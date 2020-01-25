@@ -62,7 +62,7 @@ Pull request のタイトルは "JA: ..." とすることを推奨していま�
 
 * 既に 1 つドキュメントを翻訳して pull request が取り込まれている
 
-上記の条件を充たしており、レビュアーになりたい場合は [`REVIEWERS`](https://github.com/tensorflow/docs/blob/master/site/ja/REVIEWERS) に自分の GitHub ID を書き加えて pull request を送ってください。
+上記の条件を充たしており、レビュアーになりたい場合は [`REVIEWERS`](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/REVIEWERS) に自分の GitHub ID を書き加えて pull request を送ってください。
 
 ### 英語ドキュメント側が外部リポジトリへのリンクになっている場合はどうすれば良いですか?
 
