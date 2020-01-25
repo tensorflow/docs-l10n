@@ -21,7 +21,7 @@ Igualmente, p por favor no traduzcan la seccion de `install/`, cualquier archivo
 Revisar [El Anuncio](https://groups.google.com/a/tensorflow.org/forum/#!msg/docs-zh-cn/mhLp-egzNyE/EhGSeIBqAQAJ).
 
 Note: el siguiente directorio
-[site/ko/swift](https://github.com/tensorflow/docs/tree/master/site/ko/swift)
+[site/es/swift](https://github.com/tensorflow/docs/tree/master/site/es/swift)
 es el "Home" para las traducciones
 [Swift para Tensorflow](https://www.tensorflow.org/swift)(S4TF).
 Los archivos originales estan en el directorio
@@ -49,7 +49,7 @@ Also, please do not translate the `install/` section, any `*.yaml` files, or `in
 See [the announcement](https://groups.google.com/a/tensorflow.org/forum/#!msg/docs-zh-cn/mhLp-egzNyE/EhGSeIBqAQAJ).
 
 Note: The
-[site/es/swift](https://github.com/tensorflow/docs/tree/master/site/es/swift)
+[site/es/swift](https://github.com/tensorflow/docs-l10n/tree/master/site/es/swift)
 directory is the home for
 [Swift for TensorFlow](https://www.tensorflow.org/swift)(S4TF) translations.
 Original files are in the
