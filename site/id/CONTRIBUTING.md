@@ -72,7 +72,7 @@ Saat ini sedang dibahas kriteria kriteria nya, beberapa kriteria yang sudah ada 
 * Dokumen sudah diterjemahkan dan pull request telah dilakukan
 
 Jika Anda memenuhi persyaratan di atas dan ingin menjadi peninjau
-[REVIEWERS](https://github.com/tensorflow/docs/blob/master/site/ja/REVIEWERS)
+[REVIEWERS](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/REVIEWERS)
 Tambahkan ID GitHub Anda ke dan kirim pull request.
 
 ### Apa yang harus saya lakukan jika sisi dokumen bahasa Inggris adalah tautan ke repositori eksternal?
