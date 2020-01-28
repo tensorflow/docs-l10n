@@ -2,7 +2,7 @@
 
 이 문서들은 텐서플로 커뮤니티에서 번역했습니다. 커뮤니티 번역 활동의 특성상 정확한 번역과 최신 내용을 반영하기 위해 노력함에도 불구하고
 [공식 영문 문서](https://www.tensorflow.org/?hl=en)의 내용과 일치하지 않을 수 있습니다. 이 번역에 개선할 부분이
-있다면 [tensorflow/docs](https://github.com/tensorflow/docs) 깃헙 저장소로 풀 리퀘스트를 보내주시기
+있다면 [tensorflow/docs-l10n](https://github.com/tensorflow/docs-l10n) 깃헙 저장소로 풀 리퀘스트를 보내주시기
 바랍니다. 문서 번역이나 리뷰에 참여하려면
 [docs-ko@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ko)로
 메일을 보내주시기 바랍니다.
@@ -27,7 +27,7 @@ translations are *best-effort*, there is no guarantee that this is an accurate
 and up-to-date reflection of the
 [official English documentation](https://www.tensorflow.org/?hl=en) and [Tensorflow Docs-Ko Translation](http://bit.ly/tf-docs-translation-status).
 If you have suggestions to improve this translation, please send a pull request
-to the [tensorflow/docs](https://github.com/tensorflow/docs) GitHub repository.
+to the [tensorflow/docs-l10n](https://github.com/tensorflow/docs-l10n) GitHub repository.
 To volunteer to write or review community translations, contact the
 [docs@tensorflow.org list](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs).
 
@@ -51,7 +51,7 @@ of the tensorflow/swift repository. S4TF notebooks must have the outputs saved.
 # 처음 참여하는 사람들에게
 
 문서 번역에 참여해 주셔서 감사합니다.
-번역에 참여하기 전에 번역된 [문서](https://github.com/tensorflow/docs/tree/master/site/ko)를
+번역에 참여하기 전에 번역된 [문서](https://github.com/tensorflow/docs-l10n/tree/master/site/ko)를
 먼저 읽어 보길 권합니다.
 번역 문서는 'ㅂ니다'체를 따르며 존칭이나 반말은 쓰지 않습니다.
 가능한한 기존 문서의 스타일을 따라야 합니다.
@@ -79,7 +79,7 @@ site/ko 는 텐서플로 2.x 버전을 위한 파일입니다.
 
 Thanks for joining the translation effort.
 Please read the existing
-[KO documents](https://github.com/tensorflow/docs/tree/master/site/ko)
+[KO documents](https://github.com/tensorflow/docs-l10n/tree/master/site/ko)
 before starting your translation.
 You should use 'ㅂ니다' style and not use the honorific or rude words.
 Follow the style of existing documents, as possible as you can.
