@@ -20,11 +20,11 @@ To volunteer to write or review community translations, contact the
 
 Αρκετή ορολογία ,παρά το γεγονός ότι μεταφράστηκε ,χρησιμοποιήθηκε ως έχει για να διατηρηθεί,κατά τη γνώμη μου , η ροή του λόγου:
 
-## Όροι που χρησιμοποιήθηκαν απαράλλαχτοι :
+## Όροι που χρησιμοποιήθηκαν απαράλλαχτοι
+
 * NumPy
 * Epochs 
 * Sequential & Functional API 
 * Mask & Masking
 * RNN 
 * Eager execution
-
