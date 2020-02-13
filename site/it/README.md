@@ -23,18 +23,24 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   layer
 *   gradient tape
 *   batch(es)
+*   blog(s)
 *   browser
 *   cluster(s)
+*   contributor(s)
 *   dataflow
 *   deep learning
 *   layer(s)
 *   machine learning
+*   maintainer(s)
 *   multicore
 *   notebook(s)
 *   overfit(ting)
 *   pattern(s)
 *   pixel(s)
+*   pull request(s)
+*   repository(ies)
 *   skill(s)
+*   social media(s)
 *   tablet(s)
 *   test(s)
 *   tutorials(s)
