@@ -1,63 +1,57 @@
-# Contribute to TensorFlow
+# Contribuire a TensorFlow
 
-The TensorFlow ecosystem can only grow through the contributions of this
-community. Thanks so much for your enthusiasm and your work—we appreciate
-everything you do!
+L'ecosistema TensorFlow può crescere solo attraverso i contruibuti di questa comunità. 
+Grazie mille per il vostro entusiasmo e il vostro lavoro - apprezziamo tutto quello che fate!
 
-## Community values
+## I valori della comunità
 
-In the interest of fostering an open and welcoming environment, contributors and
-maintainers pledge to make participation in our project and our community a
-harassment-free experience for everyone—regardless of age, body size,
-disability, ethnicity, gender identity and expression, level of experience,
-nationality, personal appearance, race, religion, or sexual identity and
-orientation.
+Con l'interesse di favorire un'ambiente aperto e accogliente,  i contributor e i maintainer si impegnano 
+a creare una partecipazione nel nostro progetto e nella nostra comunità con una esperienza senza discriminazioni per tutti
+ - a prescindere dall' età, corporatura, disabilità, etnia, identità e espressione di genere, livello di esperienza,
+  nazionalità, apparenza personale, razza, religione, o identità e orientamento sessuale. 
 
-Examples of behaviors that contribute to creating a positive environment
-include:
+Tra gli esempi di comportamenti che contribuiscono a creare un ambiente positivo troviamo: 
 
-*   Use welcome and inclusive language.
-*   Be respectful of differing viewpoints and experiences.
-*   Gracefully accept constructive criticism.
-*   Foster what's best for the community.
-*   Show empathy for other community members.
+*  Utilizzare un linguaggio gradito e aperto a tutti.
+*   Avere rispetto dei diversi punti di vista ed esperienze.
+*   Accettare con dignità la critica costruttiva.
+*   Favorire ciò che è meglio per la comunità.
+*   Mostrare empatia nei confronti degli altri membri della comunità.
 
-Decisions are made based on technical merit and consensus. The TensorFlow
-community aspires to treat everyone equally, and to value all contributions. For
-more information on best practices in the TensorFlow community, please review
-our
-[Code of Conduct](https://github.com/tensorflow/tensorflow/blob/master/CODE_OF_CONDUCT.md).
+Le decisioni vengono prese in base a meriti tecnici e al consenso. La comunità TensorFlow aspira a trattare
+ ognuno allo stesso modo e a dare valore a tutti i contribuiti.
+ Per ulteriori informazioni sui migliori esercizi all'interno della comunità TensorFlow per favore vedi qui: 
+[Codice di condotta](https://github.com/tensorflow/tensorflow/blob/master/CODE_OF_CONDUCT.md).
 
-## Make your first contribution
+## Fai il tuo primo contributo
 
-There are many ways to contribute to TensorFlow! You can contribute code, make
-improvements to the TensorFlow API documentation, or add your Jupyter notebooks
-to the [tensorflow/examples](http://www.github.com/tensorflow/examples) repo.
-This guide provides everything you need to get started. Our most common
-contributions include *code*, *documentation*, and *community support*.
+Ci sono diversi modi per contribuire a TensorFlow! Puoi contribuire con del codice,
+ apportare dei miglioramenti alla documentazione TensorFlow API, oppure aggiungere i tuoi 
+Jupyter notebooks al repository [tensorflow/examples](http://www.github.com/tensorflow/examples).
+Questa guida fornisce tutto quello di cui hai bisogno per iniziare. I nostri contributi più comuni includono:
+ il *codice*, la *documentazione*, e il *supporto alla comunità*.
 
-- [Write code](code.md).
-- [Improve documentation](docs.md).
-- Answer questions on
+- [Scrivere codice](code.md).
+- [Migliorare la documentazione](docs.md).
+- Rispondere alle domande su
   [Stack Overflow](https://stackoverflow.com/questions/tagged/tensorflow).
-- Participate in the discussion on the
-  [TensorFlow forums](https://www.tensorflow.org/community/forums).
-- Contribute [example notebooks](http://www.github.com/tensorflow/examples).
-- Investigate [bugs and issues](https://github.com/tensorflow/tensorflow/issues)
-  on GitHub.
-- Review and comment on
-  [pull requests](https://github.com/tensorflow/tensorflow/pulls) from other
-  developers.
-- [Report an issue](https://github.com/tensorflow/tensorflow/issues/new/choose).
-- Give a “thumbs up” 👍 on issues that are relevant to you.
-- Reference TensorFlow in your blogs, papers, and articles.
-- Talk about TensorFlow on social media.
-- ... even just starring/forking the repos you like on GitHub!
+- Partecipare alle discussioni sui
+  [forum TensorFlow](https://www.tensorflow.org/community/forums).
+- Contribuire ai [notebook di esempio](http://www.github.com/tensorflow/examples).
+- Investigare i [bug e le issue](https://github.com/tensorflow/tensorflow/issues)
+  su GitHub.
+- Rivedere commentare le
+  [pull request (https://github.com/tensorflow/tensorflow/pulls) degli altri sviluppatori.
+- [Segnalare un issue](https://github.com/tensorflow/tensorflow/issues/new/choose).
+- Mettere un “mi piace” 👍 sui problemi che sono rilevanti per te.
+- Menzionare TensorFlow nei tuoi blog, documenti, e articoli.
+- Parlare di TensorFlow sui social media.
+- ... anche solo anche solo evidenziando/replicando i repository di tuo interesse su GitHub!
 
-TensorFlow was originally developed by researchers and engineers from the Google
-Brain team within [Google's AI organization](https://ai.google/). Google open
-sourced TensorFlow in the hope of sharing technology with the external community
-and encouraging collaboration between researchers and industry. Since then,
-TensorFlow has grown into a thriving ecosystem of products, on a wide range of
-platforms. But our goal is still to make machine learning accessible to anyone,
-anywhere.
+TensorFlow è stato sviluppato in origine da alcuni ricercatori e ingenieri del gruppo Google
+Brain [Google's AI organization](https://ai.google/). Google ha creato l'open source TensorFlow
+ con la speranza di condividere la tecnologia con una comunità esterna e incoraggiare 
+ la collaborazione tra i ricercatori e il mercato. Da quel momento,
+TensorFlow è cresciuto in un fiorente ecosistema di prodotti, su un'ampia gamma di piattaforme.
+ Ma il nostro obiettivo è ancora quello di creare un machine learning accessibile a tutti,
+e ovunque.
