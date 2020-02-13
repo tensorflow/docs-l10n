@@ -5,8 +5,8 @@ Grazie mille per il vostro entusiasmo e il vostro lavoro - apprezziamo tutto que
 
 ## I valori della comunità
 
-Con l'interesse di favorire un'ambiente aperto e accogliente,  i contributor e i maintainer si impegnano 
-a creare una partecipazione nel nostro progetto e nella nostra comunità con una esperienza senza discriminazioni per tutti
+Con l'interesse di favorire un ambiente aperto e accogliente,  i contributor e i maintainer si impegnano 
+a partecipare al nostro progetto e nella nostra comunità con una esperienza senza discriminazioni per tutti
  - a prescindere dall' età, corporatura, disabilità, etnia, identità e espressione di genere, livello di esperienza,
   nazionalità, apparenza personale, razza, religione, o identità e orientamento sessuale. 
 
@@ -40,18 +40,18 @@ Questa guida fornisce tutto quello di cui hai bisogno per iniziare. I nostri con
 - Contribuire ai [notebook di esempio](http://www.github.com/tensorflow/examples).
 - Investigare i [bug e le issue](https://github.com/tensorflow/tensorflow/issues)
   su GitHub.
-- Rivedere commentare le
+- Rivedere e commentare le
   [pull request (https://github.com/tensorflow/tensorflow/pulls) degli altri sviluppatori.
-- [Segnalare un issue](https://github.com/tensorflow/tensorflow/issues/new/choose).
+- [Segnalare un problema](https://github.com/tensorflow/tensorflow/issues/new/choose).
 - Mettere un “mi piace” 👍 sui problemi che sono rilevanti per te.
 - Menzionare TensorFlow nei tuoi blog, documenti, e articoli.
 - Parlare di TensorFlow sui social media.
-- ... anche solo anche solo evidenziando/replicando i repository di tuo interesse su GitHub!
+- ... anche solo segnalando/replicando i repository di tuo interesse su GitHub!
 
 TensorFlow è stato sviluppato in origine da alcuni ricercatori e ingenieri del gruppo Google
-Brain [Google's AI organization](https://ai.google/). Google ha creato l'open source TensorFlow
+Brain [Google's AI organization](https://ai.google/). Poi Google ha creato l'open source TensorFlow
  con la speranza di condividere la tecnologia con una comunità esterna e incoraggiare 
  la collaborazione tra i ricercatori e il mercato. Da quel momento,
-TensorFlow è cresciuto in un fiorente ecosistema di prodotti, su un'ampia gamma di piattaforme.
+TensorFlow è cresciuto con un fiorente ecosistema di prodotti, su un'ampia gamma di piattaforme.
  Ma il nostro obiettivo è ancora quello di creare un machine learning accessibile a tutti,
 e ovunque.
