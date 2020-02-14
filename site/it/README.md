@@ -23,6 +23,7 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   batch(es)
 *   blog(s)
 *   browser
+*   callback(s)
 *   cluster(s)
 *   contributor(s)
 *   dataflow
