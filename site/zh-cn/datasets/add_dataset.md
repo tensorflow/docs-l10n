@@ -5,10 +5,10 @@
 请参阅我们的[数据集列表](catalog/overview.md)来查看您所需的数据集是否尚未添加。
 
 *   [总览](#总览)
-*   [编写 `my_dataset.py`](#编写-my-datasetpy)
+*   [编写 `my_dataset.py`](#编写-my_datasetpy)
     *   [使用默认模版](#使用默认模版)
     *   [DatasetBuilder](#datasetbuilder)
-    *   [my_dataset.py](#my-datasetpy)
+    *   [my_dataset.py](#my_datasetpy)
 *   [指定 `DatasetInfo`](#指定-datasetinfo)
     *   [`FeatureConnector`s](#featureconnectors)
 *   [下载和提取源数据](#下载和提取源数据)
@@ -29,8 +29,7 @@
     *   [3. 仔细检查引文](#3-仔细检查引文)
     *   [4. 添加测试](#4-添加测试)
     *   [5. 检查您的代码样式](#5-检查您的代码样式)
-    *   [6. 添加发行说明](#6-添加发行说明)
-    *   [7. 提交以供审阅!](#7-提交以供审阅)
+    *   [6. 提交以供审阅!](#6-提交以供审阅)
 *   [在 TFDS 之外定义数据集](#在-tfds-之外定义数据集)
 *   [大型数据集和分布式生成](#大型数据集和分布式生成)
 *   [测试 `MyDataset`](#测试-mydataset)
@@ -179,7 +178,7 @@ def _split_generators(self, dl_manager):
 
 ## 指定数据集分割
 
-如果数据集带有预定义的分割（例如，MNSIT 有训练和测试分割），那么就在 `DatasetBuilder` 中保留那些分割。如果这是您自己的数据，并且您可以决定您自己的分割，那么我们建议使用 `(训练：80%，验证：10%，测试：10%)` 的分割。用户总是可以通过 [`tfds.Split.subsplit`](splits.md#subsplit) 得到子分割。
+如果数据集带有预定义的分割（例如，MNSIT 有训练和测试分割），那么就在 `DatasetBuilder` 中保留那些分割。如果数据集没有预定义的分割，则 `DatasetBuilder` 应指定一个 `tfds.Split.TRAIN` 分割。用户可以用 [subsplit API](https://github.com/tensorflow/datasets/tree/master/docs/splits.md) 动态创建他们自己的子分割（例如，`split='train[80%:]'`）。
 
 ```python
   def _split_generators(self, dl_manager):
@@ -399,7 +398,7 @@ TFDS 中的大多数数据集应该有一个单元测试，并且您的审阅人
 
 除了 TensorFlow 使用 2 个空格而非 4 个空格外，请遵循 [PEP 8 Python 样式指南](https://www.python.org/dev/peps/pep-0008)。请遵守 [Google Python 样式指南](https://github.com/google/styleguide/blob/gh-pages/pyguide.md)。
 
-最重要的是，使用 [`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/oss_scripts/lint.sh) 确保您的代码格式正确。例如，检查 `image` 目录：
+最重要的是，使用 [`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/oss_scripts/lint.sh) 确保您的代码格式正确。例如，检查 `image` 目录：
 
 ```sh
 ./oss_scripts/lint.sh tensorflow_datasets/image
@@ -407,14 +406,11 @@ TFDS 中的大多数数据集应该有一个单元测试，并且您的审阅人
 
 参看 [TensorFlow 代码样式指南](https://tensorflow.google.cn/community/contribute/code_style)了解更多信息。
 
-### 6. 添加发行说明
-
-将数据集添加到[发行说明](https://github.com/tensorflow/datasets/tree/master/docs/release_notes.md)。
-该发行说明将在下一个发行版中发布。
-
-### 7. 提交以供审阅!
+### 6. 提交以供审阅!
 
 发送拉取请求以供审阅。
+
+当创建拉取请求时，请填写名称，issue 参考，和 GitHub Gist 链接的区域。当使用核对表时，将每个 `[ ]` 替换为 `[x]` 进行标记。
 
 
 ## 在 TFDS 之外定义数据集
@@ -435,7 +431,7 @@ TFDS 中的大多数数据集应该有一个单元测试，并且您的审阅人
 
 ```
 class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
-  EXAMPLE_DIR = 'path/to/fakedata'`
+  EXAMPLE_DIR = 'path/to/fakedata'
 ```
 
 ## 大型数据集和分布式生成
@@ -447,6 +443,8 @@ class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
 `tfds.testing.DatasetBuilderTestCase` 是一个基本的 `TestCase`，用于完全测试一个数据集。它使用“伪造样本”作为模拟源数据集结构的测试数据。
 
 测试数据应该放在 `my_dataset` 文件夹下的 [`testing/test_data/fake_examples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples/) 中，并且应该在下载和提取时模拟源数据集加工件。它可以手工创建，也可以用一个脚本自动创建（[示例脚本](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)）。
+
+如果您使用自动化生成测试数据，请将该脚本包含在[`测试`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing)中。
 
 确保在测试数据分割中使用不同的数据，因为如果数据集分割重叠，则测试将失败。
 
