@@ -9,10 +9,6 @@ Tensorflow GPU 支持需要各种驱动程序和库。为简化安装以及避�
 
 ## Pip 软件包
 
-See the [pip install guide](./pip) for available packages, systems
-requirements, and instructions. To `pip` install a TensorFlow package with
-GPU support, choose a stable or development package:
-
 有关可用软件包，系统，要求与说明，请参阅 [pip 安装指导](./pip)。使用 `pip` 安装具有 GPU 支持的 Tensorflow 包，可选择稳定版或者预览版：
 
 <pre class="prettyprint lang-bsh">
