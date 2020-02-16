@@ -297,7 +297,7 @@ def _generate_examples(self, images_dir_path, labels):
 请注意，大多数数据集[当前一系列的 `tfds.features.FeatureConnector`](api_docs/python/tfds/features.md)已足够，但有时可能需要定义一个新的。
 
 Note: 如果您需要一个新的不在默认设置中出现的 `FeatureConnector`，并计划将其提交到 `tensorflow/datasets`，请根据您的建议在 GitHub 上开启一个
-[新问题](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)。
+[新的 issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)。
 
 `DatasetInfo` 中的 [`tfds.features.FeatureConnector`](api_docs/python/tfds/features/FeatureConnector.md) 对应着 `tf.data.Dataset` 对象返回的元素。例如：
 
