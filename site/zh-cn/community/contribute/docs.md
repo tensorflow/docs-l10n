@@ -17,7 +17,6 @@ TensorFlow欢迎文档贡献 - 如果您改进了文档，等同于改进TensorF
 
 * 关注GitHub中的 [tensorflow/docs](https://github.com/tensorflow/docs) 仓库(repository).
 * 订阅 [docs@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs).
-* 加入 [Gitter 聊天室](https://gitter.im/tensorflow/docs).
 
 ## API 文档
 

@@ -13,7 +13,6 @@
 * Google Groups
   * [docs@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs)
   * [docs-ja@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ja)
-* [Gitter](https://gitter.im/tensorflow/docs)
 
 また、翻訳を行う際には [CONTRIBUTING.md](CONTRIBUTING.md) をお読みください。
 
