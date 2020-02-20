@@ -21,6 +21,16 @@ the [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en)
 repo. If, when translating, you find an issue in the source content, please send
 a separate pull request that fixes the upstream content.
 
+To view translated content on [tensorflow.org](https://www.tensorflow.org),
+select the in-page language switcher or append `?hl=<lang>` to the URL. For
+example, the English
+[TensorFlow 2 quickstart tutorial](https://www.tensorflow.org/tutorials/quickstart/beginner?hl=en)
+can be read in:
+
+* Korean: https://www.tensorflow.org/tutorials/quickstart/beginner?hl=ko
+* Russian: https://www.tensorflow.org/tutorials/quickstart/beginner?hl=ru
+* Or any of the supported languages in [site/<lang>](https://github.com/tensorflow/docs-l10n/tree/master/site).
+
 ### Subsites
 
 Subsites are doc collections for projects outside of the *core TensorFlow* in
