@@ -5,7 +5,7 @@
 [tensorflow/docs](https://github.com/tensorflow/docs) GitHub 仓库。要志愿地撰写或者审核译文，请加入
 [docs-zh-cn@tensorflow.org Google Group](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-zh-cn)。
 
-# Community translations
+## Community translations
 
 Our TensorFlow community has translated these documents. Because community
 translations are *best-effort*, there is no guarantee that this is an accurate
@@ -23,7 +23,19 @@ directory. TF 1.x community docs will no longer be updated as we prepare for the
 2.0 release. See
 [the announcement](https://groups.google.com/a/tensorflow.org/d/msg/docs/vO0gQnEXcSM/YK_ybv7tBQAJ).
 
-# Simplified Chinese translation guide
+## Do not translate
+
+The following sections are *not* included in `site/zh-cn` community translations
+project. TensorFlow.org does not translate API reference, and uses an internal
+system for landing pages and release-sensitive documentation. Please do not
+translate the following sections:
+
+* The `/install/` directory.
+* API reference including `/api_docs/` and `/versions/` directories.
+* Navigation: `_book.yaml` and `_toc.yaml` files.
+* Overview pages such as `_index.yaml`, `index.html`, and `index.md`.
+
+## Simplified Chinese translation guide
 
 Some technical words in English do not have a natural translation. Do *not*
 translate the following words:

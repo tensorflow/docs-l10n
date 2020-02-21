@@ -20,7 +20,7 @@
 [docs/site](https://github.com/tensorflow/swift/tree/master/docs/site)
 디렉토리입니다. S4TF 노트북은 꼭 출력 결과가 포함되어야 합니다.
 
-# Community translations
+## Community translations
 
 Our TensorFlow community has translated these documents. Because community
 translations are *best-effort*, there is no guarantee that this is an accurate
@@ -48,7 +48,19 @@ Original files are in the
 [docs/site](https://github.com/tensorflow/swift/tree/master/docs/site) directory
 of the tensorflow/swift repository. S4TF notebooks must have the outputs saved.
 
-# 처음 참여하는 사람들에게
+## Do not translate
+
+The following sections are *not* included in `site/ko` community translations
+project. TensorFlow.org does not translate API reference, and uses an internal
+system for landing pages and release-sensitive documentation. Please do not
+translate the following sections:
+
+* The `/install/` directory.
+* API reference including `/api_docs/` and `/versions/` directories.
+* Navigation: `_book.yaml` and `_toc.yaml` files.
+* Overview pages such as `_index.yaml`, `index.html`, and `index.md`.
+
+## 처음 참여하는 사람들에게
 
 문서 번역에 참여해 주셔서 감사합니다.
 번역에 참여하기 전에 번역된 [문서](https://github.com/tensorflow/docs-l10n/tree/master/site/ko)를
@@ -75,7 +87,7 @@ site/ko 는 텐서플로 2.x 버전을 위한 파일입니다.
 
 감사합니다!
 
-# For new contributors
+## For new contributors
 
 Thanks for joining the translation effort.
 Please read the existing
@@ -106,7 +118,7 @@ mailing list.
 
 Thanks!
 
-# Korean translation guide
+## Korean translation guide
 
 Some technical words in English do not have a natural translation. Do *not*
 translate the following words:
