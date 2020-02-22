@@ -1,68 +1,53 @@
-# TensorFlow variables
+# Переменные TensorFlow
 
-A TensorFlow **variable** is the best way to represent shared, persistent state
-manipulated by your program.
+**Переменная** TensorFlow  является лучшим способом представления совместно используемого постоянного состояния, которым манипулирует ваша программа.
 
-Variables are manipulated via the `tf.Variable` class. A `tf.Variable`
-represents a tensor whose value can be changed by running ops on it.  Specific
-ops allow you to read and modify the values of this tensor. Higher level
-libraries like `tf.keras` use `tf.Variable` to store model parameters. This
-guide covers how to create, update, and manage `tf.Variable`s in TensorFlow.
+Переменные обрабатываются с помощью класса `tf.Variable`. `Tf.Variable` представляет тензор, значение которого можно изменить, запустив на нем операции. Определенные операции позволяют вам читать и изменять значения этого тензора. Библиотеки более высокого уровня, такие как `tf.keras`, используют `tf.Variable` для хранения параметров модели. В этом руководстве рассказывается, как создавать, обновлять и управлять перемменными `tf.Variable` в TensorFlow.
 
-## Create a variable
+## Созадние переменной
 
-To create a variable, simply provide the initial value
+Чтобы создать переменную просто задайте начальное значение
 
 ``` python
 my_variable = tf.Variable(tf.zeros([1., 2., 3.]))
 ```
 
-This creates a variable which is a three-dimensional tensor with shape `[1, 2,
-3]` filled with zeros. This variable will, by default, have the `dtype`
-`tf.float32`. The dtype is, if not specified, inferred from the initial
-value.
+Это создаст переменную являющуюся трехмерным тензором с размерностью `[1, 2, 3]` 
+заполненную нулями. Эта переменная по умолчанию имеет `dtype`
+`tf.float32`. Если dtype не указан, то он выводится из исходного значения.
 
-If there's a `tf.device` scope active, the variable will be placed on that
-device; otherwise the variable will be placed on the "fastest" device compatible
-with its dtype (this means most variables are automatically placed on a GPU if
-one is available). For example, the following snippet creates a variable named
-`v` and places it on the second GPU device:
+Если имеется активная область действия `tf.device`, переменная будет помещена на это устройство; в противном случае переменная будет помещена в «самое быстрое» устройство, совместимое с его dtype (это означает, что большинство переменных автоматически помещаются на GPU, если таковое имеется). Например, следующий фрагмент кода создает переменную с именем `v` и помещает ее на второе GPU устройство:
 
 ``` python
 with tf.device("/device:GPU:1"):
   v = tf.Variable(tf.zeros([10, 10]))
 ```
 
-Ideally though you should use the `tf.distribute` API, as that allows you to
-write your code once and have it work under many different distributed setups.
+В идеале, вам необходимо использовать API `tf.distribute`, так как это дает вам возможность написать свой код один раз так, что он будет работать во многих различных распределенных системах.
 
-## Use a variable
+## Использование переменной
 
-To use the value of a `tf.Variable` in a TensorFlow graph, simply treat it like
-a normal `tf.Tensor`:
+Чтобы использовать значение `tf.Variable` в графе TensorFlow, просто обработайте его как обычный `tf.Tensor`:
 
 ``` python
 v = tf.Variable(0.0)
-w = v + 1  # w is a tf.Tensor which is computed based on the value of v.
-           # Any time a variable is used in an expression it gets automatically
-           # converted to a tf.Tensor representing its value.
+w = v + 1  # w это tf.Tensor который вычисляется на базе значения v.
+           # Каждый раз когда в выражении используется переменная она автоматически
+           # конвертируется в tf.Tensor представляющи его значение.
 ```
 
-To assign a value to a variable, use the methods `assign`, `assign_add`, and
-friends in the `tf.Variable` class. For example, here is how you can call these
-methods:
+Чтобы присвоить значение переменной, используйте методы `assign`, `assign_add` в классе 
+`tf.Variable`. Например, вот как вы можете вызвать эти методы:
 
 ``` python
 v = tf.Variable(0.0)
 v.assign_add(1)
 ```
 
-Most TensorFlow optimizers have specialized ops that efficiently update the
-values of variables according to some gradient descent-like algorithm. See
-`tf.keras.optimizers.Optimizer` for an explanation of how to use optimizers.
+У большинство оптимизаторов TensorFlow есть специализированные операции которые эффективно обновляют значения переменных в соотвествии с алгоритмами подобными градиентному спуску. См.
+`tf.keras.optimizers.Optimizer` для объяснения того, как использовать оптимизаторы.
 
-You can also explicitly read the current value of a variable, using
-`read_value`:
+Вы также можете явно прочитать текущее значение переменной, используя `read_value`:
 
 ```python
 v = tf.Variable(0.0)
@@ -70,18 +55,16 @@ v.assign_add(1)
 v.read_value()  # 1.0
 ```
 
-When the last reference to a `tf.Variable` goes out of scope its memory is
-freed.
+Когда последняя ссылка на `tf.Variable` выходит из области видимости, ее память освобождается.
 
-### Keep track of variables
+### Отслеживание переменных
 
-A Variable in TensorFlow is a Python object. As you build your layers, models,
-optimizers, and other related tools, you will likely want to get a list of all
-variables in a (say) model.
+Variable в TensorFlow это объект Python. Поскольку вы строите свои слои, модели,
+оптимизаторы, и другие связанные инструменты, вы, вероятно, захотите получить список всех переменных в (скажем) модели.
 
-A common use case is [implementing `Layer` subclasses](
+Типичный пример использования [реализация подклассов `Layer`](
 https://www.tensorflow.org/guide/keras/custom_layers_and_models#the_layer_class).
-The `Layer` class recursively tracks variables set as instance attributes:
+Класс `Layer` рекурсивно отслеживает набор переменных как аттрибуты экземпляра:
 
 ```python
 class MyLayer(tf.keras.layers.Layer):
@@ -99,12 +82,7 @@ class MyOtherLayer(tf.keras.layers.Layer):
     self.my_other_var = tf.Variable(10.0)
 
 m = MyOtherLayer()
-print(len(m.variables))  # 12 (11 from MyLayer, plus my_other_var)
+print(len(m.variables))  # 12 (11 с MyLayer, плюс my_other_var)
 ```
 
-If you aren't developing a new `Layer`, TensorFlow also features a more
-generic `tf.Module` base class which _only_ implements variable tracking.
-Instances of `tf.Module` have a `variables` and a `trainable_variables`
-property which return all (trainable) variables reachable from that model,
-potentially navigating through other modules (much like the tracking done by
-the `Layer` class).
+Если вы не разрабатываете новый `Layer`, у TensorFlow также есть более общий базовый класс `tf.Module`, который _только_ реализует отслеживание переменных. У экземпляров `tf.Module` есть свойства `variable` и `trainable_variables`, которые возвращают все (обучаемые) переменные, достижимые из этой модели, потенциально перемещаясь через другие модули (во многом как отслеживание, выполняемое классом `Layer`).
