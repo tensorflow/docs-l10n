@@ -21,7 +21,7 @@ Note: 이 문서는 텐서플로 커뮤니티에서 번역했습니다. 커뮤�
 변수를 생성하려면 단순하게 초기값을 설정하면 됩니다.
 
 ``` python
-my_variable = tf.Variable(tf.zeros([1., 2., 3.]))
+my_variable = tf.Variable(tf.zeros([1, 2, 3]))
 ```
 
 이렇게 하면 모양이 `[1, 2, 3]`이고 값은 0으로 채워진 3차원 텐서가 변수로 생성됩니다. 이 변수는 기본적으로 `dtype`
