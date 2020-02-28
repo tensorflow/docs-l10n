@@ -60,6 +60,8 @@ TensorFlow.org does not translate API reference, and uses an internal system for
 landing pages and release-sensitive documentation. Please do not translate the
 following sections:
 
+* Any `/images/` directories.
+* Any `/r1/` directories (TensorFlow 1.x docs).
 * The `/install/` directory.
 * API reference including `/api_docs/` and `/versions/` directories.
 * Navigation: `_book.yaml` and `_toc.yaml` files.
