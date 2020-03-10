@@ -11,7 +11,7 @@
 디렉토리에 있는 [텐서플로 2](https://www.tensorflow.org) 문서를 번역하는데 초점을 맞춰 주세요.
 2.0 릴리스를 준비하기 위해 [site/ko/r1](https://github.com/tensorflow/docs-l10n/tree/master/site/ko/r1) 디렉토리에 있는 TF 1.x 커뮤니티 문서는 더 이상 업데이트되지 않습니다. 이
 [공지](https://groups.google.com/a/tensorflow.org/d/msg/docs/vO0gQnEXcSM/YK_ybv7tBQAJ)를
-참고하세요. 또한 install 폴더의 내용과 yaml 파일, index.md 파일은 번역하지 않습니다. 이에 대한 자세한 지침은 이 [공지](https://groups.google.com/a/tensorflow.org/forum/#!msg/docs-zh-cn/mhLp-egzNyE/EhGSeIBqAQAJ)를 참고하세요.
+참고하세요. 또한 `install/` 폴더의 내용과 `*.yaml` 파일, `index.md` 파일은 번역하지 않습니다. 이에 대한 자세한 지침은 이 [공지](https://groups.google.com/a/tensorflow.org/forum/#!msg/docs-zh-cn/mhLp-egzNyE/EhGSeIBqAQAJ)를 참고하세요.
 
 노트: [Swift for TensorFlow](https://www.tensorflow.org/swift)(S4TF)를 위한 번역
 홈 디렉토리는
@@ -70,9 +70,9 @@ translate the following sections:
 
 작업을 시작하려면 [텐서플로 한글 문서 기여자](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ko)
 메일링 리스트와 [Tensorflow Docs-Ko Translation](http://bit.ly/tf-docs-translation-status) 구글 스프레드 시트에 작업 중임을 알려 주세요.
-다른 사람이 작업 중인 파일이 아니라면 en 폴더 안의 파일을 ko 폴더 아래 같은 위치에 복사하여 시작합니다.
-site/ko/r1 는 텐서플로 1.x 버전을 위한 파일입니다.
-site/ko 는 텐서플로 2.x 버전을 위한 파일입니다.
+다른 사람이 작업 중인 파일이 아니라면 `en` 폴더 안의 파일을 `ko` 폴더 아래 같은 위치에 복사하여 시작합니다.
+`site/ko/r1` 는 텐서플로 1.x 버전을 위한 파일입니다.
+`site/ko` 는 텐서플로 2.x 버전을 위한 파일입니다.
 
 마크다운(markdown)과 주석을 모두 번역합니다. 코드 셀(cell)은 실행하지 않습니다.
 주피터 노트북은 조금만 수정하더라도 파일 소스 전체가 변경될 수 있습니다.
@@ -120,8 +120,7 @@ Thanks!
 
 ## Korean translation guide
 
-Some technical words in English do not have a natural translation. Do *not*
-translate the following words:
+Some technical words in English do not have corresponding natural translations in Korean. In such cases, transliterate them according to the [standard loanword orthography](http://kornorms.korean.go.kr/regltn/regltnView.do?regltn_code=0003&regltn_no=425#a425). Do *not* translate the following words:
 
 *   mini-batch
 *   batch
@@ -134,7 +133,7 @@ translate the following words:
 *   epoch
 *   callback
 *   sequence
-*   dictionary (in python)
+*   dictionary (in Python)
 *   embedding
 *   padding
 *   unit
