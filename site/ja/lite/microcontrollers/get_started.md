@@ -5,7 +5,7 @@
 
 ## サポートされているデバイスを入手する
 
-この案内書に従っていくには、サポートされたハードウェアデバイスが必要です。
+この案内書にしたがっていくには、サポートされたハードウェアデバイスが必要です。
 使用するアプリケーション例は下記デバイスで検証されています。
 
 * [Arduino Nano 33 BLE Sense](https://store.arduino.cc/usa/nano-33-ble-sense-with-headers)
@@ -314,7 +314,7 @@ TF_LITE_MICRO_EXPECT_NEAR(-0.959, value, 0.05);
 [`main_functions.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/main_functions.cc)
 にあるサンプルアプリケーションのコードを理解できるはずです。
 
-同じような処理を行いますが、実行された推論の数に基づいて入力値を生成し、それからデバイス固有の関数を呼び、モデルの出力をユーザーに表示します
+おなじような処理を行いますが、実行された推論の数に基づいて入力値を生成し、それからデバイス固有の関数を呼び、モデルの出力をユーザーに表示します
 
 ## 次のステップ
 
