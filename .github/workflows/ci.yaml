@@ -6,7 +6,15 @@ jobs:
     name: nbfmt
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout tensorflow/docs-l10n
+      uses: actions/checkout@v2
+      with:
+        path: docs-l10n
+    - name: Checkout tensorflow/docs
+      uses: actions/checkout@v2
+      with:
+        repository: tensorflow/docs
+        path: docs
     - uses: actions/setup-python@v1
     - name: Install dependencies
       run: pip install --upgrade absl-py
@@ -14,3 +22,7 @@ jobs:
 #      run: ./tools/nbfmt_pr.sh
     - name: Display Python version
       run: python -c "import sys; print(sys.version)"
+    - name: Show environment
+      run: |
+        pwd
+        ls -al
