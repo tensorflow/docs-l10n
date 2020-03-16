@@ -1,0 +1,16 @@
+name: Continuous Integration
+on: push
+
+jobs:
+  nbfmt:
+    name: nbfmt
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v1
+    - name: Install dependencies
+      run: pip install --upgrade absl-py
+#    - name: Format notebook
+#      run: ./tools/nbfmt_pr.sh
+    - name: Display Python version
+      run: python -c "import sys; print(sys.version)"
