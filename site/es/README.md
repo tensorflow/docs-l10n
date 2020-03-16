@@ -20,6 +20,8 @@ Por favor revisar [El Anuncio](https://groups.google.com/a/tensorflow.org/d/msg/
 Igualmente, p por favor no traduzcan la seccion de `install/`, cualquier archivo `*.yaml`, o archivo `index.md`.
 Revisar [El Anuncio](https://groups.google.com/a/tensorflow.org/forum/#!msg/docs-zh-cn/mhLp-egzNyE/EhGSeIBqAQAJ).
 
+This is a test.
+
 Note: el siguiente directorio
 [site/es/swift](https://github.com/tensorflow/docs/tree/master/site/es/swift)
 es el "Home" para las traducciones
