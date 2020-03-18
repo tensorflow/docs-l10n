@@ -1,0 +1,51 @@
+name: CI
+on: push
+
+jobs:
+  format_notebooks:
+    name: Format notebooks
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/setup-python@v1
+
+    - name: Checkout user/docs-l10n
+      uses: actions/checkout@v2
+      with:
+        path: docs-l10n
+
+    - name: Checkout tensorflow/docs
+      uses: actions/checkout@v2
+      with:
+        repository: tensorflow/docs
+        path: docs
+
+    - name: Set up environment
+      run: |
+        pip install --upgrade absl-py
+        cd ./docs-l10n && git fetch origin master:master
+        git config --global user.email "tfdocsbot+no-reply@gmail.com"
+        git config --global user.name "TF DocsBot"
+
+    - name: nbfmt
+      run: |
+        cd ./docs-l10n
+        echo "Run nbfmt.py on updated notebooks:"
+        NOTEBOOKS_CHANGED="$(git diff --name-only master | grep '\.ipynb$')"
+        if [[ -n "$NOTEBOOKS_CHANGED" ]]; then
+          python ../docs/tools/nbfmt.py --ignore_warn $NOTEBOOKS_CHANGED
+        fi
+
+    - name: Push changes
+      run: |
+        cd ./docs-l10n
+        MODIFIED_FILES=$(git ls-files --modified)
+        if [[ -n "$MODIFIED_FILES" ]]; then
+          echo "Commit formatting changes for:"
+          echo "$MODIFIED_FILES"
+          echo ""
+          git add $MODIFIED_FILES
+          if git commit -m "CI: nbfmt"; then
+            git push
+          fi
+        fi
