@@ -1,5 +1,5 @@
 name: CI
-on: push
+on: [pull_request, push]
 
 jobs:
   format_notebooks:
@@ -22,18 +22,45 @@ jobs:
 
     - name: Set up environment
       run: |
+        REMOTE_REPO="${{ github.event.pull_request.head.repo.name }}"
+        echo "$REMOTE_REPO"
+        REMOTE_REPO="${{ github.repository.name }}"
+        echo "$REMOTE_REPO"
+        echo "----"
+        
         pip install --upgrade absl-py
-        cd ./docs-l10n && git fetch origin master:master
+        cd ./docs-l10n
+        git fetch -u origin master:master
+        # Pull user's PR branch and store ref in FETCH_HEAD
+        #git fetch "git@github.com:${GITHUB_ACTOR}/${user_repo}.git" "$GITHUB_HEAD_REF"
+        #git checkout -b "$LOCAL_BRANCH" FETCH_HEAD
+        #
         git config --global user.email "tfdocsbot+no-reply@gmail.com"
         git config --global user.name "TF DocsBot"
 
     - name: nbfmt
       run: |
         cd ./docs-l10n
-        echo "Run nbfmt.py on updated notebooks:"
+
+        echo "ref (pr, not a branch): $GITHUB_REF"
+        echo "user: $GITHUB_ACTOR"
+        echo "repo: $GITHUB_REPOSITORY"
+        echo "user remote branch: $GITHUB_HEAD_REF"
+
+        echo "base ref: $GITHUB_BASE_REF"
+
+        echo "user repo: $REMOTE_REPO"
+        
+        git branch
+        git rev-parse --abbrev-ref HEAD
+        git diff --name-only master | grep '\.ipynb$'
+        echo "here"
         NOTEBOOKS_CHANGED="$(git diff --name-only master | grep '\.ipynb$')"
         if [[ -n "$NOTEBOOKS_CHANGED" ]]; then
+          echo "Run nbfmt.py on updated notebooks:"
           python ../docs/tools/nbfmt.py --ignore_warn $NOTEBOOKS_CHANGED
+        else
+          echo "No notebooks found."
         fi
 
     - name: Push changes
