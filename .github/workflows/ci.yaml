@@ -1,10 +1,15 @@
 name: CI
-on: [pull_request, push]
+on: pull_request
 
 jobs:
   format_notebooks:
     name: Format notebooks
     runs-on: ubuntu-latest
+    env:
+      REMOTE_USER: ${{ github.event.pull_request.head.user.login }}
+      REMOTE_REPO: ${{ github.event.pull_request.head.repo.name }}
+      REMOTE_BRANCH: ${{ github.event.pull_request.head.ref }}
+      LOCAL_BRANCH: ${{ github.event.pull_request.head.ref }}
 
     steps:
     - uses: actions/setup-python@v1
@@ -22,18 +27,13 @@ jobs:
 
     - name: Set up environment
       run: |
-        REMOTE_REPO="${{ github.event.pull_request.head.repo.name }}"
-        echo "$REMOTE_REPO"
-        REMOTE_REPO="${{ github.repository.name }}"
-        echo "$REMOTE_REPO"
-        echo "----"
-        
         pip install --upgrade absl-py
         cd ./docs-l10n
         git fetch -u origin master:master
         # Pull user's PR branch and store ref in FETCH_HEAD
-        #git fetch "git@github.com:${GITHUB_ACTOR}/${user_repo}.git" "$GITHUB_HEAD_REF"
-        #git checkout -b "$LOCAL_BRANCH" FETCH_HEAD
+        #git fetch "git@github.com:${REMOTE_USER}/${REMOTE_REPO}.git" "$REMOTE_BRANCH"
+        git fetch "https://github.com/${REMOTE_USER}/${REMOTE_REPO}.git" "$REMOTE_BRANCH"
+        git checkout -b "$LOCAL_BRANCH" FETCH_HEAD
         #
         git config --global user.email "tfdocsbot+no-reply@gmail.com"
         git config --global user.name "TF DocsBot"
@@ -41,21 +41,8 @@ jobs:
     - name: nbfmt
       run: |
         cd ./docs-l10n
-
-        echo "ref (pr, not a branch): $GITHUB_REF"
-        echo "user: $GITHUB_ACTOR"
-        echo "repo: $GITHUB_REPOSITORY"
-        echo "user remote branch: $GITHUB_HEAD_REF"
-
-        echo "base ref: $GITHUB_BASE_REF"
-
-        echo "user repo: $REMOTE_REPO"
-        
-        git branch
-        git rev-parse --abbrev-ref HEAD
-        git diff --name-only master | grep '\.ipynb$'
-        echo "here"
-        NOTEBOOKS_CHANGED="$(git diff --name-only master | grep '\.ipynb$')"
+        NOTEBOOKS_CHANGED="$(git diff --name-only master | grep '\.ipynb$' || true)"
+        # need to restrict this to user changed notebooks
         if [[ -n "$NOTEBOOKS_CHANGED" ]]; then
           echo "Run nbfmt.py on updated notebooks:"
           python ../docs/tools/nbfmt.py --ignore_warn $NOTEBOOKS_CHANGED
@@ -73,6 +60,9 @@ jobs:
           echo ""
           git add $MODIFIED_FILES
           if git commit -m "CI: nbfmt"; then
-            git push
+            #git push
+            git push "https://github.com/${REMOTE_USER}/${REMOTE_REPO}.git" "${LOCAL_BRANCH}:${REMOTE_BRANCH}"
           fi
+        else
+          echo "No modified files to push."
         fi
