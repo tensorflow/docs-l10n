@@ -10,6 +10,7 @@ jobs:
       REMOTE_REPO: ${{ github.event.pull_request.head.repo.name }}
       REMOTE_BRANCH: ${{ github.event.pull_request.head.ref }}
       LOCAL_BRANCH: ${{ github.event.pull_request.head.ref }}
+      TOKEN: ${{ secrets.BotToken }}
 
     steps:
     - uses: actions/setup-python@v1
@@ -37,6 +38,8 @@ jobs:
         #
         git config --global user.email "tfdocsbot+no-reply@gmail.com"
         git config --global user.name "TF DocsBot"
+        #git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'
+        #git config --global user.name '${GITHUB_ACTOR}'
 
     - name: nbfmt
       run: |
@@ -52,6 +55,7 @@ jobs:
 
     - name: Push changes
       run: |
+        echo "tok: $TOKEN"
         cd ./docs-l10n
         MODIFIED_FILES=$(git ls-files --modified)
         if [[ -n "$MODIFIED_FILES" ]]; then
@@ -61,7 +65,7 @@ jobs:
           git add $MODIFIED_FILES
           if git commit -m "CI: nbfmt"; then
             #git push
-            git push "https://github.com/${REMOTE_USER}/${REMOTE_REPO}.git" "${LOCAL_BRANCH}:${REMOTE_BRANCH}"
+            git push "https://tfdocsbot:${TOKEN}@github.com/${REMOTE_USER}/${REMOTE_REPO}.git" "${LOCAL_BRANCH}:${REMOTE_BRANCH}"
           fi
         else
           echo "No modified files to push."
