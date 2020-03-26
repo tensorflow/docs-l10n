@@ -5,8 +5,8 @@
 
 ## サポートされているデバイスを入手する
 
-この案内書にしたがっていくには、サポートされたハードウェアデバイスが必要です。
-使用するアプリケーション例は下記デバイスで検証されています。
+このガイドにしたがっていくには、サポートされたハードウェアデバイスが必要です。
+使用するサンプルのアプリケーションは下記デバイスで検証されています。
 
 * [Arduino Nano 33 BLE Sense](https://store.arduino.cc/usa/nano-33-ble-sense-with-headers)
     (Arduino IDEを使います)
@@ -27,15 +27,15 @@
 
 ## サンプルを探索する
 
-マイクロコントローラ向けTensorFlow Liteはいくつかのアプリケーション例が付属しており、
-それらはさまざまなタスクの使い方を実演します。
-記述するにあたっては、下記が役に立ちます。
+マイクロコントローラ向けTensorFlow Liteはいくつかのサンプルのアプリケーションが付属しており、
+それらはさまざまなタスクへの適用の仕方を実際の例によって示します。
+記述にあたっては、下記が役に立ちます。
 
 * [Hello World](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world) -
     マイクロコントローラ向けTensorFlow Liteの使い方の基本を実演します。
 
 * [Micro speech](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/micro_speech) -
-    マイクロフォンで音声を取り込み、"yes"と"no"という単語を検出します。
+    マイクロフォンで音を取り込み、"yes"と"no"という単語を検出します。
 
 * [Person detection](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/person_detection) -
     撮像センサでカメラデータを取り込み、人が居るか否かを検出します。
@@ -45,14 +45,14 @@
 
 各アプリケーション例には、`README.md`ファイルがあり、サポートされたプラットフォームへのデプロイの仕方を説明しています。
 
-この案内書の残りの部分では、
-[Hello World](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world)
-アプリケーション例を始めから終わりまで見ていきます。
+以降では、
+アプリケーションのサンプルとして[Hello World](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world)
+を例に見ていきます。
 
-## Hello World サンプル
+## Hello World の例
 
-この例はマイクロコントローラ向けTensorFlow Liteの使い方の基本を実演します。
-モデルの訓練、TensorFlow Liteと共に使うためのモデル変換、
+このサンプルではマイクロコントローラ向けTensorFlow Liteの使い方の基本を実演します。
+このサンプルは、モデルの訓練から、TensorFlow Liteと共に使うためのモデル変換、
 そしてマイクロコントローラ上での推論実行までの始めから終わりまでのワークフローを含んでいます。
 
 この例では、モデルは正弦波関数を再現するように訓練されています。
@@ -97,13 +97,13 @@
 * [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h)
     モデルを読み込んで実行するコードを含みます。
 * [`schema_generated.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema_generated.h)
-    TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) モデルファイルフォーマットのスキームを含みます。
+    TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) モデルファイルフォーマットのスキーマを含みます。
 * [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h)
-    TensorFlow Lite スキームへのバージョン情報を提供します。
+    TensorFlow Lite スキーマのバージョン情報を提供します。
 
 ### モデルをインクルードする
 
-マイクロコントローラ向けTensorFlow Lite インタープリタは、モデルがC++配列で提供されることを期待しています。*Hellow World* サンプルでは、モデルは `sine_model_data.h` と `sine_model_data.cc` で定義されています。ヘッダーは以下の行に含まれます。
+マイクロコントローラ向けTensorFlow Lite インタープリタは、モデルがC++配列で提供されることを期待しています。*Hellow World* サンプルでは、モデルは `sine_model_data.h` と `sine_model_data.cc` で定義されています。ヘッダーは以下の行で含まれます。
 
 ```C++
 #include "tensorflow/lite/micro/examples/hello_world/sine_model_data.h"
@@ -128,9 +128,9 @@ TF_LITE_MICRO_TEST(LoadModelAndPerformInference) {
 
 コードの残り部分は、モデルの読み込みと推論を実演します。
 
-### ログ取得を用意する
+### ログ取得を準備する
 
-ログ取得の準備するために、`tflite::ErrorReporter` ポインタが作成され、ポインタは `tflite::MicroErrorReporter` インスタンスに対して使用されます。
+ログ取得の準備をするために、`tflite::MicroErrorReporter` インスタンスへのポインタを持つ、`tflite::ErrorReporter` ポインタが作成されます。 
 
 ```C++
 tflite::MicroErrorReporter micro_error_reporter;
@@ -139,18 +139,18 @@ tflite::ErrorReporter* error_reporter = &micro_error_reporter;
 
 この変数はインタープリタに渡され、ログに書くことを許可します。
 マイクロコントローラはしばしばログ取得のさまざまな機構をもつので、`tflite::MicroErrorReporter` の実装は、
-デバイス固有にカスタマイズされて設計されます。
+デバイス固有にカスタマイズされるように設計されています。
 
 ### モデルを読み込む
 
 以下のコードでは、モデルは `char` 配列、つまり `sine_model_data.h` で宣言された `g_sine_model_data` からのデータを使って実体化されます。
-モデルを検査し、そのスキーム・バージョンが我々が使用しているバージョンと互換性があることを確認します。
+モデルを検査し、そのスキーマ・バージョンが我々が使用しているバージョンと互換性があることを確認します。
 
 ```C++
 const tflite::Model* model = ::tflite::GetModel(g_sine_model_data);
 if (model->version() != TFLITE_SCHEMA_VERSION) {
   error_reporter->Report(
-      "与えられたモデルはスキーム・バージョン%dであり、"
+      "得られたモデルはスキーマ・バージョン%dであり、"
       "サポートされたバージョン%dと一致しません。",
       model->version(), TFLITE_SCHEMA_VERSION);
 }
@@ -159,14 +159,14 @@ if (model->version() != TFLITE_SCHEMA_VERSION) {
 ### 演算子リゾルバを実体化する
 
 [`AllOpsResolver`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/kernels/all_ops_resolver.h)
-インスタンスが宣言されている。これはインタープリタがモデルで使用されている演算にアクセスするために使用されます。
+インスタンスが宣言されています。これは、モデルで使用されている演算にアクセスするためにインタープリタが使います。
 
 ```C++
 tflite::ops::micro::AllOpsResolver resolver;
 ```
 
-`AllOpsResolver` は、マイクロコントローラ向けTensorFlow Liteで利用可能なすべての演算を読み込み、それは多くのメモリを使用します。
-与えられたモデルはこれら演算の一部のみを使用するであろうから、現実のアプリケーションは必要な演算のみを読み込むことが推奨されます。
+`AllOpsResolver` は、マイクロコントローラ向けTensorFlow Liteで利用可能なすべての演算を読み込むため多くのメモリを使用します。
+通常、モデルが必要とするのはこれらの演算のうちの一部のため、現実世界に適用する際には必要な演算のみを読み込むことが推奨されます。
 
 これは別のクラス、`MicroMutableOpResolver` を使用して実施されます。
 *Micro speech* [`micro_speech_test.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc) の例で使い方を見ることができます。
@@ -181,7 +181,7 @@ const int tensor_arena_size = 2 * 1024;
 uint8_t tensor_arena[tensor_arena_size];
 ```
 
-要求される大きさは使用するモデルに依存し、実験によって決められる必要があるかもしれません。
+要求される大きさは使用するモデルに依存し、実験によって決める必要があるかもしれません。
 
 ### インタープリタを実体化する
 
@@ -213,11 +213,11 @@ interpreter.AllocateTensors();
 このテンソルを検証し、形と型が期待したものであることを確認します。
 
 ```C++
-// 入力は期待するプロパティを持つこと確認する
+// 入力は期待するプロパティを持つことを確認する
 TF_LITE_MICRO_EXPECT_NE(nullptr, input);
 // プロパティ "dims" はテンソルの形を教えてくれる。
 // それは次元ごとに1つの要素を持つ。我々の入力は2次元のテンソルで1つの要素を含むので、
-// "dims" は2であるべきである。
+// "dims" の次元数は2であるべきである。
 TF_LITE_MICRO_EXPECT_EQ(2, input->dims->size);
 // 要素ごとの値は、対応するテンソルの長さを与える。
 // 我々は2つのテンソルを期待する。（一方は他方に含まれる。）
@@ -227,7 +227,7 @@ TF_LITE_MICRO_EXPECT_EQ(1, input->dims->data[1]);
 TF_LITE_MICRO_EXPECT_EQ(kTfLiteFloat32, input->type);
 ```
 
-enum値 `kTfLiteFloat32` は、TensorFlow Lite のデータ型の一つへの参照であり、
+enum値 `kTfLiteFloat32` は、TensorFlow Lite のデータ型のうちの一つへの参照であり、
 [`common.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/common.h).
 で定義されています。
 
@@ -313,14 +313,13 @@ TF_LITE_MICRO_EXPECT_NEAR(-0.959, value, 0.05);
 この単体テストを一度ひととおり読み終えたら、
 [`main_functions.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/main_functions.cc)
 にあるサンプルアプリケーションのコードを理解できるはずです。
-
 おなじような処理を行いますが、実行された推論の数に基づいて入力値を生成し、それからデバイス固有の関数を呼び、モデルの出力をユーザーに表示します
 
 ## 次のステップ
 
 ライブラリがさまざまなモデルやアプリケーションと共にどのように利用できるかを知るためには、ほかのサンプルをデプロイし、そのコードを初めから終わりまで見てみることをお薦めします。
 
-<a class="button button-primary" href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples">Githubのサンプルアプリケーション</a>
+<a class="button button-primary" href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples">GitHubのサンプルアプリケーション</a>
 
 あなた自身のプロジェクト内でのライブラリの使い方を学ぶためには、
 [C++ライブラリについて](library.md)を読んでみましょう。
