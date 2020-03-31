@@ -1,0 +1,22 @@
+name: CI
+on: pull_request
+
+jobs:
+  format_notebooks:
+    name: Lint notebooks
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-python@v1
+    - name: Checkout user/docs-l10n
+      uses: actions/checkout@v2
+    - name: Install nbfmt
+      run: |
+        pip install --upgrade absl-py
+        wget https://raw.githubusercontent.com/tensorflow/docs/master/tools/nbfmt.py
+    - name: Check notebook formatting
+      run: |
+        pwd
+        echo "--->"
+        ls -al
+        echo "---"
+        git ls-files -z '*.ipynb'
