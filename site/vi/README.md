@@ -4,7 +4,7 @@
 
 Cộng đồng TensorFlow tại Việt Nam đã và đang dịch những tài liệu này từ nguyên bản tiếng Anh.
 Những bản dịch này được hoàn thiện dựa trên sự nỗ lực đóng góp từ cộng đồng lập trình viên sử dụng TensorFlow, 
-và có thể không đảm bảo được tính cập nhật của bản dịch đối với [Tài liệu chính thức bằng tiếng Anh](https://www.tensorflow.org/?hl=en) này. 
+và điều này có thể không đảm bảo được tính cập nhật của bản dịch đối với [Tài liệu chính thức bằng tiếng Anh](https://www.tensorflow.org/?hl=en) này. 
 Nếu bạn có bất kỳ đề xuất nào nhằm cải thiện bản dịch này, vui lòng tạo Pull request đến 
 kho chứa trên GitHub của [tensorflow/docs-l10n](https://github.com/tensorflow/docs-l10n). 
 Để đăng ký dịch hoặc cải thiện nội dung bản dịch, các bạn hãy liên hệ và đặt vấn đề tại 
