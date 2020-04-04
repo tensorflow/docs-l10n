@@ -1,5 +1,7 @@
 # 텐서플로 텐서
 
+Note: 이 문서는 텐서플로 커뮤니티에서 번역했습니다. 커뮤니티 번역 활동의 특성상 정확한 번역과 최신 내용을 반영하기 위해 노력함에도 불구하고 [공식 영문 문서](https://www.tensorflow.org/?hl=en)의 내용과 일치하지 않을 수 있습니다. 이 번역에 개선할 부분이 있다면 [tensorflow/docs-l10n](https://github.com/tensorflow/docs-l10n/) 깃헙 저장소로 풀 리퀘스트를 보내주시기 바랍니다. 문서 번역이나 리뷰에 참여하려면 [docs-ko@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ko)로 메일을 보내주시기 바랍니다.
+
 이름에서 알 수 있듯이, 텐서플로는 텐서를 포함한 계산을 정의하고 실행하는 프레임워크입니다.
 *텐서(tensor)*는 벡터와 행렬을 일반화한 것이고 고차원으로 확장 가능합니다.
 내부적으로 텐서플로는 기본적으로 제공되는 자료형을 사용해 n-차원 배열로 나타냅니다.
