@@ -29,7 +29,7 @@ Ci sono diversi modi per contribuire a TensorFlow! Puoi contribuire con del codi
  apportare dei miglioramenti alla documentazione TensorFlow API, oppure aggiungere i tuoi 
 Jupyter notebooks al repository [tensorflow/examples](http://www.github.com/tensorflow/examples).
 Questa guida fornisce tutto quello di cui hai bisogno per iniziare. I nostri contributi più comuni includono:
- il *codice*, la *documentazione*, e il *supporto alla comunità*.
+ il *codice*, la *documentazione*, e il *supporto alla comunità*..
 
 - [Scrivere codice](code.md).
 - [Migliorare la documentazione](docs.md).
