@@ -1,189 +1,144 @@
-# Understand the C++ library
+# C++ライブラリを理解する
 
-The TensorFlow Lite for Microcontrollers C++ library is part of the
-[TensorFlow repository](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro).
-It is designed to be readable, easy to modify, well-tested, easy to integrate,
-and compatible with regular TensorFlow Lite.
+マイクロコントローラ向け TensorFlow Lite の C++ライブラリ は
+[TensorFlow repository](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/micro)
+の一部です。
+読みやすく、修正しやすく、よく検証されており、統合しやすく、また、標準のTensorFlow Liteと互換性があるように設計されている。
 
-The following document outlines the basic structure of the C++ library and
-provides information about creating your own project.
+以下の資料は、C++ライブラリの基本構造の概要を示しており、プロジェクトを作成に関する情報を提供する。
 
-## File structure
+## ファイル構造
 
-The
-[`micro`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro)
-root directory has a relatively simple structure. However, since it is located
-inside of the extensive TensorFlow repository, we have created scripts and
-pre-generated project files that provide the relevant source files in isolation
-within various embedded development environments.
+[`micro`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/micro)
+のルートディレクトリは、比較的簡単な構造です。
+しかし、広大な TensorFlow レポジトリの中に配置されているので、スクリプトと生成済みプロジェクトファイルを作成しました。そのプロジェクトファイルは、さまざまな組込み開発環境の内部に分離して、関連のあるソースファイルを提供します。
 
-### Key files
+### 重要なファイル
 
-The most important files for using the TensorFlow Lite for Microcontrollers
-interpreter are located in the root of the project, accompanied by tests:
+マイクロコントローラ向け TensorFlow Lite のインタープリタを使うために最も重要なファイルは、プロジェクトのルートに配置されており、テストが付属しています。
 
 -   [`all_ops_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/kernels/all_ops_resolver.h)
-    or
+    または
     [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_mutable_op_resolver.h)
-    can be used to provide the operations used by the interpreter to run the
-    model. Since `all_ops_resolver.h` pulls in every available operation, it
-    uses a lot of memory. In production applications, you should use
-    `micro_mutable_op_resolver.h` to pull in only the operations your model
-    needs.
+    は、モデルを実行するインタープリタによって使用される演算を提供します。
+    `all_ops_resolver.h` は全ての利用可能な演算を引き入れるので、多くのメモリを使用します。製品アプリケーションにおいては、`micro_mutable_op_resolver.h` を使用するべきであり、モデルが必要とする演算のみを引き入れます。
+
 -   [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h)
-    outputs debug information.
+    デバッグ情報を出力します。
+
 -   [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h)
-    contains code to handle and run models.
+    モデルを操作し、実行するコードを含みます。
 
-See [Get started with microcontrollers](get_started.md) for a walkthrough of
-typical usage.
+典型的な使用方法は、[マイクロコントローラから始める](get_started.md) を見てみましょう。
 
-The build system provides for platform-specific implementations of certain
-files. These are located in a directory with the platform name, for example
-[`sparkfun_edge`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/sparkfun_edge).
+ビルドシステムは、いくつかのファイルから成るプラットフォーム固有の実装を提供します。これらはプラットフォーム名のディレクトリに配置されており、例えば
+[`sparkfun_edge`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/sparkfun_edge) があります。
 
-Several other directories exist, including:
+いくつかの他のディレクトリが存在し、以下を含みます。
 
--   [`kernel`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/kernels),
-    which contains operation implementations and the associated code.
--   [`tools`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/tools),
-    which contains build tools and their output.
--   [`examples`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples),
-    which contains sample code.
+-   [`kernel`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/kernels)、
+    操作の実装と関連するコードを含みます。
+-   [`tools`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/tools)、
+    ビルドツールとその出力を含みます。
+-   [`examples`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples)、
+    サンプルコードを含みます。
 
-## Start a new project
+## 新規プロジェクトを始める
 
-We recommend using the *Hello World* example as a template for new projects. You
-can obtain a version of it for your platform of choice by following the
-instructions in this section.
+*Hello World* サンプルを新規プロジェクトのテンプレートととして使うことを推奨しています。
+この節の以下の指示に従うことで、選択したプラットフォームのサンプルを得られます。
 
-### Use the Arduino library
+### Arduinoライブラリを使用する
 
-If you are using Arduino, the *Hello World* example is included in the
-`Arduino_TensorFlowLite` Arduino library, which you can download from the
-Arduino IDE and in [Arduino Create](https://create.arduino.cc/).
+Arduino を使用してるのならば、*Hello World* サンプルは、`Arduino_TensorFlowLite` Arduino ライブラリに含まれており、
+Arduino IDE または [Arduino Create](https://create.arduino.cc/) からダウンロードできます。
 
-Once the library has been added, go to `File -> Examples`. You should see an
-example near the bottom of the list named `TensorFlowLite:hello_world`. Select
-it and click `hello_world` to load the example. You can then save a copy of the
-example and use it as the basis of your own project.
+ライブラリが一度追加されたら、`ファイル -> スケッチ例` を選択します。リストの下の方に `TensorFlowLite:hello_world` と言うサンプルを見つけられるはずです。それを選択し、`hello_world` をクリックし、サンプルを読み込みます。サンプルのコピーを保存し、あなた自身のプロジェクトの基礎として使用することができます。
 
-### Generate projects for other platforms
+### 他のプラットフォーム用のプロジェクトを生成する
 
-TensorFlow Lite for Microcontrollers is able to generate standalone projects
-that contain all of the necessary source files, using a `Makefile`. The current
-supported environments are Keil, Make, and Mbed.
+マイクロコントローラ向け TensorFlow Lite は、スタンドアロンなプロジェクトを生成でき、それは必要なソースファイルを全て含み、`Makefile` を使用します。現在サポートされている環境は、Keil、Make、そしてMbedです。
 
-To generate these projects with Make, clone the
-[TensorFlow repository](http://github.com/tensorflow/tensorflow) and run the
-following command:
+これらのプロジェクトをMakeと一緒に生成するために、[TensorFlow repository](http://github.com/tensorflow/tensorflow) をクローンし、以下のコマンドを実行する。
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile generate_projects
 ```
 
-This will take a few minutes, since it has to download some large toolchains for
-the dependencies. Once it has finished, you should see some folders created
-inside a path like `tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/` (the
-exact path depends on your host operating system). These folders contain the
-generated project and source files.
+これは数分かかります。理由は、依存関係のために幾つかの大きなツールチェーンをダウンロードする必要があるからです。
+一度それが終わると、`tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/` （正確なパスはあなたのホストオペレーティングシステムに依存します）のようなパスの中にいくつかのフォルダが生成されていることがわかるはずです。これらのフォルダは、生成されたプロジェクトとソースファイルを含みます。
 
-After running the command, you'll be able to find the *Hello World* projects in
-`tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/hello_world`. For
-example, `hello_world/keil` will contain the Keil project.
+コマンド実行後、*Hello World* プロジェクトを `tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/hello_world` に見つけられるでしょう。例えば、`hello_world/keil` は Keilプロジェクトを含むでしょう。
 
-## Run the tests
+## テストを実行する
 
-To build the library and run all of its unit tests, use the following command:
+ライブラリをビルドし、全ての単体テストを実行するためには、以下のコマンドを使用します。
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile test
 ```
 
-To run an individual test, use the following command, replacing `<test_name>`
-with the name of the test:
+個々のテストを実行するには、以下のコマンドを使用します。`<test_name>` はテスト名に置き換えます。
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile test_<test_name>
 ```
 
-You can find the test names in the project's Makefiles. For example,
-`examples/hello_world/Makefile.inc` specifies the test names for the *Hello
-World* example.
+プロジェクトのMakefileからテスト名を見つけられるでしょう。例えば、`examples/hello_world/Makefile.inc` は *Hello World*  サンプルのテスト名を指定しています。
 
-## Build binaries
+## バイナリをビルドする
 
-To build a runnable binary for a given project (such as an example application),
-use the following command, replacing `<project_name>` with the project you wish
-to build:
+得られたプロジェクト（サンプルアプリケーションのような）の実行可能なバイナリをビルドするために、以下のコマンドを使用します。`<project_name>` はビルドしたいプロジェクトに置き換えます。
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile <project_name>_bin
 ```
 
-For example, the following command will build a binary for the *Hello World*
-application:
+例えば、以下のコマンドは、*Hello World* アプリケーションのバイナリをビルドします。
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile hello_world_bin
 ```
 
-By default, the project will be compiled for the host operating system. To
-specify a different target architecture, use `TARGET=`. The following example
-shows how to build the *Hello World* example for the SparkFun Edge:
+デフォルトでは、プロジェクトはホストオペレーティングシステム用にコンパイルされるでしょう。異なるターゲットアーキテクチャを指定するには、`TARGET=` を使用します。以下のサンプルは、*Hello World* サンプルを SparkFun Edge 向けにビルドする方法を示しています。
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile TARGET=sparkfun_edge hello_world_bin
 ```
 
-When a target is specified, any available target-specific source files will be
-used in place of the original code. For example, the subdirectory
-`examples/hello_world/sparkfun_edge` contains SparkFun Edge implementations of
-the files `constants.cc` and `output_handler.cc`, which will be used when the
-target `sparkfun_edge` is specified.
+ターゲットが指定されると、利用可能なターゲット固有のソースファイルが、オリジナルのコードと置き換えられて使用されるでしょう。例えば、サブディレクトリ `examples/hello_world/sparkfun_edge` は `constants.cc` と `output_handler.cc` ファイルの SparkFun Edge 向けの実装を含んでおり、ターゲット `sparkfun_edge` が指定されたときに使用されるでしょう。
 
-You can find the project names in the project's Makefiles. For example,
-`examples/hello_world/Makefile.inc` specifies the binary names for the *Hello
-World* example.
+プロジェクトの Makefiles にプロジェクト名を見つけられるでしょう。例えば、`examples/hello_world/Makefile.inc`
+は、*Hello World*  サンプルのバイナリ名を指定しています。
 
-## Optimized kernels
+## 最適化されたカーネル
 
-The reference kernels in the root of `tensorflow/lite/micro/kernels` are
-implemented in pure C/C++, and do not include platform-specific hardware
-optimizations.
+`tensorflow/lite/micro/kernels` のルートにある参考となるカーネルは、純粋なC/C++で実装されており、プラットフォーム固有のハードウェア最適化は含みません。
 
-Optimized versions of kernels are provided in subdirectories. For example,
-`kernels/cmsis-nn` contains several optimized kernels that make use of Arm's
-CMSIS-NN library.
+最適化されたバージョンのカーネルは、サブディレクトリに提供されています。例えば、`kernels/cmsis-nn` はいくつかの最適化されたカーネルを含み、ArmのCMSIS-NNライブラリを使用します。
 
-To generate projects using optimized kernels, use the following command,
-replacing `<subdirectory_name>` with the name of the subdirectory containing the
-optimizations:
+最適化されたカーネルを使ったプロジェクトを生成するためには、以下のコマンドを使用します。
+`<subdirectory_name>`  は最適化を含むサブディレクトリの名前に置き換えます。
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile TAGS=<subdirectory_name> generate_projects
 ```
 
-You can add your own optimizations by creating a new subfolder for them. We
-encourage pull requests for new optimized implementations.
+新しいサブフォルダーを作成することで、あなた自身による最適化を追加することができます。我々は、新しい最適化実装へのプルリクエスト奨励しています。
 
-## Generate the Arduino library
+## Arduino ライブラリを生成する
 
-A nightly build of the Arduino library is available via the Arduino IDE's
-library manager.
+Arduinoライブラリのナイトリー・ビルドは、Arduino IDEのライブラリマネージャから利用できます。
 
-If you need to generate a new build of the library, you can run the following
-script from the TensorFlow repository:
+ライブラリの新規ビルドを生成する必要があるなら、TensorFlowレポジトリから以下のスクリプトを実行できます。
 
 ```bash
 ./tensorflow/lite/micro/tools/ci_build/test_arduino.sh
 ```
 
-The resulting library can be found in
-`tensorflow/lite/micro/tools/make/gen/arduino_x86_64/prj/tensorflow_lite.zip`.
+結果として生成されたライブラリは以下で見つけられます。
+`tensorflow/lite/micro/tools/make/gen/arduino_x86_64/prj/tensorflow_lite.zip`
 
-## Port to new devices
+## 新規デバイスに移植する
 
-Guidance on porting TensorFlow Lite for Microcontrollers to new platforms and
-devices can be found in
-[`micro/README.md`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/README.md).
+新規プラットフォームやデバイスへ マイクロコントローラ向けTensorFlow Lite の移植をするためのガイドは [`micro/README.md`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/README.md) で見つけれます。
