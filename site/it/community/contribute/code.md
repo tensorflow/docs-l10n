@@ -1,15 +1,15 @@
-# Contribute to the TensorFlow code
+# Contributo al codice TensorFlow
 
-Whether you are adding a loss function, improving test coverage, or writing an
-RFC for a major design change, this portion of the contributor guide will help
-you get started. Thank you for work and interest in improving TensorFlow.
+Sia che tu voglia aggiungere una funzione perdita, migliorare la copertura di un test, oppure scrivere una
+RFC per un cambiamento rilevante di progettazione, questa parte della guida del contributore ti sarà d'aiuto
+per cominciare. Grazie per il lavoro e l'interesse nel miglioramento di TensorFlow.
 
-## Before you get started
+## Prima di cominciare
 
-Before you contribute source code to a TensorFlow project, please review the `CONTRIBUTING.md` file in the GitHub repo of the project. (For example, see the
-[CONTRIBUTING.md file for the core TensorFlow repo](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md).) All code contributors are required to sign a [Contributor License Agreement](https://cla.developers.google.com/clas) (CLA).
+Prima di contribuire al codice sorgente di un progetto TensorFlow, cortesemente rivedi il file `CONTRIBUTING.md` nel repository GitHub del progetto. (Per esempio, vedi
+[file CONTRIBUTING.md nel repository centrale di TensorFlow](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md).) A tutti i contributori è richiesto di firmare un [Accordo di Licenza di Contribuzione](https://cla.developers.google.com/clas) (CLA).
 
-To avoid duplicating work, please review [current RFCs](https://github.com/tensorflow/community/tree/master/rfcs) and contact the developers on the TensorFlow forums before you start work on a non-trivial feature. We are somewhat selective when deciding to add new functionality, and the best way to contribute and help the project is to work on known issues. 
+Per evitare attività duplicate, prima di cominciare a lavorare su una funzionalità non banale, cortesemente consulta [RFCs correnti](https://github.com/tensorflow/community/tree/master/rfcs) e contatta gli sviluppatori nei forum TensorFlow. Talvolta siamo selettivi quando dobbiamo decidere se aggiungere una funzionalità, ed il modo migliore di contribuire ed aiutare il progetto è lavorare su problemi conosciuti. 
 
 ## Issues for new contributors
 
