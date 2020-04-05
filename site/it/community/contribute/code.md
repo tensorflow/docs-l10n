@@ -6,20 +6,20 @@ per cominciare. Grazie per il lavoro e l'interesse nel miglioramento di TensorFl
 
 ## Prima di cominciare
 
-Prima di contribuire al codice sorgente di un progetto TensorFlow, cortesemente rivedi il file `CONTRIBUTING.md` nel repository GitHub del progetto. (Per esempio, vedi
+Prima di contribuire al codice sorgente di un progetto TensorFlow, cortesemente consulta il file `CONTRIBUTING.md` nel repository GitHub del progetto. (Per esempio, vedi
 [file CONTRIBUTING.md nel repository centrale di TensorFlow](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md).) A tutti i contributori è richiesto di firmare un [Accordo di Licenza di Contribuzione](https://cla.developers.google.com/clas) (CLA).
 
 Per evitare attività duplicate, prima di cominciare a lavorare su una funzionalità non banale, cortesemente consulta [RFCs correnti](https://github.com/tensorflow/community/tree/master/rfcs) e contatta gli sviluppatori nei forum TensorFlow. Talvolta siamo selettivi quando dobbiamo decidere se aggiungere una funzionalità, ed il modo migliore di contribuire ed aiutare il progetto è lavorare su problemi conosciuti. 
 
-## Issues for new contributors
+## Temi per il nuovo contributore
 
-New contributors should look for the following tags when searching for a first contribution to the TensorFlow code base. We strongly recommend that new contributors tackle “easy” and "good first issue" projects first; this helps the contributor become familiar with the contribution workflow, and for the core devs to become acquainted with the contributor.
+I nuovi contributori alla ricerca di un primo tema per un contributo al codice TensorFlow, dovrebbero cercare i seguenti tag. Raccomandiamo fortemente che i nuovi contributori affrontino inizialmente progetti “easy” e problematiche "good first issue"; questo aiuta il contributore a familiarizzarsi con il flusso di lavoro della contribuzione, ed agli sviluppatori del core di conoscere il contributore.
 
 - `good first issue`
 - `easy`
 - `contributions welcome`
 
-If you are interested in recruiting a team to help tackle a large-scale problem or a new feature, please email the [developers@ group](https://groups.google.com/a/tensorflow.org/forum/#!forum/developers) and review our current list of RFCs. 
+Se siete interessati a reclutare un team per aiutarvi ad affrontare un problema ampio o una nuova funzionalità, cortemente mandate una email a [gruppo sviluppatori@](https://groups.google.com/a/tensorflow.org/forum/#!forum/developers) e osservate la nostra lista attuale di RFC. 
 
 
 ## Code review
