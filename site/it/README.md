@@ -20,15 +20,19 @@ To volunteer to write or review community translations, contact the
 
 Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno una traduzione naturale. Per favore *non* traducete le seguenti parole:
 
+*   account(s)
 *   batch(es)
 *   blog(s)
 *   browser
 *   callback(s)
 *   cluster(s)
+*   code-cell(s)
 *   contributor(s)
 *   dataflow
 *   dataset
 *   deep learning
+*   download
+*   dropout
 *   gradient tape
 *   layer(s)
 *   machine learning
@@ -44,6 +48,8 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   social media(s)
 *   tablet(s)
 *   test(s)
+*   training weight(s)
 *   tutorials(s)
 *   underfit(ting)
+*   upload
 *   white paper(s)
