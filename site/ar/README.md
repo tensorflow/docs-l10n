@@ -1,0 +1,45 @@
+<div dir="rtl">
+
+# ترجمات مجتمع المتطوّعين
+
+ قامت مجموعة المتطوعين في مشروع Tensorflow بترجمة هذا المحتوى. نظرًا لأن هذه الترجمات تعتمد على قاعدة أقصى الجهد (best-effort) ، فلا نضمن أنها انعكاس دقيق وحديث [للمحتوى الرسمي باللغة الإنجليزية](https://www.tensorflow.org/?hl=en). إذا كانت لديك اقتراحات لتحسين هذه الترجمة ، يرجى إرسال "Pull request" إلى مشروع [tensorflow/docs-l10n](https://github.com/tensorflow/docs-l10n). للتطوع أو مراجعة ترجمات المجموعة يرجى ارسال ايميل إلى docs@tensorflow.org.
+
+</div>
+
+# Community translations
+
+Our TensorFlow community has translated these documents. Because community
+translations are *best-effort*, there is no guarantee that this is an accurate
+and up-to-date reflection of the
+[official English documentation](https://www.tensorflow.org/?hl=en).
+If you have suggestions to improve this translation, please send a pull request
+to the [tensorflow/docs](https://github.com/tensorflow/docs) GitHub repository.
+To volunteer to write or review community translations, contact the
+[docs@tensorflow.org list](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs).
+
+<div dir="rtl">
+
+# إرشادات الترجمة
+
+
+العربية لغة تكتب من اليمين إلى اليسار. و لأنّ الدفاتر التفاعلية (notebooks) تتوقّع أن يكون النصّ من اليسار إلى اليمين ، فعليك، عند إضافة نصّ عربيّ أن تحيطه بعلامة الHTML كما في المثال التّالي حتى يكون إخراج النصّ صحيحا في المتصفّح. مثال:
+
+</div>
+
+```html
+<div dir="rtl">
+
+ مرحبا يا عالم، أنا أتكلّم العربيّة
+
+<div>
+```
+
+<div dir="rtl">
+
+# معلومات مفيدة للمتطوّعين
+
+1. نرحبّ بالمتطوّعين الجدد مهما كانت مهارتهم
+3. التطوّع لا يقتصر على الترجمة و إضافة المقالات، فحتّى قراءة المقالات الموجودة و إقتراح تنقيحات لها أو نشرها على نطاق أوسع هي أمثلة على مساهمات قيّمة.
+2. تتمّ إضافة الترجمات الجديدة إلى موقع Tensorflow.org آليّا صباح يوم الجمعة
+
+</div>
