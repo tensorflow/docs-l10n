@@ -56,81 +56,81 @@ Di particolare importanza è fare *testing adeguato*:
 *   Il test *supera il build in continuous integration*?
 *   Il test *copre tutte le linee del codice?* se no, le eccezioni sono ragionevoli ed esplicite?
 
-Se trovate dei problemi, cortesemente, considerate la possibilità di supportare un contributore a capire questi problemi ed a risolverli. 
+Se individuate dei problemi, cortesemente, considerate la possibilità di supportare un contributore a capire questi problemi ed a risolverli. 
 
 
-## Improve error messages or logs
+## Miglioramento dei messaggi di errore o dei log
 
-We welcome contributions that improve error messages and logging. 
+Accogliamo contributi che migliorano la messaggistica di errore e la tracciatura. 
 
 
-## Contribution workflow
+## Flusso dei contributi
 
-Code contributions—bug fixes, new development, test improvement—all follow a GitHub-centered workflow. To participate in TensorFlow development, set up a GitHub account. Then:
+Tutti i contributi al codice—correzioni, nuovi sviluppi, miglioramenti ai test—seguono un flusso centrato su GitHub. Per partecipare allo sviluppo in TensorFlow, aprite un account GitHub. Quindi:
 
-1.  Fork the repo you plan to work on.
-    Go to the project repo page and use the *Fork* button. This will create a copy of the
-    repo, under your username. (For more details on how to fork a repository see
-    [this guide](https://help.github.com/articles/fork-a-repo/).)
+1.  Fate un Fork del repository su cui avete intenzione di lavorare.
+    Andate sulla pagina del repository di progetto e usate il pulsante *Fork*. Ciò creerà una copia del
+    repository, con il vostro nome utente. (Per maggiori dettagli su come fare il fork di un repository vedere
+    [questa guida](https://help.github.com/articles/fork-a-repo/).)
 
-2.  Clone down the repo to your local system.
+2.  Clonate il repository sul vostro sistema locale.
 
     `$ git clone git@github.com:your-user-name/project-name.git`
 
-3.  Create a new branch to hold your work.
+3.  Definite un nuovo branch per isolare il vostro lavoro.
 
     `$ git checkout -b new-branch-name`
 
-4.  Work on your new code. Write and run tests.
+4.  Lavorate sul vostro nuovo codice. Scrivere ed eseguite i test.
 
-5.  Commit your changes.
+5.  Fate il commit delle vostre modifiche.
 
     `$ git add -A`
 
     `$ git commit -m "commit message here"`
 
-6.  Push your changes to your GitHub repo.
+6.  Fate un push delle vostre modifiche sul vostro repository GitHub.
 
     `$ git push origin branch-name`
 
-7.  Open a *Pull Request* (PR). Go to the original project repo on GitHub. There will be a message about your recently pushed branch, asking if you would like to open a pull request. Follow the prompts, *compare across repositories*, and submit the PR. This will send an email to the committers. You may want to consider sending an email to the mailing list for more visibility. (For more details, see the [GitHub guide on PRs](https://help.github.com/articles/creating-a-pull-request-from-a-fork). 
+7.  Aprite una *Pull Request* (PR). Andando su repository originale del progetto su GitHub. Ci sarà un'evidenza a proposito del branch di cui avete fatto il push di recente, che vi chiederà se avete l'intenzione di aprire una pull request. Scegliete, *confronto tra repository* (*compare across repositories* n.d.t), e sottoponete la PR. Ciò produrrà l'invio di una email ai committer. Per dare maggiore visibilità potete considerare la possibilità di inviare anche un'email alla mailing list. (Per maggiori dettagli, vedere la [guida di GitHub sulle PR](https://help.github.com/articles/creating-a-pull-request-from-a-fork). 
 
-8.  Maintainers and other contributors will *review your PR*. Please participate in the conversation, and try to *make any requested changes*. Once the PR is approved, the code will be merged.
+8.  I maintainer ed altri contributori *rivedranno la vostra PR*. Cortesemente partecipate alla conversazione, e provate ad *eseguire ogni richiesta di cambiamento*. Una volta che la PR è approvata, il codice sarà incorporato.
 
-*Before working on your next contribution*, make sure your local repository is up to date.
+*Prima di mettervi a lavorare sul vostro prossimo contributo*, assicuratevi che il vostro repository locale sia aggiornato.
 
-1. Set the upstream remote. (You only have to do this once per project, not every time.)
+1. Impostate il riferimento remoto. (Basta farlo una sola volta per ogni progetto, non ogni volta.)
 
     `$ git remote add upstream git@github.com:tensorflow/project-repo-name`
 
-2. Switch to the local master branch.
+2. Spostatevi sul vostro branch locale principale.
 
     `$ git checkout master`
 
-3. Pull down the changes from upstream.
+3. Scaricate i cambiamenti dal riferimento remoto.
 
     `$ git pull upstream master`
 
-4. Push the changes to your GitHub account. (Optional, but a good practice.)
+4. Promuovete i cambiamenti nel vostro account GitHub. (E' opzionale, ma si tratta di una buona pratica.)
 
     `$ git push origin master`
 
-5. Create a new branch if you are starting new work.
+5. Genrate un nuovo branch se dovete iniziare un nuovo lavoro.
 
     `$ git checkout -b branch-name`
 
-Additional `git` and GitHub resources:
+Risorse aggiuntive `git` e GitHub:
 
-*   [Git documentation](https://git-scm.com/documentation)
-*   [Git development workflow](https://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html)
-*   [Resolving merge conflicts](https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/).
+*   [Documentazione git](https://git-scm.com/documentation)
+*   [Documentazione sul flusso di sviluppo git](https://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html)
+*   [Soluzione dei conflitti di merge](https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/).
 
 
-## Contributor checklist
+## Checklist del contributore
 
-*   Read contributing guidelines.
-*   Read the Code of Conduct.
-*   Ensure you have signed the Contributor License Agreement (CLA).
-*   Check if your changes are consistent with the guidelines.
-*   Check if your changes are consistent with the TensorFlow coding style.
-*   Run unit tests.
+*   Leggere le linee guida per la contribuzione.
+*   Leggere il codice di condotta.
+*   Assicurarsi di aver firmato l'Accordo di Licenza di Contribuzione (CLA).
+*   Verificare se vostri cambiamenti sono consistenti con le linee guida.
+*   Verificare se i vostri cambiamenti sono consistenti con lo stile di codifica TensorFlow.
+*   Eseguire gli unit test.
