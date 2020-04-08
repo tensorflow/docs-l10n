@@ -19,7 +19,7 @@ I nuovi contributori alla ricerca di un primo issue per un contributo al codice 
 - `easy`
 - `contributions welcome`
 
-Se siete interessati a reclutare un team per aiutarvi ad affrontare un problema ampio o una nuova funzionalità, cortemente mandate una email a [gruppo sviluppatori@](https://groups.google.com/a/tensorflow.org/forum/#!forum/developers) e osservate la nostra lista attuale di RFC. 
+Se siete interessati a reclutare un team per aiutarvi ad affrontare un problema ampio o una nuova funzionalità, mandate una email a [gruppo sviluppatori@](https://groups.google.com/a/tensorflow.org/forum/#!forum/developers) e osservate la nostra lista attuale di RFC. 
 
 
 ## Revisione del codice
@@ -34,16 +34,16 @@ Qui alcune domande da tenere a mente durante il processo di revisione del codice
 *   *Il codice è consistente con le API di TensorFlow?* Le funzioni pubbliche, le classi, ed i parametri sono nominati in modo appropriato e progettati intuitivamente?
 *   *E' inclusa la documentazione?* Le funzioni pubbliche, le classi, i tipi di ritorno e gli attributi memorizzati sono nominati in accordo con le convenzioni di TensorFlow e sono documentati chiaramente? La nuova funzionalità è descritta nella documentazione di TensorFlow ed illustrata, ovunque possibile, con esempi? La documentazione si legge in modo appropriato?
 
-*   *Il codice è leggibile da una persona?* Si evitano ridondanze? I nomi delle variabili dovrebbero essere migliorati per aumentare la chiarezza o la consistenza? Dovrebbero essere aggiunti commenti? Ci sono commenti inutili o estranei che potrebbero essere rimossi?
+*   *Il codice è facilmente leggibile?* Si evitano ridondanze? I nomi delle variabili dovrebbero essere migliorati per aumentare la chiarezza o la consistenza? Dovrebbero essere aggiunti commenti? Ci sono commenti inutili o estranei che potrebbero essere rimossi?
 *   *Il codice è efficiente?* Potrebbe essere riscritto facilmente per essere più efficiente?
 *   IL codice è *retro-compatibile* con le versioni precedenti di TensorFlow?
 *   Il nuovo codice aggiungerà *nuove dipendenze* on other libraries?
 
 ## Test e miglioramento della copertura dei test
 
-Unit testing di alta qualità è una pietra miliare del processo di sviluppo di TensorFlow. Per questo scopo usiamo immagini Docker. Le funzioni di test hanno nomi appropriati, e sono responsabili del controllo della validità degli algoritmi, così come delle varie opzioni del codice.
+Lo Unit testing di alta qualità è una pietra miliare del processo di sviluppo di TensorFlow. Per questo scopo usiamo immagini Docker. Le funzioni di test hanno nomi appropriati, e sono responsabili del controllo della validità degli algoritmi, così come delle varie opzioni del codice.
 
-Tutt le nuove funzioni e le correzioni di difetti *devono* includere test con adeguata copertura. Perciò accogliamo anche contributi di nuovi casi di test o migliorie ai test esistenti. Se scoprite che i nostri attuali test non sono completi — anche se ciò, al momento, non causa un difetto — per cotesia, sottoponete un issue e, se possibile una pull request.
+Tutte le nuove funzioni e le correzioni di difetti *devono* includere test con adeguata copertura. Perciò accogliamo anche contributi di nuovi casi di test o migliorie ai test esistenti. Se scoprite che i nostri attuali test non sono completi — anche se ciò, al momento, non causa un difetto — per cotesia, sottoponete un issue e, se possibile una pull request.
 
 Per tutti i dettagli particolari sulle procedure di test in ciascun progetto TensorFlow, vedere i file `README.md` e `CONTRIBUTING.md` nel rispettivo repository su GitHub.
 
@@ -54,9 +54,9 @@ Di particolare importanza è fare *testing adeguato*:
 *   I test sono in grado di validare che *il codice è corretto*, e che esso faccia *ciò che la documentazione dice* che esso faccia?
 *   Se la modifica è la correzione di un difetto, è incluso un *test di non regressione*?
 *   Il test *supera il build in continuous integration*?
-*   Il test *copre tutte le linee del codice?* se no, le eccezioni sono ragionevoli ed esplicite?
+*   Il test *copre tutte le linee del codice?* Se no, le eccezioni sono ragionevoli ed esplicite?
 
-Se individuate dei problemi, cortesemente, considerate la possibilità di supportare un contributore a capire questi problemi ed a risolverli. 
+Se individuate dei problemi, considerate la possibilità di supportare un contributore a capire questi problemi ed a risolverli. 
 
 
 ## Miglioramento dei messaggi di errore o dei log
