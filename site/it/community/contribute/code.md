@@ -1,6 +1,6 @@
-# Contributo al codice TensorFlow
+# Contribuire al codice TensorFlow
 
-Sia che tu voglia aggiungere una funzione perdita, migliorare la copertura di un test, oppure scrivere una
+Sia che tu voglia aggiungere una funzione obiettivo, migliorare la copertura di un test, oppure scrivere una
 RFC per un cambiamento rilevante di progettazione, questa parte della guida del contributore ti sarà d'aiuto
 per cominciare. Grazie per il lavoro e l'interesse nel miglioramento di TensorFlow.
 
@@ -9,11 +9,11 @@ per cominciare. Grazie per il lavoro e l'interesse nel miglioramento di TensorFl
 Prima di contribuire al codice sorgente di un progetto TensorFlow, cortesemente consulta il file `CONTRIBUTING.md` nel repository GitHub del progetto. (Per esempio, vedi
 [file CONTRIBUTING.md nel repository centrale di TensorFlow](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md).) A tutti i contributori è richiesto di firmare un [Accordo di Licenza di Contribuzione](https://cla.developers.google.com/clas) (CLA).
 
-Per evitare attività duplicate, prima di cominciare a lavorare su una funzionalità non banale, cortesemente consulta [RFCs correnti](https://github.com/tensorflow/community/tree/master/rfcs) e contatta gli sviluppatori nei forum TensorFlow. Talvolta siamo selettivi quando dobbiamo decidere se aggiungere una funzionalità, ed il modo migliore di contribuire ed aiutare il progetto è lavorare su problemi conosciuti. 
+Per evitare attività duplicate, prima di cominciare a lavorare su una funzionalità non banale, cortesemente consulta [RFC correnti](https://github.com/tensorflow/community/tree/master/rfcs) e contatta gli sviluppatori nei forum TensorFlow. Talvolta siamo selettivi quando dobbiamo decidere se aggiungere una funzionalità, ed il modo migliore di contribuire ed aiutare il progetto è lavorare su problemi conosciuti. 
 
-## Temi per il nuovo contributore
+## Issue per il nuovo contributore
 
-I nuovi contributori alla ricerca di un primo tema per un contributo al codice TensorFlow, dovrebbero cercare i seguenti tag. Raccomandiamo fortemente che i nuovi contributori affrontino inizialmente progetti “easy” e problematiche "good first issue"; questo aiuta il contributore a familiarizzarsi con il flusso di lavoro della contribuzione, ed agli sviluppatori del core di conoscere il contributore.
+I nuovi contributori alla ricerca di un primo issue per un contributo al codice TensorFlow, dovrebbero cercare i seguenti tag. Raccomandiamo fortemente che i nuovi contributori affrontino inizialmente progetti “easy” e problematiche "good first issue"; questo aiuta il contributore a familiarizzare con il flusso di lavoro di contribuzione, ed agli sviluppatori del core di conoscere il contributore.
 
 - `good first issue`
 - `easy`
@@ -61,12 +61,12 @@ Se individuate dei problemi, cortesemente, considerate la possibilità di suppor
 
 ## Miglioramento dei messaggi di errore o dei log
 
-Accogliamo contributi che migliorano la messaggistica di errore e la tracciatura. 
+Accogliamo contributi che migliorano la messaggistica di errore e il logging. 
 
 
 ## Flusso dei contributi
 
-Tutti i contributi al codice—correzioni, nuovi sviluppi, miglioramenti ai test—seguono un flusso centrato su GitHub. Per partecipare allo sviluppo in TensorFlow, aprite un account GitHub. Quindi:
+Tutti i contributi al codice—correzioni, nuovi sviluppi, miglioramenti ai test—seguono un flusso incentrato su GitHub. Per partecipare allo sviluppo in TensorFlow, aprite un account GitHub. Quindi:
 
 1.  Fate un Fork del repository su cui avete intenzione di lavorare.
     Andate sulla pagina del repository di progetto e usate il pulsante *Fork*. Ciò creerà una copia del
@@ -93,13 +93,13 @@ Tutti i contributi al codice—correzioni, nuovi sviluppi, miglioramenti ai test
 
     `$ git push origin branch-name`
 
-7.  Aprite una *Pull Request* (PR). Andando su repository originale del progetto su GitHub. Ci sarà un'evidenza a proposito del branch di cui avete fatto il push di recente, che vi chiederà se avete l'intenzione di aprire una pull request. Scegliete, *confronto tra repository* (*compare across repositories* n.d.t), e sottoponete la PR. Ciò produrrà l'invio di una email ai committer. Per dare maggiore visibilità potete considerare la possibilità di inviare anche un'email alla mailing list. (Per maggiori dettagli, vedere la [guida di GitHub sulle PR](https://help.github.com/articles/creating-a-pull-request-from-a-fork). 
+7.  Aprite una *Pull Request* (PR). Andando su repository originale del progetto su GitHub. Ci sarà un messaggio che evidenzia il branch di cui avete fatto il push di recente, che vi chiederà se avete l'intenzione di aprire una pull request. Scegliete, *confronto tra repository* (*compare across repositories* n.d.t), e sottoponete la PR. Ciò produrrà l'invio di una email ai committer. Per dare maggiore visibilità potete considerare la possibilità di inviare anche un'email alla mailing list. (Per maggiori dettagli, vedere la [guida di GitHub sulle PR](https://help.github.com/articles/creating-a-pull-request-from-a-fork). 
 
-8.  I maintainer ed altri contributori *rivedranno la vostra PR*. Cortesemente partecipate alla conversazione, e provate ad *eseguire ogni richiesta di cambiamento*. Una volta che la PR è approvata, il codice sarà incorporato.
+8.  I maintainer ed altri contributori *revisioneranno la vostra PR*. Partecipate alla conversazione, e provate ad *eseguire ogni richiesta di cambiamento*. Una volta che la PR è approvata, il codice sarà incorporato.
 
 *Prima di mettervi a lavorare sul vostro prossimo contributo*, assicuratevi che il vostro repository locale sia aggiornato.
 
-1. Impostate il riferimento remoto. (Basta farlo una sola volta per ogni progetto, non ogni volta.)
+1. Impostate l'upsteram remoto. (Basta farlo una sola volta per ogni progetto, non ogni volta.)
 
     `$ git remote add upstream git@github.com:tensorflow/project-repo-name`
 
