@@ -21,7 +21,7 @@
     または
     [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_mutable_op_resolver.h)
     は、モデルを実行するインタープリタによって使用される演算を提供します。
-    `all_ops_resolver.h` は全ての利用可能な演算を含むので、多くのメモリを使用します。製品アプリケーションにおいては、`micro_mutable_op_resolver.h` を使用するべきであり、モデルが必要とする演算のみを読み込みます。
+    `all_ops_resolver.h` はすべての利用可能な演算を含むので、多くのメモリを使用します。製品アプリケーションにおいては、`micro_mutable_op_resolver.h` を使用するべきであり、モデルが必要とする演算のみを読み込みます。
 -   [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h)
     デバッグ情報を出力します。
 -   [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h)
@@ -66,7 +66,9 @@ make -f tensorflow/lite/micro/tools/make/Makefile generate_projects
 ```
 
 これには数分かかります。理由は、依存関係のためにいくつかの大きなツールチェーンをダウンロードする必要があるからです。
-一度それが終わると、`tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/` （正確なパスはホストのオペレーティングシステムに依存します）のようなパスの中にいくつかのフォルダが生成されていることがわかるはずです。
+一度それが終わると、
+`tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/` （正確なパスはホストのオペレーティングシステムに依存します）
+のようなパスの中にいくつかのフォルダが生成されていることがわかるはずです。
 これらのフォルダは、生成されたプロジェクトとソースファイルを含みます。
 
 コマンド実行後、*Hello World* プロジェクトを `tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/hello_world` にみつけられるでしょう。
@@ -110,7 +112,9 @@ make -f tensorflow/lite/micro/tools/make/Makefile TARGET=sparkfun_edge hello_wor
 ```
 
 ターゲットが指定されると、利用可能なターゲット固有のソースファイルが、オリジナルのコードと置き換えられて使用されるでしょう。
-たとえば、サブディレクトリ `examples/hello_world/sparkfun_edge` は `constants.cc` と `output_handler.cc` ファイルの SparkFun Edge 向けの実装を含んでおり、ターゲット `sparkfun_edge` が指定されたときに使用されるでしょう。
+たとえば、サブディレクトリ `examples/hello_world/sparkfun_edge` は
+ `constants.cc` と `output_handler.cc` ファイルの SparkFun Edge 向けの実装を含んでおり、
+ターゲット `sparkfun_edge` が指定されたときに使用されるでしょう。
 
 プロジェクトの Makefile にプロジェクト名をみつけられるでしょう。たとえば、`examples/hello_world/Makefile.inc`
 は、*Hello World* サンプルのバイナリ名を指定しています。
