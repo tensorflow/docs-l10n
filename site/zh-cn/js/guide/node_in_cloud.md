@@ -2,7 +2,7 @@
 
 此文档叙述了如何在云平台上使用 @tensorflow/tfjs-node 包运行一个 Node.js 进程。
 
-自 tfjs-node@1.2.4 起，在云平台上运行 Node.js 不需要额外的配置。此教程演示了如何运行 Heroku 和 GCloud 上的 [mnist-node](https://github.com/tensorflow/tfjs-examples/tree/master/mnist-node) 代码库中的示例。Heroku 的 Node.js 支持请参阅此[文档](https://devcenter.heroku.com/articles/nodejs-support)。在 Google Cloud Platform 上运行 Node.js 另见[这里](https://cloud.google.com/nodejs/docs/).
+自 tfjs-node@1.2.4 起，在云平台上运行 Node.js 不需要额外的配置。此教程演示了如何运行 Heroku 和 GCloud 上的 [mnist-node](https://github.com/tensorflow/tfjs-examples/tree/master/mnist-node) 仓库中的示例。Heroku 的 Node.js 支持请参阅此[文档](https://devcenter.heroku.com/articles/nodejs-support)。在 Google Cloud Platform 上运行 Node.js 另见[这里](https://cloud.google.com/nodejs/docs/).
 
 ## 在 Heroku 上部署 Node.js 项目
 
