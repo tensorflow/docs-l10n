@@ -33,7 +33,6 @@ for FILE in ${TARGET_FILES}; do
 
   echo ""
   echo "Apply RedPen to: ${TARGET_MARKDOWN}"
-  # redpen-distribution-1.10.1/bin/redpen --limit ${ERROR_LIMIT} --conf tools/ja/redpen-conf.xml ${TARGET_MARKDOWN}
   redpen --limit ${ERROR_LIMIT} --conf tools/ja/redpen-conf.xml ${TARGET_MARKDOWN}
 
 done
