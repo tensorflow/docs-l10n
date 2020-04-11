@@ -33,7 +33,7 @@ for FILE in ${TARGET_FILES}; do
   fi
 
   echo ""
-  echo "Apply RedPen to: ${TARGET_MARKDOWN}"
+  echo "===== Apply RedPen to: ${TARGET_MARKDOWN} ====="
   redpen --result-format ${RESULT_FORMAT} --limit ${ERROR_LIMIT} --conf tools/ja/redpen-conf.xml ${TARGET_MARKDOWN}
 
 done
