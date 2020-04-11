@@ -21,6 +21,11 @@ To volunteer to write or review community translations, contact the
 
 # إرشادات الترجمة
 
+## الخطوات الأولى
+
+* أضف إسم المستخدم الخاصّ بك على github إلى الملف المسمى REVIEWERS الموجود في [هذا الرّابط](https://github.com/tensorflow/docs-l10n/blob/master/site/ar/REVIEWERS) بإرسال "Pull request". 
+* إذا لم يكن لديك خبرة عن كيفية عمل طريقة "Pull request"، رجاءً إتبع التعليمات الموجودة في [هذا الرّابط](https://github.com/firstcontributions/first-contributions/blob/master/translations/README.ar.md)
+
 ## كيفية إخراج اللغة العربيّة بشكل صحيح
 
 العربية لغة تكتب من اليمين إلى اليسار. و لأنّ الدفاتر التفاعلية (notebooks) تتوقّع أن يكون النصّ من اليسار إلى اليمين ، فعليك، عند إضافة نصّ عربيّ أن تحيطه بعلامة الHTML كما في المثال التّالي حتى يكون إخراج النصّ صحيحا في المتصفّح. مثال:
@@ -39,7 +44,7 @@ To volunteer to write or review community translations, contact the
 
 ## إضافة نصّ إخلاء المسؤوليّة
 
-يجب إضافة نص إخلاء المسؤوليّة التّالي كما هو إلى بداية كُلّ درس:
+يجب إضافة نص إخلاء المسؤوليّة التّالي كما هو إلى بداية كُلّ دفتر تفاعليّ تترجمه:
 
 </div>
 
