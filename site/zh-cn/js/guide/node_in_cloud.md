@@ -14,7 +14,7 @@
 
 ### 创建 Node.js 应用程序
 
-1. 创建一个文件夹并从 [mnist-node](https://github.com/tensorflow/tfjs-examples/tree/master/mnist-node) 示例中复制 `data.js`, `main.js`, `model.js` 和 `package.json` 文件。
+1. 创建一个文件夹并从 [mnist-node](https://github.com/tensorflow/tfjs-examples/tree/master/mnist-node) 示例中复制 `data.js`、`main.js`、`model.js` 和 `package.json` 文件。
 2. 确保 @tensorflow/tfjs-node 依赖处于 @1.2.4 或更新的版本。
 
 ### 在本地构建并运行您的应用程序
@@ -148,4 +148,3 @@ Loss: 0.066 (train), 0.037 (val); Accuracy: 0.980 (train), 0.989 (val) (16.04 ms
 Epoch 3 / 20
 Epoch 3 / 20
 ```
-
