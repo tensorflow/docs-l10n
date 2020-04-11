@@ -3,7 +3,7 @@ name: ja
 on:
   push:
     paths:
-      - ".github/workflows/ja.yml"
+      - ".github/workflows/ja.yaml"
       - "site/ja/**"
       - "tools/ja/**"
 
