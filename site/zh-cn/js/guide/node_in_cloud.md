@@ -68,7 +68,7 @@ $ git commit -m "First Commit"
 $ git push heroku master
 ```
 
-3. 在构建日志中，您将能看到 tfjs-library 软件包正在下载TensorFlow C 支持库和加载 TensorFlow Node.js 原生插件：
+3. 在构建日志中，您将能看到 tfjs-library 软件包正在下载 TensorFlow C 支持库和加载 TensorFlow Node.js 原生插件：
 
 ```
 remote: -----> Installing dependencies
