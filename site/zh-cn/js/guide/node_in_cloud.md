@@ -114,7 +114,7 @@ Epoch 1 / 20
 
 ### 将应用程序部署至 GCloud
 
-运行 `gcloud app deploy` 以部署应用引擎的本地代码和配置文件。在部署日志中您将能看到 tfjs-node 已安装：
+通过执行 `gcloud app deploy` 部署应用引擎的本地代码并加载配置文件。在部署日志中您将能看到 tfjs-node 已安装：
 
 ```
 $ gcloud app deploy
