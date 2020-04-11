@@ -1,0 +1,51 @@
+name: ja
+
+on:
+  push:
+    paths:
+      - ".github/workflows/ja.yml"
+      - "site/ja/**"
+      - "tools/ja/**"
+
+jobs:
+  proofreading-ja:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dir:
+          - site/ja/guide
+          - site/ja/install
+          - site/ja/js
+          - site/ja/lite
+          - site/ja/probability
+          - site/ja/r1
+          - site/ja/tfx
+          - site/ja/tutorials
+          - site/ja/xla
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Download RedPen
+        run: |
+          wget https://github.com/redpen-cc/redpen/releases/download/redpen-1.10.1/redpen-1.10.1.tar.gz
+          tar xvf redpen-1.10.1.tar.gz
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.7"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jupyter
+
+      - name: Run proofreading tool
+        run: |
+          export PATH="redpen-distribution-1.10.1/bin:${PATH}"
+          ./tools/ja/bin/proofreading.sh ${{ matrix.dir }}
