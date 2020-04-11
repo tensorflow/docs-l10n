@@ -5,6 +5,7 @@ TARGET=${1}
 
 # Other constants.
 ERROR_LIMIT=20
+RESULT_FORMAT="plain2"
 
 # Find target files.
 TARGET_FILES=$(find ${TARGET} -type f -name *.ipynb -or -name '*.md')
@@ -33,6 +34,6 @@ for FILE in ${TARGET_FILES}; do
 
   echo ""
   echo "Apply RedPen to: ${TARGET_MARKDOWN}"
-  redpen --limit ${ERROR_LIMIT} --conf tools/ja/redpen-conf.xml ${TARGET_MARKDOWN}
+  redpen --result-format ${RESULT_FORMAT} --limit ${ERROR_LIMIT} --conf tools/ja/redpen-conf.xml ${TARGET_MARKDOWN}
 
 done
