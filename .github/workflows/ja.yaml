@@ -12,6 +12,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      REDPEN_VERSION: "1.10.1"
+
     strategy:
       matrix:
         dir:
@@ -32,8 +35,8 @@ jobs:
 
       - name: Download RedPen
         run: |
-          wget https://github.com/redpen-cc/redpen/releases/download/redpen-1.10.1/redpen-1.10.1.tar.gz
-          tar xvf redpen-1.10.1.tar.gz
+          wget https://github.com/redpen-cc/redpen/releases/download/redpen-${REDPEN_VERSION}/redpen-${REDPEN_VERSION}.tar.gz
+          tar xvf redpen-${REDPEN_VERSION}.tar.gz
 
       - name: Set up Python
         uses: actions/setup-python@v1
@@ -47,5 +50,5 @@ jobs:
 
       - name: Run proofreading tool
         run: |
-          export PATH="redpen-distribution-1.10.1/bin:${PATH}"
+          export PATH="redpen-distribution-${REDPEN_VERSION}/bin:${PATH}"
           ./tools/ja/bin/proofreading.sh ${{ matrix.dir }}
