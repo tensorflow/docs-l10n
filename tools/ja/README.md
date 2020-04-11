@@ -2,7 +2,7 @@
 
 This is a proofreading tool for Japanese translation.
 We can check our documants following the configuration file: [`redpen-conf.xml`](redpen-conf.xml).
-For example, finding notation fluctuation with [`terminologies.txt`](terminologies.txt).
+For example, checking notations and synonyms with [`terminologies.txt`](terminologies.txt).
 
 ## Requirements
 
