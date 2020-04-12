@@ -22,8 +22,6 @@ echo ""
 # Apply RedPen to target files.
 for FILE in ${TARGET_FILES}; do
 
-  echo ${FILE}
-
   if [ ${FILE##*.} = "md" ]; then
     TARGET_MARKDOWN=${FILE}
   elif [ ${FILE##*.} = "ipynb" ]; then
