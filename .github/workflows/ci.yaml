@@ -1,51 +1,26 @@
 name: CI
-on: push
+on: pull_request
 
 jobs:
-  format_notebooks:
-    name: Format notebooks
+  notebook_format:
+    name: Notebook format
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/setup-python@v1
-
-    - name: Checkout user/docs-l10n
-      uses: actions/checkout@v2
-      with:
-        path: docs-l10n
-
-    - name: Checkout tensorflow/docs
-      uses: actions/checkout@v2
-      with:
-        repository: tensorflow/docs
-        path: docs
-
-    - name: Set up environment
+    - uses: actions/checkout@v2
+    - name: Fetch master branch
+      run: git fetch -u origin master:master
+    - name: Install nbfmt
       run: |
         pip install --upgrade absl-py
-        cd ./docs-l10n && git fetch origin master:master
-        git config --global user.email "tfdocsbot+no-reply@gmail.com"
-        git config --global user.name "TF DocsBot"
-
-    - name: nbfmt
+        wget -P ./tools https://raw.githubusercontent.com/tensorflow/docs/master/tools/nbfmt.py
+    - name: Check notebook formatting
       run: |
-        cd ./docs-l10n
-        echo "Run nbfmt.py on updated notebooks:"
-        NOTEBOOKS_CHANGED="$(git diff --name-only master | grep '\.ipynb$')"
-        if [[ -n "$NOTEBOOKS_CHANGED" ]]; then
-          python ../docs/tools/nbfmt.py --ignore_warn $NOTEBOOKS_CHANGED
-        fi
-
-    - name: Push changes
-      run: |
-        cd ./docs-l10n
-        MODIFIED_FILES=$(git ls-files --modified)
-        if [[ -n "$MODIFIED_FILES" ]]; then
-          echo "Commit formatting changes for:"
-          echo "$MODIFIED_FILES"
-          echo ""
-          git add $MODIFIED_FILES
-          if git commit -m "CI: nbfmt"; then
-            git push
-          fi
+        # Only check notebooks modified in this pull request.
+        notebooks="$(git diff --name-only master | grep '\.ipynb$' || true)"
+        if [[ -n "$notebooks" ]]; then
+          echo "Check formatting with nbfmt:"
+          python ./tools/nbfmt.py --test $notebooks
+        else
+          echo "No notebooks modified in this pull request."
         fi
