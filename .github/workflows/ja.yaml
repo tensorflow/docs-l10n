@@ -19,7 +19,6 @@ jobs:
       matrix:
         dir:
           - site/ja/guide
-          - site/ja/install
           - site/ja/js
           - site/ja/lite
           - site/ja/probability
