@@ -50,6 +50,7 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   filesystem(s)
 *   fork(s)
 *   gradient tape
+*   host
 *   inline
 *   issue(s)
 *   layer(s)
@@ -66,12 +67,14 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   open source
 *   overfit/ting
 *   pattern(s)
+*   pipeline
 *   pixel(s)
 *   postsubmit(s)
 *   presubmit(s)
+*   placement
 *   plug-in(s)
 *   previewer(s)
-*   pull (request)
+*   pull request(s)
 *   push
 *   release(s)
 *   repository(ies)
