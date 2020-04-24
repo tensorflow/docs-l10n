@@ -74,37 +74,37 @@ A Gennaio 2019, i TF-SIGs attivi sono:
   <tr>
    <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/addons">SIG Addons</a>
    </td>
-   <td>Maintains a repository of contributions that conform to well-established API patterns, but implement new functionality not available in core TensorFlow.
+   <td>Mantiene un repository di contributi allineati con i pattern delle API istituzionali, ma implementa nuove funzioni non disponibili nel core di TensorFlow.
    </td>
   </tr>
   <tr>
    <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/build">SIG Build</a>
    </td>
-   <td>Focuses on issues surrounding building, packaging, and distribution of TensorFlow.
+   <td>Si focalizza su temi che hanno a che fare con la compilazione, la costruzione dei pacchetti, e la distribuzione di TensorFlow.
    </td>
   </tr>
   <tr>
    <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/io">SIG IO</a>
    </td>
-   <td>Works on support for file systems and formats other than those in core TensorFlow (such as Apache Ignite FS, or Apache Hadoop SequenceFile), as subclasses of tf.data.Dataset and TensorFlow filesystems.
+   <td>Lavora al supporto per i file system e formati oltre quelli del core TensorFlow (come Apache Ignite FS, o Apache Hadoop SequenceFile), e li rende disponibili come sotto-classi dei filesystem tf.data.Dataset e TensorFlow.
    </td>
   </tr>
   <tr>
    <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/networking">SIG Networking</a>
    </td>
-   <td>Maintains network fabrics and protocols not available in core TensorFlow.
+   <td>Mantiene architetture di rete e protocolli non disponibili nel core di TensorFlow.
    </td>
   </tr>
   <tr>
    <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/sig-tensorboard">SIG TensorBoard</a>
    </td>
-   <td>Furthers the development and direction of TensorBoard and its plug-ins.
+   <td>Promuove le direttrici e lo sviluppo di TensorBoard e dei suoi plug-in.
    </td>
   </tr>
   <tr>
    <td><a href="https://groups.google.com/a/tensorflow.org/forum/#!forum/rust">SIG Rust</a>
    </td>
-   <td>Collaborates on the development of TensorFlow's Rust bindings.
+   <td>Collabora allo sviluppo del binding Rust di TensorFlow.
    </td>
   </tr>
 </table>
