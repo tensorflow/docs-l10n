@@ -30,12 +30,14 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   code-cell(s)
 *   committer(s)
 *   contributor(s)
+*   core(s)
 *   dataflow
 *   dataset
 *   deep learning
 *   download
 *   dropout
 *   email(s)
+*   filesystem(s)
 *   gradient tape
 *   issue(s)
 *   layer(s)
@@ -49,6 +51,7 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   overfit(ting)
 *   pattern(s)
 *   pixel(s)
+*   plug-in(s)
 *   pull request(s)
 *   repository(ies)
 *   skill(s)
