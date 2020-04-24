@@ -1,13 +1,12 @@
-# Contribute to the TensorFlow API documentation
+# Contribuire alla documentazione delle API di TensorFlow
 
-## Testable docstrings
+## Docstring verificabili
 
-TensorFlow uses [DocTest](https://docs.python.org/3/library/doctest.html) to
-test code snippets in Python docstrings. The snippet must be executable Python
-code. To enable testing, prepend the line with `>>>` (three left-angle
-brackets). For example, here's a excerpt from the `tf.concat` function in the
-[array_ops.py](https://www.tensorflow.org/code/tensorflow/python/ops/array_ops.py)
-source file:
+TensorFlow usa [DocTest](https://docs.python.org/3/library/doctest.html) per
+verificare frammenti di codice in docstring Python. I frammenti devono essere codice Python
+eseguibile. Per abilitare il test, aggiungere il prefisso `>>>` alla linea (tre parentesi 
+angolate sinistre). Per esempio, qui c'è un estratto dalla funzione `tf.concat` nel file sorgente
+[array_ops.py](https://www.tensorflow.org/code/tensorflow/python/ops/array_ops.py):
 
 ```
 def concat(values, axis, name="concat"):
