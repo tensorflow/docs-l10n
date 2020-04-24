@@ -128,7 +128,7 @@ il codice verificabile con DocTest:
 Ci sono due modi per fare, in locale, il test del codice nelle docstring:
 
 *   Se state solo cambiando la docstring di una classe/funzione/metodo, allora
-    potete provarlo passando il percorso del file a
+    potete provarla passando il percorso del file a
     [tf_doctest.py](https://www.tensorflow.org/code/tensorflow/tools/docs/tf_doctest.py).
     Per esempio:
 
@@ -146,8 +146,8 @@ Ci sono due modi per fare, in locale, il test del codice nelle docstring:
 
 *   Se state cambiando il codice e la docstring di una classe/funzione/metodo,
     allora avrete bisogno di
-    [compilare TensorFlow dal sorgente](../../install/source.md). Una volta che siete pronti
-    a compilare dal sorgente, potete eseguire il test:
+    [compilare TensorFlow dal sorgente](../../install/source.md). Una volta eseguita la 
+    compilazione dal sorgente, potete eseguire il test:
 
     <pre class="prettyprint lang-bsh">
     <code class="devsite-terminal">bazel run //tensorflow/tools/docs:tf_doctest</code>
