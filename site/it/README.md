@@ -34,6 +34,7 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   dataflow
 *   dataset
 *   deep learning
+*   docstring(s)
 *   download
 *   dropout
 *   email(s)
