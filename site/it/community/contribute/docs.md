@@ -279,10 +279,10 @@ modificare ed aggiornare la vostra copia di repository GitHub direttamente con G
 1. Nel vostro repository, ottenuto tramite fork, in <var>username</var>/docs, usate l'interfaccia web di GitHub per
    <a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">creare un nuovo ramo</a>.
 2. Spostatevi sul file notebook per modificarlo.
-3. Aprite il notebook in Google Colab: usanfo la conversione di URL o l'estensione Chrome: *Apri in Colab*.
+3. Aprite il notebook in Google Colab: usando la conversione di URL o l'estensione Chrome: *Apri in Colab*.
 4. Modificate il notebook in Colab.
 5. Fate commit dei cambiamenti al vostro repository da Colab con
-   *File > Save a copy in GitHub...*, ove la finestra di dialogo di salvataggio dovrebbe collegarsi
+   *File > Save a copy in GitHub...*, con cui la finestra di dialogo di salvataggio dovrebbe collegarsi
    al ramo del repository appropriato, ed aggiungete un messaggio di commit significativo.
 6. Dopo il salvataggio, andate al vostro repository o sul repository
    <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>,
@@ -292,60 +292,59 @@ modificare ed aggiornare la vostra copia di repository GitHub direttamente con G
 Successo: I vostri cambiamenti sono stati accettati nella documentazione TensorFlow.
 
 
-## Community translations
+## Traduzioni della comunità
 
-Community translations are a great way to make TensorFlow accessible all over
-the world. To update a translation, find or add a file in the
-[language directory](https://github.com/tensorflow/docs/tree/master/site) that
-matches the same directory structure of the `en/` directory. The English docs
-are the *source-of-truth* and translations should follow these guides as close
-as possible. That said, translations are written for the communities they serve.
-If the English terminology, phrasing, style, or tone does not translate to
-another language, please use a translation appropriate for the reader.
+Le traduzioni della comunità sono un modo fantastico di rendere accessibile TensorFlow
+in tutto il mondo. Per fare una traduzione, trovate o aggiungete un file alla
+[directory delle lingue](https://github.com/tensorflow/docs/tree/master/site) che
+abbia la stessa struttura della directory `en/`. I documenti in Inglese
+sono la *fonte originale* e le traduzioni dovrebbero seguirli il più
+fedelmente possibile. Ciò detto, le traduzioni sono scritte dalle comunità a cui servono.
+Se la terminologia Inglese, la struttura delle frasi, lo stile, o il tono, non sono 
+traducibili in un'altra lingua, usate una traduzione appropriata per il lettore.
 
-Note: The API reference is *not* translated for tensorflow.org.
+Nota: la documentazione di riferimento per le API *non* viene tradotta per tensorflow.org.
 
-There are language-specific docs groups that make it easier for translation
-contributors to organize. Please join if you're an author, reviewer, or just
-interested in building out TensorFlow.org content for the community:
+Questi sono i gruppi di documentazione specifici per lingua che rendono facile organizzarsi 
+ai contributori delle traduzioni. Iscrivetevi se siete un autore, un revisore, o semplicemente 
+una persona interessata a rendere disponibile il contenuto TensorFlow.org content per la comunità:
 
-* Chinese (Simplified): [docs-zh-cn@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-zh-cn)
-* Italian: [docs-it@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-it)
-* Japanese: [docs-ja@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ja)
-* Korean: [docs-ko@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ko)
-* Russian: [docs-ru@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ru)
-* Turkish: [docs-tr@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-tr)
+* Cinese (Semplificato): [docs-zh-cn@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-zh-cn)
+* Italiano: [docs-it@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-it)
+* Giapponese: [docs-ja@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ja)
+* Koreano: [docs-ko@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ko)
+* Russo: [docs-ru@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ru)
+* Turco: [docs-tr@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-tr)
 
-### Review notifications
+### Notifiche di revisione
 
-All documentation updates require a review. To collaborate more efficiently with
-the TensorFlow translation communities, here are some ways to keep on top of
-language-specific activity:
+Tutte le modifiche alla documentazione devono essere revisionate. Per collaborare in modo effciente
+con la comunità di traduzione di TensorFlow, qui ci sono alcuni modi per rimanere aggiornati 
+sulle attività per una lingua in particolare:
 
-* Join a language group listed above to receive an email for any *created* pull
-  request that touches the <code><a
+* Aggregatevi ad uno dei gruppi di lingua elencati sopra per ricevere un'email per ogni richiesta di pull *creata*
+  che faccia riferimento alla directory <code><a
   href="https://github.com/tensorflow/docs/tree/master/site">site/<var>lang</var></a></code>
-  directory for that language.
-* Add your GitHub username to the `site/<lang>/REVIEWERS` file to get
-  automatically comment-tagged in a pull request. When comment-tagged, GitHub
-  will send you notifications for all changes and discussion in that pull
-  request.
+  relativa alla lingua.
+* Aggiungete il vostro nome utente GitHub al file `site/<lang>/REVIEWERS` per essere 
+  etichettati per commenti in una richiesta di pull. Quando siete etichettati per commenti, GitHub,
+  per ogni modifica o discussione relativa alla richiesta di pull, vi manderà una notifica.
 
-### Keep code up-to-date in translations
+### Mantenere aggiornato il codice nelle traduzioni
 
-For an open source project like TensorFlow, keeping documentation up-to-date is
-challenging. After talking with the community, readers of translated content
-will tolerate text that is a little out-of-date, but out-of-date code is
-frustrating. To make it easier to keep the code in sync, use the
+Per un progetto open source come TensorFlow, è arduo mantenere aggiornata la documentazione.
+Dopo aver paralto con la comunità, i lettori di contenuti tradotti
+tollereranno un testo leggermente arretrato, ma il codice arretrato è
+frustrante. Per rendere più facile mantenere il codice sincronizzato, usare il tool
 [nb-code-sync](https://github.com/tensorflow/docs/blob/master/tools/nb_code_sync.py)
-tool for the translated notebooks:
+sui notebook tradotti:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">./tools/nb_code_sync.py [--lang=en] site/<var>lang</var>/notebook.ipynb</code>
 </pre>
 
-This script reads the code cells of a language notebook and check it against the
-English version. After stripping the comments, it compares the code blocks and
-updates the language notebook if they are different. This tool is particularly
-useful with an interactive git workflow to selectively add hunks of the file to
-the commit using: `git add --patch site/lang/notebook.ipynb`
+Questo script legge le celle di codice di un notebook e le controlla a fronte 
+della versione Inglese. Dopo aver sezionato il contenuto, confronta i blocchi di codice
+ed aggiorna il linguaggio del notebook se diverso. Questo strumento è particolarmente
+utile in una modalità di lavoro Git interattiva per aggiungere selettivamente porzioni di file
+al commit usando: `git add --patch site/lang/notebook.ipynb`
