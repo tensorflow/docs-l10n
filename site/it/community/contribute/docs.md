@@ -4,7 +4,7 @@ TensorFlow accoglie contributi alla documentazione—se migliorate la
 documentazione, migliorate la libreria TensorFlow in se. La documentazione
 tensorflow.org ricade nelle seguenti categorie:
 
-* *riferimento API* —La [Documentazione di riferimento sulle API](https://www.tensorflow.org/api_docs/)
+* *API reference* —La [Documentazione di riferimento sulle API](https://www.tensorflow.org/api_docs/)
   è generata da docstring nel
   [Codice sorgente TensorFlow](https://github.com/tensorflow/tensorflow).
 * *Documentazione discorsiva* —Questi sono [tutorial](https://www.tensorflow.org/tutorials),
@@ -27,19 +27,19 @@ Per partecipare alla comunità docs di TensorFlow:
 
 ## API reference
 
-To update reference documentation, find the
-[source file](https://www.tensorflow.org/code/tensorflow/python/)
-and edit the symbol's
-<a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a>.
-Many API reference pages on tensorflow.org include a link to the source file
-where the symbol is defined. Docstrings support
+Per modificare la documentazione di riferimento, trovare il 
+[file sorgente](https://www.tensorflow.org/code/tensorflow/python/)
+e cambiare le 
+<a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a> dei simboli.
+Molte pagine di riferimento per le API in tensorflow.org sono collegate al codice sorgente
+ove il simbolo è definito. I docstring supportano il
 <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown</a>
-and can be (approximately) previewed using any
+e possono essere visti (approssimativamente) in anteprima usando un qualsiasi
 <a href="http://tmpvar.com/markdown.html" class="external">Markdown previewer</a>.
 
-For reference documentation quality and how to get involved with doc sprints and
-the community, see the
-[TensorFlow 2 API Docs advice](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview).
+Per la qualità della documentazione di riferimento e come essere coinvolti nella comunità
+degli sprint di Docs, vedere gli
+[avvisi di Docs per le API TensorFlow 2](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview).
 
 ### Versions and branches
 
