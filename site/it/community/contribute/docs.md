@@ -312,7 +312,7 @@ una persona interessata a rendere disponibile il contenuto TensorFlow.org conten
 * Cinese (Semplificato): [docs-zh-cn@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-zh-cn)
 * Italiano: [docs-it@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-it)
 * Giapponese: [docs-ja@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ja)
-* Koreano: [docs-ko@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ko)
+* Coreano: [docs-ko@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ko)
 * Russo: [docs-ru@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ru)
 * Turco: [docs-tr@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-tr)
 
@@ -327,15 +327,15 @@ sulle attività per una lingua in particolare:
   href="https://github.com/tensorflow/docs/tree/master/site">site/<var>lang</var></a></code>
   relativa alla lingua.
 * Aggiungete il vostro nome utente GitHub al file `site/<lang>/REVIEWERS` per essere 
-  etichettati per commenti in una richiesta di pull. Quando siete etichettati per commenti, GitHub,
-  per ogni modifica o discussione relativa alla richiesta di pull, vi manderà una notifica.
+  etichettati per commenti in una richiesta di pull. Quando siete etichettati per commenti,
+  per ogni modifica o discussione relativa alla richiesta di pull, GitHub vi manderà una notifica.
 
 ### Mantenere aggiornato il codice nelle traduzioni
 
 Per un progetto open source come TensorFlow, è arduo mantenere aggiornata la documentazione.
-Dopo aver paralto con la comunità, i lettori di contenuti tradotti
+Dopo aver parlato con la comunità, i lettori di contenuti tradotti
 tollereranno un testo leggermente arretrato, ma il codice arretrato è
-frustrante. Per rendere più facile mantenere il codice sincronizzato, usare il tool
+frustrante. Per rendere più facile mantenere aggiornato il codice, usare il tool
 [nb-code-sync](https://github.com/tensorflow/docs/blob/master/tools/nb_code_sync.py)
 sui notebook tradotti:
 
