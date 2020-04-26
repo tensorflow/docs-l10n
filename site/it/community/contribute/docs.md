@@ -147,15 +147,15 @@ locale. Questa è la directory di lavoro dove farete i cambiamenti:
 <code class="devsite-terminal">cd ./docs</code>
 </pre>
 
-#### Add an upstream repo to keep up-to-date (optional)
+#### Aggiungere un repository origine (upstream n.d.t) per rimanere aggiornati (opzionale)
 
-To keep your local repository in sync with `tensorflow/docs`, add an *upstream*
-remote to download the latest changes.
+Per mantenere sincronizzato il vostro repository locale con `tensorflow/docs`, aggiungete un' *origine*
+remota per scaricare gli aggiornamenti più recenti.
 
-Note: Make sure to update your local repo *before* starting a contribution.
-Regular syncs to upstream reduce the chance of a
-<a href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line" class="external">merge conflict</a>
-when you submit your pull request.
+Nota: Accertatevi di aggiornare il vostro repository locale *prima* di iniziare un contributo.
+Sincronizzazioni regolari con l'origine riduce le probabilità di un 
+<a href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line" class="external">conflitto di merge</a>
+quando inoltrate la vostra richiesta di pull.
 
 Add a remote:
 
