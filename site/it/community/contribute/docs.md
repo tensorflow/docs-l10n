@@ -32,7 +32,7 @@ Per modificare la documentazione di riferimento, trovare il
 e cambiare le 
 <a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a> dei simboli.
 Molte pagine di riferimento per le API in tensorflow.org sono collegate al codice sorgente
-ove il simbolo è definito. I docstring supportano il
+ove è definito un simbolo. I docstring supportano il
 <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown</a>
 e possono essere visti (approssimativamente) in anteprima usando un qualsiasi
 <a href="http://tmpvar.com/markdown.html" class="external">Markdown previewer</a>.
@@ -41,42 +41,41 @@ Per la qualità della documentazione di riferimento e come essere coinvolti nell
 degli sprint di Docs, vedere gli
 [avvisi di Docs per le API TensorFlow 2](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview).
 
-### Versions and branches
+### Versioni e rami
 
-The site's [API reference](https://www.tensorflow.org/api_docs/python/tf)
-version defaults to the latest stable binary—this matches the package installed
-with `pip install tensorflow`.
+La versione del sito [API reference](https://www.tensorflow.org/api_docs/python/tf)
+punta, per default, all'ultima versione stabile del codice binario—che corrisponde al pacchetto
+installato con `pip install tensorflow`.
 
-The default TensorFlow package is built from the stable branch `rX.x` in the
-main
-<a href="https://github.com/tensorflow/tensorflow" class="external">tensorflow/tensorflow</a>
-repo. The reference documentation is generated from code comments
-and docstrings in the source code for
+Il pacchetto di default di TensorFlow è compilato dal ramo stabile `rX.x` del repository principale
+<a href="https://github.com/tensorflow/tensorflow" class="external">tensorflow/tensorflow</a>. 
+La documentazione di riferimento è generata dai commenti del codice
+e dalle docstring nel codice sorgente per
 <a href="https://www.tensorflow.org/code/tensorflow/python/" class="external">Python</a>,
-<a href="https://www.tensorflow.org/code/tensorflow/cc/" class="external">C++</a>, and
+<a href="https://www.tensorflow.org/code/tensorflow/cc/" class="external">C++</a>, e
 <a href="https://www.tensorflow.org/code/tensorflow/java/" class="external">Java</a>.
 
-Previous versions of the TensorFlow documentation are available as
-[rX.x branches](https://github.com/tensorflow/docs/branches) in the TensorFlow
-Docs repository. These branches are added when a new version is released.
+Versioni precedenti della documentazione TensorFlow sono disponibili come
+nel repository Docs di tensorFlow come [rami rX.x](https://github.com/tensorflow/docs/branches).
+Questi rami vengono aggiunti ogni volta che viene rilasciata una nuova versione.
 
-### Build API docs
+### Compilare la documentazione sulle API
 
-Note: This step is not required to edit or preview API docstrings, only to
-generate the HTML used on tensorflow.org.
+Nota: Questo passaggio non è richiesto per modificare o vedere in anteprima le docstring delle API,
+ ma solo per generare l'HTML usato su tensorflow.org.
 
 #### Python reference
 
-The `tensorflow_docs` package includes the generator for the
-[Python API reference docs](https://www.tensorflow.org/api_docs/python/tf). To
-install:
+Il pacchetto `tensorflow_docs` include il generatore per la
+[documentazione di riferimento per le PI Python](https://www.tensorflow.org/api_docs/python/tf).
+Per installarla usare:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">pip install git+https://github.com/tensorflow/docs</code>
 </pre>
 
-To generate the TensorFlow 2 reference docs, use the
-`tensorflow/tools/docs/generate2.py` script:
+Per generare la documentazione di riferimento TensorFlow 2, usare lo script:
+`tensorflow/tools/docs/generate2.py`
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git clone https://github.com/tensorflow/tensorflow tensorflow</code>
@@ -85,8 +84,8 @@ To generate the TensorFlow 2 reference docs, use the
 <code class="devsite-terminal">python generate2.py --output_dir=/tmp/out</code>
 </pre>
 
-Note: This script uses the *installed* TensorFlow package to generate docs and
-only works for TensorFlow 2.x.
+Nota: Questo script usa il pacchetto TensorFlow *installato* per generare i documenti e
+funziona solo per TensorFlow 2.x.
 
 
 ## Narrative documentation
