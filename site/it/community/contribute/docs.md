@@ -88,21 +88,20 @@ Nota: Questo script usa il pacchetto TensorFlow *installato* per generare i docu
 funziona solo per TensorFlow 2.x.
 
 
-## Narrative documentation
+## Documentazione discorsiva
 
-TensorFlow [guides](https://www.tensorflow.org/guide) and
-[tutorials](https://www.tensorflow.org/tutorials) are written as
+Le [guide](https://www.tensorflow.org/guide) ed i
+[tutorial](https://www.tensorflow.org/tutorials) TensorFlow sono scritti come file
 <a href="https://guides.github.com/features/mastering-markdown/" class="external">Markdown</a>
-files and interactive
-<a href="https://jupyter.org/" class="external">Jupyter</a> notebooks. Notebooks
-can be run in your browser using
+e 
+<a href="https://jupyter.org/" class="external">Jupyter</a> notebook interattivi. I notebook
+possono essere eseguiti nel vostro browser usando
 <a href="https://colab.research.google.com/notebooks/welcome.ipynb"
    class="external">Google Colaboratory</a>.
-The narrative docs on [tensorflow.org](https://www.tensorflow.org) are built
-from the
-<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>
-`master` branch. Older versions are available in GitHub on the `rX.x` release
-branches.
+I documenti discorsivi su [tensorflow.org](https://www.tensorflow.org) sono compilati
+dal ramo `master` 
+<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>. 
+Le versioni più vecchie sono disponibili in GitHub sui rami dei rilasci `rX.x`.
 
 ### Simple changes
 
