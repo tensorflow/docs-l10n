@@ -1,30 +1,29 @@
-# Contribute to the TensorFlow documentation
+# Contribuire alla documentazione TensorFlow
 
-TensorFlow welcomes documentation contributions—if you improve the
-documentation, you improve the TensorFlow library itself. Documentation on
-tensorflow.org falls into the following categories:
+TensorFlow accoglie contributi alla documentazione—se migliorate la 
+documentazione, migliorate la libreria TensorFlow in se. La documentazione
+tensorflow.org ricade nelle seguenti categorie:
 
-* *API reference* —The [API reference docs](https://www.tensorflow.org/api_docs/)
-  are generated from docstrings in the
-  [TensorFlow source code](https://github.com/tensorflow/tensorflow).
-* *Narrative documentation* —These are [tutorials](https://www.tensorflow.org/tutorials),
-  [guides](https://www.tensorflow.org/guide), and other writing that's not part
-  of the TensorFlow code. This documentation is in the
-  [tensorflow/docs](https://github.com/tensorflow/docs) GitHub repository.
-* *Community translations* —These are guides and tutorials translated by the
-  community. All community translations live in the
-  [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site) repo.
+* *riferimento API* —La [Documentazione di riferimento sulle API](https://www.tensorflow.org/api_docs/)
+  è generata da docstring nel
+  [Codice sorgente TensorFlow](https://github.com/tensorflow/tensorflow).
+* *Documentazione discorsiva* —Questi sono [tutorial](https://www.tensorflow.org/tutorials),
+  [guide](https://www.tensorflow.org/guide), ed altri scritti che non sono parti
+  del codice TensorFlow. Questa documentazione si trova nel
+  repository GitHub [tensorflow/docs](https://github.com/tensorflow/docs).
+* *Traduzioni della comunità* —Queste sono guide e tutorial tradotte dalla
+  comunità. Tutte le traduzioni della comunità si trovano nel
+  repository [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site).
 
-Some [TensorFlow projects](https://github.com/tensorflow) keep documentation
-source files near the code in a separate repository, usually in a `docs/`
-directory. See the project's `CONTRIBUTING.md` file or contact the maintainer to
-contribute.
+Alcuni [progetti TensorFlow](https://github.com/tensorflow) tengono i file sorgenti 
+della documentazione vicino al codice in un repository separato, di solito in una 
+directory `docs/`. Vedere il file del progetto `CONTRIBUTING.md` o contattare il 
+responsabile della manutenzione per contribuire.
 
-To participate in the TensorFlow docs community:
+Per partecipare alla comunità docs di TensorFlow:
 
-* Watch the [tensorflow/docs](https://github.com/tensorflow/docs) GitHub
-  repository.
-* Subscribe to [docs@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs).
+* Guarda il repository GitHub [tensorflow/docs](https://github.com/tensorflow/docs) GitHub.
+* Aderisci a [docs@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs).
 
 ## API reference
 
