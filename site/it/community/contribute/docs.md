@@ -179,7 +179,7 @@ Aggiornare:
 <code class="devsite-terminal">git push</code>  # Push changes to your GitHub account (defaults to origin)
 </pre>
 
-### Flusso di attività su GitHub
+### Modalità di lavoro su GitHub
 
 #### 1. Creare un nuovo ramo
 
@@ -238,61 +238,58 @@ Per aggiornare il repository
 [tensorflow.org](https://www.tensorflow.org) da quello GitHub c'è un passo di pubblicazione diverso.
 Di solito, i cambiamenti sono accorpati, ed il sito è aggiornato con cadenza regolare.
 
-## Interactive notebooks
+## Notebook interattivi
 
-While it's possible to edit the notebook JSON file with GitHub's
-<a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">web-based file editor</a>,
-it's not recommended since malformed JSON can corrupt the file. Make sure to
-test the notebook before submitting a pull request.
+Non è raccomandato modificare il file JSON dei notebook  
+<a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">l'editor web</a> 
+di GitHub, perché, benché sia possibile, il JSON malformato può danneggiare il file stesso. 
+Quindi, provate un notebook, prima di sottomettere una richiesta di pull.
 
 <a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a>
-is a hosted notebook environment that makes it easy to edit—and run—notebook
-documentation. Notebooks in GitHub are loaded in Google Colab by passing the
-path to the Colab URL, for example,
-the notebook located in GitHub here:
+è un ambiente di esecuzione di notebook che rende facile modificare ed eseguire notebook di documentazione.
+I notebook, in GitHub, sono caricati in Google Colab passando il loro percorso
+all'URL di Colab, per esempio, il notebook che in GitHub si trova qui:
 <a href="https&#58;//github.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">https&#58;//github.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a><br/>
-can be loaded into Google Colab at this URL:
+può essere caricato in Google Colab con questo URL:
 <a href="https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a>
 
-There is an
-<a href="https://chrome.google.com/webstore/detail/open-in-colab/iogfkhleblhcpcekbiedikdehleodpjo" class="external">Open in Colab</a>
-Chrome extension that performs this URL substitution when browsing a notebook on
-GitHub. This is useful when opening a notebook in your repo fork, because the
-top buttons always link to the TensorFlow Docs `master` branch.
+C'è un'estensione di Chrome 
+<a href="https://chrome.google.com/webstore/detail/open-in-colab/iogfkhleblhcpcekbiedikdehleodpjo" class="external">Apri in Colab</a>
+che realizza questa sostituzione di URL quando sta navigando un notebook in
+GitHub. Ciò è utile quando state aprendo un notebook nel vostro fork di repository, perché 
+il bottone in alto punte sempre al ramo `master` di TensorFlow Docs.
 
-### Edit in Colab
+### Modificare in Colab
 
-Within the Google Colab environment, double-click cells to edit text and code
-blocks. Text cells use Markdown and should follow the
-[TensorFlow docs style guide](./docs_style.md).
+All'interno dell'ambiente Google Colab, fate doppio click sulle celle per modificare il testo
+ed i blocchi di codice. Le celle di testo usano Markdown e dovrebbero seguire le
+[linee guida di stile di TensorFlow](./docs_style.md).
 
-Download notebook files from Colab with *File > Download .pynb*. Commit
-this file to your [local Git repo](##set_up_a_local_git_repo) and send a pull
-request.
+Scaricate i file notebook da Colab con *File > Download .pynb*. Fate commit
+nel vostro [repository Git locale](##set_up_a_local_git_repo) e mandate una richiesta di pull.
 
-To create a new notebook, copy and edit the
-<a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow notebook template</a>.
+Per creare un nuovo notebook, copiate e modificate il
+<a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class"> template di notebook TensorFlow</a>.
 
-### Colab-GitHub workflow
+### Modalità di lavoro Colab-GitHub
 
-Instead of downloading a notebook file and using a local Git workflow, you can
-edit and update your forked GitHub repo directly from Google Colab:
+Invece di scaricare un file notebook ed usare Git locale, potete
+modificare ed aggiornare la vostra copia di repository GitHub direttamente con Google Colab:
 
-1. In your forked <var>username</var>/docs repo, use the GitHub web UI to
-   <a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">create a new branch</a>.
-2. Navigate to the notebook file to edit.
-3. Open the notebook in Google Colab: use the URL swap or the *Open in Colab*
-   Chrome extension.
-4. Edit the notebook in Colab.
-5. Commit the changes to your repo from Colab with
-   *File > Save a copy in GitHub...*. The save dialog should link to the
-   appropriate repo and branch. Add a meaningful commit message.
-6. After saving, browse to your repo or the
-   <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>
-   repo, GitHub should prompt you to create a pull request.
-7. The pull request is reviewed by maintainers.
+1. Nel vostro repository, ottenuto tramite fork, in <var>username</var>/docs, usate l'interfaccia web di GitHub per
+   <a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">creare un nuovo ramo</a>.
+2. Spostatevi sul file notebook per modificarlo.
+3. Aprite il notebook in Google Colab: usanfo la conversione di URL o l'estensione Chrome: *Apri in Colab*.
+4. Modificate il notebook in Colab.
+5. Fate commit dei cambiamenti al vostro repository da Colab con
+   *File > Save a copy in GitHub...*, ove la finestra di dialogo di salvataggio dovrebbe collegarsi
+   al ramo del repository appropriato, ed aggiungete un messaggio di commit significativo.
+6. Dopo il salvataggio, andate al vostro repository o sul repository
+   <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>,
+   e GitHub dovrebbe chiedervi di creare la richiesta di pull.
+7. La richiesta di pull è revisionata dai manutentori.
 
-Success: Your changes have been accepted to the TensorFlow documentation.
+Successo: I vostri cambiamenti sono stati accettati nella documentazione TensorFlow.
 
 
 ## Community translations
