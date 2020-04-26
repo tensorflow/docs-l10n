@@ -21,6 +21,7 @@ To volunteer to write or review community translations, contact the
 Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno una traduzione naturale. Per favore *non* traducete le seguenti parole:
 
 *   account(s)
+*   API reference(s)
 *   batch(es)
 *   blog(s)
 *   browser
@@ -28,17 +29,22 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   callback(s)
 *   cluster(s)
 *   code-cell(s)
+*   commit
 *   committer(s)
 *   contributor(s)
 *   core(s)
 *   dataflow
 *   dataset
 *   deep learning
+*   default
+*   directory
 *   docstring(s)
 *   download
 *   dropout
+*   editor(s)
 *   email(s)
 *   filesystem(s)
+*   fork(s)
 *   gradient tape
 *   issue(s)
 *   layer(s)
@@ -49,19 +55,22 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   merge(s)
 *   multicore
 *   notebook(s)
-*   overfit(ting)
+*   open source
 *   pattern(s)
 *   pixel(s)
 *   plug-in(s)
-*   pull request(s)
-*   repository(ies)
+*   previewer(s)
+*   pull (request)
+*   push
+*   release(s)
+*   repository
+*   script(s)
 *   skill(s)
 *   social media(s)
 *   tablet(s)
 *   test(s)
 *   training weight(s)
 *   tutorials(s)
-*   underfit(ting)
 *   unit test/ing(s)
 *   upload
 *   white paper(s)
