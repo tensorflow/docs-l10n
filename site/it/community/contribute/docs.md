@@ -93,8 +93,8 @@ funziona solo per TensorFlow 2.x.
 Le [guide](https://www.tensorflow.org/guide) ed i
 [tutorial](https://www.tensorflow.org/tutorials) TensorFlow sono scritti come file
 <a href="https://guides.github.com/features/mastering-markdown/" class="external">Markdown</a>
-e 
-<a href="https://jupyter.org/" class="external">Jupyter</a> notebook interattivi. I notebook
+e notebook
+<a href="https://jupyter.org/" class="external">Jupyter</a> interattivi. I notebook
 possono essere eseguiti nel vostro browser usando
 <a href="https://colab.research.google.com/notebooks/welcome.ipynb"
    class="external">Google Colaboratory</a>.
@@ -103,17 +103,16 @@ dal ramo `master`
 <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>. 
 Le versioni più vecchie sono disponibili in GitHub sui rami dei rilasci `rX.x`.
 
-### Simple changes
+### Modifiche semplici
 
-The easiest way to make straightforward documentation updates and fixes is to
-use GitHub's
-<a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">web-based file editor</a>.
-Browse the [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en)
-repository to find the Markdown or notebook file that roughly corresponds to the
-<a href="https://www.tensorflow.org">tensorflow.org</a> URL structure. In the
-upper right corner of the file view, click the pencil icon
+Il modo più facile per fare aggiornamenti diretti è correzioni è usare l'
+<a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">editor di file di GitHub via web</a>.
+Navigate il repository [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en)
+per localizzare il file Markdown o il notebook che corrisponde sommariamente alla 
+struttura dell' URL <a href="https://www.tensorflow.org">tensorflow.org</a>. Nell'angolo
+in alto a destra della pagina, cliccate sull'icona della matita
 <svg version="1.1" width="14" height="16" viewBox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path></svg>
-to open the file editor. Edit the file and then submit a new pull request.
+per aprire l'edito di file. Modificate il file, e fate una nuova richiesta di pull.
 
 ### Set up a local Git repo
 
