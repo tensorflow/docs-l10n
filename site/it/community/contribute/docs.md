@@ -116,7 +116,7 @@ per aprire l'editor di file. Modificate il file, e fate una nuova richiesta di p
 
 ### Inizializzare un repository Git locale
 
-Per modifiche a più file o aggiornamenti più complessi, è meglio usare un flusso di lavoro Git locale
+Per modifiche a più file o aggiornamenti più complessi, è meglio lavorare su un Git locale
 per creare una richiesta di pull.
 
 Nota: <a href="https://git-scm.com/" class="external">Git</a> è un sistema di controllo delle versioni
@@ -147,17 +147,17 @@ locale. Questa è la directory di lavoro dove farete i cambiamenti:
 <code class="devsite-terminal">cd ./docs</code>
 </pre>
 
-#### Aggiungere un repository origine (upstream n.d.t) per rimanere aggiornati (opzionale)
+#### Aggiungere un repository origine (upstream n.d.t.) per rimanere aggiornati (opzionale)
 
 Per mantenere sincronizzato il vostro repository locale con `tensorflow/docs`, aggiungete un' *origine*
 remota per scaricare gli aggiornamenti più recenti.
 
 Nota: Accertatevi di aggiornare il vostro repository locale *prima* di iniziare un contributo.
-Sincronizzazioni regolari con l'origine riduce le probabilità di un 
+Sincronizzazioni regolari con l'origine riducono la probabilità di un 
 <a href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line" class="external">conflitto di merge</a>
 quando inoltrate la vostra richiesta di pull.
 
-Add a remote:
+Aggiungere un repository remoto:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git remote add <var>upstream</var> git@github.com:tensorflow/docs.git</code>
@@ -170,7 +170,7 @@ origin    git@github.com:<var>username</var>/docs.git (push)
 <var>upstream</var>  git@github.com:tensorflow/docs.git (push)
 </pre>
 
-To update:
+Aggiornare:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git checkout master</code>
@@ -179,12 +179,12 @@ To update:
 <code class="devsite-terminal">git push</code>  # Push changes to your GitHub account (defaults to origin)
 </pre>
 
-### GitHub workflow
+### Flusso di attività su GitHub
 
-#### 1. Create a new branch
+#### 1. Creare un nuovo ramo
 
-After you update your repo from `tensorflow/docs`, create a new branch from the
-local *master* branch:
+Dopo che avete aggiornato il vostro repository da `tensorflow/docs`, create un nuovo ramo dal 
+rano *master* locale:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git checkout -b <var>feature-name</var></code>
@@ -194,12 +194,12 @@ local *master* branch:
 * <var>feature-name</var>
 </pre>
 
-#### 2. Make changes
+#### 2. Apportare i cambiamenti
 
-Edit files in your favorite editor and please follow the
-[TensorFlow documentation style guide](./docs_style.md).
+Modificate i file con il vostro editor preferito e seguite le
+[guide di stile TensorFlow](./docs_style.md).
 
-Commit your file change:
+Fate commit delle vostre modifiche:
 
 <pre class="prettyprint lang-bsh">
 # View changes
@@ -210,33 +210,33 @@ Commit your file change:
 <code class="devsite-terminal">git commit -m "Your meaningful commit message for the change."</code>
 </pre>
 
-Add more commits, as necessary.
+Se necessario, aggiungete altri commit.
 
-#### 3. Create a pull request
+#### 3. Create una richiesta di pull
 
-Upload your local branch to your remote GitHub repo
+Caricate il vostro ramo locale sul vostro repository GitHub remoto
 (github.com/<var>username</var>/docs):
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git push</code>
 </pre>
 
-After the push completes, a message may display a URL to automatically
-submit a pull request to the upstream repo. If not, go to the
-<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>
-repo—or your own repo—and GitHub will prompt you to create a pull request.
+Dopo aver completato il push, un messaggio potrebbe presentare un URL per 
+sottomettere automaticamente una richiesta di pull al repository origine. Se ciò non accade,
+andate sul repository <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>
+—o sul vostro repository—e GitHub vi proporrà di creare una nuova richiesta di pull.
 
-#### 4. Review
+#### 4. Revisioni
 
-Maintainers and other contributors will review your pull request. Please
-participate in the discussion and make the requested changes. When your pull
-request is approved, it will be merged into the upstream TensorFlow docs repo.
+I manutentori ed altri contributori revisioneranno la vostra richiesta di pull.
+Partecipate alla discussione e fate i cambiamenti che vi vengono richiesti. quando la vostra
+richiesta di pull sarà approvata, sarà inserita nel repository della documentazione TensorFlow originale.
 
-Success: Your changes have been accepted to the TensorFlow documentation.
+Successo: I vostri cambiamenti sono stati accettati nella documentazione TensorFlow.
 
-There is a separate publishing step to update
-[tensorflow.org](https://www.tensorflow.org) from the GitHub repo. Typically,
-changes are batched together and the site is updated on a regular cadence.
+Per aggiornare il repository 
+[tensorflow.org](https://www.tensorflow.org) da quello GitHub c'è un passo di pubblicazione diverso.
+Di solito, i cambiamenti sono accorpati, ed il sito è aggiornato con cadenza regolare.
 
 ## Interactive notebooks
 
