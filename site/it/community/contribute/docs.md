@@ -130,17 +130,17 @@ I passi seguenti su Git sono necessari solo la prima volta che inizializzate il 
 
 #### Fare un fork del repository tensorflow/docs
 
-Per creare la vostra copia di repository all'interno del vostro account GitHub,
+Per creare la vostra copia del repository, all'interno del vostro account GitHub,
 cliccate il pulsante *Fork* <svg class="octicon octicon-repo-forked" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
 sulla pagina GitHub
 <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>. 
 Una volta eseguito il fork, voi siete responsabili di tenere aggiornata la vostra copia 
 rispetto al repository TensorFlow originale.
 
-#### Clone your repo
+#### Fare un clone del vostro repository
 
-Download a copy of *your* remote <var>username</var>/docs repo to your local
-machine. This is the working directory where you will make changes:
+Scaricate una copia del *vostro* repository di documentazione <var>username</var>/docs remoto, sulla vostra macchina
+locale. Questa è la directory di lavoro dove farete i cambiamenti:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git clone git@github.com:<var>username</var>/docs</code>
