@@ -105,29 +105,28 @@ Le versioni più vecchie sono disponibili in GitHub sui rami dei rilasci `rX.x`.
 
 ### Modifiche semplici
 
-Il modo più facile per fare aggiornamenti diretti è correzioni è usare l'
+Il modo più facile per fare aggiornamenti diretti e correzioni è usare l'
 <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">editor di file di GitHub via web</a>.
 Navigate il repository [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en)
 per localizzare il file Markdown o il notebook che corrisponde sommariamente alla 
 struttura dell' URL <a href="https://www.tensorflow.org">tensorflow.org</a>. Nell'angolo
 in alto a destra della pagina, cliccate sull'icona della matita
 <svg version="1.1" width="14" height="16" viewBox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path></svg>
-per aprire l'edito di file. Modificate il file, e fate una nuova richiesta di pull.
+per aprire l'editor di file. Modificate il file, e fate una nuova richiesta di pull.
 
-### Set up a local Git repo
+### Inizializzare un repository Git locale
 
-For multi-file edits or more complex updates, it's better to use a local Git
-workflow to create a pull request.
+Per modifiche a più file o aggiornamenti più complessi, è meglio usare un flusso di lavoro Git locale
+per creare una richiesta di pull.
 
-Note: <a href="https://git-scm.com/" class="external">Git</a> is the open source
-version control system (VCS) used to track changes to source code.
-<a href="https://github.com" class="external">GitHub</a> is an online service
-that provides collaboration tools that work with Git. See the
-<a href="https://help.github.com" class="external">GitHub Help</a> to set up
-your GitHub account and get started.
+Nota: <a href="https://git-scm.com/" class="external">Git</a> è un sistema di controllo delle versioni
+(VCS) a codice aperto, usato per tracciare le modifiche al codice sorgente.
+<a href="https://github.com" class="external">GitHub</a> è un servizio online
+che fornisce strumenti collaborativi per lavorare con Git. Vedere l'
+<a href="https://help.github.com" class="external">Aiuto GitHub</a> per inizializzare
+il vostro account GitHub e iniziare.
 
-The following Git steps are only required the first time you set up a local
-project.
+I seguenti passi Git sono necessari solo la prima volta che inizializzate il vostro progetto locale.
 
 #### Fork the tensorflow/docs repo
 
