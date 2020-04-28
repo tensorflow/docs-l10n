@@ -128,36 +128,36 @@ da uno slash: `\$`. I segni dollaro dentro i blocchi di codice (come i nomi dell
 possono essere lasciati invariati.
 
 
-## Prose style
+## Stile della prosa
 
-If you are going to write or edit substantial portions of the narrative
-documentation, please read the
-[Google Developer Documentation Style Guide](https://developers.google.com/style/highlights).
+Se devi scrivere o modificare una porzione consistente della documentazione narrativa,
+leggi la 
+[Guida di Stile della Documentazione per lo Sviluppatore Google](https://developers.google.com/style/highlights).
 
-### Principles of good style
+### Principi di buon stile
 
-*   *Check the spelling and grammar in your contributions.* Most editors
-    include a spell checker or have an available spell-checking plugin. You can
-    also paste your text into a Google Doc or other document software for a more
-    robust spelling and grammar check.
-*   *Use a casual and friendly voice.* Write TensorFlow documentation like a
-    conversation—as if you're talking to another person one-on-one. Use a
-    supportive tone in the article.
+*   *Controlla l'ortografia e la grammatica tuoi vostri contributi.* Molti editor
+    contengono un correttore ortografico o dispongono di un plugin per il controllo.
+    Puoi anche copiare il tuo testo in un Google Doc o in un altro software per documenti
+    per un controllo ortografico e grammaticale più robusto.
+*   *Usa una voce informale ed amichevole.* Scrivi la documentazione come una
+    conversazione uno-ad-uno che tu stia tenendo con un'altra persona. Usa un tono
+    di supporto.
 
-Note: Being less formal does not mean being less technical. Simplify your prose,
-not the technical content.
+Nota: Essere meno formali non significa essere meno tecnici. Semplifica la tua prosa,
+non il contenuto tecnico.
 
-*   *Avoid disclaimers, opinions, and value judgements.* Words like "easily",
-    "just", and "simple" are loaded with assumptions. Something might seem easy
-    to you, but be difficult for another person. Try to avoid these whenever
-    possible.
-*   *Use simple, to the point sentences without complicated jargon.* Compound
-    sentences, chains of clauses, and location-specific idioms can make text
-    hard to understand and translate. If a sentence can be split in two, it
-    probably should. Avoid semicolons. Use bullet lists when appropriate.
-*   *Provide context.* Don't use abbreviations without explaining them. Don't
-    mention non-TensorFlow projects without linking to them. Explain why the
-    code is written the way it is.
+*   *Evita disconoscimenti, opinioni, e giudizi di valore.* Parole come "facilmente",
+    "solo", e "semplice" presuppongono assunzioni. Qualcosa può sembrare semplice 
+    a te, ma essere difficile per un'altra persona. Quando possibile, 
+    cerca di evitarle.
+*   *Usa frasi semplici che vanno dirette al punto, senza gerghi complicati.* 
+    Frasi composte, catene di clausole, e idiomi locali possono rendere il testo
+    difficile da capire e tradurre. Se una frase può essere divisa in due,
+    va probabilmente fatto. Evita i punti e virgola. Usa i punti elenco quando appropriato.
+*   *Fornisci il contesto.* Non usare abbreviazioni senza spiegarle. Non citare
+    progetti che non appartengano a TensorFlow senza collegamenti ad essi. Spiega perché 
+    il codice è scritto nel modo in cui lo è.
 
 ## Usage guide
 
