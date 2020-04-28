@@ -20,7 +20,11 @@ in sync with the en/ source-or-truth notebooks. It intentionally ignores
 Markdown cells and only compares code cells. There must be the same amount of
 code cells in source notebook and translation notebook.
 
-Usage: nb_code_sync.py [--lang=en] site/lang/notebook.ipynb [...]
+Usage: nb_code_sync.py [--lang=en] site/<lang>/notebook.ipynb [...]
+
+Sync translated notebook to source-of-truth in tensorflow/docs repo:
+$ ./tools/nb_code_sync.py --src=../docs/site/en/notebook.ipynb \
+    ./site/<lang>/notebook.ipynb
 
 Useful when used with interactive git workflow to selectively add hunks:
 git add --patch site/lang/notebook.ipynb
@@ -30,20 +34,18 @@ Commands:
   s: split this hunk
   e: edit this hunk
 """
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import errno
 import json
 import os
 import pathlib
 import re
 import sys
+import textwrap
 from absl import app
 from absl import flags
 
-flags.DEFINE_enum("lang", "en", ["en", "js", "ko", "pt", "ru", "tr", "zh-cn"],
+flags.DEFINE_enum("lang", "en", ["ar", "el", "en", "es", "fr", "id", "it", "ja",
+                                 "ko", "pt", "ru", "tr", "vi", "zh-cn"],
                   "Language directory to import from.")
 flags.DEFINE_string("src", None, "Source file or parent directory of source.")
 flags.DEFINE_boolean("stdout", False, "Write to stdout instead of file.")
@@ -80,16 +82,20 @@ class Notebook(object):
   def is_notebook(path):
     """Test of a file is an .ipynb file based on extension."""
     if not os.path.isfile(path):
-      raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), path)
+      print(f"Error: File not found: {path}", file=sys.stderr)
+      sys.exit(1)
     return os.path.splitext(path)[-1].lower() == ".ipynb"
 
   @staticmethod
   def _check_path(pth):
     if not Notebook.is_notebook(pth):
-      raise Exception("Notebook must be an .ipynb file: {}".format(pth))
+      print(f"Error: Notebook must be an .ipynb file: {pth}", file=sys.stderr)
+      sys.exit(1)
+
     path = pathlib.Path(pth)
     if not path.exists():
-      raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), path)
+      print(f"Error: File not found: {path}", file=sys.stderr)
+      sys.exit(1)
     return path
 
   def _load_code_cells(self, data):
@@ -122,12 +128,20 @@ class Notebook(object):
         break
     else:
       # for-loop exhausted
-      raise Exception("Did not find cell id '{}' in notebook.".format(cell_id))
+      print(f"Error: Did not find cell id '{cell_id}' in notebook.",
+            file=sys.stderr)
+      sys.exit(1)
+
 
   def update(self, notebook):
     """Update code cells that differ from the provided notebook."""
     if len(self.code_cells) != len(notebook.code_cells):
-      raise Exception("Notebooks must have same amount of code cells.")
+      print(textwrap.dedent("""
+        Error: Notebooks must have same amount of code cells to sync between.
+        Please manually compare the source and destination notebooks.
+        """).strip(), file=sys.stderr)
+      sys.exit(1)
+
     # Iterate all cells for destination reference
     for i, src_cell in enumerate(notebook.code_cells):
       dest_cell = self.code_cells[i]
@@ -159,15 +173,15 @@ def get_src_path(user_flags, notebook):
     notebook: Destination notebook used to select source notebook.
   Returns:
     A Path of the source-of-truth notebook.
-  Raises:
-    FileNotFoundError: If user args for site_root or src are invalid locations.
   """
   if user_flags.site_root:
     site_root = pathlib.Path(user_flags.site_root)
   else:
     site_root = pathlib.Path(__file__).parent.parent.joinpath("site")
   if not site_root.is_dir():
-    raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), site_root)
+    print(f"Error: --site_root must be a directory: {site_root}",
+          file=sys.stderr)
+    sys.exit(1)
 
   if not user_flags.src:
     # Determine path from previous notebook and source language
@@ -179,8 +193,8 @@ def get_src_path(user_flags, notebook):
   elif os.path.isfile(user_flags.src):
     return pathlib.Path(user_flags.src)
   else:
-    raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
-                            user_flags.src)
+    print(f"Error: File not found: {user_flags.src}", file=sys.stderr)
+    sys.exit(1)
 
 
 def main(argv):

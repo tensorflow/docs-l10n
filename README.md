@@ -16,12 +16,12 @@ Please read the
 section in the
 [TensorFlow docs contributor guide](https://www.tensorflow.org/community/contribute/docs).
 
-General questions can be asked on the
+Ask general questions on the
 [docs@tensorflow.org list](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs),
 and there are a few
 [language-specific docs lists](https://www.tensorflow.org/community/contribute/docs#community_translations)
 to help coordinate communities. If a language is gaining momentum and
-contributors and a new language-specific list would be useful, file
+contributors think a new language-specific list would be useful, file
 [a GitHub issue](https://github.com/tensorflow/docs-l10n/issues).
 
 ## Content
