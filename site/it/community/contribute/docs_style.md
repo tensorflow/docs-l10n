@@ -159,31 +159,31 @@ non il contenuto tecnico.
     progetti che non appartengano a TensorFlow senza collegamenti ad essi. Spiega perché 
     il codice è scritto nel modo in cui lo è.
 
-## Usage guide
+## Guida all'uso
 
-### Ops
+### Operazioni
 
-Use `# ⇒` instead of a single equal sign when you want to show what an op
-returns.
+Usa `# ⇒` invece di un segno singolo di uguale quando vuoi far vedere ciò che ritorna 
+un'operazione.
 
 ```python
 # 'input' is a tensor of shape [2, 3, 5] 
 (tf.expand_dims(input, 0))  # ⇒ [1, 2, 3, 5]
 ```
 
-### Tensors
+### Tensori
 
-When you're talking about a tensor in general, don't capitalize the word
-*tensor*. When you're talking about the specific object that's provided to or
-returned from an op, then you should capitalize the word *Tensor* and add
-backticks around it because you're talking about a `Tensor` object.
+Quando stai parlando di un tensore in genere, non usare la lettera maiuscola per la parola
+*tensore*. Quando stai parlando dell'oggetto specifico passato o ritornato da un'operazione,
+la parola *Tensor* dovrebbe avere la lettera maiuscola ed essere tra apici inversi, 
+perché stai parlando di un oggetto `Tensor`.
 
-Don't use the word *Tensors* (plural) to describe multiple `Tensor` objects
-unless you really are talking about a `Tensors` object. Instead, say "a list (or
-collection) of `Tensor` objects".
+Non usare la parola *Tensors* (plurale) per descrivere più oggetti `Tensor`
+a meno che tu non stia realmente parlando di un oggetto `Tensors` object. Scrivi, invece "una lista
+(o una collezione) di oggetti `Tensor`".
 
-Use the word *shape* to detail the dimensions of a tensor, and show the shape in
-square brackets with backticks. For example:
+Usa la parola *shape* per dettagliare le dimensioni di un tensore, e mostra lo shape
+tra parentesi quadre con apici inversi. Per esempio:
 
 <pre><code>
 If `input` is a three-dimensional tensor with shape `[3, 4, 3]`, this operation
