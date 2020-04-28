@@ -1,74 +1,72 @@
-# TensorFlow documentation style guide
+# Guida di stile della documentazione TensorFlow
 
-## Best practices
+## Best practice
 
-*   Focus on user intent and audience.
-*   Use every-day words and keep sentences short.
-*   Use consistent sentence construction, wording, and capitalization.
-*   Use headings and lists to make your docs easier to scan.
-*   The
-    [Google Developer Docs Style Guide](https://developers.google.com/style/highlights)
-    is helpful.
+*   Focalizzarsi sull'obiettivo degli utilizzatori e l'audience.
+*   Usare il linguaggio di tutti i giorni e periodi brevi.
+*   Usare costruzione e formulazione del periodo consistenti tra loro e con l'impiego delle maiuscole.
+*   Usare titoli e punti elenco in modo da rendere il vostro testo facile da scorrere.
+*   La
+    [Guida di Stile dello Sviluppatore Google](https://developers.google.com/style/highlights)
+    può essere d'aiuto.
 
 ## Markdown
 
-With a few exceptions, TensorFlow uses a Markdown syntax similiar to
+A meno di poche eccezioni,TensorFlow usa una sintassi di Markdown simile alla
 [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/)
-(GFM). This section explains differences between GFM Markdown syntax and the
-Markdown used for TensorFlow documentation.
+(GFM). Questo capitolo spiega le differenze tra la sintassi del Markdown GFM ed il 
+Markdown usato per la documentazione TensorFlow.
 
 
-### Write about code
+### Scrivere del codice
 
-#### Inline mentions of code
+#### Menzione di codice inline
 
-Put <code>&#96;backticks&#96;</code> around the following symbols when used in
-text:
+Racchiudere tra <code>&#96;apici inversi&#96;</code> i simboli seguenti nel testo:
 
-*   Argument names: <code>&#96;input&#96;</code>, <code>&#96;x&#96;</code>,
+*   Nomi di argomenti: <code>&#96;input&#96;</code>, <code>&#96;x&#96;</code>,
     <code>&#96;tensor&#96;</code>
-*   Returned tensor names: <code>&#96;output&#96;</code>,
+*   Nomi di tensori restituiti: <code>&#96;output&#96;</code>,
     <code>&#96;idx&#96;</code>, <code>&#96;out&#96;</code>
-*   Data types: <code>&#96;int32&#96;</code>, <code>&#96;float&#96;</code>,
+*   Tipi di dato: <code>&#96;int32&#96;</code>, <code>&#96;float&#96;</code>,
     <code>&#96;uint8&#96;</code>
-*   Other op names reference in text: <code>&#96;list_diff()&#96;</code>,
+*   Richiami ad operazioni nel testo: <code>&#96;list_diff()&#96;</code>,
     <code>&#96;shuffle()&#96;</code>
-*   Class names: <code>&#96;tf.Tensor&#96;</code>, <code>&#96;Strategy&#96;</code>
-*   File name: <code>&#96;image_ops.py&#96;</code>,
+*   Nomi di classi: <code>&#96;tf.Tensor&#96;</code>, <code>&#96;Strategy&#96;</code>
+*   Nomi di file: <code>&#96;image_ops.py&#96;</code>,
     <code>&#96;/path_to_dir/file_name&#96;</code>
-*   Math expressions or conditions: <code>&#96;-1-input.dims() &lt;= dim &lt;=
+*   Espressioni matematiche o condizioni: <code>&#96;-1-input.dims() &lt;= dim &lt;=
     input.dims()&#96;</code>
 
-#### Code blocks
+#### Blocchi di codice
 
-Use three backticks to open and close a code block. Optionally, specify the programming
-language after the first backtick group, for example:
+Usare tre apici inversi per aprire e chiudere un blocco di codice. Eventualmente, specificare il linguaggio 
+di programmazione dopo il primo gruppo di apici, per esempio:
 <pre><code>
 &#96;&#96;&#96;python
 &#35; some python code here
 &#96;&#96;&#96;
 </code></pre>
 
-### Links in Markdown
+### Collegamenti in Markdown
 
-#### Links between files in this repository
+#### Collegamenti tra file in questo repository
 
-Use relative links between files in a repository. This works on
-[tensorflow.org](https://www.tensorflow.org) and
+Usare collegamenti relativi tra i file in un repository. Così funzioneranno in
+[tensorflow.org](https://www.tensorflow.org) e
 [GitHub](https://github.com/tensorflow/docs/tree/master/site/en):<br/>
-<code>\[Custom layers\]\(../tutorials/eager/custom_layers.ipynb\)</code> produces
-[Custom layers](https://www.tensorflow.org/tutorials/eager/custom_layers) on the
-site.
+<code>\[Custom layers\]\(../tutorials/eager/custom_layers.ipynb\)</code> produce
+[Custom layers](https://www.tensorflow.org/tutorials/eager/custom_layers) sul sito.
 
-#### Links to API documentation
+#### Collegamenti alla documentazione sulle API
 
-API links are converted when the site is published. To link to a symbol's API
-reference page, enclose the full symbol path in backticks:
+Quando il sito viene pubblicato, i collegamenti alle API vengono convertiti. Per collegarsi ad un simbolo 
+in una pagina di riferimento di un'API, racchiudere il percorso completo tra apici inversi:
 
-*   <code>&#96;tf.data.Dataset&#96;</code> produces
+*   <code>&#96;tf.data.Dataset&#96;</code> produce
     [`tf.data.Dataset`](https://www.tensorflow.org/api_docs/python/tf/data/Dataset)
 
-For the C++ API, use the namespace path:
+Per API C++, usare il percorso del namespace:
 
 *   `tensorflow::Tensor` produces
     [tensorflow::Tensor](https://www.tensorflow.org/api_docs/cc/class/tensorflow/tensor)
