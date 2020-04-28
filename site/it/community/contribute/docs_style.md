@@ -68,42 +68,41 @@ in una pagina di riferimento di un'API, racchiudere il percorso completo tra api
 
 Per API C++, usare il percorso del namespace:
 
-*   `tensorflow::Tensor` produces
+*   `tensorflow::Tensor` produce
     [tensorflow::Tensor](https://www.tensorflow.org/api_docs/cc/class/tensorflow/tensor)
 
-#### External links
+#### Collegamenti esterni
 
-For external links, including files on <var>https://www.tensorflow.org</var>
-that are not in the `tensorflow/docs` repository, use standard Markdown links
-with the full URI.
+Per i collegamenti esterni, inclusi i file su <var>https://www.tensorflow.org</var>
+che non si trovano nel repository `tensorflow/docs`, usare i collegamenti Markdown standard
+con l'URI completo.
 
-To link to source code, use a link starting with
-<var>https://www.github.com/tensorflow/tensorflow/blob/master/</var>, followed
-by the file name starting at the GitHub root.
+Per collegamenti al codice sorgente, usare un collegamenti che inizi con
+<var>https://www.github.com/tensorflow/tensorflow/blob/master/</var>, seguito 
+dal nome del file iniziando dalla radice di GitHub.
 
-This URI naming scheme ensures that <var>https://www.tensorflow.org</var> can
-forward the link to the branch of the code corresponding to the version of the
-documentation you're viewing.
+Questo schema di nomenclatura degli URI assicura che <var>https://www.tensorflow.org</var> possa
+indirizzare il collegamento al ramo di codice corrispondente alla versione della
+documentazione che state guardando.
 
-Do not include URI query parameters in the link.
+Non includere i parametri delle query di un URI in un collegamento.
 
-File paths use underscores for spaces, for example, `custom_layers.ipynb`.
+Nei percorsi dei file usare il trattino basso (underscore n.d.t.) al posto degli spazi, per esempio, `custom_layers.ipynb`.
 
-Include the file extension in links to use on the site *and* GitHub, for example,<br/>
+Includere le estensioni dei file nei collegamenti da usare sul sito *e* in GitHub, per esempio,<br/>
 <code>\[Custom layers\]\(../tutorials/eager/custom_layers.ipynb\)</code>.
 
-### Math in Markdown
+### Matematica nei Markdown
 
-You may use MathJax within TensorFlow when editing Markdown files, but note the
-following:
+In TensorFlow potete usare MathJax, quando dovete redigere file Markdown, ma fate attenzione a quanto segue:
 
-*   MathJax renders properly on [tensorflow.org](https://www.tensorflow.org).
-*   MathJax does not render properly on GitHub.
-*   This notation can be off-putting to unfamiliar developers.
-*   For consistency [tensorflow.org](https://www.tensorflow.org) follows the
-    same  rules as Jupyter/Colab.
+*   MathJax viene visualizzato bene su [tensorflow.org](https://www.tensorflow.org).
+*   MathJax non viene visualizzato bene su GitHub.
+*   La notazione può scoraggiare sviluppatori che non hanno familiarità con essa.
+*   Per consistenza [tensorflow.org](https://www.tensorflow.org) segue le stesse
+    regole di Jupyter/Colab.
 
-Use <code>&#36;&#36;</code> around a block of MathJax:
+Racchiudere un blocco MathJax tra <code>&#36;&#36;</code>:
 
 <pre><code>&#36;&#36;
 E=\frac{1}{2n}\sum_x\lVert (y(x)-y'(x)) \rVert^2
@@ -113,20 +112,20 @@ $$
 E=\frac{1}{2n}\sum_x\lVert (y(x)-y'(x)) \rVert^2
 $$
 
-Wrap inline MathJax expressions with <code>&#36; ... &#36;</code>:
+Racchiudere le espressioni MathJax inline con <code>&#36; ... &#36;</code>:
 
 <pre><code>
-This is an example of an inline MathJax expression: &#36; 2 \times 2 = 4 &#36;
+Questo è un esempio di espressione MathJax inline: &#36; 2 \times 2 = 4 &#36;
 </code></pre>
 
-This is an example of an inline MathJax expression: $ 2 \times 2 = 4 $
+Questo è un esempio di espressione MathJax inline: $ 2 \times 2 = 4 $
 
-<code>&#92;&#92;( ... &#92;&#92;)</code> delimiters also work for inline math,
-but the \$ form is sometimes more readable.
+I delimitatori <code>&#92;&#92;( ... &#92;&#92;)</code> funzionano anche per espressioni matematiche inline,
+anche se la forma \$ talvolta è più leggibile.
 
-Note: If you need to use a dollar sign in text or MathJax expressions, escape it
-with a leading slash: `\$`. Dollar signs within code blocks (such as Bash
-variable names) do not need to be escaped.
+Nota: Se avete bisogno di un segno dollaro in un testo o in un'espressione MathJax, fatelo precedere
+da uno slash: `\$`. I segni dollaro dentro i blocchi di codice (come i nomi delle variabili Bash)
+possono essere lasciati invariati.
 
 
 ## Prose style
