@@ -57,6 +57,7 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   maintainer(s)
 *   merge(s)
 *   multicore
+*   namespace(s)
 *   notebook(s)
 *   open source
 *   pattern(s)
