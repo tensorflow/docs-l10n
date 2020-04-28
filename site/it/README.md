@@ -22,6 +22,7 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 
 *   account(s)
 *   API reference(s)
+*   best practice(s)
 *   batch(es)
 *   blog(s)
 *   browser
