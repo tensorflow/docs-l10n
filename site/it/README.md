@@ -48,6 +48,7 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   filesystem(s)
 *   fork(s)
 *   gradient tape
+*   inline
 *   issue(s)
 *   layer(s)
 *   log(s)
