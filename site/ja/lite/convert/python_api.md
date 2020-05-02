@@ -157,14 +157,11 @@ for tf_result, tflite_result in zip(tf_results, tflite_results):
 
 #### TensorFlow Lite Metadata
 
-Note: TensorFlow Lite Metadata is in experimental (beta) phase.
+Note: TensorFlow Lite Metadata は experimental (beta) フェーズにあります。
 
-TensorFlow Lite metadata provides a standard for model descriptions. The
-metadata is an important source of knowledge about what the model does and its
-input / output information. This makes it easier for other developers to
-understand the best practices and for code generators to create platform
-specific wrapper code. For more information, please refer to the
-[TensorFlow Lite Metadata](metadata.md) section.
+TensorFlow Lite Metadata はモデルの記述についての標準を提供します。
+メタデータはモデルが何を行うのか、何を入力 / 出力にするのかについて知るための重要な情報源です。
+これは開発者がベストプラクティスを理解したり、コードジェネレーターがプラットフォーム固有のラッパーとなるコードを生成するのを手助けします。より詳細については [TensorFlow Lite Metadata](metadata.md) を参照してください。
 
 ## Installing TensorFlow <a name="versioning"></a>
 
