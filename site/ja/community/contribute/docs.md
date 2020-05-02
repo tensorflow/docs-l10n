@@ -2,8 +2,8 @@
 
 TensorFlow はドキュメントの貢献を歓迎します-
 あなたがドキュメントを改善してくれれば、TensorFlowライブラリそのものが改善されます。
-Documentation on
-tensorflow.org falls into the following categories:
+tensorflow.orgにあるドキュメントは以下のカテゴリに分類されます。
+
 
 * *API reference* —The [API reference docs](https://www.tensorflow.org/api_docs/)
   are generated from docstrings in the
