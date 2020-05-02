@@ -1,7 +1,8 @@
-# Contribute to the TensorFlow documentation
+# TensorFlow ドキュメントへの貢献
 
-TensorFlow welcomes documentation contributions—if you improve the
-documentation, you improve the TensorFlow library itself. Documentation on
+TensorFlow はドキュメントの貢献を歓迎します-
+あなたがドキュメントを改善してくれれば、TensorFlowライブラリそのものが改善されます。
+Documentation on
 tensorflow.org falls into the following categories:
 
 * *API reference* —The [API reference docs](https://www.tensorflow.org/api_docs/)
