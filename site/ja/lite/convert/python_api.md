@@ -163,11 +163,11 @@ TensorFlow Lite Metadata はモデルの記述についての標準を提供し�
 メタデータはモデルが何を行うのか、何を入力 / 出力にするのかについて知るための重要な情報源です。
 これは開発者がベストプラクティスを理解したり、コードジェネレーターがプラットフォーム固有のラッパーとなるコードを生成するのを手助けします。より詳細については [TensorFlow Lite Metadata](metadata.md) を参照してください。
 
-## Installing TensorFlow <a name="versioning"></a>
+## TensorFlow のインストール <a name="versioning"></a>
 
-### Installing the TensorFlow nightly <a name="2.0-nightly"></a>
+### TensorFlow nightly のインストール <a name="2.0-nightly"></a>
 
-The TensorFlow nightly can be installed using the following command:
+TensorFlow nightly は次のコマンドでインストールできます。
 
 ```
 pip install tf-nightly
