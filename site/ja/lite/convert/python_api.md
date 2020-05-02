@@ -1,5 +1,12 @@
 # コンバータ Python API ガイド
 
+Note: これらのドキュメントは私たちTensorFlowコミュニティが翻訳したものです。コミュニティによる
+翻訳は**ベストエフォート**であるため、この翻訳が正確であることや[英語の公式ドキュメント](https://www.tensorflow.org/?hl=en)の
+最新の状態を反映したものであることを保証することはできません。
+この翻訳の品質を向上させるためのご意見をお持ちの方は、GitHubリポジトリ[tensorflow/docs](https://github.com/tensorflow/docs)にプルリクエストをお送りください。
+コミュニティによる翻訳やレビューに参加していただける方は、
+[docs-ja@tensorflow.org メーリングリスト](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ja)にご連絡ください。
+
 このページでは、TensorFlow 2.0 の Python API による [TensorFlow Lite コンバータ](index.md) の使用例を説明します。
 
 Note: このドキュメントでは TensorFlow 2 の Python API についてのみ記述します。
