@@ -175,40 +175,21 @@ pip install tf-nightly
 
 ### Custom ops in the experimental new converter
 
-There is a behavior change in how models containing
-[custom ops](https://www.tensorflow.org/lite/guide/ops_custom) (those for which
-users use to set allow\_custom\_ops before) are handled in the
-[new converter](https://github.com/tensorflow/tensorflow/blob/917ebfe5fc1dfacf8eedcc746b7989bafc9588ef/tensorflow/lite/python/lite.py#L81).
+[カスタムの演算](https://www.tensorflow.org/lite/guide/ops_custom) を利用しているモデルが [新しいコンバーター](https://github.com/tensorflow/tensorflow/blob/917ebfe5fc1dfacf8eedcc746b7989bafc9588ef/tensorflow/lite/python/lite.py#L81) でどう扱われるかについて、振る舞いの変更があります。(以前に allow\_custom\_ops をセットしていたユーザー向けです)
 
-**Built-in TensorFlow op**
+**組み込みの TensorFlow の演算**
 
-If you are converting a model with a built-in TensorFlow op that does not exist
-in TensorFlow Lite, you should set allow\_custom\_ops attribute (same as
-before), explained [here](https://www.tensorflow.org/lite/guide/ops_custom).
+組み込みの TensorFlow の演算で TensorFlow Lite に存在しないものを利用しているモデルをコンバートする場合、(以前と同様に) allow\_custom\_ops 属性をセットしてください。詳細は[こちら](https://www.tensorflow.org/lite/guide/ops_custom)にあります。
 
-**Custom op in TensorFlow**
+**TensorFlow のカスタムの演算**
 
-If you are converting a model with a custom TensorFlow op, it is recommended
-that you write a [TensorFlow kernel](https://www.tensorflow.org/guide/create_op)
-and [TensorFlow Lite kernel](https://www.tensorflow.org/lite/guide/ops_custom).
-This ensures that the model is working end-to-end, from TensorFlow and
-TensorFlow Lite. This also requires setting the allow\_custom\_ops attribute.
+カスタムの TensorFlow の演算を用いたモデルをコンバートする場合、[TensorFlow カーネル](https://www.tensorflow.org/guide/create_op)と [TensorFlow Lite カーネル](https://www.tensorflow.org/lite/guide/ops_custom)を記述することを推奨します。これによりモデルが最初から最後まで、TensorFlow でも TensorFlow Lite でも動くことが保証されます。これも allow\_custom\_ops 属性をセットすることが要求されます。
 
-**Advanced custom op usage (not recommended)**
+**応用的なカスタム演算の利用 (非推奨)**
 
-If the above is not possible, you can still convert a TensorFlow model
-containing a custom op without a corresponding kernel. You will need to pass the
-[OpDef](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/framework/op_def.proto)
-of the custom op in TensorFlow using --custom\_opdefs flag, as long as you have
-the corresponding OpDef registered in the TensorFlow global op registry. This
-ensures that the TensorFlow model is valid (i.e. loadable by the TensorFlow
-runtime).
+上記の対応が不可能な場合であっても、関連するカーネルがなくてもカスタムの演算を含む TensorFlow のモデルをコンバートできます。この場合、TensorFlow のカスタム演算の [OpDef](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/framework/op_def.proto) を --custom\_opdefs フラグで指定する必要があります。ただし、これは関連する OpDef が TensorFlow のグローバルレジストリに登録されている場合に限ります。これにより TensorFlow のモデルは検証済みである (つまり、 TensorFlow ランタイムで読み込める) ことを保証できます。
 
-If the custom op is not part of the global TensorFlow op registry, then the
-corresponding OpDef needs to be specified via the --custom\_opdefs flag. This is
-a list of an OpDef proto in string that needs to be additionally registered.
-Below is an example of an TFLiteAwesomeCustomOp with 2 inputs, 1 output, and 2
-attributes:
+カスタム演算が TensorFlow の演算のグローバルレジストリに登録されていない場合、関連する OpDef を --custom\_opdefs フラグで明示する必要があります。これは追加で登録が必要な OpDef の protocol buffer を文字列形式にしたもののリストです。次は TFLiteAwesomeCustomOp という、アウトプットが1つ、インプットが2つ、属性が2つのカスタム演算の場合の例です。
 
 ```
 converter.custom\_opdefs="name: 'TFLiteAwesomeCustomOp' input\_arg: { name: 'InputA'
