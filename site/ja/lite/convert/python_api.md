@@ -2,6 +2,10 @@
 
 このページでは、TensorFlow 2.0 の Python API による [TensorFlow Lite コンバータ](index.md) の使用例を説明します。
 
+Note: This only contains documentation on the Python API in TensorFlow 2.
+Documentation on using the Python API in TensorFlow 1 is available on
+[GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/g3doc/r1/convert/python_api.md).
+
 [TOC]
 
 ## Python API
@@ -16,11 +20,8 @@ TensorFlow 2.0 において、TensorFlow モデルを TensorFlow Lite に変換�
 *   `TFLiteConverter.from_concrete_functions()`:
     [具象関数](https://tensorflow.org/guide/concrete_function) を変換します。
 
-Node: TensorFlow Lite 2.0 alpha には、 [`from_concrete_function`](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/lite/TFLiteConverter#from_concrete_function) だけを含むような、異なるバージョンの `TFLiteConverter` API があります。
-このドキュメントで記述されている API は、[`tf-nightly-2.0-preview`](#installing_the_tensorflow_20_nightly_) を PIP でインストールすることで使えるようになります。
 
-
-このドキュメントでは API の [使用例](＃examples) 、 [1.X と 2.0 の間の API の変更点の詳細なリスト](#differences) 、 異なるバージョンの TensorFlow で実行する [方法](#versioning) を含みます。
+このドキュメントでは API の [使用例](＃examples) 、異なるバージョンの TensorFlow で実行する [方法](#versioning) を含みます。
 
 ## 例 <a name="examples"></a>
 
@@ -46,6 +47,19 @@ tf.saved_model.save(root, export_dir, to_save)
 # モデルを変換
 converter = tf.lite.TFLiteConverter.from_saved_model(export_dir)
 tflite_model = converter.convert()
+```
+
+This API does not have the option of specifying the input shape of any input
+arrays. If your model requires specifying the input shape, use the
+[`from_concrete_functions`](#concrete_function) classmethod instead. The code
+looks similar to the following:
+
+```python
+model = tf.saved_model.load(export_dir)
+concrete_func = model.signatures[
+  tf.saved_model.DEFAULT_SERVING_SIGNATURE_DEF_KEY]
+concrete_func.inputs[0].set_shape([1, 256, 256, 3])
+converter = TFLiteConverter.from_concrete_functions([concrete_func])
 ```
 
 ### Keras モデルを変換する <a name="keras"></a>
@@ -130,6 +144,7 @@ input_data = np.array(np.random.random_sample(input_shape), dtype=np.float32)
 interpreter.set_tensor(input_details[0]['index'], input_data)
 
 interpreter.invoke()
+
 # `get_tensor()` はテンソルのコピーを返す
 # テンソルのポインタを取得したい場合は `tensor()` を使う 
 tflite_results = interpreter.get_tensor(output_details[0]['index'])
@@ -142,96 +157,67 @@ for tf_result, tflite_result in zip(tf_results, tflite_results):
   np.testing.assert_almost_equal(tf_result, tflite_result, decimal=5)
 ```
 
-## 1.X から 2.0 への Python API の変更点まとめ <a name="differences"></a>
+#### TensorFlow Lite Metadata
 
-以降の章では、Python API の 1.X から 2.0 への変更点についてまとめていますが、
-もしなにか懸念が生じた場合は GitHub の [issue](https://github.com/tensorflow/tensorflow/issues) を出してください。
+Note: TensorFlow Lite Metadata is in experimental (beta) phase.
 
-### `TFLiteConverter` のサポートしているフォーマット
+TensorFlow Lite metadata provides a standard for model descriptions. The
+metadata is an important source of knowledge about what the model does and its
+input / output information. This makes it easier for other developers to
+understand the best practices and for code generators to create platform
+specific wrapper code. For more information, please refer to the
+[TensorFlow Lite Metadata](metadata.md) section.
 
-2.0の `TFLiteConverter` は 1.X と 2.0 で生成された SavedModel と Keras
-モデルファイルをサポートしますが、1.X で生成された frozen `GraphDefs` はサポートしません。 frozen `GraphDefs` を
-TensorFlow Lite に変換したい場合は `tf.compat.v1.lite.TFLiteConverter` を使う必要があります。
+## Installing TensorFlow <a name="versioning"></a>
 
-### Quantization-aware training
+### Installing the TensorFlow nightly <a name="2.0-nightly"></a>
 
-[quantization-aware training](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/quantize) に関連する以下の属性とメソッドは、 TensorFlow 2.0 の `TFLiteConverter` から削除されました:
-
-
-*   `inference_type`
-*   `inference_input_type`
-*   `quantized_input_stats`
-*   `default_ranges_stats`
-*   `reorder_across_fake_quant`
-*   `change_concat_input_ranges`
-*   `post_training_quantize` - 1.X API で非推奨
-*   `get_input_arrays()`
-
-quantization-aware training をサポートしていた計算グラフの書き換え関数は、TensorFlow
-2.0によるモデルをサポートしません。 また、TensorFlow Lite の quantization API は、Keras API を通じて
-quantization-aware training をサポートする方向で作り直しと合理化を勧めている最中です。 新しい quantization API
-がローンチされるまでは、これらの属性は 2.0 API から削除されます。 書き換え関数によってモデルを変換したい場合は
-`tf.compat.v1.lite.TFLiteConverter` を使ってください。
-
-### `TFLiteConverter` の属性に対する変更点
-
-`target_ops` 属性は `TargetSpec` の属性となり、将来追加される予定の最適化フレームワークに合わせて `supported_ops` にリネームされました。
-また、以下の属性が削除されています:
-
-*   `drop_control_dependency` (default: `True`) - 現在のところコントロールフローは TFLite でサポートされていないので、常に `True` です。
-*   _Graph visualization_ - TensorFlow 2.0 において、 TensorFlow Lite グラフの可視化で推奨されるのは [visualize.py](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/visualize.py) を使うことです。 GraphViz と違い、 post training quantization が施された後のグラフを可視化できます。 また、グラフの可視化に関する以下の属性は削除される予定です:
-    *   `output_format`
-    *   `dump_graphviz_dir`
-    *   `dump_graphviz_video`
-
-### 一般的な API に対する変更点
-
-#### 変換方法
-
-1.X で既に非推奨となっていた以下のメソッドは、 2.0 では削除されています:
-
-*   `lite.toco_convert`
-*   `lite.TocoConverter`
-
-#### `lite.constants`
-
-`lite.constants` API は、 TensorFlow と TensorFlow Lite の間の重複を減らすために 2.0 で削除されました。
-`lite.constant` の型と TensorFlow の型の対応は以下のとおりです。
-
-*   `lite.constants.FLOAT`: `tf.float32`
-*   `lite.constants.INT8`: `tf.int8`
-*   `lite.constants.INT32`: `tf.int32`
-*   `lite.constants.INT64`: `tf.int64`
-*   `lite.constants.STRING`: `tf.string`
-*   `lite.constants.QUANTIZED_UINT8`: `tf.uint8`
-
-また、`lite.constants.TFLITE` と `lite.constants.GRAPHVIZ_DOT` は、 `TFLiteConverter` の `output_format` の廃止に伴い削除されました。
-
-#### `lite.OpHint`
-
-`OpHint` API は、2.0 API との互換性がないため、現在 2.0 では利用できません。
-この API は LSTM ベースのモデルの変換を可能にするものですが、2.0 における LSTM のサポートは検証中のため、関連する `lite.experimental` API はすべて削除されています。
-
-## TensorFlow のインストール <a name="versioning"></a>
-
-### TensorFlow 2.0 nightly のインストール <a name="2.0-nightly"></a>
-
-TensorFlow 2.0 nightly は以下のコマンドでインストールできます:
+The TensorFlow nightly can be installed using the following command:
 
 ```
-pip install tf-nightly-2.0-preview
+pip install tf-nightly
 ```
 
-### インストール済の TensorFlow 1.X から 2.0 を使う <a name="use-2.0-from-1.X"></a>
+### Custom ops in the experimental new converter
 
-TensorFlow 2.0 は、最近の 1.X から以下のようにして利用できます。
+There is a behavior change in how models containing
+[custom ops](https://www.tensorflow.org/lite/guide/ops_custom) (those for which
+users use to set allow\_custom\_ops before) are handled in the
+[new converter](https://github.com/tensorflow/tensorflow/blob/917ebfe5fc1dfacf8eedcc746b7989bafc9588ef/tensorflow/lite/python/lite.py#L81).
 
-```python
-import tensorflow.compat.v2 as tf
+**Built-in TensorFlow op**
 
-tf.enable_v2_behavior()
+If you are converting a model with a built-in TensorFlow op that does not exist
+in TensorFlow Lite, you should set allow\_custom\_ops attribute (same as
+before), explained [here](https://www.tensorflow.org/lite/guide/ops_custom).
+
+**Custom op in TensorFlow**
+
+If you are converting a model with a custom TensorFlow op, it is recommended
+that you write a [TensorFlow kernel](https://www.tensorflow.org/guide/create_op)
+and [TensorFlow Lite kernel](https://www.tensorflow.org/lite/guide/ops_custom).
+This ensures that the model is working end-to-end, from TensorFlow and
+TensorFlow Lite. This also requires setting the allow\_custom\_ops attribute.
+
+**Advanced custom op usage (not recommended)**
+
+If the above is not possible, you can still convert a TensorFlow model
+containing a custom op without a corresponding kernel. You will need to pass the
+[OpDef](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/framework/op_def.proto)
+of the custom op in TensorFlow using --custom\_opdefs flag, as long as you have
+the corresponding OpDef registered in the TensorFlow global op registry. This
+ensures that the TensorFlow model is valid (i.e. loadable by the TensorFlow
+runtime).
+
+If the custom op is not part of the global TensorFlow op registry, then the
+corresponding OpDef needs to be specified via the --custom\_opdefs flag. This is
+a list of an OpDef proto in string that needs to be additionally registered.
+Below is an example of an TFLiteAwesomeCustomOp with 2 inputs, 1 output, and 2
+attributes:
+
 ```
-
-### ソースコードからのビルド <a name="latest_package"></a>
-
-TensorFlow Lite コンバータ Python API の最新バージョンを実行するには、 [pip](https://www.tensorflow.org/install/pip) (推奨) または [Docker](https://www.tensorflow.org/install/docker) を使用してナイトリービルドをインストールするか、[ソースから pip パッケージをビルド](https://www.tensorflow.org/install/source) してください。
+converter.custom\_opdefs="name: 'TFLiteAwesomeCustomOp' input\_arg: { name: 'InputA'
+type: DT\_FLOAT } input\_arg: { name: ‘InputB' type: DT\_FLOAT }
+output\_arg: { name: 'Output' type: DT\_FLOAT } attr : { name: 'Attr1' type:
+'float'} attr : { name: 'Attr2' type: 'list(float)'}"
+```
