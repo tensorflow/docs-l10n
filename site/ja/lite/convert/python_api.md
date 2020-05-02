@@ -2,9 +2,8 @@
 
 このページでは、TensorFlow 2.0 の Python API による [TensorFlow Lite コンバータ](index.md) の使用例を説明します。
 
-Note: This only contains documentation on the Python API in TensorFlow 2.
-Documentation on using the Python API in TensorFlow 1 is available on
-[GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/g3doc/r1/convert/python_api.md).
+Note: このドキュメントでは TensorFlow 2 の Python API についてのみ記述します。
+TensorFlow 1 の Python API についてのドキュメントは [GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/g3doc/r1/convert/python_api.md) にあります。
 
 [TOC]
 
