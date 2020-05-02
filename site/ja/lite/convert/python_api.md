@@ -31,7 +31,7 @@ TensorFlow 2.0 において、TensorFlow モデルを TensorFlow Lite に変換�
 ```python
 import tensorflow as tf
 
-# 基本的な関数を構築
+# 基本的なモデルを構築
 root = tf.train.Checkpoint()
 root.v1 = tf.Variable(3.)
 root.v2 = tf.Variable(2.)
@@ -48,10 +48,9 @@ converter = tf.lite.TFLiteConverter.from_saved_model(export_dir)
 tflite_model = converter.convert()
 ```
 
-This API does not have the option of specifying the input shape of any input
-arrays. If your model requires specifying the input shape, use the
-[`from_concrete_functions`](#concrete_function) classmethod instead. The code
-looks similar to the following:
+この API は入力となる任意の配列について、shape を指定するオプションを持ちません。
+モデルの入力の shape を指定する必要がある場合には、[`from_concrete_functions`](#concrete_function) クラスメソッドを利用して下さい。
+コードは次のようになるでしょう。
 
 ```python
 model = tf.saved_model.load(export_dir)
