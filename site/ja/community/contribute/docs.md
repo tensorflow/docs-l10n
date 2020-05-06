@@ -7,12 +7,12 @@ TensorFlowはドキュメントへの貢献を歓迎します。ドキュメン�
 * **説明書** —[チュートリアル](https://www.tensorflow.org/tutorials)、
   [ガイド](https://www.tensorflow.org/guide)などのTensorflowのコードに含まれない文書を指します。GitHubのレポジトリ
   [tensorflow/docs](https://github.com/tensorflow/docs) にあります。
-* **コミュニティー翻訳** —チュートリアルやガイドはコミュニティーが翻訳しています。コミュニティーによる翻訳はレポジトリ
+* **コミュニティ翻訳** —チュートリアルやガイドはコミュニティが翻訳しています。コミュニティによる翻訳はレポジトリ
   [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site) にあります。
 
 一部の[TensorFlow プロジェクト](https://github.com/tensorflow) はドキュメントのソースファイルを別のレポジトリのコードの近く（通常 `docs/` ディレクトリ内）に置いています。貢献するには、プロジェクトの`CONTRIBUTING.md` ファイルを参照するか、プロジェクトのメンテナーにご連絡ください。
 
- TensorFlow ドキュメントのコミュニティーに参加するには、
+ TensorFlow ドキュメントのコミュニティに参加するには、
 
 *  GitHub
   repository [tensorflow/docs](https://github.com/tensorflow/docs) をご覧ください。
@@ -21,13 +21,13 @@ TensorFlowはドキュメントへの貢献を歓迎します。ドキュメン�
 ## API レファレンス
 
 レファレンスドキュメントを更新するには、対応する
-[ソースファイル](https://www.tensorflow.org/code/tensorflow/python/)を見つけて
+[ソースファイル](https://www.tensorflow.org/code/tensorflow/python/)をみつけて
 <a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a>を編集してください。
 tensorflow.org上のAPIレファレンスページでは、多くの場合ソースファイルの対応する箇所へのリンクが貼ってあります。Docstrings は
 <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown</a>
 をサポートしており、 お好きな<a href="http://tmpvar.com/markdown.html" class="external">Markdown プレビュアー</a>で（大体）プレビューすることができます。
 
-レファレンスドキュメントの品質について、またDoc sprintsやコミュニティーに参加する方法については、
+レファレンスドキュメントの品質について、またDoc sprintsやコミュニティに参加する方法については、
 [TensorFlow 2 API Docs advice](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview) をご覧ください。
 
 ### バージョンとブランチ
@@ -90,7 +90,7 @@ TensorFlowの[ガイド](https://www.tensorflow.org/guide) と
 ドキュメントの簡単な更新や修正はGitHubの
 <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">ウェブベース ファイルエディタ</a>を使うと容易です。
 Browse the [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en)
-レポジトリから、<a href="https://www.tensorflow.org">tensorflow.org</a> のURL構造に概ね対応するMarkdownやノートブックのファイルを見つけます。 ファイルビューの右上端にある鉛筆アイコン
+レポジトリから、<a href="https://www.tensorflow.org">tensorflow.org</a> のURL構造に概ね対応するMarkdownやノートブックのファイルをみつけます。 ファイルビューの右上端にある鉛筆アイコン
 <svg version="1.1" width="14" height="16" viewBox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path></svg>
 をクリックして、ファイルエディタを開きます。ファイルを編集して新しいプルリクエストを送信してください。
 
@@ -102,7 +102,7 @@ Note: <a href="https://git-scm.com/" class="external">Git</a> はソースコー
 <a href="https://github.com" class="external">GitHub</a>はGitを用いた共同作業ツールを提供するオンラインサービスです。GitHubアカウントを作成して始めるには
 <a href="https://help.github.com" class="external">GitHub ヘルプ</a> をご覧ください。
 
-以下のGitステップは初めてローカルプロジェクトを立ち上げる場合にのみ必要です。
+以下のGitステップは、はじめてローカルプロジェクトを立ち上げる場合にのみ必要です。
 
 #### tensorflow/docs レポジトリをフォーク
 
@@ -196,7 +196,7 @@ origin    git@github.com:<var>username</var>/docs.git (push)
 
 #### 4. レビュー
 
-メンテナーや他の貢献者がプルリクエストをレビューします。議論に参加し、必要に応じて変更を行うようにしてください。プルリクエストが承認されると、上流のTensorFlowドキュメントレポジトリにマージされます。
+メンテナーやほかの貢献者がプルリクエストをレビューします。議論に参加し、必要に応じて変更を行うようにしてください。プルリクエストが承認されると、上流のTensorFlowドキュメントレポジトリにマージされます。
 
 Success: TensorFlowドキュメントに変更が承認されました。
 
@@ -243,10 +243,10 @@ Colaboratoryからノートブックファイルを **ファイル > .ipynbを�
 Success: TensorFlowドキュメントに変更が承認されました。
 
 
-## コミュニティー翻訳
+## コミュニティ翻訳
 
-コミュニティー翻訳を行うと、Tensorflowを世界中に広めることができます。翻訳を更新するには、[言語ディレクトリ](https://github.com/tensorflow/docs/tree/master/site)の`en/`以下の構造と対応するファイルを[言語ディレクトリ](https://github.com/tensorflow/docs/tree/master/site)に追加・更新してください。
-英語版ドキュメントは **信頼できる情報源** であり、できる限り齟齬が生じないようにガイドを翻訳する必要があります。しかしながら、翻訳は貢献するコミュニティーのためにあります。もしも英語版の用語、フレーズ、スタイル、口調が他の言語に翻訳できない場合は、読者にとって適切な翻訳を用いてください。
+コミュニティ翻訳を行うと、Tensorflowを世界中に広めることができます。翻訳を更新するには、[言語ディレクトリ](https://github.com/tensorflow/docs/tree/master/site)の`en/`以下の構造と対応するファイルを[言語ディレクトリ](https://github.com/tensorflow/docs/tree/master/site)に追加・更新してください。
+英語版ドキュメントは **信頼できる情報源** であり、できる限り齟齬が生じないようにガイドを翻訳する必要があります。しかしながら、翻訳は貢献するコミュニティのためにあります。もしも英語版の用語、フレーズ、スタイル、口調がほかの言語に翻訳できない場合は、読者にとって適切な翻訳を用いてください。
 
 Note: APIレファレンスはtensorflow.org用に翻訳され**ません**。
 
