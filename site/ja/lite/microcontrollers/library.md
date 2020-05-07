@@ -3,7 +3,7 @@
 マイクロコントローラ向け TensorFlow Lite の C++ライブラリ は
 [TensorFlow repository](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/micro)
 の一部です。
-読みやすく、修正しやすく、よく検証されており、統合しやすく、また、標準のTensorFlow Lite と互換性があるように設計されています。
+読みやすく、修正しやすく、よくテストされており、統合しやすく、また、標準のTensorFlow Lite と互換性があるように設計されています。
 
 以下の資料は、C++ライブラリの基本構造の概要を示しており、プロジェクト作成に関する情報を提供します。
 
@@ -11,7 +11,7 @@
 
 [`micro`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/micro)
 のルートディレクトリは、比較的簡単な構造です。
-しかし、広大な TensorFlow レポジトリの中に配置されているので、われわれはスクリプトと生成済みプロジェクトファイルを作成しました。そのプロジェクトファイルは、さまざまな組込み開発環境の内に隔離して、関連のあるソースファイルを提供します。
+しかし、ルートディレクトリは広大な TensorFlow レポジトリの中に配置されているので、さまざまな組込み開発環境の内に関連するソースファイルが隔離されて提供されるように、スクリプトと生成済みプロジェクトファイルを作成しました。
 
 ### 重要なファイル
 
@@ -21,7 +21,7 @@
     または
     [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_mutable_op_resolver.h)
     は、モデルを実行するインタープリタによって使用される演算を提供します。
-    `all_ops_resolver.h` はすべての利用可能な演算を含むので、多くのメモリを使用します。製品アプリケーションにおいては、`micro_mutable_op_resolver.h` を使用するべきであり、モデルが必要とする演算のみを読み込みます。
+    `all_ops_resolver.h` はすべての利用可能な演算を含むので、多くのメモリを使用します。製品アプリケーションにおいては、`micro_mutable_op_resolver.h` を使用するべきです。これはモデルが必要とする演算のみを読み込みます。
 -   [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h)
     デバッグ情報を出力します。
 -   [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h)
@@ -44,7 +44,7 @@
 ## 新規プロジェクトを始める
 
 *Hello World* サンプルを新規プロジェクトのテンプレートととして使うことを推奨しています。
-この節の以下の指示に従うことで、選択したプラットフォームのサンプルを得られます。
+この節の以下の指示に従うことで、選択したプラットフォーム用の Hello, world サンプルを得られます。
 
 ### Arduinoライブラリを使用する
 
@@ -133,7 +133,7 @@ make -f tensorflow/lite/micro/tools/make/Makefile TARGET=sparkfun_edge hello_wor
 make -f tensorflow/lite/micro/tools/make/Makefile TAGS=<subdirectory_name> generate_projects
 ```
 
-新しいサブフォルダーを作成することで、あなた自身による最適化を追加することができます。我々は、新しい最適化実装へのプルリクエスト奨励しています。
+新しいサブフォルダーを作成することで、あなた自身による最適化を追加することができます。我々は、最適化された新しい実装について、プルリクエストを奨励しています。
 
 ## Arduino ライブラリを生成する
 
