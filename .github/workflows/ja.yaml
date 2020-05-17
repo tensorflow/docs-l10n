@@ -53,8 +53,8 @@ jobs:
           export PATH="redpen-distribution-${REDPEN_VERSION}/bin:${PATH}"
           ./tools/ja/bin/proofreading.sh ${{ matrix.dir }}
       
-      # - name: Upload RedPen logs
-      #   uses: actions/upload-artifact@v1
-      #   with:
-      #     name: RedPen logs
-      #     path: tools/ja/redpen.log
+      - name: Upload RedPen logs
+        uses: actions/upload-artifact@v1
+        with:
+          name: RedPen logs
+          path: tools/ja/redpen.log
