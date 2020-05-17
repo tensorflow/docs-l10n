@@ -16,7 +16,7 @@ For example, checking notations and synonyms with [`terminologies.txt`](terminol
 You can run the proofreading tool as below:
 
 ```shell script
-./tools/ja/bin/run.sh <target directory or file>
+./tools/ja/bin/proofreading.sh <target directory or file>
 ```
 
 For example:
