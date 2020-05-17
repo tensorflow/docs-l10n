@@ -36,6 +36,7 @@ jobs:
         run: |
           wget https://github.com/redpen-cc/redpen/releases/download/redpen-${REDPEN_VERSION}/redpen-${REDPEN_VERSION}.tar.gz
           tar xvf redpen-${REDPEN_VERSION}.tar.gz
+          cp tools/ja/logback.xml redpen-distribution-${REDPEN_VERSION}/conf/logback.xml
 
       - name: Set up Python
         uses: actions/setup-python@v1
@@ -52,8 +53,8 @@ jobs:
           export PATH="redpen-distribution-${REDPEN_VERSION}/bin:${PATH}"
           ./tools/ja/bin/proofreading.sh ${{ matrix.dir }}
       
-      - name: Upload RedPen log
-        uses: actions/upload-artifact@v1
-        with:
-          name: RedPen log
-          path: tools/ja/redpen.log
+      # - name: Upload RedPen logs
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: RedPen logs
+      #     path: tools/ja/redpen.log
