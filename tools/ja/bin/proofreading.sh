@@ -32,6 +32,7 @@ for FILE in ${TARGET_FILES}; do
 
   redpen --result-format ${RESULT_FORMAT} \
          --limit ${ERROR_LIMIT} \
-         --conf tools/ja/redpen-conf.xml ${TARGET_MARKDOWN}
+         --conf tools/ja/redpen-conf.xml ${TARGET_MARKDOWN} \
+         2>tools/ja/redpen.log
 
 done
