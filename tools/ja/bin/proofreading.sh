@@ -30,8 +30,9 @@ for FILE in ${TARGET_FILES}; do
     TARGET_MARKDOWN="${TEMP_DIR}/$(basename ${FILE} .ipynb).md"
   fi
 
-  echo ""
-  echo "===== Apply RedPen to: ${TARGET_MARKDOWN} ====="
-  redpen --result-format ${RESULT_FORMAT} --limit ${ERROR_LIMIT} --conf tools/ja/redpen-conf.xml ${TARGET_MARKDOWN}
+  redpen --result-format ${RESULT_FORMAT} \
+         --limit ${ERROR_LIMIT} \
+         --conf tools/ja/redpen-conf.xml ${TARGET_MARKDOWN} \
+         2>tools/ja/redpen.log
 
 done
