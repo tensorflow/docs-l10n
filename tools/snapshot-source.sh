@@ -122,10 +122,17 @@ rsync_opts=(
   --archive
   --del
   --exclude='BUILD'
+  --exclude='Corefile'
   --exclude='README.md'
+  --exclude='*.dcm'
+  --exclude='*.gitignore'
   --exclude='*.gwsq'
   --exclude='*.py'
+  --exclude='*.sql'
+  --exclude='*.swift'
   --exclude='*.yaml'
+  --exclude='*.yamllint'
+  --exclude='*.yml'
   --exclude='_*.ipynb'
   --exclude='index.*'
   --exclude='operation_semantics.md'
