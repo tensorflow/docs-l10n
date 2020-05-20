@@ -1,8 +1,11 @@
 DO NOT EDIT
 
-This is a snapshot of the English source documentation.
+This snapshot of the English source documentation is used to submit translations
+through the [GitLocalize project](https://gitlocalize.com/repo/4592/).
 
-Updated: Wed May 20 12:35:18 PDT 2020
+Note: GitLocalize does *not* support Jupyter notebooks, at this time.
+
+Updated: Wed May 20 13:31:26 PDT 2020
 
 Projects and last commit:
 
@@ -22,9 +25,9 @@ Projects and last commit:
 - [tensorflow/quantum](https://github.com/tensorflow/quantum/tree/master/docs): [cdb6153ab1f000f6bd9ec95510ed90b32a8f7f92](https://github.com/tensorflow/quantum/commit/cdb6153ab1f000f6bd9ec95510ed90b32a8f7f92)
 - [tensorflow/swift](https://github.com/tensorflow/swift/tree/master/docs/site): [6cfb19ae6370421b71550903ff0f3e547d78aa93](https://github.com/tensorflow/swift/commit/6cfb19ae6370421b71550903ff0f3e547d78aa93)
 - [tensorflow/tensorboard](https://github.com/tensorflow/tensorboard/tree/master/docs): [386456ebcec4d9716aa8a633dc1bc4ba92626c63](https://github.com/tensorflow/tensorboard/commit/386456ebcec4d9716aa8a633dc1bc4ba92626c63)
-- [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/mlir/g3doc): [236b503131839d32d92e6c97a7dcc93d4072a959](https://github.com/tensorflow/tensorflow/commit/236b503131839d32d92e6c97a7dcc93d4072a959)
-- [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/xla/g3doc): [236b503131839d32d92e6c97a7dcc93d4072a959](https://github.com/tensorflow/tensorflow/commit/236b503131839d32d92e6c97a7dcc93d4072a959)
-- [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/g3doc): [236b503131839d32d92e6c97a7dcc93d4072a959](https://github.com/tensorflow/tensorflow/commit/236b503131839d32d92e6c97a7dcc93d4072a959)
+- [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/mlir/g3doc): [e510776645702e6f86abcfd4faa9d56f894305c1](https://github.com/tensorflow/tensorflow/commit/e510776645702e6f86abcfd4faa9d56f894305c1)
+- [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/xla/g3doc): [e510776645702e6f86abcfd4faa9d56f894305c1](https://github.com/tensorflow/tensorflow/commit/e510776645702e6f86abcfd4faa9d56f894305c1)
+- [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/g3doc): [e510776645702e6f86abcfd4faa9d56f894305c1](https://github.com/tensorflow/tensorflow/commit/e510776645702e6f86abcfd4faa9d56f894305c1)
 - [tensorflow/tfjs-website](https://github.com/tensorflow/tfjs-website/tree/master/docs): [985b2cdd9449e1a77fa134caddd7b1f72754374b](https://github.com/tensorflow/tfjs-website/commit/985b2cdd9449e1a77fa134caddd7b1f72754374b)
 - [tensorflow/tfx](https://github.com/tensorflow/tfx/tree/master/docs): [1c2e3e86a9844d39722c179a64889cab60fd675b](https://github.com/tensorflow/tfx/commit/1c2e3e86a9844d39722c179a64889cab60fd675b)
 
