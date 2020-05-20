@@ -213,7 +213,10 @@ ${COMMIT_MSG_LIST}\n"
 
 README_STR="DO NOT EDIT
 
-This is a snapshot of the English source documentation.
+This snapshot of the English source documentation is used to submit translations
+through the [GitLocalize project](https://gitlocalize.com/repo/4592/).
+
+Note: GitLocalize does *not* support Jupyter notebooks, at this time.
 
 Updated: ${TIMESTAMP_STR}
 
