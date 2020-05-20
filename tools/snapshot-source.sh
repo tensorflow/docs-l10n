@@ -207,8 +207,7 @@ print_timestamp() {
 
 TIMESTAMP_STR="$(print_timestamp $TIMESTAMP)"
 
-COMMIT_MSG="Snapshot of the English source documentation.\n
-Updated: ${TIMESTAMP_STR}\n
+COMMIT_MSG="Source snapshot: ${TIMESTAMP_STR}\n\n
 Projects and last commit:\n
 ${COMMIT_MSG_LIST}\n"
 
