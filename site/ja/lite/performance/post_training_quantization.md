@@ -142,7 +142,7 @@ tflite_quant_model = converter.convert()
 にあります。
 
 ほかの方法として、精度劣化が大きい場合には、
-[量子化を考慮した訓練](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize){:.external}.
+[量子化を考慮した訓練](https://www.tensorflow.org/model_optimization/guide/quantization/training)
 を使用することを検討してください。
 しかし、そうすることは、モデルの訓練時に偽の量子化ノードを追加するために修正を行う必要があります。なお、このページの訓練後の量子化手法は、既存の訓練済みモデルを使用します。
 
@@ -158,7 +158,7 @@ $$real\_value = (int8\_value - zero\_point) \times scale$$
 
 * ゼロ点が-128以上127以下のどこかにあり、-128以上127以下の8ビットの2の補数で表現されたテンソルごとの活性化と入力
 
-量子化スキームの詳細は、
-[quantization spec](./quantization_spec.md) を見てください。
+量子化スキーマの詳細は、
+[量子化の仕様](./quantization_spec.md) を見てください。
 TensorFlow Lite のデリゲート・インターフェースに接続したいハードウェアベンダーは、
-そこで説明されている量子化スキームを実装することが推奨されています。
+そこで説明されている量子化スキーマを実装することが推奨されています。
