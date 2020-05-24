@@ -1,188 +1,161 @@
-# Post-training quantization
+# 訓練後の量子化
 
-Post-training quantization is a conversion technique that can reduce model size
-while also improving CPU and hardware accelerator latency, with little
-degradation in model accuracy. You can perform these techniques using an
-already-trained float TensorFlow model when you convert it to TensorFlow Lite
-format using the [TensorFlow Lite Converter](../convert/).
+訓練後の量子化は、わずかなモデルの精度の低下を伴いますが、モデルの大きさを削減することができ、さらにCPUとハードウェアアクセラレータのレイテンシーを改善する変換手法です。
+TensorFlow Lite 形式に変換するときに、こと、訓練済みの浮動小数点数の TensorFlow モデルを使うこれらの手法を実行できます。
 
-Note: The procedures on this page require TensorFlow 1.15 or higher.
+注意: このページの関数はTensorFlow 1.15 以上が必要です。
 
-### Optimization Methods
+### 最適化オプション
 
-There are several post-training quantization options to choose from. Here is a
-summary table of the choices and the benefits they provide:
+選択可能な訓練後の量子化のいくつかのオプションがあります。
+これは選択肢の概要の一覧表とその効果です。
 
-| Technique            | Benefits                  | Hardware         |
-| -------------------- | ------------------------- | ---------------- |
-| Dynamic range        | 4x smaller, 2-3x speedup  | CPU              |
-: quantization         :                           :                  :
-| Full integer         | 4x smaller, 3x+ speedup   | CPU, Edge TPU,   |
-: quantization         :                           : Microcontrollers :
-| Float16 quantization | 2x smaller, potential GPU | CPU, GPU         |
-:                      : acceleration              :                  :
 
-This decision tree can help determine which post-training quantization method is
-best for your use case:
+| 手法                      | 効果                  | ハードウェア            |
+| ------------------------- | ------------------------- | ------------------- |
+| ダイナミックレンジ         | 4倍小型化, 2～3倍高速化、精度 | CPU                 |
+: 量子化                    : accuracy                  :                     :
+| 整数量子化                | 4倍小型化、3倍以上高速化   | CPU、Edge TPU、など |
+| 半精度浮動小数点数量子化   | 2倍小型化, 潜在的なGPU | CPU/GPU             |
+:                           : アクセラレーション              :                     :
+
+この決定木は、どの訓練後の量子化方法があなたのユースケースに最適化を決める手助けになるでしょう。
 
 ![post-training optimization options](images/optimization.jpg)
 
-### Dynamic range quantization
+Alternatively, you might achieve higher accuracy if you perform
+もう1つの方法として、
+[quantization-aware training](
+https://github.com/tensorflow/tensorflow/tree/r1.14/tensorflow/contrib/quantize) 
+を実行するのであれば、より高い精度を実現できるかもしれません。
+しかし、そうするには、偽の量子化ノードを追加するために、モデルをいくつか修正する必要があります。
+なお、このページの訓練後の量子化手法は、すでにある訓練済みのモデルを使用します。
 
-The simplest form of post-training quantization statically quantizes only the
-weights from floating point to integer, which has 8-bits of precision:
+### ダイナミックレンジの量子化
 
-<pre>
-import tensorflow as tf
-converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
-<b>converter.optimizations = [tf.lite.Optimize.DEFAULT]</b>
-tflite_quant_model = converter.convert()
-</pre>
+訓練後の量子化のもっとも単純な形式は、静的に重みのみを浮動小数点数から8ビット精度に量子化します。
+この手法は、
+[TensorFlow Lite 変換器](../convert/) のオプションとして利用できます。
 
-At inference, weights are converted from 8-bits of precision to floating point
-and computed using floating-point kernels. This conversion is done once and
-cached to reduce latency.
-
-To further improve latency, "dynamic-range" operators dynamically quantize
-activations based on their range to 8-bits and perform computations with 8-bit
-weights and activations. This optimization provides latencies close to fully
-fixed-point inference. However, the outputs are still stored using floating
-point, so that the speedup with dynamic-range ops is less than a full
-fixed-point computation. Dynamic-range ops are available for the most
-compute-intensive operators in a network:
-
-*   `tf.keras.layers.Dense`
-*   `tf.keras.layers.Conv2D`
-*   `tf.keras.layers.LSTM`
-*   `tf.nn.embedding_lookup`
-*   `tf.compat.v1.nn.rnn_cell.BasicRNNCell`
-*   `tf.compat.v1.nn.bidirectional_dynamic_rnn`
-*   `tf.compat.v1.nn.dynamic_rnn`
-
-### Full integer quantization
-
-You can get further latency improvements, reductions in peak memory usage, and
-access to integer only hardware devices or accelerators by making sure all model
-math is integer quantized.
-
-To do this, you need to measure the dynamic range of activations and inputs by
-supplying sample input data to the converter. Refer to the
-`representative_dataset_gen()` function used in the following code.
-
-#### Integer with float fallback (using default float input/output)
-
-In order to fully integer quantize a model, but use float operators when they
-don't have an integer implementation (to ensure conversion occurs smoothly), use
-the following steps:
-
-<pre>
-import tensorflow as tf
-converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
-<b>converter.optimizations = [tf.lite.Optimize.DEFAULT]
-def representative_dataset_gen():
-  for _ in range(num_calibration_steps):
-    # Get sample input data as a numpy array in a method of your choosing.
-    yield [input]
-converter.representative_dataset = representative_dataset_gen</b>
-tflite_quant_model = converter.convert()
-</pre>
-
-Note: This won't be compatible with integer only devices (such as 8-bit
-microcontrollers) and accelerators (such as the Coral Edge TPU). For convenience
-during inference, the input and output still remain float in order to have the
-same interface as the original float only model.
-
-#### Integer only
-
-*This is a common use case for
-[TensorFlow Lite for Microcontrollers](https://www.tensorflow.org/lite/microcontrollers)
-and [Coral Edge TPUs](https://coral.ai/).*
-
-Additionally, to ensure compatibility with integer only devices (such as 8-bit
-microcontrollers) and accelerators (such as the Coral Edge TPU), you can enforce
-full integer quantization for all ops including the input and output, by using
-the following steps:
-
-<pre>
+```
 import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
+tflite_quant_model = converter.convert()
+```
+
+推論時に、重みは8ビット精度から浮動小数点数に変換され、浮動小数点数カーネルを使って計算されます。
+この変換は一度だけおこなわれ、レイテンシーを減らすためにキャッシュされます。
+
+レイテンシーをさらに改善するために、"ダイナミックレンジ" 演算子は、8ビットの範囲に基づき動的に活性化を量子化し、また8ビット重みと活性化を用いて計算を実施します。
+この量子化は、レイテンシーを完全な固定小数点数の推論に近づけます。
+しかし、出力はまだ浮動小数点数を用いて保持されているので、ダイナミックレンジ演算子による高速化度合いは完全な固定小数点数よりも小さいです。
+ダイナミックレンジ演算子はネットワーク内の多くの数値計算演算子に適用可能です。
+
+*  [tf.contrib.layers.fully_connected](https://www.tensorflow.org/api_docs/python/tf/contrib/layers/fully_connected)
+*  [tf.nn.conv2d](https://www.tensorflow.org/api_docs/python/tf/nn/conv2d)
+*  [tf.nn.embedding_lookup](https://www.tensorflow.org/api_docs/python/tf/nn/embedding_lookup)
+*  [BasicRNN](https://www.tensorflow.org/api_docs/python/tf/contrib/rnn/BasicRNNCell)
+*  [tf.nn.bidirectional_dynamic_rnn for BasicRNNCell type](https://www.tensorflow.org/api_docs/python/tf/nn/bidirectional_dynamic_rnn)
+*  [tf.nn.dynamic_rnn for LSTM and BasicRNN Cell types](https://www.tensorflow.org/api_docs/python/tf/nn/dynamic_rnn)
+
+### 重みと活性化の完全な整数量子化
+
+モデル内のすべての計算が量子化を確実に行うことで、
+さらにレイテンシー改善、ピーク時のメモリ使用量を削減し、
+整数演算のみに対応したハードウェア・アクセラレータを利用できるようになります。
+
+こうするためには、代表的なデータセットを与えることによって、活性化と入力の範囲を計測する必要があります。
+簡単に入力データ生成器を作って、それを変換器への入力とすることができます。
+例えば、
+
+```
+import tensorflow as tf
+
 def representative_dataset_gen():
   for _ in range(num_calibration_steps):
     # Get sample input data as a numpy array in a method of your choosing.
+    # あなたの選択した関数内で、サンプル入力をnumpy配列として取得する
     yield [input]
+
+converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.representative_dataset = representative_dataset_gen
-<b>converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]</b>
-<b>converter.inference_input_type = tf.int8</b>  # or tf.uint8
-<b>converter.inference_output_type = tf.int8</b>  # or tf.uint8
 tflite_quant_model = converter.convert()
-</pre>
+```
 
-Note: The converter will throw an error if it encounters an operation it cannot
-currently quantize.
+結果として得られるモデルは完全に量子化されているべきですが、
+量子化の実装を持たないいくつの演算子は浮動小数点数として残されます。
+これは変換を簡単に行えますが、
+モデルは完全な整数量子化を必要とするアクセラレータと互換性がないでしょう。
 
-### Float16 quantization
+そのうえ、モデルは便宜上まだ浮動小数点数の入力と出力を使用します。
 
-You can reduce the size of a floating point model by quantizing the weights to
-float16, the IEEE standard for 16-bit floating point numbers. To enable float16
-quantization of weights, use the following steps:
+いくつかのアクセラレータ(Coral Edge TPUのような)と互換性を保つためには、
+すべての演算子に完全な整数化量子化を強制し、
+変換する前に以下の行を追加することで整数の入力と出力を使用することができます。
 
-<pre>
+```
+converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+converter.inference_input_type = tf.uint8
+converter.inference_output_type = tf.uint8
+```
+
+最初の行は、もし現在は量子化できない演算に遭遇したら、変換器にエラーを投げさせます。
+
+注意: `target_spec.supported_ops` は以前はPython APIでは `target_ops` でした。
+
+### 重みの半精度浮動小数点数量子化
+
+重みを、16ビット浮動小数点数のIEEE標準である半精度浮動小数点数に量子化することで
+浮動小数点数モデルの大きさを削減することができます。
+
+* モデルの大きさを半分にまで削減できます(すべての重みがオリジナルのサイズの半分になるので)
+* 最小限の精度劣化
+* いくつの委譲(たとえば、GPUへの委譲)は半精度浮動小数点数データで直接演算でき、結果として単精度浮動小数点数の計算より速く実行されます。
+
+もし最大の性能を必要とするのであれば、この量子化は良い選択ではないかもしれません
+(その場合は、固定小数点数への量子化の方がより良いでしょう)。
+重みの半精度固定小数点数の量子化を有効にするには、
+上記の "DEFAULT" 最適化を明記し、それから半精度浮動小数点数が target_spec に対してサポートされた型であることを明記します。
+
+```
 import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
-<b>converter.optimizations = [tf.lite.Optimize.DEFAULT]
-converter.target_spec.supported_types = [tf.lite.constants.FLOAT16]</b>
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.lite.constants.FLOAT16]
 tflite_quant_model = converter.convert()
-</pre>
+```
 
-The advantages of this quantization are as follows:
+デフォルトでは、半精度浮動小数点数の量子化モデルは、CPUで実行するときに重みの値を単精度浮動小数点数に"逆量子化する"でしょう。
+GPU委譲はこの逆量子化は行わないでしょう、その理由は半精度浮動小数点数のままで演算できるからです。
 
-*   Reduce model size by up to half (since all weights are now half the original
-    size).
-*   Minimal loss in accuracy.
-*   Supports some delegates (e.g. the GPU delegate) can operate directly on
-    float16 data, which results in faster execution than float32 computations.
+### モデル精度
 
-The disadvantages of this quantization are as follows:
+重みが訓練後に量子化されるので、特に小さなネットワークでは、精度劣化が発生するかもしれません。
+訓練前に完全に量子化されたモデルは、個別のネットワークごとに
+[TensorFlow Lite モデル・リポジトリ](../models/) で提供されています。
+量子化後のモデルの精度を検査し、精度劣化が許容範囲内であるか検証することが大切です。
+評価するツールは
+[TensorFlow Lite モデル精度](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/accuracy/ilsvrc/README.md){:.external}.
+にあります。
 
-*   Not a good choice for maximum performance (a quantization to fixed point
-    math would be better in that case).
-*   By default, a float16 quantized model will "dequantize" the weights values
-    to float32 when run on the CPU. (Note that the GPU delegate will not perform
-    this dequantization, since it can operate on float16 data.)
+精度劣化が大きい場合には、
+[量子化を考慮した訓練](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize){:.external}.
+を使用することを検討してください。
 
-### Model accuracy
+### 量子化されたテンソルの表現
 
-Since weights are quantized post training, there could be an accuracy loss,
-particularly for smaller networks. Pre-trained fully quantized models are
-provided for specific networks in the
-[TensorFlow Lite model repository](../models/). It is important to check the
-accuracy of the quantized model to verify that any degradation in accuracy is
-within acceptable limits. There is a tool to evaluate
-[TensorFlow Lite model accuracy](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/accuracy/ilsvrc/README.md){:.external}.
+8ビット量子化は浮動小数点数を以下の式で近似します。
+`real_value = (int8_value - zero_point) * scale`.
 
-Alternatively, if the accuracy drop is too high, consider using
-[quantization aware training](https://www.tensorflow.org/model_optimization/guide/quantization/training)
-. However, doing so requires modifications during model training to add fake
-quantization nodes, whereas the post-training quantization techniques on this
-page use an existing pre-trained model.
+その表現はおおきく2つの部分があります。
 
-### Representation for quantized tensors
+* ゼロ点は0に等しく、-127以上127以下の8ビットの2の補数で表現された軸毎(つまりチャンネル毎)、あるいはテンソルごとの重み
 
-8-bit quantization approximates floating point values using the following
-formula.
+* ゼロ点は-128以上127以下のどこかにあり、-128以上127以下の8ビットの2の補数で表現されたテンソルごとの活性化と入力
 
-$$real\_value = (int8\_value - zero\_point) \times scale$$
-
-The representation has two main parts:
-
-*   Per-axis (aka per-channel) or per-tensor weights represented by int8 two’s
-    complement values in the range [-127, 127] with zero-point equal to 0.
-
-*   Per-tensor activations/inputs represented by int8 two’s complement values in
-    the range [-128, 127], with a zero-point in range [-128, 127].
-
-For a detailed view of our quantization scheme, please see our
-[quantization spec](./quantization_spec.md). Hardware vendors who want to plug
-into TensorFlow Lite's delegate interface are encouraged to implement the
-quantization scheme described there.
+量子化スキームの詳細は、
+[quantization spec](./quantization_spec.md) を見てください。
+TensorFlow Lite の委譲インターフェースにつながりたいハードウェアベンダーは、
+そこで説明した量子化スキームを実装することが推奨されています。
