@@ -55,7 +55,7 @@ declare -A PROJECTS=(
 
 LOG_NAME="[$(basename $0)]"
 REPO_ROOT="$(cd $(dirname ${BASH_SOURCE[0]}) >/dev/null 2>&1 && cd .. && pwd)"
-TEMP_DIR=$(mktemp -d -t "$(basename $0 '.sh')")
+TEMP_DIR=$(mktemp -d -t "$(basename $0 '.sh').XXXXX")
 TIMESTAMP=$(date '+%s')
 
 declare -A LAST_COMMITS  # Last commit ID for each project
