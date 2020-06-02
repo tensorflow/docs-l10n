@@ -21,7 +21,7 @@ Igualmente, p por favor no traduzcan la seccion de `install/`, cualquier archivo
 Revisar [El Anuncio](https://groups.google.com/a/tensorflow.org/forum/#!msg/docs-zh-cn/mhLp-egzNyE/EhGSeIBqAQAJ).
 
 Note: el siguiente directorio
-[site/es/swift](https://github.com/tensorflow/docs/tree/master/site/es/swift)
+[site/es-419/swift](https://github.com/tensorflow/docs/tree/master/site/es-419/swift)
 es el "Home" para las traducciones
 [Swift para Tensorflow](https://www.tensorflow.org/swift)(S4TF).
 Los archivos originales estan en el directorio
@@ -49,7 +49,7 @@ Also, please do not translate the `install/` section, any `*.yaml` files, or `in
 See [the announcement](https://groups.google.com/a/tensorflow.org/forum/#!msg/docs-zh-cn/mhLp-egzNyE/EhGSeIBqAQAJ).
 
 Note: The
-[site/es/swift](https://github.com/tensorflow/docs-l10n/tree/master/site/es/swift)
+[site/es-419/swift](https://github.com/tensorflow/docs-l10n/tree/master/site/es-419/swift)
 directory is the home for
 [Swift for TensorFlow](https://www.tensorflow.org/swift)(S4TF) translations.
 Original files are in the
@@ -71,8 +71,8 @@ Una vez la traduccion este completa por favor notifiquen a los contribuidores
 para coordinar la traduccion.
 
 Copien un archivo en el folder `es` desde el folder `en`, asegurensen que el directorio de folders sea el adecuado.
-`site/es/r1` es para TensorFlow 1.x.
-`site/es/` es para TensorFlow 2.x.
+`site/es-419/r1` es para TensorFlow 1.x.
+`site/es-419/` es para TensorFlow 2.x.
 
 Deben traducir los comentarios y los "Markdowns" no deben correr las celdas.
 La estructura de Archivos y folders no debe ser cambiado esto dificulta la revision en GitHub.
@@ -100,8 +100,8 @@ mailing list to coordinate a review.
 
 Copy a file in `en` folder to same location under `ko` folder if anybody doesn't work on the file,
 and get it start.
-`site/es/r1` are for TensorFlow 1.x.
-`site/es/` are for TensorFlow 2.x.
+`site/es-419/r1` are for TensorFlow 1.x.
+`site/es-419/` are for TensorFlow 2.x.
 
 You should translate markdown and comments. You should not run code cells.
 Whole file structure can be changed even if you modify only a chunk in the notebook.
