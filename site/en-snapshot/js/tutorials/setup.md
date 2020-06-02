@@ -15,7 +15,7 @@ If you are new to web development, or have never heard of tools like webpack or 
 Add the following script tag to your main HTML file.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
 ```
 
 <section class="expandable">
