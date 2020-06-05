@@ -148,22 +148,21 @@ Gitでの次の手順は、
 <code class="devsite-terminal">cd ./docs</code>
 </pre>
 
-#### Add an upstream repo to keep up-to-date (optional)
+#### 上流リポジトリを設定して、最新の状態に保つ（オプション）
 
-To keep your local repository in sync with `tensorflow/docs`, add an *upstream*
-remote to download the latest changes.
+ローカルリポジトリと `tensorflow/docs`の同期を維持するには、
+*上流*リモートリポジトリを追加して最新の変更をダウンロードします。
 
-Note: Make sure to update your local repo *before* starting a contribution.
-Regular syncs to upstream reduce the chance of a
-<a href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line" class="external">merge conflict</a>
-when you submit your pull request.
+注意：貢献し始める*前*に、確実にローカルリポジトリを更新しておいてください。
+定期的に同期しておくと、
+プルリクエスト発行時の<a href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line" class="external">マージコンフリクト</a>の危険性を減らすことができます。
 
-Add a remote:
+以下のように、リモートリポジトリを追加します。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git remote add <var>upstream</var> git@github.com:tensorflow/docs.git</code>
 
-# View remote repos
+# リモートリポジトリを参照する。
 <code class="devsite-terminal">git remote -v</code>
 origin    git@github.com:<var>username</var>/docs.git (fetch)
 origin    git@github.com:<var>username</var>/docs.git (push)
@@ -171,13 +170,13 @@ origin    git@github.com:<var>username</var>/docs.git (push)
 <var>upstream</var>  git@github.com:tensorflow/docs.git (push)
 </pre>
 
-To update:
+更新をかける場合は以下のようにします。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git checkout master</code>
 <code class="devsite-terminal">git pull <var>upstream</var> master</code>
 
-<code class="devsite-terminal">git push</code>  # Push changes to your GitHub account (defaults to origin)
+<code class="devsite-terminal">git push</code>  # 変更した内容をGitHubアカウント(デフォルトはoriginブランチ)にプッシュします。
 </pre>
 
 ### GitHub workflow
