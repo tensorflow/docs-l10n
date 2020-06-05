@@ -104,18 +104,15 @@ Jupyter notebookは<a href="https://colab.research.google.com/notebooks/welcome.
 `master` ブランチから構築されています。
 古いバージョンはGitHubのリリースブランチ `rX.x` で入手できます。
 
-### Simple changes
+### 簡単な変更を行う
 
-The easiest way to make straightforward documentation updates to Markdown files
-is to use GitHub's
-<a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">web-based
-file editor</a>. Browse the
-[tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en)
-repository to find the Markdown that roughly corresponds to the
-<a href="https://www.tensorflow.org">tensorflow.org</a> URL structure. In the
-upper right corner of the file view, click the pencil icon
-<svg version="1.1" width="14" height="16" viewBox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path></svg>
-to open the file editor. Edit the file and then submit a new pull request.
+直接的にMarkdownファイルに更新をかける最も簡単な方法は、
+GitHubの<a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">WEBベースのファイルエディタ</a>を使うことです。
+[tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en)リポジトリをブラウジングしマークダウンを探しましょう。
+このリポジトリは<a href="https://www.tensorflow.org">tensorflow.org</a>のURL構造によく似ています。
+ファイルビューの上方右側にある鉛筆のアイコン<svg version="1.1" width="14" height="16" viewBox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path></svg>をクリックしてください。
+するとファイルエディタが開きます。
+編集して新しいプルリクエストを送ってください。
 
 ### Set up a local Git repo
 
