@@ -27,21 +27,20 @@ TensorFlow docsコミュニティに参加するのであれば、以下の2つ�
 * GitHubの[tensorflow/docs](https://github.com/tensorflow/docs)リポジトリを見てください。
 * [docs@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs)フォーラムに参加してください。
 
-## API reference
+## API リファレンス
 
-To update reference documentation, find the
-[source file](https://www.tensorflow.org/code/tensorflow/python/)
-and edit the symbol's
-<a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a>.
-Many API reference pages on tensorflow.org include a link to the source file
-where the symbol is defined. Docstrings support
-<a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown</a>
-and can be (approximately) previewed using any
-<a href="http://tmpvar.com/markdown.html" class="external">Markdown previewer</a>.
+リファレンスドキュメントを更新するには、
+[ソースファイル](https://www.tensorflow.org/code/tensorflow/python/)を見つけて、
+シンボルの<a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a>を編集します。
+tensorflow.orgの多くのAPIリファレンスページには、
+シンボルが定義されているソースファイルへのリンクを含みます。
+docstring は<a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown形式</a>をサポートしており、
+どんな<a href="http://tmpvar.com/markdown.html" class="external">Markdownプレビューアー</a>でも(ほぼ)プレビューすることができます。
 
-For reference documentation quality and how to get involved with doc sprints and
-the community, see the
-[TensorFlow 2 API Docs advice](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview).
+リファレンスドキュメントの品質と、
+短期集中型ドキュメント作成(訳注:doc sprints)とコミュニティに
+深くかかわる方法を知るために、
+[TensorFlow 2 API Docs advice](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview)を参照してください。
 
 ### Versions and branches
 
