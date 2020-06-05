@@ -136,10 +136,12 @@ Gitでの次の手順は、
 フォークさせたら、あなたには上流のTensorFlowリポジトリに追随して、
 リポジトリコピーを最新に保つ責任があります。
 
-#### Clone your repo
+#### リポジトリをクローンする
 
-Download a copy of *your* remote <var>username</var>/docs repo to your local
-machine. This is the working directory where you will make changes:
+*あなたの*リモートリポジトリ
+<var>username</var>/docs
+のコピーをローカルマシンにダウンロードします。
+これは、変更を加える作業用ディレクトリです。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git clone git@github.com:<var>username</var>/docs</code>
