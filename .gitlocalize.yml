@@ -1,6 +1,8 @@
 settings:
   advise_cla_signing: 
     - "true"
+  mention_contributors_in_pull_requests:
+    - "true"
 
 synchronize:
   paths:
