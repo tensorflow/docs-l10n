@@ -63,10 +63,11 @@ TensorFlow Docsリポジトリで手に入れることができます。
 新しいバージョンがリリースされると、
 新しいブランチが追加されていきます。
 
-### Build API docs
+### APIドキュメントを構築する
 
-Note: This step is not required to edit or preview API docstrings, only to
-generate the HTML used on tensorflow.org.
+注意：このステップではAPI docstringを編集、
+もしくはプレビューする必要はありません。
+ただtensorflow.orgで利用されるHTMLを生成するだけです。
 
 #### Python reference
 
