@@ -303,18 +303,19 @@ python nbfmt.py path/to/notebooks/
 python nbfmt.py --preserve_outputs=False path/to/notebooks/example.ipynb
 ```
 
-### Edit in Colab
+### Google Colabでの編集作業
 
-Within the Google Colab environment, double-click cells to edit text and code
-blocks. Text cells use Markdown and should follow the
-[TensorFlow docs style guide](./docs_style.md).
+Google Colab環境では、セルをダブルクリックして
+テキストとコードブロックを編集します。
+テキストセルはMarkdownを使用しており、
+[TensorFlowのドキュメントスタイルガイド](./docs_style.md)に従う必要があります。
 
-Download notebook files from Colab with *File > Download .pynb*. Commit
-this file to your [local Git repo](##set_up_a_local_git_repo) and send a pull
-request.
+*ファイル > .pynbをダウンロード*(訳注：2020/06/06時点では *.ipynbをダウンロード* に変更されている)を使って
+ColabからJupyter notebookファイルをダウンロードしてください。
+このファイルをあなたの[ローカルGitリポジトリ](##set_up_a_local_git_repo)にコミットして、
+プルリクエストを送りましょう。
 
-To create a new notebook, copy and edit the
-<a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow notebook template</a>.
+Jupyter notebookを新規に作成するときは<a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow notebook template</a>.
 
 ### Colab-GitHub workflow
 
