@@ -179,64 +179,68 @@ origin    git@github.com:<var>username</var>/docs.git (push)
 <code class="devsite-terminal">git push</code>  # 変更した内容をGitHubアカウント(デフォルトはoriginブランチ)にプッシュします。
 </pre>
 
-### GitHub workflow
+### GitHubワークフロー
 
-#### 1. Create a new branch
+#### 1. 新しいブランチを作成する
 
-After you update your repo from `tensorflow/docs`, create a new branch from the
-local *master* branch:
+`tensorflow/docs`からリポジトリを更新した後、
+次のようにローカル *master* ブランチから新しいブランチを作成します。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git checkout -b <var>feature-name</var></code>
 
-<code class="devsite-terminal">git branch</code>  # List local branches
+<code class="devsite-terminal">git branch</code>  # ローカルブランチのリストを表示します
   master
 * <var>feature-name</var>
 </pre>
 
-#### 2. Make changes
+#### 2. 変更を加える
 
-Edit files in your favorite editor and please follow the
-[TensorFlow documentation style guide](./docs_style.md).
+お好みのエディタでファイルを編集します。
+このとき[TensorFlowのドキュメントスタイルガイド](./docs_style.md)に従うようにしてください。
 
-Commit your file change:
+以下のように、変更をコミットします。
 
 <pre class="prettyprint lang-bsh">
-# View changes
-<code class="devsite-terminal">git status</code>  # See which files have changed
-<code class="devsite-terminal">git diff</code>    # See changes within files
+# 変更内容を確認する。
+<code class="devsite-terminal">git status</code>  # どのファイルが変更されたかを表示します。
+<code class="devsite-terminal">git diff</code>    # ファイルの変更内容を表示します。
 
 <code class="devsite-terminal">git add <var>path/to/file.md</var></code>
 <code class="devsite-terminal">git commit -m "Your meaningful commit message for the change."</code>
 </pre>
 
-Add more commits, as necessary.
+必要に応じて、さらにコミットを追加します。
 
-#### 3. Create a pull request
+#### 3. プルリクエストを作成する
 
-Upload your local branch to your remote GitHub repo
-(github.com/<var>username</var>/docs):
+以下のようにして、ローカルブランチを
+GitHub上のリモートリポジトリ(github.com/<var>username</var>/docs)にアップロードします。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git push</code>
 </pre>
 
-After the push completes, a message may display a URL to automatically
-submit a pull request to the upstream repo. If not, go to the
-<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>
-repo—or your own repo—and GitHub will prompt you to create a pull request.
+pushが完了したら、上流リポジトリへ発行されたプルリクエストのURLが、
+自動的に表示されるかもしれません。
+もし表示されなかった場合は、<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> リポジトリ—
+またはフォークしたリポジトリ—にアクセスすると、
+GitHubがプルリクエストを発行するように促してくるでしょう。
 
-#### 4. Review
+#### 4. レビューする
 
-Maintainers and other contributors will review your pull request. Please
-participate in the discussion and make the requested changes. When your pull
-request is approved, it will be merged into the upstream TensorFlow docs repo.
+メンテナや他のコントリビューターが
+あなたのプルリクエストをレビューしてくれます。
+議論に参加し、必要な変更を加えてください。
+プルリクエストが承認されると、
+上流のTensorFlowのドキュメントリポジトリにマージされます。
 
-Success: Your changes have been accepted to the TensorFlow documentation.
+上手くいきましたね！
+あなたの変更がTensorFlowドキュメントに受け入れられました。
 
-There is a separate publishing step to update
-[tensorflow.org](https://www.tensorflow.org) from the GitHub repo. Typically,
-changes are batched together and the site is updated on a regular cadence.
+GitHubリポジトリから[tensorflow.org](https://www.tensorflow.org)を更新するには、
+別の公開手順があります。
+通常、変更はまとめて処理され、サイトは定期的に更新されます。
 
 ## Interactive notebooks
 
