@@ -315,29 +315,35 @@ ColabからJupyter notebookファイルをダウンロードしてください�
 このファイルをあなたの[ローカルGitリポジトリ](##set_up_a_local_git_repo)にコミットして、
 プルリクエストを送りましょう。
 
-Jupyter notebookを新規に作成するときは<a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow notebook template</a>.
+Jupyter notebookを新規に作成するときは
+<a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow notebook テンプレート</a>をコピーして編集してください。
 
-### Colab-GitHub workflow
+### Google Colab-GitHub間のワークフロー
 
-Instead of downloading a notebook file and using a local Git workflow, you can
-edit and update your forked GitHub repo directly from Google Colab:
+Jupyter notebookファイルをダウンロードして
+ローカルGitワークフローを回す代わりに、
+Google ColabからあなたがフォークしたGitHubリポジトリを
+直接編集して更新することができます。
+以下のような手順です。
 
-1. In your forked <var>username</var>/docs repo, use the GitHub web UI to
-   <a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">create a new branch</a>.
-2. Navigate to the notebook file to edit.
-3. Open the notebook in Google Colab: use the URL swap or the *Open in Colab*
-   Chrome extension.
-4. Edit the notebook in Colab.
-5. Commit the changes to your repo from Colab with
-   *File > Save a copy in GitHub...*. The save dialog should link to the
-   appropriate repo and branch. Add a meaningful commit message.
-6. After saving, browse to your repo or the
-   <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>
-   repo, GitHub should prompt you to create a pull request.
-7. The pull request is reviewed by maintainers.
+1. フォークした <var>username</var>/docs リポジトリで、
+   <a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">新しいブランチを作る</a>ためにGitHub Web UIを使います。
+2. 編集したい Jupyter notebook ファイルに移動します。
+3. Jupyter notebook を Google Colabで開きます。
+   このときURLの変換には Chrome の拡張機能の
+   *Open in Colab* を使います。
+4. Google Colabで Jupyter notebook を編集します。
+5. *ファイル > GitHub にコピーを保存*で
+   変更をリポジトリにコミットします。
+   保存ダイアログは適切なリポジトリの
+   ブランチへのリンクになっているはずです。
+   意味のあるコミットメッセージを入力します。
+6. 保存した後は、あなたのリポジトリか
+   <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> リポジトリをブラウジングしてください。
+   GitHub上でプルリクエストを作成するように促されるはずです。
+7. メンテナにプルリクエストをレビューしてもらいます。
 
-Success: Your changes have been accepted to the TensorFlow documentation.
-
+やりました！変更はTensorFlowドキュメントに取り込まれました。
 
 ## Community translations
 
