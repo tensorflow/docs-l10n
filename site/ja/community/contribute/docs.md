@@ -114,20 +114,19 @@ GitHubの<a href="https://help.github.com/en/articles/editing-files-in-your-repo
 するとファイルエディタが開きます。
 編集して新しいプルリクエストを送ってください。
 
-### Set up a local Git repo
+### ローカルGitリポジトリを準備する
 
-For multi-file edits or more complex updates, it's better to use a local Git
-workflow to create a pull request.
+複数ファイルの編集やより複雑な更新の場合は、
+ローカルのGitワークフローを使用して
+プルリクエストを作成することをお勧めします。
 
-Note: <a href="https://git-scm.com/" class="external">Git</a> is the open source
-version control system (VCS) used to track changes to source code.
-<a href="https://github.com" class="external">GitHub</a> is an online service
-that provides collaboration tools that work with Git. See the
-<a href="https://help.github.com" class="external">GitHub Help</a> to set up
-your GitHub account and get started.
+注意：<a href="https://git-scm.com/" class="external">Git</a>はオープンソースのバージョン管理システム (VCS)で、
+ソースコードの変更を追跡するために使われます。
+<a href="https://github.com" class="external">GitHub</a>はGitと相性の良いツールを提供するオンラインサービスです。
+<a href="https://help.github.com" class="external">GitHubのヘルプ</a>を見て、GitHubのアカウントを設定して利用を開始しましょう。
 
-The following Git steps are only required the first time you set up a local
-project.
+Gitでの次の手順は、
+ローカルプロジェクトを初めてセットアップするときにのみ必要です。
 
 #### Fork the tensorflow/docs repo
 
