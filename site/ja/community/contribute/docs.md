@@ -345,29 +345,31 @@ Google ColabからあなたがフォークしたGitHubリポジトリを
 
 やりました！変更はTensorFlowドキュメントに取り込まれました。
 
-## Community translations
+## コミュニティによる翻訳
 
-Community translations are a great way to make TensorFlow accessible all over
-the world. To update a translation, find or add a file in the
-[language directory](https://github.com/tensorflow/docs/tree/master/site) that
-matches the same directory structure of the `en/` directory. The English docs
-are the *source-of-truth* and translations should follow these guides as close
-as possible. That said, translations are written for the communities they serve.
-If the English terminology, phrasing, style, or tone does not translate to
-another language, please use a translation appropriate for the reader.
+コミュニティによる翻訳はTensorFlowを世界中に広めるための素晴らしい方法です。
+翻訳をするためには、`en/` とディレクトリ構造が一致している[各言語のディレクトリ](https://github.com/tensorflow/docs/tree/master/site) 上のファイルを見つけるか追加します。
+英語版ドキュメントは*真実の源泉*であり、
+翻訳結果はなるべくこれらのガイドと近いものにすべきです。
+とは言ったものの、翻訳は彼らが従事するコミュニティのために行われています。
+英語の専門用語、言い回し、文体、語調の他言語への翻訳が難しいときは、
+読み手にとって適切な翻訳を行ってください。
 
-Note: The API reference is *not* translated for tensorflow.org.
+注意：APIリファレンスはtensorflow.orgのために翻訳*しないこと*。
 
-There are language-specific docs groups that make it easier for translation
-contributors to organize. Please join if you're an author, reviewer, or just
-interested in building out TensorFlow.org content for the community:
+翻訳を行うコントリビュータを簡単に取りまとめるための、
+各言語のドキュメンテーショングループがあります。
+あなたが執筆者であったりレビュアーであった場合、
+また単にTensorFlow.orgのコミュニティ向けコンテンツの構築に
+興味のあるだけの方もぜひ参加してください。
+例えば以下のようなグループがあります。
 
-* Chinese (Simplified): [docs-zh-cn@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-zh-cn)
-* Italian: [docs-it@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-it)
-* Japanese: [docs-ja@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ja)
-* Korean: [docs-ko@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ko)
-* Russian: [docs-ru@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ru)
-* Turkish: [docs-tr@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-tr)
+* （簡体字）中国語: [docs-zh-cn@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-zh-cn)
+* イタリア語: [docs-it@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-it)
+* 日本語: [docs-ja@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ja)
+* 韓国語: [docs-ko@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ko)
+* ロシア語: [docs-ru@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ru)
+* トルコ語: [docs-tr@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-tr)
 
 ### Review notifications
 
