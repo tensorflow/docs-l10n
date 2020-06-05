@@ -371,20 +371,20 @@ Google ColabからあなたがフォークしたGitHubリポジトリを
 * ロシア語: [docs-ru@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ru)
 * トルコ語: [docs-tr@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-tr)
 
-### Review notifications
+### レビューの通知
 
-All documentation updates require a review. To collaborate more efficiently with
-the TensorFlow translation communities, here are some ways to keep on top of
-language-specific activity:
+すべてのドキュメントの更新にはレビューが必要です。
+TensorFlow翻訳コミュニティとより効率的に協力するために、
+言語グループ毎の活動状況を深く知るためのいくつかの方法を示します。
 
-* Join a language group listed above to receive an email for any *created* pull
-  request that touches the <code><a
-  href="https://github.com/tensorflow/docs/tree/master/site">site/<var>lang</var></a></code>
-  directory for that language.
-* Add your GitHub username to the `site/<lang>/REVIEWERS` file to get
-  automatically comment-tagged in a pull request. When comment-tagged, GitHub
-  will send you notifications for all changes and discussion in that pull
-  request.
+* 上記に挙げた言語グループに参加し、
+  その言語の<code><a
+  href="https://github.com/tensorflow/docs/tree/master/site">site/<var>lang</var></a></code>ディレクトリに関係する、
+  *作成された*いかなるプルリクエストのメールも受け取るようにしましょう。
+* プルリクエストの際に自動でコメントでタグ付けされるように、
+  `site/<lang>/REVIEWERS` ファイルに GitHub ユーザー名を追加しましょう。
+  そうすればプルリクエスト上の変更や議論について
+  GitHub からの通知が来るようになるでしょう。
 
 ### Keep code up-to-date in translations
 
