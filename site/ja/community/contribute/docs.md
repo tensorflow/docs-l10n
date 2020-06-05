@@ -386,21 +386,29 @@ TensorFlow翻訳コミュニティとより効率的に協力するために、
   そうすればプルリクエスト上の変更や議論について
   GitHub からの通知が来るようになるでしょう。
 
-### Keep code up-to-date in translations
+### 訳文中のコード部分を最新に保つ
 
-For an open source project like TensorFlow, keeping documentation up-to-date is
-challenging. After talking with the community, readers of translated content
-will tolerate text that is a little out-of-date, but out-of-date code is
-frustrating. To make it easier to keep the code in sync, use the
-[nb-code-sync](https://github.com/tensorflow/docs/blob/master/tools/nb_code_sync.py)
-tool for the translated notebooks:
+TensorFlowのようなオープンソースプロジェクトでは、
+ドキュメントを最新に保つことは努力を要します。
+コミュニティについて話した後は、
+翻訳されたコンテンツの読者は
+少しばかり古い文章には目をつぶってくれるでしょうが、
+コードが古いとイライラしてしまうことでしょう。
+コードの同期をより簡単にするには、
+翻訳されたJupyter notebookのためのツール
+[nb-code-sync](https://github.com/tensorflow/docs/blob/master/tools/nb_code_sync.py) を使うことです。
+以下のようにして使います。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">./tools/nb_code_sync.py [--lang=en] site/<var>lang</var>/notebook.ipynb</code>
 </pre>
 
-This script reads the code cells of a language notebook and checks it against the
-English version. After stripping the comments, it compares the code blocks and
-updates the language notebook if they are different. This tool is particularly
-useful with an interactive git workflow to selectively add hunks of the file to
-the commit using: `git add --patch site/lang/notebook.ipynb`
+このスクリプトは
+各言語のJupyter notebookのコードセルを読み取り、
+英語版のものと見比べます。
+コメントを分離した後はコードブロックを比較して、
+もし違いがある場合はその言語のJupyter notebookを更新します。
+このツールは、
+`git add --patch site/lang/notebook.ipynb`
+を利用して、ファイルの変更箇所を選択的にコミット対象に追加する
+対話的なgitワークフローの面で特に役立ちます。
