@@ -270,32 +270,34 @@ GitHub上のJupyter notebookをブラウジングする際の
 `master` ブランチにいつでもリンクしているので、
 あなたのフォークリポジトリで Jupyter notebook を開くときにとても役立ちます。
 
-### Notebook formatting
+### Jupyter notebook フォーマット
 
-To create a new notebook, copy and edit the
-<a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow
-notebook template</a>.
+新しいJupyter notebookを作るためには、
+<a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow Jupyter notebook テンプレート</a>をコピーして編集してください。
 
-Notebooks are stored on disk as JSON and the various notebook implementations
-format the JSON differently. Diff tools and version control don't handle this
-very well, so TensorFlow Docs enforces a standard notebook formatting.
+Jupyter notebook は JSON ファイルとしてディスクに保存されており、
+様々なJupyter notebookは異なるJSONフォーマットで実装されています。
+こうなると差分比較ツールやバージョン管理システムは上手く役に立たないので、
+TensorFlowドキュメントは標準的なJupyter notebookのフォーマットを強制しています。
 
-The
-[nbfmt.py](https://github.com/tensorflow/docs/blob/master/tools/nbfmt.py)
-script applies this formatting:
+[nbfmt.py](https://github.com/tensorflow/docs/blob/master/tools/nbfmt.py) というスクリプトはこのフォーマットを適用します。
 
 ```
-# Run it on a single file
+# 1ファイルに対して実行
 python nbfmt.py path/to/notebooks/example.ipynb
 
-# Run  it on a whole directory
+# ディレクトリ全体に対して実行
 python nbfmt.py path/to/notebooks/
 ```
 
-For the same reasons notebook output should be cleared before submission
-(except in a few special cases). In Colab the "private outputs" option is used
-to enforce this. Other notebook implementations do not recognize this option.
-You can clear the outputs by passing `--preserve_outputs=False` to `nbfmt`:
+同じような理由で、Jupyter notebookの成果物は
+提案の前段階で問題ないものにしておくべきです
+(数少ない特別な場合を除いて)。
+これを強制するために、Google Colab では
+"private outputs" オプションを利用しています。
+他のJupyter notebook の実装はこのオプションを認識しません。
+以下のように、 `nbfmt` に `--preserve_outputs=False` オプションを渡すことで、
+成果物の問題を除去することができます。
 
 ```
 python nbfmt.py --preserve_outputs=False path/to/notebooks/example.ipynb
