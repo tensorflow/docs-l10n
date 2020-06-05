@@ -2,74 +2,72 @@
 
 TensorFlow はドキュメントの貢献を歓迎します-
 あなたがドキュメントを改善してくれれば、TensorFlowライブラリそのものが改善されます。
-tensorflow.orgにあるドキュメントは以下のカテゴリに分類されます。
+tensorflow.org にあるドキュメントは以下のカテゴリに分類されます。
 
 
-* *APIリファレンス* —[API リファレンスドキュメント](https://www.tensorflow.org/api_docs/)は
-  [TensorFlowソースコード](https://github.com/tensorflow/tensorflow)の docstring から生成されています。
-* *解説ドキュメント* —これは [チュートリアル](https://www.tensorflow.org/tutorials)や
-  [ガイド](https://www.tensorflow.org/guide)、その他のTensorFlowのコードの一部ではない文書です。
-  これらのドキュメントは GitHubリポジトリの
+* *APIリファレンス* — [API リファレンスドキュメント](https://www.tensorflow.org/api_docs/)は
+  [TensorFlow ソースコード](https://github.com/tensorflow/tensorflow)の docstring から生成されています。
+* *解説ドキュメント* —これは [チュートリアル](https://www.tensorflow.org/tutorials)や[ガイド](https://www.tensorflow.org/guide)、
+  その他の TensorFlow のコードの一部ではない文書です。
+  これらのドキュメントは GitHub リポジトリの
   [tensorflow/docs](https://github.com/tensorflow/docs)にあります。
 * *コミュニティによる翻訳* —これらのガイドやチュートリアルは
   コミュニティが翻訳したものです。
   コミュニティによる翻訳活動はすべて
-  [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site)リポジトリで活発に行われています。
+  [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site) リポジトリで活発に行われています。
 
-いくつかの[TensorFlow プロジェクト](https://github.com/tensorflow)は、
+いくつかの [TensorFlow プロジェクト](https://github.com/tensorflow)は、
 ドキュメント用のソースファイルを別リポジトリのコードの近く、
 たいていは `docs/` 配下のディレクトリに置いてあります。
  各プロジェクトの `CONTRIBUTING.md` ファイルを参照するか、
  メンテナに連絡を取り貢献したいという思いを伝えましょう。
 
-TensorFlow docsコミュニティに参加するのであれば、以下の2つを行ってください。
+TensorFlow docs コミュニティに参加するのであれば、以下の2つを行ってください。
 
-* GitHubの[tensorflow/docs](https://github.com/tensorflow/docs)リポジトリを見てください。
-* [docs@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs)フォーラムに参加してください。
+* GitHubの [tensorflow/docs](https://github.com/tensorflow/docs) リポジトリを見てください。
+* [docs@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs) フォーラムに参加してください。
 
 ## API リファレンス
 
 リファレンスドキュメントを更新するには、
 [ソースファイル](https://www.tensorflow.org/code/tensorflow/python/)を見つけて、
-シンボルの<a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a>を編集します。
-tensorflow.orgの多くのAPIリファレンスページには、
+シンボルの <a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a> を編集します。
+tensorflow.org の多くの API リファレンスページには、
 シンボルが定義されているソースファイルへのリンクを含みます。
-docstring は<a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown形式</a>をサポートしており、
-どんな<a href="http://tmpvar.com/markdown.html" class="external">Markdownプレビューアー</a>でも(ほぼ)プレビューすることができます。
+docstring は <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown形式</a> をサポートしており、
+どんな <a href="http://tmpvar.com/markdown.html" class="external">Markdown プレビューアー</a>でも(ほぼ)プレビューすることができます。
 
 リファレンスドキュメントの品質と、
 短期集中型ドキュメント作成(訳注:doc sprints)とコミュニティに
 深くかかわる方法を知るために、
-[TensorFlow 2 API Docs advice](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview)を参照してください。
+[TensorFlow 2 API Docs advice](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview) を参照してください。
 
 ### バージョンとブランチ
 
-サイトの[API リファレンス](https://www.tensorflow.org/api_docs/python/tf)のバージョンは、
+サイトの [API リファレンス](https://www.tensorflow.org/api_docs/python/tf)のバージョンは、
 通常最新の安定バイナリを元に作成されています。
 これは `pip install tensorflow` でインストールされる
 パッケージのバージョンと一致しています。
 
 デフォルトの TensorFlow パッケージは、メインリポジトリである
-<a href="https://github.com/tensorflow/tensorflow" class="external">tensorflow/tensorflow</a>の安定版ブランチ `rX.x` から構築されます。
+<a href="https://github.com/tensorflow/tensorflow" class="external">tensorflow/tensorflow</a> の安定版ブランチ `rX.x` から構築されます。
 リファレンスドキュメントは、
-<a href="https://www.tensorflow.org/code/tensorflow/python/" class="external">Python</a>、
-<a href="https://www.tensorflow.org/code/tensorflow/cc/" class="external">C++</a>、
-そして<a href="https://www.tensorflow.org/code/tensorflow/java/" class="external">Java</a>の、
-ソースコードのコメントとdocstringから生成されます。
+<a href="https://www.tensorflow.org/code/tensorflow/python/" class="external">Python</a>、<a href="https://www.tensorflow.org/code/tensorflow/cc/" class="external">C++</a>、そして<a href="https://www.tensorflow.org/code/tensorflow/java/" class="external">Java</a> の、
+ソースコードのコメントと docstring から生成されます。
 
-TensorFlowドキュメントの前のバージョンは、
+TensorFlow ドキュメントの前のバージョンは、
 [ブランチ rX.x](https://github.com/tensorflow/docs/branches) として
-TensorFlow Docsリポジトリで手に入れることができます。
+TensorFlow Docs リポジトリで手に入れることができます。
 新しいバージョンがリリースされると、
 新しいブランチが追加されていきます。
 
-### APIドキュメントを構築する
+### API ドキュメントを構築する
 
-注意：このステップではAPI docstringを編集、
+注意：このステップでは API docstring を編集、
 もしくはプレビューする必要はありません。
-ただtensorflow.orgで利用されるHTMLを生成するだけです。
+ただ tensorflow.org で利用される HTML を生成するだけです。
 
-#### Python向けリファレンス
+#### Python 向けリファレンス
 
 `tensorflow_docs` パッケージには
 [Python API リファレンスドキュメント](https://www.tensorflow.org/api_docs/python/tf)のジェネレータが含まれます。
@@ -90,50 +88,50 @@ TensorFlow 2 リファレンスドキュメントを生成するには、
 </pre>
 
 注意：このスクリプトは
-*インストールされている* TensorFlowパッケージを利用し、
+*インストールされている* TensorFlow パッケージを利用し、
 TensorFlow 2.x 限定で動作します。
 
 
 ## 解説ドキュメント
 
-TensorFlowの[ガイド](https://www.tensorflow.org/guide)と[チュートリアル](https://www.tensorflow.org/tutorials)は、
-<a href="https://guides.github.com/features/mastering-markdown/" class="external">Markdown</a>ファイル、および対話型の<a href="https://jupyter.org/" class="external">Jupyter</a> notebooksとして執筆されています。
-Jupyter notebookは<a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a>を利用して、
+TensorFlow の[ガイド](https://www.tensorflow.org/guide)と[チュートリアル](https://www.tensorflow.org/tutorials)は、
+<a href="https://guides.github.com/features/mastering-markdown/" class="external">Markdown</a>ファイル、および対話型の <a href="https://jupyter.org/" class="external">Jupyter</a> notebooks として執筆されています。
+Jupyter notebook は <a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a> を利用して、
 ブラウザ上で動作します。
-[tensorflow.org](https://www.tensorflow.org)の解説ドキュメントは<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>の
+[tensorflow.org](https://www.tensorflow.org) の解説ドキュメントは <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> の
 `master` ブランチから構築されています。
-古いバージョンはGitHubのリリースブランチ `rX.x` で入手できます。
+古いバージョンは GitHub のリリースブランチ `rX.x` で入手できます。
 
 ### 簡単な変更を行う
 
-直接的にMarkdownファイルに更新をかける最も簡単な方法は、
-GitHubの<a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">WEBベースのファイルエディタ</a>を使うことです。
-[tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en)リポジトリをブラウジングしマークダウンを探しましょう。
-このリポジトリは<a href="https://www.tensorflow.org">tensorflow.org</a>のURL構造によく似ています。
+直接的に Markdown ファイルに更新をかける最も簡単な方法は、
+GitHub の <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">WEB ベースのファイルエディタ</a>を使うことです。
+[tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en) リポジトリをブラウジングしマークダウンを探しましょう。
+このリポジトリは <a href="https://www.tensorflow.org">tensorflow.org</a> の URL 構造によく似ています。
 ファイルビューの上方右側にある鉛筆のアイコン<svg version="1.1" width="14" height="16" viewBox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path></svg>をクリックしてください。
 するとファイルエディタが開きます。
 編集して新しいプルリクエストを送ってください。
 
-### ローカルGitリポジトリを準備する
+### ローカル Git リポジトリを準備する
 
 複数ファイルの編集やより複雑な更新の場合は、
-ローカルのGitワークフローを使用して
+ローカルの Git ワークフローを使用して
 プルリクエストを作成することをお勧めします。
 
-注意：<a href="https://git-scm.com/" class="external">Git</a>はオープンソースのバージョン管理システム (VCS)で、
+注意：<a href="https://git-scm.com/" class="external">Git</a> はオープンソースのバージョン管理システム (VCS)で、
 ソースコードの変更を追跡するために使われます。
-<a href="https://github.com" class="external">GitHub</a>はGitと相性の良いツールを提供するオンラインサービスです。
-<a href="https://help.github.com" class="external">GitHubのヘルプ</a>を見て、GitHubのアカウントを設定して利用を開始しましょう。
+<a href="https://github.com" class="external">GitHub</a> は Git と相性の良いツールを提供するオンラインサービスです。
+<a href="https://help.github.com" class="external">GitHub のヘルプ</a>を見て、 GitHub のアカウントを設定して利用を開始しましょう。
 
-Gitでの次の手順は、
+Git での次の手順は、
 ローカルプロジェクトを初めてセットアップするときにのみ必要です。
 
-#### tensorflow/docsリポジトリをフォークする
+#### tensorflow/docs リポジトリをフォークする
 
-<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> GitHubページで、
+<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> GitHub ページで、
 *フォーク*ボタン <svg class="octicon octicon-repo-forked" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg> をクリックすることで
-あなたのGitHubアカウント上にリポジトリのコピーを作成します。
-フォークさせたら、あなたには上流のTensorFlowリポジトリに追随して、
+あなたの GitHub アカウント上にリポジトリのコピーを作成します。
+フォークさせたら、あなたには上流の TensorFlow リポジトリに追随して、
 リポジトリコピーを最新に保つ責任があります。
 
 #### リポジトリをクローンする
@@ -150,7 +148,7 @@ Gitでの次の手順は、
 
 #### 上流リポジトリを設定して、最新の状態に保つ（オプション）
 
-ローカルリポジトリと `tensorflow/docs`の同期を維持するには、
+ローカルリポジトリと `tensorflow/docs` の同期を維持するには、
 *上流*リモートリポジトリを追加して最新の変更をダウンロードします。
 
 注意：貢献し始める*前*に、確実にローカルリポジトリを更新しておいてください。
@@ -176,14 +174,14 @@ origin    git@github.com:<var>username</var>/docs.git (push)
 <code class="devsite-terminal">git checkout master</code>
 <code class="devsite-terminal">git pull <var>upstream</var> master</code>
 
-<code class="devsite-terminal">git push</code>  # 変更した内容をGitHubアカウント(デフォルトはoriginブランチ)にプッシュします。
+<code class="devsite-terminal">git push</code>  # 変更した内容を GitHub アカウント(デフォルトは origin ブランチ)にプッシュします。
 </pre>
 
-### GitHubワークフロー
+### GitHub ワークフロー
 
 #### 1. 新しいブランチを作成する
 
-`tensorflow/docs`からリポジトリを更新した後、
+`tensorflow/docs` からリポジトリを更新した後、
 次のようにローカル *master* ブランチから新しいブランチを作成します。
 
 <pre class="prettyprint lang-bsh">
@@ -197,7 +195,7 @@ origin    git@github.com:<var>username</var>/docs.git (push)
 #### 2. 変更を加える
 
 お好みのエディタでファイルを編集します。
-このとき[TensorFlowのドキュメントスタイルガイド](./docs_style.md)に従うようにしてください。
+このとき [TensorFlow のドキュメントスタイルガイド](./docs_style.md)に従うようにしてください。
 
 以下のように、変更をコミットします。
 
@@ -215,17 +213,17 @@ origin    git@github.com:<var>username</var>/docs.git (push)
 #### 3. プルリクエストを作成する
 
 以下のようにして、ローカルブランチを
-GitHub上のリモートリポジトリ(github.com/<var>username</var>/docs)にアップロードします。
+GitHub 上のリモートリポジトリ(github.com/<var>username</var>/docs)にアップロードします。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git push</code>
 </pre>
 
-pushが完了したら、上流リポジトリへ発行されたプルリクエストのURLが、
+push が完了したら、上流リポジトリへ発行されたプルリクエストの URL が、
 自動的に表示されるかもしれません。
-もし表示されなかった場合は、<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> リポジトリ—
-またはフォークしたリポジトリ—にアクセスすると、
-GitHubがプルリクエストを発行するように促してくるでしょう。
+もし表示されなかった場合は、
+<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> リポジトリ—またはフォークしたリポジトリ—にアクセスすると、
+GitHub がプルリクエストを発行するように促してくるでしょう。
 
 #### 4. レビューする
 
@@ -233,52 +231,52 @@ GitHubがプルリクエストを発行するように促してくるでしょ�
 あなたのプルリクエストをレビューしてくれます。
 議論に参加し、必要な変更を加えてください。
 プルリクエストが承認されると、
-上流のTensorFlowのドキュメントリポジトリにマージされます。
+上流の TensorFlow のドキュメントリポジトリにマージされます。
 
 上手くいきましたね！
-あなたの変更がTensorFlowドキュメントに受け入れられました。
+あなたの変更が TensorFlow ドキュメントに受け入れられました。
 
-GitHubリポジトリから[tensorflow.org](https://www.tensorflow.org)を更新するには、
+GitHubリポジトリから [tensorflow.org](https://www.tensorflow.org) を更新するには、
 別の公開手順があります。
 通常、変更はまとめて処理され、サイトは定期的に更新されます。
 
 ## 対話的な Jupyter notebook
 
-GitHubの <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">WEBベースのファイルエディタ</a>で
-Jupyter notebookのJSONファイルが編集可能とはいえ、
-誤りを含むJSONのせいでファイルがおかしくなることもあるので、
+GitHub の <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">WEBベースのファイルエディタ</a>で
+Jupyter notebook の JSON ファイルが編集可能とはいえ、
+誤りを含む JSON のせいでファイルがおかしくなることもあるので、
 お勧めしません。
 プルリクエストを発行する前に
-Jupyter notebookのテストを確実に行うようにしてください。
+Jupyter notebook のテストを確実に行うようにしてください。
 
-<a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a>は、Jupyter notebookドキュメントの編集、
+<a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a> は、Jupyter notebook ドキュメントの編集、
 そして実行を簡単にしてくれる、
-ホストされたJupyter notebook環境です。
-GitHub上のJupyter notebookは、
-ColabのURLを渡してあげることで、
-Google Colab上に読み込まれています。
-例えば、GitHubのここ
+ホストされた Jupyter notebook 環境です。
+GitHub 上の Jupyter notebook は、
+Colab の URL を渡してあげることで、
+Google Colab 上に読み込まれています。
+例えば、GitHub のここ
 <a href="https://&#103;ithub.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">https://&#103;ithub.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a><br/>
-に置いてあるJupyter notebookは、Google Colabの以下のURLで読み込まれています。
+に置いてある Jupyter notebook は、 Google Colab の以下の URL で読み込まれています。
 <a href="https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a>
 <!-- github.com path intentionally formatted to hide from import script. -->
 
-GitHub上のJupyter notebookをブラウジングする際の
-このようなURLの置き換えを行ってくれる、
-<a href="https://chrome.google.com/webstore/detail/open-in-colab/iogfkhleblhcpcekbiedikdehleodpjo" class="external">Open in Colab</a>という、Chromeの拡張機能があります。
-画面上部のボタンがTensorFlowドキュメントの
+GitHub 上の Jupyter notebook をブラウジングする際の
+このような URL の置き換えを行ってくれる、
+<a href="https://chrome.google.com/webstore/detail/open-in-colab/iogfkhleblhcpcekbiedikdehleodpjo" class="external">Open in Colab</a> という、 Chrome の拡張機能があります。
+画面上部のボタンが TensorFlow ドキュメントの
 `master` ブランチにいつでもリンクしているので、
 あなたのフォークリポジトリで Jupyter notebook を開くときにとても役立ちます。
 
 ### Jupyter notebook フォーマット
 
-新しいJupyter notebookを作るためには、
+新しい Jupyter notebook を作るためには、
 <a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow Jupyter notebook テンプレート</a>をコピーして編集してください。
 
 Jupyter notebook は JSON ファイルとしてディスクに保存されており、
-様々なJupyter notebookは異なるJSONフォーマットで実装されています。
+様々な Jupyter notebook は異なる JSON フォーマットで実装されています。
 こうなると差分比較ツールやバージョン管理システムは上手く役に立たないので、
-TensorFlowドキュメントは標準的なJupyter notebookのフォーマットを強制しています。
+TensorFlow ドキュメントは標準的な Jupyter notebook のフォーマットを強制しています。
 
 [nbfmt.py](https://github.com/tensorflow/docs/blob/master/tools/nbfmt.py) というスクリプトはこのフォーマットを適用します。
 
@@ -290,12 +288,12 @@ python nbfmt.py path/to/notebooks/example.ipynb
 python nbfmt.py path/to/notebooks/
 ```
 
-同じような理由で、Jupyter notebookの成果物は
+同じような理由で、 Jupyter notebook の成果物は
 提案の前段階で問題ないものにしておくべきです
 (数少ない特別な場合を除いて)。
-これを強制するために、Google Colab では
+これを強制するために、 Google Colab では
 "private outputs" オプションを利用しています。
-他のJupyter notebook の実装はこのオプションを認識しません。
+他の Jupyter notebook の実装はこのオプションを認識しません。
 以下のように、 `nbfmt` に `--preserve_outputs=False` オプションを渡すことで、
 成果物の問題を除去することができます。
 
@@ -303,36 +301,36 @@ python nbfmt.py path/to/notebooks/
 python nbfmt.py --preserve_outputs=False path/to/notebooks/example.ipynb
 ```
 
-### Google Colabでの編集作業
+### Google Colab での編集作業
 
-Google Colab環境では、セルをダブルクリックして
+Google Colab 環境では、セルをダブルクリックして
 テキストとコードブロックを編集します。
-テキストセルはMarkdownを使用しており、
-[TensorFlowのドキュメントスタイルガイド](./docs_style.md)に従う必要があります。
+テキストセルは Markdown を使用しており、
+[TensorFlow のドキュメントスタイルガイド](./docs_style.md)に従う必要があります。
 
-*ファイル > .pynbをダウンロード*(訳注：2020/06/06時点では *.ipynbをダウンロード* に変更されている)を使って
-ColabからJupyter notebookファイルをダウンロードしてください。
-このファイルをあなたの[ローカルGitリポジトリ](##set_up_a_local_git_repo)にコミットして、
+*ファイル > .pynb をダウンロード*(訳注：2020/06/06時点では *.ipynb をダウンロード* に変更されている)を使って
+Colab から Jupyter notebook ファイルをダウンロードしてください。
+このファイルをあなたの[ローカル Git リポジトリ](##set_up_a_local_git_repo)にコミットして、
 プルリクエストを送りましょう。
 
-Jupyter notebookを新規に作成するときは
+Jupyter notebook を新規に作成するときは
 <a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow notebook テンプレート</a>をコピーして編集してください。
 
-### Google Colab-GitHub間のワークフロー
+### Google Colab - GitHub 間のワークフロー
 
-Jupyter notebookファイルをダウンロードして
-ローカルGitワークフローを回す代わりに、
-Google ColabからあなたがフォークしたGitHubリポジトリを
+Jupyter notebook ファイルをダウンロードして
+ローカル Git ワークフローを回す代わりに、
+Google Colab からあなたがフォークした GitHub リポジトリを
 直接編集して更新することができます。
 以下のような手順です。
 
 1. フォークした <var>username</var>/docs リポジトリで、
-   <a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">新しいブランチを作る</a>ためにGitHub Web UIを使います。
+   <a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">新しいブランチを作る</a>ために GitHub Web UI を使います。
 2. 編集したい Jupyter notebook ファイルに移動します。
-3. Jupyter notebook を Google Colabで開きます。
-   このときURLの変換には Chrome の拡張機能の
+3. Jupyter notebook を Google Colab で開きます。
+   このとき URL の変換には Chrome の拡張機能の
    *Open in Colab* を使います。
-4. Google Colabで Jupyter notebook を編集します。
+4. Google Colab で Jupyter notebook を編集します。
 5. *ファイル > GitHub にコピーを保存*で
    変更をリポジトリにコミットします。
    保存ダイアログは適切なリポジトリの
@@ -343,24 +341,27 @@ Google ColabからあなたがフォークしたGitHubリポジトリを
    GitHub上でプルリクエストを作成するように促されるはずです。
 7. メンテナにプルリクエストをレビューしてもらいます。
 
-やりました！変更はTensorFlowドキュメントに取り込まれました。
+やりました！変更は TensorFlow ドキュメントに取り込まれました。
 
 ## コミュニティによる翻訳
 
-コミュニティによる翻訳はTensorFlowを世界中に広めるための素晴らしい方法です。
-翻訳をするためには、`en/` とディレクトリ構造が一致している[各言語のディレクトリ](https://github.com/tensorflow/docs/tree/master/site) 上のファイルを見つけるか追加します。
+コミュニティによる翻訳は TensorFlow を世界中に広めるための
+素晴らしい方法です。
+翻訳をするためには、
+`en/` とディレクトリ構造が一致している
+[各言語のディレクトリ](https://github.com/tensorflow/docs/tree/master/site) 上のファイルを見つけるか追加します。
 英語版ドキュメントは*真実の源泉*であり、
 翻訳結果はなるべくこれらのガイドと近いものにすべきです。
 とは言ったものの、翻訳は彼らが従事するコミュニティのために行われています。
 英語の専門用語、言い回し、文体、語調の他言語への翻訳が難しいときは、
 読み手にとって適切な翻訳を行ってください。
 
-注意：APIリファレンスはtensorflow.orgのために翻訳*しないこと*。
+注意：API リファレンスは tensorflow.org のために翻訳*しないこと*。
 
 翻訳を行うコントリビュータを簡単に取りまとめるための、
 各言語のドキュメンテーショングループがあります。
 あなたが執筆者であったりレビュアーであった場合、
-また単にTensorFlow.orgのコミュニティ向けコンテンツの構築に
+また単に TensorFlow.org のコミュニティ向けコンテンツの構築に
 興味のあるだけの方もぜひ参加してください。
 例えば以下のようなグループがあります。
 
@@ -374,12 +375,12 @@ Google ColabからあなたがフォークしたGitHubリポジトリを
 ### レビューの通知
 
 すべてのドキュメントの更新にはレビューが必要です。
-TensorFlow翻訳コミュニティとより効率的に協力するために、
+TensorFlow 翻訳コミュニティとより効率的に協力するために、
 言語グループ毎の活動状況を深く知るためのいくつかの方法を示します。
 
 * 上記に挙げた言語グループに参加し、
-  その言語の<code><a
-  href="https://github.com/tensorflow/docs/tree/master/site">site/<var>lang</var></a></code>ディレクトリに関係する、
+  その言語の <code><a
+  href="https://github.com/tensorflow/docs/tree/master/site">site/<var>lang</var></a></code> ディレクトリに関係する、
   *作成された*いかなるプルリクエストのメールも受け取るようにしましょう。
 * プルリクエストの際に自動でコメントでタグ付けされるように、
   `site/<lang>/REVIEWERS` ファイルに GitHub ユーザー名を追加しましょう。
@@ -388,14 +389,14 @@ TensorFlow翻訳コミュニティとより効率的に協力するために、
 
 ### 訳文中のコード部分を最新に保つ
 
-TensorFlowのようなオープンソースプロジェクトでは、
+TensorFlow のようなオープンソースプロジェクトでは、
 ドキュメントを最新に保つことは努力を要します。
 コミュニティについて話した後は、
 翻訳されたコンテンツの読者は
 少しばかり古い文章には目をつぶってくれるでしょうが、
 コードが古いとイライラしてしまうことでしょう。
 コードの同期をより簡単にするには、
-翻訳されたJupyter notebookのためのツール
+翻訳された Jupyter notebook のためのツール
 [nb-code-sync](https://github.com/tensorflow/docs/blob/master/tools/nb_code_sync.py) を使うことです。
 以下のようにして使います。
 
@@ -404,11 +405,11 @@ TensorFlowのようなオープンソースプロジェクトでは、
 </pre>
 
 このスクリプトは
-各言語のJupyter notebookのコードセルを読み取り、
+各言語の Jupyter notebook のコードセルを読み取り、
 英語版のものと見比べます。
 コメントを分離した後はコードブロックを比較して、
-もし違いがある場合はその言語のJupyter notebookを更新します。
+もし違いがある場合はその言語の Jupyter notebook を更新します。
 このツールは、
 `git add --patch site/lang/notebook.ipynb`
 を利用して、ファイルの変更箇所を選択的にコミット対象に追加する
-対話的なgitワークフローの面で特に役立ちます。
+対話的な git ワークフローの面で特に役立ちます。
