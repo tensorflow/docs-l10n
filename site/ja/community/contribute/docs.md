@@ -4,27 +4,28 @@ TensorFlow はドキュメントの貢献を歓迎します-
 あなたがドキュメントを改善してくれれば、TensorFlowライブラリそのものが改善されます。
 tensorflow.orgにあるドキュメントは以下のカテゴリに分類されます。
 
-* *API reference* —The [API reference docs](https://www.tensorflow.org/api_docs/)
-  are generated from docstrings in the
-  [TensorFlow source code](https://github.com/tensorflow/tensorflow).
-* *Narrative documentation* —These are [tutorials](https://www.tensorflow.org/tutorials),
-  [guides](https://www.tensorflow.org/guide), and other writing that's not part
-  of the TensorFlow code. This documentation is in the
-  [tensorflow/docs](https://github.com/tensorflow/docs) GitHub repository.
-* *Community translations* —These are guides and tutorials translated by the
-  community. All community translations live in the
-  [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site) repo.
 
-Some [TensorFlow projects](https://github.com/tensorflow) keep documentation
-source files near the code in a separate repository, usually in a `docs/`
-directory. See the project's `CONTRIBUTING.md` file or contact the maintainer to
-contribute.
+* *APIリファレンス* —[API リファレンスドキュメント](https://www.tensorflow.org/api_docs/)は
+  [TensorFlowソースコード](https://github.com/tensorflow/tensorflow)の docstring から生成されています。
+* *解説ドキュメント* —これは [チュートリアル](https://www.tensorflow.org/tutorials)や
+  [ガイド](https://www.tensorflow.org/guide)、その他のTensorFlowのコードの一部ではない文書です。
+  これらのドキュメントは GitHubリポジトリの
+  [tensorflow/docs](https://github.com/tensorflow/docs)にあります。
+* *コミュニティによる翻訳* —これらのガイドやチュートリアルは
+  コミュニティが翻訳したものです。
+  コミュニティによる翻訳活動はすべて
+  [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site)リポジトリで活発に行われています。
 
-To participate in the TensorFlow docs community:
+いくつかの[TensorFlow プロジェクト](https://github.com/tensorflow)は、
+ドキュメント用のソースファイルを別リポジトリのコードの近く、
+たいていは `docs/` 配下のディレクトリに置いてあります。
+ 各プロジェクトの `CONTRIBUTING.md` ファイルを参照するか、
+ メンテナに連絡を取り貢献したいという思いを伝えましょう。
 
-* Watch the [tensorflow/docs](https://github.com/tensorflow/docs) GitHub
-  repository.
-* Subscribe to [docs@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs).
+TensorFlow docsコミュニティに参加するのであれば、以下の2つを行ってください。
+
+* GitHubの[tensorflow/docs](https://github.com/tensorflow/docs)リポジトリを見てください。
+* [docs@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs)フォーラムに参加してください。
 
 ## API reference
 
