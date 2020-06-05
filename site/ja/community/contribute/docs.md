@@ -42,24 +42,26 @@ docstring は<a href="https://help.github.com/en/articles/about-writing-and-form
 深くかかわる方法を知るために、
 [TensorFlow 2 API Docs advice](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview)を参照してください。
 
-### Versions and branches
+### バージョンとブランチ
 
-The site's [API reference](https://www.tensorflow.org/api_docs/python/tf)
-version defaults to the latest stable binary—this matches the package installed
-with `pip install tensorflow`.
+サイトの[API リファレンス](https://www.tensorflow.org/api_docs/python/tf)のバージョンは、
+通常最新の安定バイナリを元に作成されています。
+これは `pip install tensorflow` でインストールされる
+パッケージのバージョンと一致しています。
 
-The default TensorFlow package is built from the stable branch `rX.x` in the
-main
-<a href="https://github.com/tensorflow/tensorflow" class="external">tensorflow/tensorflow</a>
-repo. The reference documentation is generated from code comments
-and docstrings in the source code for
-<a href="https://www.tensorflow.org/code/tensorflow/python/" class="external">Python</a>,
-<a href="https://www.tensorflow.org/code/tensorflow/cc/" class="external">C++</a>, and
-<a href="https://www.tensorflow.org/code/tensorflow/java/" class="external">Java</a>.
+デフォルトの TensorFlow パッケージは、メインリポジトリである
+<a href="https://github.com/tensorflow/tensorflow" class="external">tensorflow/tensorflow</a>の安定版ブランチ `rX.x` から構築されます。
+リファレンスドキュメントは、
+<a href="https://www.tensorflow.org/code/tensorflow/python/" class="external">Python</a>、
+<a href="https://www.tensorflow.org/code/tensorflow/cc/" class="external">C++</a>、
+そして<a href="https://www.tensorflow.org/code/tensorflow/java/" class="external">Java</a>の、
+ソースコードのコメントとdocstringから生成されます。
 
-Previous versions of the TensorFlow documentation are available as
-[rX.x branches](https://github.com/tensorflow/docs/branches) in the TensorFlow
-Docs repository. These branches are added when a new version is released.
+TensorFlowドキュメントの前のバージョンは、
+[ブランチ rX.x](https://github.com/tensorflow/docs/branches) として
+TensorFlow Docsリポジトリで手に入れることができます。
+新しいバージョンがリリースされると、
+新しいブランチが追加されていきます。
 
 ### Build API docs
 
