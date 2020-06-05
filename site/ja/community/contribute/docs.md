@@ -94,21 +94,15 @@ TensorFlow 2 リファレンスドキュメントを生成するには、
 TensorFlow 2.x 限定で動作します。
 
 
-## Narrative documentation
+## 解説ドキュメント
 
-TensorFlow [guides](https://www.tensorflow.org/guide) and
-[tutorials](https://www.tensorflow.org/tutorials) are written as
-<a href="https://guides.github.com/features/mastering-markdown/" class="external">Markdown</a>
-files and interactive
-<a href="https://jupyter.org/" class="external">Jupyter</a> notebooks. Notebooks
-can be run in your browser using
-<a href="https://colab.research.google.com/notebooks/welcome.ipynb"
-   class="external">Google Colaboratory</a>.
-The narrative docs on [tensorflow.org](https://www.tensorflow.org) are built
-from the
-<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>
-`master` branch. Older versions are available in GitHub on the `rX.x` release
-branches.
+TensorFlowの[ガイド](https://www.tensorflow.org/guide)と[チュートリアル](https://www.tensorflow.org/tutorials)は、
+<a href="https://guides.github.com/features/mastering-markdown/" class="external">Markdown</a>ファイル、および対話型の<a href="https://jupyter.org/" class="external">Jupyter</a> notebooksとして執筆されています。
+Jupyter notebookは<a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a>を利用して、
+ブラウザ上で動作します。
+[tensorflow.org](https://www.tensorflow.org)の解説ドキュメントは<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>の
+`master` ブランチから構築されています。
+古いバージョンはGitHubのリリースブランチ `rX.x` で入手できます。
 
 ### Simple changes
 
