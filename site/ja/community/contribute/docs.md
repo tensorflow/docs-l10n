@@ -69,18 +69,18 @@ TensorFlow Docsリポジトリで手に入れることができます。
 もしくはプレビューする必要はありません。
 ただtensorflow.orgで利用されるHTMLを生成するだけです。
 
-#### Python reference
+#### Python向けリファレンス
 
-The `tensorflow_docs` package includes the generator for the
-[Python API reference docs](https://www.tensorflow.org/api_docs/python/tf). To
-install:
+`tensorflow_docs` パッケージには
+[Python API リファレンスドキュメント](https://www.tensorflow.org/api_docs/python/tf)のジェネレータが含まれます。
+インストールするには以下のようにします。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">pip install git+https://github.com/tensorflow/docs</code>
 </pre>
 
-To generate the TensorFlow 2 reference docs, use the
-`tensorflow/tools/docs/generate2.py` script:
+TensorFlow 2 リファレンスドキュメントを生成するには、
+`tensorflow/tools/docs/generate2.py` スクリプトを以下のようにして利用します。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git clone https://github.com/tensorflow/tensorflow tensorflow</code>
@@ -89,8 +89,9 @@ To generate the TensorFlow 2 reference docs, use the
 <code class="devsite-terminal">python generate2.py --output_dir=/tmp/out</code>
 </pre>
 
-Note: This script uses the *installed* TensorFlow package to generate docs and
-only works for TensorFlow 2.x.
+注意：このスクリプトは
+*インストールされている* TensorFlowパッケージを利用し、
+TensorFlow 2.x 限定で動作します。
 
 
 ## Narrative documentation
