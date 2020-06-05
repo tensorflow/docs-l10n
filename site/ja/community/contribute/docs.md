@@ -242,28 +242,33 @@ GitHubリポジトリから[tensorflow.org](https://www.tensorflow.org)を更新
 別の公開手順があります。
 通常、変更はまとめて処理され、サイトは定期的に更新されます。
 
-## Interactive notebooks
+## 対話的な Jupyter notebook
 
-While it's possible to edit the notebook JSON file with GitHub's
-<a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">web-based file editor</a>,
-it's not recommended since malformed JSON can corrupt the file. Make sure to
-test the notebook before submitting a pull request.
+GitHubの <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">WEBベースのファイルエディタ</a>で
+Jupyter notebookのJSONファイルが編集可能とはいえ、
+誤りを含むJSONのせいでファイルがおかしくなることもあるので、
+お勧めしません。
+プルリクエストを発行する前に
+Jupyter notebookのテストを確実に行うようにしてください。
 
-<a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a>
-is a hosted notebook environment that makes it easy to edit—and run—notebook
-documentation. Notebooks in GitHub are loaded in Google Colab by passing the
-path to the Colab URL, for example,
-the notebook located in GitHub here:
+<a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a>は、Jupyter notebookドキュメントの編集、
+そして実行を簡単にしてくれる、
+ホストされたJupyter notebook環境です。
+GitHub上のJupyter notebookは、
+ColabのURLを渡してあげることで、
+Google Colab上に読み込まれています。
+例えば、GitHubのここ
 <a href="https://&#103;ithub.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">https://&#103;ithub.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a><br/>
-can be loaded into Google Colab at this URL:
+に置いてあるJupyter notebookは、Google Colabの以下のURLで読み込まれています。
 <a href="https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a>
 <!-- github.com path intentionally formatted to hide from import script. -->
 
-There is an
-<a href="https://chrome.google.com/webstore/detail/open-in-colab/iogfkhleblhcpcekbiedikdehleodpjo" class="external">Open in Colab</a>
-Chrome extension that performs this URL substitution when browsing a notebook on
-GitHub. This is useful when opening a notebook in your repo fork, because the
-top buttons always link to the TensorFlow Docs `master` branch.
+GitHub上のJupyter notebookをブラウジングする際の
+このようなURLの置き換えを行ってくれる、
+<a href="https://chrome.google.com/webstore/detail/open-in-colab/iogfkhleblhcpcekbiedikdehleodpjo" class="external">Open in Colab</a>という、Chromeの拡張機能があります。
+画面上部のボタンがTensorFlowドキュメントの
+`master` ブランチにいつでもリンクしているので、
+あなたのフォークリポジトリで Jupyter notebook を開くときにとても役立ちます。
 
 ### Notebook formatting
 
