@@ -48,7 +48,9 @@ translate the following sections:
 
 ## Japanese translation guide
 
-Some technical words in English do not have a natural translation. Do *not*
+### Translation of technical words
+
+Some technical words in English do not have a natural translation. Do _not_
 translate the following words, use katakana otherwise:
 
 *   (mini-) batch
@@ -80,3 +82,7 @@ translate the following words, use katakana otherwise:
 *   decode
 *   tuple
 *   protocol buffer
+
+### Additional Do not translate
+
+We left the `community` directory untranslated because it is a a contribution guideline for the global communities.
