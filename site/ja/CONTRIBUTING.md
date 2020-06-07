@@ -6,7 +6,7 @@
 
 ```
 site
-├── en
+├── en-snapshot
 │   ├── ...
 │   ├── ...
 │   └── ...
@@ -18,8 +18,8 @@ site
 └── ...
 ```
 
-`site/en` 以下にあるけれど `site/ja` 以下に無いものは、まだ翻訳が済んでいないドキュメントです。
-それらを翻訳して `site/en` 以下と同じ構成で `site/ja` 以下に配置して pull request を送ってください。
+`site/en-snapshot` 以下にあるけれど `site/ja` 以下に無いものは、まだ翻訳が済んでいないドキュメントです。
+それらを翻訳して `site/en-snapshot` 以下と同じ構成で `site/ja` 以下に配置して pull request を送ってください。
 
 ## Pull request title
 
