@@ -47,6 +47,14 @@ Pull request のタイトルは "JA: ..." とすることを推奨していま�
 ### どのドキュメントを翻訳すれば良いですか?
 
 [TF 1.0 の翻訳はアップデートの終了が宣言された](https://groups.google.com/a/tensorflow.org/forum/#!msg/docs/vO0gQnEXcSM/YK_ybv7tBQAJ)ので TF 2.0 のドキュメントを翻訳してください。
+また、次のディレクトリやファイルは対象外です。
+
+* `/install/` ディレクトリ
+* `/api_docs/` and `/versions/` ディレクトリを含む API リファレンス
+* ナビゲーション: `_book.yaml` と `_toc.yaml` というファイル
+* 概要を記したページ、とくに `_index.yaml`, `index.html`, `index.md`
+* `/community/` ディレクトリ (日本語話者向けのルールはこの `CONTRIBUTING.md` に記します) 
+
 それ以外は特に制限はありません。
 
 ### 誰がどのドキュメントを翻訳中か確認できますか?
