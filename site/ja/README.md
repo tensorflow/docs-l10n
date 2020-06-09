@@ -85,4 +85,4 @@ translate the following words, use katakana otherwise:
 
 ### Additional Do not translate
 
-We left the `community` directory untranslated because it is a a contribution guideline for the global communities.
+We left the `community` directory untranslated because it is a contribution guideline for the global communities.
