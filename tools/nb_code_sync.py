@@ -123,7 +123,7 @@ class Notebook(object):
 
   def _set_cell_source(self, cell_id, source):
     for i, cell in enumerate(self.data["cells"]):
-      if cell["metadata"]["id"] == cell_id:
+      if cell["metadata"].get("id") == cell_id:
         self.data["cells"][i]["source"] = source
         break
     else:
