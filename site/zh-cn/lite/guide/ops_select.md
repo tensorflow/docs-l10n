@@ -166,7 +166,7 @@ Built-in ops + TF ops | 23.0 MB         | 8.0 MB
 下面列出了一些已知的局限性：
 
 *   目前还不支持控制流运算符。
-*   目前还不支持 TensorFlow 运算符的 [`post_training_quantization`](https://www.tensorflow.org/performance/post_training_quantization) 标记，所以不会对任何 TensorFlow 运算符进行权重量化。如果模型中既包含 TensorFlow Lite 运算符又包含 TensorFlow 运算符，那么 TensorFlow Lite 内置的运算符的权重是可以被量化的。
+*   目前还不支持 TensorFlow 运算符的 [`post_training_quantization`](https://tensorflow.google.cn/performance/post_training_quantization) 标记，所以不会对任何 TensorFlow 运算符进行权重量化。如果模型中既包含 TensorFlow Lite 运算符又包含 TensorFlow 运算符，那么 TensorFlow Lite 内置的运算符的权重是可以被量化的。
 *   目前还不支持像 HashTableV2 这种需要显式用资源进行初始化的运算符。
 *   某些 TensorFlow 操作可能不支持 TensorFlow 库中整套常规可用输入/输出操作。
 
