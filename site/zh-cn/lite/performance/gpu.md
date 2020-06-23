@@ -1,6 +1,6 @@
 # TensorFlow Lite GPU 代理
 
-[TensorFlow Lite](https://www.tensorflow.org/lite) 支持多种硬件加速器。本文档描述了如何在 Android 和 iOS 设备上使用 TensorFlow Lite 的代理 APIs 来预览实验性的 GPU 后端功能。
+[TensorFlow Lite](https://tensorflow.google.cn/lite) 支持多种硬件加速器。本文档描述了如何在 Android 和 iOS 设备上使用 TensorFlow Lite 的代理 APIs 来预览实验性的 GPU 后端功能。
 
 GPU 是设计用来完成高吞吐量的大规模并行工作的。因此，它们非常适合用在包含大量运算符的神经网络上，一些输入张量可以容易的被划分为更小的工作负载且可以同时执行，通常这会导致更低的延迟。在最佳情况下，用 GPU 在实时应用程序上做推理运算已经可以运行的足够快，而这在以前是不可能的。
 
@@ -52,7 +52,7 @@ dependencies {
 
 #### 第一步. 获取演示应用程序的源码并确保它已被编译
 
-遵照我们的 iOS 演示应用程序[教程](https://www.tensorflow.org/lite/demo_ios)。这会告诉你没有修改的iOS相机应用程序是如何在我们的手机上运行的。
+遵照我们的 iOS 演示应用程序[教程](https://tensorflow.google.cn/lite/demo_ios)。这会告诉你没有修改的iOS相机应用程序是如何在我们的手机上运行的。
 
 #### 第二部. 修改 Podfile 文件来使用 TensorFlow Lite GPU CocoaPod
 

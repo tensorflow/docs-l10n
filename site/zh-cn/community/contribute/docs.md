@@ -2,11 +2,11 @@
 
 TensorFlow欢迎文档贡献 - 如果您改进了文档，等同于改进TensorFlow库本身。 tensorflow.org上的文档分为以下几类：
 
-* *API 文档* —[API 文档](https://www.tensorflow.org/api_docs/)
+* *API 文档* —[API 文档](https://tensorflow.google.cn/api_docs/)
   经由
   [TensorFlow 源代码](https://github.com/tensorflow/tensorflow)中的文档字符串(docstring)生成.
-* *叙述文档* —这部分内容为[教程](https://www.tensorflow.org/tutorials)、
-  [指南](https://www.tensorflow.org/guide)以及其他不属于TensorFlow代码的内容. 这部分代码位于GitHub的
+* *叙述文档* —这部分内容为[教程](https://tensorflow.google.cn/tutorials)、
+  [指南](https://tensorflow.google.cn/guide)以及其他不属于TensorFlow代码的内容. 这部分代码位于GitHub的
   [tensorflow/docs](https://github.com/tensorflow/docs) 仓库(repository)中.
 * *社区翻译* —这些是经由社区翻译的指南和教程。他们都被存放在
   [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site) 仓库(repository)中.
@@ -21,7 +21,7 @@ TensorFlow欢迎文档贡献 - 如果您改进了文档，等同于改进TensorF
 ## API 文档
 
 如果想更新API文档，找到其对应的
-[源文件](https://www.tensorflow.org/code/tensorflow/python/)
+[源文件](https://tensorflow.google.cn/code/tensorflow/python/)
 并编辑相应的
 <a href="https://www.python.org/dev/peps/pep-0257/" class="external">文档字符串(docstring)</a>.
 tensorflow.org上的许多API 引用的页面都包含了指向源文件定义位置的链接。 文档字符串支持
@@ -35,13 +35,13 @@ tensorflow.org上的许多API 引用的页面都包含了指向源文件定义�
 
 ### 版本(Versions) 和 分支(Branches)
 
-本网站的 [API 文档](https://www.tensorflow.org/api_docs/python/tf)
+本网站的 [API 文档](https://tensorflow.google.cn/api_docs/python/tf)
 版本默认为最新的稳定二进制文件—即与通过`pip install tensorflow`安装的版本所匹配.
 
 默认的TensorFlow 包是根据<a href="https://github.com/tensorflow/tensorflow" class="external">tensorflow/tensorflow</a>仓库(repository)中的稳定分支`rX.x`所构建的。文档则是由
-<a href="https://www.tensorflow.org/code/tensorflow/python/" class="external">Python</a>、
-<a href="https://www.tensorflow.org/code/tensorflow/cc/" class="external">C++</a>与
-<a href="https://www.tensorflow.org/code/tensorflow/java/" class="external">Java</a>代码中的注释与文档字符串所生成。
+<a href="https://tensorflow.google.cn/code/tensorflow/python/" class="external">Python</a>、
+<a href="https://tensorflow.google.cn/code/tensorflow/cc/" class="external">C++</a>与
+<a href="https://tensorflow.google.cn/code/tensorflow/java/" class="external">Java</a>代码中的注释与文档字符串所生成。
 
 以前版本的TensorFlow文档在TensorFlow Docs 仓库(repository)中以[rX.x 分支](https://github.com/tensorflow/docs/branches) 的形式提供。在发布新版本时会添加这些分支。
 
@@ -51,7 +51,7 @@ tensorflow.org上的许多API 引用的页面都包含了指向源文件定义�
 
 #### Python 文档
 
-`tensorflow_docs`包中包含[Python API 文档](https://www.tensorflow.org/api_docs/python/tf)的生成器。
+`tensorflow_docs`包中包含[Python API 文档](https://tensorflow.google.cn/api_docs/python/tf)的生成器。
 安装方式：
 
 <pre class="prettyprint lang-bsh">
@@ -72,15 +72,15 @@ tensorflow.org上的许多API 引用的页面都包含了指向源文件定义�
 
 ## 叙述文档
 
-TensorFlow [指南](https://www.tensorflow.org/guide) 和
-[教程](https://www.tensorflow.org/tutorials) 是通过
+TensorFlow [指南](https://tensorflow.google.cn/guide) 和
+[教程](https://tensorflow.google.cn/tutorials) 是通过
 <a href="https://guides.github.com/features/mastering-markdown/" class="external">Markdown</a>
 文件和交互式的
 <a href="https://jupyter.org/" class="external">Jupyter</a> 笔记本所编写。 可以使用
 <a href="https://colab.research.google.com/notebooks/welcome.ipynb"
    class="external">Google Colaboratory</a>
 在您的浏览器中运行笔记本。
-[tensorflow.org](https://www.tensorflow.org)中的叙述文档是根据
+[tensorflow.org](https://tensorflow.google.cn)中的叙述文档是根据
 <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>的
 `master` 分支构建. 旧版本存储在在GitHub 仓库(repository)下的`rX.x`发行版分支中。
 
@@ -90,7 +90,7 @@ TensorFlow [指南](https://www.tensorflow.org/guide) 和
 <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">Web文件编辑器</a>。
 浏览[tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en)
 仓库(repository) 以寻找与
-<a href="https://www.tensorflow.org">tensorflow.org</a>
+<a href="https://tensorflow.google.cn">tensorflow.org</a>
 中的URL 结构相对应的Markdown或notebook文件。 在文件视图的右上角，单击铅笔图标
 <svg version="1.1" width="14" height="16" viewBox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path></svg>
 来打开文件编辑器。 编辑文件，然后提交新的拉取请求(pull request)。
@@ -203,7 +203,7 @@ origin    git@github.com:<var>username</var>/docs.git (push)
 成功后：您的更改会被TensorFlow文档接受。
 
 从GitHub仓库更新
-[tensorflow.org](https://www.tensorflow.org)是一个单独的步骤。通常情况下，多个更改将被一并处理，并定期上传至网站中。
+[tensorflow.org](https://tensorflow.google.cn)是一个单独的步骤。通常情况下，多个更改将被一并处理，并定期上传至网站中。
 
 ## 交互式笔记本（notebook）
 
