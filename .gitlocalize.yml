@@ -3,6 +3,7 @@ settings:
     - "true"
   mention_contributors_in_pull_requests:
     - "true"
+  postprocess_jupyter_notebooks_with_nbfmt_py: true
 
 synchronize:
   paths:
