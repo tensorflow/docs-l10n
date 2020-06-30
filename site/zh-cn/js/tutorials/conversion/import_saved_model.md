@@ -1,10 +1,10 @@
 # 在TensorFlow.js中引入TensorFlow GraphDef模型
 
 TensorFlow GraphDef模型（一般是通过Python API创建的）可以保存成以下几种格式：
-1. TensorFlow [SavedModel](https://www.tensorflow.org/programmers_guide/saved_model#overview_of_saving_and_restoring_models)
-2. [Frozen Model](https://www.tensorflow.org/mobile/prepare_models#how_do_you_get_a_model_you_can_use_on_mobile)
+1. TensorFlow [SavedModel](https://tensorflow.google.cn/programmers_guide/saved_model#overview_of_saving_and_restoring_models)
+2. [Frozen Model](https://tensorflow.google.cn/mobile/prepare_models#how_do_you_get_a_model_you_can_use_on_mobile)
 3. [Session Bundle](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/session_bundle/README.md)
-4. [Tensorflow Hub module](https://www.tensorflow.org/hub/)
+4. [Tensorflow Hub module](https://tensorflow.google.cn/hub/)
 
 以上所有格式都可以被[TensorFlow.js converter](https://github.com/tensorflow/tfjs-converter)转换成TensorFlow.js可读取的模型格式，并用于推算（inference）。
 
@@ -64,7 +64,7 @@ tensorflowjs_converter \
 |`--input_format`     | 要转换的模型的格式。SavedModel 为 tf_saved_model, frozen model 为 tf_frozen_model, session bundle 为 tf_session_bundle, TensorFlow Hub module 为 tf_hub，Keras HDF5 为 keras。 |
 |`--output_node_names`| 输出节点的名字，每个名字用逗号分离。|
 |`--saved_model_tags` | 只对SavedModel转换用的选项：输入需要加载的MetaGraphDef相对应的tag，多个tag请用逗号分隔。默认为 `serve`。|
-|`--signature_name`   | 只对TensorFlow Hub module转换用的选项：对应要加载的签名，默认为`default`。请参考 https://www.tensorflow.org/hub/common_signatures/.|
+|`--signature_name`   | 只对TensorFlow Hub module转换用的选项：对应要加载的签名，默认为`default`。请参考 https://tensorflow.google.cn/hub/common_signatures/.|
 
 用以下命令查看帮助信息：
 

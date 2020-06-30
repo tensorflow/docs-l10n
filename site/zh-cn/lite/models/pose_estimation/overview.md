@@ -101,7 +101,7 @@ GitHub 代码仓库</a>.
 
 ## 示例输出
 
-<img alt="Animation showing pose estimation" src="https://www.tensorflow.org/images/lite/models/pose_estimation.gif"/>
+<img alt="Animation showing pose estimation" src="https://tensorflow.google.cn/images/lite/models/pose_estimation.gif"/>
 
 ## 模块性能
 

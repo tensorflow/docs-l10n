@@ -9,7 +9,7 @@ TensorFlow.js 配备了各种预训练模型，这些模型可以在浏览器中
 
 TensorFlow.js 转换器可以转换以下几种格式的模型:
 
-**SavedModel**: 保存 TensorFlow 模型的默认格式。SavedModel 的格式细节请 [查阅此处](https://www.tensorflow.org/guide/saved_model)。
+**SavedModel**: 保存 TensorFlow 模型的默认格式。SavedModel 的格式细节请 [查阅此处](https://tensorflow.google.cn/guide/saved_model)。
 
 **Keras model**: Keras 模型通常保存为 HDF5 文件。有关保存 Keras 模型的更多信息，请访问 [此处](https://keras.io/getting-started/faq/#savingloading-whole-models-architecture-weights-optimizer-state)。
 

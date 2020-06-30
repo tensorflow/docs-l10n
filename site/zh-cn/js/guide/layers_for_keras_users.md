@@ -163,7 +163,7 @@ const flatten = tf.layers.flatten();
 flatten.apply(tf.ones([2, 3, 4])).print();
 ```
 
-这个特性让人联想到（Python）TensorFlow 的[Eager Execution](https://www.tensorflow.org/guide/eager)。它在模型开发期间提供了更大的交互性和可调试性，并且为组成动态神经网络打开了大门。
+这个特性让人联想到（Python）TensorFlow 的[Eager Execution](https://tensorflow.google.cn/guide/eager)。它在模型开发期间提供了更大的交互性和可调试性，并且为组成动态神经网络打开了大门。
 
 ## Optimizers（优化器）在 train.* 下，而不是 optimizers.*
 
@@ -194,7 +194,7 @@ const model = await tf.loadLayersModel('https://foo.bar/model.json');
 
 ## 用`fitDataset()`训练模型使用`tf.data.Dataset`对象
 
-在python版本的tensorflow keras中， 一个模型可以使用[Dataset](https://www.tensorflow.org/guide/datasets)对象进行训练。模型的`fit()`方法直接接受这样的对象。一个Tensorflow.js方法可以使用相当于Dataset对象的Javascript进行训练，详见[TensorFlow.js的tf.data API文档](https://js.tensorflow.org/api/latest/#Data)。然而，与python不同， 基于Dataset的训练是通过一个专门的方法来完成的这个方法称之为[fitDataset](https://js.tensorflow.org/api/0.15.1/#tf.Model.fitDataset)。[fit()](https://js.tensorflow.org/api/latest/#tf.Model.fitDataset) 只针对基于Tensor(张量)的模型训练。
+在python版本的tensorflow keras中， 一个模型可以使用[Dataset](https://tensorflow.google.cn/guide/datasets)对象进行训练。模型的`fit()`方法直接接受这样的对象。一个Tensorflow.js方法可以使用相当于Dataset对象的Javascript进行训练，详见[TensorFlow.js的tf.data API文档](https://js.tensorflow.org/api/latest/#Data)。然而，与python不同， 基于Dataset的训练是通过一个专门的方法来完成的这个方法称之为[fitDataset](https://js.tensorflow.org/api/0.15.1/#tf.Model.fitDataset)。[fit()](https://js.tensorflow.org/api/latest/#tf.Model.fitDataset) 只针对基于Tensor(张量)的模型训练。
 
 ## Layer(层)对象和Model(模型)对象的内存管理
 
