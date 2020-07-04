@@ -22,7 +22,7 @@
 
 ## Estimator
 
-API Estimator остался в TensorFlow 2.x, однако нововведения его не коснулись. Код, написанный для TensorFlow 1.x или 2.x с использованием Estimator, будет работать на TFX как и прежде.
+Estimator API остался в TensorFlow 2.x, однако нововведения его не коснулись. Код, написанный для TensorFlow 1.x или 2.x с использованием Estimator, будет работать на TFX как и прежде.
 
 Вот законченный пример использования Estimator в чистом виде на TFX: [Taxi (Estimator)](https://github.com/tensorflow/tfx/blob/r0.21/tfx/examples/chicago_taxi_pipeline/taxi_utils.py).
 
@@ -61,11 +61,11 @@ def trainer_fn(trainer_fn_args, schema):
   }
 ```
 
-Изменяется только пользовательский модуль компонента Trainer; остальная часть конвейера остается прежней. Вот законченный пример использования Keras с функцией model_to_estimator на TFX: [Iris (model_to_estimator)](https://github.com/tensorflow/tfx/blob/r0.21/tfx/examples/iris/iris_utils.py).
+В компоненте Trainer изменился только пользовательский модуль; остальная часть конвейера осталась прежней. Вот законченный пример использования Keras с функцией model_to_estimator на TFX: [Iris (model_to_estimator)](https://github.com/tensorflow/tfx/blob/r0.21/tfx/examples/iris/iris_utils.py).
 
 ## Нативный Keras (Keras без функции `model_to_estimator`)
 
-Примечание. Хотя полная поддержка всех возможностей Keras еще не реализована, в большинстве случаев Keras на TFX работает корректно. Разреженные признаки при работе с FeatureColumns пока что не поддерживаются.
+Примечание. Хотя полная поддержка всех возможностей Keras еще не реализована, в большинстве случаев Keras на TFX работает корректно. Разреженные признаки (Sparse Features) при работе с FeatureColumns пока что не поддерживаются.
 
 ### Примеры и учебник в Colab
 
