@@ -36,7 +36,7 @@ outputs = session.run(f(placeholder), feed_dict={placeholder: input})
 outputs = f(input)
 ```
 
-Com o poder de interpor livremente código do Python e do TensorFlow, os usuários podem tirar proveito da expressividade do Python. Mas o TensorFlow portátil executa em contextos que não possuem um interpretador de Python, como em mobile, C++ e JavaScript. Para ajudar os usuários a evitar ter que reescrever seu código ao adicionar `@tf.function`, o [AutoGraph](function.ipynb) converte um subconjunto de constructs do Python em equivalentes do TensorFlow:
+Com o poder de interpor livremente código do Python e do TensorFlow, os usuários podem tirar proveito da expressividade do Python. Mas o TensorFlow portátil executa em contextos que não possuem um interpretador de Python, como em mobile, C++ e JavaScript. Para ajudar os usuários a evitar ter que reescrever seu código ao adicionar `@tf.function`, o [AutoGraph](function.ipynb) converte um subconjunto de estruturas de código Python em equivalentes do TensorFlow:
 
 - `for`/`while` -> `tf.while_loop` (há suporte para `break` e `continue`)
 - `if` -> `tf.cond`
@@ -121,7 +121,7 @@ tf.saved_model.save(trunk, output_path)
 
 ### Combine tf.data.Datasets e @tf.function
 
-Ao iterar sobre dados de treinamento que cabem na memória, fique à vontade para usar a interação comum do Python. Caso contrário, `tf.data.Dataset` é a melhor maneira de transmitir dados de treinamento a partir do disco. Conjuntos de dados são [iteráveis (e não iteradores)](https://docs.python.org/3/glossary.html#term-iterable) e funcionam como qualquer outro iterável do Python no modo Eager. Você pode utilizar totalmente os recursos assíncronos de pré-busca/streaming dos conjuntos de dados ao encapsular seu código em `tf.function()`, que substitui uma iteração do Python pelas operações equivalentes de grafo usando o AutoGraph.
+Ao iterar sobre dados de treinamento que cabem na memória, fique à vontade para usar os recursos básicos de iteração do Python. Caso contrário, `tf.data.Dataset` é a melhor maneira de transmitir dados de treinamento a partir do disco. Conjuntos de dados são [iteráveis (e não iteradores)](https://docs.python.org/3/glossary.html#term-iterable) e funcionam como qualquer outro iterável do Python no modo Eager. Você pode utilizar totalmente os recursos assíncronos de pré-busca/streaming dos conjuntos de dados ao encapsular seu código em `tf.function()`, que substitui uma iteração do Python pelas operações equivalentes de grafo usando o AutoGraph.
 
 ```python
 @tf.function
