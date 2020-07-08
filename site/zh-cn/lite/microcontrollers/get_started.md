@@ -43,7 +43,7 @@ World 示例</a>
 ### 微语音示例
 
 此示例使用一个简单的
-[音频识别模型](https://www.tensorflow.org/tutorials/sequences/audio_recognition)
+[音频识别模型](https://tensorflow.google.cn/tutorials/sequences/audio_recognition)
 来识别语音中的关键字。示例代码从设备的麦克风中捕获音频。模型通过对该音频进行实时分类来确定是否说过“是”或“否一词。
 
 <a class="button button-primary" href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/micro_speech">微语音示例</a>

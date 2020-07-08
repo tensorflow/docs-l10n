@@ -28,7 +28,7 @@ TensorFlow Lite 团队提供了一系列预训练模型（pre-trained models）�
 
 #### 来自其他来源的模型
 
-您还可以在许多其他地方得到预训练的 TensorFlow 模型，包括 [TensorFlow Hub](https://www.tensorflow.org/hub)。在大多数情况下，这些模型不会以 TensorFlow Lite 格式提供，您必须在使用前[转换（convert）](#2_convert_the_model_format)这些模型。
+您还可以在许多其他地方得到预训练的 TensorFlow 模型，包括 [TensorFlow Hub](https://tensorflow.google.cn/hub)。在大多数情况下，这些模型不会以 TensorFlow Lite 格式提供，您必须在使用前[转换（convert）](#2_convert_the_model_format)这些模型。
 
 ### 重新训练模型（迁移学习）
 
@@ -74,16 +74,16 @@ open("converted_model.tflite", "wb").write(tflite_model)
 
 当转换[ TensorFlow 1.x 模型](../convert/python_api.md)时，这些输入类型有：
 
-*	[SavedModel 文件夹](https://www.tensorflow.org/guide/saved_model)
+*	[SavedModel 文件夹](https://tensorflow.google.cn/guide/saved_model)
 *	Frozen GraphDef (通过[ freeze_graph.py ](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/tools/freeze_graph.py)生成的模型)
 *	[Keras](https://keras.io) HDF5 模型
 *	从 `tf.Session` 得到的模型
 
 当转换[ TensorFlow 2.x 模型](../convert/python_api.md)时，这些输入类型有：
 
-*   [SavedModel 文件夹](https://www.tensorflow.org/guide/saved_model)
-*   [`tf.keras` 模型](https://www.tensorflow.org/guide/keras/overview)
-*   [具体函数（Concrete functions）](https://tensorflow.org/guide/concrete_function)
+*   [SavedModel 文件夹](https://tensorflow.google.cn/guide/saved_model)
+*   [`tf.keras` 模型](https://tensorflow.google.cn/guide/keras/overview)
+*   [具体函数（Concrete functions）](https://tensorflow.google.cn/guide/concrete_function)
 
 转换器可以配置为应用各种优化措施（optimizations），这些优化措施可以提高性能，减少文件大小。这将在第四节[优化您的模型](#4_optimize_your_model_optional)中介绍。
 
@@ -137,7 +137,7 @@ try {
 
 ### Android 和 iOS
 
-TensorFlow Lite 解释器很容易在两个主要移动平台上使用。要入门，请浏览[ Android 快速入门](android.md)和[ iOS 快速入门](iOS.md)指南。对这两个平台，都有[示例应用程序](https://www.tensorflow.org/lite/examples)。
+TensorFlow Lite 解释器很容易在两个主要移动平台上使用。要入门，请浏览[ Android 快速入门](android.md)和[ iOS 快速入门](iOS.md)指南。对这两个平台，都有[示例应用程序](https://tensorflow.google.cn/lite/examples)。
 
 要获得所需的库（libraries），Android 开发人员应该使用[ TensorFlow Lite AAR](android.md#use_the_tensorflow_lite_aar_from_jcenter)。iOS 开发人员应该使用[ CocoaPods for Swift or Objective-C](ios.md#add_tensorflow_lite_to_your_swift_or_objective-c_project)。
 
@@ -197,4 +197,4 @@ open("converted_model.tflite", "wb").write(tflite_quantized_model)
 
 *	如果您是移动开发人员，请访问[ Android 快速入门](android.md)或[ iOS 快速入门](ios.md)。
 *	探索我们的[预训练模型](../models)。
-*	尝试我们的[示例应用程序](https://www.tensorflow.org/lite/examples)。
+*	尝试我们的[示例应用程序](https://tensorflow.google.cn/lite/examples)。

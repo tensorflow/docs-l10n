@@ -12,7 +12,7 @@
     `tflite_convert` 作为 Python 包的一部分被安装。简便起见，以下所有示例使用 `tflite_convert` 指代。
     *   示例: `tflite_convert --output_file=...`
 *   `bazel`: 为了使用最新版本的 TensorFlow Lite Converter，你可以使用
-    [pip](https://www.tensorflow.org/install/pip) 或[克隆 TensorFlow 仓库](https://www.tensorflow.org/install/source) 来安装并使用 nightly 版本的的 `bazel`。
+    [pip](https://tensorflow.google.cn/install/pip) 或[克隆 TensorFlow 仓库](https://tensorflow.google.cn/install/source) 来安装并使用 nightly 版本的的 `bazel`。
     *   示例: `bazel run //tensorflow/lite/python:tflite_convert ----output_file=...`
 
 ### 在低于 1.9 版本的 TensorFlow 中转换模型  <a name="pre_tensorflow_1.9"></a>
@@ -54,13 +54,13 @@ tflite_convert \
   --saved_model_dir=/tmp/saved_model
 ```
 
-[SavedModel](https://www.tensorflow.org/guide/saved_model#using_savedmodel_with_estimators)
+[SavedModel](https://tensorflow.google.cn/guide/saved_model#using_savedmodel_with_estimators)
 与冻结后的图比较，它需要更少的参数，这是由于保存在 SavedModel 中的附加数据所致。
- `--input_arrays`和 `--output_arrays` 所需要的值是 [MetaGraphDef](https://www.tensorflow.org/saved_model#apis_to_build_and_load_a_savedmodel) 中 [SignatureDefs](../../serving/signature_defs.md) 里的一个聚合起来的，按照字母顺序排列的输入输出列表，它由`—saved_model_tag_set`指定。
+ `--input_arrays`和 `--output_arrays` 所需要的值是 [MetaGraphDef](https://tensorflow.google.cn/saved_model#apis_to_build_and_load_a_savedmodel) 中 [SignatureDefs](../../serving/signature_defs.md) 里的一个聚合起来的，按照字母顺序排列的输入输出列表，它由`—saved_model_tag_set`指定。
  和 GraphDef 一样, `input_shapes` 的值也在可能时被自动定义。
 
 现阶段暂不提供对不带 SignatureDef 的 MetaGraphDefs 或是
-使用[`assets/`directory](https://www.tensorflow.org/guide/saved_model#structure_of_a_savedmodel_directory) 的 MetaGraphDefs 的支持。
+使用[`assets/`directory](https://tensorflow.google.cn/guide/saved_model#structure_of_a_savedmodel_directory) 的 MetaGraphDefs 的支持。
 
 ### 转换 tf.Keras 模型 <a name="keras"></a>
 

@@ -26,7 +26,7 @@ tflite_convert \
 
 ### 从源代码构建
 
-想要运行最新版本的 TensorFlow Lite 模型转换器可以通过 [pip](https://www.tensorflow.org/install/pip) 安装 TensorFlow 2.0 测试版或者[克隆 TensorFlow 代码库](https://www.tensorflow.org/install/source)然后使用 `bazel` 从源代码编译 TensorFlow 。下面是一个从源代码编译 TensorFlow 的例子。
+想要运行最新版本的 TensorFlow Lite 模型转换器可以通过 [pip](https://tensorflow.google.cn/install/pip) 安装 TensorFlow 2.0 测试版或者[克隆 TensorFlow 代码库](https://tensorflow.google.cn/install/source)然后使用 `bazel` 从源代码编译 TensorFlow 。下面是一个从源代码编译 TensorFlow 的例子。
 
 ```
 bazel run //third_party/tensorflow/lite/python:tflite_convert -- \

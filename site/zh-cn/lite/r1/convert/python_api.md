@@ -214,9 +214,9 @@ interpreter.allocate_tensors()
 ### 源码构建 <a name="latest_package"></a>
 
 为了运行最新版本的 TensorFlow Lite Converter Python API，您可以选择一种方式安装 nightly 版本：
-[pip](https://www.tensorflow.org/install/pip)（推荐），
-[Docker](https://www.tensorflow.org/install/docker)，
-[从源代码构建 pip 包](https://www.tensorflow.org/install/source)。
+[pip](https://tensorflow.google.cn/install/pip)（推荐），
+[Docker](https://tensorflow.google.cn/install/docker)，
+[从源代码构建 pip 包](https://tensorflow.google.cn/install/source)。
 
 ### 转换 TensorFlow 1.12 及之前版本的模型 <a name="pre_tensorflow_1.12"></a>
 

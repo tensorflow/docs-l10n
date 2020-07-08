@@ -70,12 +70,11 @@ writing their `model_fn` in terms of  `hub.KerasLayer` among other
 
 ### Behind the scenes: SavedModel downloading and caching
 
-Using a SavedModel from TensorFlow Hub
-(or other HTTPS servers that implement its [hosting](hosting.md) protocol)
-downloads it to the local filesystem if not already present.
-The environment variable `TFHUB_CACHE_DIR` can be set to override the default
-temporary location for caching the downloaded and uncompressed SavedModels.
-
+Using a SavedModel from TensorFlow Hub (or other HTTPS servers that implement
+its [hosting](hosting.md) protocol) downloads and decompresses it to the local
+filesystem if not already present. The environment variable `TFHUB_CACHE_DIR`
+can be set to override the default temporary location for caching the downloaded
+and uncompressed SavedModels. For details, see [Caching](caching.md).
 
 ### Using a SavedModel in low-level TensorFlow
 
@@ -169,7 +168,7 @@ piece_to_share.save(..., include_optimizer=False)
 
 [TensorFlow Models](https://github.com/tensorflow/models) on GitHub
 uses the former approach for BERT (see
-[nlp/bert_models.py](https://github.com/tensorflow/models/blob/master/official/nlp/bert_models.py)
+[nlp/bert/bert_models.py](https://github.com/tensorflow/models/blob/master/official/nlp/bert/bert_models.py)
 and [nlp/bert/export_tfhub.py](https://github.com/tensorflow/models/blob/master/official/nlp/bert/export_tfhub.py),
 note the split between `core_model` and `pretrain_model`)
 and the the latter approach for ResNet (see

@@ -1,6 +1,6 @@
 #  TensorFlow Lite 在GPU环境下
 
-[TensorFlow Lite](https://www.tensorflow.org/mobile/tflite/)支持多种硬件加速器。本文档介绍如何在安卓系统（要求OpenGL ES 3.1或更高版本）和iOS（要求iOS 8 或更高版本）的GPU后端（backend）使用TensorFLow Lite delegate APIs。
+[TensorFlow Lite](https://tensorflow.google.cn/mobile/tflite/)支持多种硬件加速器。本文档介绍如何在安卓系统（要求OpenGL ES 3.1或更高版本）和iOS（要求iOS 8 或更高版本）的GPU后端（backend）使用TensorFLow Lite delegate APIs。
 
 ## 使用GPU加速的优势
 

@@ -42,6 +42,9 @@ ones:
     use .dev names to help testing code. **FIX:** Identify and reconfigure the
     software that intercepts name resolution in the ".dev" domain.
 
+*   Failures to write to the cache directory `/tmp/tfhub_modules` (or similar):
+    see [Caching](caching.md) for what that is and how to change its location.
+
 If the above errors and fixes do not work, one can try to manually download a
 module by simulating the protocol of attaching `?tf-hub-format=compressed` to
 the URL to download a tar compressed file that has to be manually decompressed
@@ -123,7 +126,7 @@ session.run(init_op)
 result = session.run(embedded_text, feed_dict={text_input: ["Hello world"]})
 ```
 
-## Cannot change a model's dype (e.g., float32 to bfloat16)
+## Cannot change a model's dtype (e.g., float32 to bfloat16)
 
 TensorFlow's SavedModels (shared on TF Hub or otherwise) contain
 operations that work on fixed data types (often, float32 for the weights
