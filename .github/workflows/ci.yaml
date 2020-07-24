@@ -6,6 +6,14 @@ on:
     - "!site/en-snapshot/**"
 
 jobs:
+  labeler:
+    # Label rules in .github/labeler.yml
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/labeler@v2
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
   notebook_format:
     name: Notebook format
     runs-on: ubuntu-latest
