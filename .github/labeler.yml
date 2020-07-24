@@ -1,0 +1,27 @@
+# Language labels
+ar:
+- site/ar/**
+el:
+- site/el/**
+es-419:
+- site/es-419/**
+fr:
+- site/fr/**
+id:
+- site/id/**
+it:
+- site/it/**
+ja:
+- site/ja/**
+ko:
+- site/ko/**
+pt-br:
+- site/pt-br/**
+ru:
+- site/ru/**
+tr:
+- site/tr/**
+vi:
+- site/vi/**
+zh-cn:
+- site/zh-cn/**
