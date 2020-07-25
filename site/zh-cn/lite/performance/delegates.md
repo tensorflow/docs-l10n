@@ -17,9 +17,9 @@ TensorFlow Lite 代理是一种将部分或全部的图形运算委托予另一�
 TensorFlow Lite 为具备 GPU 的设备提供了一个 GPU 代理用以模型计算的加速。
 
 有关 GPU 代理的概述，请查看
-[TensorFlow Lite 在 GPU 环境下](https://www.tensorflow.org/lite/performance/gpu_advanced) 。
+[TensorFlow Lite 在 GPU 环境下](https://tensorflow.google.cn/lite/performance/gpu_advanced) 。
 有关在 Android 和 iOS 设备上使用 GPU 代理的步骤教程，请查看
-[TensorFlow Lite GPU 代理](https://www.tensorflow.org/lite/performance/gpu) 。
+[TensorFlow Lite GPU 代理](https://tensorflow.google.cn/lite/performance/gpu) 。
 
 ## 代理是如何运作的？
 

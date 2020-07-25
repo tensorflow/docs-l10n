@@ -105,7 +105,7 @@ npm install @tensorflow/tfjs-node
 ```
 
 **选项2:**
-（仅限Linux）如果您的系统具有[支持CUDA](https://www.tensorflow.org/install/install_linux#NVIDIARequirements)的NVIDIA®GPU，请使用GPU包以获得更高的性能。
+（仅限Linux）如果您的系统具有[支持CUDA](https://tensorflow.google.cn/install/install_linux#NVIDIARequirements)的NVIDIA®GPU，请使用GPU包以获得更高的性能。
 
 ```
 yarn add @tensorflow/tfjs-node-gpu

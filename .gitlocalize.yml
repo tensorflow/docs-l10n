@@ -1,0 +1,28 @@
+settings:
+  advise_cla_signing: 
+    - "true"
+  mention_contributors_in_pull_requests:
+    - "true"
+  postprocess_jupyter_notebooks_with_nbfmt_py: true
+
+synchronize:
+  paths:
+  - source: .
+    exclude:
+    - "**/BUILD"
+    - "**/Corefile"
+    - "**/index.*"
+    - "**/README.*"
+    - "**/*.dcm"
+    - "**/*.gitignore"
+    - "**/*.gwsq"
+    - "**/*.py"
+    - "**/*.sql"
+    - "**/*.swift"
+    - "**/*.yaml"
+    - "**/*.yml"
+    - "**/_*.ipynb"
+    - "**/api_docs/*"
+    - "site/en-snapshot/install/*"
+    - "site/en-snapshot/r1/*"
+    - "site/en-snapshot/datasets/catalog/*"

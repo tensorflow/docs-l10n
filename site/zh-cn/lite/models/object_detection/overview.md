@@ -13,7 +13,7 @@
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/ios"> iOS 
 示例</a>
 
-如果您使用的不是 Android 或 iOS 平台，或者您对于 <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite APIs</a> 较为熟悉, 您可以下载我们的初始对象检测模块以及对应的标签。
+如果您使用的不是 Android 或 iOS 平台，或者您对于 <a href="https://tensorflow.google.cn/api_docs/python/tf/lite">TensorFlow Lite APIs</a> 较为熟悉, 您可以下载我们的初始对象检测模块以及对应的标签。
 
 <a class="button button-primary" href="http://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip">下载初始模块和标签</a>
 

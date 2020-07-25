@@ -3,7 +3,7 @@
 これらのドキュメントは私たちTensorFlowコミュニティが翻訳したものです。コミュニティによる
 翻訳は**ベストエフォート**であるため、この翻訳が正確であることや[英語の公式ドキュメント](https://www.tensorflow.org/?hl=en)の
 最新の状態を反映したものであることを保証することはできません。
-この翻訳の品質を向上させるためのご意見をお持ちの方は、GitHubリポジトリ[tensorflow/docs](https://github.com/tensorflow/docs)にプルリクエストをお送りください。
+この翻訳の品質を向上させるためのご意見をお持ちの方は、GitHub リポジトリ[tensorflow/docs-l10n](https://github.com/tensorflow/docs-l10n)にプルリクエストをお送りください。
 
 翻訳やレビューに参加して頂ける方は以下のコミュニティにご連絡ください:
 
@@ -48,7 +48,9 @@ translate the following sections:
 
 ## Japanese translation guide
 
-Some technical words in English do not have a natural translation. Do *not*
+### Translation of technical words
+
+Some technical words in English do not have a natural translation. Do _not_
 translate the following words, use katakana otherwise:
 
 *   (mini-) batch
@@ -80,3 +82,7 @@ translate the following words, use katakana otherwise:
 *   decode
 *   tuple
 *   protocol buffer
+
+### Additional Do not translate
+
+We left the `community` directory untranslated because it is a contribution guideline for the global communities.

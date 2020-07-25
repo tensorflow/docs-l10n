@@ -6,19 +6,19 @@
 图像分类示例</a>
 
 有关源代码的说明，您还应该阅读
-[TensorFlow Lite Android 图像分类](https://www.tensorflow.org/lite/models/image_classification/android).
+[TensorFlow Lite Android 图像分类](https://tensorflow.google.cn/lite/models/image_classification/android).
 
 该示例应用程序使用
-[图像分类](https://www.tensorflow.org/lite/models/image_classification/overview)
+[图像分类](https://tensorflow.google.cn/lite/models/image_classification/overview)
 来连续地对设备的后置摄像头所看到的内容进行分类。
 该应用程序可以运行在真实设备或者模拟器上。
 
 使用 TensorFlow Lite Java API 来执行推理。该演示应用程序实时地对图像帧进行分类，显示最可能的分类结果。它允许用户选择浮点或
-[量化](https://www.tensorflow.org/lite/performance/post_training_quantization)
+[量化](https://tensorflow.google.cn/lite/performance/post_training_quantization)
 模型，选择线程数，并决定运行在CPU，GPU上，亦或是通过
 [NNAPI](https://developer.android.com/ndk/guides/neuralnetworks)运行。
 
-注意: 这些[示例](https://www.tensorflow.org/lite/examples)提供了其他的在多种用例中演示使用TensorFlow Lite的应用程序。 
+注意: 这些[示例](https://tensorflow.google.cn/lite/examples)提供了其他的在多种用例中演示使用TensorFlow Lite的应用程序。 
 
 ## 在Android Studio中构建
 
@@ -67,8 +67,8 @@ android {
 ### 在本地构建TensorFlow Lite
 
 在某些情况下，您可能希望使用一个本地构建的TensorFlow Lite. 比如说，您可能正在构建一个自定义的包含了
-[从TensorFlow中选择的操作](https://www.tensorflow.org/lite/guide/ops_select)的二进制文件。
+[从TensorFlow中选择的操作](https://tensorflow.google.cn/lite/guide/ops_select)的二进制文件。
 
 在这种情况下，请参照
-[自定义 AAR 构建说明](https://www.tensorflow.org/lite/guide/ops_select#android_aar)
+[自定义 AAR 构建说明](https://tensorflow.google.cn/lite/guide/ops_select#android_aar)
 来创建你自己的AAR并将其包含在您的APP中.
