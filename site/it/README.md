@@ -25,6 +25,8 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   API reference(s)
 *   best practice(s)
 *   batch(es)
+*   bazel macro(s)
+*   bazel test(ing)
 *   blog(s)
 *   browser
 *   build(s)
@@ -57,11 +59,15 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   maintainer(s)
 *   merge(s)
 *   multicore
+*   multithread
+*   mutex
 *   namespace(s)
 *   notebook(s)
 *   open source
 *   pattern(s)
 *   pixel(s)
+*   postsubmit(s)
+*   presubmit(s)
 *   plug-in(s)
 *   previewer(s)
 *   pull (request)
@@ -73,9 +79,14 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   slash
 *   social media(s)
 *   tablet(s)
+*   tag(s)
 *   test(s)
+*   testing
+*   thread(s)
+*   timeout
 *   training weight(s)
 *   tutorials(s)
+*   underfit(ting)
 *   unit test/ing(s)
 *   upload
 *   white paper(s)
