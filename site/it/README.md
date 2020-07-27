@@ -64,6 +64,7 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   namespace(s)
 *   notebook(s)
 *   open source
+*   overfit/ting
 *   pattern(s)
 *   pixel(s)
 *   postsubmit(s)
@@ -73,7 +74,7 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   pull (request)
 *   push
 *   release(s)
-*   repository
+*   repository(ies)
 *   script(s)
 *   skill(s)
 *   slash
@@ -82,6 +83,7 @@ Alcune parole fanno parte di un vocabolario tecnico inglese e pertanto non hanno
 *   test(s)
 *   training weight(s)
 *   tutorials(s)
+*   underfit/ting
 *   unit test/ing(s)
 *   upload
 *   white paper(s)
