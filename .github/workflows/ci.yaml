@@ -1,3 +1,5 @@
+# Pass/fail checks for continuous integration testing. No additional repo
+# permissions are required.
 name: CI
 on:
   pull_request:
@@ -6,15 +8,7 @@ on:
     - "!site/en-snapshot/**"
 
 jobs:
-  labeler:
-    # Label rules in .github/labeler.yml
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/labeler@v2
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-
-  notebook_format:
+  nbfmt:
     name: Notebook format
     runs-on: ubuntu-latest
     steps:
@@ -27,15 +21,16 @@ jobs:
     - name: Check notebook formatting
       run: |
         # Only check notebooks modified in this pull request.
-        notebooks="$(git diff --name-only master | grep '\.ipynb$' || true)"
-        if [[ -n "$notebooks" ]]; then
-          echo "Check formatting with nbfmt:"
-          python3 -m tensorflow_docs.tools.nbfmt --test $notebooks
-        else
+        readarray -t changed_notebooks < <(git diff --name-only master | grep '\.ipynb$' || true)
+        if [[ ${#changed_notebooks[@]} == 0 ]]; then
           echo "No notebooks modified in this pull request."
+          exit 0
+        else
+          echo "Check formatting with nbfmt:"
+          python3 -m tensorflow_docs.tools.nbfmt --test "${changed_notebooks[@]}"
         fi
 
-  notebook_lint:
+  nblint:
     name: Notebook lint
     runs-on: ubuntu-latest
     steps:
@@ -47,13 +42,14 @@ jobs:
       run: python3 -m pip install -U git+https://github.com/tensorflow/docs
     - name: Lint notebooks
       run: |
-        # Only check notebooks modified in this pull request.
-        notebooks="$(git diff --name-only master | grep '\.ipynb$' | grep -v 'en-snapshot' || true)"
-        if [[ -n "$notebooks" ]]; then
+        # Only check notebooks modified in this pull request. (Ignore en-snapshot)
+        readarray -t changed_notebooks < <(git diff --name-only master | grep '\.ipynb$' | grep -v 'en-snapshot' || true)
+        if [[ ${#changed_notebooks[@]} == 0 ]]; then
+          echo "No notebooks modified in this pull request."
+          exit 0
+        else
           echo "Lint check with nblint:"
           python3 -m tensorflow_docs.tools.nblint \
             --styles=tensorflow,tensorflow_docs_l10n \
-            --arg=repo:tensorflow/docs-l10n $notebooks
-        else
-          echo "No notebooks modified in this pull request."
+            --arg=repo:tensorflow/docs-l10n "${changed_notebooks[@]}"
         fi
