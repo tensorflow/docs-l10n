@@ -6,12 +6,18 @@
 
 # TensorFlow I/O
 
-TensorFlow I/O is a collection of file systems and file formats that are not
-available in TensorFlow's built-in support.
+TensorFlow I/O is an extension package to Tensorflow, which encompasses io support for 
+a collection of file systems and file formats that are not available in TensorFlow's built-in support.
+Integrations with many systems and cloud vendors include (but not limited to):
 
-TensorFlow I/O has integrations with many systems and cloud vendors such as
-Prometheus, Apache Kafka, Apache Ignite, Google Cloud PubSub, AWS Kinesis,
-Microsoft Azure Storage, Alibaba Cloud OSS etc.
+- Prometheus
+- Apache Kafka
+- Apache Ignite
+- Google Cloud BigQuery
+- Google Cloud PubSub
+- AWS Kinesis
+- Microsoft Azure Storage
+- Alibaba Cloud OSS etc.
 
 ## Community
 
