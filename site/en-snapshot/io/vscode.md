@@ -1,23 +1,19 @@
 # Configuring Visual Studio Code
 
-Visual Studio is a free code editor, which runs on the macOS, Linux, and Windows operating systems.
-
-It has nice tooling for Python and C++ development, visual debugger, git integration, and many more
-useful features. It is a great editor to use for TensorFlow IO development, but it takes some effort
-to configure it properly. VSCode configuration is very flexible, it allows compiling project using
-bazel, and running code under Python and C++ debuggers. This manual is for Linux, other OSes
-might have specifics, but approach should be similar.
-
+Visual Studio Code (VSCode) is a free code editor, which runs on the macOS, Linux, and Windows operating systems. It has elegent tooling support which supports Python & C++ development, visual debugging, integration with git and many more interesting features. Owing to the ease of use and extension management, it is a great editor for TensorFlow IO development. However, some effort is necessary
+to configure it properly. Since VSCode configuration is very flexible, it allows developers to 
+compile project using bazel and run the code under Python and C++ debuggers. The base tool setup might differ based on the operation systems, but the configuration approach should be similar.
 
 ## Extensions
-To install an extension click the extensions view icon (Extensions) on the Sidebar, or use the shortcut Ctrl+Shift+X.
-Then searh for keyword below.
+
+To install an extension click the extensions view icon (Extensions) on the Sidebar, or use the shortcut Ctrl+Shift+X. Then searh for keyword below.
 
 - [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) - Official C++ extension from Microsoft
 - [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) - Official Python extension from Microsoft
 - [Python Extension Pack](https://marketplace.visualstudio.com/items?itemName=donjayamanne.python-extension-pack) - another useful extension for Python development
 
 ## Compiling projects
+
 TensorFlow IO is compiled using bazel build command:
 
 ```sh
@@ -28,9 +24,9 @@ See project [README](https://github.com/tensorflow/io#ubuntu-18042004) file for 
 --compilation_mode dbg flag here indicates that produced binary should have debug symbols.
 Once you can compile project from command line, you can also configure VSCode to be able to invoke same command.
 
-Open View->Command Pallete (Ctrl+Shift+P) and start typing: "Tasks: Configure Build Task".
+Open View->Command Pallete (**Ctrl+Shift+P**) and start typing: "Tasks: Configure Build Task".
 If you are doing this for the first time, editor is going to suggest creating tasks.json file.
-Once you have it, paste following json:
+Once you have it, paste the following json:
 
 ```jsonc
 {
@@ -50,29 +46,28 @@ Once you have it, paste following json:
 }
 ```
 
-Now, you can press "Ctrl+Shift+B", and VSCode is going to use the command above to build the project.
-It uses its own terminal window, where all links are clickable. So when compilation error occurs, you can
-just click the link, and editor will open corresponding file and navigate to the line.
+Now, you can press **Ctrl+Shift+B**, and VSCode is going to use the command above to build the project.
+It uses its own terminal window, where all links are clickable. So when a compilation error occurs, you open the corresponding file and navigate to the line by just clicking on the link in the terminal window.
 
 ## Debugging projects
-Debugging Python code is trivial, follow official documentation to figure out how to configure VSCode to enable that: https://code.visualstudio.com/docs/python/debugging
-Debugging C++ code requires GDB to be installed on your system.
-If you have a bq_sample_read.py python script that is using tensorflow-io library that is normally
-executed like:
+
+Debugging Python code is trivial, follow official documentation to figure out how to configure VSCode to enable that: https://code.visualstudio.com/docs/python/debugging.
+
+However, debugging C++ code requires [GDB](https://www.gnu.org/software/gdb/) to be installed on your system. If you have a `bq_sample_read.py` python script that uses `tensorflow-io` library and is normally executed in the follow manner:
+
 ```sh
 python3 bq_sample_read.py --gcp_project_id=...
 ```
 
-In order to execute it under GDB, run following:
+You can execute it under GDB using the following:
+
 ```sh
 gdb -ex r --args python3 bq_sample_read.py --gcp_project_id=...
 ```
 
-If application crashes in C++ code, you can run ```backtrace``` in GDB console to get stacktrace.
+If the application crashes in the C++ code phase, you can run ```backtrace``` in GDB console to get the stacktrace of the error.
 
-VSCode also has GDB debugger support, it allows adding breakpoints, see values of variables and step through the code.
-To add debug configuration press the Debug View icon (Debug) on the Sidebar, or use the shortcut Ctrl+Shift+D. Here press the little down arrow next to the play button and select "Add Configuration...".
-It will create launch.json file, add following config here:
+VSCode also has GDB debugger support. It allows adding breakpoints, observe values of variables and step through the code in a step by step manner. To add debug configuration press the Debug View icon (Debug) on the Sidebar, or use the shortcut **Ctrl+Shift+D**. Here, press the little down arrow next to the play button and select "Add Configuration...". It will now create a `launch.json` file, to which, please add the following config:
 
 ```jsonc
 {
@@ -107,11 +102,12 @@ It will create launch.json file, add following config here:
 }
 ```
 
-If everything is configured correctly, you should be able to do Run -> Start Debugging (F5) or Run -> Run Without Debugging (Ctrl + F5). This will run your code under debugger:
+If everything is configured correctly, you should be able to do _Run -> Start Debugging_ (**F5**) or _Run -> Run Without Debugging_ (**Ctrl + F5**). This will run your code under debugger:
 
 ![VSCode debugger](./images/vscode_debugger.png)
 
-One other thing worth doing to simplify debugging experience is configuting GDB to skip standard C++ libraries, so you don't step into code you don't care about. In order to do this, create ```~/.gdbinit``` file with following content:
+In order to further simplify the debugging experience, you can configure GDB to skip standard C++ libraries. This allows you to ignore the code that you don't care about. To do this, create a ```~/.gdbinit``` file with the following content:
+
 ```
 skip -gfi /usr/include/c++/*/*/*
 skip -gfi /usr/include/c++/*/*
@@ -119,16 +115,16 @@ skip -gfi /usr/include/c++/*
 ```
 
 ## Formatting files
-You can always reformat C++ or Python file by Right Click -> Format Document (Ctrl + Shift + I), but VSCode uses different style conention. Luckily it is easy to change.
+
+You can always reformat C++ or Python file by _Right Click -> Format Document_ (**Ctrl + Shift + I**), but VSCode uses a different style convention. Luckily, it is easy to change.
 
 For Python formatting, see https://donjayamanne.github.io/pythonVSCodeDocs/docs/formatting/
 
-To configure C++ formatter, do following:
+For C++ formatting, do the following:
 
-- Go Preferences -> Settings
-- Search C_Cpp.clang_format_fallbackStyle
-- Modify the file:setting.json directly
-- Add following
+- Go to _Preferences -> Settings_
+- Search for "C_Cpp.clang_format_fallbackStyle"
+- Modify the `file:setting.json` file directly by adding the following content
 
 ```
 "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google}"
