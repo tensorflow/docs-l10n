@@ -1,12 +1,13 @@
 # Greet new pull requests with a welcome comment and apply labels.
 # This workflow must initiate from an authenticated bot repo collaborator.
+# Webhook events: Pull requests
 name: New pull request
 on:
   repository_dispatch:
     types: [opened, reopened]
 
 jobs:
-  comment:
+  comment-welcome:
     if: ${{ github.actor == 'tfdocsbot' }}
     runs-on: ubuntu-latest
     steps:
@@ -73,7 +74,7 @@ jobs:
           "${ISSUE_URL}/comments" \
           --data "{\"body\": $body}"
 
-  label:
+  label-lang:
     if: ${{ github.actor == 'tfdocsbot' }}
     runs-on: ubuntu-latest
     steps:
