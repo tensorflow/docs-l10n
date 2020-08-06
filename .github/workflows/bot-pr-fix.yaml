@@ -1,5 +1,6 @@
 # Automatically add commits to fix pull requests. This workflow must initiate
-# from an authenticated bot repo collaborator. Jobs check for opt-out labels.
+# from an authenticated bot repo collaborator. Check for opt-out label.
+# Webhook events: Pull requests
 name: Auto-fix pull request
 on:
   repository_dispatch:
@@ -7,7 +8,7 @@ on:
 
 jobs:
   nbfmt:
-    # Bot-only workflow and check for opt-out label.
+    # Check for opt-out label.
     if: >-
       ${{ github.actor == 'tfdocsbot' &&
           !contains(github.event.client_payload.pull_request.labels.*.name, 'nbfmt-disable') }}

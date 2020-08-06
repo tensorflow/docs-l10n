@@ -1,5 +1,5 @@
-# Pass/fail checks for continuous integration testing. No additional repo
-# permissions are required.
+# Pass/fail checks for continuous integration testing.
+# Webhook events: Pull requests
 name: CI
 on:
   pull_request:

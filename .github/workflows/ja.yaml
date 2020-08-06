@@ -1,5 +1,5 @@
+# CI tests for Japanese translations.
 name: JA
-
 on:
   push:
     paths:
@@ -9,12 +9,9 @@ on:
 
 jobs:
   proofreading-ja:
-
     runs-on: ubuntu-latest
-
     env:
       REDPEN_VERSION: "1.10.4"
-
     strategy:
       matrix:
         dir:
@@ -28,7 +25,6 @@ jobs:
           - site/ja/xla
 
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 

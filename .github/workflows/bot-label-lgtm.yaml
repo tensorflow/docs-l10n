@@ -12,7 +12,7 @@ on:
 
 jobs:
   lgtm-comment:
-    # contains() is case-insensitive.
+    # Check the comment. contains() is case-insensitive.
     if: >-
       ${{ github.actor == 'tfdocsbot' &&
           contains(github.event.client_payload.comment.body, 'LGTM') }}
@@ -30,7 +30,7 @@ jobs:
           --data '{"labels":["lgtm"]}'
 
   review-approval:
-    # Check for approval the pull request review.
+    # Check the pull request review.
     if: >-
       ${{ github.actor == 'tfdocsbot' &&
           contains(github.event.client_payload.review.state, 'approved') }}
