@@ -58,7 +58,7 @@ TensorFlow 的某些部分可能随时以向后不兼容的方式更改。包括
 
 - **其他语言**：Python 和 C 以外的其他语言中的 TensorFlow API，例如：
 
-    - [C++](../install/lang_c.md) (exposed through header files in [`tensorflow/cc`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/cc)).
+    -  [C++](https://github.com/tensorflow/docs-l10n/blob/master/site/en-snapshot/install/lang_c.md)（通过 [`tensorflow/cc`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/cc) 中的头文件公开）。
     - [Java](https://github.com/tensorflow/docs-l10n/blob/master/site/en-snapshot/install/lang_java.md)
     - [Go](https://github.com/tensorflow/docs-l10n/blob/master/site/en-snapshot/install/lang_go.md)
     - [JavaScript](https://tensorflow.google.cn/js)
