@@ -1,0 +1,43 @@
+# Nightly jobs run by a bot collaborator.
+name: Nightly jobs
+on:
+  repository_dispatch:
+    types: [nightly]
+
+jobs:
+  snapshot-source:
+    name: Update source snapshot
+    if : ${{ github.actor == 'tfdocsbot' }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+    - name: Install tensorflow-docs
+      run: python3 -m pip install -U git+https://github.com/tensorflow/docs
+    - name: Create en-snapshot and update
+      run: |
+        source ./tools/ci/utils.sh
+        # Set commit author.
+        git config --global user.name "$GITHUB_ACTOR"
+        git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        # Sync latest docs for all projects. Format and commit to new branch, if changes.
+        # Commit only contains changes to /site/en-snapshot/.
+        if ! ./tools/snapshot-source.sh -f -c; then
+          echo "[${GITHUB_WORKFLOW}] Unable to create snapshot commit, aborting." >&2
+          exit 1
+        fi
+        readarray -t changed_files < <(get_changed_files)
+        if [[ ${#changed_files[@]} == 0 ]]; then
+          echo "[${GITHUB_WORKFLOW}] No files updated in snapshot, exiting."
+          exit 0
+        fi
+        # Sync can take a while. Make sure everything is still up-to-date.
+        if ! git pull --rebase origin master; then
+          echo "[${GITHUB_WORKFLOW}] Unable to rebase master after snapshot." >&2
+          exit 1
+        fi
+        # Push current branch to master.
+        snapshot_branch=$(git branch --show-current)
+        echo "[${GITHUB_WORKFLOW}] Push changes to repo ..."
+        git push origin "$snapshot_branch:master"
