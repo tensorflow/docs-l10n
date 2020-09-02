@@ -168,7 +168,7 @@ for project in "${!LAST_COMMITS[@]}"; do
 
   # Append to both logs
   COMMIT_MSG_LIST+="- ${project}: ${commit_url}\n"
-  README_MSG_LIST+="- [${project}](${project_url}): [${short_id}](${commit_url})\n"
+  README_MSG_LIST+="- [${project}](${project_url}) @ <a href='${commit_url}'><code>${short_id}</code></a>\n"
 done
 
 # Order project list
