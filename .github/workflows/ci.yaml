@@ -41,8 +41,14 @@ jobs:
       run: python3 -m pip install -U git+https://github.com/tensorflow/docs
     - name: Lint notebooks
       run: |
-        # Only check notebooks modified in this pull request. (Ignore en-snapshot)
-        readarray -t changed_notebooks < <(git diff --name-only master | grep '\.ipynb$' | grep -v 'en-snapshot' || true)
+        # Only want notebooks modified in this pull request (and not deleted). Ignore en-snapshot.
+        declare -a changed_files
+        while read fp; do
+          if [[ -e "$fp" ]]; then
+            changed_files+=("$fp")
+          fi
+        done < <(git diff --name-only master | grep '\.ipynb$' | grep -v 'en-snapshot' || true)
+
         if [[ ${#changed_notebooks[@]} == 0 ]]; then
           echo "No notebooks modified in this pull request."
           exit 0
@@ -61,9 +67,15 @@ jobs:
       run: git fetch -u origin master:master
     - name: Check for source doc
       run: |
-        # Only check translations modified in this pull request.
-        readarray -t changed_files < <(git diff --name-only master \
-          | grep 'site/' | grep -v 'en-snapshot' | grep -v 'REVIEWERS' | grep -v 'README' || true)
+        # Only check translations modified in this pull request (and not deleted).
+        declare -a changed_files
+        while read fp; do
+          if [[ -e "$fp" ]]; then
+            changed_files+=("$fp")
+          fi
+        done < <(git diff --name-only master \
+                   | grep 'site/' | grep -v 'en-snapshot' | grep -v 'REVIEWERS' | grep -v 'README' || true)
+
         if [[ ${#changed_files[@]} == 0 ]]; then
           echo "No docs modified in this pull request."
           exit 0
