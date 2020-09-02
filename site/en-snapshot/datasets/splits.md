@@ -19,6 +19,11 @@ Instructions can be provided as either strings or `ReadInstruction`s. Strings
 are more compact and readable for simple cases, while `ReadInstruction`s provide
 more options and might be easier to use with variable slicing parameters.
 
+NOTE: Due to the shards being read in parallel, order isn't guaranteed to be
+consistent between sub-splits. In other words reading `test[0:100]` followed by
+`test[100:200]` may yield examples in a different order than reading
+`test[:200]`.
+
 ### Examples
 
 Examples using the string API:
@@ -100,6 +105,16 @@ trains_ds = tfds.load('mnist', [
     (tfds.core.ReadInstruction('train', to=k, unit='%') +
      tfds.core.ReadInstruction('train', from_=k+10, unit='%'))
     for k in range(0, 100, 10)])
+```
+
+### `tfds.even_splits`
+
+`tfds.even_splits` generates a list of non-overlapping sub-splits of same size.
+
+```python
+assert tfds.even_splits('train', n=3) == [
+    'train[0%:33%]', 'train[33%:67%]', 'train[67%:100%]',
+]
 ```
 
 ### Percentage slicing and rounding

@@ -1,34 +1,36 @@
-DO NOT EDIT
+__DO NOT EDIT__
 
-This snapshot of the English source documentation is used to submit translations
-through the [GitLocalize project](https://gitlocalize.com/repo/4592/).
+This snapshot of the English documentation is used for tensorflow.org
+translations. Do not edit these files. The source-of-truth files are located in
+the projects listed below.
 
-Note: GitLocalize does *not* support Jupyter notebooks, at this time.
+Please submit translations from the GitLocalize project: https://gitlocalize.com/tensorflow/docs-l10n
 
-Updated: Mon Aug 17 10:08:32 PDT 2020
+Updated: Wed 02 Sep 2020 03:11:54 PM PDT
 
 Projects and last commit:
 
-- [keras-team/keras-io](https://github.com/keras-team/keras-io/tree/master/tf): [8d19edaa76b7e5190f317625424ab047023408a5](https://github.com/keras-team/keras-io/commit/8d19edaa76b7e5190f317625424ab047023408a5)
-- [tensorflow/addons](https://github.com/tensorflow/addons/tree/master/docs): [e62add5e6999fb82c93d5aad8ad91bc6e913698c](https://github.com/tensorflow/addons/commit/e62add5e6999fb82c93d5aad8ad91bc6e913698c)
-- [tensorflow/agents](https://github.com/tensorflow/agents/tree/master/docs): [2d570d5d55673b8820184e08f60788b2617b5247](https://github.com/tensorflow/agents/commit/2d570d5d55673b8820184e08f60788b2617b5247)
-- [tensorflow/datasets](https://github.com/tensorflow/datasets/tree/master/docs): [5e141892753f69cba3c4de5c3e5137991c417e1b](https://github.com/tensorflow/datasets/commit/5e141892753f69cba3c4de5c3e5137991c417e1b)
-- [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en): [cb886cfdd16d66ff7f8d1430676ff395b02910e6](https://github.com/tensorflow/docs/commit/cb886cfdd16d66ff7f8d1430676ff395b02910e6)
-- [tensorflow/federated](https://github.com/tensorflow/federated/tree/master/docs): [df4d337b29ed6594c645a74bba27577b5aaf01ab](https://github.com/tensorflow/federated/commit/df4d337b29ed6594c645a74bba27577b5aaf01ab)
-- [tensorflow/graphics](https://github.com/tensorflow/graphics/tree/master/tensorflow_graphics/g3doc): [b5895d30435382626f2e5d64ba3761c353874c26](https://github.com/tensorflow/graphics/commit/b5895d30435382626f2e5d64ba3761c353874c26)
-- [tensorflow/hub](https://github.com/tensorflow/hub/tree/master/docs): [4c75a5112bb9f849da03ea00cf2a3b71094de8bd](https://github.com/tensorflow/hub/commit/4c75a5112bb9f849da03ea00cf2a3b71094de8bd)
-- [tensorflow/hub](https://github.com/tensorflow/hub/tree/master/examples/colab): [4c75a5112bb9f849da03ea00cf2a3b71094de8bd](https://github.com/tensorflow/hub/commit/4c75a5112bb9f849da03ea00cf2a3b71094de8bd)
-- [tensorflow/io](https://github.com/tensorflow/io/tree/master/docs): [6f458c3d1b52430b2e2a7ed1c867b2591abfccbc](https://github.com/tensorflow/io/commit/6f458c3d1b52430b2e2a7ed1c867b2591abfccbc)
-- [tensorflow/lattice](https://github.com/tensorflow/lattice/tree/master/docs): [e141576803fb8ce358c6c4acf154ff61949efbad](https://github.com/tensorflow/lattice/commit/e141576803fb8ce358c6c4acf154ff61949efbad)
-- [tensorflow/model-optimization](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/g3doc): [168c113c16b19514ba655aa40752e842f12879c4](https://github.com/tensorflow/model-optimization/commit/168c113c16b19514ba655aa40752e842f12879c4)
-- [tensorflow/neural-structured-learning](https://github.com/tensorflow/neural-structured-learning/tree/master/g3doc): [b67b210250f991461cffaba760d5fdfa19aa017d](https://github.com/tensorflow/neural-structured-learning/commit/b67b210250f991461cffaba760d5fdfa19aa017d)
-- [tensorflow/probability](https://github.com/tensorflow/probability/tree/master/tensorflow_probability/g3doc): [acf47d41fd00fd57f26b55b6f67529cb8505efc5](https://github.com/tensorflow/probability/commit/acf47d41fd00fd57f26b55b6f67529cb8505efc5)
-- [tensorflow/quantum](https://github.com/tensorflow/quantum/tree/master/docs): [a54f5cb44f3fa25308584adfe176253fa49f8c29](https://github.com/tensorflow/quantum/commit/a54f5cb44f3fa25308584adfe176253fa49f8c29)
-- [tensorflow/swift](https://github.com/tensorflow/swift/tree/master/docs/site): [2061dc01bf7609c040dbda0e06f22d3b2e88e33b](https://github.com/tensorflow/swift/commit/2061dc01bf7609c040dbda0e06f22d3b2e88e33b)
-- [tensorflow/tensorboard](https://github.com/tensorflow/tensorboard/tree/master/docs): [404bfa7a7f4f89a3d2f6ca9db2636e6ef475d615](https://github.com/tensorflow/tensorboard/commit/404bfa7a7f4f89a3d2f6ca9db2636e6ef475d615)
-- [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/mlir/g3doc): [cb9854b5f6b2f04aafa7e5a020d7cefc0deae855](https://github.com/tensorflow/tensorflow/commit/cb9854b5f6b2f04aafa7e5a020d7cefc0deae855)
-- [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/xla/g3doc): [cb9854b5f6b2f04aafa7e5a020d7cefc0deae855](https://github.com/tensorflow/tensorflow/commit/cb9854b5f6b2f04aafa7e5a020d7cefc0deae855)
-- [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/g3doc): [cb9854b5f6b2f04aafa7e5a020d7cefc0deae855](https://github.com/tensorflow/tensorflow/commit/cb9854b5f6b2f04aafa7e5a020d7cefc0deae855)
-- [tensorflow/tfjs-website](https://github.com/tensorflow/tfjs-website/tree/master/docs): [8a2608014e8c9828b28c4678bf018330875916cd](https://github.com/tensorflow/tfjs-website/commit/8a2608014e8c9828b28c4678bf018330875916cd)
-- [tensorflow/tfx](https://github.com/tensorflow/tfx/tree/master/docs): [077de8f4fae9c383777a5bf3051dc47bd67abd88](https://github.com/tensorflow/tfx/commit/077de8f4fae9c383777a5bf3051dc47bd67abd88)
+- [addons](https://github.com/tensorflow/addons/tree/master/docs) @ <a href='https://github.com/tensorflow/addons/commit/c177794d3b5007d750e7523dc4e1329173fa8a41'><code>c177794d</code></a>
+- [agents](https://github.com/tensorflow/agents/tree/master/docs) @ <a href='https://github.com/tensorflow/agents/commit/1dd3a4f8c9df0d06aff944584c2a8da02dd48ab5'><code>1dd3a4f8</code></a>
+- [datasets](https://github.com/tensorflow/datasets/tree/master/docs) @ <a href='https://github.com/tensorflow/datasets/commit/0b7aa29726708aa9d92e613f69fa8b69d6f9dd43'><code>0b7aa297</code></a>
+- [docs](https://github.com/tensorflow/docs/tree/master/site/en) @ <a href='https://github.com/tensorflow/docs/commit/c98d3985d1fa6f2cce6348319910404d97a25102'><code>c98d3985</code></a>
+- [federated](https://github.com/tensorflow/federated/tree/master/docs) @ <a href='https://github.com/tensorflow/federated/commit/239d4109fcd154644bc7b2a1f98328f3af9e569a'><code>239d4109</code></a>
+- [graphics](https://github.com/tensorflow/graphics/tree/master/tensorflow_graphics/g3doc) @ <a href='https://github.com/tensorflow/graphics/commit/9a005e1d4cc93f95cd83f509ee0aee0b2dca5096'><code>9a005e1d</code></a>
+- [hub](https://github.com/tensorflow/hub/tree/master/docs) @ <a href='https://github.com/tensorflow/hub/commit/21a594ffd89b021da99afaa73f0416a3b103811f'><code>21a594ff</code></a>
+- [hub_tutorials](https://github.com/tensorflow/hub/tree/master/examples/colab) @ <a href='https://github.com/tensorflow/hub/commit/21a594ffd89b021da99afaa73f0416a3b103811f'><code>21a594ff</code></a>
+- [io](https://github.com/tensorflow/io/tree/master/docs) @ <a href='https://github.com/tensorflow/io/commit/b3217ed781d187c19a71da34530a42a66d0dae7c'><code>b3217ed7</code></a>
+- [js](https://github.com/tensorflow/tfjs-website/tree/master/docs) @ <a href='https://github.com/tensorflow/tfjs-website/commit/d2551f8ae8d11385747de9f09d7513621444c65a'><code>d2551f8a</code></a>
+- [keras_guides](https://github.com/keras-team/keras-io/tree/master/tf) @ <a href='https://github.com/keras-team/keras-io/commit/d5dbf87c624c0457bea0a75fbd17e05a44f5ff57'><code>d5dbf87c</code></a>
+- [lattice](https://github.com/tensorflow/lattice/tree/master/docs) @ <a href='https://github.com/tensorflow/lattice/commit/e141576803fb8ce358c6c4acf154ff61949efbad'><code>e1415768</code></a>
+- [lite](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/545b0af2c826e83ad59d62dcab13e90b8a5b22a7'><code>545b0af2</code></a>
+- [mlir](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/mlir/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/545b0af2c826e83ad59d62dcab13e90b8a5b22a7'><code>545b0af2</code></a>
+- [model_optimization](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/g3doc) @ <a href='https://github.com/tensorflow/model-optimization/commit/d668624f4b01657cd3432c66e8a48ddcd0378758'><code>d668624f</code></a>
+- [neural_structured_learning](https://github.com/tensorflow/neural-structured-learning/tree/master/g3doc) @ <a href='https://github.com/tensorflow/neural-structured-learning/commit/844ea1a93f3b8e4b43d0b9603cc6d2f170a2712d'><code>844ea1a9</code></a>
+- [probability_examples](https://github.com/tensorflow/probability/tree/master/tensorflow_probability/examples/jupyter_notebooks) @ <a href='https://github.com/tensorflow/probability/commit/e4a2cd52fa9e8561d623527503f6ca27c59b1319'><code>e4a2cd52</code></a>
+- [probability](https://github.com/tensorflow/probability/tree/master/tensorflow_probability/g3doc) @ <a href='https://github.com/tensorflow/probability/commit/e4a2cd52fa9e8561d623527503f6ca27c59b1319'><code>e4a2cd52</code></a>
+- [quantum](https://github.com/tensorflow/quantum/tree/master/docs) @ <a href='https://github.com/tensorflow/quantum/commit/1cfd843831d83dc7987d701c9e94c0d9cbbfe663'><code>1cfd8438</code></a>
+- [swift](https://github.com/tensorflow/swift/tree/master/docs/site) @ <a href='https://github.com/tensorflow/swift/commit/c230df9b869aace1e70f8fd7f288524448bd476a'><code>c230df9b</code></a>
+- [tensorboard](https://github.com/tensorflow/tensorboard/tree/master/docs) @ <a href='https://github.com/tensorflow/tensorboard/commit/b89c16c60eff72b4e6b9bf70fe312190058a5e2e'><code>b89c16c6</code></a>
+- [tfx](https://github.com/tensorflow/tfx/tree/master/docs) @ <a href='https://github.com/tensorflow/tfx/commit/c9618ab8d8ba08ac36b4d76157329ec46cb3e637'><code>c9618ab8</code></a>
+- [xla](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/xla/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/ef30e2c8867f26cba645a0b344a46cb630f5f5b4'><code>ef30e2c8</code></a>
 
