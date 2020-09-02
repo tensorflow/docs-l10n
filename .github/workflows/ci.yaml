@@ -20,8 +20,14 @@ jobs:
       run: python3 -m pip install -U git+https://github.com/tensorflow/docs
     - name: Check notebook formatting
       run: |
-        # Only check notebooks modified in this pull request.
-        readarray -t changed_notebooks < <(git diff --name-only master | grep '\.ipynb$' || true)
+        # Only want notebooks modified in this pull request (and not deleted).
+        declare -a changed_files
+        while read fp; do
+          if [[ -e "$fp" ]]; then
+            changed_files+=("$fp")
+          fi
+        done < <(git diff --name-only master | grep '\.ipynb$' || true)
+
         if [[ ${#changed_notebooks[@]} == 0 ]]; then
           echo "No notebooks modified in this pull request."
           exit 0
