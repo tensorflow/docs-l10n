@@ -16,13 +16,13 @@ For example, checking notations and synonyms with [`terminologies.txt`](terminol
 You can run the proofreading tool as below:
 
 ```shell script
-./tools/ja/bin/proofreading.sh <target directory or file>
+./tools/ci/ja/bin/proofreading.sh <target directory or file>
 ```
 
 For example:
 
 ```shell script
-./tools/ja/bin/proofreading.sh site/ja/guide
+./tools/ci/ja/bin/proofreading.sh site/ja/guide
 ```
 
 # Why use RedPen?

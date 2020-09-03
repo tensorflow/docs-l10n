@@ -5,7 +5,7 @@ on:
     paths:
       - ".github/workflows/ja.yaml"
       - "site/ja/**"
-      - "tools/ja/**"
+      - "tools/ci/ja/**"
 
 jobs:
   proofreading-ja:
@@ -32,7 +32,7 @@ jobs:
         run: |
           wget https://github.com/redpen-cc/redpen/releases/download/redpen-${REDPEN_VERSION}/redpen-${REDPEN_VERSION}.tar.gz
           tar xvf redpen-${REDPEN_VERSION}.tar.gz
-          cp tools/ja/logback.xml redpen-distribution-${REDPEN_VERSION}/conf/logback.xml
+          cp tools/ci/ja/logback.xml redpen-distribution-${REDPEN_VERSION}/conf/logback.xml
 
       - name: Set up Python
         uses: actions/setup-python@v1
@@ -47,10 +47,10 @@ jobs:
       - name: Run proofreading tool
         run: |
           export PATH="redpen-distribution-${REDPEN_VERSION}/bin:${PATH}"
-          ./tools/ja/bin/proofreading.sh ${{ matrix.dir }}
+          ./tools/ci/ja/bin/proofreading.sh ${{ matrix.dir }}
       
       - name: Upload RedPen logs
         uses: actions/upload-artifact@v1
         with:
           name: RedPen logs
-          path: tools/ja/redpen.log
+          path: tools/ci/ja/redpen.log
