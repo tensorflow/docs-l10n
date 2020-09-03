@@ -183,7 +183,7 @@ dataset = dataset.prefetch(tf.data.experimental.AUTOTUNE)
 
 ## 其他资源
 
-- [tf.data performance guide](https://www.tensorflow.org/guide/data_performance) on how to write performance `tf.data` input pipelines
+- 关于如何编写高性能 `tf.data` 输入流水线的 [tf.data 性能指南](https://tensorflow.google.cn/guide/data_performance)
 - [TensorFlow 内部视频：`tf.data` 最佳做法](https://www.youtube.com/watch?v=ZnukSLKEw34)
 - [Profiler 指南](https://tensorflow.google.cn/guide/profiler)
 - [Colab 中的 Profiler 教程](https://tensorflow.google.cn/tensorboard/tensorboard_profiling_keras)
