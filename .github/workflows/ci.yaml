@@ -20,20 +20,15 @@ jobs:
       run: python3 -m pip install -U git+https://github.com/tensorflow/docs
     - name: Check notebook formatting
       run: |
-        # Only want notebooks modified in this pull request (and not deleted).
-        declare -a changed_files
-        while read fp; do
-          if [[ -e "$fp" ]]; then
-            changed_files+=("$fp")
-          fi
-        done < <(git diff --name-only master | grep '\.ipynb$' || true)
-
-        if [[ ${#changed_notebooks[@]} == 0 ]]; then
+        source ./tools/ci/utils.sh
+        # Get notebooks modified in this pull request (and not deleted).
+        readarray -t changed_files < <(get_changed_files | grep '\.ipynb$')
+        if [[ ${#changed_files[@]} == 0 ]]; then
           echo "No notebooks modified in this pull request."
           exit 0
         fi
         echo "Check formatting with nbfmt:"
-        python3 -m tensorflow_docs.tools.nbfmt --test "${changed_notebooks[@]}"
+        python3 -m tensorflow_docs.tools.nbfmt --test "${changed_files[@]}"
 
   nblint:
     name: Notebook lint
@@ -47,22 +42,16 @@ jobs:
       run: python3 -m pip install -U git+https://github.com/tensorflow/docs
     - name: Lint notebooks
       run: |
-        # Only want notebooks modified in this pull request (and not deleted). Ignore en-snapshot.
-        declare -a changed_files
-        while read fp; do
-          if [[ -e "$fp" ]]; then
-            changed_files+=("$fp")
-          fi
-        done < <(git diff --name-only master | grep '\.ipynb$' | grep -v 'en-snapshot' || true)
-
-        if [[ ${#changed_notebooks[@]} == 0 ]]; then
+        source ./tools/ci/utils.sh
+        readarray -t changed_files < <(get_changed_files | grep '\.ipynb$' | grep -v 'en-snapshot')
+        if [[ ${#changed_files[@]} == 0 ]]; then
           echo "No notebooks modified in this pull request."
           exit 0
         fi
         echo "Lint check with nblint:"
         python3 -m tensorflow_docs.tools.nblint \
           --styles=tensorflow,tensorflow_docs_l10n \
-          --arg=repo:tensorflow/docs-l10n "${changed_notebooks[@]}"
+          --arg=repo:tensorflow/docs-l10n "${changed_files[@]}"
 
   sot-check:
     name: Source doc check
@@ -73,15 +62,9 @@ jobs:
       run: git fetch -u origin master:master
     - name: Check for source doc
       run: |
-        # Only check translations modified in this pull request (and not deleted).
-        declare -a changed_files
-        while read fp; do
-          if [[ -e "$fp" ]]; then
-            changed_files+=("$fp")
-          fi
-        done < <(git diff --name-only master \
-                   | grep 'site/' | grep -v 'en-snapshot' | grep -v 'REVIEWERS' | grep -v 'README' || true)
-
+        source ./tools/ci/utils.sh
+        readarray -t changed_files < <(get_changed_files | grep '\.ipynb$' \
+          | grep -v 'en-snapshot' | grep -v 'REVIEWERS' | grep -v 'README')
         if [[ ${#changed_files[@]} == 0 ]]; then
           echo "No docs modified in this pull request."
           exit 0
@@ -96,7 +79,7 @@ jobs:
           fi
         done
         if [[ ${#orphan_files[@]} != 0 ]]; then
-          echo "No source counterpart in site/en-snapshot for the following files:"
+          echo "No source counterpart in site/en-snapshot for the following:"
           printf -- "- %s\n" "${orphan_files[@]}"
           exit 1
         fi

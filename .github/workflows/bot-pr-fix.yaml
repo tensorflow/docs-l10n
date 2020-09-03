@@ -28,27 +28,16 @@ jobs:
       run: git fetch -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" master:master
     - name: Format notebooks
       run: |
-        # Only want notebooks modified in this pull request (and not deleted).
-        declare -a changed_files
-        while read fp; do
-          if [[ -e "$fp" ]]; then
-            changed_files+=("$fp")
-          fi
-        done < <(git diff --name-only master | grep '\.ipynb$' || true)
+        # Use the master version but restore so not in commit.
+        git restore -s master -- ./tools/ci/utils.sh
+        source ./tools/ci/utils.sh
+        git restore -- ./tools/ci/utils.sh
 
+        readarray -t changed_files < <(get_changed_files | grep '\.ipynb$')
         if [[ ${#changed_files[@]} == 0 ]]; then
           echo "No notebooks modified in this pull request."
           exit 0
         fi
         python3 -m tensorflow_docs.tools.nbfmt "${changed_files[@]}"
-
-        if [[ -z $(git ls-files --modified) ]]; then
-          echo "Notebooks already formatted."
-          exit 0
-        fi
-        # Set author and commit.
-        git config --global user.name "$GITHUB_ACTOR"
-        git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
-        git commit -am "nbfmt"
-        # Push to the pull request branch submitted by head.
-        git push
+        # If changes, push to the pull request branch submitted by head.
+        push_commit "nbfmt"
