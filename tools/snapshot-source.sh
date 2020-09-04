@@ -108,7 +108,7 @@ for project in "${!PROJECTS[@]}"; do
 
   # Download shallow clone of each project in temp.
   cd "$TEMP_DIR"
-  git clone "git@github.com:${repo}.git" \
+  git clone "https://github.com/${repo}.git" \
       --branch "$branch" --single-branch --depth 1 "$project"
 
   # Store last commit id for project.
