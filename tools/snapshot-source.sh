@@ -205,14 +205,23 @@ Projects and last commit:
 ${README_MSG_LIST}\n"
 
 
-echo -e "$README_STR" > "${SNAPSHOT_ROOT}/README.md"
+CHANGELOG_FILE="${SNAPSHOT_ROOT}/README.md"
+echo -e "$README_STR" > "$CHANGELOG_FILE"
 
 # Commit change
 if [[ -n "$COMMIT_FLAG" ]]; then
   cd "$REPO_ROOT"
-  git add "$SNAPSHOT_ROOT"
-  COMMIT_MSG=$(echo -e "$COMMIT_MSG")
-  git commit --message "$COMMIT_MSG"
+  # Want to commit more than a timestamp update. (READMEs already excluded)
+  modified_docs=$(git ls-files --modified | grep -v "README.md" | wc -l)
+  if (( "$modified_docs" == 0 )); then
+    echo "No commit since there are no file changes."
+    git restore "$CHANGELOG_FILE"
+  else
+    echo "Create snapshot commit ..."
+    git add "$SNAPSHOT_ROOT"
+    COMMIT_MSG=$(echo -e "$COMMIT_MSG")
+    git commit --message "$COMMIT_MSG"
+  fi
 fi
 
 # Cleanup
