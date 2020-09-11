@@ -49,7 +49,7 @@ const model = await tf.loadLayersModel(‘path/to/model.json’);
 
 The `tf.loadGraphModel` API returns a `tf.FrozenModel`, which means that the parameters are fixed and you will not be able to fine tune your model with new data. The `tf.loadLayersModel` API returns a tf.Model, which can be trained. For information on how to train a tf.Model, refer to the [train models guide](train_models.md).
 
-After conversion, it’s a good idea to run inference a few times and benchmark the speed of your model. We have a standalone benchmarking page that can be used for this purpose: https://github.com/tensorflow/tfjs-core/blob/master/integration_tests/benchmarks/benchmark.html. You may notice that we discard measurements from an initial warmup run - this is because (in general) your model’s first inference will be several times slower than subsequent inferences due to the overhead of creating textures and compiling shaders.
+After conversion, it’s a good idea to run inference a few times and benchmark the speed of your model. We have a standalone benchmarking page that can be used for this purpose: https://tensorflow.github.io/tfjs/e2e/benchmarks/local-benchmark/index.html. You may notice that we discard measurements from an initial warmup run - this is because (in general) your model’s first inference will be several times slower than subsequent inferences due to the overhead of creating textures and compiling shaders.
 
 
 

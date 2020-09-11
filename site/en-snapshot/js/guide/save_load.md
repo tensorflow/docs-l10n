@@ -69,7 +69,7 @@ await model.save('downloads://my-model');
 This will cause the browser to download the model files to the user's machine. Two files will be produced:
 
  1. A text JSON file named `[my-model].json`, which carries the topology and reference to the weights file described below.
-  2. A binary file carrying the weight values named `[my-model].weights.bin`.
+ 2. A binary file carrying the weight values named `[my-model].weights.bin`.
 
 You can change the name `[my-model]` to get files with a different name.
 
@@ -93,7 +93,7 @@ The model will be sent to the specified HTTP server via a
 The body of the POST is in the `multipart/form-data` format and consists of two files
 
  1. A text JSON file named `model.json`, which carries the topology and reference to the weights file described below.
-  2. A binary file carrying the weight values named `model.weights.bin`.
+ 2. A binary file carrying the weight values named `model.weights.bin`.
 
 Note that the name of the two files will always be exactly as specified above (the name is built in to the function). This [api doc](https://js.tensorflow.org/api/latest/#tf.io.browserHTTPRequest) contains a Python code snippet that demonstrates how one may use the [flask](http://flask.pocoo.org/) web framework to handle the request originated from `save`.
 
@@ -121,7 +121,7 @@ await model.save('file:///path/to/my-model');
 When running on Node.js we also have direct access to the filesystem and can save models there. The command above will save two files to the `path` specified afer the `scheme`.
 
  1. A text JSON file named `[model].json`, which carries the topology and reference to the weights file described below.
-  2. A binary file carrying the weight values named `[model].weights.bin`.
+ 2. A binary file carrying the weight values named `[model].weights.bin`.
 
 Note that the name of the two files will always be exactly as specified above (the name is built in to the function).
 

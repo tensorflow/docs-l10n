@@ -152,7 +152,7 @@ const model = new tf.Sequential();  // !!! DON'T DO THIS !!!
 However, we decided not to use the “new” constructors because 1) the “new”
 keyword would make the code more bloated and 2) the “new” constructor is
 regarded as a “bad part” of JavaScript: a potential pitfall, as is argued in
-[*JavaScript: the Good Parts*](http://archive.oreilly.com/pub/a/javascript/excerpts/javascript-good-parts/bad-parts.html).
+[*JavaScript: the Good Parts*](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/).
 To create models and layers in TensorFlow.js, you call factory methods, which
 have lowerCamelCase names, for example:
 
