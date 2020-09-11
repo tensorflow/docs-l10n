@@ -12,13 +12,15 @@ usage() {
   echo "  Copy source docs from all projects into local directory."
   echo "Options:"
   echo " -c     Auto-create the git commit w/ status message"
+  echo " -f     Format notebooks before commit. Requires the tensorflow-docs pip package."
   echo " -o=dir Set a different output directory (default: site/en-snapshot)"
   echo " -h     Print this help and exit"
 }
 
-while getopts "co:h" opt; do
+while getopts "cfo:h" opt; do
   case $opt in
     c) COMMIT_FLAG=1;;
+    f) FORMAT_FLAG=1;;
     o) SNAPSHOT_ROOT="$OPTARG";;
     h | *)
       usage
@@ -75,6 +77,15 @@ fi
 if [[ ! -d "$SNAPSHOT_ROOT" ]]; then
   echo "${LOG_NAME} Output directory does not exist: ${SNAPSHOT_ROOT}" >&2
   exit 1
+fi
+
+# Notebook formatting requires the tensorflow-docs package.
+# https://github.com/tensorflow/docs/tree/master/tools/tensorflow_docs/tools
+if [[ -n "$FORMAT_FLAG" ]]; then
+  if ! python3 -m pip list | grep "tensorflow-docs" > /dev/null 2>&1; then
+    echo "${LOG_NAME} Error: Can't find the tensorflow-docs pip package required for formatting." >&2
+    exit 1
+  fi
 fi
 
 # Git status
@@ -208,16 +219,29 @@ ${README_MSG_LIST}\n"
 CHANGELOG_FILE="${SNAPSHOT_ROOT}/README.md"
 echo -e "$README_STR" > "$CHANGELOG_FILE"
 
+##
+## FINISH OPTIONS
+##
+
+# Format notebooks
+if [[ -n "$FORMAT_FLAG" ]]; then
+  echo "${LOG_NAME} Format notebooks ..."
+  if ! python3 -m tensorflow_docs.tools.nbfmt "${SNAPSHOT_ROOT}" > /dev/null 2>&1; then
+    echo "${LOG_NAME} nbfmt error, exiting." >&2
+    exit 1
+  fi
+fi
+
 # Commit change
 if [[ -n "$COMMIT_FLAG" ]]; then
   cd "$REPO_ROOT"
   # Want to commit more than a timestamp update. (READMEs already excluded)
   modified_docs=$(git ls-files --modified | grep -v "README.md" | wc -l)
   if (( "$modified_docs" == 0 )); then
-    echo "No commit since there are no file changes."
+    echo "${LOG_NAME} No commit since there are no file changes."
     git restore "$CHANGELOG_FILE"
   else
-    echo "Create snapshot commit ..."
+    echo "${LOG_NAME} Create snapshot commit ..."
     git add "$SNAPSHOT_ROOT"
     COMMIT_MSG=$(echo -e "$COMMIT_MSG")
     git commit --message "$COMMIT_MSG"
