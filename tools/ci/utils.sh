@@ -32,15 +32,17 @@ add_label() {
     if (( i < len )); then items="${items}, "; fi
     ((i+=1))
   done
+
   # Create the JSON payload.
   local json_str=$(printf '{"labels": [%s]}' "$items")
 
   if [[ -z "ISSUE_URL" ]]; then
-    echo "add_label: Requires env variable: ISSUE_URL"
+    echo "[utils:add_label] Requires env variable: ISSUE_URL" >&2
     exit 1
   fi
+
   if [[ -z "$GITHUB_TOKEN" ]]; then
-    echo "add_label: Requires env variable: GITHUB_TOKEN"
+    echo "[utils:add_label] Requires env variable: GITHUB_TOKEN" >&2
     exit 1
   fi
 
@@ -57,13 +59,15 @@ add_comment() {
   local message="$1"
 
   if [[ -z "ISSUE_URL" ]]; then
-    echo "add_comment: Requires env variable: ISSUE_URL"
+    echo "[utils:add_comment] Requires env variable: ISSUE_URL" >&2
     exit 1
   fi
+
   if [[ -z "$GITHUB_TOKEN" ]]; then
-    echo "add_comment: Requires env variable: GITHUB_TOKEN"
+    echo "[utils:add_comment] Requires env variable: GITHUB_TOKEN" >&2
     exit 1
   fi
+
   # Escape string for JSON.
   local body="$(echo -n -e $message \
           | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')"
@@ -76,20 +80,28 @@ add_comment() {
        --data "$json_str"
 }
 
-# Create new commit and push.
-# If not files changed, exit without commit.
+# Create new commit and push. Requires `GITHUB_ACTOR` env variable.
+# If no files changed, exit without commit.
 push_commit() {
   local message="$1"
 
+  if [[ -z "$GITHUB_ACTOR" ]]; then
+    echo "[utils:push_commit] Requires env variable: GITHUB_ACTOR" >&2
+    exit 1
+  fi
+
+  cd "$(git rev-parse --show-toplevel)"  # Move to repo root.
+
+  # Exclude this file from commit if checked out from elsewhere.
+  if git ls-files --modified --error-unmatch ./tools/ci/utils.sh > /dev/null 2>&1; then
+    git restore -- ./tools/ci/utils.sh
+  fi
+
   if [[ -z $(git ls-files --modified) ]]; then
-    echo "No files changed."
+    echo "[utils:push_commit] No files changed, exiting."
     exit 0
   fi
 
-  if [[ -z "$GITHUB_ACTOR" ]]; then
-    echo "git_commit_and_push: Requires env variable: GITHUB_ACTOR"
-    exit 1
-  fi
   # Set author and commit.
   git config --global user.name "$GITHUB_ACTOR"
   git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
