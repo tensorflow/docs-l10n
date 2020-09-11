@@ -8,10 +8,11 @@ on:
 
 jobs:
   nbfmt:
+    name: Fix notebook formatting
     # Check for opt-out label.
     if: >-
       ${{ github.actor == 'tfdocsbot' &&
-          !contains(github.event.client_payload.pull_request.labels.*.name, 'nbfmt-disable') }}
+          !contains(github.event.client_payload.pull_request.labels.*.name, 'disable-autofix') }}
     runs-on: ubuntu-latest
     steps:
     - name: Set up Python
@@ -28,10 +29,8 @@ jobs:
       run: git fetch -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" master:master
     - name: Format notebooks
       run: |
-        # Use the master version but restore so not in commit.
         git restore -s master -- ./tools/ci/utils.sh
         source ./tools/ci/utils.sh
-        git restore -- ./tools/ci/utils.sh
 
         readarray -t changed_files < <(get_changed_files | grep '\.ipynb$')
         if [[ ${#changed_files[@]} == 0 ]]; then
@@ -39,5 +38,42 @@ jobs:
           exit 0
         fi
         python3 -m tensorflow_docs.tools.nbfmt "${changed_files[@]}"
-        # If changes, push to the pull request branch submitted by head.
+        # If changes, push to the forked PR branch submitted by head.
         push_commit "nbfmt"
+
+  nblint-fix:
+    name: Fix lint warnings
+    # Check for opt-out label.
+    if: >-
+      ${{ github.actor == 'tfdocsbot' &&
+          !contains(github.event.client_payload.pull_request.labels.*.name, 'disable-autofix') }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Python
+      uses: actions/setup-python@v2
+    - name: Install tensorflow-docs
+      run: python3 -m pip install -U git+https://github.com/tensorflow/docs
+    - name: Fetch pull request branch
+      uses: actions/checkout@v2
+      with:
+        # Head repo is the user's fork. Ref is the branch name.
+        repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
+        ref: ${{ github.event.client_payload.pull_request.head.ref }}
+    - name: Fetch base master branch
+      run: git fetch -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" master:master
+    - name: Fix lint warnings in notebooks
+      run: |
+        git restore -s master -- ./tools/ci/utils.sh
+        source ./tools/ci/utils.sh
+
+        readarray -t changed_files < <(get_changed_files | grep '\.ipynb$')
+        if [[ ${#changed_files[@]} == 0 ]]; then
+          echo "No notebooks modified in this pull request."
+          exit 0
+        fi
+        python3 -m tensorflow_docs.tools.nblint --fix --verbose \
+          --styles=tensorflow,tensorflow_docs_l10n \
+          --arg=repo:tensorflow/docs-l10n \
+          "${changed_files[@]}"
+        # If changes, push to the forked PR branch submitted by head.
+        push_commit "nblint fix"
