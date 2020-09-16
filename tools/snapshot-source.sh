@@ -12,15 +12,15 @@ usage() {
   echo "  Copy source docs from all projects into local directory."
   echo "Options:"
   echo " -c     Auto-create the git commit w/ status message"
-  echo " -f     Format notebooks before commit. Requires the tensorflow-docs pip package."
+  echo " -F     Do not format notebooks. Formatting requires the tensorflow-docs pip package."
   echo " -o=dir Set a different output directory (default: site/en-snapshot)"
   echo " -h     Print this help and exit"
 }
 
-while getopts "cfo:h" opt; do
+while getopts "cFo:h" opt; do
   case $opt in
     c) COMMIT_FLAG=1;;
-    f) FORMAT_FLAG=1;;
+    F) NO_FORMAT_FLAG=1;;
     o) SNAPSHOT_ROOT="$OPTARG";;
     h | *)
       usage
@@ -81,9 +81,9 @@ fi
 
 # Notebook formatting requires the tensorflow-docs package.
 # https://github.com/tensorflow/docs/tree/master/tools/tensorflow_docs/tools
-if [[ -n "$FORMAT_FLAG" ]]; then
+if [[ -z "$NO_FORMAT_FLAG" ]]; then
   if ! python3 -m pip list | grep "tensorflow-docs" > /dev/null 2>&1; then
-    echo "${LOG_NAME} Error: Can't find the tensorflow-docs pip package required for formatting." >&2
+    echo "${LOG_NAME} Error: Can't find the tensorflow-docs pip package for formatting. (Use -F to disable.)" >&2
     exit 1
   fi
 fi
@@ -225,7 +225,7 @@ echo -e "$README_STR" > "$CHANGELOG_FILE"
 ##
 
 # Format notebooks
-if [[ -n "$FORMAT_FLAG" ]]; then
+if [[ -z "$NO_FORMAT_FLAG" ]]; then
   echo "${LOG_NAME} Format notebooks ..."
   if ! python3 -m tensorflow_docs.tools.nbfmt "${SNAPSHOT_ROOT}" > /dev/null 2>&1; then
     echo "${LOG_NAME} nbfmt error, exiting." >&2
