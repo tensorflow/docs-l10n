@@ -23,7 +23,7 @@ jobs:
         git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
         # Sync latest docs for all projects. Format and commit to new branch, if changes.
         # Commit only contains changes to /site/en-snapshot/.
-        if ! ./tools/snapshot-source.sh -f -c; then
+        if ! ./tools/snapshot-source.sh -c; then
           echo "[${GITHUB_WORKFLOW}] Unable to create snapshot commit, aborting." >&2
           exit 1
         fi
