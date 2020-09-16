@@ -32,7 +32,8 @@ jobs:
         git restore -s master -- ./tools/ci/utils.sh
         source ./tools/ci/utils.sh
 
-        readarray -t changed_files < <(get_changed_files | grep '\.ipynb$')
+        # Snapshot formatting already handled in sync script.
+        readarray -t changed_files < <(get_changed_files | grep '\.ipynb$' | grep -v 'en-snapshot')
         if [[ ${#changed_files[@]} == 0 ]]; then
           echo "No notebooks modified in this pull request."
           exit 0
@@ -66,7 +67,7 @@ jobs:
         git restore -s master -- ./tools/ci/utils.sh
         source ./tools/ci/utils.sh
 
-        readarray -t changed_files < <(get_changed_files | grep '\.ipynb$')
+        readarray -t changed_files < <(get_changed_files | grep '\.ipynb$' | grep -v 'en-snapshot')
         if [[ ${#changed_files[@]} == 0 ]]; then
           echo "No notebooks modified in this pull request."
           exit 0
