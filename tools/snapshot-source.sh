@@ -148,6 +148,7 @@ find "$TEMP_SITE_ROOT" \
   | xargs rm
 
 # Remove specific pages or sections.
+rm "$TEMP_SITE_ROOT/sitemap.md"  # Unused
 rm -rf "$TEMP_SITE_ROOT/install/"  # Different process.
 rm -rf "$TEMP_SITE_ROOT/datasets/catalog/"  # Reference
 rm -rf "$TEMP_SITE_ROOT/tensorboard/design"  # Design docs
