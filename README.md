@@ -5,7 +5,6 @@ notebooks published on [tensorflow.org](https://www.tensorflow.org/guide).
 
 Please file issues under the *documentation* component of the
 [TensorFlow issue tracker](https://github.com/tensorflow/tensorflow/issues/new?template=20-documentation-issue.md).
-
 Questions about TensorFlow usage are better addressed on
 [Stack Overflow](https://stackoverflow.com/questions/tagged/tensorflow) or the
 [discuss@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/discuss)
@@ -45,7 +44,7 @@ button (and consider providing a human translation through the
 ### Source
 
 Source content is aggregated from multiple GitHub repos into the
-[/site/en-snapshot](./site/en-snapshot/) directory used for translations.
+[/site/en-snapshot/](./site/en-snapshot/) directory used for translations.
 Translations are published to the website on a periodic basis (usually weekly or
 bi-weekly). If you find an error in the source content, please submit a fix to
 the [upstream repo](./site/en-snapshot/README.md) and *not* the
@@ -61,16 +60,6 @@ time-sensitive sections like the
 sections are automatically filtered in the
 [GitLocalize](https://gitlocalize.com/tensorflow/docs-l10n) interface.
 
-## Languages
-
-Language support is determined by a number of factors including—but not limited
-to—site metrics and demand, community support,
-[English proficiency](https://en.wikipedia.org/wiki/EF_English_Proficiency_Index),
-audience preference, and other indicators. Since each supported language incurs
-a cost, unmaintained languages are removed. Support for new languages will be
-announced on the [TensorFlow blog](https://blog.tensorflow.org/) or
-[Twitter](https://twitter.com/TensorFlow).
-
 ## Style
 
 The [TensorFlow docs notebook tools](https://github.com/tensorflow/docs/tree/master/tools/tensorflow_docs/tools)
@@ -82,6 +71,16 @@ Please follow the
 and the
 [Google developer docs style guide](https://developers.google.com/style/highlights),
 when applicable.
+
+## Languages
+
+Language support is determined by a number of factors including—but not limited
+to—site metrics and demand, community support,
+[English proficiency](https://en.wikipedia.org/wiki/EF_English_Proficiency_Index),
+audience preference, and other indicators. Since each supported language incurs
+a cost, unmaintained languages are removed. Support for new languages will be
+announced on the [TensorFlow blog](https://blog.tensorflow.org/) or
+[Twitter](https://twitter.com/TensorFlow).
 
 ## License
 
