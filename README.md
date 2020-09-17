@@ -1,87 +1,87 @@
-# TensorFlow Docs Community Translations
+# TensorFlow Docs Translations
 
-## Issues
+This project contains translations of the technical content and Jupyter
+notebooks published on [tensorflow.org](https://www.tensorflow.org/guide).
 
-File community translation issues with the
-[tensorflow/docs-l10](https://github.com/tensorflow/docs-l10n/issues) tracker.
+Please file issues under the *documentation* component of the
+[TensorFlow issue tracker](https://github.com/tensorflow/tensorflow/issues/new?template=20-documentation-issue.md).
 
-For general documentation issues, use the tracker in the
-[tensorflow/tensorflow](https://github.com/tensorflow/tensorflow/issues/new?template=20-documentation-issue.md)
-repo.
+Questions about TensorFlow usage are better addressed on
+[Stack Overflow](https://stackoverflow.com/questions/tagged/tensorflow) or the
+[discuss@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/discuss)
+mailing list.
 
-# Community translations
+## Contributing
 
-Please read the
-[community translations](https://www.tensorflow.org/community/contribute/docs#community_translations)
-section in the
+We love patches! Contributors are encouraged to use our GitLocalize project to
+submit pull requests and reviews: https://gitlocalize.com/tensorflow/docs-l10n
+
+General docs instructions are available in the
 [TensorFlow docs contributor guide](https://www.tensorflow.org/community/contribute/docs).
 
-Ask general questions on the
-[docs@tensorflow.org list](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs),
-and there are a few
-[language-specific docs lists](https://www.tensorflow.org/community/contribute/docs#community_translations)
-to help coordinate communities. If a language is gaining momentum and
-contributors think a new language-specific list would be useful, file
-[a GitHub issue](https://github.com/tensorflow/docs-l10n/issues).
+Please sign a
+[Contributor License Agreement](https://cla.developers.google.com/) (CLA) to
+contribute to this Google open source project. Check
+[your existing CLA](https://cla.developers.google.com/clas) and verify that
+your [email is set on git commits](https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/setting-your-commit-email-address).
 
 ## Content
 
-The source-of-truth for technical documentation is the
-[site/en](https://github.com/tensorflow/docs/tree/master/site/en) directory in
-the [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en)
-repo. If, when translating, you find an issue in the source content, please send
-a separate pull request that fixes the upstream content.
+To view translated content on tensorflow.org, select the in-page language
+switcher or append `?hl=<lang>` to the URL. For example, the
+[TensorFlow quickstart for beginners](https://www.tensorflow.org/tutorials/quickstart/beginner?hl=en)
+tutorial is available in:
 
-To view translated content on [tensorflow.org](https://www.tensorflow.org),
-select the in-page language switcher or append `?hl=<lang>` to the URL. For
-example, the English
-[TensorFlow 2 quickstart tutorial](https://www.tensorflow.org/tutorials/quickstart/beginner?hl=en)
-can be read in:
+* Korean: https://www.tensorflow.org/tutorials/quickstart/beginner?hl=ko,
+* Spanish: https://www.tensorflow.org/tutorials/quickstart/beginner?hl=es-419,
+* Or any of the supported languages in [site/<lang>](./site).
 
-* Korean: https://www.tensorflow.org/tutorials/quickstart/beginner?hl=ko
-* Russian: https://www.tensorflow.org/tutorials/quickstart/beginner?hl=ru
-* Or any of the supported languages in [site/<lang>](https://github.com/tensorflow/docs-l10n/tree/master/site).
+If a human-translation does not exist, some pages fall back to a *machine
+translation* (MT). An MT page is indicated with a banner at the top of the page.
+If the MT page is not useful or confusing, please click the *Switch to English*
+button (and consider providing a human translation through the
+[GitLocalize project](https://gitlocalize.com/tensorflow/docs-l10n)).
 
-### Subsites
+### Source
 
-Subsites are doc collections for projects outside of the *core TensorFlow* in
-the `tensorflow/docs` repo. These docs usually live with their project in a
-separate GitHub repository. For example, the docs for
-[tensorflow.org/federated](https://www.tensorflow.org/federated) live in the
-[tensorflow/federated](https://github.com/tensorflow/federated/tree/master/docs)
-GitHub repo. For translations, mirror this structure *within* this
-`tensorflow/docs-l10n` repo (i.e. do not submit translation pull requests to the
-subsite project repo).
+Source content is aggregated from multiple GitHub repos into the
+[/site/en-snapshot](./site/en-snapshot/) directory used for translations.
+Translations are published to the website on a periodic basis (usually weekly or
+bi-weekly). If you find an error in the source content, please submit a fix to
+the [upstream repo](./site/en-snapshot/README.md) and *not* the
+`/site/en-snapshot/` directory in this repo.
 
 ### Do not translate
 
-The following sections are *not* included in the community translations project.
-TensorFlow.org does not translate API reference, and uses an internal system for
-landing pages and release-sensitive documentation. Please do not translate the
-following sections:
+Not all content on tensorflow.org is translated in this project (or at all).
+Overview pages and navigation files are translated using another process.
+tensorflow.org does not translate the API reference, old versions, images, or
+time-sensitive sections like the
+[installation instructions](https://www.tensorflow.org/install). Non-translated
+sections are automatically filtered in the
+[GitLocalize](https://gitlocalize.com/tensorflow/docs-l10n) interface.
 
-* Any `/images/` directories.
-* Any `/r1/` directories (TensorFlow 1.x docs).
-* The `/install/` directory.
-* API reference including `/api_docs/` and `/versions/` directories.
-* Navigation: `_book.yaml` and `_toc.yaml` files.
-* Overview pages such as `_index.yaml`, `index.html`, and `index.md`.
+## Languages
+
+Language support is determined by a number of factors including—but not limited
+to—site metrics and demand, community support,
+[English proficiency](https://en.wikipedia.org/wiki/EF_English_Proficiency_Index),
+audience preference, and other indicators. Since each supported language incurs
+a cost, unmaintained languages are removed. Support for new languages will be
+announced on the [TensorFlow blog](https://blog.tensorflow.org/) or
+[Twitter](https://twitter.com/TensorFlow).
 
 ## Style
+
+The [TensorFlow docs notebook tools](https://github.com/tensorflow/docs/tree/master/tools/tensorflow_docs/tools)
+are used for formatting and style consistency. This is integrated into the pull
+request workflow and can be run locally.
 
 Please follow the
 [TensorFlow documentation style guide](https://www.tensorflow.org/community/contribute/docs_style)
 and the
 [Google developer docs style guide](https://developers.google.com/style/highlights),
-when applicable. Additionally, language-specific style may be agreed upon by the
-community—see the `README.md` file within a `site/<lang>/` directory. Community
-proposals and communication can take place over pull request comments or
-language-specific mailing lists (if available).
-
-To reduce diff-churn on notebook pull requests and make reviews easier, please
-use the [nbfmt](https://github.com/tensorflow/docs/blob/master/tools/nbfmt.py)
-tool or download the notebook from
-[Google Colab](https://colab.research.google.com/).
+when applicable.
 
 ## License
 
