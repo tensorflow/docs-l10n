@@ -82,6 +82,10 @@ a cost, unmaintained languages are removed. Support for new languages will be
 announced on the [TensorFlow blog](https://blog.tensorflow.org/) or
 [Twitter](https://twitter.com/TensorFlow).
 
+If your preferred language is not supported, you are welcome to maintain a
+community fork for open source contributors. These are not published to
+tensorflow.org.
+
 ## License
 
 [Apache License 2.0](LICENSE)
