@@ -33,7 +33,7 @@ tutorial is available in:
 
 * Korean: https://www.tensorflow.org/tutorials/quickstart/beginner?hl=ko,
 * Spanish: https://www.tensorflow.org/tutorials/quickstart/beginner?hl=es-419,
-* Or any of the supported languages in [site/<lang>](./site).
+* Or any of the supported languages in [site/&lt;lang&gt;](./site/).
 
 If a human-translation does not exist, some pages fall back to a *machine
 translation* (MT). An MT page is indicated with a banner at the top of the page.
@@ -57,7 +57,7 @@ Overview pages and navigation files are translated using another process.
 tensorflow.org does not translate the API reference, old versions, images, or
 time-sensitive sections like the
 [installation instructions](https://www.tensorflow.org/install). Non-translated
-sections are automatically filtered in the
+pages are automatically filtered in the
 [GitLocalize](https://gitlocalize.com/tensorflow/docs-l10n) interface.
 
 ## Style
