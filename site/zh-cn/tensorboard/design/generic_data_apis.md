@@ -6,7 +6,7 @@
 
 ## 目的
 
-TensorBoard 曾一直作为直接从磁盘读取数据的本地网络服务器运行。而 [TensorBoard.dev](https://tensorboard.dev) 则在 App Engine 上运行并读取用户上传到我们的托管服务中的数据。此外，某些与 TensorBoard 类似的 Google 内部服务具有自己的数据库，并直接重新实现 TensorBoard HTTP API。
+TensorBoard 曾一直作为直接从磁盘读取数据的本地网络服务器运行。而 [TensorBoard.dev] 则在 App Engine 上运行并读取用户上传到我们的托管服务中的数据。此外，某些与 TensorBoard 类似的 Google 内部服务具有自己的数据库，并直接重新实现 TensorBoard HTTP API。
 
 为了确保 TensorBoard 体验在所有后端之间统一，并让用户在所有环境下都能轻松地使用插件，我们需要一个 Python API（采用多种实现）来存储和访问数据。
 
@@ -18,7 +18,7 @@ TensorBoard 曾一直作为直接从磁盘读取数据的本地网络服务器�
 
 - **scalars:** *(run, tag, step) → (value: f32)*
 - **images:** *(run, tag, step, image_index) → (image_data: blob)*
-- **audio:** *(run, tag, step, audio_index) → (wav_data: blob)*
+- **音频** *(run, tag, step, audio_index) → (wav_data: blob)*
 - **text:** *(run, tag, step, text_index) → (text_data: blob)*
 - **histograms:** *(run, tag, step, bucket_index) → (lower_bound: f32, count: usize)*
 - **PR curves:** *(run, tag, step, threshold_index) → (tp, fp, tn, fn, precision, recall)*
@@ -48,8 +48,8 @@ TensorBoard 曾一直作为直接从磁盘读取数据的本地网络服务器�
     - 在实验中由运行、标记、步骤和索引键控。
     - 包括“序列”始终仅包含一个元素或“时间序列”始终仅包含一个步骤的简并用例。
     - 为何是 blob 序列而不是 blob 本身？每个图像和音频摘要在每个步骤均可包含多个图像/音频片段。赋予序列特权可有效实现这一目标，方法是在每个 GCS 对象中仅存储一个 PNG 文件并将其直接提供给浏览器。这种方法几乎没有弊端。
-    - 大小可能不一。图像大小可达千字节（MNIST 输入）或千兆字节（[组织切片图](https://iciar2018-challenge.grand-challenge.org/Dataset/)、TensorFlow 计算图和检查点）。
-    - 实现可能对其进行特殊加密（例如，使用 GCS [CMEK](https://cloud.google.com/storage/docs/encryption/customer-managed-keys)）：敏感数据通常需要包含在此类 blob 中，而不是标量或直方图中。
+    - 大小可能不一。图像大小可达千字节（MNIST 输入）或千兆字节（[组织切片图]、TensorFlow 计算图和检查点）。
+    - 实现可能对其进行特殊加密（例如，使用 GCS [CMEK]）：敏感数据通常需要包含在此类 blob 中，而不是标量或直方图中。
     - 序列长度通常具有较小的上界值。图像和音频的默认长度为 3，且网格始终为单例序列。
 
 请注意，我们将标量与任意张量区分开。标量可以支持任意张量无法执行的某些运算（例如按区间内的最小/最大值进行聚合，或诸如“查找最近的 `accuracy` 至少为 0.9 的运行”之类的查询。标量信息中心也是使用最广泛的信息中心，因此我们想充分利用我们所能实现的任何额外的性能改进：例如，我们不必存储张量形状。
@@ -102,16 +102,16 @@ TensorBoard 曾一直作为直接从磁盘读取数据的本地网络服务器�
 
 - 上传时，所有数据都被提取到 Cloud Spanner 或 GCS 中。
 - 标量时间序列存储在将候选键 *(run_id, tag_id, step)* 映射至挂钟时间和浮点值的 Spanner 表中。
-- 张量时间序列存储在 Spanner 表中，该表将候选键 *(run_id, tag_id, step)* 映射至挂钟时间、[打包的张量内容](https://github.com/tensorflow/tensorflow/blob/48b2094fd691bf2db96096d739afb23ff6807e33/tensorflow/core/framework/tensor.proto#L31-L36)的字节串以及张量形状和数据类型。
+- 张量时间序列存储在 Spanner 表中，该表将候选键 *(run_id, tag_id, step)* 映射至挂钟时间、[打包的张量内容]的字节串以及张量形状和数据类型。
 - Blob 序列时间序列存储在 GCS 上，并列在将候选键 *(run_id, tag_id, step, index)* 映射至 GCS 对象键的表中。（即使对于较小对象也是如此。）
 - 单独的表存储运行和标记名称以及摘要元数据（由 ID 键控）。
-- 可以在 SQL 中实现线性分桶降采样，如 [PR #1022](https://github.com/tensorflow/tensorboard/pull/1022) 中所述。
-- 如果需要，[Cloud Spanner 的 `TABLESAMPLE` 算子](https://cloud.google.com/spanner/docs/query-syntax#tablesample-operator)将免费提供支持伯努利采样或蓄水池采样的均匀随机降采样。
-    - `TABLESAMPLE` 是 [SQL:2011 的一部分](https://jakewheat.github.io/sql-overview/sql-2003-foundation-grammar.html#sample-clause)，也可由 PostgreSQL 和 SQL Server 实现，但无法由 SQLite 实现。（sqlite-users 邮寄名单中从未出现过“tablesample”和“downsample”。）Cloud Spanner 不会实现算子的 `REPEATABLE(seed)` 部分。
+- 可以在 SQL 中实现线性分桶降采样，如 [PR #1022] 中所述。
+- 如果需要，[Cloud Spanner 的 `TABLESAMPLE` 算子]将免费提供支持伯努利采样或蓄水池采样的均匀随机降采样。
+    - `TABLESAMPLE` 是 [SQL:2011 的一部分]，也可由 PostgreSQL 和 SQL Server 实现，但无法由 SQLite 实现。（sqlite-users 邮寄名单中从未出现过“tablesample”和“downsample”。）Cloud Spanner 不会实现算子的 `REPEATABLE(seed)` 部分。
 
 可以适时基于 TensorBoard 的数据库模式实现**本地 SQLite 后端**：
 
-- 在 [`--db_import` 时](https://github.com/tensorflow/tensorboard/blob/0e9a000a1ef484762e743335a6b5754154bd9cdd/tensorboard/plugins/core/core_plugin.py#L334-L341)，所有数据都被提取到 SQLite 中。
+- 在 [`--db_import` 时]，所有数据都被提取到 SQLite 中。
 - 标量/张量时间序列存储在与其 Cloud Spanner 对应项同构的表中。
 - Blob 序列时间序列存储在将 *(run_id, tag_id, step, index)* 映射至唯一 blob ID 的表中。
 - Blob 数据存储在将 *blob_id* 映射至实际 blob 数据的表中。（此为“GCS”。）
@@ -155,16 +155,28 @@ Blob 实际上没有大小限制。如果我们选择保留对原始 logdir 的�
 
 如何存储文件？无论何种方式，我们最终都将建立某种微型数据库，并承担所有相关的存储任务。例如，如果我们使用像 `${run_id}/${tag_id}/${step}/${index}` 一样的文件路径层次结构，那么读取运行中每个标记的最近 blob 将是标记数和步骤数的二次方程 (!)，因为 `open`(2) 需要线性扫描所含目录中所有文件名的列表。也许我们可以像 Git 的对象存储一样通过散列法和分片法来解决此问题，这会进一步提高复杂性。性能不佳的文件系统；网络文件系统；多用户系统和权限。需要声明的是，实现数据库超出了此项目的范围。
 
-另外，假定的性能提升并不明确：[SQLite 可比文件系统更快](https://www.sqlite.org/fasterthanfs.html)！
+另外，假定的性能提升并不明确：[SQLite 可比文件系统更快]！
 
 ### 包括“非时序 blob”存储类
 
 这里提出的三种存储类均为时间序列：标量、张量或 blob 序列。本文档的先前版本曾提出过针对*非时序 blob* 的第四种存储类，在实验中仅由运行和标记键控。其预期目的是用于“运行级元数据”。针对该用例的现有解决方案确实会使用摘要：例如，带有特殊标记名 `_hparams_/session_start_info` 的摘要指定超参数配置。但这一直不太正统。理想情况下，运行级元数据将成为更完整的系统的一部分。例如，它可以用于驱动运行选择（“在所有插件中仅向我展示使用 Adam 优化器的运行”）。首先，摘要就不适用于该数据。
 
-这种存储类可以根据现有的存储类来实现，方法是将非时序 blob 表示为仅在步骤 0 处采样的单例 blob 序列。在 TensorFlow 2.x 中，即使计算图在运行过程中也可能不是静态的（[`trace_export`](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/summary/trace_export) 接受 `step` 参数），从某种意义上说，超参数也不一定为静态。鉴于鲜有实用的用例，而且后备效果甚佳，我们放弃了这种存储类。
+这种存储类可以根据现有的存储类来实现，方法是将非时序 blob 表示为仅在步骤 0 处采样的单例 blob 序列。在 TensorFlow 2.x 中，即使计算图在运行过程中也可能不是静态的（[`trace_export`] 接受 `step` 参数），从某种意义上说，超参数也不一定为静态。鉴于鲜有实用的用例，而且后备效果甚佳，我们放弃了这种存储类。
 
 ## 更新日志
 
 - **2020-01-22**：将 blob 序列 `corresponding_max_index`（最新基准的长度）更改为 `max_length`（任何基准的最大长度）以满足实际需求且更为自然。
 - **2019-08-07**：基于设计评审反馈进行了修订：移除了非时序 blob（请参阅“考虑的替代方案”部分）。
 - **2019-07-25**：初始版本。
+
+
+[TensorBoard.dev]: https://tensorboard.dev
+[组织切片图]: https://iciar2018-challenge.grand-challenge.org/Dataset/
+[CMEK]: https://cloud.google.com/storage/docs/encryption/customer-managed-keys
+[PR #1022]: https://github.com/tensorflow/tensorboard/pull/1022
+[SQL:2011 的一部分]: https://jakewheat.github.io/sql-overview/sql-2003-foundation-grammar.html#sample-clause
+[Cloud Spanner 的 `TABLESAMPLE` 算子]: https://cloud.google.com/spanner/docs/query-syntax#tablesample-operator
+[打包的张量内容]: https://github.com/tensorflow/tensorflow/blob/48b2094fd691bf2db96096d739afb23ff6807e33/tensorflow/core/framework/tensor.proto#L31-L36
+[`--db_import` 时]: https://github.com/tensorflow/tensorboard/blob/0e9a000a1ef484762e743335a6b5754154bd9cdd/tensorboard/plugins/core/core_plugin.py#L334-L341
+[SQLite 可比文件系统更快]: https://www.sqlite.org/fasterthanfs.html
+[`trace_export`]: https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/summary/trace_export
