@@ -168,7 +168,6 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
         | beam.Create(tf.io.gfile.listdir(file_dir))
         | beam.Map(_process_example)
     )
-
 ```
 
 ### 运行您的流水线
