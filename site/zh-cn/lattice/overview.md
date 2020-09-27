@@ -10,7 +10,6 @@ TensorFlow Lattice 库可帮助开发者实现灵活、受控和可解释的点�
 
 *点阵*是一种能够逼近数据中任意输入-输出关系的插值查找表。点阵会将规则的网格覆盖到您的输入空间上，并学习网格顶点处输出的值。对于测试点 $x$，$f(x)$ 基于 $x$ 周围的点阵值通过线性插值法求得。
 
-
 <img src="images/2d_lattice.png" style="display:block; margin:auto;">
 
 以上简短示例中的函数包含 2 个输入特征和 4 个参数：$\theta=[0, 0.2, 0.4, 1]$，即输入空间各个角处的函数值；其余函数值基于这些参数通过插值法求得。
@@ -28,7 +27,7 @@ TensorFlow Lattice 库可帮助开发者实现灵活、受控和可解释的点�
 
 我们希望我们的模型能够学习当地推荐咖啡店的用户满意度。TensorFlow Lattice 模型可以使用*分段线性函数*（通过 `tfl.layers.PWLCalibration`）针对点阵所接受的区间（上例中的点阵区间为 0.0 至 1.0）校准和归一化输入特征。以下示例所展示的此类校准函数包含 10 个关键点：
 
-<p align="center"> <img src="images/pwl_calibration_distance.png"> <img src="images/pwl_calibration_price.png"> </p>
+<p align="center"> <img src="images/pwl_calibration_distance.png"> <img src="images/pwl_calibration_price.png"></p>
 
 将特征的分位数作为输入关键点是一种有效方法。TensorFlow Lattice [Canned Estimator](tutorials/canned_estimators.ipynb) 可自动将输入关键点设置为特征分位数。
 
@@ -60,7 +59,6 @@ TensorFlow Lattice 库可帮助开发者实现灵活、受控和可解释的点�
 
 现实中的训练数据可能无法充分代表运行时数据。在训练数据未能覆盖到的输入空间部分中，诸如 DNN 或随机森林等灵活的机器学习解决方案常会出现行为异常甚至失控的状况。如果有违政策或公平约束，那么这种行为将成为棘手的问题。
 
-
 <img src="images/model_comparison.png" style="display:block; margin:auto;">
 
 虽然常见形式的正则化可以提高外推的合理性，但标准正则化器仍不能保证整个输入空间内均能获得合理的模型行为，特别是针对高维度输入。如果改为采用行为可控性和可预测性更高的简单模型，可能会使模型准确率大幅降低。
@@ -69,7 +67,7 @@ TF Lattice 使您可以继续使用灵活的模型，同时提供多种选项，
 
 - **单调性**：您可以指定输出相对于输入仅单调递增/递减。在我们的示例中，您可以指定增大消费者到咖啡店的距离仅应降低预测的用户偏好。
 
-<p align="center"> <img src="images/linear_fit.png"> <img src="images/flexible_fit.png"> <img src="images/regularized_fit.png"> <img src="images/monotonic_fit.png"> </p>
+<p align="center"> <img src="images/linear_fit.png"> <img src="images/flexible_fit.png"> <img src="images/regularized_fit.png"> <img src="images/monotonic_fit.png"></p>
 
 - **凸性/凹性**：您可以指定函数形状为凸函数或凹函数。这种约束与单调性结合使用，可以强迫函数表示收益相对于给定特征递减。
 
