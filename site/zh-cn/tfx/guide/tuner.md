@@ -134,7 +134,6 @@ def tuner_fn(fn_args: FnArgs) -> TunerFnResult:
       tuner=tuner,
       fit_kwargs={...}
   )
-
 ```
 
 ### AI Platform Training 分布式工作进程群上的并行调节
@@ -163,7 +162,6 @@ tuner = Tuner(
             }
     })
 ...
-
 ```
 
 扩展 Tuner 组件的行为和输出与固有 Tuner 组件相同，只是多个超参数搜索会在不同的工作进程机器上并行执行，因此，`num_trials` 将更快地完成。当搜索算法极易并行化（例如 `RandomSearch`）时，这特别有效。但是，如果搜索算法使用来自前期试验结果（例如 AI Platform Optimizer 中实现的 Google Vizier 算法）的信息，则过度并行搜索会对搜索效率造成负面影响。
