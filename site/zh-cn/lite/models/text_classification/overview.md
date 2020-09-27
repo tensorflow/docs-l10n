@@ -6,25 +6,25 @@
 
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
-If you are new to TensorFlow Lite and are working with Android, we recommend exploring the following example applications that can help you get started.
+如果您是 TensorFlow Lite 新用户，并且使用的是 Android 平台，我们建议您研究以下可以帮助您入门的示例应用。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android">Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android">Android 示例</a>
 
 如果您使用的不是 Android 平台，或者您已经熟悉 <a>TensorFlow Lite API</a>，则可以下载我们的起始文本分类模型。
 
-<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">Download starter model</a>
+<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">下载起始模型</a>
 
 ## 工作方式
 
-Text classification categorizes a paragraph into predefined groups based on its content.
+文本分类根据内容将段落分类到预定义组中。
 
-This pretrained model predicts if a paragraph's sentiment is positive or negative. It was trained on [Large Movie Review Dataset v1.0](http://ai.stanford.edu/~amaas/data/sentiment/) from Mass et al, which consists of IMDB movie reviews labeled as either positive or negative.
+此预训练模型可预测段落的情感是正面的还是负面的。它在 Mass 等人提供的 [Large Movie Review Dataset v1.0](http://ai.stanford.edu/~amaas/data/sentiment/) 上进行训练，该数据集包含标记为正面或负面的 IMDB 电影评论。
 
 下面是使用该模型对段落进行分类的步骤：
 
 1. 对段落进行分词，并使用预定义词汇表将其转换为一个单词 ID 列表。
 2. 将该列表馈送到 TensorFlow Lite 模型。
-3. Get the probability of the paragraph being positive or negative from the model outputs.
+3. 从模型输出获取该段落为正面或负面评价的概率。
 
 ### 说明
 
@@ -33,7 +33,7 @@ This pretrained model predicts if a paragraph's sentiment is positive or negativ
 
 ## 性能基准
 
-Performance benchmark numbers are generated with the tool [described here](https://www.tensorflow.org/lite/performance/benchmarks).
+性能基准数值通过使用[此处所述](https://www.tensorflow.org/lite/performance/benchmarks)工具生成。
 
 <table>
   <thead>
@@ -46,7 +46,7 @@ Performance benchmark numbers are generated with the tool [described here](https
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification.tflite">文本分类</a></td>
-    <td rowspan="3">       0.6 Mb     </td>
+    <td rowspan="3">       0.6 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>0.05ms*</td>
   </tr>
