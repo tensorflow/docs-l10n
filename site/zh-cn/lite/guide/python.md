@@ -16,8 +16,7 @@
 
 例如，如果是运行 Raspbian Buster（具有 Python 3.7）的 Raspberry Pi，请使用以下命令安装 Python wheel：
 
-<pre class="devsite-terminal devsite-click-to-copy">pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl
-</pre>
+<pre class="devsite-terminal devsite-click-to-copy">pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl</pre>
 
 <table>
 <tr>
