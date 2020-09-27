@@ -6,7 +6,7 @@
 
 ## 目的
 
-磁盘上的摘要均采用张量形式*，但是来自不同插件的数据对应于不同的数据类——标量、张量或 blob 序列，它们来自[通用数据 API 设计文档](./generic_data_apis.md)并在 [`DataProvider` Python 接口](https://github.com/tensorflow/tensorboard/blob/a0c1def1e3a3725909f9fd59ee5d50fda81bb7ea/tensorboard/data/provider.py#L29)中指定。有些数据类不需要或几乎不需要预处理：例如，标量和直方图。其他一些数据类则需要转换：例如，对于音频，我们转换张量数据并将其嵌入到一个 blob 序列和一个张量时间序列中。
+磁盘上的摘要均采用张量形式*，但是来自不同插件的数据对应于不同的数据类——标量、张量或 blob 序列，它们来自[通用数据 API 设计文档]并在 [`DataProvider` Python 接口]中指定。有些数据类不需要或几乎不需要预处理：例如，标量和直方图。其他一些数据类则需要转换：例如，对于音频，我们转换张量数据并将其嵌入到一个 blob 序列和一个张量时间序列中。
 
 因此，我们需要某种机制，插件可以借助这种机制定义如何提取其数据。这种机制应同时用于本地 TensorBoard 网络服务器和 TensorBoard.dev 上传器。
 
@@ -20,13 +20,13 @@
 - **直方图**：将数据断言为 [*[k, 3]* 形状](https://github.com/tensorflow/tensorboard/blob/a0c1def1e3a3725909f9fd59ee5d50fda81bb7ea/tensorboard/plugins/histogram/summary.py#L17-L25)和浮点数据类型，并以无变化的形式嵌入到张量时间序列中。
 - **PR 曲线**：与直方图相同，但[形状为 *[6, k]*](https://github.com/tensorflow/tensorboard/blob/4ee9ae8a31524131eb56f7a1dc4aa09d7d186f10/tensorboard/plugins/pr_curve/summary.py#L523-L532)。
 - **图像**：将数据断言为大小至少为 2 的 1 秩字节串张量，其中前两个元素包含图像宽度和高度的 ASCII 表示，后面的元素表示 PNG 编码的图像数据。此张量以无变化的形式*嵌入到 blob 序列时间序列中。
-- **音频**：与图像最为相似，但我们如何处理[标签](https://github.com/tensorflow/tensorboard/blob/a0c1def1e3a3725909f9fd59ee5d50fda81bb7ea/tensorboard/plugins/audio/summary_v2.py#L21)？一些用户确实需要它们（[“包含文本注解的能力十分惊人”](https://github.com/tensorflow/tensorboard/issues/296#issuecomment-320146370)）。我们可以将它们存储在单独的张量摘​​要中，或许通过命名或摘要元数据将它们绑在一起。
+- **音频**：与图像最为相似，但我们如何处理[标签]？一些用户确实需要它们（[“包含文本注解的能力十分惊人”]）。我们可以将它们存储在单独的张量摘​​要中，或许通过命名或摘要元数据将它们绑在一起。
 - **文本**：文本通常很短，因此我们只要求文本张量的总大小不超过 10 MiB。请注意，文本张量可以具有任意秩；高秩张量在前端呈现为表。如果我们确实需要支持任意大小的文本摘要，则可以将其另存为 blob 序列。
 - **网格**：网格的三个摘要（顶点摘要、面摘要和颜色摘要）中的每一个都将其张量数据独立编码为原始字节（打包的 f32/u32/u8 数组）或 `TensorProto` 等效项，并保存为 blob 序列。
 - **计算图**：磁盘上的数据实际上略有不同，因为计算图并不总是使用张量摘要。传统上，模型计算图存储在 `Event` 原型的顶层 `graph_def` 字段中。应当将其转换为具有固定标记名称（例如，`__run_graph__`）且长度为 1 的 blob 序列，并使用制造的摘要元数据来指示其出处。Keras 概念计算图和性能分析数据表示为具有标记名称的摘要，因此应当嵌入具有适当内容且长度为 1 的 blob 序列中。为避免与固定的 `__run_graph__` 标记名称发生名称冲突，应当按类型确定名称范围：用户提供的标记 `my_keras_model` 应变为 `__model_graph__/my_keras_model`。（即，标记名称编码一个可区分联合。）
 - **超参数**：可以作为 blob 序列或张量提取（所有数据实际上都在标记名称和摘要元数据中；张量内容为空）。但我们确实希望超参数是某种特殊的运行级元数据而不是摘要，因此，也许我们现在可以什么也不做。
 
-* 我们也可以选择在此处降低维度，因为前端实际上并不需要它们，但是 (a) [我们可能以后要用到它们](https://github.com/tensorflow/tensorboard/pull/3009#pullrequestreview-329605910)，并且 (b) 这基本上是互不相关的更改。如果存储系统 Blobstore 采用内容寻址，则额外的存储实际上是免费的，因为每个“维度”文件在所有用户之间仅存储一次。如果存储系统具有唯一所有者，那么尽管实际文件内容字节自然可以忽略不计，但我们需要为每个标准 3 样本摘要多创建 67% 的文件。在任何情况下，运行时的带宽成本都应当为零，因为 Python 插件不会在这两个元素上调用 read_blob。
+* 我们也可以选择在此处降低维度，因为前端实际上并不需要它们，但是 (a) [我们可能以后要用到它们]，并且 (b) 这基本上是互不相关的更改。如果存储系统 Blobstore 采用内容寻址，则额外的存储实际上是免费的，因为每个“维度”文件在所有用户之间仅存储一次。如果存储系统具有唯一所有者，那么尽管实际文件内容字节自然可以忽略不计，但我们需要为每个标准 3 样本摘要多创建 67% 的文件。在任何情况下，运行时的带宽成本都应当为零，因为 Python 插件不会在这两个元素上调用 read_blob。
 
 ## 机制结构
 
@@ -66,7 +66,7 @@ message SummaryMetadata {  // (extend)
 
 如果时间序列包含不满足其数据类约束的张量，则行为由实现定义。实现应向用户发出警告；此外，它们还可能会丢弃其余时间序列、丢弃整个时间序列或者完全输出错误。类似地，只有张量摘要支持这种数据格式，旧摘要（`simple_value` 等）则不支持。也就是说，可以认为 v1 到 v2 的 `data_compat` 转换受到了影响。
 
-这是一种原型更改，因此需要更改 TensorFlow 代码。我们可以通过仅对 TensorBoard 兼容原型进行更改来构建原型，但我们有一种策略，除非[我们的原型与 TensorFlow 的原型同步](https://github.com/tensorflow/tensorboard/blob/ca4d6408caea7f8b823acc25266a7226349d1a67/tensorboard/compat/proto/BUILD#L51-L52)，否则我们不会执行 PyPI 发布。因此，我们必须在这里谨慎操作。
+这是一种原型更改，因此需要更改 TensorFlow 代码。我们可以通过仅对 TensorBoard 兼容原型进行更改来构建原型，但我们有一种策略，除非[我们的原型与 TensorFlow 的原型同步]，否则我们不会执行 PyPI 发布。因此，我们必须在这里谨慎操作。
 
 ### 兼容层
 
@@ -82,7 +82,7 @@ message SummaryMetadata {  // (extend)
 - 仅发出新形式，并将对这种格式的支持以原子方式向后移植到音频插件的非通用数据分支。
 - 仅发出新形式，在音频插件中默认启用通用数据，并删除旧的代码路径。
 
-后一个选项很有吸引力。由于 `is_active` 非常适合数据提供者（自 [PR #3124](https://github.com/tensorflow/tensorboard/pull/3124) 起），因此这可能是正确的做法。
+后一个选项很有吸引力。由于 `is_active` 非常适合数据提供者（自 [PR #3124] 起），因此这可能是正确的做法。
 
 实现此目的的一种明确方法是，首先作为满足正常向后兼容性保证的单独更改，将磁盘上的音频摘要形式更改为*能够*轻松嵌入到数据类范式中的形式，随后只需执行普通嵌入。换言之，让困难的更改变得简单，随后进行简单的更改。
 
@@ -129,3 +129,12 @@ message SummaryMetadata {  // (extend)
 
 - **2020-01-08**：添加了“可感知数据类的数据提供者”。是否采用建议的简化迁移路径取决于是否默认启用通用数据模式。
 - **2020-01-02**：征求公众意见的初始版本。
+
+
+[通用数据 API 设计文档]: ./generic_data_apis.md
+[`DataProvider` Python 接口]: https://github.com/tensorflow/tensorboard/blob/a0c1def1e3a3725909f9fd59ee5d50fda81bb7ea/tensorboard/data/provider.py#L29
+[标签]: https://github.com/tensorflow/tensorboard/blob/a0c1def1e3a3725909f9fd59ee5d50fda81bb7ea/tensorboard/plugins/audio/summary_v2.py#L21
+[“包含文本注解的能力十分惊人”]: https://github.com/tensorflow/tensorboard/issues/296#issuecomment-320146370
+[我们可能以后要用到它们]: https://github.com/tensorflow/tensorboard/blob/a0c1def1e3a3725909f9fd59ee5d50fda81bb7ea/tensorboard/plugins/histogram/summary.py#L17-L25
+[我们的原型与 TensorFlow 的原型同步]: https://github.com/tensorflow/tensorboard/pull/3009#pullrequestreview-329605910
+[PR #3124]: https://github.com/tensorflow/tensorboard/blob/4ee9ae8a31524131eb56f7a1dc4aa09d7d186f10/tensorboard/plugins/pr_curve/summary.py#L523-L532
