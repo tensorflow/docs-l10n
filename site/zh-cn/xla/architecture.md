@@ -1,6 +1,7 @@
 # XLA 架构
 
-<div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;"> <img style="width:50%" src="./images/xlalogo.png"> </div>
+<div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;"> <img style="width:50%" src="./images/xlalogo.png">
+</div>
 
 ## 为什么要构建 XLA？
 
@@ -24,7 +25,8 @@ XLA 接受在 HLO 中定义的计算图（“计算”）并将其编译为适�
 
 下图显示了 XLA 中的编译过程：
 
-<div style="width:95%; margin:auto; margin-bottom:10px; margin-top:20px;">   <img src="./images/how-does-xla-work.png"> </div>
+<div style="width:95%; margin:auto; margin-bottom:10px; margin-top:20px;">   <img src="./images/how-does-xla-work.png">
+</div>
 
 XLA 提供了多种与目标无关的优化和分析过程（例如 [CSE](https://en.wikipedia.org/wiki/Common_subexpression_elimination)）、与目标无关的运算融合，以及用于为计算分配运行时内存的缓冲区分析。
 
