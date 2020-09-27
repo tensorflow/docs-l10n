@@ -46,7 +46,6 @@ ds = ds.shuffle(10000)
 # Then decode with ds_info.features['image']
 ds = ds.map(
     lambda image, label: ds_info.features['image'].decode_example(image), label)
-
 ```
 
 ### 同时裁剪和解码
