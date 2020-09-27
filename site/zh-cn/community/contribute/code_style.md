@@ -12,7 +12,6 @@
 
 $ pip install pylint
 $ wget -O /tmp/pylintrc https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/tools/ci_build/pylintrc
-
 ```
 
 要使用 `pylint` 检查文件，请运行以下命令：
