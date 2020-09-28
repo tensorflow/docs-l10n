@@ -2,27 +2,27 @@
 
 ## 브라우저 설정
 
-There are two main ways to get TensorFlow.js in your browser based projects:
+브라우저 기반 프로젝트에서 TensorFlow.js를 가져오는 두 가지 주요 방법이 있습니다.
 
-- Using [script tags](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_JavaScript_within_a_webpage).
+- [스크립트 태그](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_JavaScript_within_a_webpage) 사용하기
 
-- Installation from [NPM](https://www.npmjs.com) and using a build tool like [Parcel](https://parceljs.org/), [WebPack](https://webpack.js.org/), or [Rollup](https://rollupjs.org/guide/en).
+- [NPM](https://www.npmjs.com)에서 설치하고 [Parcel](https://parceljs.org/) , [WebPack](https://webpack.js.org/) 또는 [Rollup](https://rollupjs.org/guide/en)과 같은 빌드 도구를 사용하기
 
-If you are new to web development, or have never heard of tools like webpack or parcel, *we recommend you use the script tag approach*. If you are more experienced or want to write larger programs it might be worthwhile to explore using build tools.
+웹 개발이 처음이거나 webpack 또는 parcel과 같은 도구에 대해 들어 본 적이 없는 경우 *스크립트 태그 접근 방식을 사용하는 것이 좋습니다*. 이미 웹 개발 경험이 있거나 더 큰 규모의 프로그램을 작성하려는 경우 빌드 도구를 사용하여 탐색하는 것이 좋습니다.
 
-### Usage via Script Tag
+### 스크립트 태그를 통한 사용법
 
-Add the following script tag to your main HTML file.
+기본 HTML 파일에 다음 스크립트 태그를 추가합니다.
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
 ```
 
 <section class="expandable">
-  <h4 class="showalways">See code sample for script tag setup</h4>
-  <pre class="prettyprint"> // Define a model for linear regression. const model = tf.sequential(); model.add(tf.layers.dense({units: 1, inputShape: [1]})); </pre></section>
+  <h4 class="showalways">스크립트 태그 설정 코드 샘플 보기</h4>
+  <pre class="prettyprint">// Define a model for linear regression. const model = tf.sequential (); model.add (tf.layers.dense ({units : 1, inputShape : [1]}));</pre></section>
 
-model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
+model.compile ({loss : 'meanSquaredError', optimizer : 'sgd'});
 
 // Generate some synthetic data for training. const xs = tf.tensor2d([1, 2, 3, 4], [4, 1]); const ys = tf.tensor2d([1, 3, 5, 7], [4, 1]);
 
@@ -33,7 +33,7 @@ model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
 
 ### NPM에서 설치
 
-You can use either the [npm cli](https://docs.npmjs.com/cli/npm) tool or [yarn](https://yarnpkg.com/en/) to install TensorFlow.js.
+[npm cli](https://docs.npmjs.com/cli/npm) 도구 또는 [yarn](https://yarnpkg.com/en/)을 사용하여 TensorFlow.js를 설치할 수 있습니다.
 
 ```
 yarn add @tensorflow/tfjs
@@ -46,12 +46,12 @@ npm install @tensorflow/tfjs
 ```
 
 <section class="expandable">
-  <h4 class="showalways">See sample code for installation via NPM</h4>
-  <pre class="prettyprint"> import * as tf from '@tensorflow/tfjs'; </pre></section>
+  <h4 class="showalways">NPM을 통한 설치 샘플 코드 보기</h4>
+  <pre class="prettyprint">import * as tf from '@tensorflow/tfjs';</pre></section>
 
 // Define a model for linear regression. const model = tf.sequential(); model.add(tf.layers.dense({units: 1, inputShape: [1]}));
 
-model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
+model.compile ({loss : 'meanSquaredError', optimizer : 'sgd'});
 
 // Generate some synthetic data for training. const xs = tf.tensor2d([1, 2, 3, 4], [4, 1]); const ys = tf.tensor2d([1, 3, 5, 7], [4, 1]);
 
@@ -62,9 +62,9 @@ model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
 
 ## Node.js 설정
 
-You can use either the [npm cli](https://docs.npmjs.com/cli/npm) tool or [yarn](https://yarnpkg.com/en/) to install TensorFlow.js.
+[npm cli](https://docs.npmjs.com/cli/npm) 도구 또는 [yarn](https://yarnpkg.com/en/)을 사용하여 TensorFlow.js를 설치할 수 있습니다.
 
-**Option 1:** Install TensorFlow.js with native C++ bindings.
+**옵션 1:** 네이티브 C++ 바인딩으로 TensorFlow.js를 설치합니다.
 
 ```
 yarn add @tensorflow/tfjs-node
@@ -76,7 +76,7 @@ yarn add @tensorflow/tfjs-node
 npm install @tensorflow/tfjs-node
 ```
 
-**Option 2:** (Linux Only) If your system has a NVIDIA® GPU with [CUDA support](https://www.tensorflow.org/install/install_linux#NVIDIARequirements), use the GPU package even for higher performance.
+**옵션 2:** (Linux 전용) 시스템에 [CUDA를 지원](https://www.tensorflow.org/install/install_linux#NVIDIARequirements)하는 NVIDIA® GPU가 있는 경우 GPU 패키지를 사용하여 성능을 끌어올릴 수 있습니다.
 
 ```
 yarn add @tensorflow/tfjs-node-gpu
@@ -88,7 +88,7 @@ yarn add @tensorflow/tfjs-node-gpu
 npm install @tensorflow/tfjs-node-gpu
 ```
 
-**Option 3:** Install the pure JavaScript version. This is the slowest option performance wise.
+**옵션 3:** pure JavaScript 버전을 설치합니다. 이 버전은 성능면에서 가장 느린 옵션입니다.
 
 ```
 yarn add @tensorflow/tfjs
@@ -101,8 +101,8 @@ npm install @tensorflow/tfjs
 ```
 
 <section class="expandable">
-  <h4 class="showalways">See sample code for Node.js usage</h4>
-  <pre class="prettyprint"> const tf = require('@tensorflow/tfjs'); </pre></section>
+  <h4 class="showalways">Node.js 사용법에 대한 샘플 코드 보기</h4>
+  <pre class="prettyprint">const tf = require('@tensorflow/tfjs');</pre></section>
 
 // Optional Load the binding: // Use '@tensorflow/tfjs-node-gpu' if running with GPU. require('@tensorflow/tfjs-node');
 
@@ -117,4 +117,4 @@ model.fit (xs, ys, {epochs : 100, callbacks : {onEpochEnd : (epoch, log) => cons
 
 ### TypeScript
 
-When using TypeScript you may need to set `skipLibCheck: true` in your `tsconfig.json` file if your project makes use of strict null checking or you will run into errors during compilation.
+TypeScript를 사용할 때 프로젝트에서 엄격한 null 검사를 사용하거나 컴파일 중에 오류가 발생하는 경우 `tsconfig.json` 파일에서 `skipLibCheck: true`를 설정해야 할 수 있습니다.
