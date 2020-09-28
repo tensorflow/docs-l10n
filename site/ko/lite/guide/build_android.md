@@ -44,7 +44,7 @@ android update sdk --no-ui -a --filter tools,platform-tools,android-${ANDROID_AP
 
 Bazel은 TensorFlow의 기본 빌드 시스템입니다. Bazel을 사용하여 빌드하려면 시스템에 Android NDK 및 SDK가 설치되어 있어야 합니다.
 
-1. Install the latest version of the [Bazel build system](https://bazel.build/versions/master/docs/install.html).
+1. 최신 버전의 [Bazel 빌드 시스템](https://bazel.build/versions/master/docs/install.html)을 설치합니다.
 2. 네이티브(C/C++) TensorFlow Lite 코드를 빌드하려면 Android NDK가 필요합니다. 현재 권장되는 버전은 17c이며 [여기](https://developer.android.com/ndk/downloads/older_releases.html#ndk-17c-downloads)에서 찾을 수 있습니다.
 3. Android SDK 및 빌드 도구는 [여기](https://developer.android.com/tools/revisions/build-tools.html)에서 얻거나, [Android Studio](https://developer.android.com/studio/index.html)의 일부로 얻을 수도 있습니다. TensorFlow Lite 빌드에 권장되는 버전은 Build tools API >= 23입니다.
 
