@@ -2,14 +2,13 @@
 
 TensorFlow Lattice는 유연하고 제어되며 해석 가능한 격자 기반 모델을 구현하는 라이브러리입니다. 라이브러리를 사용하면 상식적이거나 정책 중심의 [형상 제약 조건을](tutorials/shape_constraints.ipynb) 통해 학습 프로세스에 도메인 지식을 주입할 수 있습니다. 이는 단조, 볼록 및 쌍별 신뢰와 같은 제약 조건을 충족할 수 있는 [Keras 레이어](tutorials/keras_layers.ipynb) 모음을 사용하여 수행됩니다. 라이브러리는 또한 쉽게 설정할 수 있는 [준비된 estimator](tutorials/canned_estimators.ipynb)를 제공합니다.
 
-## Concepts
+## 개념
 
 이 섹션에서는 [Monotonic Calibrated Interpolated Look-Up Tables](http://jmlr.org/papers/v17/15-243.html) , JMLR 2016의 설명을 단순화한 버전이 나옵니다.
 
-### Lattices
+### 격자
 
 *격자*는 데이터의 임의의 입력-출력 관계를 근사화할 수 있는 보간된 조회 테이블입니다. 입력 공간에 일반 그리드를 겹치고 그리드의 꼭짓점에서 출력값을 학습합니다. 테스트 포인트 $x$의 경우 $f(x)$는 $x$를 둘러싼 격자 값에서 선형으로 보간됩니다.
-
 
 <img src="images/2d_lattice.png" style="display:block; margin:auto;">
 
@@ -28,38 +27,37 @@ $D$ 특성과 각 차원을 따라 2개의 꼭짓점이 있는 일반 격자에�
 
 모델이 지역 커피숍 추천으로 사용자의 행복에 대해 학습합니다. TensorFlow Lattice 모델은 *구간 선형 함수*( `tfl.layers.PWLCalibration`)를 사용하여 위의 예제 격자에서 0.0에서 1.0까지 격자가 허용하는 범위로 입력 특성을 보정하고 정규화할 수 있습니다. 다음은 10개의 키포인트가 있는 보정 함수의 예를 보여줍니다.
 
-<p align="center"> <img src="images/pwl_calibration_distance.png"> <img src="images/pwl_calibration_price.png"> </p>
+<p align="center"><img src="images/pwl_calibration_distance.png"> <img src="images/pwl_calibration_price.png"></p>
 
 특성의 분위수를 입력 키포인트로 사용하는 것이 좋습니다. TensorFlow Lattice [준비된 estimator](tutorials/canned_estimators.ipynb)는 입력 키포인트를 특성 분위수로 자동 설정할 수 있습니다.
 
 범주형 특성의 경우 TensorFlow Lattice는 격자에 공급할 유사한 출력 경계를 사용하여 범주형 보정(`tfl.layers.CategoricalCalibration`)을 제공합니다.
 
-### Ensembles
+### 앙상블
 
 격자 레이어의 매개변수 수는 입력 특성의 수에 따라 기하급수적으로 증가하기 때문에 매우 높은 차원으로 조정되지는 않습니다. 이러한 한계를 극복하기 위해 TensorFlow Lattice는 여러 개의 *작은* 격자를 결합(평균)하는 격자 앙상블을 제공하여 모델이 특성 수에서 선형으로 성장할 수 있도록 합니다.
 
-The library provides two variations of these ensembles:
+라이브러리는 이러한 앙상블의 두 가지 변형을 제공합니다.
 
 - **Random Tiny Lattices**(RTL): 각 하위 모델은 특성의 무작위 하위 집합(대체 포함)을 사용합니다.
 
 - **Crystasl**: Crystal 알고리즘은 먼저 쌍별 특성 상호 작용을 예측하는 *사전 적합* 모델을 훈련합니다. 그런 다음 비선형 상호 작용이 더 많은 특성이 동일한 격자에 있도록 최종 앙상블을 정렬합니다.
 
-## Why TensorFlow Lattice ?
+## 왜 TensorFlow Lattice인가?
 
 [TF 블로그 게시물](https://blog.tensorflow.org/2020/02/tensorflow-lattice-flexible-controlled-and-interpretable-ML.html)에서 TensorFlow Lattice에 대한 간략한 소개를 확인할 수 있습니다.
 
-### Interpretability
+### 해석 가능성
 
 각 레이어의 매개변수는 해당 레이어의 출력이므로 모델의 각 부분을 분석, 이해 및 디버그하기 쉽습니다.
 
-### Accurate and Flexible Models
+### 정확하고 유연한 모델
 
 세분화된 격자를 사용하면 단일 격자 레이어로 *임의의 복잡한* 함수를 얻을 수 있습니다. 여러 레이어의 calibrator와 격자를 사용하면 실제로 잘 동작하며 비슷한 크기의 DNN 모델과 일치하거나 성능을 능가할 수 있습니다.
 
 ### 상식적인 형상 제약 조건
 
 실제 훈련 데이터는 런타임 데이터를 충분히 나타내지 못할 수 있습니다. DNN 또는 포리스트와 같은 유연한 ML 솔루션은 훈련 데이터가 다루지 않는 입력 공간의 일부에서 예기치 않게, 격렬하게 동작하는 경우가 많습니다. 이 동작은 정책 또는 공정성 제약 조건이 위반될 수 있는 경우 특히 문제가 됩니다.
-
 
 <img src="images/model_comparison.png" style="display:block; margin:auto;">
 
@@ -69,7 +67,7 @@ TF Lattice를 사용하면 유연한 모델을 계속 사용할 수 있지만, �
 
 - **단조**: 입력에 대해 출력이 증가/감소하도록 지정할 수 있습니다. 이 예에서는 커피숍까지의 거리가 늘어날 경우 예상 사용자 선호도만 감소하도록 지정할 수 있습니다.
 
-<p align="center"> <img src="images/linear_fit.png"> <img src="images/flexible_fit.png"> <img src="images/regularized_fit.png"> <img src="images/monotonic_fit.png"> </p>
+<p align="center"><img src="images/linear_fit.png"> <img src="images/flexible_fit.png"> <img src="images/regularized_fit.png"> <img src="images/monotonic_fit.png"></p>
 
 - **볼록/오목**: 함수 형상을 볼록하거나 오목하도록 지정할 수 있습니다. 단조와 혼합되면 함수가 주어진 특성에 대해 감소하는 수익을 나타내도록 강제할 수 있습니다.
 
