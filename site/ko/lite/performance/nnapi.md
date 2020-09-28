@@ -57,7 +57,7 @@ if(null != nnApiDelegate) {
 }
 ```
 
-## Best practices
+## 모범 사례
 
 ### 배포 전에 성능 테스트하기
 
@@ -92,7 +92,7 @@ Log.d("Board Platform", boardPlatform);
 
 고급 개발자의 경우 리모트 구성 시스템을 통해 목록을 유지하는 것이 좋습니다. TensorFlow 팀은 최적의 NNAPI 구성 검색 및 적용을 단순화하고 자동화하는 방법을 적극적으로 연구하고 있습니다.
 
-### Quantization
+### 양자화
 
 양자화는 계산을 위해 32bit 부동 소수점 대신 8bit 정수 또는 16bit 부동을 사용하여 모델 크기를 줄입니다. 8bit 정수 모델 크기는 32bit 부동 버전의 1/4이고 16bit 부동 소수점은 크기의 절반입니다. 양자화는 프로세스에서 일부 모델 정확성에 상충 관계를 만들 수도 있지만 성능을 크게 향상시킬 수 있습니다.
 
@@ -106,13 +106,13 @@ NNAPI는 모델이 [지원되는 연산](https://developer.android.com/ndk/guide
 
 - [MobileNet v1(224x224) 이미지 분류(float 모델 다운로드)](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html)
     [(양자화된 모델 다운로드)](http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz)
-    *(image classification model designed for mobile and embedded based vision applications)*
-- [MobileNet v2 SSD object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html)
-    [(download)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)
+    *(모바일 및 임베디드 기반 비전 애플리케이션을 위해 설계된 이미지 분류 모델)*
+- [MobileNet v2 SSD 객체 감지](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html)
+    [(다운로드)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)
     *(경계 상자가 있는 여러 객체를 감지하는 이미지 분류 모델)*
 - [MobileNet v1(300x300) SSD(Single Shot Detector) 객체 감지](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(다운로드)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
 - [포즈 예측을 위한 PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet)
-    [(download)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)
+    [(다운로드)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)
     *(이미지 또는 비디오에서 사람의 포즈를 예측하는 비전 모델)*
 
 모델에 동적 크기의 출력이 포함된 경우 NNAPI 가속도 지원되지 않습니다. 이 경우 다음과 같은 경고가 표시됩니다.
