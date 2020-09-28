@@ -8,7 +8,7 @@ TensorFlow Lattice(TFL)를 사용하는 환경을 설정하는 방법에는 여�
 
 ## pip를 사용하여 TensorFlow Lattice 설치하기
 
-Install using pip.
+pip를 사용하여 설치합니다.
 
 ```shell
 pip install --upgrade tensorflow-lattice
@@ -22,7 +22,7 @@ github 리포지토리를 복제합니다.
 git clone https://github.com/tensorflow/lattice.git
 ```
 
-Build pip package from source:
+소스에서 pip 패키지를 빌드합니다.
 
 ```shell
 python setup.py sdist bdist_wheel --universal --release
