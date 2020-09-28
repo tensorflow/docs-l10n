@@ -1,6 +1,5 @@
 # 포즈 예측
 
-
 <img src="../images/pose.png" class="attempt-right">
 
 ## 시작하기
@@ -35,7 +34,7 @@ Android 및 iOS용 PoseNet 모델을 보여주는 TensorFlow Lite 애플리케�
   <tbody>
     <tr>
       <td>0</td>
-      <td>nose</td>
+      <td>코</td>
     </tr>
     <tr>
       <td>1</td>
@@ -43,15 +42,15 @@ Android 및 iOS용 PoseNet 모델을 보여주는 TensorFlow Lite 애플리케�
     </tr>
     <tr>
       <td>2</td>
-      <td>rightEye</td>
+      <td>오른쪽 눈</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>leftEar</td>
+      <td>왼쪽 귀</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>rightEar</td>
+      <td>오른쪽 귀</td>
     </tr>
     <tr>
       <td>5</td>
@@ -71,11 +70,11 @@ Android 및 iOS용 PoseNet 모델을 보여주는 TensorFlow Lite 애플리케�
     </tr>
     <tr>
       <td>9</td>
-      <td>leftWrist</td>
+      <td>왼쪽 손목</td>
     </tr>
     <tr>
       <td>10</td>
-      <td>rightWrist</td>
+      <td>오른쪽 손목</td>
     </tr>
     <tr>
       <td>11</td>
@@ -111,7 +110,7 @@ Android 및 iOS용 PoseNet 모델을 보여주는 TensorFlow Lite 애플리케�
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>모델명</th>
       <th>모델 크기</th>
       <th>기기</th>
       <th>GPU</th>
@@ -122,20 +121,20 @@ Android 및 iOS용 PoseNet 모델을 보여주는 TensorFlow Lite 애플리케�
     <td rowspan="3">
       <p data-md-type="paragraph"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">Posenet</a></p>
     </td>
-    <td rowspan="3">       12.7 Mb     </td>
+    <td rowspan="3">12.7Mb</td>
     <td>Pixel 3(Android 10)</td>
     <td>12ms</td>
-    <td>31ms*</td>
+    <td>31ms *</td>
   </tr>
    <tr>
      <td>Pixel 4(Android 10)</td>
     <td>12ms</td>
-    <td>19ms*</td>
+    <td>19ms *</td>
   </tr>
    <tr>
      <td>iPhone XS(iOS 12.4.1)</td>
      <td>4.8ms</td>
-    <td>22ms** </td>
+    <td>22ms **</td>
   </tr>
 </table>
 
@@ -143,12 +142,11 @@ Android 및 iOS용 PoseNet 모델을 보여주는 TensorFlow Lite 애플리케�
 
 ** 최상의 결과를 위해 iPhone에서 2개의 스레드가 사용되었습니다.
 
-## Example output
+## 예제 출력
 
+<img alt="포즈 추정을 보여주는 애니메이션" src="https://www.tensorflow.org/images/lite/models/pose_estimation.gif">
 
-<img alt="Animation showing pose estimation" src="https://www.tensorflow.org/images/lite/models/pose_estimation.gif">
-
-## How it performs
+## 수행 방법
 
 성능은 기기 및 출력 보폭(히트맵 및 오프셋 벡터)에 따라 다릅니다. PoseNet 모델은 이미지 크기가 불변하므로 이미지가 축소되었는지와 관계없이 원본 이미지와 같은 배율로 포즈 위치를 예측할 수 있습니다. 즉, PoseNet은 성능은 희생하면서 더 높은 정확성을 갖도록 구성될 수 있습니다.
 
@@ -156,8 +154,7 @@ Android 및 iOS용 PoseNet 모델을 보여주는 TensorFlow Lite 애플리케�
 
 다음 이미지는 출력 보폭이 입력 이미지 크기를 기준으로 출력을 축소 조정하는 정도를 결정하는 방법을 보여줍니다. 출력 보폭이 높을수록 더 빠르지만 정확성이 떨어집니다.
 
-
-<img alt="Output stride and heatmap resolution" src="../images/output_stride.png">
+<img alt="출력 보폭 및 히트 맵 해상도" src="../images/output_stride.png">
 
 ## 포즈 예측에 대해 자세히 알아보기
 
@@ -167,14 +164,14 @@ Android 및 iOS용 PoseNet 모델을 보여주는 TensorFlow Lite 애플리케�
    <li><p data-md-type="paragraph"><a href="https://medium.com/tensorflow/track-human-poses-in-real-time-on-android-with-tensorflow-lite-e66d0f3e6f9e">블로그 게시물: Track human poses in real-time on Android with TensorFlow Lite</a></p></li>
 </ul>
 
-### Use cases
+### 사용 사례
 
 <ul>
   <li><p data-md-type="paragraph"><a href="https://vimeo.com/128375543">'PomPom Mirror'</a></p></li>
   <li><p data-md-type="paragraph"><a href="https://youtu.be/I5__9hq-yas">Amazing Art Installation Turns You Into A Bird | Chris Milk "The Treachery of Sanctuary"</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://vimeo.com/34824490">Puppet Parade - Interactive Kinect Puppets</a></p></li>
+  <li><p data-md-type="paragraph"><a href="https://vimeo.com/34824490">Puppet Parade-Interactive Kinect Puppets</a></p></li>
   <li><p data-md-type="paragraph"><a href="https://vimeo.com/2892576">Messa di Voce(퍼포먼스), 발췌</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://www.instagram.com/p/BbkKLiegrTR/">Augmented reality</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://www.instagram.com/p/Bg1EgOihgyh/">Interactive animation</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">Gait analysis</a></p></li>
+  <li><p data-md-type="paragraph"><a href="https://www.instagram.com/p/BbkKLiegrTR/">증강 현실</a></p></li>
+  <li><p data-md-type="paragraph"><a href="https://www.instagram.com/p/Bg1EgOihgyh/">인터랙티브 애니메이션</a></p></li>
+  <li><p data-md-type="paragraph"><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">보행 분석</a></p></li>
 </ul>
