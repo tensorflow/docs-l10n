@@ -16,8 +16,7 @@ Python으로 TensorFlow Lite 모델을 빠르게 실행하려면 전체 TensorFl
 
 예를 들어, Raspbian Buster(Python 3.7 포함)를 실행하는 Raspberry Pi를 사용 중인 경우, 다음과 같이 Python wheel을 설치합니다.
 
-<pre class="devsite-terminal devsite-click-to-copy">pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl
-</pre>
+<pre class="devsite-terminal devsite-click-to-copy">pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl</pre>
 
 <table>
 <tr>
