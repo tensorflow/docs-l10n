@@ -14,7 +14,7 @@ CPU에 의존하는 대신 일부 기기에는 GPU 또는 DSP와 같은 하드�
 
 ## 내장 대리자 사용하기
 
-TensorFlow Lite provides the following delegates for hardware acceleration:
+TensorFlow Lite는 하드웨어 가속을 위해 다음 대리자를 제공합니다.
 
 - **크로스 플랫폼 가속을 위한 GPU 대리자** - GPU 대리자는 Android와 iOS 모두에서 사용할 수 있습니다. GPU를 사용할 수 있는 32bit 및 16bit 부동 기반 모델을 실행하도록 최적화되어 있습니다. GPU 대리자에 대한 개요는 [GPU의 TensorFlow Lite](gpu_advanced.md)를 참조하세요. Android 및 iOS에서 GPU 대리자를 사용하는 방법에 대한 단계별 튜토리얼은 [TensorFlow Lite GPU 대리자 튜토리얼](gpu.md)을 참조하세요.
 - **최신 Android 기기용 NNAPI 대리자** - NNAPI 대리자를 사용하여 GPU, DSP 및/또는 NPU를 사용할 수 있는 Android 기기에서 모델을 가속화할 수 있습니다. Android 8.1(API 27+) 이상에서 사용할 수 있습니다. NNAPI 대리자 개요, 단계별 지침 및 모범 사례는 [TensorFlow Lite NNAPI 대리자](nnapi.md)를 참조하세요.
@@ -25,13 +25,13 @@ TensorFlow Lite provides the following delegates for hardware acceleration:
 
 다음과 같은 간단한 모델 그래프가 있다고 가정해 보겠습니다.
 
-![Original graph](../images/performance/tflite_delegate_graph_1.png "Original Graph")
+![Original graph](../images/performance/tflite_delegate_graph_1.png "원본 그래프")
 
 특정 연산에 대리자가 제공된 경우 TensorFlow Lite는 그래프를 여러 하위 그래프로 분할하고 각 하위 그래프는 대리자가 처리합니다.
 
 대리자 `MyDelegate`가 Conv2D 및 Mean 연산을 더 빠르게 구현한다고 가정해 보겠습니다. 그 결과 기본 그래프는 아래와 같이 보이도록 업데이트됩니다.
 
-![Graph with delegate](../images/performance/tflite_delegate_graph_2.png "Graph with delegate")
+![Graph with delegate](../images/performance/tflite_delegate_graph_2.png "대리자가있는 그래프")
 
 대리자가 처리하는 각 하위 그래프는 호출된 호출에서 하위 그래프를 평가하는 노드로 대체됩니다.
 
@@ -43,7 +43,7 @@ TensorFlow Lite provides the following delegates for hardware acceleration:
 
 이전 섹션에 따라 대리자를 추가하려면 다음을 수행해야 합니다.
 
-1. Define a kernel node that is responsible for evaluating the delegate subgraph.
+1. 대리자 하위 그래프를 평가하는 커널 노드를 정의합니다.
 2. 커널 노드를 등록하고 대리자가 실행할 수 있는 노드를 요청하는 [TfLiteDelegate](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/common.h#L611) 인스턴스를 만듭니다.
 
 코드에서 확인하기 위해 대리자를 정의하고 `MyDelegate`라고 부르면 Conv2D 및 Mean 연산을 더 빠르게 실행할 수 있습니다.
