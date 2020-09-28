@@ -7,25 +7,25 @@
 
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
-If you are new to TensorFlow Lite and are working with Android, we recommend exploring the following example applications that can help you get started.
+TensorFlow Lite를 처음 사용하고 Android로 작업하는 경우, 다음 예제 애플리케이션을 탐색하면 시작하는 데 도움이 됩니다.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android">Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android">Android 예제</a>
 
 Android이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미 익숙한 경우 스타터 텍스트 분류 모델을 다운로드할 수 있습니다.
 
-<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">Download starter model</a>
+<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">스타터 모델 다운로드하기</a>
 
 ## 동작 원리
 
-Text classification categorizes a paragraph into predefined groups based on its content.
+텍스트 분류는 콘텐츠에 따라 미리 정의된 그룹으로 단락을 분류합니다.
 
-This pretrained model predicts if a paragraph's sentiment is positive or negative. It was trained on [Large Movie Review Dataset v1.0](http://ai.stanford.edu/~amaas/data/sentiment/) from Mass et al, which consists of IMDB movie reviews labeled as either positive or negative.
+이 사전 훈련된 모델은 단락의 감정이 긍정적인지 부정적인지 예측합니다. Mass et al의 [Large Movie Review Dataset v1.0](http://ai.stanford.edu/~amaas/data/sentiment/)에 대해 훈련되었으며, 이는 긍정적 또는 부정적이라고 표시된 IMDB 영화 리뷰로 구성됩니다.
 
 Here are the steps to classify a paragraph with the model:
 
 1. 단락을 토큰화하고 사전 정의된 어휘를 사용하여 단어 ID 목록으로 변환하세요.
 2. Feed the list to the TensorFlow Lite model.
-3. Get the probability of the paragraph being positive or negative from the model outputs.
+3. 모델 출력에서 단락이 양수 또는 음수일 확률을 가져옵니다.
 
 ### 참고
 
@@ -34,7 +34,7 @@ Here are the steps to classify a paragraph with the model:
 
 ## 성능 벤치마크
 
-Performance benchmark numbers are generated with the tool [described here](https://www.tensorflow.org/lite/performance/benchmarks).
+성능 벤치 마크 수치는 [여기에 설명된](https://www.tensorflow.org/lite/performance/benchmarks) 도구를 사용하여 생성됩니다.
 
 <table>
   <thead>
@@ -47,7 +47,7 @@ Performance benchmark numbers are generated with the tool [described here](https
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification.tflite">Text Classification</a></td>
-    <td rowspan="3">       0.6 Mb     </td>
+    <td rowspan="3">       0.6 Mb</td>
     <td>Pixel 3(Android 10)</td>
     <td>0.05ms*</td>
   </tr>
