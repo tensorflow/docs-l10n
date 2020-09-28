@@ -4,11 +4,11 @@
 
 ## TensorFlow Lite 대리자란 무엇입니까?
 
-A TensorFlow Lite delegate is a way to delegate part or all of graph execution to another executor.
+TensorFlow Lite 대리자는 그래프 실행의 일부 또는 전체를 다른 executor에 위임하는 방법입니다.
 
 ## 대리자를 사용해야 하는 이유는 무엇입니까?
 
-Running inference on compute-heavy machine learning models on mobile devices is resource demanding due to the devices' limited processing and power.
+모바일 기기에서 컴퓨팅이 많은 머신러닝 모델에 대한 추론을 실행하는 것은 기기의 제한된 처리 및 전력으로 인해 리소스가 많이 필요합니다.
 
 CPU에 의존하는 대신 일부 기기에는 GPU 또는 DSP와 같은 하드웨어 가속기가 있어 성능과 에너지 효율성을 높일 수 있습니다.
 
@@ -16,10 +16,10 @@ CPU에 의존하는 대신 일부 기기에는 GPU 또는 DSP와 같은 하드�
 
 TensorFlow Lite provides the following delegates for hardware acceleration:
 
-- **GPU delegate for cross platform acceleration** - The GPU delegate can be used on both Android and iOS. It is optimized to run 32-bit and 16-bit float based models where a GPU is available. For an overview of the GPU delegate, see [TensorFlow Lite on GPU](gpu_advanced.md). For step-by-step tutorials on using the GPU delegate with Android and iOS, see [TensorFlow Lite GPU Delegate Tutorial](gpu.md).
-- **NNAPI delegate for newer Android devices** - The NNAPI delegate can be used to accelerate models on Android devices with GPU, DSP and / or NPU available. It is available in Android 8.1 (API 27+) or higher. For an overview of the NNAPI delegate, step-by-step instructions and best practices, see [TensorFlow Lite NNAPI delegate](nnapi.md).
-- **Hexagon delegate for older Android devices** - The Hexagon delegate can be used to accelerate models on Android devices with Qualcomm Hexagon DSP. It can be used on devices older version of Android OS that does not fully support NNAPI. See [TensorFlow Lite Hexagon delegate](hexagon_delegate.md) for more detail.
-- **Core ML delegate for newer iPhones and iPads** - For newer iPhones and iPads where Neural Engine is available, you can use Core ML delegate to accelerate inference for 32-bit float based models. Neural Engine is available Apple mobile devices with A12 SoC or higher. For an overview of the Core ML delegate and step-by-step instructions, see [TensorFlow Lite Core ML delegate](coreml_delegate.md).
+- **크로스 플랫폼 가속을 위한 GPU 대리자** - GPU 대리자는 Android와 iOS 모두에서 사용할 수 있습니다. GPU를 사용할 수 있는 32bit 및 16bit 부동 기반 모델을 실행하도록 최적화되어 있습니다. GPU 대리자에 대한 개요는 [GPU의 TensorFlow Lite](gpu_advanced.md)를 참조하세요. Android 및 iOS에서 GPU 대리자를 사용하는 방법에 대한 단계별 튜토리얼은 [TensorFlow Lite GPU 대리자 튜토리얼](gpu.md)을 참조하세요.
+- **최신 Android 기기용 NNAPI 대리자** - NNAPI 대리자를 사용하여 GPU, DSP 및/또는 NPU를 사용할 수 있는 Android 기기에서 모델을 가속화할 수 있습니다. Android 8.1(API 27+) 이상에서 사용할 수 있습니다. NNAPI 대리자 개요, 단계별 지침 및 모범 사례는 [TensorFlow Lite NNAPI 대리자](nnapi.md)를 참조하세요.
+- **구형 Android 기기용 Hexagon 대리자** - Qualcomm Hexagon DSP를 사용하는 Android 기기에서 Hexagon 대리자를 사용하여 모델을 가속화할 수 있습니다. NNAPI를 완전히 지원하지 않는 이전 버전의 Android OS 기기에서 사용할 수 있습니다. 자세한 내용은 [TensorFlow Lite Hexagon 대리자](hexagon_delegate.md)를 참조하세요.
+- **최신 iPhone 및 iPad용 Core ML 대리자** - Neural Engine을 사용할 수 있는 최신 iPhone 및 iPad의 경우 Core ML 대리자를 사용하여 32bit 부동 기반 모델에 대한 추론을 가속화할 수 있습니다. Neural Engine은 A12 SoC 이상의 Apple 모바일 기기를 사용할 수 있습니다. Core ML 대리자에 대한 개요 및 단계별 지침은 [TensorFlow Lite Core ML 대리자](coreml_delegate.md)를 참조하세요.
 
 ## 대리자는 어떻게 동작합니까?
 
@@ -27,15 +27,15 @@ TensorFlow Lite provides the following delegates for hardware acceleration:
 
 ![Original graph](../images/performance/tflite_delegate_graph_1.png "Original Graph")
 
-If a delegate was provided for specific operations, then TensorFlow Lite will split the graph into multiple subgraphs where each subgraph will be handled by a delegate.
+특정 연산에 대리자가 제공된 경우 TensorFlow Lite는 그래프를 여러 하위 그래프로 분할하고 각 하위 그래프는 대리자가 처리합니다.
 
 대리자 `MyDelegate`가 Conv2D 및 Mean 연산을 더 빠르게 구현한다고 가정해 보겠습니다. 그 결과 기본 그래프는 아래와 같이 보이도록 업데이트됩니다.
 
 ![Graph with delegate](../images/performance/tflite_delegate_graph_2.png "Graph with delegate")
 
-Each subgraph that is handled by a delegate will be replaced with a node that evaluates the subgraph on its invoked call.
+대리자가 처리하는 각 하위 그래프는 호출된 호출에서 하위 그래프를 평가하는 노드로 대체됩니다.
 
-Depending on the model, the final graph can end up with one node, which means that all of the graphs were delegated or multiple nodes handled the subgraphs. In general, you don't want to have multiple subgraphs handled by the delegate, since each time you switch from delegate to the main graph, there is an overhead for passing the results from the subgraph to the main graph. It's not always safe to share memory.
+모델에 따라 최종 그래프는 하나의 노드로 끝날 수 있습니다. 즉, 모든 그래프가 위임되었거나 여러 노드가 하위 그래프를 처리했음을 의미합니다. 일반적으로 대리자에서 기본 그래프로 전환할 때마다 결과를 하위 그래프에서 기본 그래프로 전달하는 오버헤드가 있으므로 대리자가 여러 개의 하위 그래프를 처리하지 않도록 해야 합니다. 메모리 공유가 항상 안전한 것은 아닙니다.
 
 ## 대리자를 추가하는 방법
 
