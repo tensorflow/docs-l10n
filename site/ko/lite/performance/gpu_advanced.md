@@ -1,24 +1,24 @@
 # GPU의 TensorFlow Lite
 
-[TensorFlow Lite](https://www.tensorflow.org/mobile/tflite/) supports several hardware accelerators. This document describes how to use the GPU backend using the TensorFlow Lite delegate APIs on Android (requires OpenCL or OpenGL ES 3.1 and higher) and iOS (requires iOS 8 or later).
+[TensorFlow Lite](https://www.tensorflow.org/mobile/tflite/)는 여러 하드웨어 가속기를 지원합니다. 이 설명서에서는 Android(OpenCL 또는 OpenGL ES 3.1 이상 필요) 및 iOS(iOS 8 이상 필요)에서 TensorFlow Lite 대리자 API를 사용하여 GPU 백엔드를 사용하는 방법을 설명합니다.
 
 ## GPU 가속의 이점
 
 ### 속도
 
-GPUs are designed to have high throughput for massively parallelizable workloads. Thus, they are well-suited for deep neural nets, which consist of a huge number of operators, each working on some input tensor(s) that can be easily divided into smaller workloads and carried out in parallel. This parallelism typically results in lower latency. In the best scenario, inference on the GPU may run fast enough to become suitable for real-time applications that were not previously possible.
+GPU는 대규모 병렬 처리가 가능한 워크로드를 위해 높은 처리량을 갖도록 설계되었습니다. 따라서 GPU는 각각 작은 워크로드로 쉽게 분할되고 병렬로 수행될 수 있는 일부 입력 텐서(들)에서 작업하는 수많은 연산자로 구성된 심층 신경망에 적합합니다. 보통은 병렬 처리를 통해 지연 시간이 크게 줍니다. 최상의 시나리오에서 GPU에 대한 추론은 이전에는 가능하지 않았던 실시간 애플리케이션에 적합하도록 충분히 빠르게 실행될 수 있습니다.
 
 ### 정확성
 
-GPUs do their computation with 16-bit or 32-bit floating point numbers and (unlike the CPUs) do not require quantization for optimal performance. If decreased accuracy made quantization untenable for your models, running your neural network on a GPU may eliminate this concern.
+GPU는 16bit 또는 32bit 부동 소수점 숫자로 계산을 수행하며 CPU와 달리 최적의 성능을 위해 양자화가 필요하지 않습니다. 정확성이 낮아 모델에 대해 양자화가 불가능한 경우 GPU에서 신경망을 실행하면 이 문제를 해결할 수 있습니다.
 
-### Energy efficiency
+### 에너지 효율성
 
-Another benefit that comes with GPU inference is its power efficiency. A GPU carries out computations in a very efficient and optimized way, consuming less power and generating less heat than the same task run on a CPU.
+GPU 추론과 함께 제공되는 또 다른 이점은 전력 효율성입니다. GPU는 매우 효율적이고 최적화된 방식으로 계산을 수행하여 CPU에서 실행되는 같은 작업보다 전력을 덜 소비하고 열을 덜 발생시킵니다.
 
-## Supported ops
+## 지원되는 연산
 
-TensorFlow Lite on GPU supports the following ops in 16-bit and 32-bit float precision:
+GPU의 TensorFlow Lite는 16bit 및 32bit 부동 소수점 정밀도에서 다음 연산을 지원합니다.
 
 - `ADD`
 - `AVERAGE_POOL_2D`
@@ -44,7 +44,7 @@ TensorFlow Lite on GPU supports the following ops in 16-bit and 32-bit float pre
 - `SUB`
 - `TRANSPOSE_CONV`
 
-By default, all ops are only supported at version 1. Enabling the [experimental quantization support](gpu_advanced.md#running-quantized-models-experimental-android-only) allows the appropriate versions; for example, ADD v2.
+기본적으로 모든 연산은 버전 1에서만 지원됩니다. [실험적 양자화 지원](gpu_advanced.md#running-quantized-models-experimental-android-only)을 활성화하면 적절한 버전이 허용됩니다. 예: ADD v2.
 
 ## 기본 사용법
 
@@ -130,9 +130,9 @@ readFromOutput(output);
 
 
 
-### Android (C/C++)
+### Android(C/C++)
 
-For C/C++ usage of TensorFlow Lite GPU on Android, the GPU delegate can be created with `TfLiteGpuDelegateV2Create()` and destroyed with `TfLiteGpuDelegateV2Delete()`.
+Android에서 TensorFlow Lite GPU의 C/C++를 사용하는 경우, GPU 대리자는 `TfLiteGpuDelegateV2Create()`로 만들고 `TfLiteGpuDelegateV2Delete()`로 제거할 수 있습니다.
 
 ```c++
 // Set up interpreter.
@@ -155,18 +155,18 @@ ReadFromOutputTensor(interpreter->typed_output_tensor<float>(0));
 TfLiteGpuDelegateV2Delete(delegate);
 ```
 
-Take a look at `TfLiteGpuDelegateOptionsV2` to create a delegate instance with custom options. You can initialize the default options with `TfLiteGpuDelegateOptionsV2Default()` and then modify them as necessary.
+`TfLiteGpuDelegateOptionsV2`를 살펴보고 사용자 정의 옵션이 있는 대리자 인스턴스를 만듭니다. `TfLiteGpuDelegateOptionsV2Default()`를 사용하여 기본 옵션을 초기화한 다음 필요에 따라 수정할 수 있습니다.
 
-TFLite GPU for Android C/C++ uses the [Bazel](https://bazel.io) build system. The delegate can be built, for example, using the following command:
+Android C/C++용 TFLite GPU는 [Bazel](https://bazel.io) 빌드 시스템을 사용합니다. 예를 들어 다음 명령을 사용하여 대리자를 만들 수 있습니다.
 
 ```sh
 bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:delegate                           # for static library
 bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:libtensorflowlite_gpu_delegate.so  # for dynamic library
 ```
 
-### iOS (Swift)
+### iOS(Swift)
 
-Initialize TensorFlow Lite interpreter with the GPU delegate.
+GPU 대리자로 TensorFlow Lite 인터프리터를 초기화합니다.
 
 ```swift
 import TensorFlowLite
@@ -180,11 +180,11 @@ if let interpreter = try Interpreter(modelPath: modelPath,
 
 ```
 
-### iOS (Objective-C)
+### iOS(Objective-C)
 
-Note: For Objective-C, GPU delegate is provided via C API.
+참고: Objective-C의 경우 GPU 대리자는 C API를 통해 제공됩니다.
 
-To use TensorFlow Lite on GPU, get the GPU delegate via `TFLGpuDelegateCreate()` and then pass it to `Interpreter::ModifyGraphWithDelegate()` (instead of calling `Interpreter::AllocateTensors()`).
+GPU에서 TensorFlow Lite를 사용하려면 `TFLGpuDelegateCreate()`를 통해 GPU 대리자를 가져온 다음 (`Interpreter::AllocateTensors()`를 호출하는 대신) `Interpreter::ModifyGraphWithDelegate()`에 전달합니다.
 
 ```c++
 // Set up interpreter.
@@ -208,15 +208,15 @@ ReadFromOutputTensor(interpreter->typed_output_tensor<float>(0));
 TFLGpuDelegateDelete(delegate);
 ```
 
-Note: When calling `Interpreter::ModifyGraphWithDelegate()` or `Interpreter::Invoke()`, the caller must have an `EGLContext` in the current thread and `Interpreter::Invoke()` must be called from the same `EGLContext`. If an `EGLContext` does not exist, the delegate will internally create one, but then the developer must ensure that `Interpreter::Invoke()` is always called from the same thread in which `Interpreter::ModifyGraphWithDelegate()` was called.
+참고: `Interpreter::ModifyGraphWithDelegate()` 또는`Interpreter::Invoke()`를 호출할 때 호출자는 현재 스레드에 `EGLContext`가 있어야 하며 `Interpreter::Invoke()`는 같은 `EGLContext`에서 호출되어야 합니다. `EGLContext`가 없는 경우 대리자는 내부에서 하나를 만들지만, 개발자는 `Interpreter:: Invoke()`가 항상 같은 스레드에서 호출되도록 해야 합니다. 그리고 이 스레드에서는 `Interpreter::ModifyGraphWithDelegate()`가 호출되었습니다.
 
 ## 고급 사용법
 
-### Delegate Options for iOS
+### iOS용 대리자 옵션
 
-`TFLGpuDelegateCreate()` accepts a `struct` of options. ([C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/gpu/metal_delegate.h), [Swift API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/experimental/swift/Sources/MetalDelegate.swift))
+`TFLGpuDelegateCreate()`는 옵션 `struct`를 받아들입니다([C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/gpu/metal_delegate.h), [Swift API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/experimental/swift/Sources/MetalDelegate.swift)).
 
-Passing `nullptr`(C API) or nothing (Swift API) to the initializer sets the default options (which are explicated in the Basic Usage example above).
+이니셜라이저로 `nullptr`(C API)를 전달하거나 아무것도 전달하지 않는 경우(Swift API) 기본 옵션(위의 기본 사용법 예제에서 설명됨)이 설정됩니다.
 
 **Swift API**
 
@@ -234,7 +234,7 @@ let delegate = MetalDelegate()
 
 ```
 
-**C API (also used for Objective-C)**
+**C API(Objective-C에도 사용됨)**
 
 ```c++
 
@@ -252,29 +252,29 @@ auto* delegate = TFLGpuDelegateCreate(nullptr);
 
 ```
 
-While it is convenient to use `nullptr`, we recommend that you explicitly set the options, to avoid any unexpected behavior if default values are changed in the future.
+`nullptr`를 사용하는 것이 편리하지만 나중에 기본값이 변경될 경우 예기치 않은 동작을 방지하기 위해 명시적으로 옵션을 설정하는 것이 좋습니다.
 
-### Running quantized models (Experimental)
+### 양자화된 모델 실행(실험적)
 
-The GPU delegate already supports [float16 quantized](https://www.tensorflow.org/lite/performance/post_training_float16_quant) models. There is experimental support on Android and iOS to run 8-bit quantized as well. This includes all flavors of quantization, including:
+GPU 대리자는 이미 [float16 양자화된](https://www.tensorflow.org/lite/performance/post_training_float16_quant) 모델을 지원합니다. Android와 iOS에서도 8bit 양자화를 실행하려는 실험적인 지원을 합니다. 여기에는 다음을 포함한 모든 종류의 양자화가 포함됩니다.
 
-- Models trained with [Quantization-aware training](https://www.tensorflow.org/lite/convert/quantization)
+- [양자화 인식 훈련으로](https://www.tensorflow.org/lite/convert/quantization) 훈련된 모델
 - [훈련 후 동적 범위 양자화](https://www.tensorflow.org/lite/performance/post_training_quant)
-- [Post-training full-integer quantization](https://www.tensorflow.org/lite/performance/post_training_integer_quant)
+- [훈련 후 전체 정수 양자화](https://www.tensorflow.org/lite/performance/post_training_integer_quant)
 
-To optimize performance, use models that have floating-point input & output tensors.
+성능을 최적화하려면 부동 소수점 입력 및 출력 텐서를 가진 모델을 사용하세요.
 
-#### How does this work?
+#### 어떻게 동작합니까?
 
-Since the GPU backend only supports floating-point execution, we run quantized models by giving it a ‘floating-point view’ of the original model. At a high-level, this entails the following steps:
+GPU 백엔드는 부동 소수점 실행만 지원하므로 원래 모델의 '부동 소수점 보기'를 제공하여 양자화된 모델을 실행합니다. 높은 수준에서 모델을 실행하려면 다음 단계가 수반됩니다.
 
-- *Constant tensors* (such as weights/biases) are dequantized once into the GPU memory. This happens when the delegate is applied to the TFLite Interpreter.
+- *상수 텐서*(예: 가중치/바이어스)는 GPU 메모리로 한 번 역양자화되는데, 이는 대리자가 TFLite 인터프리터에 적용될 때 발생합니다.
 
-- *Inputs and outputs* to the GPU program, if 8-bit quantized, are dequantized and quantized (respectively) for each inference. This is done on the CPU using TFLite’s optimized kernels.
+- 8bit 양자화된 경우 GPU 프로그램에 대한 *입력 및 출력*은 각 추론에 대해 (각각) 역양자화 및 양자화됩니다. 이것은 TFLite의 최적화된 커널을 사용하여 CPU에서 수행됩니다.
 
-- The GPU program is modified to mimic quantized behavior by inserting *quantization simulators* between operations. This is necessary for models where ops expect activations to follow bounds learnt during quantization.
+- GPU 프로그램은 연산 사이에 *양자화 시뮬레이터*를 삽입하여 양자화된 동작을 모방하도록 수정되었습니다. 이는 연산이 양자화 중에 학습한 경계를 따라 활성화될 것으로 예상되는 모델에 필요합니다.
 
-This feature can be enabled using delegate options as follows:
+이 특성은 다음과 같은 대리자 옵션을 사용하여 활성화할 수 있습니다.
 
 #### Android
 
@@ -309,7 +309,7 @@ options.isQuantizationEnabled = true
 let delegate = MetalDelegate(options: options)
 ```
 
-**C API (also used for Objective-C)**
+**C API(Objective-C에도 사용됨)**
 
 ```c
 
@@ -322,15 +322,15 @@ const TFLGpuDelegateOptions options = {
 auto* delegate = TFLGpuDelegateCreate(options);
 ```
 
-### Input/Output Buffers (iOS only)
+### 입력/출력 버퍼(iOS 만 해당)
 
-To do computation on the GPU, data must be made available to the GPU. This often requires performing a memory copy. It is desirable not to cross the CPU/GPU memory boundary if possible, as this can take up a significant amount of time. Usually, such crossing is inevitable, but in some special cases, one or the other can be omitted.
+GPU에서 계산을 수행하려면 GPU에서 데이터를 사용할 수 있어야 합니다. 따라서 종종 메모리 사본을 수행해야 합니다. 상당한 시간이 소요될 수 있으므로 가능하면 CPU/GPU 메모리 경계를 넘지 않는 것이 좋습니다. 일반적으로 이러한 교차는 불가피하지만 일부 특수한 경우에는 둘 중 하나를 생략할 수 있습니다.
 
-If the network's input is an image already loaded in the GPU memory (for example, a GPU texture containing the camera feed) it can stay in the GPU memory without ever entering the CPU memory. Similarly, if the network's output is in the form of a renderable image (for example, [image style transfer](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)_) it can be directly displayed on the screen.
+네트워크의 입력이 GPU 메모리에 이미 로드된 이미지(예: 카메라 피드를 포함하는 GPU 텍스처)인 경우 CPU 메모리에 들어가지 않고도 GPU 메모리에 남아있을 수 있습니다. 마찬가지로 네트워크의 출력이 렌더링 가능한 이미지 형식(예: [이미지 스타일 전송](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)_)인 경우 화면에 직접 표시할 수 있습니다.
 
-To achieve best performance, TensorFlow Lite makes it possible for users to directly read from and write to the TensorFlow hardware buffer and bypass avoidable memory copies.
+최고의 성능을 내도록 TensorFlow Lite는 사용자가 TensorFlow 하드웨어 버퍼에서 직접 읽고 쓸 수 있게 하고, 피할 수 있는 메모리 사본을 우회할 수 있도록 합니다.
 
-Assuming the image input is in GPU memory, it must first be converted to a `MTLBuffer` object for Metal. You can associate a TfLiteTensor to a user-prepared `MTLBuffer` with `TFLGpuDelegateBindMetalBufferToTensor()`. Note that `TFLGpuDelegateBindMetalBufferToTensor()` must be called after `Interpreter::ModifyGraphWithDelegate()`. Additionally, the inference output is, by default, copied from GPU memory to CPU memory. This behavior can be turned off by calling `Interpreter::SetAllowBufferHandleOutput(true)` during initialization.
+이미지 입력이 GPU 메모리에 있다고 가정하면 먼저 이 입력을 Metal용 `MTLBuffer` 객체로 변환해야 합니다. TfLiteTensor를 `TFLGpuDelegateBindMetalBufferToTensor()`로 사용자가 준비한 `MTLBuffer`와 연결할 수 있습니다. `TFLGpuDelegateBindMetalBufferToTensor()`는 `Interpreter::ModifyGraphWithDelegate()` 이후에 호출되어야 합니다. 또한 추론 출력은 기본적으로 GPU 메모리에서 CPU 메모리로 복사됩니다. 이 동작은 초기화 중에 `Interpreter::SetAllowBufferHandleOutput(true)`을 호출하여 끌 수 있습니다.
 
 ```c++
 #include "tensorflow/lite/delegates/gpu/metal_delegate.h"
@@ -357,16 +357,16 @@ if (!TFLGpuDelegateBindMetalBufferToTensor(
 if (interpreter->Invoke() != kTfLiteOk) return false;
 ```
 
-Note: Once the default behavior is turned off, copying the inference output from GPU memory to CPU memory requires an explicit call to `Interpreter::EnsureTensorDataIsReadable()` for each output tensor.
+참고: 기본 동작이 꺼지고 나서 GPU 메모리에서 CPU 메모리로 추론 출력을 복사하려면 각 출력 텐서에 대해 `Interpreter::EnsureTensorDataIsReadable()`을 명시적으로 호출해야 합니다.
 
-Note: This also works for quantized models, but you still need to a **float32 sized buffer with float32 data**, because the buffer will be bound to the internal dequantized buffer.
+참고: 이는 양자화된 모델에서도 동작하지만 버퍼가 내부의 역양자화된 버퍼에 바인딩되므로 **float32 데이터가 있는 float32 크기의 버퍼**가 여전히 필요합니다.
 
 ## 팁과 요령
 
-- Some operations that are trivial on the CPU may be high cost on a GPU. One class of such operation includes various forms of reshape operations (including `BATCH_TO_SPACE`, `SPACE_TO_BATCH`, `SPACE_TO_DEPTH`, and similar operation). If these operations are not required (for example, they were inserted to help the network architect reason about the system but do not otherwise affect output), it is worth removing them for performance.
+- CPU에서 사소한 일부 연산은 GPU에서는 높은 비용이 발생할 수 있습니다. 이러한 연산의 한 클래스에는 다양한 형태의 reshape 연산( `BATCH_TO_SPACE` , `SPACE_TO_BATCH` , `SPACE_TO_DEPTH` 및 유사한 연산 포함)이 포함됩니다. 이러한 연산이 필요하지 않은 경우(예: 네트워크 설계자가 시스템에 대해 추론하는 데 도움을 주기 위해 삽입되었지만 출력에 영향을 주지 않는 경우) 성능을 고려해서 해당 연산을 제거하는 것이 좋습니다.
 
-- On a GPU, tensor data is sliced into 4-channels. Thus, a computation on a tensor of shape `[B, H, W, 5]` will perform about the same on a tensor of shape `[B, H, W, 8]`, but significantly worse than `[B, H, W, 4]`.
+- GPU에서 텐서 데이터는 4채널로 분할됩니다. 따라서 형상 `[B, H, W, 5]` 텐서에 대한 계산은 형상 `[B, H, W, 8]` 텐서와 거의 동일하게 수행되지만 `[B, H, W, 4]`에 비해서는 성능이 훨씬 나쁩니다.
 
-    - For example, if the camera hardware supports image frames in RGBA, feeding that 4-channel input is significantly faster, because a memory copy (from 3-channel RGB to 4-channel RGBX) can be avoided.
+    - 예를 들어 카메라 하드웨어가 RGBA의 이미지 프레임을 지원하는 경우 메모리 사본(3채널 RGB에서 4채널 RGBX로)을 피할 수 있으므로 해당 4채널 입력을 훨씬 빠르게 공급할 수 있습니다.
 
-- For best performance, do not hesitate to re-train your classifier with mobile-optimized network architecture. That is a significant part of optimization for on-device inference.
+- 최상의 성능을 위해 모바일에 최적화된 네트워크 아키텍처로 분류자를 다시 훈련하는 것을 주저하지 마세요. 이는 온디바이스 추론을 위한 최적화에 있어 중요한 부분입니다.
