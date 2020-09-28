@@ -4,4 +4,4 @@
 
 이 연습에서는 서버 애플리케이션에서 tfjs-node npm 패키지를 설정하고 모델을 빌드하며 레이블이 지정된 피치 센서 데이터로 훈련하는 단계를 보여줍니다. 또한 훈련 상태를 클라이언트에 전달하고 훈련된 모델을 클라이언트/서버 아키텍처의 예측에 사용하는 방법도 보여줍니다.
 
-<a class="button button-white" href="https://codelabs.developers.google.com/codelabs/tensorflowjs-nodejs-codelab/#0">Open in CodeLab</a>
+<a class="button button-white" href="https://codelabs.developers.google.com/codelabs/tensorflowjs-nodejs-codelab/#0">CodeLab에서 열기</a>
