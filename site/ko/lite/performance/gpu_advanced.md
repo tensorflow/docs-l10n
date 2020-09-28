@@ -50,7 +50,7 @@ GPU의 TensorFlow Lite는 16bit 및 32bit 부동 소수점 정밀도에서 다�
 
 ### Android (Kotlin / Java)
 
-Add the `tensorflow-lite-gpu` package alongside the existing `tensorflow-lite` package in the existing `dependencies` block.
+기존 `dependencies` 블록의 기존 `tensorflow-lite` 패키지와 함께 `tensorflow-lite-gpu` 패키지를 추가합니다.
 
 ```
 dependencies {
@@ -60,17 +60,14 @@ dependencies {
 }
 ```
 
-Then run TensorFlow Lite on GPU with `TfLiteDelegate`. In Java, you can specify the `GpuDelegate` through `Interpreter.Options`.
+`TfLiteDelegate`로 GPU에서 TensorFlow Lite를 실행합니다. Java에서는 `Interpreter.Options`를 통해 `GpuDelegate`를 지정할 수 있습니다.
 
 <div>
   <devsite-selector>
     <section>
       <h3>Kotlin</h3>
       <p></p>
-<pre class="prettyprint lang-kotlin">    import org.tensorflow.lite.Interpreter
-    import org.tensorflow.lite.gpu.CompatibilityList
-    import org.tensorflow.lite.gpu.GpuDelegate
-</pre></section></devsite-selector>
+<pre class="prettyprint lang-kotlin">    import org.tensorflow.lite.Interpreter<br>    import org.tensorflow.lite.gpu.CompatibilityList<br>    import org.tensorflow.lite.gpu.GpuDelegate</pre></section></devsite-selector>
 </div>
 
 ```
@@ -177,7 +174,6 @@ if let interpreter = try Interpreter(modelPath: modelPath,
 
   // Run inference ...
 }
-
 ```
 
 ### iOS(Objective-C)
@@ -231,7 +227,6 @@ let delegate = MetalDelegate(options: options)
 
 // IS THE SAME AS THIS:
 let delegate = MetalDelegate()
-
 ```
 
 **C API(Objective-C에도 사용됨)**
@@ -249,7 +244,6 @@ auto* delegate = TFLGpuDelegateCreate(options);
 
 // IS THE SAME AS THIS:
 auto* delegate = TFLGpuDelegateCreate(nullptr);
-
 ```
 
 `nullptr`를 사용하는 것이 편리하지만 나중에 기본값이 변경될 경우 예기치 않은 동작을 방지하기 위해 명시적으로 옵션을 설정하는 것이 좋습니다.
