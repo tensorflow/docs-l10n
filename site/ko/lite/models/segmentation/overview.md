@@ -1,6 +1,5 @@
 # 세분화
 
-
 <img src="../images/segmentation.png" class="attempt-right">
 
 ## 시작하기
@@ -37,7 +36,7 @@ Android 또는 iOS 이외의 플랫폼을 사용 중이거나 <a href="https://w
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>모델명</th>
       <th>모델 크기</th>
       <th>기기</th>
       <th>GPU</th>
@@ -45,21 +44,21 @@ Android 또는 iOS 이외의 플랫폼을 사용 중이거나 <a href="https://w
     </tr>
   </thead>
   <tr>
-    <td rowspan="3"><a href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">Deeplab v3</a></td>
+    <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite">Deeplab v3</a></td>
     <td rowspan="3">       2.7 Mb     </td>
     <td>Pixel 3(Android 10)</td>
     <td>16ms</td>
-    <td>37ms*</td>
+    <td>37ms *</td>
   </tr>
    <tr>
      <td>Pixel 4(Android 10)</td>
     <td>20ms</td>
-    <td>23ms*</td>
+    <td>23ms *</td>
   </tr>
    <tr>
      <td>iPhone XS(iOS 12.4.1)</td>
      <td>16ms</td>
-    <td>25ms** </td>
+    <td>25ms **</td>
   </tr>
 </table>
 
@@ -67,14 +66,13 @@ Android 또는 iOS 이외의 플랫폼을 사용 중이거나 <a href="https://w
 
 ** 최상의 결과를 위해 iPhone에서 2개의 스레드가 사용되었습니다.
 
-## Example output
+## 예제 출력
 
 모델은 높은 정확성으로 대상 객체 위에 마스크를 만듭니다.
 
+<img alt="이미지 분할을 보여주는 애니메이션" src="images/segmentation.gif">
 
-<img alt="Animation showing image segmentation" src="images/segmentation.gif">
-
-## Read more about segmentation
+## 세분화에 대해 자세히 알아보기
 
 <ul>
   <li><p data-md-type="paragraph"><a href="https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html">Semantic Image Segmentation with DeepLab in TensorFlow</a></p></li>
