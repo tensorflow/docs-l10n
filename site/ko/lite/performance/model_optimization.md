@@ -1,76 +1,76 @@
 # 모델 최적화
 
-Edge devices often have limited memory or computational power. Various optimizations can be applied to models so that they can be run within these constraints. In addition, some optimizations allow the use of specialized hardware for accelerated inference.
+에지 기기에서는 메모리 또는 계산 능력이 제한된 경우가 많습니다. 이러한 제약 조건 내에서도 실행될 수 있도록 다양한 최적화를 모델에 적용할 수 있습니다. 또한 일부 최적화를 통해 추론 가속화를 위해 특수 하드웨어를 사용할 수 있습니다.
 
-TensorFlow Lite and the [TensorFlow Model Optimization Toolkit](https://www.tensorflow.org/model_optimization) provide tools to minimize the complexity of optimizing inference.
+TensorFlow Lite 및 [TensorFlow 모델 최적화 도구 키트](https://www.tensorflow.org/model_optimization)는 추론 최적화의 복잡성을 최소화하는 도구를 제공합니다.
 
-It's recommended that you consider model optimization during your application development process. This document outlines some best practices for optimizing TensorFlow models for deployment to edge hardware.
+애플리케이션 개발 프로세스 중에 모델 최적화를 고려하는 것이 좋습니다. 이 문서는 에지 하드웨어에 배포하기 위해 TensorFlow 모델을 최적화하려는 몇 가지 모범 사례를 설명합니다.
 
-## Why models should be optimized
+## 모델을 최적화해야 하는 이유
 
-There are several main ways model optimization can help with application development.
+모델 최적화가 애플리케이션 개발에 도움이 되는 몇 가지 주요 방법이 있습니다.
 
 ### 크기 축소
 
 모델의 크기를 줄이기 위해 몇 가지 형태의 최적화를 사용할 수 있습니다. 작은 모델에는 다음과 같은 이점이 있습니다.
 
-- **Smaller storage size:** Smaller models occupy less storage space on your users' devices. For example, an Android app using a smaller model will take up less storage space on a user's mobile device.
-- **Smaller download size:** Smaller models require less time and bandwidth to download to users' devices.
-- **Less memory usage:** Smaller models use less RAM when they are run, which frees up memory for other parts of your application to use, and can translate to better performance and stability.
+- **더 작은 저장 크기:** 작은 모델은 사용자 기기에서 차지하는 저장 공간이 적습니다. 예를 들어 더 작은 모델을 사용하는 Android 앱은 사용자의 모바일 기기에서 저장 공간을 더 적게 차지합니다.
+- **더 작은 다운로드 크기:** 더 작은 모델은 사용자의 기기에 다운로드하는 데 필요한 시간과 대역폭이 더 적습니다.
+- **메모리 사용량 감소:** 모델이 작을수록 실행 시 더 적은 RAM을 사용하므로 애플리케이션의 다른 부분에서 사용할 수 있는 메모리가 확보되고 성능과 안정성이 향상될 수 있습니다.
 
-Quantization can reduce the size of a model in all of these cases, potentially at the expense of some accuracy. Pruning and clustering can reduce the size of a model for download by making it more easily compressible.
+양자화를 통해 모든 경우에서 모델의 크기를 줄일 수 있으며 잠재적으로는 정확성이 떨어집니다. 잘라내기 및 클러스터링은 더 쉽게 압축할 수 있도록 만들어 다운로드할 모델의 크기를 줄일 수 있습니다.
 
 ### 지연 시간 감소
 
-*Latency* is the amount of time it takes to run a single inference with a given model. Some forms of optimization can reduce the amount of computation required to run inference using a model, resulting in lower latency. Latency can also have an impact on power consumption.
+*지연 시간*은 주어진 모델로 단일 추론을 실행하는 데 걸리는 시간입니다. 일부 최적화 형태는 모델을 사용하여 추론을 실행하는 데 필요한 계산량을 줄여 지연 시간을 줄일 수 있습니다. 지연 시간은 전력 소비에도 영향을 미칠 수 있습니다.
 
-Currently, quantization can be used to reduce latency by simplifying the calculations that occur during inference, potentially at the expense of some accuracy.
+현재 양자화는 추론 중에 발생하는 계산을 단순화하여 잠재적으로 정확성을 떨어뜨리는 방식으로 지연 시간을 줄이는 데 사용될 수 있습니다.
 
 ### 가속기 호환성
 
-Some hardware accelerators, such as the [Edge TPU](https://cloud.google.com/edge-tpu/), can run inference extremely fast with models that have been correctly optimized.
+[에지 TPU](https://cloud.google.com/edge-tpu/) 와 같은 일부 하드웨어 가속기는 올바르게 최적화된 모델로 매우 빠르게 추론을 실행할 수 있습니다.
 
-Generally, these types of devices require models to be quantized in a specific way. See each hardware accelerator's documentation to learn more about their requirements.
+일반적으로 이러한 유형의 기기는 모델을 특정 방식으로 양자화해야 합니다. 요구 사항에 대해 자세히 알아보려면 각 하드웨어 가속기의 설명서를 참조하세요.
 
-## Trade-offs
+## 상충 관계
 
-Optimizations can potentially result in changes in model accuracy, which must be considered during the application development process.
+최적화는 잠재적으로 모델 정확성에 변화를 초래할 수 있으며 사용 여부는 애플리케이션 개발 프로세스 중에 고려되어야 합니다.
 
-The accuracy changes depend on the individual model being optimized, and are difficult to predict ahead of time. Generally, models that are optimized for size or latency will lose a small amount of accuracy. Depending on your application, this may or may not impact your users' experience. In rare cases, certain models may gain some accuracy as a result of the optimization process.
+정확성 변경은 최적화되는 개별 모델에 따라 다르며 예측하기 어렵습니다. 일반적으로 크기 또는 지연 시간에 최적화된 모델은 정확성이 약간 낮아집니다. 애플리케이션에 따라 이는 사용자 경험에 영향을 미칠 수도 있고 그렇지 않을 수도 있습니다. 드물지만 특정 모델은 최적화 프로세스로 인해 정확성이 약간 개선될 수도 있습니다.
 
 ## 최적화 유형
 
-TensorFlow Lite currently supports optimization via quantization, pruning and clustering.
+TensorFlow Lite는 현재 양자화, 잘라내기 및 클러스터링을 통한 최적화를 지원합니다.
 
-These are part of the [TensorFlow Model Optimization Toolkit](https://www.tensorflow.org/model_optimization), which provides resources for model optimization techniques that are compatible with TensorFlow Lite.
+이 유형은 TensorFlow Lite와 호환되는 모델 최적화 기술에 대한 리소스를 제공하는 [TensorFlow 모델 최적화 도구 키트](https://www.tensorflow.org/model_optimization)의 일부입니다.
 
 ### 양자화
 
-[Quantization](https://www.tensorflow.org/model_optimization/guide/quantization/post_training) works by reducing the precision of the numbers used to represent a model's parameters, which by default are 32-bit floating point numbers. This results in a smaller model size and faster computation.
+[양자화](https://www.tensorflow.org/model_optimization/guide/quantization/post_training)는 기본적으로 32bit 부동 소수점 숫자인 모델의 매개변수를 나타내는 데 사용되는 숫자의 정밀도를 줄여서 동작합니다. 그 결과 모델 크기가 작아지고 계산 속도가 빨라집니다.
 
 TensorFlow Lite에서는 다음 유형의 양자화를 사용할 수 있습니다.
 
 기술 | 데이터 요구 사항 | 크기 축소 | 정확성 | 지원되는 하드웨어
 --- | --- | --- | --- | ---
-[훈련 후 float16 양자화](post_training_float16_quant.ipynb) | 데이터 없음 | Up to 50% | Insignificant accuracy loss | CPU, GPU
-[훈련 후 동적 범위 양자화](post_training_quant.ipynb) | 데이터 없음 | Up to 75% | Accuracy loss | CPU, GPU (Android)
-[훈련 후 정수 양자화](post_training_integer_quant.ipynb) | Unlabelled representative sample | Up to 75% | Smaller accuracy loss | CPU, GPU (Android), EdgeTPU, Hexagon DSP
-[Quantization-aware training](http://www.tensorflow.org/model_optimization/guide/quantization/training) | 레이블이 지정된 훈련 데이터 | Up to 75% | Smallest accuracy loss | CPU, GPU (Android), EdgeTPU, Hexagon DSP
+[훈련 후 float16 양자화](post_training_float16_quant.ipynb) | 데이터 없음 | 최대 50% | 사소한 정확성 손실 | CPU, GPU
+[훈련 후 동적 범위 양자화](post_training_quant.ipynb) | 데이터 없음 | 최대 75% | 정확성 손실 | CPU, GPU(Android)
+[훈련 후 정수 양자화](post_training_integer_quant.ipynb) | 레이블이 없는 대표 샘플 | 최대 75% | 정확성 손실 감소 | CPU, GPU(Android), 에지 TPU, Hexagon DSP
+[양자화 인식 훈련](http://www.tensorflow.org/model_optimization/guide/quantization/training) | 레이블이 지정된 훈련 데이터 | 최대 75% | 최소 정확성 손실 | CPU, GPU(Android), 에지 TPU, Hexagon DSP
 
-Below are the latency and accuracy results for post-training quantization and quantization-aware training on a few models. All latency numbers are measured on Pixel 2 devices using a single big core CPU. As the toolkit improves, so will the numbers here:
+다음은 몇 가지 모델에서 훈련 후 양자화 및 양자화 인식 훈련으로 나온 지연 시간 및 정확성 결과입니다. 모든 지연 시간 수치는 단일 big 코어 CPU를 사용하는 Pixel 2 기기에서 측정됩니다. 도구 키트가 개선됨에 따라 여기의 수치도 향상됩니다.
 
 <figure>
   <table>
     <tr>
       <th>모델</th>
-      <th>Top-1 Accuracy (Original) </th>
-      <th>Top-1 Accuracy (Post Training Quantized) </th>
-      <th>Top-1 Accuracy (Quantization Aware Training) </th>
-      <th>Latency (Original) (ms) </th>
-      <th>Latency (Post Training Quantized) (ms) </th>
-      <th>Latency (Quantization Aware Training) (ms) </th>
-      <th> Size (Original) (MB)</th>
-      <th> Size (Optimized) (MB)</th>
+      <th>상위 1개 정확성(원본)</th>
+      <th>상위 1개 정확성(훈련 후 양자화됨)</th>
+      <th>상위 1개 정확성(양자화 인식 교육)</th>
+      <th>지연 시간 (원본)(ms)</th>
+      <th>지연 시간(훈련 후 양자화됨)(ms)</th>
+      <th>지연 시간(양자화 인식 훈련)(ms)</th>
+      <th>크기(원본)(MB)</th>
+      <th>크기(최적화됨)(MB)</th>
     </tr> <tr>
 <td>Mobilenet-v1-1-224</td>
 <td>0.709</td>
@@ -119,22 +119,22 @@ Below are the latency and accuracy results for post-training quantization and qu
   <figcaption><b>표 1</b> 일부 CNN 모델에 대한 모델 양자화의 이점</figcaption>
 </figure>
 
-### Pruning
+### 잘라내기
 
-[Pruning](https://www.tensorflow.org/model_optimization/guide/pruning) works by removing parameters within a model that have only a minor impact on its predictions. Pruned models are the same size on disk, and have the same runtime latency, but can be compressed more effectively. This makes pruning a useful technique for reducing model download size.
+[잘라내기](https://www.tensorflow.org/model_optimization/guide/pruning)는 예측에 미미한 영향만 미치는 모델 내 매개변수를 제거하는 방식으로 동작합니다. 잘라낸 모델은 디스크에서 크기가 같고 런타임 지연 시간이 같지만 더 효과적으로 압축할 수 있습니다. 따라서 잘라내기는 모델 다운로드 크기를 줄이는 데 유용한 기술입니다.
 
-In the future, TensorFlow Lite will provide latency reduction for pruned models.
+앞으로 TensorFlow Lite는 잘라낸 모델에 대한 지연 시간 감소를 제공할 것입니다.
 
 ### 클러스터링
 
-[Clustering](https://www.tensorflow.org/model_optimization/guide/clustering) works by grouping the weights of each layer in a model into a predefined number of clusters, then sharing the centroid values for the weights belonging to each individual cluster. This reduces the number of unique weight values in a model, thus reducing its complexity.
+[클러스터링](https://www.tensorflow.org/model_optimization/guide/clustering)은 모델에 있는 각 레이어의 가중치를 미리 정의된 수의 클러스터로 그룹화한 다음 각각의 개별 클러스터에 속하는 가중치의 중심 값을 공유하는 방식으로 동작합니다. 그 결과 모델의 고유한 가중치 값의 수가 줄어들어 복잡성이 줄어듭니다.
 
-As a result, clustered models can be compressed more effectively, providing deployment benefits similar to pruning.
+결과적으로 클러스터링된 모델을보다 효과적으로 압축하여 잘라내기와 유사한 배포 이점을 제공할 수 있습니다.
 
-## Development workflow
+## 개발 워크플로
 
-As a starting point, check if the models in [hosted models](../guide/hosted_models.md) can work for your application. If not, we recommend that users start with the [post-training quantization tool](post_training_quantization.md) since this is broadly applicable and does not require training data.
+[호스팅된 모델](../guide/hosted_models.md)에서 클러스터링된 모델이 애플리케이션에서 동작할 수 있는지 확인하는 것으로 시작해보세요. 그렇지 않은 경우 광범위하게 적용할 수 있고 훈련 데이터가 필요하지 않으므로 사용자가 [훈련 후 양자화 도구](post_training_quantization.md)로 시작하는 것이 좋습니다.
 
-For cases where the accuracy and latency targets are not met, or hardware accelerator support is important, [quantization-aware training](https://www.tensorflow.org/model_optimization/guide/quantization/training){:.external} is the better option. See additional optimization techniques under the [TensorFlow Model Optimization Toolkit](https://www.tensorflow.org/model_optimization).
+정확성 및 지연 시간 목표가 충족되지 않거나 하드웨어 가속기 지원이 중요한 경우 [양자화 인식 훈련](https://www.tensorflow.org/model_optimization/guide/quantization/training){:.external}이 더 나은 옵션입니다. [TensorFlow 모델 최적화 도구 키트](https://www.tensorflow.org/model_optimization)에서 추가 최적화 기술을 참조하세요.
 
-If you want to further reduce your model size, you can try [pruning](#pruning) and/or [clustering](#clustering) prior to quantizing your models.
+모델 크기를 더 줄이려면 모델을 양자화하기 전에 [잘라내기](#pruning) 및/또는 [클러스터링](#clustering)을 시도할 수 있습니다.
