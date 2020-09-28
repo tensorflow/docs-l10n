@@ -8,13 +8,13 @@
 
 TensorFlow Lite를 처음 사용하고 Android 또는 iOS로 작업하는 경우, 다음 예제 애플리케이션을 탐색하면 시작하는 데 도움이 됩니다.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android">Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android">Android 예제</a>
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/ios">iOS 예제</a>
 
 Android 또는 iOS 이외의 플랫폼을 사용 중이거나 <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite API에</a> 이미 익숙한 경우 스타터 이미지 세분화 모델을 다운로드할 수 있습니다.
 
-<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">Download starter model</a>
+<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">스타터 모델 다운로드하기</a>
 
 ## 동작 원리
 
@@ -45,7 +45,7 @@ Android 또는 iOS 이외의 플랫폼을 사용 중이거나 <a href="https://w
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite">Deeplab v3</a></td>
-    <td rowspan="3">       2.7 Mb     </td>
+    <td rowspan="3">       2.7 Mb</td>
     <td>Pixel 3(Android 10)</td>
     <td>16ms</td>
     <td>37ms *</td>
