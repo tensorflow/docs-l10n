@@ -6,7 +6,7 @@
 
 스마트 답장 모델은 채팅 메시지를 기반으로 답장 제안을 생성합니다. 사용자가 수신 메시지에 쉽게 응답할 수 있도록 상황에 맞는 원터치 응답을 제공하는 제안입니다.
 
-<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/smartreply/1/default/1?lite-format=tflite">Download starter model</a>
+<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/smartreply/1/default/1?lite-format=tflite">스타터 모델 다운로드하기</a>
 
 ### 샘플 애플리케이션
 
