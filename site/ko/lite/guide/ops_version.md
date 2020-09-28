@@ -1,25 +1,25 @@
 # TensorFlow Lite 연산자 버전
 
-This document describes TensorFlow Lite's op versioning schema. Op versioning enables developers to add new functionalities and parameters into existing ops. In addition, it guarantees the following:
+이 문서에서는 TensorFlow Lite의 op 버전 관리 스키마를 설명합니다. Op 버전 관리를 통해 개발자는 기존 ops에 새로운 기능과 매개변수를 추가할 수 있습니다. 또한 다음을 보장합니다.
 
-- Backward compatibility: New TensorFlow Lite implementation should handle an old model file.
-- Forward compatibility: Old TensorFlow Lite implementation should handle a new model file produced by new version of TOCO, as long as no new features are used.
-- Forward in-compatibility detection: If an old TensorFlow Lite implementation reads a new model that contains a new version of an op which isn't supported, it should report the error.
+- 이전 버전과의 호환성: 새로운 TensorFlow Lite 구현은 이전 모델 파일을 처리합니다.
+- 이후 버전과의 호환성: 새 기능이 사용되지 않는다면 이전 TensorFlow Lite 구현은 새 버전의 TOCO에서 생성된 새 모델 파일을 처리합니다.
+- 이후 버전과의 비호환성 감지: 이전 TensorFlow Lite 구현이 지원되지 않는 새 버전의 op를 포함한 새 모델을 읽는 경우, 오류를 보고합니다.
 
-## Example: Adding dilation into convolution
+## 예: 컨볼루션에 dilation 추가
 
-The remainder of this document explains op versioning in TFLite by showing how to add dilation parameters to the convolution operation.
+이 문서의 나머지 부분에서는 컨볼루션 연산에 dilation 매개변수를 추가하는 방법을 보여줌으로써 TFLite의 op 버전 관리를 설명합니다.
 
-Knowledge of dilation is not required to understand this document. Note that:
+이 문서를 이해하기 위해 dilation에 대한 지식이 필요하지는 않습니다. 다음 사항을 참조하세요.
 
-- 2 new integer parameters will be added: `dilation_width_factor` and `dilation_height_factor`.
-- Old convolution kernels that don't support dilation are equivalent to setting the dilation factors to 1.
+- `dilation_width_factor` 및 `dilation_height_factor`의 새로운 두 정수 매개변수가 추가됩니다.
+- Dilation을 지원하지 않는 이전 컨볼루션 커널은 dilation 인자를 1로 설정하는 것과 같습니다.
 
-### Change FlatBuffer schema
+### FlatBuffer 스키마 변경하기
 
-To add new parameters into an op, change the options table in `lite/schema/schema.fbs`.
+Op에 새 매개변수를 추가하려면 `lite/schema/schema.fbs`의 옵션 테이블을 변경합니다.
 
-For example, the options table of convolution looks like this:
+예를 들어, 컨볼루션의 옵션 테이블은 다음과 같습니다.
 
 ```
 table Conv2DOptions {
@@ -30,12 +30,12 @@ table Conv2DOptions {
 }
 ```
 
-When adding new parameters:
+새 매개변수를 추가하는 경우:
 
-- Add comments indicating which parameters are supported by which version.
-- When the new implementation gets the default values for newly added parameters, it should work exactly the same as the old implementation.
+- 어떤 매개변수가 어떤 버전에서 지원되는지 나타내는 주석을 추가합니다.
+- 새 구현이 새로 추가된 매개변수의 기본값을 가져오면 이전 구현과 정확히 동일하게 동작합니다.
 
-The table will be like this after the new parameters are added:
+새 매개변수가 추가된 후 테이블은 다음과 같습니다.
 
 ```
 table Conv2DOptions {
@@ -51,13 +51,13 @@ table Conv2DOptions {
 }
 ```
 
-The file `lite/schema/schema_generated.h` should be re-generated for the new schema.
+새 스키마에 대해 `lite/schema/schema_generated.h` 파일을 다시 생성해야 합니다.
 
-### Change C structures and kernel implementation
+### C 구조 및 커널 구현 변경하기
 
-In TensorFlow Lite, the kernel implementation is decoupled from FlatBuffer definition. The kernels read the parameter from C structures defined in `lite/c/builtin_op_data.h`.
+TensorFlow Lite에서 커널 구현은 FlatBuffer 정의에서 분리됩니다. 커널은 `lite/c/builtin_op_data.h`에 정의된 C 구조에서 매개변수를 읽습니다.
 
-The original convolution parameter is as follows:
+원래 컨볼루션 매개변수는 다음과 같습니다.
 
 ```
 typedef struct {
@@ -68,7 +68,7 @@ typedef struct {
 } TfLiteConvParams;
 ```
 
-As with the FlatBuffer schema, add comments indicating which parameters are supported starting from which version. The result is seen below:
+FlatBuffer 스키마와 마찬가지로 어떤 버전부터 어떤 매개변수가 지원되는지를 나타내는 주석을 추가합니다. 결과는 다음과 같습니다.
 
 ```
 typedef struct {
@@ -84,13 +84,13 @@ typedef struct {
 } TfLiteConvParams;
 ```
 
-Please also change the kernel implementation to read the newly added parameters from the C structures. The details are omitted here.
+C 구조에서 새로 추가된 매개변수를 읽으려면 커널 구현도 변경하세요. 여기서는 자세한 내용을 다루지 않습니다.
 
-### Change the FlatBuffer reading code
+### FlatBuffer 읽기 코드 변경하기
 
-The logic to read FlatBuffer and produce C structure is in `lite/core/api/flatbuffer_conversions.cc`.
+FlatBuffer를 읽고 C 구조를 생성하는 로직은 `lite/core/api/flatbuffer_conversions.cc`에 들어 있습니다.
 
-Update the file to handle the new parameters, as shown below:
+아래와 같이 새 매개변수를 처리하도록 파일을 업데이트합니다.
 
 ```
 case BuiltinOperator_CONV_2D: {
@@ -109,11 +109,11 @@ case BuiltinOperator_CONV_2D: {
 }
 ```
 
-It's not required to check the op version here. When the new implementation reads an old model file where dilation factors are missing, it will use 1 as the default value, and the new kernel will work consistently with the old kernel.
+여기서 연산자 버전을 확인할 필요는 없습니다. 새로운 구현은 dilation 매개변수가 누락된 이전 모델 파일을 읽을 때 기본값으로 1을 사용하고, 새 커널은 이전 커널과 일관되게 동작합니다.
 
-### Change kernel registration
+### 커널 등록 변경하기
 
-The MutableOpResolver (defined in `lite/op_resolver.h`) provides a few functions to register op kernels. The minimum and maximum version are 1 by default:
+MutableOpResolver(`lite/op_resolver.h`에 정의됨)는 op 커널을 등록하는 몇 가지 함수를 제공합니다. 최소 및 최대 버전은 기본적으로 1입니다.
 
 ```
 void AddBuiltin(tflite::BuiltinOperator op, TfLiteRegistration* registration,
@@ -122,34 +122,34 @@ void AddCustom(const char* name, TfLiteRegistration* registration,
                int min_version = 1, int max_version = 1);
 ```
 
-The built-in ops are registered in `lite/kernels/register.cc`. In this example, we implemented a new op kernel which can handle `Conv2D` version 1 and 2, so we need to change this line:
+내장 ops는 `lite/kernels/register.cc`에 등록됩니다. 이 예에서는 `Conv2D` 버전 1과 2를 처리할 수 있는 새로운 op 커널을 구현했으므로 다음 줄을 변경해야 합니다.
 
 ```
 AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D());
 ```
 
-to:
+위의 줄을 아래 줄로 바꿉니다.
 
 ```
 AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D(), 1, 2);
 ```
 
-### Change TOCO TFLite exporter
+### TOCO TFLite exporter 변경하기
 
-The next step is to make TOCO populate the minimum version that's required to execute the op. In this example, it means:
+다음 단계는 op를 실행하는 데 필요한 최소 버전을 채우도록 TOCO를 처리하는 것입니다. 이 예에서 의미하는 바는 다음과 같습니다.
 
-- Populate version=1 when dilation factors are all 1.
-- Populate version=2 otherwise.
+- Dilation 인자가 모두 1인 경우, 버전=1을 채웁니다.
+- 그렇지 않으면 버전=2를 채웁니다.
 
-To do this, you need to override `GetBuiltinOperatorVersion` function for the operator class in `lite/tools/versioning/op_version.cc`.
+이를 위해 `lite/tools/versioning/op_version.cc`에서 연산자 클래스에 대한 `GetBuiltinOperatorVersion` 함수를 재정의해야 합니다.
 
-For ops with only one version, the `GetVersion` function is defined as:
+버전이 하나뿐인 ops의 경우, `GetVersion` 함수는 다음과 같이 정의됩니다.
 
 ```
 int GetVersion(const Operator& op) const override { return 1; }
 ```
 
-When supporting multiple versions, check the parameters and determine the version for the op, as shown in the following example:
+여러 버전을 지원하는 경우, 다음 예와 같이 매개변수를 확인하고 op의 버전을 확인합니다.
 
 ```
 int GetVersion(const Operator& op) const override {
@@ -162,23 +162,23 @@ int GetVersion(const Operator& op) const override {
 }
 ```
 
-### Update the operator version map
+### 연산자 버전 맵 업데이트하기
 
-The last step is to add the new version info into the operator version map. This step is required because we need to generate the model's minimum required runtime version based on this version map.
+마지막 단계는 새 버전 정보를 연산자 버전 맵에 추가하는 것입니다. 이 버전 맵을 기반으로 필요한 모델의 최소 런타임 버전을 생성해야 하므로 이 단계가 필요합니다.
 
-To do this, you need to add a new map entry in `lite/toco/tflite/op_version.cc`.
+이를 위해 `lite/toco/tflite/op_version.cc`에 새 맵 항목을 추가해야 합니다.
 
-In this example, you need to add the following entry into `op_version_map`:
+이 예에서는 `op_version_map`에 다음 항목을 추가해야 합니다.
 
 ```
 {{OperatorType::kConv, 3}, "kPendingReleaseOpVersion"}
 ```
 
-(`kPendingReleaseOpVersion` will be replaced with the appropriate release version in the next stable release.)
+(`kPendingReleaseOpVersion`은 다음 안정적인 릴리스에서 적절한 릴리스 버전으로 대체됩니다.)
 
 ### 위임 구현
 
-TensorFlow Lite provides a delegation API which enables delegating ops to hardware backends. In the delegate's `Prepare` function, check if the version is supported for every node in Delegation code.
+TensorFlow Lite는 하드웨어 백엔드에 ops를 위임할 수 있는 Delegation API를 제공합니다. 대리자의 `Prepare` 함수에서 위임 코드의 모든 노드에 대해 버전이 지원되는지 확인합니다.
 
 ```
 const int kMinVersion = 1;
@@ -191,4 +191,4 @@ if (registration->version > kMinVersion) {
 }
 ```
 
-This is required even if the delegation only supports version 1 ops, so the delegation can detect incompatibility when getting a higher version op.
+위임 코드에서 버전 1 ops만 지원하는 경우에도 이 작업이 필요하므로, 더 높은 버전의 op를 가져올 때 위임 코드에서 비호환성을 감지할 수 있습니다.
