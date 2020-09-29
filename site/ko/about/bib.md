@@ -1,16 +1,16 @@
 # TensorFlow 백서
 
-This document identifies white papers about TensorFlow.
+이 문서에서는 TensorFlow에 대한 백서를 확인합니다.
 
-## Large-Scale Machine Learning on Heterogeneous Distributed Systems
+## 이기종 분산 시스템에 대한 대규모 머신러닝
 
-[Access this white paper.](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45166.pdf)
+[백서에 액세스하세요.](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45166.pdf)
 
-**Abstract:** TensorFlow is an interface for expressing machine learning algorithms and an implementation for executing such algorithms. A computation expressed using TensorFlow can be executed with little or no change on a wide variety of heterogeneous systems, ranging from mobile devices such as phones and tablets up to large-scale distributed systems of hundreds of machines and thousands of computational devices such as GPU cards. The system is flexible and can be used to express a wide variety of algorithms, including training and inference algorithms for deep neural network models, and it has been used for conducting research and for deploying machine learning systems into production across more than a dozen areas of computer science and other fields, including speech recognition, computer vision, robotics, information retrieval, natural language processing, geographic information extraction, and computational drug discovery. This paper describes the TensorFlow interface and an implementation of that interface that we have built at Google. The TensorFlow API and a reference implementation were released as an open-source package under the Apache 2.0 license in November, 2015 and are available at www.tensorflow.org.
+**개요:** TensorFlow는 머신러닝 알고리즘을 표현하기 위한 인터페이스이자 이러한 알고리즘을 실행하기 위한 구현입니다. TensorFlow를 사용하여 표현된 계산은 전화 및 태블릿과 같은 모바일 기기에서 수백 대 머신과 GPU 카드와 같은 수천 대의 계산 기기로 이루어진 대규모 시스템에 이르는 광범위한 이기종 시스템에서 거의 또는 전혀 변경 없이 실행될 수 있습니다. 이 시스템은 유연하고, 심층 신경망 모델을 위한 훈련 및 추론 알고리즘을 포함하여 다양한 알고리즘을 표현하는 데 사용될 수 있으며, 음성 인식, 컴퓨터 비전, 로봇 공학, 정보 검색, 자연어 처리, 지리 정보 추출 및 계산 약물 발견을 포함한 여러 컴퓨터 과학 및 기타 분야에 걸쳐 연구를 수행하고 머신러닝 시스템을 운영 환경에 배포하는 데 사용되었습니다. 본 백서는 TensorFlow 인터페이스와 Google에서 구축한 해당 인터페이스의 구현에 대해 설명합니다. TensorFlow API 및 참조 구현은 2015년 11월 Apache 2.0 라이선스에 따라 오픈 소스 패키지로 출시되었으며 www.tensorflow.org에서 제공됩니다.
 
 ### In BibTeX format
 
-If you use TensorFlow in your research and would like to cite the TensorFlow system, we suggest you cite this whitepaper.
+연구에 TensorFlow를 사용하고 TensorFlow 시스템을 인용하려면, 다음 백서를 인용하세요.
 
 <pre>@misc{tensorflow2015-whitepaper,
 title={ {TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},
@@ -61,7 +61,7 @@ author={
 }
 </pre>
 
-Or in textual form:
+또는 텍스트 형식으로 인용하세요.
 
 <pre>Martín Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo,
 Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis,
@@ -79,6 +79,6 @@ TensorFlow: Large-scale machine learning on heterogeneous systems,
 
 ## TensorFlow: 대규모 머신러닝 시스템
 
-[Access this white paper.](https://www.usenix.org/system/files/conference/osdi16/osdi16-abadi.pdf)
+[백서에 액세스하세요.](https://www.usenix.org/system/files/conference/osdi16/osdi16-abadi.pdf)
 
-**Abstract:** TensorFlow is a machine learning system that operates at large scale and in heterogeneous environments. TensorFlow uses dataflow graphs to represent computation, shared state, and the operations that mutate that state. It maps the nodes of a dataflow graph across many machines in a cluster, and within a machine across multiple computational devices, including multicore CPUs, general purpose GPUs, and custom-designed ASICs known as Tensor Processing Units (TPUs). This architecture gives flexibility to the application developer: whereas in previous “parameter server” designs the management of shared state is built into the system, TensorFlow enables developers to experiment with novel optimizations and training algorithms. TensorFlow supports a variety of applications, with a focus on training and inference on deep neural networks. Several Google services use TensorFlow in production, we have released it as an open-source project, and it has become widely used for machine learning research. In this paper, we describe the TensorFlow dataflow model and demonstrate the compelling performance that TensorFlow achieves for several real-world applications.
+**개요:** TensorFlow는 대규모 및 이기종 환경에서 작동하는 머신러닝 시스템입니다. TensorFlow는 데이터 흐름 그래프를 사용하여 계산, 공유 상태 및 해당 상태를 변경하는 연산을 나타냅니다. 클러스터의 여러 머신과 멀티 코어 CPU, 범용 GPU 및 Tensor Processing Units(TPU)로 알려진 맞춤 설계 ASIC를 포함한 여러 계산 기기의 머신 내에서 데이터 흐름 그래프의 노드를 매핑합니다. 이 아키텍처는 애플리케이션 개발자에게 유연성을 제공합니다. 이전의 "매개변수 서버" 설계에서는 공유 상태의 관리가 시스템에 내장되어 있으나, TensorFlow에서는 개발자가 새로운 최적화 및 훈련 알고리즘을 실험할 수 있습니다. TensorFlow는 심층 신경망에서 훈련 및 추론에 중점을 둔 다양한 애플리케이션을 지원합니다. 일부 Google 서비스는 운영 환경에서 TensorFlow를 사용하고 오픈 소스 프로젝트로 출시했으며, 머신러닝 연구에 광범위하게 사용했습니다. 이 백서에서는 TensorFlow 데이터 흐름 모델을 설명하고 여러 실제 애플리케이션에서 TensorFlow의 강력한 성능을 보여줍니다.
