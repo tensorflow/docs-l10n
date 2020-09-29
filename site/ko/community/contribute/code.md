@@ -2,7 +2,7 @@
 
 손실 함수 추가, 테스트 범위 개선 또는 주요 설계 변경에 대한 RFC 작성 등 기여자 가이드의 이 부분은 순조로운 출발을 도와줍니다. TensorFlow 개선에 대한 여러분의 관심과 노고에 감사 드립니다.
 
-## Before you get started
+## 시작하기 전에
 
 TensorFlow 프로젝트에 소스 코드를 제공하기 전에 프로젝트의 GitHub 리포지토리에서 `CONTRIBUTING.md` 파일을 살펴보기 바랍니다(예: [핵심 TensorFlow 리포지토리에 대한 CONTRIBUTING.md 파일](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md) 참조). 모든 코드 기여자는 [기여자 라이선스 계약](https://cla.developers.google.com/clas)(CLA)에 동의해야 합니다.
 
@@ -18,7 +18,7 @@ TensorFlow 프로젝트에 소스 코드를 제공하기 전에 프로젝트의 
 
 보다 큰 규모의 문제나 새로운 기능을 다루기 위해 팀을 구성하고 싶다면 [developers@ group](https://groups.google.com/a/tensorflow.org/forum/#!forum/developers)에 이메일을 보내 현재 RFC 목록을 검토하세요.
 
-## Code review
+## 코드 검토
 
 새로운 기능, 버그 수정 및 기타 코드 베이스의 변경은 코드 검토를 받아야 합니다.
 
