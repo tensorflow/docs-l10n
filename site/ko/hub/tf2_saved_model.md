@@ -68,7 +68,7 @@ SavedModel의 훈련 가능한 변수는 훈련 가능한 것으로 다시 로�
 
 ## TF 허브용 SavedModel 만들기
 
-### Overview
+### 개요
 
 SavedModel은 훈련된 모델 또는 모델 조각에 대한 TensorFlow의 표준 직렬화 형식입니다. 이 모델은 계산을 수행하기 위해 모델의 훈련된 가중치를 정확한 TensorFlow 연산과 함께 저장하며, 이 모델이 생성된 출처 코드와 독립적으로 사용할 수 있습니다. 특히, TensorFlow 연산이 공통된 기본 언어이기 때문에 Keras와 같은 다양한 상위 수준 모델 구축 API에서 재사용할 수 있습니다.
 
@@ -131,7 +131,7 @@ print(layer.losses)  # 0.004
 
 [tensorflow/examples/saved_model/integration_tests/](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/saved_model/integration_tests)의 코드에는 더 큰 예제가 포함되어 있습니다(특히, `export_mnist.py` 및 `use_mnist.py` 쌍이 있음).
 
-## Fine-Tuning
+## 미세 조정
 
 가져온 SavedModel의 이미 훈련된 변수를 주변 모델의 변수와 함께 훈련하는 작업을 SavedModel의 *미세 조정*이라고 합니다. 이 조정의 결과로 품질이 향상될 수 있지만 종종 훈련이 더 까다로워집니다(시간이 더 많이 걸리고, 옵티마이저와 하이퍼 매개변수에 대한 종속성이 커지며, 과대적합 위험이 높아지고, 특히 CNN의 경우 데이터세트 확대가 필요할 수 있음). SavedModel 소비자는 바람직한 훈련 체계를 수립한 후에만, 그리고 SavedModel 게시자가 권장하는 경우에만 미세 조정을 고려하는 것이 좋습니다.
 
@@ -149,7 +149,7 @@ layer = hub.KerasLayer(..., trainable=True)
 
 [이미지 분류 colab](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)에 선택적 미세 조정이 포함된 엔드 투 엔드 예제가 있습니다.
 
-#### Re-exporting the fine-tuning result
+#### 미세 조정 결과 다시 내보내기
 
 고급 사용자는 SavedModel에 미세 조정 결과를 다시 저장하여 원래 로드된 모델 대신 이 모델이 사용되도록 할 수 있습니다. 이 목적으로 다음과 같은 코드를 이용합니다.
 
