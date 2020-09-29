@@ -1,6 +1,6 @@
 # 특성 디코딩 사용자 정의하기
 
-- [Usage examples](#usage-examples)
+- 사용 예
     - [이미지 디코딩 건너뛰기](#skipping-the-image-decoding)
     - [이미지가 디코딩되기 전에 데이터세트 필터링/셔플링하기](#filtershuffle-dataset-before-images-get-decoded)
     - [ 동시에 자르기 및 디코딩하기](#cropping-and-decoding-at-the-same-time)
@@ -10,7 +10,7 @@
 
 경고: 이 API를 사용하면 디스크에서 하위 레벨 `tf.train.Example` 형식에 액세스할 수 있습니다(`FeatureConnector`에서 정의된 대로). 이 API는 이미지에서 더 나은 읽기 성능을 원하는 고급 사용자를 대상으로 합니다.
 
-## Usage examples
+## 사용 예
 
 ### 이미지 디코딩 건너뛰기
 
@@ -69,7 +69,7 @@ ds = tfds.load('imagenet2012', split='train', decoders={
 })
 ```
 
-Which is equivalent to:
+다음과 같습니다.
 
 ```python
 def decode_example(serialized_image, feature):
@@ -111,7 +111,7 @@ ds = tfds.load('ucf101', split='train', decoders={
 })
 ```
 
-Which is equivalent to:
+다음과 같습니다.
 
 ```python
 def decode_frame(serialized_image):
