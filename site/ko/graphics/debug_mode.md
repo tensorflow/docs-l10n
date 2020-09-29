@@ -9,7 +9,7 @@ from absl import flags
 from tensorflow_graphics.util import tfg_flags
 ```
 
-and then by adding the following line to the code.
+그런 다음 코드에 다음 줄을 추가합니다.
 
 ```python
 flags.FLAGS[tfg_flags.TFG_ADD_ASSERTS_TO_GRAPH].value = True
