@@ -2,13 +2,13 @@
 
 # TF Hub에서 모델 다운로드 캐싱하기
 
-## Summary
+## 요약
 
 `tensorflow_hub` 라이브러리는 모델이 tfhub.dev(또는 다른 [호스팅 사이트](hosting.md) )에서 다운로드되고 압축이 풀릴 때 파일 시스템의 모델을 캐싱합니다. 다운로드 위치는 기본적으로 로컬 임시 디렉토리이지만, 환경 변수 `TFHUB_CACHE_DIR`(권장)을 설정하거나 명령 줄 플래그 `--tfhub_cache_dir`를 전달하여 사용자 정의할 수 있습니다. 영구 위치를 사용하는 경우, 자동 정리가 없다는 점에 유의하세요.
 
 실제 Python 코드에서 `tensorflow_hub` 함수에 대한 호출은 모델의 정식 tfhub.dev URL을 계속 사용할 수 있으며 계속 사용해야 합니다. 따라서 시스템 간에 이식 가능하고 설명서를 탐색할 수 있습니다.
 
-## Specific execution environments
+## 특정 실행 환경
 
 기본 `TFHUB_CACHE_DIR`을 변경해야 하는 경우와 방법은 실행 환경에 따라 다릅니다.
 
