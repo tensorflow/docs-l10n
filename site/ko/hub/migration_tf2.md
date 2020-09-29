@@ -2,7 +2,7 @@
 
 # TensorFlow Hub를 사용하여 TF1에서 TF2로 마이그레이션하기
 
-This page explains how to keep using TensorFlow Hub while migrating your TensorFlow code from TensorFlow 1 to TensorFlow 2. It complements TensorFlow's general [migration guide](https://www.tensorflow.org/guide/migrate).
+이 페이지에서는 TensorFlow 코드를 TensorFlow 1에서 TensorFlow 2로 마이그레이션하는 동안 TensorFlow Hub를 계속 사용하는 방법을 설명합니다. TensorFlow의 일반 [마이그레이션 가이드](https://www.tensorflow.org/guide/migrate)를 보완합니다.
 
 TF2의 경우, TF Hub는 `tf.contrib.v1.layers`처럼 `tf.compat.v1.Graph`를 빌드하기 위해 레거시 `hub.Module` API에서 전환했습니다. 대신 `tf.keras.Model`(일반적으로 TF2의 새로운 [즉시 실행 환경](https://www.tensorflow.org/guide/eager_)) 및 하위 수준 TensorFlow 코드에 대한 기본 `hub.load()` 메서드를 빌드하기 위해 다른 Keras 레이어와 함께 사용할 수 있는 `hub.KerasLayer`가 있습니다.
 
@@ -31,14 +31,14 @@ model = tf.keras.Sequential([
 
 많은 튜토리얼에서 이러한 API가 실제로 동작하는 것을 보여줍니다. 특히, 다음을 참조하세요.
 
-- [Text classification example notebook](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
-- [Image classification example notebook](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
+- [텍스트 분류 예제 노트북](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
+- [이미지 분류 예제 노트북](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
 
 ### Estimator 훈련에서 새 API 사용하기
 
 매개변수 서버(또는 원격 기기에 배치된 변수가 있는 TF1 세션에서)로 훈련하기 위해 Estimator에서 TF2 SavedModel을 사용하는 경우, tf.Session의 ConfigProto에서 `experimental.share_cluster_devices_in_session`를 설정해야 합니다. 그렇지 않으면 "Assigned device '/job:ps/replica:0/task:0/device:CPU:0' does not match any device"와 같은 오류가 발생합니다.
 
-The necessary option can be set like
+필요한 옵션은 다음과 같이 설정할 수 있습니다.
 
 ```python
 session_config = tf.compat.v1.ConfigProto()
