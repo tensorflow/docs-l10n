@@ -29,9 +29,9 @@ TF Hub는 TensorFlow 프로그램에서 다시 로드, 빌드 및 재훈련할 �
     <td> It's recommended to use either hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m.signatures["sig"](inputs)</pre>       or hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle, signature="sig") outputs = m(inputs)</pre>     </td>
   </tr>
   <tr>
-    <td>Fine-tuning</td>
+    <td>미세 조정</td>
     <td>       Fully supported (<a href="https://www.tensorflow.org/hub/tf1_hub_module#for_consumers">complete TF1 Hub format fine-tuning guide</a>)     <pre style="font-size: 12px;" lang="python">m = hub.Module(handle,                trainable=True,                tags=["train"]*is_training) outputs = m(inputs)</pre>       <div style="font-style: italic; font-size: 14px">       Note: modules that don't need a separate train graph don't have a train         tag.       </div>     </td>
-    <td style="text-align: center">       Not supported     </td>
+    <td style="text-align: center">지원되지 않음</td>
   </tr>
   <tr>
     <td>생성</td>
@@ -42,7 +42,7 @@ TF Hub는 TensorFlow 프로그램에서 다시 로드, 빌드 및 재훈련할 �
 
 ## TF2 SavedModel {:#compatibility_of_tf2_savedmodel}의 호환성
 
-Not supported before TF1.15.
+TF1.15 이전에는 지원되지 않습니다.
 
 <table style="width: 100%;">
   <tr style="text-align: center">
@@ -60,7 +60,7 @@ Not supported before TF1.15.
     <td> Fully supported (<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">complete TF2 SavedModel loading guide</a>). Use either hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre>       or hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre>     </td>
   </tr>
   <tr>
-    <td>Fine-tuning</td>
+    <td>미세 조정</td>
     <td>       Supported for a hub.KerasLayer used in  tf.keras.Model when trained with       Model.fit() or trained in an Estimator whose model_fn wraps the Model per the <a href="https://www.tensorflow.org/guide/migrate#using_a_custom_model_fn">custom model_fn guide</a>.       <br><div style="font-style: italic; font-size: 14px;">         Note: hub.KerasLayer <span style="font-weight: bold;">does not</span>         fill in graph collections like the old tf.compat.v1.layers or hub.Module         APIs did.       </div>     </td>
     <td>       Fully supported (<a href="https://www.tensorflow.org/hub/tf2_saved_model#for_savedmodel_consumers">complete TF2 SavedModel fine-tuning guide</a>).       Use either hub.load:       <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs, training=is_training)</pre>       or hub.KerasLayer:       <pre style="font-size: 12px;" lang="python">m =  hub.KerasLayer(handle, trainable=True) outputs = m(inputs)</pre>     </td>
   </tr>
