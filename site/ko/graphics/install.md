@@ -1,8 +1,8 @@
 # TensorFlow 그래픽 설치하기
 
-## Stable builds
+## 안정적인 빌드
 
-TensorFlow Graphics depends on [TensorFlow](https://www.tensorflow.org/install) 1.13.1 or above. Nightly builds of TensorFlow (tf-nightly) are also supported.
+TensorFlow Graphics는 [TensorFlow](https://www.tensorflow.org/install) 1.13.1 이상에 의존합니다. TensorFlow (tf-nightly)의 Nightly 빌드도 지원됩니다.
 
 [PyPI](https://pypi.org/project/tensorflow-graphics/)에서 최신 CPU 버전을 설치하려면 다음을 실행합니다.
 
@@ -22,7 +22,7 @@ pip install --upgrade tensorflow-graphics-gpu
 
 ## 소스에서 설치하기 - macOS/Linux
 
-You can also install from source by executing the following commands:
+다음 명령을 실행하여 소스에서 설치할 수도 있습니다.
 
 ```shell
 git clone https://github.com/tensorflow/graphics.git
