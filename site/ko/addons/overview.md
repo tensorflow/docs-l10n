@@ -33,7 +33,7 @@ TensorFlow의 안정적인 최신 버전에서 빌드된 pip 패키지 `tfa-nigh
 pip install tfa-nightly
 ```
 
-#### Installing from Source
+#### 소스에서 설치하기
 
 소스에서 설치할 수도 있습니다. 이를 위해서는 [Bazel](https://bazel.build/) 빌드 시스템이 필요합니다.
 
@@ -61,17 +61,17 @@ pip install artifacts/tensorflow_addons-*.whl
 
 사용자 경험과 프로젝트 유지 관리는 TF-Addons의 핵심 개념입니다. 핵심 TensorFlow에서 볼 수 있는 확립된 API 패턴을 준수해야 합니다.
 
-#### GPU/CPU Custom-Ops
+#### GPU/CPU 사용자 정의 연산
 
 TensorFlow Addons의 주요 이점은 사전 컴파일된 ops가 있다는 것입니다. CUDA 10 설치를 찾을 수 없는 경우, 해당 op는 자동으로 CPU 구현으로 대체됩니다.
 
 #### 프록시 유지 관리
 
-Addons has been designed to compartmentalize subpackages and submodules so that they can be maintained by users who have expertise and a vested interest in that component.
+애드온은 하위 패키지와 하위 모듈을 구분하여 해당 구성 요소에 대한 전문 지식과 관심이 있는 사용자가 유지 관리할 수 있도록 설계되었습니다.
 
 서브 패키지의 유지 관리 권한은 쓰기 권한이 있는 사용자의 수를 제한하기 위해 기여한 바가 큰 사용자에게 부여될 수 있습니다. 기여는 이슈 종결, 버그 수정, 문서화, 새 코드 또는 기존 코드의 최적화와 같은 여러 형태를 포함합니다. 하위 모듈의 유지 관리 권한은 리포지토리에 대한 쓰기 권한을 포함하지 않으므로 진입 장벽을 낮추어 부여할 수 있습니다.
 
-For more information see [the RFC](https://github.com/tensorflow/community/blob/master/rfcs/20190308-addons-proxy-maintainership.md) on this topic.
+자세한 내용은 이 주제에 대한 [RFC](https://github.com/tensorflow/community/blob/master/rfcs/20190308-addons-proxy-maintainership.md)를 참조하세요.
 
 #### 하위 패키지의 주기적 평가
 
@@ -96,7 +96,7 @@ API가 'deprecated'으로 표시된 후 삭제되기까지의 기간은 90일입
 
 2. 90일은 관리자가 코드를 수정할 수 있는 충분한 시간을 제공합니다.
 
-## Contributing
+## 기여하기
 
 TF-Addons은 커뮤니티 주도의 오픈 소스 프로젝트입니다. 따라서 프로젝트는 공개 기여, 버그 수정 및 문서화에 의존합니다. 기여 방법은 [기여 가이드라인](https://github.com/tensorflow/addons/blob/master/CONTRIBUTING.md)을 참조하세요. 이 프로젝트는 [TensorFlow의 행동 강령](https://github.com/tensorflow/addons/blob/master/CODE_OF_CONDUCT.md)을 따릅니다. 참여를 통해 이 코드를 많이 지지해 주시기 바랍니다.
 
@@ -106,6 +106,6 @@ TF-Addons은 커뮤니티 주도의 오픈 소스 프로젝트입니다. 따라�
 - [SIG 월간 회의 노트](https://docs.google.com/document/d/1kxg5xIHWLY7EMdOJCdSGgaPu27a9YKpupUz2VTXqTJg)
     - 메일 그룹에 가입하고 회의에 대한 캘린더 초대 받기
 
-## License
+## 라이선스
 
 [Apache 라이선스 2.0](LICENSE)
