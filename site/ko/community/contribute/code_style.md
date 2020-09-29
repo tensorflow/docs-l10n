@@ -12,7 +12,6 @@ TensorFlow가 4개 대신 2개의 공백을 사용하는 것을 제외하고 [PE
 
 $ pip install pylint
 $ wget -O /tmp/pylintrc https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/tools/ci_build/pylintrc
-
 ```
 
 `pylint`로 파일을 확인하려면 다음과 같이 합니다.
