@@ -20,7 +20,7 @@ m = hub.Module("path/to/a/module_dir")
 
 그러면 현재 TensorFlow 그래프에 모듈의 변수가 추가됩니다. 이니셜라이저를 실행하면 디스크에서 사전 훈련된 값을 읽습니다. 마찬가지로, 테이블 및 기타 상태가 그래프에 추가됩니다.
 
-### Caching Modules
+### 캐싱 모듈
 
 URL에서 모듈을 만들 때, 모듈 콘텐츠가 다운로드되고 로컬 시스템의 임시 디렉토리에 캐싱됩니다. 모듈이 캐싱되는 위치는 `TFHUB_CACHE_DIR` 환경 변수를 사용하여 재정의할 수 있습니다. 자세한 내용은 [캐싱](caching.md)을 참조하세요.
 
@@ -91,7 +91,7 @@ TensorFlow Estimator와의 호환성을 위해 `hub.LatestModuleExporter`는 최
 
 일반적인 텍스트 임베딩 형식에서 모듈을 만드는 방법에 대한 실제 예제를 보려면 [텍스트 임베딩 모듈 내보내기](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings/export.py)를 살펴보세요.
 
-## Fine-Tuning
+## 미세 조정
 
 가져온 모듈의 변수를 주변 모델의 변수와 함께 훈련하는 것을 *미세 조정*이라고 합니다. 미세 조정은 품질을 향상할 수 있지만, 새로운 문제를 제기합니다. 소비자는 더 간단한 품질 조정을 알아본 후 모듈 게시자가 권장하는 경우에만 미세 조정을 고려할 것을 권장합니다.
 
