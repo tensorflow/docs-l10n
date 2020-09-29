@@ -1,116 +1,116 @@
 # TensorFlow RFC 프로세스
 
-Every new TensorFlow feature begins life as a Request for Comment (RFC).
+새로운 TensorFlow 특성은 언제나 Request for Comment(RFC)로 시작합니다.
 
-An RFC is a document that describes a requirement and the proposed changes that will solve it. Specifically, the RFC will:
+RFC는 요구 사항과 이를 해결하기 위해 제안된 변경 사항을 설명하는 문서입니다. 구체적으로 RFC는 다음과 같이 사용됩니다.
 
-- Be formatted according to the [RFC template](https://github.com/tensorflow/community/blob/master/rfcs/yyyymmdd-rfc-template.md).
-- Be submitted as a pull request to the [community/rfcs](https://github.com/tensorflow/community/tree/master/rfcs) directory.
-- Be subject to discussion and a review meeting prior to acceptance.
+- [RFC 템플릿](https://github.com/tensorflow/community/blob/master/rfcs/yyyymmdd-rfc-template.md)의 형식을 따릅니다.
+- [community/rfcs](https://github.com/tensorflow/community/tree/master/rfcs) 디렉토리에 풀 요청으로 제출합니다.
+- 수락하기 전에 토론 및 검토 회의를 거칩니다.
 
-The purpose of a TensorFlow Request for Comments (RFC) is to engage the TensorFlow community in development, by getting feedback from stakeholders and experts, and communicating design changes broadly.
+TensorFlow RFC의 목적은 이해 관계자 및 전문가로부터 피드백을 받고 설계 변경을 광범위하게 전달함으로써 TensorFlow 커뮤니티를 개발에 참여시키는 것입니다.
 
 ## RFC를 제출하는 방법
 
-1. Before submitting an RFC, discuss your aims with project contributors and maintainers and get early feedback. Use the developer mailing list for the project concerned (developers@tensorflow.org, or the list for the relevant SIG).
+1. RFC를 제출하기 전에 프로젝트 기여자 및 관리자와 목표를 논의하고 초기 피드백을 받습니다. 해당 프로젝트에 대한 개발자 메일 그룹(developers@tensorflow.org 또는 관련 SIG 목록)를 사용합니다.
 
-2. Draft your RFC.
+2. RFC 초안을 작성합니다.
 
     - [RFC 템플릿](https://github.com/tensorflow/community/blob/master/rfcs/yyyymmdd-rfc-template.md)을 따릅니다.
-    - Name your RFC file `YYYYMMDD-descriptive-name.md`, where `YYYYMMDD` is the date of submission, and `descriptive-name` relates to the title of your RFC. (For instance, if your RFC is titled *Parallel Widgets API*, you might use the filename `20180531-parallel-widgets.md`.
-    - If you have images or other auxiliary files, create a directory of the form `YYYYMMDD-descriptive-name` in which to store those files.
+    - RFC 파일 이름을 `YYYYMMDD-descriptive-name.md`로 지정합니다. 여기서 `YYYYMMDD`는 제출 날짜이고 `descriptive-name`은 RFC 제목과 관련됩니다. 예를 들어, RFC의 제목이 *Parallel Widgets API*인 경우 `20180531-parallel-widgets.md`의 파일 이름을 사용할 수 있습니다.
+    - 이미지 또는 다른 보조 파일이 있는 경우 해당 파일을 저장할 `YYYYMMDD-descriptive-name` 형식의 디렉토리를 만듭니다.
 
-    After writing the RFC draft, get feedback from maintainers and contributors before submitting it.
+    RFC 초안을 작성한 후 제출하기 전에 관리자 및 기여자로부터 피드백을 받습니다.
 
-    Writing implementation code is not a requirement, but it may help design discussions.
+    구현 코드 작성은 필수 사항은 아니지만 설계 토론에 도움이 될 수 있습니다.
 
-3. Recruit a sponsor.
+3. 스폰서를 모집합니다.
 
-    - A sponsor must be a maintainer of the project.
-    - Identify the sponsor in the RFC, before posting the PR.
+    - 스폰서는 프로젝트의 관리자여야 합니다.
+    - PR을 게시하기 전에 RFC에 스폰서를 나타냅니다.
 
-    You *may* post an RFC without a sponsor, but if within a month of posting the PR there is still no sponsor, it will be closed.
+    스폰서 없이 RFC를 *게시할 수는* 있지만 PR을 게시하고 한 달이 지나도 스폰서가 없으면 PR이 닫힙니다.
 
-4. Submit your RFC as a pull request to [tensorflow/community/rfcs](https://github.com/tensorflow/community/tree/master/rfcs).
+4. [tensorflow/community/rfcs](https://github.com/tensorflow/community/tree/master/rfcs)에 풀 요청으로 RFC를 제출합니다.
 
-    Include the header table and the contents of the *Objective* section in the comment of your pull request, using Markdown. For an example, please see [this example RFC](https://github.com/tensorflow/community/pull/5). Include the GitHub handles of co-authors, reviewers, and sponsors.
+    Markdown을 사용하여 풀 요청의 주석에 헤더 테이블과 *목표* 섹션의 내용을 포함합니다. 예를 들어, [이 RFC 예](https://github.com/tensorflow/community/pull/5)를 참조하세요. 공동 저자, 검토자 및 스폰서의 GitHub 핸들을 포함시킵니다.
 
-    At the top of the PR identify how long the comment period will be. This should be a *minimum of two weeks* from posting the PR.
+    PR의 맨 위에 주석 기간이 얼마나 걸리는지 나타냅니다. 이 기간은 PR 게시 후 *최소 2주*는 되어야 합니다.
 
-5. Email the developer mailing list with a brief description, a link to the PR and a request for review. Follow the format of previous mailings, as you can see in [this example](https://groups.google.com/a/tensorflow.org/forum/#!topic/developers/PIChGLLnpTE).
+5. 간략한 설명, PR 링크 및 검토 요청과 함께 개발자 메일 그룹에 이메일을 보냅니다. [이 예](https://groups.google.com/a/tensorflow.org/forum/#!topic/developers/PIChGLLnpTE)에서 볼 수 있듯이 이전 메일 형식을 따릅니다.
 
-6. The sponsor will request a review committee meeting, no sooner than two weeks after the RFC PR is posted. If discussion is lively, wait until it has settled before going to review. The goal of the review meeting is to resolve minor issues; consensus should be reached on major issues beforehand.
+6. 스폰서는 RFC PR이 게시되고 최소 2주가 지난 후에 검토 위원회 회의를 요청합니다. 토론이 활발할 경우 안정화된 다음에 검토 과정으로 넘어갑니다. 검토 회의의 목표는 사소한 문제를 해결하는 것입니다. 주요 문제에 대해서는 사전에 합의에 도달해야 합니다.
 
-7. The meeting may approve the RFC, reject it, or require changes before it can be considered again. Approved RFCs will be merged into [community/rfcs](https://github.com/tensorflow/community/tree/master/rfcs), and rejected RFCs will have their PRs closed.
+7. 회의에서 RFC를 승인하거나 거부하거나, 변경을 요청한 후에 다시 고려 수 있습니다. 승인된 RFC는 [community/rfcs](https://github.com/tensorflow/community/tree/master/rfcs)로 병합되며 거부된 RFC는 해당 PR이 닫힙니다.
 
 ## RFC 참가자
 
-Many people are involved in the RFC process:
+많은 사람들이 RFC 프로세스에 참여합니다.
 
-- **RFC author** — one or more community members who write an RFC and are committed to championing it through the process
+- **RFC 저자** — RFC를 작성하고 프로세스를 통해 RFC를 옹호하는 한 명 이상의 커뮤니티 구성원입니다.
 
-- **RFC sponsor** — a maintainer who sponsors the RFC and will shepherd it through the RFC review process
+- **RFC 스폰서** — RFC를 후원하고 RFC 검토 프로세스를 통해 RFC를 관리하는 관리자입니다.
 
-- **review committee** — a group of maintainers who have the responsibility of recommending the adoption of the RFC
+- **검토 위원회** — RFC 채택을 권고하는 일을 담당한 관리자 그룹입니다.
 
-- Any **community member** may help by providing feedback on whether the RFC will meet their needs.
+- 모든 **커뮤니티 구성원**은 RFC가 필요성을 충족하는지 여부에 대한 피드백을 제공함으로써 도움을 줄 수 있습니다.
 
 ### RFC 스폰서
 
-A sponsor is a project maintainer responsible for ensuring the best possible outcome of the RFC process. This includes:
+스폰서는 RFC 프로세스에서 최상의 결과를 보장하는 일을 담당한 프로젝트 관리자입니다. 주요 작업 내용은 다음과 같습니다.
 
-- Advocating for the proposed design.
-- Guiding the RFC to adhere to existing design and style conventions.
-- Guiding the review committee to come to a productive consensus.
-- If changes are requested by the review committee, ensure these are made and seek subsequent approval from the committee members.
-- If the RFC moves to implementation:
-    - Ensuring proposed implementation adheres to the design.
-    - Coordinate with appropriate parties to successfully land implementation.
+- 제안된 설계를 옹호합니다.
+- 기존 설계와 스타일 규칙을 준수하도록 RFC를 이끕니다.
+- 검토 위원회가 생산적인 합의에 도달하도록 유도합니다.
+- 검토 위원회가 변경을 요청하는 경우 변경이 이루어졌는지 확인하고 위원회 구성원의 후속 승인을 받습니다.
+- RFC가 구현 단계로 이동하는 경우:
+    - 제안된 구현이 설계를 준수하도록 합니다.
+    - 성공적인 구현에 이를 수 있게 해당 당사자들과 협력합니다.
 
-### RFC review committees
+### RFC 검토 위원회
 
-The review committee decides on a consensus basis whether to approve, reject, or request changes. They are responsible for:
+검토 위원회는 RFC를 승인 또는 거부할지, 아니면 변경을 요청할지 여부를 만장일치로 결정합니다. 구체적으로 다음과 같은 작업을 수행합니다.
 
-- Ensuring that substantive items of public feedback have been accounted for.
-- Adding their meeting notes as comments to the PR.
-- Providing reasons for their decisions.
+- 실질적인 대중적 피드백 항목이 고려되도록 합니다.
+- PR에 주석으로 회의록을 추가합니다.
+- 결정에 대한 이유를 제공합니다.
 
-The constitution of a review committee may change according to the particular governance style and leadership of each project. For core TensorFlow, the committee will consist of contributors to the TensorFlow project who have expertise in the domain area concerned.
+검토 위원회의 구성은 각 프로젝트의 특정 관리 스타일과 리더십에 따라 달라질 수 있습니다. 핵심 TensorFlow의 경우, 위원회는 관련 분야에서 전문성을 가진 TensorFlow 프로젝트 기여자로 구성됩니다.
 
-### Community members and the RFC process
+### 커뮤니티 구성원 및 RFC 프로세스
 
-The purpose of RFCs is to ensure the community is well represented and served by new changes to TensorFlow. It is the responsibility of community members to participate in reviewing RFCs where they have an interest in the outcome.
+RFC의 목적은 TensorFlow의 새로운 변경 사항이 커뮤니티에 잘 제시 및 제공되도록 하는 것입니다. 결과에 관심이 있는 RFC 검토에 참여하는 것은 커뮤니티 구성원의 책임입니다.
 
-Community members who are interested in an RFC should:
+RFC에 관심이 있는 커뮤니티 구성원은 다음을 수행해야 합니다.
 
-- **Provide feedback** as soon as possible to allow adequate time for consideration.
-- **Read RFCs** thoroughly before providing feedback.
-- Be **civil and constructive**.
+- 적시에 고려될 수 있게 가능한 빠르게 **피드백을 제공합니다.**
+- 피드백을 제공하기 전에 **RFC를 자세히 읽습니다**.
+- **공민 의식을 가지고 건설적**인 자세를 갖습니다.
 
-## Implementing new features
+## 새로운 특성 구현하기
 
 RFC가 승인되면 구현을 시작할 수 있습니다.
 
-If you are working on new code to implement an RFC:
+RFC를 구현하기 위해 새 코드를 작성하는 경우:
 
-- Make sure you understand the feature and the design approved in the RFC. Ask questions and discuss the approach before beginning work.
-- New features must include new unit tests that verify the feature works as expected. It's a good idea to write these tests before writing the code.
-- Follow the [TensorFlow Code Style Guide](#tensorflow-code-style-guide)
-- Add or update relevant API documentation. Reference the RFC in the new documentation.
-- Follow any other guidelines laid out in the `CONTRIBUTING.md` file in the project repo you're contributing to.
-- Run unit tests before submitting your code.
-- Work with the RFC sponsor to successfully land the new code.
+- RFC에서 승인된 특성과 설계를 이해해야 합니다. 작업을 시작하기 전에 질문하고 접근 방식에 대해 논의합니다.
+- 새로운 특성에는 특성이 예상대로 작동하는지 확인하는 새로운 단위 테스트가 포함되어야 합니다. 코드를 작성하기 전에 이러한 테스트를 작성하는 것이 좋습니다.
+- [TensorFlow 코드 스타일 가이드](#tensorflow-code-style-guide)를 따릅니다.
+- 관련 API 문서를 추가하거나 업데이트합니다. 새 문서에서 RFC를 참조합니다.
+- 기여하고 있는 프로젝트 리포지토리의 `CONTRIBUTING.md` 파일에 나와 있는 다른 지침을 따릅니다.
+- 코드를 제출하기 전에 단위 테스트를 실행합니다.
+- RFC 스폰서와 협력하여 새 코드를 성공적으로 도입합니다.
 
-## Keeping the bar high
+## 기준을 높게 잡기
 
-While we encourage and celebrate every contributor, the bar for RFC acceptance is kept intentionally high. A new feature may be rejected or need significant revision at any one of these stages:
+모든 기여자를 격려하고 칭찬해 주어야 하겠지만 이와 동시에 RFC 승인 기준은 의도적으로 높게 유지됩니다. 다음 단계 중 하나에서 새로운 특성이 거부되거나 상당한 개정이 필요할 수 있습니다.
 
-- Initial design conversations on the relevant mailing list.
-- Failure to recruit a sponsor.
-- Critical objections during the feedback phase.
-- Failure to achieve consensus during the design review.
-- Concerns raised during implementation (for example: inability to achieve backwards compatibility, concerns about maintenance).
+- 관련 메일 그룹에서 이루어지는 초기 설계 대화
+- 스폰서 모집에 실패
+- 피드백 단계 중 중대한 이의가 제기됨
+- 설계 검토 중 합의에 도달하지 못함
+- 구현 중 우려 사항 제기(예: 이전 버전과 호환되지 않음, 유지관리의 문제점)
 
-If this process is functioning well, RFCs are expected to fail in the earlier, rather than later, stages. An approved RFC is no guarantee of a commitment to implement, and acceptance of a proposed RFC implementation is still subject to the usual code review process.
+이 프로세스가 제대로 작동하면 RFC는 이후 단계가 아닌 초기 단계에서 거부될 것으로 예상됩니다. RFC가 승인되었더라도 구현이 된다는 보장은 없으며 제안된 RFC의 구현이 승인되어도 여전히 일반적인 코드 검토 프로세스를 거쳐야 합니다.
 
-If you have any questions about this process, feel free to ask on the developers mailing list or file an issue in [tensorflow/community](https://github.com/tensorflow/community/tree/master/rfcs).
+이 프로세스에 대한 질문이 있으면 개발자 메일 그룹에 자유롭게 질문하거나 [tensorflow/community](https://github.com/tensorflow/community/tree/master/rfcs)에서 관련 사안을 제출하세요.
