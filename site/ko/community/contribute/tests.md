@@ -1,89 +1,89 @@
 # TensorFlow 테스트 모범 사례
 
-These are the recommended practices for testing code in the [TensorFlow repository](https://github.com/tensorflow/tensorflow).
+여기서는 [TensorFlow 리포지토리](https://github.com/tensorflow/tensorflow)에서 코드를 테스트하기 위한 모범 사례를 알아봅니다.
 
 ## 시작하기 전에
 
-Before you contribute source code to a TensorFlow project, please review the `CONTRIBUTING.md` file in the GitHub repo of the project. (For example, see the [CONTRIBUTING.md file for the core TensorFlow repo](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md).) All code contributors are required to sign a [Contributor License Agreement](https://cla.developers.google.com/clas) (CLA).
+TensorFlow 프로젝트에 소스 코드를 제공하기 전에 프로젝트의 GitHub 리포지토리에서 `CONTRIBUTING.md` 파일을 살펴보기 바랍니다(예: [핵심 TensorFlow 리포지토리에 대한 CONTRIBUTING.md 파일](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md) 참조). 모든 코드 기여자는 [기여자 라이선스 계약](https://cla.developers.google.com/clas)(CLA)에 동의해야 합니다.
 
 ## 일반 원칙
 
 ### BUILD 규칙에서 사용하는 내용에만 의존
 
-TensorFlow is a large library, and depending on the full package when writing a unit test for its submodules has been a common practice. However, this disables the `bazel` dependency-based analysis. This means that continuous integration systems cannot intelligently eliminate unrelated tests for presubmit/postsubmit runs. If you only depend on the submodules that you are testing in your `BUILD` file, you will save time for all TensorFlow developers, and a lot of valuable computation power.
+TensorFlow는 방대한 라이브러리이며 하위 모듈에 대한 단위 테스트를 작성할 때 전체 패키지를 따르는 것이 관례입니다. 그러나 이렇게 하면 `bazel` 종속성 기반 분석이 사용되지 않습니다. 즉, 지속적인 통합 시스템이 사전 제출/사후 제출 실행에 관련이 없는 테스트를 지능적으로 제거할 수 없습니다. `BUILD` 파일에서 테스트 중인 하위 모듈에만 의존하면 모든 TensorFlow 개발자의 시간과 귀중한 컴퓨팅 자원을 절약할 수 있습니다.
 
-However, modifying your build dependency to omit the full TF targets brings some limitations for what you can import in your Python code. You will not be able to use the `import tensorflow as tf` statement in your unit tests anymore. But this is a worthwhile tradeoff since as it saves all developers from running thousands of unnecessary tests.
+하지만 전체 TF 대상을 생략하기 위해 빌드 종속성을 수정하면 Python 모드에서 가져올 수 있는 내용에 다소 제약이 따릅니다. 즉, 단위 테스트에서 더 이상 `import tensorflow as tf` 문을 사용할 수 없게 됩니다. 하지만 모든 개발자가 불필요하게 수천 번의 테스트를 실행해야 하는 수고를 덜어주므로 그럴만한 가치가 있습니다.
 
-### All code should have unit tests
+### 모든 코드에 단위 테스트가 있어야 함
 
-For any code you write, you should also write its unit tests. If you write a new file `foo.py`, you should place its unit tests in `foo_test.py` and submit it within the same change. Aim for >90% incremental test coverage for all your code.
+작성하는 모든 코드에 대해 단위 테스트도 작성해야 합니다. 새 파일 `foo.py`를 작성하는 경우, 단위 테스트를 `foo_test.py`에 배치하고 동일한 변경 내에서 제출해야 합니다. 모든 코드에 대해 90% 이상의 증분 테스트 범위를 목표로 삼으세요.
 
-### Avoid using native bazel test rules in TF
+### TF에서 기본 바젤 테스트 규칙을 사용하지 말 것
 
-TF has a lot of subtleties when running tests. We have worked to hide all of those complexities in our bazel macros. To avoid having to deal with those, use the following instead of the native test rules. Note that all of these are defined in `tensorflow/tensorflow.bzl` For CC tests, use `tf_cc_test`, `tf_gpu_cc_test`, `tf_gpu_only_cc_test`. For python tests, use `tf_py_test` or `gpu_py_test`. If you need something really close to the native `py_test` rule, please use the one defined in tensorflow.bzl instead. You just need to add the following line at the top of the BUILD file: `load(“tensorflow/tensorflow.bzl”, “py_test”)`
+TF에는 테스트를 실행할 때 많은 세부적인 부분들이 관련됩니다. 그래서 이러한 모든 복잡성을 바젤 매크로 내에 숨기기 위해 노력했습니다. 이러한 부분을 처리할 필요가 없도록 기본 테스트 규칙 대신 다음을 사용하세요. 이 모든 내용은 `tensorflow/tensorflow.bzl`에 정의되어 있습니다. CC 테스트의 경우 `tf_cc_test`, `tf_gpu_cc_test`, `tf_gpu_only_cc_test`를 사용하고 python 테스트의 경우 `tf_py_test` 또는 `gpu_py_test`를 사용합니다. 기본 `py_test` 규칙에 매우 가까워야 한다면 tensorflow.bzl에 정의된 테스트를 대신 사용하세요. BUILD 파일 맨 위에 다음 줄만 추가하면 됩니다. `load(“tensorflow/tensorflow.bzl”, “py_test”)`.
 
-### Be aware where the test executes
+### 테스트가 실행되는 위치를 알고 있어야 함
 
-When you write a test, our test infra can take care of running your tests on CPU, GPU and accelerators if you write them accordingly. We have automated tests that run on Linux, macos, windows, that have systems with or without GPUs. You simply need to pick one of the macros listed above, and then use tags to limit where they are executed.
+테스트를 작성할 때 적절히 작성했다면 CPU, GPU 및 가속기에서 테스트를 수행하는 작업을 테스트 인프라에서 처리할 수 있습니다. GPU가 있거나 없는 시스템의 Linux, macos, Windows에서 자동화된 테스트가 실행됩니다. 위에 나타낸 매크로 중 하나를 선택한 다음 태그를 사용하여 실행 위치를 제한하기만 하면 됩니다.
 
-- `manual` tag will exclude your test from running anywhere. This includes manual test executions that use patterns such as `bazel test tensorflow/…`
+- `manual` 태그는 테스트가 어디에서도 실행되지 않도록 합니다. 여기에는 `bazel test tensorflow/…`와 같은 패턴을 사용하는 수동 테스트 실행이 포함됩니다.
 
-- `no_oss` will exclude your test from running in the official TF OSS test infrastructure.
+- `no_oss`는 테스트가 공식 TF OSS 테스트 인프라에서 실행되지 않도록 합니다.
 
-- `no_mac` or `no_windows` tags can be used to exclude your test from relevant operating system test suites.
+- `no_mac` 또는 `no_windows` 태그를 사용하여 관련 운영 체제 테스트 모음에서 테스트가 실행되지 않도록 할 수 있습니다.
 
-- `no_gpu` tag can be used to exclude your test from running in GPU test suites.
+- `no_gpu` 태그를 사용하여 GPU 테스트 모음에서 테스트가 실행되지 않도록 할 수 있습니다.
 
-### Verify tests run in expected test suites
+### 예상 테스트 모음에서 테스트가 실행되는지 확인하기
 
-TF has quite a few test suites. Sometimes, they may be confusing to set up. There might be different problems that cause your tests to be omitted from continuous builds. Thus, you should verify your tests are executing as expected. To do this:
+TF에는 꽤 많은 테스트 모음이 있어서 때로는 설정하기가 혼란스러울 수 있습니다. 연속 빌드에서 테스트가 생략되는 다른 문제가 있을 수 있습니다. 따라서 테스트가 예상대로 실행되고 있는지 확인해야 합니다. 다음과 같이 하면 됩니다.
 
-- Wait for your presubmits on your Pull Request(PR) to run to completion.
-- Scroll to the bottom of your PR to see the status checks.
-- Click the “Details” link at the right side of any Kokoro check.
-- Check the “Targets” list to find your newly added targets.
+- 풀 요청(PR)에서 사전 제출의 실행이 끝날 때까지 기다립니다.
+- PR 하단으로 스크롤하여 상태 검사를 확인합니다.
+- Kokoro 검사 오른쪽에 있는 "Details" 링크를 클릭합니다.
+- “Targets” 목록을 확인하여 새로 추가된 대상을 찾습니다.
 
-### Each class/unit should have its own unit test file
+### 각 클래스/단위에는 자체 단위 테스트 파일이 있어야 함
 
-Separate test classes help us better isolate failures and resources. They lead to much shorter and easier to read test files. Therefore, all your Python files should have at least one corresponding test file (For each `foo.py`, it should have `foo_test.py`). For more elaborate tests, such as integration tests that require different setups, it is fine to add more test files.
+별도의 테스트 클래스를 통해 오류와 리소스를 보다 효과적으로 분리할 수 있습니다. 그러면 훨씬 짧고 읽기 쉬운 테스트 파일이 만들어집니다. 따라서 모든 Python 파일에는 하나 이상의 해당 테스트 파일이 있어야 합니다(각 `foo.py`마다 `foo_test.py`가 있어야 함). 서로 다른 설정이 필요한 통합 테스트와 같은 보다 정교한 테스트를 위해서는 더 많은 테스트 파일을 추가하는 것이 좋습니다.
 
 ## 속도와 실행 시간
 
-### Sharding should be used as little as possible
+### 샤딩은 가능한 한 적게 사용
 
-Instead of sharding please consider:
+샤딩 대신 다음을 고려합니다.
 
-- Making your tests smaller
-- If the above is not possible, split the tests up
+- 테스트를 더 작게 만듭니다.
+- 위의 방법을 사용할 수 없으면 테스트를 분할합니다.
 
-Sharding helps reduce the overall latency of a test, but the same can be achieved by breaking up tests to smaller targets. Splitting tests gives us a finer level of control on each test, minimizing unnecessary presubmit runs and reducing the coverage loss from a buildcop disabling an entire target due to a misbehaving testcase. Moreover, sharding incurs hidden costs that are not so obvious, such as running all test initialization code for all shards. This issue has been escalated to us by infra teams as a source that creates extra load.
+샤딩은 테스트의 전체 대기 시간을 줄이는 데 도움이 되지만 테스트를 더 작은 대상으로 분할해도 같은 결과를 얻을 수 있습니다. 테스트를 분할하면 각 테스트에 대해 보다 세밀한 수준의 제어가 가능하여 불필요한 사전 제출 실행이 최소화되고 잘못된 테스트 케이스로 인해 buildcop이 전체 대상을 비활성화하면서 발생하는 적용 범위의 손실이 줄어듭니다. 또한 샤딩은 모든 샤드에 대해 모든 테스트 초기화 코드를 실행하는 것과 같이 명확하지 않은 숨겨진 비용을 발생시킵니다. 이 문제는 인프라 팀에서 추가 로드를 발생시키는 원인인 것으로 보고했습니다.
 
-### Smaller tests are better
+### 작은 테스트가 더 좋음
 
-The quicker your tests run, the more likely people will be to run your tests. One extra second for your test can accumulate to hours of extra time spent running your test by developers and our infrastructure. Try to make your tests run under 30 seconds (in non-opt mode!), and make them small. Only mark your tests as medium as a last resort. The infra does not run any large tests as presubmits or postsubmits! Therefore, only write a large test if you are going to arrange where it is going to run. Some tips to make tests run faster:
+테스트가 빨리 실행될수록 사람들이 테스트를 실행할 가능성이 높아집니다. 테스트에 1초의 시간이 늘어나면 개발자와 인프라에서 테스트를 실행하는 시간이 몇 시간씩 늘어날 수 있습니다. 테스트가 30초 이내에 실행되도록 하고(비선택 모드에서!) 작게 만드세요. 테스트를 중간 규모로 표시하는 것은 최후의 수단으로만 선택해야 합니다. 인프라는 대규모 테스트를 사전 제출 또는 사후 제출로 수행하지 않습니다! 따라서 실행할 위치를 정할 경우에만 대규모 테스트를 작성하세요. 테스트 실행 속도를 높이기 위한 몇 가지 팁을 알려드립니다.
 
-- Run less iterations of training in your test
-- Consider using dependency injection to replace heavy dependencies of system under test with simple fakes.
-- Consider using smaller input data in unit tests
-- If nothing else works, try splitting up your test file.
+- 테스트에서 실행되는 훈련 반복 횟수를 줄입니다.
+- 종속성을 넣어 테스트 중인 시스템의 과중한 종속성을 단순한 가짜로 대체하는 방법을 고려합니다.
+- 단위 테스트에서 더 작은 입력 데이터의 사용을 고려합니다.
+- 다른 방법으로 효과가 없으면 테스트 파일을 분할합니다.
 
-### Test times should aim for half of test size timeout to avoid flakes
+### 실행 중단을 피하기 위해 테스트 시간을 테스트 크기별 시간 제한의 절반으로 잡을 것
 
-With `bazel` test targets, small tests have 1 minute timeouts. Medium test timeouts are 5 minutes. Large tests are just not executed by the TensorFlow test infra. However, many tests are not deterministic in the amount of time they take. For various reasons your tests might take more time every now and then. And, if you mark a test that runs for 50 seconds on the average as small, your test will flake if it schedules on a machine with an old CPU. Therefore, aim for 30 second average running time for small tests. Aim for 2 minutes 30 seconds of average running time for medium tests.
+`bazel` 테스트 대상을 사용하면 소규모 테스트에는 1분의 시간 제한이 있습니다. 중간 크기 테스트의 시간 제한은 5분입니다. 대규모 테스트는 TensorFlow 테스트 인프라에서 실행되지 않습니다. 그러나 많은 테스트는 소요되는 시간이 결정적이지 않습니다. 여러 가지 이유로 때때로 테스트에 더 많은 시간이 걸릴 수 있습니다. 또한 평균 50초 동안 실행되는 테스트를 소규모로 표시하면 구형 CPU를 탑재한 컴퓨터에서 테스트가 중단됩니다. 따라서 소규모 테스트의 평균 실행 시간을 30초로 잡으세요. 중간 규모 테스트의 평균 실행 시간은 2분 30초로 잡으면 됩니다.
 
-### Reduce the number of samples and increase tolerances for training
+### 샘플 수를 줄이고 훈련에 대한 허용 오차를 높일 것
 
-Slow running tests deter contributors. Running training in tests can be very slow. Prefer higher tolerances to be able to use less samples in your tests to keep your tests sufficiently fast (2.5 minutes max).
+테스트 실행 속도가 느리면 참여 의지가 떨어집니다. 테스트에서 훈련을 실행하는 속도가 매우 느릴 수 있습니다. 테스트에 사용되는 샘플 수를 줄여 테스트를 충분히 빠르게 유지할 수 있도록 허용 오차를 높게 설정하세요(최대 2.5분).
 
-## Eliminate non-determinism and flakes
+## 비결정성과 테스트 중단 해소하기
 
-### Write deterministic tests
+### 결정적인 테스트 작성
 
-Unit tests should always be deterministic. All tests running on TAP and guitar should run the same way every single time, if there is no code change affecting them. To ensure this, below are some points to consider.
+단위 테스트는 항상 결정적이어야 합니다. TAP 및 guitar에서 실행되는 모든 테스트는 영향을 받는 코드 변경이 없는 경우 매번 동일한 방식으로 실행되어야 합니다. 이를 보장하기 위해 다음 사항을 고려해야 합니다.
 
-### Always seed any source of stochasticity
+### 무질서도의 원인을 항상 시드하기
 
-Any random number generator, or any other sources of stochasticity can cause flakiness. Therefore, each of these must be seeded. In addition to making tests less flaky, this makes all tests reproducible. Different ways to set some seeds you may need to set in TF tests are:
+난수 생성기 또는 기타 무질서도의 원인은 실행 중단의 가능성을 높일 수 있습니다. 따라서 이러한 각 원인을 시드해야 합니다. 그러면 테스트의 실행 중단 가능성이 줄어드는 외에도 모든 테스트의 재현성이 확보됩니다. TF 테스트에서 필요할 수 있는 몇 가지 시드 설정 방법은 다음과 같습니다.
 
 ```python
 # Python RNG
@@ -99,18 +99,18 @@ from tensorflow.python.framework import random_seed
 random_seed.set_seed(42)
 ```
 
-### Avoid using `sleep` in multithreaded tests
+### 멀티스레드 테스트에서 `sleep` 사용 피하기
 
-Using `sleep` function in tests can be a major cause of flakiness. Especially when using multiple threads, using sleep to wait for another thread will never be determistic. This is due to system not being able to guarantee any ordering of execution of different threads or processes. Therefore, prefer deterministic synchronization constructs such as mutexes.
+테스트에서 `sleep` 함수의 사용은 중단 가능성을 높이는 주된 원인일 수 있습니다. 특히 멀티스레드를 사용하는 경우, 다른 스레드에 대기하기 위해 휴면을 사용하면 절대 결정적이 될 수 없습니다. 그 이유는 시스템이 여러 스레드 또는 프로세스의 실행 순서를 보장할 수 없기 때문입니다. 따라서 mutexe와 같은 결정적인 동기화 구문을 사용하는 것이 바람직합니다.
 
-### Check if the test is flaky
+### 테스트의 중단 가능성이 있는지 확인하기
 
-Flakes cause buildcops and developers to lose many hours. They are difficult to detect, and they are difficult to debug. Even though there are automated systems to detect flakiness, they need to accumulate hundreds of test runs before they can accurately denylist tests. Even when they detect, they denylist your tests and test coverage is lost. Therefore, test authors should check if their tests are flaky when writing tests. This can be easily done by running your test with the flag: `--runs_per_test=1000`
+중단 가능성이 있으면 buildcop와 개발자가 많은 시간을 낭비하게 됩니다. 중단 가능성은 감지하기 어렵고 디버그하기도 어렵습니다. 중단 가능성을 감지하는 자동화된 시스템이 있지만 테스트를 정확하게 거부하려면 수백 번의 테스트 실행이 필요합니다. 중단 가능성을 감지하고 테스트를 거부하더라도 테스트 검사가 손실됩니다. 따라서 테스트 작성자는 테스트를 작성할 때 테스트에 중단 가능성이 있는지 확인해야 합니다. 간단히 `--runs_per_test=1000` 플래그로 테스트를 실행하면 됩니다.
 
-### Use TensorFlowTestCase
+### TensorFlowTestCase 사용하기
 
-TensorFlowTestCase takes necessary precautions such as seeding all random number generators used to reduce flakiness as much as possible. As we discover and fix more flakiness sources, these all will be added to TensorFlowTestCase. Therefore, you should use TensorFlowTestCase when writing tests for tensorflow. TensorFlowTestCase is defined here: `tensorflow/python/framework/test_util.py`
+TensorFlowTestCase는 가능한 한 중단 가능성을 줄이기 위해 사용되는 모든 난수 생성기를 시드하는 등의 필요한 예방 조치를 취합니다. 더 많은 중단 가능성의 원인을 발견하고 수정하면서 TensorFlowTestCase에 그 내용이 추가될 것입니다. 따라서 tensorflow에 대한 테스트를 작성할 때 TensorFlowTestCase를 사용해야 합니다. TensorFlowTestCase는 `tensorflow/python/framework/test_util.py`에 정의되어 있습니다.
 
-### Write hermetic tests
+### 기밀 테스트 작성
 
-Hermetic tests do not need any outside resources. They are packed with everything they need, and they just start any fake services they might need. Any services other than your tests are sources for non determinism. Even with 99% availability of other services, network can flake, rpc response can be delayed, and you might end up with an inexplicable error message. Outside services may be, but not limited to, GCS, S3 or any website.
+기밀 테스트에는 외부 리소스가 필요하지 않습니다. 자체적으로 필요한 모든 내용이 들어 있으며 필요할 수 있는 가짜 서비스를 시작합니다. 테스트 이외의 모든 서비스는 결정성을 떨어트리는 원인이 됩니다. 다른 서비스의 가용성이 99%이더라도 네트워크 작동이 중단되고 rpc 응답이 지연될 수 있으며 예기치 않은 오류 메시지가 표시될 수 있습니다. 외부 서비스는 GCS, S3 또는 기타 웹 사이트일 수 있지만 이에 국한되지는 않습니다.
