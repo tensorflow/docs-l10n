@@ -21,7 +21,7 @@ $ wget -O /tmp/pylintrc https://raw.githubusercontent.com/tensorflow/tensorflow/
 $ pylint --rcfile=/tmp/pylintrc myfile.py
 ```
 
-### Supported Python versions
+### 지원되는 Python 버전
 
 TensorFlow는 Python > = 3.5를 지원합니다. 자세한 내용은 [설치 가이드](https://www.tensorflow.org/install)를 참조하세요.
 
@@ -44,12 +44,12 @@ $ clang-format <my_cc_file> --style=google > /tmp/my_cc_file.cc
 $ diff <my_cc_file> /tmp/my_cc_file.cc
 ```
 
-## Other languages
+## 다른 언어
 
-- [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
+- [Google Java 스타일 가이드](https://google.github.io/styleguide/javaguide.html)
 - [Google JavaScript 스타일 가이드](https://google.github.io/styleguide/jsguide.html)
 - [Google Shell 스타일 가이드](https://google.github.io/styleguide/shell.xml)
-- [Google Objective-C Style Guide](https://google.github.io/styleguide/objcguide.html)
+- [Google Objective-C 스타일 가이드](https://google.github.io/styleguide/objcguide.html)
 
 ## TensorFlow 규칙 및 특수한 사용
 
@@ -65,7 +65,7 @@ TensorFlow *연산*은 주어진 입력 텐서가 출력 텐서를 반환하거�
 - 사용 편의성을 높이려면 예제 섹션에 op의 입력/출력 사용 예를 포함합니다.
 - `tf.Tensor.eval` 또는 `tf.Session.run`을 명시적으로 사용하지 마세요. 예를 들어, Tensor 값에 의존하는 로직을 작성하려면 TensorFlow 제어 플로우를 사용합니다. 또는 즉시 실행이 활성화된 경우에만 연산이 실행되도록 제한합니다(`tf.executing_eagerly()`).
 
-Example:
+예:
 
 ```python
 def my_op(tensor_in, other_tensor_in, my_param, other_param=0.5,
