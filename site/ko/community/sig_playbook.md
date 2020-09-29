@@ -1,6 +1,6 @@
 # SIG 플레이북
 
-## Scope of a SIG
+## SIG의 범위
 
 TensorFlow는 특정 영역에 대한 집중적인 협업을 촉진하기 위해 *특별 관심 그룹*(SIG)을 호스트합니다. SIG는 공개적으로 작업을 수행합니다. 참여하고 기여하려면 그룹의 작업을 검토하고 SIG 책임자와 연락을 취하세요. 회원 자격 정책은 SIG마다 다릅니다.
 
@@ -34,7 +34,7 @@ SIG 결성에 대한 접근 방식은 보수적입니다. GitHub에서 프로젝
 
 SIG의 필요성이 분명해 보이더라도 그룹의 성공을 위해서는 조사와 상담이 여전히 중요합니다.
 
-### Creating the new group
+### 새로운 그룹 만들기
 
 새로운 그룹은 다음과 같은 결성 절차를 따라야 합니다. 특히 다음을 보여 주어야 합니다.
 
@@ -48,7 +48,7 @@ SIG의 필요성이 분명해 보이더라도 그룹의 성공을 위해서는 �
 
 새로운 그룹에 대한 공식 요청은 tensorflow/커뮤니티에 PR로 결성 허가를 제출하고 PR의 주석에 요청을 포함하는 식으로 이루어집니다(아래 템플릿 참조). 승인이 떨어지면 그룹의 PR이 병합되고 필요한 자원이 생성됩니다.
 
-### Template Request for New SIG
+### 새로운 SIG에 대한 템플릿 요청
 
 이 템플릿은 커뮤니티 리포지토리 [SIG-request-template.md](https://github.com/tensorflow/community/blob/master/governance/SIG-request-template.md)에서 얻을 수 있습니다.
 
