@@ -147,10 +147,7 @@ TensorFlow Hub는 protobufs를 사용하기 때문에 `.proto` 파일에서 필�
 (tensorflow_hub_env)~/hub/$ ls -1 tensorflow_hub/*_pb2.py
 ```
 
-<pre>tensorflow_hub/image_module_info_pb2.py
-tensorflow_hub/module_attachment_pb2.py
-tensorflow_hub/module_def_pb2.py
-</pre>
+<pre>tensorflow_hub/image_module_info_pb2.py<br>tensorflow_hub/module_attachment_pb2.py<br>tensorflow_hub/module_def_pb2.py</pre>
 
 참고: `.proto` 정의를 변경한 경우, `_pb2.py` 파일을 다시 컴파일하는 것을 잊지 마세요.
 
