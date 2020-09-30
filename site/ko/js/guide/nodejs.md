@@ -2,7 +2,7 @@
 
 ## TensorFlow CPU
 
-The TensorFlow CPU package can be imported as follows:
+TensorFlow CPU 패키지는 다음과 같이 가져올 수 있습니다.
 
 ```js
 import * as tf from '@tensorflow/tfjs-node'
@@ -16,7 +16,7 @@ import * as tf from '@tensorflow/tfjs-node'
 
 ## TensorFlow GPU
 
-The TensorFlow GPU package can be imported as follows:
+TensorFlow GPU 패키지는 다음과 같이 가져올 수 있습니다.
 
 ```js
 import * as tf from '@tensorflow/tfjs-node-gpu'
