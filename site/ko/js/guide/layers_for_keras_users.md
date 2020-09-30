@@ -72,7 +72,7 @@ await model.fit(xs, ys, {epochs: 1000});
 
 `Model.fit()`은 사용자가 TensorFlow.js에서 모델 훈련을 수행할 때 이용되는 기본 메서드입니다. 이 메서드는 종종 수 초에서 수 분까지 장시간 실행될 수 있습니다. 따라서 JavaScript 언어의 `async` 기능을 활용하면 브라우저에서 실행할 때 메인 UI 스레드를 차단하지 않는 방식으로 이 함수를 사용할 수 있습니다. `async` [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)와 같이 JavaScript에서 잠재적으로 오래 실행될 수 있는 다른 함수의 경우에도 마찬가지입니다. `async`는 Python에 존재하지 않는 구조입니다. Keras의 [`fit()`](https://keras.io/models/model/#model-class-api) 메서드가 History 객체를 반환하는 반면, JavaScript에서 그에 해당하는 `fit()` 메서드 부분은 History의 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)를 반환합니다. 이 응답은 위 예에서와 같이 [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)하거나 then() 메서드와 함께 사용할 수 있습니다.
 
-## No NumPy for TensorFlow.js
+## TensorFlow.js에 대한 NumPy 없음
 
 Python Keras 사용자는 종종 [NumPy](http://www.numpy.org/)를 사용하여 위의 예에서 2D 텐서를 생성하는 것과 같은 기본적인 숫자 및 배열 연산을 수행합니다.
 
