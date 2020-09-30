@@ -2,7 +2,7 @@
 
 Visual Studio Code(VSCode)는 macOS, Linux 및 Windows 운영 체제에서 실행되는 무료 코드 편집기입니다. Python 및 C++ 개발, 시각적 디버깅, git과의 통합 및 기타 다양하고 흥미로운 기능을 지원하는 우아한 도구 지원이 제공됩니다. 사용 및 확장 관리가 용이하다는 점에서 TensorFlow IO 개발을 위한 편집기로 매우 훌륭합니다. 그러나 적합하게 구성하려면 약간의 노력이 필요합니다. VSCode 구성은 매우 유연하기 때문에 개발자는 bazel을 사용하여 프로젝트를 컴파일하고 Python 및 C++ 디버거에서 코드를 실행할 수 있습니다. 기본 도구 설정은 운영 체제에 따라 다를 수 있지만 구성 방법은 비슷합니다.
 
-## Extensions
+## 확장
 
 확장을 설치하려면 사이드바에서 확장 보기 아이콘(확장)을 클릭하거나 단축키 Ctrl+Shift+X를 사용합니다. 그런 다음 아래 키워드를 검색합니다.
 
@@ -52,7 +52,7 @@ Python 코드 디버깅은 간단합니다. 공식 설명서에 따라 VSCode를
 python3 bq_sample_read.py --gcp_project_id=...
 ```
 
-You can execute it under GDB using the following:
+다음을 사용하여 GDB에서 실행할 수 있습니다.
 
 ```sh
 gdb -ex r --args python3 bq_sample_read.py --gcp_project_id=...
@@ -97,7 +97,7 @@ VSCode에는 GDB 디버거 지원도 있습니다. 중단점을 추가하고 변
 
 모두 올바르게 구성되었으면 *Run -> Start Debugging*(**F5**) 또는 *Run -> Run Without Debugging*(**Ctrl + F5**)를 수행할 수 있습니다. 그러면 디버거에서 코드가 실행됩니다.
 
-![VSCode debugger](./images/vscode_debugger.png)
+![VSCode 디버거](./images/vscode_debugger.png)
 
 디버깅 환경을 더욱 단순화하기 위해 표준 C++ 라이브러리를 건너뛰도록 GDB를 구성할 수 있습니다. 이렇게 하면 신경 쓰지 않아도 되는 코드를 무시할 수 있습니다. 이를 위해 다음 내용으로 `~/.gdbinit` 파일을 만듭니다.
 
