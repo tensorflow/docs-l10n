@@ -64,7 +64,7 @@ await model.save('downloads://my-model');
 1. `[my-model].json` 이라는 텍스트 JSON 파일(아래 설명된 가중치 파일에 대한 토폴로지 및 참조를 전달함)
 2. `[my-model].weights.bin` 이라는 가중치 값을 전달하는 바이너리 파일
 
-You can change the name `[my-model]` to get files with a different name.
+`[my-model]` 이름을 변경하여 다른 이름의 파일을 가져올 수 있습니다.
 
 `.json` 파일은 상대 경로를 사용하여 `.bin` 파일을 가리키므로 두 파일은 같은 폴더에 있어야 합니다.
 
@@ -80,7 +80,7 @@ await model.save('http://model-server.domain/upload')
 
 모델을 리모트 서버에 저장하도록 웹 요청이 생성됩니다. 요청이 처리될 수 있도록 사용자가 리모트 서버를 제어해야 합니다.
 
-The model will be sent to the specified HTTP server via a [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request. The body of the POST is in the `multipart/form-data` format and consists of two files
+모델은 [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) 요청을 통해 지정된 HTTP 서버로 전송됩니다. POST의 본문은 `multipart/form-data` 형식이며 두 개의 파일로 구성됩니다.
 
 1. `model.json` 이라는 텍스트 JSON 파일(아래 설명된 가중치 파일에 대한 토폴로지 및 참조를 전달함)
 2. `model.weights.bin` 이라는 가중치 값을 전달하는 바이너리 파일
