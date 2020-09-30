@@ -10,11 +10,11 @@
 목차:
 
 - [Beam 데이터세트 생성하기](#generating-a-beam-dataset)
-    - [On Google Cloud Dataflow](#on-google-cloud-dataflow)
+    - [Google Cloud Dataflow에서](#on-google-cloud-dataflow)
     - [로컬에서](#locally)
-    - [Within a custom script](#with-a-custom-script)
+    - [사용자 정의 스크립트 내](#with-a-custom-script)
 - [Beam 데이터세트 구현하기](#implementing-a-beam-dataset)
-    - [Prerequisites](#prerequisites)
+    - [전제 조건](#prerequisites)
     - [지침](#instructions)
     - [예제](#example)
     - [파이프라인 실행](#run-your-pipeline)
@@ -25,7 +25,7 @@
 
 **경고**: `tensorflow_datasets.scripts.download_and_prepare` 스크립트를 사용하여 데이터세트를 생성할 때 생성하려는 데이터세트 구성을 지정해야 합니다. 그렇지 않으면, 기본적으로 모든 기존 구성이 생성됩니다. 예를 들어, [wikipedia](https://www.tensorflow.org/datasets/catalog/wikipedia)를 위해서는 `--dataset=wikipedia` 대신 `--dataset=wikipedia/20200301.en`를 사용하세요.
 
-### On Google Cloud Dataflow
+### Google Cloud Dataflow에서
 
 [Google Cloud Dataflow](https://cloud.google.com/dataflow/)를 사용하여 파이프라인을 실행하고 분산 계산을 이용하려면, 먼저 [빠른 시작 지침](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python)을 따르세요.
 
@@ -99,7 +99,7 @@ builder.download_and_prepare(
 
 ## Beam 데이터세트 구현하기
 
-### Prerequisites
+### 전제 조건
 
 Apache Beam 데이터세트를 작성하려면, 다음 개념에 익숙해야 합니다.
 
