@@ -2,11 +2,11 @@
 
 이 페이지에는 TensorFlow Hub를 사용하여 텍스트 도메인의 문제를 해결하는 알려진 가이드 및 도구 세트가 나열되어 있습니다. 처음부터 시작하는 대신 미리 훈련된 ML 구성 요소를 사용하여 일반적인 ML 문제를 해결하려는 모든 분들에게 좋은 출발점입니다.
 
-## Classification
+## 분류
 
 **감정**, **독성** , **기사 범주** 또는 기타 특성과 같은 주어진 예에 대한 클래스를 예측하려는 경우를 예로 들 수 있습니다.
 
-![Text Classification Graphic](https://www.gstatic.com/aihub/tfhub/universal-sentence-encoder/example-classification.png)
+![텍스트 분류 그래픽](https://www.gstatic.com/aihub/tfhub/universal-sentence-encoder/example-classification.png)
 
 아래 튜토리얼은 서로 다른 관점에서 서로 다른 도구를 사용하여 동일한 작업을 해결합니다.
 
@@ -26,14 +26,14 @@
 
 [Kaggle의 IMDB 분류](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) - 데이터 다운로드 및 결과 제출을 포함하여 Colab의 Kaggle 경쟁과 쉽게 상호 작용하는 방법을 보여줍니다.
 
- | Estimator | Keras | TF2 | TF 데이터세트 | BERT | Kaggle APIs
+ | Estimator | Keras | TF2 | TF 데이터세트 | BERT | Kaggle API
 --- | --- | --- | --- | --- | --- | ---
-[Text classification](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  |
-[Text classification with Keras](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub) |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |
-[Predicting Movie Review Sentiment with BERT on TF Hub](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |
-[IMDB classification on Kaggle](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png)
+[텍스트 분류](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  |
+[Keras를 사용한 텍스트 분류](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub) |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |
+[TF Hub에서 BERT를 사용하여 영화 리뷰 감정 예측](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |
+[Kaggle의 IMDB 분류](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png)
 
-### Bangla task with FastText embeddings
+### FastText 임베딩을 사용한 Bangla 작업
 
 TensorFlow Hub는 현재 모든 언어로 모듈을 제공하지 않습니다. 다음 튜토리얼은 빠른 실험과 모듈식 ML 개발을 위해 TensorFlow Hub를 활용하는 방법을 보여줍니다.
 
@@ -43,9 +43,9 @@ TensorFlow Hub는 현재 모든 언어로 모듈을 제공하지 않습니다. �
 
 제로-샷 설정에서 서로 상관 관계가 있는 문장을 찾고 싶을 경우(훈련 예제 없음).
 
-![Semantic Similarity Graphic](https://www.gstatic.com/aihub/tfhub/universal-sentence-encoder/example-similarity.png)
+![시맨틱 유사성 그래픽](https://www.gstatic.com/aihub/tfhub/universal-sentence-encoder/example-similarity.png)
 
-### Basic
+### 기본
 
 [의미론적 유사성](https://github.com/tensorflow/hub/blob/master/examples/colab/semantic_similarity_with_tf_hub_universal_encoder.ipynb) - 문장 유사성을 계산하기 위해 문장 인코더 모듈을 사용하는 방법을 보여줍니다.
 
@@ -57,11 +57,11 @@ TensorFlow Hub는 현재 모든 언어로 모듈을 제공하지 않습니다. �
 
 [의미론적 검색](https://github.com/tensorflow/hub/blob/master/examples/colab/retrieval_with_tf_hub_universal_encoder_qa.ipynb) - Q/A 문장 인코더를 사용하여 의미론적 유사성을 기반으로 검색할 문서 모음을 인덱싱하는 방법을 보여줍니다.
 
-### SentencePiece input
+### SentencePiece 입력
 
 [범용 인코더 라이트를 이용한 의미론적 유사성](https://github.com/tensorflow/hub/blob/master/examples/colab/semantic_similarity_with_tf_hub_universal_encoder_lite.ipynb) - 텍스트 대신 입력시 [SentencePiece](https://github.com/google/sentencepiece) ID를 허용하는 문장 인코더 모듈을 사용하는 방법을 보여줍니다.
 
-## Module creation
+## 모듈 생성
 
 [tfhub.dev](https://tfhub.dev)의 모듈만 사용하는 대신 자체 모듈을 만드는 방법들이 있습니다. ML 코드베이스 모듈화와 공유를 개선하는 데 유용한 도구가 될 수 있습니다.
 
