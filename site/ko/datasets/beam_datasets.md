@@ -2,7 +2,7 @@
 
 일부 데이터세트는 너무 커서 단일 머신에서 처리할 수 없습니다. `tfds`는 [Apache Beam](https://beam.apache.org/)을 사용하여 많은 머신에서 데이터를 생성하도록 지원합니다.
 
-This doc has two sections:
+이 문서에는 두 개의 섹션이 있습니다:
 
 - 기존 Beam 데이터세트를 생성하려는 사용자
 - 새로운 Beam 데이터세트를 생성하려는 개발자
