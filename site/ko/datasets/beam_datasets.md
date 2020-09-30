@@ -168,7 +168,6 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
         | beam.Create(tf.io.gfile.listdir(file_dir))
         | beam.Map(_process_example)
     )
-
 ```
 
 ### 파이프라인 실행하기
