@@ -47,7 +47,7 @@ $ cd "federated"
     $ gcloud compute ssh <instance>
     ```
 
-5. Run the runtime container in the background.
+5. 백그라운드에서 런타임 컨테이너를 실행합니다.
 
     ```shell
     $ docker run \
@@ -63,7 +63,7 @@ $ cd "federated"
     $ exit
     ```
 
-7. Get the internal **IP address** of the instance.
+7. 인스턴스의 내부 <strong>IP 주소</strong>를 가져옵니다.
 
     이 주소는 나중에 테스트 스크립트의 매개변수로 사용됩니다.
 
@@ -100,7 +100,7 @@ $ cd "federated"
 
     4. **Create**를 클릭하여 인스턴스를 생성합니다.
 
-4. Copy your experiement to the Compute Engine instance.
+4. 실험을 Compute Engine 인스턴스에 복사합니다.
 
     ```shell
     $ gcloud compute scp \
@@ -129,7 +129,7 @@ $ cd "federated"
         bash
     ```
 
-7. Run the Python script.
+7. Python 스크립트를 실행합니다.
 
     런타임 컨테이너를 실행하는 인스턴스의 <strong>IP 주소</strong>를 사용합니다.
 
@@ -137,7 +137,7 @@ $ cd "federated"
     $ python3 test.py --host '<IP address>'
     ```
 
-8. Exit the container.
+8. 컨테이너를 종료합니다.
 
     ```shell
     $ exit
