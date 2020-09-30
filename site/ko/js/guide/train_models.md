@@ -1,30 +1,30 @@
 # 훈련 모델
 
-This guide assumes you've already read the [models and layers](models_and_layers.md) guide.
+이 가이드는 이미 [모델 및 레이어](models_and_layers.md) 가이드를 읽었다는 가정하에 쓰였습니다.
 
-In TensorFlow.js there are two ways to train a machine learning model:
+TensorFlow.js에는 머신러닝 모델을 훈련하는 두 가지 방법이 있습니다.
 
-1. using the Layers API with <code><a href="https://js.tensorflow.org/api/latest/#tf.Model.fit">LayersModel.fit()</a></code> or <code><a href="https://js.tensorflow.org/api/latest/#tf.Model.fitDataset">LayersModel.fitDataset()</a></code>.
-2. using the Core API with <code><a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize">Optimizer.minimize()</a></code>.
+1. <code><a href="https://js.tensorflow.org/api/latest/#tf.Model.fit" data-md-type="link">LayersModel.fit()</a></code> 또는 <code><a href="https://js.tensorflow.org/api/latest/#tf.Model.fitDataset" data-md-type="link">LayersModel.fitDataset()</a></code>와 함께 Layers API 사용하기
+2. <code><a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link">Optimizer.minimize()</a></code>와 함께 Core API 사용하기
 
-First, we will look at the Layers API, which is a higher-level API for building and training models. Then, we will show how to train the same model using the Core API.
+먼저 모델 빌드 및 훈련을 위한 상위 수준 API 인 Layers API를 살펴보겠습니다. 그런 다음 Core API를 사용하여 같은 모델을 훈련하는 방법을 보겠습니다.
 
 ## 소개
 
-A machine learning *model* is a function with learnable parameters that maps an input to a desired output. The optimal parameters are obtained by training the model on data.
+머신러닝 *모델*은 입력을 원하는 출력에 매핑하는 학습 가능한 매개변수가 있는 함수입니다. 최적의 매개변수는 데이터에서 모델을 훈련하여 얻습니다.
 
-Training involves several steps:
+훈련에는 여러 단계가 포함됩니다.
 
-- Getting a [batch](https://developers.google.com/machine-learning/glossary/#batch) of data to the model.
-- Asking the model to make a prediction.
-- Comparing that prediction with the "true" value.
-- Deciding how much to change each parameter so the model can make a better prediction in the future for that batch.
+- 모델에 데이터 [배치](https://developers.google.com/machine-learning/glossary/#batch) 가져오기
+- 모델에 예측값 요청하기
+- 해당 예측값을 '참'값과 비교하기
+- 모델이 향후 해당 배치에 대해 더 나은 예측값을 내도록 각 매개변수의 변경 범위 결정하기
 
-A well-trained model will provide an accurate mapping from the input to the desired output.
+잘 훈련된 모델은 입력에서 원하는 출력으로 정확한 매핑을 제공합니다.
 
-## Model parameters
+## 모델 매개변수
 
-Let's define a simple 2-layer model using the Layers API:
+Layers API를 사용하여 간단한 2레이어 모델을 정의해보겠습니다.
 
 ```js
 const model = tf.sequential({
@@ -35,7 +35,7 @@ const model = tf.sequential({
 });
 ```
 
-Under the hood, models have parameters (often referred to as *weights*) that are learnable by training on data. Let's print the names of the weights associated with this model and their shapes:
+내부적으로 모델에는 데이터 학습을 통해 훈련할 수 있는 매개변수(종종 *가중치* 라고 함)가 있습니다. 이 모델 및 형상과 관련된 가중치의 이름을 출력해봅니다.
 
 ```js
 model.weights.forEach(w => {
@@ -52,34 +52,34 @@ model.weights.forEach(w => {
 > dense_Dense2/bias [10]
 ```
 
-There are 4 weights in total, 2 per dense layer. This is expected since dense layers represent a function that maps the input tensor `x` to an output tensor `y` via the equation `y = Ax + b` where `A` (the kernel) and `b` (the bias) are parameters of the dense layer.
+총 4개의 가중치가 있으며 밀집 레이어당 2개입니다. 이러한 결과가 예상되는 이유는 밀집 레이어는 수식 `y = Ax + b`를 통해 입력 텐서 `x`를 출력 텐서 `y`로 매핑하는 함수를 나타내기 때문입니다. 여기서 `A`(커널) 및 `b`(바이어스)는 밀집 레이어의 매개변수입니다.
 
-> NOTE: By default dense layers include a bias, but you can exclude it by specifying `{useBias: false}` in the options when creating a dense layer.
+> 참고: 기본적으로 밀집 레이어에는 바이어스가 포함되지만, 밀집 레이어를 만들 때 옵션에서 `{useBias: false}`를 지정하여 바이어스를 제외할 수 있습니다.
 
-`model.summary()` is a useful method if you want to get an overview of your model and see the total number of parameters:
+`model.summary()`는 모델의 개요와 총 매개변수 수를 확인하려는 경우 유용한 메서드입니다.
 
 <table>
   <tr>
-   <td>Layer (type)    </td>
-   <td>Output shape    </td>
-   <td>Param #    </td>
+   <td>레이어(유형)</td>
+   <td>출력 형상</td>
+   <td>매개변수 번호</td>
   </tr>
   <tr>
-   <td>dense_Dense1 (Dense)    </td>
-   <td>[null,32]    </td>
+   <td>density_Dense1(밀도)</td>
+   <td>[null,32]</td>
    <td>25120</td>
   </tr>
   <tr>
-   <td>dense_Dense2 (Dense)    </td>
-   <td>[null,10]    </td>
+   <td>density_Dense2(밀도)</td>
+   <td>[null,10]</td>
    <td>330</td>
   </tr>
   <tr>
-   <td colspan="3">Total params: 25450<br>Trainable params: 25450<br>Non-trainable params: 0    </td>
+   <td colspan="3">총 매개변수: 25450 <br> 훈련 가능한 매개변수: 25450 <br> 훈련할 수 없는 매개변수: 0</td>
   </tr>
 </table>
 
-Each weight in the model is backend by a <code><a href="https://js.tensorflow.org/api/0.14.2/#class:Variable">Variable</a></code> object. In TensorFlow.js, a <code>Variable</code> is a floating-point <code>Tensor</code> with one additional method <code>assign()</code> used for updating its values. The Layers API automatically initializes the weights using best practices. For the sake of demonstration, we could overwrite the weights by calling <code>assign()</code> on the underlying variables:
+모델의 각 가중치는 <code><a href="https://js.tensorflow.org/api/0.14.2/#class:Variable" data-md-type="link">Variable</a></code> 객체의 백엔드입니다. TensorFlow.js에서 <code>Variable</code>은 값을 업데이트하는 데 사용되는 하나의 추가 메서드 <code>assign()</code>이 있는 부동 소수점 <code>Tensor</code>입니다. Layers API는 모범 사례를 사용하여 가중치를 자동으로 초기화합니다. 데모를 위해 기본 변수에 대해 <code>assign()</code>을 호출하여 가중치를 덮어쓸 수 있습니다.
 
 ```js
 model.weights.forEach(w => {
@@ -89,15 +89,15 @@ model.weights.forEach(w => {
 });
 ```
 
-## Optimizer, loss and metric
+## 옵티마이저, 손실 및 메트릭
 
-Before you do any training, you need to decide on three things:
+훈련을 시작하기 전에 다음 세 가지를 결정해야 합니다.
 
-1. **An optimizer**. The job of the optimizer is to decide how much to change each parameter in the model, given the current model prediction. When using the Layers API, you can provide either a string identifier of an existing optimizer (such as `'sgd'` or `'adam'`), or an instance of the <code><a href="https://js.tensorflow.org/api/latest/#Training-Optimizers">Optimizer</a></code> class.
-2. <strong>A loss function</strong>. An objective that the model will try to minimize. Its goal is to give a single number for "how wrong" the model's prediction was. The loss is computed on every batch of data so that the model can update its weights. When using the Layers API, you can provide either a string identifier of an existing loss function (such as <code>'categoricalCrossentropy'</code>), or any function that takes a predicted and a true value and returns a loss. See a [list of available losses](https://js.tensorflow.org/api/latest/#Training-Losses) in our API docs.
-3. <strong>List of metrics.</strong> Similar to losses, metrics compute a single number, summarizing how well our model is doing. The metrics are usually computed on the whole data at the end of each epoch. At the very least, we want to monitor that our loss is going down over time. However, we often want a more human-friendly metric such as accuracy. When using the Layers API, you can provide either a string identifier of an existing metric (such as <code>'accuracy'</code>), or any function that takes a predicted and a true value and returns a score. See a [list of available metrics](https://js.tensorflow.org/api/latest/#Metrics) in our API docs.
+1. **옵티마이저**: 옵티마이저는 현재 모델의 예측값이 주어졌을 때 모델의 각 매개변수를 얼마나 변경할 것인지 결정하는 역할을 합니다. Layers API를 사용할 때 기존 옵티마이저의 문자열 식별자인(예: `'sgd'` 또는 `'adam'` ) 또는 <code><a href="https://js.tensorflow.org/api/latest/#Training-Optimizers" data-md-type="link">Optimizer</a></code> 클래스의 인스턴스를 제공할 수 있습니다.
+2. <strong>손실 함수</strong>: 모델은 최소화를 목표로 합니다. 모델의 예측값이 '얼마나 잘못되었는지'에 대한 단일 숫자를 제공하는 것입니다. 손실은 모델이 가중치를 업데이트할 수 있도록 모든 데이터 배치에서 계산됩니다. Layers API를 사용할 때 기존 손실 함수의 문자열 식별자(예: <code>'categoricalCrossentropy'</code>) 또는 예측값과 참값을 가져와 손실을 반환하는 모든 함수를 제공할 수 있습니다. API 설명서에서 [사용 가능한 손실 목록](https://js.tensorflow.org/api/latest/#Training-Losses)을 참조하세요.
+3. <strong>메트릭 목록</strong>: 손실과 유사하게 메트릭은 단일 숫자를 계산하여 모델의 성능을 요약합니다. 메트릭은 일반적으로 각 epoch가 끝날 때 전체 데이터에 대해 계산됩니다. 최소한 시간이 지남에 따라 손실이 감소하고 있는지 모니터링해야 합니다만, 정확성과 같은 보다 인간 친화적인 메트릭을 원하는 경우가 많습니다. Layers API를 사용하는 경우 기존 메트릭의 문자열 식별자(예: <code>'accuracy'</code>) 또는 예측값 및 참값을 가져와 점수를 반환하는 모든 함수를 제공할 수 있습니다. API 설명서에서 [사용 가능한 메트릭 목록](https://js.tensorflow.org/api/latest/#Metrics)을 참조하세요.
 
-When you've decided, compile a <code>LayersModel</code> by calling <code>model.compile()</code> with the provided options:
+결정했으면 제공된 옵션으로 <code>model.compile()</code>을 호출하여 <code>LayersModel</code>을 컴파일합니다.
 
 ```js
 model.compile({
@@ -107,18 +107,18 @@ model.compile({
 });
 ```
 
-During compilation, the model will do some validation to make sure that the options you chose are compatible with each other.
+컴파일하는 동안 모델은 선택한 옵션이 서로 호환되는지를 확인하는 몇 가지 검증을 수행합니다.
 
 ## 훈련
 
-There are two ways to train a `LayersModel`:
+`LayersModel`을 훈련하는 방법에는 두 가지가 있습니다.
 
-- Using `model.fit()` and providing the data as one large tensor.
-- Using `model.fitDataset()` and providing the data via a `Dataset` object.
+- `model.fit()`를 사용하고 데이터를 하나의 큰 텐서로 제공하기
+- `model.fitDataset()` 및 `Dataset` 객체를 통해 데이터 제공하기
 
 ### model.fit()
 
-If your dataset fits in main memory, and is available as a single tensor, you can train a model by calling the `fit()` method:
+데이터세트가 주 메모리에 적합하게 맞고 단일 텐서로 사용할 수있는 경우 `fit()` 메서드를 호출하여 모델을 훈련할 수 있습니다.
 
 ```js
 // Generate dummy data.
@@ -139,20 +139,20 @@ model.fit(data, labels, {
  });
 ```
 
-Under the hood, `model.fit()` can do a lot for us:
+내부적으로 `model.fit()`는 많은 일을 할 수 있습니다.
 
 - 데이터를 훈련 및 검증 세트로 분할하고 검증 세트를 사용하여 훈련 중 진행 상황을 측정합니다.
-- Shuffles the data but only after the split. To be safe, you should pre-shuffle the data before passing it to `fit()`.
-- Splits the large data tensor into smaller tensors of size `batchSize.`
-- Calls `optimizer.minimize()` while computing the loss of the model with respect to the batch of data.
-- It can notify you on the start and end of each epoch or batch. In our case, we are notified at the end of every batch using the `callbacks.onBatchEnd `option. Other options include: `onTrainBegin`, `onTrainEnd`, `onEpochBegin`, `onEpochEnd` and `onBatchBegin`.
-- It yields to the main thread to ensure that tasks queued in the JS event loop can be handled in a timely manner.
+- 분할 후에 데이터를 셔플합니다. 안전을 위해 데이터를 `fit()`로 전달하기 전에 미리 셔플해야 합니다.
+- 큰 데이터 텐서를 `batchSize.` 크기의 더 작은 텐서로 분할합니다.
+- 데이터 배치와 관련하여 모델 손실을 계산하는 동안 `optimizer.minimize()`를 호출합니다.
+- 각 epoch 또는 배치의 시작과 끝을 알려줄 수 있습니다. 이 경우에는 모든 배치가 끝날 때 `callbacks.onBatchEnd` 옵션을 사용하여 알림을 받습니다. 다른 옵션으로는 `onTrainBegin` , `onTrainEnd`, `onEpochBegin` , `onEpochEnd` 및 `onBatchBegin`이 있습니다.
+- JS 이벤트 루프에 대기 중인 작업을 적시에 처리할 수 있도록 주 스레드에 양보합니다.
 
-For more info, see the [documentation](https://js.tensorflow.org/api/latest/#tf.Sequential.fit) of `fit()`. Note that if you choose to use the Core API, you'll have to implement this logic yourself.
+자세한 내용은 `fit()` [설명서](https://js.tensorflow.org/api/latest/#tf.Sequential.fit)를 참조하세요. Core API를 사용하기로 선택한 경우 이 로직을 직접 구현해야 합니다.
 
 ### model.fitDataset()
 
-If your data doesn't fit entirely in memory, or is being streamed, you can train a model by calling `fitDataset()`, which takes a `Dataset` object. Here is the same training code but with a dataset that wraps a generator function:
+데이터가 메모리에 완전히 맞지 않거나 스트리밍되는 경우 `Dataset` 객체를 사용하는 `fitDataset()`를 호출하여 모델을 훈련할 수 있습니다. 다음은 같은 훈련 코드이지만 생성기 함수를 래핑하는 데이터세트가 있습니다.
 
 ```js
 function* data() {
@@ -180,11 +180,11 @@ model.fitDataset(ds, {epochs: 5}).then(info => {
 });
 ```
 
-For more info about datasets, see the [documentation](https://js.tensorflow.org/api/latest/#tf.Model.fitDataset) of `model.fitDataset()`.
+데이터세트에 대한 자세한 내용은 `model.fitDataset()` [설명서](https://js.tensorflow.org/api/latest/#tf.Model.fitDataset)를 참조하세요.
 
-## Predicting new data
+## 새로운 데이터 예측하기
 
-Once the model has been trained, you can call `model.predict()` to make predictions on unseen data:
+한번 훈련을 거치면 모델이 `model.predict()`를 호출하여 보이지 않는 데이터의 예측값을 낼 수 있습니다.
 
 ```js
 // Predict 3 random samples.
@@ -192,20 +192,20 @@ const prediction = model.predict(tf.randomNormal([3, 784]));
 prediction.print();
 ```
 
-Note: As we mentioned in the [Models and Layers](models_and_layers) guide, the `LayersModel` expects the outermost dimension of the input to be the batch size. In the example above, the batch size is 3.
+참고: [모델 및 레이어](models_and_layers) 가이드에서 언급되었듯이`LayersModel`은 입력의 가장 바깥쪽 차원이 배치 크기일 것으로 예상합니다. 위의 예에서 배치 크기는 3입니다.
 
 ## Core API
 
-Earlier, we mentioned that there are two ways to train a machine learning model in TensorFlow.js.
+앞서 TensorFlow.js에서 머신러닝 모델을 훈련하는 방법에는 두 가지가 있다고 언급했습니다.
 
-The general rule of thumb is to try to use the Layers API first, since it is modeled after the well-adopted Keras API. The Layers API also offers various off-the-shelf solutions such as weight initialization, model serialization, monitoring training, portability, and safety checking.
+일반적인 방법으로는 먼저 잘 채택된 Keras API를 모델로 하는 Layers API를 사용하는 것입니다. Layers API는 가중치 초기화, 모델 직렬화, 모니터링 훈련, 이식성 및 안전 검사와 같은 다양한 기성 솔루션도 제공합니다.
 
 다음과 같은 경우 Core API를 사용할 수 있습니다.
 
 - 최대한의 유연성 또는 제어가 필요합니다.
-- And you don't need serialization, or can implement your own serialization logic.
+- 그리고 직렬화가 필요하지 않거나 자체적으로 직렬화 논리를 구현할 수 있습니다.
 
-For more information about this API, read the "Core API" section in the [Models and Layers](models_and_layers.md) guide.
+자세한 내용은 [모델 및 레이어](models_and_layers.md) 가이드의 'Core API'섹션을 참조하세요.
 
 Core API를 사용하여 작성된 위와 동일한 모델은 다음과 같습니다.
 
@@ -221,7 +221,7 @@ function model(x) {
 }
 ```
 
-In addition to the Layers API, the Data API also works seamlessly with the Core API. Let's reuse the dataset that we defined earlier in the [model.fitDataset()](#model.fitDataset()) section, which does shuffling and batching for us:
+Layers API 외에도 Data API는 Core API와 원활하게 동작합니다. 셔플 및 일괄 처리를 수행하는 [model.fitDataset ()](#model.fitDataset()) 섹션에서 이전에 정의한 데이터세트를 다시 사용해보겠습니다.
 
 ```js
 const xs = tf.data.generator(data);
@@ -230,7 +230,7 @@ const ys = tf.data.generator(labels);
 const ds = tf.data.zip({xs, ys}).shuffle(100 /* bufferSize */).batch(32);
 ```
 
-Let's train the model:
+모델을 훈련해보겠습니다.
 
 ```js
 const optimizer = tf.train.sgd(0.1 /* learningRate */);
@@ -248,9 +248,9 @@ for (let epoch = 0; epoch < 5; epoch++) {
 }
 ```
 
-The code above is the standard recipe when training a model with the Core API:
+위의 코드는 Core API로 모델을 훈련할 때 쓰이는 표준 레시피입니다.
 
-- Loop over the number of epochs.
-- Inside each epoch, loop over your batches of data. When using a `Dataset`, <code><a href="https://js.tensorflow.org/api/0.15.1/#tf.data.Dataset.forEachAsync">dataset.forEachAsync()</a> </code>is a convenient way to loop over your batches.
-- For each batch, call <code><a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize">optimizer.minimize(f)</a></code>, which executes <code>f</code> and minimizes its output by computing gradients with respect to the four variables we defined earlier.
-- <code>f</code> computes the loss. It calls one of the predefined loss functions using the prediction of the model and the true value.
+- epoch 수를 반복합니다.
+- 각 epoch 내에서 데이터 배치를 반복합니다. `Dataset`를 사용할 때 <code><a href="https://js.tensorflow.org/api/0.15.1/#tf.data.Dataset.forEachAsync" data-md-type="link">dataset.forEachAsync()</a></code>는 배치를 반복하는 편리한 방법입니다.
+- 각 배치에 대해 <code><a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link">optimizer.minimize(f)</a></code>를 호출하면 <code>f</code>를 실행하고 앞서 정의한 4개의 변수에 대한 그래디언트를 계산하여 출력을 최소화합니다.
+- <code>f</code>는 손실을 계산합니다. 모델의 예측값과 실제값을 사용하여 미리 정의된 손실 함수 중 하나를 호출합니다.
