@@ -1,16 +1,16 @@
 # TensorFlow Federated 설치
 
-There are a few ways to set up your environment to use TensorFlow Federated (TFF):
+TensorFlow Federated(TFF)를 사용하도록 환경을 설정하는 몇 가지 방법이 있습니다.
 
-- The easiest way to learn and use TFF requires no installation; run the TensorFlow Federated tutorials directly in your browser using [Google Colaboratory](https://colab.research.google.com/notebooks/welcome.ipynb).
-- To use TensorFlow Federated on a local machine, [install the TFF package](#install-tensorflow-federated-using-pip) with Python's `pip` package manager.
-- If you have a unique machine configuration, [build the TFF package](#build-the-tensorflow-federated-pip-package) from source.
+- TFF를 배우고 사용하는 가장 쉬운 방법에는 설치가 필요하지 않습니다. [Google Colaboratory](https://colab.research.google.com/notebooks/welcome.ipynb)를 사용하여 브라우저에서 직접 TensorFlow Federated 가이드를 실행합니다.
+- 로컬 머신에서 TensorFlow Federated를 사용하려면 Python의 `pip` 패키지 관리자로 [TFF 패키지](#install-tensorflow-federated-using-pip)를 설치합니다.
+- 고유한 머신 구성이 있는 경우, 소스에서 [TFF 패키지를 빌드](#build-the-tensorflow-federated-pip-package)합니다.
 
-## Install TensorFlow Federated using `pip`
+## `pip`를 사용하여 TensorFlow Federated 설치하기
 
 ### 1. Python 개발 환경을 설치합니다.
 
-On Ubuntu:
+Ubuntu:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">sudo apt update</code>
@@ -18,7 +18,7 @@ On Ubuntu:
 <code class="devsite-terminal">sudo pip3 install --user --upgrade virtualenv</code>
 </pre>
 
-On macOS:
+macOS:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code>
@@ -36,7 +36,7 @@ On macOS:
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade pip</code>
 </pre>
 
-Note: To exit the virtual environment, run `deactivate`.
+참고: 가상 환경을 종료하려면, `deactivate`를 실행하세요.
 
 ### 3. TensorFlow Federated Python 패키지를 설치합니다.
 
@@ -50,18 +50,18 @@ Note: To exit the virtual environment, run `deactivate`.
 <code class="devsite-terminal tfo-terminal-venv">python -c "import tensorflow_federated as tff; print(tff.federated_computation(lambda: 'Hello World')())"</code>
 </pre>
 
-Success: The latest TensorFlow Federated Python package is now installed.
+성공: 이제 최신 TensorFlow Federated Python 패키지가 설치되었습니다.
 
-## Build the TensorFlow Federated Python package from source
+## 소스에서 TensorFlow Federated Python 패키지 빌드하기
 
-Building a TensorFlow Federated Python package from source is helpful when you want to:
+소스에서 TensorFlow Federated Python 패키지를 빌드하면, 다음과 같은 경우에 유용합니다.
 
-- Make changes to TensorFlow Federated and test those changes in a component that uses TensorFlow Federated before those changes are submitted or released.
-- Use changes that have been submitted to TensorFlow Federated but have not been released.
+- TensorFlow Federated를 변경하고 변경 사항을 제출하거나 릴리스하기 전에 TensorFlow Federated를 사용하는 구성 요소에서 해당 변경 사항을 테스트합니다.
+- TensorFlow Federated에 제출되었지만, 아직 릴리즈되지 않은 변경 사항을 사용합니다.
 
 ### 1. Python 개발 환경을 설치합니다.
 
-On Ubuntu:
+Ubuntu:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">sudo apt update</code>
@@ -69,7 +69,7 @@ On Ubuntu:
 <code class="devsite-terminal">sudo pip3 install --user --upgrade virtualenv</code>
 </pre>
 
-On macOS:
+macOS:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code>
@@ -81,9 +81,9 @@ On macOS:
 
 ### 2. Bazel을 설치합니다.
 
-[Install Bazel](https://docs.bazel.build/versions/master/install.html), the build tool used to compile Tensorflow Federated.
+Tensorflow Federated를 컴파일하는 데 사용되는 빌드 도구인 [Bazel을 설치](https://docs.bazel.build/versions/master/install.html)합니다.
 
-### 3. Clone the Tensorflow Federated repository.
+### 3. Tensorflow Federated 리포지토리를 복제합니다.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git clone https://github.com/tensorflow/federated.git</code>
@@ -114,7 +114,7 @@ On macOS:
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade pip</code>
 </pre>
 
-Note: To exit the virtual environment run `deactivate`.
+참고: 가상 환경을 종료하려면, `deactivate`를 실행하세요.
 
 ### 7. TensorFlow Federated Python 패키지를 설치합니다.
 
@@ -128,4 +128,4 @@ Note: To exit the virtual environment run `deactivate`.
 <code class="devsite-terminal tfo-terminal-venv">python -c "import tensorflow_federated as tff; print(tff.federated_computation(lambda: 'Hello World')())"</code>
 </pre>
 
-Success: A TensorFlow Federated Python package is now built from source and installed.
+성공: 이제 TensorFlow Federated Python 패키지가 소스에서 빌드되고 설치되었습니다.
