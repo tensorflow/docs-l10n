@@ -12,21 +12,21 @@
 Многие
 [RFCs](https://github.com/tensorflow/community/pulls?utf8=%E2%9C%93&q=is%3Apr)
 объяснили изменения которые вошли в TensorFlow 2.0. Это руководство
-представляет взгляд на кто как должна выглядеть разработка в TensorFlow 2.0.
+представляет взгляд на то, как должна выглядеть разработка в TensorFlow 2.0.
 Предполагается, что вы знакомы с TensorFlow 1.x.
 
 ## Короткая выдержка основных изменений
 
 ### Очистка API
 
-Много API либо
+Много API методов
 [удалены либо перемещены](https://github.com/tensorflow/community/blob/master/rfcs/20180827-api-names.md)
 в TF 2.0. Некоторые из основных изменений включают удаление `tf.app`,
 `tf.flags`, и `tf.logging` в пользу
-[absl-py](https://github.com/abseil/abseil-py) который сейчас с открытым
+[absl-py](https://github.com/abseil/abseil-py) с открытым
 исходным кодом, перенос проектов которые находились в `tf.contrib`, и очистки
 основного пространства имен `tf.*` путем перемещения редко используемых функций
-в подпакеты наподобие `tf.math`. Неокторые API были замещены своими
+в подпакеты наподобие `tf.math`. Некоторые API были замещены своими
 эквивалентами 2.0 - `tf.summary`, `tf.keras.metrics`, и `tf.keras.optimizers`.
 Наиболее простым способом автоматически применить эти переименования является
 использование [скрипта обновления v2](upgrade.md).
@@ -51,12 +51,13 @@
 TensorFlow 1.X значительно зависел от неявных глобальных пространств имен. Когда
 вы вызывали `tf.Variable()`, она помещалась в граф по умолчанию, и она
 оставалась там даже если вы потеряли track переменной Python указывавшей на
-него. Вы можете затем восстановить ту `tf.Variable`, но только если вы знали имя
+него. Затем вы могли восстановить ту `tf.Variable`, но только если вы знали имя
 с которым она была создана. Это было сложно сделать если вы не контролировали
-создание переменных. В результате этого, размножались все виды механизмов
-пытавшиеся помочь пользователям снова найти их переменные, а для фреймворков -
-найти созданные пользователями переменные: Области переменных, глобальные
-коллекции, методы помощники такие как `tf.get_global_step()`,
+создание переменных. В результате этого, придумывалось множество способов,
+пытавшихся помочь пользователям снова найти их переменные, а для фреймворков 
+создавались механизмы, способные найти созданные пользователями 
+переменные: Области переменных, глобальные
+коллекции, методы помощники, такие как `tf.get_global_step()`,
 `tf.global_variables_initializer()`, оптимизаторы неявно вычисляющие градиенты
 по всем обучаемым переменным, и т.д. TensorFlow 2.0 устраняет все эти механизмы
 ([Variables 2.0 RFC](https://github.com/tensorflow/community/pull/11)) в пользу
@@ -89,7 +90,7 @@ outputs = session.run(f(placeholder), feed_dict={placeholder: input})
 outputs = f(input)
 ```
 
-Благодаря возможности свободно перемежать код Python и TensorFlow пользователи
+Благодаря возможности свободно смешивать код Python и TensorFlow пользователи
 могут воспользоваться преимуществами выразительности Python. Но переносимый
 TensorFlow выполняется в контекстах, таких как mobile, C ++ и JavaScript без
 интерпретатора Python. Чтобы пользователям не нужно было переписывать свой код
@@ -119,12 +120,6 @@ TensorFlow 2.0, пользователям необходимо отрефакт
 обучения или проход вперед в вашей модели.
 
 ### Используйте слои и модели Keras для управления переменными
-
-
-Keras models and layers offer the convenient `variables` and
-`trainable_variables` properties, which recursively gather up all dependent
-variables. This makes it easy to manage variables locally to where they are
-being used.
 
 Модели и слои Keras предлагают удобные свойства `variables` и
 `trainable_variables`, которые рекурсивно собирают все зависимые переменные. Это
@@ -218,8 +213,7 @@ def train(model, dataset, optimizer):
     optimizer.apply_gradients(zip(gradients, model.trainable_variables))
 ```
 
-If you use the Keras `.fit()` API, you won't have to worry about dataset
-iteration.
+Если вы используете метод `.fit()` из Keras - вам не нужно думать об итерациии
 
 ```python
 model.compile(optimizer=optimizer, loss=loss_fn)
@@ -228,11 +222,12 @@ model.fit(dataset)
 
 ### Воспользуйтесь преимуществами AutoGraph с Python control flow
 
-AutoGraph предоставляет способ преобразования зависящего от данных control flow
+AutoGraph предоставляет способ преобразования зависящего от данных контроля выполнения
 в эквивалентый режим графа, например `tf.cond` и `tf.while_loop`.
 
-Одно обычное место, где появляется зависящий от данных control flow находится
-sequence models. `tf.keras.layers.RNN` оборачивает ячейку RNN, позволяя вам
+Одно обычное место, где появляется зависящий от данных контроль выполнения находится
+в последовательных моделях. 
+`tf.keras.layers.RNN` оборачивает ячейку RNN, позволяя вам
 статически или динамически развернуть recurrence. Например, вы может
 переопределить динамическую развертку следующим образом:
 
@@ -254,16 +249,16 @@ class DynamicRNN(tf.keras.Model):
     return tf.transpose(outputs.stack(), [1, 0, 2]), state
 ```
 
-Для более подробного обзора свойств AutoGraph, смотри
+Для более подробного обзора свойств AutoGraph, смотрите
 [руководство](./function.ipynb).
 
-### tf.metrics аггрегирует данные and tf.summary ведет их лог
+### tf.metrics аггрегирует данные and tf.summary сводит их в лог
 
 Для лога summaries используйте `tf.summary. (Scalar | histogram | ...)` и
 перенаправьте его на writer используя context manager. (Если вы опустите context
-manager, ничего случится.) В отличие от TF 1.x, summaries отправляются
-непосредственно writer; там нет отдельной операции "merge" и отдельного вызова
-`add_summary()`, что означает, что значение `step` должно быть указано на месте
+manager, ничего не случится.) В отличие от TF 1.x, summaries отправляются
+непосредственно во writer; там нет отдельной операции "merge" и отдельного вызова
+`add_summary()`, что означает, что значение `step` должно быть указано в месте
 вызова.
 
 ```python
@@ -301,8 +296,8 @@ with test_summary_writer.as_default():
   test(model, test_x, test_y, optimizer.iterations)
 ```
 
-Визуализируйте сгенерированные результаты направив TensorBoard в директорий с
-summary log:
+Визуализируйте сгенерированные результаты запустив TensorBoard и передав путь к 
+директории с summary log:
 
 ```
 tensorboard --logdir /tmp/summaries
