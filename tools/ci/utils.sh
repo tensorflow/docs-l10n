@@ -1,16 +1,17 @@
 # Helper utilities for GitHub Actions jobs.
 # To include: source ./tools/ci/utils.sh
 
-# Print files modified in this pull request (and not deleted).
+# Print files modified in this pull request branch (and not deleted).
 # Usage: readarray -t changed_files < <(get_changed_files)
 get_changed_files() {
-  local branch="${1:-master}"
+  local compared_branch="${1:-master}"
 
   while read fp; do
+    # Ignore files that no longer exist.
     if [[ -e "$fp" ]]; then
       echo "$fp"
     fi
-  done < <(git diff --name-only "$branch" || true)
+  done < <(git diff --name-only "$compared_branch"... || true)
 }
 
 # Add label(s) to GitHub issue.
