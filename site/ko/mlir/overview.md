@@ -16,5 +16,4 @@ MLIR은 다음과 같은 많은 그룹의 관심을 끌 것으로 기대합니�
 
 TensorFlow 에코시스템에는 여러 수준의 소프트웨어 및 하드웨어 스택에서 동작하는 여러 컴파일러 및 옵티마이저가 포함되어 있습니다. MLIR을 점진적으로 적용하여 이 스택의 모든 측면을 단순화할 수 있을 것으로 기대합니다.
 
-
-<img alt="MLIR overview diagram" src="./images/mlir-infra.svg"> 
+<img alt="MLIR overview diagram" src="./images/mlir-infra.svg">
