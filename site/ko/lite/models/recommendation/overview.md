@@ -1,58 +1,58 @@
 # 추천
 
-Personalized recommendations are widely used for a variety of use cases on mobile devices, such as media content retrieval, shopping product suggestion, and next app recommendation. If you are interested in providing personalized recommendations in your application while respecting user privacy, we recommend exploring the following example and toolkit.
+개인화된 추천은 미디어 콘텐츠 검색, 쇼핑 제품 제안 및 다음 앱 추천과 같은 모바일 기기의 다양한 사용 사례에 널리 사용됩니다. 사용자 개인 정보를 보호하면서 애플리케이션에 개인화된 추천을 제공하는 데 관심이 있다면 다음 예제와 도구 키트를 살펴보세요.
 
-## Get started
+## 시작하기
 
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
 Android 사용자에게 관련 항목을 추천하는 방법을 보여주는 TensorFlow Lite 샘플 애플리케이션을 제공합니다.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/android">Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/android">Android 예제</a>
 
-If you are using a platform other than Android, or you are already familiar with the TensorFlow Lite APIs, you can download our starter recommendation model.
+Android 이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미 익숙한 경우, 스타터 추천 모델을 다운로드할 수 있습니다.
 
-<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/recommendation/20200720/recommendation.tar.gz">Download starter model</a>
+<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/recommendation/20200720/recommendation.tar.gz">스타터 모델 다운로드하기</a>
 
-We also provide training script in Github to train your own model.
+Github에서 고유한 모델을 훈련하기 위한 훈련 스크립트도 제공합니다.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml">Training code</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml">훈련 코드</a>
 
-## Understand the model architecture
+## 모델 아키텍처 이해하기
 
-We leverage a dual-encoder model architecture, with context-encoder to encode sequential user history and label-encoder to encode predicted recommendation candidate. Similarity between context and label encodings is used to represent the likelihood that the predicted candidate meets the user's needs.
+컨텍스트 인코더를 사용하여 순차 사용자 기록을 인코딩하고 레이블 인코더를 사용하여 예측된 추천 후보를 인코딩하는 이중 인코더 모델 아키텍처를 이용합니다. 컨텍스트와 레이블 인코딩 간의 유사성은 예측된 후보가 사용자의 요구를 충족할 가능성을 나타내는 데 사용됩니다.
 
-Three different sequential user history encoding techniques are provided with this code base:
+이 코드베이스에는 다음의 세 가지 순차적 사용자 기록 인코딩 기술이 제공됩니다.
 
-- Bag-of-words encoder (BOW): averaging user activities' embeddings without considering context order.
-- Convolutional neural network encoder (CNN): applying multiple layers of convolutional neural networks to generate context encoding.
-- Recurrent neural network encoder (RNN): applying recurrent neural network to encode context sequence.
+- BOW(bag-of-words encoder): 컨텍스트 순서를 고려하지 않고 사용자 활동의 임베딩을 평균화합니다.
+- CNN(컨볼루셔널 신경망 인코더): 여러 레이어의 컨볼루셔널 신경망을 적용하여 컨텍스트 인코딩을 생성합니다.
+- RNN(순환 신경망): 순환 신경망을 적용하여 컨텍스트 시퀀스를 인코딩합니다.
 
-*Note: The model is trained based on [MovieLens](https://grouplens.org/datasets/movielens/1m/) dataset for research purpose.
+*참고: 모델은 연구 목적으로 [MovieLens](https://grouplens.org/datasets/movielens/1m/) 데이터세트에 기초하여 훈련됩니다.
 
 ## 예
 
-Input IDs:
+입력 ID:
 
-- Matrix (ID: 260)
-- Saving Private Ryan (ID: 2028)
-- (and more)
+- 매트릭스(ID: 260)
+- 라이언 일병 구하기(ID: 2028)
+- (기타 등등)
 
-Output IDs:
+출력 ID:
 
-- Star Wars: Episode VI - Return of the Jedi (ID: 1210)
-- (and more)
+- 스타워즈: 에피소드 VI - 제다이의 귀환(ID: 1210)
+- (기타 등등)
 
-## Performance benchmarks
+## 성능 벤치마크
 
-Performance benchmark numbers are generated with the tool [described here](https://www.tensorflow.org/lite/performance/benchmarks).
+성능 벤치마크 수치는 [여기에 설명된](https://www.tensorflow.org/lite/performance/benchmarks) 도구를 사용하여 생성됩니다.
 
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
-      <th>Model Size </th>
-      <th>Device </th>
+      <th>모델 이름</th>
+      <th>모델 크기</th>
+      <th>기기</th>
       <th>CPU</th>
     </tr>
   </thead>
@@ -68,18 +68,18 @@ Performance benchmark numbers are generated with the tool [described here](https
   </tr>
 </table>
 
-* 4 threads used.
+* 4개의 스레드가 사용되었습니다.
 
-## Use your training data
+## 고유한 훈련 데이터 사용하기
 
-In addition to the trained model, we provide an open-sourced [toolkit in GitHub](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml) to train models with your own data. You can follow this tutorial to learn how to use the toolkit and deploy trained models in your own mobile applications.
+훈련된 모델 외에도 고유한 데이터로 모델을 훈련할 수 있는 오픈 소스 [GitHub 도구 키트](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml)가 제공됩니다. 이 튜토리얼의 설명에 따라 도구 키트를 사용하고 자신의 모바일 애플리케이션에서 훈련된 모델을 배포하는 방법을 배울 수 있습니다.
 
-Please follow this [tutorial](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb) to apply the same technique used here to train a recommendation model using your own datasets.
+이 [튜토리얼](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb)에 따라 여기서 사용된 것과 같은 기술을 적용하여 고유한 데이터세트로 추천 모델을 훈련해 보세요.
 
-## Tips for model customization with your data
+## 고유 데이터를 사용한 모델 사용자 정의 팁
 
-The pretrained model integrated in this demo application is trained with [MovieLens](https://grouplens.org/datasets/movielens/1m/) dataset, you may want to modify model configuration based on your own data, such as vocab size, embedding dims and input context length. Here are a few tips:
+이 데모 애플리케이션에 통합된 미리 훈련된 모델은 [MovieLens](https://grouplens.org/datasets/movielens/1m/) 데이터세트로 훈련했으며 어휘 크기, 내장 차원 및 입력 컨텍스트 길이와 같은 사용자 고유의 데이터를 기반으로 모델 구성을 수정해야 할 수 있습니다. 다음은 몇 가지 팁입니다.
 
-- Input context length: The best input context length varies with datasets. We suggest selecting input context length based on how much label events are correlated with long-term interests vs short-term context.
+- 입력 컨텍스트 길이: 최상의 입력 컨텍스트 길이는 데이터세트에 따라 다릅니다. 레이블 이벤트가 장기 관심사 및 단기 컨텍스트와 얼마나 관련성이 있는지에 따라 입력 컨텍스트 길이를 선택하는 것이 좋습니다.
 
-- Encoder type selection: we suggest selecting encoder type based on input context length. Bag-of-words encoder works well for short input context length (e.g. <10), CNN and RNN encoders bring in more summarization ability for long input context length.
+- 인코더 유형 선택: 입력 컨텍스트 길이에 따라 인코더 유형을 선택하는 것이 좋습니다. Bag-of-words 인코더는 짧은 입력 컨텍스트 길이(예: <10)에 효과적이며 CNN 및 RNN 인코더는 긴 입력 컨텍스트 길이에서 더 많은 요약 기능을 제공합니다.
