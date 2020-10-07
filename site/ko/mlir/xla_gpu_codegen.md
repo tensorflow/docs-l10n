@@ -11,12 +11,12 @@ XLA는 `HloInstruction`에서 동작하며 이 표현에 대해 많은 최적화
 
 다음은 `lhlo`를 codegen 입력으로 사용하여 XLA/GPU를 점진적으로 마이그레이션하는 기록의 계획입니다.
 
-## Tasks
+## 과제
 
  | 호스트 | 기기
 --- | --- | ---
-Input format | HloInstruction*(작업 1) | HloInstruction*(작업 1)
-Output format | xla::Thunk(작업 2) | LLVM IR(작업 3)
+입력 형식 | HloInstruction*(작업 1) | HloInstruction*(작업 1)
+출력 형식 | xla::Thunk(작업 2) | LLVM IR(작업 3)
 
 - **작업 1**은 호스트 및 기기 입력 형식을 HloInstruction*에서 LHLO로 변경합니다.
 - **작업 2**는 호스트의 출력 형식을 thunk에서 "호스트용 랜딩 패드"로 변경합니다(아래 참조).
@@ -34,12 +34,12 @@ Output format | xla::Thunk(작업 2) | LLVM IR(작업 3)
 xla::gpu::Thunk의 데이터 구조는 다음과 같습니다.
 
 - 호스트(xla::gpu::Thunk::ExecuteOnStream())에서 호출할 수 있습니다.
-- Carries various data in its subclasses.
+- 하위 클래스에 다양한 데이터를 전달합니다.
 - BufferAllocation::Slice 및 StreamExecutor와 상호 작용합니다.
-- Launches kernels
-- Calls into all runtime libraries.
+- 커널을 시작합니다.
+- 모든 런타임 라이브러리를 호출합니다.
 
-The cost of that includes:
+비용에는 다음이 포함됩니다.
 
 - 연산 관련 구성 데이터(예: 컨볼루션 구성)를 나타냅니다.
 - op 형상 및 피연산자 형상을 마이그레이션합니다.
@@ -57,7 +57,7 @@ LHLO에서 호스트측 부분을 낮추는 방법에 대한 몇 가지 선택 �
     - (장점) 매우 낮은 기능, 몇 개의 루프와 조건을 생성하면 완료됩니다.
     - (단점) GPUDialect는 아직 체인/스트림/비동기성/기기 할당을 모델링하지 않습니다.
     - (단점) CUDA/HIP 런타임 지원이 최소화됩니다(툴킷 경로, 버전, 동적 로딩 등).
-- Existing (interpreting) XLA runtime
+- 기존 (해석) XLA 런타임
 
 결정: TFRT를 채택하지만, TFRT에서 CPU 코드의 JIT 컴파일도 지원합니다.
 
@@ -65,12 +65,12 @@ LHLO에서 호스트측 부분을 낮추는 방법에 대한 몇 가지 선택 �
 
 요소 emitter는 요소별로 채워서 대상 op를 생성합니다. 각 출력 요소는 피연산자의 요소 집합에 따라 다릅니다. 모든 요소는 버퍼를 동적 인덱스와 결합하여 설명됩니다. 거의 모든 "수학" ops를 설명하는 것으로 충분하지만, 성능상의 이유로 "수학" ops의 큰 하위 집합만 (Cpu|Gpu) ElementalIrEmitter에서 직접 구현됩니다.
 
-ElementalIrEmitter is unique in that:
+ElementalIrEmitter는 다음과 같은 점에서 고유합니다.
 
 - 코드의 상당 부분은 XLA/GPU와 CPU 간에 공유됩니다.
 - 모든 요소별 ops를 포함하여 모델에서 볼 수 있는 ops의 상당 부분을 나타냅니다.
-- Most fusions solely depend on ElementalIrEmitter.
-- It's structurally simple, as it describes a data dependency DAG between op elements and operand elements.
+- 대부분의 융합은 ElementalIrEmitter에만 의존합니다.
+- op 요소와 피연산자 요소 간의 데이터 종속성 DAG를 설명하므로 구조적으로 간단합니다.
 - 대부분 이식 가능하고 높은 수준입니다(예: GPU kReduce 및 GPU kCopy와 달리).
 - 최소한 요소별 ops에 대해 동적 형상 지원이 쉽습니다.
 
@@ -80,7 +80,7 @@ ElementalIrEmitter is unique in that:
 2. 이전 emitter를 LHLO -> MLIR LLVM Dialect처럼 리팩터링합니다.
     - (비용) 궁극적으로 Standard로 마이그레이션하려는 경우, 삭제 작업이 됩니다.
     - (혜택) 쉽고 기계적입니다. 단기간에 할 수 있습니다.
-    - (Benefit) It doesn't benefit more compared to (1).
+    - (혜택) (1)에 비해 더 많은 혜택이 없습니다.
 3. 이전 emitter를 LHLO -> MLIR GPU + Standard + 루프처럼 리팩터링합니다.
     - (비용) 기존 emitter를 Standard로 올리면 몇 가지 문제가 발생합니다. 포인터와 GEP는 MemRef 및 SubView로 변환해야 합니다. amdgpu 완전성을 보장하는 것은 또 다른 하나입니다.
     - (비용) XLA/GPU는 LLVM 메타데이터에 크게 의존합니다.
@@ -98,7 +98,7 @@ ElementalIrEmitter is unique in that:
 - ElementalIrEmitter ops는 (4)로 진행되지만, 점진적으로는 아닙니다. 모든 요소 내보내기 ops가 같은 그래프에 연결되어 있으므로 연산별로 수행할 수 있는 방법이 없습니다. 이 작업은 또한 여러 진행 중인 힘(xla/service/mlir_gpu, kernel generator, Linalg)의 통합 지점 역할을 할 수 있습니다.
 - 다른 모든 ops는 (1)로 진행합니다. 확장 목표로 (3) 또는 (4)로 마이그레이션할 수 있습니다.
 
-## Prioritization
+## 우선 순위
 
 위에서 언급한 3가지 작업은 모두 병렬화할 수 있지만, 제한된 리소스에서 직렬화해야 합니다. 우선 순위는 각 작업 완료에 대한 가시적인 결과에 중점을 둡니다.
 
@@ -110,7 +110,7 @@ ElementalIrEmitter is unique in that:
 
 작업 3이 끝날 때까지 모든 XLA emitter는 구현에서 MLIR 기반입니다.
 
-## Detailed Design
+## 세부 설계
 
 ### 1단계: (작업 1) LHLO 완료 및 레거시 emitter에서 LHLO 사용
 
@@ -158,7 +158,7 @@ MLIR에서 생성된 op에 대해서는 다음과 같은 이유로 정확한 프
 - 제어 흐름 thunk: 호스트 제어 흐름 논리(조건부, while, for, 시퀀스) 및 시작 본문 커널이 있습니다.
 - 라이브러리 thunk: cuDNN, cuBLAS, cuFFT, NCCL 등
 
-The plan is:
+계획은 다음과 같습니다.
 
 - Thunk를 (역)직렬화 가능하게 만듭니다.
 - 해당 의미 체계를 지원할 수 있는 상태로 TFRT를 개선하는 데 도움이됩니다.
