@@ -31,7 +31,7 @@ TensorFlow Probability를 시작하려면 [설치 가이드](./install)를 참�
 
 TensorFlow Probability는 현재 개발 중이며 인터페이스가 달라질 수 있습니다.
 
-## Examples
+## 예
 
 탐색에 나열된 [Python 노트북 튜토리얼](https://github.com/tensorflow/probability/blob/master/tensorflow_probability/examples/jupyter_notebooks/){:.external} 외에도 사용 가능한 몇 가지 예제 스크립트가 있습니다.
 
