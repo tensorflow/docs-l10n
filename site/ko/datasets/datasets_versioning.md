@@ -1,10 +1,10 @@
 # 데이터세트의 버전 관리
 
 - [의미 체계](#semantic)
-- [Supported versions](#supported-versions)
+- [지원되는 버전](#supported-versions)
 - [특정 버전 로드하기](#loading-a-specific-version)
-- [Experiments](#experiments)
-- [BUILDER_CONFIGS and versions](#builder-configs-and-versions)
+- 실험
+- BUILDER_CONFIGS 및 버전
 
 ## 의미 체계
 
@@ -27,7 +27,7 @@ TFDS 라이브러리에서 코드를 변경하고 해당 코드 변경이 클라
 
 또한, 일부 데이터세트에는 TFDS 버전과 독립적인 다른 버전 관리 체계가 있습니다. 예를 들어, Open Images 데이터세트에는 여러 버전이 있으며, TFDS에서 해당 빌더는 `open_images_v4` , `open_images_v5`,...입니다.
 
-## Supported versions
+## 지원되는 버전
 
 `DatasetBuilder`는 정식 버전보다 높거나 낮은 여러 버전을 지원할 수 있습니다. 예를 들면, 다음과 같습니다.
 
@@ -68,7 +68,7 @@ tfds.load('imagenet2012:3.*.*')
 
 이렇게 하면 미래의 자신과 독자 및 검토자가 결과를 쉽게 재현할 수 있습니다.
 
-## Experiments
+## 실험
 
 많은 데이터세트 빌더에 영향을 주는 TFDS의 변경 사항을 점진적으로 롤아웃하기 위해 실험의 개념을 도입했습니다. 실험이 처음 도입될 때는 기본적으로 사용 중지되어 있지만, 특정 데이터세트 버전에서는 사용하도록 결정할 수 있습니다. 실험은 일반적으로 처음에는 "미래" 버전(아직 정식 버전은 아님)에서 수행됩니다. 예를 들면, 다음과 같습니다.
 
@@ -96,7 +96,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
 
 실험과 그에 대한 설명은 `core/utils/version.py`에 정의되어 있습니다.
 
-## BUILDER_CONFIGS and versions
+## BUILDER_CONFIGS 및 버전
 
 일부 데이터세트는 여러 개의 `BUILDER_CONFIGS`를 정의합니다. 이 경우, `version` 및 `supported_versions`는 구성 객체 자체에 정의됩니다. 그 외에는 의미 체계와 사용법이 동일합니다. 예를 들면, 다음과 같습니다.
 
