@@ -4,11 +4,11 @@ TensorFlow Lite for Microcontrollers C++ 라이브러리는 [TensorFlow 리포�
 
 다음 문서에서는 C++ 라이브러리의 기본 구조에 대한 요약과 고유한 프로젝트를 만드는 방법에 대한 정보를 제공합니다.
 
-## File structure
+## 파일 구조
 
 [`micro`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro) 루트 디렉토리는 비교적 간단한 구조를 가지고 있습니다. 그러나, 광범위한 TensorFlow 리포지토리 내에 있으므로 다양한 임베디드 개발 환경 내에서 독립적으로 관련 소스 파일을 제공하는 스크립트와 사전 생성된 프로젝트 파일을 마련했습니다.
 
-### Key files
+### 주요 파일
 
 마이크로컨트롤러용 TensorFlow Lite 인터프리터를 사용하는 데 가장 중요한 파일들은 프로젝트의 루트에 있으며 테스트가 함께 제공됩니다.
 
@@ -28,7 +28,7 @@ TensorFlow Lite for Microcontrollers C++ 라이브러리는 [TensorFlow 리포�
 
 ## 새 프로젝트 시작하기
 
-We recommend using the *Hello World* example as a template for new projects. You can obtain a version of it for your platform of choice by following the instructions in this section.
+*Hello World* 예제를 새 프로젝트의 템플릿으로 사용하는 것이 좋습니다. 이 섹션의 지침에 따라 선택한 플랫폼에 맞는 버전을 얻을 수 있습니다.
 
 ### Arduino 라이브러리 사용하기
 
@@ -106,7 +106,7 @@ make -f tensorflow/lite/micro/tools/make/Makefile TAGS=<subdirectory_name> gener
 
 ## Arduino 라이브러리 생성하기
 
-A nightly build of the Arduino library is available via the Arduino IDE's library manager.
+Arduino 라이브러리의 야간 빌드는 Arduino IDE의 라이브러리 관리자를 통해 사용할 수 있습니다.
 
 라이브러리의 새 빌드를 생성해야 하는 경우, TensorFlow 리포지토리에서 다음 스크립트를 실행할 수 있습니다.
 
