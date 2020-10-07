@@ -1,18 +1,18 @@
 # TensorFlow Lite Model Maker
 
-## Overview
+## 개요
 
 TensorFlow Lite Model Maker 라이브러리는 사용자 정의 데이터세트를 사용하여 TensorFlow Lite 모델 훈련 프로세스를 단순화합니다. 전이 학습을 사용하여 필요한 훈련 데이터의 양을 줄이고 훈련 시간을 단축할 수 있습니다.
 
-## Supported Tasks
+## 지원되는 작업
 
 Model Maker 라이브러리는 현재 다음 ML 작업을 지원합니다. 모델 훈련 방법에 대한 가이드를 보려면 아래 링크를 클릭하세요.
 
-Supported Tasks | Task Utility
+지원되는 작업 | 작업 유틸리티
 --- | ---
-Image Classification [guide](https://www.tensorflow.org/lite/tutorials/model_maker_image_classification) | 이미지를 미리 정의된 범주로 분류합니다.
-Text Classification [guide](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification) | 텍스트를 미리 정의된 범주로 분류합니다.
-Question Answer [guide](https://www.tensorflow.org/lite/tutorials/model_maker_question_answer) | 주어진 질문에 대한 특정 컨텍스트에서 답변을 찾습니다.
+이미지 분류 [가이드](https://www.tensorflow.org/lite/tutorials/model_maker_image_classification) | 이미지를 미리 정의된 범주로 분류합니다.
+텍스트 분류 [가이드](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification) | 텍스트를 미리 정의된 범주로 분류합니다.
+질문 답변 [가이드](https://www.tensorflow.org/lite/tutorials/model_maker_question_answer) | 주어진 질문에 대한 특정 컨텍스트에서 답변을 찾습니다.
 
 ## 엔드 투 엔드 예제
 
@@ -35,9 +35,9 @@ model.export(export_dir='/tmp/')
 
 자세한 내용은 [이미지 분류 가이드](https://www.tensorflow.org/lite/tutorials/model_maker_image_classification)를 참조하세요.
 
-## Installation
+## 설치
 
-There are two ways to install Model Maker.
+Model Maker를 설치하는 방법에는 두 가지가 있습니다.
 
 - 미리 빌드된 pip 패키지를 설치합니다.
 
