@@ -2,63 +2,63 @@
 
 <sub>TensorFlow 모델 최적화로 유지</sub>
 
-There are two forms of quantization: post-training quantization and quantization aware training. Start with [post-training quantization](post_training.md) since it's easier to use, though quantization aware training is often better for model accuracy.
+양자화에는 훈련 후 양자화와 양자화 인식 훈련의 두 가지 형태가 있습니다. 사용하기 쉬운 [훈련 후 양자화](post_training.md)로 시작하세요. 그러나 양자화 인식 훈련이 종종 모델 정확성에 더 좋습니다.
 
-This page provides an overview on quantization aware training to help you determine how it fits with your use case.
+이 페이지는 양자화 인식 훈련에 대한 개요를 제공하여 사용 사례에 얼마나 적합한지를 결정하는 데 도움이 됩니다.
 
-- To dive right into an end-to-end example, see the [quantization aware training example](training_example.md).
-- To quickly find the APIs you need for your use case, see the [quantization aware training comprehensive guide](training_comprehensive_guide.md).
+- 엔드 투 엔드 예제로 바로 들어가려면, [양자화 인식 훈련 예제](training_example.md)를 참조하세요.
+- 사용 사례에 필요한 API를 빠르게 찾으려면, [양자화 인식 훈련 종합 가이드](training_comprehensive_guide.md)를 참조하세요.
 
 ## 개요
 
-Quantization aware training emulates inference-time quantization, creating a model that downstream tools will use to produce actually quantized models. The quantized models use lower-precision (e.g. 8-bit instead of 32-bit float), leading to benefits during deployment.
+양자화 인식 훈련은 추론 시간 양자화를 에뮬레이트하여 다운스트림 도구가 실제로 양자화된 모델을 생성하는 데 사용할 모델을 생성합니다. 양자화된 모델은 낮은 정밀도(예: 32bit 부동 소수점 대신 8bit)를 사용하므로 배포 중에 이점이 있습니다.
 
-### Deploy with quantization
+### 양자화로 배포하기
 
-Quantization brings improvements via model compression and latency reduction. With the API defaults, the model size shrinks by 4x, and we typically see between 1.5 - 4x improvements in CPU latency in the tested backends. Eventually, latency improvements can be seen on compatible machine learning accelerators, such as the [EdgeTPU](https://coral.ai/docs/edgetpu/benchmarks/) and NNAPI.
+양자화는 모델 압축 및 지연 시간 감소를 통해 개선을 제공합니다. API 기본값을 사용하면 모델 크기가 4배 줄어들며 일반적으로 테스트된 백엔드에서 CPU 지연 시간이 1.5~4배 향상됩니다. [EdgeTPU](https://coral.ai/docs/edgetpu/benchmarks/) 및 NNAPI와 같은 호환 가능한 머신러닝 가속기에서 지연 시간의 개선을 볼 수 있습니다.
 
-The technique is used in production in speech, vision, text, and translate use cases. The code currently supports a [subset of these models](#general-support-matrix).
+이 기술은 음성, 시각, 텍스트 및 번역 사용 사례의 운영 환경에 사용됩니다. 이 코드는 현재 [이들 모델의 하위 집합](#general-support-matrix)을 지원합니다.
 
-### Experiment with quantization and associated hardware
+### 양자화 및 관련 하드웨어로 실험하기
 
-Users can configure the quantization parameters (e.g. number of bits) and to some degree, the underlying algorithms. With these changes from the API defaults, there is no supported path to deployment.
+사용자는 양자화 매개변수(예: 비트 수)와 어느 정도 기본 알고리즘을 구성할 수 있습니다. API 기본값의 이러한 변경으로 인해 지원되는 배포 경로가 없습니다.
 
 이 구성과 관련된 API는 실험적이며 이전 버전과의 호환성이 적용되지 않습니다.
 
 ### API 호환성
 
-Users can apply quantization with the following APIs:
+사용자는 다음 API를 사용하여 양자화를 적용할 수 있습니다.
 
-- Model building: `tf.keras` with only Sequential and Functional models.
-- TensorFlow versions: TF 2.x for tf-nightly.
-    - `tf.compat.v1` with a TF 2.X package is not supported.
-- TensorFlow execution mode: eager execution
+- 모델 구축: 순차 및 함수형 모델만 있는 `tf.keras`
+- TensorFlow 버전: tf-nightly용 TF 2.x
+    - TF 2.X 패키지가 있는 `tf.compat.v1`은 지원되지 않습니다.
+- TensorFlow 실행 모드: 즉시 실행
 
-It is on our roadmap to add support in the following areas:
+다음 영역에 대한 지원 추가가 로드맵에 나와 있습니다.
 
 <!-- TODO(tfmot): file Github issues. -->
 
-- Model building: clarify how Subclassed Models have limited to no support
-- Distributed training: `tf.distribute`
+- 모델 구축: Subclassed Model의 제한된 지원에서 미지원까지 명확히 합니다.
+- 분산 훈련: `tf.distribute`
 
-### General support matrix
+### 일반 지원 행렬
 
-Support is available in the following areas:
+다음 영역에서 지원을 받을 수 있습니다.
 
-- Model coverage: models using [whitelisted layers](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/quantization/keras/default_8bit/default_8bit_quantize_registry.py), BatchNormalization when it follows Conv2D and DepthwiseConv2D layers, and in limited cases, `Concat`.
+- 모델 적용 범위: Conv2D 및 DepthwiseConv2D 레이어를 따르는 경우, [화이트리스트 레이어](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/quantization/keras/default_8bit/default_8bit_quantize_registry.py), BatchNormalization를 사용하는 모델, 제한된 경우 `Concat`를 사용합니다.
     <!-- TODO(tfmot): add more details and ensure they are all correct. -->
-- Hardware acceleration: our API defaults are compatible with acceleration on EdgeTPU, NNAPI, and TFLite backends, amongst others. See the caveat in the roadmap.
-- Deploy with quantization: only per-axis quantization for convolutional layers, not per-tensor quantization, is currently supported.
+- 하드웨어 가속: API 기본값은 무엇보다도 EdgeTPU, NNAPI 및 TFLite 백엔드의 가속과 호환됩니다. 로드맵에서 주의 사항을 참조하세요.
+- 양자화로 배포: 현재 텐서별 양자화가 아닌 컨볼루셔널 레이어에 대한 축별 양자화만 지원됩니다.
 
-It is on our roadmap to add support in the following areas:
+다음 영역에 대한 지원 추가가 로드맵에 나와 있습니다.
 
 <!-- TODO(tfmot): file Github issue. Update as more functionality is added prior
 to launch. -->
 
-- Model coverage: extended to include RNN/LSTMs and general Concat support.
-- Hardware acceleration: ensure the TFLite converter can produce full-integer models. See [this issue](https://github.com/tensorflow/tensorflow/issues/38285) for details.
-- Experiment with quantization use cases:
-    - Experiment with quantization algorithms that span Keras layers or require the training step.
+- 모델 적용 범위: RNN/LSTM 및 일반 Concat 지원을 포함하도록 확장되었습니다.
+- 하드웨어 가속: TFLite 변환기가 전체 정수 모델을 생성할 수 있는지 확인합니다. 자세한 내용은 [이 문제](https://github.com/tensorflow/tensorflow/issues/38285)를 참조하세요.
+- 양자화 사용 사례 실험:
+    - Keras 레이어에 걸쳐 있거나 훈련 단계가 필요한 양자화 알고리즘을 실험합니다.
     - API를 안정화합니다.
 
 ## 결과
@@ -69,8 +69,8 @@ to launch. -->
   <table>
     <tr>
       <th>모델</th>
-      <th>Non-quantized Top-1 Accuracy </th>
-      <th>8-bit Quantized Accuracy </th>
+      <th>비 양자화 Top-1 정확성</th>
+      <th>8bit 양자화 정확성</th>
     </tr>
     <tr>
       <td>MobilenetV1 224</td>
@@ -98,8 +98,8 @@ to launch. -->
   <table>
     <tr>
       <th>모델</th>
-      <th>Non-quantized Top-1 Accuracy </th>
-      <th>8-Bit Quantized Accuracy </th>
+      <th>비 양자화 Top-1 정확성</th>
+      <th>8bit 양자화 정확성</th>
     </tr>
 <tr>
       <td>Nasnet-Mobile</td>
@@ -116,10 +116,10 @@ to launch. -->
 
 모델은 Imagenet에서 테스트되었으며 TensorFlow 및 TFLite에서 평가되었습니다.
 
-## Examples
+## 예제
 
-In addition to the [quantization aware training example](training_example.md), see the following examples:
+[양자화 인식 훈련 예제](training_example.md) 외에도 다음 예제를 참조하세요.
 
-- CNN model on the MNIST handwritten digit classification task with quantization: [code](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/quantization/keras/quantize_functional_test.py)
+- 양자화를 사용한, 손으로 작성한 MNIST 숫자 분류 작업의 CNN 모델: [코드](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/quantization/keras/quantize_functional_test.py)
 
-For background on something similar, see the *Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference* [paper](https://arxiv.org/abs/1712.05877). This paper introduces some concepts that this tool uses. The implementation is not exactly the same, and there are additional concepts used in this tool (e.g. per-axis quantization).
+유사한 주제에 관한 배경 정보는 *효율적인 정수 산술 전용 추론을 위한 신경망의 양자화 및 훈련* [논문](https://arxiv.org/abs/1712.05877)을 참조하세요. 이 논문에서는 이 도구에서 사용되는 몇 가지 개념을 소개합니다. 구현은 정확히 같지 않으며, 이 도구에 사용되는 추가 개념이 있습니다(예: 축별 양자화).
