@@ -11,7 +11,9 @@ get_changed_files() {
     if [[ -e "$fp" ]]; then
       echo "$fp"
     fi
-  done < <(git diff --name-only "$compared_branch"... || true)
+  done < <(git diff --name-only "$compared_branch" || true)
+  # TODO: Only list files modified on *this* branch.
+  # `git diff --name-only "$compared_branch"...` doesn't work on shallow clones.
 }
 
 # Add label(s) to GitHub issue.
