@@ -49,11 +49,11 @@ API オブジェクトを作成するには、[`BaseTaskApi`](https://github.com
 
     ```cpp
     class BertQuestionAnswerer : public BaseTaskApi<
-                                  std::vector<QaAnswer>, // OutputType
+                                  std::vector, // OutputType
                                   const std::string&, const std::string& // InputTypes
                                   > {
       // Model specific function delegating calls to BaseTaskApi::Infer
-      std::vector<QaAnswer> Answer(const std::string& context, const std::string& question) {
+      std::vector Answer(const std::string& context, const std::string& question) {
         return Infer(context, question).value();
       }
     }
