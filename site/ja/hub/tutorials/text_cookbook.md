@@ -4,7 +4,7 @@
 
 ## 分類
 
-When we want to predict a class for a given example, for example **sentiment**, **toxicity**, **article category**, or any other characteristic.
+特定の例のクラスを予測する場合、特に**センチメント**、**毒性**、**記事カテゴリ**、またはその他の特性を予測する場合。
 
 ![Text Classification Graphic](https://www.gstatic.com/aihub/tfhub/universal-sentence-encoder/example-classification.png)
 
@@ -20,11 +20,11 @@ When we want to predict a class for a given example, for example **sentiment**, 
 
 ### BERT
 
-[Predicting Movie Review Sentiment with BERT on TF Hub](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) - shows how to use a BERT module for classification. Includes use of `bert` library for tokenization and preprocessing.
+[Predicting Movie Review Sentiment with BERT on TF Hub](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb)（TF Hub で BERT を使用して映画レビューを予測する）- BERT モジュールを使用して分類を行う方法が紹介されています。トークン化と前処理を行うための `bert` ライブラリの使用方法が含まれます。
 
 ### Kaggle
 
-[IMDB classification on Kaggle](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) - shows how to easily interact with a Kaggle competition from a Colab, including downloading the data and submitting the results.
+[Kaggle での IMDB 分類](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) - データのダウンロードと結果の送信など、Colab から Kaggle コンペと簡単に連携する方法が示されています。
 
  | Estimator | Keras | TF2 | TF Dataset | BERT | Kaggle API
 --- | --- | --- | --- | --- | --- | ---
@@ -41,7 +41,7 @@ When we want to predict a class for a given example, for example **sentiment**, 
 
 ## 意味的類似性
 
-When we want to find out which sentences correlate with each other in zero-shot setup (no training examples).
+ゼロショットセットアップ（トレーニングサンプルなしのセットアップ）で、どの文章が相関しているかを見つけ出す場合。
 
 ![Semantic Similarity Graphic](https://www.gstatic.com/aihub/tfhub/universal-sentence-encoder/example-similarity.png)
 
@@ -51,7 +51,7 @@ When we want to find out which sentences correlate with each other in zero-shot 
 
 ### クロスリンガル
 
-[Cross-lingual semantic similarity](https://github.com/tensorflow/hub/blob/master/examples/colab/cross_lingual_similarity_with_tf_hub_multilingual_universal_encoder.ipynb) - shows how to use one of the cross-lingual sentence encoders to compute sentence similarity across languages.
+[クロスリンガル意味的類似性](https://github.com/tensorflow/hub/blob/master/examples/colab/cross_lingual_similarity_with_tf_hub_multilingual_universal_encoder.ipynb) - クロスリンガル文章エンコーダの 1 つを使用して言語間の文章の類似性を計算する方法を示します。
 
 ### セマンティック検索
 
@@ -69,4 +69,4 @@ When we want to find out which sentences correlate with each other in zero-shot 
 
 [テキスト埋め込みモジュールエクスポータ](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings/export.py) - 既存のトレーニング済みの埋め込みをモジュールにラッピングするツールです。テキストの事前処理演算をモジュールに含める方法を示します。こうすることで、トークン埋め込みから文章埋め込みを作成することが可能となります。
 
-[Text embedding module exporter v2](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings_v2/export_v2.py) - same as above, but compatible with TensorFlow 2 and eager execution.
+[テキスト埋め込みモジュールエクスポータ v2](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings_v2/export_v2.py) - 上記と同じですが、TensorFlow 2 と Eager execution との互換性があります。
