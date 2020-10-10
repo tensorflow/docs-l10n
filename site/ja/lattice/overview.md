@@ -27,7 +27,7 @@ $D$ の特徴量と各次元に沿った 2 つの頂点を持つ規則的格子�
 
 地元のコーヒーショップの提案で、モデルが利用者の満足度を学習できるようにしたいと考えています。TensorFlow Lattice モデルは*区分的線形関数*を（`tfl.layer.PWLCalibration`と共に）使用して、格子が受け入れられる範囲の入力特徴量に較正し、正規化することができます。上記の例の格子の範囲は 0.0 ～ 1.0 です。以下に 10 個のキーポイントを持つ較正関数の例を示します。
 
-<p align="center"> <img src="images/pwl_calibration_distance.png"> <img src="images/pwl_calibration_price.png"> </p>
+<p align="center"> <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lattice/images/pwl_calibration_distance.png?raw=true"> <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lattice/images/pwl_calibration_price.png?raw=true" class=""> </p>
 
 入力キーポイントとして特徴量の分位数の使用をお勧めします。TensorFlow Lattice [Canned Estimator](tutorials/canned_estimators.ipynb) は、入力キーポイントを特徴量分位数に自動設定することができます。
 
@@ -67,7 +67,7 @@ TensorFlow Lattice では柔軟性のあるモデルを使い続けることが�
 
 - **単調性制約**: 出力が入力のみに対して増減するように指定できます。この例では、コーヒーショップまでの距離が長くなると、予想されるユーザーの嗜好性のみが減少するように指定することができす。
 
-<p align="center"> <img src="images/linear_fit.png"> <img src="images/flexible_fit.png"> <img src="images/regularized_fit.png"> <img src="images/monotonic_fit.png"> </p>
+<p align="center"> <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lattice/images/linear_fit.png?raw=true"> <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lattice/images/flexible_fit.png?raw=true"> <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lattice/images/regularized_fit.png?raw=true"> <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lattice/images/monotonic_fit.png?raw=true" class=""> </p>
 
 - **凹凸性制約**: 関数の形状を凸状または凹状に指定できます。単調性と混合すると、特定の特徴量に関して関数に強制的に減少リターンを表現させることができます。
 
