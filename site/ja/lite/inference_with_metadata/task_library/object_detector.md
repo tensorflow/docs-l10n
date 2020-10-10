@@ -84,8 +84,7 @@ const DetectionResult result = object_detector->Detect(*frame_buffer).value();
 
 TensorFlow Hub からの [ssd mobilenet v1](https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1) の検出結果の例を次に示します。
 
-
-<img src="images/dogs.jpg" alt="dogs" width="50%">
+ <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/inference_with_metadata/task_library/images/dogs.jpg?raw=true" alt="dogs" class="">
 
 ```
 Results:
@@ -105,8 +104,7 @@ Results:
 
 境界矩形を入力画像にレンダリングします。
 
-
-<img src="images/detection-output.png" alt="detection output" width="50%">
+ <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/inference_with_metadata/task_library/images/detection-output.png?raw=true" alt="detection output" class="">
 
 独自のモデルとテストデータを使用して、シンプルな [ObjectDetector 向け CLI デモツール](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop#object-detector)をお試しください。
 
