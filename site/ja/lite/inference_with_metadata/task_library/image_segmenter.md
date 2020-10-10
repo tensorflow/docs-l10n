@@ -80,7 +80,6 @@ const SegmentationResult result = image_segmenter->Segment(*frame_buffer).value(
 
 これは、TensorFlow Hub で利用可能な一般的なセグメンテーションモデルである [deeplab_v3](https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/1) のセグメンテーション結果の例です。
 
-
 <img src="images/plane.jpg" alt="plane" width="50%">
 
 ```
