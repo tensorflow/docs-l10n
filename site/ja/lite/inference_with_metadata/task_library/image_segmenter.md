@@ -105,8 +105,7 @@ this legend.
 
 セグメンテーションカテゴリマスクは次のようになります。
 
-
-<img src="images/segmentation-output.png" alt="segmentation-output" width="30%">
+ <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/inference_with_metadata/task_library/images/segmentation-output.png?raw=true" alt="segmentation-output" class="">
 
 独自のモデルとテストデータを使用して、シンプルな [ImageSegmenter 向け CLI デモツール](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop#image-segmenter)をお試しください。
 
