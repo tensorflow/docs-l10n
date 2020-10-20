@@ -4,7 +4,7 @@
 
 ## タスクに最適なモデルを選択する
 
-Depending on the task, you will need to make a tradeoff between model complexity and size. If your task requires high accuracy, then you may need a large and complex model. For tasks that require less precision, it is better to use a smaller model because they not only use less disk space and memory, but they are also generally faster and more energy efficient. For example, graphs below show accuracy and latency tradeoffs for some common image classification models.
+タスクによっては、モデルの複雑さとサイズの間でトレードオフを行う必要があります。高い精度が要求されるタスクの場合は、大規模かつ複雑なモデルが必要になる可能性があります。さほど精度を必要としないタスクの場合は、小規模モデルを使用した方がディスク容量とメモリの使用量が少なくて済むだけでなく、一般的に高速でエネルギー効率が良くなります。例えば、以下のグラフは一般的な画像分類モデルの精度と待ち時間のトレードオフを示しています。
 
 ![Graph of model size vs accuracy](../images/performance/model_size_vs_accuracy.png "Model Size vs Accuracy")
 
