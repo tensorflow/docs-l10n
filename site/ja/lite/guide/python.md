@@ -16,8 +16,7 @@ TensorFlow Lite モデルを Python で素早く実行できるようにする�
 
 たとえば、Raspbian Buster（Python 3.7 を使用）を実行している Raspberry Pi があるとした場合、次のように Python wheel をインストールします。
 
-<pre class="devsite-terminal devsite-click-to-copy">pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl
-</pre>
+<pre class="devsite-terminal devsite-click-to-copy">pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl</pre>
 
 <table>
 <tr>
