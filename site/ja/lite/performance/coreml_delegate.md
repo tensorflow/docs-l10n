@@ -8,7 +8,7 @@ TensorFlow Lite Core ML デリゲートは、[Core ML フレームワーク](htt
 
 **サポートする iOS のバージョンとデバイス:**
 
-- iOS 12 and later. In the older iOS versions, Core ML delegate will automatically fallback to CPU.
+- iOS 12 以降。古い iOS バージョンの場合、Core ML デリゲートは自動的に CPU にフォールバックします。
 - By default, Core ML delegate will only be enabled on devices with A12 SoC and later (iPhone Xs and later) to use Neural Engine for faster inference. If you want to use Core ML delegate also on the older devices, please see [best practices](#best-practices)
 
 **サポートするモデル**
