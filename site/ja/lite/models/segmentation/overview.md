@@ -6,7 +6,7 @@
 
 *DeepLab* は、セマンティック画像セグメンテーションの最先端のディープラーニングモデルであり、入力画像の各ピクセルにセマンティックラベル（例えば、人、犬、猫など）を割り当てることを目的としています。
 
-If you are new to TensorFlow Lite and are working with Android or iOS, we recommend exploring the following example applications that can help you get started.
+TensorFlow Lite を初めて使用する場合、Android または iOS を使用する場合は、以下のサンプルアプリをご覧ください。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android">Android の例</a>
 
