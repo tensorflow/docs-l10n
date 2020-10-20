@@ -109,7 +109,7 @@ if(null != tflite) {
 import org.tensorflow.lite.support.common.FileUtil;
 
 final String ASSOCIATED_AXIS_LABELS = "labels.txt";
-List<String> associatedAxisLabels = null;
+List associatedAxisLabels = null;
 
 try {
     associatedAxisLabels = FileUtil.loadLabels(this, ASSOCIATED_AXIS_LABELS);
@@ -134,7 +134,7 @@ if (null != associatedAxisLabels) {
         probabilityProcessor.process(probabilityBuffer));
 
     // Create a map to access the result based on label
-    Map<String, Float> floatMap = labels.getMapWithFloatValue();
+    Map floatMap = labels.getMapWithFloatValue();
 }
 ```
 
