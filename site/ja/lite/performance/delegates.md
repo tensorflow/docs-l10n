@@ -4,11 +4,11 @@
 
 ## TensorFlow Lite デリゲートとは
 
-A TensorFlow Lite delegate is a way to delegate part or all of graph execution to another executor.
+TensorFlow Lite デリゲートは、グラフの実行の一部または全部を別の実行者にデリゲートする（任せる）方法です。
 
 ## デリゲートを使用する理由
 
-Running inference on compute-heavy machine learning models on mobile devices is resource demanding due to the devices' limited processing and power.
+モバイルデバイス上で計算量の多い機械学習モデルの推論を実行するには、デバイスの処理能力や電力が限られているため、リソースが要求されます。
 
 CPU に頼るのではなく、GPU や DSP などのハードウェアアクセラレータを搭載して、より高い性能とエネルギー効率を実現しているデバイスもあります。
 
@@ -33,7 +33,7 @@ TensorFlow Lite は、ハードウェアアクセラレーション向けに以�
 
 ![Graph with delegate](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/images/performance/tflite_delegate_graph_2.png?raw=true)
 
-Each subgraph that is handled by a delegate will be replaced with a node that evaluates the subgraph on its invoked call.
+デリゲートで処理される各サブグラフは、呼び出された呼び出しでサブグラフを評価するノードに置き換えられます。
 
 モデルによっては、最終的なグラフが 1 つのノードで終わることがありますが、これはすべてのグラフがデリゲートされたか、複数のノードがサブグラフを処理したことを意味します。通常は、デリゲートからメイングラフに切り替えるたびにサブグラフからメイングラフに結果を渡すオーバーヘッドが発生するため、デリゲートによる複数のサブグラフの処理は避けるべきです。メモリの共有は必ずしも安全とは限りません。
 
