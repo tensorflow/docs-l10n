@@ -51,7 +51,7 @@ TensorFlow Lite は、GPU、DSP、ニューラルアクセラレータなど、�
 - Android の[ニューラルネットワーク API](https://developer.android.com/ndk/guides/neuralnetworks/) を使用します。ハードウェアアクセラレータバックエンドを利用して、モデルの速度と効率を向上させることができます。ニューラルネットワーク API を有効にするには、インタープリタインスタンスで [UseNNAPI](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L343) を呼び出します。
 - GPU デリゲートは、Android と iOS でそれぞれ OpenGL/OpenCL と Metal を使用して利用できます。これを試す場合は、[GPU デリゲートのチュートリアル](gpu.md)と[ドキュメント](gpu_advanced.md)をご覧ください。
 - Hexagon デリゲートは Android で利用可能です。デバイスで利用可能な場合には、Qualcomm Hexagon DSP を使用します。詳細については、[Hexagon デリゲートチュートリアル](hexagon_delegate.md)をご覧ください。
-- It is possible to create your own delegate if you have access to non-standard hardware. See [TensorFlow Lite delegates](delegates.md) for more information.
+- 非標準のハードウェアへのアクセスが可能な場合、独自のデリゲートを作成することができます。詳細は [TensorFlow Lite のデリゲート](delegates.md)をご覧ください。
 
 アクセラレータによっては、モデルの種類次第で動作が良くなる場合があるので留意してください。一部のデリゲートは、浮動小数点数モデルや特定の方法で最適化されたモデルのみをサポートしています。各デリゲートを[ベンチマーク](measurement.md)して、それがアプリケーションに適しているかどうかを確認することが重要です。例えば、非常に小規模のモデルの場合は、モデルを NN API や GPU にデリゲートする価値はない可能性があります。それとは逆に、算術強度の高い大規模モデルにはアクセラレータが適します。
 
