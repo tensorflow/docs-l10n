@@ -2,7 +2,7 @@
 
 *推論*とは、入力データに基づいて予測を立てるために、TensorFlow Lite モデルをオンデバイスで実行するプロセスを指します。TensorFlow Lite モデルで推論を実行するには、*インタプリタ*を使って実行する必要があります。TensorFlow Lite インタプリタは、リーンで高速であるように設計されており、静的なグラフの順序付けとカスタム（あまり動的でない）メモリアロケータを使用して、最小限の読み込み、初期化、および実行遅延を実現しています。
 
-This page describes how to access to the TensorFlow Lite interpreter and perform an inference using C++, Java, and Python, plus links to other resources for each [supported platform](#supported-platforms).
+このページでは、TesorFlow Lite インタプリタにアクセスして、C++、Java、および Python を使って推論する方法を説明し、各[対応プラットフォーム](#supported-platforms)向けのその他のリソースへのリンクを紹介します。
 
 [TOC]
 
@@ -12,7 +12,7 @@ TensorFlow Lite の推論は、通常次の手順で行います。
 
 1. **モデルの読み込み**
 
-    You must load the `.tflite` model into memory, which contains the model's execution graph.
+    モデルの実行グラフを含む `.tflite` モデルをメモリに読み込む必要があります。
 
 2. **データの変換**
 
@@ -20,19 +20,19 @@ TensorFlow Lite の推論は、通常次の手順で行います。
 
 3. **推論の実行**
 
-    This step involves using the TensorFlow Lite API to execute the model. It involves a few steps such as building the interpreter, and allocating tensors, as described in the following sections.
+    このステップには、TensorFlow Lite API を使用して、モデルを実行することが伴います。インタプリタの構築やテンソルの割り当てなど、次のセクションに説明されるステップがあります。
 
 4. **出力の解釈**
 
     モデルの推論から結果を得ると、アプリケーションで役立つ意義のある方法でテンソルを解釈する必要があります。
 
-    For example, a model might return only a list of probabilities. It's up to you to map the probabilities to relevant categories and present it to your end-user.
+    たとえば、モデルは確率のリストのみを返すことがありますが、確率を関連するカテゴリにマッピングし、エンドユーザーに提供することを決めることができます。
 
 ##  サポートされているプラットフォーム
 
 TensorFlow の推論 API は、Android、iOS、および Linux などの最も一般的なモバイル/組み込みプラットフォーム向けに複数のプログラミング言語で提供されています。
 
-In most cases, the API design reflects a preference for performance over ease of use. TensorFlow Lite is designed for fast inference on small devices, so it should be no surprise that the APIs try to avoid unnecessary copies at the expense of convenience. Similarly, consistency with TensorFlow APIs was not an explicit goal and some variance between languages is to be expected.
+ほとんどの場合、API の設計は使いやすさよりもパフォーマンスを反映しています。TensorFlow Lite は小型デバイスでの高速推論向けに設計されているため、API が利便性を犠牲にして不要なコピーを回避しようとするのも驚くことではありません。同様に、TensorFlow APIs との一貫性は、明確な目標ではなく、言語間のバリアンスが期待されます。
 
 すべてのライブラリにおいて、TensorFlow Lite API によって、モデルの読み込み、入力のフィード、および推論出力の取得が可能となります。
 
@@ -40,13 +40,13 @@ In most cases, the API design reflects a preference for performance over ease of
 
 Android では、TensorFlow Lite の推論は、Java または C++ API のいずれかを使用して実行できます。Java API は、利便性を提供し、Android Activity クラス内で直接使用できます。C++ API は、さらに柔軟性と速度を提供しますが、Java と C++ レイヤー間でデータを移動するには、JNI ラッパーを書く必要がある場合があります。
 
-See below for details about using [C++](#load-and-run-a-model-in-c) and [Java](#load-and-run-a-model-in-java), or follow the [Android quickstart](android.md) for a tutorial and example code.
+C++ と Java の使用に関する詳細は以下をご覧ください。または、チュートリアルとサンプルコードについては、[Android クイックスタート](#load-and-run-a-model-in-c)をご覧ください。
 
 #### TensorFlow Lite Android ラッパーコードジェネレータ
 
 注意: TensorFlow Lite ラッパーコードジェネレータは実験（ベータ）フェーズにあり、現在 Android のみをサポートしています。
 
-For TensorFlow Lite model enhanced with [metadata](../convert/metadata.md), developers can use the TensorFlow Lite Android wrapper code generator to create platform specific wrapper code. The wrapper code removes the need to interact directly with `ByteBuffer` on Android. Instead, developers can interact with the TensorFlow Lite model with typed objects such as `Bitmap` and `Rect`. For more information, please refer to the [TensorFlow Lite Android wrapper code generator](../inference_with_metadata/codegen.md).
+[メタデータ](../convert/metadata.md)で強化された TensorFlow Lite モデルの場合、開発者は TensorFlow Lite Android ラッパーコードジェネレータを使用して、プラットフォーム固有のラッパーコードを作成できます。ラッパーコードにより、`ByteBuffer`と直接やり取りする必要がなくなり、開発者は `Bitmap` や `Rect` などの型付きオブジェクトを使用して TensorFlow Lite モデルとやり取りできます。詳細は、[TensorFlow Lite Android ラッパーコードジェネレータ](../inference_with_metadata/codegen.md)をご覧ください。
 
 ### iOS プラットフォーム
 
@@ -56,7 +56,7 @@ iOS では、TensorFlow Lite は [Swift](https://www.tensorflow.org/code/tensorf
 
 ### Linux プラットフォーム
 
-On Linux platforms (including [Raspberry Pi](build_rpi.md)), you can run inferences using TensorFlow Lite APIs available in [C++](#load-and-run-a-model-in-c) and [Python](#load-and-run-a-model-in-python), as shown in the following sections.
+Linux プラットフォーム（[Raspberry Pi](build_rpi.md) を含む）では、次のセクションで説明される通り、C++ とPython で提供されている TensorFlow Lite API を使用して推論を実行できます。
 
 ## モデルを実行する
 
@@ -76,7 +76,7 @@ TensorFlow Lite モデルは、いくつかの単純な手順で実行します�
 
 TensorFlow Lite で推論を実行するための Java API は主に、Android で使用するように設計されているため、Android ライブラリ依存関係として、`org.tensorflow:tensorflow-lite` のように提供されています。
 
-In Java, you'll use the `Interpreter` class to load a model and drive model inference. In many cases, this may be the only API you need.
+Java では、モデルの読み込みとモデル推論の駆動に、`Interpreter` クラスを使用します。多くの場合、これが唯一必要な API です。
 
 `Interpreter` の初期化には、`.tflite` ファイルを使用することができます。
 
@@ -119,7 +119,7 @@ public int getOutputIndex(String opName);
 
 モデルの `opName` が有効な演算でない場合、`IllegalArgumentException` がスローされます。
 
-Also beware that `Interpreter` owns resources. To avoid memory leak, the resources must be released after use by:
+また、`Interpreter` はリソースを所有することにも注意してください。メモリリークを回避するには、次のように、使用後にリソースを解放する必要があります。
 
 ```java
 interpreter.close();
@@ -316,7 +316,7 @@ class FlatBufferModel {
 
 注意: `FlatBufferModel` オブジェクトは、それを使用する `Interpreter` の全インスタンスが破壊されるまで有効な状態を維持する必要があります。
 
-The important parts of the `Interpreter` API are shown in the code snippet below. It should be noted that:
+`Interpreter` API の重要な個所を以下のコードスニペットに示していますが、次のことに注意してください。
 
 - 文字列比較（および文字列ライブラリへのすべての固定した依存関係）を回避するために、テンソルは整数値で表現されています。
 - インタプリタには同時スレッドからアクセスしてはいけません。
@@ -380,7 +380,7 @@ output_data = interpreter.get_tensor(output_details[0]['index'])
 print(output_data)
 ```
 
-As an alternative to loading the model as a pre-converted `.tflite` file, you can combine your code with the [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/convert/python_api) (`tf.lite.TFLiteConverter`), allowing you to convert your TensorFlow model into the TensorFlow Lite format and then run inference:
+事前変換された `.tflite` ファイルとしてモデルを読み込む代わりに、コードを [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/convert/python_api)（`tf.lite.TFLiteConverter`）と組み合わせて、TensorFlow モデルを TensorFlow Lite 形式に変換してから推論を実行することができます。
 
 ```python
 import numpy as np
