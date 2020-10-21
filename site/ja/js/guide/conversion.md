@@ -51,4 +51,4 @@ const model = await tf.loadLayersModel(‘path/to/model.json’);
 
 `tf.loadGraphModel` API は`tf.FrozenModel`を返します。これは、パラメータが固定されており、新しいデータでモデルを微調整できないことを意味します。`tf.loadLayersModel` API は、トレーニング可能な tf.Model を返します。tf.Model をトレーニングする方法については、[トレーニングモデルガイド](train_models.md)を参照してください。
 
-After conversion, it’s a good idea to run inference a few times and benchmark the speed of your model. We have a standalone benchmarking page that can be used for this purpose: https://tensorflow.github.io/tfjs/e2e/benchmarks/local-benchmark/index.html. You may notice that we discard measurements from an initial warmup run - this is because (in general) your model’s first inference will be several times slower than subsequent inferences due to the overhead of creating textures and compiling shaders.
+変換後、推論を数回実行し、モデルの速度をベンチマークすることをお勧めします。このためには、以下のスタンドアロンのベンチマークページをご利用ください。https://tensorflow.github.io/tfjs/e2e/benchmarks/local-benchmark/index.html。お気づきになったかもしれませんが、最初のウォームアップ実行からの測定値が破棄されています。これは、テクスチャの作成とシェーダーのコンパイルのオーバーヘッドにより、一般的にモデルの最初の推論がその後の推論よりも数倍遅くなるためです。
