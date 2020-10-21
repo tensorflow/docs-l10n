@@ -19,7 +19,7 @@
     - 共通する ML タスクですぐに利用できる API ビルディングブロック
     - より多くのモデル（NLP など）やプラットフォーム（iOS など）のサポート
 - **Android Studio の統合**
-    - Drag & drop TFLite models into Android Studio to generate model binding classes
+    - TFLite モデルの Android Studio へのドラッグアンドドロップ操作で、モデルのバインディングクラスを生成する機能
 - **オンデバイスでの制御フローとトレーニング**
     - パーソナライズ化と転移学習に焦点を当てたオンデバイストレーニングのサポート
 - **TensorBoard による視覚化ツール**
@@ -27,7 +27,7 @@
 - **Model Maker**
     - オブジェクト検出や BERT ベースの NLP タスクを含む、より多くのタスクのサポート
 - **モデルと例の追加**
-    - More examples to demonstrate model usage as well as new features and APIs, covering different platforms.
+    - モデルの使用方法だけでなく、新機能や API などを実演する、各種プラットフォームに対応した例の追加
 - **タスクライブラリ**
     - 事前構築済みのバイナリを提供したり、ユーザーフレンドリーなワークフローを作成したソースコードから構築できるようにするといった、C++ タスクライブラリのユーザービリティの改善
     - タスクライブラリの使用例を集めたリファレンスの公開
@@ -47,7 +47,7 @@
     - Android での Vulkan サポート
     - 整数量子化モデルのサポート
 - **Hexagon DSP バックエンド**
-    - Per-channel quantization support for all models created through post-training quantization
+    - ポストトレーニング量子化によって作成されたモデルのチャンネル単位の量子化サポート
     - 入力バッチサイズの動的サポート
     - LSTM を含む演算子のカバレッジ強化
 - **Core ML バックエンド**
@@ -72,7 +72,7 @@
 ## 移植性
 
 - **マイクロコントローラのサポート**
-    - Add support for a range of 32-bit MCU architecture use cases for speech and image classification
+    - スピーチと画像分類における 32 ビット MCU アーキテクチャのユースケースのサポート追加
     - ビジョンデータと音声データ用のサンプルコードとモデル
     - マイクロコントローラにおける TF Lite 演算子のフルサポート
     - CircuitPython サポートを含む、プラットフォームサポートの追加
