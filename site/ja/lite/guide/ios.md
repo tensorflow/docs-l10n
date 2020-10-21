@@ -1,20 +1,20 @@
 # iOS クイックスタート
 
-To get started with TensorFlow Lite on iOS, we recommend exploring the following example:
+iOS で TensorFlow Lite を使い始めるには、次の例をご覧ください。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS image classification example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS 画像分類の例</a>
 
 ソースコードの説明については、[TensorFlow Lite iOS 画像分類](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md)もあわせてお読みください。
 
 このサンプルアプリは、[画像分類](https://www.tensorflow.org/lite/models/image_classification/overview)を使用して、デバイスの背面カメラに取り込まれるものを継続的に分類し、最も確率の高い分類を表示します。ユーザーは、浮動小数点または[量子化](https://www.tensorflow.org/lite/performance/post_training_quantization)モデルの選択と推論を実施するスレッド数の選択を行なえます。
 
-Note: Additional iOS applications demonstrating TensorFlow Lite in a variety of use cases are available in [Examples](https://www.tensorflow.org/lite/examples).
+注意: さまざまなユースケースで TensorFlow Lite を実演するその他の iOS アプリは、[例](https://www.tensorflow.org/lite/examples)をご覧ください。
 
 ## TensorFlow Lite を Swift または Objective-C プロジェクトに追加する
 
-TensorFlow Lite offers native iOS libraries written in [Swift](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/swift) and [Objective-C](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/objc). Start writing your own iOS code using the [Swift image classification example](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios) as a starting point.
+TensorFlow Lite は、[Swift](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/swift) と [Objective-C](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/objc) で記述されたネイティブの iOS ライブラリを提供しています。出発点として、[Swift 画像分類の例](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios)を使用して、独自の iOS コードを記述してみましょう。
 
-The sections below demonstrate how to add TensorFlow Lite Swift or Objective-C to your project:
+次のセクションでは、TensorFlow Lite Swift または Objective-C をプロジェクトに追加する方法を実演しています。
 
 ### CocoaPods 開発者
 
@@ -37,13 +37,13 @@ pod 'TensorFlowLiteObjC'
 
 安定リリースと、`TensorFlowLiteSwift` および `TensorFlowLiteObjC` ポッド用のナイトリーリリースがあります。上記の例のようにバージョン制約を指定しない場合、CocoaPods はデフォルトで最新の安定リリースをプルします。
 
-You can also specify a version constraint. For example, if you wish to depend on version 2.0.0, you can write the dependency as:
+また、バージョン制約を指定することもできます。たとえば、バージョン 2.0.0 に依存する場合は、依存関係を次のように記述できます。
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 2.0.0'
 ```
 
-This will ensure the latest available 2.x.y version of the `TensorFlowLiteSwift` pod is used in your app. Alternatively, if you want to depend on the nightly builds, you can write:
+このようにすると、`TensorFlowLiteSwift` ポッドの利用可能な最新の 2.x.y バージョンがアプリで使用されるようになります。また、ナイトリービルドに依存する場合は、次のように記述できます。
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly'
@@ -123,4 +123,4 @@ Objective-C ファイルでは、次のようにアンブレラヘッダーを�
 @import TFLTensorFlowLite;
 ```
 
-Note: For CocoaPods developers who want to import the Objective-C TensorFlow Lite module, you must also include `use_frameworks!` in your `Podfile`.
+注意: CocoaPods 開発者が、Objective-C TensorFlow Lite モジュールのインポートを希望する場合は、`Podfile` に `use_frameworks!` も含める必要があります。
