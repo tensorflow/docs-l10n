@@ -1,82 +1,82 @@
-# Question and answer
+# 質問と回答
 
 事前トレーニング済みモデルを使用して、与えられたパッセージの内容に基づいて質問に答えます。
 
-## Get started
+## はじめに
 
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
-If you are new to TensorFlow Lite and are working with Android or iOS, we recommend exploring the following example applications that can help you get started.
+TensorFlow Lite を初めて使用する場合、Android または iOS を使用する場合は、以下のサンプルアプリをご覧ください。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android example</a>
 
-If you are using a platform other than Android/iOS, or you are already familiar with the [TensorFlow Lite APIs](https://www.tensorflow.org/api_docs/python/tf/lite), you can download our starter question and answer model.
+Android または iOS 以外のプラットフォームを使用する場合、または、すでに [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite) に精通している場合は、質問と回答スターターモデルをダウンロードしてください。
 
-<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Download starter model and vocab</a>
+<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">スターターモデルと語彙をダウンロードする</a>
 
 For more information about metadata and associated fields (e.g. `vocab.txt`) see <a href="https://www.tensorflow.org/lite/convert/metadata#read_the_metadata_from_models">Read the metadata from models</a>.
 
-## How it works
+## 使い方
 
-The model can be used to build a system that can answer users’ questions in natural language. It was created using a pre-trained BERT model fine-tuned on SQuAD 1.1 dataset.
+このモデルを使用すると、ユーザーの質問に自然言語で回答できるシステムを構築できます。これは、SQuAD 1.1 データセットでファインチューニングされた事前トレーニング済み BERT モデルを使用して作成されました。
 
-[BERT](https://github.com/google-research/bert), or Bidirectional Encoder Representations from Transformers, is a method of pre-training language representations which obtains state-of-the-art results on a wide array of Natural Language Processing tasks.
+[BERT](https://github.com/google-research/bert) (Bidirectional Encoder Representations from Transformers) は、言語表現を事前トレーニングする方法で、さまざまな自然言語処理タスクで最先端の結果を取得できます。
 
-This app uses a compressed version of BERT, MobileBERT, that runs 4x faster and has 4x smaller model size.
+このアプリは、BERT の圧縮バージョンである MobileBERT を使用します。これは 4 倍の速度で実行し、モデルサイズは 1/4 になります。
 
-[SQuAD](https://rajpurkar.github.io/SQuAD-explorer/), or Stanford Question Answering Dataset, is a reading comprehension dataset consisting of articles from Wikipedia and a set of question-answer pairs for each article.
+[SQuAD](https://rajpurkar.github.io/SQuAD-explorer/) (Stanford Question Answering Dataset) は、ウィキペディアの記事と、各記事の一連の質問と回答のペアで構成される読解データセットです。
 
-The model takes a passage and a question as input, then returns a segment of the passage that most likely answers the question. It requires semi-complex pre-processing including tokenization and post-processing steps that are described in the BERT [paper](https://arxiv.org/abs/1810.04805) and implemented in the sample app.
+モデルは、パッセージと質問を入力として取り、質問の回答しての可能性が最も高いパッセージのセグメントを返します。これには、トークン化と後処理ステップを含むやや複雑な前処理が必要です。これらは BERT に関する[論文](https://arxiv.org/abs/1810.04805)で説明され、サンプルアプリで実装されています。
 
-## Performance benchmarks
+## パフォーマンスベンチマーク
 
-Performance benchmark numbers are generated with the tool [described here](https://www.tensorflow.org/lite/performance/benchmarks).
+パフォーマンスベンチマークの数値は、[ここで説明する](https://www.tensorflow.org/lite/performance/benchmarks)ツールで生成されています。
 
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
-      <th>Model size </th>
-      <th>Device </th>
+      <th>モデル名</th>
+      <th>モデルサイズ</th>
+      <th>デバイス</th>
       <th>CPU</th>
     </tr>
   </thead>
   <tr>
-    <td rowspan="3"><a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a></td>
+    <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/bert_qa/mobilebert_qa_vocab.zip">Mobile Bert</a></td>
     <td rowspan="3">       100.5 Mb</td>
-    <td>Pixel 3 (Android 10) </td>
+    <td>Pixel 3 (Android 10)</td>
     <td>123ms*</td>
   </tr>
    <tr>
-     <td>Pixel 4 (Android 10) </td>
+     <td>Pixel 4 (Android 10)</td>
     <td>74ms*</td>
   </tr>
    <tr>
-     <td>iPhone XS (iOS 12.4.1) </td>
-    <td>257ms** </td>
+     <td>iPhone XS (iOS 12.4.1)</td>
+    <td>257ms**</td>
   </tr>
 </table>
 
-* 4 threads used.
+* 4 つのスレッドを使用。
 
-** 2 threads used on iPhone for the best performance result.
+** 最高のパフォーマンス結果を得るために、iPhone では 2 つのスレッドを使用。
 
-## Example output
+## 出力例
 
-### Passage (Input)
+### パッセージ (入力)
 
-> Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. It is considered one of the Big Four technology companies, alongside Amazon, Apple, and Facebook.
-> Google was founded in September 1998 by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University in California. Together they own about 14 percent of its shares and control 56 percent of the stockholder voting power through supervoting stock. They incorporated Google as a California privately held company on September 4, 1998, in California. Google was then reincorporated in Delaware on October 22, 2002. An initial public offering (IPO) took place on August 19, 2004, and Google moved to its headquarters in Mountain View, California, nicknamed the Googleplex. In August 2015, Google announced plans to reorganize its various interests as a conglomerate called Alphabet Inc. Google is Alphabet's leading subsidiary and will continue to be the umbrella company for Alphabet's Internet interests. Sundar Pichai was appointed CEO of Google, replacing Larry Page who became the CEO of Alphabet.
+> Google LLC は、オンライン広告技術、検索エンジン、クラウドコンピューティング、ソフトウェア、ハードウェアなど、インターネット関連のサービスと製品を専門とするアメリカの多国籍テクノロジー企業です。アマゾン、アップル、フェイスブックと並んで、4 大テクノロジー企業の 1 つと見なされています。
+> 当時カリフォルニア州のスタンフォード大学の博士課程に在籍していたラリー・ペイジとサーゲイ・ブリンにより設立されました。現在でも  2 人 合わせて約 14% の株を保有し、スーパー投票株を通じて株主投票権の 56% を制御しています。Google は 1998 年 9 月 4 日にカリフォルニア州でカリフォルニアの非公開会社として設立されました。その後、Google は 2002 年 10 月 22 日にデラウェア州で再度法人として設立されました。2004 年 8 月 19 日に株式公開 (IPO) が行われ、Google は Googleplex と呼ばれるカリフォルニア州マウンテンビューの本社に移転しました。2015 年 8 月、Google は Alphabet Inc と呼ばれるコングロマリットとしてさまざまな事業を再編成する計画を発表しました。Google は Alphabet 社の主要な子会社として、引き続きインターネット関係の事業に包括的に取り組みます。 ラリー・ペイジの後任としてスンダー・ピチャイが新 CEO に就任し、ラリー・ペイジは Alphabet の CEO に着任しました。
 
-### Question (Input)
+### 質問 (入力)
 
-> Who is the CEO of Google?
+> Google の CEO は誰ですか？
 
-### Answer (Output)
+### 回答 (出力)
 
-> Sundar Pichai
+> スンダー・ピチャイ
 
-## Read more about BERT
+## BERT の詳細を読む
 
 - Academic paper: [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)
-- [Open-source implementation of BERT](https://github.com/google-research/bert)
+- [BERT のオープンソース実装](https://github.com/google-research/bert)
