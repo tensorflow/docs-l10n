@@ -1,78 +1,78 @@
-# TensorFlow Lite Roadmap
+# TensorFlow Lite のロードマップ
 
-**Updated: April 18, 2020**
+**更新日: 2020 年 4 月 18 日**
 
-The following represents a high level overview of our 2020 plan. You should be aware that this roadmap may change at any time and the order below does not reflect any type of priority. As a matter of principle, we typically prioritize issues based on the number of users affected.
+以下は、TensorFlow Lite の大まかな 2020 年度計画について説明しています。ここに示すロードマップはいつでも変更される可能性があり、以下に示される順序は優先順位を示すものではないことに注意してください。原則として、課題の優先順位は通常、影響を受けているユーザー数に基づいています。
 
 このロードマップは、ユーザビリティ、パフォーマンス、最適化、および移植性という 4 つの主要区分に分けられています。ぜひロードマップにコメントを残し、[TF Lite ディスカッショングループ](https://groups.google.com/a/tensorflow.org/g/tflite)にフィードバックをご提供いただきますようお願いいたします。
 
-## Usability
+## ユーザビリティ
 
-- **Expanded ops coverage**
-    - Prioritized op additions based on user feedback
-- **Improvements to using TensorFlow ops in TensorFlow Lite**
-    - Pre-built libraries available via Bintray (Android) and Cocoapods (iOS)
-    - Smaller binary size when using select TF ops via op stripping
-- **LSTM / RNN support**
-    - Full LSTM and RNN conversion support, including support in Keras
-- **Pre-and-post processing support libraries and codegen tool**
-    - Ready-to-use API building blocks for common ML tasks
-    - Support more models (e.g. NLP) and more platforms (e.g. iOS)
-- **Android Studio Integration**
+- **演算子の対応範囲の拡大**
+    - ユーザーフィードバックに基づく優先度の高い演算子の追加
+- **TensorFlow Lite での TensorFlow 演算子の使用の改善**
+    - Bintray（Android）と Cocoapods（iOS）経由でのビルド済みライブラリの提供
+    - 演算子ストリップで一部の TF 演算子を使用する際のバイナリサイズの縮小
+- **LSTM / RNN サポート**
+    - LSTM と RNN 変換の完全サポート（Keras でのサポートを含む）
+- **処理前および処理後のサポートライブラリと codegen ツール**
+    - 共通する ML タスクですぐに利用できる API ビルディングブロック
+    - より多くのモデル（NLP など）やプラットフォーム（iOS など）のサポート
+- **Android Studio の統合**
     - Drag & drop TFLite models into Android Studio to generate model binding classes
-- **Control Flow & Training on-device**
-    - Support for training on-device, focused on personalization and transfer learning
-- **Visualization tooling with TensorBoard**
-    - Provide enhanced tooling with TensorBoard
+- **オンデバイスでの制御フローとトレーニング**
+    - パーソナライズ化と転移学習に焦点を当てたオンデバイストレーニングのサポート
+- **TensorBoard による視覚化ツール**
+    - TensorBoard に高度なツール機能を提供
 - **Model Maker**
-    - Support more tasks, including object detection and BERT-based NLP tasks
-- **More models and examples**
+    - オブジェクト検出や BERT ベースの NLP タスクを含む、より多くのタスクのサポート
+- **モデルと例の追加**
     - More examples to demonstrate model usage as well as new features and APIs, covering different platforms.
-- **Task Library**
-    - Improve the usability of the C++ Task Library, such as providing prebuilt binaries and creating user-friendly workflows for users who want to build from source code.
-    - Release reference examples of using the Task Library.
-    - Enable more task types.
-    - Improve cross-platform support and enable more tasks for iOS.
+- **タスクライブラリ**
+    - 事前構築済みのバイナリを提供したり、ユーザーフレンドリーなワークフローを作成したソースコードから構築できるようにするといった、C++ タスクライブラリのユーザービリティの改善
+    - タスクライブラリの使用例を集めたリファレンスの公開
+    - より多くのタスクの種類の提供
+    - クロスプラットフォームサポートの改善と iOS 向けタスクの追加提供
 
-## Performance
+## パフォーマンス
 
-- **Better tooling**
-    - Public dashboard for tracking performance gains with each release
-- **Improved CPU performance**
-    - New highly optimized floating-point kernel library for convolutional models
-    - First-class x86 support
-- **Updated NN API support**
-    - Full support for new Android R NN API features, ops and types
-- **GPU backend optimizations**
-    - Vulkan support on Android
-    - Support integer quantized models
-- **Hexagon DSP backend**
+- **ツールの改善**
+    - リリースごとのパフォーマンスゲインを追跡する公開ダッシュボード
+- **CPU パフォーマンスの改善**
+    - 高度に最適化された、畳み込みモデル用の新しい浮動小数点カーネルライブラリ
+    - ファーストクラスの x86 サポート
+- **NN API サポートの更新**
+    - 新しい Android R NN API 機能、演算子、および型のフルサポート
+- **GPU バックエンドの最適化**
+    - Android での Vulkan サポート
+    - 整数量子化モデルのサポート
+- **Hexagon DSP バックエンド**
     - Per-channel quantization support for all models created through post-training quantization
-    - Dynamic input batch size support
-    - Better op coverage, including LSTM
-- **Core ML backend**
-    - Optimizing start-up time
-    - Dynamic quantized models support
-    - Float16 quantized models support
-    - Better op coverage
+    - 入力バッチサイズの動的サポート
+    - LSTM を含む演算子のカバレッジ強化
+- **Core ML バックエンド**
+    - 起動時間の最適化
+    - 動的量子化モデルのサポート
+    - Float16 量子化モデルのサポート
+    - 演算子の対応範囲の拡大
 
-## Optimization
+## 最適化
 
-- **Quantization**
+- **量子化**
 
-    - Post-training quantization for (8b) fixed-point RNNs
-    - During-training quantization for (8b) fixed-point RNNs
-    - Quality and performance improvements for post-training dynamic-range quantization
+    - （8b）固定小数点 RNN のトレーニング後量子化
+    - （8b）固定小数点 RNN のトレーニング中量子化
+    - トレーニング後のダイナミックレンジ量子化の品質とパフォーマンスの改善
 
-- **Pruning / sparsity**
+- **プルーニング / スパース化**
 
-    - Sparse model execution support in TensorFlow Lite - [WIP](https://github.com/tensorflow/model-optimization/issues/173)
-    - Weight clustering API
+    - TensorFlow Lite におけるスパースモデルの実行サポート - [進行中](https://github.com/tensorflow/model-optimization/issues/173)
+    - 重みクラスタリング API
 
-## Portability
+## 移植性
 
-- **Microcontroller Support**
+- **マイクロコントローラのサポート**
     - Add support for a range of 32-bit MCU architecture use cases for speech and image classification
-    - Sample code and models for vision and audio data
-    - Full TF Lite op support on microcontrollers
-    - Support for more platforms, including CircuitPython support
+    - ビジョンデータと音声データ用のサンプルコードとモデル
+    - マイクロコントローラにおける TF Lite 演算子のフルサポート
+    - CircuitPython サポートを含む、プラットフォームサポートの追加
