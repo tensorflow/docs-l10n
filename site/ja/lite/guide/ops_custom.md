@@ -73,10 +73,7 @@ a list of operators for which you will need custom implementations: Sin.
 
 カスタム演算子を使った TensorFlow Lite モデルを作成しましょう。次に示すように、コンバータの属性を `allow_custom_ops` に設定してください。
 
-<pre>converter = tf.lite.TFLiteConverter.from_concrete_functions([sin.get_concrete_function(x)])
-<b>converter.allow_custom_ops = True</b>
-tflite_model = converter.convert()
-</pre>
+<pre>converter = tf.lite.TFLiteConverter.from_concrete_functions([sin.get_concrete_function(x)])<br><b>converter.allow_custom_ops = True</b><br>tflite_model = converter.convert()</pre>
 
 この時点では、デフォルトのインタプリタで実行しようとすると、次のようなエラーメッセージが発生します。
 
@@ -101,9 +98,9 @@ typedef struct {
 
 `TfLiteContext` と <code>TfLiteNode</code> の詳細については、<a><code data-md-type="codespan">common.h</code></a> をご覧ください。前者はエラーレポーティングファシリティと、すべてのテンソルを含むグローバルオブジェクトへのアクセスを提供し、後者は実装が入力と出力にアクセスできるようにするものです。
 
-When the interpreter loads a model, it calls `init()` once for each node in the graph. A given `init()` will be called more than once if the op is used multiple times in the graph. For custom ops a configuration buffer will be provided, containing a flexbuffer that maps parameter names to their values. The buffer is empty for builtin ops because the interpreter has already parsed the op parameters. Kernel implementations that require state should initialize it here and transfer ownership to the caller. For each `init()` call, there will be a corresponding call to `free()`, allowing implementations to dispose of the buffer they might have allocated in `init()`.
+インタプリタがモデルを読み込む際、グラフの各ノード当たり `init()` が一度呼び出されます。つまりグラフで演算が 2 回以上使用される場合、`init()` は 2 回以上呼び出されることになります。カスタム演算子の場合、パラメータ名を値にマッピングする flexbuffer が含まれる構成バッファが提供されます。このバッファは、インタプリタが演算子のパラメータをパースするため、ビルトイン演算子の場合は空です。ステートが必要なカーネル実装はここで初期化して、オーナーシップを呼び出し元に移譲します。各 `init()` 呼び出しには `free()` への対応する呼び出しがあるため、実装は、`init()` に割り当てられていた可能性のあるバッファを利用できるようになります。
 
-Whenever the input tensors are resized, the interpreter will go through the graph notifying implementations of the change. This gives them the chance to resize their internal buffer, check validity of input shapes and types, and recalculate output shapes. This is all done through `prepare()`, and implementations can access their state using `node->user_data`.
+入力テンソルのサイズが変更されるたび、インタプリタはグラフを通過して実装に変更を通知します。このため、実装は、内部バッファのサイズを変更し、入力形状と型の妥当性を検証し、出力形状を再計算するチャンスを得ることができます。このプロセスはすべて `prepare()` を介して行われるため、実装は `node->user_data` を使用してステートにアクセスすることができます。
 
 最後に、推論が実行されるたび、インタプリタは、`invoke()` を呼び出してグラフをトラバースし、ここでもステートを `node->user_data` として使用することができます。
 
@@ -193,7 +190,7 @@ class OpResolver {
 };
 ```
 
-Regular usage requires that you use the `BuiltinOpResolver` and write:
+通常の使用では、`BuiltinOpResolver` を使用して次のように書く必要があります。
 
 ```c++
 tflite::ops::builtin::BuiltinOpResolver resolver;
@@ -205,7 +202,7 @@ tflite::ops::builtin::BuiltinOpResolver resolver;
 resolver.AddCustom("Sin", Register_SIN());
 ```
 
-If the set of builtin ops is deemed to be too large, a new `OpResolver` could be code-generated based on a given subset of ops, possibly only the ones contained in a given model. This is the equivalent of TensorFlow's selective registration (and a simple version of it is available in the `tools` directory).
+ビルトイン演算子のセットが大きすぎる場合、演算子の特定のサブセットに基づいて、おそらく特定のモデルに含まれる演算子のみが含まれた新しい `OpResolver` をコード生成することができます。これが、TensorFlow の選択的登録に相当するものです（また、この単純なバージョンは、`tools` ディレクトリに提供されています）。
 
 カスタム演算子を Java で定義する場合、現時点では、独自のカスタム JNI レイヤーを構築し、[この jni コードに](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/builtin_ops_jni.cc)独自の AAR をコンパイルする必要があります。同様に、Python でこれらの演算子を定義する場合、[Python ラッパーコード](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc)に登録を配置することができます。
 
