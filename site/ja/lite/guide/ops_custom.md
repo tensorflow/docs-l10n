@@ -233,7 +233,7 @@ TensorFlow Lite のベンチマークツールで演算子をプロファイリ�
 
 3. メモリの浪費がかさばらないようであれば、実行のイテレーションごとに動的に割り当てられる `std::vector` よりも、静的な固定サイズの配列（または `Resize` の事前割り当て済みの `std::vector`）を使用することをお勧めします。
 
-4. Avoid instantiating standard library container templates that don't already exist, because they affect binary size. For example, if you need a `std::map` in your operation that doesn't exist in other kernels, using a `std::vector` with direct indexing mapping could work while keeping the binary size small. See what other kernels use to gain insight (or ask).
+4. 存在しない標準ライブラリコンテナテンプレートをインスタンス化しないようにしてください。バイナリサイズが大きくなります。たとえば、ほかのカーネルに存在しない `std::map` が演算に必要な場合、直接インデックスマッピングで `std::vector` を使用すれば、バイナリサイズを小さくしたまま機能させることが可能です。ほかのカーネルが何を使用して洞察を得ているのかご覧ください。
 
 5. `malloc` が返すメモリへのポインタを確認してください。このポインタが `nullptr` である場合、そのポイントを使って演算を実行してはいけません。関数で `malloc` を行い、エラーが存在する場合は、終了する前にメモリを解放してください。
 
