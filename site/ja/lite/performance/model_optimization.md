@@ -4,7 +4,7 @@ Edge デバイスではメモリや計算能力が限られていることがよ
 
 TensorFlow Lite と [TensorFlow モデル最適化ツールキット](https://www.tensorflow.org/model_optimization)は推論の最適化の複雑さを最小限に抑えるツールを提供します。
 
-It's recommended that you consider model optimization during your application development process. This document outlines some best practices for optimizing TensorFlow models for deployment to edge hardware.
+アプリ開発プロセス時に、モデルの最適化を検討することをお勧めします。このドキュメントでは、Edge ハードウェアへのデプロイのために TensorFlow モデルを最適化するためのいくつかのベストプラクティスについて概説します。
 
 ## モデルを最適化する理由
 
@@ -14,7 +14,7 @@ There are several main ways model optimization can help with application develop
 
 一部の形式の最適化は、モデルのサイズを縮小するために使用できます。小さいモデルには次の利点があります。
 
-- **Smaller storage size:** Smaller models occupy less storage space on your users' devices. For example, an Android app using a smaller model will take up less storage space on a user's mobile device.
+- **小さいストレージサイズ:** モデルが小さいほど、ユーザーデバイスでのストレージ容量が少なくなります。たとえば、小さいモデルを使用する Android アプリは、ユーザーのモバイルデバイス上で使用するストレージ容量が少なくなります。
 - **小さいダウンロードサイズ:** モデルが小さいほど、ユーザーのデバイスにダウンロードするのに必要な時間と帯域幅が少なくなります。
 - **少ないメモリ使用量:** モデルが小さいほど、実行時に使用する RAM が少なくなります。メモリが解放されるので、アプリの他の部分がメモリを使用できるようになり、パフォーマンスと安定性が向上します。
 
@@ -22,9 +22,9 @@ There are several main ways model optimization can help with application develop
 
 ### レイテンシ短縮
 
-*Latency* is the amount of time it takes to run a single inference with a given model. Some forms of optimization can reduce the amount of computation required to run inference using a model, resulting in lower latency. Latency can also have an impact on power consumption.
+*レイテンシ*は、モデルで単一の推論を実行するのにかかる時間です。一部の形式の最適化では、モデルを使用して推論を実行するために必要な計算量を減らすことができるため、レイテンシを短縮できます。また、レイテンシは消費電力に影響を与える可能性があります。
 
-Currently, quantization can be used to reduce latency by simplifying the calculations that occur during inference, potentially at the expense of some accuracy.
+現在、量子化を使用して、推論中に発生する計算を単純化することにより、レイテンシを削減できます（精度が少々低下する場合があります）。
 
 ### アクセラレータの互換性
 
@@ -34,7 +34,7 @@ Currently, quantization can be used to reduce latency by simplifying the calcula
 
 ## トレードオフ
 
-Optimizations can potentially result in changes in model accuracy, which must be considered during the application development process.
+最適化により、モデルの精度が変更する可能性があります。これは、アプリ開発プロセス中に考慮する必要があります。
 
 精度の変更は、最適化される個々のモデルに依存するため、事前に予測することは困難です。一般に、サイズまたはレイテンシが最適化されたモデルでは、精度がわずかに低下します。アプリに応じては、これによりユーザーエクスペリエンスが影響される場合があります。まれに、特定のモデルでは最適化プロセスの結果として精度がやや向上する場合があります。
 
@@ -42,7 +42,7 @@ Optimizations can potentially result in changes in model accuracy, which must be
 
 TensorFlow Lite は現在、量子化、プルーニング、クラスタリングによる最適化をサポートしています。
 
-These are part of the [TensorFlow Model Optimization Toolkit](https://www.tensorflow.org/model_optimization), which provides resources for model optimization techniques that are compatible with TensorFlow Lite.
+これらは TensorFlow Lite と 互換性のあるモデル最適化手法のリソースである[ TensorFlow モデル最適化ツールキット](https://www.tensorflow.org/model_optimization)に含まれています。
 
 ### 量子化
 
@@ -57,7 +57,7 @@ TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 [トレーニング後の整数量子化](post_training_integer_quant.ipynb) | ラベルなしの代表的なサンプル | 75% 以下 | 精度低下（少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
 [量子化認識トレーニング](http://www.tensorflow.org/model_optimization/guide/quantization/training) | ラベル付けされたトレーニングデータ | 75% 以下 | 精度低下（ごく少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
 
-Below are the latency and accuracy results for post-training quantization and quantization-aware training on a few models. All latency numbers are measured on Pixel 2 devices using a single big core CPU. As the toolkit improves, so will the numbers here:
+以下は、いくつかのモデルでのトレーニング後の量子化および量子化認識トレーニングのレイテンシと精度の結果です。すべてのレイテンシ数は、一つの大型コア CPU を使用する Pixel 2 デバイスで測定されます。ツールキットが改善されると、以下の数値も改善されます。
 
 <figure>
   <table>
@@ -121,7 +121,7 @@ Below are the latency and accuracy results for post-training quantization and qu
 
 ### プルーニング
 
-[Pruning](https://www.tensorflow.org/model_optimization/guide/pruning) works by removing parameters within a model that have only a minor impact on its predictions. Pruned models are the same size on disk, and have the same runtime latency, but can be compressed more effectively. This makes pruning a useful technique for reducing model download size.
+[プルーニング](https://www.tensorflow.org/model_optimization/guide/pruning)は、予測への影響が小さいモデル内のパラメータを削除します。プルーニングされたモデルはディスク上では同じサイズで、実行時のレイテンシは同じですが、より効果的に圧縮できます。プルーニングはモデルのダウンロードサイズを縮小するための便利な手法です。
 
 今後、TensorFlow Lite ではプルーニングされたモデルのレイテンシが低減される予定です。
 
