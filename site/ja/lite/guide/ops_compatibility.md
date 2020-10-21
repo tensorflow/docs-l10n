@@ -1,10 +1,10 @@
 # TensorFlow Lite と TensorFlow 演算子の互換性
 
-TensorFlow Lite supports a number of TensorFlow operations used in common inference models. As they are processed by the TensorFlow Lite Optimizing Converter, those operations may be elided or fused, before the supported operations are mapped to their TensorFlow Lite counterparts.
+TensorFlow Lite は、一般的な推論モデルで使用される多数の TensorFlow 演算をサポートしています。演算は TensorFlow Lite Optimizing Converter で処理されるため、サポートされている演算が TensorFlow Lite の相当する演算にマッピングされる前に、省略または融合されることがあります。
 
 TensorFlow Lite のビルトイン演算子ライブラリがサポートする TensorFlow 演算子は制限されているため、すべてのモデルが互換しているわけではありません。サポートされている演算であっても、パフォーマンスの理由により、非常に特定的な使用パターンが期待されることがあります。TensorFlow Lite の将来のリリースでは、演算のサポート範囲を拡大したいと考えています。
 
-The best way to understand how to build a TensorFlow model that can be used with TensorFlow Lite is to carefully consider how operations are converted and optimized, along with the limitations imposed by this process.
+TensorFlow Lite で使用できる TensorFlow モデルを構築する方法を理解する最善の方法は、このプロセスで課せられる制限とともに演算子がどのように変換されて最適化されるのかをよく考察することです。
 
 ## サポートされている型
 
