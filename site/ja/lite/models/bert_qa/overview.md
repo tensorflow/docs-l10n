@@ -8,13 +8,13 @@
 
 TensorFlow Lite を初めて使用する場合、Android または iOS を使用する場合は、以下のサンプルアプリをご覧ください。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android の例</a>
 
 Android または iOS 以外のプラットフォームを使用する場合、または、すでに [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite) に精通している場合は、質問と回答スターターモデルをダウンロードしてください。
 
 <a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">スターターモデルと語彙をダウンロードする</a>
 
-For more information about metadata and associated fields (e.g. `vocab.txt`) see <a href="https://www.tensorflow.org/lite/convert/metadata#read_the_metadata_from_models">Read the metadata from models</a>.
+メタデータと関連フィールド (`vocab.txt`など) の詳細については、「<a href="https://www.tensorflow.org/lite/convert/metadata#read_the_metadata_from_models">モデルからメタデータを読み取る</a>」をご覧ください。
 
 ## 使い方
 
@@ -78,5 +78,5 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
 
 ## BERT の詳細を読む
 
-- Academic paper: [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)
+- 学術論文: [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (自然言語処理のための Transformer を用いたディープ双方向型事前トレーニング)](https://arxiv.org/abs/1810.04805)
 - [BERT のオープンソース実装](https://github.com/google-research/bert)
