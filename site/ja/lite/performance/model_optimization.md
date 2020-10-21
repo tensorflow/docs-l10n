@@ -1,6 +1,6 @@
 # モデル最適化
 
-Edge devices often have limited memory or computational power. Various optimizations can be applied to models so that they can be run within these constraints. In addition, some optimizations allow the use of specialized hardware for accelerated inference.
+Edge デバイスではメモリや計算能力が限られていることがよくあります。モデルにさまざまな最適化を適用すると、これらの制約内で実行できるようになります。また、一部の最適化では、推論を加速するための専用ハードウェアを使用できます。
 
 TensorFlow Lite と [TensorFlow モデル最適化ツールキット](https://www.tensorflow.org/model_optimization)は推論の最適化の複雑さを最小限に抑えるツールを提供します。
 
@@ -15,8 +15,8 @@ There are several main ways model optimization can help with application develop
 一部の形式の最適化は、モデルのサイズを縮小するために使用できます。小さいモデルには次の利点があります。
 
 - **Smaller storage size:** Smaller models occupy less storage space on your users' devices. For example, an Android app using a smaller model will take up less storage space on a user's mobile device.
-- **Smaller download size:** Smaller models require less time and bandwidth to download to users' devices.
-- **Less memory usage:** Smaller models use less RAM when they are run, which frees up memory for other parts of your application to use, and can translate to better performance and stability.
+- **小さいダウンロードサイズ:** モデルが小さいほど、ユーザーのデバイスにダウンロードするのに必要な時間と帯域幅が少なくなります。
+- **少ないメモリ使用量:** モデルが小さいほど、実行時に使用する RAM が少なくなります。メモリが解放されるので、アプリの他の部分がメモリを使用できるようになり、パフォーマンスと安定性が向上します。
 
 量子化により、これらのすべてのケースでモデルのサイズを縮小できますが、精度が低下する可能性があります。プルーニングとクラスタリングは、モデルをより簡単に圧縮できるようにすることで、ダウンロード用のモデルのサイズを縮小します。
 
@@ -28,7 +28,7 @@ Currently, quantization can be used to reduce latency by simplifying the calcula
 
 ### アクセラレータの互換性
 
-Some hardware accelerators, such as the [Edge TPU](https://cloud.google.com/edge-tpu/), can run inference extremely fast with models that have been correctly optimized.
+[Edge TPU ](https://cloud.google.com/edge-tpu/)などの一部のハードウェアアクセラレータは、正しく最適化されたモデルでは非常に高速に推論を実行します。
 
 一般に、これらの種類のデバイスでは、モデルを特定の方法で量子化する必要があります。要件についての詳細は、各ハードウェアアクセラレータのドキュメントをご覧ください。
 
@@ -46,7 +46,7 @@ These are part of the [TensorFlow Model Optimization Toolkit](https://www.tensor
 
 ### 量子化
 
-[Quantization](https://www.tensorflow.org/model_optimization/guide/quantization/post_training) works by reducing the precision of the numbers used to represent a model's parameters, which by default are 32-bit floating point numbers. This results in a smaller model size and faster computation.
+[量子化](https://www.tensorflow.org/model_optimization/guide/quantization/post_training)は、モデルのパラメータを表すために使用される数値の精度を下げることで機能します。モデルの精度はデフォルトでは 32 ビットの浮動小数点数です。量子化より、モデルサイズが小さくなり、計算が高速になります。
 
 TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 
@@ -116,7 +116,7 @@ Below are the latency and accuracy results for post-training quantization and qu
 <td>44.9</td>
 </tr>
  </table>
-  <figcaption>     <b>Table 1</b> Benefits of model quantization for select CNN models   </figcaption>
+  <figcaption>     <b>表 1</b> 選択された CNN モデルのモデル量子化の利点</figcaption>
 </figure>
 
 ### プルーニング
