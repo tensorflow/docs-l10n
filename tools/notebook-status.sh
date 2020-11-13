@@ -116,6 +116,9 @@ following list may not reflect recent updates.*
 
 Updated: ${TIMESTAMP_STR}<br/>"
 
+# GitLocalize may use a different path name.
+declare -A LANG_GITLOCALIZE
+LANG_GITLOCALIZE["es-419"]="es"
 
 echo -n "${LOG_NAME} Create status report files ... "
 
@@ -137,10 +140,16 @@ for lang in "${!LANG_FILES[@]}"; do
     echo -e "\nFailures in <code>site/${lang}/</code>:\n" >> "$STATUS_FILE"
   fi
 
+  if [[ -v LANG_GITLOCALIZE["$lang"] ]]; then
+    gitlocalize_lang=${LANG_GITLOCALIZE["$lang"]}
+  else
+    gitlocalize_lang="$lang"
+  fi
+
   # Full path like: https://github.com/tensorflow/docs-l10n/blob/master/site/<lang>/guide/autodiff.ipynb
   for github_path in "${failed_notebooks[@]}"; do
     rel_path="${github_path#*site/${lang}/}"
-    gitlocalize_path="https://gitlocalize.com/repo/4592/${lang}/site/en-snapshot/${rel_path}"
+    gitlocalize_path="https://gitlocalize.com/repo/4592/${gitlocalize_lang}/site/en-snapshot/${rel_path}"
     colab_path="https://colab.research.google.com/github/tensorflow/docs-l10n/blob/master/site/${lang}/${rel_path}"
 
     # Create list entry.
