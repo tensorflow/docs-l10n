@@ -54,7 +54,7 @@ fi
 ##
 
 readarray -t langs < <(find "$REPO_ROOT"/site -mindepth 1 -maxdepth 1 -type d \
-                         | xargs basename \
+                         | xargs -n1 basename \
                          | grep -v "en-snapshot" \
                          | sort)
 
