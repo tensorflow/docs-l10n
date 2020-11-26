@@ -131,9 +131,9 @@ infra_validator = InfraValidator(
 )
 ```
 
-## Limitations
+## 한계
 
-Current InfraValidator is not complete yet, and has some limitations.
+현재 InfraValidator는 아직 완전하지 않으며 몇 가지 제한 사항이 있습니다.
 
 - TensorFlow [SavedModel](/guide/saved_model) 모델 형식만 검증할 수 있습니다.
 
