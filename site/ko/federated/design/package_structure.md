@@ -4,29 +4,29 @@
 
 ## 개요
 
-### Terminology
+### 용어
 
 #### Python 모듈
 
-A Python module is a file containing Python definitions and statements. See [modules](https://docs.python.org/3/tutorial/modules.html#modules) for more information.
+Python 모듈은 Python 정의 및 문이 포함된 파일입니다. 자세한 정보는 [모듈](https://docs.python.org/3/tutorial/modules.html#modules)을 참조하세요.
 
 #### Python 패키지
 
-Python packages are a way of structuring Python modules. See [packages](https://docs.python.org/3/tutorial/modules.html#packages) for more information.
+Python 패키지는 Python 모듈을 구성하는 방법입니다. 자세한 내용은 [패키지](https://docs.python.org/3/tutorial/modules.html#packages)를 참조하십시오.
 
 #### 공개 TFF API
 
-The TFF API that is exposed by the [TFF API documentation](https://www.tensorflow.org/federated/api_docs/python/tff); this documentation is generated with [TensorFlow Docs](https://github.com/tensorflow/docs) using the logic defined by the [explicit_package_contents_filter](https://github.com/tensorflow/docs/blob/master/tools/tensorflow_docs/api_generator/public_api.py;l=156)
+[TFF API 설명서](https://www.tensorflow.org/federated/api_docs/python/tff)에 노출된 TFF API입니다. 이 설명서는 [explicit_package_contents_filter](https://github.com/tensorflow/docs)에 정의된 로직을 사용하여 [TensorFlow 문서](https://github.com/tensorflow/docs/blob/master/tools/tensorflow_docs/api_generator/public_api.py;l=156)와 함께 생성됩니다.
 
 #### 비공개 TFF API
 
-The TFF API that that is *not* exposed in the TFF [TFF API documentation](https://www.tensorflow.org/federated/api_docs/python/tff).
+[TFF API 설명서](https://www.tensorflow.org/federated/api_docs/python/tff)에 노출되지 *않은* TFF API입니다.
 
 #### TFF Python 패키지
 
-The Python [package](https://pypi.org/project/tensorflow-federated/) distributed on [PyPI](https://pypi.org).
+[PyPI](https://pypi.org/project/tensorflow-federated/)에 배포된 Python [패키지](https://pypi.org)입니다.
 
-Please be aware, the Python package contains both [public TFF API](#public-tff-api) and [private TFF API](#private-tff-api) and it is not obvious *by inspecting the package* which API is intended to be public and which is intended to be private, for example:
+Python 패키지에는 [공개 TFF API](#public-tff-api)와 [비공개 TFF API](#private-tff-api)가 모두 포함되어 있으며, 어떤 API가 공개이고 어떤 API가 비공개인지는 *패키지를 검사*해도 불분명합니다. 예를 들면, 다음과 같습니다.
 
 ```python
 import tensorflow_federated as tff
@@ -35,112 +35,112 @@ tff.Computation  # Public TFF API
 tff.proto.v0.computation_pb2.Computation  # Private TFF API
 ```
 
-Therefore, it is useful to keep the [TFF API documentation](https://www.tensorflow.org/federated/api_docs/python/tff) in mind when using TFF.
+따라서, TFF를 사용할 때는 [TFF API 설명서](https://www.tensorflow.org/federated/api_docs/python/tff)를 염두에 두는 것이 유용합니다.
 
-### Diagram
+### 다이어그램
 
 ```dot
 <!--#include file="package_structure.dot"-->
 ```
 
-The **green** nodes indicate directories that are part of the [TFF repository](https://github.com/tensorflow/federated) on [GitHub](https://github.com) that use the [public TFF API](#public-tff-api).
+**녹색** 노드는 [공개 TFF API](https://github.com/tensorflow/federated)를 사용하는 [GitHub](https://github.com)에서 [TFF 리포지토리](https://github.com/tensorflow/federated)의 일부인 디렉토리를 나타냅니다.
 
 **파란색** 노드는 [공개 TFF API](#public-tff-api)의 일부인 패키지를 나타냅니다.
 
 **회색** 노드는 [공개 TFF API](#public-tff-api)의 일부가 아닌 디렉토리 또는 패키지를 나타냅니다.
 
-## Details
+## 세부 사항
 
-### Using TFF
+### TFF 사용하기
 
 #### 연구
 
-The `research/` subdirectory has been moved to the [`federated_research`](https://github.com/google-research/federated) repository, which contains research projects that use TFF.
+`research/` 하위 디렉토리가 TFF를 사용하는 연구 프로젝트가 포함 된 [`federated_research`](https://github.com/google-research/federated) 리포지토리로 이동되었습니다.
 
-#### Examples
+#### 예제
 
-The [examples](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/examples) directory contains examples of how to use TFF.
+[examples](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/examples) 디렉토리에는 TFF 사용 방법의 예가 포함되어 있습니다.
 
 #### 테스트
 
-The [tests](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/tests) directory contains end-to-end tests of the TFF Python package.
+[tests](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/tests) 디렉토리에는 TFF Python 패키지의 엔드 투 엔드 테스트가 포함되어 있습니다.
 
 ### TFF
 
-[tff](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/) The TensorFlow Federated library.
+[tff](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/), TensorFlow Federated 라이브러리입니다.
 
 #### TFF 시뮬레이션
 
-[simulation](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/simulation) Libraries for running Federated Learning simulations.
+[simulation](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/simulation), Federated Learning시뮬레이션을 실행하기 위한 라이브러리입니다.
 
-[simulation/datasets](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/simulation/datasets) Datasets for running Federated Learning simulations.
+[simulation/datasets](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/simulation/datasets), Federated Learning 시뮬레이션을 실행하기 위한 데이터세트입니다.
 
-[simulation/models](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/simulation/models) Models for running Federated Learning simulations.
+[simulation/models](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/simulation/models), Federated Learning 시뮬레이션을 실행하기 위한 모델입니다.
 
 #### TFF 학습
 
-[learning](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/learning) Libraries for using Federated Learning algorithms.
+[learning](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/learning), Federated Learning 알고리즘을 사용하기 위한 라이브러리입니다.
 
-[learning/framework](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/learning/framework) Libraries for developing Federated Learning algorithms.
+[learning/framework](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/learning/framework), Federated Learning 알고리즘을 개발하기 위한 라이브러리입니다.
 
-#### TFF Aggregators
+#### TFF 애그리게이터
 
-[aggregators](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/aggregators) Libraries for constructing federated aggregations.
+[aggregators](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/aggregators), 페더레이션 집계를 구성하기 위한 라이브러리입니다.
 
 #### TFF 코어
 
-[core](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core) package The TensorFlow Federated core library.
+[core](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core) 패키지, TensorFlow Federated 코어 라이브러리입니다.
 
-[core/backends](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends) Backends for constructing, compiling, and executing computations.
+[core/backends](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends), 계산을 구성, 컴파일 및 실행하기 위한 백엔드입니다.
 
-[core/native](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/native) Libraries for interacting with native backends.
+[core/native](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/native), 네이티브 백엔드와 상호 작용하기 위한 라이브러리입니다.
 
-[core/mapreduce](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce) Libraries for interacting with MapReduce-like backends.
+[core/mapreduce](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce), MapReduce와 유사한 백엔드와 상호 작용하기 위한 라이브러리입니다.
 
-[core/iree](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/iree) Libraries for interacting with IREE backends.
+[core/iree](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/iree), IREE 백엔드와 상호 작용하기 위한 라이브러리입니다.
 
-[core/templates](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/templates) Templates for commonly used computations.
+[core/templates](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/templates), 일반적으로 사용되는 계산을 위한 템플릿입니다.
 
-[core/utils](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/utils) Libraries for using and developing Federated algorithms.
+[core/utils](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/utils), Federated 알고리즘을 사용하고 개발하기 위한 라이브러리입니다.
 
-[core/test](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/test) Libraries for testing TensorFlow Federated.
+[core/test](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/test), TensorFlow Federated를 테스트하기 위한 라이브러리입니다.
 
-[core/api](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/api) Libraries for using the [TensorFlow Federated core library](#tff-core).
+[core/api](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/api), [TensorFlow Federated 코어 라이브러리](#tff-core)를 사용하기 위한 라이브러리입니다.
 
-[core/framework](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/framework) Libraries for extending the [TensorFlow Federated core library](#tff-core).
+[core/framework](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/framework), [TensorFlow Federated 코어 라이브러리](#tff-core)를 확장하기 위한 라이브러리입니다.
 
-#### TFF Impl
+#### TFF 구현
 
-[impl](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl) The implementation of the [TensorFlow Federated core library](#tff-core).
+[impl](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl), [TensorFlow Federated 코어 라이브러리](#tff-core)의 구현입니다.
 
-TODO(b/148163833): Some of the modules have not yet been moved from the [impl](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl) package to the approprate subpackage.
+TODO(b/148163833): 일부 모듈은 아직 [impl](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl) 패키지에서 적절한 하위 패키지로 이동되지 않았습니다.
 
-[impl/wrappers](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/wrappers) Decorators for constructing computations.
+[impl/wrappers](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/wrappers), 계산을 구성하기 위한 데코레이터입니다.
 
-[impl/executors](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/executors) Libraries for executing computations.
+[impl/executors](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/executors), 계산을 실행하기 위한 라이브러리입니다.
 
-[impl/federated_context](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/federated_context) Libraries for * a federated context.
+[impl/federated_context](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/federated_context), * 페더레이션 컨텍스트를 위한 라이브러리입니다.
 
-[impl/tensorflow_context](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/tensorflow_context) Libraries for * a TensorFlow context.
+[impl/tensorflow_context](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/tensorflow_context), * TensorFlow 컨텍스트를 위한 라이브러리입니다.
 
-[impl/computation](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/computation) Libraries for * a computation.
+[impl/computation](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/computation), * 계산을 위한 라이브러리입니다.
 
-[impl/compiler](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler) Libraries for compiling computations.
+[impl/compiler](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler), 계산을 컴파일하기 위한 라이브러리입니다.
 
-[impl/context_stack](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/context_stack) Libraries for * the context of a computation
+[impl/context_stack](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/context_stack), * 계산의 컨텍스트를 위한 라이브러리입니다.
 
-[impl/utils](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/utils) Libraries for use in TensorFlow Federated core library.
+[impl/utils](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/utils), TensorFlow Federated 코어 라이브러리에서 사용하기 위한 라이브러리입니다.
 
-[impl/types](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/types) Libraries for * the type of a computation.
+[impl/types](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/types), 계산의 * 유형을 위한 라이브러리입니다.
 
-#### TFF Proto
+#### TFF 프로토콜
 
-[proto](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/proto) Protobuf libraries for use in TensorFlow Federated core library.
+[proto](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/proto), TensorFlow Federated 코어 라이브러리에서 사용할 수 있는 Protobuf 라이브러리입니다.
 
-#### TFF Common Libs
+#### TFF 공통 라이브러리
 
-[common_libs](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/common_libs) Libraries that extend Python for use in TensorFlow Federated.
+[common_libs](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/common_libs), TensorFlow Federated에서 사용하기 위해 Python을 확장하는 라이브러리입니다.
 
-#### TFF Tensorflow Libs
+#### TFF Tensorflow 라이브러리
 
-[tensorflow_libs](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/tensorflow_libs) Libraries that extend TensorFlow for use in TensorFlow Federated.
+[tensorflow_libs](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/tensorflow_libs), TensorFlow Federated에서 사용하기 위해 TensorFlow를 확장하는 라이브러리입니다.
