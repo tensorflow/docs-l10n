@@ -8,14 +8,14 @@ TFX 명령줄 인터페이스(CLI)는 Apache Airflow, Apache Beam 및 Kubeflow P
 
 참고: TFX CLI는 현재 호환성 보장을 제공하지 않습니다. 새 버전이 출시되면 CLI 인터페이스가 변경될 수 있습니다.
 
-## About the TFX CLI
+## TFX CLI 정보
 
-The TFX CLI is installed as a part of the TFX package. All CLI commands follow the structure below:
+TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아래 구조를 따릅니다.
 
 <pre class="devsite-terminal">tfx <var>command-group</var> <var>command</var> <var>flags</var>
 </pre>
 
-The following <var>command-group</var> options are currently supported:
+현재 지원되는 <var>명령 그룹</var> 옵션은 다음과 같습니다.
 
 - [tfx pipeline](#tfx-pipeline) - TFX 파이프라인을 만들고 관리합니다.
 - [tfx run](#tfx-run) - 다양한 조정 플랫폼에서 TFX 파이프라인 실행을 생성하고 관리합니다.
@@ -29,7 +29,7 @@ The following <var>command-group</var> options are currently supported:
 
 ## tfx pipeline
 
-The structure for commands in the `tfx pipeline` command group is as follows:
+`tfx pipeline` 명령 그룹의 명령 구조는 다음과 같습니다.
 
 <pre class="devsite-terminal">tfx pipeline <var>command</var> <var>required-flags</var> [<var>optional-flags</var>]
 </pre>
@@ -121,7 +121,7 @@ The structure for commands in the `tfx pipeline` command group is as follows:
   <dt>--skaffold_cmd=<var>skaffold-cmd</var>
 </dt>
   <dd>
-    <p>       (Optional.) The path to <a href="https://skaffold.dev/" class="external">       Skaffold</a> on your computer.     </p>
+    <p>(선택 사항) 컴퓨터의 <a href="https://skaffold.dev/" class="external">Skaffold</a> 경로입니다.</p>
   </dd>
 
 
@@ -224,7 +224,7 @@ Kubeflow:
   <dt>--skaffold_cmd=<var>skaffold-cmd</var>
 </dt>
   <dd>
-    <p>       (Optional.) The path to <a href="https://skaffold.dev/" class="external">       Skaffold</a> on your computer.     </p>
+    <p>(선택 사항) 컴퓨터의 <a href="https://skaffold.dev/" class="external">Skaffold</a> 경로입니다.</p>
   </dd>
 
 
@@ -508,7 +508,7 @@ Kubeflow:
 
 ## tfx run
 
-The structure for commands in the `tfx run` command group is as follows:
+`tfx run` 명령 그룹의 명령 구조는 다음과 같습니다.
 
 <pre class="devsite-terminal">tfx run <var>command</var> <var>required-flags</var> [<var>optional-flags</var>]
 </pre>
@@ -752,7 +752,7 @@ Kubeflow:
 
 ### status
 
-Returns the current status of a run.
+실행의 현재 상태를 반환합니다.
 
 ** 중요 참고: 현재, Apache Beam에서는 지원되지 않습니다.
 
@@ -908,7 +908,7 @@ Kubeflow:
 
 ## tfx template [실험적]
 
-The structure for commands in the `tfx template` command group is as follows:
+`tfx template` 명령 그룹의 명령 구조는 다음과 같습니다.
 
 <pre class="devsite-terminal">tfx template <var>command</var> <var>required-flags</var> [<var>optional-flags</var>]
 </pre>
@@ -948,7 +948,7 @@ The structure for commands in the `tfx template` command group is as follows:
 
 ## TFX CLI 플래그 이해하기
 
-### Common flags
+### 공통 플래그
 
 <dl>
   <dt>--engine=<var>engine</var>
@@ -985,7 +985,7 @@ The structure for commands in the `tfx template` command group is as follows:
 
 
 
-### Kubeflow specific flags
+### Kubeflow 특정 플래그
 
 <dl>
   <dt>--endpoint=<var>endpoint</var>
