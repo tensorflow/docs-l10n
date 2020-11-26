@@ -1,8 +1,8 @@
-# Fairness Indicators
+# 공정성 지표
 
 공정성 지표는 보다 광범위한 Tensorflow 도구 키트와 함께 사용하여 공정성 문제에 대한 모델을 평가하고 개선하는 팀을 지원하도록 설계되었습니다. 이 도구는 현재 많은 제품에서 내부적으로 활발히 사용되고 있고, 이제 베타 버전으로 제공되므로 고유한 사례에 직접 사용해볼 수 있는 기회가 생겼습니다.
 
-![Fairness Indicator Dashboard](images/fairnessIndicators.png)
+![공정성 지표 대시 보드](images/fairnessIndicators.png)
 
 ## 공정성 지표란?
 
@@ -19,7 +19,7 @@
 
 [](http://www.youtube.com/watch?v=pHT-ImFXPQo)![](http://img.youtube.com/vi/pHT-ImFXPQo/0.jpg)
 
-The pip package download includes:
+pip 패키지 다운로드에는 다음이 포함됩니다.
 
 - **[Tensorflow Data Validation(TFDV)](https://www.tensorflow.org/tfx/data_validation/get_started)**
 - **[Tensorflow Model Analysis(TFMA)](https://www.tensorflow.org/tfx/model_analysis/get_started)**
@@ -28,11 +28,11 @@ The pip package download includes:
 
 ## Tensorflow 모델에서 공정성 지표 사용하기
 
-### Data
+### 데이터
 
 TFMA를 사용하여 공정성 지표를 실행하려면 평가 데이터세트에 분할하려는 특성에 대한 레이블이 지정되어 있어야 합니다. 공정성 문제에 대한 정확한 조각 특성이 없는 경우, 해당하는 평가 세트를 찾거나 결과 불일치를 부각시킬 수 있는 특성 세트 내에서 프록시 특성을 고려할 수 있습니다. 자세한 지침은 [여기](/tfx/fairness_indicators/guidance)를 참조하세요.
 
-### Model
+### 모델
 
 Tensorflow Estimator 클래스를 사용하여 모델을 빌드할 수 있습니다. Keras 모델에 대한 지원이 TFMA에 곧 제공될 예정입니다. Keras 모델에서 TFMA를 실행하려면, 아래 "모델에 구애받지 않는 TFMA" 섹션을 참조하세요.
 
@@ -107,7 +107,7 @@ from tensorflow_model_analysis.addons.fairness.view import widget_view
 widget_view.render_fairness_indicator(eval_result=eval_result)
 ```
 
-![Fairness Indicators](images/fairnessIndicators.png)
+![공정성 지표](images/fairnessIndicators.png)
 
 공정성 지표 사용을 위한 팁:
 
@@ -132,7 +132,7 @@ multi_eval_results = {"MyFirstModel": eval_result1, "MySecondModel": eval_result
 widget_view.render_fairness_indicator(multi_eval_results=multi_eval_results)
 ```
 
-![Fairness Indicators - Model Comparison](images/fairnessIndicatorsCompare.png)
+![공정성 지표-모델 비교](images/fairnessIndicatorsCompare.png)
 
 임계값 비교와 함께 모델 비교를 사용할 수 있습니다. 예를 들어, 두 임계값 세트에서 두 모델을 비교하여 공정성 메트릭에 대한 최적의 조합을 찾을 수 있습니다.
 
@@ -142,7 +142,7 @@ widget_view.render_fairness_indicator(multi_eval_results=multi_eval_results)
 
 머신러닝 시스템을 평가하려는 사람은 누구나 이 라이브러리를 사용할 수 있습니다. 특히, TensorFlow 기반이 아닌 모델을 사용하는 경우에 유용합니다. Apache Beam Python SDK를 사용하면 독립형 TFMA 평가 바이너리를 만든 다음 실행하여 모델을 분석할 수 있습니다.
 
-### Data
+### 데이터
 
 이 단계에서는 평가를 실행할 데이터세트를 제공합니다. 이 데이터세트는 레이블, 예측값 및 조각으로 분할하려는 기타 특성이 있는 [tf.Example](https://www.tensorflow.org/tutorials/load_data/tfrecord) proto 형식이어야 합니다.
 
@@ -165,7 +165,7 @@ tf.Example {
 }
 ```
 
-### Model
+### 모델
 
 모델을 지정하는 대신, 모델에 구애받지 않는 평가 구성과 추출기를 생성하여 TFMA가 메트릭을 계산하는 데 필요한 데이터를 구문 분석하고 제공합니다. [ModelAgnosticConfig](https://github.com/tensorflow/model-analysis/blob/master/tensorflow_model_analysis/model_agnostic_eval/model_agnostic_predict.py) 사양은 입력 예에서 사용할 특성, 예측값 및 레이블을 정의합니다.
 
@@ -238,7 +238,7 @@ eval_result = tensorflow_model_analysis.load_eval_result(output_path=tfma_eval_r
 
 마지막으로, 위의 "공정성 지표 렌더링하기" 섹션의 지침에 따라 공정성 지표를 렌더링합니다.
 
-## More Examples
+## 더 많은 예
 
 [공정성 지표 예제 디렉토리](https://github.com/tensorflow/fairness-indicators/tree/master/fairness_indicators/examples)에 몇 가지 예제가 포함되어 있습니다.
 
