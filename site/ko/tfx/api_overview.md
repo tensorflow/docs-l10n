@@ -19,8 +19,8 @@
 
 ## 서비스 제공
 
-- [Client API (REST)](serving/api_rest/)
-- [Server API (C++)](serving/api_docs/cc/)
+- [Client API(REST)](serving/api_rest/)
+- [Server API(C++)](serving/api_docs/cc/)
 
 ## ML 메타데이터
 
