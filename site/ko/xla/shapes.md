@@ -4,9 +4,9 @@ XLA `Shape` proto([xla_data.proto](https://www.tensorflow.org/code/tensorflow/co
 
 ## 용어, 표기법 및 규칙
 
-- The rank of an array is equal to the number of dimensions. The *true rank* of an array is the number of dimensions which have a size greater than 1.
+- 배열의 랭크는 차원의 수와 같습니다. 배열의 *실제 랭크*는 크기가 1보다 큰 차원의 수입니다.
 
-- Dimensions are numbered from `0` up to `N-1` for an `N` dimensional array. The dimension numbers are arbitrary labels for convenience. The order of these dimension numbers does not imply a particular minor/major ordering in the layout of the shape. The layout is determined by the `Layout` proto.
+- 차원에는 `N` 차원 배열에 대해 `0`부터 `N-1`까지 번호가 매겨집니다. 편의를 위해, 임의의 레이블이 차원 번호로 이용됩니다. 이러한 차원 번호의 순서는 형상의 레이아웃에서 특정한 마이너/메이저 순서를 의미하지 않습니다. 레이아웃은 `Layout` proto에 의해 결정됩니다.
 
 - 관례적으로, 차원은 차원 번호의 오름차순으로 나열됩니다. 예를 들어, 크기가 `[A x B x C]`인 3차원 배열의 경우, 차원 0은 크기가 `A`이고, 차원 1은 크기가 `B`이며, 차원 2는 크기가 `C`입니다.
 
@@ -77,7 +77,7 @@ a b c d e f
 
 #### 기본 마이너-메이저 순서
 
-The default layout for newly created Shapes is "dimension order is major-to-minor" (akin to row-major at rank 2).
+새로 생성된 형상의 기본 레이아웃은 "메이저-마이너의 차원 순서"입니다(랭크 2의 행-메이저와 유사).
 
 ### 채우기
 
