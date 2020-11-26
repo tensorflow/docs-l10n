@@ -2,7 +2,7 @@
 
 이 문서는 XLA "사용자 정의 호출"을 작성하고 사용하는 방법을 설명합니다. 사용자 정의 호출을 사용하면 XLA 프로그램에서 C++ 또는 CUDA와 같은 프로그래밍 언어로 작성된 코드를 호출할 수 있습니다.
 
-Warning: Custom calls are a low-level power-user feature. It is easy to break your program in difficult-to-debug (and even difficult-to-notice) ways using custom-calls. You shouldn't use custom calls unless you're prepared to debug XLA yourself when something goes wrong, and you should expect relatively less assistance from XLA developers if you run into trouble.
+경고: 사용자 정의 호출은 낮은 수준의 고급 사용자를 위한 기능입니다. 사용자 정의 호출을 사용하면 프로그램 작동이 멈춰도 디버깅하기 어렵고 찾기도 쉽지 않다는 것을 알고 있어야 합니다. 따라서, 문제가 발생했을 때 XLA를 직접 디버깅할 준비가 되어 있지 않다면 사용자 정의 호출을 사용하지 않아야 하며 실제로 문제가 발생했을 때 XLA 개발자로부터 받을 수 있는 지원도 제한된다는 것을 예상해야 합니다.
 
 경고: 사용자 정의 호출 API/ABI는 아직 안정적이지 않습니다. 불규칙적으로 바꿀 의도는 없지만 바뀔 수는 있습니다. 가능한 향후 변경 사항이 아래에 설명되어 있습니다.
 
