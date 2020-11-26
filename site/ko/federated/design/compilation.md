@@ -8,7 +8,7 @@
 
 TFF의 추상 구문 트리(AST)는 페더레이션 계산의 구조를 설명합니다.
 
-### Building Block
+### 빌딩 블록
 
 [building_block.ComputationBuildingBlock](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler/building_blocks.py)은 [AST](#ast)의 Python 표현입니다.
 
@@ -20,11 +20,11 @@ TFF의 추상 구문 트리(AST)는 페더레이션 계산의 구조를 설명�
 
 [pb.Computation](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/proto/v0/computation.proto)은 [AST](#ast)의 Proto 또는 직렬화된 표현입니다.
 
-#### TensorFlow Computation
+#### TensorFlow 계산
 
 [TensorFlow](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/proto/v0/computation.proto) 런타임에 위임될 [Computations](#computation)을 나타내는 [pb.Computation](execution.md#tensorflow)입니다.
 
-## Transformation
+## 변환
 
 변환(transformation)은 변경 모음을 적용한 후 주어진 AST의 새 [AST](#ast)를 구성합니다. 변환은 AST의 Python 표현을 변환하기 위해 [빌딩 블록](#building-block)에서 작동하거나 `tf.Graph`를 변환하기 위해 [TensorFlow 계산](#tensorFlow-computation)에서 작동할 수 있습니다.
 
@@ -40,7 +40,7 @@ TFF의 추상 구문 트리(AST)는 페더레이션 계산의 구조를 설명�
 
 [tensorflow_computation_transformations](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler/tensorflow_computation_transformations.py) 모듈에는 원자 [TensorFlow computation](#tensorflow-computation) 변환이 포함되어 있습니다.
 
-The [compiled_computation_transforms](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler/compiled_computation_transforms.py) module contains atomic and composite [Compiled Computation](#compiled-computation) transformations.
+[compile_computation_transforms](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler/compiled_computation_transforms.py) 모듈에는 원자 및 복합 [Compiled Computation](#compiled-computation) 변환이 포함되어 있습니다.
 
 TODO(b/148163833): `compiled_computation_transforms`를 [building block](#building-block) 변환과 [TensorFlow computation](#tensorflow-computation) 변환으로 리팩터링합니다.
 
@@ -48,9 +48,9 @@ TODO(b/148163833): `compiled_computation_transforms`를 [building block](#buildi
 
 TODO(b/148163833): `tree_to_cc_transformations` 모듈의 이름을 이해하기 더 쉬운 이름(예: `sdd_transformations`)으로 변경합니다.
 
-The [transformation_utils](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler/transformation_utils.py) module contains functions, traversal logic, and data structures used by other transformation modules.
+[transformation_utils](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler/transformation_utils.py) 모듈에는 다른 변환 모듈에서 사용하는 함수, 순회 논리 및 데이터 구조가 포함됩니다.
 
-## Compiler
+## 컴파일러
 
 컴파일러는 실행할 수 있는 양식을 구성하는 [transformations](#transformation) 모음입니다.
 
