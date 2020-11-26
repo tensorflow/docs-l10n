@@ -18,7 +18,7 @@ def add_one(x):  # 1
 result = add_one(2) # 4
 ```
 
-1. Write a *Python* function.
+1. *Python* 함수를 작성합니다.
 
 2. `@tff.tf_computation`으로 *Python* 함수를 데코레이팅합니다.
 
@@ -26,7 +26,7 @@ result = add_one(2) # 4
 
 3. TFF [context](context.md)를 설정합니다.
 
-4. Invoke the *Python* function.
+4. *Python* 함수를 호출합니다.
 
 **TFF 관점:**
 
