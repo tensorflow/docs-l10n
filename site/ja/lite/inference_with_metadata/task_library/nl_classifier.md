@@ -4,7 +4,7 @@ Task Library の`NLClassifier` API は、入力テキストをさまざまなカ
 
 ## NLClassifier API の主な機能
 
-- Takes a single string as input, performs classification with the string and outputs <Label, Score> pairs as classification results.
+- 単一の文字列を入力として受け取り、その文字列で分類を実行し、分類の結果として <Label、Score> のペアを出力します。
 
 - 入力テキストの正規表現トークン化（オプション）。
 
@@ -18,15 +18,15 @@ Task Library の`NLClassifier` API は、入力テキストをさまざまなカ
 
 - [テキスト分類用 TensorFlow Lite Model Maker ](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification)によって作成された`average_word_vec` 仕様のモデル。
 
-- Custom models that meet the [model compatibility requirements](#model-compatibility-requirements).
+- [モデルの互換性要件](#model-compatibility-requirements)を満たすカスタムモデル。
 
-## Run inference in Java
+## Java で推論を実行する
 
 Android アプリケーションで`NLClassifier`を使用する方法の例については、[テキスト分類リファレンスアプリ](https://github.com/tensorflow/examples/blob/master/lite/examples/text_classification/android/lib_task_api/src/main/java/org/tensorflow/lite/examples/textclassification/client/TextClassificationClient.java)を参照してください。
 
-### Step 1: Import Gradle dependency and other settings
+### ステップ 1: Gradle の依存関係とその他の設定をインポートする
 
-Copy the `.tflite` model file to the assets directory of the Android module where the model will be run. Specify that the file should not be compressed, and add the TensorFlow Lite library to the module’s `build.gradle` file:
+`.tflite`モデルファイルを、モデルが実行される Android モジュールのアセットディレクトリにコピーします。ファイルを圧縮しないように指定し、TensorFlow Lite ライブラリをモジュールの`build.gradle`ファイルに追加します。
 
 ```java
 android {
@@ -47,7 +47,7 @@ dependencies {
 }
 ```
 
-### Step 2: Run inference using the API
+### ステップ 2: API を使用して推論を実行する
 
 ```java
 // Initialization, use NLClassifierOptions to configure input and output tensors
@@ -88,9 +88,9 @@ let nlClassifier = TFLNLClassifier.nlClassifier(
 let categories = nlClassifier.classify(text: input)
 ```
 
-See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/text/nlclassifier/Sources/TFLNLClassifier.h) for more details.
+詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/nl_classifier.h)をご覧ください。
 
-## Run inference in C++
+## C++ で推論を実行する
 
 注意: C++ タスクライブラリでは、使いやすさを向上するために構築済みのバイナリを提供したり、ユーザーフレンドリーなワークフローを作成してソースコードから構築できるようしています。C++ API は変更される可能性があります。
 
@@ -109,7 +109,7 @@ std::vector<core::Category> categories = classifier->Classify(kInput);
 
 詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/nl_classifier.h)をご覧ください。
 
-## Example results
+## 結果の例
 
 これは、[映画レビューモデル](https://www.tensorflow.org/lite/models/text_classification/overview)の分類結果の例です。
 
@@ -124,7 +124,7 @@ category[1]: 'Positive' : '0.18687'
 
 独自のモデルとテストデータを使用して、シンプルな [NLClassifier 用 CLI デモツール](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/examples/task/text/desktop/README.md#nlclassifier)をお試しください。
 
-## Model compatibility requirements
+## モデルの互換性要件
 
 ユースケースに応じて、`NLClassifier` API は、[TFLite モデルメタデータ](../../convert/metadata.md)の有無にかかわらず TFLite モデルを読み込めます。
 
