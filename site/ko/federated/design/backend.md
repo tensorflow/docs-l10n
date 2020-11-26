@@ -2,43 +2,43 @@
 
 [TOC]
 
-A backend is the composition of a [compiler](compilation.md#compiler) and a [runtime](execution.md#runtime) in a [Context](context.md#context) used to [construct](tracing.md), [compile](compilation.md), and [execute](execution.md) an [AST](compilation.md#ast), meaning a backend constructs environments that evaluate an AST.
+백엔드는 [AST](compilation.md#ast)를 [구성](tracing.md), [컴파일](compilation.md) 및 [실행](execution.md)하는 데 사용되는 [Context](context.md#context)에서 [컴파일러](compilation.md#compiler)와 [런타임](execution.md#runtime)으로 구성됩니다. 즉, 백엔드가 AST를 평가하는 환경을 구성합니다.
 
-The [backends](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends) package contains backends which may extend the TFF compiler and/or the TFF runtime; these extensions can be found in the corresponding backend.
+[백엔드](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends) 패키지에는 TFF 컴파일러 및/또는 TFF 런타임을 확장할 수 있는 백엔드가 포함되어 있습니다. 이들 확장은 해당 백엔드에서 찾을 수 있습니다.
 
-If the [runtime](execution.md#runtime) of a backend is implemented as an [execution stack](execution.md#execution-stack), then the backend can construct an [ExecutionContext](context.md#executioncontext) to provide TFF with an environemnt in which to evaluate an AST. In this case, the backend is integrating with TFF using the high-level abstraction. However, if the runtime is *not* implemented as an execution stack, then the backend will need to construct a [Context](context.md#context) and is integrating with TFF using the low-level abstraction.
+백엔드의 [런타임](execution.md#runtime)이 [실행 스택](execution.md#execution-stack)으로 구현되면, 백엔드는 [ExecutionContext](context.md#executioncontext)를 구성하여 AST를 평가할 환경을 TFF에 제공할 수 있습니다. 이 경우 백엔드는 높은 수준의 추상화를 사용하여 TFF와 통합됩니다. 그러나 런타임이 실행 스택으로 구현*되지 않은* 경우, 백엔드는 [컨텍스트](context.md#context)를 구성해야 하며 하위 수준의 추상화를 사용하여 TFF와 통합됩니다.
 
 ```dot
 <!--#include file="backend.dot"-->
 ```
 
-The **blue** nodes are provided by TFF [core](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core).
+**파란색** 노드는 TFF [코어](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core)에서 제공됩니다.
 
-The **green**, **red**, **yellow**, and **purple** nodes are provided by the [native](#native), [mapreduce](#mapreduce), [iree](#iree), and [reference](#reference) backends respectively.
+**녹색** , **빨간색** , **노란색** 및 **보라색** 노드는 각각 [native](#native), [mapreduce](#mapreduce), [iree](#iree) 및 [reference](#reference) 백엔드에서 제공됩니다.
 
-The **dashed** nodes are provided by an external system.
+**점선** 노드는 외부 시스템에서 제공됩니다.
 
 **실선** 화살표는 관계를 나타내고 **점선** 화살표는 상속을 나타냅니다.
 
 ## Native
 
-The [native](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/native) backend composes of the TFF compiler and TFF runtime in order to compile and execute an AST in a way that is reasonably efficiant and debuggable.
+[native](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/native) 백엔드는 합리적인 수준에서 효율적이고 디버깅 가능한 방식으로 AST를 컴파일하고 실행하기 위해 TFF 컴파일러와 TFF 런타임으로 구성됩니다.
 
 ### 네이티브 형식
 
-A native form is an AST that is topologically sorted into a directed acyclic graph (DAG) of TFF intrinsics with some optimizations to the dependency of those intrinsics.
+네이티브 형식은 토폴로지별로 TFF 내장 함수의 방향성 비순환 그래프(DAG)로 정렬된 AST이며, 내장 함수의 종속성에 대한 최적화가 있습니다.
 
 ### 컴파일러
 
-The [compiler.transform_to_native_form](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/native/compiler.py) function compiles an AST into a [native form](#native-form).
+[compiler.transform_to_native_form](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/native/compiler.py) 함수는 AST를 [네이티브 형식](#native-form)으로 컴파일합니다.
 
-### Runtime
+### 런타임
 
-The native backend does not contain backend specific extentions to the TFF runtime, instead an [execution stack](execution.md#execution-stack) can be used directly.
+기본 백엔드에는 TFF 런타임에 대한 백엔드별 확장이 포함되지 않고 대신 [실행 스택](execution.md#execution-stack)을 직접 사용할 수 있습니다.
 
-### Context
+### 컨텍스트
 
-A native context is an [ExecutionContext](context.md#executioncontext) constructed with a native compiler (or no compiler) and a TFF runtime, for example:
+네이티브 컨텍스트는 네이티브 컴파일러(또는 컴파일러 없음) 및 TFF 런타임으로 구성된 [ExecutionContext](context.md#executioncontext)입니다. 예를 들면, 다음과 같습니다.
 
 ```python
 executor = eager_tf_executor.EagerTFExecutor()
@@ -51,48 +51,48 @@ set_default_context.set_default_context(context)
 
 그러나 몇 가지 일반적인 구성이 있습니다.
 
-The [execution_context.set_local_execution_context](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/native/execution_context.py) function constructs an `ExecutionContext` with a native compiler and a [local execution stack](execution.md#local-execution-stack).
+[execution_context.set_local_execution_context](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/native/execution_context.py) 함수는 네이티브 컴파일러 및 [로컬 실행 스택](execution.md#local-execution-stack)을 사용하여 `ExecutionContext`를 구성합니다.
 
 ## MapReduce
 
-The [mapreduce](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce) backend contains the data structures and compiler required to construct a form that can be executed on MapReduce-like runtimes.
+[mapreduce](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce) 백엔드에는 MapReduce와 유사한 런타임에서 실행할 수 있는 형식을 구성하는 데 필요한 데이터 구조와 컴파일러가 포함되어 있습니다.
 
 ### `CanonicalForm`
 
-A [forms.CanonicalForm](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce/forms.py) is a data structure defining the representation of logic that can be executed on MapReduce-like runtimes. This logic is organized as a collection of TensorFlow functions, see the [forms](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce/forms.py) module for more information about the nature of these functions.
+[Forms.CanonicalForm](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce/forms.py)은 MapReduce와 유사한 런타임에서 실행할 수 있는 논리의 표현을 정의하는 데이터 구조입니다. 이 로직은 TensorFlow 함수의 모음으로 구성됩니다. 함수의 특성에 대한 자세한 내용은 [forms](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce/forms.py) 모듈을 참조하세요.
 
 ### 컴파일러
 
-The [transformations](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce/transformations.py) module contains [Building Block](compilation.md#building-block) and [TensorFlow Computation](compilation.md#tensorflow-computation) transformations required to compile an AST to a [CanonicalForm](#canonicalform).
+[transforms](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce/transformations.py) 모듈에는 AST를 [CanonicalForm](#canonicalform)으로 컴파일하는 데 필요한 [구성 요소](compilation.md#building-block) 및 [TensorFlow 계산](compilation.md#tensorflow-computation) 변환이 포함되어 있습니다.
 
-The [form_utils](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce/form_utils.py) module contains the compiler for the MapReduce backend and constructs a [CanonicalForm](#canonicalform).
+[form_utils](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/mapreduce/form_utils.py) 모듈은 MapReduce 백엔드용 컴파일러를 포함하고 [CanonicalForm](#canonicalform)을 구성합니다.
 
-### Runtime
+### 런타임
 
-A MapReduce runtime is not provided by TFF, instead this should be provided by an external MapReduce-like system.
+MapReduce 런타임은 TFF에서 제공하지 않습니다. 대신 외부 MapReduce와 유사한 시스템에서 제공해야 합니다.
 
-### Context
+### 컨텍스트
 
 MapReduce 컨텍스트는 TFF에서 제공하지 않습니다.
 
 ## IREE
 
-[IREE](https://github.com/google/iree) is an experimental compiler backend for [MLIR](https://mlir.llvm.org/).
+[IREE](https://github.com/google/iree)는 [MLIR](https://mlir.llvm.org/)를 위한 실험용 컴파일러 백엔드입니다.
 
 [iree](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/iree) 백엔드에는 AST를 실행하는 데 필요한 데이터 구조, 컴파일러 및 런타임이 포함됩니다.
 
 ### 컴파일러
 
-The [compiler](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/iree/compiler.py) module contains transformations required to comiple an AST to a form that can be exected using an [executor.IreeExecutor](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/iree/executor.py).
+[컴파일러](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/iree/compiler.py) 모듈에는 [executor.IreeExecutor](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/iree/executor.py)를 사용하여 예상할 수 있는 형식으로 AST를 컴파일하는 데 필요한 변환이 포함되어 있습니다.
 
-### Runtime
+### 런타임
 
-The [executor.IreeExecutor](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/iree/executor.py) is an [Executor](execution.md#executor) that executes computations by delegating to an IREE runtime. This executor can be composed with other [Executors](execution.md#executor) from the TFF runtime in order to construct an [execution stack](execution.md#execution-stack) representing an IREE runtime.
+[executor.IreeExecutor](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/iree/executor.py)는 IREE 런타임에 위임하여 계산을 실행하는 [Executor](execution.md#executor)입니다. 이 실행기는 IREE 런타임을 나타내는 [실행 스택](execution.md#execution-stack)을 구성하기 위해 TFF 런타임의 다른 [실행기](execution.md#executor)와 함께 구성될 수 있습니다.
 
-### Context
+### 컨텍스트
 
-An iree context is [ExecutionContext](context.md#executioncontext) constructed with an iree compiler and an [execution stack](execution.md#execution-stack) with an [executor.IreeExecutor](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/iree/executor.py) delegating to an external IREE runtime.
+iree 컨텍스트는 외부 IREE 런타임에 위임하는 [executor.IreeExecutor](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/iree/executor.py)가 있는 [실행 스택](execution.md#execution-stack)과 iree 컴파일러로 구성된 [ExecutionContext](context.md#executioncontext)입니다.
 
 ## 참고
 
-A [reference_context.ReferenceContext](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/reference/reference_context.py) is a [context_base.Context](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/context_stack/context_base.py) that compiles and executes ASTs. Note that the `ReferenceContext` does not inherit from [execution_context.ExecutionContext](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/executors/execution_context.py) and the runtime is not implemented as an [execution stack](execution.md#execution-stack); instead the compiler and runtime are trivially implemented inline in the `ReferenceContext`.
+[reference_context.ReferenceContext](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/backends/reference/reference_context.py)는 AST를 컴파일하고 실행하는 [context_base.Context](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/context_stack/context_base.py)입니다. `ReferenceContext`는 [execution_context.ExecutionContext](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/executors/execution_context.py)에서 상속되지 않으며 런타임은 [실행 스택](execution.md#execution-stack)으로 구현되지 않습니다. 대신 컴파일러와 런타임은 `ReferenceContext`에서 간단하게 인라인으로 구현됩니다.
