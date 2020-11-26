@@ -15,7 +15,7 @@ TensorFlow Hub 리포지토리에서 컬렉션 파일의 올바른 위치는 다
 Collection of visual representations that have been evaluated on the VTAB
 benchmark.
 
-<!-- module-type: image-feature-vector -->
+
 
 ## Overview
 This is the list of visual representations in TensorFlow Hub that have been
