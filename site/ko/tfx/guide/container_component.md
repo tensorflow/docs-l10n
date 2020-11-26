@@ -4,7 +4,7 @@
 
 TFX 파이프라인을 처음 사용하는 경우, [TFX 파이프라인의 핵심 개념에 대해 자세히 알아보세요](understanding_tfx_pipelines).
 
-## Creating a Container-based Component
+## 컨테이너 기반 구성 요소 만들기
 
 컨테이너 기반 구성 요소는 컨테이너화된 명령줄 프로그램의 지원을 받습니다. 이미 컨테이너 이미지가 있는 경우에는 [`create_container_component` 함수](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/component/experimental/container_component.py){: .external}를 사용하여 입력 및 출력을 선언함으로써 TFX를 사용하여 이 이미지로부터 구성 요소를 만들 수 있습니다. 함수 매개변수는 다음과 같습니다.
 
@@ -27,7 +27,7 @@ TFX 파이프라인을 처음 사용하는 경우, [TFX 파이프라인의 핵�
 
 [TFX 구성 요소 명령줄 자리 표시자](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/component/experimental/placeholders.py){: .external}에 대해 자세히 알아보세요.
 
-### Example Container-based Component
+### 컨테이너 기반 구성 요소의 예
 
 다음은 데이터를 다운로드, 변환 및 업로드하는 비 Python 구성 요소의 예입니다.
 
