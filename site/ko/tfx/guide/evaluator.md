@@ -22,7 +22,7 @@ Evaluator 파이프라인 구성 요소는 일반적으로 배포가 매우 쉽�
 
 Evaluator를 설정하려면 다음 정보가 필요합니다.
 
-- Metrics to configure (only reqired if additional metrics are being added outside of those saved with the model). See [Tensorflow Model Analysis Metrics](https://github.com/tensorflow/model-analysis/blob/master/g3doc/metrics.md) for more information.
+- 구성할 메트릭(모델과 함께 저장된 메트릭 외에 다른 메트릭이 추가되는 경우에만 필요함). 자세한 내용은 [Tensorflow 모델 분석 메트릭](https://github.com/tensorflow/model-analysis/blob/master/g3doc/metrics.md)을 참조하세요.
 - 구성할 슬라이스(슬라이스가 제공되지 않은 경우, 기본적으로 "전체" 슬라이스가 추가됨). 자세한 내용은 [Tensorflow 모델 분석 설정](https://github.com/tensorflow/model-analysis/blob/master/g3doc/setup.md)을 참조하세요.
 
 검증이 포함되는 경우, 다음 추가 정보가 필요합니다.
@@ -94,7 +94,7 @@ model_analyzer = components.Evaluator(
       eval_config=eval_config)
 ```
 
-The evaluator produces an [EvalResult](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma/EvalResult) (and optionally a [ValidationResult](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma/ValidationResult) if validation was used) that can be loaded using [TFMA](tfma.md). The following is an exmmple of how to load the results into a Jupyter notebook:
+Evaluator는 [TFMA](tfma.md)를 사용하여 로드할 수 있는 [EvalResult](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma/EvalResult) (및 검증이 사용된 경우 선택적으로 [ValidationResult](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma/ValidationResult))를 생성합니다. 다음은 결과를 Jupyter 노트북에 로드하는 방법을 보여주는 예입니다.
 
 ```
 import tensorflow_model_analysis as tfma
