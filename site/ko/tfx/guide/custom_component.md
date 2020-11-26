@@ -12,7 +12,7 @@ TFX 파이프라인을 처음 사용하는 경우, [TFX 파이프라인의 핵�
 
 완전 사용자 정의 구성 요소를 개발하려면 다음이 필요합니다.
 
-- A defined set of input and output artifact specifications for the new component. Specially, the types for the input artifacts should be consistent with the output artifact types of the components that produce the artifacts and the types for the output artifacts should be consistent with the input artifact types of the components that consume the artifacts if any.
+- 새 구성 요소에 대해 정의된 입력 및 출력 아티팩트 사양 세트. 특히, 입력 아티팩트의 유형은 아티팩트를 생성하는 구성 요소의 출력 아티팩트 유형과 일치해야 하며, 출력 아티팩트의 유형은 아티팩트를 소비하는 구성 요소의 입력 아티팩트 유형과 일치해야 합니다.
 - 새 구성 요소에 필요한, 아티팩트가 아닌 실행 매개변수
 
 ### ComponentSpec
@@ -46,7 +46,7 @@ class HelloComponentSpec(types.ComponentSpec):
 
 ### 실행기
 
-Next, write the executor code for the new component. Basically, a new subclass of `base_executor.BaseExecutor` needs to be created with its `Do` function overriden. In the `Do` function, the arguments `input_dict`, `output_dict` and `exec_properties` that are passed in map to `INPUTS`, `OUTPUTS` and `PARAMETERS` that are defined in ComponentSpec respectively. For `exec_properties`, the value can be fetched directly through a dictionary lookup. For artifacts in `input_dict` and `output_dict`, there are convenient functions available in [artifact_utils](https://github.com/tensorflow/tfx/blob/41823f91dbdcb93195225a538968a80ba4bb1f55/tfx/types/artifact_utils.py) class that can be used to fetch artifact instance or artifact uri.
+다음으로, 새 구성 요소의 실행기 코드를 작성합니다. 기본적으로, `base_executor.BaseExecutor`의 새 서브 클래스는 `Do` 함수를 재정의하여 생성해야 합니다. `Do` 함수에서, 전달되는 `input_dict`, `output_dict` 및 `exec_properties` 함수는 ComponentSpec에서 정의되는 `INPUTS`, `OUTPUTS` 및 `PARAMETERS`에 각각 매핑됩니다. `exec_properties`의 경우, 값은 사전 조회를 통해 직접 가져올 수 있습니다. `input_dict` 및 `output_dict` 아티팩트의 경우, 아티팩트 인스턴스 또는 아티팩트 uri를 가져오는 데 사용할 수 있는 [artifact_utils](https://github.com/tensorflow/tfx/blob/41823f91dbdcb93195225a538968a80ba4bb1f55/tfx/types/artifact_utils.py) 클래스에서 제공되는 편리한 함수들이 있습니다.
 
 ```python
 class Executor(base_executor.BaseExecutor):
