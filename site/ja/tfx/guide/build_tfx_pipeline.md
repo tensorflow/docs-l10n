@@ -20,15 +20,7 @@ TFX パイプラインが初めての方は、読み進める前に、[TFX パ�
 
 TFX パイプラインは、[`Pipeline` クラス](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/pipeline.py){: .external } を使って定義されます。次の例では、`Pipeline` クラスの使用方法を実演しています。
 
-<pre class="devsite-click-to-copy prettyprint">pipeline.Pipeline(
-    pipeline_name=<var>pipeline-name</var>,
-    pipeline_root=<var>pipeline-root</var>,
-    components=<var>components</var>,
-    enable_cache=<var>enable-cache</var>,
-    metadata_connection_config=<var>metadata-connection-config</var>,
-    beam_pipeline_args=<var>beam_pipeline_args</var>
-)
-</pre>
+<pre class="devsite-click-to-copy prettyprint">pipeline.Pipeline(<br>    pipeline_name=<var>pipeline-name</var>,<br>    pipeline_root=<var>pipeline-root</var>,<br>    components=<var>components</var>,<br>    enable_cache=<var>enable-cache</var>,<br>    metadata_connection_config=<var>metadata-connection-config</var>,<br>    beam_pipeline_args=<var>beam_pipeline_args</var><br>)</pre>
 
 上記のコードから、次の項目を置き換えてください。
 
@@ -72,14 +64,11 @@ TFX パイプラインテンプレートを使うと、事前構築済みのパ�
 
 1. 次のコマンドを実行して、TFX パイプラインテンプレートのリストを取得します。
 
-    <pre class="devsite-click-to-copy devsite-terminal">tfx template list
-    </pre>
+    <pre class="devsite-click-to-copy devsite-terminal">tfx template list</pre>
 
 2. リストからテンプレートを選択します。現在利用できるテンプレートは **taxi** のみです。選択したら、次のコマンドを実行します。
 
-    <pre class="devsite-click-to-copy devsite-terminal">tfx template copy --model=<var>template</var> --pipeline_name=<var>pipeline-name</var> \
-    --destination_path=<var>destination-path</var>
-    </pre>
+    <pre class="devsite-click-to-copy devsite-terminal">tfx template copy --model=<var>template</var> --pipeline_name=<var>pipeline-name</var> \<br>--destination_path=<var>destination-path</var></pre>
 
     上記のコードから、次の項目を置き換えてください。
 
@@ -110,8 +99,7 @@ TFX パイプラインテンプレートを使うと、事前構築済みのパ�
 
 2. pipeline ディレクトリで次のコマンドを実行します。
 
-    <pre class="devsite-click-to-copy devsite-terminal">python beam_dag_runner.py
-    </pre>
+    <pre class="devsite-click-to-copy devsite-terminal">python beam_dag_runner.py</pre>
 
     このコマンドは、Apache Beam を使ったパイプライン実行を作成し、パイプラインに次のディレクトリを追加します。
 
@@ -161,52 +149,7 @@ TFX パイプラインテンプレートを使うと、事前構築済みのパ�
 
 2. スクリプトファイルを作成して、次の例を参考にパイプラインを定義します。このガイドではこのファイルを `my_pipeline.py` を呼びます。
 
-    <pre class="devsite-click-to-copy prettyprint">import os
-    from typing import Optional, Text, List
-    from absl import logging
-    from ml_metadata.proto import metadata_store_pb2
-    from tfx.orchestration import metadata
-    from tfx.orchestration import pipeline
-    from tfx.orchestration.beam.beam_dag_runner import BeamDagRunner
-
-    PIPELINE_NAME = 'my_pipeline'
-    PIPELINE_ROOT = os.path.join('.', 'my_pipeline_output')
-    METADATA_PATH = os.path.join('.', 'tfx_metadata', PIPELINE_NAME, 'metadata.db')
-    ENABLE_CACHE = True
-
-    def create_pipeline(
-      pipeline_name: Text,
-      pipeline_root:Text,
-      enable_cache: bool,
-      metadata_connection_config: Optional[
-        metadata_store_pb2.ConnectionConfig] = None,
-      beam_pipeline_args: Optional[List[Text]] = None
-    ):
-      components = []
-
-      return pipeline.Pipeline(
-            pipeline_name=pipeline_name,
-            pipeline_root=pipeline_root,
-            components=components,
-            enable_cache=enable_cache,
-            metadata_connection_config=metadata_connection_config,
-            beam_pipeline_args=beam_pipeline_args,
-        )
-
-    def run_pipeline():
-      my_pipeline = create_pipeline(
-          pipeline_name=PIPELINE_NAME,
-          pipeline_root=PIPELINE_ROOT,
-          enable_cache=ENABLE_CACHE,
-          metadata_connection_config=metadata.sqlite_metadata_connection_config(METADATA_PATH)
-          )
-
-      BeamDagRunner().run(my_pipeline)
-
-    if __name__ == '__main__':
-      logging.set_verbosity(logging.INFO)
-      run_pipeline()
-    </pre>
+    <pre class="devsite-click-to-copy prettyprint">import os<br>from typing import Optional, Text, List<br>from absl import logging<br>from ml_metadata.proto import metadata_store_pb2<br>from tfx.orchestration import metadata<br>from tfx.orchestration import pipeline<br>from tfx.orchestration.beam.beam_dag_runner import BeamDagRunner<br><br>PIPELINE_NAME = 'my_pipeline'<br>PIPELINE_ROOT = os.path.join('.', 'my_pipeline_output')<br>METADATA_PATH = os.path.join('.', 'tfx_metadata', PIPELINE_NAME, 'metadata.db')<br>ENABLE_CACHE = True<br><br>def create_pipeline(<br>  pipeline_name: Text,<br>  pipeline_root:Text,<br>  enable_cache: bool,<br>  metadata_connection_config: Optional[<br>    metadata_store_pb2.ConnectionConfig] = None,<br>  beam_pipeline_args: Optional[List[Text]] = None<br>):<br>  components = []<br><br>  return pipeline.Pipeline(<br>        pipeline_name=pipeline_name,<br>        pipeline_root=pipeline_root,<br>        components=components,<br>        enable_cache=enable_cache,<br>        metadata_connection_config=metadata_connection_config,<br>        beam_pipeline_args=beam_pipeline_args,<br>    )<br><br>def run_pipeline():<br>  my_pipeline = create_pipeline(<br>      pipeline_name=PIPELINE_NAME,<br>      pipeline_root=PIPELINE_ROOT,<br>      enable_cache=ENABLE_CACHE,<br>      metadata_connection_config=metadata.sqlite_metadata_connection_config(METADATA_PATH)<br>      )<br><br>  BeamDagRunner().run(my_pipeline)<br><br>if __name__ == '__main__':<br>  logging.set_verbosity(logging.INFO)<br>  run_pipeline()</pre>
 
     以降のステップでは、`create_pipeline` でパイプラインを定義し、`run_pipeline` で Apache Beam を使ってパイプラインをローカル実行します。
 
@@ -228,45 +171,7 @@ TFX パイプラインテンプレートを使うと、事前構築済みのパ�
 
 3. ワークフローの最初のノードをパイプラインに追加します。この例のパイプラインは、`ExampleGen` 標準コンポーネントを使用して、`./data` にあるディレクトリから CSV を読み込みます。
 
-    <pre class="devsite-click-to-copy prettyprint">from tfx.components import CsvExampleGen
-    from tfx.utils.dsl_utils import external_input
-
-    DATA_PATH = os.path.join('.', 'data')
-
-    def create_pipeline(
-      pipeline_name: Text,
-      pipeline_root:Text,
-      data_path: Text,
-      enable_cache: bool,
-      metadata_connection_config: Optional[
-        metadata_store_pb2.ConnectionConfig] = None,
-      beam_pipeline_args: Optional[List[Text]] = None
-    ):
-      components = []
-
-      example_gen = CsvExampleGen(input=external_input(data_path))
-      components.append(example_gen)
-
-      return pipeline.Pipeline(
-            pipeline_name=pipeline_name,
-            pipeline_root=pipeline_root,
-            components=components,
-            enable_cache=enable_cache,
-            metadata_connection_config=metadata_connection_config,
-            beam_pipeline_args=beam_pipeline_args,
-        )
-
-    def run_pipeline():
-      my_pipeline = create_pipeline(
-          pipeline_name=PIPELINE_NAME,
-          pipeline_root=PIPELINE_ROOT,
-          data_path=DATA_PATH,
-          enable_cache=ENABLE_CACHE,
-          metadata_connection_config=metadata.sqlite_metadata_connection_config(METADATA_PATH)
-          )
-
-      BeamDagRunner().run(my_pipeline)
-    </pre>
+    <pre class="devsite-click-to-copy prettyprint">from tfx.components import CsvExampleGen<br>from tfx.utils.dsl_utils import external_input<br><br>DATA_PATH = os.path.join('.', 'data')<br><br>def create_pipeline(<br>  pipeline_name: Text,<br>  pipeline_root:Text,<br>  data_path: Text,<br>  enable_cache: bool,<br>  metadata_connection_config: Optional[<br>    metadata_store_pb2.ConnectionConfig] = None,<br>  beam_pipeline_args: Optional[List[Text]] = None<br>):<br>  components = []<br><br>  example_gen = CsvExampleGen(input=external_input(data_path))<br>  components.append(example_gen)<br><br>  return pipeline.Pipeline(<br>        pipeline_name=pipeline_name,<br>        pipeline_root=pipeline_root,<br>        components=components,<br>        enable_cache=enable_cache,<br>        metadata_connection_config=metadata_connection_config,<br>        beam_pipeline_args=beam_pipeline_args,<br>    )<br><br>def run_pipeline():<br>  my_pipeline = create_pipeline(<br>      pipeline_name=PIPELINE_NAME,<br>      pipeline_root=PIPELINE_ROOT,<br>      data_path=DATA_PATH,<br>      enable_cache=ENABLE_CACHE,<br>      metadata_connection_config=metadata.sqlite_metadata_connection_config(METADATA_PATH)<br>      )<br><br>  BeamDagRunner().run(my_pipeline)</pre>
 
     `CsvExampleGen` は、指定されたデータパスにある CSV のデータを使用してシリアル化されたサンプルレコードを作成します。`CsvExampleGen` コンポーネントの `input` パラメータを [`external_input`](https://github.com/tensorflow/tfx/blob/master/tfx/utils/dsl_utils.py){: .external } で設定することで、データパスがパイプラインに渡され、パスをアーティファクトとして保存することを指定します。
 
@@ -278,20 +183,6 @@ TFX パイプラインテンプレートを使うと、事前構築済みのパ�
 
     結果は次のようになります。
 
-    <pre>INFO:absl:Component CsvExampleGen depends on [].
-    INFO:absl:Component CsvExampleGen is scheduled.
-    INFO:absl:Component CsvExampleGen is running.
-    INFO:absl:Running driver for CsvExampleGen
-    INFO:absl:MetadataStore with DB connection initialized
-    INFO:absl:Running executor for CsvExampleGen
-    INFO:absl:Generating examples.
-    INFO:absl:Using 1 process(es) for Beam pipeline execution.
-    INFO:absl:Processing input csv data ./data/* to TFExample.
-    WARNING:root:Couldn't find python-snappy so the implementation of _TFRecordUtil._masked_crc32c is not as fast as it could be.
-    INFO:absl:Examples generated.
-    INFO:absl:Running publisher for CsvExampleGen
-    INFO:absl:MetadataStore with DB connection initialized
-    INFO:absl:Component CsvExampleGen is finished.
-    </pre>
+    <pre>INFO:absl:Component CsvExampleGen depends on [].<br>INFO:absl:Component CsvExampleGen is scheduled.<br>INFO:absl:Component CsvExampleGen is running.<br>INFO:absl:Running driver for CsvExampleGen<br>INFO:absl:MetadataStore with DB connection initialized<br>INFO:absl:Running executor for CsvExampleGen<br>INFO:absl:Generating examples.<br>INFO:absl:Using 1 process(es) for Beam pipeline execution.<br>INFO:absl:Processing input csv data ./data/* to TFExample.<br>WARNING:root:Couldn't find python-snappy so the implementation of _TFRecordUtil._masked_crc32c is not as fast as it could be.<br>INFO:absl:Examples generated.<br>INFO:absl:Running publisher for CsvExampleGen<br>INFO:absl:MetadataStore with DB connection initialized<br>INFO:absl:Component CsvExampleGen is finished.</pre>
 
 6. 続けて、繰り返しながらパイプラインにコンポーネントを追加します。
