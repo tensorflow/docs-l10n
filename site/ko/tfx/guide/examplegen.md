@@ -1,6 +1,6 @@
 # ExampleGen TFX 파이프라인 구성 요소
 
-The ExampleGen TFX Pipeline component ingests data into TFX pipelines. It consumes external files/services to generate Examples which will be read by other TFX components. It also provides consistent and configurable partition, and shuffles the dataset for ML best practice.
+ExampleGen TFX Pipeline 구성 요소는 데이터를 TFX 파이프라인으로 입력합니다. 이 구성 요소는 외부 파일/서비스를 사용하여 다른 TFX 구성 요소에서 읽을 예제를 생성합니다. 또한, 일관되고 구성 가능한 파티션을 제공하고 ML 모범 사례를 위해 데이터세트를 섞습니다.
 
 - 입력: CSV, `TFRecord` , Avro, Parquet 및 BigQuery와 같은 외부 데이터 소스의 데이터
 - 출력: 페이로드 형식에 따라 `tf.Example` 레코드, `tf.SequenceExample` 레코드 또는 proto 형식
@@ -11,7 +11,7 @@ ExampleGen은 [SchemaGen](schemagen.md), [StatisticsGen](statsgen.md) 및 [Examp
 
 ## How to use an ExampleGen Component
 
-For supported data sources (currently, CSV files, TFRecord files with `tf.Example`, `tf.SequenceExample` and proto format, and results of BigQuery queries) the ExampleGen pipeline component can be used directly in deploy and requires little customization. For example:
+지원되는 데이터 소스(현재는 CSV 파일, tf.Example, `tf.SequenceExample` 및 proto 형식이 포함된 `tf.Example` 파일, 그리고 BigQuery 쿼리 결과)의 경우, ExampleGen 파이프라인 구성 요소를 배포에 직접 사용할 수 있으며 사용자 정의가 거의 필요하지 않습니다. 예를 들면, 다음과 같습니다.
 
 ```python
 from tfx.utils.dsl_utils import csv_input
@@ -80,9 +80,9 @@ example_gen = CsvExampleGen(input=examples, input_config=input)
 
 파일 기반 예제 gen(예: CsvExampleGen 및 ImportExampleGen)의 경우, `pattern`은 입력 기본 경로로 루트 디렉토리가 지정되어 입력 파일에 매핑되는 glob 상대 파일 패턴입니다. 쿼리 기반 예제 getn(예: BigQueryExampleGen, PrestoExampleGen)의 경우, `pattern`은 SQL 쿼리입니다.
 
-By default, the entire input base dir is treated as a single input split, and the train and eval output split is generated with a 2:1 ratio.
+기본적으로, 전체 입력의 기본 dir은 단일 입력 분할로 처리되고, train 및 eval의 출력 분할은 2:1 비율로 생성됩니다.
 
-Please refer to [proto/example_gen.proto](https://github.com/tensorflow/tfx/blob/master/tfx/proto/example_gen.proto) for details.
+자세한 내용은 [proto/example_gen.proto](https://github.com/tensorflow/tfx/blob/master/tfx/proto/example_gen.proto)를 참조하세요.
 
 ### Splitting Method
 
@@ -233,7 +233,7 @@ example_gen = CsvExampleGen(input=examples, input_config=input)
 
 [입력 glob 패턴](https://github.com/tensorflow/tfx/blob/master/tfx/proto/example_gen.proto)에서 '{VERSION}' 사양을 사용하여 버전을 검색할 수 있습니다.
 
-- This spec matches digits and maps the data to the relevant VERSION numbers under the SPAN. Note that the Version spec can be used combination with either Span or Date spec.
+- 이 사양은 숫자와 일치하고 데이터를 SPAN 아래의 관련 VERSION 번호에 매핑합니다. 버전 사양은 스팬 또는 날짜 사양과 함께 사용할 수 있습니다.
 - 이 사양은 SPAN 사양과 같은 방식으로 너비를 선택적으로 지정할 수도 있습니다(예: 'span-{SPAN}/version-{VERSION:4}/data-*').
 - VERSION 사양이 누락된 경우, 버전은 None으로 설정됩니다.
 - SPAN과 VERSION이 모두 지정되면 파이프라인은 최신 스팬의 최신 버전을 처리하고 메타데이터에 버전 번호를 저장합니다.
