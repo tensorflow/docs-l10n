@@ -26,7 +26,7 @@ Numpy에서는 이를 [브로드캐스팅](http://docs.scipy.org/doc/numpy/user/
 
 ## 원칙
 
-The XLA language is as strict and explicit as possible, avoiding implicit and "magical" features. Such features may make some computations slightly easier to define, at the cost of more assumptions baked into user code that will be difficult to change in the long term. If necessary, implicit and magical features can be added in client-level wrappers.
+XLA 언어는 가능한 한 엄격하고 명시적이며, 암시적 및 '마법적인' 특성을 피합니다. 이러한 특성을 사용하면 장기적으로 변경하기 어려운 사용자 코드에 더 많은 가정을 적용하는 대신 일부 계산을 정의하기가 약간 더 쉬워질 수 있습니다. 필요한 경우 클라이언트 수준 래퍼에 암시적 및 마법적 특성을 추가할 수 있습니다.
 
 브로드캐스팅에서는 서로 다른 순위의 배열 간 연산에 대한 명시적인 브로드캐스팅 사양이 필요합니다. 이는 추론이 가능한 경우 사양을 추론하는 Numpy와는 다릅니다.
 
