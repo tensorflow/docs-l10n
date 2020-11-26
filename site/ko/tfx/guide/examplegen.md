@@ -5,11 +5,11 @@ ExampleGen TFX Pipeline 구성 요소는 데이터를 TFX 파이프라인으로 
 - 입력: CSV, `TFRecord` , Avro, Parquet 및 BigQuery와 같은 외부 데이터 소스의 데이터
 - 출력: 페이로드 형식에 따라 `tf.Example` 레코드, `tf.SequenceExample` 레코드 또는 proto 형식
 
-## ExampleGen and Other Components
+## ExampleGen 및 기타 구성 요소
 
 ExampleGen은 [SchemaGen](schemagen.md), [StatisticsGen](statsgen.md) 및 [Example Validator](exampleval.md)와 같은 [TensorFlow 데이터 검증](tfdv.md) 라이브러리를 사용하는 구성 요소에 데이터를 제공합니다. 또한, [TensorFlow Transform](tft.md) 라이브러리를 사용하는 [Transform](transform.md)에 데이터를 제공하고 궁극적으로 추론 중에 배포 대상에 데이터를 제공합니다.
 
-## How to use an ExampleGen Component
+## ExampleGen 구성 요소를 사용하는 방법
 
 지원되는 데이터 소스(현재는 CSV 파일, tf.Example, `tf.SequenceExample` 및 proto 형식이 포함된 `tf.Example` 파일, 그리고 BigQuery 쿼리 결과)의 경우, ExampleGen 파이프라인 구성 요소를 배포에 직접 사용할 수 있으며 사용자 정의가 거의 필요하지 않습니다. 예를 들면, 다음과 같습니다.
 
@@ -31,7 +31,7 @@ examples = tfrecord_input(path_to_tfrecord_dir)
 example_gen = ImportExampleGen(input=examples)
 ```
 
-## Span, Version and Split
+## 스팬, 버전 및 분할
 
 스팬은 훈련 예제의 그룹입니다. 해당 데이터가 파일 시스템에 유지되는 경우, 각 스팬은 별도의 디렉토리에 저장될 수 있습니다. Span의 의미 체계는 TFX로 하드코딩되지 않습니다. 스팬은 하루 분량의 데이터, 한 시간 분량의 데이터 또는 해당 작업에 의미 있는 기타 데이터 그룹에 해당할 수 있습니다.
 
@@ -39,7 +39,7 @@ example_gen = ImportExampleGen(input=examples)
 
 스팬 내의 각 버전은 여러 분할로 더 세분화될 수 있습니다. 스팬을 분할하는 가장 일반적인 사용 사례는 훈련 데이터와 평가 데이터로 분할하는 것입니다.
 
-![Spans and Splits](images/spans_splits.png)
+![스팬 및 분할](images/spans_splits.png)
 
 ### 사용자 정의 입력/출력 분할
 
@@ -84,13 +84,13 @@ example_gen = CsvExampleGen(input=examples, input_config=input)
 
 자세한 내용은 [proto/example_gen.proto](https://github.com/tensorflow/tfx/blob/master/tfx/proto/example_gen.proto)를 참조하세요.
 
-### Splitting Method
+### 분할 방법
 
 `hash_buckets` 분할 방법을 사용하는 경우, 전체 레코드 대신 예제의 파티션을 만드는 기능을 사용할 수 있습니다. 기능이 있는 경우, ExampleGen은 해당 기능의 지문을 파티션 키로 사용합니다.
 
 이 기능은 예제의 특정한 속성과 관련해 안정적인 분할을 유지하는 데 사용할 수 있습니다. 예를 들어, 파티션 기능 이름으로 "user_id"를 선택한 경우, 사용자는 항상 동일한 분할에 배치됩니다.
 
-The interpretation of what a "feature" means and how to match a "feature" with the specified name depends on the ExampleGen implementation and the type of the examples.
+"기능"의 의미와 "기능"을 지정된 이름과 일치시키는 방법에 대한 해석은 ExampleGen 구현 및 예제 유형에 따라 다릅니다.
 
 기존 ExampleGen 구현의 경우:
 
@@ -100,7 +100,7 @@ The interpretation of what a "feature" means and how to match a "feature" with t
 
 다음과 같은 경우, ExampleGen은 런타임 오류를 발생시킵니다.
 
-- Specified feature name does not exist in the example.
+- 지정된 기능 이름이 예제에 없습니다.
 - 비어 있는 기능입니다(`tf.train.Feature()`).
 - 지원되지 않는 기능 유형입니다(예: 부동 기능).
 
@@ -141,7 +141,7 @@ example_gen = CsvExampleGen(input=examples, output_config=output)
 - '/tmp/span-2/train/data'
 - '/tmp/span-2/eval/data'
 
-and the input config is shown as below:
+입력 구성은 다음과 같습니다.
 
 ```python
 splits {
@@ -194,7 +194,7 @@ example_gen = CsvExampleGen(input=examples, input_config=input)
 - '/tmp/1970-01-03/train/data'
 - '/tmp/1970-01-03/eval/data'
 
-and the input config is shown as below:
+입력 구성은 다음과 같습니다.
 
 ```python
 splits {
@@ -248,7 +248,7 @@ example_gen = CsvExampleGen(input=examples, input_config=input)
 - '/tmp/span-2/ver-2/train/data'
 - '/tmp/span-2/ver-2/eval/data'
 
-and the input config is shown as below:
+입력 구성은 다음과 같습니다.
 
 ```python
 splits {
@@ -360,7 +360,7 @@ example_gen = CsvExampleGen(input=examples, input_config=input,
 
 현재 사용 가능한 ExampleGen 구성 요소가 필요에 맞지 않는 경우, BaseExampleGenExecutor에서 확장된 새 실행기를 포함하는 사용자 정의 ExampleGen을 만듭니다.
 
-### File-Based ExampleGen
+### 파일 기반 ExampleGen
 
 먼저, train/eval 입력 분할에서 TF 예로의 변환을 제공하는 사용자 정의 Beam PTransform을 이용해 BaseExampleGenExecutor를 확장합니다. 예를 들어, [CsvExampleGen 실행기](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/csv_example_gen/executor.py)는 입력 CSV 분할에서 TF 예로의 변환을 제공합니다.
 
@@ -380,7 +380,7 @@ example_gen = FileBasedExampleGen(
 
 이제, 이 [방법](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/custom_executors/avro_component_test.py)을 사용하여 Avro 및 Parquet 파일 읽기도 지원합니다.
 
-### Query-Based ExampleGen
+### 쿼리 기반 ExampleGen
 
 먼저, 외부 데이터 소스에서 데이터를 읽는 사용자 정의 Beam PTransform으로 BaseExampleGenExecutor를 확장합니다. 그런 다음, QueryBasedExampleGen을 확장하여 간단한 구성 요소를 만듭니다.
 
