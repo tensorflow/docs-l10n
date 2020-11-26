@@ -2,13 +2,13 @@
 
 # 게시자 되기
 
-## Terms of service
+## 서비스 약관
 
 게시할 모델을 제출하면 [https://tfhub.dev/terms](https://tfhub.dev/terms)에 있는 TensorFlow Hub 서비스 약관에 동의하는 것입니다.
 
-## Overview of the publishing process
+## 게시 프로세스 개요
 
-The full process of publishing consists of:
+게시의 전체 프로세스는 다음으로 구성됩니다.
 
 1. 모델 만들기([모델 내보내기](exporting_tf2_saved_model.md) 방법 참조)
 2. 설명서 작성하기([모델 설명서 작성하기](writing_model_documentation.md) 방법 참조)
@@ -37,4 +37,4 @@ challenging benchmark to evaluate image representations.
 
 ### 게시자 이름 가이드라인
 
-Your publisher name can be your GitHub username or the name of the GitHub organization you manage.
+게시자 이름은 GitHub 사용자 이름 또는 관리하는 GitHub 조직의 이름이 될 수 있습니다.
