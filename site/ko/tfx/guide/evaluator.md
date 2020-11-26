@@ -32,7 +32,7 @@ Evaluator를 설정하려면 다음 정보가 필요합니다.
 
 검증이 활성화되면 정의된 모든 메트릭과 조각을 대상으로 검증 작업이 수행됩니다.
 
-Typical code looks like this:
+일반적인 코드는 다음과 같습니다.
 
 ```python
 from tfx import components
