@@ -23,7 +23,7 @@ TFX 파이프라인을 처음 사용하는 경우, [TFX 파이프라인의 핵�
 - *OUTPUTS*: 구성 요소가 생성하는 출력 아티팩트에 대한 형식 지정된 매개변수 사전입니다.
 - *PARAMETERS*: 구성 요소 실행기에 전달될 추가 [ExecutionParameter](https://github.com/tensorflow/tfx/blob/54aa6fbec6bffafa8352fe51b11251b1e44a2bf1/tfx/types/component_spec.py#L274) 항목의 사전입니다. 이들 사전은 파이프라인 DSL에서 유연하게 정의하고 실행으로 전달하려는 아티팩트가 아닌 매개변수입니다.
 
-Here is an example of the ComponentSpec:
+다음은 ComponentSpec의 예입니다.
 
 ```python
 class HelloComponentSpec(types.ComponentSpec):
@@ -77,7 +77,7 @@ class Executor(base_executor.BaseExecutor):
 
 사용자 정의 실행기에 대한 단위 테스트는 [여기서](https://github.com/tensorflow/tfx/blob/r0.15/tfx/components/transform/executor_test.py)와 유시하게 만들 수 있습니다.
 
-### Component interface
+### 구성 요소 인터페이스
 
 이제 가장 복잡한 부분이 완성되었으므로 다음 단계는 이러한 부분을 구성 요소 인터페이스로 어셈블링하여 구성 요소를 파이프라인에서 사용할 수 있도록 하는 것입니다. 다음 몇 가지 단계를 거칩니다.
 
