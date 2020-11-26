@@ -1,21 +1,21 @@
 # 알려진 문제
 
-Compilation with XLA can greatly improve the performance of your programs, but the TensorFlow interop has a number of known sharp corners.
+XLA를 사용한 컴파일은 프로그램의 성능을 크게 향상할 수 있지만 TensorFlow interop에는 알려진 껄끄러운 문제들이 있습니다.
 
 ## TensorArray TF/XLA interconversion
 
-The problem manifests itself as an error message `Support for TensorList crossing the XLA/TF boundary is not implemented`.
+이 문제는 `Support for TensorList crossing the XLA/TF boundary is not implemented`라는 오류 메시지로 나타납니다.
 
-XLA supports `tf.TensorArray`. However, the *interconversion* between TF and XLA representations is not implemented yet. This error often arises when the `TensorArray` is used inside the compiled block, but the derivative is taken outside.
+XLA는 `tf.TensorArray`를 지원합니다. 그러나, TF와 XLA 표현 간의 *상호 변환(interconversion)*은 아직 구현되지 않았습니다. 이 오류는 `TensorArray`가 컴파일된 블록 내에서 사용되지만 파생 요소가 외부에서 사용되는 경우 종종 발생합니다.
 
 Workaround: compile the outermost scope which is taking the derivative.
 
 ## Dynamic `tf.TensorArray` is not supported
 
-Writes into `tf.TensorArray(..., dynamic_size=True)` are not compilable with XLA, as such writes require an unknown number of reallocations when the array exceeds the original bound.
+`tf.TensorArray(..., dynamic_size=True)`에 대한 쓰기는 XLA로 컴파일할 수 없습니다. 이러한 쓰기에는 배열이 원래 경계를 초과할 때 알 수 없는 횟수의 재할당이 필요하기 때문입니다.
 
 Workaround: provide a statically known bound to your arrays.
 
 ## 난수 생성
 
-XLA currently ignores TF seeds to random operations. This affects stateful TF random operations, such as `tf.random.normal`, or `tf.nn.dropout`.  XLA will behave as if the compilation was seeded with a new unique seed at each run. This limitation does not apply to stateless random ops.
+XLA는 현재 임의 연산에 대한 TF 시드를 무시합니다. 이는 `tf.random.normal` 또는 `tf.nn.dropout`과 같은 상태 저장 TF 임의 연산에 영향을 줍니다. XLA는 컴파일이 각 실행 시 새로운 고유 시드로 시드된 것처럼 동작합니다. 이 제한은 상태 비저장 임의 ops에는 적용되지 않습니다.
