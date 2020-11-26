@@ -2,7 +2,7 @@
 
 XLA `Shape` proto([xla_data.proto](https://www.tensorflow.org/code/tensorflow/compiler/xla/xla_data.proto))는 N 차원 배열(간단히 *배열*)의 랭크, 크기 및 데이터 유형을 설명합니다.
 
-## Terminology, Notation, and Conventions
+## 용어, 표기법 및 규칙
 
 - The rank of an array is equal to the number of dimensions. The *true rank* of an array is the number of dimensions which have a size greater than 1.
 
@@ -38,7 +38,7 @@ XLA `Shape` proto([xla_data.proto](https://www.tensorflow.org/code/tensorflow/co
 
 ## 레이아웃
 
-The `Layout` proto describes how an array is represented in memory. The `Layout` proto includes the following fields:
+`Layout` proto는 배열이 메모리에서 어떻게 표현되는지 설명합니다. `Layout` proto에는 다음 필드가 포함됩니다.
 
 ```
 message Layout {
@@ -75,7 +75,7 @@ a b c d e f
 
 `N` 차원 배열에 대해 `N-1`에서 `0`까지의 마이너-메이저 차원 순서는 *행-메이저*(랭크 2)와 유사합니다. 단조로운 차원 순서를 가정하면 코드에서 이 레이아웃을 참조하는 데 사용할 수 있는 또 다른 이름은 단순히 "dim 0 is major"입니다.
 
-#### Default minor-to-major ordering
+#### 기본 마이너-메이저 순서
 
 The default layout for newly created Shapes is "dimension order is major-to-minor" (akin to row-major at rank 2).
 
@@ -97,6 +97,6 @@ d e f 0 0
 0 0 0 0 0
 ```
 
-### Indexing into arrays
+### 배열로 인덱싱
 
 `IndexUtil`의 [IndexUtil](https://www.tensorflow.org/code/tensorflow/compiler/xla/index_util.h) 클래스는 형상과 레이아웃이 입력되면 다차원 인덱스와 선형 인덱스를 상호 변환하는 유틸리티를 제공합니다. 다차원 인덱스에는 각 차원에 대한 `int64` 인덱스가 포함됩니다. 선형 인덱스는 배열을 보유하는 버퍼로 인덱싱하는 단일 `int64` 값입니다. 형상과 레이아웃의 생성 및 조작을 단순화하는 이 유틸리티에 대해서는 같은 디렉토리에 있는 `shape_util.h` 및 `layout_util.h`를 참조하세요.
