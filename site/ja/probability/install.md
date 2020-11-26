@@ -1,12 +1,12 @@
 # インストール
 
-## ステーブル版
+## 安定版
 
 TensorFlow Probability の最新バージョンをインストールします。
 
-<pre class="devsite-terminal devsite-click-to-copy prettyprint lang-shell"> pip install --upgrade tensorflow-probability</pre>
+<pre class="devsite-terminal devsite-click-to-copy prettyprint lang-shell"> pip install --upgrade tensorflow-probability </pre>
 
-TensorFlow Probability は、[TensorFlow](https://www.tensorflow.org/install) の最近のステーブル版 (pip パッケージ`tensorflow`) に依存します。TensorFlow と TensorFlow Probability の間の依存関係の詳細については、[TFP リリースノート](https://github.com/tensorflow/probability/releases)をご覧ください。
+TensorFlow Probability は、[TensorFlow](https://www.tensorflow.org/install) の最近の安定版 (pip パッケージ`tensorflow`) に依存します。TensorFlow と TensorFlow Probability の間の依存関係の詳細については、[TFP リリースノート](https://github.com/tensorflow/probability/releases)をご覧ください。
 
 注意：TensorFlow は、TensorFlow Probability パッケージの依存ファイルとして（<code>setup.py</code> に）<em>含まれていない</em>ため、TensorFlow パッケージ（`tensorflow` または `tensorflow-gpu`）を明示的にインストールする必要があります。そうすると、CPU と GPU 対応の TensorFlow パッケージを個別にではなく、まとめて管理できるようになります。
 
