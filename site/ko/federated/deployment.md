@@ -1,10 +1,10 @@
 # 배포
 
-In addition to defining computations, TFF provides tools for executing them. Whereas the primary focus is on simulations, the interfaces and tools we provide are more general. This document outlines the options for deployment to various types of platform.
+계산 정의 외에도 TFF는 계산을 수행하기위한 도구를 제공합니다. 시뮬레이션에 중점을 두는 반면, 우리가 제공하는 인터페이스와 툴이 더 일반적입니다. 이 문서는 다양한 유형의 플랫폼에 배포하기위한 옵션을 간략하게 설명합니다.
 
 참고: 이 문서는 아직 제작 중입니다.
 
-## Overview
+## 개요
 
 TFF 계산을 위한 두 가지 주요 배포 모드가 있습니다.
 
