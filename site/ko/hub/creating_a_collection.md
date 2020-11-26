@@ -1,6 +1,6 @@
 <!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
 
-# Create a collection
+# 컬렉션 만들기
 
 컬렉션은 게시자가 관련 모델을 함께 묶어 사용자의 검색 경험을 개선하는 tfhub.dev의 기능입니다.
 
