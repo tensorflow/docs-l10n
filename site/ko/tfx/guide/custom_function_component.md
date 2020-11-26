@@ -34,7 +34,7 @@ TFX에서 입력 및 출력은 기본 데이터와 관련된 메타데이터 속
 
 참고: 현재, 출력 단순 데이터 유형 값은 실행 시 알 수 없으므로 매개변수로 사용할 수 없습니다. 마찬가지로, 입력 단순 데이터 유형 값은 현재, 파이프라인 구성 시 알려진 구체적인 값을 취할 수 없습니다. 향후 TFX 릴리스에서 이 제한이 없어질 수 있습니다.
 
-## Definition
+## 정의
 
 사용자 정의 구성 요소를 만들려면 사용자 정의 로직을 구현하는 함수를 작성하고 `tfx.dsl.component.experimental.decorators` 모듈의 [`@component` 데코레이터](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/component/experimental/decorators.py){: .external }로 데코레이트합니다. 구성 요소의 입력 및 출력 스키마를 정의하려면 함수의 인수에 주석을 달고 `tfx.dsl.component.experimental.annotations` 모듈의 주석을 사용하여 값을 반환합니다.
 
