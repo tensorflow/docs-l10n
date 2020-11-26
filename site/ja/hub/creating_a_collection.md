@@ -1,6 +1,6 @@
 <!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
 
-# Create a collection
+# コレクションを作成する
 
 コレクションは、パブリッシャーが関連するモデルをバンドルすることにより、ユーザーの検索体験の向上を可能にする tfhub.dev の機能です。
 
