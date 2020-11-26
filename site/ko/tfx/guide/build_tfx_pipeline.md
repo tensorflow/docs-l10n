@@ -140,7 +140,7 @@ TFX 파이프라인 템플릿을 사용하면 사용 사례에 맞게 사용자 
 
         - 파이프라인 매개변수 변경
         - 파이프라인에 구성 요소를 추가하거나 제거
-        - Replacing the data input source. This data source can either be a file or queries into services such as BigQuery.
+        - 데이터 입력 소스 교체, 이 데이터 소스는 파일이거나 BigQuery와 같은 서비스에 대한 쿼리일 수 있습니다.
         - 파이프라인에서 구성 요소의 구성 변경
         - 구성요소의 사용자 정의 함수 변경
 
