@@ -61,7 +61,7 @@ InfraValidator를 구성하는 프로토타입에는 세 가지가 있습니다.
 
 - [TensorFlow Serving](serving.md)
 
-Note: InfraValidator allows specifying multiple versions of the same model server type in order to upgrade the model server version without affecting model compatibility. For example, user can test `tensorflow/serving` image with both `2.1.0` and `latest` versions, to ensure the model will be compatible with the latest `tensorflow/serving` version as well.
+참고: InfraValidator에서는 모델 호환성에 영향을 주지 않고 모델 서버의 버전을 업그레이드하기 위해 동일한 모델 서버 유형을 여러 버전으로 지정할 수 있습니다. 예를 들어, 사용자는 `2.1.0` 및 `latest` 버전 모두에서 `tensorflow/serving` 이미지를 테스트하여 모델이 최신 `tensorflow/serving` 버전과도 호환되는지 확인할 수 있습니다.
 
 현재, 지원되는 제공 플랫폼은 다음과 같습니다.
 
