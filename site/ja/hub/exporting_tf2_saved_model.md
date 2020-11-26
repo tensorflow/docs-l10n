@@ -1,6 +1,6 @@
 <!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
 
-# Export a model
+# モデルをエクスポートする
 
 このページでは、[TensorFlow 2 の SavedModel 形式](https://www.tensorflow.org/guide/saved_model)でモデルをエクスポートするプロセスについて説明します。この形式は、TensorFlow Hub 上で事前トレーニングされたモデルとモデルピースの共有に推奨される方法です。これは古い [TF1 Hub 形式](tf1_hub_module.md)に取って代わり、新しい API セットが付属しています。TF1 Hub 形式のモデルのエクスポートに関する詳細は、[TF1 Hub 形式のエクスポート](exporting_hub_format.md)をご覧ください。
 
@@ -73,7 +73,7 @@ Keras モデルから保存すると、ファインチューニングのすべ�
 
 ソフトマックス確率やトップ k 予測の代わりにロジットを出力するなど、勾配のフローとうまく連携するモデルインターフェースを選択してください。
 
-If the model use dropout, batch normalization, or similar training techniques that involve hyperparameters, set them to values that make sense across many expected target problems and batch sizes. (As of this writing, saving from Keras does not make it easy to let consumers adjust them.)
+モデルでドロップアウト、バッチ正規化、またはハイパーパラメータを使用する類似のトレーニングテクニックが使用されている場合は、期待される多数のターゲット問題やバッチサイズに合理的な値に設定してください。（これを執筆している時点では、Keras から保存すると、消費する側でこれらを簡単に調整することはできません。）
 
 各レイヤーの重み正則化器は保存されますが（正則化の強度計数とともに）、オプティマイザ内の重み正則化（`tf.keras.optimizers.Ftrl.l1_regularization_strength=...)` など）は失われます。SavedModel のコンシューマに適宜アドバイスを提供してください。
 
