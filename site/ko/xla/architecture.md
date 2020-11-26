@@ -12,7 +12,7 @@ XLA가 TensorFlow와 동작하기 위한 몇 가지 목표가 있었습니다.
 
 - *사용자 정의 연산에 대한 의존도를 줄입니다.* 수동으로 융합된 사용자 정의 연산의 성능과 일치하도록, 자동으로 융합된 하위 수준 연산의 성능을 개선하여 많은 사용자 정의 연산의 필요성을 제거합니다.
 
-- *Reduce mobile footprint.* Eliminate the TensorFlow runtime by ahead-of-time compiling the subgraph and emitting an object/header file pair that can be linked directly into another application. The results can reduce the footprint for mobile inference by several orders of magnitude.
+- *모바일 공간을 줄입니다.* 하위 그래프를 미리 컴파일하고 다른 애플리케이션에 직접 연결될 수 있는 객체/헤더 파일 쌍을 내보내어 TensorFlow 런타임을 제거합니다. 그 결과 모바일 추론을 위한 공간을 몇 배나 줄일 수 있습니다.
 
 - *이식성을 향상합니다.* 새로운 하드웨어를 위한 새로운 백 엔드를 비교적 쉽게 작성할 수 있습니다. 이 시점에서 TensorFlow 프로그램의 상당 부분이 해당 하드웨어에서 수정되지 않은 상태로 실행됩니다. 이는 새로운 하드웨어를 위한 개별 모놀리식 연산을 전문화하는 접근 방식과 대조됩니다. 해당 연산을 사용하려면 TensorFlow 프로그램을 다시 작성해야 합니다.
 
