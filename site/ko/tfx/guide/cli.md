@@ -12,8 +12,7 @@ TFX 명령줄 인터페이스(CLI)는 Apache Airflow, Apache Beam 및 Kubeflow P
 
 TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아래 구조를 따릅니다.
 
-<pre class="devsite-terminal">tfx <var>command-group</var> <var>command</var> <var>flags</var>
-</pre>
+<pre class="devsite-terminal">tfx <var>command-group</var> <var>command</var> <var>flags</var></pre>
 
 현재 지원되는 <var>명령 그룹</var> 옵션은 다음과 같습니다.
 
@@ -31,8 +30,7 @@ TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아�
 
 `tfx pipeline` 명령 그룹의 명령 구조는 다음과 같습니다.
 
-<pre class="devsite-terminal">tfx pipeline <var>command</var> <var>required-flags</var> [<var>optional-flags</var>]
-</pre>
+<pre class="devsite-terminal">tfx pipeline <var>command</var> <var>required-flags</var> [<var>optional-flags</var>]</pre>
 
 다음 섹션을 사용하여 `tfx pipeline` 명령 그룹의 명령에 대해 자세히 알아보세요.
 
@@ -42,11 +40,7 @@ TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아�
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline create --pipeline_path=<var>pipeline-path</var> [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \
---iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --package_path=<var>package-path</var> \
---build_target_image=<var>build-target-image</var> --build_base_image=<var>build-base-image</var> \
---skaffold_cmd=<var>skaffold-command</var>]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline create --pipeline_path=<var>pipeline-path</var> [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \<br>--iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --package_path=<var>package-path</var> \<br>--build_target_image=<var>build-target-image</var> --build_base_image=<var>build-base-image</var> \<br>--skaffold_cmd=<var>skaffold-command</var>]</pre>
 
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var>
@@ -130,26 +124,19 @@ TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아�
 
 Apache Airflow:
 
-<pre class="devsite-terminal">tfx pipeline create --engine=airflow --pipeline_path=<var>pipeline-path</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline create --engine=airflow --pipeline_path=<var>pipeline-path</var></pre>
 
 Apache Beam:
 
-<pre class="devsite-terminal">tfx pipeline create --engine=beam --pipeline_path=<var>pipeline-path</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline create --engine=beam --pipeline_path=<var>pipeline-path</var></pre>
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx pipeline create --engine=kubeflow --pipeline_path=<var>pipeline-path</var> --package_path=<var>package-path</var> \
---iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --endpoint=<var>endpoint</var> \
---skaffold_cmd=<var>skaffold-cmd</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline create --engine=kubeflow --pipeline_path=<var>pipeline-path</var> --package_path=<var>package-path</var> \<br>--iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --endpoint=<var>endpoint</var> \<br>--skaffold_cmd=<var>skaffold-cmd</var></pre>
 
 사용자 환경에서 엔진을 자동 감지하려면 아래 예와 같이 engine 플래그를 사용하지 않으면 됩니다. 자세한 내용은 플래그 섹션을 확인하세요.
 
-<pre class="devsite-terminal">tfx pipeline create --pipeline_path=<var>pipeline-path</var> --endpoint --iap_client_id --namespace \
---package_path --skaffold_cmd
-</pre>
+<pre class="devsite-terminal">tfx pipeline create --pipeline_path=<var>pipeline-path</var> --endpoint --iap_client_id --namespace \<br>--package_path --skaffold_cmd</pre>
 
 ### update
 
@@ -157,10 +144,7 @@ Kubeflow:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline update --pipeline_path=<var>pipeline-path</var> [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \
---iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --package_path=<var>package-path</var> \
---skaffold_cmd=<var>skaffold-command</var>]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline update --pipeline_path=<var>pipeline-path</var> [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \<br>--iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --package_path=<var>package-path</var> \<br>--skaffold_cmd=<var>skaffold-command</var>]</pre>
 
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var>
@@ -233,20 +217,15 @@ Kubeflow:
 
 Apache Airflow:
 
-<pre class="devsite-terminal">tfx pipeline update --engine=airflow --pipeline_path=<var>pipeline-path</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline update --engine=airflow --pipeline_path=<var>pipeline-path</var></pre>
 
 Apache Beam:
 
-<pre class="devsite-terminal">tfx pipeline update --engine=beam --pipeline_path=<var>pipeline-path</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline update --engine=beam --pipeline_path=<var>pipeline-path</var></pre>
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx pipeline update --engine=kubeflow --pipeline_path=<var>pipeline-path</var> --package_path=<var>package-path</var> \
---iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --endpoint=<var>endpoint</var> \
---skaffold_cmd=<var>skaffold-cmd</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline update --engine=kubeflow --pipeline_path=<var>pipeline-path</var> --package_path=<var>package-path</var> \<br>--iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --endpoint=<var>endpoint</var> \<br>--skaffold_cmd=<var>skaffold-cmd</var></pre>
 
 ### compile
 
@@ -261,9 +240,7 @@ Kubeflow:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline compile --pipeline_path=<var>pipeline-path</var> [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \
---iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --package_path=<var>package-path</var>]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline compile --pipeline_path=<var>pipeline-path</var> [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \<br>--iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --package_path=<var>package-path</var>]</pre>
 
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var>
@@ -331,19 +308,15 @@ Kubeflow:
 
 Apache Airflow:
 
-<pre class="devsite-terminal">tfx pipeline compile --engine=airflow --pipeline_path=<var>pipeline-path</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline compile --engine=airflow --pipeline_path=<var>pipeline-path</var></pre>
 
 Apache Beam:
 
-<pre class="devsite-terminal">tfx pipeline compile --engine=beam --pipeline_path=<var>pipeline-path</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline compile --engine=beam --pipeline_path=<var>pipeline-path</var></pre>
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx pipeline compile --engine=kubeflow --pipeline_path=<var>pipeline-path</var> --package_path=<var>package-path</var> \
---iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --endpoint=<var>endpoint</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline compile --engine=kubeflow --pipeline_path=<var>pipeline-path</var> --package_path=<var>package-path</var> \<br>--iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --endpoint=<var>endpoint</var></pre>
 
 ### delete
 
@@ -351,9 +324,7 @@ Kubeflow:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline delete --pipeline_path=<var>pipeline-path</var> [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \
---iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline delete --pipeline_path=<var>pipeline-path</var> [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \<br>--iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]</pre>
 
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var>
@@ -413,19 +384,15 @@ Kubeflow:
 
 Apache Airflow:
 
-<pre class="devsite-terminal">tfx pipeline delete --engine=airflow --pipeline_name=<var>pipeline-name</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline delete --engine=airflow --pipeline_name=<var>pipeline-name</var></pre>
 
 Apache Beam:
 
-<pre class="devsite-terminal">tfx pipeline delete --engine=beam --pipeline_name=<var>pipeline-name</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline delete --engine=beam --pipeline_name=<var>pipeline-name</var></pre>
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx pipeline delete --engine=kubeflow --pipeline_name=<var>pipeline-name</var> \
---iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --endpoint=<var>endpoint</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline delete --engine=kubeflow --pipeline_name=<var>pipeline-name</var> \<br>--iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --endpoint=<var>endpoint</var></pre>
 
 ### list
 
@@ -433,9 +400,7 @@ Kubeflow:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline list [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \
---iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline list [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \<br>--iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]</pre>
 
 <dl>
   <dt>--endpoint=<var>endpoint</var>
@@ -492,26 +457,21 @@ Kubeflow:
 
 Apache Airflow:
 
-<pre class="devsite-terminal">tfx pipeline list --engine=airflow
-</pre>
+<pre class="devsite-terminal">tfx pipeline list --engine=airflow</pre>
 
 Apache Beam:
 
-<pre class="devsite-terminal">tfx pipeline list --engine=beam
-</pre>
+<pre class="devsite-terminal">tfx pipeline list --engine=beam</pre>
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx pipeline list --engine=kubeflow --iap_client_id=<var>iap-client-id</var> \
---namespace=<var>namespace</var> --endpoint=<var>endpoint</var>
-</pre>
+<pre class="devsite-terminal">tfx pipeline list --engine=kubeflow --iap_client_id=<var>iap-client-id</var> \<br>--namespace=<var>namespace</var> --endpoint=<var>endpoint</var></pre>
 
 ## tfx run
 
 `tfx run` 명령 그룹의 명령 구조는 다음과 같습니다.
 
-<pre class="devsite-terminal">tfx run <var>command</var> <var>required-flags</var> [<var>optional-flags</var>]
-</pre>
+<pre class="devsite-terminal">tfx run <var>command</var> <var>required-flags</var> [<var>optional-flags</var>]</pre>
 
 다음 섹션을 통해 `tfx run` 명령 그룹의 명령에 대해 자세히 알아보세요.
 
@@ -521,9 +481,7 @@ Kubeflow:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx run create --pipeline_name=<var>pipeline-name</var> [--endpoint=<var>endpoint</var> \
---engine=<var>engine</var> --iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx run create --pipeline_name=<var>pipeline-name</var> [--endpoint=<var>endpoint</var> \<br>--engine=<var>engine</var> --iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]</pre>
 
 <dl>
   <dt>--pipeline_name=<var>pipeline-name</var>
@@ -583,19 +541,15 @@ Kubeflow:
 
 Apache Airflow:
 
-<pre class="devsite-terminal">tfx run create --engine=airflow --pipeline_name=<var>pipeline-name</var>
-</pre>
+<pre class="devsite-terminal">tfx run create --engine=airflow --pipeline_name=<var>pipeline-name</var></pre>
 
 Apache Beam:
 
-<pre class="devsite-terminal">tfx run create --engine=beam --pipeline_name=<var>pipeline-name</var>
-</pre>
+<pre class="devsite-terminal">tfx run create --engine=beam --pipeline_name=<var>pipeline-name</var></pre>
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx run create --engine=kubeflow --pipeline_name=<var>pipeline-name</var> --iap_client_id=<var>iap-client-id</var> \
---namespace=<var>namespace</var> --endpoint=<var>endpoint</var>
-</pre>
+<pre class="devsite-terminal">tfx run create --engine=kubeflow --pipeline_name=<var>pipeline-name</var> --iap_client_id=<var>iap-client-id</var> \<br>--namespace=<var>namespace</var> --endpoint=<var>endpoint</var></pre>
 
 ### terminate
 
@@ -605,9 +559,7 @@ Kubeflow:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx run terminate --run_id=<var>run-id</var> [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \
---iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx run terminate --run_id=<var>run-id</var> [--endpoint=<var>endpoint</var> --engine=<var>engine</var> \<br>--iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]</pre>
 
 <dl>
   <dt>--run_id=<var>run-id</var>
@@ -667,9 +619,7 @@ Kubeflow:
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx run delete --engine=kubeflow --run_id=<var>run-id</var> --iap_client_id=<var>iap-client-id</var> \
---namespace=<var>namespace</var> --endpoint=<var>endpoint</var>
-</pre>
+<pre class="devsite-terminal">tfx run delete --engine=kubeflow --run_id=<var>run-id</var> --iap_client_id=<var>iap-client-id</var> \<br>--namespace=<var>namespace</var> --endpoint=<var>endpoint</var></pre>
 
 ### list
 
@@ -679,9 +629,7 @@ Kubeflow:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx run list --pipeline_name=<var>pipeline-name</var> [--endpoint=<var>endpoint</var> \
---engine=<var>engine</var> --iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx run list --pipeline_name=<var>pipeline-name</var> [--endpoint=<var>endpoint</var> \<br>--engine=<var>engine</var> --iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]</pre>
 
 <dl>
   <dt>--pipeline_name=<var>pipeline-name</var>
@@ -741,14 +689,11 @@ Kubeflow:
 
 Apache Airflow:
 
-<pre class="devsite-terminal">tfx run list --engine=airflow --pipeline_name=<var>pipeline-name</var>
-</pre>
+<pre class="devsite-terminal">tfx run list --engine=airflow --pipeline_name=<var>pipeline-name</var></pre>
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx run list --engine=kubeflow --pipeline_name=<var>pipeline-name</var> --iap_client_id=<var>iap-client-id</var> \
---namespace=<var>namespace</var> --endpoint=<var>endpoint</var>
-</pre>
+<pre class="devsite-terminal">tfx run list --engine=kubeflow --pipeline_name=<var>pipeline-name</var> --iap_client_id=<var>iap-client-id</var> \<br>--namespace=<var>namespace</var> --endpoint=<var>endpoint</var></pre>
 
 ### status
 
@@ -758,9 +703,7 @@ Kubeflow:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx run status --pipeline_name=<var>pipeline-name</var> --run_id=<var>run-id</var> [--endpoint=<var>endpoint</var> \
---engine=<var>engine</var> --iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx run status --pipeline_name=<var>pipeline-name</var> --run_id=<var>run-id</var> [--endpoint=<var>endpoint</var> \<br>--engine=<var>engine</var> --iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var>]</pre>
 
 <dl>
   <dt>--pipeline_name=<var>pipeline-name</var>
@@ -823,14 +766,11 @@ Kubeflow:
 
 Apache Airflow:
 
-<pre class="devsite-terminal">tfx run status --engine=airflow --run_id=<var>run-id</var> --pipeline_name=<var>pipeline-name</var>
-</pre>
+<pre class="devsite-terminal">tfx run status --engine=airflow --run_id=<var>run-id</var> --pipeline_name=<var>pipeline-name</var></pre>
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx run status --engine=kubeflow --run_id=<var>run-id</var> --pipeline_name=<var>pipeline-name</var> \
---iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --endpoint=<var>endpoint</var>
-</pre>
+<pre class="devsite-terminal">tfx run status --engine=kubeflow --run_id=<var>run-id</var> --pipeline_name=<var>pipeline-name</var> \<br>--iap_client_id=<var>iap-client-id</var> --namespace=<var>namespace</var> --endpoint=<var>endpoint</var></pre>
 
 ### delete
 
@@ -840,9 +780,7 @@ Kubeflow:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx run delete --run_id=<var>run-id</var> [--engine=<var>engine</var> --iap_client_id=<var>iap-client-id</var> \
---namespace=<var>namespace</var> --endpoint=<var>endpoint</var>]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx run delete --run_id=<var>run-id</var> [--engine=<var>engine</var> --iap_client_id=<var>iap-client-id</var> \<br>--namespace=<var>namespace</var> --endpoint=<var>endpoint</var>]</pre>
 
 <dl>
   <dt>--run_id=<var>run-id</var>
@@ -902,16 +840,13 @@ Kubeflow:
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx run delete --engine=kubeflow --run_id=<var>run-id</var> --iap_client_id=<var>iap-client-id</var> \
---namespace=<var>namespace</var> --endpoint=<var>endpoint</var>
-</pre>
+<pre class="devsite-terminal">tfx run delete --engine=kubeflow --run_id=<var>run-id</var> --iap_client_id=<var>iap-client-id</var> \<br>--namespace=<var>namespace</var> --endpoint=<var>endpoint</var></pre>
 
 ## tfx template [실험적]
 
 `tfx template` 명령 그룹의 명령 구조는 다음과 같습니다.
 
-<pre class="devsite-terminal">tfx template <var>command</var> <var>required-flags</var> [<var>optional-flags</var>]
-</pre>
+<pre class="devsite-terminal">tfx template <var>command</var> <var>required-flags</var> [<var>optional-flags</var>]</pre>
 
 다음 섹션을 통해 `tfx template` 명령 그룹의 명령에 대해 자세히 알아보세요. 템플릿은 실험적인 기능이며 언제든지 변경될 수 있습니다.
 
@@ -921,8 +856,7 @@ Kubeflow:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx template list
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx template list</pre>
 
 ### copy
 
@@ -930,9 +864,7 @@ Kubeflow:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx template copy --model=<var>model</var> --pipeline_name=<var>pipeline-name</var> \
---destination_path=<var>destination-path</var>
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx template copy --model=<var>model</var> --pipeline_name=<var>pipeline-name</var> \<br>--destination_path=<var>destination-path</var></pre>
 
 <dl>
   <dt>--model=<var>model</var>
