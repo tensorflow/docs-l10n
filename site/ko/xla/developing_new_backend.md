@@ -4,7 +4,7 @@
 
 XLA는 TensorFlow 그래프를 실행할 목적으로 백엔드를 만들 때 새로운 아키텍처 또는 가속기가 구현할 수 있는 추상 인터페이스를 제공합니다. XLA를 대상으로 다시 지정하는 것은 새로운 하드웨어에 적합하게 기존의 모든 TensorFlow Op를 구현하는 것보다 훨씬 간단하고 확장성이 좋습니다.
 
-Most implementations will fall into one of the following scenarios:
+대부분의 구현은 다음 시나리오 중 하나에 해당합니다.
 
 1. Existing CPU architecture not yet officially supported by XLA, with or without an existing [LLVM](http://llvm.org) backend.
 2. 기존 LLVM 백엔드가 있는 비 CPU 유사 하드웨어
