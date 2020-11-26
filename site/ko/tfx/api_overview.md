@@ -1,12 +1,12 @@
 # TFX API 참조
 
-## TensorFlow Extended
+## TensorFlow 확장
 
-- [TensorFlow Extended](api_docs/python/tfx)
+- [TensorFlow 확장](api_docs/python/tfx)
 
-## Data Validation
+## 데이터 검증
 
-- [Data Validation](data_validation/api_docs/python/tfdv)
+- [데이터 검증](data_validation/api_docs/python/tfdv)
 
 ## 변환
 
@@ -17,15 +17,15 @@
 
 - [모델 분석](model_analysis/api_docs/python/tfma/)
 
-## Serving
+## 서비스 제공
 
 - [Client API (REST)](serving/api_rest/)
 - [Server API (C++)](serving/api_docs/cc/)
 
-## ML Metadata
+## ML 메타데이터
 
-- [ML Metadata](ml_metadata/api_docs/python/mlmd)
+- [ML 메타데이터](ml_metadata/api_docs/python/mlmd)
 
-## TFX Basic Shared Libraries (`tfx_bsl`)
+## TFX 기본 공유 라이브러리(`tfx_bsl`)
 
 - [tfx_bsl](tfx_bsl/api_docs/python/tfx_bsl/public)
