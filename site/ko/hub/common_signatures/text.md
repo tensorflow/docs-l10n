@@ -2,11 +2,11 @@
 
 # 텍스트에 대한 공통 서명
 
-This page describes common signatures that should be implemented by modules in the [TF1 Hub format](../tf1_hub_module.md) for tasks that accept text inputs. (For the [TF2 SavedModel format](../tf2_saved_model.md), see the analogous [SavedModel API](../common_saved_model_apis/text.md).)
+이 페이지에서는 텍스트 입력을 수용하는 작업을 위해 [TF1 Hub 형식](../tf1_hub_module.md)의 모듈에서 구현해야 하는 일반적인 서명을 설명합니다. [TF2 SavedModel 형식](../tf2_saved_model.md)에 대해서는 유사한 [SavedModel API](../common_saved_model_apis/text.md)를 참조하세요.
 
-## Text feature vector
+## 텍스트 특성 벡터
 
-A **text feature vector** module creates a dense vector representation from text features. It accepts a batch of strings of shape `[batch_size]` and maps them to a `float32` tensor of shape `[batch_size, N]`. This is often called **text embedding** in dimension `N`.
+**텍스트 특성 벡터** 모듈은 텍스트 특성으로부터 밀집 벡터 표현을 만듭니다. 모듈은 형상 `[batch_size]`의 문자열 배치를 받아들이고 이를 형상 `[batch_size, N]`의 `float32` 텐서에 매핑합니다. 이 작업을 종종 차원 `N`에서 **텍스트 임베딩**이라고 합니다.
 
 ### 기본 사용법
 
@@ -18,7 +18,7 @@ A **text feature vector** module creates a dense vector representation from text
       "http://example.com"])
 ```
 
-### Feature column usage
+### 특성 열 사용법
 
 ```python
     feature_columns = [
@@ -29,8 +29,8 @@ A **text feature vector** module creates a dense vector representation from text
     estimator.train(input_fn, max_steps=100)
 ```
 
-## Notes
+## 참고
 
-Modules have been pre-trained on different domains and/or tasks, and therefore not every text feature vector module would be suitable for your problem. E.g.: some modules could have been trained on a single language.
+모듈은 여러 도메인 및/또는 작업에서 사전 훈련되었으므로 모든 텍스트 특성 벡터 모듈이 해당 문제에 적합하지는 않습니다. 예를 들어, 일부 모듈은 단일 언어에서 훈련되었습니다.
 
-This interface does not allow fine-tuning of the text representation on TPUs, because it requires the module to instantiate both string processing and the trainable variables at the same time.
+모듈이 문자열 처리와 훈련 가능한 변수를 동시에 인스턴스화해야 하기 때문에 이 인터페이스는 TPU에서 텍스트 표현의 미세 조정을 허용하지 않습니다.
