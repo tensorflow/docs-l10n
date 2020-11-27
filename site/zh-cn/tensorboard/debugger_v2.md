@@ -67,7 +67,7 @@ tensorboard --logdir /tmp/tfdbg2_logdir
 
 在网络浏览器中，前往 TensorBoard 页面（网址为：http://localhost:6006）。默认情况下，“Debugger V2”插件应处于激活状态，并显示如下页面：
 
-![Debugger V2 full view screenshot](./images/debugger_v2_1_full_view.png)
+![Debugger V2 full view screenshot](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tensorboard/images/debugger_v2_1_full_view.png?raw=true)
 
 ## 使用 Debugger V2 GUI 查找 NaN 的根本原因
 
@@ -80,17 +80,17 @@ TensorBoard 中的 Debugger V2 GUI 分为六个版块：
 
 在了解界面的组织结构之后，让我们采取以下步骤来深入了解 NaN 出现的原因。首先，在 Alerts 版块中点击 **NaN/∞** 警报。这将在 Graph Execution 版块滚动显示 600 个计算图张量，并将焦点放在 #88 上，这是一个由 `Log`（自然对数）算子生成的名为“Log:0”的张量。在二维 float32 张量的 1000 个元素中，以显眼的粉红色突出显示一个 -∞ 元素。这是 TF2 程序的运行时历史记录中的第一个张量，其中包含任何 NaN 或无穷：在它之前计算的张量不包含 NaN 或 ∞；此后计算的许多（实际上是大多数）张量都包含 NaN。我们可以上下滚动 Graph Execution 列表来进行确认。此观察结果强烈表明 `Log` 算子是导致 TF2 程序中数值不稳定的根源。
 
-![Debugger V2: Nan / Infinity alerts and graph execution list](./images/debugger_v2_2_nan_inf_alerts.png)
+![Debugger V2: Nan / Infinity alerts and graph execution list](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tensorboard/images/debugger_v2_2_nan_inf_alerts.png?raw=true)
 
 为什么此 `Log` 算子会产生 -∞？要回答此问题，需要检查算子的输入。点击张量名称 (“Log:0”) ，在 Graph Structure 版块的 TensorFlow 计算图中，会显示 `Log` 算子附近区域的简单但信息丰富的可视化效果。请注意信息流的方向为从上到下。算子本身在中间以粗体显示。在紧挨着算子的上方，我们可以看到一个占位算子，它为 `Log` 算子提供唯一输入。此 logits 占位符在生成的张量在 Graph Execution 列表中位于什么位置？通过使用黄色背景作为视觉辅助，我们可以看到 `logits:0` 张量在 `Log:0` 张量的上方并且隔了两行，即第 85 行。
 
-![Debugger V2: Graph structure view and tracing to input tensor](./images/debugger_v2_3_graph_input.png)
+![Debugger V2: Graph structure view and tracing to input tensor](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tensorboard/images/debugger_v2_3_graph_input.png?raw=true)
 
 更仔细地查看一下第 85 行的“logits:0”张量的数值分解，我们就能发现使用者 `Log:0` 产生 -∞ 的原因：在“logits:0”的 1000 个元素中，有一个元素的值是 0。-∞ 是计算 0 的自然对数的结果！如果我们能以某种方式确保 Log 算子只获得正输入，就能够防止 NaN/∞ 的发生。为此，我们可以在 logits 占位张量上应用裁剪（例如，通过使用 [tf.clip_by_value()](https://www.tensorflow.org/api_docs/python/tf/clip_by_value)）。
 
 我们离解决错误越来越近了，但还没有完成。要应用修复，我们需要知道 Log 算子及其占位输入在 Python 源代码中的位置。Debugger V2 提供了一流的支持，可跟踪计算图算子和执行事件到它们的源代码。当我们在 Graph Executions 中点击 `Log:0` 张量后，Stack Trace 版块会使用 Log 算子创建的原始堆栈跟踪进行填充。堆栈跟踪有点大，因为它包含来自 TensorFlow 内部代码（例如，gen_math_ops.py 和 dumping_callback.py）的许多帧，对于大多数调试任务，我们可以放心地忽略这些帧。我们需要关注的帧是 debug_mnist_v2.py（即，我们实际上正在尝试调试的 Python 文件）中的第 216 行。点击“Line 204”会在 Source Code 版块显示相应代码行的视图。
 
-![Debugger V2: Source code and stack trace](./images/debugger_v2_4_source_code.png)
+![Debugger V2: Source code and stack trace](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tensorboard/images/debugger_v2_4_source_code.png?raw=true)
 
 我们终于找到了源代码，该代码从 logits 输入创建了有问题的 Log 算子。这是我们的自定义分类交叉熵的损失函数，该函数用 `@tf.function` 进行了装饰并随后转换为 TensorFlow 计算图。“logits”占位算子对应于损失函数的第一个输入参数。`Log` 算子使用 tf.math.log() API 调用进行创建。
 
