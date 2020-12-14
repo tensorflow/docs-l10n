@@ -23,7 +23,6 @@ To volunteer to write or review community translations, contact the
 
 ## الخطوات الأولى
 
-* أضف إسم المستخدم الخاصّ بك على github إلى الملف المسمى REVIEWERS الموجود في [هذا الرّابط](https://github.com/tensorflow/docs-l10n/blob/master/site/ar/REVIEWERS) بإرسال "Pull request". 
 * إذا لم يكن لديك خبرة عن كيفية عمل طريقة "Pull request"، رجاءً إتبع التعليمات الموجودة في [هذا الرّابط](https://github.com/firstcontributions/first-contributions/blob/master/translations/README.ar.md)
 
 ## كيفية إخراج اللغة العربيّة بشكل صحيح

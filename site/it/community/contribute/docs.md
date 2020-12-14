@@ -326,9 +326,6 @@ sulle attività per una lingua in particolare:
   che faccia riferimento alla directory <code><a
   href="https://github.com/tensorflow/docs/tree/master/site">site/<var>lang</var></a></code>
   relativa alla lingua.
-* Aggiungete il vostro nome utente GitHub al file `site/<lang>/REVIEWERS` per essere 
-  etichettati per commenti in una richiesta di pull. Quando siete etichettati per commenti,
-  per ogni modifica o discussione relativa alla richiesta di pull, GitHub vi manderà una notifica.
 
 ### Mantenere aggiornato il codice nelle traduzioni
 

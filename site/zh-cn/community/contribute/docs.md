@@ -267,7 +267,6 @@ origin    git@github.com:<var>username</var>/docs.git (push)
 
 * 加入上面列出的语言组，以接收任何涉及该语言<code><a
   href="https://github.com/tensorflow/docs/tree/master/site">site/<var>lang</var></a></code>目录的*已创建的* 拉取请求。
-* 将您的GitHub用户名添加至`site/<lang>/REVIEWERS`文件在拉取请求中能被自动注释标记。在被标记后，GitHub会向您发送该拉取请求中所有更改和讨论的通知。
 
 ### 在翻译中让代码保持最新
 
