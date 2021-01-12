@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2020-12-29' review_interval: '3 months' } *-->
 
 # TF1 Hub format
 
@@ -80,7 +80,7 @@ handle additional outputs gracefully.
 ### Trying out alternative modules
 
 Whenever there are multiple modules for the same task, TensorFlow Hub
-encourages to equip them with compatible signartures (interfaces)
+encourages to equip them with compatible signatures (interfaces)
 such that trying different ones is as easy as varying the module handle
 as a string-valued hyperparameter.
 
