@@ -58,7 +58,7 @@ cd tensorboard_plugin_fairness_indicators
 
 ### 演示 Colab
 
-[Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb) 包含训练和评估模型并在 TensorBoard 中可视化公平性评估结果的端到端演示。
+[Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/g3doc/tutorials/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb) 包含训练和评估模型并在 TensorBoard 中可视化公平性评估结果的端到端演示。
 
 ## 使用方法
 
