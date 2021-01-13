@@ -74,16 +74,19 @@ when applicable.
 
 ## Languages
 
-Language support is determined by a number of factors including—but not limited
-to—site metrics and demand, community support,
+Official language support is determined by a number of factors including—but not
+limited to—site metrics and demand, community support,
 [English proficiency](https://en.wikipedia.org/wiki/EF_English_Proficiency_Index),
 audience preference, and other indicators. Since each supported language incurs
 a cost, unmaintained languages are removed. Support for new languages will be
 announced on the [TensorFlow blog](https://blog.tensorflow.org/) or
 [Twitter](https://twitter.com/TensorFlow).
 
-If your preferred language is not supported, you are welcome to maintain a
-community fork for open source contributors. These are not published to
+The [community branch](https://github.com/tensorflow/docs-l10n/tree/community/site)
+contains community contributed content for languages that are not officially
+supported by the TensorFlow team. This is an unmaintained archive that you can
+use for your own open source fork if your preferred language is not supported.
+Please let us know if you maintain a language! These docs are not published to
 tensorflow.org.
 
 ## License
