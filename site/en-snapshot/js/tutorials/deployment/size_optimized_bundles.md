@@ -120,7 +120,7 @@ Run the custom build tool with the config file as an argument. You need to have 
 
 
 ```
-npx tfjs-custom-bundle  --config custom_tfjs_config.json
+npx tfjs-custom-module  --config custom_tfjs_config.json
 ```
 
 
