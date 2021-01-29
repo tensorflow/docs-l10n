@@ -77,8 +77,12 @@ sudo bash -x -e bazel-$(cat .bazelversion)-installer-darwin-x86_64.sh
 # Install tensorflow and configure bazel
 sudo ./configure.sh
 
+# Add any optimization on bazel command, e.g., --compilation_mode=opt,
+#   --copt=-msse4.2, --remote_cache=, etc.
+# export BAZEL_OPTIMIZATION=
+
 # Build shared libraries
-bazel build -s --verbose_failures //tensorflow_io/...
+bazel build -s --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io/...
 
 # Once build is complete, shared libraries will be available in
 # `bazel-bin/tensorflow_io/core/python/ops/` and it is possible
@@ -132,8 +136,12 @@ sudo python3 -m pip install -U pip
 # Install tensorflow and configure bazel
 sudo ./configure.sh
 
+# Add any optimization on bazel command, e.g., --compilation_mode=opt,
+#   --copt=-msse4.2, --remote_cache=, etc.
+# export BAZEL_OPTIMIZATION=
+
 # Build shared libraries
-bazel build -s --verbose_failures //tensorflow_io/...
+bazel build -s --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io/...
 
 # Once build is complete, shared libraries will be available in
 # `bazel-bin/tensorflow_io/core/python/ops/` and it is possible
@@ -182,10 +190,14 @@ scl enable rh-python36 devtoolset-9 \
 scl enable rh-python36 devtoolset-9 \
     './configure.sh'
 
+# Add any optimization on bazel command, e.g., --compilation_mode=opt,
+#   --copt=-msse4.2, --remote_cache=, etc.
+# export BAZEL_OPTIMIZATION=
+
 # Build shared libraries, notice the passing of --//tensorflow_io/core:static_build
 BAZEL_LINKOPTS="-static-libstdc++ -static-libgcc" BAZEL_LINKLIBS="-lm -l%:libstdc++.a" \
   scl enable rh-python36 devtoolset-9 \
-    'bazel build -s --verbose_failures --//tensorflow_io/core:static_build //tensorflow_io/...'
+    'bazel build -s --verbose_failures $BAZEL_OPTIMIZATION --//tensorflow_io/core:static_build //tensorflow_io/...'
 
 # Once build is complete, shared libraries will be available in
 # `bazel-bin/tensorflow_io/core/python/ops/` and it is possible

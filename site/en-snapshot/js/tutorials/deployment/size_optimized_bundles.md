@@ -131,7 +131,7 @@ This will create a folder at `outputPath` with some new files.
 
 In bundlers like webpack and rollup we can alias the existing references to tfjs modules to point to our newly generated custom tfjs modules. There are three modules that need to be aliased for maximum savings in bundle size.
 
-Here is an snippet of what that looks like in webpack ([full example here](https://github.com/tensorflow/tfjs/blob/master/e2e/custom_bundle/dense_model/webpack.config.js)):
+Here is an snippet of what that looks like in webpack ([full example here](https://github.com/tensorflow/tfjs/blob/master/e2e/custom_module/dense_model/webpack.config.js)):
 
 
 ```
@@ -152,7 +152,7 @@ config.resolve = {
 ```
 
 
-And here is the equivalent code snippet for rollup ([full example here](https://github.com/tensorflow/tfjs/blob/master/e2e/custom_bundle/dense_model/rollup.config.js)):
+And here is the equivalent code snippet for rollup ([full example here](https://github.com/tensorflow/tfjs/blob/master/e2e/custom_module/dense_model/rollup.config.js)):
 
 
 ```
