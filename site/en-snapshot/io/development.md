@@ -88,7 +88,7 @@ bazel build -s --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io/...
 # `bazel-bin/tensorflow_io/core/python/ops/` and it is possible
 # to run tests with `pytest`, e.g.:
 sudo python3 -m pip install pytest
-TFIO_DATAPATH=bazel-bin python3 -m pytest -s -v tests/test_serialization_eager.py
+TFIO_DATAPATH=bazel-bin python3 -m pytest -s -v tests/test_serialization.py
 ```
 
 NOTE: When running pytest, `TFIO_DATAPATH=bazel-bin` has to be passed so that python can utilize the generated shared libraries after the build process.
@@ -147,7 +147,7 @@ bazel build -s --verbose_failures $BAZEL_OPTIMIZATION //tensorflow_io/...
 # `bazel-bin/tensorflow_io/core/python/ops/` and it is possible
 # to run tests with `pytest`, e.g.:
 sudo python3 -m pip install pytest
-TFIO_DATAPATH=bazel-bin python3 -m pytest -s -v tests/test_serialization_eager.py
+TFIO_DATAPATH=bazel-bin python3 -m pytest -s -v tests/test_serialization.py
 ```
 
 ##### CentOS 8
@@ -207,7 +207,7 @@ scl enable rh-python36 devtoolset-9 \
 
 TFIO_DATAPATH=bazel-bin \
   scl enable rh-python36 devtoolset-9 \
-    'python3 -m pytest -s -v tests/test_serialization_eager.py'
+    'python3 -m pytest -s -v tests/test_serialization.py'
 ```
 
 #### Python Wheels
@@ -295,7 +295,7 @@ use:
 $ bash -x -e tests/test_kafka/kafka_test.sh
 
 # Run the tests
-$ TFIO_DATAPATH=bazel-bin pytest -s -vv tests/test_kafka_eager.py
+$ TFIO_DATAPATH=bazel-bin pytest -s -vv tests/test_kafka.py
 ```
 
 Testing `Datasets` associated with tools such as `Elasticsearch` or `MongoDB`
@@ -307,7 +307,7 @@ require docker to be available on the system. In such scenarios, use:
 $ bash tests/test_elasticsearch/elasticsearch_test.sh start
 
 # Run the tests
-$ TFIO_DATAPATH=bazel-bin pytest -s -vv tests/test_elasticsearch_eager.py
+$ TFIO_DATAPATH=bazel-bin pytest -s -vv tests/test_elasticsearch.py
 
 # Stop and remove the container
 $ bash tests/test_elasticsearch/elasticsearch_test.sh stop
@@ -319,7 +319,7 @@ For example, to run tests related to `parquet` dataset's, use:
 
 ```sh
 # Just run the test
-$ TFIO_DATAPATH=bazel-bin pytest -s -vv tests/test_parquet_eager.py
+$ TFIO_DATAPATH=bazel-bin pytest -s -vv tests/test_parquet.py
 ```
 
 
