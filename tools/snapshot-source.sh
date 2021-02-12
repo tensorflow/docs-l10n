@@ -51,7 +51,6 @@ declare -A PROJECTS=(
   [probability]="tensorflow/probability:master:tensorflow_probability/g3doc:probability"
   [probability_examples]="tensorflow/probability:master:tensorflow_probability/examples/jupyter_notebooks:probability/examples"
   [quantum]="tensorflow/quantum:master:docs:quantum"
-  [swift]="tensorflow/swift:main:docs/site:swift"
   [tensorboard]="tensorflow/tensorboard:master:docs:tensorboard"
   [tfx]="tensorflow/tfx:master:docs:tfx"
   [xla]="tensorflow/tensorflow:master:tensorflow/compiler/xla/g3doc:xla"
