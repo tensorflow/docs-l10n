@@ -10,8 +10,11 @@ using the [GitLocalize project](https://gitlocalize.com/tensorflow/docs-l10n).
 *Notebooks are tested on a periodic basis (usually weekly or bi-weekly) so the
 following list may not reflect recent updates.*
 
-Updated: Fri, 15 Jan 2021 17:06:59 GMT<br/>
-Last run: Fri, 15 Jan 2021 02:00:51 GMT
+Updated: Wed, 17 Feb 2021 18:12:09 GMT<br/>
+Last run: Sat, 13 Feb 2021 03:26:02 GMT
 
-All <code>site/pt-br/</code> notebooks pass :)
+Failures in <code>site/pt-br/</code>:
+
+* [tutorials/images/transfer_learning.ipynb](https://github.com/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/images/transfer_learning.ipynb) · [[Sync in GitLocalize](https://gitlocalize.com/repo/4592/pt-br/site/en-snapshot/tutorials/images/transfer_learning.ipynb)] · [[Test in Colab](https://colab.research.google.com/github/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/images/transfer_learning.ipynb)]
+* [tutorials/quickstart/advanced.ipynb](https://github.com/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/quickstart/advanced.ipynb) · [[Sync in GitLocalize](https://gitlocalize.com/repo/4592/pt-br/site/en-snapshot/tutorials/quickstart/advanced.ipynb)] · [[Test in Colab](https://colab.research.google.com/github/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/quickstart/advanced.ipynb)]
 
