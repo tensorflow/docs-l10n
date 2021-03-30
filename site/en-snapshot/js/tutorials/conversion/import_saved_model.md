@@ -2,9 +2,8 @@
 
 TensorFlow GraphDef based models (typically created via the Python API) may be saved in one of following formats:
 1. TensorFlow [SavedModel](https://www.tensorflow.org/programmers_guide/saved_model#overview_of_saving_and_restoring_models)
-2. [Frozen Model](https://www.tensorflow.org/mobile/prepare_models#how_do_you_get_a_model_you_can_use_on_mobile)
-3. [Session Bundle](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/session_bundle/README.md)
-4. [Tensorflow Hub module](https://www.tensorflow.org/hub/)
+2. Frozen Model
+3. [Tensorflow Hub module](https://www.tensorflow.org/hub/)
 
 All of the above formats can be converted by the [TensorFlow.js converter](https://github.com/tensorflow/tfjs/tree/master/tfjs-converter) into a format that can be loaded directly into TensorFlow.js for inference.
 
