@@ -70,7 +70,7 @@ TensorFlow.js 还会将 tf.Tensor 数据存储为 WebGLTextures。创建 `tf.Ten
 
 如果您在意通过模型或 TensorFlow.js 代码执行首次预测的性能，我们建议您在使用实际数据之前先通过传递相同形状的输入张量来预热模型。
 
-For example:
+例如：
 
 ```js
 const model = await tf.loadLayersModel(modelUrl);
@@ -119,7 +119,7 @@ tf.ready().then(() => {...});
 
 [WASM](https://webassembly.org/) 于 2015 年作为一种基于 Web 的新型二进制格式面世，提供以 JavaScript、C、C++ 等语言编写的程序。WASM 自 2017 年起受到 Chrome、Safari、Firefox 和 Edge [支持](https://webassembly.org/roadmap/)，并获得全球 [90% 的设备](https://caniuse.com/#feat=wasm)的支持。
 
-**Performance**
+**性能**
 
 WASM 后端利用 [XNNPACK 库](https://github.com/google/XNNPACK)来优化神经网络算子的实现。
 
