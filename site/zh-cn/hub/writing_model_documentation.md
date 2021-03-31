@@ -4,9 +4,9 @@
 
 要向 tfhub.dev 贡献模型，必须提供 Markdown 格式的文档。有关将模型添加到 tfhub.dev 的过程的完整概述，请参阅[贡献模型](contribute_a_model.md)指南。
 
-## Types of Markdown documentation
+## Markdown 文档类型
 
-There are 3 types of Markdown documentation used in tfhub.dev:
+tfhub.dev 中使用了以下 3 种 Markdown 文档类型：
 
 - 发布者 Markdown - 包含有关发布者的信息（请参阅[成为发布者](publish.md)指南了解详情）。
 - 模型 Markdown - 包含有关特定模型的信息。
@@ -21,7 +21,7 @@ There are 3 types of Markdown documentation used in tfhub.dev:
 - 每个模型均应在 `assets/publisher_name/models` 下具有自己的目录
 - 每个集合均应在 `assets/publisher_name/collections` 下具有自己的目录
 
-Publisher and collection Markdowns are unversioned, while models can have different versions. Each model version requires a separate Markdown file named after the version it describes (i.e. 1.md, 2.md).
+发布者与集合的 Markdown 文件不受版本控制，而模型可以具有不同的版本。每个模型版本都需要一个单独的 Markdown 文件，以其描述的版本命名（即 1.md、2.md）。
 
 给定模型的所有模型版本应位于模型目录中。
 
@@ -47,11 +47,11 @@ assets
 └── ...
 ```
 
-## Model page specific Markdown format
+## 模型页面特定的 Markdown 格式
 
-The model documentation is a Markdown file with some add-on syntax. See the example below for a minimal example or [a more realistic example Markdown file](https://github.com/tensorflow/tfhub.dev/blob/master/examples/docs/tf2_model_example.md).
+模型文档是带有某些附加语法的 Markdown 文件。请参见下文提供的精简示例，或参见[更真实的 Markdown 文件示例](https://github.com/tensorflow/tfhub.dev/blob/master/examples/docs/tf2_model_example.md)。
 
-### Example documentation
+### 示例文档
 
 高质量的模型文档中包含代码段，以及有关如何训练模型和模型预期用途的信息。您还应该使用[下述](#model-markdown-specific-metadata-properties)模型特定的元数据属性，以便用户在 tfhub.dev 上更快地找到您的模型。
 
@@ -81,15 +81,15 @@ output = model(inputs)
 ``
 ```
 
-### Model deployments and grouping deployments together
+### 模型部署以及将部署分组到一起
 
 tfhub.dev 支持发布 TensorFlow 模型的 TF.js、TFLite 和 Coral 部署。
 
 Markdown 文件的首行应指定部署格式的类型：
 
 - `# Tfjs publisher/model/version` 用于 TF.js 部署
-- `# Lite publisher/model/version` for Lite deployments
-- `# Coral publisher/model/version` for Coral deployments
+- `# Lite publisher/model/version` 用于 Lite 部署
+- `# Coral publisher/model/version` 用于 Coral 部署
 
 建议您将这些不同部署显示在 tfhub.dev 上的同一模型页面中。要将给定的 TF.js、TFLite 或 Coral 部署关联至 TensorFlow 模型，请指定 parent-model 标记：
 
@@ -99,7 +99,7 @@ Markdown 文件的首行应指定部署格式的类型：
 
 有时，您可能需要发布一个或多个不含 TensorFlow SavedModel 的部署。这种情况下，您需要创建一个占位符模型，并在 `parent-model` 标记中指定其句柄。占位符 Markdown 与 TensorFlow 模型 Markdown 基本相同，区别在于其首行为 `# Placeholder publisher/model/version` 并且不需要 `asset-path` 属性。
 
-### Model Markdown specific metadata properties
+### 模型 Markdown 特定的元数据属性
 
 Markdown 文件可以包含元数据属性。这些属性以 Markdown 注释形式列于 Markdown 文件描述的下方。
 
