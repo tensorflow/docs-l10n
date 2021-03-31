@@ -8,9 +8,9 @@ Task Library `BertQuestionAnswerer` API는 Bert 모델을 로드하고 주어진
 
 - 입력 텍스트에서 그래프 외 Wordpiece 또는 Sentencepiece 토큰화를 수행합니다.
 
-## Supported BertQuestionAnswerer models
+## 지원되는 BertQuestionAnswerer 모델
 
-The following models are compatible with the `BertNLClassifier` API.
+다음 모델은 `BertNLClassifier` API와 호환됩니다.
 
 - Models created by [TensorFlow Lite Model Maker for BERT Question Answer](https://www.tensorflow.org/lite/tutorials/model_maker_question_answer).
 
@@ -96,7 +96,7 @@ std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, q
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/qa/bert_question_answerer.h)를 참조하세요.
 
-## Example results
+## 예제 결과
 
 다음은 [ALBERT 모델](https://tfhub.dev/tensorflow/lite-model/albert_lite_base/squadv1/1)의 답변 결과를 보여주는 예입니다.
 
@@ -122,7 +122,7 @@ logit: -0.774266, start_index: 37, end_index: 40
 
 자체 모델 및 테스트 데이터로 간단한 [BertQuestionAnswerer용 CLI 데모 도구](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/examples/task/text/desktop/README.md#bert-question-answerer)를 시도해 보세요.
 
-## Model compatibility requirements
+## 모델 호환성 요구 사항
 
 `BertQuestionAnswerer` API는 필수 [TFLite 모델 메타데이터](../../convert/metadata.md)가 있는 TFLite 모델을 예상합니다.
 
