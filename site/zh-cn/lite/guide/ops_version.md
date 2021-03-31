@@ -141,7 +141,7 @@ AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D(), 1, 2);
 - 当膨胀系数均为1时，填充 版本=1。
 - 除此之外，填充 版本=2。
 
-To do this, you need to first add corresponding parameters to `depthwise_conv_2d` inside the `OpSignature` struct:
+为此，您需要首先在 `OpSignature`结构内的 `depthwise_conv_2d` 中添加相应的参数：
 
 ```
 struct {
@@ -150,7 +150,7 @@ struct {
     } depthwise_conv_2d;
 ```
 
-Then populate these new parameters in `GetOpSignature` function in `lite/tools/versioning/op_version.cc`:
+然后在 `lite/tools/versioning/op_version.cc` 中的 `GetOpSignature` 函数中填充这些新参数。
 
 ```
 case BuiltinOperator_DEPTHWISE_CONV_2D: {
@@ -164,9 +164,9 @@ case BuiltinOperator_DEPTHWISE_CONV_2D: {
     } break;
 ```
 
-Note that if you are adding support for new types, above steps are not needed. Input and output types are defined and populated for all ops in `OpSignature`.
+请注意，如果要添加对新类型的支持，则无需上述步骤。可在 `OpSignature` 中为所有的运算定义和填充输入和输出类型。
 
-Finally, modify `GetBuiltinOperatorVersion` function for the operator in `lite/tools/versioning/op_version.cc` by adding the new version to the case of `DepthwiseConv2D`:
+最后，通过将新版本添加到 `DepthwiseConv2D` 示例，为 `lite/tools/versioning/op_version.cc` 中的算子修改 `GetBuiltinOperatorVersion` 函数：
 
 ```
 int GetVersion(const Operator& op) const override {
@@ -183,7 +183,7 @@ int GetVersion(const Operator& op) const override {
 
 TensorFlow Lite 提供了一个委托 API，可以将操作委派给硬件后端。在 Delegate 的 Prepare 函数中，检查该版本是否支持委派代码中的每个节点。
 
-To do this, you need to add a new map entry in `lite/tools/versioning/runtime_version.cc`.
+为此，您需要在 `lite/tools/versioning/runtime_version.cc` 中添加一个新的映射条目。
 
 在本例中，您需要将以下条目添加到 `op_version_map` 中：
 
