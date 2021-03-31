@@ -1,10 +1,10 @@
 # TensorFlow Lite 시작하기
 
-TensorFlow Lite provides all the tools you need to convert and run TensorFlow models on mobile, embedded, and IoT devices. The following guide walks through each step of the developer workflow and provides links to further instructions.
+TensorFlow Lite는 모바일, 임베디드 및 IoT 기기에서 TensorFlow 모델을 변환하고 실행하는 데 필요한 모든 도구를 제공합니다. 다음 가이드는 개발자 워크플로의 각 단계를 안내하고 추가 지침에 대한 링크를 제공합니다.
 
 [TOC]
 
-## 1. Choose a model
+## 1. 모델 선택하기
 
 <a id="1_choose_a_model"></a>
 
@@ -14,11 +14,11 @@ To use a model with TensorFlow Lite, you must convert a full TensorFlow model in
 
 참고 : TensorFlow Lite는 TensorFlow 작업의 제한된 하위 집합을 지원하므로 모든 모델을 변환 할 수 없습니다. 자세한 내용은 [TensorFlow Lite 연산자 호환성](ops_compatibility.md) 에 대해 읽어보세요.
 
-### Use a pre-trained model
+### 사전 훈련된 모델 사용하기
 
 The TensorFlow Lite team provides a set of pre-trained models that solve a variety of machine learning problems. These models have been converted to work with TensorFlow Lite and are ready to use in your applications.
 
-The pre-trained models include:
+사전 훈련된 모델에는 다음이 포함됩니다.
 
 - [Image classification](../models/image_classification/overview.md)
 - [Object detection](../models/object_detection/overview.md)
@@ -26,39 +26,39 @@ The pre-trained models include:
 - [Pose estimation](../models/pose_estimation/overview.md)
 - [Segmentation](../models/segmentation/overview.md)
 
-See our full list of pre-trained models in [Models](../models).
+[모델](../models)에서 사전 훈련된 모델의 전체 목록을 참조하세요.
 
 #### 다른 출처의 모델
 
-There are many other places you can obtain pre-trained TensorFlow models, including [TensorFlow Hub](https://www.tensorflow.org/hub). In most cases, these models will not be provided in the TensorFlow Lite format, and you'll have to [convert](#2_convert_the_model_format) them before use.
+[TensorFlow Hub](https://www.tensorflow.org/hub)를 포함하여 여러 위치에서 사전 훈련된 TensorFlow 모델을 얻을 수 있습니다. 대부분의 경우, 이러한 모델은 TensorFlow Lite 형식으로 제공되지 않으므로 사용하기 전에 [변환](#2_convert_the_model_format)해야 합니다.
 
-### Re-train a model (transfer learning)
+### 모델 재훈련(전이 학습)
 
 Transfer learning allows you to take a trained model and re-train it to perform another task. For example, an [image classification](../models/image_classification/overview.md) model could be retrained to recognize new categories of image. Re-training takes less time and requires less data than training a model from scratch.
 
-You can use transfer learning to customize pre-trained models to your application. Learn how to perform transfer learning in the <a href="https://codelabs.developers.google.com/codelabs/recognize-flowers-with-tensorflow-on-android">Recognize flowers with TensorFlow</a> codelab.
+전이 학습을 사용하여 사전 훈련된 모델을 애플리케이션에 맞게 사용자 지정할 수 있습니다. <a href="https://codelabs.developers.google.com/codelabs/recognize-flowers-with-tensorflow-on-android">TensorFlow를 이용한 꽃 인식</a> Codelab에서 전이 학습을 수행하는 방법을 알아보세요.
 
-### Train a custom model
+### 사용자 정의 모델 훈련하기
 
-If you have designed and trained your own TensorFlow model, or you have trained a model obtained from another source, you must [convert it to the TensorFlow Lite format](#2_convert_the_model_format).
+자체 TensorFlow 모델을 설계하고 학습했거나 다른 출처를 통해 얻은 모델을 훈련한 경우, [이 모델을 TensorFlow Lite 형식으로 변환](#2_convert_the_model_format)해야 합니다.
 
-You can also try [The TensorFlow Lite Model Maker library](model_maker.md) which simplifies the process of training a TensorFlow Lite model using custom datasets.
+[TensorFlow Lite Model Maker 라이브러리](model_maker.md)를 사용하면 사용자 정의 데이터세트를 사용하여 TensorFlow Lite 모델을 훈련하는 작업이 보다 간편해집니다.
 
-## 2. Convert the model
+## 2. 모델 변환하기
 
 <a id="2_convert_the_model_format"></a>
 
-TensorFlow Lite is designed to execute models efficiently on mobile and other embedded devices with limited compute and memory resources. Some of this efficiency comes from the use of a special format for storing models. TensorFlow models must be converted into this format before they can be used by TensorFlow Lite.
+TensorFlow Lite는 컴퓨팅 및 메모리 리소스가 제한적인 모바일 및 기타 임베디드 기기에서 모델을 효율적으로 실행하도록 설계되었습니다. 모델 저장에 특수 형식을 사용한 점도 이러한 효율성 개선에 일부 도움을 줍니다. TensorFlow 모델을 TensorFlow Lite에서 사용하려면 먼저 이 형식으로 변환해야 합니다.
 
-Converting models reduces their file size and introduces optimizations that do not affect accuracy. The TensorFlow Lite converter provides options that allow you to further reduce file size and increase speed of execution, with some trade-offs.
+모델을 변환하면 파일 크기가 줄어들고 정확도에 영향을 주지 않는 최적화가 가능합니다. TensorFlow Lite 변환기는 일부 상보적 균형 조정을 통해 파일 크기를 더욱 줄이고 실행 속도를 높일 수 있는 선택을 제공합니다.
 
-Note: TensorFlow Lite supports a limited subset of TensorFlow operations, so not all models can be converted. For details, read about the [TensorFlow Lite operator compatibility](ops_compatibility.md).
+참고: TensorFlow Lite는 TensorFlow 연산 중 일부만을 지원하므로 모든 모델을 변환할 수 있는 것은 아닙니다. 자세한 내용은 [TensorFlow Lite 연산자 호환성](ops_compatibility.md)을 읽어보세요.
 
 ### TensorFlow Lite 변환기
 
-The [TensorFlow Lite converter](../convert) is a tool available as a Python API that converts trained TensorFlow models into the TensorFlow Lite format. It can also introduce optimizations, which are covered in section 4, [Optimize your model](#4_optimize_your_model_optional).
+[TensorFlow Lite 변환기](../convert)는 훈련된 TensorFlow 모델을 TensorFlow Lite 형식으로 변환하는 Python API의 개념으로 사용할 수 있는 도구입니다. 또한 섹션 4, [모델 최적화](#4_optimize_your_model_optional)에서 다루는 최적화를 도입할 수도 있습니다.
 
-The following example shows a TensorFlow `SavedModel` being converted into the TensorFlow Lite format:
+다음 예는 TensorFlow `SavedModel`을 TensorFlow Lite 형식으로 변환하는 과정을 보여줍니다.
 
 ```python
 import tensorflow as tf
@@ -68,46 +68,46 @@ tflite_model = converter.convert()
 open("converted_model.tflite", "wb").write(tflite_model)
 ```
 
-You can [convert TensorFlow 2.0 models](../convert/index.md) in a similar way.
+같은 방식으로 [TensorFlow 2.0 모델도 변환](../convert/index.md)할 수 있습니다.
 
-The converter can also be used from the [command line](../convert/cmdline.md), but the Python API is recommended.
+변환기는 [명령줄](../convert/cmdline.md)에서도 사용할 수 있지만 Python API 사용을 권장합니다.
 
 ### 옵션
 
-The converter can convert from a variety of input types.
+변환기는 다음과 같은 다양한 입력 유형으로부터 변환할 수 있습니다.
 
-When [converting TensorFlow 1.x models](../convert/python_api.md), these are:
+[TensorFlow 1.x 모델을 변환](../convert/python_api.md)할 때 다음 유형이 해당합니다.
 
 - [SavedModel directories](https://www.tensorflow.org/guide/saved_model)
 - Frozen GraphDef (models generated by [freeze_graph.py](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/tools/freeze_graph.py))
 - [Keras](https://keras.io) HDF5 모델
-- Models taken from a `tf.Session`
+- `tf.Session`에서 가져온 모델
 
-When [converting TensorFlow 2.x models](../convert/python_api.md), these are:
+[TensorFlow 2.x 모델을 변환](../convert/python_api.md)할 때는 다음 유형이 해당합니다.
 
 - [SavedModel directories](https://www.tensorflow.org/guide/saved_model)
 - [`tf.keras` models](https://www.tensorflow.org/guide/keras/overview)
 - [Concrete functions](https://tensorflow.org/guide/concrete_function)
 
-The converter can be configured to apply various optimizations that can improve performance or reduce file size. This is covered in section 4, [Optimize your model](#4_optimize_your_model_optional).
+성능을 향상하거나 파일 크기를 줄일 수 있는 다양한 최적화를 적용하도록 변환기를 구성할 수 있습니다. 섹션 4, [모델 최적화](#4_optimize_your_model_optional)에서 이 내용을 다룹니다.
 
 ### Ops 호환성
 
-TensorFlow Lite currently supports a [limited subset of TensorFlow operations](ops_compatibility.md). The long term goal is for all TensorFlow operations to be supported.
+TensorFlow Lite는 현재 [TensorFlow 연산의 일부만](ops_compatibility.md) 지원합니다. 장기적으로는 모든 TensorFlow 연산을 지원하는 것이 목표입니다.
 
-If the model you wish to convert contains unsupported operations, you can use [TensorFlow Select](ops_select.md) to include operations from TensorFlow. This will result in a larger binary being deployed to devices.
+변환하려는 모델에 지원되지 않는 연산이 포함된 경우, [TensorFlow Select](ops_select.md)를 사용하여 TensorFlow의 연산을 포함할 수 있습니다. 이로 인해 기기에 큰 용량의 바이너리가 배포됩니다.
 
-## 3. Run inference with the model
+## 3. 모델로 추론 실행하기
 
 <a id="3_use_the_tensorflow_lite_model_for_inference_in_a_mobile_app"></a>
 
-*Inference* is the process of running data through a model to obtain predictions. It requires a model, an interpreter, and input data.
+*추론*은 예측값을 얻기 위해 모델에서 데이터를 실행하는 과정입니다. 추론을 위해서는 모델, 인터프리터 및 입력 데이터가 필요합니다.
 
 ### TensorFlow Lite 인터프리터
 
-The [TensorFlow Lite interpreter](inference.md) is a library that takes a model file, executes the operations it defines on input data, and provides access to the output.
+[TensorFlow Lite 인터프리터](inference.md)는 모델 파일을 가져와서 입력 데이터에 정의한 작업을 실행하고 출력에 대한 액세스를 제공하는 라이브러리입니다.
 
-The interpreter works across multiple platforms and provides a simple API for running TensorFlow Lite models from Java, Swift, Objective-C, C++, and Python.
+인터프리터는 여러 플랫폼에서 작동하며 Java, Swift, Objective-C, C++ 및 Python에서 TensorFlow Lite 모델을 실행하기 위한 간단한 API를 제공합니다.
 
 다음 코드는 Java에서 호출되는 인터프리터를 보여줍니다.
 
@@ -117,13 +117,13 @@ try (Interpreter interpreter = new Interpreter(tensorflow_lite_model_file)) {
 }
 ```
 
-### GPU acceleration and Delegates
+### GPU 가속 및 Delegate
 
-Some devices provide hardware acceleration for machine learning operations. For example, most mobile phones have GPUs, which can perform floating point matrix operations faster than a CPU.
+일부 기기는 머신러닝 연산을 위한 하드웨어 가속을 제공합니다. 예를 들어, 대부분의 휴대전화에는 CPU보다 빠르게 부동 소수점 행렬 연산을 수행할 수 있는 GPU가 있습니다.
 
-The speed-up can be substantial. For example, a MobileNet v1 image classification model runs 5.5x faster on a Pixel 3 phone when GPU acceleration is used.
+속도 향상은 상당할 수 있습니다. 예를 들어 MobileNet v1 이미지 분류 모델은 GPU 가속을 사용할 때 Pixel 3 휴대전화에서 5.5배 더 빠르게 실행됩니다.
 
-The TensorFlow Lite interpreter can be configured with [Delegates](../performance/delegates.md) to make use of hardware acceleration on different devices. The [GPU Delegate](../performance/gpu.md) allows the interpreter to run appropriate operations on the device's GPU.
+TensorFlow Lite 인터프리터는 여러 기기에서 하드웨어 가속을 사용하도록 [Delegate](../performance/delegates.md)로 구성할 수 있습니다. [GPU Delegate](../performance/gpu.md)를 사용하면 인터프리터가 기기의 GPU에서 적절한 연산을 실행할 수 있습니다.
 
 다음 코드는 Java에서 사용되는 GPU Delegate를 보여줍니다.
 
@@ -136,49 +136,49 @@ try {
 }
 ```
 
-To add support for new hardware accelerators you can [define your own delegate](../performance/delegates.md#how_to_add_a_delegate).
+새 하드웨어 가속기에 대한 지원을 추가하려면 [고유한 delegate를 정의](../performance/delegates.md#how_to_add_a_delegate)할 수 있습니다.
 
 ### Android 및 iOS
 
-The TensorFlow Lite interpreter is easy to use from both major mobile platforms. To get started, explore the [Android quickstart](android.md) and [iOS quickstart](ios.md) guides. [Example applications](https://www.tensorflow.org/lite/examples) are available for both platforms.
+TensorFlow Lite 인터프리터는 양대 모바일 플랫폼에서 쉽게 사용할 수 있습니다. 시작하려면 [Android 빠른 시작](android.md) 및 [iOS 빠른 시작](ios.md) 가이드를 살펴보세요. 두 플랫폼 모두에서 [예제 애플리케이션](https://www.tensorflow.org/lite/examples)을 사용할 수 있습니다.
 
-To obtain the required libraries, Android developers should use the [TensorFlow Lite AAR](android.md#use_the_tensorflow_lite_aar_from_jcenter). iOS developers should use the [CocoaPods for Swift or Objective-C](ios.md#add_tensorflow_lite_to_your_swift_or_objective-c_project).
+필요한 라이브러리를 얻으려는 Android 개발자는 [TensorFlow Lite AAR](android.md#use_the_tensorflow_lite_aar_from_jcenter)을 사용해야 합니다. iOS 개발자는 [Swift 또는 Objective-C용 CocoaPods](ios.md#add_tensorflow_lite_to_your_swift_or_objective-c_project)를 사용해야 합니다.
 
 ### Linux
 
-Embedded Linux is an important platform for deploying machine learning. To get started using Python to perform inference with your TensorFlow Lite models, follow the [Python quickstart](python.md).
+Embedded Linux는 머신러닝 배포를 위한 중요한 플랫폼입니다. Python을 사용하여 TensorFlow Lite 모델로 추론을 수행하려면 [Python 빠른 시작](python.md)을 따르세요.
 
-To instead install the C++ library, see the build instructions for [Raspberry Pi](build_rpi.md) or [Arm64-based boards](build_arm64.md) (for boards such as Odroid C2, Pine64, and NanoPi).
+대신 C++ 라이브러리를 설치하려면 [Raspberry Pi](build_rpi.md) 또는 [Arm64 기반 보드](build_arm64.md)(Odroid C2, Pine64, NanoPi와 같은 보드의 경우)에 대한 빌드 지침을 참조하세요.
 
-### Microcontrollers
+### 마이크로컨트롤러
 
-[TensorFlow Lite for Microcontrollers](../microcontrollers) is an experimental port of TensorFlow Lite aimed at microcontrollers and other devices with only kilobytes of memory.
+[마이크로컨트롤러용 TensorFlow Lite](../microcontrollers)는 마이크로컨트롤러 및 수 킬로바이트의 메모리만 있는 기타 기기를 대상으로 하는 TensorFlow Lite의 실험적 버전입니다.
 
-### Operations
+### 연산
 
-If your model requires TensorFlow operations that are not yet implemented in TensorFlow Lite, you can use [TensorFlow Select](ops_select.md) to use them in your model. You'll need to build a custom version of the interpreter that includes the TensorFlow operations.
+모델에 TensorFlow Lite에서 아직 구현되지 않은 TensorFlow 연산이 필요한 경우, [TensorFlow Select](ops_select.md)를 사용하여 모델에 해당 연산을 사용할 수 있습니다. TensorFlow 연산을 포함하는 인터프리터의 사용자 정의 버전을 빌드해야 합니다.
 
-You can use [Custom operators](ops_custom.md) to write your own operations, or port new operations into TensorFlow Lite.
+[사용자 정의 연산자](ops_custom.md)를 사용하여 고유한 연산을 작성하거나 새로운 연산을 TensorFlow Lite로 이식할 수 있습니다.
 
-[Operator versions](ops_version.md) allows you to add new functionalities and parameters into existing operations.
+[연산자 버전](ops_version.md)을 사용하면 기존 작업에 새로운 기능과 매개변수를 추가할 수 있습니다.
 
-## 4. Optimize your model
+## 4. 모델 최적화하기
 
 <a id="4_optimize_your_model_optional"></a>
 
-TensorFlow Lite provides tools to optimize the size and performance of your models, often with minimal impact on accuracy. Optimized models may require slightly more complex training, conversion, or integration.
+TensorFlow Lite는 종종 정확도에 미치는 영향을 최소화하면서 모델의 크기와 성능을 최적화하는 도구를 제공합니다. 최적화된 모델에는 약간 더 복잡한 훈련, 변환 또는 통합이 필요할 수 있습니다.
 
-Machine learning optimization is an evolving field, and TensorFlow Lite's [Model Optimization Toolkit](#model-optimization-toolkit) is continually growing as new techniques are developed.
+머신러닝 최적화는 진화하는 분야이며 TensorFlow Lite의 [모델 최적화 도구 키트](#model-optimization-toolkit)도 새로운 기술이 개발됨에 따라 지속적으로 발전하고 있습니다.
 
-### Performance
+### 성능
 
-The goal of model optimization is to reach the ideal balance of performance, model size, and accuracy on a given device. [Performance best practices](../performance/best_practices.md) can help guide you through this process.
+모델 최적화의 목표는 주어진 기기에서 성능, 모델 크기 및 정확성의 이상적인 균형을 찾는 것입니다. [성능 모범 사례](../performance/best_practices.md)에서 어떻게 이러한 균형을 찾을 수 있는지 알아볼 수 있습니다.
 
 ### 양자화
 
-By reducing the precision of values and operations within a model, quantization can reduce both the size of model and the time required for inference. For many models, there is only a minimal loss of accuracy.
+양자화는 모델 내에서 값과 연산의 정밀도를 줄임으로써 모델의 크기와 추론에 필요한 시간을 모두 줄일 수 있습니다. 많은 모델의 경우, 정확도 손실은 미미한 수준입니다.
 
-The TensorFlow Lite converter makes it easy to quantize TensorFlow models. The following Python code quantizes a `SavedModel` and saves it to disk:
+TensorFlow Lite 변환기를 사용하면 TensorFlow 모델을 쉽게 양자화할 수 있습니다. 다음 Python 코드는 `SavedModel`을 양자화하고 그 결과를 디스크에 저장합니다.
 
 ```python
 import tensorflow as tf
@@ -189,19 +189,19 @@ tflite_quantized_model = converter.convert()
 open("converted_model.tflite", "wb").write(tflite_quantized_model)
 ```
 
-TensorFlow Lite supports reducing precision of values from full floating point to half-precision floats (float16) or 8-bit integers. There are trade-offs in model size and accuracy for each choice, and some operations have optimized implementations for these reduced precision types.
+TensorFlow Lite는 전체 부동 소수점에서 반정밀도 부동 소수점(float16) 또는 8bit 정수로 값의 정밀도를 줄일 수 있도록 지원합니다. 각 선택에서 모델 크기와 정확도 사이에 절충이 이루어지며, 일부 연산은 이러한 감소된 정밀도에 최적화된 구현을 가지고 있습니다.
 
-To learn more about quantization, see [Post-training quantization](../performance/post_training_quantization.md).
+양자화에 대한 자세한 내용은 [훈련 후 양자화](../performance/post_training_quantization.md)를 참조하세요.
 
-### Model Optimization Toolkit
+### 모델 최적화 도구 키트
 
-The [Model Optimization Toolkit](../performance/model_optimization.md) is a set of tools and techniques designed to make it easy for developers to optimize their models. Many of the techniques can be applied to all TensorFlow models and are not specific to TensorFlow Lite, but they are especially valuable when running inference on devices with limited resources.
+[모델 최저화 도구 키트](../performance/model_optimization.md)는 개발자가 모델을 쉽게 최적화할 수 있도록 설계된 도구 및 기술 모음입니다. 많은 기술을 모든 TensorFlow 모델에 적용할 수 있으며 TensorFlow Lite에만 국한되지는 않지만 리소스가 제한된 기기에서 추론을 실행할 때 특히 유용합니다.
 
 ## 다음 단계
 
-Now that you're familiar with TensorFlow Lite, explore some of the following resources:
+이제 TensorFlow Lite에 익숙해졌으므로 다음 리소스를 살펴보세요.
 
 - If you're a mobile developer, visit [Android quickstart](android.md) or [iOS quickstart](ios.md).
 - If you're building Linux embedded devices, see the [Python quickstart](python.md) or C++ build instructions for [Raspberry Pi](build_rpi.md) and [Arm64-based boards](build_arm64.md).
-- Explore our [pre-trained models](../models).
-- Try our [example apps](https://www.tensorflow.org/lite/examples).
+- [사전 훈련된 모델](../models)을 살펴봅니다.
+- [예제 앱](https://www.tensorflow.org/lite/examples)을 사용해봅니다.
