@@ -1,6 +1,6 @@
 # TFX용 TensorFlow 모델링 코드 설계하기
 
-When designing your TensorFlow modeling code for TFX there are a few items to be aware of, including the choice of a modeling API.
+TFX용 TensorFlow 모델링 코드를 설계할 때 모델링 API의 선택을 포함하여 몇 가지 알아야 할 항목이 있습니다.
 
 - 입력: [Transform](transform.md)의 SavedModel 및 [ExampleGen](examplegen.md)의 데이터
 - 출력: SavedModel 형식의 훈련된 모델
@@ -8,7 +8,7 @@ When designing your TensorFlow modeling code for TFX there are a few items to be
 <aside class="note" id="tf2-support"><b>참고:</b> TFX는 사소한 예외를 제외하고 거의 모든 TensorFlow 2.X를 지원합니다. TFX는 또한 TensorFlow 1.15를 전체적으로 지원합니다.</aside>
 
 <ul>
-  <li>New TFX pipelines should use TensorFlow 2.x with Keras models via the     <a href="https://github.com/tensorflow/community/blob/master/rfcs/20200117-tfx-generic-trainer.md">Generic Trainer</a>.</li>
+  <li>새로운 TFX 파이프라인은 <a href="https://github.com/tensorflow/community/blob/master/rfcs/20200117-tfx-generic-trainer.md">Generic Trainer</a>를 통해 Keras 모델이 있는 TensorFlow 2.x를 사용해야 합니다.</li>
   <li>tf.distribute에 대한 개선된 지원을 포함하여 TensorFlow 2.X에 대한 전체 지원이 향후 릴리스에서 점진적으로 추가될 것입니다.</li>
   <li>이전 TFX 파이프라인은 TensorFlow 1.15를 계속 사용할 수 있습니다. TensorFlow 2.X로 전환하려면 <a href="https://www.tensorflow.org/guide/migrate">TensorFlow 마이그레이션 가이드</a>를 참조하세요.</li>
 </ul>
