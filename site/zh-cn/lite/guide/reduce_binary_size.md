@@ -6,9 +6,9 @@
 
 选择性构建适用于以下三个算子库。
 
-1. [TensorFlow Lite built-in ops library](https://www.tensorflow.org/lite/guide/ops_compatibility)
-2. [TensorFlow Lite custom ops](https://www.tensorflow.org/lite/guide/ops_custom)
-3. [Select TensorFlow ops library](https://www.tensorflow.org/lite/guide/ops_select)
+1. [TensorFlow Lite 内置运算库](https://www.tensorflow.org/lite/guide/ops_compatibility)
+2. [TensorFlow Lite 自定义运算](https://www.tensorflow.org/lite/guide/ops_custom)
+3. [选择 TensorFlow 运算库](https://www.tensorflow.org/lite/guide/ops_select)
 
 下表说明了某些常见用例的选择性构建：
 
@@ -22,9 +22,8 @@
     </tr>
   </thead>
   <tr>
-    <td rowspan="2">
-      <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>
-    </td>
+    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>
+</td>
     <td rowspan="2">图像分类</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar（296,635 字节）</td>
@@ -34,9 +33,8 @@
     <td>tensorflow-lite.aar（382,892 字节）</td>
   </tr>
   <tr>
-    <td rowspan="2">
-      <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a>
-    </td>
+    <td rowspan="2">       <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a>
+</td>
     <td rowspan="2">声音基音提取</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar（375,813 字节）<br>tensorflow-lite-select-tf-ops.aar（1,676,380 字节）</td>
@@ -46,9 +44,8 @@
     <td>tensorflow-lite.aar（421,826 字节）<br>tensorflow-lite-select-tf-ops.aar（2,298,630 字节）</td>
   </tr>
   <tr>
-    <td rowspan="2">
-      <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a>
-    </td>
+    <td rowspan="2">       <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a>
+</td>
     <td rowspan="2">视频分类</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar（240,085 字节）<br>tensorflow-lite-select-tf-ops.aar（1,708,597 字节）</td>
@@ -97,9 +94,9 @@ sh tensorflow/lite/tools/build_aar.sh \
 
 ## 使用 Docker 选择性构建 TensorFlow Lite
 
-This section assumes that you have installed [Docker](https://docs.docker.com/get-docker/) on your local machine and downloaded the TensorFlow Lite Dockerfile [here](https://www.tensorflow.org/lite/guide/build_android#set_up_build_environment_using_docker).
+本部分假设您已在本地计算机上安装 [Docker](https://docs.docker.com/get-docker/)，并且已从[此处](https://www.tensorflow.org/lite/guide/build_android#set_up_build_environment_using_docker)下载了  TensorFlow Lite Dockerfile。
 
-After downloading the above Dockerfile, you can build the docker image by running:
+下载上述 Dockerfile 之后，您可以通过运行以下命令构建 Docker 镜像：
 
 ```shell
 docker build . -t tflite-builder -f tflite-android.Dockerfile
@@ -127,7 +124,7 @@ sh build_aar_with_docker.sh \
 
 `checkpoint` 标记是您希望在构建库之前签出的 TensorFlow 仓库的提交、分支或标签。上面的命令将为 TensorFlow Lite 的内置和自定义算子生成 AAR 文件 `tensorflow-lite.aar`，对于您的当前目录下的 Select TensorFlow 算子，还可以选择生成 AAR 文件 `tensorflow-lite-select-tf-ops.aar`。
 
-The --cache_dir specify the cache directory. If not provided, the script will create a directory named `bazel-build-cache` under current working directory for caching.
+--cache_dir 指定缓存目录。如果未提供，脚本将在当前工作目录下创建一个名为 `bazel-build-cache` 的目录用于缓存。
 
 ## 将 AAR 文件添加到项目
 
