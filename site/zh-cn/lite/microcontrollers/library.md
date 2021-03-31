@@ -1,92 +1,121 @@
 # 理解 C++ 库
 
-微控制器版 TensorFlow Lite C++ 库是
-[TensorFlow 仓库](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/micro)
-的一部分。它可读、易修改，测试结果良好，易整合，并且与标准 TensorFlow Lite 兼容。
+TensorFlow Lite for Microcontrollers C++ 库是 [TensorFlow 仓库](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro)的一部分。它被设计为可读性强、易于修改、测试良好、易于集成，并与常规的 TensorFlow Lite 兼容。
 
-下面的文档列出了 C++ 库的基本结构，提供了编译所需的命令，并给出了将程序写入新设备的概览。
-
-在
-[README.md](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/README.md#如何将用于微控制器的TensorFlow-Lite写入一个新的平台)
-中包含更多关于所有这些话题的更多深入信息。
+以下文档概述了 C ++ 库的基本结构，并提供了有关创建自己项目的信息。
 
 ## 文件结构
 
-在
-[`micro`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/micro)
-根目录中有一个相对简单的结构。然而，因为它位于巨大的 TensorFlow 仓库中，所以我们创建了一些脚本和预生成的项目文件，为多种嵌入式开发环境（如 Arduino, Keil, Make 和 Mbed）提供分离的相关源文件。
+[`micro`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro) 根目录的结构相对简单。但是，由于它位于丰富的 TensorFlow 仓库内部，我们创建了脚本和预生成的项目文件，在各种嵌入式开发环境中单独提供相关源文件。
 
 ### 关键文件
 
-使用微控制器版 TensorFlow Lite 解释器时最重要的文件在项目的根目录中，并附带测试：
+使用 TensorFlow Lite for Microcontrollers 解释器最重要的文件位于项目的根目录，并附带测试：
 
--   [`all_ops_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/kernels/all_ops_resolver.h)
-    提供解释器运行模型的运算符。
--   [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h)
-    输出调试信息。
--   [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h)
-    包含控制和运行模型的代码。
+- [`all_ops_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.h) 或 [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_mutable_op_resolver.h) 可以用来提供解释器运行模型时所使用的运算。由于 `all_ops_resolver.h` 会拉取每一个可用的运算，因此它会使用大量内存。在生产应用中，您应该仅使用 `micro_mutable_op_resolver.h` 拉取模型所需的运算。
+- [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h) 输出调试信息。
+- [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h) 包含用于处理和运行模型的代码。
 
-在 [开始使用微控制器](get_started.md) 可以找到典型的用途的展示。
+请参阅[微处理器入门](get_started.md)获取典型用法的演练。
 
-构建系统提供某些文件在特定平台的实现。它们在以平台名称命名的目录下，例如：
-[`sparkfun_edge`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/sparkfun_edge)。
+构建系统提供了某些文件的特定于平台的实现。它们位于具有平台名称的目录中，例如 [`sparkfun_edge`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/sparkfun_edge)。
 
-还有许多其他目录，包括：
+还有其他几个目录，包括：
 
--   [`kernel`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/kernels),
-    包含运算符的实现和相关代码。
--   [`tools`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/tools),
-    包含构建工具和它们的输出。
--   [`examples`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples),
-    包含示例代码。
+- [`kernel`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/kernels)，其中包含运算实现和相关代码。
+- [`tools`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/tools)，其中包含构建工具及其输出。
+- [`examples`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples)，其中包含示例代码。
 
-### 生成项目文件
+## 开始新项目
 
-项目中的 `Makefile` 能够生成包含所有必需源文件的独立项目，这些源文件可以被导入嵌入式开发环境。目前被支持的环境是 Arduino, Keil, Make 和 Mbed。
+我们建议使用 *Hello World* 示例作为新项目的模板。您可以按照本部分的说明获得一个适用于您所选择的平台的版本。
 
-注意：我们为其中一些环境托管预建项目。参阅
-[支持的平台](overview.md#supported-platforms)
-以下载。
+### 使用 Arduino 库
 
-要在 Make 中生成项目，请使用如下指令：
+如果您使用的是 Arduino，则 *Hello World* 示例包含在 `Arduino_TensorFlowLite` 中。您可以从 Arduino IDE 和 [Arduino Create](https://create.arduino.cc/) 中下载 Arduino 库。
+
+添加库后，请转到 `File -> Examples`。应该会在列表底部看到一个名为 `TensorFlowLite:hello_world` 的示例。选择它并点击 `hello_world` 来加载这个示例。然后，您可以保存该示例的副本，并将其用作自己项目的基础。
+
+### 为其他平台生成项目
+
+TensorFlow Lite for Microcontrollers 能够使用 `Makefile` 生成包含所有必要源文件的独立项目。目前支持的环境有 Keil、Make 和 Mbed。
+
+要使用 Make 生成这些项目，请克隆 [TensorFlow 仓库{/ a0}，然后运行以下命令：](http://github.com/tensorflow/tensorflow)
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile generate_projects
 ```
 
-这需要几分钟，因为它需要下载一些大型工具链依赖。结束后，你应看到像这样的路径中，创建了一些文件夹：
-`tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/`
-（确切的路径取决于您的主机操作系统）。这些文件夹包含生成的项目和源文件。例如：
-`tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/keil` 包含了 Keil uVision
-目标。
+这需要几分钟的时间，因为它要下载一些大型工具链来建立依赖关系。完成后，您应该会看到在类似 `tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/` 这样的路径（具体路径取决于您的主机操作系统）下创建了一些文件夹。这些文件夹包含了生成的项目和源文件。
 
-## 构建库
-
-如果您在使用一个已生成的项目，参阅它内含的 README 以获取构建指南。
-
-要构建库并从主 TensorFlow 存储库中运行测试，请执行以下命令：
-
-1.  从 GitHub 中把 TensorFlow 存储库克隆到方便的地方。
-
-    ```bash
-    git clone --depth 1 https://github.com/tensorflow/tensorflow.git
-    ```
-
-2.  进入上一步创建的目录。
-
-    ```bash
-    cd tensorflow
-    ```
-
-3.  调用 `Makefile` 来构建项目并运行测试。 注意这将会下载所有需要的依赖：
-
-    ```bash
-    make -f tensorflow/lite/micro/tools/make/Makefile test
-    ```
+运行该命令后，您将能够在 `tensorflow/ite/micro/tools/make/gen/linux_x86_64/prj/hello_world` 中找到 *Hello World* 项目。例如，`hello_world/keil` 将包含 Keil 项目。
 
 ## 写入新设备
 
-把微控制器版 TensorFlow Lite 写入新平台和设备的指南，可在
-[README.md](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/micro#如何将用于微控制器的TensorFlow-Lite写入一个新的平台)
-中查看。
+要构建库并运行其所有的单元测试，请使用以下命令：
+
+```bash
+make -f tensorflow/lite/micro/tools/make/Makefile test
+```
+
+要运行一个单独的测试，请使用以下命令，将 `<test_name>` 替换为测试名称：
+
+```bash
+make -f tensorflow/lite/micro/tools/make/Makefile test_<test_name>
+```
+
+您可以在项目的 Makefile 中找到测试名称。例如，`examples/hello_world/Makefile.inc` 指定了 *Hello World* 示例的测试名称。
+
+## 构建二进制文件
+
+要为一个给定的项目（例如一个示例应用）构建可运行的二进制文件，请使用以下命令，并将 `<project_name>` 替换为您要构建的项目：
+
+```bash
+make -f tensorflow/lite/micro/tools/make/Makefile <project_name>_bin
+```
+
+例如，以下命令将为 *Hello World* 应用构建一个二进制文件：
+
+```bash
+make -f tensorflow/lite/micro/tools/make/Makefile hello_world_bin
+```
+
+默认情况下，项目将针对主机操作系统进行编译。如需指定不同的目标架构，请使用 `TARGET=`。下面的示例展示了如何为 SparkFun Edge 构建 *Hello World* 示例：
+
+```bash
+make -f tensorflow/lite/micro/tools/make/Makefile TARGET=sparkfun_edge hello_world_bin
+```
+
+指定目标后，任何可用的特定于目标的源文件将被用来代替原始代码。例如，子目录 `examples/hello_world/sparkfun_edge` 中包含了文件 `constants.cc` 和 `output_handler.cc` 的 SparkFun Edge 实现，指定目标 `sparkfun_edge` 后，将使用这些文件。
+
+您可以在项目的 Makefile 中找到项目名称。例如，`examples/hello_world/Makefile.inc` 指定了 *Hello World* 示例的二进制名称。
+
+## 优化内核
+
+`tensorflow/lite/micro/kernels` 根目录下的参考内核是用纯 C/C++ 实现的，并不包含特定于平台的硬件优化。
+
+子目录中提供了内核的优化版本。例如，`kernels/cmsis-nn` 包含了几个使用 ARM 的 CMSIS-NN 库的优化内核。
+
+要使用优化内核生成项目，请使用以下命令，将 `<subdirectory_name>` 替换为包含优化的子目录的名称：
+
+```bash
+make -f tensorflow/lite/micro/tools/make/Makefile TAGS=<subdirectory_name> generate_projects
+```
+
+您可以通过创建新的子文件夹来添加自己的优化。我们鼓励对新的优化实现进行拉取请求。
+
+## 生成 Arduino 库
+
+通过 Arduino IDE 的库管理器可以获得 Arduino 库的 Nightly 版本。
+
+如果需要生成库的新版本，您可以从 TensorFlow 仓库中运行以下脚本：
+
+```bash
+./tensorflow/lite/micro/tools/ci_build/test_arduino.sh
+```
+
+生成的库可在 `tensorflow/lite/micro/tools/make/gen/arduino_x86_64/prj/tensorflow_lite.zip` 中找到。
+
+## 移植到新设备
+
+有关将 TensorFlow Lite for Microcontrollers 移植到新平台和设备的指南，可在 [`micro/README.md`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/README.md) 中找到。
