@@ -1,6 +1,6 @@
 # TensorFlow Lite 委托
 
-## Introduction
+## 简介
 
 **委托**会利用设备端的加速器（如 GPU 和[数字信号处理器 (DSP)](https://en.wikipedia.org/wiki/Digital_signal_processor) 来启用 TensorFlow Lite 模型的硬件加速。
 
@@ -37,11 +37,11 @@ TensorFlow Lite 支持多种委托，每种委托都针对特定的平台和特�
 
 **模型类型** | **GPU** | **NNAPI** | **Hexagon** | **CoreML**
 --- | --- | --- | --- | ---
-浮点（32 位） | Yes | Yes | 否 | 是
-[训练后 float16 量化](post_training_float16_quant.ipynb) | Yes | 否 | 否 | 是
-[训练后动态范围量化](post_training_quant.ipynb) | Yes | Yes | 否 | 否
-[训练后整数量化](post_training_integer_quant.ipynb) | Yes | Yes | 是 | 否
-[量化感知训练](http://www.tensorflow.org/model_optimization/guide/quantization/training) | Yes | 是 | Yes | 否
+浮点（32 位） | 会 | 会 | 否 | 是
+[训练后 float16 量化](post_training_float16_quant.ipynb) | 会 | 否 | 否 | 是
+[训练后动态范围量化](post_training_quant.ipynb) | 会 | 会 | 否 | 否
+[训练后整数量化](post_training_integer_quant.ipynb) | 会 | 会 | 是 | 否
+[量化感知训练](http://www.tensorflow.org/model_optimization/guide/quantization/training) | 会 | 是 | 会 | 否
 
 ### 验证性能
 
