@@ -39,7 +39,7 @@
 - **개선된 도구**
     - 각 릴리스의 성능 향상을 추적하기 위한 공개 대시보드
 - **향상된 CPU 성능**
-    - New highly optimized floating-point kernel library for convolutional models
+    - 컨볼루션 모델을 염두에 두고 고도로 최적화한 새로운 부동 소수점 커널 라이브러리
     - 최고의 x86 지원
 - **업데이트된 NN API 지원**
     - 새로운 Android R NN API 특성, ops 및 유형에 대한 완벽한 지원
