@@ -1,78 +1,78 @@
-# TensorFlow Lite Roadmap
+# TensorFlow Lite 路线图
 
-**Updated: April 18, 2020**
+**更新日期：2020 年 4 月 18 日**
 
 下面提供了我们 2020 年计划的简要概览。请注意，该路线图随时可能发生变化，以下顺序也不代表任何类型的优先级。原则上，我们通常根据受影响的用户数量确定问题优先级。
 
 We break our roadmap into four key segments: usability, performance, optimization and portability. We strongly encourage you to comment on our roadmap and provide us feedback in the [TF Lite discussion group](https://groups.google.com/a/tensorflow.org/g/tflite).
 
-## Usability
+## 易用性
 
-- **Expanded ops coverage**
-    - Prioritized op additions based on user feedback
-- **Improvements to using TensorFlow ops in TensorFlow Lite**
-    - Pre-built libraries available via Bintray (Android) and Cocoapods (iOS)
-    - Smaller binary size when using select TF ops via op stripping
-- **LSTM / RNN support**
-    - Full LSTM and RNN conversion support, including support in Keras
-- **Pre-and-post processing support libraries and codegen tool**
-    - Ready-to-use API building blocks for common ML tasks
-    - Support more models (e.g. NLP) and more platforms (e.g. iOS)
-- **Android Studio Integration**
+- **扩大了运算范围**
+    - 根据用户反馈确定运算添加的优先级
+- **在 TensorFlow Lite 中使用 TensorFlow 运算的改进**
+    - 通过 Bintray (Android) 和 Cocoapods (iOS) 提供预构建库
+    - 通过运算剥离缩减了使用 select TF 运算时的二进制文件大小
+- **LSTM/RNN 支持**
+    - 全面支持 LSTM 和 RNN 转换，包括 Keras 中的支持
+- **预处理和后处理支持库以及代码生成工具**
+    - 适用于常见 ML 任务的即用型 API 构建块
+    - 支持更多模型（如 NLP）和更多平台（如 iOS）
+- **Android Studio 集成**
     - Drag &amp; drop TFLite models into Android Studio to generate model binding classes
-- **Control Flow &amp; Training on-device**
-    - Support for training on-device, focused on personalization and transfer learning
-- **Visualization tooling with TensorBoard**
-    - Provide enhanced tooling with TensorBoard
-- **Model Maker**
-    - Support more tasks, including object detection and BERT-based NLP tasks
-- **More models and examples**
-    - More examples to demonstrate model usage as well as new features and APIs, covering different platforms.
+- **控制流和设备端训练**
+    - 支持设备端训练，专注于个性化和迁移学习
+- **TensorBoard 提供的可视化工具**
+    - 通过 TensorBoard 提供增强的工具
+- **模型生成器**
+    - 支持更多任务，包括物体检测和基于 BERT 的 NLP 任务
+- **更多模型和示例**
+    - 更多演示模型使用方法的示例以及新功能和 API（涵盖不同的平台）。
 - **Task Library**
     - Improve the usability of the C++ Task Library, such as providing prebuilt binaries and creating user-friendly workflows for users who want to build from source code.
     - Release reference examples of using the Task Library.
-    - Enable more task types.
-    - Improve cross-platform support and enable more tasks for iOS.
+    - 支持更多任务类型。
+    - 改善跨平台支持，并使更多任务可以在 iOS 上执行。
 
-## Performance
+## 性能
 
-- **Better tooling**
-    - Public dashboard for tracking performance gains with each release
-- **Improved CPU performance**
-    - New highly optimized floating-point kernel library for convolutional models
-    - First-class x86 support
-- **Updated NN API support**
-    - Full support for new Android R NN API features, ops and types
-- **GPU backend optimizations**
-    - Vulkan support on Android
-    - Support integer quantized models
-- **Hexagon DSP backend**
-    - Per-channel quantization support for all models created through post-training quantization
-    - Dynamic input batch size support
-    - Better op coverage, including LSTM
-- **Core ML backend**
-    - Optimizing start-up time
-    - Dynamic quantized models support
-    - Float16 quantized models support
-    - Better op coverage
+- **更出色的工具**
+    - 用于跟踪每个版本的性能增益的公共信息中心
+- **改善的 CPU 性能**
+    - 高度优化的新浮点内核库，适用于卷积模型
+    - 一流的 x86 支持
+- **更新的 NN API 支持**
+    - 全面支持新的 Android R NN API 功能、运算和类型
+- **GPU 后端优化**
+    - Android 上的 Vulkan 支持
+    - 支持整数量化模型
+- **Hexagon DSP 后端**
+    - 适用于通过训练后量化创建的所有模型的按通道量化支持
+    - 动态输入批次大小支持
+    - 更大的运算范围，包括 LSTM
+- **核心 ML 后端**
+    - 优化启动时间
+    - 动态量化模型支持
+    - Float16 量化模型支持
+    - 更大的运算范围
 
-## Optimization
+## 优化
 
-- **Quantization**
+- **量化**
 
-    - Post-training quantization for (8b) fixed-point RNNs
-    - During-training quantization for (8b) fixed-point RNNs
-    - Quality and performance improvements for post-training dynamic-range quantization
+    - 适用于 (8b) 定点 RNN 的训练后量化
+    - 适用于 (8b) 定点 RNN 的训练中量化
+    - 训练后动态范围量化的质量和性能改进
 
-- **Pruning / sparsity**
+- **剪枝/稀疏**
 
-    - Sparse model execution support in TensorFlow Lite - [WIP](https://github.com/tensorflow/model-optimization/issues/173)
-    - Weight clustering API
+    - TensorFlow Lite 中的稀疏模型执行支持 - [WIP](https://github.com/tensorflow/model-optimization/issues/173)
+    - 权重聚类 API
 
-## Portability
+## 可移植性
 
-- **Microcontroller Support**
+- **微控制器支持**
     - Add support for a range of 32-bit MCU architecture use cases for speech and image classification
-    - Sample code and models for vision and audio data
-    - Full TF Lite op support on microcontrollers
-    - Support for more platforms, including CircuitPython support
+    - 视觉和音频数据的示例代码和模型
+    - 微控制器上的全面 TF Lite 运算支持
+    - 支持更多平台，包括 CircuitPython 支持
