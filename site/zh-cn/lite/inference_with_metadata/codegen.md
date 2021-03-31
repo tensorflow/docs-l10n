@@ -56,14 +56,12 @@
 <p data-md-type="paragraph">代码生成器是否有用取决于 TensorFlow Lite 模型的元数据条目是否完整。请参考 <a href="https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs" data-md-type="link">metadata_schema.fbs</a> 中相关字段下的 <code data-md-type="codespan">&lt;Codegen usage&gt;</code> 部分，查看代码生成器工具如何解析每个字段。</p>
 <h3 data-md-type="header" data-md-header-level="3">生成封装容器代码</h3>
 <p data-md-type="paragraph">您需要在终端中安装以下工具:</p>
-<pre data-md-type="block_code" data-md-language="sh"><code class="language-sh">pip install tflite-support
-</code></pre>
+<pre data-md-type="block_code" data-md-language="sh"><code class="language-sh">pip install tflite-support</code></pre>
 <p data-md-type="paragraph">完成后，可以使用以下句法来使用代码生成器：</p>
 <pre data-md-type="block_code" data-md-language="sh"><code class="language-sh">tflite_codegen --model=./model_with_metadata/mobilenet_v1_0.75_160_quantized.tflite \
     --package_name=org.tensorflow.lite.classify \
     --model_class_name=MyClassifierModel \
-    --destination=./classify_wrapper
-</code></pre>
+    --destination=./classify_wrapper</code></pre>
 <p data-md-type="paragraph">生成的代码将位于目标目录中。如果您使用的是 <a href="https://colab.research.google.com/" data-md-type="link">Google Colab</a> 或其他远程环境，将结果压缩成 zip 归档并将其下载到您的 Android Studio 项目中可能会更加容易：</p>
 <pre data-md-type="block_code" data-md-language="python"><code class="language-python"># Zip up the generated code
 !zip -r classify_wrapper.zip classify_wrapper/
