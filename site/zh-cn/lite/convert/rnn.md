@@ -106,7 +106,7 @@ TensorFlow Lite 还提供了一种转换用户定义的 LSTM 实现的方式。�
 
 8. TensorFlow Lite 转换基础架构的其余部分，包括所有已定义的 [MLIR 传递](https://github.com/tensorflow/tensorflow/blob/35a3ab91b42503776f428bda574b74b9a99cd110/tensorflow/compiler/mlir/lite/tf_tfl_passes.cc#L57)以及最终导出到 TensorFlow Lite 平面缓冲区的部分都可以重用。
 
-## Known issues/limitations
+## 已知问题/限制
 
 1. 目前只支持转换无状态的 Keras LSTM（Keras 的默认行为）。有状态的 Keras LSTM 转换是未来的工作。
 2. 还可以使用底层的无状态 Keras LSTM 层对有状态的 Keras LSTM 层进行建模，并在用户程序中显式管理状态。还可以使用此处描述的功能将此类 TensorFlow 程序转换为 TensorFlow Lite。
