@@ -2,7 +2,7 @@
 
 利用 TensorFlow Lite Core ML 委托，您可以在 [Core ML 框架](https://developer.apple.com/documentation/coreml)上运行 TensorFlow Lite 模型，从而加快 iOS 设备上的模型推断速度。
 
-Note: This delegate is in experimental (beta) phase. It is available from TensorFlow Lite 2.4.0 and latest nightly releases.
+注：此委托仍处于实验（测试）阶段。它可以从 TensorFlow Lite 2.4.0 和最新的 Nightly 版本中获得。
 
 注：Core ML 委托支持 Core ML 版本 2 及更高版本。
 
@@ -17,9 +17,9 @@ Note: This delegate is in experimental (beta) phase. It is available from Tensor
 
 ## 在自己的模型上尝试 Core ML 委托
 
-The Core ML delegate is already included in nightly release of TensorFlow lite CocoaPods. To use Core ML delegate, change your TensorFlow lite pod to include subspec `CoreML` in your `Podfile`.
+Core ML 委托已经包含在 TensorFlow lite CocoaPods 的 Nightly 版本中。要使用 Core ML 委托，请更改您的 TensorFlow lite Pod，在您的 `Podfile` 中包含子规范 `CoreML`。
 
-Note: If you want to use C API instead of Objective-C API, you can include `TensorFlowLiteC/CoreML` pod to do so.
+注：如果您使用的是 C API 而不是 Objective-C API，则可以包含 `TensorFlowLiteC/CoreML` Pod。
 
 ```
 target 'YourProjectName'
@@ -34,7 +34,7 @@ target 'YourProjectName'
   pod 'TensorFlowLiteSwift', '~> 2.4.0', :subspecs => ['CoreML']
 ```
 
-Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorFlow Lite 2.4.0 release, this was the only option.
+注：Core ML 委托也可以将 C API 用于 Objective-C 代码。在 TensorFlow Lite 2.4.0 版本之前，这是唯一的选择。
 
 <div>
   <devsite-selector>
@@ -208,7 +208,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 <li data-md-type="list_item" data-md-list-type="unordered">
 <p data-md-type="paragraph"><a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.h" data-md-type="link">Core ML delegate C API</a></p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">This can be used for Objective-C codes. ~~~</li>
+<li data-md-type="list_item" data-md-list-type="unordered">可用于 Objective-C 代码。~~~</li>
 </ul>
 </li>
 </ul>
