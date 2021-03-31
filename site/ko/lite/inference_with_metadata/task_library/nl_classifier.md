@@ -55,7 +55,7 @@ NLClassifierOptions options = NLClassifierOptions.builder().setInputTensorName(I
 NLClassifier classifier = NLClassifier.createFromFileAndOptions(context, modelFile, options);
 
 // Run inference
-List<Category> results = classifier.classify(input);
+List results = classifier.classify(input);
 ```
 
 `NLClassifier` 구성을 위한 추가 옵션은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/text/nlclassifier/NLClassifier.java)를 참조하세요.
@@ -96,7 +96,7 @@ let categories = nlClassifier.classify(text: input)
 
 ```c++
 // Initialization
-std::unique_ptr<NLClassifier> classifier = NLClassifier::CreateFromFileAndOptions(
+std::unique_ptr classifier = NLClassifier::CreateFromFileAndOptions(
     model_path,
     {
       .input_tensor_name=kInputTensorName,
@@ -104,7 +104,7 @@ std::unique_ptr<NLClassifier> classifier = NLClassifier::CreateFromFileAndOption
     }).value();
 
 // Run inference
-std::vector<core::Category> categories = classifier->Classify(kInput);
+std::vector categories = classifier->Classify(kInput);
 ```
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/nl_classifier.h)를 참조하세요.
