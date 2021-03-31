@@ -1,193 +1,140 @@
-# TensorFlow Lite 代理
+# TensorFlow Lite 委托
 
-_说明：Delegate API 仍处于试验阶段并将随时进行调整。_
+## Introduction
 
-## 什么是 TensorFlow Lite 代理？
+**委托**会利用设备端的加速器（如 GPU 和[数字信号处理器 (DSP)](https://en.wikipedia.org/wiki/Digital_signal_processor) 来启用 TensorFlow Lite 模型的硬件加速。
 
-TensorFlow Lite 代理是一种将部分或全部的图形运算委托予另一线程执行的方法。
+默认情况下，TensorFlow Lite 会使用针对 [ARM Neon](https://developer.arm.com/documentation/dht0002/a/Introducing-NEON/NEON-architecture-overview/NEON-instructions) 指令集进行了优化的 CPU 内核。但是，CPU 是一种多用途处理器，不一定会针对机器学习模型中常见的繁重计算（例如，卷积层和密集层中的矩阵数学）进行优化。
 
-## 你为什么应该使用代理？
+另一方面，大多数现代手机包含的芯片在处理这些繁重运算方面表现更好。将它们用于神经网络运算，可以在延迟和功率效率方面带来巨大好处。例如，GPU 可以在延迟方面提供高达 [5 倍的加速](https://blog.tensorflow.org/2020/08/faster-mobile-gpu-inference-with-opencl.html)，而 [Qualcomm® Hexagon DSP](https://developer.qualcomm.com/software/hexagon-dsp-sdk/dsp-processor) 在我们的实验中显示可以降低高达 75% 的功耗。
 
-由于移动设备的处理能力不足以及电量受限，在其之上进行高算力的机器学习模型的演算是不可行的。
+这些加速器均具有支持自定义计算的相关 API，例如用于移动 GPU 的 [OpenCL](https://www.khronos.org/opencl/) 或 [OpenGL ES](https://www.khronos.org/opengles/)，以及用于 DSP 的 [Qualcomm® Hexagon SDK](https://developer.qualcomm.com/software/hexagon-dsp-sdk)。通常情况下，您必须编写大量自定义代码才能通过这些接口运行神经网络。当考虑到每个加速器各有利弊，并且无法执行神经网络中的所有运算时，事情就会变得更加复杂。TensorFlow Lite 的 Delegate API 通过作为 TFLite 运行时和这些较低级别 API 之间的桥梁，解决了这个问题。
 
-为了避免加重 CPU（中央处理器）的负担，一些设备具有诸如 GPU（图形处理器）或 DSP（数字信号处理器）等的硬件加速器以求获取更佳的性能与更高的能效。
+![runtime with delegates](images/delegate_runtime.png)
 
-## 使用 GPU 代理
+## 选择委托
 
-TensorFlow Lite 为具备 GPU 的设备提供了一个 GPU 代理用以模型计算的加速。
+TensorFlow Lite 支持多种委托，每种委托都针对特定的平台和特定类型的模型进行了优化。通常情况下，会有多种委托适用于您的用例，这取决于两个主要标准：*平台*（Android 还是 iOS？），以及您要加速的*模型类型*（浮点还是量化？）。
 
-有关 GPU 代理的概述，请查看
-[TensorFlow Lite 在 GPU 环境下](https://tensorflow.google.cn/lite/performance/gpu_advanced) 。
-有关在 Android 和 iOS 设备上使用 GPU 代理的步骤教程，请查看
-[TensorFlow Lite GPU 代理](https://tensorflow.google.cn/lite/performance/gpu) 。
+### 按平台分类的委托
 
-## 代理是如何运作的？
+#### 跨平台（Android 和 iOS）
 
-假设我们将一个简化的图形样本进行如下图所示的操作：
+- **GPU 委托** - GPU 委托在 Android 和 iOS 上都可以使用。它经过了优化，可以在有 GPU 的情况下运行基于 32 位和 16 位浮点的模型。它还支持 8 位量化模型，并可以提供与其浮点版本相当的 GPU 性能。有关 GPU 委托的详细信息，请参阅[适用于 GPU 的 TensorFlow Lite](gpu_advanced.md)。有关在 Android 和 iOS 上使用 GPU 委托的分步教程，请参阅 [TensorFlow Lite GPU 委托教程](gpu.md)。
 
-![原生图形样本](../images/performance/tflite_delegate_graph_1.png "原生图形样本")
+#### Android
 
-如果把一个代理用于进行具体操作，那么 TensorFlow Lite 会将图形分割为多个交由代理进行处理的子图块。
+- **适用于较新 Android 设备的 NNAPI 委托** - NNAPI 委托可用于在具有 GPU、DSP 和/或 NPU 的设备上加速模型。它在 Android 8.1 (API 27+) 或更高版本中可用。有关 NNAPI 委托的概述、分布说明和最佳做法，请参阅 [TensorFlow Lite NNAPI 委托](nnapi.md)。
+- **适用于较旧 Android 设备的 Hexagon 委托** - Hexagon 委托可用于在具有 Qualcomm Hexagon DSP 的 Android 设备上加速模型。它可以在运行较旧版本 Android（不支持 NNAPI）的设备上使用。有关详细信息，请参阅 [TensorFlow Lite Hexagon 委托](hexagon_delegate.md)。
 
-若使用一个拥有高效处理 Conv2D（卷积层）和计算 Mean（平均值）操作的能力且名为“MyDelegate”的代理，那么它将导致主图变更为进行如下图所示的操作。
+#### iOS
 
-![使用代理的图形样本](../images/performance/tflite_delegate_graph_2.png "使用代理的图形样本")
+- **适用于较新 iPhone 和 iPad 的 Core ML 委托** - 对于提供了 Neural Engine 的较新的 iPhone 和 iPad，您可以使用 Core ML 委托来加快 32 位或 16 位 浮点模型的推断。Neural Engine 适用于具有 A12 SoC 或更高版本的 Apple 移动设备。有关 Core ML 委托的概述和分步说明，请参阅 [TensorFlow Lite Core ML 委托](coreml_delegate.md)。
 
-在返回值中，每个交由代理进行处理的子图将会被更替为评估该子图的节点。
+### 按模型类型分类的委托
 
-根据不同的模型，末图可以一个节点终结，这意味着所有的图将被代理或以多个节点的子图进行处理。一般而言，当你每次从代理切换至主图而不希望采用由代理处理的混合子图时，将会造成由子图转换为主图的损耗。毕竟，内存交换并非总是安全的。
+每种加速器的设计都考虑了一定的数据位宽。如果为只支持 8 位量化运算的委托（例如 [Hexagon 委托](hexagon_delegate.md)）提供浮点模型，它将拒绝其所有运算，并且模型将完全在 CPU 上运行。为了避免此类意外，下表提供了基于模型类型的委托支持概览：
 
-## 如何添置一个代理
+**模型类型** | **GPU** | **NNAPI** | **Hexagon** | **CoreML**
+--- | --- | --- | --- | ---
+浮点（32 位） | Yes | Yes | 否 | 是
+[训练后 float16 量化](post_training_float16_quant.ipynb) | Yes | 否 | 否 | 是
+[训练后动态范围量化](post_training_quant.ipynb) | Yes | Yes | 否 | 否
+[训练后整数量化](post_training_integer_quant.ipynb) | Yes | Yes | 是 | 否
+[量化感知训练](http://www.tensorflow.org/model_optimization/guide/quantization/training) | Yes | 是 | Yes | 否
 
-_请注意以下所采用的 API 仍处于试验阶段并将随时进行调整。_
+### 验证性能
 
-基于上节所述，添置一个代理需要完成以下步骤：
+本部分的信息可作为一个粗略指南，用于筛选可以改进您的应用的委托。但是，需要注意的是，每种委托都有一组支持的预定义运算，且执行情况可能会因模型和设备而异；例如，[NNAPI 委托](nnapi.md)可能会选择在 Pixel 手机上使用 Google 的 Edge-TPU，而在其他设备上使用 DSP。因此，通常建议您进行一些基准测试，以衡量委托对您的需求有多大用处。这还有助于判断与将委托附加到 TensorFlow Lite 运行时相关的二进制文件大小的增加是否合理。
 
-1.  定义一个用于负责评估代理子图的核心节点
-2.  创建一个用于负责注册该核心节点以及说明代理可用节点的实例 [TensorFlow Lite 代理](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/c_api_internal.h#L545)
+TensorFlow Lite 拥有丰富的性能和准确率评估工具，可以让开发者有信心在其应用中使用委托。下一部分将讨论这些工具。
 
-为了使用代码进行说明，让我们定义一个可快速执行 Conv2D 和计算 Mean 操作的代理并将其命名为“MyDelegate”。
+## 评估工具
+
+### 延迟和内存占用
+
+TensorFlow Lite 的[基准测试工具](https://www.tensorflow.org/lite/performance/measurement)可以使用合适的参数来评估模型性能，包括平均推断延迟、初始化开销、内存占用等。此工具支持多个标志，以确定模型的最佳委托配置。例如，`--gpu_backend=gl` 可以使用 `--use_gpu` 指定，以衡量 OpenGL 的 GPU 执行情况。[详细文档](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/delegates/README.md#tflite-delegate-registrar)中定义了受支持的委托参数的完整列表。
+
+下面是一个通过 `adb` 使用 GPU 运行量化模型的示例：
 
 ```
-// 这是执行操作或整个图形的开始。
-// 该类具有一个空实现，仅作结构体的声明。
-class MyDelegate {
- public:
-  // 如果代理可以处理此类操作，则返回“true”。
-  static bool SupportedOp(const TfLiteRegistration* registration) {
-    switch (registration->builtin_code) {
-      case kTfLiteBuiltinConv2d:
-      case kTfLiteBuiltinMean:
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  // 代码初始化
-  bool Init() {}
-  // 初始工作分配（例如：分配缓冲区）
-  bool Prepare(TfLiteContext* context, TfLiteNode* node) {}
-  // 代理子图开始运行。
-  bool Invoke(TfLiteContext* context, TfLiteNode* node) {}
-  // ... 添加其他所需的方法
-};
-
-// 为核心节点创建一个替代主 TfLite 图中的子图的 TfLiteRegistration。
-TfLiteRegistration GetMyDelegateNodeRegistration() {
-  // 这是为了获取被添加至 TFLite 图而非替换它的子图的代理节点的初始化
-  // 它被视为一个操作节点。
-  // 但在此，Init 函数将用于初始化代理，而 Invoke 函数将用于运行代理图。
-  // 预缓冲。
-  // 释放内存。
-  TfLiteRegistration kernel_registration;
-  kernel_registration.builtin_code = kTfLiteBuiltinDelegate;
-  kernel_registration.custom_name = "MyDelegate";
-  kernel_registration.free = [](TfLiteContext* context, void* buffer) -> void {
-    delete reinterpret_cast<MyDelegate*>(buffer);
-  };
-  kernel_registration.init = [](TfLiteContext* context, const char* buffer,
-                                   size_t) -> void* {
-    // 在节点的初始化阶段中，初始化“MyDelegate”实例。
-    const TfLiteDelegateParams* delegate_params =
-        reinterpret_cast<const TfLiteDelegateParams*>(buffer);
-    MyDelegate* my_delegate = new MyDelegate;
-    if (!my_delegate->Init(context, params)) {
-      return nullptr;
-    }
-    return my_delegate;
-  };
-  kernel_registration.invoke = [](TfLiteContext* context,
-                                   TfLiteNode* node) -> TfLiteStatus {
-    MyDelegate* kernel = reinterpret_cast<MyDelegate*>(node->user_data);
-    return kernel->Invoke(context, node);
-  };
-  kernel_registration.prepare = [](TfLiteContext* context,
-                                    TfLiteNode* node) -> TfLiteStatus {
-    MyDelegate* kernel = reinterpret_cast<MyDelegate*>(node->user_data);
-    return kernel->Prepare(context, node);
-  };
-
-  return kernel_registration;
-}
-
-// 实现 TfLiteDelegate 方法
-
-TfLiteStatus DelegatePrepare(TfLiteContext* context, TfLiteDelegate* delegate) {
-  // 说明所有可被代理评估的节点以及请求框架使用代理核心替换图。
-  // 当我们需要获取头节点的大小时，保留一个节点。
-  std::vector<int> supported_nodes(1);
-  TfLiteIntArray* plan;
-  TF_LITE_ENSURE_STATUS(context->GetExecutionPlan(context, &plan));
-  TfLiteNode* node;
-  TfLiteRegistration* registration;
-  for (int node_index : TfLiteIntArrayView(plan)) {
-    TF_LITE_ENSURE_STATUS(context->GetNodeAndRegistration(
-        context, node_index, &node, &registration));
-    if (MyDelegate::SupportedOp(registration)) {
-      supported_nodes.push_back(node_index);
-    }
-  }
-  // 设置替换所有节点的头节点。
-  supported_nodes[0] = supported_nodes.size() - 1;
-  TfLiteRegistration my_delegate_kernel_registration =
-      GetMyDelegateNodeRegistration();
-
-  // 该返回值将图分割为子图块，对于子图，它将被代理视为一个  
-  // ‘my_delegate_kernel_registration’进行处理。
-  return context->ReplaceNodeSubsetsWithDelegateKernels(
-      context, my_delegate_kernel_registration,
-      reinterpret_cast<TfLiteIntArray*>(supported_nodes.data()), delegate);
-}
-
-void FreeBufferHandle(TfLiteContext* context, TfLiteDelegate* delegate,
-                      TfLiteBufferHandle* handle) {
-  // 用于实现释放内存的方法。
-}
-
-TfLiteStatus CopyToBufferHandle(TfLiteContext* context,
-                                TfLiteDelegate* delegate,
-                                TfLiteBufferHandle buffer_handle,
-                                TfLiteTensor* tensor) {
-  // 若有所需，复制 tensor（张量）的数据至代理的缓冲区。
-  return kTfLiteOk;
-}
-
-TfLiteStatus CopyFromBufferHandle(TfLiteContext* context,
-                                  TfLiteDelegate* delegate,
-                                  TfLiteBufferHandle buffer_handle,
-                                  TfLiteTensor* tensor) {
-  // 从代理的缓冲区存入数据至 tensor 的原始内存区域。
-  return kTfLiteOk;
-}
-
-// 回调函数获取返回指针的所有权。
-TfLiteDelegate* CreateMyDelegate() {
-  TfLiteDelegate* delegate = new TfLiteDelegate;
-
-  delegate->data_ = nullptr;
-  delegate->flags = kTfLiteDelegateFlagsNone;
-  delegate->Prepare = &DelegatePrepare;
-  // 该项不可为空。
-  delegate->CopyFromBufferHandle = &CopyFromBufferHandle;
-  // 该项可为空。
-  delegate->CopyToBufferHandle = &CopyToBufferHandle;
-  // 该项可为空。
-  delegate->FreeBufferHandle = &FreeBufferHandle;
-
-  return delegate;
-}
-
-// 添加你所需调用的代理
-
-auto* my_delegate = CreateMyDelegate();
-if (interpreter->ModifyGraphWithDelegate(my_delegate) !=
-        kTfLiteOk) {
-  // 用于实现解决异常的方法
-} else {
-  interpreter->Invoke();
-}
-...
-// 最后千万要记住注销代理。
-delete my_delegate;
+adb shell /data/local/tmp/benchmark_model \
+  --graph=/data/local/tmp/mobilenet_v1_224_quant.tflite \
+  --use_gpu=true
 ```
+
+您可以在[此处](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_benchmark_model.apk)下载该工具的 Android 64 位 ARM 架构预构建版本（[详细信息](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark/android)）。
+
+### 准确率和正确性
+
+委托通常会以不同于 CPU 的精度执行计算。因此，在利用委托进行硬件加速时，会有（通常较小）精度折衷。请注意，情况并不*总是*这样；例如，由于 GPU 会使用浮点精度来运行量化模型，精度可能会略有提升（例如，ILSVRC 图像分类 Top-5 提升 &lt;1%)。
+
+TensorFlow Lite 有两种类型的工具来衡量委托对于给定模型的行为的准确性：*基于任务的*和*与任务无关的*。本节描述的所有工具都支持前一部分基准测试工具使用的[高级委托参数](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/delegates/README.md#tflite-delegate-registrar)。请注意，下面的小节关注的是*委托评估*（委托是否与 CPU 性能相同？）而非模型评估（模型本身是否适合任务？）。
+
+#### 基于任务的评估
+
+TensorFlow Lite 具有用于评估两个基于图像的任务的正确性的工具：
+
+- [ILSVRC 2012](http://image-net.org/challenges/LSVRC/2012/)（图像分类），具有 [Top-K 准确率](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Precision_at_K)
+
+- [COCO 物体检测（含边界框）](https://cocodataset.org/#detection-2020)，具有[全类平均精度 (mAP)](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Mean_average_precision)
+
+这些工具（Android，64 位 ARM 架构）的预构建二进制文件以及文档可在以下位置找到：
+
+- [ImageNet 图像分类](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_eval_imagenet_image_classification)（[详细信息](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/imagenet_image_classification)）
+- [COCO 物体检测](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_eval_coco_object_detection)（[详细信息](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/coco_object_detection)）
+
+下面的示例演示了在 Pixel 4 上利用 Google 的 Edge-TPU 使用 NNAPI 进行的[图像分类评估](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/imagenet_image_classification)。
+
+```
+adb shell /data/local/tmp/run_eval \
+  --model_file=/data/local/tmp/mobilenet_quant_v1_224.tflite \
+  --ground_truth_images_path=/data/local/tmp/ilsvrc_images \
+  --ground_truth_labels=/data/local/tmp/ilsvrc_validation_labels.txt \
+  --model_output_labels=/data/local/tmp/model_output_labels.txt \
+  --output_file_path=/data/local/tmp/accuracy_output.txt \
+  --num_images=0 # Run on all images. \
+  --use_nnapi=true \
+  --nnapi_accelerator_name=google-edgetpu
+```
+
+预期的输出是一个从 1 到 10 的 Top-K 指标列表：
+
+```
+Top-1 Accuracy: 0.733333
+Top-2 Accuracy: 0.826667
+Top-3 Accuracy: 0.856667
+Top-4 Accuracy: 0.87
+Top-5 Accuracy: 0.89
+Top-6 Accuracy: 0.903333
+Top-7 Accuracy: 0.906667
+Top-8 Accuracy: 0.913333
+Top-9 Accuracy: 0.92
+Top-10 Accuracy: 0.923333
+```
+
+#### 与任务无关的评估
+
+对于没有现成设备端评估工具的任务，或者如果您在尝试使用自定义模型，TensorFlow Lite 提供了 [Inference Diff](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/inference_diff) 工具。（Android，64 位 ARM 二进制架构二进制文件见[此处](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_eval_inference_diff)）
+
+Inference Diff 会比较以下两种设置的 TensorFlow Lite 执行情况（在延迟和输出值偏差方面）：
+
+- 单线程 CPU 推断
+- 用户定义的推断 - 由[这些参数](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/delegates/README.md#tflite-delegate-registrar)定义
+
+为此，该工具会生成随机高斯数据，并将其传递给两个 TFLite 解释器：一个运行单线程 CPU 内核，另一个通过用户的参数进行参数化。
+
+它会以每个元素为基础，测量两者的延迟，以及每个解释器的输出张量之间的绝对差。
+
+对于具有单个输出张量的模型，输出可能如下所示：
+
+```
+Num evaluation runs: 50
+Reference run latency: avg=84364.2(us), std_dev=12525(us)
+Test run latency: avg=7281.64(us), std_dev=2089(us)
+OutputDiff[0]: avg_error=1.96277e-05, std_dev=6.95767e-06
+```
+
+这意味着，对于索引 `0` 处的输出张量，CPU 输出的元素与委托输出的元素平均相差 `1.96e-05`。
+
+请注意，解释这些数字需要对模型和每个输出张量的含义有更深入的了解。如果它是确定某种分数或嵌入的简单回归，那么差异应该很小（否则为委托错误）。然而，像 SSD 模型中的“检测类”这样的输出有点难以解释。例如，使用此工具可能会显示出差异，但这并不意味着委托真的有什么问题：请考虑两个（假）类：“TV (ID: 10)”，“Monitor (ID:20)”。如果某个委托稍微偏离了黄金真理，并且显示的是 Monitor 而非 TV，那么这个张量的输出差异可能会高达 20-10 = 10。
