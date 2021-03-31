@@ -1,25 +1,25 @@
-# 在您的云平台上部署 tfjs-node 项目
+# 在云平台上部署 tfjs-node 项目
 
-此文档叙述了如何在云平台上使用 @tensorflow/tfjs-node 包运行一个 Node.js 进程。
+本文档介绍了如何在云平台上使用 @tensorflow/tfjs-node 软件包运行 Node.js 进程。
 
-自 tfjs-node@1.2.4 起，在云平台上运行 Node.js 不需要额外的配置。此教程演示了如何运行 Heroku 和 GCloud 上的 [mnist-node](https://github.com/tensorflow/tfjs-examples/tree/master/mnist-node) 仓库中的示例。Heroku 的 Node.js 支持请参阅此[文档](https://devcenter.heroku.com/articles/nodejs-support)。在 Google Cloud Platform 上运行 Node.js 另见[这里](https://cloud.google.com/nodejs/docs/).
+从 tfjs-node@1.2.4 开始，在云平台上运行 Node.js 项目便已不需要其他配置。本指南将展示如何在 Heroku 和 GCloud 上运行 @tensorflow/tfjs-examples 仓库中的 [mnist-node](https://github.com/tensorflow/tfjs-examples/tree/master/mnist-node) 示例。[本文](https://devcenter.heroku.com/articles/nodejs-support)介绍了 Heroku 的 Node.js 支持。[此处](https://cloud.google.com/nodejs/docs/)介绍了在 Google Cloud Platform 上运行 Node.js。
 
 ## 在 Heroku 上部署 Node.js 项目
 
-### 准备工作
+### 前提条件
 
-1. 已安装 Node.js 和 npm
-2. Heroku 账户
-3. Heroku 命令行工具
+1. 安装 Node.js 和 npm
+2. Heroku 帐户
+3. Heroku CLI
 
-### 创建 Node.js 应用程序
+### 创建 Node.js 应用
 
-1. 创建一个文件夹并从 [mnist-node](https://github.com/tensorflow/tfjs-examples/tree/master/mnist-node) 示例中复制 `data.js`、`main.js`、`model.js` 和 `package.json` 文件。
-2. 确保 @tensorflow/tfjs-node 依赖处于 @1.2.4 或更新的版本。
+1. 创建一个文件夹，然后从 [mnist-node](https://github.com/tensorflow/tfjs-examples/tree/master/mnist-node) 示例中复制 `data.js`、`main.js`、`model.js` 和 `package.json` 文件。
+2. 确保 @tensorflow/tfjs-node 依赖项为 @1.2.4 或更高版本。
 
-### 在本地构建并运行您的应用程序
+### 在本地构建并运行您的应用
 
-1. 在您的本地文件夹运行 `npm install` 命令以安装在 `package.json` 文件中声明的依赖。您将能看到 tfjs-node 已安装，且 libtensorflow 已下载。
+1. 在本地目录中运行 `npm install` 命令以安装 `package.json` 文件中声明的依赖项。您应当能够看到 tfjs-node 软件包已安装并且 libtensorflow 已下载。
 
 ```
 $ npm install
@@ -32,7 +32,7 @@ CPU-linux-1.2.5.tar.gz
 * Building TensorFlow Node.js bindings
 ```
 
-1. 在本地通过运行 `npm start` 以训练模型。
+1. 通过运行 `npm start` 以在本地训练模型。
 
 ```
 $ npm start
@@ -53,12 +53,12 @@ Epoch 1 / 20
 ========================>----------------------------------------------------------------------------------: 35.5
 ```
 
-3. 确保您已在 .gitignore 文件中设置忽略了构建用的组件，如 node_modules。
+1. 确保忽略 .gitignore 文件中的构建工件，例如 node_modules。
 
-### 创建并部署 Heroku 应用程序
+### 创建并部署 Heroku 应用
 
-1. 在 Heroku 网站上创建一个新的应用程序
-2. Commit 您的更改并 push 到 heroku master 分支
+1. 在 Heroku 网站上创建一个新应用
+2. 提交变更并推送到 heroku master
 
 ```
 $ git init
@@ -68,7 +68,7 @@ $ git commit -m "First Commit"
 $ git push heroku master
 ```
 
-3. 在构建日志中，您将能看到 tfjs-library 软件包正在下载 TensorFlow C 支持库和加载 TensorFlow Node.js 原生插件：
+1. 在构建日志中，您应当能够看到 tfjs-node 软件包下载了 TensorFlow C 库并加载了 TensorFlow Node.js 原生插件：
 
 ```
 remote: -----> Installing dependencies
@@ -86,7 +86,7 @@ remote:        found 0 vulnerabilities
 remote:
 ```
 
-在 Heroku 的进程日志中，您将能看到模型训练日志：
+在 Heroku 上的进程日志中，您应当能够看到模型训练日志：
 
 ```
 Total params: 594922
@@ -98,23 +98,23 @@ Epoch 1 / 20
 ====>--------------------------------------------------------------------: 221.9
 ```
 
-您也可以在 Heroku [控制台](https://devcenter.heroku.com/articles/heroku-dashboard#application-overview)中运行或调试进程。
+您也可以在 Heroku [控制台](https://devcenter.heroku.com/articles/heroku-dashboard#application-overview)中启动或调试进程。
 
 ### 使用 1.2.4 版本之前的 tfjs-node
 
-如果您正在使用 1.2.4 版本之前的 tfjs-node，需要使用 g++ 将源文件编译成 node 的原生插件。您必须确保您拥有 Linux build-essential 软件包（新版本的工具栈可能默认不配备）。
+如果您使用 1.2.4 之前版本的 tfjs-node 软件包，则软件包需要 g++ 才能从源文件编译节点原生插件。您必须确保您的堆栈具有 Linux build-essential 软件包（较新版本的堆栈在默认情况下可能没有该软件包）。
 
 ## 在 Google Cloud Platform 上部署 Node.js 项目
 
-### 准备工作
+###前提条件
 
-1. 拥有一个有效的 Google Cloud Project 的付费账户
-2. 安装 Google Cloud [客户端工具]](https://cloud.google.com/storage/docs/gsutil_install)
+1. 具备有效的 Google Cloud 项目和计费帐号
+2. 安装 Google Cloud [客户端工具](https://cloud.google.com/storage/docs/gsutil_install)
 3. 添加 app.yaml 文件以配置 [Node.js 运行时](https://cloud.google.com/appengine/docs/flexible/nodejs/runtime)
 
-### 将应用程序部署至 GCloud
+### 将应用部署到 GCloud
 
-通过执行 `gcloud app deploy` 部署应用引擎的本地代码并加载配置文件。在部署日志中您将能看到 tfjs-node 已安装：
+运行 `gcloud app deploy` 以将本地代码和配置部署到 App Engine。在部署日志中，您应当能够看到 tfjs-node 已安装：
 
 ```
 $ gcloud app deploy
@@ -131,7 +131,8 @@ Step #1: added 88 packages from 85 contributors and audited 171 packages in 13.3
 Step #1: found 0 vulnerabilities
 ```
 
-在应用日志中，您将能看到模型的训练过程：
+在应用日志中，您应当能够看到模型训练进程：
+
 ```
 Total params: 594922
 Trainable params: 594922
