@@ -22,10 +22,11 @@
 例如，卷积的选项表如下所示：
 
 ```
-table Conv2DOptions {
+table DepthwiseConv2DOptions {
   padding:Padding;
   stride_w:int;
   stride_h:int;
+  depth_multiplier:int;
   fused_activation_function:ActivationFunctionType;
 }
 ```
@@ -64,24 +65,25 @@ typedef struct {
   TfLitePadding padding;
   int stride_width;
   int stride_height;
+  int depth_multiplier;
   TfLiteFusedActivation activation;
-} TfLiteConvParams;
+} TfLiteDepthwiseConvParams;
 ```
 
 与FlatBuffer架构(Schema)一样，通过添加注释，指明从哪个版本开始支持哪些参数。结果如下：
 
 ```
 typedef struct {
-  // 版本1支持的参数：
+  // Parameters for DepthwiseConv version 1 or above.
   TfLitePadding padding;
   int stride_width;
   int stride_height;
+  int depth_multiplier;
   TfLiteFusedActivation activation;
-
-  // 版本2支持的参数：
+  // Parameters for DepthwiseConv version 2 or above.
   int dilation_width_factor;
   int dilation_height_factor;
-} TfLiteConvParams;
+} TfLiteDepthwiseConvParams;
 ```
 
 另外，请更改内核实现从C结构体中读取新添加的参数。 细节在此不再赘述。
@@ -93,19 +95,36 @@ typedef struct {
 更新该文件以处理新参数，如下所示：
 
 ```
-case BuiltinOperator_CONV_2D: {
-  TfLiteConvParams* params = MallocPOD<TfLiteConvParams>();
-  if (auto* conv_params = op->builtin_options_as_Conv2DOptions()) {
-    params->padding = parse_padding(conv_params->padding());
-    params->stride_width = conv_params->stride_w();
-    params->stride_height = conv_params->stride_h();
+TfLiteStatus ParseDepthwiseConv2D(const Operator* op,
+                                  ErrorReporter* error_reporter,
+                                  BuiltinDataAllocator* allocator,
+                                  void** builtin_data) {
+  CheckParsePointerParams(op, error_reporter, allocator, builtin_data);
+
+  SafeBuiltinDataAllocator safe_allocator(allocator);
+
+  std::unique_ptr<TfLiteDepthwiseConvParams,
+                  SafeBuiltinDataAllocator::BuiltinDataDeleter>
+      params = safe_allocator.Allocate<TfLiteDepthwiseConvParams>();
+  TF_LITE_ENSURE(error_reporter, params != nullptr);
+
+  const DepthwiseConv2DOptions* schema_params =
+      op->builtin_options_as_DepthwiseConv2DOptions();
+
+  if (schema_params != nullptr) {
+    params->padding = ConvertPadding(schema_params->padding());
+    params->stride_width = schema_params->stride_w();
+    params->stride_height = schema_params->stride_h();
+    params->depth_multiplier = schema_params->depth_multiplier();
     params->activation =
-        parse_activation(conv_params->fused_activation_function());
-    params->dilation_width_factor = conv_params->dilation_width_factor();
-    params->dilation_height_factor = conv_params->dilation_height_factor();
+        ConvertActivation(schema_params->fused_activation_function());
+
+    params->dilation_width_factor = schema_params->dilation_w_factor();
+    params->dilation_height_factor = schema_params->dilation_h_factor();
   }
-  *builtin_data = reinterpret_cast<void*>(params);
-  break;
+
+  *builtin_data = params.release();
+  return kTfLiteOk;
 }
 ```
 
@@ -125,13 +144,15 @@ void AddCustom(const char* name, TfLiteRegistration* registration,
 内置的操作在 `lite/kernels/register.cc` 中注册。 在这个例子中，我们实现了一个新的操作内核，它可以处理 `Conv2D` 的版本1和版本2，所以我们需要将下面这行：
 
 ```
-AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D());
+AddBuiltin(BuiltinOperator_DEPTHWISE_CONV_2D, Register_DEPTHWISE_CONV_2D());
 ```
 
 修改为：
 
 ```
-AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D(), 1, 2);
+AddBuiltin(BuiltinOperator_DEPTHWISE_CONV_2D, Register_DEPTHWISE_CONV_2D(),
+             /* min_version = */ 1,
+             /* max_version = */ 2);
 ```
 
 ### 改变 TOCO TFLite 的导出
@@ -169,14 +190,12 @@ case BuiltinOperator_DEPTHWISE_CONV_2D: {
 最后，通过将新版本添加到 `DepthwiseConv2D` 示例，为 `lite/tools/versioning/op_version.cc` 中的算子修改 `GetBuiltinOperatorVersion` 函数：
 
 ```
-int GetVersion(const Operator& op) const override {
-  const auto& conv_op = static_cast<const ConvOperator&>(op);
-  if (conv_op.dilation_width_factor != 1 ||
-      conv_op.dilation_height_factor != 1) {
+case BuiltinOperator_DEPTHWISE_CONV_2D:
+  if (op_sig.options.depthwise_conv_2d.dilation_w_factor != 1 ||
+      op_sig.options.depthwise_conv_2d.dilation_h_factor != 1) {
     return 2;
   }
   return 1;
-}
 ```
 
 ### 委托实现
@@ -198,13 +217,13 @@ TensorFlow Lite 提供了一个委托 API，可以将操作委派给硬件后端
 TensorFlow Lite 提供了一个委托 API，可以将运算委托给硬件后端。在委托的 `Prepare` 函数中，检查委托代码中的每个节点是否支持该版本。
 
 ```
-const int kMinVersion = 1;
+const int kMaxVersion = 1;
 TfLiteNode* node;
-TfLiteRegistration;
-context->GetNodeAndRegistration(context, node_index, &node, &registration);
+TfLiteRegistration* registration = nullptr;
+TF_LITE_ENSURE_STATUS(context->GetNodeAndRegistration(context, node_index, &node, &registration));
 
-if (registration->version > kMinVersion) {
-  // 如果不支持该版本，则拒绝该节点。
+if (registration->version > kMaxVersion) {
+  // Reject the node if the version isn't supported.
 }
 ```
 
