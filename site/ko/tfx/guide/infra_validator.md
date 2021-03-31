@@ -156,4 +156,4 @@ infra_validator = InfraValidator(
     })
     ```
 
-    - [Iris 예제](https://github.com/tensorflow/tfx/blob/master/tfx/examples/iris/iris_utils_native_keras.py) 샘플 코드를 확인하여 이 서명이 TFX의 다른 구성 요소와 어떻게 상호 작용하는지 확인하세요.
+    - [ Penguin example 예제](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local_infraval.py) 샘플 코드를 확인하여 이 서명이 TFX의 다른 구성 요소와 어떻게 상호 작용하는지 확인하세요.
