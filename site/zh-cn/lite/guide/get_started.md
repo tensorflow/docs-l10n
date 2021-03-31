@@ -105,11 +105,11 @@ TensorFlow Lite 当前支持[一部分（limited subset）](ops_compatibility.md
 
 ### TensorFlow Lite 解释器
 
-The [TensorFlow Lite interpreter](inference.md) is a library that takes a model file, executes the operations it defines on input data, and provides access to the output.
+[TensorFlow Lite 解释器](inference.md)是一个库，该库会接收模型文件，执行它对输入数据定义的运算，并提供对输出的访问。
 
 该解释器（interpreter）适用于多个平台，提供了一个简单的 API，用于从 Java、Swift、Objective-C、C++ 和 Python 运行 TensorFlow Lite 模型。
 
-The following code shows the interpreter being invoked from Java:
+以下代码展示了从 Java 调用的解释器：
 
 ```java
 try (Interpreter interpreter = new Interpreter(tensorflow_lite_model_file)) {
@@ -119,13 +119,13 @@ try (Interpreter interpreter = new Interpreter(tensorflow_lite_model_file)) {
 
 ### GPU 加速和委托
 
-Some devices provide hardware acceleration for machine learning operations. For example, most mobile phones have GPUs, which can perform floating point matrix operations faster than a CPU.
+有些设备为机器学习运算提供了硬件加速。例如，大多数手机都有 GPU，它们能够比 CPU 更快地执行浮点矩阵运算。
 
-The speed-up can be substantial. For example, a MobileNet v1 image classification model runs 5.5x faster on a Pixel 3 phone when GPU acceleration is used.
+这种速度提升可能会非常可观。例如，当使用 GPU 加速时，MobileNet v1 图像分类模型在 Pixel 3 手机上的运行速度能够提高 5.5 倍。
 
-The TensorFlow Lite interpreter can be configured with [Delegates](../performance/delegates.md) to make use of hardware acceleration on different devices. The [GPU Delegate](../performance/gpu.md) allows the interpreter to run appropriate operations on the device's GPU.
+TensorFlow Lite 解释器可以配置[委托](../performance/delegates.md)，以利用不同设备上的硬件加速。[GPU 委托](../performance/gpu.md)允许解释器在设备的 GPU 上运行适当的运算。
 
-The following code shows the GPU Delegate being used from Java:
+以下代码显示从 Java 使用的 GPU 委托：
 
 ```java
 GpuDelegate delegate = new GpuDelegate();
@@ -136,27 +136,27 @@ try {
 }
 ```
 
-To add support for new hardware accelerators you can [define your own delegate](../performance/delegates.md#how_to_add_a_delegate).
+要添加对新硬件加速器的支持，您可以[定义自己的委托](../performance/delegates.md#how_to_add_a_delegate)。
 
 ### Android 和 iOS
 
-The TensorFlow Lite interpreter is easy to use from both major mobile platforms. To get started, explore the [Android quickstart](android.md) and [iOS quickstart](ios.md) guides. [Example applications](https://www.tensorflow.org/lite/examples) are available for both platforms.
+TensorFlow Lite 解释器在两个主要的移动端平台上都很易于使用。要开始使用，请查看 [Android 快速入门](android.md)和 [iOS 快速入门](ios.md)指南。这两个平台都提供了[示例应用](https://www.tensorflow.org/lite/examples)。
 
 要获得所需的库（libraries），Android 开发人员应该使用[ TensorFlow Lite AAR](android.md#use_the_tensorflow_lite_aar_from_jcenter)。iOS 开发人员应该使用[ CocoaPods for Swift or Objective-C](ios.md#add_tensorflow_lite_to_your_swift_or_objective-c_project)。
 
 ### Linux
 
-Embedded Linux is an important platform for deploying machine learning. To get started using Python to perform inference with your TensorFlow Lite models, follow the [Python quickstart](python.md).
+嵌入式 Linux 是部署机器学习的重要平台。要开始使用 Python 对您的 TensorFlow Lite 模型进行推断，请按照 [Python 快速入门](python.md)进行操作。
 
-To instead install the C++ library, see the build instructions for [Raspberry Pi](build_rpi.md) or [Arm64-based boards](build_arm64.md) (for boards such as Odroid C2, Pine64, and NanoPi).
+如需安装 C++ 库，请参阅 [Raspberry Pi](build_rpi.md) 或[基于 Arm64 的开发板](build_arm64.md)（Odroid C2、Pine64 和 NanoPi 等开发板）的构建说明。
 
 ### 微控制器
 
-[TensorFlow Lite for Microcontrollers](../microcontrollers) is an experimental port of TensorFlow Lite aimed at microcontrollers and other devices with only kilobytes of memory.
+[用于微控制器的 TensorFlow Lite](../microcontrollers) 是 TensorFlow Lite 的实验性端口，主要针对只有千字节内存的微控制器和其他设备。
 
 ### 运算符
 
-If your model requires TensorFlow operations that are not yet implemented in TensorFlow Lite, you can use [TensorFlow Select](ops_select.md) to use them in your model. You'll need to build a custom version of the interpreter that includes the TensorFlow operations.
+如果您的模型需要尚未在 TensorFlow Lite 中实现的 TensorFlow 运算，则可以使用 [TensorFlow 选择](ops_select.md)在模型中使用它们。您需要构建一个包括该 TensorFlow 运算的自定义版本的解释器。
 
 您可以用[自定义运算符（Custom operators）](ops_custom.md)编写您自己的运算符（operations），或将新运算符移植（port）到 TensorFlow Lite 中。
 
@@ -172,7 +172,7 @@ TensorFlow Lite 提供了优化模型大小（size）和性能（performance）�
 
 ### 性能
 
-The goal of model optimization is to reach the ideal balance of performance, model size, and accuracy on a given device. [Performance best practices](../performance/best_practices.md) can help guide you through this process.
+模型优化的目标是在给定设备上达到性能、模型大小和准确率的理想平衡。[性能最佳做法](../performance/best_practices.md)可以帮助指导您完成此过程。
 
 ### 量化
 
@@ -189,7 +189,7 @@ tflite_quant_model = converter.convert()
 open("converted_model.tflite", "wb").write(tflite_quantized_model)
 ```
 
-TensorFlow Lite supports reducing precision of values from full floating point to half-precision floats (float16) or 8-bit integers. There are trade-offs in model size and accuracy for each choice, and some operations have optimized implementations for these reduced precision types.
+TensorFlow Lite 支持将值的精度从全浮点降低到半精度浮点 (float16) 或 8 位整数。每种选择都要在模型大小和准确度上进行权衡取舍，而且有些运算有针对这些降低了精度的类型的优化实现。
 
 要了解有关量化的更多信息，请参阅[训练后量化（Post-training quantization）](../performance/post_training_quantization.md)。
 
@@ -202,6 +202,6 @@ TensorFlow Lite supports reducing precision of values from full floating point t
 既然您已经熟悉了 TensorFlow Lite，请探索以下一些资源：
 
 - 如果您是移动开发人员，请访问[ Android 快速入门](android.md)或[ iOS 快速入门](ios.md)。
-- If you're building Linux embedded devices, see the [Python quickstart](python.md) or C++ build instructions for [Raspberry Pi](build_rpi.md) and [Arm64-based boards](build_arm64.md).
+- 如果您要构建 Linux 嵌入式设备，请参阅 [ Python 快速入门](python.md)或针对 [Raspberry Pi](build_rpi.md) 和[基于 Arm64 的开发板](build_arm64.md)的 C++ 构建说明。
 - 探索我们的[预训练模型](../models)。
 - 尝试我们的[示例应用程序](https://tensorflow.google.cn/lite/examples)。
