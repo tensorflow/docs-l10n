@@ -15,7 +15,7 @@ TFX 파이프라인을 사용하면 Apache Airflow, Apache Beam 및 Kubeflow Pip
 
 ## TFX 구성 요소의 구성
 
-This section provides a high-level overview of the composition of a TFX component. If you are new to TFX pipelines, [learn the core concepts by reading the guide to understanding TFX pipelines](understanding_tfx_pipelines).
+이 섹션에서는 TFX 구성 요소의 구성에 대한 높은 수준의 개요를 제공합니다. TFX 파이프라인을 처음 사용하는 경우 [TFX 파이프라인 이해 가이드를 읽고 핵심 개념을 파악하세요](understanding_tfx_pipelines).
 
 TFX 구성 요소는 구성 요소 인터페이스 클래스에 패키징된 구성 요소 사양과 실행자 클래스로 구성됩니다.
 
@@ -37,7 +37,7 @@ TFX 구성 요소는 구성 요소 인터페이스 클래스에 패키징된 구
 
 대부분의 사용자 정의 구성 요소 구현에서는 드라이버 또는 게시자를 사용자 정의할 필요가 없습니다. 일반적으로 드라이버 및 게시자에 대한 수정은 파이프라인 구성 요소와 메타데이터 저장소 간의 상호 작용을 변경하려는 경우에만 필요합니다. 구성 요소의 입력, 출력 또는 매개변수만 변경하려면 *구성 요소 사양*만 수정하면 됩니다.
 
-## Types of custom components
+## 사용자 정의 구성 요소의 유형
 
 사용자 정의 구성 요소에는 Python 함수 기반 구성 요소, 컨테이너 기반 구성 요소 및 완전 사용자 정의 구성 요소의 3가지 유형이 있습니다. 다음 섹션에서는 다양한 유형의 구성 요소와 각 접근 방식을 사용해야 하는 경우에 대해 설명합니다.
 
