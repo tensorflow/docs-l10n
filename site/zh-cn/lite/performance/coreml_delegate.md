@@ -8,7 +8,7 @@ Note: This delegate is in experimental (beta) phase. It is available from Tensor
 
 **支持的 iOS 版本和设备：**
 
-- iOS 12 and later. In the older iOS versions, Core ML delegate will automatically fallback to CPU.
+- iOS 12 及更高版本。在旧 iOS 版本中，Core ML 委托会自动回退到 CPU。
 - By default, Core ML delegate will only be enabled on devices with A12 SoC and later (iPhone Xs and later) to use Neural Engine for faster inference. If you want to use Core ML delegate also on the older devices, please see [best practices](#best-practices)
 
 **支持的模型**
@@ -105,7 +105,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 <li data-md-type="list_item" data-md-list-type="unordered">
 <p data-md-type="paragraph">Add</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">Only certain shapes are broadcastable. In Core ML tensor layout, following tensor shapes are broadcastable. <code data-md-type="codespan">[B, C, H, W]</code>, <code data-md-type="codespan">[B, C, 1, 1]</code>, <code data-md-type="codespan">[B, 1, H, W]</code>, <code data-md-type="codespan">[B, 1, 1, 1]</code>.</li>
+<li data-md-type="list_item" data-md-list-type="unordered">只能广播几种形状。在 Core ML 张量布局中，可以广播以下张量形状。<code data-md-type="codespan">[B, C, H, W]</code>、<code data-md-type="codespan">[B, C, 1, 1]</code>、<code data-md-type="codespan">[B, 1, H, W]</code>、<code data-md-type="codespan">[B, 1, 1, 1]</code>。</li>
 </ul>
 </li>
 <li data-md-type="list_item" data-md-list-type="unordered">AveragePool2D</li>
@@ -187,7 +187,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 <li data-md-type="list_item" data-md-list-type="unordered">
 <p data-md-type="paragraph">CoreML 委托可以在 iOS 模拟器上工作吗？</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">Yes. The library includes x86 and x86_64 targets so it can run on a simulator, but you will not see performance boost over CPU.</li>
+<li data-md-type="list_item" data-md-list-type="unordered">可以。该库包括 x86 和 x86_64 目标，因此，它可以在模拟器上运行，但是您不会看到比在 CPU 上更高的性能。</li>
 </ul>
 </li>
 <li data-md-type="list_item" data-md-list-type="unordered">
