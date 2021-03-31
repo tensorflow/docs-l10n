@@ -20,11 +20,11 @@ TensorFlow Lite 团队提供了一系列预训练模型（pre-trained models）�
 
 这些预训练模型包括：
 
-- [Image classification](../models/image_classification/overview.md)
-- [Object detection](../models/object_detection/overview.md)
-- [Smart reply](../models/smart_reply/overview.md)
-- [Pose estimation](../models/pose_estimation/overview.md)
-- [Segmentation](../models/segmentation/overview.md)
+- [图像分类（Image classification）](../models/image_classification/overview.md)
+- [物体检测（Object detection）](../models/object_detection/overview.md)
+- [智能回复（Smart reply）](../models/smart_reply/overview.md)
+- [姿态估计（Pose estimation）](../models/pose_estimation/overview.md)
+- [语义分割（Segmentation）](../models/segmentation/overview.md)
 
 在[模型列表（Models）](../models)中查看预训练模型的完整列表。
 
@@ -78,16 +78,16 @@ open("converted_model.tflite", "wb").write(tflite_model)
 
 当转换[ TensorFlow 1.x 模型](../convert/python_api.md)时，这些输入类型有：
 
-- [SavedModel directories](https://www.tensorflow.org/guide/saved_model)
+- [SavedModel 文件夹](https://tensorflow.google.cn/guide/saved_model)
 - Frozen GraphDef (通过[ freeze_graph.py ](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/tools/freeze_graph.py)生成的模型)
 - [Keras](https://keras.io) HDF5 模型
 - 从 `tf.Session` 得到的模型
 
 当转换[ TensorFlow 2.x 模型](../convert/python_api.md)时，这些输入类型有：
 
-- [SavedModel directories](https://www.tensorflow.org/guide/saved_model)
-- [`tf.keras` models](https://www.tensorflow.org/guide/keras/overview)
-- [Concrete functions](https://tensorflow.org/guide/concrete_function)
+- [SavedModel 文件夹](https://tensorflow.google.cn/guide/saved_model)
+- [`tf.keras` 模型](https://tensorflow.google.cn/guide/keras/overview)
+- [具体函数（Concrete functions）](https://tensorflow.google.cn/guide/concrete_function)
 
 转换器可以配置为应用各种优化措施（optimizations），这些优化措施可以提高性能，减少文件大小。这将在第四节[优化您的模型](#4_optimize_your_model_optional)中介绍。
 
