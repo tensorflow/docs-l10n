@@ -1,21 +1,21 @@
 # 模型和层
 
-机器学习中，一个 _model_ 是一个带有可训练[参数](https://developers.google.com/machine-learning/glossary/#parameter)的函数。这个函数将输入转化为输出。通俗的来说，这个函数表达了输入和输出之间的变换关系。我们通过在数据集上训练模型来获得最佳参数。训练好的模型可以精确的将输入数据转换为我们想得到的输出。
+在机器学习中，*模型*是一个带有*可学习*[参数](https://developers.google.com/machine-learning/glossary/#parameter)的函数，可将输入映射至输出。通过在数据上训练模型获得最佳参数。训练好的模型可以提供从输入到所需输出的准确映射。
 
-TensorFlow.js有两种创建机器学习的方法：
+在 TensorFlow.js 中，您可以通过两种方式创建机器学习模型：
 
-1.  用 Layers API（用 _layers_ 来创建模型）
-2.  用 Core API（底端算子，例如 `tf.matMul()`或`tf.add()`等）来建立模型
+1. 使用 Layers API（使用*层*构建模型）
+2. 使用 Core API（借助低级运算，例如 `tf.matMul()`、`tf.add()` 等）
 
-我们首先会用高层API：Layers API来建立模型。然后，我们会展示如何用Core API来搭建相同的模型。
+首先，我们会了解 Layers API，Layers API 是用于构建模型的高级 API。然后，我们将演示如何使用 Core API 构建相同的模型。
 
-## 用Layers API创建模型
+## 使用 Layers API 创建模型
 
-Layers API有两种方式创建模型：第一种是创建 _sequential_ 模型，第二种是创建 _functional_ 模型。下面两段会分别解释这两种模型创建方式。
+你可以通过两种方式使用 Layers API 创建模型：*序贯*模型和*函数式*模型。下面两部分将详细介绍两种类型。
 
-### 使用sequential model
+### 序贯模型
 
-最常见的模型是<code>[Sequential](https://js.tensorflow.org/api/0.15.1/#class:Sequential)</code>模型。Sequential模型将网络的每一层简单的叠在一起。您可以将需要的层按顺序写在一个列表里，然后将列表作为<code>[sequential()](https://js.tensorflow.org/api/0.15.1/#sequential)</code> 函数的输入：
+最常见的模型是 <code>&lt;a href="https://js.tensorflow.org/api/0.15.1/#class:Sequential" data-md-type="link"&gt;Sequential&lt;/a&gt;</code> 模型，序贯模型是层的线性堆叠。您可以通过将层列表传递到 <code>&lt;a href="https://js.tensorflow.org/api/0.15.1/#sequential" data-md-type="link"&gt;sequential()&lt;/a&gt;</code> 函数来创建 <code>Sequential</code> 模型：
 
 ```js
 const model = tf.sequential({
@@ -26,7 +26,7 @@ const model = tf.sequential({
 });
 ```
 
-或用 `add()` 方法：
+或通过 `add()` 方法：
 
 ```js
 const model = tf.sequential();
@@ -34,29 +34,30 @@ model.add(tf.layers.dense({inputShape: [784], units: 32, activation: 'relu'}));
 model.add(tf.layers.dense({units: 10, activation: 'softmax'}));
 ```
 
-> 注意：模型的第一层需要“输入形状”参数（`inputShape`）。不要在“输入型状”中包含batch size（批次大小）。假设您要向模型输入一个形状为`[B, 784]`的张量（`B`是任意batch size），您只需要将“输入型状”设为`[784]`。
+> 重要提示：模型的第一层需要 `inputShape`。提供 `inputShape` 时请确保不包含批次大小。例如，创建模型时，如果您计划馈送形状为 `[B, 784]`（其中 `B` 可为任何批次大小）的模型张量，请将 `inputShape` 指定为 `[784]`。
 
-您可以通过`model.layers`来使用模型中的每一层。例如，您可以用`model.inputLayers`和`model.outputLayers`来调用输入层和输出层。
+您可以通过 `model.layers` 访问模型的层，更具体而言为 `model.inputLayers` 和 `model.outputLayers`。
 
-### 使用functional model
+### 函数式模型
 
-我们也可以通过`tf.model()`来创建`LayersModel`。`tf.model()`和`tf.sequential()`的主要区别为，您可以用`tf.model()`来创建任何非闭环的计算图。
+创建 `LayersModel` 的另一种方式是通过 `tf.model()`。`tf.model()` 和 `tf.sequential()` 的主要区别为，`tf.model()` 可用于创建层的任意无环计算图。
 
-以下是一段如何用`tf.model()` API 建立和上文相同模型的列子：
+以下代码段可以使用 `tf.model()` API 定义与上文相同的模型：
 
 ```js
-// 用apply()方法创建任意计算图
+// Create an arbitrary graph of layers, by connecting them
+// via the apply() method.
 const input = tf.input({shape: [784]});
 const dense1 = tf.layers.dense({units: 32, activation: 'relu'}).apply(input);
 const dense2 = tf.layers.dense({units: 10, activation: 'softmax'}).apply(dense1);
 const model = tf.model({inputs: input, outputs: dense2});
 ```
 
-我们在每一层用`apply()`将上一层的输出作为本层的输入。`apply()`返回一个`SymbolicTensor`（类似于张量，但不包含任何数值）
+我们在每一层调用 `apply()` 以将其连接到另一个层的输出。在这种情况下，`apply()` 的结果是一个 `SymbolicTensor`，后者类似于 `Tensor`，但不包含任何具体数值。
 
-不同于sequential model使用`inputShape`来定义第一层的输入，我们用`tf.input()`创建的`SymbolicTensor`作为第一层的输入
+请注意，与序贯模型不同，我们通过 `tf.input()` 创建 `SymbolicTensor`，而非向第一层提供 `inputShape`。
 
-如果您向`apply()`输入一个数值张量，它会进行计算并返还一个数值张量：
+如果您向 `apply()` 传递一个具体的 `Tensor`，它也会为您提供一个具体的 `Tensor`：
 
 ```js
 const t = tf.tensor([-2, 1, 0, 5]);
@@ -64,80 +65,70 @@ const o = tf.layers.activation({activation: 'relu'}).apply(t);
 o.print(); // [0, 1, 0, 5]
 ```
 
-这个方式适用于单独测试每一层并检查它们的输出。
+这对于单独测试层并查看它们的输出非常有用。
 
-和sequential model一样，您可以通过`model.layers`来使用模型中的每一层。例如，您可以用`model.inputLayers`和`model.outputLayers`来调用输入层和输出层。
+与在序贯模型中一样，您可以通过 `model.layers` 访问模型的层，更具体而言为 `model.inputLayers` 和 `model.outputLayers`。
 
-## 验证
+## Validation
 
-Sequential model和functional model都属于`LayersModel`类。使用`LayersModels`让验证更方便：它要求您定义输入形状，并用您定义的形状来验证您对模型的输入。`LayersModel`会自动计算模型中所有张量的形状。知道张量的形状后，模型就可以自动创建它所需要的参数。您也可以用形状信息来判断两层相邻的层是否相互兼容。
+序贯模型和函数式模型都是 `LayersModel` 类的实例。使用 `LayersModels` 的一个主要优势是验证：它会强制您指定输入形状，并稍后将其用于验证您的输入。`LayersModel` 还会在数据流经层时自动推断形状。提前了解形状后，模型就可以自动创建它的参数，并告知您两个相邻的层是否相互兼容。
 
-## 模型总览
+## 模型摘要
 
-使用`model.summary()`可以显示很多模型的重要信息，包括：
+调用 `model.summary()` 以打印模型的实用摘要，其中包括：
 
-*   每一层的名字和类型
-*   每一层的输出形状
-*   每一层的权重数量
-*   每一层的输入
-*   一个模型拥有的可训练参数总量，和不可训练参数总量
+- 模型中所有层的名称和类型
+- 每个层的输出形状
+- 每个层的权重参数数量
+- 每个层接收的输入（如果模型具有一般拓扑，下文将讨论）
+- 模型的可训练和不可训练参数总数
 
-用前面定义的模型来做例子，我们可以在命令行中得到以下信息：
+对于上面定义的模型，我们在控制台上获取以下输出：
 
 <table>
   <tr>
-   <td>Layer (type)
-   </td>
-   <td>Output shape
-   </td>
-   <td>Param #
-   </td>
+   <td>层（类型）</td>
+   <td>输出形状</td>
+   <td>参数数量</td>
   </tr>
   <tr>
-   <td>dense_Dense1 (Dense)
-   </td>
-   <td>[null,32]
-   </td>
-   <td>25120
-   </td>
+   <td>dense_Dense1（密集）</td>
+   <td>[null,32]</td>
+   <td>25120</td>
   </tr>
   <tr>
-   <td>dense_Dense2 (Dense)
-   </td>
-   <td>[null,10]
-   </td>
-   <td>330
-   </td>
+   <td>dense_Dense2（密集）</td>
+   <td>[null,10]</td>
+   <td>330</td>
   </tr>
   <tr>
-   <td colspan="3" >Total params: 25450<br/>Trainable params: 25450<br/> Non-trainable params: 0
-   </td>
+   <td colspan="3">参数总数：25450<br>可训练参数：25450<br>不可训练参数：0</td>
   </tr>
 </table>
 
-注意：每一层的输出形状中都含有`null`值。模型的输入形状包含了批次大小，而批次大小是可以灵活更变的，所以批次的值在张量形状中以`null`显示。
+注意层的输出形状中的 `null` 值：这表示模型希望输入的批次大小为最外层维度，在这种情况下，由于 `null` 值，批次大小比较灵活。
 
 ## 序列化
 
-相对于底端API而言，使用`LayersModel`的另一个好处是方便存储、加载模型。`LayersModel`包含如下信息：
+在较低级别的 API 上使用 `LayersModel` 的一个主要优势是能够保存和加载模型。`LayersModel` 了解：
 
-*   可用于重建模型的模型架构信息
-*   模型的权重
-*   训练配置（例如损失函数，优化器和评估方式）
-*   优化器的状态（可用于继续训练模型）
+- 模型的架构，让您可以创新创建模型
+- 模型的权重
+- 训练配置（损失、优化器和指标）
+- 优化器的状态，让您可以恢复训练
 
-存储和加载模型只需要一行代码：
+保存或加载模型只需要 1 行代码：
 
 ```js
 const saveResult = await model.save('localstorage://my-model-1');
 const model = await tf.loadLayersModel('localstorage://my-model-1');
 ```
 
-在这个例子中，模型被存储在浏览器的本地存储里。请访问<code>[model.save()](https://js.tensorflow.org/api/latest/#tf.Model.save)</code>和[save and load](save_load.md)了解如何把模型保存在不同的媒介中（例如 file storage, <code>IndexedDB</code>, 触发下载到浏览器等等）。
+上面的示例可将模型保存到浏览器的本地存储空间中。请参阅 <code>model.save() 文档</code>和[保存并加载](save_load.md)指南，了解如何保存到不同的媒介（例如，文件存储空间、<code>IndexedDB</code>、触发浏览器下载等）。
 
 ## 自定义层
 
-层是创建模型的基础。如果您的模型需要定制化计算模块，您可以写一个自定义层并插入模型中。下面的例子是一个计算平方和的自定义层：
+层是模型的基本要素。如果您的模型需要进行自定义计算，您可以定义一个自定义层，它可以与层的其他部分很好地交互。我们在下面定义的自定义层可以计算正方形总数：
 
 ```js
 class SquaredSumLayer extends tf.layers.Layer {
@@ -155,7 +146,7 @@ class SquaredSumLayer extends tf.layers.Layer {
 }
 ```
 
-可以用`apply()`方法在一个张量上测试这个自定义层
+要对其进行测试，我们可以调用包含具体张量的 `apply()` 方法：
 
 ```js
 const t = tf.tensor([-2, 1, 0, 5]);
@@ -163,18 +154,20 @@ const o = new SquaredSumLayer().apply(t);
 o.print(); // prints 30
 ```
 
-> 注意：如果您在模型中包含了自定义层，模型将不能序列化
+> 重要提示：如果添加自定义层，将无法序列化模型。
 
-## 用Core API创建模型
+## 使用 Core API 创建模型
 
-本文开头提到了两种在TensorFlow.js中建立模型的方法。最常用的方式是使用 Layers API，因为它的模式是基于广泛应用的Keras API（详情见 [best practices and reduces cognitive load](https://keras.io/why-use-keras/)）。Layers API提供了大量方便的工具，例如权重初始化，模型序列化，训练监测，可迁移性和安全检查。
+在本指南开头处，我们提到可以通过两种方式在 TensorFlow.js 中创建机器学习模型。
 
-当您遇到如下情况时，可能会需要使用Core API：
+一般来说，您始终应当先尝试使用 Layers API，因为它基于被广泛使用的 Keras API，后者[遵循最佳做法并降低了认知负担](https://keras.io/why-use-keras/)。Layers API 还提供了各种现成的解决方案，如权重初始化、模型序列化、训练监视、概率和安全检查。
 
-*   您需要更多灵活性和控制
-*   您不需要序列化或可以创造自己的序列化方法
+在以下情况下，您可能需要使用 Core API：
 
-用Core API写的模型包含了一系列的函数。这些函数以一个或多个张量作为输入，并输出另一个张量。我们可以用Core API来重写之前定义的模型：
+- 您需要最大程度的灵活性和控制
+- 您不需要序列化或可以实现自己的序列化逻辑
+
+使用 Core API 创建的模型是以一个或多个 `Tensors` 作为输入并输出 `Tensors` 的函数。使用 Core API 编写的上面同一个模型如下所示：
 
 ```js
 // The weights and biases for the two dense layers.
@@ -188,6 +181,6 @@ function model(x) {
 }
 ```
 
-在Core API中，我们需要自己创建和初始化权重。每个权重都是一个`Variable`，TensorFlow.js会把`Variable`权重设为可训练张量。您可以用[tf.variable()](https://js.tensorflow.org/api/latest/#variable)创建`Variable`或把一个已存在的张量放到`Variable`中。
+请注意，在 Core API 中，我们需要创建和初始化模型的权重。每个权重都由一个 `Variable` 支持，变量可以告知 TensorFlow.js 这些张量是可学习张量。您可以使用 [tf.variable()](https://js.tensorflow.org/api/latest/#variable) 并传入现有 `Tensor` 来创建 `Variable`。
 
-本文介绍了如何用Layers和Core API创建模型。接下来，请看[training models](train_models.md)学习如何训练模型。
+本文介绍了如何使用 Layers API 和 Core API 创建模型。接下来，请参阅[训练模型](train_models.md)指南了解如何训练模型。
