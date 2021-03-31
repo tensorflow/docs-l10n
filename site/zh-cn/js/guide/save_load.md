@@ -4,8 +4,8 @@ TensorFlow.js提供了保存和加载模型的功能，这些模型可以是使�
 
 本教程将会介绍如何在 TensorFlow.js 中保存和加载模型(可通过JSON文件识别)。我们同样可以导入Tensorflow Python模型。
 
-- [Import Keras models](../tutorials/conversion/import_keras.md)
-- [Import Graphdef models](../tutorials/conversion/import_saved_model.md)
+- [导入Keras模型](../tutorials/conversion/import_keras.md)
+- [导入Graphdef模型](../tutorials/conversion/import_saved_model.md)
 
 ## 保存 tf.Model
 
