@@ -12,7 +12,7 @@ TensorFlow Lite Task Library 包含了一套功能强大且易于使用的任务
 
 - **可扩展性和自定义** <br>您可以利用 Task Library 基础架构提供的所有优势，轻松构建您自己的 Android/iOS 推断 API。
 
-## Supported tasks
+## 支持的任务
 
 以下是支持的任务类型的列表。随着我们继续提供越来越多的用例，该列表预计还会增加。
 
