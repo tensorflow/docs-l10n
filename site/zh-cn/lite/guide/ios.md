@@ -4,7 +4,7 @@
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS 图像分类示例</a>
 
-For an explanation of the source code, you should also read [TensorFlow Lite iOS image classification](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md).
+有关源代码的说明，您还应阅读 [TensorFlow Lite iOS 图像分类](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md)。
 
 此示例应用使用[图像分类](https://www.tensorflow.org/lite/models/image_classification/overview)持续对从设备的后置摄像头看到的内容进行分类，并显示最可能的分类。它允许用户在浮点或[量化](https://www.tensorflow.org/lite/performance/post_training_quantization)模型之间进行选择，并选择执行推断的线程数。
 
@@ -14,7 +14,7 @@ For an explanation of the source code, you should also read [TensorFlow Lite iOS
 
 TensorFlow Lite 提供用 [Swift](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/swift) 和 [Objective-C](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/objc) 编写的原生 iOS 库。将使用 [Swift 图像分类示例](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios)作为起点，开始编写自己的 iOS 代码。
 
-The sections below demonstrate how to add TensorFlow Lite Swift or Objective-C to your project:
+以下各个部分演示了如何将 TensorFlow Lite Swift 或 Objective-C 添加到您的项目：
 
 ### CocoaPods 开发者
 
@@ -35,7 +35,7 @@ pod 'TensorFlowLiteObjC'
 
 #### 指定版本
 
-There are stable releases, and nightly releases available for both `TensorFlowLiteSwift` and `TensorFlowLiteObjC` pods. If you do not specify a version constraint as in the above examples, CocoaPods will pull the latest stable release by default.
+`TensorFlowLiteSwift` Pod 和 `TensorFlowLiteObjC` Pod 都有稳定版本和 Nightly 版本。如果您没有像上述示例那样指定版本约束，CocoaPods 将默认拉取最新的稳定版本。
 
 您还可以指定版本约束。例如，如果您希望依赖版本 2.0.0，可以按照如下代码编写依赖关系：
 
@@ -123,4 +123,4 @@ import TensorFlowLite
 @import TFLTensorFlowLite;
 ```
 
-Note: For CocoaPods developers who want to import the Objective-C TensorFlow Lite module, you must also include `use_frameworks!` in your `Podfile`.
+注：对于想要导入 Objective-C TensorFlow Lite 模块的 CocoaPods 开发者，还必须在 `Podfile` 中包括 `use_frameworks!`。
