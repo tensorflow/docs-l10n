@@ -1,6 +1,6 @@
 # iOS 快速入门
 
-To get started with TensorFlow Lite on iOS, we recommend exploring the following example:
+要开始在 iOS 上使用 TensorFlow Lite，我们建议浏览以下示例:
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS 图像分类示例</a>
 
@@ -37,7 +37,7 @@ pod 'TensorFlowLiteObjC'
 
 There are stable releases, and nightly releases available for both `TensorFlowLiteSwift` and `TensorFlowLiteObjC` pods. If you do not specify a version constraint as in the above examples, CocoaPods will pull the latest stable release by default.
 
-You can also specify a version constraint. For example, if you wish to depend on version 2.0.0, you can write the dependency as:
+您还可以指定版本约束。例如，如果您希望依赖版本 2.0.0，可以按照如下代码编写依赖关系：
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 2.0.0'
