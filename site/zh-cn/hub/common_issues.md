@@ -1,3 +1,5 @@
+<!--* freshness: { owner: 'maringeo' reviewed: '2020-12-29' review_interval: '3 months' } *-->
+
 # 常见问题
 
 如果您的问题未在此处列出，请先搜索 [GitHub 问题](https://github.com/tensorflow/hub/issues)，然后再提交新问题。
@@ -43,7 +45,7 @@ $ python
 
 ## 在预初始化的模块上运行推理
 
-如果您正在编写一个将模块多次应用于输入数据的 Python 程序，则可以应用以下配方。（注：对于生产服务中的服务请求，请考虑使用 go/servo 或其他可扩展的无 Python 解决方案。）
+If you are writing a Python program that applies a module many times on input data, you can apply the following recipes. (Note: For serving requests in production servives, consider [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) or other scalable, Python-free solutions.)
 
 假设您的用例模型为**初始化**和后续**请求**（例如 Django、Flask、自定义 HTTP 服务器等），则可以按以下方式设置服务：
 
