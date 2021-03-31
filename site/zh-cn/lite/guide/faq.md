@@ -39,7 +39,15 @@ python import_pb_to_tensorboard.py --model_dir <model path> --log_dir <log dir p
 
 如果 Netron 无法打开您的 TensorFlow Lite 模型，您可以尝试我们的仓库中提供的 [visualize.py](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/visualize.py) 脚本。
 
-- [克隆 TensorFlow 仓库](https://www.tensorflow.org/install/source)
+If you're using TF 2.5 or a later version
+
+```shell
+python -m tensorflow.lite.tools.visualize model.tflite visualized_model.html
+```
+
+Otherwise, you can run this script with Bazel
+
+- [Clone the TensorFlow repository](https://www.tensorflow.org/install/source)
 - 使用 Bazel 运行 `visualize.py` 脚本：
 
 ```shell
@@ -66,9 +74,9 @@ bazel run //tensorflow/lite/tools:visualize model.tflite visualized_model.html
 
 可以在转换至 TensorFlow Lite 的过程中使用[训练后量化](../performance/post_training_quantization.md)缩减模型大小。训练后量化可将权重从浮点量化至 8 位精度，并在运行时对其进行去量化以执行浮点计算。但请注意，这可能会影响准确率。
 
-如果需要重新训练模型，请考虑采用[量化感知训练](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize)。但请注意，量化感知训练仅适用于一部分卷积神经网络架构。
+如果需要重新训练模型，请考虑采用[量化感知训练](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize)。但请注意，量化感知训练仅适用于卷积神经网络架构的子集。
 
-如需深入了解不同的优化方法，请参阅[模型优化](../performance/model_optimization.md)。
+如需深入了解不同的优化方法，请参见[模型优化](../performance/model_optimization.md)。
 
 #### 如何针对我的机器学习任务优化 TensorFlow Lite 性能？
 
@@ -79,4 +87,4 @@ bazel run //tensorflow/lite/tools:visualize model.tflite visualized_model.html
 - *使用硬件加速器*。TensorFlow Lite 支持使用委托针对特定硬件进行模型加速。例如，要使用 Android 的 Neural Networks API，请在解释器上调用 [`UseNNAPI`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L343)。或者，请参阅我们的 [GPU 委托教程](../performance/gpu.md)。
 - *（高级）分析模型*。Tensorflow Lite [基准测试工具](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)具有内置分析器，可显示每个算子的统计信息。如果您了解如何针对您的特定平台优化算子性能，那么您可以实现[自定义算子](ops_custom.md)。
 
-有关如何优化性能的更深入讨论，请参阅[最佳做法](../performance/best_practices.md)。
+有关如何优化性能的更为深入的讨论，请参见[最佳做法](../performance/best_practices.md)。
