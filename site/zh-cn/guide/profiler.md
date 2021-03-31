@@ -88,7 +88,7 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 
 - **Step-time Graph** - 显示所有采样步骤中设备单步用时（以毫秒为单位）的计算图。每个单步分为多个类别（以不同颜色标识）。红色区域对应设备闲置等待主机的输入数据所需的单步用时部分。绿色区域显示设备的实际工作时长
 
-- **Top 10 TensorFlow operations on device -** Displays the on-device ops that ran the longest.
+- **Top 10 TensorFlow operations on GPU** - 显示运行时间最长的设备端运算。
 
     每行显示了运算的自用时间（以所有运算需要的时间百分比形式）、累计时间、类别和名称。
 
@@ -126,8 +126,8 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 
 信息中心包含三个板块：
 
-1. **Summary -** Summarizes the overall input pipeline with information on whether your application is input bound and, if so, by how much
-2. **Device-side analysis -** Displays detailed, device-side analysis results, including the device step-time and the range of device time spent waiting for input data across cores at each step
+1. **Summary** - 汇总了整个输入流水线的相关信息，包含您的应用是否受输入约束，以及受输入约束时的约束程度等信息
+2. **设备端分析** - 显示详细的设备端分析结果，包括设备单步用时，以及每一步中等待各个核心的输入数据所用的设备时间的范围
 3. **Host-side analysis** - 显示详细的主机端分析，包括主机输入处理时间的明细
 
 #### 输入流水线摘要
@@ -157,7 +157,7 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 源数据表中的每个条目都包含以下信息：
 
 1. **Input Op** - 显示输入运算的 TensorFlow 运算名称
-2. **Count -** Shows the total number of instances of op execution during the profiling period
+2. **Count** - 显示分析期间运算执行的实例总数
 3. **Total Time (in ms)** - 显示每个实例所用时间的累计和
 4. **Total Time % -** 显示在一个运算上所花费的总时间占输入处理总时间的比例
 5. **Total Self Time (in ms)** - 显示其中每个实例所用的自我时间的累计和。此处的自我时间是指在函数体内部所用的时间，不包括它调用的函数所用的时间。
@@ -187,18 +187,18 @@ TensorFlow Stats 工具可以显示分析会话期间在主机或设备上执行
 
     - 如果任何运算有子运算：
 
-        - The total "accumulated" time of an op includes the time spent inside the child ops
+        - 运算的总“累计”时间不包括子运算所用的时间
         - 运算的总“自我”时间不包括子运算所用的时间
 
     - 如果某个运算在主机上执行：
 
-        - The percentage of the total self-time on device incurred by the op on will be 0
+        - 此运算所占用设备上的总自我时间百分比将为 0
         - 直到并包括此运算的设备上总自用时间的累计百分比将为 0
 
     - 如果某个运算在设备上执行：
 
         - 此运算所占用主机上的总自我时间百分比将为 0
-        - The cumulative percentage of the total self-time on host upto and including this op will be 0
+        - 直到并包括此运算的主机上总自我时间的累计百分比将为 0
 
 您可以选择在饼图和表中包含或排除空闲时间。
 
@@ -229,7 +229,7 @@ Timeline 窗格包含以下元素：
 1. **顶栏** - 包含各种辅助控件
 2. **时间轴** - 显示相对于跟踪记录开始的时间
 3. **板块和轨道标签** - 每个版块都包含多个轨道，并且左侧有一个三角形，点击该三角形可以展开和收起相应的版块。系统中的每个处理元素都有一个版块
-4. **Tool selector -** Contains various tools for interacting with the trace viewer such as Zoom, Pan, Select, and Timing. Use the Timing tool to mark a time interval.
+4. **工具选择器** - 包含与 Trace Viewer 交互的各种工具，例如 Zoom、Pan、Select 和 Timing。使用 Timing 工具可以标记时间间隔
 5. **Events** - 显示运算的执行时间或者元事件（例如训练步骤）的持续时间
 
 ##### 版块和轨道
@@ -555,7 +555,7 @@ Profiler 在四个不同的轴上涵盖了许多用例。目前已支持部分�
 
 <a name="profiling_api_table"></a>
 
-| 分析 API                | 本地     | 远程    | 多  | 硬件  | :                              :           :           : 工作进程   : 平台 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 支持 | 不       | 不       | CPU、GPU  | : Callback**                   :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | Not       | 不       | CPU、GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | 支持 | 支持 | CPU、GPU、| : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace)**  :           :           :           : TPU       : | **Context manager API**      | 支持 | 不       | 不       | CPU、GPU  | :                              :           : 支持 : 支持 :           :
+| 分析 API                | 本地     | 远程    | 多  | 硬件  | :                              :           :           : 工作进程   : 平台 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 支持 | 不       | 不       | CPU、GPU  | : Callback**                   :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | Not       | 不       | CPU、GPU  | : start/stop [API]**    :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | 支持 | 支持 | CPU、GPU、| : client.trace [API]**  :           :           :           : TPU       : | **Context manager API**      | 支持 | 不       | 不       | CPU、GPU  | :                              :           : 支持 : 支持 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -608,3 +608,7 @@ TensorFlow 2.2 和 2.3 仅支持单主机系统的多 GPU 分析；不支持多�
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
+
+
+[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2
+[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace
