@@ -31,11 +31,11 @@
 export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 ```
 
-Run the `ldconfig` command above again to verify that the CUPTI library is found.
+重新运行上面的 `ldconfig` 命令，验证在该路径下可以找到 CUPTI 库。
 
 ### 解决权限问题
 
-When you run profiling with CUDA® Toolkit in a Docker environment or on Linux, you may encounter issues related to insufficient CUPTI privileges (`CUPTI_ERROR_INSUFFICIENT_PRIVILEGES`). See the [NVIDIA Developer Docs](https://developer.nvidia.com/nvidia-development-tools-solutions-ERR_NVGPUCTRPERM-permission-issue-performance-counters){:.external} to learn more about how you can resolve these issues on Linux.
+在 Docker 环境中或 Linux 上使用 CUDA® Toolkit  运行分析时，您可能会遇到与 CUPTI 权限不足相关的问题 (`CUPTI_ERROR_INSUFFICIENT_PRIVILEGES`)。请参阅 [NVIDIA 开发者文档](https://developer.nvidia.com/nvidia-development-tools-solutions-ERR_NVGPUCTRPERM-permission-issue-performance-counters){:.external}，详细了解如何在 Linux 上解决这些问题。
 
 要解决 Docker 环境中的 CUPTI 权限问题，请运行以下代码：
 
@@ -59,13 +59,13 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 - Trace Viewer
 - GPU Kernel Stats
 - 内存分析工具
-- Pod viewer
+- 播客检视器
 
 <a name="overview_page"></a>
 
 ### 概览页面
 
-The overview page provides a top level view of how your model performed during a profile run. The page shows you an aggregated overview page for your host and all devices, and some recommendations to improve your model training performance. You can also select individual hosts in the Host dropdown.
+概览页面提供了您的模型在分析运行期间表现的顶级视图。该页面会向您显示主机和所有设备的汇总概览信息，以及一些提升模型训练性能的建议。您还可以在 Host 下拉列表中选择各个主机。
 
 概览页面包含以下信息：
 
@@ -92,7 +92,7 @@ The overview page provides a top level view of how your model performed during a
 
     每行显示了运算的自用时间（以所有运算需要的时间百分比形式）、累计时间、类别和名称。
 
-- **Run environment -** Displays a high-level summary of the model run environment including:
+- **Run Environment -** 显示包括以下内容的模型运行环境的简明摘要：
 
     - 使用的主机数
     - 设备类型 (GPU/TPU)
@@ -104,7 +104,7 @@ The overview page provides a top level view of how your model performed during a
 
 ### 输入流水线分析器
 
-When a TensorFlow program reads data from a file it begins at the top of the TensorFlow graph in a pipelined manner. The read process is divided into multiple data processing stages connected in series, where the output of one stage is the input to the next one. This system of reading data is called the *input pipeline*.
+当 TensorFlow 程序从文件读取数据时，它会以流水线方式从 TensorFlow 计算图的顶部开始。读取过程分为多个串联的数据处理阶段，其中一个阶段的输出是下一个阶段的输入。这种数据读取系统称为*输入流水线*。
 
 从文件读取记录的典型流水线包括以下阶段：
 
@@ -112,11 +112,11 @@ When a TensorFlow program reads data from a file it begins at the top of the Ten
 2. 文件预处理（可选）
 3. 文件从主机传输到设备
 
-An inefficient input pipeline can severely slow down your application. An application is considered **input bound** when it spends a significant portion of time in input pipeline. Use the insights obtained from the input pipeline analyzer to understand where the input pipeline is inefficient.
+低效的输入流水线会严重减缓应用速度。如果将很大一部分时间花在输入流水线上，应用会被视为**输入边界**。使用从输入流水线分析器获得的分析数据可以了解输入流水线低效的地方。
 
-The input pipeline analyzer tells you immediately whether your program is input bound and walks you through device- and host-side analysis to debug performance bottlenecks at any stage in the input pipeline.
+输入流水线分析器可以立即告诉您程序是否受输入约束，并引导您执行设备端和主机端分析，这两种分析可以帮助您在输入流水线的任何阶段调试性能瓶颈。
 
-See the guidance on input pipeline performance for recommended best practices to optimize your data input pipelines.
+请参阅输入流水线性能指导，了解优化数据输入流水线的推荐最佳做法。
 
 #### 输入流水线信息中心
 
@@ -132,25 +132,25 @@ See the guidance on input pipeline performance for recommended best practices to
 
 #### 输入流水线摘要
 
-The Summary reports if your program is input bound by presenting the percentage of device time spent on waiting for input from the host. If you are using a standard input pipeline that has been instrumented, the tool reports where most of the input processing time is spent.
+汇总通过显示等待主机输入所用的设备时间百分比来报告您的程序是否受输入约束。如果您使用的是已被检测的标准输入流水线，则该工具将报告占用大部分输入处理时间的环节。
 
 #### 设备端分析
 
-The device-side analysis provides insights on time spent on the device versus on the host and how much device time was spent waiting for input data from the host.
+设备端分析提供了设备与主机所占用时间以及等待主机输入数据所占用设备时间的信息。
 
-1. **Step time plotted against step number -** Displays a graph of device step time (in milliseconds) over all the steps sampled. Each step is broken into the multiple categories (with different colors) of where time is spent. The red area corresponds to the portion of the step time the devices were sitting idle waiting for input data from the host. The green area shows how much of time the device was actually working
+1. **单步用时与步数的关系图** - 显示所有采样步骤中设备单步用时（以毫秒为单位）的计算图。每个单步分为多个类别（以不同颜色标识）。红色区域对应设备闲置等待主机的输入数据所需的单步用时部分。绿色区域显示设备的实际工作时长
 2. **单步用时统计信息** - 报告设备单步用时的平均值、标准差和范围（[最小值，最大值]）
 
 #### 主机端分析
 
-The host-side analysis reports a breakdown of the input processing time (the time spent on `tf.data` API ops) on the host into several categories:
+主机端分析将主机上的输入处理时间（`tf.data` API 运算所用的时间）细分为以下几类：
 
 - **Reading data from files on demand** - 在没有缓存、预提取和交错的情况下从文件读取数据所用的时间
 - **Reading data from files in advance -** 读取文件所花费的时间，包括缓存、预取和交错
 - **Data preprocessing** - 预处理运算所用的时间，例如图像解压缩
 - **Enqueuing data to be transferred to device -** 向设备传输数据之前将数据加入馈入队列所用的时间。
 
-Expand the **Input Op Statistics** to see the statistics for individual input ops and their categories broken down by execution time.
+展开 **Input Op Statistics** 可以看到各个输入运算及其按执行时间分类的统计数据。
 
 ![image](./images/tf_profiler/input_op_stats.png)
 
@@ -160,7 +160,7 @@ Expand the **Input Op Statistics** to see the statistics for individual input op
 2. **Count -** Shows the total number of instances of op execution during the profiling period
 3. **Total Time (in ms)** - 显示每个实例所用时间的累计和
 4. **Total Time % -** 显示在一个运算上所花费的总时间占输入处理总时间的比例
-5. **Total Self Time (in ms) -** Shows the cumulative sum of the self time spent on each of those instances. The self time here measures the time spent inside the function body, excluding the time spent in the function it calls.
+5. **Total Self Time (in ms)** - 显示其中每个实例所用的自我时间的累计和。此处的自我时间是指在函数体内部所用的时间，不包括它调用的函数所用的时间。
 6. **Total Self Time %** - 显示在总自我时间占输入处理总时间的比例
 7. **Category** - 显示输入运算的处理类别
 
@@ -188,12 +188,12 @@ TensorFlow Stats 工具可以显示分析会话期间在主机或设备上执行
     - 如果任何运算有子运算：
 
         - The total "accumulated" time of an op includes the time spent inside the child ops
-        - The total "self" time of an op does not include the time spent inside the child ops
+        - 运算的总“自我”时间不包括子运算所用的时间
 
     - 如果某个运算在主机上执行：
 
         - The percentage of the total self-time on device incurred by the op on will be 0
-        - The cumulative percentage of the total self-time on device upto and including this op will be 0
+        - 直到并包括此运算的设备上总自用时间的累计百分比将为 0
 
     - 如果某个运算在设备上执行：
 
@@ -254,7 +254,7 @@ Trace Viewer 还可以显示您的 TensorFlow 程序中 Python 函数调用的�
 
 ### GPU Kernel Stats
 
-This tool shows performance statistics and the originating op for every GPU accelerated kernel.
+此工具可以显示性能统计信息以及每个 GPU 加速内核的源运算。
 
 ![image](./images/tf_profiler/trace_viewer.png)
 
@@ -512,9 +512,9 @@ TensorFlow Profiler 可以收集您的 TensorFlow 模型的主机活动和 GPU �
 使用 **Capture Profile** 对话框指定以下信息：
 
 - 以逗号分隔的分析服务网址或 TPU 名称列表。
-- A profiling duration.
-- The level of device, host, and Python function call tracing.
-- How many times you want the Profiler to retry capturing profiles if unsuccessful at first.
+- 分析持续时间
+- 设备、主机和 Python 函数调用跟踪的级别
+- 在首次不成功时，您希望 Profiler 重新尝试捕获分析的次数
 
 ### 分析自定义训练循环
 
@@ -551,7 +551,7 @@ Profiler 在四个不同的轴上涵盖了许多用例。目前已支持部分�
 - 分析多个工作进程：您可以使用 TensorFlow 的分布式训练功能分析多个机器。
 - 硬件平台：分析 CPU、GPU 和 TPU。
 
-The table below is a quick overview of which of the above use cases are supported by the various profiling APIs in TensorFlow:
+下表简单概括了上述用例受 TensorFlow 2.3 中的各种分析 API 支持的情况：
 
 <a name="profiling_api_table"></a>
 
@@ -561,13 +561,13 @@ The table below is a quick overview of which of the above use cases are supporte
 
 ## 实现最佳模型性能的最佳做法
 
-Use the following recommendations as applicable for your TensorFlow models to achieve optimal performance.
+在您的 TensorFlow 模型中根据以下建议（如适用）操作以实现最佳性能。
 
 通常，请在设备上执行所有转换，并确保在平台上使用 cuDNN 和 Intel MKL 等库的最新兼容版本。
 
 ### 优化输入数据流水线
 
-An efficient data input pipeline can drastically improve the speed of your model execution by reducing device idle time. Consider incorporating the following best practices as detailed [here](https://www.tensorflow.org/guide/data_performance) to make your data input pipeline more efficient:
+高效的数据输入流水线可以通过缩短设备空闲时间显著提高模型执行速度。考虑结合使用以下最佳做法（[此处](https://www.tensorflow.org/guide/data_performance)进行了详细说明），以提高数据输入流水线的效率：
 
 - 预提取数据
 - 并行处理数据执行
@@ -576,27 +576,27 @@ An efficient data input pipeline can drastically improve the speed of your model
 - 将用户自定义函数向量化
 - 减少应用转换时的内存用量
 
-Additionally, try running your model with synthetic data to check if the input pipeline is a performance bottleneck.
+此外，尝试使用合成数据运行您的模型以了解输入流水线是否为性能瓶颈。
 
 ### 提升设备性能
 
-- Increase training mini-batch size (number of training samples used per device in one iteration of the training loop)
+- 增加训练 mini-batch 大小（每个设备在训练循环的一次迭代中使用的训练样本数量）
 - 使用 TF Stats 了解设备端运算的运行效率
-- Use `tf.function` to perform computations and optionally, enable the `experimental_compile` flag
-- Minimize host Python operations between steps and reduce callbacks. Calculate metrics every few steps instead of at every step
+- 使用 `tf.function` 执行计算并启用 `experimental_compile` 标志（可选）
+- 最大程度减少步骤之间的主机 Python 运算并减少回调。每几步（而不是每一步）计算指标
 - 使设备计算单元保持忙碌状态
 - 将数据同时发送到多个设备
-- Optimize data layout to prefer channels first (e.g. NCHW over NHWC). Certain GPUs like the NVIDIA® V100 perform better with a NHWC data layout.
-- Consider using 16-bit numerical representations such as `fp16`, the half-precision floating point format specified by IEEE or the Brain floating-point [bfloat16](https://cloud.google.com/tpu/docs/bfloat16) format
-- Consider using the [Keras mixed precision API](https://www.tensorflow.org/guide/keras/mixed_precision)
-- When training on GPUs, make use of the TensorCore. GPU kernels use the TensorCore when the precision is fp16 and input/output dimensions are divisible by 8 or 16 (for int8)
+- 优化数据布局以优先选择通道（例如，NCHW 优于 NHWC）。某些 GPU（例如 NVIDIA® V100）在 NHWC 数据布局下性能更好。
+- 考虑使用 16 位数字表示，例如 `fp16`（IEEE 指定的半精度浮点格式）或者大脑浮点 [bfloat16](https://cloud.google.com/tpu/docs/bfloat16) 格式
+- 考虑使用 [Keras 混合精度 API](https://www.tensorflow.org/guide/keras/mixed_precision)
+- 在 GPU 上训练时，充分利用 TensorCore。当精度为 fp16 且输入/输出维度可被 8 或 16 整除（对于 int8）时，GPU 内核将使用 TensorCore。
 
 ## 其他资源
 
-- See the end-to-end [TensorBoard profiler tutorial](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras) to implement the advice in this guide.
-- Watch the [Performance profiling in TF 2](https://www.youtube.com/watch?v=pXHAQIhhMhI) talk from the TensorFlow Dev Summit 2020.
+- 请参阅端到端 [TensorBoard Profiler 教程](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras)，了解如何实现本指南中的建议。
+- 观看 2020 TensorFlow 开发者峰会上的 [TF 2 中的性能分析](https://www.youtube.com/watch?v=pXHAQIhhMhI)演讲。
 
-## Known limitations
+## 已知问题/限制
 
 ### 在 TensorFlow 2.2 和 TensorFlow 2.3 上分析多个 GPU
 
