@@ -4,7 +4,7 @@
 
 下面提供了我们 2020 年计划的简要概览。请注意，该路线图随时可能发生变化，以下顺序也不代表任何类型的优先级。原则上，我们通常根据受影响的用户数量确定问题优先级。
 
-We break our roadmap into four key segments: usability, performance, optimization and portability. We strongly encourage you to comment on our roadmap and provide us feedback in the [TF Lite discussion group](https://groups.google.com/a/tensorflow.org/g/tflite).
+我们将路线图分为四个关键部分：可用性、性能、优化和可移植性。我们大力鼓励您对我们的路线图提出意见，并在 [TF Lite 讨论组](https://groups.google.com/a/tensorflow.org/g/tflite)中提供反馈。
 
 ## 易用性
 
@@ -29,8 +29,8 @@ We break our roadmap into four key segments: usability, performance, optimizatio
 - **更多模型和示例**
     - 更多演示模型使用方法的示例以及新功能和 API（涵盖不同的平台）。
 - **Task Library**
-    - Improve the usability of the C++ Task Library, such as providing prebuilt binaries and creating user-friendly workflows for users who want to build from source code.
-    - Release reference examples of using the Task Library.
+    - 改善 C++ Task Library 的可用性，如提供预先构建的二进制文件，对于想要从源代码构建的用户，还为其创建了用户友好的工作流。
+    - 发布使用 Task Library 的参考示例。
     - 支持更多任务类型。
     - 改善跨平台支持，并使更多任务可以在 iOS 上执行。
 
