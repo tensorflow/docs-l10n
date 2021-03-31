@@ -51,7 +51,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 </div>
 <h2 data-md-type="header" data-md-header-level="2">最佳做法</h2>
 <h3 data-md-type="header" data-md-header-level="3">在没有 Neural Engine 的设备上使用 Core ML 委托</h3>
-<p data-md-type="paragraph">By default, Core ML delegate will only be created if the device has Neural Engine, and will return <code data-md-type="codespan">null</code> if the delegate is not created. If you want to run Core ML delegate on other environments (for example, simulator), pass <code data-md-type="codespan">.all</code> as an option while creating delegate in Swift. On C++ (and Objective-C), you can pass <code data-md-type="codespan">TfLiteCoreMlDelegateAllDevices</code>. Following example shows how to do this:</p>
+<p data-md-type="paragraph">默认情况下，仅在具有 Neural Engine 的设备上创建 Core ML 委托，如果没有创建委托，将返回 <code data-md-type="codespan">null</code>。如果要在其他环境（如模拟器）中运行 Core ML 委托，则在 Swift 中创建委托时，将 <code data-md-type="codespan">.all</code> 作为一个选项传递。在 C++（和 Objective-C）中，您可以传递 <code data-md-type="codespan">TfLiteCoreMlDelegateAllDevices</code>。下面的示例介绍了如何执行此操作：</p>
 <div data-md-type="block_html">
 <div>
   <devsite-selector>
@@ -79,7 +79,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 </section></devsite-selector>
 </div>
 <h3 data-md-type="header" data-md-header-level="3">使用 Metal(GPU) 委托作为回退</h3>
-<p data-md-type="paragraph">When the Core ML delegate is not created, alternatively you can still use <a href="https://www.tensorflow.org/lite/performance/gpu#ios" data-md-type="link">Metal delegate</a> to get performance benefits. Following example shows how to do this:</p>
+<p data-md-type="paragraph">如果未创建 Core ML 委托，您也可以使用 <a href="https://www.tensorflow.org/lite/performance/gpu#ios" data-md-type="link">Metal 委托</a>获得性能优势。下面的示例介绍了如何执行此操作：</p>
 <div data-md-type="block_html">
 <div>
   <devsite-selector>
@@ -98,7 +98,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 </div>
 <p data-md-type="paragraph">委托创建逻辑读取设备的机器 ID（如 iPhone11,1）以确定其 Neural Engine 可用性。有关更多详细信息，请参见<a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/experimental/delegates/coreml/coreml_delegate.mm" data-md-type="link">代码</a>。或者，您也可以使用其他库（如 <a href="https://github.com/devicekit/DeviceKit" data-md-type="link">DeviceKit</a>）实现自己的拒绝列表设备集。有关更多详细信息，请参见<a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/experimental/delegates/coreml/coreml_delegate.mm" data-md-type="link">代码</a>。或者，您也可以使用其他库（如 <a href="https://github.com/devicekit/DeviceKit" data-md-type="link">DeviceKit</a>）实现自己的拒绝名单设备集。</p>
 <h3 data-md-type="header" data-md-header-level="3">使用旧 Core ML 版本</h3>
-<p data-md-type="paragraph">Although iOS 13 supports Core ML 3, the model might work better when it is converted with Core ML 2 model specification. The target conversion version is set to the latest version by default, but you can change this by setting <code data-md-type="codespan">coreMLVersion</code> (in Swift, <code data-md-type="codespan">coreml_version</code> in C API) in the delegate option to older version.</p>
+<p data-md-type="paragraph">虽然 iOS 13 支持 Core ML 3，但使用 Core ML 2 模型规范进行转换后，该模型的效果可能更好。目标转换版本默认设置为最新的版本，但您可以通过在委托选项中设置 <code data-md-type="codespan">coreMLVersion</code>（在 Swift 中；在 C API 中则为 <code data-md-type="codespan">coreml_version</code>），将其更改为旧版本。</p>
 <h2 data-md-type="header" data-md-header-level="2">支持的运算</h2>
 <p data-md-type="paragraph">Core ML 委托支持以下运算。</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
@@ -175,7 +175,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 </li>
 </ul>
 <h2 data-md-type="header" data-md-header-level="2">反馈</h2>
-<p data-md-type="paragraph">For issues, please create a <a href="https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md" data-md-type="link">GitHub</a> issue with all the necessary details to reproduce.</p>
+<p data-md-type="paragraph">如有问题，请创建 <a href="https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md" data-md-type="link">GitHub</a> 问题，并提供重现问题所需的所有必要详情。</p>
 <h2 data-md-type="header" data-md-header-level="2">常见问题解答</h2>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">
