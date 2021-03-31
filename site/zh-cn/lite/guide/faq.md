@@ -47,7 +47,7 @@ python -m tensorflow.lite.tools.visualize model.tflite visualized_model.html
 
 否则，您可以用 Bazel 运行此脚本
 
-- [Clone the TensorFlow repository](https://www.tensorflow.org/install/source)
+- [克隆 TensorFlow 仓库](https://www.tensorflow.org/install/source)
 - 使用 Bazel 运行 `visualize.py` 脚本：
 
 ```shell
