@@ -4,7 +4,7 @@
 
 - 向后兼容性：新版本的 TensorFlow Lite 实现方式可以处理旧的模型文件。
 - 向前兼容性：只要没有使用新功能，旧版本的 TensorFlow Lite 实现方式可以处理由新版 TOCO 生成的新版本的模型文件。
-- Forward in-compatibility detection: If an old TensorFlow Lite implementation reads a new model that contains a new version of an op which isn't supported, it should report the error.
+- 向前兼容性检测：如果旧 TensorFlow Lite 实现读取包含不受支持的新版运算的新模型，则应报告错误。
 
 ## 示例：向卷积添加膨胀
 
@@ -185,7 +185,7 @@ TensorFlow Lite 提供了一个委托 API，可以将操作委派给硬件后端
 
 To do this, you need to add a new map entry in `lite/tools/versioning/runtime_version.cc`.
 
-In this example, you need to add the following entry into `op_version_map`:
+在本例中，您需要将以下条目添加到 `op_version_map` 中：
 
 ```
 {{BuiltinOperator_DEPTHWISE_CONV_2D, 2}, kPendingReleaseOpVersion}
@@ -193,9 +193,9 @@ In this example, you need to add the following entry into `op_version_map`:
 
 （`kPendingReleaseOpVersion` 将被替换为下一个稳定版中的相应发布版本。）
 
-### Delegation implementation
+### 委托实现
 
-TensorFlow Lite provides a delegation API which enables delegating ops to hardware backends. In the delegate's `Prepare` function, check if the version is supported for every node in Delegation code.
+TensorFlow Lite 提供了一个委托 API，可以将运算委托给硬件后端。在委托的 `Prepare` 函数中，检查委托代码中的每个节点是否支持该版本。
 
 ```
 const int kMinVersion = 1;
