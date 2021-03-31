@@ -12,7 +12,7 @@
 --- | ---
 图像分类[指南](https://www.tensorflow.org/lite/tutorials/model_maker_image_classification) | 将图像分成预定义类别。
 文字分类[指南](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification) | 将文字分成预定义类别。
-BERT Question Answer [guide](https://www.tensorflow.org/lite/tutorials/model_maker_question_answer) | Find the answer in a certain context for a given question with BERT.
+BERT 问答[指南](https://www.tensorflow.org/lite/tutorials/model_maker_question_answer) | 使用 BERT 在特定上下文中查找给定问题的答案。
 
 ## 端到端示例
 
