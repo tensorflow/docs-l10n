@@ -178,7 +178,7 @@ ImageProcessor imageProcessor =
 
 我们还欢迎开发者创建自定义处理程序。在这些情况下，与训练过程保持一致很重要，即相同的预处理应同时适用于训练和推断，以提高可重现性。
 
-## Quantization
+## 量化
 
 初始化类似 `TensorImage` 或 `TensorBuffer` 的输入或输出对象时，需要将它们的类型指定为 `DataType.UINT8` 或`DataType.FLOAT32`。
 
