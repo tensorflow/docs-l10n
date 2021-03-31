@@ -9,7 +9,7 @@ Note: This delegate is in experimental (beta) phase. It is available from Tensor
 **支持的 iOS 版本和设备：**
 
 - iOS 12 及更高版本。在旧 iOS 版本中，Core ML 委托会自动回退到 CPU。
-- By default, Core ML delegate will only be enabled on devices with A12 SoC and later (iPhone Xs and later) to use Neural Engine for faster inference. If you want to use Core ML delegate also on the older devices, please see [best practices](#best-practices)
+- 默认情况下，仅在使用 A12 SoC 及更高版本（iPhone XS 及更新的型号）的设备上启用 Core ML 委托，从而使用 Neural Engine 加快推断速度。如果要在旧设备上也使用 Core ML 委托，请参阅[最佳做法](#best-practices)
 
 **支持的模型**
 
@@ -43,8 +43,8 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
       <p></p>
 <pre class="prettyprint lang-swift">    let coreMLDelegate = CoreMLDelegate()
     var interpreter: Interpreter
-&lt;/div&gt;
-&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_5&lt;/code&gt;</pre>
+&amp;lt;/div&amp;gt;
+&amp;lt;pre data-md-type="block_code" data-md-language=""&amp;gt;&amp;lt;code&amp;gt;GL_CODE_5&amp;lt;/code&amp;gt;</pre>
 <div data-md-type="block_html">
 </div>
 </section></devsite-selector>
@@ -62,8 +62,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
     options.enabledDevices = .all
     let coreMLDelegate = CoreMLDelegate(options: options)!
     let interpreter = try Interpreter(modelPath: modelPath,
-                                      delegates: [coreMLDelegate])
-      </pre>
+                                      delegates: [coreMLDelegate])</pre>
     </section>
     <section>
       <h3>Objective-C</h3>
@@ -72,8 +71,8 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
     coreMLOptions.enabledDevices = TFLCoreMLDelegateEnabledDevicesAll;
     TFLCoreMLDelegate* coreMLDelegate = [[TFLCoreMLDelegate alloc]
                                           initWithOptions:coreMLOptions];
-&lt;/div&gt;
-&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_9&lt;/code&gt;</pre>
+&amp;lt;/div&amp;gt;
+&amp;lt;pre data-md-type="block_code" data-md-language=""&amp;gt;&amp;lt;code&amp;gt;GL_CODE_9&amp;lt;/code&amp;gt;</pre>
 <div data-md-type="block_html">
 </div>
 </section></devsite-selector>
@@ -90,8 +89,8 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
     if delegate == nil {
       delegate = MetalDelegate()  // Add Metal delegate options if necessary.
     }
-&lt;/div&gt;
-&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_10&lt;/code&gt;</pre>
+&amp;lt;/div&amp;gt;
+&amp;lt;pre data-md-type="block_code" data-md-language=""&amp;gt;&amp;lt;code&amp;gt;GL_CODE_10&amp;lt;/code&amp;gt;</pre>
 <div data-md-type="block_html">
 </div>
 </section></devsite-selector>
@@ -131,7 +130,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 <p data-md-type="paragraph">FullyConnected（又称 Dense 或 InnerProduct）</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">权重和偏差（如果存在）应为常量。</li>
-<li data-md-type="list_item" data-md-list-type="unordered">Only supports single-batch case. Input dimensions should be 1, except the last dimension.</li>
+<li data-md-type="list_item" data-md-list-type="unordered">仅支持单一批次情况。除最后一个维度外，输入维度应为 1。</li>
 </ul>
 </li>
 <li data-md-type="list_item" data-md-list-type="unordered">Hardswish</li>
@@ -199,7 +198,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 <li data-md-type="list_item" data-md-list-type="unordered">
 <p data-md-type="paragraph">支持自定义 TF Lite 运算吗？</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">No, CoreML delegate does not support custom ops and they will fallback to CPU.</li>
+<li data-md-type="list_item" data-md-list-type="unordered">不支持，CoreML 委托不支持自定义运算，它们将回退到 CPU。</li>
 </ul>
 </li>
 </ul>
