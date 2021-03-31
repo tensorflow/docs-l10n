@@ -69,7 +69,7 @@ o.print(); // [0, 1, 0, 5]
 
 与在序贯模型中一样，您可以通过 `model.layers` 访问模型的层，更具体而言为 `model.inputLayers` 和 `model.outputLayers`。
 
-## Validation
+## 验证
 
 序贯模型和函数式模型都是 `LayersModel` 类的实例。使用 `LayersModels` 的一个主要优势是验证：它会强制您指定输入形状，并稍后将其用于验证您的输入。`LayersModel` 还会在数据流经层时自动推断形状。提前了解形状后，模型就可以自动创建它的参数，并告知您两个相邻的层是否相互兼容。
 
