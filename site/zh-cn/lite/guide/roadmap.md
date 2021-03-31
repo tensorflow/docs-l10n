@@ -19,7 +19,7 @@ We break our roadmap into four key segments: usability, performance, optimizatio
     - 适用于常见 ML 任务的即用型 API 构建块
     - 支持更多模型（如 NLP）和更多平台（如 iOS）
 - **Android Studio 集成**
-    - Drag &amp; drop TFLite models into Android Studio to generate model binding classes
+    - 将 TFLite 模型拖放到 Android Studio 中以生成模型绑定类
 - **控制流和设备端训练**
     - 支持设备端训练，专注于个性化和迁移学习
 - **TensorBoard 提供的可视化工具**
@@ -72,7 +72,7 @@ We break our roadmap into four key segments: usability, performance, optimizatio
 ## 可移植性
 
 - **微控制器支持**
-    - Add support for a range of 32-bit MCU architecture use cases for speech and image classification
+    - 增加了对语音和图像分类的一系列 32 位 MCU 架构用例的支持
     - 视觉和音频数据的示例代码和模型
     - 微控制器上的全面 TF Lite 运算支持
     - 支持更多平台，包括 CircuitPython 支持
