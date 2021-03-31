@@ -69,14 +69,13 @@ Lite runtime...... Here is
 a list of operators for which you will need custom implementations: Sin.
 ```
 
-### Convert to a TensorFlow Lite Model
+### 转换为 TensorFlow Lite 模型
 
 通过设置转换器属性 `allow_custom_ops`，创建一个具有自定义算子的 TensorFlow Lite 模型，如下所示：
 
 <pre>converter = tf.lite.TFLiteConverter.from_concrete_functions([sin.get_concrete_function(x)])
-&lt;b&gt;converter.allow_custom_ops = True&lt;/b&gt;
-tflite_model = converter.convert()
-</pre>
+&amp;lt;b&amp;gt;converter.allow_custom_ops = True&amp;lt;/b&amp;gt;
+tflite_model = converter.convert()</pre>
 
 此时，如果使用默认解释器运行它，则会收到以下错误消息：
 
@@ -88,7 +87,7 @@ Registration failed.
 
 ### 创建并注册算子。
 
-All TensorFlow Lite operators (both custom and builtin) are defined using a simple pure-C interface that consists of four functions:
+所有 TensorFlow Lite 运算符（自定义和内置）都使用由四个函数组成的简单纯 C 接口进行定义：
 
 ```c++
 typedef struct {
@@ -101,11 +100,11 @@ typedef struct {
 
 有关 <code>TfLiteContext</code> 和 `TfLiteNode` 的详细信息，请参阅 [`common.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/common.h)。前者提供错误报告功能和对全局对象（包括所有张量）的访问。后者允许实现访问其输入和输出。
 
-When the interpreter loads a model, it calls `init()` once for each node in the graph. A given `init()` will be called more than once if the op is used multiple times in the graph. For custom ops a configuration buffer will be provided, containing a flexbuffer that maps parameter names to their values. The buffer is empty for builtin ops because the interpreter has already parsed the op parameters. Kernel implementations that require state should initialize it here and transfer ownership to the caller. For each `init()` call, there will be a corresponding call to `free()`, allowing implementations to dispose of the buffer they might have allocated in `init()`.
+当解释器加载模型时，它会为计算图中的每个节点调用一次 `init()`。如果运算在计算图中被多次使用，则会多次调用给定的 `init()`。对于自定义运算，将提供配置缓冲区，其中包含将参数名称映射到它们的值的 flexbuffer。内置运算的缓冲区为空，因为解释器已经解析了运算参数。需要状态的内核实现应在此处对其进行初始化，并将所有权转移给调用者。对于每个 `init()` 调用，都会有一个相应的 `free()` 调用，允许实现释放它们可能在 `init()` 中分配的缓冲区。
 
-Whenever the input tensors are resized, the interpreter will go through the graph notifying implementations of the change. This gives them the chance to resize their internal buffer, check validity of input shapes and types, and recalculate output shapes. This is all done through `prepare()`, and implementations can access their state using `node->user_data`.
+每当调整输入张量的大小时，解释器都将遍历计算图以通知更改的实现。这使它们有机会调整其内部缓冲区的大小、检查输入形状和类型的有效性，以及重新计算输出形状。这一切都通过 `prepare()` 完成，且实现可以使用 `node->user_data` 访问它们的状态。
 
-Finally, each time inference runs, the interpreter traverses the graph calling `invoke()`, and here too the state is available as `node->user_data`.
+最后，每次运行推断时，解释器都会遍历调用 `invoke()` 的计算图，同样，此处的状态也可作为 `node->user_data` 使用。
 
 通过定义上述四个函数和通常如下所示的全局注册函数，自定义算子可以使用与内置算子完全相同的方式实现：
 
@@ -176,7 +175,7 @@ TfLiteRegistration* Register_SIN() {
 }
 ```
 
-When initializing the `OpResolver`, add the custom op into the resolver (see below for an example). This will register the operator with Tensorflow Lite so that TensorFlow Lite can use the new implementation. Note that the last two arguments in `TfLiteRegistration` correspond to the `SinPrepare` and `SinEval` functions you defined for the custom op. If you used `SinInit` and `SinFree` functions to initialize variables used in the op and to free up space, respectively, then they would be added to the first two arguments of `TfLiteRegistration`; those arguments are set to `nullptr` in this example.
+初始化 `OpResolver` 时，将自定义算子添加到解析器中。这将向 Tensorflow Lite 注册算子，以便 TensorFlow Lite 可以使用新的实现。请注意，`TfLiteRegistration` 中的最后两个参数对应于您为自定义算子定义的 `SinPrepare` 和 `SinEval` 函数。如果使用 `SinInit` 和 `SinFree` 函数来分别初始化在算子中使用的变量并释放空间，则它们将被添加到 `TfLiteRegistration` 的前两个参数中；在此示例中，这些参数被设置为 `nullptr`。
 
 ### 在内核库中注册算子
 
@@ -193,7 +192,7 @@ class OpResolver {
 };
 ```
 
-Regular usage requires that you use the `BuiltinOpResolver` and write:
+常规用法要求您使用 `BuiltinOpResolver` 并编写以下代码：
 
 ```c++
 tflite::ops::builtin::BuiltinOpResolver resolver;
@@ -205,7 +204,7 @@ tflite::ops::builtin::BuiltinOpResolver resolver;
 resolver.AddCustom("Sin", Register_SIN());
 ```
 
-If the set of builtin ops is deemed to be too large, a new `OpResolver` could be code-generated based on a given subset of ops, possibly only the ones contained in a given model. This is the equivalent of TensorFlow's selective registration (and a simple version of it is available in the `tools` directory).
+如果觉得内置运算集过大，可以基于给定的运算子集（可能只是包含在给定模型中运算）通过代码生成新的 `OpResolver`。这相当于 TensorFlow 的选择性注册（其简单版本可在 `tools` 目录中获得）。
 
 如果想用 Java 定义自定义算子，目前需要您自行构建自定义 JNI 层并[在此 JNI 代码中](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/builtin_ops_jni.cc)编译自己的 AAR。同样，如果想定义在 Python 中可用的上述算子，可以将注册放在 [Python 封装容器代码](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc)中。
 
@@ -233,7 +232,7 @@ If the set of builtin ops is deemed to be too large, a new `OpResolver` could be
 
 3. 如果不想让它浪费太多内存，最好使用静态固定大小的数组（或在 `Resize` 中预分配的 `std::vector`），而不要使用在执行的每次迭代时动态分配的 `std::vector`。
 
-4. Avoid instantiating standard library container templates that don't already exist, because they affect binary size. For example, if you need a `std::map` in your operation that doesn't exist in other kernels, using a `std::vector` with direct indexing mapping could work while keeping the binary size small. See what other kernels use to gain insight (or ask).
+4. 避免实例化尚不存在的标准库容器模板，因为它们会影响二进制文件的大小。例如，如果运算中需要在其他内核中不存在的 `std::map`，可以使用具有直接索引映射的 `std::vector`，同时保持较小的二进制文件大小。请查看其他内核使用的内容以获得深入见解（或询问）。
 
 5. 检查指向由 `malloc` 返回的内存的指针。如果此指针是 `nullptr`，则不应使用该指针执行任何运算。如果在函数内 `malloc` 并出现退出错误，请在退出前释放内存。
 
