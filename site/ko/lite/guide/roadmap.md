@@ -1,4 +1,4 @@
-# TensorFlow Lite Roadmap
+# TensorFlow Lite 로드맵
 
 **업데이트: 2020년 4월 18일**
 
@@ -18,14 +18,14 @@
 - **사전 및 사후 처리 지원 라이브러리 및 codegen 도구**
     - 일반적인 ML 작업에 즉시 사용 가능한 API 구성 요소
     - 더 풍부한 모델(예: NLP) 및 더 다양한 플랫폼(예: iOS) 지원
-- **Android Studio Integration**
+- **Android Studio 통합**
     - Drag &amp; drop TFLite models into Android Studio to generate model binding classes
 - **제어 흐름 및 기기 내 훈련**
     - 개인화 및 전이 학습에 중점을 둔 온디바이스 훈련 지원
-- **Visualization tooling with TensorBoard**
+- **TensorBoard를 사용한 시각화 도구**
     - TensorBoard를 통해 향상된 도구 제공
-- **Model Maker**
-    - Support more tasks, including object detection and BERT-based NLP tasks
+- **모델 메이커**
+    - 객체 감지 및 BERT 기반 NLP 작업을 포함한 더 많은 작업 지원
 - **더 많은 모델과 예제**
     - 모델 사용법을 보여주는 더 많은 예제, 그리고 다양한 플랫폼을 뒷받침하는 새로운 기능과 API
 - **작업 라이브러리**
@@ -38,36 +38,36 @@
 
 - **개선된 도구**
     - 각 릴리스의 성능 향상을 추적하기 위한 공개 대시보드
-- **Improved CPU performance**
+- **향상된 CPU 성능**
     - New highly optimized floating-point kernel library for convolutional models
     - 최고의 x86 지원
 - **업데이트된 NN API 지원**
     - 새로운 Android R NN API 특성, ops 및 유형에 대한 완벽한 지원
-- **GPU backend optimizations**
-    - Vulkan support on Android
-    - Support integer quantized models
+- **GPU 백엔드 최적화**
+    - Android에서 Vulkan 지원
+    - 정수 양자화 모델 지원
 - **Hexagon DSP 백엔드**
     - 훈련 후 양자화를 통해 생성된 모든 모델에 대해 채널별 양자화 지원
-    - Dynamic input batch size support
+    - 동적 입력 배치 크기 지원
     - LSTM을 포함한 개선된 op 범위
 - **코어 ML 백엔드**
-    - Optimizing start-up time
-    - Dynamic quantized models support
-    - Float16 quantized models support
+    - 시작 시간 최적화
+    - 동적 양자화 모델 지원
+    - Float16 양자화 모델 지원
     - 개선된 op 범위
 
-## Optimization
+## 최적화
 
-- **Quantization**
+- **양자화**
 
     - (8b) 고정 소수점 RNN에 대한 훈련 후 양자화
-    - During-training quantization for (8b) fixed-point RNNs
+    - (8b) 고정 소수점 RNN에 대한 훈련 중 양자화
     - 훈련 후 동적 범위 양자화를 위한 품질 및 성능 향상
 
 - **잘라내기/희소성**
 
     - TensorFlow Lite에서 희소 모델 실행 지원 - [WIP](https://github.com/tensorflow/model-optimization/issues/173)
-    - Weight clustering API
+    - 가중치 클러스터링 API
 
 ## 이식성
 
@@ -75,4 +75,4 @@
     - Add support for a range of 32-bit MCU architecture use cases for speech and image classification
     - 시각 및 오디오 데이터용 샘플 코드 및 모델
     - 마이크로컨트롤러에서 TF Lite op 완벽 지원
-    - Support for more platforms, including CircuitPython support
+    - CircuitPython 지원을 포함한 더 많은 플랫폼 지원
