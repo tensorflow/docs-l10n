@@ -53,11 +53,11 @@ List<Category> results = classifier.classify(input);
 
 詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/text/nlclassifier/BertNLClassifier.java)をご覧ください。
 
-## Run inference in Swift
+## Swift で推論を実行する
 
-### Step 1: Import CocoaPods
+### ステップ 1: CocoaPods をインポートする
 
-Add the TensorFlowLiteTaskText pod in Podfile
+Podfile に TensorFlowLiteTaskText ポッドを追加します
 
 ```
 target 'MySwiftAppWithTaskAPI' do
@@ -66,7 +66,7 @@ target 'MySwiftAppWithTaskAPI' do
 end
 ```
 
-### Step 2: Run inference using the API
+### ステップ 2: API を使用して推論を実行する
 
 ```swift
 // Initialization
@@ -91,7 +91,7 @@ std::unique_ptr<BertNLClassifier> classifier = BertNLClassifier::CreateFromFile(
 std::vector<core::Category> categories = classifier->Classify(kInput);
 ```
 
-See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/bert_nl_classifier.h) for more details.
+詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/bert_nl_classifier.h)をご覧ください。
 
 ## 結果の例
 
@@ -112,7 +112,7 @@ category[1]: 'positive' : '0.99994'
 
 `BetNLClassifier` API では、[ TFLite モデルメタデータ](../../convert/metadata.md)を持つ TFLite モデルが必要です。
 
-The Metadata should meet the following requirements:
+メタデータは次の要件を満たす必要があります。
 
 - Wordpiece/Sentencepiece Tokenizer の input_process_units
 
