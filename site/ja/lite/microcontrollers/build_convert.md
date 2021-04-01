@@ -4,7 +4,7 @@
 
 このドキュメントでは、TensorFlow モデルをマイクロコントローラで実行するように変換するプロセスについて説明します。また、サポートされている演算の概要と、限られたメモリに収まるようにモデルを設計およびトレーニングするためのガイダンスも提供します。
 
-For an end-to-end, runnable example of building and converting a model, see the following Colab which is part of the *Hello World* example:
+エンドツーエンドの実行可能なモデルの構築と変換の例については、次の Colab をご覧ください。これは <em>Hello World</em> の例の一部です。
 
 <a class="button button-primary" href="https://colab.research.google.com/github/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb">train_hello_world_model.ipynb</a>
 
@@ -12,13 +12,13 @@ For an end-to-end, runnable example of building and converting a model, see the 
 
 トレーニング済みの TensorFlow モデルをマイクロコントローラで実行するように変換するには、[ TensorFlow Lite コンバータ Python API ](https://www.tensorflow.org/lite/convert/)を使用する必要があります。これにより、モデルが[ `FlatBuffer`](https://google.github.io/flatbuffers/)に変換され、モデルのサイズが小さくなり、TensorFlow Lite 演算を使用するようにモデルが変更されます。
 
-To obtain the smallest possible model size, you should consider using [post-training quantization](https://www.tensorflow.org/lite/performance/post_training_quantization).
+モデルサイズを最小化するには、[トレーニング後の量子化](https://www.tensorflow.org/lite/performance/post_training_quantization)の使用を検討してください。
 
 ### C 配列に変換
 
-Many microcontroller platforms do not have native filesystem support. The easiest way to use a model from your program is to include it as a C array and compile it into your program.
+多くのマイクロコントローラプラットフォームは、ネイティブファイルシステムをサポートしていません。プログラムからモデルを使用する最も簡単な方法は、モデルを C 配列として組み込み、プログラムにコンパイルすることです。
 
-The following unix command will generate a C source file that contains the TensorFlow Lite model as a `char` array:
+次の unix コマンドは、TensorFlow Lite モデルを`char`配列として含む C ソースファイルを生成します。
 
 ```bash
 xxd -i converted_model.tflite > model_data.cc
@@ -34,21 +34,21 @@ unsigned char converted_model_tflite[] = {
 unsigned int converted_model_tflite_len = 18200;
 ```
 
-Once you have generated the file, you can include it in your program. It is important to change the array declaration to `const` for better memory efficiency on embedded platforms.
+ファイルを生成したら、プログラムに含めることができます。組み込みプラットフォームでのメモリ効率を向上させるには、配列宣言を`const`に変更することが重要です。
 
-For an example of how to include and use a model in your program, see [`model.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/model.cc) in the *Hello World* example.
+プログラムにモデルを含めて使用する方法の例については、<em>Hello World</em> の例の<a> <code>model.cc</code></a>  をご覧ください。
 
-## Model architecture and training
+## モデルのアーキテクチャとトレーニング
 
-When designing a model for use on microcontrollers, it is important to consider the model size, workload, and the operations that are used.
+マイクロコントローラで使用するモデルを設計する場合、モデルのサイズ、ワークロード、および使用する演算を考慮することが重要です。
 
-### Model size
+### モデルサイズ
 
-A model must be small enough to fit within your target device's memory alongside the rest of your program, both as a binary and at runtime.
+モデルは、バイナリとしても実行時にも、プログラムの残りの部分と共にターゲットデバイスのメモリ内に収まるように十分に小さくなければなりません。
 
-To create a smaller model, you can use fewer and smaller layers in your architecture. However, small models are more likely to suffer from underfitting. This means for many problems, it makes sense to try and use the largest model that will fit in memory. However, using larger models will also lead to increased processor workload.
+より小さなモデルを作成するためには、アーキテクチャで使用するレイヤーを少なくします。ただし、小さいモデルでは、適合不足になる可能性が高くなります。そのため、多くの問題では、メモリに収まる最大のモデルを使用してみてください。ただし、より大きなモデルを使用すると、プロセッサのワークロードも増加します。
 
-Note: The core runtime for TensorFlow Lite for Microcontrollers fits in 16KB on a Cortex M3.
+注: マイクロコントローラ向け TensorFlow Lite のコアランタイムは、Cortex M3 の 16KB に収まります。
 
 ### ワークロード
 
@@ -56,6 +56,6 @@ Note: The core runtime for TensorFlow Lite for Microcontrollers fits in 16KB on 
 
 ### 演算のサポート
 
-TensorFlow Lite for Microcontrollers currently supports a limited subset of TensorFlow operations, which impacts the model architectures that it is possible to run. We are working on expanding operation support, both in terms of reference implementations and optimizations for specific architectures.
+マイクロコントローラ向け TensorFlow Lite は、現在、限られた TensorFlow 演算のサブセットをサポートしているため実行可能なモデルアーキテクチャが影響されますが、リファレンス実装と特定のアーキテクチャの最適化における演算のサポートの拡大に取り組んでいます。
 
-The supported operations can be seen in the file [`all_ops_resolver.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.cc)
+サポートされている演算は、以下のファイルからご覧いただけます。[`all_ops_resolver.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.cc)
