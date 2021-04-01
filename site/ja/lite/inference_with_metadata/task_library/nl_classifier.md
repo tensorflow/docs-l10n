@@ -4,7 +4,7 @@ Task Library の`NLClassifier` API は、入力テキストをさまざまなカ
 
 ## NLClassifier API の主な機能
 
-- 単一の文字列を入力として受け取り、その文字列で分類を実行し、分類の結果として <Label、Score> のペアを出力します。
+- 単一の文字列を入力として受け取り、その文字列で分類を実行し、分類の結果として &lt;Label、Score&gt; のペアを出力します。
 
 - 入力テキストの正規表現トークン化（オプション）。
 
@@ -43,7 +43,7 @@ dependencies {
     // Other dependencies
 
     // Import the Task Text Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.0.0-nightly'
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
 }
 ```
 
