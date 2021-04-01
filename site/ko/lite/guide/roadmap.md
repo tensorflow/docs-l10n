@@ -19,7 +19,7 @@
     - 일반적인 ML 작업에 즉시 사용 가능한 API 구성 요소
     - 더 풍부한 모델(예: NLP) 및 더 다양한 플랫폼(예: iOS) 지원
 - **Android Studio 통합**
-    - Drag &amp; drop TFLite models into Android Studio to generate model binding classes
+    - TFLite 모델을 Android Studio로 끌어다 놓아 모델 바인딩 클래스 생성
 - **제어 흐름 및 기기 내 훈련**
     - 개인화 및 전이 학습에 중점을 둔 온디바이스 훈련 지원
 - **TensorBoard를 사용한 시각화 도구**
@@ -72,7 +72,7 @@
 ## 이식성
 
 - **마이크로컨트롤러 지원**
-    - Add support for a range of 32-bit MCU architecture use cases for speech and image classification
+    - 음성 및 이미지 분류를 위한 다양한 32bit MCU 아키텍처 사용 사례에 대한 지원 추가
     - 시각 및 오디오 데이터용 샘플 코드 및 모델
     - 마이크로컨트롤러에서 TF Lite op 완벽 지원
     - CircuitPython 지원을 포함한 더 많은 플랫폼 지원
