@@ -2,7 +2,7 @@
 
 TensorFlow Lite는 공통 추론 모델에 사용되는 여러 TensorFlow 연산을 지원합니다. 이들 연산은 TensorFlow Lite 최적화 변환기에서 처리되므로, 지원되는 연산이 TensorFlow Lite의 해당 연산에 매핑되기 전에 제거되거나 통합될 수 있습니다.
 
-Since the TensorFlow Lite builtin operator library only supports a limited number of TensorFlow operators, not every model is convertible. Even for supported operations, very specific usage patterns are sometimes expected, for performance reasons. We expect to expand the set of supported operations in future TensorFlow Lite releases.
+TensorFlow Lite 내장 연산자 라이브러리는 제한된 수의 TensorFlow 연산자만 지원하므로 모든 모델을 변환할 수 있는 것은 아닙니다. 지원되는 연산의 경우에도 성능상의 이유로 매우 특정한 사용 패턴이 예상되는 경우가 있습니다. 향후 TensorFlow Lite 릴리스에서는 지원되는 연산을 확장할 예정입니다.
 
 TensorFlow Lite에서 동작하는 TensorFlow 모델을 빌드하는 방법을 이해하는 가장 좋은 방법은 이 프로세스에 적용되는 제한 사항과 함께 연산이 어떻게 변환되고 최적화되는지를 신중하게 고려하는 것입니다.
 
@@ -10,17 +10,17 @@ TensorFlow Lite에서 동작하는 TensorFlow 모델을 빌드하는 방법을 �
 
 대부분의 TensorFlow Lite 연산은 부동 소수점(`float32`) 및 양자화된(`uint8`, `int8`) 추론을 모두 대상으로 하지만, 많은 연산은 아직 `tf.float16` 및 문자열과 같은 다른 유형을 처리하지 않습니다.
 
-Apart from using different version of the operations, the other difference between floating-point and quantized models is the way they are converted. Quantized conversion requires dynamic range information for tensors. This requires "fake-quantization" during model training, getting range information via a calibration data set, or doing "on-the-fly" range estimation. See [quantization](../performance/model_optimization.md).
+서로 다른 버전의 연산을 사용하는 외에도 부동 소수점 모델과 양자화된 모델 사이에는 변환 방식에서도 차이가 있습니다. 양자화 변환에는 텐서에 대한 동적 범위 정보가 필요합니다. 이를 위해서는 모델 훈련 중에 "가짜 양자화", 보정 데이터세트를 통한 범위 정보 가져오기, 또는 "즉석" 범위 추정하기가 필요합니다. [양자화](../performance/model_optimization.md)를 참조하세요.
 
-## Supported operations and restrictions
+## 지원되는 연산 및 제한 사항
 
-TensorFlow Lite supports a subset of TensorFlow operations with some limitations. For full list of operations and limitations see [TF Lite Ops page](https://www.tensorflow.org/mlir/tfl_ops).
+TensorFlow Lite는 TensorFlow 연산의 일부를 지원하며 몇 가지 제한 사항이 있습니다. 연산 및 제한 사항의 전체 목록은 [TF Lite 연산 페이지](https://www.tensorflow.org/mlir/tfl_ops)를 참조하세요.
 
-## Straight-forward conversions, constant-folding and fusing
+## 간단한 변환, 지속적인 통합과 융합
 
-A number of TensorFlow operations can be processed by TensorFlow Lite even though they have no direct equivalent. This is the case for operations that can be simply removed from the graph (`tf.identity`), replaced by tensors (`tf.placeholder`), or fused into more complex operations (`tf.nn.bias_add`). Even some supported operations may sometimes be removed through one of these processes.
+TensorFlow Lite에 직접적으로 대응하는 연산이 없더라도 많은 TensorFlow 연산을 TensorFlow Lite에서 처리할 수 있습니다. 그래프에서 제거되거나(`tf.identity`), 텐서로 대체되거나(`tf.placeholder`), 더 복잡한 연산으로 융합(`tf.nn.bias_add`)될 수 있는 연산자가 이에 해당합니다. 때로는 지원되는 일부 연산이 이러한 프로세스 중 하나를 통해 제거될 수도 있습니다.
 
-Here is a non-exhaustive list of TensorFlow operations that are usually removed from the graph:
+다음은 일반적으로 그래프에서 제거되는 일부 TensorFlow 연산을 나타낸 목록입니다.
 
 - `tf.add`
 - `tf.check_numerics`
@@ -52,11 +52,11 @@ Here is a non-exhaustive list of TensorFlow operations that are usually removed 
 - `tf.nn.relu`
 - `tf.nn.relu6`
 
-Note: Many of those operations don't have TensorFlow Lite equivalents, and the corresponding model will not be convertible if they can't be elided or fused.
+참고: 이러한 연산의 대부분은 TensorFlow Lite에서 대응하는 연산이 없으며, 이들 연산을 제거하거나 융합할 수 없는 경우 해당 모델을 변환할 수 없습니다.
 
-## Experimental Operations
+## 실험적 연산
 
-The following TensorFlow Lite operations are present, but not ready for custom models:
+다음 TensorFlow Lite 연산도 제공되지만 사용자 정의 모델에 사용할 준비가 되지 않았습니다.
 
 - `CALL`
 - `CONCAT_EMBEDDINGS`
