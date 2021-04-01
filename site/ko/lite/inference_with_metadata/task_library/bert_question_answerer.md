@@ -12,7 +12,7 @@ Task Library `BertQuestionAnswerer` API는 Bert 모델을 로드하고 주어진
 
 다음 모델은 `BertNLClassifier` API와 호환됩니다.
 
-- Models created by [TensorFlow Lite Model Maker for BERT Question Answer](https://www.tensorflow.org/lite/tutorials/model_maker_question_answer).
+- [질문 응답기를 위한 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/tutorials/model_maker_question_answer)에서 만든 모델
 
 - [TensorFlow Hub에서 사전 훈련된 BERT 모델](https://tfhub.dev/tensorflow/collections/lite/task-library/bert-question-answerer/1)
 
@@ -125,7 +125,7 @@ logit: -0.774266, start_index: 37, end_index: 40
 
 `BertQuestionAnswerer` API는 필수 [TFLite 모델 메타데이터](../../convert/metadata.md)가 있는 TFLite 모델을 예상합니다.
 
-The Metadata should meet the following requirements:
+메타 데이터는 다음 요구 사항을 충족해야 합니다.
 
 - Wordpiece/Sentencepiece Tokenizer를 위한 `input_process_units`
 
