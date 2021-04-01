@@ -10,7 +10,7 @@ Task Library의 `NLClassifier` API는 입력 텍스트를 여러 범주로 분�
 
 - 다양한 분류 모델을 적용하도록 구성할 수 있습니다.
 
-## Supported NLClassifier models
+## 지원되는 NLClassifier 모델
 
 다음 모델은 `NLClassifier` API와의 호환성이 보장됩니다.
 
@@ -109,7 +109,7 @@ std::vector<core::Category> categories = classifier->Classify(kInput);
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/nl_classifier.h)를 참조하세요.
 
-## Example results
+## 예제 결과
 
 다음은 [영화 리뷰 모델](https://www.tensorflow.org/lite/models/text_classification/overview)의 분류 결과를 보여주는 예입니다.
 
@@ -124,7 +124,7 @@ category[1]: 'Positive' : '0.18687'
 
 자체 모델 및 테스트 데이터로 간단한 [NLClassifier용 CLI 데모 도구](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/examples/task/text/desktop/README.md#nlclassifier)를 시도해 보세요.
 
-## Model compatibility requirements
+## 모델 호환성 요구 사항
 
 사용 사례에 따라 `NLClassifier` API는 [TFLite 모델 메타데이터](../../convert/metadata.md)가 있거나 없는 TFLite 모델을 로드할 수 있습니다.
 
