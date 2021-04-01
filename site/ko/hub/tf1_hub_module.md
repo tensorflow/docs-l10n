@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2020-12-29' review_interval: '3 months' } *-->
 
 # TF1 Hub 형식
 
@@ -48,7 +48,7 @@ y2 = outputs["dogs"]
 
 ### 대체 모듈 시도하기
 
-같은 작업을 위한 모듈이 여러 개 있을 때마다 TensorFlow Hub는 모듈 핸들을 문자열 값 하이퍼 매개변수처럼 변경하는 것만큼 쉽게 서로 다른 서명을 시도할 수 있도록 호환되는 서명(인터페이스)을 갖출 것을 권장합니다.
+동일한 작업에 대한 여러 모듈이있을 때마다 TensorFlow Hub는 모듈 핸들을 문자열 값 하이퍼 파라미터처럼 변경하는 것만 큼 쉽게 다른 것을 시도 할 수 있도록 호환되는 서명 (인터페이스)을 장착하도록 권장합니다.
 
 이를 위해 인기 있는 작업에 권장되는 [공통 서명](common_signatures/index.md) 모음을 유지합니다.
 
