@@ -20,11 +20,11 @@ transform = Transform(
 
 Transform은 데이터세트에서 특성 엔지니어링을 수행하기 위해 [TensorFlow Transform](tft.md)을 광범위하게 사용합니다. TensorFlow Transform은 특성 데이터가 모델로 이동하기 전에 훈련 프로세스의 일부로 특성 데이터를 변환할 수 있는 훌륭한 도구입니다. 일반적인 특성 변환은 다음과 같습니다.
 
-- **Embedding**: converting sparse features (like the integer IDs produced by a vocabulary) into dense features by finding a meaningful mapping from high- dimensional space to low dimensional space. See the [Embeddings unit in the Machine-learning Crash Course](https://developers.google.com/machine-learning/crash-course/embedding) for an introduction to embeddings.
+- **임베딩**: 고차원 공간에서 저차원 공간으로의 의미 있는 매핑을 찾아 희소 특성(예: 어휘에서 생성되는 정수 ID)을 밀집 특성으로 변환합니다. 임베딩 시작하기는 [머신러닝 단기 집중 과정의 임베딩 단원](https://developers.google.com/machine-learning/crash-course/embedding)을 참조하세요.
 - **어휘 생성**: 각 고유 값을 ID 번호에 매핑하는 어휘를 만들어 문자열 또는 숫자가 아닌 기타 특성을 정수로 변환합니다.
 - **값 정규화**: 숫자 특성을 모두 유사한 범위에 속하도록 변환합니다.
 - **버킷화** 이산 버킷에 값을 할당하여 범주 특성으로 연속 값 특성을 변환합니다.
-- **Enriching text features**: producing features from raw data like tokens, n-grams, entities, sentiment, etc., to enrich the feature set.
+- **텍스트 특성 강화**: 토큰, n-gram, 엔티티, 감상 등과 같은 원시 데이터에서 특성을 생성하여 특성 세트를 강화합니다.
 
 TensorFlow Transform은 다음과 같은 다양한 유형의 변환을 지원합니다.
 
@@ -46,7 +46,7 @@ Apache Beam을 사용하여 값을 계산하는 것 외에도, TensorFlow Transf
 
 TensorFlow Transform을 통해 사용자는 TensorFlow 코드를 사용하여 전처리 파이프라인을 지정할 수 있습니다. 이는 파이프라인이 TensorFlow 그래프와 같은 방식으로 구성된다는 것을 의미합니다. 이 그래프에서 TensorFlow 연산만 사용된 경우, 파이프라인은 입력 배치를 받아 출력 배치를 반환하는 순수 맵이 됩니다. 이러한 파이프라인은 `tf.Estimator` API를 사용할 때 `input_fn` 내부에 이 그래프를 배치하는 것과 같습니다. 분위수 계산과 같은 전체 전달 연산을 지정하기 위해 TensorFlow Transform은 TensorFlow 연산처럼 보이는 `analyzers`라는 특수 함수를 제공하지만, 실제로는 Apache Beam에서 수행할 지연된 계산을 지정하고 출력은 상수로 그래프에 삽입됩니다. 일반 TensorFlow 연산은 단일 배치를 입력으로 사용하고 해당 배치에 대해 일부 계산을 수행하고 배치를 내보내지만, `analyzer`는 모든 배치에 대해 전역 감소(Apache Beam에서 구현됨)를 수행하고 결과를 반환합니다.
 
-By combining ordinary TensorFlow ops and TensorFlow Transform analyzers, users can create complex pipelines to preprocess their data. For example the `tft.scale_to_z_score` function takes an input tensor and returns that tensor normalized to have mean `0` and variance `1`. It does this by calling the `mean` and `var` analyzers under the hood, which will effectively generate constants in the graph equal to the mean and variance of the input tensor. It will then use TensorFlow ops to subtract the mean and divide by the standard deviation.
+일반 TensorFlow 연산과 TensorFlow Transform 분석기를 결합하여 사용자는 복잡한 파이프라인을 만들어 데이터를 사전 처리할 수 있습니다. 예를 들어, `tft.scale_to_z_score` 함수는 입력 텐서를 사용하고 평균 `0` 및 분산 `1`을 갖도록 정규화된 해당 텐서를 반환합니다. 내부적으로 `mean` 및 `var` 분석기를 호출하여 이를 수행합니다. 그러면 입력 텐서의 평균 및 분산과 동일한 상수가 그래프 내에 효과적으로 생성됩니다. 그런 다음 TensorFlow 연산을 사용하여 평균을 빼고 표준 편차로 나눕니다.
 
 ## TensorFlow Transform `preprocessing_fn`
 
@@ -106,7 +106,7 @@ def preprocessing_fn(inputs):
 - `shape`가 설정되지 않은 각 `feature`의 결과는 `VarLenFeature`입니다.
 - 각 `sparse_feature`의 결과는 `size` 및 `is_sorted`가 `fixed_shape` 및 `SparseFeature` 메시지의 `is_sorted` 필드로 결정되는 `tf.SparseFeature`입니다.
 - `sparse_feature`의 `index_feature` 또는 `value_feature`로 사용되는 특성에는 특성 사양에서 생성된 자체 항목이 없습니다.
-- The correspondence between `type` field of the `feature` (or the values feature of a `sparse_feature` proto) and the `dtype` of the feature spec is given by the following table:
+- `feature`의 `type` 필드(또는 `sparse_feature` proto의 값 특성)와 특성 사양의 `dtype` 간의 대응은 다음 표에 나와 있습니다.
 
 `type` | `dtype`
 --- | ---
@@ -116,7 +116,7 @@ def preprocessing_fn(inputs):
 
 ## TensorFlow Transform을 사용하여 문자열 레이블 처리하기
 
-Usually one wants to use TensorFlow Transform to both generate a vocabulary and apply that vocabulary to convert strings to integers. When following this workflow, the `input_fn` constructed in the model will output the integerized string. However labels are an exception, because in order for the model to be able to map the output (integer) labels back to strings, the model needs the `input_fn` to output a string label, together with a list of possible values of the label. E.g. if the labels are `cat` and `dog` then the output of the `input_fn` should be these raw strings, and the keys `["cat", "dog"]` need to be passed into the estimator as a parameter (see details below).
+일반적으로 TensorFlow Transform을 사용하여 어휘를 생성하고 해당 어휘를 적용하여 문자열을 정수로 변환하려고 합니다. 이 워크플로를 따를 때 모델에 생성된 `input_fn`은 정수화된 문자열을 출력합니다. 그렇지만 레이블은 예외입니다. 모델이 출력(정수) 레이블을 다시 문자열로 매핑할 수 있으려면 모델이 레이블의 가능한 값 목록과 함께 문자열 레이블을 출력하기 위해 `input_fn`이 필요하기 때문입니다. 예를 들어, 레이블이 `cat`과 `dog`이면 `input_fn`의 출력은 이러한 원시 문자열이어야 하며, 이들 키 `["cat", "dog"]`는 매개변수로 estimator에 전달되어야 합니다(아래 세부 사항 참조).
 
 문자열 레이블을 정수로 매핑하려면 TensorFlow Transform을 사용하여 어휘를 생성해야 합니다. 아래 코드 조각에서 이를 보여줍니다.
 
@@ -135,7 +135,7 @@ def _preprocessing_fn(inputs):
 
 위의 전처리 함수는 원시 입력 특성(전처리 함수의 출력의 일부로 반환됨)을 사용하고 `tft.uniques`를 호출합니다. 그 결과 모델에서 액세스할 수 있는 `education`을 위해 어휘가 생성됩니다.
 
-The example also shows how to transform a label and then generate a vocabulary for the transformed label. In particular it takes the raw label `education` and converts all but the top 5 labels (by frequency) to `UNKNOWN`, without converting the label to an integer.
+이 예제에서는 또한 레이블을 변환한 다음 변환된 레이블에 대한 어휘를 생성하는 방법을 보여줍니다. 특히 원시 레이블 `education`을 사용하며 레이블을 정수로 변환하지 않고 상위 5개 레이블(빈도별)을 제외한 모든 레이블을 `UNKNOWN`으로 변환합니다.
 
 모델 코드에서 분류자에는 `tft.uniques`로 생성된 어휘를 `label_vocabulary` 인수로 제공해야 합니다. 먼저 도우미 함수를 사용하여 이 어휘를 목록으로 읽으면 됩니다. 이는 아래 코드 조각에 나와 있습니다. 예제 코드는 위에서 설명한 변환된 레이블을 사용하지만, 여기에서는 원시 레이블을 사용하는 코드를 보여줍니다.
 
