@@ -9,7 +9,7 @@ MLOps는 머신러닝(ML) 워크플로를 자동화, 관리 및 감사하는 데
 
 이러한 단계를 임시적 방식으로 관리하는 것은 어렵고 시간이 많이 소요될 수 있습니다.
 
-TFX makes it easier to implement MLOps by providing a toolkit that helps you orchestrate your ML process on various orchestrators, such as: Apache Airflow, Apache Beam, and Kubeflow Pipelines. By implementing your workflow as a TFX pipeline, you can:
+TFX는 Apache Airflow, Apache Beam 및 Kubeflow Pipelines와 같은 다양한 오케스트레이터에서 ML 프로세스를 오케스트레이션하는 데 도움이 되는 도구 키트를 제공하여 MLOps를 쉽게 구현할 수 있도록 지원합니다. 워크플로를 TFX 파이프라인으로 구현하여 다음을 수행할 수 있습니다.
 
 - ML 프로세스를 자동화하여 모델을 정기적으로 재훈련, 평가 및 배포할 수 있습니다.
 - 대규모 데이터세트 및 워크로드를 처리하기 위해 분산 컴퓨팅 리소스를 활용합니다.
@@ -19,7 +19,7 @@ TFX makes it easier to implement MLOps by providing a toolkit that helps you orc
 
 ## 아티팩트
 
-The outputs of steps in a TFX pipeline are called **artifacts**. Subsequent steps in your workflow may use these artifacts as inputs. In this way, TFX lets you transfer data between workflow steps.
+TFX 파이프라인에서 단계의 출력을 **아티팩트**라고 합니다. 워크플로의 후속 단계에서는 아티팩트를 입력으로 사용할 수 있습니다. 이러한 방식으로 TFX를 사용하면 워크플로 단계 간에 데이터를 전송할 수 있습니다.
 
 예를 들어, `ExampleGen` 표준 구성 요소는 `StatisticsGen` 표준 구성 요소와 같은 구성 요소가 입력으로 사용하는 직렬화된 예를 내보냅니다.
 
@@ -70,26 +70,26 @@ TFX 파이프라인은 Apache Airflow, Apache Beam 및 Kubeflow Pipelines와 같
 
 - 데이터 수집 구성 요소에는 아티팩트 종속성이 없으므로 그래프의 첫 번째 노드가 될 수 있습니다.
 - StatisticsGen은 데이터 수집으로 생성된 *예제*에 따라 달라지므로 데이터 수집 후에 실행해야 합니다.
-- SchemaGen depends on the *statistics* created by StatisticsGen, so it must be executed after StatisticsGen.
-- ExampleValidator depends on the *statistics* created by StatisticsGen and the *schema* created by SchemaGen, so it must be executed after StatisticsGen and SchemaGen.
+- SchemaGen은 StatisticsGen에서 생성된 *통계*에 따라 달라지므로 StatisticsGen 후에 실행해야 합니다.
+- ExampleValidator는 StatisticsGen에서 생성된 *통계*와 SchemaGen으로 생성된 *스키마*에 따라 달라지므로, StatisticsGen과 SchemaGen 후에 실행해야 합니다.
 - Transform은 데이터 수집으로 생성된 *예제*와 SchemaGen에서 만들어진 *스키마*에 따라 달라지므로 데이터 수집과 SchemaGen 후에 실행해야 합니다.
-- Trainer depends on the *examples* produced by data ingestion, the *schema* created by SchemaGen, and the *saved model* produced by Transform. The Trainer can be executed only after data ingestion, SchemaGen, and Transform.
-- Evaluator depends on the *examples* produced by data ingestion and the *saved model* produced by the Trainer, so it must be executed after data ingestion and the Trainer.
-- The custom deployer depends on the *saved model* produced by the Trainer and the *analysis results* created by the Evaluator, so the deployer must be executed after the Trainer and the Evaluator.
+- Trainer는 데이터 수집으로 생성된 *예제* , SchemaGen에서 만들어진 *스키마* 및 Transform으로 생성된 *저장된 모델*에 따라 달라집니다. Trainer는 데이터 수집, SchemaGen과 Transform 후에만 실행할 수 있습니다.
+- Evaluator는 데이터 수집으로 생성된 *예제*와 Trainer에서 생성된 *저장된 모델*에 따라 달라지므로 데이터 수집과 Trainer 후에 실행해야 합니다.
+- 사용자 정의 배포자는 Trainer에서 생성된 *저장된 모델*과 Evaluator에서 생성된 *분석 결과*에 따라 달라지므로 배포자는 Trainer와 Evaluator 후에 실행해야 합니다.
 
-Based on this analysis, an orchestrator runs:
+이 분석을 기반으로 오케스트레이터는 다음과 같이 실행합니다.
 
 - 데이터 수집, StatisticsGen, SchemaGen 구성 요소 인스턴스가 순차적으로 실행됩니다.
-- The ExampleValidator and Transform components can run in parallel since they share input artifact dependencies and do not depend on each other's output.
+- ExampleValidator 및 Transform 구성 요소는 입력 아티팩트 종속성을 공유하고 서로의 출력에 의존하지 않으므로 병렬로 실행될 수 있습니다.
 - Transform 구성 요소가 완료되면 Trainer, Evaluator 및 사용자 정의 배포자 구성 요소 인스턴스가 순차적으로 실행됩니다.
 
-Learn more about [building a TFX pipeline](build_tfx_pipeline).
+[TFX 파이프라인 빌드하기](build_tfx_pipeline)에 대해 자세히 알아보세요.
 
 ## TFX 파이프라인 템플릿
 
 TFX 파이프라인 템플릿을 사용하면 사용 사례에 맞게 사용자 정의할 수 있는 사전 빌드된 파이프라인을 제공하여 파이프라인 개발을 더 쉽게 시작할 수 있습니다.
 
-Learn more about [customizing a TFX pipeline template](build_tfx_pipeline#build-a-pipeline-using-a-template).
+[TFX 파이프라인 템플릿 사용자 정의하기](build_tfx_pipeline#build-a-pipeline-using-a-template)에 대해 자세히 알아보세요.
 
 ## 파이프라인 실행
 
