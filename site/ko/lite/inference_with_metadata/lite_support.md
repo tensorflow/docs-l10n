@@ -4,7 +4,7 @@
 
 모바일 애플리케이션 개발자는 일반적으로 비트맵과 같은 형식화된 객체 또는 정수와 같은 기본 형식과 상호 작용합니다. 하지만, 기기 내 머신러닝 모델을 실행하는 TensorFlow Lite 인터프리터는 디버깅 및 조작이 어려울 수 있는 ByteBuffer 형식의 텐서를 사용합니다. [TensorFlow Lite Support Library](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/java)는 TensorFlow Lite 모델의 입력 및 출력을 처리하고 TensorFlow Lite 인터프리터를 더 쉽게 사용할 수 있도록 설계되었습니다.
 
-## Getting Started
+## 시작하기
 
 ### Gradle 종속성 및 기타 설정 가져오기
 
@@ -34,7 +34,7 @@ dependencies {
 
 [JCenter에서 호스팅되는 TensorFlow Lite Support Library AAR](https://bintray.com/google/tensorflow/tensorflow-lite-support)에서 다양한 버전의 지원 라이브러리를 살펴보세요.
 
-### Basic image manipulation and conversion
+### 기본 이미지 조작 및 변환
 
 TensorFlow Lite Support Library에는 자르기 및 크기 조정과 같은 기본적인 이미지 조작 메서드 모음이 있습니다. 이러한 메서드를 사용하려면 `ImagePreprocessor`를 만들고 필요한 연산을 추가합니다. 이미지를 TensorFlow Lite 인터프리터에 필요한 텐서 형식으로 변환하려면 입력으로 사용할 `TensorImage`를 만듭니다.
 
@@ -138,18 +138,18 @@ if (null != associatedAxisLabels) {
 }
 ```
 
-## Current use-case coverage
+## 현재 사용 사례 범위
 
 현재 버전의 TensorFlow Lite Support Library는 다음을 포함합니다.
 
 - tflite 모델의 입력 및 출력으로 이용되는 일반적인 데이터 형식(부동 소수점, uint8, 이미지 및 이러한 객체의 배열)
 - 기본 이미지 작업(이미지 자르기, 크기 조정 및 회전)
-- normalization and quantization
-- file utils
+- 정규화 및 양자화
+- 파일 유틸리티
 
 향후 버전에서는 텍스트 관련 애플리케이션에 대한 지원을 개선할 예정입니다.
 
-## ImageProcessor Architecture
+## ImageProcessor 아키텍처
 
 `ImageProcessor`는 이미지 조작 연산을 미리 정의하고 빌드 프로세스 중에 최적화할 수 있게 설계되었습니다. `ImageProcessor`는 현재 세 가지 기본 전처리 연산을 지원합니다.
 
@@ -178,7 +178,7 @@ ImageProcessor imageProcessor =
 
 개발자는 또한 사용자 정의 프로세서를 만들 수도 있습니다. 이러한 경우, 훈련 프로세스와 일치시키는 것이 중요합니다. 즉, 재현성을 높이기 위해 훈련과 추론 모두에 동일한 전처리를 적용해야 합니다.
 
-## Quantization
+## 양자화
 
 `TensorImage` 또는 `TensorBuffer`와 같은 입력 또는 출력 객체를 시작할 때, 해당 유형을 `DataType.UINT8` 또는 `DataType.FLOAT32`로 지정해야 합니다.
 
