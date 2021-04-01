@@ -65,7 +65,7 @@ const o = tf.layers.activation({activation: 'relu'}).apply(t);
 o.print(); // [0, 1, 0, 5]
 ```
 
-This can be useful when testing layers in isolation and seeing their output.
+これは、レイヤーを個別にテストしてその出力を確認するときに役立ちます。
 
 Sequential モデルと同じように、`model.layers`を介してモデルのレイヤーにアクセスできます (より具体的には、`model.inputLayers`および`model.outputLayers`)。
 
@@ -77,45 +77,45 @@ Sequential モデルと Functional モデルはどちらも`LayersModel`クラ�
 
 `model.summary()`を呼び出すと、次のような有用なモデルの概要を出力できます。
 
-- Name and type of all layers in the model.
-- Output shape for each layer.
-- Number of weight parameters of each layer.
-- If the model has general topology (discussed below), the inputs each layer receives
-- The total number of trainable and non-trainable parameters of the model.
+- モデル内のすべてのレイヤー名とタイプ。
+- 各レイヤーの出力形状。
+- 各レイヤーの重みパラメータの数。
+- モデルに一般的なトポロジーがある場合（以下で説明）、各レイヤーが受け取る入力。
+- モデルのトレーニング可能なパラメータとトレーニング不可能なパラメータの総数。
 
-For the model we defined above, we get the following output on the console:
+上記で定義したモデルの場合、コンソールに次の出力が表示されます。
 
 <table>
   <tr>
-   <td>Layer (type)    </td>
-   <td>Output shape    </td>
-   <td>Param #    </td>
+   <td>レイヤー（タイプ）</td>
+   <td>出力形状</td>
+   <td>パラメータ #</td>
   </tr>
   <tr>
-   <td>dense_Dense1 (Dense)    </td>
-   <td>[null,32]    </td>
-   <td>25120    </td>
+   <td>dense_Dense1（蜜）</td>
+   <td>[null,32]</td>
+   <td>25120</td>
   </tr>
   <tr>
-   <td>dense_Dense2 (Dense)    </td>
-   <td>[null,10]    </td>
-   <td>330    </td>
+   <td>dense_Dense2（蜜）</td>
+   <td>[null,10]</td>
+   <td>330</td>
   </tr>
   <tr>
-   <td colspan="3">Total params: 25450<br>Trainable params: 25450<br> Non-trainable params: 0    </td>
+   <td colspan="3">パラメータ総数: 25450<br>トレーニング可能なパラメータ: 25450<br> トレーニング不可能なパラメータ: 0</td>
   </tr>
 </table>
 
-Note the `null` values in the output shapes of the layers: a reminder that the model expects the input to have a batch size as the outermost dimension, which in this case can be flexible due to the `null` value.
+レイヤーの出力形状の`null`値に注意してください。モデルは入力にバッチサイズがあることを期待しています (最も外側の次元として)。この場合、値は`null`なので、柔軟性があります。
 
-## Serialization
+## シリアル化
 
-One of the major benefits of using a `LayersModel` over the lower-level API is the ability to save and load a model. A `LayersModel` knows about:
+下位レベルの API と比べて`LayersModel`を使用する主な利点の 1 つは、モデルを保存および読み込めることです。`LayersModel`は、以下を認知しています。
 
-- the architecture of the model, allowing you to re-create the model.
-- the weights of the model
-- the training configuration (loss, optimizer, metrics).
-- the state of the optimizer, allowing you to resume training.
+- モデルを再作成するためのモデルのアーキテクチャ。
+- モデルの重み
+- トレーニング構成（損失、オプティマイザ、メトリック）。
+- トレーニングを再開するためのオプティマイザの状態。
 
 わずか 1 行のコードでモデルを保存または読み込むことができます。
 
@@ -124,11 +124,11 @@ const saveResult = await model.save('localstorage://my-model-1');
 const model = await tf.loadLayersModel('localstorage://my-model-1');
 ```
 
-The example above saves the model to local storage in the browser. See the <code><a href="https://js.tensorflow.org/api/latest/#tf.Model.save">model.save() documentation</a></code> and the [save and load](save_load.md) guide for how to save to different mediums (e.g. file storage, <code>IndexedDB</code>, trigger a browser download, etc.)
+上記の例では、ブラウザのローカルストレージにモデルを保存します。別のメディア (ファイルストレージ、<code>IndexedDB</code>、ブラウザダウンロードのトリガーなど) に保存する方法については、<code>model.save() ドキュメント</code>および<a>保存と読み込み</a>ガイドを参照してください。
 
-## Custom layers
+## カスタムレイヤー
 
-Layers are the building blocks of a model. If your model is doing a custom computation, you can define a custom layer, which interacts well with the rest of the layers. Below we define a custom layer that computes the sum of squares:
+レイヤーはモデルの構成要素です。モデルがカスタム計算を実行している場合は、他のレイヤーと適切に相互作用するカスタムレイヤーを定義できます。以下では、平方和を計算するカスタムレイヤーを定義します。
 
 ```js
 class SquaredSumLayer extends tf.layers.Layer {
@@ -146,7 +146,7 @@ class SquaredSumLayer extends tf.layers.Layer {
 }
 ```
 
-To test it, we can call the `apply()` method with a concrete tensor:
+これをテストするには、具体的なテンソルを使用して`apply()`メソッドを呼び出します。
 
 ```js
 const t = tf.tensor([-2, 1, 0, 5]);
@@ -156,18 +156,18 @@ o.print(); // prints 30
 
 > 重要: カスタムレイヤーを追加すると、モデルをシリアル化できなくなります。
 
-## Creating models with the Core API
+## Core API を使用したモデルの作成
 
 このガイドの冒頭で、TensorFlow.js で機械学習モデルを作成する方法が 2 つあることを説明しました。
 
-The general rule of thumb is to always try to use the Layers API first, since it is modeled after the well-adopted Keras API which follows [best practices and reduces cognitive load](https://keras.io/why-use-keras/). The Layers API also offers various off-the-shelf solutions such as weight initialization, model serialization, monitoring training, portability, and safety checking.
+一般的な経験則は、[ベストプラクティスと認知負荷の軽減](https://keras.io/why-use-keras/)に従い、レイヤー API を常に最初に使用することです。Layers API は、重みの初期化、モデルのシリアル化、監視トレーニング、移植性、安全性チェックなど、さまざまな既製のソリューションも提供します。
 
-You may want to use the Core API whenever:
+次の場合は Core API を使用することができます。
 
-- You need maximum flexibility or control.
-- You don't need serialization, or can implement your own serialization logic.
+- 最大限の柔軟性または制御が必要な場合。
+- シリアル化が必要ない場合。または、独自のシリアル化ロジックを実装する場合。
 
-Models in the Core API are just functions that take one or more `Tensors` and return a `Tensor`. The same model as above written using the Core API looks like this:
+Core API のモデルは、1つ以上の`Tensors`を取り、`Tensor`を返す関数です。上記と同じモデルを Core API を使用して記述すると次のようになります。
 
 ```js
 // The weights and biases for the two dense layers.
@@ -181,6 +181,6 @@ function model(x) {
 }
 ```
 
-Note that in the Core API we are responsible for creating and initializing the weights of the model. Every weight is backed by a `Variable `which signals to TensorFlow.js that these tensors are learnable. You can create a `Variable` using [tf.variable()](https://js.tensorflow.org/api/latest/#variable) and passing in an existing `Tensor`.
+Core API では、モデルの重みを作成および初期化する必要があることに注意してください。すべての重みは、これらのテンソルが学習可能であることを TensorFlow.js に通知する`Variable`によって裏付けられています。<a>tf.variable()</a> を使用して<code>Variable</code>を作成し、既存の`Tensor`に渡すことができます。
 
-In this guide you have familiarized yourself with the different ways to create a model using the Layers and the Core API. Next, see the [training models](train_models.md) guide for how to train a model.
+このガイドでは、Layers API と Core API を使用してモデルを作成するさまざまな方法を紹介しました。次に、モデルをトレーニングする方法については、[モデルのトレーニング](train_models.md)ガイドをご覧ください。
