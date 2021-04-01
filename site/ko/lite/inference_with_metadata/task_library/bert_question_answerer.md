@@ -127,8 +127,8 @@ logit: -0.774266, start_index: 37, end_index: 40
 
 The Metadata should meet the following requirements:
 
-- `input_process_units` for Wordpiece/Sentencepiece Tokenizer
+- Wordpiece/Sentencepiece Tokenizer를 위한 `input_process_units`
 
 - Tokenizer의 출력을 위한 이름이 "ids", "mask" 및 "segment_ids"인 3개의 입력 텐서
 
-- 2 output tensors with names "end_logits" and "start_logits" to indicate the answer's relative position in the context
+- 컨텍스트에서 답변의 상대적 위치를 나타내는 이름이 "end_logits"및 "start_logits"인 2개의 출력 텐서
