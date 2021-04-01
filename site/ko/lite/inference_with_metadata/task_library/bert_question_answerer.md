@@ -88,10 +88,10 @@ let answers = mobileBertAnswerer.answer(
 
 ```c++
 // Initialization
-std::unique_ptr<BertQuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromFile(model_file).value();
+std::unique_ptr answerer = BertQuestionAnswerer::CreateFromFile(model_file).value();
 
 // Run inference
-std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, question_to_ask);
+std::vector positive_results = answerer->Answer(context_of_question, question_to_ask);
 ```
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/qa/bert_question_answerer.h)를 참조하세요.
@@ -117,7 +117,6 @@ answer[3]:  'the Amazon biome that covers most of the Amazon basin of South Amer
 logit: -0.498558, start_index: 28, end_index: 40
 answer[4]:  'Amazon basin of South America.'
 logit: -0.774266, start_index: 37, end_index: 40
-
 ```
 
 자체 모델 및 테스트 데이터로 간단한 [BertQuestionAnswerer용 CLI 데모 도구](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/examples/task/text/desktop/README.md#bert-question-answerer)를 시도해 보세요.
