@@ -8,7 +8,7 @@
 
 <a class="button button-primary" href="https://colab.research.google.com/github/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb">train_hello_world_model.ipynb</a>
 
-## Model conversion
+## 모델 변환
 
 훈련된 TensorFlow 모델을 마이크로컨트롤러에서 실행되도록 변환하려면 [TensorFlow Lite 변환기 Python API](https://www.tensorflow.org/lite/convert/)를 사용해야 합니다. 그러면 모델이 [`FlatBuffer`](https://google.github.io/flatbuffers/)로 변환되어 모델 크기가 줄어들고 TensorFlow Lite 연산을 사용하도록 모델이 수정됩니다.
 
