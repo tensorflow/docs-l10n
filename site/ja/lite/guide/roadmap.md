@@ -21,7 +21,7 @@
 - **Android Studio の統合**
     - TFLite モデルの Android Studio へのドラッグアンドドロップ操作で、モデルのバインディングクラスを生成する機能
 - **オンデバイスでの制御フローとトレーニング**
-    - Support for training on-device, focused on personalization and transfer learning
+    - パーソナライズ化と転移学習に焦点を当てたオンデバイストレーニングのサポート
 - **TensorBoard による視覚化ツール**
     - TensorBoard に高度なツール機能を提供
 - **Model Maker**
@@ -66,7 +66,7 @@
 
 - **プルーニング / スパース化**
 
-    - Sparse model execution support in TensorFlow Lite - [WIP](https://github.com/tensorflow/model-optimization/issues/173)
+    - TensorFlow Lite におけるスパースモデルの実行サポート - [進行中](https://github.com/tensorflow/model-optimization/issues/173)
     - 重みクラスタリング API
 
 ## 移植性
