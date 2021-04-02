@@ -4,8 +4,8 @@
 
 TensorFlow.js には、機械学習モデルをトレーニングする 2つ の方法があります。
 
-1. Layers API を <code><a href="https://js.tensorflow.org/api/latest/#tf.Model.fit" data-md-type="link">LayersModel.fit()</a></code> か <code><a href="https://js.tensorflow.org/api/latest/#tf.Model.fitDataset" data-md-type="link">LayersModel.fitDataset()</a></code> と共に使用する。
-2. Core API を <code><a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link">Optimizer.minimize()</a></code> と共に使用する。
+1. Layers API を <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.Model.fit" data-md-type="link"&gt;LayersModel.fit()&lt;/a&gt;</code> か <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.Model.fitDataset" data-md-type="link"&gt;LayersModel.fitDataset()&lt;/a&gt;</code> と共に使用する。
+2. Core API を <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link"&gt;Optimizer.minimize()&lt;/a&gt;</code> と共に使用する。
 
 まず、モデルを構築してトレーニングするための上位レベルの API である Layers API を見ていきます。 次に、Core API を使用して同じモデルをトレーニングする方法を示します。
 
@@ -79,7 +79,7 @@ model.weights.forEach(w => {
   </tr>
 </table>
 
-モデルの各重みは、 <code><a href="https://js.tensorflow.org/api/0.14.2/#class:Variable" data-md-type="link">Variable</a></code> オブジェクトによるバックエンドです。TensorFlow.js では、<code>Variable</code> はその値を更新するために使用される 1 つの追加メソッド <code>assign()</code> を持つ浮動小数点 <code>Tensor</code> です。Layers API はベストプラクティスを使用して重みを自動的に初期化します。デモ目的のため、基になる変数で <code>assign()</code> を呼び出すことで重みを上書きできます。
+モデルの各重みは、 <code>&lt;a href="https://js.tensorflow.org/api/0.14.2/#class:Variable" data-md-type="link"&gt;Variable&lt;/a&gt;</code> オブジェクトによるバックエンドです。TensorFlow.js では、<code>Variable</code> はその値を更新するために使用される 1 つの追加メソッド <code>assign()</code> を持つ浮動小数点 <code>Tensor</code> です。Layers API はベストプラクティスを使用して重みを自動的に初期化します。デモ目的のため、基になる変数で <code>assign()</code> を呼び出すことで重みを上書きできます。
 
 ```js
 model.weights.forEach(w => {
@@ -93,7 +93,7 @@ model.weights.forEach(w => {
 
 トレーニングを行う前に、次の3つの項目を決定する必要があります。
 
-1. **オプティマイザ**。オプティマイザの仕事は、現在のモデルの予測を前提として、モデルの各パラメータをどの程度変更するかを決定することです。Layers API を使用する場合、既存オプティマイザの文字列識別子（`'sgd'` または `'adam'` など）か <code><a href="https://js.tensorflow.org/api/latest/#Training-Optimizers" data-md-type="link">Optimizer</a></code> クラスのインスタンスを指定できます。
+1. **オプティマイザ**。オプティマイザの仕事は、現在のモデルの予測を前提として、モデルの各パラメータをどの程度変更するかを決定することです。Layers API を使用する場合、既存オプティマイザの文字列識別子（`'sgd'` または `'adam'` など）か <code>&lt;a href="https://js.tensorflow.org/api/latest/#Training-Optimizers" data-md-type="link"&gt;Optimizer&lt;/a&gt;</code> クラスのインスタンスを指定できます。
 2. <strong>損失関数</strong>。モデルが最小化を試みる対象です。その目標は、モデルの予測が「どれほど間違っていたか」を単一の数値で示すことです。モデルの重みを交信できるよう、損失はデータのすべてのバッチで計算されます。Layers API を使用する場合、既存の損失関数の文字列識別子（<code>'categoricalCrossentropy'</code>など）か、予測値と真の値を取り、損失を返す任意の関数を指定できます。API ドキュメントで[利用可能な損失のリスト](https://js.tensorflow.org/api/latest/#Training-Losses)をご覧ください。
 3. <strong>指標のリスト</strong>。損失と同様に、 指標は単一の数値を計算し、モデルのパフォーマンスを要約します。指標は通常、各エポックの終わりにデータ全体で計算されます。最低限でも時間の経過と共に損失が減少していることを監視する必要があります。ただし、多くの場合は精度などのより人間に理解しやすい指標が必要です。Layers API を使用する場合、既存指標の文字列識別子（<code>'accuracy'</code> など）か、予測値と真の値を取り、スコアを返す任意の関数を指定できます。API ドキュメントで[利用可能な指標のリスト](https://js.tensorflow.org/api/latest/#Metrics)をご覧ください。
 
@@ -148,7 +148,7 @@ model.fit(data, labels, {
 - 各エポックまたはバッチの開始時と終了時に通知できます。この場合、 `callbacks.onBatchEnd` オプションを使用してすべてのバッチの終了時に通知が届きます。その他にも `onTrainBegin`、`onTrainEnd`、`onEpochBegin`、`onEpochEnd`、`onBatchBegin` のオプションがあります。
 - メインスレッドに従い、JS イベントのループでキューに入れられたタスクをタイムリーに処理できるようにします。
 
-詳細については、<code>fit()</code> の<a><a href="https://js.tensorflow.org/api/latest/#tf.Sequential.fit" data-md-type="link">ドキュメント</a></a>をご覧ください。 Core API を使用する場合は、このロジックを自分で実装する必要があることに注意してください。
+詳細については、<code>fit()</code> の<a>&lt;a href="https://js.tensorflow.org/api/latest/#tf.Sequential.fit" data-md-type="link"&gt;ドキュメント&lt;/a&gt;</a>をご覧ください。 Core API を使用する場合は、このロジックを自分で実装する必要があることに注意してください。
 
 ### model.fitDataset()
 
@@ -180,7 +180,7 @@ model.fitDataset(ds, {epochs: 5}).then(info => {
 });
 ```
 
-データセットの詳細については、<code>model.fitDataset()</code> の<a><a href="https://js.tensorflow.org/api/latest/#tf.Model.fitDataset" data-md-type="link">ドキュメント</a></a>をご覧ください。
+データセットの詳細については、<code>model.fitDataset()</code> の<a>&lt;a href="https://js.tensorflow.org/api/latest/#tf.Model.fitDataset" data-md-type="link"&gt;ドキュメント&lt;/a&gt;</a>をご覧ください。
 
 ## 新しいデータの予測
 
@@ -251,6 +251,6 @@ for (let epoch = 0; epoch < 5; epoch++) {
 上記のコードは、Core API でモデルをトレーニングするときの標準的なレシピです。
 
 - エポックの数をループします。
-- 各エポック内でデータのバッチをループします。`Dataset` を使用する場合、バッチのループには <code><a href="https://js.tensorflow.org/api/0.15.1/#tf.data.Dataset.forEachAsync" data-md-type="link">dataset.forEachAsync()</a></code> を使用するのが便利です。
-- 各バッチについて <code><a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link">optimizer.minimize(f)</a></code> を呼び出します。これは <code>f</code> を実行し、事前に定義した 4 つの変数に関して勾配を計算することでその出力を最小化します。
+- 各エポック内でデータのバッチをループします。`Dataset` を使用する場合、バッチのループには <code>&lt;a href="https://js.tensorflow.org/api/0.15.1/#tf.data.Dataset.forEachAsync" data-md-type="link"&gt;dataset.forEachAsync()&lt;/a&gt;</code> を使用するのが便利です。
+- 各バッチについて <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link"&gt;optimizer.minimize(f)&lt;/a&gt;</code> を呼び出します。これは <code>f</code> を実行し、事前に定義した 4 つの変数に関して勾配を計算することでその出力を最小化します。
 - <code>f</code> は損失を計算します。モデルの予測と真の値を使用し、事前定義した損失関数の 1 つを呼び出します。
