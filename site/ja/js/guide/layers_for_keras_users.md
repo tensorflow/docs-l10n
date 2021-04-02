@@ -167,7 +167,7 @@ flatten.apply(tf.ones([2, 3, 4])).print();
 
 この機能は、(Python) TensorFlow の [Eager Execution](https://www.tensorflow.org/guide/eager)と似ています。動的ニューラルネットワークの構築を可能にするだけでなく、モデル開発時の対話性とデバッグ性も向上します。
 
-##  *optimizers* ではなく train の配下にあるオプティマイザ
+## *optimizers* ではなく train の配下にあるオプティマイザ
 
 Keras では、オプティマイザオブジェクトのコンストラクタは`keras.optimizers.*`名前空間の下にあります。TensorFlow.js レイヤーでは、オプティマイザのファクトリメソッドは`tf.train.*`名前空間の下にあります。以下に例を示します。
 
