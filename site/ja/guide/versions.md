@@ -85,7 +85,7 @@ SavedModel は、TensorFlow プログラムでの使用に推奨されるシリ�
 
 多くの TensorFlow ユーザーは SavedModel を作成し、TensorFlow の新しいリリースでそれらを読み込んで実行します。[semver](https://semver.org) に準拠し、あるバージョンの TensorFlow で記述された SavedModel は、同じメジャーリリースを持つ TensorFlow の新しいバージョンで読み込み、評価できます。
 
-*サポート対象*の SavedModel については、追加の保証を行っています。TensorFlow メジャーバージョン `N` で**非推奨ではなく、実験的ではなく、互換性のない API のみ**を使用して作成された SavedModel を、<em data-md-type="emphasis">バージョン `N` のサポート対象 SavedModel</em> と呼びます。TensorFlow メジャーバージョン `N` のサポート対象となるすべての SavedModel は TensorFlow メジャーバージョン `N+1` で読み込み、実行できます。ただし、このようなモデルの構築や変更に必要な機能は利用できなくなっている場合があるため、この保証は未変更の SavedModel のみに適用されます。
+*サポート対象*の SavedModel については、追加の保証を行っています。TensorFlow メジャーバージョン `N` で**非推奨ではなく、実験的ではなく、互換性のない API のみ**を使用して作成された SavedModel を、<em data-md-type="raw_html">バージョン `N` のサポート対象 SavedModel</em> と呼びます。TensorFlow メジャーバージョン `N` のサポート対象となるすべての SavedModel は TensorFlow メジャーバージョン `N+1` で読み込み、実行できます。ただし、このようなモデルの構築や変更に必要な機能は利用できなくなっている場合があるため、この保証は未変更の SavedModel のみに適用されます。
 
 シリアライズされたファイルを長期間使用できるよう、可能な限り下位互換性を維持するよう努めます。
 
@@ -144,8 +144,8 @@ SavedModel は、TensorFlow プログラムでの使用に推奨されるシリ�
 
 デフォルトではプロデューサーが何らかのデータを作成した場合、そのデータはプロデューサーの `producer` バージョンと `min_consumer` バージョンを継承します。`bad_consumers` は、特定のコンシューマー バージョンがバグを含んでおり、回避すべきであることが分かっている場合に設定できます。コンシューマーは、次のすべての条件を満たす場合にデータ片を受け付けます。
 
-- `consumer` >= データの `min_consumer`
-- データの `producer` >= コンシューマーの `min_producer`
+- `consumer` &gt;= データの `min_consumer`
+- データの `producer` &gt;= コンシューマーの `min_producer`
 - `consumer` がデータの `bad_consumers` に含まれない
 
 プロデューサーとコンシューマーはどちらも同じ TensorFlow コードベースに由来するため、[`core/public/version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h) には、コンテキストに応じて `producer` または `consumer` として扱われるメインデータのバージョンと、`min_consumer` および `min_producer` の両方（それぞれプロデューサーとコンシューマーで必要）が含まれます。具体的には以下のとおりです。
