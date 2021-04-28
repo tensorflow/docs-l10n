@@ -1,6 +1,6 @@
 # XLA 아키텍처
 
-<div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;"> <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ko/xla/images/xlalogo.png?raw=true" class=""> </div>
+<div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;"> <img src="https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/compiler/xla/g3doc/images/xlalogo.png" class=""> </div>
 
 ## XLA를 빌드한 이유는 무엇입니까?
 
@@ -24,7 +24,7 @@ XLA는 HLO에 정의된 그래프('계산')를 사용하여 다양한 아키텍�
 
 다음 다이어그램은 XLA의 컴파일 프로세스를 보여줍니다.
 
-<div style="width:95%; margin:auto; margin-bottom:10px; margin-top:20px;">   <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ko/xla/images/how-does-xla-work.png?raw=true" class=""> </div>
+<div style="width:95%; margin:auto; margin-bottom:10px; margin-top:20px;">   <img src="https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/compiler/xla/g3doc/images/how-does-xla-work.png" class=""> </div>
 
 XLA에는 [CSE](https://en.wikipedia.org/wiki/Common_subexpression_elimination), 대상 독립적 연산 융합 및 계산용 런타임 메모리 할당을 위한 버퍼 분석과 같이 대상 독립적인 여러 최적화 및 분석 과정이 제공됩니다.
 
