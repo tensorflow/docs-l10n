@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-01' review_interval: '3 months' } *-->
 
 # TensorFlow 2 における TF Hub の SavedModel
 
@@ -20,7 +20,7 @@ TensorFlow 1 のユーザーは、TF 1.15 に更新すると、同じ API を使
 import tensorflow as tf
 import tensorflow_hub as hub
 
-hub_url = "https://tfhub.dev/google/tf2-preview/nnlm-en-dim128/1"
+hub_url = "https://tfhub.dev/google/nnlm-en-dim128/2"
 embed = hub.KerasLayer(hub_url)
 embeddings = embed(["A long sentence.", "single-word", "http://example.com"])
 print(embeddings.shape, embeddings.dtype)
@@ -38,7 +38,7 @@ model = tf.keras.Sequential([
 
 [Text classification colab](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb) は、こういった分類器をトレーニングして評価する方法を示す完全なサンプルです。
 
-`hub.KerasLayer` のモデルの重みは、デフォルトでトレーニング不可に設定されています。これを変更する方法は、以下のファインチューニングのセクションで説明されています。Keras では通常通り、重みは同じレイヤーのすべてのアプリケーションで共有されます。
+`hub.KerasLayer` のモデルの重みは、デフォルトでトレーニング対象外に設定されています。これを変更する方法は、以下のファインチューニングのセクションで説明されています。Keras では通常通り、重みは同じレイヤーのすべてのアプリケーションで共有されます。
 
 ### Estimator で SavedModel を使用する
 
@@ -46,7 +46,7 @@ model = tf.keras.Sequential([
 
 ### 舞台裏の処理: SavedModel のダウンロードとキャッシュ
 
-TensorFlow Hub から（または [hosting](hosting.md) プロトコルを実装するほかの HTTPS サーバーから）SavedModel を使用すると、すでに存在しない限りその SavedModel をローカルファイルシステムにダウンロードして解凍します。ダウンロードして解凍される SavedModel のキャッシュに使用するデフォルトの一時的な場所は、環境変数 `TFHUB_CACHE_DIR` を設定してオーバーライドすることができます。詳細は、[キャッシング](caching.md)をご覧ください。
+TensorFlow Hub から（または [ホスティング](hosting.md)プロトコルを実装するほかの HTTPS サーバーから）SavedModel を使用すると、すでに存在しない限りその SavedModel をローカルファイルシステムにダウンロードして解凍します。ダウンロードして解凍される SavedModel のキャッシュに使用するデフォルトの一時的な場所は、環境変数 `TFHUB_CACHE_DIR` を設定してオーバーライドすることができます。詳細は、[キャッシング](caching.md)をご覧ください。
 
 ### 低レベルの TensorFlow で SavedModel を使用する
 
@@ -56,21 +56,21 @@ TensorFlow Hub から（または [hosting](hosting.md) プロトコルを実装
 
 SavedModel のコンテンツによっては、`obj = hub.load(...)` の結果をさまざまな方法で呼び出すことができます（TensorFlow の [SavedModel ガイド](https://www.tensorflow.org/guide/saved_model) にはより詳細に説明されています）。
 
-- SavedModel の推論されるシグネチャ（存在する場合）は、具象関数のディクショナリとして表され、`tensors_out = obj.signatures["serving_default"](**tensors_in)` のように呼び出すことができます。テンソルのディクショナリは、対応する入力名と出力名をキーとし、シグネチャの形状と dtype の制限に従います。
+- SavedModel のサービングシグネチャ（存在する場合）は、具象関数のディクショナリとして表され、`tensors_out = obj.signatures["serving_default"](**tensors_in)` のように呼び出すことができます。テンソルのディクショナリは、対応する入力名と出力名をキーとし、シグネチャの形状と dtype の制限に従います。
 
-- [`@tf.function`](https://www.tensorflow.org/api_docs/python/tf/function) でデコレートされた、保存されたオブジェクトのメソッド（存在する場合）は、tf.function オブジェクトとして復元することができます。このオブジェクトは、保存される前に tf.function によって[トレース](https://www.tensorflow.org/tutorials/customization/performance#tracing)された、テンソル型引数と非テンソル型引数のすべての組み合わせて呼び出すことができます。特に、適切なトレースを使った `obj.__call__` 　メソッドがある場合、`obj` そのものを Python 関数として呼び出すことができます。単純な例は、`output_tensor = obj(input_tensor, training=False)` のようになります。
+- [`@tf.function`](https://www.tensorflow.org/api_docs/python/tf/function) でデコレートされた、保存されたオブジェクトのメソッド（存在する場合）は、tf.function オブジェクトとしてリストアすることができます。このオブジェクトは、保存される前に tf.function によって[トレース](https://www.tensorflow.org/tutorials/customization/performance#tracing)された、テンソル型引数と非テンソル型引数のすべての組み合わせて呼び出すことができます。特に、適切なトレースを使った `obj.__call__` 　メソッドがある場合、`obj` そのものを Python 関数として呼び出すことができます。単純な例は、`output_tensor = obj(input_tensor, training=False)` のようになります。
 
-これにより、SavedModel が実装できるインターフェースに大きな自由が生まれます。`obj` の[再利用可能な SavedModel インターフェース](reusable_saved_models.md)は、`hub.KerasLayer` のようなアダプタなど、クライアントコードが SavedModel の使用方法を理解できるように規則を確立します。
+これにより、SavedModel が実装できるインターフェースに大きな自由が生まれます。`obj` の [Reusable SavedModel インターフェース](reusable_saved_models.md)は、`hub.KerasLayer` のようなアダプタなど、クライアントコードが SavedModel の使用方法を理解できるように規則を確立します。
 
-SavedModel の中には、特により大きなモデルで再利用されることを目的としていないモデル全体など、その規則に従わないものもあり、推論されるシグネチャのみを提供することがあります。
+SavedModel の中には、特により大きなモデルで再利用されることを目的としていないモデル全体など、その規則に従わないものもあり、サービングシグネチャのみを提供することがあります。
 
-SavedModel のトレーニング可能な変数は、トレーナブルとして再読み込みされ、`tf.GradientTape` によってデフォルトで監視されます。注意事項については、以下のファインチューニングのセクションをご覧の上、スターターではこれを避けることを検討してください。ファインチューニングを行うとしても、`obj.trainable_variables` が、もともとトレーニング可能な変数のサブセットのみを再トレーニングするように推奨しているかどうかを確認するようにしてください。
+SavedModel のトレーニング対象変数は、トレーニング対象として再読み込みされ、`tf.GradientTape` によってデフォルトで監視されます。注意事項については、以下のファインチューニングのセクションをご覧の上、スターターではこれを避けることを検討してください。ファインチューニングを行うとしても、`obj.trainable_variables` が、もともとトレーニング対象の変数のサブセットのみを再トレーニングするように推奨しているかどうかを確認するようにしてください。
 
 ## TF Hub 用の SavedModel を作成する
 
 ### 概要
 
-SavedModel は TensorFlow の、トレーニング済みモデルまたはモデルピース用の標準的なシリアル化形式です。モデルのトレーニング済みの重みとともに、計算を実施するための正確な TensorFlow 演算が含まれます。それを作成したコードに依存することなく使用することが可能です。特に、TensorFlow 演算は共通の基本言語であるため、Keras のような高レベルの model-building API で再利用できます。
+SavedModel は TensorFlow のトレーニング済みモデルまたはモデルピース用の標準的なシリアル化形式です。モデルのトレーニング済みの重みとともに、計算を実行するための正確な TensorFlow 演算が含まれるため、それを作成したコードに依存することなく使用することが可能です。特に、TensorFlow 演算は共通の基本言語であるため、Keras のような高レベルのモデル構築 API で再利用できます。
 
 ### Keras から保存する
 
@@ -97,18 +97,18 @@ piece_to_share = tf.keras.Model(sharing_input, sharing_output)
 piece_to_share.save(..., include_optimizer=False)
 ```
 
-GitHub の [TensorFlow モデル](https://github.com/tensorflow/models)は、BERT に最初のアプローチを使用しています（[nlp/bert/bert_models.py](https://github.com/tensorflow/models/blob/master/official/nlp/bert/bert_models.py) と [nlp/bert/export_tfhub.py](https://github.com/tensorflow/models/blob/master/official/nlp/bert/export_tfhub.py) をご覧ください。`core_model` と `pretrain_model` の分割に注意してください）。また、ResNet に後者のアプローチを使用しています（[vision/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/vision/image_classification/resnet/tfhub_export.py) をご覧ください）。
+GitHub の [TensorFlow モデル](https://github.com/tensorflow/models)は、BERT に 1 番目のアプローチを使用しています（[nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py) をご覧の上、エクスポートするための `core_model` とチェックポイントを復元するための `pretrainer` で分割されているところに注意してください）。また、ResNet には 2 番目のアプローチを使用しています（[vision/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/vision/image_classification/resnet/tfhub_export.py) をご覧ください）。
 
 ### 低レベル TensorFlow から保存する
 
 この操作では、TensorFlow の [SavedModel ガイド](https://www.tensorflow.org/guide/saved_model)を熟知している必要があります。
 
-推論されるシグネチャ以上のものを提供する場合は、[再利用可能な SavedModel のインターフェース](reusable_saved_models.md)を実装する必要があります。概念的には、次のように記述されます。
+サービングシグネチャ以上のものを提供する場合は、[Reusable SavedModel のインターフェース](reusable_saved_models.md)を実装する必要があります。概念的には、次のように記述されます。
 
 ```python
 class MyMulModel(tf.train.Checkpoint):
   def __init__(self, v_init):
-    super(MyMulModel, self).__init__()
+    super().__init__()
     self.v = tf.Variable(v_init)
     self.variables = [self.v]
     self.trainable_variables = [self.v]
@@ -131,19 +131,19 @@ print(layer.losses)  # 0.004
 
 ## ファインチューニング
 
-インポートされた SavedModel のトレーニング済みの変数とそれに関するモデルのトレーニング済みの変数を合わせてトレーニングことを、SavedModel の*ファインチューニング*と呼びます。これにより品質が改善されますが、多くの場合トレーニングがより困難になります（特に CNN では、時間が長引く、オプティマイザとハイパーパラメータによさらにり依存する、過適合のリスクが高まる、データセットの増加が必要となる、といった問題が生まれる可能性があります）。SavedModel の消費者は、適切なトレーニングシステムを整えた後で、SavedModel のパブリッシャーが推奨する場合に限り、ファインチューニングを検討することをお勧めします。
+インポートされた SavedModel のトレーニング済みの変数とそれに関するモデルのトレーニング済みの変数を合わせてトレーニングことを、SavedModel の*ファインチューニング*と呼びます。これにより品質が改善されますが、多くの場合トレーニングがより困難になります（特に CNN では、時間が長引く、オプティマイザとハイパーパラメータによさらにり依存する、過適合のリスクが高まる、データセットの増加が必要となる、といった問題が生まれる可能性があります）。SavedModel のコンシューマーは、適切なトレーニングシステムを整えた後で、SavedModel のパブリッシャーが推奨する場合に限り、ファインチューニングを検討することをお勧めします。
 
 ファインチューニングよにって、トレーニングされる「連続的な」モデルパラメータが変更されて今います。テキスト入力のトークン化や埋め込み行列の対応エントリへのトークンのマッピングなど、ハードコードされた変換は変更されません。
 
-### SavedModel 消費者に対する注意事項
+### SavedModel コンシューマーに対する注意事項
 
-`hub.KerasLayer` を
+`hub.KerasLayer` を次のように作成します。
 
 ```python
 layer = hub.KerasLayer(..., trainable=True)
 ```
 
-とすることで、レイヤーが読み込む SavedModel をファインチューニングすることができます。SavedModel に宣言されたトレーニング可能な重みと重みレギュラライザーを Keras モデルに追加し、SavedModel の計算をトレーニングモードで実行します（ドロップアウトなど）。
+上記のようにすることで、レイヤーが読み込む SavedModel をファインチューニングすることができます。SavedModel に宣言されたトレーニング対象の重みと重み正則化器を Keras モデルに追加し、SavedModel の計算をトレーニングモードで実行します（ドロップアウトなど）。
 
 [image classification colab](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb) には、エンドツーエンドの例が、オプションのファインチューニングとともに含まれています。
 
@@ -167,10 +167,10 @@ tf.saved_model.save(loaded_obj, export_module_dir)
 
 TensorFlow Hub で共有する SavedModel を作成する場合は、それを消費するユーザーがファインチューンを行うのか、どのように行うのか、ということを予め考え、ドキュメントにガイダンスを提供するようにしてください。
 
-Keras モデルから保存すると、ファインチューニングのすべての仕組みを機能させることができます（重み正規化損失の保存、トレーニング可能な変数の宣言、`training=True` と `training=False` の両方の `__call__` のトレースなど）。
+Keras モデルから保存すると、ファインチューニングのすべての仕組みを機能させることができます（重み正則化損失の保存、トレーニング対象変数の宣言、`training=True` と `training=False` の両方の `__call__` のトレースなど）。
 
 ソフトマックス確率やトップ k 予測の代わりにロジットを出力するなど、勾配のフローとうまく連携するモデルインターフェースを選択してください。
 
 モデルでドロップアウト、バッチ正規化、またはハイパーパラメータを使用する類似のトレーニングテクニックが使用されている場合は、期待される多数のターゲット問題やバッチサイズに合理的な値に設定してください。（これを執筆している時点では、Keras から保存すると、消費する側でこれらを簡単に調整することはできません。）
 
-各レイヤーの重みレギュラライザーは保存されますが（正規化の強度計数とともに）、オプティマイザ内の重み正規化（`tf.keras.optimizers.Ftrl.l1_regularization_strength=...)` など）は失われます。SavedModel の消費者に適宜アドバイスを提供してください。
+各レイヤーの重み正則化器は保存されますが（正則化の強度計数とともに）、オプティマイザ内の重み正則化（`tf.keras.optimizers.Ftrl.l1_regularization_strength=...)` など）は失われます。SavedModel のコンシューマに適宜アドバイスを提供してください。
