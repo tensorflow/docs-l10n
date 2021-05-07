@@ -16,7 +16,7 @@ embeddings = model(["The rain in Spain.", "falls",
 print(embeddings.shape)  #(4,128)
 ```
 
-## Next Steps
+## 次のステップ
 
 - [tfhub.dev でモデルを検索する](https://tfhub.dev/)
 - [tfhub.dev にモデルを公開する](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/publish.md)
