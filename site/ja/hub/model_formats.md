@@ -22,7 +22,7 @@ SavedModel については、TF Hub でさらにご覧ください。
 - [TF2 SavedModel をエクスポートする](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/exporting_tf2_saved_model.md)
 - [TF2 SavedModel の TF1/TF2 互換性](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/model_compatibility.md)
 
-### TF1 Hub format
+### TF1 Hub 形式
 
 TF1 Hub 形式は、TF Hub ライブラリで使用されるカスタムシリアル化形式です。TF1 Hub 形式は、TensorFlow 1 の SavedModel 形式と構文レベルで似ていますが（同じファイル名とプロトコルメッセージ）、セマンティックレベルでは、モジュールの再利用、合成および再トレーニングが可能という点で異なります（リソースイニシャライザのストレージが異なる、メタグラフのタグ規則が異なるなど）。ディスク上で区別するには、`tfhub_module.pb`ファイルの有無を確認することが最も簡単です。
 
