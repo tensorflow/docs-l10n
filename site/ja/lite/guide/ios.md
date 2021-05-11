@@ -2,7 +2,7 @@
 
 iOS で TensorFlow Lite を使い始めるには、次の例をご覧ください。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS image classification example</a>
+<a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios" class="">iOS 画像分類の例</a>
 
 ソースコードの説明については、[TensorFlow Lite iOS 画像分類](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md)もあわせてお読みください。
 
@@ -49,7 +49,7 @@ pod 'TensorFlowLiteSwift', '~> 2.0.0'
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly'
 ```
 
-From 2.4.0 version and latest nightly releases, by default [GPU](https://www.tensorflow.org/lite/performance/gpu) and [Core ML delegates](https://www.tensorflow.org/lite/performance/coreml_delegate) are excluded from the pod to reduce the binary size. You can include them by specifying subspec:
+2.4.0 バージョン以降と近日リリース予定のナイトリーバージョンでは、バイナリサイズを減らすために、デフォルトで [GPU](https://www.tensorflow.org/lite/performance/gpu) および [Core ML  デリゲート](https://www.tensorflow.org/lite/performance/coreml_delegate) がポッドから除外されていますが、サブスペックを指定してそれらを含めることができます。
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['CoreML', 'Metal']
