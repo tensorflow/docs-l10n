@@ -46,7 +46,7 @@ TensorFlow Lite は現在、量子化、プルーニング、クラスタリン�
 
 ### 量子化
 
-[Quantization](https://www.tensorflow.org/model_optimization/guide/quantization/post_training) works by reducing the precision of the numbers used to represent a model's parameters, which by default are 32-bit floating point numbers. This results in a smaller model size and faster computation.
+[量子化](https://www.tensorflow.org/model_optimization/guide/quantization/post_training)は、モデルのパラメータを表すために使用される数値の精度を下げることで機能します。モデルの精度はデフォルトでは 32 ビットの浮動小数点数です。量子化より、モデルサイズが小さくなり、計算が高速になります。
 
 TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 
