@@ -34,7 +34,7 @@ TensorFlow inference APIs are provided for most common mobile/embedded platforms
 
 ほとんどの場合、API の設計は使いやすさよりもパフォーマンスを反映しています。TensorFlow Lite は小型デバイスでの高速推論向けに設計されているため、API が利便性を犠牲にして不要なコピーを回避しようとするのも驚くことではありません。同様に、TensorFlow APIs との一貫性は、明確な目標ではなく、言語間のバリアンスが期待されます。
 
-Across all libraries, the TensorFlow Lite API enables you to load models, feed inputs, and retrieve inference outputs.
+すべてのライブラリにおいて、TensorFlow Lite API によって、モデルの読み込み、入力のフィード、および推論出力の取得が可能となります。
 
 ### Android プラットフォーム
 
@@ -46,7 +46,7 @@ C++ と Java の使用に関する詳細は以下をご覧ください。また�
 
 注意: TensorFlow Lite ラッパーコードジェネレータは実験（ベータ）フェーズにあり、現在 Android のみをサポートしています。
 
-For TensorFlow Lite model enhanced with [metadata](../convert/metadata.md), developers can use the TensorFlow Lite Android wrapper code generator to create platform specific wrapper code. The wrapper code removes the need to interact directly with `ByteBuffer` on Android. Instead, developers can interact with the TensorFlow Lite model with typed objects such as `Bitmap` and `Rect`. For more information, please refer to the [TensorFlow Lite Android wrapper code generator](../inference_with_metadata/codegen.md).
+[メタデータ](../convert/metadata.md)で強化された TensorFlow Lite モデルの場合、開発者は TensorFlow Lite Android ラッパーコードジェネレータを使用して、プラットフォーム固有のラッパーコードを作成できます。ラッパーコードにより、`ByteBuffer`と直接やり取りする必要がなくなり、開発者は `Bitmap` や `Rect` などの型付きオブジェクトを使用して TensorFlow Lite モデルとやり取りできます。詳細は、[TensorFlow Lite Android ラッパーコードジェネレータ](../inference_with_metadata/codegen.md)をご覧ください。
 
 ### iOS プラットフォーム
 
@@ -341,7 +341,7 @@ class FlatBufferModel {
 
 注意: `FlatBufferModel` オブジェクトは、それを使用する `Interpreter` の全インスタンスが破壊されるまで有効な状態を維持する必要があります。
 
-The important parts of the `Interpreter` API are shown in the code snippet below. It should be noted that:
+`Interpreter` API の重要な個所を以下のコードスニペットに示していますが、次のことに注意してください。
 
 - 文字列比較（および文字列ライブラリへのすべての固定した依存関係）を回避するために、テンソルは整数値で表現されています。
 - インタプリタには同時スレッドからアクセスしてはいけません。
