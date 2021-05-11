@@ -8,7 +8,7 @@
 
 ## 画像特徴量ベクトル
 
-### Usage summary
+### 使い方の概要
 
 **画像特徴量ベクトル**は、画像全体を表す密な 1 次元テンソルで、通常、単純なフィードフォワード分類器によってコンシューマーモデルで使用されます。（従来の CNN の観点では、これは、空間範囲がプールされたかフラット化された後にボトルネックとなる部分で、分類が行われる前にはボトルネックではありません。これについては、以下の [画像の分類](#classification)をご覧ください。）
 
@@ -38,7 +38,7 @@ features = hub.KerasLayer("path/to/model")(images)
 
 Keras では、これは `hub.KerasLayer` が処理します。ファインチューニングを有効にするために、`trainable=True` と（hparam のオーバーライドが適用されるまれなケースでは）`arguments=dict(some_hparam=some_value, ...))` で初期化します。
 
-### Notes
+### 補足
 
 ドロップアウトを出力の特徴量に適用するかどうかは、モデルの消費者に任せる必要があります。SavedModel 自体が実際の出力でドロップアウトを実行するべきではありません（ほかの場所で内部的にドロップアウトを使用している場合でも）。
 
@@ -51,9 +51,9 @@ Keras では、これは `hub.KerasLayer` が処理します。ファインチ�
 
 <a name="classification"></a>
 
-## Image Classification
+## 画像分類
 
-### Usage summary
+### 使い方の概要
 
 **画像分類**は、*モジュールパブリッシャーによって選択された*分類のクラスのメンバーシップについて、画像のピクセルを線形スコア（ロジット）にマッピングします。これにより、モデルの消費者はパブリッシャーモジュールによって学習された特定の分類から結論を導き出すことができます。（新しいクラスのセットを使った画像分類では、代わりに新しい分類器で[画像特徴量ベクトル](#feature-vector)を再利用するのが一般的です。）
 
@@ -77,7 +77,7 @@ logits = hub.KerasLayer("path/to/model")(images)
 
 値 `logits[i, c]` は、インデックス `c` を持つクラス内の例 `i` のメンバーシップを予測するスコアです。
 
-It depends on the underlying classification whether these scores are meant to be used with softmax (for mutually exclusive classes), sigmoid (for orthogonal classes), or something else. The module documentation should describe this, and refer to a definition of the class indices.
+これらのスコアがソフトマックス（相互に排他的なクラスの場合）、シグモイド（直交クラスの場合）、または他の何かで使用されることを意図しているかどうかは、基本的な分類に依存します。モジュールのドキュメントでこれを説明し、クラスインデックスの定義を参照する必要があります。
 
 ### API の詳細
 
@@ -89,7 +89,7 @@ Keras では、これは `hub.KerasLayer` が処理します。ファインチ�
 
 <a name="input"></a>
 
-## Image input
+## 画像入力
 
 以下の内容は、すべてのタイプの画像モデルに共通です。
 
