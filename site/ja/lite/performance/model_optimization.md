@@ -52,10 +52,10 @@ TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 
 手法 | データ要件 | サイズ縮小 | 精度 | サポートされているハードウェア
 --- | --- | --- | --- | ---
-[Post-training float16 quantization](post_training_float16_quant.ipynb) | データなし | 50% 以下 | 精度低下（ごくわずか） | CPU、GPU
-[Post-training dynamic range quantization](post_training_quant.ipynb) | データなし | 75% 以下 | 精度低下 | CPU、GPU (Android)
-[Post-training integer quantization](post_training_integer_quant.ipynb) | ラベルなしの代表的なサンプル | 75% 以下 | 精度低下（少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
-[Quantization-aware training](http://www.tensorflow.org/model_optimization/guide/quantization/training) | ラベル付けされたトレーニングデータ | 75% 以下 | 精度低下（ごく少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
+[トレーニング後の float16 量子化](post_training_float16_quant.ipynb) | データなし | 50% 以下 | 精度低下（ごくわずか） | CPU、GPU
+[トレーニング後のダイナミックレンジ量子化](post_training_quant.ipynb) | データなし | 75% 以下 | 精度低下 | CPU、GPU (Android)
+[トレーニング後の整数量子化](post_training_integer_quant.ipynb) | ラベルなしの代表的なサンプル | 75% 以下 | 精度低下（少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
+[量子化認識トレーニング](http://www.tensorflow.org/model_optimization/guide/quantization/training) | ラベル付けされたトレーニングデータ | 75% 以下 | 精度低下（ごく少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
 
 以下は、いくつかのモデルでのトレーニング後の量子化および量子化認識トレーニングのレイテンシと精度の結果です。すべてのレイテンシ数は、一つの大型コア CPU を使用する Pixel 2 デバイスで測定されます。ツールキットが改善されると、以下の数値も改善されます。
 
