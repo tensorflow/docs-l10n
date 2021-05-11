@@ -41,5 +41,5 @@ $ pip install --upgrade tf-hub-nightly
 - チュートリアル:
     - [テキスト分類](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
     - [画像分類](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
-    - Additional examples [on GitHub](https://github.com/tensorflow/hub/blob/master/examples/README.md)
+    - [GitHub](https://github.com/tensorflow/hub/blob/master/examples/README.md) のその他の例
 - [tfhub.dev](https://tfhub.dev) でモデルを検索してください
