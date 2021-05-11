@@ -6,7 +6,7 @@ iOS で TensorFlow Lite を使い始めるには、次の例をご覧くださ�
 
 ソースコードの説明については、[TensorFlow Lite iOS 画像分類](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md)もあわせてお読みください。
 
-This example app uses [image classification](https://www.tensorflow.org/lite/models/image_classification/overview) to continuously classify whatever it sees from the device's rear-facing camera, displaying the top most probable classifications. It allows the user to choose between a floating point or [quantized](https://www.tensorflow.org/lite/performance/post_training_quantization) model and select the number of threads to perform inference on.
+このサンプルアプリは、[画像分類](https://www.tensorflow.org/lite/models/image_classification/overview)を使用して、デバイスの背面カメラに取り込まれるものを継続的に分類し、最も確率の高い分類を表示します。ユーザーは、浮動小数点または[量子化](https://www.tensorflow.org/lite/performance/post_training_quantization)モデルの選択と推論を実施するスレッド数の選択を行なえます。
 
 注意: さまざまなユースケースで TensorFlow Lite を実演するその他の iOS アプリは、[例](https://www.tensorflow.org/lite/examples)をご覧ください。
 
@@ -43,7 +43,7 @@ pod 'TensorFlowLiteObjC'
 pod 'TensorFlowLiteSwift', '~> 2.0.0'
 ```
 
-This will ensure the latest available 2.x.y version of the `TensorFlowLiteSwift` pod is used in your app. Alternatively, if you want to depend on the nightly builds, you can write:
+このようにすると、`TensorFlowLiteSwift` ポッドの利用可能な最新の 2.x.y バージョンがアプリで使用されるようになります。また、ナイトリービルドに依存する場合は、次のように記述できます。
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly'
