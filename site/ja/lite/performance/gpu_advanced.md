@@ -97,13 +97,11 @@ if (interpreter-&gt;Invoke() != kTfLiteOk) return false;
 ReadFromOutputTensor(interpreter-&gt;typed_output_tensor&lt;float&gt;(0));
 
 // NEW: Clean up.
-TfLiteGpuDelegateV2Delete(delegate);
-</code></pre>
+TfLiteGpuDelegateV2Delete(delegate);</code></pre>
 <p data-md-type="paragraph"><code data-md-type="codespan">TfLiteGpuDelegateOptionsV2</code>を見て、カスタムオプションを使用してデリゲートインスタンスを作成します。<code data-md-type="codespan">TfLiteGpuDelegateOptionsV2Default()</code>でデフォルトオプションを初期化し、必要に応じて変更します。</p>
 <p data-md-type="paragraph">Android C/C++ 向け TFLite GPU では、<a href="https://bazel.io" data-md-type="link">Bazel</a> ビルドシステムを使用します。デリゲートは、次のコマンドなどを使用して構築できます。</p>
 <pre data-md-type="block_code" data-md-language="sh"><code class="language-sh">bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:delegate                           # for static library
-bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:libtensorflowlite_gpu_delegate.so  # for dynamic library
-</code></pre>
+bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:libtensorflowlite_gpu_delegate.so  # for dynamic library</code></pre>
 <p data-md-type="paragraph">注意: <code data-md-type="codespan">Interpreter::ModifyGraphWithDelegate()</code>または<code data-md-type="codespan">Interpreter::Invoke()</code>を呼び出す場合、呼び出し元はその時点のスレッドに<code data-md-type="codespan">EGLContext</code>を持ち、<code data-md-type="codespan">Interpreter::Invoke()</code>は、同じ<code data-md-type="codespan">EGLContext</code>から呼び出す必要があります。<code data-md-type="codespan">EGLContext</code>が存在しない場合、デリゲートは内部的に作成しますが、開発者は<code data-md-type="codespan">Interpreter::Invoke()</code>が常に<code data-md-type="codespan">Interpreter::ModifyGraphWithDelegate()</code>を呼び出すスレッドと同じスレッドから呼び出されるようにする必要があります。</p>
 <h3 data-md-type="header" data-md-header-level="3">iOS (C++)</h3>
 <p data-md-type="paragraph">注意：Swift/Objective-C/C のユースケースについては、<a href="gpu#ios" data-md-type="link">GPU デリゲートガイド</a>を参照してください。</p>
@@ -223,7 +221,7 @@ Interpreter.Options options = (new Interpreter.Options()).addDelegate(delegate);
 <h3 data-md-type="header" data-md-header-level="3">入出力バッファ（iOS、C++ API のみ）</h3>
 <p data-md-type="paragraph">注意：これは、bazel を使用している場合、または TensorFlow Lite を自分でビルドしている場合にのみ使用できます。C++ API は CocoaPods では使用できません。</p>
 <p data-md-type="paragraph">GPU で計算を実行するには、データを GPU で使用できるようにする必要があり、多くの場合、メモリコピーの実行が必要になります。これにはかなり時間がかかる可能性があるため、可能であれば CPU/GPU のメモリ境界を超えないようにしてください。通常、このような交差は避けられませんが、一部の特殊なケースでは、どちらか一方を省略できます。</p>
-<p data-md-type="paragraph">If the network's input is an image already loaded in the GPU memory (for example, a GPU texture containing the camera feed) it can stay in the GPU memory without ever entering the CPU memory. Similarly, if the network's output is in the form of a renderable image (for example, <a href="https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf" data-md-type="link">image style transfer</a>) it can be directly displayed on the screen.</p>
+<p data-md-type="paragraph">ネットワークの入力が GPU メモリに既に読み込まれている画像（たとえば、カメラフィードを含む GPU テクスチャ）である場合、CPU メモリに読み込むことなく、GPU メモリに保持できます。また、ネットワークの出力がレンダリング可能な画像（たとえば、<a href="https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf" data-md-type="link">画像スタイルの転送</a>）の形式である場合は、画面に直接表示できます。</p>
 <p data-md-type="paragraph">TensorFlow Lite では、最高のパフォーマンスを実現するために、TensorFlow ハードウェアバッファから直接読み書きできるので、回避可能なメモリコピーをバイパスできます。</p>
 <p data-md-type="paragraph">画像入力が GPU メモリにある場合、最初に Metal の<code data-md-type="codespan">MTLBuffer</code>オブジェクトに変換する必要があります。TfLiteTensor をユーザーが準備した<code data-md-type="codespan">MTLBuffer</code>に<code data-md-type="codespan">TFLGpuDelegateBindMetalBufferToTensor()</code>を関連付けることができます。<code data-md-type="codespan">TFLGpuDelegateBindMetalBufferToTensor()</code>は、<code data-md-type="codespan">Interpreter::ModifyGraphWithDelegate()</code>の後に呼び出す必要があることに注意してください。さらに、推論出力はデフォルトで、GPU メモリから CPU メモリにコピーされます。この動作は、初期化中に<code data-md-type="codespan">Interpreter::SetAllowBufferHandleOutput(true)</code>を呼び出すことで無効にできます。</p>
 <pre data-md-type="block_code" data-md-language="c++"><code class="language-c++">#include "tensorflow/lite/delegates/gpu/metal_delegate.h"
@@ -247,8 +245,7 @@ if (!TFLGpuDelegateBindMetalBufferToTensor(
 }
 
 // Run inference.
-if (interpreter-&gt;Invoke() != kTfLiteOk) return false;
-</code></pre>
+if (interpreter-&gt;Invoke() != kTfLiteOk) return false;</code></pre>
 <p data-md-type="paragraph">注意: デフォルトの動作が無効になっている場合、GPU メモリから CPU メモリに推論出力をコピーするには、各出力テンソルに対して<code data-md-type="codespan">Interpreter::EnsureTensorDataIsReadable()</code>を明示的に呼び出す必要があります。</p>
 <p data-md-type="paragraph">注意: これは量子化モデルでも機能しますが、バッファは内部の逆量子化バッファにバインドされるため、<strong data-md-type="double_emphasis">float32 データを含む float32 サイズのバッファ</strong>が必要です。</p>
 <h2 data-md-type="header" data-md-header-level="2">ヒントとコツ</h2>
