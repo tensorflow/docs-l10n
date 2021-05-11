@@ -12,7 +12,7 @@ TensorFlow Lite の推論は、通常次の手順で行います。
 
 1. **モデルの読み込み**
 
-    モデルの実行グラフを含む `.tflite` モデルをメモリに読み込む必要があります。
+    You must load the `.tflite` model into memory, which contains the model's execution graph.
 
 2. **データの変換**
 
@@ -28,13 +28,13 @@ TensorFlow Lite の推論は、通常次の手順で行います。
 
     たとえば、モデルは確率のリストのみを返すことがありますが、確率を関連するカテゴリにマッピングし、エンドユーザーに提供することを決めることができます。
 
-##  サポートされているプラットフォーム
+## サポートされているプラットフォーム
 
-TensorFlow の推論 API は、Android、iOS、および Linux などの最も一般的なモバイル/組み込みプラットフォーム向けに複数のプログラミング言語で提供されています。
+TensorFlow inference APIs are provided for most common mobile/embedded platforms such as [Android](#android-platform), [iOS](#ios-platform) and [Linux](#linux-platform), in multiple programming languages.
 
 ほとんどの場合、API の設計は使いやすさよりもパフォーマンスを反映しています。TensorFlow Lite は小型デバイスでの高速推論向けに設計されているため、API が利便性を犠牲にして不要なコピーを回避しようとするのも驚くことではありません。同様に、TensorFlow APIs との一貫性は、明確な目標ではなく、言語間のバリアンスが期待されます。
 
-すべてのライブラリにおいて、TensorFlow Lite API によって、モデルの読み込み、入力のフィード、および推論出力の取得が可能となります。
+Across all libraries, the TensorFlow Lite API enables you to load models, feed inputs, and retrieve inference outputs.
 
 ### Android プラットフォーム
 
@@ -46,7 +46,7 @@ C++ と Java の使用に関する詳細は以下をご覧ください。また�
 
 注意: TensorFlow Lite ラッパーコードジェネレータは実験（ベータ）フェーズにあり、現在 Android のみをサポートしています。
 
-[メタデータ](../convert/metadata.md)で強化された TensorFlow Lite モデルの場合、開発者は TensorFlow Lite Android ラッパーコードジェネレータを使用して、プラットフォーム固有のラッパーコードを作成できます。ラッパーコードにより、`ByteBuffer`と直接やり取りする必要がなくなり、開発者は `Bitmap` や `Rect` などの型付きオブジェクトを使用して TensorFlow Lite モデルとやり取りできます。詳細は、[TensorFlow Lite Android ラッパーコードジェネレータ](../inference_with_metadata/codegen.md)をご覧ください。
+For TensorFlow Lite model enhanced with [metadata](../convert/metadata.md), developers can use the TensorFlow Lite Android wrapper code generator to create platform specific wrapper code. The wrapper code removes the need to interact directly with `ByteBuffer` on Android. Instead, developers can interact with the TensorFlow Lite model with typed objects such as `Bitmap` and `Rect`. For more information, please refer to the [TensorFlow Lite Android wrapper code generator](../inference_with_metadata/codegen.md).
 
 ### iOS プラットフォーム
 
@@ -56,7 +56,7 @@ iOS では、TensorFlow Lite は [Swift](https://www.tensorflow.org/code/tensorf
 
 ### Linux プラットフォーム
 
-Linux プラットフォーム（[Raspberry Pi](build_rpi.md) を含む）では、次のセクションで説明される通り、C++ とPython で提供されている TensorFlow Lite API を使用して推論を実行できます。
+On Linux platforms (including [Raspberry Pi](build_rpi.md)), you can run inferences using TensorFlow Lite APIs available in [C++](#load-and-run-a-model-in-c) and [Python](#load-and-run-a-model-in-python), as shown in the following sections.
 
 ## モデルを実行する
 
@@ -92,7 +92,28 @@ public Interpreter(@NotNull MappedByteBuffer mappedByteBuffer);
 
 いずれの場合でも、有効な TensorFlow Lite モデルを提供しない場合、API によって `IllegalArgumentException` がスローされてしまいます。`MappedByteBuffer` を使用して `Interpreter` を初期化したら、`Interpreter` が存続する限り、変更してはいけません。
 
-その後でモデルで推論を実行するには、`Interpreter.run()` を実行します。次はその例を示します。
+The preferred way to run inference on a model is to use signatures - Available for models converted starting Tensorflow 2.5
+
+```Java
+try (Interpreter interpreter = new Interpreter(file_of_tensorflowlite_model)) {
+  Map<String, Object> inputs = new HashMap<>();
+  inputs.put("input_1", input1);
+  inputs.put("input_2", input2);
+  Map<String, Object> outputs = new HashMap<>();
+  outputs.put("output_1", output1);
+  interpreter.runSignature(inputs, outputs, "mySignature");
+}
+```
+
+The `runSignature` method takes three arguments:
+
+- **Inputs** : map for inputs from input name in the signature to an input object.
+
+- **Outputs** : map for output mapping from output name in signature to output data.
+
+- **Signature Name** [optional]: Signature name (Can be left empty if the model has single signature).
+
+Another way to run an inference when the model doesn't have a defined signatures. Simply call `Interpreter.run()`. For example:
 
 ```java
 try (Interpreter interpreter = new Interpreter(file_of_a_tensorflowlite_model)) {
@@ -117,7 +138,7 @@ public int getInputIndex(String opName);
 public int getOutputIndex(String opName);
 ```
 
-モデルの `opName` が有効な演算でない場合、`IllegalArgumentException` がスローされます。
+If `opName` is not a valid operation in the model, it throws an `IllegalArgumentException`.
 
 また、`Interpreter` はリソースを所有することにも注意してください。メモリリークを回避するには、次のように、使用後にリソースを解放する必要があります。
 
@@ -231,8 +252,12 @@ if (error != nil) { /* Error handling... */ }
 NSMutableData *inputData;  // Should be initialized
 // input data preparation...
 
+// Get the input `TFLTensor`
+TFLTensor *inputTensor = [interpreter inputTensorAtIndex:0 error:&error];
+if (error != nil) { /* Error handling... */ }
+
 // Copy the input data to the input `TFLTensor`.
-[interpreter copyData:inputData toInputTensorAtIndex:0 error:&error];
+[inputTensor copyData:inputData error:&error];
 if (error != nil) { /* Error handling... */ }
 
 // Run inference by invoking the `TFLInterpreter`.
@@ -312,15 +337,15 @@ class FlatBufferModel {
 
 注意: TensorFlow Lite が [Android NNAPI](https://developer.android.com/ndk/guides/neuralnetworks) の存在を検出すると、`FlatBufferModel` の格納に、自動的に共有メモリを使用しようとします。
 
-`FlatBufferModel` オブジェクトとしてモデルを準備できたので、[`Interpreter`](https://www.tensorflow.org/lite/api_docs/cc/class/tflite/interpreter.html) で実行できるようになりました。単一の `FlatBufferModel` を複数の `Interpreter` で同時に使用することができます。
+Now that you have the model as a `FlatBufferModel` object, you can execute it with an [`Interpreter`](https://www.tensorflow.org/lite/api_docs/cc/class/tflite/interpreter.html). A single `FlatBufferModel` can be used simultaneously by more than one `Interpreter`.
 
-注意: `FlatBufferModel` オブジェクトは、それを使用する `Interpreter` の全インスタンスが破壊されるまで有効な状態を維持する必要があります。
+Caution: The `FlatBufferModel` object must remain valid until all instances of `Interpreter` using it have been destroyed.
 
-`Interpreter` API の重要な個所を以下のコードスニペットに示していますが、次のことに注意してください。
+The important parts of the `Interpreter` API are shown in the code snippet below. It should be noted that:
 
-- 文字列比較（および文字列ライブラリへのすべての固定した依存関係）を回避するために、テンソルは整数値で表現されています。
+- Tensors are represented by integers, in order to avoid string comparisons (and any fixed dependency on string libraries).
 - インタプリタには同時スレッドからアクセスしてはいけません。
-- 入力テンソルと出力テンソルのメモリ割り当ては、テンソルのサイズ変更を行った直後に `AllocateTensors()` を呼び出してトリガされる必要があります。
+- Memory allocation for input and output tensors must be triggered by calling `AllocateTensors()` right after resizing tensors.
 
 C++ を使った TensorFlow Lite の最も簡単な使用方法を次に示します。
 
@@ -354,6 +379,55 @@ float* output = interpreter->typed_output_tensor<float>(0);
 推論を実行するための Python API は、`tf.lite` モジュールで提供されています。この API からは主に、モデルを読み込んで推論を実行する [`tf.lite.Interpreter`](https://www.tensorflow.org/api_docs/python/tf/lite/Interpreter) のみが必要です。
 
 次の例では、Python インタプリタを使用して `.tflite` ファイルを読み込み、ランダムな入力データで推論を実行する方法を示します。
+
+This example is recommended if you're converting from SavedModel with a defined SignatureDef. Available starting from TensorFlow 2.5
+
+```python
+class TestModel(tf.Module):
+  def __init__(self):
+    super(TestModel, self).__init__()
+
+  @tf.function(input_signature=[tf.TensorSpec(shape=[1, 10], dtype=tf.float32)])
+  def add(self, x):
+    '''
+    Simple method that accepts single input 'x' and returns 'x' + 4.
+    '''
+    # Name the output 'result' for convenience.
+    return {'result' : x + 4}
+
+
+SAVED_MODEL_PATH = 'content/saved_models/test_variable'
+TFLITE_FILE_PATH = 'content/test_variable.tflite'
+
+# Save the model
+module = TestModel()
+# You can omit the signatures argument and a default signature name will be
+# created with name 'serving_default'.
+tf.saved_model.save(
+    module, SAVED_MODEL_PATH,
+    signatures={'my_signature':module.add.get_concrete_function()})
+
+# Convert the model using TFLiteConverter
+converter = tf.lite.TFLiteConverter.from_saved_model(SAVED_MODEL_PATH)
+tflite_model = converter.convert()
+with open(TFLITE_FILE_PATH, 'wb') as f:
+  f.write(tflite_model)
+
+# Load the TFLite model in TFLite Interpreter
+interpreter = tf.lite.Interpreter(TFLITE_FILE_PATH)
+# There is only 1 signature defined in the model,
+# so it will return it by default.
+# If there are multiple signatures then we can pass the name.
+my_signature = interpreter.get_signature_runner()
+
+# my_signature is callable with input as arguments.
+output = my_signature(x=tf.constant([1.0], shape=(1,10), dtype=tf.float32))
+# 'output' is dictionary with all outputs from the inference.
+# In this case we have single output 'result'.
+print(output['result'])
+```
+
+Another example if the model doesn't have SignatureDefs defined.
 
 ```python
 import numpy as np
@@ -403,9 +477,9 @@ interpreter.allocate_tensors()
 # Continue to get tensors and so forth, as shown above...
 ```
 
-その他の Python サンプルコードについては、[`label_image.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/examples/python/label_image.py) をご覧ください。
+For more Python sample code, see [`label_image.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/examples/python/label_image.py).
 
-ヒント: Python ターミナルで `help(tf.lite.Interpreter)` を実行すると、インタプリタの詳細なドキュメントを閲覧できます。
+Tip: Run `help(tf.lite.Interpreter)` in the Python terminal to get detailed documentation about the interpreter.
 
 ## サポートされている演算
 
