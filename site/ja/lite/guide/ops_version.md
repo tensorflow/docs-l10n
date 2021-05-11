@@ -2,8 +2,8 @@
 
 このドキュメントでは、TensorFlow Lite 演算のバージョン管理スキーマを説明します。演算のバージョン管理を行うことによって、既存の演算子に新しい機能やパラメータを追加することができます。さらに、次の項目が保証されます。
 
-- 下位互換性: 新しい TensorFlow Lite 実装で以前のモデルファイルも処理します。
 - 上位互換性: 以前の TensorFlow Lite 実装で、新しい機能が使用されない限り、新しいバージョンの TOCO が生成する新しいモデルファイルを処理できます。
+- Forward compatibility: Old TensorFlow Lite implementation should handle a new model file produced by new version of converter, as long as no new features are used.
 - 上位非互換性検出: 以前の TensorFlow Lite 実装がサポートされていない新しいバージョンの演算を含む新しいモデルを読み取る場合に、エラーを報告します。
 
 ## 例: 畳み込みに膨張度を追加する
@@ -143,13 +143,11 @@ AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D(), 1, 2);
 
 これを行うには、`lite/tools/versioning/op_version.cc` で演算クラスの `GetBuiltinOperatorVersion` 関数をオーバーライドする必要があります。
 
-バージョンが 1 つしかない演算の場合は、`GetVersion` 関数は次のように定義されます。
-
 ```
 int GetVersion(const Operator& op) const override { return 1; }
 ```
 
-複数のバージョンをサポートする場合は、パラメータを確認し、次の例に示すようにして演算のバージョンを判定します。
+バージョンが 1 つしかない演算の場合は、`GetVersion` 関数は次のように定義されます。
 
 ```
 int GetVersion(const Operator& op) const override {
@@ -162,31 +160,39 @@ int GetVersion(const Operator& op) const override {
 }
 ```
 
-### 演算子のバージョンマップを更新する
-
-最後に、新しいバージョン情報を演算子バージョンマップに追加します。このバージョンマップに応じて、モデルで最小限必要となるランタイムバージョンを生成する必要があるため、これは必要なステップです。
+Note that if you are adding support for new types, above steps are not needed. Input and output types are defined and populated for all ops in `OpSignature`.
 
 これを行うには、`lite/toco/tflite/op_version.cc` に新しいマップエントリを追加する必要があります。
-
-この例では、次のエントリを `op_version_map` に追加してください。
 
 ```
 {{OperatorType::kConv, 3}, "kPendingReleaseOpVersion"}
 ```
 
-（次の安定リリースでは、`kPendingReleaseOpVersion` は適切なリリースバージョンに置き換えられます。）
+### 演算子のバージョンマップを更新する
+
+最後に、新しいバージョン情報を演算子バージョンマップに追加します。このバージョンマップに応じて、モデルで最小限必要となるランタイムバージョンを生成する必要があるため、これは必要なステップです。
+
+To do this, you need to add a new map entry in `lite/tools/versioning/runtime_version.cc`.
+
+この例では、次のエントリを `op_version_map` に追加してください。
+
+```
+{{BuiltinOperator_DEPTHWISE_CONV_2D, 2}, %CURRENT_RUNTIME_VERSION%}
+```
+
+where `%CURRENT_RUNTIME_VERSION%` corresponds to the current runtime version defined in [tensorflow/core/public/version.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h).
 
 ### 実装をデリゲートする
 
 TensorFlow Lite には、演算をハードウェアのバックエンドにデリゲートすることのできるデリゲート API があります。デリゲートの `Prepare` 関数で、バージョンがデリゲーションコードのすべてのノードに対応しているかどうかを確認します。
 
 ```
-const int kMinVersion = 1;
+const int kMaxVersion = 1;
 TfLiteNode* node;
 TfLiteRegistration* registration = nullptr;
 TF_LITE_ENSURE_STATUS(context->GetNodeAndRegistration(context, node_index, &node, &registration));
 
-if (registration->version > kMinVersion) {
+if (registration->version > kMaxVersion) {
   // Reject the node if the version isn't supported.
 }
 ```
