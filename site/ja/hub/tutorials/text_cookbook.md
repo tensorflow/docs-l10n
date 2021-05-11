@@ -8,7 +8,7 @@
 
 ![Text Classification Graphic](https://www.gstatic.com/aihub/tfhub/universal-sentence-encoder/example-classification.png)
 
-以下のチュートリアルでは、同一のタスクを異なるツールを使って異なる観点から解決しています。
+以下のチュートリアルでは、同一のタスクを異なるツールを使ってさまざまな観点から解決しています。
 
 ### Keras
 
@@ -20,17 +20,17 @@
 
 ### BERT
 
-[Predicting Movie Review Sentiment with BERT on TF Hub](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb)（TF Hub で BERT を使用して映画レビューを予測する）- BERT モジュールを使用して分類を行う方法が紹介されています。トークン化と前処理を行うための `bert` ライブラリの使用方法が含まれます。
+[TF Hub の BERT による映画レビューのセンチメントの予測](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) - BERT モジュールを使用して分類を行う方法が紹介されています。トークン化と前処理を行うための `bert` ライブラリの使用方法が含まれます。
 
 ### Kaggle
 
 [Kaggle での IMDB 分類](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) - データのダウンロードと結果の送信など、Colab から Kaggle コンペと簡単に連携する方法が示されています。
 
- | Estimator | Keras | TF2 | TF Dataset | BERT | Kaggle API
+ | Estimator | Keras | TF2 | TF Datasets | BERT | Kaggle API
 --- | --- | --- | --- | --- | --- | ---
-[テキスト分類](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  |
+[Text classification](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  |
 [Keras によるテキスト分類](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub) |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |
-[TF Hub で BERT を使用して映画レビューを予測する](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |
+[TF Hub の BERT による映画レビューのセンチメントの予測](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |
 [Kaggle での IMDB 分類](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png)
 
 ### FastText 埋め込みによる Bangla タスク
