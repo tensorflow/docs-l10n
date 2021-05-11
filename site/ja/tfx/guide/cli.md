@@ -40,7 +40,7 @@ TFX CLI は、TFX パッケージの一部としてインストールされま�
 
 指定したオーケストレーターに新しいパイプラインを作成します。
 
-Usage:
+使用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx pipeline create --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --package_path=&lt;var&gt;package-path&lt;/var&gt; \
@@ -158,7 +158,7 @@ Kubeflow:
 
 指定されたオーケストレーターの既存のパイプラインを更新します。
 
-Usage:
+使用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx pipeline update --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --package_path=&lt;var&gt;package-path&lt;/var&gt; \
@@ -265,7 +265,7 @@ Kubeflow:
 
 パイプラインを作成または更新する前に使用することが推薦されます。
 
-Usage:
+使用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx pipeline compile --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--engine=&lt;var&gt;engine&lt;/var&gt; \
 --package_path=&lt;var&gt;package-path&lt;/var&gt;]
@@ -321,7 +321,7 @@ Kubeflow:
 
 指定されたオーケストレーターからパイプラインを削除します。
 
-Usage:
+使用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx pipeline delete --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -406,7 +406,7 @@ Kubeflow:
 
 指定されたオーケストレーター内のすべてのパイプラインを一覧表示します。
 
-Usage:
+使用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx pipeline list [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -497,7 +497,7 @@ Kubeflow:
 
 オーケストレーターでパイプラインの新しい実行インスタンスを作成します。Kubeflow の場合、クラスター内のパイプラインの最新のパイプラインバージョンが使用されます。
 
-Usage:
+使用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx run create --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
 --engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -584,7 +584,7 @@ Kubeflow:
 
 ** 要注意：現在、Kubeflow でのみサポートされています。
 
-Usage:
+使用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx run terminate --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -655,7 +655,7 @@ Kubeflow:
 
 ** 要注意：現在、ローカルおよび ApacheBeam ではサポートされていません。
 
-Usage:
+使用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx run list --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
 --engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -733,7 +733,7 @@ Kubeflow:
 
 ** 要注意：現在、ローカルおよび ApacheBeam ではサポートされていません。
 
-Usage:
+使用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx run status --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
 --engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -814,7 +814,7 @@ Kubeflow:
 
 ** 要注意：現在、Kubeflow でのみサポートされています。
 
-Usage:
+使用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx run delete --run_id=&lt;var&gt;run-id&lt;/var&gt; [--engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
 --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;]
@@ -892,16 +892,15 @@ Kubeflow:
 
 利用可能な TFX パイプラインテンプレートを一覧表示します。
 
-Usage:
+使用法：
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx template list
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx template list</pre>
 
 ### copy
 
 テンプレートを宛先ディレクトリにコピーします。
 
-Usage:
+使用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx template copy --model=&lt;var&gt;model&lt;/var&gt; --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \
 --destination_path=&lt;var&gt;destination-path&lt;/var&gt;
