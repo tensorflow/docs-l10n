@@ -12,7 +12,7 @@ TensorFlow Lite の推論は、通常次の手順で行います。
 
 1. **モデルの読み込み**
 
-    You must load the `.tflite` model into memory, which contains the model's execution graph.
+    モデルの実行グラフを含む `.tflite` モデルをメモリに読み込む必要があります。
 
 2. **データの変換**
 
@@ -138,7 +138,7 @@ public int getInputIndex(String opName);
 public int getOutputIndex(String opName);
 ```
 
-If `opName` is not a valid operation in the model, it throws an `IllegalArgumentException`.
+モデルの `opName` が有効な演算でない場合、`IllegalArgumentException` がスローされます。
 
 また、`Interpreter` はリソースを所有することにも注意してください。メモリリークを回避するには、次のように、使用後にリソースを解放する必要があります。
 
@@ -337,15 +337,15 @@ class FlatBufferModel {
 
 注意: TensorFlow Lite が [Android NNAPI](https://developer.android.com/ndk/guides/neuralnetworks) の存在を検出すると、`FlatBufferModel` の格納に、自動的に共有メモリを使用しようとします。
 
-Now that you have the model as a `FlatBufferModel` object, you can execute it with an [`Interpreter`](https://www.tensorflow.org/lite/api_docs/cc/class/tflite/interpreter.html). A single `FlatBufferModel` can be used simultaneously by more than one `Interpreter`.
+`FlatBufferModel` オブジェクトとしてモデルを準備できたので、[`Interpreter`](https://www.tensorflow.org/lite/api_docs/cc/class/tflite/interpreter.html) で実行できるようになりました。単一の `FlatBufferModel` を複数の `Interpreter` で同時に使用することができます。
 
-Caution: The `FlatBufferModel` object must remain valid until all instances of `Interpreter` using it have been destroyed.
+注意: `FlatBufferModel` オブジェクトは、それを使用する `Interpreter` の全インスタンスが破壊されるまで有効な状態を維持する必要があります。
 
 The important parts of the `Interpreter` API are shown in the code snippet below. It should be noted that:
 
-- Tensors are represented by integers, in order to avoid string comparisons (and any fixed dependency on string libraries).
+- 文字列比較（および文字列ライブラリへのすべての固定した依存関係）を回避するために、テンソルは整数値で表現されています。
 - インタプリタには同時スレッドからアクセスしてはいけません。
-- Memory allocation for input and output tensors must be triggered by calling `AllocateTensors()` right after resizing tensors.
+- 入力テンソルと出力テンソルのメモリ割り当ては、テンソルのサイズ変更を行った直後に `AllocateTensors()` を呼び出してトリガされる必要があります。
 
 C++ を使った TensorFlow Lite の最も簡単な使用方法を次に示します。
 
@@ -477,9 +477,9 @@ interpreter.allocate_tensors()
 # Continue to get tensors and so forth, as shown above...
 ```
 
-For more Python sample code, see [`label_image.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/examples/python/label_image.py).
+その他の Python サンプルコードについては、[`label_image.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/examples/python/label_image.py) をご覧ください。
 
-Tip: Run `help(tf.lite.Interpreter)` in the Python terminal to get detailed documentation about the interpreter.
+ヒント: Python ターミナルで `help(tf.lite.Interpreter)` を実行すると、インタプリタの詳細なドキュメントを閲覧できます。
 
 ## サポートされている演算
 
