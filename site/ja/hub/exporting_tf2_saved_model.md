@@ -1,12 +1,14 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-12' review_interval: '6 months' } *-->
 
-# モデルをエクスポートする
+# SavedModel をエクスポートする
 
-このページでは、[TensorFlow 2 の SavedModel 形式](https://www.tensorflow.org/guide/saved_model)でモデルをエクスポートするプロセスについて説明します。この形式は、TensorFlow Hub 上で事前トレーニングされたモデルとモデルピースの共有に推奨される方法です。これは古い [TF1 Hub 形式](tf1_hub_module.md)に取って代わり、新しい API セットが付属しています。TF1 Hub 形式のモデルのエクスポートに関する詳細は、[TF1 Hub 形式のエクスポート](exporting_hub_format.md)をご覧ください。
+このページでは、TensorFlow プログラムのモデルを [TensorFlow 2 の SavedModel 形式](https://www.tensorflow.org/guide/saved_model)でエクスポートする方法について説明します。この形式は、TensorFlow Hub 上で事前トレーニングされたモデルとモデルピースの共有に推奨される方法です。これは以前の [TF1 Hub 形式](tf1_hub_module.md)に置き換わるもので、新しい API セットが付属しています。TF1 Hub 形式モデルのエクスポートに関する詳細は、[TF1 Hub 形式のエクスポート](exporting_hub_format.md)をご覧ください。
+
+一部のモデル構築ツールキットでは、これを行うためのツールがすでに提供されています（[TensorFlow Model Garden](#tensorflow-model-garden) について以下をご覧ください）。
 
 ## 概要
 
-SavedModel は TensorFlow のトレーニング済みモデルまたはモデルピース用の標準的なシリアル化形式です。モデルのトレーニング済みの重みとともに、計算を実行するための正確な TensorFlow 演算が含まれます。それを作成したコードに依存することなく使用することが可能です。特に、TensorFlow 演算は共通の基本言語であるため、Keras のような高レベルのモデル構築 API で再利用できます。
+SavedModel は TensorFlow のトレーニング済みモデルまたはモデルピース用の標準的なシリアル化形式です。モデルのトレーニング済みの重みとともに、計算を実行するための正確な TensorFlow 演算が含まれるため、それを作成したコードに依存することなく使用することが可能です。特に、TensorFlow 演算は共通の基本言語であるため、Keras のような高レベルのモデル構築 API で再利用できます。
 
 ## Keras から保存する
 
@@ -33,7 +35,7 @@ piece_to_share = tf.keras.Model(sharing_input, sharing_output)
 piece_to_share.save(..., include_optimizer=False)
 ```
 
-GitHub の [TensorFlow モデル](https://github.com/tensorflow/models)は、BERT に 1 番目のアプローチを使用しています（[nlp/bert/bert_models.py](https://github.com/tensorflow/models/blob/master/official/nlp/bert/bert_models.py) と [nlp/bert/export_tfhub.py](https://github.com/tensorflow/models/blob/master/official/nlp/bert/export_tfhub.py) をご覧になり、`core_model` と `pretrain_model` の分割に注意してください）。また、ResNet には 2 番目のアプローチを使用しています（[vision/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/vision/image_classification/resnet/tfhub_export.py) をご覧ください）。
+GitHub の [TensorFlow モデル](https://github.com/tensorflow/models)は、BERT に 1 番目のアプローチを使用しています（[nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py) をご覧の上、エクスポートするための `core_model` とチェックポイントを復元するための `pretrainer` で分割されているところに注意してください）。また、ResNet には 2 番目のアプローチを使用しています（[vision/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/vision/image_classification/resnet/tfhub_export.py) をご覧ください）。
 
 ## 低レベル TensorFlow から保存する
 
@@ -77,12 +79,14 @@ Keras モデルから保存すると、ファインチューニングのすべ�
 
 各レイヤーの重み正則化器は保存されますが（正則化の強度計数とともに）、オプティマイザ内の重み正則化（`tf.keras.optimizers.Ftrl.l1_regularization_strength=...)` など）は失われます。SavedModel のコンシューマに適宜アドバイスを提供してください。
 
+<a name="tensorflow-model-garden"></a>
+
 ## TensorFlow Model Garden
 
 [TensorFlow Model Garden](https://github.com/tensorflow/models/tree/master/official) リポジトリには、[tfhub.dev](https://tfhub.dev/) にアップロードするために再利用可能な TF2 SavedModel を作成している、多くの例があります。
 
 ## コミュニティリクエスト
 
-TensorFlow Hub チームは、tfhub.dev で利用可能なアセットのごく一部を生成しています。モデルの作成は、主に Google や Deepmind の研究者、企業や学術研究機関、ML 愛好家の方々に依存しています。そのため、特定のアセットに対するコミュニティの要求を満たす保証や、新しいアセットが利用可能になるまでの時間の見積もりはできません。
+TensorFlow Hub チームは、tfhub.dev で利用可能なアセットのごく一部を生成しています。モデルの作成は、主に Google や Deepmind の研究者、企業や学術研究機関、ML 愛好家の方々を頼りとしています。そのため、特定のアセットに対するコミュニティの要求を満たす保証や、新しいアセットが利用可能になるまでの時間の見積もりはできません。
 
-以下の[コミュニティモデルリクエスト マイルストーン](https://github.com/tensorflow/hub/milestone/1)には、コミュニティからの特定のアセットのリクエストが含まれています。もし、ご自身やお知り合いでアセットを制作して tfhub.dev で共有したいという方があれば、どうぞ提供してご参加ください！
+以下の[コミュニティモデルリクエスト マイルストーン](https://github.com/tensorflow/hub/milestone/1)には、コミュニティからの特定のアセットのリクエストが含まれています。ご自身やお知り合いでアセットを制作して tfhub.dev で共有したいという方があれば、ぜひご提供ください！
