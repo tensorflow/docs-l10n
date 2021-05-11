@@ -51,7 +51,7 @@ assets
 
 모델 설명서는 일부 애드온 구문이 있는 마크다운 파일입니다. 최소 예제 또는 [보다 현실적인 예제 마크다운 파일](https://github.com/tensorflow/tfhub.dev/blob/master/examples/docs/tf2_model_example.md)은 아래 예제를 참조하세요.
 
-### Example documentation
+### 예시 설명서
 
 고품질 모델 설명서에는 코드 조각, 모델의 훈련 방식 및 의도된 사용 방법이 포함되어 있습니다. 또한 사용자가 tfhub.dev에서 모델을 보다 빠르게 찾을 수 있도록 [아래 설명된](#model-markdown-specific-metadata-properties) 모델별 메타데이터 속성을 사용해야 합니다.
 
@@ -88,8 +88,8 @@ tfhub.dev를 사용하면 TensorFlow 모델의 TF.js, TFLite 및 Coral 배포를
 마크다운 파일의 첫 번째 줄에서 배포 형식의 유형을 지정해야 합니다.
 
 - TF.js 배포용: `# Tfjs publisher/model/version`
-- `# Lite publisher/model/version` for Lite deployments
-- `# Coral publisher/model/version` for Coral deployments
+- Lite 배포용: `# Lite publisher/model/version`
+- Coral 배포용: `# Coral publisher/model/version`
 
 다양한 배포 형식이 tfhub.dev에서 같은 모델 페이지에 표시되는 것이 좋습니다. 주어진 TF.js, TFLite 또는 Coral 배포를 TensorFlow 모델에 연결하려면 parent-model 태그를 지정하세요.
 
