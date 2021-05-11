@@ -56,22 +56,19 @@ Note: The TensorFlow Lite Interpreter must be created on the same thread as when
 <p data-md-type="paragraph">コードジェネレータの有用性は、TensorFlow Lite モデルのメタデータエントリの完全性に依存します。codegen ツールが各フィールドを解析する方法については、<a href="https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs" data-md-type="link">metadata_schema.fbs</a> の関連フィールドの下にある<code>&lt;Codegen usage&gt;</code>セクションを参照してください。</p>
 <h3 data-md-type="header" data-md-header-level="3">ラッパーコードを生成する</h3>
 <p data-md-type="paragraph">端末に以下のツールをインストールする必要があります。</p>
-<pre data-md-type="block_code" data-md-language="sh"><code class="language-sh">pip install tflite-support
-</code></pre>
+<pre data-md-type="block_code" data-md-language="sh"><code class="language-sh">pip install tflite-support</code></pre>
 <p data-md-type="paragraph">完了すると、次の構文を使用してコードジェネレータを使用できます。</p>
 <pre data-md-type="block_code" data-md-language="sh"><code class="language-sh">tflite_codegen --model=./model_with_metadata/mobilenet_v1_0.75_160_quantized.tflite \
     --package_name=org.tensorflow.lite.classify \
     --model_class_name=MyClassifierModel \
-    --destination=./classify_wrapper
-</code></pre>
+    --destination=./classify_wrapper</code></pre>
 <p data-md-type="paragraph">結果のコードは、宛先ディレクトリに配置されます。<a href="https://colab.research.google.com/" data-md-type="link">Google Colab</a> またはその他のリモート環境を使用している場合は、結果を zip アーカイブに圧縮して Android Studio プロジェクトにダウンロードする方が簡単な場合があります。</p>
 <pre data-md-type="block_code" data-md-language="python"><code class="language-python"># Zip up the generated code
 !zip -r classify_wrapper.zip classify_wrapper/
 
 # Download the archive
 from google.colab import files
-files.download('classify_wrapper.zip')
-</code></pre>
+files.download('classify_wrapper.zip')</code></pre>
 <h3 data-md-type="header" data-md-header-level="3">生成されたコードを使用する</h3>
 <h4 data-md-type="header" data-md-header-level="4">ステップ 1：生成されたコードをインポートする</h4>
 <p data-md-type="paragraph">必要に応じて、生成されたコードをディレクトリ構造に解凍します。生成されたコードのルートは、<code data-md-type="codespan">SRC_ROOT</code>であると想定されます。</p>
@@ -82,11 +79,9 @@ files.download('classify_wrapper.zip')
 <p data-md-type="paragraph">Android セクションの下に、以下を追加します。</p>
 <pre data-md-type="block_code" data-md-language="build"><code class="language-build">aaptOptions {
    noCompress "tflite"
-}
-</code></pre>
+}</code></pre>
 <p data-md-type="paragraph">依存関係セクションの下に、以下を追加します。</p>
-<pre data-md-type="block_code" data-md-language="build"><code class="language-build">implementation project(":classify_wrapper")
-</code></pre>
+<pre data-md-type="block_code" data-md-language="build"><code class="language-build">implementation project(":classify_wrapper")</code></pre>
 <h4 data-md-type="header" data-md-header-level="4">ステップ 3：モデルの使用</h4>
 <pre data-md-type="block_code" data-md-language="java"><code class="language-java">// 1. Initialize the model
 MyClassifierModel myImageClassifier = null;
@@ -107,9 +102,8 @@ if(null != myImageClassifier) {
     MyClassifierModel.Outputs outputs = myImageClassifier.run(inputs);
 
     // 4. Retrieve the result
-    Map&lt;String, Float&gt; labeledProbability = outputs.getProbability();
-}
-</code></pre>
+    Map labeledProbability = outputs.getProbability();
+}</code></pre>
 <h3 data-md-type="header" data-md-header-level="3">モデル推論の高速化</h3>
 <p data-md-type="paragraph">生成されたコードを使用すると、開発者は<a href="../performance/delegates.md" data-md-type="link">デリゲート</a>とスレッド数を使用してコードを高速化できます。これは、次の 3 つのパラメータを使用し、モデルオブジェクトを開始するときに設定できます。</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
@@ -123,11 +117,9 @@ if(null != myImageClassifier) {
     myImageClassifier = new MyClassifierModel(this, Model.Device.NNAPI, 3);
 } catch (IOException io){
     // Error reading the model
-}
-</code></pre>
+}</code></pre>
 <h3 data-md-type="header" data-md-header-level="3">トラブルシューティング</h3>
 <p data-md-type="paragraph">「java.io.FileNotFoundException: This file can not be opened as a file descriptor; it is probably compressed」エラーが発生する場合、ライブラリモジュールを使用するアプリモジュールの Android セクションの下に次の行を挿入します。</p>
 <pre data-md-type="block_code" data-md-language="build"><code class="language-build">aaptOptions {
    noCompress "tflite"
-}
-</code></pre>
+}</code></pre>
