@@ -6,9 +6,9 @@
 
 選択ビルドは、次の 3 つの演算ライブラリに適用されます。
 
-1. [TensorFlow Lite 組み込み演算ライブラリ](https://www.tensorflow.org/lite/guide/ops_compatibility)
-2. [TensorFlow Lite カスタム演算](https://www.tensorflow.org/lite/guide/ops_custom)
-3. [Select TensorFlow 演算ライブラリ](https://www.tensorflow.org/lite/guide/ops_select)
+1. [TensorFlow Lite built-in ops library](https://www.tensorflow.org/lite/guide/ops_compatibility)
+2. [TensorFlow Lite custom ops](https://www.tensorflow.org/lite/guide/ops_custom)
+3. [Select TensorFlow ops library](https://www.tensorflow.org/lite/guide/ops_select)
 
 次の表は、いくつかの一般的なユースケースでの選択的ビルドの影響を示しています。
 
@@ -22,7 +22,9 @@
     </tr>
   </thead>
   <tr>
-    <td rowspan="2"><a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a></td>
+    <td rowspan="2">
+      <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>
+    </td>
     <td rowspan="2">画像分類</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar (296,635 バイト)</td>
@@ -32,7 +34,9 @@
     <td>tensorflow-lite.aar (382,892 バイト)</td>
   </tr>
   <tr>
-    <td rowspan="2"><a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a></td>
+    <td rowspan="2">
+      <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a>
+    </td>
     <td rowspan="2">音声のピッチ抽出</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar (375,813 bytes)<br>tensorflow-lite-select-tf-ops.aar (1,676,380 バイト)</td>
@@ -42,7 +46,9 @@
     <td>tensorflow-lite.aar (421,826 bytes)<br>tensorflow-lite-select-tf-ops.aar (2,298,630 バイト)</td>
   </tr>
   <tr>
-    <td rowspan="2"><a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a></td>
+    <td rowspan="2">
+      <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a>
+    </td>
     <td rowspan="2">動画分類</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar (240,085 bytes)<br>tensorflow-lite-select-tf-ops.aar (1,708,597 バイト)</td>
@@ -91,7 +97,13 @@ sh tensorflow/lite/tools/build_aar.sh \
 
 ## Docker を使用して TensorFlow Lite を選択的に構築する
 
-このセクションでは、ローカルマシンに [Docker](https://docs.docker.com/get-docker/) をインストールし、[TensorFlow Lite Docker ファイルを構築](https://www.tensorflow.org/lite/guide/android#set_up_build_environment_using_docker)していることを前提としています。
+このセクションでは、ローカルマシンに [Docker](https://docs.docker.com/get-docker/) をインストールし、[こちら](https://www.tensorflow.org/lite/guide/build_android#set_up_build_environment_using_docker)の TensorFlow Lite Docker ファイルをダウンロードしていることを前提としています。
+
+上記の Dockerfile をダウンロードした後、次のコマンドを実行して Docker イメージを構築できます。
+
+```shell
+docker build . -t tflite-builder -f tflite-android.Dockerfile
+```
 
 ### Android プロジェクトの AAR ファイルを構築する
 
@@ -109,10 +121,13 @@ chmod +x build_aar_with_docker.sh
 sh build_aar_with_docker.sh \
   --input_models=/a/b/model_one.tflite,/c/d/model_two.tflite \
   --target_archs=x86,x86_64,arm64-v8a,armeabi-v7a \
-  --checkpoint=master
+  --checkpoint=master \
+  [--cache_dir=<path to cache directory>]
 ```
 
-`チェックポイント`フラグは、ライブラリを構築する前に確認する TensorFlow リポジトリのコミット、ブランチ、またはタグです。上記のコマンドは、TensorFlow Lite 組み込みおよびカスタム演算用の AAR ファイル`tensorflow-lite.aar`を生成します。また、オプションで、現在のディレクトリにある Select TensorFlow 演算用の AAR ファイル`tensorflow-lite-select-tf-ops.aar`を生成します。
+`チェックポイント`フラグは、ライブラリを構築する前に確認する TensorFlow リポジトリのコミット、ブランチ、またはタグです。デフォルトでは、最新のリリースブランチです。上記のコマンドは、TensorFlow Lite 組み込みおよびカスタム演算用の AAR ファイル`tensorflow-lite.aar`を生成します。また、オプションで、現在のディレクトリにある Select TensorFlow 演算用の AAR ファイル`tensorflow-lite-select-tf-ops.aar`を生成します。
+
+--cache_dir は、キャッシュディレクトリを指定します。 指定しない場合、スクリプトはキャッシュ用の現在の作業ディレクトリの下に`bazel-build-cache`という名前のディレクトリを作成します。
 
 ## プロジェクトに AAR ファイルを追加する
 
