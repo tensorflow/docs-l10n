@@ -131,7 +131,7 @@ let interpreter = try Interpreter(modelPath: modelPath,
 <p data-md-type="paragraph">FullyConnected（別名 Dense または InnerProduct）</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">重みやバイアスは（存在する場合）定数である必要があります。</li>
-<li data-md-type="list_item" data-md-list-type="unordered">Only supports single-batch case. Input dimensions should be 1, except the last dimension.</li>
+<li data-md-type="list_item" data-md-list-type="unordered">単一バッチケースのみをサポートします。入力次元は、最後の次元以外は 1 である必要があります。</li>
 </ul>
 </li>
 <li data-md-type="list_item" data-md-list-type="unordered">Hardswish</li>
