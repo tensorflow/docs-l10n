@@ -24,7 +24,7 @@
 
 ML Model Binding を利用すると、開発者はデリゲートや様々なスレッドを使用してコードを高速化できます。
 
-Note: The TensorFlow Lite Interpreter must be created on the same thread as when is is run. Otherwise, TfLiteGpuDelegate Invoke: GpuDelegate must run on the same thread where it was initialized. may occur.
+注意: TensorFlow Lite インタープリタは、実行時と同じスレッドで作成する必要があります。そうでないと、「TfLiteGpuDelegate Invoke: GpuDelegate must run on the same thread where it was initialized.」が表示される可能性があります。
 
 ステップ1.　モジュール`build.gradle`ファイルに、次の依存関係が含まれていることを確認します。
 
