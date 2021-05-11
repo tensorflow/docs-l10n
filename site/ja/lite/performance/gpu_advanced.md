@@ -180,13 +180,11 @@ TFLGpuDelegateDelete(delegate);
 options.experimental_flags = TFLITE_GPU_EXPERIMENTAL_FLAGS_NONE;
 
 auto* delegate = TfLiteGpuDelegateV2Create(options);
-if (interpreter-&gt;ModifyGraphWithDelegate(delegate) != kTfLiteOk) return false;
-</code></pre>
+if (interpreter-&gt;ModifyGraphWithDelegate(delegate) != kTfLiteOk) return false;</code></pre>
 <p data-md-type="paragraph"><strong data-md-type="double_emphasis">Java API</strong></p>
 <pre data-md-type="block_code" data-md-language="java"><code class="language-java">GpuDelegate delegate = new GpuDelegate(new GpuDelegate.Options().setQuantizedModelsAllowed(false));
 
-Interpreter.Options options = (new Interpreter.Options()).addDelegate(delegate);
-</code></pre>
+Interpreter.Options options = (new Interpreter.Options()).addDelegate(delegate);</code></pre>
 <h4 data-md-type="header" data-md-header-level="4">iOS</h4>
 <p data-md-type="paragraph">iOS API は、デフォルトで量子化モデルをサポートしています。無効にするには、次の手順に従います。</p>
 <div data-md-type="block_html">
@@ -195,10 +193,9 @@ Interpreter.Options options = (new Interpreter.Options()).addDelegate(delegate);
     <section>
       <h3>Swift</h3>
       <p></p>
-<pre class="prettyprint lang-swift">    var options = MetalDelegate.Options()
-    options.isQuantizationEnabled = false
-    let delegate = MetalDelegate(options: options)
-      </pre>
+<pre class="prettyprint lang-swift">var options = MetalDelegate.Options()
+options.isQuantizationEnabled = false
+let delegate = MetalDelegate(options: options)</pre>
     </section>
     <section>
       <h3>Objective-C</h3>
