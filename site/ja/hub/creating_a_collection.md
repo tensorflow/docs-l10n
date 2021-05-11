@@ -1,14 +1,14 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-12' review_interval: '6 months' } *-->
 
 # コレクションを作成する
 
 コレクションは、パブリッシャーが関連するモデルをバンドルすることにより、ユーザーの検索体験の向上を可能にする tfhub.dev の機能です。
 
-tfhub.dev の[すべてのコレクションリスト](https://tfhub.dev/s?subtype=model-family)をご覧ください。
+[すべてのコレクションリスト](https://tfhub.dev/s?subtype=model-family)は tfhub.dev をご覧ください。
 
-TensorFlow Hub リポジトリのコレクションファイルの正しい場所は次の通りです: [hub/tfhub_dev/assets/](https://github.com/tensorflow/hub/tree/master/tfhub_dev/assets)/<publisher_name>/<collection_name>/<collection_name.md>
+[github.com/tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) リポジトリのコレクションファイルの正しい場所は [assets/docs](https://github.com/tensorflow/tfhub.dev/tree/master/assets/docs)/<b>&lt;publisher_name&gt;</b>/collections/<b>&lt;collection_name&gt;</b>/<b>1</b>.md です。
 
-パブリッシャードキュメントの最小の例をご覧ください。
+次は、assets/docs/<b>vtab</b>/collections/<b>benchmark</b>/<b>1</b>.md に入れられるごく小さな例です。1 行目のコレクションの名前がファイルの名前より短いところに注意してください。
 
 ```markdown
 # Collection vtab/benchmark/1
