@@ -30,7 +30,7 @@ TensorFlow Lite の推論は、通常次の手順で行います。
 
 ## サポートされているプラットフォーム
 
-TensorFlow inference APIs are provided for most common mobile/embedded platforms such as [Android](#android-platform), [iOS](#ios-platform) and [Linux](#linux-platform), in multiple programming languages.
+TensorFlow の推論 API は、[Android](#android-platform)、[iOS](#ios-platform)、および、[Linux](#linux-platform) などの最も一般的なモバイル/組み込みプラットフォーム向けに複数のプログラミング言語で提供されています。
 
 ほとんどの場合、API の設計は使いやすさよりもパフォーマンスを反映しています。TensorFlow Lite は小型デバイスでの高速推論向けに設計されているため、API が利便性を犠牲にして不要なコピーを回避しようとするのも驚くことではありません。同様に、TensorFlow APIs との一貫性は、明確な目標ではなく、言語間のバリアンスが期待されます。
 
@@ -56,7 +56,7 @@ iOS では、TensorFlow Lite は [Swift](https://www.tensorflow.org/code/tensorf
 
 ### Linux プラットフォーム
 
-On Linux platforms (including [Raspberry Pi](build_rpi.md)), you can run inferences using TensorFlow Lite APIs available in [C++](#load-and-run-a-model-in-c) and [Python](#load-and-run-a-model-in-python), as shown in the following sections.
+Linux プラットフォーム（[Raspberry Pi](build_rpi.md) を含む）では、次のセクションで説明される通り、[C++](#load-and-run-a-model-in-c) と [Python](#load-and-run-a-model-in-python) で提供されている TensorFlow Lite API を使用して推論を実行できます。
 
 ## モデルを実行する
 
@@ -92,7 +92,7 @@ public Interpreter(@NotNull MappedByteBuffer mappedByteBuffer);
 
 いずれの場合でも、有効な TensorFlow Lite モデルを提供しない場合、API によって `IllegalArgumentException` がスローされてしまいます。`MappedByteBuffer` を使用して `Interpreter` を初期化したら、`Interpreter` が存続する限り、変更してはいけません。
 
-The preferred way to run inference on a model is to use signatures - Available for models converted starting Tensorflow 2.5
+モデルで推論を実行するためには、シグネチャを使用することが推薦されます。これは、Tensorflow 2.5 以降で変換されたモデルで使用可能です。
 
 ```Java
 try (Interpreter interpreter = new Interpreter(file_of_tensorflowlite_model)) {
@@ -105,15 +105,15 @@ try (Interpreter interpreter = new Interpreter(file_of_tensorflowlite_model)) {
 }
 ```
 
-The `runSignature` method takes three arguments:
+`runSignature` メソッドは以下の3つの引数を取ります。
 
-- **Inputs** : map for inputs from input name in the signature to an input object.
+- **入力** : 署名の入力名から入力オブジェクトへの入力のマップ。
 
-- **Outputs** : map for output mapping from output name in signature to output data.
+- **出力** : 署名の出力名から出力データへの出力マッピングのマップ。の出力名から出力データへの出力マッピングのマップ。
 
-- **Signature Name** [optional]: Signature name (Can be left empty if the model has single signature).
+- **シグネチャ名** [オプション]: シグネチャ名（モデルに単一のシグネチャがある場合は空のままにすることができます）。
 
-Another way to run an inference when the model doesn't have a defined signatures. Simply call `Interpreter.run()`. For example:
+また、モデルに定義されたシグネチャがない場合に推論を実行するには、`Interpreter.run()` を実行します。次はその例を示します。
 
 ```java
 try (Interpreter interpreter = new Interpreter(file_of_a_tensorflowlite_model)) {
@@ -380,7 +380,7 @@ float* output = interpreter->typed_output_tensor<float>(0);
 
 次の例では、Python インタプリタを使用して `.tflite` ファイルを読み込み、ランダムな入力データで推論を実行する方法を示します。
 
-This example is recommended if you're converting from SavedModel with a defined SignatureDef. Available starting from TensorFlow 2.5
+この例は、定義された SignatureDef がある SavedModel <br> から変換する場合に推奨されます。これは、TensorFlow 2.5 以降で利用できます。
 
 ```python
 class TestModel(tf.Module):
@@ -427,7 +427,7 @@ output = my_signature(x=tf.constant([1.0], shape=(1,10), dtype=tf.float32))
 print(output['result'])
 ```
 
-Another example if the model doesn't have SignatureDefs defined.
+モデルに定義された SignatureDefs がない場合、
 
 ```python
 import numpy as np
