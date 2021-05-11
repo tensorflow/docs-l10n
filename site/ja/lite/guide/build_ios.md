@@ -2,13 +2,13 @@
 
 このドキュメントでは、TensorFlow Lite iOS ライブラリを独自に構築する方法について説明します。通常、TensorFlow Lite iOS ライブラリをローカルで構築する必要はありません。使用するだけであれば、TensorFlow Lite CocoaPods の構築済みの安定リリースまたはナイトリーリリースを使用することが最も簡単な方法といえます。iOS プロジェクトでこれらを使用する方法の詳細については、[iOS クイックスタート](ios.md)を参照してください。
 
-## Building locally
+## ローカルで構築する
 
-In some cases, you might wish to use a local build of TensorFlow Lite, for example when you want to make local changes to TensorFlow Lite and test those changes in your iOS app or you prefer using static framework to our provided dynamic one. To create a universal iOS framework for TensorFlow Lite locally, you need to build it using Bazel on a macOS machine.
+TensorFlow Lite にローカルの変更を加え、iOS アプリでそれらの変更をテストする場合や提供されている動的フレームワークより静的フレームワークを使用したい場合などに、TensorFlow Lite のローカルビルドを使用する場合があります。TensorFlow Lite のユニバーサル iOS フレームワークをローカルで作成するには、macOS マシンで Bazel を使用して構築する必要があります。
 
 ### Xcode をインストールする
 
-If you have not already, you will need to install Xcode 8 or later and the tools using `xcode-select`:
+Xcode 8 以降と `xcode-select` を使用するツールをインストールしていない場合は、まずそれらをインストールする必要があります。
 
 ```sh
 xcode-select --install
@@ -22,35 +22,35 @@ sudo xcodebuild -license accept
 
 ### Bazel をインストールする
 
-Bazel is the primary build system for TensorFlow. Install Bazel as per the [instructions on the Bazel website](https://docs.bazel.build/versions/master/install-os-x.html). Make sure to choose a version between `_TF_MIN_BAZEL_VERSION` and `_TF_MAX_BAZEL_VERSION` in [`configure.py` file](https://github.com/tensorflow/tensorflow/blob/master/configure.py) at the root of `tensorflow` repository.
+Bazel は TensorFlow の主要なビルドシステムです。[Bazel Web サイトの指示](https://docs.bazel.build/versions/master/install-os-x.html)に従って Bazel をインストールします。`tensorflow`リポジトリのルートの [`configure.py` ファイル](https://github.com/tensorflow/tensorflow/blob/master/configure.py)から `_TF_MIN_BAZEL_VERSION` または `_TF_MAX_BAZEL_VERSION` を選択します。
 
 ### WORKSPACE と .bazelrc の構成
 
-Run the `./configure` script in the root TensorFlow checkout directory, and answer "Yes" when the script asks if you wish to build TensorFlow with iOS support.
+ルート TensorFlow チェックアウトディレクトリで `./configure` スクリプトを実行し、iOS サポートで TensorFlow を構築するかどうかを尋ねられたら、「Yes」と答えます。
 
-### Build TensorFlowLiteC dynamic framework (recommended)
+### TensorFlowLiteC 動的フレームワークの構築（推奨）
 
-Note: This step is not necessary if (1) you are using Bazel for your app, or (2) you only want to test local changes to the Swift or Objective-C APIs. In these cases, skip to the [Use in your own application](#use_in_your_own_application) section below.
+注意: このステップは、（1）アプリに Bazel を使用している場合、または（2）Swift または Objective-C API に対するローカルの変更のみをテストする場合は必要ありません。このような場合は、以下の[独自のアプリで使用する](#use_in_your_own_application)セクションに進んでください。
 
-Once Bazel is properly configured with iOS support, you can build the `TensorFlowLiteC` framework with the following command.
+Bazel が iOS サポートで適切に設定されたら、次のコマンドで `TensorFlowLiteC` フレームワークを構築できます。
 
 ```sh
 bazel build --config=ios_fat -c opt \
   //tensorflow/lite/ios:TensorFlowLiteC_framework
 ```
 
-This command will generate the `TensorFlowLiteC_framework.zip` file under `bazel-bin/tensorflow/lite/ios/` directory under your TensorFlow root directory. By default, the generated framework contains a "fat" binary, containing armv7, arm64, and x86_64 (but no i386). To see the full list of build flags used when you specify `--config=ios_fat`, please refer to the iOS configs section in the [`.bazelrc` file](https://github.com/tensorflow/tensorflow/blob/master/.bazelrc).
+このコマンドは、TensorFlow ルートディレクトリにある `bazel-bin/tensorflow/lite/ios/` ディレクトリに `TensorFlowLiteC_framework.zip` ファイルを生成します。デフォルトでは、生成されたフレームワークには、armv7、arm64、x86_64（i386 は含まない）を含む「ファット」バイナリが含まれています。`--config=ios_fat`を指定するときに使用されるビルドフラグの完全なリストを確認するには、[`.bazelrc` ファイル](https://github.com/tensorflow/tensorflow/blob/master/.bazelrc)の iOS 構成セクションを参照してください。
 
-### Build TensorFlowLiteC static framework
+### TensorFlowLiteC 静的フレームワークの構築
 
-By default, we only distribute the dynamic framework via Cocoapods. If you want to use the static framework instead, you can build the `TensorFlowLiteC` static framework with the following command:
+デフォルトでは、Cocoapod 経由でのみ動的フレームワークを配布していますが、代わりに静的フレームワークを使用する場合は、次のコマンドを使って `TensorFlowLiteC` 静的フレームワークを構築できます。
 
 ```
 bazel build --config=ios_fat -c opt \
   //tensorflow/lite/ios:TensorFlowLiteC_static_framework
 ```
 
-The command will generate a file named `TensorFlowLiteC_static_framework.zip` under `bazel-bin/tensorflow/lite/ios/` directory under your TensorFlow root directory. This static framework can be used in the exact same way as the dynamic one.
+このコマンドは、`TensorFlowLiteC_static_framework.zip` というファイルを TensorFlow ルートディレクトリの下にある `bazel-bin/tensorflow/lite/ios/` ディレクトリに生成します。この静的フレームワークは、動的フレームワークとまったく同じ方法で使用することができます。
 
 ## 独自のアプリで使用する
 
@@ -62,7 +62,7 @@ TensorFlow Lite には 3 つの CocoaPods があります。
 - `TensorFlowLiteObjC`: TensorFlow Lite の Objective-C API を提供します。
 - `TensorFlowLiteC`: TensorFlow Lite コアランタイムを組み込み、上記の 2 つのポッドで使用されるベース C API を公開する共通ベースポッド。ユーザーが直接使用するためのものではありません。
 
-As a developer, you should choose either `TensorFlowLiteSwift` or `TensorFlowLiteObjC` pod based on the language in which your app is written, but not both. The exact steps for using local builds of TensorFlow Lite differ, depending on which exact part you would like to build.
+開発者は、アプリの記述言語に基づいて、`TensorFlowLiteSwift` または `TensorFlowLiteObjC` ポッドのいずれかを選択する必要がありますが、両方を選択することはできません。TensorFlow Lite のローカルビルドを使用するための正確な手順は、ビルドする正確なパーツによって異なります。
 
 #### ローカル Swift または Objective-C API の使用
 
@@ -70,25 +70,17 @@ CocoaPods を使用していて、TensorFlow Lite の [Swift API](https://github
 
 1. `tensorflow`チェックアウトの Swift または Objective-C API に変更を加えます。
 
-2. Open the `TensorFlowLite(Swift|ObjC).podspec` file, and update this line:
-     `s.dependency 'TensorFlowLiteC', "#{s.version}"`
-     to be:
-     `s.dependency 'TensorFlowLiteC', "~> 0.0.1-nightly"`
-     This is to ensure that you are building your Swift or Objective-C APIs against the latest available nightly version of `TensorFlowLiteC` APIs (built every night between 1-4AM Pacific Time) rather than the stable version, which may be outdated compared to your local `tensorflow` checkout. Alternatively, you could choose to publish your own version of `TensorFlowLiteC` and use that version (see [Using local TensorFlow Lite core](#using_local_tensorflow_lite_core) section below).
+2. `TensorFlowLite(Swift|ObjC).podspec`ファイルを開き、<br> `s.dependency 'TensorFlowLiteC', "#{s.version}"` <br> を次のように変更します。<br> `s.dependency 'TensorFlowLiteC', "~> 0.0.1-nightly"` <br> これは、安定版ではなく、`TensorFlowLiteC` API の最新の利用可能なナイトリ―版 (毎晩 1 時から午前 4 時の間に構築される) API に対して Swift または Objective-C API を構築していることを確認するためです。安定版はローカルの `tensorflow` チェックアウトと比較して古くなっている可能性があります。または、独自のバージョンの `TensorFlowLiteC` を公開し、そのバージョンを使用することもできます (以下の[ローカル TensorFlow Lite コアの使用](#using_local_tensorflow_lite_core)セクションを参照してください)。
 
-3. In the `Podfile` of your iOS project, change the dependency as follows to point to the local path to your `tensorflow` root directory.
-     For Swift:
-     `pod 'TensorFlowLiteSwift', :path => '<your_tensorflow_root_dir>'`
-     For Objective-C:
-     `pod 'TensorFlowLiteObjC', :path => '<your_tensorflow_root_dir>'`
+3. iOS プロジェクトの `Podfile` で、依存関係を次のように変更して、`tensorflow` ルートディレクトリへのローカルパスを指すようにします。<br>Swift の場合: <br> `pod 'TensorFlowLiteSwift', :path => '<your_tensorflow_root_dir>'` <br> Objective-C の場合: <br> `pod 'TensorFlowLiteObjC', :path => '<your_tensorflow_root_dir>'`
 
 4. iOS プロジェクトのルートディレクトリからポッドインストールを更新します。<br> `$ pod update`
 
-5. Reopen the generated workspace (`<project>.xcworkspace`) and rebuild your app within Xcode.
+5. 生成されたワークスペース（`<project>.xcworkspace`）を再度開き、Xcode 内でアプリを再ビルドします。
 
 #### ローカル TensorFlow Lite コアの使用
 
-You can set up a private CocoaPods specs repository, and publish your custom `TensorFlowLiteC` framework to your private repo. You can copy this [podspec file](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/ios/TensorFlowLiteC.podspec) and modify a few values:
+プライベート CocoaPods 仕様リポジトリをセットアップし、カスタム `TensorFlowLiteC` フレームワークをプライベートリポジトリに公開します。この [podspe ファイル](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/experimental/ios/TensorFlowLiteC.podspec)をコピーして、いくつかの値を変更できます。
 
 ```ruby
   ...
@@ -101,11 +93,11 @@ You can set up a private CocoaPods specs repository, and publish your custom `Te
   ...
 ```
 
-After creating your own `TensorFlowLiteC.podspec` file, you can follow the [instructions on using private CocoaPods](https://guides.cocoapods.org/making/private-cocoapods.html) to use it in your own project. You can also modify the `TensorFlowLite(Swift|ObjC).podspec` to point to your custom `TensorFlowLiteC` pod and use either Swift or Objective-C pod in your app project.
+独自の `TensorFlowLiteC.podspec` ファイルを作成したら、[プライベート CocoaPods の使用に関する指示](https://guides.cocoapods.org/making/private-cocoapods.html)に従って、独自のプロジェクトで使用できます。また、`TensorFlowLite(Swift|ObjC).podspec` を変更して、カスタムの `TensorFlowLiteC` ポッドをポイントし、アプリプロジェクトで Swift または Objective-C ポッドを使用することもできます。
 
 ### Bazel 開発者
 
-If you are using Bazel as the main build tool, you can simply add `TensorFlowLite` dependency to your target in your `BUILD` file.
+メインビルドツールとして Bazel を使用している場合は、`BUILD` ファイルのターゲットに `TensorFlow Lite` 依存関係を追加するだけです。
 
 Swift の場合:
 
@@ -131,13 +123,13 @@ objc_library(
 
 ### Xcode プロジェクト設定を直接変更する
 
-It is highly recommended to use CocoaPods or Bazel for adding TensorFlow Lite dependency into your project. If you still wish to add `TensorFlowLiteC` framework manually, you'll need to add the `TensorFlowLiteC` framework as an embedded framework to your application project. Unzip the `TensorFlowLiteC_framework.zip` generated from the above build to get the `TensorFlowLiteC.framework` directory. This directory is the actual framework which Xcode can understand.
+TensorFlow Lite の依存関係をプロジェクトに追加するには、CocoaPods または Bazel を使用することを強くお勧めします。手動で `TensorFlowLiteC` フレームワークを追加する場合は、`TensorFlowLiteC` フレームワークを埋め込みフレームワークとしてアプリプロジェクトに追加する必要があります。上記のビルドで生成された`TensorFlowLiteC_framework.zip` を解凍して、`TensorFlowLiteC.framework` ディレクトリを取得します。このディレクトリは、Xcode が理解できる実際のフレームワークです。
 
-Once you've prepared the `TensorFlowLiteC.framework`, first you need to add it as an embedded binary to your app target. The exact project settings section for this may differ depending on your Xcode version.
+`TensorFlowLiteC.framework` を準備したら、まずそれを埋め込みバイナリとしてアプリターゲットに追加する必要があります。このための正確なプロジェクト設定セクションは、Xcode のバージョンによって異なる場合があります。
 
-- Xcode 11: Go to the 'General' tab of the project editor for your app target, and add the `TensorFlowLiteC.framework` under 'Frameworks, Libraries, and Embedded Content' section.
-- Xcode 10 and below: Go to the 'General' tab of the project editor for your app target, and add the `TensorFlowLiteC.framework` under 'Embedded Binaries'. The framework should also be added automatically under 'Linked Frameworks and Libraries' section.
+- Xcode 11: アプリターゲットのプロジェクトエディタの General タブに移動し、Franeworks, Libraries, and Embedded Contentセクションに `TensorFlowLiteC.framework` を追加します。
+- Xcode 10 以前: アプリターゲットのプロジェクトエディタのGeneral タブに移動し、Embedded Binaries の下に `TensorFlow Lite C.framework` を追加します。フレームワークは、Linked Frameworks and Libraries セクションの下にも自動的に追加されます。
 
-When you add the framework as an embedded binary, Xcode would also update the 'Framework Search Paths' entry under 'Build Settings' tab to include the parent directory of your framework. In case this does not happen automatically, you should manually add the parent directory of the `TensorFlowLiteC.framework` directory.
+フレームワークを埋め込みバイナリとして追加すると、Xcode はフレームワークの親ディレクトリを含むように Build Settings タブの Framework Search Paths エントリも更新します。これが自動的に行われない場合は、`TensorFlowLiteC.framework` ディレクトリの親ディレクトリを手動で追加する必要があります。
 
-Once these two settings are done, you should be able to import and call the TensorFlow Lite's C API, defined by the header files under `TensorFlowLiteC.framework/Headers` directory.
+これら 2 つの設定が完了すると、`TensorFlowLiteC.framework/Headers` ディレクトリにあるヘッダーファイルで定義された TensorFlow Lite の C API をインポートして呼び出すことができるようになります。
