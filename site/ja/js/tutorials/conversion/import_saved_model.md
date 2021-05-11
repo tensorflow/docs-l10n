@@ -4,8 +4,7 @@ TensorFlow GraphDef ベースのモデル（通常は Python API で作成され
 
 1. TensorFlow [SavedModel](https://www.tensorflow.org/programmers_guide/saved_model#overview_of_saving_and_restoring_models)
 2. [凍結モデル](https://www.tensorflow.org/mobile/prepare_models#how_do_you_get_a_model_you_can_use_on_mobile)
-3. [セッションバンドル](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/session_bundle/README.md)
-4. [Tensorflow Hub モジュール](https://www.tensorflow.org/hub/)
+3. [Tensorflowハブモジュール](https://www.tensorflow.org/hub/)
 
 上記の形式はすべて、[TensorFlow.js コンバータ](https://github.com/tensorflow/tfjs/tree/master/tfjs-converter)を使用して TensorFlow.js に直接読み込める形式に変換し、推論に利用することができます。
 
