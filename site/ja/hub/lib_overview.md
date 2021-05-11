@@ -14,21 +14,21 @@ print(embeddings.shape, embeddings.dtype)
 
 ## ダウンロードのキャッシュロケーションを設定する
 
-By default, `tensorflow_hub` uses a system-wide, temporary directory to cache downloaded and uncompressed models. See [Caching](caching.md) for options to use other, possibly more persistent locations.
+デフォルトでは、`tensorflow_hub` はシステム全体の一時ディレクトリを使用して、ダウンロードや圧縮されたモデルをキャッシュします。その他のより永続的なロケーションのオプションについては、[キャッシング](caching.md)をご覧ください。
 
-## API stability
+## API の安定性
 
-Although we hope to prevent breaking changes, this project is still under active development and is not yet guaranteed to have a stable API or model format.
+変更による破損を回避することに努めてはいますが、このプロジェクトは現在開発中であるため、安定した API やモデル形式を保証していません。
 
-## Fairness
+## 公平性
 
-As in all of machine learning, [fairness](http://ml-fairness.com) is an [important](https://research.googleblog.com/2016/10/equality-of-opportunity-in-machine.html) consideration. Many pre-trained models are trained on large datasets. When reusing any model, it’s important to be mindful of what data the model was trained on (and whether there are any existing biases there), and how these might impact your use of it.
+すべての機械学習と同様に、[公平性](http://ml-fairness.com)は[重要な](https://research.googleblog.com/2016/10/equality-of-opportunity-in-machine.html)考慮事項です。多くのトレーニング済みモデルは、大規模なデータセットでトレーニングされています。モデルを再利用する際は、どのデータを使ってモデルがトレーニングされたのか（およびバイアスが既存していたかどうか）、およびこのことがモデルの使用にどのような影響を与えるのかに配慮することが重要です。
 
-## Security
+## セキュリティ
 
-Since they contain arbitrary TensorFlow graphs, models can be thought of as programs. [Using TensorFlow Securely](https://github.com/tensorflow/tensorflow/blob/master/SECURITY.md) describes the security implications of referencing a model from an untrusted source.
+任意の TensorFlow グラフが含まれるため、モデルはプログラムとして捉えられます。「[TensorFlow を安全に使用する](https://github.com/tensorflow/tensorflow/blob/master/SECURITY.md)」では、信頼されないソースのモデルを参照する際のセキュリティ問題が説明されています。
 
-## Next Steps
+## 次のステップ
 
 - [ライブラリを使用する](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/tf2_saved_model.md)
 - [Reusable SavedModel](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/reusable_saved_models.md)
