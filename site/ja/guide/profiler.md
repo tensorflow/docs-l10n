@@ -8,11 +8,11 @@ Profiling helps you understand the hardware resource consumption (time and memor
 
 This guide will walk you through how to install the Profiler, the various tools available, the different modes of how the Profiler collects performance data, and some recommended best practices to optimize model performance.
 
-If you want to profile your model performance on Cloud TPUs, refer to the [Cloud TPU guide](https://cloud.google.com/tpu/docs/cloud-tpu-tools#capture_profile).
+Cloud TPU 上でモデルのパフォーマンスをプロファイリングする場合は、 [Cloud TPU のガイド](https://cloud.google.com/tpu/docs/cloud-tpu-tools#capture_profile)をご覧ください。
 
 ## プロファイラのインストールと GPU の要件
 
-Install the Profiler by downloading and running the [`install_and_run.py`](https://raw.githubusercontent.com/tensorflow/profiler/master/install_and_run.py) script from the [GitHub repository](https://github.com/tensorflow/profiler).
+[GitHub リポジトリ](https://raw.githubusercontent.com/tensorflow/profiler/master/install_and_run.py)から <a><code>install_and_run.py</code></a> スクリプトをダウンロードして実行し、プロファイラをインストールしてください。
 
 GPU 上でプロファイリングを実行するには、次の手順を行う必要があります。
 
@@ -31,7 +31,7 @@ If you don't have CUPTI on the path, prepend its installation directory to the `
 export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 ```
 
-Run the `ldconfig` command above again to verify that the CUPTI library is found.
+上記の `ldconfig` コマンドを再度実行し、CUPTI ライブラリが検出されたことを確認してください。
 
 ### 特権の問題を解消する
 
@@ -88,7 +88,7 @@ The overview page provides a top level view of how your model performed during a
 
 - **Step-time Graph -** サンプリングされたすべてのステップのデバイスステップ時間（ミリ秒単位）のグラフを表示します。各ステップは、時間を費やしている箇所によって複数のカテゴリに（別々の色で）分かれています。赤い領域は、デバイスがホストからの入力データを待機してアイドル状態であったステップ時間の部分に対応しています。緑の領域は、デバイスが実際に動作していた時間の長さを示しています。
 
-- **Top 10 TensorFlow operations on device -** Displays the on-device ops that ran the longest.
+- **デバイスでの上位 10 個の TensorFlow 演算 -** 最も多くの時間が費やされたデバイス上の演算が表示されます。
 
     各行には、演算に費やされた自己時間（すべての演算にかかった時間に占める割合）、累積時間、カテゴリ、名前が表示されます。
 
@@ -98,13 +98,13 @@ The overview page provides a top level view of how your model performed during a
     - デバイスのタイプ（GPU/TPU）
     - デバイス コアの数
 
-- **Recommendation for next steps -** Reports when a model is input bound and recommends tools you can use to locate and resolve model performance bottlenecks
+- **次の推奨ステップ -** モデルで入力処理の負荷が高くなった場合に報告され、モデルのパフォーマンス ボトルネックを特定して解消するのに使用できるツールが提案されます。
 
 <a name="input_pipeline_analyzer"></a>
 
 ### 入力パイプライン分析ツール
 
-When a TensorFlow program reads data from a file it begins at the top of the TensorFlow graph in a pipelined manner. The read process is divided into multiple data processing stages connected in series, where the output of one stage is the input to the next one. This system of reading data is called the *input pipeline*.
+TensorFlow プログラムがファイルからデータを読み込むと、TensorFlow グラフにパイプライン方式でデータが表示されます。読み取りプロセスは連続した複数のデータ処理ステージに分割され、1 つのステージの出力が次のステージの入力となります。この読み込み方式を*入力パイプライン*といいます。
 
 ファイルからレコードを読み取るための一般的なパイプラインには、次のステージがあります。
 
@@ -112,7 +112,7 @@ When a TensorFlow program reads data from a file it begins at the top of the Ten
 2. ファイルの前処理（オプション）
 3. ホストからデバイスへのファイル転送
 
-An inefficient input pipeline can severely slow down your application. An application is considered **input bound** when it spends a significant portion of time in input pipeline. Use the insights obtained from the input pipeline analyzer to understand where the input pipeline is inefficient.
+入力パイプラインが非効率な場合、アプリケーションの速度が大幅に低下する可能性があります。入力パイプラインに多くの時間が費やされている場合、このアプリケーションは**入力処理の負荷が高い**とみなされます。入力パイプライン分析ツールを使用すると、非効率な入力パイプラインを特定できます。
 
 The input pipeline analyzer tells you immediately whether your program is input bound and walks you through device- and host-side analysis to debug performance bottlenecks at any stage in the input pipeline.
 
@@ -126,27 +126,27 @@ To open the input pipeline analyzer, select **Profile**, then select **input_pip
 
 ダッシュボードには次の 3 つのセクションがあります。
 
-1. **Summary -** Summarizes the overall input pipeline with information on whether your application is input bound and, if so, by how much
-2. **Device-side analysis -** Displays detailed, device-side analysis results, including the device step-time and the range of device time spent waiting for input data across cores at each step
-3. **Host-side analysis -** Shows a detailed analysis on the host side, including a breakdown of input processing time on the host
+1. **サマリー -** 入力パイプライン全体のサマリーが表示されます。たとえば、アプリケーションで入力処理の負荷が高いかどうか表示されます。入力バウンドの場合はその量も表示されます。
+2. **デバイス側の分析 -** デバイス側の分析結果が表示されます。デバイスのステップ時間、各ステップのコアで入力データの待機に費やしたデバイス時間などが表示されます。
+3. **ホスト側の分析 -** ホスト側の分析結果が表示されます。ホスト上での入力処理時間の内訳などが表示されます。
 
 #### 入力パイプラインのサマリー
 
-The Summary reports if your program is input bound by presenting the percentage of device time spent on waiting for input from the host. If you are using a standard input pipeline that has been instrumented, the tool reports where most of the input processing time is spent.
+サマリーは、ホストからの入力待ちに費やされたデバイス時間の割合が表示されます。これにより、プログラムで入力処理の負荷が高くなっているかどうかを確認できます。インストゥルメント化された標準の入力パイプラインを使用している場合は、ツールによって多くの入力処理時間が費やされている部分が報告されます。
 
 #### デバイス側の分析
 
-The device-side analysis provides insights on time spent on the device versus on the host and how much device time was spent waiting for input data from the host.
+デバイス側の分析では、デバイスとホストの間で費やされた時間と、ホストからの入力データの待機に費やされたデバイス時間が表示されます。
 
 1. **ステップ番号に対してプロットされたステップ時間 -** サンプリングされたすべてのステップのデバイス ステップ時間（ミリ秒単位）がグラフに表示されます。各ステップは、時間が費やされた箇所によって複数のカテゴリに（別々の色で）分かれています。赤色の領域は、デバイスがホストからの入力データを待機しているステップ時間に対応します。緑色の領域は、デバイスが実際に稼働していた時間の長さを表します。
 2. **ステップ時間の統計 -** デバイス ステップ時間の平均、標準偏差、範囲（[最小、最大]）が報告されます。
 
 #### ホスト側の分析
 
-The host-side analysis reports a breakdown of the input processing time (the time spent on `tf.data` API ops) on the host into several categories:
+ホスト側の分析には、ホスト上での入力処理時間（`tf.data` API 演算に費やされた時間）の内訳が次のいくつかのカテゴリに分類されて表示されます。
 
-- **Reading data from files on demand -** Time spent on reading data from files without caching, prefetching, and interleaving
-- **Reading data from files in advance -** Time spent reading files, including caching, prefetching, and interleaving
+- **ファイルからのオンデマンドのデータ読み取り -** キャッシュ、プリフェッチ、インターリーブなしで、ファイルからデータを読み取る際に費やされた時間。
+- **ファイルからの事前のデータ読み取り -** キャッシング、プリフェッチ、インターリーブを含め、ファイルの読み取りに費やされた時間。
 - **データの前処理 -** 画像の圧縮など、前処理の演算に費やされた時間。
 - **デバイスに転送するデータのエンキュー -** デバイスへの転送前にデータがインフィード キューに追加される際に費やされた時間。
 
@@ -157,10 +157,10 @@ Expand the **Input Op Statistics** to see the statistics for individual input op
 ソース データ テーブルには、次の情報を含む各エントリが表示されます。
 
 1. **入力演算 -** 入力演算の TensorFlow 演算名が表示されます。
-2. **Count -** Shows the total number of instances of op execution during the profiling period
+2. **件数 -** プロファイリング期間中に実行された演算のインスタンスの合計数が表示されます。
 3. **合計時間（ミリ秒） -** 各インスタンスに費やされた時間の累積合計が表示されます。
-4. **Total Time % -** Shows the total time spent on an op as a fraction of the total time spent in input processing
-5. **Total Self Time (in ms) -** Shows the cumulative sum of the self time spent on each of those instances. The self time here measures the time spent inside the function body, excluding the time spent in the function it calls.
+4. **合計時間（%） -** 演算に費やされた合計時間が、入力処理に費やされた合計時間との割合で表示されます。
+5. **合計自己時間（ミリ秒） -** 各インスタンスに費やされた自己時間の累積合計が表示されます。この自己時間は、関数の本文内で費やされた時間を測定したもので、関数の本文から呼び出される関数で費やされた時間は含まれません。
 6. **合計自己時間（%）** - 合計自己時間が、入力処理に費やされた合計時間との割合で表示されます。
 7. **カテゴリ** - 入力演算の処理カテゴリが表示されます。
 
@@ -187,7 +187,7 @@ TensorFlow Stats ツールには、プロファイリングセッション中に
 
     - 子の演算を持つ演算がある場合:
 
-        - The total "accumulated" time of an op includes the time spent inside the child ops
+        - 演算の「累積」時間の合計には、子の演算内で費やされた時間が含まれています。
         - 演算の合計「自己」時間の合計には、子の演算内で費やされた時間が含まれていません。
 
     - 演算がホスト上で実行される場合:
@@ -244,7 +244,7 @@ The trace viewer contains the following sections:
 
 ##### イベント
 
-Events within the timeline are displayed in different colors; the colors themselves have no specific meaning.
+タイムライン内のイベントは異なる色で表示されます。色自体には特別な意味はありません。
 
 The trace viewer can also display traces of Python function calls in your TensorFlow program. If you use the `tf.profiler.experimental.start()` API, you can enable Python tracing by using the `ProfilerOptions` namedtuple when starting profiling. Alternatively, if you use the sampling mode for profiling, you can select the level of tracing by using the dropdown options in the **Capture Profile** dialog.
 
@@ -264,7 +264,7 @@ This tool shows performance statistics and the originating op for every GPU acce
 
 - 下のペインには、一意のカーネルと演算のペアごとに次のデータを含むテーブルが表示されます。
 
-    - A rank in descending order of total elapsed GPU duration grouped by kernel-op pair
+    - カーネルと演算のペアでグループ化された合計経過 GPU 時間の順位（降順）。
     - 起動されたカーネルの名前
     - カーネルが使用している GPU レジスタの数
     - 使用されている共有（静的+動的共有）メモリの合計サイズ（バイト単位）
@@ -440,13 +440,13 @@ In each node, "Start Time" indicates the start time of the execution. The same n
 
 ## パフォーマンスデータの収集
 
-The TensorFlow Profiler collects host activities and GPU traces of your TensorFlow model. You can configure the Profiler to collect performance data through either the programmatic mode or the sampling mode.
+TensorFlow プロファイラは、TensorFlow モデルのホストアクティビティと GPU トレースを収集します。プロファイラは、プログラムモードかサンプリングモードのいずれかでパフォーマンスデータを収集するように構成できます。
 
 ### プロファイリング API
 
 次の API を使用してプロファイリングを実行できます。
 
-- Programmatic mode using the TensorBoard Keras Callback (`tf.keras.callbacks.TensorBoard`)
+- TensorBoard Keras のコールバックを使用したプログラムモード（`tf.keras.callbacks.TensorBoard`）
 
     ```python
     # Profile from batches 10 to 15
@@ -561,13 +561,13 @@ The table below is a quick overview of which of the above use cases are supporte
 
 ## 最適なモデルパフォーマンスのベストプラクティス
 
-Use the following recommendations as applicable for your TensorFlow models to achieve optimal performance.
+TensorFlow モデルに適用可能な次の推奨事項を参照し、最適なパフォーマンスを実現してください。
 
-In general, perform all transformations on the device and ensure that you use the latest compatible version of libraries like cuDNN and Intel MKL for your platform.
+一般的にはデバイス上ですべての変換を実行し、cuDNN や Intel MKL などのご使用のプラットフォームと互換性のあるライブラリの最新バージョンを使用するようにしてください。
 
 ### 入力データパイプラインの最適化
 
-An efficient data input pipeline can drastically improve the speed of your model execution by reducing device idle time. Consider incorporating the following best practices as detailed [here](https://www.tensorflow.org/guide/data_performance) to make your data input pipeline more efficient:
+データ入力パイプラインを効率化してデバイスのアイドル時間を削減すると、モデルの実行速度を大幅に向上させることができます。データ入力パイプラインの効率を上げるため、[こちら](https://www.tensorflow.org/guide/data_performance)で説明する次のベストプラクティスを採用することを検討してください。
 
 - データをプリフェッチする
 - データ抽出を並列化する
@@ -576,14 +576,14 @@ An efficient data input pipeline can drastically improve the speed of your model
 - ユーザー定義関数をベクトル化する
 - 変換を適用する際のメモリ使用量を削減する
 
-Additionally, try running your model with synthetic data to check if the input pipeline is a performance bottleneck.
+また、合成データを使用してモデルを実行し、入力パイプラインがパフォーマンスのボトルネックになっていないかどうかを確認してください。
 
 ### デバイスのパフォーマンス改善
 
-- Increase training mini-batch size (number of training samples used per device in one iteration of the training loop)
+- トレーニングのミニバッチサイズ（トレーニングループの 1 回のイテレーションでデバイスごとに使用されるトレーニングサンプルの数）を大きくする。
 - TensorFlow 統計を使用し、デバイス上の演算がどの程度効率的に実行されているかを確認する。
-- Use `tf.function` to perform computations and optionally, enable the `experimental_compile` flag
-- Minimize host Python operations between steps and reduce callbacks. Calculate metrics every few steps instead of at every step
+- `tf.function` を使用して演算を実行し、必要に応じて `experimental_compile` フラグを有効にする。
+- ステップ間でホスト側の Python 演算を最小化し、コールバックを減らす。すべてのステップではなく、数ステップごとにメトリックを計算する。
 - デバイスの演算ユニットをビジー状態に保つ。
 - 複数のデバイスに対して並列にデータを送信する。
 - Optimize data layout to prefer channels first (e.g. NCHW over NHWC). Certain GPUs like the NVIDIA® V100 perform better with a NHWC data layout.
@@ -596,7 +596,7 @@ Additionally, try running your model with synthetic data to check if the input p
 - See the end-to-end [TensorBoard profiler tutorial](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras) to implement the advice in this guide.
 - Watch the [Performance profiling in TF 2](https://www.youtube.com/watch?v=pXHAQIhhMhI) talk from the TensorFlow Dev Summit 2020.
 
-## Known limitations
+## 既知の制限
 
 ### Profiling multiple GPUs on TensorFlow 2.2 and TensorFlow 2.3
 
