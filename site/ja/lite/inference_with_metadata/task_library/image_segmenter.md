@@ -24,6 +24,8 @@ Task Library `ImageSegmenter`API を使用して、カスタム画像セグメ�
 
 ## Java で推論を実行する
 
+Android アプリケーションで<code>ImageSegmenter</code>を使用する方法の例については、<a>画像セグメンテーションリファレンスアプリ</a>を参照してください。
+
 ### ステップ 1: Gradle の依存関係とその他の設定をインポートする
 
 `.tflite`モデルファイルを、モデルが実行される Android モジュールのアセットディレクトリにコピーします。ファイルを圧縮しないように指定し、TensorFlow Lite ライブラリをモジュールの`build.gradle`ファイルに追加します。
@@ -43,7 +45,7 @@ dependencies {
     // Other dependencies
 
     // Import the Task Vision Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.0.0-nightly'
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.1.0'
 }
 ```
 
@@ -79,6 +81,7 @@ const SegmentationResult result = image_segmenter->Segment(*frame_buffer).value(
 ## 結果の例
 
 これは、TensorFlow Hub で利用可能な一般的なセグメンテーションモデルである [deeplab_v3](https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/1) のセグメンテーション結果の例です。
+
 
 <img src="images/plane.jpg" alt="plane" width="50%">
 
@@ -117,7 +120,7 @@ this legend.
 
     - サイズ`[batch x height x width x channels]`の画像入力。
     - バッチ推論はサポートされていません (`batch`は 1 である必要があります)。
-    - RGB 入力のみがサポートされています (` channels `は 3 である必要があります)。
+    - RGB 入力のみがサポートされています (`channels`は 3 である必要があります)。
     - 型が kTfLiteFloat32 の場合、入力の正規化のためにメタデータに NormalizationOptions をアタッチする必要があります。
 
 - 出力マスクテンソル: (kTfLiteUInt8/kTfLiteFloat32)
