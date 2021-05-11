@@ -30,11 +30,11 @@ armhf（ARM32） | --config=elinux_armhf | RPI3、32ビットの RPI4
 AArch64（ARM64） | --config=elinux_aarch64 | Coral、Ubuntu 64ビット の RPI4
 :                     :                         : bit                        : |  |
 
-Note: The generated shared library requires glibc 2.28 or higher to run.
+注: 生成された共有ライブラリを実行するには、glibc 2.28 以降が必要です。
 
 次の手順は、Ubuntu 16.04.3 64 ビット PC（AMD64）および TensorFlow devel Docker イメージ [tensorflow/tensorflow:devel](https://hub.docker.com/r/tensorflow/tensorflow/tags/) でテストされています。
 
-To cross compile TensorFlow Lite with Bazel, follow the steps:
+TensorFlow Lite を Bazel とクロスコンパイルするには、次の手順に従います。
 
 #### 手順 1. Bazel をインストールする
 
@@ -52,7 +52,7 @@ git clone https://github.com/tensorflow/tensorflow.git tensorflow_src
 
 #### 手順 3. ARM バイナリを構築する
 
-##### C library
+##### C ライブラリ
 
 ```bash
 bazel build --config=elinux_aarch64 -c opt //tensorflow/lite/c:libtensorflowlite_c.so
@@ -64,7 +64,7 @@ bazel build --config=elinux_aarch64 -c opt //tensorflow/lite/c:libtensorflowlite
 
 詳細については、[TensorFlow Lite C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/README.md) ページをご覧ください。
 
-##### C++ library
+##### C++ ライブラリ
 
 ```bash
 bazel build --config=elinux_aarch64 -c opt //tensorflow/lite:libtensorflowlite.so
@@ -74,7 +74,7 @@ bazel build --config=elinux_aarch64 -c opt //tensorflow/lite:libtensorflowlite.s
 
 現在、必要なすべてのヘッダーファイルを抽出する簡単な方法はないため、TensorFlow リポジトリから tensorflow/lite/ にすべてのヘッダーファイルを含める必要があります。さらに、FlatBuffers および Abseil からのヘッダーファイルが必要になります。
 
-##### Etc
+##### その他
 
 ツールチェーンを使用してほかの Bazel ターゲットを構築することもできます。 以下は有用なターゲットです。
 
