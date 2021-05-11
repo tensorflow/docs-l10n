@@ -1,7 +1,5 @@
 # TensorFlow 演算子を選択する
 
-注意: これは実験的な機能です。
-
 TensorFlow Lite のビルトイン演算子ライブラリがサポートする TensorFlow 演算子は制限されているため、すべてのモデルが互換しているわけではありません。詳細は、[演算子の互換性](ops_compatibility.md)をご覧ください。
 
 変換を可能するために、TensorFlow Lite モデルで[特定の TensorFlow 演算子](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/flex/allowlisted_flex_ops.cc)を使用できるようにします。ただし、TensorFlow 演算子を使って TensorFlow Lite モデルを実行するには、コア TensorFlow ランタイムをプルする必要があるため、TensorFlow Lite インタプリタのバイナリサイズが増大してしまいます。Android では、必要な TensorFlow 演算子のみを選択的に構築することで、このサイズの増大を回避できます。詳細については、[バイナリサイズを縮小する](../guide/reduce_binary_size.md)をご覧ください。
@@ -30,15 +28,15 @@ open("converted_model.tflite", "wb").write(tflite_model)
 
 ### Android AAR
 
-バイナリサイズを縮小するには、[次のセクション](#building-the-android-aar)に示す方法で、独自のカスタム AAR ファイルを構築してください。バイナリサイズがそれほど大きいわけではない場合は、事前構築された、[JCenter でホストされている TensorFlow 演算子を使用した AAR](https://bintray.com/google/tensorflow/tensorflow-lite-select-tf-ops) を使用することをお勧めします。
+To reduce the binary size, please build your own custom AAR files as guided in the [next section](#building-the-android-aar). If the binary size is not a considerable concern, we recommend using the prebuilt [AAR with TensorFlow ops hosted at JCenter](https://bintray.com/google/tensorflow/tensorflow-lite-select-tf-ops).
 
 これは、次のように、`build.gradle` 依存関係に標準の TensorFlow Lite AAR とともに追加することで、指定できます。
 
 ```build
 dependencies {
-    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
     // This dependency adds the necessary TF op support.
-    implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly'
+    implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT'
 }
 ```
 
@@ -101,7 +99,9 @@ dependencies {
 
 #### CocoaPods を使用する
 
-構築済みのセレクト TF 演算子 CocoaPods をナイトリーで提供しており、`TensorFlowLiteSwift` または `TensorFlowLiteObjC` CocoaPods とともに利用することができます。
+`armv7` および `arm64` の構築済みの セレクト TF 演算 CocoaPods をナイトリーで提供しており、`TensorFlowLiteSwift` または `TensorFlowLiteObjC` CocoaPods とともに利用することができます。
+
+*注*: `x86_64`シミュレーターでセレクト TF 演算を使用する必要がある場合は、セレクト演算フレームワークを自分で構築できます 詳細については、[Bazel を使用する、および、Xcode](#using_bazel_xcode) のセクションを参照してください。
 
 ```ruby
 # In your Podfile target:
@@ -109,7 +109,7 @@ dependencies {
   pod 'TensorFlowLiteSelectTfOps', '~> 0.0.1-nightly'
 ```
 
-`pod install` を実行後、セレクト TF 演算子フレームワークをプロジェクトに強制読み込みできるように、追加のリンカーフラグを指定する必要があります。Xcode プロジェクトで、`Build Settings` -> `Other Linker Flags` に移動し、次を追加します。
+`pod install` を実行後、セレクト TF 演算子フレームワークをプロジェクトに強制読み込みできるように、追加のリンカーフラグを指定する必要があります。Xcode プロジェクトで、`Build Settings` -&gt; `Other Linker Flags` に移動し、次を追加します。
 
 ```text
 -force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
@@ -135,7 +135,7 @@ bazel build -c opt --config=ios --ios_multi_cpus=armv7,arm64,x86_64 \
 
 これにより、`bazel-bin/tensorflow/lite/experimental/ios/` ディレクトリにフレームワークが生成されます。iOS 構築ガイドの [Xcode プロジェクト設定](./build_ios.md#modify_xcode_project_settings_directly)セクションに説明された手順と同様の手順を実行し、この新しいフレームワークを Xcode プロジェクトに追加することができます。
 
-フレームワークをアプリのプロジェクトに追加したら、セレクト TF 演算子フレームワークを強制読み込みできるように、追加のリンカーフラグをアプリのプロジェクトに指定する必要があります。Xcode プロジェクトで、`Build Settings` -> `Other Linker Flags` に移動し、次を追加します。
+フレームワークをアプリのプロジェクトに追加したら、セレクト TF 演算子フレームワークを強制読み込みできるように、追加のリンカーフラグをアプリのプロジェクトに指定する必要があります。Xcode プロジェクトで、`Build Settings` -&gt; `Other Linker Flags` に移動し、次を追加します。
 
 ```text
 -force_load <path/to/your/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps>
@@ -185,10 +185,10 @@ TF 演算子のみを使用（`SELECT_TF_OPS`） | 264.5
 
 - 特定の TensorFlow 演算子は、ストック TensorFlow で通常利用可能な全セットの入力型/出力型をサポートしていない場合があります。
 - サポートされていない演算: 制御フロー演算と`HashTableV2` など、リソースから明示的な初期化が必要な演算は、まだサポートされていません。
-- サポートされていない最適化: [ポストトレーニング量子化](../performance/post_training_quantization.md)として知られる再帰化を適用する場合、量子化されるのは TensorFlow Lite 演算子のみであり、TensorFlow 演算は浮動小数点のまま（未最適化）になります。
 
-## 今後の予定
+## 更新
 
-次の項目は、現在取り組み中となっている、このパイプラインへの機能強化です。
-
-- *パフォーマンスの改善* - TensorFlow 演算子を使った TensorFlow Lite が、NNPI や GPU デリゲートなどのハードウェアアクセラレーションによるデリゲートとうまく動作できるように作業が進められています。
+- バージョン2.5（まだ正式にリリースされていません）
+    - [トレーニング後の量子化](../performance/post_training_quantization.md)と呼ばれる最適化を適用できます。
+- バージョン2.4
+    - ハードウェアアクセラレーションを使用するデリゲートとの互換性が向上しました。
