@@ -1,6 +1,6 @@
 # パフォーマンスのベストプラクティス
 
-モバイルデバイスや組み込みデバイスは計算リソースが限られているため、アプリのリソースを効率的に保つことが重要になります。TensorFlow Lite モデルのパフォーマンス向上に使用可能な、ベストプラクティスと戦略のリストを集めました。
+Mobile and embedded devices have limited computational resources, so it is important to keep your application resource efficient. We have compiled a list of best practices and strategies that you can use to improve your TensorFlow Lite model performance.
 
 ## タスクに最適なモデルを選択する
 
@@ -12,13 +12,13 @@
 
 モバイルデバイス用に最適化されたモデルの 1 例である [MobileNets](https://arxiv.org/abs/1704.04861) は、モバイルビジョンアプリ向けに最適化されています。モバイルおよび組み込みデバイスに特化して最適化されたその他のモデルは、[ホステッドモデル](../guide/hosted_models.md)にリスト表示されています。
 
-リストにあるモデルを転移学習を使用して独自のデータセットで再トレーニングすることができます。[画像分類](/lite/tutorials/model_maker_image_classification)と[オブジェクト検出](https://medium.com/tensorflow/training-and-serving-a-realtime-mobile-object-detector-in-30-minutes-with-cloud-tpus-b78971cf1193)については、転移学習チュートリアルをご覧ください。
+You can retrain the listed models on your own dataset by using transfer learning. Check out our transfer learning tutorial for [image classification](/lite/tutorials/model_maker_image_classification) and [object detection](https://medium.com/tensorflow/training-and-serving-a-realtime-mobile-object-detector-in-30-minutes-with-cloud-tpus-b78971cf1193).
 
 ## モデルをプロファイルする
 
 タスクに適した候補モデルを選択したら、モデルのプロファイルとベンチマークを行うことをお勧めします。TensorFlow Lite [ベンチマークツール](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)には、演算子ごとのプロファイル統計を表示するプロファイラが組み込まれています。これはパフォーマンスのボトルネックや、どの演算子が計算時間を支配しているかの理解に有用です。
 
-また、[TensrFlow Lite トレーシング](measurement.md#trace_tensorflow_lite_internals_in_android)を使用して、標準的な Android システムのトレーシングで Android アプリ内のモデルをプロファイルしたり、GUI ベースのプロファイルツールで演算子呼び出しを時間ごとに可視化したりすることも可能です。
+You can also use [TensorFlow Lite tracing](measurement.md#trace_tensorflow_lite_internals_in_android) to profile the model in your Android application, using standard Android system tracing, and to visualize the operator invocations by time with GUI based profiling tools.
 
 ## グラフ内の演算子をプロファイルして最適化する
 
@@ -48,10 +48,10 @@ TensorFlow Lite は、多くの演算子のマルチスレッドカーネルを�
 
 TensorFlow Lite は、GPU、DSP、ニューラルアクセラレータなど、より高速なハードウェアを使用してモデルを高速化する新しい方法を追加しました。通常、これらのアクセラレータはインタプリタの実行の一部を引き継ぐ[デリゲート](delegates.md)サブモジュールから利用することができます。TensorFlow Lite では、以下の方法でデリゲートの使用が可能です。
 
-- Android の[ニューラルネットワーク API](https://developer.android.com/ndk/guides/neuralnetworks/) を使用します。ハードウェアアクセラレータバックエンドを利用して、モデルの速度と効率を向上させることができます。ニューラルネットワーク API を有効にするには、インタープリタインスタンスで [UseNNAPI](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L343) を呼び出します。
+- Using Android's [Neural Networks API](https://developer.android.com/ndk/guides/neuralnetworks/). You can utilize these hardware accelerator backends to improve the speed and efficiency of your model. To enable the Neural Networks API, check out the [NNAPI delegate](nnapi.md) guide.
 - GPU デリゲートは、Android と iOS でそれぞれ OpenGL/OpenCL と Metal を使用して利用できます。これを試す場合は、[GPU デリゲートのチュートリアル](gpu.md)と[ドキュメント](gpu_advanced.md)をご覧ください。
-- Hexagon デリゲートは Android で利用可能です。デバイスで利用可能な場合には、Qualcomm Hexagon DSP を使用します。詳細については、[Hexagon デリゲートチュートリアル](hexagon_delegate.md)をご覧ください。
-- 非標準のハードウェアへのアクセスが可能な場合、独自のデリゲートを作成することができます。詳細は [TensorFlow Lite のデリゲート](delegates.md)をご覧ください。
+- Hexagon delegate is available on Android. It leverages the Qualcomm Hexagon DSP if it is available on the device. See the [Hexagon delegate tutorial](hexagon_delegate.md) for more information.
+- It is possible to create your own delegate if you have access to non-standard hardware. See [TensorFlow Lite delegates](delegates.md) for more information.
 
 アクセラレータによっては、モデルの種類次第で動作が良くなる場合があるので留意してください。一部のデリゲートは、浮動小数点数モデルや特定の方法で最適化されたモデルのみをサポートしています。各デリゲートを[ベンチマーク](measurement.md)して、それがアプリケーションに適しているかどうかを確認することが重要です。例えば、非常に小規模のモデルの場合は、モデルを NN API や GPU にデリゲートする価値はない可能性があります。それとは逆に、算術強度の高い大規模モデルにはアクセラレータが適します。
 
