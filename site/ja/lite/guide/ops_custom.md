@@ -73,7 +73,10 @@ a list of operators for which you will need custom implementations: Sin.
 
 カスタム演算子を使った TensorFlow Lite モデルを作成しましょう。次に示すように、コンバータの属性を `allow_custom_ops` に設定してください。
 
-<pre>converter = tf.lite.TFLiteConverter.from_concrete_functions([sin.get_concrete_function(x)])<br><b>converter.allow_custom_ops = True</b><br>tflite_model = converter.convert()</pre>
+<pre>converter = tf.lite.TFLiteConverter.from_concrete_functions([sin.get_concrete_function(x)])
+&lt;b&gt;converter.allow_custom_ops = True&lt;/b&gt;
+tflite_model = converter.convert()
+</pre>
 
 この時点では、デフォルトのインタプリタで実行しようとすると、次のようなエラーメッセージが発生します。
 
@@ -96,7 +99,7 @@ typedef struct {
 } TfLiteRegistration;
 ```
 
-`TfLiteContext` と <code>TfLiteNode</code> の詳細については、<a><code data-md-type="codespan">common.h</code></a> をご覧ください。前者はエラーレポーティングファシリティと、すべてのテンソルを含むグローバルオブジェクトへのアクセスを提供し、後者は実装が入力と出力にアクセスできるようにするものです。
+`TfLiteContext` と <code>TfLiteNode</code> の詳細については、<a><code>common.h</code></a> をご覧ください。前者はエラーレポーティングファシリティと、すべてのテンソルを含むグローバルオブジェクトへのアクセスを提供し、後者は実装が入力と出力にアクセスできるようにするものです。
 
 インタプリタがモデルを読み込む際、グラフの各ノード当たり `init()` が一度呼び出されます。つまりグラフで演算が 2 回以上使用される場合、`init()` は 2 回以上呼び出されることになります。カスタム演算子の場合、パラメータ名を値にマッピングする flexbuffer が含まれる構成バッファが提供されます。このバッファは、インタプリタが演算子のパラメータをパースするため、ビルトイン演算子の場合は空です。ステートが必要なカーネル実装はここで初期化して、オーナーシップを呼び出し元に移譲します。各 `init()` 呼び出しには `free()` への対応する呼び出しがあるため、実装は、`init()` に割り当てられていた可能性のあるバッファを利用できるようになります。
 
