@@ -2,11 +2,11 @@
 
 iOS で TensorFlow Lite を使い始めるには、次の例をご覧ください。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS 画像分類の例</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS image classification example</a>
 
 ソースコードの説明については、[TensorFlow Lite iOS 画像分類](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md)もあわせてお読みください。
 
-このサンプルアプリは、[画像分類](https://www.tensorflow.org/lite/models/image_classification/overview)を使用して、デバイスの背面カメラに取り込まれるものを継続的に分類し、最も確率の高い分類を表示します。ユーザーは、浮動小数点または[量子化](https://www.tensorflow.org/lite/performance/post_training_quantization)モデルの選択と推論を実施するスレッド数の選択を行なえます。
+This example app uses [image classification](https://www.tensorflow.org/lite/models/image_classification/overview) to continuously classify whatever it sees from the device's rear-facing camera, displaying the top most probable classifications. It allows the user to choose between a floating point or [quantized](https://www.tensorflow.org/lite/performance/post_training_quantization) model and select the number of threads to perform inference on.
 
 注意: さまざまなユースケースで TensorFlow Lite を実演するその他の iOS アプリは、[例](https://www.tensorflow.org/lite/examples)をご覧ください。
 
@@ -43,13 +43,13 @@ pod 'TensorFlowLiteObjC'
 pod 'TensorFlowLiteSwift', '~> 2.0.0'
 ```
 
-このようにすると、`TensorFlowLiteSwift` ポッドの利用可能な最新の 2.x.y バージョンがアプリで使用されるようになります。また、ナイトリービルドに依存する場合は、次のように記述できます。
+This will ensure the latest available 2.x.y version of the `TensorFlowLiteSwift` pod is used in your app. Alternatively, if you want to depend on the nightly builds, you can write:
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly'
 ```
 
-ナイトリーバージョンに関して言えば、バイナリサイズを縮小するために、デフォルトで、[GPU](https://www.tensorflow.org/lite/performance/gpu) と [Core ML デリゲート](https://www.tensorflow.org/lite/performance/coreml_delegate)がポッドから除外されますが、次のように subspec を指定することでこれらを含めることができます。
+From 2.4.0 version and latest nightly releases, by default [GPU](https://www.tensorflow.org/lite/performance/gpu) and [Core ML delegates](https://www.tensorflow.org/lite/performance/coreml_delegate) are excluded from the pod to reduce the binary size. You can include them by specifying subspec:
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['CoreML', 'Metal']
@@ -68,7 +68,7 @@ pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['CoreML', 'Metal']
 ```python
 swift_library(
   deps = [
-      "//tensorflow/lite/experimental/swift:TensorFlowLite",
+      "//tensorflow/lite/swift:TensorFlowLite",
   ],
 )
 ```
@@ -78,7 +78,7 @@ swift_library(
 ```python
 objc_library(
   deps = [
-      "//tensorflow/lite/experimental/objc:TensorFlowLite",
+      "//tensorflow/lite/objc:TensorFlowLite",
   ],
 )
 ```
