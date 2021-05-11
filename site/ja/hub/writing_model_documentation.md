@@ -51,7 +51,7 @@ assets
 
 モデルドキュメントは、複数のアドオンの構文を備えた Markdown ファイルです。最小限の例、または[より現実的な例の Markdown ファイル](https://github.com/tensorflow/tfhub.dev/blob/master/examples/docs/tf2_model_example.md)については以下をご覧ください。
 
-### Example documentation
+### ドキュメントの例
 
 高品質のモデルドキュメントには、コードスニペット、モデルのトレーニング方法および使用目的に関する情報が含まれています。また、ユーザーがあなたのモデルを tfhub.dev で素早く検索できるように、[以下に説明されている](#model-markdown-specific-metadata-properties)モデル固有のメタデータプロパティもご利用ください。
 
