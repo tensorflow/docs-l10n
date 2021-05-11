@@ -20,7 +20,7 @@ TF Hub モデルは、URL パラメータを [tfhub.dev](https://tfhub.dev) モ�
 - TFJS モデル: TFJS モデル URL に `?tfjs-format=compressed` をアペンドして圧縮されたアセットをダウンロードするか、リモートストレージの場合は `/model.json?tfjs-format=file` をアペンドして読み取ります。
 - TF Lite モデル: TF Lite モデル URL に `?lite-format=tflite` をアペンドします。
 
-For example:
+例を示します。
 
 <table style="width: 100%;">
   <tr style="text-align: center">
