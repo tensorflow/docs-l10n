@@ -4,7 +4,7 @@
 
 このページでは、テキスト関連のタスクに使用する [TF2 SavedModel](../tf2_saved_model.md) が [Reusable SavedModel API](../reusable_saved_models.md) をどのように実装しているかを説明します。（これは、[テキストの共通シグネチャ](../common_signatures/text.md)に置き換わります。[TF1 Hub 形式](../tf1_hub_module)は使用廃止となっています。）
 
-## Overview
+## 概要
 
 **テキストの埋め込み**（テキストの密な表現またはテキスト特徴量ベクトルとも知られています）を計算する API にはいくつかあります。
 
