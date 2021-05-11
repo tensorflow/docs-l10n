@@ -1,21 +1,21 @@
 # モデルの保存と読み込み
 
-TensorFlow.js provides functionality for saving and loading models that have been created with the [`Layers`](https://js.tensorflow.org/api/0.14.2/#Models) API or converted from existing TensorFlow models. These may be models you have trained yourself or those trained by others. A key benefit of using the Layers api is that the models created with it are serializable and this is what we will explore in this tutorial.
+TensorFlow.js は、[`Layers`](https://js.tensorflow.org/api/0.14.2/#Models) API で作成されたモデルまたは既存の TensorFlow モデルから変換されたモデルを保存して読み込む機能を提供しています。これらは、自分でトレーニングしたモデルか、他の人がトレーニングしたモデルです。Layers API を使用する主な利点は、作成したモデルをシリアル化できることです。このチュートリアルでは、この方法について説明します。
 
-This tutorial will focus on saving and loading TensorFlow.js models (identifiable by JSON files). We can also import TensorFlow Python models. Loading these models are covered in the following two tutorials:
+このチュートリアルでは、TensorFlow.js モデル (JSON ファイルで識別可能) の保存と読み込みに焦点が当てられています。TensorFlow Python モデルをインポートすることも可能です。これらのモデルの読み込みは、次の 2 つのチュートリアルで解説されています。
 
-- [Import Keras models](../tutorials/conversion/import_keras.md)
-- [Import Graphdef models](../tutorials/conversion/import_saved_model.md)
+- [Keras モデルをインポートする](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/js/tutorials/conversion/import_keras.md)
+- [Graphdef モデルをインポートする](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/js/tutorials/conversion/import_saved_model.md)
 
 ## tf.Model の保存
 
-[`tf.Model`](https://js.tensorflow.org/api/0.14.2/#class:Model) and [`tf.Sequential`](https://js.tensorflow.org/api/0.14.2/#class:Model) both provide a function [`model.save`](https://js.tensorflow.org/api/0.14.2/#tf.Model.save) that allow you to save the *topology* and *weights* of a model.
+[`tf.Model`](https://js.tensorflow.org/api/0.14.2/#class:Model) と [`tf.Sequential`](https://js.tensorflow.org/api/0.14.2/#class:Model) は両方とも関数 [`model.save`](https://js.tensorflow.org/api/0.14.2/#tf.Model.save) を提供しており、モデルの*トポロジ*と*重み*を保存できます。
 
 - トポロジ: これは、モデルのアーキテクチャ (モデルが使用する演算) を説明するファイルです。外部に保存されているモデルの重みへの参照が含まれています。
 
-- Weights: These are binary files that store the weights of a given model in an efficient format. They are generally stored in the same folder as the topology.
+- 重み: これらは、特定のモデルの重みを効率的な形式で保存するバイナリファイルです。通常、トポロジと同じフォルダに保存されます。
 
-Let's take a look at what the code for saving a model looks like
+モデルを保存するためのコードを見てみましょう。
 
 ```js
 const saveResult = await model.save('localstorage://my-model-1');
@@ -23,13 +23,13 @@ const saveResult = await model.save('localstorage://my-model-1');
 
 注意事項がいくつかあります。
 
-- The `save` method takes a URL-like string argument that starts with a **scheme**. This describes the type of destination we are trying to save a model to. In the example above the scheme is `localstorage://`
-- The scheme is followed by a **path**. In the example above the path is `my-model-1`.
-- The `save` method is asynchronous.
-- The return value of `model.save` is a JSON object that carries information such as the byte sizes of the model's topology and weights.
+- `save` メソッドは、**スキーム**で始まる URL のような文字列引数を取ります。スキームはモデルの保存先の種類を示します。上記の例では、`localstorage://` がスキームです。
+- スキームの後には、**パス**が続きます。上記の例では、`my-model-1` がパスです。
+- `save` メソッドは非同期です。
+- `model.save` の戻り値は、モデルのトポロジのバイトサイズや重みなどの情報をもつ JSON オブジェクトです。
 - モデルの保存に使用される環境は、モデルを読み込む環境には影響しません。node.js にモデルを保存しても、ブラウザへの読み込みが妨げられることはありません。
 
-Below we will examine the different schemes available.
+以下では、利用可能なさまざまなスキームを説明します。
 
 ### ローカルストレージ (ブラウザのみ)
 
@@ -39,7 +39,7 @@ Below we will examine the different schemes available.
 await model.save('localstorage://my-model');
 ```
 
-This saves a model under the name `my-model` in the browser's [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage). This will persist between refreshes, though local storage can be cleared by users or the browser itself if space becomes a concern. Each browser also sets their own limit on how much data can be stored in local storage for a given domain.
+このスキームは、モデルを `my-model` という名前でブラウザの[ローカルストレージ](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)に保存します。これは更新の間も持続しますが、スペースが問題になる場合は、ユーザーまたはブラウザによってローカルストレージが消去されるようになっています。また、特定のドメインのローカルストレージに保存できるデータ量は、ブラウザごとに制限されています。
 
 ### IndexedDB (ブラウザのみ)
 
@@ -49,7 +49,7 @@ This saves a model under the name `my-model` in the browser's [local storage](ht
 await model.save('indexeddb://my-model');
 ```
 
-This saves a model to the browser's [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) storage. Like local storage it persists between refreshes, it also tends to have larger limits on the size of objects stored.
+このスキームは、モデルをブラウザの [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) ストレージに保存します。ローカルストレージと同様に、更新の間も保持されますが、保存されるオブジェクトのサイズに対する制限も大きくなる傾向があります。
 
 ### ファイルダウンロード (ブラウザのみ)
 
@@ -59,35 +59,35 @@ This saves a model to the browser's [IndexedDB](https://developer.mozilla.org/en
 await model.save('downloads://my-model');
 ```
 
-This will cause the browser to download the model files to the user's machine. Two files will be produced:
+このスキームでは、ブラウザによってモデルファイルがユーザーのマシンにダウンロードされます。以下の 2 つのファイルが作成されます。
 
-1. A text JSON file named `[my-model].json`, which carries the topology and reference to the weights file described below.
-2. A binary file carrying the weight values named `[my-model].weights.bin`.
+1. `[my-model].json` という名前のテキスト JSON ファイル。これには、トポロジと、以下で説明する重みファイルへの参照が含まれます。
+2. `[my-model].weights.bin` という名前の重み値を含むバイナリファイル。
 
-You can change the name `[my-model]` to get files with a different name.
+名前 `[my-model]` を変更すると、別の名前のファイルを取得できます。
 
-Because the `.json` file points to the `.bin` using a relative path, the two files should be in the same folder.
+`.json` ファイルは相対パスを使用して `.bin` をポイントするため、2 つのファイルは同じフォルダにある必要があります。
 
-> NOTE: some browsers require users to grant permissions before more than one file can be downloaded at the same time.
+> 注意: 一部のブラウザでは、複数のファイルを同時にダウンロードする前に、ユーザーに権限を付与しておく必要があります。
 
 ### HTTP(S) リクエスト
 
-**Scheme:** `http://` or `https://`
+**スキーム:** `http://` または `https://`
 
 ```js
 await model.save('http://model-server.domain/upload')
 ```
 
-This will create a web request to save a model to a remote server. You should be in control of that remote server so that you can ensure that it is able to handle the request.
+このスキームは、モデルをリモートサーバーに保存する Web リクエストを作成します。リクエストを確実に処理できるようにリモートサーバーを制御する必要があります。
 
-The model will be sent to the specified HTTP server via a [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request. The body of the POST is in the `multipart/form-data` format and consists of two files
+モデルは、[POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) リクエストを介して指定された HTTP サーバーに送信されます。POST の本文は `multipart/form-data` 形式で、2 つのファイルで構成されています。
 
-1. A text JSON file named `model.json`, which carries the topology and reference to the weights file described below.
-2. A binary file carrying the weight values named `model.weights.bin`.
+1. `[my-model].json` という名前のテキスト JSON ファイル。これには、トポロジと、以下で説明する重みファイルへの参照が含まれます。
+2. `model.weights.bin` という名前の重み値を含むバイナリファイル。
 
-Note that the name of the two files will always be exactly as specified above (the name is built in to the function). This [api doc](https://js.tensorflow.org/api/latest/#tf.io.browserHTTPRequest) contains a Python code snippet that demonstrates how one may use the [flask](http://flask.pocoo.org/) web framework to handle the request originated from `save`.
+2 つのファイルの名前は常に上記で指定されたとおりになることに注意してください（名前は関数に組み込まれています）。この [API ドキュメント](https://js.tensorflow.org/api/latest/#tf.io.browserHTTPRequest)には、<a>Flask</a> ウェブフレームワークを使用して <code>save</code> からのリクエストを処理する方法を示す Python コードスニペットが含まれています。
 
-Often you will have to pass more arguments or request headers to your HTTP server (e.g. for authentication or if you want to specify a folder that the model should be saved in). You can gain fine-grained control over these aspects of the requests from `save` by replacing the URL string argument in `tf.io.browserHTTPRequest`. This API affords greater flexiblity in controlling HTTP requests.
+多くの場合、HTTP サーバーに追加の引数またはリクエストヘッダーを渡す必要があります（認証、またはモデルを保存するフォルダを指定するため）。`tf.io.browserHTTPRequest` の URL 文字列引数を置き換えることにより、`save` からのリクエストのこれらの側面を細かく制御できます。この API は、HTTP リクエストを制御する際の柔軟性を高めます。
 
 例:
 
@@ -105,18 +105,18 @@ await model.save(tf.io.browserHTTPRequest(
 await model.save('file:///path/to/my-model');
 ```
 
-When running on Node.js we also have direct access to the filesystem and can save models there. The command above will save two files to the `path` specified afer the `scheme`.
+Node.js で実行すると、ファイルシステムに直接アクセスしてモデルを保存することもできます。上記のコマンドは、`scheme` の後に指定された `path` に 2 つのファイルを保存します。
 
-1. A text JSON file named `[model].json`, which carries the topology and reference to the weights file described below.
-2. A binary file carrying the weight values named `[model].weights.bin`.
+1. `[model].json` という名前のテキスト JSON ファイル。これには、以下で説明するトポロジと重みファイルへの参照が含まれます。
+2. `[model].weights.bin` という名前の重み値を含むバイナリファイル。
 
-Note that the name of the two files will always be exactly as specified above (the name is built in to the function).
+2 つのファイルの名前は常に上記で指定されたとおりになることに注意してください（名前は関数に組み込まれています）。
 
 ## tf.Model モデルの読み込み
 
-Given a model that was saved using one of the methods above, we can load it using the `tf.loadLayersModel` API.
+上記のメソッドのいずれかを使用して保存されたモデルの場合、`tf.loadLayersModel`API を使用して読み込むことができます。
 
-Let's take a look at what the code for loading a model looks like
+モデルを読み込むためのコードを見てみましょう。
 
 ```js
 const model = await tf.loadLayersModel('localstorage://my-model-1');
@@ -124,13 +124,13 @@ const model = await tf.loadLayersModel('localstorage://my-model-1');
 
 注意事項がいくつかあります。
 
-- Like `model.save()`, the `loadLayersModel` function takes a URL-like string argument that starts with a **scheme**. This describes the type of destination we are trying to load a model from.
-- The scheme is followed by a **path**. In the example above the path is `my-model-1`.
+- `model.save()` と同様に、`loadLayersModel` 関数は、**スキーム**で始まる URL のような文字列引数を取ります。これは、モデルの読み込み先の種類を示しています。
+- スキームの後には、**パス**が続きます。上記の例では、`my-model-1` がパスです。
 - URL のような文字列は、IOHandler インターフェースに一致するオブジェクトに置き換えることができます。
-- The `tf.loadLayersModel()` function is asynchronous.
-- The return value of `tf.loadLayersModel` is `tf.Model`
+- `tf.loadLayersModel()` 関数は非同期です。
+- `tf.loadLayersModel` の戻り値は `tf.Model`です。
 
-Below we will examine the different schemes available.
+以下では、利用可能なさまざまなスキームを説明します。
 
 ### ローカルストレージ (ブラウザのみ)
 
@@ -140,7 +140,7 @@ Below we will examine the different schemes available.
 const model = await tf.loadLayersModel('localstorage://my-model');
 ```
 
-This loads a model named `my-model` from the browser's [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
+このスキームは、`my-model` という名前のモデルをブラウザの[ローカルストレージ](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)から読み込みます。
 
 ### IndexedDB (ブラウザのみ)
 
@@ -150,19 +150,19 @@ This loads a model named `my-model` from the browser's [local storage](https://d
 const model = await tf.loadLayersModel('indexeddb://my-model');
 ```
 
-This loads a model from the browser's [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) storage.
+このスキームは、ブラウザの [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) ストレージからモデルを読み込みます。
 
 ### HTTP(S)
 
-**Scheme:** `http://` or `https://`
+**スキーム:** `http://` または `https://`
 
 ```js
 const model = await tf.loadLayersModel('http://model-server.domain/download/model.json');
 ```
 
-This loads a model from an http endpoint. After loading the `json` file the function will make requests for corresponding `.bin` files that the `json` file references.
+このスキームは、http エンドポイントからモデルを読み込みます。`json` ファイルを読み込んだ後、関数は、`json` ファイルが参照する、対応する `.bin` ファイルをリクエストします。
 
-> NOTE: This implementation relies on the presence of the [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method, if you are in an environment that does not provide the fetch method natively you can provide a global method names [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) that satisfies that interface or use a library like (`node-fetch`)[https://www.npmjs.com/package/node-fetch].
+> 注意: この実装は [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) メソッドがあることに依存しています。ネイティブで fetch メソッドを提供していない環境を使用している場合は、そのインターフェースを満たす [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) を提供するか、`node-fetch` のようなライブラリを使用してください[https://www.npmjs.com/package/node-fetch]。
 
 ### ネイティブファイルシステム (Node.js のみ)
 
@@ -172,20 +172,20 @@ This loads a model from an http endpoint. After loading the `json` file the func
 const model = await tf.loadLayersModel('file://path/to/my-model/model.json');
 ```
 
-When running on Node.js we also have direct access to the filesystem and can load models from there. Note that in the function call above we reference the model.json file itself (whereas when saving we specify a folder). The corresponding `.bin` file(s) should be in the same folder as the `json` file.
+Node.js で実行すると、ファイルシステムに直接アクセスすることもでき、そこからモデルを読み込めます。上記の関数呼び出しでは、model.json ファイル自体を参照していることに注意してください（保存時にフォルダを指定します）。対応する`.bin`ファイルは、`json`ファイルと同じフォルダにある必要があります。
 
-## Loading models with IOHandlers
+## IOHandler を使用したモデルの読み込み
 
-If the schemes above are not sufficient for your needs you can implement custom loading behavior with an `IOHandler`. One `IOHandler` that TensorFlow.js provides is [`tf.io.browserFiles`](https://js.tensorflow.org/api/latest/#io.browserFiles) which allows browser users to upload model files in the browser. See the [documentation](https://js.tensorflow.org/api/latest/#io.browserFiles) for more information.
+上記のスキームを使ってニーズに対応できない場合は、`IOHandler` を使用してカスタムの読み込み機能を実装できます。TensorFlow.js が提供する  `IOHandler` には [`tf.io.browserFiles`](https://js.tensorflow.org/api/latest/#io.browserFiles) があり、ブラウザのユーザーがブラウザにモデルファイルをアップロードできるようになっています。詳細については[ドキュメント](https://js.tensorflow.org/api/latest/#io.browserFiles)を参照してください。
 
 # カスタム IOHandler を使用したモデルの保存と読み込み
 
-If the schemes above are not sufficient for your loading or saving needs you can implement custom serialization behavior by implementing an `IOHandler`.
+上記のスキームが読み込みや保存のニーズを十分に満たさない場合は、`IOHandler` を実装することで、カスタムのシリアル化動作を実装できます。
 
-An `IOHandler` is an object with a `save` and `load` method.
+`IOHandler` は、`save` および `load` メソッドを持つオブジェクトです。
 
-The `save` function takes one parameter that is a matches the [ModelArtifacts](https://github.com/tensorflow/tfjs-core/blob/master/src/io/types.ts#L165) interface and should return a promise that resolves to a [SaveResult](https://github.com/tensorflow/tfjs-core/blob/master/src/io/types.ts#L107) object.
+`save` 関数は、<a>ModelArtifacts</a> インターフェースと一致するパラメータを 1 つ取り、<a>SaveResult</a> オブジェクトに解決される promise を返す必要があります。
 
-The `load` function takes no parameters and should return a promise that resolves to a [ModelArtifacts](https://github.com/tensorflow/tfjs-core/blob/master/src/io/types.ts#L165) object. This is the same object that is passed to `save`.
+`load` 関数はパラメータを取らず、[ModelArtifacts](https://github.com/tensorflow/tfjs-core/blob/master/src/io/types.ts#L165) オブジェクトに解決される promise を返す必要があります。これは、`save` に渡されるオブジェクトと同じです。
 
 IOHandler の実装方法の例については、[BrowserHTTPRequest](https://github.com/tensorflow/tfjs-core/blob/master/src/io/browser_http.ts) を参照してください。
