@@ -2,8 +2,8 @@
 
 このドキュメントでは、TensorFlow Lite 演算のバージョン管理スキーマを説明します。演算のバージョン管理を行うことによって、既存の演算子に新しい機能やパラメータを追加することができます。さらに、次の項目が保証されます。
 
-- 上位互換性: 以前の TensorFlow Lite 実装で、新しい機能が使用されない限り、新しいバージョンの TOCO が生成する新しいモデルファイルを処理できます。
-- Forward compatibility: Old TensorFlow Lite implementation should handle a new model file produced by new version of converter, as long as no new features are used.
+- 下位互換性: 新しい TensorFlow Lite 実装で以前のモデルファイルも処理します。
+- 上位互換性: 以前の TensorFlow Lite 実装で、新しい機能が使用されない限り、新しいバージョンのコンバーターによって生成された新しいモデルファイルを処理できます。
 - 上位非互換性検出: 以前の TensorFlow Lite 実装がサポートされていない新しいバージョンの演算を含む新しいモデルを読み取る場合に、エラーを報告します。
 
 ## 例: 畳み込みに膨張度を追加する
@@ -160,7 +160,7 @@ int GetVersion(const Operator& op) const override {
 }
 ```
 
-Note that if you are adding support for new types, above steps are not needed. Input and output types are defined and populated for all ops in `OpSignature`.
+新しいタイプのサポートを追加する場合は、上記の手順は必要ありません。 入力タイプと出力タイプは、`OpSignature`のすべての演算に対して定義および入力されます
 
 これを行うには、`lite/toco/tflite/op_version.cc` に新しいマップエントリを追加する必要があります。
 
@@ -172,7 +172,7 @@ Note that if you are adding support for new types, above steps are not needed. I
 
 最後に、新しいバージョン情報を演算子バージョンマップに追加します。このバージョンマップに応じて、モデルで最小限必要となるランタイムバージョンを生成する必要があるため、これは必要なステップです。
 
-To do this, you need to add a new map entry in `lite/tools/versioning/runtime_version.cc`.
+これを行うには、`lite/tools/versioning/runtime_version.cc` に新しいマップエントリを追加する必要があります。
 
 この例では、次のエントリを `op_version_map` に追加してください。
 
@@ -180,7 +180,7 @@ To do this, you need to add a new map entry in `lite/tools/versioning/runtime_ve
 {{BuiltinOperator_DEPTHWISE_CONV_2D, 2}, %CURRENT_RUNTIME_VERSION%}
 ```
 
-where `%CURRENT_RUNTIME_VERSION%` corresponds to the current runtime version defined in [tensorflow/core/public/version.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h).
+ここで、`%CURRENT_RUNTIME_VERSION%` は、[tensorflow/core/public/version.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h)で定義されている現在のランタイムバージョンに対応します。
 
 ### 実装をデリゲートする
 
