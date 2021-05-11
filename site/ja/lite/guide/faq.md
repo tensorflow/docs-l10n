@@ -39,7 +39,15 @@ python import_pb_to_tensorboard.py --model_dir <model path> --log_dir <log dir p
 
 Netron が TensorFlow Lite モデルを開けられない場合は、リポジトリにある [visualize.py](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/visualize.py) スクリプトを試してみてください。
 
-- [TensorFlow レポジトリをクローンする](https://www.tensorflow.org/install/source)
+If you're using TF 2.5 or a later version
+
+```shell
+python -m tensorflow.lite.tools.visualize model.tflite visualized_model.html
+```
+
+Otherwise, you can run this script with Bazel
+
+- [Clone the TensorFlow repository](https://www.tensorflow.org/install/source)
 - `visualize.py` スクリプトを Bazel で実行する
 
 ```shell
@@ -76,7 +84,7 @@ TensorFlow Lite のパフォーマンスを最適化する高レベルのプロ�
 
 - *モデルがタスクに適していることを確認します。*画像の分類については、[ホストモデルのリスト](hosted_models.md)を参照してください。
 - *スレッド数を微調整します。*多くの TensorFlow Lite 演算子はマルチスレッドカーネルをサポートしています。 これを行うには、[C++ API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L345) で`SetNumThreads()`を使用します。ただし、スレッドを増やすと、環境によってパフォーマンスが変動します。
-- *ハードウェアアクセラレータを使用します。*TensorFlow Lite は、デリゲートを使用して特定のハードウェアのモデルアクセラレーションをサポートします。たとえば、Android の Neural Networks API を使用するには、インタープリタで[`UseNNAPI`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L343)を呼び出します。または、[GPU デリゲートチュートリアル](../performance/gpu.md)をご覧ください。
+- *Use Hardware Accelerators.* TensorFlow Lite supports model acceleration for specific hardware using delegates. See our [Delegates](../performance/delegates.md) guide for information on what accelerators are supported and how to use them with your model on-device.
 - *(高度) プロファイルモデル。*Tensorflow Lite [ベンチマークツール](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)には、演算子ごとの統計を表示できる組み込みのプロファイラがあります。特定のプラットフォームで演算子のパフォーマンスを最適化する方法をご存じの場合は、[カスタム演算子](ops_custom.md)を実装できます。
 
 パフォーマンス最適化の詳細については、[ベストプラクティス](../performance/best_practices.md)をご覧ください。
