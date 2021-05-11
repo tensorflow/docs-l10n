@@ -119,7 +119,7 @@ TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 
 ### プルーニング
 
-[Pruning](https://www.tensorflow.org/model_optimization/guide/pruning) works by removing parameters within a model that have only a minor impact on its predictions. Pruned models are the same size on disk, and have the same runtime latency, but can be compressed more effectively. This makes pruning a useful technique for reducing model download size.
+[プルーニング](https://www.tensorflow.org/model_optimization/guide/pruning)は、予測への影響が小さいモデル内のパラメータを削除します。プルーニングされたモデルはディスク上では同じサイズで、実行時のレイテンシは同じですが、より効果的に圧縮できます。プルーニングはモデルのダウンロードサイズを縮小するための便利な手法です。
 
 今後、TensorFlow Lite ではプルーニングされたモデルのレイテンシが低減される予定です。
 
