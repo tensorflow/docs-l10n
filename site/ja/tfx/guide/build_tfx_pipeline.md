@@ -41,7 +41,7 @@ TFX パイプラインは、[`Pipeline` クラス](https://github.com/tensorflow
 
 注意: 通常、タスクベースの依存関係の使用は推奨されません。アーティファクト依存関係で実行グラフを定義すると、TFX の持つ、アーティファクト系統の自動トラッキングとキャシング機能を利用できます。
 
-You can also define task-based dependencies using your component's [`add_upstream_node` and `add_downstream_node`](https://github.com/tensorflow/tfx/blob/master/tfx/components/base/base_node.py){: .external } methods. `add_upstream_node` lets you specify that the current component must be executed after the specified component. `add_downstream_node` lets you specify that the current component must be executed before the specified component.
+また、コンポーネントの [`add_upstream_node` と `add_downstream_node`](https://github.com/tensorflow/tfx/blob/master/tfx/components/base/base_node.py){: .external } メソッドを使って、タスクベースの依存関係を定義することもできます。現在のコンポーネントを指定されたコンポーネントの後に実行する場合は `add_upstream_node`、現在のコンポーネントを指定されたコンポーネントの前に実行する場合は `add_upstream_node` を使用します。
 
 ## パイプラインテンプレート
 
