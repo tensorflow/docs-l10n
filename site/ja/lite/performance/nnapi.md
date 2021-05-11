@@ -104,15 +104,10 @@ NNAPI デリゲートがモデル内の一部の演算またはパラメータ�
 
 NNAPI は、モデルが[サポートされている演算](https://developer.android.com/ndk/guides/neuralnetworks#model)のみを使用する場合に最適に機能します。以下のモデルは、NNAPI と互換性があることが確認されています。
 
-- [MobileNet v1 (224x224) image classification (float model download)](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html)[(quantized model download)](http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz)
-    *(image classification model designed for mobile and embedded based vision
-    applications)*
-- [MobileNet v2 SSD object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html)[(download)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)
-    *(image classification model that detects multiple objects with bounding
-    boxes)*
+- [[ダウンロード]](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [画像分類（フロートモデルのダウンロード）](http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz) <br>*(モバイルおよび組み込みベースのビジョンアプリケーション向けに設計された画像分類モデル)*
+- [MobileNet SSD 物体検出](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [（ダウンロード）](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br>*(バウンディングボックスで複数のオブジェクトを検出する画像分類モデル)*
 - [MobileNet v1(300x300) Single Shot Detector (SSD) 物体検出](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(ダウンロード)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
-- [PoseNet for pose estimation](https://github.com/tensorflow/tfjs-models/tree/master/posenet)[(download)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)
-    *(vision model that estimates the poses of a person(s) in image or video)*
+- [ポーズ推定のための PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [（ダウンロード）](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br><i>(画像または動画内の人物のポーズを推定するビジョンモデル)</i>
 
 また、モデルに動的サイズの出力が含まれている場合も、NNAPI アクセラレーションはサポートされません。この場合、次のような警告が表示されます。
 
@@ -120,6 +115,6 @@ NNAPI は、モデルが[サポートされている演算](https://developer.an
 ERROR: Attempting to use a delegate that only supports static-sized tensors with a graph that has dynamic-sized tensors.
 ```
 
-### Enable NNAPI CPU implementation
+### NNAPI CPU の実装を有効にする
 
-A graph that can't be processed completely by an accelerator can fall back to the NNAPI CPU implementation. However, since this is typically less performant than the TensorFlow interpreter, this option is disabled by default in the NNAPI delegate for Android 10 (API Level 29) or above. To override this behavior, set `setUseNnapiCpu` to `true` in the `NnApiDelegate.Options` object.
+アクセラレータで完全に処理できないグラフは、NNAPI  CPU実装にフォールバックできます。 ただし、これは通常、TensorFlow インタープリタよりもパフォーマンスが低いため、Android 10（API レベル 29）以降の NNAPI デリゲートでは、このオプションはデフォルトで無効になっています。この動作をオーバーライドするには、`NnApi Delegate.Options`オブジェクトで`setUseNnapiCpu`を`true`に設定します。
