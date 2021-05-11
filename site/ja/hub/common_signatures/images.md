@@ -2,19 +2,19 @@
 
 # 画像の一般的なシグネチャ
 
-This page describes common signatures that should be implemented by modules in the [TF1 Hub format](../tf1_hub_module.md) for image-related tasks. (For the [TF2 SavedModel format](../tf2_saved_model.md), see the analogous [SavedModel API](../common_saved_model_apis/images.md).)
+このページでは、画像関連タスクにおいて、[TF1 Hub 形式](../tf1_hub_module.md) のモジュ―ルで実装すべき一般的なシグネチャを説明します。（[TF2 SavedModel 形式](../tf2_saved_model.md)については、同様の [SavedModel API](../common_saved_model_apis/images.md) をご覧ください。）
 
-Some modules can be used for more than one task (e.g., image classification modules tend to do some feature extraction on the way). Therefore, each module provides (1) named signatures for all the tasks anticipated by the publisher, and (2) a default signature `output = m(images)` for its designated primary task.
+一部のモジュールは複数のタスクに使用できます（たとえば、画像分類モジュールは途中で特徴量抽出を実行する傾向があります）。このため、各モジュールは (1) パブリッシャーが期待するすべてのタスクに名前付きシグネチャを、(2) 指定のプライマリタスクにデフォルトのシグネチャ `output = m(images)` を提供します。
 
 <a name="feature-vector"></a>
 
-## Image Feature Vector
+## 画像特徴量ベクトル
 
 ### 使い方の概要
 
-An **image feature vector** is a dense 1-D tensor that represents a whole image, typically for classification by the consumer model. (Unlike the intermediate activations of CNNs, it does not offer a spatial breakdown. Unlike [image classification](#classification), it discards the classification learned by the publisher model.)
+**画像特徴量ベクトル**は、主にコンシューマーモデルによる分類のために画像全体を表現する密な 1 次元テンソルです（CNN の中間活性化とは異なり、空間分解は行われません。[画像分類](#classification)とは異なり、パブリッシャーモデルによって学習された分類は破棄されます）。
 
-A module for image feature extraction has a default signature that maps a batch of images to a batch of feature vectors. It can be used like so:
+画像特徴量抽出のモジュールには、画像のバッチを特徴量ベクトルのバッチにマッピングするデフォルトのシグネチャがあります。たとえば、次のように使用できます。
 
 ```python
   module_spec = hub.load_module_spec("path/to/module")
@@ -28,7 +28,7 @@ A module for image feature extraction has a default signature that maps a batch 
 
 ### シグネチャの仕様
 
-The named signature for extracting image feature vectors is invoked as
+画像特徴量ベクトルを抽出する名前付きシグネチャは、次のように呼び出されます。
 
 ```python
   outputs = module(dict(images=images), signature="image_feature_vector",
@@ -40,11 +40,11 @@ The named signature for extracting image feature vectors is invoked as
 
 outputs ディクショナリには dtype `float32` および形状 `[batch_size, num_features]` の `"default"` 出力が含まれています。`batch_size` は入力と同じですが、グラフの作成時には不明です。`num_features` は入力サイズに依存しないモジュール固有の既知の定数です。
 
-These feature vectors are meant to be usable for classification with a simple feed-forward classifier (like the pooled features from the topmost convolutional layer in a typical CNN for image classification).
+これらの特徴量ベクトルは、（画像分類用の典型的な CNN の最上位の畳み込みレイヤーからプールされた特徴のように）単純なフィードフォワード分類器での分類に使用できるように作られています。
 
-Applying dropout to the output features (or not) should be left to the module consumer. The module itself should not perform dropout on the actual outputs (even if it uses dropout internally in other places).
+ドロップアウトを出力の特徴量に適用するかどうかは、モジュールのコンシューマーに任せる必要があります。モジュール自体が実際の出力でドロップアウトを実行するべきではありません（ほかの場所で内部的にドロップアウトを使用している場合でも）。
 
-The outputs dictionary may provide further outputs, for example, the activations of hidden layers inside the module. Their keys and values are module-dependent. It is recommended to prefix architecture-dependent keys with an architecture name (e.g., to avoid confusing the intermediate layer `"InceptionV3/Mixed_5c"` with the topmost convolutional layer `"InceptionV2/Mixed_5c"`).
+outputs ディクショナリはモジュール内の非表示レイヤーの活性化など、さらなる出力を提供できます。それらのキーと値はモジュールに依存しています。アーキテクチャ依存キーの前にアーキテクチャ名を付けることをお勧めします（たとえば、中間レイヤー `"InceptionV3/Mixed_5c"` と最上位の畳み込みレイヤー `"InceptionV2/Mixed_5c"` の混同を回避します）。
 
 <a name="classification"></a>
 
@@ -54,7 +54,7 @@ The outputs dictionary may provide further outputs, for example, the activations
 
 **画像分類**は、*モジュールパブリッシャーによって選択された分類のクラス*のメンバーシップについて、画像のピクセルを線形スコア（ロジット）にマッピングします。これにより、コンシューマーは基本的な特徴（[画像特徴ベクトル](#feature-vector)を参照）だけでなく、パブリッシャーモジュールによって学習された特定の分類から結論を出すことができます。
 
-A module for image feature extraction has a default signature that maps a batch of images to a batch of logits. It can be used like so:
+画像特徴量抽出のモジュールには、画像のバッチをロジットのバッチにマッピングするデフォルトのシグネチャがあります。たとえば、次のように使用できます。
 
 ```python
   module_spec = hub.load_module_spec("path/to/module")
@@ -68,7 +68,7 @@ A module for image feature extraction has a default signature that maps a batch 
 
 ### シグネチャの仕様
 
-The named signature for extracting image feature vectors is invoked as
+画像特徴量ベクトルを抽出する名前付きシグネチャは、次のように呼び出されます。
 
 ```python
   outputs = module(dict(images=images), signature="image_classification",
@@ -80,11 +80,11 @@ The named signature for extracting image feature vectors is invoked as
 
 outputs ディクショナリには dtype `float32` および形状 `[batch_size, num_classes]` の `"default"` 出力が含まれています。`batch_size` は入力と同じですが、グラフの作成時には不明です。`num_classes` は入力サイズに依存しないモジュール固有の既知の定数です。
 
-Evaluating `outputs["default"][i, c]` yields a score predicting the membership of example `i` in the class with index `c`.
+`outputs["default"][i, c]` を評価すると、インデックス `c` を持つクラス内のサンプル `i` のメンバーシップを予測するスコアが得られます。
 
 これらのスコアがソフトマックス（相互に排他的なクラスの場合）、シグモイド（直交クラスの場合）、または他の何かで使用されることを意図しているかどうかは、基本的な分類に依存します。モジュールのドキュメントでこれを説明し、クラスインデックスの定義を参照する必要があります。
 
-The outputs dictionary may provide further outputs, for example, the activations of hidden layers inside the module. Their keys and values are module-dependent. It is recommended to prefix architecture-dependent keys with an architecture name (e.g., to avoid confusing the intermediate layer `"InceptionV3/Mixed_5c"` with the topmost convolutional layer `"InceptionV2/Mixed_5c"`).
+outputs ディクショナリはモジュール内の非表示レイヤーの活性化など、さらなる出力を提供できます。それらのキーと値はモジュールに依存しています。アーキテクチャ依存キーの前にアーキテクチャ名を付けることをお勧めします（たとえば、中間レイヤー `"InceptionV3/Mixed_5c"` と最上位の畳み込みレイヤー `"InceptionV2/Mixed_5c"` の混同を回避します）。
 
 <a name="input"></a>
 
