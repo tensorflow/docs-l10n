@@ -2,7 +2,7 @@
 
 # Reusable SavedModel
 
-## Introduction
+## 소개
 
 TensorFlow Hub는 다른 자산 중에서 TensorFlow 2용 SavedModel을 호스팅합니다. `obj = hub.load(url)`를 사용하여 Python 프로그램에 다시 로드할 수 있습니다[[자세히 알아보기](tf2_saved_model)]. 반환된 `obj`는 `tf.saved_model.load()`의 결과입니다(TensorFlow의 [SavedModel 가이드](https://www.tensorflow.org/guide/saved_model) 참조). 이 객체는 tf.functions, tf.Variables(사전 훈련된 값에서 초기화됨), 기타 리소스 및 반복적으로 더 많은 객체가 될 수 있는 임의의 속성을 가질 수 있습니다.
 
@@ -12,7 +12,7 @@ Reusing means building a larger model around `obj`, including the ability to fin
 
 **TensorFlow Hub 팀은 위의 의미에서 재사용할 예정인 모든 SavedModel에서 Reusable SavedModel 인터페이스**를 구현할 것을 권장합니다. `tensorflow_hub` 라이브러리의 많은 유틸리티, 특히 `hub.KerasLayer`는 이를 구현하기 위해 SavedModel가 필요합니다.
 
-### Relation to SignatureDefs
+### SignatureDefs와의 관계
 
 This interface in terms of tf.functions and other TF2 features is separate from the SavedModel's signatures, which have been available since TF1 and continue to be used in TF2 for inference (such as deploying SavedModels to TF Serving or TF Lite). Signatures for inference are not expressive enough to support fine-tuning, and [`tf.function`](https://www.tensorflow.org/api_docs/python/tf/function) provides a more natural and expressive [Python API](https://www.tensorflow.org/tutorials/customization/performance) for the reused model.
 
@@ -26,9 +26,9 @@ Reusable SavedModel을 주어진 모델 구축 라이브러리에 로드하거�
 
 The interface definition on this page allows for any number and type of inputs and outputs. The [Common SavedModel APIs for TF Hub](common_saved_model_apis/index.md) refine this general interface with usage conventions for specific tasks to make models easily interchangeable.
 
-## Interface definition
+## 인터페이스 정의
 
-### Attributes
+### 속성
 
 Reusable SavedModel은 `obj = tf.saved_model.load(...)`에서 다음 속성을 가진 객체를 반환하는 TensorFlow 2 SavedModel입니다.
 
@@ -48,7 +48,7 @@ Reusable SavedModel은 `obj = tf.saved_model.load(...)`에서 다음 속성을 �
 
     이 목록은 비어 있는 경우, 특히 SavedModel에서 미세 조정을 지원하지 않거나 가중치 정규화를 규정하지 않으려는 경우 생략할 수 있습니다.
 
-### The `__call__` function
+### `__call__` 함수
 
 Restored SavedModel `obj`에는 복원된 tf.function인 `obj.__call__` 속성이 있으며, 다음과 같이 `obj`를 호출할 수 있습니다.
 
@@ -58,11 +58,11 @@ Restored SavedModel `obj`에는 복원된 tf.function인 `obj.__call__` 속성�
 outputs = obj(inputs, trainable=..., **kwargs)
 ```
 
-#### Arguments
+#### 인수
 
-The arguments are as follows.
+인수는 다음과 같습니다.
 
-- There is one positional, required argument with a batch of input activations of the SavedModel. Its type is one of
+- SavedModel의 입력 활성화 배치와 함께 하나의 위치 필수 인수가 있습니다. 그 유형은 다음 중 하나입니다.
 
     - 단일 입력을 위한 단일 Tensor
     - 명명되지 않은 입력의 순서가 지정된 시퀀스에 대한 Tensor 목록
@@ -82,7 +82,7 @@ The arguments are as follows.
 
 복원된 `__call__` 함수는 허용되는 모든 인수 조합에 대한 추적을 제공해야 합니다. `True`과 `False` 간에 `training`을 뒤집는다고 해서 인수의 허용성이 변경되어서는 안 됩니다.
 
-#### Result
+#### 결과
 
 `obj` 호출의 `outputs`은 다음과 같을 수 있습니다.
 
@@ -100,7 +100,7 @@ Reusable SavedModel은 명명된 하위 객체(예: `obj.foo`, `obj.bar` 등)에
 
 Reusable SavedModel의 사용자는 한 수준의 중첩만 처리해야 합니다(`obj.bar.baz`가 아닌 `obj.bar`). (이 인터페이스의 향후 개정판에서는 더 깊은 중첩을 허용할 수 있으며, 최상위 수준 객체는 자체적으로 호출 가능해야 한다는 요구 사항이 면제될 수 있습니다.)
 
-## Closing remarks
+## 맺음말
 
 ### 진행 중인 API와의 관계
 
