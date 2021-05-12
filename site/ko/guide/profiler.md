@@ -2,11 +2,11 @@
 
 [TOC]
 
-Use the tools available with the Profiler to track the performance of your TensorFlow models. See how your model performs on the host (CPU), the device (GPU), or on a combination of both the host and device(s).
+Profiler와 함께 제공되는 도구를 사용하여 TensorFlow 모델의 성능을 추적하세요. 호스트(CPU), 장치(GPU) 또는 호스트와 장치의 조합에서 모델이 어떻게 작동하는지 확인하세요.
 
 프로파일링을 통해 모델에서 다양한 TensorFlow 연산(ops)이 사용하는 하드웨어 리소스(시간 및 메모리)를 이해하고 성능 병목 현상을 해결함으로써 궁극적으로 모델의 실행 속도를 높일 수 있습니다.
 
-This guide will walk you through how to install the Profiler, the various tools available, the different modes of how the Profiler collects performance data, and some recommended best practices to optimize model performance.
+이 안내서는 프로파일러의 설치 방법, 사용 가능한 다양한 도구, 프로파일러에서 성능 데이터를 수집하는 다양한 모드 및 모델 성능을 최적화하기위한 권장 모범 사례를 안내합니다.
 
 Cloud TPU의 모델 성능을 프로파일링하려면 [Cloud TPU 가이드](https://cloud.google.com/tpu/docs/cloud-tpu-tools#capture_profile)를 참조하세요.
 
@@ -16,16 +16,16 @@ Cloud TPU의 모델 성능을 프로파일링하려면 [Cloud TPU 가이드](htt
 
 GPU를 프로파일링하려면 다음을 수행해야 합니다.
 
-1. Meet the NVIDIA® GPU drivers and CUDA® Toolkit requirements listed on [TensorFlow GPU support software requirements](https://www.tensorflow.org/install/gpu#linux_setup).
+1. [TensorFlow GPU 지원 소프트웨어 요구 사항](https://www.tensorflow.org/install/gpu#linux_setup)에 나열된 NVIDIA® GPU 드라이버 및 CUDA® 툴킷 요구 사항을 충족합니다.
 
-2. Ensure CUPTI exists on the path:
+2. 경로에 CUPTI가 있는지 확인합니다.
 
     ```shell
     /sbin/ldconfig -N -v $(sed 's/:/ /g' <<< $LD_LIBRARY_PATH) | \
     grep libcupti
     ```
 
-If you don't have CUPTI on the path, prepend its installation directory to the `$LD_LIBRARY_PATH` environment variable by running:
+경로에 CUPTI가 없으면, 다음을 실행하여 설치 디렉토리를 `$LD_LIBRARY_PATH` 환경 변수에 추가합니다.
 
 ```shell
 export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
@@ -35,7 +35,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
 ### 권한 문제 해결하기
 
-When you run profiling with CUDA® Toolkit in a Docker environment or on Linux, you may encounter issues related to insufficient CUPTI privileges (`CUPTI_ERROR_INSUFFICIENT_PRIVILEGES`). See the [NVIDIA Developer Docs](https://developer.nvidia.com/nvidia-development-tools-solutions-ERR_NVGPUCTRPERM-permission-issue-performance-counters){:.external} to learn more about how you can resolve these issues on Linux.
+Docker 환경 또는 Linux에서 CUDA® Toolkit으로 프로파일링을 실행할 때 불충분한 CUPTI 권한(`CUPTI_ERROR_INSUFFICIENT_PRIVILEGES`)과 관련된 문제가 발생할 수 있습니다. Linux에서 이러한 문제를 해결하는 방법에 대한 자세한 내용은 [NVIDIA 개발자 설명서](https://developer.nvidia.com/nvidia-development-tools-solutions-ERR_NVGPUCTRPERM-permission-issue-performance-counters){:.external}를 참조하세요.
 
 Docker 환경에서 CUPTI 권한 문제를 해결하려면 다음을 실행합니다.
 
@@ -58,8 +58,8 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
 - TensorFlow 통계
 - 추적 뷰어
 - GPU 커널 통계
-- Memory profile tool
-- Pod viewer
+- 메모리 프로필 도구
+- Pod 뷰어
 
 <a name="overview_page"></a>
 
@@ -98,7 +98,7 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
     - 기기 유형(GPU/TPU)
     - 기기 코어 수
 
-- **Recommendation for next steps -** Reports when a model is input bound and recommends tools you can use to locate and resolve model performance bottlenecks
+- **다음 단계를 위한 권장 사항 -** 모델이 입력 바운드일 때 보고하고, 모델의 성능 병목 현상을 찾아 해결하는 데 사용할 수 있는 도구를 권장합니다.
 
 <a name="input_pipeline_analyzer"></a>
 
@@ -192,7 +192,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
     - 호스트에서 op가 실행되는 경우:
 
-        - The percentage of the total self-time on device incurred by the op on will be 0
+        - op에 의해 발생한 기기의 총 자체 시간 백분율은 0입니다.
         - 이 op를 포함하여 기기의 총 자체 시간 누적 백분율은 0입니다.
 
     - 기기에서 op가 실행되는 경우:
@@ -221,7 +221,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 이 화면에는 다음과 같은 주요 요소가 포함되어 있습니다.
 
-1. **Timeline pane -** Shows ops that the device and the host executed over time
+1. **타임라인 창 -** 기기와 호스트가 시간이 지남에 따라 실행한 ops를 보여줍니다.
 2. **세부 정보 창 -** 타임라인 창에서 선택한 ops에 대해 추가 정보를 표시합니다.
 
 타임라인 창에는 다음 요소가 포함되어 있습니다.
@@ -238,7 +238,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 - **기기 노드별 섹션 하나**, 기기 칩 번호와 칩 내 기기 노드로 표시됩니다(예를 들어, `/device:GPU:0 (pid 0)`). 각 기기 노드 섹션에는 다음 트랙이 포함되어 있습니다.
     - **Step -** 기기에서 실행 중인 학습 단계의 기간을 표시합니다.
-    - **TensorFlow Ops -**. Shows the ops executed on the device
+    - **TensorFlow Ops -** 기기에서 실행된 연산을 표시합니다.
     - **XLA 연산 -** XLA 컴파일러가 사용된 경우에는 기기에서 실행된 [XLA](https://www.tensorflow.org/xla/) 연산(ops)을 표시합니다. (각 TensorFlow op는 하나 또는 여러 개의 XLA ops로 변환됩니다. XLA 컴파일러는 XLA ops를 기기에서 실행되는 코드로 변환합니다.)
 - **호스트 머신의 CPU에서 실행되는 스레드에 대한 섹션 하나,** **"Host Threads"**로 표시됩니다. 이 섹션에는 CPU 스레드마다 하나의 트랙이 있습니다. 섹션 레이블과 함께 표시되는 정보는 무시해도 됩니다.
 
@@ -246,7 +246,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 타임라인 내의 이벤트는 다른 색상으로 표시됩니다. 색상 자체는 특별한 의미가 없습니다.
 
-The trace viewer can also display traces of Python function calls in your TensorFlow program. If you use the `tf.profiler.experimental.start()` API, you can enable Python tracing by using the `ProfilerOptions` namedtuple when starting profiling. Alternatively, if you use the sampling mode for profiling, you can select the level of tracing by using the dropdown options in the **Capture Profile** dialog.
+추적 뷰어는 TensorFlow 프로그램에서 Python 함수 호출의 추적을 표시할 수도 있습니다. `tf.profiler.experimental.start()` API를 사용하는 경우 프로파일링을 시작할 때 `ProfilerOptions`라는 튜플을 사용하여 Python 추적을 사용할 수 있습니다. 또는 프로파일링에 샘플링 모드를 사용하는 경우, **Capture Profile** 대화 상자의 드롭다운 옵션을 사용하여 추적 수준을 선택할 수 있습니다.
 
 ![image](./images/tf_profiler/python_tracer.png)
 
@@ -267,7 +267,7 @@ The trace viewer can also display traces of Python function calls in your Tensor
     - kernel-op 쌍별로 그룹화된 총 경과 GPU 기간의 내림차순 순위
     - 시작된 커널의 이름
     - 커널이 사용하는 GPU 레지스터 수
-    - The total size of shared (static + dynamic shared) memory used in bytes
+    - 바이트 단위로 사용되는 공유(정적 + 동적 공유) 메모리의 총 크기
     - `blockDim.x, blockDim.y, blockDim.z`로 표현된 블록 차원
     - `gridDim.x, gridDim.y, gridDim.z`로 표현된 그리드 차원
     - op가 TensorCore를 사용할 수 있는지 여부
@@ -281,160 +281,160 @@ The trace viewer can also display traces of Python function calls in your Tensor
 
 <a name="memory_profile_tool"></a>
 
-### Memory profile tool {: id = 'memory_profile_tool'}
+### 메모리 프로파일 도구 {: id = 'memory_profile_tool'}
 
-The Memory Profile tool monitors the memory usage of your device during the profiling interval. You can use this tool to:
+메모리 프로파일 도구는 프로파일링 기간 동안 기기의 메모리 사용량을 모니터링합니다. 이 도구를 사용하여 다음을 수행할 수 있습니다.
 
-- Debug out of memory (OOM) issues by pinpointing peak memory usage and the corresponding memory allocation to TensorFlow ops. You can also debug OOM issues that may arise when you run [multi-tenancy](https://arxiv.org/pdf/1901.06887.pdf) inference
-- Debug memory fragmentation issues
+- 최대 메모리 사용량과 TensorFlow 연산에 대한 해당 메모리 할당량을 정확히 찾아내 메모리 부족(OOM) 문제를 디버그합니다. [다중 테넌시](https://arxiv.org/pdf/1901.06887.pdf) 추론을 실행할 때 발생할 수 있는 OOM 문제를 디버깅할 수도 있습니다.
+- 메모리 조각화 문제 디버그
 
-The memory profile tool displays data in three sections:
+메모리 프로파일 도구는 다음 세 섹션으로 데이터를 표시합니다.
 
-1. Memory Profile Summary
-2. Memory Timeline Graph
-3. Memory Breakdown Table
+1. 메모리 프로파일 요약
+2. 메모리 타임라인 그래프
+3. 메모리 분석 표
 
-#### Memory profile summary
+#### 메모리 프로파일 요약
 
-This section displays a high-level summary of the memory profile of your TensorFlow program as shown below:
+이 섹션에는 아래와 같이 TensorFlow 프로그램의 메모리 프로파일에 대한 높은 수준의 요약이 표시됩니다.
 
 &lt;img src="./images/tf_profiler/memory_profile_summary.png" width="400", height="450"&gt;
 
-The memory profile summary has six fields:
+메모리 프로파일 요약에는 6개의 필드가 있습니다.
 
-1. Memory ID - Dropdown which lists all available device memory systems. Select the memory system you want to view from the dropdown
-2. #Allocation - The number of memory allocations made during the profiling interval
-3. #Deallocation - The number of memory deallocations in the profiling interval
-4. Memory Capacity - The total capacity (in GiBs) of the memory system that you select
-5. Peak Heap Usage - The peak memory usage (in GiBs) since the model started running
-6. Peak Memory Usage - The peak memory usage (in GiBs) in the profiling interval. This field contains the following sub-fields:
-    1. Timestamp - The timestamp of when the peak memory usage occurred on the Timeline Graph
-    2. Stack Reservation - Amount of memory reserved on the stack (in GiBs)
-    3. Heap Allocation - Amount of memory allocated on the heap (in GiBs)
-    4. Free Memory - Amount of free memory (in GiBs). The Memory Capacity is the sum total of the Stack Reservation, Heap Allocation, and Free Memory
-    5. Fragmentation - The percentage of fragmentation (lower is better). It is calculated as a percentage of (1 - Size of the largest chunk of free memory / Total free memory)
+1. 메모리 ID - 사용 가능한 모든 기기 메모리 시스템을 나열하는 드롭다운입니다. 드롭다운에서 보려는 메모리 시스템을 선택합니다.
+2. #할당 - 프로파일링 기간 동안 만들어진 메모리 할당의 수입니다.
+3. #할당 해제 - 프로파일링 기간의 메모리 할당이 해제된 수입니다.
+4. 메모리 용량 - 선택한 메모리 시스템의 총 용량(GiB)입니다.
+5. 최대 힙 사용량 - 모델 실행을 시작한 이후의 최대 메모리 사용량(GiB)입니다.
+6. 최대 메모리 사용량 - 프로파일링 기간의 최대 메모리 사용량(GiB)입니다. 이 필드에는 다음 하위 필드가 있습니다.
+    1. 타임스탬프 - 타임라인 그래프에서 최대 메모리 사용량이 발생한 타임스탬프입니다.
+    2. 스택 예약 - 스택에 예약된 메모리의 양(GiB)입니다.
+    3. 힙 할당 - 힙에 할당된 메모리 양(GiB)입니다.
+    4. 사용 가능한 메모리 - 사용 가능한 메모리의 양(GiB)입니다. 메모리 용량은 스택 예약, 힙 할당 및 사용 가능한 메모리의 합계입니다.
+    5. 조각화 - 조각화 비율입니다(낮을수록 좋음). (1 - 여유 메모리의 가장 큰 청크 크기/총 여유 메모리)의 백분율로 계산됩니다.
 
-#### Memory timeline graph
+#### 메모리 타임라인 그래프
 
-This section displays a plot of the memory usage (in GiBs) and the percentage of fragmentation versus time (in ms).
+이 섹션에는 메모리 사용량(GiB) 및 시간에 따른 조각화 비율(ms)이 표시됩니다.
 
 ![image](./images/tf_profiler/memory_timeline_graph.png)
 
-The X-axis represents the timeline (in ms) of the profiling interval. The Y-axis on the left represents the memory usage (in GiBs) and the Y-axis on the right represents the percentage of fragmentation. At each point in time on the X-axis, the total memory is broken down into three categories: stack (in red), heap (in orange), and free (in green). Hover over a specific timestamp to view the details about the memory allocation/deallocation events at that point like below:
+X축은 프로파일링 기간의 타임라인(ms)을 나타냅니다. 왼쪽의 Y축은 메모리 사용량(GiB)을 나타내고 오른쪽의 Y축은 조각화 비율을 나타냅니다. X축의 각 시점에서 총 메모리는 스택(빨간색), 힙(주황색) 및 여유(녹색)의 세 가지 범주로 분류됩니다. 특정 타임스탬프 위로 마우스를 가져가면 아래와 같이 해당 시점의 메모리 할당/할당 해제 이벤트에 대한 세부 정보를 볼 수 있습니다.
 
 ![image](./images/tf_profiler/memory_timeline_graph_popup.png)
 
-The pop-up window displays the following information:
+팝업 창에 다음 정보가 표시됩니다.
 
-- timestamp(ms) - The location of the selected event on the timeline
-- event - The type of event (allocation or deallocation)
-- requested_size(GiBs) - The amount of memory requested. This will be a negative number for deallocation events
-- allocation_size(GiBs) - The actual amount of memory allocated. This will be a negative number for deallocation events
-- tf_op - The TensorFlow Op that requests the allocation/deallocation
-- step_id - The training step in which this event occurred
-- region_type - The data entity type that this allocated memory is for. Possible values are `temp` for temporaries, `output` for activations and gradients, and `persist`/`dynamic` for weights and constants
-- data_type - The tensor element type (e.g., uint8 for 8-bit unsigned integer)
-- tensor_shape - The shape of the tensor being allocated/deallocated
-- memory_in_use(GiBs) - The total memory that is in use at this point of time
+- 타임스탬프(ms) - 타임라인에서 선택한 이벤트의 위치입니다.
+- 이벤트 - 이벤트 유형(할당 또는 할당 해제)입니다.
+- 요청된 크기(GiB) - 요청된 메모리의 양입니다. 할당 해제 이벤트의 경우 음수가 됩니다.
+- 할당 크기(GiB) - 할당된 메모리의 실제 양입니다. 할당 해제 이벤트의 경우 음수가 됩니다.
+- tf_op - 할당/할당 해제를 요청하는 TensorFlow Op입니다.
+- 단계 ID - 이 이벤트가 발생한 학습 단계입니다.
+- 영역 유형 - 이 할당된 메모리의 대상인 데이터 엔터티 유형입니다. 가능한 값은 임시의 경우 `temp`, 활성화와 그래디언트의 경우 `output`, 가중치와 상수의 경우 `persist`/`dynamic`입니다.
+- 데이터 유형 - 텐서 요소의 유형(예: 8bit 부호없는 정수의 경우 uint8)입니다.
+- 텐서 형상 - 할당/할당 해제되는 텐서의 형상입니다.
+- 사용 중 메모리(GiB) - 이 시점에서 사용 중인 총 메모리의 양입니다.
 
-#### Memory breakdown table
+#### 메모리 분석 표
 
-This table shows the active memory allocations at the point of peak memory usage in the profiling interval.
+이 표에는 프로파일링 기간 동안 최대 메모리 사용량 시점에서 활성 메모리 할당량이 표시됩니다.
 
 ![image](./images/tf_profiler/memory_breakdown_table.png)
 
-There is one row for each TensorFlow Op and each row has the following columns:
+TensorFlow Op마다 하나의 행이 있으며 각 행에는 다음 열이 있습니다.
 
-- Op Name - The name of the TensorFlow op
-- Allocation Size (GiBs) - The total amount of memory allocated to this op
-- Requested Size (GiBs) - The total amount of memory requested for this op
-- Occurrences - The number of allocations for this op
-- Region type - The data entity type that this allocated memory is for. Possible values are `temp` for temporaries, `output` for activations and gradients, and `persist`/`dynamic` for weights and constants
-- Data type - The tensor element type
-- Shape - The shape of the allocated tensors
+- Op 이름 - TensorFlow op의 이름입니다.
+- 할당 크기(GiB) - 이 op에 할당된 총 메모리의 양입니다.
+- 요청된 크기(GiB) - 이 op에 대해 요청된 총 메모리의 양입니다.
+- 발생 수 - 이 op에 대한 할당 수입니다.
+- 영역 유형 - 이 할당된 메모리의 대상인 데이터 엔터티 유형입니다. 가능한 값은 임시의 경우 `temp`, 활성화와 그래디언트의 경우 `output`, 가중치와 상수의 경우 `persist`/`dynamic`입니다.
+- 데이터 유형 - 텐서 요소의 유형입니다.
+- 형상 - 할당된 텐서의 형상입니다.
 
-Note: You can sort any column in the table and also filter rows by op name.
+참고: 테이블의 모든 열을 정렬하고 op 이름을 기준으로 행을 필터링할 수도 있습니다.
 
 <a name="pod_viewer"></a>
 
-### Pod viewer
+### Pod 뷰어
 
-The Pod Viewer tool shows the breakdown of a training step across all workers.
+Pod 뷰어 도구는 모든 작업자의 학습 단계 분석을 보여줍니다.
 
 ![image](./images/tf_profiler/pod_viewer.png)
 
-- The upper pane has slider for selecting the step number.
-- The lower pane displays a stacked column chart. This is a high level view of broken down step-time categories placed atop one another. Each stacked column represents a unique worker.
-- When you hover over a stacked column, the card on the left-hand side shows more details about the step breakdown.
+- 상단 창에는 단계 번호를 선택하는 슬라이더가 있습니다.
+- 아래쪽 창에는 누적 세로 막대형 차트가 표시됩니다. 이것은 분류된 단계 시간 범주를 서로의 위에 배치한 고차원적인 보기입니다. 누적된 각 열은 고유한 작업자를 나타냅니다.
+- 누적된 열 위로 마우스를 가져가면 왼쪽의 카드에 단계 분류에 대한 자세한 내용이 표시됩니다.
 
 <a name="tf_data_bottleneck_analysis"></a>
 
-### tf.data bottleneck analysis
+### tf.data 병목 현상 분석
 
-Warning: This tool is experimental. Please report [here](https://github.com/tensorflow/profiler/issues) if the analysis result seems off.
+경고: 이 도구는 시험 단계에 있습니다. 분석 결과가 잘못된 것 같으면 [여기서](https://github.com/tensorflow/profiler/issues) 보고해 주세요.
 
-tf.data bottleneck analysis automatically detects bottlenecks in tf.data input pipelines in your program and provides recommendations on how to fix them. It works with any program using tf.data regardless of the platform (CPU/GPU/TPU) or the framework (TensorFlow/JAX). Its analysis and recommendations are based on this [guide](https://www.tensorflow.org/guide/data_performance_analysis).
+tf.data 병목 현상 분석은 프로그램의 tf.data 입력 파이프라인에서 병목 현상을 자동으로 감지하고, 이를 해결하는 방법에 대한 권장 사항을 제공합니다. 플랫폼(CPU/GPU/TPU) 또는 프레임워크(TensorFlow/JAX)에 관계없이 tf.data를 사용하는 모든 프로그램에서 작동합니다. 분석 및 권장 사항은 이 [가이드](https://www.tensorflow.org/guide/data_performance_analysis)를 바탕으로 합니다.
 
-It detects a bottleneck by following these steps:
+다음 단계에 따라 병목 현상을 감지합니다.
 
-1. Find the most input bound host.
-2. Find the slowest execution of tf.data input pipeline.
-3. Reconstruct the input pipeline graph from the profiler trace.
-4. Find the critical path in the input pipeline graph.
-5. Identify the slowest transformation on the critical path as a bottleneck.
+1. 입력된 가장 많은 호스트를 찾습니다.
+2. tf.data 입력 파이프라인의 가장 느린 실행을 찾습니다.
+3. 프로파일러 추적에서 입력 파이프라인 그래프를 재구성합니다.
+4. 입력 파이프라인 그래프에서 임계 경로를 찾습니다.
+5. 중요 경로에서 가장 느린 변환을 병목 현상으로 식별합니다.
 
-The UI is divided into three sections: Performance Analysis Summary, Summary of All Input Pipelines and Input Pipeline Graph.
+UI는 성능 분석 요약, 모든 입력 파이프라인 요약 및 입력 파이프라인 그래프의 세 부분으로 나뉩니다.
 
-#### Performance analysis summary
+#### 성능 분석 요약
 
 ![image](./images/tf_profiler/trace_viewer.png)
 
-This section provides the summary of the analysis. It tells whether a slow tf.data input pipeline is detected in the profile. If so, it shows the most input bound host and its slowest input pipeline with the max latency. And most importantly, it tells which part of the input pipeline is the bottleneck and how to fix it. The bottleneck information is provided with the iterator type and its long name.
+이 섹션에서는 분석 요약을 제공합니다. 프로파일에서 느린 tf.data 입력 파이프라인이 감지되는지 여부를 알려줍니다. 만약 그렇다면 입력이 가장 많은 호스트와 지연 시간이 가장 커 가장 느린 입력 파이프라인을 표시합니다. 그리고 가장 중요한 부분으로, 입력 파이프라인의 어느 부분이 병목인지, 어떻게 해결해야 하는지 알려줍니다. 병목 현상 정보는 반복기 유형 및 해당하는 이름과 함께 제공됩니다.
 
-##### How to read tf.data iterator's long name
+##### tf.data 반복기의 긴 이름을 읽는 방법
 
-A long name is formatted as `Iterator::<Dataset_1>::...::<Dataset_n>`. In the long name, `<Dataset_n>` matches the iterator type and the other datasets in the long name represent downstream transformations.
+긴 이름은 `Iterator::<Dataset_1>::...::<Dataset_n>` 형식으로 지정됩니다. 긴 이름에서 `<Dataset_n>`은 반복기 유형과 일치하고, 긴 이름의 다른 데이터세트는 다운스트림 변환을 나타냅니다.
 
-For example, consider the following input pipeline dataset:
+예를 들어 다음 입력 파이프라인 데이터세트를 고려해 보겠습니다.
 
 ```python
 dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 ```
 
-The long names for the iterators from the above dataset will be:
+위 데이터세트의 반복기에 대한 긴 이름은 다음과 같습니다.
 
-Iterator Type | Long Name
+반복기 유형 | 긴 이름
 :-- | :--
-Range | Iterator::Batch::Repeat::Map::Range
-Map | Iterator::Batch::Repeat::Map
-Repeat | Iterator::Batch::Repeat
-Batch | Iterator::Batch
+범위 | Iterator::Batch::Repeat::Map::Range
+맵 | Iterator::Batch::Repeat::Map
+반복 | Iterator::Batch::Repeat
+배치 | Iterator::Batch
 
-#### Summary of All Input Pipelines
+#### 모든 입력파이프 라인의 요약
 
 ![image](./images/tf_profiler/tf_data_all_hosts.png)
 
-This section provides the summary of all input pipelines across all hosts. Typically there is one input pipeline. When using the distribution strategy, there are one host input pipeline running the program's tf.data code and multiple device input pipelines retrieving data from the host input pipeline and transferring it to the devices.
+이 섹션에서는 모든 호스트의 모든 입력 파이프라인에 대한 요약을 제공합니다. 일반적으로 하나의 입력 파이프라인이 있습니다. 배포 전략을 사용하는 경우, 프로그램의 tf.data 코드를 실행하는 하나의 호스트 입력 파이프라인과 호스트 입력 파이프라인에서 데이터를 검색하여 장치로 전송하는 여러 개의 장치 입력 파이프라인이 있습니다.
 
-For each input pipeline, it shows the statistics of its execution time. A call is counted as slow if it takes longer than 50 μs.
+각 입력 파이프라인에 대해 실행 시간의 통계가 표시됩니다. 호출이 50μs 이상 오래 걸리면 느린 것으로 간주됩니다.
 
-#### Input Pipeline Graph
+#### 입력 파이프라인 그래프
 
 ![image](./images/tf_profiler/tf_data_graph_selector.png)
 
-This section shows the input pipeline graph with the execution time information. You can use "Host" and "Input Pipeline" to choose which host and input pipeline to see. Executions of the input pipeline are sorted by the execution time in descending order which you can use "Rank" to choose.
+이 섹션에서는 실행 시간 정보와 함께 입력 파이프라인 그래프가 표시됩니다. "호스트" 및 "입력 파이프라인"을 사용하여 보려는 호스트 및 입력 파이프라인을 선택할 수 있습니다. 입력 파이프라인의 실행은 실행 시간을 기준으로 정렬되며, "순위"를 사용하여 내림차순으로 정렬할 수 있습니다.
 
 ![image](./images/tf_profiler/tf_data_graph.png)
 
-The nodes on the critical path have bold outlines. The bottleneck node, which is the node with the longest self time on the critical path, has a red outline. The other non-critical nodes have gray dashed outlines.
+중요 경로의 노드에는 굵은 윤곽선이 있습니다. 중요 경로에서 가장 긴 자체 시간을 가진 노드인 병목 노드는 빨간색 윤곽선으로 표시됩니다. 중요하지 않은 다른 노드에는 회색 점선 윤곽선이 있습니다.
 
-In each node, "Start Time" indicates the start time of the execution. The same node may be executed multiple times, for example, if there is Batch in the input pipeline. If it is executed multiple times, it is the start time of the first execution.
+각 노드에서 "시작 시간"은 실행 시작 시간을 나타냅니다. 예를 들어, 입력 파이프라인에 배치가 있는 경우 동일한 노드가 여러 번 실행될 수 있습니다. 여러 번 실행되는 경우에 시작 시간은 첫 실행의 시작 시간입니다.
 
-"Total Duration" is the wall time of the execution. If it is executed multiple times, it is the sum of the wall times of all executions.
+"전체 지속 시간"은 실행의 벽 시간입니다. 여러 번 실행되는 경우에 전체 지속 시간은 모든 실행의 벽 시간 합계입니다.
 
-"Self Time" is "Total Time" without the overlapped time with its immediate child nodes.
+"자체 시간"은 바로 이어진 하위 노드와 겹치는 시간을 제외한 "전체 시간"입니다.
 
-"# Calls" is the number of times the input pipeline is executed.
+"# 호출"은 입력 파이프라인이 실행된 횟수입니다.
 
 <a name="collect_performance_data"></a>
 
@@ -444,7 +444,7 @@ TensorFlow 프로파일러는 TensorFlow 모델의 호스트 활동 및 GPU 추�
 
 ### 프로파일링 API
 
-You can use the following APIs to perform profiling.
+다음 API를 사용하여 프로파일링을 수행할 수 있습니다.
 
 - TensorBoard Keras 콜백(`tf.keras.callbacks.TensorBoard`)을 사용하는 프로그래밍 모드
 
@@ -481,7 +481,7 @@ You can use the following APIs to perform profiling.
 
 <a name="sampling_mode"></a>
 
-- Sampling mode - Perform on-demand profiling by using `tf.profiler.experimental.server.start()` to start a gRPC server with your TensorFlow model run. After starting the gRPC server and running your model, you can capture a profile through the **Capture Profile** button in the TensorBoard profile plugin. Use the script in the Install profiler section above to launch a TensorBoard instance if it is not already running.
+- 샘플링 모드 - `tf.profiler.experimental.server.start()`를 사용하여 주문형 프로파일링을 수행하여 TensorFlow 모델이 실행된 상태에서 gRPC 서버를 시작하세요. gRPC 서버를 시작하고 모델을 실행한 후 TensorBoard 프로파일 플러그인의 **Capture Profile** 버튼을 통해 프로파일을 캡처할 수 있습니다. 위의 프로파일러 설치 섹션에서 나오는 스크립트를 사용하여 TensorBoard 인스턴스가 아직 실행 중이 아니라면 실행하세요.
 
     예를 들면,
 
@@ -494,7 +494,7 @@ You can use the following APIs to perform profiling.
                                           'gs://your_tb_logdir', 2000)
     ```
 
-    An example for profiling multiple workers:
+    여러 작업자를 프로파일링하는 예:
 
     ```python
     # E.g. your worker IP addresses are 10.0.0.2, 10.0.0.3, 10.0.0.4, and you
@@ -511,16 +511,16 @@ You can use the following APIs to perform profiling.
 
 **Capture Profile** 대화 상자를 사용하여 다음을 지정합니다.
 
-- A comma delimited list of profile service URLs or TPU name.
-- A profiling duration.
-- The level of device, host, and Python function call tracing.
-- How many times you want the Profiler to retry capturing profiles if unsuccessful at first.
+- 쉼표로 구분된 프로파일 서비스 URL 또는 TPU 이름의 목록
+- 프로파일링 기간
+- 기기, 호스트 및 Python 함수 호출 추적의 수준
+- 처음에 실패한 경우, Profiler가 프로파일 캡처를 재시도하는 횟수
 
 ### 사용자 정의 훈련 루프 프로파일링
 
-To profile custom training loops in your TensorFlow code, instrument the training loop with the `tf.profiler.experimental.Trace` API to mark the step boundaries for the Profiler. The `name` argument is used as a prefix for the step names, the `step_num` keyword argument is appended in the step names, and the `_r` keyword argument makes this trace event get processed as a step event by the Profiler.
+TensorFlow 코드에서 사용자 정의 훈련 루프를 프로파일링하려면 `tf.profiler.experimental.Trace` API를 사용하여 훈련 루프를 계측하여 Profiler의 스텝 경계를 표시합니다. `name` 인수는 스텝 이름의 접두부로 사용되고 `step_num` 키워드 인수는 스텝 이름에 추가되며 `_r` 키워드 인수는 추적 이벤트가 Profiler에 의해 스텝 이벤트로 처리되도록 합니다.
 
-As an example,
+예를 들면 다음과 같습니다.
 
 ```python
 for step in range(NUM_STEPS):
@@ -529,7 +529,7 @@ for step in range(NUM_STEPS):
         train_step(train_data)
 ```
 
-This will enable the Profiler's step-based performance analysis and cause the step events to show up in the trace viewer.
+Profiler의 스텝 기반 성능 분석이 활성화되고 스텝 이벤트가 추적 뷰어에 표시됩니다.
 
 입력 파이프라인의 정확한 분석을 위해 `tf.profiler.experimental.Trace` 컨텍스트 내에 데이터세트 반복기를 포함합니다.
 
@@ -548,14 +548,14 @@ for step, train_data in enumerate(dataset):
 Profiler는 4가지 축을 따라 여러 가지 사용 사례를 다룹니다. 일부 조합은 현재 지원되며 다른 조합은 향후에 추가될 예정입니다. 사용 사례 중 일부는 다음과 같습니다.
 
 - 로컬 및 원격 프로파일링: 프로파일링 환경을 설정하는 일반적인 두 가지 방법입니다. 로컬 프로파일링에서 프로파일링 API는 모델이 실행 중인 같은 머신(예: GPU가 있는 로컬 워크스테이션)에서 호출됩니다. 원격 프로파일링에서 프로파일링 API는 모델이 실행 중인 다른 머신(예: Cloud TPU)에서 호출됩니다.
-- Profiling multiple workers: You can profile multiple machines when using the distributed training capabilities of TensorFlow.
+- 여러 작업자 프로파일링: TensorFlow의 분산 훈련 기능을 사용할 때 여러 머신을 프로파일링할 수 있습니다.
 - 하드웨어 플랫폼: CPU, GPU 및 TPU를 프로파일링합니다.
 
-The table below is a quick overview of which of the above use cases are supported by the various profiling APIs in TensorFlow:
+아래 표는 위의 사용 사례 중 TensorFlow의 다양한 프로파일링 API에서 지원되는 사용 사례를 간략하게 보여줍니다.
 
 <a name="profiling_api_table"></a>
 
-| Profiling API                | Local     | Remote    | Multiple  | Hardware  | :                              :           :           : workers   : Platforms : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | Supported | Not       | Not       | CPU, GPU  | : Callback**                   :           : Supported : Supported :           : | **`tf.profiler.experimental` | Supported | Not       | Not       | CPU, GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : Supported : Supported :           : | **`tf.profiler.experimental` | Supported | Supported | Supported | CPU, GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace)**  :           :           :           : TPU       : | **Context manager API**      | Supported | Not       | Not       | CPU, GPU  | :                              :           : supported : Supported :           :
+| 프로파일링 API                | 로컬     | 원격    | 다중  | 하드웨어  | :                              :           :           : 작업자   : 플랫폼 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 지원됨 | 아님       | 아님       | CPU, GPU  | : Callback**                   :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 아님       | 아님       | CPU, GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 지원됨 | 지원됨 | CPU, GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace)**  :           :           :           : TPU       : | **Context manager API**      | 지원됨 | 아님       | 아님       | CPU, GPU  | :                              :           : 지원됨 : 지원됨 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -567,7 +567,7 @@ The table below is a quick overview of which of the above use cases are supporte
 
 ### 입력 데이터 파이프라인의 최적화
 
-An efficient data input pipeline can drastically improve the speed of your model execution by reducing device idle time. Consider incorporating the following best practices as detailed [here](https://www.tensorflow.org/guide/data_performance) to make your data input pipeline more efficient:
+효율적인 데이터 입력 파이프라인은 기기의 유휴 시간을 줄임으로써 모델 실행 속도를 크게 향상할 수 있습니다. 데이터 입력 파이프라인을 더 효율적으로 만들려면 [여기](https://www.tensorflow.org/guide/data_performance)에 설명된 대로 다음 모범 사례를 통합해 보세요.
 
 - 데이터 프리페치
 - 데이터 추출 병렬화
@@ -576,33 +576,33 @@ An efficient data input pipeline can drastically improve the speed of your model
 - 사용자 정의 함수 벡터화
 - 변환 적용 시 메모리 사용량 축소
 
-Additionally, try running your model with synthetic data to check if the input pipeline is a performance bottleneck.
+또한 합성 데이터로 모델을 실행하여 입력 파이프라인이 성능 병목인지 확인하세요.
 
 ### 기기 성능 향상하기
 
-- Increase training mini-batch size (number of training samples used per device in one iteration of the training loop)
+- 훈련 미니 배치 크기 늘리기(훈련 루프의 한 번 반복에서 장치당 사용되는 훈련 샘플 수)
 - TF 통계를 사용하여 기기 연산이 얼마나 효율적으로 실행되는지 확인합니다.
-- Use `tf.function` to perform computations and optionally, enable the `experimental_compile` flag
-- Minimize host Python operations between steps and reduce callbacks. Calculate metrics every few steps instead of at every step
+- `tf.function`을 사용하여 계산을 수행하고 선택적으로 `experimental_compile` 플래그를 활성화합니다.
+- 단계 간의 호스트 Python 연산을 최소화하고 콜백을 줄입니다. 모든 단계가 아닌 몇 단계마다 메트릭을 계산합니다.
 - 기기 컴퓨팅 단위의 사용률을 높게 유지합니다.
 - 여러 기기에 병렬로 데이터를 전송합니다.
 - 채널을 우선적으로 선호하도록 데이터 레이아웃을 최적화합니다(예: NHWC보다 NCHW). NVIDIA® V100과 같은 특정 GPU는 NHWC 데이터 레이아웃에서 성능이 더 우수합니다.
 - IEEE에서 지정한 반정밀도 부동 소수점 형식인 `fp16` 또는 Brain 부동 소수점 [bfloat16](https://cloud.google.com/tpu/docs/bfloat16) 형식과 같은 16-bit 숫자 표현의 사용을 고려해보세요.
 - [Keras 혼합 정밀도 API](https://www.tensorflow.org/guide/keras/mixed_precision)의 사용을 고려해보세요.
-- When training on GPUs, make use of the TensorCore. GPU kernels use the TensorCore when the precision is fp16 and input/output dimensions are divisible by 8 or 16 (for int8)
+- GPU를 학습시킬 때는 TensorCore를 사용하세요. 정밀도가 fp16이고 입력/출력 크기를 8 또는 16(int8의 경우)으로 나눌 수 있으면 GPU 커널은 TensorCore를 사용합니다.
 
 ## 추가 자료
 
 - 이 가이드의 조언을 구현하려면 엔드 투 엔드 [TensorBoard 프로파일러 튜토리얼](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras)을 참조하세요.
-- Watch the [Performance profiling in TF 2](https://www.youtube.com/watch?v=pXHAQIhhMhI) talk from the TensorFlow Dev Summit 2020.
+- TensorFlow Dev Summit 2020에서 열린 [TF 2의 성능 프로파일링](https://www.youtube.com/watch?v=pXHAQIhhMhI)을 시청하세요.
 
 ## 알려진 제한 사항
 
-### Profiling multiple GPUs on TensorFlow 2.2 and TensorFlow 2.3
+### TensorFlow 2.2 및 TensorFlow 2.3에서 여러 GPU 프로파일링
 
-TensorFlow 2.2 and 2.3 support multiple GPU profiling for single host systems only; multiple GPU profiling for multi-host systems is not supported. To profile multi-worker GPU configurations, each worker has to be profiled independently. On TensorFlow 2.4, multiple workers can be profiled using the [`tf.profiler.experimental.trace`](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace) API.
+TensorFlow 2.2 및 2.3은 단일 호스트 시스템에 대해서만 다중 GPU 프로파일링을 지원합니다. 다중 호스트 시스템에 대한 다중 GPU 프로파일링은 지원되지 않습니다. 다중 작업자 GPU 구성을 프로파일링하려면 각 작업자를 독립적으로 프로파일링해야 합니다. TensorFlow 2.4에서는 [`tf.profiler.experimental.trace`](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace) API를 사용하여 여러 작업자를 프로파일링할 수 있습니다.
 
-CUDA® Toolkit 10.2 or later is required to profile multiple GPUs. As TensorFlow 2.2 and 2.3 support CUDA® Toolkit versions only up to 10.1 , create symbolic links to `libcudart.so.10.1` and `libcupti.so.10.1`.
+여러 GPU를 프로파일링하려면 CUDA® Toolkit 10.2 이상이 필요합니다. TensorFlow 2.2 및 2.3은 최대 10.1까지만 CUDA® Toolkit 버전만 지원하므로 `libcudart.so.10.1` 및 `libcupti.so.10.1`에 대한 기호 링크를 만드세요.
 
 ```shell
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
