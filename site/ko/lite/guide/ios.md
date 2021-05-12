@@ -2,23 +2,23 @@
 
 iOS에서 TensorFlow Lite를 시작하려면 다음 예제를 살펴볼 것을 권장합니다.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS image classification example</a>
+<a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios" class="">iOS 이미지 분류 예제</a>
 
 소스 코드에 대한 설명은 [TensorFlow Lite iOS 이미지 분류](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md)를 읽어보아야 합니다.
 
-This example app uses [image classification](https://www.tensorflow.org/lite/models/image_classification/overview) to continuously classify whatever it sees from the device's rear-facing camera, displaying the top most probable classifications. It allows the user to choose between a floating point or [quantized](https://www.tensorflow.org/lite/performance/post_training_quantization) model and select the number of threads to perform inference on.
+이 예제 앱은 [이미지 분류](https://www.tensorflow.org/lite/models/image_classification/overview)를 사용하여 기기의 후면 카메라에서 보이는 내용을 지속적으로 분류하여 가장 가능성이 높은 분류를 표시합니다. 이를 통해 사용자는 부동 소수점 또는 [양자화](https://www.tensorflow.org/lite/performance/post_training_quantization) 모델 중에서 선택하고 추론을 수행할 스레드 수를 선택할 수 있습니다.
 
-Note: Additional iOS applications demonstrating TensorFlow Lite in a variety of use cases are available in [Examples](https://www.tensorflow.org/lite/examples).
+참고: 다양한 사용 사례에서 TensorFlow Lite의 사용을 시연하는 추가 iOS 애플리케이션을 [예제](https://www.tensorflow.org/lite/examples)에서 확인할 수 있습니다.
 
-## Add TensorFlow Lite to your Swift or Objective-C project
+## Swift 또는 Objective-C 프로젝트에 TensorFlow Lite 추가하기
 
-TensorFlow Lite offers native iOS libraries written in [Swift](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/swift) and [Objective-C](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/objc). Start writing your own iOS code using the [Swift image classification example](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios) as a starting point.
+TensorFlow Lite는 [Swift](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/swift) 및 [Objective-C](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/objc)로 작성된 네이티브 iOS 라이브러리를 제공합니다. [Swift 이미지 분류 예](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios)를 출발점으로 하여 고유한 iOS 코드 작성을 시작하세요.
 
 아래 섹션에서 TensorFlow Lite Swift 또는 Objective-C를 프로젝트에 추가하는 방법을 보여줍니다.
 
 ### CocoaPods 개발자
 
-In your `Podfile`, add the TensorFlow Lite pod. Then, run `pod install`.
+`Podfile`에서 TensorFlow Lite 포드를 추가합니다. 그런 다음 `pod install`을 실행합니다.
 
 #### Swift
 
@@ -33,31 +33,31 @@ pod 'TensorFlowLiteSwift'
 pod 'TensorFlowLiteObjC'
 ```
 
-#### Specifying versions
+#### 버전 지정하기
 
 `TensorFlowLiteSwift` 및 `TensorFlowLiteObjC` 포드 모두에 안정적인 릴리스와 야간 릴리스가 제공됩니다. 위의 예에서와 같이 버전 제약 조건을 지정하지 않으면 CocoaPods는 기본적으로 안정된 최신 릴리스를 가져옵니다.
 
-You can also specify a version constraint. For example, if you wish to depend on version 2.0.0, you can write the dependency as:
+버전 제약 조건을 지정할 수도 있습니다. 예를 들어, 버전 2.0.0을 이용하려는 경우 종속성을 다음과 같이 작성할 수 있습니다.
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 2.0.0'
 ```
 
-This will ensure the latest available 2.x.y version of the `TensorFlowLiteSwift` pod is used in your app. Alternatively, if you want to depend on the nightly builds, you can write:
+그러면 `TensorFlowLiteSwift` 포드의 최신 2.xy 버전이 앱에서 사용됩니다. 또는 야간 빌드를 사용하려는 경우, 다음과 같이 작성할 수 있습니다.
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly'
 ```
 
-From 2.4.0 version and latest nightly releases, by default [GPU](https://www.tensorflow.org/lite/performance/gpu) and [Core ML delegates](https://www.tensorflow.org/lite/performance/coreml_delegate) are excluded from the pod to reduce the binary size. You can include them by specifying subspec:
+2.4.0 버전과 최근 야간 버전부터 바이너리 크기를 줄이기 위해 기본적으로 [GPU](https://www.tensorflow.org/lite/performance/gpu) 및 [Core ML delegate](https://www.tensorflow.org/lite/performance/coreml_delegate)가 포드에서 제외되지만 하위 사양을 지정하여 포함할 수 있습니다.
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['CoreML', 'Metal']
 ```
 
-This will allow you to use the latest features added to TensorFlow Lite. Note that once the `Podfile.lock` file is created when you run `pod install` command for the first time, the nightly library version will be locked at the current date's version. If you wish to update the nightly library to the newer one, you should run `pod update` command.
+이를 통해 TensorFlow Lite에 추가된 최신 특성을 사용할 수 있습니다. `pod install` 명령을 처음 실행할 때 `Podfile.lock` 파일이 생성되면 야간 라이브러리 버전이 현재 날짜 버전에서 잠긴다는 점에 유의해야 합니다. 야간 라이브러리를 최신 라이브러리로 업데이트하려면 `pod update` 명령을 실행해야 합니다.
 
-For more information on different ways of specifying version constraints, see [Specifying pod versions](https://guides.cocoapods.org/using/the-podfile.html#specifying-pod-versions).
+버전 제약 조건을 지정하는 다양한 방법에 대한 자세한 설명은 [포드 버전 지정하기](https://guides.cocoapods.org/using/the-podfile.html#specifying-pod-versions)를 참조하세요.
 
 ### Bazel 개발자
 
@@ -85,7 +85,7 @@ objc_library(
 
 #### C/C++ API
 
-Alternatively, you can use [C API](https://www.tensorflow.org/code/tensorflow/lite/c/c_api.h) or [C++ API](https://tensorflow.org/lite/api_docs/cc)
+또는, [C API](https://www.tensorflow.org/code/tensorflow/lite/c/c_api.h) 또는 [C++ API](https://tensorflow.org/lite/api_docs/cc)를 사용할 수 있습니다.
 
 ```python
 # Using C API directly
@@ -103,21 +103,21 @@ objc_library(
 )
 ```
 
-### Import the library
+### 라이브러리 가져오기
 
-For Swift files, import the TensorFlow Lite module:
+Swift 파일의 경우, TensorFlow Lite 모듈을 가져옵니다.
 
 ```swift
 import TensorFlowLite
 ```
 
-For Objective-C files, import the umbrella header:
+Objective-C 파일의 경우, 마스터 헤더를 가져옵니다.
 
 ```objectivec
 #import "TFLTensorFlowLite.h"
 ```
 
-Or, the module if you set `CLANG_ENABLE_MODULES = YES` in your Xcode project:
+또는 Xcode 프로젝트에서 `CLANG_ENABLE_MODULES = YES`를 설정한 모듈의 경우는 다음과 같습니다.
 
 ```objectivec
 @import TFLTensorFlowLite;
