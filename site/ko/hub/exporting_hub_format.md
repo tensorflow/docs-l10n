@@ -4,13 +4,13 @@
 
 이 형식에 대한 자세한 내용은 [TF1 허브 형식](tf1_hub_module.md)에서 읽을 수 있습니다.
 
-## Compatibility note
+## 호환성 참고
 
 TF1 허브 형식은 TensorFlow 1에 맞춰져 있습니다. TensorFlow 2의 TF 허브에서는 부분적으로만 지원됩니다. 대신 [모델 내보내기](exporting_tf2_saved_model) 가이드에 따라 새로운 [TF2 SavedModel](tf2_saved_model.md) 형식으로 게시하는 것을 고려하세요.
 
 TF1 허브 형식은 구문 수준(동일한 파일 이름 및 프로토콜 메시지)에서 TensorFlow 1의 SavedModel 형식과 유사하지만 모듈 재사용, 구성 및 재교육(예: 리소스 초기화 프로그램의 다른 저장소, 메타그래프에 대한 다른 태그 지정 방식)을 허용하기 위해 의미상 다릅니다. 디스크에서 이들을 구별하는 가장 쉬운 방법은 `tfhub_module.pb` 파일이 있는지 여부입니다.
 
-## General approach
+## 일반적인 접근
 
 새 모듈을 정의하려면, 게시자는 `module_fn` 함수로 `hub.create_module_spec()`을 호출합니다. 이 함수는 호출자가 제공할 입력에 대해 `tf.placeholder()`를 사용하여 모듈의 내부 구조를 나타내는 그래프를 구성합니다. 그런 다음 `hub.add_signature(name, inputs, outputs)`을 한 번 이상 호출하여 서명을 정의합니다.
 
@@ -37,7 +37,7 @@ TensorFlow Estimator와의 호환성을 위해 `hub.LatestModuleExporter`는 최
 
 모듈 게시자는 가능한 경우 [공통 서명](common_signatures/index.md)을 구현하여 소비자가 쉽게 모듈을 교환하고 해당 문제에 가장 적합한 모델을 찾을 수 있도록 해야 합니다.
 
-## Real example
+## 실제 예
 
 일반적인 텍스트 임베딩 형식에서 모듈을 만드는 방법에 대한 실제 예제를 보려면 [텍스트 임베딩 모듈 내보내기](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings/export.py)를 살펴보세요.
 
