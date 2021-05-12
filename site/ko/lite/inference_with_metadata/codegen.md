@@ -111,7 +111,7 @@ if(null != myImageClassifier) {
 <li data-md-type="list_item" data-md-list-type="unordered">
 <strong data-md-type="double_emphasis"><code data-md-type="codespan">Context</code></strong>: Android 활동 또는 서비스의 컨텍스트</li>
 <li data-md-type="list_item" data-md-list-type="unordered">(선택 사항) <strong data-md-type="double_emphasis"><code data-md-type="codespan">Device</code></strong>: GPUDelegate 또는 NNAPIDelegate와 같은 TFLite 가속 대리자</li>
-<li data-md-type="list_item" data-md-list-type="unordered">(Optional) <strong data-md-type="double_emphasis"><code data-md-type="codespan">numThreads</code></strong>: Number of threads used to run the model - default is one.</li>
+<li data-md-type="list_item" data-md-list-type="unordered">(선택 사항) <strong data-md-type="double_emphasis"><code data-md-type="codespan">numThreads</code></strong>: 모델을 실행하는 데 사용되는 스레드의 수 - 기본값 1</li>
 </ul>
 <p data-md-type="paragraph">예를 들어, NNAPI 대리자와 최대 3개의 스레드를 사용하려면 다음과 같이 모델을 초기화할 수 있습니다.</p>
 <pre data-md-type="block_code" data-md-language="java"><code class="language-java">try {
