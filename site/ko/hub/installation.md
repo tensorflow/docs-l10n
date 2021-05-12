@@ -35,11 +35,11 @@ $ pip install tf-nightly
 $ pip install --upgrade tf-hub-nightly
 ```
 
-## Next Steps
+## 다음 단계
 
 - [Library overview](lib_overview.md)
 - 튜토리얼:
     - [Text classification](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
     - [Image classification](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
-    - Additional examples [on GitHub](https://github.com/tensorflow/hub/blob/master/examples/README.md)
-- Find models on [tfhub.dev](https://tfhub.dev)
+    - [GitHub의](https://github.com/tensorflow/hub/blob/master/examples/README.md) 추가 예제
+- [tfhub.dev](https://tfhub.dev)에서 모델 찾기
