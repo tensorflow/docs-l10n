@@ -4,7 +4,7 @@
 
 Use the tools available with the Profiler to track the performance of your TensorFlow models. See how your model performs on the host (CPU), the device (GPU), or on a combination of both the host and device(s).
 
-Profiling helps you understand the hardware resource consumption (time and memory) of the various TensorFlow operations (ops) in your model and resolve performance bottlenecks and ultimately, make the model execute faster.
+프로파일링을 통해 모델에서 다양한 TensorFlow 연산(ops)이 사용하는 하드웨어 리소스(시간 및 메모리)를 이해하고 성능 병목 현상을 해결함으로써 궁극적으로 모델의 실행 속도를 높일 수 있습니다.
 
 This guide will walk you through how to install the Profiler, the various tools available, the different modes of how the Profiler collects performance data, and some recommended best practices to optimize model performance.
 
@@ -12,7 +12,7 @@ Cloud TPU의 모델 성능을 프로파일링하려면 [Cloud TPU 가이드](htt
 
 ## Profiler 및 GPU 필수 구성 요소 설치
 
-Install the Profiler by downloading and running the [`install_and_run.py`](https://raw.githubusercontent.com/tensorflow/profiler/master/install_and_run.py) script from the [GitHub repository](https://github.com/tensorflow/profiler).
+[GitHub 리포지토리](https://raw.githubusercontent.com/tensorflow/profiler/master/install_and_run.py)에서 <a><code>install_and_run.py</code></a> 스크립트를 다운로드한 후 실행하여 Profiler를 설치하세요.
 
 GPU를 프로파일링하려면 다음을 수행해야 합니다.
 
@@ -31,7 +31,7 @@ If you don't have CUPTI on the path, prepend its installation directory to the `
 export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 ```
 
-Run the `ldconfig` command above again to verify that the CUPTI library is found.
+위의 `ldconfig` 명령을 다시 실행하여 CUPTI 라이브러리가 있는지 확인하세요.
 
 ### 권한 문제 해결하기
 
@@ -84,11 +84,11 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
         - 기기 내 컴퓨팅 시간
         - Python 오버헤드를 포함한 기타
 
-    2. Device compute precisions - Reports the percentage of device compute time that uses 16 and 32-bit computations
+    2. 기기 컴퓨팅 정밀도 - 16 및 32bit 계산을 사용하는 기기 컴퓨팅 시간의 백분율을 보고합니다.
 
 - **단계 시간 그래프 - ** 샘플링한 모든 단계에서 기기 단계 시간(밀리 초)의 그래프를 표시합니다. 각 단계는 시간이 사용된 여러 범주(서로 다른 색상)로 나뉩니다. 빨간색 영역은 기기가 호스트로부터 입력 데이터를 기다리는 동안 유휴 상태인 단계 시간의 일부에 해당합니다. 녹색 영역은 기기가 실제로 작동한 시간을 나타냅니다.
 
-- **Top 10 TensorFlow operations on device -** Displays the on-device ops that ran the longest.
+- **기기 내 상위 10개의 TensorFlow 연산 -** 가장 오래 실행된 기기 연산을 표시합니다.
 
     각 행에는 연산의 자체 시간(모든 연산에 소요된 시간의 백분율), 누적 시간, 범주 및 이름이 표시됩니다.
 
@@ -104,7 +104,7 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
 
 ### 입력 파이프라인 분석기
 
-When a TensorFlow program reads data from a file it begins at the top of the TensorFlow graph in a pipelined manner. The read process is divided into multiple data processing stages connected in series, where the output of one stage is the input to the next one. This system of reading data is called the *input pipeline*.
+TensorFlow 프로그램이 파일에서 데이터를 읽을 때 파이프라인 방식으로 TensorFlow 그래프의 맨 위에서 시작합니다. 읽기 프로세스는 직렬로 연결된 다수의 데이터 처리 단계로 나누어지며, 한 단계의 출력은 다음 단계의 입력이 됩니다. 이러한 데이터 읽기 방식을 *입력 파이프라인*이라고 합니다.
 
 파일에서 레코드를 읽는 일반적인 파이프라인에는 다음 단계가 있습니다.
 
@@ -120,19 +120,19 @@ When a TensorFlow program reads data from a file it begins at the top of the Ten
 
 #### 입력 파이프라인 대시보드
 
-To open the input pipeline analyzer, select **Profile**, then select **input_pipeline_analyzer** from the **Tools** dropdown.
+입력 파이프라인 분석기를 열려면 **프로파일**을 선택한 다음 **도구** 드롭다운 메뉴에서 **input_pipeline_analyzer**를 선택하세요.
 
-![image](./images/tf_profiler/input_pipeline_analyzer.png)
+![image](./images/tf_profiler/overview_page.png)
 
 대시보드에는 세 개의 섹션이 있습니다.
 
-1. **Summary -** Summarizes the overall input pipeline with information on whether your application is input bound and, if so, by how much
-2. **Device-side analysis -** Displays detailed, device-side analysis results, including the device step-time and the range of device time spent waiting for input data across cores at each step
-3. **Host-side analysis -** Shows a detailed analysis on the host side, including a breakdown of input processing time on the host
+1. **요약 -** 애플리케이션이 입력 바운드인지 여부와 정보의 양에 따라 전체 입력 파이프라인을 요약하여 보여줍니다.
+2. **기기 쪽 분석 -** 기기 단계 시간 및 각 단계에서 코어를 통해 입력 데이터를 기다리는 데 소요된 기기 시간 범위를 포함하여 자세한 기기 쪽 분석 결과를 표시합니다.
+3. **호스트 쪽 분석 -** 호스트의 입력 처리 시간 분석을 포함하여 호스트 쪽 분석을 자세히 보여줍니다.
 
 #### 입력 파이프라인 요약
 
-The Summary reports if your program is input bound by presenting the percentage of device time spent on waiting for input from the host. If you are using a standard input pipeline that has been instrumented, the tool reports where most of the input processing time is spent.
+요약에서는 호스트로부터 입력을 기다리는 데 소요된 기기 시간의 백분율을 보여줌으로써 프로그램이 입력 바운드인지 보고합니다. 계측된 표준 입력 파이프라인을 사용하는 경우에는 도구에서 대부분의 입력 처리 시간이 소비된 위치를 보고합니다.
 
 #### 기기 쪽 분석
 
@@ -145,22 +145,22 @@ The Summary reports if your program is input bound by presenting the percentage 
 
 호스트 쪽 분석은 호스트의 입력 처리 시간(`tf.data` API 연산에 소요된 시간)을 여러 범주로 분류하여 보고합니다.
 
-- **Reading data from files on demand -** Time spent on reading data from files without caching, prefetching, and interleaving
-- **Reading data from files in advance -** Time spent reading files, including caching, prefetching, and interleaving
+- **요청 시 파일에서 데이터 읽기 -** 캐싱, 프리페치 및 인터리빙 없이 파일에서 데이터를 읽는 데 소요된 시간입니다.
+- **파일에서 미리 데이터 읽기 -** 캐싱, 프리페치 및 인터리빙을 포함하여 파일을 읽는 데 소요된 시간
 - **데이터 전처리 -** 이미지 압축 풀기와 같은 사전 처리 연산에 소요된 시간
 - **기기로 전송될 데이터 큐에 넣기 -** 데이터를 기기로 전송하기 전에 데이터를 인피드 큐에 넣는 데 소요된 시간
 
 **입력 Op 통계**를 확장하여 개별 입력 연산 및 해당 범주에 대한 통계를 실행 시간별로 분류하여 볼 수 있습니다.
 
-![image](./images/tf_profiler/input_op_stats.png)
+![image](./images/tf_profiler/input_pipeline_analyzer.png)
 
-A source data table appears with each entry containing the following information:
+소스 데이터 표에는 다음 정보가 포함하여 각 항목이 표시됩니다.
 
 1. **입력 Op -** 입력 op의 TensorFlow op 이름을 표시합니다.
-2. **Count -** Shows the total number of instances of op execution during the profiling period
+2. **Count -** 프로파일링 기간 동안 작업 실행의 총 인스턴스 수를 표시합니다.
 3. **총 시간(밀리 초) -** 각 인스턴스에 소요된 시간의 누적 합계를 보여줍니다.
 4. **총 시간 % -** 입력 처리에 소요된 총 시간의 일부로 작업에 소요된 총 시간을 표시합니다.
-5. **Total Self Time (in ms) -** Shows the cumulative sum of the self time spent on each of those instances. The self time here measures the time spent inside the function body, excluding the time spent in the function it calls.
+5. **총 자체 시간(밀리 초) -** 각 인스턴스에 소요된 자체 시간의 누적 합계를 표시합니다. 여기에서 자체 시간은 호출하는 함수에서 소비한 시간을 제외하고 함수 본문 내에서 소비된 시간을 측정합니다.
 6. **총 자체 시간 %**. 총 자체 시간을 입력 처리에 소요된 총 시간의 일부로 표시합니다.
 7. **범주**. 입력 op의 처리 범주를 표시합니다.
 
@@ -170,7 +170,7 @@ A source data table appears with each entry containing the following information
 
 TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기기에서 실행되는 모든 TensorFlow 연산(op)의 성능을 표시합니다.
 
-![image](./images/tf_profiler/tf_stats.png)
+![image](./images/tf_profiler/input_op_stats.png)
 
 이 도구는 성능 정보를 두 개의 창에서 표시합니다.
 
@@ -181,23 +181,23 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
     3. 기기에서 각 op의 자체 실행 시간 분포
     4. 기기에서 각 op 유형의 자체 실행 시간 분포
 
-- The lower pane shows a table that reports data about TensorFlow ops with one row for each op and one column for each type of data (sort columns by clicking the heading of the column). Click the Export as CSV button on the right side of the upper pane to export the data from this table as a CSV file.
+- 하단 창에 표시되는 표에는 TensorFlow 연산에 대한 데이터를 보고합니다. 행에는 연산별로, 열에는 데이터 유형별로 표시됩니다(열의 제목을 클릭하여 정렬). 상단 창의 오른쪽에 있는 CSV로 내보내기 버튼을 클릭하여 테이블의 데이터를 CSV 파일로 내보낼 수 있습니다.
 
     참고:
 
     - 어떤 연산이 하위 연산을 포함하는 경우:
 
-        - The total "accumulated" time of an op includes the time spent inside the child ops
-        - The total "self" time of an op does not include the time spent inside the child ops
+        - 작업의 총 "누적" 시간에는 하위 작업 내부에서 보낸 시간이 포함됩니다.
+        - 작업의 총 "자체" 시간에는 하위 작업 내부에서 보낸 시간이 포함되지 않습니다.
 
     - 호스트에서 op가 실행되는 경우:
 
         - The percentage of the total self-time on device incurred by the op on will be 0
-        - The cumulative percentage of the total self-time on device upto and including this op will be 0
+        - 이 op를 포함하여 기기의 총 자체 시간 누적 백분율은 0입니다.
 
     - 기기에서 op가 실행되는 경우:
 
-        - The percentage of the total self-time on host incurred by this op will be 0
+        - 이 op로 발생한 호스트의 총 자체 시간 백분율은 0입니다.
         - 이 op를 포함하여 호스트의 총 자체 시간 누적 백분율은 0입니다.
 
 파이 차트 및 테이블에서 유휴 시간을 포함하거나 제외하도록 선택할 수 있습니다.
@@ -209,7 +209,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 추적 뷰어의 타임라인을 통해 다음을 알 수 있습니다.
 
 - TensorFlow 모델에 의해 실행된 연산의 기간
-- Which part of the system (host or device) executed an op. Typically, the host executes input operations, preprocesses training data and transfers it to the device, while the device executes the actual model training
+- 시스템의 어느 부분(호스트 또는 기기)에서 op를 실행했는지 알 수 있습니다. 일반적으로 호스트는 입력 연산을 실행하고 학습 데이터를 사전 처리하여 기기로 전송하는 반면, 기기는 실제 모델 학습을 실행합니다.
 
 추적 뷰어를 사용하면 모델의 성능 문제를 식별한 다음 해결을 위한 단계를 수행할 수 있습니다. 예를 들어, 입력 또는 모델 훈련에 많은 시간이 소요되는지 높은 수준에서 확인할 수 있습니다. 드릴다운하면 실행하는 데 가장 오래 걸리는 ops를 식별할 수 있습니다. 추적 뷰어는 기기당 백만 개의 이벤트로 제한됩니다.
 
@@ -217,7 +217,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 추적 뷰어를 열면 가장 최근에 실행된 내용이 표시됩니다.
 
-![image](./images/tf_profiler/trace_viewer.png)
+![image](./images/tf_profiler/tf_stats.png)
 
 이 화면에는 다음과 같은 주요 요소가 포함되어 있습니다.
 
@@ -236,15 +236,15 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 추적 뷰어에는 다음 섹션이 포함되어 있습니다.
 
-- **One section for each device node**, labeled with the number of the device chip and the device node within the chip (for example, `/device:GPU:0 (pid 0)`). Each device node section contains the following tracks:
+- **기기 노드별 섹션 하나**, 기기 칩 번호와 칩 내 기기 노드로 표시됩니다(예를 들어, `/device:GPU:0 (pid 0)`). 각 기기 노드 섹션에는 다음 트랙이 포함되어 있습니다.
     - **Step -** 기기에서 실행 중인 학습 단계의 기간을 표시합니다.
     - **TensorFlow Ops -**. Shows the ops executed on the device
-    - **XLA Ops -** Shows [XLA](https://www.tensorflow.org/xla/) operations (ops) that ran on the device if XLA is the compiler used (each TensorFlow op is translated into one or several XLA ops. The XLA compiler translates the XLA ops into code that runs on the device).
+    - **XLA 연산 -** XLA 컴파일러가 사용된 경우에는 기기에서 실행된 [XLA](https://www.tensorflow.org/xla/) 연산(ops)을 표시합니다. (각 TensorFlow op는 하나 또는 여러 개의 XLA ops로 변환됩니다. XLA 컴파일러는 XLA ops를 기기에서 실행되는 코드로 변환합니다.)
 - **호스트 머신의 CPU에서 실행되는 스레드에 대한 섹션 하나,** **"Host Threads"**로 표시됩니다. 이 섹션에는 CPU 스레드마다 하나의 트랙이 있습니다. 섹션 레이블과 함께 표시되는 정보는 무시해도 됩니다.
 
 ##### 이벤트
 
-Events within the timeline are displayed in different colors; the colors themselves have no specific meaning.
+타임라인 내의 이벤트는 다른 색상으로 표시됩니다. 색상 자체는 특별한 의미가 없습니다.
 
 The trace viewer can also display traces of Python function calls in your TensorFlow program. If you use the `tf.profiler.experimental.start()` API, you can enable Python tracing by using the `ProfilerOptions` namedtuple when starting profiling. Alternatively, if you use the sampling mode for profiling, you can select the level of tracing by using the dropdown options in the **Capture Profile** dialog.
 
@@ -262,9 +262,9 @@ The trace viewer can also display traces of Python function calls in your Tensor
 
 - 상단 창에는 총 시간이 가장 높은 CUDA 커널을 보여주는 파이 차트가 표시됩니다.
 
-- The lower pane displays a table with the following data for each unique kernel-op pair:
+- 하단 창에 표시되는 표에서는 각 고유 kernel-op 쌍에 대한 다음 데이터를 보여줍니다.
 
-    - A rank in descending order of total elapsed GPU duration grouped by kernel-op pair
+    - kernel-op 쌍별로 그룹화된 총 경과 GPU 기간의 내림차순 순위
     - 시작된 커널의 이름
     - 커널이 사용하는 GPU 레지스터 수
     - The total size of shared (static + dynamic shared) memory used in bytes
@@ -387,7 +387,7 @@ The UI is divided into three sections: Performance Analysis Summary, Summary of 
 
 #### Performance analysis summary
 
-![image](./images/tf_profiler/tf_data_summary.png)
+![image](./images/tf_profiler/trace_viewer.png)
 
 This section provides the summary of the analysis. It tells whether a slow tf.data input pipeline is detected in the profile. If so, it shows the most input bound host and its slowest input pipeline with the max latency. And most importantly, it tells which part of the input pipeline is the bottleneck and how to fix it. The bottleneck information is provided with the iterator type and its long name.
 
@@ -440,13 +440,13 @@ In each node, "Start Time" indicates the start time of the execution. The same n
 
 ## 성능 데이터 수집
 
-The TensorFlow Profiler collects host activities and GPU traces of your TensorFlow model. You can configure the Profiler to collect performance data through either the programmatic mode or the sampling mode.
+TensorFlow 프로파일러는 TensorFlow 모델의 호스트 활동 및 GPU 추적을 수집합니다. 프로그래밍 모드 또는 샘플링 모드를 통해 성능 데이터를 수집하도록 프로파일러를 구성할 수 있습니다.
 
 ### 프로파일링 API
 
 You can use the following APIs to perform profiling.
 
-- Programmatic mode using the TensorBoard Keras Callback (`tf.keras.callbacks.TensorBoard`)
+- TensorBoard Keras 콜백(`tf.keras.callbacks.TensorBoard`)을 사용하는 프로그래밍 모드
 
     ```python
     # Profile from batches 10 to 15
@@ -561,9 +561,9 @@ The table below is a quick overview of which of the above use cases are supporte
 
 ## 최적의 모델 성능을 위한 모범 사례
 
-Use the following recommendations as applicable for your TensorFlow models to achieve optimal performance.
+최적의 성능을 얻으려면 TensorFlow 모델에 적용 가능한 다음 권장 사항을 사용하세요.
 
-In general, perform all transformations on the device and ensure that you use the latest compatible version of libraries like cuDNN and Intel MKL for your platform.
+일반적으로 기기에서 모든 변환을 수행하고 플랫폼에 맞는 최신 호환 버전의 라이브러리(cuDNN, Intel MKL 등)를 사용해야 합니다.
 
 ### 입력 데이터 파이프라인의 최적화
 
@@ -586,9 +586,9 @@ Additionally, try running your model with synthetic data to check if the input p
 - Minimize host Python operations between steps and reduce callbacks. Calculate metrics every few steps instead of at every step
 - 기기 컴퓨팅 단위의 사용률을 높게 유지합니다.
 - 여러 기기에 병렬로 데이터를 전송합니다.
-- Optimize data layout to prefer channels first (e.g. NCHW over NHWC). Certain GPUs like the NVIDIA® V100 perform better with a NHWC data layout.
-- Consider using 16-bit numerical representations such as `fp16`, the half-precision floating point format specified by IEEE or the Brain floating-point [bfloat16](https://cloud.google.com/tpu/docs/bfloat16) format
-- Consider using the [Keras mixed precision API](https://www.tensorflow.org/guide/keras/mixed_precision)
+- 채널을 우선적으로 선호하도록 데이터 레이아웃을 최적화합니다(예: NHWC보다 NCHW). NVIDIA® V100과 같은 특정 GPU는 NHWC 데이터 레이아웃에서 성능이 더 우수합니다.
+- IEEE에서 지정한 반정밀도 부동 소수점 형식인 `fp16` 또는 Brain 부동 소수점 [bfloat16](https://cloud.google.com/tpu/docs/bfloat16) 형식과 같은 16-bit 숫자 표현의 사용을 고려해보세요.
+- [Keras 혼합 정밀도 API](https://www.tensorflow.org/guide/keras/mixed_precision)의 사용을 고려해보세요.
 - When training on GPUs, make use of the TensorCore. GPU kernels use the TensorCore when the precision is fp16 and input/output dimensions are divisible by 8 or 16 (for int8)
 
 ## 추가 자료
@@ -596,7 +596,7 @@ Additionally, try running your model with synthetic data to check if the input p
 - 이 가이드의 조언을 구현하려면 엔드 투 엔드 [TensorBoard 프로파일러 튜토리얼](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras)을 참조하세요.
 - Watch the [Performance profiling in TF 2](https://www.youtube.com/watch?v=pXHAQIhhMhI) talk from the TensorFlow Dev Summit 2020.
 
-## Known limitations
+## 알려진 제한 사항
 
 ### Profiling multiple GPUs on TensorFlow 2.2 and TensorFlow 2.3
 
