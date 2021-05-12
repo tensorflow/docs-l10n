@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-01' review_interval: '3 months' } *-->
 
 # TensorFlow 2에서 TF 허브의 SavedModel
 
@@ -74,7 +74,7 @@ SavedModel은 훈련된 모델 또는 모델 조각에 대한 TensorFlow의 표�
 
 ### Keras에서 저장하기
 
-TensorFlow 2부터 `tf.keras.Model.save()` 및 `tf.keras.models.save_model()`은 기본적으로 SavedModel 형식(HDF5 아님)을 사용합니다. 결과 SavedModel은 `hub.load()` , `hub.KerasLayer` 및 앞으로 제공될 다른 유사한 상위 수준 API 어댑터와 함께 사용할 수 있습니다.
+TensorFlow 2부터 `tf.keras.Model.save()` 및 `tf.keras.models.save_model()`은 기본적으로 SavedModel 형식(HDF5 아님)을 사용합니다. 결과 SavedModel은 `hub.load()`, `hub.KerasLayer` 및 앞으로 제공될 다른 유사한 상위 수준 API 어댑터와 함께 사용할 수 있습니다.
 
 전체 Keras 모델을 공유하려면 간단히 `include_optimizer=False`를 저장합니다.
 
@@ -97,7 +97,7 @@ piece_to_share = tf.keras.Model(sharing_input, sharing_output)
 piece_to_share.save(..., include_optimizer=False)
 ```
 
-GitHub의 [TensorFlow 모델](https://github.com/tensorflow/models)은 BERT에 대해 전자의 접근 방식을 사용하고([nlp/bert/bert_models.py](https://github.com/tensorflow/models/blob/master/official/nlp/bert/bert_models.py) 및 [nlp/bert/export_tfhub.py](https://github.com/tensorflow/models/blob/master/official/nlp/bert/export_tfhub.py) 참조, `core_model`과 `pretrain_model` 간의 분할에 유의) ResNet에 대해 후자의 접근 방식([vision/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/vision/image_classification/resnet/tfhub_export.py) 참조)을 사용합니다.
+GitHub에서 [TensorFlow 모델](https://github.com/tensorflow/models)은 BERT에 대해 전자의 접근 방식을 사용하고([nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py) 참조, 내보내기를 위한 `core_model`과 체크포인트 복원을 위한 `pretrainer`가 분리된 것에 주목) ResNet에는 후자의 접근 방식을 사용합니다([vision/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/vision/image_classification/resnet/tfhub_export.py) 참조).
 
 ### 하위 수준 TensorFlow에서 저장하기
 
@@ -128,8 +128,6 @@ layer.trainable = True
 print(layer.trainable_weights)  # [2.]
 print(layer.losses)  # 0.004
 ```
-
-[tensorflow/examples/saved_model/integration_tests/](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/saved_model/integration_tests)의 코드에는 더 큰 예제가 포함되어 있습니다(특히, `export_mnist.py` 및 `use_mnist.py` 쌍이 있음).
 
 ## 미세 조정
 
