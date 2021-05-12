@@ -24,7 +24,7 @@
 
 ![image](images/data_performance_analysis/get_next_fast.png "If your IteratorGetNext::DoCompute calls return quickly, `tf.data` is not your bottleneck.")
 
-**호출이 빨리 반환되면(<= 50us),** 요청 시 데이터를 사용할 수 있음을 의미합니다. 입력 파이프라인은 병목 상태가 아닙니다. 보다 일반적인 성능 분석 팁은 [Profiler 가이드](https://www.tensorflow.org/guide/profiler)를 참조하세요.
+**호출이 빨리 반환되면(&lt;= 50us),** 요청 시 데이터를 사용할 수 있음을 의미합니다. 입력 파이프라인은 병목 상태가 아닙니다. 보다 일반적인 성능 분석 팁은 [Profiler 가이드](https://www.tensorflow.org/guide/profiler)를 참조하세요.
 
 ![image](images/data_performance_analysis/get_next_slow.png "If your IteratorGetNext::DoCompute calls return slowly, `tf.data` is not producing data quickly enough.")
 
@@ -157,7 +157,7 @@ dataset = dataset.interleave(tf.data.TFRecordDataset,
 
 ##### 변환 데이터세트
 
-중간 `tf.data` 변환을 병목 상태로 식별한 경우, 데이터를 메모리에 저장하기 적합하다면 변환을 병렬화하거나 [계산을 캐싱](https://www.tensorflow.org/guide/data_performance#caching)하여 해결할 수 있습니다. `Map`과 같은 일부 변환에는 병렬 부분이 있습니다. <a data-md-type="link" href="https://www.tensorflow.org/guide/data_performance#parallelizing_data_transformation">`tf.data` 성능 가이드</a>는 이를 병렬화하는 방법을 보여줍니다. `Filter`, `Unbatch` 및 `Batch`와 같은 기타 변환은 기본적으로 순차적입니다. "외부 병렬 처리"를 사용하여 병렬화할 수 있습니다. 예를 들어, 입력 파이프라인이 처음에 다음과 같으며 `Batch`를 병목 상태로 가정합니다.
+중간 `tf.data` 변환을 병목 상태로 식별한 경우, 데이터를 메모리에 저장하기 적합하다면 변환을 병렬화하거나 [계산을 캐싱](https://www.tensorflow.org/guide/data_performance#caching)하여 해결할 수 있습니다. `Map`과 같은 일부 변환에는 병렬 부분이 있습니다. <a data-md-type="raw_html" href="https://www.tensorflow.org/guide/data_performance#parallelizing_data_transformation">`tf.data` 성능 가이드</a>는 이를 병렬화하는 방법을 보여줍니다. `Filter`, `Unbatch` 및 `Batch`와 같은 기타 변환은 기본적으로 순차적입니다. "외부 병렬 처리"를 사용하여 병렬화할 수 있습니다. 예를 들어, 입력 파이프라인이 처음에 다음과 같으며 `Batch`를 병목 상태로 가정합니다.
 
 ```python
 filenames = tf.data.Dataset.list_files(file_path, shuffle=is_training)
@@ -184,6 +184,6 @@ dataset = dataset.prefetch(tf.data.experimental.AUTOTUNE)
 ## 추가 자료
 
 - 성능 `tf.data` 입력 파이프라인의 작성 방법에 대한 [tf.data 성능 가이드](https://www.tensorflow.org/guide/data_performance)
-- [Inside TensorFlow 비디오: `tf.data` 모범 사례](https://www.youtube.com/watch?v=ZnukSLKEw34)
 - [Profiler 가이드](https://www.tensorflow.org/guide/profiler)
 - [colab을 사용한 Profiler 튜토리얼](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras)
+- [Profiler tutorial with colab](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras)
