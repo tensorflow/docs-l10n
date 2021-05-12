@@ -2,9 +2,9 @@
 
 [TOC]
 
-使用 Profiler 随附的工具可以跟踪 TensorFlow 模型的性能。查看模型在主机 (CPU)、设备 (GPU) 或主机与设备组合上的性能。
+使用 Profiler 随附的工具可以跟踪 TensorFlow 模型的性能。查看您的模型在主机 (CPU)、设备 (GPU) 或主机与设备组合上的性能。
 
-分析可帮助您了解模型中各种 TensorFlow 运算的硬件资源消耗（时间和内存），并帮助解决性能瓶颈，最终提高模型的执行速度。
+分析可以帮助您了解模型中各种 TensorFlow 运算的硬件资源消耗（时间和内存），并帮助解决性能瓶颈，最终提高模型的执行速度。
 
 本指南将指导您了解如何安装 Profiler、提供的各种工具、Profiler 收集性能数据的不同模式，以及一些用于优化模型性能的建议最佳做法。
 
@@ -47,7 +47,7 @@ docker run option '--privileged=true'
 
 ## Profiler 工具
 
-从 TensorBoard 的 **Profile** 标签中访问 Profiler，只有您捕获一些模型数据后，Profiler 才会出现。
+从 TensorBoard 的 **Profile** 标签页中访问 Profiler，只有您捕获一些模型数据后，Profiler 才会出现。
 
 注：Profiler 需要访问互联网才能加载 [Google Chart 库](https://developers.google.com/chart/interactive/docs/basic_load_libs#basic-library-loading)。如果您在本地计算机上、在公司防火墙后或者数据中心中完全离线运行 TensorBoard，某些图表和表可能缺失。
 
@@ -59,7 +59,7 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 - Trace Viewer
 - GPU Kernel Stats
 - 内存分析工具
-- 播客检视器
+- Pod Viewer
 
 <a name="overview_page"></a>
 
@@ -71,7 +71,7 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 
 ![image](./images/tf_profiler/overview_page.png)
 
-- **性能摘要** - 显示模型性能的简明摘要。性能摘要包含两部分：
+- **Performance Summary** - 显示模型性能的简明摘要。性能摘要包含两部分：
 
     1. 单步用时细分 - 按照消耗时间的项目将平均单步用时细分成多个类别：
 
@@ -86,19 +86,19 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 
     2. 设备计算精度 - 报告使用 16 位和 32 位计算的设备计算时间的百分比
 
-- **Step-time Graph** - 显示所有采样步骤中设备单步用时（以毫秒为单位）的计算图。每个单步分为多个类别（以不同颜色标识）。红色区域对应设备闲置等待主机的输入数据所需的单步用时部分。绿色区域显示设备的实际工作时长
+- **Step-time Graph** - 显示所有采样步骤中的设备单步用时图（以毫秒为单位）。每个步骤分为多个类别（以不同颜色标识）。红色区域对应设备闲置等待主机的输入数据所需的单步用时部分。绿色区域显示设备的实际工作时长。
 
 - **Top 10 TensorFlow operations on GPU** - 显示运行时间最长的设备端运算。
 
     每行显示了运算的自用时间（以所有运算需要的时间百分比形式）、累计时间、类别和名称。
 
-- **Run Environment -** 显示包括以下内容的模型运行环境的简明摘要：
+- **Run Environment** - 显示包括以下内容的模型运行环境的简明摘要：
 
     - 使用的主机数
     - 设备类型 (GPU/TPU)
     - 设备核心的数量
 
-- **Recommendation for Next Step **- 模型为输入边界时报告并推荐您可以用于定位和解决模型性能瓶颈的工具
+- **Recommendation for Next Step** - 在模型受输入约束时报告，并推荐您可以用于定位和解决模型性能瓶颈的工具。
 
 <a name="input_pipeline_analyzer"></a>
 
@@ -112,7 +112,7 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 2. 文件预处理（可选）
 3. 文件从主机传输到设备
 
-低效的输入流水线会严重减缓应用速度。如果将很大一部分时间花在输入流水线上，应用会被视为**输入边界**。使用从输入流水线分析器获得的分析数据可以了解输入流水线低效的地方。
+效率低下的输入流水线会严重减缓应用速度。如果将很大一部分时间花在输入流水线上，应用会被视为**受输入约束**。使用从输入流水线分析器获得的分析数据可以了解输入流水线低效的环节。
 
 输入流水线分析器可以立即告诉您程序是否受输入约束，并引导您执行设备端和主机端分析，这两种分析可以帮助您在输入流水线的任何阶段调试性能瓶颈。
 
@@ -124,21 +124,21 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 
 ![image](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/guide/images/tf_profiler/overview_page.png?raw=true)
 
-信息中心包含三个板块：
+信息中心包含三个版块：
 
-1. **Summary** - 汇总了整个输入流水线的相关信息，包含您的应用是否受输入约束，以及受输入约束时的约束程度等信息
+1. **摘要** - 汇总了整个输入流水线的相关信息，包含您的应用是否受输入约束，以及受输入约束时的约束程度等信息
 2. **设备端分析** - 显示详细的设备端分析结果，包括设备单步用时，以及每一步中等待各个核心的输入数据所用的设备时间的范围
-3. **Host-side analysis** - 显示详细的主机端分析，包括主机输入处理时间的明细
+3. **主机端分析** - 显示详细的主机端分析，包括主机输入处理时间的明细
 
 #### 输入流水线摘要
 
-汇总通过显示等待主机输入所用的设备时间百分比来报告您的程序是否受输入约束。如果您使用的是已被检测的标准输入流水线，则该工具将报告占用大部分输入处理时间的环节。
+摘要通过显示等待主机输入所用的设备时间百分比来报告您的程序是否受输入约束。如果您使用的是已被检测的标准输入流水线，则该工具将报告占用大部分输入处理时间的环节。
 
 #### 设备端分析
 
-设备端分析提供了设备与主机所占用时间以及等待主机输入数据所占用设备时间的信息。
+设备端分析提供了设备与主机所用时间以及等待主机输入数据所用设备时间的信息。
 
-1. **单步用时与步数的关系图** - 显示所有采样步骤中设备单步用时（以毫秒为单位）的计算图。每个单步分为多个类别（以不同颜色标识）。红色区域对应设备闲置等待主机的输入数据所需的单步用时部分。绿色区域显示设备的实际工作时长
+1. **单步用时与步数的关系图** - 显示所有采样步骤中的设备单步用时图（以毫秒为单位）。每个步骤分为多个类别（以不同颜色标识）。红色区域对应设备闲置等待主机的输入数据所需的单步用时部分。绿色区域显示设备的实际工作时长。
 2. **单步用时统计信息** - 报告设备单步用时的平均值、标准差和范围（[最小值，最大值]）
 
 #### 主机端分析
@@ -146,9 +146,9 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 主机端分析将主机上的输入处理时间（`tf.data` API 运算所用的时间）细分为以下几类：
 
 - **Reading data from files on demand** - 在没有缓存、预提取和交错的情况下从文件读取数据所用的时间
-- **Reading data from files in advance -** 读取文件所花费的时间，包括缓存、预取和交错
-- **Data preprocessing** - 预处理运算所用的时间，例如图像解压缩
-- **Enqueuing data to be transferred to device -** 向设备传输数据之前将数据加入馈入队列所用的时间。
+- **Reading data from files in advance** - 读取文件所用的时间，包括缓存、提取和交错
+- **Data preprocessing** - 预处理运算（例如图像解压缩）所用的时间
+- **Enqueuing data to be transferred to device** - 向设备传输数据之前将数据加入馈入队列所用的时间
 
 展开 **Input Op Statistics** 可以看到各个输入运算及其按执行时间分类的统计数据。
 
@@ -159,9 +159,9 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 1. **Input Op** - 显示输入运算的 TensorFlow 运算名称
 2. **Count** - 显示分析期间运算执行的实例总数
 3. **Total Time (in ms)** - 显示每个实例所用时间的累计和
-4. **Total Time % -** 显示在一个运算上所花费的总时间占输入处理总时间的比例
-5. **Total Self Time (in ms)** - 显示其中每个实例所用的自我时间的累计和。此处的自我时间是指在函数体内部所用的时间，不包括它调用的函数所用的时间。
-6. **Total Self Time %** - 显示在总自我时间占输入处理总时间的比例
+4. **Total Time % -** 显示在一个运算上所用的总时间占输入处理总时间的比例
+5. **Total Self Time (in ms)** - 显示其中每个实例的自用时间的累计和。此处的自用时间是指在函数体内部所用的时间，不包括它调用的函数所用的时间。
+6. **Total Self Time %** - 显示总自用时间占输入处理总时间的比例
 7. **Category** - 显示输入运算的处理类别
 
 <a name="tf_stats"></a>
@@ -170,7 +170,7 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 
 TensorFlow Stats 工具可以显示分析会话期间在主机或设备上执行的每个 TensorFlow 运算的性能。
 
-![image](./images/tf_profiler/input_op_stats.png)
+![image](./images/tf_profiler/trace_viewer.png)
 
 该工具在两个窗格中显示性能信息：
 
@@ -188,17 +188,17 @@ TensorFlow Stats 工具可以显示分析会话期间在主机或设备上执行
     - 如果任何运算有子运算：
 
         - 运算的总“累计”时间不包括子运算所用的时间
-        - 运算的总“自我”时间不包括子运算所用的时间
+        - 运算的总“自用”时间不包括子运算所用的时间
 
     - 如果某个运算在主机上执行：
 
-        - 此运算所占用设备上的总自我时间百分比将为 0
+        - 此运算所占用的设备上总自用时间百分比将为 0
         - 直到并包括此运算的设备上总自用时间的累计百分比将为 0
 
     - 如果某个运算在设备上执行：
 
-        - 此运算所占用主机上的总自我时间百分比将为 0
-        - 直到并包括此运算的主机上总自我时间的累计百分比将为 0
+        - 此运算所占用的主机上总自用时间百分比将为 0
+        - 直到并包括此运算的主机上总自用时间的累计百分比将为 0
 
 您可以选择在饼图和表中包含或排除空闲时间。
 
@@ -209,7 +209,7 @@ TensorFlow Stats 工具可以显示分析会话期间在主机或设备上执行
 Trace Viewer 会显示一个包含以下信息的时间线：
 
 - TensorFlow 模型所执行运算的持续时间
-- 系统的哪个部分（主机还是设备）执行了运算。一般来说，主机会执行输入运算、预处理训练数据并将其传输到设备，而设备则执行实际模型训练
+- 系统的哪个部分（主机还是设备）执行了运算。一般来说，主机会执行输入运算，预处理训练数据并将其传输到设备，而设备则执行实际模型训练
 
 借助 Trace Viewer，您可以确定模型中的性能问题，然后采取措施解决这些问题。例如，您既可以从较高的层面确定是输入还是模型训练占用了大部分时间，又可以根据明细了解哪个运算占用了最长的执行时间。请注意，Trace Viewer 被限制为每个设备 100 万个事件。
 
@@ -228,7 +228,7 @@ Timeline 窗格包含以下元素：
 
 1. **顶栏** - 包含各种辅助控件
 2. **时间轴** - 显示相对于跟踪记录开始的时间
-3. **板块和轨道标签** - 每个版块都包含多个轨道，并且左侧有一个三角形，点击该三角形可以展开和收起相应的版块。系统中的每个处理元素都有一个版块
+3. **版块和轨道标签** - 每个版块都包含多个轨道，并且左侧有一个三角形，点击该三角形可以展开和收起相应的版块。系统中的每个处理元素都有一个版块
 4. **工具选择器** - 包含与 Trace Viewer 交互的各种工具，例如 Zoom、Pan、Select 和 Timing。使用 Timing 工具可以标记时间间隔
 5. **Events** - 显示运算的执行时间或者元事件（例如训练步骤）的持续时间
 
@@ -236,11 +236,11 @@ Timeline 窗格包含以下元素：
 
 Trace Viewer 包含以下版块：
 
-- **显示每个设备节点的版块**，使用设备芯片编号和芯片内的设备节点进行标记（例如，`/device:GPU:0 (pid 0)`）。每个设备节点版块都包含以下轨道：
+- **每个设备节点一个版块**，使用设备芯片编号和芯片内的设备节点进行标记（例如，`/device:GPU:0 (pid 0)`）。每个节点版块都包含以下轨道：
     - **Step** - 显示在设备上运行的训练步骤的持续时间
     - **TensorFlow Ops** - 显示在设备上执行的运算
     - **XLA Ops** - 如果使用的编译器是 XLA，则显示在设备上运行的 [XLA](https://www.tensorflow.org/xla/) 运算（每个 TensorFlow 运算都会转换成一个或多个 XLA 运算。XLA 编译器可以将 XLA 运算转换成在设备上运行的代码）。
-- **显示在主机的 CPU 上运行的线程的版块**，标有 **Host Threads**。该版块为每个 CPU 线程包含一个轨道。请注意，您可以忽略显示的信息和版块标签。
+- **用于在主机的 CPU 上运行的线程的版块**，标有 **Host Threads**。该版块为每个 CPU 线程包含一个轨道。请注意，您可以忽略显示的信息和版块标签。
 
 ##### 事件
 
@@ -256,7 +256,7 @@ Trace Viewer 还可以显示您的 TensorFlow 程序中 Python 函数调用的�
 
 此工具可以显示性能统计信息以及每个 GPU 加速内核的源运算。
 
-![image](./images/tf_profiler/trace_viewer.png)
+![image](./images/tf_profiler/input_op_stats.png)
 
 该工具在两个窗格中显示信息：
 
@@ -264,7 +264,7 @@ Trace Viewer 还可以显示您的 TensorFlow 程序中 Python 函数调用的�
 
 - 下部窗格显示了一个表，其中包含每个内核-运算对的以下数据：
 
-    - 按内核-运算对分组，经过的 GPU 总持续时间的降序排名
+    - 按内核-运算对分组，经过的总 GPU 持续时间的降序排名
     - 启动的内核的名称
     - 内核使用的 GPU 寄存器的数量
     - 使用的共享（静态 + 动态共享）内存的总大小（以字节为单位）
@@ -283,12 +283,12 @@ Trace Viewer 还可以显示您的 TensorFlow 程序中 Python 函数调用的�
 
 ### 内存分析工具 {: id = 'memory_profile_tool'}
 
-内存分析工具在分析间隔期间监视设备的内存使用量。您可以使用此工具执行以下操作：
+内存分析工具可在分析间隔期间监视设备的内存使用量。您可以使用此工具执行以下操作：
 
 - 通过查明峰值内存使用量和为 TensorFlow 运算分配的相应内存来调试内存不足 (OOM) 问题。您还可以调试运行[多租户](https://arxiv.org/pdf/1901.06887.pdf)推断时可能出现的 OOM 问题
 - 调试内存碎片问题
 
-内存分析工具在三个板块中显示数据：
+内存分析工具在三个版块中显示数据：
 
 1. 内存分析摘要
 2. 内存时间线图
@@ -296,13 +296,13 @@ Trace Viewer 还可以显示您的 TensorFlow 程序中 Python 函数调用的�
 
 #### 内存分析摘要
 
-此板块显示 TensorFlow 程序的内存分析的简明摘要，具体如下所示：
+此版块显示 TensorFlow 程序的内存分析的简明摘要，具体如下所示：
 
 &lt;img src="./images/tf_profiler/memory_profile_summary.png" width="400", height="450"&gt;
 
 内存分析摘要包含以下六个字段：
 
-1. Memory ID - 列出了所有可用设备内存系统的下拉列表。从下拉列表中选择要查看的内存系统
+1. Memory ID - 列出所有可用设备内存系统的下拉列表。从下拉列表中选择要查看的内存系统
 2. #Allocation - 分析间隔内进行的内存分配数
 3. #Deallocation - 分析间隔中的内存释放数
 4. Memory Capacity - 您选择的内存系统的总容量（以 GiB 为单位）
@@ -316,7 +316,7 @@ Trace Viewer 还可以显示您的 TensorFlow 程序中 Python 函数调用的�
 
 #### 内存时间线图
 
-此板块显示了内存使用量（以 GiB 为单位）以及碎片百分比与时间（以毫秒为单位）的关系图。
+此版块显示了内存使用量（以 GiB 为单位）以及碎片百分比与时间（以毫秒为单位）关系图。
 
 ![image](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/guide/images/tf_profiler/memory_timeline_graph.png?raw=true)
 
@@ -341,7 +341,7 @@ X 轴表示分析间隔的时间线（以毫秒为单位）。左侧的 Y 轴表
 
 此表显示了分析间隔中处于峰值内存使用量时的有效内存分配。
 
-![image](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/guide/images/tf_profiler/memory_breakdown_table.png?raw=true)
+![image](./images/tf_profiler/pod_viewer.png)
 
 每个 TensorFlow 运算对应一行，每行都包括以下列：
 
@@ -359,9 +359,9 @@ X 轴表示分析间隔的时间线（以毫秒为单位）。左侧的 Y 轴表
 
 ### Pod Viewer
 
-Pod Viewer 工具显示了所有工作进程中训练步骤的详细情况。
+Pod Viewer 工具可以显示一个训练步骤在所有工作进程中的细分。
 
-![image](./images/tf_profiler/pod_viewer.png)
+![image](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/guide/images/tf_profiler/pod_viewer.png?raw=true)
 
 - 上部窗格具有用于选择步骤编号的滑块。
 - 下部窗格显示堆叠的柱状图。这是细分的步骤-时间类别彼此叠加的高级视图。每个堆叠的柱状图代表一个唯一的工作进程。
@@ -377,19 +377,19 @@ tf.data 瓶颈分析会自动检测程序中 tf.data 输入流水线中的瓶颈
 
 它通过按以下步骤操作来检测瓶颈：
 
-1. 找到最受输入限制的主机。
+1. 找到最受输入约束的主机。
 2. 找到执行速度最慢的 tf.data 输入流水线。
-3. 根据 Profiler 轨迹重构输入流水线计算图。
+3. 根据 Profiler 跟踪记录重构输入流水线计算图。
 4. 在输入流水线计算图中找到关键路径。
 5. 将关键路径上最慢的转换确定为瓶颈。
 
-界面分为三个部分：Performance Analysis Summary、Summary of All Input Pipelines 和 Input Pipeline Graph。
+界面分为三个版块：Performance Analysis Summary、Summary of All Input Pipelines 和 Input Pipeline Graph。
 
 #### Performance Analysis Summary
 
-![image](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/guide/images/tf_profiler/capture_profile.png?raw=true)
+![image](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/guide/images/tf_profiler/memory_breakdown_table.png?raw=true)
 
-本部分提供了分析的摘要。它会告知在分析中是否检测到较慢的 tf.data 输入流水线。如果检测到，它将显示最受输入限制的主机及其最慢且具有最大延迟的输入流水线。最重要的是，它会告知输入流水线的哪一部分是瓶颈以及如何解决该瓶颈。瓶颈信息随迭代器类型及其长名称一起提供。
+本版块提供了分析的摘要。它会告知在分析中是否检测到较慢的 tf.data 输入流水线。如果检测到，它将显示最受输入约束的主机及其最慢且具有最大延迟的输入流水线。最重要的是，它会告知输入流水线的哪一部分是瓶颈以及如何解决该瓶颈。瓶颈信息随迭代器类型及其长名称一起提供。
 
 ##### 如何读取 tf.data 迭代器的长名称
 
@@ -412,7 +412,7 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 
 #### Summary of All Input Pipelines
 
-![image](./images/tf_profiler/tf_data_all_hosts.png)
+![image](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/guide/images/tf_profiler/tf_data_all_hosts.png?raw=true)
 
 本部分提供了所有主机上的所有输入流水线的摘要。通常只有一个输入流水线。使用分配策略时，有一个主机输入流水线运行程序的 tf.data 代码，多个设备输入流水线从主机输入流水线中检索数据并将其传送到设备。
 
@@ -511,14 +511,14 @@ TensorFlow Profiler 可以收集您的 TensorFlow 模型的主机活动和 GPU �
 
 使用 **Capture Profile** 对话框指定以下信息：
 
-- 以逗号分隔的分析服务网址或 TPU 名称列表。
+- 以逗号分隔的分析服务网址或 TPU 名称列表
 - 分析持续时间
 - 设备、主机和 Python 函数调用跟踪的级别
 - 在首次不成功时，您希望 Profiler 重新尝试捕获分析的次数
 
 ### 分析自定义训练循环
 
-要分析您的 TensorFlow 代码中的自定义训练循环，请使用 `tf.profiler.experimental.Trace` API 检测训练循环，为 Profiler 标记步骤边界。`name` 参数用作步骤名称的前缀，`step_num` 关键字参数附加在步骤名称中，`_r` 关键字参数使此跟踪事件作为步骤事件由 Profiler 处理。
+要分析您的 TensorFlow 代码中的自定义训练循环，请使用 `tf.profiler.experimental.Trace` API 检测训练循环，为 Profiler 标记步骤边界。`name` 参数用作步骤名称的前缀，`step_num` 关键字参数追加在步骤名称中，`_r` 关键字参数使此跟踪事件作为步骤事件由 Profiler 处理。
 
 例如，
 
@@ -547,15 +547,15 @@ for step, train_data in enumerate(dataset):
 
 Profiler 在四个不同的轴上涵盖了许多用例。目前已支持部分组合，将来还会添加其他组合。其中一些用例包括：
 
-- 本地与远程分析：您可以通过两种常见方式设置分析环境。在本地分析中，将在模型执行的同一个计算机（例如带 GPU 的本地工作站）上调用分析 API。在远程分析中，将在与模型执行不同的计算机（例如 Cloud TPU）上调用分析 API。
+- 本地与远程分析：您可以通过两种常见方式设置分析环境。在本地分析中，将在执行模型的同一个计算机（例如带 GPU 的本地工作站）上调用分析 API。在远程分析中，将在与执行模型不同的计算机（例如 Cloud TPU）上调用分析 API。
 - 分析多个工作进程：您可以使用 TensorFlow 的分布式训练功能分析多个机器。
 - 硬件平台：分析 CPU、GPU 和 TPU。
 
-下表简单概括了上述用例受 TensorFlow 2.3 中的各种分析 API 支持的情况：
+下表简单概括了上述用例受 TensorFlow 中各种分析 API 支持的情况：
 
 <a name="profiling_api_table"></a>
 
-| 分析 API                | 本地     | 远程    | 多  | 硬件  | :                              :           :           : 工作进程   : 平台 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 支持 | 不       | 不       | CPU、GPU  | : Callback**                   :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | Not       | 不       | CPU、GPU  | : start/stop [API]**    :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | 支持 | 支持 | CPU、GPU、| : client.trace [API]**  :           :           :           : TPU       : | **Context manager API**      | 支持 | 不       | 不       | CPU、GPU  | :                              :           : 支持 : 支持 :           :
+| 分析 API                | 本地     | 远程    | 多  | 硬件  | :                              :           :           : 工作进程   : 平台 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 支持 | 不       | 不       | CPU、GPU  | : Callback**                   :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | Not       | 不       | CPU、GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | 支持 | 支持 | CPU、GPU、| : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 支持 | 不       | 不       | CPU、GPU  | :                              :           : 支持 : 支持 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -574,7 +574,7 @@ Profiler 在四个不同的轴上涵盖了许多用例。目前已支持部分�
 - 并行处理数据转换
 - 在内存中缓存数据
 - 将用户自定义函数向量化
-- 减少应用转换时的内存用量
+- 减少应用转换时的内存使用量
 
 此外，尝试使用合成数据运行您的模型以了解输入流水线是否为性能瓶颈。
 
@@ -594,13 +594,13 @@ Profiler 在四个不同的轴上涵盖了许多用例。目前已支持部分�
 ## 其他资源
 
 - 请参阅端到端 [TensorBoard Profiler 教程](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras)，了解如何实现本指南中的建议。
-- 观看 2020 TensorFlow 开发者峰会上的 [TF 2 中的性能分析](https://www.youtube.com/watch?v=pXHAQIhhMhI)演讲。
+- 观看 TensorFlow Dev Summit 2020 上的 [TF 2 中的性能分析](https://www.youtube.com/watch?v=pXHAQIhhMhI)演讲。
 
 ## 已知问题/限制
 
 ### 在 TensorFlow 2.2 和 TensorFlow 2.3 上分析多个 GPU
 
-TensorFlow 2.2 和 2.3 仅支持单主机系统的多 GPU 分析；不支持多主机系统的多 GPU 分析。要分析多工作进程 GPU，必须单独分析每个工作进程。在 TensorFlow 2.4 上，可以使用 [`tf.profiler.experimental.trace`](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace) API 分析多个工作进程。
+TensorFlow 2.2 和 2.3 仅支持单主机系统的多 GPU 分析；不支持多主机系统的多 GPU 分析。要分析多工作进程 GPU 配置，必须单独分析每个工作进程。在 TensorFlow 2.4 上，可以使用 [`tf.profiler.experimental.trace`](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace) API 分析多个工作进程。
 
 需要 CUDA® Toolkit 10.2 或更高版本才能分析多个 GPU。由于 TensorFlow 2.2 和 2.3 仅支持 10.1 及更低版本的 CUDA® Toolkit，因此请创建 `libcudart.so.10.1` 和 `libcupti.so.10.1` 的符号链接。
 
@@ -608,7 +608,3 @@ TensorFlow 2.2 和 2.3 仅支持单主机系统的多 GPU 分析；不支持多�
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
-
-
-[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2
-[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace
