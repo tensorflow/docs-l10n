@@ -48,7 +48,7 @@ dependencies {
 BertNLClassifier classifier = BertNLClassifier.createFromFile(context, modelFile);
 
 // Run inference
-List<Category> results = classifier.classify(input);
+List results = classifier.classify(input);
 ```
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/text/nlclassifier/BertNLClassifier.java)를 참조하세요.
@@ -85,10 +85,10 @@ let categories = bertNLClassifier.classify(text: input)
 
 ```c++
 // Initialization
-std::unique_ptr<BertNLClassifier> classifier = BertNLClassifier::CreateFromFile(model_path).value();
+std::unique_ptr classifier = BertNLClassifier::CreateFromFile(model_path).value();
 
 // Run inference
-std::vector<core::Category> categories = classifier->Classify(kInput);
+std::vector categories = classifier->Classify(kInput);
 ```
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/bert_nl_classifier.h)를 참조하세요.
