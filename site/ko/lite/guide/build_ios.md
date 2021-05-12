@@ -22,7 +22,7 @@ sudo xcodebuild -license accept
 
 ### Bazel 설치하기
 
-Bazel은 TensorFlow의 기본 빌드 시스템입니다. [Bazel 웹 사이트의 지침](https://docs.bazel.build/versions/master/install-os-x.html)에 따라 Bazel을 설치합니다. `tensorflow` 리포지토리 루트에 있는 [`configure.py` 파일](https://github.com/tensorflow/tensorflow/blob/master/configure.py)에서 `_TF_MIN_BAZEL_VERSION` 및 `_TF_MAX_BAZEL_VERSION` 사이의 버전을 선택해야 합니다.
+Bazel은 TensorFlow의 기본 빌드 시스템입니다. [Bazel 웹 사이트의 지침]에 따라 Bazel을 설치합니다. `tensorflow` 리포지토리 루트에 있는 [`configure.py` 파일]에서 `_TF_MIN_BAZEL_VERSION` 및 `_TF_MAX_BAZEL_VERSION` 사이의 버전을 선택해야 합니다.
 
 ### WORKSPACE 및 .bazelrc 구성하기
 
@@ -39,7 +39,7 @@ bazel build --config=ios_fat -c opt \
   //tensorflow/lite/ios:TensorFlowLiteC_framework
 ```
 
-이 명령으로 TensorFlow 루트 디렉터리 아래의 `bazel-bin/tensorflow/lite/experimental/ios/` 디렉터리에 `TensorFlowLiteC_framework.zip` 파일이 생성됩니다. 기본적으로, 생성된 프레임워크에는 armv7, arm64 및 x86_64(i386 제외)가 들어 있는 "뚱뚱한" 바이너리가 포함됩니다. `--config=ios_fat`를 지정할 때 사용되는 빌드 플래그의 전체 목록을 보려면 [`.bazelrc` 파일](https://github.com/tensorflow/tensorflow/blob/master/.bazelrc)의 iOS 구성 섹션을 참조하세요.
+이 명령으로 TensorFlow 루트 디렉터리 아래의 `bazel-bin/tensorflow/lite/experimental/ios/` 디렉터리에 `TensorFlowLiteC_framework.zip` 파일이 생성됩니다. 기본적으로, 생성된 프레임워크에는 armv7, arm64 및 x86_64(i386 제외)가 들어 있는 "뚱뚱한" 바이너리가 포함됩니다. `--config=ios_fat`를 지정할 때 사용되는 빌드 플래그의 전체 목록을 보려면 [`.bazelrc` 파일]의 iOS 구성 섹션을 참조하세요.
 
 ### TensorFlowLiteC 정적 프레임워크 빌드하기
 
@@ -93,7 +93,7 @@ CocoaPod를 사용 중이고 TensorFlow Lite의 [Swift API](https://github.com/t
   ...
 ```
 
-고유한 `TensorFlowLiteC.podspec` 파일을 만든 후, [비공개 CocoaPod 사용 지침](https://guides.cocoapods.org/making/private-cocoapods.html)에 따라 고유 프로젝트에서 이 파일을 사용할 수 있습니다. `TensorFlowLite(Swift|ObjC).podspec`을 수정하여 사용자 정의 `TensorFlowLiteC` 포드를 가리키고 앱 프로젝트에서 Swift 또는 Objective-C 포드를 사용할 수도 있습니다.
+고유한 `TensorFlowLiteC.podspec` 파일을 만든 후, [비공개 CocoaPod 사용 지침]에 따라 고유 프로젝트에서 이 파일을 사용할 수 있습니다. `TensorFlowLite(Swift|ObjC).podspec`을 수정하여 사용자 정의 `TensorFlowLiteC` 포드를 가리키고 앱 프로젝트에서 Swift 또는 Objective-C 포드를 사용할 수도 있습니다.
 
 ### Bazel 개발자
 
@@ -133,3 +133,9 @@ TensorFlow Lite 종속성을 프로젝트에 추가하려면 CocoaPod 또는 Baz
 프레임워크를 포함된 바이너리로 추가하면 Xcode는 프레임워크의 상위 디렉토리를 포함하도록 'Build Settings' 탭 아래의 'Framework Search Paths' 항목도 업데이트합니다. 이 업데이트가 자동으로 이루어지지 않을 경우에는 `TensorFlowLiteC.framework` 디렉토리의 상위 디렉토리를 수동으로 추가해야 합니다.
 
 이 두 가지 설정이 완료되면 `TensorFlowLiteC.framework/Headers` 디렉토리 아래의 헤더 파일에 정의된 TensorFlow Lite의 C API를 가져와 호출할 수 있습니다.
+
+
+[Bazel 웹 사이트의 지침]: https://docs.bazel.build/versions/master/install-os-x.html
+[`.bazelrc` 파일]: https://github.com/tensorflow/tensorflow/blob/master/.bazelrc
+[`configure.py` 파일]: https://github.com/tensorflow/tensorflow/blob/master/configure.py
+[비공개 CocoaPod 사용 지침]: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/objc
