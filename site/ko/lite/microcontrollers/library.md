@@ -16,7 +16,7 @@ TensorFlow Lite for Microcontrollers C++ 라이브러리는 [TensorFlow 리포�
 - [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h)는 디버그 정보를 출력합니다.
 - [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h)에는 모델을 처리하고 실행하는 코드가 포함되어 있습니다.
 
-일반적인 사용법에 대한 안내는 [마이크로컨트롤러 시작하기](get_started.md)를 참조하세요.
+일반적인 사용법에 대한 안내는 [마이크로컨트롤러 시작하기](get_started_low_level.md)를 참조하세요.
 
 빌드 시스템은 특정 파일의 플랫폼별 구현을 제공합니다. 이들 구현은 플랫폼 이름을 가진 디렉토리(예: [`sparkfun_edge`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/sparkfun_edge))에 들어 있습니다.
 
