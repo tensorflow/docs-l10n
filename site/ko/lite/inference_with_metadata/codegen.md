@@ -62,16 +62,14 @@ Step 2. Detect if GPU running on the device is compatible with TensorFlow GPU de
 <pre data-md-type="block_code" data-md-language="sh"><code class="language-sh">tflite_codegen --model=./model_with_metadata/mobilenet_v1_0.75_160_quantized.tflite \
     --package_name=org.tensorflow.lite.classify \
     --model_class_name=MyClassifierModel \
-    --destination=./classify_wrapper
-</code></pre>
+    --destination=./classify_wrapper</code></pre>
 <p data-md-type="paragraph">결과 코드는 대상 디렉토리에 있습니다. <a href="https://colab.research.google.com/" data-md-type="link">Google Colab</a> 또는 기타 원격 환경을 사용하는 경우, 결과를 zip 아카이브로 압축하여 Android Studio 프로젝트에 다운로드하는 것이 더 쉬울 수 있습니다.</p>
 <pre data-md-type="block_code" data-md-language="python"><code class="language-python"># Zip up the generated code
 !zip -r classify_wrapper.zip classify_wrapper/
 
 # Download the archive
 from google.colab import files
-files.download('classify_wrapper.zip')
-</code></pre>
+files.download('classify_wrapper.zip')</code></pre>
 <h3 data-md-type="header" data-md-header-level="3">생성된 코드 사용하기</h3>
 <h4 data-md-type="header" data-md-header-level="4">1단계: 생성된 코드 가져오기</h4>
 <p data-md-type="paragraph">필요한 경우 생성된 코드를 디렉토리 구조에 압축 해제합니다. 생성된 코드의 루트는 <code data-md-type="codespan">SRC_ROOT</code>로 간주합니다.</p>
@@ -82,11 +80,9 @@ files.download('classify_wrapper.zip')
 <p data-md-type="paragraph">android 섹션 아래에 다음을 추가합니다.</p>
 <pre data-md-type="block_code" data-md-language="build"><code class="language-build">aaptOptions {
    noCompress "tflite"
-}
-</code></pre>
+}</code></pre>
 <p data-md-type="paragraph">종속성 섹션에 다음을 추가합니다.</p>
-<pre data-md-type="block_code" data-md-language="build"><code class="language-build">implementation project(":classify_wrapper")
-</code></pre>
+<pre data-md-type="block_code" data-md-language="build"><code class="language-build">implementation project(":classify_wrapper")</code></pre>
 <h4 data-md-type="header" data-md-header-level="4">3단계: 모델 사용하기</h4>
 <pre data-md-type="block_code" data-md-language="java"><code class="language-java">// 1. Initialize the model
 MyClassifierModel myImageClassifier = null;
@@ -107,9 +103,8 @@ if(null != myImageClassifier) {
     MyClassifierModel.Outputs outputs = myImageClassifier.run(inputs);
 
     // 4. Retrieve the result
-    Map&lt;String, Float&gt; labeledProbability = outputs.getProbability();
-}
-</code></pre>
+    Map labeledProbability = outputs.getProbability();
+}</code></pre>
 <h3 data-md-type="header" data-md-header-level="3">모델 추론 가속하기</h3>
 <p data-md-type="paragraph">생성된 코드는 개발자가 <a href="../performance/delegates.md" data-md-type="link">대리자</a> 및 스레드 수를 사용하여 코드를 가속할 수 있는 방법을 제공합니다. 모델 객체를 초기화할 때 세 가지 매개변수를 사용하여 설정할 수 있습니다.</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
@@ -123,11 +118,9 @@ if(null != myImageClassifier) {
     myImageClassifier = new MyClassifierModel(this, Model.Device.NNAPI, 3);
 } catch (IOException io){
     // Error reading the model
-}
-</code></pre>
+}</code></pre>
 <h3 data-md-type="header" data-md-header-level="3">문제 해결</h3>
 <p data-md-type="paragraph"> 'java.io.FileNotFoundException: This file can not be opened as a file descriptor; it is probably compressed(이 파일을 파일 설명자로 열 수 없습니다. 압축되었을 수 있습니다.)' 오류가 발생하면 라이브러리 모듈을 사용할 앱 모듈의 android 섹션 아래에 다음 줄을 삽입합니다.</p>
 <pre data-md-type="block_code" data-md-language="build"><code class="language-build">aaptOptions {
    noCompress "tflite"
-}
-</code></pre>
+}</code></pre>
