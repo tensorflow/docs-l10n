@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-12' review_interval: '6 months' } *-->
 
 # 컬렉션 만들기
 
@@ -6,9 +6,9 @@
 
 tfhub.dev의 [모든 컬렉션 목록](https://tfhub.dev/s?subtype=model-family)을 참조하세요.
 
-TensorFlow Hub 리포지토리에서 컬렉션 파일의 올바른 위치는 다음과 같습니다. [hub/tfhub_dev/assets/](https://github.com/tensorflow/hub/tree/master/tfhub_dev/assets)/<publisher_name>/<collection_name>/<collection_name.md>
+리포지토리 [github.com/tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev)에서 컬렉션 파일의 올바른 위치는 [assets/docs](https://github.com/tensorflow/tfhub.dev/tree/master/assets/docs)/<b>&lt;게시자_이름&gt;</b>/collections/<b>&lt;컬렉션_이름&gt;</b>/<b>1</b>.md입니다.
 
-최소 게시자 설명서의 예를 참조하세요.
+다음은 assets/docs/<b>vtab</b>/collections/<b>benchmark</b>/<b>1</b>.md에 들어가는 최소한의 예입니다. 첫 번째 줄의 컬렉션 이름이 파일 이름보다 짧다는 점에 주목하세요.
 
 ```markdown
 # Collection vtab/benchmark/1
