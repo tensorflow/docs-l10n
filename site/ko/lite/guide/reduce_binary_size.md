@@ -6,9 +6,9 @@
 
 선택적 빌드는 다음 세 가지 연산 라이브러리에 적용됩니다.
 
-1. [TensorFlow Lite built-in ops library](https://www.tensorflow.org/lite/guide/ops_compatibility)
-2. [TensorFlow Lite custom ops](https://www.tensorflow.org/lite/guide/ops_custom)
-3. [Select TensorFlow ops library](https://www.tensorflow.org/lite/guide/ops_select)
+1. [TensorFlow Lite 내장 연산 라이브러리](https://www.tensorflow.org/lite/guide/ops_compatibility)
+2. [TensorFlow Lite 사용자 정의 연산](https://www.tensorflow.org/lite/guide/ops_custom)
+3. [Select TensorFlow 연산 라이브러리](https://www.tensorflow.org/lite/guide/ops_select)
 
 아래 표는 몇 가지 일반적인 사용 사례에서 선택적 빌드의 영향을 보여줍니다.
 
@@ -22,9 +22,7 @@
     </tr>
   </thead>
   <tr>
-    <td rowspan="2">
-      <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>
-    </td>
+    <td rowspan="2"><a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a></td>
     <td rowspan="2">이미지 분류</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar(296,635바이트)</td>
@@ -34,9 +32,7 @@
     <td>tensorflow-lite.aar(382,892바이트)</td>
   </tr>
   <tr>
-    <td rowspan="2">
-      <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a>
-    </td>
+    <td rowspan="2"><a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a></td>
     <td rowspan="2">음높이 추출</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar(375,813바이트) <br>tensorflow-lite-select-tf-ops.aar(1,676,380바이트)</td>
@@ -46,9 +42,7 @@
     <td>tensorflow-lite.aar(421,826바이트) <br>tensorflow-lite-select-tf-ops.aar(2,298,630바이트)</td>
   </tr>
   <tr>
-    <td rowspan="2">
-      <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a>
-    </td>
+    <td rowspan="2"><a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a></td>
     <td rowspan="2">비디오 분류</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar(240,085바이트) <br>tensorflow-lite-select-tf-ops.aar(1,708,597바이트)</td>
