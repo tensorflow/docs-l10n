@@ -2,7 +2,7 @@
 
 <a href="overview.md">TensorFlow Lite Task Library</a>는 TensorFlow를 추상화하는 동일한 인프라 위에 사전 빌드된 네이티브/Android/iOS API를 제공합니다. 해당 모델이 기존 작업 라이브러리에서 지원되지 않는 경우, Task API 인프라를 확장하여 사용자 정의 API를 빌드할 수 있습니다.
 
-## Overview
+## 개요
 
 Task API 인프라는 2개 레이어 구조로 되어 있습니다. 즉, 기본 TFLite 런타임을 캡슐화하는 하위 C++ 레이어와 JNI 또는 네이티브 래퍼를 통해 C++ 레이어와 정보를 소통하는 상위 Java/ObjC 레이어입니다.
 
