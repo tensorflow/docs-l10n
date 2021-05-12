@@ -144,24 +144,13 @@ AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D(), 1, 2);
 이를 위해 `lite/tools/versioning/op_version.cc`에서 연산자 클래스에 대한 `GetBuiltinOperatorVersion` 함수를 재정의해야 합니다.
 
 ```
-struct {
-      int32_t dilation_w_factor;
-      int32_t dilation_h_factor;
-    } depthwise_conv_2d;
+struct {       int32_t dilation_w_factor;       int32_t dilation_h_factor;     } depthwise_conv_2d;
 ```
 
 버전이 하나뿐인 ops의 경우, `GetVersion` 함수는 다음과 같이 정의됩니다.
 
 ```
-case BuiltinOperator_DEPTHWISE_CONV_2D: {
-      auto conv_option = op->builtin_options_as_DepthwiseConv2DOptions();
-      if (conv_option) {
-        op_sig.options.depthwise_conv_2d.dilation_w_factor =
-            conv_option->dilation_w_factor();
-        op_sig.options.depthwise_conv_2d.dilation_h_factor =
-            conv_option->dilation_h_factor();
-      }
-    } break;
+case BuiltinOperator_DEPTHWISE_CONV_2D: {       auto conv_option = op->builtin_options_as_DepthwiseConv2DOptions();       if (conv_option) {         op_sig.options.depthwise_conv_2d.dilation_w_factor =             conv_option->dilation_w_factor();         op_sig.options.depthwise_conv_2d.dilation_h_factor =             conv_option->dilation_h_factor();       }     } break;
 ```
 
 이를 위해 `lite/toco/tflite/op_version.cc`에 새 맵 항목을 추가해야 합니다.
@@ -169,12 +158,7 @@ case BuiltinOperator_DEPTHWISE_CONV_2D: {
 마지막으로, `DepthwiseConv2D` 케이스에 새 버전을 추가하여 `lite/tools/versioning/op_version.cc`의 연산자에 적합하게 `GetBuiltinOperatorVersion` 함수를 수정합니다.
 
 ```
-case BuiltinOperator_DEPTHWISE_CONV_2D:
-  if (op_sig.options.depthwise_conv_2d.dilation_w_factor != 1 ||
-      op_sig.options.depthwise_conv_2d.dilation_h_factor != 1) {
-    return 2;
-  }
-  return 1;
+case BuiltinOperator_DEPTHWISE_CONV_2D:   if (op_sig.options.depthwise_conv_2d.dilation_w_factor != 1 ||       op_sig.options.depthwise_conv_2d.dilation_h_factor != 1) {     return 2;   }   return 1;
 ```
 
 ### 연산자 버전 맵 업데이트하기
@@ -196,14 +180,7 @@ case BuiltinOperator_DEPTHWISE_CONV_2D:
 마지막 단계는 새 버전 정보를 연산자 버전 맵에 추가하는 것입니다. 이 버전 맵을 기반으로 필요한 모델의 최소 런타임 버전을 생성해야 하므로 이 단계가 필요합니다.
 
 ```
-const int kMaxVersion = 1;
-TfLiteNode* node;
-TfLiteRegistration* registration = nullptr;
-TF_LITE_ENSURE_STATUS(context->GetNodeAndRegistration(context, node_index, &node, &registration));
-
-if (registration->version > kMaxVersion) {
-  // Reject the node if the version isn't supported.
-}
+const int kMaxVersion = 1; TfLiteNode* node; TfLiteRegistration* registration = nullptr; TF_LITE_ENSURE_STATUS(context->GetNodeAndRegistration(context, node_index, &node, &registration));  if (registration->version > kMaxVersion) {   // Reject the node if the version isn't supported. }
 ```
 
 TensorFlow Lite는 하드웨어 백엔드에 ops를 위임할 수 있는 Delegation API를 제공합니다. 대리자의 `Prepare` 함수에서 위임 코드의 모든 노드에 대해 버전이 지원되는지 확인합니다.
