@@ -2,7 +2,7 @@
 
 # TensorFlow 허브
 
-TensorFlow Hub is an open repository and library for reusable machine learning. The [tfhub.dev](https://tfhub.dev) repository provides many pre-trained models: text embeddings, image classification models, TF.js/TFLite models and much more. The repository is open to [community contributors](https://tfhub.dev/s?subtype=publisher).
+TensorFlow Hub는 재사용 가능한 머신러닝을 위한 개방형 리포지토리 및 라이브러리입니다. [tfhub.dev](https://tfhub.dev) 리포지토리는 텍스트 임베딩, 이미지 분류 모델, TF.js/TFLite 모델 등 많은 사전 훈련된 모델을 제공합니다. 리포지토리는 [커뮤니티 기여자](https://tfhub.dev/s?subtype=publisher)에게 공개됩니다.
 
 The [`tensorflow_hub`](https://github.com/tensorflow/hub) library lets you download and reuse them in your TensorFlow program with a minimum amount of code.
 
@@ -18,9 +18,9 @@ print(embeddings.shape)  #(4,128)
 
 ## Next Steps
 
-- [Find models on tfhub.dev](https://tfhub.dev)
-- [Publish models on tfhub.dev](publish.md)
+- [tfhub.dev에서 모델 찾기](https://tfhub.dev)
+- [tfhub.dev에 모델 게시](publish.md)
 - TensorFlow Hub library
-    - [Install TensorFlow Hub](installation.md)
-    - [Library overview](lib_overview.md)
-- [Follow tutorials](tutorials)
+    - [TensorFlow Hub 설치](installation.md)
+    - [라이브러리 개요](lib_overview.md)
+- [튜토리얼 따르기](tutorials)
