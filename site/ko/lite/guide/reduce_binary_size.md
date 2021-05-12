@@ -6,9 +6,9 @@
 
 선택적 빌드는 다음 세 가지 연산 라이브러리에 적용됩니다.
 
-1. [TensorFlow Lite 내장 연산 라이브러리](https://www.tensorflow.org/lite/guide/ops_compatibility)
-2. [TensorFlow Lite 사용자 정의 연산](https://www.tensorflow.org/lite/guide/ops_custom)
-3. [Select TensorFlow 연산 라이브러리](https://www.tensorflow.org/lite/guide/ops_select)
+1. [TensorFlow Lite built-in ops library](https://www.tensorflow.org/lite/guide/ops_compatibility)
+2. [TensorFlow Lite custom ops](https://www.tensorflow.org/lite/guide/ops_custom)
+3. [Select TensorFlow ops library](https://www.tensorflow.org/lite/guide/ops_select)
 
 아래 표는 몇 가지 일반적인 사용 사례에서 선택적 빌드의 영향을 보여줍니다.
 
@@ -22,7 +22,9 @@
     </tr>
   </thead>
   <tr>
-    <td rowspan="2"><a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a></td>
+    <td rowspan="2">
+      <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>
+    </td>
     <td rowspan="2">이미지 분류</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar(296,635바이트)</td>
@@ -32,7 +34,9 @@
     <td>tensorflow-lite.aar(382,892바이트)</td>
   </tr>
   <tr>
-    <td rowspan="2"><a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a></td>
+    <td rowspan="2">
+      <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a>
+    </td>
     <td rowspan="2">음높이 추출</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar(375,813바이트) <br>tensorflow-lite-select-tf-ops.aar(1,676,380바이트)</td>
@@ -42,7 +46,9 @@
     <td>tensorflow-lite.aar(421,826바이트) <br>tensorflow-lite-select-tf-ops.aar(2,298,630바이트)</td>
   </tr>
   <tr>
-    <td rowspan="2"><a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a></td>
+    <td rowspan="2">
+      <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a>
+    </td>
     <td rowspan="2">비디오 분류</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar(240,085바이트) <br>tensorflow-lite-select-tf-ops.aar(1,708,597바이트)</td>
@@ -91,7 +97,13 @@ sh tensorflow/lite/tools/build_aar.sh \
 
 ## Docker를 사용하여 TensorFlow Lite를 선택적으로 빌드하기
 
-이 섹션에서는 로컬 시스템에 [Docker](https://docs.docker.com/get-docker/)를 설치하고 [TensorFlow Lite Docker 파일을 빌드](https://www.tensorflow.org/lite/guide/android#set_up_build_environment_using_docker)했다고 가정합니다.
+이 섹션에서는 로컬 머신에 [Docker](https://docs.docker.com/get-docker/)를 설치하고 [여기](https://www.tensorflow.org/lite/guide/build_android#set_up_build_environment_using_docker)에서 TensorFlow Lite Dockerfile을 다운로드했다고 가정합니다.
+
+위의 Dockerfile을 다운로드한 후, 다음을 실행하여 Docker 이미지를 빌드할 수 있습니다.
+
+```shell
+docker build . -t tflite-builder -f tflite-android.Dockerfile
+```
 
 ### Android 프로젝트용 AAR 파일 빌드하기
 
@@ -109,10 +121,13 @@ chmod +x build_aar_with_docker.sh
 sh build_aar_with_docker.sh \
   --input_models=/a/b/model_one.tflite,/c/d/model_two.tflite \
   --target_archs=x86,x86_64,arm64-v8a,armeabi-v7a \
-  --checkpoint=master
+  --checkpoint=master \
+  [--cache_dir=<path to cache directory>]
 ```
 
-`checkpoint` 플래그는 라이브러리를 빌드하기 전에 체크아웃하려는 TensorFlow 리포지토리의 커밋, 분기 또는 태그입니다. 위의 명령으로 현재 디렉토리에 TensorFlow Lite 내장 및 사용자 정의 연산에 대한 AAR 파일 `tensorflow-lite.aar`이 생성되고, 선택적으로 Select TensorFlow 연산을 위한 AAR 파일 `tensorflow-lite-select-tf-ops.aar`이 생성됩니다.
+`checkpoint` 플래그는 라이브러리를 빌드하기 전에 체크아웃하려는 TensorFlow 리포지토리의 커밋, 분기 또는 태그입니다. 기본적으로 이것이 최신 릴리스 분기입니다. 위의 명령으로 TensorFlow Lite 내장 및 사용자 정의 ops를 위한 AAR 파일 `tensorflow-lite.aar`, 그리고 선택적으로 현재 디렉터리에 있는 특정 TensorFlow ops를 위한 AAR 파일 `tensorflow-lite-select-tf-ops.aar`이 생성됩니다.
+
+--cache_dir은 캐시 디렉터리를 지정합니다. 제공되지 않은 경우 스크립트는 캐싱을 위해 현재 작업 디렉터리 아래에 `bazel-build-cache`라는 디렉터리를 만듭니다.
 
 ## 프로젝트에 AAR 파일 추가하기
 
