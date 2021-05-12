@@ -26,12 +26,12 @@
 
 [Kaggle의 IMDB 분류](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) - 데이터 다운로드 및 결과 제출을 포함하여 Colab의 Kaggle 경쟁과 쉽게 상호 작용하는 방법을 보여줍니다.
 
- | Estimator | Keras | TF2 | TF 데이터세트 | BERT | Kaggle API
+ | 예측 도구 | Keras | TF2 | TF 데이터세트 | BERT | Kaggle APIs
 --- | --- | --- | --- | --- | --- | ---
-[텍스트 분류](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  |
-[Keras를 사용한 텍스트 분류](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub) |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |
-[TF Hub에서 BERT를 사용하여 영화 리뷰 감정 예측](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |
-[Kaggle의 IMDB 분류](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png)
+[Text classification](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  |
+[Keras를 이용한 텍스트 분류](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub) |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |
+[TF Hub에서 BERT를 이용한 영화 리뷰 감성 예측](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |
+[Kaggle에서 IMDB 분류](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png)
 
 ### FastText 임베딩을 사용한 Bangla 작업
 
@@ -70,7 +70,3 @@ TensorFlow Hub는 현재 모든 언어로 모듈을 제공하지 않습니다. �
 [텍스트 임베딩 모듈 exporter](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings/export.py) - 기존의 사전 훈련된 임베딩을 모듈로 래핑하는 도구입니다. 모듈에 텍스트 전처리 연산을 포함하는 방법을 보여줍니다. 이를 통해 토큰 임베딩에서 문장 임베딩 모듈을 만들 수 있습니다.
 
 [텍스트 임베딩 모듈 exporter v2](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings_v2/export_v2.py) - 위와 동일하지만 TensorFlow 2 및 즉시 실행과 호환됩니다.
-
-### 훈련 가능한 RNN 모듈 만들기
-
-[RNN 모델 exporter](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/saved_model/integration_tests/export_text_rnn_model.py) - TensorFlow 2와 호환되는 초기화되지 않은 훈련 가능한 LSTM 기반 모듈을 생성하는 방법을 보여줍니다. 이 모듈은 두 개의 서명을 노출합니다. 하나는 문장을 직접 입력하여 훈련하기 위한 서명이고 다른 하나는 디코딩을 위해 통계적으로 가장 가능성이 높은 문장을 구성하기 위한 서명입니다.
