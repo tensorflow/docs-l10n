@@ -22,7 +22,7 @@ TF 허브의 SavedModel에 대해 자세히 알아보세요.
 - [TF2 SavedModel 내보내기](exporting_tf2_saved_model.md)
 - [TF2 SavedModels의 TF1/TF2 호환성](model_compatibility.md)
 
-### TF1 Hub format
+### TF1 허브 형식
 
 TF1 허브 형식은 TF 허브 라이브러리에서 사용하는 사용자 정의 직렬화 형식입니다. TF1 허브 형식은 구문 수준(동일한 파일 이름 및 프로토콜 메시지)에서 TensorFlow 1의 SavedModel 형식과 유사하지만 모듈 재사용, 구성 및 재교육(예: 리소스 초기화 프로그램의 다른 저장소, 메타그래프에 대한 다른 태그 지정 규칙)이 가능하도록 의미적으로 다릅니다. 디스크에서 이를 구별하는 가장 쉬운 방법은 `tfhub_module.pb` 파일이 있는지 여부입니다.
 
