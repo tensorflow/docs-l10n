@@ -1,16 +1,16 @@
-# Generate model interfaces using metadata
+# 메타데이터를 사용하여 모델 인터페이스 생성
 
-Using [TensorFlow Lite Metadata](../convert/metadata), developers can generate wrapper code to enable integration on Android. For most developers, the graphical interface of [Android Studio ML Model Binding](#mlbinding) is the easiest to use. If you require more customisation or are using command line tooling, the [TensorFlow Lite Codegen](#codegen) is also available.
+개발자는 [TensorFlow Lite Metadata](../convert/metadata)를 사용하여 래퍼 코드를 생성하여 Android에서 통합할 수 있습니다. 대부분의 개발자들에게 [Android Studio ML Model Binding](#mlbinding)의 그래픽 인터페이스가 가장 사용하기 쉽습니다. 더 많은 사용자 정의가 필요하거나 명령 줄 도구를 사용하는 경우 [TensorFlow Lite Codegen](#codegen)도 사용할 수 있습니다.
 
-## Use Android Studio ML Model Binding {:#mlbinding}
+## Android Studio ML Model Binding {:#mlbinding} 사용
 
-For TensorFlow Lite models enhanced with [metadata](../convert/metadata.md), developers can use Android Studio ML Model Binding to automatically configure settings for the project and generate wrapper classes based on the model metadata. The wrapper code removes the need to interact directly with `ByteBuffer`. Instead, developers can interact with the TensorFlow Lite model with typed objects such as `Bitmap` and `Rect`.
+[metadata](../convert/metadata.md)로 보강된 TensorFlow Lite 모델의 경우 개발자는 Android Studio ML Model Binding을 사용하여 프로젝트를 위한 설정을 자동으로 구성하고 모델 메타데이터에 기초한 래퍼 클래스를 생성할 수 있습니다. 래퍼 코드를 사용하면 `ByteBuffer`와 직접 상호작용할 필요가 없습니다. 대신, 개발자는 `Bitmap` 및 `Rect`와 같은 형식화된 객체를 통해 TensorFlow Lite 모델과 상호작용할 수 있습니다.
 
 Note: Required [Android Studio 4.1](https://developer.android.com/studio) or above
 
-### Import a TensorFlow Lite model in Android Studio
+### Android Studio에서 TensorFlow Lite 모델 가져오기
 
-1. Right-click on the module you would like to use the TFLite model or click on `File`, then `New` &gt; `Other` &gt; `TensorFlow Lite Model` ![Right-click menus to access the TensorFlow Lite import functionality](../images/android/right_click_menu.png)
+1. TFLite 모델을 사용하려는 모듈을 마우스 오른쪽 버튼으로 클릭하거나 `파일`을 클릭한 다음 `새로 만들기` &gt; `기타` &gt; `TensorFlow Lite 모델` ![Right-click menus to access the TensorFlow Lite import functionality](../images/android/right_click_menu.png)을 클릭합니다.
 
 2. Select the location of your TFLite file. Note that the tooling will configure the module's dependency on your behalf with ML Model binding and all dependencies automatically inserted into your Android module's `build.gradle` file.
 
@@ -20,13 +20,13 @@ Note: Required [Android Studio 4.1](https://developer.android.com/studio) or abo
 
 4. The following screen will appear after the import is successful. To start using the model, select Kotlin or Java, copy and paste the code under the `Sample Code` section. You can get back to this screen by double clicking the TFLite model under the `ml` directory in Android Studio. ![Model details page in Android Studio](../images/android/model_details.png)
 
-### Accelerating model inference {:#acceleration}
+### 모델 추론 가속화 {:#acceleration}
 
-ML Model Binding provides a way for developers to accelerate their code through the use of delegates and the number of threads.
+ML Model Binding은 개발자가 대리자 및 스레드 수를 사용하여 코드를 가속할 수있는 방법을 제공합니다.
 
 Note: The TensorFlow Lite Interpreter must be created on the same thread as when is is run. Otherwise, TfLiteGpuDelegate Invoke: GpuDelegate must run on the same thread where it was initialized. may occur.
 
-Step 1. Check the module `build.gradle` file that it contains the following dependency:
+1 단계. 모듈 `build.gradle` 파일에 다음 종속성이 포함되어 있는지 확인합니다.
 
 ```java
     dependencies {
@@ -36,7 +36,7 @@ Step 1. Check the module `build.gradle` file that it contains the following depe
     }
 ```
 
-Step 2. Detect if GPU running on the device is compatible with TensorFlow GPU delegate, if not run the model using multiple CPU threads:
+2 단계. 여러 CPU 스레드를 사용하여 모델을 실행하지 않는 경우 기기에서 실행 중인 GPU가 TensorFlow GPU 대리자와 호환되는지 감지합니다.
 
 <div>
     <devsite-selector>
@@ -50,7 +50,7 @@ Step 2. Detect if GPU running on the device is compatible with TensorFlow GPU de
 <div data-md-type="block_html"></div>
 </section></devsite-selector>
 </div>
-<h2 data-md-type="header" data-md-header-level="2">Generate model interfaces with TensorFlow Lite code generator {:#codegen}</h2>
+<h2 data-md-type="header" data-md-header-level="2">TensorFlow Lite 코드 생성기로 모델 인터페이스 생성 {: #codegen}</h2>
 <p data-md-type="paragraph">참고: TensorFlow Lite 래퍼 코드 생성기는 현재 Android만 지원합니다.</p>
 <p data-md-type="paragraph"><a href="../convert/metadata.md" data-md-type="link">메타데이터</a>로 강화된 TensorFlow Lite 모델의 경우, 개발자는 TensorFlow Lite Android 래퍼 코드 생성기를 사용하여 플랫폼별 래퍼 코드를 만들 수 있습니다. 래퍼 코드는 <code data-md-type="codespan">ByteBuffer</code>와 직접 상호 작용할 필요성을 없애줍니다. 대신, 개발자는 <code data-md-type="codespan">Bitmap</code> 및 <code data-md-type="codespan">Rect</code>와 같은 형식화된 객체를 사용하여 TensorFlow Lite 모델과 상호 작용할 수 있습니다.</p>
 <p data-md-type="paragraph">코드 생성기의 유용성은 TensorFlow Lite 모델의 메타데이터 항목이 얼마나 완전한지에 달려 있습니다. <code data-md-type="codespan">&lt;Codegen usage&gt;</code> 섹션에서 <a href="https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs" data-md-type="link">metadata_schema.fbs</a>의 관련 필드를 참조하여 codegen 도구가 이러한 필드를 어떻게 구문 분석하는지 확인하세요.</p>
