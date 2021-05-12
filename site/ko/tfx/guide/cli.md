@@ -855,7 +855,7 @@ Kubeflow:
   <dt>--package_path=<var>package-path</var> </dt>
   <dd>
     <p>파일로 컴파일된 파이프라인의 경로입니다. 컴파일된 파이프라인은 압축 파일(<code>.tar.gz</code>, <code>.tgz</code> 또는 <code>.zip</code>) 또는 YAML 파일(<code>.yaml</code> 또는 <code>.yml</code>)이어야 합니다.</p>
-    <p>       If <var>package-path</var> is not specified, TFX uses the following as       the default path:       <code>&lt;var&gt;current_directory&lt;/var&gt;/&lt;var&gt;pipeline_name&lt;/var&gt;.tar.gz</code>     </p>
+    <p><var>package-path</var>가 지정되지 않으면 TFX가 <code>current_directory/pipeline_name.tar.gz</code>를 기본 경로로 사용합니다.</p>
   </dd>
 
 
