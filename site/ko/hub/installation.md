@@ -19,7 +19,7 @@ TensorFlow Hub의 TF1 스타일 API는 TensorFlow 2의 v1 호환성 모드에서
 
 ### TensorFlow 1과 함께 레거시 사용하기
 
-TensorFlow 1.15 is the only version of TensorFlow 1.x still supported by the `tensorflow_hub` library (as of release 0.11.0). TensorFlow 1.15 defaults to TF1-compatible behavior but contains many TF2 features under the hood to allow some use of TensorFlow Hub's TF2-style APIs.
+TensorFlow 1.15는 `tensorflow_hub` 라이브러리에서 여전히 지원하는 TensorFlow 1.x의 유일한 버전입니다(릴리스 0.11.0 기준). TensorFlow 1.15는 기본적으로 TF1 호환 동작을 사용하지만 TensorFlow 허브의 TF2 스타일 API를 일부 사용할 수 있도록 내부에 많은 TF2 기능이 포함되어 있습니다.
 
 ```bash
 $ pip install "tensorflow>=1.15,<2.0"
@@ -37,7 +37,7 @@ $ pip install --upgrade tf-hub-nightly
 
 ## 다음 단계
 
-- [Library overview](lib_overview.md)
+- [라이브러리 개요](lib_overview.md)
 - 튜토리얼:
     - [Text classification](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
     - [Image classification](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
