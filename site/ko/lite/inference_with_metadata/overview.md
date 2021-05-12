@@ -2,7 +2,7 @@
 
 Inferencing [models with metadata](../convert/metadata.md) can be as easy as just a few lines of code. TensorFlow Lite metadata contains a rich description of what the model does and how to use the model. It can empower code generators to automatically generate the inference code for you, such as using the [Android Studio ML Binding feature](codegen.md#mlbinding) or [TensorFlow Lite Android code generator](codegen.md#codegen). It can also be used to configure your custom inference pipeline.
 
-## Tools and libraries
+## 도구 및 라이브러리
 
 TensorFlow Lite는 다음과 같이 다양한 계층의 배포 요구 사항을 해결하도록 다양한 도구와 라이브러리를 제공합니다.
 
