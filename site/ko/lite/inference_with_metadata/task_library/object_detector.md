@@ -61,7 +61,7 @@ ObjectDetectorOptions options = ObjectDetectorOptions.builder().setMaxResults(1)
 ObjectDetector objectDetector = ObjectDetector.createFromFileAndOptions(context, modelFile, options);
 
 // Run inference
-List<Detection> results = objectDetector.detect(image);
+List results = objectDetector.detect(image);
 ```
 
 `ObjectDetector`를 구성하는 추가 옵션은 [소스 코드 및 javadoc](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/vision/detector/ObjectDetector.java)를 참조하세요.
@@ -74,7 +74,7 @@ List<Detection> results = objectDetector.detect(image);
 // Initialization
 ObjectDetectorOptions options;
 options.mutable_model_file_with_metadata()->set_file_name(model_file);
-std::unique_ptr<ObjectDetector> object_detector = ObjectDetector::CreateFromOptions(options).value();
+std::unique_ptr object_detector = ObjectDetector::CreateFromOptions(options).value();
 
 // Run inference
 const DetectionResult result = object_detector->Detect(*frame_buffer).value();
