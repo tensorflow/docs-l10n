@@ -39,13 +39,13 @@ python import_pb_to_tensorboard.py --model_dir <model path> --log_dir <log dir p
 
 Netron이 TensorFlow Lite 모델을 열 수 없는 경우, 리포지토리에서 [visualize.py](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/visualize.py) 스크립트를 사용해 볼 수 있습니다.
 
-If you're using TF 2.5 or a later version
+TF 2.5 이상 버전을 사용하는 경우
 
 ```shell
 python -m tensorflow.lite.tools.visualize model.tflite visualized_model.html
 ```
 
-Otherwise, you can run this script with Bazel
+그렇지 않으면 Bazel을 사용하여 이 스크립트를 실행할 수 있습니다.
 
 - [Clone the TensorFlow repository](https://www.tensorflow.org/install/source)
 - bazel을 사용하여 `visualize.py` 스크립트를 실행합니다.
