@@ -64,7 +64,7 @@ embeddings = hub.KerasLayer("path/to/model", trainable=...)(text_input)
 
 ### 示例
 
-- Colab 教程[影评文本分类](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)。
+- Colab 教程[电影评论文本分类](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)。
 
 <a name="text-embeddings-preprocessed"></a>
 
@@ -126,7 +126,7 @@ embeddings = encoder_outputs["default"]
 
 <a name="transformer-encoders"></a>
 
-## 包含 Transfrmer 编码器的文本嵌入向量
+## 包含 Transformer 编码器的文本嵌入向量
 
 文本的 Transformer 编码器在一批输入序列上运行，每个序列由 *n* 上的一些模型特定边界内的 *n* ≥ 1 个词例化文本段构成。对于 BERT 及其许多扩展，该边界为 2，因此它们接受单个段和段对。
 
