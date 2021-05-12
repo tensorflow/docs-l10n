@@ -67,7 +67,7 @@ ImageClassifierOptions options = ImageClassifierOptions.builder().setMaxResults(
 ImageClassifier imageClassifier = ImageClassifier.createFromFileAndOptions(context, modelFile, options);
 
 // Run inference
-List<Classifications> results = imageClassifier.classify(image);
+List results = imageClassifier.classify(image);
 ```
 
 <code>ImageClassifier</code> 구성에 대한 추가 옵션은 <a>소스 코드 및 javadoc</a>를 참조하세요.
@@ -80,7 +80,7 @@ List<Classifications> results = imageClassifier.classify(image);
 // Initialization
 ImageClassifierOptions options;
 options.mutable_model_file_with_metadata()->set_file_name(model_file);
-std::unique_ptr<ImageClassifier> image_classifier = ImageClassifier::CreateFromOptions(options).value();
+std::unique_ptr image_classifier = ImageClassifier::CreateFromOptions(options).value();
 
 // Run inference
 const ClassificationResult result = image_classifier->Classify(*frame_buffer).value();
