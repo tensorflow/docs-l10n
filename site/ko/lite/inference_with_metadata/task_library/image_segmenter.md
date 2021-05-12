@@ -57,7 +57,7 @@ ImageSegmenterOptions options = ImageSegmenterOptions.builder().setOutputType(Ou
 ImageSegmenter imageSegmenter = ImageSegmenter.createFromFileAndOptions(context, modelFile, options);
 
 // Run inference
-List<Segmentation> results = imageSegmenter.segment(image);
+List results = imageSegmenter.segment(image);
 ```
 
 `ImageSegmenter` 구성에 대한 추가 옵션은 [소스 코드 및 javadoc](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/vision/segmenter/ImageSegmenter.java)를 참조하세요.
@@ -70,7 +70,7 @@ List<Segmentation> results = imageSegmenter.segment(image);
 // Initialization
 ImageSegmenterOptions options;
 options.mutable_model_file_with_metadata()->set_file_name(model_file);
-std::unique_ptr<ImageSegmenter> image_segmenter = ImageSegmenter::CreateFromOptions(options).value();
+std::unique_ptr image_segmenter = ImageSegmenter::CreateFromOptions(options).value();
 
 // Run inference
 const SegmentationResult result = image_segmenter->Segment(*frame_buffer).value();
