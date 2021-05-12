@@ -6,25 +6,25 @@
 
 [metadata](../convert/metadata.md)로 보강된 TensorFlow Lite 모델의 경우 개발자는 Android Studio ML Model Binding을 사용하여 프로젝트를 위한 설정을 자동으로 구성하고 모델 메타데이터에 기초한 래퍼 클래스를 생성할 수 있습니다. 래퍼 코드를 사용하면 `ByteBuffer`와 직접 상호작용할 필요가 없습니다. 대신, 개발자는 `Bitmap` 및 `Rect`와 같은 형식화된 객체를 통해 TensorFlow Lite 모델과 상호작용할 수 있습니다.
 
-Note: Required [Android Studio 4.1](https://developer.android.com/studio) or above
+참고: [Android Studio 4.1](https://developer.android.com/studio) 이상 필요
 
 ### Android Studio에서 TensorFlow Lite 모델 가져오기
 
 1. TFLite 모델을 사용하려는 모듈을 마우스 오른쪽 버튼으로 클릭하거나 `파일`을 클릭한 다음 `새로 만들기` &gt; `기타` &gt; `TensorFlow Lite 모델` ![Right-click menus to access the TensorFlow Lite import functionality](../images/android/right_click_menu.png)을 클릭합니다.
 
-2. Select the location of your TFLite file. Note that the tooling will configure the module's dependency on your behalf with ML Model binding and all dependencies automatically inserted into your Android module's `build.gradle` file.
+2. TFLite 파일의 위치를 선택합니다. 도구가 ML 모델을 바인딩하고 모든 종속성은 Android 모듈의 `build.gradle` 파일에 자동으로 삽입하는 등 사용자를 대신하여 모듈의 종속성을 구성합니다.
 
-    Optional: Select the second checkbox for importing TensorFlow GPU if you want to use GPU acceleration. ![Import dialog for TFLite model](../images/android/import_dialog.png)
+    선택 사항: <a>GPU 가속</a>을 사용하려는 경우 TensorFlow GPU를 가져오기 위한 두 번째 확인란을 선택합니다. <img>
 
-3. Click `Finish`.
+3. `마침`을 클릭합니다.
 
-4. The following screen will appear after the import is successful. To start using the model, select Kotlin or Java, copy and paste the code under the `Sample Code` section. You can get back to this screen by double clicking the TFLite model under the `ml` directory in Android Studio. ![Model details page in Android Studio](../images/android/model_details.png)
+4. 가져오기가 성공하면 다음 화면이 나타납니다. 모델 사용을 시작하려면 Kotlin 또는 Java를 선택하고 `Sample Code` 섹션 아래에 코드를 복사하여 붙여 넣습니다. Android Studio의 `ml` 디렉터리 아래에 있는 TFLite 모델을 두 번 클릭하여 이 화면으로 돌아갈 수 있습니다. ![Model details page in Android Studio](../images/android/model_details.png)
 
 ### 모델 추론 가속화 {:#acceleration}
 
 ML Model Binding은 개발자가 대리자 및 스레드 수를 사용하여 코드를 가속할 수있는 방법을 제공합니다.
 
-Note: The TensorFlow Lite Interpreter must be created on the same thread as when is is run. Otherwise, TfLiteGpuDelegate Invoke: GpuDelegate must run on the same thread where it was initialized. may occur.
+참고: TensorFlow Lite 인터프리터는 실행될 때와 같은 스레드에서 생성되어야 합니다. 그렇지 않으면, <code>TfLiteGpuDelegate Invoke: GpuDelegate must run on the same thread where it was initialized.</code>가 발생할 수 있습니다.
 
 1 단계. 모듈 `build.gradle` 파일에 다음 종속성이 포함되어 있는지 확인합니다.
 
@@ -45,8 +45,8 @@ Note: The TensorFlow Lite Interpreter must be created on the same thread as when
       <p></p>
 <pre class="prettyprint lang-kotlin">    import org.tensorflow.lite.gpu.CompatibilityList
     import org.tensorflow.lite.gpu.GpuDelegate
-&lt;/div&gt;
-&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_13&lt;/code&gt;</pre>
+&amp;amp;lt;/div&amp;amp;gt;
+&amp;amp;lt;pre data-md-type=&amp;quot;block_code&amp;quot; data-md-language=&amp;quot;&amp;quot;&amp;amp;gt;&amp;amp;lt;code&amp;amp;gt;GL_CODE_13&amp;amp;lt;/code&amp;amp;gt;</pre>
 <div data-md-type="block_html"></div>
 </section></devsite-selector>
 </div>
