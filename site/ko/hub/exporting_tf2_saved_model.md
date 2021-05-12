@@ -8,13 +8,13 @@
 
 ## 개요
 
-SavedModel is TensorFlow's standard serialization format for trained models or model pieces. It stores the model's trained weights together with the exact TensorFlow operations to perform its computation. It can be used independently from the code that created it. In particular, it can be reused across different high-level model-building APIs like Keras, because TensorFlow operations are their common basic language.
+SavedModel은 훈련된 모델 또는 모델 조각에 대한 TensorFlow의 표준 직렬화 형식입니다. 이 모델은 계산을 수행하기 위해 모델의 훈련된 가중치를 정확한 TensorFlow 작업과 함께 저장하며, 이 모델이 생성된 출처 코드와 독립적으로 사용할 수 있습니다. 특히, TensorFlow 연산이 공통된 기본 언어이기 때문에 Keras와 같은 다양한 고수준 모델 구축 API에서 재사용할 수 있습니다.
 
 ## Keras에서 저장하기
 
 TensorFlow 2부터 `tf.keras.Model.save()` 및 `tf.keras.models.save_model()`은 기본적으로 SavedModel 형식(HDF5 아님)을 사용합니다. 이렇게 얻어진 SavedModel은 `hub.load()`, `hub.KerasLayer` 및 앞으로 제공될 다른 유사한 고수준 API 어댑터와 함께 사용할 수 있습니다.
 
-To share a complete Keras Model, just save it with `include_optimizer=False`.
+전체 Keras 모델을 공유하려면 간단히 `include_optimizer=False`를 저장합니다.
 
 Keras 모델의 조각을 공유하려면 해당 부분 자체를 모델로 만든 다음 저장합니다. 처음부터 그와 같이 코드를 배치할 수 있습니다.
 
@@ -39,7 +39,7 @@ GitHub에서 [TensorFlow 모델](https://github.com/tensorflow/models)은 BERT�
 
 ## 저수준 TensorFlow에서 저장하기
 
-This requires good familiarity with TensorFlow's [SavedModel Guide](https://www.tensorflow.org/guide/saved_model).
+이를 위해서는 TensorFlow의 [SavedModel 가이드](https://www.tensorflow.org/guide/saved_model) 내용을 잘 알고 있어야 합니다.
 
 서비스 서명 그 이상을 제공하려면 [재사용 가능한 SavedModel 인터페이스](reusable_saved_models.md)를 구현해야 합니다. 개념적으로 이 내용은 다음과 같습니다.
 
@@ -69,7 +69,7 @@ print(layer.losses)  # 0.004
 
 ## SavedModel 제작자를 위한 조언
 
-When creating a SavedModel for sharing on TensorFlow Hub, think ahead if and how its consumers should fine-tune it, and provide guidance in the documentation.
+TensorFlow 허브에서 공유하기 위해 SavedModel을 만들 때 소비자가 모델을 미세 조정해야 하는지, 해야 한다면 어떻게 해야 하는지 미리 생각하고 문서에 지침을 제공하세요.
 
 Keras 모델에서 저장하면 미세 조정의 모든 메커니즘이 동작합니다(가중치 정규화 손실 방지, 훈련 가능한 변수 선언, `training=True` 및 `training=False` 모두에 대해 `__call__` 추적 등).
 
@@ -77,7 +77,7 @@ Keras 모델에서 저장하면 미세 조정의 모든 메커니즘이 동작�
 
 모델이 드롭아웃, 배치 정규화 또는 하이퍼 매개변수를 포함하는 유사한 학습 기술을 사용하는 경우 예상되는 많은 대상 문제 및 배치 크기에서 의미가 있는 값으로 설정합니다(이 글을 쓰는 시점에서 Keras에서 저장하면 소비자가 쉽게 조정할 수 없습니다).
 
-Weight regularizers on individual layers are saved (with their regularization strength coefficients), but weight regularization from within the optimizer (like `tf.keras.optimizers.Ftrl.l1_regularization_strength=...)`) is lost. Advise consumers of your SavedModel accordingly.
+개별 레이어의 가중치 regularizer는 (정규화 강도 계수와 함께) 저장되지만 옵티마이저 내에서 가중치 정규화(예: `tf.keras.optimizers.Ftrl.l1_regularization_strength=...)`)는 손실됩니다. 따라서 SavedModel의 소비자에게 적절한 고지를 해주기 바랍니다.
 
 <a name="tensorflow-model-garden"></a>
 
