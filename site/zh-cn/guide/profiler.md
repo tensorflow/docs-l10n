@@ -555,7 +555,7 @@ Profiler 在四个不同的轴上涵盖了许多用例。目前已支持部分�
 
 <a name="profiling_api_table"></a>
 
-| 分析 API                | 本地     | 远程    | 多  | 硬件  | :                              :           :           : 工作进程   : 平台 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 支持 | 不       | 不       | CPU、GPU  | : Callback**                   :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | Not       | 不       | CPU、GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | 支持 | 支持 | CPU、GPU、| : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 支持 | 不       | 不       | CPU、GPU  | :                              :           : 支持 : 支持 :           :
+| 分析 API                | 本地     | 远程    | 多  | 硬件  | :                              :           :           : 工作进程   : 平台 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 支持 | 不       | 不       | CPU、GPU  | : Callback**                   :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | Not       | 不       | CPU、GPU  | : start/stop [API]**    :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | 支持 | 支持 | CPU、GPU、| : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 支持 | 不       | 不       | CPU、GPU  | :                              :           : 支持 : 支持 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -600,7 +600,7 @@ Profiler 在四个不同的轴上涵盖了许多用例。目前已支持部分�
 
 ### 在 TensorFlow 2.2 和 TensorFlow 2.3 上分析多个 GPU
 
-TensorFlow 2.2 和 2.3 仅支持单主机系统的多 GPU 分析；不支持多主机系统的多 GPU 分析。要分析多工作进程 GPU 配置，必须单独分析每个工作进程。在 TensorFlow 2.4 上，可以使用 [`tf.profiler.experimental.trace`](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace) API 分析多个工作进程。
+TensorFlow 2.2 和 2.3 仅支持单主机系统的多 GPU 分析；不支持多主机系统的多 GPU 分析。要分析多工作进程 GPU 配置，必须单独分析每个工作进程。在 TensorFlow 2.4 上，可以使用 [`tf.profiler.experimental.trace`] API 分析多个工作进程。
 
 需要 CUDA® Toolkit 10.2 或更高版本才能分析多个 GPU。由于 TensorFlow 2.2 和 2.3 仅支持 10.1 及更低版本的 CUDA® Toolkit，因此请创建 `libcudart.so.10.1` 和 `libcupti.so.10.1` 的符号链接。
 
@@ -608,3 +608,7 @@ TensorFlow 2.2 和 2.3 仅支持单主机系统的多 GPU 分析；不支持多�
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
+
+
+[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2
+[`tf.profiler.experimental.trace`]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace
