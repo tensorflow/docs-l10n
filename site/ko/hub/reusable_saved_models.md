@@ -8,13 +8,13 @@ TensorFlow Hub는 다른 자산 중에서 TensorFlow 2용 SavedModel을 호스�
 
 이 페이지는 TensorFlow Python 프로그램에서 *재사용*하기 위해 로드된 `obj`에 의해 구현되는 인터페이스를 설명합니다. 이 인터페이스를 준수하는 SavedModel을 *Reusable SavedModel*이라고 합니다.
 
-Reusing means building a larger model around `obj`, including the ability to fine-tune it. Fine-tuning means further training of the weights in the loaded `obj` as part of the surrounding model. The loss function and the optimizer are determined by the surrounding model; `obj` only defines the mapping of input to output activations (the "forward pass"), possibly including techniques such as dropout or batch normalization.
+재사용은 미세 조정 기능을 포함하여 `obj` 중심의 더 큰 모델을 빌드하는 것을 의미합니다. 미세 조정은 주변 모델의 일부로 로드된 `obj`의 가중치를 추가로 훈련하는 것을 의미합니다. 손실 함수와 옵티마이저는 주변 모델에 의해 결정됩니다. `obj`는 출력 활성화에 대한 입력 매핑("포워드 패스")만 정의하며 드롭아웃 또는 배치 정규화와 같은 기술을 포함할 수 있습니다.
 
 **TensorFlow Hub 팀은 위의 의미에서 재사용할 예정인 모든 SavedModel에서 Reusable SavedModel 인터페이스**를 구현할 것을 권장합니다. `tensorflow_hub` 라이브러리의 많은 유틸리티, 특히 `hub.KerasLayer`는 이를 구현하기 위해 SavedModel가 필요합니다.
 
 ### SignatureDefs와의 관계
 
-This interface in terms of tf.functions and other TF2 features is separate from the SavedModel's signatures, which have been available since TF1 and continue to be used in TF2 for inference (such as deploying SavedModels to TF Serving or TF Lite). Signatures for inference are not expressive enough to support fine-tuning, and [`tf.function`](https://www.tensorflow.org/api_docs/python/tf/function) provides a more natural and expressive [Python API](https://www.tensorflow.org/tutorials/customization/performance) for the reused model.
+tf.functions 및 기타 TF2 기능 측면에서 이 인터페이스는 TF1 이후로 사용 가능하며 추론을 위해 TF2에서 계속 사용되는 SavedModel의 서명과는 별개입니다(예: TF Serving 또는 TF Lite에 SavedModel 배포). 추론을 위한 서명은 미세 조정을 지원할 만큼 충분히 다양하지 않고, [`tf.function`](https://www.tensorflow.org/api_docs/python/tf/function)은 재사용된 모델에 대해 보다 자연스럽고 다양한 [Python API](https://www.tensorflow.org/tutorials/customization/performance)를 제공합니다.
 
 ### 모델 구축 라이브러리와의 관계
 
@@ -24,7 +24,7 @@ Reusable SavedModel을 주어진 모델 구축 라이브러리에 로드하거�
 
 ### 작업별 "Common SavedModel API"와의 관계
 
-The interface definition on this page allows for any number and type of inputs and outputs. The [Common SavedModel APIs for TF Hub](common_saved_model_apis/index.md) refine this general interface with usage conventions for specific tasks to make models easily interchangeable.
+이 페이지의 인터페이스 정의는 모든 수와 유형의 입력 및 출력을 허용합니다. [TF 허브용 Common SavedModel API](common_saved_model_apis/index.md)는 모델을 쉽게 교환할 수 있도록 특정 작업에 대한 사용 규칙으로 이 일반 인터페이스를 구체화합니다.
 
 ## 인터페이스 정의
 
