@@ -136,6 +136,9 @@ sudo python3 -m pip install -U pip
 # Install tensorflow and configure bazel
 sudo ./configure.sh
 
+# Alias python3 to python, needed by bazel
+sudo ln -s /usr/bin/python3 /usr/bin/python
+
 # Add any optimization on bazel command, e.g., --compilation_mode=opt,
 #   --copt=-msse4.2, --remote_cache=, etc.
 # export BAZEL_OPTIMIZATION=
