@@ -1,6 +1,6 @@
 # TensorFlow 버전 호환성
 
-Note: 이 문서는 텐서플로 커뮤니티에서 번역했습니다. 커뮤니티 번역 활동의 특성상 정확한 번역과 최신 내용을 반영하기 위해 노력함에도 불구하고 [공식 영문 문서](https://www.tensorflow.org/?hl=en)의 내용과 일치하지 않을 수 있습니다. 이 번역에 개선할 부분이 있다면 [tensorflow/docs-l10n](https://github.com/tensorflow/docs-l10n/) 깃헙 저장소로 풀 리퀘스트를 보내주시기 바랍니다. 문서 번역이나 리뷰에 참여하려면 [docs-ko@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/docs-ko)로 메일을 보내주시기 바랍니다.
+이 문서는 서로 다른 버전의 TensorFlow(코드 또는 데이터)에서 하위 호환성이 필요한 사용자, 그리고 호환성을 유지하면서 TensorFlow를 수정하려는 개발자를 위해 작성되었습니다.
 
 ## 유의적 버저닝 2.0
 
@@ -12,13 +12,13 @@ TensorFlow는 공개 API에 유의적 버저닝 2.0([semver](http://semver.org))
 
 - **PATCH**: 하위 호환되는 버그 픽스
 
-이를테면 릴리즈 1.0.0은 릴리즈 0.12.1에서 하위 호환성이 *없는* 변동사항이 있습니다. 그러나, 릴리즈 1.1.1은 릴리즈 1.0.0과 하위 호환성이 있습니다.
+이를테면 릴리즈 1.0.0은 릴리즈 0.12.1에서 하위 호환성이 *없는* 변동사항이 있습니다. 그러나, 릴리즈 1.1.1은 릴리즈 1.0.0과 하위 *호환성이 있습니다*.
 
 ## 포함되는 사항
 
 TensorFlow의 공개 API만이 부 버전 및 패치 버전에서 하위 호환성을 가집니다. 공개 API는 다음을 포함합니다.
 
-- 모든 문서화된 [Python](https://www.tensorflow.org/api_docs/python) `tensorflow` 모듈과 서브 모듈에 있는 함수와 클래스, 다음은 제외
+- 모든 문서화된 [Python](https://gitlocalize.com/repo/4592/ko/site/en-snapshot/api_docs/python) `tensorflow` 모듈과 서브 모듈에 있는 함수와 클래스, 다음은 제외
 
     - 비공개 심볼: `_`로 시작하는 함수나 클래스 등
     - 실험적인 및 `tf.contrib` 심볼, 자세한 내용은 [아래](#not_covered) 내용 참조
@@ -158,7 +158,7 @@ TensorFlow의 일부분은 어떤 면에서도 하위 호환성이 없도록 변
 다음의 가이드를 따르면 일련의 연산이 변하지 않았을 때만 상위 호환성이 있게 됩니다.
 
 1. 상위 호환성이 필요하다면, `SavedModelBuilder`클래스의 `tf.saved_model.SavedModelBuilder.add_meta_graph_and_variables`와 `tf.saved_model.SavedModelBuilder.add_meta_graph` 메서드를 사용하거나 `tf.estimator.Estimator.export_saved_model`을 사용하는 모델을 내보내는 동안 `strip_default_attrs`를 `True`로 설정합니다.
-2. 이렇게 하면 모델을 생성하고 내보낼 때 기본값 속성을 제거하게 됩니다.
+2. 이렇게 하면 모델을 생성/내보낼 때 기본 값 속성이 제거됩니다. 그러면 기본값이 사용될 때 내보낸 `tf.MetaGraphDef`에 새 op 속성이 포함되지 않습니다.
 3. 이 컨트롤을 사용하면 오래된 소비자(예를들면, 훈련 바이너리에 뒤쳐진 바이너리를 제공하는)가 모델을 불러오기를 계속할 수 있게 하고 모델 서비스 중단을 막을 수 있습니다.
 
 ### GraphDef 버전업
