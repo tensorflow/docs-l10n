@@ -2,7 +2,7 @@
 
 iOS에서 TensorFlow Lite를 시작하려면 다음 예제를 살펴볼 것을 권장합니다.
 
-<a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios" class="">iOS 이미지 분류 예제</a>
+<a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS 이미지 분류 예제</a>
 
 소스 코드에 대한 설명은 [TensorFlow Lite iOS 이미지 분류](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md)를 읽어보아야 합니다.
 
