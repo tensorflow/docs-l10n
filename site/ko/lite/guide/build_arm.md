@@ -60,7 +60,7 @@ bazel build --config=elinux_aarch64 -c opt //tensorflow/lite/c:libtensorflowlite
 
 공유 라이브러리는 `bazel-bin/tensorflow/lite/c/libtensorflowlite_c.so`에서 찾을 수 있습니다.
 
-**참고:** <a>32bit ARM 하드 플로트</a> 빌드에 <code>elinux_armhf</code>를 사용하세요.
+**참고:** [32bit ARM 하드 플로트](https://wiki.debian.org/ArmHardFloatPort) 빌드에 <code>elinux_armhf</code>를 사용하세요.
 
 자세한 내용은 [TensorFlow Lite C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/README.md) 페이지를 확인하세요.
 
@@ -72,7 +72,7 @@ bazel build --config=elinux_aarch64 -c opt //tensorflow/lite:libtensorflowlite.s
 
 공유 라이브러리는 `bazel-bin/tensorflow/lite/libtensorflowlite.so`에서 찾을 수 있습니다.
 
-현재, 필요한 모든 헤더 파일을 추출하는 간단한 방법은 없으므로 모든 헤더 파일을 TensorFlow 리포지토리의 <code>tensorflow/lite/</code>에 포함해야 합니다. 또한 <a>FlatBuffers</a> 및 <a>Abseil</a>의 헤더 파일도 필요합니다.
+현재, 필요한 모든 헤더 파일을 추출하는 간단한 방법은 없으므로 모든 헤더 파일을 TensorFlow 리포지토리의 tensorflow/lite/에 포함해야 합니다. 또한 FlatBuffers 및 Abseil의 헤더 파일도 필요합니다.
 
 ##### 기타
 
