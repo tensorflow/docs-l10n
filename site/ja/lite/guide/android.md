@@ -2,7 +2,7 @@
 
 Android で TensorFlow Lite を使い始めるには、次の例をご覧ください。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android">Android 画像分類の例</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android">Android image classification example</a>
 
 ソースコードの説明については [TensorFlow Lite 画像分類の例](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/android/EXPLORE_THE_CODE.md)を参照してください。
 
@@ -42,7 +42,7 @@ TensorFlow Lite（TFLite）モデルをインポートするには、次を行�
 
 TensorFlow Lite Task ライブラリには、アプリ開発者が TFLite を使って ML エクスペリエンスを作成できるように、強力で使いやすいタスク固有の一連のライブラリが含まれています。画像の分類、質問と回答など、一般的な機械学習タスク用に最適化された は、画像の分類、質問と回答など、一般的な機械学習タスク用に最適化された、すぐに使用できるモデルインターフェースが得られます。モデルインターフェースは、最高のパフォーマンスと使いやすさを実現するために、タスクごとに特別に設計されています。Task ライブラリはクロスプラットフォームで動作し、Java、C++、および Swift （近日）でサポートされています。
 
-Android アプリで Support ライブラリを使用するには、JCenter でホスティングされている [Task Vision ライブラリ](https://bintray.com/google/tensorflow/tensorflow-lite-task-vision) と [Task Text ライブラリ](https://bintray.com/google/tensorflow/tensorflow-lite-task-text)の AAR を使用することをお勧めします。
+To use the Support Library in your Android app, we recommend using the AAR hosted at MavenCentral for [Task Vision library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-vision) and [Task Text library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-text) , respectively.
 
 これは、`build.gradle` 依存関係に次のように指定できます。
 
@@ -53,6 +53,8 @@ dependencies {
 }
 ```
 
+To use nightly snapshots, make sure that you have added [Sonatype snapshot repository](./build_android#use_nightly_snapshots).
+
 詳細は、[TensorFlow Lite Task ライブラリの概要](../inference_with_metadata/task_library/overview.md)の概要のセクションをご覧ください。
 
 ### TensorFlow Lite Android Support ライブラリを使用する
@@ -61,7 +63,7 @@ TensorFlow Lite Android Support ライブラリを使用すると、モデルを
 
 画像や配列など、入力と出力の一般的なデータ形式をサポートしています。また、画像のサイズ変更やトリミングなどのタスクを実行する前処理ユニットと後処理ユニットも提供されています。
 
-Android アプリで Support ライブラリを使用するには、[JCenter でホスティングされている TensorFlow Lite Support ライブラリ AAR](https://bintray.com/google/tensorflow/tensorflow-lite-support) を使用することをお勧めします。
+To use the Support Library in your Android app, we recommend using the [TensorFlow Lite Support Library AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-support).
 
 これは、`build.gradle` 依存関係に次のように指定できます。
 
@@ -71,11 +73,13 @@ dependencies {
 }
 ```
 
+To use nightly snapshots, make sure that you have added [Sonatype snapshot repository](./build_android#use_nightly_snapshots).
+
 始めるには、[TensorFlow Lite Android Support ライブラリ](../inference_with_metadata/lite_support.md)の手順に従ってください。
 
-### JCenter の TensorFlow Lite AAR を使用する
+### Use the TensorFlow Lite AAR from MavenCentral
 
-Android アプリで TensorFlow Lite を使用するには、[JCenter でホストされている TensorFlow Lite AAR](https://bintray.com/google/tensorflow/tensorflow-lite) を使用することをお勧めします。
+To use TensorFlow Lite in your Android app, we recommend using the [TensorFlow Lite AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite).
 
 これは、`build.gradle` 依存関係に次のように指定できます。
 
@@ -84,6 +88,8 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
 }
 ```
+
+To use nightly snapshots, make sure that you have added [Sonatype snapshot repository](./build_android#use_nightly_snapshots).
 
 この AAR には、すべての [Android ABI](https://developer.android.com/ndk/guides/abis) のバイナリが含まれています。サポートする必要のある ABI のみを含めることで、アプリケーションのバイナリのサイズを削減できます。
 
@@ -107,7 +113,7 @@ NDK でアプリをビルドする場合、C++ で TFLite を使用する方法�
 
 ### TFLite C API を使用する
 
-これは*推薦される*アプローチです。[JCenter でホストされている TensorFlow Lite AAR ](https://bintray.com/google/tensorflow/tensorflow-lite) をダウンロードし、名前を `tensorflow-lite-*.zip` に変更して、解凍します。`headers/tensorflow/lite/` および `headers/tensorflow/lite/c/` フォルダに 4 つのヘッダーファイルを含め、NDK プロジェクトの `jni/` フォルダに関連する `libtensorflowlite_jni.so` 動的ライブラリを含める必要があります。
+This is the *recommended* approach. Download the [TensorFlow Lite AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow/tensorflow-lite), rename it to `tensorflow-lite-*.zip`, and unzip it. You must include the four header files in `headers/tensorflow/lite/` and `headers/tensorflow/lite/c/` folder and the relevant `libtensorflowlite_jni.so` dynamic library in `jni/` folder in your NDK project.
 
 `c_api.h` ヘッダーファイルには、TFLite C API の使用に関する基本的なドキュメントが含まれています。
 
