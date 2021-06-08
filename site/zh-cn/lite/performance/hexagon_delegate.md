@@ -1,21 +1,21 @@
 # TensorFlow Lite Hexagon 委托
 
-This document explains how to use the TensorFlow Lite Hexagon Delegate in your application using the Java and/or C API. The delegate leverages the Qualcomm Hexagon library to execute quantized kernels on the DSP. Note that the delegate is intended to *complement* NNAPI functionality, particularly for devices where NNAPI DSP acceleration is unavailable (e.g., on older devices, or devices that don’t yet have a DSP NNAPI driver).
+本文档介绍如何使用 Java 和/或 C API 在您的应用中利用 TensorFlow Lite Hexagon 委托。该委托利用 Qualcomm Hexagon 库在 DSP 上执行量化内核。请注意，该委托旨在*补充* NNAPI 功能，特别适用于 NNAPI DSP 加速不可用的设备（例如，在旧设备上，或者在没有 DSP NNAPI 驱动器的设备上）。
 
-Note: This delegate is in experimental (beta) phase.
+注：此委托目前处于实验 (Beta) 阶段。
 
 **支持的设备：**
 
-Currently the following Hexagon architecture are supported, including but not limited to:
+目前支持以下 Hexagon 架构，包括但不限于：
 
 - Hexagon 680
-    - SoC examples: Snapdragon 821, 820, 660
+    - SoC 示例：Snapdragon 821、820、660
 - Hexagon 682
-    - SoC examples: Snapdragon 835
+    - SoC 示例：Snapdragon 835
 - Hexagon 685
-    - SoC examples: Snapdragon 845, Snapdragon 710, QCS605, QCS603
+    - SoC 示例：Snapdragon 845、Snapdragon 710、QCS605、QCS603
 - Hexagon 690
-    - SoC examples: Snapdragon 855, QCS610, QCS410, RB5
+    - SoC 示例：Snapdragon 855、QCS610、QCS410、RB5
 
 **支持的模型：**
 
@@ -44,9 +44,9 @@ public class HexagonDelegate implements Delegate, Closeable {
 }
 ```
 
-### Example usage
+### 示例用法
 
-#### Step 1. Edit app/build.gradle to use the nightly Hexagon delegate AAR
+#### 第 1 步. 编辑 app/build.gradle 以使用 Nightly 版本 Hexagon 委托 AAR
 
 ```
 dependencies {
@@ -67,9 +67,9 @@ dependencies {
 
 注：您需要接受许可协议。
 
-Note: As of 02/23/2021 you should use v1.21.
+注：从 2021 年 2 月 23 日起，您应当使用 v1.21。
 
-Note: You must use the hexagon_nn libraries with the compatible version of interface library. Interface library is part of the AAR and fetched by bazel through the [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) The version in the bazel config is the version you should use.
+注：必须将 hexagon_nn 库与兼容版本的接口库一起使用。接口库是 AAR 的一部分，由 Bazel 通过 [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) 获取。Bazel 配置中的版本就是您应该使用的版本。
 
 - 在应用中通过其他共享库包含所有 3 个共享库。请参阅[如何将共享库添加到应用](#how-to-add-shared-library-to-your-app)。委托会根据设备自动选择性能最佳的共享库。
 
@@ -142,9 +142,9 @@ Void TfLiteHexagonInit();
 Void TfLiteHexagonTearDown();
 ```
 
-### Example usage
+### 示例用法
 
-#### Step 1. Edit app/build.gradle to use the nightly Hexagon delegate AAR
+#### 第 1 步. 编辑 app/build.gradle 以使用 Nightly 版本 Hexagon 委托 AAR
 
 ```
 dependencies {
@@ -156,7 +156,7 @@ dependencies {
 
 #### 第 2 步. 将 Hexagon 库添加到 Android 应用
 
-- Download and run hexagon_nn_skel.run. It should provide 3 different shared libraries “libhexagon_nn_skel.so”, “libhexagon_nn_skel_v65.so”, “libhexagon_nn_skel_v66.so”
+- 下载并运行 hexagon_nn_skel.run。它应该会提供 3 个不同的共享库：“libhexagon_nn_skel.so”、“libhexagon_nn_skel_v65.so”、“libhexagon_nn_skel_v66.so”
     - [v1.10.3](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_1_10_3_1.run)
     - [v1.14](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.14.run)
     - [v1.17](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.17.0.0.run)
@@ -165,9 +165,9 @@ dependencies {
 
 注：您需要接受许可协议。
 
-Note: As of 02/23/2021 you should use v1.21.
+注：从 2021 年 2 月 23 日起，您应当使用 v1.21。
 
-Note: You must use the hexagon_nn libraries with the compatible version of interface library. Interface library is part of the AAR and fetched by bazel through the [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl). The version in the bazel config is the version you should use.
+注：必须将 hexagon_nn 库与兼容版本的接口库一起使用。接口库是 AAR 的一部分，由 Bazel 通过 [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) 获取。Bazel 配置中的版本就是您应该使用的版本。
 
 - 在应用中包含所有 3 个共享库和其他共享库。请参阅[如何将共享库添加到应用](#how-to-add-shared-library-to-your-app)。委托会根据设备自动选择性能最佳的共享库。
 
@@ -179,8 +179,7 @@ Note: You must use the hexagon_nn libraries with the compatible version of inter
 
 #### 第 4 步. 创建委托并初始化 TensorFlow Lite 解释器
 
-- In your code, ensure the native Hexagon library is loaded. This can be done by calling `System.loadLibrary("tensorflowlite_hexagon_jni");`
-     in your Activity or Java entry-point.
+- 在您的代码中，确保已加载原生 Hexagon 库。在您的操作组件或 Java 入口点中调用 `System.loadLibrary("tensorflowlite_hexagon_jni");` <br>即可加载此库。
 
 - 创建委托，示例：
 
@@ -218,7 +217,7 @@ TfLiteHexagonTearDown();  // Needed once at end of app/DSP usage.
 
 ## 反馈
 
-For issues, please create a [GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) issue with all the necessary repro details, including the phone model and board used (`adb shell getprop ro.product.device` and `adb shell getprop ro.board.platform`).
+如有问题，请创建 [GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) 议题，并提供重现问题所需的所有必要详情，包括使用的手机型号和主板（`adb shell getprop ro.product.device` 和 `adb shell getprop ro.board.platform`）。
 
 ## 常见问题解答
 
@@ -232,7 +231,7 @@ For issues, please create a [GitHub](https://github.com/tensorflow/tensorflow/is
     - 使用 `bazel build -c opt --config=android_arm64 tensorflow/lite/delegates/hexagon/java:tensorflow-lite-hexagon`。
 - 为何我的 Android 设备具有受支持的 SoC，但 Hexagon 委托无法初始化？
     - 验证您的设备是否确实具有受支持的 SoC。请运行 `adb shell cat /proc/cpuinfo | grep Hardware`，并查看返回的结果是否类似于 “Hardware : Qualcomm Technologies, Inc MSMXXXX”。
-    - Some phone manufacturers use different SoCs for the same phone model. Therefore, Hexagon delegate may only work on some but not all devices of the same phone model.
+    - 某些手机制造商可能会为相同的手机型号使用不同的 SoC。因此，对于某些手机型号，Hexagon 委托可能只能在部分设备上正常运行，不一定可以在所有设备上正常运行。
     - 某些手机制造商会特意限制从非系统 Android 应用使用 Hexagon DSP，从而导致 Hexagon 委托无法正常运行。
-- My phone has locked DSP access. I rooted the phone and still can't run the delegate, what to do ?
-    - Make sure to disable SELinux enforce by running `adb shell setenforce 0`
+- 我的手机已锁定 DSP 访问。我已启用手机的 root 权限，但仍然无法运行委托，应该怎么办？
+    - 确保通过运行 `adb shell setenforce 0` 来停用 SELinux 强制访问
