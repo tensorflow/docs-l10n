@@ -20,7 +20,7 @@
 - TFJS 模型：将 `?tfjs-format=compressed` 附加到 TFJS 模型网址以下载压缩资源，或者附加 `/model.json?tfjs-format=file` 以便从远程存储空间读取。
 - TF Lite 模型：将 `?lite-format=tflite` 附加到 TF Lite 模型网址。
 
-For example:
+例如：
 
 <table style="width: 100%;">
   <tr style="text-align: center">
