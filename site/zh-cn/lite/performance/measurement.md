@@ -178,9 +178,9 @@ adb shell /data/local/tmp/benchmark_model \
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>模型名称</th>
       <th>设备</th>
-      <th>CPU, 4 threads</th>
+      <th>CPU，4 线程</th>
       <th>GPU</th>
       <th>NNAPI</th>
     </tr>
@@ -190,10 +190,10 @@ adb shell /data/local/tmp/benchmark_model \
     <td>Pixel 3</td>
     <td>23.9 毫秒</td>
     <td>6.45 毫秒</td>
-    <td>13.8 ms</td>
+    <td>13.8 毫秒</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>14.0 毫秒</td>
     <td>9.0 毫秒</td>
     <td>14.8 毫秒</td>
@@ -201,25 +201,25 @@ adb shell /data/local/tmp/benchmark_model \
   <tr>
     <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz">Mobilenet_1.0_224 (quant)</a>     </td>
     <td>Pixel 3</td>
-    <td>13.4 ms</td>
+    <td>13.4 毫秒</td>
     <td>---</td>
     <td>6.0 毫秒</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>5.0 毫秒</td>
     <td>---</td>
-    <td>3.2 ms</td>
+    <td>3.2 毫秒</td>
   </tr>
   <tr>
     <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/nasnet_mobile_2018_04_27.tgz">NASNet mobile</a>     </td>
     <td>Pixel 3</td>
-    <td>56 ms</td>
+    <td>56 毫秒</td>
     <td>---</td>
-    <td>102 ms</td>
+    <td>102 毫秒</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>34.5 毫秒</td>
     <td>---</td>
     <td>99.0 毫秒</td>
@@ -229,23 +229,23 @@ adb shell /data/local/tmp/benchmark_model \
     <td>Pixel 3</td>
     <td>35.8 毫秒</td>
     <td>9.5 毫秒</td>
-    <td>18.5 ms</td>
+    <td>18.5 毫秒</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>23.9 毫秒</td>
-    <td>11.1 ms</td>
+    <td>11.1 毫秒</td>
     <td>19.0 毫秒</td>
   </tr>
   <tr>
     <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_resnet_v2_2018_04_27.tgz">Inception_ResNet_V2</a>     </td>
     <td>Pixel 3</td>
-    <td>422 ms</td>
+    <td>422 毫秒</td>
     <td>99.8 毫秒</td>
-    <td>201 ms</td>
+    <td>201 毫秒</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>272.6 毫秒</td>
     <td>87.2 毫秒</td>
     <td>171.1 毫秒</td>
@@ -253,12 +253,12 @@ adb shell /data/local/tmp/benchmark_model \
   <tr>
     <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_v4_2018_04_27.tgz">Inception_V4</a>     </td>
     <td>Pixel 3</td>
-    <td>486 ms</td>
+    <td>486 毫秒</td>
     <td>93 毫秒</td>
     <td>292 毫秒</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>324.1 毫秒</td>
     <td>97.6 毫秒</td>
     <td>186.9 毫秒</td>
@@ -274,7 +274,7 @@ adb shell /data/local/tmp/benchmark_model \
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>模型名称</th>
       <th>设备</th>
       <th>CPU，2 线程</th>
       <th>GPU</th>
