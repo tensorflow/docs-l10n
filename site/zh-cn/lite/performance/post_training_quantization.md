@@ -31,9 +31,9 @@ converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 tflite_quant_model = converter.convert()
 </pre>
 
-At inference, weights are converted from 8-bits of precision to floating point and computed using floating-point kernels. This conversion is done once and cached to reduce latency.
+推断时，权重从 8 位精度转换为浮点，并使用浮点内核进行计算。此转换会完成一次并缓存，以减少延迟。
 
-To further improve latency, "dynamic-range" operators dynamically quantize activations based on their range to 8-bits and perform computations with 8-bit weights and activations. This optimization provides latencies close to fully fixed-point inference. However, the outputs are still stored using floating point so that the speedup with dynamic-range ops is less than a full fixed-point computation.
+为了进一步改善延迟，“动态范围”算子会根据激活的范围将其动态量化为 8 位，并使用 8 位权重和激活执行计算。此优化提供的延迟接近全定点推断。但是，输出仍使用浮点进行存储，因此使用动态范围算子的加速小于全定点计算。
 
 ### 全整数量化
 
@@ -85,11 +85,11 @@ converter.representative_dataset = representative_dataset
 tflite_quant_model = converter.convert()
 </pre>
 
-Note: The converter will throw an error if it encounters an operation it cannot currently quantize.
+注：如果遇到当前无法量化的运算，转换器会引发错误。
 
 ### float16 量化
 
-You can reduce the size of a floating point model by quantizing the weights to float16, the IEEE standard for 16-bit floating point numbers. To enable float16 quantization of weights, use the following steps:
+您可以通过将权重量化为 float16（16 位浮点数的 IEEE 标准）来缩减浮点模型的大小。要启用权重的 float16 量化，请使用以下步骤：
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -107,7 +107,7 @@ float16 量化的优点如下：
 float16 量化的缺点如下：
 
 - 它不像对定点数学进行量化那样减少那么多延迟。
-- By default, a float16 quantized model will "dequantize" the weights values to float32 when run on the CPU. (Note that the GPU delegate will not perform this dequantization, since it can operate on float16 data.)
+- 默认情况下，float16 量化模型在 CPU 上运行时会将权重值“反量化”为 float32。（请注意，GPU 委托不会执行此反量化，因为它可以对 float16 数据进行运算。）
 
 ### 仅整数：具有 8 位权重的 16 位激活（实验性）
 
@@ -149,11 +149,11 @@ tflite_quant_model = converter.convert()
 
 由于权重是在训练后量化的，因此可能会造成准确率损失，对于较小的网络更是如此。[TensorFlow Lite 模型存储库](../models/)为特定网络提供了预训练的完全量化模型。请务必检查量化模型的准确率，以验证准确率的任何下降都在可接受的范围内。有一些工具可以评估 [TensorFlow Lite 模型准确率](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}。
 
-Alternatively, if the accuracy drop is too high, consider using [quantization aware training](https://www.tensorflow.org/model_optimization/guide/quantization/training) . However, doing so requires modifications during model training to add fake quantization nodes, whereas the post-training quantization techniques on this page use an existing pre-trained model.
+另外，如果准确率下降过多，请考虑使用[量化感知训练](https://www.tensorflow.org/model_optimization/guide/quantization/training)。但是，这样做需要在模型训练期间进行修改以添加伪量化节点，而此页面上的训练后量化技术使用的是现有的预训练模型。
 
 ### 量化张量的表示
 
-8-bit quantization approximates floating point values using the following formula.
+8 位量化近似于使用以下公式得到的浮点值。
 
 $$real_value = (int8_value - zero_point) \times scale$$
 
