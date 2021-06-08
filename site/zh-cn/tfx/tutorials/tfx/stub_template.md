@@ -1,6 +1,6 @@
 ## 使用存根执行器测试流水线
 
-### Introduction
+### 简介
 
 **您应该先将 [template.ipynb](https://github.com/tensorflow/tfx/blob/master/docs/tutorials/tfx/template.ipynb) 教程完成到*第 6 步*，以继续本教程。**
 
@@ -97,10 +97,10 @@ tfx run create --pipeline-name $pipeline_name --endpoint=$endpoint \
   --engine=kubeflow
 ```
 
-## Cleaning up
+## 清理
 
 使用命令 `fg` 在后台访问端口转发，然后按 Ctrl+C 终止。您可以使用 `gsutil -m rm -R $output_dir` 删除包含记录了流水线输出的目录。
 
-To clean up all Google Cloud resources used in this project, you can [delete the Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects#shutting_down_projects) you used for the tutorial.
+要清理此项目中使用的所有 Google Cloud 资源，您可以[删除用于本教程的 Google Cloud 项目](https://cloud.google.com/resource-manager/docs/creating-managing-projects#shutting_down_projects)。
 
-Alternatively, you can clean up individual resources by visiting each consoles: - [Google Cloud Storage](https://console.cloud.google.com/storage) - [Google Container Registry](https://console.cloud.google.com/gcr) - [Google Kubernetes Engine](https://console.cloud.google.com/kubernetes)
+或者，您可以通过访问每个控制台来清理各个资源：- [Google Cloud Storage](https://console.cloud.google.com/storage) - [Google Container Registry](https://console.cloud.google.com/gcr) - [Google Kubernetes Engine](https://console.cloud.google.com/kubernetes)
