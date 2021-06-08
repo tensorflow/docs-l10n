@@ -26,7 +26,7 @@
 
 请在 [TensorFlow Lite for Microcontrollers](index.md) 中了解有关所支持的平台的详细信息。
 
-## Train a model
+## 训练模型
 
 注：您可以跳过本部分，使用示例代码中包含的训练好的模型。
 
