@@ -12,11 +12,11 @@
 
 要整合自定义运算，您需要执行以下操作：
 
-1. 在 C++ 文件中注册新运算。运算注册会定义运算功能的接口（规范），此接口与运算的实现无关。例如，运算注册会定义运算的名称及运算的输入和输出，还会定义用于张量形状推理的形状函数。
+1. 在 C++ 文件中注册新运算。运算注册会定义运算功能的接口（规范），此接口与运算的实现无关。例如，运算注册会定义运算的名称及运算的输入和输出，还会定义用于张量形状推断的形状函数。
 2. 使用 C++ 实现运算。运算的实现称为内核，它是您在第 1 步中注册的规范的具体实现。可以有多个内核用于不同的输入/输出类型或架构（例如，CPU、GPU）。
-3. 创建一个 Python 包装器（可选）。此包装器是用于以 Python 创建运算的公共 API。默认包装器根据运算注册生成，用户可以直接使用它或向其中添加内容。
+3. 创建一个 Python 封装容器（可选）。此封装容器是用于以 Python 创建运算的公共 API。默认封装容器是根据运算注册生成的，用户可以直接使用它或向其中添加内容。
 4. 编写一个函数来计算运算的梯度（可选）。
-5. 测试运算。为方便起见，我们通常在 Python 中进行测试，但您也可以在 C++ 中测试运算。如果您要定义梯度，可以使用 Python `tf.test.compute_gradient_error` 验证梯度。要了解如何测试 ReLu 之类的算子及其梯度的前向函数，请参见 [`relu_op_test.py`](https://www.tensorflow.org/code/tensorflow/python/kernel_tests/relu_op_test.py)。
+5. 测试运算。为方便起见，我们通常在 Python 中进行测试，但您也可以在 C++ 中测试运算。如果您要定义梯度，可以使用 Python `tf.test.compute_gradient_error` 验证梯度。要了解如何测试 ReLu 之类的算子及其梯度的前向函数，请参阅 [`relu_op_test.py`](https://www.tensorflow.org/code/tensorflow/python/kernel_tests/relu_op_test.py)。
 
 ### 前提条件
 
@@ -98,11 +98,11 @@ REGISTER_KERNEL_BUILDER(Name("ZeroOut").Device(DEVICE_CPU), ZeroOutOp);
 
 ### 多线程 CPU 内核
 
-要编写多线程 CPU 内核，可以使用 [`work_sharder.h`](https://www.tensorflow.org/code/tensorflow/core/util/work_sharder.h) 中的 Shard 函数。此函数会在配置为用于运算内线程的线程之间对计算函数进行分片（请参见 [`config.proto`](https://www.tensorflow.org/code/tensorflow/core/protobuf/config.proto) 中的 intra_op_parallelism_threads）。
+要编写多线程 CPU 内核，可以使用 [`work_sharder.h`](https://www.tensorflow.org/code/tensorflow/core/util/work_sharder.h) 中的 Shard 函数。此函数会在配置为用于运算内线程的线程之间对计算函数进行分片（请参阅 [`config.proto`](https://www.tensorflow.org/code/tensorflow/core/protobuf/config.proto) 中的 intra_op_parallelism_threads）。
 
 ### GPU 内核
 
-GPU 内核分为两部分实现：OpKernel 内核和 CUDA 内核及其启动代码。
+GPU 内核分为两部分实现：OpKernel 内核，CUDA 内核及其启动代码。
 
 有时，OpKernel 实现在 CPU 和 GPU 内核之间很常见，例如检查输入和分配输出。在这种情况下，建议的实现是：
 
@@ -116,6 +116,8 @@ GPU 内核分为两部分实现：OpKernel 内核和 CUDA 内核及其启动代�
 // kernel_example.h
 #ifndef KERNEL_EXAMPLE_H_
 #define KERNEL_EXAMPLE_H_
+
+#include <unsupported/Eigen/CXX11/Tensor>
 
 template <typename Device, typename T>
 struct ExampleFunctor {
@@ -136,12 +138,24 @@ struct ExampleFunctor<Eigen::GpuDevice, T> {
 ```c++
 // kernel_example.cc
 #include "kernel_example.h"
+
+#include "tensorflow/core/framework/op.h"
+#include "tensorflow/core/framework/shape_inference.h"
 #include "tensorflow/core/framework/op_kernel.h"
 
 using namespace tensorflow;
 
 using CPUDevice = Eigen::ThreadPoolDevice;
 using GPUDevice = Eigen::GpuDevice;
+
+REGISTER_OP("Example")
+    .Attr("T: numbertype")
+    .Input("input: T")
+    .Output("input_times_two: T")
+    .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
+      c->set_output(0, c->input(0));
+      return Status::OK();
+    });
 
 // CPU specialization of actual computation.
 template <typename T>
@@ -265,11 +279,11 @@ TF_LFLAGS=( $(python -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.ge
 g++ -std=c++11 -shared zero_out.cc -o zero_out.so -fPIC ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} -O2
 ```
 
-在 macOS 上，在构建 `.so` 文件时需要添加附加标记“-undefined dynamic_lookup”。
+在 macOS 上，构建 `.so` 文件时需要添加附加标志 "-undefined dynamic_lookup"。
 
 > 关于 `>=5` 的 `gcc` 版本的注意事项：gcc 自版本 `5` 起使用新的 C++ [ABI](https://gcc.gnu.org/gcc-5/changes.html#libstdcxx)。TensorFlow 网站上提供的二进制 pip 软件包使用 `gcc4` 构建，该编译器使用旧版 ABI。如果您使用 `gcc>=5` 编译运算库，请在命令行中添加 `-D_GLIBCXX_USE_CXX11_ABI=0`，使库与旧版 ABI 兼容。
 
-### 使用 bazel 编译运算（TensorFlow 源代码安装）
+### 使用 Bazel 编译运算（TensorFlow 源代码安装）
 
 如果您已安装 TensorFlow 源代码，则可以使用 TensorFlow 的构建系统编译运算。在 [`tensorflow/core/user_ops`](https://www.tensorflow.org/code/tensorflow/core/user_ops/) 目录中放置一个包含以下 Bazel 构建规则的 BUILD 文件。
 
@@ -288,19 +302,37 @@ tf_custom_op_library(
 $ bazel build --config opt //tensorflow/core/user_ops:zero_out.so
 ```
 
-注：如上所述，如果您使用 gcc>=5 进行编译，请将 `--cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0"` 添加到 Bazel 命令行参数。
+要使用 CUDA 内核编译 `Example` 运算，您需要使用 `tf_custom_op_library` 的 `gpu_srcs` 参数。将具有以下 Bazel 构建规则的 BUILD 文件置于 [`tensorflow/core/user_ops`](https://www.tensorflow.org/code/tensorflow/core/user_ops/) 目录内的新文件夹（例如，“example_gpu”）中。
+
+```python
+load("//tensorflow:tensorflow.bzl", "tf_custom_op_library")
+
+tf_custom_op_library(
+    # kernel_example.cc  kernel_example.cu.cc  kernel_example.h
+    name = "kernel_example.so",
+    srcs = ["kernel_example.h", "kernel_example.cc"],
+    gpu_srcs = ["kernel_example.cu.cc", "kernel_example.h"],
+)
+```
+
+运行以下命令以构建 `kernel_example.so`。
+
+```bash
+$ bazel build --config opt //tensorflow/core/user_ops/example_gpu:kernel_example.so
+```
+
+注：如上所述，如果您使用 gcc&gt;=5 进行编译，请将 `--cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0"` 添加到 Bazel 命令行参数中。
 
 > 注：虽然您可以使用标准的 `cc_library` 规则创建共享库（`.so` 文件），但我们强烈建议您使用 `tf_custom_op_library` 宏。它可以添加一些必需依赖项，并执行检查以确保共享库与 TensorFlow 的插件加载机制兼容。
 
 ## 在 Python 中使用运算
 
-TensorFlow Python API 提供了 `tf.load_op_library` 函数来加载动态库并向 TensorFlow 框架注册运算。`load_op_library` 会返回一个 Python 模块，其中包含运算和内核的 Python 包装器。因此，在构建此运算后，您可以执行以下操作以从 Python 运行它：
+TensorFlow Python API 提供了 `tf.load_op_library` 函数来加载动态库并向 TensorFlow 框架注册运算。`load_op_library` 会返回一个 Python 模块，其中包含运算和内核的 Python 封装容器。因此，在构建此运算后，您可以执行以下操作以从 Python 运行它：
 
 ```python
 import tensorflow as tf
 zero_out_module = tf.load_op_library('./zero_out.so')
-with tf.Session(''):
-  zero_out_module.zero_out([[1, 2], [3, 4]]).eval()
+print(zero_out_module.zero_out([[1, 2], [3, 4]]).numpy())
 
 # Prints
 array([[1, 0], [0, 0]], dtype=int32)
@@ -319,7 +351,7 @@ zero_out = zero_out_module.zero_out
 
 ## 验证运算是否正常运行
 
-验证您是否已成功实现运算的一种好方法是为运算编写测试。请使用以下内容创建 `zero_out_op_test.py` 文件：
+为运算编写测试，您可以验证是否已成功实现运算。请使用以下内容创建 `zero_out_op_test.py` 文件：
 
 ```python
 import tensorflow as tf
@@ -359,7 +391,7 @@ $ python zero_out_op_test.py
 
 ### 条件检查和验证
 
-上面的示例假设运算已应用于任意形状的张量。如果运算只应用于向量该怎么办？这就需要在上面的 OpKernel 实现中添加检查。
+上面的示例假设运算已应用于任意形状的张量。如果运算只应用于向量，该怎么办？这就需要在上面的 OpKernel 实现中添加检查。
 
 ```c++
   void Compute(OpKernelContext* context) override {
@@ -372,11 +404,11 @@ $ python zero_out_op_test.py
   }
 ```
 
-上述代码会声明输入是一个向量，如果不是，则返回设置 `InvalidArgument` 状态。[`OP_REQUIRES` 宏](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h)采用三个参数：
+上述代码会声明输入是一个向量，如果不是，返回将设置 `InvalidArgument` 状态。[`OP_REQUIRES` 宏](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h)采用三个参数：
 
-- `context`，可以是其 `SetStatus()` 方法的 `OpKernelContext` 或 `OpKernelConstruction` 指针（请参见 [`tensorflow/core/framework/op_kernel.h`](https://www.tensorflow.org/code/tensorflow/core/framework/op_kernel.h)）。
+- `context`，可以是其 `SetStatus()` 方法的 `OpKernelContext` 或 `OpKernelConstruction` 指针（请参阅 [`tensorflow/core/framework/op_kernel.h`](https://www.tensorflow.org/code/tensorflow/core/framework/op_kernel.h)）。
 - 条件。例如，[`tensorflow/core/framework/tensor_shape.h`](https://www.tensorflow.org/code/tensorflow/core/framework/tensor_shape.h) 中存在用于验证张量形状的函数。
-- 错误本身，由 `Status` 对象表示，请参见 [`tensorflow/core/lib/core/status.h`](https://www.tensorflow.org/code/tensorflow/core/lib/core/status.h)。`Status` 包含类型（通常为 `InvalidArgument`，但具体请参见类型列表）和消息。可以在 [`tensorflow/core/lib/core/errors.h`](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h) 中找到用于构造错误的函数。
+- 错误本身，由 `Status` 对象表示，请参阅 [`tensorflow/core/lib/core/status.h`](https://www.tensorflow.org/code/tensorflow/core/lib/core/status.h)。`Status` 包含类型（通常为 `InvalidArgument`，但具体请参见类型列表）和消息。可以在 [`tensorflow/core/lib/core/errors.h`](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h) 中找到用于构造错误的函数。
 
 或者，如果您要测试从某个函数返回的 `Status` 对象是否为错误，请使用 [`OP_REQUIRES_OK`](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h)（如果是，则返回错误）。这两个宏都会在出错时从函数返回。
 
@@ -384,7 +416,7 @@ $ python zero_out_op_test.py
 
 #### 特性
 
-运算可以包含特性，特性值在向计算图中添加运算时设置。这些值用于配置运算，用户可以在内核实现中以及运算注册的输入和输出类型中访问它们的值。尽可能首选使用输入而不是特性，因为输入更灵活。原因在于特性是常量，必须在计算图构造时定义。相比之下，输入是值可以动态变化的张量；也就是说，输入在每一步都可以变化，使用馈送进行设置等。特性用于无法通过输入完成的操作：任何影响签名（输入或输出的数量或类型）或者不能每一步都更改的配置。
+运算可以包含特性，特性值在向计算图中添加运算时设置。这些值用于配置运算，用户可以在内核实现中以及运算注册的输入和输出类型中访问它们的值。尽可能使用输入而不是特性，因为输入更灵活。原因在于特性是常量，必须在构造计算图时定义。相比之下，输入是值可以动态变化的张量；也就是说，输入在每一步都可以变化，使用馈送进行设置等。特性用于无法通过输入完成的操作：任何影响签名（输入或输出的数量或类型）或者不能每一步都更改的配置。
 
 您可以在注册运算时定义特性，只需使用 `Attr` 方法指定该特性的名称和类型即可（满足以下格式规范）：
 
@@ -461,7 +493,7 @@ class ZeroOutOp : public OpKernel {
 - `shape`：[`TensorShapeProto`](https://www.tensorflow.org/code/tensorflow/core/framework/tensor_shape.proto)。
 - `list(<type>)`：`<type>` 列表，其中 `<type>` 是上述类型之一。请注意，`list(list(<type>))` 无效。
 
-另请参见 [`op_def_builder.cc:FinalizeAttr`](https://www.tensorflow.org/code/tensorflow/core/framework/op_def_builder.cc) 来查看最终列表。
+另请参阅 [`op_def_builder.cc:FinalizeAttr`](https://www.tensorflow.org/code/tensorflow/core/framework/op_def_builder.cc) 来查看最终列表。
 
 ##### 默认值和约束
 
@@ -582,7 +614,7 @@ REGISTER_OP("ZeroOut")
 
 ###### 命名
 
-输入、输出和特性通常应当采用蛇形名称。但是，用作输入类型或在输出类型中使用的特性例外。向计算图中添加运算时，系统可以推断出这些特性，因此这些特性不会显示在运算的函数中。例如，ZeroOut 的最后一个定义将生成如下所示的 Python 函数：
+输入、输出和特性通常应当会采用蛇形名称。但是，用作输入类型或在输出类型中使用的特性例外。向计算图中添加运算时，系统可以推断出这些特性，因此这些特性不会显示在运算的函数中。例如，ZeroOut 的最后一个定义将生成如下所示的 Python 函数：
 
 ```python
 def zero_out(to_zero, name=None):
@@ -597,9 +629,9 @@ def zero_out(to_zero, name=None):
   """
 ```
 
-如果向 `to_zero` 传递 `int32` 张量，`T` 将自动设置为 `int32`（实际上是 `DT_INT32`）。这些推断特性会采用大写或驼峰式名称。
+如果向 `to_zero` 传递 `int32` 张量，`T` 将被自动设置为 `int32`（实际上是 `DT_INT32`）。这些推断特性会采用大写或驼峰式名称。
 
-将此运算与具有确定输出类型的类型特性的运算进行比较：
+将此运算与具有决定输出类型的类型特性的运算进行比较：
 
 ```c++
 REGISTER_OP("StringToNumber")
@@ -679,7 +711,7 @@ REGISTER_KERNEL_BUILDER(
     ZeroOutFloatOp);
 ```
 
-要保留[向后兼容性](#backwards-compatibility)，您应在将特性添加到现有运算时指定[默认值](#default-values-and-constraints)：
+要保留[向后兼容性](#backwards-compatibility)，您应当在将特性添加到现有运算时指定[默认值](#default-values-and-constraints)：
 
 ```c++
 REGISTER_OP("ZeroOut")
@@ -764,7 +796,7 @@ REGISTER_KERNEL(double);
 #undef REGISTER_KERNEL
 ```
 
-根据您为其注册内核的类型列表，您可以使用 [`tensorflow/core/framework/register_types.h`](https://www.tensorflow.org/code/tensorflow/core/framework/register_types.h) 提供的宏：
+根据您为其注册内核的类型列表，您或许可以使用 [`tensorflow/core/framework/register_types.h`](https://www.tensorflow.org/code/tensorflow/core/framework/register_types.h) 提供的宏：
 
 ```c++
 #include "tensorflow/core/framework/op_kernel.h"
@@ -871,7 +903,7 @@ REGISTER_OP("MultipleInsAndOuts")
 
 - `<type>`，其中 `<type>` 是受支持的输入类型（例如 `float`、`int32`、`string`）。它会指定一个具有给定类型的张量。
 
-    请参见 `tf.DType`。
+    请参阅 `tf.DType`。
 
     ```c++
     REGISTER_OP("BuiltInTypesExample")
@@ -879,7 +911,7 @@ REGISTER_OP("MultipleInsAndOuts")
         .Input("complex_numbers: complex64");
     ```
 
-- `<attr-type>`，其中 `<attr-type>` 是类型为 `type` 或 `list(type)`（可能有类型限制）的[类型](#attrs)的名称。此语法允许[多态运算](#polymorphism)。
+- `<attr-type>`，其中 `<attr-type>` 是类型为 `type` 或 `list(type)`（可能有类型限制）的[特性](#attrs)的名称。此语法允许[多态运算](#polymorphism)。
 
     ```c++
     REGISTER_OP("PolymorphicSingleInput")
@@ -907,7 +939,7 @@ REGISTER_OP("MultipleInsAndOuts")
 
     请注意，输出 `out` 和输入 `in` 中的张量数量和类型相同，因为二者的类型均为 `T`。
 
-- 对于具有相同类型的张量序列：`<number> * <type>`，其中 `<number>` 是类型为 `int` 的[特性表](#attrs)的名称。`<type>` 可以是 `tf.DType`，也可以是类型为 `type` 的特性的名称。就第一种情况举例来说，此运算会接受 `int32` 张量列表：
+- 对于具有相同类型的张量序列：`<number> * <type>`，其中 `<number>` 是类型为 `int` 的[特性](#attrs)的名称。`<type>` 可以是 `tf.DType`，也可以是类型为 `type` 的特性的名称。就第一种情况举例来说，此运算会接受 `int32` 张量列表：
 
     ```c++
     REGISTER_OP("Int32SequenceExample")
@@ -926,15 +958,15 @@ REGISTER_OP("MultipleInsAndOuts")
 
 - 对于张量引用：`Ref(<type>)`，其中 `<type>` 是之前的类型之一。
 
-系统将推断输入类型中使用的任何特性。按照惯例，这些推断特性使用大写名称（如 `T` 或 `N`）。否则，输入、输出和特性会具有与函数参数类似的名称（例如 `num_outputs`）。要了解更多详细信息，请参阅[前面有关命名的部分](#naming)。
+系统将推断输入类型中使用的任何特性。按照惯例，这些推断特性使用大写名称（如 `T` 或 `N`）。否则，输入、输出和特性会具有与函数参数类似的名称（例如 `num_outputs`）。有关详情，请参阅[前面有关命名的部分](#naming)。
 
-要了解更多详细信息，请参见 [`tensorflow/core/framework/op_def_builder.h`](https://www.tensorflow.org/code/tensorflow/core/framework/op_def_builder.h)。
+有关详情，请参阅 [`tensorflow/core/framework/op_def_builder.h`](https://www.tensorflow.org/code/tensorflow/core/framework/op_def_builder.h)。
 
 #### 向后兼容性
 
 假设您已编写一个不错的自定义运算并与其他人共享，客户在使用您的运算时感到满意。不过，您需要以某种方式对运算进行更改。
 
-通常，对现有检入规范的更改必须向后兼容：更改运算规范不得破坏之前根据旧规范构造的序列化 `GraphDef` 协议缓冲区。[此处](./versions.md#compatibility_of_graphs_and_checkpoints)详细介绍了 `GraphDef` 兼容性。
+通常，对现有检入规范的变更必须向后兼容：更改运算规范不得破坏之前根据旧规范构造的序列化 `GraphDef` 协议缓冲区。[此处](./versions.md#compatibility_of_graphs_and_checkpoints)详细介绍了 `GraphDef` 兼容性。
 
 可通过以下几种方式保持向后兼容性。
 
@@ -946,7 +978,7 @@ REGISTER_OP("MultipleInsAndOuts")
         .Output("out: float");
     ```
 
-    您可以利用以下方法以向后兼容的方式将该运算设为多态：
+    您可以使用以下代码以向后兼容的方式使该运算变为多态：
 
     ```c++
     REGISTER_OP("MyGeneralUnaryOp")
@@ -963,15 +995,15 @@ REGISTER_OP("MultipleInsAndOuts")
 
 5. 为您创建的任何新运算设置命名空间，方法是在运算名称前添加项目独有的内容作为前缀。这样可以避免您的运算与未来版本的 TensorFlow 中可能包含的任何运算发生冲突。
 
-6. 未雨绸缪！尝试预测运算的未来用途。某些签名更改无法以兼容的方式完成（例如，将相同类型的列表变为类型变化的列表）。
+6. 未雨绸缪！尝试预测运算的未来用途。某些签名变更无法以兼容的方式完成（例如，将相同类型的列表变为类型变化的列表）。
 
-可以在 [`tensorflow/core/framework/op_compatibility_test.cc`](https://www.tensorflow.org/code/tensorflow/core/framework/op_compatibility_test.cc) 中找到安全和不安全更改的完整列表。如果您无法以向后兼容的方式更改运算，则创建新的运算，并使用新语义设置新名称。
+可以在 [`tensorflow/core/framework/op_compatibility_test.cc`](https://www.tensorflow.org/code/tensorflow/core/framework/op_compatibility_test.cc) 中找到安全和不安全变更的完整列表。如果您无法以向后兼容的方式更改运算，则创建新的运算，并使用新语义设置新名称。
 
-另请注意，虽然这些更改可以保持 `GraphDef` 兼容性，但生成的 Python 代码可能会以与旧调用者不兼容的方式发生更改。要使 Python API 保持兼容，可以在手写 Python 包装器中小心地进行更改，并保留旧签名（可能要在末尾添加新的可选参数时除外）。通常，只有在 TensorFlow 更改主要版本时，才可以进行不兼容的更改，并且这些更改必须符合 <a data-md-type="link" href="./versions.md#compatibility_of_graphs_and_checkpoints">`GraphDef` 版本语义</a>。
+另请注意，虽然这些变更可以保持 `GraphDef` 兼容性，但生成的 Python 代码可能会以与旧调用者不兼容的方式发生更改。要使 Python API 保持兼容，可以在手写 Python 封装容器中小心地进行更改，并保留旧签名（可能要在末尾添加新的可选参数时除外）。通常，只有在 TensorFlow 更改主要版本时，才可以进行不兼容的变更，并且这些变更必须符合 <a data-md-type="raw_html" href="./versions.md#compatibility_of_graphs_and_checkpoints">`GraphDef` 版本语义</a>。
 
 ### GPU 支持
 
-您可以实现不同的 OpKernel 并为 CPU 和 GPU 各注册一个内核，就像您可[为不同类型注册内核](#polymorphism)一样。[`tensorflow/core/kernels/`](https://www.tensorflow.org/code/tensorflow/core/kernels/) 中提供了几个支持 GPU 的内核示例。请注意，某些内核在 `.cc` 文件中具有 CPU 版本，在以 `_gpu.cu.cc` 结尾的文件中具有 GPU 版本，并且在 `.h` 文件中具有一些共享的通用代码。
+您可以实现不同的 OpKernel 并为 CPU 和 GPU 各注册一个内核，就像您可以[为不同类型注册内核](#polymorphism)一样。[`tensorflow/core/kernels/`](https://www.tensorflow.org/code/tensorflow/core/kernels/) 中提供了几个支持 GPU 的内核示例。请注意，某些内核在 `.cc` 文件中具有 CPU 版本，在以 `_gpu.cu.cc` 结尾的文件中具有 GPU 版本，并且在 `.h` 文件中具有一些共享的通用代码。
 
 例如，`tf.pad` 在 [`tensorflow/core/kernels/pad_op.cc`](https://www.tensorflow.org/code/tensorflow/core/kernels/pad_op.cc) 中具有除 GPU 内核之外的所有代码。GPU 内核位于 [`tensorflow/core/kernels/pad_op_gpu.cu.cc`](https://www.tensorflow.org/code/tensorflow/core/kernels/pad_op_gpu.cu.cc) 中，共享代码是在 [`tensorflow/core/kernels/pad_op.h`](https://www.tensorflow.org/code/tensorflow/core/kernels/pad_op.h) 中定义的模板化类。我们以这种方式组织代码有两个原因：可以让您在 CPU 和 GPU 实现之间共享通用代码，并将 GPU 实现放入单独的文件中，这样它便只能由 GPU 编译器进行编译。
 
@@ -988,7 +1020,7 @@ REGISTER_OP("MultipleInsAndOuts")
 
 #### 编译 GPU 设备的内核
 
-要了解使用 CUDA 内核实现运算的示例，请参见 [cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc)。`tf_custom_op_library` 接受 `gpu_srcs` 参数，可以在其中指定包含 CUDA 内核的源文件（`*.cu.cc` 文件）列表。要与 TensorFlow 的二进制安装一起使用，必须使用 NVIDIA 的 `nvcc` 编译器编译 CUDA 内核。您可以使用以下命令序列将 [cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc) 和 [cuda_op_kernel.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cc) 编译成一个可动态加载的库：
+要了解使用 CUDA 内核实现运算的示例，请参阅 [cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc)。`tf_custom_op_library` 会接受 `gpu_srcs` 参数，可以在其中指定包含 CUDA 内核的源文件（`*.cu.cc` 文件）列表。要与 TensorFlow 的二进制文件安装一起使用，必须使用 NVIDIA 的 `nvcc` 编译器编译 CUDA 内核。您可以使用以下命令序列将 [cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc) 和 [cuda_op_kernel.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cc) 编译成一个可动态加载的库：
 
 ```bash
 nvcc -std=c++11 -c -o cuda_op_kernel.cu.o cuda_op_kernel.cu.cc \
@@ -1006,7 +1038,7 @@ g++ -std=c++11 -shared -o cuda_op_kernel.so cuda_op_kernel.cc \
 
 ### 在 Python 中实现梯度
 
-给定运算的计算图后，TensorFlow 会使用自动微分（反向传播）相对于现有运算添加表示梯度的新运算。要使自动微分对新运算生效，您必须注册一个梯度函数，在给定相对于运算输出的梯度时，计算相对于运算输入的梯度。
+给定运算的计算图后，TensorFlow 会使用自动微分（反向传播）添加表示相对于现有运算的梯度的新运算。要使自动微分对新运算生效，您必须注册一个梯度函数，在给定相对于运算输出的梯度时，计算相对于运算输入的梯度。
 
 在数学上，如果运算计算 \(y = f(x)\)，注册的梯度运算会通过链式法则将相对于 \(y\) 的损失 \(L\) 的梯度 \(\partial L/ \partial y\) 转换为相对于 \(x\) 的梯度 \(\partial L/ \partial x\)：
 
@@ -1053,7 +1085,7 @@ def _zero_out_grad(op, grad):
 
 ### C++ 中的形状函数
 
-TensorFlow API 具有一项称为“形状推理”的功能，该功能可以提供有关张量形状的信息，而无需执行计算图。形状推理由在 C++ `REGISTER_OP` 声明中为每个运算类型注册的“形状函数”提供支持，并承担两个角色：声明输入的形状在计算图构造期间是兼容的，并指定输出的形状。
+TensorFlow API 具有一项称为“形状推断”的功能，该功能可以提供有关张量形状的信息，而无需执行计算图。形状推断由在 C++ `REGISTER_OP` 声明中为每个运算类型注册的“形状函数”提供支持，并承担两个角色：声明输入的形状在计算图构造期间是兼容的，并指定输出的形状。
 
 形状函数定义为 `shape_inference::InferenceContext` 类上的运算。例如，在 ZeroOut 的形状函数中：
 
@@ -1064,7 +1096,7 @@ TensorFlow API 具有一项称为“形状推理”的功能，该功能可以�
     });
 ```
 
-`c->set_output(0, c->input(0));` 会声明第一个输出的形状应当设置为第一个输入的形状。如果按输出索引选择输出（如上例所示），则 `set_output` 的第二个参数应当为 `ShapeHandle` 对象。您可以通过空 `ShapeHandle` 对象的默认构造函数创建该对象。具有索引 `idx` 的输入的 `ShapeHandle` 对象可以通过 `c->input(idx)` 获得。
+`c->set_output(0, c->input(0));` 会声明第一个输出的形状应当设置为第一个输入的形状。如果按输出索引选择输出（如上例所示），则 `set_output` 的第二个参数应当为 `ShapeHandle` 对象。您可以通过空 `ShapeHandle` 对象的默认构造函数创建该对象。索引为 `idx` 的输入的 `ShapeHandle` 对象可以通过 `c->input(idx)` 获得。
 
 有许多常用的形状函数适用于多种运算（例如 `shape_inference::UnchangedShape`），您可以在 [common_shape_fns.h](https://www.tensorflow.org/code/tensorflow/core/framework/common_shape_fns.h) 中找到这些函数并按如下方式使用它们：
 
@@ -1103,9 +1135,9 @@ REGISTER_OP("ZeroOut")
     });
 ```
 
-由于形状推理是可选功能，并且张量的形状可能会动态变化，因此对于任何输入的不完整形状信息，形状函数必须可靠。[`InferenceContext`](https://www.tensorflow.org/code/tensorflow/core/framework/shape_inference.h) 中的 `Merge` 方法允许调用者声明两个形状是相同的，即使其中任一个或两个都没有完整的信息。我们为所有核心 TensorFlow 运算定义了形状函数，并提供了许多不同的用法示例。
+由于形状推断是可选功能，并且张量的形状可能会动态变化，因此对于任何输入的不完整形状信息，形状函数必须可靠。[`InferenceContext`](https://www.tensorflow.org/code/tensorflow/core/framework/shape_inference.h) 中的 `Merge` 方法允许调用者声明两个形状是相同的，即使其中任一个或两个都没有完整的信息。我们为所有核心 TensorFlow 运算定义了形状函数，并提供了许多不同的用法示例。
 
-`InferenceContext` 类具有许多可用于定义形状函数操作的函数。例如，您可以使用 `InferenceContext::Dim` 和 `InferenceContext::WithValue` 验证特定维度是否具有非常具体的值；您可以使用 `InferenceContext::Add` 和 `InferenceContext::Multiply` 指定输出维度是两个输入维度的和/积。要了解您可以指定的所有不同形状操作，请参见 `InferenceContext` 类。以下示例将第一个输出的形状设置为 (n, 3)，其中第一个输入的形状为 (n, ...)
+`InferenceContext` 类具有许多可用于定义形状函数操作的函数。例如，您可以使用 `InferenceContext::Dim` 和 `InferenceContext::WithValue` 验证特定维度是否具有非常具体的值；您可以使用 `InferenceContext::Add` 和 `InferenceContext::Multiply` 指定输出维度是两个输入维度的和/积。要了解您可以指定的所有不同形状操作，请参阅 `InferenceContext` 类。以下示例将第一个输出的形状设置为 (n, 3)，其中第一个输入的形状为 (n, ...)
 
 ```c++
 .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
@@ -1118,4 +1150,4 @@ REGISTER_OP("ZeroOut")
 
 ## 为您的自定义运算构建 pip 软件包
 
-要为您的运算构建 `pip` 软件包，请参见 [tensorflow/custom-op](https://github.com/tensorflow/custom-op) 示例。本文说明了如何从 TensorFlow pip 软件包构建自定义运算，而不是从源代码构建 TensorFlow。
+要为您的运算构建 `pip` 软件包，请参阅 [tensorflow/custom-op](https://github.com/tensorflow/custom-op) 示例。本指南说明了如何从 TensorFlow pip 软件包构建自定义运算，而不是从源代码构建 TensorFlow。
