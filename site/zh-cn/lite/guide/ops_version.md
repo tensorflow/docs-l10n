@@ -1,25 +1,25 @@
 # TensorFlow Lite 算子版本
 
-本文档描述了TensorFlow Lite的操作(operator)版本架构。 操作(operator)的版本使开发人员能够将新功能和参数添加到现有操作中。 此外，它保证以下内容：
+本文档描述了 TensorFlow Lite 的算子版本控制架构。借助算子版本控制，开发者能够向现有算子添加新的功能和参数。此外，它还保证了如下功能：
 
 - 向后兼容性：新 TensorFlow Lite 实现应该可以处理旧模型文件。
-- 向前兼容性：只要没有使用新功能，旧版本的 TensorFlow Lite 实现方式可以处理由新版 TOCO 生成的新版本的模型文件。
+- 向前兼容性：只要没有使用新功能，旧 TensorFlow Lite 实现就应该可以处理由新版转换器生成的新模型文件。
 - 向前兼容性检测：如果旧 TensorFlow Lite 实现读取包含不受支持的新版算子的新模型，则应报告错误。
 
 ## 示例：向卷积添加膨胀
 
-##示例：将膨胀(Dilation)添加到卷积操作中 本文档的其余部分通过展示如何在卷积操作中添加膨胀系数来解释 TFLite 中操作(operator)的版本。
+本文档的其余部分将通过展示如何向深度卷积运算中添加膨胀参数来说明 TFLite 中的算子版本控制。
 
-了解本文档内容并不需要了解卷积核膨胀的知识。需要注意的是：
+理解本文档不需要具备膨胀知识。请注意：
 
 - 将添加 2 个新的整数参数：`dilation_width_factor` 和 `dilation_height_factor`。
 - 不支持膨胀的旧卷积内核相当于将膨胀系数设置为 1。
 
 ### 更改 FlatBuffer 架构
 
-要将新参数添加到操作(operator)中，请更改`lite/schema/schema.fbs`中的选项表 。
+要向运算中添加新参数，请更改 `lite/schema/schema.fbs` 中的选项表。
 
-For example, the options table of depthwise convolution looks like this:
+例如，深度卷积的选项表如下所示：
 
 ```
 table DepthwiseConv2DOptions {
@@ -36,7 +36,7 @@ table DepthwiseConv2DOptions {
 - 添加注释，指明哪个版本支持哪些参数。
 - 当新实现获取新添加参数的默认值时，它的运行应该与旧实现完全相同。
 
-添加新参数后，参数表如下所示：
+添加新参数后，参数表将如下所示：
 
 ```
 table Conv2DOptions {
@@ -56,9 +56,9 @@ table Conv2DOptions {
 
 ### 更改 C 结构体和内核实现
 
-在TensorFlow Lite中，内核实现与FlatBuffer定义是分离发。 内核从`lite/builtin_op_data.h`中定义的C的结构体中读取参数。
+在 TensorFlow Lite 中，内核实现与 FlatBuffer 定义分离。内核从 `lite/c/builtin_op_data.h` 中定义的 C 结构体读取参数。
 
-原始卷积参数如下：
+原始深度卷积参数如下：
 
 ```
 typedef struct {
@@ -70,7 +70,7 @@ typedef struct {
 } TfLiteDepthwiseConvParams;
 ```
 
-与FlatBuffer架构(Schema)一样，通过添加注释，指明从哪个版本开始支持哪些参数。结果如下：
+与 FlatBuffer 架构一样，添加注释，指明从哪个版本开始支持哪些参数。结果如下：
 
 ```
 typedef struct {
@@ -128,11 +128,11 @@ TfLiteStatus ParseDepthwiseConv2D(const Operator* op,
 }
 ```
 
-这里不需要检查操作版本。 当新实现读取缺少扩张因子的旧模型文件时，它将使用1作为默认值，并且新内核将与旧内核一致地工作。
+这里不需要检查运算版本。当新实现读取缺少膨胀系数的旧模型文件时，它将使用 1 作为默认值，并且新内核的运行将与旧内核保持一致。
 
 ### 更改内核注册
 
-MutableOpResolver（在`lite/op_resolver.h`中定义）提供了一些注册操作(operator)内核的函数。默认情况下，最小和最大版本都为1：
+MutableOpResolver（在`lite/op_resolver.h`中定义）提供了一些注册运算内核的函数。默认情况下，最小和最大版本都为 1：
 
 ```
 void AddBuiltin(tflite::BuiltinOperator op, TfLiteRegistration* registration,
@@ -141,13 +141,13 @@ void AddCustom(const char* name, TfLiteRegistration* registration,
                int min_version = 1, int max_version = 1);
 ```
 
-内置的操作在 `lite/kernels/register.cc` 中注册。 在这个例子中，我们实现了一个新的操作内核，它可以处理 `Conv2D` 的版本1和版本2，所以我们需要将下面这行：
+内置运算在 `lite/kernels/register.cc` 中注册。在本例中，我们实现了一个新运算内核，它可以处理 `Conv2D` 的版本 1 和版本 2，因此我们需要将下面这行：
 
 ```
 AddBuiltin(BuiltinOperator_DEPTHWISE_CONV_2D, Register_DEPTHWISE_CONV_2D());
 ```
 
-修改为：
+更改为：
 
 ```
 AddBuiltin(BuiltinOperator_DEPTHWISE_CONV_2D, Register_DEPTHWISE_CONV_2D(),
@@ -155,14 +155,14 @@ AddBuiltin(BuiltinOperator_DEPTHWISE_CONV_2D, Register_DEPTHWISE_CONV_2D(),
              /* max_version = */ 2);
 ```
 
-### 改变 TOCO TFLite 的导出
+### 更改 TFLite 运算版本
 
 下一步是让 TFLite 填充执行运算所需的最低版本。在本例中，这意味着：
 
-- 当膨胀系数均为1时，填充 版本=1。
-- 除此之外，填充 版本=2。
+- 填充版本=1，当膨胀系数均为 1 时。
+- 填充版本=2，其他情况。
 
-为此，您需要首先在 `OpSignature`结构内的 `depthwise_conv_2d` 中添加相应的参数：
+为此，您需要首先在 `OpSignature`结构体内的 `depthwise_conv_2d` 中添加相应的参数：
 
 ```
 struct {
@@ -210,7 +210,7 @@ case BuiltinOperator_DEPTHWISE_CONV_2D:
 {{BuiltinOperator_DEPTHWISE_CONV_2D, 2}, %CURRENT_RUNTIME_VERSION%}
 ```
 
-where `%CURRENT_RUNTIME_VERSION%` corresponds to the current runtime version defined in [tensorflow/core/public/version.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h).
+其中 `%CURRENT_RUNTIME_VERSION%` 对应 [tensorflow/core/public/version.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h) 中定义的当前运行时版本。
 
 ### 委托实现
 
