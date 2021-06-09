@@ -8,7 +8,7 @@ This page is about adding Markdown documentation files to GitHub. For more infor
 
 The complete Markdown files can be pulled into the master branch of [tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev/tree/master) by one of the following methods.
 
-### Git CLI submission
+### Git CLI 제출
 
 Assuming the identified markdown file path is `assets/docs/publisher/model/1.md`, you can follow the standard Git[Hub] steps to create a new Pull Request with a newly added file.
 
@@ -26,11 +26,11 @@ git commit -m "Added model file."
 git push origin master
 ```
 
-### GitHub GUI submission
+### GitHub GUI 제출
 
 좀 더 간단한 제출 방법은 GitHub 그래픽 사용자 인터페이스를 사용하는 것입니다. GitHub에서는 GUI를 통해 직접 [새 파일](https://help.github.com/en/github/managing-files-in-a-repository/creating-new-files) 또는 [파일 편집](https://help.github.com/en/github/managing-files-in-a-repository/editing-files-in-your-repository)을 위한 PR을 생성할 수 있습니다.
 
 1. [TensorFlow Hub GitHub 페이지](https://github.com/tensorflow/hub)에서 `Create new file` 버튼을 누릅니다.
 2. Set the right file path: `assets/docs/publisher/model/1.md`
 3. 기존 마크다운을 복사하여 붙여 넣습니다.
-4. At the bottom, select "Create a new branch for this commit and start a pull request."
+4. 하단에서 "Create a new branch for this commit and start a pull request"를 선택합니다.
