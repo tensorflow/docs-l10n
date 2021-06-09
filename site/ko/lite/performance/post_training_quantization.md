@@ -1,6 +1,6 @@
 # 훈련 후 양자화
 
-Post-training quantization is a conversion technique that can reduce model size while also improving CPU and hardware accelerator latency, with little degradation in model accuracy. You can quantize an already-trained float TensorFlow model when you convert it to TensorFlow Lite format using the [TensorFlow Lite Converter](../convert/).
+훈련 후 양자화는 모델 정확성을 거의 저하시키지 않으면서 CPU 및 하드웨어 가속기 지연 시간을 개선하고 모델 크기를 줄일 수 있는 변환 기술입니다. [TensorFlow Lite 변환기](../convert/)를 사용하여 TensorFlow Lite 형식으로 변환할 때 이미 훈련된 부동 TensorFlow 모델을 양자화할 수 있습니다.
 
 참고: 해당 페이지의 절차를 따르려면 TensorFlow 1.15 이상이 필요합니다.
 
@@ -37,7 +37,7 @@ To further improve latency, "dynamic-range" operators dynamically quantize activ
 
 ### 전체 정수 양자화
 
-You can get further latency improvements, reductions in peak memory usage, and compatibility with integer only hardware devices or accelerators by making sure all model math is integer quantized.
+모든 모델 수학이 정수 양자화되었는지 확인하여 추가 지연 시간 개선, 최대 메모리 사용량 감소, 정수 전용 하드웨어 기기 또는 가속기와의 호환성을 얻을 수 있습니다.
 
 For full integer quantization, you need to calibrate or estimate the range, i.e, (min, max) of all floating-point tensors in the model. Unlike constant tensors such as weights and biases, variable tensors such as model input, activations (outputs of intermediate layers) and model output cannot be calibrated unless we run a few inference cycles. As a result, the converter requires a representative dataset to calibrate them. This dataset can be a small subset (around ~100-500 samples) of the training or validation data. Refer to the `representative_dataset()` function below.
 
@@ -63,7 +63,7 @@ converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 converter.representative_dataset = representative_dataset&amp;lt;/b&amp;gt;
 tflite_quant_model = converter.convert()</pre>
 
-Note: This `tflite_quant_model` won't be compatible with integer only devices (such as 8-bit microcontrollers) and accelerators (such as the Coral Edge TPU) because the input and output still remain float in order to have the same interface as the original float only model.
+참고: `tflite_quant_model`은 정수 전용 기기(예: 8bit 마이크로 컨트롤러) 및 가속기(예: Coral 에지 TPU)와 호환되지 않습니다. 입력 및 출력이 원본 부동 모델과 같은 인터페이스를 갖기 위해 여전히 부동 상태로 남아 있기 때문입니다.
 
 #### 정수 전용
 
@@ -98,7 +98,7 @@ tflite_quant_model = converter.convert()
 
 float16 양자화의 장점은 다음과 같습니다.
 
-- It reduces model size by up to half (since all weights become half of their original size).
+- (모든 가중치가 원래 크기의 절반이되므로) 모델 크기를 최대 절반까지 줄입니다.
 - 정확성 손실을 최소화합니다.
 - float16 데이터에서 직접 동작할 수 있는 일부 대리자(예: GPU 대리자)를 지원하므로 float32 계산보다 빠른 실행이 가능합니다.
 
@@ -159,6 +159,6 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 - 축당(일명 채널당) 또는 텐서당 가중치는 0과 같은 영점이 있는 [-127, 127] 범위의 int8 2의 보수 값으로 표시됩니다.
 
-- Per-tensor activations/inputs represented by int8 two’s complement values in the range [-128, 127], with a zero-point in range [-128, 127].
+- 텐서별 활성화/입력은 [-128, 127] 범위의 int8 2의 보수 값으로 표시되며 [-128, 127] 범위의 영점을 포함합니다.
 
 양자화 체계에 대한 자세한 내용은 [양자화 사양](./quantization_spec.md)을 참조하세요. TensorFlow Lite의 대리자 인터페이스에 연결하려는 하드웨어 공급 업체는 여기에 설명된 양자화 체계를 구현해보는 것이 좋습니다.
