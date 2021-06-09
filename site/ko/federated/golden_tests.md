@@ -43,6 +43,6 @@ path/
       test_case_last.expected
 ```
 
-## How do I update `.expected` files?
+## `.expected` 파일을 어떻게 업데이트합니까?
 
 `.expected` 파일은 인수 `--test_arg=--update_goldens --test_strategy=local`로 해당 테스트 대상을 실행하여 업데이트할 수 있습니다. 결과 차이에 예상치 못한 변경 사항이 있는지 확인해야 합니다.
