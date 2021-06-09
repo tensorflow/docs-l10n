@@ -105,7 +105,7 @@ The usefulness of the code generator depend on the completeness of the TensorFlo
 pip install tflite-support
 ```
 
-Once completed, the code generator can be used using the following syntax:
+완료되면 다음 구문을 사용하여 코드 생성기를 사용할 수 있습니다.
 
 ```sh
 tflite_codegen --model=./model_with_metadata/mobilenet_v1_0.75_160_quantized.tflite \
@@ -199,7 +199,7 @@ try {
 }
 ```
 
-### Troubleshooting
+### 문제 해결
 
  'java.io.FileNotFoundException: This file can not be opened as a file descriptor; it is probably compressed(이 파일을 파일 설명자로 열 수 없습니다. 압축되었을 수 있습니다.)' 오류가 발생하면 라이브러리 모듈을 사용할 앱 모듈의 android 섹션 아래에 다음 줄을 삽입합니다.
 
