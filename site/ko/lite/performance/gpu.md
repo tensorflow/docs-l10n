@@ -6,7 +6,7 @@ GPU는 대규모 병렬 처리가 가능한 워크로드를 위해 높은 처리
 
 CPU와 달리 GPU는 16비트 또는 32비트 부동 소수점 숫자로 계산하며 최적의 성능을 위해 양자화가 필요하지 않습니다. 대리자는 8비트 양자화된 모델을 허용하지만 계산은 부동 소수점 숫자로 수행됩니다. 자세한 내용은 [고급 문서](gpu_advanced.md)를 참조하세요.
 
-Another benefit with GPU inference is its power efficiency. GPUs carry out the computations in a very efficient and optimized manner, so that they consume less power and generate less heat than when the same task is run on CPUs.
+GPU 추론의 또 다른 이점은 전력 효율성입니다. GPU는 매우 효율적이고 최적화된 방식으로 계산을 수행하므로 같은 작업이 CPU에서 실행될 때보다 전력을 덜 소비하고 열을 덜 발생시킵니다.
 
 ## Demo app tutorials
 
@@ -172,7 +172,7 @@ Look at the demo to see how to add the delegate. In your application, add the AA
 <p data-md-type="paragraph">We did not provide a callback for this failure, as this is not a true run-time failure, but something that the developer can observe while trying to get the network to run on the delegate.</p>
 <h2 data-md-type="header" data-md-header-level="2">Tips for optimization</h2>
 <p data-md-type="paragraph">CPU에서 사소한 일부 연산은 GPU에서는 높은 비용이 발생할 수 있습니다. 이러한 연산의 한 클래스는 <code data-md-type="codespan">BATCH_TO_SPACE</code>, <code data-md-type="codespan">SPACE_TO_BATCH</code>, <code data-md-type="codespan">SPACE_TO_DEPTH</code> 등 다양한 형태의 reshape 연산입니다. 네트워크 설계자의 논리적 사고만을 위해 연산을 네트워크에 삽입한 경우, 성능을 고려해서 해당 연산을 제거하는 것이 좋습니다.</p>
-<p data-md-type="paragraph">On GPU, tensor data is sliced into 4-channels. Thus, a computation on a tensor of shape <code data-md-type="codespan">[B,H,W,5]</code> will perform about the same on a tensor of shape <code data-md-type="codespan">[B,H,W,8]</code> but significantly worse than <code data-md-type="codespan">[B,H,W,4]</code>.</p>
-<p data-md-type="paragraph">In that sense, if the camera hardware supports image frames in RGBA, feeding that 4-channel input is significantly faster as a memory copy (from 3-channel RGB to 4-channel RGBX) can be avoided.</p>
+<p data-md-type="paragraph">GPU에서 텐서 데이터는 4채널로 분할됩니다. 따라서 형상 <code data-md-type="codespan">[B, H, W, 5]</code> 텐서에 대한 계산은 형상 <code data-md-type="codespan">[B, H, W, 8]</code> 텐서와 거의 동일하게 수행되지만 <code data-md-type="codespan">[B, H, W, 4]</code>에 비해서는 성능이 훨씬 나쁩니다.</p>
+<p data-md-type="paragraph">그런 의미에서 카메라 하드웨어가 RGBA의 이미지 프레임을 지원하는 경우 메모리 사본(3채널 RGB에서 4채널 RGBX로)을 피할 수 있으므로 해당 4채널 입력을 훨씬 빠르게 공급할 수 있습니다.</p>
 <p data-md-type="paragraph">For best performance, do not hesitate to retrain your classifier with a mobile-optimized network architecture. That is a significant part of optimization for on-device inference.</p>
 </div>
