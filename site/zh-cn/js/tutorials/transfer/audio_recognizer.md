@@ -1,7 +1,7 @@
-# 语音识别的迁移学习
+# 音频识别器迁移学习
 
-在这个教程中，您将会学习到如何建立一个客制化的语音分类器。您将使用Tensorflow.js在浏览器中进行训练。您将使用它通过发出声音来控制浏览器中的滑块。
+在本教程中，您将学习如何构建一个自定义音频分类器并使用 TensorFlow.js 在浏览器中进行训练。您将使用它通过发出声音来控制浏览器中的滑块。
 
-您将会使用迁移学习建立一个模型，这个模型使用较少的训练数据对短音频进行分类。您将会使用预训练模型[语音命令识别](https://github.com/tensorflow/tfjs-models/tree/master/speech-commands)。您将会在预训练模型的基础上训练一个新的模型，以识别您自己定义的声音类。
+您将使用迁移学习构建一个模型，并使用相对较少的训练数据对短声音进行分类。您将会使用预训练模型进行[语音命令识别](https://github.com/tensorflow/tfjs-models/tree/master/speech-commands)。您将基于这个模型训练一个新模型来识别您自己的自定义声音类。
 
-这个教程在codelab上已经为您准备好了 [从这里打开codelab吧！](https://codelabs.developers.google.com/codelabs/tensorflowjs-audio-codelab/index.html)
+本教程作为一个 Codelab 演示。[点击此链接可打开 Codelab](https://codelabs.developers.google.com/codelabs/tensorflowjs-audio-codelab/index.html)
