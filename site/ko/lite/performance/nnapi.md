@@ -110,7 +110,7 @@ NNAPI는 모델이 [지원되는 연산](https://developer.android.com/ndk/guide
 - [MobileNet v2 SSD object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html)[(download)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)
     *(image classification model that detects multiple objects with bounding
     boxes)*
-- [MobileNet v1(300x300) Single Shot Detector (SSD) object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(download)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
+- [MobileNet v1(300x300) SSD(Single Shot Detector) 객체 감지](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(다운로드)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
 - [PoseNet for pose estimation](https://github.com/tensorflow/tfjs-models/tree/master/posenet)[(download)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)
     *(vision model that estimates the poses of a person(s) in image or video)*
 
