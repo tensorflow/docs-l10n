@@ -2,9 +2,9 @@
 
 ## Introduction
 
-**Delegates** enable hardware acceleration of TensorFlow Lite models by leveraging on-device accelerators such as the GPU and [Digital Signal Processor (DSP)](https://en.wikipedia.org/wiki/Digital_signal_processor).
+**대리자**는 GPU 및 [DSP(디지털 신호 프로세서)](https://en.wikipedia.org/wiki/Digital_signal_processor)와 같은 온 디바이스 가속기를 활용하여 TensorFlow Lite 모델의 하드웨어 가속을 지원합니다.
 
-By default, TensorFlow Lite utilizes CPU kernels that are optimized for the [ARM Neon](https://developer.arm.com/documentation/dht0002/a/Introducing-NEON/NEON-architecture-overview/NEON-instructions) instruction set. However, the CPU is a multi-purpose processor that isn't necessarily optimized for the heavy arithmetic typically found in Machine Learning models (for example, the matrix math involved in convolution and dense layers).
+기본적으로 TensorFlow Lite는 [ARM Neon](https://developer.arm.com/documentation/dht0002/a/Introducing-NEON/NEON-architecture-overview/NEON-instructions) 명령어 세트에 최적화된 CPU 커널을 사용합니다. 그러나 CPU는 머신러닝 모델에서 일반적으로 발견되는 무거운 산술(예: 컨볼루션 및 밀집 레이어와 관련된 행렬 수학)에 반드시 최적화되었다고 할 수 없는 다목적 프로세서입니다.
 
 On the other hand, most modern mobile phones contain chips that are better at handling these heavy operations. Utilizing them for neural network operations provides huge benefits in terms of latency and power efficiency. For example, GPUs can provide upto a [5x speedup](https://blog.tensorflow.org/2020/08/faster-mobile-gpu-inference-with-opencl.html) in latency, while the [Qualcomm® Hexagon DSP](https://developer.qualcomm.com/software/hexagon-dsp-sdk/dsp-processor) has shown to reduce power consumption upto 75% in our experiments.
 
@@ -14,13 +14,13 @@ Each of these accelerators have associated APIs that enable custom computations,
 
 ## Choosing a Delegate
 
-TensorFlow Lite supports multiple delegates, each of which is optimized for certain platform(s) and particular types of models. Usually, there will be multiple delegates applicable to your use-case, depending on two major criteria: the *Platform* (Android or iOS?) you target, and the *Model-type* (floating-point or quantized?) that you are trying to accelerate.
+TensorFlow Lite는 여러 대리자를 지원하며, 각 대리자는 특정 플랫폼 및 특정 유형의 모델에 최적화되어 있습니다. 일반적으로 타겟으로 삼은 *플랫폼*(Android 또는 iOS?)과 가속화하려는 *모델 유형*(부동 소수점 또는 양자화?)의 두 가지 주요 기준에 따라 사용 사례에 적용할 수 있는 여러 대리자가 있습니다.
 
 ### Delegates by Platform
 
-#### Cross-platform (Android &amp; iOS)
+#### 교차 플랫폼(Android 및 iOS)
 
-- **GPU delegate** - The GPU delegate can be used on both Android and iOS. It is optimized to run 32-bit and 16-bit float based models where a GPU is available. It also supports 8-bit quantized models and provides GPU performance on par with their float versions. For details on the GPU delegate, see [TensorFlow Lite on GPU](gpu_advanced.md). For step-by-step tutorials on using the GPU delegate with Android and iOS, see [TensorFlow Lite GPU Delegate Tutorial](gpu.md).
+- **GPU 대리자** - GPU 대리자는 Android와 iOS 모두에서 사용할 수 있으며, GPU를 사용할 수 있는 32bit 및 16bit 부동 기반 모델을 실행하도록 최적화되어 있습니다. 또한, 8bit 양자화 모델을 지원하고 부동 버전과 동등한 GPU 성능을 제공합니다. GPU 대리자에 대한 자세한 내용은 [GPU 기반 TensorFlow Lite](gpu_advanced.md)를 참조하세요. Android 및 iOS에서 GPU 대리자를 사용하는 방법에 대한 단계별 튜토리얼은 [TensorFlow Lite GPU 대리자 튜토리얼](gpu.md)을 참조하세요.
 
 #### Android
 
@@ -33,7 +33,7 @@ TensorFlow Lite supports multiple delegates, each of which is optimized for cert
 
 ### Delegates by model type
 
-Each accelerator is designed with a certain bit-width of data in mind. If you provide a floating-point model to a delegate that only supports 8-bit quantized operations (such as the [Hexagon delegate](hexagon_delegate.md)), it will reject all its operations and the model will run entirely on the CPU. To avoid such surprises, the table below provides an overview of delegate support based on model type:
+각 가속기는 특정 비트 폭의 데이터를 염두에 두고 설계되었습니다. 8bit 양자화된 연산(예: [Hexagon delegate](hexagon_delegate.md))만 지원하는 대리자에 부동 소수점 모델을 제공하는 경우 모든 연산이 거부되고 모델은 전적으로 CPU에서 실행됩니다. 이러한 뜻밖의 상황을 방지하기 위해 아래의 표를 보면 모델 유형에 따른 대리자 지원의 개요가 나와있습니다.
 
 **Model Type** | **GPU** | **NNAPI** | **Hexagon** | **CoreML**
 --- | --- | --- | --- | ---
@@ -45,7 +45,7 @@ Floating-point (32 bit) | Yes | Yes | No | Yes
 
 ### Validating performance
 
-The information in this section acts as a rough guideline for shortlisting the delegates that could improve your application. However, it is important to note that each delegate has a pre-defined set of operations it supports, and may perform differently depending on the model and device; for example, the [NNAPI delegate](nnapi.md) may choose to use Google's Edge-TPU on a Pixel phone while utilizing a DSP on another device. Therefore, it is usually recommended that you perform some benchmarking to gauge how useful a delegate is for your needs. This also helps justify the binary size increase associated with attaching a delegate to the TensorFlow Lite runtime.
+이 섹션의 정보는 애플리케이션을 개선할 수 있는 대리자를 선정하기 위한 대략적인 가이드라인 역할을 합니다. 그러나 각 대리자가 지원하는 사전 정의된 연산 세트가 있으며 모델 및 기기에 따라 다르게 수행될 수 있다는 점에 유의하는 것이 중요합니다. 예를 들어 [NNAPI 대리자](nnapi.md)는 Pixel 휴대폰에서 Google의 Edge-TPU를 사용하도록 선택할 수 있지만 다른 기기에서는 DSP를 사용할 수 있습니다. 따라서 일반적으로 몇 가지 벤치마킹을 수행하여 대리자가 자신의 필요성에 얼마나 유용한지 평가하는 것이 좋습니다. 이는 또한 대리자를 TensorFlow Lite 런타임에 연결하는 것과 관련된 바이너리 크기 증가를 정당화하는 데 도움이 됩니다.
 
 TensorFlow Lite has extensive performance and accuracy-evaluation tooling that can empower developers to be confident in using delegates in their application. These tools are discussed in the next section.
 
@@ -63,11 +63,11 @@ adb shell /data/local/tmp/benchmark_model \
   --use_gpu=true
 ```
 
-You can download pre-built version of this tool for Android, 64-bit ARM architecture [here](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_benchmark_model.apk) ([more details](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark/android)).
+이 도구의 Android, 64bit ARM 아키텍처용 사전 빌드 버전을 [여기](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_benchmark_model.apk)([보다 상세한 정보](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark/android))에서 다운로드할 수 있습니다.
 
 ### Accuracy &amp; correctness
 
-Delegates usually perform computations at a different precision than their CPU counterparts. As a result, there is an (usually minor) accuracy tradeoff associated with utilizing a delegate for hardware acceleration. Note that this isn't *always* true; for example, since the GPU uses floating-point precision to run quantized models, there might be a slight precision improvement (for e.g., &lt;1% Top-5 improvement in ILSVRC image classification).
+대리자는 일반적으로 CPU와 다른 정밀도로 계산을 수행합니다. 결과적으로 하드웨어 가속을 위해 대리자를 사용하는 것과 관련된(보통 사소한) 정확도 절충이 있습니다. 이것이 *항상* 그런 것은 아닙니다. 예를 들어, GPU는 부동 소수점 정밀도를 사용하여 양자화된 모델을 실행하기 때문에 약간의 정밀도 향상(예: ILSVRC 이미지 분류에서 &lt;1% Top-5 향상)이 있을 수 있습니다.
 
 TensorFlow Lite has two types of tooling to measure how accurately a delegate behaves for a given model: *Task-Based* and *Task-Agnostic*. All the tools described in this section support the [advanced delegation parameters](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/delegates/README.md#tflite-delegate-registrar) used by the benchmarking tool from the previous section. Note that the sub-sections below focus on *delegate evaluation* (Does the delegate perform the same as the CPU?) rather than model evaluation (Is the model itself good for the task?).
 
