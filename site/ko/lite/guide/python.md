@@ -14,22 +14,18 @@ Python으로 TensorFlow Lite 모델 실행을 빠르게 시작하려면 모든 T
 
 ## Python용 TensorFlow Lite 설치하기
 
-Debian Linux 또는 Debian 파생 제품(Raspberry Pi OS 포함)을 실행 중인 경우 Debian 패키지 리포지토리에서 설치해야 합니다. 이를 위해서는 시스템에 새 리포지토리 목록과 키를 추가한 후 다음과 같이 설치해야 합니다.
+설치하려면 `pip3 install`을 실행하고 다음 표에서 적절한 Python wheel URL을 전달합니다.
 
-<pre class="devsite-terminal">echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list
-&lt;code class="devsite-terminal"
-&gt;GL_CODE_5&lt;/code&gt;&lt;code class="devsite-terminal"
-&gt;GL_CODE_6&lt;/code&gt;&lt;code class="devsite-terminal"
-&gt;GL_CODE_7&lt;/code&gt;
+<pre class="devsite-terminal">pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl</pre>
+
+예를 들어, Raspbian Buster(Python 3.7 포함)를 실행하는 Raspberry Pi를 사용 중인 경우, 다음과 같이 Python wheel을 설치합니다.
+
+<pre class="devsite-terminal devsite-click-to-copy">pip3 install --index-url https://google-coral.github.io/py-repo/ tflite_runtime
 </pre>
-
-다른 모든 시스템의 경우 pip로 설치할 수 있습니다.
-
-<pre class="devsite-terminal devsite-click-to-copy">pip3 install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime</pre>
 
 따라서 `Interpreter`를 `tensorflow` 모듈 대신 `tflite_runtime`에서 가져와야 합니다.
 
-참고: Debian Linux에서 `tflite_runtime` pip를 사용하여 `tflite_runtime`을 설치하는 경우 Debian 패키지로 설치하고 TF Lite에 종속된 다른 소프트웨어(예: [Coral 라이브러리](https://coral.ai/software/))를 사용할 때 런타임 오류가 발생할 수 있습니다. pip로 `tflite_runtime`을 제거한 다음 위의 `apt-get` 명령으로 다시 설치하면 문제를 해결할 수 있습니다.
+참고: Debian Linux에서 pip를 사용하여 `tflite_runtime`을 설치하는 경우 Debian 패키지로 설치하고 TF Lite에 종속된 다른 소프트웨어(예: [Coral 라이브러리](https://coral.ai/software/))를 사용할 때 런타임 오류가 발생할 수 있습니다. pip로 `tflite_runtime`을 제거한 다음 위의 `apt-get` 명령으로 다시 설치하면 문제를 해결할 수 있습니다.
 
 ## tflite_runtime을 사용하여 추론 실행하기
 
