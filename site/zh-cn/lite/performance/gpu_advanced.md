@@ -97,13 +97,11 @@ if (interpreter-&gt;Invoke() != kTfLiteOk) return false;
 ReadFromOutputTensor(interpreter-&gt;typed_output_tensor&lt;float&gt;(0));
 
 // NEW: Clean up.
-TfLiteGpuDelegateV2Delete(delegate);
-</code></pre>
+TfLiteGpuDelegateV2Delete(delegate);</code></pre>
 <p data-md-type="paragraph">查看 <code data-md-type="codespan">TfLiteGpuDelegateOptionsV2</code> 以使用自定义选项创建一个委托实例。您可以使用 <code data-md-type="codespan">TfLiteGpuDelegateOptionsV2Default()</code> 初始化默认选项，然后根据需要对其进行修改。</p>
 <p data-md-type="paragraph">TFLite GPU for Android C/C++ 使用 <a href="https://bazel.io" data-md-type="link">Bazel</a> 构建系统。例如，可以使用以下命令构建委托：</p>
 <pre data-md-type="block_code" data-md-language="sh"><code class="language-sh">bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:delegate                           # for static library
-bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:libtensorflowlite_gpu_delegate.so  # for dynamic library
-</code></pre>
+bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:libtensorflowlite_gpu_delegate.so  # for dynamic library</code></pre>
 <p data-md-type="paragraph">注：调用 <code data-md-type="codespan">Interpreter::ModifyGraphWithDelegate()</code> 或 <code data-md-type="codespan">Interpreter::Invoke()</code> 时，调用者在当前线程中必须具有 <code data-md-type="codespan">EGLContext</code>，并且 <code data-md-type="codespan">Interpreter::Invoke()</code> 必须从相同的 <code data-md-type="codespan">EGLContext</code> 调用。如果 <code data-md-type="codespan">EGLContext</code> 不存在，委托将在内部创建一个，但开发者随后必须确保该 <code data-md-type="codespan">Interpreter::Invoke()</code> 始终从调用 <code data-md-type="codespan">Interpreter::ModifyGraphWithDelegate()</code> 的同一个线程调用。</p>
 <h3 data-md-type="header" data-md-header-level="3">iOS (C++)</h3>
 <p data-md-type="paragraph">注：有关 Swift/Objective-C/C 用例，请参阅 <a href="gpu#ios" data-md-type="link">GPU 委托指南</a></p>
@@ -127,8 +125,7 @@ if (interpreter-&gt;Invoke() != kTfLiteOk) return false;
 ReadFromOutputTensor(interpreter-&gt;typed_output_tensor&lt;float&gt;(0));
 
 // Clean up.
-TFLGpuDelegateDelete(delegate);
-</code></pre>
+TFLGpuDelegateDelete(delegate);</code></pre>
 <h2 data-md-type="header" data-md-header-level="2">高级用法</h2>
 <h3 data-md-type="header" data-md-header-level="3">iOS 委托选项</h3>
 <p data-md-type="paragraph">GPU 委托的构造函数接受选项的 <code data-md-type="codespan">struct</code>。（<a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/swift/Sources/MetalDelegate.swift" data-md-type="link">Swift API</a>、<a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/objc/apis/TFLMetalDelegate.h" data-md-type="link">Objective-C API</a>、<a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/gpu/metal_delegate.h" data-md-type="link">C API</a>）</p>
@@ -181,13 +178,11 @@ TFLGpuDelegateDelete(delegate);
 options.experimental_flags = TFLITE_GPU_EXPERIMENTAL_FLAGS_NONE;
 
 auto* delegate = TfLiteGpuDelegateV2Create(options);
-if (interpreter-&gt;ModifyGraphWithDelegate(delegate) != kTfLiteOk) return false;
-</code></pre>
+if (interpreter-&gt;ModifyGraphWithDelegate(delegate) != kTfLiteOk) return false;</code></pre>
 <p data-md-type="paragraph"><strong data-md-type="double_emphasis">Java API</strong></p>
 <pre data-md-type="block_code" data-md-language="java"><code class="language-java">GpuDelegate delegate = new GpuDelegate(new GpuDelegate.Options().setQuantizedModelsAllowed(false));
 
-Interpreter.Options options = (new Interpreter.Options()).addDelegate(delegate);
-</code></pre>
+Interpreter.Options options = (new Interpreter.Options()).addDelegate(delegate);</code></pre>
 <h4 data-md-type="header" data-md-header-level="4">iOS</h4>
 <p data-md-type="paragraph">iOS API 默认支持量化模型。要停用，请执行以下操作：</p>
 <div data-md-type="block_html">
@@ -198,15 +193,13 @@ Interpreter.Options options = (new Interpreter.Options()).addDelegate(delegate);
       <p></p>
 <pre class="prettyprint lang-swift">    var options = MetalDelegate.Options()
     options.isQuantizationEnabled = false
-    let delegate = MetalDelegate(options: options)
-      </pre>
+    let delegate = MetalDelegate(options: options)</pre>
     </section>
     <section>
       <h3>Objective-C</h3>
       <p></p>
 <pre class="prettyprint lang-objc">    TFLMetalDelegateOptions* options = [[TFLMetalDelegateOptions alloc] init];
-    options.quantizationEnabled = false;
-      </pre>
+    options.quantizationEnabled = false;</pre>
     </section>
     <section>
       <h3>C</h3>
@@ -246,8 +239,7 @@ if (!TFLGpuDelegateBindMetalBufferToTensor(
 }
 
 // Run inference.
-if (interpreter-&gt;Invoke() != kTfLiteOk) return false;
-</code></pre>
+if (interpreter-&gt;Invoke() != kTfLiteOk) return false;</code></pre>
 <p data-md-type="paragraph">注：关闭默认行为后，要将推断输出从 GPU 内存复制到 CPU 内存，则需要对每个输出张量显式调用 <code data-md-type="codespan">Interpreter::EnsureTensorDataIsReadable()</code>。</p>
 <p data-md-type="paragraph">注：这也适用于量化模型，但是您仍然需要<strong data-md-type="double_emphasis">带有 float32 数据的 float32 大小的缓冲区</strong>，因为该缓冲区将绑定到内部去量化缓冲区。</p>
 <h2 data-md-type="header" data-md-header-level="2">提示和技巧</h2>
