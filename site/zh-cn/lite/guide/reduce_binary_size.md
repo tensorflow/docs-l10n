@@ -1,10 +1,10 @@
-# 缩减 TensorFlow Lite 二进制文件大小
+# 减小 TensorFlow Lite 二进制文件大小
 
 ## 概述
 
 为设备端机器学习 (ODML) 应用部署模型时，必须注意移动设备上的内存有限。模型二进制文件的大小与模型中使用的算子数量密切相关。通过选择性构建，TensorFlow Lite 让您可以缩减模型二进制文件的大小。选择性构建会跳过在模型集中不使用的算子，从而产生一个只包含让模型在移动设备上运行所必需的运行时和算子内核的紧凑库。
 
-选择性构建适用于以下三个算子库。
+选择性构建适用于以下三个运算库。
 
 1. [TensorFlow Lite 内置运算库](https://www.tensorflow.org/lite/guide/ops_compatibility)
 2. [TensorFlow Lite 自定义运算](https://www.tensorflow.org/lite/guide/ops_custom)
@@ -22,8 +22,7 @@
     </tr>
   </thead>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>
-</td>
+    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a> </td>
     <td rowspan="2">图像分类</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar（296,635 字节）</td>
@@ -33,8 +32,7 @@
     <td>tensorflow-lite.aar（382,892 字节）</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a>
-</td>
+    <td rowspan="2">       <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a> </td>
     <td rowspan="2">声音基音提取</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar（375,813 字节）<br>tensorflow-lite-select-tf-ops.aar（1,676,380 字节）</td>
@@ -44,8 +42,7 @@
     <td>tensorflow-lite.aar（421,826 字节）<br>tensorflow-lite-select-tf-ops.aar（2,298,630 字节）</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a>
-</td>
+    <td rowspan="2">       <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a> </td>
     <td rowspan="2">视频分类</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar（240,085 字节）<br>tensorflow-lite-select-tf-ops.aar（1,708,597 字节）</td>
@@ -56,7 +53,7 @@
   </tr>
  </table>
 
-注：此功能从 2.4 版本开始提供，目前处于实验阶段，随时可能发生更改。
+注：此功能目前处于实验阶段，从 2.4 版本开始提供，并且可能发生更改。
 
 ## 已知问题/限制
 
@@ -64,7 +61,7 @@
 
 ## 使用 Bazel 选择性构建 TensorFlow Lite
 
-本部分假设您已下载 TensorFlow 源代码，并且已[设置 Bazel 的本地开发环境](https://www.tensorflow.org/lite/guide/android#build_tensorflow_lite_locally)。
+本部分假设您已下载 TensorFlow 源代码，并且已[将本地开发环境设置到 Bazel](https://www.tensorflow.org/lite/guide/android#build_tensorflow_lite_locally)。
 
 ### 为 Android 项目构建 AAR 文件
 
@@ -104,7 +101,7 @@ docker build . -t tflite-builder -f tflite-android.Dockerfile
 
 ### 为 Android 项目构建 AAR 文件
 
-运行以下命令，下载使用 Docker 进行构建的脚本：
+运行以下命令，下载使用 Docker 构建模型的脚本：
 
 ```sh
 curl -o build_aar_with_docker.sh \
