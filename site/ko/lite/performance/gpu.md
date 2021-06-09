@@ -1,8 +1,8 @@
 # TensorFlow Lite GPU 대리자
 
-[TensorFlow Lite](https://www.tensorflow.org/lite) supports several hardware accelerators. This document describes how to use the GPU backend using the TensorFlow Lite delegate APIs on Android and iOS.
+[TensorFlow Lite](https://www.tensorflow.org/lite)는 여러 하드웨어 가속기를 지원합니다. 이 문서는 Android 및 iOS에서 TensorFlow Lite 대리자 API를 사용하여 GPU 백엔드를 사용하는 방법을 설명합니다.
 
-GPUs are designed to have high throughput for massively parallelizable workloads. Thus, they are well-suited for deep neural nets, which consist of a huge number of operators, each working on some input tensor(s) that can be easily divided into smaller workloads and carried out in parallel, typically resulting in lower latency. In the best scenario, inference on the GPU may now run fast enough for previously not available real-time applications.
+GPU는 대규모 병렬 처리가 가능한 워크로드를 위해 높은 처리량을 갖도록 설계되었습니다. 따라서 GPU는 많은 수의 연산자로 구성된 심층 신경망에 적합하며, 일부 입력 텐서에서 더 작은 워크로드로 쉽게 분할되고 병렬로 수행될 수 있는 각 작업은 일반적으로 지연 시간이 더 짧습니다. 최상의 시나리오에서, GPU에 대한 추론은 이전에는 사용할 수 없었던 실시간 애플리케이션에 대해 충분히 빠르게 실행될 수 있습니다.
 
 CPU와 달리 GPU는 16비트 또는 32비트 부동 소수점 숫자로 계산하며 최적의 성능을 위해 양자화가 필요하지 않습니다. 대리자는 8비트 양자화된 모델을 허용하지만 계산은 부동 소수점 숫자로 수행됩니다. 자세한 내용은 [고급 문서](gpu_advanced.md)를 참조하세요.
 
