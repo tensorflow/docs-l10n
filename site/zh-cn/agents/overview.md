@@ -2,13 +2,13 @@
 
 **使用 TensorFlow 进行强化学习**
 
-Agents makes designing, implementing and testing new RL algorithms easier, by providing well tested modular components that can be modified and extended. It enables fast code iteration, with good test integration and benchmarking.
+通过提供经充分测试的可修改、可拓展的模块化组件，Agents使得设计、实现和测试新的回归算法更加容易。它实现了快速的代码迭代，同时保证了良好的测试集成和基准。
 
 要开始使用，我们建议您先阅读我们的[教程](/tutorials)之一。
 
 ## 安装
 
-TF-Agents publishes nightly and stable builds. For a list of releases read the <a href="#Releases">Releases</a> section. The commands below cover installing TF-Agents stable and nightly from [pypi.org](https://pypi.org) as well as from a GitHub clone.
+TF-Agents发布有测试版和稳定版。有关发行列表，请阅读 <a href="#Releases">发行</a> 部分。以下命令包含从 [pypi.org](https://pypi.org)以及GitHub克隆安装TF-Agents的稳定版和测试版。
 
 ### 稳定版本
 
@@ -34,7 +34,7 @@ $ pip install --user tf-agents
 如果要将 TF-Agents 与 TensorFlow 1.15 或 2.0 一起使用，请安装版本 0.3.0：
 
 ```shell
-# Newer versions of tensorflow-probability require newer versions of TensorFlow.
+# 更新版本的tensorflow-probability需要更新版本的TensorFlow.
 $ pip install tensorflow-probability==0.8.0
 $ pip install tf-agents==0.3.0
 ```
@@ -46,12 +46,12 @@ Nightly 版本包含较新的功能，但可能不如带版本号的版本稳定
 要安装 Nightly 版本，请运行以下代码：
 
 ```shell
-# `--force-reinstall helps guarantee the right versions.
+# `--force-reinstall`帮助确保版本正确
 $ pip install --user --force-reinstall tf-nightly
 $ pip install --user --force-reinstall tfp-nightly
 $ pip install --user --force-reinstall dm-reverb-nightly
 
-# Installing with the `--upgrade` flag ensures you'll get the latest version.
+# `--upgrade` 指令确保您安装最新的版本。
 $ pip install --user --upgrade tf-agents-nightly
 ```
 
@@ -84,7 +84,7 @@ Nightly 版本 | [master](https://github.com/tensorflow/agents) | tf-nightly
 
 ## 原则
 
-This project adheres to [Google's AI principles](https://github.com/tensorflow/agents/blob/master/PRINCIPLES.md). By participating, using or contributing to this project you are expected to adhere to these principles.
+该项目坚持 [Google's AI principles](https://github.com/tensorflow/agents/blob/master/PRINCIPLES.md). 参与、使用或为该项目做出贡献的过程，您需要遵守这些原则。
 
 <a id="Citation"></a>
 
