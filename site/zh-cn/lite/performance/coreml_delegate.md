@@ -43,8 +43,8 @@ target 'YourProjectName'
       <p></p>
 <pre class="prettyprint lang-swift">    let coreMLDelegate = CoreMLDelegate()
     var interpreter: Interpreter
-&amp;lt;/div&amp;gt;
-&amp;lt;pre data-md-type="block_code" data-md-language=""&amp;gt;&amp;lt;code&amp;gt;GL_CODE_5&amp;lt;/code&amp;gt;</pre>
+&lt;/div&gt;
+&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_5&lt;/code&gt;</pre>
 <div data-md-type="block_html">
 </div>
 </section></devsite-selector>
@@ -71,8 +71,8 @@ target 'YourProjectName'
     coreMLOptions.enabledDevices = TFLCoreMLDelegateEnabledDevicesAll;
     TFLCoreMLDelegate* coreMLDelegate = [[TFLCoreMLDelegate alloc]
                                           initWithOptions:coreMLOptions];
-&amp;lt;/div&amp;gt;
-&amp;lt;pre data-md-type="block_code" data-md-language=""&amp;gt;&amp;lt;code&amp;gt;GL_CODE_9&amp;lt;/code&amp;gt;</pre>
+&lt;/div&gt;
+&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_9&lt;/code&gt;</pre>
 <div data-md-type="block_html">
 </div>
 </section></devsite-selector>
@@ -89,8 +89,8 @@ target 'YourProjectName'
     if delegate == nil {
       delegate = MetalDelegate()  // Add Metal delegate options if necessary.
     }
-&amp;lt;/div&amp;gt;
-&amp;lt;pre data-md-type="block_code" data-md-language=""&amp;gt;&amp;lt;code&amp;gt;GL_CODE_10&amp;lt;/code&amp;gt;</pre>
+&lt;/div&gt;
+&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_10&lt;/code&gt;</pre>
 <div data-md-type="block_html">
 </div>
 </section></devsite-selector>
