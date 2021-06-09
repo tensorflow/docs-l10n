@@ -90,7 +90,7 @@ typedef struct {
 
 ### 更改 FlatBuffer 读取代码
 
-负责读取 FlatBuffer 并生成 C 结构体的逻辑是由 `lite/model.cc` 实现的。
+读取 FlatBuffer 并生成 C 结构体的逻辑在 `lite/core/api/flatbuffer_conversions.cc` 中实现。
 
 更新该文件以处理新参数，如下所示：
 
