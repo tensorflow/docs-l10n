@@ -283,7 +283,6 @@ from grpc import insecure_channel
 from ml_metadata.proto import metadata_store_pb2
 from ml_metadata.proto import metadata_store_service_pb2
 from ml_metadata.proto import metadata_store_service_pb2_grpc
-
 channel = insecure_channel('localhost:8080')
 stub = metadata_store_service_pb2_grpc.MetadataStoreServiceStub(channel)
 ```
@@ -296,17 +295,14 @@ data_type = metadata_store_pb2.ArtifactType()
 data_type.name = "DataSet"
 data_type.properties["day"] = metadata_store_pb2.INT
 data_type.properties["split"] = metadata_store_pb2.STRING
-
 request = metadata_store_service_pb2.PutArtifactTypeRequest()
 request.all_fields_match = True
 request.artifact_type.CopyFrom(data_type)
 stub.PutArtifactType(request)
-
 model_type = metadata_store_pb2.ArtifactType()
 model_type.name = "SavedModel"
 model_type.properties["version"] = metadata_store_pb2.INT
 model_type.properties["name"] = metadata_store_pb2.STRING
-
 request.artifact_type.CopyFrom(model_type)
 stub.PutArtifactType(request)
 ```
