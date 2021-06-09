@@ -38,7 +38,7 @@ TF Hub는 TensorFlow 프로그램에서 다시 로드, 빌드 및 재훈련할 �
     <td>생성</td>
     <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">전체 TF1 Hub 형식 생성 가이드 참조</a>) <br><div style="font-style: italic; font-size: 14px"> 참고: TF1 Hub 형식은 TF1에 맞춰져 있으며 TF2에서는 부분적으로만 지원됩니다. TF2 SavedModel의 생성을 고려해 보세요.</div>
 </td>
-    <td style="text-align: center">미지원</td>
+    <td style="text-align: center">지원되지 않음</td>
   </tr>
 </table>
 
