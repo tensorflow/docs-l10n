@@ -40,7 +40,7 @@ dependencies {
 
 Run → Run ‘app’ (実行 → 「アプリ」を実行)。アプリを実行すると、GPU を有効にするためのボタンが表示されます。量子化モデルから浮動小数点数モデルに変更し、GPU をクリックして GPU で実行します。
 
-![running android gpu demo and switch to gpu](images/android_gpu_demo.gif)
+![Android GPU デモを実行し、GPU に切り替えます](images/android_gpu_demo.gif)
 
 ### iOS（XCode を使用）
 
@@ -107,7 +107,7 @@ GPU デリゲートを使用するコードを有効にするには、`CameraExa
 
 最後に、必ず 64 ビットアーキテクチャでリリースのみのビルドを選択してください。`Project navigator -> tflite_camera_example -> PROJECT -> tflite_camera_example -> Build Settings`で、`Build Active Architecture Only> Release`を「Yes」に設定します。
 
-![setting up release options](images/iosrelease.png)
+![リリースオプションの設定](images/iosrelease.png)
 
 ## 独自のモデルで GPU デリゲートを試す
 
