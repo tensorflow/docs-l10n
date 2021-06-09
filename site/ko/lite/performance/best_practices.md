@@ -12,11 +12,11 @@ Depending on the task, you will need to make a tradeoff between model complexity
 
 모바일 기기에 최적화된 모델의 한 가지 예는 모바일 비전 애플리케이션에 최적화된 [MobileNet](https://arxiv.org/abs/1704.04861)입니다. [호스팅된 모델](../guide/hosted_models.md)에는 모바일 및 임베디드 기기에 특별히 최적화된 몇 가지 다른 모델이 나열되어 있습니다.
 
-You can retrain the listed models on your own dataset by using transfer learning. Check out our transfer learning tutorial for [image classification](/lite/tutorials/model_maker_image_classification) and [object detection](https://medium.com/tensorflow/training-and-serving-a-realtime-mobile-object-detector-in-30-minutes-with-cloud-tpus-b78971cf1193).
+전이 학습을 통해 자체 데이터세트에서 나열된 모델을 재훈련할 수 있습니다. [이미지 분류](/lite/tutorials/model_maker_image_classification) 및 [객체 감지](https://medium.com/tensorflow/training-and-serving-a-realtime-mobile-object-detector-in-30-minutes-with-cloud-tpus-b78971cf1193)에 대한 전이 학습 튜토리얼을 확인하세요.
 
 ## Profile your model
 
-Once you have selected a candidate model that is right for your task, it is a good practice to profile and benchmark your model. TensorFlow Lite [benchmarking tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark) has a built-in profiler that shows per operator profiling statistics. This can help in understanding performance bottlenecks and which operators dominate the computation time.
+작업에 적합한 후보 모델을 선택한 후에는 모델을 프로파일링하고 벤치마킹하는 것이 좋습니다. TensorFlow Lite [벤치마킹 도구](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)에는 연산자별 프로파일링 통계를 표시하는 내장 프로파일러가 있습니다. 이는 성능 병목 현상과 계산 시간을 지배하는 연산자를 이해하는 데 도움이 될 수 있습니다.
 
 You can also use [TensorFlow Lite tracing](measurement.md#trace_tensorflow_lite_internals_in_android) to profile the model in your Android application, using standard Android system tracing, and to visualize the operator invocations by time with GUI based profiling tools.
 
@@ -32,9 +32,9 @@ Check out our [model optimization docs](model_optimization.md) for details.
 
 ## 스레드 수 조정
 
-TensorFlow Lite supports multi-threaded kernels for many operators. You can increase the number of threads and speed up execution of operators. Increasing the number of threads will, however, make your model use more resources and power.
+TensorFlow Lite는 많은 연산자를 위한 다중 스레드 커널을 지원합니다. 스레드 수를 늘리고 연산자 실행 속도를 높일 수 있습니다. 그러나 스레드 수를 늘리면 모델이 더 많은 리소스와 성능을 사용하게 됩니다.
 
-For some applications, latency may be more important than energy efficiency. You can increase the number of threads by setting the number of interpreter [threads](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L346). Multi-threaded execution, however, comes at the cost of increased performance variability depending on what else is executed concurrently. This is particularly the case for mobile apps. For example, isolated tests may show 2x speed-up vs single-threaded, but, if another app is executing at the same time, it may result in worse performance than single-threaded.
+일부 애플리케이션의 경우 지연 시간이 에너지 효율성보다 더 중요할 수 있습니다. 인터프리터 [스레드](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L346) 수를 설정하여 스레드 수를 늘릴 수 있습니다. 그러나 다중 스레드 실행은 동시에 실행되는 다른 항목에 따라 성능 변동성이 증가합니다. 특히 모바일 앱의 경우가 해당합니다. 예를 들어 격리된 테스트는 단일 스레드에 비해 2배의 속도 향상을 보여줄 수 있지만 다른 앱이 동시에 실행되는 경우 단일 스레드보다 성능이 저하될 수 있습니다.
 
 ## 중복 사본 제거
 
@@ -46,7 +46,7 @@ Platform specific tools like [Android profiler](https://developer.android.com/st
 
 ## Evaluate whether your model benefits from using hardware accelerators available on the device
 
-TensorFlow Lite has added new ways to accelerate models with faster hardware like GPUs, DSPs, and neural accelerators. Typically, these accelerators are exposed through [delegate](delegates.md) submodules that take over parts of the interpreter execution. TensorFlow Lite can use delegates by:
+TensorFlow Lite는 GPU, DSP, 신경 가속기와 같은 더 빠른 하드웨어로 모델을 가속화하는 새로운 방법을 추가했습니다. 일반적으로 이러한 가속기는 인터프리터 실행의 일부를 차지하는 [대리자](delegates.md) 서브 모듈을 통해 노출됩니다. TensorFlow Lite는 다음과 같은 방법으로 대리자를 사용할 수 있습니다.
 
 - Android의 [Neural Networks API](https://developer.android.com/ndk/guides/neuralnetworks/) 사용하기. 하드웨어 가속기 백엔드를 활용하여 모델의 속도와 효율성을 개선할 수 있습니다. Neural Networks API를 활성화하려면 [NNAPI 대리자](nnapi.md) 가이드를 확인하세요.
 - GPU 대리자는 각각 OpenGL/OpenCL 및 Metal을 사용하여 Android 및 iOS에서 사용할 수 있습니다. 사용해 보려면 [GPU 대리자 튜토리얼](gpu.md) 및 [설명서](gpu_advanced.md)를 참조하세요.
