@@ -26,7 +26,7 @@ git clone https://github.com/tensorflow/tensorflow
 
 #### 2단계: 야간 GPU AAR을 사용하도록 `app/build.gradle`을 편집합니다.
 
-Add the `tensorflow-lite-gpu` package alongside the existing `tensorflow-lite` package in the existing `dependencies` block.
+기존 `dependencies` 블록의 기존 `tensorflow-lite` 패키지와 함께 `tensorflow-lite-gpu` 패키지를 추가합니다.
 
 ```
 dependencies {
@@ -38,7 +38,7 @@ dependencies {
 
 #### 3단계: 빌드하고 실행합니다.
 
-Run → Run ‘app’. When you run the application you will see a button for enabling the GPU. Change from quantized to a float model and then click GPU to run on the GPU.
+실행 → '앱'을 실행합니다. 애플리케이션을 실행하면 GPU 활성화 버튼이 표시됩니다. 양자화에서 부동 모델로 변경한 다음 GPU를 클릭하여 GPU에서 실행합니다.
 
 ![running android gpu demo and switch to gpu](images/android_gpu_demo.gif)
 
@@ -85,7 +85,7 @@ Objective-C(2.4.0 릴리스부터) 또는 C API를 사용하려는 경우 `Tenso
 
 #### 3단계: GPU 대리자를 활성화합니다.
 
-To enable the code that will use the GPU delegate, you will need to change `TFLITE_USE_GPU_DELEGATE` from 0 to 1 in `CameraExampleViewController.h`.
+GPU 대리자를 사용할 코드를 활성화하려면 `CameraExampleViewController.h`에서 `TFLITE_USE_GPU_DELEGATE`를 0에서 1로 변경해야 합니다.
 
 ```c
 #define TFLITE_USE_GPU_DELEGATE 1
@@ -97,7 +97,7 @@ To enable the code that will use the GPU delegate, you will need to change `TFLI
 
 #### 5단계: 모드를 릴리스합니다.
 
-While in Step 4 you ran in debug mode, to get better performance, you should change to a release build with the appropriate optimal Metal settings. In particular, To edit these settings go to the `Product > Scheme > Edit Scheme...`. Select `Run`. On the `Info` tab, change `Build Configuration`, from `Debug` to `Release`, uncheck `Debug executable`.
+4단계에서 디버그 모드로 실행하는 동안 성능을 향상하려면 적절한 최적의 Metal 설정을 사용하여 릴리스 빌드로 변경해야 합니다. 특히 해당 설정을 편집하려면 `Product> Scheme> Edit Scheme...`으로 이동합니다. `Run`을 선택합니다. `Info` 탭에서 `Build Configuration`을 `Debug`에서 `Release`로 변경하고 `Debug executable`을 선택 취소합니다.
 
 ![setting up release](images/iosdebug.png)
 
@@ -129,8 +129,8 @@ While in Step 4 you ran in debug mode, to get better performance, you should cha
 <pre class="prettyprint lang-kotlin">    import org.tensorflow.lite.Interpreter
     import org.tensorflow.lite.gpu.CompatibilityList
     import org.tensorflow.lite.gpu.GpuDelegate
-&lt;/div&gt;
-&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_32&lt;/code&gt;</pre>
+&amp;amp;lt;/div&amp;amp;gt;
+&amp;amp;lt;pre data-md-type=&amp;quot;block_code&amp;quot; data-md-language=&amp;quot;&amp;quot;&amp;amp;gt;&amp;amp;lt;code&amp;amp;gt;GL_CODE_32&amp;amp;lt;/code&amp;amp;gt;</pre>
 <div data-md-type="block_html">
 </div>
 </section></devsite-selector>
@@ -144,8 +144,8 @@ While in Step 4 you ran in debug mode, to get better performance, you should cha
       <h3>Swift</h3>
       <p></p>
 <pre class="prettyprint lang-swift">    import TensorFlowLite
-&lt;/div&gt;
-&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_33&lt;/code&gt;</pre>
+&amp;amp;lt;/div&amp;amp;gt;
+&amp;amp;lt;pre data-md-type=&amp;quot;block_code&amp;quot; data-md-language=&amp;quot;&amp;quot;&amp;amp;gt;&amp;amp;lt;code&amp;amp;gt;GL_CODE_33&amp;amp;lt;/code&amp;amp;gt;</pre>
 <div data-md-type="block_html">
 </div>
 </section></devsite-selector>
