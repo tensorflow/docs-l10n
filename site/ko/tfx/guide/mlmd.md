@@ -307,7 +307,7 @@ request.artifact_type.CopyFrom(model_type)
 stub.PutArtifactType(request)
 ```
 
-## Resources
+## 리소스
 
 MLMD 라이브러리에는 ML 파이프라인과 함께 쉽게 사용할 수 있는 고급 API가 있습니다. 자세한 내용은 [MLMD API 문서](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd)를 참조하세요.
 
