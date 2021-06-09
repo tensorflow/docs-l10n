@@ -1,6 +1,6 @@
 # よくある質問
 
-質問に対する回答がここで見つからない場合は、トピックに関する詳細なドキュメントを確認するか、[GitHub issue](https://github.com/tensorflow/tensorflow/issues) を作成してください。
+質問に対する回答がここで見つからない場合は、トピックに関する詳細なドキュメントを確認するか、[GitHub 課題](https://github.com/tensorflow/tensorflow/issues)を提出してください。
 
 ## モデル変換
 
@@ -17,17 +17,17 @@ TensorFlow Lite コンバータは、次の形式をサポートしています�
 
 #### モデルを変換できない場合があるのはなぜですか？
 
-TensorFlow Lite の演算の数は TensorFlow の演算の数よりも少ないため、一部の推論モデルは変換できない場合があります。実装されていない演算については、[演算子がない場合](faq.md#why-are-some-operations-not-implemented-in-tensorflow-lite)に関する質問をご覧ください。サポートされていない演算子には、埋め込みと LSTM/RNN が含まれます。LSTM/RNN を備えたモデルの場合、試験的な API である [OpHint](https://www.tensorflow.org/api_docs/python/tf/lite/OpHint) を試して変換してみることもできます。現在、制御フロー演算 (スイッチ、マージなど) を備えたモデルは変換できませんが、Tensorflow Lite では制御フローのサポートの追加に取り組んでいます。[GitHub issues](https://github.com/tensorflow/tensorflow/issues/28485) をご覧ください。
+TensorFlow Lite の演算の数は TensorFlow の演算の数よりも少ないため、一部の推論モデルは変換できない場合があります。実装されていない演算については、[演算子のサポートがない場合](faq.md#why-are-some-operations-not-implemented-in-tensorflow-lite)に関する質問をご覧ください。サポートされていない演算子には、埋め込みと LSTM/RNN が含まれます。LSTM/RNN を備えたモデルの場合、試験的な API である [OpHint](https://www.tensorflow.org/api_docs/python/tf/lite/OpHint) を試して変換してみることもできます。現在、制御フロー演算 (スイッチ、マージなど) を備えたモデルは変換できませんが、Tensorflow Lite では制御フローのサポートの追加に取り組んでいます。[GitHub 課題](https://github.com/tensorflow/tensorflow/issues/28485)をご覧ください。
 
-サポートされていない演算や制御フロー演算に関連しない変換の問題については、[GitHub issues](https://github.com/tensorflow/tensorflow/issues?q=label%3Acomp%3Alite+) を検索するか、[新しい Issues](https://github.com/tensorflow/tensorflow/issues) を作成してください。
+サポートされていない演算や制御フロー演算に関連しない変換の問題については、[GitHub 課題](https://github.com/tensorflow/tensorflow/issues?q=label%3Acomp%3Alite+)を検索するか、[新しい課題](https://github.com/tensorflow/tensorflow/issues)を提出してください。
 
 #### GraphDef プロトコルバッファーの入力/出力を決定するにはどうすればよいですか？
 
-`.pb` ファイルからグラフを検査する最も簡単な方法は、機械学習モデルのオープンソースビューアである [Netron](https://github.com/lutzroeder/netron) を使用することです。
+`.pb`ファイルからグラフを検査する最も簡単な方法は、機械学習モデルのオープンソースビューアである [Netron](https://github.com/lutzroeder/netron) を使用することです。
 
 Netron がグラフを開けられない場合は、[summarize_graph](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/tools/graph_transforms/README.md#inspecting-graphs) ツールを試してみてください。
 
-summary_graph ツールでエラーが発生した場合は、[TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard) を使用して GraphDef を視覚化し、グラフで入力と出力を確認できます。`.pb` ファイルを視覚化するには、次のような[`import_pb_to_tensorboard.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/tools/import_pb_to_tensorboard.py)スクリプトを使用します。
+summary_graph ツールでエラーが発生した場合は、[TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard) を使用して GraphDef を視覚化し、グラフで入力と出力を確認できます。`.pb`ファイルを視覚化するには、次のような[`import_pb_to_tensorboard.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/tools/import_pb_to_tensorboard.py)スクリプトを使用します。
 
 ```shell
 python import_pb_to_tensorboard.py --model_dir <model path> --log_dir <log dir path>
@@ -48,7 +48,7 @@ python -m tensorflow.lite.tools.visualize model.tflite visualized_model.html
 それ以外の場合は、Bazel でこのスクリプトを実行できます
 
 - [TensorFlow レポジトリをクローンする](https://www.tensorflow.org/install/source)
-- `visualize.py` スクリプトを Bazel で実行する
+- `visualize.py`スクリプトを Bazel で実行する
 
 ```shell
 bazel run //tensorflow/lite/tools:visualize model.tflite visualized_model.html
@@ -60,9 +60,9 @@ bazel run //tensorflow/lite/tools:visualize model.tflite visualized_model.html
 
 TensorFlow Lite を軽量に保つために、コンバータでは特定の演算のみが使用されています。TensorFlow Lite で現在サポートされている演算のリストは[互換性ガイド](ops_compatibility.md)で提供されています。
 
-特定の演算 (または同等の演算) がリストに表示されていない場合は、その演算が優先されていない可能性があります。チームは、GitHub [Issue #21526](https://github.com/tensorflow/tensorflow/issues/21526) の新しい演算のリクエストを追跡します。リクエストがまだ対応されていない場合は、コメントを書いてください。
+特定の演算 (または同等の演算) がリストに表示されていない場合は、その演算が優先されていない可能性があります。チームは、GitHub [課題 #21526](https://github.com/tensorflow/tensorflow/issues/21526) の新しい演算のリクエストを追跡します。リクエストがまだ対応されていない場合は、コメントを書いてください。
 
-その間、[カスタム演算子](ops_custom.md)を実装するか、サポートされている演算子のみを含む別のモデルを使用してみてください。バイナリサイズが制約にならない場合は、TensorFlow Lite の [select TensorFlow ops](ops_select.md) を使用してみてください。
+その間、[カスタム演算子](ops_custom.md)を実装するか、サポートされている演算子のみを含む別のモデルを使用してみてください。バイナリサイズが制約にならない場合は、TensorFlow Lite の [Select TensorFlow 演算子](ops_select.md)を使用してみてください。
 
 #### TensorFlow Lite モデルが元の TensorFlow モデルと同じように動作することをどのようにテストしますか？
 
@@ -82,9 +82,9 @@ TensorFlow Lite に変換する際に[トレーニング後の量子化](../perf
 
 TensorFlow Lite のパフォーマンスを最適化する高レベルのプロセスは、次のようになります。
 
-- *モデルがタスクに適していることを確認します。*画像の分類については、[ホストモデルのリスト](hosted_models.md)を参照してください。
-- *スレッド数を微調整します。*多くの TensorFlow Lite 演算子はマルチスレッドカーネルをサポートしています。 これを行うには、[C++ API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L345) で`SetNumThreads()`を使用します。ただし、スレッドを増やすと、環境によってパフォーマンスが変動します。
-- *ハードウェアアクセラレータを使用します。* TensorFlow Lite は、デリゲートを使用した特定のハードウェアのモデルアクセラレーションをサポートします。サポートされているアクセラレータと、デバイス上のモデルでそれらを使用する方法については、[デリゲート](../performance/delegates.md)ガイドを参照してください。
+- *モデルがタスクに適していることを確認します。*画像の分類については、[ホステッドモデルのリスト](hosted_models.md)を参照してください。
+- *スレッド数を微調整します。*多くの TensorFlow Lite 演算子はマルチスレッドカーネルをサポートしています。これを行うには、[C++ API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L345) で`SetNumThreads()`を使用します。ただし、スレッドを増やすと、環境によってパフォーマンスが変動します。
+- *ハードウェアアクセラレータを使用します。*TensorFlow Lite は、デリゲートを使用した特定のハードウェアのモデルアクセラレーションをサポートします。サポートされているアクセラレータと、デバイス上のモデルでそれらを使用する方法については、[デリゲート](../performance/delegates.md)ガイドを参照してください。
 - *(高度) プロファイルモデル。*Tensorflow Lite [ベンチマークツール](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)には、演算子ごとの統計を表示できる組み込みのプロファイラがあります。特定のプラットフォームで演算子のパフォーマンスを最適化する方法をご存じの場合は、[カスタム演算子](ops_custom.md)を実装できます。
 
 パフォーマンス最適化の詳細については、[ベストプラクティス](../performance/best_practices.md)をご覧ください。
