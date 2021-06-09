@@ -39,14 +39,14 @@ tflite_quant_model = converter.convert()
 
 모든 모델 수학이 정수 양자화되었는지 확인하여 추가 지연 시간 개선, 최대 메모리 사용량 감소, 정수 전용 하드웨어 기기 또는 가속기와의 호환성을 얻을 수 있습니다.
 
-For full integer quantization, you need to calibrate or estimate the range, i.e, (min, max) of all floating-point tensors in the model. Unlike constant tensors such as weights and biases, variable tensors such as model input, activations (outputs of intermediate layers) and model output cannot be calibrated unless we run a few inference cycles. As a result, the converter requires a representative dataset to calibrate them. This dataset can be a small subset (around ~100-500 samples) of the training or validation data. Refer to the `representative_dataset()` function below.
+완전한 정수 양자화의 경우, 모델에 있는 모든 부동 소수점 텐서의 범위, 즉 (최소, 최대)를 보정하거나 추정해야 합니다. 가중치 및 편향과 같은 상수 텐서와 달리 모델 입력, 활성화 (중간 계층의 출력) 및 모델 출력과 같은 가변 텐서는 몇 가지 추론 주기를 실행하지 않는 한 보정할 수 없습니다. 결과적으로, 변환기는 이를 보정하기 위해 대표적 데이터세트가 필요합니다. 이 데이터세트는 훈련 또는 검증 데이터의 작은 하위 집합(약 100 ~ 500개 샘플)일 수 있습니다. 아래의 `representative_dataset()` 함수를 참조하세요.
 
 <pre>def representative_dataset():
   for data in tf.data.Dataset.from_tensor_slices((images)).batch(1).take(100):
     yield [tf.dtypes.cast(data, tf.float32)]
 </pre>
 
-For testing purposes, you can use a dummy dataset as follows:
+테스트 목적으로 다음과 같이 더미 데이터세트를 사용할 수 있습니다.
 
 <pre>def representative_dataset():
     for _ in range(100):
@@ -109,7 +109,7 @@ float16 양자화의 단점은 다음과 같습니다.
 
 ### 정수 전용: 8bit 가중치를 사용한 16bit 활성화(실험적)
 
-This is an experimental quantization scheme. It is similar to the "integer only" scheme, but activations are quantized based on their range to 16-bits, weights are quantized in 8-bit integer and bias is quantized into 64-bit integer. This is referred to as 16x8 quantization further.
+이것은 실험적인 양자화 체계입니다. 이는 '정수 전용' 방식과 유사하지만 활성화는 16bit 범위에 따라 양자화되고 가중치는 8bit 정수로 양자화되고 바이어스는 64bit 정수로 양자화됩니다. 이를 16x8 양자화라고 합니다.
 
 이 양자화의 주요 장점은 정확성을 크게 향상시키면서도 모델 크기는 아주 약간만 늘릴 수 있다는 것입니다.
 
@@ -121,7 +121,7 @@ converter.target_spec.supported_ops = [tf.lite.OpsSet.EXPERIMENTAL_TFLITE_BUILTI
 tflite_quant_model = converter.convert()
 </pre>
 
-If 16x8 quantization is not supported for some operators in the model, then the model still can be quantized, but unsupported operators kept in float. The following option should be added to the target_spec to allow this.
+모델의 일부 연산자에 대해 16x8 양자화가 지원되지 않는 경우 모델은 여전히 양자화될 수 있지만 지원되지 않는 연산자는 부동 상태로 유지됩니다. 이를 허용하려면 다음 옵션을 target_spec에 추가해야 합니다.
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -132,7 +132,7 @@ converter.target_spec.supported_ops = [tf.lite.OpsSet.EXPERIMENTAL_TFLITE_BUILTI
 tflite_quant_model = converter.convert()
 </pre>
 
-Examples of the use cases where accuracy improvements provided by this quantization scheme include: * super-resolution, * audio signal processing such as noise cancelling and beamforming, * image de-noising, * HDR reconstruction from a single image.
+이 양자화 체계에 의해 정확도가 향상되는 사용 사례의 예는 다음과 같습니다: * 초고해상도, * 노이즈 제거 및 빔포밍과 같은 오디오 신호 처리, * 이미지 노이즈 제거, * 단일 이미지에서 HDR 재구성.
 
 이 양자화의 단점은 다음과 같습니다.
 
@@ -141,7 +141,7 @@ Examples of the use cases where accuracy improvements provided by this quantizat
 
 참고: 이것은 실험적인 특성입니다.
 
-A tutorial for this quantization mode can be found [here](post_training_integer_quant_16x8.ipynb).
+이 양자화 모드에 대한 튜토리얼은 [여기](post_training_integer_quant_16x8.ipynb)에서 찾을 수 있습니다.
 
 ### 모델 정확성
 
