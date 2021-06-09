@@ -1,10 +1,10 @@
-# TensorFlow Lite 操作(operator)的版本
+# TensorFlow Lite 算子版本
 
 本文档描述了TensorFlow Lite的操作(operator)版本架构。 操作(operator)的版本使开发人员能够将新功能和参数添加到现有操作中。 此外，它保证以下内容：
 
-- 向后兼容性：新版本的 TensorFlow Lite 实现方式可以处理旧的模型文件。
+- 向后兼容性：新 TensorFlow Lite 实现应该可以处理旧模型文件。
 - 向前兼容性：只要没有使用新功能，旧版本的 TensorFlow Lite 实现方式可以处理由新版 TOCO 生成的新版本的模型文件。
-- 向前兼容性检测：如果旧 TensorFlow Lite 实现读取包含不受支持的新版运算的新模型，则应报告错误。
+- 向前兼容性检测：如果旧 TensorFlow Lite 实现读取包含不受支持的新版算子的新模型，则应报告错误。
 
 ## 示例：向卷积添加膨胀
 
@@ -12,14 +12,14 @@
 
 了解本文档内容并不需要了解卷积核膨胀的知识。需要注意的是：
 
-- 将添加2个新的整数参数：'dilation_width_factor' 和 'dilation_height_factor'。
+- 将添加 2 个新的整数参数：`dilation_width_factor` 和 `dilation_height_factor`。
 - 不支持膨胀的旧卷积内核相当于将膨胀系数设置为 1。
 
-### 更改 FlatBuffer 架构(Schema)
+### 更改 FlatBuffer 架构
 
 要将新参数添加到操作(operator)中，请更改`lite/schema/schema.fbs`中的选项表 。
 
-例如，卷积的选项表如下所示：
+For example, the options table of depthwise convolution looks like this:
 
 ```
 table DepthwiseConv2DOptions {
@@ -31,10 +31,10 @@ table DepthwiseConv2DOptions {
 }
 ```
 
-在添加新参数时：
+添加新参数时，请注意以下两点：
 
 - 添加注释，指明哪个版本支持哪些参数。
-- 当新的实现获取新添加的参数的默认值时，它应该与旧实现完全相同。
+- 当新实现获取新添加参数的默认值时，它的运行应该与旧实现完全相同。
 
 添加新参数后，参数表如下所示：
 
@@ -54,7 +54,7 @@ table Conv2DOptions {
 
 应为新架构重新生成 `lite/schema/schema_generated.h` 文件。
 
-### 更改C中的结构体和内核实现
+### 更改 C 结构体和内核实现
 
 在TensorFlow Lite中，内核实现与FlatBuffer定义是分离发。 内核从`lite/builtin_op_data.h`中定义的C的结构体中读取参数。
 
@@ -86,9 +86,9 @@ typedef struct {
 } TfLiteDepthwiseConvParams;
 ```
 
-另外，请更改内核实现从C结构体中读取新添加的参数。 细节在此不再赘述。
+另外，请更改内核实现以从 C 结构体中读取新添加的参数。细节在此不再赘述。
 
-### 更改 FlatBuffer 代码以获取新参数
+### 更改 FlatBuffer 读取代码
 
 负责读取 FlatBuffer 并生成 C 结构体的逻辑是由 `lite/model.cc` 实现的。
 
@@ -198,19 +198,19 @@ case BuiltinOperator_DEPTHWISE_CONV_2D:
   return 1;
 ```
 
-### 委托实现
+### 更新算子版本映射
 
-TensorFlow Lite 提供了一个委托 API，可以将操作委派给硬件后端。在 Delegate 的 Prepare 函数中，检查该版本是否支持委派代码中的每个节点。
+最后一步是将新版本信息添加到算子版本映射中。这一步是必要步骤，因为我们需要基于此版本映射生成模型要求的最低运行时版本。
 
 为此，您需要在 `lite/tools/versioning/runtime_version.cc` 中添加一个新的映射条目。
 
 在本例中，您需要将以下条目添加到 `op_version_map` 中：
 
 ```
-{{BuiltinOperator_DEPTHWISE_CONV_2D, 2}, kPendingReleaseOpVersion}
+{{BuiltinOperator_DEPTHWISE_CONV_2D, 2}, %CURRENT_RUNTIME_VERSION%}
 ```
 
-（`kPendingReleaseOpVersion` 将被替换为下一个稳定版中的相应发布版本。）
+where `%CURRENT_RUNTIME_VERSION%` corresponds to the current runtime version defined in [tensorflow/core/public/version.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h).
 
 ### 委托实现
 
