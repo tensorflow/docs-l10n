@@ -10,21 +10,21 @@ GPU 추론의 또 다른 이점은 전력 효율성입니다. GPU는 매우 효�
 
 ## Demo app tutorials
 
-The easiest way to try out the GPU delegate is to follow the below tutorials, which go through building our classification demo applications with GPU support. The GPU code is only binary for now; it will be open-sourced soon. Once you understand how to get our demos working, you can try this out on your own custom models.
+GPU 대리자를 시험해보는 가장 쉬운 방법은 GPU 지원을 통해 분류 데모 애플리케이션을 빌드하는 아래 튜토리얼을 따르는 것입니다. GPU 코드는 현재로서는 바이너리일 뿐이며 곧 오픈 소스가 될 것입니다. 데모를 동작시키는 방법을 이해한 후에는 자체 사용자 정의 모델에서 이를 시도해 볼 수 있습니다.
 
-### Android (with Android Studio)
+### Android(Android Studio 포함)
 
-For a step-by-step tutorial, watch the [GPU Delegate for Android](https://youtu.be/Xkhgre8r5G0) video.
+단계별 가이드는 [Android용 GPU 대리자](https://youtu.be/Xkhgre8r5G0) 동영상을 시청하세요.
 
-Note: This requires OpenCL or OpenGL ES (3.1 or higher).
+참고: OpenCL 또는 OpenGL ES(3.1 이상)가 필요합니다.
 
-#### Step 1. Clone the TensorFlow source code and open it in Android Studio
+#### 1단계: TensorFlow 소스 코드를 복제하고 Android Studio에서 엽니다.
 
 ```sh
 git clone https://github.com/tensorflow/tensorflow
 ```
 
-#### Step 2. Edit `app/build.gradle` to use the nightly GPU AAR
+#### 2단계: 야간 GPU AAR을 사용하도록 `app/build.gradle`을 편집합니다.
 
 Add the `tensorflow-lite-gpu` package alongside the existing `tensorflow-lite` package in the existing `dependencies` block.
 
@@ -36,23 +36,23 @@ dependencies {
 }
 ```
 
-#### Step 3. Build and run
+#### 3단계: 빌드하고 실행합니다.
 
 Run → Run ‘app’. When you run the application you will see a button for enabling the GPU. Change from quantized to a float model and then click GPU to run on the GPU.
 
 ![running android gpu demo and switch to gpu](images/android_gpu_demo.gif)
 
-### iOS (with XCode)
+### iOS(XCode 포함)
 
-For a step-by-step tutorial, watch the [GPU Delegate for iOS](https://youtu.be/a5H4Zwjp49c) video.
+단계별 가이드는 [GPU Delegate for iOS](https://youtu.be/a5H4Zwjp49c) 동영상을 시청하세요.
 
-Note: This requires XCode v10.1 or later.
+참고: XCode v10.1 이상이 필요합니다.
 
-#### Step 1. Get the demo source code and make sure it compiles.
+#### 1단계: 데모 소스 코드를 얻고 컴파일되었는지 확인합니다.
 
-Follow our iOS Demo App [tutorial](https://www.tensorflow.org/lite/demo_ios). This will get you to a point where the unmodified iOS camera demo is working on your phone.
+iOS 데모 앱 [튜토리얼](https://www.tensorflow.org/lite/demo_ios)을 따릅니다. 이를 통해 수정되지 않은 iOS 카메라 데모가 휴대폰에서 동작하는 지점으로 이동합니다.
 
-#### Step 2. Modify the Podfile to use the TensorFlow Lite GPU CocoaPod
+#### 2단계: TensorFlow Lite GPU CocoaPod를 사용하도록 Podfile을 수정합니다.
 
 2.3.0 릴리스부터 바이너리 크기를 줄이기 위해 기본적으로 GPU 대리자가 포드에서 제외됩니다. 하위 사양을 지정하여 이를 포함할 수 있습니다. `TensorFlowLiteSwift` 포드의 경우:
 
@@ -83,7 +83,7 @@ Objective-C(2.4.0 릴리스부터) 또는 C API를 사용하려는 경우 `Tenso
   </devsite-expandable>
 </div>
 
-#### Step 3. Enable the GPU delegate
+#### 3단계: GPU 대리자를 활성화합니다.
 
 To enable the code that will use the GPU delegate, you will need to change `TFLITE_USE_GPU_DELEGATE` from 0 to 1 in `CameraExampleViewController.h`.
 
@@ -91,25 +91,25 @@ To enable the code that will use the GPU delegate, you will need to change `TFLI
 #define TFLITE_USE_GPU_DELEGATE 1
 ```
 
-#### Step 4. Build and run the demo app
+#### 4단계: 데모 앱을 빌드하고 실행합니다.
 
-After following the previous step, you should be able to run the app.
+이전 단계를 수행한 후 앱을 실행할 수 있습니다.
 
-#### Step 5. Release mode
+#### 5단계: 모드를 릴리스합니다.
 
 While in Step 4 you ran in debug mode, to get better performance, you should change to a release build with the appropriate optimal Metal settings. In particular, To edit these settings go to the `Product > Scheme > Edit Scheme...`. Select `Run`. On the `Info` tab, change `Build Configuration`, from `Debug` to `Release`, uncheck `Debug executable`.
 
 ![setting up release](images/iosdebug.png)
 
-Then click the `Options` tab and change `GPU Frame Capture` to `Disabled` and `Metal API Validation` to `Disabled`.
+그런 다음 `Options` 탭을 클릭하고 `GPU Frame Capture`를 `Disabled`로 변경하고 `Metal API Validation`을 `Disabled`로 바꿉니다.
 
 ![setting up metal options](images/iosmetal.png)
 
-Lastly make sure to select Release-only builds on 64-bit architecture. Under `Project navigator -> tflite_camera_example -> PROJECT -> tflite_camera_example -> Build Settings` set `Build Active Architecture Only > Release` to Yes.
+마지막으로 64bit 아키텍처에서 릴리스 전용 빌드를 선택해야 합니다. `Project navigator -> tflite_camera_example -> PROJECT -> tflite_camera_example -> Build Settings`에서 `Build Active Architecture Only > Release`를 Yes로 설정합니다.
 
 ![setting up release options](images/iosrelease.png)
 
-## Trying the GPU delegate on your own model
+## 자체 모델에서 GPU 대리자 시도하기
 
 ### Android
 
@@ -119,7 +119,7 @@ Lastly make sure to select Release-only builds on 64-bit architecture. Under `Pr
 
 #### TensorFlow Lite 인터프리터
 
-Look at the demo to see how to add the delegate. In your application, add the AAR as above, import `org.tensorflow.lite.gpu.GpuDelegate` module, and use the`addDelegate` function to register the GPU delegate to the interpreter:
+대리자를 추가하는 방법을 보려면 데모를 보세요. 애플리케이션에서 위와 같이 AAR을 추가하고 `org.tensorflow.lite.gpu.GpuDelegate` 모듈을 가져온 다음 `addDelegate` 함수를 사용하여 GPU 대리자를 인터프리터에 등록합니다.
 
 <div>
   <devsite-selector>
@@ -150,8 +150,8 @@ Look at the demo to see how to add the delegate. In your application, add the AA
 </div>
 </section></devsite-selector>
 </div>
-<h2 data-md-type="header" data-md-header-level="2">Supported Models and Ops</h2>
-<p data-md-type="paragraph">With the release of the GPU delegate, we included a handful of models that can be run on the backend:</p>
+<h2 data-md-type="header" data-md-header-level="2">지원되는 모델 및 연산</h2>
+<p data-md-type="paragraph">릴리스된 GPU 대리자에 백엔드에서 실행할 수 있는 몇 가지 모델이 포함되었습니다.</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">
 <a href="https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html" data-md-type="link">MobileNet v1 (224x224) 이미지 분류</a> <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobilenet_v1_1.0_224.tflite" data-md-type="link">[다운로드]</a> <br><i data-md-type="raw_html">(모바일 및 임베디드 기반 비전 애플리케이션을 위해 설계된 이미지 분류 모델)</i>
@@ -164,15 +164,15 @@ Look at the demo to see how to add the delegate. In your application, add the AA
 <li data-md-type="list_item" data-md-list-type="unordered"> <a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet" data-md-type="link">포즈 추정을 위한 PoseNet</a> <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite" data-md-type="link">[다운로드]</a> <br><i data-md-type="raw_html">(이미지 또는 비디오에서 사람의 포즈를 추정하는 비전 모델)</i>
 </li>
 </ul>
-<p data-md-type="paragraph">To see a full list of supported ops, please see the <a href="gpu_advanced.md" data-md-type="link">advanced documentation</a>.</p>
+<p data-md-type="paragraph">지원되는 연산의 전체 목록을 보려면 <a href="gpu_advanced.md" data-md-type="link">고급 설명서</a>를 참조하세요.</p>
 <h2 data-md-type="header" data-md-header-level="2">Non-supported models and ops</h2>
-<p data-md-type="paragraph">If some of the ops are not supported by the GPU delegate, the framework will only run a part of the graph on the GPU and the remaining part on the CPU. Due to the high cost of CPU/GPU synchronization, a split execution mode like this will often result in slower performance than when the whole network is run on the CPU alone. In this case, the user will get a warning like:</p>
+<p data-md-type="paragraph">일부 작업이 GPU 대리자에서 지원되지 않는 경우 프레임워크는 GPU에서 그래프의 일부만 실행하고 CPU에서 나머지 부분을 실행합니다. CPU/GPU 동기화 비용이 높기 때문에 이와 같은 분할 실행 모드는 전체 네트워크가 CPU에서만 실행될 때보다 성능이 저하되는 경우가 많습니다. 이 경우 사용자는 다음과 같은 경고를 받게 됩니다.</p>
 <pre data-md-type="block_code" data-md-language="none"><code class="language-none">WARNING: op code #42 cannot be handled by this delegate.
 </code></pre>
-<p data-md-type="paragraph">We did not provide a callback for this failure, as this is not a true run-time failure, but something that the developer can observe while trying to get the network to run on the delegate.</p>
-<h2 data-md-type="header" data-md-header-level="2">Tips for optimization</h2>
+<p data-md-type="paragraph">실패에 대한 콜백이 제공되지 않았습니다. 이 실패는 진정한 런타임 실패가 아니기 때문에 개발자가 대리자에서 네트워크를 실행하는 동안 관찰할 수 있습니다.</p>
+<h2 data-md-type="header" data-md-header-level="2">최적화를 위한 팁</h2>
 <p data-md-type="paragraph">CPU에서 사소한 일부 연산은 GPU에서는 높은 비용이 발생할 수 있습니다. 이러한 연산의 한 클래스는 <code data-md-type="codespan">BATCH_TO_SPACE</code>, <code data-md-type="codespan">SPACE_TO_BATCH</code>, <code data-md-type="codespan">SPACE_TO_DEPTH</code> 등 다양한 형태의 reshape 연산입니다. 네트워크 설계자의 논리적 사고만을 위해 연산을 네트워크에 삽입한 경우, 성능을 고려해서 해당 연산을 제거하는 것이 좋습니다.</p>
 <p data-md-type="paragraph">GPU에서 텐서 데이터는 4채널로 분할됩니다. 따라서 형상 <code data-md-type="codespan">[B, H, W, 5]</code> 텐서에 대한 계산은 형상 <code data-md-type="codespan">[B, H, W, 8]</code> 텐서와 거의 동일하게 수행되지만 <code data-md-type="codespan">[B, H, W, 4]</code>에 비해서는 성능이 훨씬 나쁩니다.</p>
 <p data-md-type="paragraph">그런 의미에서 카메라 하드웨어가 RGBA의 이미지 프레임을 지원하는 경우 메모리 사본(3채널 RGB에서 4채널 RGBX로)을 피할 수 있으므로 해당 4채널 입력을 훨씬 빠르게 공급할 수 있습니다.</p>
-<p data-md-type="paragraph">For best performance, do not hesitate to retrain your classifier with a mobile-optimized network architecture. That is a significant part of optimization for on-device inference.</p>
+<p data-md-type="paragraph">최상의 성능을 위해 모바일에 최적화된 네트워크 아키텍처로 분류자를 다시 훈련하는 것을 주저하지 마세요. 이는 온디바이스 추론을 위한 최적화에 있어 중요한 부분입니다.</p>
 </div>
