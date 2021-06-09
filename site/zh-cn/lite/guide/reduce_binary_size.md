@@ -2,7 +2,7 @@
 
 ## 概述
 
-为设备端机器学习 (ODML) 应用部署模型时，必须注意移动设备上的内存有限。模型二进制文件的大小与模型中使用的算子数量密切相关。通过选择性构建，TensorFlow Lite 让您可以缩减模型二进制文件的大小。选择性构建会跳过在模型集中不使用的算子，从而产生一个只包含让模型在移动设备上运行所必需的运行时和算子内核的紧凑库。
+为设备端机器学习 (ODML) 应用部署模型时，必须注意移动设备上的内存有限。模型二进制文件的大小与模型中使用的算子数量密切相关。TensorFlow Lite 使您可以通过选择性构建来减小模型二进制文件的大小。选择性构建会跳过在您的模型集中用不到的算子，从而生成只包含供模型在移动设备上运行所必需的运行时和算子内核的紧凑库。
 
 选择性构建适用于以下三个运算库。
 
@@ -65,7 +65,7 @@
 
 ### 为 Android 项目构建 AAR 文件
 
-通过按如下方式提供模型文件路径，您可以构建自定义 TensorFlow Lite AAR。
+随后，您可以按如下方式提供模型文件路径，构建自定义 TensorFlow Lite AAR。
 
 ```sh
 sh tensorflow/lite/tools/build_aar.sh \
@@ -73,11 +73,11 @@ sh tensorflow/lite/tools/build_aar.sh \
   --target_archs=x86,x86_64,arm64-v8a,armeabi-v7a
 ```
 
-上面的命令将为 TensorFlow Lite 的内置和自定义算子生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite.aar`；如果您的模型包含 Select TensorFlow 算子，您还可以选择生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite-select-tf-ops.aar`。请注意，这会构建具有多个不同架构的“胖”AAR 文件；如果您不需要所有架构，请使用适用于您的部署环境的子集。
+上面的命令将为 TensorFlow Lite 的内置算子和自定义算子生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite.aar`；如果您的模型包含 Select TensorFlow 算子，您还可以选择生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite-select-tf-ops.aar`。请注意，这会构建具有多个不同架构的“肥胖”AAR 文件；如果您不需要所有架构，请使用适用于您的部署环境的子集。
 
-### 高级用法：使用自定义算子构建
+### 高级用法：使用自定义算子进行构建
 
-如果您已经使用自定义算子开发了 Tensorflow Lite 模型，则可以通过将以下标记添加到构建命令来构建这些模型：
+如果您已经使用自定义算子开发了 TensorFlow Lite 模型，则可以通过将以下标记添加到构建命令来构建这些模型：
 
 ```sh
 sh tensorflow/lite/tools/build_aar.sh \
@@ -91,9 +91,9 @@ sh tensorflow/lite/tools/build_aar.sh \
 
 ## 使用 Docker 选择性构建 TensorFlow Lite
 
-本部分假设您已在本地计算机上安装 [Docker](https://docs.docker.com/get-docker/)，并且已从[此处](https://www.tensorflow.org/lite/guide/build_android#set_up_build_environment_using_docker)下载了  TensorFlow Lite Dockerfile。
+本部分假设您已在本地计算机上安装了 [Docker](https://docs.docker.com/get-docker/)，并且已从[此处](https://www.tensorflow.org/lite/guide/build_android#set_up_build_environment_using_docker)下载了 TensorFlow Lite Dockerfile。
 
-下载上述 Dockerfile 之后，您可以通过运行以下命令构建 Docker 镜像：
+下载上述 Dockerfile 之后，您可以通过运行以下命令来构建 Docker 镜像：
 
 ```shell
 docker build . -t tflite-builder -f tflite-android.Dockerfile
@@ -125,4 +125,4 @@ sh build_aar_with_docker.sh \
 
 ## 将 AAR 文件添加到项目
 
-通过直接[将 AAR 导入项目](https://www.tensorflow.org/lite/guide/android#add_aar_directly_to_project)，或者[将自定义 AAR 发布到本地 Maven 存储库](https://www.tensorflow.org/lite/guide/android#install_aar_to_local_maven_repository)，您可以添加 AAR 文件。请注意，您还必须为 `tensorflow-lite-select-tf-ops.aar` 添加 AAR 文件。
+您可以通过直接[将 AAR 导入项目](https://www.tensorflow.org/lite/guide/android#add_aar_directly_to_project)，或者[将自定义 AAR 发布到本地 Maven 存储库](https://www.tensorflow.org/lite/guide/android#install_aar_to_local_maven_repository)来添加 AAR 文件。请注意，如果生成了 `tensorflow-lite-select-tf-ops.aar`，您也必须为它添加 AAR 文件。
