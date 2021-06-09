@@ -8,7 +8,7 @@ CPU와 달리 GPU는 16비트 또는 32비트 부동 소수점 숫자로 계산�
 
 GPU 추론의 또 다른 이점은 전력 효율성입니다. GPU는 매우 효율적이고 최적화된 방식으로 계산을 수행하므로 같은 작업이 CPU에서 실행될 때보다 전력을 덜 소비하고 열을 덜 발생시킵니다.
 
-## Demo app tutorials
+## 데모 앱 튜토리얼
 
 GPU 대리자를 시험해보는 가장 쉬운 방법은 GPU 지원을 통해 분류 데모 애플리케이션을 빌드하는 아래 튜토리얼을 따르는 것입니다. GPU 코드는 현재로서는 바이너리일 뿐이며 곧 오픈 소스가 될 것입니다. 데모를 동작시키는 방법을 이해한 후에는 자체 사용자 정의 모델에서 이를 시도해 볼 수 있습니다.
 
@@ -40,7 +40,7 @@ dependencies {
 
 실행 → '앱'을 실행합니다. 애플리케이션을 실행하면 GPU 활성화 버튼이 표시됩니다. 양자화에서 부동 모델로 변경한 다음 GPU를 클릭하여 GPU에서 실행합니다.
 
-![running android gpu demo and switch to gpu](images/android_gpu_demo.gif)
+![Android GPU 데모 실행 및 GPU로 전환](images/android_gpu_demo.gif)
 
 ### iOS(XCode 포함)
 
@@ -60,7 +60,7 @@ iOS 데모 앱 [튜토리얼](https://www.tensorflow.org/lite/demo_ios)을 따�
 pod 'TensorFlowLiteSwift/Metal', '~> 0.0.1-nightly',
 ```
 
-OR
+또는
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['Metal']
@@ -71,7 +71,7 @@ Objective-C(2.4.0 릴리스부터) 또는 C API를 사용하려는 경우 `Tenso
 <div>
   <devsite-expandable>
     <h4 class="showalways">2.3.0 릴리스 이전</h4>
-    <h4>Until TensorFlow Lite 2.0.0</h4>
+    <h4>TensorFlow Lite 2.0.0까지</h4>
     <p>GPU 대리자를 포함하는 바이너리 CocoaPod를 구축했습니다. 이를 사용하도록 프로젝트를 전환하려면 `TensorFlowLite` 대신`TensorFlowLiteGpuExperimental` 포드를 사용하도록 `tensorflow/tensorflow/lite/examples/ios/camera/Podfile` 파일을 수정하세요.</p>
     <pre class="prettyprint lang-ruby notranslate" translate="no"><code>
     target 'YourProjectName'
@@ -99,15 +99,15 @@ GPU 대리자를 사용할 코드를 활성화하려면 `CameraExampleViewContro
 
 4단계에서 디버그 모드로 실행하는 동안 성능을 향상하려면 적절한 최적의 Metal 설정을 사용하여 릴리스 빌드로 변경해야 합니다. 특히 해당 설정을 편집하려면 `Product> Scheme> Edit Scheme...`으로 이동합니다. `Run`을 선택합니다. `Info` 탭에서 `Build Configuration`을 `Debug`에서 `Release`로 변경하고 `Debug executable`을 선택 취소합니다.
 
-![setting up release](images/iosdebug.png)
+![릴리스 설정](images/iosdebug.png)
 
 그런 다음 `Options` 탭을 클릭하고 `GPU Frame Capture`를 `Disabled`로 변경하고 `Metal API Validation`을 `Disabled`로 바꿉니다.
 
-![setting up metal options](images/iosmetal.png)
+![금속 옵션 설정](images/iosmetal.png)
 
 마지막으로 64bit 아키텍처에서 릴리스 전용 빌드를 선택해야 합니다. `Project navigator -> tflite_camera_example -> PROJECT -> tflite_camera_example -> Build Settings`에서 `Build Active Architecture Only > Release`를 Yes로 설정합니다.
 
-![setting up release options](images/iosrelease.png)
+![릴리스 옵션 설정](images/iosrelease.png)
 
 ## 자체 모델에서 GPU 대리자 시도하기
 
@@ -165,7 +165,7 @@ GPU 대리자를 사용할 코드를 활성화하려면 `CameraExampleViewContro
 </li>
 </ul>
 <p data-md-type="paragraph">지원되는 연산의 전체 목록을 보려면 <a href="gpu_advanced.md" data-md-type="link">고급 설명서</a>를 참조하세요.</p>
-<h2 data-md-type="header" data-md-header-level="2">Non-supported models and ops</h2>
+<h2 data-md-type="header" data-md-header-level="2">지원되지 않는 모델 및 작업</h2>
 <p data-md-type="paragraph">일부 작업이 GPU 대리자에서 지원되지 않는 경우 프레임워크는 GPU에서 그래프의 일부만 실행하고 CPU에서 나머지 부분을 실행합니다. CPU/GPU 동기화 비용이 높기 때문에 이와 같은 분할 실행 모드는 전체 네트워크가 CPU에서만 실행될 때보다 성능이 저하되는 경우가 많습니다. 이 경우 사용자는 다음과 같은 경고를 받게 됩니다.</p>
 <pre data-md-type="block_code" data-md-language="none"><code class="language-none">WARNING: op code #42 cannot be handled by this delegate.
 </code></pre>
