@@ -18,9 +18,9 @@ SavedModel 是共享 TensorFlow 模型时的推荐格式。您可以参阅 [Tens
 
 详细了解 TF Hub 上的 SavedModel：
 
-- [使用 TF2 SavedModel](tf2_saved_model.md)
-- [导出 TF2 SavedModel](exporting_tf2_saved_model.md)
-- [TF2 SavedModel 的 TF1/TF2 兼容性](model_compatibility.md)
+- [Using TF2 SavedModels](tf2_saved_model.md)
+- [Exporting a TF2 SavedModel](exporting_tf2_saved_model.md)
+- [TF1/TF2 compatibility of TF2 SavedModels](model_compatibility.md)
 
 ### TF1 Hub 格式
 
@@ -30,9 +30,9 @@ TF1 Hub 格式是 TF Hub 库所使用的自定义序列化格式。在语法层�
 
 详细了解 TF Hub 上 TF1 Hub 格式的模型：
 
-- [使用 TF1 Hub 格式的模型](tf1_hub_module.md)
-- [以 TF1 Hub 格式导出模型](exporting_hub_format.md)
-- [TF1 Hub 格式的 TF1/TF2 兼容性](model_compatibility.md)
+- [Using TF1 Hub format models](tf1_hub_module.md)
+- [Exporting a model in the TF1 Hub format](exporting_hub_format.md)
+- [TF1/TF2 compatibility of TF1 Hub format](model_compatibility.md)
 
 ## TFLite 格式
 
@@ -42,6 +42,6 @@ TFLite 格式用于设备端推断。您可以参阅 [TFLite 文档](https://www
 
 ## TFJS 格式
 
-TF.js format 格式用于浏览器内机器学习。您可以参阅 [TF.js 文档](https://www.tensorflow.org/js)了解更多信息。
+TF.js 格式用于浏览器内机器学习。您可以参阅 [TF.js 文档](https://www.tensorflow.org/js)了解更多信息。
 
 您可以通过在 [thub.dev 浏览页面](https://tfhub.dev/s?subtype=module,placeholder)中使用 TF.js 模型格式筛选器，或通过访问[此链接](https://tfhub.dev/js)在 tfhub.dev 上浏览 TF.js 模型。
