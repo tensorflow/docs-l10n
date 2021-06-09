@@ -175,7 +175,7 @@ encoder_inputs = bert_pack_inputs([tokenized_premises, tokenized_hypotheses])
 
 #### `tokenize` 세부 사항
 
-`preprocessor.tokenize()`에 대한 호출은 `[batch_size]` 형상의 문자열 텐서를 받아 입력 문자열을 나타내는 int32 토큰 ID를 값으로 갖는 <code>[batch_size, ...]</code> 형상의 <a>RaggedTensor</a>를 반환합니다. `batch_size` 뒤에 *r* ≥ 1인 비정형 차원이 있을 수 있지만 다른 균일한 차원은 없습니다.
+`preprocessor.tokenize()`에 대한 호출은 `[batch_size]` 형상의 문자열 텐서를 받아 입력 문자열을 나타내는 int32 토큰 ID를 값으로 갖는 <code>[batch_size, ...]</code> 형상의 [RaggedTensor](https://www.tensorflow.org/guide/ragged_tensor)를 반환합니다. `batch_size` 뒤에 *r* ≥ 1인 비정형 차원이 있을 수 있지만 다른 균일한 차원은 없습니다.
 
 - *r*=1이면 형상은 `[batch_size, (tokens)]`이고 각 입력은 단순 토큰 시퀀스로 토큰화됩니다.
 - *r*&gt;1이면 *r*-1 추가 수준의 그룹화가 존재합니다. 예를 들어, [tensorflow_text.BertTokenizer](https://github.com/tensorflow/text/blob/v2.3.0/tensorflow_text/python/ops/bert_tokenizer.py#L138)는 *r*=2를 사용하여 단어별로 토큰을 그룹화하고 형상 `[batch_size, (words), (tokens_per_word)]`를 내놓습니다. 이러한 추가 수준이 얼마나 되는지, 그리고 이러한 수준이 어떤 그룹화를 나타내는지는 현재 모델에 달려 있습니다.
@@ -236,4 +236,4 @@ encoder_outputs = encoder(encoder_inputs)
 
 ### 예제
 
-- Colab 튜토리얼 [TPU에서 BERT를 사용하여 GLUE 작업 해결](https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/text/solve_glue_tasks_using_bert_on_tpu.ipynb)
+- Colab 튜토리얼 [TPU에서 BERT를 사용하여 GLUE 작업 해결](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb).
