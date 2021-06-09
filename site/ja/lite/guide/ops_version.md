@@ -166,7 +166,10 @@ AddBuiltin(BuiltinOperator_DEPTHWISE_CONV_2D, Register_DEPTHWISE_CONV_2D(),
 これを行うには、最初に対応するパラメータを`OpSignature`構造体内の`depthwise_conv_2d`に追加する必要があります。
 
 ```
-int GetVersion(const Operator& op) const override { return 1; }
+struct {
+      int32_t dilation_w_factor;
+      int32_t dilation_h_factor;
+    } depthwise_conv_2d;
 ```
 
 次に、これらの新しいパラメータを`lite/tools/versioning/op_version.cc`の`GetOpSignature`関数に入力します。
