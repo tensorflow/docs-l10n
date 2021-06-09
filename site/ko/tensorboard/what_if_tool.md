@@ -8,9 +8,9 @@ WIT(What-If Tool)는 블랙 박스 분류 및 회귀 ML 모델에 대한 이해�
 
 이 도구는 TensorBoard를 통해, 또는 Jupyter 또는 Colab 노트북에서 직접 액세스할 수 있습니다. 노트북 모드에서 WIT 사용과 관련된 자세한 내용, 데모, 연습 및 정보를 보려면 [What-If Tool 웹 사이트](https://pair-code.github.io/what-if-tool)를 참조하세요.
 
-## Requirements
+## 요구 사항
 
-To use WIT in TensorBoard, two things are necessary:
+TensorBoard에서 WIT를 사용하려면 두 가지가 필요합니다.
 
 - 탐색하려는 모델은 분류, 회귀 또는 예측 API를 사용하여 [TensorFlow Serving](https://github.com/tensorflow/serving)에서 제공되어야 합니다.
 - 모델에서 추론할 데이터세트는 TensorBoard 웹 서버에서 액세스할 수 있는 TFRecord 파일에 있어야 합니다.
@@ -25,7 +25,7 @@ WIT의 다양한 기능과 이러한 기능이 모델에 대한 이해와 공정
 
 사전 훈련된 모델로 TensorBoard에서 WIT를 테스트하려면 https://storage.googleapis.com/what-if-tool-resources/uci-census-demo/uci-census-demo.zip에서 사전 훈련된 모델과 데이터세트를 다운로드하고 압축을 풉니다. 이 모델은 [UCI Census](https://archive.ics.uci.edu/ml/datasets/census+income) 데이터세트를 사용하여 어떤 개인의 연간 수입이 $50k 이상인지를 예측하는 이진 분류 모델입니다. 이 데이터세트와 예측 작업은 머신러닝 모델링과 공정성 연구에 종종 이용됩니다.
 
-Set the environment variable MODEL_PATH to the location of the resulting model directory on your machine.
+환경 변수 MODEL_PATH를 머신의 결과 모델 디렉토리 위치로 설정합니다.
 
 [공식 설명서](https://www.tensorflow.org/serving/docker)에 따라 docker 및 TensorFlow Serving을 설치합니다.
 
@@ -35,7 +35,7 @@ Set the environment variable MODEL_PATH to the location of the resulting model d
 
 설정 화면에서 추론 주소를 "localhost:8500"으로, 모델 이름을 "uci_income"으로, 예제 경로를 다운로드한 `adult.tfrecord` 파일의 전체 경로로 설정한 다음 "Accept"를 누릅니다.
 
-![Setup screen for demo](./images/what_if_tool_demo_setup.png)
+![데모 설정 화면](./images/what_if_tool_demo_setup.png)
 
 이 데모에서는 What-If Tool로 다음과 같은 몇 가지를 시도합니다.
 
