@@ -1,205 +1,140 @@
-# TensorFlow Lite 대리자(delegate)
+# TensorFlow Lite Delegates
 
-참고: 대리자 API는 아직 실험 단계이며 추후 변경될 수 있습니다.
+## Introduction
 
-## TensorFlow Lite 대리자란 무엇입니까?
+**Delegates** enable hardware acceleration of TensorFlow Lite models by leveraging on-device accelerators such as the GPU and [Digital Signal Processor (DSP)](https://en.wikipedia.org/wiki/Digital_signal_processor).
 
-TensorFlow Lite 대리자는 그래프 실행의 일부 또는 전체를 다른 executor에 위임하는 방법입니다.
+By default, TensorFlow Lite utilizes CPU kernels that are optimized for the [ARM Neon](https://developer.arm.com/documentation/dht0002/a/Introducing-NEON/NEON-architecture-overview/NEON-instructions) instruction set. However, the CPU is a multi-purpose processor that isn't necessarily optimized for the heavy arithmetic typically found in Machine Learning models (for example, the matrix math involved in convolution and dense layers).
 
-## 대리자를 사용해야 하는 이유는 무엇입니까?
+On the other hand, most modern mobile phones contain chips that are better at handling these heavy operations. Utilizing them for neural network operations provides huge benefits in terms of latency and power efficiency. For example, GPUs can provide upto a [5x speedup](https://blog.tensorflow.org/2020/08/faster-mobile-gpu-inference-with-opencl.html) in latency, while the [Qualcomm® Hexagon DSP](https://developer.qualcomm.com/software/hexagon-dsp-sdk/dsp-processor) has shown to reduce power consumption upto 75% in our experiments.
 
-모바일 기기에서 컴퓨팅이 많은 머신러닝 모델에 대한 추론을 실행하는 것은 기기의 제한된 처리 및 전력으로 인해 리소스가 많이 필요합니다.
-
-CPU에 의존하는 대신 일부 기기에는 GPU 또는 DSP와 같은 하드웨어 가속기가 있어 성능과 에너지 효율성을 높일 수 있습니다.
-
-## 내장 대리자 사용하기
-
-TensorFlow Lite는 하드웨어 가속을 위해 다음 대리자를 제공합니다.
-
-- **크로스 플랫폼 가속을 위한 GPU 대리자** - GPU 대리자는 Android와 iOS 모두에서 사용할 수 있습니다. GPU를 사용할 수 있는 32bit 및 16bit 부동 기반 모델을 실행하도록 최적화되어 있습니다. GPU 대리자에 대한 개요는 [GPU의 TensorFlow Lite](gpu_advanced.md)를 참조하세요. Android 및 iOS에서 GPU 대리자를 사용하는 방법에 대한 단계별 튜토리얼은 [TensorFlow Lite GPU 대리자 튜토리얼](gpu.md)을 참조하세요.
-- **최신 Android 기기용 NNAPI 대리자** - NNAPI 대리자를 사용하여 GPU, DSP 및/또는 NPU를 사용할 수 있는 Android 기기에서 모델을 가속화할 수 있습니다. Android 8.1(API 27+) 이상에서 사용할 수 있습니다. NNAPI 대리자 개요, 단계별 지침 및 모범 사례는 [TensorFlow Lite NNAPI 대리자](nnapi.md)를 참조하세요.
-- **구형 Android 기기용 Hexagon 대리자** - Qualcomm Hexagon DSP를 사용하는 Android 기기에서 Hexagon 대리자를 사용하여 모델을 가속화할 수 있습니다. NNAPI를 완전히 지원하지 않는 이전 버전의 Android OS 기기에서 사용할 수 있습니다. 자세한 내용은 [TensorFlow Lite Hexagon 대리자](hexagon_delegate.md)를 참조하세요.
-- **최신 iPhone 및 iPad용 Core ML 대리자** - Neural Engine을 사용할 수 있는 최신 iPhone 및 iPad의 경우 Core ML 대리자를 사용하여 32bit 부동 기반 모델에 대한 추론을 가속화할 수 있습니다. Neural Engine은 A12 SoC 이상의 Apple 모바일 기기를 사용할 수 있습니다. Core ML 대리자에 대한 개요 및 단계별 지침은 [TensorFlow Lite Core ML 대리자](coreml_delegate.md)를 참조하세요.
-
-## 대리자는 어떻게 동작합니까?
-
-다음과 같은 간단한 모델 그래프가 있다고 가정해 보겠습니다.
+Each of these accelerators have associated APIs that enable custom computations, such as [OpenCL](https://www.khronos.org/opencl/) or [OpenGL ES](https://www.khronos.org/opengles/) for mobile GPU and the [Qualcomm® Hexagon SDK](https://developer.qualcomm.com/software/hexagon-dsp-sdk) for DSP. Typically, you would have to write a lot of custom code to run a neural network through these interfaces. Things get even more complicated when you consider that each accelerator has its pros &amp; cons and cannot execute every operation in a neural network. TensorFlow Lite's Delegate API solves this problem by acting as a bridge between the TFLite runtime and these lower-level APIs.
 
 ![Original graph](../images/performance/tflite_delegate_graph_1.png "원본 그래프")
 
-특정 연산에 대리자가 제공된 경우 TensorFlow Lite는 그래프를 여러 하위 그래프로 분할하고 각 하위 그래프는 대리자가 처리합니다.
+## Choosing a Delegate
 
-대리자 `MyDelegate`가 Conv2D 및 Mean 연산을 더 빠르게 구현한다고 가정해 보겠습니다. 그 결과 기본 그래프는 아래와 같이 보이도록 업데이트됩니다.
+TensorFlow Lite supports multiple delegates, each of which is optimized for certain platform(s) and particular types of models. Usually, there will be multiple delegates applicable to your use-case, depending on two major criteria: the *Platform* (Android or iOS?) you target, and the *Model-type* (floating-point or quantized?) that you are trying to accelerate.
 
-![Graph with delegate](../images/performance/tflite_delegate_graph_2.png "대리자가있는 그래프")
+### Delegates by Platform
 
-대리자가 처리하는 각 하위 그래프는 호출된 호출에서 하위 그래프를 평가하는 노드로 대체됩니다.
+#### Cross-platform (Android &amp; iOS)
 
-모델에 따라 최종 그래프는 하나의 노드로 끝날 수 있습니다. 즉, 모든 그래프가 위임되었거나 여러 노드가 하위 그래프를 처리했음을 의미합니다. 일반적으로 대리자에서 기본 그래프로 전환할 때마다 결과를 하위 그래프에서 기본 그래프로 전달하는 오버헤드가 있으므로 대리자가 여러 개의 하위 그래프를 처리하지 않도록 해야 합니다. 메모리 공유가 항상 안전한 것은 아닙니다.
+- **GPU delegate** - The GPU delegate can be used on both Android and iOS. It is optimized to run 32-bit and 16-bit float based models where a GPU is available. It also supports 8-bit quantized models and provides GPU performance on par with their float versions. For details on the GPU delegate, see [TensorFlow Lite on GPU](gpu_advanced.md). For step-by-step tutorials on using the GPU delegate with Android and iOS, see [TensorFlow Lite GPU Delegate Tutorial](gpu.md).
 
-## 대리자를 추가하는 방법
+#### Android
 
-*아래 사용된 API는 실험적이며 추후 변경될 수 있습니다.*
+- **최신 Android 기기용 NNAPI 대리자** - NNAPI 대리자를 사용하여 GPU, DSP 및/또는 NPU를 사용할 수 있는 Android 기기에서 모델을 가속화할 수 있습니다. Android 8.1(API 27+) 이상에서 사용할 수 있습니다. NNAPI 대리자 개요, 단계별 지침 및 모범 사례는 [TensorFlow Lite NNAPI 대리자](nnapi.md)를 참조하세요.
+- **Hexagon delegate for older Android devices** - The Hexagon delegate can be used to accelerate models on Android devices with Qualcomm Hexagon DSP. It can be used on devices running older versions of Android that do not support NNAPI. See [TensorFlow Lite Hexagon delegate](hexagon_delegate.md) for more detail.
 
-이전 섹션에 따라 대리자를 추가하려면 다음을 수행해야 합니다.
+#### iOS
 
-1. 대리자 하위 그래프를 평가하는 커널 노드를 정의합니다.
-2. 커널 노드를 등록하고 대리자가 실행할 수 있는 노드를 요청하는 [TfLiteDelegate](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/common.h#L611) 인스턴스를 만듭니다.
+- **Core ML delegate for newer iPhones and iPads** - For newer iPhones and iPads where Neural Engine is available, you can use Core ML delegate to accelerate inference for 32-bit or 16-bit floating-point models. Neural Engine is available Apple mobile devices with A12 SoC or higher. For an overview of the Core ML delegate and step-by-step instructions, see [TensorFlow Lite Core ML delegate](coreml_delegate.md).
 
-코드에서 확인하기 위해 대리자를 정의하고 `MyDelegate`라고 부르면 Conv2D 및 Mean 연산을 더 빠르게 실행할 수 있습니다.
+### Delegates by model type
 
-```c++
-#include "tensorflow/lite/util.h"
-#include "tensorflow/lite/builtin_ops.h"
-#include "tensorflow/lite/context_util.h"
+Each accelerator is designed with a certain bit-width of data in mind. If you provide a floating-point model to a delegate that only supports 8-bit quantized operations (such as the [Hexagon delegate](hexagon_delegate.md)), it will reject all its operations and the model will run entirely on the CPU. To avoid such surprises, the table below provides an overview of delegate support based on model type:
 
-// This is where the execution of the operations or whole graph happens.
-// The class below has an empty implementation just as a guideline
-// on the structure.
-class MyDelegate {
- public:
-  // Returns true if my delegate can handle this type of op.
-  static bool SupportedOp(const TfLiteRegistration* registration) {
-    switch (registration->builtin_code) {
-      case kTfLiteBuiltinConv2d:
-      case kTfLiteBuiltinMean:
-        return true;
-      default:
-        return false;
-    }
-  }
+**Model Type** | **GPU** | **NNAPI** | **Hexagon** | **CoreML**
+--- | --- | --- | --- | ---
+Floating-point (32 bit) | Yes | Yes | No | Yes
+[Post-training float16 quantization](post_training_float16_quant.ipynb) | Yes | No | No | Yes
+[Post-training dynamic range quantization](post_training_quant.ipynb) | Yes | Yes | No | No
+[Post-training integer quantization](post_training_integer_quant.ipynb) | Yes | Yes | Yes | No
+[Quantization-aware training](http://www.tensorflow.org/model_optimization/guide/quantization/training) | Yes | Yes | Yes | No
 
-  // Any initialization code needed
-  bool Init() {}
-  // Any preparation work needed (e.g. allocate buffers)
-  bool Prepare(TfLiteContext* context, TfLiteNode* node) {}
-  // Actual running of the delegate subgraph.
-  bool Invoke(TfLiteContext* context, TfLiteNode* node) {}
-  // ... Add any other methods needed.
-};
+### Validating performance
 
-// Create the TfLiteRegistration for the Kernel node which will replace
-// the subgraph in the main TfLite graph.
-TfLiteRegistration GetMyDelegateNodeRegistration() {
-  // This is the registration for the Delegate Node that gets added to
-  // the TFLite graph instead of the subgraph it replaces.
-  // It is treated as an OP node. But in our case
-  // Init will initialize the delegate.
-  // Invoke will run the delegate graph.
-  // Prepare for preparing the delegate.
-  // Free for any cleaning needed by the delegate.
-  TfLiteRegistration kernel_registration;
-  kernel_registration.builtin_code = kTfLiteBuiltinDelegate;
-  kernel_registration.custom_name = "MyDelegate";
-  kernel_registration.free = [](TfLiteContext* context, void* buffer) -> void {
-    delete reinterpret_cast<MyDelegate*>(buffer);
-  };
-  kernel_registration.init = [](TfLiteContext* context, const char* buffer,
-                                   size_t) -> void* {
-    // In the node init phase, initialize MyDelegate instance
-    const TfLiteDelegateParams* delegate_params =
-        reinterpret_cast<const TfLiteDelegateParams*>(buffer);
-    MyDelegate* my_delegate = new MyDelegate;
-    if (!my_delegate->Init(context, params)) {
-      return nullptr;
-    }
-    return my_delegate;
-  };
-  kernel_registration.invoke = [](TfLiteContext* context,
-                                   TfLiteNode* node) -> TfLiteStatus {
-    MyDelegate* kernel = reinterpret_cast<MyDelegate*>(node->user_data);
-    return kernel->Invoke(context, node);
-  };
-  kernel_registration.prepare = [](TfLiteContext* context,
-                                    TfLiteNode* node) -> TfLiteStatus {
-    MyDelegate* kernel = reinterpret_cast<MyDelegate*>(node->user_data);
-    return kernel->Prepare(context, node);
-  };
+The information in this section acts as a rough guideline for shortlisting the delegates that could improve your application. However, it is important to note that each delegate has a pre-defined set of operations it supports, and may perform differently depending on the model and device; for example, the [NNAPI delegate](nnapi.md) may choose to use Google's Edge-TPU on a Pixel phone while utilizing a DSP on another device. Therefore, it is usually recommended that you perform some benchmarking to gauge how useful a delegate is for your needs. This also helps justify the binary size increase associated with attaching a delegate to the TensorFlow Lite runtime.
 
-  return kernel_registration;
-}
+TensorFlow Lite has extensive performance and accuracy-evaluation tooling that can empower developers to be confident in using delegates in their application. These tools are discussed in the next section.
 
-// TfLiteDelegate methods
+## Tools for Evaluation
 
-TfLiteStatus DelegatePrepare(TfLiteContext* context, TfLiteDelegate* delegate) {
-  // Claim all nodes that can be evaluated by the delegate and ask the
-  // framework to update the graph with delegate kernel instead.
-  std::vector<int> supported_nodes;
-  TfLiteIntArray* plan;
-  TF_LITE_ENSURE_STATUS(context->GetExecutionPlan(context, &plan));
-  TfLiteNode* node;
-  TfLiteRegistration* registration;
-  for (int node_index : TfLiteIntArrayView(plan)) {
-    TF_LITE_ENSURE_STATUS(context->GetNodeAndRegistration(
-        context, node_index, &node, &registration));
-    if (MyDelegate::SupportedOp(registration)) {
-      supported_nodes.push_back(node_index);
-    }
-  }
-  TfLiteRegistration my_delegate_kernel_registration =
-      GetMyDelegateNodeRegistration();
+### Latency &amp; memory footprint
 
-  // This call split the graphs into subgraphs, for subgraphs that can be
-  // handled by the delegate, it will replace it with a
-  // 'my_delegate_kernel_registration'
-  TfLiteIntArray* supported_nodes_int_array =
-      ::tflite::ConvertVectorToTfLiteIntArray(supported_nodes);
-  auto status = context->ReplaceNodeSubsetsWithDelegateKernels(
-      context, my_delegate_kernel_registration,
-      supported_nodes_int_array, delegate);
-  TfLiteIntArrayFree(supported_nodes_int_array);
-  return status
-}
+TensorFlow Lite’s [benchmark tool](https://www.tensorflow.org/lite/performance/measurement) can be used with suitable parameters to estimate model performance, including average inference latency, initialization overhead, memory footprint, etc. This tool supports multiple flags to figure out the best delegate configuration for your model. For instance, `--gpu_backend=gl` can be specified with `--use_gpu` to measure GPU execution with OpenGL. The complete list of supported delegate parameters is defined in the [detailed documentation](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/delegates/README.md#tflite-delegate-registrar).
 
-void FreeBufferHandle(TfLiteContext* context, TfLiteDelegate* delegate,
-                      TfLiteBufferHandle* handle) {
-  // Do any cleanups.
-}
+Here’s an example run for a quantized model with GPU via `adb`:
 
-TfLiteStatus CopyToBufferHandle(TfLiteContext* context,
-                                TfLiteDelegate* delegate,
-                                TfLiteBufferHandle buffer_handle,
-                                TfLiteTensor* tensor) {
-  // Copies data from tensor to delegate buffer if needed.
-  return kTfLiteOk;
-}
-
-TfLiteStatus CopyFromBufferHandle(TfLiteContext* context,
-                                  TfLiteDelegate* delegate,
-                                  TfLiteBufferHandle buffer_handle,
-                                  TfLiteTensor* tensor) {
-  // Copies the data from delegate buffer into the tensor raw memory.
-  return kTfLiteOk;
-}
-
-// Caller takes ownership of the returned pointer.
-TfLiteDelegate* CreateMyDelegate() {
-  TfLiteDelegate* delegate = new TfLiteDelegate;
-
-  delegate->data_ = nullptr;
-  delegate->flags = kTfLiteDelegateFlagsNone;
-  delegate->Prepare = &DelegatePrepare;
-  // This cannot be null.
-  delegate->CopyFromBufferHandle = &CopyFromBufferHandle;
-  // This can be null.
-  delegate->CopyToBufferHandle = &CopyToBufferHandle;
-  // This can be null.
-  delegate->FreeBufferHandle = &FreeBufferHandle;
-
-  return delegate;
-}
-
-
-// To add the delegate you need to call
-
-auto* my_delegate = CreateMyDelegate();
-if (interpreter->ModifyGraphWithDelegate(my_delegate) !=
-        kTfLiteOk) {
-  // Handle error
-} else {
-  interpreter->Invoke();
-}
-...
-// Don't forget to delete your delegate
-delete my_delegate;
 ```
+adb shell /data/local/tmp/benchmark_model \
+  --graph=/data/local/tmp/mobilenet_v1_224_quant.tflite \
+  --use_gpu=true
+```
+
+You can download pre-built version of this tool for Android, 64-bit ARM architecture [here](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_benchmark_model.apk) ([more details](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark/android)).
+
+### Accuracy &amp; correctness
+
+Delegates usually perform computations at a different precision than their CPU counterparts. As a result, there is an (usually minor) accuracy tradeoff associated with utilizing a delegate for hardware acceleration. Note that this isn't *always* true; for example, since the GPU uses floating-point precision to run quantized models, there might be a slight precision improvement (for e.g., &lt;1% Top-5 improvement in ILSVRC image classification).
+
+TensorFlow Lite has two types of tooling to measure how accurately a delegate behaves for a given model: *Task-Based* and *Task-Agnostic*. All the tools described in this section support the [advanced delegation parameters](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/delegates/README.md#tflite-delegate-registrar) used by the benchmarking tool from the previous section. Note that the sub-sections below focus on *delegate evaluation* (Does the delegate perform the same as the CPU?) rather than model evaluation (Is the model itself good for the task?).
+
+#### Task-Based Evaluation
+
+TensorFlow Lite has tools to evaluate correctness on two image-based tasks:
+
+- [ILSVRC 2012](http://image-net.org/challenges/LSVRC/2012/) (Image Classification) with [top-K accuracy](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Precision_at_K)
+
+- [COCO Object Detection (w/ bounding boxes)](https://cocodataset.org/#detection-2020) with [mean Average Precision (mAP)](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Mean_average_precision)
+
+Prebuilt binaries of these tools (Android, 64-bit ARM architecture), along with documentation can be found here:
+
+- [ImageNet Image Classification](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_eval_imagenet_image_classification) ([More details](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/imagenet_image_classification))
+- [COCO Object Detection](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_eval_coco_object_detection) ([More details](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/coco_object_detection))
+
+The example below demonstrates [image classification evaluation](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/imagenet_image_classification) with NNAPI utilizing Google's Edge-TPU on a Pixel 4:
+
+```
+adb shell /data/local/tmp/run_eval \
+  --model_file=/data/local/tmp/mobilenet_quant_v1_224.tflite \
+  --ground_truth_images_path=/data/local/tmp/ilsvrc_images \
+  --ground_truth_labels=/data/local/tmp/ilsvrc_validation_labels.txt \
+  --model_output_labels=/data/local/tmp/model_output_labels.txt \
+  --output_file_path=/data/local/tmp/accuracy_output.txt \
+  --num_images=0 # Run on all images. \
+  --use_nnapi=true \
+  --nnapi_accelerator_name=google-edgetpu
+```
+
+The expected output is a list of Top-K metrics from 1 to 10:
+
+```
+Top-1 Accuracy: 0.733333
+Top-2 Accuracy: 0.826667
+Top-3 Accuracy: 0.856667
+Top-4 Accuracy: 0.87
+Top-5 Accuracy: 0.89
+Top-6 Accuracy: 0.903333
+Top-7 Accuracy: 0.906667
+Top-8 Accuracy: 0.913333
+Top-9 Accuracy: 0.92
+Top-10 Accuracy: 0.923333
+```
+
+#### Task-Agnostic Evaluation
+
+For tasks where there isn't an established on-device evaluation tool, or if you are experimenting with custom models, TensorFlow Lite has the [Inference Diff](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/inference_diff) tool. (Android, 64-bit ARM binary architecture binary [here](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_eval_inference_diff))
+
+Inference Diff compares TensorFlow Lite execution (in terms of latency &amp; output-value deviation) in two settings:
+
+- Single-threaded CPU Inference
+- User-defined Inference - defined by [these parameters](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/delegates/README.md#tflite-delegate-registrar)
+
+To do so, the tool generates random Gaussian data and passes it through two TFLite Interpreters - one running single-threaded CPU kernels, and the other parameterized by the user's arguments.
+
+It measures the latency of both, as well as the absolute difference between the output tensors from each Interpreter, on a per-element basis.
+
+For a model with a single output tensor, the output might look like this:
+
+```
+Num evaluation runs: 50
+Reference run latency: avg=84364.2(us), std_dev=12525(us)
+Test run latency: avg=7281.64(us), std_dev=2089(us)
+OutputDiff[0]: avg_error=1.96277e-05, std_dev=6.95767e-06
+```
+
+What this means is that for the output tensor at index `0`, the elements from the CPU output different from the delegate output by an average of `1.96e-05`.
+
+Note that interpreting these numbers requires deeper knowledge of the model, and what each output tensor signifies. If its a simple regression that determines some sort of score or embedding, the difference should be low (otherwise it's an error with the delegate). However, outputs like the 'detection class' one from SSD models is a little harder to interpret. For example, it might show a difference using this tool, but that may not mean something really wrong with the delegate: consider two (fake) classes: "TV (ID: 10)", "Monitor (ID:20)" - If a delegate is slightly off the golden truth and shows monitor instead of TV, the output diff for this tensor might be something as high as 20-10 = 10.
