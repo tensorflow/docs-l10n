@@ -12,7 +12,7 @@ Cloud TPU의 모델 성능을 프로파일링하려면 [Cloud TPU 가이드](htt
 
 ## Profiler 및 GPU 필수 구성 요소 설치
 
-[GitHub 리포지토리](https://raw.githubusercontent.com/tensorflow/profiler/master/install_and_run.py)에서 <a><code>install_and_run.py</code></a> 스크립트를 다운로드한 후 실행하여 Profiler를 설치하세요.
+[GitHub 리포지토리](https://github.com/tensorflow/profiler)에서 [`install_and_run.py`](https://raw.githubusercontent.com/tensorflow/profiler/master/install_and_run.py) 스크립트를 다운로드한 후 실행하여 Profiler를 설치하세요.
 
 GPU를 프로파일링하려면 다음을 수행해야 합니다.
 
@@ -483,7 +483,7 @@ TensorFlow 프로파일러는 TensorFlow 모델의 호스트 활동 및 GPU 추�
 
 - 샘플링 모드 - `tf.profiler.experimental.server.start()`를 사용하여 주문형 프로파일링을 수행하여 TensorFlow 모델이 실행된 상태에서 gRPC 서버를 시작하세요. gRPC 서버를 시작하고 모델을 실행한 후 TensorBoard 프로파일 플러그인의 **Capture Profile** 버튼을 통해 프로파일을 캡처할 수 있습니다. 위의 프로파일러 설치 섹션에서 나오는 스크립트를 사용하여 TensorBoard 인스턴스가 아직 실행 중이 아니라면 실행하세요.
 
-    예를 들면,
+    예를 들면 다음과 같습니다.
 
     ```python
     # Start a profiler server before your model runs.
