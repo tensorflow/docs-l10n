@@ -16,7 +16,7 @@
 
 ## モデルをプロファイルする
 
-タスクに適した候補モデルを選択したら、モデルのプロファイルとベンチマークを行うことをお勧めします。TensorFlow Lite [ベンチマークツール](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)には、演算子ごとのプロファイル統計を表示するプロファイラが組み込まれています。これはパフォーマンスのボトルネックや、どの演算子が計算時間を支配しているかの理解に有用です。
+タスクに適した候補モデルを選択したら、モデルのプロファイルとベンチマークを行うことをお勧めします。TensorFlow Lite [ベンチマークツール](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)には、演算子ごとのプロファイル統計を表示するプロファイラが組み込まれています。これはパフォーマンスのボトルネックや、どの演算子が計算時間を支配しているかを理解するのに有用です。
 
 また、[TensrFlow Lite トレーシング](measurement.md#trace_tensorflow_lite_internals_in_android)を使用して、標準的な Android システムのトレーシングで Android アプリ内のモデルをプロファイルしたり、GUI ベースのプロファイルツールで演算子呼び出しを時間ごとに可視化したりすることも可能です。
 
