@@ -69,7 +69,11 @@ dependencies {
     <section>
       <h3>Kotlin</h3>
       <p></p>
-<pre class="prettyprint lang-kotlin">    import org.tensorflow.lite.Interpreter&lt;br&gt;    import org.tensorflow.lite.gpu.CompatibilityList&lt;br&gt;    import org.tensorflow.lite.gpu.GpuDelegate</pre>
+<pre class="prettyprint lang-kotlin">    import org.tensorflow.lite.Interpreter
+    import org.tensorflow.lite.gpu.CompatibilityList
+    import org.tensorflow.lite.gpu.GpuDelegate
+&lt;/div&gt;
+&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_30&lt;/code&gt;</pre>
 <div data-md-type="block_html">
 </div>
 </section></devsite-selector>
