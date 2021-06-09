@@ -79,7 +79,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 </section></devsite-selector>
 </div>
 <h3 data-md-type="header" data-md-header-level="3">Metal(GPU) 대리자를 폴백으로 사용하기</h3>
-<p data-md-type="paragraph">When the Core ML delegate is not created, alternatively you can still use <a href="https://www.tensorflow.org/lite/performance/gpu#ios" data-md-type="link">Metal delegate</a> to get performance benefits. Following example shows how to do this:</p>
+<p data-md-type="paragraph">Core ML 대리자가 생성되지 않은 경우에도 여전히 <a href="https://www.tensorflow.org/lite/performance/gpu#ios" data-md-type="link">Metal 대리자</a>를 사용하여 성능 이점을 얻을 수 있습니다. 다음 예에서는 이를 수행하는 방법을 보여줍니다.</p>
 <div data-md-type="block_html">
 <div>
   <devsite-selector>
@@ -98,14 +98,14 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 </div>
 <p data-md-type="paragraph">The delegate creation logic reads device's machine id (e.g. iPhone11,1) to determine its Neural Engine availability. See the <a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.mm" data-md-type="link">code</a> for more detail. Alternatively, you can implement your own set of denylist devices using other libraries such as <a href="https://github.com/devicekit/DeviceKit" data-md-type="link">DeviceKit</a>.</p>
 <h3 data-md-type="header" data-md-header-level="3">이전 Core ML 버전 사용하기</h3>
-<p data-md-type="paragraph">Although iOS 13 supports Core ML 3, the model might work better when it is converted with Core ML 2 model specification. The target conversion version is set to the latest version by default, but you can change this by setting <code data-md-type="codespan">coreMLVersion</code> (in Swift, <code data-md-type="codespan">coreml_version</code> in C API) in the delegate option to older version.</p>
+<p data-md-type="paragraph">iOS 13은 Core ML 3을 지원하지만 Core ML 2 모델 사양으로 변환하면 모델이 더 잘 동작할 수 있습니다. 대상 변환 버전은 기본적으로 최신 버전으로 설정되어 있지만 대리자 옵션에서 <code data-md-type="codespan">coreMLVersion</code>(Swift에서는 C API의 <code data-md-type="codespan">coreml_version</code>)을 이전 버전으로 설정하여 변경할 수 있습니다.</p>
 <h2 data-md-type="header" data-md-header-level="2">지원되는 연산</h2>
 <p data-md-type="paragraph">Core ML 대리자는 다음 연산을 지원합니다.</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">
 <p data-md-type="paragraph">Add</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">Only certain shapes are broadcastable. In Core ML tensor layout, following tensor shapes are broadcastable. <code data-md-type="codespan">[B, C, H, W]</code>, <code data-md-type="codespan">[B, C, 1, 1]</code>, <code data-md-type="codespan">[B, 1, H, W]</code>, <code data-md-type="codespan">[B, 1, 1, 1]</code>.</li>
+<li data-md-type="list_item" data-md-list-type="unordered">특정 형상만 브로드캐스팅할 수 있습니다. Core ML 텐서 레이아웃에서 다음 텐서 형상을 브로드캐스팅할 수 있습니다. <code data-md-type="codespan">[B, C, H, W]</code>, <code data-md-type="codespan">[B, C, 1, 1]</code>, <code data-md-type="codespan">[B, 1, H, W]</code>, <code data-md-type="codespan">[B, 1, 1, 1]</code> .</li>
 </ul>
 </li>
 <li data-md-type="list_item" data-md-list-type="unordered">AveragePool2D</li>
@@ -188,7 +188,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 <li data-md-type="list_item" data-md-list-type="unordered">
 <p data-md-type="paragraph">CoreML 대리자는 iOS 시뮬레이터에서 동작합니까?</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">Yes. The library includes x86 and x86_64 targets so it can run on a simulator, but you will not see performance boost over CPU.</li>
+<li data-md-type="list_item" data-md-list-type="unordered">예. 라이브러리에는 x86 및 x86_64 대상이 포함되어 있으므로 시뮬레이터에서 실행할 수 있지만 CPU에 비해 성능이 향상되지는 않습니다.</li>
 </ul>
 </li>
 <li data-md-type="list_item" data-md-list-type="unordered">
