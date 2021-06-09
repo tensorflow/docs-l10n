@@ -1,10 +1,10 @@
 # TFX 파이프라인 빌드하기
 
-TFX를 사용하면 머신러닝(ML) 워크플로를 파이프라인으로 쉽게 오케스트레이션하여 다음과 같은 결과를 얻을 수 있습니다.
+참고: TFX 파이프라인의 개념 보기는 [TFX 파이프라인 이해](understanding_tfx_pipelines)를 참조하세요.
 
-참고: 깊게 들어가기 전에 첫 파이프라인을 빌드해보고 싶습니까? [템플릿을 사용하여 파이프라인 빌드하기](#build_a_pipeline_using_a_template)로 시작하세요.
+참고: 깊게 들어가기 전에 첫 파이프라인을 빌드 해보고 싶습니까? [템플릿을 사용하여 파이프라인 빌드](#build_a_pipeline_using_a_template)하기로 시작하세요.
 
-## TFX 파이프라인 개요
+## `Pipeline` 클래스 사용
 
 TFX 파이프라인은 [`Pipeline` 클래스](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/pipeline.py){: .external}를 사용하여 정의됩니다. 다음 예는 `Pipeline` 클래스를 사용하는 방법입니다.
 
