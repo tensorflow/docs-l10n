@@ -1,4 +1,4 @@
-# TensorFlow Lite NNAPI 대리자(delegate)
+# TensorFlow Lite NNAPI 대리자
 
 [Android Neural Networks API(NNAPI)](https://developer.android.com/ndk/guides/neuralnetworks)는 Android 8.1(API 레벨 27) 이상을 실행하는 모든 Android 기기에서 사용할 수 있습니다. 다음과 같은 하드웨어 가속기를 지원하는 Android 기기의 TensorFlow Lite 모델을 속도를 향상합니다.
 
@@ -104,19 +104,22 @@ NNAPI 대리자가 모델의 일부 연산 또는 매개변수 조합을 지원�
 
 NNAPI는 모델이 [지원되는 연산](https://developer.android.com/ndk/guides/neuralnetworks#model)만 사용할 때 수행 능력이 가장 좋습니다. 다음 모델은 NNAPI와 호환되는 것으로 알려져 있습니다.
 
-- [MobileNet v1(224x224) 이미지 분류(float 모델 다운로드)](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html)
-    [(양자화된 모델 다운로드)](http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz)
-    *(모바일 및 임베디드 기반 비전 애플리케이션을 위해 설계된 이미지 분류 모델)*
-- [MobileNet v2 SSD 객체 감지](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html)
-    [(다운로드)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)
-    *(경계 상자가 있는 여러 객체를 감지하는 이미지 분류 모델)*
-- [MobileNet v1(300x300) SSD(Single Shot Detector) 객체 감지](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(다운로드)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
-- [포즈 예측을 위한 PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet)
-    [(다운로드)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)
-    *(이미지 또는 비디오에서 사람의 포즈를 예측하는 비전 모델)*
+- [MobileNet v1 (224x224) image classification (float model download)](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html)[(quantized model download)](http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz)
+    *(image classification model designed for mobile and embedded based vision
+    applications)*
+- [MobileNet v2 SSD object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html)[(download)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)
+    *(image classification model that detects multiple objects with bounding
+    boxes)*
+- [MobileNet v1(300x300) Single Shot Detector (SSD) object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(download)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
+- [PoseNet for pose estimation](https://github.com/tensorflow/tfjs-models/tree/master/posenet)[(download)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)
+    *(vision model that estimates the poses of a person(s) in image or video)*
 
 모델에 동적 크기의 출력이 포함된 경우 NNAPI 가속도 지원되지 않습니다. 이 경우 다음과 같은 경고가 표시됩니다.
 
 ```none
 ERROR: Attempting to use a delegate that only supports static-sized tensors with a graph that has dynamic-sized tensors.
 ```
+
+### Enable NNAPI CPU implementation
+
+A graph that can't be processed completely by an accelerator can fall back to the NNAPI CPU implementation. However, since this is typically less performant than the TensorFlow interpreter, this option is disabled by default in the NNAPI delegate for Android 10 (API Level 29) or above. To override this behavior, set `setUseNnapiCpu` to `true` in the `NnApiDelegate.Options` object.
