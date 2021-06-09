@@ -1,4 +1,4 @@
-# Tensorflow Lite Core ML delegate
+# Tensorflow Lite Core ML 대리자
 
 TensorFlow Lite Core ML 대리자를 사용하면 [Core ML 프레임워크](https://developer.apple.com/documentation/coreml)에서 TensorFlow Lite 모델을 실행할 수 있으므로 iOS 기기에서 모델 추론이 더 빨라집니다.
 
@@ -11,7 +11,7 @@ Note: This delegate is in experimental (beta) phase. It is available from Tensor
 - iOS 12 and later. In the older iOS versions, Core ML delegate will automatically fallback to CPU.
 - By default, Core ML delegate will only be enabled on devices with A12 SoC and later (iPhone Xs and later) to use Neural Engine for faster inference. If you want to use Core ML delegate also on the older devices, please see [best practices](#best-practices)
 
-**Supported models**
+**지원되는 모델**
 
 Core ML 대리자는 현재 float(FP32 및 FP16) 모델을 지원합니다.
 
@@ -26,7 +26,7 @@ target 'YourProjectName'
   pod 'TensorFlowLiteSwift/CoreML', '~> 2.4.0'  # Or TensorFlowLiteObjC/CoreML
 ```
 
-OR
+또는
 
 ```
 # Particularily useful when you also want to include 'Metal' subspec.
@@ -49,7 +49,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 </div>
 </section></devsite-selector>
 </div>
-<h2 data-md-type="header" data-md-header-level="2">Best practices</h2>
+<h2 data-md-type="header" data-md-header-level="2">모범 사례</h2>
 <h3 data-md-type="header" data-md-header-level="3">Neural Engine이 없는 기기에서 Core ML 대리자 사용하기</h3>
 <p data-md-type="paragraph">By default, Core ML delegate will only be created if the device has Neural Engine, and will return <code data-md-type="codespan">null</code> if the delegate is not created. If you want to run Core ML delegate on other environments (for example, simulator), pass <code data-md-type="codespan">.all</code> as an option while creating delegate in Swift. On C++ (and Objective-C), you can pass <code data-md-type="codespan">TfLiteCoreMlDelegateAllDevices</code>. Following example shows how to do this:</p>
 <div data-md-type="block_html">
@@ -175,14 +175,14 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 </ul>
 </li>
 </ul>
-<h2 data-md-type="header" data-md-header-level="2">Feedback</h2>
-<p data-md-type="paragraph">For issues, please create a <a href="https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md" data-md-type="link">GitHub</a> issue with all the necessary details to reproduce.</p>
-<h2 data-md-type="header" data-md-header-level="2">FAQ</h2>
+<h2 data-md-type="header" data-md-header-level="2">피드백</h2>
+<p data-md-type="paragraph">문제가 발생한 경우 재현하는 데 필요한 모든 세부 정보가 포함된 <a href="https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md" data-md-type="link">GitHub</a> 문제를 생성하십시오.</p>
+<h2 data-md-type="header" data-md-header-level="2">자주하는 질문</h2>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">
 <p data-md-type="paragraph">Does CoreML delegate support fallback to CPU if a graph contains unsupported ops?</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">Yes</li>
+<li data-md-type="list_item" data-md-list-type="unordered">예</li>
 </ul>
 </li>
 <li data-md-type="list_item" data-md-list-type="unordered">
@@ -194,7 +194,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 <li data-md-type="list_item" data-md-list-type="unordered">
 <p data-md-type="paragraph">TensorFlow Lite 및 CoreML 대리자는 MacOS를 지원하나요?</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">TensorFlow Lite is only tested on iOS but not MacOS.</li>
+<li data-md-type="list_item" data-md-list-type="unordered">TensorFlow Lite는 iOS에서만 테스트되고 MacOS에서는 테스트되지 않습니다.</li>
 </ul>
 </li>
 <li data-md-type="list_item" data-md-list-type="unordered">
