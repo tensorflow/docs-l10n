@@ -187,7 +187,7 @@ The generated code provides a way for developers to accelerate their code throug
 
 - **`Context`**: Android 활동 또는 서비스의 컨텍스트
 - (선택 사항) **`Device`**: GPUDelegate 또는 NNAPIDelegate와 같은 TFLite 가속 대리자
-- (Optional) **`numThreads`**: Number of threads used to run the model - default is one.
+- (선택 사항) **`numThreads`**: 모델을 실행하는 데 사용되는 스레드의 수 - 기본값 1
 
 예를 들어, NNAPI 대리자와 최대 3개의 스레드를 사용하려면 다음과 같이 모델을 초기화할 수 있습니다.
 
