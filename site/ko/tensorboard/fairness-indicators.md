@@ -1,6 +1,6 @@
 # Fairness Indicators 대시보드를 사용하여 모델 평가하기 [베타]
 
-![Fairness Indicators](./images/fairness-indicators.png)
+![공정성 지표](./images/fairness-indicators.png)
 
 TensorBoard Fairness Indicators를 사용하면 *이진* 및 *다중 클래스* 분류자에서 일반적으로 식별되는 공정성 메트릭을 쉽게 계산할 수 있습니다. 플러그인을 사용하면 실행에 대한 공정성 평가를 시각화하고 그룹 간에 성능을 쉽게 비교할 수 있습니다.
 
@@ -8,7 +8,7 @@ TensorBoard Fairness Indicators를 사용하면 *이진* 및 *다중 클래스* 
 
 공정성 문제를 평가하기 위한 기존의 많은 도구는 대규모 데이터세트 및 모델에서 제대로 동작하지 않습니다. Google에서는 수십억 명의 사용자가 있는 시스템에서 동작할 수 있는 도구를 확보하는 것이 중요합니다. Fairness Indicators를 이용하면 TensorBoard 환경 또는 [Colab](https://github.com/tensorflow/fairness-indicators)에서 어떤 크기의 사용 사례든 평가할 수 있습니다.
 
-## Requirements
+## 요구 사항
 
 TensorBoard Fairness Indicators를 설치하려면 다음을 실행합니다.
 
@@ -20,7 +20,7 @@ pip install fairness_indicators
 pip install tensorboard-plugin-fairness-indicators
 ```
 
-## Demo
+## 데모
 
 TensorBoard에서 Fairness Indicators를 테스트하려면 Google 클라우드 플랫폼에서 TensorFlow 모델 분석의 평가 결과 샘플(eval_config.json, 메트릭 및 플롯 파일)과 `demo.py` 유틸리티를 다운로드할 수 있습니다(다음 명령을 사용하여 [여기](https://console.cloud.google.com/storage/browser/tensorboard_plugin_fairness_indicators/)에서 다운로드).
 
@@ -44,11 +44,11 @@ cd tensorboard_plugin_fairness_indicators
 - `--logdir`: TensorBoard가 요약을 작성하는 디렉토리
 - `--eval_result_output_dir`: TFMA(마지막 단계에서 다운로드됨)에서 평가한 평가 결과를 포함한 디렉토리
 
-Run the `demo.py` utility to write the summary results in the log directory:
+`demo.py` 유틸리티를 실행하여 로그 디렉토리에 요약 결과를 작성합니다.
 
 `python demo.py --logdir=. --eval_result_output_dir=.`
 
-Run TensorBoard:
+TensorBoard를 실행합니다.
 
 참고: 이 데모의 경우, 다운로드한 모든 파일이 들어 있는 동일한 디렉토리에서 TensorBoard를 실행하세요.
 
@@ -56,7 +56,7 @@ Run TensorBoard:
 
 로컬 인스턴스가 시작됩니다. 로컬 인스턴스가 시작되면 단말기에 링크가 표시됩니다. 브라우저에서 링크를 열어 Fairness Indicators 대시보드를 봅니다.
 
-### Demo Colab
+### 데모 Colab
 
 [Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb)에는 모델을 훈련 및 평가하고 TensorBoard에서 공정성 평가 결과를 시각화하기 위한 엔드 투 엔드 데모가 포함되어 있습니다.
 
