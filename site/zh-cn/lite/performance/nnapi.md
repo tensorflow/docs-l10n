@@ -26,7 +26,7 @@ dependencies {
 
 添加以下代码，先初始化 NNAPI 委托，然后再初始化 TensorFlow Lite 解释器。
 
-注：虽然从 API 级别 27 (Android Oreo MR1) 开始就支持 NNAPI，但是，在 API 级别 28 (Android Pie) 及以后的版本上，对操作的支持大有改善。因此，对于大多数场景，我们建议开发者为 Android Pie 或更高版本使用 NNAPI 委托。
+注：虽然从 API 级别 27 (Android Oreo MR1) 开始就支持 NNAPI，但是，在 API 级别 28 (Android Pie) 及以后的版本上，对运算的支持大有改善。因此，对于大多数情形，我们建议开发者为 Android Pie 或更高的版本使用 NNAPI 委托。
 
 ```java
 import org.tensorflow.lite.Interpreter;
