@@ -2,28 +2,28 @@
 
 Post-training quantization is a conversion technique that can reduce model size while also improving CPU and hardware accelerator latency, with little degradation in model accuracy. You can quantize an already-trained float TensorFlow model when you convert it to TensorFlow Lite format using the [TensorFlow Lite Converter](../convert/).
 
-Note: The procedures on this page require TensorFlow 1.15 or higher.
+참고: 해당 페이지의 절차를 따르려면 TensorFlow 1.15 이상이 필요합니다.
 
-### Optimization Methods
+### 최적화 메서드
 
-There are several post-training quantization options to choose from. Here is a summary table of the choices and the benefits they provide:
+선택할 수 있는 몇 가지 훈련 후 양자화 옵션이 있습니다. 다음은 선택 항목과 선택 항목이 제공하는 이점에 대한 요약표입니다.
 
-기술 | Benefits | 하드웨어
+기술 | 이점 | 하드웨어
 --- | --- | ---
-동적 범위 | 4x smaller, 2x-3x speedup | CPU
+동적 범위 | 4배 작아짐, 2배-3배 속도 향상 | CPU
 : 양자화 : : : |  |
-전체 정수 | 4x smaller, 3x+ speedup | CPU, Edge TPU,
+전체 정수 | 4배 더 작게, 3배 이상의 속도 향상 | CPU, 에지 TPU
 : 양자화 : : 마이크로 컨트롤러 : |  |
-Float16 양자화 | 2x smaller, GPU | CPU, GPU
+Float16 양자화 | 2배 더 작아진 GPU | CPU, GPU
 : : 가속 : : |  |
 
-The following decision tree can help determine which post-training quantization method is best for your use case:
+다음 의사 결정 트리는 사용 사례에 가장 적합한 훈련 후 양자화 메서드를 결정하는 데 도움이 될 수 있습니다.
 
 ![훈련 후 최적화 옵션](images/optimization.jpg)
 
 ### 동적 범위 양자화
 
-The simplest form of post-training quantization statically quantizes only the weights from floating point to integer, which has 8-bits of precision:
+훈련 후 양자화의 가장 간단한 형태는 8bit의 정밀도를 가진 부동 소수점에서 정수까지 가중치만 정적으로 양자화합니다.
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -35,7 +35,7 @@ At inference, weights are converted from 8-bits of precision to floating point a
 
 To further improve latency, "dynamic-range" operators dynamically quantize activations based on their range to 8-bits and perform computations with 8-bit weights and activations. This optimization provides latencies close to fully fixed-point inference. However, the outputs are still stored using floating point so that the speedup with dynamic-range ops is less than a full fixed-point computation.
 
-### Full integer quantization
+### 전체 정수 양자화
 
 You can get further latency improvements, reductions in peak memory usage, and compatibility with integer only hardware devices or accelerators by making sure all model math is integer quantized.
 
@@ -54,9 +54,9 @@ For testing purposes, you can use a dummy dataset as follows:
       yield [data.astype(np.float32)]
  </pre>
 
-#### Integer with float fallback (using default float input/output)
+#### 부동 폴 백이 있는 정수(기본 부동 입력/출력 사용하기)
 
-In order to fully integer quantize a model, but use float operators when they don't have an integer implementation (to ensure conversion occurs smoothly), use the following steps:
+모델을 완전히 정수로 양자화하지만 정수 구현이 없는 경우 부동 연산자를 사용하려면(원활하게 변환을 수행하기 위해) 다음 스탭을 사용합니다.
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -67,13 +67,13 @@ tflite_quant_model = converter.convert()
 
 Note: This `tflite_quant_model` won't be compatible with integer only devices (such as 8-bit microcontrollers) and accelerators (such as the Coral Edge TPU) because the input and output still remain float in order to have the same interface as the original float only model.
 
-#### Integer only
+#### 정수 전용
 
-*Creating integer only models is a common use case for [TensorFlow Lite for Microcontrollers](https://www.tensorflow.org/lite/microcontrollers) and [Coral Edge TPUs](https://coral.ai/).*
+*정수 전용 모델을 만드는 것은 [마이크로 컨트롤러용 TensorFlow Lite](https://www.tensorflow.org/lite/microcontrollers) 및 [Coral 에지 TPU](https://coral.ai/)의 일반적인 사용 사례입니다.*
 
-Note: Starting TensorFlow 2.3.0, we support the `inference_input_type` and `inference_output_type` attributes.
+참고: TensorFlow 2.3.0부터는 `inference_input_type` 및 `inference_output_type` 속성을 지원합니다.
 
-Additionally, to ensure compatibility with integer only devices (such as 8-bit microcontrollers) and accelerators (such as the Coral Edge TPU), you can enforce full integer quantization for all ops including the input and output, by using the following steps:
+또한 정수 전용 기기(예: 8bit 마이크로 컨트롤러) 및 가속기(예: Coral 에지 TPU)와의 호환성을 보장하기 위해 다음 스탭을 사용하여 입력 및 출력을 포함한 모든 연산에 대해 전체 정수 양자화를 적용할 수 있습니다.
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -101,19 +101,19 @@ tflite_quant_model = converter.convert()
 float16 양자화의 장점은 다음과 같습니다.
 
 - It reduces model size by up to half (since all weights become half of their original size).
-- It causes minimal loss in accuracy.
-- It supports some delegates (e.g. the GPU delegate) which can operate directly on float16 data, resulting in faster execution than float32 computations.
+- 정확성 손실을 최소화합니다.
+- float16 데이터에서 직접 동작할 수 있는 일부 대리자(예: GPU 대리자)를 지원하므로 float32 계산보다 빠른 실행이 가능합니다.
 
 float16 양자화의 단점은 다음과 같습니다.
 
 - 고정 소수점 수학에 대한 양자화만큼 지연 시간을 줄이지 않습니다.
 - By default, a float16 quantized model will "dequantize" the weights values to float32 when run on the CPU. (Note that the GPU delegate will not perform this dequantization, since it can operate on float16 data.)
 
-### Integer only: 16-bit activations with 8-bit weights (experimental)
+### 정수 전용: 8bit 가중치를 사용한 16bit 활성화(실험적)
 
 This is an experimental quantization scheme. It is similar to the "integer only" scheme, but activations are quantized based on their range to 16-bits, weights are quantized in 8-bit integer and bias is quantized into 64-bit integer. This is referred to as 16x8 quantization further.
 
-The main advantage of this quantization is that it can improve accuracy significantly, but only slightly increase model size.
+이 양자화의 주요 장점은 정확성을 크게 향상시키면서도 모델 크기는 아주 약간만 늘릴 수 있다는 것입니다.
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -138,20 +138,20 @@ Examples of the use cases where accuracy improvements provided by this quantizat
 
 이 양자화의 단점은 다음과 같습니다.
 
-- Currently inference is noticeably slower than 8-bit full integer due to the lack of optimized kernel implementation.
-- Currently it is incompatible with the existing hardware accelerated TFLite delegates.
+- 현재 추론은 최적화된 커널 구현이 없기 때문에 8bit 정수보다 눈에 띄게 느립니다.
+- 현재 기존 하드웨어 가속 TFLite 대리자와 호환되지 않습니다.
 
-Note: This is an experimental feature.
+참고: 이것은 실험적인 특성입니다.
 
 A tutorial for this quantization mode can be found [here](post_training_integer_quant_16x8.ipynb).
 
-### Model accuracy
+### 모델 정확성
 
-Since weights are quantized post training, there could be an accuracy loss, particularly for smaller networks. Pre-trained fully quantized models are provided for specific networks in the [TensorFlow Lite model repository](../models/). It is important to check the accuracy of the quantized model to verify that any degradation in accuracy is within acceptable limits. There are tools to evaluate [TensorFlow Lite model accuracy](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}.
+가중치는 훈련 후에 양자화되기 때문에 특히 소규모 네트워크의 경우 정확성 손실이 있을 수 있습니다. [TensorFlow Lite 모델 리포지토리](../models/)에서 특정 네트워크에 대해 사전 훈련된 전체 양자화 모델이 제공됩니다. 정확성 저하가 허용 가능한 한계 내에 있는지 확인하기 위해 양자화된 모델의 정확성을 확인하는 것이 중요합니다. [TensorFlow Lite 모델 정확성](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}을 평가하는 도구가 있습니다.
 
 Alternatively, if the accuracy drop is too high, consider using [quantization aware training](https://www.tensorflow.org/model_optimization/guide/quantization/training) . However, doing so requires modifications during model training to add fake quantization nodes, whereas the post-training quantization techniques on this page use an existing pre-trained model.
 
-### Representation for quantized tensors
+### 양자화된 텐서 표현
 
 8-bit quantization approximates floating point values using the following formula.
 
@@ -159,8 +159,8 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 표현에는 두 가지 주요 부분이 있습니다.
 
-- Per-axis (aka per-channel) or per-tensor weights represented by int8 two’s complement values in the range [-127, 127] with zero-point equal to 0.
+- 축당(일명 채널당) 또는 텐서당 가중치는 0과 같은 영점이 있는 [-127, 127] 범위의 int8 2의 보수 값으로 표시됩니다.
 
 - Per-tensor activations/inputs represented by int8 two’s complement values in the range [-128, 127], with a zero-point in range [-128, 127].
 
-For a detailed view of our quantization scheme, please see our [quantization spec](./quantization_spec.md). Hardware vendors who want to plug into TensorFlow Lite's delegate interface are encouraged to implement the quantization scheme described there.
+양자화 체계에 대한 자세한 내용은 [양자화 사양](./quantization_spec.md)을 참조하세요. TensorFlow Lite의 대리자 인터페이스에 연결하려는 하드웨어 공급 업체는 여기에 설명된 양자화 체계를 구현해보는 것이 좋습니다.
