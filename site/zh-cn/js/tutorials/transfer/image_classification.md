@@ -1,7 +1,7 @@
-# 图像分类迁移学习
+# 图像分类器迁移学习
 
-本指南中，你将学习如何使用TensorFlow.js创建一个自定义的图像分类器，并在浏览器中对它进行训练。
+在本教程中，您将学习如何使用 TensorFlow.js 构建一个自定义图像分类器，并在浏览器中对它进行快速训练。
 
-通过使用迁移学习，你将用少量的训练数据创建一个高精度的模型。你将使用一个名为MobileNet的预训练模型来做图像分类。在此基于上，你将训练一个模型以自定义其所能识别的图像分类。
+借助迁移学习，您将用少量的训练数据创建一个高度准确的模型。您将使用一个名为 MobileNet 的预训练模型进行图像分类。在此模型的基础上，您将训练一个模型来自定义它所能识别的图像类。
 
-本指南通过一个 codelab 展示。 [点击这个链接打开codelab](https://codelabs.developers.google.com/codelabs/tensorflowjs-teachablemachine-codelab/index.html)
+本教程作为一个 Codelab 演示。[点击此链接可打开 Codelab](https://codelabs.developers.google.com/codelabs/tensorflowjs-teachablemachine-codelab/index.html)
