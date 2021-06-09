@@ -48,7 +48,7 @@ GPU では TensorFlow Lite は、16 ビットおよび 32 ビットの浮動小�
 
 ## 基本的な使い方
 
-Android でモデルアクセラレーションを呼び出す方法は 2 つありますが、[Android Studio ML Model Binding](../inference_with_metadata/codegen#acceleration) または TensorFlow Lite Interpreter を使用しているかによって、方法は異なります。
+Android でモデルアクセラレーションを呼び出す方法は 2 つありますが、[Android Studio ML Model Binding](../inference_with_metadata/codegen#acceleration) または TensorFlow Lite インタープリタを使用しているかによって、方法は異なります。
 
 ### TensorFlow Lite Interpreter を使用して Android でモデルアクセラレーションを呼び出す
 
@@ -155,12 +155,12 @@ TFLGpuDelegateDelete(delegate);
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">
 <a href="https://www.tensorflow.org/lite/convert/quantization" data-md-type="link">量子化認識トレーニング</a>でトレーニングされたモデル</li>
-<li data-md-type="list_item" data-md-list-type="unordered"><a href="https://www.tensorflow.org/lite/performance/post_training_quant" data-md-type="link" class="">トレーニング後のダイナミックレンジ量子化</a></li>
-<li data-md-type="list_item" data-md-list-type="unordered"><a href="https://www.tensorflow.org/lite/performance/post_training_integer_quant" data-md-type="link" class="">トレーニング後の完全整数量子化</a></li>
+<li data-md-type="list_item" data-md-list-type="unordered"><a href="https://www.tensorflow.org/lite/performance/post_training_quant" data-md-type="link">トレーニング後のダイナミックレンジ量子化</a></li>
+<li data-md-type="list_item" data-md-list-type="unordered"><a href="https://www.tensorflow.org/lite/performance/post_training_integer_quant" data-md-type="link">トレーニング後の完全整数量子化</a></li>
 </ul>
 <p data-md-type="paragraph">パフォーマンスを最適化するには、浮動小数点入出力テンソルを持つモデルを使用します。</p>
 <h4 data-md-type="header" data-md-header-level="4">仕組み</h4>
-<p data-md-type="paragraph">GPU バックエンドは浮動小数点の実行のみをサポートするため、元のモデルの「浮動小数点ビュー」を与えて量子化モデルを実行します。これには次のような手順が含まれます。</p>
+<p data-md-type="paragraph">GPU バックエンドは浮動小数点の実行のみをサポートするため、元のモデルの「浮動小数点ビュー」を与えて量子化モデルを実行します。上位レベルで、次のような手順が含まれます。</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="false">
 <li data-md-type="list_item" data-md-list-type="unordered">
 <p data-md-type="paragraph"><em data-md-type="emphasis">定数テンソル</em>（重み/バイアスなど）は、GPU メモリに一度逆量子化されます。これは、デリゲートが TFLite Interpreter に適用されるときに発生します。</p>
@@ -251,7 +251,7 @@ if (interpreter-&gt;Invoke() != kTfLiteOk) return false;</code></pre>
 <p data-md-type="paragraph">演算によっては CPU では簡単で GPU ではコストが高くなる可能性があります。このような演算の 1 つのクラスは、<code data-md-type="codespan">BATCH_TO_SPACE</code>、<code data-md-type="codespan">SPACE_TO_BATCH</code>、<code data-md-type="codespan">SPACE_TO_DEPTH</code>など、さまざまな形の変形演算です。ネットワークアーキテクトの論理的思考のためだけにこれらの演算がネットワークに挿入されている場合、パフォーマンスのためにそれらを削除することをお勧めします。</p>
 </li>
 <li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">GPU では、テンソルデータは 4 チャネルにスライスされます。したがって、形状<code data-md-type="codespan">[B,H,W,5]</code>のテンソルに対する計算は、形状<code data-md-type="codespan">[B,H,W,8]</code>のテンソルに対しする計算とほぼ同じように実行されますが、パフォーマンスは<code data-md-type="codespan">[B,H,W,4]</code>と比べて大幅に低下します。</p>
+<p data-md-type="paragraph">GPU では、テンソルデータは 4 チャネルにスライスされます。したがって、形状<code data-md-type="codespan">[B,H,W,5]</code>のテンソルに対する計算は、形状<code data-md-type="codespan">[B,H,W,8]</code>のテンソルに対する計算とほぼ同じように実行されますが、パフォーマンスは<code data-md-type="codespan">[B,H,W,4]</code>と比べて大幅に低下します。</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">たとえば、カメラハードウェアが RGBA の画像フレームをサポートしている場合、メモリコピー (3 チャネル RGB から 4 チャネル RGBX へ) を回避できるため、4 チャネル入力のフィードは大幅に速くなります。</li>
 </ul>
