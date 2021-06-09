@@ -2,7 +2,7 @@
 
 # 재사용 가능한 SavedModel
 
-## 소개
+## 시작하기
 
 TensorFlow Hub는 다른 자산 중에서 TensorFlow 2용 SavedModel을 호스팅합니다. `obj = hub.load(url)`를 사용하여 Python 프로그램에 다시 로드할 수 있습니다[[자세히 알아보기](tf2_saved_model)]. 반환된 `obj`는 `tf.saved_model.load()`의 결과입니다(TensorFlow의 [SavedModel 가이드](https://www.tensorflow.org/guide/saved_model) 참조). 이 객체는 tf.functions, tf.Variables(사전 훈련된 값에서 초기화됨), 기타 리소스 및 반복적으로 더 많은 객체가 될 수 있는 임의의 속성을 가질 수 있습니다.
 
