@@ -64,7 +64,7 @@ interpreter = tflite.Interpreter(model_path=args.model_file)
 
 ## 了解详情
 
-For more details about the `Interpreter` API, read [Load and run a model in Python](inference.md#load-and-run-a-model-in-python).
+有关 `Interpreter` API 的更多详细信息，请阅读[在 Python 中加载和运行模型](inference.md#load-and-run-a-model-in-python)。
 
 如果您有 Raspberry Pi，请尝试运行 [classify_picamera.py 示例](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/raspberry_pi)，使用 Pi Camera 和 TensorFlow Lite 执行图像分类。
 
