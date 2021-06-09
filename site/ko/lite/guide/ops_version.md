@@ -141,13 +141,13 @@ AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D(), 1, 2);
 - Dilation 인자가 모두 1인 경우, 버전=1을 채웁니다.
 - 그렇지 않으면 버전=2를 채웁니다.
 
-이를 위해 `lite/tools/versioning/op_version.cc`에서 연산자 클래스에 대한 `GetBuiltinOperatorVersion` 함수를 재정의해야 합니다.
+이렇게 하려면 먼저 해당 매개변수를 `OpSignature` 구조체 내의 `depthwise_conv_2d`에 추가해야 합니다:
 
 ```
 struct {       int32_t dilation_w_factor;       int32_t dilation_h_factor;     } depthwise_conv_2d;
 ```
 
-버전이 하나뿐인 ops의 경우, `GetVersion` 함수는 다음과 같이 정의됩니다.
+그러면 `lite/tools/versioning/op_version.cc`에서 `GetOpSignature` 함수에 이러한 새 매개변수를 채웁니다.
 
 ```
 case BuiltinOperator_DEPTHWISE_CONV_2D: {       auto conv_option = op->builtin_options_as_DepthwiseConv2DOptions();       if (conv_option) {         op_sig.options.depthwise_conv_2d.dilation_w_factor =             conv_option->dilation_w_factor();         op_sig.options.depthwise_conv_2d.dilation_h_factor =             conv_option->dilation_h_factor();       }     } break;
@@ -163,7 +163,7 @@ case BuiltinOperator_DEPTHWISE_CONV_2D:   if (op_sig.options.depthwise_conv_2d.d
 
 ### 연산자 버전 맵 업데이트하기
 
-(`kPendingReleaseOpVersion`은 다음 안정적인 릴리스에서 적절한 릴리스 버전으로 대체됩니다.)
+마지막 단계는 새 버전 정보를 연산자 버전 맵에 추가하는 것입니다. 이 버전 맵을 기반으로 모델의 최소 필수 런타임 버전을 생성해야 하므로 이 단계가 필요합니다.
 
 이를 위해 `lite/tools/versioning/runtime_version.cc`에 새 맵 항목을 추가해야 합니다.
 
@@ -177,10 +177,10 @@ case BuiltinOperator_DEPTHWISE_CONV_2D:   if (op_sig.options.depthwise_conv_2d.d
 
 ### 위임 구현
 
-마지막 단계는 새 버전 정보를 연산자 버전 맵에 추가하는 것입니다. 이 버전 맵을 기반으로 필요한 모델의 최소 런타임 버전을 생성해야 하므로 이 단계가 필요합니다.
+TensorFlow Lite는 하드웨어 백엔드에 ops를 위임할 수 있는 Delegation API를 제공합니다. 대리자의 `Prepare` 함수에서 위임 코드의 모든 노드에 대해 버전이 지원되는지 확인합니다.
 
 ```
 const int kMaxVersion = 1; TfLiteNode* node; TfLiteRegistration* registration = nullptr; TF_LITE_ENSURE_STATUS(context->GetNodeAndRegistration(context, node_index, &node, &registration));  if (registration->version > kMaxVersion) {   // Reject the node if the version isn't supported. }
 ```
 
-TensorFlow Lite는 하드웨어 백엔드에 ops를 위임할 수 있는 Delegation API를 제공합니다. 대리자의 `Prepare` 함수에서 위임 코드의 모든 노드에 대해 버전이 지원되는지 확인합니다.
+위임 코드에서 버전 1 ops만 지원하는 경우에도 이 작업이 필요하므로, 더 높은 버전의 op를 가져올 때 위임 코드에서 비호환성을 감지할 수 있습니다.
