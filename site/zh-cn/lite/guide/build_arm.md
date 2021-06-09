@@ -8,11 +8,11 @@ TensorFlow Lite 支持两种构建系统，而每种构建系统支持的功能�
 --- | --- | ---
 预定义工具链 | armhf、aarch64 | armel、armhf、aarch64
 自定义工具链 | 难用 | 易用
-[Select TF ops](https://www.tensorflow.org/lite/guide/ops_select) | 支持 | 不支持
-[GPU delegate](https://www.tensorflow.org/lite/performance/gpu) | 仅适用于 Android | 任何支持 OpenCL 的平台
+[选择 TF 运算](https://www.tensorflow.org/lite/guide/ops_select) | 支持 | 不支持
+[GPU 委托](https://www.tensorflow.org/lite/performance/gpu) | 仅适用于 Android | 任何支持 OpenCL 的平台
 XNNPack | 支持 | 支持
 [Python Wheel](https://www.tensorflow.org/lite/guide/build_cmake_pip) | 支持 | 支持
-[C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/README.md) | 支持 | [supported](https://www.tensorflow.org/lite/guide/build_cmake#build_tensorflow_lite_c_library)
+[C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/README.md) | 支持 | [支持](https://www.tensorflow.org/lite/guide/build_cmake#build_tensorflow_lite_c_library)
 [C++ API](https://www.tensorflow.org/lite/guide/inference#load_and_run_a_model_in_c) | 支持 Bazel 项目 | 支持 CMake 项目
 
 ## 使用 CMake 对 ARM 进行交叉编译
