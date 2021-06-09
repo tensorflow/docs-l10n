@@ -179,7 +179,7 @@ let interpreter = try Interpreter(modelPath: modelPath,
 <h2 data-md-type="header" data-md-header-level="2">자주하는 질문</h2>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">Does CoreML delegate support fallback to CPU if a graph contains unsupported ops?</p>
+<p data-md-type="paragraph">그래프에 지원되지 않는 연산이 포함된 경우 CoreML 대리자가 CPU로 폴백을 지원합니까?</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">예</li>
 </ul>
