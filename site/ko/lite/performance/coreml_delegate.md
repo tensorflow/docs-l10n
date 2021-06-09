@@ -58,12 +58,11 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
     <section>
       <h3> Swift</h3>
       <p></p>
-<pre class="prettyprint lang-swift">    var options = CoreMLDelegate.Options()
-    options.enabledDevices = .all
-    let coreMLDelegate = CoreMLDelegate(options: options)!
-    let interpreter = try Interpreter(modelPath: modelPath,
-                                      delegates: [coreMLDelegate])
-      </pre>
+<pre class="prettyprint lang-swift">var options = CoreMLDelegate.Options()
+options.enabledDevices = .all
+let coreMLDelegate = CoreMLDelegate(options: options)!
+let interpreter = try Interpreter(modelPath: modelPath,
+                                  delegates: [coreMLDelegate])</pre>
     </section>
     <section>
       <h3>Objective-C</h3>
@@ -131,7 +130,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 <p data-md-type="paragraph">FullyConnected(일명 Dense 또는 InnerProduct)</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">가중치와 바이어스(있는 경우)는 일정해야 합니다.</li>
-<li data-md-type="list_item" data-md-list-type="unordered">Only supports single-batch case. Input dimensions should be 1, except the last dimension.</li>
+<li data-md-type="list_item" data-md-list-type="unordered">단일 배치 케이스만 지원합니다. 입력 차원은 마지막 차원을 제외하고 1이어야 합니다.</li>
 </ul>
 </li>
 <li data-md-type="list_item" data-md-list-type="unordered">Hardswish</li>
