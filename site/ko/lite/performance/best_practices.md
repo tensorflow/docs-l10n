@@ -1,6 +1,6 @@
 # 성능 모범 사례
 
-Mobile and embedded devices have limited computational resources, so it is important to keep your application resource efficient. We have compiled a list of best practices and strategies that you can use to improve your TensorFlow Lite model performance.
+모바일 및 임베디드 기기에는 계산 리소스가 제한되어 있으므로 애플리케이션 리소스를 효율적으로 유지하는 것이 중요합니다. TensorFlow Lite 모델 성능을 개선하는 데 사용할 수 있는 모범 사례 및 전략 목록을 작성했습니다.
 
 ## 작업에 가장 적합한 모델 선택
 
@@ -14,7 +14,7 @@ Depending on the task, you will need to make a tradeoff between model complexity
 
 전이 학습을 통해 자체 데이터세트에서 나열된 모델을 재훈련할 수 있습니다. [이미지 분류](/lite/tutorials/model_maker_image_classification) 및 [객체 감지](https://medium.com/tensorflow/training-and-serving-a-realtime-mobile-object-detector-in-30-minutes-with-cloud-tpus-b78971cf1193)에 대한 전이 학습 튜토리얼을 확인하세요.
 
-## Profile your model
+## 모델 프로파일링
 
 작업에 적합한 후보 모델을 선택한 후에는 모델을 프로파일링하고 벤치마킹하는 것이 좋습니다. TensorFlow Lite [벤치마킹 도구](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)에는 연산자별 프로파일링 통계를 표시하는 내장 프로파일러가 있습니다. 이는 성능 병목 현상과 계산 시간을 지배하는 연산자를 이해하는 데 도움이 될 수 있습니다.
 
@@ -26,9 +26,9 @@ If a particular operator appears frequently in the model and, based on profiling
 
 ## 모델 최적화
 
-Model optimization aims to create smaller models that are generally faster and more energy efficient, so that they can be deployed on mobile devices. TensorFlow Lite supports multiple optimization techniques, such as quantization.
+모델 최적화는 일반적으로 더 빠르고 에너지 효율적인 작은 모델을 만들어 모바일 기기에 배포될 수 있도록 하는 것을 목표로 합니다. TensorFlow Lite는 양자화와 같은 여러 가지 최적화 기술을 지원합니다.
 
-Check out our [model optimization docs](model_optimization.md) for details.
+자세한 내용은 [모델 최적화 설명서](model_optimization.md)를 확인하세요.
 
 ## 스레드 수 조정
 
@@ -42,7 +42,7 @@ If your application is not carefully designed, there can be redundant copies whe
 
 ## Profile your application with platform specific tools
 
-Platform specific tools like [Android profiler](https://developer.android.com/studio/profile/android-profiler) and [Instruments](https://help.apple.com/instruments/mac/current/) provide a wealth of profiling information that can be used to debug your app. Sometimes the performance bug may be not in the model but in parts of application code that interact with the model. Make sure to familiarize yourself with platform specific profiling tools and best practices for your platform.
+[Android 프로파일러](https://developer.android.com/studio/profile/android-profiler) 및 [Instrument](https://help.apple.com/instruments/mac/current/)와 같은 플랫폼별 도구는 앱을 디버그하는 데 사용할 수 있는 풍부한 프로파일링 정보를 제공합니다. 때로는 성능 버그가 모델이 아니라 모델과 상호 작용하는 애플리케이션 코드의 일부에 있을 수 있습니다. 플랫폼별 프로파일링 도구 및 플랫폼에 대한 모범 사례를 숙지하세요.
 
 ## Evaluate whether your model benefits from using hardware accelerators available on the device
 
