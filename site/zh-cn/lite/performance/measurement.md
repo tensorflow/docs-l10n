@@ -345,7 +345,6 @@ Android 应用的 TensorFlow Lite 解释器中的内部事件可通过 [Android 
   Trace.endSection();
   ...
   Trace.endSection();
-
 ```
 
 ### 启用 TensorFlow Lite 跟踪
