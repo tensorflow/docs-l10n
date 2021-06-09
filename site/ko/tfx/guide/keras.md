@@ -71,7 +71,7 @@ Trainer의 사용자 모듈 파일을 제외하고 나머지 파이프라인은 
 
 다음은 기본 Keras를 사용한 몇 가지 예입니다.
 
-- [Penguin](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py) ([module file](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils.py)): 'Hello world' end-to-end example.
+- [Penguin](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py)([모듈 파일](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils.py)): 'Hello world' 엔드 투 엔드 예제
 - [MNIST](https://github.com/tensorflow/tfx/blob/master/tfx/examples/mnist/mnist_pipeline_native_keras.py)([모듈 파일](https://github.com/tensorflow/tfx/blob/master/tfx/examples/mnist/mnist_utils_native_keras.py)): 이미지 및 TFLite 엔드 투 엔드 예제
 - [Taxi](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_pipeline_native_keras.py)([모듈 파일](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_utils_native_keras.py)): 고급 Transform 사용법을 사용한 엔드 투 엔드 예제
 
