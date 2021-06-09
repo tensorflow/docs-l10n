@@ -28,15 +28,15 @@
 
 要导入 TensorFlow Lite (TFLite) 模型，请执行以下操作：
 
-1. Right-click on the module you would like to use the TFLite model or click on `File`, then `New` &gt; `Other` &gt; `TensorFlow Lite Model` ![Right-click menus to access the TensorFlow Lite import functionality](../images/android/right_click_menu.png)
+1. 右键点击您要使用 TFLite 模型的模块，或者点击 `File`，然后依次点击 `New`&gt;`Other`&gt;`TensorFlow Lite Model` ![右键点击菜单可访问 TensorFlow Lite 导入功能](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/lite/images/android/right_click_menu.png?raw=true)
 
 2. 选择 TFLite 文件的位置。请注意，该工具将使用机器学习模型绑定代您配置模块的依赖关系，所有依赖项将自动插入 Android 模块的 `build.gradle` 文件。
 
     可选：如果要使用 [GPU 加速](../performance/gpu)，请选择用于导入 TensorFlow GPU 的第二个复选框。![TFLite 模型的导入对话框](../images/android/import_dialog.png)
 
-3. Click `Finish`.
+3. 点击 `Finish`。
 
-4. The following screen will appear after the import is successful. To start using the model, select Kotlin or Java, copy and paste the code under the `Sample Code` section. You can get back to this screen by double clicking the TFLite model under the `ml` directory in Android Studio. ![Model details page in Android Studio](../images/android/model_details.png)
+4. 导入成功后，会出现以下界面。要开始使用该模型，请选择 Kotlin 或 Java，复制并粘贴 `Sample Code` 部分的代码。在 Android Studio 中双击 `ml` 目录下的 TFLite 模型，可以返回此界面。![Android Studio 中的模型详细信息页面](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/lite/images/android/model_details.png?raw=true)
 
 ### 使用 TensorFlow Lite Task Library
 
