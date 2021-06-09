@@ -178,7 +178,7 @@ nnapi 대리자로 실행하려면 `--use_nnapi=true`를 설정합니다. GPU �
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>모델명</th>
       <th>기기</th>
       <th>CPU, 4 스레드</th>
       <th>GPU</th>
@@ -279,7 +279,7 @@ iOS 벤치마크를 실행하기 위해 적절한 모델을 포함하도록 벤�
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>모델명</th>
       <th>기기</th>
       <th>CPU, 2 스레드</th>
       <th>GPU</th>
