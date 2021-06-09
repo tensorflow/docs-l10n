@@ -1,6 +1,6 @@
 <!--* freshness: { owner: 'kempy' reviewed: '2021-03-09' } *-->
 
-# Reusable SavedModel
+# 재사용 가능한 SavedModel
 
 ## 소개
 
