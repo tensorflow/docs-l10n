@@ -1,37 +1,37 @@
 # ML 메타데이터
 
-[ML Metadata (MLMD)](https://github.com/google/ml-metadata) is a library for recording and retrieving metadata associated with ML developer and data scientist workflows. MLMD is an integral part of [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx), but is designed so that it can be used independently.
+[ML Metadata(MLMD)](https://github.com/google/ml-metadata)는 ML 개발자 및 데이터 과학자 워크플로와 관련된 메타데이터를 기록하고 검색하기 위한 라이브러리입니다. MLMD는 [TensorFlow Extended(TFX)](https://www.tensorflow.org/tfx)의 필수 부분이지만 독립적으로 사용할 수 있도록 설계되었습니다.
 
-Every run of a production ML pipeline generates metadata containing information about the various pipeline components, their executions (e.g. training runs), and resulting artifacts(e.g. trained models). In the event of unexpected pipeline behavior or errors, this metadata can be leveraged to analyze the lineage of pipeline components and debug issues.Think of this metadata as the equivalent of logging in software development.
+프로덕션 ML 파이프라인의 모든 실행의 결과로, 다양한 파이프라인 구성 요소, 실행(예: 학습 실행) 및 결과 아티팩트(예: 학습된 모델)에 대한 정보를 포함하는 메타데이터가 생성됩니다. 예기치 않은 파이프라인 동작이나 오류가 발생하는 경우 이 메타데이터를 활용하여 파이프라인 구성 요소의 계보를 분석하고 문제를 디버그할 수 있습니다. 이 메타데이터를 소프트웨어 개발을 기록하는 것으로 생각하면 이해가 쉽습니다.
 
-MLMD helps you understand and analyze all the interconnected parts of your ML pipeline instead of analyzing them in isolation and can help you answer questions about your ML pipeline such as:
+MLMD는 ML 파이프라인의 상호 연결된 모든 부분을 개별적으로 분석하지 않고도 쉽게 이해하고 분석할 수 있게 해주며 ML 파이프라인에 관한 다음과 같은 물음에 답하는 데 도움을 줄 수 있습니다.
 
-- Which dataset did the model train on?
-- What were the hyperparameters used to train the model?
-- Which pipeline run created the model?
-- Which training run led to this model?
-- Which version of TensorFlow created this model?
-- When was the failed model pushed?
+- 모델이 학습한 데이터세트는 무엇입니까?
+- 모델 훈련에 사용된 하이퍼 파라미터는 무엇입니까?
+- 모델을 생성한 파이프라인 실행은 무엇입니까?
+- 이 모델로 이어진 훈련 실행은 무엇입니까?
+- 이 모델을 만든 TensorFlow 버전은 무엇입니까?
+- 실패한 모델은 언제 푸시되었습니까?
 
-## Metadata store
+## 메타데이터 저장소
 
-MLMD registers the following types of metadata in a database called the **Metadata Store**.
+MLMD는 **메타데이터 저장소**라는 데이터베이스에 다음 유형의 메타데이터를 등록합니다.
 
-1. Metadata about the artifacts generated through the components/steps of your ML pipelines
-2. Metadata about the executions of these components/steps
-3. Metadata about pipelines and associated lineage information
+1. ML 파이프라인의 구성 요소/단계를 통해 생성된 아티팩트에 대한 메타데이터
+2. 이러한 구성 요소/단계의 실행에 대한 메타데이터
+3. 파이프라인 및 관련 계보 정보에 대한 메타데이터
 
-The Metadata Store provides APIs to record and retrieve metadata to and from the storage backend. The storage backend is pluggable and can be extended. MLMD provides reference implementations for SQLite (which supports in-memory and disk) and MySQL out of the box.
+메타데이터 저장소는 저장소 백엔드에서 메타데이터를 기록하고 검색하는 API를 제공합니다. 스토리지 백엔드는 플러그 가능하고 확장할 수 있습니다. MLMD는 SQLite(인메모리 및 디스크 지원) 및 MySQL에 대한 참조 구현을 즉시 제공합니다.
 
-This graphic shows a high-level overview of the various components that are part of MLMD.
+이 그래픽은 MLMD의 일부인 다양한 구성 요소에 대한 높은 수준의 개요를 보여줍니다.
 
-![ML Metadata Overview](images/mlmd_overview.png)
+![ML Metadata Overview](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/tfx/guide/images/mlmd_overview.png?raw=true)
 
-### Metadata storage backends and store connection configuration
+### 메타데이터 스토리지 백엔드 및 저장소 연결 구성
 
 `MetadataStore` 객체는 사용된 스토리지 백엔드에 해당하는 연결 구성을 수신합니다.
 
-- **Fake Database** provides an in-memory DB (using SQLite) for fast experimentation and local runs. The database is deleted when the store object is destroyed.
+- **Fake Database**는 빠른 실험과 로컬 실행을 위해 인메모리 DB(SQLite 사용)를 제공합니다. 저장소 객체가 삭제되면 데이터베이스가 삭제됩니다.
 
 ```python
 import ml_metadata as mlmd
@@ -64,7 +64,7 @@ connection_config.mysql.password = '...'
 store = metadata_store.MetadataStore(connection_config)
 ```
 
-Similarly, when using a MySQL instance with Google CloudSQL([quickstart](https://cloud.google.com/sql/docs/mysql/quickstart), [connect-overview](https://cloud.google.com/sql/docs/mysql/connect-overview)), one could also use SSL option if applicable.
+마찬가지로, Google CloudSQL([quickstart](https://cloud.google.com/sql/docs/mysql/quickstart), [connect-overview](https://cloud.google.com/sql/docs/mysql/connect-overview))과 함께 MySQL 인스턴스를 사용하면, 해당하는 경우 SSL 옵션을 사용할 수도 있습니다.
 
 ```python
 connection_config.mysql.ssl_options.key = '...'
@@ -76,41 +76,41 @@ connection_config.mysql.ssl_options.verify_server_cert = '...'
 store = metadata_store.MetadataStore(connection_config)
 ```
 
-## Data model
+## 데이터 모델
 
 메타데이터 저장소는 다음 데이터 모델을 사용하여 스토리지 백엔드에서 메타데이터를 기록하고 검색합니다.
 
-- `ArtifactType` describes an artifact's type and its properties that are stored in the metadata store. You can register these types on-the-fly with the metadata store in code, or you can load them in the store from a serialized format. Once you register a type, its definition is available throughout the lifetime of the store.
-- An `Artifact` describes a specific instance of an `ArtifactType`, and its properties that are written to the metadata store.
-- An `ExecutionType` describes a type of component or step in a workflow, and its runtime parameters.
-- An `Execution` is a record of a component run or a step in an ML workflow and the runtime parameters. An execution can be thought of as an instance of an `ExecutionType`. Executions are recorded when you run an ML pipeline or step.
-- An `Event` is a record of the relationship between artifacts and executions. When an execution happens, events record every artifact that was used by the execution, and every artifact that was produced. These records allow for lineage tracking throughout a workflow. By looking at all events, MLMD knows what executions happened and what artifacts were created as a result. MLMD can then recurse back from any artifact to all of its upstream inputs.
-- A `ContextType` describes a type of conceptual group of artifacts and executions in a workflow, and its structural properties. For example: projects, pipeline runs, experiments, owners etc.
-- A `Context` is an instance of a `ContextType`. It captures the shared information within the group. For example: project name, changelist commit id, experiment annotations etc. It has a user-defined unique name within its `ContextType`.
-- An `Attribution` is a record of the relationship between artifacts and contexts.
-- An `Association` is a record of the relationship between executions and contexts.
+- `ArtifactType`은 아티팩트 유형 및 메타데이터 저장소에 저장되는 속성을 설명합니다. 이러한 유형을 코드의 메타데이터 저장소에 즉시 등록하거나, 직렬화된 형식에서 저장소에 로드할 수 있습니다. 유형을 등록하면 저장소의 수명 기간 동안 해당 정의를 사용할 수 있습니다.
+- `Artifact`는 `ArtifactType`의 특정 인스턴스와 메타데이터 저장소에 작성된 해당 속성을 설명합니다.
+- `ExecutionType`은 워크플로의 구성 요소 유형 또는 단계와 해당 런타임 매개변수를 설명합니다.
+- `Execution`은 ML 워크플로의 구성 요소 실행 또는 단계, 및 런타임 매개변수에 대한 기록입니다. 실행은 `ExecutionType`의 인스턴스로 생각할 수 있습니다. ML 파이프라인 또는 단계를 실행할 때 실행이 기록됩니다.
+- `Event`는 아티팩트와 실행 간의 관계에 대한 기록입니다. 실행이 수행되면, 이벤트가 실행에 사용된 모든 아티팩트와 생성된 모든 아티팩트를 기록합니다. 이러한 기록을 사용하면 워크플로 전체에서 계보를 추적할 수 있습니다. 모든 이벤트를 살펴봄으로써 MLMD는 어떤 실행이 이루어졌는지, 그리고 그 결과로 만들어진 아티팩트는 무엇인지 파악합니다. 그러면 MLMD가 모든 아티팩트에서 모든 업스트림 입력으로 되돌릴 수 있습니다.
+- `ContextType`은 워크플로에서 아티팩트 및 실행의 개념적 그룹 유형과 구조적 속성을 설명합니다. 예: 프로젝트, 파이프라인 실행, 실험, 소유자 등
+- `Context`는 `ContextType`의 인스턴스로, 그룹 내에서 공유된 정보를 캡처합니다(예: 프로젝트 이름, 변경 목록 커밋 ID, 실험 주석 등). `ContextType` 내에 사용자가 정의한 고유 이름이 있습니다.
+- `Attribution`은 아티팩트와 컨텍스트 간의 관계에 대한 기록입니다.
+- `Association`은 실행과 컨텍스트 간의 관계에 대한 기록입니다.
 
-## MLMD Functionality
+## MLMD 기능
 
 ML 워크플로 및 해당 계보에서 모든 구성 요소/단계의 입력 및 출력을 추적하면 ML 플랫폼에서 몇 가지 중요한 기능을 사용할 수 있습니다. 다음 목록은 몇 가지 주요 이점에 대한 포괄적인 개요를 제공합니다.
 
 - **List all Artifacts of a specific type.** Example: all Models that have been trained.
 - **비교를 위해 같은 유형의 두 아티팩트를 로드합니다.** 예: 두 실험의 결과를 비교합니다.
 - **모든 관련 실행의 DAG와 컨텍스트의 입력 및 출력 아티팩트를 표시합니다.** 예: 디버깅 및 발견을 위한 실험의 워크플로를 시각화합니다.
-- **Recurse back through all events to see how an artifact was created.** Examples: see what data went into a model; enforce data retention plans.
+- **모든 이벤트를 다시 반복하여 아티팩트가 어떻게 만들어졌는지 확인합니다.** 예: 모델에 들어간 데이터를 확인하고, 데이터 보존 계획을 시행합니다.
 - **주어진 아티팩트를 사용하여 만들어진 모든 아티팩트를 식별합니다.** 예: 특정 데이터세트에서 훈련된 모든 모델을 확인하고, 잘못된 데이터를 기반으로 한 모델을 표시합니다.
 - **이전에 같은 입력에서 실행이 수행되었는지 확인합니다.** 예: 구성 요소/단계가 이미 같은 작업을 완료했고 이전 출력을 다시 사용할 수 있는지 확인합니다.
 - **워크플로 실행의 컨텍스트를 기록하고 쿼리합니다.** 예: 워크플로 실행에 사용되는 소유자 및 변경 목록을 추적하고, 실험별로 계보를 그룹화하며, 프로젝트별로 아티팩트를 관리합니다.
 
-See the [MLMD tutorial](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial) for an example that shows you how to use the MLMD API and the metadata store to retrieve lineage information.
+MLMD API 및 메타데이터 저장소를 사용하여 계보 정보를 검색하는 방법을 보여주는 예제는 [MLMD 튜토리얼](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial)을 참조하세요.
 
-### Integrate ML Metadata into your ML Workflows
+### ML 워크플로에 ML 메타데이터 통합하기
 
-If you are a platform developer interested in integrating MLMD into your system, use the example workflow below to use the low-level MLMD APIs to track the execution of a training task. You can also use higher-level Python APIs in notebook environments to record experiment metadata.
+MLMD를 시스템에 통합하는 데 관심이 있는 플랫폼 개발자인 경우, 아래 예제 워크플로를 사용하여 저수준 MLMD API로 학습 작업의 실행을 추적해 보세요. 노트북 환경에서 더 높은 수준의 Python API를 사용하여 실험 메타데이터를 기록할 수도 있습니다.
 
-![ML Metadata Example Flow](images/mlmd_flow.png)
+![ML Metadata Example Flow](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/tfx/guide/images/mlmd_flow.png?raw=true)
 
-1. Register artifact types
+1. 아티팩트 유형을 등록합니다.
 
 ```python
 # Create ArtifactTypes, e.g., Data and Model
@@ -130,7 +130,7 @@ model_type_id = store.put_artifact_type(model_type)
 artifact_types = store.get_artifact_types()
 ```
 
-1. Register execution types for all steps in the ML workflow
+1. ML 워크플로의 모든 단계에 대한 실행 유형을 등록합니다.
 
 ```python
 # Create an ExecutionType, e.g., Trainer
@@ -143,7 +143,7 @@ trainer_type_id = store.put_execution_type(trainer_type)
 [registered_type] = store.get_execution_types_by_id([trainer_type_id])
 ```
 
-1. Create an artifact of DataSet ArtifactType
+1. DataSet ArtifactType의 아티팩트를 만듭니다.
 
 ```python
 # Create an input artifact of type DataSet
@@ -162,7 +162,7 @@ artifacts = store.get_artifacts()
 artifacts_with_uri = store.get_artifacts_by_uri(data_artifact.uri)
 ```
 
-1. Create an execution of the Trainer run
+1. Trainer 실행의 실행을 만듭니다.
 
 ```python
 # Register the Execution of a Trainer run
@@ -175,7 +175,7 @@ trainer_run.properties["state"].string_value = "RUNNING"
 executions = store.get_executions_by_id([run_id])
 ```
 
-1. Define the input event and read data
+1. 입력 이벤트를 정의하고 데이터를 읽습니다.
 
 ```python
 # Define the input event
@@ -188,7 +188,7 @@ input_event.type = metadata_store_pb2.Event.DECLARED_INPUT
 store.put_events([input_event])
 ```
 
-1. Declare the output artifact
+1. 출력 아티팩트를 선언합니다.
 
 ```python
 # Declare the output artifact of type SavedModel
@@ -200,7 +200,7 @@ model_artifact.type_id = model_type_id
 [model_artifact_id] = store.put_artifacts([model_artifact])
 ```
 
-1. Record the output event
+1. 출력 이벤트를 기록합니다.
 
 ```python
 # Declare the output event
@@ -213,7 +213,7 @@ output_event.type = metadata_store_pb2.Event.DECLARED_OUTPUT
 store.put_events([output_event])
 ```
 
-1. Mark the execution as completed
+1. 실행을 완료된 것으로 표시합니다.
 
 ```python
 trainer_run.id = run_id
@@ -221,7 +221,7 @@ trainer_run.properties["state"].string_value = "COMPLETED"
 store.put_executions([trainer_run])
 ```
 
-1. Group artifacts and executions under a context using attributions and assertions artifacts
+1. 특성 및 어설션 아티팩트를 사용하여 하나의 컨텍스트 아래에 아티팩트와 실행을 그룹화합니다.
 
 ```python
 # Create a ContextType, e.g., Experiment with a note property
@@ -253,19 +253,19 @@ experiment_artifacts = store.get_artifacts_by_context(experiment_id)
 experiment_executions = store.get_executions_by_context(experiment_id)
 ```
 
-## Use MLMD with a remote gRPC server
+## 원격 gRPC 서버와 함께 MLMD 사용하기
 
-You can use MLMD with remote gRPC servers as shown below:
+아래와 같이 원격 gRPC 서버에서 MLMD를 사용할 수 있습니다.
 
-- Start a server
+- 서버 시작
 
 ```bash
 bazel run -c opt --define grpc_no_ares=true  //ml_metadata/metadata_store:metadata_store_server
 ```
 
-By default, the server uses a fake in-memory db per request and does not persist the metadata across calls. It can also be configured with a MLMD `MetadataStoreServerConfig` to use SQLite files or MySQL instances. The config can be stored in a text protobuf file and passed to the binary with `--metadata_store_server_config_file=path_to_the_config_file`.
+기본적으로, 서버는 매 요청시 가짜 인메모리 db를 사용하며 호출 간에 메타데이터를 유지하지 않습니다. SQLite 파일 또는 MySQL 인스턴스를 사용하도록 MLMD `MetadataStoreServerConfig`로 구성할 수도 있습니다. 구성은 텍스트 protobuf 파일에 저장하고 `-metadata_store_server_config_file`을 이용해 바이너리로 전달할 수 있습니다.
 
-An example `MetadataStoreServerConfig` file in text protobuf format:
+텍스트 protobuf 형식의 `MetadataStoreServerConfig` 파일 예:
 
 ```textpb
 connection_config {
@@ -276,7 +276,7 @@ connection_config {
 }
 ```
 
-- Create the client stub and use it in Python
+- 클라이언트 스텁을 만들고 Python에서 사용합니다.
 
 ```python
 from grpc import insecure_channel
@@ -313,6 +313,6 @@ stub.PutArtifactType(request)
 
 ## Resources
 
-The MLMD library has a high-level API that you can readily use with your ML pipelines. See the [MLMD API documentation](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd) for more details.
+MLMD 라이브러리에는 ML 파이프라인과 함께 쉽게 사용할 수 있는 고급 API가 있습니다. 자세한 내용은 [MLMD API 문서](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd)를 참조하세요.
 
-Also check out the [MLMD tutorial](../tutorials/mlmd/mlmd_tutorial) to learn how to use MLMD to trace the lineage of your pipeline components.
+또한 [MLMD 튜토리얼](../tutorials/mlmd/mlmd_tutorial)에서 MLMD를 사용하여 파이프라인 구성 요소의 계보를 추적하는 방법을 알아보세요.
