@@ -10,7 +10,7 @@ Depending on the task, you will need to make a tradeoff between model complexity
 
 ![Graph of accuracy vs latency](../images/performance/accuracy_vs_latency.png "정확도 대 지연")
 
-One example of models optimized for mobile devices are [MobileNets](https://arxiv.org/abs/1704.04861), which are optimized for mobile vision applications. [Hosted models](../guide/hosted_models.md) lists several other models that have been optimized specifically for mobile and embedded devices.
+모바일 기기에 최적화된 모델의 한 가지 예는 모바일 비전 애플리케이션에 최적화된 [MobileNet](https://arxiv.org/abs/1704.04861)입니다. [호스팅된 모델](../guide/hosted_models.md)에는 모바일 및 임베디드 기기에 특별히 최적화된 몇 가지 다른 모델이 나열되어 있습니다.
 
 You can retrain the listed models on your own dataset by using transfer learning. Check out our transfer learning tutorial for [image classification](/lite/tutorials/model_maker_image_classification) and [object detection](https://medium.com/tensorflow/training-and-serving-a-realtime-mobile-object-detector-in-30-minutes-with-cloud-tpus-b78971cf1193).
 
@@ -48,9 +48,9 @@ Platform specific tools like [Android profiler](https://developer.android.com/st
 
 TensorFlow Lite has added new ways to accelerate models with faster hardware like GPUs, DSPs, and neural accelerators. Typically, these accelerators are exposed through [delegate](delegates.md) submodules that take over parts of the interpreter execution. TensorFlow Lite can use delegates by:
 
-- Using Android's [Neural Networks API](https://developer.android.com/ndk/guides/neuralnetworks/). You can utilize these hardware accelerator backends to improve the speed and efficiency of your model. To enable the Neural Networks API, check out the [NNAPI delegate](nnapi.md) guide.
-- GPU delegate is available on Android and iOS, using OpenGL/OpenCL and Metal, respectively. To try them out, see the [GPU delegate tutorial](gpu.md) and [documentation](gpu_advanced.md).
-- Hexagon delegate is available on Android. It leverages the Qualcomm Hexagon DSP if it is available on the device. See the [Hexagon delegate tutorial](hexagon_delegate.md) for more information.
+- Android의 [Neural Networks API](https://developer.android.com/ndk/guides/neuralnetworks/) 사용하기. 하드웨어 가속기 백엔드를 활용하여 모델의 속도와 효율성을 개선할 수 있습니다. Neural Networks API를 활성화하려면 [NNAPI 대리자](nnapi.md) 가이드를 확인하세요.
+- GPU 대리자는 각각 OpenGL/OpenCL 및 Metal을 사용하여 Android 및 iOS에서 사용할 수 있습니다. 사용해 보려면 [GPU 대리자 튜토리얼](gpu.md) 및 [설명서](gpu_advanced.md)를 참조하세요.
+- Hexagon 대리자는 Android에서 사용할 수 있습니다. 기기에서 사용할 수 있는 경우 Qualcomm Hexagon DSP를 활용합니다. 자세한 내용은 [Hexagon 대리자 튜토리얼](hexagon_delegate.md)을 참조하세요.
 - It is possible to create your own delegate if you have access to non-standard hardware. See [TensorFlow Lite delegates](delegates.md) for more information.
 
 Be aware that some accelerators work better for different types of models. Some delegates only support float models or models optimized in a specific way. It is important to [benchmark](measurement.md) each delegate to see if it is a good choice for your application. For example, if you have a very small model, it may not be worth delegating the model to either the NN API or the GPU. Conversely, accelerators are a great choice for large models that have high arithmetic intensity.
