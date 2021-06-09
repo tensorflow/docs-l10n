@@ -6,7 +6,7 @@ Using [TensorFlow Lite Metadata](../convert/metadata), developers can generate w
 
 [메타데이터](../convert/metadata.md)로 강화된 TensorFlow Lite 모델의 경우 개발자는 Android Studio ML Model Binding을 사용하여 프로젝트를 위한 설정을 자동으로 구성하고 모델 메타데이터에 기초한 래퍼 클래스를 생성할 수 있습니다. 래퍼 코드를 사용하면 `ByteBuffer`와 직접 상호 작용할 필요가 없습니다. 대신, 개발자는 `Bitmap` 및 `Rect`와 같은 형식화된 객체를 통해 TensorFlow Lite 모델과 상호 작용할 수 있습니다.
 
-Note: Required [Android Studio 4.1](https://developer.android.com/studio) or above
+참고: [Android Studio 4.1](https://developer.android.com/studio) 이상 필요
 
 ### Import a TensorFlow Lite model in Android Studio
 
