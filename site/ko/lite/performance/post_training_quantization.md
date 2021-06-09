@@ -33,7 +33,7 @@ tflite_quant_model = converter.convert()
 
 추론에서 가중치는 8bit 정밀도에서 부동 소수점으로 변환되고 부동 소수점 커널을 사용하여 계산됩니다. 이 변환은 한 번 수행되고 캐시되어 지연 시간을 줄입니다.
 
-To further improve latency, "dynamic-range" operators dynamically quantize activations based on their range to 8-bits and perform computations with 8-bit weights and activations. This optimization provides latencies close to fully fixed-point inference. However, the outputs are still stored using floating point so that the speedup with dynamic-range ops is less than a full fixed-point computation.
+지연 시간을 더욱 개선하기 위해 '동적 범위' 연산자는 8bit까지 범위를 기반으로 활성화를 동적으로 양자화하고 8bit 가중치 및 활성화를 사용하여 계산을 수행합니다. 이 최적화는 전체 고정 소수점 추론에 가까운 지연 시간을 제공합니다. 그러나 출력은 여전히 부동 소수점을 사용하여 저장되므로 동적 범위 연산을 통한 속도 향상은 전체 고정 소수점 계산보다 적습니다.
 
 ### 전체 정수 양자화
 
@@ -105,7 +105,7 @@ float16 양자화의 장점은 다음과 같습니다.
 float16 양자화의 단점은 다음과 같습니다.
 
 - 고정 소수점 수학에 대한 양자화만큼 지연 시간을 줄이지 않습니다.
-- By default, a float16 quantized model will "dequantize" the weights values to float32 when run on the CPU. (Note that the GPU delegate will not perform this dequantization, since it can operate on float16 data.)
+- 기본적으로 float16 양자화된 모델은 CPU에서 실행될 때 가중치 값을 float32로 '역양자화'합니다. (GPU 대리자는 float16 데이터에서 동작할 수 있으므로 이 역양자화를 수행하지 않습니다.)
 
 ### 정수 전용: 8bit 가중치를 사용한 16bit 활성화(실험적)
 
