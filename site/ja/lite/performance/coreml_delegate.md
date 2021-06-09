@@ -9,7 +9,7 @@ TensorFlow Lite Core ML デリゲートは、[Core ML フレームワーク](htt
 **サポートする iOS のバージョンとデバイス:**
 
 - iOS 12 以降。古い iOS バージョンの場合、Core ML デリゲートは自動的に CPU にフォールバックします。
-- デフォルトでは、Core ML デリゲートは A12 SoC 以降のデバイス（iPhone Xs 以降）でのみ有効で、Neural Engine（ニューラルエンジン）を推論の高速化に使用します。古いデバイスで Core ML デリゲートを使用する場合は、[ベストプラクティス](#best-practices)をご覧ください。
+- デフォルトでは、Core ML デリゲートは A12 SoC 以降のデバイス（iPhone Xs 以降）でのみ有効で、Neural Engine（ニューラルエンジン）を推論の高速化に使用します。古いデバイスで Core ML デリゲートを使用する場合は、[ベストプラクティス](#best-practices)を参照してください。
 
 **サポートするモデル**
 
