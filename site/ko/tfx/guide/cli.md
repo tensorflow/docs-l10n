@@ -40,7 +40,10 @@ TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아�
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline create --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \&lt;br&gt;--iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --package_path=&lt;var&gt;package-path&lt;/var&gt; \&lt;br&gt;--build_target_image=&lt;var&gt;build-target-image&lt;/var&gt; --build_base_image=&lt;var&gt;build-base-image&lt;/var&gt; \&lt;br&gt;--skaffold_cmd=&lt;var&gt;skaffold-command&lt;/var&gt;]</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline create --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
+--iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; \
+--build_image --build_base_image=&lt;var&gt;build-base-image&lt;/var&gt;]
+</pre>
 
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var> </dt>
@@ -85,31 +88,18 @@ TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아�
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>(선택 사항) IAP 보호 끝점의 클라이언트 ID입니다.</dd>
 
-
   <dt>--namespace=<var>namespace</var> </dt>
 <dd>(선택 사항) Kubeflow Pipelines API에 연결하기 위한 Kubernetes 네임스페이스입니다. 네임스페이스가 지정되지 않으면, <code>kubeflow</code>가 기본값으로 사용됩니다.</dd>
 
-
-  <dt>--package_path=<var>package-path</var> </dt>
+  <dt>--build_image</dt>
   <dd>
-    <p>(선택 사항) 파일로 컴파일된 파이프라인의 경로입니다. 컴파일된 파이프라인은 압축 파일(<code>.tar.gz</code>, <code>.tgz</code> 또는 <code>.zip</code>) 또는 YAML 파일(<code>.yaml</code> 또는 <code>.yml</code>)이어야 합니다.</p>
-    <p><var>package-path</var>가 지정되지 않으면 TFX가 <code>current_directory/pipeline_name.tar.gz</code>를 기본 경로로 사용합니다.</p>
-  </dd>
-  <dt>--build_target_image=<var>build-target-image</var> </dt>
-  <dd>
-    <p>(선택 사항) <var>engine</var>이 <strong>kubeflow</strong>이면 TFX는 파이프라인에 대한 컨테이너 이미지를 생성합니다. 빌드 대상 이미지는 파이프라인 컨테이너 이미지를 만들 때 사용할 이름, 컨테이너 이미지 리포지토리 및 태그를 지정합니다. 태그를 지정하지 않으면 컨테이너 이미지가 <code>latest</code>로 태그 지정됩니다.</p>
-    <p>Kubeflow Pipelines 클러스터가 파이프라인을 실행하려면 클러스터가 지정된 컨테이너 이미지 리포지토리에 액세스할 수 있어야 합니다.</p>
+    <p>(선택 사항) <var>engine</var>이 <strong>kubeflow</strong>이면 TFX는 지정된 경우 파이프라인에 대한 컨테이너 이미지를 생성합니다. 현재 디렉토리의 `Dockerfile`이 사용되며, 존재하지 않으면 TFX에서 자동으로 생성합니다.</p>
+    <p>빌드된 이미지는 `KubeflowDagRunnerConfig`에 지정된 원격 레지스트리로 푸시됩니다.</p>
   </dd>
   <dt>--build_base_image=<var>build-base-image</var> </dt>
   <dd>
     <p>(선택 사항) <var>engine</var>이 <strong>kubeflow</strong>이면 TFX는 파이프라인에 대한 컨테이너 이미지를 생성합니다. 빌드 기본 이미지는 파이프라인 컨테이너 이미지를 빌드할 때 사용할 기본 컨테이너 이미지를 지정합니다.</p>
   </dd>
-  <dt>--skaffold_cmd=<var>skaffold-cmd</var> </dt>
-  <dd>
-    <p>(선택 사항) 컴퓨터의 <a href="https://skaffold.dev/" class="external">Skaffold</a> 경로입니다.</p>
-  </dd>
-
-
 
 #### 예:
 
@@ -119,16 +109,18 @@ Apache Airflow:
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx pipeline create --engine=kubeflow --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; --package_path=&lt;var&gt;package-path&lt;/var&gt; \&lt;br&gt;--iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt; \&lt;br&gt;--skaffold_cmd=&lt;var&gt;skaffold-cmd&lt;/var&gt;</pre>
+<pre class="devsite-terminal">tfx pipeline create --engine=kubeflow --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; \
+--iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
+--build_image
+</pre>
 
 Local:
 
-<pre class="devsite-terminal">tfx pipeline create --engine=local --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;
-</pre>
+<pre class="devsite-terminal">tfx pipeline create --engine=local --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;</pre>
 
 사용자 환경에서 엔진을 자동 감지하려면 아래 예와 같이 engine 플래그를 사용하지 않으면 됩니다. 자세한 내용은 플래그 섹션을 확인하세요.
 
-<pre class="devsite-terminal">tfx pipeline create --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; --endpoint --iap_client_id --namespace \&lt;br&gt;--package_path --skaffold_cmd</pre>
+<pre class="devsite-terminal">tfx pipeline create --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;</pre>
 
 ### update
 
@@ -136,7 +128,9 @@ Local:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline update --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \&lt;br&gt;--iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --package_path=&lt;var&gt;package-path&lt;/var&gt; \&lt;br&gt;--skaffold_cmd=&lt;var&gt;skaffold-command&lt;/var&gt;]</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline update --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
+--iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --build_image]
+</pre>
 
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var> </dt>
@@ -180,20 +174,12 @@ Local:
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>(선택 사항) IAP 보호 끝점의 클라이언트 ID입니다.</dd>
-
-
   <dt>--namespace=<var>namespace</var> </dt>
 <dd>(선택 사항) Kubeflow Pipelines API에 연결하기 위한 Kubernetes 네임스페이스입니다. 네임스페이스가 지정되지 않으면, <code>kubeflow</code>가 기본값으로 사용됩니다.</dd>
-
-
-  <dt>--package_path=<var>package-path</var> </dt>
+  <dt>--build_image</dt>
   <dd>
-    <p>(선택 사항) 파일로 컴파일된 파이프라인의 경로입니다. 컴파일된 파이프라인은 압축 파일(<code>.tar.gz</code>, <code>.tgz</code> 또는 <code>.zip</code>) 또는 YAML 파일(<code>.yaml</code> 또는 <code>.yml</code>)이어야 합니다.</p>
-    <p><var>package-path</var>가 지정되지 않으면 TFX가 <code>current_directory/pipeline_name.tar.gz</code>를 기본 경로로 사용합니다.</p>
-  </dd>
-  <dt>--skaffold_cmd=<var>skaffold-cmd</var> </dt>
-  <dd>
-    <p>(선택 사항) 컴퓨터의 <a href="https://skaffold.dev/" class="external">Skaffold</a> 경로입니다.</p>
+    <p>(선택 사항) <var>engine</var>이 <strong>kubeflow</strong>이면 TFX는 지정된 경우 파이프라인에 대한 컨테이너 이미지를 생성합니다. 현재 디렉토리의 `Dockerfile`이 사용됩니다.</p>
+    <p>빌드된 이미지는 `KubeflowDagRunnerConfig`에 지정된 원격 레지스트리로 푸시됩니다.</p>
   </dd>
 
 
@@ -206,12 +192,14 @@ Apache Airflow:
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx pipeline update --engine=kubeflow --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; --package_path=&lt;var&gt;package-path&lt;/var&gt; \&lt;br&gt;--iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt; \&lt;br&gt;--skaffold_cmd=&lt;var&gt;skaffold-cmd&lt;/var&gt;</pre>
+<pre class="devsite-terminal">tfx pipeline update --engine=kubeflow --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; \
+--iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
+--build_image
+</pre>
 
 Local:
 
-<pre class="devsite-terminal">tfx pipeline update --engine=local --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;
-</pre>
+<pre class="devsite-terminal">tfx pipeline update --engine=local --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;</pre>
 
 ### compile
 
@@ -226,9 +214,7 @@ Local:
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline compile --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--engine=&lt;var&gt;engine&lt;/var&gt; \
---package_path=&lt;var&gt;package-path&lt;/var&gt;]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx pipeline compile --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--engine=&lt;var&gt;engine&lt;/var&gt;]</pre>
 
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var> </dt>
@@ -246,11 +232,6 @@ Local:
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
   </dd>
-  <dt>--package_path=<var>package-path</var> </dt>
-  <dd>
-    <p>(선택 사항) 파일로 컴파일된 파이프라인의 경로입니다. 컴파일된 파이프라인은 압축 파일(<code>.tar.gz</code>, <code>.tgz</code> 또는 <code>.zip</code>) 또는 YAML 파일(<code>.yaml</code> 또는 <code>.yml</code>)이어야 합니다.</p>
-    <p><var>package-path</var>가 지정되지 않으면 TFX가 <code>current_directory/pipeline_name.tar.gz</code>를 기본 경로로 사용합니다.</p>
-  </dd>
 </dl>
 
 #### 예:
@@ -261,13 +242,11 @@ Apache Airflow:
 
 Kubeflow:
 
-<pre class="devsite-terminal">tfx pipeline compile --engine=kubeflow --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; --package_path=&lt;var&gt;package-path&lt;/var&gt;
-</pre>
+<pre class="devsite-terminal">tfx pipeline compile --engine=kubeflow --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;</pre>
 
 Local:
 
-<pre class="devsite-terminal">tfx pipeline compile --engine=local --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;
-</pre>
+<pre class="devsite-terminal">tfx pipeline compile --engine=local --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;</pre>
 
 ### delete
 
@@ -338,8 +317,7 @@ Kubeflow:
 
 Local:
 
-<pre class="devsite-terminal">tfx pipeline delete --engine=local --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt;
-</pre>
+<pre class="devsite-terminal">tfx pipeline delete --engine=local --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt;</pre>
 
 ### list
 
@@ -421,7 +399,7 @@ Local:
 
 ### create
 
-오케스트레이터에서 파이프라인에 대한 새 실행 인스턴스를 만듭니다.
+오케스트레이터에서 파이프라인에 대한 새 실행 인스턴스를 만듭니다. Kubeflow의 경우 클러스터에 있는 파이프라인의 최신 파이프라인 버전이 사용됩니다.
 
 사용법:
 
@@ -852,15 +830,9 @@ Kubeflow:
 <dd>Kubeflow Pipelines API에 연결하기 위한 Kubernetes 네임스페이스입니다. 네임스페이스가 지정되지 않으면, <code>kubeflow</code>가 기본값으로 사용됩니다.</dd>
 
 
-  <dt>--package_path=<var>package-path</var> </dt>
-  <dd>
-    <p>파일로 컴파일된 파이프라인의 경로입니다. 컴파일된 파이프라인은 압축 파일(<code>.tar.gz</code>, <code>.tgz</code> 또는 <code>.zip</code>) 또는 YAML 파일(<code>.yaml</code> 또는 <code>.yml</code>)이어야 합니다.</p>
-    <p><var>package-path</var>가 지정되지 않으면 TFX가 <code>current_directory/pipeline_name.tar.gz</code>를 기본 경로로 사용합니다.</p>
-  </dd>
+## TFX CLI로 생성된 파일
 
-
-
-
+파이프라인이 생성되고 실행되면 파이프라인 관리를 위해 여러 파일이 생성됩니다.
 
 ## TFX CLI로 생성된 파일
 
@@ -870,7 +842,6 @@ Kubeflow:
     - 구성에서 읽은 파이프라인 메타데이터는 `${HOME}/tfx/${ORCHESTRATION_ENGINE}/${PIPELINE_NAME}` 아래에 저장됩니다. `AIRFLOW_HOME` 또는 `KUBEFLOW_HOME`과 같은 환경 변수를 설정하여 이 위치를 사용자 정의할 수 있습니다. 이 동작은 향후 릴리스에서 변경될 수 있습니다. 이 디렉터리는 파이프라인을 실행하거나 업데이트하는 데 필요한 Kubeflow Pipelines 클러스터에 파이프라인 ID를 포함한 파이프라인 정보를 저장하는 데 사용됩니다.
     - TFX 0.25 이전에는 이러한 파일이 `${HOME}/${ORCHESTRATION_ENGINE}`에 있었습니다. TFX 0.25에서는 원활한 마이그레이션을 위해 이전 위치의 파일이 자동으로 새 위치로 이동됩니다.
     - TFX 0.27부터 kubeflow는 로컬 파일 시스템에 이러한 메타데이터 파일을 생성하지 않습니다. 그러나 kubeflow가 생성하는 다른 파일은 아래를 참조하세요.
-- (Kubeflow만 해당) Dockerfile, build.yaml, *pipeline_name*.tar.gz
+- (Kubeflow만 해당) Dockerfile 및 컨테이너 이미지
     - Kubeflow Pipelines에는 파이프라인에 대해 두 가지 종류의 입력이 필요합니다. 이러한 파일은 현재 디렉터리에서 TFX에 의해 생성됩니다.
-    - 하나는 파이프라인에서 구성 요소를 실행하는 데 사용되는 컨테이너 이미지입니다. 이 컨테이너 이미지는 Kubeflow Pipelines용 파이프라인이 TFX CLI를 사용하여 생성될 때 빌드됩니다. TFX는 [skaffold](https://skaffold.dev/)를 사용하여 컨테이너 이미지를 빌드합니다. `Dockerfile` 및 `build.yaml`은 TFX에 의해 생성되고 skaffold에 전달됩니다. 이러한 파일 이름은 고정되어 있으며 지금은 변경할 수 없습니다.
-    - TFX CLI는 주어진 파이프라인 정의를 Kubeflow Pipelines가 이해할 수 있는 형식으로 *컴파일합니다.* 컴파일 결과는 `_pipeline_name_.tar.gz`로 저장됩니다. 이 파일 이름은 `--package-path` 플래그를 사용하여 사용자 정의할 수 있습니다.
+    - 하나는 파이프라인에서 구성 요소를 실행하는 데 사용되는 컨테이너 이미지입니다. 이 컨테이너 이미지는 Kubeflow Pipelines용 파이프라인이 생성되거나 `--build-image` 플래그로 업데이트될 때 빌드됩니다. TFX CLI는 있는 경우 `Dockerfile`을 생성하고 컨테이너 이미지를 빌드하고 KubeflowDagRunnerConfig에 지정된 레지스트리에 푸시합니다.
