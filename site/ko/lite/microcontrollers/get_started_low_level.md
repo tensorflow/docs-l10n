@@ -42,7 +42,7 @@ To run the model on your device, we will walk through the instructions in the `R
 
 The following sections walk through the example's [`hello_world_test.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/hello_world_test.cc), unit test which demonstrates how to run inference using TensorFlow Lite for Microcontrollers. It loads the model and runs inference several times.
 
-### 1. Include the library headers
+### 1. 라이브러리 헤더 포함
 
 마이크로컨트롤러용 TensorFlow Lite 라이브러리를 사용하려면 다음 헤더 파일을 포함해야 합니다.
 
@@ -60,7 +60,7 @@ The following sections walk through the example's [`hello_world_test.cc`](https:
 - [`schema_generated.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema_generated.h)에는 TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) 모델 파일 형식에 대한 스키마가 포함됩니다.
 - [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h)는 TensorFlow Lite 스키마에 대한 버전 관리 정보를 제공합니다.
 
-### 2. Include the model header
+### 2. 모델 헤더 포함
 
 마이크로컨트롤러용 TensorFlow Lite 인터프리터는 모델이 C++ 배열로 제공될 것으로 예상합니다. 모델은 `model.h` 및 `model.cc` 파일에 정의되어 있습니다. 헤더는 다음 줄에 포함됩니다.
 
@@ -76,7 +76,7 @@ The following sections walk through the example's [`hello_world_test.cc`](https:
 #include "tensorflow/lite/micro/testing/micro_test.h"
 ```
 
-The test is defined using the following macros:
+테스트는 다음 매크로를 사용하여 정의됩니다.
 
 ```C++
 TF_LITE_MICRO_TESTS_BEGIN
@@ -91,7 +91,7 @@ TF_LITE_MICRO_TESTS_END
 
 이제 위의 매크로에 포함된 코드에 대해 설명합니다.
 
-### 4. Set up logging
+### 4. 로깅 설정
 
 로깅을 설정하기 위해 `tflite::MicroErrorReporter` 인스턴스에 대한 포인터를 사용하여 `tflite::ErrorReporter` 포인터를 생성합니다.
 
@@ -128,7 +128,7 @@ tflite::AllOpsResolver resolver;
 
 이 작업을 위해 다른 클래스인 `MicroMutableOpResolver`를 사용합니다. *Micro Speech* 예제의 [`micro_speech_test.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc)에서 사용하는 방법을 확인할 수 있습니다.
 
-### 7. Allocate memory
+### 7. 메모리 할당
 
 입력, 출력 및 중간 배열에 대해 일정량의 메모리를 미리 할당해야 합니다. 이 메모리는 `tensor_arena_size` 크기의 `uint8_t` 배열로 제공됩니다.
 
@@ -139,7 +139,7 @@ uint8_t tensor_arena[tensor_arena_size];
 
 필요한 크기는 사용 중인 모델에 따라 다르며 실험을 통해 결정해야 할 수도 있습니다.
 
-### 8. Instantiate interpreter
+### 8. 인터프리터 인스턴스화
 
 `tflite::MicroInterpreter` 인스턴스를 만들고 앞서 만든 변수를 전달합니다.
 
@@ -148,7 +148,7 @@ tflite::MicroInterpreter interpreter(model, resolver, tensor_arena,
                                      tensor_arena_size, error_reporter);
 ```
 
-### 9. Allocate tensors
+### 9. 텐서 할당
 
 We tell the interpreter to allocate memory from the `tensor_arena` for the model's tensors:
 
@@ -185,7 +185,7 @@ TF_LITE_MICRO_EXPECT_EQ(kTfLiteFloat32, input->type);
 
 The enum value `kTfLiteFloat32` is a reference to one of the TensorFlow Lite data types, and is defined in [`common.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/common.h).
 
-### 11. Provide an input value
+### 11. 입력 값 제공
 
 모델에 입력을 제공하기 위해 다음과 같이 입력 텐서의 내용을 설정합니다.
 
@@ -195,7 +195,7 @@ input->data.f[0] = 0.;
 
 이 경우, `0`을 나타내는 부동 소수점 값을 입력합니다.
 
-### 12. Run the model
+### 12. 모델 실행
 
 모델을 실행하기 위해 `tflite::MicroInterpreter` 인스턴스에서 `Invoke()`를 호출할 수 있습니다.
 
@@ -237,7 +237,7 @@ float value = output->data.f[0];
 TF_LITE_MICRO_EXPECT_NEAR(0., value, 0.05);
 ```
 
-### 14. Run inference again
+### 14. 추론 다시 실행
 
 나머지 코드는 추론을 여러 번 더 실행합니다. 각 인스턴스에서 입력 텐서에 값을 할당하고 인터프리터를 호출하고 출력 텐서에서 결과를 읽습니다.
 
@@ -258,6 +258,6 @@ value = output->data.f[0];
 TF_LITE_MICRO_EXPECT_NEAR(-0.959, value, 0.05);
 ```
 
-### 15. Read the application code
+### 15. 애플리케이션 코드 읽기
 
 Once you have walked through this unit test, you should be able to understand the example's application code, located in [`main_functions.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/main_functions.cc). It follows a similar process, but generates an input value based on how many inferences have been run, and calls a device-specific function that displays the model's output to the user.
