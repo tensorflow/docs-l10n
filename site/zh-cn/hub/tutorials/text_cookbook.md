@@ -20,13 +20,13 @@
 
 ### BERT
 
-[使用 TF Hub 上的 BERT 预测电影评论情感](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) - 展示如何使用 BERT 模块进行分类。包括使用 `bert` 库进行分词和预处理的方法。
+[使用 TF Hub 上的 BERT 预测电影评论情感](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) - 展示如何使用 BERT 模块进行分类。包括使用 `bert` 库进行分词和预处理。
 
 ### Kaggle
 
 [Kaggle 上的 IMDB 分类](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) - 演示如何在 Colab 中与 Kaggle 竞赛轻松交互，包括下载数据和提交结果。
 
- | Estimator | Keras | TF2 | TF 数据集 | BERT | Kaggle API
+ | Estimator | Keras | TF2 | TF Datasets | BERT | Kaggle APIs
 --- | --- | --- | --- | --- | --- | ---
 [文本分类](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  |
 [使用 Keras 进行文本分类](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub) |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |
@@ -67,10 +67,6 @@ TensorFlow Hub 提供的模块目前不支持所有语言。下面的教程展�
 
 ### 封装现有的预训练嵌入向量
 
-[文本嵌入向量模块导出程序](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings/export.py) - 一种将现有的预训练嵌入向量封装到模块中的工具。展示在模块中包括文本预处理运算的方法。您可以通过该方法从词例嵌入向量创建句子嵌入向量模块。
+[文本嵌入向量模块导出程序](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings/export.py) - 一种将现有的预训练嵌入向量封装到模块中的工具。展示在模块中包括文本预处理运算的方法。您可以通过这种方式从词例嵌入向量创建句子嵌入向量模块。
 
 [文本嵌入向量模块导出程序 v2](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings_v2/export_v2.py) - 与上面的导出程序相同，但兼容 TensorFlow 2 和 Eager Execution。
-
-### 创建可训练的 RNN 模块
-
-[RNN 模型导出程序](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/saved_model/integration_tests/export_text_rnn_model.py) - 展示如何创建基于 LSTM 并且与 TensorFlow 2 兼容的未初始化可训练模块。该模块公开两个签名，一个用于训练（通过直接在句子中进行馈送），另一个用于解码（构造从统计上来看最有可能的句子）。
