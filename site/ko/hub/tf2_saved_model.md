@@ -74,7 +74,7 @@ SavedModel은 훈련된 모델 또는 모델 조각에 대한 TensorFlow의 표�
 
 ### Keras에서 저장하기
 
-TensorFlow 2부터 `tf.keras.Model.save()` 및 `tf.keras.models.save_model()`은 기본적으로 SavedModel 형식(HDF5 아님)을 사용합니다. 결과 SavedModel은 `hub.load()`, `hub.KerasLayer` 및 앞으로 제공될 다른 유사한 상위 수준 API 어댑터와 함께 사용할 수 있습니다.
+TensorFlow 2부터 `tf.keras.Model.save()` 및 `tf.keras.models.save_model()`은 기본적으로 SavedModel 형식(HDF5 아님)을 사용합니다. 이렇게 얻어진 SavedModel은 `hub.load()`, `hub.KerasLayer` 및 앞으로 제공될 다른 유사한 고수준 API 어댑터와 함께 사용할 수 있습니다.
 
 전체 Keras 모델을 공유하려면 간단히 `include_optimizer=False`를 저장합니다.
 
@@ -99,11 +99,11 @@ piece_to_share.save(..., include_optimizer=False)
 
 GitHub에서 [TensorFlow 모델](https://github.com/tensorflow/models)은 BERT에 대해 전자의 접근 방식을 사용하고([nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py) 참조, 내보내기를 위한 `core_model`과 체크포인트 복원을 위한 `pretrainer`가 분리된 것에 주목) ResNet에는 후자의 접근 방식을 사용합니다([vision/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/vision/image_classification/resnet/tfhub_export.py) 참조).
 
-### 하위 수준 TensorFlow에서 저장하기
+### 저수준 TensorFlow에서 저장하기
 
-먼저, TensorFlow의 [SavedModel 가이드](https://www.tensorflow.org/guide/saved_model) 내용을 잘 알고 있어야 합니다.
+이를 위해서는 TensorFlow의 [SavedModel 가이드](https://www.tensorflow.org/guide/saved_model) 내용을 잘 알고 있어야 합니다.
 
-서비스 서명 그 이상을 제공하려면 [Reusable SavedModel 인터페이스](reusable_saved_models.md)를 구현해야 합니다. 개념적으로 다음과 같습니다.
+서비스 서명 그 이상을 제공하려면 [재사용 가능한 SavedModel 인터페이스](reusable_saved_models.md)를 구현해야 합니다. 개념적으로 이 내용은 다음과 같습니다.
 
 ```python
 class MyMulModel(tf.train.Checkpoint):
@@ -171,6 +171,6 @@ Keras 모델에서 저장하면 미세 조정의 모든 메커니즘이 동작�
 
 그래디언트 흐름과 잘 어울리는 모델 인터페이스(예: 소프트맥스 확률 또는 top-k 예측 대신 출력 로짓)를 선택합니다.
 
-모델이 드롭아웃, 배치 정규화 또는 하이퍼 매개변수를 포함하는 유사한 훈련 기술을 사용하는 경우, 예상되는 많은 대상 문제와 배치 크기에서 의미가 있는 값으로 설정합니다. 이 글을 쓰는 시점에서 Keras에서 저장하는 방법으로 소비자가 이들 값을 쉽게 조정할 수는 없지만 [tensorflow/examples/saved_model/integration_tests/export_mnist_cnn.py](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/saved_model/integration_tests/export_mnist_cnn.py)에서 몇 가지 대략적인 해결 방법을 참조하세요.
+모델이 드롭아웃, 배치 정규화 또는 하이퍼 매개변수를 포함하는 유사한 학습 기술을 사용하는 경우 예상되는 많은 대상 문제 및 배치 크기에서 의미가 있는 값으로 설정합니다(이 글을 쓰는 시점에서 Keras에서 저장하면 소비자가 쉽게 조정할 수 없습니다).
 
-개별 레이어의 가중치 regularizer는 (정규화 강도 계수와 함께) 저장되지만 옵티마이저 내에서 가중치 정규화(예: `tf.keras.optimizers.Ftrl.l1_regularization_strength=...`)는 손실됩니다. 따라서 SavedModel의 소비자에게 적절하게 알려주시기 바랍니다.
+개별 레이어의 가중치 regularizer는 (정규화 강도 계수와 함께) 저장되지만 옵티마이저 내에서 가중치 정규화(예: `tf.keras.optimizers.Ftrl.l1_regularization_strength=...)`)는 손실됩니다. 따라서 SavedModel의 소비자에게 적절한 고지를 해주기 바랍니다.
