@@ -34,13 +34,13 @@ model.add(tf.layers.dense({inputShape: [784], units: 32, activation: 'relu'}));
 model.add(tf.layers.dense({units: 10, activation: 'softmax'}));
 ```
 
-> 重要提示：模型的第一层需要 `inputShape`。提供 `inputShape` 时请确保不包含批次大小。例如，创建模型时，如果您计划馈送形状为 `[B, 784]`（其中 `B` 可为任何批次大小）的模型张量，请将 `inputShape` 指定为 `[784]`。
+> 重要提示：模型的第一层需要 `inputShape`。提供 `inputShape` 时请确保排除批次大小。例如，创建模型时，如果您计划馈送形状为 `[B, 784]`（其中 `B` 可为任何批次大小）的模型张量，请将 `inputShape` 指定为 `[784]`。
 
 您可以通过 `model.layers` 访问模型的层，更具体而言为 `model.inputLayers` 和 `model.outputLayers`。
 
 ### 函数式模型
 
-创建 `LayersModel` 的另一种方式是通过 `tf.model()`。`tf.model()` 和 `tf.sequential()` 的主要区别为，`tf.model()` 可用于创建层的任意无环计算图。
+创建 `LayersModel` 的另一种方式是通过 `tf.model()` 函数。`tf.model()` 和 `tf.sequential()` 的主要区别为，`tf.model()` 可用于创建层的任意计算图，前提是层没有循环。
 
 以下代码段可以使用 `tf.model()` API 定义与上文相同的模型：
 
@@ -53,11 +53,11 @@ const dense2 = tf.layers.dense({units: 10, activation: 'softmax'}).apply(dense1)
 const model = tf.model({inputs: input, outputs: dense2});
 ```
 
-我们在每一层调用 `apply()` 以将其连接到另一个层的输出。在这种情况下，`apply()` 的结果是一个 `SymbolicTensor`，后者类似于 `Tensor`，但不包含任何具体数值。
+我们在每一层调用 `apply()` 以将其连接到另一个层的输出。在这种情况下，`apply()` 的结果是一个 `SymbolicTensor`，后者类似于 `Tensor`，但不包含任何具体值。
 
 请注意，与序贯模型不同，我们通过 `tf.input()` 创建 `SymbolicTensor`，而非向第一层提供 `inputShape`。
 
-如果您向 `apply()` 传递一个具体的 `Tensor`，它也会为您提供一个具体的 `Tensor`：
+如果您向 `apply()` 传递一个具体 `Tensor`，它也会为您提供一个具体 `Tensor`：
 
 ```js
 const t = tf.tensor([-2, 1, 0, 5]);
@@ -124,7 +124,7 @@ const saveResult = await model.save('localstorage://my-model-1');
 const model = await tf.loadLayersModel('localstorage://my-model-1');
 ```
 
-上面的示例可将模型保存到浏览器的本地存储空间中。请参阅 <code>model.save() 文档</code>和[保存并加载](save_load.md)指南，了解如何保存到不同的媒介（例如，文件存储空间、<code>IndexedDB</code>、触发浏览器下载等）。
+上面的示例可将模型保存到浏览器的本地存储空间中。请参阅 <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.Model.save" data-md-type="link"&gt;model.save() 文档&lt;/a&gt;</code>和[保存并加载](save_load.md)指南，了解如何保存到不同的媒介（例如，文件存储空间、<code>IndexedDB</code>、触发浏览器下载等）。
 
 ## 自定义层
 
@@ -167,7 +167,7 @@ o.print(); // prints 30
 - 您需要最大程度的灵活性和控制
 - 您不需要序列化或可以实现自己的序列化逻辑
 
-使用 Core API 创建的模型是以一个或多个 `Tensors` 作为输入并输出 `Tensors` 的函数。使用 Core API 编写的上面同一个模型如下所示：
+使用 Core API 创建的模型是以一个或多个 `Tensor` 作为输入并输出 `Tensor` 的函数。使用 Core API 编写的上面同一个模型如下所示：
 
 ```js
 // The weights and biases for the two dense layers.
