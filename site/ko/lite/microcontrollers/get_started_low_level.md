@@ -20,13 +20,13 @@ The example application we'll be using has been tested on the following devices:
 - [STM32F746 Discovery 키트](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html)(Mbed 사용)
 - [Adafruit EdgeBadge](https://www.adafruit.com/product/4400)(Arduino IDE 사용)
 - [마이크로컨트롤러용 Adafruit TensorFlow Lite 키트](https://www.adafruit.com/product/4317)(Arduino IDE 사용)
-- [Adafruit Circuit Playground Bluefruit](https://learn.adafruit.com/tensorflow-lite-for-circuit-playground-bluefruit-quickstart?view=all) (using Arduino IDE)
+- [Adafruit Circuit Playground Bluefruit](https://learn.adafruit.com/tensorflow-lite-for-circuit-playground-bluefruit-quickstart?view=all)(Arduino IDE 사용)
 - [Espressif ESP32-DevKitC](https://www.espressif.com/en/products/hardware/esp32-devkitc/overview)(ESP IDF 사용)
 - [Espressif ESP-EYE](https://www.espressif.com/en/products/hardware/esp-eye/overview)(ESP IDF 사용)
 
-Learn more about supported platforms in [TensorFlow Lite for Microcontrollers](index.md).
+[마이크로컨트롤러용 TensorFlow Lite](index.md)에서 지원되는 플랫폼에 대해 자세히 알아보세요.
 
-## Train a model
+## 모델 훈련
 
 Note: You can skip this section and use the trained model included in the example code.
 
@@ -44,7 +44,7 @@ The following sections walk through the example's [`hello_world_test.cc`](https:
 
 ### 1. Include the library headers
 
-To use the TensorFlow Lite for Microcontrollers library, we must include the following header files:
+마이크로컨트롤러용 TensorFlow Lite 라이브러리를 사용하려면 다음 헤더 파일을 포함해야 합니다.
 
 ```C++
 #include "tensorflow/lite/micro/all_ops_resolver.h"
@@ -54,15 +54,15 @@ To use the TensorFlow Lite for Microcontrollers library, we must include the fol
 #include "tensorflow/lite/version.h"
 ```
 
-- [`all_ops_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.h) provides the operations used by the interpreter to run the model.
-- [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h) outputs debug information.
+- [`all_ops_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.h)는 인터프리터가 모델을 실행하는 데 사용하는 연산을 제공합니다.
+- [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h)는 디버그 정보를 출력합니다.
 - [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h)에는 모델을 로드하고 실행하는 코드가 포함됩니다.
-- [`schema_generated.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema_generated.h) contains the schema for the TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) model file format.
+- [`schema_generated.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema_generated.h)에는 TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) 모델 파일 형식에 대한 스키마가 포함됩니다.
 - [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h)는 TensorFlow Lite 스키마에 대한 버전 관리 정보를 제공합니다.
 
 ### 2. Include the model header
 
-The TensorFlow Lite for Microcontrollers interpreter expects the model to be provided as a C++ array. The model is defined in `model.h` and `model.cc` files. The header is included with the following line:
+마이크로컨트롤러용 TensorFlow Lite 인터프리터는 모델이 C++ 배열로 제공될 것으로 예상합니다. 모델은 `model.h` 및 `model.cc` 파일에 정의되어 있습니다. 헤더는 다음 줄에 포함됩니다.
 
 ```C++
 #include "tensorflow/lite/micro/examples/hello_world/model.h"
@@ -93,7 +93,7 @@ TF_LITE_MICRO_TESTS_END
 
 ### 4. Set up logging
 
-To set up logging, a `tflite::ErrorReporter` pointer is created using a pointer to a `tflite::MicroErrorReporter` instance:
+로깅을 설정하기 위해 `tflite::MicroErrorReporter` 인스턴스에 대한 포인터를 사용하여 `tflite::ErrorReporter` 포인터를 생성합니다.
 
 ```C++
 tflite::MicroErrorReporter micro_error_reporter;
@@ -104,7 +104,7 @@ This variable will be passed into the interpreter, which allows it to write logs
 
 ### 5. Load a model
 
-In the following code, the model is instantiated using data from a `char` array, `g_model`, which is declared in `model.h`. We then check the model to ensure its schema version is compatible with the version we are using:
+다음 코드에서, 모델은 `model.h`에 선언된 `char` 배열인 `g_model`의 데이터를 사용하여 인스턴스화됩니다. 그런 다음 모델에서 스키마 버전이 사용 중인 버전과 호환되는지 확인합니다.
 
 ```C++
 const tflite::Model* model = ::tflite::GetModel(g_model);
@@ -118,7 +118,7 @@ if (model->version() != TFLITE_SCHEMA_VERSION) {
 
 ### 6. Instantiate operations resolver
 
-An [`AllOpsResolver`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.h) instance is declared. This will be used by the interpreter to access the operations that are used by the model:
+[`AllOpsResolver`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.h) 인스턴스가 선언됩니다. 이 인스턴스를 통해 인터프리터는 모델에서 사용하는 연산에 접근할 수 있습니다.
 
 ```C++
 tflite::AllOpsResolver resolver;
@@ -126,11 +126,11 @@ tflite::AllOpsResolver resolver;
 
 `AllOpsResolver`는 마이크로컨트롤러용 TensorFlow Lite에서 사용할 수 있는 모든 연산을 로드하며, 여기에 많은 메모리가 사용됩니다. 특정 모델은 이러한 연산의 일부만 사용하므로 실제 애플리케이션에서는 필요한 연산만 로드하는 것이 좋습니다.
 
-This is done using a different class, `MicroMutableOpResolver`. You can see how to use it in the *Micro speech* example's [`micro_speech_test.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc).
+이 작업을 위해 다른 클래스인 `MicroMutableOpResolver`를 사용합니다. *Micro Speech* 예제의 [`micro_speech_test.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc)에서 사용하는 방법을 확인할 수 있습니다.
 
 ### 7. Allocate memory
 
-We need to preallocate a certain amount of memory for input, output, and intermediate arrays. This is provided as a `uint8_t` array of size `tensor_arena_size`:
+입력, 출력 및 중간 배열에 대해 일정량의 메모리를 미리 할당해야 합니다. 이 메모리는 `tensor_arena_size` 크기의 `uint8_t` 배열로 제공됩니다.
 
 ```C++
 const int tensor_arena_size = 2 * 1024;
@@ -141,7 +141,7 @@ uint8_t tensor_arena[tensor_arena_size];
 
 ### 8. Instantiate interpreter
 
-We create a `tflite::MicroInterpreter` instance, passing in the variables created earlier:
+`tflite::MicroInterpreter` 인스턴스를 만들고 앞서 만든 변수를 전달합니다.
 
 ```C++
 tflite::MicroInterpreter interpreter(model, resolver, tensor_arena,
@@ -158,7 +158,7 @@ interpreter.AllocateTensors();
 
 ### 10. Validate input shape
 
-The `MicroInterpreter` instance can provide us with a pointer to the model's input tensor by calling `.input(0)`, where `0` represents the first (and only) input tensor:
+`MicroInterpreter` 인스턴스는 `.input(0)`을 호출하여 모델의 입력 텐서에 대한 포인터를 제공할 수 있습니다. 여기서 `0`은 첫 번째 (및 유일한) 입력 텐서를 나타냅니다.
 
 ```C++
   // Obtain a pointer to the model's input tensor
@@ -187,7 +187,7 @@ The enum value `kTfLiteFloat32` is a reference to one of the TensorFlow Lite dat
 
 ### 11. Provide an input value
 
-To provide an input to the model, we set the contents of the input tensor, as follows:
+모델에 입력을 제공하기 위해 다음과 같이 입력 텐서의 내용을 설정합니다.
 
 ```C++
 input->data.f[0] = 0.;
