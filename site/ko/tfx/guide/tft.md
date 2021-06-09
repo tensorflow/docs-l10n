@@ -1,8 +1,8 @@
 # 비 TFX 사용자를 위한 Transform 라이브러리
 
-Transform is available as a standalone library.
+Transform은 독립 실행형 라이브러리로 사용할 수 있습니다.
 
-- [Getting Started with TensorFlow Transform](/tfx/transform/get_started)
-- [TensorFlow Transform API Reference](/tfx/transform/api_docs/python/tft)
+- [TensorFlow Transform 시작하기](/tfx/transform/get_started)
+- [TensorFlow Transform API 참조](/tfx/transform/api_docs/python/tft)
 
-The `tft` module documentation is the only module that is relevant to TFX users. The `tft_beam` module is relevant only when using Transform as a standalone library. Typically, a TFX user constructs a `preprocessing_fn`, and the rest of the Transform library calls are made by the Transform component.
+`tft` 모듈 문서는 TFX 사용자와 관련된 유일한 모듈입니다. `tft_beam` 모듈은 Transform을 독립 실행형 라이브러리로 사용할 때만 관련됩니다. 일반적으로 TFX 사용자는 `preprocessing_fn`을 생성하고 나머지 Transform 라이브러리 호출은 Transform 구성 요소에 의해 수행됩니다.
