@@ -61,7 +61,7 @@ def trainer_fn(trainer_fn_args, schema):
   }
 ```
 
-Other than the user module file of Trainer, the rest of the pipeline remains unchanged.
+Trainer의 사용자 모듈 파일을 제외하고 나머지 파이프라인은 변경되지 않습니다.
 
 ## 네이티브 Keras(예: `model_to_estimator`가 없는 Keras)
 
@@ -97,7 +97,7 @@ Transform 구성 요소 자체를 변경 없이 네이티브 Keras에 사용할 
 
 ##### Transform이 있는 Keras 모듈 파일
 
-The training module file must contains a `run_fn` which will be called by the `GenericExecutor`, a typical Keras `run_fn` would look like this:
+훈련 모듈 파일에는 `GenericExecutor`에서 호출하는 `run_fn`이 포함되어야 합니다. 일반적인 Keras `run_fn`은 다음과 같습니다.
 
 ```python
 def run_fn(fn_args: TrainerFnArgs):
