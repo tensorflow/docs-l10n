@@ -7,19 +7,19 @@ TensorFlow.js 的 Layers API 以 Keras 为模型。考虑到 JavaScript 与 Pyth
 import keras
 import numpy as np
 
-# 建立并编译模型.
+# Build and compile model.
 model = keras.Sequential()
 model.add(keras.layers.Dense(units=1, input_shape=[1]))
 model.compile(optimizer='sgd', loss='mean_squared_error')
 
-# 生成一些用于训练的数据.
+# Generate some synthetic data for training.
 xs = np.array([[1], [2], [3], [4]])
 ys = np.array([[1], [3], [5], [7]])
 
-# 用 fit() 训练模型.
+# Train model with fit().
 model.fit(xs, ys, epochs=1000)
 
-# 用 predict() 推理.
+# Run inference with predict().
 print(model.predict(np.array([[5]])))
 ```
 
@@ -27,19 +27,19 @@ print(model.predict(np.array([[5]])))
 // JavaScript:
 import * as tf from '@tensorlowjs/tfjs';
 
-// 建立并编译模型.
+// Build and compile model.
 const model = tf.sequential();
 model.add(tf.layers.dense({units: 1, inputShape: [1]}));
 model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 
-// 生成一些用于训练的数据.
+// Generate some synthetic data for training.
 const xs = tf.tensor2d([[1], [2], [3], [4]], [4, 1]);
 const ys = tf.tensor2d([[1], [3], [5], [7]], [4, 1]);
 
-// 用 fit() 训练模型.
+// Train model with fit().
 await model.fit(xs, ys, {epochs: 1000});
 
-// 用 predict() 推理.
+// Run inference with predict().
 model.predict(tf.tensor2d([[5]], [1, 1])).print();
 ```
 
@@ -103,16 +103,16 @@ model = keras.Sequential()
 
 ```js
 // JavaScript:
-const model = tf.sequential();
-
-const layer = tf.layers.batchNormalization({axis: 1});
+const model = new tf.Sequential();  // !!! DON'T DO THIS !!!
 ```
 
 不过，我们决定不使用“new”构造函数，因为 1)“new”关键字会使代码更加膨胀；2)“new”构造函数被视为 JavaScript 的“不良部分”：一个潜在的陷阱，如 [*JavaScript: the Good Parts*](http://archive.oreilly.com/pub/a/javascript/excerpts/javascript-good-parts/bad-parts.html) 中所讨论。要在 TensorFlow.js 中创建模型和层，可以调用具有 lowerCamelCase（小驼峰式命名法）名称的工厂方法，例如：
 
 ```js
 // JavaScript:
-model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+const model = tf.sequential();
+
+const layer = tf.layers.batchNormalization({axis: 1});
 ```
 
 ## 选项字符串值为小驼峰式命名法，而不是蛇形命名法
@@ -126,11 +126,8 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 例如，如上例所示：
 
 ```js
-# Python:
-my_input = keras.Input(shape=[2, 4])
-flatten = keras.layers.Flatten()
-
-print(flatten(my_input).shape)
+// JavaScript:
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 ```
 
 对于模型序列化和反序列化，请放心。TensorFlow.js 的内部机制可以确保正确处理 JSON 对象中的蛇形命名法，例如，在从 Python Keras 加载预训练模型时。
@@ -162,8 +159,10 @@ console.log(flatten.apply(myInput).shape);
 目前，在 Keras 中，<strong>调用</strong>方法只能在 (Python) TensorFlow 的 `tf.Tensor` 对象上运行（假设 TensorFlow 是后端），这些对象是符号对象并且不包含实际数值。这就是上一部分中的示例所显示的内容。但是，在 TensorFlow.js 中，层的 `apply()` 方法可以在符号和命令模式下运行。如果使用 SymbolicTensor（类似于 tf.Tensor）调用 `apply()`，返回值将为 SymbolicTensor。这通常发生在模型构建期间。但是，如果使用实际的具体张量值调用 `apply()`，将返回一个具体的张量。例如：
 
 ```js
-# Python:
-my_sgd = keras.optimizers.sgd(lr=0.2)
+// JavaScript:
+const flatten = tf.layers.flatten();
+
+flatten.apply(tf.ones([2, 3, 4])).print();
 ```
 
 这个特性让人联想到 (Python) TensorFlow 的 [Eager Execution](https://tensorflow.google.cn/guide/eager)。它在模型开发期间提供了更出色的交互性和可调试性，并且为构建动态神经网络打开了大门。
@@ -179,7 +178,7 @@ my_sgd = keras.optimizers.sgd(lr=0.2)
 
 ```js
 // JavaScript:
-const model = await tf.loadLayersModel('https://foo.bar/model.json');
+const mySGD = tf.train.sgd({lr: 0.2});
 ```
 
 ## loadLayersModel() 从网址而不是 HDF5 文件加载
