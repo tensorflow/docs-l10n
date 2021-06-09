@@ -37,11 +37,11 @@ TensorFlow Lite는 여러 대리자를 지원하며, 각 대리자는 특정 플
 
 **Model Type** | **GPU** | **NNAPI** | **Hexagon** | **CoreML**
 --- | --- | --- | --- | ---
-Floating-point (32 bit) | Yes | Yes | No | Yes
-[Post-training float16 quantization](post_training_float16_quant.ipynb) | Yes | No | No | Yes
-[Post-training dynamic range quantization](post_training_quant.ipynb) | Yes | Yes | No | No
-[Post-training integer quantization](post_training_integer_quant.ipynb) | Yes | Yes | Yes | No
-[Quantization-aware training](http://www.tensorflow.org/model_optimization/guide/quantization/training) | Yes | Yes | Yes | No
+부동점 (32bit) | 예 | 예 | 아니요 | 예
+[훈련 후 float16 양자화](post_training_float16_quant.ipynb) | 예 | 아니요 | 아니요 | 예
+[훈련 후 동적 범위 양자화](post_training_quant.ipynb) | 예 | 예 | 아니요 | 아니요
+[훈련 후 정수 양자화](post_training_integer_quant.ipynb) | 예 | 예 | 예 | 아니요
+[양자화 인식 훈련](http://www.tensorflow.org/model_optimization/guide/quantization/training) | 예 | 예 | 예 | 아니요
 
 ### Validating performance
 
