@@ -228,7 +228,7 @@ encoder_outputs = encoder(encoder_inputs)
 
 - `"input_word_ids"`: 形状 `[batch_size, seq_length]` の int32 テンソルで、パッキングされた入力シーケンスのトークン ID を持ちます（つまり、start-of-sequence トークン、end-of-segment トークン、およびパディングを含みます）。
 - `"input_mask"`: 形状 `[batch_size, seq_length]` の int32 テンソルで、パディングの前に存在するすべての入力トークンの位置に値 1、パディングトークンに値 0 があります。
-- `"input_type_ids"`: 形状 `[batch_size, seq_length]` の int32 テンソルで、それぞれの位置で入力トークンを生成した入力セグメントのインデックスを持ちます。最初の入力セグメント（index 0）には、start-of-sequence トークンと end-of-segment トークンが含まれます。2 番目以降のセグメント（<br>（ある場合）には、それぞれの end-of-segment トークンが含まれます。パディングトークンのインデクスはもう一度 0 になります。
+- `"input_type_ids"`: 形状 `[batch_size, seq_length]` の int32 テンソルで、それぞれの位置で入力トークンを生成した入力セグメントのインデックスを持ちます。最初の入力セグメント（index 0）には、start-of-sequence トークンと end-of-segment トークンが含まれます。2 番目以降のセグメント（ある場合）には、それぞれの end-of-segment トークンが含まれます。パディングトークンのインデクスはもう一度 0 になります。
 
 ### 分散型トレーニング
 
@@ -236,4 +236,4 @@ encoder_outputs = encoder(encoder_inputs)
 
 ### Examples
 
-- Colab チュートリアル「[Solve GLUE tasks using BERT on TPU ](https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/text/solve_glue_tasks_using_bert_on_tpu.ipynb)」
+- Colab tutorial [Solve GLUE tasks using BERT on TPU](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb).
