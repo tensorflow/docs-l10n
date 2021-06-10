@@ -9,7 +9,7 @@ TensorFlow Lite Core ML デリゲートは、[Core ML フレームワーク](htt
 **サポートする iOS のバージョンとデバイス:**
 
 - iOS 12 以降。古い iOS バージョンの場合、Core ML デリゲートは自動的に CPU にフォールバックします。
-- デフォルトでは、Core ML デリゲートは A12 SoC 以降のデバイス（iPhone Xs 以降）でのみ有効で、Neural Engine（ニューラルエンジン）を推論の高速化に使用します。古いデバイスで Core ML デリゲートを使用する場合は、[ベストプラクティス](#best-practices)をご覧ください。
+- デフォルトでは、Core ML デリゲートは A12 SoC 以降のデバイス（iPhone Xs 以降）でのみ有効で、Neural Engine（ニューラルエンジン）を推論の高速化に使用します。古いデバイスで Core ML デリゲートを使用する場合は、[ベストプラクティス](#best-practices)を参照してください。
 
 **サポートするモデル**
 
@@ -131,7 +131,7 @@ let interpreter = try Interpreter(modelPath: modelPath,
 <p data-md-type="paragraph">FullyConnected（別名 Dense または InnerProduct）</p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">重みやバイアスは（存在する場合）定数である必要があります。</li>
-<li data-md-type="list_item" data-md-list-type="unordered">Only supports single-batch case. Input dimensions should be 1, except the last dimension.</li>
+<li data-md-type="list_item" data-md-list-type="unordered">単一バッチケースのみをサポートします。入力次元は、最後の次元以外は 1 である必要があります。</li>
 </ul>
 </li>
 <li data-md-type="list_item" data-md-list-type="unordered">Hardswish</li>
