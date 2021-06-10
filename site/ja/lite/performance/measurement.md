@@ -178,9 +178,9 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>モデル名</th>
       <th>デバイス</th>
-      <th>CPU, 4 threads</th>
+      <th>CPU、4 スレッド</th>
       <th>GPU</th>
       <th>NNAPI</th>
     </tr>
@@ -193,7 +193,7 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
     <td>13.8 ms</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>14.0 ms</td>
     <td>9.0 ms</td>
     <td>14.8 ms</td>
@@ -206,7 +206,7 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
     <td>6.0 ms</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>5.0 ms</td>
     <td>---</td>
     <td>3.2 ms</td>
@@ -219,7 +219,7 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
     <td>102 ms</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>34.5 ms</td>
     <td>---</td>
     <td>99.0 ms</td>
@@ -232,7 +232,7 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
     <td>18.5 ms</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>23.9 ms</td>
     <td>11.1 ms</td>
     <td>19.0 ms</td>
@@ -245,7 +245,7 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
     <td>201 ms</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>272.6 ms</td>
     <td>87.2 ms</td>
     <td>171.1 ms</td>
@@ -258,7 +258,7 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
     <td>292 ms</td>
   </tr>
    <tr>
-     <td>Pixel 4 </td>
+     <td>Pixel 4</td>
     <td>324.1 ms</td>
     <td>97.6 ms</td>
     <td>186.9 ms</td>
@@ -274,7 +274,7 @@ iOS ベンチマークを実行するために、適切なモデルを含める�
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>モデル名</th>
       <th>デバイス</th>
       <th>CPU、2 スレッド</th>
       <th>GPU</th>
