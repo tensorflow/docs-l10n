@@ -2,11 +2,11 @@
 
 iOS で TensorFlow Lite を使い始めるには、次の例をご覧ください。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS image classification example</a>
+<a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS 画像分類の例</a>
 
 ソースコードの説明については、[TensorFlow Lite iOS 画像分類](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md)もあわせてお読みください。
 
-This example app uses [image classification](https://www.tensorflow.org/lite/models/image_classification/overview) to continuously classify whatever it sees from the device's rear-facing camera, displaying the top most probable classifications. It allows the user to choose between a floating point or [quantized](https://www.tensorflow.org/lite/performance/post_training_quantization) model and select the number of threads to perform inference on.
+このサンプルアプリは、[画像分類](https://www.tensorflow.org/lite/models/image_classification/overview)を使用して、デバイスの背面カメラに取り込まれるものを継続的に分類し、最も確率の高い分類を表示します。ユーザーは、浮動小数点または[量子化](https://www.tensorflow.org/lite/performance/post_training_quantization)モデルを選択し、推論を実行するスレッド数を選択できます。
 
 注意: さまざまなユースケースで TensorFlow Lite を実演するその他の iOS アプリは、[例](https://www.tensorflow.org/lite/examples)をご覧ください。
 
@@ -18,7 +18,7 @@ TensorFlow Lite は、[Swift](https://github.com/tensorflow/tensorflow/tree/mast
 
 ### CocoaPods 開発者
 
-`Podfile` で、TensorFlow Lite ポッドを追加し、`pod install` を実行します。
+`Podfile`で、TensorFlow Lite ポッドを追加し、`pod install`を実行します。
 
 #### Swift
 
@@ -35,7 +35,7 @@ pod 'TensorFlowLiteObjC'
 
 #### バージョンを指定する
 
-There are stable releases, and nightly releases available for both `TensorFlowLiteSwift` and `TensorFlowLiteObjC` pods. If you do not specify a version constraint as in the above examples, CocoaPods will pull the latest stable release by default.
+`TensorFlowLiteSwift`および`TensorFlowLiteObjC`ポッドには安定リリースとナイトリーリリースがあります。上記の例のようにバージョン制約を指定しない場合、CocoaPods はデフォルトで最新の安定リリースをプルします。
 
 また、バージョン制約を指定することもできます。たとえば、バージョン 2.0.0 に依存する場合は、依存関係を次のように記述できます。
 
@@ -43,25 +43,25 @@ There are stable releases, and nightly releases available for both `TensorFlowLi
 pod 'TensorFlowLiteSwift', '~> 2.0.0'
 ```
 
-This will ensure the latest available 2.x.y version of the `TensorFlowLiteSwift` pod is used in your app. Alternatively, if you want to depend on the nightly builds, you can write:
+このようにすると、`TensorFlowLiteSwift`ポッドの利用可能な最新の 2.x.y バージョンがアプリで使用されるようになります。また、ナイトリービルドに依存する場合は、次のように記述できます。
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly'
 ```
 
-From 2.4.0 version and latest nightly releases, by default [GPU](https://www.tensorflow.org/lite/performance/gpu) and [Core ML delegates](https://www.tensorflow.org/lite/performance/coreml_delegate) are excluded from the pod to reduce the binary size. You can include them by specifying subspec:
+2.4.0 バージョン以降および最新のナイトリーリリースでは、バイナリサイズを減らすために、デフォルトで [GPU](https://www.tensorflow.org/lite/performance/gpu) および [Core ML  デリゲート](https://www.tensorflow.org/lite/performance/coreml_delegate) がポッドから除外されていますが、以下のようにサブスペックを指定して含めることができます。
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['CoreML', 'Metal']
 ```
 
-このようにすると、TensorFlow Lite に追加される最新の機能を使用できるようになります。`pod install` コマンドを初めて実行したときに `Podfile.lock` ファイルが作成されると、ナイトリーライブラリバージョンは現在の日付のバージョンにロックされていまうことに注意してください。ナイトリーライブラリを最新のものに更新する場合は、`pod update` コマンドを実行する必要があります。
+このようにすると、TensorFlow Lite に追加される最新の機能を使用できるようになります。`pod install`コマンドを初めて実行したときに`Podfile.lock`ファイルが作成されると、ナイトリーライブラリバージョンはその時点の日付のバージョンにロックされるので注意してください。ナイトリーライブラリを最新のものに更新する場合は、`pod update`コマンドを実行する必要があります。
 
 バージョン制約のさまざまな指定方法については、[ポッドバージョンを指定する](https://guides.cocoapods.org/using/the-podfile.html#specifying-pod-versions)をご覧ください。
 
 ### Bazel 開発者
 
-`BUILD` ファイルで、ターゲットに `TensorFlowLite` 依存関係を追加します。
+`BUILD`ファイルで、ターゲットに`TensorFlowLite`依存関係を追加します。
 
 #### Swift
 
@@ -117,10 +117,10 @@ Objective-C ファイルでは、次のようにアンブレラヘッダーを�
 #import "TFLTensorFlowLite.h"
 ```
 
-または、Xcode プロジェクトに `CLANG_ENABLE_MODULES = YES` を設定している場合は、次のようにモジュールをインポートします。
+または、Xcode プロジェクトに`CLANG_ENABLE_MODULES = YES`を設定している場合は、次のようにモジュールをインポートします。
 
 ```objectivec
 @import TFLTensorFlowLite;
 ```
 
-注意: CocoaPods 開発者が、Objective-C TensorFlow Lite モジュールのインポートを希望する場合は、`Podfile` に `use_frameworks!` も含める必要があります。
+注意: CocoaPods 開発者が、Objective-C TensorFlow Lite モジュールのインポートする場合は、`Podfile`に`use_frameworks!`も含める必要があります。
