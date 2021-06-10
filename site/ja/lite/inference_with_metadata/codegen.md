@@ -177,7 +177,7 @@ if(null != myImageClassifier) {
     MyClassifierModel.Outputs outputs = myImageClassifier.run(inputs);
 
     // 4. Retrieve the result
-    Map<String, Float> labeledProbability = outputs.getProbability();
+    Map labeledProbability = outputs.getProbability();
 }
 ```
 
