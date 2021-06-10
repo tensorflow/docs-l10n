@@ -3,10 +3,10 @@
 [Android Neural Networks API (NNAPI)](https://developer.android.com/ndk/guides/neuralnetworks) は、Android 8.1 (API レベル 27) 以降を実行しているすべての Android デバイスで使用でき、以下を含むサポートされているハードウェアアクセラレータを備えた Android デバイス上で TensorFlow Lite モデルのアクセラレーションを提供します。
 
 - GPU (グラフィックス プロセッシング ユニット)
-- DSP (デジタル・シグナル・プロセッサ)
-- ニューラルプロセッシングユニット (NPU)
+- DSP (デジタルシグナル プロセッサ)
+- NPU (ニューラルプロセッシングユニット)
 
-パフォーマンスは、デバイスで使用可能な特定のハードウェアによって異なります。
+パフォーマンスは、デバイスで使用可能な特定のハードウェアに応じて異なります。
 
 このページでは、Java および Kotlin の TensorFlow Lite インタープリタ で NNAPI デリゲートを使用する方法について説明します。Android C API については、[Android Native Developer Kit のドキュメント](https://developer.android.com/ndk/guides/neuralnetworks)をご覧ください。
 
@@ -67,7 +67,7 @@ if(null != nnApiDelegate) {
 
 ### デバイス除外リストを作成する
 
-本番環境では、NNAPI が期待どおりに動作しない場合があるので、NNAPI アクセラレーションを特定のモデルと組み合わせて使用しないデバイスのリストを維持することをお勧めします。このリストは、次のコードスニペットを使用して取得できる`"ro.board.platform"`の値に基づいて作成できます。
+本番環境では、NNAPI が期待どおりに動作しない場合があるので、NNAPI アクセラレーションを特定のモデルと組み合わせて使用しないようにデバイスのリストを維持することをお勧めします。このリストは、`"ro.board.platform"`の値に基づいて作成できます。次のコードスニペットを使用して取得できます。
 
 ```java
 String boardPlatform = "";
@@ -100,23 +100,21 @@ Log.d("Board Platform", boardPlatform);
 
 ### サポートされているモデルと演算を使用する
 
-NNAPI デリゲートがモデル内の一部の演算またはパラメータの組み合わせをサポートしていない場合、フレームワークは、アクセラレータでグラフがサポートされている部分のみを実行します。残りは CPU で実行されるため、分割実行になります。CPU/アクセラレータの同期には高いコストがかかるため、CPU だけでネットワーク全体を実行するよりもパフォーマンスが低下する可能性があります。
+NNAPI デリゲートがモデル内の一部の演算子またはパラメータの組み合わせをサポートしていない場合、フレームワークは、アクセラレータでグラフがサポートされている部分のみを実行します。残りは CPU で実行されるため、分割実行になります。CPU/アクセラレータの同期には高いコストがかかるため、CPU だけでネットワーク全体を実行するよりもパフォーマンスが低下する可能性があります。
 
-NNAPI は、モデルが[サポートされている演算](https://developer.android.com/ndk/guides/neuralnetworks#model)のみを使用する場合に最適に機能します。以下のモデルは、NNAPI と互換性があることが確認されています。
+NNAPI は、モデルが[サポートされている演算子](https://developer.android.com/ndk/guides/neuralnetworks#model)のみを使用する場合に最適に機能します。以下のモデルは、NNAPI と互換性があることが確認されています。
 
-- [MobileNet v1 (224x224) 画像分類（浮動小数点モデルダウンロード）](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html)
-    [（量子化モデルのダウンロード）](http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz)
-    *（モバイルおよび組み込みベースのビジョンアプリケーション用に設計された画像分類モデル）*
-- [MobileNet v2 SSD 物体検出](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html)
-    [（ダウンロード）](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)
-    *（境界矩形で複数の物体を検出する画像分類モデル）*
-- [MobileNet v1(300x300) Single Shot Detector (SSD) 物体検出](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(ダウンロード)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
-- [ポーズ推定のための PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet)
-    [(ダウンロード)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)
-    *（画像またはビデオにおける人物のポーズを推定するビジョンモデル）*
+- [MobileNet v1 (224x224) 画像分類（浮動小数点数モデルのダウンロード）](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [(量子化モデルのダウンロード)](http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz) <br>(モバイルおよび組み込みベースのビジョンアプリケーション向けに設計された画像分類モデル)
+- [MobileNet SSD 物体検出](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html)[（ダウンロード）](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br>*(バウンディングボックスで複数のオブジェクトを検出する画像分類モデル)*
+- [MobileNet v1(300x300) Single Shot Detector (SSD) object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(download)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
+- [ポーズ推定のための PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [（ダウンロード）](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br><i>(画像または動画内の人物のポーズを推定するビジョンモデル)</i>
 
 また、モデルに動的サイズの出力が含まれている場合も、NNAPI アクセラレーションはサポートされません。この場合、次のような警告が表示されます。
 
 ```none
 ERROR: Attempting to use a delegate that only supports static-sized tensors with a graph that has dynamic-sized tensors.
 ```
+
+### NNAPI CPU の実装を有効にする
+
+アクセラレータで完全に処理できないグラフは、NNAPI  CPU 実装にフォールバックできます。ただし、これは通常、TensorFlow インタープリタよりもパフォーマンスが低いため、Android 10（API レベル 29）以降の NNAPI デリゲートでは、このオプションはデフォルトで無効になっています。この動作をオーバーライドするには、`NnApi Delegate.Options`オブジェクトで`setUseNnapiCpu`を`true`に設定します。
