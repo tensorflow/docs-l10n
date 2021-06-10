@@ -11,7 +11,7 @@ The [Hello World](https://github.com/tensorflow/tensorflow/tree/master/tensorflo
 1. [モデルをトレーニングする](#train-a-model) (Python): デバイス上で使用するためにモデルをトレーニング、変換、最適化するための jupyter ノートブック。
 2. [Run inference](#run-inference) (in C++ 11): An end-to-end unit test that runs inference on the model using the [C++ library](library.md).
 
-## Get a supported device
+## サポートされているデバイスを入手する
 
 The example application we'll be using has been tested on the following devices:
 
@@ -30,24 +30,24 @@ Learn more about supported platforms in [TensorFlow Lite for Microcontrollers](i
 
 Note: You can skip this section and use the trained model included in the example code.
 
-Use Google colaboratory to [train your own model](https://colab.research.google.com/github/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb). For more details, refer to the `README.md`:
+各アプリケーション例には、`README.md`ファイルがあり、サポートされたプラットフォームへのデプロイの仕方を説明しています。
 
 <a class="button button-primary" href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world/train/README.md">Hello World Training README.md</a>
 
-## Run inference
+## 推論を実行する方法
 
 To run the model on your device, we will walk through the instructions in the `README.md`:
 
 <a class="button button-primary" href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world/README.md">Hello World README.md</a>
 
-The following sections walk through the example's [`hello_world_test.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/hello_world_test.cc), unit test which demonstrates how to run inference using TensorFlow Lite for Microcontrollers. It loads the model and runs inference several times.
+以下の節は *Hello World* サンプルの [`hello_world_test.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/hello_world_test.cc)を見ていきます。 これは、マイクロコントローラ向けTensorFlow Liteを使って推論を実行する方法を実演します。
 
-### 1. Include the library headers
+### ライブラリをインクルードする
 
-To use the TensorFlow Lite for Microcontrollers library, we must include the following header files:
+この例では、モデルは正弦波関数を再現するように訓練されています。 １つの数を入力として、[正弦波](https://en.wikipedia.org/wiki/Sine)の数値を出力します。 マイクロコントローラにデプロイされると、その予測は、LEDを点滅させたりアニメーションを制御したりすることに使用されます。
 
 ```C++
-#include "tensorflow/lite/micro/all_ops_resolver.h"
+#include "tensorflow/lite/micro/kernels/all_ops_resolver.h"
 #include "tensorflow/lite/micro/micro_error_reporter.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
 #include "tensorflow/lite/schema/schema_generated.h"
@@ -60,23 +60,23 @@ To use the TensorFlow Lite for Microcontrollers library, we must include the fol
 - [`schema_generated.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema_generated.h) contains the schema for the TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) model file format.
 - [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h) provides versioning information for the TensorFlow Lite schema.
 
-### 2. Include the model header
+### モデルをインクルードする
 
-The TensorFlow Lite for Microcontrollers interpreter expects the model to be provided as a C++ array. The model is defined in `model.h` and `model.cc` files. The header is included with the following line:
+マイクロコントローラ向けTensorFlow Lite インタープリタは、モデルがC++配列で提供されることを期待しています。*Hellow World* サンプルでは、モデルは `sine_model_data.h` と `sine_model_data.cc` で定義されています。ヘッダーは以下の行で含まれます。
 
 ```C++
-#include "tensorflow/lite/micro/examples/hello_world/model.h"
+#include "tensorflow/lite/micro/examples/hello_world/sine_model_data.h"
 ```
 
-### 3. Include the unit test framework header
+### 単体テストを用意する
 
-In order to create a unit test, we include the TensorFlow Lite for Microcontrollers unit test framework by including the following line:
+見ていくコードは単体テストで、それはマイクロコントローラ向けTensorFlow Liteフレームワークの単体テストフレームワークを使います。 フレームワークを読み込むため、以下のファイルをインクルードします。
 
 ```C++
 #include "tensorflow/lite/micro/testing/micro_test.h"
 ```
 
-The test is defined using the following macros:
+テストは以下のマクロを使って定義されます。
 
 ```C++
 TF_LITE_MICRO_TESTS_BEGIN
@@ -89,136 +89,135 @@ TF_LITE_MICRO_TEST(LoadModelAndPerformInference) {
 TF_LITE_MICRO_TESTS_END
 ```
 
-We now discuss the code included in the macro above.
+コードの残り部分は、モデルの読み込みと推論を実演します。
 
-### 4. Set up logging
+### ログ取得を準備する
 
-To set up logging, a `tflite::ErrorReporter` pointer is created using a pointer to a `tflite::MicroErrorReporter` instance:
+ログ取得の準備をするために、`tflite::MicroErrorReporter` インスタンスへのポインタを持つ、`tflite::ErrorReporter` ポインタが作成されます。
 
 ```C++
 tflite::MicroErrorReporter micro_error_reporter;
 tflite::ErrorReporter* error_reporter = &micro_error_reporter;
 ```
 
-This variable will be passed into the interpreter, which allows it to write logs. Since microcontrollers often have a variety of mechanisms for logging, the implementation of `tflite::MicroErrorReporter` is designed to be customized for your particular device.
+この変数はインタープリタに渡され、ログに書くことを許可します。 マイクロコントローラはしばしばログ取得のさまざまな機構をもつので、`tflite::MicroErrorReporter` の実装は、 デバイス固有にカスタマイズされるように設計されています。
 
-### 5. Load a model
+### モデルを読み込む
 
-In the following code, the model is instantiated using data from a `char` array, `g_model`, which is declared in `model.h`. We then check the model to ensure its schema version is compatible with the version we are using:
+以下のコードでは、モデルは `char` 配列、つまり `sine_model_data.h` で宣言された `g_sine_model_data` からのデータを使って実体化されます。 モデルを検査し、そのスキーマ・バージョンが我々が使用しているバージョンと互換性があることを確認します。
 
 ```C++
-const tflite::Model* model = ::tflite::GetModel(g_model);
+const tflite::Model* model = ::tflite::GetModel(g_sine_model_data);
 if (model->version() != TFLITE_SCHEMA_VERSION) {
-  TF_LITE_REPORT_ERROR(error_reporter,
-      "Model provided is schema version %d not equal "
-      "to supported version %d.\n",
+  error_reporter->Report(
+      "得られたモデルはスキーマ・バージョン%dであり、"
+      "サポートされたバージョン%dと一致しません。",
       model->version(), TFLITE_SCHEMA_VERSION);
 }
 ```
 
-### 6. Instantiate operations resolver
+### 演算子リゾルバを実体化する
 
-An [`AllOpsResolver`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.h) instance is declared. This will be used by the interpreter to access the operations that are used by the model:
+[`AllOpsResolver`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/kernels/all_ops_resolver.h) インスタンスが宣言されています。これは、モデルで使用されている演算にアクセスするためにインタープリタが使います。
 
 ```C++
-tflite::AllOpsResolver resolver;
+tflite::ops::micro::AllOpsResolver resolver;
 ```
 
-The `AllOpsResolver` loads all of the operations available in TensorFlow Lite for Microcontrollers, which uses a lot of memory. Since a given model will only use a subset of these operations, it's recommended that real world applications load only the operations that are needed.
+`AllOpsResolver` は、マイクロコントローラ向けTensorFlow Liteで利用可能なすべての演算を読み込むため多くのメモリを使用します。 通常、モデルが必要とするのはこれらの演算のうちの一部のため、現実世界に適用する際には必要な演算のみを読み込むことが推奨されます。
 
-This is done using a different class, `MicroMutableOpResolver`. You can see how to use it in the *Micro speech* example's [`micro_speech_test.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc).
+これは別のクラス、`MicroMutableOpResolver` を使用して実施されます。 *Micro speech* [`micro_speech_test.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc) の例で使い方を見ることができます。
 
-### 7. Allocate memory
+### メモリを割り当てる
 
-We need to preallocate a certain amount of memory for input, output, and intermediate arrays. This is provided as a `uint8_t` array of size `tensor_arena_size`:
+適当な量のメモリを入力、出力、そして中間配列に事前に割り当てる必要があります。 これは、`tensor_arena_size` の大きさの `uint8_t` 配列として提供されます。
 
 ```C++
 const int tensor_arena_size = 2 * 1024;
 uint8_t tensor_arena[tensor_arena_size];
 ```
 
-The size required will depend on the model you are using, and may need to be determined by experimentation.
+要求される大きさは使用するモデルに依存し、実験によって決める必要があるかもしれません。
 
-### 8. Instantiate interpreter
+### インタープリタを実体化する
 
-We create a `tflite::MicroInterpreter` instance, passing in the variables created earlier:
+`tflite::MicroInterpreter` インスタンスを作成し、事前に作成した変数を渡します。
 
 ```C++
 tflite::MicroInterpreter interpreter(model, resolver, tensor_arena,
                                      tensor_arena_size, error_reporter);
 ```
 
-### 9. Allocate tensors
+### テンソルを割り当てる
 
-We tell the interpreter to allocate memory from the `tensor_arena` for the model's tensors:
+インタープリタに対し、 `tensor_arena` からモデルのテンソルにメモリを割り当てるように指示します。
 
 ```C++
 interpreter.AllocateTensors();
 ```
 
-### 10. Validate input shape
+### 入力の形を検証する
 
-The `MicroInterpreter` instance can provide us with a pointer to the model's input tensor by calling `.input(0)`, where `0` represents the first (and only) input tensor:
+`MicroInterpreter` インスタンスは、`.input(0)` を呼ぶことで、モデルの入力テンソルへのポインタを提供します。 `0` は最初の（そして唯一の）入力テンソルであることを表します。
 
 ```C++
-  // Obtain a pointer to the model's input tensor
+  // モデルの入力テンソルへポインタを取得する
   TfLiteTensor* input = interpreter.input(0);
 ```
 
-We then inspect this tensor to confirm that its shape and type are what we are expecting:
+このテンソルを検証し、形と型が期待したものであることを確認します。
 
 ```C++
-// Make sure the input has the properties we expect
+// 入力は期待するプロパティを持つことを確認する
 TF_LITE_MICRO_EXPECT_NE(nullptr, input);
-// The property "dims" tells us the tensor's shape. It has one element for
-// each dimension. Our input is a 2D tensor containing 1 element, so "dims"
-// should have size 2.
+// プロパティ "dims" はテンソルの形を教えてくれる。
+// それは次元ごとに1つの要素を持つ。我々の入力は2次元のテンソルで1つの要素を含むので、
+// "dims" の次元数は2であるべきである。
 TF_LITE_MICRO_EXPECT_EQ(2, input->dims->size);
-// The value of each element gives the length of the corresponding tensor.
-// We should expect two single element tensors (one is contained within the
-// other).
+// 要素ごとの値は、対応するテンソルの長さを与える。
+// 我々は2つのテンソルを期待する。（一方は他方に含まれる。）
 TF_LITE_MICRO_EXPECT_EQ(1, input->dims->data[0]);
 TF_LITE_MICRO_EXPECT_EQ(1, input->dims->data[1]);
-// The input is a 32 bit floating point value
+// 入力は32bit浮動小数点数である。
 TF_LITE_MICRO_EXPECT_EQ(kTfLiteFloat32, input->type);
 ```
 
-The enum value `kTfLiteFloat32` is a reference to one of the TensorFlow Lite data types, and is defined in [`common.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/common.h).
+enum値 `kTfLiteFloat32` は、TensorFlow Lite のデータ型のうちの一つへの参照であり、 [`common.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/common.h). で定義されています。
 
-### 11. Provide an input value
+### 入力値を提供する
 
-To provide an input to the model, we set the contents of the input tensor, as follows:
+入力をモデルに提供するために、入力テンソルの内容を以下のとおり設定します。
 
 ```C++
 input->data.f[0] = 0.;
 ```
 
-In this case, we input a floating point value representing `0`.
+この場合、`0` を表す浮動小数点数を入力しています。
 
-### 12. Run the model
+### モデルを実行する
 
-To run the model, we can call `Invoke()` on our `tflite::MicroInterpreter` instance:
+モデルを実行するために、 `tflite::MicroInterpreter` インスタンス上で `Invoke()` を呼びます。
 
 ```C++
 TfLiteStatus invoke_status = interpreter.Invoke();
 if (invoke_status != kTfLiteOk) {
-  TF_LITE_REPORT_ERROR(error_reporter, "Invoke failed\n");
+  error_reporter->Report("Invoke failed\n");
 }
 ```
 
-We can check the return value, a `TfLiteStatus`, to determine if the run was successful. The possible values of `TfLiteStatus`, defined in [`common.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/common.h), are `kTfLiteOk` and `kTfLiteError`.
+戻り値 `TfLiteStatus` を確認でき、実行が成功したかどうか決定できます。 `TfLiteStatus` の取りうる値は、 [`common.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/common.h)で定義されており、 `kTfLiteOk` と `kTfLiteError` です。
 
-The following code asserts that the value is `kTfLiteOk`, meaning inference was successfully run.
+下記コードは値が、推論がうまく実行されたことを意味する、`kTfLiteOk`であることを知らせています。
 
 ```C++
 TF_LITE_MICRO_EXPECT_EQ(kTfLiteOk, invoke_status);
 ```
 
-### 13. Obtain the output
+### 出力を取得する
 
-The model's output tensor can be obtained by calling `output(0)` on the `tflite::MicroInterpreter`, where `0` represents the first (and only) output tensor.
+モデルの出力テンソルは、`tflite::MicroIntepreter` 上で `output(0)` を呼ぶことで取得できます。 `0` は最初の（そして唯一の）出力テンソルであることを表します。
 
-In the example, the model's output is a single floating point value contained within a 2D tensor:
+サンプルでは、モデルの出力は1つの2次元テンソルに含まれる1つの浮動小数点数です。
 
 ```C++
 TfLiteTensor* output = interpreter.output(0);
@@ -228,18 +227,18 @@ TF_LITE_MICRO_EXPECT_EQ(1, input->dims->data[1]);
 TF_LITE_MICRO_EXPECT_EQ(kTfLiteFloat32, output->type);
 ```
 
-We can read the value directly from the output tensor and assert that it is what we expect:
+出力テンソルから直接値を読むこともでき、それが期待するものであるか評価することもできます。
 
 ```C++
-// Obtain the output value from the tensor
+// テンソルから出力値を取得する
 float value = output->data.f[0];
-// Check that the output value is within 0.05 of the expected value
+// 出力値が期待値から0.05以内であるかを検査する
 TF_LITE_MICRO_EXPECT_NEAR(0., value, 0.05);
 ```
 
-### 14. Run inference again
+### 推論を再度実行する
 
-The remainder of the code runs inference several more times. In each instance, we assign a value to the input tensor, invoke the interpreter, and read the result from the output tensor:
+コードの残りの部分は、推論をさらに何回も実行します。 インスタンス毎に、入力テンソルに値を割り当て、インタープリタを呼び、そして出力テンソルから結果を読み取ります。
 
 ```C++
 input->data.f[0] = 1.;
@@ -258,6 +257,6 @@ value = output->data.f[0];
 TF_LITE_MICRO_EXPECT_NEAR(-0.959, value, 0.05);
 ```
 
-### 15. Read the application code
+### アプリケーションのコードを読む
 
 Once you have walked through this unit test, you should be able to understand the example's application code, located in [`main_functions.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/main_functions.cc). It follows a similar process, but generates an input value based on how many inferences have been run, and calls a device-specific function that displays the model's output to the user.
