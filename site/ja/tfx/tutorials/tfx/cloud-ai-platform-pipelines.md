@@ -1,0 +1,635 @@
+# Cloud AI Platform パイプライン上の TFX
+
+## はじめに
+
+このチュートリアルでは、TensorFlow Extended (TFX) と Cloud AI Platform Pipelines を紹介し、Google Cloud で独自の機械学習パイプラインを作成する方法を見ていきます。また、TFX、AI Platform Pipelines、Kubeflow との統合や Jupyter Notebook の TFX とのインタラクティブな動作を見ていきます。
+
+このチュートリアルの最終ステップでは、Google Cloud でホストされる機械学習パイプラインを作成して実行します。また、それぞれの実行の結果を視覚化し、作成されたアーティファクトの系統を表示します。
+
+Key Term: A TFX pipeline is a Directed Acyclic Graph, or "DAG". We will often refer to pipelines as DAGs.
+
+ここでは典型的な機械学習開発プロセスに従い、データセットを調べてから最終的に完全に機能するパイプラインを作成します。また、パイプラインをデバッグおよび更新し、パフォーマンスを測定する方法を学びます。
+
+注: このチュートリアルの所要時間は、約45 ～ 60 分です。
+
+### Chicago Taxi Dataset
+
+<!-- Image free for commercial use, does not require attribution:
+https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
+
+![Taxi](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/taxi.jpg?raw=true) ![Chicago taxi](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/chicago.png?raw=true)
+
+You're using the [Taxi Trips dataset](https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew) released by the City of Chicago.
+
+注：この Web サイトは、シカゴ市の公式 Web サイト www.cityofchicago.org で公開されたデータを変更して使用するアプリケーションを提供します。シカゴ市は、この Web サイトで提供されるデータの内容、正確性、適時性、または完全性について一切の表明を行いません。この Web サイトで提供されるデータは、随時変更される可能性があり、提供されるデータはユーザーの自己責任で利用されるものとします。
+
+You can [read more](https://cloud.google.com/bigquery/public-data/chicago-taxi) about the dataset in [Google BigQuery](https://cloud.google.com/bigquery/). Explore the full dataset in the [BigQuery UI](https://bigquery.cloud.google.com/dataset/bigquery-public-data:chicago_taxi_trips).
+
+#### Model Goal - Binary classification
+
+Will the customer tip more or less than 20%?
+
+## 1. Google Cloud プロジェクトをセットアップする
+
+### 1.a Google Cloud で環境を設定する
+
+このチュートリアルをはじめるには、Google Cloud アカウントが必要です。すでにアカウントがある場合は、スキップして[新規プロジェクトを作成](#create_project)してください。
+
+警告: このデモは、[Google Cloud の無料枠](https://cloud.google.com/free)の制限を超えないように設計されています。すでに Google アカウントをお持ちの場合は、無料枠の上限に達しているか、新規ユーザーに提供される無料の Google Cloud クレジットを使い果たしている可能性があります。**そのような場合、このデモを行うと、Google Cloud アカウントに課金が発生します**。
+
+1. [Google Cloud Console](https://console.cloud.google.com/) に移動します。
+
+2. Google Cloud の利用規約に同意します。
+
+     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/welcome-popup.png?raw=true" class="">
+
+3. 無料トライアル アカウントではじめる場合は、[[**無料で使ってみる**](https://console.cloud.google.com/freetrial)] をクリックします（または、[**無料で開始**](https://console.cloud.google.com/freetrial))。
+
+    1. 国を選択します。
+
+    2. 利用規約に同意します。
+
+    3. 請求先の詳細を入力します。
+
+        この時点では課金されることはありません。他の Google Cloud プロジェクトがない場合は、[Google Cloud の無料枠](https://cloud.google.com/free)の上限を超えることなくこのチュートリアルを完了することができます。これには、同時に実行される最大 8 コアが含まれます。
+
+注: この時点で、無料トライアルを使用する代わりに、有料ユーザーになることを選択できます。このチュートリアルは無料枠の上限を超えないので、これが唯一のプロジェクトで、この制限内で利用する場合は課金は発生しません。詳細については、[Google Cloud 料金計算ツール](https://cloud.google.com/products/calculator/)と [Google Cloud Platform の無料枠](https://cloud.google.com/free)をご覧ください。
+
+### 1.b 新規プロジェクトを作成する<a name="create_project"></a>
+
+注: このチュートリアルは、新しいプロジェクトでこのデモに取り組むことを前提としています。必要に応じて、既存のプロジェクトで作業することもできます。
+
+注：プロジェクトを作成する前に、検証済みのクレジットカードを登録しておく必要があります。
+
+1. [Google Cloud メイン ダッシュボード](https://console.cloud.google.com/home/dashboard)で、[**Google Cloud Platform**] ヘッダーの横にあるプロジェクトのプルダウンをクリックし、[**新規プロジェクト**] を選択します。
+2. プロジェクトに名前を付け、他のプロジェクトの詳細を入力します。
+3. プロジェクトを作成したら、プロジェクトのドロップダウンからそれを選択します。
+
+## 2. AI Platform Pipeline をセットアップして新しい Kubernetes クラスタにデプロイする
+
+注: リソースがプロビジョニングされるまでに数回待機する必要があるため、これには最大 10 分かかります。
+
+1. [AI Platform Pipelines クラスタ](https://console.cloud.google.com/ai-platform/pipelines)のページに移動します。
+
+    メインナビゲーションメニューの下: ≡ &gt; AI Platform &gt; パイプライン
+
+2. [**+ 新規インスタンス**] をクリックして新しいクラスタを作成します。
+
+    <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-instance.png">
+
+3. **Kubeflow Pipelines** の概要ページで、[**構成**] をクリックします。
+
+     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/configure.png?raw=true" class="">
+
+    次に進む前に、Kubernetes Engine API が有効になるまで数分待つ必要がある場合があります。
+
+4. [**Deploy Kubeflow Pipelines**] ページで:
+
+    1. クラスタの[ゾーン](https://cloud.google.com/compute/docs/regions-zones)（または「リージョン」）を選択します。
+
+    2. **重要** [*次のクラウド API へのアクセスを許可する*] というラベルの付いたボックスをオンにします。(これは、このクラスターがプロジェクトの他の部分にアクセスするために必要です。この手順を怠ると、後で修正するのが少し難しくなります。)
+
+         <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/check-the-box.png?raw=true" class="">
+
+    3. [**作成**] をクリックし、クラスタが作成されるまで数分待ちます。
+
+    4. 名前空間とインスタンス名を選択します (デフォルトを使用しても問題ありません)。*マネージド ストレージを使用する*をチェックする必要はありません。
+
+    5. [**デプロイ**] をクリックし、パイプラインがデプロイされるまでしばらく待ちます。Kubeflow Pipelines をデプロイすることにより、利用規約に同意したことになります。
+
+## 3. Cloud AI Platform Notebook インスタンスをセットアップします。
+
+1. [AI Platform Notebooks](https://console.cloud.google.com/ai-platform/notebooks) ページに移動します。
+
+    メイン ナビゲーション メニューの下: ≡ -&gt; AI Platform -&gt; Notebooks
+
+2. プロンプトが表示されたら、Compute Engine API を有効にします。
+
+3. TensorFlow 2.1（またはそれ以降）がインストールされた**新規インスタンス**を作成します。
+
+    新規インスタンス -&gt; TensorFlow 2.1 -&gt; GPU なし
+
+    無料利用枠の制限内に留まるには、ここのデフォルト設定を受け入れないでください。このインスタンスで使用できる vCPU の数を 4 から 2 に減らす必要があります。
+
+    1. [**新規 Notebook インスタンス**] フォームの下部にある [**カスタマイズ**] を選択します。
+
+    2. 1 つまたは 2 つの vCPU を備えた**マシン構成**を選択します。
+
+         <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/two-cpus.png?raw=true" class="">
+
+注: デフォルト設定ではなく 1 つまたは 2 つの vCPU を使用する場合、Notebook のパフォーマンスが低下する可能性がありますが、このチュートリアルの完了を著しく妨げることはありません。デフォルト設定を使用する場合は、少なくとも 12 vCPU に[アカウントをアップグレード](https://cloud.google.com/free/docs/gcp-free-tier#to_upgrade_your_account)してください。これにより、課金が発生します。[料金計算ツール](https://cloud.google.com/products/calculator)や [Google Cloud 無料枠](https://cloud.google.com/free)に関する情報など、料金の詳細については、[Google Kubernetes Engine の料金](https://cloud.google.com/kubernetes-engine/pricing/)を参照してください。
+
+## 4. Getting Started Notebook をローンチする
+
+1. [AI Platform Pipelines クラスタ](https://console.cloud.google.com/ai-platform/pipelines)のページに移動します。
+
+    メインナビゲーションメニューの下: ≡ &gt; AI Platform &gt; パイプライン
+
+2. このチュートリアルで使用しているクラスタの行の、[**パイプライン ダッシュボードを開く**] をクリックします。
+
+    ![open-dashboard](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/open-dashboard.png?raw=true)
+
+3. [**スタートガイド**] ページで、[**TF 2.1 Notebook を開く**] をクリックします。
+
+4. このチュートリアルで使用している Notebook のインスタンスを選択し、[**続行**] をクリックします。
+
+    ![select-notebook](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/select-notebook.png?raw=true)
+
+## 5. Notebook で作業を続行する
+
+重要: このチュートリアルの残りの部分は、前述のステップで開いた Jupyter Lab Notebook で完了する必要があります。ここに記載された手順と説明を参照してください。
+
+### インストール
+
+Getting Started Notebook をはじめるには、まず、Jupyter Lab が実行されている VM に [TFX](https://www.tensorflow.org/tfx) と [Kubeflow Pipelines (KFP)](https://www.kubeflow.org/docs/pipelines/) をインストールします。
+
+次に、インストールされている TFX のバージョンを確認し、インポートを行い、プロジェクト ID を設定して出力します。
+
+![check python version and import](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/check-version-nb-cell.png?raw=true)
+
+### Google Cloud サービスと接続する
+
+パイプライン構成にはプロジェクト ID が必要です。これは、Notebook を介して取得し、環境変数として設定できます。
+
+```python
+# Read GCP project id from env.
+shell_output=!gcloud config list --format 'value(core.project)' 2>/dev/null
+GCP_PROJECT_ID=shell_output[0]
+print("GCP project ID:" + GCP_PROJECT_ID)
+```
+
+次に、KFP クラスターのエンドポイントを設定します。
+
+これは、Pipelines ダッシュボードの URL から見つけることができます。Kubeflow Pipeline ダッシュボードに移動し、URL を確認します。エンドポイントは、URL 内の`https://`から`googleusercontent.com`までのすべてです（googleusercontent.com を含む）。
+
+```python
+ENDPOINT='' # Enter YOUR ENDPOINT here.
+```
+
+次に、Notebook はカスタム Docker イメージに一意の名前を設定します。
+
+```python
+# Docker image name for the pipeline image
+CUSTOM_TFX_IMAGE='gcr.io/' + GCP_PROJECT_ID + '/tfx-pipeline'
+```
+
+## 6. テンプレートをプロジェクト ディレクトリにコピーする
+
+次の Notebook セルを編集して、パイプラインの名前を設定します。このチュートリアルでは、`my_pipeline`を使用します。
+
+```python
+PIPELINE_NAME="my_pipeline"
+PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
+```
+
+次に、Notebook は `tfx` CLI を使用してパイプライン テンプレートをコピーします。このチュートリアルでは、Chicago Taxi データセットを使用してバイナリ分類を実行するため、テンプレートはモデルを`taxi`に設定します。
+
+```python
+!tfx template copy \
+  --pipeline-name={PIPELINE_NAME} \
+  --destination-path={PROJECT_DIR} \
+  --model=taxi
+```
+
+次に、Notebook はその CWD コンテキストをプロジェクト ディレクトリに変更します。
+
+```
+%cd {PROJECT_DIR}
+```
+
+### パイプラインファイルを閲覧する
+
+Cloud AI Platform Notebook の左側に、ファイル ブラウザが表示されます。そのパイプライン名 (`my_pipeline`) のディレクトリがあるはずです。それを開いてファイルを表示します。 (Notebook 環境からも開いて編集できます。)
+
+```
+# You can also list the files from the shell
+! ls
+```
+
+上記の`tfx template copy`コマンドは、パイプラインを構築するファイルの基本的なスキャフォールドを作成しました。これらには、Python ソース コード、サンプルデータ、Jupyter Notebook が含まれます。これらは、この特定のサンプルを対象としています。独自のパイプラインの場合、これらはパイプラインに必要なサポート ファイルになります。
+
+Python ファイルの簡単な説明を次に示します。
+
+- `pipeline` - このディレクトリには、パイプラインの定義が含まれています。
+    - `configs.py` — パイプライン ランナーの共通定数を定義します。
+    - `pipeline.py` — TFX コンポーネントとパイプラインを定義します。
+- `models` - このディレクトリには、機械学習モデルの定義が含まれています。
+    - `features.py` `features_test.py` — モデルの機能を定義します
+    - `preprocessing.py` / `preprocessing_test.py` — `tf::Transform`を使用して前処理ジョブを定義します。
+    - `estimator` - このディレクトリには、Estimator ベースのモデルが含まれています。
+        - `constants.py` — モデルの定数を定義します。
+        - `model.py` / `model_test.py` — TF estimator を使用して DNN モデルを定義します
+    - `keras` - このディレクトリには、Keras ベースのモデルが含まれています。
+        - `constants.py` — モデルの定数を定義します。
+        - `model.py` / `model_test.py` — Keras を使用して DNN モデルを定義します。
+- `beam_runner.py` / `kubeflow_runner.py` — オーケストレーション エンジンごとにランナーを定義します。
+
+## 7. Kubeflow で最初の TFX パイプラインを実行
+
+Notebook は、`tfx run` CLI コマンドを使用してパイプラインを実行します。
+
+### ストレージに接続
+
+パイプラインを実行するとアーティファクトが作成されます。これは、[ML-Metadata](https://github.com/google/ml-metadata) に保存する必要があります。アーティファクトは、ファイル システムまたはブロック ストレージに格納する必要があるファイルであるペイロードを指します。このチュートリアルでは、セットアップ中に自動的に作成されたバケットを使用して、GCS を使用してメタデータ ペイロードを保存します。名前は`<your-project-id>-kubeflowpipelines-default`になります。
+
+### パイプラインを作成する
+
+Notebook はサンプル データを GCS バケットにアップロードして、後でパイプラインで使用できるようにします。
+
+```python
+!gsutil cp data/data.csv gs://{GOOGLE_CLOUD_PROJECT}-kubeflowpipelines-default/tfx-template/data/taxi/data.csv
+```
+
+次に、Notebook は`tfx pipeline create`コマンドを使用してパイプラインを作成します。
+
+```python
+!tfx pipeline create  \
+--pipeline-path=kubeflow_runner.py \
+--endpoint={ENDPOINT} \
+--build-image
+```
+
+パイプラインの作成中に、Docker イメージをビルドするための`Dockerfile`が生成されます。これらのファイルを他のソースファイルと一緒にソース管理システム (たとえば、git) に追加することを忘れないでください。
+
+### パイプラインの実行
+
+次に、Notebook は`tfx run create`コマンドを使用して、パイプラインの実行を開始します。この実行は、Kubeflow Pipelines ダッシュボードの [実験] の下にも表示されます。
+
+```python
+!tfx run create --pipeline-name={PIPELINE_NAME} --endpoint={ENDPOINT}
+```
+
+Kubeflow Pipelines ダッシュボードからパイプラインを表示できます。
+
+注: パイプラインの実行が失敗した場合、KFP ダッシュボードで詳細なログを確認できます。失敗の主な原因の 1 つは、許可関連の問題です。KFP クラスタに Google Cloud API へのアクセス権限があることを確認してください。これは、[GCP で KFP クラスタを作成するときに](https://cloud.google.com/ai-platform/pipelines/docs/setting-up)構成します。[GCP でのトラブルシューティング ドキュメント](https://cloud.google.com/ai-platform/pipelines/docs/troubleshooting)を参照してください。
+
+## 8. データを検証する
+
+The first task in any data science or ML project is to understand and clean the data.
+
+- 各特徴量のデータ型を理解する
+- Look for anomalies and missing values
+- Understand the distributions for each feature
+
+### コンポーネント
+
+![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/examplegen1.png?raw=true) ![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/examplegen2.png?raw=true)
+
+- [ExampleGen](https://www.tensorflow.org/tfx/guide/examplegen) ingests and splits the input dataset.
+- [StatisticsGen](https://www.tensorflow.org/tfx/guide/statsgen) calculates statistics for the dataset.
+- [SchemaGen](https://www.tensorflow.org/tfx/guide/schemagen) SchemaGen examines the statistics and creates a data schema.
+- [ExampleValidator](https://www.tensorflow.org/tfx/guide/exampleval) looks for anomalies and missing values in the dataset.
+
+### Jupyter ラボ ファイル エディターで以下を行います
+
+`pipeline`/`pipeline.py`で、これらのコンポーネントをパイプラインに追加する行のコメントを外します。
+
+```python
+# components.append(statistics_gen)
+# components.append(schema_gen)
+# components.append(example_validator)
+```
+
+（`ExampleGen`は、テンプレート ファイルがコピーされたときにすでに有効になっています）。
+
+### パイプラインを更新して再実行する
+
+```python
+# Update the pipeline
+! tfx pipeline update \
+  --pipeline-path=kubeflow_runner.py \
+  --endpoint={ENDPOINT}
+
+! tfx run create --pipeline-name "{PIPELINE_NAME}"
+```
+
+### パイプラインを確認する
+
+Kubeflow Orchestrator の場合、KFP ダッシュボードにアクセスし、パイプライン実行のページでパイプライン出力を見つけます。左側の [実験] タブをクリックし、[実験] ページの [すべての実行] をクリックします。パイプラインの名前の実行が表示されるはずです。
+
+### More advanced example
+
+The example presented here is really only meant to get you started. For a more advanced example see the [TensorFlow Data Validation Colab](https://www.tensorflow.org/tfx/tutorials/data_validation/chicago_taxi).
+
+For more information on using TFDV to explore and validate a dataset, [see the examples on tensorflow.org](https://www.tensorflow.org/tfx/data_validation).
+
+## 9. 特徴量エンジニアリング
+
+You can increase the predictive quality of your data and/or reduce dimensionality with feature engineering.
+
+- Feature crosses
+- Vocabularies
+- 埋め込み
+- PCA
+- Categorical encoding
+
+One of the benefits of using TFX is that you will write your transformation code once, and the resulting transforms will be consistent between training and serving.
+
+### コンポーネント
+
+![Transform](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/transform.png?raw=true)
+
+- [変換](https://www.tensorflow.org/tfx/guide/transform)は、データセットに対する特徴量エンジニアリングを実行します。
+
+### Jupyter ラボ ファイル エディターで次を行います
+
+`pipeline`/`pipeline.py`で、パイプラインに [Transform](https://www.tensorflow.org/tfx/guide/transform) を追加する行を見つけてコメントを外します。
+
+```python
+# components.append(transform)
+```
+
+### パイプラインを更新して再実行する
+
+```python
+# Update the pipeline
+! tfx pipeline update \
+  --pipeline-path=kubeflow_runner.py \
+  --endpoint={ENDPOINT}
+
+! tfx run create --pipeline-name "{PIPELINE_NAME}"
+```
+
+### パイプライン出力を確認する
+
+Kubeflow Orchestrator の場合、KFP ダッシュボードにアクセスし、パイプライン実行のページでパイプライン出力を見つけます。左側の [実験] タブをクリックし、[実験] ページの [すべての実行] をクリックします。パイプラインの名前の実行が表示されるはずです。
+
+### More advanced example
+
+The example presented here is really only meant to get you started. For a more advanced example see the [TensorFlow Transform Colab](https://www.tensorflow.org/tfx/tutorials/transform/census).
+
+## 10. トレーニング
+
+Train a TensorFlow model with your nice, clean, transformed data.
+
+- 前のステップの変換を含めて、一貫して適用されるようにします。
+- Save the results as a SavedModel for production
+- Visualize and explore the training process using TensorBoard
+- Also save an EvalSavedModel for analysis of model performance
+
+### コンポーネント
+
+- [Trainer](https://www.tensorflow.org/tfx/guide/trainer) は TensorFlow モデルをトレーニングします。
+
+### Jupyter ラボ ファイル エディターで次を行います
+
+`pipeline`/`pipeline.py` で、パイプラインに Trainer を追加する行を見つけてコメントを外します。
+
+```python
+# components.append(trainer)
+```
+
+### パイプラインを更新して再実行する
+
+```python
+# Update the pipeline
+! tfx pipeline update \
+  --pipeline-path=kubeflow_runner.py \
+  --endpoint={ENDPOINT}
+
+! tfx run create --pipeline-name "{PIPELINE_NAME}"
+```
+
+### パイプライン出力を確認する
+
+Kubeflow Orchestrator の場合、KFP ダッシュボードにアクセスし、パイプライン実行のページでパイプライン出力を見つけます。左側の [実験] タブをクリックし、[実験] ページの [すべての実行] をクリックします。パイプラインの名前の実行が表示されるはずです。
+
+### More advanced example
+
+The example presented here is really only meant to get you started. For a more advanced example see the [TensorBoard Tutorial](https://www.tensorflow.org/tensorboard/r1/summaries).
+
+## 11. モデルのパフォーマンスの分析
+
+Understanding more than just the top level metrics.
+
+- Users experience model performance for their queries only
+- Poor performance on slices of data can be hidden by top level metrics
+- Model fairness is important
+- Often key subsets of users or data are very important, and may be small
+    - Performance in critical but unusual conditions
+    - Performance for key audiences such as influencers
+- If you’re replacing a model that is currently in production, first make sure that the new one is better
+
+### コンポーネント
+
+- [Evaluator](https://www.tensorflow.org/tfx/guide/evaluator) はトレーニング結果の詳細分析を実行します。
+
+### Jupyter ラボ ファイル エディターで次を行います
+
+`pipeline`/`pipeline.py` で、Evaluator をパイプラインに追加する行を見つけてコメント解除します。
+
+```python
+components.append(evaluator)
+```
+
+### パイプラインを更新して再実行する
+
+```python
+# Update the pipeline
+! tfx pipeline update \
+  --pipeline-path=kubeflow_runner.py \
+  --endpoint={ENDPOINT}
+
+! tfx run create --pipeline-name "{PIPELINE_NAME}"
+```
+
+### パイプライン出力を確認する
+
+Kubeflow Orchestrator の場合、KFP ダッシュボードにアクセスし、パイプライン実行のページでパイプライン出力を見つけます。左側の [実験] タブをクリックし、[実験] ページの [すべての実行] をクリックします。パイプラインの名前の実行が表示されるはずです。
+
+## 12. モデルのサービング
+
+If the new model is ready, make it so.
+
+- Pusher deploys SavedModels to well-known locations
+
+Deployment targets receive new models from well-known locations
+
+- TensorFlow Serving
+- TensorFlow Lite
+- TensorFlow JS
+- TensorFlow Hub
+
+### コンポーネント
+
+- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) deploys the model to a serving infrastructure.
+
+### Jupyter ラボ ファイル エディターで次を行います
+
+`pipeline`/`pipeline.py`で、Pusher をパイプラインに追加する行を見つけてコメントを外します。
+
+```python
+# components.append(pusher)
+```
+
+### パイプライン出力を確認する
+
+Kubeflow Orchestrator の場合、KFP ダッシュボードにアクセスし、パイプライン実行のページでパイプライン出力を見つけます。左側の [実験] タブをクリックし、[実験] ページの [すべての実行] をクリックします。パイプラインの名前の実行が表示されるはずです。
+
+### 利用可能なデプロイメントターゲット
+
+これでモデルのトレーニングと検証が完了し、モデルの実稼働環境の準備が整いました。次のような TensorFlow デプロイメント ターゲットのいずれかにモデルをデプロイできるようになりました。
+
+- [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving), for serving your model on a server or server farm and processing REST and/or gRPC inference requests.
+- [TensorFlow Lite](https://www.tensorflow.org/lite), for including your model in an Android or iOS native mobile application, or in a Raspberry Pi, IoT, or microcontroller application.
+- [TensorFlow.js](https://www.tensorflow.org/js), for running your model in a web browser or Node.JS application.
+
+## より高度な例
+
+前述の例は、初心者向けのものです。以下は、他のクラウドサービスとの統合の例です。
+
+### Kubeflow Pipelines のリソースに関する考慮事項
+
+ワークロードの要件に対して、Kubeflow Pipelines デプロイメントのデフォルト構成がニーズを満たしていない場合があります。`KubeflowDagRunnerConfig`を呼び出し、`pipeline_operator_funcs`を使用して、リソース構成をカスタマイズできます。
+
+`pipeline_operator_funcs`は`OpFunc`アイテムのリストであり、`KubeflowDagRunner`からコンパイルされた KFP パイプライン仕様で生成されたすべての`ContainerOp`インスタンスを変換します。
+
+たとえば、メモリを構成するには、[`set_memory_request`](https://github.com/kubeflow/pipelines/blob/646f2fa18f857d782117a078d626006ca7bde06d/sdk/python/kfp/dsl/_container_op.py#L249)を使用して必要なメモリ量を宣言できます。これを行うには、一般的に`set_memory_request`のラッパーを作成し、それを使用してパイプライン `AggFunc`のリストに追加します。
+
+```python
+def request_more_memory():
+  def _set_memory_spec(container_op):
+    container_op.set_memory_request('32G')
+  return _set_memory_spec
+
+# Then use this opfunc in KubeflowDagRunner
+pipeline_op_funcs = kubeflow_dag_runner.get_default_pipeline_operator_funcs()
+pipeline_op_funcs.append(request_more_memory())
+config = KubeflowDagRunnerConfig(
+    pipeline_operator_funcs=pipeline_op_funcs,
+    ...
+)
+kubeflow_dag_runner.KubeflowDagRunner(config=config).run(pipeline)
+```
+
+同様に以下の関数を使用してリソースを構成できます。
+
+- `set_memory_limit`
+- `set_cpu_request`
+- `set_cpu_limit`
+- `set_gpu_limit`
+
+### `BigQueryExampleGen`を試してみる
+
+[BigQuery](https://cloud.google.com/bigquery) は、サーバーレスでスケーラビリティと費用対効果の高いクラウド データ ウェアハウスです。BigQuery は、TFX のトレーニング サンプルのソースとして使用できます。このステップでは、パイプラインに`BigQueryExampleGen`を追加します。
+
+#### Jupyter ラボ ファイル エディターで次を行います
+
+**`pipeline.py`をダブルクリックして開きます**。`CsvExampleGen`をコメントアウトし、`BigQuery Example Gen`のインスタンスを作成する行のコメントを外します。また、`create_pipeline`関数の`query`引数のコメントも外す必要があります。
+
+BigQuery に使用する GCP プロジェクトを指定する必要があります。そのためには、パイプラインの作成時に`beam_pipeline_args`に`--project`を設定します。
+
+**`configs.py`**をダブルクリックして開きます。`BIG_QUERY_WITH_DIRECT_RUNNER_BEAM_PIPELINE_ARGS`と`BIG_QUERY_QUERY`の定義のコメントを外します。このファイルのプロジェクト ID とリージョンの値を、GCP プロジェクトの正しい値に置き換えます。
+
+> **注: 続行する前に、GCP プロジェクト ID とリージョンを`configs.py`ファイルに設定する必要があります。**
+
+**ディレクトリを 1 レベル上に変更します。**ファイル リストの上にあるディレクトリの名前をクリックします。ディレクトリ名はパイプライン名で、パイプライン名を変更しなかった場合は`my_pipeline`です。
+
+**ダブルクリックして`kubeflow_runner.py`** を開きます。`create_pipeline`関数の 2 つの引数 `query`と`beam_pipeline_args`のコメントを外します。
+
+パイプラインで BigQuery をサンプル ソースとして使用する準備ができました。前と同じようにパイプラインを更新し、ステップ 5 と 6 で行ったように新しい実行を作成します。
+
+#### パイプラインを更新して再実行する
+
+```python
+# Update the pipeline
+!tfx pipeline update \
+  --pipeline-path=kubeflow_runner.py \
+  --endpoint={ENDPOINT}
+
+!tfx run create --pipeline-name {PIPELINE_NAME} --endpoint={ENDPOINT}
+```
+
+### Dataflow を試してみる
+
+いくつかの [TFX コンポーネントは Apache Beam を使用](https://www.tensorflow.org/tfx/guide/beam)してデータ並列パイプラインを実装します。そのため、[Google Cloud Dataflow](https://cloud.google.com/dataflow/) を使用してデータ処理ワークロードを分散できます。このステップでは、Apache Beam のデータ処理バックエンドとして Dataflow を使用するように Kubeflow オーケストレーターを設定します。
+
+> **注:** Dataflow API がまだ有効になっていない場合は、コンソールを使用するか、CLI から次のコマンドを使用して（Cloud Shell など）有効にできます。
+
+```bash
+# Select your project:
+gcloud config set project YOUR_PROJECT_ID
+
+# Get a list of services that you can enable in your project:
+gcloud services list --available | grep Dataflow
+
+# If you don't see dataflow.googleapis.com listed, that means you haven't been
+# granted access to enable the Dataflow API.  See your account adminstrator.
+
+# Enable the Dataflow service:
+
+gcloud services enable dataflow.googleapis.com
+```
+
+> **注:** 実行速度は、デフォルトの [Google Compute Engine（GCE）](https://cloud.google.com/compute) 割り当てにより制限される場合があります。約 250 の Dataflow VM に十分な割り当てを設定することをお勧めします（**250 個の CPU、250 個の IP アドレス、62500 GB の永続ディスク**）。詳細については、[GCE 割り当て](https://cloud.google.com/compute/quotas)と [Dataflow 割り当て](https://cloud.google.com/dataflow/quotas)のドキュメントを参照してください。IP アドレスの割り当てによりブロックされている場合は、より大きな[`worker_type`](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options)を使用すると、必要な IP の数を減らすことができます。
+
+**`pipeline`をダブルクリックしてディレクトリを変更し、`configs.py`**をダブルクリックして開きます。`GOOGLE_CLOUD_REGION`と`DATAFLOW_BEAM_PIPELINE_ARGS`の定義のコメントを外します。
+
+**ディレクトリを 1 レベル上に変更します。**ファイル リストの上にあるディレクトリの名前をクリックします。ディレクトリ名はパイプライン名で、変更しなかった場合は`my_pipeline`です。
+
+**`kubeflow_runner.py`**をダブルクリックして開きます。`beam_pipeline_args`のコメントを外します。（ステップ 7 で追加した最新の`beam_pipeline_args`も必ずコメントアウトしてください）。
+
+#### パイプラインを更新して再実行する
+
+```python
+# Update the pipeline
+!tfx pipeline update \
+  --pipeline-path=kubeflow_runner.py \
+  --endpoint={ENDPOINT}
+
+!tfx run create --pipeline-name {PIPELINE_NAME} --endpoint={ENDPOINT}
+```
+
+[Cloud Console の Dataflow](http://console.cloud.google.com/dataflow) で Dataflow のジョブを見つけることができます。
+
+### KFP で Cloud AI Platform のトレーニングと予測を試す
+
+TFX は、[トレーニングと予測のための Cloud AI Platform](https://cloud.google.com/ai-platform/) など、いくつかのマネージド GCP サービスと相互運用します。機械学習モデルをトレーニングするためのマネージド サービスである Cloud AI Platform Training を使用するように `Trainer` コンポーネントを設定できます。さらに、モデルが構築され、サービングする準備ができたら、サービングするためにモデルを Cloud AI Platform Prediction に *push* できます。このステップでは、Cloud AI Platform サービスを使用するように`Trainer`コンポーネントと`Pusher`コンポーネントを設定します。
+
+ファイルを編集する前に、最初に *AI Platform Training と Prediction API* を有効にする必要がある場合があります。
+
+**[`pipeline`]をダブルクリックしてディレクトリを変更し、ダブルクリックして`configs.py`**を開きます。`GOOGLE_CLOUD_REGION`、`GCP_AI_PLATFORM_TRAINING_ARGS`、`GCP_AI_PLATFORM_SERVING_ARGS` の定義のコメントを外します。カスタム ビルドのコンテナ イメージを使用して Cloud AI Platform Training でモデルをトレーニングするため、`GCP_AI_PLATFORM_TRAINING_ARGS`の`masterConfig.imageUri`を上記の`CUSTOM_TFX_IMAGE`と同じ値に設定する必要があります。
+
+**ディレクトリを 1 レベル上に変更し、ダブルクリックして`kubeflow_runner.py`**を開きます。`ai_platform_training_args`と`ai_platform_serving_args`のコメントを外します。
+
+> 注: トレーニング ステップで権限エラーを受け取った場合は、Cloud Machine Learning Engine (AI Platform Prediction と Training) サービス アカウントに　Storage <br> オブジェクト閲覧者権限を提供する必要がある場合があります。詳細については、[Container Registry のドキュメント](https://cloud.google.com/container-registry/docs/access-control#grant)をご覧ください。
+
+#### パイプラインを更新して再実行する
+
+```python
+# Update the pipeline
+!tfx pipeline update \
+  --pipeline-path=kubeflow_runner.py \
+  --endpoint={ENDPOINT}
+
+!tfx run create --pipeline-name {PIPELINE_NAME} --endpoint={ENDPOINT}
+```
+
+トレーニング ジョブは [Cloud AI Platform ジョブ](https://console.cloud.google.com/ai-platform/jobs)で見つけることができます。パイプラインが正常に完了した場合、[Cloud AI Platform モデル](https://console.cloud.google.com/ai-platform/models)でモデルを見つけることができます。
+
+## 14. 独自のデータを使用する
+
+このチュートリアルでは、Chicago Taxi データセットを使用してモデルのパイプラインを作成しました。次に、独自のデータをパイプラインに入れてみます。データは、Google Cloud Storage、BigQuery、CSV ファイルなど、パイプラインがアクセスできる場所ならどこにでも保存できます。
+
+データに対応するようにパイプライン定義を変更する必要があります。
+
+### データがファイルに保存されている場合
+
+1. `kubeflow_runner.py`の`DATA_PATH`を変更して、場所を示します。
+
+### データが BigQuery に保存されている場合
+
+1. configs.py の`BIG_QUERY_QUERY`をクエリ ステートメントに変更します。
+2. `models`/`features.py`に特徴量を追加します。
+3. `models`/`preprocessing.py`を変更して、[トレーニング用の入力データを変換](https://www.tensorflow.org/tfx/guide/transform)します。
+4. `models`/`keras`/`model.py`と`models`/`keras`/`constants.py`を変更して、[機械学習モデルを記述](https://www.tensorflow.org/tfx/guide/trainer)します。
+
+### Trainer についての詳細
+
+トレーニング パイプラインの詳細については、[Trainer コンポーネント ガイド](https://www.tensorflow.org/tfx/guide/trainer)を参照してください。
+
+## クリーンアップ
+
+このプロジェクトで使用されているすべての Google Cloud リソースをクリーンアップするには、チュートリアルで使用した [Google Cloud プロジェクトを削除](https://cloud.google.com/resource-manager/docs/creating-managing-projects#shutting_down_projects)します。
+
+または、各コンソール（[Google Cloud Storage](https://console.cloud.google.com/storage) - [Google Container Registry](https://console.cloud.google.com/gcr) - [Google Kubernetes Engine](https://console.cloud.google.com/kubernetes)）にアクセスして、個々のリソースをクリーンアップできます。
