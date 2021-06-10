@@ -60,7 +60,7 @@ interpreter = tf.lite.Interpreter(model_path=args.model_file)
 interpreter = tflite.Interpreter(model_path=args.model_file)
 ```
 
-Now run `label_image.py` again. That's it! You're now executing TensorFlow Lite models.
+もう一度 `label_image.py` を実行してください。そうです！TensorFlow Lite モデルを実行できるようになりました。
 
 ## 今後の学習
 
