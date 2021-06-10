@@ -57,11 +57,11 @@ List<QaAnswer> answers = answerer.answer(contextOfTheQuestion, questionToAsk);
 
 詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/text/qa/BertQuestionAnswerer.java)をご覧ください。
 
-## Run inference in Swift
+## Swift で推論を実行する
 
-### Step 1: Import CocoaPods
+### ステップ 1: CocoaPods をインポートする
 
-Add the TensorFlowLiteTaskText pod in Podfile
+Podfile に TensorFlowLiteTaskText ポッドを追加します
 
 ```
 target 'MySwiftAppWithTaskAPI' do
@@ -70,7 +70,7 @@ target 'MySwiftAppWithTaskAPI' do
 end
 ```
 
-### Step 2: Run inference using the API
+### ステップ 2: API を使用して推論を実行する
 
 ```swift
 // Initialization
@@ -96,7 +96,7 @@ std::unique_ptr<BertQuestionAnswerer> answerer = BertQuestionAnswerer::CreateFro
 std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, question_to_ask);
 ```
 
-See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/qa/bert_question_answerer.h) for more details.
+詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/qa/bert_question_answerer.h)をご覧ください。
 
 ## 結果の例
 
