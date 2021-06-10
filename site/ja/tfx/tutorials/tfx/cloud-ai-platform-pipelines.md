@@ -6,28 +6,28 @@
 
 このチュートリアルの最終ステップでは、Google Cloud でホストされる機械学習パイプラインを作成して実行します。また、それぞれの実行の結果を視覚化し、作成されたアーティファクトの系統を表示します。
 
-Key Term: A TFX pipeline is a Directed Acyclic Graph, or "DAG". We will often refer to pipelines as DAGs.
+重要な用語：TFX パイプラインは、有向非巡回グラフ（DAG）で DAG と呼ばれることもあります。
 
 ここでは典型的な機械学習開発プロセスに従い、データセットを調べてから最終的に完全に機能するパイプラインを作成します。また、パイプラインをデバッグおよび更新し、パフォーマンスを測定する方法を学びます。
 
 注: このチュートリアルの所要時間は、約45 ～ 60 分です。
 
-### Chicago Taxi Dataset
+### シカゴのタクシー データセット
 
 <!-- Image free for commercial use, does not require attribution:
 https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 ![Taxi](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/taxi.jpg?raw=true) ![Chicago taxi](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/chicago.png?raw=true)
 
-You're using the [Taxi Trips dataset](https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew) released by the City of Chicago.
+シカゴ市からリリースされた[タクシートリップデータセット](https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew)のデータを使用します。
 
 注：この Web サイトは、シカゴ市の公式 Web サイト www.cityofchicago.org で公開されたデータを変更して使用するアプリケーションを提供します。シカゴ市は、この Web サイトで提供されるデータの内容、正確性、適時性、または完全性について一切の表明を行いません。この Web サイトで提供されるデータは、随時変更される可能性があり、提供されるデータはユーザーの自己責任で利用されるものとします。
 
-You can [read more](https://cloud.google.com/bigquery/public-data/chicago-taxi) about the dataset in [Google BigQuery](https://cloud.google.com/bigquery/). Explore the full dataset in the [BigQuery UI](https://bigquery.cloud.google.com/dataset/bigquery-public-data:chicago_taxi_trips).
+データセットの詳細については、[Google BigQuery](https://cloud.google.com/bigquery/public-data/chicago-taxi) を[参照](https://cloud.google.com/bigquery/)してください。[BigQuery UI](https://bigquery.cloud.google.com/dataset/bigquery-public-data:chicago_taxi_trips) でデータセット全体をご確認ください。
 
-#### Model Goal - Binary classification
+#### モデル目標 - 二項分類
 
-Will the customer tip more or less than 20%?
+顧客は 20% 以上のチップを払うでしょうか？
 
 ## 1. Google Cloud プロジェクトをセットアップする
 
@@ -265,20 +265,20 @@ Kubeflow Pipelines ダッシュボードからパイプラインを表示でき�
 
 ## 8. データを検証する
 
-The first task in any data science or ML project is to understand and clean the data.
+データ サイエンスや機械学習プロジェクトの最初のタスクは、データを理解してクリーンアップすることです。
 
 - 各特徴量のデータ型を理解する
-- Look for anomalies and missing values
-- Understand the distributions for each feature
+- 異常と欠損値を探す
+- 各特徴の分布を理解する
 
 ### コンポーネント
 
 ![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/examplegen1.png?raw=true) ![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/examplegen2.png?raw=true)
 
-- [ExampleGen](https://www.tensorflow.org/tfx/guide/examplegen) ingests and splits the input dataset.
-- [StatisticsGen](https://www.tensorflow.org/tfx/guide/statsgen) calculates statistics for the dataset.
-- [SchemaGen](https://www.tensorflow.org/tfx/guide/schemagen) SchemaGen examines the statistics and creates a data schema.
-- [ExampleValidator](https://www.tensorflow.org/tfx/guide/exampleval) looks for anomalies and missing values in the dataset.
+- [ExampleGen](https://www.tensorflow.org/tfx/guide/examplegen) は入力データセットを取り込み、分割します。
+- [StatisticsGen](https://www.tensorflow.org/tfx/guide/statsgen) はデータセットの統計を計算します。
+- [SchemaGen](https://www.tensorflow.org/tfx/guide/schemagen) は統計を調べ、データ スキーマを作成します。
+- [ExampleValidator](https://www.tensorflow.org/tfx/guide/exampleval) はデータセット内の異常と欠損値を探します。
 
 ### Jupyter ラボ ファイル エディターで以下を行います
 
@@ -307,23 +307,23 @@ The first task in any data science or ML project is to understand and clean the 
 
 Kubeflow Orchestrator の場合、KFP ダッシュボードにアクセスし、パイプライン実行のページでパイプライン出力を見つけます。左側の [実験] タブをクリックし、[実験] ページの [すべての実行] をクリックします。パイプラインの名前の実行が表示されるはずです。
 
-### More advanced example
+### より高度な例
 
-The example presented here is really only meant to get you started. For a more advanced example see the [TensorFlow Data Validation Colab](https://www.tensorflow.org/tfx/tutorials/data_validation/chicago_taxi).
+ここに示されている例は、初心者向けのものです。より高度な例については、[TensorFlow Data Validation Colab](https://www.tensorflow.org/tfx/tutorials/data_validation/chicago_taxi) を参照してください。
 
-For more information on using TFDV to explore and validate a dataset, [see the examples on tensorflow.org](https://www.tensorflow.org/tfx/data_validation).
+TFDV を使用してデータセットを調査および検証する方法の詳細については、[tensorflow.org の例を参照してください](https://www.tensorflow.org/tfx/data_validation)。
 
 ## 9. 特徴量エンジニアリング
 
-You can increase the predictive quality of your data and/or reduce dimensionality with feature engineering.
+特徴量エンジニアリングを使用すると、データの予測品質を向上させたり、次元を減らしたりすることができます。
 
-- Feature crosses
-- Vocabularies
+- 特徴量クロス
+- 語彙
 - 埋め込み
 - PCA
-- Categorical encoding
+- カテゴリカル変数のエンコーディング
 
-One of the benefits of using TFX is that you will write your transformation code once, and the resulting transforms will be consistent between training and serving.
+TFX を使用する利点の 1 つは、変換コードを 1 回記述すれば、結果として得られる変換はトレーニングとサービングの間で一貫性を保てることです。
 
 ### コンポーネント
 
@@ -354,18 +354,18 @@ One of the benefits of using TFX is that you will write your transformation code
 
 Kubeflow Orchestrator の場合、KFP ダッシュボードにアクセスし、パイプライン実行のページでパイプライン出力を見つけます。左側の [実験] タブをクリックし、[実験] ページの [すべての実行] をクリックします。パイプラインの名前の実行が表示されるはずです。
 
-### More advanced example
+### より高度な例
 
-The example presented here is really only meant to get you started. For a more advanced example see the [TensorFlow Transform Colab](https://www.tensorflow.org/tfx/tutorials/transform/census).
+ここに示されている例は、初心者向けのものです。より高度な例については、[TensorFlow Transform Colab](https://www.tensorflow.org/tfx/tutorials/transform/census) を参照してください。
 
 ## 10. トレーニング
 
-Train a TensorFlow model with your nice, clean, transformed data.
+TensorFlow モデルを、クリーンアップおよび変換されたデータでトレーニングします。
 
 - 前のステップの変換を含めて、一貫して適用されるようにします。
-- Save the results as a SavedModel for production
-- Visualize and explore the training process using TensorBoard
-- Also save an EvalSavedModel for analysis of model performance
+- 実稼働用に結果を SavedModel として保存します。
+- TensorBoard を使用してトレーニング プロセスを視覚化して調査します。
+- また、モデル パフォーマンスの分析のために EvalSavedModel を保存します。
 
 ### コンポーネント
 
@@ -394,21 +394,21 @@ Train a TensorFlow model with your nice, clean, transformed data.
 
 Kubeflow Orchestrator の場合、KFP ダッシュボードにアクセスし、パイプライン実行のページでパイプライン出力を見つけます。左側の [実験] タブをクリックし、[実験] ページの [すべての実行] をクリックします。パイプラインの名前の実行が表示されるはずです。
 
-### More advanced example
+### より高度な例
 
-The example presented here is really only meant to get you started. For a more advanced example see the [TensorBoard Tutorial](https://www.tensorflow.org/tensorboard/r1/summaries).
+ここに示されている例は、初心者向けのものです。より高度な例については、[TensorFlow チュートリアル](https://www.tensorflow.org/tensorboard/r1/summaries) を参照してください。
 
 ## 11. モデルのパフォーマンスの分析
 
-Understanding more than just the top level metrics.
+トップレベルの指標以上のことを理解します。
 
-- Users experience model performance for their queries only
-- Poor performance on slices of data can be hidden by top level metrics
-- Model fairness is important
-- Often key subsets of users or data are very important, and may be small
-    - Performance in critical but unusual conditions
-    - Performance for key audiences such as influencers
-- If you’re replacing a model that is currently in production, first make sure that the new one is better
+- ユーザーは自分のクエリに対してのみモデルのパフォーマンスを体験します。
+- データ スライスのパフォーマンスの低下は、トップ レベルの指標により隠される可能性があります。
+- モデルの公平性は重要です。
+- 多くの場合、ユーザーまたはデータの主要なサブセットは非常に重要です。これは小さい場合があります。
+    - 重要かつ異常な状態でのパフォーマンス
+    - インフルエンサーなどの主要オーディエンスに対するパフォーマンス
+- 実稼働中のモデルを置き換える場合は、まず新しいモデルの方が優れていることを確認してください。
 
 ### コンポーネント
 
@@ -439,20 +439,20 @@ Kubeflow Orchestrator の場合、KFP ダッシュボードにアクセスし、
 
 ## 12. モデルのサービング
 
-If the new model is ready, make it so.
+新しいモデルの準備ができている場合は、準備を完了します。
 
-- Pusher deploys SavedModels to well-known locations
+- Pusher は SavedModels を既知の場所にデプロイします
 
-Deployment targets receive new models from well-known locations
+デプロイメントターゲットは、既知の場所から新しいモデルを受け取ります。
 
-- TensorFlow Serving
+- <a>TensorFlow Serving</a>
 - TensorFlow Lite
 - TensorFlow JS
 - TensorFlow Hub
 
 ### コンポーネント
 
-- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) deploys the model to a serving infrastructure.
+- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) モデルをサービス インフラストラクチャにデプロイします。
 
 ### Jupyter ラボ ファイル エディターで次を行います
 
@@ -470,9 +470,9 @@ Kubeflow Orchestrator の場合、KFP ダッシュボードにアクセスし、
 
 これでモデルのトレーニングと検証が完了し、モデルの実稼働環境の準備が整いました。次のような TensorFlow デプロイメント ターゲットのいずれかにモデルをデプロイできるようになりました。
 
-- [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving), for serving your model on a server or server farm and processing REST and/or gRPC inference requests.
-- [TensorFlow Lite](https://www.tensorflow.org/lite), for including your model in an Android or iOS native mobile application, or in a Raspberry Pi, IoT, or microcontroller application.
-- [TensorFlow.js](https://www.tensorflow.org/js), for running your model in a web browser or Node.JS application.
+- [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) はサーバーまたはサーバー ファームでモデルを提供し、REST および/または gRPC 推論リクエストを処理します。
+- [TensorFlow Lite](https://www.tensorflow.org/lite) は、モデルを Android または iOS のネイティブ モバイル アプリケーション、または Raspberry Pi、IoT、またはマイクロコントローラー アプリケーションに含めます。
+- [TensorFlow.js](https://www.tensorflow.org/js) は、モデルを Web ブラウザまたは Node.JS アプリケーションで実行します。
 
 ## より高度な例
 
