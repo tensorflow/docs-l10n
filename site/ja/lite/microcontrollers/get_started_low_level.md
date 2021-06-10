@@ -1,34 +1,34 @@
 # マイクロコントローラを使ってみる
 
-This document explains how to train a model and run inference using a microcontroller.
+このドキュメントは、マイクロコントローラを使用してモデルをトレーニングし、推論を実行する方法について説明します。
 
 ## Hello World の例
 
-The [Hello World](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world) example is designed to demonstrate the absolute basics of using TensorFlow Lite for Microcontrollers. We train and run a model that replicates a sine function, i.e, it takes a single number as its input, and outputs the number's [sine](https://en.wikipedia.org/wiki/Sine) value. When deployed to the microcontroller, its predictions are used to either blink LEDs or control an animation.
+[Hello World](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world) の例は、マイクロコントローラ向け TensorFlow Lite を使用するための基本を説明するためのものです。サイン関数を複製するモデルをトレーニングして実行します。つまり、単一の数値を入力として受け取り、その数値の[サイン](https://en.wikipedia.org/wiki/Sine)値を出力します。マイクロコントローラにデプロイされると、その予測は LED を点滅させるか、アニメーションを制御するために使用されます。
 
 エンドツーエンドのワークフローには、次の手順が含まれます。
 
 1. [モデルをトレーニングする](#train-a-model) (Python): デバイス上で使用するためにモデルをトレーニング、変換、最適化するための jupyter ノートブック。
-2. [Run inference](#run-inference) (in C++ 11): An end-to-end unit test that runs inference on the model using the [C++ library](library.md).
+2. [推論を実行する](#run-inference) (C++ 11): [C++ライブラリ](library.md)を使用してモデルで推論を実行するエンドツーエンドの単体テスト。
 
 ## サポートされているデバイスを入手する
 
-The example application we'll be using has been tested on the following devices:
+使用するサンプルアプリケーションは、次のデバイスでテストされています。
 
-- [Arduino Nano 33 BLE Sense](https://store.arduino.cc/usa/nano-33-ble-sense-with-headers) (using Arduino IDE)
-- [SparkFun Edge](https://www.sparkfun.com/products/15170) (building directly from source)
-- [STM32F746 Discovery kit](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html) (using Mbed)
-- [Adafruit EdgeBadge](https://www.adafruit.com/product/4400) (using Arduino IDE)
-- [Adafruit TensorFlow Lite for Microcontrollers Kit](https://www.adafruit.com/product/4317) (using Arduino IDE)
-- [Adafruit Circuit Playground Bluefruit](https://learn.adafruit.com/tensorflow-lite-for-circuit-playground-bluefruit-quickstart?view=all) (using Arduino IDE)
-- [Espressif ESP32-DevKitC](https://www.espressif.com/en/products/hardware/esp32-devkitc/overview) (using ESP IDF)
-- [Espressif ESP-EYE](https://www.espressif.com/en/products/hardware/esp-eye/overview) (using ESP IDF)
+- [Arduino Nano 33 BLE Sense](https://store.arduino.cc/usa/nano-33-ble-sense-with-headers) (Arduino IDE を使用する)
+- [SparkFun Edge](https://www.sparkfun.com/products/15170) (ソースから直接構築する)
+- [STM32F746 Discovery kit](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html) (Mbed を使用する)
+- [Adafruit EdgeBadge](https://www.adafruit.com/product/4400) (Arduino IDE を使用する)
+- [Adafruit TensorFlow Lite for Microcontrollers Kit](https://www.adafruit.com/product/4317) (Arduino IDE を使用する)
+- [Adafruit Circuit Playground Bluefruit](https://learn.adafruit.com/tensorflow-lite-for-circuit-playground-bluefruit-quickstart?view=all) (Arduino IDE を使用する)
+- [Espressif ESP32-DevKitC](https://www.espressif.com/en/products/hardware/esp32-devkitc/overview) (ESP IDF を使用する)
+- [Espressif ESP-EYE](https://www.espressif.com/en/products/hardware/esp-eye/overview) (ESP IDF を使用する)
 
-Learn more about supported platforms in [TensorFlow Lite for Microcontrollers](index.md).
+サポートされているプラットフォームの詳細については、[マイクロコントローラ向け TensorFlow Lite](index.md) をご覧ください。
 
 ## モデルをトレーニングする
 
-Note: You can skip this section and use the trained model included in the example code.
+注：このセクションをスキップして、サンプルコードに含まれているトレーニング済みモデルを使用することもできます。
 
 各アプリケーション例には、`README.md`ファイルがあり、サポートされたプラットフォームへのデプロイの仕方を説明しています。
 
@@ -36,7 +36,7 @@ Note: You can skip this section and use the trained model included in the exampl
 
 ## 推論を実行する方法
 
-To run the model on your device, we will walk through the instructions in the `README.md`:
+デバイスでモデルを実行するために、`README.md`の手順を説明します。
 
 <a class="button button-primary" href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/hello_world/README.md">Hello World README.md</a>
 
@@ -54,11 +54,11 @@ To run the model on your device, we will walk through the instructions in the `R
 #include "tensorflow/lite/version.h"
 ```
 
-- [`all_ops_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.h) provides the operations used by the interpreter to run the model.
-- [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h) outputs debug information.
-- [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h) contains code to load and run models.
-- [`schema_generated.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema_generated.h) contains the schema for the TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) model file format.
-- [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h) provides versioning information for the TensorFlow Lite schema.
+- [`all_ops_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.h)モデルを実行するためにインタープリタが使用する演算を提供します。
+- [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h)はデバッグ情報を出力します。
+- [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h)にはモデルをロードして実行するためのコードが含まれています。
+- [`schema_generated.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema_generated.h)には、TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/)デルファイル形式のスキーマが含まれています。
+- [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h)は TensorFlow Lite スキーマのバージョン情報を提供します。
 
 ### モデルをインクルードする
 
@@ -259,4 +259,4 @@ TF_LITE_MICRO_EXPECT_NEAR(-0.959, value, 0.05);
 
 ### アプリケーションのコードを読む
 
-Once you have walked through this unit test, you should be able to understand the example's application code, located in [`main_functions.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/main_functions.cc). It follows a similar process, but generates an input value based on how many inferences have been run, and calls a device-specific function that displays the model's output to the user.
+この単体テストを一度ひととおり読み終えたら、 [`main_functions.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/main_functions.cc) にあるサンプルアプリケーションのコードを理解できるはずです。 同じような処理を行いますが、実行された推論の数に基づいて入力値を生成し、それからデバイス固有の関数を呼び、モデルの出力をユーザーに表示します。
