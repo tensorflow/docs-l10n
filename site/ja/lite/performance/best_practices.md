@@ -10,7 +10,7 @@
 
 ![Graph of accuracy vs latency](../images/performance/accuracy_vs_latency.png "Accuracy vs Latency")
 
-One example of models optimized for mobile devices are [MobileNets](https://arxiv.org/abs/1704.04861), which are optimized for mobile vision applications. [Hosted models](../guide/hosted_models.md) lists several other models that have been optimized specifically for mobile and embedded devices.
+モバイルデバイス用に最適化されたモデルの 1 例である [MobileNets](https://arxiv.org/abs/1704.04861) は、モバイルビジョンアプリ向けに最適化されています。モバイルおよび組み込みデバイスに特化して最適化されたその他のモデルは、[ホステッドモデル](../guide/hosted_models.md)にリスト表示されています。
 
 転移学習を使用してリストにあるモデルを独自のデータセットで再トレーニングすることができます。[画像分類](/lite/tutorials/model_maker_image_classification)と[物体検出](https://medium.com/tensorflow/training-and-serving-a-realtime-mobile-object-detector-in-30-minutes-with-cloud-tpus-b78971cf1193)については、転移学習チュートリアルをご覧ください。
 
