@@ -343,7 +343,7 @@ class FlatBufferModel {
 
 The important parts of the `Interpreter` API are shown in the code snippet below. It should be noted that:
 
-- Tensors are represented by integers, in order to avoid string comparisons (and any fixed dependency on string libraries).
+- 文字列比較（および文字列ライブラリへのすべての固定した依存関係）を回避するために、テンソルは整数値で表現されています。
 - インタプリタには同時スレッドからアクセスしてはいけません。
 - 入力テンソルと出力テンソルのメモリ割り当ては、テンソルのサイズ変更を行った直後に`AllocateTensors()`を呼び出してトリガする必要があります。
 
