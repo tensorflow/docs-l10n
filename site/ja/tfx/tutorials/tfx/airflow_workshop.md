@@ -11,7 +11,7 @@
 
 典型的な機械学習開発プロセスに従い、データセットを調べてから最終的に完全に機能するパイプラインを作成します。その過程で、パイプラインをデバッグおよび更新し、パフォーマンスを測定する方法を学びます。
 
-### Learn more
+### 詳細情報
 
 詳細については、[TFX ユーザーガイド](https://www.tensorflow.org/tfx/guide)を参照してください。
 
@@ -27,7 +27,7 @@
 6. [モデルのパフォーマンスの分析](#step_6_analyzing_model_performance)
 7. [実稼働の準備完了](#step_7_ready_for_production)
 
-## Prerequisites
+## 前提条件
 
 - Linux / MacOS
 - Virtualenv
@@ -124,7 +124,7 @@ TFX を使用して機械学習パイプラインを作成する方法を学び�
 典型的な機械学習の開発プロセスに従います
 
 - データの取り込み、理解、クリーニング
-- Feature engineering
+- 特徴量エンジニアリング
 - トレーニング
 - モデルのパフォーマンスを分析する
 - サイクルを繰り返す
@@ -209,7 +209,7 @@ jupyter notebook
 
 - ブラウザを開いて http://127.0.0.1:8080 にアクセスします。
 
-#### Troubleshooting
+#### トラブルシューティング
 
 Web ブラウザでの Airflow コンソールの読み込みに問題がある場合、または `airflow webserver`の実行時にエラーが発生した場合は、ポート 8080 で別のアプリケーションが実行されている可能性があります。これは Airflow のデフォルト ポートですが、使用されていない他のユーザー ポートに変更できます。たとえば、ポート 7070 で Airflow を実行するには、次のように実行できます。
 
@@ -219,14 +219,14 @@ airflow webserver -p 7070
 
 #### DAG ビュー ボタン
 
-![DAG buttons](images/airflow_workshop/airflow_dag_buttons.png)
+![DAG buttons](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/airflow_dag_buttons.png?raw=true)
 
 - 左側のボタンを使用して DAG を*有効化*します
 - 変更を加えるときは、右側のボタンを使用して DAG を*更新*します。
 - 右側のボタンを使用して DAG を*トリガー*します
 - タクシーをクリックすると、その日のグラフビューに移動します
 
-![Graph refresh button](images/airflow_workshop/graph_refresh_button.png)
+![Graph refresh button](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/graph_refresh_button.png?raw=true)
 
 #### Airflow CLI
 
@@ -261,7 +261,7 @@ DAG ビューでパイプラインをトリガーした後、パイプライン�
 
 ### コンポーネント
 
-![Data Components](images/airflow_workshop/examplegen1.png) ![Data Components](images/airflow_workshop/examplegen2.png)
+![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/examplegen1.png?raw=true) ![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/examplegen2.png?raw=true)
 
 - [ExampleGen](https://www.tensorflow.org/tfx/guide/examplegen) は入力データセットを取り込み、分割します。
 - [StatisticsGen](https://www.tensorflow.org/tfx/guide/statsgen) はデータセットの統計を計算します。
@@ -292,7 +292,7 @@ DAG ビューでパイプラインをトリガーした後、パイプライン�
 - step3.ipynb を開きます
 - notebook をフォローします
 
-![Dive into data](images/airflow_workshop/step3notebook.png)
+![Dive into data](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step3notebook.png?raw=true)
 
 ### より高度な例
 
@@ -314,7 +314,7 @@ TFX を使用する利点の 1 つは、変換コードを 1 回記述すれば�
 
 ### コンポーネント
 
-![Transform](images/airflow_workshop/transform.png)
+![Transform](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/transform.png?raw=true)
 
 - [Transform](https://www.tensorflow.org/tfx/guide/transform)は、データセットに対する特徴量エンジニアリングを実行します。
 
@@ -333,7 +333,7 @@ TFX を使用する利点の 1 つは、変換コードを 1 回記述すれば�
     - 全てダークグリーンになります。
     - 右側の更新を使用するか、ページを更新します。
 
-![Feature Engineering](images/airflow_workshop/step4.png)
+![Feature Engineering](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step4.png?raw=true)
 
 ### Jupyter に戻ります
 
@@ -374,7 +374,7 @@ TensorFlow モデルを、クリーンアップおよび変換されたデータ
     - 全てダークグリーンになります。
     - 右側の更新を使用するか、ページを更新します。
 
-![Training a Model](images/airflow_workshop/step5.png)
+![Training a Model](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step5.png?raw=true)
 
 ### Jupyter に戻ります
 
@@ -383,7 +383,7 @@ TensorFlow モデルを、クリーンアップおよび変換されたデータ
 - step5.ipynb を開きます。
 - notebook をフォローします。
 
-![Training a Model](images/airflow_workshop/step5tboard.png)
+![Training a Model](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step5tboard.png?raw=true)
 
 ### より高度な例
 
@@ -421,7 +421,7 @@ TensorFlow モデルを、クリーンアップおよび変換されたデータ
     - 全てダークグリーンになります。
     - 右側の更新を使用するか、ページを更新します。
 
-![Analyzing model performance](images/airflow_workshop/step6.png)
+![Analyzing model performance](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step6.png?raw=true)
 
 ### Jupyter に戻ります：
 
@@ -430,7 +430,7 @@ TensorFlow モデルを、クリーンアップおよび変換されたデータ
 - step6.ipynb を開きます。
 - notebook をフォローします。
 
-![Analyzing model performance](images/airflow_workshop/step6notebook.png)
+![Analyzing model performance](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step6notebook.png?raw=true)
 
 ### より高度な例
 
@@ -468,9 +468,9 @@ TensorFlow モデルを、クリーンアップおよび変換されたデータ
     - 全てダークグリーンになります。
     - 右側の更新を使用するか、ページを更新します。
 
-![Ready for production](images/airflow_workshop/step7.png)
+![Ready for production](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step7.png?raw=true)
 
-## Next Steps
+## 次のステップ
 
 以上で、モデルのトレーニングと検証が完了し、`~/airflow/saved_models/taxi`ディレクトリに`SavedModel`ファイルがエクスポートされました。これで、モデルの実稼働の準備が完了ました。 次のような TensorFlow デプロイメント ターゲットのいずれかにモデルをデプロイできるようになりました。
 
