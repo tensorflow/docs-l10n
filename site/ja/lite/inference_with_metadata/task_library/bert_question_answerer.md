@@ -119,7 +119,6 @@ answer[3]:  'the Amazon biome that covers most of the Amazon basin of South Amer
 logit: -0.498558, start_index: 28, end_index: 40
 answer[4]:  'Amazon basin of South America.'
 logit: -0.774266, start_index: 37, end_index: 40
-
 ```
 
 独自のモデルとテストデータを使用して、シンプルな[BertQuestionAnswerer用 CLI デモツール](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/examples/task/text/desktop/README.md#bert-question-answerer)をお試しください。
