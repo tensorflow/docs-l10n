@@ -131,7 +131,7 @@ infra_validator = InfraValidator(
 )
 ```
 
-## Limitations
+## 制限事項
 
 現在の InfraValidator は未完全であるため、次のような制限があります。
 
