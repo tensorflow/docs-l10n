@@ -154,7 +154,7 @@ tflite_quant_model = converter.convert()
 
 ### 量子化されたテンソルの表現
 
-8-bit quantization approximates floating point values using the following formula.
+8 ビット量子化は、次の方程式により、浮動小数点値を概算します。
 
 $$real_value = (int8_value - zero_point) \times scale$$
 
