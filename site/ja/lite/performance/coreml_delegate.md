@@ -1,14 +1,14 @@
 # Tensorflow Lite Core ML デリゲート
 
-TensorFlow Lite Core ML デリゲートは、[Core ML フレームワーク](https://developer.apple.com/documentation/coreml)上で TensorFlow Lite モデルの実行を可能にし、その結果、iOS デバイス上におけるモデル推論の高速化を実現しました。
+TensorFlow Lite Core ML デリゲートは、[Core ML フレームワーク](https://developer.apple.com/documentation/coreml)上での TensorFlow Lite モデルの実行を可能にしました。その結果、iOS デバイス上におけるモデル推論の高速化します。
 
-注意: このデリゲートは実験（ベータ）段階です。
+注意: このデリゲートは試験（ベータ）段階です。TensorFlow Lite 2.4.0 および最新のナイトリーリリースから利用できます。
 
 注意: Core ML デリゲートは、Core ML のバージョン 2 以降をサポートしています。
 
 **サポートする iOS のバージョンとデバイス:**
 
-- iOS 12 and later. In the older iOS versions, Core ML delegate will automatically fallback to CPU.
+- iOS 12 以降。古い iOS バージョンの場合、Core ML デリゲートは自動的に CPU にフォールバックします。
 - デフォルトでは、Core ML デリゲートは A12 SoC 以降のデバイス（iPhone Xs 以降）でのみ有効で、Neural Engine（ニューラルエンジン）を推論の高速化に使用します。古いデバイスで Core ML デリゲートを使用する場合は、[ベストプラクティス](#best-practices)をご覧ください。
 
 **サポートするモデル**
@@ -17,9 +17,9 @@ TensorFlow Lite Core ML デリゲートは、[Core ML フレームワーク](htt
 
 ## 独自のモデルで Core ML デリゲートを試す
 
-The Core ML delegate is already included in nightly release of TensorFlow lite CocoaPods. To use Core ML delegate, change your TensorFlow lite pod to include subspec `CoreML` in your `Podfile`.
+Core ML デリゲートは、TensorFlow lite CocoaPods のナイトリーリリースにすでに含まれています。Core ML デリゲートを使用するには、TensorFlow lite ポッドを変更して、`Podfile`にサブスペック`CoreML`を含めます。
 
-Note: If you want to use C API instead of Objective-C API, you can include `TensorFlowLiteC/CoreML` pod to do so.
+注意：Objective-C API の代わりに C API を使用する場合は`TensorFlowLiteC/CoreML`ポッドを含めることができます。
 
 ```
 target 'YourProjectName'
@@ -34,7 +34,7 @@ target 'YourProjectName'
   pod 'TensorFlowLiteSwift', '~> 2.4.0', :subspecs => ['CoreML']
 ```
 
-Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorFlow Lite 2.4.0 release, this was the only option.
+注意：Core ML デリゲートは、Objective-C コードで C API を使用することもできます。TensorFlow Lite 2.4.0 リリース以前は、これが唯一のオプションでした。
 
 <div>
   <devsite-selector>
@@ -176,7 +176,7 @@ let interpreter = try Interpreter(modelPath: modelPath,
 </li>
 </ul>
 <h2 data-md-type="header" data-md-header-level="2">フィードバック</h2>
-<p data-md-type="paragraph">For issues, please create a <a href="https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md" data-md-type="link">GitHub</a> issue with all the necessary details to reproduce.</p>
+<p data-md-type="paragraph">問題などが生じた場合は、<a href="https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md" data-md-type="link">GitHub</a> の課題を提出し、再現に必要なすべての詳細を記載してください。</p>
 <h2 data-md-type="header" data-md-header-level="2">よくある質問</h2>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
 <li data-md-type="list_item" data-md-list-type="unordered">
@@ -210,7 +210,7 @@ let interpreter = try Interpreter(modelPath: modelPath,
 <li data-md-type="list_item" data-md-list-type="unordered">
 <p data-md-type="paragraph"><a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.h" data-md-type="link">Core ML delegate C API</a></p>
 <ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">This can be used for Objective-C codes. ~~~</li>
+<li data-md-type="list_item" data-md-list-type="unordered">これは Objective-C コードに使用可能です。</li>
 </ul>
 </li>
 </ul>
