@@ -341,7 +341,7 @@ class FlatBufferModel {
 
 注意: `FlatBufferModel`オブジェクトは、それを使用する`Interpreter`の全インスタンスが破壊されるまで有効な状態を維持する必要があります。
 
-The important parts of the `Interpreter` API are shown in the code snippet below. It should be noted that:
+`Interpreter` API の重要な個所を以下のコードスニペットに示していますが、次のことに注意してください。
 
 - 文字列比較（および文字列ライブラリへのすべての固定した依存関係）を回避するために、テンソルは整数値で表現されています。
 - インタプリタには同時スレッドからアクセスしてはいけません。
