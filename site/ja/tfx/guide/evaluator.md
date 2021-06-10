@@ -32,7 +32,7 @@ Evaluator をセットアップするには、次の情報が必要となりま�
 
 検証は有効である場合に定義されているすべてのメトリクスとスライスに対して実施されます。
 
-Typical code looks like this:
+次は、典型的なコードです。
 
 ```python
 import tensorflow_model_analysis as tfma
