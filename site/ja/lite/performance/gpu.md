@@ -85,7 +85,7 @@ Objective-C（2.4.0 リリース以降）または C API を使用する場合�
 
 #### ステップ 3. GPU デリゲートを有効化する
 
-To enable the code that will use the GPU delegate, you will need to change `TFLITE_USE_GPU_DELEGATE` from 0 to 1 in `CameraExampleViewController.h`.
+GPU デリゲートを使用するコードを有効にするには、`CameraExampleViewController.h`で`TFLITE_USE_GPU_DELEGATE`を 0 から 1 に変更する必要があります。
 
 ```c
 #define TFLITE_USE_GPU_DELEGATE 1
@@ -97,7 +97,7 @@ To enable the code that will use the GPU delegate, you will need to change `TFLI
 
 #### ステップ 5. リリースモード
 
-While in Step 4 you ran in debug mode, to get better performance, you should change to a release build with the appropriate optimal Metal settings. In particular, To edit these settings go to the `Product > Scheme > Edit Scheme...`. Select `Run`. On the `Info` tab, change `Build Configuration`, from `Debug` to `Release`, uncheck `Debug executable`.
+パフォーマンスを向上させるには、ステップ 4 でデバッグモードで実行している間、適切な最適な Metal 設定でリリースビルドに変更する必要があります。特に、これらの設定を編集するには、`Product > Scheme > Edit Scheme...`に移動します。 `Run`を選択します。`Info`タブで、`Build Configuration `を`Debug` から`Release`に変更し、`Debug executable`のチェックを外します。
 
 ![リリースの設定](images/iosdebug.png)
 
@@ -113,13 +113,13 @@ While in Step 4 you ran in debug mode, to get better performance, you should cha
 
 ### Android
 
-Note: The TensorFlow Lite Interpreter must be created on the same thread as where it is run. Otherwise, `TfLiteGpuDelegate Invoke: GpuDelegate must run on the same thread where it was initialized.` may occur.
+注意: TensorFlow Lite インタープリタは、実行時と同じスレッドで作成する必要があります。そうでないと、「`TfLiteGpuDelegate Invoke: GpuDelegate must run on the same thread where it was initialized.`」が表示される可能性があります。
 
 モデルアクセラレーションを呼び出す方法は 2 つありますが、[Android Studio ML Model Binding](../inference_with_metadata/codegen#acceleration) または TensorFlow Lite インタープリタを使用しているかによって、方法は異なります。
 
-#### TensorFlow Lite Interpreter
+#### TensorFlow Lite インタープリタ
 
-Look at the demo to see how to add the delegate. In your application, add the AAR as above, import `org.tensorflow.lite.gpu.GpuDelegate` module, and use the`addDelegate` function to register the GPU delegate to the interpreter:
+デモを見て、デリゲートを追加する方法を確認してください。アプリで、上記のように AAR を追加し、`org.tensorflow.lite.gpu.GpuDelegate`モジュールをインポートし、`addDelegate`関数を使用して GPU デリゲートをインタープリタに登録します。
 
 <div>
   <devsite-selector>
@@ -129,8 +129,8 @@ Look at the demo to see how to add the delegate. In your application, add the AA
 <pre class="prettyprint lang-kotlin">    import org.tensorflow.lite.Interpreter
     import org.tensorflow.lite.gpu.CompatibilityList
     import org.tensorflow.lite.gpu.GpuDelegate
-&lt;/div&gt;
-&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_32&lt;/code&gt;</pre>
+&amp;amp;lt;/div&amp;amp;gt;
+&amp;amp;lt;pre data-md-type=&amp;quot;block_code&amp;quot; data-md-language=&amp;quot;&amp;quot;&amp;amp;gt;&amp;amp;lt;code&amp;amp;gt;GL_CODE_37&amp;amp;lt;/code&amp;amp;gt;</pre>
 <div data-md-type="block_html">
 </div>
 </section></devsite-selector>
