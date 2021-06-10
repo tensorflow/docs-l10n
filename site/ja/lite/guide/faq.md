@@ -47,7 +47,7 @@ python -m tensorflow.lite.tools.visualize model.tflite visualized_model.html
 
 それ以外の場合は、Bazel でこのスクリプトを実行できます
 
-- [Clone the TensorFlow repository](https://www.tensorflow.org/install/source)
+- [TensorFlow レポジトリをクローンする](https://www.tensorflow.org/install/source)
 - `visualize.py`スクリプトを Bazel で実行する
 
 ```shell
