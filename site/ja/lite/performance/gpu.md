@@ -2,7 +2,7 @@
 
 [TensorFlow Lite](https://www.tensorflow.org/lite) では、複数のハードウェアアクセラレータがサポートされています。このドキュメントでは、Android および iOS で TensorFlow Lite デリゲート API を使用して GPU バックエンドを使用する方法について説明します。
 
-GPUs are designed to have high throughput for massively parallelizable workloads. Thus, they are well-suited for deep neural nets, which consist of a huge number of operators, each working on some input tensor(s) that can be easily divided into smaller workloads and carried out in parallel, typically resulting in lower latency. In the best scenario, inference on the GPU may now run fast enough for previously not available real-time applications.
+GPU は、大規模に実行する並列化可能なワークロードで高い処理能力を実現するように設計されています。そのため、これは多数の演算で構成されるディープニューラルネットに適しています。各演算は、より小さなワークロードに簡単に分割でき、並列に実行する入力テンソルで機能するため、通常レイテンシが低くなります。現在、最良のシナリオでは、GPU での推論は以前は利用できなかったリアルタイムアプリケーションで十分に速く実行できます。
 
 CPU とは異なり、GPU は 16 ビットまたは 32 ビットの浮動小数点数で計算し、最適なパフォーマンスを得るために量子化を必要としません。デリゲートは 8 ビットの量子化モデルを受け入れますが、計算は浮動小数点数で実行されます。詳細については、[高度なドキュメント](gpu_advanced.md)をご覧ください。
 
@@ -14,7 +14,7 @@ GPU の推論のもう 1 つの利点は、電力効率です。GPU は非常に
 
 ### Android（Android Studio を使用）
 
-For a step-by-step tutorial, watch the [GPU Delegate for Android](https://youtu.be/Xkhgre8r5G0) video.
+ステップバイステップのチュートリアルは、[Android 向け GPU デリゲート](https://youtu.be/Xkhgre8r5G0)の動画をご覧ください。
 
 注意: これには、OpenCL または OpenGL ES （3.1 以降）が必要です。
 
@@ -26,7 +26,7 @@ git clone https://github.com/tensorflow/tensorflow
 
 #### ステップ 2. `app/build.gradle`を編集して、ナイトリーの GPU AAR を使用する
 
-Add the `tensorflow-lite-gpu` package alongside the existing `tensorflow-lite` package in the existing `dependencies` block.
+`tensorflow-lite-gpu`パッケージを既存の`tensorflow-lite`パッケージと共に、既存の`dependencies`ブロックに追加します。
 
 ```
 dependencies {
@@ -40,11 +40,11 @@ dependencies {
 
 Run → Run ‘app’ (実行 → 「アプリ」を実行)。アプリを実行すると、GPU を有効にするためのボタンが表示されます。量子化モデルから浮動小数点数モデルに変更し、GPU をクリックして GPU で実行します。
 
-![running android gpu demo and switch to gpu](images/android_gpu_demo.gif)
+![Android GPU デモを実行し、GPU に切り替えます](images/android_gpu_demo.gif)
 
 ### iOS（XCode を使用）
 
-For a step-by-step tutorial, watch the [GPU Delegate for iOS](https://youtu.be/a5H4Zwjp49c) video.
+ステップバイステップのチュートリアルは、[iOS 向け GPU デリゲート](https://youtu.be/a5H4Zwjp49c)の動画をご覧ください。
 
 注意: これには XCode v10.1 以降が必要です。
 
@@ -99,15 +99,15 @@ To enable the code that will use the GPU delegate, you will need to change `TFLI
 
 While in Step 4 you ran in debug mode, to get better performance, you should change to a release build with the appropriate optimal Metal settings. In particular, To edit these settings go to the `Product > Scheme > Edit Scheme...`. Select `Run`. On the `Info` tab, change `Build Configuration`, from `Debug` to `Release`, uncheck `Debug executable`.
 
-![setting up release](images/iosdebug.png)
+![リリースの設定](images/iosdebug.png)
 
 次に、`Options`タブをクリックし、`GPU Frame Capture`を`Disabled`に、`Metal API Validation`をc`Disabled`に変更します。
 
-![setting up metal options](images/iosmetal.png)
+![メタルオプションの設定](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/performance/images/iosmetal.png?raw=true)
 
 最後に、必ず 64 ビットアーキテクチャでリリースのみのビルドを選択してください。`Project navigator -> tflite_camera_example -> PROJECT -> tflite_camera_example -> Build Settings`で、`Build Active Architecture Only> Release`を「Yes」に設定します。
 
-![setting up release options](images/iosrelease.png)
+![リリースオプションの設定](images/iosrelease.png)
 
 ## 独自のモデルで GPU デリゲートを試す
 
