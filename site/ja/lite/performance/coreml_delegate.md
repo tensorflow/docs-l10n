@@ -8,7 +8,7 @@ TensorFlow Lite Core ML デリゲートは、[Core ML フレームワーク](htt
 
 **サポートする iOS のバージョンとデバイス:**
 
-- iOS 12 以降。古い iOS バージョンの場合、Core ML デリゲートは自動的に CPU にフォールバックします。
+- iOS 12 and later. In the older iOS versions, Core ML delegate will automatically fallback to CPU.
 - デフォルトでは、Core ML デリゲートは A12 SoC 以降のデバイス（iPhone Xs 以降）でのみ有効で、Neural Engine（ニューラルエンジン）を推論の高速化に使用します。古いデバイスで Core ML デリゲートを使用する場合は、[ベストプラクティス](#best-practices)をご覧ください。
 
 **サポートするモデル**
@@ -17,194 +17,202 @@ TensorFlow Lite Core ML デリゲートは、[Core ML フレームワーク](htt
 
 ## 独自のモデルで Core ML デリゲートを試す
 
-TensorFlow Lite CocoaPods のナイトリーリリースには、既に Core ML デリゲートが含まれています。Core ML デリゲートを使用する場合は、TensorFlow Lite ポッド（C API用の`TensorflowLiteC`と Swift 用の`TensorFlowLiteSwift`）のバージョンを`Podfile`で`0.0.1-nightly`に変更し、サブスペック`CoreML`をインクルードします。
+The Core ML delegate is already included in nightly release of TensorFlow lite CocoaPods. To use Core ML delegate, change your TensorFlow lite pod to include subspec `CoreML` in your `Podfile`.
+
+Note: If you want to use C API instead of Objective-C API, you can include `TensorFlowLiteC/CoreML` pod to do so.
 
 ```
 target 'YourProjectName'
-  # pod 'TensorFlowLiteSwift'
-  pod 'TensorFlowLiteSwift/CoreML', '~> 0.0.1-nightly'
+  pod 'TensorFlowLiteSwift/CoreML', '~> 2.4.0'  # Or TensorFlowLiteObjC/CoreML
 ```
 
 または
 
 ```
+# Particularily useful when you also want to include 'Metal' subspec.
 target 'YourProjectName'
-  # pod 'TensorFlowLiteSwift'
-  pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['CoreML']
+  pod 'TensorFlowLiteSwift', '~> 2.4.0', :subspecs => ['CoreML']
 ```
 
-注意: `Podfile`の更新後、`pod update`を実行して変更を反映させる必要があります。最新の`CoreMLDelegate.swift`ファイルが表示されない場合は、`pod cache clean TensorFlowLiteSwift`を実行します。
+Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorFlow Lite 2.4.0 release, this was the only option.
 
-### Swift
-
-Core ML デリゲートを使用して TensorFlow Lite インタープリタを初期化します。
-
-```swift
-let coreMLDelegate = CoreMLDelegate()
-var interpreter: Interpreter
-
-// Core ML delegate will only be created for devices with Neural Engine
-if coreMLDelegate != nil {
-  interpreter = try Interpreter(modelPath: modelPath,
-                                delegates: [coreMLDelegate!])
-} else {
-  interpreter = try Interpreter(modelPath: modelPath)
-}
-```
-
-### Objective-C
-
-Core ML のデリゲートは Objective-C コード用の C API を使用しています。
-
-#### ステップ 1. `coreml_delegate.h`をインクルードする。
-
-```c
-#include "tensorflow/lite/experimental/delegates/coreml/coreml_delegate.h"
-```
-
-#### ステップ 2. デリゲートを作成して TensorFlow Lite Interpreter を初期化する。
-
-インタプリタのオプションを初期化してから、初期化された Core ML のデリゲートで`TfLiteInterpreterOptionsAddDelegate`を呼び出し、デリゲートを適用します。その後、作成したオプションでインタプリタを初期化します。
-
-```c
-// Initialize interpreter with model
-TfLiteModel* model = TfLiteModelCreateFromFile(model_path);
-
-// Initialize interpreter with Core ML delegate
-TfLiteInterpreterOptions* options = TfLiteInterpreterOptionsCreate();
-TfLiteDelegate* delegate = TfLiteCoreMlDelegateCreate(NULL);  // default config
-TfLiteInterpreterOptionsAddDelegate(options, delegate);
-TfLiteInterpreterOptionsDelete(options);
-
-TfLiteInterpreter* interpreter = TfLiteInterpreterCreate(model, options);
-
-TfLiteInterpreterAllocateTensors(interpreter);
-
-// Run inference ...
-```
-
-#### ステップ 3. 使用されなくなった時点でリソースを破棄する。
-
-デリゲートを破棄するセクション（例えばクラスの`dealloc`など）にこのコードを追加します。
-
-```c
-TfLiteInterpreterDelete(interpreter);
-TfLiteCoreMlDelegateDelete(delegate);
-TfLiteModelDelete(model);
-```
-
-## ベストプラクティス
-
-### Neural Engine を搭載しないデバイスで Core ML デリゲートを使用する
-
-デフォルトでは、デバイスが Neural Engine を搭載している場合にのみ Core ML のデリゲートを作成し、デリゲートが作成されない場合は`null`を返します。他の環境（例えばシミュレータなど）で Core ML のデリゲートを実行する場合は、Swift でデリゲートを作成する際に`.all`をオプションとして渡します。C++（および Objective-C）では、`TfLiteCoreMlDelegateAllDevices`を渡すことができます。以下の例は、その方法を示しています。
-
-#### Swift
-
-```swift
-var options = CoreMLDelegate.Options()
+<div>
+  <devsite-selector>
+    <section>
+      <h3>Swift</h3>
+      <p></p>
+<pre class="prettyprint lang-swift">    let coreMLDelegate = CoreMLDelegate()
+    var interpreter: Interpreter
+&lt;/div&gt;
+&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_5&lt;/code&gt;</pre>
+<div data-md-type="block_html">
+</div>
+</section></devsite-selector>
+</div>
+<h2 data-md-type="header" data-md-header-level="2">ベストプラクティス</h2>
+<h3 data-md-type="header" data-md-header-level="3">Neural Engine を搭載しないデバイスで Core ML デリゲートを使用する</h3>
+<p data-md-type="paragraph">デフォルトでは、デバイスが Neural Engine を搭載している場合にのみ Core ML のデリゲートを作成し、デリゲートが作成されない場合は<code data-md-type="codespan">null</code>を返します。他の環境（例えばシミュレータなど）で Core ML のデリゲートを実行する場合は、Swift でデリゲートを作成する際に<code data-md-type="codespan">.all</code>をオプションとして渡します。C++（および Objective-C）では、<code data-md-type="codespan">TfLiteCoreMlDelegateAllDevices</code>を渡すことができます。以下の例は、その方法を示しています。</p>
+<div data-md-type="block_html">
+<div>
+  <devsite-selector>
+    <section>
+      <h3>Swift</h3>
+      <p></p>
+<pre class="prettyprint lang-swift">var options = CoreMLDelegate.Options()
 options.enabledDevices = .all
 let coreMLDelegate = CoreMLDelegate(options: options)!
 let interpreter = try Interpreter(modelPath: modelPath,
                                   delegates: [coreMLDelegate])
-```
-
-#### Objective-C
-
-```c
-TfLiteCoreMlDelegateOptions options;
-options.enabled_devices = TfLiteCoreMlDelegateAllDevices;
-TfLiteDelegate* delegate = TfLiteCoreMlDelegateCreate(&options);
-// Initialize interpreter with delegate
-```
-
-### Metal (GPU) デリゲートをフォールバックとして使用する。
-
-Core ML のデリゲートが作成されない場合でも、[Metal デリゲート](https://www.tensorflow.org/lite/performance/gpu#ios) を使用してパフォーマンスの向上を図ることができます。以下の例は、その方法を示しています。
-
-#### Swift
-
-```swift
-var delegate = CoreMLDelegate()
-if delegate == nil {
-  delegate = MetalDelegate()  // Add Metal delegate options if necessary.
-}
-
-let interpreter = try Interpreter(modelPath: modelPath,
-                                  delegates: [delegate!])
-```
-
-#### Objective-C
-
-```c
-TfLiteCoreMlDelegateOptions options = {};
-delegate = TfLiteCoreMlDelegateCreate(&options);
-if (delegate == NULL) {
-  // Add Metal delegate options if necessary
-  delegate = TFLGpuDelegateCreate(NULL);
-}
-// Initialize interpreter with delegate
-```
-
-デリゲート作成のロジックがデバイスのマシン ID（iPhone11,1 など）を読み取って Neural Engine が利用できるかを判断します。詳細は[コード](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/experimental/delegates/coreml/coreml_delegate.mm)をご覧ください。または、[DeviceKit](https://github.com/devicekit/DeviceKit) などの他のライブラリを使用して、独自の拒否リストデバイスのセットを実装することもできます。
-
-### 古い Core ML バージョンを使用する
-
-iOS 13 は Core ML 3 をサポートしていますが、Core ML 2 のモデル仕様に変換すると動作が良くなる場合があります。デフォルトでは変換対象のバージョンは最新バージョンに設定されていますが、デリゲートオプションで`coreMLVersion`（Swift の場合は C API の`coreml_version`）を古いバージョンに設定することによって変更が可能です。
-
-## サポートする演算子
-
-Core ML デリゲートがサポートする演算子は以下の通りです。
-
-- Add
-    - 特定の形状に限りブロードキャストが可能です。Core ML のテンソルレイアウトでは、次のテンソル形状をブロードキャストできます。`[B, C, H, W]`、`[B, C, 1, 1]`、`[B, 1, H, W]`、 `[B, 1, 1, 1]`。
-- AveragePool2D
-- Concat
-    - 連結はチャンネル軸に沿って行う必要があります。
-- Conv2D
-    - 重みやバイアスは定数である必要があります。
-- DepthwiseConv2D
-    - 重みやバイアスは定数である必要があります。
-- FullyConnected（別名 Dense または InnerProduct）
-    - 重みやバイアスは（存在する場合）定数である必要があります。
-    - 単一バッチケースのみをサポートします。入力次元は、最後の次元以外は 1 である必要があります。
-- Hardswish
-- Logistic（別名 Sigmoid）
-- MaxPool2D
-- MirrorPad
-    - `REFLECT`モードの 4 次元入力のみをサポートします。パディングは定数である必要があり、H 次元と W 次元にのみ許可されます。
-- Mul
-    - 特定の形状に限りブロードキャストが可能です。Core ML のテンソルレイアウトでは、次のテンソル形状をブロードキャストできます。`[B, C, H, W]`、`[B, C, 1, 1]`、`[B, 1, H, W]`、 `[B, 1, 1, 1]`。
-- Pad および PadV2
-    - 4 次元入力のみをサポートします。パディングは定数である必要があり、H 次元と W 次元にのみ許可されます。
-- Relu
-- ReluN1To1
-- Relu6
-- Reshape
-    - 対象の Core ML バージョンが 2 の場合にのみサポートされ、Core ML 3 の場合はサポートされません。
-- ResizeBilinear
-- SoftMax
-- Tanh
-- TransposeConv
-    - 重みは定数である必要があります。
-
-## フィードバック
-
-問題などが生じた場合は、[GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md)の Issue を作成し、再現に必要なすべての詳細を記載してください。
-
-## よくある質問
-
-- サポートされていない演算子がグラフに含まれている場合、CoreML デリゲートは CPU へのフォールバックをサポートしますか？
-    - はい
-- CoreML デリゲートは iOS Simulator で動作しますか？
-    - はい。ライブラリには x86 と x86_64 ターゲットが含まれているのでシミュレータ上で実行できますが、パフォーマンスが CPU より向上することはありません。
-- TensorFlow Lite と CoreML デリゲートは MacOS をサポートしていますか？
-    - TensorFlow Lite は iOS のみでテストを行っており、MacOS ではテストしていません。
-- カスタムの TensorFlow Lite 演算子はサポートされますか？
-    - いいえ、CoreML デリゲートはカスタム演算子をサポートしていないため、CPU にフォールバックします。
-
-## API
-
-- [Core ML デリゲート Swift API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/experimental/swift/Sources/CoreMLDelegate.swift)
-- [Core ML デリゲート C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/experimental/delegates/coreml/coreml_delegate.h)
-    - これは Objective-C コードに使用可能です。
+</pre>
+    </section>
+    <section>
+      <h3>Objective-C</h3>
+      <p></p>
+<pre class="prettyprint lang-objc">    TFLCoreMLDelegateOptions* coreMLOptions = [[TFLCoreMLDelegateOptions alloc] init];
+    coreMLOptions.enabledDevices = TFLCoreMLDelegateEnabledDevicesAll;
+    TFLCoreMLDelegate* coreMLDelegate = [[TFLCoreMLDelegate alloc]
+                                          initWithOptions:coreMLOptions];
+&lt;/div&gt;
+&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_9&lt;/code&gt;</pre>
+<div data-md-type="block_html">
+</div>
+</section></devsite-selector>
+</div>
+<h3 data-md-type="header" data-md-header-level="3">Metal (GPU) デリゲートをフォールバックとして使用する。</h3>
+<p data-md-type="paragraph">Core ML のデリゲートが作成されない場合でも、<a href="https://www.tensorflow.org/lite/performance/gpu#ios" data-md-type="link">Metal デリゲート</a> を使用してパフォーマンスの向上を図ることができます。以下の例は、その方法を示しています。</p>
+<div data-md-type="block_html">
+<div>
+  <devsite-selector>
+    <section>
+      <h3>Swift</h3>
+      <p></p>
+<pre class="prettyprint lang-swift">    var delegate = CoreMLDelegate()
+    if delegate == nil {
+      delegate = MetalDelegate()  // Add Metal delegate options if necessary.
+    }
+&lt;/div&gt;
+&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_10&lt;/code&gt;</pre>
+<div data-md-type="block_html">
+</div>
+</section></devsite-selector>
+</div>
+<p data-md-type="paragraph">デリゲート作成のロジックがデバイスのマシン ID（iPhone11,1 など）を読み取って Neural Engine が利用できるかを判断します。詳細は<a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/experimental/delegates/coreml/coreml_delegate.mm" data-md-type="link">コード</a>をご覧ください。または、<a href="https://github.com/devicekit/DeviceKit" data-md-type="link">DeviceKit</a> などの他のライブラリを使用して、独自の拒否リストデバイスのセットを実装することもできます。</p>
+<h3 data-md-type="header" data-md-header-level="3">古い Core ML バージョンを使用する</h3>
+<p data-md-type="paragraph">iOS 13 は Core ML 3 をサポートしていますが、Core ML 2 のモデル仕様に変換すると動作が良くなる場合があります。デフォルトでは変換対象のバージョンは最新バージョンに設定されていますが、デリゲートオプションで<code data-md-type="codespan">coreMLVersion</code>（Swift の場合は C API の<code data-md-type="codespan">coreml_version</code>）を古いバージョンに設定することによって変更が可能です。</p>
+<h2 data-md-type="header" data-md-header-level="2">サポートする演算子</h2>
+<p data-md-type="paragraph">Core ML デリゲートがサポートする演算子は以下の通りです。</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">Add</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">特定の形状に限りブロードキャストが可能です。Core ML のテンソルレイアウトでは、次のテンソル形状をブロードキャストできます。<code data-md-type="codespan">[B, C, H, W]</code>、<code data-md-type="codespan">[B, C, 1, 1]</code>、<code data-md-type="codespan">[B, 1, H, W]</code>、 <code data-md-type="codespan">[B, 1, 1, 1]</code>。</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">AveragePool2D</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">Concat</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">連結はチャンネル軸に沿って行う必要があります。</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">Conv2D</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">重みやバイアスは定数である必要があります。</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">DepthwiseConv2D</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">重みやバイアスは定数である必要があります。</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">FullyConnected（別名 Dense または InnerProduct）</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">重みやバイアスは（存在する場合）定数である必要があります。</li>
+<li data-md-type="list_item" data-md-list-type="unordered">Only supports single-batch case. Input dimensions should be 1, except the last dimension.</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">Hardswish</li>
+<li data-md-type="list_item" data-md-list-type="unordered">Logistic（別名 Sigmoid）</li>
+<li data-md-type="list_item" data-md-list-type="unordered">MaxPool2D</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">MirrorPad</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">
+<code data-md-type="codespan">REFLECT</code>モードの 4 次元入力のみをサポートします。パディングは定数である必要があり、H 次元と W 次元にのみ許可されます。</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">Mul</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">特定の形状に限りブロードキャストが可能です。Core ML のテンソルレイアウトでは、次のテンソル形状をブロードキャストできます。<code data-md-type="codespan">[B, C, H, W]</code>、<code data-md-type="codespan">[B, C, 1, 1]</code>、<code data-md-type="codespan">[B, 1, H, W]</code>、 <code data-md-type="codespan">[B, 1, 1, 1]</code>。</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">Pad および PadV2</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">4 次元入力のみをサポートします。パディングは定数である必要があり、H 次元と W 次元にのみ許可されます。</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">Relu</li>
+<li data-md-type="list_item" data-md-list-type="unordered">ReluN1To1</li>
+<li data-md-type="list_item" data-md-list-type="unordered">Relu6</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">Reshape</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">対象の Core ML バージョンが 2 の場合にのみサポートされ、Core ML 3 の場合はサポートされません。</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">ResizeBilinear</li>
+<li data-md-type="list_item" data-md-list-type="unordered">SoftMax</li>
+<li data-md-type="list_item" data-md-list-type="unordered">Tanh</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">TransposeConv</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">重みは定数である必要があります。</li>
+</ul>
+</li>
+</ul>
+<h2 data-md-type="header" data-md-header-level="2">フィードバック</h2>
+<p data-md-type="paragraph">For issues, please create a <a href="https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md" data-md-type="link">GitHub</a> issue with all the necessary details to reproduce.</p>
+<h2 data-md-type="header" data-md-header-level="2">よくある質問</h2>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">サポートされていない演算子がグラフに含まれている場合、CoreML デリゲートは CPU へのフォールバックをサポートしますか？</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">はい</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">CoreML デリゲートは iOS Simulator で動作しますか？</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">はい。ライブラリには x86 と x86_64 ターゲットが含まれているのでシミュレータ上で実行できますが、パフォーマンスが CPU より向上することはありません。</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">TensorFlow Lite と CoreML デリゲートは MacOS をサポートしていますか？</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">TensorFlow Lite は iOS のみでテストを行っており、MacOS ではテストしていません。</li>
+</ul>
+</li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph">カスタムの TensorFlow Lite 演算子はサポートされますか？</p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">いいえ、CoreML デリゲートはカスタム演算子をサポートしていないため、CPU にフォールバックします。</li>
+</ul>
+</li>
+</ul>
+<h2 data-md-type="header" data-md-header-level="2">API</h2>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered"><a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/swift/Sources/CoreMLDelegate.swift" data-md-type="link">Core ML delegate Swift API</a></li>
+<li data-md-type="list_item" data-md-list-type="unordered">
+<p data-md-type="paragraph"><a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.h" data-md-type="link">Core ML delegate C API</a></p>
+<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
+<li data-md-type="list_item" data-md-list-type="unordered">This can be used for Objective-C codes. ~~~</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
