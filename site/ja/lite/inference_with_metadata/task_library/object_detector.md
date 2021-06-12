@@ -1,8 +1,8 @@
 # 物体検出器の統合
 
-物体検出器は、既知の物体セットのどれが存在するかを識別し、特定の画像またはビデオストリーム内のそれらの位置に関する情報を提供できます。物体検出器は、物体の複数のクラスの存在と位置を検出するようにトレーニングされています。たとえば、さまざまな果物を含む画像でモデルをトレーニングし、それらが表す果物のクラスを指定する*ラベル* (リンゴ、バナナ、イチゴなど) と各物体が画像のどこに現れるかを特定するデータを提供できます。物体検出器の詳細については、[物体検出の概要](../../models/object_detection/overview.md)をご覧ください。
+物体検出器は、既知の物体セットのどれが存在するかを識別し、特定の画像またはビデオストリーム内のそれらの位置に関する情報を提供します。物体検出器は、物体の複数のクラスの存在と位置を検出するようにトレーニングされています。たとえば、さまざまな果物を含む画像でモデルをトレーニングし、それらが表す果物のクラスを指定する*ラベル* (リンゴ、バナナ、イチゴなど) と各物体が画像のどこに現れるかを特定するデータを提供できます。物体検出器の詳細については、[物体検出の概要](../../models/object_detection/overview.md)をご覧ください。
 
-Task Library `ObjectDetector` API を使用して、カスタム物体検出器または事前トレーニング済みの検出器をモデルアプリにデプロイします。
+Task Library `ObjectDetector` API を使用して、カスタム物体検出器または事前トレーニング済みの検出器をモバイルアプリにデプロイします。
 
 ## ObjectDetector API の主な機能
 
@@ -24,9 +24,13 @@ Task Library `ObjectDetector` API を使用して、カスタム物体検出器�
 
 - [AutoML Vision Edge 物体検出](https://cloud.google.com/vision/automl/object-detection/docs)によって作成されたモデル。
 
+- [物体検出器向け TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) により作成されたモデル。
+
 - [モデルの互換性要件](#model-compatibility-requirements)を満たすカスタムモデル。
 
 ## Java で推論を実行する
+
+Android アプリケーションで<code>ObjectDetector</code>を使用する方法の例については、<a>物体検出リファレンスアプリ</a>を参照してください。
 
 ### ステップ 1: Gradle の依存関係とその他の設定をインポートする
 
@@ -47,9 +51,11 @@ dependencies {
     // Other dependencies
 
     // Import the Task Vision Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.0.0-nightly'
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.2.0'
 }
 ```
+
+注意：Android Gradle プラグインのバージョン 4.1 以降、.tflite はデフォルトで noCompress リストに追加され、上記の aaptOptions は不要になりました。
 
 ### ステップ 2: モデルを使用する
 
@@ -66,25 +72,22 @@ List<Detection> results = objectDetector.detect(image);
 
 ## C++ で推論を実行する
 
-注: C++ Task Library では、使いやすさを向上するために構築済みのバイナリを提供したり、ユーザーフレンドリーなワークフローを作成してソースコードから構築できるようしています。C++ API は変更される可能性があります。
-
 ```c++
-// Initialization
 ObjectDetectorOptions options;
-options.mutable_model_file_with_metadata()->set_file_name(model_file);
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
 std::unique_ptr<ObjectDetector> object_detector = ObjectDetector::CreateFromOptions(options).value();
 
 // Run inference
 const DetectionResult result = object_detector->Detect(*frame_buffer).value();
 ```
 
-<code>ObjectDetector</code>を構成するその他のオプションについては、<a>ソースコード</a>をご覧ください。
+<code>ObjectDetector</code>を構成するその他のオプションについては、[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/vision/object_detector.h)をご覧ください。
 
 ## 結果の例
 
 TensorFlow Hub からの [ssd mobilenet v1](https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1) の検出結果の例を次に示します。
 
- <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/inference_with_metadata/task_library/images/dogs.jpg?raw=true" alt="dogs" class="">
+ <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/inference_with_metadata/task_library/images/dogs.jpg?raw=true" alt="dogs">
 
 ```
 Results:
@@ -104,13 +107,13 @@ Results:
 
 境界矩形を入力画像にレンダリングします。
 
- <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/inference_with_metadata/task_library/images/detection-output.png?raw=true" alt="detection output" class="">
+ <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/inference_with_metadata/task_library/images/detection-output.png?raw=true" alt="detection output">
 
 独自のモデルとテストデータを使用して、シンプルな [ObjectDetector 向け CLI デモツール](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop#object-detector)をお試しください。
 
 ## モデルの互換性要件
 
-`ObjectDetector` APIでは、[ TFLite モデルメタデータ](../../convert/metadata.md)を持つ TFLite モデル が必要です。
+`ObjectDetector` API は、必須の [TFLite モデル メタデータ](../../convert/metadata.md)を持つ TFLite モデルを想定しています。[TensorFlow Lite Metadata Writer API](../../convert/metadata_writer_tutorial.ipynb#object_detectors) を使用して物体検出器のメタデータを作成する例をご覧ください。
 
 互換性のある物体検出モデルは、次の要件を満たす必要があります。
 
@@ -118,7 +121,7 @@ Results:
 
     - サイズ`[batch x height x width x channels]`の画像入力。
     - バッチ推論はサポートされていません (`batch`は 1 である必要があります)。
-    - RGB 入力のみがサポートされています (` channels `は 3 である必要があります)。
+    - RGB 入力のみがサポートされています (`channels`は 3 である必要があります)。
     - 型が kTfLiteFloat32 の場合、入力の正規化のためにメタデータに NormalizationOptions をアタッチする必要があります。
 
 - 出力テンソルは、以下のように`DetectionPostProcess`演算の 4 つの出力でなければなりません。
