@@ -2,7 +2,7 @@
 ## Development
 
 The document contains the necessary information for setting up the development environement
-and building the `tensorflow-io` package from source on various platforms.
+and building the `tensorflow-io` package from source on various platforms. Once the setup is completed please refer to the [STYLE_GUIDE](https://github.com/tensorflow/io/blob/master/STYLE_GUIDE.md) for guidelines on adding new ops.
 
 ### IDE Setup
 
