@@ -4,8 +4,8 @@
 
 TensorFlow.js에는 머신러닝 모델을 훈련하는 두 가지 방법이 있습니다.
 
-1. <code><a href="https://js.tensorflow.org/api/latest/#tf.Model.fit" data-md-type="link">LayersModel.fit()</a></code> 또는 <code><a href="https://js.tensorflow.org/api/latest/#tf.Model.fitDataset" data-md-type="link">LayersModel.fitDataset()</a></code>와 함께 Layers API 사용하기
-2. <code><a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link">Optimizer.minimize()</a></code>와 함께 Core API 사용하기
+1. <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.Model.fit" data-md-type="link"&gt;LayersModel.fit()&lt;/a&gt;</code> 또는 <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.Model.fitDataset" data-md-type="link"&gt;LayersModel.fitDataset()&lt;/a&gt;</code>와 함께 Layers API 사용하기
+2. <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link"&gt;Optimizer.minimize()&lt;/a&gt;</code>와 함께 Core API 사용하기
 
 먼저 모델 빌드 및 훈련을 위한 상위 수준 API 인 Layers API를 살펴보겠습니다. 그런 다음 Core API를 사용하여 같은 모델을 훈련하는 방법을 보겠습니다.
 
@@ -79,7 +79,7 @@ model.weights.forEach(w => {
   </tr>
 </table>
 
-모델의 각 가중치는 <code><a href="https://js.tensorflow.org/api/0.14.2/#class:Variable" data-md-type="link">Variable</a></code> 객체의 백엔드입니다. TensorFlow.js에서 <code>Variable</code>은 값을 업데이트하는 데 사용되는 하나의 추가 메서드 <code>assign()</code>이 있는 부동 소수점 <code>Tensor</code>입니다. Layers API는 모범 사례를 사용하여 가중치를 자동으로 초기화합니다. 데모를 위해 기본 변수에 대해 <code>assign()</code>을 호출하여 가중치를 덮어쓸 수 있습니다.
+모델의 각 가중치는 <code>&lt;a href="https://js.tensorflow.org/api/0.14.2/#class:Variable" data-md-type="link"&gt;Variable&lt;/a&gt;</code> 객체의 백엔드입니다. TensorFlow.js에서 <code>Variable</code>은 값을 업데이트하는 데 사용되는 하나의 추가 메서드 <code>assign()</code>이 있는 부동 소수점 <code>Tensor</code>입니다. Layers API는 모범 사례를 사용하여 가중치를 자동으로 초기화합니다. 데모를 위해 기본 변수에 대해 <code>assign()</code>을 호출하여 가중치를 덮어쓸 수 있습니다.
 
 ```js
 model.weights.forEach(w => {
@@ -93,7 +93,7 @@ model.weights.forEach(w => {
 
 훈련을 시작하기 전에 다음 세 가지를 결정해야 합니다.
 
-1. **옵티마이저**: 옵티마이저는 현재 모델의 예측값이 주어졌을 때 모델의 각 매개변수를 얼마나 변경할 것인지 결정하는 역할을 합니다. Layers API를 사용할 때 기존 옵티마이저의 문자열 식별자인(예: `'sgd'` 또는 `'adam'` ) 또는 <code><a href="https://js.tensorflow.org/api/latest/#Training-Optimizers" data-md-type="link">Optimizer</a></code> 클래스의 인스턴스를 제공할 수 있습니다.
+1. **옵티마이저**: 옵티마이저는 현재 모델의 예측값이 주어졌을 때 모델의 각 매개변수를 얼마나 변경할 것인지 결정하는 역할을 합니다. Layers API를 사용할 때 기존 옵티마이저의 문자열 식별자인(예: `'sgd'` 또는 `'adam'` ) 또는 <code>&lt;a href="https://js.tensorflow.org/api/latest/#Training-Optimizers" data-md-type="link"&gt;Optimizer&lt;/a&gt;</code> 클래스의 인스턴스를 제공할 수 있습니다.
 2. <strong>손실 함수</strong>: 모델은 최소화를 목표로 합니다. 모델의 예측값이 '얼마나 잘못되었는지'에 대한 단일 숫자를 제공하는 것입니다. 손실은 모델이 가중치를 업데이트할 수 있도록 모든 데이터 배치에서 계산됩니다. Layers API를 사용할 때 기존 손실 함수의 문자열 식별자(예: <code>'categoricalCrossentropy'</code>) 또는 예측값과 참값을 가져와 손실을 반환하는 모든 함수를 제공할 수 있습니다. API 설명서에서 [사용 가능한 손실 목록](https://js.tensorflow.org/api/latest/#Training-Losses)을 참조하세요.
 3. <strong>메트릭 목록</strong>: 손실과 유사하게 메트릭은 단일 숫자를 계산하여 모델의 성능을 요약합니다. 메트릭은 일반적으로 각 epoch가 끝날 때 전체 데이터에 대해 계산됩니다. 최소한 시간이 지남에 따라 손실이 감소하고 있는지 모니터링해야 합니다만, 정확성과 같은 보다 인간 친화적인 메트릭을 원하는 경우가 많습니다. Layers API를 사용하는 경우 기존 메트릭의 문자열 식별자(예: <code>'accuracy'</code>) 또는 예측값 및 참값을 가져와 점수를 반환하는 모든 함수를 제공할 수 있습니다. API 설명서에서 [사용 가능한 메트릭 목록](https://js.tensorflow.org/api/latest/#Metrics)을 참조하세요.
 
@@ -251,6 +251,6 @@ for (let epoch = 0; epoch < 5; epoch++) {
 위의 코드는 Core API로 모델을 훈련할 때 쓰이는 표준 레시피입니다.
 
 - epoch 수를 반복합니다.
-- 각 epoch 내에서 데이터 배치를 반복합니다. `Dataset`를 사용할 때 <code><a href="https://js.tensorflow.org/api/0.15.1/#tf.data.Dataset.forEachAsync" data-md-type="link">dataset.forEachAsync()</a></code>는 배치를 반복하는 편리한 방법입니다.
-- 각 배치에 대해 <code><a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link">optimizer.minimize(f)</a></code>를 호출하면 <code>f</code>를 실행하고 앞서 정의한 4개의 변수에 대한 그래디언트를 계산하여 출력을 최소화합니다.
+- 각 epoch 내에서 데이터 배치를 반복합니다. `Dataset`를 사용할 때 <code>&lt;a href="https://js.tensorflow.org/api/0.15.1/#tf.data.Dataset.forEachAsync" data-md-type="link"&gt;dataset.forEachAsync()&lt;/a&gt;</code>는 배치를 반복하는 편리한 방법입니다.
+- 각 배치에 대해 <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link"&gt;optimizer.minimize(f)&lt;/a&gt;</code>를 호출하면 <code>f</code>를 실행하고 앞서 정의한 4개의 변수에 대한 그래디언트를 계산하여 출력을 최소화합니다.
 - <code>f</code>는 손실을 계산합니다. 모델의 예측값과 실제값을 사용하여 미리 정의된 손실 함수 중 하나를 호출합니다.
