@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-12' review_interval: '6 months' } *-->
 
 # 일반적인 문제
 
@@ -45,7 +45,7 @@ $ python
 
 ## 사전 초기화된 모듈에서 추론 실행하기
 
-입력 데이터에 모듈을 여러 번 적용하는 Python 프로그램을 작성하는 경우, 다음 레시피를 적용할 수 있습니다. (참고: 운영 서비스에서 요청을 처리하려면 go/servo 또는 Python이 없는 기타 확장 가능한 솔루션을 고려하세요.)
+입력 데이터에 모듈을 여러 번 적용하는 Python 프로그램을 작성하는 경우 다음 레시피를 적용할 수 있습니다. (참고: 프로덕션 서비스에서 요청을 처리하려면 [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) 또는 기타 확장 가능한 Python이 없는 솔루션을 고려하세요.)
 
 사용 사례 모델이 **초기화** 및 후속 **요청**(예: Django, Flask, 사용자 정의 HTTP 서버 등)이라고 가정하면, 다음과 같이 서비스를 설정할 수 있습니다.
 
@@ -103,4 +103,8 @@ result = session.run(embedded_text, feed_dict={text_input: ["Hello world"]})
 
 ## 모델의 dtype을 변경할 수 없습니다(예: float32에서 bfloat16으로).
 
-TensorFlow의 SavedModels(TF Hub 또는 기타에서 공유됨)에는 고정 데이터 유형(신경망의 가중치 및 중간 활성화를 위한 float32)에서 동작하는 연산이 포함됩니다. 고정 데이터 유형은 SavedMode을 로드한 후에 변경할 수 없습니다. (그러나 모델 게시자는 데이터 유형이 다른 여러 모델을 게시하도록 선택할 수 있습니다.).
+TensorFlow의 SavedModels(TF Hub 또는 기타에서 공유됨)에는 고정 데이터 유형(신경망의 가중치 및 중간 활성화를 위한 float32)에서 동작하는 연산이 포함됩니다. 고정 데이터 유형은 SavedMode을 로드한 후에 변경할 수 없습니다. (그러나 모델 게시자는 데이터 유형이 다른 여러 모델을 게시하도록 선택할 수 있습니다.)
+
+## 모델 버전 업데이트하기
+
+모델 버전의 문서 메타데이터를 업데이트할 수 있습니다. 그러나 버전의 자산(모델 파일)은 변경할 수 없습니다. 모델 자산을 변경하려면 새 버전의 모델을 게시할 수 있습니다. 버전 간에 변경된 사항을 설명하는 변경 로그로 문서를 확장하는 것이 좋습니다.
