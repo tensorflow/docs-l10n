@@ -16,7 +16,7 @@ TensorFlow Lite for Microcontrollers C++ 库是 [TensorFlow 仓库](https://gith
 - [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h) 输出调试信息。
 - [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h) 包含用于处理和运行模型的代码。
 
-请参阅[微处理器入门](get_started.md)获取典型用法的演练。
+请参阅[微处理器入门](get_started_low_level.md)获取典型用法的演练。
 
 构建系统提供了某些文件的特定于平台的实现。它们位于具有平台名称的目录中，例如 [`sparkfun_edge`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/sparkfun_edge)。
 

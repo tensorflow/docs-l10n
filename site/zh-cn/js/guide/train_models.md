@@ -4,8 +4,8 @@
 
 在 TensorFlow.js 中，您可以通过以下两种方式训练机器学习模型：
 
-1. 使用 Layers API 与 <code><a href="https://js.tensorflow.org/api/latest/#tf.Model.fit" data-md-type="link">LayersModel.fit()</a></code> 或 <code><a href="https://js.tensorflow.org/api/latest/#tf.Model.fitDataset" data-md-type="link">LayersModel.fitDataset()</a></code>。
-2. 使用 Core API 与 <code><a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link">Optimizer.minimize()</a></code>。
+1. 使用 Layers API 与 <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.Model.fit" data-md-type="link"&gt;LayersModel.fit()&lt;/a&gt;</code> 或 <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.Model.fitDataset" data-md-type="link"&gt;LayersModel.fitDataset()&lt;/a&gt;</code>。
+2. 使用 Core API 与 <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link"&gt;Optimizer.minimize()&lt;/a&gt;</code>。
 
 首先，我们将了解 Layers API，它是一种用于构建和训练模型的高级 API。然后，我们将展示如何使用 Core API 训练相同的模型。
 
@@ -79,7 +79,7 @@ model.weights.forEach(w => {
   </tr>
 </table>
 
-模型中的每个权重均由 <code><a href="https://js.tensorflow.org/api/0.14.2/#class:Variable" data-md-type="link">Variable</a></code> 对象提供支持。在 TensorFlow.js 中，<code>Variable</code> 为浮点型 <code>Tensor</code>，具有一个用于更新值的附加方法 <code>assign()</code>。Layers API 会使用最佳做法自动初始化权重。出于演示目的，我们可以通过在基础变量上调用 <code>assign()</code> 来覆盖权重：
+模型中的每个权重均由 <code>&lt;a href="https://js.tensorflow.org/api/0.14.2/#class:Variable" data-md-type="link"&gt;Variable&lt;/a&gt;</code> 对象提供支持。在 TensorFlow.js 中，<code>Variable</code> 为浮点型 <code>Tensor</code>，具有一个用于更新值的附加方法 <code>assign()</code>。Layers API 会使用最佳做法自动初始化权重。出于演示目的，我们可以通过在基础变量上调用 <code>assign()</code> 来覆盖权重：
 
 ```js
 model.weights.forEach(w => {
@@ -93,7 +93,7 @@ model.weights.forEach(w => {
 
 进行任何训练之前，您需要确定以下三项内容：
 
-1. **优化器**。优化器的作用是在给定当前模型预测的情况下，决定对模型中每个参数实施更改的幅度。使用 Layers API 时，您可以提供现有优化器的字符串标识符（例如 `'sgd'` 或 `'adam'`），也可以提供 <code><a href="https://js.tensorflow.org/api/latest/#Training-Optimizers" data-md-type="link">Optimizer</a></code> 类的实例。
+1. **优化器**。优化器的作用是在给定当前模型预测的情况下，决定对模型中每个参数实施更改的幅度。使用 Layers API 时，您可以提供现有优化器的字符串标识符（例如 `'sgd'` 或 `'adam'`），也可以提供 <code>&lt;a href="https://js.tensorflow.org/api/latest/#Training-Optimizers" data-md-type="link"&gt;Optimizer&lt;/a&gt;</code> 类的实例。
 2. <strong>损失函数</strong>。模型将以最小化损失作为目标。该函数旨在将模型预测的“误差程度”量化为具体数字。损失以每一批次数据为基础计算，因此模型可以更新其权重。使用 Layers API 时，您可以提供现有损失函数的字符串标识符（例如 <code>'categoricalCrossentropy'</code>），也可以提供任何采用预测值和真实值并返回损失的函数。请参阅我们的 API 文档中的[可用损失列表](https://js.tensorflow.org/api/latest/#Training-Losses)。
 3. <strong>指标列表。</strong>与损失类似，指标也会计算一个数字，用于总结模型的运作情况。通常要在每个周期结束时基于整体数据来计算指标。至少，我们要监控损失是否随着时间推移而下降。但是，我们经常需要准确率等更人性化的指标。使用 Layers API 时，您可以提供现有指标的字符串标识符（例如 <code>'accuracy'</code>），也可以提供任何采用预测值和真实值并返回分数的函数。请参阅我们的 API 文档中的[可用指标列表](https://js.tensorflow.org/api/latest/#Metrics)。
 
@@ -251,6 +251,6 @@ for (let epoch = 0; epoch < 5; epoch++) {
 以上代码是使用 Core API 训练模型时的标准方法：
 
 - 循环周期数。
-- 在每个周期内，循环各批次数据。使用 `Dataset` 时，<code><a href="https://js.tensorflow.org/api/0.15.1/#tf.data.Dataset.forEachAsync" data-md-type="link">dataset.forEachAsync()</a> </code> 可方便地循环各批次数据。
-- 针对每个批次，调用 <code><a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link">optimizer.minimize(f)</a></code>，它可以执行 <code>f</code> 并通过计算相对于我们先前定义的四个变量的梯度来最小化其输出。
+- 在每个周期内，循环各批次数据。使用 `Dataset` 时，<code>&lt;a href="https://js.tensorflow.org/api/0.15.1/#tf.data.Dataset.forEachAsync" data-md-type="link"&gt;dataset.forEachAsync()&lt;/a&gt; </code> 可方便地循环各批次数据。
+- 针对每个批次，调用 <code>&lt;a href="https://js.tensorflow.org/api/latest/#tf.train.Optimizer.minimize" data-md-type="link"&gt;optimizer.minimize(f)&lt;/a&gt;</code>，它可以执行 <code>f</code> 并通过计算相对于我们先前定义的四个变量的梯度来最小化其输出。
 - <code>f</code> 可计算损失。它使用模型的预测和真实值调用预定义的损失函数之一。

@@ -1,10 +1,10 @@
-# 性能的最佳实践
+# 性能最佳做法
 
-移动和嵌入式设备的计算资源有限，因此保持应用的资源效率非常重要。我们整理了一份最佳实践和策略的清单，您可以用它们来提高 TensorFlow Lite 模型的性能。
+移动设备和嵌入式设备的计算资源有限，因此保持应用的资源效率非常重要。我们整理了一份最佳做法和策略的清单，可用于改善 TensorFlow Lite 模型的性能。
 
-## 为任务选择最佳的模型
+## 为任务选择最佳模型
 
-根据任务的不同，你会需要在模型复杂度和大小之间做取舍。如果你的任务需要高准确率，那么你可能需要一个大而复杂的模型。对于精确度不高的任务，就最好使用小一点的模型，因为小的模型不仅占用更少的磁盘和内存，也一般更快更高效。比如，下图展示了常见的图像分类模型中准确率和延迟对模型大小的影响。
+您需要根据任务在模型复杂性和大小之间进行权衡。如果您的任务需要高准确率，那么您可能需要一个大而复杂的模型。对于准确率要求较低的任务，则最好使用较小的模型，因为它们不仅占用的磁盘空间和内存更少，而且通常速度更快且更节能。例如，下图显示了一些常见图像分类模型的准确率和延迟权衡。
 
 ![模型大小和准确度的关系图](../images/performance/model_size_vs_accuracy.png "模型大小和准确度")
 
@@ -12,49 +12,49 @@
 
 [MobileNets](https://arxiv.org/abs/1704.04861) 是针对移动设备优化的模型的一个示例，该模型针对移动视觉应用进行了优化。[托管模型](../guide/hosted_models.md)列出了其他几种专门针对移动设备和嵌入式设备进行了优化的模型。
 
-你可以用你自己的数据通过迁移学习再训练这些模型。查看我们的迁移学习教程：[图像分类](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/#0) 和 [物体检测](https://medium.com/tensorflow/training-and-serving-a-realtime-mobile-object-detector-in-30-minutes-with-cloud-tpus-b78971cf1193)。
+您可以使用迁移学习在您自己的数据集上重新训练这些模型。请查看我们的迁移学习教程，了解[图像分类](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/#0)和[物体检测](https://medium.com/tensorflow/training-and-serving-a-realtime-mobile-object-detector-in-30-minutes-with-cloud-tpus-b78971cf1193)。
 
-## 测试你的模型
+## 对您的模型进行性能分析
 
-在选择了一个适合你的任务的模型之后，测试该模型和设立基准很好的行为。TensorFlow Lite [测试工具](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark) 有内置的测试器，可展示每一个运算符的测试数据。这能帮助理解性能瓶颈和哪些运算符主导了运算时间。
+在选择了适合您的任务的候选模型后，最好对模型进行性能分析和基准测试。TensorFlow Lite [基准测试工具](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)有内置的性能分析器，可展示每个算子的性能分析数据。这能帮助理解性能瓶颈，以及哪些算子占据了大部分计算时间。
 
 您还可以使用 [TensorFlow Lite 跟踪](measurement.md#trace_tensorflow_lite_internals_in_android)，在您的 Android 应用中使用标准的 Android 系统跟踪来对模型进行性能分析，还可以使用基于 GUI 的性能分析工具按时间直观呈现算子的调用。
 
-## 测试和优化图（graph）中的运算符
+## 对计算图中的算子进行性能分析和优化
 
 如果某个特定的算子频繁出现在模型中，并且基于性能分析，您发现该算子消耗的时间最多，则可以考虑优化该算子。这种情况应该会很少见，因为 TensorFlow Lite 为大多数算子提供了优化版本。但是，如果您知道执行算子的约束条件，则可以编写自定义算子的更快版本。请查看我们的[自定义算子文档](../custom_operators.md)。
 
-## 优化你的模型
+## 优化模型
 
-如果你的模型使用浮点权重或者激励函数，那么模型大小或许可以通过量化减少75%，该方法有效地将浮点权重从32字节转化为8字节。量化分为：[训练后量化](post_training_quantization.md) 和 [量化训练](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/quantize/README.md){:.external}。前者不需要再训练模型，但是在极少情况下会有精度损失。当精度损失超过了可接受范围，则应该使用量化训练。
+模型优化旨在创建更小的模型，这些模型通常更快、更节能，从而可以将其部署在移动设备上。TensorFlow Lite 支持量化等多种优化技术。
 
 有关详细信息，请查看我们的[模型优化文档](model_optimization.md)。
 
 ## 调整线程数
 
-TensorFlow Lite 支持用于许多算子的多线程内核。您可以增加线程数并加快算子的执行速度。但是，增加线程数会使模型使用更多资源和功率。
+TensorFlow Lite 支持用于许多算子的多线程内核。您可以增加线程数并加快算子的执行速度。但是，增加线程数会使模型使用更多资源和能源。
 
-对有些应用来说，延迟或许比能源效率更重要。你可以通过设定 [解释器](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L346) 的数量来增加线程数。然而，根据同时运行的其他操作不同，多线程运行会增加性能的可变性。比如，隔离测试可能显示多线程的速度是单线程的两倍，但如果同时有另一个应用在运行的话，性能测试结果可能比单线程更差。
+对某些应用来说，延迟或许比能效更重要。您可以通过设置解释器[线程数](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L346)来增加线程数。然而，多线程执行的代价是增加了性能可变性，具体取决于并发执行的其他内容。对于移动应用来说，情况尤其如此。例如，单独的测试可能会显示速度比单线程快 2 倍，但是，如果另一个应用同时执行，可能会导致其性能比单线程更差。
 
-## 清除冗余副本
+## 消除冗余副本
 
-如果您的应用没有仔细设计，则在向模型输入和从模型读取输出时，可能会出现冗余副本。请确保消除冗余副本。如果您使用的是更高级别的 API（如Java），请务必仔细检查文档中的性能注意事项。例如，如果将 `ByteBuffers` 用作[输入](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/java/org/tensorflow/lite/Interpreter.java#L175)，Java API 的速度就会快很多。
+如果您的应用没有仔细设计，则在向模型输入和从模型读取输出时，可能会出现冗余副本。请确保消除冗余副本。如果您使用的是更高级别的 API（如 Java），请务必仔细检查文档中的性能注意事项。例如，如果将 `ByteBuffers` 用作[输入](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/java/org/tensorflow/lite/Interpreter.java#L175)，Java API 的速度就会快很多。
 
-## 用平台特定工具测试你的应用
+## 用平台特定工具对您的应用进行性能分析
 
-平台特定工具，如 [Android profiler](https://developer.android.com/studio/profile/android-profiler) 和 [Instruments](https://help.apple.com/instruments/mac/current/)，提供了丰富的可被用于调试应用的测试信息。有时性能问题可能不出自于模型，而是与模型交互的应用代码。确保熟悉平台特定测试工具和对该平台最好的测试方法。
+平台特定工具（如 [Android Profiler](https://developer.android.com/studio/profile/android-profiler) 和 [Instruments](https://help.apple.com/instruments/mac/current/)）提供了丰富的可被用于调试应用的性能分析信息。有时错误可能不在模型中，而在与模型交互的部分应用代码中。请务必熟悉平台特定的性能分析工具和适用于该平台的最佳做法。
 
-## 评估你的模型是否受益于使用设备上可用的硬件加速器
+## 评估您的模型是否能从使用设备上可用的硬件加速器中受益
 
 TensorFlow Lite 添加了使用速度更快的硬件（如 GPU、DSP 和神经加速器等）来加速模型的新方式。通常，这些加速器会通过接管解释器部分执行的[委托](delegates.md)子模块公开。TensorFlow Lite 可以通过以下方式使用委托：
 
-- 使用 Android 的[神经网络 API](https://developer.android.com/ndk/guides/neuralnetworks/)。<br>您可以利用这些硬件加速器后端来提高模型的速度和效率。<br>要启用神经网络 API，请查看 [NNAPI 委托](nnapi.md)指南。
-- 我们已经发布了一个仅限二进制的 GPU 代理，Android 和 iOS 分别使用 OpenGL 和 Metal。要试用它们，查看 [GPU 代理教程](gpu.md) 和 [文档](gpu_advanced.md)。
+- 使用 Android 的 [Neural Networks API](https://developer.android.com/ndk/guides/neuralnetworks/)。您可以利用这些硬件加速器后端来提高模型的速度和效率。要启用 Neural Networks API，请查看 [NNAPI 委托](nnapi.md)指南。
+- 在 Android 和 iOS 上均可以使用 GPU 委托，分别使用 OpenGL/OpenCL 和 Metal。要尝试使用它们，请查看 [GPU 委托教程](gpu.md)和[文档](gpu_advanced.md)。
 - 在 Android 上可以使用 Hexagon 委托。如果在设备上可用，它会利用 Qualcomm Hexagon DSP。请参阅 [Hexagon 委托教程](hexagon_delegate.md)了解更多信息。
 - 如果您可以访问非标准硬件，则可以创建自己的委托。请参阅 [TensorFlow Lite 委托](delegates.md)了解更多信息。
 
-请注意，有的加速器在某些模型效果更好。为每个代理设立基准以测试出最优的选择是很重要的。比如，如果你有一个非常小的模型，那可能没必要将模型委托给 NN API 或 GPU。相反，对于具有高算术强度的大模型来说，加速器就是一个很好的选择。
+请注意，有些加速器更适合不同类型的模型。有些委托只支持浮点模型或以特定方式优化的模型。请务必对每个委托进行[基准测试](measurement.md)，以查看它是否适合您的应用。例如，如果您有一个非常小的模型，将该模型委托给 NN API 或 GPU 可能不值得。相反，对于具有高运算强度的大型模型来说，加速器是很好的选择。
 
 ## 需要更多帮助？
 
-TensorFlow 团队非常乐意帮助你诊断和定位具体的性能问题。请在 [GitHub](https://github.com/tensorflow/tensorflow/issues) 提出问题并描述细节。
+TensorFlow 团队非常乐意帮助诊断和解决您可能面对的具体性能问题。请在 [GitHub](https://github.com/tensorflow/tensorflow/issues) 提交问题并提供问题的详细信息。

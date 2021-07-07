@@ -42,6 +42,6 @@ TFLite 格式用于设备端推断。您可以参阅 [TFLite 文档](https://www
 
 ## TFJS 格式
 
-TF.js format 格式用于浏览器内机器学习。您可以参阅 [TF.js 文档](https://www.tensorflow.org/js)了解更多信息。
+TF.js 格式用于浏览器内机器学习。您可以参阅 [TF.js 文档](https://www.tensorflow.org/js)了解更多信息。
 
 您可以通过在 [thub.dev 浏览页面](https://tfhub.dev/s?subtype=module,placeholder)中使用 TF.js 模型格式筛选器，或通过访问[此链接](https://tfhub.dev/js)在 tfhub.dev 上浏览 TF.js 模型。

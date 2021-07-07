@@ -1,3 +1,5 @@
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-01' review_interval: '3 months' } *-->
+
 # 在使用 TensorFlow Hub 的情况下从 TF1 迁移到 TF2
 
 本页介绍了在将 TensorFlow 代码从 TensorFlow 1 迁移到 TensorFlow 2 时如何继续使用 TensorFlow Hub，旨在补充 TensorFlow 的常规[迁移指南](https://www.tensorflow.org/guide/migrate)。
