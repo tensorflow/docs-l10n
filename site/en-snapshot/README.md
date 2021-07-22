@@ -6,7 +6,7 @@ the projects listed below.
 
 Please submit translations from the GitLocalize project: https://gitlocalize.com/tensorflow/docs-l10n
 
-Updated: Wed Jul 21 15:16:50 PDT 2021
+Updated: Thu Jul 22 07:00:37 UTC 2021
 
 Projects and last commit:
 
@@ -22,14 +22,14 @@ Projects and last commit:
 - [js](https://github.com/tensorflow/tfjs-website/tree/master/docs) @ <a href='https://github.com/tensorflow/tfjs-website/commit/e9b788228e017f515a14ded7f6ab36bd73af6431'><code>e9b78822</code></a>
 - [keras_guides](https://github.com/tensorflow/docs/tree/snapshot-keras/site/en/guide/keras) @ <a href='https://github.com/tensorflow/docs/commit/49074823a88d9e3561cb3f9f9a063bb7a8f1d0c9'><code>49074823</code></a>
 - [lattice](https://github.com/tensorflow/lattice/tree/master/docs) @ <a href='https://github.com/tensorflow/lattice/commit/35f3e9d7da7f90a700d7a903e1818e82965f245c'><code>35f3e9d7</code></a>
-- [lite](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/c3b915ffff4540af2d2f29e5a4a73ef1b651539e'><code>c3b915ff</code></a>
-- [mlir](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/mlir/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/c3b915ffff4540af2d2f29e5a4a73ef1b651539e'><code>c3b915ff</code></a>
+- [lite](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/a219f7e7b4f2e4e15c1bb82d8dcf19d51e7d5634'><code>a219f7e7</code></a>
+- [mlir](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/mlir/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/a219f7e7b4f2e4e15c1bb82d8dcf19d51e7d5634'><code>a219f7e7</code></a>
 - [model_optimization](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/g3doc) @ <a href='https://github.com/tensorflow/model-optimization/commit/11011c9994e41236f1d77dd8ad8d052edfbd4692'><code>11011c99</code></a>
 - [neural_structured_learning](https://github.com/tensorflow/neural-structured-learning/tree/master/g3doc) @ <a href='https://github.com/tensorflow/neural-structured-learning/commit/04f32d5b8cce8d1761d02d3678eaa5b615ecb3e6'><code>04f32d5b</code></a>
 - [probability](https://github.com/tensorflow/probability/tree/main/tensorflow_probability/g3doc) @ <a href='https://github.com/tensorflow/probability/commit/33cc12bfcbc93a1015b5b4f405bcb13a13349aea'><code>33cc12bf</code></a>
 - [probability_examples](https://github.com/tensorflow/probability/tree/main/tensorflow_probability/examples/jupyter_notebooks) @ <a href='https://github.com/tensorflow/probability/commit/33cc12bfcbc93a1015b5b4f405bcb13a13349aea'><code>33cc12bf</code></a>
 - [quantum](https://github.com/tensorflow/quantum/tree/master/docs) @ <a href='https://github.com/tensorflow/quantum/commit/fd952d0362c5445eef0da4437fb3e5ebb16b7948'><code>fd952d03</code></a>
-- [tensorboard](https://github.com/tensorflow/tensorboard/tree/master/docs) @ <a href='https://github.com/tensorflow/tensorboard/commit/3a2c400a56be993a75f6c9518cdbba4cb9c53b86'><code>3a2c400a</code></a>
-- [tfx](https://github.com/tensorflow/tfx/tree/master/docs) @ <a href='https://github.com/tensorflow/tfx/commit/ada8fc2e9d8fe6b56b7e3a17cde37951591202c7'><code>ada8fc2e</code></a>
-- [xla](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/xla/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/c3b915ffff4540af2d2f29e5a4a73ef1b651539e'><code>c3b915ff</code></a>
+- [tensorboard](https://github.com/tensorflow/tensorboard/tree/master/docs) @ <a href='https://github.com/tensorflow/tensorboard/commit/562444c1d2fa079a2f78441517ada146ef858d6e'><code>562444c1</code></a>
+- [tfx](https://github.com/tensorflow/tfx/tree/master/docs) @ <a href='https://github.com/tensorflow/tfx/commit/84b6c82be1c79019068b5f2cddc3d10968e05863'><code>84b6c82b</code></a>
+- [xla](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/xla/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/a219f7e7b4f2e4e15c1bb82d8dcf19d51e7d5634'><code>a219f7e7</code></a>
 
