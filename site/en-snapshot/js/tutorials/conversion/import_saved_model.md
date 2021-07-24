@@ -1,7 +1,7 @@
 # Importing a TensorFlow GraphDef based Models into TensorFlow.js
 
 TensorFlow GraphDef based models (typically created via the Python API) may be saved in one of following formats:
-1. TensorFlow [SavedModel](https://www.tensorflow.org/programmers_guide/saved_model#overview_of_saving_and_restoring_models)
+1. TensorFlow [SavedModel](https://www.tensorflow.org/tutorials/keras/save_and_load)
 2. Frozen Model
 3. [Tensorflow Hub module](https://www.tensorflow.org/hub/)
 
