@@ -26,7 +26,7 @@
 
 [Kaggle 上的 IMDB 分类](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) - 演示如何在 Colab 中与 Kaggle 竞赛轻松交互，包括下载数据和提交结果。
 
- | Estimator | Keras | TF2 | TF Datasets | BERT | Kaggle APIs
+ | Estimator | Keras | TF2 | TF 数据集 | BERT | Kaggle API
 --- | --- | --- | --- | --- | --- | ---
 [文本分类](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  |
 [使用 Keras 进行文本分类](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub) |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |
