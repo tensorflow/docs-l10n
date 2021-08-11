@@ -1,6 +1,6 @@
 # TFX Airflow 教程
 
-[![Python](https://img.shields.io/pypi/pyversions/tfx.svg?style=plastic)](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)
+[![Python](https://img.shields.io/pypi/pyversions/tfx.svg?style=plastic)](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)
 [![PyPI](https://badge.fury.io/py/tfx.svg)](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)
 
 ## 简介
@@ -226,7 +226,7 @@ airflow webserver -p 7070
 - 可使用右侧按钮*触发* DAG
 - 点击“taxi”可转到 DAG 的计算图视图
 
-![Graph refresh button](images/airflow_workshop/graph_refresh_button.png)
+![Graph refresh button](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/graph_refresh_button.png?raw=true)
 
 #### Airflow CLI
 
@@ -249,7 +249,7 @@ airflow trigger_dag <your DAG name>
 
 到目前为止，流水线中只有 CsvExampleGen 组件，因此您需要等待其变为深绿色（约 1 分钟）。
 
-![Setup complete](images/airflow_workshop/step2.png)
+![Setup complete](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step2.png?raw=true)
 
 ## 第 3 步：深入剖析数据
 
@@ -261,7 +261,7 @@ airflow trigger_dag <your DAG name>
 
 ### 组件
 
-![Data Components](images/airflow_workshop/examplegen1.png) ![Data Components](images/airflow_workshop/examplegen2.png)
+![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/examplegen1.png?raw=true) ![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/examplegen2.png?raw=true)
 
 - [ExampleGen](https://www.tensorflow.org/tfx/guide/examplegen) 用于提取并拆分输入数据集。
 - [StatisticsGen](https://www.tensorflow.org/tfx/guide/statsgen) 用于计算数据集的统计信息。
@@ -283,7 +283,7 @@ airflow trigger_dag <your DAG name>
     - 全部变为深绿色
     - 使用右侧的刷新按钮或刷新页面
 
-![Dive into data](images/airflow_workshop/step3.png)
+![Dive into data](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step3.png?raw=true)
 
 ### 回到 Jupyter：
 
@@ -292,7 +292,7 @@ airflow trigger_dag <your DAG name>
 - 打开 step3.ipynb
 - 按照笔记本进行操作
 
-![Dive into data](images/airflow_workshop/step3notebook.png)
+![Dive into data](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step3notebook.png?raw=true)
 
 ### 更高级的示例
 
@@ -314,7 +314,7 @@ airflow trigger_dag <your DAG name>
 
 ### 组件
 
-![Transform](images/airflow_workshop/transform.png)
+![Transform](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/transform.png?raw=true)
 
 - [Transform](https://www.tensorflow.org/tfx/guide/transform) 会对数据集执行特征工程。
 
@@ -333,7 +333,7 @@ airflow trigger_dag <your DAG name>
     - 全部变为深绿色
     - 使用右侧的刷新按钮或刷新页面
 
-![Feature Engineering](images/airflow_workshop/step4.png)
+![Feature Engineering](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step4.png?raw=true)
 
 ### 回到 Jupyter：
 
@@ -374,7 +374,7 @@ airflow trigger_dag <your DAG name>
     - 全部变为深绿色
     - 使用右侧的刷新按钮或刷新页面
 
-![Training a Model](images/airflow_workshop/step5.png)
+![Training a Model](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step5.png?raw=true)
 
 ### 回到 Jupyter：
 
@@ -383,7 +383,7 @@ airflow trigger_dag <your DAG name>
 - 打开 step5.ipynb
 - 按照笔记本进行操作
 
-![Training a Model](images/airflow_workshop/step5tboard.png)
+![Training a Model](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step5tboard.png?raw=true)
 
 ### 更高级的示例
 
@@ -421,7 +421,7 @@ airflow trigger_dag <your DAG name>
     - 全部变为深绿色
     - 使用右侧的刷新按钮或刷新页面
 
-![Analyzing model performance](images/airflow_workshop/step6.png)
+![Analyzing model performance](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step6.png?raw=true)
 
 ### 回到 Jupyter：
 
@@ -430,7 +430,7 @@ airflow trigger_dag <your DAG name>
 - 打开 step6.ipynb
 - 按照笔记本进行操作
 
-![Analyzing model performance](images/airflow_workshop/step6notebook.png)
+![Analyzing model performance](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step6notebook.png?raw=true)
 
 ### 更高级的示例
 
