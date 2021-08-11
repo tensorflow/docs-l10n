@@ -28,4 +28,4 @@ TensorFlow Lite 提供了多种工具和库来满足不同层次的部署要求�
 
 ## TensorFlow Lite Support GitHub 仓库
 
-请访问 [TensorFlow Lite Support GitHub 仓库](https://github.com/tensorflow/tflite-support)获取更多示例和源代码，并通过创建[新的 GitHub 问题](https://github.com/tensorflow/tflite-support/issues/new)让我们了解您的反馈。
+请访问 [TensorFlow Lite Support GitHub 仓库](https://github.com/tensorflow/tflite-support)获取更多示例和源代码，并通过创建[新的 GitHub 议题](https://github.com/tensorflow/tflite-support/issues/new)让我们了解您的反馈。
