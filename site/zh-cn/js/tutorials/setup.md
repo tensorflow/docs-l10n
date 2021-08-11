@@ -8,7 +8,7 @@
 
 - 从 [NPM](https://www.npmjs.com) 安装并使用诸如 [Parcel](https://parceljs.org/)、[WebPack](https://webpack.js.org/) 或 [Rollup](https://rollupjs.org/guide/en) 的构建工具。
 
-如果您是 Web 开发新手，或者从未听说过诸如 Webpack 或 Parcel 的工具，*建议您使用脚本代码*。如果您比较有经验或想编写更大的程序，则可能值得使用构建工具进行探索。
+如果您是 Web 开发新手，或者从未听说过诸如 Webpack 或 Parcel 的工具，*建议您使用脚本代码*。如果您比较有经验或想编写更大的程序，则最好使用构建工具进行探索。
 
 ### 使用脚本代码
 
