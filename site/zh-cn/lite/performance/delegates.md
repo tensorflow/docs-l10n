@@ -38,10 +38,10 @@ TensorFlow Lite 支持多种委托，每种委托都针对特定的平台和特�
 **模型类型** | **GPU** | **NNAPI** | **Hexagon** | **CoreML**
 --- | --- | --- | --- | ---
 浮点（32 位） | 是 | 是 | 否 | 是
-[Post-training float16 quantization](post_training_float16_quant.ipynb) | 是 | 否 | 否 | 是
-[Post-training dynamic range quantization](post_training_quant.ipynb) | 是 | 是 | 否 | 否
-[Post-training integer quantization](post_training_integer_quant.ipynb) | 是 | 是 | 是 | 否
-[Quantization-aware training](http://www.tensorflow.org/model_optimization/guide/quantization/training) | 是 | 是 | 是 | 否
+[训练后 float16 量化](post_training_float16_quant.ipynb) | 是 | 否 | 否 | 是
+[训练后动态范围量化](post_training_quant.ipynb) | 是 | 是 | 否 | 否
+[训练后整数量化](post_training_integer_quant.ipynb) | 是 | 是 | 是 | 否
+[量化感知训练](http://www.tensorflow.org/model_optimization/guide/quantization/training) | 是 | 是 | 是 | 否
 
 ### 验证性能
 
