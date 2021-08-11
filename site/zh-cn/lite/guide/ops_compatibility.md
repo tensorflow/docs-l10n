@@ -1,10 +1,10 @@
 # TensorFlow Lite 和 TensorFlow 算子兼容性
 
-TensorFlow Lite supports a number of TensorFlow operations used in common inference models. As they are processed by the TensorFlow Lite Optimizing Converter, those operations may be elided or fused, before the supported operations are mapped to their TensorFlow Lite counterparts.
+TensorFlow Lite 支持许多在常见推理模型中使用的 TensorFlow 运算。当使用 TensorFlow Lite Optimizing Converter 处理运算时，这些运算可能会被消除或融合，然后受支持的运算会被映射到它们对应的 TensorFlow Lite 运算。
 
 由于 TensorFlow Lite 内置算子库仅支持有限数量的 TensorFlow 算子，所以并非所有模型都可以转换。即使对于支持的运算，出于性能原因，有时也需要非常特定的使用模式。我们希望在未来的 TensorFlow Lite 版本中扩展支持的运算。
 
-The best way to understand how to build a TensorFlow model that can be used with TensorFlow Lite is to carefully consider how operations are converted and optimized, along with the limitations imposed by this process.
+要理解如何构建可以和 TensorFlow Lite 一起使用的 TensorFlow 模型，最好的方法是仔细考虑运算的转换和优化方式，以及此过程带来的限制。
 
 ## 支持的类型
 
