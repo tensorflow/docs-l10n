@@ -1,6 +1,6 @@
 # iOS 快速入门
 
-要开始在 iOS 上使用 TensorFlow Lite，我们建议浏览以下示例:
+要开始在 iOS 上使用 TensorFlow Lite，我们建议浏览以下示例：
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS 图像分类示例</a>
 
