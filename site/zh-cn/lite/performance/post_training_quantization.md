@@ -1,6 +1,6 @@
 # 训练后量化
 
-Post-training quantization is a conversion technique that can reduce model size while also improving CPU and hardware accelerator latency, with little degradation in model accuracy. You can quantize an already-trained float TensorFlow model when you convert it to TensorFlow Lite format using the [TensorFlow Lite Converter](../convert/).
+训练后量化是一种转换技术，它可以在改善 CPU 和硬件加速器延迟的同时缩减模型大小，且几乎不会降低模型准确率。使用 [TensorFlow Lite 转换器](../convert/)将已训练的浮点 TensorFlow 模型转换为 TensorFlow Lite 格式后，可以对该模型进行量化。
 
 注：此页面上的过程需要 TensorFlow 1.15 或更高版本。
 
@@ -19,7 +19,7 @@ Float16 量化 | 大小缩减至原来的二分之一，GPU | CPU、GPU
 
 以下决策树可以帮助确定最适合您用例的训练后量化方法：
 
-![post-training optimization options](images/optimization.jpg)
+![训练后量化选项](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/lite/performance/images/optimization.jpg?raw=true)
 
 ### 动态范围量化
 
@@ -100,7 +100,7 @@ tflite_quant_model = converter.convert()
 
 float16 量化的优点如下：
 
-- It reduces model size by up to half (since all weights become half of their original size).
+- 将模型的大小缩减一半（因为所有权重都变成其原始大小的一半）。
 - 实现最小的准确率损失。
 - 支持可直接对 float16 数据进行运算的部分委托（例如 GPU 委托），从而使执行速度比 float32 计算更快。
 
