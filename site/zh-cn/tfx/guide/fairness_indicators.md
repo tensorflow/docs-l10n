@@ -2,7 +2,7 @@
 
 Fairness Indicators 旨在与更广泛的 TensorFlow 工具包进行合作，支持团队评估和改善模型的公平性问题。目前，我们的许多产品都在内部积极使用该工具，现在该工具以推出 BETA 版本，您可以在自己的用例中试用。
 
-![Fairness Indicator Dashboard](images/fairnessIndicators.png)
+![Fairness Indicator 信息中心](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/guide/images/fairnessIndicators.png?raw=true)
 
 ## 什么是 Fairness Indicators？
 
@@ -107,7 +107,7 @@ from tensorflow_model_analysis.addons.fairness.view import widget_view
 widget_view.render_fairness_indicator(eval_result=eval_result)
 ```
 
-![Fairness Indicators](images/fairnessIndicators.png)
+![Fairness Indicators](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/guide/images/fairnessIndicators.png?raw=true)
 
 使用 Fairness Indicators 的提示：
 
@@ -132,7 +132,7 @@ multi_eval_results = {"MyFirstModel": eval_result1, "MySecondModel": eval_result
 widget_view.render_fairness_indicator(multi_eval_results=multi_eval_results)
 ```
 
-![Fairness Indicators - Model Comparison](images/fairnessIndicatorsCompare.png)
+![Fairness Indicators - 模型比较](https://gitlocalize.com/repo/4592/zh-cn/site/en-snapshot/tfx/guide/images/fairnessIndicatorsCompare.png)
 
 模型比较可以与阈值比较一起使用。例如，您可以在两组阈值下比较两个模型，以找到公平性指标的最佳组合。
 
