@@ -8,7 +8,7 @@ TensorFlow.js 可以在浏览器和 Node.js 中运行，并且在两个平台中
 
 ## 环境
 
-执行 TensorFlow.js 程序时，特定配置称为环境。环境由单个全局后端以及一组控制 TensorFlow.js 细粒度功能的标记构成。
+执行 TensorFlow.js 程序时，特定配置称为环境。环境由单个全局后端以及一组控制 TensorFlow.js 细粒度功能的标志构成。
 
 ### 后端
 
@@ -64,9 +64,9 @@ const y = tf.tidy(() => {
 
 ##### 着色器编译和纹理上传
 
-TensorFlow.js 通过运行 WebGL 着色器程序来在 GPU 上执行运算。当用户要求执行运算时，这些着色器会迟缓地进行汇编和编译。着色器的编译在 CPU 主线程上进行，可能十分缓慢。TensorFlow.js 将自动缓存已编译的着色器，从而大幅加快第二次调用具有相同形状输入和输出张量的同一运算的速度。通常，TensorFlow.js 应用在应用生命周期内会多次使用同一运算，因此第二次通过机器学习模型的速度会大幅提高。
+TensorFlow.js 通过运行 WebGL 着色器程序在 GPU 上执行运算。当用户要求执行运算时，这些着色器会迟缓地进行汇编和编译。着色器的编译在 CPU 主线程上进行，可能十分缓慢。TensorFlow.js 将自动缓存已编译的着色器，从而大幅加快第二次调用具有相同形状输入和输出张量的同一运算的速度。通常，TensorFlow.js 应用在应用生命周期内会多次使用同一运算，因此第二次通过机器学习模型的速度会大幅提高。
 
-TensorFlow.js 还会将 tf.Tensor 数据存储为 WebGLTextures。创建 `tf.Tensor` 时，我们不会立即将数据上传到 GPU，而是将数据保留在 CPU 上，直到在运算中使用到 `tf.Tensor` 为止。第二次使用 `tf.Tensor` 时，数据已位于 GPU 上，因此不存在上传成本。在典型的机器学习模型中，这意味着在模型第一次预测期间会上传权重，而第二次通过模型则会快得多。
+TensorFlow.js 还会将 tf.Tensor 数据存储为 WebGLTextures。创建 `tf.Tensor` 时，我们不会立即将数据上传到 GPU，而是将数据保留在 CPU 上，直到在运算中使用 `tf.Tensor` 为止。第二次使用 `tf.Tensor` 时，数据已位于 GPU 上，因此不存在上传成本。在典型的机器学习模型中，这意味着在模型第一次预测期间会上传权重，而第二次通过模型则会快得多。
 
 如果您在意通过模型或 TensorFlow.js 代码执行首次预测的性能，我们建议您在使用实际数据之前先通过传递相同形状的输入张量来预热模型。
 
@@ -86,9 +86,9 @@ const result = model.predict(userData);
 
 #### Node.js TensorFlow 后端
 
-在 TensorFlow Node.js 后端 'node' 中，使用 TensorFlow C API 来加速运算。这将在可用情况下使用计算机的可用硬件加速（例如 CUDA）。
+在 TensorFlow Node.js 后端 'node' 中，使用 TensorFlow C API 加速运算。这将在可用情况下使用计算机的可用硬件加速（例如 CUDA）。
 
-在这个后端中，就像 WebGL 后端一样，运算会同步返回 `tf.Tensor`。但与 WebGL 后端不同的是，运算在返回张量之前就已完成。这意味着调用 `tf.matMul(a, b)` 将阻塞 UI 线程。
+在这个后端中，就像 WebGL 后端一样，运算会同步返回 `tf.Tensor`。但与 WebGL 后端不同的是，运算在返回张量之前就已完成。这意味着调用 `tf.matMul(a, b)` 将阻塞界面线程。
 
 因此，如果打算在生产应用中使用，则应在工作线程中运行 TensorFlow.js 以免阻塞主线程。
 
@@ -117,7 +117,7 @@ tf.ready().then(() => {...});
 
 ##### 为何使用 WASM？
 
-[WASM](https://webassembly.org/) 于 2015 年作为一种基于 Web 的新型二进制格式面世，提供以 JavaScript、C、C++ 等语言编写的程序。WASM 自 2017 年起受到 Chrome、Safari、Firefox 和 Edge [支持](https://webassembly.org/roadmap/)，并获得全球 [90% 的设备](https://caniuse.com/#feat=wasm)的支持。
+[WASM](https://webassembly.org/) 于 2015 年作为一种基于 Web 的新型二进制格式面世，提供以 JavaScript、C、C++ 等语言编写的程序。WASM 自 2017 年起受到 Chrome、Safari、Firefox 和 Edge [支持](https://webassembly.org/roadmap/)，并获得全球 [90% 设备](https://caniuse.com/#feat=wasm)的支持。
 
 **性能**
 
@@ -156,7 +156,7 @@ MobileNet v2 | 37 ms | 94 ms | 923.6 ms | 13 MB
 
 上表显示，针对这些模型，WASM 比普通的 JS CPU 后端快 10-30 倍；并且针对 [BlazeFace](https://github.com/tensorflow/tfjs-models/tree/master/blazeface)（轻量化 (400KB) 但运算数量尚可 (~140)）之类的较小模型，则可与 WebGL 抗衡。考虑到 WebGL 程序每执行一次运算的固定开销成本，这就解释了像 BlazeFace 这样的模型在 WASM 上速度更快的原因。
 
-**这些结果将因您的具体设备而异。确定 WASM 是否适合您的应用的最佳方法是在我们不同的后端上对其进行测试。**
+**这些结果将因您的具体设备而异。确定 WASM 是否适合您的应用的最佳方式是在我们不同的后端上对其进行测试。**
 
 ##### 推断与训练
 
@@ -164,17 +164,17 @@ MobileNet v2 | 37 ms | 94 ms | 923.6 ms | 13 MB
 
 #### CPU 后端
 
-CPU 后端 'cpu' 是性能最低但最简单的后端。所有运算均在普通的 JavaScript 中实现，这使它们的可并行性较差。这些运算还会阻塞界面线程。
+CPU 后端 'cpu' 是性能最低且最简单的后端。所有运算均在普通的 JavaScript 中实现，这使它们的可并行性较差。这些运算还会阻塞界面线程。
 
 此后端对于测试或在 WebGL 不可用的设备上非常有用。
 
-### 标记
+### 标志
 
-TensorFlow.js 具有一组可自动评估的环境标记，这些标记可以确定当前平台中的最佳配置。大部分标记为内部标记，但有一些可以使用公共 API 控制的全局标记。
+TensorFlow.js 具有一组可自动评估的环境标志，这些标志可以确定当前平台中的最佳配置。大部分标志为内部标志，但有一些可以使用公共 API 控制的全局标志。
 
-- `tf.enableProdMode()`：启用生产模式，在此模式下将移除模型验证、NaN 检查以及其他有利于性能的正确性检查。
+- `tf.enableProdMode()`：启用生产模式，在此模式下将移除模型验证、NaN 检查和其他有利于性能的正确性检查。
 - `tf.enableDebugMode()`：启用调试模式，在此模式下会将执行的每项运算以及运行时性能信息（如内存占用量和总内核执行时间）记录到控制台。请注意，这将大幅降低您应用的速度，请勿在生产中使用。
 
-> 注：这两个方法应在使用任何 TensorFlow.js 代码之前使用，因为它们会影响将缓存的其他标记的值。出于相同的原因，没有“disable”模拟函数。
+> 注：这两个方法应在使用任何 TensorFlow.js 代码之前使用，因为它们会影响将缓存的其他标志的值。出于相同的原因，没有“disable”模拟函数。
 
-> 注：您可以通过将 `tf.ENV.features` 记录到控制台来查看所有已评估的标记。尽管它们**不是公共 API 的一部分**（因此不能保证版本之间的稳定性），但它们对于跨平台和设备进行调试或微调行为而言非常实用。您可以使用 `tf.ENV.set` 重写标记的值。
+> 注：您可以通过将 `tf.ENV.features` 记录到控制台来查看所有已评估的标志。尽管它们**不是公共 API 的一部分**（因此不能保证版本之间的稳定性），但它们对于跨平台和设备进行调试或微调行为而言非常实用。您可以使用 `tf.ENV.set` 重写标志的值。
