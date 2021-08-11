@@ -16,5 +16,4 @@ MLIR 深受 [LLVM](https://llvm.org/) 的影响，并且明显重用了后者的
 
 TensorFlow 生态系统包含许多在软件和硬件堆栈的多个级别上运行的编译器和优化器。我们希望逐步采用 MLIR 来简化此堆栈的各个方面。
 
-
-<img alt="MLIR overview diagram" src="./images/mlir-infra.svg"> 
+ <img alt="MLIR overview diagram" src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/mlir/images/mlir-infra.svg?raw=true"> 
