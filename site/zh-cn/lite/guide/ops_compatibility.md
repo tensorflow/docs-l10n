@@ -14,7 +14,7 @@ TensorFlow Lite 支持许多在常见推理模型中使用的 TensorFlow 运算�
 
 ## 支持的运算和限制
 
-TensorFlow Lite supports a subset of TensorFlow operations with some limitations. For full list of operations and limitations see [TF Lite Ops page](https://www.tensorflow.org/mlir/tfl_ops).
+TensorFlow Lite 支持一部分 TensorFlow 运算，但存在一些限制。有关运算和限制的完整列表，请参阅 [TF Lite 运算](https://www.tensorflow.org/mlir/tfl_ops)页面。
 
 ## 直接转换、常量折叠以及融合
 
