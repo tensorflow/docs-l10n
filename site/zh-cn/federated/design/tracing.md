@@ -20,7 +20,7 @@ TODO(b/153500547)：描述并链接跟踪系统的各个组件。
 
 ### 跟踪函数
 
-When tracing a `federated_computation`, the user's function is called using [value_impl.Value](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/federated_context/value_impl.py) as a stand-in replacement for each argument. `Value` attempts to emulate the behavior of the original argument type by implementing common Python dunder methods (e.g. `__getattr__`).
+跟踪 `federated_computation` 时，可以将 [value_impl.Value](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/federated_context/value_impl.py) 用作各个参数的替代来调用用户的函数。`Value` 会尝试通过实现常见的 Python dunder 方法（例如 `__getattr__`）来模拟原始参数类型的行为。
 
 具体而言，只有一个参数时，将通过以下方式执行跟踪：
 
