@@ -12,7 +12,7 @@ TensorFlow.js 中数据的中央单元为 `tf.Tensor`：一组形状为一维或
 - `shape`：定义数据每个维度的大小
 - `dtype`：定义张量的数据类型
 
-注：我们会将“维度”一词与秩互换使用。有时在机器学习中，张量的“维数”也可以指特定维度的大小（例如，形状为 [10, 5] 的矩阵为 2 秩张量或二维张量）。第一维的维数为 10。这可能会造成混淆，但由于您可能会遇到该术语的这两种说法，因此我们在此提供了此注释。
+注：我们会将“维度”一词与秩互换使用。有时在机器学习中，张量的“维数”也可以指特定维度的大小（例如，形状为 [10, 5] 的矩阵为 2 秩张量或二维张量。第一维的维数为 10。这可能会造成混淆，但由于您可能会遇到该术语的这两种说法，因此我们在此提供了此注释）。
 
 可以使用 `tf.tensor()` 方法从数组创建 `tf.Tensor`：
 
@@ -38,7 +38,7 @@ console.log('dtype', a.dtype);
 a.print();
 ```
 
-TensorFlow.js 还提供了一组便捷的方法，用于创建随机张量，填充特定值的张量、`HTMLImageElement` 中的张量，以及[此处](https://js.tensorflow.org/api/latest/#Tensors-Creation)所列的更多张量。
+TensorFlow.js 还提供了一组便捷的方法，用于创建随机张量、填充特定值的张量、`HTMLImageElement` 中的张量，以及[此处](https://js.tensorflow.org/api/latest/#Tensors-Creation)所列的更多张量。
 
 #### 更改张量的形状
 
@@ -105,9 +105,9 @@ y.print();
 
 ## 内存
 
-使用 WebGL 后端时，必须显式管理 `tf.Tensor` 内存（靠 `tf.Tensor` 超出范围以释放其内存**是不够的**）。
+使用 WebGL 后端时，必须显式管理 `tf.Tensor` 内存（即使 `tf.Tensor` 超出范围也**不足以**释放其内存）。
 
-要销毁 tf.Tensor 的内存，您可以使用 `dispose()` 方法或 `tf.dispose()`
+要销毁 tf.Tensor 的内存，您可以使用 `dispose()` 方法或 `tf.dispose()`：
 
 ```js
 const a = tf.tensor([[1, 2], [3, 4]]);
