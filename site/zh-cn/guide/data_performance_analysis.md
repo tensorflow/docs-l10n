@@ -24,7 +24,7 @@
 
 ![image](images/data_performance_analysis/get_next_fast.png "If your IteratorGetNext::DoCompute calls return quickly, `tf.data` is not your bottleneck.")
 
-**如果调用迅速返回 (<= 50 us)**，这表示您的数据在被请求时可用。输入流水线不是您的瓶颈；请参阅 [Profiler 指南](https://tensorflow.google.cn/guide/profiler)，获得更多常规性能分析提示。
+**如果调用迅速返回 (&lt;= 50 us)**，这表示您的数据在被请求时可用。输入流水线不是您的瓶颈；请参阅 [Profiler 指南](https://tensorflow.google.cn/guide/profiler)，获得更多常规性能分析提示。
 
 ![image](images/data_performance_analysis/get_next_slow.png "If your IteratorGetNext::DoCompute calls return slowly, `tf.data` is not producing data quickly enough.")
 
@@ -149,7 +149,7 @@ dataset = dataset.repeat()
 ```python
 dataset = tf.data.Dataset.from_tensor_slices(filenames)
 dataset = dataset.interleave(tf.data.TFRecordDataset,
-  num_parallel_calls=tf.data.experimental.AUTOTUNE,
+  num_parallel_calls=tf.data.AUTOTUNE,
   deterministic=False)
 ```
 
@@ -157,7 +157,7 @@ dataset = dataset.interleave(tf.data.TFRecordDataset,
 
 ##### 转换数据集
 
-如果您已确定中间 `tf.data` 转换为瓶颈，则可以通过并行处理转换或者[缓存计算](https://tensorflow.google.cn/guide/data_performance#caching)来解决此瓶颈，前提是您的数据适合装入内存并且适当。某些转换（例如 `Map`）具有并行的对应项；<a data-md-type="link" href="https://tensorflow.google.cn/guide/data_performance#parallelizing_data_transformation" class="">`tf.data` 性能指南演示了</a>如何并行处理这些对应项。其他转换（例如 `Filter`、`Unbatch` 和 `Batch`）本质上是依序的；您可以通过引入“外部并行”来并行处理它们。例如，假设您的输入流水线最初如下所示，其中瓶颈为 `Batch`：
+如果您已确定中间 `tf.data` 转换为瓶颈，则可以通过并行处理转换或者[缓存计算](https://tensorflow.google.cn/guide/data_performance#caching)来解决此瓶颈，前提是您的数据适合装入内存并且适当。某些转换（例如 `Map`）具有并行的对应项；<a data-md-type="raw_html" href="https://tensorflow.google.cn/guide/data_performance#parallelizing_data_transformation">`tf.data` 性能指南演示了</a>如何并行处理这些对应项。其他转换（例如 `Filter`、`Unbatch` 和 `Batch`）本质上是依序的；您可以通过引入“外部并行”来并行处理它们。例如，假设您的输入流水线最初如下所示，其中瓶颈为 `Batch`：
 
 ```python
 filenames = tf.data.Dataset.list_files(file_path, shuffle=is_training)
@@ -177,13 +177,13 @@ def make_dataset(shard_index):
 
 indices = tf.data.Dataset.range(NUM_SHARDS)
 dataset = indices.interleave(make_dataset,
-                             num_parallel_calls=tf.data.experimental.AUTOTUNE)
-dataset = dataset.prefetch(tf.data.experimental.AUTOTUNE)
+                             num_parallel_calls=tf.data.AUTOTUNE)
+dataset = dataset.prefetch(tf.data.AUTOTUNE)
 ```
 
 ## 其他资源
 
 - 关于如何编写高性能 `tf.data` 输入流水线的 [tf.data 性能指南](https://tensorflow.google.cn/guide/data_performance)
-- [TensorFlow 内部视频：`tf.data` 最佳做法](https://www.youtube.com/watch?v=ZnukSLKEw34)
-- [Profiler 指南](https://tensorflow.google.cn/guide/profiler)
-- [Colab 中的 Profiler 教程](https://tensorflow.google.cn/tensorboard/tensorboard_profiling_keras)
+- [Inside TensorFlow video: `tf.data` best practices ](https://www.youtube.com/watch?v=ZnukSLKEw34)
+- [Profiler guide](https://www.tensorflow.org/guide/profiler)
+- [Profiler tutorial with colab](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras)
