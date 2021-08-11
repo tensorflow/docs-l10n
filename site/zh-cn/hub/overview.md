@@ -16,7 +16,7 @@ embeddings = model(["The rain in Spain.", "falls",
 print(embeddings.shape)  #(4,128)
 ```
 
-## Next Steps
+## 后续步骤
 
 - [在 tfhub.dev 上查找模型](https://tfhub.dev)
 - [在 tfhub.dev 上发布模型](publish.md)
