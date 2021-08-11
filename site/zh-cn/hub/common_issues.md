@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2020-12-29' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-12' review_interval: '6 months' } *-->
 
 # 常见问题
 
-如果您的问题未在此处列出，请先搜索 [GitHub 问题](https://github.com/tensorflow/hub/issues)，然后再提交新问题。
+如果您的问题未在此处列出，请先搜索 [GitHub 议题](https://github.com/tensorflow/hub/issues)，然后再提交新问题。
 
 ## TypeError: 'AutoTrackable' object is not callable
 
@@ -104,3 +104,7 @@ result = session.run(embedded_text, feed_dict={text_input: ["Hello world"]})
 ## 无法更改模型的数据类型（例如，将 float32 更改为 bfloat16）
 
 TensorFlow 的 SavedModel（在 TF Hub 上或其他位置共享）包含适用于固定数据类型的运算（对于神经网络的权重和中间激活，通常使用 float32）。在加载 SavedModel 之后，将无法更改这些数据类型（但模型发布者可以选择发布具有不同数据类型的不同模型）。
+
+## 更新模型版本
+
+可以更新模型版本的文档元数据。但是，版本的资产（模型文件）不可变。如果要更改模型资产，可以发布较新版本的模型。最好使用描述版本之间变化的变更日志来扩展文档。
