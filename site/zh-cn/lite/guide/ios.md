@@ -10,9 +10,9 @@
 
 注：在各种用例中演示 TensorFlow Lite 的其他 iOS 应用可在[示例](https://www.tensorflow.org/lite/examples)中获得。
 
-## 将 TensorFlow Lite 添加到您的 Swift 或 Objective-C 项目
+## 将 TensorFlow Lite 添加到 Swift 或 Objective-C 项目
 
-TensorFlow Lite 提供用 [Swift](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/swift) 和 [Objective-C](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/objc) 编写的原生 iOS 库。将使用 [Swift 图像分类示例](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios)作为起点，开始编写自己的 iOS 代码。
+TensorFlow Lite 提供了用 [Swift](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/swift) 和 [Objective-C](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/objc) 编写的原生 iOS 库。您可以将 [Swift 图像分类示例](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios)作为起点，开始编写自己的 iOS 代码。
 
 以下各个部分演示了如何将 TensorFlow Lite Swift 或 Objective-C 添加到您的项目：
 
@@ -43,13 +43,13 @@ pod 'TensorFlowLiteObjC'
 pod 'TensorFlowLiteSwift', '~> 2.0.0'
 ```
 
-这将确保您的应用中使用的是 `TensorFlowLiteSwift` Pod 最新可用的 2.x.y 版本。或者，如果您想依赖每日构建版本，可以编写如下代码：
+这将确保您的应用中使用的是 `TensorFlowLiteSwift` Pod 最新可用的 2.x.y 版本。或者，如果您想依赖 Nightly 版本，可以编写如下代码：
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly'
 ```
 
-从 2.4.0 版本和最新的 Nightly 版本开始，默认情况下，[GPU](https://www.tensorflow.org/lite/performance/gpu) 和 [Core ML 委托](https://www.tensorflow.org/lite/performance/coreml_delegate)将从 Pod 中排除，以减少二进制文件的大小。您可以通过指定 subspec 来包含它们：
+从 2.4.0 版本和最新的 Nightly 版本开始，默认情况下，[GPU](https://www.tensorflow.org/lite/performance/gpu) 和 [Core ML 委托](https://www.tensorflow.org/lite/performance/coreml_delegate)将从 Pod 中排除，以缩减二进制文件的大小。您可以通过指定 subspec 来包含它们：
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['CoreML', 'Metal']
