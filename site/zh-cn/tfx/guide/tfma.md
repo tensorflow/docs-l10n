@@ -9,11 +9,11 @@
 TensorFlow Model Analysis 的目标是为 TFX 中的模型评估提供一种机制。TensorFlow Model Analysis 允许您在 TFX 流水线中执行模型评估，并在 Jupyter 笔记本中查看结果指标和绘图。具体来说，它可以提供：
 
 - [Metrics](../model_analysis/metrics) computed on entire training and holdout dataset, as well as next-day evaluations
-- Tracking metrics over time
-- Model quality performance on different feature slices
+- 随时间跟踪指标
+- 在不同特征切片上的模型质量性能
 - [模型验证](../model_analysis/model_validations)，用于确保模型的性能保持一致
 
-## Next Steps
+## 后续步骤
 
 阅读我们的 [TFMA 教程](../tutorials/model_analysis/tfma_basic)。
 
