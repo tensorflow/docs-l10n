@@ -30,4 +30,4 @@ bulk_inferrer = BulkInferrer(
 )
 ```
 
-More details are available in the [BulkInferrer API reference](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/BulkInferrer).
+有关更多详细信息，请参阅 [BulkInferrer API 参考](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/BulkInferrer)。
