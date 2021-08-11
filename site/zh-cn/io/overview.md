@@ -1,5 +1,4 @@
-<div align="center">   <img src="https://tensorflow.org/images/SIGIO.png" width="60%"><br><br>
-</div>
+<div align="center">   <img src="https://tensorflow.org/images/SIGIO.png" width="60%"><br><br> </div>
 
 ---
 
