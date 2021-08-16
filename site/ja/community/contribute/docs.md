@@ -56,7 +56,7 @@ TensorFlow の[ガイド](https://www.tensorflow.org/guide)と[チュートリ�
 
 ### 簡単な変更
 
-The easiest way to make straightforward documentation updates to Markdown files is to use GitHub's <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">web-based file editor</a>. Browse the [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en) repository to find the Markdown that roughly corresponds to the <a href="https://www.tensorflow.org">tensorflow.org</a> URL structure. In the upper right corner of the file view, click the pencil icon <svg version="1.1" width="14" height="16" viewbox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"></svg><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path> to open the file editor. Edit the file and then submit a new pull request.
+直接的にMarkdownファイルに更新をかける最も簡単な方法は、GitHubの<a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">WEBベースのファイルエディタ</a>を使うことです。[tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en)リポジトリをブラウジングしマークダウンを探しましょう。このリポジトリは<a href="https://www.tensorflow.org">tensorflow.org</a>のURL構造によく似ています。ファイルビューの上方右側にある鉛筆のアイコンをクリックしてください<svg version="1.1" width="14" height="16" viewbox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"></svg><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path>。するとファイルエディタが開きます。編集して新しいプルリクエストを送ってください。
 
 ### ローカル Git リポジトリを設定する
 
@@ -64,7 +64,7 @@ The easiest way to make straightforward documentation updates to Markdown files 
 
 注：<a href="https://git-scm.com/" class="external">Git</a>はオープンソースのバージョン管理システム (VCS)で、ソースコードの変更を追跡するために使われます。<a href="https://github.com" class="external">GitHub</a>は、gitを使用したコラボレーションを簡単にするオンラインサービスです。GitHubのアカウントを設定して利用するには、<a href="https://help.github.com" class="external">GitHubのヘルプ</a>を参照してください。
 
-The following Git steps are only required the first time you set up a local project.
+次のGitの手順は、ローカルプロジェクトを初めてセットアップするときにのみ必要です。
 
 #### tensorflow/docs リポジトリをフォークする
 
@@ -154,7 +154,7 @@ GitHubリポジトリから[tensorflow.org](https://www.tensorflow.org)を更新
 
 ## 対話的 notebook
 
-While it's possible to edit the notebook JSON file with GitHub's <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">web-based file editor</a>, it's not recommended since malformed JSON can corrupt the file. Make sure to test the notebook before submitting a pull request.
+GitHubの<a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">Webベースのファイルエディタ</a>でnotebookのJSONファイルを編集できますが、JSONに誤りが含まれているとファイルが破損する可能性があるので、お勧めしません。プルリクエストを発行する前にnotebookのテストを確実に行うようにしてください。
 
 <a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a>は、 ノートブックドキュメントの編集や実行を簡単にする、ホストされたノートブック環境です。GitHubのnotebookは、ColabのURLを渡してあげることで、Google Colabから読み込まれています。例えば、GitHubのここ（<a href="https://github.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">https://github.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a><br> ）に置いてあるノートブックは、Google Colabの以下のURLで読み込まれています。<br><a>https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a>
 
@@ -175,26 +175,26 @@ $ python3 -m tensorflow_docs.tools.nbfmt [options] notebook.ipynb [...]
 
 TensorFlow ドキュメントプロジェクトの場合、*出力セルなし*のノートブックは実行およびテストされます。保存された*出力セルがある*ノートブックはそのまま公開されます。`nbfmt`はノートブックの状態を尊重し、`--remove_outputs`オプションを使用して出力セルを明示的に削除します。
 
-To create a new notebook, copy and edit the <a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow docs notebook template</a>.
+Jupyter notebookを新規に作成するときは<a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow notebookテンプレート</a>をコピーして編集してください。
 
 ### Google Colab での編集作業
 
 Google Colab環境内で、セルをダブルクリックしてテキストとコードブロックを編集します。テキストセルはMarkdownを使用しており、 [TensorFlowのドキュメントスタイルガイド](./docs_style.md)に従う必要があります。
 
-Download notebook files from Colab with *File &gt; Download .pynb*. Commit this file to your [local Git repo](##set_up_a_local_git_repo) and send a pull request.
+Download notebook files from Colab with *ファイル &gt; Download.pynb*を使ってColabからJupyter notebookファイルをダウンロードしてください。ファイルをあなたの[ローカルGitリポジトリ](##set_up_a_local_git_repo)にコミットして、プルリクエストを送りましょう。
 
 Jupyter notebookを新規に作成するときは<a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow notebookテンプレート</a>をコピーして編集してください。
 
 ### Colab と GitHub のワークフロー
 
-Instead of downloading a notebook file and using a local Git workflow, you can edit and update your forked GitHub repo directly from Google Colab:
+Jupyter notebookファイルをダウンロードしてローカルGitワークフローを回す代わりに、Google ColabからあなたがフォークしたGitHubリポジトリを直接編集して、更新することができます。手順は以下のとおりです。
 
 1. フォークした <var>username</var>/docsリポジトリで、<a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">新しいブランチを作成する</a>ためにGitHub Web UIを使います。
 2.  編集する notebook ファイルに移動します。
 3. notebookをGoogle Colabで開きます。このときURLの変換にはChromeの拡張機能の*Open in Colab*を使います。
 4.  Colab で notebook を編集します。
 5. *ファイル &gt; GitHubにコピーを保存*で変更をリポジトリにコミットします。保存ダイアログは適切なリポジトリのブランチへのリンクになっているはずです。そうしたら意味のあるコミットメッセージを入力します。
-6. After saving, browse to your repo or the <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> repo, GitHub should prompt you to create a pull request.
+6. 保存した後は、あなたのリポジトリか<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a>リポジトリをブラウジングしてください。GitHub上でプルリクエストを作成するように促されるはずです。
 7.  メンテナにプルリクエストをレビューしてもらいます。
 
 成功：あなたの変更はTensorFlowドキュメントに取り込まれました。
