@@ -1,4 +1,4 @@
-# フォーラム
+# メーリングリスト
 
 コミュニティでは、公開メーリングリストを介して数多くのコラボレーションを行っています。TensorFlowの使用に関するヘルプをお探しの場合は、 まず、[Stack Overflow](https://stackoverflow.com/questions/tagged/tensorflow)と[GitHub issues](https://github.com/tensorflow/tensorflow/issues)を確認してください。
 
