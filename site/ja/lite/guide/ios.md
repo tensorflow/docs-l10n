@@ -49,7 +49,7 @@ pod 'TensorFlowLiteSwift', '~> 2.0.0'
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly'
 ```
 
-2.4.0 バージョン以降および最新のナイトリーリリースでは、バイナリサイズを減らすために、デフォルトで [GPU](https://www.tensorflow.org/lite/performance/gpu) および [Core ML  デリゲート](https://www.tensorflow.org/lite/performance/coreml_delegate) がポッドから除外されていますが、以下のようにサブスペックを指定して含めることができます。
+2.4.0 バージョン以降および最新のナイトリーリリースでは、バイナリサイズを減らすために、デフォルトで [GPU](https://www.tensorflow.org/lite/performance/gpu) および [Core ML デリゲート](https://www.tensorflow.org/lite/performance/coreml_delegate) がポッドから除外されていますが、以下のようにサブスペックを指定して含めることができます。
 
 ```ruby
 pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['CoreML', 'Metal']
