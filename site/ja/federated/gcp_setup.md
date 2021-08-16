@@ -35,7 +35,7 @@ $ cd "federated"
 
     1. Cloud Console で、[VM Instances](https://console.cloud.google.com/compute/instances) ページに移動します。
 
-    2.  **Create instance** をクリックします。
+    2. **Create instance** をクリックします。
 
     3. **Firewall** セクションで、**Allow HTTP traffic** と **Allow HTTPS traffic** を選択します。
 
@@ -94,7 +94,7 @@ $ cd "federated"
 
     1. Cloud Console で、[VM Instances](https://console.cloud.google.com/compute/instances) ページに移動します。
 
-    2.  **Create instance** をクリックします。
+    2. **Create instance** をクリックします。
 
     3. **Firewall** セクションで、**Allow HTTP traffic** と **Allow HTTPS traffic** を選択します。
 
@@ -123,7 +123,7 @@ $ cd "federated"
         --interactive \
         --tty \
         --name=tff-client \
-        --volume ~:/simulation \
+        --volume ~/:/simulation \
         --workdir /simulation \
         <registry>/tff-client \
         bash
