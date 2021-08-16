@@ -3,7 +3,7 @@
 [![Python](https://img.shields.io/pypi/pyversions/tfx.svg?style=plastic)](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)
 [![PyPI](https://badge.fury.io/py/tfx.svg)](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)
 
-## Introduction
+## 시작하기
 
 이 튜토리얼은 TensorFlow Extended(TFX)를 소개하고 자체 머신러닝 파이프라인을 만드는 방법을 배우는 데 도움이 되도록 설계되었습니다. 로컬에서 실행되며 TFX 및 TensorBoard와의 통합과 더불어 Jupyter 노트북에서 TFX와의 상호 작용도 보여줍니다.
 
@@ -11,7 +11,7 @@
 
 데이터세트를 검사하는 것으로 시작하여 완전하게 작동하는 파이프라인을 만드는 것으로 완성되는 일반적인 ML 개발 프로세스를 따릅니다. 그 과정에서 파이프라인을 디버그 및 업데이트하고 성능을 측정하는 방법을 살펴봅니다.
 
-### Learn more
+### 자세히 알아보기
 
 자세한 내용은 [TFX 사용 설명서](https://www.tensorflow.org/tfx/guide)를 참조하세요.
 
@@ -27,7 +27,7 @@
 6. [모델 성능 분석](#step_6_analyzing_model_performance)
 7. [프로덕션 준비](#step_7_ready_for_production)
 
-## Prerequisites
+## 전제 조건
 
 - Linux / MacOS
 - Virtualenv
@@ -124,7 +124,7 @@ TFX를 사용하여 ML 파이프라인을 생성하는 방법을 배우게 됩�
 일반적인 ML 개발 프로세스를 따릅니다.
 
 - 데이터 수집, 이해 및 정리
-- Feature engineering
+- 특성 엔지니어링
 - 훈련
 - 모델 성능 분석
 - 다듬고 정리하고 반복
@@ -209,7 +209,7 @@ jupyter notebook
 
 - 브라우저를 열고 http://127.0.0.1:8080으로 이동합니다.
 
-#### Troubleshooting
+#### 문제 해결
 
 웹 브라우저에서 Airflow 콘솔을 로드하는 데 문제가 있거나 `airflow webserver`를 실행할 때 오류가 발생한 경우, 포트 8080에서 다른 애플리케이션이 실행 중일 수 있습니다. 이 포트는 Airflow의 기본 포트이지만 사용되지 않는 다른 사용자 포트로 변경할 수 있습니다. 예를 들어, 포트 7070에서 Airflow를 실행하려면 다음을 실행할 수 있습니다.
 
@@ -470,7 +470,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 
 ![Ready for production](images/airflow_workshop/step7.png)
 
-## Next Steps
+## 다음 단계
 
 이제 모델을 훈련하고 유효성을 검증했고 `SavedModel` 파일을 `~/airflow/saved_models/taxi` 디렉토리 아래에 내보냈습니다. 이제 모델의 프로덕션 준비가 완료되었습니다. 이제 다음을 포함하여 모든 TensorFlow 배포 대상에 모델을 배포할 수 있습니다.
 
