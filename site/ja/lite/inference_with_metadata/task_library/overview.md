@@ -44,8 +44,8 @@ TensorFlow Lite Task ライブラリには、強力で使いやすいタスク�
 
 - Android
     - [GPU](https://www.tensorflow.org/lite/performance/gpu)
-    - [NNAPI](https://www.tensorflow.org/lite/performance/nnapi)
-    - [Hexagon](https://www.tensorflow.org/lite/performance/hexagon_delegate)
+    - NNAPI
+    - Hexagon
 - Linux / Mac
     - [Coral Edge TPU](https://coral.ai/)
 
