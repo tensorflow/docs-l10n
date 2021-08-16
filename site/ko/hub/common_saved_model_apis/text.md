@@ -62,7 +62,7 @@ If the text embedding is used as part of a model that gets trained with a distri
     ...
 ```
 
-### Examples
+### 예
 
 - Colab tutorial [Text Classification with Movie Reviews](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb).
 
