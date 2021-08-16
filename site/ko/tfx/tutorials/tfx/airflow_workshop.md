@@ -219,14 +219,14 @@ airflow webserver -p 7070
 
 #### DAG 보기 버튼
 
-![DAG buttons](images/airflow_workshop/airflow_dag_buttons.png)
+![DAG 버튼](images/airflow_workshop/airflow_dag_buttons.png)
 
 - 왼쪽에 있는 버튼을 사용하여 DAG를 *활성화*합니다.
 - 오른쪽에 있는 버튼을 사용하여 변경을 수행할 때 DAG를 *새로 고침*합니다.
 - 오른쪽에 있는 버튼을 사용하여 DAG를 *트리거*합니다.
 - 택시를 클릭하여 DAG의 그래프 보기로 이동합니다.
 
-![Graph refresh button](images/airflow_workshop/graph_refresh_button.png)
+![그래프 새로 고침 버튼](images/airflow_workshop/graph_refresh_button.png)
 
 #### Airflow CLI
 
@@ -249,7 +249,7 @@ DAG 보기에서 파이프라인을 트리거한 후, 파이프라인이 처리�
 
 지금까지는 파이프라인에 CsvExampleGen 구성 요소만 있으므로 짙은 녹색으로 변할 때까지 기다려야 합니다(~ 1분).
 
-![Setup complete](images/airflow_workshop/step2.png)
+![설정 완료](images/airflow_workshop/step2.png)
 
 ## 3단계: 데이터 고찰하기
 
@@ -283,7 +283,7 @@ DAG 보기에서 파이프라인을 트리거한 후, 파이프라인이 처리�
     - 모든 진한 녹색
     - 오른쪽에서 새로 고침을 사용하거나 페이지를 새로 고칩니다.
 
-![Dive into data](images/airflow_workshop/step3.png)
+![데이터 고찰하기](images/airflow_workshop/step3.png)
 
 ### Jupyter로 돌아가기:
 
@@ -292,7 +292,7 @@ DAG 보기에서 파이프라인을 트리거한 후, 파이프라인이 처리�
 - step3.ipynb를 엽니다.
 - 노트북을 따릅니다.
 
-![Dive into data](images/airflow_workshop/step3notebook.png)
+![데이터 고찰하기](images/airflow_workshop/step3notebook.png)
 
 ### 고급 예제
 
@@ -314,7 +314,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 
 ### 구성 요소
 
-![Transform](images/airflow_workshop/transform.png)
+![변환](images/airflow_workshop/transform.png)
 
 - [Transform](https://www.tensorflow.org/tfx/guide/transform)은 데이터세트에서 특성 엔지니어링을 수행합니다.
 
@@ -333,7 +333,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
     - 모든 진한 녹색
     - 오른쪽에서 새로 고침을 사용하거나 페이지를 새로 고칩니다.
 
-![Feature Engineering](images/airflow_workshop/step4.png)
+![특성 엔지니어링](images/airflow_workshop/step4.png)
 
 ### Jupyter로 돌아가기:
 
@@ -374,7 +374,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
     - 모든 진한 녹색
     - 오른쪽에서 새로 고침을 사용하거나 페이지를 새로 고칩니다.
 
-![Training a Model](images/airflow_workshop/step5.png)
+![모델 훈련](images/airflow_workshop/step5.png)
 
 ### Jupyter로 돌아가기:
 
@@ -383,7 +383,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 - step5.ipynb를 엽니다.
 - 노트북을 따릅니다.
 
-![Training a Model](images/airflow_workshop/step5tboard.png)
+![모델 훈련](images/airflow_workshop/step5tboard.png)
 
 ### 고급 예제
 
@@ -421,7 +421,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
     - 모든 진한 녹색
     - 오른쪽에서 새로 고침을 사용하거나 페이지를 새로 고칩니다.
 
-![Analyzing model performance](images/airflow_workshop/step6.png)
+![모델 성능 분석](images/airflow_workshop/step6.png)
 
 ### Jupyter로 돌아가기:
 
@@ -430,7 +430,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 - step6.ipynb를 엽니다.
 - 노트북을 따릅니다.
 
-![Analyzing model performance](images/airflow_workshop/step6notebook.png)
+![모델 성능 분석](images/airflow_workshop/step6notebook.png)
 
 ### 고급 예제
 
@@ -468,7 +468,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
     - 모든 진한 녹색
     - 오른쪽에서 새로 고침을 사용하거나 페이지를 새로 고칩니다.
 
-![Ready for production](images/airflow_workshop/step7.png)
+![프로덕션 준비](images/airflow_workshop/step7.png)
 
 ## 다음 단계
 
