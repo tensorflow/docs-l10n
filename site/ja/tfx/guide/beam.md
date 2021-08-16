@@ -6,7 +6,7 @@
 
 ワークロードの要件が増大するにつれ、Beam は大規模なコンピュートクラスタの非常に大規模なデプロイに合わせてスケーリングできます。唯一の制限は、その基盤にあるランナーのスケーラビリティによるものです。大規模なデプロイのランナーは通常、アプリケーションの自動デプロイ、スケーリング、および管理が可能な Kubernetes または Apache Mesos などのコンテナオーケストレーションシステムにデプロイされます。
 
-Apache Beam についての詳細は、[Apache Beam](https://beam.apache.org/) ドキュメントをご覧ください。
+Apache Beam についての詳細は、[Apache Beam](https://beam.apache.org/) ドキュメントを参照してください。
 
 Google Cloud ユーザーの場合、[Dataflow](https://cloud.google.com/dataflow) が推奨されるランナーです。これは、リソースの自動スケーリング、動的な作業のリバランス、他の Google Cloud サービスとの緊密な統合、組み込みのセキュリティ、モニタリングを通じて、サーバーレスの費用効果の高いプラットフォームを提供します。
 
@@ -29,10 +29,10 @@ TFX は、Python の依存関係を処理するために [Python パイプライ
 
 これは、次のユーザーに推奨されます。
 
-1. Python パッケージに精通していて
+1. Python パッケージに精通しているユーザー
 2. Python ソースコードのみを使用するユーザー（C モジュールや共有ライブラリは使用しない）。
 
-これを提供するには、次の beam_pipeline_args のいずれかを使用して [Python PipelineDependencies の管理](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/)のいずれかのパスに従います。
+これを提供するには、次の beam_pipeline_args のいずれかを使用して [Python パイプラインの依存関係の管理](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/)のいずれかのパスに従います。
 
 - --setup_file
 - --extra_package
@@ -42,12 +42,12 @@ TFX は、Python の依存関係を処理するために [Python パイプライ
 
 ### [Dataflow のみ]コンテナイメージをワーカーとして使用する
 
-TFX 0.26.0 以降では、Dataflow ワーカーに[カスタムコンテナイメージ](https://beam.apache.org/documentation/runtime/environments/#customizing-container-images)を使用するための実験的なサポートがあります。
+TFX 0.26.0 以降では、Dataflow ワーカーに[カスタムコンテナイメージ](https://beam.apache.org/documentation/runtime/environments/#customizing-container-images)を使用するための試験的なサポートがあります。
 
 これを使用するには、次のことを行う必要があります。
 
 - `tfx`とユーザーのカスタムコードおよび依存関係の両方がプリインストールされた Docker イメージを作成します。
-    - （1）`tfx>=0.26` を使用し、（2）python 3.7 を使用してパイプラインを開発するユーザーの場合、これを行う最も簡単な方法は、公式の`tensorflow/tfx`の対応するバージョンを拡張することです。
+    - （1）`tfx>=0.26`を使用し、（2）python 3.7 を使用してパイプラインを開発するユーザーの場合、これを行う最も簡単な方法は、公式の`tensorflow/tfx`の対応するバージョンを拡張することです。
 
 ```Dockerfile
 # You can use a build-arg to dynamically pass in the
@@ -58,7 +58,7 @@ FROM tensorflow/tfx:${TFX_VERSION}
 # COPY your code and dependencies in
 ```
 
-- ビルドされたイメージを、Dataflow で使用されるプロジェクトからアクセスできるコンテナーイメージレジストリにプッシュします。
+- ビルドされたイメージを、Dataflow で使用されるプロジェクトからアクセスできるコンテナイメージレジストリにプッシュします。
     - Google Cloud ユーザーは、上記の手順を適切に自動化する [Cloud Build](https://cloud.google.com/cloud-build/docs/quickstart-build) を使用できます。
 - 以下の`beam_pipeline_args`を提供します。
 
@@ -80,15 +80,13 @@ beam_pipeline_args.extend([
 いくつかの TFX コンポーネントは、分散データ処理のために Beam に依存しています。これらは`beam_pipeline_args`で構成されます。これは、パイプラインの作成中に指定されます。
 
 ```python
-from tfx.orchestration import pipeline
-my_pipeline = pipeline.Pipeline(
+my_pipeline = Pipeline(
     ...,
     beam_pipeline_args=[...])
 ```
 
-TFX 0.30 以降では、コンポーネントごとにパイプラインレベルのビーム引数を拡張するためのインターフェイス` with_beam_pipeline_args`が追加されています。
+TFX 0.30 以降では、コンポーネントごとにパイプラインレベルのビーム引数を拡張するためのインターフェイス`with_beam_pipeline_args`が追加されています。
 
 ```python
-from tfx.components import CsvExampleGen
 example_gen = CsvExampleGen(input_base=data_root).with_beam_pipeline_args([...])
 ```
