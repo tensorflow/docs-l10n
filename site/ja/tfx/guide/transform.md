@@ -20,7 +20,7 @@ Additionally, you may wish to provide options to the [TFDV](tfdv.md)-based pre-t
 
 ## Transform と TensorFlow Transform
 
-Transform makes extensive use of [TensorFlow Transform](tft.md) for performing feature engineering on your dataset.  TensorFlow Transform is a great tool for transforming feature data before it goes to your model and as a part of the training process. Common feature transformations include:
+Transform は、データセットに特徴量エンジニアリングを実施するために [TensorFlow Transform](tft.md) を多大に使用しています。TensorFlow Transform は特徴量データがトレーニングプロセスの一環としてモデルに送られる前に変換するための最適なツールです。以下に、一般的な特徴量変換の一部を示します。
 
 - **埋め込み**: スパース特徴量（ボキャブラリが生成した整数型 ID など）を高次元空間から低次元空間への有意義なマッピングを見つけ出して密な特徴量に変換します。埋め込みの基礎について、[機械学習における埋め込みユニットのクラッシュコース](https://developers.google.com/machine-learning/crash-course/embedding)をご覧ください。
 - **ボキャブラリ生成**: 文字列またはその他の非数値特徴量を、一意の値から ID 番号にマッピングするボキャブラリを作成して整数に変換します。
