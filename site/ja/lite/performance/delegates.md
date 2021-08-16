@@ -29,7 +29,7 @@ TensorFlow Lite は複数のデリゲートをサポートしており、各デ�
 
 #### iOS
 
-- **新しい iPhone と iPad 用 Core ML デリゲート** - Neural Engine が利用可能な最近の iPhone や iPad では、Core ML デリゲートを使用して単精度浮動小数点数を使用するモデルの推論を高速化することができます。Neural Engine は、A12 SoC 以上の Apple モバイルデバイスで利用できます。Core ML デリゲートの概要と段階的な手順については、[TensorFlow Lite Core ML デリゲート](coreml_delegate.md)をご覧ください。
+- **新しい iPhone と iPad 用 Core ML デリゲート** - Neural Engine が利用可能な最近の iPhone や iPad では、Core ML デリゲートを使用して単精度浮動小数点数または半精度浮動小数点数を使用するモデルの推論を高速化することができます。Neural Engine は、A12 SoC 以上の Apple モバイルデバイスで利用できます。Core ML デリゲートの概要と段階的な手順については、[TensorFlow Lite Core ML デリゲート](coreml_delegate.md)をご覧ください。
 
 ### モデルタイプ別のデリゲート
 
@@ -69,7 +69,7 @@ Android 64 ビット ARM アーキテクチャ用のツールのビルド済み�
 
 デリゲートは通常、対応する CPU とは異なる精度で計算を実行します。その結果、ハードウェアアクセラレーションにデリゲートを利用することに関連して、（通常はマイナーな）精度のトレードオフが発生します。これは*常に*発生するわけではありません。たとえば、GPU は浮動小数点精度を使用して量子化モデルを実行するため、わずかな精度の向上が見られる場合があります（1% 未満の ILSVRC 画像分類の上位 5 の向上）。
 
-TensorFlow Lite には、デリゲートが特定のモデルに対してどの程度正確に動作するかを測定するための 2 種類のツール*タスクベースのツール*と*タスクに依存しないツール*)があります。このセクションで説明するすべてのツールは、前のセクションのベンチマークツールで使用された[高度なデレゲーションパラメータ](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/delegates/README.md#tflite-delegate-registrar)をサポートしています。以下のサブセクションでは、モデル評価（モデル自体はタスクに適しているか？）ではなく、*デリゲート評価*（デリゲートは CPU と同じように実行されているか？）に焦点を当てていることに注意してください。
+TensorFlow Lite には、デリゲートが特定のモデルに対してどの程度正確に動作するかを測定するための 2 種類のツール（*タスクベースのツール*と*タスクに依存しないツール*）があります。このセクションで説明するすべてのツールは、前のセクションのベンチマークツールで使用された[高度なデレゲーションパラメータ](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/delegates/README.md#tflite-delegate-registrar)をサポートしています。以下のサブセクションでは、モデル評価（モデル自体はタスクに適しているか？）ではなく、*デリゲート評価*（デリゲートは CPU と同じように実行されているか？）に焦点を当てていることに注意してください。
 
 #### タスクベースの評価
 
