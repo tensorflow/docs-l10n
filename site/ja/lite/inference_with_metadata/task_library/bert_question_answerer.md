@@ -6,7 +6,7 @@ Task Library `BertQuestionAnswerer` API は Bert モデルを読み込み、特�
 
 - 質問と文脈の 2 つのテキストを入力として受け取り、可能性の高い回答のリストを出力します。
 
-- 入力するテキストに対してグラフ外の <a>Wordpiece </a> または <a>Sentencepiece</a> トークン化を実行します。
+- 入力するテキストに対してグラフ外の Wordpiece または Sentencepiece トークン化を実行します。
 
 ## サポートされている BertQuestionAnswerer モデル
 
@@ -42,6 +42,8 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
 }
 ```
+
+注意：Android Gradle プラグインのバージョン 4.1 以降、.tflite はデフォルトで noCompress リストに追加され、上記の aaptOptions は不要になりました。
 
 ### ステップ 2: API を使用して推論を実行する
 
@@ -84,11 +86,11 @@ let answers = mobileBertAnswerer.answer(
 
 ## C++ で推論を実行する
 
-注: C++ Task Library では、使いやすさを向上するために構築済みのバイナリを提供したり、ユーザーフレンドリーなワークフローを作成してソースコードから構築できるようしています。C++ API は変更される可能性があります。
-
 ```c++
 // Initialization
-std::unique_ptr<BertQuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromFile(model_file).value();
+BertQuestionAnswererOptions options;
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
+std::unique_ptr<BertQuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromOptions(options).value();
 
 // Run inference
 std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, question_to_ask);
