@@ -6,7 +6,7 @@
 
 エンドツーエンドの実行可能なモデルの構築と変換の例については、次の Colab をご覧ください。これは <em>Hello World</em> の例の一部です。
 
-<a class="button button-primary" href="https://colab.research.google.com/github/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb">train_hello_world_model.ipynb</a>
+train_hello_world_model.ipynb
 
 ## モデル変換
 
@@ -36,7 +36,7 @@ unsigned int converted_model_tflite_len = 18200;
 
 ファイルを生成したら、プログラムに含めることができます。組み込みプラットフォームでのメモリ効率を向上させるには、配列宣言を`const`に変更することが重要です。
 
-プログラムにモデルを含めて使用する方法の例については、<em>Hello World</em> の例の<a> <code>model.cc</code></a>  をご覧ください。
+プログラムにモデルを含めて使用する方法の例については、<em>Hello World</em>の例の<a> <code>model.cc</code></a>  をご覧ください。
 
 ## モデルのアーキテクチャとトレーニング
 
@@ -58,4 +58,4 @@ unsigned int converted_model_tflite_len = 18200;
 
 マイクロコントローラ向け TensorFlow Lite は、現在、限られた TensorFlow 演算のサブセットをサポートしているため実行可能なモデルアーキテクチャが影響されますが、リファレンス実装と特定のアーキテクチャの最適化における演算のサポートの拡大に取り組んでいます。
 
-サポートされている演算は、以下のファイルからご覧いただけます。[`all_ops_resolver.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.cc)
+サポートされている演算は、以下のファイルからご覧いただけます。[`all_ops_resolver.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.cc)
