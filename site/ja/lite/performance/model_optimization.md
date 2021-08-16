@@ -139,6 +139,6 @@ TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 
 まず、[ホステッドモデル](../guide/hosted_models.md)のモデルがアプリケーションで機能することを確認します。機能しない場合は、[トレーニング後の量子化ツール](post_training_quantization.md)から始めることをお勧めします。これはトレーニングデータを必要としないため、幅広く適用できます。
 
-For cases where the accuracy and latency targets are not met, or hardware accelerator support is important, [quantization-aware training](https://www.tensorflow.org/model_optimization/guide/quantization/training){:.external} is the better option. See additional optimization techniques under the [TensorFlow Model Optimization Toolkit](https://www.tensorflow.org/model_optimization).
+精度とレイテンシが不十分な場合やハードウェアアクセラレータのサポートが重要な場合は、[量子化認識トレーニング](https://www.tensorflow.org/model_optimization/guide/quantization/training){:.external}が最適なオプションです。[TensorFlow モデル最適化ツールキット](https://www.tensorflow.org/model_optimization)で追加の最適化手法をご覧ください。
 
 モデルサイズをさらに縮小する場合は、モデルを量子化する前に、[プルーニング](#pruning)や[クラスタリング](#clustering)をお試しください。
