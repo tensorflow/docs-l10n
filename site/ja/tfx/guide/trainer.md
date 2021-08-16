@@ -58,7 +58,7 @@ def run_fn(fn_args: FnArgs) -> None:
   model.save(fn_args.serving_model_dir, ...)
 ```
 
-Here is an [example module file](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils_keras.py) with `run_fn`.
+上記の [Example モジュールファイル](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils_keras.py)では `run_fn` を使用しています。
 
 Transform コンポーネントがパイプラインで使用されていない場合、Trainer は直接 ExampleGen の Example を取るところに注意してください。
 
