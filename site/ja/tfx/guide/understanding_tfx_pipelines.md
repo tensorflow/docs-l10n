@@ -11,7 +11,7 @@ MLOps は 機械学習（ML）ワークフローの自動化、管理、およ�
 
 TFX は、ML プロセスを Apache Airflow、Apache Beam、Kubeflow Pipelines などのさまざまなオーケストレータに統合しやすくするツールキットを提供することで、MLOps を実装しやすくしています。ワークフローを TFX パイプラインで実装すると、次のことを行えるようになります。
 
-- Automate your ML process, which lets you regularly retrain, evaluate, and deploy your model.
+- モデルを定期的に再トレーニングし、評価してデプロイできるように、ML プロセスを自動化する。
 - 分散化された計算リソースを使用して、ダ規模なデータセットやワークロードを処理する。
 - パイプラインをさまざまなハイパーパラメータの組み合わせで実行することで、実験を加速させる。
 
@@ -87,7 +87,7 @@ TFX パイプラインは ML ワークフローの移植可能な実装で、Apa
 
 ## TFX パイプラインテンプレート
 
-TFX Pipeline Templates make it easier to get started with pipeline development by providing a prebuilt pipeline that you can customize for your use case.
+TFX パイプラインテンプレートを使うと、事前構築済みのパイプラインをユースケースに合わせてカスタマイズできるため、パイプラインの作成をより簡単に行えます。
 
 詳細は、[TFX パイプラインテンプレートをカスタマイズする](build_tfx_pipeline#build-a-pipeline-using-a-template)をご覧ください。
 
