@@ -380,7 +380,7 @@ float* output = interpreter->typed_output_tensor<float>(0);
 
 次の例では、Python インタプリタを使用して`.tflite`ファイルを読み込み、ランダムな入力データで推論を実行する方法を示します。
 
-この例は、定義された SignatureDef がある SavedModel <br> から変換する場合に推奨されます。これは、TensorFlow 2.5 以降で利用できます。
+この例は、定義された SignatureDef がある SavedModel から変換する場合に推奨されます。これは、TensorFlow 2.5 以降で利用できます。
 
 ```python
 class TestModel(tf.Module):
