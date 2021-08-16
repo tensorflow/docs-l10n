@@ -51,21 +51,16 @@ TFX では、入力と出力は、基になるデータの場所とそれに関�
 完成した関数コンポーネントは次のようになります。
 
 ```python
-from tfx.dsl.component.experimental.annotations import OutputDict
-from tfx.dsl.component.experimental.annotations import InputArtifact
-from tfx.dsl.component.experimental.annotations import OutputArtifact
-from tfx.dsl.component.experimental.annotations import Parameter
+import tfx.v1 as tfx
 from tfx.dsl.component.experimental.decorators import component
-from tfx.types.standard_artifacts import Examples
-from tfx.types.standard_artifacts import Model
 
 @component
 def MyTrainerComponent(
-    training_data: InputArtifact[Examples],
-    model: OutputArtifact[Model],
+    training_data: tfx.dsl.components.InputArtifact[tfx.types.standard_artifacts.Examples],
+    model: tfx.dsl.components.OutputArtifact[tfx.types.standard_artifacts.Model],
     dropout_hyperparameter: float,
-    num_iterations: Parameter[int] = 10
-    ) -> OutputDict(loss=float, accuracy=float):
+    num_iterations: tfx.dsl.components.Parameter[int] = 10
+    ) -> tfx.v1.dsl.components.OutputDict(loss=float, accuracy=float):
   '''My simple trainer component.'''
 
   records = read_examples(training_data.uri)
