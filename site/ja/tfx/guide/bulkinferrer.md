@@ -21,11 +21,7 @@ BulkInferrer TFX コンポーネントは、ラベル無しの tf.Examples に�
 次は、典型的なコードです。
 
 ```python
-from tfx import components
-
-...
-
-bulk_inferrer = components.BulkInferrer(
+bulk_inferrer = BulkInferrer(
     examples=examples_gen.outputs['examples'],
     model=trainer.outputs['model'],
     model_blessing=evaluator.outputs['blessing'],
@@ -34,4 +30,4 @@ bulk_inferrer = components.BulkInferrer(
 )
 ```
 
-より詳細な情報は、[BulkInferrer API リファレンス](https://www.tensorflow.org/tfx/api_docs/python/tfx/components/BulkInferrer)をご覧ください。
+より詳細な情報は、[BulkInferrer API リファレンス](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/BulkInferrer)をご覧ください。
