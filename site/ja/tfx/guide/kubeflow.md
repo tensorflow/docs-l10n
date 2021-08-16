@@ -1,7 +1,7 @@
 # TFX パイプラインのオーケストレーション
 
-## Kubeflow Pipelines
+## Kubeflow パイプライン
 
-[Kubeflow](https://www.kubeflow.org/) is an open source ML platform dedicated to making deployments of machine learning (ML) workflows on Kubernetes simple, portable and scalable. [Kubeflow Pipelines](https://www.kubeflow.org/docs/pipelines/pipelines-overview/) is part of the Kubeflow platform that enables composition and execution of reproducible workflows on Kubeflow, integrated with experimentation and notebook based experiences. Kubeflow Pipelines services on Kubernetes include the hosted Metadata store, container based orchestration engine, notebook server, and UI to help users develop, run, and manage complex ML pipelines at scale. The Kubeflow Pipelines SDK allows for creation and sharing of components and composition and of pipelines programmatically.
+[Kubeflow](https://www.kubeflow.org/) は、Kebernetes での機械学習（ML）フレームワークのデプロイを単純で移植可能かつスケーラブルにすることに専念したオープンソースの ML プラットフォームです。[Kubeflow パイプライン](https://www.kubeflow.org/docs/pipelines/pipelines-overview/)は Kubeflow プラットフォームの一環として Kubernetes で再現可能なワークフローの作成と実行を可能にし、実験とノートブックに基づくエクスペリエンスが備わっています。Kubernetes の Kubeflow パイプラインサービスには、ホスティングされたメタデータ保存、コンテナベースのオーケストレーションエンジン、ノートブックサーバー、およびユーザーによる複雑な ML パイプラインを大規模に開発、実行、および管理を支援する UI が含まれます。Kubeflow Pipelines SDK を使用すると、コンポーネントとパイプラインの作成と共有をプログラミングで行えます。
 
-See the [TFX example on Kubeflow Pipelines](https://www.tensorflow.org/tfx/tutorials/tfx/cloud-ai-platform-pipelines) for details on running TFX at scale on Google cloud.
+Google Cloud での大規模な TFX の実行についての詳細は、[Kuberflow パイプラインの TFX の例](https://www.tensorflow.org/tfx/tutorials/tfx/cloud-ai-platform-pipelines)をご覧ください。
