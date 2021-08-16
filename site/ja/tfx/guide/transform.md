@@ -1,9 +1,9 @@
 # Transform TFX パイプラインコンポーネント
 
-The Transform TFX pipeline component performs feature engineering on tf.Examples emitted from an [ExampleGen](examplegen.md) component, using a data schema created by a [SchemaGen](schemagen.md) component, and emits both a SavedModel as well as statistics on both pre-transform and post-transform data.  When executed, the SavedModel will accept tf.Examples emitted from an ExampleGen component and emit the transformed feature data.
+Transform TFX パイプラインコンポーネントは [ExampleGen](examplegen.md) コンポーネントから出力された tf.Examples に、[SchemaGen](schemagen.md) が作成したデータスキーマを使用して特徴量エンジニアリングを実施し、SavedModel、および、変換前と変換後の両方のデータに関する統計を出力します。その SavedModel は、実行されると ExampleGen コンポーネントが出力した tf.Examples を受け入れて、変換された特徴量データを出力します。
 
 - 消費: ExampleGen コンポーネントの tf.Examples、SchemaGen コンポーネントのデータスキーマ
-- Emits: A SavedModel to a Trainer component, pre-transform and post-transform statistics.
+- 出力: SavedModel、および、変換前および変換後の統計を Trainer コンポーネントに出力。
 
 ## Transform コンポーネントを構成する
 
@@ -16,7 +16,7 @@ transform = Transform(
     module_file=os.path.abspath(_taxi_transform_module_file))
 ```
 
-Additionally, you may wish to provide options to the [TFDV](tfdv.md)-based pre-transform or post-transform statistics computation. To do so, define a `stats_options_updater_fn` within the same module.
+さらに、[TFDV](tft.md) ベースの変換前または変換後の統計計算にオプションを提供することもできます。これを行うには、同じモジュール内で `stats_options_updater_fn` を定義します。
 
 ## Transform と TensorFlow Transform
 
@@ -46,7 +46,7 @@ Apache Beam を使った値の計算に加え、TensorFlow Transform ではユ�
 
 プリプロセッシングはグラフとして表現されているため、サーバーで発生することができ、トレーニングとサービング間の一貫性が保証されます。この一貫性により、トレーニング/サービングスキューの原因の 1 つを消し去られます。
 
-TensorFlow Transform allows users to specify their preprocessing pipeline using TensorFlow code. This means that a pipeline is constructed in the same manner as a TensorFlow graph. If only TensorFlow ops were used in this graph, the pipeline would be a pure map that accepts batches of input and returns batches of output. Such a pipeline would be equivalent to placing this graph inside your `input_fn` when using the `tf.Estimator` API. In order to specify full-pass operations such as computing quantiles, TensorFlow Transform provides special functions called `analyzers` that appear like TensorFlow ops, but in fact specify a deferred computation that will be done by Apache Beam, and the output inserted into the graph as a constant. While an ordinary TensorFlow op will take a single batch as its input, perform some computation on just that batch and emit a batch, an `analyzer` will perform a global reduction (implemented in Apache Beam) over all batches and return the result.
+TensorFlow Transform では、TensorFlow コードを使用してプリプロセッシングパイプラインを指定することができます。つまり、パイプラインは TensorFlow グラフと同じ方法で構築されるということです。このグラフに TensorFlow 演算のみが使用されている場合、パイプラインは入力バッチを受け入れて出力バッチを返す純粋なマップとなります。そのようなパイプラインは、`tf.Estimator` API を使用する場合に `input_fn` 内にこのグラフを配置することと同じことです。数量を計算するなどのフルパス演算を指定するために、TensorFlow Transform には、外見的に TensorFlow 演算に似ているが、実際には Apache Beam が実行し、出力が定数としてグラフに挿入される遅延計算を指定する `analyzer` と呼ばれる特殊関数が備わっています。通常の TensorFlow 演算が 1 つのバッチを入力として取り、そのバッチで計算を行ってバッチを出力するのに対し、`analyzer` はすべてのバッチに対してグローバル簡約 (Apache Beam に実装) を実施して結果を返します。
 
 通常の TensorFlow 演算と TensorFlow Transform analyzer を組み合わせると、データを事前処理する複雑なパイプラインを作成することができます。たとえば、`tft.scale_to_z_score` 関数は入力テンソルを取り、平均 `0` と分散 `1` を持つように正規化されたテンソルを返します。内部的には `mean` と `var` analyzer を呼び出してこれを実施しており、こうすることで入力テンソルの平均と分散に等しい定数がグラフ内に効果的に生成されます。その後 TensorFlow 演算を使用して、平均の減算と標準偏差による除算が行われます。
 
@@ -135,11 +135,11 @@ def _preprocessing_fn(inputs):
   ...
 ```
 
-The preprocessing function above takes the raw input feature (which will also be returned as part of the output of the preprocessing function) and calls `tft.vocabulary` on it. This results in a vocabulary being generated for `education` that can be accessed in the model.
+上記のプリプロセッシング関数は生の入力特徴量 (プリプロセッシング関数の出力の一環としても返されます) を取り、それに対して `tft.uniques` を呼び出します。これにより、モデルでアクセスできる `education` のボキャブラリが生成されます。
 
 この例では、ラベルを変換してから、変換されたラベルのボキャブラリを生成する方法も示しています。具体的には、生のラベル `education` を取り、ラベルを整数に変換せずに、上位 5 つ（頻度別）のラベルを除くすべてのラベルを `UNKNOWN` に変換しています。
 
-In the model code, the classifier must be given the vocabulary generated by `tft.vocabulary` as the `label_vocabulary` argument. This is done by first reading this vocabulary as a list with a helper function. This is shown in the snippet below. Note the example code uses the transformed label discussed above but here we show code for using the raw label.
+モデルのコードでは、分類子に、`tft.uniques` が生成したボキャブラリを `label_vocabulary` 引数として指定する必要があります。これは、最初にヘルパー関数を使ってこのボキャブラリをリストとして読み取って行います。これは以下のスニペットで示されています。サンプルコードでは上記で説明した変換済みのラベルが使用されていますが、ここでは生のラベルを使用するためのコードを示します。
 
 ```python
 def create_estimator(pipeline_inputs, hparams):
@@ -160,9 +160,9 @@ def create_estimator(pipeline_inputs, hparams):
       ...)
 ```
 
-## Configuring pre-transform and post-transform statistics
+## 変換前および変換後の統計の構成
 
-As mentioned above, the Transform component invokes TFDV to compute both pre-transform and post-transform statistics. TFDV takes as input an optional [StatsOptions](https://github.com/tensorflow/datavalidation/blob/master/tensorflow_data_validation/statistics/stats_options.py) object. Users may wish to configure this object to enable certain additonal statistics (e.g. NLP statistics) or to set thresholds that are validated (e.g. min / max token frequency). To do so, define a `stats_options_updater_fn` in the module file.
+上記のように、変換コンポーネントは TFDV を呼び出して、変換前と変換後の両方の統計を計算します。TFDV は、オプションの [StatsOptions](https://github.com/tensorflow/datavalidation/blob/master/tensorflow_data_validation/statistics/stats_options.py) オブジェクトを入力として受け取ります。ユーザーには、特定の追加統計 (NLP 統計など) を有効にするか、検証されるしきい値 (最小/最大トークン頻度) を設定するようにこのオブジェクトを構成することをお勧めします。これを行うには、モジュールファイルで `stats_options_updater_fn` を定義します。
 
 ```python
 def stats_options_updater_fn(stats_type, stats_options):
@@ -178,4 +178,4 @@ def stats_options_updater_fn(stats_type, stats_options):
   return stats_options
 ```
 
-Post-transform statistics often benefit from knowledge of the vocabulary being used for preprocessing a feature. The vocabulary name to path mapping is is provided to StatsOptions (and hence TFDV) for every TFT-generated vocabulary. Additionally, mappings for externally-created vocabularies can be added by either (i) directly modifying the `vocab_paths` dictionary within StatsOptions or by (ii) using `tft.annotate_asset`.
+多くの場合、特徴量の前処理に使用されたボキャブラリに関する知識は変換後の統計に有用です。ボキャブラリ名からパスへのマッピングは、TFT で生成されたすべてのボキャブラリの StatsOptions (したがって TFDV) に提供されます。また、外部で作成されたボキャブラリのマッピングは、(i) StatsOptions 内の `vocab_paths` ディクショナリを直接変更するか、(ii) `tft.annotate_asset`を使用して追加できます。
