@@ -37,9 +37,11 @@ dependencies {
     // Other dependencies
 
     // Import the Task Text Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.2.0'
 }
 ```
+
+注：Android Gradle プラグインのバージョン 4.1 以降、.tflite はデフォルトで noCompress リストに追加され、上記の aaptOptions は不要になりました。
 
 ### ステップ 2: API を使用して推論を実行する
 
@@ -62,7 +64,7 @@ Podfile に TensorFlowLiteTaskText ポッドを追加します
 ```
 target 'MySwiftAppWithTaskAPI' do
   use_frameworks!
-  pod 'TensorFlowLiteTaskText', '~> 0.0.1-nightly'
+  pod 'TensorFlowLiteTaskText', '~> 0.2.0'
 end
 ```
 
@@ -81,11 +83,11 @@ let categories = bertNLClassifier.classify(text: input)
 
 ## C++ で推論を実行する
 
-注: C++ Task Library では、使いやすさを向上するために構築済みのバイナリを提供したり、ユーザーフレンドリーなワークフローを作成してソースコードから構築できるようしています。C++ API は変更される可能性があります。
-
 ```c++
 // Initialization
-std::unique_ptr<BertNLClassifier> classifier = BertNLClassifier::CreateFromFile(model_path).value();
+BertNLClassifierOptions options;
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
+std::unique_ptr<BertNLClassifier> classifier = BertNLClassifier::CreateFromOptions(options).value();
 
 // Run inference
 std::vector<core::Category> categories = classifier->Classify(kInput);
