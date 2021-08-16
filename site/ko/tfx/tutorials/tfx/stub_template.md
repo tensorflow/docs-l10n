@@ -1,6 +1,6 @@
 ## 스텁 실행기를 사용하여 파이프라인 테스트하기
 
-### Introduction
+### 시작하기
 
 **이 튜토리얼을 진행하려면 *6단계*까지 [template.ipynb](https://github.com/tensorflow/tfx/blob/master/docs/tutorials/tfx/template.ipynb) 튜토리얼을 완료해야 합니다.**
 
