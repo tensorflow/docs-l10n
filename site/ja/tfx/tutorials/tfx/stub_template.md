@@ -97,10 +97,10 @@ tfx run create --pipeline-name $pipeline_name --endpoint=$endpoint \
   --engine=kubeflow
 ```
 
-## Cleaning up
+## クリーンアップ
 
 コマンド `fg` を使用してバックグラウンドでポート転送にアクセスし、次に ctrl-C を使用して終了します。`gsutil -m rm -R $output_dir` を使用すると、パイプライン出力が記録されているディレクトリを削除できます。
 
-To clean up all Google Cloud resources used in this project, you can [delete the Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects#shutting_down_projects) you used for the tutorial.
+このプロジェクトで使用されているすべての Google Cloud リソースをクリーンアップするには、チュートリアルで使用した [Google Cloud プロジェクトを削除](https://cloud.google.com/resource-manager/docs/creating-managing-projects#shutting_down_projects)します。
 
 または、各コンソール ([Google Cloud Storage](https://console.cloud.google.com/storage) - [Google Container Registry](https://console.cloud.google.com/gcr) - [Google Kubernetes Engine](https://console.cloud.google.com/kubernetes)) にアクセスして、個々のリソースをクリーンアップできます。
