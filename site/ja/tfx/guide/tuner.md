@@ -21,7 +21,7 @@ Tuner は次を取り込みます。
 
 特定のデータ、モデル、および目的を使用して、Tuner はハイパーパラメータをチューニング氏、最善の結果を出力します。
 
-## Instructions
+## 手順
 
 Tuner には次のシグネチャーによるユーザーモジュール関数 `tuner_fn` が必要です。
 
@@ -178,4 +178,4 @@ tuner = google_cloud_ai_platform.Tuner(
 
 [提案](https://github.com/tensorflow/community/blob/master/rfcs/20200420-tfx-tuner-component.md)
 
-More details are available in the [Tuner API reference](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/Tuner).
+より詳細な情報は、[Tuner API リファレンス](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/Tuner)をご覧ください。
