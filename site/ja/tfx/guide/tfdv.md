@@ -4,67 +4,67 @@
 
 データを分析および変換する理由はいくつもあります。
 
-- To find problems in your data. Common problems include:
-    - Missing data, such as features with empty values.
-    - Labels treated as features, so that your model gets to peek at the right answer during training.
-    - Features with values outside the range you expect.
-    - Data anomalies.
+- データ内の問題を見つけるため。一般的な問題には次のようなものがあります。
+    - 値が空の特徴量があるなど、欠損したデータ
+    - ラベルが特徴量として処理されている。この場合、モデルはトレーニング中に正解を確認してしまいます。
+    - 期待する範囲から外れた値のある特徴量
+    - 異常なデータ
     - 転移学習で作成されたモデルには、トレーニングデータと一致しない前処理があります。
-- To engineer more effective feature sets. For example, you can identify:
+- より効果的な特徴量を構築するため。たとえば、次の項目を特定できます。
     - 特に有用な特徴量
-    - Redundant features.
-    - Features that vary so widely in scale that they may slow learning.
-    - Features with little or no unique predictive information.
+    - 冗長特徴量
+    - 広い値域に渡って分布しているため、学習速度が遅くなる可能性のある特徴量
+    - 予測情報がほとんどない、または一意でない特徴量
 
-TFX tools can both help find data bugs, and help with feature engineering.
+TFX ツールはデータ内のバグの検出と特徴量エンジニアリングの両方に役立ちます。
 
 ## TensorFlow Data Validation
 
-- [Overview](#overview)
-- [Schema Based Example Validation](#schema_based_example_validation)
-- [Training-Serving Skew Detection](#skewdetect)
-- [Drift Detection](#drift_detection)
+- [概要](#overview)
+- [スキーマに基づく Example の検証](#schema_based_example_validation)
+- [トレーニング/サービングスキューの検出](#skewdetect)
+- [ドリフト検出](#drift_detection)
 
 ### 概要
 
-TensorFlow Data Validation identifies anomalies in training and serving data, and can automatically create a schema by examining the data. The component can be configured to detect different classes of anomalies in the data. It can
+TensorFlow Data Validation はトレーニングデータやサービングデータの特異点を特定し、そのデータの検査によって自動的にスキーマを作成することができます。データに含まれるさまざまな種類の特異点を検出するようにコンポーネントを構成することが可能で、次の項目を実行できます。
 
-1. Perform validity checks by comparing data statistics against a schema that codifies expectations of the user.
-2. Detect training-serving skew by comparing examples in training and serving data.
-3. Detect data drift by looking at a series of data.
+1. データの統計量を、ユーザーの期待を記述したスキーマと比較することで妥当性チェックを実行する。
+2. トレーニングデータとサービングデータの例を比較して、トレーニング/サービングスキューを検出する。
+3. データの系列を確認することで、データドリフトを検出する。
 
-We document each of these functionalities independently:
+これらの機能について、個別に説明します。
 
-- [Schema Based Example Validation](#schema_based_example_validation)
-- [Training-Serving Skew Detection](#skewdetect)
-- [Drift Detection](#drift_detection)
+- [スキーマに基づく Example の検証](#schema_based_example_validation)
+- [トレーニング/サービングスキューの検出](#skewdetect)
+- [ドリフト検出](#drift_detection)
 
 ### スキーマに基づく Example の検証
 
-TensorFlow Data Validation identifies any anomalies in the input data by comparing data statistics against a schema. The schema codifies properties which the input data is expected to satisfy, such as data types or categorical values, and can be modified or replaced by the user.
+TensorFlow Data Validation は、データの統計をスキーマと比較することで、入力データ内の特異点を特定します。このスキーマは、入力データが満たすと期待されるデータ型やカテゴリ値といったプロパティを記述したもので、ユーザーによる変更や置換が可能です。
 
 Tensorflow Data Validation は通常、TFX パイプラインのコンテキストで (i) ExampleGen から取得されたすべての分割、(ii) Transform により使用されるすべての変換前データ、および (iii) Transform により生成されたすべての変換後データに対して複数回呼び出されます 。Transform (ii-iii) のコンテキストで呼び出される場合、統計オプションとスキーマベースの制約は、[`stats_options_updater_fn`](tft.md) を定義することで設定できます。これは、非構造化データ (テキストデータの特徴量など) を検証するときに特に役立ちます。例については、[ユーザーコード](https://github.com/tensorflow/tfx/blob/master/tfx/examples/bert/mrpc/bert_mrpc_utils.py)を参照してください。
 
 #### スキーマの高度な機能
 
-This section covers more advanced schema configuration that can help with special setups.
+このセクションでは特殊なセットアップに役立つ、高度なスキーマの構成について説明します。
 
 ##### スパースな特徴量
 
-Encoding sparse features in Examples usually introduces multiple Features that are expected to have the same valency for all Examples. For example the sparse feature:
+Example に現れるスパースな特徴量をエンコードすると、通常、すべての Example で同じ値を取ることが期待される複数の特徴量が導入されます。たとえば、次に示すスパースな特徴量があるとします。
 
 <pre><code>
 WeightedCategories = [('CategoryA', 0.3), ('CategoryX', 0.7)]
 </code></pre>
 
-would be encoded using separate Features for index and value:
+この特徴量は、インデックスと値に個別の特徴量を使用することでエンコードできます。
 
 <pre><code>
 WeightedCategoriesIndex = ['CategoryA', 'CategoryX']
 WeightedCategoriesValue = [0.3, 0.7]
 </code></pre>
 
-with the restriction that the valency of the index and value feature should match for all Examples. This restriction can be made explicit in the schema by defining a sparse_feature:
+ただし、インデックスと値特徴量の価数はすべての Example で一致する必要があります。この制約は sparse_feature を定義することで、スキーマに明示的に指定できます。
 
 <pre><code class="lang-proto">
 sparse_feature {
@@ -85,7 +85,7 @@ sparse_feature {
 例として、'LABEL' という特徴量はトレーニング時には必要なものの、本番環境では欠損していることが期待される場合を考察しましょう。これは次のようにして表現できます。
 
 - スキーマで異なる 2 つの環境 ["SERVING", "TRAINING"] を定義し、'LABEL' を "TRAINING" 環境にだけ関連付けます。
-- Associate the training data with environment "TRAINING" and the serving data with environment "SERVING".
+- トレーニングデータを "TRAINING" 環境に、サービングデータを "SERVING" 環境に関連付けます。
 
 ##### スキーマ生成
 
@@ -93,7 +93,7 @@ sparse_feature {
 
 スキーマを初めから手動で構成する代わりに、TensorFlow Data Validation の自動スキーマ構成機能を利用することができます。具体的には、パイプラインで利用可能なトレーニングデータをもとに計算された統計量に基づいて、TensorFlow Data Validation が自動的に構築したスキーマを最初のバージョンとして利用することができます。ユーザーは単に、自動的に生成されたスキーマを確認し、必要であれば修正し、バージョン管理システムに登録して、さらなる検証のためにパイプラインに明示的に組み込むだけが必要となります。
 
-TFDV includes `infer_schema()` to generate a schema automatically.  For example:
+TFDV にはスキーマを自動的に生成するための `infer_schema()` が含まれています。これは次のようにして利用できます。
 
 ```python
 schema = tfdv.infer_schema(statistics=train_stats)
@@ -106,25 +106,25 @@ tfdv.display_schema(schema=schema)
 
 - それ以外の場合、TensorFlow Data Validation は利用可能なデータの統計量を確認し、データにあったスキーマを計算します。
 
-*Note: The auto-generated schema is best-effort and only tries to infer basic properties of the data. It is expected that users review and modify it as needed.*
+*注意: 自動生成されたスキーマはベストエフォートのもので、データの基本的なプロパティだけを推論しようとします。ユーザーが確認し、必要に応じて修正することが期待されています。*
 
-### Training-Serving Skew Detection<a name="skewdetect"></a>
+### トレーニング/サービングスキューの検出<a name="skewdetect"></a>
 
 #### 概要
 
-TensorFlow Data Validation can detect distribution skew between training and serving data. Distribution skew occurs when the distribution of feature values for training data is significantly different from serving data. One of the key causes for distribution skew is using either a completely different corpus for training data generation to overcome lack of initial data in the desired corpus. Another reason is a faulty sampling mechanism that only chooses a subsample of the serving data to train on.
+TensorFlow Data Validation は、トレーニングデータとサービングデータ間の分布の歪みを検出できます。分布の歪みは、トレーニングデータの特徴量値の分布がサービングデータのものと大幅に異なる場合に発生します。分布に歪みが生じる主な原因の 1 つに、対象のコーパスにおける初期データの欠落を克服するために、トレーニングデータの生成に完全に異なるコーパスが使用されることが挙げられます。また、トレーニングするサービングデータのサブサンプルのみを選択するという、仕組みに存在する欠陥が別の原因として挙げられます。
 
 ##### シナリオの例
 
-Note: For instance, in order to compensate for an underrepresented slice of data, if a biased sampling is used without upweighting the downsampled examples appropriately, the distribution of feature values between training and serving data gets artificially skewed.
+注意: たとえば、データに出現しなかったスライスを補間するために、アップウェイティングもダウンサンプリングも適切に行われなかった、バイアスの生じたサンプリングが用いられた場合、トレーニングデータとサービングデータの間で特徴量の分布に大きな偏りが生じるでしょう。
 
-See the [TensorFlow Data Validation Get Started Guide](https://www.tensorflow.org/tfx/data_validation/get_started#checking_data_skew_and_drift) for information about configuring training-serving skew detection.
+トレーニング/サービススキュー検出に関する詳細は、[TensorFlow Data Validation 入門ガイド](https://www.tensorflow.org/tfx/data_validation/get_started#checking_data_skew_and_drift)をご覧ください。
 
-### Drift Detection
+### ドリフト検出
 
-Drift detection is supported between consecutive spans of data (i.e., between span N and span N+1), such as between different days of training data. We express drift in terms of [L-infinity distance](https://en.wikipedia.org/wiki/Chebyshev_distance) for categorical features and approximate [Jensen-Shannon divergence](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence) for numeric features. You can set the threshold distance so that you receive warnings when the drift is higher than is acceptable. Setting the correct distance is typically an iterative process requiring domain knowledge and experimentation.
+ドリフト検出は、トレーニング日数が異なるなど、連続したスパンのデータ（スパン N とスパン N+1 間）でサポートされています。ドリフトは、カテゴリ特徴量については [L-無限大距離](https://en.wikipedia.org/wiki/Chebyshev_distance) として表現され、数値特徴量については [ジェンセン・シャノン情報量](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence)に近似されます。ドリフトが許容を超える際に警告を受け取れるよう、しきい値距離を設定することが可能です。正しい距離の設定は一般的に、ドメイン知識や事件が必要な反復プロセスになります。
 
-See the [TensorFlow Data Validation Get Started Guide](https://www.tensorflow.org/tfx/data_validation/get_started#checking_data_skew_and_drift) for information about configuring drift detection.
+ドリフト検出の構成に関する詳細は、[TensorFlow Data Validation 入門ガイド](https://www.tensorflow.org/tfx/data_validation/get_started#checking_data_skew_and_drift)をご覧ください。
 
 ## データの確認のための可視化の利用
 
@@ -134,60 +134,60 @@ TensorFlow Data Validation は特徴量の分布を可視化するためのツ�
 
 ### 疑わしい分布の識別
 
-You can identify common bugs in your data by using a Facets Overview display to look for suspicious distributions of feature values.
+Facets Overview の表示を用いて特徴量の疑わしい分布を探すことにより、データの一般的なバグを特定できます。
 
 #### 不均衡データ
 
-An unbalanced feature is a feature for which one value predominates. Unbalanced features can occur naturally, but if a feature always has the same value you may have a data bug. To detect unbalanced features in a Facets Overview, choose "Non-uniformity" from the "Sort by" dropdown.
+不均衡な特徴量とは、単一の値のみが圧倒的に多いような特徴量を指します。不均衡な特徴量は自然に出現するものですが、ある特徴量が常に同じ値である場合は、データにバグがあるかもしれません。Facets Overview で不均衡な特徴量を検出するには、"Sort by" ドロップダウンから "Non-uniformity" を選択してください。
 
-The most unbalanced features will be listed at the top of each feature-type list. For example, the following screenshot shows one feature that is all zeros, and a second that is highly unbalanced, at the top of the "Numeric Features" list:
+それぞれの特徴量の型ごとに、最も不均衡な特徴量がリストのトップに表示されます。一例として、次のスクリーンショットは "Numeric Feature" リストから、最初の特徴量はすべての値がゼロであること、2 番めの特徴量は極めて不均衡であることを示しています。
 
-![Visualization of unbalanced data](images/unbalanced.png)
+![不均衡なデータの視覚化](images/unbalanced.png)
 
 #### 一様分布に従うデータ
 
 一様分布に従う特徴量はすべての取りうる値が同じ程度の頻度で出現する特徴量です。不均衡データと同様に、この分布は自然に生じます。しかし、データのバグによっても引き起こされます。
 
-To detect uniformly distributed features in a Facets Overview, choose "Non- uniformity" from the "Sort by" dropdown and check the "Reverse order" checkbox:
+Facets Overview を用いて一様分布に従う特徴量を検出するには、次のように "Sort by" ドロップダウンから "Non-uniformly" を選択し、"Reverse order" のチェックボックスをオンにします。
 
-![Histogram of uniform data](images/uniform.png)
+![一様データのヒストグラム](images/uniform.png)
 
-String data is represented using bar charts if there are 20 or fewer unique values, and as a cumulative distribution graph if there are more than 20 unique values. So for string data, uniform distributions can appear as either flat bar graphs like the one above or straight lines like the one below:
+文字列データは、一意な値が 20 個以下の場合には棒グラフを用い、20 個を超える場合には累積分布グラフを用いて表されます。したがって文字列データの場合、一様分布は上の図のような平坦な棒グラフか、次のような直線として現れます。
 
-![Line graph: cumulative distribution of uniform data](images/uniform_cumulative.png)
+![線グラフ: 一様データの累積分布](images/uniform_cumulative.png)
 
 ##### 一様分布を生成しうるバグの例
 
-Here are some common bugs that can produce uniformly distributed data:
+一様分布を生成する一般的なバグを次に示します。
 
-- Using strings to represent non-string data types such as dates. For example, you will have many unique values for a datetime feature with representations like "2017-03-01-11-45-03". Unique values will be distributed uniformly.
+- 日付のような文字列でないデータを文字列として扱っている。たとえば、datetime 型の特徴量が "2017-03-01-11-45-03" のように表現した、多くの一意な値が現れます。この一意な値は一様に分布されます。
 
-- Including indices like "row number" as features. Here again you have many unique values.
+- "行数" などのインデックスが特徴量として含まれている。この場合も多くの一意な値が現れます。
 
 #### データの欠損
 
-To check whether a feature is missing values entirely:
+特徴量の値が完全に欠落しているかを調べるには次を行います。
 
 1. "Sort by" ドロップダウンから "Amount missing/zero" を選択します。
 2. "Reverse order" チェックボックスをオンにします。
 3. "missing" 列を見て、特徴量に含まれる欠損値の割合を確認します。
 
-A data bug can also cause incomplete feature values. For example you may expect a feature's value list to always have three elements and discover that sometimes it only has one. To check for incomplete values or other cases where feature value lists don't have the expected number of elements:
+データのバグは特徴量に含まれる不完全な値の原因になりえます。たとえば、特徴量のリストには常に 3 つの値が入っていることを期待していたものの、実際には 1 つの値しか入っていないことを見つけたとします。ほかに不完全な値が発生していたり、特徴量のリストに期待するだけの数の要素が含まれていないものを見つける場合には、次のようにします。
 
 1. 右側の "Chart to show" ドロップダウンから、"Value list length" を選択します。
 
-2. Look at the chart to the right of each feature row. The chart shows the range of value list lengths for the feature. For example, the highlighted row in the screenshot below shows a feature that has some zero-length value lists:
+2. それぞれの特徴量の行の右側に表示されたグラフを確認します。グラフはその特徴量に含まれるリストの長さの範囲を表しています。たとえば、次のスクリーンショットの中でハイライトされている行は、特徴量中に長さゼロのリストが含まれていることを示しています。
 
-![Facets Overview display with feature with zero-length feature value lists](images/zero_length.png)
+![ゼロ長の特徴量値リストを使った特徴量の Facets Overview 表示](images/zero_length.png)
 
 #### 特徴量間のスケールの大きな違い
 
-If your features vary widely in scale, then the model may have difficulties learning. For example, if some features vary from 0 to 1 and others vary from 0 to 1,000,000,000, you have a big difference in scale. Compare the "max" and "min" columns across features to find widely varying scales.
+特徴量のスケールが大きく異なる場合、モデルの学習が困難である可能性があります。たとえば、ある特徴量は 0 から 1 の間の値を取り、別の特徴量は 0 から 1,000,000,000 の間の値を取るような場合、スケールに大きな違いがあると言えます。大きく異なるスケールを見つけるには、 "max" や "min" 列を特徴量間で比較してください。
 
-Consider normalizing feature values to reduce these wide variations.
+このような幅広い変動を減らすには、特徴量の正規化を検討してください。
 
 #### 無効な値のあるラベル
 
-TensorFlow's Estimators have restrictions on the type of data they accept as labels. For example, binary classifiers typically only work with {0, 1} labels.
+TensorFlow Estimator でラベルとして用いることのできるデータの型には制約があります。たとえば、二値分類器は通常 {0, 1} のラベルでのみ動作します。
 
-Review the label values in the Facets Overview and make sure they conform to the [requirements of Estimators](https://github.com/tensorflow/docs/blob/master/site/en/r1/guide/feature_columns.md).
+[Estimator の要件](https://github.com/tensorflow/docs/blob/master/site/en/r1/guide/feature_columns.md)を満たしているか確認するには、Facets Overview のラベルの値を確認してください。
