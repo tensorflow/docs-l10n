@@ -14,7 +14,7 @@
 - TF Hub 모음은 `https://tfhub.dev/<publisher>/collection/<collection_name>`를 따릅니다.
 - TF Hub 모델에는 버전이 지정된 URL `https://tfhub.dev/<publisher>/<model_name>/<version>` 및 최신 버전으로 확인되는 버전 없는 URL `https://tfhub.dev/<publisher>/<model_name>`이 있습니다.
 
-TF Hub models can be downloaded as compressed assets by appending URL parameters to the [tfhub.dev](https://tfhub.dev) model URL. However, the URL paramters required to achieve that depend on the model type:
+TF Hub 모델은 [thub.dev](https://tfhub.dev) 모델 URL에 URL 매개변수를 추가하여 압축된 자산으로 다운로드할 수 있습니다. 그러나 이를 달성하는 데 필요한 URL 매개변수는 모델 유형에 따라 다릅니다.
 
 - TensorFlow 모델(SavedModel 및 TF1 Hub 형식 모두): `?tf-hub-format=compressed`를 TensorFlow 모델 URL에 추가합니다.
 - TFJS 모델: `?tfjs-format=compressed`를 TFJS 모델 URL에 추가하여 압축된 또는 `/model.json?tfjs-format=file`을 다운로드하고 원격 스토리지에서 읽습니다.
@@ -74,7 +74,7 @@ TF Hub models can be downloaded as compressed assets by appending URL parameters
     <td style="text-align: center; background-color: #D0D0D0">요청 URL</td>
   </tr>
   <tr>
-    <td>TensorFlow (SavedModel, TF1 Hub format)</td>
+    <td>TensorFlow (SavedModel, TF1 Hub 형식)</td>
     <td>https://tfhub.dev/google/spice/2</td>
     <td>문자열(압축되지 않은 모델이 저장되는 GCS 폴더 경로)</td>
     <td>?tf-hub-format=uncompressed</td>
@@ -91,7 +91,7 @@ TF Hub models can be downloaded as compressed assets by appending URL parameters
 
 ## tensorflow_hub 라이브러리 프로토콜
 
-This section describes how we host models on [tfhub.dev](https://tfhub.dev) for use with the tensorflow_hub library. If you want to host your own model repository to work with the tensorflow_hub library, your HTTP(s) distribution service should provide an implementation of this protocol.
+이 섹션에서는 tensorflow_hub 라이브러리와 함께 사용하기 위해 [thub.dev](https://tfhub.dev)에서 모델을 호스팅하는 방법을 설명합니다. tensorflow_hub 라이브러리와 함께 동작하도록 자체 모델 리포지토리를 호스팅하려면 HTTP(s) 배포 서비스에서 이 프로토콜의 구현을 제공해야 합니다.
 
 이 섹션에서는 TF Lite 및 TFJS 모델이 `tensorflow_hub` 라이브러리를 통해 다운로드되지 않으므로 호스팅에 대해서는 다루지 않습니다. 이들 모델 유형의 호스팅에 대한 자세한 내용은 [위에서](#general-url-conventions) 확인하세요.
 
