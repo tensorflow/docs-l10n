@@ -16,19 +16,19 @@ print(embeddings.shape, embeddings.dtype)
 
 기본적으로 `tensorflow_hub`는 시스템 전체의 임시 디렉터리를 사용하여 다운로드 및 압축되지 않은 모델을 캐시합니다. 더 영구적인 다른 위치를 사용하는 옵션은 [캐싱](caching.md)을 참조하세요.
 
-## API stability
+## API 안정성
 
 파격적인 변경 사항은 없길 바라지만, 이 프로젝트는 아직 개발 중이며 안정적인 API 또는 모델 형식을 보장하지 않습니다.
 
-## Fairness
+## 공평
 
 모든 머신러닝에서와 마찬가지로, [공정성](http://ml-fairness.com)은 [중요한](https://research.googleblog.com/2016/10/equality-of-opportunity-in-machine.html) 고려 사항입니다. 많은 사전 훈련된 모델이 대규모 데이터세트에서 훈련됩니다. 모델을 재사용할 때 모델이 학습한 데이터(및 기존 바이어스가 있는지 여부)와 데이터세트가 모델 사용에 어떤 영향을 미칠 수 있는지를 염두에 두는 것이 중요합니다.
 
-## Security
+## 보안
 
-Since they contain arbitrary TensorFlow graphs, models can be thought of as programs. [Using TensorFlow Securely](https://github.com/tensorflow/tensorflow/blob/master/SECURITY.md) describes the security implications of referencing a model from an untrusted source.
+모델은 임의의 TensorFlow 그래프를 포함하기 때문에 프로그램으로 생각할 수 있습니다. [TensorFlow를 안전하게 사용하기](https://github.com/tensorflow/tensorflow/blob/master/SECURITY.md)에서는 신뢰할 수 없는 소스에서 모델을 참조할 때 보안에 미치는 영향을 설명합니다.
 
-## Next Steps
+## 다음 단계
 
 - [라이브러리 사용하기](tf2_saved_model.md)
 - [재사용 가능한 SavedModels](reusable_saved_models.md)
