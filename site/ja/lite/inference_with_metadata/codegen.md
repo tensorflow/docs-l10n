@@ -45,45 +45,120 @@ ML Model Binding を利用すると、開発者はデリゲートや様々なス
       <p></p>
 <pre class="prettyprint lang-kotlin">    import org.tensorflow.lite.gpu.CompatibilityList
     import org.tensorflow.lite.gpu.GpuDelegate
-&lt;/div&gt;
-&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_13&lt;/code&gt;</pre>
-<div data-md-type="block_html"></div>
-</section></devsite-selector>
+
+    val compatList = CompatibilityList()
+
+    val options = if(compatList.isDelegateSupportedOnThisDevice) {
+        // if the device has a supported GPU, add the GPU delegate
+        Model.Options.Builder().setDevice(Model.Device.GPU).build()
+    } else {
+        // if the GPU is not supported, run on 4 threads
+        Model.Options.Builder().setNumThreads(4).build()
+    }
+
+    // Initialize the model as usual feeding in the options object
+    val myModel = MyModel.newInstance(context, options)
+
+    // Run inference per sample code
+      </pre>
+    </section>
+    <section>
+      <h3>Java</h3>
+      <p></p>
+<pre class="prettyprint lang-java">    import org.tensorflow.lite.support.model.Model
+    import org.tensorflow.lite.gpu.CompatibilityList;
+    import org.tensorflow.lite.gpu.GpuDelegate;
+
+    // Initialize interpreter with GPU delegate
+    Model.Options options;
+    CompatibilityList compatList = CompatibilityList();
+
+    if(compatList.isDelegateSupportedOnThisDevice()){
+        // if the device has a supported GPU, add the GPU delegate
+        options = Model.Options.Builder().setDevice(Model.Device.GPU).build();
+    } else {
+        // if the GPU is not supported, run on 4 threads
+        options = Model.Options.Builder().setNumThreads(4).build();
+    }
+
+    MyModel myModel = new MyModel.newInstance(context, options);
+
+    // Run inference per sample code
+      </pre>
+    </section>
+    </devsite-selector>
 </div>
-<h2 data-md-type="header" data-md-header-level="2">TensorFlow Lite コードジェネレータを使用してモデルインターフェイスを生成する{:#codegen}</h2>
-<p data-md-type="paragraph">注意：TensorFlow Lite ラッパーコードジェネレータは現在、Android のみをサポートしています。</p>
-<p data-md-type="paragraph"><a href="../convert/metadata.md" data-md-type="link">メタデータ</a>で拡張された TensorFlow Lite モデルの場合、開発者は TensorFlow Lite Android ラッパーコードジェネレータを使用してプラットフォーム固有のラッパーコードを作成できます。ラッパーコードにより、<code data-md-type="codespan">ByteBuffer</code>と直接対話する必要がなくなり、開発者は<code data-md-type="codespan">Bitmap</code>や<code data-md-type="codespan">Rect</code>などの型付きオブジェクトを使用して TensorFlow Lite モデルと対話できます。</p>
-<p data-md-type="paragraph">コードジェネレータの有用性は、TensorFlow Lite モデルのメタデータエントリの完全性に依存します。codegen ツールが各フィールドを解析する方法については、<a href="https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs" data-md-type="link">metadata_schema.fbs</a> の関連フィールドの下にある<code>&lt;Codegen usage&gt;</code>セクションを参照してください。</p>
-<h3 data-md-type="header" data-md-header-level="3">ラッパーコードを生成する</h3>
-<p data-md-type="paragraph">端末に以下のツールをインストールする必要があります。</p>
-<pre data-md-type="block_code" data-md-language="sh"><code class="language-sh">pip install tflite-support</code></pre>
-<p data-md-type="paragraph">完了すると、次の構文を使用してコードジェネレータを使用できます。</p>
-<pre data-md-type="block_code" data-md-language="sh"><code class="language-sh">tflite_codegen --model=./model_with_metadata/mobilenet_v1_0.75_160_quantized.tflite \
+
+## TensorFlow Lite コードジェネレータを使用してモデルインターフェイスを生成する{:#codegen}
+
+注意：TensorFlow Lite ラッパーコードジェネレータは現在、Android のみをサポートしています。
+
+[メタデータ](../convert/metadata.md)で拡張された TensorFlow Lite モデルの場合、開発者は TensorFlow Lite Android ラッパーコードジェネレータを使用してプラットフォーム固有のラッパーコードを作成できます。ラッパーコードにより、`ByteBuffer`と直接対話する必要がなくなり、開発者は`Bitmap`や`Rect`などの型付きオブジェクトを使用して TensorFlow Lite モデルと対話できます。
+
+コードジェネレータの有用性は、TensorFlow Lite モデルのメタデータエントリの完全性に依存します。codegen ツールが各フィールドを解析する方法については、[metadata_schema.fbs](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs) の関連フィールドの下にある<code>&lt;Codegen usage&gt;</code>セクションを参照してください。
+
+### ラッパーコードを生成する
+
+端末に以下のツールをインストールする必要があります。
+
+```sh
+pip install tflite-support
+```
+
+完了すると、次の構文を使用してコードジェネレータを使用できます。
+
+```sh
+tflite_codegen --model=./model_with_metadata/mobilenet_v1_0.75_160_quantized.tflite \
     --package_name=org.tensorflow.lite.classify \
     --model_class_name=MyClassifierModel \
-    --destination=./classify_wrapper</code></pre>
-<p data-md-type="paragraph">結果のコードは、宛先ディレクトリに配置されます。<a href="https://colab.research.google.com/" data-md-type="link">Google Colab</a> またはその他のリモート環境を使用している場合は、結果を zip アーカイブに圧縮して Android Studio プロジェクトにダウンロードする方が簡単な場合があります。</p>
-<pre data-md-type="block_code" data-md-language="python"><code class="language-python"># Zip up the generated code
+    --destination=./classify_wrapper
+```
+
+結果のコードは、宛先ディレクトリに配置されます。[Google Colab](https://colab.research.google.com/) またはその他のリモート環境を使用している場合は、結果を zip アーカイブに圧縮して Android Studio プロジェクトにダウンロードする方が簡単な場合があります。
+
+```python
+# Zip up the generated code
 !zip -r classify_wrapper.zip classify_wrapper/
 
 # Download the archive
 from google.colab import files
-files.download('classify_wrapper.zip')</code></pre>
-<h3 data-md-type="header" data-md-header-level="3">生成されたコードを使用する</h3>
-<h4 data-md-type="header" data-md-header-level="4">ステップ 1：生成されたコードをインポートする</h4>
-<p data-md-type="paragraph">必要に応じて、生成されたコードをディレクトリ構造に解凍します。生成されたコードのルートは、<code data-md-type="codespan">SRC_ROOT</code>であると想定されます。</p>
-<p data-md-type="paragraph">TensorFlow Lite モデルを使用する Android Studio プロジェクトを開き、生成されたモジュールを次の方法でインポートします。And File-&gt; New-&gt; Import Module-&gt; <code data-md-type="codespan">SRC_ROOT</code>を選択します。</p>
-<p data-md-type="paragraph">上記の例を使用すると、インポートされたディレクトリとモジュールは<code data-md-type="codespan">classify_wrapper</code>と呼ばれます。</p>
-<h4 data-md-type="header" data-md-header-level="4">ステップ 2：アプリの<code data-md-type="codespan">build.gradle</code>ファイルを更新します</h4>
-<p data-md-type="paragraph">生成されたライブラリモジュールを使用するアプリモジュールでは、次のようになります。</p>
-<p data-md-type="paragraph">Android セクションの下に、以下を追加します。</p>
-<pre data-md-type="block_code" data-md-language="build"><code class="language-build">aaptOptions {
+files.download('classify_wrapper.zip')
+```
+
+### 生成されたコードを使用する
+
+#### ステップ 1：生成されたコードをインポートする
+
+必要に応じて、生成されたコードをディレクトリ構造に解凍します。生成されたコードのルートは、`SRC_ROOT`であると想定されます。
+
+TensorFlow Lite モデルを使用する Android Studio プロジェクトを開き、生成されたモジュールを次の方法でインポートします。And File-&gt; New-&gt; Import Module-&gt; `SRC_ROOT`を選択します。
+
+上記の例を使用すると、インポートされたディレクトリとモジュールは`classify_wrapper`と呼ばれます。
+
+#### ステップ 2：アプリの`build.gradle`ファイルを更新します
+
+生成されたライブラリモジュールを使用するアプリモジュールでは、次のようになります。
+
+Android セクションの下に、以下を追加します。
+
+```build
+aaptOptions {
    noCompress "tflite"
-}</code></pre>
-<p data-md-type="paragraph">依存関係セクションの下に、以下を追加します。</p>
-<pre data-md-type="block_code" data-md-language="build"><code class="language-build">implementation project(":classify_wrapper")</code></pre>
-<h4 data-md-type="header" data-md-header-level="4">ステップ 3：モデルの使用</h4>
-<pre data-md-type="block_code" data-md-language="java"><code class="language-java">// 1. Initialize the model
+}
+```
+
+Note: starting from version 4.1 of the Android Gradle plugin, .tflite will be added to the noCompress list by default and the aaptOptions above is not needed anymore.
+
+依存関係セクションの下に、以下を追加します。
+
+```build
+implementation project(":classify_wrapper")
+```
+
+#### ステップ 3：モデルの使用
+
+```java
+// 1. Initialize the model
 MyClassifierModel myImageClassifier = null;
 
 try {
@@ -102,24 +177,36 @@ if(null != myImageClassifier) {
     MyClassifierModel.Outputs outputs = myImageClassifier.run(inputs);
 
     // 4. Retrieve the result
-    Map labeledProbability = outputs.getProbability();
-}</code></pre>
-<h3 data-md-type="header" data-md-header-level="3">モデル推論の高速化</h3>
-<p data-md-type="paragraph">生成されたコードを使用すると、開発者は<a href="../performance/delegates.md" data-md-type="link">デリゲート</a>とスレッド数を使用してコードを高速化できます。これは、次の 3 つのパラメータを使用し、モデルオブジェクトを開始するときに設定できます。</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">
-<strong data-md-type="double_emphasis"><code data-md-type="codespan">Context</code></strong>：Android アクティビティまたはサービスからのコンテキスト</li>
-<li data-md-type="list_item" data-md-list-type="unordered">（オプション）<strong data-md-type="double_emphasis"><code data-md-type="codespan">Device</code></strong>：GPUDelegate や NNAPIDelegate などの TFLite アクセラレーションデリゲート</li>
-<li data-md-type="list_item" data-md-list-type="unordered">（オプション）<strong data-md-type="double_emphasis"><code data-md-type="codespan">numThreads</code></strong>：モデルの実行に使用されるスレッドの数。デフォルトは 1 です。</li>
-</ul>
-<p data-md-type="paragraph">例えば、NNAPI デリゲートと最大 3 つのスレッドを使用するには、次のようにモデルを初期化します。</p>
-<pre data-md-type="block_code" data-md-language="java"><code class="language-java">try {
+    Map<String, Float> labeledProbability = outputs.getProbability();
+}
+```
+
+### モデル推論の高速化
+
+生成されたコードを使用すると、開発者は[デリゲート](../performance/delegates.md)とスレッド数を使用してコードを高速化できます。これは、次の 3 つのパラメータを使用し、モデルオブジェクトを開始するときに設定できます。
+
+-  **`Context`**：Android アクティビティまたはサービスからのコンテキスト
+- （オプション）**`Device`**：GPUDelegate や NNAPIDelegate などの TFLite アクセラレーションデリゲート
+- （オプション）**`numThreads`**：モデルの実行に使用されるスレッドの数。デフォルトは 1 です。
+
+例えば、NNAPI デリゲートと最大 3 つのスレッドを使用するには、次のようにモデルを初期化します。
+
+```java
+try {
     myImageClassifier = new MyClassifierModel(this, Model.Device.NNAPI, 3);
 } catch (IOException io){
     // Error reading the model
-}</code></pre>
-<h3 data-md-type="header" data-md-header-level="3">トラブルシューティング</h3>
-<p data-md-type="paragraph">「java.io.FileNotFoundException: This file can not be opened as a file descriptor; it is probably compressed」エラーが発生する場合、ライブラリモジュールを使用するアプリモジュールの Android セクションの下に次の行を挿入します。</p>
-<pre data-md-type="block_code" data-md-language="build"><code class="language-build">aaptOptions {
+}
+```
+
+### トラブルシューティング
+
+「java.io.FileNotFoundException: This file can not be opened as a file descriptor; it is probably compressed」エラーが発生する場合、ライブラリモジュールを使用するアプリモジュールの Android セクションの下に次の行を挿入します。
+
+```build
+aaptOptions {
    noCompress "tflite"
-}</code></pre>
+}
+```
+
+Note: starting from version 4.1 of the Android Gradle plugin, .tflite will be added to the noCompress list by default and the aaptOptions above is not needed anymore.
