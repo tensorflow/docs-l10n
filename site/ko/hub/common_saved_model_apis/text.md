@@ -2,9 +2,9 @@
 
 # 텍스트 작업을 위한 일반적인 SavedModel API
 
-This page describes how [TF2 SavedModels](../tf2_saved_model.md) for text-related tasks should implement the [Reusable SavedModel API](../reusable_saved_models.md). (This replaces and extends the [Common Signatures for Text](../common_signatures/text.md) for the now-deprecated [TF1 Hub format](../tf1_hub_module).)
+이 페이지에서는 텍스트 관련 작업용 [TF2 SavedModel](../tf2_saved_model.md)에서 [Reusable SavedModel API](../reusable_saved_models.md)를 구현하는 방법을 설명합니다. (이는 현재 지원 중단된 [TF1 Hub 형식](../common_signatures/text.md)의 [텍스트에 대한 일반적인 서명](../tf1_hub_module)을 대체합니다.)
 
-## Overview
+## 개요
 
 There are several APIs to compute **text embeddings** (also known as dense representations of text, or text feature vectors).
 
@@ -214,7 +214,7 @@ encoder = hub.KerasLayer("path/to/encoder", trainable=True)
 encoder_outputs = encoder(encoder_inputs)
 ```
 
-#### Details
+#### 세부 사항
 
 The `encoder_outputs` are a dict of Tensors with the following keys.
 
