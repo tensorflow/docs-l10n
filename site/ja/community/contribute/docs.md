@@ -17,15 +17,15 @@ To participate in the TensorFlow docs community:
 
 リファレンスドキュメントを更新するには、[ソースファイル](https://www.tensorflow.org/code/tensorflow/python/)を見つけて、シンボルの <a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a> を編集します。 tensorflow.org の多くの API リファレンスページには、シンボルが定義されているソースファイルへのリンクを含みます。docstrings は <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown 形式</a>をサポートしており、(ほとんどの)<a href="http://tmpvar.com/markdown.html" class="external">ビューアー（リンク先は Markdown previewer のものです）</a>でプレビューすることができます。
 
-For reference documentation quality and how to get involved with doc sprints and the community, see the [TensorFlow 2 API Docs advice](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview).
+リファレンスドキュメントの品質と、短期集中型ドキュメント作成（訳注: doc sprints）とコミュニティに深くかかわる方法を知るには、[TensorFlow 2 API Docs アドバイス](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview)を参照してください。
 
 ### Versions and branches
 
 The site's [API reference](https://www.tensorflow.org/api_docs/python/tf) version defaults to the latest stable binary—this matches the package installed with `pip install tensorflow`.
 
-The default TensorFlow package is built from the stable branch `rX.x` in the main <a href="https://github.com/tensorflow/tensorflow" class="external">tensorflow/tensorflow</a> repo. The reference documentation is generated from code comments and docstrings in the source code for <a href="https://www.tensorflow.org/code/tensorflow/python/" class="external">Python</a>, <a href="https://www.tensorflow.org/code/tensorflow/cc/" class="external">C++</a>, and <a href="https://www.tensorflow.org/code/tensorflow/java/" class="external">Java</a>.
+デフォルトの TensorFlow パッケージは、メインリポジトリである <a>tensorflow/tensorflow</a> のステーブル版ブランチ <code>rX.x</code> から構築されます。リファレンスドキュメントは、<a href="https://www.tensorflow.org/code/tensorflow/python/" class="external">Python</a>、 <a href="https://www.tensorflow.org/code/tensorflow/cc/" class="external">C++</a>、および、<a href="https://www.tensorflow.org/code/tensorflow/java/" class="external">Java</a> のソースコードのコメントと docstring から生成されます。
 
-Previous versions of the TensorFlow documentation are available as [rX.x branches](https://github.com/tensorflow/docs/branches) in the TensorFlow Docs repository. These branches are added when a new version is released.
+TensorFlow ドキュメントの前のバージョンは、[ブランチ rX.x](https://github.com/tensorflow/docs/branches)のように TensorFlow Docs リポジトリで手に入れることができます。新しいバージョンがリリースされると、新しいブランチが追加されていきます。
 
 ### Build API docs
 
@@ -62,7 +62,7 @@ The easiest way to make straightforward documentation updates to Markdown files 
 
 For multi-file edits or more complex updates, it's better to use a local Git workflow to create a pull request.
 
-Note: <a href="https://git-scm.com/" class="external">Git</a> is the open source version control system (VCS) used to track changes to source code. <a href="https://github.com" class="external">GitHub</a> is an online service that provides collaboration tools that work with Git. See the <a href="https://help.github.com" class="external">GitHub Help</a> to set up your GitHub account and get started.
+注：<a href="https://git-scm.com/" class="external">Git</a>はオープンソースのバージョン管理システム (VCS)で、ソースコードの変更を追跡するために使われます。<a href="https://github.com" class="external">GitHub</a>は、gitを使用したコラボレーションを簡単にするオンラインサービスです。GitHubのアカウントを設定して利用するには、<a href="https://help.github.com" class="external">GitHubのヘルプ</a>を参照してください。
 
 The following Git steps are only required the first time you set up a local project.
 
@@ -72,7 +72,7 @@ On the <a href="https://github.com/tensorflow/docs" class="external">tensorflow/
 
 #### Clone your repo
 
-Download a copy of *your* remote <var>username</var>/docs repo to your local machine. This is the working directory where you will make changes:
+*あなたの*リモートリポジトリ<var>username</var>/docsのコピーをローカルマシンにダウンロードします。これは、変更を加える作業用ディレクトリです。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git clone git@github.com:&lt;var&gt;username&lt;/var&gt;/docs</code>
@@ -83,7 +83,7 @@ Download a copy of *your* remote <var>username</var>/docs repo to your local mac
 
 To keep your local repository in sync with `tensorflow/docs`, add an *upstream* remote to download the latest changes.
 
-Note: Make sure to update your local repo *before* starting a contribution. Regular syncs to upstream reduce the chance of a <a href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line" class="external">merge conflict</a> when you submit your pull request.
+注意：貢献し始める*前*に、確実にローカルリポジトリを更新しておいてください。定期的に同期しておくと、プルリクエスト発行時の<a href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line" class="external">マージコンフリクト</a>の危険性を減らすことができます。
 
 Add a remote:
 
@@ -109,7 +109,7 @@ To update:
 
 #### 1. Create a new branch
 
-After you update your repo from `tensorflow/docs`, create a new branch from the local *master* branch:
+`tensorflow/docs`からリポジトリを更新した後、ローカル*マスター*ブランチから新しいブランチを作成します。
 
 <pre class="prettyprint lang-bsh">&lt;code class="devsite-terminal"&gt;git checkout -b &lt;var&gt;feature-name&lt;/var&gt;&lt;/code&gt;
 
@@ -136,13 +136,13 @@ Add more commits, as necessary.
 
 #### 3. Create a pull request
 
-Upload your local branch to your remote GitHub repo (github.com/<var>username</var>/docs):
+以下のようにして、ローカルブランチをGitHub上のリモートリポジトリ（github.com/<var>username</var>/docs）にアップロードします。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git push</code>
 </pre>
 
-After the push completes, a message may display a URL to automatically submit a pull request to the upstream repo. If not, go to the <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> repo—or your own repo—and GitHub will prompt you to create a pull request.
+pushが完了したら、自動的に上流リポジトリへ発行されたプルリクエストのURLが表示されるかもしれません。もし表示されなかった場合は、<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> リポジトリ—それかあなたのフォークしたリポジトリ—にアクセスすると、GitHubがプルリクエストを発行するように促してくるでしょう。
 
 #### 4. Review
 
