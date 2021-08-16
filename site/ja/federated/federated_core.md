@@ -41,7 +41,7 @@ TFF は、フェデレーテッドコンピュテーションの表現に内部�
 次は、一例です。その他の例は[カスタムアルゴリズム](tutorials/custom_federated_algorithms_1.ipynb)チュートリアルをご覧ください。
 
 ```python
-@tff.federated_computation(tff.FederatedType(tf.float32, tff.CLIENTS))
+@tff.federated_computation(tff.type_at_clients(tf.float32))
 def get_average_temperature(sensor_readings):
   return tff.federated_mean(sensor_readings)
 ```
@@ -125,7 +125,7 @@ FC が言語を定義する理由の一部は、上述のように、フェデ�
     次は、前述のラムダ式の例です。
 
     ```python
-    @tff.federated_computation(tff.FederatedType(tf.float32, tff.CLIENTS))
+    @tff.federated_computation(tff.type_at_clients(tf.float32))
     def get_average_temperature(sensor_readings):
       return tff.federated_mean(sensor_readings)
     ```
