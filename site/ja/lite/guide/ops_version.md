@@ -163,37 +163,15 @@ AddBuiltin(BuiltinOperator_DEPTHWISE_CONV_2D, Register_DEPTHWISE_CONV_2D(),
 - 膨張係数がすべて 1 である場合は、version=1
 - そうでない場合は version=2 とする
 
-これを行うには、最初に対応するパラメータを`OpSignature`構造体内の`depthwise_conv_2d`に追加する必要があります。
-
-```
-struct {
-      int32_t dilation_w_factor;
-      int32_t dilation_h_factor;
-    } depthwise_conv_2d;
-```
-
-次に、これらの新しいパラメータを`lite/tools/versioning/op_version.cc`の`GetOpSignature`関数に入力します。
-
-```
-case BuiltinOperator_DEPTHWISE_CONV_2D: {
-      auto conv_option = op->builtin_options_as_DepthwiseConv2DOptions();
-      if (conv_option) {
-        op_sig.options.depthwise_conv_2d.dilation_w_factor =
-            conv_option->dilation_w_factor();
-        op_sig.options.depthwise_conv_2d.dilation_h_factor =
-            conv_option->dilation_h_factor();
-      }
-    } break;
-```
-
-新しい型のサポートを追加する場合は、上記の手順は必要ありません。入力型と出力型は、`OpSignature`のすべての演算に対して定義および移入されます。
-
 最後に、`DepthwiseConv2D`の場合に新しいバージョンを追加して、`lite/tools/versioning/op_version.cc`の演算子の`GetBuiltinOperatorVersion`関数を変更します。
 
 ```
 case BuiltinOperator_DEPTHWISE_CONV_2D:
-  if (op_sig.options.depthwise_conv_2d.dilation_w_factor != 1 ||
-      op_sig.options.depthwise_conv_2d.dilation_h_factor != 1) {
+  auto depthwise_conv_params =
+      reinterpret_cast<TfLiteDepthwiseConvParams*>(op_sig.builtin_data);
+  TFLITE_DCHECK(depthwise_conv_params != nullptr);
+  if (depthwise_conv_params->dilation_width_factor != 1 ||
+       depthwise_conv_params->dilation_height_factor != 1) {
     return 2;
   }
   return 1;
