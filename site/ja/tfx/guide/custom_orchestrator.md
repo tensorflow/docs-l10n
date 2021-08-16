@@ -1,14 +1,14 @@
 # TFX パイプラインのオーケストレーション
 
-## Custom Orchestrator
+## カスタムオーケストレータ
 
-TFX is designed to be portable to multiple environments and orchestration frameworks. Developers can create custom orchestrators or add additional orchestrators in addition to the default orchestrators that are supported by TFX, namely [Airflow](airflow.md), [Beam](beam_orchestrator.md) and [Kubeflow](kubeflow.md).
+TFX は、複数の環境とオーケストレーションフレームワークに移植できるように設計されており、開発者はカスタムオーケストレータを作成するか、TFX がサポートしているデフォルトのオーケストレータ（[Airflow](airflow.md)、[Beam](beam_orchestrator.md)、および [Kubeflow](kubeflow.md)）のほかにオーケストレータを追加することができます。
 
-All orchestrators must inherit from [TfxRunner](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/tfx_runner.py). TFX orchestrators take the logical pipeline object, which contains pipeline args, components, and DAG, and are responsible for scheduling components of the TFX pipeline based on the dependencies defined by the DAG.
+すべてのオーケストレータは [TfxRunner](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/tfx_runner.py) を継承している必要があります。TFX オーケストレータは論理パイプラインオブジェクトを取ります。このオブジェクトにはパイプライン引数、コンポーネント、および DAG が含まれており、TFX パイプラインのコンポーネントを DAG が定義する依存関係に基づいてスケジューリングを管理します。
 
-For example, let's look at how to create a custom orchestrator with [ComponentLauncher](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/component_launcher.py). ComponentLauncher already handles driver, executor, and publisher of a single component. The new orchestrator just needs to schedule ComponentLaunchers based on the DAG. A simple orchestrator is provided as the [LocalDagRunner] (https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/local/local_dag_runner.py), which runs the components one by one in DAG's topological order.
+例として、[ComponentLauncher](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/component_launcher.py) でカスタムオーケストレータを作成する方法を見てみましょう。ComponentLauncher はすでに 1 つのコンポーネントのドライバ、executor、およびパブリッシャを処理するため、新しいオーケストレータでは DAG に基づいて ComponentLauncher をスケジューリングすることだけが必要です。単純なオーケストレータは、LocalDagRunner（https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/local/local_dag_runner.py）として提供されており、DAG のトポロジー順でコンポーネントを 1 つずつ実行します。
 
-This orchestrator can be used in the Python DSL:
+このオーケストレータは、Python DSL で次のように使用することができます。
 
 ```python
 def _create_pipeline(...) -> dsl.Pipeline:
@@ -19,7 +19,7 @@ if __name__ == '__main__':
   orchestration.LocalDagRunner().run(_create_pipeline(...))
 ```
 
-To run above Python DSL file (assuming it is named dsl.py), simply do the following:
+上記の Python DSL ファイルを実行するには（名前を dsl.py とした場合）、単純に次のようにします。
 
 ```bash
 python dsl.py
