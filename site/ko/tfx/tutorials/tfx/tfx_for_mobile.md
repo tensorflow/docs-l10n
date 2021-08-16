@@ -1,6 +1,6 @@
 # 모바일용 TFX
 
-## Introduction
+## 시작하기
 
 이 가이드는 Tensorflow Extended(TFX)가 기기에 배포될 머신러닝 모델을 만들고 평가하는 방법을 보여줍니다. 이제 TFX는 [TFLite](https://www.tensorflow.org/lite)에 대한 기본 지원을 제공하므로 모바일 기기에서 매우 효율적인 추론을 수행할 수 있습니다.
 
