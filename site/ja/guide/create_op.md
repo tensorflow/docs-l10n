@@ -1,44 +1,33 @@
-# オペレーションを作成する
+# 演算子を作成する
 
-Note: C++のカスタムオペレーションが、TensorFlow公式のpipパッケージとABI互換になることを保証するため、[Custom opリポジトリ](https://github.com/tensorflow/custom-op) のガイドにしたがってください。
-カスタムオペレーションをビルドして配布するためのDockerのイメージはもちろんのこと、初めから終わりまでのコード例が示されています。
+注意: C++ のカスタム演算子が TensorFlow 公式 の pip パッケージと ABI 互換になることを保証できるように、[カスタム演算子リポジトリ](https://github.com/tensorflow/custom-op)にあるガイドに従ってください。カスタム演算子をビルドして配布するための Docker のイメージのほか、エンドツーエンドのコード例も含まれています。
 
-既存のTensorFlowのライブラリに存在しないオペレーションを作りたい場合、既存のPythonのオペレーションや関数を組み合わせて、Pythonでオペレーションを書くことを推奨します。
-もしそれが不可能なら、C++のカスタムオペレーションを作ってもよいです。
-C++のカスタムオペレーションを作りたいと考える理由は、いくつかあります。
+既存の TensorFlow ライブラリに含まれていない演算子を作成する場合は、まず既存の Python 演算子または関数の複合として、Python で演算子を作成することをお勧めします。これを行えない場合は、カスタム C++ 演算子を作成することもできます。カスタム C++ 演算子を作成するのには、いくつかの理由があります。
 
-* 既存のオペレーションの組み合わせでオペレーションを表現するのが、不可能または簡単ではない
-* 既存のプリミティブの組み合わせでオペレーションを表現するのが、効率的ではない
-* 将来コンパイラが融合することが難しいプリミティブの組み合わせを、自前で融合したい
+- 既存の演算子を合成して演算子を表現するのが容易ではないか不可能である。
+- 既存のプリミティブを合成して演算子を表現するのは非効率的である。
+- 将来のコンパイラーでは融合が困難と思われるプリミティブの合成を手動で融合する。
 
-たとえば、"MaxPool" オペレーションと似ているが、最大値のかわりにウィンドウをスライドさせて中央値を計算する、"median pooling" のようなものを実装したいとしましょう。
-これは、オペレーションの組み合わせ（たとえば、ExtractImagePatchesとTopKを使う）でも可能ですが、1つの融合したオペレーションとしてより賢明に実装したネイティブなオペレーションと比較して、性能とメモリ効率の面で劣るかもしれません。
-いつも通り、オペレーションの組み合わせで、やりたいことを表現する試みには価値があります。
-もしそれが難しいまたは非効率であることが証明されたときのみ、新しいオペレーションを追加することを検討しましょう。
+例えとして、"MaxPool" 演算子に似ていても、最大値の代わりにスライディングウィンドウで中央値を計算する「median pooling」のようなものを実装するとしましょう。複合演算子を使ってこれを行うことは可能ですが（ExtractImagePatches と TopK を使用するなど）、単一の融合演算でより賢明に実行できるネイティブ演算子ほどのパフォーマンス効率またはメモリ効率は得られません。いつも通り、まずは表現しようとしているものを演算子を組み合わせて作成し、それが困難であるか非効率であることがわかった場合にのみ、新しい演算子を追加することをお勧めします。
 
-カスタムオペレーションを組み込むために必要なことを、次に示します。
+カスタム演算子を導入するには、次を行う必要があります。
 
-1. C++ファイル内で新しいオペレーションを登録します。オペレーションの登録では、オペレーションの実装とは独立であるオペレーションの機能のためのインターフェース（仕様）を定義します。たとえば、オペレーションの登録では、オペレーション名やオペレーションの入出力を定義します。また、テンソルのシェイプ推論に使用されるシェイプ関数を定義します。
-2. C++でオペレーションを実装します。オペレーションの実装はカーネルとして知られ、Step 1で登録した仕様の実装を具体化します。異なる入出力型、アーキテクチャ（たとえば、CPUやGPU）のために複数のカーネルが存在することもあり得ます。
-3. Pythonのラッパーを作成する（任意）。このラッパーは、Pythonでオペレーションを作るときに使われるパブリックなAPIです。デフォルトのラッパーは、オペレーションの登録から生成され、直接利用することもできますし、追加することもできます。
-4. オペレーションの勾配を計算するための関数を書きます。（任意）
-5. オペレーションをテストします。便宜上、たいていはPythonで行いますが、C++でオペレーションをテストすることも可能です。勾配を定義した場合、Python からは `tf.test.compute_gradient_error` を使って確認できます。Reluのような順伝搬の関数とその勾配をテストするための例については、[`relu_op_test.py`](https://www.tensorflow.org/code/tensorflow/python/kernel_tests/relu_op_test.py) を見てください。
+1. C++ ファイルに新しい演算子を登録します。演算子を登録すると、演算子の機能のインターフェース（仕様）が定義されます。これは、演算子の実装に依存していません。たとえば、演算子の登録によって、演算子の名前と入出力のほか、テンソルの形状推論に使用される形状の関数も定義されます。
+2. C++ で演算子を実装します。演算子の実装はカーネルとして知られており、手順 1 で登録した仕様の具象実装です。さまざまな入力/出力の型またはアーキテクチャ（CPU、GPU など）に対し複数のカーネルが存在することがあります。
+3. Python のラッパーを作成します（オプション）。このラッパーは Python で演算子を作成するために使用されるパブリック API です。デフォルトのラッパーは演算子の登録によって生成されるため、それを直接使用することも追加することもできます。
+4. 演算子に使用する勾配を計算する関数を記述します（オプション）。
+5. 演算子をテストします。通常は便宜上、Python でテストしますが、C++ でテストすることも可能です。勾配を定義した場合は、Python の `tf.test.compute_gradient_error` を使って検証することができます。Relu に似た演算子のフォワード関数と勾配をテストする例は、[`relu_op_test.py`](https://www.tensorflow.org/code/tensorflow/python/kernel_tests/relu_op_test.py) をご覧ください。
 
+### 前提条件
 
-## 前提条件
+- C++ にある程度精通していること
+- [TensorFlow バイナリ](../../install)がインストール済みであるか、[TensorFlow のソースコードがダウンロード済み](../../install/source.md)で、ビルドできること
 
-* C++になじみがあること
-* [TensorFlowのバイナリ](../../install) がインストールされていること。もしくは、[ダウンロードされたTensorFlowのソースコード](../../install/source.md) があり、ビルドできること
+## 演算子のインターフェースを定義する
 
+TensorFlow システムで演算子を登録することで、演算子のインターフェースを定義します。登録では、演算子の名前、演算子の入力（型と名前）と出力（型と名前）、および演算子が必要とする docstrings や[属性](#%E3%82%A2%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%83%88)を指定します。
 
-## オペレーションのインターフェース定義
-
-TensorFlowのシステムを使って、オペレーションのインターフェースを登録して定義します。
-登録にあたり、オペレーションの名前と入出力（型と名前）、オペレーションが必要とする場合があるdocstringsと [アトリビュート](#アトリビュート) を指定します。
-
-どのように取り組むのかを見るために、`int32` のテンソルを受け取り、最初以外のすべての要素が0であるコピーされたテンソルを出力するオペレーションを作ることを考えます。
-これを行うために、`zero_out.cc` と命名されたファイルを作成します。
-続いて、オペレーションのインターフェースを定義するための `REGISTER_OP` マクロ呼び出しを追加します。
+この仕組みを確認するには、`int32` のテンソルを取って、最初の要素以外のすべての要素をゼロに設定したテンソルのコピーを出力する演算子を作成することをお勧めします。これを行うには、`zero_out.cc` というファイルを作成し、演算子のインターフェースを定義する `REGISTER_OP` マクロの呼び出しを追加します。
 
 ```c++
 #include "tensorflow/core/framework/op.h"
@@ -55,21 +44,15 @@ REGISTER_OP("ZeroOut")
     });
 ```
 
-この `ZeroOut` オペレーションは、入力として32bit整数のテンソル `to_zero` を受け取り、32bit整数のテンソル `zeroed` を出力します。
-このオペレーションは、出力テンソルが入力テンソルとおなじシェイプであることを保証するために、シェイプ関数を使っています。
-たとえば、入力テンソルのシェイプが [10, 20] であるならば、このシェイプ関数は出力のシェイプも [10, 20] であることを明示します。
+この `ZeroOut` 演算子は、入力として 32 ビット整数のテンソル `to_zero` を取り、32 ビット整数のテンソル `zeroed` を出力します。この演算子は形状関数を使用して、出力テンソルの形状が入力テンソルの形状と同じであることを保証します。たとえば、入力が形状 [10, 20] のテンソルである場合、この形状関数は出力形状も [10, 20] であることを示します。
 
-Note: オペレーションの名前はCamelCaseで、かつバイナリに登録されているすべてのオペレーションの中で唯一のものである必要があります。
+注意: 演算子名はキャメルケースであり、バイナリに登録されているすべての演算子の中で一意である必要があります。
 
+## 演算子のカーネルを実装する
 
-## オペレーションのカーネル実装
+インターフェースを定義したら、演算子の実装を 1 つ以上提供します。これらのカーネルの 1 つを作成するには、`OpKernel` を拡張して `Compute` メソッドをオーバーライドするクラスを作成します。`Compute` メソッドは、`OpKernelContext*` 型の `context` 引数を 1 つ提供します。これを介して入力テンソルや出力テンソルなどにアクセスすることができます。
 
-インターフェースを定義したあとは、1つ以上のオペレーションの実装を提供する必要があります。
-これらのカーネルを作成するためには、`OpKernel` を継承したクラスを作成し、`Compute` メソッドをオーバーライドします。
-`Compute` メソッドは、`OpKernelContext*` 型である1つの `context` 引数を提供し、ここから入力や出力テンソルのような便利なものにアクセスできます。
-
-上記で作成したファイルにカーネルを追加します。
-カーネルはたとえば次のようなものになるかもしれません。
+上記で作成したファイルにカーネルを追加します。 カーネルは次のように記述されます。
 
 ```c++
 #include "tensorflow/core/framework/op_kernel.h"
@@ -81,57 +64,51 @@ class ZeroOutOp : public OpKernel {
   explicit ZeroOutOp(OpKernelConstruction* context) : OpKernel(context) {}
 
   void Compute(OpKernelContext* context) override {
-    // 入力テンソルを取得する。
+    // Grab the input tensor
     const Tensor& input_tensor = context->input(0);
     auto input = input_tensor.flat<int32>();
 
-    // 出力テンソルを作成する。
+    // Create an output tensor
     Tensor* output_tensor = NULL;
     OP_REQUIRES_OK(context, context->allocate_output(0, input_tensor.shape(),
                                                      &output_tensor));
     auto output_flat = output_tensor->flat<int32>();
 
-    // 最初以外のすべての要素を0にする。
+    // Set all but the first element of the output tensor to 0.
     const int N = input.size();
     for (int i = 1; i < N; i++) {
       output_flat(i) = 0;
     }
 
-    // 可能なら、最初の入力値は維持する。
+    // Preserve the first input value if possible.
     if (N > 0) output_flat(0) = input(0);
   }
 };
 ```
 
-カーネルを実装したあと、TensorFlowのシステムに登録します。
-登録時には、このカーネルが動作するいろいろな制約を指定します。
-たとえば、CPU向けに作成した1つのカーネルと、GPU向けの別のカーネルがあるとしましょう。
+カーネルを実装したら、それを TensorFlow システムに登録します。 登録時には、このカーネルが実行する際のさなざまな制約を指定します。たとえば、CPU 向けに作成したカーネルと GPU 向けの別のカーネルがある場合があります。
 
-これを `ZeroOut` オペレーションで実現するためには、次を `zero_out.cc` に追加します。
+これを `ZeroOut` 演算子で行うには、次のコードを `zero_out.cc` に追加します。
 
 ```c++
 REGISTER_KERNEL_BUILDER(Name("ZeroOut").Device(DEVICE_CPU), ZeroOutOp);
 ```
 
-> 重要: OpKernelのインスタンスは、同時にアクセスされることがあります。`Compute` メソッドは、スレッドセーフにしなければなりません。クラスメンバへのアクセスはmutexでガードしてください。いっそのこと、クラスメンバ経由で状態を共有しないようにしてください！オペレーションの状態を追跡するためには、[`ResourceMgr`](https://www.tensorflow.org/code/tensorflow/core/framework/resource_mgr.h) を使用することを検討してください。
+> 重要: OpKernelのインスタンスは、同時にアクセスされることがあるため、`Compute` メソッドはをスレッドセーフにする必要があります。クラスメンバーへのアクセスは mutex で保護してください。または、クラスメンバー経由で状態を共有しないようにする方が推奨されます！演算子の状態を追跡するために、[`ResourceMgr`](https://www.tensorflow.org/code/tensorflow/core/framework/resource_mgr.h) を使用することを検討してください。
 
+### マルチスレッドの CPU カーネル
 
-### マルチスレッド化されたCPUカーネル
+マルチスレッド化された CPU カーネルを書くには、[`work_sharder.h`](https://www.tensorflow.org/code/tensorflow/core/util/work_sharder.h) にあるシャード関数を利用できます。この関数は、内部演算子スレッドに使用されるために構成されたスレッド間で計算関数をシャーディングします（[`config.proto`](https://www.tensorflow.org/code/tensorflow/core/protobuf/config.proto) の intra_op_parallelism_threads をご覧ください）。
 
-マルチスレッド化されたCPUカーネルを書くためには、[`work_sharder.h`](https://www.tensorflow.org/code/tensorflow/core/util/work_sharder.h) にあるShard関数を利用できます。
-この関数は、オペレーション内でのスレッド実行のために使われるスレッド間で計算を分割します。（[`config.proto`](https://www.tensorflow.org/code/tensorflow/core/protobuf/config.proto) のintra_op_parallelism_threadsを見てください）
+### GPU カーネル
 
+GPU カーネルは、OpKernel と CUDAカーネルおよびそのローンチコードの 2 部で実装されています。
 
-### GPUカーネル
+入力の検査や出力の割り当てなど、CPU と GPU カーネルにおいて、OpKernel の実装はが共通している場合があります。その場合、次のように実装することが推奨されます。
 
-GPUのカーネルは、OpKernelとCUDAカーネルとカーネルを起動するコードの2つの部分から実装されています。
-
-入力の検査や出力の割り当てなど、時にはOpKernelの実装はCPUとGPU間で共通です。
-その場合において、推奨される実装を次に示します。
-
-1. デバイスとテンソルのプリミティブ型をテンプレート化した、OpKernelを定義します。
-2. 実際に出力の計算をするために、Compute関数はテンプレート化されたファンクタ構造体を呼び出します。
-3. CPUDeviceのために特化したファンクタはおなじファイルに定義しますが、GPUDeviceのために特化したものは、CUDAコンパイラによってコンパイルされるために.cu.ccファイルに定義します。
+1. デバイスとプリミティブ型のテンソルで OpKernel をテンプレート化して定義します。
+2. 実際に出力を計算するために、Compute 関数はテンプレート化されたファンクタ構造体を呼び出します。
+3. CPUDevice 用の特化したファンクタは同じファイルに定義されますが、GPUDevice 用の特化したファンクタは CUDA コンパイラによってコンパイルされるため、.cu.cc ファイルに定義されます。
 
 実装例を示します。
 
@@ -140,15 +117,17 @@ GPUのカーネルは、OpKernelとCUDAカーネルとカーネルを起動す�
 #ifndef KERNEL_EXAMPLE_H_
 #define KERNEL_EXAMPLE_H_
 
+#include <unsupported/Eigen/CXX11/Tensor>
+
 template <typename Device, typename T>
 struct ExampleFunctor {
   void operator()(const Device& d, int size, const T* in, T* out);
 };
 
 #if GOOGLE_CUDA
-// GpuDeivce向けに部分特化したファンクタ。
-template <typename Eigen::GpuDevice, typename T>
-struct ExampleFunctor {
+// Partially specialize functor for GpuDevice.
+template <typename T>
+struct ExampleFunctor<Eigen::GpuDevice, T> {
   void operator()(const Eigen::GpuDevice& d, int size, const T* in, T* out);
 };
 #endif
@@ -159,6 +138,9 @@ struct ExampleFunctor {
 ```c++
 // kernel_example.cc
 #include "kernel_example.h"
+
+#include "tensorflow/core/framework/op.h"
+#include "tensorflow/core/framework/shape_inference.h"
 #include "tensorflow/core/framework/op_kernel.h"
 
 using namespace tensorflow;
@@ -166,7 +148,16 @@ using namespace tensorflow;
 using CPUDevice = Eigen::ThreadPoolDevice;
 using GPUDevice = Eigen::GpuDevice;
 
-// CPUに特化された実際の計算。
+REGISTER_OP("Example")
+    .Attr("T: numbertype")
+    .Input("input: T")
+    .Output("input_times_two: T")
+    .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
+      c->set_output(0, c->input(0));
+      return Status::OK();
+    });
+
+// CPU specialization of actual computation.
 template <typename T>
 struct ExampleFunctor<CPUDevice, T> {
   void operator()(const CPUDevice& d, int size, const T* in, T* out) {
@@ -176,23 +167,23 @@ struct ExampleFunctor<CPUDevice, T> {
   }
 };
 
-// OpKernelの定義。
-// テンプレートパラメータ<T>は、テンソルのデータ型。
+// OpKernel definition.
+// template parameter <T> is the datatype of the tensors.
 template <typename Device, typename T>
 class ExampleOp : public OpKernel {
  public:
   explicit ExampleOp(OpKernelConstruction* context) : OpKernel(context) {}
 
   void Compute(OpKernelContext* context) override {
-    // 入力テンソルを取得する。
+    // Grab the input tensor
     const Tensor& input_tensor = context->input(0);
 
-    // 出力テンソルを作成する。
+    // Create an output tensor
     Tensor* output_tensor = NULL;
     OP_REQUIRES_OK(context, context->allocate_output(0, input_tensor.shape(),
                                                      &output_tensor));
 
-    // 計算する。
+    // Do the computation.
     OP_REQUIRES(context, input_tensor.NumElements() <= tensorflow::kint32max,
                 errors::InvalidArgument("Too many elements in tensor"));
     ExampleFunctor<Device, T>()(
@@ -203,7 +194,7 @@ class ExampleOp : public OpKernel {
   }
 };
 
-// CPUカーネルを登録する。
+// Register the CPU kernels.
 #define REGISTER_CPU(T)                                          \
   REGISTER_KERNEL_BUILDER(                                       \
       Name("Example").Device(DEVICE_CPU).TypeConstraint<T>("T"), \
@@ -211,11 +202,11 @@ class ExampleOp : public OpKernel {
 REGISTER_CPU(float);
 REGISTER_CPU(int32);
 
-// GPUカーネルを登録する。
+// Register the GPU kernels.
 #ifdef GOOGLE_CUDA
 #define REGISTER_GPU(T)                                          \
-  /* 明示的なインスタンス化は、kernel_example.cu.ccに定義する。 */  \
-  extern template ExampleFunctor<GPUDevice, T>;                  \
+  /* Declare explicit instantiations in kernel_example.cu.cc. */ \
+  extern template class ExampleFunctor<GPUDevice, T>;            \
   REGISTER_KERNEL_BUILDER(                                       \
       Name("Example").Device(DEVICE_GPU).TypeConstraint<T>("T"), \
       ExampleOp<GPUDevice, T>);
@@ -228,63 +219,59 @@ REGISTER_GPU(int32);
 // kernel_example.cu.cc
 #ifdef GOOGLE_CUDA
 #define EIGEN_USE_GPU
-#include "example.h"
+#include "kernel_example.h"
 #include "tensorflow/core/util/gpu_kernel_helper.h"
 
 using namespace tensorflow;
 
 using GPUDevice = Eigen::GpuDevice;
 
-// CUDAカーネルを定義する。
+// Define the CUDA kernel.
 template <typename T>
 __global__ void ExampleCudaKernel(const int size, const T* in, T* out) {
   for (int i = blockIdx.x * blockDim.x + threadIdx.x; i < size;
        i += blockDim.x * gridDim.x) {
-    out[i] = 2 * ldg(in + i);
+    out[i] = 2 * __ldg(in + i);
   }
 }
 
-// CUDAカーネルを起動するGPU向けの実装を定義する。
+// Define the GPU implementation that launches the CUDA kernel.
 template <typename T>
 void ExampleFunctor<GPUDevice, T>::operator()(
     const GPUDevice& d, int size, const T* in, T* out) {
-  // CUDAカーネルを起動する。
+  // Launch the cuda kernel.
   //
-  // 計算のためのblock数とthread_per_block数の例は、
-  // core/util/gpu_kernel_helper.hを見てください。
+  // See core/util/gpu_kernel_helper.h for example of computing
+  // block count and thread_per_block count.
   int block_count = 1024;
   int thread_per_block = 20;
   ExampleCudaKernel<T>
       <<<block_count, thread_per_block, 0, d.stream()>>>(size, in, out);
 }
 
-// 登録されたOpKernelの型のために、明示的にファンクタをインスタンス化します。
+// Explicitly instantiate functors for the types of OpKernels registered.
 template struct ExampleFunctor<GPUDevice, float>;
 template struct ExampleFunctor<GPUDevice, int32>;
 
 #endif  // GOOGLE_CUDA
 ```
 
+## 演算子ライブラリをビルドする
 
-## オペレーションライブラリの構築
+### システムコンパイラーを使って演算子をコンパイルする（TensorFlow バイナリインストール）
 
-### システムのコンパイラを使ってコンパイル（TensorFlowのバイナリインストール）
-
-システム上で利用できる `g++` や `clang` のような `C++` コンパイラを使って、`zero_out.cc` をコンパイルするはずです。
-バイナリのPIPパッケージは、オペレーションをコンパイルするために必要な、ヘッダファイルとライブラリをシステム固有の場所にインストールします。
-しかし、TensorFlowのpythonライブラリは、ヘッダのディレクトリを取得する `get_include` 関数と、リンクされる共有オブジェクトがあるディレクトリを取得する `get_lib` 関数を提供しています。
-Ubuntuマシン上におけるこれらの関数の出力を、次に示します。
+システムで提供されている `g++` や `clang` のような `C++` コンパイラを使えば、`zero_out.cc` をコンパイルすることができます。バイナリ PIP パッケージは、コンパイルに必要なヘッダーファイルとライブラリをシステム固有の場所にインストールしますが、TensorFlow python ライブラリには、ヘッダーのディレクトリを取得する `get_include` 関数と、リンクされる共有オブジェクトがあるディレクトリを取得する `get_lib` 関数があります。Ubuntu マシン上でのこれらの関数の出力を次に示します。
 
 ```bash
 $ python
 >>> import tensorflow as tf
 >>> tf.sysconfig.get_include()
-'/usr/local/lib/python2.7/site-packages/tensorflow/include'
+'/usr/local/lib/python3.6/site-packages/tensorflow/include'
 >>> tf.sysconfig.get_lib()
-'/usr/local/lib/python2.7/site-packages/tensorflow'
+'/usr/local/lib/python3.6/site-packages/tensorflow'
 ```
 
-`g++` がインストールされていることを想定し、ここではオペレーションを動的ライブラリにコンパイルするための一連のコマンドを示します。
+`g++` がインストールされていることを前提に、ここでは演算子を動的ライブラリにコンパイルするための一連のコマンドを示します。
 
 ```bash
 TF_CFLAGS=( $(python -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_compile_flags()))') )
@@ -292,15 +279,13 @@ TF_LFLAGS=( $(python -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.ge
 g++ -std=c++11 -shared zero_out.cc -o zero_out.so -fPIC ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} -O2
 ```
 
-Mac OS X上では、`.so` ファイルをビルドするときに、追加フラグ "-undefined dynamic_lookup" が必要です。
+macOS では、`.so` ファイルをビルドするときに、"-undefined dynamic_lookup" という追加フラグが必要です。
 
-> `gcc` のバージョンが `>=5` のときの注意点: gccは、バージョン `5` から新しいC++ [ABI](https://gcc.gnu.org/gcc-5/changes.html#libstdcxx) を利用します。TensorFlowのウェブサイトで利用可能なパッケージは、古いABIを利用する `gcc4` でビルドされています。もしオペレーションを `gcc>=5` でコンパイルする場合、コマンドラインに `-D_GLIBCXX_USE_CXX11_ABI=0` を追加し、古いABIと互換をもたせるようにしてください。
+> `gcc` のバージョンが `>=5` のときの注意点: gccは、バージョン `5` から新しい C++ [ABI](https://gcc.gnu.org/gcc-5/changes.html#libstdcxx) を利用しています。TensorFlow のウェブサイトで提供されているパッケージは、古い ABI を利用する `gcc4` でビルドされています。演算子ライブラリを `gcc>=5` でコンパイルする場合、コマンドラインに `-D_GLIBCXX_USE_CXX11_ABI=0` を追加し、ライブラリが古い ABI に対応できるようにしてください。
 
+### bazel を使って演算子をコンパイルする（TensorFlow ソースインストール）
 
-### bazelを使ってオペレーションをコンパイル（TensorFlowのソースコードインストール）
-
-もしTensorFlowのソースコードがインストールされているなら、オペレーションをコンパイルするためにTensorFlowのビルドシステムを使用できます。
-Bazelのビルドルールに従ったBUILDファイルを [`tensorflow/core/user_ops`][user_ops] ディレクトリに配置してください。
+TensorFlow ソースがインストールされている場合は、TensorFlow のビルドシステムを利用して演算子をコンパイルすることができます。BUILD ファイルを次の Bazel ビルドルールに従って、[`tensorflow/core/user_ops`](https://www.tensorflow.org/code/tensorflow/core/user_ops/) ディレクトリに配置してください。
 
 ```python
 load("//tensorflow:tensorflow.bzl", "tf_custom_op_library")
@@ -311,37 +296,51 @@ tf_custom_op_library(
 )
 ```
 
-`zero_out.so` をビルドするために、次のコマンドを実行します。
+次のコマンドを使用して、`zero_out.so` をビルドします。
 
 ```bash
 $ bazel build --config opt //tensorflow/core/user_ops:zero_out.so
 ```
 
-Note: 前述したように、もしgcc>=5でコンパイルする場合は、bazelのコマンドラインに `--cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0"` を追加してください。
+`Example` 演算のコンパイルでは、CUDA カーネルで、`tf_custom_op_library` の `gpu_srcs` パラメーターを使用する必要があります。BUILD ファイルを次の Bazel ビルドツールに従って、[`tensorflow/core/user_ops`](https://www.tensorflow.org/code/tensorflow/core/user_ops/) ディレクトリの新しいフォルダ（"example_gpu" など）に配置してください。
 
-> Note: 標準の `cc_library` ルールを利用して共有ライブラリ（`.so` ファイル）を作成できますが、`tf_custom_op_library` マクロを利用することを強く推奨します。このマクロは、必要となるいくつかの依存関係を追加し、共有ライブラリがTensorFlowのプラグイン読み込み機構と適合しているかを確認します。
+```python
+load("//tensorflow:tensorflow.bzl", "tf_custom_op_library")
 
+tf_custom_op_library(
+    # kernel_example.cc  kernel_example.cu.cc  kernel_example.h
+    name = "kernel_example.so",
+    srcs = ["kernel_example.h", "kernel_example.cc"],
+    gpu_srcs = ["kernel_example.cu.cc", "kernel_example.h"],
+)
+```
 
-## オペレーションをPythonで使用する
+次のコマンドを使用して、`kernel_example.so` をビルドします。
 
-TensorFlowのPython APIは、動的ライブラリをロードしてTensorFlowのフレームワークにオペレーションを登録する、`tf.load_op_library` 関数を提供しています。
-`load_op_library` は、オペレーションとカーネルのPythonラッパーを含んだ、Pythonモジュールを返します。
-たとえば、オペレーションを1度ビルドしたら、Pythonから次のように実行できます。
+```bash
+$ bazel build --config opt //tensorflow/core/user_ops/example_gpu:kernel_example.so
+```
+
+注意: 前述のとおり、gcc&gt;=5 でコンパイルする場合は、Bazel のコマンドライン引数に `--cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0"` を追加してください。
+
+> 注意: 標準の `cc_library` ルールを利用して共有ライブラリ（`.so` ファイル）を作成できますが、`tf_custom_op_library` マクロを利用することを強く推奨します。このマクロは、必要となる依存関係を追加し、共有ライブラリが TensorFlow のプラグイン読み込みメカニズムに対応しているかを確認します。
+
+## 演算子を Python で使用する
+
+TensorFlow Python API には、動的ライブラリを読み込んで演算心を TensorFlow フレームワークに登録する `tf.load_op_library` 関数があります。`load_op_library` は、演算子とカーネルの Python ラッパーを含む Python モジュールを返します。そのため、演算子をビルドしたら、Python から次のようにして実行することができます。
 
 ```python
 import tensorflow as tf
 zero_out_module = tf.load_op_library('./zero_out.so')
-with tf.Session(''):
-  zero_out_module.zero_out([[1, 2], [3, 4]]).eval()
+print(zero_out_module.zero_out([[1, 2], [3, 4]]).numpy())
 
-# 出力表示
+# Prints
 array([[1, 0], [0, 0]], dtype=int32)
 ```
 
-([PEP8](https://www.python.org/dev/peps/pep-0008/) に従うために、)生成された関数は、スネークケースの名前が与えられることを覚えておいてください。
-つまり、C++のファイル内で `ZeroOut` と名付けられたオペレーションは、Pythonの関数では `zero_out` で呼ぶことになるでしょう。
+生成された関数は、スネークケースの名前が与えられることを覚えておいてください（[PEP8](https://www.python.org/dev/peps/pep-0008/) に準拠）。そのため、C++ ファイルで `ZeroOut` と名付けられた演算子は、Python 関数では `zero_out` となります。
 
-Pythonモジュールから `import` 可能な、通常の関数としてオペレーションを利用可能にするには、次のようにしてPythonのソースコードのファイルに、`load_op_library` の呼び出しをもつのが便利かもしれません。
+Python モジュールから `import` 可能な、通常の関数として演算子を利用できるようにするには、次のように Python ソースファイルで `load_op_library` の呼び出しを使用すると役立つ可能性があります。
 
 ```python
 import tensorflow as tf
@@ -350,11 +349,9 @@ zero_out_module = tf.load_op_library('./zero_out.so')
 zero_out = zero_out_module.zero_out
 ```
 
+## 演算子の動作を検証する
 
-## オペレーションの動作を検証する
-
-正しくオペレーションが実装できたことを確かめるよい方法は、テストを書くことです。
-次の内容を持った `zero_out_op_test.py` を作ってください。
+演算子が正しく実装されたことを検証するには、テストを書くことをお勧めします。次のコンテンツで `zero_out_op_test.py` を作成します。
 
 ```python
 import tensorflow as tf
@@ -370,39 +367,35 @@ if __name__ == "__main__":
   tf.test.main()
 ```
 
-そして、テストを実行してください（TensorFlowがインストール済みであると想定しています）。
+次に、テストを実行します（TensorFlow がインストール済みであることが前提です）。
 
 ```sh
 $ python zero_out_op_test.py
 ```
 
+## 演算子に高度な機能を組み込む
 
-## より進んだ機能をオペレーションに作り込む
+基本的な（ある程度の制限が付いた）演算子のビルド方法と実装について理解したので、演算子に通常組み込む必要のある、より複雑な機能を確認しましょう。
 
-基本的な（そして、やや制限された）オペレーションと実装の構築方法を学んだため、オペレーションに対して作り込む必要が出てくるであろう、一般的でより複雑なことを見ていきましょう。
-
-* [条件のチェックと検証](#条件チェックと検証)
-* [オペレーションの登録](#オペレーションの登録)
-  * [アトリビュート](#アトリビュート)
-  * [アトリビュート型](#アトリビュート型)
-  * [ポリモーフィズム](#ポリモーフィズム)
-  * [入力と出力](#入力と出力)
-  * [後方互換性](#後方互換性)
-* [GPUサポート](#GPUサポート)
-  * [GPUデバイス向けのカーネルコンパイル](#GPUデバイス向けのカーネルコンパイル)
-* [Pythonにおける勾配の実装](#Pythonにおける勾配の実装)
-* [C++でのシェイプ関数](#C++でのシェイプ関数)
-
+- [条件チェックと検証](#conditional-checks-and-validation)
+- [演算子の登録](#op-registration)
+    - [属性](#attrs)
+    - [属性のタイプ](#attr-types)
+    - [ポリモーフィズム](#polymorphism)
+    - [入力と出力](#inputs-and-outputs)
+    - [下位互換性](#backwards-compatibility)
+- [GPU サポート](#gpu-support)
+    - [GPU デバイス向けのカーネルのコンパイル](#compiling-the-kernel-for-the-gpu-device)
+- [Python での勾配の実装](#implement-the-gradient-in-python)
+- [C++ での形状関数](#shape-functions-in-c)
 
 ### 条件チェックと検証
 
-これまで想定してきた例では、いかなるシェイプのテンソルに対しても適用できるオペレーションを想定していました。
-仮にベクトルに対してのみ適用したい場合、どうなるでしょうか？
-これまでのOpKernelの実装に、チェックを追加することになります。
+ここまでの例では、あらゆる形状のテンソルに適用される演算子が想定されていましたが、ベクトルにのみ適用する場合はそうでしょうか。つまり、上記の OpKernel 実装にチェックを追加するということです。
 
 ```c++
   void Compute(OpKernelContext* context) override {
-    // 入力テンソルを取得する
+    // Grab the input tensor
     const Tensor& input_tensor = context->input(0);
 
     OP_REQUIRES(context, TensorShapeUtils::IsVector(input_tensor.shape()),
@@ -411,39 +404,29 @@ $ python zero_out_op_test.py
   }
 ```
 
-これは入力がベクトルであることを表明し、もしそうでないなら `InvalidArgument` ステータスを設定して戻ります。
-[`OP_REQUIRES` マクロ][validation-macro] は、3つの引数を受け取ります。
+これは入力がベクトルであることを表明し、ベクトルでない場合は `InvalidArgument` ステータスを設定して戻します。`OP_REQUIRES` マクロは、次の 3 つの引数を取ります。
 
-*  `context`、`SetStatus()` メソッドのための、`OpKernelContext` または `OpKernelConstruction` のポインタです ([`tensorflow/core/framework/op_kernel.h`](https://www.tensorflow.org/code/tensorflow/core/framework/op_kernel.h) を確認してください)。
-* 条件文。たとえば、[`tensorflow/core/framework/tensor_shape.h`](https://www.tensorflow.org/code/tensorflow/core/framework/tensor_shape.h) にあるテンソルのシェイプを検証する関数
-* `Status` オブジェクトで表現されるエラーそのもの。[`tensorflow/core/lib/core/status.h`](https://www.tensorflow.org/code/tensorflow/core/lib/core/status.h) を見てください。`Status` は、型(`InvalidArgument` が頻出ですが、型のリストを見てください)とメッセージ。エラーを構築する関数は、[`tensorflow/core/lib/core/errors.h`][validation-macros] にあります。
+- `context`。`OpKernelContext` または `OpKernelConstruction` のポインタで（[`tensorflow/core/framework/op_kernel.h`](https://www.tensorflow.org/code/tensorflow/core/framework/op_kernel.h) を参照）、`SetStatus()` メソッドに使用します。
+- 条件文。例として [`tensorflow/core/framework/tensor_shape.h`](https://www.tensorflow.org/code/tensorflow/core/framework/tensor_shape.h) には、テンソルの形状を検証するための関数があります。
+- エラー。`Status` オブジェクトで表現されます。[`tensorflow/core/lib/core/status.h`](https://www.tensorflow.org/code/tensorflow/core/lib/core/status.h) をご覧ください。`Status` には、型（通常は `InvalidArgument` ですが、型のリストをご覧ください）とメッセージの両方があります。エラーを構築する関数は、[`tensorflow/core/lib/core/errors.h`](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h) にある場合があります。
 
-あるいは、もしエラーとなった関数から `Status` オブジェクトを返したかどうかを判定し、エラーならそのまま返す場合は、[`OP_REQUIRES_OK`][validation-macros] が利用できます。
-これらのマクロは、両方ともエラーとなった関数から戻ります。
+または、ある関数から返された `Status` オブジェクトがエラーであるかをテストし、エラーである場合はそれを返して [`OP_REQUIRES_OK`](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h) を使用することもできます。これらのマクロは、エラー時に関数から返されます。
 
+### 演算子の登録
 
-### オペレーションの登録
+#### 属性
 
-#### アトリビュート
+演算子には属性があり、その値は演算子がグラフに追加された時に設定されます。これらは演算子を構成するために使用され、その値にはカーネル実装内から演算子登録の入力と出力の型でアクセスすることができます。入力の方が柔軟であるため、できる限り属性の代わりに入力を使用するようにしてください。一方で入力はテンソルであり、値は動的に変わります。すなわち、入力はステップごとに変化したり、フィードを使って設定されたりします。属性は、入力で行えない、シグネチャ（入力または出力の数または型）に影響する構成やステップごとに変更できない構成に使用されます。
 
-オペレーションは、オペレーションがグラフに追加されるときに設定される値である、アトリビュートをもつことができます。
-これらはオペレーションを設定するときに使用され、カーネル実装やオペレーションの登録における入出力のデータ型の中で値にアクセスできます。
-入力のほうがより柔軟であるため、できればアトリビュートの代わりに入力を使ってください。
-これは、アトリビュートが定数値であり、グラフ構築時に定義する必要があるためです。
-一方で入力はテンソルであり、値は動的に変わります。
-すなわち、フィードを設定するように、入力はステップ毎に変わります。
-アトリビュートは、入力ではできないことに対して使われます。
-たとえば、シグネチャに影響するいかなる設定（入出力の型や数）や、ステップごとには変わらない設定に使われます。
-
-オペレーションを登録するときに、次の仕様で `Attr` メソッドを使って名前と型を指定し、アトリビュートを定義します。
+属性は演算子を登録する際に定義します。`Attr` メソッドを使って名前と型を指定しますが、次の形式を使用する必要があります。
 
 ```
 <name>: <attr-type-expr>
 ```
 
-`<name>` は、アルファベットとアンダースコアで構成される文字で、`<attr-type-expr>` は、[以下で説明する](#アトリビュート型) 型表現です。
+上記の `<name>` は、文字で始まり、英数字とアンダースコアを使用できます。`<attr-type-expr>` は、[以下で説明](#%E3%82%A2%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%83%88%E5%9E%8B)される形式の型表現です。
 
-たとえば、0番目のエレメントのみの代わりに、ユーザが指定したインデックスを保存する `ZeroOut` オペレーションにしたい場合は、次のようにオペレーションを登録します。
+たとえば、0 番目の要素だけでなくユーザー指定のインデックスを保持するために演算子を `ZeroOut` する場合は、次のように演算子を登録できます。
 
 ```c++
 REGISTER_OP("ZeroOut")
@@ -452,18 +435,18 @@ REGISTER_OP("ZeroOut")
     .Output("zeroed: int32");
 ```
 
-（[アトリビュート型](#アトリビュート型) のセットが、入出力に使われていた `tf.DType` と異なることに注意してください。）
+（一連の[属性の型](#%E3%82%A2%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%83%88%E5%9E%8B)は、入力と出力に使用される `tf.DType` と異なることに注意してください。）
 
-カーネルでは、コンストラクタ内で `context` パラメータを通してアクセスできます。
+カーネルでは、`context` パラメータを通じてコンストラクタ内でこの属性にアクセスできます。
 
 ```c++
 class ZeroOutOp : public OpKernel {
  public:
   explicit ZeroOutOp(OpKernelConstruction* context) : OpKernel(context) {
-    // 値を保存するインデックスを取得する
+    // Get the index of the value to preserve
     OP_REQUIRES_OK(context,
                    context->GetAttr("preserve_index", &preserve_index_));
-    // preserve_indexが正であるか確認する
+    // Check that preserve_index is positive
     OP_REQUIRES(context, preserve_index_ >= 0,
                 errors::InvalidArgument("Need preserve_index >= 0, got ",
                                         preserve_index_));
@@ -476,133 +459,126 @@ class ZeroOutOp : public OpKernel {
 };
 ```
 
-そして、これを `Compute` メソッドで使用します。
+そして、これを `Compute` メソッドで使用することができます。
 
 ```c++
   void Compute(OpKernelContext* context) override {
     // ...
 
-    // 潜在的に動的な入力を検証するために、保存したアトリビュートを使います。
-    // つまり、preserve_indexが範囲内であるかを確認する
+    // We're using saved attr to validate potentially dynamic input
+    // So we check that preserve_index is in range
     OP_REQUIRES(context, preserve_index_ < input.dimension(0),
                 errors::InvalidArgument("preserve_index out of range"));
 
-    // すべての出力テンソルの要素を0に設定する
+    // Set all the elements of the output tensor to 0
     const int N = input.size();
     for (int i = 0; i < N; i++) {
       output_flat(i) = 0;
     }
 
-    // リクエストされた入力の値を保存する
+    // Preserve the requested input value
     output_flat(preserve_index_) = input(preserve_index_);
   }
 ```
 
+#### 属性の型
 
-#### アトリビュート型
+属性には、次の型がサポートされています。
 
-次に示す型がアトリビュートでサポートされています。
+- `string`: バイトシーケンス（UTF8 である必要はありません）
+- `int`: 符号付き整数
+- `float`: 浮動小数点数
+- `bool`: True または False
+- `type`: [`DataType`](https://www.tensorflow.org/code/tensorflow/core/framework/types.cc) のいずれかの（ref型ではない）値
+- `tensor`: [`TensorProto`](https://www.tensorflow.org/code/tensorflow/core/framework/tensor.proto)
+- `list(<type>)`: `<type>` のリスト。`<type>` は上記のいずれかの型です。`list(list(<type>))` は無効であることに注意してください。
 
-* `string`: バイトシーケンス（UTF8である必要はない）
-* `int`: 符号付き整数
-* `float`: 浮動小数点数
-* `bool`: TrueまたはFalse
-* `type`: [`DataType`][DataTypeString] の（ref型ではない）値のいずれか
-* `shape`: [`TensorShapeProto`][TensorShapeProto]
-* `tensor`: [`TensorProto`][TensorProto]
-* `list(<type>)`: `<type>` のリスト。`<type>` は、上記の型のいずれか。`list(list(<type>))` は無効であることに注意。
-
-信頼のおけるリストである [`op_def_builder.cc:FinalizeAttr`][FinalizeAttr] も参照のこと。
-
+完全なリストについては、[`op_def_builder.cc:FinalizeAttr`](https://www.tensorflow.org/code/tensorflow/core/framework/op_def_builder.cc) もご覧ください。
 
 ##### デフォルト値と制約
 
-アトリビュートはデフォルト値をもつことができ、いくつかのアトリビュート型には制約をもたせることができます。
-制約を持ったアトリビュートを定義するために、次のような `<attr-type-expr>` を利用できます。
+属性にはデフォルト値がある場合があり、一部の型に制約を付けることができます。制約付きの属性を定義するには、次の `<attr-type-expr>` を利用できます。
 
-* `{'<string1>', '<string2>'}`: 値が `<string1>` もしくは `<string2>` である文字列でなければならない。このシンタックスを利用する場合、型名は `string` であることを暗に意味している。enumを真似る場合は、次のようにする。
+`{'<string1>', '<string2>'}`: 値は `<string1>` または `<string2>` を持つ文字列である必要があります。この構文を利用する場合、型名  `string` は暗喩されます。これは enum をエミュレーションします。
 
 ```c++
 REGISTER_OP("EnumExample")
     .Attr("e: {'apple', 'orange'}");
 ```
 
-* `{<type1>, <type2>}`: 型 `type` の値であり、`<type1>` もしくは `<type2>` のいずれかの値でなければならない。`<type1>` と `<type2>` は、サポートされた `tf.DType` である。アトリビュート型 `type` は指定しない。これは、`{...}` に型のリストを持っていることを暗に意味している。たとえば次のような場合、アトリビュート `t` は、`int32`、 `float`、 `bool` のいずれかになる。
+`{<type1>, <type2>}`: 型 `type` の値であり、`<type1>` または `<type2>` のいずれかである必要があります。`<type1>` と `<type2>` は、サポートされている `tf.DType` です。属性の型が `type` であることは指定しません。これは、`{...}` に型のリストがある場合に暗喩されます。この場合には属性 `t` は、`int32`、 `float`、または `bool` のいずれかです。
 
 ```c++
 REGISTER_OP("RestrictedTypeExample")
     .Attr("t: {int32, float, bool}");
 ```
 
-* 一般的な型制約のために、手っ取り早い方法があります
-  * `numbertype`: 型 `type` は、数値型（文字列でもなくBool型でもない）に制限されます。
-  * `realnumbertype`: 複素数型を除いた `numbertype`
-  * `quantizedtype`: 量子化された数値型に限定した `numbertype`
+一般的な型制約には、次のようなショートカットがあります。
 
-これらによって許されている特定の型リストは、[`tensorflow/core/framework/types.h`](https://www.tensorflow.org/code/tensorflow/core/framework/types.h) に定義された（`NumberTypes()` のような）関数によって定義されています。
-この例では、アトリビュート `t` は数値型の1つでなければなりません。
+- `numbertype`: 型 `type` は、数値型（文字列型、非ブール型ではない型）に制限されます。
+- `realnumbertype`: 複素数型を除いた `numbertype` に似ています。
+- `quantizedtype`: `numbertype` に似ていますが、量子化された数値型のみです。
+
+これらで許可された具体的な型のリストは関数（`NumberTypes()` など）によって [`tensorflow/core/framework/types.h`](https://www.tensorflow.org/code/tensorflow/core/framework/types.h) に定義されています。この例では、属性 `t` は数値型である必要があります。
 
 ```c++
 REGISTER_OP("NumberType")
     .Attr("t: numbertype");
 ```
 
-このオペレーションでは、次のようになります。
+この演算子の場合:
 
 ```python
-tf.number_type(t=tf.int32)  # 有効
-tf.number_type(t=tf.bool)   # 無効
+tf.number_type(t=tf.int32)  # Valid
+tf.number_type(t=tf.bool)   # Invalid
 ```
 
-リストは、ほかのリストや単一の型と組み合わせることができます。
-次のオペレーションは、アトリビュート `t` が、数値型、Bool型のいずれについても許可しています。
+リストは他のリストや single 型と組み合わせることができます。次の演算子では、属性 `t` を任意の数値型またはブール型にすることができます。
 
 ```c++
 REGISTER_OP("NumberOrBooleanType")
     .Attr("t: {numbertype, bool}");
 ```
 
-このオペレーションでは、次のようになります。
+この演算子の場合:
 
 ```python
-tf.number_or_boolean_type(t=tf.int32)  # 有効
-tf.number_or_boolean_type(t=tf.bool)   # 有効
-tf.number_or_boolean_type(t=tf.string) # 無効
+tf.number_or_boolean_type(t=tf.int32)  # Valid
+tf.number_or_boolean_type(t=tf.bool)   # Valid
+tf.number_or_boolean_type(t=tf.string) # Invalid
 ```
 
-* `int >= <n>`: 値は、`<n>` 以上の整数型でなければならない。`<n>` は自然数である。
-
-たとえば、次に示すオペレーションの登録では、アトリビュート `a` が `2` 以上の値であることが必要であると示しています。
+`int >= <n>`: 値は、`<n>` 以上の整数型である必要があります。`<n>` は自然数です。たとえば、次の演算子の登録には、属性 `a` に `2` つ以上の値がある必要があることが示されています。
 
 ```c++
 REGISTER_OP("MinIntExample")
     .Attr("a: int >= 2");
 ```
 
-* `list(<type>) >= <n>`: 長さが `<n>` 以上の、型 `<type>` のリストである。
-
-たとえば、次に示すオペレーションの登録では、アトリビュート `a` が、3つ以上の型（`int32` か `float`）のリストであることを示しています。
+`list(<type>) >= <n>`: 長さが `<n>` 以上の型 `<type>` のリストです。たとえば、次の演算子の登録には、属性 `a` は型のリスト（`int32` または `float`）のリストであり、少なくとも 3 つ以上の値が必要であることが示されています。
 
 ```c++
 REGISTER_OP("TypeListExample")
     .Attr("a: list({int32, float}) >= 3");
 ```
 
-（生成されたコードでは任意である）アトリビュートのデフォルト値を設定するためには、次のように最後に `= <default>` を追加します。
+属性のデフォルトの値を設定するには（生成されるコードのオプション）、次のように最後に `= <default>` を追加します。
 
 ```c++
 REGISTER_OP("AttrDefaultExample")
     .Attr("i: int = 0");
 ```
 
-加えて、制約とデフォルト値を同時に指定することもできます。
+さらに、制約とデフォルト値を同時に指定することもできます。
 
 ```c++
 REGISTER_OP("AttrConstraintAndDefaultExample")
     .Attr("i: int >= 1 = 1");
 ```
 
-サポートされているデフォルト値のシンタックスは、GraphDefの定義の結果として表現されるprotoで利用できるものになります。
+サポートされているデフォルト値のシンタックスは、GraphDefの定義の結果として表現される proto で利用できるものになります。
+
+次に、すべての型にデフォルトを指定する例を示します。
 
 ```c++
 REGISTER_OP("AttrDefaultExampleForAllTypes")
@@ -617,17 +593,15 @@ REGISTER_OP("AttrDefaultExampleForAllTypes")
    .Attr("l_int: list(int) = [2, 3, 5, 7]");
 ```
 
-特に型 `type` の値については、`tf.DType` になります。
-
+型 `type` の値は `tf.DType` を使用することに特に注意してください。
 
 #### ポリモーフィズム
 
 ##### 型ポリモーフィズム
 
-異なる型を入力として受け取るか、異なる型を出力するオペレーションについては、オペレーションの登録において、[入力または出力の型](#入力と出力) に [アトリビュート](#アトリビュート) を指定できます。
-一般的に、サポートされたそれぞれの型について `OpKernel` を登録します。
+異なる型を入力として取るか異なる型を出力する演算子については、オペレーションの登録において、[1 つの属性](#%E5%85%A5%E5%8A%9B%E3%81%A8%E5%87%BA%E5%8A%9B) を [入力または出力の型](#%E3%82%A2%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%83%88) に指定できます。一般的にはその後で、サポートされたそれぞれの型について `OpKernel` を登録します。
 
-たとえば、もし `ZeroOut` オペレーションについて、`int32` 型に加えて `float` 型をサポートするのであれば、オペレーションの登録は次のようになります。
+たとえば、`ZeroOut` 演算子を `float` と `int32` に使用する場合、演算子の登録は次のようになります。
 
 ```c++
 REGISTER_OP("ZeroOut")
@@ -636,11 +610,11 @@ REGISTER_OP("ZeroOut")
     .Output("zeroed: T");
 ```
 
-オペレーションの登録は、どちらも型 `T` であることから、入力の型が `float` もしくは `int32` で、出力がおなじ型でなければならないと明示しています。
+これで、演算子の登録は、入力の型が `float` または `int32` であり、出力にも `T` が使用されているためも同じ型で出力されるように指定されました。
 
 ###### 命名
 
-入力、出力、そしてアトリビュートは、スネークケースの名前にすべきです。入力の型や出力の型として使用されるアトリビュートは、例外です。これらのアトリビュートは、オペレーションがグラフに追加されるときに推論され、オペレーションの関数には現れてきません。たとえば、ZeroOutの最後の定義は、次のようなPythonの関数を生成します。
+入力、出力、および属性は通常、スネークケースで命名される必要があります。ただし、入力の型として使用されている属または出力の型に使用されている属性は例外です。これらの属性は、演算子がグラフに追加されるときに推論されるため、演算子の関数には出現しません。たとえば、この最後の ZeroOut の定義では、次のような Python 関数が生成されます。
 
 ```python
 def zero_out(to_zero, name=None):
@@ -649,14 +623,15 @@ def zero_out(to_zero, name=None):
     to_zero: A `Tensor`. Must be one of the following types:
         `float32`, `int32`.
     name: A name for the operation (optional).
+
   Returns:
     A `Tensor`. Has the same type as `to_zero`.
   """
 ```
 
- もし `int32` のテンソルが `to_zero` に渡されてきた場合、`T` は自動的に `int32` （実際は、`DT_INT32`）が設定されます。これらの推論されたアトリビュートは、大文字もしくはキャメルケースで与えられます。
+`int32` のテンソルが `to_zero` に渡されてきた場合、`T` は自動的に `int32` （実際は、`DT_INT32`）に設定されます。これらの推論される属性は、大文字もしくはキャメルケースで命名されます。
 
-出力の型を決めるアトリビュート型を持つオペレーションと比較します。
+これを、出力型を決定する型属性のある演算子と比較して見ましょう。
 
 ```c++
 REGISTER_OP("StringToNumber")
@@ -668,7 +643,7 @@ Converts each string in the input Tensor to the specified numeric type.
 )doc");
 ```
 
-この場合、生成されたPythonのように、ユーザは出力の型を指定しなければなりません。
+この場合、ユーザーは生成される Python で出力型を指定する必要があります。
 
 ```python
 def string_to_number(string_tensor, out_type=None, name=None):
@@ -679,6 +654,7 @@ def string_to_number(string_tensor, out_type=None, name=None):
     out_type: An optional `tf.DType` from: `tf.float32, tf.int32`.
       Defaults to `tf.float32`.
     name: A name for the operation (optional).
+
   Returns:
     A `Tensor` of type `out_type`.
   """
@@ -690,7 +666,7 @@ def string_to_number(string_tensor, out_type=None, name=None):
 #include "tensorflow/core/framework/op_kernel.h"
 
 class ZeroOutInt32Op : public OpKernel {
-  // 前と同様
+  // as before
 };
 
 class ZeroOutFloatOp : public OpKernel {
@@ -699,28 +675,30 @@ class ZeroOutFloatOp : public OpKernel {
       : OpKernel(context) {}
 
   void Compute(OpKernelContext* context) override {
-    // 入力テンソルを取得する。
+    // Grab the input tensor
     const Tensor& input_tensor = context->input(0);
     auto input = input_tensor.flat<float>();
 
-    // 出力テンソルを作成する。
+    // Create an output tensor
     Tensor* output = NULL;
     OP_REQUIRES_OK(context,
                    context->allocate_output(0, input_tensor.shape(), &output));
     auto output_flat = output->template flat<float>();
 
-    // 出力テンソルのすべての要素を0にする。
+    // Set all the elements of the output tensor to 0
     const int N = input.size();
     for (int i = 0; i < N; i++) {
       output_flat(i) = 0;
     }
 
-    // 最初の入力値は維持する。
+    // Preserve the first input value
     if (N > 0) output_flat(0) = input(0);
   }
 };
 
-// TypeConstraint<int32>("T") は、このテンプレートを具現化するときに使用するアトリビュート "T" が "int32" でなければならないことを意味していることに注意。
+// Note that TypeConstraint<int32>("T") means that attr "T" (defined
+// in the op registration above) must be "int32" to use this template
+// instantiation.
 REGISTER_KERNEL_BUILDER(
     Name("ZeroOut")
     .Device(DEVICE_CPU)
@@ -733,16 +711,16 @@ REGISTER_KERNEL_BUILDER(
     ZeroOutFloatOp);
 ```
 
-> [後方互換性](#後方互換性) を保つためには、既存のオペレーションに対してアトリビュートを追加するときに [デフォルト値](#デフォルト値と制約) を指定すべきです。
->
-> ```c++
-> REGISTER_OP("ZeroOut")
->   .Attr("T: {float, int32} = DT_INT32")
->   .Input("to_zero: T")
->   .Output("zeroed: T")
-> ```
+[下位互換性](#%E5%BE%8C%E6%96%B9%E4%BA%92%E6%8F%9B%E6%80%A7) を保つには、既存の演算子に属性を追加するときに[デフォルト値](#%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E5%80%A4%E3%81%A8%E5%88%B6%E7%B4%84)を指定する必要があります。
 
-もしより多くの型、たとえば `double` を追加したいとしましょう。
+```c++
+REGISTER_OP("ZeroOut")
+  .Attr("T: {float, int32} = DT_INT32")
+  .Input("to_zero: T")
+  .Output("zeroed: T")
+```
+
+たとえば、`double` 型など、ほかの型を追加するとしましょう。
 
 ```c++
 REGISTER_OP("ZeroOut")
@@ -751,38 +729,39 @@ REGISTER_OP("ZeroOut")
     .Output("zeroed: T");
 ```
 
-前述のような冗長なコードでほかの `OpKernel` を書く代わりに、C++のテンプレートを使うことができます。
-オーバーロード毎に、1つのカーネル登録（`REGISTER_KERNEL_BUILDER` 呼び出し）が必要になります。
+ほとんどの場合、前述のような冗長なコードでほかの `OpKernel` を書く代わりに、C++ テンプレートを使うことができます。オーバーロードごとに 1つのカーネル登録（`REGISTER_KERNEL_BUILDER` 呼び出し）が必要になります。
 
 ```c++
 template <typename T>
 class ZeroOutOp : public OpKernel {
  public:
   explicit ZeroOutOp(OpKernelConstruction* context) : OpKernel(context) {}
-  
+
   void Compute(OpKernelContext* context) override {
-    // 入力テンソルを取得する。
+    // Grab the input tensor
     const Tensor& input_tensor = context->input(0);
     auto input = input_tensor.flat<T>();
-    
-    // 出力テンソルを作成する。
+
+    // Create an output tensor
     Tensor* output = NULL;
     OP_REQUIRES_OK(context,
                    context->allocate_output(0, input_tensor.shape(), &output));
     auto output_flat = output->template flat<T>();
-    
-    // 出力テンソルのすべての要素を0にする。
+
+    // Set all the elements of the output tensor to 0
     const int N = input.size();
     for (int i = 0; i < N; i++) {
       output_flat(i) = 0;
     }
-    
-    // 最初の入力値は維持する。
+
+    // Preserve the first input value
     if (N > 0) output_flat(0) = input(0);
   }
 };
 
-// TypeConstraint<int32>("T") は、このテンプレートを具現化するときに使用するアトリビュート "T" が "int32" でなければならないことを意味していることに注意。
+// Note that TypeConstraint<int32>("T") means that attr "T" (defined
+// in the op registration above) must be "int32" to use this template
+// instantiation.
 REGISTER_KERNEL_BUILDER(
     Name("ZeroOut")
     .Device(DEVICE_CPU)
@@ -800,7 +779,7 @@ REGISTER_KERNEL_BUILDER(
     ZeroOutOp<double>);
 ```
 
-もし2つ以上のオーバーロードが必要な場合は、登録をマクロで行うことができます。
+オーバーロード数が 3 つ以上ある場合は、登録をマクロに入れ込むことができます。
 
 ```c++
 #include "tensorflow/core/framework/op_kernel.h"
@@ -817,7 +796,7 @@ REGISTER_KERNEL(double);
 #undef REGISTER_KERNEL
 ```
 
-カーネルを登録する型のリストに依存しますが、[`tensorflow/core/framework/register_types.h`][register_types] で提供されているマクロを利用できます。
+カーネルを登録する型のリストによっては、[`tensorflow/core/framework/register_types.h`](https://www.tensorflow.org/code/tensorflow/core/framework/register_types.h) が提供するマクロを使用することも可能です。
 
 ```c++
 #include "tensorflow/core/framework/op_kernel.h"
@@ -841,13 +820,11 @@ TF_CALL_REAL_NUMBER_TYPES(REGISTER_KERNEL);
 #undef REGISTER_KERNEL
 ```
 
-
 ##### 入力と出力のリスト
 
-異なる型を受け取れる、もしくは出力できるようにすることに加えて、オペレーションは数多くのテンソルを消費または生成します。
+異なる型を受け入れたり生成したりできるほか、演算子は、テンソルの可変数を消費または生成することができます。
 
-次の例では、アトリビュート `T` は型の *リスト* を持ち、入力 `in` と出力 `out` の両方の型として使用されます。
-入力と出力はその型のテンソルのリストです（そして、両方とも型 `T` をもつため、出力テンソルの型と数は入力とおなじです）。
+次の例では、属性 `T` は型の*リスト*を保持し、入力  `in` と出力 `out` の両方の型として使用されます。入力と出力はその方のテンソルのリストです（出力のテンソルの数と型にも `T` が使用されているため、入力と同じになります）。
 
 ```c++
 REGISTER_OP("PolymorphicListExample")
@@ -856,9 +833,7 @@ REGISTER_OP("PolymorphicListExample")
     .Output("out: T");
 ```
 
-リスト内で型を指定し、制限を加えることもできます。
-次の場合は、入力が `float` と `double` のテンソルのリストです。
-オペレーションは、たとえば入力型として `(float, double, float)` を受け取りますが、この場合出力型も `(float, double, float)` となります。
+また、どの型をリストに指定できるの制約を付けることもできます。次のケースでは、入力は `float` 型と `double` 型のテンソルのリストです。演算子は、たとえば、入力型 `(float, double, float)` を受け入れ、その場合の出力型も `(float, double, float)` になります。
 
 ```c++
 REGISTER_OP("ListTypeRestrictionExample")
@@ -867,7 +842,7 @@ REGISTER_OP("ListTypeRestrictionExample")
     .Output("out: T");
 ```
 
-もしリスト内のすべてのテンソルがおなじ型であるならば、次のようにしてもよいです。
+リスト内のすべてのテンソルを同じ型にする場合は、次のようにします。
 
 ```c++
 REGISTER_OP("IntListInputExample")
@@ -876,10 +851,9 @@ REGISTER_OP("IntListInputExample")
     .Output("out: int32");
 ```
 
-これは、`int32` のテンソルのリストを受け取り、リストの長さを指定するために、`int` のアトリビュート `N` を利用しています。
+これは、`int32` テンソルのリストを受け入れ、`int` 属性 `N` を使用して、リストの長さを指定します。
 
-これは、[型ポリモーフィズム](#型ポリモーフィズム) でも同様です。
-次の例では、入力がおなじ（ただし指定されていない）型（`"T"`）の（長さが `"N"` である）テンソルのリストで、出力がおなじ型の単一のテンソルです。
+これを [型ポリモーフィック](#type-polymorphism)にすることもできます。次の例では、入力は同じ（未指定）型（`"T"`）のテンソルのリスト（長さ `"N"`）で、出力は同じ型の 1 つのテンソルです。
 
 ```c++
 REGISTER_OP("SameListInputExample")
@@ -889,9 +863,7 @@ REGISTER_OP("SameListInputExample")
     .Output("out: T");
 ```
 
-デフォルトでは、テンソルのリストは最小で1の長さを持ちます。
-[対象とするアトリビュートの制約として `">="` ](#デフォルト値と制約) を利用することで、デフォルト値を変更できます。
-次の例では、入力は少なくとも2つの `int32` のテンソルのリストです。
+デフォルトのテンソルの長さは 1 以上です。このデフォルトは、[対応する属性に `">="` 制約](#default-values-and-constraints)を使って変更することができます。次の例では、入力は少なくとも 2 つの `int32` 型テンソルのリストです。
 
 ```c++
 REGISTER_OP("MinLengthIntListExample")
@@ -900,7 +872,7 @@ REGISTER_OP("MinLengthIntListExample")
     .Output("out: int32");
 ```
 
-同様のシンタックスが、アトリビュート `"list(type)"` に対しても適用できます。
+同じ構文は、`"list(type)"` 属性でも動作します。
 
 ```c++
 REGISTER_OP("MinimumLengthPolymorphicListExample")
@@ -909,10 +881,9 @@ REGISTER_OP("MinimumLengthPolymorphicListExample")
     .Output("out: T");
 ```
 
-
 #### 入力と出力
 
-これまでの内容を要約すると、オペレーションの登録では、複数の入力と出力をもつことができます。
+上記をまとめると、演算子の登録は複数の入力と出力を持つことができます。
 
 ```c++
 REGISTER_OP("MultipleInsAndOuts")
@@ -922,130 +893,121 @@ REGISTER_OP("MultipleInsAndOuts")
     .Output("b: int32");
 ```
 
-それぞれの入力と出力の指定は、次の形で行います。
+それぞれの入力または出力の仕様は、次の形式です。
 
 ```
 <name>: <io-type-expr>
 ```
 
-`<name>` は文字で始まり、英数字の文字とアンダースコアから構成できます。
-`<io-type-expr>` は、次の型表現のいずれかになります。
+上記の `<name>` は、文字で始まり、英数字とアンダースコアを使用できます。`<io-type-expr>` は、次の型表現のいずれかです。
 
-* `<type>`: `<type>` は、サポートされる入力型（たとえば、`float`, `int32`, `string`）である。与えられた型の単一のテンソルであることを示す。`tf.DType` を参照のこと。
+- `<type>`: `<type>` は、サポートされる入力型（`float`、`int32`、`string` など）です。これは特定の型の単一のテンソルを示します。
 
-```c++
-REGISTER_OP("BuiltInTypesExample")
-    .Input("integers: int32")
-    .Input("complex_numbers: complex64");
-```
+    `tf.DType` をご覧ください。
 
-* `<attr-type>`: `<attr-type>` は、（型の制限がありうる）`type` もしくは `list(type)` の型をもつ [アトリビュート](#アトリビュート) の名前です。このシンタックスは、[ポリモーフィズムなオペレーション](#ポリモーフィズム) を許しています。
+    ```c++
+    REGISTER_OP("BuiltInTypesExample")
+        .Input("integers: int32")
+        .Input("complex_numbers: complex64");
+    ```
 
-```c++
-REGISTER_OP("PolymorphicSingleInput")
-    .Attr("T: type")
-    .Input("in: T");
+- `<attr-type>`: `<attr-type>` は、[属性](#attrs)の名前で、型 `type` または `list(type)` を持ち、型制限の可能性があります。この構文では[ポリモーフィズムな演算子](#%E3%83%9D%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%95%E3%82%A3%E3%82%BA%E3%83%A0)が可能です。
 
-REGISTER_OP("RestrictedPolymorphicSingleInput")
-    .Attr("T: {int32, int64}")
-    .Input("in: T");
-```
+    ```c++
+    REGISTER_OP("PolymorphicSingleInput")
+        .Attr("T: type")
+        .Input("in: T");
 
-`list(type)` 型のアトリビュートを参照することは、連続したテンソルを受け入れることになります。
+    REGISTER_OP("RestrictedPolymorphicSingleInput")
+        .Attr("T: {int32, int64}")
+        .Input("in: T");
+    ```
 
-```c++
-REGISTER_OP("ArbitraryTensorSequenceExample")
-    .Attr("T: list(type)")
-    .Input("in: T")
-    .Output("out: T");
+    型 `list(type)` の属性を参照することで、一連のテンソルを受け入れることができます。
 
-REGISTER_OP("RestrictedTensorSequenceExample")
-    .Attr("T: list({int32, int64})")
-    .Input("in: T")
-    .Output("out: T");
-```
+    ```c++
+    REGISTER_OP("ArbitraryTensorSequenceExample")
+        .Attr("T: list(type)")
+        .Input("in: T")
+        .Output("out: T");
 
-両方ともおなじ型 `T` であるため、出力 `out` のテンソルの数と型は、入力 `in` とおなじであることに注意してください。
+    REGISTER_OP("RestrictedTensorSequenceExample")
+        .Attr("T: list({int32, int64})")
+        .Input("in: T")
+        .Output("out: T");
+    ```
 
-* おなじ型をもつテンソル列について: `<number> * <type>` となる。`<number>` は、`int` 型である [アトリビュート](#アトリビュート) の名前である。`<type>` は、`tf.DType` または `type` 型のアトリビュートの名前である。最初の例では、オペレーションは `int32` のテンソルのリストを受け取る。
+    出力と入力の型は `T` であるため、出力 `out` のテンソルの数と型は入力 `in` と同じです。
 
-```c++
-REGISTER_OP("Int32SequenceExample")
-    .Attr("NumTensors: int")
-    .Input("in: NumTensors * int32")
-```
+- おなじ型をもつテンソルのシーケンス: `<number> * <type>`。`<number>` は[属性](#attrs)の数で、`int` 型です。`<type>` は `tf.DType` または `type` 型の属性の数です。前者の例として、この演算子は `int32` テンソルのリストを受け入れます。
 
-一方このオペレーションは、すべておなじである限り、いかなる型のテンソルのリストを受け取ります。
+    ```c++
+    REGISTER_OP("Int32SequenceExample")
+        .Attr("NumTensors: int")
+        .Input("in: NumTensors * int32")
+    ```
 
-```c++
-REGISTER_OP("SameTypeSequenceExample")
-    .Attr("NumTensors: int")
-    .Attr("T: type")
-    .Input("in: NumTensors * T")
-```
+    この演算子はすべての型が同じである場合に限り、任意の型のリストを受け入れます。
 
-* テンソルのリファレンスについて: `Ref(<type>)` となる。`<type>` は前述した型のいずれかになる。
+    ```c++
+    REGISTER_OP("SameTypeSequenceExample")
+        .Attr("NumTensors: int")
+        .Attr("T: type")
+        .Input("in: NumTensors * T")
+    ```
 
-入力の型として利用されている、いかなるアトリビュートは推論されます。慣例的に、推論されたアトリビュートは、（`T` や `N` のように）大文字の名前を使用します。そうでなければ、入力や出力、アトリビュートは、関数のパラメータ（たとえば `num_outputs`）のような名前を持ちます。詳細は、[前述した命名](#命名) を参照してください。
+- テンソルの参照: `Ref(<type>)`。`<type>` は前述した型のいずれかです。
 
-詳細は、[`tensorflow/core/framework/op_def_builder.h`][op_def_builder] を参照してください。
+入力の型に使用される属性は推論されます。推論された属性には大文字の名前（`T` または `N` など）が使用されます。そうでない場合、入力、出力、および属性には、関数パラメーター（`num_outputs` など）のような名前が付けられます。詳細については、[命名規則に関する前方のセクション](#naming)をご覧ください。
 
+詳細については、[`tensorflow/core/framework/op_def_builder.h`](https://www.tensorflow.org/code/tensorflow/core/framework/op_def_builder.h) をご覧ください。
 
-#### 後方互換性
+#### 下位互換性
 
-すばらしいカスタムオペレーションを作り、ほかの人と共有し、顧客がそのオペレーションを使って喜んでいることを想定しましょう。
-しかし、何らかの方法でオペレーションを変更したいとします。
+カスタム演算子をうまく書けたので、みんなに利用してもらえるように共有したとします。ところが、その演算子に変更を適用することになりました。
 
-一般的に、既存のチェックインされた仕様の変更は、後方互換でなければなりません。
-すなわち、オペレーションの仕様変更は、前に古い仕様から構築してシリアライズ化された `GraphDef` プロトコルバッファを壊してはいけません。
-`GraphDef` の互換性の詳細は、[ここで説明されています](https://github.com/tensorflow/docs/blob/master/site/en/guide/versions.md#compatibility-of-savedmodels-graphs-and-checkpoints)。
+一般的に、既存のチェックイン済みの仕様への変更は、下位互換性である必要があります。ある演算子の仕様を変更することによって、以前に古い仕様を使ってシリアル化した `GraphDef` プロトコルバッファが動作しなくなっては大変です。`GraphDef` 対応の詳細については、[こちらに説明](./versions.md#compatibility_of_graphs_and_checkpoints)されています。
 
-後方互換性を保つための方法は、いくつかあります。
+下位互換性を維持するにはいくつかの方法があります。
 
-1. オペレーションに新しく追加されたアトリビュートは、デフォルト値が定義されている必要があり、そのデフォルト値の場合には、オペレーションはもともとの動作にならなければなりません。非ポリモーフィズムからポリモーフィズムに変更するためには、新しい型アトリビュートにデフォルト値を与え、デフォルトでもとのシグネチャを保つ必要があります。たとえば、オペレーションが、次のようなものであった場合、
+1. 演算に追加された新しい属性にはデフォルト値が定義されている必要があり、演算子の元の動作はそのデフォルト値に基づく必要があります。演算を非ポリモーフィックからポリモーフィックに変更するには、新しい型属性にデフォルトの値を提供して、元のシグネチャをデフォルトで維持できるようにする*必要があります*。たとえば、次の演算があったとします。
 
-       REGISTER_OP("MyGeneralUnaryOp")
-           .Input("in: float")
-           .Output("out: float");
+    ```c++
+    REGISTER_OP("MyGeneralUnaryOp")
+        .Input("in: float")
+        .Output("out: float");
+    ```
 
-   次のようにして、後方互換を維持しながらポリモーフィズムにできます。
+    次のようにして、下位互換性の方法でポリモーフィックにすることができます。
 
-       REGISTER_OP("MyGeneralUnaryOp")
-           .Input("in: T")
-           .Output("out: T")
-           .Attr("T: numerictype = DT_FLOAT");
+    ```c++
+    REGISTER_OP("MyGeneralUnaryOp")
+        .Input("in: T")
+        .Output("out: T")
+        .Attr("T: numerictype = DT_FLOAT");
+    ```
 
-2. アトリビュートの制約を緩めるのは安全に行えます。たとえば、`{int32, int64}` から `{int32, int64, float}` もしくは `type` に変更できます。また、`{"apple", "orange"}` を `{"apple", "banana", "orange"}` または `string` に変更できます。
+2. 属性の制約の制限を安全に緩和することができます。たちえば、アトリビュートの制約を緩めるのは安全に行えます。たとえば、`{int32, int64}` から `{int32, int64, float}` または `type` に変更できます。または、`{"apple", "orange"}` を `{"apple", "banana", "orange"}` または `string` に変更することができます。
 
-3. リストの型のデフォルトが古いシグネチャと一致する限り、単一の入力/出力をリストの入力/出力に変更できます。
+3. リスト型のデフォルトが以前のシグネチャに一致する場合に限り、単一の入力/出力をリストの入力出力に変更できます。
 
 4. デフォルトが空であれば、新たなリストの入力/出力を追加できます。
 
-5. オペレーションの名前に、プロジェクトに固有の名前をプレフィックスすることで、作成したオペレーションの名前空間を作れます。これにより、TensorFlowの将来のバージョンで含まれるかもしれないオペレーションとの衝突を回避できます。
+5. 演算子の名前に、プロジェクトに固有のプレフィックスを付けることで、作成した演算子の名前空間を作れます。これにより、TensorFlow の将来のバージョンで含まれる可能性のあるすべての演算子との競合を回避できます。
 
-6. 前もって計画してください！オペレーションの将来の使われ方を予想しましょう。いくつかのシグネチャの変更は、互換を保つ方法ではできません（たとえば、おなじ型のリストを異なる型のリストに変更するなど）。
+6. 前もって計画しましょう！演算子の将来の使われ方を予測します。シグネチャの中には互換性のある方法で実行できないものがあります（同じ型のリストを型の異なるリストに変更するなど）。
 
-変更が安全か安全でないかの一覧は、[`tensorflow/core/framework/op_compatibility_test.cc`](https://www.tensorflow.org/code/tensorflow/core/framework/op_compatibility_test.cc) にあります。
-もし、オペレーションの変更を後方互換にできないならば、新しい名前かつ新しいセマンティクスで、新しいオペレーションを作ります。
+安全な変更と安全でない変更の全リストは、[`tensorflow/core/framework/op_compatibility_test.cc`](#%E3%83%9D%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%95%E3%82%A3%E3%82%BA%E3%83%A0) をご覧ください。演算子への変更を下位互換性にできない場合は、新しいセマンティクスと新しい名前で新しい演算を作成してください。
 
-これらの変更は、`GraphDef` の互換性を維持できますが、生成されたPythonコードは、呼び出し側にとって互換にならない変更をもたらすかもしれません。
-Python APIは、新しい任意の引数を最後に追加するなどして古いシグネチャを保つなど、手書きのPythonラッパー内で注意深く変更することで、互換性を保てるかもしれません。
-一般的に、互換性のない変更は、TensorFlowのメジャーバージョンが変更されたときのみ許されており、[`GraphDef` のバージョンのセマンティクス](./versions.md#compatibility_of_graphs_and_checkpoints) に従う必要があります。
+また、これらの変更によって `GraphDef` 互換性を維持できるかもしれませんが、生成される Python コードが以前のコーラーと互換性のない方法に変更される可能性があります。Python API は、手書きの Python ラッパーを注意深く変更することで互換性を維持できます。ただし、最後に新しいオプションの引数を追加する場合を除いて、以前のシグネチャを保持することもできます。一般的に互換性のない変更は、TensorFlow がメジャーバージョンを変更する場合にのみ行うことができ、<a href="./versions.md#compatibility_of_graphs_and_checkpoints" data-md-type="link">`GraphDef` バージョンのセマンティクス</a>に準拠する必要があります。
 
+### GPU のサポート
 
-### GPUサポート
+[異なる型のカーネルを登録](#polymorphism)できるのと同様に、CPU と GPU で別々の OpKernel を実装して登録することができます。[`tensorflow/core/kernels/`](https://www.tensorflow.org/code/tensorflow/core/kernels/) には GPU をサポートしたカーネルの例がいくつかあります。一部のカーネルには `.cc` ファイルの CPU バージョン、`_gpu.cu.cc` ファイルの GPU バージョン、および `.h` ファイルの共通コードがあります。
 
-[異なる型へカーネル登録](#ポリモーフィズム) できるのと同様に、CPUとGPU向けに異なるOpKernelを実装し、登録できます。
-[`tensorflow/core/kernels/`](https://www.tensorflow.org/code/tensorflow/core/kernels/) には、GPUをサポートするカーネルの例がいくつかあります。
-いくつかのカーネルは、`.cc` ファイルにCPUバージョン、`_gpu.cu.cc` で終わるファイルにはGPUバージョン、`.h` ファイルに共通で使用されるコードが存在していることに注意してください。
+たとえば `tf.pad` は、[`tensorflow/core/kernels/pad_op.cc`](https://www.tensorflow.org/code/tensorflow/core/kernels/pad_op.cc) に GPU のカーネル以外のすべてが存在します。GPU のカーネルは、[`tensorflow/core/kernels/pad_op_gpu.cu.cc`](https://www.tensorflow.org/code/tensorflow/core/kernels/pad_op_gpu.cu.cc) にあり、共通のコードは [`tensorflow/core/kernels/pad_op.h`](https://www.tensorflow.org/code/tensorflow/core/kernels/pad_op.h) に定義されたテンプレートクラスです。コードをこのように編成しているは、CPU と GPU の実装間で共通のコードを共有できるようにし、GPU の実装を別のファイルに置くことで GPU コンパイラだけがコンパイルできるようにしているためです。
 
-たとえば `tf.pad` は、[`tensorflow/core/kernels/pad_op.cc`][pad_op] にGPUのカーネル以外のすべてが存在します。
-GPUのカーネルは、[`tensorflow/core/kernels/pad_op_gpu.cu.cc`](https://www.tensorflow.org/code/tensorflow/core/kernels/pad_op_gpu.cu.cc) にあり、共通のコードは [`tensorflow/core/kernels/pad_op.h`](https://www.tensorflow.org/code/tensorflow/core/kernels/pad_op.h) に定義された、テンプレートクラスです。
-CPUとGPUの実装間で共通のコードを共有できるようにし、GPUの実装を別のファイルに置くことでGPUのコンパイラだけがコンパイルできるようにする、という2つの理由から、このようなコードの管理になっています。
-
-1つ注意することとしては、`pad` のGPUのカーネル版が使われたとしても、入力 `"paddings"` はCPUメモリに存在することです。
-入力や出力をCPUに配置するためには、カーネル登録に `HostMemory()` 呼び出しを追加します。
-たとえば、次のようにします。
+`pad` の GPU カーネルバージョンが使用されている場合であっても、CPU メモリに `"paddings"` が必要であるということに注意してください。その入力または出力が CPU に維持されているとマークするには、次のように、カーネル登録に `HostMemory()` 呼び出しを追加します。
 
 ```c++
 #define REGISTER_GPU_KERNEL(T)                         \
@@ -1056,13 +1018,9 @@ CPUとGPUの実装間で共通のコードを共有できるようにし、GPU�
                           PadOp<GPUDevice, T>)
 ```
 
+#### GPU デバイス向けのカーネルのコンパイル
 
-#### GPUデバイス向けのカーネルコンパイル
-
-オペレーションを実装するために、CUDAカーネルを使用する例 [cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc) を見てください。
-`tf_custom_op_library` は、CUDAカーネル（`*.cu.cc` ファイル）を含むソースファイルのリストを指定できる `gpu_srcs` 引数を受け取ります。
-バイナリインストールによるTensorFlowを使う場合、CUDAカーネルはNVIDIAの `nvcc` コンパイラによってコンパイルされます。
-ここでは、[cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc) と [cuda_op_kernel.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cc) を1つの動的ロード可能なライブラリにコンパイルするために利用できる一連のコマンドを示します。
+CUDA カーネルを使用して演算子を実装している例については [cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc) をご覧ください。`tf_custom_op_library` は、CUDA カーネル（`*.cu.cc` ファイル）を含むソースファイルのリストが指定されている `gpu_srcs` 引数を受け入れます。TensorFlow のバイナリインストールで使用する場合、CUDA カーネルは NVIDIA の `nvcc` コンパイラを使用してコンパイルされる必要があります。次は、[cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc) と [cuda_op_kernel.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cc) を単一の動的に読み込まれるライブラリにコンパイルするために使用できるコマンドのシーケンスです。
 
 ```bash
 nvcc -std=c++11 -c -o cuda_op_kernel.cu.o cuda_op_kernel.cu.cc \
@@ -1072,28 +1030,21 @@ g++ -std=c++11 -shared -o cuda_op_kernel.so cuda_op_kernel.cc \
   cuda_op_kernel.cu.o ${TF_CFLAGS[@]} -fPIC -lcudart ${TF_LFLAGS[@]}
 ```
 
-上記によって生成された `cuda_op_kernel.so` は、`tf.load_op_library` 関数を使って、いつものようにPythonからロードできます。
+上記で生成された `cuda_op_kernel.so` は Python の `tf.load_op_library` 関数を使用して通常通り読み込むことができます。
 
-もしCUDAライブラリが `/usr/local/lib64` にインストールされていない場合、上記の2番目(g++)のコマンドにパスを指定する必要があることに注意してください。
-たとえば、`/usr/local/cuda-8.0` にCUDAがインストールされている場合は、`-L /usr/local/cuda-8.0/lib64/` を追加します。
+CUDA ライブラリが `/usr/local/lib64` にインストールされていない場合は、上記の 2 つ目のコマンド（g++）に明示的にパスを指定する必要があります。たとえば、CUDA が `/usr/local/cuda-8.0` にインストールされている場合は `-L /usr/local/cuda-8.0/lib64/` を追加します。
 
-> 特定のLinuxの設定では、`nvcc` によるコンパイルの手順にいくつかのオプションが必要になることに注意してください。`mwaitxintrin.h` からのエラーを回避するためには、`nvcc` コマンドラインに `-D_MWAITXINTRIN_H_INCLUDED` を追加してください。
+注意: 特定の Linux の設定では、`nvcc` によるコンパイルのステップに追加のオプションが必要になることに注意してください。`mwaitxintrin.h` からのエラーを回避するには、`nvcc` コマンドラインに `-D_MWAITXINTRIN_H_INCLUDED` を追加してください。
 
+### Python での勾配の実装
 
-### Pythonにおける勾配の実装
+特定の演算子のグラフにおいて、TesorFlow は自動微分（バックプロパゲーション）を使用して、既存の演算子に対する勾配を表現する新しい演算子を追加します。自動微分が新しい演算子でも動作するようにするには、演算子の入力指定勾配に対する勾配を計算する勾配関数を演算子の出力に対して登録する必要があります。
 
-オペレーションのグラフが与えられると、TensorFlowは自動微分（逆伝搬）を使って、存在するオペレーションに関して、勾配を表現するための新しいオペレーションを追加します。
-新しいオペレーションに対して自動微分を動作させるためには、勾配を計算するための勾配関数を登録する必要があります。
-これは、オペレーションの出力に関して与えられた勾配を入力とする、オペレーションに関する勾配を計算するものです。
+数学的には、演算子が \(y = f(x)\)  を計算する場合、登録されている勾配演算子は、\(y\) に関する損失 \(L\) の勾配 \(\partial L/ \partial y\) を連鎖規則を介して \(x\) に関する勾配 \(\partial L/ \partial x\) に変換します。
 
-数学的には、もしオペレーションが \\(y = f(x)\\) を計算するなら、登録された勾配のオペレーションは、\\(y\\) に関するロス \\(L\\) として、勾配 \\(\partial L/ \partial y\\) をチェインルールによって、\\(x\\) に関する勾配 \\(\partial L/ \partial x\\) に変換します。
+$$\frac{\partial L}{\partial x} = \frac{\partial L}{\partial y} \frac{\partial y}{\partial x} = \frac{\partial L}{\partial y} \frac{\partial f}{\partial x}.$$
 
-$$\frac{\partial L}{\partial x}
-    = \frac{\partial L}{\partial y} \frac{\partial y}{\partial x}
-    = \frac{\partial L}{\partial y} \frac{\partial f}{\partial x}.$$
-
-`ZeroOut` の場合は、出力に影響を与える入力は1つのエントリだけであるため、入力に関する勾配は、スパースな "ワンホット" テンソルになります。
-これは、次のように表現できます。
+`ZeroOut` の場合、入力の 1 つのエントリのみが出力に影響するため、入力に関する勾配はスパース「ワンショット」テンソルになります。これは次のように表現されます。
 
 ```python
 from tensorflow.python.framework import ops
@@ -1102,46 +1053,41 @@ from tensorflow.python.ops import sparse_ops
 
 @ops.RegisterGradient("ZeroOut")
 def _zero_out_grad(op, grad):
-  """`zero_out` の勾配。
+  """The gradients for `zero_out`.
 
   Args:
-    op: オリジナルのオペレーションの入力と出力を見つけるために使用する、
-        微分対象の `zero_out` `Operation`。
-    grad: `zero_out` オペレーションの出力に関する勾配。
+    op: The `zero_out` `Operation` that we are differentiating, which we can use
+      to find the inputs and outputs of the original op.
+    grad: Gradient with respect to the output of the `zero_out` op.
 
   Returns:
-    `zero_out` の入力に関する勾配。
+    Gradients with respect to the input of `zero_out`.
   """
   to_zero = op.inputs[0]
   shape = array_ops.shape(to_zero)
   index = array_ops.zeros_like(shape)
   first_grad = array_ops.reshape(grad, [-1])[0]
   to_zero_grad = sparse_ops.sparse_to_dense([index], shape, first_grad, 0)
-  return [to_zero_grad]  # 1つの入力しか持たないため、1つのテンソルのリスト
+  return [to_zero_grad]  # List of one Tensor, since we have one input
 ```
 
-`tf.RegisterGradient` による勾配関数の登録の詳細を次に示します。
+`tf.RegisterGradient` で勾配関数を登録する方法:
 
-* 1つの出力をもつオペレーションでは、勾配関数は `tf.Operation` である `op`、`tf.Tensor` である `grad` を受け取り、`op.inputs[i]`、`op.outputs[i]`、`grad` を出力する新しいオペレーションをビルドします。アトリビュートに関する情報は、`tf.Operation.get_attr` 経由で確認できます。
+- 出力が 1 つの演算子では、勾配関数は `tf.Operation`、`op`、および `tf.Tensor` `grad` を取って、テンソル `op.inputs[i]`、`op.outputs[i]`、および `grad` から新しい演算子をビルドします。属性に関する情報は、`tf.Operation.get_attr` にあります。
 
-* オペレーションが複数の出力をもつ場合、勾配関数は `op` と `grads` を受け取ります。`grads` は、それぞれの出力に関する勾配のリストです。勾配関数の結果は、それぞれの入力の勾配を表現するために、`Tensor` オブジェクトのリストでなければいけません。
+- 演算子に複数の出力がある場合、勾配関数は `op` と `grads` を取ります。`grads` は各出力に関する勾配のリストです。勾配関数の結果は、それぞれの入力に関する勾配を表現する `Tensor` オブジェクトのリストである必要があります。
 
-* 整数の入力がインデックスとして使われている場合など、もし入力についてきちんと定義された勾配がない場合は、対応する結果の勾配の値は `None` にすべきです。たとえば、浮動小数点数のテンソル `x` とインデックス `i` を受け取るオペレーションについて、勾配関数は `[x_grad, None]` を返します。
+- 整数の入力がインデックスとして使われている場合など、一部の入力の勾配が十分に定義されていない場合は、対応する結果の勾配は `None` になります。たとえば、浮動小数点数のテンソル `x` と整数インデックス `i` を取る演算子では、勾配関数は `[x_grad, None]` を返します。
 
-* もしオペレーションの勾配がまったく意味がないものである場合、勾配を登録しなくてもよいでしょう。そしてこれは、オペレーションの勾配が必要でない限り、問題がありません。オペレーションがきちんと定義された勾配を持たない場合でも、勾配の演算に含めることはできます。ここで、自動的にゼロ逆伝搬を行うために、`ops.NotDifferentiable` を利用できます。
+- 演算子に意味のない勾配である場合は、ほとんどの場合、勾配を登録する必要はありません。また、演算の勾配がまったく必要でない限り、問題でもありません。ただし、一部のケースでは、十分に定義された勾配がない演算子が勾配の計算に関わっている場合があります。この場合は、`ops.NotDifferentiable` を使用して自動的にゼロ逆伝搬を行うことができます。
 
-勾配関数が呼ばれたとき、オペレーションのデータフローグラフのみが利用可能であり、テンソルのデータ自体は利用できないことに注意してください。
-このようにすべての計算は、グラフの実行時に実行されるほかのTensorFlowのオペレーションを使って行われなければなりません。
+勾配関数が呼び出されるとき、演算子のデータフローグラフのみが利用でき、テンソルデータ自体は利用できない場合があることに注意してください。したがって、グラフ実行時に実行するには、すべての計算をほかの TensorFlow 演算子を使用して実行する必要があります。
 
+### C++ での形状関数
 
-### C++でのシェイプ推論
+TensorFlow API には、グラフを実行せずにテンソルの形状に関する情報を提供する「形状推論」と呼ばれる機能があります。形状推論は、C++ の `REGISTER_OP` 宣言の各演算子の型に登録されている「形状関数」によってサポートされており、グラフ構築中に入力の形状が互換していることをアサートすることと、出力の形状を指定することという 2 つの役割があります。
 
-TensorFlow APIは、グラフを実行することなくテンソルのシェイプの情報を提供するための"シェイプ推論"機能を持ちます。
-シェイプ推論は、C++の `REGISTER_OP` 宣言における各オペレーションの型のために登録する"シェイプ関数"によってサポートされ、2つの役割を行います。
-グラフ構築時に入力のシェイプに矛盾がないことを表明することと、出力のシェイプを決めることです。
-
-シェイプ関数は、`shape_inference::InferenceContext` クラスのオペレーションとして定義されています。
-たとえば、ZeroOutのシェイプ関数を次に示します。
+形状関数は、`shape_inference::InferenceContext`  に演算として定義されています。たとえば、ZeroOut の形状関数では、次のようになります。
 
 ```c++
     .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
@@ -1150,12 +1096,9 @@ TensorFlow APIは、グラフを実行することなくテンソルのシェイ
     });
 ```
 
-`c->set_output(0, c->input(0));` は、1番目の出力のシェイプに1番目の入力のシェイプが設定されるべきであると、宣言しています。
-上記の例について、もし出力がインデックスによって選択される場合、`set_output` の2番目のパラメータは、`ShapeHandle` オブジェクトであるべきです。
-デフォルトコンストラクタによって、空の `ShapeHandle` オブジェクトを作ることができます。
-インデックス `idx` の入力のための `ShapeHandle` オブジェクトは、`c->input(idx)` によって得られます。 
+`c->set_output(0, c->input(0));` は、最初の出力の形状が最初の入力の形状に設定される必要があることを宣言しています。出力が上記の例のようにインデックスによって選択されている場合、`set_output` の 2 つ目のパラメーターは `ShapeHandle` である必要があります。空の `ShapeHandle` オブジェクトはデフォルトのコンストラクタで作成できます。インデックス `idx` の入力の `ShapeHandle` オブジェクトとは、`c->input(idx)` で取得できます。
 
-[common_shape_fns.h](https://www.tensorflow.org/code/tensorflow/core/framework/common_shape_fns.h) にある `shape_inference::UnchangedShape` のように、数多くのオペレーションに適用する共通のシェイプ関数があり、次のように利用します。
+多数の演算子に適用する `shape_inference::UnchangedShape` などの多数の共通する形状関数があり、これらは [common_shape_fns.h](https://www.tensorflow.org/code/tensorflow/core/framework/common_shape_fns.h) にあり、次のように使用されます。
 
 ```c++
 REGISTER_OP("ZeroOut")
@@ -1164,8 +1107,7 @@ REGISTER_OP("ZeroOut")
     .SetShapeFn(::tensorflow::shape_inference::UnchangedShape);
 ```
 
-シェイプ関数は、入力のシェイプに制約を与えることもできます。
-[ベクトルのシェイプの制約がある `ZeroOut`](#条件のチェックと検証) について、シェイプ関数は次のようになります。
+形状関数は、入力の形状も制約できます。[ベクトル形状制約のある `ZeroOut`](https://www.tensorflow.org/code/tensorflow/core/framework/shape_inference.h) のバージョンについては、形状関数は次のようになります。
 
 ```c++
     .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
@@ -1176,9 +1118,9 @@ REGISTER_OP("ZeroOut")
     });
 ```
 
-`WithRank` は、入力のシェイプ `c->input(0)` がちょうど1次元のシェイプである（もしくは、もし入力のシェイプが不明なら、出力のシェイプは1つの不明な次元をもつベクトルになる）ことを検証します。
+`WithRank` 呼び出しは、入力形状 `c->input(0)` にきっかり 1 次元の形状があることを検証します（または入力形状が不明である場合、出力形状は 1 つの不明な次元を持つベクトルがあることを検証します）。
 
-もしオペレーションが、[複数入力をもつポリモーフィズム](#ポリモーフィズム) なら、チェックするためのシェイプ数を決定したり、シェイプがすべて矛盾しないことを検証したりするために、`InferenceContext` のメンバ変数を利用できます（かわりに、オペレーションのアトリビュートへのアクセス手段を提供する `InferenceContext::GetAttr` を使って長さを示すアトリビュートにアクセスしてもよいです）。
+演算子が[複数の入力を持つポリモーフィック](#polymorphism)である場合、`InferenceContext` のメンバーを使用して、チェックする形状の数を判定し、`Merge` を使用してすべての形状に互換性があることを検証します（または、`InferenceContext::GetAttr` で長さを示す属性にアクセスし、演算子の属性にアクセスできるようになります）。
 
 ```c++
     .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
@@ -1193,15 +1135,9 @@ REGISTER_OP("ZeroOut")
     });
 ```
 
-シェイプ関数が任意の機能であり、テンソルのシェイプが動的に変更される場合があることから、シェイプ関数は入力の不完全なシェイプ情報に対して強固なものにしなければなりません。
-[`InferenceContext`](https://www.tensorflow.org/code/tensorflow/core/framework/shape_inference.h) にある `Merge` メソッドは、たとえどちらかまたは両方が完全な情報を持っていなくても、呼び出し元で2つのシェイプがおなじであることを、強く表明できます。
-シェイプ関数は、すべてのTensorFlowのオペレーションに定義され、数多くの異なる使い方の例が提供されています。
+形状推論はオプションの機能であり、テンソルの形状は非常に動的になる可能性があるため、形状関数はいずれかの入力に関する形状情報が不完全であることに堅牢である必要があります。`Merge` メソッド（[`InferenceContext`](https://www.tensorflow.org/code/tensorflow/core/framework/shape_inference.h)）を使うと、2 つの形状のいずれかまたは両方に完全な情報がない場合でも、コーラーはそれらが同じであることをアサートすることができます。形状関数は、すべてのコア TensorFlow 演算子に定義されており、多数のさまざまな使用例を提供しています。
 
-`InferenceContext` クラスは、シェイプ関数の処理を定義するために使われる、多くの関数を持っています。
-たとえば、`InferenceContext::Dim` と `InferenceContext::WithValue` を利用することで、特定の次元が特定の値をもつことを検査できます。
-また、`InferenceContext::Add` と `InferenceContext::Multiply` を利用することで、出力の次元が2つの入力の次元の和または積であることを指定できます。
-指定可能な数多くのシェイプの操作については、`InferenceContext` を参照してください。
-次の例は、1番目の出力のシェイプを(n, 3)に設定し、1番目の入力がシェイプ(n, ...)をもつものです。
+`InferenceContext` クラスには、形状関数の操作を定義するために使用できる関数が多数あります。たとえば、`InferenceContext::Dim` と `InferenceContext::WithValue` を使用して、特定の次元に非常に具体的な値があることを検証することができます。また、`InferenceContext::Add` と `InferenceContext::Multiply` を使用して、出力の次元が 2 つの入力の和また積であることを指定することもできます。指定できる形状操作については、`InferenceContext` クラスをご覧ください。次の例は、最初の出力の形状を (n, 3) に設定しています。この最初の入力の 形状は (n, ...) です。
 
 ```c++
 .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
@@ -1210,30 +1146,8 @@ REGISTER_OP("ZeroOut")
 });
 ```
 
-もし、複雑なシェイプ関数になる場合、さまざまなシェイプを持った入力を組み合わせ、期待した出力のシェイプの組み合わせが出力されることを検査するためのテストを追加することを考えてください。
+複雑な形状関数がある場合は、多様な入力形状の組み合わせによって、期待される出力形状の組み合わせが生成されることを検証するテストを追加することを検討してください。これらのテストの作成方法の例は、[core ops tests](https://www.tensorflow.org/code/tensorflow/core/ops/array_ops_test.cc) をご覧ください（`INFER_OK` と `INFER_ERROR` の構文は多少不可解ではありますが、テストで入力と出力の形状仕様を表現する場合は、コンパクトに収められるようにしてください。現時点では、これらのテストに含まれるコメントを見て、形状文字列の仕様を理解してください）。
 
-このようなテストを書くための例が、[core ops tests](https://www.tensorflow.org/code/tensorflow/core/ops/array_ops_test.cc) にあります。（シンタックス `INFER_OK` と `INFER_ERROR` は少々不可解なものですが、テスト内で入力と出力のシェイプの仕様を表現するときに、簡潔になるようにしましょう。今のところは、シェイプの文字列指定の意味を理解するために、これらのテストにあるコメントを見てください。）
+## カスタム演算子の pip パッケージをビルドする
 
-
-## カスタムオペレーションのpipパッケージをビルドする
-
-オペレーションのpipパッケージをビルドするために、[tensorflow/custom-op](https://github.com/tensorflow/custom-op) の例を見てください。
-このガイドでは、TensorFlowをソースコードからビルドする代わりに、TensorFlowのpipパッケージからカスタムオペレーションをビルドする方法が示されています。
-
-[core-array_ops]:https://www.tensorflow.org/code/tensorflow/core/ops/array_ops.cc
-[python-user_ops]:https://www.tensorflow.org/code/tensorflow/python/user_ops/user_ops.py
-[tf-kernels]:https://www.tensorflow.org/code/tensorflow/core/kernels/
-[user_ops]:https://www.tensorflow.org/code/tensorflow/core/user_ops/
-[pad_op]:https://www.tensorflow.org/code/tensorflow/core/kernels/pad_op.cc
-[standard_ops-py]:https://www.tensorflow.org/code/tensorflow/python/ops/standard_ops.py
-[standard_ops-cc]:https://www.tensorflow.org/code/tensorflow/cc/ops/standard_ops.h
-[python-BUILD]:https://www.tensorflow.org/code/tensorflow/python/BUILD
-[validation-macros]:https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h
-[op_def_builder]:https://www.tensorflow.org/code/tensorflow/core/framework/op_def_builder.h
-[register_types]:https://www.tensorflow.org/code/tensorflow/core/framework/register_types.h
-[FinalizeAttr]:https://www.tensorflow.org/code/tensorflow/core/framework/op_def_builder.cc
-[DataTypeString]:https://www.tensorflow.org/code/tensorflow/core/framework/types.cc
-[python-BUILD]:https://www.tensorflow.org/code/tensorflow/python/BUILD
-[types-proto]:https://www.tensorflow.org/code/tensorflow/core/framework/types.proto
-[TensorShapeProto]:https://www.tensorflow.org/code/tensorflow/core/framework/tensor_shape.proto
-[TensorProto]:https://www.tensorflow.org/code/tensorflow/core/framework/tensor.proto
+演算子の `pip` パッケージをビルドするには、[tensorflow/custom-op](https://github.com/tensorflow/custom-op) の例をご覧ください。このガイドでは、ソースから TensorFlow をビルドするのではなく、TensorFlow pip パッケージからカスタム演算子をビルドする方法が説明されています。
