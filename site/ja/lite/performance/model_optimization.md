@@ -59,7 +59,7 @@ TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 
 単純に期待されるモデルのサイズと精度の基づいて、モデルに使用する量子化スキームを選択するには、次の決定木を使用することができます。
 
-![quantization-decision-tree](images/quantization_decision_tree.png)
+![量子化の決定木](images/quantization_decision_tree.png)
 
 以下は、いくつかのモデルでのトレーニング後の量子化および量子化認識トレーニングのレイテンシと精度の結果です。すべてのレイテンシ数は、1 つの大型コア CPU を使用する Pixel 2 デバイスで測定されます。ツールキットが改善されると、以下の数値も改善されます。
 
