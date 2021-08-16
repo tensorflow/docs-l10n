@@ -1,5 +1,6 @@
 # スマートリプライ
 
+
 <img src="../images/smart_reply.png" class="attempt-right">
 
 ## はじめに
@@ -30,20 +31,21 @@ Android 上でスマートリプライモデルを実演する TensorFlow Lite �
 
 ## 出力例
 
+
 <img alt="Animation showing smart reply" src="images/smart_reply.gif" style="max-width: 300px">
 
 ## 詳細を読む
 
 <ul>
-  <li><p data-md-type="paragraph"><a href="https://arxiv.org/pdf/1708.00630.pdf">研究論文</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://github.com/tensorflow/examples/tree/master/lite/examples/smart_reply/android">ソースコード</a></p></li>
+  <li><a href="https://arxiv.org/pdf/1708.00630.pdf">研究論文</a></li>
+  <li><a href="https://github.com/tensorflow/examples/tree/master/lite/examples/smart_reply/android">ソースコード</a></li>
 </ul>
 
 ## ユーザー
 
 <ul>
-  <li><p data-md-type="paragraph"><a href="https://www.blog.google/products/gmail/save-time-with-smart-reply-in-gmail/">Gmail</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://www.blog.google/products/gmail/computer-respond-to-this-email/">Inbox</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://blog.google/products/allo/google-allo-smarter-messaging-app/">Allo</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://research.googleblog.com/2017/02/on-device-machine-intelligence.html">Android Wear のスマートリプライ</a></p></li>
+  <li><a href="https://www.blog.google/products/gmail/save-time-with-smart-reply-in-gmail/">Gmail</a></li>
+  <li><a href="https://www.blog.google/products/gmail/computer-respond-to-this-email/">Inbox</a></li>
+  <li><a href="https://blog.google/products/allo/google-allo-smarter-messaging-app/">Allo</a></li>
+  <li><a href="https://research.googleblog.com/2017/02/on-device-machine-intelligence.html">Android Wear のスマートリプライ</a></li>
 </ul>
