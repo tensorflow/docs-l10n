@@ -50,14 +50,18 @@ TensorFlow Lite は現在、量子化、プルーニング、クラスタリン�
 
 TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 
-手法 | データ要件 | サイズ縮小 | 精度 | サポートされているハードウェア
+手法 | データ要件 | サイズ縮小 | 精度 | 対応ハードウェア
 --- | --- | --- | --- | ---
 [トレーニング後の float16 量子化](post_training_float16_quant.ipynb) | データなし | 50% 以下 | 精度低下（ごくわずか） | CPU、GPU
 [トレーニング後のダイナミックレンジ量子化](post_training_quant.ipynb) | データなし | 75% 以下 | 精度低下 | CPU、GPU (Android)
 [トレーニング後の整数量子化](post_training_integer_quant.ipynb) | ラベルなしの代表的なサンプル | 75% 以下 | 精度低下（少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
 [量子化認識トレーニング](http://www.tensorflow.org/model_optimization/guide/quantization/training) | ラベル付けされたトレーニングデータ | 75% 以下 | 精度低下（ごく少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
 
-以下は、いくつかのモデルでのトレーニング後の量子化および量子化認識トレーニングのレイテンシと精度の結果です。すべてのレイテンシ数は、一つの大型コア CPU を使用する Pixel 2 デバイスで測定されます。ツールキットが改善されると、以下の数値も改善されます。
+単純に期待されるモデルのサイズと精度の基づいて、モデルに使用する量子化スキームを選択するには、次の決定木を使用することができます。
+
+![quantization-decision-tree](images/quantization_decision_tree.png)
+
+以下は、いくつかのモデルでのトレーニング後の量子化および量子化認識トレーニングのレイテンシと精度の結果です。すべてのレイテンシ数は、1 つの大型コア CPU を使用する Pixel 2 デバイスで測定されます。ツールキットが改善されると、以下の数値も改善されます。
 
 <figure>
   <table>
@@ -89,7 +93,9 @@ TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 
 [int16 アクティベーションによる量子化](https://www.tensorflow.org/model_optimization/guide/quantization/post_training)は、int16 アクティベーション、および、int8 重みを使用する完全整数の量子化スキームです。このモードでは、同様のモデルサイズの完全整数量子化スキームと比較して、int8 のアクティベーションと重みの両方が量子化モデルの精度を向上させることができます。アクティベーションが量子化に敏感な場合に推奨されます。
 
-<i>注：</i> 現在、この量子化スキームは TFLite の最適化されていないレファレンスカーネルの実装のみでしか利用できないため、デフォルトでは、int8 カーネルと比較してパフォーマンスが低下します。このモードのすべての利点は、現在、専用のハードウェアまたはカスタムソフトウェアを介してアクセスできます。
+<i>注意: </i> 現在、この量子化スキームは TFLite の最適化されていないレファレンスカーネルの実装のみでしか利用できないため、デフォルトでは、int8 カーネルと比較してパフォーマンスが低下します。このモードのすべての利点は、現在、専用のハードウェアまたはカスタムソフトウェアを介してアクセスできます。
+
+このモードから利益を得られるモデルの精度結果は以下のようになります。
 
 <figure>
   <table>
@@ -119,7 +125,7 @@ TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 
 ### プルーニング
 
-[プルーニング](https://www.tensorflow.org/model_optimization/guide/pruning)は、予測への影響が小さいモデル内のパラメータを削除します。プルーニングされたモデルはディスク上では同じサイズで、実行時のレイテンシは同じですが、より効果的に圧縮できます。プルーニングはモデルのダウンロードサイズを縮小するための便利な手法です。
+[プルーニング](https://www.tensorflow.org/model_optimization/guide/pruning)は、予測への影響が小さいモデル内のパラメータを削除します。プルーニングされたモデルはディスク上では同じサイズで、ランタイムのレイテンシは同じですが、より効果的に圧縮できます。プルーニングはモデルのダウンロードサイズを縮小するための便利な手法です。
 
 今後、TensorFlow Lite ではプルーニングされたモデルのレイテンシが低減される予定です。
 
@@ -131,8 +137,8 @@ TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 
 ## 開発ワークフロー
 
-まず、[ホステッドモデル](../guide/hosted_models.md)のモデルがアプリで機能することを確認します。機能しない場合は、[トレーニング後の量子化ツール](post_training_quantization.md)から始めることをお勧めします。これはトレーニングデータを必要としないため、幅広く適用できます。
+まず、[ホステッドモデル](../guide/hosted_models.md)のモデルがアプリケーションで機能することを確認します。機能しない場合は、[トレーニング後の量子化ツール](post_training_quantization.md)から始めることをお勧めします。これはトレーニングデータを必要としないため、幅広く適用できます。
 
-精度とレイテンシが不十分な場合やハードウェアアクセラレータのサポートが重要な場合は、[量子化認識トレーニング](https://www.tensorflow.org/model_optimization/guide/quantization/training){:.external}が最適なオプションです。[TensorFlow モデル最適化ツールキット](https://www.tensorflow.org/model_optimization)で追加の最適化手法をご覧ください。
+For cases where the accuracy and latency targets are not met, or hardware accelerator support is important, [quantization-aware training](https://www.tensorflow.org/model_optimization/guide/quantization/training){:.external} is the better option. See additional optimization techniques under the [TensorFlow Model Optimization Toolkit](https://www.tensorflow.org/model_optimization).
 
 モデルサイズをさらに縮小する場合は、モデルを量子化する前に、[プルーニング](#pruning)や[クラスタリング](#clustering)をお試しください。
