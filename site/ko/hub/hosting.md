@@ -2,13 +2,13 @@
 
 # 모델 호스팅 프로토콜
 
-This document describes the URL coventions used when hosting all model types on [tfhub.dev](https://tfhub.dev) - TFJS, TF Lite and TensorFlow models. It also describes the HTTP(S)-based protocol implemented by the `tensorflow_hub` library in order to load TensorFlow models from [tfhub.dev](https://tfhub.dev) and compatibe services into TensorFlow programs.
+이 문서는 [thub.dev](https://tfhub.dev) - TFJS, TF Lite 및 TensorFlow 모델에서 모든 모델 유형을 호스팅할 때 사용되는 URL 규칙을 설명합니다. 또한, [thub.dev](https://tfhub.dev)의 TensorFlow 모델과 호환 가능한 서비스를 TensorFlow 프로그램에 로드하기 위해 `tensorflow_hub` 라이브러리에서 구현된 HTTP(S) 기반 프로토콜에 대해서도 설명합니다.
 
 주요 기능은 코드에서 같은 URL을 사용하여 모델을 로드하고 브라우저에서 모델 설명서를 보는 것입니다.
 
 ## 일반 URL 규칙
 
-[tfhub.dev](https://tfhub.dev) supports the following URL formats:
+[thub.dev](https://tfhub.dev)는 다음 URL 형식을 지원합니다.
 
 - TF Hub 게시자는 `https://tfhub.dev/<publisher>`를 따릅니다.
 - TF Hub 모음은 `https://tfhub.dev/<publisher>/collection/<collection_name>`를 따릅니다.
@@ -16,7 +16,7 @@ This document describes the URL coventions used when hosting all model types on 
 
 TF Hub models can be downloaded as compressed assets by appending URL parameters to the [tfhub.dev](https://tfhub.dev) model URL. However, the URL paramters required to achieve that depend on the model type:
 
-- TensorFlow models (both SavedModel and TF1 Hub formats): append `?tf-hub-format=compressed` to the TensorFlow model url.
+- TensorFlow 모델(SavedModel 및 TF1 Hub 형식 모두): `?tf-hub-format=compressed`를 TensorFlow 모델 URL에 추가합니다.
 - TFJS 모델: `?tfjs-format=compressed`를 TFJS 모델 URL에 추가하여 압축된 또는 `/model.json?tfjs-format=file`을 다운로드하고 원격 스토리지에서 읽습니다.
 - TF Lite 모델: `?lite-format=tflite`를 TF Lite 모델 URL에 추가합니다.
 
@@ -58,7 +58,7 @@ TF Hub models can be downloaded as compressed assets by appending URL parameters
   </tr>
 </table>
 
-Additionally, some models also are hosted in a format that can be read directly from remote storage without being downloaded. This is especially useful if there is no local storage available, such as running a TF.js model in the browser or loading a SavedModel on [Colab](https://colab.research.google.com/). Be conscious that reading models that are hosted remotely without being downloaded locally may increase latency.
+또한, 일부 모델은 다운로드하지 않고도 원격 스토리지에서 직접 읽을 수 있는 형식으로 호스팅됩니다. 이는 브라우저에서 TF.js 모델을 실행하거나 [Colab](https://colab.research.google.com/)에서 SavedModel을 로드하는 등 사용 가능한 로컬 스토리지가 없는 경우에 특히 유용합니다. 로컬로 다운로드하지 않고 원격으로 호스팅되는 모델을 읽으면 대기 시간이 늘어날 수 있습니다.
 
 <table style="width: 100%;">
   <tr style="text-align: center">
@@ -69,14 +69,14 @@ Additionally, some models also are hosted in a format that can be read directly 
     <col style="width: 25%">
     <td style="text-align: center; background-color: #D0D0D0">유형</td>
     <td style="text-align: center; background-color: #D0D0D0">모델 URL</td>
-    <td style="text-align: center; background-color: #D0D0D0">Response type</td>
+    <td style="text-align: center; background-color: #D0D0D0">응답 유형</td>
     <td style="text-align: center; background-color: #D0D0D0">URL 매개변수</td>
-    <td style="text-align: center; background-color: #D0D0D0">Request URL</td>
+    <td style="text-align: center; background-color: #D0D0D0">요청 URL</td>
   </tr>
   <tr>
     <td>TensorFlow (SavedModel, TF1 Hub format)</td>
     <td>https://tfhub.dev/google/spice/2</td>
-    <td>String (Path to GCS folder where the uncompressed model is stored)</td>
+    <td>문자열(압축되지 않은 모델이 저장되는 GCS 폴더 경로)</td>
     <td>?tf-hub-format=uncompressed</td>
     <td>https://tfhub.dev/google/spice/2?tf-hub-format=uncompressed</td>
   </tr>
@@ -95,9 +95,9 @@ This section describes how we host models on [tfhub.dev](https://tfhub.dev) for 
 
 이 섹션에서는 TF Lite 및 TFJS 모델이 `tensorflow_hub` 라이브러리를 통해 다운로드되지 않으므로 호스팅에 대해서는 다루지 않습니다. 이들 모델 유형의 호스팅에 대한 자세한 내용은 [위에서](#general-url-conventions) 확인하세요.
 
-### Compressed Hosting
+### 압축된 호스팅
 
-Models are stored on [tfhub.dev](https://tfhub.dev) as compressed tar.gz files. By default, the tensorflow_hub library automatically downloads the compressed model. They can also be manually downloaded by appending the `?tf-hub-format=compressed` to the model url, for example:
+모델은 압축된 tar.gz 파일로 [thub.dev](https://tfhub.dev)에 저장됩니다. tensorflow_hub 라이브러리는 압축된 모델을 자동으로 다운로드합니다. 또는, 모델 URL에 `?tf-hub-format=compressed`를 추가하여 수동으로 다운로드할 수도 있습니다. 예를 들면 다음과 같습니다.
 
 ```shell
 wget https://tfhub.dev/tensorflow/albert_en_xxlarge/1?tf-hub-format=compressed
@@ -121,13 +121,10 @@ $ tar -tf model.tar.gz
 
 레거시 [TF1 Hub 형식](https://www.tensorflow.org/hub/tf1_hub_module)과 함께 사용하기 위한 Tarball에는 `./tfhub_module.pb` 파일도 포함됩니다.
 
-When one of `tensorflow_hub` library model loading APIs is invoked ([hub.KerasLayer](https://www.tensorflow.org/hub/api_docs/python/hub/KerasLayer), [hub.load](https://www.tensorflow.org/hub/api_docs/python/hub/load), etc) the library downloads the model, uncompresses the model and caches it locally. The `tensorflow_hub` library expects that model URLs are versioned and that the model content of a given version is immutable, so that it can be cached indefinitely. Learn more about [caching models](caching.md).
+`tensorflow_hub` 라이브러리 모델 로딩 API 중 하나가 호출되면([hub.KerasLayer](https://www.tensorflow.org/hub/api_docs/python/hub/KerasLayer), [hub.load](https://www.tensorflow.org/hub/api_docs/python/hub/load) 등), 라이브러리는 모델을 다운로드하고 모델의 압축을 풀고 로컬로 캐싱합니다. `tensorflow_hub` 라이브러리는 모델 URL의 버전이 지정되고 지정된 버전의 모델 콘텐츠가 변경 불가능하여 무기한 캐싱될 수 있다고 예상합니다. [캐싱 모델](caching.md)에 대해 자세히 알아보세요.
 
 ![](https://raw.githubusercontent.com/tensorflow/hub/master/docs/images/library_download_cache.png)
 
-### Uncompressed Hosting
+### 압축되지 않은 호스팅
 
-When the environment variable `TFHUB_MODEL_LOAD_FORMAT` or the command-line flag `--tfhub_model_load_format` is set to `UNCOMPRESSED`, the model is read directly from remote storage (GCS) instead of being downloaded and uncompressed locally. When this behavior is enabled the library appends `?tf-hub-format=uncompressed` to the model URL. That request returns the path to the folder on GCS that contains the uncompressed model files. As an example,
- `https://tfhub.dev/google/spice/2?tf-hub-format=uncompressed`
- returns
- `gs://tfhub-modules/google/spice/2/uncompressed` in the body of the 303 response. The library then reads the model from that GCS destination.
+환경 변수 `TFHUB_MODEL_LOAD_FORMAT` 또는 명령줄 플래그 `--tfhub_model_load_format`가 `UNCOMPRESSED`로 설정된 경우, 모델은 로컬로 다운로드 및 압축 해제되는 대신 원격 저장소(GCS)에서 직접 읽어옵니다. 이 동작이 활성화되면 라이브러리는 `?tf-hub-format=uncompressed`를 모델 URL에 추가합니다. 이 요청은 압축되지 않은 모델 파일이 포함된 GCS의 폴더 경로를 반환합니다. 예를 들어, <br>`https://tfhub.dev/google/spice/2?tf-hub-format=uncompressed`<br>는 303 응답 본문에 `gs://tfhub-modules/google/spice/2/uncompressed`<br>를 반환합니다. 그런 다음 이 라이브러리는 해당 GCS 대상에서 모델을 읽습니다.
