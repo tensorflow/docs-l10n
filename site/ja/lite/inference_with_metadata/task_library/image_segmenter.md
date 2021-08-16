@@ -2,7 +2,7 @@
 
 画像セグメンタは、画像の各ピクセルが特定のクラスに関連付けられているかどうかを予測します。これは、矩形の領域でオブジェクトを検出する<a href="../../models/object_detection/overview.md">オブジェクト検出</a>、および画像全体を分類する<a href="../../models/image_classification/overview.md">画像分類</a>とは対照的です。画像セグメンタの詳細については、[画像セグメンテーションの概要](../../models/segmentation/overview.md)をご覧ください。
 
-Task Library `ImageSegmenter`API を使用して、カスタム画像セグメンタまたは事前トレーニングされたものをモデルアプリにデプロイします。
+Task Library `ImageSegmenter`API を使用して、カスタム画像セグメンタまたは事前トレーニングされたものをモバイルアプリにデプロイします。
 
 ## ImageSegmenter API の主な機能
 
@@ -49,6 +49,8 @@ dependencies {
 }
 ```
 
+注：Android Gradle プラグインのバージョン 4.1 以降、.tflite はデフォルトで noCompress リストに追加され、上記の aaptOptions は不要になりました。
+
 ### ステップ 2: モデルを使用する
 
 ```java
@@ -64,12 +66,10 @@ List<Segmentation> results = imageSegmenter.segment(image);
 
 ## C++ で推論を実行する
 
-注: C++ Task Library では、使いやすさを向上するために構築済みのバイナリを提供したり、ユーザーフレンドリーなワークフローを作成してソースコードから構築できるようしています。C++ API は変更される可能性があります。
-
 ```c++
 // Initialization
 ImageSegmenterOptions options;
-options.mutable_model_file_with_metadata()->set_file_name(model_file);
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
 std::unique_ptr<ImageSegmenter> image_segmenter = ImageSegmenter::CreateFromOptions(options).value();
 
 // Run inference
@@ -114,7 +114,7 @@ this legend.
 
 ## モデルの互換性要件
 
-`ImageSegmenter` API では、[ TFLite モデルメタデータ](../../convert/metadata.md)を持つ TFLite モデル が必要です。
+`ImageSegmenter` API は、必須の [TFLite モデル メタデータ](../../convert/metadata.md)を持つ TFLite モデルを想定しています。[TensorFlow Lite Metadata Writer API](../../convert/metadata_writer_tutorial.ipynb#image_segmenters) を使用して画像セグメンタのメタデータを作成する例をご覧ください。
 
 - 入力画像テンソル (kTfLiteUInt8/kTfLiteFloat32)
 
