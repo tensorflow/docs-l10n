@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-01' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-06-30' review_interval: '6 months' } *-->
 
 # TensorFlow 2 における TF Hub の SavedModel
 
