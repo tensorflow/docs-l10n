@@ -19,8 +19,8 @@ print(embeddings.shape)  #(4,128)
 ## 次のステップ
 
 - [tfhub.dev でモデルを検索する](https://tfhub.dev/)
-- [tfhub.dev にモデルを公開する](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/publish.md)
+- [Publish models on tfhub.dev](publish.md)
 - TensorFlow Hub ライブラリ
     - [TensorFlow Hub をインストールする](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/installation.md)
-    - [ライブラリの概要](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/lib_overview.md)
-- [チュートリアルを実行する](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/tutorials)
+    - [Library overview](lib_overview.md)
+- [Follow tutorials](tutorials)
