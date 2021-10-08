@@ -52,6 +52,6 @@ TensorFlow Lite 对量化提供了多种级别的对量化支持。
 
 首先，检查 [hosted models](../guide/hosted_models.md) 中的模型是否适合您的应用程序。如果没有，我们建议用户从 [post-training quantization tool](post_training_quantization.md) 开始，因为它广泛适用的，且无需训练数据。
 
-对于精度和延迟目标没有达到，或者需要硬件加速器支持情况， [quantization-aware training](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize) {:.external} 是更好的选择。参见 Tensorflow 模型优化工具包[Tensorflow Model Optimization Toolkit](https://tensorflow.google.cn/model_optimization) 中的的其他优化技术。
+对于精度和延迟目标没有达到，或者需要硬件加速器支持情况， [quantization-aware training](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize){:.external} 是更好的选择。参见 Tensorflow 模型优化工具包[Tensorflow Model Optimization Toolkit](https://tensorflow.google.cn/model_optimization) 中的的其他优化技术。
 
 注意: Quantization-aware training 支持卷积神经网络体系结构的子集。
