@@ -12,7 +12,11 @@ For instructions on how to configure Visual Studio Code for developing TensorFlo
 
 TensorFlow I/O's code conforms to Bazel Buildifier, Clang Format, Black, and Pyupgrade.
 Please use the following command to check the source code and identify lint issues:
+
 ```
+# Install Bazel version specified in .bazelversion
+$ curl -OL https://github.com/bazelbuild/bazel/releases/download/$(cat .bazelversion)/bazel-$(cat .bazelversion)-installer-darwin-x86_64.sh
+$ sudo bash -x -e bazel-$(cat .bazelversion)-installer-darwin-x86_64.sh
 $ bazel run //tools/lint:check
 ```
 
