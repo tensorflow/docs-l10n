@@ -152,6 +152,8 @@ rm -rf "$TEMP_SITE_ROOT/install/"  # Different process.
 rm -rf "$TEMP_SITE_ROOT/datasets/catalog/"  # Reference
 rm -rf "$TEMP_SITE_ROOT/tensorboard/design"  # Design docs
 rm "$TEMP_SITE_ROOT/xla/operation_semantics.md"  # Reference
+# Cloud integration not available here (b/197880392)
+rm "$TEMP_SITE_ROOT/guide/keras/training_keras_models_on_cloud.ipynb"
 
 ##
 ## SYNC
