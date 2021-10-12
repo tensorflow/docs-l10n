@@ -5,15 +5,13 @@ notebooks published on [tensorflow.org](https://www.tensorflow.org/guide).
 
 Please file issues under the *documentation* component of the
 [TensorFlow issue tracker](https://github.com/tensorflow/tensorflow/issues/new?template=20-documentation-issue.md).
-Questions about TensorFlow usage are better addressed on
-[Stack Overflow](https://stackoverflow.com/questions/tagged/tensorflow) or the
-[discuss@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/discuss)
-mailing list.
+Questions about TensorFlow usage are better addressed on the
+[TensorFlow Forum](https://discuss.tensorflow.org/).
 
 ## Contributing
 
-We love patches! Contributors are encouraged to use our GitLocalize project to
-submit pull requests and reviews: https://gitlocalize.com/tensorflow/docs-l10n
+Contributors are encouraged to use our GitLocalize project to submit pull
+requests and reviews: https://gitlocalize.com/tensorflow/docs-l10n
 
 General docs instructions are available in the
 [TensorFlow docs contributor guide](https://www.tensorflow.org/community/contribute/docs).
