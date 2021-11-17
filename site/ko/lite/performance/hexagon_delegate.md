@@ -63,11 +63,11 @@ dependencies {
     - [v1.14](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.14.run)
     - [v1.17](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.17.0.0.run)
     - [v1.20](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.0.run)
-    - [v1.21](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
+    - [v1.20.0.1](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
 
 참고: 라이선스 계약에 동의해야 합니다.
 
-참고: 2021년 2월 23일부터 v1.21을 사용해야 합니다.
+참고: 2021년 2월 23일부터 v1.20.0.1을 사용해야 합니다.
 
 참고: 호환되는 버전의 인터페이스 라이브러리와 함께 hexagon_nn 라이브러리를 반드시 사용해야 합니다. 인터페이스 라이브러리는 AAR의 일부이며 bazel로 [구성](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl)을 통해 가져옵니다. 여기서 bazel 구성의 버전을 사용해야 합니다.
 
@@ -161,11 +161,11 @@ dependencies {
     - [v1.14](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.14.run)
     - [v1.17](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.17.0.0.run)
     - [v1.20](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.0.run)
-    - [v1.21](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
+    - [v1.20.0.1](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
 
 참고: 라이선스 계약에 동의해야 합니다.
 
-참고: 2021년 2월 23일부터 v1.21을 사용해야 합니다.
+참고: 2021년 2월 23일부터 v1.20.0.1을 사용해야 합니다.
 
 참고: 호환되는 버전의 인터페이스 라이브러리와 함께 hexagon_nn 라이브러리를 사용해야 합니다. 인터페이스 라이브러리는 AAR의 일부이며 [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl)를 통해 bazel에서 가져옵니다. 여기서 bazel 구성의 버전은 사용해야 합니다.
 
