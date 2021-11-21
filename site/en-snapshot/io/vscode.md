@@ -1,12 +1,12 @@
 # Configuring Visual Studio Code
 
-Visual Studio Code (VSCode) is a free code editor, which runs on the macOS, Linux, and Windows operating systems. It has elegent tooling support which supports Python & C++ development, visual debugging, integration with git and many more interesting features. Owing to the ease of use and extension management, it is a great editor for TensorFlow IO development. However, some effort is necessary
+Visual Studio Code (VSCode) is a free code editor, which runs on the macOS, Linux, and Windows operating systems. It has elegant tooling support which supports Python & C++ development, visual debugging, integration with git and many more interesting features. Owing to the ease of use and extension management, it is a great editor for TensorFlow IO development. However, some effort is necessary
 to configure it properly. Since VSCode configuration is very flexible, it allows developers to 
 compile project using bazel and run the code under Python and C++ debuggers. The base tool setup might differ based on the operation systems, but the configuration approach should be similar.
 
 ## Extensions
 
-To install an extension click the extensions view icon (Extensions) on the Sidebar, or use the shortcut Ctrl+Shift+X. Then searh for keyword below.
+To install an extension click the extensions view icon (Extensions) on the Sidebar, or use the shortcut Ctrl+Shift+X. Then search for keyword below.
 
 - [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) - Official C++ extension from Microsoft
 - [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) - Official Python extension from Microsoft

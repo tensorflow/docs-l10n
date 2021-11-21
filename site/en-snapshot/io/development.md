@@ -1,7 +1,7 @@
 
 ## Development
 
-The document contains the necessary information for setting up the development environement
+The document contains the necessary information for setting up the development environment
 and building the `tensorflow-io` package from source on various platforms. Once the setup is completed please refer to the [STYLE_GUIDE](https://github.com/tensorflow/io/blob/master/STYLE_GUIDE.md) for guidelines on adding new ops.
 
 ### IDE Setup
@@ -159,8 +159,8 @@ TFIO_DATAPATH=bazel-bin python3 -m pytest -s -v tests/test_serialization.py
 
 ##### CentOS 8
 
-The steps to build shared libraries for CentOS 8 is similiar to Ubuntu 20.04 above
-excpet that
+The steps to build shared libraries for CentOS 8 is similar to Ubuntu 20.04 above
+except that
 ```
 sudo yum install -y python3 python3-devel gcc gcc-c++ git unzip which make
 ```
