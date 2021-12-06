@@ -1,14 +1,8 @@
 # 特徴量のデコードをカスタマイズする
 
-- [使用例](#usage-examples)
-    - [画像のデコードをスキップする](#skipping-the-image-decoding)
-    - [画像をデコードする前にデータセットをフィルタ/シャッフルする](#filtershuffle-dataset-before-images-get-decoded)
-    - [クロップとデコードを同時に実行する](#cropping-and-decoding-at-the-same-time)
-    - [動画のデコードをカスタマイズする](#customizing-video-decoding)
-
 `tfds.decode` API を使うと、デフォルトの特徴量のデコードをオーバーライドすることができます。主なユースケースは、パフォーマンスを改善するために、画像のデコードをスキップすることです。
 
-警告: この API では、ディスク上の低レベルの `tf.train.Example` 形式にアクセスできます（`FeatureConnector` で定義されています）。この API は、画像の読み取り性能の改善を求める高度ユーザーを対象としています。
+Note: This API gives you access to the low-level `tf.train.Example` format on disk (as defined by the `FeatureConnector`). This API is targeted towards advanced users who want better read performance with images.
 
 ## 使用例
 
@@ -132,7 +126,6 @@ def decode_video(example):
       video,
       dtype=ds_info.features['video'].dtype,
       parallel_iterations=10,
-      back_prop=False,
   )
   example['video'] = video
   return example
@@ -143,3 +136,38 @@ ds, ds_info = tfds.load('ucf101', split='train', with_info=True, decoders={
 })
 ds = ds.map(decode_video)  # Decode the video
 ```
+
+### Only decode a sub-set of the features.
+
+It's also possible to entirely skip some features by specifying only the features you need. All other features will be ignored/skipped.
+
+```python
+builder = tfds.builder('my_dataset')
+builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
+    'image': True,
+    'metadata': {'num_objects', 'scene_name'},
+    'objects': {'label'},
+})
+```
+
+TFDS will select the subset of `builder.info.features` matching the given `tfds.decode.PartialDecoding` structure.
+
+In the above code, the featured are implictly extracted to match `builder.info.features`. It is also possible to explicitly define the features. The above code is equivalent to:
+
+```python
+builder = tfds.builder('my_dataset')
+builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
+    'image': tfds.features.Image(),
+    'metadata': {
+        'num_objects': tf.int64,
+        'scene_name': tfds.features.Text(),
+    },
+    'objects': tfds.features.Sequence({
+        'label': tfds.features.ClassLabel(names=[]),
+    }),
+})
+```
+
+The original metadata (label names, image shape,...) are automatically reused so it's not required to provide them.
+
+`tfds.decode.SkipDecoding` can be passed to `tfds.decode.PartialDecoding`, through the `PartialDecoding(..., decoders={})` kwargs.
