@@ -8,7 +8,7 @@
 
 TFF 계산을 위한 두 가지 주요 배포 모드가 있습니다.
 
-- **네이티브 백엔드**: 백엔드를 [`computation.proto`](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/proto/v0/computation.proto)에 정의된 대로 TFF 계산의 구문 구조를 해석할 수 있는 경우, *native*라고 합니다. 네이티브 백엔드가 반드시 모든 언어 구문이나 내장 함수를 지원할 필요는 없습니다. 네이티브 백엔드는 Python 코드에서 소비하기 위한 [`tff.framework.Executor`](https://www.tensorflow.org/federated/api_docs/python/tff/framework/Executor)와 같은 표준 TFF *executor* 인터페이스 중 하나 또는 gRPC 엔드포인트로 노출된 [`executor.proto`](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/proto/v0/executor.proto)에 정의된 언어 독립적 버전을 구현해야 합니다.
+- **기본 백엔드** 우리는에 정의 된 TFF 계산의 구문 구조를 해석 할 수있는 *기본* 경우와 같은 백엔드를 참조 겁니다 [`computation.proto`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/proto/v0/computation.proto) . 기본 백엔드가 반드시 모든 언어 구성 또는 내장 함수를 지원할 필요는 없습니다. 네이티브 백엔드는 파이썬 코드에서 사용하기위한 <a><code>tff.framework.Executor</code></a> 와 같은 표준 TFF <em>executor</em> 인터페이스 중 하나 또는 gRPC 엔드 포인트로 노출 된 [`executor.proto`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/proto/v0/executor.proto) 정의 된 언어 독립적 버전을 구현해야합니다.
 
     위의 인터페이스를 지원하는 네이티브 백엔드는 기본 참조 런타임 대신 양방향으로 사용하여 노트북 또는 실험 스크립트를 실행할 수 있습니다. 대부분의 네이티브 백엔드는 *해석 모드*에서 동작합니다. 즉, 정의된 대로 계산 정의를 처리하고 점진적으로 실행하지만, 항상 그럴 필요는 없습니다. 네이티브 백엔드는 더 나은 성능을 위해 또는 구조를 단순화하기 위해 계산의 일부를 *변환*(*컴파일* 또는 JIT 컴파일)할 수 있습니다. 이를 사용하는 일반적인 예는 계산에 나타나는 페더레이션 연산자 세트를 줄여 변환의 백엔드 다운스트림 부분이 전체 세트에 노출될 필요가 없도록 하는 것입니다.
 
