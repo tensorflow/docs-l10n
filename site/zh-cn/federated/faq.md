@@ -21,3 +21,9 @@ TFF 初始版本中包含的默认运行时仅适用于小型实验，例如我�
 ## 如何做贡献？
 
 请参阅[自述文件](../README.md)和[贡献者准则](../CONTRIBUTING.md)。
+
+## FedJAX 和 TensorFlow Federated 之间是什么关系？
+
+TensorFlow Federated (TFF) 是一个成熟的联合学习和分析框架，旨在简化不同算法和功能的组合过程，并且支持跨不同的模拟和部署场景移植代码。TFF 提供可扩展的运行时并通过其标准 API 支持许多隐私、压缩和优化算法。此外，TFF 还支持[多种类型的 FL 研究](https://www.tensorflow.org/federated/tff_for_research)，[google-research 仓库](https://github.com/google-research/federated)中收集了来自已发表的 Google 论文的示例集合。
+
+相比之下，[FedJAX](https://github.com/google/fedjax) 是一个基于 Python 和 JAX 的轻量级模拟库，专注于用于研究目的的联合学习算法的易用性和快速原型设计。TensorFlow Federated 和 FedJAX 作为单独的项目开发，没有代码可移植性的预期。
