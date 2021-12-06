@@ -4,7 +4,7 @@
 
 TensorFlow [코드 및 협력 거버넌스](https://github.com/tensorflow/community/blob/master/governance/code-and-collaboration.md)를 읽어보세요.
 
-## Community support
+## 커뮤니티 지원
 
 많은 사람들이 [Stack Overflow에서 TensorFlow에 대해 질문](https://stackoverflow.com/questions/tagged/tensorflow)합니다. 질문에 답하고 사람들에게 관련 문서를 알려주는 것은 커뮤니티에 기여하는 훌륭한 방법입니다.
 
@@ -26,7 +26,7 @@ TensorFlow에서의 작업에 관한 기본적 의사 교류는 [GitHub의 Tenso
 
 메일 그룹은 공지 사항 및 기여자 대화 목적으로 이용됩니다. 기본적으로, 기술 지원을 제공하기 위한 것이 아닙니다.
 
-#### General TensorFlow lists
+#### 일반 TensorFlow 목록
 
 - [announce@tensorflow.org](mailto:announce@tensorflow.org) — 모든 주요 릴리스 및 중요한 공지가 이 메일 그룹으로 발송됩니다. 어떤 식으로든 TensorFlow를 사용하고 있다면 이 목록에 가입할 것을 권장합니다.
 - [discuss@tensorflow.org](mailto:discuss@tensorflow.org) — TensorFlow 개발 및 방향에 대한 일반적인 토론에 목적을 둡니다.
@@ -45,15 +45,15 @@ TensorFlow에서의 작업에 관한 기본적 의사 교류는 [GitHub의 Tenso
 - [tfprobability@tensorflow.org](mailto:tfprobability@tensorflow.org) — TensorFlow Probability에 대한 토론 및 동료 지원에 목적을 둡니다.
 - [tpu-users@tensorflow.org](mailto:tpu-users@tensorflow.org) — TPU 사용자를 위한 커뮤니티 토론 및 지원에 목적을 둡니다.
 
-### Blog
+### 블로그
 
 정기적으로 [TensorFlow 블로그](http://blog.tensorflow.org/)에 글을 게시하고 TensorFlow 개발자와 폭넓은 커뮤니티에서 가져온 콘텐츠를 제공합니다. 검토가 필요한 게시글을 제출하려면 TensorFlow 개발자 관계 팀에 문의하세요.
 
-### Social media
+### 소셜 미디어
 
 TensorFlow 프로젝트의 전 세계 뉴스 및 업데이트는 Twitter의 [@tensorflow](https://twitter.com/tensorflow)를 팔로우하세요. TensorFlow 관련 콘텐츠를 보려면 [YouTube](http://youtube.com/tensorflow/) 채널을 확인하세요.
 
-### User groups
+### 사용자 그룹
 
 TensorFlow에는 전 세계에 많은 커뮤니티가 있습니다! 전체 목록은 TensorFlow 웹 사이트의 [커뮤니티](https://www.tensorflow.org/community/groups) 섹션을 참조하세요.
 
@@ -61,7 +61,7 @@ TensorFlow에는 전 세계에 많은 커뮤니티가 있습니다! 전체 목�
 
 TensorFlow의 특정 영역에서 집중적인 협업을 펼치기 위해 특별 관심 그룹(SIG)을 호스트합니다. SIG는 공개적으로 작업을 수행합니다. 참여하고 기여하려면 그룹의 작업을 검토하고 관련 SIG 리더와 연락을 취하세요. 회원 자격 정책은 SIG마다 다릅니다.
 
-#### Current SIGs
+#### 현재 SIG
 
 2019년 1월 기준으로 현재 TF-SIG는 다음과 같습니다.
 
