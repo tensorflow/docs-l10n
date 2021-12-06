@@ -16,6 +16,7 @@ TensorFlow RFC의 목적은 이해 관계자 및 전문가로부터 피드백을
 
 2. RFC 초안을 작성합니다.
 
+    - [설계 검토 기준](https://github.com/tensorflow/community/blob/master/governance/design-reviews.md)을 읽습니다.
     - [RFC 템플릿](https://github.com/tensorflow/community/blob/master/rfcs/yyyymmdd-rfc-template.md)을 따릅니다.
     - RFC 파일 이름을 `YYYYMMDD-descriptive-name.md`로 지정합니다. 여기서 `YYYYMMDD`는 제출 날짜이고 `descriptive-name`은 RFC 제목과 관련됩니다. 예를 들어, RFC의 제목이 *Parallel Widgets API*인 경우 `20180531-parallel-widgets.md`의 파일 이름을 사용할 수 있습니다.
     - 이미지 또는 다른 보조 파일이 있는 경우 해당 파일을 저장할 `YYYYMMDD-descriptive-name` 형식의 디렉토리를 만듭니다.
