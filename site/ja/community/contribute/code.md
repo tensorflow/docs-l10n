@@ -6,15 +6,14 @@
 
 TensorFlow プロジェクトにソースコードを提供する前に、プロジェクトの GitHub リポジトリにある`CONTRIBUTING.md` ファイルを確認してください。（例として、[コアの TensorFlow リポジトリの CONTRIBUTING.md ファイル](https://cla.developers.google.com/clas)をご覧ください）。すべてのコードコントリビュータは、[コントリビュータライセンス契約](https://cla.developers.google.com/clas)（CLA）に署名する必要があります。
 
-作業の重複を避けるために、重要な機能の作業を開始する前に、[最新のRFC](https://github.com/tensorflow/community/tree/master/rfcs)を確認し、TensorFlow フォーラムで開発者に連絡してください。私たちは新しい機能の追加についてはやや選択的なので、既知の問題の解決に貢献し、プロジェクトを支援していただくようにお願いしています。
+作業の重複を避けるために、重要な機能の作業を開始する前に[最新](https://github.com/tensorflow/community/tree/master/rfcs)または[提案中](https://github.com/tensorflow/community/labels/RFC%3A%20Proposed)の RFC を確認し、TensorFlow フォーラムの開発者に連絡してください（[developers@tensorflow.org](https://groups.google.com/u/1/a/tensorflow.org/g/developers)）。私たちは新しい機能の追加についてやや選択的であるため、既知の問題の解決に貢献いただくことでプロジェクトを支援していただくよう、お願いしています。
 
 ## 新しいコントリビュータのための issue
 
-新しいコントリビュータには、TensorFlow コードベースへの最初の貢献を検索するときに、次のタグを探すことをお勧めします。新しいコントリビュータには最初に「easy」および「good first issue」プロジェクトに取り組むことを強くお勧めします。 このようなプロジェクトに取り組むことによりコントリビュータは、貢献ワークフローに慣れ、主な開発者はコントリビュータに慣れることができます。
+新しいコントリビュータには、TensorFlow コードベースへの最初の貢献を検索するときに、次のタグを探すことをお勧めします。新しいコントリビュータには最初に「good first issue」および「contributions welcome」プロジェクトに取り組むことを強くお勧めします。 このようなプロジェクトに取り組むことによりコントリビュータは、貢献ワークフローに慣れ、作業の中心となる開発者が新しいコントリビュータに慣れることができます。
 
-- `good first issue`
-- `easy`
-- `contributions welcome`
+- [good first issue](https://github.com/tensorflow/tensorflow/labels/good%20first%20issue)
+- [contributions welcome](https://github.com/tensorflow/tensorflow/labels/stat%3Acontributions%20welcome)
 
 大規模な問題や新機能への取り組みを支援するチームの採用に関心がある場合は、[developers@ group](https://groups.google.com/a/tensorflow.org/forum/#!forum/developers) にメールでお問い合わせください。また、RFC の最新リストをご確認ください。
 
@@ -26,7 +25,7 @@ TensorFlow プロジェクトにソースコードを提供する前に、プロ
 
 コードレビューでは、以下の点を検討してください。
 
-- *これを TensorFlow に含めるべきでしょうか？*使用される可能性が高いと考えられますか？ TensorFlow ユーザーとして、この変更を気に入って使用しますか？ この変更は TensorFlow の範囲内ですか？ 新しい機能を維持するためのコストは、そのメリットに値するでしょうか？
+- *これを TensorFlow に含めるべきでしょうか？* 使用される可能性が高いと考えられますか？ TensorFlow ユーザーとして、この変更を気に入って使用しますか？ この変更は TensorFlow の範囲内ですか？ 新しい機能を維持するためのコストは、そのメリットに値するでしょうか？
 
 - *コードは TensorFlow API と一貫性がありますか？*パブリック関数、クラス、およびパラメータは適切な名前で直感的に設計されていますか？
 
@@ -107,7 +106,7 @@ TensorFlow プロジェクトにソースコードを提供する前に、プロ
 
     `$ git pull upstream master`
 
-4. 変更をGitHubアカウントにプッシュします。（オプションですが、良い習慣です。）
+4. 変更を GitHub アカウントにプッシュします。（オプションですが、良い習慣です。）
 
     `$ git push origin master`
 
@@ -115,17 +114,17 @@ TensorFlow プロジェクトにソースコードを提供する前に、プロ
 
     `$ git checkout -b branch-name`
 
-追加の`git`およびGitHubリソース：
+追加の `git` および GitHub リソース:
 
-- [Git ドキュメンテーション](https://git-scm.com/documentation)
+- [Git ドキュメント](https://git-scm.com/documentation)
 - [Git 開発ワークフロー](https://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html)
 - [マージ中に発生した競合の解決](https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/)
 
 ## コントリビュータチェックリスト
 
-- 貢献ガイドラインを読む
-- 行動規範を読む
-- コントリビュータライセンス契約（CLA）に署名したことを確認する
-- 変更がガイドラインに準拠しているかどうかを確認する
-- 変更がTensorFlowコーディングスタイルと一致しているかどうかを確認する
-- 単体テストを実行する
+- [貢献ガイドライン](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md)を読む
+- [行動規範](https://github.com/tensorflow/tensorflow/blob/master/CODE_OF_CONDUCT.md)を読む
+- [コントリビュータライセンス契約（CLA）](https://cla.developers.google.com/)に署名したことを確認する
+- 変更が[ガイドライン](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md#general-guidelines-and-philosophy-for-contribution)に準拠しているかどうかを確認する
+- 変更が[TensorFlowコーディングスタイル](https://www.tensorflow.org/community/contribute/code_style)と一致しているかどうかを確認する
+- [ユニットテストを実行する](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md#running-unit-tests)
