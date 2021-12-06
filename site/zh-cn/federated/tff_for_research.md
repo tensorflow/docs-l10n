@@ -34,15 +34,15 @@ TensorFlow Federated [托管了多个数据集](https://www.tensorflow.org/feder
 
 - [**CIFAR-100**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)CIFAR-100 数据集在 500 个训练客户端和 100 个测试客户端上的联合分区。 每个客户端都有 100 个唯一样本。 分区的完成方式是在客户端之间创建更实际的异构性。 有关更多详细信息，请参阅 [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)。
 
-- [**Google Landmark v2 dataset**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data) The dataset consists of photos of various world landmarks, with images grouped by photographer to achieve a federated partitioning of the data. Two flavors of dataset are available: a smaller dataset with 233 clients and 23080 images, and a larger dataset with 1262 clients and 164172 images.
+- [**Google Landmark v2 数据集。**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data)该数据集由各种世界地标的照片组成，图像按摄影师分组以实现数据的联合分区。提供两种形式的数据集：较小的数据集包括 233 个客户端和 23080 个图像，较大的数据集包括 1262 个客户端和 164172 个图像。
 
-- [**CelebA**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/celeba/load_data) A dataset of examples (image and facial attributes) of celebrity faces. The federated dataset has each celebrity's examples grouped together to form a client. There are 9343 clients, each with at least 5 examples. The dataset can be split into train and test groups either by clients or by examples.
+- [**CelebA。**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/celeba/load_data)名人面部样本（图像和面部属性）数据集。该联合数据集将每个名人的样本组合在一起形成一个客户端。共有 9343 个客户端，每个客户端至少包含 5 个样本。该数据集可以按客户端或按样本分为训练组和测试组。
 
-- [**iNaturalist**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/inaturalist/load_data) A dataset consists of photos of various species. The dataset contains 120,300 images for 1,203 species. Seven flavors of the dataset are available. One of them is grouped by the photographer and it consists of 9257 clients. The rest of the datasets are grouped by the geo location where the photo was taken. These six flavors of the dataset consists of 11 - 3,606 clients.
+- [**iNaturalist。**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/inaturalist/load_data)一个由不种物种的照片组成的数据集。该数据集包含 1203 个物种的 120300 个图像。提供七种形式的数据集。其中一种按摄影师分组，包含 9257 个客户端。其余数据集按拍摄照片的地理位置分组。这六种数据集包含 11 - 3606 个客户端。
 
 ## 高性能模拟
 
-While the wall-clock time of an FL *simulation* is not a relevant metric for evaluating algorithms (as simulation hardware isn't representative of real FL deployment environments), being able to run FL simulations quickly is critical for research productivity. Hence, TFF has invested heavily in providing high-performance single and multi-machine runtimes. Documentation is under development, but for now see the [High-performance simulations with TFF](https://www.tensorflow.org/federated/tutorials/simulations) tutorial, instructions on [TFF simulations with accelerators](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators), and instructions on [setting up simulations with TFF on GCP](https://www.tensorflow.org/federated/gcp_setup). The high-performance TFF runtime is enabled by default.
+虽然 FL *模拟*的时钟时间不是评估算法的相关指标（因为模拟硬件不代表真实的 FL 部署环境），但是快速运行 FL 模拟的能力对于提高研究效率至关重要。因此，TFF 投入了大量资源来提供高性能的单机和多机运行时。相关文档正在编写中，但现在您可以参阅[使用 TFF 进行高性能模拟](https://www.tensorflow.org/federated/tutorials/simulations)教程、有关[使用加速器进行 TFF 模拟](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators)的说明，以及有关[设置 GCP 上的 TFF 模拟](https://www.tensorflow.org/federated/gcp_setup)的说明。默认情况下，高性能 TFF 运行时处于启用状态。
 
 ## 针对不同研究领域的 TFF
 
@@ -68,7 +68,7 @@ TFF 使用 [tensor_encoding](https://github.com/tensorflow/model-optimization/tr
 
 TFF 可与 [TensorFlow 隐私](https://github.com/tensorflow/privacy)库互操作，以研究新的算法，从而对使用差分隐私的模型进行联合训练。有关使用[基本 DP-FedAvg 算法](https://arxiv.org/abs/1710.06963)和[扩展程序](https://arxiv.org/abs/1812.06210)进行 DP 训练的示例，请参阅[此实验驱动程序](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/research/differential_privacy/stackoverflow/run_federated.py)。
 
-If you want to implement a custom DP algorithm and apply it to the aggregate updates of federated averaging, you can implement a new DP mean algorithm as a subclass of [`tensorflow_privacy.DPQuery`](https://github.com/tensorflow/privacy/blob/master/tensorflow_privacy/privacy/dp_query/dp_query.py#L54) and create a `tff.aggregators.DifferentiallyPrivateFactory` with an instance of your query. An example of implementing the [DP-FTRL algorithm](https://arxiv.org/abs/2103.00039) can be found [here](https://github.com/google-research/federated/blob/master/dp_ftrl/dp_fedavg.py)
+如果要实现自定义 DP 算法并将其应用于联合平均算法的聚合更新，可以实现一个新的 DP 均值算法作为 [`tensorflow_privacy.DPQuery`](https://github.com/tensorflow/privacy/blob/master/tensorflow_privacy/privacy/dp_query/dp_query.py#L54) 的子类，然后使用查询实例创建 `tff.aggregators.DifferentiallyPrivateFactory`。实现 [DP-FTRL 算法](https://arxiv.org/abs/2103.00039)的示例可以在[此处](https://github.com/google-research/federated/blob/master/dp_ftrl/dp_fedavg.py)找到。
 
 联合 GAN（[如下](#generative_adversarial_networks)所述）是 TFF 项目的另一个示例，它实现了用户级别的差分隐私（例如[此处的代码](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/research/gans/tff_gans.py#L293)）。
 
