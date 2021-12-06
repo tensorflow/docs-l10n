@@ -5,6 +5,15 @@ Google Cloud Storage（GCS）は、次の理由により tfds と併用するこ
 - 事前処理されたデータの格納
 - GCS に格納されたデータを持つデータセットへのアクセス
 
+## TFDS GCS バケットを通じてアクセスする
+
+一部のデータセットは、認証を行わずに、直接 GCS バケット [`gs://tfds-data/datasets/`](https://console.cloud.google.com/storage/browser/tfds-data) で利用することができます。
+
+- `tfds.load(..., try_gcs=False)`（デフォルト）である場合、データセットは `download_and_prepare` 中にローカルに `~/tensorflow_datasets` にコピーされます。
+- `tfds.load(..., try_gcs=True)` である場合、データセットは GCS から直接ストリーミングされます（`download_and_prepare` はスキップされます）。
+
+データセットがパブリックバケットにホストされているかどうかは、`tfds.is_dataset_on_gcs('mnist')` を使って確認できます。
+
 ## 認証
 
 始める前に、認証方法を決定する必要があります。これには、次の 3 つのオプションがあります。
