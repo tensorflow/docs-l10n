@@ -6,29 +6,27 @@
 
 ### pylint
 
-要安装 `pylint` 并检索 TensorFlow 的自定义风格定义，请运行以下命令：
+要安装 `pylint`，请运行以下代码：
 
 ```bash
-
 $ pip install pylint
-$ wget -O /tmp/pylintrc https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/tools/ci_build/pylintrc
 ```
 
-要使用 `pylint` 检查文件，请运行以下命令：
+要使用 TensorFlow 源代码根目录中的 `pylint` 检查文件，请运行以下代码：
 
 ```bash
-$ pylint --rcfile=/tmp/pylintrc myfile.py
+$ pylint --rcfile=tensorflow/tools/ci_build/pylintrc tensorflow/python/keras/losses.py
 ```
 
 ### 支持的 Python 版本
 
-TensorFlow 支持版本 >= 3.5 的 Python。有关详细信息，请参阅[安装指南](https://www.tensorflow.org/install)。
+有关支持的 Python 版本，请参阅 TensorFlow [安装指南](https://www.tensorflow.org/install)。
 
 有关官方和社区支持的构建，请参阅 TensorFlow [持续构建状态](https://github.com/tensorflow/tensorflow/blob/master/README.md#continuous-build-status)。
 
 ## C++ 编码样式
 
-对 TensorFlow C++ 代码的更改应符合 [Google C++ 样式指南](https://google.github.io/styleguide/cppguide.html)。使用 `clang-format` 检查您的 C/C++ 更改。
+对 TensorFlow C++ 代码的变更应符合 [Google C++ 样式指南](https://google.github.io/styleguide/cppguide.html)和 [TensorFlow 特定样式详细信息](https://github.com/tensorflow/community/blob/master/governance/cpp-style.md)。使用 `clang-format` 检查您的 C/C++ 变更。
 
 要在 Ubuntu 16+ 上安装，请运行以下命令：
 
