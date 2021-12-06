@@ -10,7 +10,7 @@
 
 ## Markdown
 
-With a few exceptions, TensorFlow uses a Markdown syntax similar to [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) (GFM). This section explains differences between GFM Markdown syntax and the Markdown used for TensorFlow documentation.
+몇 가지 예외가 있지만 TensorFlow는 [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/)(GFM)과 유사한 Markdown 구문을 사용합니다. 이 섹션에서는 GFM Markdown 구문과 TensorFlow 설명서에 사용되는 Markdown의 차이점에 대해 설명합니다.
 
 ### 코드 작성
 
