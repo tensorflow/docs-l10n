@@ -2,40 +2,40 @@
 
 [TOC]
 
-The [executors](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors) package contains core [Executors](#executor) classes and [runtime](#runtime) related functionality.
+[executors](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors) パッケージには、コア [Executors](#executor) クラスとと[ランタイム](#runtime)関連の機能が含まれます。
 
-## Runtime
+## ランタイム
 
-A runtime is a logical concept describing a system that executes a computation.
+ランタイムは、計算を実行するシステムを記述する論理的概念です。
 
-### TFF Runtime
+### TFF ランタイム
 
-A TFF runtime typically handles executing an [AST](compilation.md#ast) and delegates executing mathematical computations to a [external runtime](#external-runtime) such as [TensorFlow](#tensorflow).
+TFF ランタイムは通常、[AST](compilation.md#ast) の実行を処理し、数学的計算の実行を [TensorFlow](#tensorflow) などの[外部ランタイム](#external-runtime)にデリゲートします。
 
-### External Runtime
+### 外部ランタイム
 
-An external runtime is any system that the TFF runtime delegates execution to.
+外部ランタイムは、TFF ランタイムが実行をデリゲートする先のシステムです。
 
 #### TensorFlow
 
-[TensorFlow](https://www.tensorflow.org/) is an open source platform for machine learning. Today the TFF runtime delegates mathematical computations to TensorFlow using an [eager_tf_executor.EagerTFExecutor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/eager_tf_executor.py) that can be composed into a hierarchy, referred to as an [execution stack](#execution-stack).
+[TensorFlow](https://www.tensorflow.org/) は機械学習用のオープンソースプラットフォームです。今日、TFF ランタイムは、[実行スタック](#execution-stack)と呼ばれる階層に構成できる [eager_tf_executor.EagerTFExecutor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/eager_tf_executor.py) を使用して、数学的計算を TensorFlow にデリゲートしています。
 
 ## `Executor`
 
-An [executor_base.Executor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_base.py) is an abstract interface that defines the API for executing an [AST](compilation.md#ast). The [executors](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors) package contains a collection of concrete implementations of this interface.
+[executor_base.Executor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_base.py) は、[AST](compilation.md#ast) を実行するための API を定義する抽象インターフェースです。[executors](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors) パッケージには、このインターフェースの具体的な実装のコレクションが含まれます。
 
 ## `ExecutorFactory`
 
-An [executor_factory.ExecutorFactory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_factory.py) is an abstract interface that defines the API for constructing an [Executor](#executor). These factories construct the executor lazily and manage the lifecycle of the executor; the motivation to lazily constructing executors is to infer the number of clients at execution time.
+[executor_factory.ExecutorFactory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_factory.py) は、[Executor](#executor) を構築するための API を定義する抽象インターフェースです。これらのファクトリーは Executor を遅延的に構築し、その Executor のライフサイクルを管理します。Executor を遅延構築するのは、実行時にクライアント数を推論するためです。
 
-## Execution Stack
+## 実行スタック
 
-An execution stack is a hierarchy of [Executors](#executor). The [executor_stacks](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) module contains logic for constructing and composing specific execution stacks.
+実行スタックは、[Executor](#executor) の階層です。[executor_stacks](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) モジュールには、特定の実行スタックを構築・作成するためのロジックが含まれます。
 
-### Local Execution Stack
+### ローカル実行スタック
 
-The [executor_stacks.local_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) function constructs a local execution stack that executes an [AST](compilation.md#ast) on some number of clients.
+[executor_stacks.local_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) 関数は、クライアントで [AST](compilation.md#ast) を実行するローカル実行スタックを構築します。
 
-### Remote Execution Stack
+### リモート実行スタック
 
-The [executor_stacks.remote_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) function constructs a remote execution stack that executes an [AST](compilation.md#ast) on some service.
+[executor_stacks.remote_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) 関数は、サービスで [AST](compilation.md#ast) を実行するリモート実行スタックを構築します。
