@@ -16,6 +16,7 @@ TensorFlow 征求意见 (RFC) 的目的是通过从利益相关者和专家那�
 
 2. 起草您的 RFC。
 
+    - 阅读[设计审核标准](https://github.com/tensorflow/community/blob/master/governance/design-reviews.md)
     - 遵循 [RFC 模板](https://github.com/tensorflow/community/blob/master/rfcs/yyyymmdd-rfc-template.md)。
     - 将您的 RFC 文件命名为 `YYYYMMDD-descriptive-name.md`，其中 `YYYYMMDD` 是提交日期，而 `descriptive-name` 与您的 RFC 标题相关。（例如，如果您的 RFC 标题为 *Parallel Widgets API*，则可以使用文件名 `20180531-parallel-widgets.md`）。
     - 如果要提交图像或其他辅助文件，请创建格式为 `YYYYMMDD-descriptive-name` 的目录来存储这些文件。
