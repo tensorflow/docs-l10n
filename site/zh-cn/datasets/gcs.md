@@ -5,6 +5,15 @@
 - 存储预处理数据
 - 访问在 GCS 上存储数据的数据集
 
+## 通过 TFDS GCS 桶访问
+
+一些数据集可直接在我们的 GCS 存储分区 [`gs://tfds-data/datasets/`](https://console.cloud.google.com/storage/browser/tfds-data) 中获得，无需进行任何身份验证：
+
+- 如果 `tfds.load(..., try_gcs=False)`（默认），则将在 `download_and_prepare` 期间在 `~/tensorflow_datasets` 中本地复制数据集。
+- 如果 `tfds.load(..., try_gcs=True)`，则将直接从 GCS 流式传输数据集（将跳过 `download_and_prepare`）。
+
+您可以使用 `tfds.is_dataset_on_gcs('mnist')` 检查数据集是否托管在公共存储分区上。
+
 ## 身份验证
 
 首先，您应该决定如何进行身份验证。共有三个选项：
