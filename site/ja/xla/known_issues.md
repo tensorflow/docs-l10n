@@ -1,39 +1,39 @@
 # 既知の問題
 
-Compilation with XLA can greatly improve the performance of your programs, but the TensorFlow interop has a number of known sharp corners.
+XLA を使用してコンパイルすると、プログラムのパフォーマンスを大幅に向上させることができますが、TensorFlow 相互運用性にはいくつかの既知の問題があります。
 
-## `tf.Variable` on a different device
+## 異なるデバイス上の `tf.Variable`
 
-*Error message*: `INVALID_ARGUMENT: Trying to access resource <Variable> (defined @ <Loc>) located in device CPU:0 from device GPU:0`
+*エラーメッセージ*: `INVALID_ARGUMENT: Trying to access resource <Variable> (defined @ <Loc>) located in device CPU:0 from device GPU:0`
 
-XLA cluster runs on exactly one device, and it can not read or write to `tf.Variable` located on a different device. Usually this error message indicates that the variable was not placed on the right device to begin with. The error message should precisely specify the location of the offending variable.
+XLA クラスタは 1 台のデバイスでしか実行できません。別のデバイスにある `tf.Variable` に対して読み取りまたは書き込みを行うことはできません。通常、このエラーメッセージは、変数が最初から適切なデバイスに配置されていないことを示しています。エラーメッセージは、問題のある変数の場所を正確に指定します。
 
-NOTE: `tf.Variable` of type `int32` are always placed on a host, and can not be placed on a GPU. As a workaround, `int64` can be used.
+注意: `int32` 型の `tf.Variable` は常にホストに配置され、GPU に配置することはできません。回避策として、`int64` を使用できます。
 
-## TensorArray TF/XLA interconversion is not supported
+## TensorArray TF/XLA 相互変換はサポートされていない
 
-*Error message*: `Support for TensorList crossing the XLA/TF boundary is not implemented`.
+*エラーメッセージ*: `Support for TensorList crossing the XLA/TF boundary is not implemented`
 
-XLA supports `tf.TensorArray`. However, the *interconversion* between TF and XLA representations is not implemented yet. This error often arises when the `TensorArray` is used inside the compiled block, but the derivative is taken outside.
+XLA は `tf.TensorArray` をサポートしていますが、TF と XLA 間の*相互変換*はまだ実装されていません。このエラーは、コンパイルされたブロック内で `TensorArray` が使用されていて、導関数が外部で使用されている場合によく発生します。
 
-*Workaround*: compile the outermost scope which is taking the derivative.
+*回避策*: 導関数をとっている最も外側のスコープをコンパイルします。
 
-## TensorFlow while loops need to be bounded (or have backprop disabled)
+## TensorFlow while ループを制限する必要がある（または backprop を無効にする）
 
-*Error message*: `XLA compilation requires a fixed tensor list size. Set the max number of elements. This could also happen if you're using a TensorArray in a while loop that does not have its maximum_iteration set, you can fix this by setting maximum_iteration to a suitable value`.
+*エラーメッセージ*: `XLA compilation requires a fixed tensor list size. Set the max number of elements. This could also happen if you're using a TensorArray in a while loop that does not have its maximum_iteration set, you can fix this by setting maximum_iteration to a suitable value`
 
-TF while [loops](https://www.tensorflow.org/api_docs/python/tf/while_loop) created using `tf.while_loop` support backpropagation by accumulating all intermediate results in a `TensorArray`, but XLA only supports bounded `TensorArray`s.
+`tf.while_loop` を使用して作成された TF while [ループ](https://www.tensorflow.org/api_docs/python/tf/while_loop)は、すべての中間結果を `TensorArray` に累積することでバックプロパゲーションをサポートしますが、XLA は制限付き `TensorArray` のみをサポートします。
 
-*Workaround*: all compiled while loops need to either have `maximum_iterations` parameter set to a constant value known at compile time, or backpropagation disabled using `back_prop=False`.
+*回避策*: コンパイルされたすべての while ループでは、`maximum_iterations` パラメータをコンパイル時に既知の定数値に設定するか、`back_prop=False` を使用してバックプロパゲーションを無効にする必要があります。
 
-## Dynamic `tf.TensorArray` is not supported
+## 動的な `tf.TensorArray` はサポートされていない
 
-Writes into `tf.TensorArray(..., dynamic_size=True)` are not compilable with XLA, as such writes require an unknown number of reallocations when the array exceeds the original bound.
+`tf.TensorArray(..., dynamic_size=True)` への書き込みは、配列が元の境界を超えたときに不明な数の再割り当てが必要になるため、XLA ではコンパイルできません。
 
-*Workaround*: provide a statically known bound to your arrays.
+*回避策*: 静的な既知の配列の制限を提供します。
 
-## Random number generation ignores TF seed
+## 乱数生成は TF シードを無視する
 
-XLA currently ignores TF seeds to random operations. This affects stateful TF random operations, such as `tf.random.normal`, or `tf.nn.dropout`. XLA will behave as if the compilation was seeded with a new unique seed at each run within the same process (the first run of the process will always yield the same result).
+XLA は現在、ランダム演算に対する TF シードを無視しています。これは、`tf.random.normal` や `tf.nn.dropout` などのステートフル TF ランダム演算に影響を与えます。XLA は、実行ごとに新しい一意のシードがコンパイルにシードされたかのように動作します。
 
-*Workaround*: use [the recommended RNGs](https://www.tensorflow.org/guide/random_numbers#stateless_rngs) such as `tf.random.stateless_uniform` or the `tf.random.Generator` directly.
+*回避策*: `tf.random.stateless_uniform` または、`tf.random.Generator` などの[推薦される RNG](https://www.tensorflow.org/guide/random_numbers#stateless_rngs) を直接使用します。
