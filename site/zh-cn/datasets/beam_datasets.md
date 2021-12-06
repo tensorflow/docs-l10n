@@ -43,8 +43,7 @@ echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
 最后，您可以使用以下命令启动作业：
 
 ```sh
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --datasets=$DATASET_NAME/$DATASET_CONFIG \
+tfds build $DATASET_NAME/$DATASET_CONFIG \
   --data_dir=$GCS_BUCKET/tensorflow_datasets \
   --beam_pipeline_options=\
 "runner=DataflowRunner,project=$GCP_PROJECT,job_name=$DATASET_NAME-gen,"\
@@ -57,8 +56,7 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
 要使用默认的 Apache Beam 运行程序在本地运行脚本，该命令与其他数据集的命令相同：
 
 ```sh
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --datasets=my_new_dataset
+tfds build my_dataset
 ```
 
 **警告**：Beam 数据集可能非常**庞大**（数 TB 或更大），并且生成数据集会占用大量资源（在本地计算机上可能需要数周）。建议使用分布式环境生成数据集。请参阅 [Apache Beam 文档](https://beam.apache.org/)以查看受支持的运行时列表。
@@ -72,17 +70,13 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
 # flags. Otherwise, you can leave flags empty [].
 flags = ['--runner=DataflowRunner', '--project=<project-name>', ...]
 
-# To use Beam, you have to set at least one of `beam_options` or `beam_runner`
+# `beam_options` (and `beam_runner`) will be forwarded to `beam.Pipeline`
 dl_config = tfds.download.DownloadConfig(
     beam_options=beam.options.pipeline_options.PipelineOptions(flags=flags)
 )
-
 data_dir = 'gs://my-gcs-bucket/tensorflow_datasets'
 builder = tfds.builder('wikipedia/20190301.en', data_dir=data_dir)
-builder.download_and_prepare(
-    download_dir=FLAGS.download_dir,
-    download_config=dl_config,
-)
+builder.download_and_prepare(download_config=dl_config)
 ```
 
 ## 实现 Beam 数据集
@@ -102,56 +96,19 @@ builder.download_and_prepare(
 非 Beam 数据集：
 
 ```python
-class DummyBeamDataset(tfds.core.BeamBasedBuilder):
-
-  VERSION = tfds.core.Version('1.0.0')
-
-  def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
-        features=tfds.features.FeaturesDict({
-            'image': tfds.features.Image(shape=(16, 16, 1)),
-            'label': tfds.features.ClassLabel(names=['dog', 'cat']),
-        }),
-    )
-
-  def _split_generators(self, dl_manager):
-    ...
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=dict(file_dir='path/to/train_data/'),
-        ),
-        splits_lib.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs=dict(file_dir='path/to/test_data/'),
-        ),
-    ]
-
-  def _build_pcollection(self, pipeline, file_dir):
-    """Generate examples as dicts."""
-    beam = tfds.core.lazy_imports.apache_beam
-
-    def _process_example(filename):
-      # Use filename as key
-      return filename, {
-          'image': os.path.join(file_dir, filename),
-          'label': filename.split('.')[1],  # Extract label: "0010102.dog.jpeg"
-      }
-
-    return (
-        pipeline
-        | beam.Create(tf.io.gfile.listdir(file_dir))
-        | beam.Map(_process_example)
-    )
+def _generate_examples(self, path):
+  for f in path.iterdir():
+    yield _process_example(f)
 ```
 
 Beam 数据集：
 
 ```python
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --register_checksums \
-  --datasets=my_new_dataset
+def _generate_examples(self, path):
+  return (
+      beam.Create(path.iterdir())
+      | beam.Map(_process_example)
+  )
 ```
 
 其余所有内容都可以完全相同，包括测试。
