@@ -56,7 +56,7 @@ TFF 旨在支持各种分布学习场景，在这些场景中，您编写的机�
 
     - 对于每个客户端，在本地数据批次流上反复调用您的模型代码（无论是独立还是并行），从而产生一组新的模型参数（训练时），以及一组新的本地指标，如上所述（这是本地聚合）。
 
-    - TFF 运行分布聚合协议来累积和聚合整个系统中的模型参数以及本地导出的指标。该逻辑使用 TFF 自有的*联合计算*语言（不是在 TensorFlow 中），在模型的 `federated_output_computation.` 中以声明式方式进行表达。
+    - TFF 运行分布聚合协议来累积和聚合整个系统中的模型参数以及本地导出的指标。该逻辑使用 TFF 自有的*联合计算*语言（不是在 TensorFlow 中），在模型的 `federated_output_computation` 中以声明方式进行表达。有关聚合 API 的详细信息，请参阅[自定义算法](tutorials/custom_federated_algorithms_1.ipynb)教程。
 
 ### 抽象接口
 
@@ -68,7 +68,7 @@ TFF 旨在支持各种分布学习场景，在这些场景中，您编写的机�
 
 此外，抽象接口 `tff.learning.Model` 会公开属性 `federated_output_computation`。该属性与前述 `report_local_outputs` 属性相结合，可让您控制聚合汇总统计数据的过程。
 
-在[图像分类](tutorials/federated_learning_for_image_classification.ipynb)教程的第二部分，以及我们用于在 [`model_examples.py`](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/learning/model_examples.py) 中进行测试的示例模型中，您可以找到有关如何定义自定义 `tf.learning.Model` 的示例。
+在[图像分类](tutorials/federated_learning_for_image_classification.ipynb)教程的第二部分，以及我们用于在 [`model_examples.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/model_examples.py) 中进行测试的示例模型中，您可以找到有关如何定义自定义 `tff.learning.Model` 的示例。
 
 ### Keras 转换器
 
@@ -153,10 +153,10 @@ while True:
 
 ### 抽象接口
 
-为了标准化模拟联合数据集的处理，TFF 提供了一个抽象接口 `tff.simulation.ClientData`。通过该接口，用户可以枚举客户端集，并构造包含特定客户端的数据的 `tf.data.Dataset`。在 Eager 模式下，这些 `tf.data.Dataset` 可作为输入直接提供给生成的联合计算。
+为了使模拟联合数据集的处理实现标准化，TFF 提供了一个抽象接口 `tff.simulation.datasets.ClientData`。通过该接口，用户可以枚举客户端集，并构造包含特定客户端的数据的 `tf.data.Dataset`。在 Eager 模式下，这些 `tf.data.Dataset` 可以作为输入直接馈送给生成的联合计算。
 
 需要注意的是，访问客户端标识的能力是数据集为了在模拟中使用才提供的一个功能，在这种情况下，可能需要对客户端的特定子集的数据进行训练的能力（例如，为了模拟不同类型客户端的日可用性）。编译的计算和底层运行时*不*涉及客户端身份的任何概念。一旦选择来自客户端特定子集的数据作为输入（例如，在对 `tff.templates.IterativeProcess.next` 的调用中），则其中不再出现客户端标识。
 
 ### 可用数据集
 
-为了在模拟中使用，我们已指定将命名空间 `tff.simulation.datasets` 专门用于实现 `tff.simulation.ClientData` 接口的数据集，并为其提供 2 个数据集作为种子，从而支持[图像分类](tutorials/federated_learning_for_image_classification.ipynb)和[文本生成](tutorials/federated_learning_for_text_generation.ipynb)教程。我们希望您为此平台贡献自己的数据集。
+为了在模拟中使用，我们已指定将命名空间 `tff.simulation.datasets` 专门用于实现 `tff.simulation.datasets.ClientData` 接口的数据集，并为其提供 2 个数据集作为种子，从而支持[图像分类](tutorials/federated_learning_for_image_classification.ipynb)和[文本生成](tutorials/federated_learning_for_text_generation.ipynb)教程。我们希望您为平台贡献自己的数据集。
