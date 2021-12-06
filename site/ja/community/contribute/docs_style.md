@@ -16,15 +16,15 @@
 
 #### コードの記述をインライン化
 
-テキストで使用する場合には、以下のシンボルの前後に<code>backticks</code>（バッククォート）を配置します。
+テキストで使用する場合には、以下のシンボルの前後に <code>backticks</code>（バッククォート）を配置します。
 
-- 引数名 : <code>input</code>、<code>x</code>、<code>tensor</code>
-- 返されたテンソル名 : <code>output</code>、<code>idx</code>、<code>out</code>
-- データ型 : <code>int32</code>、<code>float</code>、<code>uint8</code>
-- テキストで参照する他の演算子名 : <code>list_diff()</code>、<code>shuffle()</code>
-- クラス名 : <code>tf.Tensor</code>、<code>Strategy</code>
-- ファイル名 : <code>image_ops.py</code>、<code>/path_to_dir/file_name</code>
-- 数式や条件: <code>-1-input.dims() <= dim <= input.dims()</code>
+- 引数名: <code>&lt;code data-md-type="codespan"&gt;input</code>、<code>&lt;code data-md-type="codespan"&gt;x</code>、<code>&lt;code data-md-type="codespan"&gt;tensor</code>
+- 返されたテンソル名: <code>&lt;code data-md-type="codespan"&gt;output</code>、<code>&lt;code data-md-type="codespan"&gt;idx</code>、<code>&lt;code data-md-type="codespan"&gt;out</code>
+- データ型: <code>&lt;code data-md-type="codespan"&gt;int32</code>、<code>&lt;code data-md-type="codespan"&gt;float</code>、<code>&lt;code data-md-type="codespan"&gt;uint8</code>
+- テキストで参照する他の演算子名: <code>&lt;code data-md-type="codespan"&gt;list_diff()</code>、<code>&lt;code data-md-type="codespan"&gt;shuffle()</code>
+- クラス名: <code>&lt;code data-md-type="codespan"&gt;tf.Tensor</code>、<code>&lt;code data-md-type="codespan"&gt;Strategy</code>
+- ファイル名: <code>&lt;code data-md-type="codespan"&gt;image_ops.py</code>、<code>&lt;code data-md-type="codespan"&gt;/path_to_dir/file_name</code>
+- 数式や条件: <code>&lt;code data-md-type="codespan"&gt;-1-input.dims() &lt;= dim &lt;= input.dims()</code>
 
 #### コードブロック
 
@@ -40,21 +40,21 @@
 
 #### このリポジトリ内のファイル間のリンク
 
-リポジトリ内のファイル間の相対リンクを使用します。これは <br>[tensorflow.org](https://www.tensorflow.org) と [GitHub](https://github.com/tensorflow/docs/tree/master/site/en) で動作します。<br> <code>[Custom layers](../tutorials/eager/custom_layers.ipynb)</code>は、サイトに[カスタムレイヤー](https://www.tensorflow.org/tutorials/eager/custom_layers)を生成します。
+リポジトリ内のファイル間の相対リンクを使用します。これは [tensorflow.org](https://www.tensorflow.org) と [GitHub](https://www.tensorflow.org) で動作します。<br> <code>[Custom layers](../tutorials/eager/custom_layers.ipynb)</code> は、サイトに[カスタムレイヤー](https://www.tensorflow.org/tutorials/eager/custom_layers)を生成します。
 
 #### API ドキュメントへのリンク
 
 API リンクはサイトの公開時に変換されます。特定のシンボルの API リファレンスページにリンクするには、シンボルパス全体をバッククォートで囲みます。
 
-- <code>tf.data.Dataset</code>は [tf.data.Dataset](https://www.tensorflow.org/api_docs/python/tf/data/Dataset) を生成します。
+- <code>&lt;code data-md-type="codespan"&gt;tf.data.Dataset</code> は [tf.data.Dataset](https://www.tensorflow.org/api_docs/python/tf/data/Dataset) を生成します。
 
 C++ API の場合は、ネームスペースパスを使用します。
 
-- `tensorflow::Tensor`は [tensorflow::Tensor](https://www.tensorflow.org/api_docs/cc/class/tensorflow/tensor) を生成します。
+- `tensorflow::Tensor` は [tensorflow::Tensor](https://www.tensorflow.org/api_docs/cc/class/tensorflow/tensor) を生成します。
 
 #### 外部リンク
 
-`tensorflow/docs`リポジトリにない <var>https://www.tensorflow.org</var> 上のファイルを含む外部リンクには、完全な URI を含んだ標準の Markdown リンクを使用します。
+`tensorflow/docs` リポジトリにない <var>https://www.tensorflow.org</var> 上のファイルを含む外部リンクには、完全な URI を含んだ標準の Markdown リンクを使用します。
 
 ソースコードをリンクするには、<var>https://www.github.com/tensorflow/tensorflow/blob/master/</var>  で始まるリンクを使用し、その後に GitHub のルートで始まるファイル名をつけます。
 
@@ -62,9 +62,9 @@ C++ API の場合は、ネームスペースパスを使用します。
 
 リンクには、URI クエリパラメータを含めてはいけません。
 
-ファイルパスは、例えば`custom_layers.ipynb`のように、スペースにアンダースコアを使用します。
+ファイルパスは、例えば `custom_layers.ipynb` のように、スペースにアンダースコアを使用します。
 
-リンクにファイル拡張子を含めて、サイト*および* GitHub で使用できるようにします。例を示します。<br> <code>[Custom layers](../tutorials/eager/custom_layers.ipynb)</code>
+リンクにファイル拡張子を含めて、サイト*および* GitHub で使用できるようにします。例を示します。<br> <code>&lt;a href="../tutorials/eager/custom_layers.ipynb" data-md-type="link"&gt;Custom layers&lt;/a&gt;</code>
 
 ### Markdown の数学
 
@@ -91,7 +91,7 @@ This is an example of an inline MathJax expression: $ 2 \times 2 = 4 $
 
 これはインライン MathJax の式の例で、$ 2 \times 2 = 4 $ です。
 
-<code>\( ... \)</code>区切り文字はインライン数学でも使えますが、$ 形式の方が読みやすい場合があります。
+<code>\( ... \)</code> 区切り文字はインライン数学でも使えますが、$ 形式の方が読みやすい場合があります。
 
 注意: テキストや MathJax の式の中でドル記号を使う必要がある場合は、先頭のスラッシュでエスケープします（`\$`）。コードブロック内のドル記号（Bash の変数名など）はエスケープする必要はありません。
 
@@ -114,22 +114,28 @@ This is an example of an inline MathJax expression: $ 2 \times 2 = 4 $
 
 ### 演算子
 
-演算子が何を返すかを表示する場合は、単一の等号の代わりに`# ⇒`を使用します。
+演算子が何を返すかを表示する場合は、単一の等号の代わりに `# ⇒` を使用します。
 
 ```python
 # 'input' is a tensor of shape [2, 3, 5]
 (tf.expand_dims(input, 0))  # ⇒ [1, 2, 3, 5]
 ```
 
+ノートブックでは、コメントを追加する代わりに結果を表示します（ノートブックセルの最後の式が変数に割り当てられていない場合は、自動的にそれが表示されます）。
+
+API リファレンスドキュメントでは、[doctest](docs_ref.md#doctest) を使って結果を表示することが推奨されています。
+
 ### テンソル
 
-一般的なテンソルについて話す際には、*tensor* という英単語に大文字は使用しないでください。演算子に提供されたり演算子から返されたりする特定のオブジェクトについて話す際は、*Tensor* と頭文字を大文字にします。また、これは`Tensor`オブジェクトについて話しているため、その前後にバッククォートを追加します。
+一般的にテンソルについて話す際は、*tensor* という単語を大文字にしてはいけません。演算子に提供されたり演算子から返されたりする特定のオブジェクトについて話す際は、*Tensor* と単語の頭文字を大文字にし、さらにこれは`Tensor` オブジェクトについて話しているため、その前後にバッククォートを追加します。
 
-複数の`Tensor`オブジェクトを表現する際に、`Tensors`オブジェクトについて言及しているのでなければ *Tensors*（複数形）は使用しないでください。その代わりに "a list (or collection) of `Tensor` objects"（「Tensor オブジェクトのリスト（またはコレクション）」）と表記します。
+複数の `Tensor` オブジェクトを表現する際に、`Tensors` オブジェクトについて言及していない場合に *Tensors*（複数形）を使用してはいけません。その代わりに "a list (or collection) of `Tensor` objects"（「Tensor オブジェクトのリスト（またはコレクション）」）と表記します。
 
-*shape* という単語を使用して、テンソルの次元を詳しく説明し、バッククォート付きの角括弧で形状を示します。例を示します。
+*shape* という単語を使用してテンソルの軸を詳しく説明し、バッククォート付きの角括弧で形状を示します。例を示します。
 
 <pre><code>
 If `input` is a three-dimensional tensor with shape `[3, 4, 3]`, this operation
 returns a three-dimensional tensor with shape `[6, 8, 6]`.
 </code></pre>
+
+上述のとおり、`Tensor` の形状の要素について話す場合には、「dimension（次元）」ではなく、「axis（軸）」または「index（インデックス）」を使用することを推奨します。そうでない場合、「dimension」をベクトル空間の次元と混同する可能性があるためです。「three-dimensional vector（3 次元ベクトル)」は長さ 3 の単一の軸です。
