@@ -109,4 +109,4 @@ TensorFlow Estimator와의 호환성을 위해 `hub.LatestModuleExporter`는 최
 
 - 게시자 모델에서는 `tf.train.FtrlOptimizer`, `tf.train.ProximalGradientDescentOptimizer` 및 기타 근위 옵티마이저의 `l1_` 및 `l2_regularization_strength` 매개변수를 통해 L1/L2 정규화를 정의하지 마세요. 이들은 모듈과 함께 내보내지지 않으며, 전체적으로 정규화 강도를 설정하는 것은 소비자에게 적합하지 않을 수 있습니다. 넓은(즉, 희소 선형) 또는 넓고 깊은 모델의 L1 정규화를 제외하고는 개별 정규화 손실을 대신 사용할 수 있습니다.
 
-- If you use dropout, batch normalization, or similar training techniques, set their hyperparameters to values that make sense across many expected uses. The dropout rate may have to be adjusted to the target problem's propensity to overfitting. In batch normalization, the momentum (a.k.a. decay coefficient) should be small enough to enable fine-tuning with small datasets and/or large batches. For advanced consumers, consider adding a signature that exposes control over critical hyperparameters.
+- 드롭아웃, 배치 정규화 또는 유사한 훈련 테크닉을 사용하는 경우, 하이퍼 매개변수를 예상되는 여러 용도에서 의미 있는 값으로 설정합니다. 드롭아웃은 대상 문제의 과대적합 경향에 따라 조정되어야 할 수 있습니다. 배치 정규화에서 모멘텀(일명 감쇄 계수)은 작은 데이터세트 및/또는 큰 배치로 미세 조정이 가능할 만큼 충분히 작아야 합니다. 고급 소비자의 경우, 중요한 하이퍼 매개변수를 제어할 수 있는 서명을 추가하는 것이 좋습니다.
