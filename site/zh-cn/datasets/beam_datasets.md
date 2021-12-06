@@ -7,29 +7,17 @@
 - 面向想要生成现有 Beam 数据集的用户
 - 面向想要创建新的 Beam 数据集的开发者
 
-目录：
-
-- [生成 Beam 数据集](#generating-a-beam-dataset)
-    - [在 Google Cloud Dataflow 上生成](#on-google-cloud-dataflow)
-    - [在本地生成](#locally)
-    - [使用自定义脚本生成](#with-a-custom-script)
-- [实现 Beam 数据集](#implementing-a-beam-dataset)
-    - [前提条件](#prerequisites)
-    - [说明](#instructions)
-    - [示例](#example)
-    - [运行您的流水线](#run-your-pipeline)
-
 ## 生成 Beam 数据集
 
 以下是在云端或在本地生成 Beam 数据集的不同示例。
 
-**警告**：使用 `tensorflow_datasets.scripts.download_and_prepare` 脚本生成数据集时，请确保指定要生成的数据集配置，否则将默认生成所有现有配置。例如，对于 [wikipedia](https://www.tensorflow.org/datasets/catalog/wikipedia)，请使用 `--dataset=wikipedia/20200301.en` 而非 `--dataset=wikipedia`。
+**警告**：使用 [`tfds build` CLI](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset) 生成数据集时，请确保指定要生成的数据集配置，否则将默认生成所有现有配置。例如，对于 [wikipedia](https://www.tensorflow.org/datasets/catalog/wikipedia)，请使用 `tfds build wikipedia/20200301.en` 而非 `tfds build wikipedia`。
 
 ### 在 Google Cloud Dataflow 上生成
 
 要使用 [Google Cloud Dataflow](https://cloud.google.com/dataflow/) 运行流水线并利用分布式计算的优势，请首先遵循[快速入门说明](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python)。
 
-设置好环境后，您可以使用 [GCS](https://cloud.google.com/storage/) 上的数据目录并为 `--beam_pipeline_options` 标记指定[所需的选项](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)来运行 `download_and_prepare` 脚本。
+设置好环境后，您可以使用 [GCS](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset) 上的数据目录并为 `--beam_pipeline_options` 标志指定[所需的选项](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)来运行 [`tfds build` CLI](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset)。
 
 为了便于启动脚本，建议您使用自己的 GCP/GCS 设置和您要生成的数据集的实际值来定义以下变量：
 
@@ -73,13 +61,13 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
   --datasets=my_new_dataset
 ```
 
-**警告**：Beam 数据集可能非常**庞大**（太字节），并且生成数据集会占用大量资源（在本地计算机上可能需要数周）。建议使用分布式环境生成数据集。请参阅 [Apache Beam 文档](https://beam.apache.org/)以查看受支持的运行时列表。
+**警告**：Beam 数据集可能非常**庞大**（数 TB 或更大），并且生成数据集会占用大量资源（在本地计算机上可能需要数周）。建议使用分布式环境生成数据集。请参阅 [Apache Beam 文档](https://beam.apache.org/)以查看受支持的运行时列表。
 
 ### 使用自定义脚本生成
 
-要在 Beam 上生成数据集，API 与其他数据集相同，但需要将 Beam 选项或运行程序传递给 `DownloadConfig`。
+要在 Beam 上生成数据集，API 与其他数据集相同。您可以使用 `DownloadConfig` 的 `beam_options`（和 `beam_runner`）参数自定义 [`beam.Pipeline`](https://beam.apache.org/documentation/programming-guide/#creating-a-pipeline)。
 
-```py
+```python
 # If you are running on Dataflow, Spark,..., you may have to set-up runtime
 # flags. Otherwise, you can leave flags empty [].
 flags = ['--runner=DataflowRunner', '--project=<project-name>', ...]
@@ -109,21 +97,9 @@ builder.download_and_prepare(
 
 ### 说明
 
-如果您熟悉[数据集创建指南](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)，则仅需进行一些修改即可添加 Beam 数据集：
+如果您熟悉[数据集创建指南](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)，则仅需修改 `_generate_examples` 函数即可添加 Beam 数据集。此函数应当返回一个 Beam 对象，而不是一个生成器：
 
-- 您的 `DatasetBuilder` 将继承自 `tfds.core.BeamBasedBuilder` 而非 `tfds.core.GeneratorBasedBuilder`。
-- Beam 数据集应实现抽象方法 `_build_pcollection(self, **kwargs)` 而非 `_generate_examples(self, **kwargs)` 方法。`_build_pcollection` 应返回 `beam.PCollection` 以及与拆分相关联的示例。
-- Beam 数据集与其他数据集的单元测试编写方法相同。
-
-其他注意事项：
-
-- 使用 `tfds.core.lazy_imports` 导入 Apache Beam。通过使用惰性依赖关系，用户在数据集生成后仍可以读取数据集，而不必安装 Beam。
-- 使用 Python 闭包时要小心。在运行流水线时，使用 `pickle` 序列化 `beam.Map` 和 `beam.DoFn` 函数，并将其发送给所有工作进程。这会产生错误；例如，如果您在函数中使用了在函数外部声明的可变对象，则可能会遇到 `pickle` 错误或意外行为。解决方法通常是避免改变封闭的对象。
-- 在 Beam 流水线中可以对 `DatasetBuilder` 使用方法。但是，在 pickle 过程中类被序列化的方式以及在创建过程中对特征所做的更改最多将被忽略。
-
-### 示例
-
-以下为 Beam 数据集的示例。要了解更为复杂的实际示例，请参见 [`Wikipedia` 数据集](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia.py)。
+非 Beam 数据集：
 
 ```python
 class DummyBeamDataset(tfds.core.BeamBasedBuilder):
@@ -170,14 +146,91 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
     )
 ```
 
-### 运行您的流水线
+Beam 数据集：
 
-要运行流水线，请参阅以上部分内容。
-
-**警告**：首次运行数据集以注​​册下载内容时，请勿忘记将注册校验和 `--register_checksums` 标记添加到 `download_and_prepare` 脚本中。
-
-```sh
+```python
 python -m tensorflow_datasets.scripts.download_and_prepare \
   --register_checksums \
   --datasets=my_new_dataset
 ```
+
+其余所有内容都可以完全相同，包括测试。
+
+其他注意事项：
+
+- 使用 `tfds.core.lazy_imports` 导入 Apache Beam。通过使用惰性依赖关系，用户在数据集生成后仍可以读取数据集，而不必安装 Beam。
+- 小心使用 Python 闭包。运行流水线时，`beam.Map` 和 `beam.DoFn` 函数使用 `pickle` 序列化并发送给所有工作进程。如果必须在工作进程之间共享状态，请不要在 `beam.PTransform` 内使用可变对象。
+- 由于 `tfds.core.DatasetBuilder` 使用 pickle 序列化的方式，在数据创建期间改变 `tfds.core.DatasetBuilder` 将在工作进程上被忽略（例如，无法在 `_split_generators` 中设置 `self.info.metadata['offset'] = 123` 并从 `beam.Map(lambda x: x + self.info.metadata['offset'])` 之类的工作进程访问它）
+- 如果您需要在拆分之间共享一些流水线步骤，则可以将一个额外的 `pipeline: beam.Pipeline` kwarg 添加到 `_split_generator` 并控制完整的生成流水线。请参阅 `tfds.core.GeneratorBasedBuilder` 的 `_generate_examples` 文档。
+
+### 示例
+
+下面是一个 Beam 数据集的示例。
+
+```python
+class DummyBeamDataset(tfds.core.GeneratorBasedBuilder):
+
+  VERSION = tfds.core.Version('1.0.0')
+
+  def _info(self):
+    return tfds.core.DatasetInfo(
+        builder=self,
+        features=tfds.features.FeaturesDict({
+            'image': tfds.features.Image(shape=(16, 16, 1)),
+            'label': tfds.features.ClassLabel(names=['dog', 'cat']),
+        }),
+    )
+
+  def _split_generators(self, dl_manager):
+    ...
+    return {
+        'train': self._generate_examples(file_dir='path/to/train_data/'),
+        'test': self._generate_examples(file_dir='path/to/test_data/'),
+    }
+
+  def _generate_examples(self, file_dir: str):
+    """Generate examples as dicts."""
+    beam = tfds.core.lazy_imports.apache_beam
+
+    def _process_example(filename):
+      # Use filename as key
+      return filename, {
+          'image': os.path.join(file_dir, filename),
+          'label': filename.split('.')[1],  # Extract label: "0010102.dog.jpeg"
+      }
+
+    return (
+        beam.Create(tf.io.gfile.listdir(file_dir))
+        | beam.Map(_process_example)
+    )
+
+```
+
+### 运行您的流水线
+
+要运行流水线，请参阅上文。
+
+**注**：与非 Beam 数据集一样，不要忘记使用 `--register_checksums` 注册下载校验和（仅在第一次注册下载时）。
+
+```sh
+tfds build my_dataset --register_checksums
+```
+
+## 使用 TFDS 作为输入的流水线
+
+如果要创建以 TFDS 数据集为源的 Beam 流水线，则可以使用 `tfds.beam.ReadFromTFDS`：
+
+```python
+builder = tfds.builder('my_dataset')
+
+_ = (
+    pipeline
+    | tfds.beam.ReadFromTFDS(builder, split='train')
+    | beam.Map(tfds.as_numpy)
+    | ...
+)
+```
+
+它将并行处理数据集的每个分片。
+
+注：这需要已经生成数据集。要使用 Beam 生成数据集，请参阅其他部分。
