@@ -2,7 +2,7 @@
 
 `tfds.decode` API を使うと、デフォルトの特徴量のデコードをオーバーライドすることができます。主なユースケースは、パフォーマンスを改善するために、画像のデコードをスキップすることです。
 
-Note: This API gives you access to the low-level `tf.train.Example` format on disk (as defined by the `FeatureConnector`). This API is targeted towards advanced users who want better read performance with images.
+注意: この API では、ディスク上の低レベルの `tf.train.Example` 形式にアクセスできます（`FeatureConnector` で定義されています）。この API は、画像の読み取り性能の改善を求める高度ユーザーを対象としています。
 
 ## 使用例
 
@@ -137,9 +137,9 @@ ds, ds_info = tfds.load('ucf101', split='train', with_info=True, decoders={
 ds = ds.map(decode_video)  # Decode the video
 ```
 
-### Only decode a sub-set of the features.
+### 特徴量の一部のみをデコードする
 
-It's also possible to entirely skip some features by specifying only the features you need. All other features will be ignored/skipped.
+必要な特徴量のみを指定することで、一部の特徴量を完全にスキップすることも可能です。指定されていないすべての特徴量は無視またはスキップされます
 
 ```python
 builder = tfds.builder('my_dataset')
@@ -150,9 +150,9 @@ builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
 })
 ```
 
-TFDS will select the subset of `builder.info.features` matching the given `tfds.decode.PartialDecoding` structure.
+TFDS は、特定の `tfds.decode.PartialDecoding` 構造に一致する `builder.info.features` のサブセットを選択します。
 
-In the above code, the featured are implictly extracted to match `builder.info.features`. It is also possible to explicitly define the features. The above code is equivalent to:
+上記のコードでは、特徴量は `builder.info.features` に一致するように暗黙的に抽出されます。また、特徴量を明示的に定義することも可能です。上記のコードは次のコードと同等です。
 
 ```python
 builder = tfds.builder('my_dataset')
@@ -168,6 +168,6 @@ builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
 })
 ```
 
-The original metadata (label names, image shape,...) are automatically reused so it's not required to provide them.
+元のメタデータ（ラベル名、画像の形状など）は自動的に再利用されるため、それらを提供する必要はありません。
 
-`tfds.decode.SkipDecoding` can be passed to `tfds.decode.PartialDecoding`, through the `PartialDecoding(..., decoders={})` kwargs.
+`tfds.decode.SkipDecoding` は、`PartialDecoding(..., decoders={})` kwargs を通じて `tfds.decode.PartialDecoding` に渡すことができます。
