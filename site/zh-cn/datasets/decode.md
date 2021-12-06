@@ -2,7 +2,7 @@
 
 使用 `tfds.decode` API，您可以重写默认特征解码。主要用例是跳过图像解码以获得更高的性能。
 
-Note: This API gives you access to the low-level `tf.train.Example` format on disk (as defined by the `FeatureConnector`). This API is targeted towards advanced users who want better read performance with images.
+注：此 API 支持访问磁盘上的低级别 `tf.train.Example` 格式（由 `FeatureConnector` 定义）。此 API 面向希望在图像方面获得更高读取性能的高级用户。
 
 ## 用法示例
 
@@ -136,9 +136,9 @@ ds, ds_info = tfds.load('ucf101', split='train', with_info=True, decoders={
 ds = ds.map(decode_video)  # Decode the video
 ```
 
-### Only decode a sub-set of the features.
+### 仅解码特征的子集。
 
-It's also possible to entirely skip some features by specifying only the features you need. All other features will be ignored/skipped.
+也可以通过仅指定您需要的特征来完全跳过某些特征。此时将忽略/跳过所有其他特征。
 
 ```python
 builder = tfds.builder('my_dataset')
@@ -149,9 +149,9 @@ builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
 })
 ```
 
-TFDS will select the subset of `builder.info.features` matching the given `tfds.decode.PartialDecoding` structure.
+TFDS 将选择与给定 `tfds.decode.PartialDecoding` 结构匹配的 `builder.info.features` 的子集。
 
-In the above code, the featured are implictly extracted to match `builder.info.features`. It is also possible to explicitly define the features. The above code is equivalent to:
+在上面的代码中，会隐式提取特征以匹配 `builder.info.features`。此外，也可以显式定义特征。上面的代码等价于：
 
 ```python
 builder = tfds.builder('my_dataset')
@@ -167,6 +167,6 @@ builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
 })
 ```
 
-The original metadata (label names, image shape,...) are automatically reused so it's not required to provide them.
+原始元数据（标签名称、图像形状…）会自动重用，因此不需要提供它们。
 
-`tfds.decode.SkipDecoding` can be passed to `tfds.decode.PartialDecoding`, through the `PartialDecoding(..., decoders={})` kwargs.
+`tfds.decode.SkipDecoding` 可以通过 `PartialDecoding(..., decoders={})` kwarg 传递给 `tfds.decode.PartialDecoding`。
