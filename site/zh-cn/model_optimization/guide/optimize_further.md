@@ -8,7 +8,7 @@ Keras 训练脚本是使用训练 API 的起点，您可以选择从预训练的
 
 可供您尝试的训练时工具包括：
 
-- [Weight pruning](./pruning/)
-- [Quantization](./quantization/training)
-- [Weight clustering](./clustering/)
-- [Collaborative optimization](./combine/collaborative_optimization)
+- [权重剪枝](./pruning/)
+- [量化](./quantization/training)
+- [权重聚类](./clustering/)
+- [协同优化](./combine/collaborative_optimization)
