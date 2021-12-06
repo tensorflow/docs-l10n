@@ -19,7 +19,7 @@
 
 環境をセットアップしたら、[`tfds build` CLI](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset) を実行できます。これには、[GCS](https://cloud.google.com/storage/) のデータディレクトリを使用し、[必要なオプション](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)を `--beam_pipeline_options` フラグに指定します。
 
-環境の設定ができたら、<a href="https://cloud.google.com/storage/">GCS</a> のデータディレクトリを使用して<code>download_and_prepare</code>スクリプトを実行し、<code>--beam_pipeline_options</code>フラグに<a href="https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service">必要なオプション</a>を指定します。
+スクリプトの起動を容易にするためには、GCP/GCS セットアップの実際の値と生成するデータセットを使用して、以下の変数を定義すると便利です。
 
 ```sh
 DATASET_NAME=<dataset-name>
