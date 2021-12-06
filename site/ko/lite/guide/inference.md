@@ -95,14 +95,7 @@ public Interpreter(@NotNull MappedByteBuffer mappedByteBuffer);
 모델에서 추론을 실행하는 선호되는 방법은 서명을 사용하는 것이며, Tensorflow 2.5부터 변환된 모델에 사용 가능합니다.
 
 ```Java
-try (Interpreter interpreter = new Interpreter(file_of_tensorflowlite_model)) {
-  Map<String, Object> inputs = new HashMap<>();
-  inputs.put("input_1", input1);
-  inputs.put("input_2", input2);
-  Map<String, Object> outputs = new HashMap<>();
-  outputs.put("output_1", output1);
-  interpreter.runSignature(inputs, outputs, "mySignature");
-}
+try (Interpreter interpreter = new Interpreter(file_of_tensorflowlite_model)) {   Map<String, Object> inputs = new HashMap<>();   inputs.put("input_1", input1);   inputs.put("input_2", input2);   Map<String, Object> outputs = new HashMap<>();   outputs.put("output_1", output1);   interpreter.runSignature(inputs, outputs, "mySignature"); }
 ```
 
 `runSignature` 메서드는 세 가지 인수를 사용합니다.
@@ -184,43 +177,7 @@ import TensorFlowLite
 ```
 
 ```swift
-// Getting model path
-guard
-  let modelPath = Bundle.main.path(forResource: "model", ofType: "tflite")
-else {
-  // Error handling...
-}
-
-do {
-  // Initialize an interpreter with the model.
-  let interpreter = try Interpreter(modelPath: modelPath)
-
-  // Allocate memory for the model's input `Tensor`s.
-  try interpreter.allocateTensors()
-
-  let inputData: Data  // Should be initialized
-
-  // input data preparation...
-
-  // Copy the input data to the input `Tensor`.
-  try self.interpreter.copy(inputData, toInputAt: 0)
-
-  // Run inference by invoking the `Interpreter`.
-  try self.interpreter.invoke()
-
-  // Get the output `Tensor`
-  let outputTensor = try self.interpreter.output(at: 0)
-
-  // Copy output to `Data` to process the inference results.
-  let outputSize = outputTensor.shape.dimensions.reduce(1, {x, y in x * y})
-  let outputData =
-        UnsafeMutableBufferPointer<Float32>.allocate(capacity: outputSize)
-  outputTensor.data.copyBytes(to: outputData)
-
-  if (error != nil) { /* Error handling... */ }
-} catch error {
-  // Error handling...
-}
+// Getting model path guard   let modelPath = Bundle.main.path(forResource: "model", ofType: "tflite") else {   // Error handling... }  do {   // Initialize an interpreter with the model.   let interpreter = try Interpreter(modelPath: modelPath)    // Allocate memory for the model's input `Tensor`s.   try interpreter.allocateTensors()    let inputData: Data  // Should be initialized    // input data preparation...    // Copy the input data to the input `Tensor`.   try self.interpreter.copy(inputData, toInputAt: 0)    // Run inference by invoking the `Interpreter`.   try self.interpreter.invoke()    // Get the output `Tensor`   let outputTensor = try self.interpreter.output(at: 0)    // Copy output to `Data` to process the inference results.   let outputSize = outputTensor.shape.dimensions.reduce(1, {x, y in x * y})   let outputData =         UnsafeMutableBufferPointer<Float32>.allocate(capacity: outputSize)   outputTensor.data.copyBytes(to: outputData)    if (error != nil) { /* Error handling... */ } } catch error {   // Error handling... }
 ```
 
 ## Objective-C에서 모델 로드 및 실행하기
@@ -337,15 +294,15 @@ class FlatBufferModel {
 
 참고: TensorFlow Lite가 [Android NNAPI](https://developer.android.com/ndk/guides/neuralnetworks)의 존재를 감지하면 자동으로 공유 메모리를 사용하여 `FlatBufferModel` 저장을 시도합니다.
 
-Now that you have the model as a `FlatBufferModel` object, you can execute it with an [`Interpreter`](https://www.tensorflow.org/lite/api_docs/cc/class/tflite/interpreter.html). A single `FlatBufferModel` can be used simultaneously by more than one `Interpreter`.
+모델이 `FlatBufferModel` 객체로 준비되었으므로, 이제 [`Interpreter`](https://www.tensorflow.org/lite/api_docs/cc/class/tflite/interpreter.html)로 실행할 수 있습니다. 둘 이상의 `Interpreter`에서 하나의 `FlatBufferModel`을 동시에 사용할 수 있습니다.
 
-Caution: The `FlatBufferModel` object must remain valid until all instances of `Interpreter` using it have been destroyed.
+주의: `FlatBufferModel` 객체는 이 객체를 사용하는 `Interpreter`의 모든 인스턴스가 소멸될 때까지 유효해야 합니다.
 
 `Interpreter` API의 중요한 부분은 아래 코드 조각에 나와 있습니다. 다음 사항에 유의하세요.
 
-- Tensors are represented by integers, in order to avoid string comparisons (and any fixed dependency on string libraries).
+- 문자열 비교(및 문자열 라이브러리에 대한 고정 종속성)를 피하기 위해 텐서는 정수로 표시됩니다.
 - 인터프리터는 여러 스레드에서 동시에 액세스할 수 없습니다.
-- Memory allocation for input and output tensors must be triggered by calling `AllocateTensors()` right after resizing tensors.
+- 입력 및 출력 텐서에 대한 메모리 할당은 텐서 크기를 조정한 직후 `AllocateTensors()`를 호출하여 트리거해야 합니다.
 
 C++에서 TensorFlow Lite의 가장 간단한 사용법은 다음과 같습니다.
 
@@ -383,103 +340,24 @@ float* output = interpreter->typed_output_tensor<float>(0);
 이 예제는 정의된 SignatureDef를 사용하여 SavedModel에서 변환하는 경우에 권장됩니다. TensorFlow 2.5부터 사용 가능합니다.
 
 ```python
-class TestModel(tf.Module):
-  def __init__(self):
-    super(TestModel, self).__init__()
-
-  @tf.function(input_signature=[tf.TensorSpec(shape=[1, 10], dtype=tf.float32)])
-  def add(self, x):
-    '''
-    Simple method that accepts single input 'x' and returns 'x' + 4.
-    '''
-    # Name the output 'result' for convenience.
-    return {'result' : x + 4}
-
-
-SAVED_MODEL_PATH = 'content/saved_models/test_variable'
-TFLITE_FILE_PATH = 'content/test_variable.tflite'
-
-# Save the model
-module = TestModel()
-# You can omit the signatures argument and a default signature name will be
-# created with name 'serving_default'.
-tf.saved_model.save(
-    module, SAVED_MODEL_PATH,
-    signatures={'my_signature':module.add.get_concrete_function()})
-
-# Convert the model using TFLiteConverter
-converter = tf.lite.TFLiteConverter.from_saved_model(SAVED_MODEL_PATH)
-tflite_model = converter.convert()
-with open(TFLITE_FILE_PATH, 'wb') as f:
-  f.write(tflite_model)
-
-# Load the TFLite model in TFLite Interpreter
-interpreter = tf.lite.Interpreter(TFLITE_FILE_PATH)
-# There is only 1 signature defined in the model,
-# so it will return it by default.
-# If there are multiple signatures then we can pass the name.
-my_signature = interpreter.get_signature_runner()
-
-# my_signature is callable with input as arguments.
-output = my_signature(x=tf.constant([1.0], shape=(1,10), dtype=tf.float32))
-# 'output' is dictionary with all outputs from the inference.
-# In this case we have single output 'result'.
-print(output['result'])
+class TestModel(tf.Module):   def __init__(self):     super(TestModel, self).__init__()    @tf.function(input_signature=[tf.TensorSpec(shape=[1, 10], dtype=tf.float32)])   def add(self, x):     '''     Simple method that accepts single input 'x' and returns 'x' + 4.     '''     # Name the output 'result' for convenience.     return {'result' : x + 4}   SAVED_MODEL_PATH = 'content/saved_models/test_variable' TFLITE_FILE_PATH = 'content/test_variable.tflite'  # Save the model module = TestModel() # You can omit the signatures argument and a default signature name will be # created with name 'serving_default'. tf.saved_model.save(     module, SAVED_MODEL_PATH,     signatures={'my_signature':module.add.get_concrete_function()})  # Convert the model using TFLiteConverter converter = tf.lite.TFLiteConverter.from_saved_model(SAVED_MODEL_PATH) tflite_model = converter.convert() with open(TFLITE_FILE_PATH, 'wb') as f:   f.write(tflite_model)  # Load the TFLite model in TFLite Interpreter interpreter = tf.lite.Interpreter(TFLITE_FILE_PATH) # There is only 1 signature defined in the model, # so it will return it by default. # If there are multiple signatures then we can pass the name. my_signature = interpreter.get_signature_runner()  # my_signature is callable with input as arguments. output = my_signature(x=tf.constant([1.0], shape=(1,10), dtype=tf.float32)) # 'output' is dictionary with all outputs from the inference. # In this case we have single output 'result'. print(output['result'])
 ```
 
 모델에 SignatureDefs가 정의되지 않은 경우의 또 다른 예입니다.
 
 ```python
-import numpy as np
-import tensorflow as tf
-
-# Load the TFLite model and allocate tensors.
-interpreter = tf.lite.Interpreter(model_path="converted_model.tflite")
-interpreter.allocate_tensors()
-
-# Get input and output tensors.
-input_details = interpreter.get_input_details()
-output_details = interpreter.get_output_details()
-
-# Test the model on random input data.
-input_shape = input_details[0]['shape']
-input_data = np.array(np.random.random_sample(input_shape), dtype=np.float32)
-interpreter.set_tensor(input_details[0]['index'], input_data)
-
-interpreter.invoke()
-
-# The function `get_tensor()` returns a copy of the tensor data.
-# Use `tensor()` in order to get a pointer to the tensor.
-output_data = interpreter.get_tensor(output_details[0]['index'])
-print(output_data)
+import numpy as np import tensorflow as tf  # Load the TFLite model and allocate tensors. interpreter = tf.lite.Interpreter(model_path="converted_model.tflite") interpreter.allocate_tensors()  # Get input and output tensors. input_details = interpreter.get_input_details() output_details = interpreter.get_output_details()  # Test the model on random input data. input_shape = input_details[0]['shape'] input_data = np.array(np.random.random_sample(input_shape), dtype=np.float32) interpreter.set_tensor(input_details[0]['index'], input_data)  interpreter.invoke()  # The function `get_tensor()` returns a copy of the tensor data. # Use `tensor()` in order to get a pointer to the tensor. output_data = interpreter.get_tensor(output_details[0]['index']) print(output_data)
 ```
 
 모델을 미리 변환된 `.tflite` 파일로 로드하는 대신 코드를 [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/convert/python_api)( `tf.lite.TFLiteConverter`)와 결합하여 TensorFlow 모델을 TensorFlow Lite 형식으로 변환한 다음 추론을 실행할 수 있습니다.
 
 ```python
-import numpy as np
-import tensorflow as tf
-
-img = tf.placeholder(name="img", dtype=tf.float32, shape=(1, 64, 64, 3))
-const = tf.constant([1., 2., 3.]) + tf.constant([1., 4., 4.])
-val = img + const
-out = tf.identity(val, name="out")
-
-# Convert to TF Lite format
-with tf.Session() as sess:
-  converter = tf.lite.TFLiteConverter.from_session(sess, [img], [out])
-  tflite_model = converter.convert()
-
-# Load the TFLite model and allocate tensors.
-interpreter = tf.lite.Interpreter(model_content=tflite_model)
-interpreter.allocate_tensors()
-
-# Continue to get tensors and so forth, as shown above...
+import numpy as np import tensorflow as tf  img = tf.placeholder(name="img", dtype=tf.float32, shape=(1, 64, 64, 3)) const = tf.constant([1., 2., 3.]) + tf.constant([1., 4., 4.]) val = img + const out = tf.identity(val, name="out")  # Convert to TF Lite format with tf.Session() as sess:   converter = tf.lite.TFLiteConverter.from_session(sess, [img], [out])   tflite_model = converter.convert()  # Load the TFLite model and allocate tensors. interpreter = tf.lite.Interpreter(model_content=tflite_model) interpreter.allocate_tensors()  # Continue to get tensors and so forth, as shown above...
 ```
 
-For more Python sample code, see [`label_image.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/examples/python/label_image.py).
+Python 샘플 코드는 [`label_image.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/examples/python/label_image.py)를 참조하세요.
 
-Tip: Run `help(tf.lite.Interpreter)` in the Python terminal to get detailed documentation about the interpreter.
+팁: 인터프리터에 대한 자세한 설명을 보려면 Python 단말기에서 `help(tf.lite.Interpreter)`를 실행하세요.
 
 ## 지원되는 연산
 
