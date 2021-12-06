@@ -113,7 +113,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 
 ### Neural Engine이 없는 기기에서 Core ML 대리자 사용하기
 
-By default, Core ML delegate will only be created if the device has Neural Engine, and will return `null` if the delegate is not created. If you want to run Core ML delegate on other environments (for example, simulator), pass `.all` as an option while creating delegate in Swift. On C++ (and Objective-C), you can pass `TfLiteCoreMlDelegateAllDevices`. Following example shows how to do this:
+기본적으로 Core ML 대리자는 기기에 Neural Engine이 있는 경우에만 생성되고 대리자가 생성되지 않은 경우 `null`을 반환합니다. 다른 환경(예: 시뮬레이터)에서 Core ML 대리자를 실행하려면 Swift에서 대리자를 생성하는 동안 `.all`을 옵션으로 전달하세요. C++(및 Objective-C)에서는 `TfLiteCoreMlDelegateAllDevices`를 전달할 수 있습니다. 다음 예에서는 이를 수행하는 방법을 보여줍니다.
 
 <div>
   <devsite-selector>
@@ -237,7 +237,7 @@ Core ML 대리자는 다음 연산을 지원합니다.
 
 ## 피드백
 
-For issues, please create a [GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) issue with all the necessary details to reproduce.
+문제가 발생한 경우 재현하는 데 필요한 모든 세부 정보가 포함된 [GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) 문제를 만드세요.
 
 ## 자주하는 질문
 
