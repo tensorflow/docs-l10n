@@ -1,6 +1,6 @@
 # 量子機械学習の概念
 
-Google の<a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">量子超越性の実証実験</a>では、*ノイズの多い* 53 量子ビットを使用して、既存のアルゴリズムを使用する最大の古典的なコンピュータでは 10,000 年かかる計算を量子コンピュータで 200 秒で実行できることを実証しました。これは、<a href="https://quantum-journal.org/papers/q-2018-08-06-79/" class="external">NISQ</a>（ノイズあり中規模量子）コンピューティング時代の始まりを示しています。今後数年間で、数十から数百のノイズの多い量子ビットを備えた量子デバイスが実現することが予想されています。
+Google's <a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">quantum beyond-classical experiment</a> used 53 *noisy* qubits to demonstrate it could perform a calculation in 200 seconds on a quantum computer that would take 10,000 years on the largest classical computer using existing algorithms. This marks the beginning of the <a href="https://quantum-journal.org/papers/q-2018-08-06-79/" class="external">Noisy Intermediate-Scale Quantum</a> (NISQ) computing era. In the coming years, quantum devices with tens-to-hundreds of noisy qubits are expected to become a reality.
 
 ## 量子コンピューティング
 
