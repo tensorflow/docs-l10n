@@ -132,7 +132,7 @@ Download and install `bazel` version 3.7.2:
 
 ### 4. ソースから TensorFlow Quantum を構築する
 
-Here we adapt instructions from the TensorFlow [build from source](https://www.tensorflow.org/install/source) guide, see the link for further details. TensorFlow Quantum is compatible with TensorFlow version 2.5.
+ここでは、TensorFlow [ソースから構築する](https://www.tensorflow.org/install/source)ガイドからの説明を使用しました。詳細はリンクをご覧ください。TensorFlow Quantum は、TensorFlow バージョン 2.3 と互換性があります。
 
 <a href="https://github.com/tensorflow/tensorflow" class="external">TensorFlow ソースコード</a>をダウンロードします。
 
