@@ -4,7 +4,7 @@ TensorFlow Federated（TFF）を使用するための環境は、いくつかの
 
 - TFF を最も簡単に学習して使用するにはインストールの必要はありません。[Google Colaboratory](https://colab.research.google.com/notebooks/welcome.ipynb) を使用してブラウザで直接 TensorFlow Federated チュートリアルを実行することができます。
 - ローカルマシンで TensorFlow Federated を使用するには、Python の`pip` パッケージマネージャを使って [TFF をインストール](#install-tensorflow-federated-using-pip)します。
-- 固有のマシン構成を使用している場合は、ソースから [TFF パッケージを構築](#build-the-tensorflow-federated-pip-package)します。
+- 固有のマシン構成を使用する場合は、[ソースから TFF パッケージを構築](#build-the-tensorflow-federated-python-package-from-source)します。
 
 ## `pip` を使用して TensorFlow Federated をインストールする
 
@@ -38,10 +38,16 @@ macOS:
 
 注意: 仮想環境を終了するには、`deactivate` を実行してください。
 
-### 3. TensorFlow Federated Python パッケージをインストールします。
+### 3. リリースされている TensorFlow Federated Python パッケージをインストールします。
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install --upgrade tensorflow_federated</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install --upgrade tensorflow-federated</code>
+</pre>
+
+### 3（または）ナイトリーの TensorFlow Federated Python パッケージをインストールします。
+
+<pre class="prettyprint lang-bsh">
+<code class="devsite-terminal tfo-terminal-venv">pip install --upgrade tensorflow-federated-nightly</code>
 </pre>
 
 ### 4. Tensorflow Federated をテストします。
@@ -58,6 +64,8 @@ macOS:
 
 - TensorFlow Federated に変更を適用し、それらの変更が送信またはリリースされる前に、TensorFlow Federated を使用するコンポーネントでテストする。
 - TensorFlow Federated に送信されたがリリースされていない変更を使用する。
+
+注意: リリースされているパッケージに含まれない新機能を使用するには、[ナイトリーパッケージ](#3-alternative-install-the-nightly-tensorflow-federated-python-package)を pip install するのがより簡単です。
 
 ### 1. Python 開発環境をインストールします。
 
@@ -94,9 +102,9 @@ macOS:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">mkdir "/tmp/tensorflow_federated"</code>
-<code class="devsite-terminal">bazel run //tensorflow_federated/tools/development:build_pip_package -- \
+<code class="devsite-terminal">bazel run //tensorflow_federated/tools/python_package:build_python_package -- \
     --nightly \
-    --output_dir "/tmp/tensorflow_federated"</code>
+    --output_dir="/tmp/tensorflow_federated"</code>
 </pre>
 
 ### 5. 新規プロジェクトを作成します。
