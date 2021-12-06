@@ -25,7 +25,7 @@ TensorFlow 运算使用优化的 C++ 编写。这些运算从电路采样，计�
 2. 量子数据可以引出完全不同的电路结构。这是在 TFQ 运算中支持动态大小的另一个原因。量子数据可以表示底层量子态的结构变化，这种变化由原始电路的修改来表示。由于新的数据点会在运行时交换，TensorFlow 计算图在构建后无法修改，因此需要支持这些变化的结构。
 3. `cirq.Circuits` 与计算图相似，因为它们也是一系列运算，有些可能包含符号/占位符。使其与 TensorFlow 尽可能兼容十分重要。
 
-由于性能方面的原因，Eigen（许多 TensorFlow 运算中使用的 C++ 库）不适合量子电路模拟。作为替代，<a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">量子霸权实验</a>中使用的电路模拟器将用作验证器，并扩展为 TFQ 运算的基础（均使用 AVX2 和 SSE 指令编写）。使用物理量子计算机创建具有相同函数签名的运算。在模拟和物理量子计算机之间切换就像更改一行代码一样轻松。这些运算位于 <a href="https://github.com/tensorflow/quantum/blob/master/tensorflow_quantum/core/ops/circuit_execution_ops.py" class="external"><code>circuit_execution_ops.py</code></a> 中。
+由于性能方面的原因，Eigen（许多 TensorFlow 运算中使用的 C++ 库）不适合量子电路模拟。作为替代，<a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">量子超越经典实验</a>中使用的电路模拟器将用作验证器，并扩展为 TFQ 运算的基础（均使用 AVX2 和 SSE 指令编写）。使用物理量子计算机创建具有相同函数签名的运算。在模拟和物理量子计算机之间切换就像更改一行代码一样轻松。这些运算位于 <a href="https://github.com/tensorflow/quantum/blob/master/tensorflow_quantum/core/ops/circuit_execution_ops.py" class="external"><code>circuit_execution_ops.py</code></a> 中。
 
 ### 层
 
