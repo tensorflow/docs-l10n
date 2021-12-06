@@ -45,7 +45,7 @@
 
 在以下方面提供支持：
 
-- Model coverage: models using [allowlisted layers](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/quantization/keras/default_8bit/default_8bit_quantize_registry.py), BatchNormalization when it follows Conv2D and DepthwiseConv2D layers, and in limited cases, `Concat`.
+- 模型覆盖：使用[allowlisted layers](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/quantization/keras/default_8bit/default_8bit_quantize_registry.py)的模型，遵循 Conv2D 和 DepthwiseConv2D 层时的 BatchNormalization，以及少数情况下的 `Concat`。
     <!-- TODO(tfmot): add more details and ensure they are all correct. -->
 - 硬件加速：我们的 API 默认值兼容 EdgeTPU、NNAPI 和 TFLite 后端等设备上的加速。请参阅路线图中的注意事项。
 - 使用量化部署：目前仅支持卷积层的按轴量化，不支持按张量量化。
@@ -120,6 +120,6 @@ to launch. -->
 
 除了[量化感知训练示例](training_example.md)外，另请参阅以下示例：
 
-- CNN model on the MNIST handwritten digit classification task with quantization: [code](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/quantization/keras/quantize_functional_test.py)
+- 基于使用量化的 MNIST 手写数字分类任务的 CNN 模型：[code](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/quantization/keras/quantize_functional_test.py)
 
 有关类似内容的背景信息，请参阅[论文](https://arxiv.org/abs/1712.05877) *Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference*。这篇论文介绍了此工具使用的一些概念。实现并不完全相同，而且此工具中还使用了其他概念（例如按轴量化）。
