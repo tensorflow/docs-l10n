@@ -15,7 +15,7 @@ XLA 在 `HloInstruction` 上进行运算并对此表示执行许多优化，同�
 
  | 主机 | 设备
 --- | --- | ---
-输入格式 | HloInstruction*（任务 1） | HloInstruction*（任务 1）
+| 主机 | 设备 --- | --- | --- 输入格式 | HloInstruction*（任务 1） | HloInstruction*（任务 1） 输出格式 | xla::Thunk（任务 2） | LLVM IR（任务 3） | HloInstruction*（任务 1） | HloInstruction*（任务 1）
 输出格式 | xla::Thunk（任务 2） | LLVM IR（任务 3）
 
 - **任务 1** 将主机和设备的输入格式从 HloInstruction* 更改为 LHLO。
@@ -77,24 +77,24 @@ ElementalIrEmitter 的独特之处在于：
 现在，对于所有算子（无论是否以元素为单位进行发射），每个 XLA 算子的结束状态都有几种形式：
 
 1. 设备代码保持为 LLVM IR
-2. 将旧发射器重构为类似 LHLO -> MLIR LLVM 方言的形式：
+2. 将旧发射器重构为类似 LHLO -&gt; MLIR LLVM 方言的形式：
     - （成本）如果我们最终要迁移到 Standard，那将是一劳永逸的工作
     - （收益）简单而机械，可在短期内完成
     - （收益）与 (1) 相比并没有更多收益
-3. 将旧发射器重构为类似 LHLO -> MLIR GPU + Standard + 循环的形式：
+3. 将旧发射器重构为类似 LHLO -&gt; MLIR GPU + Standard + 循环的形式：
     - （成本）将现有发射器提升为 Standard 会带来一些挑战。指针和 GEP 需要转换为 MemRef 和 SubView。确保 AMDGPU 的完整性也是一个问题。
     - （成本）XLA/GPU 严重依赖 LLVM 元数据：
         - 用于块/线程索引的 `range`
         - 用于加载/存储的 `align`、`dereferenceable`、`invariant.load`、`alias.scope` 和 `noalias`
         - 用于顺序循环的 `llvm.loop.unroll.disable`、`llvm.loop.unroll.full` 和 `llvm.loop.vectorize.enable`
     - （收益）可为长期。更好的可移植性。
-4. 将旧发射器重构为 LHLO -> Linalg，并编写新的 Linalg 发射器
-    - （成本）这视情况而定。与之前的选项相比，匹配 XLA 性能的新实现需要通过基准测试 <-> 优化工作流，这对于某些算子而言是一项巨大的开销。
+4. 将旧发射器重构为 LHLO -&gt; Linalg，并编写新的 Linalg 发射器
+    - （成本）这视情况而定。与之前的选项相比，匹配 XLA 性能的新实现需要通过基准测试 &lt;-&gt; 优化工作流，这对于某些算子而言是一项巨大的开销。
     - （收益）统一堆栈；社区支持；可移植性；更大的优化潜力。
 
 结论：
 
-- 不要选择 (2)。(1) 或 (3) 都比 (2) 好。(2) 的成本比 (1) 高，因为它需要大量的机械重构。如果选择 (1)，我们仍然可以实现使 XLA 拾取 MLIR 发射器这一目标。具体方法为：LHLO -> LLVM IR -> 运行旧的设备发射器。
+- 不要选择 (2)。(1) 或 (3) 都比 (2) 好。(2) 的成本比 (1) 高，因为它需要大量的机械重构。如果选择 (1)，我们仍然可以实现使 XLA 拾取 MLIR 发射器这一目标。具体方法为：LHLO -&gt; LLVM IR -&gt; 运行旧的设备发射器。
 - ElementalIrEmitter 算子适合选择 (4)，但无法递增。因为以元素发出的所有算子都连接到同一个计算图中，所以无法逐算子执行。此项工作还可以作为几个正在发展的方案（xla/service/mlir_gpu、内核生成器，以及 Linalg）的统一点。
 - 所有其他算子应选择 (1)。作为延伸目标，它们可能会迁移到 (3) 或 (4)。
 
@@ -102,7 +102,7 @@ ElementalIrEmitter 的独特之处在于：
 
 虽然上述所有三个任务都可并行化，但在有限的资源下，它们必须被序列化。优先级重点是完成每个任务的可见结果。
 
-优先级为：任务 1（旧发射器的 LHLO）> 任务 2（Thunk）> 任务 3（MLIR 发射器）。
+优先级为：任务 1（旧发射器的 LHLO）&gt; 任务 2（Thunk）&gt; 任务 3（MLIR 发射器）。
 
 在任务 1 结束时，XLA 的用户可以生成 LHLO（例如内核生成器）并执行它们。编译格式不是可序列化的 MLIR。
 
