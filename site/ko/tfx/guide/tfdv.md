@@ -93,7 +93,7 @@ sparse_feature {
 
 개발자는 처음부터 수동으로 스키마를 구성하는 대신 TensorFlow 검증의 자동 스키마 구성을 사용할 수 있습니다. 특히 TensorFlow 검증은 파이프라인에서 사용 가능한 훈련 데이터에 대해 계산된 통계를 기반으로 초기 스키마를 자동으로 구성합니다. 사용자는 이 자동 생성된 스키마를 검토하고 필요에 따라 수정하고 버전 제어 시스템에 체크인한 다음, 추가 검증을 위해 파이프라인에 명시적으로 푸시할 수 있습니다.
 
-TFDV includes `infer_schema()` to generate a schema automatically.  For example:
+TFDV에는 스키마를 자동으로 생성하는 `infer_schema()`가 포함되어 있습니다. 예를 들면, 다음과 같습니다.
 
 ```python
 schema = tfdv.infer_schema(statistics=train_stats)
@@ -160,7 +160,7 @@ Facets Overview에서 균일하게 분포된 특성을 감지하려면 'Sorty by
 
 다음은 균일하게 분포된 데이터를 생성할 수 있는 몇 가지 일반적인 버그입니다.
 
-- Using strings to represent non-string data types such as dates. For example, you will have many unique values for a datetime feature with representations like "2017-03-01-11-45-03". Unique values will be distributed uniformly.
+- 문자열을 사용하여 날짜와 같은 비 문자열 데이터 유형을 나타냅니다. 예를 들어, '2017-03-01-11-45-03'과 같은 표현이 있는 날짜/시간 특성에 대한 고유한 값이 많이 있습니다. 고유한 값이 균일하게 분포됩니다.
 
 - 특성으로 '행 번호'와 같은 인덱스를 포함합니다. 여기에서도 고유한 값이 많이 있습니다.
 
