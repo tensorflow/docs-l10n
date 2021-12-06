@@ -4,7 +4,7 @@
 
 ## テスト可能なドキュメンテーション文字列
 
-TensorFlow は [DocTest](https://docs.python.org/3/library/doctest.html) を使用して Python ドキュメント文字列（docstring）のコードスニペットをテストします。スニペットは、実行可能な Python コードである必要があります。テストを有効にするには、行の先頭に`>>>`（3 つの右山括弧）を追加します。例えば、以下は [array_ops.py](https://www.tensorflow.org/code/tensorflow/python/ops/array_ops.py) ソースファイルの`tf.concat`関数からの抜粋です。
+TensorFlow は [DocTest](https://docs.python.org/3/library/doctest.html) を使用して Python ドキュメント文字列（docstring）のコードスニペットをテストします。スニペットは、実行可能な Python コードである必要があります。テストを有効にするには、行の先頭に `>>>`（3 つの右山括弧）を追加します。例えば、以下は [array_ops.py](https://www.tensorflow.org/code/tensorflow/python/ops/array_ops.py) ソースファイルの `tf.concat` 関数からの抜粋です。
 
 ```
 def concat(values, axis, name="concat"):
@@ -178,4 +178,30 @@ There are two ways to test the code in the docstring locally:
 
     <pre class="prettyprint lang-bsh">
     <code class="devsite-terminal">python tf_doctest.py --file=<file_path>
+    </pre>
+
+    This will run it using your installed version of TensorFlow. To be sure
+    you're running the same code that you're testing:
+
+    *   Use an up to date [tf-nightly](https://pypi.org/project/tf-nightly/)
+        `pip install -U tf-nightly`
+    *   Rebase your pull request onto a recent pull from
+        [TensorFlow's](https://github.com/tensorflow/tensorflow) master branch.
+
+*   If you are changing the code and the docstring of a class/function/method,
+    then you will need to
+    [build TensorFlow from source](../../install/source.md). Once you are setup
+    to build from source, you can run the tests:
+
+    <pre class="prettyprint lang-bsh">
+    bazel run //tensorflow/tools/docs:tf_doctest
+    </pre>
+
+    or
+
+    <pre class="prettyprint lang-bsh">
+    bazel run //tensorflow/tools/docs:tf_doctest -- --module=ops.array_ops
+    </pre>
+
+    The `--module` is relative to `tensorflow.python`.
 ```
