@@ -146,7 +146,7 @@ infra_validator = InfraValidator(
 
 そして、出力 `InfraBlessing` アーティファクトにはウォームアップによる SavedModel が含まれているため、[Pusher](pusher.md) で、`Model` アーティファクトと同様にプッシュすることもできます。
 
-## Limitations
+## 制限事項
 
 現在の InfraValidator は未完全であるため、次のような制限があります。
 
