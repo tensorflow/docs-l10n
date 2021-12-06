@@ -26,13 +26,13 @@ TensorFlow の連合学習データセットは、連合学習で解決できる
 
 データセットには以下が含まれています。
 
-- [**StackOverflow**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data) A realistic text dataset for language modeling or supervised learning tasks, with 342,477 unique users with 135,818,730 examples (sentences) in the training set.
+- [**StackOverflow**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data)言語モデリングや教師あり学習タスク用の現実的なテキストデータセット。342,477人のユニークユーザーがトレーニングセットで135,818,730例（センテンス）を使用します。
 
 - [**Federated EMNIST**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/emnist/load_data)各クライアントが異なるライターに対応する、EMNIST文字と数字のデータセットの連合前処理。完全なトレインセットには、62のラベルからの671,585の例を持つ3400人のユーザーが含まれています。
 
 - [**Shakespeare**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/shakespeare/load_data)ウィリアムシェイクスピアの全作品に基づいた、文字レベルの小さなテキストデータセット。 データセットは715人のユーザー（シェイクスピア劇のキャラクター）で構成されます。各例は、特定の劇のキャラクターが話す連続した一連の行に対応しています。
 
-- [**CIFAR-100**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data) A federated partitioning of the CIFAR-100 dataset across 500 training clients and 100 test clients. Each client has 100 unique examples. The partitioning is done in a way to create more realistic heterogeneity between clients. For more details, see the [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data).
+- [**CIFAR-100**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)500のトレーニングクライアントと100のテストクライアントにわたるCIFAR-100データセットの連合パーティション。各クライアントには100のユニークな例があります。 パーティションは、クライアント間でより現実的な異質性を作成する方法で行われます。 詳細については、[API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)をご覧ください。
 
 - [**Google Landmark v2 dataset**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data) The dataset consists of photos of various world landmarks, with images grouped by photographer to achieve a federated partitioning of the data. Two flavors of dataset are available: a smaller dataset with 233 clients and 23080 images, and a larger dataset with 1262 clients and 164172 images.
 
@@ -60,9 +60,9 @@ TFF は[ tensor_encoding ](https://github.com/tensorflow/model-optimization/tree
 
 カスタム圧縮アルゴリズムを実装してトレーニングループに適用するには、次の手順に従います。
 
-1. Implement a new compression algorithm as a subclass of [`EncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L75) or its more general variant, [`AdaptiveEncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L274) following [this example](https://github.com/google-research/federated/blob/master/compression/sparsity.py).
+1. 新しい圧縮アルゴリズムを[ `EncodingStageInterface ` ](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L75)のサブクラスとして実装します。または、[この例](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L274)のようにより一般的なバリアント<a><code>AdaptiveEncodingStageInterface</code></a>として実装します。
 2. 新しい[ `Encoder` ](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/core_encoder.py#L38)を作成し、[モデルブロードキャスト](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L118)または[モデル更新の平均化](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L144)に特化します。
-3. Use those objects to build the entire [training computation](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L247).
+3. これらのオブジェクトを使用して、[トレーニング計算全体](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L247)を構築します。
 
 ### 差別的なプライバシー
 
@@ -76,8 +76,8 @@ If you want to implement a custom DP algorithm and apply it to the aggregate upd
 
 TFF は、*[「連合学習にバックドアを組み込むことは可能か？」](https://arxiv.org/abs/1911.07963)*で取り上げられているように、連合学習システムへの標的型攻撃とプライバシーに基づく差別化された防御のシミュレーションにも使用できます。これは、潜在的に悪意のあるクライアントとのイテレーションプロセスを構築することにより実行されます。(`build_federated_averaging_process_attacked`を参照してください。) 詳細は [targeted_attack](https://github.com/tensorflow/federated/tree/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/research/targeted_attack) ディレクトリをご覧ください。
 
-- New attacking algorithms can be implemented by writing a client update function which is a Tensorflow function, see [`ClientProjectBoost`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/federated_research/targeted_attack/attacked_fedavg.py#L460) for an example.
-- New defenses can be implemented by customizing ['tff.utils.StatefulAggregateFn'](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/core/utils/computation_utils.py#L103) which aggregates client outputs to get a global update.
+- 新しい攻撃アルゴリズムは、Tensorflow関数であるクライアント更新関数を記述することにより、実装できます。
+- 新しい防御策は、クライアントの出力を集約してグローバル更新を取得する[](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/core/utils/computation_utils.py#L103)
 
 シミュレーションのサンプルスクリプトについては、[`emnist_with_targeted_attack.py`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/research/targeted_attack/emnist_with_targeted_attack.py)をご覧ください。
 
