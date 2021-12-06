@@ -20,10 +20,12 @@ NSL 可提供以下优势：
 
 ## 分步教程
 
-为了帮您获得神经结构学习的动手经验，我们提供了三个教程，它们涵盖了显式给定、诱导或构造结构化信号的各种场景：
+为了帮助您获得神经结构学习的动手经验，我们提供了各种教程，涵盖显式给定、构造或诱导结构化信号等各种场景。下面是一些示例：
 
 - [使用计算图正则化实现利用自然计算图的文档分类](tutorials/graph_keras_mlp_cora.ipynb)。在本教程中，我们将了解如何使用计算图正则化对构成自然（有机）计算图的文档进行分类。
 
 - [使用计算图正则化实现利用合成计算图的情感分类](tutorials/graph_keras_lstm_imdb.ipynb)。在本教程中，我们将演示如何使用计算图正则化通过构造（合成）结构化信号对电影评论情感进行分类。
 
 - [使用对抗正则化实现图像分类](tutorials/adversarial_keras_cnn_mnist.ipynb)。在本教程中，我们将了解如何使用对抗学习（结构化信号为诱导所得）对包含数字的图像进行分类。
+
+可以在我们 GitHub 仓库的[示例](https://github.com/tensorflow/neural-structured-learning/tree/master/neural_structured_learning/examples)目录中找到更多示例和教程。
