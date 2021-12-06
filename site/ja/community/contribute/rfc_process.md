@@ -16,6 +16,7 @@ TensorFlow Request for Comments (RFC) の目的は、利害関係者や専門家
 
 2. RFC を起草します。
 
+    - [デザインレビューの基準](https://github.com/tensorflow/community/blob/master/governance/design-reviews.md)を読みます。
     - [RFC テンプレート](https://github.com/tensorflow/community/blob/master/rfcs/yyyymmdd-rfc-template.md)に従います。
     - RFC ファイルには`YYYYMMDD-descriptive-name.md`と名前付けします。`YYYYMMDD`は提出日、`descriptive-name`は RFC のタイトルに関連したものにします。（例えば、RFC のタイトルが *Parallel Widgets API* の場合、ファイル名は`20180531-parallel-widgets.md`を使用します。）
     - 画像やその他の補助ファイルがある場合は、それらのファイルを保存するために`YYYYMMDD-descriptive-name`形式のディレクトリを作成します。
