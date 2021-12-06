@@ -1,24 +1,24 @@
 # 설치
 
-## 안정적 빌드
+## Stable builds
 
 최신 버전의 TensorFlow Probability를 설치합니다.
 
-<pre class="devsite-terminal devsite-click-to-copy prettyprint lang-shell"> pip install --upgrade tensorflow-probability</pre>
+<pre class="devsite-terminal devsite-click-to-copy prettyprint lang-shell"> pip install --upgrade tensorflow-probability </pre>
 
-TensorFlow Probability는 최신 버전의 안정적 [TensorFlow](https://www.tensorflow.org/install)입니다(PIP 패키지 `tensorflow`). TensorFlow와 TensorFlow Probability 간의 종속성에 대한 자세한 내용은 [TFP 릴리스 노트](https://github.com/tensorflow/probability/releases)를 참조하세요.
+TensorFlow Probability depends on a recent stable release of [TensorFlow](https://www.tensorflow.org/install) (pip package `tensorflow`). See the [TFP release notes](https://github.com/tensorflow/probability/releases) for details about dependencies between TensorFlow and TensorFlow Probability.
 
-참고: TensorFlow는 TensorFlow Probability 패키지(`setup.py`의 일부)의 종속성으로 포함되지 *않으므로* TensorFlow 패키지(`tensorflow` 또는 `tensorflow-gpu`)를 명시적으로 설치해야 합니다. 이를 통해 CPU 및 GPU 지원 TensorFlow를 위한 별도의 패키지 대신 하나의 패키지를 유지할 수 있습니다.
+Note: Since TensorFlow is *not* included as a dependency of the TensorFlow Probability package (in `setup.py`), you must explicitly install the TensorFlow package (`tensorflow` or `tensorflow-gpu`). This allows us to maintain one package instead of separate packages for CPU and GPU-enabled TensorFlow.
 
-Python 3에 특정한 설치를 수행하려면 위 명령에서 `pip`를 <code>pip3</code>로 바꿉니다. 추가적인 설치 지원, 설치 전제 조건에 대한 안내 및 가상 환경 설정(선택 사항)에 대한 내용은 [TensorFlow 설치 가이드](https://www.tensorflow.org/install)를 참조하세요.
+To force a Python 3-specific install, replace `pip` with `pip3` in the above commands. For additional installation help, guidance installing prerequisites, and (optionally) setting up virtual environments, see the [TensorFlow installation guide](https://www.tensorflow.org/install).
 
 ## 야간 빌드
 
-`tf-nightly` 및 `tf-nightly-gpu` 중 하나로 결정되는 pip 패키지 `tfp-nightly`에 TensorFlow Probability의 야간 빌드도 들어 있습니다. 야간 빌드에는 새로운 특성이 포함되어 있지만 버전 관리되는 릴리스보다 안정성이 떨어질 수 있습니다.
+There are also nightly builds of TensorFlow Probability under the pip package `tfp-nightly`, which depend on one of `tf-nightly` and `tf-nightly-gpu`. Nightly builds include newer features, but may be less stable than the versioned releases.
 
-## 소스에서 설치하기
+## Install from source
 
-소스에서 설치할 수도 있습니다. 이를 위해서는 [Bazel](https://bazel.build/){:.external} 빌드 시스템이 필요합니다. 소스에서 TensorFlow Probability를 빌드하기 전에 TensorFlow의 야간 빌드(`tf-nightly`)를 설치하는 것이 좋습니다.
+You can also install from source. This requires the [Bazel](https://bazel.build/){:.external} build system. It is highly recommended that you install the nightly build of TensorFlow (`tf-nightly`) before trying to build TensorFlow Probability from source.
 
 <!-- common_typos_disable -->
 
