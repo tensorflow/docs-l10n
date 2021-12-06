@@ -4,7 +4,7 @@
 
 ## 概述
 
-### Terminology
+### 术语
 
 #### Python 模块
 
