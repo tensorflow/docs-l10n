@@ -193,9 +193,9 @@ TF 演算子のみを使用（`SELECT_TF_OPS`） | 264.5
 
 ## 更新
 
-- Version 2.6
+- バージョン 2.6
     - Supports for GraphDef-attribute based operators and HashTable resource initializations have improved.
-- Version 2.5
+- バージョン 2.5
     - [トレーニング後の量子化](../performance/post_training_quantization.md)と呼ばれる最適化を適用できます。
 - バージョン2.4
     - ハードウェアアクセラレーションを使用するデリゲートとの互換性が向上しました。
