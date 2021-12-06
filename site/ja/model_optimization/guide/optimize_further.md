@@ -11,4 +11,4 @@
 - [重みプルーニング](./pruning/)
 - [量子化](./quantization/training)
 - [重みクラスタリング](./clustering/)
-- [Collaborative optimization](./combine/collaborative_optimization)
+- [共同最適化](./combine/collaborative_optimization)
