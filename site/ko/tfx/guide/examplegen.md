@@ -385,7 +385,7 @@ Apache Beam은 Beam I/O 변환을 통해 다양한 [추가 데이터 형식](htt
 - Apache Hadoop
 - Apache Kafka
 - Apache Parquet
-- Google Cloud BigQuery
+- Google 클라우드 BigQuery
 - Google Cloud BigTable
 - Google Cloud Datastore
 - Google Cloud Pub/Sub
