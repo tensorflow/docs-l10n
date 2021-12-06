@@ -106,11 +106,17 @@ tfds.load('open_images_v4/original:1.*.*')
 
 ```python
 class MNIST(tfds.core.GeneratorBasedBuilder):
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0")  # Default version
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", "EXP1: Opt-in for experiment 1",
-                        experiments={tfds.core.Experiment.EXP1: True}),
+      tfds.core.Version("2.0.0"),  # Experimental version
   ]
+
+
+# Download and load default version 1.0.0
+builder = tfds.builder('mnist')
+
+#  Download and load experimental version 2.0.0
+builder = tfds.builder('mnist', version='experimental_latest')
 ```
 
 在代码中，您需要确保支持 2 个版本：
