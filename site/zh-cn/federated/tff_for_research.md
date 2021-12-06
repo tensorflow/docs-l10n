@@ -32,7 +32,7 @@ TensorFlow Federated [托管了多个数据集](https://www.tensorflow.org/feder
 
 - [**Shakespeare**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/shakespeare/load_data)基于威廉·莎士比亚全集的较小的字符级文本数据集。该数据集由 715 个用户（莎士比亚戏剧中的角色）组成，其中每个样本对应给定戏剧中的角色所说的一组连续台词。
 
-- [**CIFAR-100**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data) A federated partitioning of the CIFAR-100 dataset across 500 training clients and 100 test clients. Each client has 100 unique examples. The partitioning is done in a way to create more realistic heterogeneity between clients. For more details, see the [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data).
+- [**CIFAR-100**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)CIFAR-100 数据集在 500 个训练客户端和 100 个测试客户端上的联合分区。 每个客户端都有 100 个唯一样本。 分区的完成方式是在客户端之间创建更实际的异构性。 有关更多详细信息，请参阅 [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)。
 
 - [**Google Landmark v2 dataset**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data) The dataset consists of photos of various world landmarks, with images grouped by photographer to achieve a federated partitioning of the data. Two flavors of dataset are available: a smaller dataset with 233 clients and 23080 images, and a larger dataset with 1262 clients and 164172 images.
 
@@ -62,7 +62,7 @@ TFF 使用 [tensor_encoding](https://github.com/tensorflow/model-optimization/tr
 
 1. Implement a new compression algorithm as a subclass of [`EncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L75) or its more general variant, [`AdaptiveEncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L274) following [this example](https://github.com/google-research/federated/blob/master/compression/sparsity.py).
 2. Construct your new [`Encoder`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/core_encoder.py#L38) and specialize it for [model broadcast](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L118) or [model update averaging](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L144).
-3. Use those objects to build the entire [training computation](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L247).
+3. 使用这些对象来构建整个[训练计算](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L247)。
 
 ### 差分隐私
 
@@ -76,7 +76,7 @@ If you want to implement a custom DP algorithm and apply it to the aggregate upd
 
 TFF 还可以用于模拟联合学习系统上的针对性攻击以及 *[Can You Really Back door Federated Learning?](https://arxiv.org/abs/1911.07963)* 中所考虑的基于差分隐私的防御。这是通过使用潜在的恶意客户端构建迭代过程来实现的（请参阅 [`build_federated_averaging_process_attacked`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/research/targeted_attack/attacked_fedavg.py#L412)）。[targeted_attack](https://github.com/tensorflow/federated/tree/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/research/targeted_attack) 目录中包含更多详细信息。
 
-- New attacking algorithms can be implemented by writing a client update function which is a Tensorflow function, see [`ClientProjectBoost`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/federated_research/targeted_attack/attacked_fedavg.py#L460) for an example.
+- 新的攻击算法可以通过编写客户端更新函数来实现，该函数是 Tensorflow 函数。有关示例请参阅 [`ClientProjectBoost`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/federated_research/targeted_attack/attacked_fedavg.py#L460)。
 - 新的防御可通过自定义 ['tff.utils.StatefulAggregateFn'](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/core/utils/computation_utils.py#L103)（聚合客户端输出以获得全局更新）来实现。
 
 有关模拟的示例脚本，请参阅 [`emnist_with_targeted_attack.py`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/research/targeted_attack/emnist_with_targeted_attack.py)。
