@@ -68,7 +68,7 @@ eager モードの使用など、最新のベストプラクティスに従っ�
 
 さらに、抽象インターフェース`tff.learning.Model`は、プロパティ`federated_output_computation`を公開します。これは、前述の`report_local_outputs`プロパティとともに、要約統計を集計するプロセスを制御できるようにします。
 
-You can find examples of how to define your own custom `tff.learning.Model` in the second part of our [image classification](tutorials/federated_learning_for_image_classification.ipynb) tutorial, as well as in the example models we use for testing in [`model_examples.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/model_examples.py).
+独自のカスタム`tf.learning.Model`を定義する方法の例は、[画像分類](tutorials/federated_learning_for_image_classification.ipynb)チュートリアルの後半と、[`model_examples.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/model_examples.py)のテストで使用するサンプルモデルにあります。
 
 ### Keras 用コンバータ
 
