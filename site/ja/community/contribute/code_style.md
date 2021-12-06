@@ -1,37 +1,34 @@
-# TensorFlowコードスタイルガイド
+# TensorFlow コードスタイルガイド
 
-## Pythonスタイル
+## Python スタイル
 
-[PEP 8 Pythonスタイルガイド](https://www.python.org/dev/peps/pep-0008/)に従ってください。ただし、TensorFlowでは4文字ではなく2文字の半角空白文字を使用します。[Google Pythonスタイルガイド](https://github.com/google/styleguide/blob/gh-pages/pyguide.md)に準拠し、[pylint ](https://www.pylint.org/)を使用してPythonの変更を確認してください。
+[PEP 8 Python スタイルガイド](https://www.python.org/dev/peps/pep-0008/)に従ってください。ただし、TensorFlow では 4 文字ではなく 2 文字の半角空白文字を使用します。[Google Python スタイルガイド](https://github.com/google/styleguide/blob/gh-pages/pyguide.md)に準拠し、[pylint](https://www.pylint.org/) を使用して Python の変更を確認してください。
 
 ### pylint
 
-`pylint`をインストールしてTensorFlowのカスタムスタイル定義を取得します。
+`pylint` をインストールするには、次を行います。
 
 ```bash
-
 $ pip install pylint
-$ wget -O /tmp/pylintrc https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/tools/ci_build/pylintrc
-
 ```
 
-`pylint`でファイルを確認します。
+`pylint` で TensorFlow ソースコードのルートディレクトリからファイルを確認するには、次を行います。
 
 ```bash
-$ pylint --rcfile=/tmp/pylintrc myfile.py
+$ pylint --rcfile=tensorflow/tools/ci_build/pylintrc tensorflow/python/keras/losses.py
 ```
 
-### サポートされているPythonバージョン
+### サポートされている Python バージョン
 
-TensorFlowはPython 3.5以降をサポートしています。 詳しくは、[「インストールガイド」](https://www.tensorflow.org/install)を参照してください。
+サポートされている Python バージョンについては、TensorFlow の[インストールガイド](https://www.tensorflow.org/install)をご覧ください。
 
-公式およびコミュニティでサポートされているビルドについては、TensorFlow[継続的ビルドステータス](https://github.com/tensorflow/tensorflow/blob/master/README.md#continuous-build-status)を参照してください。
+公式およびコミュニティでサポートされているビルドについては、TensorFlow の[継続的ビルドステータス](https://github.com/tensorflow/tensorflow/blob/master/README.md#continuous-build-status)をご覧ください。
 
 ## C++ コードスタイル
 
-TensorFlow C ++コードへの変更は、[Google C ++スタイルガイド](https://google.github.io/styleguide/cppguide.html)に準拠する必要があります。`clang-format`を使用して、C / C ++の変更を確認します。
+TensorFlow C++ コードへの変更は、[Google C++ スタイルガイド](https://google.github.io/styleguide/cppguide.html)と [TensorFlow 固有のスタイルの詳細](https://github.com/tensorflow/community/blob/master/governance/cpp-style.md)に準拠する必要があります。C/C++ の変更を確認するには、`clang-format` を使用してください。
 
-Ubuntu 16以降をインストールするには、次の手順に従います。
+Ubuntu 16 以降をインストールするには、次を行います。
 
 ```bash
 $ apt-get install -y clang-format
@@ -46,24 +43,24 @@ $ diff <my_cc_file> /tmp/my_cc_file.cc
 
 ## 他の言語
 
-- [Google Javaスタイルガイド](https://google.github.io/styleguide/javaguide.html)
-- [Google JavaScriptスタイルガイド](https://google.github.io/styleguide/jsguide.html)
-- [Google Shellスタイルガイド](https://google.github.io/styleguide/shell.xml)
-- [Google Objective-Cスタイルガイド](https://google.github.io/styleguide/objcguide.html)
+- [Google Java スタイルガイド](https://google.github.io/styleguide/javaguide.html)
+- [Google JavaScript スタイルガイド](https://google.github.io/styleguide/jsguide.html)
+- [Google Shell スタイルガイド](https://google.github.io/styleguide/shell.xml)
+- [Google Objective-C スタイルガイド](https://google.github.io/styleguide/objcguide.html)
 
-## TensorFlowの規則と特別な使用
+## TensorFlow の規則と特別な使用
 
-### Python演算
+### Python 演算
 
-TensorFlow*演算*は、指定された入力テンソルが出力テンソルを返す関数です（またはグラフ作成時にグラフにopを追加します）。
+TensorFlow *演算*は、指定された入力テンソルが出力テンソルを返す関数です（またはグラフ作成時にグラフに op を追加します）。
 
-- 最初の引数は必ずテンソルで、その後に基本的なPythonパラメータが続きます。最後の引数は`name`で、デフォルト値は`None`です。
-- テンソル引数は、単一のテンソルまたは反復可能なテンソルのいずれかである必要があります。つまり、「テンソルまたはテンソルのリスト」では広すぎます。 `assert_proper_iterable`を参照してください。
-- テンソルを引数として受け取る演算では、`convert_to_tensor`を呼び出して、テンソル以外の入力をテンソルに変換する必要があります（C ++演算を使用している場合）。引数は、ドキュメントでは特定のdtypeの<code>Tensor</code>オブジェクトとして説明されていることに注意してください。
-- それぞれのPython演算には、`name_scope`が必要です。 以下に示すように、opの名前を文字列として渡します。
-- 演算には、各値のタイプと意味の両方を説明する引数および戻り値について詳しく説明するPythonコメントを記述する必要があります。可能な形状、dtype、またはランクは、説明で指定する必要があります。詳細はドキュメントを参照してください。
+- 最初の引数は必ずテンソルで、その後に基本的な Python パラメータが続きます。最後の引数は `name` で、デフォルト値は `None` です。
+- テンソル引数は、単一のテンソルまたは反復可能なテンソルのいずれかである必要があります。つまり、「テンソルまたはテンソルのリスト」では広すぎます。 `assert_proper_iterable` を参照してください。
+- テンソルを引数として受け取る演算では、`convert_to_tensor` を呼び出して、テンソル以外の入力をテンソルに変換する必要があります（C ++ 演算を使用している場合）。引数は、ドキュメントでは特定の dtype の <code>Tensor</code> オブジェクトとして説明されていることに注意してください。
+- それぞれの Python 演算には、`name_scope` が必要です。 以下に示すように、op の名前を文字列として渡します。
+- 演算には、各値のタイプと意味の両方を説明する引数および戻り値について詳しく説明する Python コメントを記述する必要があります。可能な形状、dtype、または階数は、説明で指定する必要があります。詳細はドキュメントをご覧ください。
 - より使いやすくするために、例のセクションにopの入力/出力の使用例を含めてください。
-- `tf.Tensor.eval`または`tf.Session.run`を明示的に使用しないでください。たとえば、テンソル値に依存するロジックを作成するには、TensorFlow制御フローを使用します。または、eager実行が有効な場合(`tf.executing_eagerly()`)にのみ実行するように演算を制限します。
+- `tf.Tensor.eval` または `tf.Session.run` を明示的に使用しないでください。たとえば、テンソル値に依存するロジックを作成するには、TensorFlow 制御フローを使用します。または、Eager execution が有効な場合（`tf.executing_eagerly()`）にのみ実行するように演算を制限します。
 
 例：
 
