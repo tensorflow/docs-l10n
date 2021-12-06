@@ -45,13 +45,13 @@ macOS の場合:
 CPU サポート:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow&gt;=1.15.0'</code>
 </pre>
 
 GPU サポート:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu&gt;=1.15.0'</code>
 </pre>
 
 #### 4. Neural Structured Learning `pip` パッケージをインストールします。
@@ -117,13 +117,13 @@ NSL を使用するには、TensorFlow のバージョン1.15 以上が必要な
 CPU サポート:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow&gt;=1.15.0'</code>
 </pre>
 
 GPU サポート:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu&gt;=1.15.0'</code>
 </pre>
 
 #### 6. Neural Structured Learning の依存性をインストールします。
