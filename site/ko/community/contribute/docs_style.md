@@ -33,8 +33,7 @@ With a few exceptions, TensorFlow uses a Markdown syntax similar to [GitHub Flav
 <pre><code>
 ```python
 # some python code here
-```
-</code></pre>
+```</code></pre>
 
 ### Markdown의 링크
 
@@ -86,8 +85,7 @@ $$ E=\frac{1}{2n}\sum_x\lVert (y(x)-y'(x)) \rVert^2 $$
 인라인 MathJax 표현식을 <code>$ ... $</code>로 래핑합니다.
 
 <pre><code>
-This is an example of an inline MathJax expression: $ 2 \times 2 = 4 $
-</code></pre>
+This is an example of an inline MathJax expression: $ 2 \times 2 = 4 $</code></pre>
 
 다음은 인라인 MathJax 표현식의 예입니다. $ 2 \times 2 = 4 $
 
