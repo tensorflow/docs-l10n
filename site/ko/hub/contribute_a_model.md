@@ -1,18 +1,18 @@
 <!--* freshness: { owner: 'maringeo' reviewed: '2021-11-25' review_interval: '6 months' } *-->
 
-# Submit a pull request
+# 풀 요청 제출하기
 
-This page is about submitting a pull request containing Markdown documentation files to the [tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev). GitHub Repo. For more information on how to write the Markdown files in the first place, please see the [writing documentation guide](writing_documentation.md).
+이 페이지는 Markdown 문서 파일이 포함된 풀 요청을 [tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) GitHub 저장소에 제출하는 내용을 다룹니다. 먼저 Markdown 파일을 작성하는 방법에 대한 자세한 내용은 [문서 작성 가이드](writing_documentation.md)를 참조하세요.
 
-## GitHub Actions checks
+## GitHub 작업 확인
 
-The [tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) repo uses GitHub Actions to validate the format of the files in a PR. The workflow used to validate PRs is defined in [.github/workflows/contributions-validator.yml](https://github.com/tensorflow/tfhub.dev/blob/master/.github/workflows/contributions-validator.yml). You can run the validator script on your own branch outside of the workflow, but you will need to ensure you have all the correct pip package dependencies installed.
+[tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) 저장소는 GitHub 작업을 사용하여 PR의 파일 형식을 확인합니다. PR을 검증하는 데 사용되는 워크플로는 [.github/workflows/contributions-validator.yml](https://github.com/tensorflow/tfhub.dev/blob/master/.github/workflows/contributions-validator.yml)에 정의되어 있습니다. 워크플로 외부의 자체 분기에서 유효성 검사기 스크립트를 실행할 수 있지만 모든 pip 패키지 종속성이 올바르게 설치되어 있어야 합니다.
 
-First time contributors are only able to run automated checks with the approval of a repo maintainer, per [GitHub policy](https://github.blog/changelog/2021-04-22-github-actions-maintainers-must-approve-first-time-contributor-workflow-runs/). Publishers are encouraged to submit a small PR fixing typos, otherwise improving model documentation, or submitting a PR containing only their publisher page as their first PR to be able to run automated checks on subsequent PRs.
+처음 기여자는 [GitHub 정책](https://github.blog/changelog/2021-04-22-github-actions-maintainers-must-approve-first-time-contributor-workflow-runs/)에 따라 저장소 관리자의 승인이 있어야만 자동화된 검사를 실행할 수 있습니다. 게시자는 작은 PR 수정 오타를 제출하거나 모델 문서를 개선하거나, 후속 PR에 대한 자동 검사를 실행할 수 있도록 게시자 페이지만 포함하는 PR을 첫 번째 PR로 제출하는 것이 좋습니다.
 
-Important: Your pull request must pass the automated checks before it will be reviewed!
+중요: 풀 요청은 자동 검사를 통과해야 검토를 받게 됩니다!
 
-## Submitting the PR
+## PR 제출하기
 
 전체 마크다운 파일은 다음 방법 중 하나를 사용하여 [tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev/tree/master)의 마스터 브랜치로 가져올 수 있습니다.
 
