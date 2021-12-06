@@ -1,6 +1,6 @@
 # TensorFlow 演算子を選択する
 
-TensorFlow Lite のビルトイン演算子ライブラリがサポートする TensorFlow 演算子は制限されているため、すべてのモデルが互換しているわけではありません。詳細は、[演算子の互換性](ops_compatibility.md)をご覧ください。
+TensorFlow Lite の組み込み演算子ライブラリがサポートする TensorFlow 演算子は制限されているため、すべてのモデルは変換可能ではありません。詳細は、[演算子の互換性](ops_compatibility.md)をご覧ください。
 
 変換を可能するために、TensorFlow Lite モデルで[特定の TensorFlow 演算子](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/flex/allowlisted_flex_ops.cc)を使用できるようにします。ただし、TensorFlow 演算子を使って TensorFlow Lite モデルを実行するには、コア TensorFlow ランタイムをプルする必要があるため、TensorFlow Lite インタプリタのバイナリサイズが増大してしまいます。Android では、必要な TensorFlow 演算子のみを選択的に構築することで、このサイズの増大を回避できます。詳細については、[バイナリサイズを縮小する](../guide/reduce_binary_size.md)をご覧ください。
 
@@ -28,7 +28,7 @@ open("converted_model.tflite", "wb").write(tflite_model)
 
 ### Android AAR
 
-To reduce the binary size, please build your own custom AAR files as guided in the [next section](#building-the-android-aar). If the binary size is not a considerable concern, we recommend using the prebuilt [AAR with TensorFlow ops hosted at JCenter](https://bintray.com/google/tensorflow/tensorflow-lite-select-tf-ops).
+バイナリサイズを縮小するには、[次のセクション](#building-the-android-aar)に示す方法で、独自のカスタム AAR ファイルを構築してください。バイナリサイズがそれほど大きくない場合は、事前構築された、[MavenCentral でホストされている TensorFlow 演算子を使用した AAR](https://bintray.com/google/tensorflow/tensorflow-lite-select-tf-ops) を使用することをお勧めします。
 
 これは、次のように、`build.gradle` 依存関係に標準の TensorFlow Lite AAR とともに追加することで、指定できます。
 
@@ -39,6 +39,8 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT'
 }
 ```
+
+ナイトリーのスナップショットを使用するには、[Sonatype スナップショットリポジトリ](./build_android#use_nightly_snapshots)が追加されていることを確認してください。
 
 依存関係を追加したら、グラフの TensorFlow 演算子を処理するために必要なデリゲートが、それを必要とするグラフに自動的にインストールされます。
 
@@ -84,7 +86,11 @@ mvn install:install-file \
 ```build
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
+        maven {  // Only for snapshot artifacts
+            name 'ossrh-snapshot'
+            url 'http://oss.sonatype.org/content/repositories/snapshots'
+        }
         mavenLocal()
     }
 }
@@ -160,7 +166,7 @@ bazel パイプラインを使用して TensorFlow Lite ライブラリを構築
 
 ### パフォーマンス
 
-ビルトインとセレクトの両方の TensorFlow 演算子を使用する場合、すべての同一の TensorFlow Lite 最適化と最適化済みのビルトイン演算子を利用できるようになり、変換済みモデルで使用できます。
+組み込み TensorFlow 演算子と Select TensorFlow 演算子の両方を使用する場合、すべての同一の TensorFlow Lite 最適化と最適化済みの組み込み演算子を利用できるようになり、変換済みモデルで使用できます。
 
 次のテーブルは、Pixel 2 の MobileNet で推論を実行するためにかかる平均時間を示します。リストされている時間は、100 回の実行の平均に基づきます。これらのターゲットは、フラグ `--config=android_arm64 -c opt` を使用して、Android 向けに構築されています。
 
@@ -184,11 +190,12 @@ TF 演算子のみを使用（`SELECT_TF_OPS`） | 264.5
 ## 既知の制限
 
 - 特定の TensorFlow 演算子は、ストック TensorFlow で通常利用可能な全セットの入力型/出力型をサポートしていない場合があります。
-- サポートされていない演算: 制御フロー演算と`HashTableV2` など、リソースから明示的な初期化が必要な演算は、まだサポートされていません。
 
 ## 更新
 
-- バージョン2.5（まだ正式にリリースされていません）
+- Version 2.6
+    - Supports for GraphDef-attribute based operators and HashTable resource initializations have improved.
+- Version 2.5
     - [トレーニング後の量子化](../performance/post_training_quantization.md)と呼ばれる最適化を適用できます。
 - バージョン2.4
     - ハードウェアアクセラレーションを使用するデリゲートとの互換性が向上しました。
