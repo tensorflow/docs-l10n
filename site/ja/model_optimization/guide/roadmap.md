@@ -1,27 +1,41 @@
-**更新日: 2020 年 8 月 7 日**
+**更新日: 2021 年 6 月**
+
+TensorFlow の Model Optimization Toolkit（MOT）は、TensorFlow モデルから、モバイルや IoT デバイスで実行できる、より小規模でパフォーマンスに優れ、許容範囲の精度を得られる TensorFlow Lite モデルへの変換と最適化を実現するために広く使用されてきました。現在、この MOT テクニックとツーリングを、TensorFlow Lite の領域を超えて TensorFlow SavedModel もサポートできるよう、拡張に努めています。
+
+以下は、ロードマップの概要です。このロードマップはいつでも変更される可能性があり、以下に示す順序は優先順位を示すものではないことに注意してください。このロードマップに関するコメントを[ディスカッショングループ](https://groups.google.com/a/tensorflow.org/g/tflite)で共有することを強くお勧めします。
 
 ## 量子化
 
-- ダイナミックレンジカーネル用のポストトレーニング量子化 -- [公開済み](https://blog.tensorflow.org/2018/09/introducing-model-optimization-toolkit.html)
-- （8b）固定小数点カーネル用のポストトレーニング量子化 -- [公開済み](https://blog.tensorflow.org/2019/06/tensorflow-integer-quantization.html)
-- （8b）固定小数点カーネル用量子化対応トレーニングおよび <8b 用実験 -- [公開済み](https://blog.tensorflow.org/2020/04/quantization-aware-training-with-tensorflow-model-optimization-toolkit.html)
-- ［進行中］（8b）固定小数点 RNN 用ポストトレーニング量子化
-- （8b）固定小数点 RNN 用量子化対応トレーニング
-- ［進行中］ポストトレーニングのダイナミックレンジ量子化の品質とパフォーマンスの改善
+#### TensorFlow Lite
 
-## プルーニング / スパース化
+- Selective post-training quantization to exclude certain layers from quantization.
+- 量子化デバッガーで、量子化誤差損失をレイヤーごとに検査する。
+- Applying quantization-aware training on more model coverage e.g. TensorFlow Model Garden.
+- トレーニング後のダイナミックレンジ量子化の品質とパフォーマンスの改善。
 
-- トレーニング中のマグニチュードベースの重みプルーニング -- [公開済み](https://blog.tensorflow.org/2019/05/tf-model-optimization-toolkit-pruning-API.html)
-- TensorFlow Lite におけるスパースモデルの実行サポート -- [進行中](https://github.com/tensorflow/model-optimization/issues/173)
+#### TensorFlow
 
-## 重みクラスタリング
+- トレーニング後量子化（bf16 * int8 ダイナミックレンジ）。
+- 量子化認識トレーニング（Fake Quant による bf16 * int8 重みのみ）。
+- Selective post-training quantization to exclude certain layers from quantization.
+- 量子化デバッガーで、量子化誤差損失をレイヤーごとに検査する。
 
-- トレーニング中の重みクラスタリング -- [公開済み](https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html)
+## スパース性
+
+#### TensorFlow Lite
+
+- より多くのモデルでのスパースモデルの実行サポート。
+- スパース性のターゲット対応オーサリング。
+- パフォーマンスに優れた x86 カーネルによるスパース演算セットの拡張。
+
+#### TensorFlow
+
+- TensorFlow でのスパース性サポート
 
 ## カスケード圧縮テクニック
 
-- ［進行中］さまざまな圧縮テクニックを組み合わせるための追加サポート。現在、1 つのトレーニング中のテクニックとポストトレーニング量子化のみを組み合わせることができます。提案内容は近日公開されます。
+- 量子化 + テンソル圧縮 + スパース性: 3 つすべてのテクニックの連携。
 
 ## 圧縮
 
-- ［進行中］テンソル圧縮 API
+- 標準的なテスト/ベンチマーク手法の提供など、開発者が独自のモデル圧縮アルゴリズムに圧縮アルゴリズムを実装しやすくするためのテンソル圧縮 API（重みクラスタリングなど）。
