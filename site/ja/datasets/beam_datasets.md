@@ -7,31 +7,19 @@
 - 既存の Beam のデータセットを生成するユーザー向け
 - 新規の Beam のデータセットを作成する開発者向け
 
-目次 :
-
-- [Beam のデータセットを生成する](#generating-a-beam-dataset)
-    - [Google Cloud Dataflow で生成する](#on-google-cloud-dataflow)
-    - [ローカルで生成する](#locally)
-    - [カスタムスクリプト内で生成する](#with-a-custom-script)
-- [Beam のデータセットを実装する](#implementing-a-beam-dataset)
-    - [必要な準備](#prerequisites)
-    - [手順](#instructions)
-    - [例](#example)
-    - [パイプラインの実行](#run-your-pipeline)
-
 ## Beam のデータセットを生成する
 
-クラウドとローカルで Beam のデータセットを生成する例を以下に紹介します。
+クラウドまたはローカルで Beam のデータセットを生成するさまざまな例を以下に紹介します。
 
-**警告**: `tensorflow_datasets.scripts.download_and_prepare`スクリプトでデータセットを生成する際には、生成するデータセットの設定を必ず指定しなければなりません。例えば、[wikipedia](https://www.tensorflow.org/datasets/catalog/wikipedia) の場合は、`--dataset=wikipedia`の代わりに`--dataset=wikipedia/20200301.en`を使用します。
+**警告**: [`tfds build` CLI](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset) でデータセットを生成する際には、生成するデータセットの構成を必ず指定してください。指定しない場合、すべての既存の構成が生成されてしまいます。たとえば[ウィキペディア](https://www.tensorflow.org/datasets/catalog/wikipedia)の場合は、`tfds build wikipedia` の代わりに `tfds build wikipedia/20200301.en` を使用します。
 
 ### Google Cloud Dataflow で生成する
 
-[Google Cloud Dataflow](https://cloud.google.com/dataflow/) を使用してパイプラインを実行し、分散計算を活用できるようにするには、まず[クイックスタートの手順](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python)に従います。
+[Google Cloud Dataflow](https://cloud.google.com/dataflow/) を使用してパイプラインを実行し、分散計算を活用するには、まず[クイックスタートの手順](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python)に従います。
 
-環境の設定ができたら、<a class="" href="https://cloud.google.com/storage/">GCS</a> のデータディレクトリを使用して<code>download_and_prepare</code>スクリプトを実行し、<code>--beam_pipeline_options</code>フラグに<a class="" href="https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service">必要なオプション</a>を指定します。
+環境をセットアップしたら、[`tfds build` CLI](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset) を実行できます。これには、[GCS](https://cloud.google.com/storage/) のデータディレクトリを使用し、[必要なオプション](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)を `--beam_pipeline_options` フラグに指定します。
 
-スクリプトの起動を容易にするためには、GCP/GCS のセットアップと生成するデータセットの実際の値を使用して、以下の変数を定義すると有用です。
+環境の設定ができたら、<a href="https://cloud.google.com/storage/">GCS</a> のデータディレクトリを使用して<code>download_and_prepare</code>スクリプトを実行し、<code>--beam_pipeline_options</code>フラグに<a href="https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service">必要なオプション</a>を指定します。
 
 ```sh
 DATASET_NAME=<dataset-name>
@@ -40,13 +28,13 @@ GCP_PROJECT=my-project-id
 GCS_BUCKET=gs://my-gcs-bucket
 ```
 
-次に、ワーカーに`tfds`をインストールするよう Dataflow に指示をするファイルを作成する必要があります。
+次に、ワーカーに `tfds` をインストールするよう Dataflow に指示をするファイルを作成する必要があります。
 
 ```sh
 echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
-`tfds-nightly`を使用している場合には、データセットが前回のリリースから更新されている場合に備え、`tfds-nightly`からエコーするようにします。
+`tfds-nightly` を使用している場合には、データセットが前回のリリースから更新されている場合に備え、`tfds-nightly` からエコーするようにします。
 
 ```sh
 echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
@@ -69,61 +57,73 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
 デフォルトの Apache Beam ランナーを使用してローカルでスクリプトを実行する場合、コマンドは他のデータセットの場合と同じです。
 
 ```sh
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --datasets=my_new_dataset
+tfds build my_dataset
 ```
 
-**警告**: Beam のデータセットは**巨大**（テラバイト級）な場合があり、生成にはかなりの量のリソースを必要とします（ローカルコンピュータでは数週間かかることもあります）。データセットの生成には分散環境の使用を推奨しています。サポートされているランタイムのリストについては [Apache Beam ドキュメント](https://beam.apache.org/)を参照してください。
+**警告**: Beam のデータセットは**巨大な**（テラバイト以上）場合があり、生成には相当量のリソースを必要とします（ローカルコンピュータでは数週間かかることもあります）。データセットの生成には分散環境の使用を推奨しています。サポートされているランタイムのリストについては [Apache Beam ドキュメント](https://beam.apache.org/)を参照してください。
 
 ### カスタムスクリプト内で生成する
 
-Beam でデータセットを生成する場合、API は他のデータセットの場合と同じですが、Beam のオプションかランナーを`DownloadConfig`に渡す必要があります。
+Beam でデータセットを生成する場合、API は他のデータセットの場合と同じですが、[`beam.Pipeline`](https://beam.apache.org/documentation/programming-guide/#creating-a-pipeline) を、`DownloadConfig` の `beam_options`（および `beam_runner`）引数を使ってカスタマイズできます。
 
-```py
+```python
 # If you are running on Dataflow, Spark,..., you may have to set-up runtime
 # flags. Otherwise, you can leave flags empty [].
 flags = ['--runner=DataflowRunner', '--project=<project-name>', ...]
 
-# To use Beam, you have to set at least one of `beam_options` or `beam_runner`
+# `beam_options` (and `beam_runner`) will be forwarded to `beam.Pipeline`
 dl_config = tfds.download.DownloadConfig(
     beam_options=beam.options.pipeline_options.PipelineOptions(flags=flags)
 )
-
 data_dir = 'gs://my-gcs-bucket/tensorflow_datasets'
 builder = tfds.builder('wikipedia/20190301.en', data_dir=data_dir)
-builder.download_and_prepare(
-    download_dir=FLAGS.download_dir,
-    download_config=dl_config,
-)
+builder.download_and_prepare(download_config=dl_config)
 ```
 
 ## Beam のデータセットを実装する
 
-### 必要な準備
+### 前提条件
 
 Apache Beam のデータセットを書き込むにあたり、以下の概念を理解しておく必要があります。
 
-- ほとんどの内容が Beam のデータセットにも適用されるため、[`tfds`データセット作成ガイド](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)に精通しましょう。
+- ほとんどの内容が Beam のデータセットにも適用されるため、[`tfds` データセット作成ガイド](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)に精通しましょう。
 - [Beam プログラミングガイド](https://beam.apache.org/documentation/programming-guide/)で Apache Beam の概要を把握しましょう。
 - Cloud Dataflow を使用してデータセットを生成する場合は、[Google Cloud ドキュメント](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python) と [Apache Beam 依存性ガイド](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/)をお読みください。
 
 ### 手順
 
-[データセット作成ガイド](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)に精通している場合は、少し変更を加えるだけで Beam のデータセットを追加することができます。
+[データセット作成ガイド](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)を理解しているのであれば、Beam データセットの追加には、`_generate_examples` 関数のみを変更する必要があることはお分かりでしょう。この関数はジェネレータではなく Beam 関数を返します。
 
-- `DatasetBuilder`は、`tfds.core.GeneratorBasedBuilder`の代わりに`tfds.core.BeamBasedBuilder`を継承します。
-- Beam のデータセットは、メソッド`_generate_examples(self, **kwargs)`の代わりに抽象メソッド`_build_pcollection(self, **kwargs)`を実装します。`_build_pcollection`は、スプリットに関連付けられた例を含む`beam.PCollection`を返します。
-- Beam のデータセットの単体テストの記述は、他のデータセットの場合と同じです。
+Beam 以外のデータセット:
+
+```python
+def _generate_examples(self, path):
+  for f in path.iterdir():
+    yield _process_example(f)
+```
+
+Beam データセット:
+
+```python
+def _generate_examples(self, path):
+  return (
+      beam.Create(path.iterdir())
+      | beam.Map(_process_example)
+  )
+```
+
+その他すべては、テストも含め、まったく同じになります。
 
 その他の考慮事項 :
 
 - Apache Beam のインポートには、`tfds.core.lazy_imports`を使用します。遅延依存関係を使用すると、ユーザーは Beam をインストールしなくても、生成された後のデータセットを読むことができます。
-- Python のクロージャには注意が必要です。パイプラインを実行すると、`beam.Map`関数と`beam.DoFn`関数は`pickle`を使用してシリアライズされ、すべてのワーカーに送信されます。これはバグを発生させる可能性があります。例えば、関数の外部で宣言された可変オブジェクトを関数内で使用している場合、`pickle`エラーや予期せぬ動作が発生する場合があります。一般的な解決策は、関数閉包を変更しないようにすることです。
-- Beam のパイプラインに`DatasetBuilder`のメソッドを使用することは問題ありません。しかし、pickle 中にクラスをシリアライズする方法では、作成中に加えられた特徴の変更は無視されます。
+- Python のクロージャには注意してください。パイプラインを実行する際、`beam.Map` と `beam.DoFn` 関数は、`pickle` を使ってシリアル化され、すべてのワーカーに送信されます。ワーカー間で状態を共有する必要がある場合は、`beam.PTransform` 内でオブジェクトをミュータブルにしないでください。
+- `tfds.core.DatasetBuilder` が pickle でシリアル化される方法により、データ作成中、ワーカーでの `tfds.core.DatasetBuilder` のミュート化は無視されます（`_split_generators` で `self.info.metadata['offset'] = 123` を設定し、`beam.Map(lambda x: x + self.info.metadata['offset'])` のようにしてワーカーからそれにアクセスすることはできません）。
+- Split 間で一部のパイプラインステップを共有する櫃夜ぐあある場合は、追加の `pipeline: beam.Pipeline` kwarg を `_split_generator` に追加して、生成パイプライン全体を制御することができます。`tfds.core.GeneratorBasedBuilder` の `_generate_examples` ドキュメントをご覧ください。
 
 ### 例
 
-以下は Beam のデータセットの例です。より複雑な実例については、[`Wikipedia`データセット](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia.py)をご覧ください。
+Beam データセットの例を以下に示します。
 
 ```python
 class DummyBeamDataset(tfds.core.BeamBasedBuilder):
@@ -175,10 +175,27 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
 
 パイプラインの実行には、上記のセクションをご覧ください。
 
-**警告**: 初めてデータセットを実行してダウンロードを登録する際には、`download_and_prepare`スクリプトにレジスタチェックサム`--register_checksums`フラグの追加を忘れないようにしてください。
+**注意**: Beam 以外のデータセットと同様に、`--register_checksums` でダウンロードチェックサムを必ず登録してください（ダウンロードを初めて登録する場合のみ）。
 
 ```sh
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --register_checksums \
-  --datasets=my_new_dataset
+tfds build my_dataset --register_checksums
 ```
+
+## TFDS を入力として使用するパイプライン
+
+TFDS データセットをソースとして取る Beam パイプラインを作成する場合は、`tfds.beam.ReadFromTFDS` を使用できます。
+
+```python
+builder = tfds.builder('my_dataset')
+
+_ = (
+    pipeline
+    | tfds.beam.ReadFromTFDS(builder, split='train')
+    | beam.Map(tfds.as_numpy)
+    | ...
+)
+```
+
+データセットの各シャードを並行して処理します。
+
+注意: これには、データベースがすでに生成されていることが必要です。Beam を使ってデータセットを生成するには、ほかのセクションをご覧ください。
