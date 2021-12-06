@@ -10,7 +10,7 @@
 
 ## Markdown
 
-いくつかの例外を除き、TensorFlow は [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/)（GFM）に似ている Markdown 構文を使用しています。本セクションでは、GFM Markdown の構文と TensorFlow のドキュメントに使用される Markdown の違いを説明します。
+いくつかの例外を除き、TensorFlow は [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/)（GFM）に似た Markdown 構文を使用しています。ここでは、GFM Markdown の構文と、TensorFlow のドキュメントに使用される Markdown との違いを説明します。
 
 ### コードの記述
 
