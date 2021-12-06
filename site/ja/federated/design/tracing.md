@@ -28,7 +28,7 @@ TODO(b/153500547): トレースシステムの個別のコンポーネントを�
 
 2. `ValueImpl` で関数を呼び出します。これにより、Python ランタイムが `ValueImpl` によって実装されるダンダーメソッドを呼び出し、それらを AST 構造として解釈します。各ダンダーメソッドは AST を構築して AST に基づく `ValueImpl` を返します。
 
-For example:
+以下に例を示します。
 
 ```python
 def foo(x):
