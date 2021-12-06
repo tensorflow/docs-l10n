@@ -1,8 +1,8 @@
-# フェデレーテッドラーニング
+# 連合学習
 
 ## 概要
 
-このドキュメントでは、TensorFlow に実装された既存の機械学習モデルを使用したフェデレーテッドトレーニングや評価などのフェデレーテッドラーニングのタスクを容易にするインターフェースを紹介します。これらのインターフェースを設計する上の主な目標は、内部機能についての知識を必要とせずに、フェデレーテッドラーニングを実験できるようにし、さまざまな既存のモデルとデータに実装されたフェデレーテッドラーニングアルゴリズムを評価することでした。ぜひ、このプラットフォームに貢献してください。TFF は拡張性と構成可能性を考慮して設計されているので、皆様からの貢献を歓迎します！
+このドキュメントでは、TensorFlow に実装された既存の機械学習モデルを使用した連合トレーニングや評価などの連合学習のタスクを容易にするインターフェースを紹介します。これらのインターフェースを設計する上の主な目標は、内部機能についての知識を必要とせずに、連合学習を実験できるようにし、さまざまな既存のモデルとデータに実装された連合学習アルゴリズムを評価することでした。ぜひ、このプラットフォームに貢献してください。TFF は拡張性と構成可能性を考慮して設計されているので、皆様からの貢献を歓迎します！
 
 このレイヤーにより提供されるインターフェースは、次の 3 つの主要部分で構成されています。
 
@@ -26,7 +26,7 @@ TFF は、さまざまな分散学習シナリオをサポートすることを�
 
 eager モードの使用など、最新のベストプラクティスに従って TF コードを開発することができますが、最終的なコードはシリアル化可能である必要があります (eager-modeコードの場合は`tf.function`としてラップできます)。これにより、実行時に必要な Python の状態または制御フローを ([Autograph ](https://www.tensorflow.org/guide/autograph)などを使用して) シリアル化できるようになります 。
 
-現在、TensorFlow は、eager モードの TensorFlow のシリアラル化と逆シリアル化を完全にはサポートしていません。TFF でのシリアル化は現在、TF 1.0 パターンに従い、すべてのコードは TFF が制御する` tf.Graph `内に構築する必要があります。つまり、現在 TFF は既に構築されたモデルを使用できません。モデル定義ロジックは、`tff.learning.Model`を返す引数なしの関数にパッケージ化され、この関数が TFF によって呼び出され、モデルのすべてのコンポーネントが確実にシリアル化されます。さらに、強く型付けされた環境であるため、TFF にはモデルの入力タイプの仕様など追加の*メタデータ*が少し必要になります。
+現在、TensorFlow は、eager モードの TensorFlow のシリアラル化と逆シリアル化を完全にはサポートしていません。TFF でのシリアル化は現在、TF 1.0 パターンに従い、すべてのコードは TFF が制御する`tf.Graph`内に構築する必要があります。つまり、現在 TFF は既に構築されたモデルを使用できません。モデル定義ロジックは、`tff.learning.Model`を返す引数なしの関数にパッケージ化され、この関数が TFF によって呼び出され、モデルのすべてのコンポーネントが確実にシリアル化されます。さらに、強く型付けされた環境であるため、TFF にはモデルの入力タイプの仕様など追加の*メタデータ*が少し必要になります。
 
 #### 集計
 
@@ -68,7 +68,7 @@ eager モードの使用など、最新のベストプラクティスに従っ�
 
 さらに、抽象インターフェース`tff.learning.Model`は、プロパティ`federated_output_computation`を公開します。これは、前述の`report_local_outputs`プロパティとともに、要約統計を集計するプロセスを制御できるようにします。
 
-独自のカスタム`tf.learning.Model`を定義する方法の例については、[画像分類](tutorials/federated_learning_for_image_classification.ipynb)チュートリアルの第 2 部と[`model_examples.py`](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/learning/model_examples.py)のテストで使用するサンプルモデルを参照してください。
+You can find examples of how to define your own custom `tff.learning.Model` in the second part of our [image classification](tutorials/federated_learning_for_image_classification.ipynb) tutorial, as well as in the example models we use for testing in [`model_examples.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/model_examples.py).
 
 ### Keras 用コンバータ
 
@@ -149,14 +149,14 @@ while True:
   state, metrics = trainer.next(state, data_for_this_round)
 ```
 
-これを容易にするために、シミュレーションで TFF を使用する場合、連合データは Python` list `として受け入れられ、参加しているクライアントデバイスごとに 1 つの要素を使用して、そのデバイスのローカル`tf.data.Dataset`を表します。
+これを容易にするために、シミュレーションで TFF を使用する場合、連合データは Python`list`として受け入れられ、参加しているクライアントデバイスごとに 1 つの要素を使用して、そのデバイスのローカル`tf.data.Dataset`を表します。
 
 ### 抽象インターフェース
 
-シミュレートされた連合データセットの処理を標準化するために、TFF は抽象的なインターフェース`tff.simulation.ClientData`を提供します。これにより、クライアントのセットを列挙し、特定のクライアントのデータを含む`tf.data.Dataset`を構築できます。これらの`tf.data.Dataset`は、eager モードで生成された連合コンピュテーションへの入力として直接供給することができます。
+In order to standardize dealing with simulated federated data sets, TFF provides an abstract interface `tff.simulation.datasets.ClientData`, which allows one to enumerate the set of clients, and to construct a `tf.data.Dataset` that contains the data of a particular client. Those `tf.data.Dataset`s can be fed directly as input to the generated federated computations in eager mode.
 
 クライアント ID にアクセスする機能は、シミュレーションで使用するためのみにデータセットにより提供される機能であり、クライアントの特定のサブセットからのデータをトレーニングする機能が必要になる場合があることに注意してください (たとえば、さまざまなタイプのクライアントの日中の可用性をシミュレートする場合など)。コンパイルされた計算と基になるランタイムは、クライアント ID の概念を一切含みません。たとえば`tff.templates.IterativeProcess.next`の呼び出しなどで、クライアントの特定のサブセットからのデータが入力として選択されると、クライアント ID はその中に表示されなくなります。
 
 ### 利用可能なデータセット
 
-名前空間`tff.simulation.datasets`は、シミュレーションで使用するための`tff.simulation.ClientData`インターフェースを実装するデータセット専用で、[画像分類](tutorials/federated_learning_for_image_classification.ipynb)と[テキスト生成](tutorials/federated_learning_for_text_generation.ipynb)のチュートリアルをサポートするために、2 つのデータセットがシードされていますが、独自のデータセットをプラットフォームに提供することをお勧めします。
+We have dedicated the namespace `tff.simulation.datasets` for datasets that implement the `tff.simulation.datasets.ClientData` interface for use in simulations, and seeded it with 2 data sets to support the [image classification](tutorials/federated_learning_for_image_classification.ipynb) and [text generation](tutorials/federated_learning_for_text_generation.ipynb) tutorials. We'd like to encourage you to contribute your own data sets to the platform.
