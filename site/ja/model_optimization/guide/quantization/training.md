@@ -21,7 +21,7 @@
 
 ### 量子化による実験と関連ハードウェア
 
-Users can configure the quantization parameters (e.g. number of bits) and to some degree, the underlying algorithms. Note that with these changes from the API defaults, there is currently no supported path for deployment to a backend. For instance, TFLite conversion and kernel implementations only support 8-bit quantization.
+ユーザーは量子化パラメーター（ビット数など）や、ある程度の基盤のアルゴリズムを構成できます。API のデフォルトを変更した場合、バックエンドにデプロイするパスは現在サポートされていないことに注意してください。たとえば、TFLite 変換とカーネル実装は 8 ビット量子化のみをサポートしています。
 
 この構成に固有の API は実験的 API であり、下位互換性はありません。
 
@@ -45,7 +45,7 @@ Users can configure the quantization parameters (e.g. number of bits) and to som
 
 次の分野のサポートが提供されています。
 
-- Model coverage: models using [allowlisted layers](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/quantization/keras/default_8bit/default_8bit_quantize_registry.py), BatchNormalization when it follows Conv2D and DepthwiseConv2D layers, and in limited cases, `Concat`.
+- モデルのカバレッジ: [ホワイトリストに追加されたレイヤー](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/quantization/keras/default_8bit/default_8bit_quantize_registry.py)を使用したモデル、Conv2D および DepthwiseConv2D レイヤーに従う BatchNormalization、および限られたケースでの `Concat`
     <!-- TODO(tfmot): add more details and ensure they are all correct. -->
 - ハードウェアアクセラレータ: API のデフォルトは、EdgeTPU、NNAPI、TFLite バックエンドなどのアクセラレーションと互換しています。ロードマップの注意事項をご覧ください。
 - 量子化によるデプロイ: テンソルごとの量子化ではなく、畳み込みレイヤーの軸ごとの量子化のみが現在サポートされています。
@@ -68,9 +68,9 @@ to launch. -->
 <figure>
   <table>
     <tr>
-      <th>モデル</th>
-      <th>非量子化トップ 1 精度</th>
-      <th>8 ビット量子化精度</th>
+      <th>Model</th>
+      <th>Non-quantized Top-1 Accuracy </th>
+      <th>8-bit Quantized Accuracy </th>
     </tr>
     <tr>
       <td>MobilenetV1 224</td>
@@ -97,11 +97,10 @@ to launch. -->
 <figure>
   <table>
     <tr>
-      <th>モデル</th>
-      <th>非量子化トップ 1 精度</th>
-      <th>8 ビット量子化精度</th>
-    </tr>
-<tr>
+      <th>Model</th>
+      <th>Non-quantized Top-1 Accuracy </th>
+      <th>8-Bit Quantized Accuracy </th>
+    <tr>
       <td>Nasnet-Mobile</td>
       <td>74%</td>
       <td>73%</td>
