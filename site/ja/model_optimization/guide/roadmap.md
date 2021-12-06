@@ -8,16 +8,16 @@ TensorFlow の Model Optimization Toolkit（MOT）は、TensorFlow モデルか�
 
 #### TensorFlow Lite
 
-- Selective post-training quantization to exclude certain layers from quantization.
+- 特定のレイヤーを量子化から除外する、選択的ポストトレーニング量子化。
 - 量子化デバッガーで、量子化誤差損失をレイヤーごとに検査する。
-- Applying quantization-aware training on more model coverage e.g. TensorFlow Model Garden.
+- 量子化対応トレーニングを、TensorFlow Model Garden などより多くのモデルカバレッジに適用。
 - トレーニング後のダイナミックレンジ量子化の品質とパフォーマンスの改善。
 
 #### TensorFlow
 
 - トレーニング後量子化（bf16 * int8 ダイナミックレンジ）。
 - 量子化認識トレーニング（Fake Quant による bf16 * int8 重みのみ）。
-- Selective post-training quantization to exclude certain layers from quantization.
+- 特定のレイヤーを量子化から除外する、選択的ポストトレーニング量子化。
 - 量子化デバッガーで、量子化誤差損失をレイヤーごとに検査する。
 
 ## スパース性
