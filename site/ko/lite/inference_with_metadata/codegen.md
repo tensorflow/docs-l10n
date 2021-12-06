@@ -10,15 +10,15 @@
 
 ### Import a TensorFlow Lite model in Android Studio
 
-1. Right-click on the module you would like to use the TFLite model or click on `File`, then `New` &gt; `Other` &gt; `TensorFlow Lite Model` ![Right-click menus to access the TensorFlow Lite import functionality](../images/android/right_click_menu.png)
+1. TFLite 모델을 사용하려는 모듈을 마우스 오른쪽 버튼으로 클릭하거나 `파일`, `새로 만들기` &gt; `기타` &gt; `TensorFlow Lite 모델` ![Right-click menus to access the TensorFlow Lite import functionality](../images/android/right_click_menu.png)을 클릭합니다.
 
-2. Select the location of your TFLite file. Note that the tooling will configure the module's dependency on your behalf with ML Model binding and all dependencies automatically inserted into your Android module's `build.gradle` file.
+2. TFLite 파일의 위치를 선택합니다. 도구가 ML 모델을 바인딩하고 모든 종속성은 Android 모듈의 `build.gradle` 파일에 자동으로 삽입하는 등 사용자를 대신하여 모듈의 종속성을 구성합니다.
 
-    Optional: Select the second checkbox for importing TensorFlow GPU if you want to use GPU acceleration. ![Import dialog for TFLite model](../images/android/import_dialog.png)
+    선택 사항: <a>GPU 가속</a>을 사용하려는 경우 TensorFlow GPU를 가져오기 위한 두 번째 확인란을 선택합니다. <img alt="Import dialog for TFLite model">
 
-3. Click `Finish`.
+3. `마침`을 클릭합니다.
 
-4. The following screen will appear after the import is successful. To start using the model, select Kotlin or Java, copy and paste the code under the `Sample Code` section. You can get back to this screen by double clicking the TFLite model under the `ml` directory in Android Studio. ![Model details page in Android Studio](../images/android/model_details.png)
+4. 가져오기가 성공하면 다음 화면이 나타납니다. 모델 사용을 시작하려면 Kotlin 또는 Java를 선택하고 `Sample Code` 섹션 아래에 코드를 복사하여 붙여 넣습니다. Android Studio의 `ml` 디렉터리 아래에 있는 TFLite 모델을 두 번 클릭하여 이 화면으로 돌아갈 수 있습니다. ![Model details page in Android Studio](../images/android/model_details.png)
 
 ### Accelerating model inference {:#acceleration}
 
