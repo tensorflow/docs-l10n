@@ -139,7 +139,7 @@ bazel build -c opt --config=ios --ios_multi_cpus=armv7,arm64,x86_64 \
   //tensorflow/lite/experimental/ios:TensorFlowLiteSelectTfOps_framework
 ```
 
-これにより、`bazel-bin/tensorflow/lite/experimental/ios/` ディレクトリにフレームワークが生成されます。iOS 構築ガイドの [Xcode プロジェクト設定](./build_ios.md#modify_xcode_project_settings_directly)セクションに説明された手順と同様の手順を実行し、この新しいフレームワークを Xcode プロジェクトに追加することができます。
+これにより、`bazel-bin/tensorflow/lite/ios/`ディレクトリにフレームワークが生成されます。iOS 構築ガイドの [Xcode プロジェクト設定](./build_ios.md#modify_xcode_project_settings_directly)セクションに説明された手順と同様の手順を実行し、この新しいフレームワークを Xcode プロジェクトに追加することができます。
 
 フレームワークをアプリのプロジェクトに追加したら、セレクト TF 演算子フレームワークを強制読み込みできるように、追加のリンカーフラグをアプリのプロジェクトに指定する必要があります。Xcode プロジェクトで、`Build Settings` -&gt; `Other Linker Flags` に移動し、次を追加します。
 
