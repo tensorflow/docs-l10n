@@ -12,11 +12,11 @@ TFF 是一个可扩展的强大框架，通过在实际代理数据集上模拟�
 
 在 TFF 中实现的研究 FL 模拟通常包括三种主要的逻辑类型。
 
-1. Individual pieces of TensorFlow code, typically `tf.function`s, that encapsulate logic that runs in a single location (e.g., on clients or on a server). This code is typically written and tested without any `tff.*` references, and can be re-used outside of TFF. For example, the [client training loop in Federated Averaging](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tf.py#L184-L222) is implemented at this level.
+1. 单个 TensorFlow 代码段（通常为 `tf.function`），它会封装在单个位置（例如客户端或服务器）上运行的逻辑。此代码在编写或测试时通常没有任何 `tff.*` 引用，且可以在 TFF 之外重用。例如，[联合平均中的客户端训练循环](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tf.py#L184-L222)就是在此级别上实现的。
 
-2. TensorFlow Federated orchestration logic, which binds together the individual `tf.function`s from 1. by wrapping them as `tff.tf_computation`s and then orchestrating them using abstractions like `tff.federated_broadcast` and `tff.federated_mean` inside a `tff.federated_computation`. See, for example, this [orchestration for Federated Averaging](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tff.py#L112-L140).
+2. TensorFlow Federated 编排逻辑，它会通过将第 1 点中的各个 `tf.function` 封装成 `tff.tf_computation` 从而将其绑定在一起，然后使用抽象（如 `tff.federated_computation` 中的 `tff.federated_broadcast` 和 `tff.federated_mean` ）对其进行编排。相关示例请参阅[联合平均编排](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tff.py#L112-L140)。
 
-3. An outer driver script that simulates the control logic of a production FL system, selecting simulated clients from a dataset and then executing federated computations defined in 2. on those clients. For example, [a Federated EMNIST experiment driver](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/emnist_fedavg_main.py).
+3. 外部驱动程序脚本，它能模拟生产 FL 系统的控制逻辑，从数据集中选择模拟客户端，然后在这些客户端上执行第 2 点中定义的联合计算。例如，[Federated EMNIST 实验驱动程序](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/emnist_fedavg_main.py)。
 
 ## 联合学习数据集
 
@@ -26,7 +26,7 @@ TensorFlow Federated [托管了多个数据集](https://www.tensorflow.org/feder
 
 数据集包括：
 
-- [**StackOverflow**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data) A realistic text dataset for language modeling or supervised learning tasks, with 342,477 unique users with 135,818,730 examples (sentences) in the training set.
+- [**StackOverflow**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data)一个用于语言建模或监督学习任务的真实文本数据集，训练集中有 342,477 个唯一用户和 135,818,730 个样本（句子）。
 
 - [**Federated EMNIST**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/emnist/load_data)EMNIST 字符和数字数据集的联合预处理，其中每个客户端对应一个不同的编写器。完整的训练集包含 3400 个用户和来自 62 个标签的 671,585 个样本。
 
@@ -50,9 +50,9 @@ While the wall-clock time of an FL *simulation* is not a relevant metric for eva
 
 在 TFF 中，根据所需自定义程度的不同，可以采用不同的方法对联合优化算法进行研究。
 
-A minimal stand-alone implementation of the [Federated Averaging](https://arxiv.org/abs/1602.05629) algorithm is provided [here](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg). The code includes [TF functions](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tf.py) for local computation, [TFF computations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tff.py) for orchestration, and a [driver script](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/emnist_fedavg_main.py) on the EMNIST dataset as an example. These files can easily be adapted for customized applciations and algorithmic changes following detailed instructions in the [README](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/README.md).
+[此处](https://arxiv.org/abs/1602.05629)提供了[联合平均](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg)算法的最小独立实现。举例来说，代码包括用于本地计算的 [TF 函数](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tf.py)、用于编排的 [TFF 计算](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tff.py)，以及 EMNIST 数据集上的[驱动程序脚本](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/emnist_fedavg_main.py)。这些文件可按照 [README](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/README.md) 中的详细说明轻松适应自定义的应用程序和算法更改。
 
-A more general implementation of Federated Averaging can be found [here](https://github.com/google-research/federated/blob/master/optimization/fed_avg_schedule.py). This implementation allows for more sophisticated optimization techniques, including learning rate scheduling and the use of different optimizers on both the server and client. Code that applies this generalized Federated Averaging to various tasks and federated datasets can be found [here](https://github.com/google-research/federated/blob/master/optimization).
+点击[此处](https://github.com/google-research/federated/blob/master/optimization/fed_avg_schedule.py)可查看关于联合平均更通用的实现。此实现支持更复杂的优化技术，包括学习率调度以及在服务器和客户端上使用不同的优化器。点击[此处](https://github.com/google-research/federated/blob/master/optimization)查看将此泛化的联合平均应用于各种任务和联合数据集的代码。
 
 ### 模型和更新压缩
 
@@ -60,8 +60,8 @@ TFF 使用 [tensor_encoding](https://github.com/tensorflow/model-optimization/tr
 
 要实现自定义压缩算法并将其应用于训练循环，您可以进行以下操作：
 
-1. Implement a new compression algorithm as a subclass of [`EncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L75) or its more general variant, [`AdaptiveEncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L274) following [this example](https://github.com/google-research/federated/blob/master/compression/sparsity.py).
-2. Construct your new [`Encoder`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/core_encoder.py#L38) and specialize it for [model broadcast](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L118) or [model update averaging](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L144).
+1. 作为 [`EncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L75) 的子类或其更通用的变型 [`AdaptiveEncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L274)，实现一种新的压缩算法，如[此示例](https://github.com/google-research/federated/blob/master/compression/sparsity.py)所示。
+2. 构造新的 [`Encoder`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/core_encoder.py#L38) ，并将其专门用于[模型广播](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L118)或[模型更新平均](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L144)。
 3. 使用这些对象来构建整个[训练计算](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L247)。
 
 ### 差分隐私
@@ -85,14 +85,14 @@ TFF 还可以用于模拟联合学习系统上的针对性攻击以及 *[Can You
 
 GAN 提供了一种有趣的[联合编排模式](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/research/gans/tff_gans.py#L266-L316)，这种模式看上去和标准的联合平均略有不同。它们涉及两种不同的网络（生成器和判别器），每种网络使用自己的优化步骤进行训练。
 
-TFF can be used for research on federated training of GANs. For example, the DP-FedAvg-GAN algorithm presented in [recent work](https://arxiv.org/abs/1911.06679) is [implemented in TFF](https://github.com/tensorflow/federated/tree/main/federated_research/gans). This work demonstrates the effectiveness of combining federated learning, generative models, and [differential privacy](#differential_privacy).
+TFF 可用于研究 GAN 的联合训练。例如，[最近研究工作](https://arxiv.org/abs/1911.06679)中展示的 DP-FedAvg-GAN 算法就是[在 TFF 中实现](https://github.com/tensorflow/federated/tree/main/federated_research/gans)的。此研究工作演示了将联合学习、生成模型和[差分隐私](#differential_privacy)相结合的有效性。
 
 ### 个性化
 
 联合学习设置中的个性化是一个活跃的研究领域。个性化的目的是为不同的用户提供不同的推理模型。此问题可能有不同的解决方法。
 
-One approach is to let each client fine-tune a single global model (trained using federated learning) with their local data. This approach has connections to meta-learning, see, e.g., [this paper](https://arxiv.org/abs/1909.12488). An example of this approach is given in [`emnist_p13n_main.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/personalization/emnist_p13n_main.py). To explore and compare different personalization strategies, you can:
+其中一种方法是让每个客户端使用自己的本地数据微调单个全局模型（使用联合学习进行训练）。这种方法与元学习有关，请参阅[此论文](https://arxiv.org/abs/1909.12488)。[`emnist_p13n_main.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/personalization/emnist_p13n_main.py) 中给出了此方法的示例。要探索和比较不同的个性化策略，您可以进行如下操作：
 
-- Define a personalization strategy by implementing a `tf.function` that starts from an initial model, trains and evaluates a personalized model using each client's local datasets. An example is given by [`build_personalize_fn`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/personalization/p13n_utils.py).
+- 通过实现 `tf.function` 来定义个性化策略，该函数从初始模型开始，使用每个客户端的本地数据集训练和评估个性化模型。[`build_personalize_fn`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/personalization/p13n_utils.py) 中给出了一个示例。
 
 - 定义一个 `OrderedDict`，将策略名称映射到相应的个性化策略，并将其用作 [`tff.learning.build_personalization_eval`](https://www.tensorflow.org/federated/api_docs/python/tff/learning/build_personalization_eval) 中的 `personalize_fn_dict` 参数。
