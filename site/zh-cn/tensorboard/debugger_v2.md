@@ -123,7 +123,7 @@ Debugger V2 在级别相对较低的 TensorFlow 软件堆栈上实现，因此�
 
 关于此调试 API 的一个常见问题是，应该在 TensorFlow 代码的哪个位置插入对 `enable_dump_debug_info()` 的调用。通常，应该在 TF2 程序中尽早调用该 API，最好在 Python 导入行之后以及构建计算图和执行开始之前进行调用。这样可以确保全面涵盖所有为模型及其训练提供支持的运算和计算图。
 
-The currently supported tensor_debug_modes are: `NO_TENSOR`, `CURT_HEALTH`, `CONCISE_HEALTH`, `FULL_HEALTH`, and `SHAPE`. They vary in the amount of information extracted from each tensor and the performance overhead to the debugged program. Please refer to the [args section](https://www.tensorflow.org/api_docs/python/tf/debugging/experimental/enable_dump_debug_info) of `enable_dump_debug_info()`’s documentation.
+目前支持的 tensor_debug_modes 包括：`NO_TENSOR`、`CURT_HEALTH`、`CONCISE_HEALTH`、`FULL_HEALTH` 和 `SHAPE`。它们从每个张量提取的信息量以及所调试程序的性能开销各不相同。请参阅 <code>enable_dump_debug_info()</code> 文档的<a>“参数”部分</a>。
 
 ## 性能开销
 
