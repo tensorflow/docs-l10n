@@ -4,7 +4,7 @@
 
 <p align="center"><img src="images/xla_array_layout_figure1.png">그림 1</p>
 
-Figure 1 shows how an array F32[3,5] is laid out in memory with 2x2 tiling. A shape with this layout is written as F32[3,5]{1,0:T(2,2)}, where 1,0 relates to the physical order of dimensions (minor_to_major field in Layout) while (2,2) after the colon indicates tiling of the physical dimensions by a 2x2 tile.
+그림 1은 배열 F32[3,5]가 2x2 바둑판식 배열로 메모리에 배치되는 방식을 보여줍니다. 이 레이아웃을 가진 형상은 F32[3,5]{1,0:(2,2)}로 작성되며, 여기서 1,0은 차원의 물리적 순서(레이아웃에서 minor_to_major 필드)와 관련되고, 콜론 다음의 (2,2)는 2x2의 물리적 차원을 갖는 바둑판식 배열을 나타냅니다.
 
 직관적으로, 타일은 형상을 덮도록 배치되고 각 타일 내에서는 요소가 바둑판식 배열 없이 배치됩니다. 이것을 나타낸 위의 예에서 오른쪽 부분은 메모리 내의 레이아웃을 나타내며, 여기에는 원래 배열 경계가 균등하지 않더라도 완전한 2x2 타일이 유지되도록 추가된 화이트 채우기 요소가 포함됩니다.
 
