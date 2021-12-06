@@ -6,29 +6,27 @@ TensorFlow가 4개 대신 2개의 공백을 사용하는 것을 제외하고 [PE
 
 ### pylint
 
-`pylint`를 설치하고 TensorFlow의 사용자 정의 스타일 정의를 검색하려면 다음을 수행합니다.
+`pylint`를 설치하려면:
 
 ```bash
-
 $ pip install pylint
-$ wget -O /tmp/pylintrc https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/tools/ci_build/pylintrc
 ```
 
-`pylint`로 파일을 확인하려면 다음과 같이 합니다.
+TensorFlow 소스 코드 루트 디렉터리에서 `pylint`로 파일을 확인하려면:
 
 ```bash
-$ pylint --rcfile=/tmp/pylintrc myfile.py
+$ pylint --rcfile=tensorflow/tools/ci_build/pylintrc tensorflow/python/keras/losses.py
 ```
 
 ### 지원되는 Python 버전
 
-TensorFlow는 Python > = 3.5를 지원합니다. 자세한 내용은 [설치 가이드](https://www.tensorflow.org/install)를 참조하세요.
+지원되는 Python 버전은 TensorFlow [설치 가이드](https://www.tensorflow.org/install)를 참조하세요.
 
 공식 및 커뮤니티 지원 빌드에 대해서는 TensorFlow [연속 빌드 상태](https://github.com/tensorflow/tensorflow/blob/master/README.md#continuous-build-status)를 참조하세요.
 
 ## C++ 코딩 스타일
 
-TensorFlow C++ 코드에 대한 변경 사항은 [Google C++ 스타일 가이드](https://google.github.io/styleguide/cppguide.html)를 준수해야 합니다. `clang-format`을 사용하여 C/C++ 변경 사항을 확인하세요.
+TensorFlow C++ 코드에 대한 변경 사항은 [Google C++ 스타일 가이드](https://google.github.io/styleguide/cppguide.html) 및 [TensorFlow 특정 스타일 세부 정보](https://github.com/tensorflow/community/blob/master/governance/cpp-style.md)를 준수해야 합니다. `clang-format`을 사용하여 C/C++ 변경 사항을 확인하세요.
 
 Ubuntu 16+에 설치하려면 다음을 수행합니다.
 
