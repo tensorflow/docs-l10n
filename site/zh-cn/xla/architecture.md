@@ -1,7 +1,6 @@
 # XLA 架构
 
-<div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;"> <img style="width:50%" src="./images/xlalogo.png">
-</div>
+<div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;"> <img style="width:50%" src="./images/xlalogo.png"> </div>
 
 ## 为什么要构建 XLA？
 
@@ -9,7 +8,7 @@
 
 - *提高执行速度*。编译子计算图以减少短暂运算的执行时间，从而消除 TensorFlow 运行时的开销；融合流水线运算以降低内存开销；并针对已知张量形状执行专门优化以支持更积极的常量传播。
 
-- *提高内存使用率*。分析和安排内存使用，原则上需要消除许多中间存储缓冲区。
+- *提高内存使用率*。分析和安排内存使用量，原则上需要消除许多中间存储缓冲区。
 
 - *降低对自定义运算的依赖*。通过提高自动融合的低级运算的性能，使之达到手动融合的自定义运算的性能水平，从而消除对多种自定义运算的需求。
 
@@ -19,14 +18,13 @@
 
 ## XLA 工作原理
 
-XLA 的输入语言称为“HLO IR”或仅为“HLO”（高级优化器）。[运算语义](./operation_semantics.md)页面中介绍了 HLO 的语义。可以将 HLO 简单理解为[编译器 IR](https://en.wikipedia.org/wiki/Intermediate_representation)。
+XLA 的输入语言称为“HLO IR”或仅为“HLO”（高级运算）。[运算语义](./operation_semantics.md)页面中介绍了 HLO 的语义。可以将 HLO 简单理解为[编译器 IR](https://en.wikipedia.org/wiki/Intermediate_representation)。
 
 XLA 接受在 HLO 中定义的计算图（“计算”）并将其编译为适用于各种架构的机器指令。XLA 采用模块化设计，可以轻松融入其他后端以[针对某些新颖的硬件架构](./developing_new_backend.md)。TensorFlow 源代码树中包含适用于 x64 和 ARM64 架构的 CPU 后端，以及 NVIDIA GPU 后端。
 
 下图显示了 XLA 中的编译过程：
 
-<div style="width:95%; margin:auto; margin-bottom:10px; margin-top:20px;">   <img src="./images/how-does-xla-work.png">
-</div>
+<div style="width:95%; margin:auto; margin-bottom:10px; margin-top:20px;">   <img src="./images/how-does-xla-work.png"> </div>
 
 XLA 提供了多种与目标无关的优化和分析过程（例如 [CSE](https://en.wikipedia.org/wiki/Common_subexpression_elimination)）、与目标无关的运算融合，以及用于为计算分配运行时内存的缓冲区分析。
 
