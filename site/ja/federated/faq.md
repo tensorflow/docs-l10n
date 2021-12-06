@@ -21,3 +21,9 @@ TFF には、フェデレーテッドコンピューティングがコアに含�
 ## どうすれば貢献できますか？
 
 [README](../README.md) および[貢献者向けガイドライン](../CONTRIBUTING.md)をご覧ください。
+
+## FedJAX と TensorFlow Federated? にはどのような関係がありますか？
+
+TensorFlow Federated（TFF）は、異なるアルゴリズムと特徴を計算しやすくするために設計され、さまざまなシミュレーションとデプロイのシナリオにおいてコードの移植を可能にする、連合学習と分析のためのフル機能フレームワークです。TFF にはスケーラブルなランタイムが備わっており、数多くのプライバシー、圧縮、および最適化アルゴリズムを標準 API によってサポートしています。TFF はまた、[多くの種類の FL リサーチ](https://www.tensorflow.org/federated/tff_for_research)もサポートしており、発表済みの Google 論文からのサンプル集が [google-research リポジトリ](https://github.com/google-research/federated)に公開されています。
+
+一方で、[FedJAX](https://github.com/google/fedjax) は軽量の Python ベースおよび JAX ベースのシミュレーションライブラリで、研究目的で連合学習アルゴリズムの使いやすさと高速プロトライピングに焦点が当てられています。TensorFlow Federated と FedJAX は個別のプロジェクトとして開発されており、コードの移植性は期待されていません。
