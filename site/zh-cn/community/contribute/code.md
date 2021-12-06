@@ -6,15 +6,14 @@
 
 在为 TensorFlow 项目贡献源代码之前，请查看该项目的 GitHub 仓库中的 `CONTRIBUTING.md` 文件。（例如，请参阅[核心 TensorFlow 仓库的 CONTRIBUTING.md 文件](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md)。）所有代码贡献者都需要签署[贡献者许可协议](https://cla.developers.google.com/clas) (CLA)。
 
-为避免重复工作，在开始处理重要功能之前，请查看[当前的 RFC](https://github.com/tensorflow/community/tree/master/rfcs) 并与 TensorFlow 论坛上的开发者联系。在决定添加新功能时，我们会有选择性，而为项目做贡献和提供帮助的最佳方法是处理已知问题。
+为避免重复工作，在开始处理非普通功能之前，请查看[当前](https://github.com/tensorflow/community/tree/master/rfcs)或[提议的](https://github.com/tensorflow/community/labels/RFC%3A%20Proposed) RFC 并与 TensorFlow 论坛上的开发者 ([developers@tensorflow.org](https://groups.google.com/u/1/a/tensorflow.org/g/developers)) 联系。在决定添加新功能时，我们是有选择性的，为项目做贡献和提供帮助的最佳方法是处理已知问题。
 
 ## 新贡献者的问题
 
-新贡献者在搜索对 TensorFlow 代码库的首次贡献时应查找以下标签。强烈建议新贡献者先处理具有“easy”和“good first issue”标签的项目；这有助于贡献者熟悉贡献工作流，并让核心开发者认识贡献者。
+新贡献者在搜索对 TensorFlow 代码库的首次贡献时应查找以下标签。我们强烈建议新贡献者先处理具有“good first issue”和“contributions welcome”标签的项目；这有助于贡献者熟悉贡献工作流程，并让核心开发者认识贡献者。
 
-- `good first issue`
-- `easy`
-- `contributions welcome`
+- [good first issue](https://github.com/tensorflow/tensorflow/labels/good%20first%20issue)
+- [contributions welcome](https://github.com/tensorflow/tensorflow/labels/stat%3Acontributions%20welcome)
 
 如果您有兴趣招募一个团队来帮助解决大规模问题或处理新功能，请给 [developers@ 小组](https://groups.google.com/a/tensorflow.org/forum/#!forum/developers)发送电子邮件，并查看我们当前的 RFC 列表。
 
@@ -123,9 +122,9 @@
 
 ## 贡献者核对清单
 
-- 阅读贡献准则。
+- 阅读[贡献准则](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md)。
 - 阅读《行为准则》。
 - 确保您已签署《贡献者许可协议》(CLA)。
 - 检查您的更改与准则是否一致。
 - 检查您的更改与 TensorFlow 编码风格是否一致。
-- 运行单元测试。
+- [运行单元测试](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md#running-unit-tests)。
