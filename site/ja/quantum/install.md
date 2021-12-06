@@ -88,7 +88,7 @@ TensorFlow Quantum の最新のナイトリ―版をインストールします�
 
 TensorFlow の[ソースから構築する](https://www.tensorflow.org/install/source#install_bazel)ガイドに記載されているように、<a href="https://bazel.build/" class="external">Bazel </a>ビルドシステムが必要になります。
 
-Our latest source builds use TensorFlow 2.5.1. To ensure compatibility we use `bazel` version 3.7.2. To remove any existing version of Bazel:
+最新のソースビルドには、TensorFlow 2.5.1 が使用されています。互換性を確保するために、`bazel` バージョン 3.7.2 を使用しています。Bazel の既存のバージョンを削除するには、以下を実行します。
 
 <!-- common_typos_disable -->
 
@@ -98,7 +98,7 @@ Our latest source builds use TensorFlow 2.5.1. To ensure compatibility we use `b
 
 <!-- common_typos_enable -->
 
-Download and install `bazel` version 3.7.2:
+`bazel` バージョン 3.7.2 をダウンロードしてインストールします。
 
 <!-- common_typos_disable -->
 
