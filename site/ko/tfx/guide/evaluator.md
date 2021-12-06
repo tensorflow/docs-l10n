@@ -35,9 +35,7 @@ Evaluator를 설정하려면 다음 정보가 필요합니다.
 일반적인 코드는 다음과 같습니다.
 
 ```python
-from tfx import components
 import tensorflow_model_analysis as tfma
-
 ...
 
 # For TFMA evaluation
@@ -48,7 +46,7 @@ eval_config = tfma.EvalConfig(
         # using estimator based EvalSavedModel, add signature_name='eval' and
         # remove the label_key. Note, if using a TFLite model, then you must set
         # model_type='tf_lite'.
-        tfma.ModelSpec(label_key='')
+        tfma.ModelSpec(label_key='<label_key>')
     ],
     metrics_specs=[
         tfma.MetricsSpec(
@@ -80,13 +78,13 @@ eval_config = tfma.EvalConfig(
 
 # The following component is experimental and may change in the future. This is
 # required to specify the latest blessed model will be used as the baseline.
-model_resolver = ResolverNode(
-      instance_name='latest_blessed_model_resolver',
-      resolver_class=latest_blessed_model_resolver.LatestBlessedModelResolver,
+model_resolver = Resolver(
+      strategy_class=dsl.experimental.LatestBlessedModelStrategy,
       model=Channel(type=Model),
-      model_blessing=Channel(type=ModelBlessing))
+      model_blessing=Channel(type=ModelBlessing)
+).with_id('latest_blessed_model_resolver')
 
-model_analyzer = components.Evaluator(
+model_analyzer = Evaluator(
       examples=examples_gen.outputs['examples'],
       model=trainer.outputs['model'],
       baseline_model=model_resolver.outputs['model'],
@@ -114,3 +112,5 @@ validation_result = tfma.load_validation_result(output_path)
 if not validation_result.validation_ok:
   ...
 ```
+
+자세한 내용은 [Evaluator API 참조](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/Evaluator)에서 확인할 수 있습니다.
