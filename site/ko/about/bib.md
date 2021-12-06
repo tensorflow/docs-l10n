@@ -14,11 +14,70 @@ TensorFlow publishes a DOI for the open-source code base using Zenodo.org: [10.5
 
 연구에 TensorFlow를 사용하고 TensorFlow 시스템을 인용하려면, 다음 백서를 인용하세요.
 
-<pre>@misc{tensorflow2015-whitepaper,&lt;br&gt;title={ {TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},&lt;br&gt;url={https://www.tensorflow.org/},&lt;br&gt;note={Software available from tensorflow.org},&lt;br&gt;author={&lt;br&gt;    Mart\'{\i}n~Abadi and&lt;br&gt;    Ashish~Agarwal and&lt;br&gt;    Paul~Barham and&lt;br&gt;    Eugene~Brevdo and&lt;br&gt;    Zhifeng~Chen and&lt;br&gt;    Craig~Citro and&lt;br&gt;    Greg~S.~Corrado and&lt;br&gt;    Andy~Davis and&lt;br&gt;    Jeffrey~Dean and&lt;br&gt;    Matthieu~Devin and&lt;br&gt;    Sanjay~Ghemawat and&lt;br&gt;    Ian~Goodfellow and&lt;br&gt;    Andrew~Harp and&lt;br&gt;    Geoffrey~Irving and&lt;br&gt;    Michael~Isard and&lt;br&gt;    Yangqing Jia and&lt;br&gt;    Rafal~Jozefowicz and&lt;br&gt;    Lukasz~Kaiser and&lt;br&gt;    Manjunath~Kudlur and&lt;br&gt;    Josh~Levenberg and&lt;br&gt;    Dandelion~Man\'{e} and&lt;br&gt;    Rajat~Monga and&lt;br&gt;    Sherry~Moore and&lt;br&gt;    Derek~Murray and&lt;br&gt;    Chris~Olah and&lt;br&gt;    Mike~Schuster and&lt;br&gt;    Jonathon~Shlens and&lt;br&gt;    Benoit~Steiner and&lt;br&gt;    Ilya~Sutskever and&lt;br&gt;    Kunal~Talwar and&lt;br&gt;    Paul~Tucker and&lt;br&gt;    Vincent~Vanhoucke and&lt;br&gt;    Vijay~Vasudevan and&lt;br&gt;    Fernanda~Vi\'{e}gas and&lt;br&gt;    Oriol~Vinyals and&lt;br&gt;    Pete~Warden and&lt;br&gt;    Martin~Wattenberg and&lt;br&gt;    Martin~Wicke and&lt;br&gt;    Yuan~Yu and&lt;br&gt;    Xiaoqiang~Zheng},&lt;br&gt;  year={2015},&lt;br&gt;}</pre>
+<pre>@misc{tensorflow2015-whitepaper,
+title={ {TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},
+url={https://www.tensorflow.org/},
+note={Software available from tensorflow.org},
+author={
+    Mart\'{\i}n~Abadi and
+    Ashish~Agarwal and
+    Paul~Barham and
+    Eugene~Brevdo and
+    Zhifeng~Chen and
+    Craig~Citro and
+    Greg~S.~Corrado and
+    Andy~Davis and
+    Jeffrey~Dean and
+    Matthieu~Devin and
+    Sanjay~Ghemawat and
+    Ian~Goodfellow and
+    Andrew~Harp and
+    Geoffrey~Irving and
+    Michael~Isard and
+    Yangqing Jia and
+    Rafal~Jozefowicz and
+    Lukasz~Kaiser and
+    Manjunath~Kudlur and
+    Josh~Levenberg and
+    Dandelion~Man\'{e} and
+    Rajat~Monga and
+    Sherry~Moore and
+    Derek~Murray and
+    Chris~Olah and
+    Mike~Schuster and
+    Jonathon~Shlens and
+    Benoit~Steiner and
+    Ilya~Sutskever and
+    Kunal~Talwar and
+    Paul~Tucker and
+    Vincent~Vanhoucke and
+    Vijay~Vasudevan and
+    Fernanda~Vi\'{e}gas and
+    Oriol~Vinyals and
+    Pete~Warden and
+    Martin~Wattenberg and
+    Martin~Wicke and
+    Yuan~Yu and
+    Xiaoqiang~Zheng},
+  year={2015},
+}
+</pre>
 
 또는 텍스트 형식으로:
 
-<pre>Martín Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo,&lt;br&gt;Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis,&lt;br&gt;Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow,&lt;br&gt;Andrew Harp, Geoffrey Irving, Michael Isard, Rafal Jozefowicz, Yangqing Jia,&lt;br&gt;Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dan Mané, Mike Schuster,&lt;br&gt;Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Jonathon Shlens,&lt;br&gt;Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker,&lt;br&gt;Vincent Vanhoucke, Vijay Vasudevan, Fernanda Viégas,&lt;br&gt;Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke,&lt;br&gt;Yuan Yu, and Xiaoqiang Zheng.&lt;br&gt;TensorFlow: Large-scale machine learning on heterogeneous systems,&lt;br&gt;2015. Software available from tensorflow.org.</pre>
+<pre>Martín Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo,
+Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis,
+Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow,
+Andrew Harp, Geoffrey Irving, Michael Isard, Rafal Jozefowicz, Yangqing Jia,
+Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dan Mané, Mike Schuster,
+Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Jonathon Shlens,
+Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker,
+Vincent Vanhoucke, Vijay Vasudevan, Fernanda Viégas,
+Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke,
+Yuan Yu, and Xiaoqiang Zheng.
+TensorFlow: Large-scale machine learning on heterogeneous systems,
+2015. Software available from tensorflow.org.
+</pre>
 
 ## TensorFlow: 대규모 머신러닝 시스템
 
