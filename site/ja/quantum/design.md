@@ -25,7 +25,7 @@ TensorFlow の演算は最適化された C++ で記述されています。こ�
 2. 量子データは、異なる回路構造を引き起こす可能性があります。これは、TFQ 演算で動的サイズをサポートするもう 1 つの理由です。量子データは、基礎となる量子状態の構造変化を表すことができます。これは、元の回路への変更によって表されます。新しいデータポイントは実行時にスワップインおよびスワップアウトされるため、TensorFlow 計算グラフは構築後に変更できません。そのため、これらのさまざまな構造のサポートが必要になります。
 3. `cirq.Circuits`は、一連の演算であるという点で計算グラフに似ています。一部には記号/プレースホルダーが含まれている場合があります。これを TensorFlow と可能な限り互換性を持たせることが重要です。
 
-パフォーマンス上の理由から、Eigen（多くの TensorFlow 演算で使用される C ++ ライブラリ）は量子回路シミュレーションにはあまり適していません。代わりに、<a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">量子超越性実験</a>で使用される回路シミュレータが検証に使用され、TFQ 演算の基盤として拡張されます（すべて AVX2 および SSE 命令で記述されています）。物理的な量子コンピュータを使用する、同一の機能シグネチャを持つ演算が作成されました。シミュレートされた量子コンピュータと物理的な量子コンピュータの切り替えは、1 行のコードを変更するのと同じくらい簡単です。これらの演算は、<a href="https://github.com/tensorflow/quantum/blob/master/tensorflow_quantum/core/ops/circuit_execution_ops.py" class="external"><code>circuit_execution_ops.py</code></a>にあります。
+パフォーマンス上の理由から、Eigen（多くの TensorFlow 演算で使用される C ++ ライブラリ）は量子回路シミュレーションにはあまり適していません。代わりに、<a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">古典的コンピュータを超える量子実験</a>で使用される回路シミュレータが検証に使用され、TFQ 演算の基盤として拡張されます（すべて AVX2 および SSE 命令で記述されています）。物理的な量子コンピュータを使用する、同一の機能シグネチャを持つ演算が作成されました。シミュレートされた量子コンピュータと物理的な量子コンピュータの切り替えは、1 行のコードを変更するのと同じくらい簡単です。これらの演算は、<a href="https://github.com/tensorflow/quantum/blob/master/tensorflow_quantum/core/ops/circuit_execution_ops.py" class="external"><code>circuit_execution_ops.py</code></a>にあります。
 
 ### レイヤー
 
