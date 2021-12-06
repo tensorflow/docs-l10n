@@ -153,10 +153,10 @@ while True:
 
 ### 抽象インターフェース
 
-In order to standardize dealing with simulated federated data sets, TFF provides an abstract interface `tff.simulation.datasets.ClientData`, which allows one to enumerate the set of clients, and to construct a `tf.data.Dataset` that contains the data of a particular client. Those `tf.data.Dataset`s can be fed directly as input to the generated federated computations in eager mode.
+シミュレートされた連合データセットの処理を標準化するために、TFF には抽象的なインターフェース `tff.simulation.datasets.ClientData` が提供されています。これにより、クライアントのセットを列挙し、特定のクライアントのデータを含む `tf.data.Dataset` を構築できます。これらの `tf.data.Dataset` は、eager モードで生成された連合計算への入力として直接供給することができます。
 
 クライアント ID にアクセスする機能は、シミュレーションで使用するためのみにデータセットにより提供される機能であり、クライアントの特定のサブセットからのデータをトレーニングする機能が必要になる場合があることに注意してください (たとえば、さまざまなタイプのクライアントの日中の可用性をシミュレートする場合など)。コンパイルされた計算と基になるランタイムは、クライアント ID の概念を一切含みません。たとえば`tff.templates.IterativeProcess.next`の呼び出しなどで、クライアントの特定のサブセットからのデータが入力として選択されると、クライアント ID はその中に表示されなくなります。
 
 ### 利用可能なデータセット
 
-We have dedicated the namespace `tff.simulation.datasets` for datasets that implement the `tff.simulation.datasets.ClientData` interface for use in simulations, and seeded it with 2 data sets to support the [image classification](tutorials/federated_learning_for_image_classification.ipynb) and [text generation](tutorials/federated_learning_for_text_generation.ipynb) tutorials. We'd like to encourage you to contribute your own data sets to the platform.
+名前空間 `tff.simulation.datasets` は、シミュレーションで使用するための `tff.simulation.datasets.ClientData` インターフェースを実装するデータセット専用で、[画像分類](tutorials/federated_learning_for_image_classification.ipynb)と[テキスト生成](tutorials/federated_learning_for_text_generation.ipynb)のチュートリアルをサポートするために、2 つのデータセットがシードされていますが、独自のデータセットをプラットフォームに貢献することをお勧めします。
