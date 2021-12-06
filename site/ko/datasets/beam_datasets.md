@@ -89,7 +89,7 @@ builder.download_and_prepare(
 
 ### 전제 조건
 
-Beam에서 데이터세트를 생성하기 위한 API는 다른 데이터세트에서와 같지만, Beam 옵션 또는 러너를 `DownloadConfig`로 전달해야 합니다.
+Apache Beam 데이터세트를 작성하려면 다음 개념에 익숙해야 합니다.
 
 - 대부분의 내용이 Beam 데이터세트에 적용되므로 [`tfds`데이터세트 작성 가이드](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)를 숙지하세요.
 - Apache Beam에 대한 소개는 [Beam 프로그래밍 가이드](https://beam.apache.org/documentation/programming-guide/)를 참조하세요.
