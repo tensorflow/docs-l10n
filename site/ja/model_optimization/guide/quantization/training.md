@@ -21,7 +21,7 @@
 
 ### 量子化による実験と関連ハードウェア
 
-ユーザーは、量子化パラメータ（ビット数など）、ある程度の基盤のアルゴリズムを構成できます。API のデフォルトからこれらを変更すると、デプロイはサポートされません。
+Users can configure the quantization parameters (e.g. number of bits) and to some degree, the underlying algorithms. Note that with these changes from the API defaults, there is currently no supported path for deployment to a backend. For instance, TFLite conversion and kernel implementations only support 8-bit quantization.
 
 この構成に固有の API は実験的 API であり、下位互換性はありません。
 
@@ -45,7 +45,7 @@
 
 次の分野のサポートが提供されています。
 
-- モデルのカバレッジ: [ホワイトリストに追加されたレイヤー](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/quantization/keras/default_8bit/default_8bit_quantize_registry.py)を使ったモデル、Conv2D および DepthwiseConv2D レイヤーに従う場合の BatchNormalization、および限られた場合 `Concat`
+- Model coverage: models using [allowlisted layers](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/quantization/keras/default_8bit/default_8bit_quantize_registry.py), BatchNormalization when it follows Conv2D and DepthwiseConv2D layers, and in limited cases, `Concat`.
     <!-- TODO(tfmot): add more details and ensure they are all correct. -->
 - ハードウェアアクセラレータ: API のデフォルトは、EdgeTPU、NNAPI、TFLite バックエンドなどのアクセラレーションと互換しています。ロードマップの注意事項をご覧ください。
 - 量子化によるデプロイ: テンソルごとの量子化ではなく、畳み込みレイヤーの軸ごとの量子化のみが現在サポートされています。
