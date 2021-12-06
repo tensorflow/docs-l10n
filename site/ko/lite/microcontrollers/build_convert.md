@@ -6,7 +6,7 @@
 
 모델을 빌드하고 변환하는 실행 가능한 엔드 투 엔드 예제는 *Hello World* 예제의 일부인 다음 Colab을 참조하세요.
 
-<a class="button button-primary" href="https://colab.research.google.com/github/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb">train_hello_world_model.ipynb</a>
+train_hello_world_model.ipynb
 
 ## 모델 변환
 
@@ -58,4 +58,4 @@ unsigned int converted_model_tflite_len = 18200;
 
 마이크로컨트롤러용 TensorFlow Lite는 현재 TensorFlow 연산의 일부만 지원하기 때문에 실행 가능한 모델 아키텍처에서 제약이 따릅니다. 특정 아키텍처의 참조 구현과 최적화 측면에서 연산 지원을 확대하기 위해 노력하고 있습니다.
 
-지원되는 연산은 [`all_ops_resolver.cc`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.cc) 파일에서 확인할 수 있습니다.
+지원되는 연산은 [`all_ops_resolver.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.cc) 파일에서 확인할 수 있습니다.
