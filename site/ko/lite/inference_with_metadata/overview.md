@@ -1,6 +1,6 @@
 # 메타데이터를 이용한 TensorFlow Lite 추론
 
-Inferencing [models with metadata](../convert/metadata.md) can be as easy as just a few lines of code. TensorFlow Lite metadata contains a rich description of what the model does and how to use the model. It can empower code generators to automatically generate the inference code for you, such as using the [Android Studio ML Binding feature](codegen.md#mlbinding) or [TensorFlow Lite Android code generator](codegen.md#codegen). It can also be used to configure your custom inference pipeline.
+[메타데이터를 사용하여 모델](../convert/metadata.md)을 추론하는 작업은 코드 몇 줄만 작성하면 될 만큼 쉽습니다. TensorFlow Lite 메타데이터에는 모델이 하는 작업과 모델 사용 방법에 대한 풍부한 설명이 포함되어 있습니다. 이를 통해 코드 생성기가 [Android Studio ML Binding 특성](codegen.md#mlbinding)이나 [TensorFlow Lite Android 코드 생성기](codegen.md#codegen)를 사용하는 등 추론 코드를 자동으로 생성할 수 있습니다. 또한 사용자 정의 추론 파이프라인을 구성하는 데 사용할 수도 있습니다.
 
 ## 도구 및 라이브러리
 
@@ -8,9 +8,9 @@ TensorFlow Lite는 다음과 같이 다양한 계층의 배포 요구 사항을 
 
 ### Generate model interface with Android code generators
 
-There are two ways to automatically generate the necessary Android wrapper code for TensorFlow Lite model with metadata:
+메타데이터를 사용하여 TensorFlow Lite 모델에 필요한 Android 래퍼 코드를 자동으로 생성하는 방법에는 다음과 같이 두 가지가 있습니다.
 
-1. [Android Studio ML Model Binding](codegen.md#mlbinding) is tooling available within Android Studio to import TensorFlow Lite model through a graphical interface. Android Studio will automatically configure settings for the project and generate wrapper classes based on the model metadata.
+1. [Android Studio ML Model Binding](codegen.md#mlbinding)은 그래픽 인터페이스를 통해 TensorFlow Lite 모델을 가져오기 위해 Android 스튜디오 내에서 사용할 수 있는 도구입니다. Android Studio는 프로젝트에 대한 설정을 자동으로 구성하고 모델 메타데이터를 기반으로 래퍼 클래스를 생성합니다.
 
 2. [TensorFlow Lite 코드 생성기](codegen.md)는 메타데이터를 기반으로 모델 인터페이스를 자동으로 생성하는 실행 파일입니다. 현재 Java가 설치된 Android를 지원합니다. 래퍼 코드가 있어서 `ByteBuffer`와 직접 상호 작용할 필요가 없습니다. 대신, 개발자는 `Bitmap` 및 `Rect`와 같은 형식화된 객체를 사용하여 TensorFlow Lite 모델과 상호 작용할 수 있습니다. Android Studio 사용자는 [Android Studio ML Binding](codegen.md#generate-code-with-android-studio-ml-model-binding)을 통해 codegen 특성에 액세스할 수도 있습니다.
 
