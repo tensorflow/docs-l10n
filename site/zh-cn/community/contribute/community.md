@@ -2,6 +2,8 @@
 
 一个开源项目不仅涉及代码，还是一个包含用户、开发者、作者、研究员和其他贡献者的社区。您可以为发展和支持这一社区提供帮助。
 
+请阅读 TensorFlow [代码和协作治理](https://github.com/tensorflow/community/blob/master/governance/code-and-collaboration.md)
+
 ## 社区支持
 
 许多人[在 Stack Overflow 上询问有关 TensorFlow 的问题](https://stackoverflow.com/questions/tagged/tensorflow)。回答这些问题并指导人们找到相关文档对社区意义重大。
@@ -51,10 +53,6 @@ TensorFlow 社区有许多正式和非正式的联系方式。
 
 有关 TensorFlow 项目的新闻和动态，请在 Twitter 上关注 [@tensorflow](https://twitter.com/tensorflow)。要观看与 TensorFlow 相关的内容，请查看我们的 [YouTube](http://youtube.com/tensorflow/) 频道。
 
-### 开发路线图
-
-[路线图](https://www.tensorflow.org/community/roadmap)汇总了即将添加到 TensorFlow 中的内容的计划。
-
 ### 用户小组
 
 TensorFlow 在世界各地拥有许多社区！有关完整列表，请参阅 TensorFlow 网站上的[社区](https://www.tensorflow.org/community/groups)部分。
@@ -69,39 +67,27 @@ TensorFlow 在世界各地拥有许多社区！有关完整列表，请参阅 Te
 
 <table>
   <tr>
-   <td>
-<p data-md-type="paragraph"><a href="https://groups.google.com/a/tensorflow.org/d/forum/addons">SIG Addons</a></p>
-   </td>
+   <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/addons">SIG Addons</a></td>
    <td>维护一个符合完善的 API 模式，但实现了核心 TensorFlow 中未提供的新功能的贡献仓库。</td>
   </tr>
   <tr>
-   <td>
-<p data-md-type="paragraph"><a href="https://groups.google.com/a/tensorflow.org/d/forum/build">SIG Build</a></p>
-   </td>
+   <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/build">SIG Build</a></td>
    <td>专注于 TensorFlow 的构建、打包和分发方面的问题。</td>
   </tr>
   <tr>
-   <td>
-<p data-md-type="paragraph"><a href="https://groups.google.com/a/tensorflow.org/d/forum/io">SIG IO</a></p>
-   </td>
+   <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/io">SIG IO</a></td>
    <td>致力于为除核心 TensorFlow 以外的文件系统和格式（如 Apache Ignite FS 或 Apache Hadoop SequenceFile）提供支持，作为 tf.data.Dataset 和 TensorFlow 文件系统的子类。</td>
   </tr>
   <tr>
-   <td>
-<p data-md-type="paragraph"><a href="https://groups.google.com/a/tensorflow.org/d/forum/networking">SIG Networking</a></p>
-   </td>
+   <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/networking">SIG Networking</a></td>
    <td>维护核心 TensorFlow 中未提供的网络结构和协议。</td>
   </tr>
   <tr>
-   <td>
-<p data-md-type="paragraph"><a href="https://groups.google.com/a/tensorflow.org/d/forum/tensorboard">SIG TensorBoard</a></p>
-   </td>
+   <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/tensorboard">SIG TensorBoard</a></td>
    <td>TensorBoard 及其插件的进一步开发和方向。</td>
   </tr>
   <tr>
-   <td>
-<p data-md-type="paragraph"><a href="https://groups.google.com/a/tensorflow.org/forum/#!forum/rust">SIG Rust</a></p>
-   </td>
+   <td><a href="https://groups.google.com/a/tensorflow.org/forum/#!forum/rust">SIG Rust</a></td>
    <td>协作开发 TensorFlow 的 Rust 绑定。</td>
   </tr>
 </table>
