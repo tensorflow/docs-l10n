@@ -182,7 +182,7 @@ example_gen = CsvExampleGen(input_base='/tmp', input_config=input)
 
 特定の Span を取得するには、RangeConfig を使用することができます。これについては以下で詳しく説明します。
 
-### クエリベースの ExampleGen の場合
+### Date
 
 注意: この機能は、TFX 0.24.0 以降でのみ利用できます。
 
@@ -454,7 +454,7 @@ example_validator = ExampleValidator(
              exclude_splits=['eval'])
 ```
 
-### Transform
+### 変換
 
 デフォルトでは、'train' Split を分析してメタデータを生成し、すべての Split を変換します。
 
