@@ -2,30 +2,30 @@
 
 ## TensorFlow Extended
 
-- [TensorFlow Extended](api_docs/python/tfx)
+- [TensorFlow Extended](https://www.tensorflow.org/tfx/api_docs/python/tfx)
 
 ## データ検証
 
-- [データ検証](data_validation/api_docs/python/tfdv)
+- データ検証
 
 ## 変換
 
-- [変換](transform/api_docs/python/tft)
-- [Transform.beam](transform/api_docs/python/tft_beam)
+- [Transform](https://www.tensorflow.org/tfx/transform/api_docs/python/tft)
+- [Transform.beam](https://www.tensorflow.org/tfx/transform/api_docs/python/tft_beam)
 
 ## モデル分析
 
-- [モデル分析](model_analysis/api_docs/python/tfma/)
+- モデル分析
 
 ## 配信
 
-- [Client API（REST）](serving/api_rest/)
-- [Server API（C++）](serving/api_docs/cc/)
+- [Client API（REST）](https://www.tensorflow.org/tfx/serving/api_rest)
+- [Server API（C++）](https://www.tensorflow.org/tfx/serving/api_docs/cc)
 
 ## ML メタデータ
 
-- [ML メタデータ](ml_metadata/api_docs/python/mlmd)
+- ML メタデータ
 
 ## TFX 基本共有ライブラリ（`tfx_bsl`）
 
-- [tfx_bsl](tfx_bsl/api_docs/python/tfx_bsl/public)
+- [tfx_bsl](https://www.tensorflow.org/tfx/tfx_bsl/api_docs/python/tfx_bsl/public)
