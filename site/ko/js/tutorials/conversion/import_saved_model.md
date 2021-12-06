@@ -2,10 +2,9 @@
 
 TensorFlow GraphDef 기반 모델(일반적으로 Python API를 통해 생성됨)은 다음 형식 중 하나로 저장할 수 있습니다.
 
-1. TensorFlow [저장된 모델](https://www.tensorflow.org/programmers_guide/saved_model#overview_of_saving_and_restoring_models)
-2. [고정 모델](https://www.tensorflow.org/mobile/prepare_models#how_do_you_get_a_model_you_can_use_on_mobile)
-3. [세션 번들](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/session_bundle/README.md)
-4. [Tensorflow Hub 모듈](https://www.tensorflow.org/hub/)
+1. TensorFlow [SavedModel](https://www.tensorflow.org/tutorials/keras/save_and_load)
+2. 고정 모델
+3. [Tensorflow Hub 모듈](https://www.tensorflow.org/hub/)
 
 위의 모든 형식은 [TensorFlow.js 변환기](https://github.com/tensorflow/tfjs/tree/master/tfjs-converter)에서 TensorFlow.js로 직접 로드할 수 있는 형식으로 변환하여 추론할 수 있습니다.
 
@@ -13,7 +12,7 @@ TensorFlow GraphDef 기반 모델(일반적으로 Python API를 통해 생성됨
 
 ## 요구 사항
 
-변환 절차에는 Python 환경이 필요한데 [pipenv](https://github.com/pypa/pipenv) 또는 [virtualenv를](https://virtualenv.pypa.io) 사용하여 격리를 유지해야 합니다. 변환기를 설치하려면 다음 명령을 실행하세요.
+변환 절차에는 Python 환경이 필요한데 [pipenv](https://github.com/pypa/pipenv) 또는 [virtualenv](https://virtualenv.pypa.io)를 사용하여 격리를 유지해야 합니다. 변환기를 설치하려면 다음 명령을 실행하세요.
 
 ```bash
  pip install tensorflowjs
@@ -65,7 +64,7 @@ tensorflowjs_converter \
 `--input_format` | 입력 모델의 형식은 저장된 모델에 tf_saved_model, 고정 모델에 tf_frozen_model, 세션 번들에 tf_session_bundle, TensorFlow Hub 모듈에 tf_hub, Keras HDF5에 Keras를 사용합니다.
 `--output_node_names` | 쉼표로 구분된 출력 노드의 이름입니다.
 `--saved_model_tags` | 저장된 모델 변환과 로드할 MetaGraphDef의 태그에만 쉼표로 구분된 형식으로 적용됩니다. 기본적으로 `serve`가 됩니다.
-`--signature_name` | TensorFlow Hub 모듈 변환과 로드할 서명에만 적용됩니다. 기본값은 `default`입니다. https://www.tensorflow.org/hub/common_signatures/를 참조하세요.
+`--signature_name` | TensorFlow Hub 모듈 변환, 로드할 서명에만 적용됩니다. 기본값은 `default`입니다. https://www.tensorflow.org/hub/common_signatures/를 참조하세요.
 
 자세한 도움말 메시지를 보려면 다음 명령을 사용하세요.
 
