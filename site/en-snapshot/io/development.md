@@ -14,9 +14,10 @@ TensorFlow I/O's code conforms to Bazel Buildifier, Clang Format, Black, and Pyu
 Please use the following command to check the source code and identify lint issues:
 
 ```
-# Install Bazel version specified in .bazelversion
-$ curl -OL https://github.com/bazelbuild/bazel/releases/download/$(cat .bazelversion)/bazel-$(cat .bazelversion)-installer-darwin-x86_64.sh
-$ sudo bash -x -e bazel-$(cat .bazelversion)-installer-darwin-x86_64.sh
+# Install Bazelisk (manage bazel version implicitly)
+$ curl -sSOL https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-linux-amd64
+$ sudo mv bazelisk-linux-amd64 /usr/local/bin/bazel
+$ sudo chmod +x /usr/local/bin/bazel
 $ bazel run //tools/lint:check
 ```
 
@@ -74,9 +75,8 @@ xcodebuild -version
 # Show macOS's default python3
 python3 --version
 
-# Install Bazel version specified in .bazelversion
-curl -OL https://github.com/bazelbuild/bazel/releases/download/$(cat .bazelversion)/bazel-$(cat .bazelversion)-installer-darwin-x86_64.sh
-sudo bash -x -e bazel-$(cat .bazelversion)-installer-darwin-x86_64.sh
+# Install Bazelisk (manage bazel version implicitly)
+brew install bazelisk
 
 # Install tensorflow and configure bazel
 sudo ./configure.sh
@@ -130,9 +130,10 @@ the shared libraries on Ubuntu 20.04:
 sudo apt-get -y -qq update
 sudo apt-get -y -qq install gcc g++ git unzip curl python3-pip
 
-# Install Bazel version specified in .bazelversion
-curl -sSOL https://github.com/bazelbuild/bazel/releases/download/$(cat .bazelversion)/bazel-$(cat .bazelversion)-installer-linux-x86_64.sh
-sudo bash -x -e bazel-$(cat .bazelversion)-installer-linux-x86_64.sh
+# Install Bazelisk (manage bazel version implicitly)
+curl -sSOL https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-linux-amd64
+sudo mv bazelisk-linux-amd64 /usr/local/bin/bazel
+sudo chmod +x /usr/local/bin/bazel
 
 # Upgrade pip
 sudo python3 -m pip install -U pip
@@ -185,9 +186,10 @@ The following will install bazel, devtoolset-9, rh-python36, and build the share
 sudo yum install -y centos-release-scl
 sudo yum install -y devtoolset-9 git rh-python36 make
 
-# Install Bazel version specified in .bazelversion
-curl -sSOL https://github.com/bazelbuild/bazel/releases/download/$(cat .bazelversion)/bazel-$(cat .bazelversion)-installer-linux-x86_64.sh
-sudo bash -x -e bazel-$(cat .bazelversion)-installer-linux-x86_64.sh
+# Install Bazelisk (manage bazel version implicitly)
+curl -sSOL https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-linux-amd64
+sudo mv bazelisk-linux-amd64 /usr/local/bin/bazel
+sudo chmod +x /usr/local/bin/bazel
 
 # Upgrade pip
 scl enable rh-python36 devtoolset-9 \
