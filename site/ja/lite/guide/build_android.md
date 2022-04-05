@@ -1,6 +1,22 @@
 # Android 用の TensorFlow Lite を構築する
 
-This document describes how to build TensorFlow Lite Android library on your own. Normally, you do not need to locally build TensorFlow Lite Android library. If you just want to use it, the easiest way is using the [TensorFlow Lite AAR hosted at JCenter](https://bintray.com/google/tensorflow/tensorflow-lite). See [Android quickstart](../guide/android.md) for more details on how to use them in your Android projects.
+このドキュメントでは、TensorFlow Lite Android ライブラリを独自に構築する方法について説明します。通常、TensorFlow Lite Android ライブラリをローカルで構築する必要はありません。使用するだけの場合、最も簡単な方法は、[MavenCentral でホストされている TensorFlow Lite AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite) を使用することです。Android プロジェクトでこれらを使用する方法の詳細については、[Android クイックスタート](../guide/android.md)をご覧ください。
+
+## Nightly スナップショットを使用する
+
+Nightly スナップショットを使用するには、以下のリポジトリをルートの Gradle ビルド構成に追加します。
+
+```build
+allprojects {
+    repositories {      // should be already there
+        mavenCentral()  // should be already there
+        maven {         // add this repo to use snapshots
+          name 'ossrh-snapshot'
+          url 'https://oss.sonatype.org/content/repositories/snapshots'
+        }
+    }
+}
+```
 
 ## ローカルで TensorFlow Lite を構築する
 
@@ -37,10 +53,15 @@ Windows で PowerShell を使用する場合は、"$PWD" を "pwd" に置き換�
 - コンテナの中に入ると、以下を実行して追加の Android ツールやライブラリをダウンロードすることができます（ライセンスに同意する必要があるかもしれないので注意してください）。
 
 ```shell
-android update sdk --no-ui -a --filter tools,platform-tools,android-${ANDROID_API_LEVEL},build-tools-${ANDROID_BUILD_TOOLS_VERSION}
+sdkmanager \
+  "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
+  "platform-tools" \
+  "platforms;android-${ANDROID_API_LEVEL}"
 ```
 
-これで「構築してインストールする」の項目に進むことができます。ライブラリの構築が終了したら、コンテナ内の /host_dir にコピーして、ホスト上でアクセスできるようにします。
+次に、[WORKSPACE と .bazelrc の構成](#configure_workspace_and_bazelrc) セクションに進み、ビルド設定を構成します。
+
+ライブラリの構築が終了したら、コンテナ内の /host_dir にコピーして、ホスト上でアクセスできるようにします。
 
 ### Docker を使用せずに構築環境をセットアップする
 
@@ -52,9 +73,9 @@ Bazel は TensorFlow の主なビルドシステムです。これを使用し�
 2. TensorFlow Lite のネイティブコード (C/C++) を構築するには、Android NDK が必要です。現在の推奨バージョンは 19c で、[こちら](https://developer.android.com/ndk/downloads/older_releases.html#ndk-19c-downloads)から入手できます。
 3. Android SDK とビルドツールは[こちら](https://developer.android.com/tools/revisions/build-tools.html)から、または [Android Studio](https://developer.android.com/studio/index.html) の一部として入手できます。TensorFlow Lite の構築に推奨されるビルドツールの API バージョンは 23 かそれ以降です。
 
-#### WORKSPACE と .bazelrc の構成
+### WORKSPACE と .bazelrc の構成
 
-ルートの TensorFlow チェックアウトディレクトリにある `./configure` スクリプトを実行して、Android ビルド用の `./WORKSPACE` をインタラクティブに設定するかを尋ねられたら「Yes」と答えます。スクリプトは以下の環境変数を使用して設定を試みます。
+これは、TF Lite ライブラリを構築するために必要となる一度限りの構成ステップです。ルートの TensorFlow チェックアウトディレクトリにある `./configure` スクリプトを実行して、Android ビルド用の `./WORKSPACE` をインタラクティブに設定するかを尋ねられたら「Yes」と答えます。スクリプトは以下の環境変数を使用して設定を試みます。
 
 - `ANDROID_SDK_HOME`
 - `ANDROID_SDK_API_LEVEL`
@@ -83,7 +104,7 @@ bazel build -c opt --fat_apk_cpu=x86,x86_64,arm64-v8a,armeabi-v7a \
 
 これにより、`bazel-bin/tensorflow/lite/java/` に AAR ファイルが生成されます。これは、複数の異なるアーキテクチャの「大きな」AAR を構築するので注意してください。その全部が必要ではない場合は、デプロイ環境に適切なサブセットを使用します。
 
-警告: 次の機能は実験的なものであり、HEAD のみで利用が可能です。以下のように、特定のモデルのみを対象とした小さな AAR ファイルを作成することができます。
+以下のようにすると、1 つのモデルセットのみをターゲットするより小型の AAR ファイルを構築できます。
 
 ```sh
 bash tensorflow/lite/tools/build_aar.sh \
@@ -100,7 +121,11 @@ bash tensorflow/lite/tools/build_aar.sh \
 ```
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
+        maven {  // Only for snapshot artifacts
+            name 'ossrh-snapshot'
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
+        }
         flatDir {
             dirs 'libs'
         }
@@ -128,7 +153,11 @@ mvn install:install-file \
 ```
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
+        maven {  // Only for snapshot artifacts
+            name 'ossrh-snapshot'
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
+        }
         mavenLocal()
     }
 }
