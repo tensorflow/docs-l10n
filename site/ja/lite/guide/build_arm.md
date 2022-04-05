@@ -21,7 +21,7 @@ CMake プロジェクトがある場合、またはカスタムツールチェ�
 
 ## Bazel を使用した ARM のクロスコンパイル
 
-Bazel プロジェクトがある場合、または TF 演算を使用する場合は、Bazel ビルドシステムの使用が推奨されます。ARM32/64 共有ライブラリを構築するには、統合されている [ARM GCC 8.3 ツールチェーン](https://github.com/tensorflow/tensorflow/tree/master/third_party/toolchains/embedded/arm-linux)を Bazel を使用します。
+Bazel プロジェクトがある場合、または TF 演算を使用する場合は、Bazel ビルドシステムの使用が推奨されます。ARM32/64 共有ライブラリを構築するには、統合されている [ARM GCC 8.3 ツールチェーン](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tools/toolchains/embedded/arm-linux)を Bazel を使用します。
 
 ターゲットアーキテクチャ | Bazel 構成 | 対応デバイス
 --- | --- | ---
