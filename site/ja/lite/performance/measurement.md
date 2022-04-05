@@ -14,25 +14,25 @@
 
 ### Android ベンチマークアプリ
 
-Android でベンチマークツールを使用するには、2つのオプションがあります。1つ目は[ネイティブベンチマークバイナリ](#native-benchmark-binary)で、2つ目は Android ベンチマークアプリです。これは、モデルがアプリでどのように機能するかをより正確に把握するためのものです。いずれの場合も、ベンチマークツールの数値は、実際のアプリでモデルを使用して推論を実行した場合とは少し異なります。
+Android でベンチマークツールを使用するには、2つのオプションがあります。1つ目はネイティブベンチマークバイナリで、2つ目は Android ベンチマークアプリです。これは、モデルがアプリでどのように機能するかをより正確に把握するためのものです。いずれの場合も、ベンチマークツールの数値は、実際のアプリでモデルを使用して推論を実行した場合とは少し異なります。
 
-この Android ベンチマークアプリには UI がありません。`adb`コマンドを使用してインストールおよび実行し、`adb logcat`コマンドを使用して結果を取得します。
+この Android ベンチマークアプリには UI がありません。adbコマンドを使用してインストールおよび実行し、adb logcatコマンドを使用して結果を取得します。
 
 #### アプリをダウンロードまたはビルドする
 
 以下のリンクを使用して、ナイトリービルドの Android ベンチマークアプリをダウンロードします。
 
-- [android_aarch64](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_benchmark_model.apk)
-- [android_arm](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_arm_benchmark_model.apk)
+- android_aarch64
+- android_arm
 
-[Flex デリゲート](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/delegates/flex)を介して [TF 演算](https://www.tensorflow.org/lite/guide/ops_select)をサポートする Android ベンチマークアプリは、以下のリンクをクリックしてください。
+Flex デリゲートを介して TF 演算をサポートする Android ベンチマークアプリは、以下のリンクをクリックしてください。
 
-- [android_aarch64](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_benchmark_model_plus_flex.apk)
-- [android_arm](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_arm_benchmark_model_plus_flex.apk)
+- android_aarch64
+- android_arm
 
-また、これらの[手順](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark/android)に従って、ソースからアプリをビルドすることもできます。
+また、これらの説明に従って、ソースからアプリをビルドすることもできます。
 
-注：x86 CPU または Hexagon デリゲートで Android ベンチマーク apk を実行する場合、またはモデルに [Select TF 演算子](../guide/ops_select)または[カスタム演算子](../guide/ops_custom)が含まれている場合は、ソースからアプリをビルドする必要があります。
+注：x86 CPU または Hexagon デリゲートで Android ベンチマーク apk を実行する場合、またはモデルに Select TF 演算子またはカスタム演算子が含まれている場合は、ソースからアプリをビルドする必要があります。
 
 #### ベンチマークを準備する
 
@@ -52,21 +52,21 @@ adb shell am start -S \
               --num_threads=4"'
 ```
 
-`graph`は必須パラメータです。
+graphは必須パラメータです。
 
-- `graph`: `string` <br> TFLite モデルファイルへのパス。
+- graph: string  TFLite モデルファイルへのパス。
 
 ベンチマークを実行するためのオプションのパラメータをさらに指定できます。
 
-- `num_threads`: `int` (デフォルト=1) <br> TFLite インタープリタの実行に使用するスレッドの数。
-- `use_gpu`: `bool` (デフォルト=false) <br>[GPU デレゲート](gpu)を使用する。
-- `use_nnapi`: `bool` (デフォルト=false) <br>[NNAPI デレゲート](nnapi)を使用する。
-- `use_xnnpack`: `bool` (デフォルト=`false`) <br>[XNNPACK デレゲート](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/delegates/xnnpack)を使用する。
-- `use_hexagon`: `bool` (デフォルト=`false`) <br>[Hexagon デレゲート](hexagon_delegate)を使用する。
+- num_threads: int (デフォルト=1)  TFLite インタープリタの実行に使用するスレッドの数。
+- use_gpu: bool (デフォルト=false) GPU デレゲートを使用する。
+- use_nnapi: bool (デフォルト=false) NNAPI デレゲートを使用する。
+- use_xnnpack: bool (デフォルト=false) XNNPACK デレゲートを使用する。
+- use_hexagon: bool (デフォルト=false) Hexagon デレゲートを使用する。
 
-使用しているデバイスによっては、これらのオプションの一部が使用できない場合や使用しても効果がない場合があります。ベンチマークアプリで実行できるその他のパフォーマンスパラメータについては、[パラメータ](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#parameters)を参照してください。
+使用しているデバイスによっては、これらのオプションの一部が使用できない場合や使用しても効果がない場合があります。ベンチマークアプリで実行できるその他のパフォーマンスパラメータについては、パラメータを参照してください。
 
-`logcat`コマンドを使用して結果を表示します。
+logcatコマンドを使用して結果を表示します。
 
 ```shell
 adb logcat | grep "Average inference"
@@ -80,40 +80,45 @@ adb logcat | grep "Average inference"
 
 ### ネイティブベンチマークバイナリ
 
-ベンチマークツールは、ネイティブバイナリ`Benchmark_model`としても提供されます。このツールは、Linux、Mac、組み込みデバイス、および Android デバイスのシェルコマンドラインから実行できます。
+ベンチマークツールは、ネイティブバイナリBenchmark_modelとしても提供されます。このツールは、Linux、Mac、組み込みデバイス、および Android デバイスのシェルコマンドラインから実行できます。
 
 #### バイナリをダウンロードまたはビルドする
 
 以下のリンクを使用して、ナイトリービルドのネイティブコマンドラインバイナリをダウンロードします。
 
-- [linux_x86-64](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/linux_x86-64_benchmark_model)
-- [linux_aarch64](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/linux_aarch64_benchmark_model)
-- [linux_arm](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/linux_arm_benchmark_model)
-- [android_aarch64](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_benchmark_model)
-- [android_arm](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_arm_benchmark_model)
+- linux_x86-64
+- linux_aarch64
+- linux_arm
+- android_aarch64
+- android_arm
 
-[Flex デリゲート](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/delegates/flex)を介して [TF 演算](https://www.tensorflow.org/lite/guide/ops_select)をサポートする ナイトリ―ビルドのバイナリは、以下のリンクをクリックしてください。
+Flex デリゲートを介して TF 演算をサポートする ナイトリ―ビルドのバイナリは、以下のリンクをクリックしてください。
 
-- [linux_x86-64](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/linux_x86-64_benchmark_model_plus_flex)
-- [linux_aarch64](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/linux_aarch64_benchmark_model_plus_flex)
-- [linux_arm](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/linux_arm_benchmark_model_plus_flex)
-- [android_aarch64](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_benchmark_model_plus_flex)
-- [android_arm](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_arm_benchmark_model_plus_flex)
+- linux_x86-64
+- linux_aarch64
+- linux_arm
+- android_aarch64
+- android_arm
 
-コンピュータの[ソース](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)からネイティブベンチマークバイナリをビルドすることもできます。
+To benchmark with [TensorFlow Lite Hexagon delegate](https://www.tensorflow.org/lite/performance/hexagon_delegate), we have also pre-built the required `libhexagon_interface.so` files (see [here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md) for details about this file). After downloading the file of the corresponding platform from the links below, please rename the file to `libhexagon_interface.so`.
+
+- linux_x86-64
+- linux_aarch64
+
+コンピュータのソースからネイティブベンチマークバイナリをビルドすることもできます。
 
 ```shell
 bazel build -c opt //tensorflow/lite/tools/benchmark:benchmark_model
 ```
 
-Android NDK ツールチェーンを使用してビルドするには、まずこの[ガイド](../guide/build_android#set_up_build_environment_without_docker)に従ってビルド環境をセットアップするか、この[ガイド](../guide/build_android#set_up_build_environment_using_docker)で説明されているように Docker イメージを使用する必要があります。
+Android NDK ツールチェーンを使用してビルドするには、まずこのガイドに従ってビルド環境をセットアップするか、このガイドで説明されているように Docker イメージを使用する必要があります。
 
 ```shell
 bazel build -c opt --config=android_arm64 \
   //tensorflow/lite/tools/benchmark:benchmark_model
 ```
 
-注意：ベンチマークのために Android デバイスでバイナリを直接プッシュして実行することも可能ですが、実際の Android アプリ内での実行と比較してパフォーマンスにわずかな（観察可能な）違いが生じる可能性があります。特に、Android のスケジューラーは、スレッドとプロセスの優先度に基づいて動作を調整します。これは、フォアグラウンドアクティビティ/アプリケーションと`adb shell ...`を介して実行される通常のバックグラウンドバイナリとの間で異なります。この調整された動作は、TensorFlow Lite でマルチスレッド CPU 実行を有効にする場合に最も顕著になります。したがって、パフォーマンス測定には Android ベンチマークアプリが推奨されます。
+注意：ベンチマークのために Android デバイスでバイナリを直接プッシュして実行することも可能ですが、実際の Android アプリ内での実行と比較してパフォーマンスにわずかな（観察可能な）違いが生じる可能性があります。特に、Android のスケジューラーは、スレッドとプロセスの優先度に基づいて動作を調整します。これは、フォアグラウンドアクティビティ/アプリケーションとadb shell ...を介して実行される通常のバックグラウンドバイナリとの間で異なります。この調整された動作は、TensorFlow Lite でマルチスレッド CPU 実行を有効にする場合に最も顕著になります。したがって、パフォーマンス測定には Android ベンチマークアプリが推奨されます。
 
 #### ベンチマークを実行する
 
@@ -125,29 +130,29 @@ path/to/downloaded_or_built/benchmark_model \
   --num_threads=4
 ```
 
-上記と同じ[パラメータのセット](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#parameters)をネイティブコマンドラインバイナリで使用できます。
+上記と同じパラメータのセットをネイティブコマンドラインバイナリで使用できます。
 
 #### モデル演算のプロファイリング
 
-ベンチマークモデルバイナリを使用すると、モデル演算のプロファイルを作成し、各演算子の実行時間を取得することもできます。これを実行するには、呼び出し中にフラグ`--enable_op_profiling=true`を`benchmark_model`に渡します。詳細は[こちら](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#profiling-model-operators)を参照してください。
+ベンチマークモデルバイナリを使用すると、モデル演算のプロファイルを作成し、各演算子の実行時間を取得することもできます。これを実行するには、呼び出し中にフラグ--enable_op_profiling=trueをbenchmark_modelに渡します。詳細はこちらを参照してください。
 
 ### 1回の実行で複数のパフォーマンスオプションを実行するためのネイティブベンチマークバイナリ
 
-また、1回の実行で[複数のパフォーマンスオプション](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#benchmark-multiple-performance-options-in-a-single-run)をベンチマークするために便利でシンプルな C++ バイナリが提供されています。このバイナリは、一度に1つのパフォーマンスオプションしかベンチマークできない前述のベンチマークツールに基づいて構築されています。これらは同一のビルド/インストール/実行プロセスを共有しますが、このバイナリの BUILD ターゲット名は`Benchmark_model_performance_options`で、複数の追加パラメータを取ります。このバイナリの重要なパラメータは次のとおりです。
+また、1回の実行で複数のパフォーマンスオプションをベンチマークするために便利でシンプルな C++ バイナリが提供されています。このバイナリは、一度に1つのパフォーマンスオプションしかベンチマークできない前述のベンチマークツールに基づいて構築されています。これらは同一のビルド/インストール/実行プロセスを共有しますが、このバイナリの BUILD ターゲット名はBenchmark_model_performance_optionsで、複数の追加パラメータを取ります。このバイナリの重要なパラメータは次のとおりです。
 
-`perf_options_list`: `string` (デフォルト='all') <br>ベンチマークする TFLite パフォーマンスオプションのコンマ区切りリスト。
+perf_options_list: string (デフォルト='all') ベンチマークする TFLite パフォーマンスオプションのコンマ区切りリスト。
 
 以下のリストから、このツール用にナイトリービルドのバイナリを取得できます。
 
-- [linux_x86-64](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/linux_x86-64_benchmark_model_performance_options)
-- [linux_aarch64](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/linux_aarch64_benchmark_model_performance_options)
-- [linux_arm](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/linux_arm_benchmark_model_performance_options)
-- [android_aarch64](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_benchmark_model_performance_options)
-- [android_arm](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_arm_benchmark_model_performance_options)
+- linux_x86-64
+- linux_aarch64
+- linux_arm
+- android_aarch64
+- android_arm
 
 ### iOS ベンチマークアプリ
 
-iOS デバイスでベンチマークを実行するには、[ソース](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark/ios)からアプリをビルドする必要があります。TensorFlow Lite モデルファイルをソースツリーの [benchmark_data](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark/ios/TFLiteBenchmark/TFLiteBenchmark/benchmark_data) ディレクトリに配置し、`Benchmark_params.json`ファイルを変更します。これらのファイルはアプリにパッケージ化され、アプリはディレクトリからデータを読み取ります。詳細については、[iOS ベンチマークアプリ](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark/ios)を参照してください。
+iOS デバイスでベンチマークを実行するには、ソースからアプリをビルドする必要があります。TensorFlow Lite モデルファイルをソースツリーの benchmark_data ディレクトリに配置し、Benchmark_params.jsonファイルを変更します。これらのファイルはアプリにパッケージ化され、アプリはディレクトリからデータを読み取ります。詳細については、iOS ベンチマークアプリを参照してください。
 
 ## 既知のモデルのパフォーマンスベンチマーク
 
@@ -155,11 +160,11 @@ iOS デバイスでベンチマークを実行するには、[ソース](https:/
 
 ### Android パフォーマンスベンチマーク
 
-これらのパフォーマンスベンチマーク数は、[ネイティブベンチマークバイナリ](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)を使用して生成されています。
+これらのパフォーマンスベンチマーク数は、ネイティブベンチマークバイナリを使用して生成されています。
 
-Android ベンチマークの場合、CPU アフィニティは、デバイスで多いコア数を使用して差異を減らすように設定されています（[詳細はこちら](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#reducing-variance-between-runs-on-android)を参照してください）。
+Android ベンチマークの場合、CPU アフィニティは、デバイスで多いコア数を使用して差異を減らすように設定されています（詳細はこちらを参照してください）。
 
-モデルがダウンロードされ、`/data/local/tmp/tflite_models`ディレクトリに解凍されたことが想定されます。ベンチマークバイナリは、[これらの指示](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#on-android)を使用して構築され、`/data/local/tmp`ディレクトリにあると想定されます。
+モデルがダウンロードされ、/data/local/tmp/tflite_modelsディレクトリに解凍されたことが想定されます。ベンチマークバイナリは、これらの指示を使用して構築され、/data/local/tmpディレクトリにあると想定されます。
 
 ベンチマークの実行：
 
@@ -171,7 +176,7 @@ adb shell /data/local/tmp/benchmark_model \
   --num_runs=50
 ```
 
-nnapi デリゲートで実行するには、`-use_nnapi = true`を設定します。GPU デリゲートで実行するには、`-use_gpu = true`を設定します。
+nnapi デリゲートで実行するには、-use_nnapi = trueを設定します。GPU デリゲートで実行するには、-use_gpu = trueを設定します。
 
 以下のパフォーマンス値は Android 10 で測定されています。
 
@@ -179,14 +184,14 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
   <thead>
     <tr>
       <th>モデル名</th>
-      <th>デバイス</th>
+      <th>Device </th>
       <th>CPU、4 スレッド</th>
       <th>GPU</th>
       <th>NNAPI</th>
     </tr>
   </thead>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>     </td>
+    <td rowspan="2">       Mobilenet_1.0_224(float)     </td>
     <td>Pixel 3</td>
     <td>23.9 ms</td>
     <td>6.45 ms</td>
@@ -199,33 +204,33 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
     <td>14.8 ms</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz">Mobilenet_1.0_224 (quant)</a>     </td>
+    <td rowspan="2">       Mobilenet_1.0_224 (quant)     </td>
     <td>Pixel 3</td>
     <td>13.4 ms</td>
-    <td>---</td>
+    <td>--- </td>
     <td>6.0 ms</td>
   </tr>
    <tr>
      <td>Pixel 4</td>
     <td>5.0 ms</td>
-    <td>---</td>
+    <td>--- </td>
     <td>3.2 ms</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/nasnet_mobile_2018_04_27.tgz">NASNet mobile</a>     </td>
+    <td rowspan="2">       NASNet mobile     </td>
     <td>Pixel 3</td>
     <td>56 ms</td>
-    <td>---</td>
+    <td>--- </td>
     <td>102 ms</td>
   </tr>
    <tr>
      <td>Pixel 4</td>
     <td>34.5 ms</td>
-    <td>---</td>
+    <td>--- </td>
     <td>99.0 ms</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/squeezenet_2018_04_27.tgz">SqueezeNet</a>     </td>
+    <td rowspan="2">       SqueezeNet     </td>
     <td>Pixel 3</td>
     <td>35.8 ms</td>
     <td>9.5 ms</td>
@@ -238,7 +243,7 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
     <td>19.0 ms</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_resnet_v2_2018_04_27.tgz">Inception_ResNet_V2</a>     </td>
+    <td rowspan="2">       Inception_ResNet_V2     </td>
     <td>Pixel 3</td>
     <td>422 ms</td>
     <td>99.8 ms</td>
@@ -251,7 +256,7 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
     <td>171.1 ms</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_v4_2018_04_27.tgz">Inception_V4</a>     </td>
+    <td rowspan="2">       Inception_V4     </td>
     <td>Pixel 3</td>
     <td>486 ms</td>
     <td>93 ms</td>
@@ -267,62 +272,64 @@ nnapi デリゲートで実行するには、`-use_nnapi = true`を設定しま�
 
 ### iOS パフォーマンスベンチマーク
 
-これらのパフォーマンスベンチマークの数値は、[iOS ベンチマークアプリ](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark/ios)を使用して生成されています。
+これらのパフォーマンスベンチマークの数値は、iOS ベンチマークアプリを使用して生成されています。
 
-iOS ベンチマークを実行するために、適切なモデルを含めるためにベンチマークアプリが変更され、`num_threads`を2に設定するために`benchmark_params.json`が変更されました。また、GPU デリゲートを使用するために、`"use_gpu" : "1"`および`"gpu_wait_type" : "aggressive"`オプションも`benchmark_params.json`に追加されました 。
+iOS ベンチマークを実行するために、適切なモデルを含めるためにベンチマークアプリが変更され、num_threadsを2に設定するためにbenchmark_params.jsonが変更されました。また、GPU デリゲートを使用するために、"use_gpu" : "1"および"gpu_wait_type" : "aggressive"オプションもbenchmark_params.jsonに追加されました 。
 
 <table>
   <thead>
     <tr>
       <th>モデル名</th>
-      <th>デバイス</th>
+      <th>Device </th>
       <th>CPU、2 スレッド</th>
       <th>GPU</th>
     </tr>
   </thead>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>     </td>
+    <td>       Mobilenet_1.0_224(float)     </td>
     <td>iPhone XS</td>
     <td>14.8 ms</td>
     <td>3.4 ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz)">Mobilenet_1.0_224 (quant)</a>     </td>
+    <td>       Mobilenet_1.0_224 (quant)     </td>
     <td>iPhone XS</td>
     <td>11 ms</td>
     <td>---</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/nasnet_mobile_2018_04_27.tgz">NASNet mobile</a>     </td>
+    <td>       NASNet mobile     </td>
     <td>iPhone XS</td>
     <td>30.4 ms</td>
     <td>---</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/squeezenet_2018_04_27.tgz">SqueezeNet</a>     </td>
+    <td>       SqueezeNet     </td>
     <td>iPhone XS</td>
     <td>21.1 ms</td>
     <td>15.5 ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_resnet_v2_2018_04_27.tgz">Inception_ResNet_V2</a>     </td>
+    <td>       Inception_ResNet_V2     </td>
     <td>iPhone XS</td>
     <td>261.1 ms</td>
     <td>45.7 ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_v4_2018_04_27.tgz">Inception_V4</a>     </td>
+    <td>       Inception_V4     </td>
     <td>iPhone XS</td>
     <td>309 ms</td>
     <td>54.4 ms</td>
   </tr>
  </table>
 
-## Android で TensorFlow Lite の内部をトレースする
+## Trace TensorFlow Lite internals
 
-注意：この機能は実験的なものであり、Android アプリがナイトリ―リリースの Tensorflow Lite ライブラリでビルドされている場合にのみ利用できます。v2.3 以前の安定版ライブラリはこれをサポートしていません。
+### Android で TensorFlow Lite の内部をトレースする
 
-Android アプリの TensorFlow Lite インタープリタからの内部イベントは、[Android トレースツール](https://developer.android.com/topic/performance/tracing)でキャプチャできます。これは Android [Trace](https://developer.android.com/reference/android/os/Trace) API と同じイベントであるため、Java/Kotlin コードからキャプチャされたイベントは TensorFlow Lite 内部イベントと共に表示されます。
+Note: This feature is available from Tensorflow Lite v2.4.
+
+Internal events from the TensorFlow Lite interpreter of an Android app can be captured by [Android tracing tools](https://developer.android.com/topic/performance/tracing). They are the same events with Android [Trace](https://developer.android.com/reference/android/os/Trace) API, so the captured events from Java/Kotlin code are seen together with TensorFlow Lite internal events.
 
 イベントの例は次のとおりです。
 
@@ -330,11 +337,11 @@ Android アプリの TensorFlow Lite インタープリタからの内部イベ�
 - デリゲートによるグラフの変更
 - テンソルの割り当て
 
-トレースをキャプチャするオプションは複数ありますが、本ガイドでは Android Studio CPU Profiler とシステムトレースアプリについて説明します。その他のオプションについては、[Perfetto コマンドラインツール](https://developer.android.com/studio/command-line/perfetto)または [Systrace コマンドラインツール](https://developer.android.com/topic/performance/tracing/command-line)を参照してください。
+トレースをキャプチャするオプションは複数ありますが、本ガイドでは Android Studio CPU Profiler とシステムトレースアプリについて説明します。その他のオプションについては、Perfetto コマンドラインツールまたは Systrace コマンドラインツールを参照してください。
 
-### Java コードにトレースイベントを追加する
+#### Java コードにトレースイベントを追加する
 
-これは、[画像分類](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android)サンプルアプリのコードスニペットです。TensorFlow Lite インタープリタは、`recognizeImage/runInference`セクションで実行されます。この手順はオプションですが、推論呼び出しが行われた場所を確認するのに役立ちます。
+これは、画像分類サンプルアプリのコードスニペットです。TensorFlow Lite インタープリタは、recognizeImage/runInferenceセクションで実行されます。この手順はオプションですが、推論呼び出しが行われた場所を確認するのに役立ちます。
 
 ```java
   Trace.beginSection("recognizeImage");
@@ -348,9 +355,9 @@ Android アプリの TensorFlow Lite インタープリタからの内部イベ�
 
 ```
 
-### TensorFlow Lite トレースを有効にする
+#### TensorFlow Lite トレースを有効にする
 
-TensorFlow Lite トレースを有効にするには、Android アプリを起動する前に、Android システムプロパティ`debug.tflite.tracing`を1に設定します。
+To enable TensorFlow Lite tracing, set the Android system property `debug.tflite.trace` to 1 before starting the Android app.
 
 ```shell
 adb shell setprop debug.tflite.trace 1
@@ -364,17 +371,17 @@ TensorFlow Lite インタープリタの初期化時にこのプロパティが�
 adb shell setprop debug.tflite.trace 0
 ```
 
-### Android Studio CPU Profiler
+#### Android Studio CPU Profiler
 
-以下の手順に従って、[Android Studio CPU Profiler](https://developer.android.com/studio/profile/cpu-profiler) でトレースをキャプチャします。
+以下の手順に従って、Android Studio CPU Profiler でトレースをキャプチャします。
 
-1. トップメニューから**実行&gt;プロファイル「アプリ」**を選択します。
+1. トップメニューから実行&gt;プロファイル「アプリ」を選択します。
 
 2. プロファイラーウィンドウが表示されたら、CPU タイムラインの任意の場所をクリックします。
 
 3. CPU プロファイリングモードから「システムコールのトレース」を選択します。
 
-    ![[システムコールのトレース]を選択します](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/performance/images/as_select_profiling_mode.png?raw=true)
+    ![Select 'Trace System Calls'](images/as_select_profiling_mode.png)
 
 4. 「記録」ボタンを押します。
 
@@ -382,17 +389,67 @@ adb shell setprop debug.tflite.trace 0
 
 6. トレース結果を調査します。
 
-    ![Android Studio トレース](images/as_traces.png)
+    ![Android Studio trace](images/as_traces.png)
 
 この例では、スレッド内のイベントの階層と各演算子の時間の統計、および、スレッド間のアプリ全体のデータフローを確認できます。
 
-### システムトレースアプリ
+#### システムトレースアプリ
 
-Android Studio を使用せずにトレースをキャプチャするには[システムトレースアプリ](https://developer.android.com/topic/performance/tracing/on-device)で詳しく説明されている手順に従います。
+Android Studio を使用せずにトレースをキャプチャするにはシステムトレースアプリで詳しく説明されている手順に従います。
 
-この例では、同じ TFLite イベントがキャプチャされ、Android デバイスのバージョンに応じて、Perfetto または Systrace 形式で保存されました。キャプチャされたトレースファイルは、[Perfetto UI](https://ui.perfetto.dev/#!/) で開くことができます。
+この例では、同じ TFLite イベントがキャプチャされ、Android デバイスのバージョンに応じて、Perfetto または Systrace 形式で保存されました。キャプチャされたトレースファイルは、Perfetto UI で開くことができます。
 
-![Perfetto トレース](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/performance/images/perfetto_traces.png?raw=true)
+![Perfetto trace](images/perfetto_traces.png)
+
+### Trace TensorFlow Lite internals in iOS
+
+Note: This feature is available from Tensorflow Lite v2.5.
+
+Internal events from the TensorFlow Lite interpreter of an iOS app can be captured by [Instruments](https://developer.apple.com/library/archive/documentation/ToolsLanguages/Conceptual/Xcode_Overview/MeasuringPerformance.html#//apple_ref/doc/uid/TP40010215-CH60-SW1) tool included with Xcode. They are the iOS [signpost](https://developer.apple.com/documentation/os/logging/recording_performance_data) events, so the captured events from Swift/Objective-C code are seen together with TensorFlow Lite internal events.
+
+イベントの例は次のとおりです。
+
+- 演算子の呼び出し
+- デリゲートによるグラフの変更
+- テンソルの割り当て
+
+#### TensorFlow Lite トレースを有効にする
+
+Set the environment variable `debug.tflite.trace` by following the steps below:
+
+1. Select **Product &gt; Scheme &gt; Edit Scheme...** from the top menus of Xcode.
+
+2. Click 'Profile' in the left pane.
+
+3. Deselect 'Use the Run action's arguments and environment variables' checkbox.
+
+4. Add `debug.tflite.trace` under 'Environment Variables' section.
+
+    ![Set environment variable](images/xcode_profile_environment.png)
+
+If you want to exclude TensorFlow Lite events when profiling the iOS app, disable tracing by removing the environment variable.
+
+#### XCode Instruments
+
+Capture traces by following the steps below:
+
+1. Select **Product &gt; Profile** from the top menus of Xcode.
+
+2. Click **Logging** among profiling templates when Instruments tool launches.
+
+3. Press 'Start' button.
+
+4. 「停止」ボタンを押します。
+
+5. Click 'os_signpost' to expand OS Logging subsystem items.
+
+6. Click 'org.tensorflow.lite' OS Logging subsystem.
+
+7. トレース結果を調査します。
+
+    ![Xcode Instruments trace](images/xcode_traces.png)
+
+In this example, you can see the hierarchy of events and statistics for each operator time.
 
 ### トレースデータの使用
 
