@@ -38,10 +38,10 @@ TensorFlow Lite は複数のデリゲートをサポートしており、各デ�
 **モデルタイプ** | **GPU** | **NNAPI** | **Hexagon** | **CoreML**
 --- | --- | --- | --- | ---
 単精度浮動小数点（32ビット） | 〇 | 〇 | ✕ | 〇
-[Post-training float16 quantization](post_training_float16_quant.ipynb) | 〇 | ✕ | ✕ | 〇
-[Post-training dynamic range quantization](post_training_quant.ipynb) | 〇 | 〇 | ✕ | ✕
-[Post-training integer quantization](post_training_integer_quant.ipynb) | 〇 | 〇 | 〇 | ✕
-[Quantization-aware training](http://www.tensorflow.org/model_optimization/guide/quantization/training) | 〇 | 〇 | 〇 | ✕
+トレーニング後の float16 量子化 | 〇 | ✕ | ✕ | 〇
+トレーニング後のダイナミックレンジ量子化 | 〇 | 〇 | ✕ | ✕
+トレーニング後の整数量子化 | 〇 | 〇 | 〇 | ✕
+量子化認識トレーニング | 〇 | 〇 | 〇 | ✕
 
 ### パフォーマンスの検証
 
