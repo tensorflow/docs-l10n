@@ -1,7 +1,7 @@
 # TFX Airflow のチュートリアル
 
-[![Python](https://img.shields.io/pypi/pyversions/tfx.svg?style=plastic)](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)
-[![Python](https://img.shields.io/pypi/pyversions/tfx.svg?style=plastic)](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)
+[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)![Python](https://img.shields.io/pypi/pyversions/tfx.svg?style=plastic)[](https://github.com/tensorflow/tfx)
+[![Python](https://badge.fury.io/py/tfx.svg)](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)
 
 ## はじめに
 
@@ -19,13 +19,13 @@
 
 典型的な機械学習開発プロセスに従って、段階的に作業し、パイプラインを作成します。手順は次のとおりです。
 
-1. [環境をセットアップする](#step_1_setup_your_environment)
-2. [最初のパイプラインスケルトンを表示する](#step_2_bring_up_initial_pipeline_skeleton)
-3. [データを調査する](#step_3_dive_into_your_data)
+1. 環境をセットアップする
+2. 最初のパイプラインスケルトンを表示する
+3. データを調査する
 4. 特徴量エンジニアリング
-5. [トレーニング](#step_5_training)
-6. [モデルのパフォーマンスの分析](#step_6_analyzing_model_performance)
-7. [実稼働の準備完了](#step_7_ready_for_production)
+5. [Training](#step_5_training)
+6. モデルのパフォーマンスの分析
+7. 実稼働の準備完了
 
 ## 前提条件
 
