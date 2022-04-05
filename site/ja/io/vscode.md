@@ -20,7 +20,7 @@ bazel build -s --verbose_failures --compilation_mode dbg //tensorflow_io/...
 
 Ubuntu で開発環境をセットアップする方法については、プロジェクトの [README](https://github.com/tensorflow/io#ubuntu-18042004) ファイルをご覧ください。上記の --compilation_mode dbg フラグは、生成されるバイナリにデバッグシンボルを含むことを示します。コマンドラインからプロジェクトをコンパイルできるようになったら、同じコマンドを VSCode から呼び出せるように構成することができます。
 
-表示 ->コマンド パレット（**Ctrl+Shift+P**）を開き、"Tasks: Configure Build Task" と入力し始めます。初めてこれを行う場合、エディタから tasks.json ファイルを作成するように提案されます。これを作成したら、次の json を貼り付けます。
+表示 -&gt;コマンド パレット（**Ctrl+Shift+P**）を開き、"Tasks: Configure Build Task" と入力し始めます。初めてこれを行う場合、エディタから tasks.json ファイルを作成するように提案されます。これを作成したら、次の json を貼り付けます。
 
 ```jsonc
 {
@@ -95,7 +95,7 @@ VSCode には、GDB デバッガサポートもあります。ブレイクポイ
 }
 ```
 
-すべてが正しく構成されると、*実行 -> デバッグの開始*（**F5**）または*実行 -> デバッグなしで実行する*（**Ctrl + F5**）を使用できるようになり、コードがデバッガで実行されるようになります。
+すべてが正しく構成されると、*実行 -&gt; デバッグの開始*（**F5**）または*実行 -&gt; デバッグなしで実行する*（**Ctrl + F5**）を使用できるようになり、コードがデバッガで実行されるようになります。
 
 ![VSCode debugger](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/io/images/vscode_debugger.png)
 
@@ -109,13 +109,13 @@ skip -gfi /usr/include/c++/*
 
 ## ファイルの書式を設定する
 
-C++ または Python ファイルは、*右クリック -> ドキュメントのフォーマット*（**Ctrl + Shift + I**）を使ってフォーマットし直すことはできますが、VSCode が使用するスタイル規則は異なります。幸いにも、この変更は簡単に行えます。
+C++ または Python ファイルは、*右クリック -&gt; ドキュメントのフォーマット*（**Ctrl + Shift + I**）を使ってフォーマットし直すことはできますが、VSCode が使用するスタイル規則は異なります。幸いにも、この変更は簡単に行えます。
 
 Python の書式については、 https://donjayamanne.github.io/pythonVSCodeDocs/docs/formatting/ をご覧ください。
 
 C++ の書式については、次の操作を行います。
 
-- *環境設定 -> 設定* に移動します。
+- *環境設定 -&gt; 設定* に移動します。
 - 「C_Cpp.clang_format_fallbackStyle」を検索します。
 - 次の内容を追加して、`file:setting.json` ファイルを直接変更します。
 
