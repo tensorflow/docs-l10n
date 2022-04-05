@@ -377,17 +377,17 @@ $ python zero_out_op_test.py
 
 基本的な（ある程度の制限が付いた）演算子のビルド方法と実装について理解したので、演算子に通常組み込む必要のある、より複雑な機能を確認しましょう。
 
-- [Conditional checks and validation](#conditional-checks-and-validation)
-- [Op registration](#op-registration)
-    - [Attrs](#attrs)
-    - [Attr types](#attr-types)
+- 条件チェックと検証
+- 演算子の登録
+    - 属性
+    - 属性のタイプ
     - [ポリモーフィズム](#polymorphism)
     - [入力と出力](#inputs-and-outputs)
-    - [Backwards compatibility](#backwards-compatibility)
+    - 下位互換性
 - [GPU サポート](#gpu-support)
-    - [Compiling the kernel for the GPU device](#compiling-the-kernel-for-the-gpu-device)
-- [Implement the gradient in Python](#implement-the-gradient-in-python)
-- [Shape functions in C++](#shape-functions-in-c)
+    - GPU デバイス向けのカーネルのコンパイル
+- Python での勾配の実装
+- C++ での形状関数
 
 ### 条件チェックと検証
 
