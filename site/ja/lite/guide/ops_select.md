@@ -44,7 +44,7 @@ dependencies {
 
 依存関係を追加したら、グラフの TensorFlow 演算子を処理するために必要なデリゲートが、それを必要とするグラフに自動的にインストールされます。
 
-*注意*: TensorFlow 演算子の依存関係は比較的に大きいため、`abiFilters` をセットアップして、`.gradle` ファイルの不要な x86 ABI を除外するとよいでしょう。
+*注意*: TensorFlow 演算子の依存関係は比較的に大きいため、`abiFilters`をセットアップして、`.gradle`ファイルの不要な x86 ABI を除外することを推薦します。
 
 ```build
 android {
@@ -66,7 +66,7 @@ sh tensorflow/lite/tools/build_aar.sh \
   --target_archs=x86,x86_64,arm64-v8a,armeabi-v7a
 ```
 
-上記のコードは、TensorFlow Lite のビルトインとカスタム演算子用に、AAR ファイル `bazel-bin/tmp/tensorflow-lite.aar` を生成します。稼働中のビルド環境がない場合は、[Docker を使って上記のファイルを作成](../guide/reduce_binary_size.md#selectively_build_tensorflow_lite_with_docker)することも可能です。
+上記のコードは、TensorFlow Lite の組み込み演算子とカスタム演算子用に、AAR ファイル`bazel-bin/tmp/tensorflow-lite.aar`を生成します。稼働中のビルド環境がない場合は、<a>Docker を使って上記のファイルを作成</a>することも可能です。
 
 生成したら、AAR ファイルを直接プロジェクトにインポートするか、カスタム AAR ファイルをローカルの Maven リポジトリに公開することが可能です。
 
@@ -89,7 +89,7 @@ allprojects {
         mavenCentral()
         maven {  // Only for snapshot artifacts
             name 'ossrh-snapshot'
-            url 'http://oss.sonatype.org/content/repositories/snapshots'
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
         }
         mavenLocal()
     }
@@ -105,7 +105,7 @@ dependencies {
 
 #### CocoaPods を使用する
 
-`armv7` および `arm64` の構築済みの セレクト TF 演算 CocoaPods をナイトリーで提供しており、`TensorFlowLiteSwift` または `TensorFlowLiteObjC` CocoaPods とともに利用することができます。
+`armv7`および`arm64`の構築済みの Select TensorFlow 演算子 CocoaPods はナイトリーで提供されています。これらは、`TensorFlowLiteSwift`または`TensorFlowLiteObjC`CocoaPods と合わせて使用できます。
 
 *注*: `x86_64`シミュレーターでセレクト TF 演算を使用する必要がある場合は、セレクト演算フレームワークを自分で構築できます 詳細については、[Bazel を使用する、および、Xcode](#using_bazel_xcode) のセクションを参照してください。
 
@@ -130,7 +130,7 @@ dependencies {
 
 #### Bazel + Xcode を使用する
 
-iOS 用のセレクト TensorFlow 演算子を使った TensorFlow Lite は Bazel を使って構築できます。まず、[iOS の構築手順](build_ios.md)に従って、 Bazel ワークスペースと `.bazelrc` ファイルを正しく構成します。
+iOS 用の Select TensorFlow 演算子を使った TensorFlow Lite は Bazel を使って構築できます。まず、[iOS の構築手順](build_ios.md)に従って、Bazel ワークスペースと`.bazelrc`ファイルを正しく構成します。
 
 iOS サポートを有効化したワークスペースを構成したら、次のコマンドを使用して、セレクト TF 演算子のアドオンフレームワークを構築します。これは、通常の `TensorFlowLiteC.framework` の上に追加されるフレームワークです。セレクト TF 演算子フレームワークは、`i386` アーキテクチャには構築できまないため、`i386` を除くターゲットアーキテクチャのｎリストを明示的に指定する必要があります。
 
@@ -141,20 +141,31 @@ bazel build -c opt --config=ios --ios_multi_cpus=armv7,arm64,x86_64 \
 
 これにより、`bazel-bin/tensorflow/lite/ios/`ディレクトリにフレームワークが生成されます。iOS 構築ガイドの [Xcode プロジェクト設定](./build_ios.md#modify_xcode_project_settings_directly)セクションに説明された手順と同様の手順を実行し、この新しいフレームワークを Xcode プロジェクトに追加することができます。
 
-フレームワークをアプリのプロジェクトに追加したら、セレクト TF 演算子フレームワークを強制読み込みできるように、追加のリンカーフラグをアプリのプロジェクトに指定する必要があります。Xcode プロジェクトで、`Build Settings` -&gt; `Other Linker Flags` に移動し、次を追加します。
+フレームワークをアプリのプロジェクトに追加したら、Select TF 演算子フレームワークを強制読み込みできるように、追加のリンカーフラグをアプリのプロジェクトに指定する必要があります。Xcode プロジェクトで、`Build Settings` -&gt; `Other Linker Flags`に移動し、次を追加します。
 
 ```text
 -force_load <path/to/your/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps>
 ```
 
-### C++
+### C/C++
 
-bazel パイプラインを使用して TensorFlow Lite ライブラリを構築する際に、追加の TensorFlow 演算子ライブラリを含めて次のように有効化することができます。
+If you're using Bazel or [CMake](https://www.tensorflow.org/lite/guide/build_cmake) to build TensorFlow Lite interpreter, you can enable Flex delegate by linking a TensorFlow Lite Flex delegate shared library. You can build it with Bazel as the following command.
 
-- 必要に応じて、`--config=monolithic` ビルドフラグを追加して、モノリシックビルドを有効化します。
-- 次のように、TensorFlow 演算子デリゲートライブラリの依存関係をビルド依存関係に追加します。 `tensorflow/lite/delegates/flex:delegate`
+```
+bazel build -c opt --config=monolithic tensorflow/lite/delegates/flex:tensorflowlite_flex
+```
 
-デリゲートがクライアントライブラリにリンクされている限り、必要な `TfLiteDelegate` は、ランタイム時にインタプリタを作成するときに自動的にインストールされます。通常ほかのデリゲートタイプでも必要とされるため、明示的にデリゲートインスタンスをインストールする必要はありません。
+This command generates the following shared library in `bazel-bin/tensorflow/lite/delegates/flex`.
+
+Platform | Library name
+--- | ---
+Linux | libtensorflowlite_flex.so
+macOS | libtensorflowlite_flex.dylib
+Windows | tensorflowlite_flex.dll
+
+Note that the necessary `TfLiteDelegate` will be installed automatically when creating the interpreter at runtime as long as the shared library is linked. It is not necessary to explicitly install the delegate instance as is typically required with other delegate types.
+
+**Note:** This feature is available since version 2.7.
 
 ### Python
 
