@@ -6,20 +6,21 @@
 
 #### TensorFlow から TensorFlow Lite への変換では、どの形式がサポートされていますか？
 
-TensorFlow Lite コンバータは、次の形式をサポートしています。
+The supported formats are listed [here](../convert/index.md#python_api)
 
-- SavedModels: [TFLiteConverter.from_saved_model](../convert/python_api.md#exporting_a_savedmodel_)
-- [freeze_graph.py](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/tools/freeze_graph.py) により生成された Frozen GraphDefs: [TFLiteConverter.from_frozen_graph](../convert/python_api.md#exporting_a_graphdef_from_file_)
-- tf.keras HDF5 モデル: [TFLiteConverter.from_keras_model_file](../convert/python_api.md#exporting_a_tfkeras_file_)
-- tf.Session: [TFLiteConverter.from_session](../convert/python_api.md#exporting_a_graphdef_from_tfsession_)
+#### TensorFlow Lite に実装されていない演算があるのはなぜですか？
 
-互換性の問題を早期に検出するために、[Python コンバータ](../convert/python_api.md)をモデルパイプラインに統合することをお勧めします。
+In order to keep TFLite lightweight, only certain TF operators (listed in the [allowlist](op_select_allowlist.md)) are supported in TFLite.
 
 #### モデルを変換できない場合があるのはなぜですか？
 
-TensorFlow Lite の演算の数は TensorFlow の演算の数よりも少ないため、一部の推論モデルは変換できない場合があります。実装されていない演算については、[演算子のサポートがない場合](faq.md#why-are-some-operations-not-implemented-in-tensorflow-lite)に関する質問をご覧ください。サポートされていない演算子には、埋め込みと LSTM/RNN が含まれます。LSTM/RNN を備えたモデルの場合、試験的な API である [OpHint](https://www.tensorflow.org/api_docs/python/tf/lite/OpHint) を試して変換してみることもできます。現在、制御フロー演算 (スイッチ、マージなど) を備えたモデルは変換できませんが、Tensorflow Lite では制御フローのサポートの追加に取り組んでいます。[GitHub 課題](https://github.com/tensorflow/tensorflow/issues/28485)をご覧ください。
+Since the number of TensorFlow Lite operations is smaller than TensorFlow's, some models may not be able to convert. Some common errors are listed [here](../convert/index.md#conversion-errors).
 
 サポートされていない演算や制御フロー演算に関連しない変換の問題については、[GitHub 課題](https://github.com/tensorflow/tensorflow/issues?q=label%3Acomp%3Alite+)を検索するか、[新しい課題](https://github.com/tensorflow/tensorflow/issues)を提出してください。
+
+#### TensorFlow Lite モデルが元の TensorFlow モデルと同じように動作することをどのようにテストしますか？
+
+The best way to test is to compare the outputs of the TensorFlow and the TensorFlow Lite models for the same inputs (test data or random inputs) as shown [here](inference.md#load-and-run-a-model-in-python).
 
 #### GraphDef プロトコルバッファーの入力/出力を決定するにはどうすればよいですか？
 
@@ -47,26 +48,12 @@ python -m tensorflow.lite.tools.visualize model.tflite visualized_model.html
 
 それ以外の場合は、Bazel でこのスクリプトを実行できます
 
-- [TensorFlow レポジトリをクローンする](https://www.tensorflow.org/install/source)
+- [Clone the TensorFlow repository](https://www.tensorflow.org/install/source)
 - `visualize.py`スクリプトを Bazel で実行する
 
 ```shell
 bazel run //tensorflow/lite/tools:visualize model.tflite visualized_model.html
 ```
-
-## モデルと演算
-
-#### TensorFlow Lite に実装されていない演算があるのはなぜですか？
-
-TensorFlow Lite を軽量に保つために、コンバータでは特定の演算のみが使用されています。TensorFlow Lite で現在サポートされている演算のリストは[互換性ガイド](ops_compatibility.md)で提供されています。
-
-特定の演算 (または同等の演算) がリストに表示されていない場合は、その演算が優先されていない可能性があります。チームは、GitHub [課題 #21526](https://github.com/tensorflow/tensorflow/issues/21526) の新しい演算のリクエストを追跡します。リクエストがまだ対応されていない場合は、コメントを書いてください。
-
-その間、[カスタム演算子](ops_custom.md)を実装するか、サポートされている演算子のみを含む別のモデルを使用してみてください。バイナリサイズが制約にならない場合は、TensorFlow Lite の [Select TensorFlow 演算子](ops_select.md)を使用してみてください。
-
-#### TensorFlow Lite モデルが元の TensorFlow モデルと同じように動作することをどのようにテストしますか？
-
-TensorFlow Lite モデルの動作をテストする最良の方法は、テストデータを含む API を使用し、TensorFlow で同じ入力を使用して出力を比較することです。インタプリタに送るランダムデータを生成する [Python インタプリタの例](../convert/python_api.md)をご覧ください。
 
 ## 最適化
 
