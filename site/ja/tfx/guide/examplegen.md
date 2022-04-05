@@ -13,14 +13,14 @@ ExampleGen は [TensorFlow Data Validation](tfdv.md) ライブラリを利用す
 
 現在、標準的な TFX のインストールには、以下のデータソースと形式をサポートする完全な ExampleGen コンポーネントが含まれています。
 
-- [CSV](https://github.com/tensorflow/tfx/tree/master/tfx/components/example_gen/csv_example_gen)
-- [tf.Record](https://github.com/tensorflow/tfx/tree/master/tfx/components/example_gen/import_example_gen)
-- [BigQuery](https://github.com/tensorflow/tfx/tree/master/tfx/extensions/google_cloud_big_query/example_gen)
+- CSV
+- tf.Record
+- BigQuery
 
 以下のデータソースと形式をサポートする ExampleGen コンポーネントの開発を可能にするカスタム Executor も利用できます。
 
-- [Avro](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/custom_executors/avro_executor.py)
-- [Parquet](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/custom_executors/parquet_executor.py)
+- Avro
+- Parquet
 
 カスタム Executor の使用方法と開発方法についての詳細は、ソースコードに含まれる使用例と[こちらのディスカッション](/tfx/guide/examplegen#custom_examplegen)をご覧ください。
 
@@ -203,14 +203,11 @@ example_gen = CsvExampleGen(input_base='/tmp', input_config=input)
 また、以下のような入力構成があるとします。
 
 ```python
-splits {
-  name: 'train'
-  pattern: '{YYYY}-{MM}-{DD}/train/*'
-}
-splits {
-  name: 'eval'
-  pattern: '{YYYY}-{MM}-{DD}/eval/*'
-}
+from tfx.examples.custom_components.presto_example_gen.proto import presto_config_pb2
+from tfx.examples.custom_components.presto_example_gen.presto_component.component import PrestoExampleGen
+
+presto_config = presto_config_pb2.PrestoConnConfig(host='localhost', port=8080)
+example_gen = PrestoExampleGen(presto_config, query='SELECT * FROM chicago_taxi_trips')
 ```
 
 パイプラインをトリガーすると、次のように処理されます。
@@ -491,11 +488,11 @@ Trainer = Trainer(
 
 デフォルトでは、'eval' Split で計算されたメトリクスを提供します。
 
-カスタム Split で評価統計を計算するには、Evaluator コンポーネントの `example_splits` を設定します。以下に例を示します。
+To compute evaluation statistics on custom splits, set the `example_splits` for Evaluator component. For example:
 
 ```python
 # Compute metrics on the 'eval1' split and the 'eval2' split.
-Trainer = Evaluator(
+evaluator = Evaluator(
       examples=example_gen.outputs['examples'],
       model=trainer.outputs['model'],
       example_splits=['eval1', 'eval2'])
