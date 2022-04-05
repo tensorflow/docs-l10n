@@ -2,7 +2,7 @@
 
 物体検出器は、既知の物体セットのどれが存在するかを識別し、特定の画像またはビデオストリーム内のそれらの位置に関する情報を提供できます。物体検出器は、物体の複数のクラスの存在と位置を検出するようにトレーニングされています。たとえば、さまざまな果物を含む画像でモデルをトレーニングし、それらが表す果物のクラスを指定する*ラベル* (リンゴ、バナナ、イチゴなど) と各物体が画像のどこに現れるかを特定するデータを提供できます。物体検出器の詳細については、[物体検出の概要](../../models/object_detection/overview.md)をご覧ください。
 
-Task Library `ObjectDetector` API を使用して、カスタム物体検出器または事前トレーニング済みの検出器をモデルアプリにデプロイします。
+Task Library `ObjectDetector` API を使用して、カスタム物体検出器または事前トレーニング済みの検出器をモバイルアプリにデプロイします。
 
 ## ObjectDetector API の主な機能
 
@@ -12,7 +12,7 @@ Task Library `ObjectDetector` API を使用して、カスタム物体検出器�
 
 - 結果をフィルタリングするスコアしきい値。
 
-- Top-k 分類結果。
+- Top-k 検出結果。
 
 - 許可リストと拒否リストのラベルを付け。
 
@@ -23,6 +23,8 @@ Task Library `ObjectDetector` API を使用して、カスタム物体検出器�
 - [TensorFlow Hub の事前トレーニング済み物体検出モデル](https://tfhub.dev/tensorflow/collections/lite/task-library/object-detector/1)。
 
 - [AutoML Vision Edge 物体検出](https://cloud.google.com/vision/automl/object-detection/docs)によって作成されたモデル。
+
+- [物体検出器向け TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) により作成されたモデル。
 
 - [モデルの互換性要件](#model-compatibility-requirements)を満たすカスタムモデル。
 
@@ -48,17 +50,27 @@ android {
 dependencies {
     // Other dependencies
 
-    // Import the Task Vision Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.1.0'
+    // Import the Task Vision Library dependency (NNAPI is included)
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.0'
+    // Import the GPU delegate plugin Library for GPU inference
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.3.0'
 }
 ```
+
+注意：Android Gradle プラグインのバージョン 4.1 以降、.tflite はデフォルトで noCompress リストに追加され、上記の aaptOptions は不要になりました。
 
 ### ステップ 2: モデルを使用する
 
 ```java
 // Initialization
-ObjectDetectorOptions options = ObjectDetectorOptions.builder().setMaxResults(1).build();
-ObjectDetector objectDetector = ObjectDetector.createFromFileAndOptions(context, modelFile, options);
+ObjectDetectorOptions options =
+    ObjectDetectorOptions.builder()
+        .setBaseOptions(BaseOptions.builder().useGpu().build())
+        .setMaxResults(1)
+        .build();
+ObjectDetector objectDetector =
+    ObjectDetector.createFromFileAndOptions(
+        context, modelFile, options);
 
 // Run inference
 List<Detection> results = objectDetector.detect(image);
@@ -68,12 +80,9 @@ List<Detection> results = objectDetector.detect(image);
 
 ## C++ で推論を実行する
 
-注: C++ Task Library では、使いやすさを向上するために構築済みのバイナリを提供したり、ユーザーフレンドリーなワークフローを作成してソースコードから構築できるようしています。C++ API は変更される可能性があります。
-
 ```c++
-// Initialization
 ObjectDetectorOptions options;
-options.mutable_model_file_with_metadata()->set_file_name(model_file);
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
 std::unique_ptr<ObjectDetector> object_detector = ObjectDetector::CreateFromOptions(options).value();
 
 // Run inference
@@ -112,7 +121,7 @@ Results:
 
 ## モデルの互換性要件
 
-`ObjectDetector` APIでは、[ TFLite モデルメタデータ](../../convert/metadata.md)を持つ TFLite モデル が必要です。
+`ObjectDetector` API は、必須の [TFLite モデル メタデータ](../../convert/metadata.md)を持つ TFLite モデルを想定しています。[TensorFlow Lite Metadata Writer API](../../convert/metadata_writer_tutorial.ipynb#object_detectors) を使用して物体検出器のメタデータを作成する例をご覧ください。
 
 互換性のある物体検出モデルは、次の要件を満たす必要があります。
 
@@ -133,7 +142,7 @@ Results:
     - クラステンソル (kTfLiteFloat32)
 
         - サイズ`[1 x num_results]`のテンソル。各値はクラスの整数インデックスを表します。
-        - TENSOR_AXIS_LABELS 型の AssociatedFile ラベルマップ (オプションですが推薦されます)。1 行に 1 つのラベルが含まれます。最初の AssociatedFile (存在する場合) は、結果の`class_name`フィールドの入力のために使用されます。`display_name`フィールドは、AssociatedFile (存在する場合) から入力されます。そのロケールは、作成時に使用される`ObjectDetectorOptions`の`display_names_locale`フィールドと一致します（デフォルトでは「en (英語)」）。これらのいずれも使用できない場合、結果の<code>index</code>フィールドのみが入力されます。
+        - optional (but recommended) label map(s) can be attached as AssociatedFile-s with type TENSOR_VALUE_LABELS, containing one label per line. See the [example label file](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/python/tests/testdata/object_detector/labelmap.txt). The first such AssociatedFile (if any) is used to fill the `class_name` field of the results. The `display_name` field is filled from the AssociatedFile (if any) whose locale matches the `display_names_locale` field of the `ObjectDetectorOptions` used at creation time ("en" by default, i.e. English). If none of these are available, only the `index` field of the results will be filled.
 
     - スコアテンソル (kTfLiteFloat32)
 
