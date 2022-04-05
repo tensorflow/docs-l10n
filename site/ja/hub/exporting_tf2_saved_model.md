@@ -2,7 +2,7 @@
 
 # SavedModel をエクスポートする
 
-This page describes the details of exporting (saving) a model from a TensorFlow program to the [SavedModel format of TensorFlow 2](https://www.tensorflow.org/guide/saved_model). This format is the recommended way to share pre-trained models and model pieces on TensorFlow Hub. It replaces the older [TF1 Hub format](tf1_hub_module.md) and comes with a new set of APIs. You can find more information on exporting the TF1 Hub format models in [TF1 Hub format export](exporting_hub_format.md). You can find details on how to compress the SavedModel for sharing it on TensorFlow Hub [here](writing_documentation.md#model-specific_asset_content).
+このページでは、TensorFlow プログラムのモデルを [TensorFlow 2 の SavedModel 形式](https://www.tensorflow.org/guide/saved_model)でエクスポートする方法について説明します。この形式は、TensorFlow Hub 上で事前トレーニングされたモデルとモデルピースの共有に推奨される方法です。これは以前の [TF1 Hub 形式](tf1_hub_module.md)に置き換わるもので、新しい API セットが付属しています。TF1 Hub 形式モデルのエクスポートに関する詳細は、[TF1 Hub 形式のエクスポート](exporting_hub_format.md)をご覧ください。TensorFlow Hub で共有するために  SavedModel を圧縮する方法については、[こちら](writing_documentation.md#model-specific_asset_content)をご覧ください。
 
 一部のモデル構築ツールキットでは、これを行うためのツールがすでに提供されています（[TensorFlow Model Garden](#tensorflow-model-garden) について以下をご覧ください）。
 
@@ -35,7 +35,7 @@ piece_to_share = tf.keras.Model(sharing_input, sharing_output)
 piece_to_share.save(..., include_optimizer=False)
 ```
 
-[TensorFlow Models](https://github.com/tensorflow/models) on GitHub uses the former approach for BERT (see [nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py), note the split between `core_model` for export and the `pretrainer` for restoring the checkpoint) and the the latter approach for ResNet (see [legacy/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/legacy/image_classification/resnet/tfhub_export.py)).
+[TensorFlow Models](https://github.com/tensorflow/models) は、BERT に前者のアプローチを使用しています（[nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py) をご覧の上、エクスポート用の `core_model` とチェックポイント復元用の `pretrainer` で分割されているところに注意してください）。また、ResNet には後者のアプローチを使用しています（[legacy/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/legacy/image_classification/resnet/tfhub_export.py) をご覧ください）。
 
 ## 低レベル TensorFlow から保存する
 
