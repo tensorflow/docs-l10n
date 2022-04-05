@@ -8,7 +8,7 @@ TensorFlow Lite Core ML デリゲートは、[Core ML フレームワーク](htt
 
 **サポートする iOS のバージョンとデバイス:**
 
-- iOS 12 以降。古い iOS バージョンの場合、Core ML デリゲートは自動的に CPU にフォールバックします。
+- iOS 12 and later. In the older iOS versions, Core ML delegate will automatically fallback to CPU.
 - デフォルトでは、Core ML デリゲートは A12 SoC 以降のデバイス（iPhone Xs 以降）でのみ有効で、Neural Engine（ニューラルエンジン）を推論の高速化に使用します。古いデバイスで Core ML デリゲートを使用する場合は、[ベストプラクティス](#best-practices)を参照してください。
 
 **サポートするモデル**
@@ -213,7 +213,7 @@ iOS 13 は Core ML 3 をサポートしていますが、Core ML 2 のモデル�
 Core ML デリゲートがサポートする演算子は以下の通りです。
 
 - Add
-    - 特定の形状に限りブロードキャストが可能です。Core ML のテンソルレイアウトでは、次のテンソル形状をブロードキャストできます。`[B, C, H, W]`、`[B, C, 1, 1]`、`[B, 1, H, W]`、 `[B, 1, 1, 1]`。
+    - Only certain shapes are broadcastable. In Core ML tensor layout, following tensor shapes are broadcastable. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
 - AveragePool2D
 - Concat
     - 連結はチャンネル軸に沿って行う必要があります。
@@ -223,14 +223,14 @@ Core ML デリゲートがサポートする演算子は以下の通りです。
     - 重みやバイアスは定数である必要があります。
 - FullyConnected（別名 Dense または InnerProduct）
     - 重みやバイアスは（存在する場合）定数である必要があります。
-    - 単一バッチケースのみをサポートします。入力次元は、最後の次元以外は 1 である必要があります。
+    - Only supports single-batch case. Input dimensions should be 1, except the last dimension.
 - Hardswish
 - Logistic（別名 Sigmoid）
 - MaxPool2D
 - MirrorPad
-    -  `REFLECT`モードの 4 次元入力のみをサポートします。パディングは定数である必要があり、H 次元と W 次元にのみ許可されます。
+    - `REFLECT`モードの 4 次元入力のみをサポートします。パディングは定数である必要があり、H 次元と W 次元にのみ許可されます。
 - Mul
-    - 特定の形状に限りブロードキャストが可能です。Core ML のテンソルレイアウトでは、次のテンソル形状をブロードキャストできます。`[B, C, H, W]`、`[B, C, 1, 1]`、`[B, 1, H, W]`、 `[B, 1, 1, 1]`。
+    - Only certain shapes are broadcastable. In Core ML tensor layout, following tensor shapes are broadcastable. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
 - Pad および PadV2
     - 4 次元入力のみをサポートします。パディングは定数である必要があり、H 次元と W 次元にのみ許可されます。
 - Relu
@@ -246,21 +246,21 @@ Core ML デリゲートがサポートする演算子は以下の通りです。
 
 ## フィードバック
 
-問題などが生じた場合は、[GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) の課題を提出し、再現に必要なすべての詳細を記載してください。
+For issues, please create a [GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) issue with all the necessary details to reproduce.
 
 ## よくある質問
 
-- サポートされていない演算子がグラフに含まれている場合、CoreML デリゲートは CPU へのフォールバックをサポートしますか？
+- Does CoreML delegate support fallback to CPU if a graph contains unsupported ops?
     - はい
 - CoreML デリゲートは iOS Simulator で動作しますか？
-    - はい。ライブラリには x86 と x86_64 ターゲットが含まれているのでシミュレータ上で実行できますが、パフォーマンスが CPU より向上することはありません。
+    - Yes. The library includes x86 and x86_64 targets so it can run on a simulator, but you will not see performance boost over CPU.
 - TensorFlow Lite と CoreML デリゲートは MacOS をサポートしていますか？
     - TensorFlow Lite は iOS のみでテストを行っており、MacOS ではテストしていません。
 - カスタムの TensorFlow Lite 演算子はサポートされますか？
-    - いいえ、CoreML デリゲートはカスタム演算子をサポートしていないため、CPU にフォールバックします。
+    - No, CoreML delegate does not support custom ops and they will fallback to CPU.
 
 ## API
 
 - [Core ML delegate Swift API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/swift/Sources/CoreMLDelegate.swift)
 - [Core ML delegate C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.h)
-    - これは Objective-C コードに使用可能です。
+    - This can be used for Objective-C codes. ~~~
