@@ -92,9 +92,9 @@ dependencies {
 
 To use nightly snapshots, make sure that you have added [Sonatype snapshot repository](./build_android#use_nightly_snapshots).
 
-この AAR には、すべての [Android ABI](https://developer.android.com/ndk/guides/abis) のバイナリが含まれています。サポートする必要のある ABI のみを含めることで、アプリケーションのバイナリのサイズを削減できます。
+NDK でアプリをビルドする場合、C++ で TFLite を使用する方法が 2 つあります。
 
-ほとんどの開発者には、`x86`、`x86_64`、および`arm32` ABI を省略することをお勧めします。これは、次の Gradle 構成を使って実現できます。この構成には、最新のほとんどの Android デバイスに対応する `armeabi-v7a` と `arm64-v8a` のみが含まれています。
+これは*推薦される*アプローチです。[JCenter でホストされている TensorFlow Lite AAR ](https://bintray.com/google/tensorflow/tensorflow-lite) をダウンロードし、名前を `tensorflow-lite-*.zip` に変更して、解凍します。`headers/tensorflow/lite/` および `headers/tensorflow/lite/c/` フォルダに 4 つのヘッダーファイルを含め、NDK プロジェクトの `jni/` フォルダに関連する `libtensorflowlite_jni.so` 動的ライブラリを含める必要があります。
 
 ```build
 android {
@@ -106,11 +106,11 @@ android {
 }
 ```
 
-`abiFilters` の詳細については、Android Gradle ドキュメントの [`NdkOptions`](https://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.NdkOptions.html) を参照してください。
+`c_api.h` ヘッダーファイルには、TFLite C API の使用に関する基本的なドキュメントが含まれています。
 
 ## C++ を使用して Android アプリを構築する
 
-NDK でアプリをビルドする場合、C++ で TFLite を使用する方法が 2 つあります。
+C++ API を介して TFLite を使用する場合は、C++ 共有ライブラリを構築します。
 
 ### TFLite C API を使用する
 
@@ -120,7 +120,7 @@ This is the *recommended* approach. Download the [TensorFlow Lite AAR hosted at 
 
 ### TFLite C++ API を使用する
 
-C++ API を介して TFLite を使用する場合は、C++ 共有ライブラリを構築します。
+現在、必要なすべてのヘッダーファイルを抽出する簡単な方法はないため、TensorFlow リポジトリから `tensorflow/lite/` にすべてのヘッダーファイルを含める必要があります。さらに、[FlatBuffers](https://github.com/google/flatbuffers) および [Abseil](https://github.com/abseil/abseil-cpp) からのヘッダーファイルが必要になります。
 
 32bit armeabi-v7a:
 
@@ -136,19 +136,19 @@ bazel build -c opt --config=android_arm64 //tensorflow/lite:libtensorflowlite.so
 
 現在、必要なすべてのヘッダーファイルを抽出する簡単な方法はないため、TensorFlow リポジトリから `tensorflow/lite/` にすべてのヘッダーファイルを含める必要があります。さらに、[FlatBuffers](https://github.com/google/flatbuffers) および [Abseil](https://github.com/abseil/abseil-cpp) からのヘッダーファイルが必要になります。
 
-## Min SDK version of TFLite
+## TFLite の SDK 最低バージョン
 
-Library | `minSdkVersion` | Device Requirements
+ライブラリ | `minSdkVersion` | デバイス要件
 --- | --- | ---
-tensorflow-lite | 19 | NNAPI usage requires
+tensorflow-lite | 19 | NNAPI の使用が必要
 :                             :                 : API 27+                : |  |
-tensorflow-lite-gpu | 19 | GLES 3.1 or OpenCL
-:                             :                 : (typically only        : |  |
-:                             :                 : available on API 21+   : |  |
+tensorflow-lite-gpu | 19 | GLES 3.1 または OpenCL
+:                             :                 : （通常        : |  |
+:                             :                 : API 21+ のみで利用可  : |  |
 tensorflow-lite-hexagon | 19 | -
 tensorflow-lite-support | 19 | -
 tensorflow-lite-task-vision | 21 | android.graphics.Color
-:                             :                 : related API requires   : |  |
+:                             :                 : 関連 API が必要   : |  |
 :                             :                 : API 26+                : |  |
 tensorflow-lite-task-text | 21 | -
 tensorflow-lite-task-audio | 23 | -
