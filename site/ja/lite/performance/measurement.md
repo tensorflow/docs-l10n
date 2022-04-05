@@ -100,7 +100,7 @@ Flex デリゲートを介して TF 演算をサポートする ナイトリ―�
 - android_aarch64
 - android_arm
 
-To benchmark with [TensorFlow Lite Hexagon delegate](https://www.tensorflow.org/lite/performance/hexagon_delegate), we have also pre-built the required `libhexagon_interface.so` files (see [here](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md) for details about this file). After downloading the file of the corresponding platform from the links below, please rename the file to `libhexagon_interface.so`.
+[TensorFlow Lite Hexagon デリゲート](https://www.tensorflow.org/lite/performance/hexagon_delegate)でベンチマークを行うために、必要な `libhexagon_interface.so` ファイル（このファイルの詳細は[こちら](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)）も事前ビルドしました。対応するプラットフォームのファイルを以下のリンクからダウンロードしたら、ファイルの名前を `libhexagon_interface.so` に変更してください。
 
 - linux_x86-64
 - linux_aarch64
@@ -184,7 +184,7 @@ nnapi デリゲートで実行するには、-use_nnapi = trueを設定します
   <thead>
     <tr>
       <th>モデル名</th>
-      <th>Device </th>
+      <th>デバイス</th>
       <th>CPU、4 スレッド</th>
       <th>GPU</th>
       <th>NNAPI</th>
@@ -207,26 +207,26 @@ nnapi デリゲートで実行するには、-use_nnapi = trueを設定します
     <td rowspan="2">       Mobilenet_1.0_224 (quant)     </td>
     <td>Pixel 3</td>
     <td>13.4 ms</td>
-    <td>--- </td>
+    <td>---</td>
     <td>6.0 ms</td>
   </tr>
    <tr>
      <td>Pixel 4</td>
     <td>5.0 ms</td>
-    <td>--- </td>
+    <td>---</td>
     <td>3.2 ms</td>
   </tr>
   <tr>
     <td rowspan="2">       NASNet mobile     </td>
     <td>Pixel 3</td>
     <td>56 ms</td>
-    <td>--- </td>
+    <td>---</td>
     <td>102 ms</td>
   </tr>
    <tr>
      <td>Pixel 4</td>
     <td>34.5 ms</td>
-    <td>--- </td>
+    <td>---</td>
     <td>99.0 ms</td>
   </tr>
   <tr>
@@ -280,7 +280,7 @@ iOS ベンチマークを実行するために、適切なモデルを含める�
   <thead>
     <tr>
       <th>モデル名</th>
-      <th>Device </th>
+      <th>デバイス</th>
       <th>CPU、2 スレッド</th>
       <th>GPU</th>
     </tr>
@@ -323,13 +323,13 @@ iOS ベンチマークを実行するために、適切なモデルを含める�
   </tr>
  </table>
 
-## Trace TensorFlow Lite internals
+## TensorFlow Lite の内部をトレースする
 
 ### Android で TensorFlow Lite の内部をトレースする
 
-Note: This feature is available from Tensorflow Lite v2.4.
+注意: この機能は Tensorflow Lite v2.4 以降で利用できます。
 
-Internal events from the TensorFlow Lite interpreter of an Android app can be captured by [Android tracing tools](https://developer.android.com/topic/performance/tracing). They are the same events with Android [Trace](https://developer.android.com/reference/android/os/Trace) API, so the captured events from Java/Kotlin code are seen together with TensorFlow Lite internal events.
+Android アプリの TensorFlow Lite インタープリタからの内部イベントは、[Android トレースツール](https://developer.android.com/topic/performance/tracing)でキャプチャできます。これは Android [Trace](https://developer.android.com/reference/android/os/Trace) API と同じイベントであるため、Java/Kotlin コードからキャプチャされたイベントは TensorFlow Lite 内部イベントと共に表示されます。
 
 イベントの例は次のとおりです。
 
@@ -357,7 +357,7 @@ Internal events from the TensorFlow Lite interpreter of an Android app can be ca
 
 #### TensorFlow Lite トレースを有効にする
 
-To enable TensorFlow Lite tracing, set the Android system property `debug.tflite.trace` to 1 before starting the Android app.
+TensorFlow Lite トレースを有効にするには、Android アプリを起動する前に、Android システムプロパティの `debug.tflite.trace` を1に設定します。
 
 ```shell
 adb shell setprop debug.tflite.trace 1
@@ -381,7 +381,7 @@ adb shell setprop debug.tflite.trace 0
 
 3. CPU プロファイリングモードから「システムコールのトレース」を選択します。
 
-    ![Select 'Trace System Calls'](images/as_select_profiling_mode.png)
+    !['システムコールのトレース' を選択](images/as_select_profiling_mode.png)
 
 4. 「記録」ボタンを押します。
 
@@ -389,7 +389,7 @@ adb shell setprop debug.tflite.trace 0
 
 6. トレース結果を調査します。
 
-    ![Android Studio trace](images/as_traces.png)
+    ![Android Studio トレース](images/as_traces.png)
 
 この例では、スレッド内のイベントの階層と各演算子の時間の統計、および、スレッド間のアプリ全体のデータフローを確認できます。
 
@@ -399,13 +399,13 @@ Android Studio を使用せずにトレースをキャプチャするにはシ�
 
 この例では、同じ TFLite イベントがキャプチャされ、Android デバイスのバージョンに応じて、Perfetto または Systrace 形式で保存されました。キャプチャされたトレースファイルは、Perfetto UI で開くことができます。
 
-![Perfetto trace](images/perfetto_traces.png)
+![Perfetto トレース](images/perfetto_traces.png)
 
-### Trace TensorFlow Lite internals in iOS
+### iOS で TensorFlow Lite の内部をトレースする
 
-Note: This feature is available from Tensorflow Lite v2.5.
+注意: この機能は Tensorflow Lite v2.5 以降で利用できます。
 
-Internal events from the TensorFlow Lite interpreter of an iOS app can be captured by [Instruments](https://developer.apple.com/library/archive/documentation/ToolsLanguages/Conceptual/Xcode_Overview/MeasuringPerformance.html#//apple_ref/doc/uid/TP40010215-CH60-SW1) tool included with Xcode. They are the iOS [signpost](https://developer.apple.com/documentation/os/logging/recording_performance_data) events, so the captured events from Swift/Objective-C code are seen together with TensorFlow Lite internal events.
+iOS アプリの TensorFlow Lite インタープリターからの内部イベントは、Xcode に含まれる [Instruments](https://developer.apple.com/library/archive/documentation/ToolsLanguages/Conceptual/Xcode_Overview/MeasuringPerformance.html#//apple_ref/doc/uid/TP40010215-CH60-SW1) ツールでキャプチャできます。これは iOS の [Signpost](https://developer.apple.com/documentation/os/logging/recording_performance_data) イベントであるため、Swift/Objective-C コードからキャプチャされたイベントは、TensorFlow Lite 内部イベントと共に表示されます。
 
 イベントの例は次のとおりです。
 
@@ -415,41 +415,41 @@ Internal events from the TensorFlow Lite interpreter of an iOS app can be captur
 
 #### TensorFlow Lite トレースを有効にする
 
-Set the environment variable `debug.tflite.trace` by following the steps below:
+以下の手順に従って、環境変数 `debug.tflite.trace` を設定します。
 
-1. Select **Product &gt; Scheme &gt; Edit Scheme...** from the top menus of Xcode.
+1. Xcode のトップメニューから **Product &gt; Scheme &gt; Edit Scheme...** を選択します。
 
-2. Click 'Profile' in the left pane.
+2. 左ペインの 'Profile' をクリックします。
 
-3. Deselect 'Use the Run action's arguments and environment variables' checkbox.
+3. 'Use the Run action's arguments and environment variables' チェックボックスをオフにします。
 
-4. Add `debug.tflite.trace` under 'Environment Variables' section.
+4. 'Environment Variables' セクションに `debug.tflite.trace` を追加します。
 
-    ![Set environment variable](images/xcode_profile_environment.png)
+    ![環境変数を設定](images/xcode_profile_environment.png)
 
-If you want to exclude TensorFlow Lite events when profiling the iOS app, disable tracing by removing the environment variable.
+iOS アプリをプロファイリングする際に TesorFlow Lite イベントを除外する場合は、環境変数を削除してトレースを無効にします。
 
 #### XCode Instruments
 
-Capture traces by following the steps below:
+以下の手順に従って、トレースをキャプチャします。
 
-1. Select **Product &gt; Profile** from the top menus of Xcode.
+1. Xcode のトップメニューから **Product &gt; Profile** を選択します。
 
-2. Click **Logging** among profiling templates when Instruments tool launches.
+2. Instruments ツールが起動する際に、プロファイリングテンプレートの中から **Logging** をクリックします。
 
-3. Press 'Start' button.
+3. 'Start' ボタンを押します。
 
 4. 「停止」ボタンを押します。
 
-5. Click 'os_signpost' to expand OS Logging subsystem items.
+5. 'os_signpost' をクリックして、OS Logging のサブシステムアイテムを展開します。
 
-6. Click 'org.tensorflow.lite' OS Logging subsystem.
+6. 'org.tensorflow.lite' OS Logging サブシステムをクリックします。
 
 7. トレース結果を調査します。
 
-    ![Xcode Instruments trace](images/xcode_traces.png)
+    ![Xcode Instruments トレース](images/xcode_traces.png)
 
-In this example, you can see the hierarchy of events and statistics for each operator time.
+この例では、演算子の時間ごとにイベントと統計の階層が表示されます。
 
 ### トレースデータの使用
 
