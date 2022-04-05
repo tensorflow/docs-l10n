@@ -130,7 +130,7 @@ TensorFlow Data Validation は、トレーニングデータとサービング�
 
 TensorFlow Data Validation は特徴量の分布を可視化するためのツールも提供しています。[Facets](https://pair-code.github.io/facets/) を使って Jupyter ノートブック上でこれらの分布を確認することで、データに関する一般的な問題を確認することができます。
 
-![Feature stats](images/feature_stats.png)
+![Feature stats](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/guide/images/feature_stats.png?raw=true)
 
 ### 疑わしい分布の識別
 
@@ -142,7 +142,7 @@ Facets Overview の表示を用いて特徴量の疑わしい分布を探すこ�
 
 それぞれの特徴量の型ごとに、最も不均衡な特徴量がリストのトップに表示されます。一例として、次のスクリーンショットは "Numeric Feature" リストから、最初の特徴量はすべての値がゼロであること、2 番めの特徴量は極めて不均衡であることを示しています。
 
-![不均衡なデータの視覚化](images/unbalanced.png)
+![不均衡なデータの視覚化](images/zero_length.png)
 
 #### 一様分布に従うデータ
 
@@ -178,7 +178,7 @@ Facets Overview を用いて一様分布に従う特徴量を検出するには�
 
 2. それぞれの特徴量の行の右側に表示されたグラフを確認します。グラフはその特徴量に含まれるリストの長さの範囲を表しています。たとえば、次のスクリーンショットの中でハイライトされている行は、特徴量中に長さゼロのリストが含まれていることを示しています。
 
-![ゼロ長の特徴量値リストを使った特徴量の Facets Overview 表示](images/zero_length.png)
+![ゼロ長の特徴量値リストを使った特徴量の Facets Overview 表示](images/unbalanced.png)
 
 #### 特徴量間のスケールの大きな違い
 
