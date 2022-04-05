@@ -133,7 +133,7 @@ split = splits[jax.process_index()]
 
 ### 画像のデコードの高速化
 
-By default, TFDS automatically decodes images. However, there are cases where it can be more performant to skip the image decoding with `tfds.decode.SkipDecoding` and manually apply the `tf.io.decode_image` op:
+デフォルトでは、TFDS は自動的に画像をデコードするようになっていますが、`tfds.decode.SkipDecoding` を使って画像のデコードをスキップし、手動で `tf.io.decode_image` 演算を適用する方がパフォーマンスが高くなる場合もあります。
 
 - When filtering examples (with `tf.data.Dataset.filter`), to decode images after examples have been filtered.
 - 画像をクロップする場合。結合された `tf.image.decode_and_crop_jpeg` 演算を使用します。
