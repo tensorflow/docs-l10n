@@ -149,23 +149,23 @@ bazel build -c opt --config=ios --ios_multi_cpus=armv7,arm64,x86_64 \
 
 ### C/C++
 
-If you're using Bazel or [CMake](https://www.tensorflow.org/lite/guide/build_cmake) to build TensorFlow Lite interpreter, you can enable Flex delegate by linking a TensorFlow Lite Flex delegate shared library. You can build it with Bazel as the following command.
+Bazel または [CMake](https://www.tensorflow.org/lite/guide/build_cmake) を使用して TensorFlow Lite インタープリタを構築している場合、TensorFlow Lite Flex デリゲート共有ライブラリをリンクして Flex デリゲートを有効にできます。Bazel で次のコマンドを使用しインタープリタを構築できます。
 
 ```
 bazel build -c opt --config=monolithic tensorflow/lite/delegates/flex:tensorflowlite_flex
 ```
 
-This command generates the following shared library in `bazel-bin/tensorflow/lite/delegates/flex`.
+このコマンドは次の共有ライブラリを `bazel-bin/tensorflow/lite/delegates/flex` 生成します。
 
-Platform | Library name
+プラットフォーム | ライブラリ名
 --- | ---
 Linux | libtensorflowlite_flex.so
 macOS | libtensorflowlite_flex.dylib
 Windows | tensorflowlite_flex.dll
 
-Note that the necessary `TfLiteDelegate` will be installed automatically when creating the interpreter at runtime as long as the shared library is linked. It is not necessary to explicitly install the delegate instance as is typically required with other delegate types.
+`TfLiteDelegate` は、共有ライブラリがリンクされている限り、ランタイム時にインタープリタを作成する際に自動的に作成されます。通常は他のデリゲートタイプでも必要とされるため、デリゲートインスタンスを明示的にインストールする必要はありません。
 
-**Note:** This feature is available since version 2.7.
+**注意:** この機能は バージョン 2.7 以降で利用できます。
 
 ### Python
 
