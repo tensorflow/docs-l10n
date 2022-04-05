@@ -42,7 +42,7 @@ tflite_quant_model = converter.convert()
 
 こうするためにはサンプルの入力データを変換器に与え、活性化関数の入力と出力の範囲を計測する必要があります。重みやバイアスなどの一定テンソルとは異なり、モデル入力、活性化（中間層の出力）、モデル出力などの可変テンソルは、いくつかの推論サイクルを実行しない限り、キャリブレーションできません。そのため、コンバータはそれらをキャリブレーションするために代表的なデータセットを必要とします。このデータセットには、トレーニングデータまたは検証データの小さなサブセット（約100〜500サンプル）を使用できます。以下のコードで使用されている `representative_dataset_gen()` 関数を参照してください。
 
-From TensorFlow 2.7 version, you can specify the representative dataset through a [signature](/lite/guide/signatures) as the following example:
+TensorFlow 2.7 バージョンより、以下の例のように[シグネチャ](/lite/guide/signatures)を通じて、代表データセットを指定できます。
 
 <pre>def representative_dataset():
   for data in dataset:
@@ -52,7 +52,7 @@ From TensorFlow 2.7 version, you can specify the representative dataset through 
     }
 </pre>
 
-If there are more than one signature in the given TensorFlow model, you can specify the multiple dataset by specifying the signature keys:
+特定の TensorFlow モデルに 2 つ以上のシグネチャが存在する場合、シグネチャキーを指定することで、複数のデータセットを指定できます。
 
 <pre>def representative_dataset():
   # Feed data set for the "encode" signature.
@@ -74,14 +74,14 @@ If there are more than one signature in the given TensorFlow model, you can spec
     )
 </pre>
 
-You can generate the representative dataset by providing an input tensor list:
+代表的なデータセットは、入力テンソルのリストを指定することで生成できます。
 
 <pre>def representative_dataset():
   for data in tf.data.Dataset.from_tensor_slices((images)).batch(1).take(100):
     yield [tf.dtypes.cast(data, tf.float32)]
 </pre>
 
-Since TensorFlow 2.7 version, we recommend using the signature-based approach over the input tensor list-based approach because the input tensor ordering can be easily flipped.
+入力テンソルの順序は容易に変更されてしまうため、TensorFlow 2.7 バージョン以降では、入力テンソルベースのアプローチではなく、シグネチャベースのアプローチを使用することをお勧めします。
 
 テストのためには、次のようにダミーデータセットを使用できます。
 
