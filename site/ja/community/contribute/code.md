@@ -4,7 +4,7 @@
 
 ## はじめる前に
 
-TensorFlow プロジェクトにソースコードを提供する前に、プロジェクトの GitHub リポジトリにある`CONTRIBUTING.md` ファイルを確認してください。（例として、[コアの TensorFlow リポジトリの CONTRIBUTING.md ファイル](https://cla.developers.google.com/clas)をご覧ください）。すべてのコードコントリビュータは、[コントリビュータライセンス契約](https://cla.developers.google.com/clas)（CLA）に署名する必要があります。
+TensorFlow プロジェクトにソースコードを提供する前に、プロジェクトの GitHub リポジトリにある`CONTRIBUTING.md` ファイルを確認してください。例として、コアの TensorFlow リポジトリの [CONTRIBUTING.md](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md) ファイルをご覧ください。すべてのコードコントリビュータは、[コントリビュータライセンス契約](https://cla.developers.google.com/clas)（CLA）に署名する必要があります。
 
 作業の重複を避けるために、重要な機能の作業を開始する前に[最新](https://github.com/tensorflow/community/tree/master/rfcs)または[提案中](https://github.com/tensorflow/community/labels/RFC%3A%20Proposed)の RFC を確認し、TensorFlow フォーラムの開発者に連絡してください（[developers@tensorflow.org](https://groups.google.com/u/1/a/tensorflow.org/g/developers)）。私たちは新しい機能の追加についてやや選択的であるため、既知の問題の解決に貢献いただくことでプロジェクトを支援していただくよう、お願いしています。
 
@@ -117,7 +117,7 @@ TensorFlow プロジェクトにソースコードを提供する前に、プロ
 追加の `git` および GitHub リソース:
 
 - [Git ドキュメント](https://git-scm.com/documentation)
-- [Git 開発ワークフロー](https://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html)
+- [Git 開発ワークフロー](https://docs.scipy.org/doc/numpy/dev/development_workflow.html)
 - [マージ中に発生した競合の解決](https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/)
 
 ## コントリビュータチェックリスト
