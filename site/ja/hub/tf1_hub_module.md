@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2020-12-29' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-10-10' review_interval: '6 months' } *-->
 
 # TF1 Hub 形式
 
