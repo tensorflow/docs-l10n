@@ -1,6 +1,6 @@
 # TFX コマンドラインインターフェイスの使用
 
-The TFX command-line interface (CLI) performs a full range of pipeline actions using pipeline orchestrators, such as Kubeflow Pipelines, Vertex Pipelines. Local orchestrator can be also used for faster development or debugging. Apache Beam and Apache airflow is supported as experimental features. For example, you can use the CLI to:
+TFX コマンドラインインターフェース（CLI）は、Kubeflow Pipelines、Vertex Pipeline などのパイプラインオーケストレーターを使用して、あらゆるパイプラインアクションを実行します。また、ローカルオーケストレーターを使用して、開発やデバッグを高速化することもできます。Apache Beam と Apache airflow は事件機能としてサポートされています。たとえば、CLI を使って次のことを行えます。
 
 - パイプラインを作成、更新、削除する。
 - パイプラインを実行し、さまざまなオーケストレーターでの実行を監視する。
@@ -81,7 +81,7 @@ TFX CLI は、TFX パッケージの一部としてインストールされま�
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
@@ -89,7 +89,7 @@ TFX CLI は、TFX パッケージの一部としてインストールされま�
     <p>      **要注意：パイプライン構成ファイルの DagRunner に必要とされるオーケストレーターは、選択されたエンジンまたは自動検出されたエンジンと一致する必要があります。エンジンの自動検出は、ユーザー環境に基づいています。Apache Airflow と Kubeflow Pipelines がインストールされていない場合、デフォルトでローカルオーケストレーターが使用されます。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint when using Kubeflow Pipelines.   </dd>
+  <dd>     （オプション）Kubeflow Pipelines を使用している場合に、IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
   <dt>--namespace=<var>namespace</var> </dt>
@@ -98,8 +98,8 @@ TFX CLI は、TFX パッケージの一部としてインストールされま�
 
   <dt>--build_image</dt>
   <dd>
-    <p>       (Optional.) When the <var>engine</var> is <strong>kubeflow</strong> or <strong>vertex</strong>, TFX       creates a container image for your pipeline if specified. `Dockerfile` in       the current directory will be used, and TFX will automatically generate       one if not exists.     </p>
-    <p>       The built image will be pushed to the remote registry which is specified       in `KubeflowDagRunnerConfig` or `KubeflowV2DagRunnerConfig`.     </p>
+    <p>       （オプション）<var>engine</var> が <strong>kubeflow</strong> または <strong>vertex</strong> である場合、TFX はパイプラインのコンテナイメージが指定されていればそれを作成します。現在のディレクトリの `Dockerfile` が使用され、存在しない場合は TFX が自動的に生成します。</p>
+    <p>       ビルドイメージは `KubeflowDagRunnerConfig` または `KubeflowV2DagRunnerConfig` に指定されているリモートレジストリにプッシュされます。</p>
   </dd>
   <dt>--build_base_image=<var>build-base-image</var> </dt>
   <dd>
@@ -177,7 +177,7 @@ Vertex:
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
@@ -192,8 +192,8 @@ Vertex:
 <dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで<code>kubeflow</code>になります。</dd>
   <dt>--build_image</dt>
   <dd>
-    <p>       (Optional.) When the <var>engine</var> is <strong>kubeflow</strong> or <strong>vertex</strong>, TFX       creates a container image for your pipeline if specified. `Dockerfile` in       the current directory will be used.     </p>
-    <p>       The built image will be pushed to the remote registry which is specified       in `KubeflowDagRunnerConfig` or `KubeflowV2DagRunnerConfig`.     </p>
+    <p>       （オプション）<var>engine</var> が <strong>kubeflow</strong> または <strong>vertex</strong> である場合、TFX はパイプラインのコンテナイメージが指定されていればそれを作成します。</p>
+    <p>       ビルドイメージは `KubeflowDagRunnerConfig` または `KubeflowV2DagRunnerConfig` に指定されているリモートレジストリにプッシュされます。</p>
   </dd>
 
 
@@ -244,7 +244,7 @@ Vertex:
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
@@ -314,7 +314,7 @@ Vertex:
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
@@ -390,7 +390,7 @@ Vertex:
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
@@ -477,7 +477,7 @@ Vertex:
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
@@ -488,7 +488,7 @@ Vertex:
 
   <dt>--runtime_parameter=<var>parameter-name</var>=<var>parameter-value</var>
 </dt>
-  <dd>     (Optional.) Sets a runtime parameter value. Can be set multiple times to set     values of multiple variables. Only applicable to `airflow`, `kubeflow` and     `vertex` engine.   </dd>
+  <dd>     （オプション）ランタイムパラメータ値を設定します。複数の変数の値を設定するために、複数回、設定できます。`airflow`、`kubeflow`、および `vertex` エンジンのみに適用できます。</dd>
 
 
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
@@ -501,12 +501,12 @@ Vertex:
 
   <dt>--project=<var>GCP-project-id</var>
 </dt>
-  <dd>     (Required for Vertex.) GCP project id for the vertex pipeline.   </dd>
+  <dd>     （Vertex では必須）vertex パイプラインの GCP プロジェクト ID。</dd>
 
 
   <dt>--region=<var>GCP-region</var>
 </dt>
-  <dd>     (Required for Vertex.) GCP region name like us-central1. See [Vertex documentation](https://cloud.google.com/vertex-ai/docs/general/locations) for available regions.   </dd>
+  <dd>     （Vertex では必須）us-central1 などの GCP リージョン名。利用できるリージョンは、「Vertex ドキュメント」（https://cloud.google.com/vertex-ai/docs/general/locations）をご覧ください。</dd>
 
 
 
@@ -845,7 +845,7 @@ Kubeflow:
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
@@ -916,6 +916,6 @@ Kubeflow:
     - 構成から読み取られたパイプラインメタデータは、`${HOME}/tfx/${ORCHESTRATION_ENGINE}/${PIPELINE_NAME}`に保存されます。`AIRFLOW_HOME`や`KUBEFLOW_HOME`などの環境変数を設定することでこの場所をカスタマイズできます。この動作は、将来のリリースで変更される可能性があります。このディレクトリは、実行の作成またはパイプラインの更新に必要なパイプライン情報（パイプライン ID を含む）を Kubeflow Pipelines クラスタに格納するために使用されます。
     - TFX 0.25 より前では、これらのファイルは`${HOME}/${ORCHESTRATION_ENGINE}`の下にありました。スムーズに移行するために、TFX 0.25 では、古い場所にあるファイルは自動的に新しい場所に移動されます。
     - TFX 0.27 以降、kubeflow はこれらのメタデータファイルをローカルファイルシステムに作成しません。kubeflow が作成する他のファイルについては、以下を参照してください。
-- (Kubeflow only) Dockerfile and a container image
+- （Kubeflow のみ）Dockerfile とコンテナイメージ
     - Kubeflow Pipelines では、パイプラインに2種類の入力が必要です。これらのファイルは、現行のディレクトリの TFX により生成されます。
-    - One is a container image which will be used to run components in the pipeline. This container image is built when a pipeline for Kubeflow Pipelines is created or updated with `--build-image` flag. TFX CLI will generate `Dockerfile` if not exists, and will build and push a container image to the registry specified in KubeflowDagRunnerConfig.
+    - 1 つはパイプラインでコンポーネントを実行するために使用されるコンテナイメージです。このコンテナイメージは、Kubeflow Pipelines のパイプラインが `--build-image` フラグ付きで作成されたか更新された場合にビルドされます。存在しない場合は TFX CLI によって `Dockerfile` が作成され、コンテナイメージを KubeflowDagRunnerConfig に指定されたレジストリにビルドしてプッシュします。
