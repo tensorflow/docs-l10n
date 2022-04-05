@@ -19,7 +19,7 @@
 
 **サポートされているモデル：**
 
-Hexagon デリゲートは、[トレーニング後の整数量子化](https://www.tensorflow.org/lite/performance/post_training_integer_quant)を使用して生成されたものを含め、[8 ビット対称量子化仕様](https://www.tensorflow.org/lite/performance/quantization_spec)に準拠するすべてのモデルをサポートしています。従来の[量子化認識トレーニング](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize)パスでトレーニングされた UInt8 モデルもサポートされています（例：ホステッドモデルページの[これらの量子化バージョン](https://www.tensorflow.org/lite/guide/hosted_models#quantized_models)）。
+Hexagon デリゲートは、[トレーニング後の整数量子化](https://www.tensorflow.org/lite/performance/quantization_spec)を使用して生成されたものを含め、[8 ビット対称量子化仕様](https://www.tensorflow.org/lite/performance/post_training_integer_quant)に準拠するすべてのモデルをサポートしています。従来の[量子化認識トレーニング](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize)パスでトレーニングされた UInt8 モデルもサポートされています（例：ホステッドモデルページの[これらの量子化バージョン](https://www.tensorflow.org/lite/guide/hosted_models#quantized_models)）。
 
 ## Hexagon デレゲート Java API
 
@@ -59,19 +59,19 @@ dependencies {
 #### ステップ 2. Hexagon ライブラリを Android アプリに追加する
 
 - hexagon_nn_skel.run をダウンロードして実行します。3 つの異なる共有ライブラリ「libhexagon_nn_skel.so」、「libhexagon_nn_skel_v65.so」、「libhexagon_nn_skel_v66.so」が提供されます。
-    - [v1.10.3](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_1_10_3_1.run)
-    - [v1.14](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.14.run)
-    - [v1.17](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.17.0.0.run)
-    - [v1.20](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.0.run)
-    - [v1.21](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
+    - v1.10.3
+    - v1.14
+    - v1.17
+    - v1.20
+    - [v1.20.0.1](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
 
 注意：ライセンス契約に同意する必要があります。
 
-注意：2021 年 2 月 23 日以降、v1.21 を使用する必要があります。
+Note: As of 02/23/2021 you should use v1.20.0.1.
 
 注意：hexagon_nn ライブラリは、互換性のあるバージョンのインターフェイスライブラリと使用する必要があります。インターフェイスライブラリは AAR の一部であり、[config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) を通じて bazel によりフェッチされます。bazelconfig のバージョンを使用する必要があります。
 
-- 他の共有ライブラリと共にアプリに 3 つすべて追加します。 [アプリに共有ライブラリを追加する方法](#how-to-add-shared-library-to-your-app)をご覧ください。デリゲートは、デバイスに応じて最高のパフォーマンスを持つものを自動的に選択します。
+- 他の共有ライブラリと共にアプリに 3 つすべて追加します。 [アプリに共有ライブラリを追加する方法](#how-to-add-shared-library-to-your-app)を参照してください。デリゲートは、デバイスに応じて最高のパフォーマンスを持つものを自動的に選択します。
 
 注意: アプリが 32 ビットと 64 ビットの両方の ARM デバイス用に構築される場合、32 ビットと 64 ビットの両方の lib フォルダに Hexagon 共有ライブラリを追加する必要があります。
 
@@ -157,17 +157,17 @@ dependencies {
 #### ステップ 2. Hexagon ライブラリを Android アプリに追加する
 
 - hexagon_nn_skel.run をダウンロードして実行します。3 つの異なる共有ライブラリ「libhexagon_nn_skel.so」、「libhexagon_nn_skel_v65.so」、「libhexagon_nn_skel_v66.so」が提供されます。
-    - [v1.10.3](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_1_10_3_1.run)
-    - [v1.14](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.14.run)
-    - [v1.17](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.17.0.0.run)
-    - [v1.20](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.0.run)
-    - [v1.21](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
+    - v1.10.3
+    - v1.14
+    - v1.17
+    - v1.20
+    - [v1.20.0.1](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
 
 注意：ライセンス契約に同意する必要があります。
 
-注意：2021 年 2 月 23 日以降、v1.21 を使用する必要があります。
+Note: As of 02/23/2021 you should use v1.20.0.1.
 
-注意：hexagon_nn ライブラリは、互換性のあるバージョンのインターフェイスライブラリと使用する必要があります。インターフェイスライブラリは AAR の一部であり、[config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) を通じて bazel によりフェッチされます。bazel config のバージョンを使用する必要があります。
+注意：hexagon_nn ライブラリは、互換性のあるバージョンのインターフェイスライブラリと使用する必要があります。インターフェイスライブラリは AAR の一部であり、[config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) を通じて bazel によりフェッチされます。bazelconfig のバージョンを使用する必要があります。
 
 - 他の共有ライブラリと共にアプリに 3 つすべて追加します。 [アプリに共有ライブラリを追加する方法](#how-to-add-shared-library-to-your-app)を参照してください。デリゲートは、デバイスに応じて最高のパフォーマンスを持つものを自動的に選択します。
 
@@ -228,7 +228,7 @@ TfLiteHexagonTearDown();  // Needed once at end of app/DSP usage.
 - デリゲートを実行するには、モデル内のすべての演算がサポートされる必要がありますか？
     - いいえ、モデルはサポートされる演算に基づいてサブグラフに分割されます。サポートされていない演算はすべて CPU で実行されます。
 - ソースから Hexagon デリゲート AAR を構築するにはどうすればよいですか？
-    -  `bazel build -c opt --config=android_arm64 tensorflow/lite/delegates/hexagon/java:tensorflow-lite-hexagon`を使用します。
+    - `bazel build -c opt --config=android_arm64 tensorflow/lite/delegates/hexagon/java:tensorflow-lite-hexagon`を使用します。
 - Android デバイスにサポートされている SoC があるのに、Hexagon デリゲートが初期化に失敗するのはなぜですか？
     - デバイスに実際にサポートされている SoC があるかどうかを確認します。`adb shell cat /proc/cpuinfo | grep Hardware`を実行して、「Hardware：Qualcomm Technologies、Inc MSMXXXX」のような結果が返されるかどうかを確認します。
     - 一部のモバイルデバイスメーカーは、同一のモバイルモデルに異なる SoC を使用しているため、Hexagon デリゲートは、モバイルデバイスのモデルが同じでも、一部のデバイスでしか機能しない可能性があります。
