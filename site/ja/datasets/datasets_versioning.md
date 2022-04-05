@@ -2,22 +2,22 @@
 
 ## 定義
 
-Versioning can refer to different meaning:
+バージョン管理には、異なる意味があります。
 
-- The TFDS API version (pip version): `tfds.__version__`
-- The public dataset version, independent from TFDS (e.g. [Voc2007](https://pjreddie.com/projects/pascal-voc-dataset-mirror/), Voc2012). In TFDS each public dataset version should be implemented as an independent dataset:
-    - Either through [builder configs](https://www.tensorflow.org/datasets/add_dataset#dataset_configurationvariants_tfdscorebuilderconfig): E.g. `voc/2007`, `voc/2012`
-    - Either as 2 independent datasets: E.g. `wmt13_translate`, `wmt14_translate`
-- The dataset generation code version in TFDS (`my_dataset:1.0.0`): For example, if a bug is found in the TFDS implementation of `voc/2007`, the `voc.py` generation code will be updated (`voc/2007:1.0.0` -&gt; `voc/2007:2.0.0`).
+- TFDS API バージョン (pip バージョン): `tfds.__version__`
+- TFDS のバージョンから独立した別のバージョン管理方式 ([Voc2007](https://pjreddie.com/projects/pascal-voc-dataset-mirror/)、Voc2012 など)。TFDS では、各パブリックデータセットバージョンを独立したデータセットとして実装する必要があります。
+    - [builder configs](https://www.tensorflow.org/datasets/add_dataset#dataset_configurationvariants_tfdscorebuilderconfig) を介して実装する: `voc/2007`、`voc/2012` など
+    - 2つの独立したデータセットとして実装する: `wmt13_translate`、`wmt14_translate` など
+- TFDS のデータセット生成コードバージョン(`my_dataset:1.0.0`): 例えば、 `voc/2007` の TFDS 実装にバグが見つかった場合、`voc.py` 生成コードが更新されます。 (`voc/2007:1.0.0` -&gt; `voc/2007:2.0.0`)。
 
-The rest of this guide only focus on the last definition (dataset code version in the TFDS repository).
+以下では、最後の定義 (TFDS リポジトリーのデータセットコードバージョン) のみを見ていきます。
 
 ## サポートされているバージョン
 
-As a general rule:
+一般的なルール:
 
-- Only the last current version can be generated.
-- All previously generated dataset can be read (note: This require datasets generated with TFDS 4+).
+- 最後の最新のバージョンのみを生成できます。
+- 以前に生成されたすべてのデータセットを読み取ることができます（注: これには、TFDS 4 以降で生成されたデータセットが必要です）。
 
 ```python
 builder = tfds.builder('my_dataset')
@@ -98,11 +98,11 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
 tfds.load('open_images_v4/original:1.*.*')
 ```
 
-## Experimental version
+## 実験バージョン
 
-Note: The following is bad practice, error prone and should be discouraged.
+注意: 以下は悪い習慣であり、エラーが発生しやすくなるため、避けることをお勧めします。
 
-It is possible to allow 2 versions to be generated at the same time. One default and one experimental version. For example:
+2 つのバージョン (1つ のデフォルトバージョンと 1 つの実験バージョン) を同時に生成できるようにすることができます。以下に例を示します。
 
 ```python
 class MNIST(tfds.core.GeneratorBasedBuilder):
@@ -119,7 +119,7 @@ builder = tfds.builder('mnist')
 builder = tfds.builder('mnist', version='experimental_latest')
 ```
 
-In the code, you need to make sure to support the 2 versions:
+コードでは、2つのバージョンをサポートしていることを確認する必要があります。
 
 ```python
 class MNIST(tfds.core.GeneratorBasedBuilder):
