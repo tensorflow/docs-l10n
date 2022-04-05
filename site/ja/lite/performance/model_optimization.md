@@ -55,7 +55,7 @@ TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 [トレーニング後の float16 量子化](post_training_float16_quant.ipynb) | データなし | 50% 以下 | 精度低下（ごくわずか） | CPU、GPU
 [トレーニング後のダイナミックレンジ量子化](post_training_quant.ipynb) | データなし | 75% 以下 | 精度低下（ごく少量） | CPU、GPU (Android)
 [トレーニング後の整数量子化](post_training_integer_quant.ipynb) | ラベルなしの代表的なサンプル | 75% 以下 | 精度低下（少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
-[Quantization-aware training](http://www.tensorflow.org/model_optimization/guide/quantization/training) | ラベル付けされたトレーニングデータ | 75% 以下 | 精度低下（ごく少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
+[量子化認識トレーニング](http://www.tensorflow.org/model_optimization/guide/quantization/training) | ラベル付けされたトレーニングデータ | 75% 以下 | 精度低下（ごく少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
 
 単純に期待されるモデルのサイズと精度の基づいて、モデルに使用する量子化スキームを選択するには、次の決定木を使用することができます。
 
