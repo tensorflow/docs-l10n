@@ -1,7 +1,7 @@
 # TFX Airflow のチュートリアル
 
 [](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)![Python](https://img.shields.io/pypi/pyversions/tfx.svg?style=plastic)[](https://github.com/tensorflow/tfx)
-[![Python](https://badge.fury.io/py/tfx.svg)](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)
+[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)
 
 ## はじめに
 
