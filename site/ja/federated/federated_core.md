@@ -60,7 +60,7 @@ FC が言語を定義する理由の一部は、上述のように、フェデ�
 
 - **テンソル型**（`tff.TensorType`）。TensorFlow と同様に、`dtype` と `shape` があります。唯一の違いは、この型のオブジェクトは、TensorFlow 演算の出力を表す Python の `tf.Tensor` インスタンスに限られず、たとえば分散集約プロトコルの出力として生成されるデータのユニットを含むことがあるというところです。そのため、TFF テンソル型は単に、Python または TensorFlow のそのような型の具体的な物理表現の抽象バージョンです。
 
-    TFF's `TensorTypes` can be stricter in their (static) treatment of shapes than TensorFlow. For example, TFF's typesystem treats a tensor with unknown rank as assignable *from* any other tensor of the same `dtype`, but not assignable *to* any tensor with fixed rank. This treatment prevents certain runtime failures (e.g., attempting to reshape a tensor of unknown rank into a shape with incorrect number of elements), at the cost of greater strictness in what computations TFF accepts as valid.
+    TFF の `TensorTypes` は、TensorFlow よりも形状の (静的な) 処理を厳密にすることができます。たとえば、TFF の型システムは、階数が不明なテンソルを、同じ `dtype` の他のテンソル*から*割り当て可能として扱いますが、固定階数のテンソル*に*割り当てることはできません。この処理により、TFF が有効として受け入れる計算がより厳密になりますが、特定の実行時の失敗を防ぐことができます（たとえば、階数が不明なテンソルを要素数が正しくない形状に変更しようとする場合など）。
 
     テンソル型のコンパクト表記は、`dtype` または `dtype[shape]` です。たとえば、`int32` と `int32[10]` は、それぞれ整数と int ベクトルの型です。
 
