@@ -28,15 +28,15 @@ Android Studio でサンプルをビルドするには、[README.md](https://git
 
 TensorFlow Lite（TFLite）モデルをインポートするには、次を行います。
 
-1. TF Lite モデルを使用するモジュールを右クリックするか、`File` をクリックして、`New` &gt; `Other` &gt; `TensorFlow Lite Model` に移動します。![Right-click menus to access the TensorFlow Lite import functionality](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/lite/images/android/right_click_menu.png)
+1. TF Lite モデルを使用するモジュールを右クリックするか、`File` をクリックして、`New` &gt; `Other` &gt; `TensorFlow Lite Model` に移動します。![Right-click menus to access the TensorFlow Lite import functionality](../images/android/right_click_menu.png)
 
 2. TFLite ファイルの場所を選択します。ユーザーに代わってツールが、ML Model バインディングとのモジュールの依存関係と Android モジュールの `build.gradle` ファイルに自動的に挿入されたすべての依存関係を構成します。
 
-    オプション: [GPU アクセラレーション](../performance/gpu)を使用する場合は、TensorFlow GPU をインポートするための 2 番目のチェックをオンにしてください。 ![Import dialog for TFLite model](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/lite/images/android/import_dialog.png)
+    オプション: [GPU アクセラレーション](../performance/gpu)を使用する場合は、TensorFlow GPU をインポートするための 2 番目のチェックをオンにしてください。 ![Import dialog for TFLite model](../images/android/import_dialog.png)
 
 3. `Finish` をクリックします。
 
-4. インポートが正常に完了すると、次の画面が表示されます。モデルを使用し始めるには、Kotlin または Java を選択し、`Sample Code` セクションにあるコードをコピーして貼り付けます。Android Studio の `ml` ディレクトリにある TFLite モデルをダブルクリックすると、この画面に戻ることができます。![Model details page in Android Studio](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/lite/images/android/model_details.png)
+4. インポートが正常に完了すると、次の画面が表示されます。モデルを使用し始めるには、Kotlin または Java を選択し、`Sample Code` セクションにあるコードをコピーして貼り付けます。Android Studio の `ml` ディレクトリにある TFLite モデルをダブルクリックすると、この画面に戻ることができます。![Model details page in Android Studio](../images/android/model_details.png)
 
 ### TensorFlow Lite Task ライブラリを使用する
 
@@ -48,8 +48,9 @@ To use the Support Library in your Android app, we recommend using the AAR hoste
 
 ```build
 dependencies {
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.1.0'
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.3.0'
 }
 ```
 
@@ -69,7 +70,7 @@ To use the Support Library in your Android app, we recommend using the [TensorFl
 
 ```build
 dependencies {
-    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.3.0'
 }
 ```
 
@@ -134,3 +135,21 @@ bazel build -c opt --config=android_arm64 //tensorflow/lite:libtensorflowlite.so
 ```
 
 現在、必要なすべてのヘッダーファイルを抽出する簡単な方法はないため、TensorFlow リポジトリから `tensorflow/lite/` にすべてのヘッダーファイルを含める必要があります。さらに、[FlatBuffers](https://github.com/google/flatbuffers) および [Abseil](https://github.com/abseil/abseil-cpp) からのヘッダーファイルが必要になります。
+
+## Min SDK version of TFLite
+
+Library | `minSdkVersion` | Device Requirements
+--- | --- | ---
+tensorflow-lite | 19 | NNAPI usage requires
+:                             :                 : API 27+                : |  |
+tensorflow-lite-gpu | 19 | GLES 3.1 or OpenCL
+:                             :                 : (typically only        : |  |
+:                             :                 : available on API 21+   : |  |
+tensorflow-lite-hexagon | 19 | -
+tensorflow-lite-support | 19 | -
+tensorflow-lite-task-vision | 21 | android.graphics.Color
+:                             :                 : related API requires   : |  |
+:                             :                 : API 26+                : |  |
+tensorflow-lite-task-text | 21 | -
+tensorflow-lite-task-audio | 23 | -
+tensorflow-lite-metadata | 19 | -
