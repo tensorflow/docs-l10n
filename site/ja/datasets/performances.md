@@ -1,6 +1,6 @@
 # パフォーマンスに関するヒント
 
-This document provides TensorFlow Datasets (TFDS)-specific performance tips. Note that TFDS provides datasets as `tf.data.Dataset` objects, so the advice from the [`tf.data` guide](https://www.tensorflow.org/guide/data_performance#optimize_performance) still applies.
+このドキュメントでは、TensorFlow Datasets (TFDS) 固有のパフォーマンスに関するヒントを提供します。TFDS はデータセットを `tf.data.Dataset` として提供するため、[`tf.data` ガイド](https://www.tensorflow.org/guide/data_performance#optimize_performance)のアドバイスが適用されます。
 
 ## データセットのベンチマークを作成する
 
@@ -16,11 +16,11 @@ tfds.benchmark(ds, batch_size=32)
 tfds.benchmark(ds, batch_size=32)
 ```
 
-## Small datasets (less than 1 GB)
+## 小規模なデータセット (1 GB 未満)
 
-All TFDS datasets store the data on disk in the [`TFRecord`](https://www.tensorflow.org/tutorials/load_data/tfrecord) format. For small datasets (e.g. MNIST, CIFAR-10/-100), reading from `.tfrecord` can add significant overhead.
+すべての TFDS データセットは、[`TFRecord`](https://www.tensorflow.org/tutorials/load_data/tfrecord) 形式でディスク上にデータを保存します。小規模なデータセット (MNIST、CIFAR-10/-100 など) の場合、`.tfrecord` から読み取ると、著しいオーバーヘッドが追加されます。
 
-As those datasets fit in memory, it is possible to significantly improve the performance by caching or pre-loading the dataset. Note that TFDS automatically caches small datasets (the following section has the details).
+これらのデータセットはメモリに収まるため、データセットをキャッシュするか事前に読み込むことで、パフォーマンスを大幅に改善することが可能です。TFDS は小規模なデータセットを自動的にキャッシュすることに注意してください（詳細は次のセクションをご覧ください）。
 
 ### データセットのキャッシュ
 
@@ -57,7 +57,7 @@ ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
 
 ### 自動キャッシュ
 
-By default, TFDS auto-caches (with `ds.cache()`) datasets which satisfy the following constraints:
+デフォルトでは、TFDS は (`ds.cache()` で) 次の制限を満たすデータセットを自動的にキャッシュします。
 
 - 合計データセットサイズ（全分割）が定義されており、250 MiB 未満である
 - `shuffle_files` が無効化されているか、単一のシャードのみが読み取られる
@@ -79,11 +79,11 @@ By default, TFDS auto-caches (with `ds.cache()`) datasets which satisfy the foll
 
 ## 大規模なデータセット
 
-Large datasets are sharded (split in multiple files) and typically do not fit in memory, so they should not be cached.
+大規模なデータセットはシャーディングされており（複数のファイルに分割）、 通常、メモリに収まらないため、キャッシュすることはできません。
 
 ### シャッフルとトレーニング
 
-During training, it's important to shuffle the data well - poorly shuffled data can result in lower training accuracy.
+トレーニング中はデータを十分にシャッフルすることが重要です。適切にシャッフルされていないデータでは、トレーニング精度が低下してしまいます。
 
 `ds.shuffle` を使用してレコードをシャッフルするほかに、`shuffle_files=True` を設定して、複数のファイルシャーディングされている大規模なデータセット向けに、十分なシャッフル動作を得る必要があります。シャッフルが十分でない場合、エポックは、同じ順でシャードを読み取ってしまい、データが実質的にランダム化されません。
 
@@ -91,7 +91,7 @@ During training, it's important to shuffle the data well - poorly shuffled data 
 ds = tfds.load('imagenet2012', split='train', shuffle_files=True)
 ```
 
-Additionally, when `shuffle_files=True`, TFDS disables [`options.deterministic`](https://www.tensorflow.org/api_docs/python/tf/data/Options#deterministic), which may give a slight performance boost. To get deterministic shuffling, it is possible to opt-out of this feature with `tfds.ReadConfig`: either by setting `read_config.shuffle_seed` or overwriting `read_config.options.deterministic`.
+さらに、`shuffle_files=True` である場合、TFDS は  [`options.deterministic`](https://www.tensorflow.org/api_docs/python/tf/data/Options#deterministic) を無効化するため、パフォーマンスがわずかに向上することがあります。確定的なシャッフルを行うには、`tfds.ReadConfig` を使って `read_config.shuffle_seed` を設定するか、`read_config.options.deterministic` を上書きすることで、この機能をオプトアウトすることができます。
 
 ### ワーカー間でデータを自動シャーディングする（TF）
 
@@ -108,11 +108,11 @@ read_config = tfds.ReadConfig(
 ds = tfds.load('dataset', split='train', read_config=read_config)
 ```
 
-This is complementary to the subsplit API. First, the subplit API is applied: `train[:50%]` is converted into a list of files to read. Then, a `ds.shard()` op is applied on those files. For example, when using `train[:50%]` with `num_input_pipelines=2`, each of the 2 workers will read 1/4 of the data.
+これは subsplit API を補完するものです。まず、subplit API が適用され（`train[:50%]` が読み取るファイルのリストに変換されます）、それらのファイルに対して `ds.shard()` op が適用されます。たとえば、`num_input_pipelines=2` で `train[:50%]` を使用する場合、2 つの各ワーカーはデータの 4 分の 1 を読み取るようになります。
 
 `shuffle_files=True` である場合、ファイルは 1 つのワーカー内でシャッフルされますが、ワーカー全体ではシャッフルされません。各ワーカーはエポックごとにファイルの同じサブセットを読み取ります。
 
-Note: When using `tf.distribute.Strategy`, the `input_context` can be automatically created with [distribute_datasets_from_function](https://www.tensorflow.org/api_docs/python/tf/distribute/Strategy#distribute_datasets_from_function)
+注意: `tf.distribute.Strategy` を使用すると、[distribute_datasets_from_function](https://www.tensorflow.org/api_docs/python/tf/distribute/Strategy#distribute_datasets_from_function) で <code>input_context</code> を自動的に作成することができます。
 
 ### ワーカー間でデータを自動シャーディングする（Jax）
 
@@ -135,7 +135,7 @@ split = splits[jax.process_index()]
 
 デフォルトでは、TFDS は自動的に画像をデコードするようになっていますが、`tfds.decode.SkipDecoding` を使って画像のデコードをスキップし、手動で `tf.io.decode_image` 演算を適用する方がパフォーマンスが高くなる場合もあります。
 
-- When filtering examples (with `tf.data.Dataset.filter`), to decode images after examples have been filtered.
+- サンプルをフィルタし（`tf.data.Dataset.filter`）、サンプルがフィルタされた後に画像をデコードする場合。
 - 画像をクロップする場合。結合された `tf.image.decode_and_crop_jpeg` 演算を使用します。
 
 上記の両方の例のコードは、[decode ガイド](https://www.tensorflow.org/datasets/decode#usage_examples)をご覧ください。
