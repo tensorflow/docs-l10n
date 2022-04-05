@@ -8,7 +8,7 @@
 
 GPU は、大規模に実行する並列化可能なワークロードで高い処理能力を実現するように設計されています。そのため、これは多数の演算で構成されるディープニューラルネットに適しています。各演算は、より小さなワークロードに簡単に分割でき、並列に実行する入力テンソルで機能するため、通常レイテンシが低くなります。現在、最良のシナリオでは、GPU での推論は以前は利用できなかったリアルタイムアプリケーションで十分に速く実行できます。
 
-### Accuracy
+### 精度
 
 GPU は、16 ビットまたは 32 ビットの浮動小数点数を使用して計算を行い、（CPU とは異なり）最適なパフォーマンスを得るために量子化を必要としません。精度の低下によりモデルでの量子化が不可能になる場合、GPU でニューラルネットワークを実行すると、この問題が解消される場合があります。
 
@@ -370,9 +370,9 @@ if (interpreter->Invoke() != kTfLiteOk) return false;
 
 注意: これは量子化モデルでも機能しますが、バッファは内部の逆量子化バッファにバインドされるため、**float32 データを含む float32 サイズのバッファ**が必要です。
 
-### GPU Delegate Serialization
+### GPU デリゲートのシリアル化
 
-Using serialization of GPU kernel code and model data from previous initializations can reduce latency of GPU delegate's initialization up to 90%. This improvement is achieved by exchanging disk space for time savings. You can enable this feature with a few configurations options, as shown in the following code examples:
+前の初期化からの GPU カーネルコードとモデルデータのシリアル化を使用すると、GPU デリゲートの初期化のレイテンシーを 90% まで抑えることができます。この改善は、時間を節約するためにディスク容量を交換することで達成されます。この機能は、以下のサンプルコードで示されるように、いくつかの構成オプションで有効にすることができます。
 
 <div>
   <devsite-selector>
@@ -402,12 +402,12 @@ Using serialization of GPU kernel code and model data from previous initializati
   </devsite-selector>
 </div>
 
-When using the serialization feature, make sure your code complies with these implementation rules:
+シリアル化機能を使用する場合、コードが以下の実装ルールでコンパイルすることを確認してください。
 
-- Store the serialization data in a directory that is not accessible to other apps. On Android devices, use [`getCodeCacheDir()`](https://developer.android.com/reference/android/content/Context#getCacheDir()) which points to a location that is private to the current application.
-- The model token must be unique to the device for the specific model. You can compute a model token by generating a fingerprint from the model data (e.g. using [`farmhash::Fingerprint64`](https://github.com/google/farmhash)).
+- シリアル化データを他のアプリがアクセスできないディレクトリに保存します。Android デバイスでは、現在のアプリケーションに非公開の場所にポイントする [`getCodeCacheDir()`](https://developer.android.com/reference/android/content/Context#getCacheDir()) を使用します。
+- モデルトークンは、特定のモデルのデバイスに一意である必要があります。モデルトークンは、モデルデータからフィンガープリントを生成することで計算できます（[`farmhash::Fingerprint64`](https://github.com/google/farmhash) を使用するなど）。
 
-Note: This feature requires the [OpenCL SDK](https://github.com/KhronosGroup/OpenCL-SDK) for serialization support.
+注意: この機能には、シリアル化サポートを提供する [OpenCL SDK](https://github.com/KhronosGroup/OpenCL-SDK) が必要です。
 
 ## ヒントとコツ
 
