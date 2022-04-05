@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'kempy' } *-->
+<!--* freshness: { owner: 'akhorlin' } *-->
 
 # TensorFlow Hub ライブラリの概要
 
@@ -30,5 +30,5 @@ print(embeddings.shape, embeddings.dtype)
 
 ## 次のステップ
 
-- [ライブラリを使用する](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/tf2_saved_model.md)
-- [Reusable SavedModel](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/reusable_saved_models.md)
+- ライブラリを使用する
+- Reusable SavedModel
