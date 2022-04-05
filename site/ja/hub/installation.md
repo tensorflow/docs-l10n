@@ -37,7 +37,7 @@ $ pip install --upgrade tf-hub-nightly
 
 ## 次のステップ
 
-- [Library overview](lib_overview.md)
+- [ライブラリの概要](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/lib_overview.md)
 - チュートリアル:
     - [テキスト分類](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
     - [画像分類](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
