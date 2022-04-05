@@ -1,18 +1,47 @@
 # データセットのバージョン管理
 
-- [セマンティック](#semantic)
-- [サポートされているバージョン](#supported-versions)
-- [特定のバージョンを読み込む](#loading-a-specific-version)
-- [実験](#experiments)
-- [BUILDER_CONFIGS とバージョン](#builder-configs-and-versions)
+## 定義
+
+Versioning can refer to different meaning:
+
+- The TFDS API version (pip version): `tfds.__version__`
+- The public dataset version, independent from TFDS (e.g. [Voc2007](https://pjreddie.com/projects/pascal-voc-dataset-mirror/), Voc2012). In TFDS each public dataset version should be implemented as an independent dataset:
+    - Either through [builder configs](https://www.tensorflow.org/datasets/add_dataset#dataset_configurationvariants_tfdscorebuilderconfig): E.g. `voc/2007`, `voc/2012`
+    - Either as 2 independent datasets: E.g. `wmt13_translate`, `wmt14_translate`
+- The dataset generation code version in TFDS (`my_dataset:1.0.0`): For example, if a bug is found in the TFDS implementation of `voc/2007`, the `voc.py` generation code will be updated (`voc/2007:1.0.0` -&gt; `voc/2007:2.0.0`).
+
+The rest of this guide only focus on the last definition (dataset code version in the TFDS repository).
+
+## サポートされているバージョン
+
+As a general rule:
+
+- Only the last current version can be generated.
+- All previously generated dataset can be read (note: This require datasets generated with TFDS 4+).
+
+```python
+builder = tfds.builder('my_dataset')
+builder.info.version  # Current version is: '2.0.0'
+
+# download and load the last available version (2.0.0)
+ds = tfds.load('my_dataset')
+
+# Explicitly load a previous version (only works if
+# `~/tensorflow_datasets/my_dataset/1.0.0/` already exists)
+ds = tfds.load('my_dataset:1.0.0')
+```
 
 ## セマンティック
 
 TFDS で定義されているすべての`DatasetBuilder`にはバージョンがあります。例を示します。
 
-```py
+```python
 class MNIST(tfds.core.GeneratorBasedBuilder):
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version('2.0.0')
+  RELEASE_NOTES = {
+      '1.0.0': 'Initial release',
+      '2.0.0': 'Update dead download url',
+  }
 ```
 
 バージョンは [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html): `MAJOR.MINOR.PATCH`に従います。バージョンの目的は、再現性を保証できるようにすることにあります。つまり、特定のデータセットを固定のバージョンで読み込むと、同じデータが生成されます。より具体的に示します。
@@ -27,31 +56,11 @@ TFDS ライブラリのコード変更が行われ、そのコード変更がデ
 
 また、データセットによっては、TFDS のバージョンから独立した別のバージョン管理方式があることにも注意してください。例えば、Open Images データセットにはいくつかのバージョンがあり、TFDS では、対応するビルダーは`open_images_v4`、`open_images_v5`などです。
 
-## サポートされているバージョン
-
-`DatasetBuilder`は、複数のバージョンをサポートできますが、そのバージョンが正規バージョンより高い場合もあれば低い場合もあります。例を示します。
-
-```py
-class Imagenet2012(tfds.core.GeneratorBasedBuilder):
-  VERSION = tfds.core.Version('2.0.1', 'Encoding fix. No changes from user POV')
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version('3.0.0', 'S3: tensorflow.org/datasets/splits'),
-      tfds.core.Version('1.0.0'),
-      tfds.core.Version('0.0.9', tfds_version_to_prepare="v1.0.0"),
-  ]
-```
-
-古いバージョンのサポートを継続するかどうかについての選択は、主にデータセットとバージョンの人気度に基づき、ケースバイケースで行われます。最終的にはデータセットごとにごく少数のバージョン、理想的には単一のバージョンのみのサポートを目指しています。上記の例では、バージョン`2.0.0`は読者の観点から見た場合`2.0.1`と同じなので、既にサポートされていないことが分かります。
-
-サポートされているバージョンの中で正規のバージョン番号よりも高い番号を持つバージョンは、実験的なものとみなしており、破損している場合があります。しかしそれらは最終的には正規化されます。
-
-バージョンは`tfds_version_to_prepare`を指定することができます。これは、このデータセットのバージョンが既に古いバージョンのコードで準備されている場合、現在のバージョンの TFDS コードと使用はできますが、準備はできないことを意味します。`tfds_version_to_prepare`の値には、このバージョンでデータセットをダウンロードして準備するために使用が可能な、TFDS の最新の既知のバージョンを指定します。
-
 ## 特定のバージョンを読み込む
 
 データセットや`DatasetBuilder`を読み込む際に、使用するバージョンを指定できます。例を示します。
 
-```py
+```python
 tfds.load('imagenet2012:2.0.1')
 tfds.builder('imagenet2012:2.0.1')
 
@@ -63,44 +72,16 @@ tfds.load('imagenet2012:3.*.*')
 
 パブリケーションに TFDS を使用する場合には、以下をお勧めします。
 
-- **バージョンの`MAJOR`コンポーネントのみを修正する。**
+- バージョンの`MAJOR`コンポーネントのみを修正する。
 - **結果の中に、使用したデータセットのバージョン番号を公表する。**
 
 そうすることによって、将来の自分自身、読者、レビュアーが結果を再現しやすくなります。
-
-## 実験
-
-多くのデータセットビルダーに影響を与える TFDS の変更を段階的に展開するために、実験という概念を導入しました。実験は、最初の導入ではデフォルトで無効になっていますが、特定のデータセットのバージョンを有効にすることができます。これは通常、最初に「将来の」（まだ正規化されていない）バージョンで行います。例を示します。
-
-```py
-class MNIST(tfds.core.GeneratorBasedBuilder):
-  VERSION = tfds.core.Version("1.0.0")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", "EXP1: Opt-in for experiment 1",
-                        experiments={tfds.core.Experiment.EXP1: True}),
-  ]
-```
-
-実験が期待通りに動作することを確認した後、それをすべての、または大部分のデータセットに拡張し、その時点でデフォルトで有効化することができます。上記の定義は以下のようになります。
-
-```py
-class MNIST(tfds.core.GeneratorBasedBuilder):
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.EXP1: False})
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", "EXP1: Opt-in for experiment 1"),
-  ]
-```
-
-すべてのデータセットバージョンに渡って実験を使用すると（`{experiment: False}`を指定したデータセットのバージョンが残っていない場合は）、その実験を削除することができます。
-
-実験とその説明は`core/utils/version.py`で定義されています。
 
 ## BUILDER_CONFIGS とバージョン
 
 データセットによっては、複数の`BUILDER_CONFIGS`を定義しているものがあります。その場合、`version`と`supported_versions`は、それらの構成オブジェクト上で定義します。それ以外は、セマンティックと使用方法は同じです。例を示します。
 
-```py
+```python
 class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
@@ -115,4 +96,39 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
   ]
 
 tfds.load('open_images_v4/original:1.*.*')
+```
+
+## Experimental version
+
+Note: The following is bad practice, error prone and should be discouraged.
+
+It is possible to allow 2 versions to be generated at the same time. One default and one experimental version. For example:
+
+```python
+class MNIST(tfds.core.GeneratorBasedBuilder):
+  VERSION = tfds.core.Version("1.0.0")  # Default version
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0"),  # Experimental version
+  ]
+
+
+# Download and load default version 1.0.0
+builder = tfds.builder('mnist')
+
+#  Download and load experimental version 2.0.0
+builder = tfds.builder('mnist', version='experimental_latest')
+```
+
+In the code, you need to make sure to support the 2 versions:
+
+```python
+class MNIST(tfds.core.GeneratorBasedBuilder):
+
+  ...
+
+  def _generate_examples(self, path):
+    if self.info.version >= '2.0.0':
+      ...
+    else:
+      ...
 ```
