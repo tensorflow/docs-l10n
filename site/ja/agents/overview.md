@@ -73,7 +73,7 @@ TF Agents にはステーブル版とナイトリ―ビルドがあります。�
 
 リリース | ブランチ/タグ | TensorFlow バージョン
 --- | --- | ---
-ナイトリービルド | [master](https://github.com/tensorflow/agents) | TF-ナイトリ―ビルド
+ナイトリービルド | [マスター](https://github.com/tensorflow/agents) | TF-ナイトリ―ビルド
 0.12.0 | [v0.12.0](https://github.com/tensorflow/agents/tree/v0.12.0) | 2.8.0
 0.11.0 | [v0.11.0](https://github.com/tensorflow/agents/tree/v0.11.0) | 2.7.0
 0.10.0 | [v0.10.0](https://github.com/tensorflow/agents/tree/v0.10.0) | 2.6.0
