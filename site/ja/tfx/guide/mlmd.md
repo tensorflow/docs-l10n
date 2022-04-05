@@ -1,37 +1,37 @@
 # ML メタデータ
 
-[ML Metadata (MLMD)](https://github.com/google/ml-metadata) is a library for recording and retrieving metadata associated with ML developer and data scientist workflows. MLMD is an integral part of [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx), but is designed so that it can be used independently.
+[ML メタデータ（MLMD）](https://github.com/google/ml-metadata)は、ML 開発者とデータサイエンティストのワークフローに関連付けられたメタデータの記録と取得を行うライブラリです。MLMD は [TensorFlow Extended（TFX）](https://www.tensorflow.org/tfx)の基本構成要素ですが、独立して使用できるように設計されています。
 
-Every run of a production ML pipeline generates metadata containing information about the various pipeline components, their executions (e.g. training runs), and resulting artifacts(e.g. trained models). In the event of unexpected pipeline behavior or errors, this metadata can be leveraged to analyze the lineage of pipeline components and debug issues.Think of this metadata as the equivalent of logging in software development.
+本番 ML パイプラインを実行するたびに、さまざまなパイプラインコンポーネント、その実行（トレーニングランなど）、および結果のアーティファクト（トレーニング済みのモデルなど）に関する情報が含まれたメタデータが生成されます。予期しないパイプラインの動作やエラーが発生した場合には、このメタデータを使用して、パイプラインコンポーネントの系統を分析し、問題をデバッグすることができます。このメタデータは、ソフトウェア開発におけるログ記録に相当すると考えても良いでしょう。
 
-MLMD helps you understand and analyze all the interconnected parts of your ML pipeline instead of analyzing them in isolation and can help you answer questions about your ML pipeline such as:
+MLMD によって、相互に接続された ML パイプラインの各部位を個別にではなく全体として理解し、分析することができます。また、次のような ML パイプラインに関する疑問に答える上でも役立ちます。
 
-- Which dataset did the model train on?
-- What were the hyperparameters used to train the model?
-- Which pipeline run created the model?
-- Which training run led to this model?
-- Which version of TensorFlow created this model?
-- When was the failed model pushed?
+- どのデータセットでモデルはトレーニングされたのか
+- モデルのトレーニングにはどのハイパーパラメータが使用されたのか
+- どのパイプラインランでモデルが作成されたのか
+- どのトレーニングランでこのモデルが生じたのか
+- このモデルはどのバージョンの TensorFlow で作成されたのか
+- 失敗したモデルがプッシュされたのはいつか
 
-## Metadata store
+## メタデータストア
 
-MLMD registers the following types of metadata in a database called the **Metadata Store**.
+MLMD は次の種類のメタデータを**メタデータストア**と呼ばれるデータベースに登録します。
 
-1. Metadata about the artifacts generated through the components/steps of your ML pipelines
-2. Metadata about the executions of these components/steps
-3. Metadata about pipelines and associated lineage information
+1. ML パイプラインのコンポーネント/ステップで生成されたアーティファクトに関するメタデータ
+2. これらのコンポーネント/ステップの実行に関するメタデータ
+3. パイプラインと関連する系統の情報に関するメタデータ
 
-The Metadata Store provides APIs to record and retrieve metadata to and from the storage backend. The storage backend is pluggable and can be extended. MLMD provides reference implementations for SQLite (which supports in-memory and disk) and MySQL out of the box.
+メタデータストアには、ストレージバックエンドへのメタデータの記録とそこからの取得を行うための API があります。ストレージバックエンドは接続可能であり、拡張が可能です。MLMD はすぐに利用できる SQLite（インメモリとディスクをサポート）と MySQL のリファレンス実装を提供しています。
 
-This graphic shows a high-level overview of the various components that are part of MLMD.
+以下の図は、MLMD の一部を構成するさまざまなコンポーネントを大まかに示しています。
 
-![ML Metadata Overview](images/mlmd_overview.png)
+![ML メタデータの概要](images/mlmd_overview.png)
 
-### Metadata storage backends and store connection configuration
+### メタデータのストレージバックエンドとストア接続構成
 
-The `MetadataStore` object receives a connection configuration that corresponds to the storage backend used.
+`MetadataStore` オブジェクトは、使用しているストレージバックエンドに対応する接続構成を受信します。
 
-- **Fake Database** provides an in-memory DB (using SQLite) for fast experimentation and local runs. The database is deleted when the store object is destroyed.
+- **Fake Database** は、高速実験とローカルランを行うためのインメモリ DB（SQLite を使用）を提供します。このデータベースはストアオブジェクトが破棄されると削除されます。
 
 ```python
 import ml_metadata as mlmd
@@ -43,7 +43,7 @@ connection_config.fake_database.SetInParent() # Sets an empty fake database prot
 store = metadata_store.MetadataStore(connection_config)
 ```
 
-- **SQLite** reads and writes files from disk.
+- **SQLite** はディスクからファイルを読み取り、ディスクに書き込みます。
 
 ```python
 connection_config = metadata_store_pb2.ConnectionConfig()
@@ -52,7 +52,7 @@ connection_config.sqlite.connection_mode = 3 # READWRITE_OPENCREATE
 store = metadata_store.MetadataStore(connection_config)
 ```
 
-- **MySQL** connects to a MySQL server.
+- **MySQL** は MySQL サーバーに接続します。
 
 ```python
 connection_config = metadata_store_pb2.ConnectionConfig()
@@ -64,7 +64,7 @@ connection_config.mysql.password = '...'
 store = metadata_store.MetadataStore(connection_config)
 ```
 
-Similarly, when using a MySQL instance with Google CloudSQL([quickstart](https://cloud.google.com/sql/docs/mysql/quickstart), [connect-overview](https://cloud.google.com/sql/docs/mysql/connect-overview)), one could also use SSL option if applicable.
+同様に、MySQL インスタンスを Google CloudSQL（[クイックスタート](https://cloud.google.com/sql/docs/mysql/quickstart)、[接続の概要](https://cloud.google.com/sql/docs/mysql/connect-overview)）で使用する場合、該当する場合は SSL オプションを使用することも可能です。
 
 ```python
 connection_config.mysql.ssl_options.key = '...'
@@ -76,42 +76,42 @@ connection_config.mysql.ssl_options.verify_server_cert = '...'
 store = metadata_store.MetadataStore(connection_config)
 ```
 
-## Data model
+## データモデル
 
-The Metadata Store uses the following data model to record and retrieve metadata from the storage backend.
+メタデータストアは次のデータモデルを使用して、ストレージバックエンドにメタデータを記録し、そこから取得します。
 
-- `ArtifactType` describes an artifact's type and its properties that are stored in the metadata store. You can register these types on-the-fly with the metadata store in code, or you can load them in the store from a serialized format. Once you register a type, its definition is available throughout the lifetime of the store.
-- An `Artifact` describes a specific instance of an `ArtifactType`, and its properties that are written to the metadata store.
-- An `ExecutionType` describes a type of component or step in a workflow, and its runtime parameters.
-- An `Execution` is a record of a component run or a step in an ML workflow and the runtime parameters. An execution can be thought of as an instance of an `ExecutionType`. Executions are recorded when you run an ML pipeline or step.
-- An `Event` is a record of the relationship between artifacts and executions. When an execution happens, events record every artifact that was used by the execution, and every artifact that was produced. These records allow for lineage tracking throughout a workflow. By looking at all events, MLMD knows what executions happened and what artifacts were created as a result. MLMD can then recurse back from any artifact to all of its upstream inputs.
-- A `ContextType` describes a type of conceptual group of artifacts and executions in a workflow, and its structural properties. For example: projects, pipeline runs, experiments, owners etc.
-- A `Context` is an instance of a `ContextType`. It captures the shared information within the group. For example: project name, changelist commit id, experiment annotations etc. It has a user-defined unique name within its `ContextType`.
-- An `Attribution` is a record of the relationship between artifacts and contexts.
-- An `Association` is a record of the relationship between executions and contexts.
+- `ArtifactType` は、メタデータストアに保存されているアーティファクトの種類とそのプロパティを説明します。これらの種類はオンザフライ方式でコードのメタデータストアに登録するか、シリアル化形式からストアに読み込むことができます。種類を登録したら、その定義がストアの寿命期間、利用できるようになります。
+- `Artifact` は `ArtifactType` の特定のインスタンスと、メタデータストアに書き込まれたプロパティを説明します。
+- `ExecutionType` は、コンポーネントまたはワークフローのステップの種類とランタイムパラメーターを説明します。
+- `Execution` は ML ワークフローのコンポーネントランまたはステップとランタイムパラメーターのレコードです。実行は、`ExecutionType` のインスタントとして考えられます。実行は、ML パイプラインまたはステップを実行すると記録されます。
+- `Event` はアーティファクトと実行の関係のレコードです。実行が発生すると、イベントは実行で使用されたすべてのアーティファクトと生成されたすべてのアーティファクトを記録します。これらのレコードによって、ワークフロー全体で系統を追跡することができます。すべてのイベントを見ることで、MLMD はどの実行が発生し、どのアーティファクトが結果的に作成されたのかを把握します。その上で、アーティファクトから上流のすべての入力にさかのぼることができます。
+- `ContextType` は、ワークフロー内のアーティファクトと実行の概念的なグループの種類と、その構造上のプロパティを説明します。たとえば、プロジェクト、パイプラインラン、実験、所有者などです。
+- `Context` は `ContextType` のインスタンスです。グループ内の共有情報をキャプチャします。たとえば、プロジェクト名、変更リストのコミット ID、実験の注釈などです。`ContextType` にはユーザー定義の一意の名前があります。
+- `Attribution` は、アーティファクトとコンテキストの関係のレコードです。
+- `Association` は、実行とコンテキストの関係のレコードです。
 
-## MLMD Functionality
+## MLMD の機能
 
-Tracking the inputs and outputs of all components/steps in an ML workflow and their lineage allows ML platforms to enable several important features. The following list provides a non-exhaustive overview of some of the major benefits.
+ML ワークフローとその系統のすべてのコンポーネント/ステップの入力と出力を追跡すると、ML プラットフォームでさまざまな重要な機能が有効になります。主なメリットの一部を以下のリストに示します。
 
-- **List all Artifacts of a specific type.** Example: all Models that have been trained.
-- **Load two Artifacts of the same type for comparison.** Example: compare results from two experiments.
-- **Show a DAG of all related executions and their input and output artifacts of a context.** Example: visualize the workflow of an experiment for debugging and discovery.
-- **Recurse back through all events to see how an artifact was created.** Examples: see what data went into a model; enforce data retention plans.
-- **Identify all artifacts that were created using a given artifact.** Examples: see all Models trained from a specific dataset; mark models based upon bad data.
-- **Determine if an execution has been run on the same inputs before.** Example: determine whether a component/step has already completed the same work and the previous output can just be reused.
-- **Record and query context of workflow runs.** Examples: track the owner and changelist used for a workflow run; group the lineage by experiments; manage artifacts by projects.
-- **Declarative nodes filtering capabilities on properties and 1-hop neighborhood nodes.** Examples: look for artifacts of a type and under some pipeline context; return typed artifacts where a given property’s value is within a range; find previous executions in a context with the same inputs.
+- **特定の種類のアーティファクトをすべてリストする。** 例: トレーニング済みのすべてのモデル
+- **同じ種類のアーティファクトを 2 つ読み込んで比較する。** 例: 2 つの実験の結果の比較
+- **コンテキストの関連するすべての実行とその入力と出力アーティファクトの DAG を示す。** 例: 実験のワークフローを視覚化して、デバッグや検出を行う
+- **すべてのイベントをさかのぼってアーティファクトがどのように作成されたのかを確認する。** 例: どのデータがモデルに取り込まれたのか、データ保持計画を適用する
+- **ある特定のアーティファクトを使って作成されたすべてのアーティファクトを識別する。** 例: 特定のデータセットからトレーニングされたすべてのモデルを確認する、不良データに基づくモデルをマークする
+- **実行が前と同じ入力で実行されたかどうかを判断する。** 例: コンポーネント/ステップが同じ作業をすでに完了しており、前の出力を再利用できるかどうかを判断する
+- **ワークフローランのコンテキストを記録してクエリする。** 例: ワークフローランにしよされた所有者と変更リストを追跡する、実験別に系統をグループ化する、プロジェクト別にアーティファクトを管理する
+- **プロパティと 1 ホップ隣接ノードでの宣言的ノードフィルタ機能。** 例: 型のアーティファクトをパイプラインコンテキスト下で探します。特定のプロパティ値が範囲内にある型付きのアーティファクトを返します。同じ入力でコンテキスト内の前の実行を検索します。
 
-See the [MLMD tutorial](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial) for an example that shows you how to use the MLMD API and the metadata store to retrieve lineage information.
+MLMD API とメタデータストアを使用して系統情報を取得する方法を示す例については、[MLMD チュートリアル](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial)をご覧ください。
 
-### Integrate ML Metadata into your ML Workflows
+### ML メタデータを ML ワークフローに組み込む
 
-If you are a platform developer interested in integrating MLMD into your system, use the example workflow below to use the low-level MLMD APIs to track the execution of a training task. You can also use higher-level Python APIs in notebook environments to record experiment metadata.
+MLMD をシステムに組み込みたいと考えているプラットフォーム開発者であれば、以下の低レベルの MLMD API を使ってトレーニングタスクの実行を追跡するワークフローの例を利用できます。また、ノートブック環境でより高いレベルの Python API を使って実験的なメタデータを記録することもできます。
 
-![ML Metadata Example Flow](images/mlmd_flow.png)
+![ML メタデータのサンプルフロー](images/mlmd_flow.png)
 
-1. Register artifact types
+1. アーティファクトの種類を登録する
 
 ```python
 # Create ArtifactTypes, e.g., Data and Model
@@ -131,7 +131,7 @@ model_type_id = store.put_artifact_type(model_type)
 artifact_types = store.get_artifact_types()
 ```
 
-1. Register execution types for all steps in the ML workflow
+1. ML ワークフローのすべてのステップの実行タイプを登録する
 
 ```python
 # Create an ExecutionType, e.g., Trainer
@@ -144,7 +144,7 @@ trainer_type_id = store.put_execution_type(trainer_type)
 [registered_type] = store.get_execution_types_by_id([trainer_type_id])
 ```
 
-1. Create an artifact of DataSet ArtifactType
+1. DataSet ArtifactType のアーティファクトを作成する
 
 ```python
 # Create an input artifact of type DataSet
@@ -166,7 +166,7 @@ artifacts_with_conditions = store.get_artifacts(
           filter_query='uri LIKE "%/data" AND properties.day.int_value > 0'))
 ```
 
-1. Create an execution of the Trainer run
+1. Trainer ランの実行を作成する
 
 ```python
 # Register the Execution of a Trainer run
@@ -183,7 +183,7 @@ executions_with_conditions = store.get_executions(
         filter_query='type = "Trainer" AND properties.state.string_value IS NOT NULL'))
 ```
 
-1. Define the input event and read data
+1. 入力イベントを定義し、データを読み取る
 
 ```python
 # Define the input event
@@ -196,7 +196,7 @@ input_event.type = metadata_store_pb2.Event.DECLARED_INPUT
 store.put_events([input_event])
 ```
 
-1. Declare the output artifact
+1. 出力アーティファクトを宣言する
 
 ```python
 # Declare the output artifact of type SavedModel
@@ -208,7 +208,7 @@ model_artifact.type_id = model_type_id
 [model_artifact_id] = store.put_artifacts([model_artifact])
 ```
 
-1. Record the output event
+1. 出力イベントを記録する
 
 ```python
 # Declare the output event
@@ -221,7 +221,7 @@ output_event.type = metadata_store_pb2.Event.DECLARED_OUTPUT
 store.put_events([output_event])
 ```
 
-1. Mark the execution as completed
+1. 実行を完了としてマークする
 
 ```python
 trainer_run.id = run_id
@@ -229,7 +229,7 @@ trainer_run.properties["state"].string_value = "COMPLETED"
 store.put_executions([trainer_run])
 ```
 
-1. Group artifacts and executions under a context using attributions and assertions artifacts
+1. attribution と assertion アーティファクトを使って、アーティファクトと実行をコンテキストの下にグループ化する
 
 ```python
 # Create a ContextType, e.g., Experiment with a note property
@@ -270,19 +270,19 @@ experiment_executions_with_conditions = store.get_executions(
         filter_query=('contexts_a.id = {}'.format(experiment_id))))
 ```
 
-## Use MLMD with a remote gRPC server
+## MLMD をリモート gRPC サーバーと使用する
 
-You can use MLMD with remote gRPC servers as shown below:
+以下に示すように、MLMD をリモート gRPC サーバーと使用することができます。
 
-- Start a server
+- サーバーを起動します。
 
 ```bash
 bazel run -c opt --define grpc_no_ares=true  //ml_metadata/metadata_store:metadata_store_server
 ```
 
-By default, the server uses a fake in-memory db per request and does not persist the metadata across calls. It can also be configured with a MLMD `MetadataStoreServerConfig` to use SQLite files or MySQL instances. The config can be stored in a text protobuf file and passed to the binary with `--metadata_store_server_config_file=path_to_the_config_file`.
+デフォルトでは、サーバーはリクエストごとにフェイクのインメモリ db を使用し、呼び出し間でメタデータを永続化しません。また、MySQL インスタンスまたは Sqlite ファイルを使用するように MLMD の `MetadataStoreServerConfig` で構成することもできます。この構成はテキスト形式の protobuf ファイルに保存し、`--metadata_store_server_config_file=path_to_the_config_file` を使ってバイナリーに渡すことができます。
 
-An example `MetadataStoreServerConfig` file in text protobuf format:
+テキスト protobuf 形式の `MetadataStoreServerConfig` ファイルの例：
 
 ```textpb
 connection_config {
@@ -293,7 +293,7 @@ connection_config {
 }
 ```
 
-- Create the client stub and use it in Python
+- クライアントスタブを作成して Python で使用します。
 
 ```python
 from grpc import insecure_channel
@@ -305,7 +305,7 @@ channel = insecure_channel('localhost:8080')
 stub = metadata_store_service_pb2_grpc.MetadataStoreServiceStub(channel)
 ```
 
-- Use MLMD with RPC calls
+- MLMD を RPC 呼び出しで使用します。
 
 ```python
 # Create ArtifactTypes, e.g., Data and Model
@@ -330,10 +330,10 @@ stub.PutArtifactType(request)
 
 ## リソース
 
-The MLMD library has a high-level API that you can readily use with your ML pipelines. See the [MLMD API documentation](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd) for more details.
+MLMD ライブラリには、ML パイプラインですぐに使用できる高位 API があります。詳細は、[MLMD API ドキュメント](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd)をご覧ください。
 
-Check out [MLMD Declarative Nodes Filtering](https://github.com/google/ml-metadata/blob/v1.2.0/ml_metadata/proto/metadata_store.proto#L708-L786) to learn how to use MLMD declarative nodes filtering capabilities on properties and 1-hop neighborhood nodes.
+プロパティと 1 ホップ隣接ノードでの MLMD 宣言的ノードフィルタ機能の使用方法については、[MLMD Declarative Nodes Filtering](https://github.com/google/ml-metadata/blob/v1.2.0/ml_metadata/proto/metadata_store.proto#L708-L786) をご覧ください。
 
 また、MLMD を使ってパイプラインコンポーネントの系統を追跡する方法については、[MLMD チュートリアル](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial)をご覧ください。
 
-MLMD provides utilities to handle schema and data migrations across releases. See the MLMD [Guide](https://github.com/google/ml-metadata/blob/master/g3doc/get_started.md#upgrade-the-mlmd-library) for more details.
+MLMD には、リリース間でスキーマとデータ移行を処理するためのユーティリティが用意されています。詳細は、MLMD の[ガイド](https://github.com/google/ml-metadata/blob/master/g3doc/get_started.md#upgrade-the-mlmd-library)をご覧ください。
