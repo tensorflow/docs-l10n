@@ -21,5 +21,13 @@ TensorFlow は、TensorFlow モデル最適化パッケージの依存ファイ�
 ソースからインストールすることも可能です。これには [Bazel](https://bazel.build/) 構築システムが必要です。
 
 ```shell
-# To install dependencies on Ubuntu: # sudo apt-get install bazel git python-pip # For other platforms, see Bazel docs above. git clone https://github.com/tensorflow/model-optimization.git cd model_optimization bazel build --copt=-O3 --copt=-march=native :pip_pkg PKGDIR=$(mktemp -d) ./bazel-bin/pip_pkg $PKGDIR pip install --user --upgrade $PKGDIR/*.whl
+# To install dependencies on Ubuntu:
+# sudo apt-get install bazel git python-pip
+# For other platforms, see Bazel docs above.
+git clone https://github.com/tensorflow/model-optimization.git
+cd model-optimization
+bazel build --copt=-O3 --copt=-march=native :pip_pkg
+PKGDIR=$(mktemp -d)
+./bazel-bin/pip_pkg $PKGDIR
+pip install --user --upgrade $PKGDIR/*.whl
 ```
