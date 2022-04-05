@@ -276,7 +276,7 @@ $ python
 ```bash
 TF_CFLAGS=( $(python -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_compile_flags()))') )
 TF_LFLAGS=( $(python -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_link_flags()))') )
-g++ -std=c++11 -shared zero_out.cc -o zero_out.so -fPIC ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} -O2
+g++ -std=c++14 -shared zero_out.cc -o zero_out.so -fPIC ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} -O2
 ```
 
 macOS では、`.so` ファイルをビルドするときに、"-undefined dynamic_lookup" という追加フラグが必要です。
@@ -377,17 +377,17 @@ $ python zero_out_op_test.py
 
 基本的な（ある程度の制限が付いた）演算子のビルド方法と実装について理解したので、演算子に通常組み込む必要のある、より複雑な機能を確認しましょう。
 
-- [条件チェックと検証](#conditional-checks-and-validation)
-- [演算子の登録](#op-registration)
-    - [属性](#attrs)
-    - [属性のタイプ](#attr-types)
+- [Conditional checks and validation](#conditional-checks-and-validation)
+- [Op registration](#op-registration)
+    - [Attrs](#attrs)
+    - [Attr types](#attr-types)
     - [ポリモーフィズム](#polymorphism)
     - [入力と出力](#inputs-and-outputs)
-    - [下位互換性](#backwards-compatibility)
+    - [Backwards compatibility](#backwards-compatibility)
 - [GPU サポート](#gpu-support)
-    - [GPU デバイス向けのカーネルのコンパイル](#compiling-the-kernel-for-the-gpu-device)
-- [Python での勾配の実装](#implement-the-gradient-in-python)
-- [C++ での形状関数](#shape-functions-in-c)
+    - [Compiling the kernel for the GPU device](#compiling-the-kernel-for-the-gpu-device)
+- [Implement the gradient in Python](#implement-the-gradient-in-python)
+- [Shape functions in C++](#shape-functions-in-c)
 
 ### 条件チェックと検証
 
@@ -999,7 +999,7 @@ REGISTER_OP("MultipleInsAndOuts")
 
 安全な変更と安全でない変更の全リストは、[`tensorflow/core/framework/op_compatibility_test.cc`](#%E3%83%9D%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%95%E3%82%A3%E3%82%BA%E3%83%A0) をご覧ください。演算子への変更を下位互換性にできない場合は、新しいセマンティクスと新しい名前で新しい演算を作成してください。
 
-また、これらの変更によって `GraphDef` 互換性を維持できるかもしれませんが、生成される Python コードが以前のコーラーと互換性のない方法に変更される可能性があります。Python API は、手書きの Python ラッパーを注意深く変更することで互換性を維持できます。ただし、最後に新しいオプションの引数を追加する場合を除いて、以前のシグネチャを保持することもできます。一般的に互換性のない変更は、TensorFlow がメジャーバージョンを変更する場合にのみ行うことができ、<a href="./versions.md#compatibility_of_graphs_and_checkpoints" data-md-type="link">`GraphDef` バージョンのセマンティクス</a>に準拠する必要があります。
+また、これらの変更によって `GraphDef` 互換性を維持できるかもしれませんが、生成される Python コードが以前のコーラーと互換性のない方法に変更される可能性があります。Python API は、手書きの Python ラッパーを注意深く変更することで互換性を維持できます。ただし、最後に新しいオプションの引数を追加する場合を除いて、以前のシグネチャを保持することもできます。一般的に互換性のない変更は、TensorFlow がメジャーバージョンを変更する場合にのみ行うことができ、<a data-md-type="raw_html" href="./versions.md#compatibility_of_graphs_and_checkpoints">`GraphDef` バージョンのセマンティクス</a>に準拠する必要があります。
 
 ### GPU のサポート
 
@@ -1023,10 +1023,10 @@ REGISTER_OP("MultipleInsAndOuts")
 CUDA カーネルを使用して演算子を実装している例については [cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc) をご覧ください。`tf_custom_op_library` は、CUDA カーネル（`*.cu.cc` ファイル）を含むソースファイルのリストが指定されている `gpu_srcs` 引数を受け入れます。TensorFlow のバイナリインストールで使用する場合、CUDA カーネルは NVIDIA の `nvcc` コンパイラを使用してコンパイルされる必要があります。次は、[cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc) と [cuda_op_kernel.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cc) を単一の動的に読み込まれるライブラリにコンパイルするために使用できるコマンドのシーケンスです。
 
 ```bash
-nvcc -std=c++11 -c -o cuda_op_kernel.cu.o cuda_op_kernel.cu.cc \
+nvcc -std=c++14 -c -o cuda_op_kernel.cu.o cuda_op_kernel.cu.cc \
   ${TF_CFLAGS[@]} -D GOOGLE_CUDA=1 -x cu -Xcompiler -fPIC
 
-g++ -std=c++11 -shared -o cuda_op_kernel.so cuda_op_kernel.cc \
+g++ -std=c++14 -shared -o cuda_op_kernel.so cuda_op_kernel.cc \
   cuda_op_kernel.cu.o ${TF_CFLAGS[@]} -fPIC -lcudart ${TF_LFLAGS[@]}
 ```
 
@@ -1040,7 +1040,7 @@ CUDA ライブラリが `/usr/local/lib64` にインストールされていな�
 
 特定の演算子のグラフにおいて、TesorFlow は自動微分（バックプロパゲーション）を使用して、既存の演算子に対する勾配を表現する新しい演算子を追加します。自動微分が新しい演算子でも動作するようにするには、演算子の入力指定勾配に対する勾配を計算する勾配関数を演算子の出力に対して登録する必要があります。
 
-数学的には、演算子が \(y = f(x)\)  を計算する場合、登録されている勾配演算子は、\(y\) に関する損失 \(L\) の勾配 \(\partial L/ \partial y\) を連鎖規則を介して \(x\) に関する勾配 \(\partial L/ \partial x\) に変換します。
+数学的には、演算子が (y = f(x))  を計算する場合、登録されている勾配演算子は、(y) に関する損失 (L) の勾配 (\partial L/ \partial y) を連鎖規則を介して (x) に関する勾配 (\partial L/ \partial x) に変換します。
 
 $$\frac{\partial L}{\partial x} = \frac{\partial L}{\partial y} \frac{\partial y}{\partial x} = \frac{\partial L}{\partial y} \frac{\partial f}{\partial x}.$$
 
