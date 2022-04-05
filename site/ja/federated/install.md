@@ -46,7 +46,7 @@ TensorFlow Federated（TFF）を使用するための環境は、いくつかの
 - TensorFlow Federated に変更を適用し、それらの変更が送信またはリリースされる前に、TensorFlow Federated を使用するコンポーネントでテストする。
 - TensorFlow Federated に送信されたがリリースされていない変更を使用する。
 
-### 1. Install the Python development environment.
+### 1. Python 開発環境をインストールする
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">sudo apt update</code>
