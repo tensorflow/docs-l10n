@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'kempy' reviewed: '2020-09-14' } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2020-09-14' } *-->
 
 # TensorFlow Hub
 
@@ -18,9 +18,9 @@ print(embeddings.shape)  #(4,128)
 
 ## 次のステップ
 
-- [tfhub.dev でモデルを検索する](https://tfhub.dev/)
-- [tfhub.dev にモデルを公開する](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/publish.md)
+- tfhub.dev でモデルを検索する
+- [Publish models on tfhub.dev](publish.md)
 - TensorFlow Hub ライブラリ
-    - [TensorFlow Hub をインストールする](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/installation.md)
-    - [ライブラリの概要](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/lib_overview.md)
-- [チュートリアルを実行する](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/hub/tutorials)
+    - TensorFlow Hub をインストールする
+    - [ライブラリの概要](lib_overview.md)
+- [Follow tutorials](tutorials)
