@@ -19,8 +19,8 @@
 
 ## 配信
 
-- [Client API (REST)](https://www.tensorflow.org/tfx/serving/api_rest)
-- [Server API (C++)](https://www.tensorflow.org/tfx/serving/api_docs/cc)
+- Client API（REST）
+- Server API（C++）
 
 ## ML メタデータ
 
