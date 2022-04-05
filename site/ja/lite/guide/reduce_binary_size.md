@@ -22,9 +22,7 @@
     </tr>
   </thead>
   <tr>
-    <td rowspan="2">
-      <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>
-    </td>
+    <td rowspan="2">       Mobilenet_1.0_224(float)     </td>
     <td rowspan="2">画像分類</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar (296,635 バイト)</td>
