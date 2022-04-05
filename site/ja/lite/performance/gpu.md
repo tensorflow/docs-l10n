@@ -292,7 +292,7 @@ GPU デリゲートのリリースには、バックエンドで実行できる�
 WARNING: op code #42 cannot be handled by this delegate.
 ```
 
-We did not provide a callback for this failure, as this is not a true run-time failure, but something that the developer can observe while trying to get the network to run on the delegate.
+これは実行時エラーではないため、このエラーに対するコールバックは提供されませんが、開発者はデリゲートでネットワークを実行する際に確認できます。
 
 ## 最適化のヒント
 
