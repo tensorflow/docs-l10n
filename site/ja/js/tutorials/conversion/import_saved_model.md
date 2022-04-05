@@ -2,7 +2,7 @@
 
 TensorFlow GraphDef ベースのモデル（通常は Python API で作成されたモデル）は、以下のいずれかの形式で保存することができます。
 
-1. TensorFlow [SavedModel](https://www.tensorflow.org/programmers_guide/saved_model#overview_of_saving_and_restoring_models)
+1. TensorFlow [SavedModel](https://www.tensorflow.org/tutorials/keras/save_and_load)
 2. [凍結モデル](https://www.tensorflow.org/mobile/prepare_models#how_do_you_get_a_model_you_can_use_on_mobile)
 3. [Tensorflowハブモジュール](https://www.tensorflow.org/hub/)
 
