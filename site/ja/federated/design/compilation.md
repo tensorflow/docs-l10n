@@ -40,11 +40,9 @@ TFF の抽象構文木（AST）は、連合コンピュテーションの構造�
 
 [tensorflow_computation_transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/tensorflow_computation_transformations.py) モジュールには、アトミック [TensorFlow computation](#tensorflow-computation) 変換が含まれます。
 
-[compiled_computation_transforms](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/compiled_computation_transforms.py) モジュールには、アトミックと複合の [Compiled Computation](#compiled-computation) 変換が含まれます。
+The [compiled_computation_transforms](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/compiled_computation_transforms.py) module contains atomic and composite [Compiled Computation](#compiled-computation) transformations.
 
-[tree_to_cc_transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/tree_to_cc_transformations.py) モジュールには、構文指向定義（SDD）ロジックを表現する複合[ビルディングブロック](#building-block)変換が含まれます。
-
-[transformation_utils](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/transformation_utils.py) モジュールには、他の transformation モジュールが使用する関数、トラバーサルロジック、およびデータ構造が含まれます。
+[transformation_utils](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/transformation_utils.py) モジュールには、他の変換モジュールが使用する関数、トラバーサルロジック、およびデータ構造が含まれます。
 
 ## コンパイラ
 
