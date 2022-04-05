@@ -34,7 +34,7 @@ TFF は、単純な*クライアントサーバー*アーキテクチャを超�
 
 ### Python インターフェース
 
-TFF は、フェデレーテッドコンピュテーションの表現に内部言語を使用します。その構文は、[computation.proto](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/proto/v0/computation.proto) のシリアル化可能な表現によって定義されています。ただし、一般的に、FC API のユーザーがこの言語を直接操作する必要はありません。計算を定義する方法として、その言語をラッピングしている Python API（`tff` 名前空間）が提供されています。
+TFF uses an internal language to represent federated computations, the syntax of which is defined by the serializable representation in [computation.proto](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/proto/v0/computation.proto). Users of FC API generally won't need to interact with this language directly, though. Rather, we provide a Python API (the `tff` namespace) that wraps arounds it as a way to define computations.
 
 具体的には、TFF はデコレートされた関数の本文をトレースして TFF の言語でシリアル化表現を生成する `tff.federated_computation` といった Python 関数デコレータを提供しています。`tff.federated_computation` でデコレートされた関数はそういったシリアル化表現のキャリアとして機能し、別の計算の本文にビルディングブロックとして組み込み、呼び出し時にオンデマンドで実行することができます。
 
@@ -59,6 +59,8 @@ FC が言語を定義する理由の一部は、上述のように、フェデ�
 まず、既存の主要言語に見られる型カテゴリに類似するカテゴリから説明します。
 
 - **テンソル型**（`tff.TensorType`）。TensorFlow と同様に、`dtype` と `shape` があります。唯一の違いは、この型のオブジェクトは、TensorFlow 演算の出力を表す Python の `tf.Tensor` インスタンスに限られず、たとえば分散集約プロトコルの出力として生成されるデータのユニットを含むことがあるというところです。そのため、TFF テンソル型は単に、Python または TensorFlow のそのような型の具体的な物理表現の抽象バージョンです。
+
+    TFF's `TensorTypes` can be stricter in their (static) treatment of shapes than TensorFlow. For example, TFF's typesystem treats a tensor with unknown rank as assignable *from* any other tensor of the same `dtype`, but not assignable *to* any tensor with fixed rank. This treatment prevents certain runtime failures (e.g., attempting to reshape a tensor of unknown rank into a shape with incorrect number of elements), at the cost of greater strictness in what computations TFF accepts as valid.
 
     テンソル型のコンパクト表記は、`dtype` または `dtype[shape]` です。たとえば、`int32` と `int32[10]` は、それぞれ整数と int ベクトルの型です。
 
