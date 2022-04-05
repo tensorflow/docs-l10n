@@ -129,4 +129,4 @@ ds = tfds.load('my_dataset', split=split)
 
 同様に、サブスプリット API は必ず Example の同じ `set` を選択し、これにはプラットフォームやアーキテクチャなどは考慮されません。つまり、`set('train[:20%]') == set('train[:10%]') + set('train[10%:20%]')` となります。
 
-However, the order in which examples are read might **not** be deterministic. This depends on other parameters (e.g. whether `shuffle_files=True`).
+ただし、Example が読み取られる順序は**決定的**ではない場合があります。これは他のパラメータ`shuffle_files=True` であるかどうか）に依存しています。
