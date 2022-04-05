@@ -2,9 +2,9 @@
 
 [TOC]
 
-プロファイラが提供しているツールを使用し、TensorFlow モデルのパフォーマンスを追跡します。また、ホスト（CPU）、デバイス（GPU）、またはホストとデバイスの両方の組み合わせでモデルがどのように機能するかを確認します。
+This guide demonstrates how to use the tools available with the TensorFlow Profiler to track the performance of your TensorFlow models. You will learn how to understand how your model performs on the host (CPU), the device (GPU), or on a combination of both the host and device(s).
 
-プロファイリングは、モデル内のさまざまな TensorFlow 演算（op）によるハードウェアリソース消費（時間とメモリ）を把握し、パフォーマンスのボトルネックを解消して最終的にモデルの実行を高速化するのに役立ちます。
+Profiling helps understand the hardware resource consumption (time and memory) of the various TensorFlow operations (ops) in your model and resolve performance bottlenecks and, ultimately, make the model execute faster.
 
 このガイドでは、プロファイラのインストール方法、利用可能なさまざまなツール、プロファイラのさまざまなパフォーマンスデータ収集モード、およびモデルのパフォーマンスを最適化するために推奨されるベストプラクティスについて説明します。
 
@@ -12,13 +12,17 @@ Cloud TPU 上でモデルのパフォーマンスをプロファイリングす�
 
 ## プロファイラのインストールと GPU の要件
 
-[GitHub リポジトリ](https://raw.githubusercontent.com/tensorflow/profiler/master/install_and_run.py)から <a><code>install_and_run.py</code></a> スクリプトをダウンロードして実行し、プロファイラをインストールしてください。
+Install the Profiler plugin for TensorBoard with pip. Note that the Profiler requires the latest versions of TensorFlow and TensorBoard (&gt;=2.2).
+
+```shell
+pip install -U tensorboard_plugin_profile
+```
 
 GPU 上でプロファイリングを実行するには、次の手順を行う必要があります。
 
 1. [TensorFlow GPU サポートソフトウェアの要件](https://www.tensorflow.org/install/gpu#linux_setup)に記載されている NVIDIA® GPU ドライバーと CUDA® Toolkit の要件を満たします。
 
-2. CUPTI がパスに存在することを確認します。
+2. Make sure the [NVIDIA® CUDA® Profiling Tools Interface](https://developer.nvidia.com/cupti) (CUPTI) exists on the path:
 
     ```shell
     /sbin/ldconfig -N -v $(sed 's/:/ /g' <<< $LD_LIBRARY_PATH) | \
@@ -31,11 +35,11 @@ GPU 上でプロファイリングを実行するには、次の手順を行う�
 export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 ```
 
-上記の `ldconfig` コマンドを再度実行し、CUPTI ライブラリが検出されたことを確認してください。
+Then, run the `ldconfig` command above again to verify that the CUPTI library is found.
 
 ### 特権の問題を解消する
 
-Docker 環境または Linux で CUDA® Toolkit を使用してプロファイリングを実行する場合、CUPTI 権限の不足に関する問題（`CUPTI_ERROR_INSUFFICIENT_PRIVILEGES`）が発生する場合があります。Linux でこの問題を解消する方法については、[NVIDIA 開発者ドキュメント](https://developer.nvidia.com/nvidia-development-tools-solutions-ERR_NVGPUCTRPERM-permission-issue-performance-counters){:.external} をご覧ください。
+When you run profiling with CUDA® Toolkit in a Docker environment or on Linux, you may encounter issues related to insufficient CUPTI privileges (`CUPTI_ERROR_INSUFFICIENT_PRIVILEGES`). Go to the [NVIDIA Developer Docs](https://developer.nvidia.com/nvidia-development-tools-solutions-ERR_NVGPUCTRPERM-permission-issue-performance-counters){:.external} to learn more about how you can resolve these issues on Linux.
 
 Docker 環境で CUPTI 特権の問題を解消するには、以下を実行してください。
 
@@ -47,19 +51,19 @@ docker run option '--privileged=true'
 
 ## プロファイラツール
 
-プロファイラには、一部のモデルデータをキャプチャした後にのみ表示される TensorBoard の **Profile** タブからアクセスできます。
+Access the Profiler from the **Profile** tab in TensorBoard, which appears only after you have captured some model data.
 
 注意: プロファイラは [Google Chart ライブラリ](https://developers.google.com/chart/interactive/docs/basic_load_libs#basic-library-loading)を読み込むため、インターネットアクセスを要求します。TensorBoard をローカルマシン上、企業内ファイアウォールの背後、またはデータセンターで完全にオフラインで実行する場合、一部のチャートやテーブルが表示されない場合があります。
 
 プロファイラには、次のようなパフォーマンス分析に役立つツールが含まれています。
 
-- 概要ページ
-- 入力パイプライン分析ツール
-- TensorFlow 統計
-- トレースビューア
-- GPU カーネル統計
-- メモリプロファイルツール
-- Pod ビューア
+- Overview Page
+- Input Pipeline Analyzer
+- TensorFlow Stats
+- Trace Viewer
+- GPU Kernel Stats
+- Memory Profile Tool
+- Pod Viewer
 
 <a name="overview_page"></a>
 
@@ -71,34 +75,34 @@ docker run option '--privileged=true'
 
 ![image](./images/tf_profiler/overview_page.png)
 
-- **Performance Summary -** モデルのパフォーマンスの概要が表示されます。パフォーマンスの概要は、次の2つの部分に分かれています。
+- **Performance Summary**: Displays a high-level summary of your model performance. The performance summary has two parts:
 
-    1. ステップ時間の内訳 - 平均ステップ時間を、時間を消費した場所に応じて複数のカテゴリに分類しています。
+    1. Step-time breakdown: Breaks down the average step time into multiple categories of where time is spent:
 
-        - Compilation - カーネルのコンパイルに費やされた時間
-        - Input - 入力データの読み込みに費やされた時間
-        - Output - 出力データの読み込みに費やされた時間
-        - Kernel Launch - ホストがカーネルを起動するのに費やされた時間
-        - Host Compute Time - ホストの演算時間
-        - Device to Device Time - デバイス間の通信時間
-        - Device Compute Time - デバイス上の演算時間
-        - Python のオーバーヘッドを含むその他すべての時間
+        - Compilation: Time spent compiling kernels.
+        - Input: Time spent reading input data.
+        - Output: Time spent reading output data.
+        - Kernel launch: Time spent by the host to launch kernels
+        - Host compute time..
+        - Device-to-device communication time.
+        - On-device compute time.
+        - All others, including Python overhead.
 
-    2. Device Compute Precisions - 16 ビットおよび 32 ビット計算を使用するデバイス演算時間の割合を報告します。
+    2. Device compute precisions - Reports the percentage of device compute time that uses 16 and 32-bit computations.
 
-- **Step-time Graph -** サンプリングされたすべてのステップのデバイスステップ時間（ミリ秒単位）のグラフを表示します。各ステップは、時間を費やしている箇所によって複数のカテゴリに（別々の色で）分かれています。赤い領域は、デバイスがホストからの入力データを待機してアイドル状態であったステップ時間の部分に対応しています。緑の領域は、デバイスが実際に動作していた時間の長さを示しています。
+- **Step-time Graph**: Displays a graph of device step time (in milliseconds) over all the steps sampled. Each step is broken into the multiple categories (with different colors) of where time is spent. The red area corresponds to the portion of the step time the devices were sitting idle waiting for input data from the host. The green area shows how much of time the device was actually working.
 
-- **デバイスでの上位 10 個の TensorFlow 演算 -** 最も多くの時間が費やされたデバイス上の演算が表示されます。
+- **Top 10 TensorFlow operations on device (e.g. GPU)**: Displays the on-device ops that ran the longest.
 
     各行には、演算に費やされた自己時間（すべての演算にかかった時間に占める割合）、累積時間、カテゴリ、名前が表示されます。
 
-- **実行環境 -** 以下を含むモデルの実行環境の高度な概要が表示されます。
+- **Run Environment**: Displays a high-level summary of the model run environment including:
 
-    - 使用されたホストの数
-    - デバイスのタイプ（GPU/TPU）
-    - デバイス コアの数
+    - Number of hosts used.
+    - Device type (GPU/TPU).
+    - Number of device cores.
 
-- **次の推奨ステップ -** モデルで入力処理の負荷が高くなった場合に報告され、モデルのパフォーマンス ボトルネックを特定して解消するのに使用できるツールが提案されます。
+- **Recommendation for Next Step**: Reports when a model is input bound and recommends tools you can use to locate and resolve model performance bottlenecks.
 
 <a name="input_pipeline_analyzer"></a>
 
@@ -108,27 +112,27 @@ TensorFlow プログラムがファイルからデータを読み込むと、Ten
 
 ファイルからレコードを読み取るための一般的なパイプラインには、次のステージがあります。
 
-1. ファイルの読み取り
-2. ファイルの前処理（オプション）
-3. ホストからデバイスへのファイル転送
+1. File reading.
+2. File preprocessing (optional).
+3. File transfer from the host to the device.
 
-入力パイプラインが非効率な場合、アプリケーションの速度が大幅に低下する可能性があります。入力パイプラインに多くの時間が費やされている場合、このアプリケーションは**入力処理の負荷が高い**とみなされます。入力パイプライン分析ツールを使用すると、非効率な入力パイプラインを特定できます。
+An inefficient input pipeline can severely slow down your application. An application is considered **input bound** when it spends a significant portion of time in the input pipeline. Use the insights obtained from the input pipeline analyzer to understand where the input pipeline is inefficient.
 
 入力パイプライン分析ツールは、プログラムで入力処理の負荷が高くなっているかどうかを即座に通知し、入力パイプラインの任意のステージでパフォーマンスボトルネックをデバッグするために、デバイス側とホスト側の分析を案内します。
 
-データ入力パイプラインを最適化するための推奨ベストプラクティスについては、入力パイプラインのパフォーマンスに関するガイダンスをご覧ください。
+Check the guidance on input pipeline performance for recommended best practices to optimize your data input pipelines.
 
 #### 入力パイプライン ダッシュボード
 
 入力パイプライン分析ツールを開くには、**Profile** を選択し、**Tools** プルダウンから **input_pipeline_analyzer** を選択します。
 
-![image](./images/tf_profiler/input_pipeline_analyzer.png)
+![image](./images/tf_profiler/tf_data_graph.png)
 
 ダッシュボードには次の 3 つのセクションがあります。
 
-1. **サマリー -** 入力パイプライン全体のサマリーが表示されます。たとえば、アプリケーションで入力処理の負荷が高いかどうか表示されます。入力バウンドの場合はその量も表示されます。
-2. **デバイス側の分析 -** デバイス側の分析結果が表示されます。デバイスのステップ時間、各ステップのコアで入力データの待機に費やしたデバイス時間などが表示されます。
-3. **ホスト側の分析 -** ホスト側の分析結果が表示されます。ホスト上での入力処理時間の内訳などが表示されます。
+1. **Summary**: Summarizes the overall input pipeline with information on whether your application is input bound and, if so, by how much.
+2. **Device-side analysis**: Displays detailed, device-side analysis results, including the device step-time and the range of device time spent waiting for input data across cores at each step.
+3. **Host-side analysis**: Shows a detailed analysis on the host side, including a breakdown of input processing time on the host.
 
 #### 入力パイプラインのサマリー
 
@@ -138,31 +142,31 @@ TensorFlow プログラムがファイルからデータを読み込むと、Ten
 
 デバイス側の分析では、デバイスとホストの間で費やされた時間と、ホストからの入力データの待機に費やされたデバイス時間が表示されます。
 
-1. **ステップ番号に対してプロットされたステップ時間 -** サンプリングされたすべてのステップのデバイス ステップ時間（ミリ秒単位）がグラフに表示されます。各ステップは、時間が費やされた箇所によって複数のカテゴリに（別々の色で）分かれています。赤色の領域は、デバイスがホストからの入力データを待機しているステップ時間に対応します。緑色の領域は、デバイスが実際に稼働していた時間の長さを表します。
-2. **ステップ時間の統計 -** デバイス ステップ時間の平均、標準偏差、範囲（[最小、最大]）が報告されます。
+1. **Step time plotted against step number**: Displays a graph of device step time (in milliseconds) over all the steps sampled. Each step is broken into the multiple categories (with different colors) of where time is spent. The red area corresponds to the portion of the step time the devices were sitting idle waiting for input data from the host. The green area shows how much of the time the device was actually working.
+2. **Step time statistics**: Reports the average, standard deviation, and range ([minimum, maximum]) of the device step time.
 
 #### ホスト側の分析
 
 ホスト側の分析には、ホスト上での入力処理時間（`tf.data` API 演算に費やされた時間）の内訳が次のいくつかのカテゴリに分類されて表示されます。
 
-- **ファイルからのオンデマンドのデータ読み取り -** キャッシュ、プリフェッチ、インターリーブなしで、ファイルからデータを読み取る際に費やされた時間。
-- **ファイルからの事前のデータ読み取り -** キャッシング、プリフェッチ、インターリーブを含め、ファイルの読み取りに費やされた時間。
-- **データの前処理 -** 画像の圧縮など、前処理の演算に費やされた時間。
-- **デバイスに転送するデータのエンキュー -** デバイスへの転送前にデータがインフィード キューに追加される際に費やされた時間。
+- **Reading data from files on demand**: Time spent on reading data from files without caching, prefetching, and interleaving.
+- **Reading data from files in advance**: Time spent reading files, including caching, prefetching, and interleaving.
+- **Data preprocessing**: Time spent on preprocessing ops, such as image decompression.
+- **Enqueuing data to be transferred to device**: Time spent putting data into an infeed queue before transferring the data to the device.
 
-個々の入力演算の統計とそのカテゴリの内訳を実行時間別に表示するには、**Input Op Statistics** を展開します。
+Expand **Input Op Statistics** to inspect the statistics for individual input ops and their categories broken down by execution time.
 
-![image](./images/tf_profiler/tf_stats.png)
+![image](./images/tf_profiler/input_op_stats.png)
 
-ソース データ テーブルには、次の情報を含む各エントリが表示されます。
+A source data table will appear with each entry containing the following information:
 
-1. **入力演算 -** 入力演算の TensorFlow 演算名が表示されます。
-2. **件数 -** プロファイリング期間中に実行された演算のインスタンスの合計数が表示されます。
-3. **合計時間（ミリ秒） -** 各インスタンスに費やされた時間の累積合計が表示されます。
-4. **合計時間（%） -** 演算に費やされた合計時間が、入力処理に費やされた合計時間との割合で表示されます。
-5. **合計自己時間（ミリ秒） -** 各インスタンスに費やされた自己時間の累積合計が表示されます。この自己時間は、関数の本文内で費やされた時間を測定したもので、関数の本文から呼び出される関数で費やされた時間は含まれません。
-6. **合計自己時間（%）** - 合計自己時間が、入力処理に費やされた合計時間との割合で表示されます。
-7. **カテゴリ** - 入力演算の処理カテゴリが表示されます。
+1. **Input Op**: Shows the TensorFlow op name of the input op.
+2. **Count**: Shows the total number of instances of op execution during the profiling period.
+3. **Total Time (in ms)**: Shows the cumulative sum of time spent on each of those instances.
+4. **Total Time %**: Shows the total time spent on an op as a fraction of the total time spent in input processing.
+5. **Total Self Time (in ms)**: Shows the cumulative sum of the self time spent on each of those instances. The self time here measures the time spent inside the function body, excluding the time spent in the function it calls.
+6. **Total Self Time %**. Shows the total self time as a fraction of the total time spent on input processing.
+7. **Category**. Shows the processing category of the input op.
 
 <a name="tf_stats"></a>
 
@@ -170,16 +174,16 @@ TensorFlow プログラムがファイルからデータを読み込むと、Ten
 
 TensorFlow Stats ツールには、プロファイリングセッション中にホストまたはデバイスで実行されるすべての TensorFlow演算（op）のパフォーマンスが表示されます。
 
-![image](./images/tf_profiler/input_op_stats.png)
+![image](./images/tf_profiler/tf_data_graph_selector.png)
 
 このツールでは 2 つのペインでパフォーマンス情報が表示されます。
 
 - 上のペインには、最大 4 つの円グラフが表示されます。
 
-    1. ホスト上の各演算の自己実行時間の分布
-    2. ホスト上の各演算タイプの自己実行時間の分布
-    3. デバイス上の各演算の自己実行時間の分布
-    4. デバイス上の各演算タイプの自己実行時間の分布
+    1. The distribution of self-execution time of each op on the host.
+    2. The distribution of self-execution time of each op type on the host.
+    3. The distribution of self-execution time of each op on the device.
+    4. The distribution of self-execution time of each op type on the device.
 
 - 下のペインには、TensorFlow 演算に関するデータを報告するテーブルが表示されており、各演算に 1 行、各タイプのデータに 1 列（列の見出しをクリックして列をソート）が割り当てられています。上のペインの右側にある Export as CSV ボタンをクリックすると、このテーブルのデータが CSV ファイルとしてエクスポートされます。
 
@@ -187,18 +191,18 @@ TensorFlow Stats ツールには、プロファイリングセッション中に
 
     - 子の演算を持つ演算がある場合:
 
-        - 演算の「累積」時間の合計には、子の演算内で費やされた時間が含まれています。
-        - 演算の合計「自己」時間の合計には、子の演算内で費やされた時間が含まれていません。
+        - The total "accumulated" time of an op includes the time spent inside the child ops.
+        - The total "self" time of an op does not include the time spent inside the child ops.
 
     - 演算がホスト上で実行される場合:
 
-        - 演算によって発生するデバイスの合計自己時間のパーセンテージは 0 になります。
-        - この演算までを含むデバイスの合計自己時間の累積パーセンテージは 0 になります。
+        - The percentage of the total self-time on device incurred by the op on will be 0.
+        - The cumulative percentage of the total self-time on device up to and including this op will be 0.
 
     - 演算がデバイス上で実行される場合:
 
-        - この演算で発生するホストの合計自己時間の割合は 0 になります。
-        - この演算までを含むホストの合計自己時間の累積的な割合は 0 になります。
+        - The percentage of the total self-time on host incurred by this op will be 0.
+        - The cumulative percentage of the total self-time on host up to and including this op will be 0.
 
 円グラフとテーブルにアイドル時間を含めるか除外するかを選択できます。
 
@@ -221,32 +225,32 @@ TensorFlow Stats ツールには、プロファイリングセッション中に
 
 この画面には、次の主要な要素が表示されます。
 
-1. **Timeline ペイン -** デバイスとホストで実行された演算が時系列で表示されます。
-2. **Details ペイン -**Timeline ペインで選択した演算の詳細情報が表示されます。
+1. **Timeline pane**: Shows ops that the device and the host executed over time.
+2. **Details pane**: Shows additional information for ops selected in the Timeline pane.
 
 Timeline ペインには、次の要素が含まれます。
 
-1. **上部バー -** さまざまな補助コントロールが含まれています。
-2. **時間軸 -** トレースの開始時点を基準とした時間が表示されます。
-3. **セクションとトラックラベル -** 各セクションには複数のトラックが含まれています。左側にある三角形をクリックすると、セクションの展開や折りたたみを行うことができます。システムで処理中の要素ごとに 1 つのセクションがあります。
-4. **ツールセレクタ -**Zoom、Pan、Select、Timing などのトレースビューアを操作するさまざまなツールが用意されています。
-5. **イベント -** これらのイベントは、演算が実行されていた時間やトレーニングステップなどのメタイベントの期間を示します。
+1. **Top bar**: Contains various auxiliary controls.
+2. **Time axis**: Shows time relative to the beginning of the trace.
+3. **Section and track labels**: Each section contains multiple tracks and has a triangle on the left that you can click to expand and collapse the section. There is one section for every processing element in the system.
+4. **Tool selector**: Contains various tools for interacting with the trace viewer such as Zoom, Pan, Select, and Timing. Use the Timing tool to mark a time interval.
+5. **Events**: These show the time during which an op was executed or the duration of meta-events, such as training steps.
 
 ##### セクションとトラック
 
 トレースビューアには、次のセクションがあります。
 
-- **デバイスノードごとに 1 つのセクション**。ラベルとしてデバイスチップの数とチップ内のデバイスノードの数が使用されます（例: 「`/device:GPU:0 (pid 0)`」）。デバイスノードのセクションには、次のトラックが含まれます。
-    - **Step -** デバイスで実行されていたレーニングステップの期間が表示されます。
-    - **TensorFlow Ops -** デバイス上で実行された演算が表示されます。
-    - **XLA Ops -** [XLA](https://www.tensorflow.org/xla/) が使用されているコンパイラである場合にデバイス上で実行された XLA 演算が表示されます。1 つの TensorFlow 演算が 1 つ以上の XLA 演算に変換されます。XLA コンパイラにより、XLA 演算がデバイス上で実行されるコードに変換されます。
+- **One section for each device node**, labeled with the number of the device chip and the device node within the chip (for example, `/device:GPU:0 (pid 0)`). Each device node section contains the following tracks:
+    - **Step**: Shows the duration of the training steps that were running on the device
+    - **TensorFlow Ops**: Shows the ops executed on the device
+    - **XLA Ops**: Shows [XLA](https://www.tensorflow.org/xla/) operations (ops) that ran on the device if XLA is the compiler used (each TensorFlow op is translated into one or several XLA ops. The XLA compiler translates the XLA ops into code that runs on the device).
 - **ホストマシンの CPU 上で実行されるスレッドのセクション** - **「Host Threads」**というラベルが付いています。このセクションには、CPU スレッドごとに 1 つのトラックが含まれます。セクションラベルと一緒に表示される情報は無視してもかまいません。
 
 ##### イベント
 
 タイムライン内のイベントは異なる色で表示されます。色自体には特別な意味はありません。
 
-トレースビューアは TensorFlow プログラム内の Python 関数呼び出しのトレースも表示できます。`tf.profiler.experimental.start()` API を使用する場合は、プロファイリングを開始する際に `ProfilerOptions` 名前付きタプルを使用して Python のトレースを有効化できます。または、プロファイリングにサンプリングモードを使用する場合は、[**Capture Profile**] ダイアログのドロップダウンオプションを使用してトレースのレベルを選択することができます。
+The trace viewer can also display traces of Python function calls in your TensorFlow program. If you use the `tf.profiler.experimental.start` API, you can enable Python tracing by using the `ProfilerOptions` namedtuple when starting profiling. Alternatively, if you use the sampling mode for profiling, you can select the level of tracing by using the dropdown options in the **Capture Profile** dialog.
 
 ![image](./images/tf_profiler/python_tracer.png)
 
@@ -256,28 +260,28 @@ Timeline ペインには、次の要素が含まれます。
 
 このツールには、すべての GPU アクセラレータカーネルのパフォーマンス統計と元の演算を表示されます。
 
-![image](./images/tf_profiler/trace_viewer.png)
+![image](./images/tf_profiler/tf_data_all_hosts.png)
 
 このツールでは 2 つのペインで情報が表示されます。
 
-- 上部のペインには、合計経過時間が最も長い CUDA カーネルを示す円グラフが表示されます。
+- The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
 
-- 下のペインには、一意のカーネルと演算のペアごとに次のデータを含むテーブルが表示されます。
+- The lower pane displays a table with the following data for each unique kernel-op pair:
 
-    - カーネルと演算のペアでグループ化された合計経過 GPU 時間の順位（降順）。
-    - 起動されたカーネルの名前
-    - カーネルが使用している GPU レジスタの数
-    - 使用されている共有（静的+動的共有）メモリの合計サイズ（バイト単位）
-    - `blockDim.x, blockDim.y, blockDim.z` で表現されたブロックの次元
-    - `gridDim.x, gridDim.y, gridDim.z` で表現されたグリッドの次元
-    - 演算が TensorCore を使用可能かどうか
-    - カーネルに TensorCore 命令が含まれているかどうか
-    - このカーネルを起動した演算の名前
-    - このカーネルと演算のペアが発生した数
-    - 合計経過 GPU 時間（マイクロ秒）
-    - 平均経過 GPU 時間（マイクロ秒）
-    - 最短経過 GPU 時間（マイクロ秒）
-    - 最長経過 GPU 時間（マイクロ秒）
+    - A rank in descending order of total elapsed GPU duration grouped by kernel-op pair.
+    - The name of the launched kernel.
+    - The number of GPU registers used by the kernel.
+    - The total size of shared (static + dynamic shared) memory used in bytes.
+    - The block dimension expressed as `blockDim.x, blockDim.y, blockDim.z`.
+    - The grid dimensions expressed as `gridDim.x, gridDim.y, gridDim.z`.
+    - Whether the op is eligible to use [Tensor Cores](https://www.nvidia.com/en-gb/data-center/tensor-cores/).
+    - Whether the kernel contains Tensor Core instructions.
+    - The name of the op that launched this kernel.
+    - The number of occurrences of this kernel-op pair.
+    - The total elapsed GPU time in microseconds.
+    - The average elapsed GPU time in microseconds.
+    - The minimum elapsed GPU time in microseconds.
+    - The maximum elapsed GPU time in microseconds.
 
 <a name="memory_profile_tool"></a>
 
@@ -285,14 +289,14 @@ Timeline ペインには、次の要素が含まれます。
 
 メモリプロファイルツールは、プロファイリング間のデバイスのメモリ使用状況を監視します。このツールを使用して、次のことを実行できます。
 
-- ピークメモリ使用状況とそれに対応する TensorFlow 演算への割り当てメモリを特定することで、メモリ不足（OOM）の問題をデバッグします。また、[マルチテナント](https://arxiv.org/pdf/1901.06887.pdf)の推論を実行する場合に発生する OOM 問題もデバッグできます。
-- メモリの断片化の問題をデバッグします。
+- Debug out of memory (OOM) issues by pinpointing peak memory usage and the corresponding memory allocation to TensorFlow ops. You can also debug OOM issues that may arise when you run [multi-tenancy](https://arxiv.org/pdf/1901.06887.pdf) inference.
+- Debug memory fragmentation issues.
 
 メモリプロファイルツールには、次の 3 つのセクションにデータが表示されます。
 
-1. メモリプロファイルのサマリー
-2. メモリのタイムライングラフ
-3. メモリの詳細テーブル
+1. **メモリプロファイルのサマリー**
+2. **メモリのタイムライングラフ**
+3. **メモリの詳細テーブル**
 
 #### メモリプロファイルのサマリー
 
@@ -302,17 +306,17 @@ Timeline ペインには、次の要素が含まれます。
 
 メモリプロファイルのサマリーには、次の 6 つのフィールドがあります。
 
-1. Memory ID - すべての利用可能なデバイスメモリシステムをリストするドロップダウン。ドロップダウンから、表示するメモリシステムを選択できます。
-2. #Allocation - プロファイリングのインターバル中に作成されるメモリ割り当ての数です。
-3. #Deallocation - プロファイリングのインターバル中に行われるメモリ割り当て解除の数です。
-4. Memory Capacity - 選択したメモリシステムの合計容量（GB）です。
-5. Peak Heap Usage - モデルが実行し始めてからのピークメモリ使用率（GiB）です。
-6. Peak Memory Usage - プロファイリングのインターバル中のピークメモリ使用率（GiB）です。このフィールドには次のサブフィールドがあります。
-    1. Timestamp - タイムライングラフ上でピークメモリ使用率が発生したときのタイムスタンプです。
-    2. Stack Reservation - スタックに予約されたメモリの量（GiB）です。
-    3. Heap Allocation - ヒープに割り当てられたメモリの量（GiB）です。
-    4. Free Memory - 空きメモリの量（GiB）です。Memory Capacity は、Stack Reservation、Heap Allocation、および Free Memory の総計です。
-    5. Fragmentation - 断片率です（低いほど良）。（1 - 空きメモリの最大チャンクサイズ / 合計空きメモリ）のパーセント率で計算されます。
+1. **Memory ID**: Dropdown which lists all available device memory systems. Select the memory system you want to view from the dropdown.
+2. **#Allocation**: The number of memory allocations made during the profiling interval.
+3. **#Deallocation**: The number of memory deallocations in the profiling interval
+4. **Memory Capacity**: The total capacity (in GiBs) of the memory system that you select.
+5. **Peak Heap Usage**: The peak memory usage (in GiBs) since the model started running.
+6. **Peak Memory Usage**: The peak memory usage (in GiBs) in the profiling interval. This field contains the following sub-fields:
+    1. **Timestamp**: The timestamp of when the peak memory usage occurred on the Timeline Graph.
+    2. **Stack Reservation**: Amount of memory reserved on the stack (in GiBs).
+    3. **Heap Allocation**: Amount of memory allocated on the heap (in GiBs).
+    4. **Free Memory**: Amount of free memory (in GiBs). The Memory Capacity is the sum total of the Stack Reservation, Heap Allocation, and Free Memory.
+    5. **Fragmentation**: The percentage of fragmentation (lower is better). It is calculated as a percentage of `(1 - Size of the largest chunk of free memory / Total free memory)`.
 
 #### メモリのタイムライングラフ
 
@@ -326,32 +330,32 @@ X 軸は、プロファイリングインターバルのタイムライン（ms�
 
 ポップアップウィンドウには、次の情報が表示されます。
 
-- timestamp(ms) - タイムライン上の選択されたイベントの場所
-- event - イベントの種類（割り当てまたは割り当て解除）
-- requested_size（GiB）- 要求されたメモリ量。割り当て解除イベントの場合、これは負の値になります。
-- allocation_size(GiBs) - 割り当てられた実際のメモリ量。割り当て解除イベントの場合、これは負の値になります。
-- tf_op - 割り当てと割り当て解除を要求する TensorFlow Op
-- step_id - このイベントが発生したトレーニングステップ
-- region_type - この割り当てメモリの対象であるデータエントリーの種類。可能な値は、一時を意味する `temp`、アクティベーションと勾配の `output`、および重みと定数の `persist`/`dynamic` です。
-- data_type - テンソル要素の種類（8-bit 署名無し整数を表す uint8 など）
-- tensor_shape - 割り当て/割り当て解除されるテンソルの形状
-- memory_in_use(GiBs) - この時点で使用されている合計メモリ
+- **timestamp(ms)**: The location of the selected event on the timeline.
+- **event**: The type of event (allocation or deallocation).
+- **requested_size(GiBs)**: The amount of memory requested. This will be a negative number for deallocation events.
+- **allocation_size(GiBs)**: The actual amount of memory allocated. This will be a negative number for deallocation events.
+- **tf_op**: The TensorFlow op that requests the allocation/deallocation.
+- **step_id**: The training step in which this event occurred.
+- **region_type**: The data entity type that this allocated memory is for. Possible values are `temp` for temporaries, `output` for activations and gradients, and `persist`/`dynamic` for weights and constants.
+- **data_type**: The tensor element type (e.g., uint8 for 8-bit unsigned integer).
+- **tensor_shape**: The shape of the tensor being allocated/deallocated.
+- **memory_in_use(GiBs)**: The total memory that is in use at this point of time.
 
 #### メモリの詳細テーブル
 
 このテーブルには、プロファイリングインターバルのピークメモリ使用率の時点でアクティブなメモリの割り当てが示されます。
 
-![image](./images/tf_profiler/memory_breakdown_table.png)
+![image](./images/tf_profiler/input_pipeline_analyzer.png)
 
 TensorFlow 演算ごとに 1 つの行があり、各行には次の列があります。
 
-- Op Name - TensorFlow 演算の名前
-- Allocation Size (GiBs) - この演算に割り当てられている合計メモリ量
-- Requested Size (GiBs) - この演算に要求されたメモリの合計量
-- Occurrences - この演算の割り当て数
-- Region type - この割り当てメモリの対象であるデータエンティティの種類。可能な値は、一時を意味する `temp`、活性化と勾配の `output`、および重みと定数の `persist`/`dynamic` です。
-- Data type - テンソル要素の型
-- Shape - 割り当てられたテンソルの形状
+- **Op Name**: The name of the TensorFlow op.
+- **Allocation Size (GiBs)**: The total amount of memory allocated to this op.
+- **Requested Size (GiBs)**: The total amount of memory requested for this op.
+- **Occurrences**: The number of allocations for this op.
+- **Region type**: The data entity type that this allocated memory is for. Possible values are `temp` for temporaries, `output` for activations and gradients, and `persist`/`dynamic` for weights and constants.
+- **Data type**: The tensor element type.
+- **Shape**: The shape of the allocated tensors.
 
 注意: テーブル内のすべての列は並べ替え可能で、演算名で行をフィルタできます。
 
@@ -363,7 +367,7 @@ Pod ビューアツールには、すべてのワーカーのトレーニング�
 
 ![image](./images/tf_profiler/pod_viewer.png)
 
-- 上部のペインには、ステップ番号を選択するためのスライダーがあります。
+- The upper pane has a slider for selecting the step number.
 - 下部のペインには、スタックされた列のグラフが表示されます。これは相互に重なったステップ時間カテゴリの詳細を示す要約です。各スタックの列は、一意のワーカーを表します。
 - スタックされた列にマウスポインタを合わせると、左側のカードにそのステップの詳細に関するさらに詳しい情報が表示されます。
 
@@ -371,14 +375,14 @@ Pod ビューアツールには、すべてのワーカーのトレーニング�
 
 ### tf.data のボトルネック分析
 
-警告: このツールは実験的です。分析結果が誤っていると思われる場合は、[こちら](https://github.com/tensorflow/profiler/issues)に報告してください。
+Warning: This tool is experimental. Please open a [GitHub Issue](https://github.com/tensorflow/profiler/issues) if the analysis result seems incorrect.
 
-tf.data ボトルネック分析は、プログラム内の tf.data 入力パイプラインに存在するボトルネックを自動的に検出し、その修正方法を推奨します。プラットフォーム（CPU/GPU/TPU）やフレームワーク（TensorFlow/JAX）に関係なく、tf.data を使用しているあらゆるプログラムで機能します。分析と推奨は、こちらの[ガイド](https://www.tensorflow.org/guide/data_performance_analysis)に基づきます。
+The `tf.data` bottleneck analysis tool automatically detects bottlenecks in `tf.data` input pipelines in your program and provides recommendations on how to fix them. It works with any program using `tf.data` regardless of the platform (CPU/GPU/TPU). Its analysis and recommendations are based on this [guide](https://www.tensorflow.org/guide/data_performance_analysis).
 
 次のステップで、ボトルネックを検出します。
 
 1. 最も多い入力バウンドのホストを見つけます。
-2. 最も実行の遅い tf.data 入力パイプラインを見つけます。
+2. Find the slowest execution of a `tf.data` input pipeline.
 3. プロファイラのトレースから入力パイプラインのグラフを再構築します。
 4. 入力パイプライングラフの重要なパスを見つけます。
 5. その重要なパスで最も遅い変換をボトルネックとして識別します。
@@ -389,7 +393,7 @@ UI は、パフォーマンス分析サマリー、全入力パイプライン�
 
 ![image](./images/tf_profiler/capture_profile.png)
 
-このセクションには、分析の概要が示されます。プロファイル内に処理の遅い tf.data 入力パイプラインが検出されたかどうかがわかります。検出されている場合は、最も多い入力バウンドのホストと、その中で最も遅い入力パイプラインが最大レイテンシとともに表示されます。最も重要なのは、入力パイプラインのどの部分がボトルネックであり、それをどのように修正するかと示しているところです。ボトルネックの情報には、イテレータの種類とそのロング名が示されます。
+This section provides the summary of the analysis. It reports on slow `tf.data` input pipelines detected in the profile. This section also shows the most input bound host and its slowest input pipeline with the max latency. Most importantly, it identifies which part of the input pipeline is the bottleneck and how to fix it. The bottleneck information is provided with the iterator type and its long name.
 
 ##### tf.data イテレータのロング名の読み取り方
 
@@ -410,29 +414,29 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 反復 | Iterator::Batch::Repeat
 バッチ | Iterator::Batch
 
-#### 全入力パイプラインのサマリー
+#### Summary of all input pipelines
 
-![image](./images/tf_profiler/tf_data_all_hosts.png)
+![image](./images/tf_profiler/tf_stats.png)
 
-このセクションには、全ホストのすべての入力パイプラインの概要が示されます。通常、入力パイプラインは 1 つです。分散ストラテジーを使用している場合、プログラムの tf.data コードを実行しているホストにゅうりょくパイプラインが 1 つと、そのホスト入力パイプラインからデータを取得してデバイスに転送しているデバイス入力パイプラインが複数あります。
+This section provides the summary of all input pipelines across all hosts. Typically there is one input pipeline. When using the distribution strategy, there is one host input pipeline running the program's `tf.data` code and multiple device input pipelines retrieving data from the host input pipeline and transferring it to the devices.
 
 入力パイプラインごとに、実行時間の統計が表示されます。50 μs より長くかかる呼び出しは、遅いと見なされます。
 
-#### 入力パイプラインのグラフ
+#### Input pipeline graph
 
-![image](./images/tf_profiler/tf_data_graph_selector.png)
+![image](./images/tf_profiler/memory_breakdown_table.png)
 
-このセクションには、入力パイプラインのグラフが実行時間と共に示されます。「Host」と「Input Pipeline」を使って、どのホストと入力パイプラインを表示するかを選択できます。入力パイプラインの実行は、実行時間別に降順で並べ替えられており、この順序は「Rank」を使って選択できます。
+This section shows the input pipeline graph with the execution time information. You can use "Host" and "Input Pipeline" to choose which host and input pipeline to see. Executions of the input pipeline are sorted by the execution time in descending order which you can choose using the **Rank** dropdown.
 
-![image](./images/tf_profiler/tf_data_graph.png)
+![image](./images/tf_profiler/trace_viewer.png)
 
 重要なパスにあるノードは太いアウトラインで示されます。ボトルネックノードは重要なパスにある、それ自体の処理に最も時間のかかったノードで、赤いアウトラインで示されます。その他の重要でないノードは、グレーの破線で示されます。
 
-各ノードの「Start Time」は、実行の開始時刻を示します。入力パイプラインにバッチがある場合などは、同一のノードが何度も実行されることがありますが、その場合の開始時刻は、最初に実行されたときの時刻です。
+In each node,**Start Time** indicates the start time of the execution. The same node may be executed multiple times, for example, if there is a `Batch` op in the input pipeline. If it is executed multiple times, it is the start time of the first execution.
 
-「Total Duration」を実行の実測時間です。何度も実行されている場合の実測時間は、各実行の実測時間の合計です。
+**Total Duration** is the wall time of the execution. If it is executed multiple times, it is the sum of the wall times of all executions.
 
-「Self Time」は直下の子ノードと重複した時間を除く「Total Time」です。
+**Self Time** is **Total Time** without the overlapped time with its immediate child nodes.
 
 「# Calls」は、入力パイプラインが実行された回数です。
 
@@ -481,7 +485,7 @@ TensorFlow プロファイラは、TensorFlow モデルのホストアクティ�
 
 <a name="sampling_mode"></a>
 
-- サンプリングモード - `tf.profiler.experimental.server.start()`を使用してオンデマンドプロファイリングを実行し、gRPC サーバーを起動して TensorFlow モデルを実行します。gRPC サーバーを起動してモデルを実行したら、TensorBoard プロファイルプラグインの[プロファイルの **Capture Profile** ボタンを使用してプロファイルをキャプチャできます。まだ実行されていない場合は、上記の「プロファイラのインストール」セクションのスクリプトを使用して TensorBoard インスタンスを起動してください。
+- Sampling mode: Perform on-demand profiling by using `tf.profiler.experimental.server.start` to start a gRPC server with your TensorFlow model run. After starting the gRPC server and running your model, you can capture a profile through the **Capture Profile** button in the TensorBoard profile plugin. Use the script in the Install profiler section above to launch a TensorBoard instance if it is not already running.
 
     以下に例を示します。
 
@@ -511,14 +515,16 @@ TensorFlow プロファイラは、TensorFlow モデルのホストアクティ�
 
 以下の項目を指定するには、**Capture Profile** ダイアログを使用します。
 
-- プロファイルサービス URL または TPU 名のカンマ区切りのリスト
+- A comma-delimited list of profile service URLs or TPU names.
 - プロファイリング期間
 - デバイス、ホスト、Python 関数呼び出しのトレースレベル
 - 初回失敗時にプロファイラにプロファイルのキャプチャを再試行させる回数
 
 ### カスタムトレーニングループのプロファイリング
 
-TensorFlow コードでカスタムトレーニングループのプロファイルを作成するには、`tf.profiler.experimental.Trace` API を使用してトレーニングループをインストルメント化し、プロファイラのステップの範囲を示してください。`name` 引数はステップ名の接頭辞として使用され、`step_num` キーワード引数はステップ名に追加され、`_r` キーワード引数はこのトレース イベントをステップ イベントとしてプロファイラに処理させます。
+To profile custom training loops in your TensorFlow code, instrument the training loop with the `tf.profiler.experimental.Trace` API to mark the step boundaries for the Profiler.
+
+The `name` argument is used as a prefix for the step names, the `step_num` keyword argument is appended in the step names, and the `_r` keyword argument makes this trace event get processed as a step event by the Profiler.
 
 以下に例を示します。
 
@@ -531,7 +537,7 @@ for step in range(NUM_STEPS):
 
 これにより、プロファイラのステップごとのパフォーマンス分析が有効になり、ステップイベントがトレースビューアに表示されるようになります。
 
-入力パイプラインで正確な分析を行うため、`tf.profiler.experimental.Trace` コンテキスト内にデータセットイテレータを必ず含めるようにしてください。
+Make sure that you include the dataset iterator within the `tf.profiler.experimental.Trace` context for accurate analysis of the input pipeline.
 
 以下のコードスニペットはアンチパターンです。
 
@@ -547,15 +553,15 @@ for step, train_data in enumerate(dataset):
 
 プロファイラは、4 種類の軸に沿って多数の使用事例をカバーしています。これらの組み合わせの中には、現在サポートされているものもあれば、今後の追加が予定されているものもあります。次に一部の使用事例を示します。
 
-- ローカルプロファイリングとリモートプロファイリング: これら 2 つは、プロファイリング環境を設定するための一般的な方法です。ローカルプロファイリングでは、モデルが実行されているのと同じマシン（GPU を備えたローカルのワークステーションなど）でプロファイリング API が呼び出されます。リモートプロファイリングでは、モデルが実行されているマシンとは異なるマシン（Cloud TPU 上など）でプロファイリング API が呼び出されます。
+- *Local vs. remote profiling*: These are two common ways of setting up your profiling environment. In local profiling, the profiling API is called on the same machine your model is executing, for example, a local workstation with GPUs. In remote profiling, the profiling API is called on a different machine from where your model is executing, for example, on a Cloud TPU.
 - 複数のワーカーのプロファイリング: TensorFlow の分散トレーニング機能を使用すると、複数のマシンをプロファイリングできます。
 - ハードウェアプラットフォーム: CPU、GPU、TPU のプロファイリング。
 
-以下の表に、TensorFlow のさまざまなプロファイリング API がサポートしている上記の使用事例を簡単にまとめています。
+The table below provides a quick overview of the TensorFlow-supported use cases mentioned above:
 
 <a name="profiling_api_table"></a>
 
-| プロファイリング API                | ローカル     | リモート    | 複数  | ハードウェア  | :                              :           :           : ワーカー   : プラットフォーム : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | サポート対象 | サポート       | サポート       | CPU、GPU  | : コールバック**                   :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート       | サポート       | CPU、GPU  | : start/stop [API]**    :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート対象 | サポート対象 | CPU、GPU, | : client.trace [API]**  :           :           :           : TPU       : | **コンテキストマネージャ API**      | サポート対象 | サポート       | サポート       | CPU、GPU  | :                              :           : 対象外 : 対象外 :           :
+| プロファイリング API                | ローカル     | リモート    | 複数  | ハードウェア  | :                              :           :           : ワーカー   : プラットフォーム : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | サポート対象 | サポート       | サポート       | CPU、GPU  | : コールバック**                   :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート       | サポート       | CPU、GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート対象 | サポート対象 | CPU、GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **コンテキストマネージャ API**      | サポート対象 | サポート       | サポート       | CPU、GPU  | :                              :           : 対象外 : 対象外 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -567,48 +573,148 @@ TensorFlow モデルに適用可能な次の推奨事項を参照し、最適な
 
 ### 入力データパイプラインの最適化
 
-データ入力パイプラインを効率化してデバイスのアイドル時間を削減すると、モデルの実行速度を大幅に向上させることができます。データ入力パイプラインの効率を上げるため、[こちら](https://www.tensorflow.org/guide/data_performance)で説明する次のベストプラクティスを採用することを検討してください。
+Use the data from the [#input_pipeline_analyzer] to optimize your data input pipeline. An efficient data input pipeline can drastically improve the speed of your model execution by reducing device idle time. Try to incorporate the best practices detailed in the [Better performance with the tf.data API](https://www.tensorflow.org/guide/data_performance) guide and below to make your data input pipeline more efficient.
 
-- データをプリフェッチする
-- データ抽出を並列化する
-- データ変換を並列化する
-- データをメモリにキャッシュする
-- ユーザー定義関数をベクトル化する
-- 変換を適用する際のメモリ使用量を削減する
+- In general, parallelizing any ops that do not need to be executed sequentially can significantly optimize the data input pipeline.
 
-また、合成データを使用してモデルを実行し、入力パイプラインがパフォーマンスのボトルネックになっていないかどうかを確認してください。
+- In many cases, it helps to change the order of some calls or to tune the arguments such that it works best for your model. While optimizing the input data pipeline, benchmark only the data loader without the training and backpropagation steps to quantify the effect of the optimizations independently.
+
+- Try running your model with synthetic data to check if the input pipeline is a performance bottleneck.
+
+- Use `tf.data.Dataset.shard` for multi-GPU training. Ensure you shard very early on in the input loop to prevent reductions in throughput. When working with TFRecords, ensure you shard the list of TFRecords and not the contents of the TFRecords.
+
+- Parallelize several ops by dynamically setting the value of `num_parallel_calls` using `tf.data.AUTOTUNE`.
+
+- Consider limiting the usage of `tf.data.Dataset.from_generator` as it is slower compared to pure TensorFlow ops.
+
+- Consider limiting the usage of `tf.py_function` as it cannot be serialized and is not supported to run in distributed TensorFlow.
+
+- Use `tf.data.Options` to control static optimizations to the input pipeline.
+
+Also read the `tf.data` performance analysis [guide](https://www.tensorflow.org/guide/data_performance_analysis) for more guidance on optimizing your input pipeline.
+
+#### Optimize data augmentation
+
+When working with image data, make your [data augmentation](https://www.tensorflow.org/tutorials/images/data_augmentation) more efficient by casting to different data types <b><i>after</i></b> applying spatial transformations, such as flipping, cropping, rotating, etc.
+
+Note: Some ops like `tf.image.resize` transparently change the `dtype` to `fp32`. Make sure you normalize your data to lie between `0` and `1` if its not done automatically. Skipping this step could lead to `NaN` errors if you have enabled [AMP](https://developer.nvidia.com/automatic-mixed-precision).
+
+#### Use NVIDIA® DALI
+
+In some instances, such as when you have a system with a high GPU to CPU ratio, all of the above optimizations may not be enough to eliminate bottlenecks in the data loader caused due to limitations of CPU cycles.
+
+If you are using NVIDIA® GPUs for computer vision and audio deep learning applications, consider using the Data Loading Library ([DALI](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/examples/getting%20started.html)) to accelerate the data pipeline.
+
+Check the [NVIDIA® DALI: Operations](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/supported_ops.html) documentation for a list of supported DALI ops.
+
+### Use threading and parallel execution
+
+Run ops on multiple CPU threads with the `tf.config.threading` API to execute them faster.
+
+TensorFlow automatically sets the number of parallelism threads by default. The thread pool available for running TensorFlow ops depends on the number of CPU threads available.
+
+Control the maximum parallel speedup for a single op by using `tf.config.threading.set_intra_op_parallelism_threads`. Note that if you run multiple ops in parallel, they will all share the available thread pool.
+
+If you have independent non-blocking ops (ops with no directed path between them on the graph), use `tf.config.threading.set_inter_op_parallelism_threads` to run them concurrently using the available thread pool.
+
+### Miscellaneous
+
+When working with smaller models on NVIDIA® GPUs, you can set `tf.compat.v1.ConfigProto.force_gpu_compatible=True` to force all CPU tensors to be allocated with CUDA pinned memory to give a significant boost to model performance. However, exercise caution while using this option for unknown/very large models as this might negatively impact the host (CPU) performance.
 
 ### デバイスのパフォーマンス改善
 
-- トレーニングのミニバッチサイズ（トレーニングループの 1 回のイテレーションでデバイスごとに使用されるトレーニングサンプルの数）を大きくする。
-- TensorFlow 統計を使用し、デバイス上の演算がどの程度効率的に実行されているかを確認する。
-- `tf.function` を使用して演算を実行し、必要に応じて `experimental_compile` フラグを有効にする。
-- ステップ間でホスト側の Python 演算を最小化し、コールバックを減らす。すべてのステップではなく、数ステップごとにメトリックを計算する。
-- デバイスの演算ユニットをビジー状態に保つ。
-- 複数のデバイスに対して並列にデータを送信する。
-- チャネルを優先するようにデータレイアウトを最適化する（NHWC の代わりに NCHW など）。NVIDIA® V100 のような特定の GPU は NHWC データレイアウトでより高速に動作します。
-- IEEE が規定した半精度浮動小数点形式である `fp16`、または Brain 浮動小数点である [bfloat16](https://cloud.google.com/tpu/docs/bfloat16) 形式などの 16 ビット数値表現を使用することを検討する。
-- [Keras 混合精度 API](https://www.tensorflow.org/guide/keras/mixed_precision) の使用を検討する。
-- GPU でトレーニングする場合は、TensorCore を利用する。精度が fp16 で、入出力の次元が 8 または 16 で割り切れる場合（int8の場合）、GPU カーネルは TensorCore を使用する。
+Follow the best practices detailed here and in the [GPU performance optimization guide](https://www.tensorflow.org/guide/gpu_performance_analysis) to optimize on-device TensorFlow model performance.
+
+If you are using NVIDIA GPUs, log the GPU and memory utilization to a CSV file by running:
+
+```shell
+nvidia-smi
+--query-gpu=utilization.gpu,utilization.memory,memory.total,
+memory.free,memory.used --format=csv
+```
+
+#### Configure data layout
+
+When working with data that contains channel information (like images), optimize the data layout format to prefer channels last (NHWC over NCHW).
+
+Channel-last data formats improve [Tensor Core](https://www.nvidia.com/en-gb/data-center/tensor-cores/) utilization and provide significant performance improvements especially in convolutional models when coupled with AMP. NCHW data layouts can still be operated on by Tensor Cores, but introduce additional overhead due to automatic transpose ops.
+
+You can optimize the data layout to prefer NHWC layouts by setting `data_format="channels_last"` for layers such as `tf.keras.layers.Conv2D`, `tf.keras.layers.Conv3D`, and `tf.keras.layers.RandomRotation`.
+
+Use `tf.keras.backend.set_image_data_format` to set the default data layout format for the Keras backend API.
+
+#### Max out the L2 cache
+
+When working with NVIDIA® GPUs, execute the code snippet below before the training loop to max out the L2 fetch granularity to 128 bytes.
+
+```python
+import ctypes
+
+_libcudart = ctypes.CDLL('libcudart.so')
+# Set device limit on the current device
+# cudaLimitMaxL2FetchGranularity = 0x05
+pValue = ctypes.cast((ctypes.c_int*1)(), ctypes.POINTER(ctypes.c_int))
+_libcudart.cudaDeviceSetLimit(ctypes.c_int(0x05), ctypes.c_int(128))
+_libcudart.cudaDeviceGetLimit(pValue, ctypes.c_int(0x05))
+assert pValue.contents.value == 128
+```
+
+#### Configure GPU thread usage
+
+The GPU thread mode decides how GPU threads are used.
+
+Set the thread mode to `gpu_private` to make sure that preprocessing does not steal all the GPU threads. This will reduce the kernel launch delay during training. You can also set the number of threads per GPU. Set these values using environment variables.
+
+```python
+import os
+
+os.environ['TF_GPU_THREAD_MODE']='gpu_private'
+os.environ['TF_GPU_THREAD_COUNT']='1'
+```
+
+#### Configure GPU memory options
+
+In general, increase the batch size and scale the model to better utilize GPUs and get higher throughput. Note that increasing the batch size will change the model’s accuracy so the model needs to be scaled by tuning hyperparameters like the learning rate to meet the target accuracy.
+
+Also, use `tf.config.experimental.set_memory_growth` to allow GPU memory to grow to prevent all the available memory from being fully allocated to ops that require only a fraction of the memory. This allows other processes which consume GPU memory to run on the same device.
+
+To learn more, check out the [Limiting GPU memory growth](https://www.tensorflow.org/guide/gpu#limiting_gpu_memory_growth) guidance in the GPU guide to learn more.
+
+#### Miscellaneous
+
+- Increase the training mini-batch size (number of training samples used per device in one iteration of the training loop) to the maximum amount that fits without an out of memory (OOM) error on the GPU. Increasing the batch size impacts the model's accuracy—so make sure you scale the model by tuning hyperparameters to meet the target accuracy.
+
+- Disable reporting OOM errors during tensor allocation in production code. Set `report_tensor_allocations_upon_oom=False` in `tf.compat.v1.RunOptions`.
+
+- For models with convolution layers, remove bias addition if using batch normalization. Batch normalization shifts values by their mean and this removes the need to have a constant bias term.
+
+- Use TF Stats to find out how efficiently on-device ops run.
+
+- Use `tf.function` to perform computations and optionally, enable the `jit_compile=True` flag (`tf.function(jit_compile=True`). To learn more, go to [Use XLA tf.function](https://www.tensorflow.org/xla/tutorials/jit_compile).
+
+- Minimize host Python operations between steps and reduce callbacks. Calculate metrics every few steps instead of at every step.
+
+- Keep the device compute units busy.
+
+- Send data to multiple devices in parallel.
+
+- Consider [using 16-bit numerical representations](https://www.tensorflow.org/guide/mixed_precision), such as `fp16`—the half-precision floating point format specified by IEEE—or the Brain floating-point [bfloat16](https://cloud.google.com/tpu/docs/bfloat16) format.
 
 ## 追加リソース
 
-- このガイドに記載されたアドバイスを実践するには、エンドツーエンドの[TensorBoard プロファイラチュートリアル](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras)をご覧ください。
-- TensorFlow Dev Summit 2020 の講演「[TF 2 のパフォーマンスプロファイリング](https://www.youtube.com/watch?v=pXHAQIhhMhI)」をご覧ください。
+- The [TensorFlow Profiler: Profile model performance](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras) tutorial with Keras and TensorBoard where you can apply the advice in this guide.
+- The [Performance profiling in TensorFlow 2](https://www.youtube.com/watch?v=pXHAQIhhMhI) talk from the TensorFlow Dev Summit 2020.
+- The [TensorFlow Profiler demo](https://www.youtube.com/watch?v=e4_4D7uNvf8) from the TensorFlow Dev Summit 2020.
 
 ## 既知の制限
 
 ### TensorFlow 2.2 と TensorFlow 2.3 におけるマルチ GPU のプロファイリング
 
-TensorFlow 2.2 と 2.3 では、シングルホストシステムのみのマルチ GPU プロファイリングがサポートされています。マルチホストシステムの GPU プロファイリングはサポートされていません。マルチワーカー GPU 構成のプロファイリングを行うには、各ワーカーを個別にプロファイルする必要があります。TensorFlow 2.4 では、[`tf.profiler.experimental.trace`](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace) API を使って複数のワーカーをプロファイルすることが可能です。
+TensorFlow 2.2 and 2.3 support multiple GPU profiling for single host systems only; multiple GPU profiling for multi-host systems is not supported. To profile multi-worker GPU configurations, each worker has to be profiled independently. From TensorFlow 2.4 multiple workers can be profiled using the `tf.profiler.experimental.client.trace` API.
 
-CUDA® Toolkit 10.2 以降では、マルチ GPU のプロファイリングが必要です。TensorFlow 2.2 と 2.3 では、CUDA® Toolkit のバージョン 10.1 までをサポートしているため、`libcudart.so.10.1` と `libcupti.so.10.1` にシンボリックリンクを作成してください。
+CUDA® Toolkit 10.2 or later is required to profile multiple GPUs. As TensorFlow 2.2 and 2.3 support CUDA® Toolkit versions only up to 10.1, you need to create symbolic links to `libcudart.so.10.1` and `libcupti.so.10.1`:
 
 ```shell
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
-
-
-[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2
-[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace
