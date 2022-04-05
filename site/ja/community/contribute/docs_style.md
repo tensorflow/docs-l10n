@@ -16,15 +16,15 @@
 
 #### コードの記述をインライン化
 
-Put <code>`backticks`</code> around the following symbols when used in text:
+テキストで使用する場合は、以下のシンボルの前後に <code>`backticks`</code>（バッククォート）を挿入します。
 
-- Argument names: <code>`input`</code>, <code>`x`</code>, <code>`tensor`</code>
-- Returned tensor names: <code>`output`</code>, <code>`idx`</code>, <code>`out`</code>
-- Data types: <code>`int32`</code>, <code>`float`</code>, <code>`uint8`</code>
-- Other op names reference in text: <code>`list_diff()`</code>, <code>`shuffle()`</code>
-- Class names: <code>`tf.Tensor`</code>, <code>`Strategy`</code>
-- File name: <code>`image_ops.py`</code>, <code>`/path_to_dir/file_name`</code>
-- Math expressions or conditions: <code>`-1-input.dims() &lt;= dim &lt;=     input.dims()`</code>
+- 引数名: <code>`input`</code>、<code>`x`</code>、<code>`tensor`</code>
+- 返されるテンソル名: <code>`output`</code>、<code>`idx`</code>、<code>`out`</code>
+- データ型: <code>`int32`</code>、<code>`float`</code>、<code>`uint8`</code>
+- テキスト内のその他の演算子名の参照: <code>`list_diff()`</code>、<code>`shuffle()`</code>
+- クラス名: <code>`tf.Tensor`</code>、<code>`Strategy`</code>
+- ファイル名: <code>`image_ops.py`</code>、<code>`/path_to_dir/file_name`</code>
+- 数式や条件: <code>`-1-input.dims() &lt;= dim &lt;=     input.dims()`</code>
 
 #### コードブロック
 
@@ -36,59 +36,59 @@ Put <code>`backticks`</code> around the following symbols when used in text:
 ```
 </code></pre>
 
-### Links in Markdown and notebooks
+### Markdown とノートブック内のリンク
 
-#### Links between files in a repository
+#### リポジトリ内のファイル間のリンク
 
-Use relative links between files in a single GitHub repository. Include the file extension.
+1 つの GitHub リポジトリ内でファイル間をリンクするには、相対リンクを使用します。ファイル拡張子も含めてください。
 
-For example, **this file you're reading** is from the [https://github.com/tensorflow/docs](https://github.com/tensorflow/docs) repository. Therefore, it can use relative paths to link to other files in the same repository like this:
+たとえば、**今読んでいるこのファイル**は [https://github.com/tensorflow/docs](https://github.com/tensorflow/docs) リポジトリにあります。したがって、次のように、同じリポジトリ内の他のファイルへのリンクには相対パスを使用できます。
 
-- <code>\[Basics\]\(../../guide/basics.ipynb\)</code> produces [Basics](../../guide/basics.ipynb).
+- <code>\[Basics\]\(../../guide/basics.ipynb\)</code> は [Basics](../../guide/basics.ipynb) を生成します。
 
-This is the prefered approach because this way the links on [tensorflow.org](https://www.tensorflow.org), [GitHub](https://github.com/tensorflow/docs){:.external} and [Colab](https://github.com/tensorflow/docs/tree/master/site/en/guide/bazics.ipynb){:.external} all work. Also, the reader stays in the same site when they click a link.
+このようにすると、[tensorflow.org](https://www.tensorflow.org)、[GitHub](https://github.com/tensorflow/docs){:.external}、および [Colab](https://github.com/tensorflow/docs/tree/master/site/en/guide/bazics.ipynb){:.external} のリンクがすべて機能するため、これが優先される方法です。また、読者がリンクをクリックしても、同じサイト内にとどまります。
 
-Note: You should include the file extension—such as `.ipynb` or `.md`—for relative links. It will rendered on `tensorflow.org` without an extension.
+注意: 相対リンクでは、`.ipynb` や `.md` などのファイル拡張子を含めてください。拡張子がない場合、`tensorflow.org` でレンダリングされます。
 
 #### 外部リンク
 
-For links to files that are not in the current repository, use standard Markdown links with the full URI. Prefer to link to the [tensorflow.org](https://www.tensorflow.org) URI if it's available.
+現在のリポジトリにないファイルへのリンクの場合は、絶対 URIを使った標準的な Markdown リンクを使用します。利用できる場合は、[tensorflow.org](https://www.tensorflow.org) URI にリンクすることを優先してください。
 
 ソースコードをリンクするには、<var>https://www.github.com/tensorflow/tensorflow/blob/master/</var>  で始まるリンクを使用し、その後に GitHub のルートで始まるファイル名をつけます。
 
-When linking off of [tensorflow.org](https://www.tensorflow.org), include a `{:.external}` on the Markdown link so that the "external link" symbol is shown.
+[tensorflow.org](https://www.tensorflow.org) からリンクする場合は、「外部リンク」シンボルが表示されるように、Markdown リンクに `{:.external}` を含めます。
 
-- `[GitHub](https://github.com/tensorflow/docs){:.external}` produces [GitHub](https://github.com/tensorflow/docs){:.external}
+- `[GitHub](https://github.com/tensorflow/docs){:.external}` は [GitHub](https://github.com/tensorflow/docs){:.external} となります。
 
-Do not include URI query parameters in the link:
+リンクに URI クエリパラメータを含めないでください。
 
-- Use: `https://www.tensorflow.org/guide/data`
-- Not: `https://www.tensorflow.org/guide/data?hl=en`
+- 使用する: `https://www.tensorflow.org/guide/data`
+- 使用しない: `https://www.tensorflow.org/guide/data?hl=en`
 
-#### Images
+#### 画像
 
-The advice in the previous section is for links to pages. Images are handled differently.
+前のセクションの推奨事項は、ページへのリンクを対象としています。画像においては、処理が異なります。
 
-Generally, you should not check in images, and instead add the [TensorFlow-Docs team](https://github.com/tensorflow/docs) to your PR, and ask them to host the images on [tensorflow.org](https://www.tensorflow.org). This helps keep the size of your repository down.
+一般に、画像はチェックインせずに、[TensorFlow-Docs チーム](https://github.com/tensorflow/docs)を PR に追加し、[tensorflow.org](https://www.tensorflow.org) に画像をホストするように要請します。こうすることで、リポジトリのサイズを抑制することができます。
 
-If you do submit images to your repository, note that some systems do not handle relative paths to images. Prefer to use a full URL pointing to the image's eventual location on [tensorflow.org](https://www.tensorflow.org).
+リポジトリに画像を送信する場合は、システムによっては、画像への相対パスが処理されないことに注意してください。[tensorflow.org](https://www.tensorflow.org) にある画像の最終的な場所にポイントする絶対 URL を使用することを優先してください。
 
 #### API ドキュメントへのリンク
 
-API links are converted when the site is published. To link to a symbol's API reference page, enclose the symbol path in backticks:
+API リンクはサイトの公開時に変換されます。シンボルの API リファレンスページにリンクするには、シンボルパス全体をバッククォートで囲みます。
 
 - *貢献内容のスペルと文法をチェックします。*ほとんどのエディタにはスペルチェッカーが含まれているか、利用可能なスペルチェックプラグインがあります。また、Google ドキュメントや他の文書ソフトにテキストを貼り付けて、より強力なスペルチェックや文法チェックをすることもできます。
 
-Full paths are slightly preferred except for long paths. Paths can be abbreviated by dropping the leading path components. Partial paths will be converted to links if:
+長いパスでない限り、フルパスの方がやや優先されます。パスは、先頭のパスコンポーネントを抄訳することで、短縮が可能です。部分パスは、以下の場合にリンクに変換されます。
 
-- There is at least one `.` in the path, and
+- パスに少なくとも 1 つの `.` が含まれる場合。
 - *複雑な専門用語は使わず、簡潔で要点を押さえた文章を使用します。*重文、節の連鎖、場所特有の慣用句は、テキストの理解や翻訳を難しくする可能性があります。文章を 2 つに分割できる場合は、分割した方がよいでしょう。セミコロンは避け、必要に応じて箇条書きを使用します。
 
-API paths are linked **for every project** with a Python API published on [tensorflow.org](https://www.tensorflow.org). You can easily link to multiple subprojects from a single file by wrapping the API names with backticks. For example:
+API パスは、[tensorflow.org](https://www.tensorflow.org) に公開された Python API で**プロジェクト単位**にリンクされます。以下のようにその API 名をバッククォートで囲むと、単一のファイルから複数のサブプロジェクトに簡単にリンクできます。
 
-- <code>`tf.metrics`</code>, <code>`tf_agents.metrics`</code>, <code>`text.metrics`</code> produces: `tf.metrics`, `tf_agents.metrics`, `text.metrics`.
+- <code>`tf.metrics`</code>、<code>`tf_agents.metrics`</code>、<code>`text.metrics`</code> は、`tf.metrics`、`tf_agents.metrics`、`text.metrics` となります。
 
-For symbols with multiple path aliases there is a slight preference for the path that matches the API-page on [tensorflow.org](https://www.tensorflow.org). All aliases will redirect to the correct page.
+複数のパスエイリアスを持つシンボルの場合は、[tensorflow.org](https://www.tensorflow.org) 上の API ページに一致するパスがやや優先されます。すべてのエイリアスは正しいページにリダイレクトされます。
 
 ### Markdown の数学
 
@@ -115,7 +115,7 @@ This is an example of an inline MathJax expression: $ 2 \times 2 = 4 $
 
 これはインライン MathJax の式の例で、$ 2 \times 2 = 4 $ です。
 
-<code>\( ... \)</code> delimiters also work for inline math, but the $ form is sometimes more readable.
+<code>\( ... \)</code> 区切り文字は、インライン数式でも使用できますが、$ 形式の方が読みやすい場合があります。
 
 注意: テキストや MathJax の式の中でドル記号を使う必要がある場合は、先頭のスラッシュでエスケープします（`\$`）。コードブロック内のドル記号（Bash の変数名など）はエスケープする必要はありません。
 
