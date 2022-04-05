@@ -257,7 +257,7 @@ GPU デリゲートのコンストラクタは、オプションの`struct`を�
 このセクションでは、GPU デリゲートが 8 ビットの量子化モデルを高速化する方法について説明します。以下のようなあらゆる種類の量子化が対象となります。
 
 - [量子化認識トレーニング](https://www.tensorflow.org/lite/convert/quantization)でトレーニングされたモデル
-- [Post-training dynamic-range quantization](https://www.tensorflow.org/lite/performance/post_training_quant)
+- トレーニング後のダイナミックレンジ量子化
 - [Post-training full-integer quantization](https://www.tensorflow.org/lite/performance/post_training_integer_quant)
 
 パフォーマンスを最適化するには、浮動小数点入出力テンソルを持つモデルを使用します。
@@ -335,7 +335,7 @@ iOS API は、デフォルトで量子化モデルをサポートしています
 
 GPU で計算を実行するには、データを GPU で使用できるようにする必要があり、多くの場合、メモリコピーの実行が必要になります。これにはかなり時間がかかる可能性があるため、可能であれば CPU/GPU のメモリ境界を超えないようにしてください。通常、このような交差は避けられませんが、一部の特殊なケースでは、どちらか一方を省略できます。
 
-If the network's input is an image already loaded in the GPU memory (for example, a GPU texture containing the camera feed) it can stay in the GPU memory without ever entering the CPU memory. Similarly, if the network's output is in the form of a renderable image (for example, [image style transfer](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)) it can be directly displayed on the screen.
+ネットワークの入力が GPU メモリに既に読み込まれている画像（たとえば、カメラフィードを含む GPU テクスチャ）である場合、CPU メモリに読み込むことなく、GPU メモリに保持できます。また、ネットワークの出力がレンダリング可能な画像（たとえば、[画像スタイルの転送](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)）の形式である場合は、画面に直接表示できます。
 
 TensorFlow Lite では、最高のパフォーマンスを実現するために、TensorFlow ハードウェアバッファから直接読み書きできるので、回避可能なメモリコピーをバイパスできます。
 
