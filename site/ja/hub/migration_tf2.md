@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-01' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2022-01-12' } *-->
 
 # TensorFlow Hub を使用したまま TF1 から TF2 に移行する
 
@@ -31,8 +31,8 @@ model = tf.keras.Sequential([
 
 多くのチュートリアルで、上記の API が実際に使用される様子を紹介しています。特に、次の項目をご覧ください。
 
-- [テキスト分類のサンプルノートブック](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
-- [画像分類のサンプルノートブック](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
+- [Text classification example notebook](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
+- [Image classification example notebook](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
 
 ### Estimator トレーニングで新しい API を使用する
 
