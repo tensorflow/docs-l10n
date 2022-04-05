@@ -88,7 +88,9 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
         builder=self,
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(256, 256, 3)),
-            'label': tfds.features.ClassLabel(names=['no', 'yes']),
+            'label': tfds.features.ClassLabel(
+                names=['no', 'yes'],
+                doc='Whether this is a picture of a cat'),
         }),
     )
 
@@ -183,7 +185,7 @@ def _info(self):
 - `extract`: 現在サポートされているのは `.zip`、`.gz`、および `.tar` ファイルです。
 - `download_and_extract`: `dl_manager.extract(dl_manager.download(urls))` と同じです。
 
-これらのすべてのメソッドは `tfds.core.ReadOnlyPath` を戻し、これらは [pathlib.Path のような](https://docs.python.org/3/library/pathlib.html)オブジェクトです。
+これらのすべてのメソッドは `tfds.core.Path`（[`epath.Path`](https://github.com/google/etils) のエイリアス）を戻し、これらは [pathlib.Path のような](https://docs.python.org/3/library/pathlib.html)オブジェクトです。
 
 これらのメソッドは次のように、任意のネストされた構造（`list`、`dict` など）をサポートしています。
 
@@ -374,7 +376,7 @@ Pathlib は `tf.io.gfile` よりも優先される必要があります（[ratio
 
 データセットを更新するには、次のように行います。
 
-- 「外部」データの更新: 不空数のユーザーが特定の年/バージョンに同時にアクセスすることがあります。これは、バージョン当たり 1 つの `tfds.core.BuilderConfig`（`coco/2017`、`coco/2019` など）またはバージョン当たり 1 つのクラス（`Voc2007`、`Voc2012` など）を使って行われます。
+- For "external" data update: Multiple users may want to access a specific year/version simultaneously. This is done by using one `tfds.core.BuilderConfig` per version (e.g. `coco/2017`, `coco/2019`) or one class per version (e.g. `Voc2007`, `Voc2012`).
 - 「内部」コードの更新: ユーザーは最も最近のバージョンのみをダウンロードします。コードが更新されると、`VERSION` クラス属性が増加（`1.0.0` から `VERSION = tfds.core.Version('2.0.0')` など）します。これは[セマンティックバージョン管理](https://www.tensorflow.org/datasets/datasets_versioning#semantic)に従います。
 
 ### import を追加して登録する
@@ -404,7 +406,7 @@ cd path/to/datasets/my_dataset/
 tfds build --register_checksums
 ```
 
-開発に使用できる便利なフラグには、次のようなものがあります。
+Some useful flags for development:
 
 - `--pdb`: 例外が発生すると、デバッグモードに入ります。
 - `--overwrite`: データセットがすでに生成されている場合、既存のファイルを削除します。
