@@ -6,21 +6,21 @@
 
 #### TensorFlow から TensorFlow Lite への変換では、どの形式がサポートされていますか？
 
-The supported formats are listed [here](../convert/index.md#python_api)
+サポートされている形式は、[こちら](../convert/index.md#python_api)にリストされています。
 
 #### TensorFlow Lite に実装されていない演算があるのはなぜですか？
 
-In order to keep TFLite lightweight, only certain TF operators (listed in the [allowlist](op_select_allowlist.md)) are supported in TFLite.
+TFLite を軽量に維持するため、TFLite では特定の TF 演算子のみがサポートされています（[allowlist](op_select_allowlist.md) を参照）。
 
 #### モデルを変換できない場合があるのはなぜですか？
 
-Since the number of TensorFlow Lite operations is smaller than TensorFlow's, some models may not be able to convert. Some common errors are listed [here](../convert/index.md#conversion-errors).
+TensorFlow Lite 演算の数は、TensorFlow の演算よりも少ないため、変換できないモデルがある場合があります。一部の一般的なエラーは、[こちら](../convert/index.md#conversion-errors)にリストされています。
 
 サポートされていない演算や制御フロー演算に関連しない変換の問題については、[GitHub 課題](https://github.com/tensorflow/tensorflow/issues?q=label%3Acomp%3Alite+)を検索するか、[新しい課題](https://github.com/tensorflow/tensorflow/issues)を提出してください。
 
 #### TensorFlow Lite モデルが元の TensorFlow モデルと同じように動作することをどのようにテストしますか？
 
-The best way to test is to compare the outputs of the TensorFlow and the TensorFlow Lite models for the same inputs (test data or random inputs) as shown [here](inference.md#load-and-run-a-model-in-python).
+同じ入力（テストデータまたはランダム入力）による TensorFlow モデルと TensorFlow Lite モデルの出力を比較するのが最善のテスト方法です。[こちら](inference.md#load-and-run-a-model-in-python)をご覧ください。
 
 #### GraphDef プロトコルバッファーの入力/出力を決定するにはどうすればよいですか？
 
@@ -48,7 +48,7 @@ python -m tensorflow.lite.tools.visualize model.tflite visualized_model.html
 
 それ以外の場合は、Bazel でこのスクリプトを実行できます
 
-- [Clone the TensorFlow repository](https://www.tensorflow.org/install/source)
+- [TensorFlow リポジトリをクローンする](https://www.tensorflow.org/install/source)
 - `visualize.py`スクリプトを Bazel で実行する
 
 ```shell
