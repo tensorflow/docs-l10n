@@ -28,7 +28,7 @@ git clone https://github.com/tensorflow/tensorflow
 
 Note: You can now target **Android S+** with `targetSdkVersion="S"` in your manifest, or `targetSdkVersion "S"` in your Gradle `defaultConfig` (API level TBD). In this case, you should merge the contents of [`AndroidManifestGpu.xml`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/AndroidManifestGpu.xml) into your Android application's manifest. Without this change, the GPU delegate cannot access OpenCL libraries for acceleration. *AGP 4.2.0 or above is required for this to work.*
 
-Add the `tensorflow-lite-gpu` package alongside the existing `tensorflow-lite` package in the existing `dependencies` block.
+`tensorflow-lite-gpu`パッケージを既存の`tensorflow-lite`パッケージと共に、既存の`dependencies`ブロックに追加します。
 
 ```
 dependencies {
@@ -46,7 +46,7 @@ Run → Run ‘app’ (実行 → 「アプリ」を実行)。アプリを実行
 
 ### iOS（XCode を使用）
 
-For a step-by-step tutorial, watch the [GPU Delegate for iOS](https://youtu.be/a5H4Zwjp49c) video.
+ステップバイステップのチュートリアルは、[iOS 向け GPU デリゲート](https://youtu.be/a5H4Zwjp49c)の動画をご覧ください。
 
 注意: これには XCode v10.1 以降が必要です。
 
@@ -99,7 +99,7 @@ GPU デリゲートを使用するコードを有効にするには、`CameraExa
 
 #### ステップ 5. リリースモード
 
-While in Step 4 you ran in debug mode, to get better performance, you should change to a release build with the appropriate optimal Metal settings. In particular, To edit these settings go to the `Product > Scheme > Edit Scheme...`. Select `Run`. On the `Info` tab, change `Build Configuration`, from `Debug` to `Release`, uncheck `Debug executable`.
+パフォーマンスを向上させるには、ステップ 4 でデバッグモードで実行している間、適切な最適な Metal 設定でリリースビルドに変更する必要があります。特に、これらの設定を編集するには、`Product > Scheme > Edit Scheme...`に移動します。 `Run`を選択します。`Info`タブで、`Build Configuration `を`Debug` から`Release`に変更し、`Debug executable`のチェックを外します。
 
 ![メタルオプションの設定](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/performance/images/iosmetal.png?raw=true)
 
