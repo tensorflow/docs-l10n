@@ -178,4 +178,4 @@ def stats_options_updater_fn(stats_type, stats_options):
   return stats_options
 ```
 
-Post-transform statistics often benefit from knowledge of the vocabulary being used for preprocessing a feature. The vocabulary name to path mapping is provided to StatsOptions (and hence TFDV) for every TFT-generated vocabulary. Additionally, mappings for externally-created vocabularies can be added by either (i) directly modifying the `vocab_paths` dictionary within StatsOptions or by (ii) using `tft.annotate_asset`.
+多くの場合、特徴量の前処理に使用されたボキャブラリに関する知識は変換後の統計に有用です。ボキャブラリ名からパスへのマッピングは、TFT で生成されたすべてのボキャブラリの StatsOptions（したがって TFDV）に提供されます。また、外部で作成されたボキャブラリのマッピングは、(i) StatsOptions 内の `vocab_paths` ディクショナリを直接変更するか、(ii) `tft.annotate_asset`を使用して追加できます。
