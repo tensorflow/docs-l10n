@@ -12,11 +12,11 @@ TODO(b/153500547): 추적 시스템의 개별 구성 요소를 설명하고 연�
 
 ### 인수 압축하기
 
-Internally, a TFF computation only ever have zero or one argument. The arguments provided to the [computations.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/api/computations.py) decorator describe type signature of the arguments to the TFF computation. TFF uses this information to to determine how to pack the arguments of the Python function into a single [structure.Struct](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/common_libs/structure.py).
+내부적으로 TFF 계산에는 0 또는 1개의 인수만 있습니다. [computations.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/api/computations.py) 데코레이터에 제공되는 인수는 TFF 연산에 대한 인수의 유형 서명을 설명합니다. TFF는 이 정보를 사용하여 Python 함수의 인수를 단일 [structure.Struct](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/common_libs/structure.py)로 압축하는 방법을 결정합니다.
 
 참고: `Struct`를 단일 데이터 구조로 사용하여 Python `args`와 `kwargs`를 나타내는 것은 `Struct`에서 명명된 필드와 명명되지 않은 필드를 모두 허용하는 이유입니다.
 
-See [function_utils.create_argument_unpacking_fn](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/computation/function_utils.py) for more information.
+자세한 내용은 [function_utils.create_argument_unpacking_fn](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/computation/function_utils.py)을 참조하세요.
 
 ### 함수 추적하기
 
@@ -24,7 +24,7 @@ When tracing a `federated_computation`, the user's function is called using [val
 
 구체적으로, 정확히 하나의 인수가 있을 때 추적은 다음과 같이 수행됩니다.
 
-1. Constructing a [value_impl.ValueImpl](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) backed by a [building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) with appropriate type signature to represent the argument.
+1. 인수를 나타내는 적절한 형식 서명을 사용하여 [building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py)에서 지원되는 [value_impl.ValueImpl](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py)를 생성합니다.
 
 2. `ValueImpl`에 대한 함수를 호출합니다. 이로 인해 Python 런타임이 ValueImpl에 의해 구현된 `ValueImpl` 메서드를 호출하여 dunder 메서드를 AST 구성으로 변환합니다. 각 dunder 메서드는 AST를 구성하고 해당 AST가 지원하는 `ValueImpl`을 반환합니다.
 
@@ -35,13 +35,13 @@ def foo(x):
   return x[0]
 ```
 
-Here the function’s parameter is a tuple and in the body of the fuction the 0th element is selected. This invokes Python’s `__getitem__` method, which is overridden on `ValueImpl`. In the simplest case, the implementation of `ValueImpl.__getitem__` constructs a [building_blocks.Selection](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) to represent the invocation of `__getitem__` and returns a `ValueImpl` backed by this new `Selection`.
+여기서 함수의 매개변수는 튜플이고, 함수 본문에서 0번째 요소가 선택됩니다. 그러면 `ValueImpl`에서 재정의된 Python의 `__getitem__` 메서드가 호출됩니다. 가장 간단한 경우, `ValueImpl.__getitem__`의 구현은 <code>__getitem__</code>의 호출을 나타내는 <a>building_blocks.Selection</a>을 구성하고 새로운 `Selection`에서 지원되는 `ValueImpl`을 반환합니다.
 
 각 dunder 메서드가 `ValueImpl`을 반환하여 재정의된 dunder 메서드 중 하나를 호출하는 함수의 본문에서 모든 연산을 스탬프 처리하므로 추적이 계속됩니다.
 
 ### AST 생성하기
 
-The result of tracing the function is packaged into a [building_blocks.Lambda](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) whose `parameter_name` and `parameter_type` map to the [building_block.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) created to represent the packed arguments. The resulting `Lambda` is then returned as a Python object that fully represents the user’s Python function.
+함수를 추적한 결과는 [building_blocks.Lambda](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py)로 패키징되며, `parameter_name` 및 `parameter_type`이 압축된 인수를 나타내기 위해 생성된 [building_block.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py)에 매핑됩니다. 결과 `Lambda`는 사용자의 Python 함수를 완전히 나타내는 Python 객체로 반환됩니다.
 
 ## TensorFlow 계산 추적하기
 
