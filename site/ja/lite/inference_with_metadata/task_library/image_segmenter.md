@@ -44,8 +44,10 @@ android {
 dependencies {
     // Other dependencies
 
-    // Import the Task Vision Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.1.0'
+    // Import the Task Vision Library dependency (NNAPI is included)
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.0'
+    // Import the GPU delegate plugin Library for GPU inference
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.3.0'
 }
 ```
 
@@ -55,8 +57,13 @@ dependencies {
 
 ```java
 // Initialization
-ImageSegmenterOptions options = ImageSegmenterOptions.builder().setOutputType(OutputType.CONFIDENCE_MASK).build();
-ImageSegmenter imageSegmenter = ImageSegmenter.createFromFileAndOptions(context, modelFile, options);
+ImageSegmenterOptions options =
+    ImageSegmenterOptions.builder()
+        .setBaseOptions(BaseOptions.builder().useGpu().build())
+        .setOutputType(OutputType.CONFIDENCE_MASK)
+        .build();
+ImageSegmenter imageSegmenter =
+    ImageSegmenter.createFromFileAndOptions(context, modelFile, options);
 
 // Run inference
 List<Segmentation> results = imageSegmenter.segment(image);
