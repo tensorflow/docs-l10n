@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'mroff' reviewed: '2021-03-09'  } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2021-10-15'  } *-->
 
 # 이미지 작업을 위한 일반적인 SavedModel API
 
