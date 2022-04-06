@@ -38,8 +38,8 @@ android {
 dependencies {
     // Other dependencies
 
-    // Import the Task Text Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
+    // Import the Task Text Library dependency (NNAPI is included)
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
 }
 ```
 
@@ -49,7 +49,13 @@ dependencies {
 
 ```java
 // Initialization
-BertQuestionAnswerer answerer = BertQuestionAnswerer.createFromFile(androidContext, modelFile);
+BertQuestionAnswererOptions options =
+    BertQuestionAnswererOptions.builder()
+        .setBaseOptions(BaseOptions.builder().setNumThreads(4).build())
+        .build();
+BertQuestionAnswerer answerer =
+    BertQuestionAnswerer.createFromFileAndOptions(
+        androidContext, modelFile, options);
 
 // Run inference
 List<QaAnswer> answers = answerer.answer(contextOfTheQuestion, questionToAsk);
