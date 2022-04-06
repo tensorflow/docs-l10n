@@ -1,27 +1,41 @@
-**업데이트: 2020년 8월 7일**
+**업데이트: 2021년 6월**
+
+TensorFlow의 모델 최적화 도구 키트(MOT)는 TensorFlow 모델을 모바일 및 IoT 장치에서 실행할 수 있는 더 작은 크기, 더 나은 성능 및 허용 가능한 정확성의 TensorFlow Lite 모델로 변환/최적화하는 데 널리 사용되어 왔습니다. 우리는 현재 MOT 기술과 도구를 확장하여 TensorFlow Lite를 넘어 TensorFlow SavedModel도 지원할 수 있도록 노력하고 있습니다.
+
+다음은 로드맵을 높은 개요 수준에서 나타낸 것입니다. 이 로드맵은 언제든지 변경될 수 있으며 아래 순서는 어떤 형태의 우선순위도 반영하지 않는다는 점에 유의해 주세요. [토론 그룹](https://groups.google.com/a/tensorflow.org/g/tflite)에서 우리의 로드맵에 대한 의견과 피드백을 제공해 주시기 바랍니다.
 
 ## 양자화
 
-- 동적 범위 커널에 대한 훈련 후 양자화 -- [출시됨](https://blog.tensorflow.org/2018/09/introducing-model-optimization-toolkit.html)
-- (8b) 고정 소수점 커널에 대한 훈련 후 양자화 -- [출시됨](https://blog.tensorflow.org/2019/06/tensorflow-integer-quantization.html)
-- (8b) 고정 소수점 커널에 대한 양자화 인식 훈련 및 <8b에 대한 실험 -- [출시됨](https://blog.tensorflow.org/2020/04/quantization-aware-training-with-tensorflow-model-optimization-toolkit.html)
-- [WIP] (8b) 고정 소수점 RNN에 대한 훈련 후 양자화
-- (8b) 고정 소수점 RNN에 대한 양자화 인식 훈련
-- [WIP] 훈련 후 동적 범위 양자화를 위한 품질 및 성능 개선
+#### 가중치 클러스터링
 
-## 잘라내기/희소성
+- Selective post-training quantization to exclude certain layers from quantization.
+- 레이어별 양자화 오류 손실을 검사하는 양자화 디버거
+- Applying quantization-aware training on more model coverage e.g. TensorFlow Model Garden.
+- 훈련 후 동적 범위 양자화를 위한 품질 및 성능 향상
 
-- 훈련 중 규모 기반 가중치 잘라내기 -- [출시됨](https://blog.tensorflow.org/2019/05/tf-model-optimization-toolkit-pruning-API.html)
-- TensorFlow Lite의 희소 모델 실행 지원 -- [WIP](https://github.com/tensorflow/model-optimization/issues/173)
+#### TensorFlow
 
-## 가중치 클러스터링
+- 훈련 후 양자화(bf16 * int8 동적 범위)
+- Quantization Aware Training ((bf16 * int8 weight-only with fake quant).
+- Selective post-training quantization to exclude certain layers from quantization.
+- 레이어별 양자화 오류 손실을 검사하는 양자화 디버거
 
-- 훈련 중 가중치 클러스터링 -- [출시됨](https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html)
+## 희소도
+
+#### TensorFlow Lite
+
+- 더 많은 모델에 대한 희소 모델 실행 지원
+- 희소도에 대한 대상 인식 작성
+- 성능 기준에 맞는 x86 커널을 사용하여 희소 op 세트 확장
+
+#### TensorFlow
+
+- TensorFlow에서 희소도 지원
 
 ## 연계 압축 기술
 
-- [WIP] 다양한 압축 기술을 결합하기 위한 추가 지원, 오늘날 사용자는 하나의 훈련 중 기술만 훈련 후 양자화와 결합할 수 있습니다. 결합 제안이 곧 출시됩니다.
+- 양자화 + 텐서 압축 + 희소도: 함께 작동하는 모든 3가지 기법을 설명
 
 ## 압축
 
-- [WIP] 텐서 압축 API
+- 테스트/벤치마킹을 위한 표준 방법을 제공하는 등 압축 알고리즘 개발자가 자체 모델 압축 알고리즘(예: 가중치 클러스터링)을 구현하는 데 도움이 되는 텐서 압축 API
