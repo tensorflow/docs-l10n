@@ -15,7 +15,7 @@ Trainer는 다음을 사용합니다.
 - 훈련 및 평가에 사용되는 tf.Examples
 - Trainer 로직을 정의하는 사용자 제공 모듈 파일
 - 훈련 인수 및 평가 인수의 [Protobuf](https://developers.google.com/protocol-buffers) 정의
-- (Optional) A data schema created by a SchemaGen pipeline component and optionally altered by the developer.
+- SchemaGen 파이프라인 구성 요소로 생성되고 개발자가 선택적으로 변경하는 데이터 스키마(선택 사항)
 - 업스트림 Transform 구성 요소에서 생성한 변환 그래프(선택 사항)
 - 웜스타트와 같은 시나리오에 사용되는 사전 훈련된 모델(선택 사항)
 - 사용자 모듈 함수에 전달될 하이퍼 매개변수(Tuner와의 통합에 대한 자세한 내용은 [여기](tuner.md)에서 찾을 수 있음)(선택 사항)
@@ -58,7 +58,7 @@ def run_fn(fn_args: FnArgs) -> None:
   model.save(fn_args.serving_model_dir, ...)
 ```
 
-Here is an [example module file](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils_keras.py) with `run_fn`.
+다음은 <code>run_fn</code>을 사용한 <a>예제 모듈 파일</a>입니다.
 
 Transform 구성 요소가 파이프라인에서 사용되지 않으면 Trainer는 ExampleGen에서 직접 예제를 가져옵니다.
 
