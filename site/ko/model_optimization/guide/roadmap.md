@@ -16,7 +16,7 @@ TensorFlow의 모델 최적화 도구 키트(MOT)는 TensorFlow 모델을 모바
 #### TensorFlow
 
 - 훈련 후 양자화(bf16 * int8 동적 범위)
-- Quantization Aware Training ((bf16 * int8 weight-only with fake quant).
+- 양자화 인식 훈련((bf16 * int8, 가짜 양자화를 사용한 가중치만 적용)
 - 양자화에서 특정 레이어를 제외하기 위한 선택적 훈련 후 양자화
 - 레이어별 양자화 오류 손실을 검사하는 양자화 디버거
 
