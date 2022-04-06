@@ -488,7 +488,7 @@ Trainer = Trainer(
 
 デフォルトでは、'eval' Split で計算されたメトリクスを提供します。
 
-To compute evaluation statistics on custom splits, set the `example_splits` for Evaluator component. For example:
+カスタム Split で評価統計を計算するには、Evaluator コンポーネントに `example_splits` を設定します。以下に例を示します。
 
 ```python
 # Compute metrics on the 'eval1' split and the 'eval2' split.
