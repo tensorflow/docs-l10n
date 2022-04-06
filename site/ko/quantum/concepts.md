@@ -1,6 +1,6 @@
 # 양자 머신러닝 개념
 
-Google's <a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">quantum beyond-classical experiment</a> used 53 *noisy* qubits to demonstrate it could perform a calculation in 200 seconds on a quantum computer that would take 10,000 years on the largest classical computer using existing algorithms. This marks the beginning of the <a href="https://quantum-journal.org/papers/q-2018-08-06-79/" class="external">Noisy Intermediate-Scale Quantum</a> (NISQ) computing era. In the coming years, quantum devices with tens-to-hundreds of noisy qubits are expected to become a reality.
+Google의 <a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">양자 고전성 초월 실험</a>은 53개의 *노이즈*가 있는 큐비트(qubit)로, 기존 알고리즘을 사용하는 가장 고전적인 컴퓨터에서는 1만년이 걸리는 계산을 양자 컴퓨터에서 200초 만에 수행할 수 있음을 입증했습니다. 이는 <a href="https://quantum-journal.org/papers/q-2018-08-06-79/" class="external">노이즈가 있는 중간 규모 양자</a>(NISQ) 컴퓨팅 시대의 시작을 의미합니다. 앞으로 수만에서 수백 개의 노이즈가 있는 큐비트를 가진 양자 기기가 현실이 될 것으로 예상됩니다.
 
 ## 양자 컴퓨팅
 
