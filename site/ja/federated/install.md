@@ -10,28 +10,15 @@ TensorFlow Federated（TFF）を使用するための環境は、いくつかの
 
 ### 1. Python 開発環境をインストールします。
 
-Ubuntu:
-
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">sudo apt update</code>
 <code class="devsite-terminal">sudo apt install python3-dev python3-pip  # Python 3</code>
-<code class="devsite-terminal">sudo pip3 install --user --upgrade virtualenv</code>
-</pre>
-
-macOS:
-
-<pre class="prettyprint lang-bsh">
-<code class="devsite-terminal">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code>
-<code class="devsite-terminal">export PATH="/usr/local/bin:/usr/local/sbin:$PATH"</code>
-<code class="devsite-terminal">brew update</code>
-<code class="devsite-terminal">brew install python  # Python 3</code>
-<code class="devsite-terminal">sudo pip3 install --user --upgrade virtualenv</code>
 </pre>
 
 ### 2. 仮想環境を作成します。
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal">virtualenv --python python3 "venv"</code>
+<code class="devsite-terminal">python3 -m venv "venv"</code>
 <code class="devsite-terminal">source "venv/bin/activate"</code>
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade pip</code>
 </pre>
@@ -42,12 +29,6 @@ macOS:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade tensorflow-federated</code>
-</pre>
-
-### 3（または）ナイトリーの TensorFlow Federated Python パッケージをインストールします。
-
-<pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install --upgrade tensorflow-federated-nightly</code>
 </pre>
 
 ### 4. Tensorflow Federated をテストします。
@@ -65,26 +46,11 @@ macOS:
 - TensorFlow Federated に変更を適用し、それらの変更が送信またはリリースされる前に、TensorFlow Federated を使用するコンポーネントでテストする。
 - TensorFlow Federated に送信されたがリリースされていない変更を使用する。
 
-注意: リリースされているパッケージに含まれない新機能を使用するには、[ナイトリーパッケージ](#3-alternative-install-the-nightly-tensorflow-federated-python-package)を pip install するのがより簡単です。
-
-### 1. Python 開発環境をインストールします。
-
-Ubuntu:
+### 1. Install the Python development environment.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">sudo apt update</code>
 <code class="devsite-terminal">sudo apt install python3-dev python3-pip  # Python 3</code>
-<code class="devsite-terminal">sudo pip3 install --user --upgrade virtualenv</code>
-</pre>
-
-macOS:
-
-<pre class="prettyprint lang-bsh">
-<code class="devsite-terminal">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code>
-<code class="devsite-terminal">export PATH="/usr/local/bin:/usr/local/sbin:$PATH"</code>
-<code class="devsite-terminal">brew update</code>
-<code class="devsite-terminal">brew install python  # Python 3</code>
-<code class="devsite-terminal">sudo pip3 install --user --upgrade virtualenv</code>
 </pre>
 
 ### 2. Bazel をインストールします。
@@ -103,7 +69,6 @@ macOS:
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">mkdir "/tmp/tensorflow_federated"</code>
 <code class="devsite-terminal">bazel run //tensorflow_federated/tools/python_package:build_python_package -- \
-    --nightly \
     --output_dir="/tmp/tensorflow_federated"</code>
 </pre>
 
@@ -117,7 +82,7 @@ macOS:
 ### 6. 仮想環境を作成します。
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal">virtualenv --python python3 "venv"</code>
+<code class="devsite-terminal">python3 -m venv "venv"</code>
 <code class="devsite-terminal">source "venv/bin/activate"</code>
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade pip</code>
 </pre>
