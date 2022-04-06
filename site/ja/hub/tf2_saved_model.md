@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2021-06-30' review_interval: '6 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2022-01-12'} *-->
 
 # TensorFlow 2 における TF Hub の SavedModel
 
@@ -97,7 +97,7 @@ piece_to_share = tf.keras.Model(sharing_input, sharing_output)
 piece_to_share.save(..., include_optimizer=False)
 ```
 
-GitHub の [TensorFlow モデル](https://github.com/tensorflow/models)は、BERT に 1 番目のアプローチを使用しています（[nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py) をご覧の上、エクスポートするための `core_model` とチェックポイントを復元するための `pretrainer` で分割されているところに注意してください）。また、ResNet には 2 番目のアプローチを使用しています（[vision/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/vision/image_classification/resnet/tfhub_export.py) をご覧ください）。
+[TensorFlow Models](https://github.com/tensorflow/models) on GitHub uses the former approach for BERT (see [nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py), note the split between `core_model` for export and the `pretrainer` for restoring the checkpoint) and the latter approach for ResNet (see [legacy/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/legacy/image_classification/resnet/tfhub_export.py)).
 
 ### 低レベル TensorFlow から保存する
 
