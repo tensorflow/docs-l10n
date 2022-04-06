@@ -20,7 +20,7 @@ bazel build -s --verbose_failures --compilation_mode dbg //tensorflow_io/...
 
 Ubuntu에서 개발 환경을 설정하는 방법에 대한 자세한 내용은 프로젝트 [README](https://github.com/tensorflow/io#ubuntu-18042004) 파일을 참조하세요. --여기서 compilation_mode dbg 플래그는 생성된 바이너리에 디버그 기호가 있어야 함을 나타냅니다. 명령줄에서 프로젝트를 컴파일할 수 있으면 동일한 명령을 호출할 수 있도록 VSCode를 구성할 수도 있습니다.
 
-View->Command Pallete(**Ctrl+Shift+P**)를 열고 "Tasks: Configure Build Task" 입력을 시작합니다. 처음 이 작업을 수행하는 경우 편집기에서 tasks.json 파일을 생성하도록 제안합니다. 파일이 준비되었으면 다음 json을 붙여넣습니다.
+View-&gt;Command Pallete(**Ctrl+Shift+P**)를 열고 "Tasks: Configure Build Task" 입력을 시작합니다. 처음 이 작업을 수행하는 경우 편집기에서 tasks.json 파일을 생성하도록 제안합니다. 파일이 준비되었으면 다음 json을 붙여넣습니다.
 
 ```jsonc
 {
@@ -95,7 +95,7 @@ VSCode에는 GDB 디버거 지원도 있습니다. 중단점을 추가하고 변
 }
 ```
 
-모두 올바르게 구성되었으면 *Run -> Start Debugging*(**F5**) 또는 *Run -> Run Without Debugging*(**Ctrl + F5**)를 수행할 수 있습니다. 그러면 디버거에서 코드가 실행됩니다.
+모두 올바르게 구성되었으면 *Run -&gt; Start Debugging*(**F5**) 또는 *Run -&gt; Run Without Debugging*(**Ctrl + F5**)를 수행할 수 있습니다. 그러면 디버거에서 코드가 실행됩니다.
 
 ![VSCode 디버거](./images/vscode_debugger.png)
 
@@ -109,13 +109,13 @@ skip -gfi /usr/include/c++/*
 
 ## 파일 형식 지정하기
 
-*마우스 오른쪽 버튼 클릭 -> Format Document*(**Ctrl + Shift + I**)을 사용하여 언제든지 C++ 또는 Python 파일의 형식을 변경할 수 있지만 VSCode는 다른 스타일 규칙을 사용합니다. 다행인 것은 변경이 쉽다는 것입니다.
+*마우스 오른쪽 버튼 클릭 -&gt; Format Document*(**Ctrl + Shift + I**)을 사용하여 언제든지 C++ 또는 Python 파일의 형식을 변경할 수 있지만 VSCode는 다른 스타일 규칙을 사용합니다. 다행인 것은 변경이 쉽다는 것입니다.
 
 Python 형식 지정에 대해서는 https://donjayamanne.github.io/pythonVSCodeDocs/docs/formatting/을 참조하세요.
 
 C++ 형식 지정의 경우 다음을 수행합니다.
 
-- *Preferences -> Settings*로 이동합니다.
+- *Preferences -&gt; Settings*로 이동합니다.
 - "C_Cpp.clang_format_fallbackStyle"을 검색합니다.
 - 다음 내용을 추가하여 직접 `file:setting.json` 파일을 수정합니다.
 
