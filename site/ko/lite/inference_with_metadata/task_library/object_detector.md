@@ -18,7 +18,7 @@
 
 ## 지원되는 객체 감지기 모델
 
-The following models are guaranteed to be compatible with the `ObjectDetector` API.
+다음 모델은 `ObjectDetector` API와의 호환성이 보장됩니다.
 
 - [TensorFlow Hub의 사전 훈련된 객체 감지 모델](https://tfhub.dev/tensorflow/collections/lite/task-library/object-detector/1)
 
@@ -92,12 +92,11 @@ const DetectionResult result = object_detector->Detect(*frame_buffer).value();
 
 `ObjectDetector`를 구성하기 위한 추가 옵션은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/vision/object_detector.h)를 참조하세요.
 
-## Example results
+## 예제 결과
 
 Here is an example of the detection results of [ssd mobilenet v1](https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1) from TensorFlow Hub.
 
-
-<img src="images/dogs.jpg" alt="dogs" width="50%">
+<img src="images/dogs.jpg" alt="개" width="50%">
 
 ```
 Results:
@@ -115,14 +114,13 @@ Results:
    class name  : dog
 ```
 
-Render the bounding boxes onto the input image:
+경계 상자를 입력 이미지에 렌더링합니다.
 
-
-<img src="images/detection-output.png" alt="detection output" width="50%">
+<img src="images/detection-output.png" alt="감지 출력" width="50%">
 
 자체 모델 및 테스트 데이터로 간단한 [ObjectDetector용 CLI 데모 도구](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop#object-detector)를 시도해 보세요.
 
-## Model compatibility requirements
+## 모델 호환성 요구 사항
 
 `ObjectDetector` API는 필수 [TFLite 모델 메타데이터](../../convert/metadata.md)가 있는 TFLite 모델을 예상합니다. [TensorFlow Lite Metadata Writer API](../../convert/metadata_writer_tutorial.ipynb#object_detectors)를 사용하여 객체 감지기에 대한 메타데이터를 생성하는 예를 참조하세요.
 
