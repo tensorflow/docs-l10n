@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2021-06-15' review_interval: '6 months'} *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-12-13' review_interval: '6 months'} *-->
 
 # 모델 호스팅 프로토콜
 
-이 문서는 [thub.dev](https://tfhub.dev) - TFJS, TF Lite 및 TensorFlow 모델에서 모든 모델 유형을 호스팅할 때 사용되는 URL 규칙을 설명합니다. 또한, [thub.dev](https://tfhub.dev)의 TensorFlow 모델과 호환 가능한 서비스를 TensorFlow 프로그램에 로드하기 위해 `tensorflow_hub` 라이브러리에서 구현된 HTTP(S) 기반 프로토콜에 대해서도 설명합니다.
+이 문서는 [thub.dev](https://tfhub.dev) - TFJS, TF Lite 및 TensorFlow 모델에서 모든 모델 유형을 호스팅할 때 사용되는 URL 규칙을 설명합니다. 또한, <a>thub.dev</a>의 TensorFlow 모델과 호환 가능한 서비스를 TensorFlow 프로그램에 로드하기 위해 <code>tensorflow_hub</code> 라이브러리에서 구현된 HTTP(S) 기반 프로토콜에 대해서도 설명합니다.
 
 주요 기능은 코드에서 같은 URL을 사용하여 모델을 로드하고 브라우저에서 모델 설명서를 보는 것입니다.
 
