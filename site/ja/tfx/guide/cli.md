@@ -648,7 +648,7 @@ Kubeflow:
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>    （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
   <dt>--namespace=<var>namespace</var> </dt>
