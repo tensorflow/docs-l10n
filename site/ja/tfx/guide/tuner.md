@@ -170,7 +170,7 @@ tuner = google_cloud_ai_platform.Tuner(
 
 [E2E の例](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py)
 
-[E2E CloudTuner on GCP Example](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow.py)
+[GCP Example の E2E CloudTuner](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow.py)
 
 [KerasTuner チュートリアル](https://www.tensorflow.org/tutorials/keras/keras_tuner)
 
