@@ -1,14 +1,8 @@
 # 특성 디코딩 사용자 정의하기
 
-- 사용 예
-    - [이미지 디코딩 건너뛰기](#skipping-the-image-decoding)
-    - [이미지가 디코딩되기 전에 데이터세트 필터링/셔플링하기](#filtershuffle-dataset-before-images-get-decoded)
-    - [ 동시에 자르기 및 디코딩하기](#cropping-and-decoding-at-the-same-time)
-    - [비디오 디코딩 사용자 정의하기](#customizing-video-decoding)
-
 `tfds.decode` API를 사용하면 기본 특성 디코딩을 재정의할 수 있습니다. 주요 사용 사례는 더 나은 성능을 위해 이미지 디코딩을 건너뛰는 것입니다.
 
-경고: 이 API를 사용하면 디스크에서 하위 레벨 `tf.train.Example` 형식에 액세스할 수 있습니다(`FeatureConnector`에서 정의된 대로). 이 API는 이미지에서 더 나은 읽기 성능을 원하는 고급 사용자를 대상으로 합니다.
+Note: This API gives you access to the low-level `tf.train.Example` format on disk (as defined by the `FeatureConnector`). This API is targeted towards advanced users who want better read performance with images.
 
 ## 사용 예
 
@@ -131,7 +125,6 @@ def decode_video(example):
       video,
       dtype=ds_info.features['video'].dtype,
       parallel_iterations=10,
-      back_prop=False,
   )
   example['video'] = video
   return example
@@ -142,3 +135,38 @@ ds, ds_info = tfds.load('ucf101', split='train', with_info=True, decoders={
 })
 ds = ds.map(decode_video)  # Decode the video
 ```
+
+### Only decode a sub-set of the features.
+
+It's also possible to entirely skip some features by specifying only the features you need. All other features will be ignored/skipped.
+
+```python
+builder = tfds.builder('my_dataset')
+builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
+    'image': True,
+    'metadata': {'num_objects', 'scene_name'},
+    'objects': {'label'},
+})
+```
+
+TFDS will select the subset of `builder.info.features` matching the given `tfds.decode.PartialDecoding` structure.
+
+위의 코드에서 `builder.info.features`와 일치하도록 요소가 암시적으로 추출됩니다. 요소를 명시적으로 정의하는 것도 가능합니다. 위의 코드는 다음과 같습니다.
+
+```python
+builder = tfds.builder('my_dataset')
+builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
+    'image': tfds.features.Image(),
+    'metadata': {
+        'num_objects': tf.int64,
+        'scene_name': tfds.features.Text(),
+    },
+    'objects': tfds.features.Sequence({
+        'label': tfds.features.ClassLabel(names=[]),
+    }),
+})
+```
+
+The original metadata (label names, image shape,...) are automatically reused so it's not required to provide them.
+
+`tfds.decode.SkipDecoding` can be passed to `tfds.decode.PartialDecoding`, through the `PartialDecoding(..., decoders={})` kwargs.
