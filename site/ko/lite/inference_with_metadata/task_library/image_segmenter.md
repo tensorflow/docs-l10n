@@ -14,9 +14,9 @@ Task Library `ImageSegmenter` API를 사용하여 사용자 정의 이미지 분
 
 - 표시 목적의 컬러 레이블
 
-## Supported image segmenter models
+## 지원되는 이미지 분할기 모델
 
-The following models are guaranteed to be compatible with the `ImageSegmenter` API.
+다음 모델은 `ImageSegmenter` API와의 호환성이 보장됩니다.
 
 - The [pretrained image segmentation models on TensorFlow Hub](https://tfhub.dev/tensorflow/collections/lite/task-library/image-segmenter/1).
 
@@ -85,12 +85,11 @@ const SegmentationResult result = image_segmenter->Segment(*frame_buffer).value(
 
 `ImageSegmenter` 구성에 대한 추가 옵션은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/vision/image_segmenter.h)를 참조하세요.
 
-## Example results
+## 예제 결과
 
 다음은 TensorFlow Hub에서 사용할 수 있는 일반적인 분할 모델인 [deeplab_v3](https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/1)의 분할 결과를 보여주는 예입니다.
 
-
-<img src="images/plane.jpg" alt="plane" width="50%">
+<img src="images/plane.jpg" alt="비행기" width="50%">
 
 ```
 Color Legend:
@@ -115,12 +114,11 @@ this legend.
 
 분할 범주 마스크는 다음과 같아야 합니다.
 
-
-<img src="images/segmentation-output.png" alt="segmentation-output" width="30%">
+<img src="images/segmentation-output.png" alt="분할 출력" width="30%">
 
 자체 모델 및 테스트 데이터로 간단한 [ImageSegmenter용 CLI 데모 도구](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop#image-segmenter)를 시도해 보세요.
 
-## Model compatibility requirements
+## 모델 호환성 요구 사항
 
 `ImageSegmenter` API는 필수 [TFLite 모델 메타데이터](../../convert/metadata.md)가 있는 TFLite 모델을 예상합니다. [TensorFlow Lite Metadata Writer API](../../convert/metadata_writer_tutorial.ipynb#image_segmenters)를 사용하여 이미지 분류자에 대한 메타데이터를 생성하는 예를 참조하세요.
 
