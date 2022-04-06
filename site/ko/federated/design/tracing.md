@@ -20,7 +20,7 @@ TODO(b/153500547): 추적 시스템의 개별 구성 요소를 설명하고 연�
 
 ### 함수 추적하기
 
-When tracing a `federated_computation`, the user's function is called using [value_impl.Value](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) as a stand-in replacement for each argument. `Value` attempts to emulate the behavior of the original argument type by implementing common Python dunder methods (e.g. `__getattr__`).
+`federated_computation`을 추적할 때 사용자의 함수는 [value_impl.Value](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py)를 각 인수에 대한 대리 대체로 사용하여 호출됩니다. `Value`는 일반적인 Python dunder 메서드(예: `__ getattr__`)를 구현하여 원래 인수 형식의 동작을 에뮬레이션하려고 합니다.
 
 구체적으로, 정확히 하나의 인수가 있을 때 추적은 다음과 같이 수행됩니다.
 
