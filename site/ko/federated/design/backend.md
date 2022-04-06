@@ -51,7 +51,7 @@ set_default_context.set_default_context(context)
 
 그러나 몇 가지 일반적인 구성이 있습니다.
 
-The [execution_context.set_local_python_execution_context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/native/execution_context.py) function constructs an `ExecutionContext` with a native compiler and a [local execution stack](execution.md#local-execution-stack).
+[execution_context.set_local_python_execution_context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/native/execution_context.py) 함수는 네이티브 컴파일러와 [로컬 실행 스택](execution.md#local-execution-stack)으로 `ExecutionContext`를 구성합니다.
 
 ## MapReduce
 
@@ -59,13 +59,13 @@ The [execution_context.set_local_python_execution_context](https://github.com/te
 
 ### `MapReduceForm`
 
-A [forms.MapReduceForm](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/forms.py) is a data structure defining the representation of logic that can be executed on MapReduce-like runtimes. This logic is organized as a collection of TensorFlow functions, see the [forms](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/forms.py) module for more information about the nature of these functions.
+[forms.MapReduceForm](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/forms.py)은 MapReduce와 유사한 런타임에서 실행할 수 있는 논리의 표현을 정의하는 데이터 구조입니다. 이 로직은 TensorFlow 함수의 모음으로 구성됩니다. 함수의 특성에 대한 자세한 내용은 [forms](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/forms.py) 모듈을 참조하세요.
 
 ### 컴파일러
 
-The [transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/transformations.py) module contains [Building Block](compilation.md#building-block) and [TensorFlow Computation](compilation.md#tensorflow-computation) transformations required to compile an AST to a [MapReduceForm](#canonicalform).
+[transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/transformations.py) 모듈에는 AST를 [MapReduceForm](#canonicalform)으로 컴파일하는 데 필요한 [빌딩 블록(Building Block)](compilation.md#building-block) 및 [TensorFlow 계산(Computation)](#canonicalform) 변환이 포함되어 있습니다.
 
-The [form_utils](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/form_utils.py) module contains the compiler for the MapReduce backend and constructs a [MapReduceForm](#canonicalform).
+[form_utils](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/form_utils.py) 모듈은 MapReduce 백엔드용 컴파일러를 포함하고 [MapReduceForm](#canonicalform)을 구성합니다.
 
 ### 런타임
 
