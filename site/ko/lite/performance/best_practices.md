@@ -51,7 +51,7 @@ TensorFlow Lite는 GPU, DSP, 신경 가속기와 같은 더 빠른 하드웨어�
 - Android의 [Neural Networks API](https://developer.android.com/ndk/guides/neuralnetworks/) 사용하기. 하드웨어 가속기 백엔드를 활용하여 모델의 속도와 효율성을 개선할 수 있습니다. Neural Networks API를 활성화하려면 [NNAPI 대리자](nnapi.md) 가이드를 확인하세요.
 - GPU 대리자는 각각 OpenGL/OpenCL 및 Metal을 사용하여 Android 및 iOS에서 사용할 수 있습니다. 사용해 보려면 [GPU 대리자 튜토리얼](gpu.md) 및 [설명서](gpu_advanced.md)를 참조하세요.
 - Hexagon 대리자는 Android에서 사용할 수 있습니다. 기기에서 사용할 수 있는 경우 Qualcomm Hexagon DSP를 활용합니다. 자세한 내용은 [Hexagon 대리자 튜토리얼](hexagon_delegate.md)을 참조하세요.
-- It is possible to create your own delegate if you have access to non-standard hardware. See [TensorFlow Lite delegates](delegates.md) for more information.
+- 비표준 하드웨어에 대한 액세스 권한이 있는 경우, 고유한 대리자를 만들 수 있습니다. 자세한 내용은 [TensorFlow Lite 대리자](delegates.md)를 참조하세요.
 
 Be aware that some accelerators work better for different types of models. Some delegates only support float models or models optimized in a specific way. It is important to [benchmark](measurement.md) each delegate to see if it is a good choice for your application. For example, if you have a very small model, it may not be worth delegating the model to either the NN API or the GPU. Conversely, accelerators are a great choice for large models that have high arithmetic intensity.
 
