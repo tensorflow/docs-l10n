@@ -142,7 +142,7 @@ Results:
     - クラステンソル (kTfLiteFloat32)
 
         - サイズ`[1 x num_results]`のテンソル。各値はクラスの整数インデックスを表します。
-        - optional (but recommended) label map(s) can be attached as AssociatedFile-s with type TENSOR_VALUE_LABELS, containing one label per line. See the [example label file](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/python/tests/testdata/object_detector/labelmap.txt). The first such AssociatedFile (if any) is used to fill the `class_name` field of the results. The `display_name` field is filled from the AssociatedFile (if any) whose locale matches the `display_names_locale` field of the `ObjectDetectorOptions` used at creation time ("en" by default, i.e. English). If none of these are available, only the `index` field of the results will be filled.
+        - オプション（ただし推奨）のラベルマップを TENSOR_VALUE_LABELS 型の AssociatedFile-s として添付できます。1 行に 1 つのラベルが含まれます。最初の AssociatedFile（存在する場合）は、結果の <code>class_name</code> フィールドを入力するために使用されます。`display_name` フィールドは、AssociatedFile（存在する場合）から入力されます。そのロケールは、作成時に使用される `ObjectDetectorOptions` の `display_names_locale`フィールドと一致します（デフォルトでは「en (英語)」）。これらのいずれも使用できない場合、結果の `index` フィールドのみを使用できます。
 
     - スコアテンソル (kTfLiteFloat32)
 
