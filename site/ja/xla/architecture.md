@@ -1,6 +1,7 @@
 # XLA アーキテクチャ
 
-<div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;"> <img style="width:50%" src="./images/xlalogo.png"> </div>
+<div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;"> <img style="width:50%" src="./images/xlalogo.png">
+</div>
 
 ## XLAを開発した理由とは
 
