@@ -9,7 +9,7 @@
 エンドツーエンドのワークフローには、次の手順が含まれます。
 
 1. [モデルをトレーニングする](#train_a_model) (Python): デバイス上で使用するためにモデルをトレーニング、変換、最適化するための jupyter ノートブック。
-2. [推論を実行する](#run_inference) (C++ 11): [C++ライブラリ](library.md)を使用してモデルで推論を実行するエンドツーエンドの単体テスト。
+2. [Run inference](#run_inference) (in C++ 11): An end-to-end unit test that runs inference on the model using the [C++ library](library.md).
 
 ## サポートされているデバイスを入手する
 
@@ -58,7 +58,7 @@ Google Colaboratory を使用して、[独自のモデルをトレーニング](
 - [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_error_reporter.h)はデバッグ情報を出力します。
 - [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_interpreter.h)にはモデルをロードして実行するためのコードが含まれています。
 - [`schema_generated.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/schema/schema_generated.h)には、TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/)デルファイル形式のスキーマが含まれています。
-- [`version.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/version.h)は TensorFlow Lite スキーマのバージョン情報を提供します。
+- [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h)は TensorFlow Lite スキーマのバージョン情報を提供します。
 
 ### 2. モデルヘッダーをインクルードする
 
