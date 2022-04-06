@@ -15,7 +15,7 @@ TensorFlow Lite と [TensorFlow モデル最適化ツールキット](https://ww
 一部の形式の最適化は、モデルのサイズを縮小するために使用できます。小さいモデルには次の利点があります。
 
 - **小さいストレージサイズ:** モデルが小さいほど、ユーザーデバイスでのストレージ容量が少なくなります。たとえば、小さいモデルを使用する Android アプリは、ユーザーのモバイルデバイス上で使用するストレージ容量が少なくなります。
-- **小さいダウンロードサイズ:** モデルが小さいほど、ユーザーのデバイスにダウンロードするのに必要な時間と帯域幅が少なくなります。
+- **Smaller download size:** Smaller models require less time and bandwidth to download to users' devices.
 - **少ないメモリ使用量:** モデルが小さいほど、実行時に使用する RAM が少なくなります。メモリが解放されるので、アプリの他の部分がメモリを使用できるようになり、パフォーマンスと安定性が向上します。
 
 量子化により、これらのすべてのケースでモデルのサイズを縮小できますが、精度が低下する可能性があります。プルーニングとクラスタリングは、モデルをより簡単に圧縮できるようにすることで、ダウンロード用のモデルのサイズを縮小します。
@@ -53,9 +53,9 @@ TensorFlow Lite で使用できる量子化の種類は次のとおりです。
 手法 | データ要件 | サイズ縮小 | 精度 | 対応ハードウェア
 --- | --- | --- | --- | ---
 [トレーニング後の float16 量子化](post_training_float16_quant.ipynb) | データなし | 50% 以下 | 精度低下（ごくわずか） | CPU、GPU
-[トレーニング後のダイナミックレンジ量子化](post_training_quant.ipynb) | データなし | 75% 以下 | 精度低下 | CPU、GPU (Android)
-[トレーニング後の整数量子化](post_training_integer_quant.ipynb) | ラベルなしの代表的なサンプル | 75% 以下 | 精度低下（少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
-[量子化認識トレーニング](http://www.tensorflow.org/model_optimization/guide/quantization/training) | ラベル付けされたトレーニングデータ | 75% 以下 | 精度低下（ごく少量） | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
+[トレーニング後のダイナミックレンジ量子化](post_training_quant.ipynb) | データなし | 75% 以下 | 精度低下（ごく少量） | CPU、GPU (Android)
+[トレーニング後の整数量子化](post_training_integer_quant.ipynb) | ラベルなしの代表的なサンプル | 75% 以下 | Small accuracy loss | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
+[Quantization-aware training](http://www.tensorflow.org/model_optimization/guide/quantization/training) | ラベル付けされたトレーニングデータ | 75% 以下 | Smallest accuracy loss | CPU, GPU (Android)、EdgeTPU、Hexagon DSP
 
 単純に期待されるモデルのサイズと精度の基づいて、モデルに使用する量子化スキームを選択するには、次の決定木を使用することができます。
 
