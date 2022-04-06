@@ -26,7 +26,7 @@ git clone https://github.com/tensorflow/tensorflow
 
 #### ステップ 2. `app/build.gradle`を編集して、ナイトリーの GPU AAR を使用する
 
-Note: You can now target **Android S+** with `targetSdkVersion="S"` in your manifest, or `targetSdkVersion "S"` in your Gradle `defaultConfig` (API level TBD). In this case, you should merge the contents of [`AndroidManifestGpu.xml`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/AndroidManifestGpu.xml) into your Android application's manifest. Without this change, the GPU delegate cannot access OpenCL libraries for acceleration. *AGP 4.2.0 or above is required for this to work.*
+注意: **Android S+** を、マニフェストでは `targetSdkVersion="S"` を、または Gradle `defaultConfig` の `targetSdkVersion "S"`（API レベルは未確定）を使用してターゲットできるようになりました。この場合、[`AndroidManifestGpu.xml`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/AndroidManifestGpu.xml) のコンテンツをAndroid アプリケーションのマニフェストにマージする必要があります。この変更を行わない場合、GPU デリゲートは OpenCL ライブラリにアクセスしてアクセラレーションを行えません。*これが機能するには、AGP 4.2.0 またはそれ以上が必要です<br>。*
 
 `tensorflow-lite-gpu`パッケージを既存の`tensorflow-lite`パッケージと共に、既存の`dependencies`ブロックに追加します。
 
@@ -52,7 +52,7 @@ Run → Run ‘app’ (実行 → 「アプリ」を実行)。アプリを実行
 
 #### ステップ 1. デモのソースコードを入手して、コンパイルできることを確認する。
 
-Follow our iOS Demo App [tutorial](https://www.tensorflow.org/lite/guide/ios). This will get you to a point where the unmodified iOS camera demo is working on your phone.
+iOS デモアプリの[チュートリアル](https://www.tensorflow.org/lite/guide/ios)に従います。これにより、変更されていない iOS カメラのデモがモバイルデバイスで機能するようになります。
 
 #### ステップ 2. TensorFlow Lite GPU CocoaPod を使用するように Podfile を変更する
 
@@ -277,10 +277,10 @@ GPU デリゲートを使用するコードを有効にするには、`CameraExa
 
 GPU デリゲートのリリースには、バックエンドで実行できるいくつかのモデルが含まれています。
 
-- [MobileNet v1 (224x224) image classification](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobilenet_v1_1.0_224.tflite)<br><i>(image classification model designed for mobile and embedded based vision applications)</i>
-- [DeepLab segmentation (257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite)<br><i>(image segmentation model that assigns semantic labels (e.g., dog, cat, car) to every pixel in the input image)</i>
-- [MobileNet SSD object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)<br><i>(image classification model that detects multiple objects with bounding boxes)</i>
-- [PoseNet for pose estimation](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)<br><i>(vision model that estimates the poses of a person(s) in image or video)</i>
+- [MobileNet v1（224x224）画像分類](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [[ダウンロード]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobilenet_v1_1.0_224.tflite) <br><i>（モバイルおよび組み込みベースのビジョンアプリケーション向けに設計された画像分類モデル）</i>
+- [DeepLab セグメンテーション (257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[ダウンロード]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite) <br><i>（入力画像のすべてのピクセルにセマンティックラベル（犬、猫、車など）を割り当てる画像セグメンテーションモデル）</i>
+- [MobileNet SSD 物体検出](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [[ダウンロード]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br><i>（境界ボックスで複数のオブジェクトを検出する画像分類モデル）</i>
+- [ポーズ推定のための PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [[ダウンロード]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br><i>（画像または動画内の人物のポーズを推定するビジョンモデル）</i>
 
 サポートされている演算の完全なリストは、[アドバンストドキュメント](gpu_advanced.md)を参照してください。
 
@@ -296,14 +296,14 @@ WARNING: op code #42 cannot be handled by this delegate.
 
 ## 最適化のヒント
 
-### Optimizing for mobile devices
+### モバイルデバイス向けに最適化する
 
-Some operations that are trivial on the CPU may have a high cost for the GPU on mobile devices. Reshape operations are particularly expensive to run, including `BATCH_TO_SPACE`, `SPACE_TO_BATCH`, `SPACE_TO_DEPTH`, and so forth. You should closely examine use of reshape operations, and consider that may have been applied only for exploring data or for early iterations of your model. Removing them can significantly improve performance.
+CPU において単純な一部の演算は、モバイルデバイスの GPU には高コストとなる可能性があります。特に形状変更を行う演算の実行コストは高く、こういった演算には、`BATCH_TO_SPACE`、`SPACE_TO_BATCH`、`SPACE_TO_DEPTH` などがあります。形状変更を行う演算の使用を十分に調べ、データ探索やモデルの早期のイテレーションのみに適用されていないか検討することをお勧めします。こういった演算を除去することで、パフォーマンスを大幅に改善できます。
 
-On GPU, tensor data is sliced into 4-channels. Thus, a computation on a tensor of shape `[B,H,W,5]` will perform about the same on a tensor of shape `[B,H,W,8]` but significantly worse than `[B,H,W,4]`. In that sense, if the camera hardware supports image frames in RGBA, feeding that 4-channel input is significantly faster as a memory copy (from 3-channel RGB to 4-channel RGBX) can be avoided.
+GPU では、テンソルデータは 4 チャンネルにスライスされます。そのため、形状 `[B,H,W,5]` のテンソルでの計算は、形状 `[B,H,W,8]` のテンソルでの計算とほぼ同程度のパフォーマンスを見せますが、`[B,H,W,4]` に比べれば、著しく悪化します。その意味では、カメラハードウェアが RGBA で画像フレームをサポートしている場合、その 4 チャンネルの入力の供給は、メモリのコピー（3 チャンネル RGB から 4 チャンネル RGBX）を回避できるため、はるかに高速になります。
 
-For best performance, you should consider retraining the classifier with a mobile-optimized network architecture. Optimization for on-device inferencing can dramatically reduce latency and power consumption by taking advantage of mobile hardware features.
+最も高いパフォーマンスを得るには、モバイル向けに最適化されたネットワークアーキテクチャで分類器を再トレーニングすることを検討してください。オンデバイス推論向けの最適化によって、モバイルハードウェア機能を利用し、レイテンシーと電力消費量を大きく抑制することができます。
 
-### Reducing initialization time with serialization
+### シリアル化で初期化時間を短縮する
 
-The GPU delegate feature allows you to load from pre-compiled kernel code and model data serialized and saved on disk from previous runs. This approach avoids re-compilation and reduces startup time by up to 90%. For instructions on how to apply serialization to your project, see [GPU Delegate Serialization](gpu_advanced.md#gpu_delegate_serialization).
+GPU デリゲート機能では、事前コンパイル済みのカーネルコードと前の実行によりシリアル化されてディスクに保存されているモデルデータから読み込むことができます。このアプローチではリコンパイルが回避されるため、起動時間が最大 90% 短縮されます。プロジェクトにシリアル化を適用する方法については、[GPU デリゲートのシリアル化](gpu_advanced.md#gpu_delegate_serialization)をご覧ください。
