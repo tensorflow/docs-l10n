@@ -32,5 +32,43 @@ TFX 파이프라인을 처음 사용하는 경우, [TFX 파이프라인의 핵�
 다음은 데이터를 다운로드, 변환 및 업로드하는 비 Python 구성 요소의 예입니다.
 
 ```python
-from tfx.dsl.component.experimental import container_component from tfx.dsl.component.experimental import placeholders from tfx.types import standard_artifacts  grep_component = container_component.create_container_component(     name='FilterWithGrep',     inputs={         'text': standard_artifacts.ExternalArtifact,     },     outputs={         'filtered_text': standard_artifacts.ExternalArtifact,     },     parameters={         'pattern': str,     },     # The component code uses gsutil to upload the data to Google Cloud Storage, so the     # container image needs to have gsutil installed and configured.     image='google/cloud-sdk:278.0.0',     command=[         'sh', '-exc',         '''           pattern="$1"           text_uri="$3"/data  # Adding suffix, because currently the URI are "directories". This will be fixed soon.           text_path=$(mktemp)           filtered_text_uri="$5"/data  # Adding suffix, because currently the URI are "directories". This will be fixed soon.           filtered_text_path=$(mktemp)            # Getting data into the container           gsutil cp "$text_uri" "$text_path"            # Running the main code           grep "$pattern" "$text_path" >"$filtered_text_path"            # Getting data out of the container           gsutil cp "$filtered_text_path" "$filtered_text_uri"         ''',         '--pattern', placeholders.InputValuePlaceholder('pattern'),         '--text', placeholders.InputUriPlaceholder('text'),         '--filtered-text', placeholders.OutputUriPlaceholder('filtered_text'),     ], )
+import tfx.v1 as tfx
+
+grep_component = tfx.dsl.components.create_container_component(
+    name='FilterWithGrep',
+    inputs={
+        'text': tfx.standard_artifacts.ExternalArtifact,
+    },
+    outputs={
+        'filtered_text': tfx.standard_artifacts.ExternalArtifact,
+    },
+    parameters={
+        'pattern': str,
+    },
+    # The component code uses gsutil to upload the data to Google Cloud Storage, so the
+    # container image needs to have gsutil installed and configured.
+    image='google/cloud-sdk:278.0.0',
+    command=[
+        'sh', '-exc',
+        '''
+          pattern="$1"
+          text_uri="$3"/data  # Adding suffix, because currently the URI are "directories". This will be fixed soon.
+          text_path=$(mktemp)
+          filtered_text_uri="$5"/data  # Adding suffix, because currently the URI are "directories". This will be fixed soon.
+          filtered_text_path=$(mktemp)
+
+          # Getting data into the container
+          gsutil cp "$text_uri" "$text_path"
+
+          # Running the main code
+          grep "$pattern" "$text_path" >"$filtered_text_path"
+
+          # Getting data out of the container
+          gsutil cp "$filtered_text_path" "$filtered_text_uri"
+        ''',
+        '--pattern', tfx.dsl.placeholders.InputValuePlaceholder('pattern'),
+        '--text', tfx.dsl.placeholders.InputUriPlaceholder('text'),
+        '--filtered-text', tfx.dsl.placeholders.OutputUriPlaceholder('filtered_text'),
+    ],
+)
 ```
