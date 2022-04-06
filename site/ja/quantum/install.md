@@ -6,14 +6,14 @@ TensorFlow Quantum (TFQ) を使用するために環境をセットアップす�
 - ローカルマシンで TensorFlowQuantum を使用するには、Python の pip パッケージマネージャを使用して TFQ パッケージをインストールします。
 - または、ソースから TensorFlow Quantum を構築します。
 
-TensorFlow Quantum は Python  3.6、3.7、および 3.8 でサポートされています。また、[Circq](https://github.com/quantumlib/Cirq) に直接依存しています。
+TensorFlow Quantum は Python  3.7、3.8 および 3.9 でサポートされています。また、[Circq](https://github.com/quantumlib/Cirq) に直接依存しています。
 
 ## Pip パッケージ
 
 ### 要件
 
 - pip 19.0 以降 (`manylinux2010`サポートが必要)
-- [TensorFlow == 2.5.1](https://www.tensorflow.org/install/pip)
+- [TensorFlow == 2.7.0](https://www.tensorflow.org/install/pip)
 
 Python 開発環境と（オプションの）仮想環境をセットアップするには、[TensorFlow インストールガイド](https://www.tensorflow.org/install/pip)を参照してください。
 
@@ -23,7 +23,7 @@ Python 開発環境と（オプションの）仮想環境をセットアップ�
 
 <pre class="devsite-click-to-copy">
   <code class="devsite-terminal">pip3 install --upgrade pip</code>
-  <code class="devsite-terminal">pip3 install tensorflow==2.5.1</code>
+  <code class="devsite-terminal">pip3 install tensorflow==2.7.0</code>
 </pre>
 
 <!-- common_typos_enable -->
@@ -42,7 +42,7 @@ TensorFlow Quantum の最新のステーブル版をインストールします�
 
 成功: TensorFlow Quantum がインストールされました。
 
-TensorFlow Quantum の最新のナイトリ―版をインストールします。
+より新しいバージョンの TensorFlow に依存している可能性のある Nightly ビルドは、次のようにしてインストールできます。
 
 <!-- common_typos_disable -->
 
@@ -88,7 +88,7 @@ TensorFlow Quantum の最新のナイトリ―版をインストールします�
 
 TensorFlow の[ソースから構築する](https://www.tensorflow.org/install/source#install_bazel)ガイドに記載されているように、<a href="https://bazel.build/" class="external">Bazel </a>ビルドシステムが必要になります。
 
-最新のソースビルドには、TensorFlow 2.5.1 が使用されています。互換性を確保するために、`bazel` バージョン 3.7.2 を使用しています。Bazel の既存のバージョンを削除するには、以下を実行します。
+最新のソースビルドには、TensorFlow 2.7.0 が使用されています。互換性を確保するために、`bazel` バージョン 3.7.2 を使用しています。Bazel の既存のバージョンを削除するには、以下を実行します。
 
 <!-- common_typos_disable -->
 
@@ -132,7 +132,7 @@ TensorFlow の[ソースから構築する](https://www.tensorflow.org/install/s
 
 ### 4. ソースから TensorFlow Quantum を構築する
 
-ここでは、TensorFlow [ソースから構築する](https://www.tensorflow.org/install/source)ガイドからの説明を使用しました。詳細はリンクをご覧ください。TensorFlow Quantum は、TensorFlow バージョン 2.3 と互換性があります。
+ここでは、TensorFlow [ソースから構築する](https://www.tensorflow.org/install/source)ガイドからの説明を使用しました。詳細はリンクをご覧ください。TensorFlow Quantum は、TensorFlow バージョン 2.7.0 と互換性があります。
 
 <a href="https://github.com/tensorflow/tensorflow" class="external">TensorFlow ソースコード</a>をダウンロードします。
 
@@ -141,7 +141,7 @@ TensorFlow の[ソースから構築する](https://www.tensorflow.org/install/s
 <pre class="devsite-click-to-copy">
   <code class="devsite-terminal">git clone https://github.com/tensorflow/tensorflow.git</code>
   <code class="devsite-terminal">cd tensorflow</code>
-  <code class="devsite-terminal">git checkout v2.5.1</code>
+  <code class="devsite-terminal">git checkout v2.7.0</code>
 </pre>
 
 ステップ 2 で作成した仮想環境がアクティブになっていることを確認します。次に、TensorFlow の依存関係をインストールします。
