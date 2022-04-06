@@ -8,16 +8,16 @@ TensorFlow의 모델 최적화 도구 키트(MOT)는 TensorFlow 모델을 모바
 
 #### 가중치 클러스터링
 
-- Selective post-training quantization to exclude certain layers from quantization.
+- 양자화에서 특정 레이어를 제외하기 위한 선택적 훈련 후 양자화
 - 레이어별 양자화 오류 손실을 검사하는 양자화 디버거
-- Applying quantization-aware training on more model coverage e.g. TensorFlow Model Garden.
+- TensorFlow Model Garden과 같은 더 많은 모델 적용 범위에 양자화 인식 훈련 적용
 - 훈련 후 동적 범위 양자화를 위한 품질 및 성능 향상
 
 #### TensorFlow
 
 - 훈련 후 양자화(bf16 * int8 동적 범위)
 - Quantization Aware Training ((bf16 * int8 weight-only with fake quant).
-- Selective post-training quantization to exclude certain layers from quantization.
+- 양자화에서 특정 레이어를 제외하기 위한 선택적 훈련 후 양자화
 - 레이어별 양자화 오류 손실을 검사하는 양자화 디버거
 
 ## 희소도
