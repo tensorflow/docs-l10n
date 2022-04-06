@@ -13,10 +13,10 @@ XLA는 `HloInstruction`에서 동작하며 이 표현에 대해 많은 최적화
 
 ## 과제
 
- | 호스트 | 기기
+ | 호스트 | Device
 --- | --- | ---
-입력 형식 | HloInstruction*(작업 1) | HloInstruction*(작업 1)
-출력 형식 | xla::Thunk(작업 2) | LLVM IR(작업 3)
+Input format | HloInstruction*(작업 1) | HloInstruction*(작업 1)
+Output format | xla::Thunk(작업 2) | LLVM IR(작업 3)
 
 - **작업 1**은 호스트 및 기기 입력 형식을 HloInstruction*에서 LHLO로 변경합니다.
 - **작업 2**는 호스트의 출력 형식을 thunk에서 "호스트용 랜딩 패드"로 변경합니다(아래 참조).
@@ -77,24 +77,24 @@ ElementalIrEmitter는 다음과 같은 점에서 고유합니다.
 이제 요소 내보내기 여부와 관계없이 모든 ops에 대해 각 XLA op의 최종 상태에 대한 몇 가지 특징이 있습니다.
 
 1. 기기 코드는 LLVM IR로 유지됩니다.
-2. 이전 emitter를 LHLO -> MLIR LLVM Dialect처럼 리팩터링합니다.
+2. 이전 emitter를 LHLO -&gt; MLIR LLVM Dialect처럼 리팩터링합니다.
     - (비용) 궁극적으로 Standard로 마이그레이션하려는 경우, 삭제 작업이 됩니다.
     - (혜택) 쉽고 기계적입니다. 단기간에 할 수 있습니다.
     - (혜택) (1)에 비해 더 많은 혜택이 없습니다.
-3. 이전 emitter를 LHLO -> MLIR GPU + Standard + 루프처럼 리팩터링합니다.
+3. 이전 emitter를 LHLO -&gt; MLIR GPU + Standard + 루프처럼 리팩터링합니다.
     - (비용) 기존 emitter를 Standard로 올리면 몇 가지 문제가 발생합니다. 포인터와 GEP는 MemRef 및 SubView로 변환해야 합니다. amdgpu 완전성을 보장하는 것은 또 다른 하나입니다.
     - (비용) XLA/GPU는 LLVM 메타데이터에 크게 의존합니다.
         - 블록/스레드 인덱스의 `range`
         - 로드/저장을 위한 `align`, `dereferenceable`, `invariant.load`, `alias.scope`,`noalias`
         - 순차 루프를 위한 `llvm.loop.unroll.disable`, `llvm.loop.unroll.full`, `llvm.loop.vectorize.enable`
     - (혜택) 장기적일 수 있습니다. 이식성이 높습니다.
-4. 이전 emitter를 LHLO -> Linalg로 리팩터링하고 새 Linalg emitter 작성합니다.
-    - (비용) 경우에 따라 다릅니다. 이전 옵션과 비교하여 XLA의 성능과 일치하는 새로운 구현은 벤치마크 <-> 최적화 워크플로를 거쳐야 하며, 이는 일부 ops에서 상당한 비용이 될 수 있습니다.
+4. 이전 emitter를 LHLO -&gt; Linalg로 리팩터링하고 새 Linalg emitter 작성합니다.
+    - (비용) 경우에 따라 다릅니다. 이전 옵션과 비교하여 XLA의 성능과 일치하는 새로운 구현은 벤치마크 &lt;-&gt; 최적화 워크플로를 거쳐야 하며, 이는 일부 ops에서 상당한 비용이 될 수 있습니다.
     - (혜택) 통합 스택, 지역 사회 지원, 이식성, 더 많은 최적화 가능성
 
 결론:
 
-- (2)는 권장하지 않습니다. (1) 또는 (3)이 (2)보다 낫습니다. (2)는 기계적 리팩터링이 많이 필요하기 때문에 (1)보다 비용이 많이 듭니다. (1)을 사용하면 XLA에서 MLIR emitter를 선택할 수 있다는 목표를 달성할 수 있습니다. LHLO -> LLVM IR -> 레거시 기기 emitter를 실행합니다.
+- (2)는 권장하지 않습니다. (1) 또는 (3)이 (2)보다 낫습니다. (2)는 기계적 리팩터링이 많이 필요하기 때문에 (1)보다 비용이 많이 듭니다. (1)을 사용하면 XLA에서 MLIR emitter를 선택할 수 있다는 목표를 달성할 수 있습니다. LHLO -&gt; LLVM IR -&gt; 레거시 기기 emitter를 실행합니다.
 - ElementalIrEmitter ops는 (4)로 진행되지만, 점진적으로는 아닙니다. 모든 요소 내보내기 ops가 같은 그래프에 연결되어 있으므로 연산별로 수행할 수 있는 방법이 없습니다. 이 작업은 또한 여러 진행 중인 힘(xla/service/mlir_gpu, kernel generator, Linalg)의 통합 지점 역할을 할 수 있습니다.
 - 다른 모든 ops는 (1)로 진행합니다. 확장 목표로 (3) 또는 (4)로 마이그레이션할 수 있습니다.
 
@@ -102,7 +102,7 @@ ElementalIrEmitter는 다음과 같은 점에서 고유합니다.
 
 위에서 언급한 3가지 작업은 모두 병렬화할 수 있지만, 제한된 리소스에서 직렬화해야 합니다. 우선 순위는 각 작업 완료에 대한 가시적인 결과에 중점을 둡니다.
 
-우선 순위는 작업 1(레거시 emitter의 경우 LHLO) > 작업 2(Thunks) > 작업 3(MLIR emitter)입니다.
+우선 순위는 작업 1(레거시 emitter의 경우 LHLO) &gt; 작업 2(Thunks) &gt; 작업 3(MLIR emitter)입니다.
 
 작업 1이 끝날 때까지 XLA 사용자는 LHLO(예: 커널 생성기)를 생성하고 실행할 수 있습니다. 컴파일 형식은 직렬화 가능한 MLIR이 아닙니다.
 
