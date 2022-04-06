@@ -27,7 +27,7 @@ Tuner には次のシグネチャーによるユーザーモジュール関数 `
 
 ```python
 ...
-from kerastuner.engine import base_tuner
+from keras_tuner.engine import base_tuner
 
 TunerFnResult = NamedTuple('TunerFnResult', [('tuner', base_tuner.BaseTuner),
                                              ('fit_kwargs', Dict[Text, Any])])
@@ -81,12 +81,12 @@ trainer = Trainer(
 モデルを取得するたびにハイパーパラメータをチューニングしないようにする場合は、Tuner を使用して、良い結果を出すハイパーパラメータを特定したら、パイプラインから Tuner を削除して、`ImporterNode` を使って前回のトレーニングランの Tuner アーティファクトをインポートし、Trainer にフィードすることができます。
 
 ```python
-hparams_importer = ImporterNode(
-    instance_name='import_hparams',
+hparams_importer = Importer(
     # This can be Tuner's output file or manually edited file. The file contains
-    # text format of hyperparameters (kerastuner.HyperParameters.get_config())
+    # text format of hyperparameters (keras_tuner.HyperParameters.get_config())
     source_uri='path/to/best_hyperparameters.txt',
-    artifact_type=HyperParameters)
+    artifact_type=HyperParameters,
+).with_id('import_hparams')
 
 trainer = Trainer(
     ...
@@ -170,7 +170,7 @@ tuner = google_cloud_ai_platform.Tuner(
 
 [E2E の例](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py)
 
-[GCP における E2E CloudTuner の例](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow_gcp.py)
+[E2E CloudTuner on GCP Example](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow.py)
 
 [KerasTuner チュートリアル](https://www.tensorflow.org/tutorials/keras/keras_tuner)
 
