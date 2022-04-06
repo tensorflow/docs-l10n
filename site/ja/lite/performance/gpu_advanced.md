@@ -8,7 +8,7 @@
 
 GPU は、大規模に実行する並列化可能なワークロードで高い処理能力を実現するように設計されています。そのため、これは多数の演算で構成されるディープニューラルネットに適しています。各演算は、より小さなワークロードに簡単に分割でき、並列に実行する入力テンソルで機能するため、通常レイテンシが低くなります。現在、最良のシナリオでは、GPU での推論は以前は利用できなかったリアルタイムアプリケーションで十分に速く実行できます。
 
-### 精度
+### Accuracy
 
 GPU は、16 ビットまたは 32 ビットの浮動小数点数を使用して計算を行い、（CPU とは異なり）最適なパフォーマンスを得るために量子化を必要としません。精度の低下によりモデルでの量子化が不可能になる場合、GPU でニューラルネットワークを実行すると、この問題が解消される場合があります。
 
@@ -16,7 +16,7 @@ GPU は、16 ビットまたは 32 ビットの浮動小数点数を使用して
 
 GPU の推論のもう 1 つの利点は、電力効率です。GPU は非常に効率的かつ最適化された方法で計算を実行するため、同じタスクを CPU で実行する場合よりも消費電力と発熱が少なくなります。
 
-## サポートされている演算
+## サポートする演算子
 
 GPU では TensorFlow Lite は、16 ビットおよび 32 ビットの浮動小数点精度で次の演算をサポートします。
 
@@ -28,7 +28,7 @@ GPU では TensorFlow Lite は、16 ビットおよび 32 ビットの浮動小�
 - `EXP`
 - `FULLY_CONNECTED`
 - `LOGISTIC`
-- `LSTM v2 (Basic LSTM のみ)`
+- `LSTM v2 (Basic LSTM only)`
 - `MAX_POOL_2D`
 - `MAXIMUM`
 - `MINIMUM`
@@ -151,9 +151,9 @@ ReadFromOutputTensor(interpreter->typed_output_tensor<float>(0));
 TfLiteGpuDelegateV2Delete(delegate);
 ```
 
-`TfLiteGpuDelegateOptionsV2`を見て、カスタムオプションを使用してデリゲートインスタンスを作成します。`TfLiteGpuDelegateOptionsV2Default()`でデフォルトオプションを初期化し、必要に応じて変更します。
+Take a look at `TfLiteGpuDelegateOptionsV2` to create a delegate instance with custom options. You can initialize the default options with `TfLiteGpuDelegateOptionsV2Default()` and then modify them as necessary.
 
-Android C/C++ 向け TFLite GPU では、[Bazel](https://bazel.io) ビルドシステムを使用します。デリゲートは、次のコマンドなどを使用して構築できます。
+TFLite GPU for Android C/C++ uses the [Bazel](https://bazel.io) build system. The delegate can be built, for example, using the following command:
 
 ```sh
 bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:delegate                           # for static library
@@ -164,11 +164,11 @@ bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:libtenso
 
 ### iOS (C++)
 
-注意：Swift/Objective-C/C のユースケースについては、[GPU デリゲートガイド](gpu#ios)を参照してください。
+Note: For Swift/Objective-C/C use cases, please refer to [GPU delegate guide](gpu#ios)
 
 注意：これは、bazel を使用している場合、または TensorFlow Lite を自分でビルドしている場合にのみ使用できます。C++ API は CocoaPods では使用できません。
 
-GPU で TensorFlow Lite を使用するには、`TFLGpuDelegateCreate()`を介して GPU デリゲートを取得し、（`Interpreter::AllocateTensors()`を呼び出す代わりに）それを`Interpreter::ModifyGraphWithDelegate()`に渡します。
+To use TensorFlow Lite on GPU, get the GPU delegate via `TFLGpuDelegateCreate()` and then pass it to `Interpreter::ModifyGraphWithDelegate()` (instead of calling `Interpreter::AllocateTensors()`).
 
 ```c++
 // Set up interpreter.
@@ -196,7 +196,7 @@ TFLGpuDelegateDelete(delegate);
 
 ### iOS のデリゲートオプション
 
-GPU デリゲートのコンストラクタは、オプションの`struct`を受け入れます。([Swift API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/swift/Sources/MetalDelegate.swift)、[Objective-C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/objc/apis/TFLMetalDelegate.h)、[C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/gpu/metal_delegate.h))
+Constructor for GPU delegate accepts a `struct` of options. ([Swift API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/swift/Sources/MetalDelegate.swift), [Objective-C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/objc/apis/TFLMetalDelegate.h), [C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/gpu/metal_delegate.h))
 
 `nullptr`（C API）を初期化子に渡すと、または初期化子に何も渡さないと（Objective-C と Swift API）、デフォルトのオプションが設定されます（上記の基本的な使用例で説明されています）。
 
@@ -256,9 +256,9 @@ GPU デリゲートのコンストラクタは、オプションの`struct`を�
 
 このセクションでは、GPU デリゲートが 8 ビットの量子化モデルを高速化する方法について説明します。以下のようなあらゆる種類の量子化が対象となります。
 
--  [量子化認識トレーニング](https://www.tensorflow.org/lite/convert/quantization)でトレーニングされたモデル
-- [トレーニング後のダイナミックレンジ量子化](https://www.tensorflow.org/lite/performance/post_training_quant)
-- [トレーニング後の完全整数量子化](https://www.tensorflow.org/lite/performance/post_training_integer_quant)
+- [量子化認識トレーニング](https://www.tensorflow.org/lite/convert/quantization)でトレーニングされたモデル
+- [Post-training dynamic-range quantization](https://www.tensorflow.org/lite/performance/post_training_quant)
+- [Post-training full-integer quantization](https://www.tensorflow.org/lite/performance/post_training_integer_quant)
 
 パフォーマンスを最適化するには、浮動小数点入出力テンソルを持つモデルを使用します。
 
@@ -268,7 +268,7 @@ GPU バックエンドは浮動小数点の実行のみをサポートするた�
 
 - *定数テンソル*（重み/バイアスなど）は、GPU メモリに一度逆量子化されます。これは、デリゲートが TFLite Interpreter に適用されるときに発生します。
 
-- 8 ビット量子化されている場合、GPU プログラムへの*入出力*は、推論ごとにそれぞれ逆量子化および量子化されます。これは、TFLite の最適化されたカーネルを使用して CPU 上で行われます。
+- *Inputs and outputs* to the GPU program, if 8-bit quantized, are dequantized and quantized (respectively) for each inference. This is done on the CPU using TFLite’s optimized kernels.
 
 - GPU プログラムは、演算の間に*量子化シミュレータ*を挿入することにより、量子化された動作を模倣するように変更されます。これは、演算時にアクティベーションが量子化中に学習された境界に従うことが期待されるモデルに必要です。
 
@@ -276,7 +276,7 @@ GPU バックエンドは浮動小数点の実行のみをサポートするた�
 
 #### Android
 
-Android API は、デフォルトで量子化モデルをサポートしています。無効にするには、次の手順に従います。
+Android APIs support quantized models by default. To disable, do the following:
 
 **C++ API**
 
@@ -305,9 +305,10 @@ iOS API は、デフォルトで量子化モデルをサポートしています
     <section>
       <h3>Swift</h3>
       <p></p>
-<pre class="prettyprint lang-swift">var options = MetalDelegate.Options()
-options.isQuantizationEnabled = false
-let delegate = MetalDelegate(options: options)</pre>
+<pre class="prettyprint lang-swift">    var options = MetalDelegate.Options()
+    options.isQuantizationEnabled = false
+    let delegate = MetalDelegate(options: options)
+      </pre>
     </section>
     <section>
       <h3>Objective-C</h3>
@@ -332,13 +333,13 @@ let delegate = MetalDelegate(options: options)</pre>
 
 注意：これは、bazel を使用している場合、または TensorFlow Lite を自分でビルドしている場合にのみ使用できます。C++ API は CocoaPods では使用できません。
 
-GPU で計算を実行するには、データを GPU で使用できるようにする必要があり、多くの場合、メモリコピーの実行が必要になります。これにはかなり時間がかかる可能性があるため、可能であれば CPU/GPU のメモリ境界を超えないようにしてください。通常、このような交差は避けられませんが、一部の特殊なケースでは、どちらか一方を省略できます。
+To do computation on the GPU, data must be made available to the GPU. This often requires performing a memory copy. It is desirable not to cross the CPU/GPU memory boundary if possible, as this can take up a significant amount of time. Usually, such crossing is inevitable, but in some special cases, one or the other can be omitted.
 
-ネットワークの入力が GPU メモリに既に読み込まれている画像（たとえば、カメラフィードを含む GPU テクスチャ）である場合、CPU メモリに読み込むことなく、GPU メモリに保持できます。また、ネットワークの出力がレンダリング可能な画像（たとえば、[画像スタイルの転送](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)）の形式である場合は、画面に直接表示できます。
+If the network's input is an image already loaded in the GPU memory (for example, a GPU texture containing the camera feed) it can stay in the GPU memory without ever entering the CPU memory. Similarly, if the network's output is in the form of a renderable image (for example, [image style transfer](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)) it can be directly displayed on the screen.
 
 TensorFlow Lite では、最高のパフォーマンスを実現するために、TensorFlow ハードウェアバッファから直接読み書きできるので、回避可能なメモリコピーをバイパスできます。
 
-画像入力が GPU メモリにある場合、最初に Metal の`MTLBuffer`オブジェクトに変換する必要があります。TfLiteTensor をユーザーが準備した`MTLBuffer`に`TFLGpuDelegateBindMetalBufferToTensor()`を関連付けることができます。`TFLGpuDelegateBindMetalBufferToTensor()`は、`Interpreter::ModifyGraphWithDelegate()`の後に呼び出す必要があることに注意してください。さらに、推論出力はデフォルトで、GPU メモリから CPU メモリにコピーされます。この動作は、初期化中に`Interpreter::SetAllowBufferHandleOutput(true)`を呼び出すことで無効にできます。
+Assuming the image input is in GPU memory, it must first be converted to a `MTLBuffer` object for Metal. You can associate a TfLiteTensor to a user-prepared `MTLBuffer` with `TFLGpuDelegateBindMetalBufferToTensor()`. Note that `TFLGpuDelegateBindMetalBufferToTensor()` must be called after `Interpreter::ModifyGraphWithDelegate()`. Additionally, the inference output is, by default, copied from GPU memory to CPU memory. This behavior can be turned off by calling `Interpreter::SetAllowBufferHandleOutput(true)` during initialization.
 
 ```c++
 #include "tensorflow/lite/delegates/gpu/metal_delegate.h"
@@ -369,6 +370,45 @@ if (interpreter->Invoke() != kTfLiteOk) return false;
 
 注意: これは量子化モデルでも機能しますが、バッファは内部の逆量子化バッファにバインドされるため、**float32 データを含む float32 サイズのバッファ**が必要です。
 
+### GPU Delegate Serialization
+
+Using serialization of GPU kernel code and model data from previous initializations can reduce latency of GPU delegate's initialization up to 90%. This improvement is achieved by exchanging disk space for time savings. You can enable this feature with a few configurations options, as shown in the following code examples:
+
+<div>
+  <devsite-selector>
+    <section>
+      <h3>C++</h3>
+      <p></p>
+<pre class="prettyprint lang-cpp">    TfLiteGpuDelegateOptionsV2 options = TfLiteGpuDelegateOptionsV2Default();
+    options.experimental_flags |= TFLITE_GPU_EXPERIMENTAL_FLAGS_ENABLE_SERIALIZATION;
+    options.serialization_dir = kTmpDir;
+    options.model_token = kModelToken;
+
+    auto* delegate = TfLiteGpuDelegateV2Create(options);
+    if (interpreter-&gt;ModifyGraphWithDelegate(delegate) != kTfLiteOk) return false;
+      </pre>
+    </section>
+    <section>
+      <h3>Java</h3>
+      <p></p>
+<pre class="prettyprint lang-java">    GpuDelegate delegate = new GpuDelegate(
+      new GpuDelegate.Options().setSerializationParams(
+        /* serializationDir= */ serializationDir,
+        /* modelToken= */ modelToken));
+
+    Interpreter.Options options = (new Interpreter.Options()).addDelegate(delegate);
+      </pre>
+    </section>
+  </devsite-selector>
+</div>
+
+When using the serialization feature, make sure your code complies with these implementation rules:
+
+- Store the serialization data in a directory that is not accessible to other apps. On Android devices, use [`getCodeCacheDir()`](https://developer.android.com/reference/android/content/Context#getCacheDir()) which points to a location that is private to the current application.
+- The model token must be unique to the device for the specific model. You can compute a model token by generating a fingerprint from the model data (e.g. using [`farmhash::Fingerprint64`](https://github.com/google/farmhash)).
+
+Note: This feature requires the [OpenCL SDK](https://github.com/KhronosGroup/OpenCL-SDK) for serialization support.
+
 ## ヒントとコツ
 
 - 演算によっては CPU では簡単で GPU ではコストが高くなる可能性があります。このような演算の 1 つのクラスは、`BATCH_TO_SPACE`、`SPACE_TO_BATCH`、`SPACE_TO_DEPTH`など、さまざまな形の変形演算です。ネットワークアーキテクトの論理的思考のためだけにこれらの演算がネットワークに挿入されている場合、パフォーマンスのためにそれらを削除することをお勧めします。
@@ -377,4 +417,4 @@ if (interpreter->Invoke() != kTfLiteOk) return false;
 
     - たとえば、カメラハードウェアが RGBA の画像フレームをサポートしている場合、メモリコピー (3 チャネル RGB から 4 チャネル RGBX へ) を回避できるため、4 チャネル入力のフィードは大幅に速くなります。
 
-- 最高のパフォーマンスを得るには、モバイル向けに最適化されたネットワークアーキテクチャで分類器を再トレーニングします。これは、デバイス上の推論の最適化の重要な部分です。
+- For best performance, do not hesitate to re-train your classifier with mobile-optimized network architecture. That is a significant part of optimization for on-device inference.
