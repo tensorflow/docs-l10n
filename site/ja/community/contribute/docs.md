@@ -10,12 +10,12 @@ TensorFlow はドキュメント作成への貢献を歓迎します。ドキュ
 
 TensorFlow docsコミュニティに参加するのであれば、以下の2つを行ってください。
 
-- Watch the [tensorflow/docs](https://github.com/tensorflow/docs) GitHub repository.
-- Follow the [docs](https://discuss.tensorflow.org/tag/docs) tag on the [TensorFlow Forum](https://discuss.tensorflow.org/).
+- GitHub の <a>tensorflow/docs</a> リポジトリを見る。
+- [TensorFlow フォーラム](https://discuss.tensorflow.org/)の[ドキュメント](https://discuss.tensorflow.org/tag/docs)タグをフォローする。
 
 ## APIリファレンス
 
-For details, use the [TensorFlow API docs contributor guide](docs_ref.md). This shows you how to find the [source file](https://www.tensorflow.org/code/tensorflow/python/) and edit the symbol's <a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a>. Many API reference pages on tensorflow.org include a link to the source file where the symbol is defined. Docstrings support <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown</a> and can be (approximately) previewed using any <a href="http://tmpvar.com/markdown.html" class="external">Markdown previewer</a>.
+詳細については、[ TensorFlow API ドキュメント寄稿者ガイド](docs_ref.md)を参照してください。このガイドは<a href="https://www.python.org/dev/peps/pep-0257/" class="external">ソースファイル</a>を見つけて、シンボルの <a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a> を編集する方法を説明します。tensorflow.org の多くの API リファレンスページには、シンボルが定義されているソースファイルへのリンクを含みます。docstrings は  <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown</a> 形式をサポートしており、ほとんどの <a href="http://tmpvar.com/markdown.html" class="external">Markdown プレビューア</a>でプレビューすることができます。
 
 ### バージョンとブランチ
 
@@ -54,9 +54,9 @@ TensorFlow のガイドとチュートリアルは、<a href="https://guides.git
 
 ### 簡単な変更
 
-The easiest way to make straightforward documentation updates to Markdown files is to use GitHub's <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">web-based file editor</a>. Browse the [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en) repository to find the Markdown that roughly corresponds to the <a href="https://www.tensorflow.org">tensorflow.org</a> URL structure. In the upper right corner of the file view, click the pencil icon <svg version="1.1" width="14" height="16" viewbox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"></svg><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path> to open the file editor. Edit the file and then submit a new pull request.
+直接的にMarkdownファイルに更新をかける最も簡単な方法は、GitHubのWEBベースのファイルエディタを使うことです。[tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en) リポジトリをブラウジングしマークダウンを探しましょう。このリポジトリは<a href="https://www.tensorflow.org">tensorflow.org</a>のURL構造によく似ています。ファイルビューの上方右側にある鉛筆のアイコンをクリックしてください。するとファイルエディタが開きます。編集して新しいプルリクエストを送ってください。
 
-### Set up a local Git repo
+### ローカル Git リポジトリを設定する
 
 複数ファイルの編集やより複雑な更新の場合は、ローカルのGitワークフローを使用してプルリクエストを作成することをお勧めします。
 
@@ -66,7 +66,7 @@ The easiest way to make straightforward documentation updates to Markdown files 
 
 #### tensorflow/docsリポジトリをフォークする
 
-On the <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> GitHub page, click the *Fork* button <svg class="octicon octicon-repo-forked" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"></svg><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path> to create your own repo copy under your GitHub account. Once forked, you're responsible for keeping your repo copy up-to-date with the upstream TensorFlow repo.
+<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> GitHubページで、フォークボタンをクリックすることで あなたのGitHubアカウント上にリポジトリのコピーを作成します。フォークしたら、あなたには、上流のTensorFlowリポジトリに追随してリポジトリコピーを最新に保つ責任があります。
 
 #### リポジトリをクローンする
 
@@ -79,7 +79,7 @@ On the <a href="https://github.com/tensorflow/docs" class="external">tensorflow/
 
 #### 上流リポジトリを設定して、最新の状態に保つ（オプション）
 
-To keep your local repository in sync with `tensorflow/docs`, add an *upstream* remote to download the latest changes.
+ローカルリポジトリと `tensorflow/docs` の同期を維持するには、 上流リモートを追加して最新の変更をダウンロードします。
 
 注意：貢献し始める前に、確実にローカルリポジトリを更新しておいてください。定期的に同期しておくと、プルリクエスト発行時のマージコンフリクトの危険性を減らすことができます。
 
@@ -107,7 +107,7 @@ upstream  git@github.com:tensorflow/docs.git (push)
 
 #### 1.新しいブランチを作成する
 
-After you update your repo from `tensorflow/docs`, create a new branch from the local *master* branch:
+`tensorflow/docs` からリポジトリを更新した後、ローカルマスターブランチから新しいブランチを作成します。
 
 <pre class="prettyprint lang-bsh">&lt;code class="devsite-terminal"&gt;git checkout -b &lt;var&gt;feature-name&lt;/var&gt;&lt;/code&gt;
 
@@ -148,7 +148,7 @@ pushが完了したら、自動的に上流リポジトリへ発行されたプ�
 
 成功：あなたの変更はTensorFlowドキュメントに取り込まれました。
 
-There is a separate publishing step to update [tensorflow.org](https://www.tensorflow.org) from the GitHub repo. Typically, changes are batched together and the site is updated on a regular cadence.
+GitHubリポジトリから [tensorflow.org](https://www.tensorflow.org) を更新するには、別の公開手順があります。通常、変更はまとめて処理され、サイトは定期的に更新されます。
 
 ## 対話的ノートブック
 
@@ -192,14 +192,14 @@ Jupyter notebookファイルをダウンロードしてローカルGitワーク�
 3. notebookをGoogle Colabで開きます。このときURLの変換にはChromeの拡張機能のOpen in Colabを使います。
 4. Colabでnotebookを編集します。
 5. ファイル &gt; GitHubにコピーを保存で変更をリポジトリにコミットします。保存ダイアログは適切なリポジトリのブランチへのリンクになっているはずです。そうしたら意味のあるコミットメッセージを入力します。
-6. After saving, browse to your repo or the <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> repo, GitHub should prompt you to create a pull request.
+6. 保存した後は、あなたのリポジトリか <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> リポジトリをブラウジングしてください。GitHub上でプルリクエストを作成するように促されるはずです。
 7. メンテナにプルリクエストをレビューしてもらいます。
 
 成功：あなたの変更はTensorFlowドキュメントに取り込まれました。
 
 ## 翻訳
 
-The TensorFlow team works with the community and vendors to provide translations for tensorflow.org. Translations of notebooks and other technical content are located in the <a class="external" href="https://github.com/tensorflow/docs-l10n">tensorflow/docs-l10n</a> GitHub repo. Please submit pull requests through the <a class="external" href="https://gitlocalize.com/tensorflow/docs-l10n">TensorFlow GitLocalize project</a>.
+TensorFlow チームは、コミュニティやベンダーと協力して、tensorflow.org の翻訳を提供しています。ノートブックやその他の技術コンテンツの翻訳は、<a class="external" href="https://github.com/tensorflow/docs-l10n">tensorflow/docs-l10n</a> GitHubリポジトリにあります。プルリクエストは <a class="external" href="https://gitlocalize.com/tensorflow/docs-l10n">TensorFlow GitLocalize プロジェクト</a>を介して送信してください。
 
 英語のドキュメントは信頼できる唯一の情報源であり、可能な限りこれらのガイドに従って翻訳する必要がありますが、翻訳はコミュニティのためのものです。英語の用語、言い回し、スタイル、または語調が他の言語に適していない場合は、読者に適するように翻訳してください。
 
