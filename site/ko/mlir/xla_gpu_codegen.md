@@ -13,10 +13,10 @@ XLA는 `HloInstruction`에서 동작하며 이 표현에 대해 많은 최적화
 
 ## 과제
 
- | 호스트 | Device
+ | 호스트 | 장치
 --- | --- | ---
-Input format | HloInstruction*(작업 1) | HloInstruction*(작업 1)
-Output format | xla::Thunk(작업 2) | LLVM IR(작업 3)
+입력 형식 | HloInstruction*(작업 1) | HloInstruction*(작업 1)
+출력 형식 | xla::Thunk(작업 2) | LLVM IR(작업 3)
 
 - **작업 1**은 호스트 및 기기 입력 형식을 HloInstruction*에서 LHLO로 변경합니다.
 - **작업 2**는 호스트의 출력 형식을 thunk에서 "호스트용 랜딩 패드"로 변경합니다(아래 참조).
