@@ -213,7 +213,7 @@ iOS 13 は Core ML 3 をサポートしていますが、Core ML 2 のモデル�
 Core ML デリゲートがサポートする演算子は以下の通りです。
 
 - Add
-    - Only certain shapes are broadcastable. In Core ML tensor layout, following tensor shapes are broadcastable. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
+    - 特定の形状に限りブロードキャストが可能です。Core ML のテンソルレイアウトでは、次のテンソル形状をブロードキャストできます。`[B, C, H, W]`、`[B, C, 1, 1]`、`[B, 1, H, W]`、 `[B, 1, 1, 1]`。
 - AveragePool2D
 - Concat
     - 連結はチャンネル軸に沿って行う必要があります。
@@ -246,7 +246,7 @@ Core ML デリゲートがサポートする演算子は以下の通りです。
 
 ## フィードバック
 
-For issues, please create a [GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) issue with all the necessary details to reproduce.
+問題などが生じた場合は、[GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) の課題を提出し、再現に必要なすべての詳細を記載してください。
 
 ## よくある質問
 
@@ -263,4 +263,4 @@ For issues, please create a [GitHub](https://github.com/tensorflow/tensorflow/is
 
 - [Core ML delegate Swift API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/swift/Sources/CoreMLDelegate.swift)
 - [Core ML delegate C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.h)
-    - This can be used for Objective-C codes. ~~~
+    - これは Objective-C コードに使用可能です。
