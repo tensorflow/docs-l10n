@@ -2,7 +2,7 @@
 
 `tfds.decode` API를 사용하면 기본 특성 디코딩을 재정의할 수 있습니다. 주요 사용 사례는 더 나은 성능을 위해 이미지 디코딩을 건너뛰는 것입니다.
 
-Note: This API gives you access to the low-level `tf.train.Example` format on disk (as defined by the `FeatureConnector`). This API is targeted towards advanced users who want better read performance with images.
+참고: 이 API를 사용하면 디스크의 하위 레벨 `tf.train.Example` 형식에 액세스할 수 있습니다(`FeatureConnector`에 의해 정의됨). 이 API는 이미지로 더 나은 읽기 성능을 원하는 고급 사용자를 대상으로 합니다.
 
 ## 사용 예
 
@@ -136,9 +136,9 @@ ds, ds_info = tfds.load('ucf101', split='train', with_info=True, decoders={
 ds = ds.map(decode_video)  # Decode the video
 ```
 
-### Only decode a sub-set of the features.
+### 요소의 하위 집합만 디코딩합니다.
 
-It's also possible to entirely skip some features by specifying only the features you need. All other features will be ignored/skipped.
+필요한 요소만 지정하여 일부 요소를 완전히 건너뛸 수도 있습니다. 다른 모든 요소는 무시/건너뜁니다.
 
 ```python
 builder = tfds.builder('my_dataset')
@@ -149,7 +149,7 @@ builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
 })
 ```
 
-TFDS will select the subset of `builder.info.features` matching the given `tfds.decode.PartialDecoding` structure.
+TFDS는 주어진 `tfds.decode.PartialDecoding` 구조와 일치하는 `builder.info.features`의 하위 집합을 선택합니다.
 
 위의 코드에서 `builder.info.features`와 일치하도록 요소가 암시적으로 추출됩니다. 요소를 명시적으로 정의하는 것도 가능합니다. 위의 코드는 다음과 같습니다.
 
@@ -167,6 +167,6 @@ builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
 })
 ```
 
-The original metadata (label names, image shape,...) are automatically reused so it's not required to provide them.
+원본 메타데이터(레이블 이름, 이미지 모양 등)는 자동으로 재사용되므로 제공할 필요가 없습니다.
 
-`tfds.decode.SkipDecoding` can be passed to `tfds.decode.PartialDecoding`, through the `PartialDecoding(..., decoders={})` kwargs.
+`tfds.decode.SkipDecoding`은 `PartialDecoding(..., decoders={})` kwargs를 통해 `tfds.decode.PartialDecoding`으로 전달할 수 있습니다.
