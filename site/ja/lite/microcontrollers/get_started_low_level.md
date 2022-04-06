@@ -9,7 +9,7 @@
 エンドツーエンドのワークフローには、次の手順が含まれます。
 
 1. [モデルをトレーニングする](#train_a_model) (Python): デバイス上で使用するためにモデルをトレーニング、変換、最適化するための jupyter ノートブック。
-2. [Run inference](#run_inference) (in C++ 11): An end-to-end unit test that runs inference on the model using the [C++ library](library.md).
+2. [推論を実行する](#run_inference) (C++ 11): [C++ライブラリ](library.md)を使用してモデルで推論を実行するエンドツーエンドの単体テスト。
 
 ## サポートされているデバイスを入手する
 
