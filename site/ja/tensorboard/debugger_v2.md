@@ -127,7 +127,7 @@ Debugger V2 は、TensorFlow のソフトウェアスタックでは比較的に
 
 ## パフォーマンスオーバーヘッド
 
-デバッグ API では、計装された TensorFlow プログラムにパフォーマンスオーバーヘッドが生じます。個のオーバーヘッドは、`tensor_debug_mode`、ハードウェアの種類、および計装された TensorFlow プログラムの性質によって異なりますが、基準としては、GPU では `NO_TENSOR` モードの場合、バッチサイズ 64 の[変換モデル](https://github.com/tensorflow/models/tree/master/official/nlp/transformer)のトレーニング中に、15% のオーバーヘッドが追加されます。ほかの tensor_debug_mode の場合のオーバーヘッドの割合は高くなる傾向にあり、`CURT_HEALTH`、`CONCISE_HEALTH`、`FULL_HEALTH`、および `SHAPE` モードでは約 50% 増となります。CPU ではやや低くなる傾向にあり、TPU では現時点では高くなる傾向にあります。
+デバッグ API では、計装された TensorFlow プログラムにパフォーマンスオーバーヘッドが生じます。個のオーバーヘッドは、`tensor_debug_mode`、ハードウェアの種類、および計装された TensorFlow プログラムの性質によって異なりますが、基準としては、GPU では `NO_TENSOR` モードの場合、バッチサイズ 64 の[変換モデル](https://github.com/tensorflow/models/tree/master/official/legacy/transformer)のトレーニング中に、15% のオーバーヘッドが追加されます。ほかの tensor_debug_mode の場合のオーバーヘッドの割合は高くなる傾向にあり、`CURT_HEALTH`、`CONCISE_HEALTH`、`FULL_HEALTH`、および `SHAPE` モードでは約 50% 増となります。CPU ではやや低くなる傾向にあり、TPU では現時点では高くなる傾向にあります。
 
 ## ほかの TensorFlow デバッグ API との関係
 
