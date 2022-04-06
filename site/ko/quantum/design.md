@@ -12,7 +12,7 @@ TFQ에서는 양자 데이터세트, 양자 모델 및 고전적인 제어 매�
 
 TensorFlow Quantum은 TensorFlow를 양자 컴퓨팅 하드웨어와 통합하는 데 필요한 구성 요소를 구현합니다. 이를 위해 TFQ에서는 두 가지 데이터 유형 프리미티브를 도입합니다.
 
-- *양자 회로*: TensorFlow 내의 <a href="https://github.com/quantumlib/Cirq" class="external">Cirq</a> 정의 양자 회로( `cirq.Circuit`)를 나타냅니다. 다른 실수값 데이터 포인트의 배치와 유사하게 다양한 크기의 회로 배치를 생성합니다.
+- *양자 회로*: TensorFlow 내의 <a href="https://github.com/quantumlib/Cirq" class="external">Cirq</a> 정의 양자 회로(`cirq.Circuit`)를 나타냅니다. 다른 실수값 데이터 포인트의 배치와 유사하게 다양한 크기의 회로 배치를 생성합니다.
 - *파울리 합계(Pauli sum)*: Cirq(`cirq.PauliSum`)에 정의된 Pauli 연산자의 텐서 곱의 선형 조합을 나타냅니다. 회로와 마찬가지로, 다양한 크기의 연산자 배치를 만듭니다.
 
 ### 기본 연산
@@ -23,9 +23,9 @@ TensorFlow 연산은 최적화된 C++로 작성되었습니다. 이러한 연산
 
 1. 회로는 같은 크기가 아닙니다. 시뮬레이션된 회로의 경우 정적 연산(예: `tf.matmul` 또는 `tf.add`)을 만든 다음, 크기가 다른 회로를 다른 숫자로 대체할 수 없습니다. 정적 연산은 정적으로 크기가 지정된 TensorFlow 컴퓨팅 그래프에서 허용하지 않는 동적 크기를 허용해야 합니다.
 2. 양자 데이터는 완전히 다른 회로 구조를 유도할 수 있습니다. 이는 TFQ ops에서 동적 크기를 지원하는 또 다른 이유입니다. 양자 데이터는 원래 회로에 대한 변경 사항으로 표시되는 기본 양자 상태의 구조적 변화를 나타낼 수 있습니다. 새로운 데이터 포인트가 런타임에 교체되기 때문에 TensorFlow 컴퓨팅 그래프는 빌드된 후에 수정할 수 없으므로 이러한 다양한 구조에 대한 지원이 필요합니다.
-3. `cirq.Circuits`는 일련의 연산이라는 점에서 계산 그래프와 유사하며 일부는 기호/자리 표시자를 포함할 수 있습니다. 가능한 한 TensorFlow와 호환되게 하는 것이 중요합니다.
+3. `cirq.Circuits`는 일련의 연산이라는 점에서 계산 그래프와 유사하며 일부는 기호/자리 표시자를 포함할 수 있습니다. 가능한 한 TensorFlow와 호환되도록 하는 것이 중요합니다.
 
-For performance reasons, Eigen (the C++ library used in many TensorFlow ops) is not well suited for quantum circuit simulation. Instead, the circuit simulators used in the <a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">quantum beyond-classical experiment</a> are used as verifiers and extended as the foundation of TFQ ops (all written with AVX2 and SSE instructions). Ops with identical functional signatures were created that use a physical quantum computer. Switching between a simulated and physical quantum computer is as easy as changing a single line of code. These ops are located in the <a href="https://github.com/tensorflow/quantum/blob/master/tensorflow_quantum/core/ops/circuit_execution_ops.py" class="external"><code>circuit_execution_ops.py</code></a>.
+성능상의 이유로 Eigen(많은 TensorFlow 연산에 사용되는 C++ 라이브러리)은 양자 회로 시뮬레이션에 적합하지 않습니다. 대신 <a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">양자 우월성 기존 실험</a>에 사용된 회로 시뮬레이터는 검증 도구로 사용되며 TFQ 연산의 기반으로 확장됩니다(모두 AVX2 및 SSE 명령어로 작성됨). 물리적 양자 컴퓨터를 사용하는 동일한 함수형 서명을 가진 ops가 만들어졌습니다. 시뮬레이션된 양자 컴퓨터와 물리적 양자 컴퓨터 간에 전환하는 것은 한 줄의 코드를 변경하는 것만큼 쉽습니다. 해당 연산은 <a href="https://github.com/tensorflow/quantum/blob/master/tensorflow_quantum/core/ops/circuit_execution_ops.py" class="external"><code>circuit_execution_ops.py</code></a>에 있습니다.
 
 ### 레이어
 
