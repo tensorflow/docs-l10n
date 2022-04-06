@@ -112,7 +112,7 @@ android {
 
 C++ API を介して TFLite を使用する場合は、C++ 共有ライブラリを構築します。
 
-### TFLite C API を使用する
+### TFLite C++ API を使用する
 
 This is the *recommended* approach. Download the [TensorFlow Lite AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow/tensorflow-lite), rename it to `tensorflow-lite-*.zip`, and unzip it. You must include the four header files in `headers/tensorflow/lite/` and `headers/tensorflow/lite/c/` folder and the relevant `libtensorflowlite_jni.so` dynamic library in `jni/` folder in your NDK project.
 
