@@ -44,7 +44,7 @@ eager モードの使用など、最新のベストプラクティスに従っ�
 
     - TFF は、`Model`で`forward_pass`メソッドを複数回呼び出し、クライアントデータの後続のバッチで順次実行するため、副次的効果としてさまざまな集計を保持する変数を更新できます。
 
-    - Finally, TFF invokes the `report_local_unfinalized_metrics` method on your Model to allow your model to compile all the summary statistics it collected into a compact set of metrics to be exported by the client. This is where your model code may, for example, divide the sum of losses by the number of examples processed to export the average loss, etc.
+    - 最後に、TFFはモデルで `report_local_unfinalized_metrics` メソッドを呼び出し、モデルが収集したすべての要約統計をコンパイルして、クライアントによりエクスポートされるメトリックをコンパクトにまとめます。これは、たとえば、モデルコードが損失の総計を処理されたサンプル数で割り、平均損失をエクスポートする場合に使用されます。
 
 - **連合集計**。このレベルの集計は、システム内の複数のクライアント (デバイス) にわたる集計を指します。これはクライアント全体で平均化されるモデルパラメータ (変数) とローカル集計の結果としてモデルがエクスポートしたメトリックに適用されます。
 
@@ -56,17 +56,17 @@ eager モードの使用など、最新のベストプラクティスに従っ�
 
     - 各クライアントでは、独立かつ並行してモデルコードがローカルデータバッチのストリームで繰り返し呼び出され、上記のように新しいモデルパラメーターのセット (トレーニング時) と新しいローカルメトリックのセット (ローカル集計) が生成されます。
 
-    - TFF runs a distributed aggregation protocol to accumulate and aggregate the model parameters and locally exported metrics across the system. This logic is expressed in a declarative manner using TFF's own *federated computation* language (not in TensorFlow). See the [custom algorithms](tutorials/custom_federated_algorithms_1.ipynb) tutorial for more on the aggregation API.
+    - TFFは、分散型集約プロトコルを実行して、システム全体でモデルパラメータとローカルにエクスポートされたメトリックを蓄積および集約します。このロジックは、TFF 独自の*連合計算*言語（TensorFlowではない）を使用して宣言的な方法で表現されます。集計APIの詳細については、[カスタムアルゴリズム](tutorials/custom_federated_algorithms_1.ipynb)のチュートリアルをご覧ください。
 
 ### 抽象インターフェース
 
 この基本的な *constructor* と *metadata* インターフェースは、次のようにインターフェース`tff.learning.Model `で表されます。
 
-- The constructor, `forward_pass`, and `report_local_unfinalized_metrics` methods should construct model variables, forward pass, and statistics you wish to report, correspondingly. The TensorFlow constructed by those methods must be serializable, as discussed above.
+- コンストラクター、`forward_pass`、および `report_local_unfinalized_metrics` メソッドは、対応するモデル変数、フォワードパス、およびレポートする統計をそれぞれ構成する必要があります。
 
 - `input_spec`プロパティと、トレーニング可能な変数、トレーニング不可能な変数、およびローカル変数のサブセットを返す 3 つのプロパティは、メタデータを表します。TFF はこの情報を使用して、モデルの部分を連合最適化アルゴリズムに接続する方法を決定し、構築されたシステムの正確性を検証するのに役立つ内部型シグネチャを定義します (モデルが使用するように設計されているものと一致しないデータに対してモデルをインスタンス化しないようにするため)。
 
-In addition, the abstract interface `tff.learning.Model` exposes a property `metric_finalizers` that takes in a metric's unfinalized values (returned by `report_local_unfinalized_metrics()`) and returns the finalized metric values. The `metric_finalizers` and `report_local_unfinalized_metrics()` method will be used together to build a cross-client metrics aggregator when defining the federated training processes or evaluation computations. For example, a simple `tff.learning.metrics.sum_then_finalize` aggregator will first sum the unfinalized metric values from clients, and then call the finalizer functions at the server.
+また、抽象インターフェースの `tff.learning.Model` は、メトリックの未完成の値（`report_local_unfinalized_metrics()` が戻す）を取って最終的なメトリック値を返す `metric_finalizers` プロパティを公開します。`metric_finalizers` と `report_local_unfinalized_metrics()` メソッドは、連合トレーニングプロセスまたは評価コンピュテーションを定義する際に、クライアント間のメトリクスアグリゲータを構築するために同時に使用されます。たとえば、単純な `tff.learning.metrics.sum_then_finalize` アグリゲータは、まずクライアントからの未完成のメトリック値を加算して空、ファイナライザー関数をサーバー側で呼び出します。
 
 独自のカスタム`tf.learning.Model`を定義する方法の例は、[画像分類](tutorials/federated_learning_for_image_classification.ipynb)チュートリアルの後半と、[`model_examples.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/model_examples.py)のテストで使用するサンプルモデルにあります。
 
@@ -159,4 +159,4 @@ while True:
 
 ### 利用可能なデータセット
 
-We have dedicated the namespace `tff.simulation.datasets` for datasets that implement the `tff.simulation.datasets.ClientData` interface for use in simulations, and seeded it with datasets to support the [image classification](tutorials/federated_learning_for_image_classification.ipynb) and [text generation](tutorials/federated_learning_for_text_generation.ipynb) tutorials. We'd like to encourage you to contribute your own datasets to the platform.
+名前空間 `tff.simulation.datasets` は、シミュレーションで使用するための `tff.simulation.datasets.ClientData` インターフェースを実装するデータセット専用で、[画像分類](tutorials/federated_learning_for_image_classification.ipynb)と[テキスト生成](tutorials/federated_learning_for_text_generation.ipynb)のチュートリアルをサポートするために、データセットがシードされていますが、独自のデータセットをプラットフォームに貢献することをお勧めします。
