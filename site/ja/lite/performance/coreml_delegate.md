@@ -8,7 +8,7 @@ TensorFlow Lite Core ML デリゲートは、[Core ML フレームワーク](htt
 
 **サポートする iOS のバージョンとデバイス:**
 
-- iOS 12 and later. In the older iOS versions, Core ML delegate will automatically fallback to CPU.
+- iOS 12 以降。古い iOS バージョンの場合、Core ML デリゲートは自動的に CPU にフォールバックします。
 - デフォルトでは、Core ML デリゲートは A12 SoC 以降のデバイス（iPhone Xs 以降）でのみ有効で、Neural Engine（ニューラルエンジン）を推論の高速化に使用します。古いデバイスで Core ML デリゲートを使用する場合は、[ベストプラクティス](#best-practices)を参照してください。
 
 **サポートするモデル**
@@ -223,7 +223,7 @@ Core ML デリゲートがサポートする演算子は以下の通りです。
     - 重みやバイアスは定数である必要があります。
 - FullyConnected（別名 Dense または InnerProduct）
     - 重みやバイアスは（存在する場合）定数である必要があります。
-    - Only supports single-batch case. Input dimensions should be 1, except the last dimension.
+    - 単一バッチケースのみをサポートします。入力次元は、最後の次元以外は 1 である必要があります。
 - Hardswish
 - Logistic（別名 Sigmoid）
 - MaxPool2D
@@ -250,14 +250,14 @@ For issues, please create a [GitHub](https://github.com/tensorflow/tensorflow/is
 
 ## よくある質問
 
-- Does CoreML delegate support fallback to CPU if a graph contains unsupported ops?
+- サポートされていない演算子がグラフに含まれている場合、CoreML デリゲートは CPU へのフォールバックをサポートしますか？
     - はい
 - CoreML デリゲートは iOS Simulator で動作しますか？
-    - Yes. The library includes x86 and x86_64 targets so it can run on a simulator, but you will not see performance boost over CPU.
+    - はい。ライブラリには x86 と x86_64 ターゲットが含まれているのでシミュレータ上で実行できますが、パフォーマンスが CPU より向上することはありません。
 - TensorFlow Lite と CoreML デリゲートは MacOS をサポートしていますか？
     - TensorFlow Lite は iOS のみでテストを行っており、MacOS ではテストしていません。
 - カスタムの TensorFlow Lite 演算子はサポートされますか？
-    - No, CoreML delegate does not support custom ops and they will fallback to CPU.
+    - いいえ、CoreML デリゲートはカスタム演算子をサポートしていないため、CPU にフォールバックします。
 
 ## API
 
