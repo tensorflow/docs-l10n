@@ -21,7 +21,7 @@
 
 ### 양자화 및 관련 하드웨어로 실험하기
 
-Users can configure the quantization parameters (e.g. number of bits) and to some degree, the underlying algorithms. Note that with these changes from the API defaults, there is currently no supported path for deployment to a backend. For instance, TFLite conversion and kernel implementations only support 8-bit quantization.
+사용자는 양자화 매개변수(예: 비트 수)와 어느 정도 기본 알고리즘을 구성할 수 있습니다. API 기본값의 이러한 변경으로 인해 현재 백엔드 배포에 지원되는 경로가 없습니다. 예를 들어 TFLite 변환 및 커널 구현은 8비트 양자화만 지원합니다.
 
 이 구성과 관련된 API는 실험적이며 이전 버전과의 호환성이 적용되지 않습니다.
 
@@ -45,7 +45,7 @@ Users can configure the quantization parameters (e.g. number of bits) and to som
 
 다음 영역에서 지원을 받을 수 있습니다.
 
-- Model coverage: models using [allowlisted layers](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/quantization/keras/default_8bit/default_8bit_quantize_registry.py), BatchNormalization when it follows Conv2D and DepthwiseConv2D layers, and in limited cases, `Concat`.
+- 모델 적용 범위: Conv2D 및 DepthwiseConv2D 레이어를 따르는 경우 [allowlisted 레이어](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/quantization/keras/default_8bit/default_8bit_quantize_registry.py), BatchNormalization을 사용하는 모델을 사용하며 제한된 경우에는 `Concat`을 사용합니다.
     <!-- TODO(tfmot): add more details and ensure they are all correct. -->
 - 하드웨어 가속: API 기본값은 무엇보다도 EdgeTPU, NNAPI 및 TFLite 백엔드의 가속과 호환됩니다. 로드맵에서 주의 사항을 참조하세요.
 - 양자화로 배포: 현재 텐서별 양자화가 아닌 컨볼루셔널 레이어에 대한 축별 양자화만 지원됩니다.
