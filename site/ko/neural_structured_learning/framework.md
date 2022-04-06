@@ -14,16 +14,18 @@ Neural Structured Learning의 전체 워크플로는 다음과 같습니다. 검
 
 NSL은 다음과 같은 이점을 제공합니다.
 
-- **더 높은 정확성**: 샘플에서 구조적 신호는 특성 입력에서 언제나 사용할 수는 없는 정보를 제공할 수 있습니다. 따라서 문서 분류 및 시맨틱 의도 분류와 같은 광범위한 작업에서 공동 학습 접근 방식(구조적 신호 및 특성 모두 포함)이 기존의 많은 방법(특성만 포함된 훈련에 의존하는 방법)을 능가하는 것으로 나타났습니다([Bui et al., WSDM'18](https://research.google/pubs/pub46568.pdf) & [Kipf et al., ICLR'17](https://arxiv.org/pdf/1609.02907.pdf)).
-- **견고성**: 적대적 예제로 훈련된 모델은 모델의 예측 또는 분류를 오도하도록 설계된 적대적 교란에 대해 견고한 것으로 나타났습니다 ([Goodfellow et al., ICLR'15](https://arxiv.org/pdf/1412.6572.pdf) & [Miyato et al., ICLR'16](https://arxiv.org/pdf/1704.03976.pdf)). 훈련 샘플의 수가 적을 때 적대적 예제를 사용한 훈련도 모델 정확성을 향상하는 데 도움이 됩니다([Tsipras et al., ICLR'19](https://arxiv.org/pdf/1805.12152.pdf)).
-- **레이블이 지정된 필요 데이터 감소**: NSL을 사용하면 신경망에서 레이블이 지정된 데이터와 레이블이 지정되지 않은 데이터를 모두 활용할 수 있으므로 학습 패러다임이 [준감독 학습](https://en.wikipedia.org/wiki/Semi-supervised_learning)으로 확장됩니다. 특히 NSL을 사용하면, 네트워크가 감독 설정에서와 같이 레이블이 지정된 데이터를 사용하여 훈련할 수 있으며, 동시에 레이블이 있거나 없을 수 있는 "인접 샘플"에 대해 유사한 숨겨진 표현을 학습하도록 네트워크를 구동합니다. 이 기술은 레이블이 지정된 데이터의 양이 상대적으로 적을 때 모델 정확성을 향상할 수 있는 큰 가능성을 보여주었습니다.([Bui et al., WSDM'18](https://research.google/pubs/pub46568.pdf) & [Miyato et al., ICLR'16](https://arxiv.org/pdf/1704.03976.pdf)).
+- **더 높은 정확성**: 샘플에서 구조적 신호는 특성 입력에서 언제나 사용할 수는 없는 정보를 제공할 수 있습니다. 따라서 문서 분류 및 시맨틱 의도 분류와 같은 광범위한 작업에서 공동 학습 접근 방식(구조적 신호 및 특성 모두 포함)이 기존의 많은 방법(특성만 포함된 훈련에 의존하는 방법)을 능가하는 것으로 나타났습니다([Bui et al., WSDM'18](https://research.google/pubs/pub46568.pdf) &amp; [Kipf et al., ICLR'17](https://arxiv.org/pdf/1609.02907.pdf)).
+- **견고성**: 적대적 예제로 훈련된 모델은 모델의 예측 또는 분류를 오도하도록 설계된 적대적 교란에 대해 견고한 것으로 나타났습니다 ([Goodfellow et al., ICLR'15](https://arxiv.org/pdf/1412.6572.pdf) &amp; [Miyato et al., ICLR'16](https://arxiv.org/pdf/1704.03976.pdf)). 훈련 샘플의 수가 적을 때 적대적 예제를 사용한 훈련도 모델 정확성을 향상하는 데 도움이 됩니다([Tsipras et al., ICLR'19](https://arxiv.org/pdf/1805.12152.pdf)).
+- **레이블이 지정된 필요 데이터 감소**: NSL을 사용하면 신경망에서 레이블이 지정된 데이터와 레이블이 지정되지 않은 데이터를 모두 활용할 수 있으므로 학습 패러다임이 [준감독 학습](https://en.wikipedia.org/wiki/Semi-supervised_learning)으로 확장됩니다. 특히 NSL을 사용하면, 네트워크가 감독 설정에서와 같이 레이블이 지정된 데이터를 사용하여 훈련할 수 있으며, 동시에 레이블이 있거나 없을 수 있는 "인접 샘플"에 대해 유사한 숨겨진 표현을 학습하도록 네트워크를 구동합니다. 이 기술은 레이블이 지정된 데이터의 양이 상대적으로 적을 때 모델 정확성을 향상할 수 있는 큰 가능성을 보여주었습니다.([Bui et al., WSDM'18](https://research.google/pubs/pub46568.pdf) &amp; [Miyato et al., ICLR'16](https://arxiv.org/pdf/1704.03976.pdf)).
 
 ## 단계별 튜토리얼
 
-Neural Structured Learning에 대한 실습 경험을 얻기 위해 구조적 신호를 명시적으로 제공, 유도 또는 구성할 수 있는 다양한 시나리오를 다루는 3가지 튜토리얼이 제공됩니다.
+Neural Structured Learning에 대한 실습 경험을 얻기 위해 구조적 신호를 명시적으로 제공, 구성 또는 유도할 수 있는 다양한 시나리오를 다루는 튜토리얼이 제공됩니다. 다음은 몇 가지 예시입니다.
 
 - [자연 그래프를 사용한, 문서 분류를 위한 그래프 정규화](tutorials/graph_keras_mlp_cora.ipynb) 이 튜토리얼에서는 그래프 정규화를 사용하여 자연(유기적) 그래프를 형성하는 문서를 분류하는 방법을 살펴봅니다.
 
 - [합성 그래프를 사용한, 감상 분류를 위한 그래프 정규화](tutorials/graph_keras_lstm_imdb.ipynb) 이 튜토리얼에서는 그래프 정규화를 사용하여 구조적 신호를 구성(합성)함으로써 영화 리뷰 감상을 분류하는 방법을 보여줍니다.
 
 - [이미지 분류를 위한 적대적 학습](tutorials/adversarial_keras_cnn_mnist.ipynb) 이 튜토리얼에서는 적대적 학습(구조적 신호가 유도되는 학습)을 사용하여 숫자가 포함된 이미지를 분류하는 방법을 살펴봅니다.
+
+더 많은 예시와 튜토리얼은 GitHub 리포지토리의 [예시](https://github.com/tensorflow/neural-structured-learning/tree/master/neural_structured_learning/examples)에서 확인할 수 있습니다.
