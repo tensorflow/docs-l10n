@@ -18,7 +18,7 @@ Task Library `ImageSegmenter` API를 사용하여 사용자 정의 이미지 분
 
 다음 모델은 `ImageSegmenter` API와의 호환성이 보장됩니다.
 
-- The [pretrained image segmentation models on TensorFlow Hub](https://tfhub.dev/tensorflow/collections/lite/task-library/image-segmenter/1).
+- [TensorFlow Hub의 사전 훈련된 이미지 분할 모델](https://tfhub.dev/tensorflow/collections/lite/task-library/image-segmenter/1)
 
 - [모델 호환성 요구 사항](#model-compatibility-requirements)을 충족하는 사용자 정의 모델
 
@@ -131,5 +131,5 @@ this legend.
 
 - 출력 마스크 텐서: (kTfLiteUInt8/kTfLiteFloat32)
 
-    - tensor of size `[batch x mask_height x mask_width x num_classes]`, where `batch` is required to be 1, `mask_width` and `mask_height` are the dimensions of the segmentation masks produced by the model, and `num_classes` is the number of classes supported by the model.
+    - `[batch x mask_height x mask_width x num_classes]` 크기의 텐서(여기서 `batch`는 1이어야 하고, `mask_width` 및 `mask_height`는 모델에 의해 생성된 분할 마스크의 차원이며, `num_classes`는 모델에서 지원하는 클래스의 수입니다.)
     - 선택적 (권장함) 레이블 맵은 한 줄에 하나의 레이블을 포함하여 TENSOR_VALUE_LABELS 유형의 AssociatedFile-s로 첨부할 수 있습니다. 첫 번째 AssociatedFile(있는 경우)은 결과의 `label` 필드(C++에서 `class_name`으로 명명됨)를 채우는 데 사용됩니다. `display_name` 필드는 생성 시 사용된 `ImageSegmenterOptions`의 `display_names_locale` 필드와 로케일이 일치하는 AssociatedFile(있는 경우)로부터 채워집니다(기본적으로 "en", 즉 영어). 이들 중 어느 것도 사용할 수 없는 경우, 결과의 `index` 필드만 채워집니다.
