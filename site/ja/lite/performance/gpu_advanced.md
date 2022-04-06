@@ -258,7 +258,7 @@ GPU デリゲートのコンストラクタは、オプションの`struct`を�
 
 - [量子化認識トレーニング](https://www.tensorflow.org/lite/convert/quantization)でトレーニングされたモデル
 - トレーニング後のダイナミックレンジ量子化
-- [Post-training full-integer quantization](https://www.tensorflow.org/lite/performance/post_training_integer_quant)
+- [トレーニング後の完全整数量子化](https://www.tensorflow.org/lite/performance/post_training_integer_quant)
 
 パフォーマンスを最適化するには、浮動小数点入出力テンソルを持つモデルを使用します。
 
