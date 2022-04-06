@@ -51,7 +51,7 @@ docker run option '--privileged=true'
 
 ## プロファイラツール
 
-Access the Profiler from the **Profile** tab in TensorBoard, which appears only after you have captured some model data.
+プロファイラには、一部のモデルデータをキャプチャした後にのみ表示される TensorBoard の **Profile** タブからアクセスできます。
 
 注意: プロファイラは [Google Chart ライブラリ](https://developers.google.com/chart/interactive/docs/basic_load_libs#basic-library-loading)を読み込むため、インターネットアクセスを要求します。TensorBoard をローカルマシン上、企業内ファイアウォールの背後、またはデータセンターで完全にオフラインで実行する場合、一部のチャートやテーブルが表示されない場合があります。
 
@@ -88,7 +88,7 @@ Access the Profiler from the **Profile** tab in TensorBoard, which appears only 
         - On-device compute time.
         - All others, including Python overhead.
 
-    2. Device compute precisions - Reports the percentage of device compute time that uses 16 and 32-bit computations.
+    2. Device Compute Precisions - 16 ビットおよび 32 ビット計算を使用するデバイス演算時間の割合を報告します。
 
 - **Step-time Graph**: Displays a graph of device step time (in milliseconds) over all the steps sampled. Each step is broken into the multiple categories (with different colors) of where time is spent. The red area corresponds to the portion of the step time the devices were sitting idle waiting for input data from the host. The green area shows how much of time the device was actually working.
 
@@ -164,8 +164,8 @@ A source data table will appear with each entry containing the following informa
 2. **Count**: Shows the total number of instances of op execution during the profiling period.
 3. **Total Time (in ms)**: Shows the cumulative sum of time spent on each of those instances.
 4. **Total Time %**: Shows the total time spent on an op as a fraction of the total time spent in input processing.
-5. **Total Self Time (in ms)**: Shows the cumulative sum of the self time spent on each of those instances. The self time here measures the time spent inside the function body, excluding the time spent in the function it calls.
-6. **Total Self Time %**. Shows the total self time as a fraction of the total time spent on input processing.
+5. **合計自己時間（ミリ秒） -** 各インスタンスに費やされた自己時間の累積合計が表示されます。この自己時間は、関数の本文内で費やされた時間を測定したもので、関数の本文から呼び出される関数で費やされた時間は含まれません。
+6. **合計自己時間（%）** - 合計自己時間が、入力処理に費やされた合計時間との割合で表示されます。
 7. **Category**. Shows the processing category of the input op.
 
 <a name="tf_stats"></a>
@@ -240,17 +240,17 @@ Timeline ペインには、次の要素が含まれます。
 
 トレースビューアには、次のセクションがあります。
 
-- **One section for each device node**, labeled with the number of the device chip and the device node within the chip (for example, `/device:GPU:0 (pid 0)`). Each device node section contains the following tracks:
+- **デバイスノードごとに 1 つのセクション**。ラベルとしてデバイスチップの数とチップ内のデバイスノードの数が使用されます（例: 「`/device:GPU:0 (pid 0)`」）。デバイスノードのセクションには、次のトラックが含まれます。
     - **Step**: Shows the duration of the training steps that were running on the device
     - **TensorFlow Ops**: Shows the ops executed on the device
-    - **XLA Ops**: Shows [XLA](https://www.tensorflow.org/xla/) operations (ops) that ran on the device if XLA is the compiler used (each TensorFlow op is translated into one or several XLA ops. The XLA compiler translates the XLA ops into code that runs on the device).
+    - **XLA Ops -** [XLA](https://www.tensorflow.org/xla/) が使用されているコンパイラである場合にデバイス上で実行された XLA 演算が表示されます。1 つの TensorFlow 演算が 1 つ以上の XLA 演算に変換されます。XLA コンパイラにより、XLA 演算がデバイス上で実行されるコードに変換されます。
 - **ホストマシンの CPU 上で実行されるスレッドのセクション** - **「Host Threads」**というラベルが付いています。このセクションには、CPU スレッドごとに 1 つのトラックが含まれます。セクションラベルと一緒に表示される情報は無視してもかまいません。
 
 ##### イベント
 
 タイムライン内のイベントは異なる色で表示されます。色自体には特別な意味はありません。
 
-The trace viewer can also display traces of Python function calls in your TensorFlow program. If you use the `tf.profiler.experimental.start` API, you can enable Python tracing by using the `ProfilerOptions` namedtuple when starting profiling. Alternatively, if you use the sampling mode for profiling, you can select the level of tracing by using the dropdown options in the **Capture Profile** dialog.
+トレースビューアは TensorFlow プログラム内の Python 関数呼び出しのトレースも表示できます。`tf.profiler.experimental.start()` API を使用する場合は、プロファイリングを開始する際に `ProfilerOptions` 名前付きタプルを使用して Python のトレースを有効化できます。または、プロファイリングにサンプリングモードを使用する場合は、[**Capture Profile**] ダイアログのドロップダウンオプションを使用してトレースのレベルを選択することができます。
 
 ![image](./images/tf_profiler/python_tracer.png)
 
@@ -264,9 +264,9 @@ The trace viewer can also display traces of Python function calls in your Tensor
 
 このツールでは 2 つのペインで情報が表示されます。
 
-- The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
+- 上部のペインには、合計経過時間が最も長い CUDA カーネルを示す円グラフが表示されます。
 
-- The lower pane displays a table with the following data for each unique kernel-op pair:
+- 下のペインには、一意のカーネルと演算のペアごとに次のデータを含むテーブルが表示されます。
 
     - A rank in descending order of total elapsed GPU duration grouped by kernel-op pair.
     - The name of the launched kernel.
@@ -289,7 +289,7 @@ The trace viewer can also display traces of Python function calls in your Tensor
 
 メモリプロファイルツールは、プロファイリング間のデバイスのメモリ使用状況を監視します。このツールを使用して、次のことを実行できます。
 
-- Debug out of memory (OOM) issues by pinpointing peak memory usage and the corresponding memory allocation to TensorFlow ops. You can also debug OOM issues that may arise when you run [multi-tenancy](https://arxiv.org/pdf/1901.06887.pdf) inference.
+- ピークメモリ使用状況とそれに対応する TensorFlow 演算への割り当てメモリを特定することで、メモリ不足（OOM）の問題をデバッグします。また、[マルチテナント](https://arxiv.org/pdf/1901.06887.pdf)の推論を実行する場合に発生する OOM 問題もデバッグできます。
 - Debug memory fragmentation issues.
 
 メモリプロファイルツールには、次の 3 つのセクションにデータが表示されます。
@@ -418,7 +418,7 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 
 ![image](./images/tf_profiler/tf_stats.png)
 
-This section provides the summary of all input pipelines across all hosts. Typically there is one input pipeline. When using the distribution strategy, there is one host input pipeline running the program's `tf.data` code and multiple device input pipelines retrieving data from the host input pipeline and transferring it to the devices.
+このセクションには、全ホストのすべての入力パイプラインの概要が示されます。通常、入力パイプラインは 1 つです。分散ストラテジーを使用している場合、プログラムの tf.data コードを実行しているホストにゅうりょくパイプラインが 1 つと、そのホスト入力パイプラインからデータを取得してデバイスに転送しているデバイス入力パイプラインが複数あります。
 
 入力パイプラインごとに、実行時間の統計が表示されます。50 μs より長くかかる呼び出しは、遅いと見なされます。
 
@@ -485,7 +485,7 @@ TensorFlow プロファイラは、TensorFlow モデルのホストアクティ�
 
 <a name="sampling_mode"></a>
 
-- Sampling mode: Perform on-demand profiling by using `tf.profiler.experimental.server.start` to start a gRPC server with your TensorFlow model run. After starting the gRPC server and running your model, you can capture a profile through the **Capture Profile** button in the TensorBoard profile plugin. Use the script in the Install profiler section above to launch a TensorBoard instance if it is not already running.
+- サンプリングモード - `tf.profiler.experimental.server.start()`を使用してオンデマンドプロファイリングを実行し、gRPC サーバーを起動して TensorFlow モデルを実行します。gRPC サーバーを起動してモデルを実行したら、TensorBoard プロファイルプラグインの[プロファイルの **Capture Profile** ボタンを使用してプロファイルをキャプチャできます。まだ実行されていない場合は、上記の「プロファイラのインストール」セクションのスクリプトを使用して TensorBoard インスタンスを起動してください。
 
     以下に例を示します。
 
@@ -553,7 +553,7 @@ for step, train_data in enumerate(dataset):
 
 プロファイラは、4 種類の軸に沿って多数の使用事例をカバーしています。これらの組み合わせの中には、現在サポートされているものもあれば、今後の追加が予定されているものもあります。次に一部の使用事例を示します。
 
-- *Local vs. remote profiling*: These are two common ways of setting up your profiling environment. In local profiling, the profiling API is called on the same machine your model is executing, for example, a local workstation with GPUs. In remote profiling, the profiling API is called on a different machine from where your model is executing, for example, on a Cloud TPU.
+- ローカルプロファイリングとリモートプロファイリング: これら 2 つは、プロファイリング環境を設定するための一般的な方法です。ローカルプロファイリングでは、モデルが実行されているのと同じマシン（GPU を備えたローカルのワークステーションなど）でプロファイリング API が呼び出されます。リモートプロファイリングでは、モデルが実行されているマシンとは異なるマシン（Cloud TPU 上など）でプロファイリング API が呼び出されます。
 - 複数のワーカーのプロファイリング: TensorFlow の分散トレーニング機能を使用すると、複数のマシンをプロファイリングできます。
 - ハードウェアプラットフォーム: CPU、GPU、TPU のプロファイリング。
 
