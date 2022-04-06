@@ -28,7 +28,7 @@ TensorFlow の連合学習データセットは、連合学習で解決できる
 
 - [**StackOverflow**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data)言語モデリングや教師あり学習タスク用の現実的なテキストデータセット。342,477人のユニークユーザーがトレーニングセットで135,818,730例（センテンス）を使用します。
 
-- [**Federated EMNIST**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/emnist/load_data) A federated pre-processing of the EMNIST character and digit dataset, where each client corresponds to a different writer. The full train set contains 3400 users with 671,585 examples from 62 labels.
+- [**Federated EMNIST**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/emnist/load_data)各クライアントが異なるライターに対応する、EMNIST文字と数字のデータセットの連合前処理。完全なトレインセットには、62のラベルからの671,585の例を持つ3400人のユーザーが含まれています。
 
 - [**Shakespeare**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/shakespeare/load_data)ウィリアムシェイクスピアの全作品に基づいた、文字レベルの小さなテキストデータセット。 データセットは715人のユーザー（シェイクスピア劇のキャラクター）で構成されます。各例は、特定の劇のキャラクターが話す連続した一連の行に対応しています。
 
