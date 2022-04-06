@@ -22,7 +22,7 @@ Fairness Indicators は二進数とマルチクラスの分類子において一
 pip パッケージダウンロードには次の項目が含まれています。
 
 - **[Tensorflow Data Validation（TFDV）](https://www.tensorflow.org/tfx/data_validation/get_started)**
-- ****[Tensorflow Model Analysis（TFMA）](https://www.tensorflow.org/tfx/model_analysis/get_started)****
+- **[Tensorflow Model Analysis（TFMA）](https://www.tensorflow.org/tfx/model_analysis/get_started)**
     - **Fairness Indicators**
 - **[What-If Tool（WIT）](https://www.tensorflow.org/tensorboard/what_if_tool)**
 
