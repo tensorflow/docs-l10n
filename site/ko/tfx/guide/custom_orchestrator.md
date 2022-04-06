@@ -11,15 +11,12 @@ TFX는 여러 환경 및 오케스트레이션 프레임워크로 이식할 수 
 이 오케 스트레이터는 Python DSL에서 사용할 수 있습니다.
 
 ```python
-from tfx.orchestration import pipeline
-from tfx.orchestration.local import local_dag_runner
-
-def _create_pipeline(...) -> pipeline.Pipeline:
+def _create_pipeline(...) -> dsl.Pipeline:
   ...
-  return pipeline.Pipeline(...)
+  return dsl.Pipeline(...)
 
 if __name__ == '__main__':
-  local_dag_runner.LocalDagRunner().run(_create_pipeline(...))
+  orchestration.LocalDagRunner().run(_create_pipeline(...))
 ```
 
 위의 Python DSL 파일(이름이 dsl.py라고 가정)을 실행하려면 간단히 다음을 수행합니다.
