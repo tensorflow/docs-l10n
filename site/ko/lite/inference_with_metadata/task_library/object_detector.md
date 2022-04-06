@@ -94,7 +94,7 @@ const DetectionResult result = object_detector->Detect(*frame_buffer).value();
 
 ## 예제 결과
 
-Here is an example of the detection results of [ssd mobilenet v1](https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1) from TensorFlow Hub.
+다음은 TensorFlow Hub에서 [ssd mobilenet v1](https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1)의 감지 결과를 보여주는 예입니다.
 
 <img src="images/dogs.jpg" alt="개" width="50%">
 
@@ -137,18 +137,18 @@ Results:
 
     - 위치 텐서(kTfLiteFloat32)
 
-        - tensor of size `[1 x num_results x 4]`, the inner array representing bounding boxes in the form [top, left, right, bottom].
+        - `[1 x num_results x 4]` 크기의 텐서, [top, left, right, bottom] 형식의 경계 상자를 나타내는 내부 배열입니다.
         - BoundingBoxProperties는 메타데이터에 첨부되어야 하며 `type=BOUNDARIES` 및 `coordinate_type = RATIO를 지정해야 합니다.
 
     - 클래스 텐서(kTfLiteFloat32)
 
-        - tensor of size `[1 x num_results]`, each value representing the integer index of a class.
+        - `[1 x num_results]` 크기의 텐서, 각 값은 클래스의 정수 인덱스를 나타냅니다.
         - 선택적(그러나 권장함) 레이블 맵은 한 줄에 하나의 레이블을 포함하여 TENSOR_VALUE_LABELS 유형의 AssociatedFile-s로 첨부할 수 있습니다. [예제 레이블 파일](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/python/tests/testdata/object_detector/labelmap.txt)을 참조하세요. 이러한 첫 번째 AssociatedFile(있는 경우)은 결과의 `class_name` 필드를 채우는 데 사용됩니다. `display_name` 필드는 생성 시 사용된 `ObjectDetectorOptions`의 `display_names_locale` 필드와 로케일이 일치하는 AssociatedFile(있는 경우)로부터 채워집니다(기본적으로 "en", 즉 영어). 이들 중 어느 것도 사용할 수 없는 경우, 결과의 `index` 필드만 채워집니다.
 
     - 스코어 텐서(kTfLiteFloat32)
 
         - `[1 x num_results]` 크기의 텐서, 각 값은 감지된 객체의 스코어를 나타냅니다.
 
-    - Number of detection tensor (kTfLiteFloat32)
+    - 감지 텐서의 수(kTfLiteFloat32)
 
-        - integer num_results as a tensor of size `[1]`.
+        - `[1]` 크기의 텐서인 정수 num_results
