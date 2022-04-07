@@ -330,6 +330,6 @@ MLMD 라이브러리에는 ML 파이프라인과 함께 쉽게 사용할 수 있
 
 속성 및 1홉 이웃 노드에서 MLMD 선언적 노드 필터링 기능을 사용하는 방법을 알아보려면 [MLMD 선언적 노드 필터링](https://github.com/google/ml-metadata/blob/v1.2.0/ml_metadata/proto/metadata_store.proto#L708-L786)을 확인하세요.
 
-Also check out the [MLMD tutorial](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial) to learn how to use MLMD to trace the lineage of your pipeline components.
+또한 [MLMD 튜토리얼](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial)에서 MLMD를 사용하여 파이프라인 구성 요소의 계보를 추적하는 방법을 알아보세요.
 
 MLMD는 릴리스 간에 스키마와 데이터 마이그레이션을 처리하는 유틸리티를 제공합니다. 자세한 내용은 MLMD [가이드](https://github.com/google/ml-metadata/blob/master/g3doc/get_started.md#upgrade-the-mlmd-library)를 참조하세요.
