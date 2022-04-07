@@ -85,7 +85,7 @@ xla::CustomCall(&b, "do_custom_call", /*operands=*/{param0, param1},
 
 ## 오류 신호 보내기.
 
-If your custom call encounters an error, you can signal the error to the XLA runtime (instead of e.g. crashing or returning nonsense in the output buffers) by using the following signature for your function on CPU:
+사용자 정의 호출에 오류가 발생하면 CPU의 함수에 대해 다음 서명을 사용하여 예를 들어, 충돌 또는 출력 버퍼에서 넌센스를 반환하는 대신 XLA 런타임에 오류 신호를 보낼 수 있습니다.
 
 ```c++
 #include "tensorflow/compiler/xla/service/custom_call_status.h"
@@ -93,7 +93,7 @@ If your custom call encounters an error, you can signal the error to the XLA run
 void do_custom_call(void* out, const void** in, XlaCustomCallStatus* status);
 ```
 
-... and on GPU:
+...그리고 GPU의 경우:
 
 ```c++
 #include "tensorflow/compiler/xla/service/custom_call_status.h"
