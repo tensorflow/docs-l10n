@@ -40,13 +40,13 @@ dependencies {
 
 #### 3단계: 빌드하고 실행합니다.
 
-Run → Run ‘app’. When you run the application you will see a button for enabling the GPU. Change from quantized to a float model and then click GPU to run on the GPU.
+실행 → '앱'을 실행합니다. 애플리케이션을 실행하면 GPU 활성화 버튼이 표시됩니다. 양자화에서 부동 모델로 변경한 다음 GPU를 클릭하여 GPU에서 실행합니다.
 
 ![Android GPU 데모 실행 및 GPU로 전환](images/android_gpu_demo.gif)
 
 ### iOS(XCode 포함)
 
-For a step-by-step tutorial, watch the [GPU Delegate for iOS](https://youtu.be/a5H4Zwjp49c) video.
+단계별 가이드는 [GPU Delegate for iOS](https://youtu.be/a5H4Zwjp49c) 동영상을 시청하세요.
 
 참고: XCode v10.1 이상이 필요합니다.
 
