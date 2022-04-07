@@ -20,4 +20,10 @@ TFF는 컴퓨팅을 핵심으로 페더레이션했으므로 TFF의 작성자는
 
 ## 어떻게 기여할 수 있습니까?
 
-[README](../README.md) 및 [기여자 가이드라인](../CONTRIBUTING.md)을 참조하세요.
+See the [README](../README.md), [guidelines for contributors](../CONTRIBUTING.md), and [collaborations](collaborations/README.md).
+
+## FedJAX와 TensorFlow Federated의 관계는 무엇입니까?
+
+TensorFlow Federated(TFF)는 다양한 알고리즘과 기능을 쉽게 구성하고 다양한 시뮬레이션 및 배포 시나리오에서 코드를 이식할 수 있도록 설계된 통합 학습 및 분석을 위한 본격적인 프레임워크입니다. TFF는 확장 가능한 런타임을 제공하고 표준 API를 통해 많은 개인 정보 보호, 압축 및 최적화 알고리즘을 지원합니다. TFF는 또한 [google-research repo](https://github.com/google-research/federated) 에 게시된 Google 논문의 예 모음과 함께 [다양한 유형의 FL 연구를](https://www.tensorflow.org/federated/tff_for_research) 지원합니다.
+
+대조적으로, [FedJAX](https://github.com/google/fedjax) 는 연구 목적을 위한 연합 학습 알고리즘의 사용 용이성과 신속한 프로토타이핑에 중점을 둔 경량 Python 및 JAX 기반 시뮬레이션 라이브러리입니다. TensorFlow Federated 및 FedJAX는 코드 이식성에 대한 기대 없이 별도의 프로젝트로 개발됩니다.
