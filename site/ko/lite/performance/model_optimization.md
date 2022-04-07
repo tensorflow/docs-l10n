@@ -52,10 +52,10 @@ TensorFlow Lite에서는 다음 유형의 양자화를 사용할 수 있습니�
 
 기술 | 데이터 요구 사항 | 크기 축소 | 정확성 | 지원되는 하드웨어
 --- | --- | --- | --- | ---
-[Post-training float16 quantization](post_training_float16_quant.ipynb) | 데이터 없음 | 최대 50% | 사소한 정확성 손실 | CPU, GPU
-[Post-training dynamic range quantization](post_training_quant.ipynb) | 데이터 없음 | 최대 75% | 최소 정확성 손실 | CPU, GPU(Android)
-[Post-training integer quantization](post_training_integer_quant.ipynb) | 레이블이 없는 대표 샘플 | 최대 75% | 적은 정확성 손실 | CPU, GPU(Android), 에지 TPU, Hexagon DSP
-[Quantization-aware training](http://www.tensorflow.org/model_optimization/guide/quantization/training) | 레이블이 지정된 훈련 데이터 | 최대 75% | Smallest accuracy loss | CPU, GPU(Android), 에지 TPU, Hexagon DSP
+훈련 후 float16 양자화 | 데이터 없음 | 최대 50% | 사소한 정확성 손실 | CPU, GPU
+훈련 후 동적 범위 양자화 | 데이터 없음 | 최대 75% | 최소 정확성 손실 | CPU, GPU(Android)
+훈련 후 정수 양자화 | 레이블이 없는 대표 샘플 | 최대 75% | 적은 정확성 손실 | CPU, GPU(Android), 에지 TPU, Hexagon DSP
+양자화 인식 훈련 | 레이블이 지정된 훈련 데이터 | 최대 75% | 최소 정확성 손실 | CPU, GPU(Android), 에지 TPU, Hexagon DSP
 
 다음 의사 결정 트리는 단순히 예상되는 모델 크기와 정확도만 따져서 모델에 사용해야 할 수 있는 양자화 체계를 선택하는 데 도움이 됩니다.
 
@@ -137,7 +137,7 @@ TensorFlow Lite에서는 다음 유형의 양자화를 사용할 수 있습니�
 
 ## 개발 워크플로
 
-As a starting point, check if the models in [hosted models](../guide/hosted_models.md) can work for your application. If not, we recommend that users start with the [post-training quantization tool](post_training_quantization.md) since this is broadly applicable and does not require training data.
+[호스팅된 모델](../guide/hosted_models.md)에서 클러스터링된 모델이 애플리케이션에서 동작할 수 있는지 확인하는 것으로 시작해보세요. 그렇지 않은 경우 광범위하게 적용할 수 있고 훈련 데이터가 필요하지 않으므로 사용자가 [훈련 후 양자화 도구](post_training_quantization.md)로 시작하는 것이 좋습니다.
 
 정확성 및 지연 시간 목표가 충족되지 않거나 하드웨어 가속기 지원이 중요한 경우 [양자화 인식 훈련](https://www.tensorflow.org/model_optimization/guide/quantization/training){:.external}이 더 나은 옵션입니다. [TensorFlow 모델 최적화 도구 키트](https://www.tensorflow.org/model_optimization)에서 추가 최적화 기술을 참조하세요.
 
