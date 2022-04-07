@@ -1,6 +1,6 @@
 # Cloud AI Platform 파이프라인의 TFX
 
-## Introduction
+## 시작하기
 
 This tutorial is designed to introduce [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx) and [AIPlatform Pipelines] (https://cloud.google.com/ai-platform/pipelines/docs/introduction), and help you learn to create your own machine learning pipelines on Google Cloud. It shows integration with TFX, AI Platform Pipelines, and Kubeflow, as well as interaction with TFX in Jupyter notebooks.
 
@@ -131,7 +131,6 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     2. Under **Machine configuration** you may want to select a configuration with 1 or 2 vCPUs if you need to stay in the free tier.
 
-
         <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
     3. Wait for the new notebook to be created, and then click **Enable Notebooks API**
@@ -202,7 +201,7 @@ Edit the next notebook cell to set a name for your pipeline. In this tutorial we
 
 ```python
 PIPELINE_NAME="my_pipeline"
-PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
+PROJECT_DIR=os.path.join(os.path.expanduser("~"),"deployed_notebook",PIPELINE_NAME)
 ```
 
 The notebook then uses the `tfx` CLI to copy the pipeline template. This tutorial uses the Chicago Taxi dataset to perform binary classification, so the template sets the model to `taxi`:
@@ -471,7 +470,7 @@ Deployment targets receive new models from well-known locations
 - TensorFlow Serving
 - TensorFlow Lite
 - TensorFlow JS
-- TensorFlow Hub
+- TensorFlow 허브
 
 ### Components
 
