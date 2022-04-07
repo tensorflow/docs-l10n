@@ -153,7 +153,7 @@ while True:
 
 ### 추상 인터페이스
 
-In order to standardize dealing with simulated federated data sets, TFF provides an abstract interface `tff.simulation.datasets.ClientData`, which allows one to enumerate the set of clients, and to construct a `tf.data.Dataset` that contains the data of a particular client. Those `tf.data.Dataset`s can be fed directly as input to the generated federated computations in eager mode.
+시뮬레이션된 페더레이션 데이터세트 처리를 표준화하기 위해 TFF는 클라이언트 세트를 열거하고 특정 클라이언트의 데이터를 포함하는 `tf.data.Dataset`를 구성할 수 있는 추상 인터페이스인 `tff.simulation.datasets.ClientData`를 제공합니다. 이러한 `tf.data.Dataset`은 강제 실행 모드에서 생성된 페더레이션 계산에 입력으로 직접 공급될 수 있습니다.
 
 클라이언트 ID에 액세스하는 기능은 시뮬레이션에 사용하기 위해 데이터세트에서만 제공되는 기능으로, 클라이언트의 특정 하위 세트에서 데이터에 대해 훈련하는 기능이 필요할 수 있습니다(예: 다양한 클라이언트 유형의 하루 동안의 가용성을 시뮬레이션합니다). 컴파일된 계산 및 기본 런타임에는 클라이언트 ID의 개념이 포함되지 *않습니다*. 특정 클라이언트 하위 세트의 데이터가 입력으로 선택되면(예: `tff.templates.IterativeProcess.next` 호출), 클라이언트 ID가 더 이상 표시되지 않습니다.
 
