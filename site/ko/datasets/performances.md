@@ -2,7 +2,7 @@
 
 This document provides TensorFlow Datasets (TFDS)-specific performance tips. Note that TFDS provides datasets as `tf.data.Dataset` objects, so the advice from the [`tf.data` guide](https://www.tensorflow.org/guide/data_performance#optimize_performance) still applies.
 
-## Benchmark datasets
+## 벤치마크 데이터세트
 
 Use `tfds.benchmark(ds)` to benchmark any `tf.data.Dataset` object.
 
@@ -22,9 +22,9 @@ All TFDS datasets store the data on disk in the [`TFRecord`](https://www.tensorf
 
 As those datasets fit in memory, it is possible to significantly improve the performance by caching or pre-loading the dataset. Note that TFDS automatically caches small datasets (the following section has the details).
 
-### Caching the dataset
+### 데이터세트 캐싱하기
 
-Here is an example of a data pipeline which explicitly caches the dataset after normalizing the images.
+다음은 이미지를 정규화한 후 데이터세트를 명시적으로 캐싱하는 데이터 파이프라인의 예입니다.
 
 ```python
 def normalize_img(image, label):
@@ -53,20 +53,20 @@ ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
 
 - [[1] Vectorizing mapping](https://www.tensorflow.org/guide/data_performance#vectorizing_mapping)
 
-When iterating over this dataset, the second iteration will be much faster than the first one thanks to the caching.
+이 데이터세트를 반복할 때 두 번째 반복은 캐싱 덕분에 첫 번째 반복보다 훨씬 빠릅니다.
 
 ### 자동 캐싱
 
 By default, TFDS auto-caches (with `ds.cache()`) datasets which satisfy the following constraints:
 
-- Total dataset size (all splits) is defined and &lt; 250 MiB
-- `shuffle_files` is disabled, or only a single shard is read
+- 총 데이터세트 크기(모든 분할)가 정의되고 &lt; 250MiB
+- `shuffle_files`가 비활성화되었거나 단일 샤드만 읽을 때
 
-It is possible to opt out of auto-caching by passing `try_autocaching=False` to `tfds.ReadConfig` in `tfds.load`. Have a look at the dataset catalog documentation to see if a specific dataset will use auto-cache.
+`tfds.load`에서 `try_autocaching=False`를 `tfds.ReadConfig`에 전달하여 자동 캐싱을 거부할 수 있습니다. 특정 데이터세트가 자동 캐싱을 사용할지 여부를 확인하려면 데이터세트 카탈로그 설명서를 살펴보세요.
 
-### Loading the full data as a single Tensor
+### 전체 데이터를 단일 텐서로 로드하기
 
-If your dataset fits into memory, you can also load the full dataset as a single Tensor or NumPy array. It is possible to do so by setting `batch_size=-1` to batch all examples in a single `tf.Tensor`. Then use `tfds.as_numpy` for the conversion from `tf.Tensor` to `np.array`.
+데이터세트가 메모리에 저장하기 적합한 경우, 전체 데이터세트를 단일 텐서 또는 NumPy 배열로 로드할 수도 있습니다. `batch_size=-1`를 설정하여 모든 예제를 단일 `tf.Tensor`로 배치 처리할 수 ​​있습니다. 그런 다음, `tfds.as_numpy`를 사용하여 `tf.Tensor`에서 `np.array`로 변환합니다.
 
 ```python
 (img_train, label_train), (img_test, label_test) = tfds.as_numpy(tfds.load(
@@ -77,15 +77,15 @@ If your dataset fits into memory, you can also load the full dataset as a single
 ))
 ```
 
-## Large datasets
+## 큰 데이터세트
 
 Large datasets are sharded (split in multiple files) and typically do not fit in memory, so they should not be cached.
 
-### Shuffle and training
+### 셔플링 및 훈련
 
 During training, it's important to shuffle the data well - poorly shuffled data can result in lower training accuracy.
 
-In addition to using `ds.shuffle` to shuffle records, you should also set `shuffle_files=True` to get good shuffling behavior for larger datasets that are sharded into multiple files. Otherwise, epochs will read the shards in the same order, and so data won't be truly randomized.
+`ds.shuffle`을 사용하여 레코드를 셔플하는 것 외에도 `shuffle_files=True`를 설정하여 여러 파일로 샤딩된 큰 데이터세트에 좋은 셔플링 동작을 가져와야 합니다. 그렇지 않으면, epoch는 샤드를 같은 순서로 읽으므로 데이터가 실제로 무작위화되지는 않습니다.
 
 ```python
 ds = tfds.load('imagenet2012', split='train', shuffle_files=True)
@@ -95,7 +95,7 @@ Additionally, when `shuffle_files=True`, TFDS disables [`options.deterministic`]
 
 ### Auto-shard your data across workers (TF)
 
-When training on multiple workers, you can use the `input_context` argument of `tfds.ReadConfig`, so each worker will read a subset of the data.
+여러 사용자에 대해 훈련할 때 `tfds.ReadConfig`의 `input_context` 인수를 사용하면 각 사용자가 데이터의 하위 세트를 읽을 수 있습니다.
 
 ```python
 input_context = tf.distribute.InputContext(
@@ -110,7 +110,7 @@ ds = tfds.load('dataset', split='train', read_config=read_config)
 
 This is complementary to the subsplit API. First, the subplit API is applied: `train[:50%]` is converted into a list of files to read. Then, a `ds.shard()` op is applied on those files. For example, when using `train[:50%]` with `num_input_pipelines=2`, each of the 2 workers will read 1/4 of the data.
 
-When `shuffle_files=True`, files are shuffled within one worker, but not across workers. Each worker will read the same subset of files between epochs.
+`shuffle_files=True`일 때, 파일은 한 작업자 내에서 셔플되지만 작업자 간에는 셔플되지 않습니다. 각 작업자는 Epoch 간에 파일의 같은 하위 세트를 읽습니다.
 
 Note: When using `tf.distribute.Strategy`, the `input_context` can be automatically created with [distribute_datasets_from_function](https://www.tensorflow.org/api_docs/python/tf/distribute/Strategy#distribute_datasets_from_function)
 
@@ -136,9 +136,9 @@ split = splits[jax.process_index()]
 By default, TFDS automatically decodes images. However, there are cases where it can be more performant to skip the image decoding with `tfds.decode.SkipDecoding` and manually apply the `tf.io.decode_image` op:
 
 - When filtering examples (with `tf.data.Dataset.filter`), to decode images after examples have been filtered.
-- When cropping images, to use the fused `tf.image.decode_and_crop_jpeg` op.
+- 이미지를 자를 때, 융합`tf.image.decode_and_crop_jpeg` op를 사용합니다.
 
-The code for both examples is available in the [decode guide](https://www.tensorflow.org/datasets/decode#usage_examples).
+두 예제 모두에 대한 코드는 [디코딩 가이드](https://www.tensorflow.org/datasets/decode#usage_examples)에서 사용할 수 있습니다.
 
 ### Skip unused features
 
