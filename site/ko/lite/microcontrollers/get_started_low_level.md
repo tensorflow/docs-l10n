@@ -4,7 +4,7 @@
 
 ## Hello World 예제
 
-The [Hello World](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world) example is designed to demonstrate the absolute basics of using TensorFlow Lite for Microcontrollers. We train and run a model that replicates a sine function, i.e, it takes a single number as its input, and outputs the number's [sine](https://en.wikipedia.org/wiki/Sine) value. When deployed to the microcontroller, its predictions are used to either blink LEDs or control an animation.
+[Hello World](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world) 예제는 마이크로컨트롤러용 TensorFlow Lite 사용의 절대적인 기본 사항을 보여주기 위해 설계되었습니다. 우리는 sine 함수를 복제하는 모델을 훈련하고 실행합니다. 즉, 단일 숫자를 입력으로 간주하고 해당 숫자의 [sine](https://en.wikipedia.org/wiki/Sine)값을 출력합니다. 마이크로컨트롤러에 배포할 때, 예측을 사용하여 LED를 깜박이거나 애니메이션을 제어합니다.
 
 전체 워크플로에는 다음 단계가 포함됩니다.
 
@@ -20,7 +20,7 @@ The example application we'll be using has been tested on the following devices:
 - [STM32F746 Discovery 키트](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html)(Mbed 사용)
 - [Adafruit EdgeBadge](https://www.adafruit.com/product/4400)(Arduino IDE 사용)
 - [마이크로컨트롤러용 Adafruit TensorFlow Lite 키트](https://www.adafruit.com/product/4317)(Arduino IDE 사용)
-- [Adafruit Circuit Playground Bluefruit](https://learn.adafruit.com/tensorflow-lite-for-circuit-playground-bluefruit-quickstart?view=all) (using Arduino IDE)
+- [Adafruit Circuit Playground Bluefruit](https://learn.adafruit.com/tensorflow-lite-for-circuit-playground-bluefruit-quickstart?view=all)(Arduino IDE 사용)
 - [Espressif ESP32-DevKitC](https://www.espressif.com/en/products/hardware/esp32-devkitc/overview)(ESP IDF 사용)
 - [Espressif ESP-EYE](https://www.espressif.com/en/products/hardware/esp-eye/overview)(ESP IDF 사용)
 
@@ -32,7 +32,7 @@ The example application we'll be using has been tested on the following devices:
 
 Google Colaboratory를 사용하여 [자신의 모델을 훈련](https://colab.research.google.com/github/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb)시키세요. 자세한 내용은 `README.md`를 참조하세요.
 
-<a class="button button-primary" href="https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/train/README.md">Hello World Training README.md</a>
+<a class="button button-primary" href="https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/train/README.md">Hello World 훈련 README.md</a>
 
 ## Run inference
 
@@ -40,7 +40,7 @@ To run the model on your device, we will walk through the instructions in the `R
 
 <a class="button button-primary" href="https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/README.md">Hello World README.md</a>
 
-The following sections walk through the example's [`hello_world_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/hello_world_test.cc), unit test which demonstrates how to run inference using TensorFlow Lite for Microcontrollers. It loads the model and runs inference several times.
+다음 섹션에서는 마이크로컨트롤러용 TensorFlow Lite를 사용하여 추론을 실행하는 방법을 보여주는 단위 테스트인 예제의 [`hello_world_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/hello_world_test.cc)를 살펴보겠니다. 이 예제에서는 모델을 로드하고 추론을 여러 번 실행합니다.
 
 ### 1. 라이브러리 헤더 포함
 
@@ -54,10 +54,10 @@ The following sections walk through the example's [`hello_world_test.cc`](https:
 #include "tensorflow/lite/version.h"
 ```
 
-- [`all_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/all_ops_resolver.h) provides the operations used by the interpreter to run the model.
-- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_error_reporter.h) outputs debug information.
-- [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_interpreter.h) contains code to load and run models.
-- [`schema_generated.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/schema/schema_generated.h) contains the schema for the TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) model file format.
+- [`all_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/all_ops_resolver.h)는 인터프리터가 모델을 실행하는 데 사용하는 연산을 제공합니다.
+- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_error_reporter.h)는 디버그 정보를 출력합니다.
+- [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_interpreter.h)에는 모델을 로드하고 실행하는 코드가 포함됩니다.
+- [`schema_generated.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/schema/schema_generated.h)에는 TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) 모델 파일 형식에 대한 스키마가 포함됩니다.
 - [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h) provides versioning information for the TensorFlow Lite schema.
 
 ### 2. 모델 헤더 포함
@@ -118,7 +118,7 @@ if (model->version() != TFLITE_SCHEMA_VERSION) {
 
 ### 6. Instantiate operations resolver
 
-An [`AllOpsResolver`](github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/all_ops_resolver.h) instance is declared. This will be used by the interpreter to access the operations that are used by the model:
+[`AllOpsResolver`](github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/all_ops_resolver.h) 인스턴스가 선언됩니다. 이 인스턴스를 통해 인터프리터는 모델에서 사용하는 연산에 접근할 수 있습니다.
 
 ```C++
 tflite::AllOpsResolver resolver;
@@ -126,7 +126,7 @@ tflite::AllOpsResolver resolver;
 
 `AllOpsResolver`는 마이크로컨트롤러용 TensorFlow Lite에서 사용할 수 있는 모든 연산을 로드하며, 여기에 많은 메모리가 사용됩니다. 특정 모델은 이러한 연산의 일부만 사용하므로 실제 애플리케이션에서는 필요한 연산만 로드하는 것이 좋습니다.
 
-This is done using a different class, `MicroMutableOpResolver`. You can see how to use it in the *Micro speech* example's [`micro_speech_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc).
+이 작업을 위해 다른 클래스인 `MicroMutableOpResolver`를 사용합니다. *Micro Speech* 예제의 [`micro_speech_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc)에서 사용하는 방법을 확인할 수 있습니다.
 
 ### 7. 메모리 할당
 
@@ -183,7 +183,7 @@ TF_LITE_MICRO_EXPECT_EQ(1, input->dims->data[1]);
 TF_LITE_MICRO_EXPECT_EQ(kTfLiteFloat32, input->type);
 ```
 
-The enum value `kTfLiteFloat32` is a reference to one of the TensorFlow Lite data types, and is defined in [`common.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/c/common.h).
+열거 값 `kTfLiteFloat32`는 TensorFlow Lite 데이터 유형 중 하나에 대한 참조이며 [`common.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/c/common.h)에서 정의됩니다.
 
 ### 11. 입력 값 제공
 
@@ -206,7 +206,7 @@ if (invoke_status != kTfLiteOk) {
 }
 ```
 
-We can check the return value, a `TfLiteStatus`, to determine if the run was successful. The possible values of `TfLiteStatus`, defined in [`common.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/c/common.h), are `kTfLiteOk` and `kTfLiteError`.
+반환 값인 `TfLiteStatus`를 확인하여 실행이 성공적인지 결정할 수 있습니다. [`common.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/c/common.h)에 정의된 `TfLiteStatus`의 가능한 값은 `kTfLiteOk` 및 `kTfLiteError`입니다.
 
 다음 코드에서 값이 `kTfLiteOk`인 것을 알수 있으며, 이는 추론이 성공적으로 실행되었음을 의미합니다.
 
@@ -260,4 +260,4 @@ TF_LITE_MICRO_EXPECT_NEAR(-0.959, value, 0.05);
 
 ### 15. 애플리케이션 코드 읽기
 
-Once you have walked through this unit test, you should be able to understand the example's application code, located in [`main_functions.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/main_functions.cc). It follows a similar process, but generates an input value based on how many inferences have been run, and calls a device-specific function that displays the model's output to the user.
+이 단위 테스트를 수행하고 나면, [`main_functions.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/main_functions.cc)에 위치해 있는 예제의 애플리케이션 코드를 이해할 수 있습니다. 이들 코드는 유사한 프로세스를 따르지만 실행된 추론의 수에 따라 입력 값을 생성하고 모델의 출력을 사용자에게 표시하는 기기별 함수를 호출합니다.
