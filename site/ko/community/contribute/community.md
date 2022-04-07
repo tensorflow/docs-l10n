@@ -4,7 +4,7 @@
 
 Please read the TensorFlow [Code and Collaboration governance](https://github.com/tensorflow/community/blob/master/governance/code-and-collaboration.md).
 
-## Community support
+## 커뮤니티 지원
 
 Many people [ask questions about TensorFlow on the TensorFlow Forum](https://discuss.tensorflow.org/). Answering those questions and pointing people to the relevant documentation is a great service to the community.
 
@@ -53,7 +53,7 @@ The TensorFlow Community Spotlight Program provides an opportunity to showcase y
 
 Follow the [#TFCommunitySpotlight](https://twitter.com/hashtag/TFCommunitySpotlight?src=hashtag_click) hashtag and find out more about past winners [here](https://blog.tensorflow.org/2020/11/tensorflow-community-spotlight-program-update.html).
 
-## User groups
+## 사용자 그룹
 
 [TensorFlow User Groups](https://www.tensorflow.org/community/groups) (or TFUGs, for short) are local communities of developers and researchers around the world. If you don’t have a TFUG in your country or city, we encourage you to start one by reaching out to [tfug-help@tensorflow.org](mailto:tfug-help@tensorflow.org).
 
