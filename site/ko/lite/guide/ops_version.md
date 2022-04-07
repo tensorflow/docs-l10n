@@ -22,10 +22,11 @@ Op에 새 매개변수를 추가하려면 `lite/schema/schema.fbs`의 옵션 테
 예를 들어, 컨볼루션의 옵션 테이블은 다음과 같습니다.
 
 ```
-table Conv2DOptions {
+table DepthwiseConv2DOptions {
   padding:Padding;
   stride_w:int;
   stride_h:int;
+  depth_multiplier:int;
   fused_activation_function:ActivationFunctionType;
 }
 ```
@@ -64,24 +65,25 @@ typedef struct {
   TfLitePadding padding;
   int stride_width;
   int stride_height;
+  int depth_multiplier;
   TfLiteFusedActivation activation;
-} TfLiteConvParams;
+} TfLiteDepthwiseConvParams;
 ```
 
 FlatBuffer 스키마와 마찬가지로 어떤 버전부터 어떤 매개변수가 지원되는지를 나타내는 주석을 추가합니다. 결과는 다음과 같습니다.
 
 ```
 typedef struct {
-  // Parameters supported by version 1:
+  // Parameters for DepthwiseConv version 1 or above.
   TfLitePadding padding;
   int stride_width;
   int stride_height;
+  int depth_multiplier;
   TfLiteFusedActivation activation;
-
-  // Parameters supported by version 2:
+  // Parameters for DepthwiseConv version 2 or above.
   int dilation_width_factor;
   int dilation_height_factor;
-} TfLiteConvParams;
+} TfLiteDepthwiseConvParams;
 ```
 
 C 구조에서 새로 추가된 매개변수를 읽으려면 커널 구현도 변경하세요. 여기서는 자세한 내용을 다루지 않습니다.
@@ -93,19 +95,36 @@ FlatBuffer를 읽고 C 구조를 생성하는 로직은 `lite/core/api/flatbuffe
 아래와 같이 새 매개변수를 처리하도록 파일을 업데이트합니다.
 
 ```
-case BuiltinOperator_CONV_2D: {
-  TfLiteConvParams* params = MallocPOD<TfLiteConvParams>();
-  if (auto* conv_params = op->builtin_options_as_Conv2DOptions()) {
-    params->padding = parse_padding(conv_params->padding());
-    params->stride_width = conv_params->stride_w();
-    params->stride_height = conv_params->stride_h();
+TfLiteStatus ParseDepthwiseConv2D(const Operator* op,
+                                  ErrorReporter* error_reporter,
+                                  BuiltinDataAllocator* allocator,
+                                  void** builtin_data) {
+  CheckParsePointerParams(op, error_reporter, allocator, builtin_data);
+
+  SafeBuiltinDataAllocator safe_allocator(allocator);
+
+  std::unique_ptr<TfLiteDepthwiseConvParams,
+                  SafeBuiltinDataAllocator::BuiltinDataDeleter>
+      params = safe_allocator.Allocate<TfLiteDepthwiseConvParams>();
+  TF_LITE_ENSURE(error_reporter, params != nullptr);
+
+  const DepthwiseConv2DOptions* schema_params =
+      op->builtin_options_as_DepthwiseConv2DOptions();
+
+  if (schema_params != nullptr) {
+    params->padding = ConvertPadding(schema_params->padding());
+    params->stride_width = schema_params->stride_w();
+    params->stride_height = schema_params->stride_h();
+    params->depth_multiplier = schema_params->depth_multiplier();
     params->activation =
-        parse_activation(conv_params->fused_activation_function());
-    params->dilation_width_factor = conv_params->dilation_width_factor();
-    params->dilation_height_factor = conv_params->dilation_height_factor();
+        ConvertActivation(schema_params->fused_activation_function());
+
+    params->dilation_width_factor = schema_params->dilation_w_factor();
+    params->dilation_height_factor = schema_params->dilation_h_factor();
   }
-  *builtin_data = reinterpret_cast<void*>(params);
-  break;
+
+  *builtin_data = params.release();
+  return kTfLiteOk;
 }
 ```
 
@@ -125,13 +144,15 @@ void AddCustom(const char* name, TfLiteRegistration* registration,
 내장 ops는 `lite/kernels/register.cc`에 등록됩니다. 이 예에서는 `Conv2D` 버전 1과 2를 처리할 수 있는 새로운 op 커널을 구현했으므로 다음 줄을 변경해야 합니다.
 
 ```
-AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D());
+AddBuiltin(BuiltinOperator_DEPTHWISE_CONV_2D, Register_DEPTHWISE_CONV_2D());
 ```
 
 위의 줄을 아래 줄로 바꿉니다.
 
 ```
-AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D(), 1, 2);
+AddBuiltin(BuiltinOperator_DEPTHWISE_CONV_2D, Register_DEPTHWISE_CONV_2D(),
+             /* min_version = */ 1,
+             /* max_version = */ 2);
 ```
 
 ### TOCO TFLite exporter 변경하기
@@ -144,7 +165,15 @@ AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D(), 1, 2);
 `DepthwiseConv2D` 케이스에 새 버전을 추가하여 `lite/tools/versioning/op_version.cc`의 연산자에 적합하게 `GetBuiltinOperatorVersion` 함수를 수정합니다.
 
 ```
-int GetVersion(const Operator& op) const override { return 1; }
+case BuiltinOperator_DEPTHWISE_CONV_2D:
+  auto depthwise_conv_params =
+      reinterpret_cast<TfLiteDepthwiseConvParams*>(op_sig.builtin_data);
+  TFLITE_DCHECK(depthwise_conv_params != nullptr);
+  if (depthwise_conv_params->dilation_width_factor != 1 ||
+       depthwise_conv_params->dilation_height_factor != 1) {
+    return 2;
+  }
+  return 1;
 ```
 
 ### 연산자 버전 맵 업데이트하기
@@ -156,14 +185,7 @@ int GetVersion(const Operator& op) const override { return 1; }
 이 예에서는 `op_version_map`에 다음 항목을 추가해야 합니다.
 
 ```
-int GetVersion(const Operator& op) const override {
-  const auto& conv_op = static_cast<const ConvOperator&>(op);
-  if (conv_op.dilation_width_factor != 1 ||
-      conv_op.dilation_height_factor != 1) {
-    return 2;
-  }
-  return 1;
-}
+{{BuiltinOperator_DEPTHWISE_CONV_2D, 2}, %CURRENT_RUNTIME_VERSION%}
 ```
 
 여기서 `%CURRENT_RUNTIME_VERSION%`는 [tensorflow/core/public/version.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h)에 정의된 현재 런타임 버전에 해당합니다.
@@ -173,7 +195,14 @@ int GetVersion(const Operator& op) const override {
 TensorFlow Lite는 하드웨어 백엔드에 ops를 위임할 수 있는 Delegation API를 제공합니다. 대리자의 `Prepare` 함수에서 위임 코드의 모든 노드에 대해 버전이 지원되는지 확인합니다.
 
 ```
-{{OperatorType::kConv, 3}, "kPendingReleaseOpVersion"}
+const int kMaxVersion = 1;
+TfLiteNode* node;
+TfLiteRegistration* registration = nullptr;
+TF_LITE_ENSURE_STATUS(context->GetNodeAndRegistration(context, node_index, &node, &registration));
+
+if (registration->version > kMaxVersion) {
+  // Reject the node if the version isn't supported.
+}
 ```
 
-This is required even if the delegation only supports version 1 ops, so the delegation can detect incompatibility when getting a higher version op.
+위임 코드에서 버전 1 ops만 지원하는 경우에도 이 작업이 필요하므로, 더 높은 버전의 op를 가져올 때 위임 코드에서 비호환성을 감지할 수 있습니다.
