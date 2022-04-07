@@ -7,4 +7,4 @@ TensorFlow Federated(TFF) 플랫폼은 두 개의 레이어로 구성됩니다.
 
 실제 예제를 사용하여 주요 TFF 개념 및 API를 안내 [하는 TFF 자습서로](tutorials/tutorials_overview.md) 시작합니다. [설치 지침](install.md) 에 따라 TFF와 함께 사용할 환경을 구성해야 합니다.
 
-The more detailed guides (see the left sidebar of this page) then provide reference information on important topics.
+더 자세한 가이드(이 페이지의 왼쪽 사이드바 참조)는 중요한 주제에 대한 참조 정보를 제공합니다.
