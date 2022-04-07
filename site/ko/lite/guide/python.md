@@ -14,26 +14,26 @@ Python으로 TensorFlow Lite 모델 실행을 빠르게 시작하려면 모든 T
 
 ## Python용 TensorFlow Lite 설치하기
 
-You can install on Linux with pip:
+다음과 같이 pip를 사용하여 Linux에 설치할 수 있습니다.
 
 <pre class="devsite-terminal devsite-click-to-copy">python3 -m pip install tflite-runtime
 </pre>
 
 ## 지원되는 플랫폼
 
-The `tflite-runtime` Python wheels are pre-built and provided for these platforms:
+`tflite-runtime` Python 휠은 사전에 빌드되어 다음 플랫폼에 제공됩니다.
 
-- Linux armv7l (e.g. Raspberry Pi 2, 3, 4 and Zero 2 running Raspberry Pi OS 32-bit)
-- Linux aarch64 (e.g. Raspberry Pi 3, 4 running Debian ARM64)
+- Linux armv7l(예: Raspberry Pi OS 32비트를 실행하는 Raspberry Pi 2, 3, 4 및 Zero 2)
+- Linux aarch64(예: Debian ARM64를 실행하는 Raspberry Pi 3, 4)
 - Linux x86_64
 
-If you want to run TensorFlow Lite models on other platforms, you should either use the [full TensorFlow package](https://www.tensorflow.org/install/), or [build the tflite-runtime package from source](build_cmake_pip.md).
+다른 플랫폼에서 TensorFlow Lite 모델을 실행하려면 [전체 TensorFlow 패키지](https://www.tensorflow.org/install/)를 사용하거나 [소스로부터 tflite-runtime 패키지를 빌드](build_cmake_pip.md)해야 합니다.
 
-If you're using TensorFlow with the Coral Edge TPU, you should instead follow the appropriate [Coral setup documentation](https://coral.ai/docs/setup).
+Coral Edge TPU로 TensorFlow를 사용하는 경우에는 대신에 적절한 [Coral 설정 문서](https://coral.ai/docs/setup)를 따라야 합니다.
 
-Note: We no longer update the Debian package `python3-tflite-runtime`. The latest Debian package is for TF version 2.5, which you can install by following [these older instructions](https://github.com/tensorflow/tensorflow/blob/v2.5.0/tensorflow/lite/g3doc/guide/python.md#install-tensorflow-lite-for-python).
+참고: 당사는 더 이상 Debian 패키지 `python3-tflite-runtime`을 업데이트하지 않습니다. 최신 Debian 패키지는 TF 버전 2.5용이며 [이전 지침](https://github.com/tensorflow/tensorflow/blob/v2.5.0/tensorflow/lite/g3doc/guide/python.md#install-tensorflow-lite-for-python)에 따라 설치할 수 있습니다.
 
-Note: We no longer release pre-built `tflite-runtime` wheels for Windows and macOS. For these platforms, you should use the [full TensorFlow package](https://www.tensorflow.org/install/), or [build the tflite-runtime package from source](build_cmake_pip.md).
+참고: 당사는 더 이상 Windows 및 macOS용으로 사전 빌드된 `tflite-runtime` 휠을 릴리스하지 않습니다. 이러한 플랫폼의 경우 [전체 TensorFlow 패키지](https://www.tensorflow.org/install/)를 사용하거나 [소스로부터 tflite-runtime 패키지를 빌드](build_cmake_pip.md)해야 합니다.
 
 ## tflite_runtime을 사용하여 추론 실행하기
 
@@ -69,10 +69,10 @@ interpreter = tflite.Interpreter(model_path=args.model_file)
 
 - `Interpreter` API에 대한 자세한 내용은 [Python에서 모델 로드 및 실행하기](inference.md#load-and-run-a-model-in-python)를 참조하세요.
 
-- If you have a Raspberry Pi, check out a [video series](https://www.youtube.com/watch?v=mNjXEybFn98&list=PLQY2H8rRoyvz_anznBg6y3VhuSMcpN9oe) about how to run object detection on Raspberry Pi using TensorFlow Lite.
+- Raspberry Pi를 보유하고 있는 경우 TensorFlow Lite를 사용하여 Raspberry Pi에서 객체 감지를 실행하는 방법에 대한 [동영상 시리즈](https://www.youtube.com/watch?v=mNjXEybFn98&list=PLQY2H8rRoyvz_anznBg6y3VhuSMcpN9oe)를 확인하세요.
 
 - Coral ML 가속기를 사용하는 경우, [GitHub에서 Coral 예제](https://github.com/google-coral/tflite/tree/master/python/examples)를 확인하세요.
 
-- To convert other TensorFlow models to TensorFlow Lite, read about the [TensorFlow Lite Converter](../convert/).
+- 다른 TensorFlow 모델을 TensorFlow Lite로 변환하려면 [TensorFlow Lite Converter](../convert/)에 대해 읽어보세요.
 
 - `tflite_runtime` 휠을 빌드하려면 [TensorFlow Lite Python 휠 패키지 빌드](build_cmake_pip.md)를 읽으세요.
