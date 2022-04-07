@@ -4,9 +4,9 @@
 
 Federated Core에 대한 간단한 소개를 위해 다음 튜토리얼를 읽어 보세요. 기본 개념 중 일부를 예제로 소개하고 간단한 페더레이션 평균화 알고리즘의 구성을 단계별로 보여줍니다.
 
-- [Custom Federated Algorithms, Part 1: Introduction to the Federated Core](tutorials/custom_federated_algorithms_1.ipynb).
+- [사용자 정의 페더레이션 알고리즘, 1부: Federated Core 소개](tutorials/custom_federated_algorithms_1.ipynb)
 
-- [Custom Federated Algorithms, Part 2: Implementing Federated Averaging](tutorials/custom_federated_algorithms_2.ipynb).
+- [사용자 정의 페더레이션 알고리즘, 2부: 페더레이션 평균화 구현하기](tutorials/custom_federated_algorithms_2.ipynb)
 
 또한, 페더레이션 학습에 Federated Core API(FC API)를 사용하면 이 레이어를 설계할 때 선택한 일부 사항에 대한 중요한 맥락을 이해할 수 있으므로 [페더레이션 학습](federated_learning.md)과 [이미지 분류](tutorials/federated_learning_for_image_classification.ipynb) 및 [텍스트 생성](tutorials/federated_learning_for_text_generation.ipynb)에 관한 관련 튜토리얼에 익숙해지기를 권장합니다.
 
