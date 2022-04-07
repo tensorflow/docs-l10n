@@ -6,7 +6,7 @@ TensorFlow Quantum(TFQ)을 사용하도록 환경을 설정하는 몇 가지 방
 - 로컬 컴퓨터에서 TensorFlow Quantum을 사용하려면 Python의 pip 패키지 관리자를 사용하여 TFQ 패키지를 설치해야 합니다.
 - 또는 소스에서 TensorFlow Quantum을 빌드합니다.
 
-TensorFlow Quantum is supported on Python 3.7, 3.8, and 3.9 and depends directly on [Cirq](https://github.com/quantumlib/Cirq).
+TensorFlow Quantum은 Python 3.7, 3.8 및 3.9에서 지원되며 [Cirq](https://github.com/quantumlib/Cirq)에 직접 의존합니다.
 
 ## Pip 패키지
 
