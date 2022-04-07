@@ -39,7 +39,7 @@ offset = tf.Variable(0.0)
 def sin(x):
   return tf.sin(x + offset, name="Sin")
 
-# Train model
+  # Train model
 optimizer = tf.optimizers.Adam(0.01)
 def train(x, y):
     with tf.GradientTape() as t:
@@ -88,7 +88,7 @@ Registration failed.
 
 ### 연산자를 생성하고 등록합니다.
 
-All TensorFlow Lite operators (both custom and builtin) are defined using a simple pure-C interface that consists of four functions:
+모든 TensorFlow Lite 연산자(사용자 정의 및 내장)는 네 가지 함수로 구성된 간단한 pure-C 인터페이스를 사용하여 정의됩니다.
 
 ```c++
 typedef struct {
@@ -101,11 +101,11 @@ typedef struct {
 
 `TfLiteContext` 및 `TfLiteNode`에 대한 자세한 내용은 [`common.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/common.h)를 참조하세요. 전자는 오류 보고 기능과 모든 텐서를 포함한 전역 객체에 대한 액세스를 제공합니다. 후자는 구현에서 입력과 출력에 액세스할 수 있도록 합니다.
 
-When the interpreter loads a model, it calls `init()` once for each node in the graph. A given `init()` will be called more than once if the op is used multiple times in the graph. For custom ops a configuration buffer will be provided, containing a flexbuffer that maps parameter names to their values. The buffer is empty for builtin ops because the interpreter has already parsed the op parameters. Kernel implementations that require state should initialize it here and transfer ownership to the caller. For each `init()` call, there will be a corresponding call to `free()`, allowing implementations to dispose of the buffer they might have allocated in `init()`.
+인터프리터는 모델을 로드할 때 그래프의 각 노드에 대해 한 번씩 `init()`을 호출합니다. 그래프에서 연산자가 여러 번 사용되면 지정된 `init()`이 두 번 이상 호출됩니다. 사용자 정의 연산자의 경우, 매개변수 이름을 해당 값에 매핑하는 flexbuffer를 포함하는 구성 버퍼가 제공됩니다. 인터프리터가 이미 연산자 매개변수를 구문 분석했기 때문에 내장 연산자에 대한 버퍼는 비어 있습니다. 상태가 필요한 커널 구현은 여기에서 상태를 초기화하고 소유권을 호출자에게 전달해야 합니다. 각 `init()` 호출에서 해당하는 `free()` 호출이 있으므로 구현에서 `init()`에 할당했을 수 있는 버퍼를 삭제할 수 있습니다.
 
-Whenever the input tensors are resized, the interpreter will go through the graph notifying implementations of the change. This gives them the chance to resize their internal buffer, check validity of input shapes and types, and recalculate output shapes. This is all done through `prepare()`, and implementations can access their state using `node->user_data`.
+입력 텐서의 크기가 조정될 때마다 인터프리터는 그래프를 돌며 변경 구현을 알립니다. 그러면 그래프에서 내부 버퍼의 크기를 조정하고 입력 형상과 유형의 유효성을 확인하며 출력 형상을 다시 계산할 수 있습니다. 이 연산은 모두 `prepare()`를 통해 수행되며 구현은 `node->user_data`를 사용하여 해당 상태에 액세스할 수 있습니다.
 
-Finally, each time inference runs, the interpreter traverses the graph calling `invoke()`, and here too the state is available as `node->user_data`.
+마지막으로, 추론이 실행될 때마다 인터프리터는 그래프를 순회하며 `invoke()`를 호출하고, 여기에서도 상태를 `node->user_data`로 사용할 수 있습니다.
 
 사용자 정의 연산자는 일반적으로 다음과 같은 네 가지 함수와 전역 등록 함수를 정의하여 내장 연산자와 완전히 동일한 방식으로 구현할 수 있습니다.
 
@@ -193,7 +193,7 @@ class OpResolver {
 };
 ```
 
-Regular usage requires that you use the `BuiltinOpResolver` and write:
+정규 사용을 위해서는 `BuiltinOpResolver`를 사용하고 다음을 작성해야 합니다.
 
 ```c++
 tflite::ops::builtin::BuiltinOpResolver resolver;
@@ -205,7 +205,7 @@ tflite::ops::builtin::BuiltinOpResolver resolver;
 resolver.AddCustom("Sin", Register_SIN());
 ```
 
-If the set of builtin ops is deemed to be too large, a new `OpResolver` could be code-generated based on a given subset of ops, possibly only the ones contained in a given model. This is the equivalent of TensorFlow's selective registration (and a simple version of it is available in the `tools` directory).
+내장 연산자 세트가 너무 큰 것으로 여겨지면 주어진 연산자 하위 집합(보통은 주어진 모델에 포함된 연산자)을 바탕으로 새 `OpResolver`를 코드로 생성할 수 있습니다. 이는 TensorFlow의 선택적 등록과 동일하며 `tools` 디렉토리에서 간단한 버전을 사용할 수 있습니다.
 
 Java에서 사용자 정의 연산자를 정의하려면, 고유한 사용자 정의 JNI 레이어를 빌드하고 [이 jni 코드](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/builtin_ops_jni.cc)에서 자체 AAR을 컴파일해야 합니다. 마찬가지로, Python에서 사용할 수 있는 이러한 연산자를 정의하려면 [Python 래퍼 코드](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc)에 등록할 수 있습니다.
 
