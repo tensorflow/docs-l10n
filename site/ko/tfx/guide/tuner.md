@@ -99,14 +99,14 @@ trainer = Trainer(
 
 Google Cloud Platform(GCP)에서 실행할 때 Tuner 구성 요소는 두 가지 서비스를 활용할 수 있습니다.
 
-- [AI Platform Vizier](https://cloud.google.com/ai-platform/optimizer/docs/overview) (via CloudTuner implementation)
-- [AI Platform Training](https://cloud.google.com/ai-platform/training/docs) (as a flock manager for distributed tuning)
+- [AI Platform Vizier](https://cloud.google.com/ai-platform/optimizer/docs/overview)(CloudTuner 구현을 통해)
+- [AI Platform Training](https://cloud.google.com/ai-platform/training/docs)(분산 조정을 위한 무리 관리자로)
 
-### AI Platform Vizier as the backend of hyperparameter tuning
+### 하이퍼 매개변수 조정의 백엔드 역할을 하는 AI Platform Vizier
 
-[AI Platform Vizier](https://cloud.google.com/ai-platform/optimizer/docs/overview) is a managed service that performs black box optimization, based on the [Google Vizier](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/bcb15507f4b52991a0783013df4222240e942381.pdf) technology.
+[AI Platform Vizier](https://cloud.google.com/ai-platform/optimizer/docs/overview)는 [Google Vizier](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/bcb15507f4b52991a0783013df4222240e942381.pdf) 기술을 기반으로 블랙 박스 최적화를 수행하는 관리형 서비스입니다.
 
-[CloudTuner](https://github.com/tensorflow/cloud/blob/master/src/python/tensorflow_cloud/tuner/tuner.py) is an implementation of [KerasTuner](https://www.tensorflow.org/tutorials/keras/keras_tuner) which talks to the AI Platform Vizier service as the study backend. Since CloudTuner is a subclass of `keras_tuner.Tuner`, it can be used as a drop-in replacement in the `tuner_fn` module, and execute as a part of the TFX Tuner component.
+[CloudTuner](https://github.com/tensorflow/cloud/blob/master/src/python/tensorflow_cloud/tuner/tuner.py)는 연구용 백엔드로 AI Platform Vizier 서비스와 통신하는 [KerasTuner](https://www.tensorflow.org/tutorials/keras/keras_tuner)를 구현한 것입니다. CloudTuner는 `kerastuner.Tuner`의 서브 클래스이므로 `tuner_fn` 모듈에서 드롭인 교체로 사용하고 TFX Tuner 구성 요소의 일부로 실행할 수 있습니다.
 
 아래는 `CloudTuner`의 사용 방법을 보여주는 코드 조각입니다. `CloudTuner`에 대한 구성에는 `project_id` 및 `region`과 같은 GCP 관련 항목이 필요합니다.
 
@@ -160,22 +160,22 @@ tuner = google_cloud_ai_platform.Tuner(
 
 ```
 
-The behavior and the output of the extension Tuner component is the same as the stock Tuner component, except that multiple hyperparameter searches are executed in parallel on different worker machines, and as a result, the `num_trials` will be completed faster. This is particularly effective when the search algorithm is embarrassingly parallelizable, such as `RandomSearch`. However, if the search algorithm uses information from results of prior trials, such as Google Vizier algorithm implemented in the AI Platform Vizier does, an excessively parallel search would negatively affect the efficacy of the search.
+확장 Tuner 구성 요소의 동작과 출력은 여러 하이퍼 매개변수 검색이 서로 다른 작업자 머신에서 병렬로 실행된다는 점을 제외하면 stock Tuner 구성 요소와 같으며, 그 결과, `num_trials`가 더 빨리 완료됩니다. 이는 `RandomSearch`와 같이 검색 알고리즘이 과도하게 병렬화될 때 특히 효과적입니다. 그러나 AI Platform Optimizer에 구현된 Google Vizier 알고리즘과 같이, 검색 알고리즘이 이전 시도의 결과에서 나온 정보를 사용하면, 과도한 병렬 검색은 검색의 효율성에 부정적인 영향을 미칠 수 있습니다.
 
-Note: Each trial in each parallel search is conducted on a single machine in the worker flock, i.e., each trial does not take advantage of multi-worker distributed training. If multi-worker distribution is desired for each trial, refer to [`DistributingCloudTuner`](https://github.com/tensorflow/cloud/blob/b9c8752f5c53f8722dfc0b5c7e05be52e62597a8/src/python/tensorflow_cloud/tuner/tuner.py#L384-L676), instead of `CloudTuner`.
+참고: 각 병렬 검색의 각 시도는 작업자 무리의 단일 시스템에서 수행됩니다. 즉, 각 시도는 다중 작업자 분산 교육을 활용하지 않습니다. 각 시도에 대해 다중 작업자 분산이 필요한 경우 `CloudTuner` 대신 [`DistributingCloudTuner`](https://github.com/tensorflow/cloud/blob/b9c8752f5c53f8722dfc0b5c7e05be52e62597a8/src/python/tensorflow_cloud/tuner/tuner.py#L384-L676)를 참조하세요.
 
-Note: Both `CloudTuner` and the Google Cloud AI Platform extensions Tuner component can be used together, in which case it allows distributed parallel tuning backed by the AI Platform Vizier's hyperparameter search algorithm. However, in order to do so, the Cloud AI Platform Job must be given access to the AI Platform Vizier service. See this [guide](https://cloud.google.com/ai-platform/training/docs/custom-service-account#custom) to set up a custom service account. After that, you should specify the custom service account for your training job in the pipeline code. More details see [E2E CloudTuner on GCP exmaple](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow_gcp.py).
+참고: `CloudTuner`와 Google Cloud AI Platform 확장 Tuner 구성 요소를 함께 사용할 수 있으며, 이 경우 AI Platform Vizier의 하이퍼 매개변수 검색 알고리즘이 지원하는 분산 병렬 조정이 기능합니다. 그러나 이렇게 하려면 Cloud AI Platform 작업에 AI Platform Vizier 서비스에 대한 액세스 권한이 부여되어야 합니다. 사용자 지정 서비스 계정을 설정하려면 이 [가이드](https://cloud.google.com/ai-platform/training/docs/custom-service-account#custom)를 참조하세요. 그런 다음 파이프라인 코드에서 훈련 작업에 대한 사용자 지정 서비스 계정을 지정해야 합니다. 자세한 내용은 [GCP 예제의 E2E CloudTuner](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow_gcp.py)를 참조하세요.
 
 ## 링크
 
-[E2E Example](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py)
+[E2E 예제](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py)
 
-[E2E CloudTuner on GCP Example](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow.py)
+[GCP 예제에서 E2E CloudTuner](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow.py)
 
-[KerasTuner tutorial](https://www.tensorflow.org/tutorials/keras/keras_tuner)
+[KerasTuner 튜토리얼](https://www.tensorflow.org/tutorials/keras/keras_tuner)
 
-[CloudTuner tutorial](https://github.com/GoogleCloudPlatform/ai-platform-samples/blob/master/notebooks/samples/optimizer/ai_platform_vizier_tuner.ipynb)
+[CloudTuner 튜토리얼](https://github.com/GoogleCloudPlatform/ai-platform-samples/blob/master/notebooks/samples/optimizer/ai_platform_vizier_tuner.ipynb)
 
-[Proposal](https://github.com/tensorflow/community/blob/master/rfcs/20200420-tfx-tuner-component.md)
+[제안](https://github.com/tensorflow/community/blob/master/rfcs/20200420-tfx-tuner-component.md)
 
-More details are available in the [Tuner API reference](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/Tuner).
+자세한 내용은 [Tuner API 참조](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/Tuner)에서 확인할 수 있습니다.
