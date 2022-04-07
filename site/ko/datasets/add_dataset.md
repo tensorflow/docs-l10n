@@ -376,7 +376,7 @@ TFDS 저장소에 데이터세트를 추가하는 경우, `tfds.core.lazy_import
 
 데이터세트를 업데이트하려면:
 
-- For "external" data update: Multiple users may want to access a specific year/version simultaneously. This is done by using one `tfds.core.BuilderConfig` per version (e.g. `coco/2017`, `coco/2019`) or one class per version (e.g. `Voc2007`, `Voc2012`).
+- "외부" 데이터 업데이트의 경우: 여러 사용자가 특정 연도/버전에 동시에 액세스하기를 원할 수 있습니다. 이것은 버전당 하나의 `tfds.core.BuilderConfig`(예: `coco/2017`, `coco/2019`) 또는 버전당 하나의 클래스(예: `Voc2007`, `Voc2012`)를 사용하여 수행됩니다.
 - "내부" 코드 업데이트의 경우: 사용자는 최신 버전만 다운로드합니다. 코드를 업데이트하면 [의미 체계 버전 관리](https://www.tensorflow.org/datasets/datasets_versioning#semantic)에 따라 `VERSION` 클래스 속성이 증가합니다(예: `1.0.0`에서 `VERSION = tfds.core.Version('2.0.0')`로 증가).
 
 ### 등록을 위해 가져오기 추가
@@ -406,7 +406,7 @@ cd path/to/datasets/my_dataset/
 tfds build --register_checksums
 ```
 
-Some useful flags for development:
+개발을 위한 몇 가지 유용한 플래그:
 
 - `--pdb`: 예외가 발생하면 디버깅 모드로 들어갑니다.
 - `--overwrite`: 데이터세트가 이미 생성된 경우 기존 파일을 삭제합니다.
