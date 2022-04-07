@@ -149,23 +149,23 @@ bazel build -c opt --config=ios --ios_multi_cpus=armv7,arm64,x86_64 \
 
 ### C/C++
 
-If you're using Bazel or [CMake](https://www.tensorflow.org/lite/guide/build_cmake) to build TensorFlow Lite interpreter, you can enable Flex delegate by linking a TensorFlow Lite Flex delegate shared library. You can build it with Bazel as the following command.
+Bazel 또는 [CMake](https://www.tensorflow.org/lite/guide/build_cmake)를 사용하여 TensorFlow Lite 인터프리터를 빌드하는 경우 TensorFlow Lite Flex 대리자 공유 라이브러리를 연결하여 Flex 대리자를 사용할 수 있습니다. 다음 명령어로 Bazel를 사용하여 빌드할 수 있습니다.
 
 ```
 bazel build -c opt --config=monolithic tensorflow/lite/delegates/flex:tensorflowlite_flex
 ```
 
-This command generates the following shared library in `bazel-bin/tensorflow/lite/delegates/flex`.
+이 명령어는 `bazel-bin/tensorflow/lite/delegates/flex`에 다음 공유 라이브러리를 생성합니다.
 
-플랫폼 | Library name
+플랫폼 | 라이브러리 이름
 --- | ---
 리눅스 | libtensorflowlite_flex.so
 macOS | libtensorflowlite_flex.dylib
 Windows | tensorflowlite_flex.dll
 
-Note that the necessary `TfLiteDelegate` will be installed automatically when creating the interpreter at runtime as long as the shared library is linked. It is not necessary to explicitly install the delegate instance as is typically required with other delegate types.
+공유 라이브러리가 연결되어 있으면 런타임에 인터프리터를 만들 때 필요한 `TfLiteDelegate`가 자동으로 설치됩니다. 일반적으로 다른 대리자 유형에 필요한 것처럼 대리자 인스턴스를 명시적으로 설치할 필요는 없습니다.
 
-**Note:** This feature is available since version 2.7.
+**참고:** 이 기능은 2.7 버전부터 사용할 수 있습니다.
 
 ### Python
 
