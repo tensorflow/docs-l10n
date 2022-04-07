@@ -1,6 +1,8 @@
-# TensorFlow API 설명서에 기여하기
+# TensorFlow API 문서에 기여하기
 
-## 테스트 가능한 docstring
+<a id="doctest"></a>
+
+## 테스트 가능한 문서 문자열
 
 TensorFlow는 [DocTest](https://docs.python.org/3/library/doctest.html)를 사용하여 Python docstring에서 코드 조각을 테스트합니다. 이 조각은 실행 가능한 Python 코드여야 합니다. 테스트가 가능하도록 `>>>`(세 개의 왼쪽 꺾쇠 괄호)가 들어간 줄을 추가하세요. 예를 들어, 다음은 [array_ops.py](https://www.tensorflow.org/code/tensorflow/python/ops/array_ops.py) 소스 파일의 `tf.concat` 함수에서 발췌한 내용입니다.
 
@@ -36,37 +38,60 @@ def concat(values, axis, name="concat"):
   <code here>
 ```
 
-참고: TensorFlow DocTest는 TensorFlow 2 및 Python 3을 사용합니다.
+Note: TensorFlow DocTest uses TensorFlow 2 and Python 3.
 
-### DocTest로 코드를 테스트 가능하게 만들기
+To assess reference documentation quality, see the example section of the
+[TensorFlow 2 API Docs advice](https://docs.google.com/document/d/1e20k9CuaZ_-hp25-sSd8E8qldxKPKQR-SkwojYr_r-U/preview).
+(Be aware that the Task Tracker on this sheet is no longer in use.)
 
-현재, 많은 docstring에서 백틱 (```)을 사용하여 코드를 식별합니다. DocTest로 코드를 테스트할 수 있게 하려면 다음과 같이 합니다.
 
-- 백틱(```)을 제거하고 각 줄 앞에 왼쪽 꺾쇠 괄호(>>>)를 사용합니다. 연속된 줄 앞에 (...)를 사용합니다.
-- tensorflow.org에서 올바르게 렌더링하려면 Markdown 텍스트와 DocTest 조각을 구분하는 새로운 줄을 추가합니다.
+### Make the code testable with DocTest
 
-### 사용자 정의
+Currently, many docstrings use backticks (```) to identify code. To make the
+code testable with DocTest:
 
-TensorFlow는 내장된 doctest 로직에 몇 가지 사용자 정의를 사용합니다.
+*   Remove the backticks (```) and use the left-brackets (>>>) in front of each
+    line. Use (...) in front of continued lines.
+*   Add a newline to separate DocTest snippets from Markdown text to
+    render properly on tensorflow.org.
 
-- 부동 소수점 값을 텍스트로 비교하지 않습니다. 부동 소수점 값은 *liberal `atol` 및 `rtol` tolerences*와 함께 `allclose`를 사용하여 텍스트에서 추출하고 비교합니다. 그러면 다음과 같은 장점이 있습니다.
-    - 더 명확한 문서 - 작성자가 소수 자릿수를 모두 포함할 필요가 없습니다.
-    - 보다 강력한 테스트 - 기본 구현의 수치적 변경으로 인해 doctest가 실패하지 않습니다.
-- 작성자가 줄에 대한 출력을 포함하는 경우에만 출력을 확인합니다. 따라서 작성자는 일반적으로 인쇄되지 않도록 관련 없는 중간 값을 캡처할 필요가 없으므로 보다 명확한 문서를 작성할 수 있습니다.
+### Customizations
 
-### Docstring 고려 사항
+TensorFlow uses a few customizations to the builtin doctest logic:
 
-- *전체*: doctest의 목표는 문서를 제공하고 문서가 작동하는지 확인하는 것입니다. 이것은 단위 테스트와 다릅니다. 따라서 다음이 권장됩니다.
+*   It does not compare float values as text: Float values are extracted from
+    the text and compared using `allclose` with _liberal `atol` and `rtol`
+    tolerences_. This allows :
+    *   Clearer docs - Authors don't need to include all decimal places.
+    *   More robust tests - Numerical changes in the underlying implementation
+        should never cause a doctest to fail.
+*   It only checks the output if the author includes output for a line. This
+    allows for clearer docs because authors usually don't need to capture
+    irrelevant intermediate values to prevent them from being printed.
 
-    - 예제를 간단하게 유지합니다.
-    - 길거나 복잡한 출력을 피합니다.
-    - 가능하면 올림 숫자를 사용합니다.
+### Docstring considerations
 
-- *출력 형식*: 조각의 출력은 출력을 생성하는 코드 바로 아래에 있어야 합니다. 또한 docstring의 출력은 코드가 실행된 후의 출력과 정확히 같아야 합니다. 위의 예를 참조하세요. 또한 DocTest 설명서에서 [이 부분](https://docs.python.org/3/library/doctest.html#warnings)을 확인하세요. 출력이 80줄 제한을 초과하면 추가 출력을 새 줄에 넣을 수 있으며 DocTest는 이를 인식합니다. 예를 들어 아래의 여러 줄 블록을 참조하세요.
-
-- *글로벌*: <code><code data-md-type="codespan">tf</code></code>, `np` 및 `os` 모듈은 TensorFlow의 DocTest에서 항상 사용할 수 있습니다.
-
-- *기호 사용*: DocTest에서 같은 파일에 정의된 기호에 직접 액세스할 수 있습니다. 현재 파일에 정의되지 않은 기호를 사용하려면 `xxx` 대신 TensorFlow의 공용 API `tf.xxx`를 사용합니다. 아래 예에서 볼 수 있는 바와 같이 <code>random.normal</code>은 <code>tf.random.normal</code>을 통해 액세스할 수 있습니다. 그 이유는 <code>random.normal</code>이 `NewLayer`에서 보이지 않기 때문입니다.
+*   *Overall*: The goal of doctest is to provide documentation, and confirm that
+    the documentation works. This is different from unit-testing. So:
+    *   Keep examples simple.
+    *   Avoid long or complicated outputs.
+    *   Use round numbers if possible.
+*   *Output format*: The output of the snippet needs to be directly beneath the
+    code that’s generating the output. Also, the output in the docstring has to
+    be exactly equal to what the output would be after the code is executed. See
+    the above example. Also, check out
+    [this part](https://docs.python.org/3/library/doctest.html#warnings) in the
+    DocTest documentation. If the output exceeds the 80 line limit, you can put
+    the extra output on the new line and DocTest will recognize it. For example,
+    see multi-line blocks below.
+*   *Globals*: The <code>`tf`</code>, `np` and `os` modules are always
+    available in TensorFlow's DocTest.
+*   *Use symbols*: In DocTest you can directly access symbols defined in the
+    same file. To use a symbol that’s not defined in the current file, please
+    use TensorFlow’s public API `tf.xxx` instead of `xxx`. As you can see in the
+    example below, <code>`random.normal`</code> is accessed via
+    <code>`tf.random.normal`</code>. This is because
+    <code>`random.normal`</code> is not visible in `NewLayer`.
 
     ```
     def NewLayer():
@@ -81,9 +106,14 @@ TensorFlow는 내장된 doctest 로직에 몇 가지 사용자 정의를 사용�
       “””
     ```
 
-- *부동 소수점 값*: TensorFlow doctest는 결과 문자열에서 부동 소수점 값을 추출하고 합리적인 허용 오차(`atol=1e-6` , `rtol=1e-6`)로 `np.allclose`를 사용하여 비교를 수행합니다. 이런 식으로 작성자는 docstring이 지나치게 정밀해 수치 문제로 실패가 발생하는 상황을 걱정할 필요가 없습니다. 간단히 예상 값을 붙여넣기만 하면 됩니다.
+*   *Floating point values*: The TensorFlow doctest extracts float values from
+    the result strings, and compares using `np.allclose` with reasonable
+    tolerances (`atol=1e-6`, `rtol=1e-6`). This way authors do not need to worry
+    about overly precise docstrings causing failures due to numerical issues.
+    Simply paste in the expected value.
 
-- *비결정적 출력*: 불확실한 부분에 생략 부호(`...`)를 사용하면 DocTest가 해당 하위 문자열을 무시합니다.
+*   *Non-deterministic output*: Use ellipsis(`...`) for the uncertain parts and
+    DocTest will ignore that substring.
 
     ```
     >>> x = tf.random.normal((1,))
@@ -91,7 +121,8 @@ TensorFlow는 내장된 doctest 로직에 몇 가지 사용자 정의를 사용�
     <tf.Tensor: shape=(1,), dtype=float32, numpy=..., dtype=float32)>
     ```
 
-- *여러 줄 블록*: DocTest는 한 줄과 여러 줄이 있는 문의 차이에 대해 엄격합니다. 아래의 (...) 사용법에 유의하세요.
+*   *Multi-line blocks*: DocTest is strict about the difference between a single
+    and a multi-line statement. Note the usage of (...) below:
 
     ```
     >>> if x > 0:
@@ -101,7 +132,10 @@ TensorFlow는 내장된 doctest 로직에 몇 가지 사용자 정의를 사용�
     ...   optimizer="adam")
     ```
 
-- *예외*: 발생한 예외를 제외하고 예외 세부 사항은 무시됩니다. 자세한 내용은 [이 내용](https://docs.python.org/3/library/doctest.html#doctest.IGNORE_EXCEPTION_DETAIL)을 참조하세요.
+*   *Exceptions*: Exception details are ignored except the Exception that’s
+    raised. See
+    [this](https://docs.python.org/3/library/doctest.html#doctest.IGNORE_EXCEPTION_DETAIL)
+    for more details.
 
     ```
     >>> np_var = np.array([1, 2])
@@ -111,31 +145,63 @@ TensorFlow는 내장된 doctest 로직에 몇 가지 사용자 정의를 사용�
     ValueError: Unexpectedly found an instance of type `<class 'numpy.ndarray'>`.
     ```
 
-### 로컬 머신에서 테스트하기
+### Use a project-local copy of tf-doctest.
 
-docstring에서 코드를 로컬로 테스트하는 방법에는 두 가지가 있습니다.
+Note: The tf-doctest utility is only setup to test source files within the
+`tensorflow` repository. If the files you are editing are in TensorFlow you can
+skip to the next section. Otherwise keep reading this section.
 
-- 클래스/함수/메서드의 docstring만 변경하는 경우 해당 파일의 경로를 [tf_doctest.py](https://www.tensorflow.org/code/tensorflow/tools/docs/tf_doctest.py)에 전달하여 테스트할 수 있습니다. 예를 들면 다음과 같습니다.
+Some API's in TensorFlow come from an external project:
+
+*   `tf.estimator` (from
+    [tensorflow_estimator](https://github.com/tensorflow/estimator))
+*   `tf.summary` [tensorboard](https://github.com/tensorflow/tensorboard))
+*   `tf.keras.preprocessing` (from
+    [keras-preprocessing](https://github.com/keras-team/keras-preprocessing))
+
+If you're working on an external project, or on TensorFlow APIs that are housed
+in an external project, these instructions won't work unless that project has
+its own local copy of `tf_doctest`, and you use that copy instead of
+TensorFlow's.
+
+For example:
+[tf_estimator_doctest.py](https://github.com/tensorflow/estimator/python/estimator/tf_estimator_doctest.py).
+
+### Test on your local machine
+
+There are two ways to test the code in the docstring locally:
+
+*   If you are only changing the docstring of a class/function/method, then you
+    can test it by passing that file's path to
+    [tf_doctest.py](https://www.tensorflow.org/code/tensorflow/tools/docs/tf_doctest.py).
+    For example:
 
     <pre class="prettyprint lang-bsh">
-    <code class="devsite-terminal">python tf_doctest.py --file=</code>
+    <code class="devsite-terminal">python tf_doctest.py --file=<file_path>
     </pre>
 
-    설치된 버전의 TensorFlow를 사용하여 실행이 이루어집니다. 다음과 같이 테스트 중인 코드와 같은 코드가 실행되도록 합니다.
+    This will run it using your installed version of TensorFlow. To be sure
+    you're running the same code that you're testing:
 
-    - 최신 [tf-nightly](https://pypi.org/project/tf-nightly/) `pip install -U tf-nightly`를 사용합니다.
-    - 풀 요청의 기반을 [TensorFlow](https://github.com/tensorflow/tensorflow) 마스터 분기의 최근 풀로 재지정합니다.
+    *   Use an up to date [tf-nightly](https://pypi.org/project/tf-nightly/)
+        `pip install -U tf-nightly`
+    *   Rebase your pull request onto a recent pull from
+        [TensorFlow's](https://github.com/tensorflow/tensorflow) master branch.
 
-- 클래스/함수/메서드의 코드와 docstring을 변경하는 경우, [소스에서 TensorFlow를 빌드](../../install/source.md)해야 합니다. 소스에서 빌드할 준비가 되면 테스트를 실행할 수 있습니다.
+*   If you are changing the code and the docstring of a class/function/method,
+    then you will need to
+    [build TensorFlow from source](../../install/source.md). Once you are setup
+    to build from source, you can run the tests:
 
     <pre class="prettyprint lang-bsh">
-    <code class="devsite-terminal">bazel run //tensorflow/tools/docs:tf_doctest</code>
+    bazel run //tensorflow/tools/docs:tf_doctest
     </pre>
 
-    또는
+    or
 
     <pre class="prettyprint lang-bsh">
-    <code class="devsite-terminal">bazel run //tensorflow/tools/docs:tf_doctest -- --module=ops.array_ops</code>
+    bazel run //tensorflow/tools/docs:tf_doctest -- --module=ops.array_ops
     </pre>
 
-    `--module`은 `tensorflow.python`에 상대적입니다.
+    The `--module` is relative to `tensorflow.python`.
+```
