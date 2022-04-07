@@ -186,13 +186,13 @@ Note that the necessary `TfLiteDelegate` will be installed automatically when cr
 내장 ops만(`TFLITE_BUILTIN`) | 260.7
 TF ops만 사용( `SELECT_TF_OPS`) | 264.5
 
-### Binary size
+### 바이너리 크기
 
 다음 표는 각 빌드에 대한 TensorFlow Lite의 바이너리 크기를 설명합니다. 대상 ops는 `--config=android_arm -c opt`를 사용하여 Android용으로 빌드되었습니다.
 
-빌드 | C++ 바이너리 크기 | Android APK Size
+빌드 | C++ 바이너리 크기 | Android APK 크기
 --- | --- | ---
-내장 ops만 | 796 KB | 561 KB
+내장 ops만 | 796KB | 561KB
 내장 ops + TF ops | 23.0 MB | 8.0 MB
 내장 ops + TF ops (1) | 4.1 MB | 1.8 MB
 
