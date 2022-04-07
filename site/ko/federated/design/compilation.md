@@ -38,11 +38,11 @@ TFF의 추상 구문 트리(AST)는 페더레이션 계산의 구조를 설명�
 
 [transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/transformations.py) 모듈에는 복합 [building block](#building-block) 변환이 포함되어 있습니다.
 
-The [tensorflow_computation_transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/tensorflow_computation_transformations.py) module contains atomic [TensorFlow computation](#tensorflow-computation) transformations.
+[tensorflow_computation_transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/tensorflow_computation_transformations.py) 모듈에는 원자 [TensorFlow 계산](#tensorflow-computation) 변환이 포함되어 있습니다.
 
-The [compiled_computation_transforms](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/compiled_computation_transforms.py) module contains atomic and composite [Compiled Computation](#compiled-computation) transformations.
+[compiled_computation_transforms](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/compiled_computation_transforms.py) 모듈에는 원자 및 복합 [컴파일 계산](#compiled-computation) 변환이 포함되어 있습니다.
 
-The [transformation_utils](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/transformation_utils.py) module contains functions, traversal logic, and data structures used by other transformation modules.
+[transformation_utils](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/transformation_utils.py) 모듈에는 다른 변환 모듈에서 사용하는 함수, 순회 논리 및 데이터 구조가 포함되어 있습니다.
 
 ## 컴파일러
 
