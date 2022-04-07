@@ -44,7 +44,7 @@ TFF는 작성하는 머신러닝 모델 코드가 다양한 기능을 가진 수
 
     - TFF는 클라이언트 데이터의 후속 배치에 대해 순차적으로 `Model`에서 `forward_pass` 메서드를 여러 번 호출합니다. 부작용으로 다양한 집계를 보유하는 변수를 업데이트할 수 있습니다.
 
-    - 마지막으로, TFF는 Model에서 `report_local_outputs` 메서드를 호출하여 수집한 모든 요약 통계를 클라이언트가 내보낼 수 있는 간단한 메트릭 세트로 컴파일할 수 있습니다. 예를 들어, 모델 코드는 손실 합계를 처리된 예제의 수로 나누어 평균 손실 등을 내보낼 수 있습니다.
+    - Finally, TFF invokes the `report_local_unfinalized_metrics` method on your Model to allow your model to compile all the summary statistics it collected into a compact set of metrics to be exported by the client. This is where your model code may, for example, divide the sum of losses by the number of examples processed to export the average loss, etc.
 
 - **페더레이션 집계**: 이 레벨의 집계는 시스템의 여러 클라이언트(기기)에 대한 집계를 나타냅니다. 다시 말하자면, 클라이언트 전체에서 평균화되는 모델 매개변수(변수)와 로컬 집계의 결과로서 모델이 내보낸 메트릭에 모두 적용됩니다.
 
@@ -56,19 +56,19 @@ TFF는 작성하는 머신러닝 모델 코드가 다양한 기능을 가진 수
 
     - 각 클라이언트에서 독립적으로, 그리고 병렬로, 로컬 데이터 배치의 스트림에서 모델 코드가 반복적으로 호출되어 새로운 모델 매개변수 세트(훈련 시)와 위에 설명된 대로(로컬 집계) 새로운 로컬 메트릭 세트를 생성합니다.
 
-    - TFF는 분산 집계 프로토콜을 실행하여 모델 매개변수와 시스템 전체에서 로컬로 내보낸 메트릭을 누적하고 집계합니다. 이 로직은 Model의 `federated_output_computation`에서 TFF의 자체 *페더레이션 계산* 언어(TensorFlow에 없는)를 사용하여 선언적 방식으로 표현됩니다. 집계 API에 대한 자세한 내용은 [사용자 정의 알고리즘](tutorials/custom_federated_algorithms_1.ipynb) 튜토리얼을 참조하세요.
+    - TFF runs a distributed aggregation protocol to accumulate and aggregate the model parameters and locally exported metrics across the system. This logic is expressed in a declarative manner using TFF's own *federated computation* language (not in TensorFlow). See the [custom algorithms](tutorials/custom_federated_algorithms_1.ipynb) tutorial for more on the aggregation API.
 
 ### 추상 인터페이스
 
 이 기본 *생성자* + *메타 데이터* 인터페이스는 다음과 같이 `tff.learning.Model` 인터페이스로 표시됩니다.
 
-- 생성자, `forward_pass` 및 `report_local_outputs` 메서드는 보고할 모델 변수, 순방향 전달 및 통계를 적절히 구성해야 합니다. 이들 메서드로 구성된 TensorFlow는 위에서 설명한 대로 직렬화할 수 있어야 합니다.
+- The constructor, `forward_pass`, and `report_local_unfinalized_metrics` methods should construct model variables, forward pass, and statistics you wish to report, correspondingly. The TensorFlow constructed by those methods must be serializable, as discussed above.
 
 - `input_spec` 속성과 훈련 가능, 훈련 불가능 및 로컬 변수의 하위 세트를 반환하는 3개의 속성은 메타 데이터를 나타냅니다. TFF는 이 정보를 사용하여 모델의 일부를 페더레이션 최적화 알고리즘에 연결하는 방법을 결정하고, 생성된 시스템의 정확성을 확인하는 데 도움이 되는 내부 유형 시그니처를 정의합니다(모델이 소비하도록 설계된 것과 일치하지 않는 데이터에 대해 모델을 인스턴스화할 수 없도록).
 
-또한, 추상 인터페이스 `tff.learning.Model`은 앞에서 언급한 `report_local_outputs` 속성과 함께 요약 통계의 집계 프로세스를 제어할 수 있는 속성 `federated_output_computation`을 노출합니다.
+In addition, the abstract interface `tff.learning.Model` exposes a property `metric_finalizers` that takes in a metric's unfinalized values (returned by `report_local_unfinalized_metrics()`) and returns the finalized metric values. The `metric_finalizers` and `report_local_unfinalized_metrics()` method will be used together to build a cross-client metrics aggregator when defining the federated training processes or evaluation computations. For example, a simple `tff.learning.metrics.sum_then_finalize` aggregator will first sum the unfinalized metric values from clients, and then call the finalizer functions at the server.
 
-[이미지 분류](tutorials/federated_learning_for_image_classification.ipynb) 튜토리얼의 두 번째 부분과 [`model_examples.py`](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/learning/model_examples.py)에서 테스트에 사용하는 예제 모델에서 사용자 정의 `tf.learning.Model`을 정의하는 방법의 예를 찾을 수 있습니다.
+당신은 당신의 자신의 사용자 정의 정의하는 방법의 예를 찾을 수 있습니다 `tf.learning.Model` 우리의 두 번째 부분에서 [이미지 분류](tutorials/federated_learning_for_image_classification.ipynb) 뿐만 아니라 우리가 테스트에 사용할 예제 모델, 튜토리얼 [`model_examples.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/model_examples.py) .
 
 ### Keras용 변환기
 
@@ -153,10 +153,10 @@ while True:
 
 ### 추상 인터페이스
 
-시뮬레이션된 페더레이션 데이터세트의 처리를 표준화하기 위해 TFF는 추상 인터페이스 `tff.simulation.ClientData`를 제공하며, 클라이언트 세트를 열거하고 특정 클라이언트의 데이터를 포함하는 `tf.data.Dataset`를 구성할 수 있습니다. 이들 `tf.data.Dataset`는 즉시 모드에서 생성된 페더레이션 계산에 대한 입력으로 직접 제공될 수 있습니다.
+In order to standardize dealing with simulated federated data sets, TFF provides an abstract interface `tff.simulation.datasets.ClientData`, which allows one to enumerate the set of clients, and to construct a `tf.data.Dataset` that contains the data of a particular client. Those `tf.data.Dataset`s can be fed directly as input to the generated federated computations in eager mode.
 
 클라이언트 ID에 액세스하는 기능은 시뮬레이션에 사용하기 위해 데이터세트에서만 제공되는 기능으로, 클라이언트의 특정 하위 세트에서 데이터에 대해 훈련하는 기능이 필요할 수 있습니다(예: 다양한 클라이언트 유형의 하루 동안의 가용성을 시뮬레이션합니다). 컴파일된 계산 및 기본 런타임에는 클라이언트 ID의 개념이 포함되지 *않습니다*. 특정 클라이언트 하위 세트의 데이터가 입력으로 선택되면(예: `tff.templates.IterativeProcess.next` 호출), 클라이언트 ID가 더 이상 표시되지 않습니다.
 
 ### 사용 가능한 데이터세트
 
-시뮬레이션에 사용하기 위해 `tff.simulation.ClientData` 인터페이스를 구현하는 네임스페이스 `tff.simulation.datasets`를 데이터세트 전용으로 지정했으며, [이미지 분류](tutorials/federated_learning_for_image_classification.ipynb) 및 [텍스트 생성](tutorials/federated_learning_for_text_generation.ipynb) 튜토리얼을 지원하기 위해 두 개의 데이터세트로 시드했습니다. 자체 데이터세트를 플랫폼에 제공하도록 권장합니다.
+We have dedicated the namespace `tff.simulation.datasets` for datasets that implement the `tff.simulation.datasets.ClientData` interface for use in simulations, and seeded it with datasets to support the [image classification](tutorials/federated_learning_for_image_classification.ipynb) and [text generation](tutorials/federated_learning_for_text_generation.ipynb) tutorials. We'd like to encourage you to contribute your own datasets to the platform.
