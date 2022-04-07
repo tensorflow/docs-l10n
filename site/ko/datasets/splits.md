@@ -2,7 +2,7 @@
 
 모든 TFDS 데이터세트는 <a>카탈로그</a>에서 탐색할 수 있는 다양한 데이터 분할(예: `'train'`, <code>'test'</code>)을 노출합니다.
 
-In addition of the "official" dataset splits, TFDS allow to select slice(s) of split(s) and various combinations.
+"공식" 데이터세트 분할 외에도 TFDS를 사용하면 분할 및 다양한 조합의 슬라이스를 선택할 수 있습니다.
 
 ## 조각화 API
 
@@ -21,7 +21,7 @@ ds = builder.as_dataset(split='test+train[:75%]')
 
 - **일반 분할**(`'train'`, `'test'`): 분할 내의 모든 예가 선택됩니다.
 - **슬라이스**: 슬라이스는 [python 슬라이스 표기](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations)와 동일한 의미를 갖습니다. 슬라이스는 다음과 같을 수 있습니다.
-    - **Absolute** (`'train[123:450]'`, `train[:4000]`): (see note below for caveat about read order)
+    - **절대** (`'train[123:450]'`, `train[:4000]`): (읽기 순서에 대한 주의 사항은 아래 참고 참조)
     - **백분율**(`'train[:75%]'`, `'train[25%:75%]'`): 전체 데이터를 100개의 균일한 슬라이스로 나눕니다. 데이터를 100으로 나눌 수 없는 경우 일부 백분율에 추가 예가 포함될 수 있습니다.
     - **샤드**(`train[:4shard]`, `train[4shard]`): 요청된 샤드의 모든 예제를 선택합니다. (분할의 샤드 수를 얻으려면 `info.splits['train'].num_shards`을 참조하세요.)
 - **분할의 합집합**(`'train+test'`, `'train[:25%]+test'`): 분할이 함께 인터리브됩니다.
@@ -37,7 +37,7 @@ train_ds, test_ds = tfds.load('mnist', split=['train', 'test[50%]'])
 
 ## `tfds.even_splits` 및 다중 호스트 훈련
 
-`tfds.even_splits` generates a list of non-overlapping sub-splits of the same size.
+`tfds.even_splits`는 동일한 크기의 겹치지 않는 하위 분할의 목록을 생성합니다.
 
 ```python
 # Divide the dataset into 3 even parts, each containing 1/3 of the data
@@ -46,16 +46,16 @@ split0, split1, split2 = tfds.even_splits('train', n=3)
 ds = tfds.load('my_dataset', split=split2)
 ```
 
-This can be particularly useful when training in a distributed setting, where each host should receive a slice of the original data.
+이는 각 호스트가 원본 데이터의 조각을 받아야 하는 분산 환경에서 훈련할 때 특히 유용할 수 있습니다.
 
-With `Jax`, this can be simplified even further using `tfds.split_for_jax_process`:
+`Jax`의 경우 `tfds.split_for_jax_process`를 사용하여 더욱 간소화할 수 있습니다.
 
 ```python
 split = tfds.split_for_jax_process('train', drop_remainder=True)
 ds = tfds.load('my_dataset', split=split)
 ```
 
-`tfds.split_for_jax_process` is a simple alias for:
+`tfds.split_for_jax_process`는 다음에 대한 간단한 별칭입니다.
 
 ```python
 # The current `process_index` loads only `1 / process_count` of the data.
@@ -63,7 +63,7 @@ splits = tfds.even_splits('train', n=jax.process_count(), drop_remainder=True)
 split = splits[jax.process_index()]
 ```
 
-`tfds.even_splits`, `tfds.split_for_jax_process` accepts on any split value as input (e.g. `'train[75%:]+test'`)
+`tfds.even_splits`, `tfds.split_for_jax_process`는 모든 분할 값을 입력으로 허용합니다(예: `'train[75%:]+test'`).
 
 ## 슬라이싱 및 메타데이터
 
