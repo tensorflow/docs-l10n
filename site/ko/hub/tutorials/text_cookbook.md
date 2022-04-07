@@ -26,7 +26,7 @@
 
 [Kaggle의 IMDB 분류](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) - 데이터 다운로드 및 결과 제출을 포함하여 Colab의 Kaggle 경쟁과 쉽게 상호 작용하는 방법을 보여줍니다.
 
- | Estimator | Keras | TF2 | TF Datasets | BERT | Kaggle APIs
+ | Estimator | Keras | TF2 | TF Datasets | BERT | Kaggle API
 --- | --- | --- | --- | --- | --- | ---
 [Text classification](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  |
 [Keras를 이용한 텍스트 분류](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub) |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |
