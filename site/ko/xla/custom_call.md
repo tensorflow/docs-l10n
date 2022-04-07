@@ -1,14 +1,14 @@
 # XLA 사용자 정의 호출
 
-This document describes how to write and use XLA "custom calls". Custom calls let you invoke code written in a programming language like C++ or CUDA from an XLA program.
+본 문서에는 XLA "사용자 정의 호출"을 작성하고 사용하는 방법이 설명되어 있습니다. 사용자 정의 호출을 사용하면 XLA 프로그램에서 C++ 또는 CUDA와 같은 프로그래밍 언어로 작성된 코드를 호출할 수 있습니다.
 
-Warning: Custom calls are a low-level power-user feature. It is easy to break your program in difficult-to-debug (and even difficult-to-notice) ways using custom-calls. You shouldn't use custom calls unless you're prepared to debug XLA yourself when something goes wrong, and you should expect relatively less assistance from XLA developers if you run into trouble.
+경고: 사용자 정의 호출은 낮은 수준의 고급 사용자를 위한 기능입니다. 사용자 정의 호출을 사용하면 디버깅 또는 심지어 알리기 어려운 방식으로 프로그램을 중단하기 쉽습니다. 따라서 문제가 발생했을 때 XLA를 직접 디버깅할 준비가 되어 있지 않다면 사용자 정의 호출을 사용하지 않아야 하며 실제로 문제가 발생했을 때 XLA 개발자로부터 받을 수 있는 지원도 상대적으로 제한된다는 것을 예상해야 합니다.
 
-Warning: The custom-call API/ABI is not currently stable. We don't intend to change it capriciously, but it may change. Some possible future changes are described below.
+경고: 사용자 정의 호출 API/ABI는 아직 안정적이지 않습니다. 변덕스럽게 바꿀 의도는 없지만 바뀔 수는 있습니다. 가능한 향후 일부 변경 사항은 아래에 설명되어 있습니다.
 
 ## CPU에서 사용자 정의 호출
 
-You can create an HLO instruction which represents a custom-call via XLA's client API. This is not exposed via TensorFlow as of writing.
+XLA의 클라이언트 API를 통해 사용자 정의 호출을 나타내는 HLO 명령을 생성할 수 있습니다. 이것은 작성 시점에서 TensorFlow를 통해 노출되지 않습니다.
 
 예를 들어, 다음 코드는 사용자 정의 호출을 사용하여 CPU에서 `A[i] = B[i % 128] + C[i]`를 계산합니다(물론, 일반 HLO를 사용하여 이 작업을 수행할 수 있으며, 그렇게 해야 합니다!).
 
@@ -38,11 +38,11 @@ void do_custom_call(void* out, const void** in) {
 XLA_REGISTER_CUSTOM_CALL_TARGET(do_custom_call, "Host");
 ```
 
-Notice that the function `do_custom_call` needs to know the dimensions of the buffers it operates over. In this example we hardcode the sizes 128 and 2048. If you don't want to do this, you can pass the dimensions in as parameters to the call.
+`do_custom_call` 함수는 연산이 이루어지는 버퍼의 크기를 알아야 합니다. 이 예에서는 크기 128과 2048을 하드 코딩합니다. 이렇게 하지 않으려면 크기를 매개변수로 호출에 전달할 수 있습니다.
 
 ## GPU에서 사용자 정의 호출
 
-The GPU custom call framework is somewhat different than that on the CPU. Here is a CUDA example that does the same `A[i] = B[i % 128] + C[i]` computation as the CPU code above.
+GPU 사용자 정의 호출 프레임워크는 CPU의 프레임워크와 약간 다릅니다. 다음은 위의 CPU 코드와 동일한 `A[i] = B[i % 128] + C[i]` 계산을 수행하는 CUDA 예입니다.
 
 ```c++
 void do_it() { /* same implementation as above */ }
@@ -70,9 +70,9 @@ XLA_REGISTER_CUSTOM_CALL_TARGET(do_custom_call, "CUDA");
 
 `buffers` is an array of pointers which lives on the host, and each element it contains points to device (i.e. GPU) memory. The parameters come first, followed by the output value. This is notably different from the CPU calling convention, which has two params, `ins` and `out`. The main reason we diverge is to make it possible to handle tuple-shaped inputs/outputs efficiently; see the section below.
 
-As in the CPU example, we've hardcoded the input and output buffer sizes into our custom call. However unlike in the CPU case, passing the buffer sizes in as operands to the custom call would not work well. Usually we need the buffer sizes available to us on the CPU; e.g. when launching a kernel, we need to know the block/grid dimensions to use. But if we were to pass the buffer sizes as operands to our custom call, their values would live in GPU memory. We'd then have to do an expensive synchronous device-to-host memcpy at the start of our operation just to read the sizes.
+CPU 예에서와 같이, 입력 및 출력 버퍼 크기를 사용자 정의 호출에 하드 코딩했습니다. 그러나, CPU의 경우와 달리 버퍼 크기를 피연산자로 사용자 지정 호출에 전달하면 제대로 동작하지 않습니다. 일반적으로, CPU에서 사용할 수 있는 버퍼 크기가 필요합니다. 예를 들어, 커널을 시작할 때 사용할 블록/그리드 크기를 알아야 합니다. 그러나 버퍼 크기를 사용자 지정 호출에 피연산자로 전달하면 해당 값이 GPU 메모리에 저장됩니다. 그러면 연산을 시작할 때 단순히 크기를 읽기 위해 값 비싼 동기식 장치-호스트 memcpy를 수행해야 합니다.
 
-To let you work around this, we provide the `opaque` parameter. You can set this to an arbitrary string of bytes when you create the custom call:
+이 문제를 해결할 수 있도록 `opaque` 매개변수를 제공합니다. 사용자 정의 호출을 생성할 때 이를 임의의 바이트 문자열로 설정할 수 있습니다.
 
 ```c++
 std::string opaque = "...";
@@ -83,7 +83,7 @@ xla::CustomCall(&b, "do_custom_call", /*operands=*/{param0, param1},
 
 `xla::Shape`에는 프로토콜 버퍼 표현이 있으므로 이 직렬화된 proto를 `opaque` 내부에 저장하고 GPU 사용자 정의 호출 내에서 역직렬화할 수 있습니다. 하지만 `xla::ShapeProto`가 자주 변경되지는 않지만 변경이 되기는 *한다*는 점을 알아야 합니다. git 로그를 확인하여 과거에 어떻게 변경되었는지 확인하세요.
 
-## Signalling an error.
+## 오류 신호 보내기.
 
 If your custom call encounters an error, you can signal the error to the XLA runtime (instead of e.g. crashing or returning nonsense in the output buffers) by using the following signature for your function on CPU:
 
@@ -102,7 +102,7 @@ void do_custom_call(CUstream stream, void** buffers, const char* opaque,
                     size_t opaque_len, xla::XlaCustomCallStatus* status);
 ```
 
-You can signal failure by using `XlaCustomCallStatusSetFailure`, e.g.:
+`XlaCustomCallStatusSetFailure`를 사용하여 실패 신호를 보낼 수 있습니다. 예:
 
 ```c++
 void do_custom_call(void* out, const void** in, XlaCustomCallStatus* status) {
@@ -118,9 +118,9 @@ void do_custom_call(void* out, const void** in, XlaCustomCallStatus* status) {
 }
 ```
 
-You can also use `XlaCustomCallStatusSetSuccess` to indicate success, but the `XlaCustomCallStatus` is in a success state by default, so ignoring it completely will also indicate success.
+`XlaCustomCallStatusSetSuccess`를 사용하여 성공 여부를 표시할 수도 있지만 `XlaCustomCallStatus`는 기본으로 성공 상태에 있으므로 이를 무시하면 완전히 성공으로 표시됩니다.
 
-When using custom call functions with this signature, you must create the corresponding `custom-call` op with the appropriate API version set, e.g.:
+이 서명과 함께 사용자 정의 호출 기능을 사용할 때 적절한 API 버전 세트로 해당하는 `custom-call` op를 생성해야 합니다. 예:
 
 ```c++
 xla::CustomCall(&b, "do_custom_call", /*operands=*/{param0, param1},
@@ -131,9 +131,9 @@ xla::CustomCall(&b, "do_custom_call", /*operands=*/{param0, param1},
                 /*api_version=*/API_VERSION_STATUS_RETURNING);
 ```
 
-NOTE: In the future all clients will be required to migrate their custom call functions to the new API version and the old one will be deprecated. For custom calls that can't fail, you can simply add the new `XlaCustomCallStatus*` parameter and then ignore it.
+참고: 앞으로 모든 클라이언트는 사용자 정의 호출 기능을 새 API 버전으로 마이그레이션해야 하며 이전 버전은 더 이상 사용되지 않습니다. 실패할 수 없는 사용자 지정 호출의 경우 새 `XlaCustomCallStatus*` 매개변수를 추가한 다음 무시하면 됩니다.
 
-On failure, none of the custom call outputs will be used; the XLA runtime will terminate the computation. It is not possible for an HLO computation to recover from the error (e.g. by catching and handling it).
+실패 시 사용자 정의 호출 출력이 사용되지 않습니다. XLA 런타임은 계산을 종료합니다. HLO 계산을 수행하는 동안 예를 들어, 포착 및 처리하여 오류로부터 복구하는 것은 불가능합니다.
 
 ## 사용자 정의 호출에 튜플 전달하기
 
@@ -181,7 +181,7 @@ void* p0 = new void*[3];
 
 튜플의 메모리 내 표현은 CPU와 GPU에서 동일하지만 CPU 및 GPU 사용자 정의 호출의 호출 규칙에서 다르게 처리됩니다.
 
-### Tuple outputs as temp buffers
+### 튜플 출력을 임시 버퍼로 사용
 
 사용자 정의 호출에 대한 튜플 입력은 편리하지만 반드시 필요한 것은 아닙니다. 사용자 정의 호출에 대한 튜플 입력을 지원하지 않는 경우, 사용자 정의 호출에 전달하기 전에 항상 get-tuple-element를 사용하여 튜플을 압축 해제할 수 있습니다.
 
