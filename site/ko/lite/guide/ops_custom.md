@@ -215,7 +215,7 @@ Java에서 사용자 정의 연산자를 정의하려면, 고유한 사용자 �
 
 TensorFlow Lite 벤치마크 도구로 op를 프로파일링하려면 TensorFlow Lite용 [벤치마크 모델 도구](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#tflite-model-benchmark-tool)를 사용할 수 있습니다. 테스트 목적으로 [register.cc](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/kernels/register.cc)에 적절한 `AddCustom` 호출을 추가하여(위에 나타낸 바와 같이) TensorFlow Lite의 로컬 빌드가 사용자 정의 op를 인식하도록 할 수 있습니다.
 
-## Best practices
+## 모범 사례
 
 1. 메모리 할당 및 할당 해제를 신중하게 최적화하세요. `Prepare`에서 메모리를 할당하는 것이 `Invoke`보다 효율적이며, 루프 전에 메모리를 할당하는 것이 매번 반복하는 것보다 낫습니다. Malloc을 직접 수행하지 말고 임시 텐서 데이터를 사용하세요(항목 2 참조). 복사하는 대신 되도록 포인터/참조를 사용하세요.
 
