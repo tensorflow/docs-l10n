@@ -129,4 +129,4 @@ ds = tfds.load('my_dataset', split=split)
 
 마찬가지로, subsplit API는 플랫폼, 아키텍처 등에 관계없이 항상 동일한 예제 `set`를 선택합니다. 즉, `set('train[:20%]') == set('train[:10%]') + set('train[10%:20%]')`입니다.
 
-However, the order in which examples are read might **not** be deterministic. This depends on other parameters (e.g. whether `shuffle_files=True`).
+그러나 예제를 읽는 순서는 결정성이 **없을** 수 있습니다. 이것은 다른 매개변수에 따라 다릅니다(예: `shuffle_files=True` 여부).
