@@ -58,7 +58,7 @@ To run the model on your device, we will walk through the instructions in the `R
 - [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_error_reporter.h)는 디버그 정보를 출력합니다.
 - [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_interpreter.h)에는 모델을 로드하고 실행하는 코드가 포함됩니다.
 - [`schema_generated.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/schema/schema_generated.h)에는 TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) 모델 파일 형식에 대한 스키마가 포함됩니다.
-- [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h) provides versioning information for the TensorFlow Lite schema.
+- [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h)는 TensorFlow Lite 스키마에 대한 버전 관리 정보를 제공합니다.
 
 ### 2. 모델 헤더 포함
 
