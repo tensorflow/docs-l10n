@@ -183,7 +183,7 @@ if(null != myImageClassifier) {
 
 ### 모델 추론 가속하기
 
-The generated code provides a way for developers to accelerate their code through the use of [delegates](../performance/delegates.md) and the number of threads. These can be set when initializing the model object as it takes three parameters:
+생성된 코드는 개발자가 [대리자](../performance/delegates.md) 및 스레드 수를 사용하여 코드를 가속할 수 있는 방법을 제공합니다. 모델 객체를 초기화할 때 다음 3개의 매개변수를 갖기 때문에 이들을 설정할 수 있습니다.
 
 - **`Context`**: Android 활동 또는 서비스의 컨텍스트
 - (선택 사항) **`Device`**: GPUDelegate 또는 NNAPIDelegate와 같은 TFLite 가속 대리자
