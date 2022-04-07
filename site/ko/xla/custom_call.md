@@ -68,7 +68,7 @@ XLA_REGISTER_CUSTOM_CALL_TARGET(do_custom_call, "CUDA");
 
 먼저, GPU 사용자 정의 호출 함수는 *여전히 CPU에서 실행되는 함수*라는 점을 알아야 합니다. `do_custom_call` CPU 함수는 GPU에서 작업을 대기열에 추가하는 역할을 합니다. 여기에서는 CUDA 커널을 시작하지만 cublas 호출과 같은 다른 작업을 수행할 수도 있습니다.
 
-`buffers` is an array of pointers which lives on the host, and each element it contains points to device (i.e. GPU) memory. The parameters come first, followed by the output value. This is notably different from the CPU calling convention, which has two params, `ins` and `out`. The main reason we diverge is to make it possible to handle tuple-shaped inputs/outputs efficiently; see the section below.
+`buffers`는 호스트에 있는 포인터의 배열이며, 여기에 포함된 각 요소는 장치(즉, GPU) 메모리를 가리킵니다. 매개변수가 먼저 오고 출력 값이 뒤따릅니다. 이것은 두 개의 매개변수 `ins` 및 `out`이 있는 CPU 호출 규칙과는 확연하게 다릅니다. 분기하는 주된 이유는 튜플 형상의 입력/출력을 효율적으로 처리할 수 있도록 하기 위해서입니다. 아래 섹션을 참조하세요.
 
 CPU 예에서와 같이, 입력 및 출력 버퍼 크기를 사용자 정의 호출에 하드 코딩했습니다. 그러나, CPU의 경우와 달리 버퍼 크기를 피연산자로 사용자 지정 호출에 전달하면 제대로 동작하지 않습니다. 일반적으로, CPU에서 사용할 수 있는 버퍼 크기가 필요합니다. 예를 들어, 커널을 시작할 때 사용할 블록/그리드 크기를 알아야 합니다. 그러나 버퍼 크기를 사용자 지정 호출에 피연산자로 전달하면 해당 값이 GPU 메모리에 저장됩니다. 그러면 연산을 시작할 때 단순히 크기를 읽기 위해 값 비싼 동기식 장치-호스트 memcpy를 수행해야 합니다.
 
