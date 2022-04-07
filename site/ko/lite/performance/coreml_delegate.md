@@ -43,16 +43,78 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
       <p></p>
 <pre class="prettyprint lang-swift">    let coreMLDelegate = CoreMLDelegate()
     var interpreter: Interpreter
-&lt;/div&gt;
-&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_5&lt;/code&gt;</pre>
-<div data-md-type="block_html">
+</pre>
+    </section>
+    <section>
+      <h3>Objective-C</h3>
+      <p></p>
+<pre class="prettyprint lang-objc">
+    // Import module when using CocoaPods with module support
+    @import TFLTensorFlowLite;
+
+    // Or import following headers manually
+    # import "tensorflow/lite/objc/apis/TFLCoreMLDelegate.h"
+    # import "tensorflow/lite/objc/apis/TFLTensorFlowLite.h"
+
+    // Initialize Core ML delegate
+    TFLCoreMLDelegate* coreMLDelegate = [[TFLCoreMLDelegate alloc] init];
+
+    // Initialize interpreter with model path and Core ML delegate
+    TFLInterpreterOptions* options = [[TFLInterpreterOptions alloc] init];
+    NSError* error = nil;
+    TFLInterpreter* interpreter = [[TFLInterpreter alloc]
+                                    initWithModelPath:modelPath
+                                              options:options
+                                            delegates:@[ coreMLDelegate ]
+                                                error:&amp;error];
+    if (error != nil) { /* Error handling... */ }
+
+    if (![interpreter allocateTensorsWithError:&amp;error]) { /* Error handling... */ }
+    if (error != nil) { /* Error handling... */ }
+
+    // Run inference ...
+      </pre>
+    </section>
+    <section>
+      <h3>C (Until 2.3.0)</h3>
+      <p></p>
+<pre class="prettyprint lang-c">    #include "tensorflow/lite/delegates/coreml/coreml_delegate.h"
+
+    // Initialize interpreter with model
+    TfLiteModel* model = TfLiteModelCreateFromFile(model_path);
+
+    // Initialize interpreter with Core ML delegate
+    TfLiteInterpreterOptions* options = TfLiteInterpreterOptionsCreate();
+    TfLiteDelegate* delegate = TfLiteCoreMlDelegateCreate(NULL);  // default config
+    TfLiteInterpreterOptionsAddDelegate(options, delegate);
+    TfLiteInterpreterOptionsDelete(options);
+
+    TfLiteInterpreter* interpreter = TfLiteInterpreterCreate(model, options);
+
+    TfLiteInterpreterAllocateTensors(interpreter);
+
+    // Run inference ...
+
+    /* ... */
+
+    // Dispose resources when it is no longer used.
+    // Add following code to the section where you dispose of the delegate
+    // (e.g. `dealloc` of class).
+
+    TfLiteInterpreterDelete(interpreter);
+    TfLiteCoreMlDelegateDelete(delegate);
+    TfLiteModelDelete(model);
+      </pre>
+    </section>
+  </devsite-selector>
 </div>
-</section></devsite-selector>
-</div>
-<h2 data-md-type="header" data-md-header-level="2">모범 사례</h2>
-<h3 data-md-type="header" data-md-header-level="3">Neural Engine이 없는 기기에서 Core ML 대리자 사용하기</h3>
-<p data-md-type="paragraph">By default, Core ML delegate will only be created if the device has Neural Engine, and will return <code data-md-type="codespan">null</code> if the delegate is not created. If you want to run Core ML delegate on other environments (for example, simulator), pass <code data-md-type="codespan">.all</code> as an option while creating delegate in Swift. On C++ (and Objective-C), you can pass <code data-md-type="codespan">TfLiteCoreMlDelegateAllDevices</code>. Following example shows how to do this:</p>
-<div data-md-type="block_html">
+
+## 모범 사례
+
+### Neural Engine이 없는 기기에서 Core ML 대리자 사용하기
+
+By default, Core ML delegate will only be created if the device has Neural Engine, and will return `null` if the delegate is not created. If you want to run Core ML delegate on other environments (for example, simulator), pass `.all` as an option while creating delegate in Swift. On C++ (and Objective-C), you can pass `TfLiteCoreMlDelegateAllDevices`. Following example shows how to do this:
+
 <div>
   <devsite-selector>
     <section>
@@ -71,15 +133,26 @@ let interpreter = try Interpreter(modelPath: modelPath,
     coreMLOptions.enabledDevices = TFLCoreMLDelegateEnabledDevicesAll;
     TFLCoreMLDelegate* coreMLDelegate = [[TFLCoreMLDelegate alloc]
                                           initWithOptions:coreMLOptions];
-&lt;/div&gt;
-&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_9&lt;/code&gt;</pre>
-<div data-md-type="block_html">
+
+    // Initialize interpreter with delegate
+      </pre>
+    </section>
+    <section>
+      <h3>C</h3>
+      <p></p>
+<pre class="prettyprint lang-c">    TfLiteCoreMlDelegateOptions options;
+    options.enabled_devices = TfLiteCoreMlDelegateAllDevices;
+    TfLiteDelegate* delegate = TfLiteCoreMlDelegateCreate(&amp;options);
+    // Initialize interpreter with delegate
+      </pre>
+    </section>
+  </devsite-selector>
 </div>
-</section></devsite-selector>
-</div>
-<h3 data-md-type="header" data-md-header-level="3">Metal(GPU) 대리자를 폴백으로 사용하기</h3>
-<p data-md-type="paragraph">Core ML 대리자가 생성되지 않은 경우에도 여전히 <a href="https://www.tensorflow.org/lite/performance/gpu#ios" data-md-type="link">Metal 대리자</a>를 사용하여 성능 이점을 얻을 수 있습니다. 다음 예에서는 이를 수행하는 방법을 보여줍니다.</p>
-<div data-md-type="block_html">
+
+### Metal(GPU) 대리자를 폴백으로 사용하기
+
+Core ML 대리자가 생성되지 않은 경우에도 여전히 [Metal 대리자](https://www.tensorflow.org/lite/performance/gpu#ios)를 사용하여 성능 이점을 얻을 수 있습니다. 다음 예에서는 이를 수행하는 방법을 보여줍니다.
+
 <div>
   <devsite-selector>
     <section>
@@ -89,129 +162,96 @@ let interpreter = try Interpreter(modelPath: modelPath,
     if delegate == nil {
       delegate = MetalDelegate()  // Add Metal delegate options if necessary.
     }
-&lt;/div&gt;
-&lt;pre data-md-type="block_code" data-md-language=""&gt;&lt;code&gt;GL_CODE_10&lt;/code&gt;</pre>
-<div data-md-type="block_html">
+
+    let interpreter = try Interpreter(modelPath: modelPath,
+                                      delegates: [delegate!])
+      </pre>
+    </section>
+    <section>
+      <h3>Objective-C</h3>
+      <p></p>
+<pre class="prettyprint lang-objc">    TFLDelegate* delegate = [[TFLCoreMLDelegate alloc] init];
+    if (!delegate) {
+      // Add Metal delegate options if necessary
+      delegate = [[TFLMetalDelegate alloc] init];
+    }
+    // Initialize interpreter with delegate
+      </pre>
+    </section>
+    <section>
+      <h3>C</h3>
+      <p></p>
+<pre class="prettyprint lang-c">    TfLiteCoreMlDelegateOptions options = {};
+    delegate = TfLiteCoreMlDelegateCreate(&amp;options);
+    if (delegate == NULL) {
+      // Add Metal delegate options if necessary
+      delegate = TFLGpuDelegateCreate(NULL);
+    }
+    // Initialize interpreter with delegate
+      </pre>
+    </section>
+  </devsite-selector>
 </div>
-</section></devsite-selector>
-</div>
-<p data-md-type="paragraph">The delegate creation logic reads device's machine id (e.g. iPhone11,1) to determine its Neural Engine availability. See the <a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.mm" data-md-type="link">code</a> for more detail. Alternatively, you can implement your own set of denylist devices using other libraries such as <a href="https://github.com/devicekit/DeviceKit" data-md-type="link">DeviceKit</a>.</p>
-<h3 data-md-type="header" data-md-header-level="3">이전 Core ML 버전 사용하기</h3>
-<p data-md-type="paragraph">iOS 13은 Core ML 3을 지원하지만 Core ML 2 모델 사양으로 변환하면 모델이 더 잘 동작할 수 있습니다. 대상 변환 버전은 기본적으로 최신 버전으로 설정되어 있지만 대리자 옵션에서 <code data-md-type="codespan">coreMLVersion</code>(Swift에서는 C API의 <code data-md-type="codespan">coreml_version</code>)을 이전 버전으로 설정하여 변경할 수 있습니다.</p>
-<h2 data-md-type="header" data-md-header-level="2">지원되는 연산</h2>
-<p data-md-type="paragraph">Core ML 대리자는 다음 연산을 지원합니다.</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">Add</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">특정 형상만 브로드캐스팅할 수 있습니다. Core ML 텐서 레이아웃에서 다음 텐서 형상을 브로드캐스팅할 수 있습니다. <code data-md-type="codespan">[B, C, H, W]</code>, <code data-md-type="codespan">[B, C, 1, 1]</code>, <code data-md-type="codespan">[B, 1, H, W]</code>, <code data-md-type="codespan">[B, 1, 1, 1]</code> .</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">AveragePool2D</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">Concat</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">채널 축을 따라 연결해야 합니다.</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">Conv2D</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">가중치와 바이어스는 일정해야 합니다.</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">DepthwiseConv2D</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">가중치와 바이어스는 일정해야 합니다.</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">FullyConnected(일명 Dense 또는 InnerProduct)</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">가중치와 바이어스(있는 경우)는 일정해야 합니다.</li>
-<li data-md-type="list_item" data-md-list-type="unordered">단일 배치 케이스만 지원합니다. 입력 차원은 마지막 차원을 제외하고 1이어야 합니다.</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">Hardswish</li>
-<li data-md-type="list_item" data-md-list-type="unordered">Logistic(일명 Sigmoid)</li>
-<li data-md-type="list_item" data-md-list-type="unordered">MaxPool2D</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">MirrorPad</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">
-<code data-md-type="codespan">REFLECT</code> 모드의 4D 입력만 지원됩니다. 패딩은 일정해야 하며 H 및 W 차원에만 허용됩니다.</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">Mul</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">특정 형상만 브로드캐스팅할 수 있습니다. Core ML 텐서 레이아웃에서 다음 텐서 형상을 브로드캐스팅할 수 있습니다. <code data-md-type="codespan">[B, C, H, W]</code>, <code data-md-type="codespan">[B, C, 1, 1]</code>, <code data-md-type="codespan">[B, 1, H, W]</code>, <code data-md-type="codespan">[B, 1, 1, 1]</code>.</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">Pad 및 PadV2</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">4D 입력만 지원됩니다. 패딩은 일정해야 하며 H 및 W 차원에만 허용됩니다.</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">Relu</li>
-<li data-md-type="list_item" data-md-list-type="unordered">ReluN1To1</li>
-<li data-md-type="list_item" data-md-list-type="unordered">Relu6</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">Reshape</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">대상 Core ML 버전이 2인 경우에만 지원되고 Core ML 3을 대상으로 하는 경우 지원되지 않습니다.</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">ResizeBilinear</li>
-<li data-md-type="list_item" data-md-list-type="unordered">SoftMax</li>
-<li data-md-type="list_item" data-md-list-type="unordered">Tanh</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">TransposeConv</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">가중치는 일정해야 합니다.</li>
-</ul>
-</li>
-</ul>
-<h2 data-md-type="header" data-md-header-level="2">피드백</h2>
-<p data-md-type="paragraph">문제가 발생한 경우 재현하는 데 필요한 모든 세부 정보가 포함된 <a href="https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md" data-md-type="link">GitHub</a> 문제를 생성하십시오.</p>
-<h2 data-md-type="header" data-md-header-level="2">자주하는 질문</h2>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">그래프에 지원되지 않는 연산이 포함된 경우 CoreML 대리자가 CPU로 폴백을 지원합니까?</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">예</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">CoreML 대리자는 iOS 시뮬레이터에서 동작합니까?</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">예. 라이브러리에는 x86 및 x86_64 대상이 포함되어 있으므로 시뮬레이터에서 실행할 수 있지만 CPU에 비해 성능이 향상되지는 않습니다.</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">TensorFlow Lite 및 CoreML 대리자는 MacOS를 지원하나요?</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">TensorFlow Lite는 iOS에서만 테스트되고 MacOS에서는 테스트되지 않습니다.</li>
-</ul>
-</li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph">사용자 정의 TF Lite 연산이 지원되나요?</p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">No, CoreML delegate does not support custom ops and they will fallback to CPU.</li>
-</ul>
-</li>
-</ul>
-<h2 data-md-type="header" data-md-header-level="2">API</h2>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered"><a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/swift/Sources/CoreMLDelegate.swift" data-md-type="link">Core ML delegate Swift API</a></li>
-<li data-md-type="list_item" data-md-list-type="unordered">
-<p data-md-type="paragraph"><a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.h" data-md-type="link">Core ML delegate C API</a></p>
-<ul data-md-type="list" data-md-list-type="unordered" data-md-list-tight="true">
-<li data-md-type="list_item" data-md-list-type="unordered">This can be used for Objective-C codes. ~~~</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
+
+The delegate creation logic reads device's machine id (e.g. iPhone11,1) to determine its Neural Engine availability. See the [code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.mm) for more detail. Alternatively, you can implement your own set of denylist devices using other libraries such as [DeviceKit](https://github.com/devicekit/DeviceKit).
+
+### 이전 Core ML 버전 사용하기
+
+iOS 13은 Core ML 3을 지원하지만 Core ML 2 모델 사양으로 변환하면 모델이 더 잘 동작할 수 있습니다. 대상 변환 버전은 기본적으로 최신 버전으로 설정되어 있지만 대리자 옵션에서 `coreMLVersion`(Swift에서는 C API의 `coreml_version`)을 이전 버전으로 설정하여 변경할 수 있습니다.
+
+## 지원되는 연산
+
+Core ML 대리자는 다음 연산을 지원합니다.
+
+- Add
+    - 특정 형상만 브로드캐스팅할 수 있습니다. Core ML 텐서 레이아웃에서 다음 텐서 형상을 브로드캐스팅할 수 있습니다. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
+- AveragePool2D
+- Concat
+    - 채널 축을 따라 연결해야 합니다.
+- Conv2D
+    - 가중치와 바이어스는 일정해야 합니다.
+- DepthwiseConv2D
+    - 가중치와 바이어스는 일정해야 합니다.
+- FullyConnected(일명 Dense 또는 InnerProduct)
+    - 가중치와 바이어스(있는 경우)는 일정해야 합니다.
+    - 단일 배치 케이스만 지원합니다. 입력 차원은 마지막 차원을 제외하고 1이어야 합니다.
+- Hardswish
+- Logistic(일명 Sigmoid)
+- MaxPool2D
+- MirrorPad
+    -  `REFLECT` 모드의 4D 입력만 지원됩니다. 패딩은 일정해야 하며 H 및 W 차원에만 허용됩니다.
+- Mul
+    - 특정 형상만 브로드캐스팅할 수 있습니다. Core ML 텐서 레이아웃에서 다음 텐서 형상을 브로드캐스팅할 수 있습니다. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
+- Pad 및 PadV2
+    - 4D 입력만 지원됩니다. 패딩은 일정해야 하며 H 및 W 차원에만 허용됩니다.
+- Relu
+- ReluN1To1
+- Relu6
+- Reshape
+    - 대상 Core ML 버전이 2인 경우에만 지원되고 Core ML 3을 대상으로 하는 경우 지원되지 않습니다.
+- ResizeBilinear
+- SoftMax
+- Tanh
+- TransposeConv
+    - 가중치는 일정해야 합니다.
+
+## 피드백
+
+For issues, please create a [GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) issue with all the necessary details to reproduce.
+
+## 자주하는 질문
+
+- 그래프에 지원되지 않는 연산이 포함된 경우 CoreML 대리자가 CPU로 폴백을 지원합니까?
+    - 예
+- CoreML 대리자는 iOS 시뮬레이터에서 동작합니까?
+    - 예. 라이브러리에는 x86 및 x86_64 대상이 포함되어 있으므로 시뮬레이터에서 실행할 수 있지만 CPU에 비해 성능이 향상되지는 않습니다.
+- TensorFlow Lite 및 CoreML 대리자는 MacOS를 지원하나요?
+    - TensorFlow Lite는 iOS에서만 테스트되고 MacOS에서는 테스트되지 않습니다.
+- 사용자 정의 TF Lite 연산이 지원되나요?
+    - No, CoreML delegate does not support custom ops and they will fallback to CPU.
+
+## API
+
+- [Core ML delegate Swift API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/swift/Sources/CoreMLDelegate.swift)
+- [Core ML delegate C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.h)
+    - This can be used for Objective-C codes. ~~~
