@@ -57,8 +57,7 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
 기본 Apache Beam 러너를 사용하여 스크립트를 로컬로 실행하기 위한 명령은 다른 데이터세트에서와 같습니다.
 
 ```sh
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --datasets=my_new_dataset
+tfds build my_dataset
 ```
 
 **경고**: Beam 데이터세트는 **매우** 클 수 있으며(테라바이트 이상), 상당한 양의 리소스가 생성될 수 있습니다(로컬 컴퓨터에서 몇 주가 걸릴 수 있음). 분산 환경을 사용하여 데이터세트를 생성하는 것이 좋습니다. 지원되는 런타임 목록은 [Apache Beam 설명서](https://beam.apache.org/)를 참조하세요.
@@ -72,17 +71,13 @@ Beam에서 데이터세트를 생성하기 위해 API는 다른 데이터세트�
 # flags. Otherwise, you can leave flags empty [].
 flags = ['--runner=DataflowRunner', '--project=<project-name>', ...]
 
-# To use Beam, you have to set at least one of `beam_options` or `beam_runner`
+# `beam_options` (and `beam_runner`) will be forwarded to `beam.Pipeline`
 dl_config = tfds.download.DownloadConfig(
     beam_options=beam.options.pipeline_options.PipelineOptions(flags=flags)
 )
-
 data_dir = 'gs://my-gcs-bucket/tensorflow_datasets'
 builder = tfds.builder('wikipedia/20190301.en', data_dir=data_dir)
-builder.download_and_prepare(
-    download_dir=FLAGS.download_dir,
-    download_config=dl_config,
-)
+builder.download_and_prepare(download_config=dl_config)
 ```
 
 ## Beam 데이터세트 구현하기
@@ -102,56 +97,19 @@ Apache Beam 데이터세트를 작성하려면 다음 개념에 익숙해야 합
 빔이 아닌 데이터세트:
 
 ```python
-class DummyBeamDataset(tfds.core.BeamBasedBuilder):
-
-  VERSION = tfds.core.Version('1.0.0')
-
-  def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
-        features=tfds.features.FeaturesDict({
-            'image': tfds.features.Image(shape=(16, 16, 1)),
-            'label': tfds.features.ClassLabel(names=['dog', 'cat']),
-        }),
-    )
-
-  def _split_generators(self, dl_manager):
-    ...
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=dict(file_dir='path/to/train_data/'),
-        ),
-        splits_lib.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs=dict(file_dir='path/to/test_data/'),
-        ),
-    ]
-
-  def _build_pcollection(self, pipeline, file_dir):
-    """Generate examples as dicts."""
-    beam = tfds.core.lazy_imports.apache_beam
-
-    def _process_example(filename):
-      # Use filename as key
-      return filename, {
-          'image': os.path.join(file_dir, filename),
-          'label': filename.split('.')[1],  # Extract label: "0010102.dog.jpeg"
-      }
-
-    return (
-        pipeline
-        | beam.Create(tf.io.gfile.listdir(file_dir))
-        | beam.Map(_process_example)
-    )
+def _generate_examples(self, path):
+  for f in path.iterdir():
+    yield _process_example(f)
 ```
 
 빔 데이터세트:
 
 ```python
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --register_checksums \
-  --datasets=my_new_dataset
+def _generate_examples(self, path):
+  return (
+      beam.Create(path.iterdir())
+      | beam.Map(_process_example)
+  )
 ```
 
 나머지 모두는 테스트를 포함하여 100% 동일할 수 있습니다.
