@@ -138,12 +138,24 @@ struct ExampleFunctor<Eigen::GpuDevice, T> {
 ```c++
 // kernel_example.cc
 #include "kernel_example.h"
+
+#include "tensorflow/core/framework/op.h"
+#include "tensorflow/core/framework/shape_inference.h"
 #include "tensorflow/core/framework/op_kernel.h"
 
 using namespace tensorflow;
 
 using CPUDevice = Eigen::ThreadPoolDevice;
 using GPUDevice = Eigen::GpuDevice;
+
+REGISTER_OP("Example")
+    .Attr("T: numbertype")
+    .Input("input: T")
+    .Output("input_times_two: T")
+    .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
+      c->set_output(0, c->input(0));
+      return Status::OK();
+    });
 
 // CPU specialization of actual computation.
 template <typename T>
