@@ -6,7 +6,7 @@ Tuner 구성 요소는 모델의 하이퍼 매개변수를 조정합니다.
 
 Tuner 구성 요소는 하이퍼 매개변수를 조정하기 위해 Python [KerasTuner](https://www.tensorflow.org/tutorials/keras/keras_tuner) API를 광범위하게 사용합니다.
 
-Note: The KerasTuner library can be used for hyperparameter tuning regardless of the modeling API, not just for Keras models only.
+참고: KerasTuner 라이브러리는 Keras 모델뿐만 아니라 모델링 API와 관계없이 하이퍼 매개변수 조정에 사용할 수 있습니다.
 
 ## 구성 요소
 
@@ -108,7 +108,7 @@ Google Cloud Platform(GCP)에서 실행할 때 Tuner 구성 요소는 두 가지
 
 [CloudTuner](https://github.com/tensorflow/cloud/blob/master/src/python/tensorflow_cloud/tuner/tuner.py) is an implementation of [KerasTuner](https://www.tensorflow.org/tutorials/keras/keras_tuner) which talks to the AI Platform Vizier service as the study backend. Since CloudTuner is a subclass of `keras_tuner.Tuner`, it can be used as a drop-in replacement in the `tuner_fn` module, and execute as a part of the TFX Tuner component.
 
-Below is a code snippet which shows how to use `CloudTuner`. Notice that configuration to `CloudTuner` requires items which are specific to GCP, such as the `project_id` and `region`.
+아래는 `CloudTuner`의 사용 방법을 보여주는 코드 조각입니다. `CloudTuner`에 대한 구성에는 `project_id` 및 `region`과 같은 GCP 관련 항목이 필요합니다.
 
 ```python
 ...
@@ -137,7 +137,7 @@ def tuner_fn(fn_args: FnArgs) -> TunerFnResult:
 
 ### Cloud AI Platform 훈련 분산 작업자 무리의 병렬 조정
 
-The KerasTuner framework as the underlying implementation of the Tuner component has ability to conduct hyperparameter search in parallel. While the stock Tuner component does not have ability to execute more than one search worker in parallel, by using the [Google Cloud AI Platform extension Tuner component](https://github.com/tensorflow/tfx/blob/master/tfx/extensions/google_cloud_ai_platform/tuner/component.py), it provides the ability to run parallel tuning, using an AI Platform Training Job as a distributed worker flock manager. [TuneArgs](https://github.com/tensorflow/tfx/blob/master/tfx/proto/tuner.proto) is the configuration given to this component. This is a drop-in replacement of the stock Tuner component.
+Tuner 구성 요소의 기본 구현인 KerasTuner 프레임워크에는 하이퍼 매개변수 검색을 병렬로 수행하는 기능이 있습니다. stock Tuner 구성 요소에는 둘 이상의 검색 작업자를 병렬로 실행할 수 있는 기능이 없지만, [Google Cloud AI Platform 확장 Tuner 구성 요소](https://github.com/tensorflow/tfx/blob/master/tfx/extensions/google_cloud_ai_platform/tuner/component.py)를 사용하면 AI Platform Training 작업을 분산 작업자 무리 관리자로 사용하여 병렬 조정을 실행할 수 있는 기능을 제공합니다. [TuneArgs](https://github.com/tensorflow/tfx/blob/master/tfx/proto/tuner.proto)는 이 구성 요소에 제공된 구성입니다. 이는 stock Tuner 구성 요소의 드롭인 교체입니다.
 
 ```python
 tuner = google_cloud_ai_platform.Tuner(
