@@ -202,7 +202,7 @@ Core ML 대리자가 생성되지 않은 경우에도 여전히 [Metal 대리자
   </devsite-selector>
 </div>
 
-The delegate creation logic reads device's machine id (e.g. iPhone11,1) to determine its Neural Engine availability. See the [code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.mm) for more detail. Alternatively, you can implement your own set of denylist devices using other libraries such as [DeviceKit](https://github.com/devicekit/DeviceKit).
+대리자 생성 로직은 기기의 머신 ID(예: iPhone11,1)를 읽어 Neural Engine 가용성을 결정합니다. 자세한 내용은 [코드](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.mm)를 참조하세요. 또는 [DeviceKit](https://github.com/devicekit/DeviceKit)와 같은 다른 라이브러리를 사용하여 자체 거부 목록 기기 세트를 구현할 수 있습니다.
 
 ### 이전 Core ML 버전 사용하기
 
@@ -263,4 +263,4 @@ Core ML 대리자는 다음 연산을 지원합니다.
 
 - [Core ML delegate Swift API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/swift/Sources/CoreMLDelegate.swift)
 - [Core ML delegate C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/coreml/coreml_delegate.h)
-    - This can be used for Objective-C codes. ~~~
+    - Objective-C 코드에 사용될 수 있습니다. ~~~
