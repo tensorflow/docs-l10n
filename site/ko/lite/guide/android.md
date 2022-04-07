@@ -34,7 +34,7 @@ TensorFlow Lite(TFLite) 모델을 가져오려면 다음과 같이 합니다.
 
     선택 사항: [GPU 가속](../performance/gpu)을 사용하려는 경우 TensorFlow GPU를 가져오기 위한 두 번째 확인란을 선택합니다. ![Import dialog for TFLite model](../images/android/import_dialog.png)
 
-3. Click `Finish`.
+3. `Finish`를 클릭합니다.
 
 4. 가져오기가 성공하면 다음 화면이 나타납니다. 모델 사용을 시작하려면 Kotlin 또는 Java를 선택하고 `Sample Code` 섹션 아래에 코드를 복사하여 붙여 넣습니다. Android Studio의 `ml` 디렉터리 아래에 있는 TFLite 모델을 두 번 클릭하여 이 화면으로 돌아갈 수 있습니다. ![Model details page in Android Studio](../images/android/model_details.png)
 
@@ -42,7 +42,7 @@ TensorFlow Lite(TFLite) 모델을 가져오려면 다음과 같이 합니다.
 
 TensorFlow Lite Task 라이브러리에는 앱 개발자가 TFLite로 ML 경험을 만들 수 있는 강력하고 사용하기 쉬운 작업별 라이브러리 세트가 포함되어 있습니다. 이미지 분류, 질문 및 답변 등과 같은 주요 머신 러닝 작업에 최적화된 기본 제공 모델 인터페이스가 제공됩니다. 모델 인터페이스는 각 작업에 맞게 특별히 설계되어 최상의 성능과 유용성을 제공합니다. Task 라이브러리는 크로스 플랫폼에서 작동하며 Java, C++ 및 Swift(곧 제공 예정)에서 지원됩니다.
 
-To use the Task Library in your Android app, we recommend using the AAR hosted at MavenCentral for [Task Vision library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-vision) and [Task Text library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-text) , respectively.
+Android 앱에서 Task 라이브러리를 사용하려면 각각 [Task Vision 라이브러리](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-vision) 및 [Task Text 라이브러리](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-text)에 대해 MavenCentral에서 호스팅되는 AAR을 사용하는 것이 좋습니다.
 
 다음과 같이 `build.gradle` 종속성에서 이 요소를 지정할 수 있습니다.
 
