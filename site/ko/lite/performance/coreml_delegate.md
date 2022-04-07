@@ -43,7 +43,15 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
       <p></p>
 <pre class="prettyprint lang-swift">    let coreMLDelegate = CoreMLDelegate()
     var interpreter: Interpreter
-</pre>
+
+    // Core ML delegate will only be created for devices with Neural Engine
+    if coreMLDelegate != nil {
+      interpreter = try Interpreter(modelPath: modelPath,
+                                    delegates: [coreMLDelegate!])
+    } else {
+      interpreter = try Interpreter(modelPath: modelPath)
+    }
+      </pre>
     </section>
     <section>
       <h3>Objective-C</h3>
@@ -76,7 +84,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
       </pre>
     </section>
     <section>
-      <h3>C (Until 2.3.0)</h3>
+      <h3>C(2.3.0까지)</h3>
       <p></p>
 <pre class="prettyprint lang-c">    #include "tensorflow/lite/delegates/coreml/coreml_delegate.h"
 
@@ -120,11 +128,12 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
     <section>
       <h3> Swift</h3>
       <p></p>
-<pre class="prettyprint lang-swift">var options = CoreMLDelegate.Options()
-options.enabledDevices = .all
-let coreMLDelegate = CoreMLDelegate(options: options)!
-let interpreter = try Interpreter(modelPath: modelPath,
-                                  delegates: [coreMLDelegate])</pre>
+<pre class="prettyprint lang-swift">    var options = CoreMLDelegate.Options()
+    options.enabledDevices = .all
+    let coreMLDelegate = CoreMLDelegate(options: options)!
+    let interpreter = try Interpreter(modelPath: modelPath,
+                                      delegates: [coreMLDelegate])
+      </pre>
     </section>
     <section>
       <h3>Objective-C</h3>
