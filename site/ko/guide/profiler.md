@@ -51,7 +51,7 @@ docker run option '--privileged=true'
 
 ## Profiler 도구
 
-Access the Profiler from the **Profile** tab in TensorBoard, which appears only after you have captured some model data.
+일부 모델 데이터를 캡처한 후에만 표시되는 TensorBoard의 **Profile** 탭에서 Profiler에 액세스합니다.
 
 참고: Profiler에서 [Google 차트 라이브러리](https://developers.google.com/chart/interactive/docs/basic_load_libs#basic-library-loading)를 로드하려면 인터넷에 연결되어 있어야 합니다. 로컬 컴퓨터, 회사 방화벽 뒤 또는 데이터 센터에서 TensorBoard를 완전히 오프라인으로 실행하면 일부 차트와 표가 누락될 수 있습니다.
 
@@ -73,7 +73,7 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
 
 개요 페이지에는 다음과 같은 데이터가 표시됩니다.
 
-![image](./images/tf_profiler/overview_page.png)
+![image](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/guide/images/tf_profiler/overview_page.png?raw=true)
 
 - **성능 요약**: 모델 성능에 대한 높은 수준의 요약을 표시합니다. 성능 요약은 두 부분으로 구성됩니다.
 
@@ -88,7 +88,7 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
         - 기기 내 컴퓨팅 시간
         - Python 오버헤드를 포함한 기타
 
-    2. Device compute precisions - Reports the percentage of device compute time that uses 16 and 32-bit computations.
+    2. 기기 컴퓨팅 정밀도 - 16 및 32bit 계산을 사용하는 기기 컴퓨팅 시간의 백분율을 보고합니다.
 
 - **스텝-시간 그래프**: 샘플링한 모든 스텝에서 기기 스텝 시간(밀리 초)의 그래프를 표시합니다. 각 스텝은 시간이 사용된 여러 범주(서로 다른 색상)로 세분됩니다. 빨간색 영역은 기기가 호스트로부터 입력 데이터를 기다리는 동안 유휴 상태로 있었던 스텝 시간 부분에 해당합니다. 녹색 영역은 기기가 실제로 작동한 시간을 나타냅니다.
 
@@ -124,9 +124,9 @@ TensorFlow 프로그램이 파일에서 데이터를 읽을 때 파이프라인 
 
 #### 입력 파이프라인 대시보드
 
-To open the input pipeline analyzer, select **Profile**, then select **input_pipeline_analyzer** from the **Tools** dropdown.
+입력 파이프라인 분석기를 열려면 **프로파일**을 선택한 다음 **도구** 드롭다운 메뉴에서 **input_pipeline_analyzer**를 선택하세요.
 
-![image](./images/tf_profiler/input_pipeline_analyzer.png)
+![image](./images/tf_profiler/overview_page.png)
 
 대시보드에는 세 개의 섹션이 있습니다.
 
@@ -136,7 +136,7 @@ To open the input pipeline analyzer, select **Profile**, then select **input_pip
 
 #### 입력 파이프라인 요약
 
-The **Summary** reports if your program is input bound by presenting the percentage of device time spent on waiting for input from the host. If you are using a standard input pipeline that has been instrumented, the tool reports where most of the input processing time is spent.
+요약에서는 호스트로부터 입력을 기다리는 데 소요된 기기 시간의 백분율을 보여줌으로써 프로그램이 입력 바운드인지 보고합니다. 계측된 표준 입력 파이프라인을 사용하는 경우에는 도구에서 대부분의 입력 처리 시간이 소비된 위치를 보고합니다.
 
 #### 기기 쪽 분석
 
@@ -156,7 +156,7 @@ The **Summary** reports if your program is input bound by presenting the percent
 
 **입력 연산 통계**를 확장하여 개별 입력 연산 및 해당 범주에 대한 통계를 실행 시간별로 분류하여 볼 수 있습니다.
 
-![image](./images/tf_profiler/input_op_stats.png)
+![image](./images/tf_profiler/input_pipeline_analyzer.png)
 
 소스 데이터 표가 표시되고 각 항목에는 다음 정보가 포함됩니다.
 
@@ -164,8 +164,8 @@ The **Summary** reports if your program is input bound by presenting the percent
 2. **카운트**: 프로파일링 기간 동안 연산 실행의 총 인스턴스 수를 표시합니다.
 3. **총 시간(밀리 초)**: 이러한 각 인스턴스에 소요된 시간의 누적 합계를 보여줍니다.
 4. **총 시간 %**: 연산에 소요된 총 시간을 입력 처리에 소요된 총 시간의 분율로 표시합니다.
-5. **Total Self Time (in ms)**: Shows the cumulative sum of the self time spent on each of those instances. The self time here measures the time spent inside the function body, excluding the time spent in the function it calls.
-6. **Total Self Time %**. Shows the total self time as a fraction of the total time spent on input processing.
+5. **총 자체 시간(밀리 초) -** 각 인스턴스에 소요된 자체 시간의 누적 합계를 표시합니다. 여기에서 자체 시간은 호출하는 함수에서 소비한 시간을 제외하고 함수 본문 내에서 소비된 시간을 측정합니다.
+6. **총 자체 시간 %**. 총 자체 시간을 입력 처리에 소요 된 총 시간의 일부로 표시합니다.
 7. **범주**: 입력 연산의 처리 범주를 표시합니다.
 
 <a name="tf_stats"></a>
@@ -174,7 +174,7 @@ The **Summary** reports if your program is input bound by presenting the percent
 
 TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기기에서 실행되는 모든 TensorFlow 연산(op)의 성능을 표시합니다.
 
-![image](./images/tf_profiler/tf_stats.png)
+![image](./images/tf_profiler/input_op_stats.png)
 
 이 도구는 성능 정보를 두 개의 창에서 표시합니다.
 
@@ -185,7 +185,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
     3. 기기에서 각 연산의 자체 실행 시간 분포
     4. 기기에서 각 연산 유형의 자체 실행 시간 분포
 
-- The lower pane shows a table that reports data about TensorFlow ops with one row for each op and one column for each type of data (sort columns by clicking the heading of the column). Click the **Export as CSV button** on the right side of the upper pane to export the data from this table as a CSV file.
+- 하단 창에 표시되는 표에는 TensorFlow 연산에 대한 데이터를 보고합니다. 행에는 연산별로, 열에는 데이터 유형별로 표시됩니다(열의 제목을 클릭하여 정렬). 상단 창의 오른쪽에 있는 CSV로 내보내기 버튼을 클릭하여 테이블의 데이터를 CSV 파일로 내보낼 수 있습니다.
 
     참고:
 
@@ -221,7 +221,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 추적 뷰어를 열면 가장 최근에 실행된 내용이 표시됩니다.
 
-![image](./images/tf_profiler/trace_viewer.png)
+![image](./images/tf_profiler/tf_stats.png)
 
 이 화면에는 다음과 같은 주요 요소가 포함되어 있습니다.
 
@@ -248,9 +248,9 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 ##### 이벤트
 
-Events within the timeline are displayed in different colors; the colors themselves have no specific meaning.
+타임라인 내의 이벤트는 다른 색상으로 표시됩니다. 색상 자체는 특별한 의미가 없습니다.
 
-The trace viewer can also display traces of Python function calls in your TensorFlow program. If you use the `tf.profiler.experimental.start` API, you can enable Python tracing by using the `ProfilerOptions` namedtuple when starting profiling. Alternatively, if you use the sampling mode for profiling, you can select the level of tracing by using the dropdown options in the **Capture Profile** dialog.
+추적 뷰어는 TensorFlow 프로그램에서 Python 함수 호출의 추적을 표시할 수도 있습니다. `tf.profiler.experimental.start()` API를 사용하는 경우 프로파일링을 시작할 때 `ProfilerOptions`라는 튜플을 사용하여 Python 추적을 사용할 수 있습니다. 또는 프로파일링에 샘플링 모드를 사용하는 경우, **Capture Profile** 대화 상자의 드롭다운 옵션을 사용하여 추적 수준을 선택할 수 있습니다.
 
 ![image](./images/tf_profiler/python_tracer.png)
 
@@ -264,7 +264,7 @@ The trace viewer can also display traces of Python function calls in your Tensor
 
 이 도구는 두 개의 창에서 정보를 표시합니다.
 
-- The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
+- 상단 창에는 총 시간이 가장 높은 CUDA 커널을 보여주는 파이 차트가 표시됩니다.
 
 - 하단 창에 표시되는 표에서는 각 고유 kernel-op 쌍에 대한 다음 데이터를 보여줍니다.
 
@@ -289,7 +289,7 @@ The trace viewer can also display traces of Python function calls in your Tensor
 
 메모리 프로파일 도구는 프로파일링 기간 동안 기기의 메모리 사용량을 모니터링합니다. 이 도구를 사용하여 다음을 수행할 수 있습니다.
 
-- Debug out of memory (OOM) issues by pinpointing peak memory usage and the corresponding memory allocation to TensorFlow ops. You can also debug OOM issues that may arise when you run [multi-tenancy](https://arxiv.org/pdf/1901.06887.pdf) inference.
+- 최대 메모리 사용량과 TensorFlow 연산에 대한 해당 메모리 할당량을 정확히 찾아내 메모리 부족(OOM) 문제를 디버그합니다. [다중 테넌시](https://arxiv.org/pdf/1901.06887.pdf) 추론을 실행할 때 발생할 수 있는 OOM 문제를 디버깅할 수도 있습니다.
 - 메모리 조각화 문제를 디버깅합니다.
 
 메모리 프로파일 도구는 다음 세 섹션으로 데이터를 표시합니다.
@@ -391,7 +391,7 @@ UI는 **성능 분석 요약**, **모든 입력 파이프라인 요약** 및 **�
 
 #### 성능 분석 요약
 
-![image](./images/tf_profiler/tf_data_summary.png)
+![image](./images/tf_profiler/trace_viewer.png)
 
 이 섹션에서는 분석 요약을 제공합니다. 프로파일에서 느린 `tf.data` 입력 파이프라인이 감지되는지 여부가 보고됩니다. 이 섹션에는 또한 입력 바운드가 가장 큰 호스트와 지연 시간이 가장 큰 가장 느린 입력 파이프라인이 표시됩니다. 그리고 가장 중요한 부분으로, 입력 파이프라인의 어느 부분이 병목인지, 이 병목을 해결할 방법을 알려줍니다. 병목 현상 정보는 반복기 유형과 해당하는 긴 이름과 함께 제공됩니다.
 
@@ -418,17 +418,17 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 
 ![image](./images/tf_profiler/tf_data_all_hosts.png)
 
-This section provides the summary of all input pipelines across all hosts. Typically there is one input pipeline. When using the distribution strategy, there is one host input pipeline running the program's `tf.data` code and multiple device input pipelines retrieving data from the host input pipeline and transferring it to the devices.
+이 섹션에서는 모든 호스트의 모든 입력 파이프라인에 대한 요약을 제공합니다. 일반적으로 하나의 입력 파이프라인이 있습니다. 배포 전략을 사용하는 경우, 프로그램의 `tf.data` 코드를 실행하는 하나의 호스트 입력 파이프라인과 호스트 입력 파이프라인에서 데이터를 검색하여 장치로 전송하는 여러 개의 장치 입력 파이프라인이 있습니다.
 
 각 입력 파이프라인에 대해 실행 시간의 통계가 표시됩니다. 호출이 50μs 이상 오래 걸리면 느린 것으로 간주됩니다.
 
 #### 입력 파이프라인 그래프
 
-![image](./images/tf_profiler/tf_data_graph_selector.png)
+![image](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/guide/images/tf_profiler/tf_data_graph_selector.png?raw=true)
 
 이 섹션에서는 실행 시간 정보와 함께 입력 파이프라인 그래프가 표시됩니다. "호스트" 및 "입력 파이프라인"을 사용하여 보려는 호스트와 입력 파이프라인을 선택할 수 있습니다. 입력 파이프라인의 실행은 실행 시간을 기준으로 정렬되며, **Rank** 드롭다운을 사용하여 내림차순으로 정렬할 수 있습니다.
 
-![image](./images/tf_profiler/tf_data_graph.png)
+![image](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/guide/images/tf_profiler/tf_data_graph.png?raw=true)
 
 중요 경로의 노드에는 굵은 윤곽선이 있습니다. 중요 경로에서 가장 긴 자체 시간을 가진 노드인 병목 노드는 빨간색 윤곽선으로 표시됩니다. 중요하지 않은 다른 노드에는 회색 점선 윤곽선이 있습니다.
 
@@ -444,7 +444,7 @@ This section provides the summary of all input pipelines across all hosts. Typic
 
 ## 성능 데이터 수집
 
-The TensorFlow Profiler collects host activities and GPU traces of your TensorFlow model. You can configure the Profiler to collect performance data through either the programmatic mode or the sampling mode.
+TensorFlow 프로파일러는 TensorFlow 모델의 호스트 활동 및 GPU 추적을 수집합니다. 프로그래밍 모드 또는 샘플링 모드를 통해 성능 데이터를 수집하도록 프로파일러를 구성할 수 있습니다.
 
 ### 프로파일링 API
 
@@ -485,7 +485,7 @@ The TensorFlow Profiler collects host activities and GPU traces of your TensorFl
 
 <a name="sampling_mode"></a>
 
-- Sampling mode: Perform on-demand profiling by using `tf.profiler.experimental.server.start` to start a gRPC server with your TensorFlow model run. After starting the gRPC server and running your model, you can capture a profile through the **Capture Profile** button in the TensorBoard profile plugin. Use the script in the Install profiler section above to launch a TensorBoard instance if it is not already running.
+- 샘플링 모드 - `tf.profiler.experimental.server.start()`를 사용하여 주문형 프로파일링을 수행하여 TensorFlow 모델이 실행된 상태에서 gRPC 서버를 시작하세요. gRPC 서버를 시작하고 모델을 실행한 후 TensorBoard 프로파일 플러그인의 **Capture Profile** 버튼을 통해 프로파일을 캡처할 수 있습니다. 위의 프로파일러 설치 섹션에서 나오는 스크립트를 사용하여 TensorBoard 인스턴스가 아직 실행 중이 아니라면 실행하세요.
 
     예를 들면 다음과 같습니다.
 
@@ -553,7 +553,7 @@ for step, train_data in enumerate(dataset):
 
 Profiler는 4가지 축을 따라 여러 가지 사용 사례를 다룹니다. 일부 조합은 현재 지원되며 다른 조합은 향후에 추가될 예정입니다. 사용 사례 중 일부는 다음과 같습니다.
 
-- *Local vs. remote profiling*: These are two common ways of setting up your profiling environment. In local profiling, the profiling API is called on the same machine your model is executing, for example, a local workstation with GPUs. In remote profiling, the profiling API is called on a different machine from where your model is executing, for example, on a Cloud TPU.
+- *로컬 및 원격 프로파일링*: 프로파일링 환경을 설정하는 일반적인 두 가지 방법입니다. 로컬 프로파일링에서 프로파일링 API는 모델이 실행 중인 같은 시스템(예: GPU가 있는 로컬 워크스테이션)에서 호출됩니다. 원격 프로파일링에서 프로파일링 API는 모델이 실행 중인 다른 시스템(예: Cloud TPU)에서 호출됩니다.
 - *여러 작업자 프로파일링*: TensorFlow의 분산 훈련 기능을 사용할 때 여러 머신을 프로파일링할 수 있습니다.
 - *하드웨어 플랫폼*: CPU, GPU 및 TPU를 프로파일링합니다.
 
@@ -567,9 +567,9 @@ Profiler는 4가지 축을 따라 여러 가지 사용 사례를 다룹니다. �
 
 ## 최적의 모델 성능을 위한 모범 사례
 
-Use the following recommendations as applicable for your TensorFlow models to achieve optimal performance.
+최적의 성능을 얻으려면 TensorFlow 모델에 적용 가능한 다음 권장 사항을 사용하세요.
 
-In general, perform all transformations on the device and ensure that you use the latest compatible version of libraries like cuDNN and Intel MKL for your platform.
+일반적으로 기기에서 모든 변환을 수행하고 플랫폼에 맞는 최신 호환 버전의 라이브러리(cuDNN, Intel MKL 등)를 사용해야 합니다.
 
 ### 입력 데이터 파이프라인의 최적화
 
@@ -706,7 +706,7 @@ os.environ['TF_GPU_THREAD_COUNT']='1'
 - TensorFlow Dev Summit 2020에서 개최된 [TensorFlow 2의 성능 프로파일링](https://www.youtube.com/watch?v=pXHAQIhhMhI) 대담
 - TensorFlow Dev Summit 2020의 [TensorFlow Profiler 데모](https://www.youtube.com/watch?v=e4_4D7uNvf8)
 
-## Known limitations
+## 알려진 제한 사항
 
 ### TensorFlow 2.2 및 TensorFlow 2.3에서 여러 GPU 프로파일링
 
