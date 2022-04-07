@@ -101,6 +101,7 @@ ML 워크플로 및 해당 계보에서 모든 구성 요소/단계의 입력 �
 - **주어진 아티팩트를 사용하여 만들어진 모든 아티팩트를 식별합니다.** 예: 특정 데이터세트에서 훈련된 모든 모델을 확인하고, 잘못된 데이터를 기반으로 한 모델을 표시합니다.
 - **이전에 같은 입력에서 실행이 수행되었는지 확인합니다.** 예: 구성 요소/단계가 이미 같은 작업을 완료했고 이전 출력을 다시 사용할 수 있는지 확인합니다.
 - **워크플로 실행의 컨텍스트를 기록하고 쿼리합니다.** 예: 워크플로 실행에 사용되는 소유자 및 변경 목록을 추적하고, 실험별로 계보를 그룹화하며, 프로젝트별로 아티팩트를 관리합니다.
+- **속성 및 1홉 인접 노드에 대한 선언적 노드 필터링 기능.** 예: 일부 파이프라인 컨텍스트에서 형식 아티팩트 찾기; 지정된 속성의 값이 범위 내에 있는 형식이 지정된 아티팩트 반환; 동일한 입력을 가진 컨텍스트에서 이전 실행 찾기.
 
 MLMD API 및 메타데이터 저장소를 사용하여 계보 정보를 검색하는 방법을 보여주는 예제는 [MLMD 튜토리얼](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial)을 참조하세요.
 
@@ -160,6 +161,9 @@ artifacts = store.get_artifacts()
 # Plus, there are many ways to query the same Artifact
 [stored_data_artifact] = store.get_artifacts_by_id([data_artifact_id])
 artifacts_with_uri = store.get_artifacts_by_uri(data_artifact.uri)
+artifacts_with_conditions = store.get_artifacts(
+      list_options=mlmd.ListOptions(
+          filter_query='uri LIKE "%/data" AND properties.day.int_value > 0'))
 ```
 
 1. Trainer 실행의 실행을 만듭니다.
@@ -173,6 +177,10 @@ trainer_run.properties["state"].string_value = "RUNNING"
 
 # Query all registered Execution
 executions = store.get_executions_by_id([run_id])
+# Similarly, the same execution can be queried with conditions.
+executions_with_conditions = store.get_executions(
+    list_options = mlmd.ListOptions(
+        filter_query='type = "Trainer" AND properties.state.string_value IS NOT NULL'))
 ```
 
 1. 입력 이벤트를 정의하고 데이터를 읽습니다.
@@ -251,6 +259,15 @@ store.put_attributions_and_associations([attribution], [association])
 # Query the Artifacts and Executions that are linked to the Context.
 experiment_artifacts = store.get_artifacts_by_context(experiment_id)
 experiment_executions = store.get_executions_by_context(experiment_id)
+
+# You can also use neighborhood queries to fetch these artifacts and executions
+# with conditions.
+experiment_artifacts_with_conditions = store.get_artifacts(
+    list_options = mlmd.ListOptions(
+        filter_query=('contexts_a.type = "Experiment" AND contexts_a.name = "exp1"')))
+experiment_executions_with_conditions = store.get_executions(
+    list_options = mlmd.ListOptions(
+        filter_query=('contexts_a.id = {}'.format(experiment_id))))
 ```
 
 ## 원격 gRPC 서버와 함께 MLMD 사용하기
@@ -311,4 +328,8 @@ stub.PutArtifactType(request)
 
 MLMD 라이브러리에는 ML 파이프라인과 함께 쉽게 사용할 수 있는 고급 API가 있습니다. 자세한 내용은 [MLMD API 문서](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd)를 참조하세요.
 
-또한 [MLMD 튜토리얼](../tutorials/mlmd/mlmd_tutorial)에서 MLMD를 사용하여 파이프라인 구성 요소의 계보를 추적하는 방법을 알아보세요.
+속성 및 1홉 이웃 노드에서 MLMD 선언적 노드 필터링 기능을 사용하는 방법을 알아보려면 [MLMD 선언적 노드 필터링](https://github.com/google/ml-metadata/blob/v1.2.0/ml_metadata/proto/metadata_store.proto#L708-L786)을 확인하세요.
+
+Also check out the [MLMD tutorial](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial) to learn how to use MLMD to trace the lineage of your pipeline components.
+
+MLMD는 릴리스 간에 스키마와 데이터 마이그레이션을 처리하는 유틸리티를 제공합니다. 자세한 내용은 MLMD [가이드](https://github.com/google/ml-metadata/blob/master/g3doc/get_started.md#upgrade-the-mlmd-library)를 참조하세요.
