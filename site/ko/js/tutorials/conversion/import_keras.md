@@ -4,7 +4,7 @@ Keras 모델(일반적으로 Python API를 통해 생성됨)은 [여러 형식 �
 
 대상 TensorFlow.js Layer 형식은 `model.json` 파일과 바이너리 형식의 샤딩된 가중치 파일 집합이 포함된 디렉터리입니다. `model.json` 파일에는 모델 토폴로지('아키텍처' 또는 '그래프.' 즉, 레이어에 대한 설명 및 연결 방법)와 가중치 파일의 매니페스트가 모두 포함되어 있습니다.
 
-## Requirements
+## 요구 사항
 
 변환 절차에는 Python 환경이 필요합니다. [pipenv](https://github.com/pypa/pipenv) 또는 [virtualenv를](https://virtualenv.pypa.io) 사용하여 격리된 것을 유지할 수 있습니다. 변환기를 설치하려면 <code>pip install tensorflowjs</code>를 사용하세요.
 
