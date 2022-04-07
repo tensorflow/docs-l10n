@@ -8,11 +8,11 @@ TensorFlow Lite는 두 개의 빌드 시스템을 지원하며 각 빌드 시스
 --- | --- | ---
 사전 정의된 툴체인 | armhf, aarch64 | armel, armhf, aarch64
 사용자 정의 툴체인 | 사용하기 더 어려움 | 사용하기 쉬움
-[Select TF ops](https://www.tensorflow.org/lite/guide/ops_select) | 지원됨 | 지원되지 않음
-[GPU delegate](https://www.tensorflow.org/lite/performance/gpu) | Android에서만 사용 가능 | OpenCL을 지원하는 모든 플랫폼
+[TF op 선택](https://www.tensorflow.org/lite/guide/ops_select) | 지원됨 | 지원되지 않음
+[GPU 대리자](https://www.tensorflow.org/lite/performance/gpu) | Android에서만 사용 가능 | OpenCL을 지원하는 모든 플랫폼
 XNNPack | 지원됨 | 지원됨
 [Python Wheel](https://www.tensorflow.org/lite/guide/build_cmake_pip) | 지원됨 | 지원됨
-[C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/README.md) | 지원됨 | [supported](https://www.tensorflow.org/lite/guide/build_cmake#build_tensorflow_lite_c_library)
+[C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/README.md) | 지원됨 | [지원됨](https://www.tensorflow.org/lite/guide/build_cmake#build_tensorflow_lite_c_library)
 C++ API | Bazel 프로젝트에 지원됨 | CMake 프로젝트에 지원됨
 
 ## CMake를 사용한 ARM의 크로스 컴파일
