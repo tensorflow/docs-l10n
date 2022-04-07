@@ -43,7 +43,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/welcome-popup.png">
 
-3. If you would like to start with a free trial account, click on [**Try For Free**](https://console.cloud.google.com/freetrial) (or [**Get started for free**](https://console.cloud.google.com/freetrial)).
+3. 무료 평가판 계정으로 시작하려면 [**무료로 사용하기**](https://console.cloud.google.com/freetrial)(또는 [**무료로 시작하기**](https://console.cloud.google.com/freetrial))를 클릭하세요.
 
     1. 해당 국가를 선택합니다.
 
@@ -51,7 +51,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     3. 청구 세부 정보를 입력합니다.
 
-        You will not be charged at this point. If you have no other Google Cloud projects, you can complete this tutorial without exceeding the [Google Cloud Free Tier](https://cloud.google.com/free) limits, which includes a max of 8 cores running at the same time.
+        이 시점에서는 비용이 청구되지 않습니다. 다른 Google Cloud 프로젝트가 없는 경우, 동시에 실행되는 최대 8개의 코어를 포함하는 [Google Cloud 무료 등급](https://cloud.google.com/free) 한도를 초과하지 않고 이 튜토리얼을 완료할 수 있습니다.
 
 참고: 이 시점에서 무료 평가판에 의존하지 않고 유료 사용자로 전환할 수 있습니다. 이 튜토리얼은 무료 등급 한도 내에서 유지되므로 이것이 유일한 프로젝트이고 이 한도 내에서 유지한다면 요금이 청구되지 않습니다. 자세한 내용은 [Google Cloud 비용 계산기](https://cloud.google.com/products/calculator/) 및 [Google Cloud Platform 무료 등급](https://cloud.google.com/free)을 참조하세요.
 
@@ -63,7 +63,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 1. [기본 Google Cloud 대시보드](https://console.cloud.google.com/home/dashboard)**에서 Google Cloud Platform** 헤더 옆에 있는 프로젝트 드롭다운을 클릭하고 **새 프로젝트**를 선택합니다.
 2. 프로젝트 이름을 지정하고 다른 프로젝트 세부 정보를 입력합니다.
-3. **Once you have created a project, make sure to select it from the project drop-down.**
+3. **프로젝트를 생성했으면 프로젝트 드롭다운에서 프로젝트를 선택합니다.**
 
 ## 2. 새 Kubernetes 클러스터에서 AI Platform 파이프라인 설정 및 배포하기
 
@@ -81,73 +81,71 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/configure.png">
 
-4. Click "Enable" to enable the Kubernetes Engine API
+4. "활성화"를 클릭하여 Kubernetes Engine API를 활성화합니다.
 
     <img src="images/cloud-ai-platform-pipelines/select-notebook.png" alt="선택 노트북" data-md-type="image">
 
-    Note: You may have to wait several minutes before moving on, while the Kubernetes Engine APIs are being enabled for you.
+    참고: 계속 진행하기 전에 Kubernetes Engine API를 사용할 수 있게 준비되는 동안 몇 분 정도 기다려야 할 수 있습니다.
 
 5. **Deploy Kubeflow Pipelines(Kubeflow 파이프라인 배포)** 페이지에서 다음을 수행합니다.
 
-    1. Select a [zone](https://cloud.google.com/compute/docs/regions-zones) (or "region") for your cluster. The network and subnetwork can be set, but for the purposes of this tutorial we will leave them as defaults.
+    1. 클러스터의 [영역](https://cloud.google.com/compute/docs/regions-zones)(또는 '리전')을 선택합니다. 네트워크 및 서브네트워크를 설정할 수 있지만 이 튜토리얼의 목적을 위해 기본값으로 두겠습니다.
 
-    2. **IMPORTANT** Check the box labeled *Allow access to the following cloud APIs*. (This is required for this cluster to access the other pieces of your project. If you miss this step, fixing it later is a bit tricky.)
+    2. **중요** *다음 Cloud API에 대한 액세스 허용* 상자를 선택 표시합니다. (이 클러스터가 프로젝트의 다른 부분에 액세스하는 데 필요합니다. 이 단계를 놓치면 나중에 수정하기가 약간 까다롭습니다.)
 
         <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
-    3. Click **Create New Cluster**, and wait several minutes until the cluster has been created.  This will take a few minutes.  When it completes you will see a message like:
+    3. **새 클러스터 만들기**를 클릭하고 클러스터가 생성될 때까지 몇 분 정도 기다립니다. 이 작업은 몇 분 정도 걸립니다. 완료되면 다음과 같은 메시지가 표시됩니다.
 
-        > Cluster "cluster-1" successfully created in zone "us-central1-a".
+        > "us-central1-a" 영역에 "cluster-1" 클러스터를 만들었습니다.
 
-    4. Select a namespace and instance name (using the defaults is fine). For the purposes of this tutorial do not check *executor.emissary* or *managedstorage.enabled*.
+    4. 네임스페이스와 인스턴스 이름을 선택합니다(기본값을 사용해도 좋습니다). 이 튜토리얼의 목적에 맞게 *executor.emissary* 또는 *managedstorage.enabled*는 선택하지 않습니다.
 
-    5. Click **Deploy**, and wait several moments until the pipeline has been deployed. By deploying Kubeflow Pipelines, you accept the Terms of Service.
+    5. **배포**를 클릭하고 파이프라인이 배포될 때까지 잠시 기다립니다. Kubeflow Pipelines를 배포하면 서비스 약관에 동의하는 것입니다.
 
 ## 3. Cloud AI Platform Notebook 인스턴스를 설정합니다.
 
-1. Go to the [Vertex AI Workbench](https://console.cloud.google.com/vertex-ai/workbench) page.  The first time you run Workbench you will need to enable the Notebooks API.
+1. [Vertex AI Workbench](https://console.cloud.google.com/vertex-ai/workbench) 페이지로 이동합니다. Workbench를 처음 실행하는 경우 Notebooks API를 활성화해야 합니다.
 
-    Under the Main Navigation Menu: ≡ -&gt; Vertex AI -&gt; Workbench
+    기본 탐색 메뉴 아래: ≡ -&gt; Vertex AI -&gt; Workbench
 
 2. 메시지가 표시되면 Compute Engine API를 사용 설정합니다.
 
-3. Create a **New Notebook** with TensorFlow Enterprise 2.7 (or above) installed.
+3. TensorFlow Enterprise 2.7(또는 그 이상)이 설치된 **새 노트북**을 생성합니다.
 
     <img src="images/cloud-ai-platform-pipelines/open-dashboard.png" alt="오픈 대시 보드" data-md-type="image">
 
-    New Notebook -&gt; TensorFlow Enterprise 2.7 -&gt; Without GPU
+    새 노트북 -&gt; TensorFlow Enterprise 2.7 -&gt; Without GPU
 
-    Select a region and zone, and give the notebook instance a name.
+    리전과 영역을 선택하고 노트북 인스턴스의 이름을 지정합니다.
 
-    To stay within the Free Tier limits, you may need to change the default settings here to reduce the number of vCPUs available to this instance from 4 to 2:
+    무료 등급 한도 내에서 작업하려면 여기에서 기본 설정을 변경하여 이 인스턴스에 사용 가능한 vCPU 수를 4에서 2로 줄여야 할 수 있습니다.
 
-    1. Select **Advanced Options** at the bottom of the **New notebook** form.
+    1. **새 노트북** 양식 하단에서 **고급 옵션**을 선택합니다.
 
-    2. Under **Machine configuration** you may want to select a configuration with 1 or 2 vCPUs if you need to stay in the free tier.
+    2. 무료 등급을 유지해야 하는 경우 **머신 구성**에서 vCPU가 1개 또는 2개인 구성을 선택할 수 있습니다.
 
         <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
-    3. Wait for the new notebook to be created, and then click **Enable Notebooks API**
+    3. 새 노트북이 생성될 때까지 기다린 후 **Notebooks API 사용 설정**을 클릭합니다.
 
-Note: You may experience slow performance in your notebook if you use 1 or 2 vCPUs instead of the default or higher. This should not seriously hinder your completion of this tutorial. If would like to use the default settings, [upgrade your account](https://cloud.google.com/free/docs/gcp-free-tier#to_upgrade_your_account) to at least 12 vCPUs. This will accrue charges. See [Google Kubernetes Engine Pricing](https://cloud.google.com/kubernetes-engine/pricing/) for more details on pricing, including a [pricing calculator](https://cloud.google.com/products/calculator) and information about the [Google Cloud Free Tier](https://cloud.google.com/free).
+참고: 기본값 이상의 구성 대신 1개 또는 2개의 vCPU를 사용하는 경우 노트북의 성능이 저하될 수 있습니다. 이러한 현상은 이 튜토리얼을 완료하는 데 심각하게 방해가 되지는 않습니다. 기본 설정을 사용하려면 최소 12개의 vCPU로 [계정을 업그레이드](https://cloud.google.com/free/docs/gcp-free-tier#to_upgrade_your_account)합니다. 이 경우 요금이 발생합니다. [가격 계산기](https://cloud.google.com/products/calculator) 및 [Google Cloud 무료 등급](https://cloud.google.com/free) 정보 등 가격 책정에 대한 자세한 내용은 [Google Kubernetes Engine 가격 책정](https://cloud.google.com/kubernetes-engine/pricing/)을 참조하세요.
 
 ## 4. 시작하기 노트북 시작
 
-1. Go to the [**AI Platform Pipelines Clusters**] (https://console.cloud.google.com/ai-platform/pipelines) page.
+1. [**AI Platform 파이프라인 클러스터**](https://console.cloud.google.com/ai-platform/pipelines) 페이지로 이동합니다.
 
     기본 탐색 메뉴에서 : ≡-&gt; AI Platform-&gt; 파이프 라인
 
 2. 이 튜토리얼에서 사용중인 클러스터 라인에서 **Open Pipelines Dashboard를** 클릭합니다.
 
-
     <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
 
-3. On the **Getting Started** page, click **Open a Cloud AI Platform Notebook on Google Cloud**.
-
+3. **시작하기** 페이지에서 **Google Cloud에서 Cloud AI Platform 노트북 열기**를 클릭합니다.
 
     <img src="images/cloud-ai-platform-pipelines/open-template.png">
 
-4. Select the Notebook instance you are using for this tutorial and **Continue**, and then **Confirm**.
+4. 이 튜토리얼에서 사용 중인 노트북 인스턴스를 선택하고 **계속**을 선택한 후 **확인**을 선택합니다.
 
     <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/check-the-box.png">
 
@@ -231,7 +229,7 @@ Cloud AI Platform Notebook의 왼쪽에 파일 브라우저가 표시되어야�
     - pipeline.py — TFX 구성 요소 및 `pipeline.py`
 - `models` 이 디렉토리에는 ML 모델 정의가 포함되어 있습니다.
     - `features.py` `features_test.py` — 모델의 기능을 정의합니다.
-    - `preprocessing.py` / `preprocessing_test.py` — defines preprocessing jobs using `tf::Transform`
+    - `preprocessing.py` / `preprocessing_test.py` — `tf::Transform`을 사용하여 전처리 작업을 정의합니다.
     - `estimator` 이 디렉토리는 Estimator 기반 모델을 포함합니다.
         - `constants.py` — 모델의 상수를 정의합니다.
         - `model.py` / `model_test.py` — TF 추정기를 사용하여 DNN 모델 정의
@@ -345,7 +343,7 @@ TFX 사용의 이점 중 하나는 변환 코드를 한 번 작성하면 결과 
 
 ![변환](images/airflow_workshop/transform.png)
 
-- [Transform](https://www.tensorflow.org/tfx/guide/transform) performs feature engineering on the dataset.
+- [Transform](https://www.tensorflow.org/tfx/guide/transform)은 데이터세트에서 특성 엔지니어링을 수행합니다.
 
 ### Jupyter 랩 파일 편집기에서 :
 
@@ -385,7 +383,7 @@ Kubeflow Orchestrator의 경우 KFP 대시 보드를 방문하여 파이프 라�
 
 ### 구성품
 
-- [Trainer](https://www.tensorflow.org/tfx/guide/trainer) trains a TensorFlow model.
+- [Trainer](https://www.tensorflow.org/tfx/guide/trainer)는 TensorFlow 모델을 훈련합니다.
 
 ### Jupyter 랩 파일 편집기에서 :
 
@@ -428,7 +426,7 @@ Kubeflow Orchestrator의 경우 KFP 대시 보드를 방문하여 파이프 라�
 
 ### 구성품
 
-- [Evaluator](https://www.tensorflow.org/tfx/guide/evaluator) performs deep analysis of the training results.
+- [Evaluator](https://www.tensorflow.org/tfx/guide/evaluator)는 훈련 결과에 대한 심층 분석을 수행합니다.
 
 ### Jupyter 랩 파일 편집기에서 :
 
@@ -468,7 +466,7 @@ Kubeflow Orchestrator의 경우 KFP 대시 보드를 방문하여 파이프 라�
 
 ### 구성품
 
-- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) deploys the model to a serving infrastructure.
+- [Pusher](https://www.tensorflow.org/tfx/guide/pusher)는 모델을 적용 인프라에 배포합니다.
 
 ### Jupyter 랩 파일 편집기에서 :
 
@@ -537,7 +535,7 @@ BigQuery에 사용할 GCP 프로젝트를 지정해야합니다. 파이프 라�
 
 **두 번 클릭하여 `configs.py`** 를 엽니 다. `BIG_QUERY_WITH_DIRECT_RUNNER_BEAM_PIPELINE_ARGS` 및 BIG_QUERY_QUERY의 정의를 주석 `BIG_QUERY_QUERY` . 이 파일의 프로젝트 ID와 지역 값을 GCP 프로젝트의 올바른 값으로 바꿔야합니다.
 
-> **Note: You MUST set your GCP project ID and region in the `configs.py` file before proceeding.**
+> **참고: 더 진행하기 전에 `configs.py` 파일에서 GCP 프로젝트 ID와 리전을 설정해야 합니다.**
 
 **디렉토리를 한 수준 위로 변경합니다.** 파일 목록 위의 디렉토리 이름을 클릭하십시오. 디렉토리 이름은 파이프 라인 이름을 변경하지 않은 경우 `my_pipeline`
 
@@ -560,7 +558,7 @@ BigQuery에 사용할 GCP 프로젝트를 지정해야합니다. 파이프 라�
 
 여러 [TFX 구성 요소는 Apache Beam](https://www.tensorflow.org/tfx/guide/beam) [을 사용하여 데이터 병렬 파이프 라인을 구현하며, 이는 Google Cloud Dataflow를](https://cloud.google.com/dataflow/) 사용하여 데이터 처리 워크로드를 분산 할 수 있음을 의미합니다. 이 단계에서는 Apache Beam의 데이터 처리 백엔드로 Dataflow를 사용하도록 Kubeflow 오케 스트레이터를 설정합니다.
 
-> **Note:** If the Dataflow API is not already enabled, you can enable it using the console, or from the CLI using this command (for example, in the Cloud Shell):
+> **참고:** Dataflow API가 아직 사용 설정되지 않은 경우 콘솔을 사용하거나 CLI에서 다음 명령어를 사용하여 사용 설정할 수 있습니다(예: Cloud Shell에서).
 
 ```bash
 # Select your project:
@@ -577,7 +575,7 @@ gcloud services list --available | grep Dataflow
 gcloud services enable dataflow.googleapis.com
 ```
 
-> **Note:** Execution speed may be limited by default [Google Compute Engine (GCE)](https://cloud.google.com/compute) quota. We recommend setting a sufficient quota for approximately 250 Dataflow VMs: **250 CPUs, 250 IP Addresses, and 62500 GB of Persistent Disk**. For more details, please see the [GCE Quota](https://cloud.google.com/compute/quotas) and [Dataflow Quota](https://cloud.google.com/dataflow/quotas) documentation. If you are blocked by IP Address quota, using a bigger [`worker_type`](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options) will reduce the number of needed IPs.
+> **참고:** 실행 속도는 기본적으로 [Google Compute Engine(GCE)](https://cloud.google.com/compute) 할당량에 따라 제한될 수 있습니다. 약 250개의 Dataflow VM(**250개의 CPU, 250개의 IP 주소, 62500GB의 영구 디스크**)에 대해 충분한 할당량을 설정하는 것이 좋습니다. 자세한 내용은 [GCE 할당량](https://cloud.google.com/compute/quotas) 및 [Dataflow 할당량](https://cloud.google.com/dataflow/quotas) 문서를 참조하세요. IP 주소 할당량으로 인해 차단된 경우 더 큰 [`worker_type`](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options)을 사용하면 필요한 IP 수가 줄어듭니다.
 
 **`pipeline` 을 두 번 클릭하여 디렉토리를 변경하고 두 번 클릭하여 `configs.py`** 를 엽니 다. `GOOGLE_CLOUD_REGION` 및 `DATAFLOW_BEAM_PIPELINE_ARGS` 정의의 주석 처리를 제거합니다.
 
@@ -608,7 +606,7 @@ gcloud services enable dataflow.googleapis.com
 
 **디렉토리를 한 수준 위로 변경하고 두 번 클릭하여 `kubeflow_runner.py`** 를 엽니 다. `ai_platform_training_args` 및 `ai_platform_serving_args` 주석을 제거합니다.
 
-> Note: If you receive a permissions error in the Training step, you may need to provide Storage Object Viewer permissions to the Cloud Machine Learning Engine (AI Platform Prediction &amp; Training) service account. More information is available in the [Container Registry documentation](https://cloud.google.com/container-registry/docs/access-control#grant).
+> 참고: 학습 단계에서 권한 오류가 발생하면 Cloud Machine Learning Engine(AI Platform 예측 및 학습) 서비스 계정에 스토리지 객체 뷰어 권한을 제공해야 할 수도 있습니다. 자세한 내용은 [Container Registry 문서](https://cloud.google.com/container-registry/docs/access-control#grant)에서 확인할 수 있습니다.
 
 #### 파이프 라인을 업데이트하고 다시 실행하십시오.
 
