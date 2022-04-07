@@ -26,7 +26,7 @@ git clone https://github.com/tensorflow/tensorflow
 
 #### 2단계: 야간 GPU AAR을 사용하도록 `app/build.gradle`을 편집합니다.
 
-Note: You can now target **Android S+** with `targetSdkVersion="S"` in your manifest, or `targetSdkVersion "S"` in your Gradle `defaultConfig` (API level TBD). In this case, you should merge the contents of [`AndroidManifestGpu.xml`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/AndroidManifestGpu.xml) into your Android application's manifest. Without this change, the GPU delegate cannot access OpenCL libraries for acceleration. *AGP 4.2.0 or above is required for this to work.*
+참고: 이제 매니페스트에 `targetSdkVersion="S"`을 적용하거나 Gradle `defaultConfig`(API 수준 미정)에 `targetSdkVersion "S"`를 적용해 **Android S+**를 대상으로 지정할 수 있습니다. 이 경우 [`AndroidManifestGpu.xml`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/AndroidManifestGpu.xml)의 콘텐츠를 Android 애플리케이션의 매니페스트에 병합해야 합니다. 이 변경이 없으면 GPU 대리자가 가속을 위해 OpenCL 라이브러리에 액세스할 수 없습니다. *이 작업을 수행하려면 AGP 4.2.0 이상이 필요합니다.*
 
 기존 `dependencies` 블록의 기존 `tensorflow-lite` 패키지와 함께 `tensorflow-lite-gpu` 패키지를 추가합니다.
 
@@ -237,7 +237,7 @@ GPU 대리자를 사용할 코드를 활성화하려면 `CameraExampleViewContro
       </pre>
     </section>
     <section>
-      <h3>C (Until 2.3.0)</h3>
+      <h3>C(2.3.0까지)</h3>
       <p></p>
 <pre class="prettyprint lang-c">    #include "tensorflow/lite/c/c_api.h"
     #include "tensorflow/lite/delegates/gpu/metal_delegate.h"
