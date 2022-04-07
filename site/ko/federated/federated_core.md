@@ -4,9 +4,9 @@
 
 Federated Core에 대한 간단한 소개를 위해 다음 튜토리얼를 읽어 보세요. 기본 개념 중 일부를 예제로 소개하고 간단한 페더레이션 평균화 알고리즘의 구성을 단계별로 보여줍니다.
 
-- [사용자 정의 페더레이션 알고리즘, 1부: Federated Core 소개](tutorials/custom_federated_algorithms_1.ipynb)
+- [Custom Federated Algorithms, Part 1: Introduction to the Federated Core](tutorials/custom_federated_algorithms_1.ipynb).
 
-- [사용자 정의 페더레이션 알고리즘, 2부: 페더레이션 평균화 구현하기](tutorials/custom_federated_algorithms_2.ipynb)
+- [Custom Federated Algorithms, Part 2: Implementing Federated Averaging](tutorials/custom_federated_algorithms_2.ipynb).
 
 또한, 페더레이션 학습에 Federated Core API(FC API)를 사용하면 이 레이어를 설계할 때 선택한 일부 사항에 대한 중요한 맥락을 이해할 수 있으므로 [페더레이션 학습](federated_learning.md)과 [이미지 분류](tutorials/federated_learning_for_image_classification.ipynb) 및 [텍스트 생성](tutorials/federated_learning_for_text_generation.ipynb)에 관한 관련 튜토리얼에 익숙해지기를 권장합니다.
 
@@ -34,14 +34,14 @@ TFF는 단순한 *클라이언트-서버* 아키텍처를 뛰어넘을 수 있�
 
 ### Python 인터페이스
 
-TFF는 내부 언어를 사용하여 페더레이션 계산을 표현하며, 언어의 구문은 [computation.proto](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/proto/v0/computation.proto)에서 직렬화 가능하는 표현에 의해 정의됩니다. FC API의 사용자는 일반적으로 이 언어와 직접 상호 작용할 필요가 없습니다. 그보다는 계산을 정의하는 방법으로 언어를 래핑하는 Python API(`tff` 네임스페이스)를 제공합니다.
+TFF uses an internal language to represent federated computations, the syntax of which is defined by the serializable representation in [computation.proto](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/proto/v0/computation.proto). Users of FC API generally won't need to interact with this language directly, though. Rather, we provide a Python API (the `tff` namespace) that wraps arounds it as a way to define computations.
 
 특히, TFF는 `tff.federated_computation`과 같은 Python 함수 데코레이터를 제공하여 데코레이팅된 함수의 본문을 추적하고 TFF의 언어로 페더레이션 계산 논리의 직렬화된 표현을 생성합니다. `tff.federated_computation`으로 데코레이팅된 함수는 이러한 직렬화된 표현의 캐리어 역할을 하며, 캐리어를 다른 계산 본문에 구성 요소로 포함하거나 호출될 때 요청 시 실행할 수 있습니다.
 
 여기에 한 가지 예제가 있습니다. 더 많은 예제는 [사용자 정의 알고리즘](tutorials/custom_federated_algorithms_1.ipynb) 튜토리얼에서 찾을 수 있습니다.
 
 ```python
-@tff.federated_computation(tff.FederatedType(tf.float32, tff.CLIENTS))
+@tff.federated_computation(tff.type_at_clients(tf.float32))
 def get_average_temperature(sensor_readings):
   return tff.federated_mean(sensor_readings)
 ```
@@ -59,6 +59,8 @@ Federated Core는 다음 유형의 범주를 제공합니다. 이들 유형을 �
 첫째, 기존 주류 언어에서 볼 수 있는 유형과 개념적으로 유사한 유형의 범주는 다음과 같습니다.
 
 - **텐서 유형**(`tff.TensorType`): TensorFlow에서와 마찬가지로 `dtype`과 `shape`이 있습니다. 유일한 차이점은 이 유형의 객체는 TensorFlow 그래프에서 TensorFlow ops의 출력을 나타내는 Python의 `tf.Tensor` 인스턴스로 제한되지 않으며, 예를 들어 분산 집계 프로토콜의 출력으로 생성될 수 있는 데이터의 단위를 포함할 수 있다는 것입니다. 따라서 TFF 텐서 유형은 단순히 Python 또는 TensorFlow에서 해당 유형의 구체적인 물리적 표현의 추상 버전입니다.
+
+    TFF's `TensorTypes` can be stricter in their (static) treatment of shapes than TensorFlow. For example, TFF's typesystem treats a tensor with unknown rank as assignable *from* any other tensor of the same `dtype`, but not assignable *to* any tensor with fixed rank. This treatment prevents certain runtime failures (e.g., attempting to reshape a tensor of unknown rank into a shape with incorrect number of elements), at the cost of greater strictness in what computations TFF accepts as valid.
 
     텐서 유형의 간단한 표기법은 `dtype` 또는 `dtype[shape]`입니다. 예를 들어, `int32` 및 `int32[10]`은 각각 정수 및 int 벡터의 유형입니다.
 
@@ -125,7 +127,7 @@ Federated Core의 언어는 몇 가지 추가 요소가 포함된 [람다 미적
     다음은 앞서 언급한 람다 식의 예입니다.
 
     ```python
-    @tff.federated_computation(tff.FederatedType(tf.float32, tff.CLIENTS))
+    @tff.federated_computation(tff.type_at_clients(tf.float32))
     def get_average_temperature(sensor_readings):
       return tff.federated_mean(sensor_readings)
     ```
