@@ -6,10 +6,10 @@
 
 The [Hello World](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world) example is designed to demonstrate the absolute basics of using TensorFlow Lite for Microcontrollers. We train and run a model that replicates a sine function, i.e, it takes a single number as its input, and outputs the number's [sine](https://en.wikipedia.org/wiki/Sine) value. When deployed to the microcontroller, its predictions are used to either blink LEDs or control an animation.
 
-The end-to-end workflow involves the following steps:
+전체 워크플로에는 다음 단계가 포함됩니다.
 
 1. [모델](#train_a_model) 훈련 (Python에서): 기기에서 사용할 수 있도록 모델을 훈련, 변환 및 최적화하는 jupyter 노트북.
-2. [Run inference](#run_inference) (in C++ 11): An end-to-end unit test that runs inference on the model using the [C++ library](library.md).
+2. [추론 실행](#run_inference) (C++ 11에서): [C++ 라이브러리](library.md)를 사용하여 모델에 대한 추론을 실행하는 전체 단위 테스트.
 
 ## 지원되는 기기 준비하기
 
@@ -28,9 +28,9 @@ The example application we'll be using has been tested on the following devices:
 
 ## 모델 훈련
 
-Note: You can skip this section and use the trained model included in the example code.
+참고: 이 섹션을 건너뛰고 예제 코드에 포함된 학습된 모델을 사용할 수 있습니다.
 
-Use Google Colaboratory to [train your own model](https://colab.research.google.com/github/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb). For more details, refer to the `README.md`:
+Google Colaboratory를 사용하여 [자신의 모델을 훈련](https://colab.research.google.com/github/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb)시키세요. 자세한 내용은 `README.md`를 참조하세요.
 
 <a class="button button-primary" href="https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/train/README.md">Hello World Training README.md</a>
 
