@@ -112,7 +112,7 @@ NNAPI는 모델이 [지원되는 연산](https://developer.android.com/ndk/guide
 - [PoseNet for pose estimation](https://github.com/tensorflow/tfjs-models/tree/master/posenet)[(download)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)
     *(vision model that estimates the poses of a person(s) in image or video)*
 
-NNAPI acceleration is also not supported when the model contains dynamically-sized outputs. In this case, you will get a warning like:
+모델에 동적 크기의 출력이 포함된 경우 NNAPI 가속도 지원되지 않습니다. 이 경우 다음과 같은 경고가 표시됩니다.
 
 ```none
 ERROR: Attempting to use a delegate that only supports static-sized tensors \
