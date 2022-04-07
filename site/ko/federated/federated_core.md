@@ -34,7 +34,7 @@ TFF는 단순한 *클라이언트-서버* 아키텍처를 뛰어넘을 수 있�
 
 ### Python 인터페이스
 
-TFF uses an internal language to represent federated computations, the syntax of which is defined by the serializable representation in [computation.proto](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/proto/v0/computation.proto). Users of FC API generally won't need to interact with this language directly, though. Rather, we provide a Python API (the `tff` namespace) that wraps arounds it as a way to define computations.
+TFF 페더레이션 계산을 표현하기 위해 내부 언어를 사용하며, 언어의 구문은 [computation.proto](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/proto/v0/computation.proto)에서 직렬화 표현에 의해 정의됩니다. FC API 사용자는 일반적으로 이 언어와 직접 상호 작용할 필요가 없습니다. 그보다는 계산을 정의하는 방법으로 언어를 래핑하는 Python API(`tff` 네임스페이스)를 제공합니다.
 
 특히, TFF는 `tff.federated_computation`과 같은 Python 함수 데코레이터를 제공하여 데코레이팅된 함수의 본문을 추적하고 TFF의 언어로 페더레이션 계산 논리의 직렬화된 표현을 생성합니다. `tff.federated_computation`으로 데코레이팅된 함수는 이러한 직렬화된 표현의 캐리어 역할을 하며, 캐리어를 다른 계산 본문에 구성 요소로 포함하거나 호출될 때 요청 시 실행할 수 있습니다.
 
