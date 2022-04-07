@@ -18,9 +18,9 @@ print(embeddings.shape)  #(4,128)
 
 ## 다음 단계
 
-- [Find models on tfhub.dev](https://tfhub.dev)
+- [tfhub.dev에서 모델 찾기](https://tfhub.dev)
 - [tfhub.dev에 모델 게시](publish.md)
 - TensorFlow Hub 라이브러리
     - [TensorFlow Hub 설치](installation.md)
-    - [Library overview](lib_overview.md)
+    - [라이브러리 개요](lib_overview.md)
 - [튜토리얼 따르기](tutorials)
