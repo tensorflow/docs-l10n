@@ -28,7 +28,7 @@ Trainer는 추론/서빙을 위한 하나 이상의 모델(일반적으로 Saved
 
 제네릭 Trainer를 사용하면 개발자가 Trainer 구성 요소와 함께 모든 TensorFlow 모델 API를 사용할 수 있습니다. TensorFlow Estimator 외에도 개발자는 Keras 모델 또는 사용자 정의 훈련 루프를 사용할 수 있습니다. 자세한 내용은 [제네릭 Trainer용 RFC](https://github.com/tensorflow/community/blob/master/rfcs/20200117-tfx-generic-trainer.md)를 참조하세요.
 
-### Configuring the Trainer Component
+### Trainer 구성 요소 구성하기
 
 제네릭 Trainer의 일반적인 파이프라인 DSL 코드는 다음과 같습니다.
 
@@ -45,7 +45,7 @@ trainer = Trainer(
     eval_args=trainer_pb2.EvalArgs(num_steps=5000))
 ```
 
-Trainer invokes a training module, which is specified in the `module_file` parameter. Instead of `trainer_fn`, a `run_fn` is required in the module file if the `GenericExecutor` is specified in the `custom_executor_spec`. The `trainer_fn` was responsible for creating the model. In addition to that, `run_fn` also needs to handle the training part and output the trained model to a the desired location given by [FnArgs](https://github.com/tensorflow/tfx/blob/master/tfx/components/trainer/fn_args_utils.py):
+Trainer는 `module_file` 매개변수에 지정된 훈련 모듈을 호출합니다. `custom_executor_spec`에 `GenericExecutor`가 지정된 경우 모듈에 `trainer_fn` 대신 `run_fn`이 필요합니다. `trainer_fn`은 모델 생성을 담당했습니다. 이와 함께 `run_fn`은 훈련 부분을 처리하고 훈련된 모델을 [FnArgs](https://github.com/tensorflow/tfx/blob/master/tfx/components/trainer/fn_args_utils.py)에서 지정한 원하는 위치로 출력해야 합니다.
 
 ```python
 from tfx.components.trainer.fn_args_utils import FnArgs
@@ -60,7 +60,7 @@ def run_fn(fn_args: FnArgs) -> None:
 
 Here is an [example module file](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils_keras.py) with `run_fn`.
 
-Note that if the Transform component is not used in the pipeline, then the Trainer would take the examples from ExampleGen directly:
+Transform 구성 요소가 파이프라인에서 사용되지 않으면 Trainer는 ExampleGen에서 직접 예제를 가져옵니다.
 
 ```python
 trainer = Trainer(
@@ -71,4 +71,4 @@ trainer = Trainer(
     eval_args=trainer_pb2.EvalArgs(num_steps=5000))
 ```
 
-More details are available in the [Trainer API reference](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/Trainer).
+자세한 내용은 [Trainer API 참조](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/Trainer)에서 확인할 수 있습니다.
