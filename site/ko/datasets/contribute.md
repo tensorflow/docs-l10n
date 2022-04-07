@@ -5,7 +5,7 @@
 ## 시작하며
 
 - If you're new with TFDS, the easiest way to get started is to implement one of our [requested dataset](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc), focusing on the most requested ones. [Follow our guide](https://www.tensorflow.org/datasets/add_dataset) for instructions.
-- Issues, feature requests, bugs,... have a much bigger impact than adding new datasets, as they benefit the entire TFDS community. See the [potential contribution list](https://github.com/tensorflow/datasets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+-label%3A%22dataset+request%22+). Starts with the ones labeled with [contribution-welcome](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22contributions+welcome%22) which are small self-contained easy issues to get started with.
+- 이슈들, 기능요청들과 버그들,... 은 그것들이 전체 TFDS 커뮤니티에 이익을 주기 때문에 새로운 데이타셋을 추가하는 것보다 더욱 큰 영향이 있습니다.[potential contribution list](https://github.com/tensorflow/datasets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+-label%3A%22dataset+request%22+)을 보십시오. Starts with the ones labeled with [contribution-welcome](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22contributions+welcome%22)의 이름을 가진 것으로 시작해보십시오. 그것은 시작하기에 쉽고 작은 이슈가 포함되어 있습니다.
 - 이미 할당되었지만 한동안 업데이트되지 않은 버그를 주저하지 마십시오.
 - 문제를 할당받을 필요가 없습니다. 작업을 시작할 때 문제에 대해 간단히 언급하십시오. :)
 - 문제에 관심이 있지만 시작하는 방법을 모르는 경우 주저하지 말고 도움을 요청하십시오. 조기 피드백을 원하시면 PR 초안을 보내 주시기 바랍니다.
@@ -70,7 +70,7 @@ pip install pylint --upgrade
 pylint tensorflow_datasets/core/some_file.py
 ```
 
-You can try `yapf` to auto-format a file, but the tool is not perfect, so you'll likely have to manually apply fixes afterward.
+`yapf` 를 사용하여 파일 형식을 자동으로 지정할 수 있지만 도구가 완벽하지 않으므로 나중에 수정 사항을 수동으로 적용해야 할 것입니다.
 
 ```sh
 yapf tensorflow_datasets/core/some_file.py
