@@ -40,13 +40,13 @@ python import_pb_to_tensorboard.py --model_dir <model path> --log_dir <log dir p
 
 Netron이 TensorFlow Lite 모델을 열 수 없는 경우, 리포지토리에서 [visualize.py](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/visualize.py) 스크립트를 사용해 볼 수 있습니다.
 
-If you're using TF 2.5 or a later version
+TF 2.5 이상 버전을 사용하는 경우
 
 ```shell
 python -m tensorflow.lite.tools.visualize model.tflite visualized_model.html
 ```
 
-Otherwise, you can run this script with Bazel
+그렇지 않으면 Bazel을 사용하여 이 스크립트를 실행할 수 있습니다.
 
 - [TensorFlow 리포지토리 복제](https://www.tensorflow.org/install/source)
 - bazel을 사용하여 `visualize.py` 스크립트를 실행합니다.
@@ -71,7 +71,7 @@ TensorFlow Lite 성능을 최적화하기 위한 상위 수준 프로세스는 �
 
 - *작업에 적합한 모델이 있는지 확인합니다.* 이미지 분류의 경우, [호스팅 모델 목록](hosted_models.md)을 확인하세요.
 - *스레드 수를 조정합니다.* 많은 TensorFlow Lite 연산자는 다중 스레드 커널을 지원합니다. 이를 위해 [C++ API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L345)에서 `SetNumThreads()`를 사용할 수 있습니다. 그러나 스레드를 늘리면 환경에 따라 성능이 달라집니다.
-- *하드웨어 가속기를 사용합니다.* TensorFlow Lite는 delegate(대리자)를 사용하여 특정 하드웨어에 대한 모델 가속을 지원합니다. 예를 들어, Android의 Neural Networks API를 사용하려면 인터프리터에서 [`UseNNAPI`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L343)를 호출합니다. 또는 [GPU 대리자 튜토리얼](../performance/gpu.md)을 살펴보세요.
+- *하드웨어 가속기를 사용합니다.* TensorFlow Lite는 대리자를 사용하여 특정 하드웨어에 대한 모델 가속을 지원합니다. 지원되는 가속기와 장치의 모델에서 가속기를 사용하는 방법에 대한 정보는 [대리자](../performance/delegates.md) 가이드를 참조하세요.
 - *(고급) 모델을 프로파일링합니다.* Tensorflow Lite [벤치마킹 도구](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)에는 연산자별 통계를 표시할 수 있는 프로파일러가 내장되어 있습니다. 특정 플랫폼에 대해 연산자의 성능을 최적화할 수 있는 방법을 알고 있다면 [사용자 정의 연산자](ops_custom.md)를 구현할 수 있습니다.
 
 성능을 최적화하는 방법에 대해 더 자세히 알아보려면 [모범 사례](../performance/best_practices.md)를 참조하세요.
