@@ -141,15 +141,19 @@ AddBuiltin(BuiltinOperator_CONV_2D, Register_CONV_2D(), 1, 2);
 - Dilation 인자가 모두 1인 경우, 버전=1을 채웁니다.
 - 그렇지 않으면 버전=2를 채웁니다.
 
-이를 위해 `lite/tools/versioning/op_version.cc`에서 연산자 클래스에 대한 `GetBuiltinOperatorVersion` 함수를 재정의해야 합니다.
-
-버전이 하나뿐인 ops의 경우, `GetVersion` 함수는 다음과 같이 정의됩니다.
+`DepthwiseConv2D` 케이스에 새 버전을 추가하여 `lite/tools/versioning/op_version.cc`의 연산자에 적합하게 `GetBuiltinOperatorVersion` 함수를 수정합니다.
 
 ```
 int GetVersion(const Operator& op) const override { return 1; }
 ```
 
-여러 버전을 지원하는 경우, 다음 예와 같이 매개변수를 확인하고 op의 버전을 확인합니다.
+### 연산자 버전 맵 업데이트하기
+
+마지막 단계는 새 버전 정보를 연산자 버전 맵에 추가하는 것입니다. 이 버전 맵을 기반으로 모델의 최소 필수 런타임 버전을 생성해야 하므로 이 단계가 필요합니다.
+
+이를 위해 `lite/tools/versioning/runtime_version.cc`에 새 맵 항목을 추가해야 합니다.
+
+이 예에서는 `op_version_map`에 다음 항목을 추가해야 합니다.
 
 ```
 int GetVersion(const Operator& op) const override {
@@ -162,33 +166,14 @@ int GetVersion(const Operator& op) const override {
 }
 ```
 
-### 연산자 버전 맵 업데이트하기
-
-마지막 단계는 새 버전 정보를 연산자 버전 맵에 추가하는 것입니다. 이 버전 맵을 기반으로 필요한 모델의 최소 런타임 버전을 생성해야 하므로 이 단계가 필요합니다.
-
-이를 위해 `lite/toco/tflite/op_version.cc`에 새 맵 항목을 추가해야 합니다.
-
-이 예에서는 `op_version_map`에 다음 항목을 추가해야 합니다.
-
-```
-{{OperatorType::kConv, 3}, "kPendingReleaseOpVersion"}
-```
-
-(`kPendingReleaseOpVersion`은 다음 안정적인 릴리스에서 적절한 릴리스 버전으로 대체됩니다.)
+여기서 `%CURRENT_RUNTIME_VERSION%`는 [tensorflow/core/public/version.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h)에 정의된 현재 런타임 버전에 해당합니다.
 
 ### 위임 구현
 
 TensorFlow Lite는 하드웨어 백엔드에 ops를 위임할 수 있는 Delegation API를 제공합니다. 대리자의 `Prepare` 함수에서 위임 코드의 모든 노드에 대해 버전이 지원되는지 확인합니다.
 
 ```
-const int kMinVersion = 1;
-TfLiteNode* node;
-TfLiteRegistration* registration = nullptr;
-TF_LITE_ENSURE_STATUS(context->GetNodeAndRegistration(context, node_index, &node, &registration));
-
-if (registration->version > kMinVersion) {
-  // Reject the node if the version isn't supported.
-}
+{{OperatorType::kConv, 3}, "kPendingReleaseOpVersion"}
 ```
 
-위임 코드에서 버전 1 ops만 지원하는 경우에도 이 작업이 필요하므로, 더 높은 버전의 op를 가져올 때 위임 코드에서 비호환성을 감지할 수 있습니다.
+This is required even if the delegation only supports version 1 ops, so the delegation can detect incompatibility when getting a higher version op.
