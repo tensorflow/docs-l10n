@@ -1,12 +1,12 @@
-# Writing custom datasets
+# 사용자 정의 데이터세트 작성하기
 
-Follow this guide to create a new dataset (either in TFDS or in your own repository).
+이 가이드에 따라 새 데이터세트를 생성하세요(TFDS 또는 자체 저장소 이용).
 
-Check our [list of datasets](catalog/overview.md) to see if the dataset you want is already present.
+원하는 데이터세트가 이미 있는지 확인하려면 [데이터세트 목록](catalog/overview.md)을 확인하세요.
 
 ## TL;DR
 
-The easiest way to write a new dataset is to use the [TFDS CLI](https://www.tensorflow.org/datasets/cli):
+새 데이터세트를 작성하는 가장 쉬운 방법은 [TFDS CLI](https://www.tensorflow.org/datasets/cli)를 사용하는 것입니다.
 
 ```sh
 cd path/to/my/project/datasets/
@@ -16,10 +16,10 @@ cd my_dataset/
 tfds build  # Download and prepare the dataset to `~/tensorflow_datasets/`
 ```
 
-To use the new dataset with `tfds.load('my_dataset')`:
+`tfds.load('my_dataset')`와 함께 새 데이터세트를 사용하려면 다음을 수행합니다.
 
-- `tfds.load` will automatically detect and load the dataset generated in `~/tensorflow_datasets/my_dataset/` (e.g. by `tfds build`).
-- Alternatively, you can explicitly `import my.project.datasets.my_dataset` to register your dataset:
+- `tfds.load`가 `~/tensorflow_datasets/my_dataset/`에서 생성된(예: `tfds build`를 통해) 데이터세트를 자동으로 감지하고 로드합니다.
+- 또는, `my.project.datasets.my_dataset`를 명시적으로 가져와 데이터세트를 등록할 수 있습니다.
 
 ```python
 import my.project.datasets.my_dataset  # Register `my_dataset`
@@ -31,27 +31,27 @@ ds = tfds.load('my_dataset')  # `my_dataset` registered
 
 데이터세트는 모든 종류의 형식으로 모든 장소에 배포되며, 항상 머신러닝 파이프라인에 공급할 수 있는 형식으로 저장되는 것은 아닙니다. TFDS를 입력하세요.
 
-TFDS process those datasets into a standard format (external data -&gt; serialized files), which can then be loaded as machine learning pipeline (serialized files -&gt; `tf.data.Dataset`). The serialization is done only once. Subsequent access will read from those pre-processed files directly.
+TFDS는 이러한 데이터세트를 표준 형식(외부 데이터 -&gt; 직렬화된 파일)으로 처리한 다음 머신 러닝 파이프라인(직렬화된 파일 -&gt; `tf.data.Dataset`)으로 로드할 수 있습니다. 직렬화는 한 번만 수행됩니다. 이후 액세스 때는 이러한 사전 처리된 파일에서 직접 읽습니다.
 
-Most of the preprocessing is done automatically. Each dataset implements a subclass of `tfds.core.DatasetBuilder`, which specifies:
+대부분의 전처리는 자동으로 수행됩니다. 각 데이터세트는 다음을 지정하는 `tfds.core.DatasetBuilder`의 서브 클래스를 구현합니다.
 
-- Where the data is coming from (i.e. its URLs);
+- 데이터의 출처(예: URL)
 - 데이터세트의 모습(즉, 특성)
 - 데이터 분할 방법(예: `TRAIN` 및 `TEST` )
-- and the individual examples in the dataset.
+- 데이터세트의 개별 예
 
-## Write your dataset
+## 데이터세트 작성하기
 
-### Default template: `tfds new`
+### 기본 템플릿: `tfds new`
 
-Use [TFDS CLI](https://www.tensorflow.org/datasets/cli) to generate the required template python files.
+[TFDS CLI](https://www.tensorflow.org/datasets/cli)를 사용하여 필요한 템플릿 Python 파일을 생성합니다.
 
 ```sh
 cd path/to/project/datasets/  # Or use `--dir=path/to/project/datasets/` below
 tfds new my_dataset
 ```
 
-This command will generate a new `my_dataset/` folder with the following structure:
+이 명령으로 다음 구조를 가진 새로운 `my_dataset/`가 생성됩니다.
 
 ```sh
 my_dataset/
@@ -62,16 +62,16 @@ my_dataset/
     checksum.tsv # (optional) URL checksums (see `checksums` section).
 ```
 
-Search for `TODO(my_dataset)` here and modify accordingly.
+여기에서 `TODO(my_dataset)`를 검색하고 그에 따라 수정합니다.
 
-### Dataset example
+### 데이터세트 예제
 
-All datasets are implemented as `tfds.core.GeneratorBasedBuilder`, a subclasses of `tfds.core.DatasetBuilder` which takes care of most boilerplate. It supports:
+모든 데이터세트는 대부분의 상용구를 담당하는 `tfds.core.DatasetBuilder`의 서브 클래스인 `tfds.core.GeneratorBasedBuilder`로 구현됩니다.
 
-- Small/medium datasets which can be generated on a single machine (this tutorial).
-- Very large datasets which require distributed generation (using [Apache Beam](https://beam.apache.org/), see our [huge dataset guide](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset))
+- 단일 머신에서 생성할 수 있는 작은/중간 크기의 데이터세트(이 튜토리얼)
+- 분산 생성이 필요한 매우 큰 데이터세트([Apache Beam](https://beam.apache.org/)을 사용하며, [방대한 데이터세트 가이드](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset) 참조)
 
-Here is a minimal example of dataset class:
+다음은 데이터세트 클래스의 최소 예입니다.
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedBuilder):
@@ -114,11 +114,11 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
       }
 ```
 
-Let's see in detail the 3 abstract methods to overwrite.
+덮어쓰기를 위한 3가지 추상 메서드에 대해 자세히 알아보겠습니다.
 
-### `_info`: dataset metadata
+### `_info`: 데이터세트 메타데이터
 
-`_info` returns the `tfds.core.DatasetInfo` containing the [dataset metadata](https://www.tensorflow.org/datasets/overview#access_the_dataset_metadata).
+`_info`는 [데이터세트 메타데이터](https://www.tensorflow.org/datasets/overview#access_the_dataset_metadata)를 포함하는 `tfds.core.DatasetInfo`를 반환합니다.
 
 ```python
 def _info(self):
@@ -150,19 +150,19 @@ def _info(self):
   )
 ```
 
-Most fields should be self-explanatory. Some precisions:
+대부분의 필드는 자체적으로 명확해야 합니다. 일부 정밀도:
 
-- `features`: This specify the dataset structure, shape,... Support complex data types (audio, video, nested sequences,...). See the [available features](https://www.tensorflow.org/datasets/api_docs/python/tfds/features#classes) or the [feature connector guide](https://www.tensorflow.org/datasets/features) for more info.
-- `disable_shuffling`: See section [Maintain dataset order](#maintain-dataset-order).
-- `citation`: To find the `BibText` citation:
-    - Search the dataset website for citation instruction (use that in BibTex format).
-    - For [arXiv](https://arxiv.org/) papers: find the paper and click the `BibText` link on the right-hand side.
-    - Find the paper on [Google Scholar](https://scholar.google.com) and click the double-quotation mark underneath the title and on the popup, click `BibTeX`.
+- `features`: 데이터세트 구조, 형상 등을 지정합니다. 복잡한 데이터 형식(오디오, 비디오, 중첩 시퀀스 등)을 지원합니다. 자세한 내용은 [사용 가능한 기능](https://www.tensorflow.org/datasets/api_docs/python/tfds/features#classes) 또는 [기능 커넥터 가이드](https://www.tensorflow.org/datasets/features)를 참조하세요.
+- `disable_shuffling`: [데이터세트 순서 유지](#maintain-dataset-order) 섹션을 참조하세요.
+- `citation`: `BibText` 인용을 찾으려면:
+    - 데이터세트 웹사이트에서 인용 지침을 검색합니다(BibTex 형식으로 사용).
+    - [arXiv](https://arxiv.org/) 논문의 경우: 논문을 찾아 오른쪽에 있는 `BibText` 링크를 클릭합니다.
+    - [Google Scholar](https://scholar.google.com)에서 논문을 찾아 제목 아래에 있는 큰따옴표를 클릭하고 팝업에서 `BibTeX`를 클릭합니다.
     - 관련 논문이 없으면(예를 들어, 웹 사이트만 있음), [BibTeX 온라인 편집기](https://truben.no/latex/bibtex/)를 사용하여 사용자 정의 BibTeX 항목을 작성할 수 있습니다(드롭다운 메뉴에 `Online` 항목 유형이 있음).
 
-#### Maintain dataset order
+#### 데이터세트 순서 유지
 
-By default, the records of the datasets are shuffled when stored in order to make the distribution of classes more uniform across the dataset, since often records belonging to the same class are contiguous. In order to specify that the dataset should be sorted by the key generated provided by `_generate_examples` the field `disable_shuffling` should be set to `True`. By default it is set to `False`.
+동일한 클래스에 속하는 레코드가 인접하는 경우가 많기 때문에 데이터세트 전체에서 클래스 분포를 더 균일하게 만들기 위해 저장할 때 기본적으로 데이터세트의 레코드가 섞입니다. `_generate_examples`에서 제공하는 생성된 키로 데이터세트가 분류되도록 지정하려면 `disable_shuffling` 필드를 `True`로 설정해야 합니다. 기본적으로, `False`로 설정됩니다.
 
 ```python
 def _info(self):
@@ -173,21 +173,21 @@ def _info(self):
   )
 ```
 
-Keep in mind that disabling shuffling has a performance impact as shards cannot be read in parallel anymore.
+셔플을 비활성화하면 샤드를 더 이상 병렬로 읽을 수 없으므로 성능에 영향을 미칩니다.
 
-### `_split_generators`: downloads and splits data
+### `_split_generators`: 데이터 다운로드 및 분할
 
 #### 소스 데이터 다운로드 및 추출하기
 
-Most datasets need to download data from the web. This is done using the `tfds.download.DownloadManager` input argument of `_split_generators`. `dl_manager` has the following methods:
+대부분의 데이터세트는 웹에서 데이터를 다운로드해야 합니다. 이 작업은 `_split_generators`의 `tfds.download.DownloadManager` 입력 인수를 사용하여 수행됩니다. `dl_manager`는 다음 메서드를 가지고 있습니다.
 
-- `download`: supports `http(s)://`, `ftp(s)://`
-- `extract`: currently supports `.zip`, `.gz`, and `.tar` files.
-- `download_and_extract`: Same as `dl_manager.extract(dl_manager.download(urls))`
+- `download`: `http(s)://`, `ftp(s)://`를 지원합니다.
+- `extract`: 현재 `.zip`, `.gz` 및 `.tar` 파일을 지원합니다.
+- `download_and_extract`: `dl_manager.extract(dl_manager.download(urls))`와 동일합니다.
 
 All those methods returns `tfds.core.Path` (aliases for [`epath.Path`](https://github.com/google/etils)), which are [pathlib.Path-like](https://docs.python.org/3/library/pathlib.html) objects.
 
-Those methods supports arbitrary nested structure (`list`, `dict`), like:
+이러한 메서드는 다음과 같은 임의의 중첩 구조(`list`, `dict`)를 지원합니다.
 
 ```python
 extracted_paths = dl_manager.download_and_extract({
@@ -203,9 +203,9 @@ assert extracted_paths == {
 
 #### 수동 다운로드 및 추출
 
-Some data cannot be automatically downloaded (e.g. require a login), in this case, user will manually download the source data and place it in `manual_dir/` (defaults to `~/tensorflow_datasets/downloads/manual/`).
+일부 데이터는 자동으로 다운로드할 수 없습니다(예: 로그인 필요). 이 경우 사용자는 수동으로 소스 데이터를 다운로드하여 `manual_dir/`(기본적으로 `~/tensorflow_datasets/downloads/manual/`)에 놓을 수 있습니다.
 
-Files can then be accessed through `dl_manager.manual_dir`:
+그러면 `dl_manager.manual_dir`를 통해 파일에 액세스할 수 있습니다.
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedBuilder):
@@ -223,22 +223,22 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
     ...
 ```
 
-The `manual_dir` location can be customized with `tfds build --manual_dir=` or using `tfds.download.DownloadConfig`.
+`manual_dir` 위치는 `tfds build --manual_dir=` 또는 `tfds.download.DownloadConfig`를 사용하여 사용자 정의할 수 있습니다.
 
-#### Read archive directly
+#### 아카이브 직접 읽기
 
-`dl_manager.iter_archive` reads an archives sequentially without extracting them. This can save storage space and improve performances on some file systems.
+`dl_manager.iter_archive`는 압축을 풀지 않고 순차적으로 아카이브를 읽습니다. 이것은 저장 공간을 절약하고 일부 파일 시스템의 성능을 향상시킬 수 있습니다.
 
 ```python
 for filename, fobj in dl_manager.iter_archive('path/to/archive.zip'):
   ...
 ```
 
-`fobj` has the same methods as `with open('rb') as fobj:` (e.g. `fobj.read()`)
+`fobj`에는 `with open('rb') as fobj:`와 동일한 메서드가 있습니다(예: `fobj.read()`).
 
 #### 데이터세트 분할 지정하기
 
-If the dataset comes with pre-defined splits (e.g. `MNIST` has `train` and `test` splits), keep those. Otherwise, only specify a single `tfds.Split.TRAIN` split. Users can dynamically create their own subsplits with the [subsplit API](https://www.tensorflow.org/datasets/splits) (e.g. `split='train[80%:]'`).
+데이터세트에 사전 정의된 분할이 함께 제공되는 경우(예: `MNIST`에 `train` 및 `test` 분할이 있음) 이를 유지합니다. 그렇지 않으면 단일 `tfds.Split.TRAIN` 분할만 지정합니다. 사용자는 [subsplit API](https://www.tensorflow.org/datasets/splits)(예: `split='train[80%:]'`)를 사용하여 고유한 하위 분할을 동적으로 생성할 수 있습니다.
 
 ```python
 def _split_generators(self, dl_manager):
@@ -258,21 +258,21 @@ def _split_generators(self, dl_manager):
   }
 ```
 
-### `_generate_examples`: Example generator
+### `_generate_examples`: 예제 생성기
 
-`_generate_examples` generates the examples for each split from the source data.
+`_generate_examples`는 소스 데이터에서 각 분할에 대한 예제를 생성합니다.
 
-This method will typically read source dataset artifacts (e.g. a CSV file) and yield `(key, feature_dict)` tuples:
+이 메서드는 일반적으로 소스 데이터세트 아티팩트(예: CSV 파일)를 판독하고 `(key, feature_dict)` 튜플을 산출합니다.
 
-- `key`: Example identifier. Used to deterministically shuffle the examples using `hash(key)` or to sort by key when shuffling is disabled (see section [Maintain dataset order](#maintain-dataset-order)). Should be:
-    - **unique**: If two examples use the same key, an exception will be raised.
-    - **deterministic**: Should not depend on `download_dir`, `os.path.listdir` order,... Generating the data twice should yield the same key.
-    - **comparable**: If shuffling is disabled the key will be used to sort the dataset.
-- `feature_dict`: A `dict` containing the example values.
-    - The structure should match the `features=` structure defined in `tfds.core.DatasetInfo`.
-    - Complex data types (image, video, audio,...) will be automatically encoded.
-    - Each feature often accept multiple input types (e.g. video accept `/path/to/vid.mp4`, `np.array(shape=(l, h, w, c))`, `List[paths]`, `List[np.array(shape=(h, w, c)]`, `List[img_bytes]`,...)
-    - See the [feature connector guide](https://www.tensorflow.org/datasets/features) for more info.
+- `key`: 예시 식별자. `hash(key)` 사용하여 예제를 결정성 있게 셔플하거나 셔플이 비활성화된 경우 키별로 정렬하는 데 사용됩니다([데이터세트 순서 유지](#maintain-dataset-order) 섹션 참조). 다음가 같아야 합니다.
+    - **고유함**: 두 예제가 동일한 키를 사용하면 예외가 발생합니다.
+    - **결정성이 있음**: `download_dir`, `os.path.listdir` 순서에 의존하지 않아야 합니다. 데이터를 두 번 생성하면 동일한 키가 산출됩니다.
+    - **비교 가능**: 셔플링이 비활성화된 경우 키가 데이터세트를 정렬하는 데 사용됩니다.
+- `feature_dict`: 예제 값을 포함한 `dict`
+    - 구조는 `tfds.core.DatasetInfo`에 정의된 `features=` 구조와 일치해야 합니다.
+    - 복잡한 데이터 형식(이미지, 비디오, 오디오 등)은 자동으로 인코딩됩니다.
+    - 각 기능은 종종 여러 입력 유형을 허용합니다(예: 비디오는 `/path/to/vid.mp4`, `np.array(shape=(l, h, w, c))`, `List[paths]`, `List[np.array(shape=(h, w, c)]`, `List[img_bytes]` 등을 수용함).
+    - 자세한 내용은 [기능 커넥터 가이드](https://www.tensorflow.org/datasets/features)를 참조하세요.
 
 ```python
 def _generate_examples(self, images_path, label_path):
@@ -290,9 +290,9 @@ def _generate_examples(self, images_path, label_path):
 
 #### 파일 액세스 및 `tf.io.gfile`
 
-In order to support Cloud storage systems, avoid the use of the Python built-in I/O ops.
+클라우드 스토리지 시스템을 지원하려면 Python 내장 I/O ops를 사용하지 마세요.
 
-Instead, the `dl_manager` returns [pathlib-like](https://docs.python.org/3/library/pathlib.html) objects directly compatible with Google Cloud storage:
+대신 `dl_manager`는 Google Cloud Storage와 직접 호환되는 [pathlib 유사](https://docs.python.org/3/library/pathlib.html) 객체를 반환합니다.
 
 ```python
 path = dl_manager.download_and_extract('http://some-website/my_data.zip')
@@ -302,19 +302,19 @@ json_path = path / 'data/file.json'
 json.loads(json_path.read_text())
 ```
 
-Alternatively, use `tf.io.gfile` API instead of built-in for file operations:
+또는, 파일 연산에 내장된 API 대신 `tf.io.gfile` API를 사용합니다.
 
 - `open` -&gt; `tf.io.gfile.GFile`
 - `os.rename` -&gt; `tf.io.gfile.rename`
 - ...
 
-Pathlib should be prefered to `tf.io.gfile` (see [rational](https://www.tensorflow.org/datasets/common_gotchas#prefer_to_use_pathlib_api).
+`tf.io.gfile`보다는 Pathlib이 선호됩니다([이론적 근거 ](https://www.tensorflow.org/datasets/common_gotchas#prefer_to_use_pathlib_api) 참조).
 
 #### 추가 종속성
 
-Some datasets require additional Python dependencies only during generation. For example, the SVHN dataset uses `scipy` to load some data.
+일부 데이터세트에는 생성 중에만 추가 Python 종속성이 필요합니다. 예를 들어 SVHN 데이터세트는 `scipy`를 사용하여 일부 데이터를 로드합니다.
 
-If you're adding dataset into the TFDS repository, please use `tfds.core.lazy_imports` to keep the `tensorflow-datasets` package small. Users will install additional dependencies only as needed.
+TFDS 저장소에 데이터세트를 추가하는 경우, `tfds.core.lazy_imports`를 사용하여 `tensorflow-datasets` 패키지를 작게 유지하세요. 사용자는 필요한 경우에만 추가 종속성을 설치합니다.
 
 `lazy_imports`를 사용하려면:
 
@@ -326,13 +326,13 @@ If you're adding dataset into the TFDS repository, please use `tfds.core.lazy_im
 
 일부 데이터세트는 완벽하게 정리되지 않았으며, 일부 손상된 데이터(예: 이미지는 JPEG 파일이지만, 일부는 유효하지 않은 JPEG일 때)를 포함합니다. 이들 예제는 건너뛰어야 하지만, 데이터세트 설명에 몇 개의 예제가 삭제되었으며 그 이유는 무엇인지 메모를 남겨 주세요.
 
-### Dataset configuration/variants (tfds.core.BuilderConfig)
+### 데이터세트 구성/변형(tfds.core.BuilderConfig)
 
-Some datasets may have multiple variants, or options for how the data is preprocessed and written to disk. For example, [cycle_gan](https://www.tensorflow.org/datasets/catalog/cycle_gan) has one config per object pairs (`cycle_gan/horse2zebra`, `cycle_gan/monet2photo`,...).
+일부 데이터세트에는 데이터가 사전 처리되고 디스크에 기록되는 방식에 대한 여러 가지 변형 또는 옵션이 있을 수 있습니다. 예를 들어, [cycle_gan](https://www.tensorflow.org/datasets/catalog/cycle_gan)에는 객체 쌍별로 하나의 구성이 있습니다(`cycle_gan/horse2zebra`, `cycle_gan/monet2photo`,...)
 
-This is done through `tfds.core.BuilderConfig`s:
+이는 `tfds.core.BuilderConfig`를 통해 수행됩니다.
 
-1. Define your configuration object as a subclass of `tfds.core.BuilderConfig`. For example, `MyDatasetConfig`.
+1. 자신의 구성 객체를 `tfds.core.BuilderConfig`의 서브 클래스로 정의합니다. 예를 들면, `MyDatasetConfig`와 같습니다.
 
     ```python
     @dataclasses.dataclass
@@ -340,9 +340,9 @@ This is done through `tfds.core.BuilderConfig`s:
       img_size: Tuple[int, int] = (0, 0)
     ```
 
-    Note: Default values are required because of https://bugs.python.org/issue33129.
+    참고: https://bugs.python.org/issue33129로 인해 기본값이 필요합니다.
 
-2. Define the `BUILDER_CONFIGS = []` class member in `MyDataset` that lists `MyDatasetConfig`s that the dataset exposes.
+2. 데이터세트가 노출하는 `MyDatasetConfig`를 나열하는 `MyDataset`에서 `BUILDER_CONFIGS = []` 클래스 구성원을 정의합니다.
 
     ```python
     class MyDataset(tfds.core.GeneratorBasedBuilder):
@@ -356,32 +356,32 @@ This is done through `tfds.core.BuilderConfig`s:
       # pytype: enable=wrong-keyword-args
     ```
 
-    Note: `# pytype: disable=wrong-keyword-args` is required because of [Pytype bug](https://github.com/google/pytype/issues/628) with dataclasses inheritance.
+    참고: 데이터 클래스 상속을 갖는 [Pytype 버그](https://github.com/google/pytype/issues/628)로 인해 `# pytype: disable=wrong-keyword-args`가 필요합니다.
 
-3. Use `self.builder_config` in `MyDataset` to configure data generation (e.g. `shape=self.builder_config.img_size`). This may include setting different values in `_info()` or changing download data access.
+3. `MyDataset`의 `self.builder_config`를 사용하여 데이터 생성을 구성합니다(예:`shape=self.builder_config.img_size`). 여기에는 `_info()`에서 여러 값을 설정하거나 다운로드 데이터 액세스를 변경하는 것이 포함될 수 있습니다.
 
-Notes:
+참고:
 
-- Each config has a unique name. The fully qualified name of a config is `dataset_name/config_name` (e.g. `coco/2017`).
-- If not specified, the first config in `BUILDER_CONFIGS` will be used (e.g. `tfds.load('c4')` default to `c4/en`)
+- 각 구성에는 고유한 이름이 있습니다. 구성의 정규화된 이름은 `dataset_name/config_name`입니다(예: `coco/2017`).
+- 지정되지 않은 경우 `BUILDER_CONFIGS`의 첫 번째 구성이 사용됩니다(예: `tfds.load('c4')`의 기본값은 `c4/en`).
 
-See [`anli`](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/text/anli.py#L69) for an example of a dataset that uses `BuilderConfig`s.
+`BuilderConfig`를 사용하는 데이터세트의 예는 [`anli`](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/text/anli.py#L69)를 참조하세요.
 
-### Version
+### 버전
 
-Version can refer to two different meaning:
+버전은 두 가지 다른 의미를 나타낼 수 있습니다.
 
-- The "external" original data version: e.g. COCO v2019, v2017,...
-- The "internal" TFDS code version: e.g. rename a feature in `tfds.features.FeaturesDict`, fix a bug in `_generate_examples`
+- "외부" 원본 데이터 버전: 예: COCO v2019, v2017,...
+- "내부" TFDS 코드 버전: 예를 들어 `tfds.features.FeaturesDict`에서 이름 바꾸기, `_generate_examples`에서 버그 수정
 
-To update a dataset:
+데이터세트를 업데이트하려면:
 
 - For "external" data update: Multiple users may want to access a specific year/version simultaneously. This is done by using one `tfds.core.BuilderConfig` per version (e.g. `coco/2017`, `coco/2019`) or one class per version (e.g. `Voc2007`, `Voc2012`).
-- For "internal" code update: Users only download the most recent version. Any code update should increase the `VERSION` class attribute (e.g. from `1.0.0` to `VERSION = tfds.core.Version('2.0.0')`) following [semantic versioning](https://www.tensorflow.org/datasets/datasets_versioning#semantic).
+- "내부" 코드 업데이트의 경우: 사용자는 최신 버전만 다운로드합니다. 코드를 업데이트하면 [의미 체계 버전 관리](https://www.tensorflow.org/datasets/datasets_versioning#semantic)에 따라 `VERSION` 클래스 속성이 증가합니다(예: `1.0.0`에서 `VERSION = tfds.core.Version('2.0.0')`로 증가).
 
-### Add an import for registration
+### 등록을 위해 가져오기 추가
 
-Don't forget to import the dataset module to your project `__init__` to be automatically registered in `tfds.load`, `tfds.builder`.
+데이터세트 모듈을 프로젝트 `__init__`로 가져와 `tfds.load`, `tfds.builder`에 자동으로 등록되도록 하는 것을 잊지 마세요.
 
 ```python
 import my_project.datasets.my_dataset  # Register MyDataset
@@ -389,17 +389,17 @@ import my_project.datasets.my_dataset  # Register MyDataset
 ds = tfds.load('my_dataset')  # MyDataset available
 ```
 
-For example, if you're contributing to `tensorflow/datasets`, add the module import to its subdirectory's `__init__.py` (e.g. [`image/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/__init__.py).
+예를 들어, `tensorflow/datasets`에 제공하는 경우, 해당 하위 디렉토리의 `__init__.py`에 모듈 가져오기를 추가합니다(예: [`image/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/__init__.py).
 
-### Check for common implementation gotchas
+### 일반적인 구현 문제 점검하기
 
-Please check for the [common implementation gotchas](https://www.tensorflow.org/datasets/common_gotchas).
+[일반적인 구현 문제](https://www.tensorflow.org/datasets/common_gotchas)가 있는지 확인하세요.
 
-## Test your dataset
+## 데이터세트 테스트하기
 
-### Download and prepare: `tfds build`
+### 다운로드 및 준비: `tfds build`
 
-To generate the dataset, run `tfds build` from the `my_dataset/` directory:
+데이터세트를 생성하려면 `my_dataset/` 디렉토리에서 `tfds build`를 실행합니다.
 
 ```sh
 cd path/to/datasets/my_dataset/
@@ -408,24 +408,24 @@ tfds build --register_checksums
 
 Some useful flags for development:
 
-- `--pdb`: Enter debugging mode if an exception is raised.
-- `--overwrite`: Delete existing files if the dataset was already generated.
-- `--max_examples_per_split`: Only generate the first X examples (default to 1), rather than the full dataset.
-- `--register_checksums`: Record the checksums of downloaded urls. Should only be used while in development.
+- `--pdb`: 예외가 발생하면 디버깅 모드로 들어갑니다.
+- `--overwrite`: 데이터세트가 이미 생성된 경우 기존 파일을 삭제합니다.
+- `--max_examples_per_split`: 전체 데이터세트가 아닌 처음 X개 예제(기본값은 1)만 생성합니다.
+- `--register_checksums`: 다운로드한 URL의 체크섬을 기록합니다. 개발 중에만 사용해야 합니다.
 
-See the [CLI documentation](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset) for full list of flags.
+플래그의 전체 목록은 [CLI 설명서](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset)를 참조하세요.
 
-### Checksums
+### 체크섬
 
-It is recommended to record the checksums of your datasets to guarantee determinism, help with documentation,... This is done by generating the dataset with the `--register_checksums` (see previous section).
+결정성을 보장하고 문서화를 돕기 위해 데이터세트의 체크섬을 기록하는 것이 좋습니다. 이를 위해 `--register_checksums`로 데이터세트를 생성합니다(이전 섹션 참조).
 
-If you are releasing your datasets through PyPI, don't forget to export the `checksums.tsv` files (e.g. in the `package_data` of your `setup.py`).
+PyPI를 통해 데이터세트를 릴리스하는 경우 `checksums.tsv` 파일을 내보내는 것을 잊지 마세요(예: `setup.py`의 `package_data`에).
 
-### Unit-test your dataset
+### 데이터세트 단위 테스트
 
-`tfds.testing.DatasetBuilderTestCase` is a base `TestCase` to fully exercise a dataset. It uses "dummy data" as test data that mimic the structure of the source dataset.
+`tfds.testing.DatasetBuilderTestCase`는 데이터세트를 완전히 실행해보기 위한 기본 `TestCase`입니다. 이 때 "더미 예제"를 소스 데이터세트의 구조를 모방한 테스트 데이터로 사용합니다.
 
-- The test data should be put in `my_dataset/dummy_data/` directory and should mimic the source dataset artifacts as downloaded and extracted. It can be created manually or automatically with a script ([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/bccd/dummy_data_generation.py)).
+- 테스트 데이터는 `my_dataset/dummy_data/` 디렉토리에 넣어야 하며 다운로드 및 추출된 소스 데이터세트 아티팩트를 모방해야 합니다. 스크립트([예제 스크립트](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/bccd/dummy_data_generation.py))를 사용하여 이 데이터를 수동 또는 자동으로 생성할 수 있습니다.
 - 데이터세트가 겹치면 테스트가 실패하므로 테스트 데이터 분할에 서로 다른 데이터를 사용해야 합니다.
 - **테스트 데이터에는 저작권이 있는 자료가 포함되어서는 안 됩니다**. 의심스러운 경우, 원래 데이터세트의 자료를 사용하여 데이터를 생성하지 마세요.
 
@@ -456,12 +456,12 @@ if __name__ == '__main__':
   tfds.testing.test_main()
 ```
 
-Run the following command to test the dataset.
+다음 명령어를 실행하여 데이터세트를 테스트합니다.
 
 ```sh
 python my_dataset_test.py
 ```
 
-## Send us feedback
+## 피드백 보내기
 
-We are continuously trying to improve the dataset creation workflow, but can only do so if we are aware of the issues. Which issues, errors did you encountered while creating the dataset ? Was there a part which was confusing, boilerplate or wasn't working the first time ? Please share your [feedback on github](https://github.com/tensorflow/datasets/issues).
+데이터세트 생성 워크플로를 개선하기 위해 지속적으로 노력하고 있지만 문제점을 알아야만 그렇게 할 수 있습니다. 데이터세트를 생성하는 동안 어떤 문제, 오류를 경험하셨나요? 혼란스럽거나 상용구이거나 아예 작동하지 않는 부분이 있었나요? [github에서 피드백](https://github.com/tensorflow/datasets/issues)을 공유해 주세요.
