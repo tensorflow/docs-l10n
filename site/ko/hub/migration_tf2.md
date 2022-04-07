@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2020-09-14' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2022-01-12' } *-->
 
 # TensorFlow Hub를 사용하여 TF1에서 TF2로 마이그레이션하기
 
