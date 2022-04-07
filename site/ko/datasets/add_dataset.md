@@ -29,15 +29,15 @@ ds = tfds.load('my_dataset')  # `my_dataset` registered
 
 ## 개요
 
-Datasets are distributed in all kinds of formats and in all kinds of places, and they're not always stored in a format that's ready to feed into a machine learning pipeline. Enter TFDS.
+데이터세트는 모든 종류의 형식으로 모든 장소에 배포되며, 항상 머신러닝 파이프라인에 공급할 수 있는 형식으로 저장되는 것은 아닙니다. TFDS를 입력하세요.
 
 TFDS process those datasets into a standard format (external data -&gt; serialized files), which can then be loaded as machine learning pipeline (serialized files -&gt; `tf.data.Dataset`). The serialization is done only once. Subsequent access will read from those pre-processed files directly.
 
 Most of the preprocessing is done automatically. Each dataset implements a subclass of `tfds.core.DatasetBuilder`, which specifies:
 
 - Where the data is coming from (i.e. its URLs);
-- What the dataset looks like (i.e. its features);
-- How the data should be split (e.g. `TRAIN` and `TEST`);
+- 데이터세트의 모습(즉, 특성)
+- 데이터 분할 방법(예: `TRAIN` 및 `TEST` )
 - and the individual examples in the dataset.
 
 ## Write your dataset
@@ -158,7 +158,7 @@ Most fields should be self-explanatory. Some precisions:
     - Search the dataset website for citation instruction (use that in BibTex format).
     - For [arXiv](https://arxiv.org/) papers: find the paper and click the `BibText` link on the right-hand side.
     - Find the paper on [Google Scholar](https://scholar.google.com) and click the double-quotation mark underneath the title and on the popup, click `BibTeX`.
-    - If there is no associated paper (for example, there's just a website), you can use the [BibTeX Online Editor](https://truben.no/latex/bibtex/) to create a custom BibTeX entry (the drop-down menu has an `Online` entry type).
+    - 관련 논문이 없으면(예를 들어, 웹 사이트만 있음), [BibTeX 온라인 편집기](https://truben.no/latex/bibtex/)를 사용하여 사용자 정의 BibTeX 항목을 작성할 수 있습니다(드롭다운 메뉴에 `Online` 항목 유형이 있음).
 
 #### Maintain dataset order
 
@@ -177,7 +177,7 @@ Keep in mind that disabling shuffling has a performance impact as shards cannot 
 
 ### `_split_generators`: downloads and splits data
 
-#### Downloading and extracting source data
+#### 소스 데이터 다운로드 및 추출하기
 
 Most datasets need to download data from the web. This is done using the `tfds.download.DownloadManager` input argument of `_split_generators`. `dl_manager` has the following methods:
 
@@ -236,7 +236,7 @@ for filename, fobj in dl_manager.iter_archive('path/to/archive.zip'):
 
 `fobj` has the same methods as `with open('rb') as fobj:` (e.g. `fobj.read()`)
 
-#### Specifying dataset splits
+#### 데이터세트 분할 지정하기
 
 If the dataset comes with pre-defined splits (e.g. `MNIST` has `train` and `test` splits), keep those. Otherwise, only specify a single `tfds.Split.TRAIN` split. Users can dynamically create their own subsplits with the [subsplit API](https://www.tensorflow.org/datasets/splits) (e.g. `split='train[80%:]'`).
 
@@ -316,15 +316,15 @@ Some datasets require additional Python dependencies only during generation. For
 
 If you're adding dataset into the TFDS repository, please use `tfds.core.lazy_imports` to keep the `tensorflow-datasets` package small. Users will install additional dependencies only as needed.
 
-To use `lazy_imports`:
+`lazy_imports`를 사용하려면:
 
-- Add an entry for your dataset into `DATASET_EXTRAS` in [`setup.py`](https://github.com/tensorflow/datasets/tree/master/setup.py). This makes it so that users can do, for example, `pip install 'tensorflow-datasets[svhn]'` to install the extra dependencies.
-- Add an entry for your import to [`LazyImporter`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib.py) and to the [`LazyImportsTest`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib_test.py).
-- Use `tfds.core.lazy_imports` to access the dependency (for example, `tfds.core.lazy_imports.scipy`) in your `DatasetBuilder`.
+- [`setup.py`](https://github.com/tensorflow/datasets/tree/master/setup.py)에서 데이터세트의 항목을 `DATASET_EXTRAS`에 추가합니다. 이를 통해 사용자는 예를 들어 `pip install 'tensorflow-datasets[svhn]'`을 실행하여 추가 종속성을 설치할 수 있습니다.
+- 가져오기의 항목을 [`LazyImporter`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib.py)와 [`LazyImportsTest`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib_test.py)에 추가합니다.
+- `tfds.core.lazy_imports`를 사용하여`DatasetBuilder`에서 종속성(예를 들어, `tfds.core.lazy_imports.scipy`)에 액세스합니다.
 
 #### 손상된 데이터
 
-Some datasets are not perfectly clean and contain some corrupt data (for example, the images are in JPEG files but some are invalid JPEG). These examples should be skipped, but leave a note in the dataset description how many examples were dropped and why.
+일부 데이터세트는 완벽하게 정리되지 않았으며, 일부 손상된 데이터(예: 이미지는 JPEG 파일이지만, 일부는 유효하지 않은 JPEG일 때)를 포함합니다. 이들 예제는 건너뛰어야 하지만, 데이터세트 설명에 몇 개의 예제가 삭제되었으며 그 이유는 무엇인지 메모를 남겨 주세요.
 
 ### Dataset configuration/variants (tfds.core.BuilderConfig)
 
@@ -426,8 +426,8 @@ If you are releasing your datasets through PyPI, don't forget to export the `che
 `tfds.testing.DatasetBuilderTestCase` is a base `TestCase` to fully exercise a dataset. It uses "dummy data" as test data that mimic the structure of the source dataset.
 
 - The test data should be put in `my_dataset/dummy_data/` directory and should mimic the source dataset artifacts as downloaded and extracted. It can be created manually or automatically with a script ([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/bccd/dummy_data_generation.py)).
-- Make sure to use different data in your test data splits, as the test will fail if your dataset splits overlap.
-- **The test data should not contain any copyrighted material**. If in doubt, do not create the data using material from the original dataset.
+- 데이터세트가 겹치면 테스트가 실패하므로 테스트 데이터 분할에 서로 다른 데이터를 사용해야 합니다.
+- **테스트 데이터에는 저작권이 있는 자료가 포함되어서는 안 됩니다**. 의심스러운 경우, 원래 데이터세트의 자료를 사용하여 데이터를 생성하지 마세요.
 
 ```python
 import tensorflow_datasets as tfds
