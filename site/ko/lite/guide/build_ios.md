@@ -107,7 +107,7 @@ CocoaPod를 사용 중이고 TensorFlow Lite의 [Swift API](https://github.com/t
 
 고유한 `TensorFlowLiteC.podspec` 파일을 만든 후, [비공개 CocoaPod 사용 지침](https://guides.cocoapods.org/making/private-cocoapods.html)에 따라 고유 프로젝트에서 이 파일을 사용할 수 있습니다. `TensorFlowLite(Swift|ObjC).podspec`을 수정하여 사용자 정의 `TensorFlowLiteC` 포드를 가리키고 앱 프로젝트에서 Swift 또는 Objective-C 포드를 사용할 수도 있습니다.
 
-### Bazel developers
+### Bazel 개발자
 
 Bazel을 기본 빌드 도구로 사용하는 경우, `BUILD` 파일의 대상에 `TensorFlowLite` 종속성을 추가하기만 하면 됩니다.
 
