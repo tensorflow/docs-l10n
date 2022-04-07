@@ -153,7 +153,7 @@ TfLiteGpuDelegateV2Delete(delegate);
 
 `TfLiteGpuDelegateOptionsV2`를 살펴보고 사용자 정의 옵션이 있는 대리자 인스턴스를 만듭니다. `TfLiteGpuDelegateOptionsV2Default()`를 사용하여 기본 옵션을 초기화한 다음 필요에 따라 수정할 수 있습니다.
 
-TFLite GPU for Android C/C++ uses the [Bazel](https://bazel.io) build system. The delegate can be built, for example, using the following command:
+Android C/C++용 TFLite GPU는 [Bazel](https://bazel.io) 빌드 시스템을 사용합니다. 예를 들어 다음 명령을 사용하여 대리자를 만들 수 있습니다.
 
 ```sh
 bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:delegate                           # for static library
@@ -192,7 +192,7 @@ ReadFromOutputTensor(interpreter->typed_output_tensor<float>(0));
 TFLGpuDelegateDelete(delegate);
 ```
 
-## 고급 사용법
+## 고급 사용
 
 ### iOS용 대리자 옵션
 
@@ -264,7 +264,7 @@ GPU 대리자의 생성자는 옵션의 `struct`를 수락합니다([Swift API](
 
 #### 어떻게 동작합니까?
 
-Since the GPU backend only supports floating-point execution, we run quantized models by giving it a ‘floating-point view’ of the original model. At a high-level, this entails the following steps:
+GPU 백엔드는 부동 소수점 실행만 지원하므로 원래 모델의 '부동 소수점 보기'를 제공하여 양자화된 모델을 실행합니다. 높은 수준에서 모델을 실행하려면 다음 단계가 수반됩니다.
 
 - *상수 텐서*(예: 가중치/바이어스)는 GPU 메모리로 한 번 역양자화되는데, 이는 대리자가 TFLite 인터프리터에 적용될 때 발생합니다.
 
