@@ -248,7 +248,7 @@ Core ML 대리자는 다음 연산을 지원합니다.
 - TensorFlow Lite 및 CoreML 대리자는 MacOS를 지원하나요?
     - TensorFlow Lite는 iOS에서만 테스트되고 MacOS에서는 테스트되지 않습니다.
 - 사용자 정의 TF Lite 연산이 지원되나요?
-    - No, CoreML delegate does not support custom ops and they will fallback to CPU.
+    - 아니요, CoreML 대리자는 사용자 정의 ops를 지원하지 않으며 CPU로 폴백됩니다.
 
 ## API
 
