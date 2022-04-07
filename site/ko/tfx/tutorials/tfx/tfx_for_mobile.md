@@ -68,7 +68,9 @@ TFX Trainer는 사용자 정의 `run_fn`이 모듈 파일에 지정될 것으로
       examples=example_gen.outputs['examples'],
       model=trainer_lite.outputs['model'],
       eval_config=eval_config_lite,
-      instance_name='mnist_lite')
+  ).with_id('mnist_lite')
 ```
 
 위에 표시된 것처럼 필요한 유일한 변경은 `model_type` 필드를 `tf_lite`로 설정하는 것입니다. TFLite 모델을 분석하기 위해 다른 구성 변경이 필요하지 않습니다. TFLite 모델을 분석하든 SavedModel을 분석하든 상관없이 `Evaluator`의 출력은 정확히 동일한 구조를 갖습니다.
+
+단, Evaluator는 TFLite 모델이 trainer_lite.outputs['model'] 내의 `tflite`라는 파일에 저장되어 있다고 가정합니다.
