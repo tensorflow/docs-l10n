@@ -2,7 +2,7 @@
 
 TensorFlow GraphDef 기반 모델(일반적으로 Python API를 통해 생성됨)은 다음 형식 중 하나로 저장할 수 있습니다.
 
-1. TensorFlow [SavedModel](https://www.tensorflow.org/tutorials/keras/save_and_load)
+1. TensorFlow [저장된 모델](https://www.tensorflow.org/tutorials/keras/save_and_load)
 2. 고정 모델
 3. [Tensorflow Hub 모듈](https://www.tensorflow.org/hub/)
 
