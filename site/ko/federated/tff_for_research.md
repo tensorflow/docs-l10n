@@ -4,11 +4,11 @@
      If you update those section headings, please make sure you also update
      any links to the section. -->
 
-## Overview
+## 개요
 
 TFF는 현실적인 프록시 데이터세트에 대한 페더레이션 계산을 시뮬레이션하여 federated learning(FL) 연구를 수행하기 위한 확장 가능하고 강력한 프레임워크입니다. 이 페이지에서는 연구 시뮬레이션과 관련된 주요 개념 및 구성 요소와 TFF에서 다양한 종류의 연구를 수행하기 위한 자세한 지침을 설명합니다.
 
-## The typical structure of research code in TFF
+## TFF의 일반적인 연구 코드 구조
 
 TFF에서 구현된 연구 FL 시뮬레이션은 일반적으로 3가지 주요 논리 유형으로 구성됩니다.
 
@@ -34,15 +34,15 @@ TensorFlow 페더레이션은 페더레이션 학습으로 해결할 수 있는 
 
 - [**CIFAR-100**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data) A federated partitioning of the CIFAR-100 dataset across 500 training clients and 100 test clients. Each client has 100 unique examples. The partitioning is done in a way to create more realistic heterogeneity between clients. For more details, see the [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data).
 
-- [**Google Landmark v2 dataset**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data) The dataset consists of photos of various world landmarks, with images grouped by photographer to achieve a federated partitioning of the data. Two flavors of dataset are available: a smaller dataset with 233 clients and 23080 images, and a larger dataset with 1262 clients and 164172 images.
+- [**Google Landmark v2 데이터세트 데이터**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data) 세트는 다양한 세계 랜드마크의 사진으로 구성되며, 데이터의 연합 분할을 달성하기 위해 사진사가 이미지를 그룹화합니다. 233개의 클라이언트와 23080개의 이미지가 있는 더 작은 데이터 세트와 1262개의 클라이언트와 164172개의 이미지가 있는 더 큰 데이터 세트의 두 가지 유형의 데이터 세트를 사용할 수 있습니다.
 
-- [**CelebA**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/celeba/load_data) A dataset of examples (image and facial attributes) of celebrity faces. The federated dataset has each celebrity's examples grouped together to form a client. There are 9343 clients, each with at least 5 examples. The dataset can be split into train and test groups either by clients or by examples.
+- [**CelebA**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/celeba/load_data) 유명인 얼굴의 예(이미지 및 얼굴 속성) 데이터세트입니다. 연합 데이터 세트에는 클라이언트를 형성하기 위해 함께 그룹화되는 각 유명인의 예가 있습니다. 9343개의 클라이언트가 있으며 각각 최소 5개의 예제가 있습니다. 데이터 세트는 클라이언트 또는 예제별로 훈련 및 테스트 그룹으로 분할할 수 있습니다.
 
-- [**iNaturalist**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/inaturalist/load_data) A dataset consists of photos of various species. The dataset contains 120,300 images for 1,203 species. Seven flavors of the dataset are available. One of them is grouped by the photographer and it consists of 9257 clients. The rest of the datasets are grouped by the geo location where the photo was taken. These six flavors of the dataset consists of 11 - 3,606 clients.
+- [**iNaturalist**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/inaturalist/load_data) 데이터 세트는 다양한 종의 사진으로 구성됩니다. 데이터 세트에는 1,203종에 대한 120,300개의 이미지가 포함되어 있습니다. 7가지 유형의 데이터 세트를 사용할 수 있습니다. 그 중 하나는 사진 작가에 의해 그룹화되며 9257명의 클라이언트로 구성됩니다. 나머지 데이터 세트는 사진을 찍은 지리적 위치별로 그룹화됩니다. 이 6가지 유형의 데이터 세트는 11 - 3,606개의 클라이언트로 구성됩니다.
 
-## High performance simulations
+## 고성능 시뮬레이션
 
-While the wall-clock time of an FL *simulation* is not a relevant metric for evaluating algorithms (as simulation hardware isn't representative of real FL deployment environments), being able to run FL simulations quickly is critical for research productivity. Hence, TFF has invested heavily in providing high-performance single and multi-machine runtimes. Documentation is under development, but for now see the [High-performance simulations with TFF](https://www.tensorflow.org/federated/tutorials/simulations) tutorial, instructions on [TFF simulations with accelerators](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators), and instructions on [setting up simulations with TFF on GCP](https://www.tensorflow.org/federated/gcp_setup). The high-performance TFF runtime is enabled by default.
+*FL 시뮬레이션* 의 실제 시간은 알고리즘을 평가하기 위한 관련 측정항목이 아니지만(시뮬레이션 하드웨어는 실제 FL 배포 환경을 나타내지 않기 때문에) FL 시뮬레이션을 빠르게 실행할 수 있는 것은 연구 생산성에 매우 중요합니다. 따라서 TFF는 고성능 단일 및 다중 시스템 런타임을 제공하는 데 많은 투자를 했습니다. 문서가 개발 중이지만 지금은 [TFF를 사용한 고성능 시뮬레이션](https://www.tensorflow.org/federated/tutorials/simulations) 자습서, [가속기를 사용한 TFF 시뮬레이션](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators) [지침 및 GCP에서 TFF를 사용한 시뮬레이션 설정](https://www.tensorflow.org/federated/gcp_setup) 지침을 참조하십시오. 고성능 TFF 런타임은 기본적으로 활성화되어 있습니다.
 
 ## 다양한 연구 분야를 위한 TFF
 
@@ -54,7 +54,7 @@ A minimal stand-alone implementation of the [Federated Averaging](https://arxiv.
 
 A more general implementation of Federated Averaging can be found [here](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/algorithms/fed_avg.py). This implementation allows for more sophisticated optimization techniques, including the use of different optimizers on both the server and client. Other federated learning algorithms, including federated k-means clustering, can be found [here](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/algorithms/).
 
-### Model and update compression
+### 압축 모델링 및 업데이트
 
 TFF는 [tensor_encoding](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/internal/tensor_encoding) API를 사용하여 손실 압축 알고리즘을 활성화하여 서버와 클라이언트 간의 통신 비용을 줄입니다. [Federated Averaging 알고리즘](https://arxiv.org/abs/1812.07210)을 사용한 서버-클라이언트 및 클라이언트-서버 압축을 사용한 훈련의 예는 [이 실험](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/research/compression/run_experiment.py)을 참조하세요.
 
@@ -68,7 +68,7 @@ TFF는 [tensor_encoding](https://github.com/tensorflow/model-optimization/tree/m
 
 TFF는 [TensorFlow Privacy](https://github.com/tensorflow/privacy) 라이브러리와 상호 운용이 가능하며, 차등 프라이버시를 사용하는 모델의 페더레이션 훈련을 위한 새로운 알고리즘을 연구할 수 있습니다. [기본 DP-FedAvg 알고리즘](https://arxiv.org/abs/1710.06963) 및 [확장](https://arxiv.org/abs/1812.06210)을 사용하는 DP 훈련의 예는 [이 실험 드라이버](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/research/differential_privacy/stackoverflow/run_federated.py)을 참조하세요.
 
-If you want to implement a custom DP algorithm and apply it to the aggregate updates of federated averaging, you can implement a new DP mean algorithm as a subclass of [`tensorflow_privacy.DPQuery`](https://github.com/tensorflow/privacy/blob/master/tensorflow_privacy/privacy/dp_query/dp_query.py#L54) and create a `tff.aggregators.DifferentiallyPrivateFactory` with an instance of your query. An example of implementing the [DP-FTRL algorithm](https://arxiv.org/abs/2103.00039) can be found [here](https://github.com/google-research/federated/blob/master/dp_ftrl/dp_fedavg.py)
+사용자 지정 DP 알고리즘을 구현하고 연합 평균의 집계 업데이트에 적용하려면 [`tensorflow_privacy.DPQuery`](https://github.com/tensorflow/privacy/blob/master/tensorflow_privacy/privacy/dp_query/dp_query.py#L54) 의 하위 클래스로 새 DP 평균 알고리즘을 구현하고 쿼리 인스턴스로 `tff.aggregators.DifferentiallyPrivateFactory` 를 만들 수 있습니다. [DP-FTRL 알고리즘](https://arxiv.org/abs/2103.00039) 을 구현하는 예는 여기에서 찾을 수 [있습니다.](https://github.com/google-research/federated/blob/master/dp_ftrl/dp_fedavg.py)
 
 Federated GAN([아래에서](#generative_adversarial_networks) 설명)은 사용자 레벨의 차등 프라이버시를 구현하는 TFF 프로젝트의 또 다른 예입니다(예: [코드에서 여기](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/research/gans/tff_gans.py#L293)).
 
@@ -87,7 +87,7 @@ GAN은 표준 Federated Averaging과 약간 다른 흥미로운 [페더레이션
 
 TFF can be used for research on federated training of GANs. For example, the DP-FedAvg-GAN algorithm presented in [recent work](https://arxiv.org/abs/1911.06679) is [implemented in TFF](https://github.com/tensorflow/federated/tree/main/federated_research/gans). This work demonstrates the effectiveness of combining federated learning, generative models, and [differential privacy](#differential_privacy).
 
-### Personalization
+### 개인화
 
 페더레이션 학습 환경에서 개인화는 활발한 연구 분야입니다. 개인화의 목표는 다른 사용자에게 다른 추론 모델을 제공하는 것입니다. 이 문제에 대한 잠재적으로 다양한 접근 방식이 있습니다.
 
