@@ -185,7 +185,7 @@ def _info(self):
 - `extract`: 현재 `.zip`, `.gz` 및 `.tar` 파일을 지원합니다.
 - `download_and_extract`: `dl_manager.extract(dl_manager.download(urls))`와 동일합니다.
 
-All those methods returns `tfds.core.Path` (aliases for [`epath.Path`](https://github.com/google/etils)), which are [pathlib.Path-like](https://docs.python.org/3/library/pathlib.html) objects.
+이러한 모든 메서드는 [pathlib.Path-like](https://docs.python.org/3/library/pathlib.html) 개체인 `tfds.core.Path`([`epath.Path`](https://github.com/google/etils)의 별칭)를 반환합니다.
 
 이러한 메서드는 다음과 같은 임의의 중첩 구조(`list`, `dict`)를 지원합니다.
 
