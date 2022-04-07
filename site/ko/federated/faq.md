@@ -20,7 +20,7 @@ TFF는 컴퓨팅을 핵심으로 페더레이션했으므로 TFF의 작성자는
 
 ## 어떻게 기여할 수 있습니까?
 
-See the [README](../README.md), [guidelines for contributors](../CONTRIBUTING.md), and [collaborations](collaborations/README.md).
+[README](../README.md), [기여자 가이드라인](../CONTRIBUTING.md), [공동 작업](collaborations/README.md)을 참조하세요.
 
 ## FedJAX와 TensorFlow Federated의 관계는 무엇입니까?
 
