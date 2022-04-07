@@ -91,7 +91,7 @@ ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
 ds = tfds.load('imagenet2012', split='train', shuffle_files=True)
 ```
 
-Additionally, when `shuffle_files=True`, TFDS disables [`options.deterministic`](https://www.tensorflow.org/api_docs/python/tf/data/Options#deterministic), which may give a slight performance boost. To get deterministic shuffling, it is possible to opt-out of this feature with `tfds.ReadConfig`: either by setting `read_config.shuffle_seed` or overwriting `read_config.options.deterministic`.
+또한, `shuffle_files=True`일 때, TFDS는 [`options.deterministic`](https://www.tensorflow.org/api_docs/python/tf/data/Options#deterministic)를 비활성화하여 성능이 약간 향상될 수 있습니다. 결정론적인 셔플링을 얻으려면, `tfds.ReadConfig`를 사용하여 이 기능을 중지할 수 있습니다. 이를 위해 `read_config.shuffle_seed`를 설정하거나 `read_config.options.deterministic`를 덮어씁니다.
 
 ### 작업자 간에 데이터 자동 샤딩하기(TF)
 
@@ -116,14 +116,14 @@ ds = tfds.load('dataset', split='train', read_config=read_config)
 
 ### 작업자 간에 데이터 자동 샤딩(Jax)
 
-With Jax, you can use the `tfds.split_for_jax_process` or `tfds.even_splits` API to distribute your data across workers. See the [split API guide](https://www.tensorflow.org/datasets/splits).
+Jax를 사용하면 `tfds.split_for_jax_process` 또는 `tfds.even_splits` API를 사용하여 작업자 간에 데이터를 배포할 수 있습니다. [분할 API 가이드](https://www.tensorflow.org/datasets/splits)를 참조하세요.
 
 ```python
 split = tfds.split_for_jax_process('train', drop_remainder=True)
 ds = tfds.load('my_dataset', split=split)
 ```
 
-`tfds.split_for_jax_process` is a simple alias for:
+`tfds.split_for_jax_process`는 다음에 대한 간단한 별칭입니다.
 
 ```python
 # The current `process_index` loads only `1 / process_count` of the data.
