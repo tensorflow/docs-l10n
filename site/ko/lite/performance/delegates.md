@@ -1,6 +1,6 @@
 # TensorFlow Lite 대리자
 
-## Introduction
+## 시작하기
 
 **대리자**는 GPU 및 [DSP(디지털 신호 프로세서)](https://en.wikipedia.org/wiki/Digital_signal_processor)와 같은 온 디바이스 가속기를 활용하여 TensorFlow Lite 모델의 하드웨어 가속을 지원합니다.
 
