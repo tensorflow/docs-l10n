@@ -4,15 +4,15 @@ Python에서 TensorFlow Lite를 사용하면 [Raspberry Pi](https://www.raspberr
 
 이 페이지에서는 단 몇 분 안에 Python으로 TensorFlow Lite 모델 실행을 시작할 수 있는 방법을 보여줍니다. [TensorFlow Lite로 변환된](../convert/) TensorFlow 모델만 있으면 됩니다. 아직 변환된 모델이 없는 경우, 아래 링크된 예제와 함께 제공된 모델을 사용하여 시도해 볼 수 있습니다.
 
-## About the TensorFlow Lite runtime package
+## TensorFlow Lite 런타임 패키지 정보
 
-To quickly start executing TensorFlow Lite models with Python, you can install just the TensorFlow Lite interpreter, instead of all TensorFlow packages. We call this simplified Python package `tflite_runtime`.
+Python으로 TensorFlow Lite 모델 실행을 빠르게 시작하려면 모든 TensorFlow 패키지 대신 TensorFlow Lite 인터프리터만 설치할 수 있습니다. 이 단순화된 Python 패키지를 `tflite_runtime`이라고 합니다.
 
-The `tflite_runtime` package is a fraction the size of the full `tensorflow` package and includes the bare minimum code required to run inferences with TensorFlow Lite—primarily the [`Interpreter`](https://www.tensorflow.org/api_docs/python/tf/lite/Interpreter) Python class. This small package is ideal when all you want to do is execute `.tflite` models and avoid wasting disk space with the large TensorFlow library.
+`tflite_runtime` 패키지의 크기는 전체 `tensorflow` 패키지의 극히 일부이며 TensorFlow Lite로 추론을 실행하는 데 필요한 최소한의 코드를 포함합니다. 여기에는 기본적으로 [`Interpreter`](https://www.tensorflow.org/api_docs/python/tf/lite/Interpreter) Python 클래스가 포함됩니다. 이 작은 패키지는 <code>.tflite</code> 모델만 실행하고 대용량 TensorFlow 라이브러리로 디스크 공간을 낭비하지 않으려는 경우에 이상적입니다.
 
-Note: If you need access to other Python APIs, such as the [TensorFlow Lite Converter](../convert/), you must install the [full TensorFlow package](https://www.tensorflow.org/install/). For example, the [Select TF ops] (https://www.tensorflow.org/lite/guide/ops_select) are not included in the `tflite_runtime` package. If your models have any dependencies to the Select TF ops, you need to use the full TensorFlow package instead.
+참고: [TensorFlow Lite Converter](../convert/)와 같은 다른 Python API에 액세스해야 하는 경우 [전체 TensorFlow 패키지](https://www.tensorflow.org/install/)를 설치해야 합니다. 예를 들어 [Select TF ops](https://www.tensorflow.org/lite/guide/ops_select)는 `tflite_runtime` 패키지에 포함되어 있지 않습니다. 모델에 Select TF ops에 대한 종속성이 있는 경우, 대신 전체 TensorFlow 패키지를 사용해야 합니다.
 
-## Install TensorFlow Lite for Python
+## Python용 TensorFlow Lite 설치하기
 
 You can install on Linux with pip:
 
@@ -37,7 +37,7 @@ Note: We no longer release pre-built `tflite-runtime` wheels for Windows and mac
 
 ## tflite_runtime을 사용하여 추론 실행하기
 
-Instead of importing `Interpreter` from the `tensorflow` module, you now need to import it from `tflite_runtime`.
+`tensorflow` 모듈에서 `Interpreter`를 가져오는 대신, 이제 `tflite_runtime`에서 가져와야 합니다.
 
 예를 들어, 위의 패키지를 설치한 후 [`label_image.py`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/examples/python/) 파일을 복사하고 실행합니다. (아마도) `tensorflow` 라이브러리가 설치되어 있지 않기 때문에 이 작업에 실패합니다. 이 문제를 해결하려면 파일의 다음 줄을 편집합니다.
 
@@ -75,4 +75,4 @@ interpreter = tflite.Interpreter(model_path=args.model_file)
 
 - To convert other TensorFlow models to TensorFlow Lite, read about the [TensorFlow Lite Converter](../convert/).
 
-- If you want to build `tflite_runtime` wheel, read [Build TensorFlow Lite Python Wheel Package](build_cmake_pip.md)
+- `tflite_runtime` 휠을 빌드하려면 [TensorFlow Lite Python 휠 패키지 빌드](build_cmake_pip.md)를 읽으세요.
