@@ -2,23 +2,23 @@
 
 To get started with TensorFlow Lite on Android, we recommend exploring the following example.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android">Android image classification example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android">Android 이미지 분류의 예</a>
 
-Read [TensorFlow Lite Android image classification](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/android/EXPLORE_THE_CODE.md) for an explanation of the source code.
+소스 코드에 대한 설명은 [TensorFlow Lite Android 이미지 분류](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/android/EXPLORE_THE_CODE.md)를 읽어보세요.
 
-This example app uses [image classification](https://www.tensorflow.org/lite/models/image_classification/overview) to continuously classify whatever it sees from the device's rear-facing camera. The application can run either on device or emulator.
+이 예제 앱은 [이미지 분류](https://www.tensorflow.org/lite/models/image_classification/overview)를 사용하여 기기의 후면 카메라에서 보여지는 내용을 지속적으로 분류합니다. 이 앱은 기기 또는 에뮬레이터에서 실행할 수 있습니다.
 
 Inference is performed using the TensorFlow Lite Java API and the [TensorFlow Lite Android Support Library](../inference_with_metadata/lite_support.md). The demo app classifies frames in real-time, displaying the top most probable classifications. It allows the user to choose between a floating point or [quantized](https://www.tensorflow.org/lite/performance/post_training_quantization) model, select the thread count, and decide whether to run on CPU, GPU, or via [NNAPI](https://developer.android.com/ndk/guides/neuralnetworks).
 
 Note: Additional Android applications demonstrating TensorFlow Lite in a variety of use cases are available in [Examples](https://www.tensorflow.org/lite/examples).
 
-## Build in Android Studio
+## Android Studio에서 빌드하기
 
 To build the example in Android Studio, follow the instructions in [README.md](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/android/README.md).
 
 ## Create your own Android app
 
-To get started quickly writing your own Android code, we recommend using our [Android image classification example](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android) as a starting point.
+고유한 Android 코드 작성을 빠르게 시작하려면 [Android 이미지 분류 예](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android)를 출발점으로 이용하는 것이 좋습니다.
 
 The following sections contain some useful information for working with TensorFlow Lite on Android.
 
@@ -44,7 +44,7 @@ TensorFlow Lite Task Library contains a set of powerful and easy-to-use task-spe
 
 To use the Task Library in your Android app, we recommend using the AAR hosted at MavenCentral for [Task Vision library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-vision) and [Task Text library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-text) , respectively.
 
-You can specify this in your `build.gradle` dependencies as follows:
+다음과 같이 `build.gradle` 종속성에서 이 요소를 지정할 수 있습니다.
 
 ```build
 dependencies {
@@ -58,15 +58,15 @@ To use nightly snapshots, make sure that you have added [Sonatype snapshot repos
 
 See the introduction in the [TensorFlow Lite Task Library overview](../inference_with_metadata/task_library/overview.md) for more details.
 
-### Use the TensorFlow Lite Android Support Library
+### TensorFlow Lite Android 지원 라이브러리 사용하기
 
-The TensorFlow Lite Android Support Library makes it easier to integrate models into your application. It provides high-level APIs that help transform raw input data into the form required by the model, and interpret the model's output, reducing the amount of boilerplate code required.
+TensorFlow Lite Android 지원 라이브러리를 사용하면 모델을 애플리케이션에 통합하기가 쉬워집니다. 이 라이브러리는 원시 입력 데이터를 모델에 필요한 형식으로 변환하고 모델의 출력을 해석하여 필요한 상용구 코드의 양을 줄이는 고급 API를 제공합니다.
 
-It supports common data formats for inputs and outputs, including images and arrays. It also provides pre- and post-processing units that perform tasks such as image resizing and cropping.
+이미지 및 배열을 포함하여 입력 및 출력에 대해 공통 데이터 형식이 지원됩니다. 또한 이미지 크기 조정 및 자르기와 같은 작업을 수행하는 전처리 및 후 처리 기능도 제공됩니다.
 
 To use the Support Library in your Android app, we recommend using the [TensorFlow Lite Support Library AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-support).
 
-You can specify this in your `build.gradle` dependencies as follows:
+다음과 같이 `build.gradle` 종속성에서 이 요소를 지정할 수 있습니다.
 
 ```build
 dependencies {
@@ -82,7 +82,7 @@ To get started, follow the instructions in the [TensorFlow Lite Android Support 
 
 To use TensorFlow Lite in your Android app, we recommend using the [TensorFlow Lite AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite).
 
-You can specify this in your `build.gradle` dependencies as follows:
+다음과 같이 `build.gradle` 종속성에서 이 요소를 지정할 수 있습니다.
 
 ```build
 dependencies {
@@ -92,9 +92,9 @@ dependencies {
 
 To use nightly snapshots, make sure that you have added [Sonatype snapshot repository](./build_android#use_nightly_snapshots).
 
-This AAR includes binaries for all of the [Android ABIs](https://developer.android.com/ndk/guides/abis). You can reduce the size of your application's binary by only including the ABIs you need to support.
+이 AAR에는 모든 [Android ABI](https://developer.android.com/ndk/guides/abis)에 대한 바이너리가 포함되어 있습니다. 지원해야 하는 ABI만 포함하여 애플리케이션의 바이너리 크기를 줄일 수 있습니다.
 
-We recommend most developers omit the `x86`, `x86_64`, and `arm32` ABIs. This can be achieved with the following Gradle configuration, which specifically includes only `armeabi-v7a` and `arm64-v8a`, which should cover most modern Android devices.
+대부분의 개발자는 `x86`, `x86_64` 및 `arm32` ABI를 생략하는 것이 좋습니다. 이를 위해 대부분의 최신 Android 기기에 적용되는 `armeabi-v7a` 및 `arm64-v8a`를 포함한 다음 Gradle 구성을 이용할 수 있습니다.
 
 ```build
 android {
@@ -106,21 +106,21 @@ android {
 }
 ```
 
-To learn more about `abiFilters`, see [`NdkOptions`](https://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.NdkOptions.html) in the Android Gradle documentation.
+`abiFilters`에 대해 자세히 알아보려면 Android Gradle 설명서에서 [`NdkOptions`](https://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.NdkOptions.html)를 참조하세요.
 
 ## Build Android app using C++
 
-There are two ways to use TFLite through C++ if you build your app with the NDK:
+NDK로 앱을 빌드하는 경우, C++를 통해 TFLite를 사용하는 두 가지 방법이 있습니다.
 
-### Use TFLite C API
+### TFLite C API 사용하기
 
 This is the *recommended* approach. Download the [TensorFlow Lite AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow/tensorflow-lite), rename it to `tensorflow-lite-*.zip`, and unzip it. You must include the four header files in `headers/tensorflow/lite/` and `headers/tensorflow/lite/c/` folder and the relevant `libtensorflowlite_jni.so` dynamic library in `jni/` folder in your NDK project.
 
-The `c_api.h` header file contains basic documentation about using the TFLite C API.
+`c_api.h` 헤더 파일에는 TFLite C API 사용을 위한 기본 설명서가 포함되어 있습니다.
 
-### Use TFLite C++ API
+### TFLite C++ API 사용하기
 
-If you want to use TFLite through C++ API, you can build the C++ shared libraries:
+C++ API를 통해 TFLite를 사용하려는 경우, C++ 공유 라이브러리를 빌드할 수 있습니다.
 
 32bit armeabi-v7a:
 
@@ -134,7 +134,7 @@ bazel build -c opt --config=android_arm //tensorflow/lite:libtensorflowlite.so
 bazel build -c opt --config=android_arm64 //tensorflow/lite:libtensorflowlite.so
 ```
 
-Currently, there is no straightforward way to extract all header files needed, so you must include all header files in `tensorflow/lite/` from the TensorFlow repository. Additionally, you will need header files from [FlatBuffers](https://github.com/google/flatbuffers) and [Abseil](https://github.com/abseil/abseil-cpp).
+현재, 필요한 모든 헤더 파일을 추출하는 간단한 방법은 없으므로 모든 헤더 파일을 TensorFlow 리포지토리의 `tensorflow/lite/`에 포함해야 합니다. 또한 [FlatBuffers](https://github.com/google/flatbuffers) 및 [Abseil](https://github.com/abseil/abseil-cpp)의 헤더 파일도 필요합니다.
 
 ## Min SDK version of TFLite
 
