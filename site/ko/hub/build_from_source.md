@@ -30,7 +30,7 @@ TensorFlow Hub pip 패키지를 변경하는 경우, 소스에서 pip 패키지�
 
 또는 protobuf 컴파일러를 설치하는 경우, [bazel을 사용하지 않고 변경 사항을 시도](#develop)할 수 있습니다.
 
-## Setup a virtualenv {:#setup}
+## virtualenv 설정 {:#setup}
 
 ### virtualenv 활성화
 
