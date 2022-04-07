@@ -99,7 +99,7 @@ GPU 대리자를 사용할 코드를 활성화하려면 `CameraExampleViewContro
 
 #### 5단계: 모드를 릴리스합니다.
 
-While in Step 4 you ran in debug mode, to get better performance, you should change to a release build with the appropriate optimal Metal settings. In particular, To edit these settings go to the `Product > Scheme > Edit Scheme...`. Select `Run`. On the `Info` tab, change `Build Configuration`, from `Debug` to `Release`, uncheck `Debug executable`.
+4단계에서 디버그 모드로 실행하는 동안 성능을 향상하려면 적절한 최적의 Metal 설정을 사용하여 릴리스 빌드로 변경해야 합니다. 특히 해당 설정을 편집하려면 `Product> Scheme> Edit Scheme...`으로 이동합니다. `Run`을 선택합니다. `Info` 탭에서 `Build Configuration`을 `Debug`에서 `Release`로 변경하고 `Debug executable`을 선택 취소합니다.
 
 ![금속 옵션 설정](images/iosmetal.png)
 
