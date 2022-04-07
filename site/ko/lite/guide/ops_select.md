@@ -1,6 +1,6 @@
 # TensorFlow 연산자 선택
 
-Since the TensorFlow Lite builtin operator library only supports a limited number of TensorFlow operators, not every model is convertible. For details, refer to [operator compatibility](ops_compatibility.md).
+TensorFlow Lite 내장 연산자 라이브러리는 제한된 수의 TensorFlow 연산자만 지원하므로 모든 모델을 변환할 수 있는 것은 아닙니다. 자세한 내용은 [연산자 호환성](ops_compatibility.md)을 참조하세요.
 
 변환을 위해 사용자는 TensorFlow Lite 모델에서 [특정 TensorFlow ops](op_select_allowlist.md)를 사용하도록 설정할 수 있습니다. 그러나 TensorFlow ops로 TensorFlow Lite 모델을 실행하려면 핵심 TensorFlow 런타임을 가져와야 하므로 TensorFlow Lite 인터프리터 바이너리 크기가 늘어납니다. Android의 경우 필요한 Tensorflow ops만 선택적으로 빌드하여 이를 방지할 수 있습니다. 자세한 내용은 [바이너리 크기 줄이기](../guide/reduce_binary_size.md)를 참조하세요.
 
@@ -28,7 +28,7 @@ open("converted_model.tflite", "wb").write(tflite_model)
 
 ### Android AAR
 
-To reduce the binary size, please build your own custom AAR files as guided in the [next section](#building-the-android-aar). If the binary size is not a considerable concern, we recommend using the prebuilt [AAR with TensorFlow ops hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-select-tf-ops).
+바이너리 크기를 줄이려면 [다음 섹션](#building-the-android-aar)의 안내에 따라 사용자 정의 AAR 파일을 빌드하세요. 바이너리 크기가 큰 문제가 아니라면 [MavenCentral에서 TensorFlow ops가 호스팅되는 사전 빌드된 AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-select-tf-ops)을 사용할 것을 권장합니다.
 
 다음과 같이 표준 TensorFlow Lite AAR과 함께 이 AAR을 추가하여 `build.gradle` 종속성에서 이 내용을 지정할 수 있습니다.
 
@@ -157,9 +157,9 @@ bazel build -c opt --config=monolithic tensorflow/lite/delegates/flex:tensorflow
 
 This command generates the following shared library in `bazel-bin/tensorflow/lite/delegates/flex`.
 
-Platform | Library name
+플랫폼 | Library name
 --- | ---
-Linux | libtensorflowlite_flex.so
+리눅스 | libtensorflowlite_flex.so
 macOS | libtensorflowlite_flex.dylib
 Windows | tensorflowlite_flex.dll
 
