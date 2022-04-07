@@ -58,7 +58,7 @@ Reusable SavedModel을 주어진 모델 구축 라이브러리에 로드하거�
 outputs = obj(inputs, trainable=..., **kwargs)
 ```
 
-#### Arguments
+#### 인수
 
 인수는 다음과 같습니다.
 
