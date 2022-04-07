@@ -10,7 +10,7 @@ TensorFlow에서 Neural Structured Learning(NSL)을 사용하도록 환경을 �
 
 ## pip를 사용하여 Neural Structured Learning 설치하기
 
-#### 1. Python 개발 환경을 설치합니다.
+#### 1. Install the Python development environment.
 
 Ubuntu:
 
@@ -30,7 +30,7 @@ macOS:
 <code class="devsite-terminal">sudo pip3 install --upgrade virtualenv  # system-wide install</code>
 </pre>
 
-#### 2. 가상 환경을 만듭니다.
+#### 2. Create a virtual environment.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">virtualenv --python python3 "./venv"</code>
@@ -45,13 +45,13 @@ macOS:
 CPU 지원:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow&gt;=1.15.0'</code>
 </pre>
 
 GPU 지원:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu&gt;=1.15.0'</code>
 </pre>
 
 #### 4. Neural Structured Learning `pip` 패키지를 설치합니다.
@@ -70,7 +70,7 @@ GPU 지원:
 
 ## Neural Structured Learning pip 패키지 빌드하기
 
-#### 1. Python 개발 환경을 설치합니다.
+#### 1. Install the Python development environment.
 
 Ubuntu:
 
@@ -90,7 +90,7 @@ macOS:
 <code class="devsite-terminal">sudo pip3 install --upgrade virtualenv  # system-wide install</code>
 </pre>
 
-#### 2. Bazel을 설치합니다.
+#### 2. Install Bazel.
 
 Neural Structured Learning을 컴파일하는 데 사용되는 빌드 도구인 [Bazel을 설치합니다](https://docs.bazel.build/versions/master/install.html).
 
@@ -100,7 +100,7 @@ Neural Structured Learning을 컴파일하는 데 사용되는 빌드 도구인 
 <code class="devsite-terminal">git clone https://github.com/tensorflow/neural-structured-learning.git</code>
 </pre>
 
-#### 4. 가상 환경을 만듭니다.
+#### 4. Create a virtual environment.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">virtualenv --python python3 "./venv"</code>
@@ -112,18 +112,18 @@ Neural Structured Learning을 컴파일하는 데 사용되는 빌드 도구인 
 
 #### 5. Tensorflow를 설치합니다.
 
-NSL에는 1.15 이상의 TensorFlow 버전이 필요합니다. NSL은 TensorFlow 2.0도 지원합니다.
+Note that NSL requires a TensorFlow version of 1.15 or higher. NSL also supports TensorFlow 2.0.
 
 CPU 지원:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow&gt;=1.15.0'</code>
 </pre>
 
 GPU 지원:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu&gt;=1.15.0'</code>
 </pre>
 
 #### 6. Neural Structured Learning 종속성을 설치합니다.
@@ -139,13 +139,13 @@ GPU 지원:
 <code class="devsite-terminal tfo-terminal-venv">bazel test //neural_structured_learning/...</code>
 </pre>
 
-#### 8. pip 패키지를 빌드합니다.
+#### 8. Build the pip package.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">python setup.py bdist_wheel --universal --dist-dir="./wheel"</code>
 </pre>
 
-#### 9. pip 패키지를 설치합니다.
+#### 9. Install the pip package.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade ./wheel/neural_structured_learning*.whl</code>
