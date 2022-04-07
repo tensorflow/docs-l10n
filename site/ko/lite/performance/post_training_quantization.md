@@ -99,11 +99,11 @@ converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 converter.representative_dataset = representative_dataset&amp;lt;/b&amp;gt;
 tflite_quant_model = converter.convert()</pre>
 
-Note: This `tflite_quant_model` won't be compatible with integer only devices (such as 8-bit microcontrollers) and accelerators (such as the Coral Edge TPU) because the input and output still remain float in order to have the same interface as the original float only model.
+참고: `tflite_quant_model`은 정수 전용 기기(예: 8bit 마이크로 컨트롤러) 및 가속기(예: Coral 에지 TPU)와 호환되지 않습니다. 입력 및 출력이 원본 부동 모델과 같은 인터페이스를 갖기 위해 여전히 부동 상태로 남아 있기 때문입니다.
 
 #### 정수 전용
 
-*Creating integer only models is a common use case for [TensorFlow Lite for Microcontrollers](https://www.tensorflow.org/lite/microcontrollers) and [Coral Edge TPUs](https://coral.ai/).*
+*정수 전용 모델을 만드는 것은 [마이크로 컨트롤러용 TensorFlow Lite](https://www.tensorflow.org/lite/microcontrollers) 및 [Coral 에지 TPU](https://coral.ai/)의 일반적인 사용 사례입니다.*
 
 참고: TensorFlow 2.3.0부터는 `inference_input_type` 및 `inference_output_type` 속성을 지원합니다.
 
@@ -123,7 +123,7 @@ tflite_quant_model = converter.convert()
 
 ### Float16 양자화
 
-You can reduce the size of a floating point model by quantizing the weights to float16, the IEEE standard for 16-bit floating point numbers. To enable float16 quantization of weights, use the following steps:
+가중치를 16bit 부동 소수점 숫자에 대한 IEEE 표준인 float16으로 양자화하여 부동 소수점 모델의 크기를 줄일 수 있습니다. 가중치의 float16 양자화를 활성화하려면 다음 스탭을 사용합니다.
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -183,7 +183,7 @@ tflite_quant_model = converter.convert()
 
 가중치는 훈련 후에 양자화되기 때문에 특히 소규모 네트워크의 경우 정확성 손실이 있을 수 있습니다. [TensorFlow Lite 모델 리포지토리](../models/)에서 특정 네트워크에 대해 사전 훈련된 전체 양자화 모델이 제공됩니다. 정확성 저하가 허용 가능한 한계 내에 있는지 확인하기 위해 양자화된 모델의 정확성을 확인하는 것이 중요합니다. [TensorFlow Lite 모델 정확성](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}을 평가하는 도구가 있습니다.
 
-Alternatively, if the accuracy drop is too high, consider using [quantization aware training](https://www.tensorflow.org/model_optimization/guide/quantization/training) . However, doing so requires modifications during model training to add fake quantization nodes, whereas the post-training quantization techniques on this page use an existing pre-trained model.
+또는 정확성 저하가 너무 크면 [양자화 인식 훈련](https://www.tensorflow.org/model_optimization/guide/quantization/training)을 사용해 볼 수 있습니다. 그러나 해당 훈련을 사용하려면 모델 훈련 중에 수정하여 가짜 양자화 노드를 추가해야 하지만, 이 페이지의 훈련 후 양자화 기술은 기존의 사전 훈련된 모델을 사용합니다.
 
 ### 양자화된 텐서 표현
 
@@ -195,6 +195,6 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 - Per-axis (aka per-channel) or per-tensor weights represented by int8 two’s complement values in the range [-127, 127] with zero-point equal to 0.
 
-- Per-tensor activations/inputs represented by int8 two’s complement values in the range [-128, 127], with a zero-point in range [-128, 127].
+- 텐서별 활성화/입력은 [-128, 127] 범위의 int8 2의 보수 값으로 표시되며 [-128, 127] 범위의 영점을 포함합니다.
 
 양자화 체계에 대한 자세한 내용은 [양자화 사양](./quantization_spec.md)을 참조하세요. TensorFlow Lite의 대리자 인터페이스에 연결하려는 하드웨어 공급 업체는 여기에 설명된 양자화 체계를 구현해보는 것이 좋습니다.
