@@ -1,12 +1,12 @@
 # 분할 및 조각화
 
-All TFDS datasets expose various data splits (e.g. `'train'`, `'test'`) which can be explored in the [catalog](https://www.tensorflow.org/datasets/catalog/overview).
+모든 TFDS 데이터세트는 <a>카탈로그</a>에서 탐색할 수 있는 다양한 데이터 분할(예: `'train'`, <code>'test'</code>)을 노출합니다.
 
 In addition of the "official" dataset splits, TFDS allow to select slice(s) of split(s) and various combinations.
 
 ## 조각화 API
 
-Slicing instructions are specified in `tfds.load` or `tfds.DatasetBuilder.as_dataset` through the `split=` kwarg.
+슬라이싱 지침은 `split=` kwarg를 통해 `tfds.load` 또는 `tfds.DatasetBuilder.as_dataset`에 지정됩니다.
 
 ```python
 ds = tfds.load('my_dataset', split='train[:75%]')
@@ -17,25 +17,25 @@ builder = tfds.builder('my_dataset')
 ds = builder.as_dataset(split='test+train[:75%]')
 ```
 
-Split can be:
+분할은 다음과 같을 수 있습니다.
 
-- **Plain split** (`'train'`, `'test'`): All examples within the split selected.
-- **Slices**: Slices have the same semantic as [python slice notation](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations). Slices can be:
+- **일반 분할**(`'train'`, `'test'`): 분할 내의 모든 예가 선택됩니다.
+- **슬라이스**: 슬라이스는 [python 슬라이스 표기](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations)와 동일한 의미를 갖습니다. 슬라이스는 다음과 같을 수 있습니다.
     - **Absolute** (`'train[123:450]'`, `train[:4000]`): (see note below for caveat about read order)
-    - **Percent** (`'train[:75%]'`, `'train[25%:75%]'`): Divide the full data into 100 even slices. If the data is not divisible by 100, some percent might contain additional examples.
-    - **Shard** (`train[:4shard]`, `train[4shard]`): Select all examples in the requested shard. (see `info.splits['train'].num_shards` to get the number of shards of the split)
-- **Union of splits** (`'train+test'`, `'train[:25%]+test'`): Splits will be interleaved together.
-- **Full dataset** (`'all'`): `'all'` is a special split name corresponding to the union of all splits (equivalent to `'train+test+...'`).
-- **List of splits** (`['train', 'test']`): Multiple `tf.data.Dataset` are returned separately:
+    - **백분율**(`'train[:75%]'`, `'train[25%:75%]'`): 전체 데이터를 100개의 균일한 슬라이스로 나눕니다. 데이터를 100으로 나눌 수 없는 경우 일부 백분율에 추가 예가 포함될 수 있습니다.
+    - **샤드**(`train[:4shard]`, `train[4shard]`): 요청된 샤드의 모든 예제를 선택합니다. (분할의 샤드 수를 얻으려면 `info.splits['train'].num_shards`을 참조하세요.)
+- **분할의 합집합**(`'train+test'`, `'train[:25%]+test'`): 분할이 함께 인터리브됩니다.
+- **전체 데이터세트**(`'all'`): `'all'`은 모든 분할의 합집합에 해당하는 특수 분할 이름입니다(`'train+test+...'`).
+- **분할 목록**(`['train', 'test']`): 여러 `tf.data.Dataset`가 별도로 반환됩니다.
 
 ```python
 # Returns both train and test split separately
 train_ds, test_ds = tfds.load('mnist', split=['train', 'test[50%]'])
 ```
 
-Note: Due to the shards being [interleaved](https://www.tensorflow.org/api_docs/python/tf/data/Dataset?version=nightly#interleave), order isn't guaranteed to be consistent between sub-splits. In other words reading `test[0:100]` followed by `test[100:200]` may yield examples in a different order than reading `test[:200]`. See [determinism guide](https://www.tensorflow.org/datasets/determinism#determinism_when_reading) to understand the order in which TFDS read examples.
+참고: 샤드가 [인터리브 처리](https://www.tensorflow.org/api_docs/python/tf/data/Dataset?version=nightly#interleave)되기 때문에 하위 분할 간에 순서가 일치하지 않을 수 있습니다. 즉, `test[0:100]` 다음에 `test[100:200]`를 판독하면 `test[:200]`를 읽는 것과 다른 순서로 예제가 생성될 수 있습니다. TFDS가 예제를 읽는 순서를 이해하려면 [결정론 가이드](https://www.tensorflow.org/datasets/determinism#determinism_when_reading)를 참조하세요.
 
-## `tfds.even_splits` &amp; multi-host training
+## `tfds.even_splits` 및 다중 호스트 훈련
 
 `tfds.even_splits` generates a list of non-overlapping sub-splits of the same size.
 
@@ -65,9 +65,9 @@ split = splits[jax.process_index()]
 
 `tfds.even_splits`, `tfds.split_for_jax_process` accepts on any split value as input (e.g. `'train[75%:]+test'`)
 
-## Slicing and metadata
+## 슬라이싱 및 메타데이터
 
-It is possible to get additional info on the splits/subsplits (`num_examples`, `file_instructions`,...) using the [dataset info](https://www.tensorflow.org/datasets/overview#access_the_dataset_metadata):
+[데이터세트 정보](https://www.tensorflow.org/datasets/overview#access_the_dataset_metadata)를 사용하여 분할/하위 분할(`num_examples`, `file_instructions`,...)에 대한 추가 정보를 얻을 수 있습니다.
 
 ```python
 builder = tfds.builder('my_dataset')
@@ -76,9 +76,9 @@ builder.info.splits['train[:75%]'].num_examples  # 7_500 (also works with slices
 builder.info.splits.keys()  # ['train', 'test']
 ```
 
-## Cross validation
+## 교차 검증
 
-Examples of 10-fold cross-validation using the string API:
+문자열 API를 사용한 10겹 교차 검증의 예:
 
 ```python
 vals_ds = tfds.load('mnist', split=[
@@ -89,15 +89,15 @@ trains_ds = tfds.load('mnist', split=[
 ])
 ```
 
-The validation datasets are each going to be 10%: `[0%:10%]`, `[10%:20%]`, ..., `[90%:100%]`. And the training datasets are each going to be the complementary 90%: `[10%:100%]` (for a corresponding validation set of `[0%:10%]`), `[0%:10%]
+검증 데이터세트는 각각 10%가 됩니다: `[0%:10%]`, `[10%:20%]`, ..., `[90%:100%]`. 그리고 훈련 데이터세트는 각각 보완적인 90%가 됩니다: `[10%:100%]`(`[0%:10%]`의 해당 검증 세트에 대해), `[0%:10%]
 
 - [20%:100%]`(for a validation set of `[10%:20%]`),...
 
-## `tfds.core.ReadInstruction` and rounding
+## `tfds.core.ReadInstruction` 및 반올림
 
-Rather than `str`, it is possible to pass splits as `tfds.core.ReadInstruction`:
+`str` 대신 `tfds.core.ReadInstruction`으로 분할을 전달할 수 있습니다.
 
-For example, `split = 'train[50%:75%] + test'` is equivalent to:
+예를 들어 `split = 'train[50%:75%] + test'`는 다음과 같습니다.
 
 ```python
 split = (
@@ -112,21 +112,21 @@ split = (
 ds = tfds.load('my_dataset', split=split)
 ```
 
-`unit` can be:
+`unit`는 다음과 같을 수 있습니다.
 
-- `abs`: Absolute slicing
-- `%`: Percent slicing
-- `shard`: Shard slicing
+- `abs`: 절대 슬라이싱
+- `%`: 백분율 슬라이싱
+- `shard`: 샤드 슬라이싱
 
-`tfds.ReadInstruction` also has a rounding argument. If the number of example in the dataset is not divide evenly by `100`:
+`tfds.ReadInstruction`에는 반올림 인수도 있습니다. 데이터세트의 예제 수가 `100`으로 균등하게 나눠지지 않는 경우:
 
-- `rounding='closest'` (default): The remaining examples are distributed among the percent, so some percent might contain additional examples.
-- `rounding='pct1_dropremainder'`: The remaining examples are dropped, but this guarantee all percent contain the exact same number of example (eg: `len(5%) == 5 * len(1%)`).
+- `rounding='closest'`(기본값): 나머지 예제는 백분율로 분산되므로 일부 백분율에는 추가 예제가 포함될 수 있습니다.
+- `rounding='pct1_dropremainder'`: 나머지 예제는 삭제되지만 모든 백분율에 정확히 동일한 수의 예제가 포함된다는 보장이 있습니다(예: `len(5%) == 5 * len(1%)`).
 
-### Reproducibility &amp; determinism
+### 재현성 및 결정성
 
-During generation, for a given dataset version, TFDS guarantee that examples are deterministically shuffled on disk. So generating the dataset twice (in 2 different computers) won't change the example order.
+생성하는 동안 주어진 데이터세트 버전에 대해 TFDS는 예제가 디스크에서 결정성 있게 셔플되도록 보장합니다. 따라서 데이터세트를 두 번(두 대의 다른 컴퓨터에서) 생성해도 예제 순서는 변경되지 않습니다.
 
-Similarly, the subsplit API will always select the same `set` of examples, regardless of platform, architecture, etc. This mean `set('train[:20%]') == set('train[:10%]') + set('train[10%:20%]')`.
+마찬가지로, subsplit API는 플랫폼, 아키텍처 등에 관계없이 항상 동일한 예제 `set`를 선택합니다. 즉, `set('train[:20%]') == set('train[:10%]') + set('train[10%:20%]')`입니다.
 
 However, the order in which examples are read might **not** be deterministic. This depends on other parameters (e.g. whether `shuffle_files=True`).
