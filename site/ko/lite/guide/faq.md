@@ -6,20 +6,21 @@
 
 #### TensorFlow에서 TensorFlow Lite로의 변환이 지원되는 형식은 무엇입니까?
 
-TensorFlow Lite 변환기는 다음 형식을 지원합니다.
+freeze_graph.py에 의해 생성된 고정 [GraphDefs](../convert/index.md#python_api): <a>TFLiteConverter.from_frozen_graph</a>
 
-- SavedModel: [TFLiteConverter.from_saved_model](../convert/python_api.md#exporting_a_savedmodel_)
-- freeze_graph.py에 의해 생성된 고정 [GraphDefs](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/tools/freeze_graph.py): [TFLiteConverter.from_frozen_graph](../convert/python_api.md#exporting_a_graphdef_from_file_)
-- tf.keras HDF5 모델: [TFLiteConverter.from_keras_model_file](../convert/python_api.md#exporting_a_tfkeras_file_)
-- tf.Session: [TFLiteConverter.from_session](../convert/python_api.md#exporting_a_graphdef_from_tfsession_)
+#### TensorFlow Lite에서 일부 연산이 구현되지 않은 이유는 무엇입니까?
 
-호환성 문제를 조기에 감지하기 위해 [Python 변환기](../convert/python_api.md)를 모델 파이프라인에 통합하는 방법이 권장됩니다.
+In order to keep TFLite lightweight, only certain TF operators (listed in the [allowlist](op_select_allowlist.md)) are supported in TFLite.
 
 #### 내 모델이 변환되지 않는 이유는 무엇입니까?
 
-TensorFlow Lite 연산 수가 TensorFlow의 연산 수보다 작기 때문에 일부 추론 모델은 변환하지 못할 수 있습니다. 구현되지 않은 연산의 경우, [누락된 연산자](faq.md#why-are-some-operations-not-implemented-in-tensorflow-lite)에 대한 질문을 살펴보세요. 지원되지 않는 연산자에는 임베딩 및 LSTM/RNN이 포함됩니다. LSTM/RNN이 있는 모델의 경우, 실험적 API [OpHint](https://www.tensorflow.org/api_docs/python/tf/lite/OpHint)를 사용해 변환을 시도해볼 수도 있습니다. 제어 흐름 연산(Switch, Merge 등)이 있는 모델은 현재 변환할 수 없지만 Tensorflow Lite에서 제어 흐름에 대한 지원을 추가하기 위해 노력하고 있습니다. [GitHub 문제](https://github.com/tensorflow/tensorflow/issues/28485)를 참조하세요.
+Since the number of TensorFlow Lite operations is smaller than TensorFlow's, some models may not be able to convert. Some common errors are listed [here](../convert/index.md#conversion-errors).
 
 누락된 연산 또는 제어 흐름 연산과 관련이 없는 변환 문제의 경우, [GitHub 문제](https://github.com/tensorflow/tensorflow/issues?q=label%3Acomp%3Alite+)를 검색하거나 [새 문제](https://github.com/tensorflow/tensorflow/issues)를 제출하세요.
+
+#### TensorFlow Lite 모델이 원래 TensorFlow 모델과 동일하게 동작하는지 어떻게 테스트합니까?
+
+The best way to test is to compare the outputs of the TensorFlow and the TensorFlow Lite models for the same inputs (test data or random inputs) as shown [here](inference.md#load-and-run-a-model-in-python).
 
 #### GraphDef 프로토콜 버퍼의 입력/출력을 어떻게 결정합니까?
 
@@ -39,26 +40,20 @@ python import_pb_to_tensorboard.py --model_dir <model path> --log_dir <log dir p
 
 Netron이 TensorFlow Lite 모델을 열 수 없는 경우, 리포지토리에서 [visualize.py](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/visualize.py) 스크립트를 사용해 볼 수 있습니다.
 
+If you're using TF 2.5 or a later version
+
+```shell
+python -m tensorflow.lite.tools.visualize model.tflite visualized_model.html
+```
+
+Otherwise, you can run this script with Bazel
+
 - [TensorFlow 리포지토리 복제](https://www.tensorflow.org/install/source)
 - bazel을 사용하여 `visualize.py` 스크립트를 실행합니다.
 
 ```shell
 bazel run //tensorflow/lite/tools:visualize model.tflite visualized_model.html
 ```
-
-## 모델 및 연산
-
-#### TensorFlow Lite에서 일부 연산이 구현되지 않은 이유는 무엇입니까?
-
-TensorFlow Lite를 가볍게 유지하기 위해 변환기에서 특정 연산만 사용되었습니다. [호환성 가이드](ops_compatibility.md)에 현재 TensorFlow Lite에서 지원하는 연산 목록이 나와 있습니다.
-
-특정 연산(또는 이에 상응하는 연산)이 나열되어 있지 않으면 우선 순위가 높지 않은 것일 수 있습니다. 팀은 GitHub [문제 #21526](https://github.com/tensorflow/tensorflow/issues/21526)에서 새로운 연산자에 대한 요청을 추적합니다. 본인의 요청에 아직 답변이 없는 경우 의견을 남겨주세요.
-
-그 동안 [사용자 정의 연산자](ops_custom.md)를 구현하거나 지원되는 연산자만 포함하는 다른 모델을 사용해 볼 수 있습니다. 바이너리 크기가 제약 조건이 아닌 경우, [선택된 TensorFlow 연산자](ops_select.md)와 함께 TensorFlow Lite를 사용해보세요.
-
-#### TensorFlow Lite 모델이 원래 TensorFlow 모델과 동일하게 동작하는지 어떻게 테스트합니까?
-
-TensorFlow Lite 모델의 동작을 테스트하는 가장 좋은 방법은 테스트 데이터와 함께 API를 사용하고 동일한 입력에 대해 TensorFlow와 출력을 비교하는 것입니다. 인터프리터에 제공할 임의 데이터를 생성하는 [Python 인터프리터 예제](../convert/python_api.md)를 살펴보세요.
 
 ## 최적화
 
