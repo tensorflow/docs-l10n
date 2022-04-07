@@ -42,7 +42,7 @@ TensorFlow Quantum의 최신 안정 릴리스를 설치합니다.
 
 성공: 이제 TensorFlow Quantum이 설치되었습니다.
 
-Nightly builds which might depend on newer version of TensorFlow can be installed with:
+최신 버전의 TensorFlow에 의존할 수 있는 야간 빌드는 다음을 사용하여 설치할 수 있습니다.
 
 <!-- common_typos_disable -->
 
@@ -88,7 +88,7 @@ Nightly builds which might depend on newer version of TensorFlow can be installe
 
 [TensorFlow build from source](https://www.tensorflow.org/install/source#install_bazel) 가이드에 언급했듯이 <a href="https://bazel.build/" class="external">Bazel</a> 빌드 시스템이 필요합니다.
 
-Our latest source builds use TensorFlow 2.7.0. To ensure compatibility we use `bazel` version 3.7.2. To remove any existing version of Bazel:
+최신 소스 빌드는 TensorFlow 2.7.0을 사용합니다. 호환성을 보장하려면 `bazel` 버전 3.7.2를 사용해야 합니다. 기존 Bazel 버전을 제거하려면:
 
 <!-- common_typos_disable -->
 
@@ -132,7 +132,7 @@ Our latest source builds use TensorFlow 2.7.0. To ensure compatibility we use `b
 
 ### 4. 소스에서 TensorFlow를 빌드합니다.
 
-Here we adapt instructions from the TensorFlow [build from source](https://www.tensorflow.org/install/source) guide, see the link for further details. TensorFlow Quantum is compatible with TensorFlow version 2.7.0.
+자세한 내용은 TensorFlow [소스에서 빌드하기](https://www.tensorflow.org/install/source) 가이드 링크를 참조하세요. TensorFlow Quantum은 TensorFlow 버전 2.7.0과 호환됩니다.
 
 <a href="https://github.com/tensorflow/tensorflow" class="external">TensorFlow 소스 코드</a>를 다운로드합니다.
 
