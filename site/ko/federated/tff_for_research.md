@@ -32,7 +32,7 @@ TensorFlow 페더레이션은 페더레이션 학습으로 해결할 수 있는 
 
 - [**Shakespeare**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/shakespeare/load_data) William Shakespeare의 전체 작품을 기반으로 한 더 작은 문자 수준의 텍스트 데이터세트입니다. 데이터세트는 715명의 사용자 (셰익스피어 연극의 캐릭터)로 구성되며, 각 예제는 주어진 연극에서 캐릭터가 말한 연속적인 라인 세트에 해당합니다.
 
-- [**CIFAR-100**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data) A federated partitioning of the CIFAR-100 dataset across 500 training clients and 100 test clients. Each client has 100 unique examples. The partitioning is done in a way to create more realistic heterogeneity between clients. For more details, see the [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data).
+- [**CIFAR-100**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data) 500개의 훈련 클라이언트와 100개의 테스트 클라이언트에 대한 CIFAR-100 데이터세트의 페더레이션 파티셔닝입니다. 각 클라이언트에는 100개의 고유한 예제가 있습니다. 파티셔닝은 클라이언트 간에 보다 현실적인 이질성을 생성하는 방식으로 수행됩니다. 자세한 내용은 [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)를 참조하세요.
 
 - [**Google Landmark v2 데이터세트 데이터**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data) 세트는 다양한 세계 랜드마크의 사진으로 구성되며, 데이터의 연합 분할을 달성하기 위해 사진사가 이미지를 그룹화합니다. 233개의 클라이언트와 23080개의 이미지가 있는 더 작은 데이터 세트와 1262개의 클라이언트와 164172개의 이미지가 있는 더 큰 데이터 세트의 두 가지 유형의 데이터 세트를 사용할 수 있습니다.
 
@@ -60,9 +60,9 @@ TFF는 [tensor_encoding](https://github.com/tensorflow/model-optimization/tree/m
 
 사용자 정의 압축 알고리즘을 구현하고 훈련 루프에 적용하기 위해 다음을 수행할 수 있습니다.
 
-1. Implement a new compression algorithm as a subclass of [`EncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L75) or its more general variant, [`AdaptiveEncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L274) following [this example](https://github.com/google-research/federated/blob/master/compression/sparsity.py).
-2. Construct your new [`Encoder`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/core_encoder.py#L38) and specialize it for [model broadcast](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L118) or [model update averaging](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L144).
-3. Use those objects to build the entire [training computation](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L247).
+1. [이 예제](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L75)에 따라 <a><code>EncodingStageInterface</code></a>의 서브 클래스 또는 더 일반적인 변형인 <a><code>AdaptiveEncodingStageInterface</code></a>로 새 압축 알고리즘을 구현합니다.
+2. 새 [`Encoder`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/core_encoder.py#L38)를 생성하고 [모델 브로드캐스트](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L118) 또는 [모델 업데이트 평균](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L144)을 위해 특수화합니다.
+3. 이러한 개체를 사용하여 전체 [학습 계산을 작성](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L247) 합니다.
 
 ### 차등 프라이버시
 
@@ -76,7 +76,7 @@ Federated GAN([아래에서](#generative_adversarial_networks) 설명)은 사용
 
 TFF는 페더레이션 학습 시스템에 대한 표적 공격과 *[Can You Really Back door Federated Learning?](https://arxiv.org/abs/1911.07963)*에서 고려한 차등 프라이버시 기반 방어를 시뮬레이션하는 데 사용할 수 있습니다. 이는 잠재적으로 악의적인 클라이언트로 반복적인 프로세스를 빌드하여 수행됩니다([`build_federated_averaging_process_attacked`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/research/targeted_attack/attacked_fedavg.py#L412) 참조). [target_attack](https://github.com/tensorflow/federated/tree/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/research/targeted_attack) 디렉토리에 자세한 내용이 포함되어 있습니다.
 
-- New attacking algorithms can be implemented by writing a client update function which is a Tensorflow function, see [`ClientProjectBoost`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/federated_research/targeted_attack/attacked_fedavg.py#L460) for an example.
+- Tensorflow 함수인 클라이언트 업데이트 함수를 작성하여 새로운 공격 알고리즘을 구현할 수 있습니다. 예제는 [`ClientProjectBoost`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/federated_research/targeted_attack/attacked_fedavg.py#L460)를 참조하세요.
 - New defenses can be implemented by customizing ['tff.utils.StatefulAggregateFn'](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/core/utils/computation_utils.py#L103) which aggregates client outputs to get a global update.
 
 시뮬레이션을 위한 예제 스크립트는 [`emnist_with_targeted_attack.py`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/research/targeted_attack/emnist_with_targeted_attack.py)를 참조하세요.
@@ -85,7 +85,7 @@ TFF는 페더레이션 학습 시스템에 대한 표적 공격과 *[Can You Rea
 
 GAN은 표준 Federated Averaging과 약간 다른 흥미로운 [페더레이션 오케스트레이션 패턴](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/research/gans/tff_gans.py#L266-L316)을 제공합니다. 여기에는 각각 고유한 최적화 단계로 훈련된 두 개의 개별 네트워크(생성기와 판별기)가 포함됩니다.
 
-TFF can be used for research on federated training of GANs. For example, the DP-FedAvg-GAN algorithm presented in [recent work](https://arxiv.org/abs/1911.06679) is [implemented in TFF](https://github.com/tensorflow/federated/tree/main/federated_research/gans). This work demonstrates the effectiveness of combining federated learning, generative models, and [differential privacy](#differential_privacy).
+TFF는 GAN의 페더레이션 훈련에 대한 연구에 사용할 수 있습니다. 예를 들어, [최근 작업](https://arxiv.org/abs/1911.06679)에서 제시된 DP-FedAvg-GAN 알고리즘은 [TFF에서 구현됩니다](https://github.com/tensorflow/federated/tree/main/federated_research/gans). 이 작업은 페더레이션 학습, 생성 모델 및 [차등 프라이버시](#differential_privacy)를 결합하는 효과를 보여줍니다.
 
 ### 개인화
 
