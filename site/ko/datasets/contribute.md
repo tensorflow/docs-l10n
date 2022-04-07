@@ -4,7 +4,7 @@
 
 ## 시작하며
 
-- If you're new with TFDS, the easiest way to get started is to implement one of our [requested dataset](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc), focusing on the most requested ones. [Follow our guide](https://www.tensorflow.org/datasets/add_dataset) for instructions.
+- 만약 당신이 TFDS가 처음이라면, 시작하는 가장 빠른 방법은 가장 많이 요청된 것에 집중해서 우리의[requested dataset](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc)중 하나를 구현해보는 것입니다. 지침은 [Follow our guide](https://www.tensorflow.org/datasets/add_dataset)에 있습니다.
 - 이슈들, 기능요청들과 버그들,... 은 그것들이 전체 TFDS 커뮤니티에 이익을 주기 때문에 새로운 데이타셋을 추가하는 것보다 더욱 큰 영향이 있습니다.[potential contribution list](https://github.com/tensorflow/datasets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+-label%3A%22dataset+request%22+)을 보십시오. Starts with the ones labeled with [contribution-welcome](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22contributions+welcome%22)의 이름을 가진 것으로 시작해보십시오. 그것은 시작하기에 쉽고 작은 이슈가 포함되어 있습니다.
 - 이미 할당되었지만 한동안 업데이트되지 않은 버그를 주저하지 마십시오.
 - 문제를 할당받을 필요가 없습니다. 작업을 시작할 때 문제에 대해 간단히 언급하십시오. :)
@@ -29,7 +29,7 @@ pip install -e .  # Install minimal deps to use tensorflow_datasets
 pip install -e ".[dev]"  # Install all deps required for testing and development
 ```
 
-Note there is also a `pip install -e ".[tests-all]"` to install all dataset-specific deps.
+모든 dataset-specific deps를 설치하기 위해 `pip install -e ".[tests-all]"` 가 있음을 주의하십시오.
 
 ### Visual Studio 코드
 
@@ -44,9 +44,9 @@ Note there is also a `pip install -e ".[tests-all]"` to install all dataset-spec
 
 ### CLA에 서명
 
-Contributions to this project must be accompanied by a Contributor License Agreement (CLA). You (or your employer) retain the copyright to your contribution; this simply gives us permission to use and redistribute your contributions as part of the project. Head over to [https://cla.developers.google.com/](https://cla.developers.google.com/) to see your current agreements on file or to sign a new one.
+이 프로젝트에 기여하기 위해서는 반드시 CLA가 동반되어야 합니다. 당신의(또는 당신의 고용주) 기여에 대한 저작권을 유지하십시오; 이것은 말 그대로 우리에게 이것을 사용할 수 있게 해주고, 당신의 기여를 프로젝트의 일부분으로 재분배하게 합니다. 현재 파일에 대한 동의를 확인하거나 새로운 것에 대한 허가가 필요하다면 [https://cla.developers.google.com/](https://cla.developers.google.com/) 를 확인하십시오.
 
-You generally only need to submit a CLA once, so if you've already submitted one (even if it was for a different project), you probably don't need to do it again.
+일반적으로 CLA의 확인은 한번만 필요하기 때문에, 만약 다른 프로젝트를 할 때도 이미 CLA가 확인되어있을 것이고 다시 할 필요는 없습니다.
 
 ### 모범 사례 따르기
 
@@ -76,7 +76,7 @@ pylint tensorflow_datasets/core/some_file.py
 yapf tensorflow_datasets/core/some_file.py
 ```
 
-Both `pylint` and `yapf` should have been installed with `pip install -e ".[dev]"` but can also be manually installed with `pip install`. If you're using VS Code, those tools should be integrated in the UI.
+`pylint` 와 `yapf` 둘다 `pip install -e ".[dev]"`와 함께 설치가 되어있어야 하지만, `pip install`을 통해서 수동으로 설치할 수도 있습니다. 만약 당신이 VS Code를 이용한다면, 이 도구들은 UI안에 통합되어야 합니다.
 
 ### 독 스트링 및 타이핑 주석
 
