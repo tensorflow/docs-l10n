@@ -63,7 +63,7 @@ author={
 }
 </pre>
 
-[백서에 액세스하세요.](https://www.usenix.org/system/files/conference/osdi16/osdi16-abadi.pdf)
+또는 텍스트 형식으로:
 
 <pre>Martín Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo,&lt;br&gt;Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis,&lt;br&gt;Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow,&lt;br&gt;Andrew Harp, Geoffrey Irving, Michael Isard, Rafal Jozefowicz, Yangqing Jia,&lt;br&gt;Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dan Mané, Mike Schuster,&lt;br&gt;Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Jonathon Shlens,&lt;br&gt;Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker,&lt;br&gt;Vincent Vanhoucke, Vijay Vasudevan, Fernanda Viégas,&lt;br&gt;Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke,&lt;br&gt;Yuan Yu, and Xiaoqiang Zheng.&lt;br&gt;TensorFlow: Large-scale machine learning on heterogeneous systems,&lt;br&gt;2015. Software available from tensorflow.org.</pre>
 
