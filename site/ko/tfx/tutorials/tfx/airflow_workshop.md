@@ -1,7 +1,7 @@
 # TFX Airflow 튜토리얼
 
 [](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[ ](https://github.com/tensorflow/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)[](https://github.com/tensorflow/tfx)
-<a href="https://badge.fury.io/py/tfx" data-md-type="link" data-segment-id="7662006">![PyPI](https://badge.fury.io/py/tfx.svg)</a>[](https://badge.fury.io/py/tfx)
+[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)
 
 ## 가중치 값만 저장합니다. 이것은 일반적으로 모델을 훈련할 때 사용됩니다.
 
@@ -125,7 +125,7 @@ TFX를 사용하여 ML 파이프라인을 생성하는 방법을 배우게 됩�
 
 - 데이터 수집, 이해 및 정리
 - 특성 엔지니어링
-- Training
+- 훈련
 - 모델 성능 분석
 - 다듬고 정리하고 반복
 - 프로덕션 준비
@@ -136,7 +136,7 @@ TFX를 사용하여 ML 파이프라인을 생성하는 방법을 배우게 됩�
 
 각 단계에 대해 추가할 코드는 일반적으로 세 가지 코드 영역에 속합니다.
 
-- imports
+- 가져오기
 - DAG 구성
 - create_pipeline () 호출에서 반환된 목록
 - taxi_utils.py의 지원 코드
@@ -259,7 +259,7 @@ DAG 보기에서 파이프라인을 트리거한 후, 파이프라인이 처리�
 - 이상 및 누락된 값 찾기
 - 각 특성의 분포 이해
 
-### Components
+### 구성 요소
 
 ![데이터 구성 요소](images/airflow_workshop/examplegen1.png) ![데이터 구성 요소](images/airflow_workshop/examplegen2.png)
 
@@ -306,13 +306,13 @@ TFDV를 사용하여 데이터세트를 탐색하고 유효성을 검사하는 �
 
 - 특성 교차
 - 어휘
-- Embeddings
+- 임베딩
 - PCA
 - 범주형 인코딩
 
 TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하면 결과 변환이 훈련과 서비스 사이에서 일관되다는 것입니다.
 
-### Components
+### 구성 요소
 
 ![변환](images/airflow_workshop/transform.png)
 
@@ -355,7 +355,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 - TensorBoard를 사용하여 훈련 프로세스를 시각화하고 탐색합니다.
 - 모델 성능 분석을 위해 EvalSavedModel도 저장합니다.
 
-### Components
+### 구성 요소
 
 - Trainer는 TensorFlow Estimators를 사용하여 모델 훈련합니다.
 
@@ -402,7 +402,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 - 현재 프로덕션 상태인 모델을 교체하는 경우, 먼저 새 모델이 더 나은지 확인하세요.
 - Evaluator는 모델이 정상인지 여부를 Pusher 구성 요소에 알립니다.
 
-### Components
+### 구성 요소
 
 - Evaluator는 훈련 결과에 대한 심층 분석을 수행하고 모델이 프로덕션으로 푸시하기에 "충분히 좋은지" 확인합니다.
 
@@ -449,7 +449,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 - TensorFlow JS
 - TensorFlow Hub
 
-### Components
+### 구성 요소
 
 - Pusher는 모델을 적용 인프라에 배포합니다.
 
