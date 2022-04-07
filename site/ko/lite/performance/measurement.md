@@ -191,9 +191,7 @@ nnapi 대리자로 실행하려면 `--use_nnapi=true`를 설정합니다. GPU �
     </tr>
   </thead>
   <tr>
-    <td rowspan="2">
-      <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>
-    </td>
+    <td rowspan="2"><a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a></td>
     <td>Pixel 3</td>
     <td>23.9 ms</td>
     <td>6.45 ms</td>
@@ -293,9 +291,7 @@ iOS 벤치마크를 실행하기 위해 적절한 모델을 포함하도록 벤�
     </tr>
   </thead>
   <tr>
-    <td>
-      <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>
-    </td>
+    <td><a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a></td>
     <td>iPhone XS</td>
     <td>14.8 ms</td>
     <td>3.4 ms</td>
