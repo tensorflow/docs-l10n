@@ -13,7 +13,7 @@
 - *전처리된 입력이 있는 텍스트 임베딩*을 위한 API는 동일한 작업을 해결하지만 두 개의 별도 SavedModel에 의해 구현됩니다.
 
     - tf.data 입력 파이프라인 내에서 실행될 수 있고 문자열 및 기타 가변 길이 데이터를 숫자 텐서로 변환할 수 있는 *전처리기*
-    - an *encoder* that accepts the results of the preprocessor and performs the trainable part of the embedding computation.
+    - 전처리기의 결과를 받아들이고 포함 계산의 훈련 가능한 부분을 수행하는 *인코더*
 
     이 분할을 통해 입력이 훈련 루프에 공급되기 전에 비동기적으로 전처리될 수 있습니다. 특히 [TPU](https://www.tensorflow.org/guide/tpu)에서 실행하고 미세 조정할 수 있는 인코더를 빌드할 수 있습니다.
 
@@ -73,7 +73,7 @@ embeddings = hub.KerasLayer("path/to/model", trainable=...)(text_input)
 **전처리된 입력이 포함된 텍스트 임베딩**은 두 개의 개별 SavedModel에 의해 구현됩니다.
 
 - `[batch_size]` 형상의 문자열 텐서를 숫자 텐서의 dict에 매핑하는 **전처리기**
-- an **encoder** that accepts a dict of Tensors as returned by the preprocessor, performs the trainable part of the embedding computation, and returns a dict of outputs. The output under key `"default"` is a float32 Tensor of shape `[batch_size, dim]`.
+- 전처리기가 반환한 텐서 dict를 받아들이고, 임베딩 계산의 학습 가능한 부분을 수행하며, 출력의 dict를 반환하는 **인코더**. `"default"` 키 아래의 출력은 `[batch_size, dim]` 형상의 float32 텐서입니다.
 
 이를 통해 입력 파이프라인에서 전처리기를 실행할 수 있지만 더 큰 모델의 일부로 인코더에서 계산한 임베딩을 미세 조정할 수 있습니다. 특히 [TPU](https://www.tensorflow.org/guide/tpu)에서 실행하고 미세 조정할 수 있는 인코더를 빌드할 수 있습니다.
 
@@ -200,7 +200,7 @@ encoder_inputs = bert_pack_inputs([tokenized_premises, tokenized_hypotheses])
 
 인코더는 [Reusable SavedModel API](../reusable_saved_models.md)의 프로비전을 포함하여 전처리된 입력(위 참조)이 있는 텍스트 임베딩 API에서와 동일한 방식으로 `encoder_inputs`의 dict에서 호출됩니다.
 
-#### Usage synopsis
+#### 사용법 요약
 
 ```python
 enocder = hub.load("path/to/encoder")
@@ -228,7 +228,7 @@ encoder_outputs = encoder(encoder_inputs)
 
 - `"input_word_ids"`: 패킹된 입력 시퀀스의 토큰 ID가 있는 `[batch_size, seq_length]` 형상의 int32 텐서(즉, 시퀀스 시작 토큰, 세그먼트 끝 토큰 및 패딩 포함)
 - `"input_mask"`: 패딩 앞에 있는 모든 입력 토큰의 위치에 값 1이 있고 패딩 토큰에 대한 값이 0인 `[batch_size, seq_length]` 형상의 int32 텐서
-- `"input_type_ids"`: an int32 Tensor of shape `[batch_size, seq_length]` with the index of the input segment that gave rise to the input token at the respective position. The first input segment (index 0) includes the start-of-sequence token and its end-of-segment token. The second and later segments (if present) include their respective end-of-segment token. Padding tokens get index 0 again.
+- `"input_type_ids"`: 각 위치에서 입력 토큰을 발생시킨 입력 세그먼트의 인덱스가 있는 `[batch_size, seq_length]` 형상의 int32 텐서. 첫 번째 입력 세그먼트(인덱스 0)에는 시퀀스 시작 토큰과 세그먼트 끝 토큰이 포함됩니다. 두 번째 및 이후 세그먼트(있는 경우)에는 해당 세그먼트 끝 토큰이 포함됩니다. 패딩 토큰은 다시 인덱스 0을 얻습니다.
 
 ### 분산 훈련
 
@@ -236,4 +236,4 @@ encoder_outputs = encoder(encoder_inputs)
 
 ### 예제
 
-- Colab tutorial [Solve GLUE tasks using BERT on TPU](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb).
+- Colab 튜토리얼 [TPU에서 BERT를 사용하여 GLUE 작업 해결](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb).
