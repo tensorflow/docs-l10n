@@ -52,7 +52,7 @@ dependencies {
 
 #### 1단계: 데모 소스 코드를 얻고 컴파일되었는지 확인합니다.
 
-Follow our iOS Demo App [tutorial](https://www.tensorflow.org/lite/guide/ios). This will get you to a point where the unmodified iOS camera demo is working on your phone.
+iOS 데모 앱 [튜토리얼](https://www.tensorflow.org/lite/guide/ios)을 따라 진행합니다. 이를 통해 수정되지 않은 iOS 카메라 데모가 휴대전화에서 동작하는 지점으로 이동합니다.
 
 #### 2단계: TensorFlow Lite GPU CocoaPod를 사용하도록 Podfile을 수정합니다.
 
@@ -277,10 +277,10 @@ GPU 대리자를 사용할 코드를 활성화하려면 `CameraExampleViewContro
 
 릴리스된 GPU 대리자에 백엔드에서 실행할 수 있는 몇 가지 모델이 포함되었습니다.
 
-- [MobileNet v1 (224x224) image classification](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobilenet_v1_1.0_224.tflite)<br><i>(image classification model designed for mobile and embedded based vision applications)</i>
-- [DeepLab segmentation (257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite)<br><i>(image segmentation model that assigns semantic labels (e.g., dog, cat, car) to every pixel in the input image)</i>
-- [MobileNet SSD object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)<br><i>(image classification model that detects multiple objects with bounding boxes)</i>
-- [PoseNet for pose estimation](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)<br><i>(vision model that estimates the poses of a person(s) in image or video)</i>
+- [MobileNet v1(224x224) 이미지 분류](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobilenet_v1_1.0_224.tflite) <br><i>(모바일 및 임베디드 기반 비전 애플리케이션을 위해 설계된 이미지 분류 모델)</i>
+- [DeepLab 분할(257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite) <br><i>(입력 이미지의 모든 픽셀에 의미론적 레이블(예: 개, 고양이, 자동차)을 할당하는 이미지 분할 모델)</i>
+- [MobileNet SSD 개체 감지](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br><i>(경계 상자가 있는 여러 개체를 감지하는 이미지 분류 모델)</i>
+- [포즈 추정을 위한 PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br><i>(이미지 또는 동영상에서 사람의 포즈를 추정하는 비전 모델)</i>
 
 지원되는 연산의 전체 목록을 보려면 [고급 설명서](gpu_advanced.md)를 참조하세요.
 
@@ -296,14 +296,14 @@ WARNING: op code #42 cannot be handled by this delegate.
 
 ## 최적화를 위한 팁
 
-### Optimizing for mobile devices
+### 모바일 장치를 위한 최적화
 
-Some operations that are trivial on the CPU may have a high cost for the GPU on mobile devices. Reshape operations are particularly expensive to run, including `BATCH_TO_SPACE`, `SPACE_TO_BATCH`, `SPACE_TO_DEPTH`, and so forth. You should closely examine use of reshape operations, and consider that may have been applied only for exploring data or for early iterations of your model. Removing them can significantly improve performance.
+<br>CPU에서는 사소한 작업이 모바일 장치의 GPU에서는 높은 비용을 지급해야 하는 작업일 수 있습니다. `BATCH_TO_SPACE`, `SPACE_TO_BATCH`, `SPACE_TO_DEPTH` 등의 형상 변경 작업은 실행 비용이 많이 듭니다. 형상 변경 작업의 사용을 자세히 조사하고 데이터 탐색이나 초기에 모델을 반복하는 작업에만 적용되었을 수 있음을 고려해야 합니다. 형상 변경 작업을 제거하면 성능이 크게 향상될 수 있습니다.
 
-On GPU, tensor data is sliced into 4-channels. Thus, a computation on a tensor of shape `[B,H,W,5]` will perform about the same on a tensor of shape `[B,H,W,8]` but significantly worse than `[B,H,W,4]`. In that sense, if the camera hardware supports image frames in RGBA, feeding that 4-channel input is significantly faster as a memory copy (from 3-channel RGB to 4-channel RGBX) can be avoided.
+GPU에서 텐서 데이터는 4채널로 분할됩니다. 따라서 `[B,H,W,5]` 형상의 텐서에 대한 계산은 `[B,H,W,8]` 형상의 텐서에 대한 계산과 거의 동일하게 수행되지만 `[B,H,W,4]`에 대한 계산보다 훨씬 좋지 않습니다. 그런 의미에서 카메라 하드웨어가 RGBA의 이미지 프레임을 지원하는 경우 메모리 복사(3채널 RGB에서 4채널 RGBX로)를 피할 수 있으므로 해당 4채널 입력을 공급하는 것이 훨씬 더 빠릅니다.
 
-For best performance, you should consider retraining the classifier with a mobile-optimized network architecture. Optimization for on-device inferencing can dramatically reduce latency and power consumption by taking advantage of mobile hardware features.
+최상의 성능을 위해 모바일에 최적화된 네트워크 아키텍처를 사용하여 분류자를 다시 훈련하는 것을 고려해야 합니다. 온디바이스 최적화를 진행하면 모바일 하드웨어 기능의 이점을 활용하여 대기 시간과 전력 소비를 크게 줄일 수 있습니다.
 
-### Reducing initialization time with serialization
+### 직렬화로 초기화 시간 단축하기
 
-The GPU delegate feature allows you to load from pre-compiled kernel code and model data serialized and saved on disk from previous runs. This approach avoids re-compilation and reduces startup time by up to 90%. For instructions on how to apply serialization to your project, see [GPU Delegate Serialization](gpu_advanced.md#gpu_delegate_serialization).
+GPU 대리자 기능을 사용하여 사전에 컴파일된 커널 코드로부터 로드하고, 직렬화되고 디스크에 저장된 모델 데이터를 이전 실행으로부터 로드할 수 있습니다. 이 접근 방식은 다시 컴파일을 수행하는 것을 방지하고 시작 시간을 최대 90%까지 단축합니다. 프로젝트에 직렬화를 적용하는 방법에 대한 지침은 [GPU 대리자 직렬화](gpu_advanced.md#gpu_delegate_serialization)를 참조하세요.
