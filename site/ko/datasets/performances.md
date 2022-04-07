@@ -1,12 +1,12 @@
 # 성능 팁
 
-This document provides TensorFlow Datasets (TFDS)-specific performance tips. Note that TFDS provides datasets as `tf.data.Dataset` objects, so the advice from the [`tf.data` guide](https://www.tensorflow.org/guide/data_performance#optimize_performance) still applies.
+이 문서는 TensorFlow 데이터세트(TFDS)에 특정한 성능 팁을 제공합니다. TFDS가 `tf.data.Dataset` 개체와 같은 데이터세트를 제공하므로 [`tf.data` 가이드](https://www.tensorflow.org/guide/data_performance#optimize_performance)의 지침이 여전히 적용됩니다.
 
 ## 벤치마크 데이터세트
 
-Use `tfds.benchmark(ds)` to benchmark any `tf.data.Dataset` object.
+`tfds.benchmark(ds)`를 사용하여 `tf.data.Dataset` 개체를 벤치마킹합니다.
 
-Make sure to indicate the `batch_size=` to normalize the results (e.g. 100 iter/sec -&gt; 3200 ex/sec). This works with any iterable (e.g. `tfds.benchmark(tfds.as_numpy(ds))`).
+결과를 정규화하기 위해(예: 100 iter/sec -&gt; 3200 ex/sec) `batch_size=`를 나타내야 합니다. 어떤 iterable에서든 작동합니다(예: `tfds.benchmark(tfds.as_numpy(ds))`).
 
 ```python
 ds = tfds.load('mnist', split='train').batch(32).prefetch()
@@ -16,11 +16,11 @@ tfds.benchmark(ds, batch_size=32)
 tfds.benchmark(ds, batch_size=32)
 ```
 
-## Small datasets (less than 1 GB)
+## 작은 데이터세트(1GB 미만)
 
-All TFDS datasets store the data on disk in the [`TFRecord`](https://www.tensorflow.org/tutorials/load_data/tfrecord) format. For small datasets (e.g. MNIST, CIFAR-10/-100), reading from `.tfrecord` can add significant overhead.
+모든 TFDS 데이터세트는 디스크에 데이터를 [`TFRecord`](https://www.tensorflow.org/tutorials/load_data/tfrecord) 형식으로 저장합니다. 소규모 데이터세트(예: MNIST, CIFAR-10/-100)의 경우, `.tfrecord`에서 읽으면 상당한 오버헤드가 추가될 수 있습니다.
 
-As those datasets fit in memory, it is possible to significantly improve the performance by caching or pre-loading the dataset. Note that TFDS automatically caches small datasets (the following section has the details).
+이러한 데이터세트가 메모리에 적합하므로 데이터세트를 캐싱 또는 사전 로드하여 성능을 크게 향상시킬 수 있습니다. TFDS는 작은 데이터세트를 자동으로 캐시합니다(자세한 내용은 다음 섹션 참조).
 
 ### 데이터세트 캐싱하기
 
@@ -51,13 +51,13 @@ ds = ds.batch(128)
 ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
 ```
 
-- [[1] Vectorizing mapping](https://www.tensorflow.org/guide/data_performance#vectorizing_mapping)
+- [[1] 벡터화 매핑](https://www.tensorflow.org/guide/data_performance#vectorizing_mapping)
 
 이 데이터세트를 반복할 때 두 번째 반복은 캐싱 덕분에 첫 번째 반복보다 훨씬 빠릅니다.
 
 ### 자동 캐싱
 
-By default, TFDS auto-caches (with `ds.cache()`) datasets which satisfy the following constraints:
+기본적으로 TFDS는 다음 제약 조건을 충족하는 데이터세트를 자동 캐시합니다(`ds.cache()` 이용).
 
 - 총 데이터세트 크기(모든 분할)가 정의되고 &lt; 250MiB
 - `shuffle_files`가 비활성화되었거나 단일 샤드만 읽을 때
@@ -79,11 +79,11 @@ By default, TFDS auto-caches (with `ds.cache()`) datasets which satisfy the foll
 
 ## 큰 데이터세트
 
-Large datasets are sharded (split in multiple files) and typically do not fit in memory, so they should not be cached.
+큰 데이터세트는 샤딩되고(여러 파일로 분할) 일반적으로 메모리에 맞지 않으므로 캐시하지 않아야 합니다.
 
 ### 셔플링 및 훈련
 
-During training, it's important to shuffle the data well - poorly shuffled data can result in lower training accuracy.
+훈련 중에는 데이터를 잘 섞는 것(셔플링)이 중요합니다. 데이터가 잘 섞이지 않으면 훈련 정확성이 떨어질 수 있습니다.
 
 `ds.shuffle`을 사용하여 레코드를 셔플하는 것 외에도 `shuffle_files=True`를 설정하여 여러 파일로 샤딩된 큰 데이터세트에 좋은 셔플링 동작을 가져와야 합니다. 그렇지 않으면, epoch는 샤드를 같은 순서로 읽으므로 데이터가 실제로 무작위화되지는 않습니다.
 
@@ -93,7 +93,7 @@ ds = tfds.load('imagenet2012', split='train', shuffle_files=True)
 
 Additionally, when `shuffle_files=True`, TFDS disables [`options.deterministic`](https://www.tensorflow.org/api_docs/python/tf/data/Options#deterministic), which may give a slight performance boost. To get deterministic shuffling, it is possible to opt-out of this feature with `tfds.ReadConfig`: either by setting `read_config.shuffle_seed` or overwriting `read_config.options.deterministic`.
 
-### Auto-shard your data across workers (TF)
+### 작업자 간에 데이터 자동 샤딩하기(TF)
 
 여러 사용자에 대해 훈련할 때 `tfds.ReadConfig`의 `input_context` 인수를 사용하면 각 사용자가 데이터의 하위 세트를 읽을 수 있습니다.
 
@@ -108,13 +108,13 @@ read_config = tfds.ReadConfig(
 ds = tfds.load('dataset', split='train', read_config=read_config)
 ```
 
-This is complementary to the subsplit API. First, the subplit API is applied: `train[:50%]` is converted into a list of files to read. Then, a `ds.shard()` op is applied on those files. For example, when using `train[:50%]` with `num_input_pipelines=2`, each of the 2 workers will read 1/4 of the data.
+이것은 하위 분할 API를 보완합니다. 먼저 하위 분할 API가 적용되고(`train[:50%]`이 읽을 파일의 목록으로 변환됨), `ds.shard()` op가 이러한 파일에 적용됩니다. 예를 들어, `num_input_pipelines=2`와 함께 `train[:50%]`를 사용하는 경우, 두 작업자 각각이 데이터의 1/4을 읽습니다.
 
 `shuffle_files=True`일 때, 파일은 한 작업자 내에서 셔플되지만 작업자 간에는 셔플되지 않습니다. 각 작업자는 Epoch 간에 파일의 같은 하위 세트를 읽습니다.
 
-Note: When using `tf.distribute.Strategy`, the `input_context` can be automatically created with [distribute_datasets_from_function](https://www.tensorflow.org/api_docs/python/tf/distribute/Strategy#distribute_datasets_from_function)
+참고: `tf.distribute.Strategy`를 사용하면 [distribute_datasets_from_function](https://www.tensorflow.org/api_docs/python/tf/distribute/Strategy#distribute_datasets_from_function)과 함께 `input_context`를 자동으로 생성할 수 있습니다.
 
-### Auto-shard your data across workers (Jax)
+### 작업자 간에 데이터 자동 샤딩(Jax)
 
 With Jax, you can use the `tfds.split_for_jax_process` or `tfds.even_splits` API to distribute your data across workers. See the [split API guide](https://www.tensorflow.org/datasets/splits).
 
@@ -133,13 +133,13 @@ split = splits[jax.process_index()]
 
 ### 빠른 이미지 디코딩
 
-By default, TFDS automatically decodes images. However, there are cases where it can be more performant to skip the image decoding with `tfds.decode.SkipDecoding` and manually apply the `tf.io.decode_image` op:
+기본적으로 TFDS는 이미지를 자동으로 디코딩합니다. 그러나 `tfds.decode.SkipDecoding`으로 이미지 디코딩을 건너뛰고 `tf.io.decode_image` op를 수동으로 적용하는 것이 더 성능이 좋은 경우가 있습니다.
 
-- When filtering examples (with `tf.data.Dataset.filter`), to decode images after examples have been filtered.
+- 예를 필터링할 때(`tf.data.Dataset.filter` 사용) 예제가 필터링된 후 이미지를 디코딩합니다.
 - 이미지를 자를 때, 융합`tf.image.decode_and_crop_jpeg` op를 사용합니다.
 
 두 예제 모두에 대한 코드는 [디코딩 가이드](https://www.tensorflow.org/datasets/decode#usage_examples)에서 사용할 수 있습니다.
 
-### Skip unused features
+### 사용하지 않는 요소 건너뛰기
 
-If you're only using a subset of the features, it is possible to entirely skip some features. If your dataset has many unused features, not decoding them can significantly improve performances. See https://www.tensorflow.org/datasets/decode#only_decode_a_sub-set_of_the_features.
+요소의 하위 집합만 사용하는 경우, 일부 요소를 완전히 건너뛸 수 있습니다. 데이터세트에 사용하지 않는 많은 요소가 있는 경우, 이를 디코딩하지 않으면 성능이 크게 향상될 수 있습니다. https://www.tensorflow.org/datasets/decode#only_decode_a_sub-set_of_the_features를 참조하세요.
