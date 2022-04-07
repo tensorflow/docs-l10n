@@ -4,7 +4,7 @@
 
 ## 시작하기 전에
 
-Before you contribute source code to a TensorFlow project, please review the `CONTRIBUTING.md` file in the GitHub repo of the project. For example, see the [CONTRIBUTING.md](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md) file in the core TensorFlow repo. All code contributors are required to sign a [Contributor License Agreement](https://cla.developers.google.com/clas) (CLA).
+TensorFlow 프로젝트에 소스 코드를 제공하기 전에 프로젝트의 GitHub 리포지토리에서 `CONTRIBUTING.md` 파일을 살펴보기 바랍니다. 예를 들어 핵심 TensorFlow 리포지토리에 대한 [CONTRIBUTING.md](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md) 파일을 참조합니다. 모든 코드 제공자는 [제공자 라이선스 계약](https://cla.developers.google.com/clas)(CLA)에 동의해야 합니다.
 
 중복 작업을 피하려면 중요하지 않은 기능에 대한 작업을 시작하기 전에 [현재](https://github.com/tensorflow/community/tree/master/rfcs) 또는 [제안된](https://github.com/tensorflow/community/tree/master/rfcs) RFC를 검토하고 TensorFlow 포럼의 개발자에게 문의하세요([developers@tensorflow.org](https://groups.google.com/u/1/a/tensorflow.org/g/developers)). 우리는 새로운 기능을 추가하기로 결정할 때 다소 선택적이며, 프로젝트에 기여하고 도움을 줄 수 있는 가장 좋은 방법은 알려진 문제를 해결하는 것입니다.
 
@@ -117,7 +117,7 @@ Before you contribute source code to a TensorFlow project, please review the `CO
 추가 `git` 및 GitHub 리소스:
 
 - [Git 문서](https://git-scm.com/documentation)
-- [Git development workflow](https://docs.scipy.org/doc/numpy/dev/development_workflow.html)
+- [Git 개발 워크플로](https://docs.scipy.org/doc/numpy/dev/development_workflow.html)
 - [병합 충돌 해결](https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/)
 
 ## 기여자 체크리스트
