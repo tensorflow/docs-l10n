@@ -77,7 +77,7 @@ Federated GAN([아래에서](#generative_adversarial_networks) 설명)은 사용
 TFF는 페더레이션 학습 시스템에 대한 표적 공격과 *[Can You Really Back door Federated Learning?](https://arxiv.org/abs/1911.07963)*에서 고려한 차등 프라이버시 기반 방어를 시뮬레이션하는 데 사용할 수 있습니다. 이는 잠재적으로 악의적인 클라이언트로 반복적인 프로세스를 빌드하여 수행됩니다([`build_federated_averaging_process_attacked`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/research/targeted_attack/attacked_fedavg.py#L412) 참조). [target_attack](https://github.com/tensorflow/federated/tree/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/research/targeted_attack) 디렉토리에 자세한 내용이 포함되어 있습니다.
 
 - Tensorflow 함수인 클라이언트 업데이트 함수를 작성하여 새로운 공격 알고리즘을 구현할 수 있습니다. 예제는 [`ClientProjectBoost`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/federated_research/targeted_attack/attacked_fedavg.py#L460)를 참조하세요.
-- New defenses can be implemented by customizing ['tff.utils.StatefulAggregateFn'](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/core/utils/computation_utils.py#L103) which aggregates client outputs to get a global update.
+- 글로벌 업데이트를 얻기 위해 클라이언트 출력을 집계하는 [](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/core/utils/computation_utils.py#L103)
 
 시뮬레이션을 위한 예제 스크립트는 [`emnist_with_targeted_attack.py`](https://github.com/tensorflow/federated/blob/6477a3dba6e7d852191bfd733f651fad84b82eab/tensorflow_federated/python/research/targeted_attack/emnist_with_targeted_attack.py)를 참조하세요.
 
