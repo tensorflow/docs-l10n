@@ -21,5 +21,13 @@ TensorFlow는 TensorFlow Model Optimization 패키지(<code>setup.py</code>)의 
 소스에서 설치할 수도 있습니다. 이를 위해서는 [Bazel](https://bazel.build/) 빌드 시스템이 필요합니다.
 
 ```shell
-# To install dependencies on Ubuntu: # sudo apt-get install bazel git python-pip # For other platforms, see Bazel docs above. git clone https://github.com/tensorflow/model-optimization.git cd model_optimization bazel build --copt=-O3 --copt=-march=native :pip_pkg PKGDIR=$(mktemp -d) ./bazel-bin/pip_pkg $PKGDIR pip install --user --upgrade $PKGDIR/*.whl
+# To install dependencies on Ubuntu:
+# sudo apt-get install bazel git python-pip
+# For other platforms, see Bazel docs above.
+git clone https://github.com/tensorflow/model-optimization.git
+cd model-optimization
+bazel build --copt=-O3 --copt=-march=native :pip_pkg
+PKGDIR=$(mktemp -d)
+./bazel-bin/pip_pkg $PKGDIR
+pip install --user --upgrade $PKGDIR/*.whl
 ```
