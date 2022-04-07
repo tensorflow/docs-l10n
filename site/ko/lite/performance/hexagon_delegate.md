@@ -215,11 +215,11 @@ TfLiteHexagonTearDown();  // Needed once at end of app/DSP usage.
 
 참고: 애플리케이션 게시에 App Bundle을 사용하는 경우 gradle.properties 파일에서 android.bundle.enableUncompressedNativeLibs=false를 설정할 수 있습니다.
 
-## Feedback
+## 피드백
 
 문제가 있는 경우, 사용된 전화 모델 및 보드(<code>adb shell getprop ro.product.device</code> 및 `adb shell getprop ro.board.platform`)를 포함하여 필요한 모든 재현 세부 정보와 함께 <a>GitHub</a> 문제를 만드세요.
 
-## FAQ
+## 자주하는 질문
 
 - 대리자는 어떤 연산을 지원하나요?
     - 현재 [지원되는 연산 및 제약 조건](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md) 목록을 참조하세요.
