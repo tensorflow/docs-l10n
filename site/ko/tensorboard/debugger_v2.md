@@ -127,7 +127,7 @@ Debugger V2는 비교적 낮은 수준의 TensorFlow 소프트웨어 스택에�
 
 ## 성능 오버헤드
 
-The debugging API introduces performance overhead to the instrumented TensorFlow program. The overhead varies by `tensor_debug_mode`, hardware type, and nature of the instrumented TensorFlow program. As a reference point, on a GPU, the `NO_TENSOR` mode adds a 15% overhead during the training of a [Transformer model](https://github.com/tensorflow/models/tree/master/official/legacy/transformer) under batch size 64. The percent overhead for other tensor_debug_modes are higher: approximately 50% for the `CURT_HEALTH`, `CONCISE_HEALTH`, `FULL_HEALTH` and `SHAPE` modes. On CPUs, the overhead is slightly lower. On TPUs, the overhead is currently higher.
+디버깅 API는 계측된 TensorFlow 프로그램에 성능 오버헤드를 도입합니다. 오버헤드는 `tensor_debug_mode`, 하드웨어 형식, 계측된 TensorFlow 프로그램의 특성에 따라 다릅니다. 참조 사항으로, GPU에서 `NO_TENSOR` 모드는 배치 크기 64에서 [Transformer 모델](https://github.com/tensorflow/models/tree/master/official/legacy/transformer)을 훈련하는 동안 15%의 오버헤드를 추가합니다. 다른 tensor_debug_mode의 오버헤드 비율은 더 높습니다. `CURT_HEALTH`, `CONCISE_HEALTH`, `FULL_HEALTH` 및 `SHAPE` 모드의 경우는 약 50%입니다. CPU에서는 오버헤드가 약간 더 낮습니다. TPU에서는 현재 오버헤드가 더 높습니다.
 
 ## 다른 TensorFlow 디버깅 API와의 관계
 
