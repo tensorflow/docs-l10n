@@ -52,7 +52,7 @@ Nightly builds which might depend on newer version of TensorFlow can be installe
 
 <!-- common_typos_enable -->
 
-## Build from source
+## 소스에서 빌드
 
 다음 단계는 Ubuntu와 유사한 시스템에 대해 테스트되었습니다.
 
