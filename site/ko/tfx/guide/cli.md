@@ -51,7 +51,7 @@ TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아�
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
 </dd>
 </dl>
 
@@ -284,7 +284,7 @@ Vertex:
 
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var> </dt>
-  <dd>The path to the pipeline configuration file.</dd>
+  <dd>파이프라인 구성 파일의 경로입니다.</dd>
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
@@ -364,7 +364,7 @@ Vertex:
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
 </dd>
 </dl>
 
@@ -447,7 +447,7 @@ Vertex:
 
 <dl>
   <dt>--pipeline_name=<var>pipeline-name</var> </dt>
-  <dd>The name of the pipeline.</dd>
+  <dd>파이프라인의 이름입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 끝점은 Kubeflow Pipelines 대시보드의 URL과 동일합니다. 끝점 값은 다음과 같아야 합니다.</p>
@@ -549,7 +549,7 @@ Vertex:
 
 <dl>
   <dt>--run_id=<var>run-id</var> </dt>
-  <dd>Unique identifier for a pipeline run.</dd>
+  <dd>파이프라인 실행의 고유 식별자입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 끝점은 Kubeflow Pipelines 대시보드의 URL과 동일합니다. 끝점 값은 다음과 같아야 합니다.</p>
@@ -746,7 +746,7 @@ Kubeflow:
   <dd>파이프라인 실행의 고유 식별자입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
 </dd>
 </dl>
 
@@ -820,11 +820,11 @@ Kubeflow:
 
 <dl>
   <dt>--model=<var>model</var> </dt>
-  <dd>The name of the model built by the pipeline template.</dd>
+  <dd>파이프라인 템플릿으로 빌드된 모델의 이름입니다.</dd>
   <dt>--pipeline_name=<var>pipeline-name</var> </dt>
-  <dd>The name of the pipeline.</dd>
+  <dd>파이프라인의 이름입니다.</dd>
   <dt>--destination_path=<var>destination-path</var> </dt>
-  <dd>The path to copy the template to.</dd>
+  <dd>템플릿을 복사할 경로입니다.</dd>
 </dl>
 
 ## TFX CLI 플래그 이해하기
@@ -852,11 +852,11 @@ Kubeflow:
 </dl>
 
   <dt>--pipeline_name=<var>pipeline-name</var> </dt>
-  <dd>The name of the pipeline.</dd>
+  <dd>파이프라인의 이름입니다.</dd>
 
 
   <dt>--pipeline_path=<var>pipeline-path</var> </dt>
-  <dd>The path to the pipeline configuration file.</dd>
+  <dd>파이프라인 구성 파일의 경로입니다.</dd>
 
 
   <dt>--run_id=<var>run-id</var> </dt>
