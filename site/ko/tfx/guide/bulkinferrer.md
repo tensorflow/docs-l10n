@@ -21,11 +21,7 @@ BulkInferrer TFX 구성 요소는 레이블이 지정되지 않은 tf.Examples�
 일반적인 코드는 다음과 같습니다.
 
 ```python
-from tfx import components
-
-...
-
-bulk_inferrer = components.BulkInferrer(
+bulk_inferrer = BulkInferrer(
     examples=examples_gen.outputs['examples'],
     model=trainer.outputs['model'],
     model_blessing=evaluator.outputs['blessing'],
@@ -34,4 +30,4 @@ bulk_inferrer = components.BulkInferrer(
 )
 ```
 
-자세한 내용은 [BulkInferrer API 참조](https://www.tensorflow.org/tfx/api_docs/python/tfx/components/BulkInferrer)에서 확인할 수 있습니다.
+자세한 내용은 [BulkInferrer API 참조](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/BulkInferrer)에서 확인할 수 있습니다.
