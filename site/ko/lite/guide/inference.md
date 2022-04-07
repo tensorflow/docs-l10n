@@ -26,7 +26,7 @@ TensorFlow Lite 추론은 일반적으로 다음 단계를 따릅니다.
 
     모델 추론에서 결과를 받으면 애플리케이션에 유용한 의미 있는 방식으로 텐서를 해석해야 합니다.
 
-    For example, a model might return only a list of probabilities. It's up to you to map the probabilities to relevant categories and present it to your end-user.
+    예를 들어, 모델은 확률 목록만 반환할 수 있습니다. 확률을 관련 범주에 매핑하고 최종 사용자에게 제시하는 것은 사용자의 몫입니다.
 
 ## 지원되는 플랫폼
 
@@ -38,13 +38,13 @@ TensorFlow 추론 API는 [Android](#android-platform), [iOS](#ios-platform) 및 
 
 ### Android 플랫폼
 
-On Android, TensorFlow Lite inference can be performed using either Java or C++ APIs. The Java APIs provide convenience and can be used directly within your Android Activity classes. The C++ APIs offer more flexibility and speed, but may require writing JNI wrappers to move data between Java and C++ layers.
+Android에서는 Java 또는 C++ API를 사용하여 TensorFlow Lite 추론을 수행할 수 있습니다. Java API는 편의성을 제공하며 Android Activity 클래스 내에서 직접 사용할 수 있습니다. C++ API는 더 많은 유연성과 속도를 제공하지만 Java와 C++ 레이어 간에 데이터를 이동하려면 JNI 래퍼를 작성해야 할 수 있습니다.
 
 [C++](#load-and-run-a-model-in-c) 및 [Java](#load-and-run-a-model-in-java) 사용에 대한 자세한 내용은 아래를 참조하거나 [Android 빠른 시작](#load-and-run-a-model-in-c)의 튜토리얼 및 예제 코드를 따르세요.
 
 #### TensorFlow Lite Android 래퍼 코드 생성기
 
-Note: TensorFlow Lite wrapper code generator is in experimental (beta) phase and it currently only supports Android.
+참고: TensorFlow Lite 래퍼 코드 생성기는 실험(베타) 단계에 있으며 현재 Android만 지원합니다.
 
 [메타데이터](../convert/metadata.md)로 강화된 TensorFlow Lite 모델의 경우, 개발자는 TensorFlow Lite Android 래퍼 코드 생성기를 사용하여 플랫폼별 래퍼 코드를 만들 수 있습니다. 래퍼 코드는 Android에서 `ByteBuffer`와 직접 상호 작용할 필요성을 없애줍니다. 대신, 개발자는 `Bitmap` 및 `Rect`와 같은 형식화된 객체를 사용하여 TensorFlow Lite 모델과 상호 작용할 수 있습니다. 자세한 내용은 [TensorFlow Lite Android 래퍼 코드 생성기](../inference_with_metadata/codegen.md)를 참조하세요.
 
@@ -56,7 +56,7 @@ iOS에서 TensorFlow Lite는 [Swift](https://www.tensorflow.org/code/tensorflow/
 
 ### Linux 플랫폼
 
-On Linux platforms (including [Raspberry Pi](build_rpi.md)), you can run inferences using TensorFlow Lite APIs available in [C++](#load-and-run-a-model-in-c) and [Python](#load-and-run-a-model-in-python), as shown in the following sections.
+Linux 플랫폼([Raspberry Pi](build_rpi.md) 포함)에서는 다음 섹션과 같이 [C++](#load-and-run-a-model-in-c) 및 [Python](#load-and-run-a-model-in-python)에서 사용할 수 있는 TensorFlow Lite API를 사용하여 추론을 실행할 수 있습니다.
 
 ## 모델 실행하기
 
@@ -64,7 +64,7 @@ TensorFlow Lite 모델을 실행하려면 몇 가지 간단한 단계가 필요�
 
 1. 모델을 메모리에 로드합니다.
 2. 기존 모델을 기반으로 `Interpreter`를 빌드합니다.
-3. Set input tensor values. (Optionally resize input tensors if the predefined sizes are not desired.)
+3. 입력 텐서 값을 설정합니다(미리 정의된 크기가 필요하지 않은 경우 선택적으로 입력 텐서의 크기를 조정함).
 4. 추론을 호출합니다.
 5. 출력 텐서 값을 읽습니다.
 
@@ -76,7 +76,7 @@ TensorFlow Lite 모델을 실행하려면 몇 가지 간단한 단계가 필요�
 
 TensorFlow Lite로 추론을 실행하기 위한 Java API는 주로 Android에서 사용하도록 설계되었으므로 Android 라이브러리 종속성으로 사용할 수 있습니다(`org.tensorflow:tensorflow-lite`).
 
-In Java, you'll use the `Interpreter` class to load a model and drive model inference. In many cases, this may be the only API you need.
+Java에서는 `Interpreter` 클래스를 사용하여 모델을 로드하고 모델 추론을 유도합니다. 많은 경우에 이 API만 있으면 됩니다.
 
 `.tflite` 파일을 사용하여 `Interpreter`를 초기화할 수 있습니다.
 
@@ -341,7 +341,7 @@ Now that you have the model as a `FlatBufferModel` object, you can execute it wi
 
 Caution: The `FlatBufferModel` object must remain valid until all instances of `Interpreter` using it have been destroyed.
 
-The important parts of the `Interpreter` API are shown in the code snippet below. It should be noted that:
+`Interpreter` API의 중요한 부분은 아래 코드 조각에 나와 있습니다. 다음 사항에 유의하세요.
 
 - Tensors are represented by integers, in order to avoid string comparisons (and any fixed dependency on string libraries).
 - 인터프리터는 여러 스레드에서 동시에 액세스할 수 없습니다.
