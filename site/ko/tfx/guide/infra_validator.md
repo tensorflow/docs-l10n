@@ -30,19 +30,19 @@ evaluator = Evaluator(
     model=trainer.outputs['model'],
     examples=example_gen.outputs['examples'],
     baseline_model=model_resolver.outputs['model'],
-    eval_config=EvalConfig(...)
+    eval_config=tfx.proto.EvalConfig(...)
 )
 
 infra_validator = InfraValidator(
     model=trainer.outputs['model'],
-    serving_spec=ServingSpec(...)
+    serving_spec=tfx.proto.ServingSpec(...)
 )
 
 pusher = Pusher(
     model=trainer.outputs['model'],
     model_blessing=evaluator.outputs['blessing'],
     infra_blessing=infra_validator.outputs['blessing'],
-    push_destination=PushDestination(...)
+    push_destination=tfx.proto.PushDestination(...)
 )
 ```
 
@@ -73,11 +73,11 @@ InfraValidator를 구성하는 프로토타입에는 세 가지가 있습니다.
 ```python
 infra_validator=InfraValidator(
     model=trainer.outputs['model'],
-    serving_spec=ServingSpec(
-        tensorflow_serving=TensorFlowServing(
+    serving_spec=tfx.proto.ServingSpec(
+        tensorflow_serving=tfx.proto.TensorFlowServing(
             tags=['latest']
         ),
-        kubernetes=KubernetesConfig()
+        kubernetes=tfx.proto.KubernetesConfig()
     )
 )
 ```
@@ -91,8 +91,8 @@ infra_validator=InfraValidator(
 ```python
 infra_validator=InfraValidator(
     model=trainer.outputs['model'],
-    serving_spec=ServingSpec(...),
-    validation_spec=ValidationSpec(
+    serving_spec=tfx.proto.ServingSpec(...),
+    validation_spec=tfx.proto.ValidationSpec(
         # How much time to wait for model to load before automatically making
         # validation fail.
         max_loading_time_seconds=60,
@@ -113,23 +113,38 @@ infra_validator = InfraValidator(
     model=trainer.outputs['model'],
     # This is the source for the data that will be used to build a request.
     examples=example_gen.outputs['examples'],
-    serving_spec=ServingSpec(
+    serving_spec=tfx.proto.ServingSpec(
         # Depending on what kind of model server you're using, RequestSpec
         # should specify the compatible one.
-        tensorflow_serving=TensorFlowServing(tags=['latest']),
-        local_docker=LocalDockerConfig(),
+        tensorflow_serving=tfx.proto.TensorFlowServing(tags=['latest']),
+        local_docker=tfx.proto.LocalDockerConfig(),
     ),
-    request_spec=RequestSpec(
+    request_spec=tfx.proto.RequestSpec(
         # InfraValidator will look at how "classification" signature is defined
         # in the model, and automatically convert some samples from `examples`
         # artifact to prediction RPC requests.
-        tensorflow_serving=TensorFlowServingRequestSpec(
+        tensorflow_serving=tfx.proto.TensorFlowServingRequestSpec(
             signature_names=['classification']
         ),
         num_examples=10  # How many requests to make.
     )
 )
 ```
+
+### 워밍업이 있는 SavedModel 생성
+
+(버전 0.30.0부터)
+
+InfraValidator는 실제 요청으로 모델을 검증하기 때문에 이러한 검증 요청을 SavedModel의 [워밍업 요청](https://www.tensorflow.org/tfx/serving/saved_model_warmup)으로 쉽게 재사용할 수 있습니다. InfraValidator는 워밍업과 함께 SavedModel을 내보내기 위한 옵션(`RequestSpec.make_warmup`)을 제공합니다.
+
+```python
+infra_validator = InfraValidator(
+    ...,
+    request_spec=tfx.proto.RequestSpec(..., make_warmup=True)
+)
+```
+
+그러면 출력 `InfraBlessing` 아티팩트에 워밍업이 있는 SavedModel이 포함되며 `Model` 아티팩트와 마찬가지로 <a>푸셔</a>에 의해 푸시될 수도 있습니다.
 
 ## 한계
 
