@@ -225,9 +225,9 @@ Vertex:
 파이프라인 구성 파일을 컴파일하여 Kubeflow에서 워크플로 파일을 만들고 컴파일하는 동안 다음 검사를 수행합니다.
 
 1. 파이프라인 경로가 유효한지 확인합니다.
-2. Checks if the pipeline details are extracted successfully from the pipeline config file.
+2. 파이프라인 구성 파일에서 파이프라인 세부 정보가 성공적으로 추출되었는지 확인합니다.
 3. 파이프라인 구성의 DagRunner가 엔진과 일치하는지 확인합니다.
-4. Checks if the workflow file is created successfully in the package path provided (only for Kubeflow).
+4. 제공된 패키지 경로에 워크플로 파일이 성공적으로 생성되었는지 확인합니다(Kubflow에만 해당).
 
 파이프라인을 생성하거나 업데이트하기 전에 사용하는 것이 좋습니다.
 
