@@ -24,7 +24,7 @@
 
 ML Model Binding은 개발자가 대리자 및 스레드 수를 사용하여 코드를 가속할 수 있는 방법을 제공합니다.
 
-Note: The TensorFlow Lite Interpreter must be created on the same thread as when is run. Otherwise, TfLiteGpuDelegate Invoke: GpuDelegate must run on the same thread where it was initialized. may occur.
+참고: TensorFlow Lite 인터프리터는 실행될 때와 동일한 스레드에서 생성되어야 합니다. 그렇지 않으면 "TfLiteGpuDelegate Invoke: GpuDelegate must run on the same thread where it was initialized."가 발생할 수 있습니다.
 
 1 단계. 모듈 `build.gradle` 파일에 다음 종속성이 포함되어 있는지 확인합니다.
 
