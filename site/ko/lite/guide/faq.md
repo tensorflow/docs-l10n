@@ -10,17 +10,17 @@ freeze_graph.py에 의해 생성된 고정 [GraphDefs](../convert/index.md#pytho
 
 #### TensorFlow Lite에서 일부 연산이 구현되지 않은 이유는 무엇입니까?
 
-In order to keep TFLite lightweight, only certain TF operators (listed in the [allowlist](op_select_allowlist.md)) are supported in TFLite.
+TFLite를 가볍게 유지하기 위해 TFLite에서는 특정 TF 연산자([허용 목록](op_select_allowlist.md)에 나열됨)만 지원합니다.
 
 #### 내 모델이 변환되지 않는 이유는 무엇입니까?
 
-Since the number of TensorFlow Lite operations is smaller than TensorFlow's, some models may not be able to convert. Some common errors are listed [here](../convert/index.md#conversion-errors).
+TensorFlow Lite 작업 수가 TensorFlow의 작업 수보다 적기 때문에 일부 모델은 변환하지 못할 수 있습니다. 몇 가지 일반적인 오류는 [여기](../convert/index.md#conversion-errors)에 나열되어 있습니다.
 
 누락된 연산 또는 제어 흐름 연산과 관련이 없는 변환 문제의 경우, [GitHub 문제](https://github.com/tensorflow/tensorflow/issues?q=label%3Acomp%3Alite+)를 검색하거나 [새 문제](https://github.com/tensorflow/tensorflow/issues)를 제출하세요.
 
 #### TensorFlow Lite 모델이 원래 TensorFlow 모델과 동일하게 동작하는지 어떻게 테스트합니까?
 
-The best way to test is to compare the outputs of the TensorFlow and the TensorFlow Lite models for the same inputs (test data or random inputs) as shown [here](inference.md#load-and-run-a-model-in-python).
+가장 좋은 테스트 방법은 [여기](inference.md#load-and-run-a-model-in-python)에 표시된 것과 같이 동일한 입력(테스트 데이터 또는 임의의 입력)에 대한 TensorFlow 및 TensorFlow Lite 모델의 출력을 비교하는 것입니다.
 
 #### GraphDef 프로토콜 버퍼의 입력/출력을 어떻게 결정합니까?
 
