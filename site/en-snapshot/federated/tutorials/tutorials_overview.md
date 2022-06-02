@@ -4,6 +4,12 @@ These [colab-based](https://colab.research.google.com/) tutorials walk you
 through the main TFF concepts and APIs using practical examples. Reference
 documentation can be found in the [TFF guides](../get_started.md).
 
+Note: TFF currently requires Python 3.9 or later, but
+[Google Colaboratory](https://research.google.com/colaboratory/)'s hosted
+runtimes currently use Python 3.7, and so in order to run these notebooks you
+will need to use a
+[custom local runtime](https://research.google.com/colaboratory/local-runtimes.html).
+
 **Getting started with federated learning**
 
 *   [Federated Learning for image classification](federated_learning_for_image_classification.ipynb)
@@ -88,7 +94,10 @@ documentation can be found in the [TFF guides](../get_started.md).
     demonstrates how to use TFF to train models with user-level differential
     privacy.
 
-*   [Experimental support for JAX in TFF](../experimental/tutorials/jax_support.ipynb)
-    shows how [JAX](https://github.com/google/jax) computations can be used in
-    TFF, demonstrating how TFF is designed to be able to interoperate with other
+*   [Loading Remote Data with TFF](loading_remote_data.ipynb) describes how to
+    embed custom logic in the TFF runtime to load data on remote machines.
+
+*   [Support for JAX in TFF](../tutorials/jax_support.ipynb) shows how
+    [JAX](https://github.com/google/jax) computations can be used in TFF,
+    demonstrating how TFF is designed to be able to interoperate with other
     frontend and backend ML frameworks.
