@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2021-03-09' } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2022-03-19' } *-->
 
 <!-- Copyright 2018 The TensorFlow Hub Authors. All Rights Reserved.
 
@@ -30,9 +30,7 @@ TensorFlow Hub pip 패키지를 변경하는 경우, 소스에서 pip 패키지�
 
 또는 protobuf 컴파일러를 설치하는 경우, [bazel을 사용하지 않고 변경 사항을 시도](#develop)할 수 있습니다.
 
-## virtualenv 설정하기
-
-<a id="setup"></a>
+## virtualenv 설정 {:#setup}
 
 ### virtualenv 활성화
 
@@ -147,9 +145,11 @@ TensorFlow Hub는 protobufs를 사용하기 때문에 `.proto` 파일에서 필�
 (tensorflow_hub_env)~/hub/$ ls -1 tensorflow_hub/*_pb2.py
 ```
 
-<pre>tensorflow_hub/image_module_info_pb2.py
+<pre>
+tensorflow_hub/image_module_info_pb2.py
 tensorflow_hub/module_attachment_pb2.py
-tensorflow_hub/module_def_pb2.py</pre>
+tensorflow_hub/module_def_pb2.py
+</pre>
 
 참고: `.proto` 정의를 변경한 경우, `_pb2.py` 파일을 다시 컴파일하는 것을 잊지 마세요.
 

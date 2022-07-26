@@ -5,6 +5,15 @@ GCS(Google Cloud Storage)는 여러 가지 이유로 tfd와 함께 사용할 수
 - 사전 처리된 데이터 저장하기
 - GCS에 저장된 데이터가 있는 데이터세트에 액세스하기
 
+## TFDS GCS 버킷을 통한 액세스
+
+일부 데이터세트는 인증 없이 GCS 버킷 [`gs://tfds-data/datasets/`](https://console.cloud.google.com/storage/browser/tfds-data)에서 직접 사용할 수 있습니다.
+
+- `tfds.load(..., try_gcs=False)`(기본값)인 경우, 데이터세트는 `download_and_prepare` 중에 `~/tensorflow_datasets`에서 로컬로 복사됩니다.
+- `tfds.load(..., try_gcs=True)`인 경우, 데이터세트는 GCS에서 직접 스트리밍됩니다(`download_and_prepare`는 건너뜀).
+
+`tfds.is_dataset_on_gcs('mnist')`를 이용해 데이터세트가 공용 버킷에서 호스팅되는지 여부를 확인할 수 있습니다.
+
 ## 인증
 
 시작하기 전에 인증 방법을 결정해야 합니다. 3가지 옵션이 있습니다.
@@ -13,7 +22,7 @@ GCS(Google Cloud Storage)는 여러 가지 이유로 tfd와 함께 사용할 수
 - Google 계정 사용하기
 - 서비스 계정 사용하기(팀의 다른 사용자와 쉽게 공유할 수 있음)
 
-[Google 클라우드 설명서](https://cloud.google.com/docs/authentication/getting-started)에서 자세한 정보를 찾을 수 있습니다
+[Google Cloud 문서](https://cloud.google.com/docs/authentication/getting-started)에서 자세한 정보를 찾을 수 있습니다.
 
 ### 단순화된 지침
 

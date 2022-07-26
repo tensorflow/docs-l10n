@@ -38,16 +38,24 @@ android {
 dependencies {
     // Other dependencies
 
-    // Import the Task Text Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
+    // Import the Task Text Library dependency (NNAPI is included)
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
 }
 ```
+
+참고: Android Gradle 플러그인 버전 4.1부터는 .tflite가 기본적으로 noCompress 목록에 추가되며 위의 aaptOptions는 더 이상 필요하지 않습니다.
 
 ### 2단계: API를 사용하여 추론 실행하기
 
 ```java
 // Initialization
-BertQuestionAnswerer answerer = BertQuestionAnswerer.createFromFile(androidContext, modelFile);
+BertQuestionAnswererOptions options =
+    BertQuestionAnswererOptions.builder()
+        .setBaseOptions(BaseOptions.builder().setNumThreads(4).build())
+        .build();
+BertQuestionAnswerer answerer =
+    BertQuestionAnswerer.createFromFileAndOptions(
+        androidContext, modelFile, options);
 
 // Run inference
 List<QaAnswer> answers = answerer.answer(contextOfTheQuestion, questionToAsk);
@@ -64,7 +72,7 @@ Podfile에 TensorFlowLiteTaskText 포드를 추가합니다.
 ```
 target 'MySwiftAppWithTaskAPI' do
   use_frameworks!
-  pod 'TensorFlowLiteTaskText', '~> 0.0.1-nightly'
+  pod 'TensorFlowLiteTaskText', '~> 0.2.0'
 end
 ```
 
@@ -84,14 +92,14 @@ let answers = mobileBertAnswerer.answer(
 
 ## C++에서 추론 실행하기
 
-참고: 사전 빌드된 바이너리를 제공하고 소스 코드에서 빌드할 사용자 친화적인 워크플로를 만드는 등 C++ Task Library의 사용 편리성을 개선하기 위해 노력하고 있습니다. C++ API는 변경될 수 있습니다.
-
 ```c++
 // Initialization
-std::unique_ptr answerer = BertQuestionAnswerer::CreateFromFile(model_file).value();
+BertQuestionAnswererOptions options;
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
+std::unique_ptr<BertQuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromOptions(options).value();
 
 // Run inference
-std::vector positive_results = answerer->Answer(context_of_question, question_to_ask);
+std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, question_to_ask);
 ```
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/qa/bert_question_answerer.h)를 참조하세요.

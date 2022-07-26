@@ -4,123 +4,40 @@ Python에서 TensorFlow Lite를 사용하면 [Raspberry Pi](https://www.raspberr
 
 이 페이지에서는 단 몇 분 안에 Python으로 TensorFlow Lite 모델 실행을 시작할 수 있는 방법을 보여줍니다. [TensorFlow Lite로 변환된](../convert/) TensorFlow 모델만 있으면 됩니다. 아직 변환된 모델이 없는 경우, 아래 링크된 예제와 함께 제공된 모델을 사용하여 시도해 볼 수 있습니다.
 
-## TensorFlow Lite 인터프리터만 설치하기
+## TensorFlow Lite 런타임 패키지 정보
 
-Python으로 TensorFlow Lite 모델을 빠르게 실행하려면 전체 TensorFlow 패키지 대신 TensorFlow Lite 인터프리터만 설치할 수 있습니다.
+Python으로 TensorFlow Lite 모델 실행을 빠르게 시작하려면 모든 TensorFlow 패키지 대신 TensorFlow Lite 인터프리터만 설치할 수 있습니다. 이 단순화된 Python 패키지를 `tflite_runtime`이라고 합니다.
 
-이 인터프리터 전용 패키지의 크기는 전체 TensorFlow 패키지의 극히 일부이며 TensorFlow Lite로 추론을 실행하는 데 필요한 최소한의 코드를 포함합니다. 여기에는 [`tf.lite.Interpreter`](https://www.tensorflow.org/api_docs/python/tf/lite/Interpreter) Python 클래스만 포함됩니다. 이 작은 패키지는 `.tflite` 모델만 실행하고 대용량 TensorFlow 라이브러리로 디스크 공간을 낭비하지 않으려는 경우에 이상적입니다.
+`tflite_runtime` 패키지의 크기는 전체 `tensorflow` 패키지의 극히 일부이며 TensorFlow Lite로 추론을 실행하는 데 필요한 최소한의 코드를 포함합니다. 여기에는 기본적으로 [`Interpreter`](https://www.tensorflow.org/api_docs/python/tf/lite/Interpreter) Python 클래스가 포함됩니다. 이 작은 패키지는 <code>.tflite</code> 모델만 실행하고 대용량 TensorFlow 라이브러리로 디스크 공간을 낭비하지 않으려는 경우에 이상적입니다.
 
-참고: [TensorFlow Lite Converter](../convert/python_api.md)와 같은 다른 Python API에 액세스해야 하는 경우, [전체 TensorFlow 패키지](https://www.tensorflow.org/install/)를 설치해야 합니다.
+참고: [TensorFlow Lite Converter](../convert/)와 같은 다른 Python API에 액세스해야 하는 경우 [전체 TensorFlow 패키지](https://www.tensorflow.org/install/)를 설치해야 합니다. 예를 들어 [Select TF ops](https://www.tensorflow.org/lite/guide/ops_select)는 `tflite_runtime` 패키지에 포함되어 있지 않습니다. 모델에 Select TF ops에 대한 종속성이 있는 경우, 대신 전체 TensorFlow 패키지를 사용해야 합니다.
 
-설치하려면 `pip3 install`을 실행하고 다음 표에서 적절한 Python wheel URL을 전달합니다.
+## Python용 TensorFlow Lite 설치하기
 
-예를 들어, Raspbian Buster(Python 3.7 포함)를 실행하는 Raspberry Pi를 사용 중인 경우, 다음과 같이 Python wheel을 설치합니다.
+다음과 같이 pip를 사용하여 Linux에 설치할 수 있습니다.
 
-<pre class="devsite-terminal devsite-click-to-copy">pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl</pre>
+<pre class="devsite-terminal devsite-click-to-copy">python3 -m pip install tflite-runtime
+</pre>
 
-<table>
-<tr>
-<th>플랫폼</th>
-<th>Python</th>
-<th>URL</th>
-</tr>
-<tr>
-  <td style="white-space:nowrap" rowspan="4">Linux (ARM 32)</td>
-  <td style="white-space:nowrap">3.5</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp35-cp35m-linux_armv7l.whl</td>
-</tr>
-<tr>
-  <!-- ARM 32 -->
-  <td style="white-space:nowrap">3.6</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp36-cp36m-linux_armv7l.whl</td>
-</tr>
-<tr>
-  <!-- ARM 32 -->
-  <td style="white-space:nowrap">3.7</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl</td>
-</tr>
-<tr>
-  <!-- ARM 32 -->
-  <td style="white-space:nowrap">3.8</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp38-cp38-linux_armv7l.whl</td>
-</tr>
-<tr>
-  <td style="white-space:nowrap" rowspan="4">Linux (ARM 64)</td>
-  <td style="white-space:nowrap">3.5</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp35-cp35m-linux_aarch64.whl</td>
-</tr>
-<tr>
-  <!-- ARM 64 -->
-  <td style="white-space:nowrap">3.6</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp36-cp36m-linux_aarch64.whl</td>
-</tr>
-<tr>
-  <!-- ARM 64 -->
-  <td style="white-space:nowrap">3.7</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_aarch64.whl</td>
-</tr>
-<tr>
-  <!-- ARM 64 -->
-  <td style="white-space:nowrap">3.8</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp38-cp38-linux_aarch64.whl</td>
-</tr>
-<tr>
-  <td style="white-space:nowrap" rowspan="4">Linux (x86-64)</td>
-  <td style="white-space:nowrap">3.5</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp35-cp35m-linux_x86_64.whl</td>
-</tr>
-<tr>
-  <!-- x86-64 -->
-  <td style="white-space:nowrap">3.6</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp36-cp36m-linux_x86_64.whl</td>
-</tr>
-<tr>
-  <!-- x86-64 -->
-  <td style="white-space:nowrap">3.7</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_x86_64.whl</td>
-</tr>
-<tr>
-  <!-- x86-64 -->
-  <td style="white-space:nowrap">3.8</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp38-cp38-linux_x86_64.whl</td>
-</tr>
-<tr>
-  <td style="white-space:nowrap" rowspan="3">macOS 10.14</td>
-  <td style="white-space:nowrap">3.5</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp35-cp35m-macosx_10_14_x86_64.whl</td>
-</tr>
-<tr>
-  <!-- Mac -->
-  <td style="white-space:nowrap">3.6</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp36-cp36m-macosx_10_14_x86_64.whl</td>
-</tr>
-<tr>
-  <!-- Mac -->
-  <td style="white-space:nowrap">3.7</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-macosx_10_14_x86_64.whl</td>
-</tr>
-<tr>
-  <td style="white-space:nowrap" rowspan="3">Windows 10</td>
-  <td style="white-space:nowrap">3.5</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp35-cp35m-win_amd64.whl</td>
-</tr>
-<tr>
-  <!-- Win -->
-  <td style="white-space:nowrap">3.6</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp36-cp36m-win_amd64.whl</td>
-</tr>
-<tr>
-  <!-- Win -->
-  <td style="white-space:nowrap">3.7</td>
-  <td>https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-win_amd64.whl</td>
-</tr>
-</table>
+## 지원되는 플랫폼
+
+`tflite-runtime` Python 휠은 사전에 빌드되어 다음 플랫폼에 제공됩니다.
+
+- Linux armv7l(예: Raspberry Pi OS 32비트를 실행하는 Raspberry Pi 2, 3, 4 및 Zero 2)
+- Linux aarch64(예: Debian ARM64를 실행하는 Raspberry Pi 3, 4)
+- Linux x86_64
+
+다른 플랫폼에서 TensorFlow Lite 모델을 실행하려면 [전체 TensorFlow 패키지](https://www.tensorflow.org/install/)를 사용하거나 [소스로부터 tflite-runtime 패키지를 빌드](build_cmake_pip.md)해야 합니다.
+
+Coral Edge TPU로 TensorFlow를 사용하는 경우에는 대신에 적절한 [Coral 설정 문서](https://coral.ai/docs/setup)를 따라야 합니다.
+
+참고: 당사는 더 이상 Debian 패키지 `python3-tflite-runtime`을 업데이트하지 않습니다. 최신 Debian 패키지는 TF 버전 2.5용이며 [이전 지침](https://github.com/tensorflow/tensorflow/blob/v2.5.0/tensorflow/lite/g3doc/guide/python.md#install-tensorflow-lite-for-python)에 따라 설치할 수 있습니다.
+
+참고: 당사는 더 이상 Windows 및 macOS용으로 사전 빌드된 `tflite-runtime` 휠을 릴리스하지 않습니다. 이러한 플랫폼의 경우 [전체 TensorFlow 패키지](https://www.tensorflow.org/install/)를 사용하거나 [소스로부터 tflite-runtime 패키지를 빌드](build_cmake_pip.md)해야 합니다.
 
 ## tflite_runtime을 사용하여 추론 실행하기
 
-이 인터프리터 전용 패키지를 전체 TensorFlow 패키지와 구분하기 위해(원하면 둘 다 설치할 수 있음) 위의 wheel에 제공된 Python 모듈의 이름은 `tflite_runtime`입니다.
-
-따라서 `Interpreter`를 `tensorflow` 모듈 대신 `tflite_runtime`에서 가져와야 합니다.
+`tensorflow` 모듈에서 `Interpreter`를 가져오는 대신, 이제 `tflite_runtime`에서 가져와야 합니다.
 
 예를 들어, 위의 패키지를 설치한 후 [`label_image.py`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/examples/python/) 파일을 복사하고 실행합니다. (아마도) `tensorflow` 라이브러리가 설치되어 있지 않기 때문에 이 작업에 실패합니다. 이 문제를 해결하려면 파일의 다음 줄을 편집합니다.
 
@@ -150,10 +67,12 @@ interpreter = tflite.Interpreter(model_path=args.model_file)
 
 ## 자세히 알아보기
 
-`Interpreter` API에 대한 자세한 내용은 [Python에서 모델 로드 및 실행하기](inference.md#load-and-run-a-model-in-python)를 참조하세요.
+- `Interpreter` API에 대한 자세한 내용은 [Python에서 모델 로드 및 실행하기](inference.md#load-and-run-a-model-in-python)를 참조하세요.
 
-Raspberry Pi를 사용하는 경우, [classify_picamera.py 예제](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/raspberry_pi)를 사용하여 Pi 카메라 및 TensorFlow Lite로 이미지 분류를 수행해 보세요.
+- Raspberry Pi를 보유하고 있는 경우 TensorFlow Lite를 사용하여 Raspberry Pi에서 객체 감지를 실행하는 방법에 대한 [동영상 시리즈](https://www.youtube.com/watch?v=mNjXEybFn98&list=PLQY2H8rRoyvz_anznBg6y3VhuSMcpN9oe)를 확인하세요.
 
-Coral ML 가속기를 사용하는 경우, [GitHub에서 Coral 예제](https://github.com/google-coral/tflite/tree/master/python/examples)를 확인하세요.
+- Coral ML 가속기를 사용하는 경우, [GitHub에서 Coral 예제](https://github.com/google-coral/tflite/tree/master/python/examples)를 확인하세요.
 
-다른 TensorFlow 모델을 TensorFlow Lite로 변환하려면 [TensorFlow Lite 변환기](../convert/)에 대해 읽어보세요.
+- 다른 TensorFlow 모델을 TensorFlow Lite로 변환하려면 [TensorFlow Lite Converter](../convert/)에 대해 읽어보세요.
+
+- `tflite_runtime` 휠을 빌드하려면 [TensorFlow Lite Python 휠 패키지 빌드](build_cmake_pip.md)를 읽으세요.

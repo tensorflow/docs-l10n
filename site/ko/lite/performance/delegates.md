@@ -1,6 +1,6 @@
-# TensorFlow Lite Delegates
+# TensorFlow Lite 대리자
 
-## Introduction
+## 시작하기
 
 **대리자**는 GPU 및 [DSP(디지털 신호 프로세서)](https://en.wikipedia.org/wiki/Digital_signal_processor)와 같은 온 디바이스 가속기를 활용하여 TensorFlow Lite 모델의 하드웨어 가속을 지원합니다.
 
@@ -12,7 +12,7 @@ Each of these accelerators have associated APIs that enable custom computations,
 
 ![Original graph](../images/performance/tflite_delegate_graph_1.png "원본 그래프")
 
-## Choosing a Delegate
+## 대리자 선택
 
 TensorFlow Lite는 여러 대리자를 지원하며, 각 대리자는 특정 플랫폼 및 특정 유형의 모델에 최적화되어 있습니다. 일반적으로 타겟으로 삼은 *플랫폼*(Android 또는 iOS?)과 가속화하려는 *모델 유형*(부동 소수점 또는 양자화?)의 두 가지 주요 기준에 따라 사용 사례에 적용할 수 있는 여러 대리자가 있습니다.
 
@@ -29,13 +29,13 @@ TensorFlow Lite는 여러 대리자를 지원하며, 각 대리자는 특정 플
 
 #### iOS
 
-- **Core ML delegate for newer iPhones and iPads** - For newer iPhones and iPads where Neural Engine is available, you can use Core ML delegate to accelerate inference for 32-bit or 16-bit floating-point models. Neural Engine is available Apple mobile devices with A12 SoC or higher. For an overview of the Core ML delegate and step-by-step instructions, see [TensorFlow Lite Core ML delegate](coreml_delegate.md).
+- **최신 iPhone 및 iPad용 Core ML 대리자** - Neural Engine을 사용할 수 있는 최신 iPhone 및 iPad의 경우 Core ML 대리자를 사용하여 32bit 또는 16bit 부동점 모델에 대한 추론을 가속화할 수 있습니다. Neural Engine은 A12 SoC 이상의 Apple 모바일 기기를 사용할 수 있습니다. Core ML 대리자에 대한 개요 및 단계별 지침은 [TensorFlow Lite Core ML 대리자](coreml_delegate.md)를 참조하세요.
 
 ### Delegates by model type
 
 각 가속기는 특정 비트 폭의 데이터를 염두에 두고 설계되었습니다. 8bit 양자화된 연산(예: [Hexagon delegate](hexagon_delegate.md))만 지원하는 대리자에 부동 소수점 모델을 제공하는 경우 모든 연산이 거부되고 모델은 전적으로 CPU에서 실행됩니다. 이러한 뜻밖의 상황을 방지하기 위해 아래의 표를 보면 모델 유형에 따른 대리자 지원의 개요가 나와있습니다.
 
-**Model Type** | **GPU** | **NNAPI** | **Hexagon** | **CoreML**
+**모델 유형** | **GPU** | **NNAPI** | **Hexagon** | **CoreML**
 --- | --- | --- | --- | ---
 부동점 (32bit) | 예 | 예 | 아니요 | 예
 [훈련 후 float16 양자화](post_training_float16_quant.ipynb) | 예 | 아니요 | 아니요 | 예
@@ -49,7 +49,7 @@ TensorFlow Lite는 여러 대리자를 지원하며, 각 대리자는 특정 플
 
 TensorFlow Lite has extensive performance and accuracy-evaluation tooling that can empower developers to be confident in using delegates in their application. These tools are discussed in the next section.
 
-## Tools for Evaluation
+## 평가 도구
 
 ### Latency &amp; memory footprint
 
@@ -75,16 +75,16 @@ TensorFlow Lite has two types of tooling to measure how accurately a delegate be
 
 TensorFlow Lite has tools to evaluate correctness on two image-based tasks:
 
-- [ILSVRC 2012](http://image-net.org/challenges/LSVRC/2012/) (Image Classification) with [top-K accuracy](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Precision_at_K)
+- [top-K 정확도](http://image-net.org/challenges/LSVRC/2012/)의 [ILSVRC 2012](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Precision_at_K) (이미지 분류)
 
-- [COCO Object Detection (w/ bounding boxes)](https://cocodataset.org/#detection-2020) with [mean Average Precision (mAP)](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Mean_average_precision)
+- [mean 평균 정밀도 (mAP)](https://cocodataset.org/#detection-2020)를 사용하는 [COCO 객체 감지 (경계 상자 포함)](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Mean_average_precision)
 
-Prebuilt binaries of these tools (Android, 64-bit ARM architecture), along with documentation can be found here:
+이들 도구(Android, 64bit ARM 아키텍처)의 미리 빌드된 바이너리와 설명서는 여기에서 찾을 수 있습니다.
 
-- [ImageNet Image Classification](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_eval_imagenet_image_classification) ([More details](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/imagenet_image_classification))
-- [COCO Object Detection](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_eval_coco_object_detection) ([More details](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/coco_object_detection))
+- [ImageNet 이미지 분류](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_eval_imagenet_image_classification) ([상세 정보](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/imagenet_image_classification))
+- [COCO 객체 감지](https://storage.googleapis.com/tensorflow-nightly-public/prod/tensorflow/release/lite/tools/nightly/latest/android_aarch64_eval_coco_object_detection) ([상세 정보](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/coco_object_detection))
 
-The example below demonstrates [image classification evaluation](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/imagenet_image_classification) with NNAPI utilizing Google's Edge-TPU on a Pixel 4:
+아래 예는 Pixel 4에서 Google의 Edge-TPU를 활용하는 NNAPI를 통한 [이미지 분류 평가](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks/imagenet_image_classification)를 보여줍니다.
 
 ```
 adb shell /data/local/tmp/run_eval \
@@ -98,7 +98,7 @@ adb shell /data/local/tmp/run_eval \
   --nnapi_accelerator_name=google-edgetpu
 ```
 
-The expected output is a list of Top-K metrics from 1 to 10:
+예상되는 출력은 1에서 10까지의 Top-K 메트릭 목록입니다.
 
 ```
 Top-1 Accuracy: 0.733333
@@ -119,8 +119,8 @@ For tasks where there isn't an established on-device evaluation tool, or if you 
 
 Inference Diff compares TensorFlow Lite execution (in terms of latency &amp; output-value deviation) in two settings:
 
-- Single-threaded CPU Inference
-- User-defined Inference - defined by [these parameters](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/delegates/README.md#tflite-delegate-registrar)
+- 단일 쓰레드 CPU 추론
+- 사용자 정의 추론 - [이들 매개변수](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/delegates/README.md#tflite-delegate-registrar)에 의해 정의
 
 To do so, the tool generates random Gaussian data and passes it through two TFLite Interpreters - one running single-threaded CPU kernels, and the other parameterized by the user's arguments.
 

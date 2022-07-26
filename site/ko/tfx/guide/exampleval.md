@@ -20,12 +20,10 @@ ExampleValidator는 입력 데이터 검증을 위해 [TensorFlow Data Validatio
 ExampleValidator 파이프라인 구성 요소는 일반적으로 배포가 매우 쉽고 사용자 정의가 거의 필요하지 않습니다. 일반적인 코드는 다음과 같습니다.
 
 ```python
-from tfx import components
-
-...
-
-validate_stats = components.ExampleValidator(
-      statistics=compute_eval_stats.outputs['statistics'],
-      schema=infer_schema.outputs['schema']
+validate_stats = ExampleValidator(
+      statistics=statistics_gen.outputs['statistics'],
+      schema=schema_gen.outputs['schema']
       )
 ```
+
+자세한 내용은 [ExampleValidator API 참조](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/ExampleValidator)에서 확인할 수 있습니다.

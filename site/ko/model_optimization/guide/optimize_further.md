@@ -11,3 +11,4 @@
 - [가중치 잘라내기](./pruning/)
 - [양자화](./quantization/training)
 - [가중치 클러스터링](./clustering/)
+- [공동 작업 최적화](./combine/collaborative_optimization)

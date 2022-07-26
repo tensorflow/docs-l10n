@@ -9,7 +9,7 @@
 **사용자 관점:**
 
 ```python
-tff.backends.native.set_local_execution_context()  # 3
+tff.backends.native.set_local_python_execution_context()  # 3
 
 @tff.tf_computation(tf.int32)  # 2
 def add_one(x):  # 1
@@ -37,7 +37,7 @@ Python이 **구문 분석**될 때 `@tff.tf_computation` 데코레이터는 Pyth
 ## TF vs. TFF vs. Python
 
 ```python
-tff.backends.native.set_local_execution_context()
+tff.backends.native.set_local_python_execution_context()
 
 @tff.tf_computation(tf.int32)
 def add_one(x):

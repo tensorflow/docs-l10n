@@ -104,7 +104,7 @@ NNAPI 대리자가 모델의 일부 연산 또는 매개변수 조합을 지원�
 
 NNAPI는 모델이 [지원되는 연산](https://developer.android.com/ndk/guides/neuralnetworks#model)만 사용할 때 수행 능력이 가장 좋습니다. 다음 모델은 NNAPI와 호환되는 것으로 알려져 있습니다.
 
--  [MobileNet v1 (224x224) 이미지 분류(부동 모델 다운로드)](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [(양자화된 모델 다운로드)](http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz) <br> *(모바일 및 임베디드 기반 비전 애플리케이션을 위해 설계된 이미지 분류 모델)*
+- [MobileNet v1 (224x224) 이미지 분류(부동 모델 다운로드)](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [(양자화된 모델 다운로드)](http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz) <br> *(모바일 및 임베디드 기반 비전 애플리케이션을 위해 설계된 이미지 분류 모델)*
 -  [MobileNet v2 SSD 객체 감지](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(다운로드)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br> *(경계 상자가 있는 여러 객체를 감지하는 이미지 분류 모델)*
 - [MobileNet v1(300x300) SSD(Single Shot Detector) 객체 감지](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(다운로드)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
 -  [포즈 추정을 위한 PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [(다운로드)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br> *(이미지 또는 비디오에서 사람의 포즈를 추정하는 비전 모델)*
@@ -112,7 +112,8 @@ NNAPI는 모델이 [지원되는 연산](https://developer.android.com/ndk/guide
 모델에 동적 크기의 출력이 포함된 경우 NNAPI 가속도 지원되지 않습니다. 이 경우 다음과 같은 경고가 표시됩니다.
 
 ```none
-ERROR: Attempting to use a delegate that only supports static-sized tensors with a graph that has dynamic-sized tensors.
+ERROR: Attempting to use a delegate that only supports static-sized tensors \
+with a graph that has dynamic-sized tensors.
 ```
 
 ### NNAPI CPU 구현 사용하기

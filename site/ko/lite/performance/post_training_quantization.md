@@ -41,10 +41,46 @@ tflite_quant_model = converter.convert()
 
 완전한 정수 양자화의 경우, 모델에 있는 모든 부동 소수점 텐서의 범위, 즉 (최소, 최대)를 보정하거나 추정해야 합니다. 가중치 및 편향과 같은 상수 텐서와 달리 모델 입력, 활성화 (중간 계층의 출력) 및 모델 출력과 같은 가변 텐서는 몇 가지 추론 주기를 실행하지 않는 한 보정할 수 없습니다. 결과적으로, 변환기는 이를 보정하기 위해 대표적 데이터세트가 필요합니다. 이 데이터세트는 훈련 또는 검증 데이터의 작은 하위 집합(약 100 ~ 500개 샘플)일 수 있습니다. 아래의 `representative_dataset()` 함수를 참조하세요.
 
+TensorFlow 2.7 버전부터 다음 예제와 같이 [서명](/lite/guide/signatures)을 통해 대표 데이터세트를 지정할 수 있습니다.
+
+<pre>def representative_dataset():
+  for data in dataset:
+    yield {
+      "image": data.image,
+      "bias": data.bias,
+    }
+</pre>
+
+주어진 TensorFlow 모델에 둘 이상의 서명이 있는 경우 서명 키를 지정하여 여러 데이터세트를 지정할 수 있습니다.
+
+<pre>def representative_dataset():
+  # Feed data set for the "encode" signature.
+  for data in encode_signature_dataset:
+    yield (
+      "encode", {
+        "image": data.image,
+        "bias": data.bias,
+      }
+    )
+
+  # Feed data set for the "decode" signature.
+  for data in decode_signature_dataset:
+    yield (
+      "decode", {
+        "image": data.image,
+        "hint": data.hint,
+      },
+    )
+</pre>
+
+입력 텐서 목록을 제공하여 대표적인 데이터세트를 생성할 수 있습니다.
+
 <pre>def representative_dataset():
   for data in tf.data.Dataset.from_tensor_slices((images)).batch(1).take(100):
     yield [tf.dtypes.cast(data, tf.float32)]
 </pre>
+
+TensorFlow 2.7 버전부터 입력 텐서 목록 기반 접근 방식보다 서명 기반 접근 방식을 사용하는 것이 좋은데, 입력 텐서 순서를 쉽게 뒤집을 수 있기 때문입니다.
 
 테스트 목적으로 다음과 같이 더미 데이터세트를 사용할 수 있습니다.
 

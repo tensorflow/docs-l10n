@@ -19,7 +19,7 @@
 
 **지원되는 모델**
 
-Hexagon 대리자는 [사후 훈련 정수 양자화](https://www.tensorflow.org/lite/performance/post_training_integer_quant)를 사용하여 생성된 모델을 포함하여 [8bit 대칭 양자화 사양](https://www.tensorflow.org/lite/performance/quantization_spec)을 준수하는 모든 모델을 지원합니다. 기존 [양자화 인식 훈련](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize) 경로로 훈련된 UInt8 모델도 지원됩니다(예: 호스팅 모델 페이지의 [양자화 버전](https://www.tensorflow.org/lite/guide/hosted_models#quantized_models)).
+Hexagon 대리자는 [사후 훈련 정수 양자화](https://www.tensorflow.org/lite/performance/quantization_spec)를 사용하여 생성된 모델을 포함하여 [8bit 대칭 양자화 사양](https://www.tensorflow.org/lite/performance/post_training_integer_quant)을 준수하는 모든 모델을 지원합니다. 기존 [양자화 인식 훈련](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize) 경로로 훈련된 UInt8 모델도 지원됩니다(예: 호스팅 모델 페이지의 [양자화 버전](https://www.tensorflow.org/lite/guide/hosted_models#quantized_models)).
 
 ## Hexagon 대리자 Java API
 
@@ -69,7 +69,7 @@ dependencies {
 
 참고: 2021년 2월 23일부터 v1.20.0.1을 사용해야 합니다.
 
-참고: 호환되는 버전의 인터페이스 라이브러리와 함께 hexagon_nn 라이브러리를 반드시 사용해야 합니다. 인터페이스 라이브러리는 AAR의 일부이며 bazel로 [구성](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl)을 통해 가져옵니다. 여기서 bazel 구성의 버전을 사용해야 합니다.
+참고: 호환되는 버전의 인터페이스 라이브러리와 함께 hexagon_nn 라이브러리를 사용해야 합니다. 인터페이스 라이브러리는 AAR의 일부이며 bazel로 [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl)를 통해 가져옵니다. 여기서 bazel 구성의 버전을 사용해야 합니다.
 
 - 다른 공유 라이브러리와 함께 앱에 3개를 모두 포함합니다. [앱에 공유 라이브러리를 추가하는 방법](#how-to-add-shared-library-to-your-app)을 참조하세요. 대리자는 기기에 따라 성능이 가장 좋은 라이브러리를 자동으로 선택합니다.
 
@@ -144,7 +144,7 @@ Void TfLiteHexagonTearDown();
 
 ### 사용 예제
 
-#### 1단계: 야간 Hexagon 대리자 AAR을 사용하도록 app/build.gradle 편집합니다.
+#### 1단계: 야간 Hexagon 대리자 AAR을 사용하도록 app/build.gradle를 편집합니다.
 
 ```
 dependencies {
@@ -167,7 +167,7 @@ dependencies {
 
 참고: 2021년 2월 23일부터 v1.20.0.1을 사용해야 합니다.
 
-참고: 호환되는 버전의 인터페이스 라이브러리와 함께 hexagon_nn 라이브러리를 사용해야 합니다. 인터페이스 라이브러리는 AAR의 일부이며 [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl)를 통해 bazel에서 가져옵니다. 여기서 bazel 구성의 버전은 사용해야 합니다.
+참고: 호환되는 버전의 인터페이스 라이브러리와 함께 hexagon_nn 라이브러리를 사용해야 합니다. 인터페이스 라이브러리는 AAR의 일부이며 bazel로 [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl)를 통해 가져옵니다. 여기서 bazel 구성의 버전을 사용해야 합니다.
 
 - 다른 공유 라이브러리와 함께 앱에 3개를 모두 포함합니다. [앱에 공유 라이브러리를 추가하는 방법](#how-to-add-shared-library-to-your-app)을 참조하세요. 대리자는 기기에 따라 성능이 가장 좋은 라이브러리를 자동으로 선택합니다.
 
@@ -217,7 +217,7 @@ TfLiteHexagonTearDown();  // Needed once at end of app/DSP usage.
 
 ## 피드백
 
-문제가 있는 경우, 사용된 전화 모델 및 보드(`adb shell getprop ro.product.device` 및 `adb shell getprop ro.board.platform`)를 포함하여 필요한 모든 재현 세부 정보와 함께 [GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) 문제를 생성하세요.
+문제가 있는 경우, 사용된 전화 모델 및 보드(<code>adb shell getprop ro.product.device</code> 및 `adb shell getprop ro.board.platform`)를 포함하여 필요한 모든 재현 세부 정보와 함께 <a>GitHub</a> 문제를 만드세요.
 
 ## 자주하는 질문
 

@@ -123,7 +123,7 @@ $ cd "federated"
         --interactive \
         --tty \
         --name=tff-client \
-        --volume ~:/simulation \
+        --volume ~/:/simulation \
         --workdir /simulation \
         <registry>/tff-client \
         bash

@@ -45,13 +45,13 @@ macOS:
 CPU 지원:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow&gt;=1.15.0'</code>
 </pre>
 
 GPU 지원:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu&gt;=1.15.0'</code>
 </pre>
 
 #### 4. Neural Structured Learning `pip` 패키지를 설치합니다.
@@ -117,13 +117,13 @@ NSL에는 1.15 이상의 TensorFlow 버전이 필요합니다. NSL은 TensorFlow
 CPU 지원:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow&gt;=1.15.0'</code>
 </pre>
 
 GPU 지원:
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu>=1.15.0'</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install 'tensorflow-gpu&gt;=1.15.0'</code>
 </pre>
 
 #### 6. Neural Structured Learning 종속성을 설치합니다.

@@ -80,7 +80,7 @@ tf_library(
     # use the text format instead, use the ‘.pbtxt’ suffix.  This is where the
     # feeds and fetches were specified above, in the previous step.
     config = "test_graph_tfmatmul.config.pbtxt",
-)</name></name></name>
+)
 ```
 
 > 이 예의 경우에 GraphDef proto (test_graph_tfmatmul.pb)를 생성하려면 [make_test_graphs.py](https://www.tensorflow.org/code/tensorflow/compiler/aot/tests/make_test_graphs.py)를 실행하고 --out_dir 플래그로 출력 위치를 지정합니다.
@@ -124,11 +124,11 @@ class MatMulComp {
 
   void set_arg0_data(float* data);
   float* arg0_data();
-  float&amp; arg0(size_t dim0, size_t dim1);
+  float& arg0(size_t dim0, size_t dim1);
 
   void set_arg1_data(float* data);
   float* arg1_data();
-  float&amp; arg1(size_t dim0, size_t dim1);
+  float& arg1(size_t dim0, size_t dim1);
 
   // Result methods for managing output buffers. Buffers are in row-major order.
   // Must only be called after a successful Run call. There is a set of methods
@@ -137,7 +137,7 @@ class MatMulComp {
 
 
   float* result0_data();
-  float&amp; result0(size_t dim0, size_t dim1);
+  float& result0(size_t dim0, size_t dim1);
 };
 
 }  // end namespace bar

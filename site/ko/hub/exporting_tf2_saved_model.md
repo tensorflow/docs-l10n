@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-12' review_interval: '6 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2021-10-10' review_interval: '6 months' } *-->
 
 # SavedModel 내보내기
 
-이 페이지에서는 TensorFlow 프로그램에서 [TensorFlow 2의 SavedModel 형식](https://www.tensorflow.org/guide/saved_model)으로 모델을 내보내는(저장하는) 방법을 자세히 설명합니다. 이 형식은 TensorFlow 허브에서 사전 학습된 모델 및 모델 조각을 공유하는 권장 방법으로, 이전 [TF1 허브 형식](tf1_hub_module.md)을 대체하고 새로운 API 세트와 함께 제공됩니다. [TF1 허브 형식 내보내기](exporting_hub_format.md)에서 TF1 허브 형식 모델을 내보내기 위한 자세한 정보를 찾아볼 수 있습니다.
+이 페이지에서는 TensorFlow 프로그램에서 [TensorFlow 2의 SavedModel 형식](https://www.tensorflow.org/guide/saved_model)으로 모델을 내보내는(저장하는) 방법을 자세히 설명합니다. 이 형식은 TensorFlow 허브에서 사전 학습된 모델 및 모델 조각을 공유하는 권장 방법으로, 이전 [TF1 허브 형식](tf1_hub_module.md)을 대체하고 새로운 API 세트와 함께 제공됩니다. [TF1 허브 형식 내보내기](exporting_hub_format.md)에서 TF1 허브 형식 모델을 내보내기 위한 자세한 정보를 찾아볼 수 있습니다. TensorFlow Hub에서 공유하기 위해 SavedModel을 압축하는 방법에 대한 자세한 내용은 [여기](writing_documentation.md#model-specific_asset_content)를 참조하세요.
 
 일부 모델 구축 도구 키트는 이미 이를 위한 도구를 제공합니다(예: 아래에서 [TensorFlow Model Garden](#tensorflow-model-garden) 참조).
 
@@ -35,7 +35,7 @@ piece_to_share = tf.keras.Model(sharing_input, sharing_output)
 piece_to_share.save(..., include_optimizer=False)
 ```
 
-GitHub에서 [TensorFlow 모델](https://github.com/tensorflow/models)은 BERT에 대해 전자의 접근 방식을 사용하고([nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py) 참조, 내보내기를 위한 `core_model`과 체크포인트 복원을 위한 `pretrainer`가 분리된 것에 주목) ResNet에는 후자의 접근 방식을 사용합니다([vision/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/vision/image_classification/resnet/tfhub_export.py) 참조).
+GitHub에서 [TensorFlow 모델](https://github.com/tensorflow/models)은 BERT에 대해 전자의 접근 방식을 사용하고([nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py) 참조, 내보내기를 위한 `core_model`과 체크포인트 복원을 위한 `pretrainer`가 분리된 것에 주목) ResNet에는 후자의 접근 방식을 사용합니다([legacy/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/legacy/image_classification/resnet/tfhub_export.py) 참조).
 
 ## 저수준 TensorFlow에서 저장하기
 
