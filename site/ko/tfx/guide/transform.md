@@ -1,9 +1,9 @@
 # Transform TFX 파이프라인 구성 요소
 
-Transform TFX 파이프라인 구성 요소는 [SchemaGen](examplegen.md) 구성 요소로 만들어진 데이터 스키마를 사용하여 [ExampleGen](schemagen.md) 구성 요소에서 내보낸 tf.Examples에 대한 특성 엔지니어링(feature engineering)을 수행하고 SavedModel을 내보냅니다. 실행 시 SavedModel은 ExampleGen 구성 요소에서 내보낸 tf.Examples를 허용하고 변환된 특성 데이터를 내보냅니다.
+Transform TFX 파이프라인 구성 요소는 [SchemaGen](schemagen.md) 구성 요소에서 생성한 데이터 스키마를 사용하여 [ExampleGen](examplegen.md) 구성 요소에서 내보낸 tf.Examples에 대한 특성 엔지니어링을 수행하고 SavedModel과 변환 전 및 변환 후 데이터에 대한 통계를 모두 내보냅니다. 실행되면 SavedModel은 ExampleGen 구성 요소에서 내보낸 tf.Examples를 수락하고 변환된 특성 데이터를 내보냅니다.
 
 - 입력: ExampleGen 구성 요소의 tf.Examples 및 SchemaGen 구성 요소의 데이터 스키마
-- 출력: SavedModel을 Trainer 구성 요소로
+- 출력: Trainer 구성 요소, 변환 전 및 변환 후 통계로 SavedModel을 내보냄
 
 ## Transform 구성 요소 구성하기
 
@@ -15,6 +15,8 @@ transform = Transform(
     schema=schema_gen.outputs['schema'],
     module_file=os.path.abspath(_taxi_transform_module_file))
 ```
+
+또한 [TFDV](tfdv.md) 기반 변환 전 또는 변환 후 통계 계산에 옵션을 제공해야 할 수 있습니다. 그렇게 하려면 동일한 모듈 내에서 `stats_options_updater_fn`을 정의합니다.
 
 ## Transform 및 TensorFlow Transform
 
@@ -64,7 +66,7 @@ def preprocessing_fn(inputs):
   """
   outputs = {}
   for key in _DENSE_FLOAT_FEATURE_KEYS:
-    # Preserve this feature as a dense float, setting nan's to the mean.
+    # If sparse make it dense, setting nan's to 0 or '', and apply zscore.
     outputs[_transformed_name(key)] = transform.scale_to_z_score(
         _fill_in_missing(inputs[key]))
 
@@ -128,16 +130,16 @@ def _preprocessing_fn(inputs):
 
 
   education = inputs[features.RAW_LABEL_KEY]
-  _ = tft.uniques(education, vocab_filename=features.RAW_LABEL_KEY)
+  _ = tft.vocabulary(education, vocab_filename=features.RAW_LABEL_KEY)
 
   ...
 ```
 
-위의 전처리 함수는 원시 입력 특성(전처리 함수의 출력의 일부로 반환됨)을 사용하고 `tft.uniques`를 호출합니다. 그 결과 모델에서 액세스할 수 있는 `education`을 위해 어휘가 생성됩니다.
+위의 전처리 함수는 원시 입력 특성(전처리 함수의 출력의 일부로도 반환됨)을 사용하고 여기에서 `tft.vocabulary`를 호출합니다. 그 결과 모델에서 액세스할 수 있는 `education`에 대한 어휘가 생성됩니다.
 
 이 예제에서는 또한 레이블을 변환한 다음 변환된 레이블에 대한 어휘를 생성하는 방법을 보여줍니다. 특히 원시 레이블 `education`을 사용하며 레이블을 정수로 변환하지 않고 상위 5개 레이블(빈도별)을 제외한 모든 레이블을 `UNKNOWN`으로 변환합니다.
 
-모델 코드에서 분류자에는 `tft.uniques`로 생성된 어휘를 `label_vocabulary` 인수로 제공해야 합니다. 먼저 도우미 함수를 사용하여 이 어휘를 목록으로 읽으면 됩니다. 이는 아래 코드 조각에 나와 있습니다. 예제 코드는 위에서 설명한 변환된 레이블을 사용하지만, 여기에서는 원시 레이블을 사용하는 코드를 보여줍니다.
+모델 코드에서 분류자에는 `tft.vocabulary`로 생성된 어휘를 `label_vocabulary` 인수로 제공해야 합니다. 먼저 도우미 함수를 사용하여 이 어휘를 목록으로 읽으면 됩니다. 이는 아래 코드 조각에 나와 있습니다. 예제 코드는 위에서 설명한 변환된 레이블을 사용하지만, 여기에서는 원시 레이블을 사용하는 코드를 보여줍니다.
 
 ```python
 def create_estimator(pipeline_inputs, hparams):
@@ -157,3 +159,23 @@ def create_estimator(pipeline_inputs, hparams):
       label_vocabulary=label_vocab,
       ...)
 ```
+
+## 변환 전 및 변환 후 통계 구성하기
+
+위에서 언급했듯이 Transform 구성 요소는 TFDV를 호출하여 변환 전 및 변환 후 통계를 모두 계산합니다. TFDV는 선택적 [StatsOptions](https://github.com/tensorflow/datavalidation/blob/master/tensorflow_data_validation/statistics/stats_options.py) 객체를 입력으로 사용합니다. 사용자는 특정한 추가 통계(예: NLP 통계)를 활성화하거나 검증된 임계값(예: 최소/최대 토큰 빈도)을 설정하기 위해 이 객체를 구성해야 할 수 있습니다. 그렇게 하려면 모듈 파일에 `stats_options_updater_fn`을 정의합니다.
+
+```python
+def stats_options_updater_fn(stats_type, stats_options):
+  ...
+  if stats_type == stats_options_util.StatsType.PRE_TRANSFORM:
+    # Update stats_options to modify pre-transform statistics computation.
+    # Most constraints are specified in the schema which can be accessed
+    # via stats_options.schema.
+  if stats_type == stats_options_util.StatsType.POST_TRANSFORM
+    # Update stats_options to modify post-transform statistics computation.
+    # Most constraints are specified in the schema which can be accessed
+    # via stats_options.schema.
+  return stats_options
+```
+
+변환 후 통계는 종종 특성을 사전 처리하는 데 사용되는 어휘에 대한 지식을 활용합니다. 경로 매핑에 대한 어휘 이름은 모든 TFT 생성 어휘에 대해 StatsOptions(따라서 TFDV)에 제공됩니다. 추가적으로, 외부 생성 어휘에 대한 매핑은 (i) StatsOptions 내에서 `vocab_paths` 사전을 직접 수정하거나 (ii) `tft.annotate_asset`를 사용하여 추가할 수 있습니다.

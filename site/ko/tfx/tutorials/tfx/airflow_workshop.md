@@ -1,19 +1,19 @@
 # TFX Airflow 튜토리얼
 
-[![Python](https://img.shields.io/pypi/pyversions/tfx.svg?style=plastic)](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)
-[![PyPI](https://badge.fury.io/py/tfx.svg)](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)
+[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[ ](https://github.com/tensorflow/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)[](https://github.com/tensorflow/tfx)
+[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)
 
-## 시작하기
+## 가중치 값만 저장합니다. 이것은 일반적으로 모델을 훈련할 때 사용됩니다.
 
 이 튜토리얼은 TensorFlow Extended(TFX)를 소개하고 자체 머신러닝 파이프라인을 만드는 방법을 배우는 데 도움이 되도록 설계되었습니다. 로컬에서 실행되며 TFX 및 TensorBoard와의 통합과 더불어 Jupyter 노트북에서 TFX와의 상호 작용도 보여줍니다.
 
-핵심 용어: TFX 파이프라인은 방향성 비순환 그래프 또는 "DAG"입니다. 종종 파이프라인을 DAG라고 합니다.
+핵심 용어: TFX 파이프라인은 Directed Acyclic Graph 또는 "DAG"입니다. 종종 파이프라인을 DAG라고 합니다.
 
 데이터세트를 검사하는 것으로 시작하여 완전하게 작동하는 파이프라인을 만드는 것으로 완성되는 일반적인 ML 개발 프로세스를 따릅니다. 그 과정에서 파이프라인을 디버그 및 업데이트하고 성능을 측정하는 방법을 살펴봅니다.
 
 ### 자세히 알아보기
 
-자세한 내용은 [TFX 사용 설명서](https://www.tensorflow.org/tfx/guide)를 참조하세요.
+자세한 내용은 TFX 사용 설명서를 참조하세요.
 
 ## 단계별 안내
 
@@ -57,7 +57,7 @@ Python 3.7을 실행 중인 경우 python3.7-dev를 설치해야 합니다.
 sudo apt-get install python3.7-dev
 ```
 
-또한 시스템의 GCC 버전이 7 미만이면 GCC를 업데이트해야 합니다. 그렇지 않으면 `airflow webserver`를 실행할 때 오류가 표시됩니다. 다음을 사용하여 현재 버전을 확인할 수 있습니다.
+또한 시스템의 GCC 버전이 7 미만이면 GCC를 업데이트해야 합니다. 그렇지 않으면 airflow webserver를 실행할 때 오류가 표시됩니다. 다음을 사용하여 현재 버전을 확인할 수 있습니다.
 
 ```bash
 gcc --version
@@ -75,7 +75,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /u
 
 ### MacOS 환경
 
-Python 3 및 git이 아직 설치되지 않은 경우 [Homebrew](https://brew.sh/) 패키지 관리자를 사용하여 설치할 수 있습니다.
+Python 3 및 git이 아직 설치되지 않은 경우 Homebrew 패키지 관리자를 사용하여 설치할 수 있습니다.
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -85,7 +85,7 @@ brew install python
 brew install git
 ```
 
-MacOS는 구성에 따라 Airflow를 실행할 때 스레드 분기에서 문제를 일으키는 경우가 종종 있습니다. 이러한 문제를 방지하려면 `~/.bash_profile`을 편집하고 파일 끝에 다음 줄을 추가해야 합니다.
+MacOS는 구성에 따라 Airflow를 실행할 때 스레드 분기에서 문제를 일으키는 경우가 종종 있습니다. 이러한 문제를 방지하려면 ~/.bash_profile을 편집하고 파일 끝에 다음 줄을 추가해야 합니다.
 
 ```bash
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
@@ -93,7 +93,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 ## 튜토리얼 자료
 
-이 튜토리얼의 코드는 [https://github.com/tensorflow/tfx/tree/master/tfx/examples/airflow_workshop](https://github.com/tensorflow/tfx/tree/master/tfx/examples/airflow_workshop)에서 확인할 수 있습니다.
+이 튜토리얼의 코드는 https://github.com/tensorflow/tfx/tree/master/tfx/examples/airflow_workshop에서 확인할 수 있습니다.
 
 코드는 작업하는 대상 단계별로 구성되어 있으므로 각 단계마다 필요한 코드와 함께 수행할 작업에 대한 지침이 제공됩니다.
 
@@ -132,7 +132,7 @@ TFX를 사용하여 ML 파이프라인을 생성하는 방법을 배우게 됩�
 
 ### 각 단계에 대한 코드 추가하기
 
-이 튜토리얼은 모든 코드가 파일에 포함되도록 설계되었지만 3-7 단계의 모든 코드는 주석 처리되고 인라인 주석으로 표시됩니다. 인라인 주석은 코드 줄이 적용되는 단계를 나타냅니다. 예를 들어, 3단계의 코드는 `# Step 3` 주석으로 표시됩니다.
+이 튜토리얼은 모든 코드가 파일에 포함되도록 설계되었지만 3-7 단계의 모든 코드는 주석 처리되고 인라인 주석으로 표시됩니다. 인라인 주석은 코드 줄이 적용되는 단계를 나타냅니다. 예를 들어, 3단계의 코드는 # Step 3 주석으로 표시됩니다.
 
 각 단계에 대해 추가할 코드는 일반적으로 세 가지 코드 영역에 속합니다.
 
@@ -141,7 +141,7 @@ TFX를 사용하여 ML 파이프라인을 생성하는 방법을 배우게 됩�
 - create_pipeline () 호출에서 반환된 목록
 - taxi_utils.py의 지원 코드
 
-튜토리얼을 진행하면서 현재 작업 중인 튜토리얼 단계에 적용되는 코드 줄의 주석 처리를 제거합니다. 그러면 해당 단계에 대한 코드가 추가되고 파이프라인이 업데이트됩니다. 이 때 **주석 처리를 제거하는 코드를 검토할 것을 강력히 권장합니다**.
+튜토리얼을 진행하면서 현재 작업 중인 튜토리얼 단계에 적용되는 코드 줄의 주석 처리를 제거합니다. 그러면 해당 단계에 대한 코드가 추가되고 파이프라인이 업데이트됩니다. 이 때 주석 처리를 제거하는 코드를 검토할 것을 강력히 권장합니다.
 
 ## Chicago Taxi 데이터세트
 
@@ -162,7 +162,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 ## 1단계: 환경 설정
 
-설정 스크립트(`setup_demo.sh`)는 TFX 및 [Airflow](https://airflow.apache.org/)를 설치하고 이 튜토리얼에서 쉽게 작업할 수 있는 방식으로 Airflow를 구성합니다.
+설정 스크립트(setup_demo.sh)는 TFX 및 Airflow를 설치하고 이 튜토리얼에서 쉽게 작업할 수 있는 방식으로 Airflow를 구성합니다.
 
 셸에서:
 
@@ -179,7 +179,7 @@ cd ~/tfx/tfx/examples/airflow_workshop/setup
 ./setup_demo.sh
 ```
 
-`setup_demo.sh`를 검토하여 어떤 작업을 하는지 확인해야 합니다.
+setup_demo.sh를 검토하여 어떤 작업을 하는지 확인해야 합니다.
 
 ## 2단계: 초기 파이프라인 골격 가져오기
 
@@ -211,7 +211,7 @@ jupyter notebook
 
 #### 문제 해결
 
-웹 브라우저에서 Airflow 콘솔을 로드하는 데 문제가 있거나 `airflow webserver`를 실행할 때 오류가 발생한 경우, 포트 8080에서 다른 애플리케이션이 실행 중일 수 있습니다. 이 포트는 Airflow의 기본 포트이지만 사용되지 않는 다른 사용자 포트로 변경할 수 있습니다. 예를 들어, 포트 7070에서 Airflow를 실행하려면 다음을 실행할 수 있습니다.
+웹 브라우저에서 Airflow 콘솔을 로드하는 데 문제가 있거나 airflow webserver를 실행할 때 오류가 발생한 경우, 포트 8080에서 다른 애플리케이션이 실행 중일 수 있습니다. 이 포트는 Airflow의 기본 포트이지만 사용되지 않는 다른 사용자 포트로 변경할 수 있습니다. 예를 들어, 포트 7070에서 Airflow를 실행하려면 다음을 실행할 수 있습니다.
 
 ```bash
 airflow webserver -p 7070
@@ -221,16 +221,16 @@ airflow webserver -p 7070
 
 ![DAG 버튼](images/airflow_workshop/airflow_dag_buttons.png)
 
-- 왼쪽에 있는 버튼을 사용하여 DAG를 *활성화*합니다.
-- 오른쪽에 있는 버튼을 사용하여 변경을 수행할 때 DAG를 *새로 고침*합니다.
-- 오른쪽에 있는 버튼을 사용하여 DAG를 *트리거*합니다.
+- 왼쪽에 있는 버튼을 사용하여 DAG를 활성화합니다.
+- 오른쪽에 있는 버튼을 사용하여 변경을 수행할 때 DAG를 새로 고침합니다.
+- 오른쪽에 있는 버튼을 사용하여 DAG를 트리거합니다.
 - 택시를 클릭하여 DAG의 그래프 보기로 이동합니다.
 
 ![그래프 새로 고침 버튼](images/airflow_workshop/graph_refresh_button.png)
 
 #### Airflow CLI
 
-[Airflow CLI](https://airflow.apache.org/cli.html)를 사용하여 DAG를 활성화하고 트리거할 수도 있습니다.
+Airflow CLI를 사용하여 DAG를 활성화하고 트리거할 수도 있습니다.
 
 ```bash
 # enable/disable
@@ -245,7 +245,7 @@ airflow trigger_dag <your DAG name>
 
 DAG 보기에서 파이프라인을 트리거한 후, 파이프라인이 처리를 완료하는 것을 볼 수 있습니다. 각 구성 요소가 실행됨에 따라 DAG 그래프에서 구성 요소의 외곽선 색상이 변경되어 해당 상태를 표시합니다. 구성 요소 처리가 완료되면 윤곽선이 진한 녹색으로 바뀌어 완료되었음을 나타냅니다.
 
-참고: 구성 요소가 실행될 때 업데이트된 상태를 보려면 오른쪽에 있는 *그래프 새로 고침* 버튼을 사용하거나 페이지를 새로 고쳐야 합니다.
+참고: 구성 요소가 실행될 때 업데이트된 상태를 보려면 오른쪽에 있는 그래프 새로 고침 버튼을 사용하거나 페이지를 새로 고쳐야 합니다.
 
 지금까지는 파이프라인에 CsvExampleGen 구성 요소만 있으므로 짙은 녹색으로 변할 때까지 기다려야 합니다(~ 1분).
 
@@ -263,14 +263,14 @@ DAG 보기에서 파이프라인을 트리거한 후, 파이프라인이 처리�
 
 ![데이터 구성 요소](images/airflow_workshop/examplegen1.png) ![데이터 구성 요소](images/airflow_workshop/examplegen2.png)
 
-- [ExampleGen](https://www.tensorflow.org/tfx/guide/examplegen)은 입력 데이터세트를 수집하고 분할합니다.
-- [StatisticsGen](https://www.tensorflow.org/tfx/guide/statsgen)은 데이터세트에 대한 통계를 계산합니다.
-- [SchemaGen](https://www.tensorflow.org/tfx/guide/schemagen) SchemaGen은 통계를 검사하고 데이터 스키마를 생성합니다.
-- [ExampleValidator](https://www.tensorflow.org/tfx/guide/exampleval)는 데이터세트에서 이상 항목과 누락된 값을 찾습니다.
+- ExampleGen은 입력 데이터세트를 수집하고 분할합니다.
+- StatisticsGen은 데이터세트에 대한 통계를 계산합니다.
+- SchemaGen SchemaGen은 통계를 검사하고 데이터 스키마를 생성합니다.
+- ExampleValidator는 데이터세트에서 이상 항목과 누락된 값을 찾습니다.
 
 ### 편집기에서:
 
-- ~/airflow/dags에서 `taxi_pipeline.py`의 `Step 3`으로 표시된 줄의 주석 처리를 제거합니다.
+- ~/airflow/dags에서 taxi_pipeline.py의 Step 3으로 표시된 줄의 주석 처리를 제거합니다.
 - 주석 처리를 제거할 코드를 잠시 검토합니다.
 
 ### 브라우저에서:
@@ -287,7 +287,7 @@ DAG 보기에서 파이프라인을 트리거한 후, 파이프라인이 처리�
 
 ### Jupyter로 돌아가기:
 
-이전에 `jupyter notebook`을 실행했을 때는 브라우저 탭에서 Jupyter 세션이 열렸습니다. 이제 브라우저에서 해당 탭으로 돌아갑니다.
+이전에 jupyter notebook을 실행했을 때는 브라우저 탭에서 Jupyter 세션이 열렸습니다. 이제 브라우저에서 해당 탭으로 돌아갑니다.
 
 - step3.ipynb를 엽니다.
 - 노트북을 따릅니다.
@@ -296,9 +296,9 @@ DAG 보기에서 파이프라인을 트리거한 후, 파이프라인이 처리�
 
 ### 고급 예제
 
-여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 [TensorFlow Data Validation Colab](https://www.tensorflow.org/tfx/tutorials/data_validation/chicago_taxi)을 참조하세요.
+여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 TensorFlow Data Validation Colab을 참조하세요.
 
-TFDV를 사용하여 데이터세트를 탐색하고 유효성을 검사하는 방법에 대한 자세한 내용은 [tensorflow.org의 예를 참조하세요](https://www.tensorflow.org/tfx/data_validation).
+TFDV를 사용하여 데이터세트를 탐색하고 유효성을 검사하는 방법에 대한 자세한 내용은 tensorflow.org의 예를 참조하세요.
 
 ## 4단계: 특성 엔지니어링
 
@@ -316,11 +316,11 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 
 ![변환](images/airflow_workshop/transform.png)
 
-- [Transform](https://www.tensorflow.org/tfx/guide/transform)은 데이터세트에서 특성 엔지니어링을 수행합니다.
+- Transform은 데이터세트에서 특성 엔지니어링을 수행합니다.
 
 ### 편집기에서:
 
-- ~/airflow/dags에서 `taxi_pipeline.py` 및 `taxi_utils.py`의 `Step 4`로 표시된 줄의 주석 처리를 제거합니다.
+- ~/airflow/dags에서 taxi_pipeline.py 및 taxi_utils.py의 Step 4로 표시된 줄의 주석 처리를 제거합니다.
 - 주석 처리를 제거할 코드를 잠시 검토합니다.
 
 ### 브라우저에서:
@@ -344,7 +344,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 
 ### 고급 예제
 
-여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 [TensorFlow Transform Colab](https://www.tensorflow.org/tfx/tutorials/transform/census)을 참조하세요.
+여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 TensorFlow Transform Colab을 참조하세요.
 
 ## 5단계: 훈련
 
@@ -357,11 +357,11 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 
 ### 구성 요소
 
-- [Trainer](https://www.tensorflow.org/tfx/guide/trainer)는 TensorFlow [Estimators](https://github.com/tensorflow/docs/blob/master/site/en/r1/guide/estimators.md)를 사용하여 모델 훈련합니다.
+- Trainer는 TensorFlow Estimators를 사용하여 모델 훈련합니다.
 
 ### 편집기에서:
 
-- ~/airflow/dags에서 `taxi_pipeline.py` 및 `taxi_utils.py`의 `Step 5`로 표시된 줄의 주석 처리를 제거합니다.
+- ~/airflow/dags에서 taxi_pipeline.py 및 taxi_utils.py의 Step 5로 표시된 줄의 주석 처리를 제거합니다.
 - 주석 처리를 제거할 코드를 잠시 검토합니다.
 
 ### 브라우저에서:
@@ -387,7 +387,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 
 ### 고급 예제
 
-여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 [TensorBoard 튜토리얼](https://www.tensorflow.org/tensorboard/r1/summaries)을 참조하세요.
+여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 TensorBoard 튜토리얼을 참조하세요.
 
 ## 6단계: 모델 성능 분석
 
@@ -404,11 +404,11 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 
 ### 구성 요소
 
-- [Evaluator](https://www.tensorflow.org/tfx/guide/evaluator)는 훈련 결과에 대한 심층 분석을 수행하고 모델이 프로덕션으로 푸시하기에 "충분히 좋은지" 확인합니다.
+- Evaluator는 훈련 결과에 대한 심층 분석을 수행하고 모델이 프로덕션으로 푸시하기에 "충분히 좋은지" 확인합니다.
 
 ### 편집기에서:
 
-- ~/airflow/dags에서 `taxi_pipeline.py`의 `Step 6`로 표시된 줄의 주석 처리를 제거합니다.
+- ~/airflow/dags에서 taxi_pipeline.py의 Step 6로 표시된 줄의 주석 처리를 제거합니다.
 - 주석 처리를 제거할 코드를 잠시 검토합니다.
 
 ### 브라우저에서:
@@ -434,7 +434,7 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 
 ### 고급 예제
 
-여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 [TFMA Chicago Taxi 튜토리얼](https://www.tensorflow.org/tfx/tutorials/model_analysis/chicago_taxi)을 참조하세요.
+여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 TFMA Chicago Taxi 튜토리얼을 참조하세요.
 
 ## 7단계: 프로덕션 준비
 
@@ -451,11 +451,11 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 
 ### 구성 요소
 
-- [Pusher](https://www.tensorflow.org/tfx/guide/pusher)는 모델을 적용 인프라에 배포합니다.
+- Pusher는 모델을 적용 인프라에 배포합니다.
 
 ### 편집기에서:
 
-- ~/airflow/dags에서 `taxi_pipeline.py`의 `Step 7`로 표시된 줄의 주석 처리를 제거합니다.
+- ~/airflow/dags에서 taxi_pipeline.py의 Step 7로 표시된 줄의 주석 처리를 제거합니다.
 - 주석 처리를 제거할 코드를 잠시 검토합니다.
 
 ### 브라우저에서:
@@ -472,8 +472,8 @@ TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하�
 
 ## 다음 단계
 
-이제 모델을 훈련하고 유효성을 검증했고 `SavedModel` 파일을 `~/airflow/saved_models/taxi` 디렉토리 아래에 내보냈습니다. 이제 모델의 프로덕션 준비가 완료되었습니다. 이제 다음을 포함하여 모든 TensorFlow 배포 대상에 모델을 배포할 수 있습니다.
+이제 모델을 훈련하고 유효성을 검증했고 SavedModel 파일을 ~/airflow/saved_models/taxi 디렉토리 아래에 내보냈습니다. 이제 모델의 프로덕션 준비가 완료되었습니다. 이제 다음을 포함하여 모든 TensorFlow 배포 대상에 모델을 배포할 수 있습니다.
 
-- [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) - 서버 또는 서버 팜에서 모델을 제공하고 REST 및/또는 gRPC 추론 요청을 처리합니다.
-- [TensorFlow Lite](https://www.tensorflow.org/lite) - Android 또는 iOS 네이티브 모바일 애플리케이션 또는 Raspberry Pi, IoT 또는 마이크로 컨트롤러 애플리케이션에 모델을 포함합니다.
-- [TensorFlow.js](https://www.tensorflow.org/js) - 웹 브라우저 또는 Node.JS 애플리케이션에서 모델을 실행합니다.
+- TensorFlow Serving - 서버 또는 서버 팜에서 모델을 제공하고 REST 및/또는 gRPC 추론 요청을 처리합니다.
+- TensorFlow Lite - Android 또는 iOS 네이티브 모바일 애플리케이션 또는 Raspberry Pi, IoT 또는 마이크로 컨트롤러 애플리케이션에 모델을 포함합니다.
+- TensorFlow.js - 웹 브라우저 또는 Node.JS 애플리케이션에서 모델을 실행합니다.

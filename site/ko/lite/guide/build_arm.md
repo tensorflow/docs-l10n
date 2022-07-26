@@ -8,12 +8,12 @@ TensorFlow Lite는 두 개의 빌드 시스템을 지원하며 각 빌드 시스
 --- | --- | ---
 사전 정의된 툴체인 | armhf, aarch64 | armel, armhf, aarch64
 사용자 정의 툴체인 | 사용하기 더 어려움 | 사용하기 쉬움
-[특정 TF ops](https://www.tensorflow.org/lite/guide/ops_select) | 지원됨 | 지원되지 않음
-[GPU 델리게이트](https://www.tensorflow.org/lite/performance/gpu) | Android에서만 사용 가능 | OpenCL을 지원하는 모든 플랫폼
+[TF op 선택](https://www.tensorflow.org/lite/guide/ops_select) | 지원됨 | 지원되지 않음
+[GPU 대리자](https://www.tensorflow.org/lite/performance/gpu) | Android에서만 사용 가능 | OpenCL을 지원하는 모든 플랫폼
 XNNPack | 지원됨 | 지원됨
 [Python Wheel](https://www.tensorflow.org/lite/guide/build_cmake_pip) | 지원됨 | 지원됨
 [C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/README.md) | 지원됨 | [지원됨](https://www.tensorflow.org/lite/guide/build_cmake#build_tensorflow_lite_c_library)
-[C++ API](https://www.tensorflow.org/lite/guide/inference#load_and_run_a_model_in_c) | Bazel 프로젝트에 지원됨 | CMake 프로젝트에 지원됨
+C++ API | Bazel 프로젝트에 지원됨 | CMake 프로젝트에 지원됨
 
 ## CMake를 사용한 ARM의 크로스 컴파일
 
@@ -21,7 +21,7 @@ CMake 프로젝트가 있거나 사용자 정의 툴체인을 사용하려는 �
 
 ## Bazel을 사용한 ARM 크로스 컴파일
 
-Bazel 프로젝트가 있거나 TF op를 사용하려는 경우, Bazel 빌드 시스템을 사용하는 것이 좋습니다. Bazel과 통합된 [ARM GCC 8.3 툴체인](https://github.com/tensorflow/tensorflow/tree/master/third_party/toolchains/embedded/arm-linux)을 사용하여 ARM32/64 공유 라이브러리를 빌드합니다.
+Bazel 프로젝트가 있거나 TF op를 사용하려는 경우, Bazel 빌드 시스템을 사용하는 것이 좋습니다. Bazel과 통합된 [ARM GCC 8.3 툴체인](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tools/toolchains/embedded/arm-linux)을 사용하여 ARM32/64 공유 라이브러리를 빌드합니다.
 
 대상 아키텍처 | Bazel 구성 | 호환 기기
 --- | --- | ---

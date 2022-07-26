@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'kempy' reviewed: '2021-03-09' } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2021-11-22' } *-->
 
 # 텍스트 작업을 위한 일반적인 SavedModel API
 

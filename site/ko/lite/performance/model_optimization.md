@@ -52,71 +52,75 @@ TensorFlow Lite에서는 다음 유형의 양자화를 사용할 수 있습니�
 
 기술 | 데이터 요구 사항 | 크기 축소 | 정확성 | 지원되는 하드웨어
 --- | --- | --- | --- | ---
-[훈련 후 float16 양자화](post_training_float16_quant.ipynb) | 데이터 없음 | 최대 50% | 사소한 정확성 손실 | CPU, GPU
-[훈련 후 동적 범위 양자화](post_training_quant.ipynb) | 데이터 없음 | 최대 75% | 정확성 손실 | CPU, GPU(Android)
-[훈련 후 정수 양자화](post_training_integer_quant.ipynb) | 레이블이 없는 대표 샘플 | 최대 75% | 정확성 손실 감소 | CPU, GPU(Android), 에지 TPU, Hexagon DSP
-[양자화 인식 훈련](http://www.tensorflow.org/model_optimization/guide/quantization/training) | 레이블이 지정된 훈련 데이터 | 최대 75% | 최소 정확성 손실 | CPU, GPU(Android), 에지 TPU, Hexagon DSP
+훈련 후 float16 양자화 | 데이터 없음 | 최대 50% | 사소한 정확성 손실 | CPU, GPU
+훈련 후 동적 범위 양자화 | 데이터 없음 | 최대 75% | 최소 정확성 손실 | CPU, GPU(Android)
+훈련 후 정수 양자화 | 레이블이 없는 대표 샘플 | 최대 75% | 적은 정확성 손실 | CPU, GPU(Android), 에지 TPU, Hexagon DSP
+양자화 인식 훈련 | 레이블이 지정된 훈련 데이터 | 최대 75% | 최소 정확성 손실 | CPU, GPU(Android), 에지 TPU, Hexagon DSP
+
+다음 의사 결정 트리는 단순히 예상되는 모델 크기와 정확도만 따져서 모델에 사용해야 할 수 있는 양자화 체계를 선택하는 데 도움이 됩니다.
+
+![양자화 선택 트리](images/quantization_decision_tree.png)
 
 다음은 몇 가지 모델에서 훈련 후 양자화 및 양자화 인식 훈련으로 나온 지연 시간 및 정확성 결과입니다. 모든 지연 시간 수치는 단일 big 코어 CPU를 사용하는 Pixel 2 기기에서 측정됩니다. 도구 키트가 개선됨에 따라 여기의 수치도 향상됩니다.
 
 <figure>
   <table>
     <tr>
-      <th>모델</th>
-      <th>상위 1개 정확성(원본)</th>
-      <th>상위 1개 정확성(훈련 후 양자화됨)</th>
-      <th>상위 1개 정확성(양자화 인식 교육)</th>
-      <th>지연 시간 (원본)(ms)</th>
-      <th>지연 시간(훈련 후 양자화됨)(ms)</th>
-      <th>지연 시간(양자화 인식 훈련)(ms)</th>
-      <th>크기(원본)(MB)</th>
-      <th>크기(최적화됨)(MB)</th>
-    </tr> <tr>
-<td>Mobilenet-v1-1-224</td>
-<td>0.709</td>
-<td>0.657</td>
-<td>0.70</td>
-      <td>124</td>
-<td>112</td>
-<td>64</td>
-<td>16.9</td>
-<td>4.3</td>
-</tr>
-    <tr>
-<td>Mobilenet-v2-1-224</td>
-<td>0.719</td>
-<td>0.637</td>
-<td>0.709</td>
-      <td>89</td>
-<td>98</td>
-<td>54</td>
-<td>14</td>
-<td>3.6</td>
-</tr>
-   <tr>
-<td>Inception_v3</td>
-<td>0.78</td>
-<td>0.772</td>
-<td>0.775</td>
-      <td>1130 년</td>
-<td>845</td>
-<td>543</td>
-<td>95.7</td>
-<td>23.9</td>
-</tr>
-   <tr>
-<td>Resnet_v2_101</td>
-<td>0.770</td>
-<td>0.768</td>
-<td>해당 없음</td>
-      <td>3973</td>
-<td>2868</td>
-<td>해당 없음</td>
-<td>178.3</td>
-<td>44.9</td>
-</tr>
+      <th>Model</th>
+      <th>Top-1 Accuracy (Original) </th>
+      <th>Top-1 Accuracy (Post Training Quantized) </th>
+      <th>Top-1 Accuracy (Quantization Aware Training) </th>
+      <th>Latency (Original) (ms) </th>
+      <th>Latency (Post Training Quantized) (ms) </th>
+      <th>Latency (Quantization Aware Training) (ms) </th>
+      <th> Size (Original) (MB)</th>
+      <th> Size (Optimized) (MB)</th>
+    </tr> <tr><td>Mobilenet-v1-1-224</td><td>0.709</td><td>0.657</td><td>0.70</td>
+      <td>124</td><td>112</td><td>64</td><td>16.9</td><td>4.3</td></tr>
+    <tr><td>Mobilenet-v2-1-224</td><td>0.719</td><td>0.637</td><td>0.709</td>
+      <td>89</td><td>98</td><td>54</td><td>14</td><td>3.6</td></tr>
+   <tr><td>Inception_v3</td><td>0.78</td><td>0.772</td><td>0.775</td>
+      <td>1130</td><td>845</td><td>543</td><td>95.7</td><td>23.9</td></tr>
+   <tr><td>Resnet_v2_101</td><td>0.770</td><td>0.768</td><td>N/A</td>
+      <td>3973</td><td>2868</td><td>N/A</td><td>178.3</td><td>44.9</td></tr>
  </table>
-  <figcaption><b>표 1</b> 일부 CNN 모델에 대한 모델 양자화의 이점</figcaption>
+  <figcaption>
+    <b>Table 1</b> Benefits of model quantization for select CNN models
+  </figcaption>
+</figure>
+
+### int16 활성화 및 int8 가중치를 사용한 전체 정수 양자화
+
+[int16 활성화를 사용한 양자화](https://www.tensorflow.org/model_optimization/guide/quantization/post_training)는 int16에서 활성화 및 int8에서 가중치를 사용하는 전체 정수 양자화 체계입니다. 이 모드는 int8의 활성화 및 가중치 모두에서 유사한 모델 크기를 유지하면서 전체 정수 양자화 방식과 비교하여 양자화된 모델의 정확도를 향상시킬 수 있습니다. 활성화가 양자화에 민감한 경우 권장됩니다.
+
+<i>참고:</i> 현재 이 양자화 체계를 위해 TFLite에서는 최적화되지 않은 참조 커널 구현만 사용할 수 있으므로, 기본적으로 int8 커널에 비해 성능이 느립니다. 이 모드의 모든 장점은 현재 특수 하드웨어 또는 맞춤형 소프트웨어를 통해 이용할 수 있습니다.
+
+다음은 이 모드를 활용하는 일부 모델의 정확도 결과입니다.
+
+<figure>
+  <table>
+    <tr>
+      <th>Model</th>
+      <th>Accuracy metric type </th>
+      <th>Accuracy (float32 activations) </th>
+      <th>Accuracy (int8 activations) </th>
+      <th>Accuracy (int16 activations) </th>
+    </tr> <tr><td>Wav2letter</td><td>WER</td><td>6.7%</td><td>7.7%</td>
+      <td>7.2%</td></tr>
+    <tr><td>DeepSpeech 0.5.1 (unrolled)</td><td>CER</td><td>6.13%</td><td>43.67%</td>
+      <td>6.52%</td></tr>
+    <tr><td>YoloV3</td><td>mAP(IOU=0.5)</td><td>0.577</td><td>0.563</td>
+      <td>0.574</td></tr>
+    <tr><td>MobileNetV1</td><td>Top-1 Accuracy</td><td>0.7062</td><td>0.694</td>
+      <td>0.6936</td></tr>
+    <tr><td>MobileNetV2</td><td>Top-1 Accuracy</td><td>0.718</td><td>0.7126</td>
+      <td>0.7137</td></tr>
+    <tr><td>MobileBert</td><td>F1(Exact match)</td><td>88.81(81.23)</td><td>2.08(0)</td>
+      <td>88.73(81.15)</td></tr>
+ </table>
+  <figcaption>
+    <b>Table 2</b> Benefits of model quantization with int16 activations
+  </figcaption>
 </figure>
 
 ### 잘라내기

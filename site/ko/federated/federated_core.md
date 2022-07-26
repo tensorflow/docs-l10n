@@ -34,14 +34,14 @@ TFF는 단순한 *클라이언트-서버* 아키텍처를 뛰어넘을 수 있�
 
 ### Python 인터페이스
 
-TFF는 내부 언어를 사용하여 페더레이션 계산을 표현하며, 언어의 구문은 [computation.proto](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/proto/v0/computation.proto)에서 직렬화 가능하는 표현에 의해 정의됩니다. FC API의 사용자는 일반적으로 이 언어와 직접 상호 작용할 필요가 없습니다. 그보다는 계산을 정의하는 방법으로 언어를 래핑하는 Python API(`tff` 네임스페이스)를 제공합니다.
+TFF 페더레이션 계산을 표현하기 위해 내부 언어를 사용하며, 언어의 구문은 [computation.proto](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/proto/v0/computation.proto)에서 직렬화 표현에 의해 정의됩니다. FC API 사용자는 일반적으로 이 언어와 직접 상호 작용할 필요가 없습니다. 그보다는 계산을 정의하는 방법으로 언어를 래핑하는 Python API(`tff` 네임스페이스)를 제공합니다.
 
 특히, TFF는 `tff.federated_computation`과 같은 Python 함수 데코레이터를 제공하여 데코레이팅된 함수의 본문을 추적하고 TFF의 언어로 페더레이션 계산 논리의 직렬화된 표현을 생성합니다. `tff.federated_computation`으로 데코레이팅된 함수는 이러한 직렬화된 표현의 캐리어 역할을 하며, 캐리어를 다른 계산 본문에 구성 요소로 포함하거나 호출될 때 요청 시 실행할 수 있습니다.
 
 여기에 한 가지 예제가 있습니다. 더 많은 예제는 [사용자 정의 알고리즘](tutorials/custom_federated_algorithms_1.ipynb) 튜토리얼에서 찾을 수 있습니다.
 
 ```python
-@tff.federated_computation(tff.FederatedType(tf.float32, tff.CLIENTS))
+@tff.federated_computation(tff.type_at_clients(tf.float32))
 def get_average_temperature(sensor_readings):
   return tff.federated_mean(sensor_readings)
 ```
@@ -59,6 +59,8 @@ Federated Core는 다음 유형의 범주를 제공합니다. 이들 유형을 �
 첫째, 기존 주류 언어에서 볼 수 있는 유형과 개념적으로 유사한 유형의 범주는 다음과 같습니다.
 
 - **텐서 유형**(`tff.TensorType`): TensorFlow에서와 마찬가지로 `dtype`과 `shape`이 있습니다. 유일한 차이점은 이 유형의 객체는 TensorFlow 그래프에서 TensorFlow ops의 출력을 나타내는 Python의 `tf.Tensor` 인스턴스로 제한되지 않으며, 예를 들어 분산 집계 프로토콜의 출력으로 생성될 수 있는 데이터의 단위를 포함할 수 있다는 것입니다. 따라서 TFF 텐서 유형은 단순히 Python 또는 TensorFlow에서 해당 유형의 구체적인 물리적 표현의 추상 버전입니다.
+
+    TFF의 `TensorTypes`는 TensorFlow보다 형상(shape)의 (정적) 처리가 더 엄격할 수 있습니다. 예를 들어, TFF의 유형 시스템은 순위를 알 수 없는 텐서를 동일한 `dtype`의 다른 텐서*로부터* 할당할 수 있는 대상으로 취급합니다. 하지만 이는 순위가 고정된 텐서<em>에는</em> 할당할 수 없습니다. 이 처리는 TFF가 유효한 것으로 받아들이는 계산이 더 엄격해지는 대가로 특정 런타임 오류(예: 순위를 알 수 없는 텐서를 잘못된 수의 요소가 있는 형상으로 변경하려는 시도)를 방지합니다.
 
     텐서 유형의 간단한 표기법은 `dtype` 또는 `dtype[shape]`입니다. 예를 들어, `int32` 및 `int32[10]`은 각각 정수 및 int 벡터의 유형입니다.
 
@@ -125,7 +127,7 @@ Federated Core의 언어는 몇 가지 추가 요소가 포함된 [람다 미적
     다음은 앞서 언급한 람다 식의 예입니다.
 
     ```python
-    @tff.federated_computation(tff.FederatedType(tf.float32, tff.CLIENTS))
+    @tff.federated_computation(tff.type_at_clients(tf.float32))
     def get_average_temperature(sensor_readings):
       return tff.federated_mean(sensor_readings)
     ```

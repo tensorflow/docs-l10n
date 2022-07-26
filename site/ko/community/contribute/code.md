@@ -4,17 +4,16 @@
 
 ## 시작하기 전에
 
-TensorFlow 프로젝트에 소스 코드를 제공하기 전에 프로젝트의 GitHub 리포지토리에서 `CONTRIBUTING.md` 파일을 살펴보기 바랍니다(예: [핵심 TensorFlow 리포지토리에 대한 CONTRIBUTING.md 파일](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md) 참조). 모든 코드 기여자는 [기여자 라이선스 계약](https://cla.developers.google.com/clas)(CLA)에 동의해야 합니다.
+TensorFlow 프로젝트에 소스 코드를 제공하기 전에 프로젝트의 GitHub 리포지토리에서 `CONTRIBUTING.md` 파일을 살펴보기 바랍니다. 예를 들어 핵심 TensorFlow 리포지토리에 대한 [CONTRIBUTING.md](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md) 파일을 참조합니다. 모든 코드 제공자는 [제공자 라이선스 계약](https://cla.developers.google.com/clas)(CLA)에 동의해야 합니다.
 
-중복 작업을 피하려면 특수한 기능에 대한 작업을 시작하기 전에 [현재 RFC](https://github.com/tensorflow/community/tree/master/rfcs)를 검토하고 TensorFlow 포럼에서 개발자에게 문의하세요. 저희는 새로운 기능을 추가할지 결정할 때 다소 신중한 태도로 접근하며 프로젝트에 기여하고 도움을 주는 가장 좋은 방법은 알려진 문제를 해결하는 것입니다.
+중복 작업을 피하려면 중요하지 않은 기능에 대한 작업을 시작하기 전에 [현재](https://github.com/tensorflow/community/tree/master/rfcs) 또는 [제안된](https://github.com/tensorflow/community/tree/master/rfcs) RFC를 검토하고 TensorFlow 포럼의 개발자에게 문의하세요([developers@tensorflow.org](https://groups.google.com/u/1/a/tensorflow.org/g/developers)). 우리는 새로운 기능을 추가하기로 결정할 때 다소 선택적이며, 프로젝트에 기여하고 도움을 줄 수 있는 가장 좋은 방법은 알려진 문제를 해결하는 것입니다.
 
 ## 새로운 기여자에 조언
 
-새로운 기여자는 TensorFlow 코드 베이스에 대한 첫 기여를 검색할 때 다음 태그를 찾아야 합니다. 새로운 기여자는 "쉬운" 프로젝트와 "처음으로 하기 좋은" 프로젝트를 먼저 선택하는 것이 좋습니다. 이를 통해 기여자는 기여 워크플로에 익숙해지고 핵심 개발자는 기여자를 잘 알게 됩니다.
+새로운 기여자는 TensorFlow 코드베이스에 대한 첫 번째 기여를 검색할 때 다음 태그를 찾아야 합니다. 새로운 기여자들은 "쉬운 첫 문제" 및 "기여 환영" 프로젝트를 먼저 다루는 것이 좋습니다. 이를 통해 기여자가 기여 워크플로에 익숙해지고 핵심 개발자는 기여자에게 익숙해 질 수 있습니다.
 
-- `good first issue`
-- `easy`
-- `contributions welcome`
+- [쉬운 첫 문제](https://github.com/tensorflow/tensorflow/labels/good%20first%20issue)
+- [기여 환영](https://github.com/tensorflow/tensorflow/labels/stat%3Acontributions%20welcome)
 
 보다 큰 규모의 문제나 새로운 기능을 다루기 위해 팀을 구성하고 싶다면 [developers@ group](https://groups.google.com/a/tensorflow.org/forum/#!forum/developers)에 이메일을 보내 현재 RFC 목록을 검토하세요.
 
@@ -118,14 +117,14 @@ TensorFlow 프로젝트에 소스 코드를 제공하기 전에 프로젝트의 
 추가 `git` 및 GitHub 리소스:
 
 - [Git 문서](https://git-scm.com/documentation)
-- [Git 개발 워크플로](https://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html)
+- [Git 개발 워크플로](https://docs.scipy.org/doc/numpy/dev/development_workflow.html)
 - [병합 충돌 해결](https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/)
 
 ## 기여자 체크리스트
 
-- 기여 지침을 읽습니다.
-- 행동 강령을 읽습니다.
-- 기여자 라이선스 계약(CLA)에 동의합니다.
-- 변경 사항이 지침과 일치하는지 확인합니다.
-- 변경 사항이 TensorFlow 코딩 스타일과 일치하는지 확인합니다.
-- 단위 테스트를 실행합니다.
+- [기여 지침](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md) 읽기
+- [행동 강령](https://github.com/tensorflow/tensorflow/blob/master/CODE_OF_CONDUCT.md)을 읽습니다.
+- [기여자 라이선스 계약(CLA)](https://cla.developers.google.com/)에 동의합니다.
+- 변경 사항이 [지침](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md#general-guidelines-and-philosophy-for-contribution)과 일치하는지 확인합니다.
+- 변경 사항이 [TensorFlow 코딩 스타일](https://www.tensorflow.org/community/contribute/code_style)과 일치하는지 확인합니다.
+- [단위 테스트 실행](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md#running-unit-tests)
