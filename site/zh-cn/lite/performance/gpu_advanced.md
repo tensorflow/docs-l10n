@@ -20,48 +20,109 @@ GPU使用16位或32位浮点数进行运算，并且（与CPU不同）不需要�
 
 TensorFlow Lite 在GPU上支持16位和32位浮点精度中的以下操作：
 
-* `ADD v1`
-* `AVERAGE_POOL_2D v1`
-* `CONCATENATION v1`
-* `CONV_2D v1`
-* `DEPTHWISE_CONV_2D v1-2`
-* `FULLY_CONNECTED v1`
-* `LOGISTIC v1`
-* `MAX_POOL_2D v1`
-* `MUL v1`
-* `PAD v1`
-* `PRELU v1`
-* `RELU v1`
-* `RELU6 v1`
-* `RESHAPE v1`
-* `RESIZE_BILINEAR v1`
-* `SOFTMAX v1`
-* `STRIDED_SLICE v1`
-* `SUB v1`
-* `TRANSPOSE_CONV v1`
+*   `ADD`
+*   `AVERAGE_POOL_2D`
+*   `CONCATENATION`
+*   `CONV_2D`
+*   `DEPTHWISE_CONV_2D v1-2`
+*   `EXP`
+*   `FULLY_CONNECTED`
+*   `LOGISTIC`
+*   `LSTM v2 (Basic LSTM only)`
+*   `MAX_POOL_2D`
+*   `MAXIMUM`
+*   `MINIMUM`
+*   `MUL`
+*   `PAD`
+*   `PRELU`
+*   `RELU`
+*   `RELU6`
+*   `RESHAPE`
+*   `RESIZE_BILINEAR v1-3`
+*   `SOFTMAX`
+*   `STRIDED_SLICE`
+*   `SUB`
+*   `TRANSPOSE_CONV`
 
 ## 基本用法
 
-### Android (Java)
+### Android via TensorFlow Lite Interpreter
 
-使用`TfLiteDelegate`在GPU上运行TensorFlow Lite，在Java中，您可以通过`Interpreter.Options`来指定GpuDelegate。
+Add the `tensorflow-lite-gpu` package alongside the existing `tensorflow-lite`
+package in the existing `dependencies` block.
 
-```java
-// NEW: Prepare GPU delegate.
-GpuDelegate delegate = new GpuDelegate();
-Interpreter.Options options = (new Interpreter.Options()).addDelegate(delegate);
-
-// Set up interpreter.
-Interpreter interpreter = new Interpreter(model, options);
-
-// Run inference.
-writeToInputTensor(inputTensor);
-interpreter.run(inputTensor, outputTensor);
-readFromOutputTensor(outputTensor);
-
-// Clean up.
-delegate.close();
 ```
+dependencies {
+    ...
+    implementation 'org.tensorflow:tensorflow-lite:2.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.3.0'
+}
+```
+
+Then run TensorFlow Lite on GPU with `TfLiteDelegate`. In Java, you can specify
+the `GpuDelegate` through `Interpreter.Options`.
+
+<div>
+  <devsite-selector>
+    <section>
+      <h3>Kotlin</h3>
+      <p><pre class="prettyprint lang-kotlin">
+    import org.tensorflow.lite.Interpreter
+    import org.tensorflow.lite.gpu.CompatibilityList
+    import org.tensorflow.lite.gpu.GpuDelegate
+
+    val compatList = CompatibilityList()
+
+    val options = Interpreter.Options().apply{
+        if(compatList.isDelegateSupportedOnThisDevice){
+            // if the device has a supported GPU, add the GPU delegate
+            val delegateOptions = compatList.bestOptionsForThisDevice
+            this.addDelegate(GpuDelegate(delegateOptions))
+        } else {
+            // if the GPU is not supported, run on 4 threads
+            this.setNumThreads(4)
+        }
+    }
+
+    val interpreter = Interpreter(model, options)
+
+    // Run inference
+    writeToInput(input)
+    interpreter.run(input, output)
+    readFromOutput(output)
+      </pre></p>
+    </section>
+    <section>
+      <h3>Java</h3>
+      <p><pre class="prettyprint lang-java">
+    import org.tensorflow.lite.Interpreter;
+    import org.tensorflow.lite.gpu.CompatibilityList;
+    import org.tensorflow.lite.gpu.GpuDelegate;
+
+    // Initialize interpreter with GPU delegate
+    Interpreter.Options options = new Interpreter.Options();
+    CompatibilityList compatList = CompatibilityList();
+
+    if(compatList.isDelegateSupportedOnThisDevice()){
+        // if the device has a supported GPU, add the GPU delegate
+        GpuDelegate.Options delegateOptions = compatList.getBestOptionsForThisDevice();
+        GpuDelegate gpuDelegate = new GpuDelegate(delegateOptions);
+        options.addDelegate(gpuDelegate);
+    } else {
+        // if the GPU is not supported, run on 4 threads
+        options.setNumThreads(4);
+    }
+
+    Interpreter interpreter = new Interpreter(model, options);
+
+    // Run inference
+    writeToInput(input);
+    interpreter.run(input, output);
+    readFromOutput(output);
+      </pre></p>
+    </section>
+  </devsite-selector>
+</div>
 
 ### Android (C/C++)
 
@@ -76,15 +137,7 @@ std::unique_ptr<Interpreter> interpreter;
 InterpreterBuilder(*model, op_resolver)(&interpreter);
 
 // NEW: Prepare GPU delegate.
-const TfLiteGpuDelegateOptions options = {
-  .metadata = NULL,
-  .compile_options = {
-    .precision_loss_allowed = 1,  // FP16
-    .preferred_gl_object_type = TFLITE_GL_OBJECT_TYPE_FASTEST,
-    .dynamic_batch_enabled = 0,   // Not fully functional yet
-  },
-};
-auto* delegate = TfLiteGpuDelegateCreate(&options);
+auto* delegate = TfLiteGpuDelegateV2Create(/*default options=*/nullptr);
 if (interpreter->ModifyGraphWithDelegate(delegate) != kTfLiteOk) return false;
 
 // Run inference.
@@ -93,14 +146,14 @@ if (interpreter->Invoke() != kTfLiteOk) return false;
 ReadFromOutputTensor(interpreter->typed_output_tensor<float>(0));
 
 // NEW: Clean up.
-TfLiteGpuDelegateDelete(delegate);
+TfLiteGpuDelegateV2Delete(delegate);
 ```
 
 适用于Android C / C ++的TFLite GPU使用[Bazel](https://bazel.io)构建系统。例如，可以使用以下命令构建委托（delegate）：
 
 ```sh
-bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:gl_delegate                  # for static library
-bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:libtensorflowlite_gpu_gl.so  # for dynamic library
+bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:delegate                           # for static library
+bazel build -c opt --config android_arm64 tensorflow/lite/delegates/gpu:libtensorflowlite_gpu_delegate.so  # for dynamic library
 ```
 
 ### iOS(ObjC++)
@@ -117,12 +170,7 @@ InterpreterBuilder(*model, op_resolver)(&interpreter);
 
 // NEW: Prepare GPU delegate.
 
-const GpuDelegateOptions options = {
-  .allow_precision_loss = false,
-  .wait_type = kGpuDelegateOptions::WaitType::Passive,
-};
-
-auto* delegate = NewGpuDelegate(options);
+auto* delegate = TFLGpuDelegateCreate(/*default options=*/nullptr);
 if (interpreter->ModifyGraphWithDelegate(delegate) != kTfLiteOk) return false;
 
 // Run inference.
@@ -131,10 +179,8 @@ if (interpreter->Invoke() != kTfLiteOk) return false;
 ReadFromOutputTensor(interpreter->typed_output_tensor<float>(0));
 
 // Clean up.
-DeleteGpuDelegate(delegate);
+TFLGpuDelegateDelete(delegate);
 ```
-
-注意：调用`Interpreter::ModifyGraphWithDelegate()`或`Interpreter::Invoke()`时，调用者必须在当前线程中有一个`EGLContext`，并且从同一个`EGLContext`中调用`Interpreter::Invoke()`。如果`EGLContext`不存在，委托（delegate）将在内部创建一个，但是开发人员必须确保始终从调用`Interpreter::Invoke()`的同一个线程调用`Interpreter::ModifyGraphWithDelegate()`。
 
 ## 高级用法
 
