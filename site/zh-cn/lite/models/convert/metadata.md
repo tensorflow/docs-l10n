@@ -1,20 +1,20 @@
 # 向 TensorFlow Lite 模型添加元数据
 
-TensorFlow Lite metadata provides a standard for model descriptions. The metadata is an important source of knowledge about what the model does and its input / output information. The metadata consists of both
+TensorFlow Lite 元数据为模型描述提供了标准。元数据是与模型功能及其输入/输出信息有关的重要信息来源。元数据包含以下两个部分：
 
 - 人员可读部分，用于传达使用模型时的最佳做法，以及
-- machine readable parts that can be leveraged by code generators, such as the [TensorFlow Lite Android code generator](../../inference_with_metadata/codegen#generate-code-with-tensorflow-lite-android-code-generator) and the [Android Studio ML Binding feature](../../inference_with_metadata/codegen#generate-code-with-android-studio-ml-model-binding).
+- 机器可读部分，可供诸如 [TensorFlow Lite Android 代码生成器](../../inference_with_metadata/codegen#generate-code-with-tensorflow-lite-android-code-generator)和 [Android Studio 机器学习绑定特征](../../inference_with_metadata/codegen#generate-code-with-android-studio-ml-model-binding)等代码生成器使用。
 
-All image models published on [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite) have been populated with metadata.
+[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite) 上发布的所有图像模型都已填充元数据。
 
-## Model with metadata format
+## 具有元数据格式的模型
 
 <center><img src="../../images/convert/model_with_metadata.png" alt="model_with_metadata" width="70%"></center>
 <center>图 1. 带有元数据和相关文件的 TFLite 模型。</center>
 
-Model metadata is defined in [metadata_schema.fbs](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs), a [FlatBuffer](https://google.github.io/flatbuffers/index.html#flatbuffers_overview) file. As shown in Figure 1, it is stored in the [metadata](https://github.com/tensorflow/tensorflow/blob/bd73701871af75539dd2f6d7fdba5660a8298caf/tensorflow/lite/schema/schema.fbs#L1208) field of the [TFLite model schema](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema.fbs), under the name, `"TFLITE_METADATA"`. Some models may come with associated files, such as [classification label files](https://github.com/tensorflow/examples/blob/dd98bc2b595157c03ac9fa47ac8659bb20aa8bbd/lite/examples/image_classification/android/models/src/main/assets/labels.txt#L1). These files are concatenated to the end of the original model file as a ZIP using the ZipFile ["append" mode](https://pymotw.com/2/zipfile/#appending-to-files) (`'a'` mode). TFLite Interpreter can consume the new file format in the same way as before. See [Pack the associated files](#pack-the-associated-files) for more information.
+模型元数据在 [FlatBuffers](https://google.github.io/flatbuffers/index.html#flatbuffers_overview) 文件 [metadata_schema.fbs](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs) 中进行定义。如图 1 所示，它以 `"TFLITE_METADATA"` 的名称存储在 [TFLite 模型模式](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema.fbs)的 [metadata](https://github.com/tensorflow/tensorflow/blob/bd73701871af75539dd2f6d7fdba5660a8298caf/tensorflow/lite/schema/schema.fbs#L1208) 字段中。某些模型可能随附关联文件，例如[分类标签文件](https://github.com/tensorflow/examples/blob/dd98bc2b595157c03ac9fa47ac8659bb20aa8bbd/lite/examples/image_classification/android/models/src/main/assets/labels.txt#L1)。这些文件将使用 ZipFile [“附加”模式](https://pymotw.com/2/zipfile/#appending-to-files)（`'a'` 模式）作为 ZIP 文件连接到原始模型文件的末尾。TFLite 解释器可以像之前一样使用新文件格式。请参阅[打包关联文件](#pack-the-associated-files)，了解更多信息。
 
-See the instruction below about how to populate, visualize, and read metadata.
+请参阅以下有关如何填充、可视化和读取元数据的说明。
 
 ## 设置元数据工具
 
@@ -26,19 +26,19 @@ After setup the Python programming environment, you will need to install additio
 pip install tflite-support
 ```
 
-TensorFlow Lite metadata tooling supports Python 3.
+TensorFlow Lite 元数据工具支持 Python 3。
 
-## Adding metadata using Flatbuffers Python API
+## 使用 Flatbuffers Python API 添加元数据
 
-Note: to create metadata for the popular ML tasks supported in [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/overview), use the high-level API in the [TensorFlow Lite Metadata Writer Library](metadata_writer_tutorial.ipynb).
+注：要为 [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/overview) 中支持的常用 ML 任务创建元数据，请使用 [TensorFlow Lite Metadata Writer Library](metadata_writer_tutorial.ipynb) 中的高级 API。
 
 模型元数据[模式](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs)中包含三个部分：
 
-1. **Model information** - Overall description of the model as well as items such as license terms. See [ModelMetadata](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L640).
+1. **模型信息** - 模型的总体说明以及许可条款等项目信息。请参阅 [ModelMetadata](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L640)。
 2. **输入信息** - 输入以及诸如归一化等所需预处理的描述。请参阅 [SubGraphMetadata.input_tensor_metadata](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L590)。
 3. **输出信息** - 输出以及诸如标签映射等所需后处理的描述，请参阅 [SubGraphMetadata.output_tensor_metadata](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L599)。
 
-Since TensorFlow Lite only supports single subgraph at this point, the [TensorFlow Lite code generator](../../inference_with_metadata/codegen#generate-code-with-tensorflow-lite-android-code-generator) and the [Android Studio ML Binding feature](../../inference_with_metadata/codegen#generate-code-with-android-studio-ml-model-binding) will use `ModelMetadata.name` and `ModelMetadata.description`, instead of `SubGraphMetadata.name` and `SubGraphMetadata.description`, when displaying metadata and generating code.
+由于 TensorFlow Lite 目前仅支持单一子图，因此在显示元数据和生成代码时，[TensorFlow Lite 代码生成器](../../inference_with_metadata/codegen#generate-code-with-tensorflow-lite-android-code-generator) 和 [Android Studio 机器学习绑定特征](../../inference_with_metadata/codegen#generate-code-with-android-studio-ml-model-binding)将使用 `ModelMetadata.name` 和 `ModelMetadata.description`，而非 `SubGraphMetadata.name` 和 `SubGraphMetadata.description`。
 
 ### 支持的输入/输出类型
 
@@ -54,7 +54,7 @@ TensorFlow Lite 模型可能随附不同的关联文件。例如，自然语言�
 
 The associated files can now be bundled with the model through the metadata Python library. The new TensorFlow Lite model becomes a zip file that contains both the model and the associated files. It can be unpacked with common zip tools. This new model format keeps using the same file extension, `.tflite`. It is compatible with existing TFLite framework and Interpreter. See [Pack metadata and associated files into the model](#pack-metadata-and-associated-files-into-the-model) for more details.
 
-The associated file information can be recorded in the metadata. Depending on the file type and where the file is attached to (i.e. `ModelMetadata`, `SubGraphMetadata`, and `TensorMetadata`), [the TensorFlow Lite Android code generator](../../inference_with_metadata/codegen) may apply corresponding pre/post processing automatically to the object. See [the &lt;Codegen usage&gt; section of each associate file type](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L77-L127) in the schema for more details.
+关联文件信息可以记录在元数据内。根据文件类型和文件附加到的位置（即 `ModelMetadata`、`SubGraphMetadata` 和 `TensorMetadata`），[TensorFlow Lite Android 代码生成器](../../inference_with_metadata/codegen)可能会将相应的预处理/后处理自动应用于对象。请参阅元数据模式[各种关联文件类型的 &lt;Codegen usage&gt; 部分](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L77-L127)，了解详细信息 。
 
 ### 归一化和量化参数
 
@@ -107,7 +107,7 @@ The associated file information can be recorded in the metadata. Depending on th
 :                         : [2]                     : 通过              : |  |
 :                         :                         : `MetadataExtractor` API  : |  |
 :                         :                         : [2]                      : |  |
-浮点和量化 | Yes, float and quant | 否，浮点模型
+浮点和量化 | 是，浮点和量化 | 否，浮点模型
 : 模型是否共享相同的   : 模型使用相同的   : 不需要量化。   : |  |
 : 值？                  : 归一化           :                          : |  |
 :                         : 参数              :                          : |  |
@@ -117,12 +117,11 @@ TFLite 代码 | \ | \
 : 是否会在数据处理过程中  :                         :                          : |  |
 : 自动生成参数？  :                         :                          : |  |
 
-[1] The [TensorFlow Lite Java API](https://github.com/tensorflow/tensorflow/blob/09ec15539eece57b257ce9074918282d88523d56/tensorflow/lite/java/src/main/java/org/tensorflow/lite/Tensor.java#L73) and the [TensorFlow Lite C++ API](https://github.com/tensorflow/tensorflow/blob/09ec15539eece57b257ce9074918282d88523d56/tensorflow/lite/c/common.h#L391).
- [2] The [metadata extractor library](#read-the-metadata-from-models)
+[1] [TensorFlow Lite Java API](https://github.com/tensorflow/tensorflow/blob/09ec15539eece57b257ce9074918282d88523d56/tensorflow/lite/java/src/main/java/org/tensorflow/lite/Tensor.java#L73) 和 [TensorFlow Lite C++ API](https://github.com/tensorflow/tensorflow/blob/09ec15539eece57b257ce9074918282d88523d56/tensorflow/lite/c/common.h#L391)。<br> [2] [Metadata Extractor 库](../guide/codegen.md#read-the-metadata-from-models)
 
 针对 uint8 模型处理图像数据时，有时可以跳过归一化和量化步骤。当像素值在 [0, 255] 区间内时可以跳过。但通常来说，如果适用，应始终根据归一化和量化参数处理数据。
 
-[TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/overview) can handle normalization for you if you set up `NormalizationOptions` in metadata. Quantization and dequantization processing is always encapsulated.
+如果您在元数据中设置了 <code>NormalizationOptions</code>，则 <a>TensorFlow Lite Task Library</a> 可以为您处理归一化。量化和反量化处理始终被封装在一起。
 
 ### 示例
 
@@ -234,7 +233,7 @@ label_file.type = _metadata_fb.AssociatedFileType.TENSOR_AXIS_LABELS
 output_meta.associatedFiles = [label_file]
 ```
 
-#### Create the metadata Flatbuffers
+#### 创建元数据 FlatBuffers
 
 以下代码可将模型信息与输入和输出信息组合在一起：
 
@@ -254,7 +253,7 @@ metadata_buf = b.Output()
 
 #### 将元数据和关联文件打包到模型中
 
-Once the metadata Flatbuffers is created, the metadata and the label file are written into the TFLite file via the `populate` method:
+在元数据 FlatBuffers 创建完成后，元数据和标签文件即可通过 `populate` 方法写入到 TFLite 文件中：
 
 ```python
 populator = _metadata.MetadataPopulator.with_model_file(model_file)
@@ -279,31 +278,31 @@ with open(export_json_file, "w") as f:
   f.write(json_file)
 ```
 
-Android Studio also supports displaying metadata through the [Android Studio ML Binding feature](https://developer.android.com/studio/preview/features#tensor-flow-lite-models).
+Android Studio 还支持通过 [Android Studio 机器学习绑定功能](https://developer.android.com/studio/preview/features#tensor-flow-lite-models)显示元数据。
 
 ## 元数据版本控制
 
-The [metadata schema](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs) is versioned both by the Semantic versioning number, which tracks the changes of the schema file, and by the Flatbuffers file identification, which indicates the true version compatibility.
+[元数据模式](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs)的版本控制可通过跟踪模式文件变更的语义化版本控制编号以及指示真实版本兼容性的 FlatBuffers 文件标识予以实现。
 
 ### 语义化版本控制编号
 
 元数据模式可以通过诸如 MAJOR.MINOR.PATCH 等[语义化版本控制编号](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L53)实现版本控制。它可以依据[此处](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L32-L44)所述规则跟踪模式变更。请参阅 `1.0.0` 版本之后添加的[字段历史记录](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L63)。
 
-### The Flatbuffers file identification
+### FlatBuffers 文件标识
 
 Semantic versioning guarantees the compatibility if following the rules, but it does not imply the true incompatibility. When bumping up the MAJOR number, it does not necessarily mean the backward compatibility is broken. Therefore, we use the [Flatbuffers file identification](https://google.github.io/flatbuffers/md__schemas.html), [file_identifier](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L61), to denote the true compatibility of the metadata schema. The file identifier is exactly 4 characters long. It is fixed to a certain metadata schema and not subject to change by users. If the backward compatibility of the metadata schema has to be broken for some reason, the file_identifier will bump up, for example, from “M001” to “M002”. File_identifier is expected to be changed much less frequently than the metadata_version.
 
 ### 所需元数据解析器最低版本
 
-The [minimum necessary metadata parser version](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L681) is the minimum version of metadata parser (the Flatbuffers generated code) that can read the metadata Flatbuffers in full. The version is effectively the largest version number among the versions of all the fields populated and the smallest compatible version indicated by the file identifier. The minimum necessary metadata parser version is automatically populated by the `MetadataPopulator` when the metadata is populated into a TFLite model. See the [metadata extractor](#read-the-metadata-from-models) for more information on how the minimum necessary metadata parser version is used.
+[所需元数据解析器最低版本](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L681)是可以完整读取元数据 FlatBuffers 的元数据解析器（FlatBuffers 生成的代码）的最低版本。该版本实际上是填充了所有字段的版本中编号最大的版本，同时也是文件标识符所指示的最小的兼容版本。当将元数据填充到 TFLite 模型中时，所需元数据解析器最低版本将由 `MetadataPopulator` 自动填充。有关如何使用所需元数据解析器最低版本的更多信息，请参阅[元数据提取器](#read-the-metadata-from-models)。
 
-## Read the metadata from models
+## 从模型中读取元数据
 
-The Metadata Extractor library is convenient tool to read the metadata and associated files from a models across different platforms (see the [Java version](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/metadata/java) and the [C++ version](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/metadata/cc)). You can build your own metadata extractor tool in other languages using the Flatbuffers library.
+Metadata Extractor 库是从不同平台的模型中读取元数据和关联文件的便捷工具（请参阅 [Java 版本](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/metadata/java)和 [C++ 版本](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/metadata/cc)）。您可以使用 FlatBuffers 库以其他语言构建自己的元数据提取工具。
 
-### Read the metadata in Java
+### 读取以 Java 编写的元数据
 
-To use the Metadata Extractor library in your Android app, we recommend using the [TensorFlow Lite Metadata AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-metadata). It contains the `MetadataExtractor` class, as well as the FlatBuffers Java bindings for the [metadata schema](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs) and the [model schema](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema.fbs).
+要在您的 Android 应用中使用 Metadata Extractor 库，我们建议使用[托管在 MavenCentral 上的 TensorFlow Lite Metadata AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-metadata)。它包含 `MetadataExtractor` 类，以及针对[元数据模式](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs)和[模型模式](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema.fbs)的 FlatBuffers Java 绑定。
 
 You can specify this in your `build.gradle` dependencies as follows:
 
@@ -313,15 +312,15 @@ dependencies {
 }
 ```
 
-To use nightly snapshots, make sure that you have added [Sonatype snapshot repository](https://www.tensorflow.org/lite/android/lite_build#use_nightly_snapshots).
+要使用 Nightly 快照，请确保您已添加 [Sonatype 快照存储库](https://www.tensorflow.org/lite/android/lite_build#use_nightly_snapshots)。
 
-You can initialize a `MetadataExtractor` object with a `ByteBuffer` that points to the model:
+您可以使用指向模型的 `ByteBuffer` 来初始化 `MetadataExtractor` 对象：
 
 ```java
 public MetadataExtractor(ByteBuffer buffer);
 ```
 
-The `ByteBuffer` must remain unchanged for the entire lifetime of the `MetadataExtractor` object. The initialization may fail if the Flatbuffers file identifier of the model metadata does not match that of the metadata parser. See [metadata versioning](#metadata-versioning) for more information.
+`ByteBuffer` 在 `MetadataExtractor` 对象的整个生命周期中必须保持不变。如果模型元数据的 FlatBuffers 文件标识符与元数据解析器的标识符不匹配，则初始化可能会失败。请参阅[元数据版本控制](#metadata-versioning)，了解更多信息。
 
 With matching file identifiers, the metadata extractor will successfully read metadata generated from all past and future schema due to the Flatbuffers' forwards and backward compatibility mechanism. However, fields from future schemas cannot be extracted by older metadata extractors. The [minimum necessary parser version](#the-minimum-necessary-metadata-parser-version) of the metadata indicates the minimum version of metadata parser that can read the metadata Flatbuffers in full. You can use the following method to verify if the minimum necessary parser version condition is met:
 
@@ -329,13 +328,13 @@ With matching file identifiers, the metadata extractor will successfully read me
 public final boolean isMinimumParserVersionSatisfied();
 ```
 
-Passing in a model without metadata is allowed. However, invoking methods that read from the metadata will cause runtime errors. You can check if a model has metadata by invoking the `hasMetadata` method:
+允许传入没有元数据的模型。但是，调用从元数据读取的方法将导致运行时错误。您可以通过调用 `hasMetadata` 方法来检查模型是否有元数据：
 
 ```java
 public boolean hasMetadata();
 ```
 
-`MetadataExtractor` provides convenient functions for you to get the input/output tensors' metadata. For example,
+`MetadataExtractor` 为您提供了获取输入/输出张量元数据的便捷功能。例如，
 
 ```java
 public int getInputTensorCount();
@@ -348,11 +347,11 @@ public QuantizationParams getoutputTensorQuantizationParams(int inputIndex);
 public int[] getoutputTensorShape(int inputIndex);
 ```
 
-Though the [TensorFlow Lite model schema](https://github.com/tensorflow/tensorflow/blob/aa7ff6aa28977826e7acae379e82da22482b2bf2/tensorflow/lite/schema/schema.fbs#L1075) supports multiple subgraphs, the TFLite Interpreter currently only supports a single subgraph. Therefore, `MetadataExtractor` omits subgraph index as an input argument in its methods.
+尽管 [TensorFlow Lite 模型模式](https://github.com/tensorflow/tensorflow/blob/aa7ff6aa28977826e7acae379e82da22482b2bf2/tensorflow/lite/schema/schema.fbs#L1075)支持多个子计算图，但 TFLite 解释器当前仅支持单个子计算图。因此，`MetadataExtractor` 在其方法中省略了子计算图索引作为输入参数。
 
-## Read the associated files from models
+## 从模型中读取关联文件
 
-The TensorFlow Lite model with metadata and associated files is essentially a zip file that can be unpacked with common zip tools to get the associated files. For example, you can unzip [mobilenet_v1_0.75_160_quantized](https://tfhub.dev/tensorflow/lite-model/mobilenet_v1_0.75_160_quantized/1/metadata/1) and extract the label file in the model as follows:
+包含元数据和关联文件的 TensorFlow Lite 模型本质上是 zip 文件，可以用常见的 zip 工具解包得到关联文件。例如，可以解压 [mobilenet_v1_0.75_160_quantized](https://tfhub.dev/tensorflow/lite-model/mobilenet_v1_0.75_160_quantized/1/metadata/1) 并提取模型中的标签文件，如下所示：
 
 ```sh
 $ unzip mobilenet_v1_0.75_160_quantized_1_metadata_1.tflite
@@ -360,15 +359,15 @@ Archive:  mobilenet_v1_0.75_160_quantized_1_metadata_1.tflite
  extracting: labels.txt
 ```
 
-You can also read associated files through the Metadata Extractor library.
+您还可以通过 Metadata Extractor 库读取关联文件。
 
-In Java, pass the file name into the `MetadataExtractor.getAssociatedFile` method:
+在 Java 中，可以将文件名传递到 `MetadataExtractor.getAssociatedFile` 方法中：
 
 ```java
 public InputStream getAssociatedFile(String fileName);
 ```
 
-Similarly, in C++, this can be done with the method, `ModelMetadataExtractor::GetAssociatedFile`:
+同样，在 C++ 中，可以通过 `ModelMetadataExtractor::GetAssociatedFile` 方法来实现：
 
 ```c++
 tflite::support::StatusOr<absl::string_view> GetAssociatedFile(
