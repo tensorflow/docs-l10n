@@ -2,7 +2,7 @@
 
 ## 概述
 
-为设备端机器学习 (ODML) 应用部署模型时，必须注意移动设备上的内存有限。模型二进制文件的大小与模型中使用的算子数量密切相关。通过选择性构建，TensorFlow Lite 让您可以缩减模型二进制文件的大小。选择性构建会跳过在模型集中不使用的算子，从而产生一个只包含让模型在移动设备上运行所必需的运行时和算子内核的紧凑库。
+为设备端机器学习 (ODML) 应用部署模型时，必须注意移动设备上的内存有限。模型二进制文件的大小与模型中使用的算子数量密切相关。TensorFlow Lite 使您可以通过选择性构建来减小模型二进制文件的大小。选择性构建会跳过在您的模型集中用不到的算子，从而生成只包含供模型在移动设备上运行所必需的运行时和算子内核的紧凑库。
 
 选择性构建适用于以下三个运算库。
 
@@ -67,7 +67,7 @@ This section assumes that you have downloaded TensorFlow source codes and [set u
 
 ### 为 Android 项目构建 AAR 文件
 
-通过按如下方式提供模型文件路径，您可以构建自定义 TensorFlow Lite AAR。
+随后，您可以按如下方式提供模型文件路径，构建自定义 TensorFlow Lite AAR。
 
 ```sh
 sh tensorflow/lite/tools/build_aar.sh \
@@ -75,11 +75,11 @@ sh tensorflow/lite/tools/build_aar.sh \
   --target_archs=x86,x86_64,arm64-v8a,armeabi-v7a
 ```
 
-上面的命令将为 TensorFlow Lite 的内置和自定义算子生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite.aar`；如果您的模型包含 Select TensorFlow 算子，您还可以选择生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite-select-tf-ops.aar`。请注意，这会构建具有多个不同架构的“胖”AAR 文件；如果您不需要所有架构，请使用适用于您的部署环境的子集。
+上面的命令将为 TensorFlow Lite 的内置算子和自定义算子生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite.aar`；如果您的模型包含 Select TensorFlow 算子，您还可以选择生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite-select-tf-ops.aar`。请注意，这会构建具有多个不同架构的“肥胖”AAR 文件；如果您不需要所有架构，请使用适用于您的部署环境的子集。
 
-### Build with custom ops
+### 使用自定义算子构建
 
-如果您已经使用自定义算子开发了 Tensorflow Lite 模型，则可以通过将以下标记添加到构建命令来构建这些模型：
+如果您已经使用自定义算子开发了 TensorFlow Lite 模型，则可以通过将以下标记添加到构建命令来构建这些模型：
 
 ```sh
 sh tensorflow/lite/tools/build_aar.sh \
@@ -91,11 +91,11 @@ sh tensorflow/lite/tools/build_aar.sh \
 
 `tflite_custom_ops_srcs` 标记包含您的自定义算子的源文件，`tflite_custom_ops_deps` 标记则包含构建这些源文件的依赖项。请注意，TensorFlow 仓库中必须存在这些依赖项。
 
-### Advanced Usages: Custom Bazel rules
+### 高级用法：自定义 Bazel 规则
 
-If your project is using Bazel and you would like to define custom TFLite dependencies for a given set of models, you can define following rule(s) in your project repository:
+如果您的项目使用 Bazel，并且您希望为给定的一组模型定义自定义 TFLite 依存项，则可以在项目存储库中定义以下规则：
 
-For the models with the builtin ops only:
+仅适用于具有内置算子的模型：
 
 ```bazel
 load(
@@ -133,7 +133,7 @@ tflite_custom_cc_library(
 )
 ```
 
-For the models with the [Select TF ops](../guide/ops_select.md):
+适用于具有[精选 TF 算子](../guide/ops_select.md)的模型：
 
 ```bazel
 load(
@@ -161,19 +161,19 @@ tflite_flex_cc_library(
 )
 ```
 
-### Advanced Usages: Build custom C/C++ shared libraries
+### 高级用法：构建自定义 C/C++ 共享库
 
-If you would like to build your own custom TFLite C/C++ shared objects towards the given models, you can follow the below steps:
+如果您想要针对给定的模型构建您自己的自定义 TFLite C/C++ 共享对象，可以执行以下步骤：
 
-Create a temporary BUILD file by running the following command at the root directory of the TensorFlow source code:
+通过在 TensorFlow 源代码的根目录中运行以下命令来创建临时 BUILD 文件：
 
 ```sh
 mkdir -p tmp && touch tmp/BUILD
 ```
 
-#### Building custom C shared objects
+#### 构建自定义 C 共享对象
 
-If you would like to build a custom TFLite C shared object, add the following to `tmp/BUILD` file:
+如果要构建自定义 TFLite C 共享对象，请将以下内容添加到 `tmp/BUILD` 文件中：
 
 ```bazel
 load(
@@ -220,23 +220,23 @@ tflite_cc_shared_object(
 )
 ```
 
-The newly added target can be built as follows:
+新添加的目标可以构建如下：
 
 ```sh
 bazel build -c opt --cxxopt=--std=c++17 \
   //tmp:tensorflowlite_c
 ```
 
-and for Android (replace `android_arm` with `android_arm64` for 64-bit):
+对于 Android（对于 64 位，将 `android_arm` 替换为 `android_arm64`）：
 
 ```sh
 bazel build -c opt --cxxopt=--std=c++17 --config=android_arm \
   //tmp:tensorflowlite_c
 ```
 
-#### Building custom C++ shared objects
+#### 构建自定义 C++ 共享对象
 
-If you would like to build a custom TFLite C++ shared object, add the following to `tmp/BUILD` file:
+如果要构建自定义 TFLite C++ 共享对象，请将以下内容添加到 `tmp/BUILD` 文件中：
 
 ```bazel
 load(
@@ -283,21 +283,21 @@ tflite_cc_shared_object(
 )
 ```
 
-The newly added target can be built as follows:
+新添加的目标可以构建如下：
 
 ```sh
 bazel build -c opt  --cxxopt=--std=c++17 \
   //tmp:tensorflowlite
 ```
 
-and for Android (replace `android_arm` with `android_arm64` for 64-bit):
+对于 Android（对于 64 位，将 `android_arm` 替换为 `android_arm64`）：
 
 ```sh
 bazel build -c opt --cxxopt=--std=c++17 --config=android_arm \
   //tmp:tensorflowlite
 ```
 
-For the models with the Select TF ops, you also need to build the following shared library as well:
+对于带有精选 TF 算子的模型，您还需要构建以下共享库：
 
 ```bazel
 load(
@@ -320,7 +320,7 @@ tflite_flex_shared_library(
 
 ```
 
-The newly added target can be built as follows:
+新添加的目标可以构建如下：
 
 ```sh
 bazel build -c opt --cxxopt='--std=c++17' \
@@ -329,7 +329,7 @@ bazel build -c opt --cxxopt='--std=c++17' \
       //tmp:tensorflowlite_flex
 ```
 
-and for Android (replace `android_arm` with `android_arm64` for 64-bit):
+对于 Android（对于 64 位，将 `android_arm` 替换为 `android_arm64`）：
 
 ```sh
 bazel build -c opt --cxxopt='--std=c++17' \
@@ -343,7 +343,7 @@ bazel build -c opt --cxxopt='--std=c++17' \
 
 This section assumes that you have installed [Docker](https://docs.docker.com/get-docker/) on your local machine and downloaded the TensorFlow Lite Dockerfile [here](https://www.tensorflow.org/lite/android/lite_build#set_up_build_environment_using_docker).
 
-下载上述 Dockerfile 之后，您可以通过运行以下命令构建 Docker 镜像：
+下载上述 Dockerfile 之后，您可以通过运行以下命令来构建 Docker 镜像：
 
 ```shell
 docker build . -t tflite-builder -f tflite-android.Dockerfile
@@ -377,6 +377,6 @@ sh build_aar_with_docker.sh \
 
 Add AAR files by directly [importing the AAR into your project](https://www.tensorflow.org/lite/android/lite_build#add_aar_directly_to_project), or by [publishing the custom AAR to your local Maven repository](https://www.tensorflow.org/lite/android/lite_build#install_aar_to_local_maven_repository). Note that you have to add the AAR files for `tensorflow-lite-select-tf-ops.aar` as well if you generate it.
 
-## Selective Build for iOS
+## 针对 iOS 的选择性构建
 
-Please see the [Building locally section](../guide/build_ios.md#building_locally) to set up the build environment and configure TensorFlow workspace and then follow the [guide](../guide/build_ios.md#selectively_build_tflite_frameworks) to use the selective build script for iOS.
+请参阅[本地构建部分](../guide/build_ios.md#building_locally)以设置构建环境并配置 TensorFlow 工作区，然后按照[指南](../guide/build_ios.md#selectively_build_tflite_frameworks)使用 iOS 的选择性构建脚本。
