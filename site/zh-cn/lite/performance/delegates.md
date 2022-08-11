@@ -75,9 +75,9 @@ TensorFlow Lite 有两种类型的工具来衡量委托对于给定模型的行�
 
 TensorFlow Lite 具有用于评估两个基于图像的任务的正确性的工具：
 
-- 具有 [Top-K 准确率](http://image-net.org/challenges/LSVRC/2012/)的 [ILSVRC 2012](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Precision_at_K)（图像分类）
+- [ILSVRC 2012](http://image-net.org/challenges/LSVRC/2012/)（图像分类），具有 [Top-K 准确率](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Precision_at_K)
 
-- 具有[全类平均精度 (mAP)](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Mean_average_precision) 的 [COCO 物体检测（含边界框）](https://cocodataset.org/#detection-2020)
+- 具有[全类平均精度 (mAP)](https://cocodataset.org/#detection-2020) 的 [COCO 物体检测（含边界框）](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Mean_average_precision)
 
 这些工具（Android，64 位 ARM 架构）的预构建二进制文件以及文档可在以下位置找到：
 
