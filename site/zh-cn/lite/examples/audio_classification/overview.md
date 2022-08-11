@@ -10,17 +10,17 @@
 
 注：(1) 要集成现有模型，请尝试 [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/audio_classifier)。(2) 要自定义模型，请尝试 [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/audio_classification)。
 
-## Get started
+## 开始
 
-If you are new to TensorFlow Lite and are working with Android, we recommend exploring the following example applications that can help you get started.
+如果您是 TensorFlow Lite 新用户，并且使用的是 Android 平台，我们建议您研究以下可以帮助您入门的示例应用。
 
 您可以利用 [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/audio_classifier) 中开箱即用的 API，只需几行代码即可集成音频分类模型。您也可以使用 [TensorFlow Lite Support Library](../../inference_with_metadata/task_library/audio_classifier) 构建自己的自定义推断流水线。
 
 下面的 Android 示例使用[TFLite Task Library](https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android) 演示了实现：
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android">View Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android">查看 Android 示例</a>
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/ios">View iOS example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/ios">查看 iOS 示例</a>
 
 如果您使用的平台不是 Android/iOS，或者您已经熟悉 [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite)，请下载入门模型和支持文件（如果适用）。
 
@@ -30,7 +30,7 @@ If you are new to TensorFlow Lite and are working with Android, we recommend exp
 
 YAMNet 是一个音频事件分类器，它将音频波形作为输入，并从 [AudioSet](https://g.co/audioset) 本体中对 521 个音频事件中的每个事件进行独立预测。该模型使用 MobileNet v1 架构，并使用 AudioSet 语料库进行训练。该模型最初在 TensorFlow Model Garden 中发布，其中有模型源代码、原始模型检查点和详细文档。
 
-### How it works
+### 工作原理
 
 转换为 TFLite 的 YAMNet 模型有两个版本：
 
@@ -54,7 +54,7 @@ YAMNet 可用作：
 - 高级特征提取器：YAMNet 的 1024 维嵌入向量输出可以用作另一个模型的输入特征，然后可以用少量数据对该模型进行训练，用于特定的任务。这样可以快速创建专门的音频分类器，而不需要大量带标签数据，也不需要训练大型端到端模型。
 - 热启动：YAMNet 模型参数可以用于初始化较大模型的一部分，提高微调和模型探索的速度。
 
-### Limitations
+### 函数式模型示例：
 
 - YAMNet 的分类器输出尚未跨类进行校准，因此您不能直接将输出视为概率。对于任何给定的任务，您很可能需要使用特定于任务的数据执行校准，以便您为每个类分配适当的分数阈值和比例。
 - YAMNet 已经过数百万个 YouTube 视频的训练，尽管这些视频非常多样化，但对于任何给定的任务，典型 YouTube 视频和预期的音频输入之间仍然可能存在领域不匹配。您应该进行一些微调和校准，以使 YAMNet 在您构建的任何系统中变得可用。
