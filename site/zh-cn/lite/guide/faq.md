@@ -16,7 +16,7 @@
 
 由于 TensorFlow Lite 运算的数量少于 TensorFlow，因此某些模型可能无法转换。[此处](../models/convert/index#conversion-errors)列出了一些常见错误。
 
-For conversion issues not related to missing operations or control flow ops, search our [GitHub issues](https://github.com/tensorflow/tensorflow/issues?q=label%3Acomp%3Alite+) or file a [new one](https://github.com/tensorflow/tensorflow/issues).
+对于与缺少运算或控制流运算无关的转换问题，请搜索我们的 [GitHub 议题](https://github.com/tensorflow/tensorflow/issues?q=label%3Acomp%3Alite+)或提交[新议题](https://github.com/tensorflow/tensorflow/issues)。
 
 #### 如何测试 TensorFlow Lite 模型与原始 TensorFlow 模型的行为相同？
 
@@ -67,7 +67,7 @@ bazel run //tensorflow/lite/tools:visualize model.tflite visualized_model.html
 
 #### 如何针对我的机器学习任务优化 TensorFlow Lite 性能？
 
-The high-level process to optimize TensorFlow Lite performance looks something like this:
+优化 TensorFlow Lite 性能的高级过程如下所示：
 
 - *确保您为任务选用了合适的模型*。对于图像分类，请查看 [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&module-type=image-classification)。
 - *调整线程数*。许多 TensorFlow Lite 算子都支持多线程内核。您可以在 [C++ API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L345) 中使用 `SetNumThreads()` 执行调整。但是，增加线程数会导致性能发生变化，具体取决于环境。
