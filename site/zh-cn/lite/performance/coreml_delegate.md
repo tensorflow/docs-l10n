@@ -51,7 +51,7 @@ target 'YourProjectName'
     } else {
       interpreter = try Interpreter(modelPath: modelPath)
     }
-  </pre>
+      </pre>
     </section>
     <section>
       <h3>Objective-C</h3>
@@ -81,10 +81,10 @@ target 'YourProjectName'
     if (error != nil) { /* Error handling... */ }
 
     // Run inference ...
-  </pre>
+      </pre>
     </section>
     <section>
-      <h3>C (Until 2.3.0)</h3>
+      <h3>C（支持到 2.3.0 版）</h3>
       <p></p>
 <pre class="prettyprint lang-c">    #include "tensorflow/lite/delegates/coreml/coreml_delegate.h"
 
@@ -144,7 +144,7 @@ target 'YourProjectName'
                                           initWithOptions:coreMLOptions];
 
     // Initialize interpreter with delegate
-  </pre>
+      </pre>
     </section>
     <section>
       <h3>C</h3>
@@ -174,7 +174,7 @@ target 'YourProjectName'
 
     let interpreter = try Interpreter(modelPath: modelPath,
                                       delegates: [delegate!])
-  </pre>
+      </pre>
     </section>
     <section>
       <h3>Objective-C</h3>
