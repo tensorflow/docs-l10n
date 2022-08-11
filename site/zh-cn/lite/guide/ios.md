@@ -6,7 +6,7 @@
 
 有关源代码的说明，您还应阅读 [TensorFlow Lite iOS 图像分类](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md)。
 
-此示例应用使用[图像分类](https://www.tensorflow.org/lite/models/image_classification/overview)持续对从设备的后置摄像头看到的内容进行分类，并显示最可能的分类。它允许用户在浮点或[量化](https://www.tensorflow.org/lite/performance/post_training_quantization)模型之间进行选择，并选择执行推断的线程数。
+此示例应用使用[图像分类](https://www.tensorflow.org/lite/examples/image_classification/overview)持续对从设备的后置摄像头看到的内容进行分类，并显示最可能的分类。它允许用户在浮点或[量化](https://www.tensorflow.org/lite/performance/post_training_quantization)模型之间进行选择，并选择执行推断的线程数。
 
 注：在各种用例中演示 TensorFlow Lite 的其他 iOS 应用可在[示例](https://www.tensorflow.org/lite/examples)中获得。
 
