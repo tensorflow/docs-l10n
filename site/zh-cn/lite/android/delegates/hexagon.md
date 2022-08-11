@@ -1,6 +1,6 @@
 # TensorFlow Lite Hexagon 委托
 
-This document explains how to use the TensorFlow Lite Hexagon Delegate in your application using the Java and/or C API. The delegate leverages the Qualcomm Hexagon library to execute quantized kernels on the DSP. Note that the delegate is intended to *complement* NNAPI functionality, particularly for devices where NNAPI DSP acceleration is unavailable (e.g., on older devices, or devices that don’t yet have a DSP NNAPI driver).
+本文档介绍如何使用 Java 和/或 C API 在您的应用中利用 TensorFlow Lite Hexagon 委托。该委托利用 Qualcomm Hexagon 库在 DSP 上执行量化内核。请注意，该委托旨在*补充* NNAPI 功能，特别适用于 NNAPI DSP 加速不可用的设备（例如，在旧设备上，或者在没有 DSP NNAPI 驱动程序的设备上）。
 
 注：此委托目前处于实验 (Beta) 阶段。
 
