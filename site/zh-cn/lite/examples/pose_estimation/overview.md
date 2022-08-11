@@ -1,29 +1,41 @@
-# 姿势预测
+# 姿态预测
 
-<img src="../images/pose.png" class="attempt-right" />
+
+<img src="../images/pose.png" class="attempt-right">
+
+*PoseNet* 能够通过预测图像或视频中人体的关键位置进行姿态的预测。
 
 ## 开始使用
 
-_PoseNet_ 能够通过预测图像或视频中人体的关键位置进行姿势的预测。
+If you are new to TensorFlow Lite and are working with Android or iOS, explore the following example applications that can help you get started.
 
-<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite">下载此模块</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android 示例</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS 示例</a>
 
-Android 和 iOS 设备上的一对一课程即将面世. 与此同时，如果您想要在 web 浏览器中体验此模块，可以访问
-<a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet">TensorFlow.js
-GitHub 代码仓库</a>.
+如果您熟悉 [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite)，请下载入门 MoveNet 姿态预测模型和支持文件。
+
+<a class="button button-primary" href="https://tfhub.dev/s?q=movenet">下载入门模型</a>
+
+如果你想在 Web 浏览器上尝试姿态预测，请查看 <a href="https://storage.googleapis.com/tfjs-models/demos/pose-detection/index.html?model=movenet">TensorFlow JS Demo</a>。
 
 ## 工作原理
 
-姿势检测通过使用计算机图形技术来对图片和视频中的人进行检测和判断，如图片中的人露出了肘臂。
+### 使用案例
 
 为了达到清晰的目的，该算法只是对图像中的人简单的预测身体关键位置所在，而不会去辨别此人是谁。
 
-关键点检测使用“编号 部位”的格式进行索引，并对部位的探测结果伴随一个信任值。信任值取值范围在 0.0 至 1.0，1.0 为最高信任值。
+姿态预测模型会将处理后的相机图像作为输入，并输出有关关键点的信息。检测到的关键点由部位 ID 索引，置信度分数介于 0.0 和 1.0 之间。置信度分数表示该位置存在关键点的概率。
+
+我们提供了两个 TensorFlow Lite 姿态预测模型的参考实现：
+
+- MoveNet：最先进的姿态预测模型，有两个版本可供选择：Lightning 和 Thunder。在以下部分可以看到这两者之间的对比。
+- PoseNet：2017 年发布的上一代姿态预测模型。
+
+姿态预测模型检测到的各种身体关节如下表所示：
 
 <table style="width: 30%;">
   <thead>
     <tr>
-      <th>编号</th>
+      <th>ID</th>
       <th>部位</th>
     </tr>
   </thead>
@@ -74,11 +86,11 @@ GitHub 代码仓库</a>.
     </tr>
     <tr>
       <td>11</td>
-      <td>左髋</td>
+      <td>左胯</td>
     </tr>
     <tr>
       <td>12</td>
-      <td>右髋</td>
+      <td>右胯</td>
     </tr>
     <tr>
       <td>13</td>
@@ -99,37 +111,100 @@ GitHub 代码仓库</a>.
   </tbody>
 </table>
 
-## 示例输出
+输出示例如下所示：
 
-<img alt="Animation showing pose estimation" src="https://tensorflow.google.cn/images/lite/models/pose_estimation.gif"/>
+<img alt="Output stride and heatmap resolution" src="https://storage.googleapis.com/download.tensorflow.org/example_images/movenet_demo.gif" class="">
 
-## 模块性能
+## 性能基准
 
-性能很大程度取决于您的设备性能以及输出的幅度(热点图和偏移向量)。PoseNet 对于不同尺寸的图片是不变式，也就是说在原始图像和缩小后图像中预测姿势位置是一样的。这也意味着 PostNet 能精确配置性能消耗。
+MoveNet 有两种版本：
 
-输出幅度决定了缩小后的和输入的图片尺寸的相关程度。输出幅度同样影响到了图层的尺寸和输出的模型。更高的输出幅度决定了更小的网络和输出的图层分辨率，和更小的可信度。
+- MoveNet.Lightning 比 Thunder 版更小、更快，但准确率较低。它可以在当下的智能手机上实时运行。
+- MoveNet.Thunder 是更准确的版本，但比 Lightning 版更大、更慢。对于需要更高准确率的用例，它非常有用。
 
-在此示例中，输出幅度可以为 8、16 或 32。换句话说，当输出幅度为 32，则会拥有最高性能和最差的可信度；当输出幅度为 8，则会有用最高的可信度和最低的性能。我们给出的建议是 16。
+MoveNet 在各种数据集上的表现都优于 PoseNet，尤其是在包含健身动作的图像上。因此，我们建议使用 MoveNet 而不是 PoseNet。
 
-下图展示了输出幅度的程度决定缩放后的输出和输入的图像的相关度。更高的输出幅度速度更快，但也会导致更低的可信度。
+性能基准数值使用[此处介绍的](../../performance/measurement)工具生成。准确率 (MAP) 数值在 [COCO 数据集](https://cocodataset.org/#home)的子集上测得，在该数据集中，我们筛选并裁剪了每个图像，使其仅包含一个人。
 
-<img alt="Output stride and heatmap resolution" src="../images/output_stride.png" >
+<table>
+<thead>
+  <tr>
+    <th rowspan="2">模型</th>
+    <th rowspan="2">大小 (MB)</th>
+    <th rowspan="2">mAP</th>
+    <th colspan="3">延迟 (ms)</th>
+  </tr>
+  <tr>
+    <td>Pixel 5 - CPU 4 线程</td>
+    <td>Pixel 5 - GPU</td>
+    <td>Raspberry Pi 4 - CPU 4 线程</td>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/float16/4">MoveNet.Thunder（FP16 量化）</a>
+</td>
+    <td>12.6MB</td>
+    <td>72.0</td>
+    <td>155ms</td>
+    <td>45ms</td>
+    <td>594ms</td>
+  </tr>
+  <tr>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/int8/4">MoveNet.Thunder（INT8 量化）</a>
+</td>
+    <td>7.1MB</td>
+    <td>68.9</td>
+    <td>100ms</td>
+    <td>52ms</td>
+    <td>251ms</td>
+  </tr>
+  <tr>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/float16/4">MoveNet.Lightning（FP16 量化）</a>
+</td>
+    <td>4.8MB</td>
+    <td>63.0</td>
+    <td>60ms</td>
+    <td>25ms</td>
+    <td>186ms</td>
+  </tr>
+  <tr>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/int8/4">MoveNet.Lightning（INT8 量化）</a>
+</td>
+    <td>2.9MB</td>
+    <td>57.4</td>
+    <td>52ms</td>
+    <td>28ms</td>
+    <td>95ms</td>
+  </tr>
+  <tr>
+    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">PoseNet（MobileNetV1 主干，FP32）</a>
+</td>
+    <td>13.3MB</td>
+    <td>45.6</td>
+    <td>80ms</td>
+    <td>40ms</td>
+    <td>338ms</td>
+  </tr>
+</tbody>
+</table>
 
-## 关于此模块的更多内容
+## 补充阅读和资源
+
+- 请查看这篇[博文](https://blog.tensorflow.org/2021/08/pose-estimation-and-classification-on-edge-devices-with-MoveNet-and-TensorFlow-Lite.html)，了解更多使用 MoveNet 和 TensorFlow Lite 进行姿态预测的信息。
+- 请查看这篇[博文](https://blog.tensorflow.org/2021/05/next-generation-pose-detection-with-movenet-and-tensorflowjs.html)，了解更多关于 Web 姿态预测的信息。
+- 请查看此[教程](https://www.tensorflow.org/hub/tutorials/movenet)，了解如何使用 TensorFlow Hub 的模型在 Python 上运行 MoveNet。
+- Coral/EdgeTPU 可以加快姿态预测在边缘设备上的运行速度。有关更多详细信息，请参阅 [EdgeTPU 优化模型](https://coral.ai/models/pose-estimation/)。
+- 请在[此处](https://arxiv.org/abs/1803.08225)阅读 PoseNet 论文。
+
+另外，请查看以下姿态预测的用例。
 
 <ul>
-  <li><a href="https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5">博客: 使用 TensorFlow.js 在浏览器端上实现实时人体姿势检测</a></li>
-  <li><a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet">TF.js 代码库: 浏览器中的姿势检测: PoseNet Model</a></li>
-</ul>
-
-### 使用案例
-
-<ul>
-  <li><a href="https://vimeo.com/128375543">‘毛绒球镜子’</a></li>
-  <li><a href="https://youtu.be/I5__9hq-yas">神奇艺术之将你变为鸟</a></li>
-  <li><a href="https://vimeo.com/34824490">木偶队列</a></li>
-  <li><a href="https://vimeo.com/2892576">弥撒的声音 (性能)</a></li>
-  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">现实添加</a></li>
-  <li><a href="https://www.instagram.com/p/Bg1EgOihgyh/">互动动画片</a></li>
-  <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">步态分析</a></li>
+  <li><a href="https://vimeo.com/128375543">‘PomPom Mirror’</a></li>
+  <li><a href="https://youtu.be/I5__9hq-yas">Amazing Art Installation Turns You Into A Bird | Chris Milk "The Treachery of Sanctuary"</a></li>
+  <li><a href="https://vimeo.com/34824490">Puppet Parade - Interactive Kinect Puppets</a></li>
+  <li><a href="https://vimeo.com/2892576">Messa di Voce (Performance), Excerpts</a></li>
+  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">增强现实</a></li>
+  <li><a href="https://www.instagram.com/p/Bg1EgOihgyh/">交互动画</a></li>
+  <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">Gait 分析</a></li>
 </ul>
