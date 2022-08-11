@@ -1,6 +1,6 @@
 # 训练后量化
 
-训练后量化是一种转换技术，它可以在改善 CPU 和硬件加速器延迟的同时缩减模型大小，且几乎不会降低模型准确率。使用 [TensorFlow Lite 转换器](../convert/)将已训练的浮点 TensorFlow 模型转换为 TensorFlow Lite 格式后，可以对该模型进行量化。
+训练后量化是一种转换技术，它可以在改善 CPU 和硬件加速器延迟的同时缩减模型大小，且几乎不会降低模型准确率。使用 [TensorFlow Lite 转换器](../models/convert/)将已训练的浮点 TensorFlow 模型转换为 TensorFlow Lite 格式后，可以对该模型进行量化。
 
 注：此页面上的过程需要 TensorFlow 1.15 或更高版本。
 
@@ -41,10 +41,46 @@ tflite_quant_model = converter.convert()
 
 对于全整数量化，需要校准或估算模型中所有浮点张量的范围，即 (min, max)。与权重和偏差等常量张量不同，模型输入、激活（中间层的输出）和模型输出等变量张量不能校准，除非我们运行几个推断周期。因此，转换器需要一个有代表性的数据集来校准它们。这个数据集可以是训练数据或验证数据的一个小子集（大约 100-500 个样本）。请参阅下面的 `representative_dataset()` 函数。
 
+从 TensorFlow 2.7 版本开始，您可以通过[签名](../guide/signatures.ipynb)指定代表性数据集，示例如下：
+
+<pre>def representative_dataset():
+  for data in dataset:
+    yield {
+      "image": data.image,
+      "bias": data.bias,
+    }
+</pre>
+
+如果给定的 TensorFlow 模型中有多个签名，则可以通过指定签名密钥来指定多个数据集：
+
+<pre>def representative_dataset():
+  # Feed data set for the "encode" signature.
+  for data in encode_signature_dataset:
+    yield (
+      "encode", {
+        "image": data.image,
+        "bias": data.bias,
+      }
+    )
+
+  # Feed data set for the "decode" signature.
+  for data in decode_signature_dataset:
+    yield (
+      "decode", {
+        "image": data.image,
+        "hint": data.hint,
+      },
+    )
+</pre>
+
+您可以通过提供输入张量列表来生成代表性数据集：
+
 <pre>def representative_dataset():
   for data in tf.data.Dataset.from_tensor_slices((images)).batch(1).take(100):
     yield [tf.dtypes.cast(data, tf.float32)]
 </pre>
+
+从 TensorFlow 2.7 版本开始，我们推荐使用基于签名的方法，而不是基于输入张量列表的方法，因为输入张量排序可以很容易地翻转。
 
 出于测试目的，您可以使用如下所示的虚拟数据集：
 
@@ -85,7 +121,7 @@ converter.representative_dataset = representative_dataset
 tflite_quant_model = converter.convert()
 </pre>
 
-注：如果遇到当前无法量化的运算，转换器会引发错误。
+Note: The converter will throw an error if it encounters an operation it cannot currently quantize.
 
 ### float16 量化
 
@@ -147,7 +183,7 @@ tflite_quant_model = converter.convert()
 
 ### 模型准确率
 
-由于权重是在训练后量化的，因此可能会造成准确率损失，对于较小的网络更是如此。[TensorFlow Lite 模型存储库](../models/)为特定网络提供了预训练的完全量化模型。请务必检查量化模型的准确率，以验证准确率的任何下降都在可接受的范围内。有一些工具可以评估 [TensorFlow Lite 模型准确率](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}。
+由于权重是在训练后量化的，因此可能会造成准确率损失，对于较小的网络尤其如此。[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&q=quantized){:.external} 为特定网络提供了预训练的完全量化模型。请务必检查量化模型的准确率，以验证准确率的任何下降都在可接受的范围内。有一些工具可以评估 [TensorFlow Lite 模型准确率](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}。
 
 另外，如果准确率下降过多，请考虑使用[量化感知训练](https://www.tensorflow.org/model_optimization/guide/quantization/training)。但是，这样做需要在模型训练期间进行修改以添加伪量化节点，而此页面上的训练后量化技术使用的是现有的预训练模型。
 
@@ -161,6 +197,6 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 - 由 int8 补码值表示的逐轴（即逐通道）或逐张量权重，范围为 [-127, 127]，零点等于 0。
 
-- 由 int8 补码值表示的逐张量激活/输入，范围为 [-128, 127]，零点范围为 [-128, 127]。
+- 由 int8 补码值表示的按张量激活/输入，范围为 [-128, 127]，零点范围为 [-128, 127]。
 
-有关量化方案的详细信息，请参阅我们的[量化规范](./quantization_spec.md)。对于想要插入 TensorFlow Lite 委托接口的硬件供应商，我们鼓励您实现此规范中描述的量化方案。
+有关量化方案的详细信息，请参阅我们的[量化规范](./quantization_spec)。对于想要插入 TensorFlow Lite 委托接口的硬件供应商，我们鼓励您实现此规范中描述的量化方案。
