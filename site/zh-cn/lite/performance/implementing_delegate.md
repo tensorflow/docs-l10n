@@ -1,6 +1,6 @@
 # 实现自定义委托
 
-[TOC]
+[目录]
 
 ## 什么是 TensorFlow Lite 委托？
 
@@ -430,7 +430,7 @@ cc_binary(
 
 值得注意的是，*外部委托*是 TensorFlow Lite Python 绑定中的*委托*的对应 C++ 实现，如[处](https://github.com/tensorflow/tensorflow/blob/7145fc0e49be01ef6943f4df386ce38567e37797/tensorflow/lite/python/interpreter.py#L42)所示。因此，这里创建的动态外部委托适配器库可以直接与 TensorFlow Lite Python API 一起使用。
 
-## Resources
+## 资源
 
 ### 下载 Nightly 预构建的 TFLite 工具二进制文件的链接
 
