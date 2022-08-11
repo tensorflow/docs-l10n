@@ -1,4 +1,4 @@
-# Select TensorFlow operators
+# 精选 TensorFlow 算子
 
 Since the TensorFlow Lite builtin operator library only supports a limited number of TensorFlow operators, not every model is convertible. For details, refer to [operator compatibility](ops_compatibility.md).
 
@@ -54,7 +54,7 @@ android {
 }
 ```
 
-#### Building the Android AAR
+#### 构建 Android AAR
 
 For reducing the binary size or other advanced cases, you can also build the library manually. Assuming a [working TensorFlow Lite build environment](../android/quickstart.md), build the Android AAR with select TensorFlow ops as follows:
 
@@ -66,7 +66,7 @@ sh tensorflow/lite/tools/build_aar.sh \
 
 这将为 TensorFlow Lite 内置算子和自定义算子生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite.aar`；并为 TensorFlow 算子生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite-select-tf-ops.aar`。如果没有正在运行的构建环境，您也可以[使用 Docker 构建上述文件](../guide/reduce_binary_size.md#selectively_build_tensorflow_lite_with_docker)。
 
-TensorFlow Lite 的相机示例应用可以用来进行测试。一个新的支持 TensorFlow select 运算符的 TensorFlow Lite XCode 项目已经添加在 `tensorflow/lite/examples/ios/camera/tflite_camera_example_with_select_tf_ops.xcodeproj` 中。
+在 Docker 中，您可以将 AAR 文件直接导入项目，或者将自定义 AAR 文件发布到您的本地 Maven 仓库：
 
 ```sh
 mvn install:install-file \
@@ -101,7 +101,7 @@ dependencies {
 
 ### iOS
 
-#### Using CocoaPods
+#### 使用 CocoaPods
 
 TensorFlow Lite provides nightly prebuilt select TF ops CocoaPods for `arm64`, which you can depend on alongside the `TensorFlowLiteSwift` or `TensorFlowLiteObjC` CocoaPods.
 
@@ -121,12 +121,12 @@ TensorFlow Lite provides nightly prebuilt select TF ops CocoaPods for `arm64`, w
 
 然后，您应该能够在您的 iOS 应用中运行任何使用 `SELECT_TF_OPS` 转换的模型。例如，您可以修改[图像分类 iOS 应用](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios)来测试精选 TF 算子功能。
 
-- `TFLITE_BUILTINS` - 使用 TensorFlow Lite 内置运算符转换模型。
-- `SELECT_TF_OPS` - 使用 TensorFlow 运算符转换模型。已经支持的 TensorFlow 运算符的完整列表可以在白名单 `lite/delegates/flex/whitelisted_flex_ops.cc` 中查看。
+- 将模型文件替换为已启用 `SELECT_TF_OPS` 的模型文件。
+- 按照说明将 `TensorFlowLiteSelectTfOps` 依赖项添加到 `Podfile` 中。
 - 按照上述方法添加附加的链接器标志。
-- Run the example app and see if the model works correctly.
+- 运行示例应用，然后查看模型是否正常工作。
 
-#### Using Bazel + Xcode
+#### 使用 Bazel + Xcode
 
 可以使用 Bazel 构建带有适用于 iOS 的精选 TensorFlow 算子的 TensorFlow Lite。首先，按照 [iOS 构建说明](build_ios.md)正确配置您的 Bazel 工作区和 `.bazelrc` 文件。
 
@@ -137,7 +137,7 @@ bazel build -c opt --config=ios --ios_multi_cpus=arm64,x86_64 \
   //tensorflow/lite/ios:TensorFlowLiteSelectTfOps_framework
 ```
 
-This will generate the framework under `bazel-bin/tensorflow/lite/ios/` directory. You can add this new framework to your Xcode project by following similar steps described under the [Xcode project settings](./build_ios.md#modify_xcode_project_settings_directly) section in the iOS build guide.
+这将在 `bazel-bin/tensorflow/lite/ios/` 目录下生成框架。您可以按照 iOS 构建指南的 [Xcode 项目设置](./build_ios.md#modify_xcode_project_settings_directly)部分中所述的类似步骤，将此新框架添加到您的 Xcode 项目中。
 
 将框架添加到您的应用项目后，应在您的应用项目中指定一个附加的链接器标志，以强制加载精选 TF 算子框架。在您的 Xcode 项目中，转到 `Build Settings` -&gt; `Other Linker Flags`，然后添加：
 
@@ -147,25 +147,25 @@ This will generate the framework under `bazel-bin/tensorflow/lite/ios/` director
 
 ### C/C++
 
-If you're using Bazel or [CMake](https://www.tensorflow.org/lite/guide/build_cmake) to build TensorFlow Lite interpreter, you can enable Flex delegate by linking a TensorFlow Lite Flex delegate shared library. You can build it with Bazel as the following command.
+如果您使用 Bazel 或 [CMake](https://www.tensorflow.org/lite/guide/build_cmake) 构建 TensorFlow Lite 解释器，则可以通过链接 TensorFlow Lite Flex 委托共享库来启用 Flex 委托。您可以使用 Bazel 构建它，命令如下。
 
 ```
 bazel build -c opt --config=monolithic tensorflow/lite/delegates/flex:tensorflowlite_flex
 ```
 
-This command generates the following shared library in `bazel-bin/tensorflow/lite/delegates/flex`.
+此命令会在 `bazel-bin/tensorflow/lite/delegates/flex` 中生成以下共享库。
 
-Platform | Library name
+Platform | 库名称
 --- | ---
 Linux | libtensorflowlite_flex.so
 macOS | libtensorflowlite_flex.dylib
 Windows | tensorflowlite_flex.dll
 
-Note that the necessary `TfLiteDelegate` will be installed automatically when creating the interpreter at runtime as long as the shared library is linked. It is not necessary to explicitly install the delegate instance as is typically required with other delegate types.
+请注意，只要链接了共享库，在运行时创建解释器时，就会自动安装必要的 `TfLiteDelegate`。不需要像其他委托类型通常要求的那样显式安装委托实例。
 
-**Note:** This feature is available since version 2.7.
+**注**：此功能从 2.7 版本开始提供。
 
-### Python pip Package
+### Python
 
 包含精选 TensorFlow 算子的 TensorFlow Lite 将自动与 [TensorFlow pip 软件包](https://www.tensorflow.org/install/pip)一起安装。此外，您也可以选择仅安装 [TensorFlow Lite Interpreter pip 软件包](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter)。
 
@@ -186,7 +186,7 @@ Note that the necessary `TfLiteDelegate` will be installed automatically when cr
 
 ### 二进制文件大小
 
-The following table describes the binary size of TensorFlow Lite for each build. These targets were built for Android using `--config=android_arm -c opt`.
+下表给出了每个构建的 TensorFlow Lite 的二进制文件大小。这些目标是使用 `--config=android_arm -c opt` 为 Android 构建的。
 
 构建 | C++ 二进制文件大小 | Android APK 大小
 --- | --- | ---
@@ -196,15 +196,15 @@ The following table describes the binary size of TensorFlow Lite for each build.
 
 (1) 这些库是为包含 8 个 TFLite 内置算子和 3 个 TensorFlow 算子的 [i3d-kinetics-400 模型](https://tfhub.dev/deepmind/i3d-kinetics-400/1)选择性构建的。有关详情，请参阅[缩减 TensorFlow Lite 二进制文件大小](../guide/reduce_binary_size.md)部分。
 
-## 已知的局限性
+## 已知限制
 
 - 不支持的类型：某些 TensorFlow 算子可能不支持 TensorFlow 中通常可用的全套输入​​/输出类型。
 
-## Updates
+## 更新
 
 - 版本 2.6
     - 改进了对基于 GraphDef 特性的算子和 HashTable 资源初始化的支持。
 - 版本 2.5
-    - You can apply an optimization known as [post training quantization](../performance/post_training_quantization.md)
-- Version 2.4
+    - 您可以应用称为[后训练量化](../performance/post_training_quantization.md)的优化
+- 版本 2.4
     - 改进了与硬件加速委托的兼容性
