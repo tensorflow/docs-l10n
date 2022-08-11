@@ -1,8 +1,8 @@
-# Quickstart for Linux-based devices with Python
+# 使用 Python 快速入门基于 Linux 的设备
 
 对于基于 Linux 的嵌入式设备（例如 [Raspberry Pi](https://www.raspberrypi.org/){:.external} 和[使用 Edge TPU 的 Coral 设备](https://coral.withgoogle.com/){:.external}），非常适合将 TensorFlow Lite 与 Python 结合使用。
 
-This page shows how you can start running TensorFlow Lite models with Python in just a few minutes. All you need is a TensorFlow model [converted to TensorFlow Lite](../models/convert/). (If you don't have a model converted yet, you can experiment using the model provided with the example linked below.)
+本页介绍如何在几分钟内学会开始使用 Python 运行 TensorFlow Lite 模型。您只需要一个[已转换为 TensorFlow Lite](../models/convert/) 的 TensorFlow 模型。（如果还没有转换的模型，您可以使用随下面链接的示例提供的模型进行实验。）
 
 ## 关于 TensorFlow Lite 运行时软件包
 
@@ -10,7 +10,7 @@ This page shows how you can start running TensorFlow Lite models with Python in 
 
 `tflite_runtime` 软件包是整个 `tensorflow` 软件包的一小部分，并且包括使用 TensorFlow Lite 运行推断所需的最少代码（主要是 [`Interpreter`](https://www.tensorflow.org/api_docs/python/tf/lite/Interpreter) Python 类）。当您只想执行 `.tflite` 模型并避免因使用大型 TensorFlow 库而浪费磁盘空间时，这种小型软件包是理想选择。
 
-Note: If you need access to other Python APIs, such as the [TensorFlow Lite Converter](../models/convert/), you must install the [full TensorFlow package](https://www.tensorflow.org/install/). For example, the [Select TF ops] (https://www.tensorflow.org/lite/guide/ops_select) are not included in the `tflite_runtime` package. If your models have any dependencies to the Select TF ops, you need to use the full TensorFlow package instead.
+注：如果您需要访问其他 Python API（如 [TensorFlow Lite Converter](../models/convert/)），则必须安装[完整的 TensorFlow 软件包](https://www.tensorflow.org/install/)。例如，`tflite_runtime` 软件包中不包括 [Select TF 算子] (https://www.tensorflow.org/lite/guide/ops_select)。如果您的模型与 Select TF 算子有任何依赖关系，则需要改用完整的 TensorFlow 软件包。
 
 ## 安装适用于 Python 的 TensorFlow Lite
 
@@ -69,10 +69,10 @@ interpreter = tflite.Interpreter(model_path=args.model_file)
 
 - 有关 `Interpreter` API 的更多详细信息，请阅读[在 Python 中加载和运行模型](inference.md#load-and-run-a-model-in-python)。
 
-- If you have a Raspberry Pi, check out a [video series](https://www.youtube.com/watch?v=mNjXEybFn98&list=PLQY2H8rRoyvz_anznBg6y3VhuSMcpN9oe) about how to run object detection on Raspberry Pi using TensorFlow Lite.
+- 如果您拥有 Raspberry Pi，请查看有关如何使用 TensorFlow Lite 在 Raspberry Pi 上运行目标检测的[视频系列](https://www.youtube.com/watch?v=mNjXEybFn98&list=PLQY2H8rRoyvz_anznBg6y3VhuSMcpN9oe)。
 
 - 如果您使用 Coral ML 加速器，请查看 [GitHub 上的 Coral 示例](https://github.com/google-coral/tflite/tree/master/python/examples)。
 
-- To convert other TensorFlow models to TensorFlow Lite, read about the [TensorFlow Lite Converter](../models/convert/).
+- 要将其他 TensorFlow 模型转换为 TensorFlow Lite，请阅读有关 [TensorFlow Lite Converter](../models/convert/) 的内容。
 
 - 如果您想构建 `tflite_runtime` wheel，请阅读[构建 TensorFlow Lite Python Wheel 软件包](build_cmake_pip.md)
