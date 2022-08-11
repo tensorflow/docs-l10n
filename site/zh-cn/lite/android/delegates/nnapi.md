@@ -106,16 +106,16 @@ Log.d("Board Platform", boardPlatform);
 
 - [MobileNet v1 (224x224) 图像分类（浮点模型下载）](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [（量化模型下载）](http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz) <br> *（专为基于移动设备和嵌入式设备视觉应用设计的图像分类模型）*
 - [MobileNet v2 SSD 目标检测](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [（下载）](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br> *（使用边界框检测多个目标的图像分类模型）*
-- [MobileNet v1(300x300) Single Shot Detector (SSD) object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(download)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
+- [MobileNet v1(300x300) 单样本检测器 (SSD) 目标检测](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [（下载）] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
 - [用于姿态预测的 PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [（下载）](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br> *（预测图像或视频中人物姿态的视觉模型）*
 
-NNAPI acceleration is also not supported when the model contains dynamically-sized outputs. In this case, you will get a warning like:
+当模型包含动态大小的输出时，也不支持 NNAPI 加速。在这种情况下，您会收到如下所示的警告：
 
 ```none
 ERROR: Attempting to use a delegate that only supports static-sized tensors \
 with a graph that has dynamic-sized tensors.
 ```
 
-### Enable NNAPI CPU implementation
+### 启用 NNAPI CPU 实现
 
-A graph that can't be processed completely by an accelerator can fall back to the NNAPI CPU implementation. However, since this is typically less performant than the TensorFlow interpreter, this option is disabled by default in the NNAPI delegate for Android 10 (API Level 29) or above. To override this behavior, set `setUseNnapiCpu` to `true` in the `NnApiDelegate.Options` object.
+无法完全由加速器处理的计算图可以回退到 NNAPI CPU 实现。但是，由于这种做法的性能通常不如 TensorFlow 解释器，因此在 Android 10（API 级别 29）或更高版本的 NNAPI 委托中，默认情况下会停用此选项。若要重写此行为，请在 `NnApiDelegate.Options` 对象中将 `setUseNnapiCpu` 设置为 `true`。
