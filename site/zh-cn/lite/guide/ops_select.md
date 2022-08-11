@@ -40,7 +40,7 @@ dependencies {
 }
 ```
 
-To use nightly snapshots, make sure that you have added [Sonatype snapshot repository](../android/lite_build.md#use_nightly_snapshots).
+要使用 Nightly 快照，请确保您已添加 [Sonatype 快照存储库](../android/lite_build.md#use_nightly_snapshots)。
 
 在添加依赖项后，用于处理计算图的 TensorFlow 算子的所需委托应对需要它们的计算图自动安装。
 
@@ -58,7 +58,7 @@ android {
 
 #### 构建 Android AAR
 
-For reducing the binary size or other advanced cases, you can also build the library manually. Assuming a [working TensorFlow Lite build environment](../android/quickstart.md), build the Android AAR with select TensorFlow ops as follows:
+为了缩减二进制文件大小或其他高级情况，您也可以手动构建库。假设 [TensorFlow Lite 构建环境正常运行](../android/quickstart.md)，请使用以下 TensorFlow 算子构建 Android AAR：
 
 ```sh
 sh tensorflow/lite/tools/build_aar.sh \
