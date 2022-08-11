@@ -12,7 +12,7 @@ Task Library `BertNLClassifier` API 与将输入文本分类为不同类别的 `
 
 以下模型与 `BertNLClassifier` API 兼容。
 
-- 由[适用于文本分类的 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification) 创建的 BERT 模型。
+- 由[适用于文本分类的 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) 创建的 BERT 模型。
 
 - 符合[模型兼容性要求](#model-compatibility-requirements)的自定义模型。
 
@@ -36,16 +36,23 @@ android {
 dependencies {
     // Other dependencies
 
-    // Import the Task Text Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
+    // Import the Task Text Library dependency (NNAPI is included)
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
 }
 ```
+
+注：从 Android Gradle 插件的 4.1 版开始，默认情况下，.tflite 将被添加到 noCompress 列表中，不再需要上面的 aaptOptions。
 
 ### 步骤 2：使用 API 运行推断
 
 ```java
 // Initialization
-BertNLClassifier classifier = BertNLClassifier.createFromFile(context, modelFile);
+BertNLClassifierOptions options =
+    BertNLClassifierOptions.builder()
+        .setBaseOptions(BaseOptions.builder().setNumThreads(4).build())
+        .build();
+BertNLClassifier classifier =
+    BertNLClassifier.createFromFileAndOptions(context, modelFile, options);
 
 // Run inference
 List<Category> results = classifier.classify(input);
@@ -62,7 +69,7 @@ List<Category> results = classifier.classify(input);
 ```
 target 'MySwiftAppWithTaskAPI' do
   use_frameworks!
-  pod 'TensorFlowLiteTaskText', '~> 0.0.1-nightly'
+  pod 'TensorFlowLiteTaskText', '~> 0.2.0'
 end
 ```
 
@@ -81,21 +88,21 @@ let categories = bertNLClassifier.classify(text: input)
 
 ## 用 C++ 运行推断
 
-注：我们正在改善 C++ Task Library 的可用性，如提供预先构建的二进制文件，并创建用户友好的工作流以从源代码进行构建。C++ API 可能会发生变化。
-
 ```c++
 // Initialization
-std::unique_ptr<BertNLClassifier> classifier = BertNLClassifier::CreateFromFile(model_path).value();
+BertNLClassifierOptions options;
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
+std::unique_ptr<BertNLClassifier> classifier = BertNLClassifier::CreateFromOptions(options).value();
 
-// Run inference
-std::vector<core::Category> categories = classifier->Classify(kInput);
+// Run inference with your input, `input_text`.
+std::vector<core::Category> categories = classifier->Classify(input_text);
 ```
 
-有关详情，请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/bert_nl_classifier.h)。
+请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_nl_classifier.h)，了解详细信息。
 
 ## 结果示例
 
-下面是使用 Model Maker 中的 [MobileBert](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification) 模型对电影评论进行分类的结果示例。
+下面是使用 Model Maker 中的 [MobileBert](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) 模型对电影评论进行分类的结果示例。
 
 输入：“it's a charming and often affecting journey”
 
@@ -110,7 +117,7 @@ category[1]: 'positive' : '0.99994'
 
 ## 模型兼容性要求
 
-`BetNLClassifier` API 需要具有强制性 [TFLite 模型元数据](../../convert/metadata.md)的 TFLite 模型。
+`BetNLClassifier` API 需要具有强制性 [TFLite 模型元数据](../../models/convert/metadata.md)的 TFLite 模型。
 
 元数据应满足以下要求：
 
