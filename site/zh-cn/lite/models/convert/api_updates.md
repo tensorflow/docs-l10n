@@ -6,7 +6,7 @@
 
 - TensorFlow 2.3
 
-    - Support integer (previously, only float) input/output type for integer quantized models using the new `inference_input_type` and `inference_output_type` attributes. Refer to this [example usage](../../performance/post_training_quantization.md#integer_only).
+    - 对于使用新的 `inference_input_type` 和 `inference_output_type` 特性的整数量化模型，支持整数（之前仅支持浮点数）输入/输出类型。请参阅此[示例用法](../../performance/post_training_quantization.md#integer_only)。
     - 支持使用动态维度转换和调整模型大小。
     - 添加了具有 16 位激活和 8 位权重的新实验性量化模式。
 
@@ -18,7 +18,7 @@
 
     - 将 `target_ops` 特性重命名为 `target_spec.supported_ops`
     - 移除了以下特性：
-        - *quantization*: `inference_type`, `quantized_input_stats`, `post_training_quantize`, `default_ranges_stats`, `reorder_across_fake_quant`, `change_concat_input_ranges`, `get_input_arrays()`. Instead, [quantize aware training](https://www.tensorflow.org/model_optimization/guide/quantization/training) is supported through the `tf.keras` API and [post training quantization](../../performance/post_training_quantization.md) uses fewer attributes.
+        - *量化*：`inference_type`、`quantized_input_stats`、`post_training_quantize`、`default_ranges_stats`、`reorder_across_fake_quant`、`change_concat_input_ranges`、`get_input_arrays()`。现在，通过 <code>tf.keras</code> API 为<a>量化感知训练</a>提供支持，并且[训练后量化](../../performance/post_training_quantization.md)使用更少的特性。
         - *可视化*：`output_format`、`dump_graphviz_dir`、`dump_graphviz_video`。现在，可视化 TensorFlow Lite 模型的推荐方式是使用 [visualize.py](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/visualize.py)。
         - *冻结计算图*：`drop_control_dependency`，因为 TensorFlow 2.x 不支持冻结计算图。
     - 移除了其他转换器 API，如 `tf.lite.toco_convert` 和 `tf.lite.TocoConverter`
