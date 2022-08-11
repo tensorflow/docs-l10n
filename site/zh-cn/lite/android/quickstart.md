@@ -13,7 +13,7 @@
 - Android Studio 4.2.2 或更高版本
 - Android SDK 31 或更高版本
 
-Note: This example uses the camera, so you should run it on a physical Android device.
+注：本示例会用到摄像头，因此您应该在实体 Android 设备上运行。
 
 ### 获取示例代码
 
@@ -43,7 +43,7 @@ Note: This example uses the camera, so you should run it on a physical Android d
 
 如果您选择了正确的目录，Android Studio 会创建并构建一个新项目。这个过程可能需要几分钟，具体取决于您的计算机速度，以及您是否曾将 Android Studio 用于其他项目。构建完成后，Android Studio 会在 **Build Output** 状态面板中显示 `BUILD SUCCESSFUL` 消息。
 
-Note: The example code is built with Android Studio 4.2.2, but works with earlier versions of Studio. If you are using an earlier version of Android Studio you can try to adjust the version number of the Android plugin so that the build completes, instead of upgrading Studio.
+注：示例代码使用 Android Studio 4.2.2 构建，但可以在更早版本的 Studio 上运行。如果您使用的是 Android Studio 的早期版本，可以尝试调整 Android 插件的版本号，以便构建完成，而无需升级 Studio。
 
 **可选**：要通过更新 Android 插件版本来修正构建错误，请执行以下操作：
 
@@ -68,7 +68,7 @@ Note: The example code is built with Android Studio 4.2.2, but works with earlie
 
 在您自己的应用中，您必须添加特定的项目依赖项才能运行 TensorFlow Lite 机器学习模型，并访问能够将图像等数据转换为您所使用的模型可以处理的张量数据格式的效用函数。
 
-The example app uses several TensorFlow Lite libraries to enable the execution of the object detection machine learning model:
+该示例应用使用几个 TensorFlow Lite 库来执行目标检测机器学习模型：
 
 - *TensorFlow Lite 主库* - 提供所需的数据输入类、机器学习模型的执行，以及模型处理的输出结果。
 - *TensorFlow Lite Support 库* - 该库提供了一个辅助类，用于将摄像头中的图像转换为可由机器学习模型处理的 [`TensorImage`](../api_docs/java/org/tensorflow/lite/support/image/TensorImage) 数据对象。
@@ -132,7 +132,7 @@ TensorFlow Lite 模型包括包含模型代码的 `.tflite` 文件，并且经�
 Interpreter.Options().addDelegate(nnApiDelegate)
 ```
 
-TensorFlow Lite *delegates* are software modules that accelerate the execution of machine learning models using specialized processing hardware on a mobile device, such as GPUs, TPUs, or DSPs. Using delegates for running TensorFlow Lite models is recommended, but not required.
+TensorFlow Lite *委托*是使用移动设备上的专用处理硬件（如 GPU、TPU 或 DSP）加速机器学习模型执行的软件模块。建议使用委托来运行 TensorFlow Lite 模型，但非必需。
 
 有关在 TensorFlow Lite 中使用委托的更多信息，请参阅 [TensorFlow Lite 委托](../performance/delegates)。
 
@@ -140,7 +140,7 @@ TensorFlow Lite *delegates* are software modules that accelerate the execution o
 
 在您的 Android 应用中，您的代码通过将图像等现有数据转换为您的模型可以处理的[张量](../api_docs/java/org/tensorflow/lite/Tensor)数据格式，向模型提供数据以进行解释。张量中的数据必须具有与用于训练模型的数据格式相匹配的特定维度或形状。
 
-To determine the required tensor shape for a model:
+要确定模型所需的张量形状，请执行以下操作：
 
 - 使用已初始化的 [Interpreter](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/Interpreter) 对象来确定模型使用的张量的形状，如以下代码片段所示：（[代码引用](https://github.com/android/camera-samples/blob/b0f4ec3a81ec30e622bb1ccd55f30e54ddac223f/CameraXAdvanced/tflite/src/main/java/com/example/android/camerax/tflite/CameraActivity.kt#L102-L106)）
     ```
@@ -204,7 +204,7 @@ TensorFlow Lite Interpreter 对象接收该数据，在模型上运行该数据�
 
 ## 处理模型输出
 
-In your Android app, after you run image data against the object detection model, it produces a list of predictions that your app code must handle by executing additional business logic, displaying results to the user, or taking other actions.
+在您的 Android 应用中，当您在目标检测模型上运行图像数据后，它会生成一个预测列表，您的应用代码必须通过执行额外的业务逻辑，向用户显示结果或采取其他操作来处理这些预测。
 
 任何给定的 TensorFlow Lite 模型的输出都根据其产生的预测数量（一个或多个）以及每个预测的描述性信息而有所不同。对于目标检测模型来说，预测通常包括用于指示在图像中检测到目标的位置的边界框数据。在示例代码中，返回的数据被格式化为 [ObjectPrediction](https://github.com/android/camera-samples/blob/b0f4ec3a81ec30e622bb1ccd55f30e54ddac223f/CameraXAdvanced/tflite/src/main/java/com/example/android/camerax/tflite/ObjectDetectionHelper.kt#L42-L58) 对象的列表，如下所示：（[代码引用](https://github.com/android/camera-samples/blob/b0f4ec3a81ec30e622bb1ccd55f30e54ddac223f/CameraXAdvanced/tflite/src/main/java/com/example/android/camerax/tflite/ObjectDetectionHelper.kt#L42-L58)）
 
@@ -230,7 +230,7 @@ val predictions get() = (0 until OBJECT_COUNT).map {
 
 ![目标检测屏幕截图](../../images/lite/android/qs-obj-detect.jpeg){: .attempt-right width="250px"} 对于在该示例中使用的模型，每个预测包括目标的边界框位置、目标的标签，以及介于 0 和 1 之间的预测分数作为表示预测的置信度的浮点，其中 1 是最高置信度评级。一般来说，得分低于 50% (0.5) 的预测会被认为不确定。但是，如何处理低值预测结果取决于您和您应用的需要。
 
-Once the model has returned a prediction result, your application can act on that prediction by presenting the result to your user or executing additional logic. In the case of the example code, the application draws a bounding box around the identified object and displays the class name on the screen. Review the [`CameraActivity.reportPrediction()`](https://github.com/android/camera-samples/blob/b0f4ec3a81ec30e622bb1ccd55f30e54ddac223f/CameraXAdvanced/tflite/src/main/java/com/example/android/camerax/tflite/CameraActivity.kt#L236-L262) function in the example code for details.
+模型返回预测结果后，您的应用就可以通过将结果呈现给您的用户或执行其他逻辑来基于预测执行操作。对于此示例代码，应用会在标识的目标周围绘制一个边界框，并在屏幕上显示类名称。请查看示例代码中的 [`CameraActivity.reportPrediction()`](https://github.com/android/camera-samples/blob/b0f4ec3a81ec30e622bb1ccd55f30e54ddac223f/CameraXAdvanced/tflite/src/main/java/com/example/android/camerax/tflite/CameraActivity.kt#L236-L262) 函数以了解详情。
 
 ## 后续步骤
 
