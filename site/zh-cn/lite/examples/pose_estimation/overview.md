@@ -7,7 +7,7 @@
 
 ## 开始使用
 
-If you are new to TensorFlow Lite and are working with Android or iOS, explore the following example applications that can help you get started.
+<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite">下载此模块</a>
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android 示例</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS 示例</a>
 
