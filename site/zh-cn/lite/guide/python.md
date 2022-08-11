@@ -67,7 +67,7 @@ interpreter = tflite.Interpreter(model_path=args.model_file)
 
 ## 了解详情
 
-- For more details about the `Interpreter` API, read [Load and run a model in Python](inference.md#load-and-run-a-model-in-python).
+- 有关 `Interpreter` API 的更多详细信息，请阅读[在 Python 中加载和运行模型](inference.md#load-and-run-a-model-in-python)。
 
 - If you have a Raspberry Pi, check out a [video series](https://www.youtube.com/watch?v=mNjXEybFn98&list=PLQY2H8rRoyvz_anznBg6y3VhuSMcpN9oe) about how to run object detection on Raspberry Pi using TensorFlow Lite.
 
