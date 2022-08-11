@@ -1,6 +1,6 @@
 # 集成 BERT 问答器
 
-Task Library `BertQuestionAnswerer` API 能够加载 BERT 模型并根据给定段落的内容回答问题。有关详情，请参阅<a href="../../models/bert_qa/overview.md">此处</a>的问答模型文档。
+Task Library `BertQuestionAnswerer` API 能够加载 BERT 模型并根据给定段落的内容回答问题。有关详情，请参阅<a href="../../examples/bert_qa/overview">问答模型文档</a>。
 
 ## BertQuestionAnswerer API 的主要功能
 
@@ -12,7 +12,7 @@ Task Library `BertQuestionAnswerer` API 能够加载 BERT 模型并根据给定�
 
 以下模型与 `BertNLClassifier` API 兼容。
 
-- 由[适用于 BERT 问答的 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/tutorials/model_maker_question_answer) 创建的模型。
+- 由[适用于 BERT 问答的 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/question_answer) 创建的模型。
 
 - [TensorFlow Hub 上预训练 BERT 模型](https://tfhub.dev/tensorflow/collections/lite/task-library/bert-question-answerer/1)。
 
@@ -38,16 +38,24 @@ android {
 dependencies {
     // Other dependencies
 
-    // Import the Task Text Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
+    // Import the Task Text Library dependency (NNAPI is included)
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
 }
 ```
+
+注：从 Android Gradle 插件的 4.1 版开始，默认情况下，.tflite 将被添加到 noCompress 列表中，不再需要上面的 aaptOptions。
 
 ### 步骤 2：使用 API 运行推断
 
 ```java
 // Initialization
-BertQuestionAnswerer answerer = BertQuestionAnswerer.createFromFile(androidContext, modelFile);
+BertQuestionAnswererOptions options =
+    BertQuestionAnswererOptions.builder()
+        .setBaseOptions(BaseOptions.builder().setNumThreads(4).build())
+        .build();
+BertQuestionAnswerer answerer =
+    BertQuestionAnswerer.createFromFileAndOptions(
+        androidContext, modelFile, options);
 
 // Run inference
 List<QaAnswer> answers = answerer.answer(contextOfTheQuestion, questionToAsk);
@@ -64,7 +72,7 @@ List<QaAnswer> answers = answerer.answer(contextOfTheQuestion, questionToAsk);
 ```
 target 'MySwiftAppWithTaskAPI' do
   use_frameworks!
-  pod 'TensorFlowLiteTaskText', '~> 0.0.1-nightly'
+  pod 'TensorFlowLiteTaskText', '~> 0.2.0'
 end
 ```
 
@@ -84,17 +92,17 @@ let answers = mobileBertAnswerer.answer(
 
 ## 用 C++ 运行推断
 
-注：我们正在改善 C++ Task Library 的可用性，如提供预先构建的二进制文件，并创建用户友好的工作流以从源代码进行构建。C++ API 可能会发生变化。
-
 ```c++
 // Initialization
-std::unique_ptr<BertQuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromFile(model_file).value();
+BertQuestionAnswererOptions options;
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
+std::unique_ptr<BertQuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromOptions(options).value();
 
-// Run inference
+// Run inference with your inputs, `context_of_question` and `question_to_ask`.
 std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, question_to_ask);
 ```
 
-有关详情，请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/qa/bert_question_answerer.h)。
+请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_question_answerer.h)，了解详细信息。
 
 ## 结果示例
 
@@ -124,7 +132,7 @@ logit: -0.774266, start_index: 37, end_index: 40
 
 ## 模型兼容性要求
 
-`BertQuestionAnswerer` API 需要具有强制性 [TFLite 模型元数据](../../convert/metadata.md)的 TFLite 模型。
+`BertQuestionAnswerer` API 需要具有强制性 [TFLite 模型元数据](../../models/convert/metadata)的 TFLite 模型。
 
 元数据应满足以下要求：
 
