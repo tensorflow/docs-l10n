@@ -119,9 +119,9 @@ tflite_codegen --model=./model_with_metadata/mobilenet_v1_0.75_160_quantized.tfl
 ```python
 # Zip up the generated code
 !zip -r classify_wrapper.zip classify_wrapper/
-</div>
-<h1 data-md-type="header" data-md-header-level="1">Download the archive</h1>
-<p data-md-type="paragraph">from google.colab import files
+
+# Download the archive
+from google.colab import files
 files.download('classify_wrapper.zip')
 ```
 
