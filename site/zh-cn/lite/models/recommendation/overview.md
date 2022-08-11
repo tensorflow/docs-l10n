@@ -111,7 +111,7 @@
         <td>0.13ms*</td>
       </tr>
        <tr>
-         <td>Pixel 4 </td>
+         <td>Pixel 4</td>
         <td>0.06ms*</td>
       </tr>
     
@@ -120,11 +120,11 @@
 
 * 使用 4 个线程。
 
-## Use your training data
+## 使用训练数据
 
-In addition to the trained model, we provide an open-sourced [toolkit in GitHub](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml) to train models with your own data. You can follow this tutorial to learn how to use the toolkit and deploy trained models in your own mobile applications.
+除了经过训练的模型，我们在 GitHub 中还提供了一个开放源代码[工具包](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml)，以便帮助您使用自己的数据训练模型。您可以按本教程学习如何使用此工具包，并在自己的移动应用中部署经过训练的模型。
 
-Please follow this [tutorial](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb) to apply the same technique used here to train a recommendation model using your own datasets.
+请按本[教程](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb)运用此处使用的相同技术，利用自己的数据集训练推荐模型。
 
 ## 利用数据自定义模型的提示
 
