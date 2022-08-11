@@ -134,9 +134,9 @@ std::vector<QaAnswer> results = answerer->Answer(context_of_question, question_t
 
 在[此处](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto)浏览更多高级加速器设置。
 
-### Example usage of Coral Edge TPU in Python
+### 用 Python 实现 Coral Edge TPU 使用的示例
 
-Configure Coral Edge TPU in the base options of the task. For example, you can set up Coral Edge TPU in `ImageClassifier` as follows:
+在任务的基本选项中配置 Coral Edge TPU。例如，您可以在 `ImageClassifier` 中设置 Coral Edge TPU，如下所示：
 
 ```python
 # Imports
