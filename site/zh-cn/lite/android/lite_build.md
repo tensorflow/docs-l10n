@@ -1,10 +1,10 @@
 # 为 Android 构建 TensorFlow Lite 库
 
-This document describes how to build TensorFlow Lite Android library on your own. Normally, you do not need to locally build TensorFlow Lite Android library. If you just want to use it, the easiest way is using the [TensorFlow Lite AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite). See [Android quickstart](../guide/android.md) for more details on how to use them in your Android projects.
+本文介绍如何自行构建 TensorFlow Lite Android 库。通常，您不需要在本地构建 TensorFlow Lite Android 库。如果您只是希望使用此库，最简单的方法是使用 [MavenCentral 中托管的 TensorFlow Lite AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite)。有关在 Android 项目中如何使用这些库的更多详细信息，请参阅 [Android 快速入门](../guide/android.md)。
 
-## Use Nightly Snapshots
+## 使用 Nightly 快照
 
-To use nightly snapshots, add the following repo to your root Gradle build config.
+要使用 Nightly 快照，请将以下仓库添加到您的根 Gradle 构建配置中。
 
 ```build
 allprojects {
@@ -59,9 +59,9 @@ sdkmanager \
   "platforms;android-${ANDROID_API_LEVEL}"
 ```
 
-Now you should proceed to the [Configure WORKSPACE and .bazelrc](#configure_workspace_and_bazelrc) section to configure the build settings.
+现在，您应该进入[配置 WORKSPACE 和 .bazelrc](#configure_workspace_and_bazelrc) 部分来配置构建设置。
 
-After you finish building the libraries, you can copy them to /host_dir inside the container so that you can access them on the host.
+构建完库之后，可以将它们复制到容器内的 /host_dir，以便可以在主机上访问它们。
 
 ### 不使用 Docker 设置构建环境
 
@@ -75,7 +75,7 @@ Bazel 是适用于 TensorFlow 的主要构建系统。要使用 Bazel 构建，�
 
 ### 配置工作区和 .bazelrc
 
-This is a one-time configuration step that is required to build the TF Lite libraries. Run the `./configure` script in the root TensorFlow checkout directory, and answer "Yes" when the script asks to interactively configure the `./WORKSPACE` for Android builds. The script will attempt to configure settings using the following environment variables:
+这是构建 TF Lite 库所需的一次性配置步骤。在 TensorFlow 根签出目录中运行 `./configure` 脚本，当脚本询问是否以交互方式为 Android 构建配置 `./WORKSPACE` 时，请回答“Yes”。此脚本会尝试使用以下环境变量配置设置：
 
 - `ANDROID_SDK_HOME`
 - `ANDROID_SDK_API_LEVEL`
@@ -104,7 +104,7 @@ bazel build -c opt --fat_apk_cpu=x86,x86_64,arm64-v8a,armeabi-v7a \
 
 这会在 `bazel-bin/tensorflow/lite/java/` 中产生 AAR 文件。请注意，这会构建具有多个不同架构的“胖”AAR 文件；如果您不需要所有架构，请使用适用于您的部署环境的子集。
 
-You can build smaller AAR files targeting only a set of models as follows:
+您可以构建仅针对一组模型的较小 AAR 文件，如下所示：
 
 ```sh
 bash tensorflow/lite/tools/build_aar.sh \
