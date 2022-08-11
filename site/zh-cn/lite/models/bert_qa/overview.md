@@ -22,9 +22,9 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
 
 ## 工作方式
 
-The model can be used to build a system that can answer users’ questions in natural language. It was created using a pre-trained BERT model fine-tuned on SQuAD 1.1 dataset.
+该模型可用于构建以自然语言回答用户问题的系统。它使用在 SQuAD 1.1 数据集上经过微调的预训练 BERT 模型进行创建。
 
-[BERT](https://github.com/google-research/bert), or Bidirectional Encoder Representations from Transformers, is a method of pre-training language representations which obtains state-of-the-art results on a wide array of Natural Language Processing tasks.
+[BERT](https://github.com/google-research/bert)（或称基于 Transformer 的双向编码器表示）是一种预训练语言表示方法，它可以在广泛的自然语言处理任务上获得一流的结果。
 
 此应用使用 BERT 的压缩版本 MobileBERT。该版本的运行速度快 4 倍，而模型大小只有 BERT 模型的四分之一。
 
@@ -34,7 +34,7 @@ The model can be used to build a system that can answer users’ questions in na
 
 ## 性能基准
 
-Performance benchmark numbers are generated with the tool [described here](https://www.tensorflow.org/lite/performance/benchmarks).
+性能基准数值使用[此处所述](https://www.tensorflow.org/lite/performance/benchmarks)工具生成。
 
 <table>
   <thead>
