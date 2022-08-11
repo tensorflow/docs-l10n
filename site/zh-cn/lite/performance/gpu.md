@@ -26,7 +26,7 @@ git clone https://github.com/tensorflow/tensorflow
 
 #### 第 2 步. 编辑 `app/build.gradle` 以使用 Nightly 版本的 GPU AAR
 
-Note: You can now target **Android S+** with `targetSdkVersion="S"` in your manifest, or `targetSdkVersion "S"` in your Gradle `defaultConfig` (API level TBD). In this case, you should merge the contents of [`AndroidManifestGpu.xml`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/AndroidManifestGpu.xml) into your Android application's manifest. Without this change, the GPU delegate cannot access OpenCL libraries for acceleration. *AGP 4.2.0 or above is required for this to work.*
+注：您现在可以在清单中使用 **Android S+** with `targetSdkVersion="S"`，或在您的 Gradle `defaultConfig`（API 级别待定）中使用 `targetSdkVersion "S"`。在这种情况下，您应将 [`AndroidManifestGpu.xml`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/AndroidManifestGpu.xml) 的内容合并到 Android 应用的清单中。如果没有此更改，GPU 代理将无法访问 OpenCL 库进行加速。*需要 AGP 4.2.0 或更高版本才能运行。*
 
 在现有 `dependencies` 块中现有 `tensorflow-lite` 软件包的位置下添加 `tensorflow-lite-gpu` 软件包。
 
@@ -237,7 +237,7 @@ pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['Metal']
       </pre>
     </section>
     <section>
-      <h3>C (Until 2.3.0)</h3>
+      <h3>C（支持到 2.3.0 版）</h3>
       <p></p>
 <pre class="prettyprint lang-c">    #include "tensorflow/lite/c/c_api.h"
     #include "tensorflow/lite/delegates/gpu/metal_delegate.h"
@@ -296,14 +296,14 @@ WARNING: op code #42 cannot be handled by this delegate.
 
 ## 优化建议
 
-### Optimizing for mobile devices
+### 针对移动设备进行优化
 
-Some operations that are trivial on the CPU may have a high cost for the GPU on mobile devices. Reshape operations are particularly expensive to run, including `BATCH_TO_SPACE`, `SPACE_TO_BATCH`, `SPACE_TO_DEPTH`, and so forth. You should closely examine use of reshape operations, and consider that may have been applied only for exploring data or for early iterations of your model. Removing them can significantly improve performance.
+一些在 CPU 上微不足道的运算可能会为移动设备上的 GPU 带来很高的开销。改造运算的运行成本特别高，包括 `BATCH_TO_SPACE`、`SPACE_TO_BATCH`、`SPACE_TO_DEPTH` 等。您应该仔细检查改造运算的使用情况，并考虑到这些运算可能仅应用于浏览数据或模型的早期迭代。移除它们可以显著提高性能。
 
-On GPU, tensor data is sliced into 4-channels. Thus, a computation on a tensor of shape `[B,H,W,5]` will perform about the same on a tensor of shape `[B,H,W,8]` but significantly worse than `[B,H,W,4]`. In that sense, if the camera hardware supports image frames in RGBA, feeding that 4-channel input is significantly faster as a memory copy (from 3-channel RGB to 4-channel RGBX) can be avoided.
+在 GPU 上，张量数据被拆分为 4 通道。因此，在形状为 `[B,H,W,5]` 的张量和形状为 `[B,H,W,8]` 的张量上的计算结果大致相同，但明显比 `[B,H,W,4]` 差。从这个意义上说，如果摄像头硬件支持 RGBA 中的图像帧，则馈送 4 通道输入的速度要快得多，因为可以避免内存复制（从 3 通道 RGB 到 4 通道 RGBX）。
 
-For best performance, you should consider retraining the classifier with a mobile-optimized network architecture. Optimization for on-device inferencing can dramatically reduce latency and power consumption by taking advantage of mobile hardware features.
+为了获得最佳性能，您应该考虑使用移动优化的网络架构重新训练分类器。通过充分利用移动硬件特性，对设备端推断进行优化可以显著降低延迟和功耗。
 
-### Reducing initialization time with serialization
+### 通过序列化缩短初始化时间
 
-The GPU delegate feature allows you to load from pre-compiled kernel code and model data serialized and saved on disk from previous runs. This approach avoids re-compilation and reduces startup time by up to 90%. For instructions on how to apply serialization to your project, see [GPU Delegate Serialization](gpu_advanced.md#gpu_delegate_serialization).
+GPU委托功能允许您从预编译的内核代码和模型数据中加载序列化的数据，并将其保存在磁盘上，这些数据来自以前的运行。这种方法避免了重新编译，并且最高可将启动时间缩短 90%。有关如何将序列化应用于项目的说明，请参阅 [GPU 委托序列化](gpu_advanced.md#gpu_delegate_serialization)。
