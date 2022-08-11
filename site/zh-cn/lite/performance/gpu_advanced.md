@@ -281,37 +281,19 @@ Android API 默认支持量化模型。要停用，请执行以下操作：
 **C++ API**
 
 ```c++
-struct GpuDelegateOptions {
-  // Allows to quantify tensors, downcast values, process in float16 etc.
-  bool allow_precision_loss;
+TfLiteGpuDelegateOptionsV2 options = TfLiteGpuDelegateOptionsV2Default();
+options.experimental_flags = TFLITE_GPU_EXPERIMENTAL_FLAGS_NONE;
 
-  enum class WaitType {
-    // waitUntilCompleted
-    kPassive,
-    // Minimize latency. It uses active spinning instead of mutex and consumes
-    // additional CPU resources.
-    kActive,
-    // Useful when the output is used with GPU pipeline then or if external
-    // command encoder is set
-    kDoNotWait,
-  };
-  WaitType wait_type;
-};
+auto* delegate = TfLiteGpuDelegateV2Create(options);
+if (interpreter->ModifyGraphWithDelegate(delegate) != kTfLiteOk) return false;
 ```
 
 **Java API**
 
 ```java
-// THIS:
-const GpuDelegateOptions options = {
-  .allow_precision_loss = false,
-  .wait_type = kGpuDelegateOptions::WaitType::Passive,
-};
+GpuDelegate delegate = new GpuDelegate(new GpuDelegate.Options().setQuantizedModelsAllowed(false));
 
-auto* delegate = NewGpuDelegate(options);
-
-// IS THE SAME AS THIS:
-auto* delegate = NewGpuDelegate(nullptr);
+Interpreter.Options options = (new Interpreter.Options()).addDelegate(delegate);
 ```
 
 #### iOS
