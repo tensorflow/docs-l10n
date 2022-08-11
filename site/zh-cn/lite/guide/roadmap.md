@@ -59,9 +59,9 @@
 
 - **量化**
 
-    - Selective post-training quantization to exclude certain layers from quantization.
+    - 旨在从量化中排除某些层的选择性训练后量化。
     - 用于逐层检查量化误差损失的量化调试程序。
-    - Applying quantization-aware training on more model coverage e.g. TensorFlow Model Garden.
+    - 将量化感知训练应用于更大的模型覆盖范围，例如 TensorFlow Model Garden。
     - 训练后动态范围量化的质量和性能改进。
     - 允许 SVD 等压缩算法的 Tensor Compression API。
 
