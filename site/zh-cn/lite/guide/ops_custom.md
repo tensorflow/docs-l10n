@@ -39,7 +39,7 @@ offset = tf.Variable(0.0)
 def sin(x):
   return tf.sin(x + offset, name="Sin")
 
-  # Train model
+# Train model
 optimizer = tf.optimizers.Adam(0.01)
 def train(x, y):
     with tf.GradientTape() as t:
@@ -73,9 +73,10 @@ a list of operators for which you will need custom implementations: Sin.
 
 通过设置转换器属性 `allow_custom_ops`，创建一个具有自定义算子的 TensorFlow Lite 模型，如下所示：
 
-<pre>converter = tf.lite.TFLiteConverter.from_concrete_functions([sin.get_concrete_function(x)])
-&amp;lt;b&amp;gt;converter.allow_custom_ops = True&amp;lt;/b&amp;gt;
-tflite_model = converter.convert()</pre>
+<pre>converter = tf.lite.TFLiteConverter.from_concrete_functions([sin.get_concrete_function(x)], sin)
+&lt;b&gt;converter.allow_custom_ops = True&lt;/b&gt;
+tflite_model = converter.convert()
+</pre>
 
 此时，如果使用默认解释器运行它，则会收到以下错误消息：
 
@@ -206,7 +207,7 @@ resolver.AddCustom("Sin", Register_SIN());
 
 如果觉得内置运算集过大，可以基于给定的运算子集（可能只是包含在给定模型中运算）通过代码生成新的 `OpResolver`。这相当于 TensorFlow 的选择性注册（其简单版本可在 `tools` 目录中获得）。
 
-如果想用 Java 定义自定义算子，目前需要您自行构建自定义 JNI 层并[在此 JNI 代码中](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/builtin_ops_jni.cc)编译自己的 AAR。同样，如果想定义在 Python 中可用的上述算子，可以将注册放在 [Python 封装容器代码](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc)中。
+If you want to define your custom operators in Java, you would currently need to build your own custom JNI layer and compile your own AAR [in this jni code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/nativeinterpreterwrapper_jni.cc). Similarly, if you wish to define these operators available in Python you can place your registrations in the [Python wrapper code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc).
 
 请注意，可以按照与上文类似的过程支持一组运算（而不是单个算子），只需添加所需数量的 `AddCustom` 算子。另外，`BuiltinOpResolver` 还允许您使用 `AddBuiltin` 重写内置算子的实现。
 
@@ -232,7 +233,7 @@ resolver.AddCustom("Sin", Register_SIN());
 
 3. 如果不想让它浪费太多内存，最好使用静态固定大小的数组（或在 `Resize` 中预分配的 `std::vector`），而不要使用在执行的每次迭代时动态分配的 `std::vector`。
 
-4. 避免实例化尚不存在的标准库容器模板，因为它们会影响二进制文件的大小。例如，如果运算中需要在其他内核中不存在的 `std::map`，可以使用具有直接索引映射的 `std::vector`，同时保持较小的二进制文件大小。请查看其他内核使用的内容以获得深入见解（或询问）。
+4. Avoid instantiating standard library container templates that don't already exist, because they affect binary size. For example, if you need a `std::map` in your operation that doesn't exist in other kernels, using a `std::vector` with direct indexing mapping could work while keeping the binary size small. See what other kernels use to gain insight (or ask).
 
 5. 检查指向由 `malloc` 返回的内存的指针。如果此指针是 `nullptr`，则不应使用该指针执行任何运算。如果在函数内 `malloc` 并出现退出错误，请在退出前释放内存。
 
