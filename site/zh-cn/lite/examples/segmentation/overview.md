@@ -16,9 +16,9 @@ DeepLab 是用于语义图像分割的最先进的深度学习模型，其目标
 
 下面的 Android 示例分别以 [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android/lib_task_api) 和 [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android/lib_interpreter) 形式演示了两个方法的实现。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android">View Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android">查看 Android 示例</a>
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/ios">View iOS example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/ios">查看 iOS 示例</a>
 
 如果您使用的不是 Android 或 iOS 平台，或者您已经熟悉 TensorFlow Lite API，则可以下载我们的入门图像分割模型。
 
@@ -43,13 +43,13 @@ DeepLab 是用于语义图像分割的最先进的深度学习模型，其目标
 
 ## Example output
 
-Performance benchmark numbers are generated with the tool [described here](https://www.tensorflow.org/lite/performance/benchmarks).
+性能基准数值使用[此处所述](https://www.tensorflow.org/lite/performance/benchmarks)工具生成。
 
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
-      <th>Model size </th>
+      <th>模型名称</th>
+      <th>模型大小</th>
       <th>设备</th>
       <th>GPU</th>
       <th>CPU</th>
@@ -59,25 +59,25 @@ Performance benchmark numbers are generated with the tool [described here](https
     <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">Deeplab v3</a>
 </td>
     <td rowspan="3">       2.7 Mb</td>
-    <td>Pixel 3 (Android 10) </td>
+    <td>Pixel 3 (Android 10)</td>
     <td>16ms</td>
     <td>37ms*</td>
   </tr>
    <tr>
-     <td>Pixel 4 (Android 10) </td>
+     <td>Pixel 4 (Android 10)</td>
     <td>20ms</td>
     <td>23ms*</td>
   </tr>
    <tr>
-     <td>iPhone XS (iOS 12.4.1) </td>
+     <td>iPhone XS (iOS 12.4.1)</td>
      <td>16ms</td>
     <td>25ms**</td>
   </tr>
 </table>
 
-* 4 threads used.
+* 使用 4 个线程。
 
-** 2 threads used on iPhone for the best performance result.
+** 为了获得最佳性能结果，在 iPhone 上使用 2 个线程。
 
 ## 补充阅读和资源
 
