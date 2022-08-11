@@ -74,7 +74,7 @@ Keras LSTM 到 TensorFlow Lite [Colab](https://colab.research.google.com/github/
 
 ### 用户定义的 LSTM 转换示例
 
-TensorFlow Lite also provides a way to convert user defined LSTM implementations. Here we use Lingvo’s LSTM as an example of how that can be implemented. For details please refer to the [lingvo.LSTMCellSimple interface](https://github.com/tensorflow/lingvo/blob/91a4609dbc2579748a95110eda59c66d17c594c5/lingvo/core/rnn_cell.py#L228) and the conversion logic [here](https://github.com/tensorflow/tensorflow/blob/82abf0dbf316526cd718ae8cd7b11cfcb805805e/tensorflow/compiler/mlir/lite/transforms/prepare_composite_functions_tf.cc#L130). We also provide an example for another of Lingvo’s LSTM definitions in [lingvo.LayerNormalizedLSTMCellSimple interface](https://github.com/tensorflow/lingvo/blob/91a4609dbc2579748a95110eda59c66d17c594c5/lingvo/core/rnn_cell.py#L1173) and its conversion logic [here](https://github.com/tensorflow/tensorflow/blob/c11d5d8881fd927165eeb09fd524a80ebaf009f2/tensorflow/compiler/mlir/lite/transforms/prepare_composite_functions_tf.cc#L137).
+TensorFlow Lite 还提供了一种转换用户定义的 LSTM 实现的方式。在这里，我们以 Lingvo 的 LSTM 为例来说明如何实现。有关详细信息，请参阅 [lingvo.LSTMCellSimple 接口](https://github.com/tensorflow/lingvo/blob/91a4609dbc2579748a95110eda59c66d17c594c5/lingvo/core/rnn_cell.py#L228)和[转换逻辑](https://github.com/tensorflow/tensorflow/blob/82abf0dbf316526cd718ae8cd7b11cfcb805805e/tensorflow/compiler/mlir/lite/transforms/prepare_composite_functions_tf.cc#L130)。我们还在 [lingvo.LayerNormalizedLSTMCellSimple 接口](https://github.com/tensorflow/lingvo/blob/91a4609dbc2579748a95110eda59c66d17c594c5/lingvo/core/rnn_cell.py#L1173)及其[转换逻辑](https://github.com/tensorflow/tensorflow/blob/c11d5d8881fd927165eeb09fd524a80ebaf009f2/tensorflow/compiler/mlir/lite/transforms/prepare_composite_functions_tf.cc#L137)中提供了 Lingvo 的 LSTM 定义的另一个示例。
 
 ## “将您自己的 TensorFlow RNN”转换为 TensorFlow Lite
 
@@ -106,7 +106,7 @@ TensorFlow Lite also provides a way to convert user defined LSTM implementations
 
 8. TensorFlow Lite 转换基础架构的其余部分，包括所有已定义的 [MLIR 传递](https://github.com/tensorflow/tensorflow/blob/35a3ab91b42503776f428bda574b74b9a99cd110/tensorflow/compiler/mlir/lite/tf_tfl_passes.cc#L57)以及最终导出到 TensorFlow Lite 平面缓冲区的部分都可以重用。
 
-## Known issues/limitations
+## 已知问题/限制
 
 1. 目前只支持转换无状态的 Keras LSTM（Keras 的默认行为）。有状态的 Keras LSTM 转换是未来的工作。
 2. 仍然可以使用底层的无状态 Keras LSTM 层对有状态的 Keras LSTM 层进行建模，并在用户程序中显式管理状态。仍然可以使用此处描述的功能将此类 TensorFlow 程序转换为 TensorFlow Lite。
