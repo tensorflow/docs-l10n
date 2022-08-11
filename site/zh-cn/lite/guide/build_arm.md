@@ -8,11 +8,11 @@ TensorFlow Lite 支持两种构建系统，而每种构建系统支持的功能�
 --- | --- | ---
 预定义工具链 | armhf、aarch64 | armel、armhf、aarch64
 自定义工具链 | 难用 | 易用
-[选择 TF 运算](https://www.tensorflow.org/lite/guide/ops_select) | 支持 | 不支持
-[GPU 委托](https://www.tensorflow.org/lite/performance/gpu) | 仅适用于 Android | 任何支持 OpenCL 的平台
+[Select TF ops](https://www.tensorflow.org/lite/guide/ops_select) | 支持 | 不支持
+[GPU delegate](https://www.tensorflow.org/lite/performance/gpu) | 仅适用于 Android | 任何支持 OpenCL 的平台
 XNNPack | 支持 | 支持
 [Python Wheel](https://www.tensorflow.org/lite/guide/build_cmake_pip) | 支持 | 支持
-[C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/README.md) | 支持 | [支持](https://www.tensorflow.org/lite/guide/build_cmake#build_tensorflow_lite_c_library)
+[C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/README.md) | 支持 | [supported](https://www.tensorflow.org/lite/guide/build_cmake#build_tensorflow_lite_c_library)
 [C++ API](https://www.tensorflow.org/lite/guide/inference#load_and_run_a_model_in_c) | 支持 Bazel 项目 | 支持 CMake 项目
 
 ## 使用 CMake 对 ARM 进行交叉编译
@@ -21,7 +21,7 @@ XNNPack | 支持 | 支持
 
 ## 使用 Bazel 对 ARM 进行交叉编译
 
-如果您有一个 Bazel 项目，或者您想使用 TF 算子，那么您最好使用 Bazel 构建系统。您将使用集成的 [ARM GCC 8.3 工具链](https://github.com/tensorflow/tensorflow/tree/master/third_party/toolchains/embedded/arm-linux)配合 Bazel 构建 ARM32/64 共享库。
+If you have a Bazel project or if you want to use TF ops, you'd better use Bazel build system. You'll use the integrated [ARM GCC 8.3 toolchains](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tools/toolchains/embedded/arm-linux) with Bazel to build an ARM32/64 shared library.
 
 目标架构 | Bazel 配置 | 兼容设备
 --- | --- | ---
@@ -36,7 +36,7 @@ AArch64 (ARM64) | --config=elinux_aarch64 | Coral、RPI4 运行 Ubuntu 64
 
 要使用 Bazel 交叉编译 TensorFlow Lite，请按照以下步骤进行操作：
 
-#### 步骤 1. 安装 Bazel
+#### 第 1 步：安装 Bazel
 
 Bazel 是 TensorFlow 的主要构建系统。安装最新版本的 [Bazel 构建系统](https://bazel.build/versions/master/docs/install.html)。
 
@@ -50,7 +50,7 @@ git clone https://github.com/tensorflow/tensorflow.git tensorflow_src
 
 **注**：如果您使用的是 TensorFlow Docker 镜像，则 `/tensorflow_src/` 中已经提供了该仓库。
 
-#### 步骤 3. 构建 ARM 二进制文件
+#### 第 3 步：构建 ARM 二进制文件
 
 ##### C 库
 
@@ -62,7 +62,7 @@ bazel build --config=elinux_aarch64 -c opt //tensorflow/lite/c:libtensorflowlite
 
 **注**：请使用 `elinux_armhf` 进行 [32 位 ARM 硬浮点](https://wiki.debian.org/ArmHardFloatPort)构建。
 
-有关详细信息，请查看 [TensorFlow Lite C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/README.md) 页面。
+请查看 [TensorFlow Lite C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/README.md) 页面了解详细信息。
 
 ##### C++ 库
 
@@ -72,11 +72,11 @@ bazel build --config=elinux_aarch64 -c opt //tensorflow/lite:libtensorflowlite.s
 
 您可以在以下位置找到共享库：`bazel-bin/tensorflow/lite/libtensorflowlite.so`。
 
-目前没有直接的方式来提取所需的所有头文件，因此你必须从 TensorFlow 仓库中将所有头文件包括在 tensorflow/lite/ 目录下。此外，您还需要 FlatBuffers 和 Abseil 的头文件。
+目前，没有一种直接方式可以提取需要的所有头文件，因此您必须将来自 TensorFlow 仓库的所有头文件都包含在 tensorflow/lite/ 中。此外，您还将需要来自 FlatBuffers 和 Abseil 的头文件。
 
 ##### 其他信息
 
-您还可以用工具链构建其他 Bazel 目标。下面是一些有用的目标。
+您也可以用工具链构建其他 Bazel 目标。下面是一些有用的目标。
 
 - //tensorflow/lite/tools/benchmark:benchmark_model
 - //tensorflow/lite/examples/label_image:label_image
