@@ -20,21 +20,21 @@ TensorFlow Lite 推断通常遵循以下步骤：
 
 3. **运行推断**
 
-    This step involves using the TensorFlow Lite API to execute the model. It involves a few steps such as building the interpreter, and allocating tensors, as described in the following sections.
+    此步骤涉及使用 TensorFlow Lite API 来执行模型。如以下各部分所述，它涉及构建解释器和分配张量等若干步骤。
 
 4. **解释输出**
 
-    When you receive results from the model inference, you must interpret the tensors in a meaningful way that's useful in your application.
+    当您从模型推断接收到结果后，必须以对您的应用有意义的方式来解释张量。
 
-    For example, a model might return only a list of probabilities. It's up to you to map the probabilities to relevant categories and present it to your end-user.
+    例如，模型可能只会返回概率列表。由您来将概率映射到相关类别，并呈现给最终用户。
 
 ## 支持的平台
 
-TensorFlow inference APIs are provided for most common mobile/embedded platforms such as [Android](#android-platform), [iOS](#ios-platform) and [Linux](#linux-platform), in multiple programming languages.
+TensorFlow 推断 API 以多种编程语言为大多数常见的移动/嵌入式平台（例如 [Android](#android-platform)、[iOS](#ios-platform) 和 [Linux](#linux-platform)）提供。
 
 在大多数情况下，API 设计反映了对性能而非易用性的偏好。 TensorFlow Lite 专为在小型设备上进行快速推断而设计，因此 API 试图以牺牲便利性为代价来避免不必要的复制也就不足为奇了。同样，与 TensorFlow API 保持一致也非明确目标，而且在不同语言之间还可能会有一些差异。
 
-Across all libraries, the TensorFlow Lite API enables you to load models, feed inputs, and retrieve inference outputs.
+您可以使用 TensorFlow Lite API 在所有库中加载模型、馈送输入，并检索推断输出。
 
 ### Android 平台
 
@@ -44,7 +44,7 @@ Across all libraries, the TensorFlow Lite API enables you to load models, feed i
 
 #### TensorFlow Lite Android 封装容器代码生成器
 
-Note: TensorFlow Lite wrapper code generator is in experimental (beta) phase and it currently only supports Android.
+注：TensorFlow Lite 封装容器代码生成器现处于实验 (Beta) 阶段，目前仅支持 Android。
 
 对于使用[元数据](../inference_with_metadata/overview)增强的 TensorFlow Lite 模型，开发者可以使用 TensorFlow Lite Android 封装容器代码生成器来创建平台特定的封装容器代码。封装容器代码无需在 Android 上直接与 `ByteBuffer` 进行交互。相反，开发者可以使用类型化对象（如 `Bitmap` 和 `Rect`）与 TensorFlow Lite 模型进行交互。如需了解详细信息，请参阅 [TensorFlow Lite Android 封装容器代码生成器](../inference_with_metadata/codegen.md)。
 
@@ -52,7 +52,7 @@ Note: TensorFlow Lite wrapper code generator is in experimental (beta) phase and
 
 在 iOS 上，TensorFlow Lite 适用于以 [Swift](https://www.tensorflow.org/code/tensorflow/lite/swift) 和 [Objective-C](https://www.tensorflow.org/code/tensorflow/lite/objc) 编写的原生 iOS 库。您也可以直接在 Objective-C 代码中使用 [C API](https://www.tensorflow.org/code/tensorflow/lite/c/c_api.h)。
 
-See below for details about using [Swift](#load-and-run-a-model-in-swift), [Objective-C](#load-and-run-a-model-in-objective-c) and the [C API](#using-c-api-in-objective-c-code), or follow the [iOS quickstart](ios.md) for a tutorial and example code.
+有关使用 Swift、Objective-C 和 C API 的详细信息，请参阅下文，或者按照 [iOS 快速入门](#load-and-run-a-model-in-swift)中的教程和示例代码进行操作。
 
 ### Linux 平台
 
@@ -64,7 +64,7 @@ See below for details about using [Swift](#load-and-run-a-model-in-swift), [Obje
 
 1. 将模型加载到内存中。
 2. 基于现有模型构建 `Interpreter`。
-3. Set input tensor values. (Optionally resize input tensors if the predefined sizes are not desired.)
+3. 设置输入张量值。（如果不需要预定义的大小，则可以选择调整输入张量的大小。）
 4. 调用推断。
 5. 读取输出张量值。
 
@@ -76,7 +76,7 @@ See below for details about using [Swift](#load-and-run-a-model-in-swift), [Obje
 
 使用 TensorFlow Lite 运行推断的 Java API 主要设计用于 Android，因此它可以作为 Android 库依赖项使用：<br><code>org.tensorflow:tensorflow-lite</code>。
 
-In Java, you'll use the `Interpreter` class to load a model and drive model inference. In many cases, this may be the only API you need.
+在 Java 中，您将使用 `Interpreter` 类加载模型并驱动模型推断。在许多情况下，这可能是您唯一需要的 API。
 
 您可以使用 `.tflite` 文件初始化 `Interpreter`：
 
@@ -341,7 +341,7 @@ class FlatBufferModel {
 
 Caution: The `FlatBufferModel` object must remain valid until all instances of `Interpreter` using it have been destroyed.
 
-The important parts of the `Interpreter` API are shown in the code snippet below. It should be noted that:
+以下代码段展示了 `Interpreter` API 的重要部分。应注意以下几点：
 
 - 用整数来表示张量，以避免字符串比较（以及字符串库上的任何固定依赖项）。
 - 不得从并发线程访问解释器。
