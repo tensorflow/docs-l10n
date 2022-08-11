@@ -1,6 +1,6 @@
 # 使用元数据进行 TensorFlow Lite 推断
 
-[用元数据来推断模型](../convert/metadata.md)可以简单到只需几行代码。TensorFlow Lite 元数据包含了有关模型功能以及使用方法的丰富描述。它可以授权代码生成器自动生成推断代码，例如使用 [Android Studio 机器学习绑定功能](../convert/metadata.md)或 [TensorFlow Lite Android 代码生成器](codegen.md#mlbinding)。它还可以用来配置自定义推断流水线。
+[用元数据来推断模型](../models/convert/metadata.md)可以简单到只需几行代码。TensorFlow Lite 元数据包含了有关模型功能以及使用方法的丰富描述。它可以授权代码生成器自动生成推断代码，例如使用 [Android Studio 机器学习绑定功能](codegen.md#mlbinding)或 [TensorFlow Lite Android 代码生成器](codegen.md#codegen)。它还可以用来配置自定义推断流水线。
 
 ## 工具和库
 
@@ -24,7 +24,7 @@ TensorFlow Lite 提供了多种工具和库来满足不同层次的部署要求�
 
 ## 探索带有元数据的预训练模型
 
-浏览 [TensorFlow Lite 托管模型](https://www.tensorflow.org/lite/guide/hosted_models)和 [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite)，下载带有元数据的预训练模型，用于视觉和文本任务。另请参阅[可视化元数据](../convert/metadata.md#visualize-the-metadata)的不同选项。
+浏览 [TensorFlow Lite 托管模型](https://www.tensorflow.org/lite/guide/hosted_models)和 [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite)，下载带有元数据的预训练模型，用于视觉和文本任务。另请参阅[可视化元数据](../models/convert/metadata.md#visualize-the-metadata)的不同选项。
 
 ## TensorFlow Lite Support GitHub 仓库
 
