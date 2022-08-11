@@ -14,9 +14,9 @@ Task Library 的 `NLClassifier` API 可以将输入的文本分为不同类别�
 
 以下模型保证可与 `NLClassifier` API 兼容。
 
-- <a href="../../models/text_classification/overview.md">电影评论情感分类</a>模型。
+- <a href="../../examples/text_classification/overview">电影评论情感分类</a>模型。
 
-- 由[适用于文本分类的 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification) 创建的具有 `average_word_vec` 规范的模型。
+- 由<a>适用于文本分类的 TensorFlow Lite Model Maker</a> 创建的具有 <code>average_word_vec</code> 规范的模型。
 
 - 符合[模型兼容性要求](#model-compatibility-requirements)的自定义模型。
 
@@ -42,17 +42,27 @@ android {
 dependencies {
     // Other dependencies
 
-    // Import the Task Text Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
+    // Import the Task Vision Library dependency (NNAPI is included)
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
+    // Import the GPU delegate plugin Library for GPU inference
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.3.0'
 }
 ```
+
+注：从 Android Gradle 插件的 4.1 版开始，默认情况下，.tflite 将被添加到 noCompress 列表中，不再需要上面的 aaptOptions。
 
 ### 步骤 2：使用 API 运行推断
 
 ```java
 // Initialization, use NLClassifierOptions to configure input and output tensors
-NLClassifierOptions options = NLClassifierOptions.builder().setInputTensorName(INPUT_TENSOR_NAME).setOutputScoreTensorName(OUTPUT_SCORE_TENSOR_NAME).build();
-NLClassifier classifier = NLClassifier.createFromFileAndOptions(context, modelFile, options);
+NLClassifierOptions options =
+    NLClassifierOptions.builder()
+        .setBaseOptions(BaseOptions.builder().useGpu().build())
+        .setInputTensorName(INPUT_TENSOR_NAME)
+        .setOutputScoreTensorName(OUTPUT_SCORE_TENSOR_NAME)
+        .build();
+NLClassifier classifier =
+    NLClassifier.createFromFileAndOptions(context, modelFile, options);
 
 // Run inference
 List<Category> results = classifier.classify(input);
@@ -69,7 +79,7 @@ List<Category> results = classifier.classify(input);
 ```
 target 'MySwiftAppWithTaskAPI' do
   use_frameworks!
-  pod 'TensorFlowLiteTaskText', '~> 0.0.1-nightly'
+  pod 'TensorFlowLiteTaskText', '~> 0.2.0'
 end
 ```
 
@@ -92,26 +102,21 @@ let categories = nlClassifier.classify(text: input)
 
 ## 用 C++ 运行推断
 
-注：我们正在改善 C++ Task Library 的可用性，如提供预先构建的二进制文件，并创建用户友好的工作流以从源代码进行构建。C++ API 可能会发生变化。
-
 ```c++
 // Initialization
-std::unique_ptr<NLClassifier> classifier = NLClassifier::CreateFromFileAndOptions(
-    model_path,
-    {
-      .input_tensor_name=kInputTensorName,
-      .output_score_tensor_name=kOutputScoreTensorName,
-    }).value();
+NLClassifierOptions options;
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
+std::unique_ptr<NLClassifier> classifier = NLClassifier::CreateFromOptions(options).value();
 
-// Run inference
-std::vector<core::Category> categories = classifier->Classify(kInput);
+// Run inference with your input, `input_text`.
+std::vector<core::Category> categories = classifier->Classify(input_text);
 ```
 
 有关详情，请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/nl_classifier.h)。
 
 ## 结果示例
 
-下面是[电影评论模型](https://www.tensorflow.org/lite/models/text_classification/overview)的分类结果示例。
+下面是[电影评论模型](https://www.tensorflow.org/lite/examples/text_classification/overview)的分类结果示例。
 
 输入：“What a waste of my time.”
 
@@ -126,15 +131,15 @@ category[1]: 'Positive' : '0.18687'
 
 ## 模型兼容性要求
 
-根据用例，`NLClassifier` API 可以加载带或不带 [TFLite 模型元数据](../../convert/metadata.md)的 TFLite 模型。
+根据用例的不同，`NLClassifier` API 可以加载带有或不带有 [TFLite Model Metadata](../../models/convert/metadata) 的 TFLite 模型。请参阅使用 [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#nl_classifiers) 为自然语言分类器创建元数据的示例。
 
 兼容的模型应满足以下要求：
 
 - 输入张量 (kTfLiteString/kTfLiteInt32)
 
     - 模型的输入应为 kTfLiteString 张量原始输入字符串或用于原始输入字符串的正则表达式标记化索引的 kTfLiteInt32 张量。
-    - 如果输入类型为 kTfLiteString，则模型不需要[元数据](../../convert/metadata.md)。
-    - 如果输入类型为 kTfLiteInt32，则需要在输入张量的[元数据](../../convert/metadata.md)中设置 `RegexTokenizer`。
+    - 如果输入类型为 kTfLiteString，则模型不需要[元数据](../../models/convert/metadata)。
+    - If input type is kTfLiteInt32, a `RegexTokenizer` needs to be set up in the input tensor's [Metadata](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers).
 
 - 输入分数张量：(kTfLiteUInt8/kTfLiteInt8/kTfLiteInt16/kTfLiteFloat32/kTfLiteFloat64)
 
@@ -142,7 +147,7 @@ category[1]: 'Positive' : '0.18687'
 
     - 如果类型是 Int 类型中的一种，将其去量化为 double/float 到相应的平台
 
-    - 可以在输出张量的对应类别标签的[元数据](../../convert/metadata.md)中包含一个可选的关联文件，该文件应为纯文本文件，每行一个标签，并且标签数量应与模型输出的类别数量相匹配。
+    - 可以在输出张量的对应类别标签的[元数据](../../models/convert/metadata)中包含一个可选的关联文件，该文件应为纯文本文件，每行一个标签，并且标签数量应与模型输出的类别数量相匹配。请参阅[示例标签文件](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/python/tests/testdata/nl_classifier/labels.txt)。
 
 - 输出标签张量：(kTfLiteString/kTfLiteInt32)
 
