@@ -22,7 +22,7 @@ sudo xcodebuild -license accept
 
 ### 安装 Bazel
 
-Bazel 是 TensorFlow 的主要构建系统。按照 [Bazel 网站上的说明](https://docs.bazel.build/versions/master/install-os-x.html)安装 Bazel。确保在 `tensorflow` 仓库根下的 [`configure.py` 文件](https://github.com/tensorflow/tensorflow/blob/master/configure.py)中选择一个介于 `_TF_MIN_BAZEL_VERSION` 到 `_TF_MAX_BAZEL_VERSION` 之间的版本。
+Bazel 是 TensorFlow 的主要构建系统。按照 [Bazel 网站上的说明]安装 Bazel。确保在 `tensorflow` 仓库根下的 [`configure.py` 文件]中选择一个介于 `_TF_MIN_BAZEL_VERSION` 到 `_TF_MAX_BAZEL_VERSION` 之间的版本。
 
 ### 配置工作区和 .bazelrc
 
@@ -39,7 +39,7 @@ bazel build --config=ios_fat -c opt --cxxopt=--std=c++17 \
   //tensorflow/lite/ios:TensorFlowLiteC_framework
 ```
 
-此命令将在 TensorFlow 根目录的 `bazel-bin/tensorflow/lite/ios/` 目录下生成 `TensorFlowLiteC_framework.zip` 文件。默认情况下，生成的框架包含一个“胖”二进制文件，其中包含 armv7、arm64 和 x86_64（但不包含 i386）。要查看在指定 `--config=ios_fat` 时使用的构建标志的完整列表，请参阅 [`.bazelrc` 文件](https://github.com/tensorflow/tensorflow/blob/master/.bazelrc)中的 iOS 配置部分。
+此命令将在 TensorFlow 根目录的 `bazel-bin/tensorflow/lite/ios/` 目录下生成 `TensorFlowLiteC_framework.zip` 文件。默认情况下，生成的框架包含一个“胖”二进制文件，其中包含 armv7、arm64 和 x86_64（但不包含 i386）。要查看在指定 `--config=ios_fat` 时使用的构建标志的完整列表，请参阅 [`.bazelrc` 文件]中的 iOS 配置部分。
 
 ### 构建 TensorFlowLiteC 静态框架
 
@@ -78,7 +78,7 @@ bash tensorflow/lite/ios/build_frameworks.sh \
 
 #### 使用本地 Swift 或 Objective-C API
 
-如果您使用的是 CocoaPods，并且仅希望测试对 TensorFlow Lite 的 [Swift API](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/swift) 或 [Objective-C API](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/objc) 的某些本地变更，请按以下步骤操作。
+如果您使用的是 CocoaPods，并且仅希望测试对 TensorFlow Lite 的 [Swift API] 或 [Objective-C API] 的某些本地变更，请按以下步骤操作。
 
 1. 在 `tensorflow` 检出中对 Swift 或 Objective-C API 进行更改。
 
@@ -92,7 +92,7 @@ bash tensorflow/lite/ios/build_frameworks.sh \
 
 #### 使用本地 TensorFlow Lite 核心
 
-您可以设置一个专用的 CocoaPods 规范仓库，并将您的自定义 `TensorFlowLiteC` 框架发布到您的专用仓库中。您可以复制此 [podspec 文件](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/ios/TensorFlowLiteC.podspec)并修改一些值：
+您可以设置一个专用的 CocoaPods 规范仓库，并将您的自定义 `TensorFlowLiteC` 框架发布到您的专用仓库中。您可以复制此 [podspec 文件]并修改一些值：
 
 ```ruby
   ...
@@ -105,7 +105,7 @@ bash tensorflow/lite/ios/build_frameworks.sh \
   ...
 ```
 
-创建自己的 `TensorFlowLiteC.podspec` 文件后，您可以按照[使用私有 CocoaPods 的说明](https://guides.cocoapods.org/making/private-cocoapods.html)在您自己的项目中加以使用。此外，您还可以修改 `TensorFlowLite(Swift|ObjC).podspec` 以指向您的自定义 `TensorFlowLiteC` Pod，并在您的应用项目中使用 Swift 或 Objective-C Pod。
+创建自己的 `TensorFlowLiteC.podspec` 文件后，您可以按照[使用私有 CocoaPods 的说明]在您自己的项目中加以使用。此外，您还可以修改 `TensorFlowLite(Swift|ObjC).podspec` 以指向您的自定义 `TensorFlowLiteC` Pod，并在您的应用项目中使用 Swift 或 Objective-C Pod。
 
 ### Bazel 开发者
 
@@ -145,3 +145,12 @@ objc_library(
 当您将框架作为嵌入式二进制文件添加时，Xcode 还会更新 Build Settings 标签页下的 Framework Search Paths 条目，以包括框架的父目录。如果这种情况未自动发生，则应手动添加 `TensorFlowLiteC.framework` 目录的父目录。
 
 完成这两个设置后，您应当能够导入并调用 `TensorFlowLiteC.framework/Headers` 目录下的头文件定义的 TensorFlow Lite 的 C API。
+
+
+[Bazel 网站上的说明]: https://docs.bazel.build/versions/master/install-os-x.html
+[`.bazelrc` 文件]: https://github.com/tensorflow/tensorflow/blob/master/.bazelrc
+[`configure.py` 文件]: https://github.com/tensorflow/tensorflow/blob/master/configure.py
+[Objective-C API]: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/objc
+[使用私有 CocoaPods 的说明]: https://guides.cocoapods.org/making/private-cocoapods.html
+[Swift API]: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/swift
+[podspec 文件]: https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/ios/TensorFlowLiteC.podspec
