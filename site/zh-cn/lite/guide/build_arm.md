@@ -21,7 +21,7 @@ XNNPack | 支持 | 支持
 
 ## 使用 Bazel 对 ARM 进行交叉编译
 
-If you have a Bazel project or if you want to use TF ops, you'd better use Bazel build system. You'll use the integrated [ARM GCC 8.3 toolchains](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tools/toolchains/embedded/arm-linux) with Bazel to build an ARM32/64 shared library.
+如果您有一个 Bazel 项目，或者您想使用 TF 运算，那么您最好使用 Bazel 构建系统。您将使用集成的 [ARM GCC 8.3 工具链](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tools/toolchains/embedded/arm-linux)配合 Bazel 构建 ARM32/64 共享库。
 
 目标架构 | Bazel 配置 | 兼容设备
 --- | --- | ---
