@@ -19,7 +19,7 @@ This document explains how to use the TensorFlow Lite Hexagon Delegate in your a
 
 **支持的模型：**
 
-The Hexagon delegate supports all models that conform to our [8-bit symmetric quantization spec](https://www.tensorflow.org/lite/performance/quantization_spec), including those generated using [post-training integer quantization](https://www.tensorflow.org/lite/performance/post_training_integer_quant). UInt8 models trained with the legacy [quantization-aware training](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize) path are also supported, for e.g., [these quantized versions](https://www.tensorflow.org/lite/guide/hosted_models#quantized_models) on our Hosted Models page.
+Hexagon 委托支持符合我们的 [8 位对称量化规范](https://www.tensorflow.org/lite/performance/quantization_spec)的所有模型，包括使用[训练后整数量化](https://www.tensorflow.org/lite/performance/post_training_integer_quant)生成的模型。使用旧[量化感知训练](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize)路径训练的 UInt8 模型也受支持，例如，我们的“托管模型”页面上的[这些量化版本](https://www.tensorflow.org/lite/guide/hosted_models#quantized_models)。
 
 ## Hexagon 委托 Java API
 
@@ -59,21 +59,21 @@ dependencies {
 #### 第 2 步. 将 Hexagon 库添加到 Android 应用
 
 - 下载并运行 hexagon_nn_skel.run。它应该会提供 3 个不同的共享库：“libhexagon_nn_skel.so”、“libhexagon_nn_skel_v65.so”、“libhexagon_nn_skel_v66.so”
-    - [v1.10.3](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_1_10_3_1.run)
-    - [v1.14](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.14.run)
-    - [v1.17](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.17.0.0.run)
-    - [v1.20](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.0.run)
+    - v1.10.3
+    - v1.14
+    - v1.17
+    - v1.20
     - [v1.20.0.1](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
 
 注：您需要接受许可协议。
 
 注：从 2021 年 2 月 23 日起，您应当使用 v1.20.0.1。
 
-Note: You must use the hexagon_nn libraries with the compatible version of interface library. Interface library is part of the AAR and fetched by bazel through the [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) The version in the bazel config is the version you should use.
+注：必须将 hexagon_nn 库与兼容版本的接口库一起使用。接口库是 AAR 的一部分，由 Bazel 通过 [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) 获取。Bazel 配置中的版本就是您应该使用的版本。
 
-- Include all 3 in your app with other shared libraries. See [How to add shared library to your app](#how-to-add-shared-library-to-your-app). The delegate will automatically pick the one with best performance depending on the device.
+- 在应用中包含所有 3 个共享库和其他共享库。请参阅[如何将共享库添加到应用](#how-to-add-shared-library-to-your-app)。委托会根据设备自动选择性能最佳的共享库。
 
-Note: If your app will be built for both 32 and 64-bit ARM devices, then you will need to add the Hexagon shared libs to both 32 and 64-bit lib folders.
+注：如果您要同时为 32 位和 64 位 ARM 设备构建应用，则需要将 Hexagon 共享库同时添加到 32 位和 64 位 lib 文件夹中。
 
 #### 第 3 步. 创建委托并初始化 TensorFlow Lite 解释器
 
@@ -157,30 +157,29 @@ dependencies {
 #### 第 2 步. 将 Hexagon 库添加到 Android 应用
 
 - 下载并运行 hexagon_nn_skel.run。它应该会提供 3 个不同的共享库：“libhexagon_nn_skel.so”、“libhexagon_nn_skel_v65.so”、“libhexagon_nn_skel_v66.so”
-    - [v1.10.3](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_1_10_3_1.run)
-    - [v1.14](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.14.run)
-    - [v1.17](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.17.0.0.run)
-    - [v1.20](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.0.run)
+    - v1.10.3
+    - v1.14
+    - v1.17
+    - v1.20
     - [v1.20.0.1](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
 
 注：您需要接受许可协议。
 
 注：从 2021 年 2 月 23 日起，您应当使用 v1.20.0.1。
 
-Note: You must use the hexagon_nn libraries with the compatible version of interface library. Interface library is part of the AAR and fetched by bazel through the [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl). The version in the bazel config is the version you should use.
+注：必须将 hexagon_nn 库与兼容版本的接口库一起使用。接口库是 AAR 的一部分，由 Bazel 通过 [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) 获取。Bazel 配置中的版本就是您应该使用的版本。
 
 - 在应用中包含所有 3 个共享库和其他共享库。请参阅[如何将共享库添加到应用](#how-to-add-shared-library-to-your-app)。委托会根据设备自动选择性能最佳的共享库。
 
-Note: If your app will be built for both 32 and 64-bit ARM devices, then you will need to add the Hexagon shared libs to both 32 and 64-bit lib folders.
+注：如果您要同时为 32 位和 64 位 ARM 设备构建应用，则需要将 Hexagon 共享库同时添加到 32 位和 64 位 lib 文件夹中。
 
 #### 第 3 步. 包含 C 头
 
-- The header file "hexagon_delegate.h" can be downloaded from [GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/hexagon_delegate.h) or extracted from the Hexagon delegate AAR.
+- 头文件“hexagon_delegate.h”既可以从 [GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/hexagon_delegate.h) 下载，也可以从 Hexagon 委托 AAR 提取。
 
 #### 第 4 步. 创建委托并初始化 TensorFlow Lite 解释器
 
-- In your code, ensure the native Hexagon library is loaded. This can be done by calling `System.loadLibrary("tensorflowlite_hexagon_jni");`
-     in your Activity or Java entry-point.
+- 在您的代码中，确保已加载原生 Hexagon 库。在您的操作组件或 Java 入口点中调用 `System.loadLibrary("tensorflowlite_hexagon_jni");` <br>即可加载此库。
 
 - 创建委托，示例：
 
@@ -214,20 +213,18 @@ TfLiteHexagonTearDown();  // Needed once at end of app/DSP usage.
     - ARM 32 位：`app/src/main/jniLibs/armeabi-v7a`
 - 将 .so 文件放在与架构相符的目录中。
 
-Note: If you're using App Bundle for publishing your Application, you might want to set android.bundle.enableUncompressedNativeLibs=false in the gradle.properties file.
+注：如果您使用 App Bundle 发布应用，可能需要在 gradle.properties 文件中设置 android.bundle.enableUncompressedNativeLibs=false。
 
 ## 反馈
 
-For issues, please create a [GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) issue with all the necessary repro details, including the phone model and board used (`adb shell getprop ro.product.device` and `adb shell getprop ro.board.platform`).
+如有问题，请创建 [GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) 议题，并提供重现问题所需的所有必要详情，包括使用的手机型号和主板（`adb shell getprop ro.product.device` 和 `adb shell getprop ro.board.platform`）。
 
 ## 常见问题解答
 
 - 委托支持哪些运算？
-    - See the current list of [supported ops and constraints](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)
+    - 请参见[支持的运算和约束](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)的最新列表
 - 启用委托时，如何确定模型是否使用 DSP？
-    - Two log messages will be printed when you enable the delegate - one to indicate if the delegate was created and another to indicate how many nodes are running using the delegate.
-         `Created TensorFlow Lite delegate for Hexagon.`
-         `Hexagon delegate: X nodes delegated out of Y nodes.`
+    - 启用委托时会打印两条消息：其中一条指示是否创建了委托，另一条指示有多少节点使用委托运行。<br> `Created TensorFlow Lite delegate for Hexagon.` <br> `Hexagon delegate: X nodes delegated out of Y nodes.`
 - 是否需要支持模型中的所有运算才能运行委托？
     - 不需要，模型会根据支持的运算分配到子计算图中。任何不受支持的运算都将在 CPU 上运行。
 - 如何从源代码构建 Hexagon 委托 AAR？
