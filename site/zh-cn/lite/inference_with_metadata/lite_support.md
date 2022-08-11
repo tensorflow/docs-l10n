@@ -2,7 +2,7 @@
 
 注：TensorFlow Lite Support Library 目前只支持 Android。
 
-移动应用开发者通常会与类型化的对象（如位图）或基元（如整数）进行交互。然而，在设备端运行机器学习模型的 TensorFlow Lite 解释器使用的是 ByteBuffer 形式的张量，可能难以调试和操作。[TensorFlow Lite Android Support Library](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/java) 旨在帮助处理TensorFlow Lite 模型的输入和输出，并使 TensorFlow Lite 解释器更易于使用。
+移动应用开发者通常会与类型化的对象（如位图）或基元（如整数）进行交互。然而，在设备端运行机器学习模型的 TensorFlow Lite Interpreter API 使用的是 ByteBuffer 形式的张量，可能难以调试和操作。[TensorFlow Lite Android Support Library](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/java) 旨在帮助处理 TensorFlow Lite 模型的输入和输出，并使 TensorFlow Lite 解释器更易于使用。
 
 ## 开始
 
@@ -32,13 +32,16 @@ dependencies {
 }
 ```
 
-探索[托管在 JCenter 上的 TensorFlow Lite Support Library AAR](https://bintray.com/google/tensorflow/tensorflow-lite-support)，以获取不同版本的 Support Library。
+注：从 Android Gradle 插件的 4.1 版开始，默认情况下，.tflite 将被添加到 noCompress 列表中，不再需要上面的 aaptOptions。
+
+探索[托管在 MavenCentral 上的 TensorFlow Lite Support Library AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-support)，以获取不同版本的 Support Library。
 
 ### 基本的图像处理和转换
 
 TensorFlow Lite Support Library 有一套基本的图像处理方法，如裁剪和调整大小。要使用它，请创建 `ImagePreprocessor`，并添加所需的运算。要将图像转换为 TensorFlow Lite 解释器所需的张量格式，请创建 `TensorImage` 用作输入：
 
 ```java
+import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.image.ImageProcessor;
 import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.image.ops.ResizeOp;
@@ -53,21 +56,43 @@ ImageProcessor imageProcessor =
 
 // Create a TensorImage object. This creates the tensor of the corresponding
 // tensor type (uint8 in this case) that the TensorFlow Lite interpreter needs.
-TensorImage tImage = new TensorImage(DataType.UINT8);
+TensorImage tensorImage = new TensorImage(DataType.UINT8);
 
 // Analysis code for every frame
 // Preprocess the image
-tImage.load(bitmap);
-tImage = imageProcessor.process(tImage);
+tensorImage.load(bitmap);
+tensorImage = imageProcessor.process(tensorImage);
 ```
 
-张量的 `DataType` 可通过 [Metadata Exractor 库](../convert/metadata.md#read-the-metadata-from-models)和其他模型信息进行读取。
+张量的 `DataType` 可通过 [Metadata Exractor 库](../models/convert/metadata.md#read-the-metadata-from-models)和其他模型信息进行读取。
+
+### 基本音频数据处理
+
+TensorFlow Lite Support Library 还定义了一个 `TensorAudio` 类，该类封装了一些基本的音频数据处理方法。它主要和 [AudioRecord](https://developer.android.com/reference/android/media/AudioRecord) 配合使用，在环形缓冲区中捕获音频样本。
+
+```java
+import android.media.AudioRecord;
+import org.tensorflow.lite.support.audio.TensorAudio;
+
+// Create an `AudioRecord` instance.
+AudioRecord record = AudioRecord(...)
+
+// Create a `TensorAudio` object from Android AudioFormat.
+TensorAudio tensorAudio = new TensorAudio(record.getFormat(), size)
+
+// Load all audio samples available in the AudioRecord without blocking.
+tensorAudio.load(record)
+
+// Get the `TensorBuffer` for inference.
+TensorBuffer buffer = tensorAudio.getTensorBuffer()
+```
 
 ### 创建输出对象并运行模型
 
 在运行模型之前，我们需要创建用于存储结果的容器对象：
 
 ```java
+import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 // Create a container for the result and specify that this is a quantized model.
@@ -79,14 +104,17 @@ TensorBuffer probabilityBuffer =
 加载模型并运行推断：
 
 ```java
-import org.tensorflow.lite.support.model.Model;
+import java.nio.MappedByteBuffer;
+import org.tensorflow.lite.InterpreterFactory;
+import org.tensorflow.lite.InterpreterApi;
 
 // Initialise the model
 try{
     MappedByteBuffer tfliteModel
         = FileUtil.loadMappedFile(activity,
             "mobilenet_v1_1.0_224_quant.tflite");
-    Interpreter tflite = new Interpreter(tfliteModel)
+    InterpreterApi tflite = new InterpreterFactory().create(
+        tfliteModel, new InterpreterApi.Options());
 } catch (IOException e){
     Log.e("tfliteSupport", "Error reading model", e);
 }
@@ -121,7 +149,9 @@ try {
 以下代码段演示了如何将概率与类别标签关联起来：
 
 ```java
+import java.util.Map;
 import org.tensorflow.lite.support.common.TensorProcessor;
+import org.tensorflow.lite.support.common.ops.NormalizeOp;
 import org.tensorflow.lite.support.label.TensorLabel;
 
 // Post-processor which dequantize the result
@@ -142,7 +172,7 @@ if (null != associatedAxisLabels) {
 
 当前版本的 TensorFlow Lite Support Library 涵盖了以下内容：
 
-- 常见的数据类型（浮点、uint8、图像，以及这些对象的数组）作为 tflite 模型的输入和输出。
+- 常见的数据类型（浮点、uint8、图像、音频，以及这些对象的数组）作为 tflite 模型的输入和输出。
 - 基本的图像运算（裁剪图像，调整大小和旋转）。
 - 归一化和量化
 - 文件实用工具
@@ -151,9 +181,15 @@ if (null != associatedAxisLabels) {
 
 ## ImageProcessor 架构
 
-`ImageProcessor` 的设计允许预先定义图像处理运算，并在构建过程中进行优化。`ImageProcessor` 目前支持三种基本的预处理运算。
+`ImageProcessor` 的设计允许预先定义图像处理运算，并在构建过程中进行优化。code1}ImageProcessor 目前支持三种基本的预处理运算，如下面代码段中的三条注释所述：
 
 ```java
+import org.tensorflow.lite.support.common.ops.NormalizeOp;
+import org.tensorflow.lite.support.common.ops.QuantizeOp;
+import org.tensorflow.lite.support.image.ops.ResizeOp;
+import org.tensorflow.lite.support.image.ops.ResizeWithCropOrPadOp;
+import org.tensorflow.lite.support.image.ops.Rot90Op;
+
 int width = bitmap.getWidth();
 int height = bitmap.getHeight();
 
@@ -172,7 +208,7 @@ ImageProcessor imageProcessor =
         .build();
 ```
 
-请在[此处](../convert/metadata.md#normalization-and-quantization-parameters)参阅有关归一化和量化的详细信息。
+请在[此处](../models/convert/metadata.md#normalization-and-quantization-parameters)参阅有关归一化和量化的详细信息。
 
 支持库的最终目标是支持所有 [`tf.image`](https://www.tensorflow.org/api_docs/python/tf/image) 转换。这意味着转换将与 TensorFlow 相同，且实现将独立于操作系统。
 
@@ -183,7 +219,7 @@ ImageProcessor imageProcessor =
 初始化类似 `TensorImage` 或 `TensorBuffer` 的输入或输出对象时，需要将它们的类型指定为 `DataType.UINT8` 或`DataType.FLOAT32`。
 
 ```java
-TensorImage tImage = new TensorImage(DataType.UINT8);
+TensorImage tensorImage = new TensorImage(DataType.UINT8);
 TensorBuffer probabilityBuffer =
     TensorBuffer.createFixedSize(new int[]{1, 1001}, DataType.UINT8);
 ```
@@ -199,4 +235,4 @@ TensorProcessor probabilityProcessor =
 TensorBuffer dequantizedBuffer = probabilityProcessor.process(probabilityBuffer);
 ```
 
-张量的量化参数可以通过 [Metadata Exractor 库](../convert/metadata.md#read-the-metadata-from-models)来读取。
+张量的量化参数可以通过 [Metadata Exractor 库](../models/convert/metadata.md#read-the-metadata-from-models)来读取。
