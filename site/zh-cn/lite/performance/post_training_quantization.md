@@ -75,7 +75,8 @@ tflite_quant_model = converter.convert()
 
 您可以通过提供输入张量列表来生成代表性数据集：
 
-<pre>def representative_dataset():
+<pre>
+def representative_dataset():
   for data in tf.data.Dataset.from_tensor_slices((images)).batch(1).take(100):
     yield [tf.dtypes.cast(data, tf.float32)]
 </pre>
@@ -84,7 +85,8 @@ tflite_quant_model = converter.convert()
 
 出于测试目的，您可以使用如下所示的虚拟数据集：
 
-<pre>def representative_dataset():
+<pre>
+def representative_dataset():
     for _ in range(100):
       data = np.random.rand(1, 244, 244, 3)
       yield [data.astype(np.float32)]
@@ -94,7 +96,8 @@ tflite_quant_model = converter.convert()
 
 为了对模型进行全整数量化，但在模型没有整数实现时使用浮点算子（以确保转换顺利进行），请按照以下步骤进行操作：
 
-<pre>import tensorflow as tf
+<pre>
+import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 &lt;b&gt;converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.representative_dataset = representative_dataset&lt;/b&gt;
@@ -111,7 +114,8 @@ tflite_quant_model = converter.convert()
 
 此外，为了确保兼容仅支持整数的设备（如 8 位微控制器）和加速器（如 Coral Edge TPU），您可以使用以下步骤对包括输入和输出在内的所有算子强制执行全整数量化：
 
-<pre>import tensorflow as tf
+<pre>
+import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.representative_dataset = representative_dataset
@@ -127,7 +131,8 @@ tflite_quant_model = converter.convert()
 
 您可以通过将权重量化为 float16（16 位浮点数的 IEEE 标准）来缩减浮点模型的大小。要启用权重的 float16 量化，请使用以下步骤：
 
-<pre>import tensorflow as tf
+<pre>
+import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 &lt;b&gt;converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.target_spec.supported_types = [tf.float16]&lt;/b&gt;
@@ -151,7 +156,8 @@ float16 量化的缺点如下：
 
 这种量化的主要优点是可以显著提高准确率，但只会稍微增加模型大小。
 
-<pre>import tensorflow as tf
+<pre>
+import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 converter.representative_dataset = representative_dataset
 &lt;b&gt;converter.optimizations = [tf.lite.Optimize.DEFAULT]
@@ -161,7 +167,8 @@ tflite_quant_model = converter.convert()
 
 如果模型中的部分算子不支持 16x8 量化，模型仍然可以量化，但不受支持的算子会保留为浮点。要允许此操作，应将以下选项添加到 target_spec 中。
 
-<pre>import tensorflow as tf
+<pre>
+import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 converter.representative_dataset = representative_dataset
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
