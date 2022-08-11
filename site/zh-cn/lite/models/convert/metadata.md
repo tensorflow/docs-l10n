@@ -10,7 +10,7 @@ All image models published on [TensorFlow Hub](https://tfhub.dev/s?deployment-fo
 ## Model with metadata format
 
 <center><img src="../../images/convert/model_with_metadata.png" alt="model_with_metadata" width="70%"></center>
-<center>Figure 1. TFLite model with metadata and associated files.</center>
+<center>图 1. 带有元数据和相关文件的 TFLite 模型。</center>
 
 Model metadata is defined in [metadata_schema.fbs](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs), a [FlatBuffer](https://google.github.io/flatbuffers/index.html#flatbuffers_overview) file. As shown in Figure 1, it is stored in the [metadata](https://github.com/tensorflow/tensorflow/blob/bd73701871af75539dd2f6d7fdba5660a8298caf/tensorflow/lite/schema/schema.fbs#L1208) field of the [TFLite model schema](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema.fbs), under the name, `"TFLITE_METADATA"`. Some models may come with associated files, such as [classification label files](https://github.com/tensorflow/examples/blob/dd98bc2b595157c03ac9fa47ac8659bb20aa8bbd/lite/examples/image_classification/android/models/src/main/assets/labels.txt#L1). These files are concatenated to the end of the original model file as a ZIP using the ZipFile ["append" mode](https://pymotw.com/2/zipfile/#appending-to-files) (`'a'` mode). TFLite Interpreter can consume the new file format in the same way as before. See [Pack the associated files](#pack-the-associated-files) for more information.
 
