@@ -6,7 +6,7 @@
 
 **注**：此功能从 2.4 版本开始提供。
 
-#### Prerequisites
+#### <a>先决条件</a>
 
 您需要安装 CMake 和 TensorFlow 源代码的副本。有关详细信息，请参阅[使用 CMake 构建 TensorFlow Lite](https://www.tensorflow.org/lite/guide/build_cmake) 页面。
 
@@ -35,7 +35,7 @@ make -C tensorflow/lite/tools/pip_package docker-build \
 
 `tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh` 脚本需要目标名称来确定目标架构。以下是支持的目标的列表。
 
-目标 | Target architecture | 注释
+目标 | 目标架构 | 注释
 --- | --- | ---
 armhf | ARMv7 VFP 带 Neon | 兼容 Raspberry Pi 3 和 4
 rpi0 | ARMv6 | 兼容 Raspberry Pi Zero
@@ -65,7 +65,7 @@ make -C tensorflow/lite/tools/pip_package docker-build \
 
 如果生成的二进制文件与您的目标不兼容，则需要使用您自己的工具链或提供自定义的构建标志。（请查看[此页面](https://www.tensorflow.org/lite/guide/build_cmake_arm#check_your_target_environment)以了解您的目标环境）。在这种情况下，您需要修改 `tensorflow/lite/tools/cmake/download_toolchains.sh` 以使用您自己的工具链。工具链脚本为 `build_pip_package_with_cmake.sh` 脚本定义了以下两个变量。
 
-变量 | Purpose | 示例
+变量 | 目的 | 示例
 --- | --- | ---
 ARMCC_PREFIX | 定义工具链前缀 | arm-linux-gnueabihf-
 ARMCC_FLAGS | 编译标志 | -march=armv7-a -mfpu=neon-vfpv4
