@@ -1,6 +1,6 @@
 # 精选 TensorFlow 算子
 
-Since the TensorFlow Lite builtin operator library only supports a limited number of TensorFlow operators, not every model is convertible. For details, refer to [operator compatibility](ops_compatibility.md).
+由于 TensorFlow Lite 内置算子库仅支持有限数量的 TensorFlow 算子，所以并非所有模型都可以转换。有关详细信息，请参阅[算子兼容性](ops_compatibility.md)。
 
 为了允许进行转换，用户可以在 TensorFlow Lite 模型中启用[特定 TensorFlow 算子](op_select_allowlist.md)的使用。但是，运行带 TensorFlow 算子的 TensorFlow Lite 模型需要引入核心 TensorFlow 运行时，这会增加 TensorFlow Lite 解释器的二进制文件大小。对于 Android，您可以通过有选择地仅构建所需 Tensorflow 算子来避免这种情况。有关详情，请参阅[缩减二进制文件大小](../guide/reduce_binary_size.md)。
 
@@ -157,7 +157,7 @@ bazel build -c opt --config=monolithic tensorflow/lite/delegates/flex:tensorflow
 
 此命令会在 `bazel-bin/tensorflow/lite/delegates/flex` 中生成以下共享库。
 
-Platform | 库名称
+平台 | 库名称
 --- | ---
 Linux | libtensorflowlite_flex.so
 macOS | libtensorflowlite_flex.dylib
