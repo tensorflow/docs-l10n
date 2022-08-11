@@ -1,8 +1,8 @@
-# BERT Question and Answer
+# BERT 问答
 
-Use a TensorFlow Lite model to answer questions based on the content of a given passage.
+使用 TensorFlow Lite 模型回答基于指定文章内容的问题。
 
-Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/bert_question_answerer). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/question_answer).
+注：(1) 要集成现有模型，请尝试 [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/bert_question_answerer)。(2) 要自定义模型，请尝试 [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/question_answer)。
 
 ## 开始
 
@@ -10,15 +10,13 @@ Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](htt
 
 如果您是 TensorFlow Lite 新用户，并且使用的是 Android 或 iOS 平台，我们建议您研究以下可以帮助您入门的示例应用。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android example</a>
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/ios">iOS
-example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android 示例</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/ios">iOS 示例</a>
 
 如果您使用的不是 Android/iOS 平台，或者您已经熟悉 [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite)，则可以下载我们的起始问答模型。
 
-<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Download starter model and vocab</a>
+<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">下载入门模型和词汇</a>
 
-For more information about metadata and associated fields (e.g. `vocab.txt`) see <a href="https://www.tensorflow.org/lite/models/convert/metadata#read_the_metadata_from_models">Read the metadata from models</a>.
+有关元数据和相关字段（例如：`vocab.txt`）的详细信息，请参阅<a href="https://www.tensorflow.org/lite/models/convert/metadata#read_the_metadata_from_models">从模型读取元数据</a>。
 
 ## 工作方式
 
@@ -46,10 +44,9 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">
-      <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a>
-    </td>
-    <td rowspan="3">       100.5 Mb     </td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a>
+</td>
+    <td rowspan="3">       100.5 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>123ms*</td>
   </tr>
@@ -86,4 +83,4 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
 ## 详细了解 BERT
 
 - 学术论文：[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)
-- [Open-source implementation of BERT](https://github.com/google-research/bert)
+- [BERT 的开源实现](https://github.com/google-research/bert)
