@@ -183,7 +183,7 @@ if(null != myImageClassifier) {
 
 ### 加速模型推断
 
-The generated code provides a way for developers to accelerate their code through the use of [delegates](../performance/delegates.md) and the number of threads. These can be set when initializing the model object as it takes three parameters:
+生成的代码为开发者提供了一种通过使用[委托](../performance/delegates.md)和线程数来加速代码的方式。这些可以在初始化模型对象时设置，因为它需要三个参数：
 
 -  **`Context`**：Android 操作组件或服务的上下文
 - （可选）**`Device`**：TFLite 加速委托，例如 GPUDelegate 或 NNAPIDelegate
