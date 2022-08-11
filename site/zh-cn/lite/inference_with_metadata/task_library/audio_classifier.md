@@ -8,17 +8,17 @@
 
 - 输入音频处理，例如将 PCM 16 位编码转换为 PCM 浮点编码和处理音频环形缓冲区。
 
-- Label map locale.
+- 标注映射区域。
 
 - 支持多头分类模型。
 
 - 支持单标签和多标签分类。
 
-- Score threshold to filter results.
+- 筛选结果的分数阈值。
 
-- Top-k classification results.
+- Top-k 分类结果。
 
-- Label allowlist and denylist.
+- 标注允许列表和拒绝列表。
 
 ## 支持的音频分类器模型
 
@@ -28,15 +28,15 @@
 
 - [TensorFlow Hub 上的预训练音频分类模型](https://tfhub.dev/google/lite-model/yamnet/classification/tflite/1)。
 
-- Custom models that meet the [model compatibility requirements](#model-compatibility-requirements).
+- 符合[模型兼容性要求](#model-compatibility-requirements)的自定义模型。
 
-## Run inference in Java
+## 用 Java 运行推断
 
 请参阅[音频分类参考应用](https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android)，获得如何在 Android 应用中使用 `AudioClassifier` 的示例。
 
-### Step 1: Import Gradle dependency and other settings
+### 步骤 1：导入 Gradle 依赖项和其他设置
 
-Copy the `.tflite` model file to the assets directory of the Android module where the model will be run. Specify that the file should not be compressed, and add the TensorFlow Lite library to the module’s `build.gradle` file:
+将 `.tflite` 模型文件复制到将要运行模型的 Android 模块的资源目录下。指定不压缩该文件，并将 TensorFlow Lite 库添加到模块的 `build.gradle` 文件中。
 
 ```java
 android {
@@ -60,7 +60,7 @@ dependencies {
 
 注：从 Android Gradle 插件的 4.1 版开始，默认情况下，.tflite 将被添加到 noCompress 列表中，不再需要上面的 aaptOptions。
 
-### Step 2: Using the model
+### 第 2 步：使用模型
 
 ```java
 // Initialization
@@ -99,7 +99,7 @@ pip install tflite-support
 - Linux：运行 `sudo apt-get update && apt-get install libportaudio2`
 - Mac 和 Windows：安装 `tflite-support` pip 软件包时会自动安装 PortAudio。
 
-### Step 2: Using the model
+### 第 2 步：使用模型
 
 ```python
 # Imports
@@ -123,7 +123,7 @@ audio_result = classifier.classify(audio_file)
 
 请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/audio/audio_classifier.py)，了解有关配置 `AudioClassifier` 的更多选项。
 
-## Run inference in C++
+## 用 C++ 运行推断
 
 ```c++
 // Initialization
@@ -143,7 +143,7 @@ const ClassificationResult result = audio_classifier->Classify(*audio_buffer).va
 
 请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/audio/audio_classifier.h)，了解有关配置 `AudioClassifier` 的更多选项。
 
-## Model compatibility requirements
+## 模型兼容性要求
 
 `AudioClassifier` API 需要具有强制性 [TFLite Model Metadata](../../models/convert/metadata.md) 的 TFLite 模型。请参阅使用 [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#audio_classifiers) 为音频分类器创建元数据的示例。
 
@@ -152,10 +152,10 @@ const ClassificationResult result = audio_classifier->Classify(*audio_buffer).va
 - 输入音频张量 (kTfLiteFloat32)
 
     - 大小为 `[batch x samples]` 的音频剪辑。
-    - batch inference is not supported (`batch` is required to be 1).
+    - 不支持批量推断（`batch` 必须为 1）。
     - 对于多通道模型，通道需要交错。
 
 - 输出分数张量 (kTfLiteFloat32)
 
     - `[1 x N]` 数组，其中 `N` 表示类编号。
-    - optional (but recommended) label map(s) as AssociatedFile-s with type TENSOR_AXIS_LABELS, containing one label per line. The first such AssociatedFile (if any) is used to fill the `label` field (named as `class_name` in C++) of the results. The `display_name` field is filled from the AssociatedFile (if any) whose locale matches the `display_names_locale` field of the `AudioClassifierOptions` used at creation time ("en" by default, i.e. English). If none of these are available, only the `index` field of the results will be filled.
+    - 可选（但推荐）标签映射可作为 AssociatedFile-s，类型为 TENSOR_AXIS_LABELS，每行包含一个标签。第一个此类 AssociatedFile（如果有）用于填充结果的 `label` 字段（在 C++ 中命名为 `class_name`）。`display_name` 字段由其区域与创建时所用的 `ImageClassifierOptions` 的 `display_names_locale` 字段（默认为“en”，即英语）相匹配的 AssociatedFile（如果有）填充。如果上述选项均不可用，将仅填充结果中的 `index` 字段。
