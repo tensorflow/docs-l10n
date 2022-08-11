@@ -61,7 +61,7 @@ bazel run //tensorflow/lite/tools:visualize model.tflite visualized_model.html
 
 转换至 TensorFlow Lite 的过程中可以使用[训练后量化](../performance/post_training_quantization)以缩小模型尺寸。训练后量化可将权重从浮点量化至 8 位精度，并在运行时对其进行去量化以执行浮点计算。但请注意，这可能会影响准确性。
 
-If retraining the model is an option, consider [Quantization-aware training](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize). However, note that quantization-aware training is only available for a subset of convolutional neural network architectures.
+如果需要重新训练模型，请考虑采用[量化感知训练](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize)。但请注意，量化感知训练仅适用于卷积神经网络架构的子集。
 
 如需深入了解不同的优化方法，请参见[模型优化](../performance/model_optimization)。
 
