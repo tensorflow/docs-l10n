@@ -4,40 +4,40 @@
 
 This page shows how you can start running TensorFlow Lite models with Python in just a few minutes. All you need is a TensorFlow model [converted to TensorFlow Lite](../models/convert/). (If you don't have a model converted yet, you can experiment using the model provided with the example linked below.)
 
-## About the TensorFlow Lite runtime package
+## 关于 TensorFlow Lite 运行时软件包
 
-To quickly start executing TensorFlow Lite models with Python, you can install just the TensorFlow Lite interpreter, instead of all TensorFlow packages. We call this simplified Python package `tflite_runtime`.
+为了快速开始使用 Python 执行 TensorFlow Lite 模型，您可以仅安装 TensorFlow Lite 解释器，无需安装所有 TensorFlow 软件包。我们将这种简化的 Python 软件包称为 `tflite_runtime`。
 
-The `tflite_runtime` package is a fraction the size of the full `tensorflow` package and includes the bare minimum code required to run inferences with TensorFlow Lite—primarily the [`Interpreter`](https://www.tensorflow.org/api_docs/python/tf/lite/Interpreter) Python class. This small package is ideal when all you want to do is execute `.tflite` models and avoid wasting disk space with the large TensorFlow library.
+`tflite_runtime` 软件包是整个 `tensorflow` 软件包的一小部分，并且包括使用 TensorFlow Lite 运行推断所需的最少代码（主要是 [`Interpreter`](https://www.tensorflow.org/api_docs/python/tf/lite/Interpreter) Python 类）。当您只想执行 `.tflite` 模型并避免因使用大型 TensorFlow 库而浪费磁盘空间时，这种小型软件包是理想选择。
 
 Note: If you need access to other Python APIs, such as the [TensorFlow Lite Converter](../models/convert/), you must install the [full TensorFlow package](https://www.tensorflow.org/install/). For example, the [Select TF ops] (https://www.tensorflow.org/lite/guide/ops_select) are not included in the `tflite_runtime` package. If your models have any dependencies to the Select TF ops, you need to use the full TensorFlow package instead.
 
-## Install TensorFlow Lite for Python
+## 安装适用于 Python 的 TensorFlow Lite
 
-You can install on Linux with pip:
+您可以使用 pip 在 Linux 上安装：
 
 <pre class="devsite-terminal devsite-click-to-copy">python3 -m pip install tflite-runtime
 </pre>
 
 ## 受支持的平台
 
-The `tflite-runtime` Python wheels are pre-built and provided for these platforms:
+`tflite-runtime` Python wheel 针对以下平台进行预构建并提供给这些平台：
 
-- Linux armv7l (e.g. Raspberry Pi 2, 3, 4 and Zero 2 running Raspberry Pi OS 32-bit)
-- Linux aarch64 (e.g. Raspberry Pi 3, 4 running Debian ARM64)
+- Linux armv7l（例如运行 32 位 Raspberry Pi OS 的 Raspberry Pi 2、3、4 和 Zero 2）
+- Linux aarch64（例如运行 Debian ARM64 的 Raspberry Pi 3、4）
 - Linux x86_64
 
-If you want to run TensorFlow Lite models on other platforms, you should either use the [full TensorFlow package](https://www.tensorflow.org/install/), or [build the tflite-runtime package from source](build_cmake_pip.md).
+如果您想在其他平台上运行 TensorFlow Lite 模型，则应使用[完整 TensorFlow 软件包](https://www.tensorflow.org/install/)，或者[从源代码构建 tflite-runtime 软件包](build_cmake_pip.md)。
 
-If you're using TensorFlow with the Coral Edge TPU, you should instead follow the appropriate [Coral setup documentation](https://coral.ai/docs/setup).
+如果您将 TensorFlow 与 Coral Edge TPU 结合使用，则应遵循相应的 [Coral 设置文档](https://coral.ai/docs/setup)。
 
-Note: We no longer update the Debian package `python3-tflite-runtime`. The latest Debian package is for TF version 2.5, which you can install by following [these older instructions](https://github.com/tensorflow/tensorflow/blob/v2.5.0/tensorflow/lite/g3doc/guide/python.md#install-tensorflow-lite-for-python).
+注：我们已不再更新 Debian 软件包 `python3-tflite-runtime`。最新版 Debian 软件包适用于 TF 2.5 版本，您可以按照[这些早期说明](https://github.com/tensorflow/tensorflow/blob/v2.5.0/tensorflow/lite/g3doc/guide/python.md#install-tensorflow-lite-for-python)进行安装。
 
-Note: We no longer release pre-built `tflite-runtime` wheels for Windows and macOS. For these platforms, you should use the [full TensorFlow package](https://www.tensorflow.org/install/), or [build the tflite-runtime package from source](build_cmake_pip.md).
+注：我们已不再发布适用于 Windows 和 macOS 的预构建 `tflite-runtime` wheel。对于这些平台，您应使用[完整 TensorFlow 软件包](https://www.tensorflow.org/install/)，或者[从源代码构建 tflite-runtime 软件包](build_cmake_pip.md)。
 
-## 使用 tflite_runtime 运行推理
+## 使用 tflite_runtime 运行推断
 
-Instead of importing `Interpreter` from the `tensorflow` module, you now need to import it from `tflite_runtime`.
+现在，您需要从 `tflite_runtime` 导入 `Interpreter`，而不是从 `tensorflow` 模块导入。
 
 例如，安装上述软件包后，如果复制并运行 [`label_image.py`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/examples/python/) 文件，（可能）会失败，因为您没有安装 `tensorflow` 库。要解决此问题，请编辑该文件中的下面一行：
 
@@ -75,4 +75,4 @@ interpreter = tflite.Interpreter(model_path=args.model_file)
 
 - To convert other TensorFlow models to TensorFlow Lite, read about the [TensorFlow Lite Converter](../models/convert/).
 
-- If you want to build `tflite_runtime` wheel, read [Build TensorFlow Lite Python Wheel Package](build_cmake_pip.md)
+- 如果您想构建 `tflite_runtime` wheel，请阅读[构建 TensorFlow Lite Python Wheel 软件包](build_cmake_pip.md)
