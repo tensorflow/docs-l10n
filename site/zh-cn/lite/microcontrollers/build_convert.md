@@ -36,7 +36,7 @@ unsigned int converted_model_tflite_len = 18200;
 
 一旦你已经生成了此文件，你可以将它包含入你的程序。在嵌入式平台上，将数组声明改变为 `const` 类型以获得更好的内存效率是重要的。
 
-For an example of how to include and use a model in your program, see [`model.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/model.cc) in the *Hello World* example.
+有关如何在程序中包含并使用模型的示例，请参阅 <em>Hello World</em> 示例中的 <a><code>model.cc</code></a>。
 
 ## 模型结构与训练
 
@@ -58,4 +58,4 @@ For an example of how to include and use a model in your program, see [`model.cc
 
 面向微控制器的 TensorFlow Lite 目前仅支持有限的部分 TensorFlow 运算，这影响了可以运行的模型结构。我们正致力于在参考实现和针对特定结构的优化方面扩展运算支持。
 
-The supported operations can be seen in the file [`all_ops_resolver.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.cc)
+可以在 [`all_ops_resolver.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.cc) 文件中查看支持的运算。
