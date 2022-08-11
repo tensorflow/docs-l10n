@@ -105,7 +105,7 @@ dependencies {
 
 #### 使用 CocoaPods
 
-TensorFlow Lite provides nightly prebuilt select TF ops CocoaPods for `arm64`, which you can depend on alongside the `TensorFlowLiteSwift` or `TensorFlowLiteObjC` CocoaPods.
+TensorFlow Lite 提供适用于 `arm64` 的 Nightly 预构建精选 TF 算子 CocoaPods，您可以将其与 `TensorFlowLiteSwift` 或 `TensorFlowLiteObjC` CocoaPods 一起使用。
 
 *注*：如果需要在 `x86_64` 模拟器中使用精选 TF 算子，则可以自己构建精选算子框架。请参阅[使用 Bazel + Xcode](#using_bazel_xcode) 部分了解详细信息。
 
