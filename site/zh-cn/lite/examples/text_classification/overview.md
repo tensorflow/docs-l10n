@@ -29,7 +29,7 @@ If you are new to TensorFlow Lite and are working with Android, we recommend exp
 
 1. Tokenize the paragraph and convert it to a list of word ids using a predefined vocabulary.
 2. 将该列表馈送到 TensorFlow Lite 模型。
-3. Get the probability of the paragraph being positive or negative from the model outputs.
+3. 从模型输出获取该段落为正面或负面评价的概率。
 
 ### 说明
 
@@ -51,7 +51,7 @@ If you are new to TensorFlow Lite and are working with Android, we recommend exp
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification.tflite">文本分类</a></td>
-    <td rowspan="3">       0.6 Mb     </td>
+    <td rowspan="3">       0.6 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>0.05ms*</td>
   </tr>
@@ -65,7 +65,7 @@ If you are new to TensorFlow Lite and are working with Android, we recommend exp
   </tr>
 </table>
 
-* 4 threads used.
+* 使用 4 个线程。
 
 ** 为了获得最佳性能结果，在 iPhone 上使用 2 个线程。
 
