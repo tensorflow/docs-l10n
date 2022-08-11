@@ -18,7 +18,7 @@ Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](htt
 
 <a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">下载新手图像分类及标签</a>
 
-当新手模型在你的目标设备运行起来之后，你可以尝试其他模型，在性能、准确率以及模型体积间找到最佳的平衡点。详见 <a href="#choose_a_different_model">选择不同模型</a>。
+下面的 Android 示例分别以 <a href="#choose_a_different_model">lib_task_api</a> 和 [lib_support](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_support) 形式演示了两个方法的实现。
 
 我们在 Android 和 iOS 平台上都有图像分类的示例应用，并解释了它们的工作原理。
 
@@ -63,7 +63,7 @@ Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](htt
 
 预测图像类别的任务被称为 *图像分类* 。训练图像分类模型的目的是识别各类图像。比如，一个模型可能被训练用于识别三种动物的特征：兔子、仓鼠和狗。
 
-当我们提供一张新的图片给模型时，它会输出这张图片含有这三种动物的概率。以下是一个输出示例：
+您可能注意到（兔子、仓鼠和狗的）概率的总和是 1。这是多类模型的常见输出。（请参阅 <a href="https://developers.google.com/machine-learning/crash-course/multi-class-neural-networks/softmax">Softmax</a> 了解更多信息）。
 
 Note: Image classification can only tell you the probability that an image represents one or more of the classes that the model was trained on. It cannot tell you the position or identity of objects within the image. If you need to identify objects and their positions within images, you should use an <a href="../object_detection/overview">object detection</a> model.
 
@@ -71,7 +71,7 @@ Note: Image classification can only tell you the probability that an image repre
 
 注意：图像分类只能告诉你图片里出现的类别及其概率，并且只能是被训练过的类别。它不能告诉你图片里对象的位置或者名称。 如果你需要识别图片里对象的名称及位置，你应该使用 <a href="../object_detection/overview.md">物体检测</a> 模型。
 
-在训练中，用图像和其对应的 *标签* 投喂一个图像分类模型。每个标签是一个概念或种类的名字。这个模型就要学会去识别这些标签。
+例如，下表可能表示一个模棱两可的结果：
 
 
 <table style="width: 40%;">   <thead>     <tr>       <th>Label</th>       <th>Probability</th>     </tr>   </thead>   <tbody>     <tr>       <td>rabbit</td>       <td>0.31</td>     </tr>     <tr>       <td>hamster</td>       <td>0.35</td>     </tr>     <tr>       <td>dog</td>       <td>0.34</td>     </tr>   </tbody> </table> If your model frequently returns ambiguous results, you may need a different, more accurate model.
@@ -88,7 +88,7 @@ TensorFlow Lite provides you with a variety of image classification models which
 
 如果您想要训练模型来识别新类，请参阅<a href="#customize_model">自定义模型</a>。
 
-既然概率的总和总是等于 1，那么如果这张图片没有被模型识别出来，也就是不属于被训练的种类，你可能会发现它的几个标签都没有特别大的概率。
+针对以下用例，您应该使用不同的模型：
 
 <ul>
   <li>Predicting the type and position of one or more objects within an image (see <a href="../object_detection/overview">Object detection</a>)</li>
@@ -97,7 +97,7 @@ TensorFlow Lite provides you with a variety of image classification models which
 
 Once you have the starter model running on your target device, you can experiment with different models to find the optimal balance between performance, accuracy, and model size.
 
-<h3>Customize model</h3>
+<h3>自定义模型</h3>
 
 我们提供的这些图形分类模型对单标签分类很有用。单标签分类是指预测图像最有可能表示的某一个标签。这些模型被训练用于识别 1000 类图像。完整的标签列表：<a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">模型压缩包</a>
 
@@ -118,9 +118,9 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>模型名称</th>
       <th>模型大小</th>
-      <th>Device </th>
+      <th>设备</th>
       <th>NNAPI</th>
       <th>CPU</th>
     </tr>
@@ -130,25 +130,25 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a>
     </td>
     <td rowspan="3">       4.3 Mb     </td>
-    <td>Pixel 3 (Android 10) </td>
+    <td>Pixel 3 (Android 10)</td>
     <td>6ms</td>
     <td>13ms*</td>
   </tr>
    <tr>
-     <td>Pixel 4 (Android 10) </td>
+     <td>Pixel 4 (Android 10)</td>
     <td>3.3ms</td>
     <td>5ms*</td>
   </tr>
    <tr>
-     <td>iPhone XS (iOS 12.4.1) </td>
+     <td>iPhone XS (iOS 12.4.1)</td>
      <td></td>
-    <td>11ms** </td>
+    <td>11ms**</td>
   </tr>
 </table>
 
-我们根据在同样的硬件条件下，一个模型执行推断所花费的时间来衡量性能。时间越短，模型越快。
+* 使用 4 个线程。
 
-你需要的性能取决于你的应用。对实时视频这类应用来说，性能可能非常重要。因为需要在下一帧绘制完之前及时分析每一帧（例如：推断用时必须少于 33 ms 才能实时推断 30 fps 的视频流）。
+** 为了获得最佳性能结果，在 iPhone 上使用 2 个线程。
 
 ### 模型准确率
 
@@ -158,7 +158,7 @@ The most relevant accuracy metrics are Top-1 and Top-5. Top-1 refers to how ofte
 
 The TensorFlow Lite quantized MobileNet models’ Top-5 accuracy range from 64.4 to 89.9%.
 
-### Model size
+### 模型大小
 
 磁盘上模型的大小因其性能和准确率而异。大小对移动开发（可能影响应用的下载大小）或在使用硬件时（可用存储空间可能有限）很重要。
 
