@@ -52,7 +52,7 @@ TensorFlow Lite 元数据工具支持 Python 3。
 
 TensorFlow Lite 模型可能随附不同的关联文件。例如，自然语言模型通常具有可将单词片段映射到单词 ID 的 vocab 文件；分类模型可能具有指示对象类别的标签文件。不使用关联文件（如有），模型将无法正常运行。
 
-The associated files can now be bundled with the model through the metadata Python library. The new TensorFlow Lite model becomes a zip file that contains both the model and the associated files. It can be unpacked with common zip tools. This new model format keeps using the same file extension, `.tflite`. It is compatible with existing TFLite framework and Interpreter. See [Pack metadata and associated files into the model](#pack-metadata-and-associated-files-into-the-model) for more details.
+现在可以通过元数据 Python 库将关联文件与模型捆绑在一起。新的 TensorFlow Lite 模型现在以包含模型和关联文件的 zip 文件形式提供。该文件可使用常用的 zip 工具进行解包。这种新模型格式沿用了相同的文件扩展名 `.tflite`。它与现有的 TFLite 框架和解释器兼容。请参阅[将元数据和关联文件打包到模型中](#pack-metadata-and-associated-files-into-the-model)，了解详细信息。
 
 关联文件信息可以记录在元数据内。根据文件类型和文件附加到的位置（即 `ModelMetadata`、`SubGraphMetadata` 和 `TensorMetadata`），[TensorFlow Lite Android 代码生成器](../../inference_with_metadata/codegen)可能会将相应的预处理/后处理自动应用于对象。请参阅元数据模式[各种关联文件类型的 &lt;Codegen usage&gt; 部分](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L77-L127)，了解详细信息 。
 
@@ -290,7 +290,7 @@ Android Studio 还支持通过 [Android Studio 机器学习绑定功能](https:/
 
 ### FlatBuffers 文件标识
 
-Semantic versioning guarantees the compatibility if following the rules, but it does not imply the true incompatibility. When bumping up the MAJOR number, it does not necessarily mean the backward compatibility is broken. Therefore, we use the [Flatbuffers file identification](https://google.github.io/flatbuffers/md__schemas.html), [file_identifier](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L61), to denote the true compatibility of the metadata schema. The file identifier is exactly 4 characters long. It is fixed to a certain metadata schema and not subject to change by users. If the backward compatibility of the metadata schema has to be broken for some reason, the file_identifier will bump up, for example, from “M001” to “M002”. File_identifier is expected to be changed much less frequently than the metadata_version.
+在符合规则的情况下，语义化版本控制能够保证兼容性，但无法指示真实版本的不兼容性。当 MAJOR 编号增大时，不一定表示向后兼容性被破坏。因此，我们使用 [FlatBuffers 文件标识](https://google.github.io/flatbuffers/md__schemas.html) ([file_identifiler](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L61)) 来表示元数据模式的真实兼容性。文件标识符长度为 4 个字符。该长度对于特定元数据模式是固定的，不支持用户更改。如果出于某种原因必须破坏元数据模式的向后兼容性，则 file_identifier 将增大（例如从“M001”变为“M002”）。与 metadata_version 相比，file_identifiler 的预期变更频率要低得多。
 
 ### 所需元数据解析器最低版本
 
@@ -322,7 +322,7 @@ public MetadataExtractor(ByteBuffer buffer);
 
 `ByteBuffer` 在 `MetadataExtractor` 对象的整个生命周期中必须保持不变。如果模型元数据的 FlatBuffers 文件标识符与元数据解析器的标识符不匹配，则初始化可能会失败。请参阅[元数据版本控制](#metadata-versioning)，了解更多信息。
 
-With matching file identifiers, the metadata extractor will successfully read metadata generated from all past and future schema due to the Flatbuffers' forwards and backward compatibility mechanism. However, fields from future schemas cannot be extracted by older metadata extractors. The [minimum necessary parser version](#the-minimum-necessary-metadata-parser-version) of the metadata indicates the minimum version of metadata parser that can read the metadata Flatbuffers in full. You can use the following method to verify if the minimum necessary parser version condition is met:
+在文件标识符匹配的情况下，由于 FlatBuffers 的向前和向后兼容机制，元数据提取器将能成功读取所有由过去和未来模式生成的元数据。但是，来自未来模式的字段不能被旧的元数据提取器提取。元数据的[所需元数据解析器最低版本](#the-minimum-necessary-metadata-parser-version)指示了能够完整读取元数据 FlatBuffers 的元数据解析器的最低版本。您可以使用以下方法来验证是否满足所需元数据解析器最低版本的条件：
 
 ```java
 public final boolean isMinimumParserVersionSatisfied();
