@@ -13,7 +13,7 @@
 
 有一个 TensorFlow Lite 示例应用可以在 Android 上演示这个智能回复模型。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/smart_reply/android">View Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/smart_reply/android">查看 Android 示例应用</a>
 
 阅读 [GitHub 页面](https://github.com/tensorflow/examples/tree/master/lite/examples/smart_reply/android/)以了解应用的工作原理。在此项目中，您还会学习如何使用 C++ 运算构建应用。
 
@@ -37,8 +37,8 @@
 ## 了解更多
 
 <ul>
-  <li><a href="https://arxiv.org/pdf/1708.00630.pdf">Research paper</a></li>
-  <li><a href="https://github.com/tensorflow/examples/tree/master/lite/examples/smart_reply/android">Source code</a></li>
+  <li><a href="https://arxiv.org/pdf/1708.00630.pdf">论文</a></li>
+  <li><a href="https://github.com/tensorflow/examples/tree/master/lite/examples/smart_reply/android">源码</a></li>
 </ul>
 
 ## 用户
@@ -47,5 +47,5 @@
   <li><a href="https://www.blog.google/products/gmail/save-time-with-smart-reply-in-gmail/">Gmail</a></li>
   <li><a href="https://www.blog.google/products/gmail/computer-respond-to-this-email/">Inbox</a></li>
   <li><a href="https://blog.google/products/allo/google-allo-smarter-messaging-app/">Allo</a></li>
-  <li><a href="https://research.googleblog.com/2017/02/on-device-machine-intelligence.html">Smart Replies on Android Wear</a></li>
+  <li><a href="https://research.googleblog.com/2017/02/on-device-machine-intelligence.html">智能回复在上 Android Wear 的应用</a></li>
 </ul>
