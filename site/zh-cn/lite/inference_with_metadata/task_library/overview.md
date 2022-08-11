@@ -32,7 +32,7 @@ TensorFlow Lite Task Library 包含了一套功能强大且易于使用的任务
     - [TextSearcher](text_searcher.md)
     - [TextEmbedder](text_embedder.md)
 
-- **Audio APIs**
+- **音频 API**
 
     - [AudioClassifier](audio_classifier.md)
 
@@ -40,11 +40,11 @@ TensorFlow Lite Task Library 包含了一套功能强大且易于使用的任务
 
     - 扩展任务 API 基础架构并构建[自定义 API](customized_task_api.md)。
 
-## Run Task Library with Delegates
+## 使用委托运行 Task Library
 
-[Delegates](https://www.tensorflow.org/lite/performance/delegates) enable hardware acceleration of TensorFlow Lite models by leveraging on-device accelerators such as the [GPU](https://www.tensorflow.org/lite/performance/gpu) and [Coral Edge TPU](https://coral.ai/). Utilizing them for neural network operations provides huge benefits in terms of latency and power efficiency. For example, GPUs can provide upto a [5x speedup](https://blog.tensorflow.org/2020/08/faster-mobile-gpu-inference-with-opencl.html) in latency on mobile devices, and Coral Edge TPUs inference [10x faster](https://coral.ai/docs/edgetpu/benchmarks/) than desktop CPUs.
+[委托](https://www.tensorflow.org/lite/performance/delegates)能够通过利用设备端加速器（如 [GPU](https://www.tensorflow.org/lite/performance/gpu) 和 [Coral Edge TPU](https://coral.ai/)）实现 TensorFlow<br>Lite 模型的硬件加速。将它们用于神经网络运算能够在延迟和功效方面提供巨大的好处。例如，GPU 可以在移动设备上提供高达 [5 倍的延迟加速](https://blog.tensorflow.org/2020/08/faster-mobile-gpu-inference-with-opencl.html)，而 Coral Edge TPU 推断比桌面电脑 CPU [快 10 倍](https://coral.ai/docs/edgetpu/benchmarks/)。
 
-Task Library provides easy configuration and fall back options for you to set up and use delegates. The following accelerators are now supported in the Task API:
+Task Library 为您设置和使用委托提供了简单的配置和后备选项。Task API 目前支持以下加速器：
 
 - Android
     - [GPU](https://www.tensorflow.org/lite/performance/gpu): Java / C++
@@ -55,11 +55,11 @@ Task Library provides easy configuration and fall back options for you to set up
 - iOS
     - [Core ML delegate](https://www.tensorflow.org/lite/performance/coreml_delegate): C++
 
-Acceleration support in Task Swift / Web API are coming soon.
+Task Swift / Web API 中的加速支持即将推出。
 
-### Example usage of GPU on Android in Java
+### 用 Java 实现 Android 平台上 GPU 使用的示例
 
-Step 1. Add the GPU delegate plugin library to your module's `build.gradle` file:
+第 1 步：将 GPU 委托插件库添加到您模块的 `build.gradle` 文件：
 
 ```java
 dependencies {
@@ -70,9 +70,9 @@ dependencies {
 }
 ```
 
-Note: NNAPI comes with the Task Library targets for vision, text, and audio by default.
+注：默认情况下，NNAPI 附带针对视觉、文本和音频的 Task Library。
 
-Step 2. Configure GPU delegate in the task options through [BaseOptions](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/core/BaseOptions.Builder). For example, you can set up GPU in `ObjectDetecor` as follows:
+第 2 步：通过 [BaseOptions](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/core/BaseOptions.Builder) 在任务选项中配置 GPU 委托。例如，您可以在 `ObjectDetecor` 中设置 GPU，如下所示：
 
 ```java
 // Turn on GPU delegation.
@@ -92,9 +92,9 @@ ObjectDetector objectDetector =
 List<Detection> results = objectDetector.detect(image);
 ```
 
-### Example usage of GPU on Android in C++
+### 用 C++ 实现 Android 平台上 GPU 使用的示例
 
-Step 1. Depend on the GPU delegate plugin in your bazel build target, such as:
+第 1 步：依赖于 Bazel 构建目标中的 GPU 委托插件，例如：
 
 ```
 deps = [
@@ -102,16 +102,16 @@ deps = [
 ]
 ```
 
-Note: the `gpu_plugin` target is a separate one from the [GPU delegate target](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/delegates/gpu). `gpu_plugin` wraps the GPU delegate target, and can provide safety guard, i.e. fallback to TFLite CPU path on delegation errors.
+注：`gpu_plugin` 目标与 [GPU 委托目标](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/delegates/gpu) 不同。 `gpu_plugin` 封装了 GPU 委托目标，可以提供安全防护，即委托出错时回退到 TFLite CPU 路径。
 
-Other delegate options include:
+其他委托选项包括：
 
 ```
 "//tensorflow_lite_support/acceleration/configuration:nnapi_plugin", # for NNAPI
 "//tensorflow_lite_support/acceleration/configuration:hexagon_plugin", # for Hexagon
 ```
 
-Step 2. Configure GPU delegate in the task options. For example, you can set up GPU in `BertQuestionAnswerer` as follows:
+第 2 步：在任务选项中配置 GPU 委托。例如，您可以在 `BertQuestionAnswerer` 中设置 GPU，如下所示：
 
 ```c++
 // Initialization
@@ -132,7 +132,7 @@ std::unique_ptr<QuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromOpt
 std::vector<QaAnswer> results = answerer->Answer(context_of_question, question_to_ask);
 ```
 
-Explore more advanced accelerator settings [here](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto).
+在[此处](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto)浏览更多高级加速器设置。
 
 ### Example usage of Coral Edge TPU in Python
 
@@ -155,9 +155,9 @@ image = vision.TensorImage.create_from_file(image_path)
 classification_result = classifier.classify(image)
 ```
 
-### Example usage of Coral Edge TPU in C++
+### 用 C++ 实现 Coral Edge TPU 使用的示例
 
-Step 1. Depend on the Coral Edge TPU delegate plugin in your bazel build target, such as:
+第 1 步：依赖 Bazel 构建目标中的 Coral Edge TPU 委托插件，例如：
 
 ```
 deps = [
@@ -165,7 +165,7 @@ deps = [
 ]
 ```
 
-Step 2. Configure Coral Edge TPU in the task options. For example, you can set up Coral Edge TPU in `ImageClassifier` as follows:
+第 2 步：在任务选项中配置 Coral Edge TPU。例如，您可以在 `ImageClassifier` 中设置 Coral Edge TPU，如下所示：
 
 ```c++
 // Initialization
@@ -181,7 +181,7 @@ std::unique_ptr<ImageClassifier> image_classifier = ImageClassifier::CreateFromO
 const ClassificationResult result = image_classifier->Classify(*frame_buffer).value();
 ```
 
-Step 3. Install the `libusb-1.0-0-dev` package as below. If it is already installed, skip to the next step.
+第 3 步：使用如下代码安装 `libusb-1.0-0-dev` 软件包。如果已经安装，请跳到下一步。
 
 ```bash
 # On the Linux
@@ -193,7 +193,7 @@ port install libusb
 brew install libusb
 ```
 
-Step 4. Compile with the following configurations in your bazel command:
+第 4 步：在 Bazel 命令中使用以下配置进行编译：
 
 ```bash
 # On the Linux
@@ -207,13 +207,13 @@ Step 4. Compile with the following configurations in your bazel command:
 # Windows is not supported yet.
 ```
 
-Try out the [Task Library CLI demo tool](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop) with your Coral Edge TPU devices. Explore more on the [pretrained Edge TPU models](https://coral.ai/models/) and [advanced Edge TPU settings](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto#L275).
+在您的 Coral Edge TPU 设备上试用 [Task Library CLI 演示工具](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop)。了解更多有关[预训练的 Edge TPU 模型](https://coral.ai/models/)和[高级 Edge TPU 设置](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto#L275)的详细信息。
 
-### Example usage of Core ML Delegate in C++
+### 用 C++ 实现 Core ML Delegate 使用的示例
 
-A complete example can be found at [Image Classifier Core ML Delegate Test](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/test/task/vision/image_classifier/TFLImageClassifierCoreMLDelegateTest.mm).
+完整示例可在[图像分类器核心机器学习委托测试](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/test/task/vision/image_classifier/TFLImageClassifierCoreMLDelegateTest.mm)中找到。
 
-Step 1. Depend on the Core ML delegate plugin in your bazel build target, such as:
+第 1 步：依赖 Bazel 构建目标中的 Core ML 委托插件，例如：
 
 ```
 deps = [
@@ -221,7 +221,7 @@ deps = [
 ]
 ```
 
-Step 2. Configure Core ML Delegate in the task options. For example, you can set up Core ML Delegate in `ImageClassifier` as follows:
+第 2 步：在任务选项中配置 Core ML Delegate。例如，您可以在 `ImageClassifier` 中设置 Core ML Delegate，如下所示：
 
 ```c++
 // Initialization
