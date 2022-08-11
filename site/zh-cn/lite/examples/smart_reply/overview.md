@@ -7,7 +7,7 @@
 
 我们的智能回复模型可以基于聊天消息生成回复建议。这些建议是与上下文相关的一键式响应，可以帮助用户轻松回复收到的消息。
 
-<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/smartreply/1/default/1?lite-format=tflite">Download starter model</a>
+<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/smartreply/1/default/1?lite-format=tflite">下载入门模型</a>
 
 ### 示例应用
 
