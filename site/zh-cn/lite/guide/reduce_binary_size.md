@@ -22,9 +22,7 @@
     </tr>
   </thead>
   <tr>
-    <td rowspan="2">
-      <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>
-    </td>
+    <td rowspan="2">       Mobilenet_1.0_224(float)</td>
     <td rowspan="2">图像分类</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar（296,635 字节）</td>
@@ -34,9 +32,7 @@
     <td>tensorflow-lite.aar（382,892 字节）</td>
   </tr>
   <tr>
-    <td rowspan="2">
-      <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a>
-    </td>
+    <td rowspan="2">       SPICE</td>
     <td rowspan="2">声音基音提取</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar（375,813 字节）<br>tensorflow-lite-select-tf-ops.aar（1,676,380 字节）</td>
@@ -46,9 +42,7 @@
     <td>tensorflow-lite.aar（421,826 字节）<br>tensorflow-lite-select-tf-ops.aar（2,298,630 字节）</td>
   </tr>
   <tr>
-    <td rowspan="2">
-      <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a>
-    </td>
+    <td rowspan="2">       i3d-kinetics-400</td>
     <td rowspan="2">视频分类</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar（240,085 字节）<br>tensorflow-lite-select-tf-ops.aar（1,708,597 字节）</td>
@@ -63,7 +57,7 @@
 
 ## 使用 Bazel 选择性构建 TensorFlow Lite
 
-This section assumes that you have downloaded TensorFlow source codes and [set up the local development environment](https://www.tensorflow.org/lite/android/lite_build#set_up_build_environment_without_docker) to Bazel.
+本部分假设您已下载 TensorFlow 源代码，并且已[设置 Bazel 的本地开发环境](https://www.tensorflow.org/lite/android/lite_build#set_up_build_environment_without_docker)。
 
 ### 为 Android 项目构建 AAR 文件
 
@@ -341,7 +335,7 @@ bazel build -c opt --cxxopt='--std=c++17' \
 
 ## 使用 Docker 选择性构建 TensorFlow Lite
 
-This section assumes that you have installed [Docker](https://docs.docker.com/get-docker/) on your local machine and downloaded the TensorFlow Lite Dockerfile [here](https://www.tensorflow.org/lite/android/lite_build#set_up_build_environment_using_docker).
+本部分假设您已在本地计算机上安装了 [Docker](https://docs.docker.com/get-docker/)，并且已从[此处](https://www.tensorflow.org/lite/android/lite_build#set_up_build_environment_using_docker)下载了 TensorFlow Lite Dockerfile。
 
 下载上述 Dockerfile 之后，您可以通过运行以下命令来构建 Docker 镜像：
 
@@ -375,7 +369,7 @@ sh build_aar_with_docker.sh \
 
 ## 将 AAR 文件添加到项目
 
-Add AAR files by directly [importing the AAR into your project](https://www.tensorflow.org/lite/android/lite_build#add_aar_directly_to_project), or by [publishing the custom AAR to your local Maven repository](https://www.tensorflow.org/lite/android/lite_build#install_aar_to_local_maven_repository). Note that you have to add the AAR files for `tensorflow-lite-select-tf-ops.aar` as well if you generate it.
+您可以通过直接[将 AAR 导入项目](https://www.tensorflow.org/lite/android/lite_build#add_aar_directly_to_project)，或者[将自定义 AAR 发布到本地 Maven 存储库](https://www.tensorflow.org/lite/android/lite_build#install_aar_to_local_maven_repository)来添加 AAR 文件。请注意，如果生成了 `tensorflow-lite-select-tf-ops.aar`，您也必须为它添加 AAR 文件。
 
 ## 针对 iOS 的选择性构建
 
