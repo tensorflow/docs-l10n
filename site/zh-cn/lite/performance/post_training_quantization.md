@@ -121,7 +121,7 @@ converter.representative_dataset = representative_dataset
 tflite_quant_model = converter.convert()
 </pre>
 
-Note: The converter will throw an error if it encounters an operation it cannot currently quantize.
+注：如果遇到当前无法量化的运算，转换器会引发错误。
 
 ### float16 量化
 
