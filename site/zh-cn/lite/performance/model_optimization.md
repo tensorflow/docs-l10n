@@ -44,18 +44,18 @@ TensorFlow Lite 目前支持通过量化、剪枝和聚类进行优化。
 
 这些都是 [TensorFlow Model Optimization Toolkit](https://www.tensorflow.org/model_optimization) 的一部分，该工具包提供了与 TensorFlow Lite 兼容的模型优化技术的资源。
 
-### Quantization
+### 量化
 
 [量化](https://www.tensorflow.org/model_optimization/guide/quantization/post_training)的工作原理是降低用于表示模型参数的数字（默认情况为 32 位浮点数）的精度。这样可以获得较小的模型大小和较快的计算速度。
 
 TensorFlow Lite 提供以下量化类型:
 
-Technique | 数据要求 | 大小缩减 | 准确率 | Supported hardware
+技术 | 数据要求 | 大小缩减 | 准确率 | 支持的硬件
 --- | --- | --- | --- | ---
-[Post-training float16 quantization](post_training_float16_quant.ipynb) | 无数据 | 高达 50% | 轻微的准确率损失 | CPU, GPU
-[Post-training dynamic range quantization](post_training_quant.ipynb) | 无数据 | 高达 75% | 极小的准确率损失 | CPU、GPU (Android)
-[Post-training integer quantization](post_training_integer_quant.ipynb) | 无标签的代表性样本 | 高达 75% | 极小的准确率损失 | CPU、GPU (Android)、Edge TPU、Hexagon DSP
-[Quantization-aware training](http://www.tensorflow.org/model_optimization/guide/quantization/training) | 带标签的训练数据 | 高达 75% | Smallest accuracy loss | CPU、GPU (Android)、Edge TPU、Hexagon DSP
+训练后 Float16 量化 | 无数据 | 高达 50% | 轻微的准确率损失 | CPU、GPU
+训练后动态范围量化 | 无数据 | 高达 75% | 极小的准确率损失 | CPU、GPU (Android)
+[训练后量化](post_training_integer_quant.ipynb) | 无标签的代表性样本 | 高达 75% | 极小的准确率损失 | CPU、GPU (Android)、Edge TPU、Hexagon DSP
+量化感知训练 | 带标签的训练数据 | 高达 75% | 极小的准确率损失 | CPU、GPU (Android)、Edge TPU、Hexagon DSP
 
 以下决策树可帮助您仅根据预期的模型大小和准确率来选择要用于模型的量化方案。
 
