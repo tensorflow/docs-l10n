@@ -70,7 +70,7 @@ sdkmanager \
 Bazel 是适用于 TensorFlow 的主要构建系统。要使用 Bazel 构建，您必须在系统上安装此工具以及 Android NDK 与 SDK。
 
 1. 安装最新版本的 [Bazel 构建系统](https://bazel.build/versions/master/docs/install.html)。
-2. The Android NDK is required to build the native (C/C++) TensorFlow Lite code. The current recommended version is 19c, which may be found [here](https://developer.android.com/ndk/downloads/older_releases.html#ndk-19c-downloads).
+2. 需要 Android NDK 才能构建原生 (C/C++) TensorFlow Lite 代码。最新的推荐版本是 17c，在[此处](https://developer.android.com/ndk/downloads/older_releases.html#ndk-19c-downloads)可以找到该版本。
 3. 在[此处](https://developer.android.com/tools/revisions/build-tools.html)可以获取 Android SDK 和构建工具，或者，您也可以通过 [Android Studio](https://developer.android.com/studio/index.html) 获取。对于 TensorFlow Lite 模型构建，推荐的构建工具 API 版本是 23 或更高版本。
 
 ### 配置工作区和 .bazelrc
