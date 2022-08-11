@@ -4,7 +4,7 @@
 
 ## Hello World 示例
 
-The [Hello World](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world) example is designed to demonstrate the absolute basics of using TensorFlow Lite for Microcontrollers. We train and run a model that replicates a sine function, i.e, it takes a single number as its input, and outputs the number's [sine](https://en.wikipedia.org/wiki/Sine) value. When deployed to the microcontroller, its predictions are used to either blink LEDs or control an animation.
+[Hello World](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world) 示例旨在演示 TensorFlow Lite for Microcontrollers 的最基础用法。我们会训练并运行一个复制正弦函数的模型，该模型以单个数字作为输入，并输出该数字的[正弦](https://en.wikipedia.org/wiki/Sine)值。部署到微控制器后，该模型的预测将用于使 LED 闪烁或控制动画。
 
 端到端工作流包括以下步骤：
 
@@ -20,13 +20,13 @@ The [Hello World](https://github.com/tensorflow/tflite-micro/tree/main/tensorflo
 - [STM32F746 Discovery 套件](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html)（使用 Mbed）
 - [Adafruit EdgeBadge](https://www.adafruit.com/product/4400)（使用 Arduino IDE）
 - [Adafruit TensorFlow Lite for Microcontrollers 套件](https://www.adafruit.com/product/4317)（使用 Arduino IDE）
-- [Adafruit Circuit Playground Bluefruit](https://learn.adafruit.com/tensorflow-lite-for-circuit-playground-bluefruit-quickstart?view=all) (using Arduino IDE)
+- [Adafruit Circuit Playground Bluefruit](https://learn.adafruit.com/tensorflow-lite-for-circuit-playground-bluefruit-quickstart?view=all)（使用 Arduino IDE）
 - [Espressif ESP32-DevKitC](https://www.espressif.com/en/products/hardware/esp32-devkitc/overview)（使用 ESP IDF）
 - [Espressif ESP-EYE](https://www.espressif.com/en/products/hardware/esp-eye/overview)（使用 ESP IDF）
 
 请在 [TensorFlow Lite for Microcontrollers](index.md) 中了解有关所支持的平台的详细信息。
 
-## Train a model
+## 训练模型
 
 注：您可以跳过本部分，使用示例代码中包含的训练好的模型。
 
@@ -40,7 +40,7 @@ The [Hello World](https://github.com/tensorflow/tflite-micro/tree/main/tensorflo
 
 <a class="button button-primary" href="https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/README.md">Hello World README.md</a>
 
-The following sections walk through the example's [`hello_world_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/hello_world_test.cc), unit test which demonstrates how to run inference using TensorFlow Lite for Microcontrollers. It loads the model and runs inference several times.
+以下各部分逐步介绍了示例的 [`hello_world_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/hello_world_test.cc)，这是一个演示如何使用 TensorFlow Lite for Microcontrollers 运行推断的单元测试。它会加载模型并多次运行推断。
 
 ### 1. 包括库头文件
 
@@ -54,11 +54,11 @@ The following sections walk through the example's [`hello_world_test.cc`](https:
 #include "tensorflow/lite/version.h"
 ```
 
-- [`all_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/all_ops_resolver.h) provides the operations used by the interpreter to run the model.
-- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_error_reporter.h) outputs debug information.
-- [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_interpreter.h) contains code to load and run models.
-- [`schema_generated.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/schema/schema_generated.h) contains the schema for the TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) model file format.
-- [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h) provides versioning information for the TensorFlow Lite schema.
+- [`all_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/all_ops_resolver.h) 提供解释器用来运行模型的运算。
+- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_error_reporter.h) 输出调试信息。
+- [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_interpreter.h) 包含用于加载和运行模型的代码。
+- [`schema_generated.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/schema/schema_generated.h) 包含 TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) 模型文件架构的模式。
+- [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h) 提供 Tensorflow Lite 架构的版本控制信息。
 
 ### 2. 包含模型头文件
 
@@ -118,7 +118,7 @@ if (model->version() != TFLITE_SCHEMA_VERSION) {
 
 ### 6. 实例化运算解析器
 
-An [`AllOpsResolver`](github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/all_ops_resolver.h) instance is declared. This will be used by the interpreter to access the operations that are used by the model:
+声明了一个 [`AllOpsResolver`](github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/all_ops_resolver.h) 实例。解释器将使用它来访问模型所使用的运算：
 
 ```C++
 tflite::AllOpsResolver resolver;
@@ -126,7 +126,7 @@ tflite::AllOpsResolver resolver;
 
 `AllOpsResolver` 会加载 TensorFlow Lite for Microcontrollers 中可用的所有运算，而这些运算会占用大量内存。由于给定的模型仅会用到这些运算中的一部分，因此建议在实际应用中仅加载所需的运算。
 
-This is done using a different class, `MicroMutableOpResolver`. You can see how to use it in the *Micro speech* example's [`micro_speech_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc).
+这是使用另一个类 `MicroMutableOpResolver` 来实现的。您可以在 *Micro speech* 示例的 [`micro_speech_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc) 中了解如何使用它。
 
 ### 分配内存
 
@@ -183,7 +183,7 @@ TF_LITE_MICRO_EXPECT_EQ(1, input->dims->data[1]);
 TF_LITE_MICRO_EXPECT_EQ(kTfLiteFloat32, input->type);
 ```
 
-The enum value `kTfLiteFloat32` is a reference to one of the TensorFlow Lite data types, and is defined in [`common.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/c/common.h).
+枚举值 `kTfLiteFloat32` 是对 TensorFlow Lite 其中一种数据类型的引用，并在 [`common.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/c/common.h) 中定义。
 
 ### 11. 提供输入值
 
@@ -206,7 +206,7 @@ if (invoke_status != kTfLiteOk) {
 }
 ```
 
-We can check the return value, a `TfLiteStatus`, to determine if the run was successful. The possible values of `TfLiteStatus`, defined in [`common.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/c/common.h), are `kTfLiteOk` and `kTfLiteError`.
+我们可以检查返回值 `TfLiteStatus`，以确定运行是否成功。在 <a><code>common.h</code></a> 中定义的 `TfLiteStatus` 的可能值为 `kTfLiteOk` 和 `kTfLiteError`。
 
 以下代码断言该值为 `kTfLiteOk`，意味着推断已成功运行。
 
@@ -260,4 +260,4 @@ TF_LITE_MICRO_EXPECT_NEAR(-0.959, value, 0.05);
 
 ### 15. 阅读应用代码
 
-Once you have walked through this unit test, you should be able to understand the example's application code, located in [`main_functions.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/main_functions.cc). It follows a similar process, but generates an input value based on how many inferences have been run, and calls a device-specific function that displays the model's output to the user.
+完成此单元测试后，您应该能够理解位于 [`main_functions.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/main_functions.cc) 的示例应用代码。它遵循类似的过程，但会根据已运行推断的次数生成输入值，并调用特定于设备的函数，将模型的输出显示给用户。
