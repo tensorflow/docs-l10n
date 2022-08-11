@@ -213,7 +213,7 @@ target 'YourProjectName'
 Core ML 委托支持以下运算。
 
 - Add
-    - Only certain shapes are broadcastable. In Core ML tensor layout, following tensor shapes are broadcastable. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
+    - 只能广播几种形状。在 Core ML 张量布局中，可以广播以下张量形状。`[B, C, H, W]`、`[B, C, 1, 1]`、`[B, 1, H, W]`、`[B, 1, 1, 1]`。
 - AveragePool2D
 - Concat
     - 串联应沿通道轴执行。
