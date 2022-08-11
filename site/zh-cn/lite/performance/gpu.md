@@ -28,7 +28,7 @@ git clone https://github.com/tensorflow/tensorflow
 
 Note: You can now target **Android S+** with `targetSdkVersion="S"` in your manifest, or `targetSdkVersion "S"` in your Gradle `defaultConfig` (API level TBD). In this case, you should merge the contents of [`AndroidManifestGpu.xml`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/AndroidManifestGpu.xml) into your Android application's manifest. Without this change, the GPU delegate cannot access OpenCL libraries for acceleration. *AGP 4.2.0 or above is required for this to work.*
 
-Add the `tensorflow-lite-gpu` package alongside the existing `tensorflow-lite` package in the existing `dependencies` block.
+在现有 `dependencies` 块中现有 `tensorflow-lite` 软件包的位置下添加 `tensorflow-lite-gpu` 软件包。
 
 ```
 dependencies {
@@ -40,19 +40,19 @@ dependencies {
 
 #### 第 3 步. 编译和运行
 
-Run → Run ‘app’. When you run the application you will see a button for enabling the GPU. Change from quantized to a float model and then click GPU to run on the GPU.
+运行 → 运行“应用”。运行应用时，您会看到一个用于启用 GPU 的按钮。从量化模型转换为浮点模型，然后点击 GPU 以在 GPU 上运行。
 
 ![运行 Android GPU 演示并切换到 GPU](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/lite/performance/images/android_gpu_demo.gif?raw=true)
 
 ### iOS（使用 XCode）
 
-For a step-by-step tutorial, watch the [GPU Delegate for iOS](https://youtu.be/a5H4Zwjp49c) video.
+如果需要分步教程，请观看[适用于 iOS 的 GPU 委托](https://youtu.be/a5H4Zwjp49c)视频。
 
 注：要求 XCode 10.1 或者更高版本。
 
 #### 第 1 步. 获取演示应用的源码并确保它可以编译。
 
-Follow our iOS Demo App [tutorial](https://www.tensorflow.org/lite/guide/ios). This will get you to a point where the unmodified iOS camera demo is working on your phone.
+按照我们的 iOS 演示应用[教程](https://www.tensorflow.org/lite/guide/ios)操作。这会向您展示未经修改的 iOS 相机演示应用如何在您的手机上的运行。
 
 #### 第 2 步. 修改 Podfile 文件以使用 TensorFlow Lite GPU CocoaPod
 
@@ -99,7 +99,7 @@ pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['Metal']
 
 #### 第 5 步. 发布模式
 
-While in Step 4 you ran in debug mode, to get better performance, you should change to a release build with the appropriate optimal Metal settings. In particular, To edit these settings go to the `Product > Scheme > Edit Scheme...`. Select `Run`. On the `Info` tab, change `Build Configuration`, from `Debug` to `Release`, uncheck `Debug executable`.
+在第 4 步中以调试模式运行时，为了获得更高性能，您应当更改为具有适当优化 Metal 设置的发布构建。特别是，要编辑这些设置，请转至 `Product > Scheme > Edit Scheme…`。选择 `Run`。在 `Info` 标签页中，将 `Build Configuration` 从 `Debug` 更改为 `Release`，取消选中 `Debug executable`。
 
 ![设置 Metal 选项](https://gitlocalize.com/repo/4592/zh-cn/site/en-snapshot/lite/performance/images/iosmetal.png)
 
@@ -275,12 +275,12 @@ While in Step 4 you ran in debug mode, to get better performance, you should cha
 
 ## 支持的模型和运算
 
-With the release of the GPU delegate, we included a handful of models that can be run on the backend:
+随着 GPU 委托的发布，我们提供了一些可以在后端运行的模型：
 
-- [MobileNet v1 (224x224) image classification](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobilenet_v1_1.0_224.tflite)<br><i>(image classification model designed for mobile and embedded based vision applications)</i>
-- [DeepLab segmentation (257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite)<br><i>(image segmentation model that assigns semantic labels (e.g., dog, cat, car) to every pixel in the input image)</i>
-- [MobileNet SSD object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)<br><i>(image classification model that detects multiple objects with bounding boxes)</i>
-- [PoseNet for pose estimation](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)<br><i>(vision model that estimates the poses of a person(s) in image or video)</i>
+- [MobileNet v1 (224x224) 图像分类](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [[下载]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobilenet_v1_1.0_224.tflite)<br><i>（专为基于移动设备和嵌入式设备视觉应用设计的图像分类模型）</i>
+- [DeepLab 分割 (257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[下载]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite)<br><i>（为输入图像中的每个像素分配语义标签（例如狗、猫、汽车）的图像分割模型）</i>
+- [MobileNet SSD 目标检测](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [[下载]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)<br><i>（使用边界框检测多个目标的图像分类模型）</i>
+- [用于姿势预测的 PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [[下载]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)<br><i>（预测图像或视频中人物姿势的视觉模型）</i>
 
 要查看支持的运算的完整列表，请参阅[高级文档](gpu_advanced.md)。
 
@@ -292,7 +292,7 @@ With the release of the GPU delegate, we included a handful of models that can b
 WARNING: op code #42 cannot be handled by this delegate.
 ```
 
-We did not provide a callback for this failure, as this is not a true run-time failure, but something that the developer can observe while trying to get the network to run on the delegate.
+我们没有为此错误提供回调，因为这并非真正的运行时错误，而是开发者在尝试在委托上运行网络时可以发现的问题。
 
 ## 优化建议
 
