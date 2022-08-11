@@ -71,7 +71,7 @@ top 的值代表了矩形框的顶部距离图片上部的距离，单位为像�
     <tr>
       <th>索引</th>
       <th>名称</th>
-      <th>Description</th>
+      <th>描述</th>
     </tr>
   </thead>
   <tbody>
@@ -216,8 +216,8 @@ top 值表示矩形的顶边距图像顶部的距离，以像素为单位。left
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
-      <th>Model size </th>
+      <th>模型名称</th>
+      <th>模型大小</th>
       <th>设备</th>
       <th>GPU</th>
       <th>CPU</th>
@@ -227,19 +227,19 @@ top 值表示矩形的顶边距图像顶部的距离，以像素为单位。left
     <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a>
 </td>
     <td rowspan="3">       27 Mb</td>
-    <td>Pixel 3 (Android 10) </td>
+    <td>Pixel 3 (Android 10)</td>
     <td>22ms</td>
     <td>46ms*</td>
   </tr>
    <tr>
-     <td>Pixel 4 (Android 10) </td>
+     <td>Pixel 4 (Android 10)</td>
     <td>20ms</td>
     <td>29ms*</td>
   </tr>
    <tr>
-     <td>iPhone XS (iOS 12.4.1) </td>
+     <td>iPhone XS (iOS 12.4.1)</td>
      <td>7.6ms</td>
-    <td>11ms** </td>
+    <td>11ms**</td>
   </tr>
 </table>
 
