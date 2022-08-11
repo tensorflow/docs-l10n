@@ -31,7 +31,7 @@ table DepthwiseConv2DOptions {
 }
 ```
 
-在添加新参数时：
+添加新参数时，请注意以下两点：
 
 - 添加注释，指明哪个版本支持哪些参数。
 - 当新的实现获取新添加的参数的默认值时，它应该与旧实现完全相同。
@@ -162,37 +162,15 @@ AddBuiltin(BuiltinOperator_DEPTHWISE_CONV_2D, Register_DEPTHWISE_CONV_2D(),
 - 当膨胀系数均为1时，填充 版本=1。
 - 除此之外，填充 版本=2。
 
-为此，您需要首先在 `OpSignature`结构内的 `depthwise_conv_2d` 中添加相应的参数：
-
-```
-struct {
-      int32_t dilation_w_factor;
-      int32_t dilation_h_factor;
-    } depthwise_conv_2d;
-```
-
-然后在 `lite/tools/versioning/op_version.cc` 中的 `GetOpSignature` 函数中填充这些新参数。
-
-```
-case BuiltinOperator_DEPTHWISE_CONV_2D: {
-      auto conv_option = op->builtin_options_as_DepthwiseConv2DOptions();
-      if (conv_option) {
-        op_sig.options.depthwise_conv_2d.dilation_w_factor =
-            conv_option->dilation_w_factor();
-        op_sig.options.depthwise_conv_2d.dilation_h_factor =
-            conv_option->dilation_h_factor();
-      }
-    } break;
-```
-
-请注意，如果要添加对新类型的支持，则无需上述步骤。可在 `OpSignature` 中为所有的运算定义和填充输入和输出类型。
-
-最后，通过将新版本添加到 `DepthwiseConv2D` 示例，为 `lite/tools/versioning/op_version.cc` 中的算子修改 `GetBuiltinOperatorVersion` 函数：
+Modify `GetBuiltinOperatorVersion` function for the operator in `lite/tools/versioning/op_version.cc` by adding the new version to the case of `DepthwiseConv2D`:
 
 ```
 case BuiltinOperator_DEPTHWISE_CONV_2D:
-  if (op_sig.options.depthwise_conv_2d.dilation_w_factor != 1 ||
-      op_sig.options.depthwise_conv_2d.dilation_h_factor != 1) {
+  auto depthwise_conv_params =
+      reinterpret_cast<TfLiteDepthwiseConvParams*>(op_sig.builtin_data);
+  TFLITE_DCHECK(depthwise_conv_params != nullptr);
+  if (depthwise_conv_params->dilation_width_factor != 1 ||
+       depthwise_conv_params->dilation_height_factor != 1) {
     return 2;
   }
   return 1;
@@ -207,10 +185,10 @@ TensorFlow Lite 提供了一个委托 API，可以将操作委派给硬件后端
 在本例中，您需要将以下条目添加到 `op_version_map` 中：
 
 ```
-{{BuiltinOperator_DEPTHWISE_CONV_2D, 2}, kPendingReleaseOpVersion}
+{{BuiltinOperator_DEPTHWISE_CONV_2D, 2}, %CURRENT_RUNTIME_VERSION%}
 ```
 
-（`kPendingReleaseOpVersion` 将被替换为下一个稳定版中的相应发布版本。）
+where `%CURRENT_RUNTIME_VERSION%` corresponds to the current runtime version defined in [tensorflow/core/public/version.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h).
 
 ### 委托实现
 
