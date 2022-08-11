@@ -1,30 +1,30 @@
 # 理解 C++ 库
 
-TensorFlow Lite for Microcontrollers C++ 库是 [TensorFlow 仓库](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro)的一部分。它被设计为可读性强、易于修改、测试良好、易于集成，并与常规的 TensorFlow Lite 兼容。
+TensorFlow Lite for Microcontrollers C++ 库是 [TensorFlow 仓库](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro)的一部分。它具有可读性强、易于修改、测试良好、易于集成，并与常规的 TensorFlow Lite 兼容等特点。
 
 以下文档概述了 C ++ 库的基本结构，并提供了有关创建自己项目的信息。
 
 ## 文件结构
 
-[`micro`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro) 根目录的结构相对简单。但是，由于它位于丰富的 TensorFlow 仓库内部，我们创建了脚本和预生成的项目文件，在各种嵌入式开发环境中单独提供相关源文件。
+[`micro`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro) 根目录的结构相对简单。但是，由于它位于内容丰富的 TensorFlow 仓库内部，我们创建了脚本和预生成的项目文件，在各种嵌入式开发环境中单独提供相关源文件。
 
 ### 关键文件
 
 使用 TensorFlow Lite for Microcontrollers 解释器最重要的文件位于项目的根目录，并附带测试：
 
-- [`all_ops_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.h) 或 [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_mutable_op_resolver.h) 可以用来提供解释器运行模型时所使用的运算。由于 `all_ops_resolver.h` 会拉取每一个可用的运算，因此它会使用大量内存。在生产应用中，您应该仅使用 `micro_mutable_op_resolver.h` 拉取模型所需的运算。
-- [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h) 输出调试信息。
-- [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h) 包含用于处理和运行模型的代码。
+- [`all_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.h) 或 [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_mutable_op_resolver.h) 可以用来提供解释器运行模型时所使用的运算。由于 `all_ops_resolver.h` 会拉取每一个可用的运算，因此它会占用大量内存。在生产应用中，您应该仅使用 `micro_mutable_op_resolver.h` 拉取您的模型所需的运算。
+- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_error_reporter.h) 输出调试信息。
+- [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_interpreter.h) 包含用于处理和运行模型的代码。
 
-请参阅[微处理器入门](get_started.md)获取典型用法的演练。
+请参阅[微处理器入门](get_started_low_level.md)获取典型用法的演练。
 
-构建系统提供了某些文件的特定于平台的实现。它们位于具有平台名称的目录中，例如 [`sparkfun_edge`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/sparkfun_edge)。
+构建系统提供了某些文件的特定于平台的实现。它们位于具有平台名称的目录中，例如 [`sparkfun_edge`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/sparkfun_edge)。
 
 还有其他几个目录，包括：
 
-- [`kernel`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/kernels)，其中包含运算实现和相关代码。
-- [`tools`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/tools)，其中包含构建工具及其输出。
-- [`examples`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples)，其中包含示例代码。
+- [`kernel`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/kernels)，其中包含运算实现和相关代码。
+- [`tools`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/tools)，其中包含构建工具及其输出。
+- [`examples`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples)，其中包含示例代码。
 
 ## 开始新项目
 
@@ -118,4 +118,4 @@ make -f tensorflow/lite/micro/tools/make/Makefile TAGS=<subdirectory_name> gener
 
 ## 移植到新设备
 
-有关将 TensorFlow Lite for Microcontrollers 移植到新平台和设备的指南，可在 [`micro/README.md`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/README.md) 中找到。
+Guidance on porting TensorFlow Lite for Microcontrollers to new platforms and devices can be found in [`micro/docs/new_platform_support.md`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/docs/new_platform_support.md).
