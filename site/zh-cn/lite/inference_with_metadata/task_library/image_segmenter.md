@@ -1,6 +1,6 @@
 # 集成图像分割器
 
-图像分割器会预测图像中的每个像素是否与某个类相关联。这与<a href="../../models/object_detection/overview.md">物体检测</a>（检测矩形区域中的物体）和<a href="../../models/image_classification/overview.md">图像分类</a>（对整体图像进行分类）不同。有关图像分割器的详细信息，请参阅[图像分割简介](../../models/segmentation/overview.md)。
+图像分割器会预测图像中的每个像素是否与某个类相关联。这与<a href="../../examples/object_detection/overview">目标检测</a>（检测矩形区域中的目标）和<a href="../../examples/image_classification/overview">图像分类</a>（对整体图像进行分类）不同。请参阅[图像分割概述](../../examples/segmentation/overview)，了解有关图像分割器的详细信息。
 
 使用 Task Library `ImageSegmenter` API 可将自定义图像分割器或预训练图像分割器部署到您的模型应用中。
 
@@ -38,23 +38,31 @@ android {
     aaptOptions {
         noCompress "tflite"
     }
-
 }
 
 dependencies {
     // Other dependencies
 
-    // Import the Task Vision Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.1.0'
+    // Import the Task Vision Library dependency (NNAPI is included)
+    implementation 'org.tensorflow:tensorflow-lite-task-vision'
+    // Import the GPU delegate plugin Library for GPU inference
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin'
 }
 ```
+
+注：从 Android Gradle 插件的 4.1 版开始，默认情况下，.tflite 将被添加到 noCompress 列表中，不再需要上面的 aaptOptions。
 
 ### 步骤 2：使用模型
 
 ```java
 // Initialization
-ImageSegmenterOptions options = ImageSegmenterOptions.builder().setOutputType(OutputType.CONFIDENCE_MASK).build();
-ImageSegmenter imageSegmenter = ImageSegmenter.createFromFileAndOptions(context, modelFile, options);
+ImageSegmenterOptions options =
+    ImageSegmenterOptions.builder()
+        .setBaseOptions(BaseOptions.builder().useGpu().build())
+        .setOutputType(OutputType.CONFIDENCE_MASK)
+        .build();
+ImageSegmenter imageSegmenter =
+    ImageSegmenter.createFromFileAndOptions(context, modelFile, options);
 
 // Run inference
 List<Segmentation> results = imageSegmenter.segment(image);
@@ -62,15 +70,130 @@ List<Segmentation> results = imageSegmenter.segment(image);
 
 有关配置 `ImageSegmenter` 的更多选项，请参阅[源代码和 Javadoc](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/vision/segmenter/ImageSegmenter.java)。
 
-## 用 C++ 运行推断
+## 在 iOS 中运行推断
 
-注：我们正在改善 C++ Task Library 的可用性，如提供预先构建的二进制文件，并创建用户友好的工作流以从源代码进行构建。C++ API 可能会发生变化。
+### 第 1 步：安装依赖项
+
+Task Library 支持使用 CocoaPods 进行安装。请确保您的系统上已安装 CocoaPods。有关说明，请参阅 [CocoaPods 安装指南](https://guides.cocoapods.org/using/getting-started.html#getting-started)。
+
+有关向 Xcode 项目添加 Pod 的详细信息，请参阅 [CocoaPods 指南](https://guides.cocoapods.org/using/using-cocoapods.html)。
+
+在 Podfile 中添加 `TensorFlowLiteTaskVision`。
+
+```
+target 'MyAppWithTaskAPI' do
+  use_frameworks!
+  pod 'TensorFlowLiteTaskVision'
+end
+```
+
+请确保您的应用捆绑包中存在用于推断的 `.tflite` 模型。
+
+### 第 2 步：使用模型
+
+#### Swift
+
+```swift
+// Imports
+import TensorFlowLiteTaskVision
+
+// Initialization
+guard let modelPath = Bundle.main.path(forResource: "deeplabv3",
+                                            ofType: "tflite") else { return }
+
+let options = ImageSegmenterOptions(modelPath: modelPath)
+
+// Configure any additional options:
+// options.outputType = OutputType.confidenceMasks
+
+let segmenter = try ImageSegmenter.segmenter(options: options)
+
+// Convert the input image to MLImage.
+// There are other sources for MLImage. For more details, please see:
+// https://developers.google.com/ml-kit/reference/ios/mlimage/api/reference/Classes/GMLImage
+guard let image = UIImage (named: "plane.jpg"), let mlImage = MLImage(image: image) else { return }
+
+// Run inference
+let segmentationResult = try segmenter.segment(mlImage: mlImage)
+```
+
+#### Objective C
+
+```objc
+// Imports
+#import <TensorFlowLiteTaskVision/TFLTaskVision.h>
+
+// Initialization
+NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"deeplabv3" ofType:@"tflite"];
+
+TFLImageSegmenterOptions *options =
+    [[TFLImageSegmenterOptions alloc] initWithModelPath:modelPath];
+
+// Configure any additional options:
+// options.outputType = TFLOutputTypeConfidenceMasks;
+
+TFLImageSegmenter *segmenter = [TFLImageSegmenter imageSegmenterWithOptions:options
+                                                                      error:nil];
+
+// Convert the input image to MLImage.
+UIImage *image = [UIImage imageNamed:@"plane.jpg"];
+
+// There are other sources for GMLImage. For more details, please see:
+// https://developers.google.com/ml-kit/reference/ios/mlimage/api/reference/Classes/GMLImage
+GMLImage *gmlImage = [[GMLImage alloc] initWithImage:image];
+
+// Run inference
+TFLSegmentationResult *segmentationResult =
+    [segmenter segmentWithGMLImage:gmlImage error:nil];
+```
+
+请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/vision/sources/TFLImageSegmenter.h)，了解有关配置 `TFLImageSegmenter` 的更多选项。
+
+## 用 Python 运行推断
+
+### 第 1 步：安装 pip 软件包
+
+```
+pip install tflite-support
+```
+
+### 第 2 步：使用模型
+
+```python
+# Imports
+from tflite_support.task import vision
+from tflite_support.task import core
+from tflite_support.task import processor
+
+# Initialization
+base_options = core.BaseOptions(file_name=model_path)
+segmentation_options = processor.SegmentationOptions(
+    output_type=processor.SegmentationOptions.OutputType.CATEGORY_MASK)
+options = vision.ImageSegmenterOptions(base_options=base_options, segmentation_options=segmentation_options)
+segmenter = vision.ImageSegmenter.create_from_options(options)
+
+# Alternatively, you can create an image segmenter in the following manner:
+# segmenter = vision.ImageSegmenter.create_from_file(model_path)
+
+# Run inference
+image_file = vision.TensorImage.create_from_file(image_path)
+segmentation_result = segmenter.segment(image_file)
+```
+
+请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/vision/image_segmenter.py)，了解有关配置 `ImageSegmenter` 的更多选项。
+
+## 用 C++ 运行推断
 
 ```c++
 // Initialization
 ImageSegmenterOptions options;
-options.mutable_model_file_with_metadata()->set_file_name(model_file);
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
 std::unique_ptr<ImageSegmenter> image_segmenter = ImageSegmenter::CreateFromOptions(options).value();
+
+// Create input frame_buffer from your inputs, `image_data` and `image_dimension`.
+// See more information here: tensorflow_lite_support/cc/task/vision/utils/frame_buffer_common_utils.h
+std::unique_ptr<FrameBuffer> frame_buffer = CreateFromRgbRawBuffer(
+      image_data, image_dimension);
 
 // Run inference
 const SegmentationResult result = image_segmenter->Segment(*frame_buffer).value();
@@ -81,6 +204,7 @@ const SegmentationResult result = image_segmenter->Segment(*frame_buffer).value(
 ## 结果示例
 
 下面是 TensorFlow Hub 上的通用分割模型 [deeplab_v3](https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/1) 的分割结果的示例。
+
 
 <img src="images/plane.jpg" alt="plane" width="50%">
 
@@ -107,13 +231,14 @@ this legend.
 
 分割类别掩码应如下所示：
 
+
 <img src="images/segmentation-output.png" alt="segmentation-output" width="30%">
 
 用您自己的模型和测试数据试用简单的 [ImageSegmenter CLI 演示工具](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop#image-segmenter)。
 
 ## 模型兼容性要求
 
-`ImageSegmenter` API 需要具有强制性 [TFLite 模型元数据](../../convert/metadata.md)的 TFLite 模型。
+`ImageSegmenter` API 需要具有强制性 [TFLite Model Metadata](../../models/convert/metadata) 的 TFLite 模型。请参阅使用 [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#image_segmenters) 为图像分割器创建元数据的示例。
 
 - 输入图像张量 (kTfLiteUInt8/kTfLiteFloat32)
 
