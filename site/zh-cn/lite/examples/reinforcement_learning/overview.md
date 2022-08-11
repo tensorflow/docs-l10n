@@ -2,11 +2,11 @@
 
 与使用强化学习进行训练，并使用 TensorFlow Lite 进行部署的代理进行棋盘游戏对战。
 
-## Get started
+## 开始
 
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
-If you are new to TensorFlow Lite and are working with Android, we recommend exploring the following example application that can help you get started.
+如果您是 TensorFlow Lite 新用户，并且使用的是 Android 平台，我们建议您研究以下可以帮助您入门的示例应用。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/reinforcement_learning/android">Android 示例</a>
 
@@ -14,7 +14,7 @@ If you are new to TensorFlow Lite and are working with Android, we recommend exp
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/blob/master/lite/examples/reinforcement_learning/android/app/src/main/assets/planestrike_tf.tflite">下载模型</a>
 
-## How it works
+## 工作原理
 
 该模型是为一个游戏代理构建的，用于游玩一款名为 'Plane Strike' 的小型棋盘游戏。有关此游戏及其规则的快速介绍，请参阅此[自述文件](https://github.com/tensorflow/examples/tree/master/lite/examples/reinforcement_learning/android)。
 
@@ -22,15 +22,15 @@ If you are new to TensorFlow Lite and are working with Android, we recommend exp
 
 在 Android 应用的实际游戏中，当轮到代理采取行动时，代理会查看人类玩家的棋盘状态（底部的棋盘），其中包含有关之前成功和不成功的攻击（命中和未命中）的信息，并使用训练好的模型预测下一次攻击的位置，这样它就可以在人类玩家之前完成游戏。
 
-## Performance benchmarks
+## 性能基准
 
-Performance benchmark numbers are generated with the tool described [here](https://www.tensorflow.org/lite/performance/benchmarks).
+性能基准数值使用[此处所述](https://www.tensorflow.org/lite/performance/benchmarks)工具生成。
 
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
-      <th>Model size </th>
+      <th>模型名称</th>
+      <th>模型大小</th>
       <th>设备</th>
       <th>CPU</th>
     </tr>
@@ -39,11 +39,11 @@ Performance benchmark numbers are generated with the tool described [here](https
     <td rowspan="2">       <a href="https://github.com/tensorflow/examples/blob/master/lite/examples/reinforcement_learning/android/app/src/main/assets/planestrike.tflite">策略梯度</a>
 </td>
     <td rowspan="2">       84 Kb</td>
-    <td>Pixel 3 (Android 10) </td>
+    <td>Pixel 3 (Android 10)</td>
     <td>0.01ms*</td>
   </tr>
    <tr>
-     <td>Pixel 4 (Android 10) </td>
+     <td>Pixel 4 (Android 10)</td>
     <td>0.01ms*</td>
   </tr>
 </table>
