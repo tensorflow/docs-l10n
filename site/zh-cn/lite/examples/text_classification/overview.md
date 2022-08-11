@@ -1,23 +1,22 @@
 # 文本分类
 
-Use a TensorFlow Lite model to category a paragraph into predefined groups.
+使用 TensorFlow Lite 模型将段落分类到预定义组中。
 
-Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/nl_classifier). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification).
+注：(1) 要集成现有模型，请尝试 [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/nl_classifier)。(2) 要自定义模型，请尝试 [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)。
 
 ## 开始
 
-
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
-If you are new to TensorFlow Lite and are working with Android, we recommend exploring the guide of [TensorFLow Lite Task Library](../../inference_with_metadata/task_library/nl_classifier) to integrate text classification models within just a few lines of code. You can also integrate the model using the [TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java).
+如果您是 TensorFlow Lite 新用户，并且使用的是 Android 系统，我们建议您浏览 [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/nl_classifier) 的指南，将图像分割模型集成到几行代码中。您也可以使用 [TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java) 集成模型。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android">Android 示例</a>
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android">Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android">Android 示例</a>
 
 如果您使用的不是 Android 平台，或者您已经熟悉 <a>TensorFlow Lite API</a>，则可以下载我们的起始文本分类模型。
 
-<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">Download starter model</a>
+<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">下载入门模型</a>
 
 ## 工作方式
 
@@ -27,7 +26,7 @@ If you are new to TensorFlow Lite and are working with Android, we recommend exp
 
 下面是使用该模型对段落进行分类的步骤：
 
-1. Tokenize the paragraph and convert it to a list of word ids using a predefined vocabulary.
+1. 对段落进行分词，并使用预定义词汇表将其转换为一个单词 ID 列表。
 2. 将该列表馈送到 TensorFlow Lite 模型。
 3. 从模型输出获取该段落为正面或负面评价的概率。
 
@@ -79,7 +78,7 @@ What a waste of my time. | 72.5% | 27.5%
 
 ## 使用训练数据集
 
-Follow this [tutorial](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) to apply the same technique used here to train a text classification model using your own datasets. With the right dataset, you can create a model for use cases such as document categorization or toxic comments detection.
+使用您自己的数据集，按照本[教程](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)运用本文使用的相同技术训练文本分类模型。利用正确的数据集，您可以为文档分类或负面评论检测等用例创建模型。
 
 ## 详细了解文本分类
 
