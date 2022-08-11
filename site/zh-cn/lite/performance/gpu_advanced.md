@@ -360,30 +360,28 @@ iOS API 默认支持量化模型。要停用，请执行以下操作：
 假设图像输入位于 GPU 内存中，则必须首先将其转换为 Metal 的 `MTLBuffer` 对象。您可以使用 `TFLGpuDelegateBindMetalBufferToTensor()` 将 TfLiteTensor 关联至用户准备的 `MTLBuffer`。请注意，必须在 `Interpreter::ModifyGraphWithDelegate()` 之后调用 `TFLGpuDelegateBindMetalBufferToTensor()`。此外，在默认情况下，推断输出会从 GPU 内存复制到 CPU 内存。可以通过在初始化期间调用 `Interpreter::SetAllowBufferHandleOutput(true)` 来关闭此行为。
 
 ```c++
-// Ensure a valid EGL rendering context.
-EGLContext eglContext = eglGetCurrentContext();
-if (eglContext.equals(EGL_NO_CONTEXT)) return false;
+#include "tensorflow/lite/delegates/gpu/metal_delegate.h"
+#include "tensorflow/lite/delegates/gpu/metal_delegate_internal.h"
 
-// Create an SSBO.
-int[] id = new int[1];
-glGenBuffers(id.length, id, 0);
-glBindBuffer(GL_SHADER_STORAGE_BUFFER, id[0]);
-glBufferData(GL_SHADER_STORAGE_BUFFER, inputSize, null, GL_STREAM_COPY);
-glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);  // unbind
-int inputSsboId = id[0];
+// ...
 
-// Create interpreter.
-Interpreter interpreter = new Interpreter(tfliteModel);
-Tensor inputTensor = interpreter.getInputTensor(0);
-GpuDelegate gpuDelegate = new GpuDelegate();
-// The buffer must be bound before the delegate is installed.
-gpuDelegate.bindGlBufferToTensor(inputTensor, inputSsboId);
-interpreter.modifyGraphWithDelegate(gpuDelegate);
+// Prepare GPU delegate.
+auto* delegate = TFLGpuDelegateCreate(nullptr);
 
-// Run inference; the null input argument indicates use of the bound buffer for input.
-fillSsboWithCameraImageTexture(inputSsboId);
-float[] outputArray = new float[outputSize];
-interpreter.runInference(null, outputArray);
+if (interpreter->ModifyGraphWithDelegate(delegate) != kTfLiteOk) return false;
+
+interpreter->SetAllowBufferHandleOutput(true);  // disable default gpu->cpu copy
+if (!TFLGpuDelegateBindMetalBufferToTensor(
+        delegate, interpreter->inputs()[0], user_provided_input_buffer)) {
+  return false;
+}
+if (!TFLGpuDelegateBindMetalBufferToTensor(
+        delegate, interpreter->outputs()[0], user_provided_output_buffer)) {
+  return false;
+}
+
+// Run inference.
+if (interpreter->Invoke() != kTfLiteOk) return false;
 ```
 
 注：关闭默认行为后，要将推断输出从 GPU 内存复制到 CPU 内存，则需要对每个输出张量显式调用 `Interpreter::EnsureTensorDataIsReadable()`。
