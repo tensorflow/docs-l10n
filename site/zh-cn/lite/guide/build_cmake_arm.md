@@ -6,7 +6,7 @@
 
 **注**：此功能从 2.4 版本开始提供。
 
-### Prerequisites
+### <a>先决条件</a>
 
 您需要安装 CMake 并下载 TensorFlow 源代码。有关详细信息，请参阅[使用 CMake 构建 TensorFlow Lite](https://www.tensorflow.org/lite/guide/build_cmake) 页面。
 
