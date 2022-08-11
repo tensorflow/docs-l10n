@@ -2,7 +2,7 @@
 
 本页面提供了在 TensorFlow 2.x 中对 `tf.lite.TFLiteConverter` [Python API](index.md) 进行的更新的信息。
 
-Note: If any of the changes raise concerns, please file a [GitHub issue](https://github.com/tensorflow/tensorflow/issues/new?template=60-tflite-converter-issue.md).
+注：如果您对任何更改有疑问，请提交 [GitHub 议题](https://github.com/tensorflow/tensorflow/issues/new?template=60-tflite-converter-issue.md)。
 
 - TensorFlow 2.3
 
