@@ -2,7 +2,7 @@
 
 *推断*这一术语是指为了根据输入数据进行预测而在设备端执行 TensorFlow Lite 模型的过程。要使用 TensorFlow Lite 模型进行推断，您必须通过*解释器*运行该模型。TensorFlow Lite 解释器旨在实现精益和快速。解释器使用静态计算图排序和自定义（动态程度较低的）内存分配器，来确保最小的负载、初始化和执行延迟。
 
-This page describes how to access to the TensorFlow Lite interpreter and perform an inference using C++, Java, and Python, plus links to other resources for each [supported platform](#supported-platforms).
+本页面介绍了如何获得 TensorFlow Lite 解释器、如何使用 C++、Java 和 Python 执行推断，并提供了适用于每个[支持的平台](#supported-platforms)的其他资源的链接。
 
 [TOC]
 
@@ -12,11 +12,11 @@ TensorFlow Lite 推断通常遵循以下步骤：
 
 1. **加载模型**
 
-    You must load the `.tflite` model into memory, which contains the model's execution graph.
+    您必须将 `.tflite` 模型加载到内存中，其中包含模型的执行计算图。
 
 2. **转换数据**
 
-    Raw input data for the model generally does not match the input data format expected by the model. For example, you might need to resize an image or change the image format to be compatible with the model.
+    模型的原始输入数据通常与模型期望的输入数据格式不匹配。例如，您可能需要调整图像大小或更改图像格式才能与模型兼容。
 
 3. **运行推断**
 
@@ -339,7 +339,7 @@ class FlatBufferModel {
 
 现在，您已拥有作为 `FlatBufferModel` 对象的模型，您可以使用 [`Interpreter`](https://www.tensorflow.org/lite/api_docs/cc/class/tflite/interpreter.html) 来执行它。单个 `FlatBufferModel` 可供多个 `Interpreter` 同时使用。
 
-Caution: The `FlatBufferModel` object must remain valid until all instances of `Interpreter` using it have been destroyed.
+小心：`FlatBufferModel` 对象必须保持有效，直到使用它的所有 `Interpreter` 实例都被销毁。
 
 以下代码段展示了 `Interpreter` API 的重要部分。应注意以下几点：
 
@@ -454,7 +454,7 @@ output_data = interpreter.get_tensor(output_details[0]['index'])
 print(output_data)
 ```
 
-As an alternative to loading the model as a pre-converted `.tflite` file, you can combine your code with the [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/api_docs/python/tf/lite/TFLiteConverter) (`tf.lite.TFLiteConverter`), allowing you to convert your TensorFlow model into the TensorFlow Lite format and then run inference:
+除了将模型作为预转换的 `.tflite` 文件进行加载外，您还可以将代码与 [TensorFlow Lite 转换器 Python API](https://www.tensorflow.org/lite/api_docs/python/tf/lite/TFLiteConverter) (`tf.lite.TFLiteConverter`) 组合，进而将 TensorFlow 模型转换为 TensorFlow Lite 格式，然后运行推断：
 
 ```python
 import numpy as np
