@@ -58,7 +58,7 @@ table Conv2DOptions {
 
 在TensorFlow Lite中，内核实现与FlatBuffer定义是分离发。 内核从`lite/builtin_op_data.h`中定义的C的结构体中读取参数。
 
-原始卷积参数如下：
+原始深度卷积参数如下：
 
 ```
 typedef struct {
@@ -162,7 +162,7 @@ AddBuiltin(BuiltinOperator_DEPTHWISE_CONV_2D, Register_DEPTHWISE_CONV_2D(),
 - 当膨胀系数均为1时，填充 版本=1。
 - 除此之外，填充 版本=2。
 
-Modify `GetBuiltinOperatorVersion` function for the operator in `lite/tools/versioning/op_version.cc` by adding the new version to the case of `DepthwiseConv2D`:
+通过将新版本添加到 `DepthwiseConv2D` 示例，为 `lite/tools/versioning/op_version.cc` 中的算子修改 `GetBuiltinOperatorVersion` 函数：
 
 ```
 case BuiltinOperator_DEPTHWISE_CONV_2D:
@@ -188,7 +188,7 @@ TensorFlow Lite 提供了一个委托 API，可以将操作委派给硬件后端
 {{BuiltinOperator_DEPTHWISE_CONV_2D, 2}, %CURRENT_RUNTIME_VERSION%}
 ```
 
-where `%CURRENT_RUNTIME_VERSION%` corresponds to the current runtime version defined in [tensorflow/core/public/version.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h).
+其中 `%CURRENT_RUNTIME_VERSION%` 对应 [tensorflow/core/public/version.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h) 中定义的当前运行时版本。
 
 ### 委托实现
 
