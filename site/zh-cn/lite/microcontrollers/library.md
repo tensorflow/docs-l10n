@@ -118,4 +118,4 @@ make -f tensorflow/lite/micro/tools/make/Makefile TAGS=<subdirectory_name> gener
 
 ## 移植到新设备
 
-Guidance on porting TensorFlow Lite for Microcontrollers to new platforms and devices can be found in [`micro/docs/new_platform_support.md`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/docs/new_platform_support.md).
+有关将 TensorFlow Lite for Microcontrollers 移植到新平台和设备的指南，可以在 [`micro/docs/new_platform_support.md`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/docs/new_platform_support.md) 中找到。
