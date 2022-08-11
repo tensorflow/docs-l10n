@@ -8,7 +8,7 @@
 
 GPU 采用高吞吐量式设计，可处理大规模可并行化的工作负载。因此，它们非常适合包含大量算子的深度神经网络，每个算子都会处理一个或多个输入张量，可以轻松地划分为较小的工作负载且并行执行，这通常可以降低延迟。在最佳情况下，GPU 上的推断速度已足够快，适用于以前无法实现的实时应用。
 
-### Accuracy
+### 准确性
 
 GPU 使用 16 位或 32 位浮点数进行计算，并且（与 CPU 不同）不需要量化即可获得最佳性能。如果准确率降低使模型的量化无法达到要求，那么在 GPU 上运行神经网络可以消除这种担忧。
 
@@ -50,9 +50,9 @@ GPU 上的 TensorFlow Lite 支持 16 位和 32 位浮点精度的以下运算：
 
 您可以通过两种方式调用模型加速，具体取决于您使用的是 [Android Studio 机器学习模型绑定](../inference_with_metadata/codegen#acceleration)还是 TensorFlow Lite 解释器。
 
-### 支持的Ops
+### Android 通过 TensorFlow Lite 解释器
 
-在Android GPU上使用C/C++语言的TensorFlow Lite，可以使用`TfLiteGpuDelegateCreate()`创建，并使用`TfLiteGpuDelegateDelete()`销毁。
+在现有 `dependencies` 块中现有 `tensorflow-lite` 软件包的位置下添加 `tensorflow-lite-gpu` 软件包。
 
 ```
 dependencies {
@@ -69,8 +69,7 @@ dependencies {
     <section>
       <h3>Kotlin</h3>
       <p></p>
-<pre class="prettyprint lang-kotlin">
-    import org.tensorflow.lite.Interpreter
+<pre class="prettyprint lang-kotlin">    import org.tensorflow.lite.Interpreter
     import org.tensorflow.lite.gpu.CompatibilityList
     import org.tensorflow.lite.gpu.GpuDelegate
 
@@ -98,8 +97,7 @@ dependencies {
     <section>
       <h3>Java</h3>
       <p></p>
-<pre class="prettyprint lang-java">
-    import org.tensorflow.lite.Interpreter;
+<pre class="prettyprint lang-java">    import org.tensorflow.lite.Interpreter;
     import org.tensorflow.lite.gpu.CompatibilityList;
     import org.tensorflow.lite.gpu.GpuDelegate;
 
@@ -258,7 +256,7 @@ GPU 委托的构造函数接受选项的 `struct`。（[Swift API](https://githu
 
 本部分将说明 GPU 委托如何加速 8 位量化模型。这包括所有量化方式，包括：
 
-- Models trained with [Quantization-aware training](https://www.tensorflow.org/lite/models/convert/quantization)
+- 使用[量化感知训练](https://www.tensorflow.org/lite/models/convert/quantization)训练的模型
 - [训练后动态范围量化](https://www.tensorflow.org/lite/performance/post_training_quant)
 - [训练后全整数量化](https://www.tensorflow.org/lite/performance/post_training_integer_quant)
 
