@@ -1,32 +1,16 @@
-# 从 TensorFlow 中选择运算符
+# Select TensorFlow operators
 
-注意：该功能是实验性的。
+Since the TensorFlow Lite builtin operator library only supports a limited number of TensorFlow operators, not every model is convertible. For details, refer to [operator compatibility](ops_compatibility.md).
 
-TensorFlow Lite 已经内置了很多运算符，并且还在不断扩展，但是仍然还有一部分 TensorFlow 运算符没有被 TensorFlow Lite 原生支持。这些不被支持的运算符会给 TensorFlow Lite 的模型转换带来一些阻力。为了减少模型转换的阻力，TensorFlow Lite 开发团队最近一直致力于一个实验性功能的开发。
+为了允许进行转换，用户可以在 TensorFlow Lite 模型中启用[特定 TensorFlow 算子](op_select_allowlist.md)的使用。但是，运行带 TensorFlow 算子的 TensorFlow Lite 模型需要引入核心 TensorFlow 运行时，这会增加 TensorFlow Lite 解释器的二进制文件大小。对于 Android，您可以通过有选择地仅构建所需 Tensorflow 算子来避免这种情况。有关详情，请参阅[缩减二进制文件大小](../guide/reduce_binary_size.md)。
 
-这篇文档简单介绍了怎样在 TensorFlow Lite 使用 TensorFlow 运算符。*注意，这只是一个实验性的功能，并且还在开发中。* 在使用该功能的时候，请记住这些[已知的局限性](#已知的局限性)，并且请将使用中遇到的问题反馈至 tflite@tensorflow.org。
-
-TensorFlow Lite 会继续为移动设备和嵌入式设备优化[内置的运算符](ops_compatibility.md)。但是现在，当 TensorFlow Lite 内置的运算符不够的时候，TensorFlow Lite 模型可以使用部分 TensorFlow 的运算符。
-
-TensorFlow Lite 解释器在处理转换后的包含 TensorFlow 运算符的模型的时候，会比处理只包含 TensorFlow Lite 内置运算符的模型占用更多的空间。并且，TensorFlow Lite 模型中包含的任何 TensorFlow 运算符，性能都不会被优化。
-
-这篇文档简单介绍了怎样针对不同的平台[转换](#转换模型)和[运行](#运行模型)包含 TensorFlow 运算符的 TensorFlow Lite 模型。并且讨论了一些[已知的局限性](#已知的局限性)、为此功能制定的[未来的计划](#未来的计划)以及基本的[性能和空间指标](#性能和空间指标)。
+本文档概述了如何在您选择的平台上[转换](#convert_a_model)和[运行](#run_inference)包含 TensorFlow 算子的 TensorFlow Lite 模型。此外，它还探讨了[性能和大小指标](#metrics)以及[已知的限制](#known_limitations)。
 
 ## 转换模型
 
-为了能够转换包含 TensorFlow 运算符的 TensorFlow Lite 模型，可使用位于 [TensorFlow Lite 转换器](../convert/) 中的 `target_spec.supported_ops` 参数。`target_spec.supported_ops` 的可选值如下：
+以下示例显示了如何使用精选 TensorFlow 算子生成 TensorFlow Lite 模型。
 
-*   `TFLITE_BUILTINS` - 使用 TensorFlow Lite 内置运算符转换模型。
-*   `SELECT_TF_OPS` - 使用 TensorFlow 运算符转换模型。已经支持的 TensorFlow 运算符的完整列表可以在白名单
-    `lite/delegates/flex/whitelisted_flex_ops.cc` 中查看。
-
-注意：`target_spec.supported_ops` 是之前 Python API 中的 `target_ops`。
-
-我们优先推荐使用 `TFLITE_BUILTINS` 转换模型，然后是同时使用 `TFLITE_BUILTINS,SELECT_TF_OPS` ，最后是只使用 `SELECT_TF_OPS`。同时使用两个选项（也就是 `TFLITE_BUILTINS,SELECT_TF_OPS`）会用 TensorFlow Lite 内置的运算符去转换支持的运算符。有些 TensorFlow 运算符 TensorFlow Lite 只支持部分用法，这时可以使用 `SELECT_TF_OPS` 选项来避免这种局限性。
-
-下面的示例展示了通过 Python API 中的 [`TFLiteConverter`](./convert/python_api.md) 来使用该功能。
-
-```
+```python
 import tensorflow as tf
 
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -36,144 +20,191 @@ tflite_model = converter.convert()
 open("converted_model.tflite", "wb").write(tflite_model)
 ```
 
-下面的示例展示了在命令行工具 [`tflite_convert`](../convert/cmdline_examples.md) 中通过 `target_ops` 标记来使用该功能。
+## 运行推断
 
-```
-tflite_convert \
-  --output_file=/tmp/foo.tflite \
-  --graph_def_file=/tmp/foo.pb \
-  --input_arrays=input \
-  --output_arrays=MobilenetV1/Predictions/Reshape_1 \
-  --target_ops=TFLITE_BUILTINS,SELECT_TF_OPS
-```
-
-如果直接使用 `bazel` 编译和运行 `tflite_convert`，请传入参数 `--define=with_select_tf_ops=true`。
-
-```
-bazel run --define=with_select_tf_ops=true tflite_convert -- \
-  --output_file=/tmp/foo.tflite \
-  --graph_def_file=/tmp/foo.pb \
-  --input_arrays=input \
-  --output_arrays=MobilenetV1/Predictions/Reshape_1 \
-  --target_ops=TFLITE_BUILTINS,SELECT_TF_OPS
-```
-
-## 运行模型
-
-如果 TensorFlow Lite 模型在转换的时候支持 TensorFlow select 运算符，那么在使用的时候 Tensorflow Lite 运行时必须包含 TensorFlow 运算符的库。
+使用已转换并支持精选 TensorFlow 算子的 TensorFlow Lite 模型时，客户端还必须使用包含必要的 TensorFlow 算子库的 TensorFlow Lite 运行时。
 
 ### Android AAR
 
-为了便于使用，新增了一个支持 TensorFlow select 运算符的Android AAR。如果已经有了<a href="android.md">可用的 TensorFlow Lite
-编译环境</a>，可以按照下面的方式编译支持使用 TensorFlow select 运算符的 Android AAR：
+要缩减二进制文件的大小，请按照[下一部分](#building-the-android-aar)中的指导构建您自己的自定义 AAR 文件。如果二进制文件大小不是特别大的问题，我们建议使用预构建的 [AAR，其中 TensorFlow 算子托管在 MavenCentral 中](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-select-tf-ops)。
 
-```sh
-bazel build --cxxopt='--std=c++11' -c opt             \
-  --config=android_arm --config=monolithic          \
-  //tensorflow/lite/java:tensorflow-lite-with-select-tf-ops
+您可以在 `build.gradle` 依赖项中进行指定，方法是将其与标准 TensorFlow Lite AAR 一起添加，如下所示：
+
+```build
+dependencies {
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
+    // This dependency adds the necessary TF op support.
+    implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT'
+}
 ```
 
-上面的命令会在 `bazel-genfiles/tensorflow/lite/java/` 目录下生成一个 AAR 文件。你可以直接将这个 AAR 文件导入到项目中，也可以将其发布到本地的 Maven 仓库：
+To use nightly snapshots, make sure that you have added [Sonatype snapshot repository](../android/lite_build.md#use_nightly_snapshots).
+
+在添加依赖项后，用于处理计算图的 TensorFlow 算子的所需委托应对需要它们的计算图自动安装。
+
+*注*：TensorFlow 算子依赖项相对较大，因此，您可能需要通过设置 `abiFilters` 在 `.gradle` 文件中滤除不必要的 x86 ABI。
+
+```build
+android {
+    defaultConfig {
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+}
+```
+
+#### Building the Android AAR
+
+For reducing the binary size or other advanced cases, you can also build the library manually. Assuming a [working TensorFlow Lite build environment](../android/quickstart.md), build the Android AAR with select TensorFlow ops as follows:
+
+```sh
+sh tensorflow/lite/tools/build_aar.sh \
+  --input_models=/a/b/model_one.tflite,/c/d/model_two.tflite \
+  --target_archs=x86,x86_64,arm64-v8a,armeabi-v7a
+```
+
+这将为 TensorFlow Lite 内置算子和自定义算子生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite.aar`；并为 TensorFlow 算子生成 AAR 文件 `bazel-bin/tmp/tensorflow-lite-select-tf-ops.aar`。如果没有正在运行的构建环境，您也可以[使用 Docker 构建上述文件](../guide/reduce_binary_size.md#selectively_build_tensorflow_lite_with_docker)。
+
+TensorFlow Lite 的相机示例应用可以用来进行测试。一个新的支持 TensorFlow select 运算符的 TensorFlow Lite XCode 项目已经添加在 `tensorflow/lite/examples/ios/camera/tflite_camera_example_with_select_tf_ops.xcodeproj` 中。
 
 ```sh
 mvn install:install-file \
-  -Dfile=bazel-genfiles/tensorflow/lite/java/tensorflow-lite-with-select-tf-ops.aar \
+  -Dfile=bazel-bin/tmp/tensorflow-lite.aar \
   -DgroupId=org.tensorflow \
-  -DartifactId=tensorflow-lite-with-select-tf-ops -Dversion=0.1.100 -Dpackaging=aar
+  -DartifactId=tensorflow-lite -Dversion=0.1.100 -Dpackaging=aar
+mvn install:install-file \
+  -Dfile=bazel-bin/tmp/tensorflow-lite-select-tf-ops.aar \
+  -DgroupId=org.tensorflow \
+  -DartifactId=tensorflow-lite-select-tf-ops -Dversion=0.1.100 -Dpackaging=aar
 ```
 
-最后，在应用的 `build.gradle` 文件中需要保证有 `mavenLocal()` 依赖，并且需要用支持 TensorFlow select 运算符的 TensorFlow Lite 依赖去替换标准的 TensorFlow Lite 依赖：
+最后，请确保在应用的 `build.gradle` 中添加了 `mavenLocal()` 依赖项，并将标准 TensorFlow Lite 依赖项替换为支持精选 TensorFlow 算子的依赖项：
 
-```
+```build
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
+        maven {  // Only for snapshot artifacts
+            name 'ossrh-snapshot'
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
+        }
         mavenLocal()
     }
 }
 
 dependencies {
-    implementation 'org.tensorflow:tensorflow-lite-with-select-tf-ops:0.1.100'
+    implementation 'org.tensorflow:tensorflow-lite:0.1.100'
+    implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:0.1.100'
 }
 ```
 
 ### iOS
 
-如果安装了 XCode 命令行工具，可以用下面的命令编译支持 TensorFlow select 运算符的 TensorFlow Lite：
+#### Using CocoaPods
 
-```sh
-tensorflow/contrib/makefile/build_all_ios_with_tflite.sh
+TensorFlow Lite provides nightly prebuilt select TF ops CocoaPods for `arm64`, which you can depend on alongside the `TensorFlowLiteSwift` or `TensorFlowLiteObjC` CocoaPods.
+
+*注*：如果需要在 `x86_64` 模拟器中使用精选 TF 算子，则可以自己构建精选算子框架。请参阅[使用 Bazel + Xcode](#using_bazel_xcode) 部分了解详细信息。
+
+```ruby
+# In your Podfile target:
+  pod 'TensorFlowLiteSwift'   # or 'TensorFlowLiteObjC'
+  pod 'TensorFlowLiteSelectTfOps', '~> 0.0.1-nightly'
 ```
 
-这条命令会在 `tensorflow/contrib/makefile/gen/lib/` 目录下生成所需要的静态链接库。
+运行 `pod install` 后，您需要提供一个附加的链接器标志，以将精选 TF 算子框架强制加载到您的项目中。在您的 Xcode 项目中，转到 `Build Settings` -&gt; `Other Linker Flags`，然后添加：
 
-TensorFlow Lite 的相机示例应用可以用来进行测试。一个新的支持 TensorFlow select 运算符的 TensorFlow Lite XCode 项目已经添加在 `tensorflow/lite/examples/ios/camera/tflite_camera_example_with_select_tf_ops.xcodeproj` 中。
+```text
+-force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
+```
 
-如果想要在自己的项目中使用这个功能，你可以克隆示例项目，也可以按照下面的方式对项目进行设置：
+然后，您应该能够在您的 iOS 应用中运行任何使用 `SELECT_TF_OPS` 转换的模型。例如，您可以修改[图像分类 iOS 应用](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios)来测试精选 TF 算子功能。
 
-*   在 Build Phases -> Link Binary With Libraries 中，添加 `tensorflow/contrib/makefile/gen/lib/` 目录中的静态库：
-    *   `libtensorflow-lite.a`
-    *   `libprotobuf.a`
-    *   `nsync.a`
-*   在 Build Settings -> Header Search Paths 中，添加下面的路径：
-    *   `tensorflow/lite/`
-    *   `tensorflow/contrib/makefile/downloads/flatbuffer/include`
-    *   `tensorflow/contrib/makefile/downloads/eigen`
-*   在 Build Settings -> Other Linker Flags 中，添加 `-force_load
-    tensorflow/contrib/makefile/gen/lib/libtensorflow-lite.a`。
-    
-未来还会发布支持 TensorFlow select 运算符的 CocoaPod 。
+- `TFLITE_BUILTINS` - 使用 TensorFlow Lite 内置运算符转换模型。
+- `SELECT_TF_OPS` - 使用 TensorFlow 运算符转换模型。已经支持的 TensorFlow 运算符的完整列表可以在白名单 `lite/delegates/flex/whitelisted_flex_ops.cc` 中查看。
+- 按照上述方法添加附加的链接器标志。
+- Run the example app and see if the model works correctly.
 
-### C++
+#### Using Bazel + Xcode
 
-如果使用 bazel 编译 TensorFlow Lite 库，可以按照下面的方式添加和支持额外的 TensorFlow 运算符的库。
+可以使用 Bazel 构建带有适用于 iOS 的精选 TensorFlow 算子的 TensorFlow Lite。首先，按照 [iOS 构建说明](build_ios.md)正确配置您的 Bazel 工作区和 `.bazelrc` 文件。
 
-*   如果需要单体编译，可以添加 `--config=monolithic` 编译标记。
-*   从下面的方案中选择一个：
-    *   在用 `bazel build` 命令编译 TensorFlow Lite 时添加 `--define=with_select_tf_ops=true` 编译标记。
-    *   在编译依赖中添加 TensorFlow 运算符库依赖 `tensorflow/lite/delegates/flex:delegate`。
+在启用 iOS 支持的情况下配置工作区后，您可以使用以下命令构建精选 TF 算子加载项框架，该框架可以添加到常规的 `TensorFlowLiteC.framework` 之上。请注意，不能为 `i386` 架构构建精选 TF 算子框架，因此您需要显式提供除 `i386` 之外的目标架构列表。
 
-注意，只要委托链接到了客户端库，在运行时创建解释器的时候就会自动安装所需的 `TfLiteDelegate`，而不需要像其他委托类型去显式安装委托实例。
+```sh
+bazel build -c opt --config=ios --ios_multi_cpus=arm64,x86_64 \
+  //tensorflow/lite/ios:TensorFlowLiteSelectTfOps_framework
+```
+
+This will generate the framework under `bazel-bin/tensorflow/lite/ios/` directory. You can add this new framework to your Xcode project by following similar steps described under the [Xcode project settings](./build_ios.md#modify_xcode_project_settings_directly) section in the iOS build guide.
+
+将框架添加到您的应用项目后，应在您的应用项目中指定一个附加的链接器标志，以强制加载精选 TF 算子框架。在您的 Xcode 项目中，转到 `Build Settings` -&gt; `Other Linker Flags`，然后添加：
+
+```text
+-force_load <path/to/your/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps>
+```
+
+### C/C++
+
+If you're using Bazel or [CMake](https://www.tensorflow.org/lite/guide/build_cmake) to build TensorFlow Lite interpreter, you can enable Flex delegate by linking a TensorFlow Lite Flex delegate shared library. You can build it with Bazel as the following command.
+
+```
+bazel build -c opt --config=monolithic tensorflow/lite/delegates/flex:tensorflowlite_flex
+```
+
+This command generates the following shared library in `bazel-bin/tensorflow/lite/delegates/flex`.
+
+Platform | Library name
+--- | ---
+Linux | libtensorflowlite_flex.so
+macOS | libtensorflowlite_flex.dylib
+Windows | tensorflowlite_flex.dll
+
+Note that the necessary `TfLiteDelegate` will be installed automatically when creating the interpreter at runtime as long as the shared library is linked. It is not necessary to explicitly install the delegate instance as is typically required with other delegate types.
+
+**Note:** This feature is available since version 2.7.
 
 ### Python pip Package
 
-对 Python 的支持还在开发当中。
+包含精选 TensorFlow 算子的 TensorFlow Lite 将自动与 [TensorFlow pip 软件包](https://www.tensorflow.org/install/pip)一起安装。此外，您也可以选择仅安装 [TensorFlow Lite Interpreter pip 软件包](https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter)。
 
-## 性能和空间指标
+注：在自 2.3（适用于 Linux）和 2.4（适用于其他环境）起的 TensorFlow pip 软件包版本中，可以使用包含精选 TensorFlow 算子的 TensorFlow Lite。
+
+## 各种指标
 
 ### 性能
 
-如果 TensorFlow Lite 模型是同时混合使用内置运算符和 TensorFlow select 运算符进行转换的，那么模型依然可以使用针对 TensorFlow Lite 的优化以及内置的优化内核。
+混合使用内置和精选 TensorFlow 算子时，所有相同的 TensorFlow Lite 优化和优化后的内置算子都将可用并可与转换后的模型一起使用。
 
-下表列出了在 Pixel 2 上 MobileNet 的平均推断时间。表中的时间是 100 次运行的平均时间。在对 Android 平台编译的时候添加了 `--config=android_arm64 -c opt` 标记。
+下表给出了在 Pixel 2 的 MobileNet 上运行推断所需的平均时间。列出的时间是运行 100 次的平均值。这些目标是使用以下标志为 Android 构建的：`--config=android_arm64 -c opt`。
 
-编译                               | 推断时间 (milliseconds)
------------------------------------- | -------------------
-Only built-in ops (`TFLITE_BUILTIN`) | 260.7
-Using only TF ops (`SELECT_TF_OPS`)  | 264.5
+构建 | 时间（毫秒）
+--- | ---
+仅内置算子 (`TFLITE_BUILTIN`) | 260.7
+仅使用 TF 算子 (`SELECT_TF_OPS`) | 264.5
 
 ### 二进制文件大小
 
-下表列出了不同编译方式生成的 TensorFlow Lite 二进制文件的大小。在对 Android 平台编译的时候添加了 `--config=android_arm -c opt` 标记。
+The following table describes the binary size of TensorFlow Lite for each build. These targets were built for Android using `--config=android_arm -c opt`.
 
-编译                 | C++ 二进制文件大小 | Android APK 大小
---------------------- | --------------- | ----------------
-Only built-in ops     | 796 KB          | 561 KB
-Built-in ops + TF ops | 23.0 MB         | 8.0 MB
+构建 | C++ 二进制文件大小 | Android APK 大小
+--- | --- | ---
+仅内置算子 | 796 KB | 561 KB
+内置算子 + TF 算子 | 23.0 MB | 8.0 MB
+内置算子 + TF 算子 (1) | 4.1 MB | 1.8 MB
+
+(1) 这些库是为包含 8 个 TFLite 内置算子和 3 个 TensorFlow 算子的 [i3d-kinetics-400 模型](https://tfhub.dev/deepmind/i3d-kinetics-400/1)选择性构建的。有关详情，请参阅[缩减 TensorFlow Lite 二进制文件大小](../guide/reduce_binary_size.md)部分。
 
 ## 已知的局限性
 
-下面列出了一些已知的局限性：
+- 不支持的类型：某些 TensorFlow 算子可能不支持 TensorFlow 中通常可用的全套输入​​/输出类型。
 
-*   目前还不支持控制流运算符。
-*   目前还不支持 TensorFlow 运算符的 [`post_training_quantization`](https://tensorflow.google.cn/performance/post_training_quantization) 标记，所以不会对任何 TensorFlow 运算符进行权重量化。如果模型中既包含 TensorFlow Lite 运算符又包含 TensorFlow 运算符，那么 TensorFlow Lite 内置的运算符的权重是可以被量化的。
-*   目前还不支持像 HashTableV2 这种需要显式用资源进行初始化的运算符。
-*   某些 TensorFlow 操作可能不支持 TensorFlow 库中整套常规可用输入/输出操作。
+## Updates
 
-## 未来的计划
-
-下面列出了正在开发中的针对该功能的一些改进：
-
-*   *选择性注册* - 有一项正在完成的工作是，让生成只包含特定模型集合所需的 Tensorflow 运算符的 TensorFlow Lite 二进制文件变得更简单。
-*   *提升可用性* - 模型转换的过程将被简化，只需要一次性完成转换。 并且还会提供预编译的 Android AAR 和 iOS CocoaPod 二进制文件。
-*   *提升性能* - 有一项正在完成的工作是，让使用 TensorFlow 运算符的 TensorFlow Lite 具有与 TensorFlow Mobile 同等的性能。
+- 版本 2.6
+    - 改进了对基于 GraphDef 特性的算子和 HashTable 资源初始化的支持。
+- 版本 2.5
+    - You can apply an optimization known as [post training quantization](../performance/post_training_quantization.md)
+- Version 2.4
+    - 改进了与硬件加速委托的兼容性
