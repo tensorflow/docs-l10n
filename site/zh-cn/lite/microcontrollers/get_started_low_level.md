@@ -15,7 +15,7 @@
 
 我们将使用的示例应用已在以下设备上进行了测试：
 
-- [Arduino Nano 33 BLE Sense](https://store-usa.arduino.cc/products/arduino-nano-33-ble-sense-with-headers) (using Arduino IDE)
+- [Arduino Nano 33 BLE Sense](https://store-usa.arduino.cc/products/arduino-nano-33-ble-sense-with-headers)（使用 Arduino IDE）
 - [SparkFun Edge](https://www.sparkfun.com/products/15170)（直接从源代码构建）
 - [STM32F746 Discovery 套件](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html)（使用 Mbed）
 - [Adafruit EdgeBadge](https://www.adafruit.com/product/4400)（使用 Arduino IDE）
