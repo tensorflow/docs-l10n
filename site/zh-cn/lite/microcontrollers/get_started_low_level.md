@@ -1,50 +1,50 @@
 # 微控制器入门
 
-This document explains how to train a model and run inference using a microcontroller.
+本文介绍了如何使用微控制器训练模型并运行推断。
 
-## The Hello World example
+## Hello World 示例
 
 The [Hello World](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world) example is designed to demonstrate the absolute basics of using TensorFlow Lite for Microcontrollers. We train and run a model that replicates a sine function, i.e, it takes a single number as its input, and outputs the number's [sine](https://en.wikipedia.org/wiki/Sine) value. When deployed to the microcontroller, its predictions are used to either blink LEDs or control an animation.
 
-The end-to-end workflow involves the following steps:
+端到端工作流包括以下步骤：
 
-1. [Train a model](#train_a_model) (in Python): A jupyter notebook to train, convert and optimize a model for on-device use.
-2. [Run inference](#run_inference) (in C++ 11): An end-to-end unit test that runs inference on the model using the [C++ library](library.md).
+1. [训练模型](#train_a_model)（用 Python 编写）：Jupyter 笔记本，用于训练、转换和优化模型供设备端使用。
+2. [运行推断](#run_inference)（用 C++ 11 编写）：端到端单元测试，使用 [C++ 库](library.md)在模型上运行推断。
 
-## Get a supported device
+## 获得支持的设备
 
-The example application we'll be using has been tested on the following devices:
+我们将使用的示例应用已在以下设备上进行了测试：
 
 - [Arduino Nano 33 BLE Sense](https://store-usa.arduino.cc/products/arduino-nano-33-ble-sense-with-headers) (using Arduino IDE)
-- [SparkFun Edge](https://www.sparkfun.com/products/15170) (building directly from source)
-- [STM32F746 Discovery kit](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html) (using Mbed)
-- [Adafruit EdgeBadge](https://www.adafruit.com/product/4400) (using Arduino IDE)
-- [Adafruit TensorFlow Lite for Microcontrollers Kit](https://www.adafruit.com/product/4317) (using Arduino IDE)
+- [SparkFun Edge](https://www.sparkfun.com/products/15170)（直接从源代码构建）
+- [STM32F746 Discovery 套件](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html)（使用 Mbed）
+- [Adafruit EdgeBadge](https://www.adafruit.com/product/4400)（使用 Arduino IDE）
+- [Adafruit TensorFlow Lite for Microcontrollers 套件](https://www.adafruit.com/product/4317)（使用 Arduino IDE）
 - [Adafruit Circuit Playground Bluefruit](https://learn.adafruit.com/tensorflow-lite-for-circuit-playground-bluefruit-quickstart?view=all) (using Arduino IDE)
-- [Espressif ESP32-DevKitC](https://www.espressif.com/en/products/hardware/esp32-devkitc/overview) (using ESP IDF)
-- [Espressif ESP-EYE](https://www.espressif.com/en/products/hardware/esp-eye/overview) (using ESP IDF)
+- [Espressif ESP32-DevKitC](https://www.espressif.com/en/products/hardware/esp32-devkitc/overview)（使用 ESP IDF）
+- [Espressif ESP-EYE](https://www.espressif.com/en/products/hardware/esp-eye/overview)（使用 ESP IDF）
 
-Learn more about supported platforms in [TensorFlow Lite for Microcontrollers](index.md).
+请在 [TensorFlow Lite for Microcontrollers](index.md) 中了解有关所支持的平台的详细信息。
 
 ## Train a model
 
-Note: You can skip this section and use the trained model included in the example code.
+注：您可以跳过本部分，使用示例代码中包含的训练好的模型。
 
-Use Google Colaboratory to [train your own model](https://colab.research.google.com/github/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb). For more details, refer to the `README.md`:
+请使用 Google Colab 来[训练您自己的模型](https://colab.research.google.com/github/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb)。有关更多详细信息，请参考 `README.md`：
 
 <a class="button button-primary" href="https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/train/README.md">Hello World Training README.md</a>
 
-## Run inference
+## 运行推断
 
-To run the model on your device, we will walk through the instructions in the `README.md`:
+为了在您的设备上运行模型，我们将对 `README.md` 中的说明进行逐步介绍 ：
 
 <a class="button button-primary" href="https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/README.md">Hello World README.md</a>
 
 The following sections walk through the example's [`hello_world_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/hello_world_test.cc), unit test which demonstrates how to run inference using TensorFlow Lite for Microcontrollers. It loads the model and runs inference several times.
 
-### 1. Include the library headers
+### 1. 包括库头文件
 
-To use the TensorFlow Lite for Microcontrollers library, we must include the following header files:
+要使用 TensorFlow Lite for Microcontrollers 库，我们必须包含以下头文件：
 
 ```C++
 #include "tensorflow/lite/micro/all_ops_resolver.h"
@@ -60,23 +60,23 @@ To use the TensorFlow Lite for Microcontrollers library, we must include the fol
 - [`schema_generated.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/schema/schema_generated.h) contains the schema for the TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) model file format.
 - [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h) provides versioning information for the TensorFlow Lite schema.
 
-### 2. Include the model header
+### 2. 包含模型头文件
 
-The TensorFlow Lite for Microcontrollers interpreter expects the model to be provided as a C++ array. The model is defined in `model.h` and `model.cc` files. The header is included with the following line:
+TensorFlow Lite for Microcontrollers 解释器希望以 C++ 数组的形式提供模型。模型在 `model.h` 和 `model.cc` 文件中进行定义。请使用下面这行代码来包括头文件：
 
 ```C++
 #include "tensorflow/lite/micro/examples/hello_world/model.h"
 ```
 
-### 3. Include the unit test framework header
+### 3. 包含单元测试框架头文件
 
-In order to create a unit test, we include the TensorFlow Lite for Microcontrollers unit test framework by including the following line:
+为了创建单元测试，我们通过包含下面这行代码来包括 TensorFlow Lite for Microcontrollers 单元测试框架：
 
 ```C++
 #include "tensorflow/lite/micro/testing/micro_test.h"
 ```
 
-The test is defined using the following macros:
+该测试使用下面的宏来定义：
 
 ```C++
 TF_LITE_MICRO_TESTS_BEGIN
@@ -89,22 +89,22 @@ TF_LITE_MICRO_TEST(LoadModelAndPerformInference) {
 TF_LITE_MICRO_TESTS_END
 ```
 
-We now discuss the code included in the macro above.
+现在我们来讨论一下上面宏中包含的代码。
 
-### 4. Set up logging
+### 4. 设置日志记录
 
-To set up logging, a `tflite::ErrorReporter` pointer is created using a pointer to a `tflite::MicroErrorReporter` instance:
+要设置日志记录，请使用指向 `tflite::MicroErrorReporter` 实例的指针来创建 `tflite::ErrorReporter` 指针：
 
 ```C++
 tflite::MicroErrorReporter micro_error_reporter;
 tflite::ErrorReporter* error_reporter = &micro_error_reporter;
 ```
 
-This variable will be passed into the interpreter, which allows it to write logs. Since microcontrollers often have a variety of mechanisms for logging, the implementation of `tflite::MicroErrorReporter` is designed to be customized for your particular device.
+此变量将被传递到解释器中，从而允许其写入日志。由于微控制器通常有多种日志记录机制，`tflite::MicroErrorReporter` 的实现旨在针对您的特定设备进行自定义。
 
-### 5. Load a model
+### 5. 加载模型
 
-In the following code, the model is instantiated using data from a `char` array, `g_model`, which is declared in `model.h`. We then check the model to ensure its schema version is compatible with the version we are using:
+下面的代码使用了 `model.h` 中声明的 `char` 数组和 `g_model` 中的数据实例化模型。然后，我们检查模型，以确保它的架构版本与我们正在使用的版本兼容：
 
 ```C++
 const tflite::Model* model = ::tflite::GetModel(g_model);
@@ -116,7 +116,7 @@ if (model->version() != TFLITE_SCHEMA_VERSION) {
 }
 ```
 
-### 6. Instantiate operations resolver
+### 6. 实例化运算解析器
 
 An [`AllOpsResolver`](github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/all_ops_resolver.h) instance is declared. This will be used by the interpreter to access the operations that are used by the model:
 
@@ -124,48 +124,48 @@ An [`AllOpsResolver`](github.com/tensorflow/tflite-micro/tree/main/tensorflow/li
 tflite::AllOpsResolver resolver;
 ```
 
-The `AllOpsResolver` loads all of the operations available in TensorFlow Lite for Microcontrollers, which uses a lot of memory. Since a given model will only use a subset of these operations, it's recommended that real world applications load only the operations that are needed.
+`AllOpsResolver` 会加载 TensorFlow Lite for Microcontrollers 中可用的所有运算，而这些运算会占用大量内存。由于给定的模型仅会用到这些运算中的一部分，因此建议在实际应用中仅加载所需的运算。
 
 This is done using a different class, `MicroMutableOpResolver`. You can see how to use it in the *Micro speech* example's [`micro_speech_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc).
 
 ### 分配内存
 
-We need to preallocate a certain amount of memory for input, output, and intermediate arrays. This is provided as a `uint8_t` array of size `tensor_arena_size`:
+我们需要为输入、输出和中间数组预分配一定的内存。这由大小为 `tensor_arena_size` 的 `uint8_t` 数组提供：
 
 ```C++
 const int tensor_arena_size = 2 * 1024;
 uint8_t tensor_arena[tensor_arena_size];
 ```
 
-The size required will depend on the model you are using, and may need to be determined by experimentation.
+所需的大小将取决于您使用的模型，可能需要通过实验来确定。
 
-### 8. Instantiate interpreter
+### 8. 实例化解释器
 
-We create a `tflite::MicroInterpreter` instance, passing in the variables created earlier:
+我们创建一个 `tflite::MicroInterpreter` 实例，并传入之前创建的变量：
 
 ```C++
 tflite::MicroInterpreter interpreter(model, resolver, tensor_arena,
                                      tensor_arena_size, error_reporter);
 ```
 
-### 9. Allocate tensors
+### 9. 分配张量
 
-We tell the interpreter to allocate memory from the `tensor_arena` for the model's tensors:
+我们告诉解释器从 `tensor_arena` 为模型的张量分配内存：
 
 ```C++
 interpreter.AllocateTensors();
 ```
 
-### 10. Validate input shape
+### 10. 验证输入形状
 
-The `MicroInterpreter` instance can provide us with a pointer to the model's input tensor by calling `.input(0)`, where `0` represents the first (and only) input tensor:
+`MicroInterpreter` 实例可以通过调用 `.input(0)` 为我们提供指向模型输入张量的指针，其中 `0` 代表第一个（也是唯一的）输入张量：
 
 ```C++
   // Obtain a pointer to the model's input tensor
   TfLiteTensor* input = interpreter.input(0);
 ```
 
-We then inspect this tensor to confirm that its shape and type are what we are expecting:
+然后，我们检查该张量以确认其形状和类型是否符合预期：
 
 ```C++
 // Make sure the input has the properties we expect
@@ -185,19 +185,19 @@ TF_LITE_MICRO_EXPECT_EQ(kTfLiteFloat32, input->type);
 
 The enum value `kTfLiteFloat32` is a reference to one of the TensorFlow Lite data types, and is defined in [`common.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/c/common.h).
 
-### 11. Provide an input value
+### 11. 提供输入值
 
-To provide an input to the model, we set the contents of the input tensor, as follows:
+为了给模型提供输入，我们设置输入张量的内容，如下所示：
 
 ```C++
 input->data.f[0] = 0.;
 ```
 
-In this case, we input a floating point value representing `0`.
+在本例中，我们输入表示 `0` 的浮点值。
 
-### 12. Run the model
+### 12. 运行模型
 
-To run the model, we can call `Invoke()` on our `tflite::MicroInterpreter` instance:
+要运行模型，我们可以在 `tflite::MicroInterpreter` 实例上调用 `Invoke()`：
 
 ```C++
 TfLiteStatus invoke_status = interpreter.Invoke();
@@ -208,17 +208,17 @@ if (invoke_status != kTfLiteOk) {
 
 We can check the return value, a `TfLiteStatus`, to determine if the run was successful. The possible values of `TfLiteStatus`, defined in [`common.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/c/common.h), are `kTfLiteOk` and `kTfLiteError`.
 
-The following code asserts that the value is `kTfLiteOk`, meaning inference was successfully run.
+以下代码断言该值为 `kTfLiteOk`，意味着推断已成功运行。
 
 ```C++
 TF_LITE_MICRO_EXPECT_EQ(kTfLiteOk, invoke_status);
 ```
 
-### 13. Obtain the output
+### 13. 获得输出
 
-The model's output tensor can be obtained by calling `output(0)` on the `tflite::MicroInterpreter`, where `0` represents the first (and only) output tensor.
+可以通过在 `tflite::MicroInterpreter` 上调用 `output(0)` 来获得模型的输出张量，其中 `0` 表示第一个（也是唯一的）输出张量。
 
-In the example, the model's output is a single floating point value contained within a 2D tensor:
+在此例中，模型的输出是包含在 2D 张量中的单个浮点值：
 
 ```C++
 TfLiteTensor* output = interpreter.output(0);
@@ -228,7 +228,7 @@ TF_LITE_MICRO_EXPECT_EQ(1, input->dims->data[1]);
 TF_LITE_MICRO_EXPECT_EQ(kTfLiteFloat32, output->type);
 ```
 
-We can read the value directly from the output tensor and assert that it is what we expect:
+我们可以直接从输出张量中读取该值，并断言这是我们期望的值：
 
 ```C++
 // Obtain the output value from the tensor
@@ -237,9 +237,9 @@ float value = output->data.f[0];
 TF_LITE_MICRO_EXPECT_NEAR(0., value, 0.05);
 ```
 
-### 14. Run inference again
+### 14. 再次运行推断
 
-The remainder of the code runs inference several more times. In each instance, we assign a value to the input tensor, invoke the interpreter, and read the result from the output tensor:
+代码的剩余部分又运行了几次推断。在每个实例中，我们都为输入张量分配一个值，调用解释器，并从输出张量中读取结果。
 
 ```C++
 input->data.f[0] = 1.;
@@ -258,6 +258,6 @@ value = output->data.f[0];
 TF_LITE_MICRO_EXPECT_NEAR(-0.959, value, 0.05);
 ```
 
-### 15. Read the application code
+### 15. 阅读应用代码
 
 Once you have walked through this unit test, you should be able to understand the example's application code, located in [`main_functions.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/main_functions.cc). It follows a similar process, but generates an input value based on how many inferences have been run, and calls a device-specific function that displays the model's output to the user.
