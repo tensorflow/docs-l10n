@@ -18,9 +18,9 @@ TensorFlow Lite 元数据为模型描述提供了标准。元数据是与模型�
 
 ## 设置元数据工具
 
-Before adding metadata to your model, you will need to a Python programming environment setup for running TensorFlow. There is a detailed guide on how to set this up [here](https://www.tensorflow.org/install).
+将元数据添加到模型之前，您需要设置 Python 编程环境以便运行 TensorFlow。[此处](https://www.tensorflow.org/install)提供了有关设置方法的详细指南。
 
-After setup the Python programming environment, you will need to install additional tooling:
+设置 Python 编程环境后，您将需要安装附加工具：
 
 ```sh
 pip install tflite-support
@@ -42,7 +42,7 @@ TensorFlow Lite 元数据工具支持 Python 3。
 
 ### 支持的输入/输出类型
 
-TensorFlow Lite metadata for input and output are not designed with specific model types in mind but rather input and output types. It does not matter what the model functionally does, as long as the input and output types consists of the following or a combination of the following, it is supported by TensorFlow Lite metadata:
+用于输入和输出的 TensorFlow Lite 元数据在设计时并未考虑特定的模型类型，而是考虑了输入和输出类型。只要输入和输出类型是由以下项目或以下项目的组合构成，TensorFlow Lite 元数据即可支持该模型，无论模型功能如何：
 
 - 特征 - 无符号整数或 float32 类型的数字。
 - 图像 - 元数据当前支持 RGB 和灰度图像。
@@ -262,7 +262,7 @@ populator.load_associated_files(["your_path_to_label_file"])
 populator.populate()
 ```
 
-You can pack as many associated files as you want into the model through `load_associated_files`. However, it is required to pack at least those files documented in the metadata. In this example, packing the label file is mandatory.
+您可以通过 `load_associated_files` 将所需数量的关联文件打包到模型中。但是，至少须对元数据内记录的文件进行打包。在本例中，必须对标签文件进行打包。
 
 ## 可视化元数据
 
@@ -304,7 +304,7 @@ Metadata Extractor 库是从不同平台的模型中读取元数据和关联文�
 
 要在您的 Android 应用中使用 Metadata Extractor 库，我们建议使用[托管在 MavenCentral 上的 TensorFlow Lite Metadata AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-metadata)。它包含 `MetadataExtractor` 类，以及针对[元数据模式](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs)和[模型模式](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema.fbs)的 FlatBuffers Java 绑定。
 
-You can specify this in your `build.gradle` dependencies as follows:
+您可以在 `build.gradle` 依赖项中加以指定，如下所示：
 
 ```build
 dependencies {
