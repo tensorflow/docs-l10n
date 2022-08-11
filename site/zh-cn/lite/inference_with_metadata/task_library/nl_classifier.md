@@ -139,7 +139,7 @@ category[1]: 'Positive' : '0.18687'
 
     - 模型的输入应为 kTfLiteString 张量原始输入字符串或用于原始输入字符串的正则表达式标记化索引的 kTfLiteInt32 张量。
     - 如果输入类型为 kTfLiteString，则模型不需要[元数据](../../models/convert/metadata)。
-    - If input type is kTfLiteInt32, a `RegexTokenizer` needs to be set up in the input tensor's [Metadata](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers).
+    - 如果输入类型为 kTfLiteInt32，则需要在输入张量的<a>元数据</a>中设置 <code>RegexTokenizer</code>。
 
 - 输入分数张量：(kTfLiteUInt8/kTfLiteInt8/kTfLiteInt16/kTfLiteFloat32/kTfLiteFloat64)
 
