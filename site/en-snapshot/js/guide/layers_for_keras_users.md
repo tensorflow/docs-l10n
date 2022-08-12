@@ -30,7 +30,7 @@ print(model.predict(np.array([[5]])))
 
 ```js
 // JavaScript:
-import * as tf from '@tensorlowjs/tfjs';
+import * as tf from '@tensorflow/tfjs';
 
 // Build and compile model.
 const model = tf.sequential();
@@ -56,7 +56,7 @@ should be a relatively smooth experience.
 ## Constructors take JavaScript Objects as configurations
 
 Compare the following Python and JavaScript lines from the example above: they
-both create a [Dense](https://keras.io/layers/core/#dense) layer.
+both create a [Dense](https://keras.io/api/layers/core_layers/dense) layer.
 
 ```python
 # Python:
@@ -72,7 +72,7 @@ JavaScript functions don’t have an equivalent of the keyword arguments in Pyth
 functions. We want to avoid implementing constructor options as positional
 arguments in JavaScript, which would be especially cumbersome to remember and
 use for constructors with a large number of keyword arguments (e.g.,
-[LSTM](https://keras.io/layers/recurrent/#lstm)). This
+[LSTM](https://keras.io/api/layers/recurrent_layers/lstm)). This
 is why we use JavaScript configuration objects. Such objects provide the same
 level of positional invariance and flexibility as Python keyword arguments.
 
@@ -253,7 +253,7 @@ const mySGD = tf.train.sgd({lr: 0.2});
 
 ## loadLayersModel() loads from a URL, not an HDF5 file
 
-In Keras, models are usually [saved](https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model)
+In Keras, models are usually [saved](https://keras.io/getting_started/faq/#what-are-my-options-for-saving-models)
 as a HDF5 (.h5) file, which can be later loaded using the
 `keras.models.load_model()` method. The method takes a path to the .h5 file. The
 counterpart of `load_model()` in TensorFlow.js is
@@ -274,10 +274,10 @@ of [`tf.Model`](https://js.tensorflow.org/api/latest/#class:Model).
 
 In general, saving and loading `tf.Model`s in TensorFlow.js is done using the
 `tf.Model.save` and `tf.loadLayersModel` methods, respectively. We designed these APIs to be similar to
-[the save and load_model API](https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model)
+[the save and load_model API](https://keras.io/getting_started/faq/#what-are-my-options-for-saving-models)
 of Keras. But the browser environment is quite different from the backend environment
 on which staple deep learning frameworks like Keras run, particularly in the
-array of routes for persisting and transimitting data. Hence there are
+array of routes for persisting and transmitting data. Hence there are
 some interesting differences between the save/load APIs in TensorFlow.js and in Keras.
 See our tutorial on [Saving and Loading tf.Model](./save_load.md) for more
 details.
