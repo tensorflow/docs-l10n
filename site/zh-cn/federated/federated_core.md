@@ -20,7 +20,7 @@
 
 虽然以非常正式的方式定义*联合计算*超出了本文档的讨论范围，但是，不妨想一想在介绍一种新分布式学习算法的[研究论文](https://arxiv.org/pdf/1602.05629.pdf)中以伪代码表示的的算法类型。
 
-The goal of FC, in a nutshell, is to enable similarly compact representation, at a similar pseudocode-like level of abstraction, of program logic that is *not* pseudocode, but rather, that's executable in a variety of target environments.
+简而言之，FC 的目标就是以相当于伪代码级别的抽象来实现编程逻辑的类似紧凑表示，但这种编程逻辑并*非*伪代码，而是可在各种目标环境中执行的程序。
 
 根据 FC 的设计，用于表达这些算法类型的关键定义特征是以集合方式描述系统参与者的行为。因此，我们倾向于讨论在本地转换数据的*各个设备*，以及通过*广播*、*收集*或*聚合*结果来协调工作的集中式协调器。
 
