@@ -3,14 +3,14 @@
 通过 TFX 可以更轻松地将机器学习 (ML) 工作流编排为流水线，以实现以下功能：
 
 - 使 ML 过程自动化，以便定期重新训练、评估和部署模型。
-- Create ML pipelines which include deep analysis of model performance and validation of newly trained models to ensure performance and reliability.
-- Monitor training data for anomalies and eliminate training-serving skew
-- Increase the velocity of experimentation by running a pipeline with different sets of hyperparameters.
+- 创建 ML 流水线，其中包括对模型性能的深入分析和对新训练的模型的验证，以确保性能和可靠性。
+- 监视训练数据中的异常情况并消除训练-应用偏差
+- 通过运行具有不同超参数集的流水线来提高实验速度。
 
 典型的流水线开发过程从本地机器开始，进行数据分析和组件设置，然后再部署到生产环境中。本指南描述了在本地构建流水线的两种方法。
 
-- Customize a TFX pipeline template to fit the needs of your ML workflow. TFX pipeline templates are prebuilt workflows that demonstrate best practices using the TFX standard components.
-- Build a pipeline using TFX. In this use case, you define a pipeline without starting from a template.
+- 自定义 TFX 流水线模板以适合您的 ML 工作流的需求。TFX 流水线模板是预构建的工作流，它们演示了使用 TFX 标准组件的最佳做法。
+- 使用 TFX 构建流水线。在此用例中，您无需从模板开始定义流水线。
 
 在开发流水线时，您可以使用 `LocalDagRunner` 运行它。然后，一旦流水线各组件定义良好且经过测试，您便可以使用生产级编排器，例如 Kubeflow 或 Airflow。
 
@@ -22,15 +22,15 @@ TFX 为 Python 软件包，因此您需要设置一个 Python 开发环境，例
 pip install tfx
 ```
 
-If you are new to TFX pipelines, [learn more about the core concepts for TFX pipelines](understanding_tfx_pipelines) before continuing.
+如果您不熟悉 TFX 流水线，请在继续之前[详细了解 TFX 流水线的核心概念 ](understanding_tfx_pipelines)。
 
-## Build a pipeline using a template
+## 使用模板构建流水线
 
 TFX 流水线模板通过提供预构建的一组流水线定义使流水线开发变得更加容易，您可针对自己的用例对这些预构建的流水线定义进行自定义。
 
-The following sections describe how to create a copy of a template and customize it to meet your needs.
+以下各部分将介绍如何创建模板副本并对其进行自定义来满足您的需求。
 
-### Create a copy of the pipeline template
+### 创建流水线模板副本
 
 1. 查看可用 TFX 流水线模板的列表：
 
@@ -43,19 +43,19 @@ The following sections describe how to create a copy of a template and customize
         --destination_path=&lt;var&gt;destination-path&lt;/var&gt;
         </pre>
 
-    Replace the following:
+    替换以下内容：
 
-    - <var>template</var>: The name of the template you want to copy.
-    - <var>pipeline-name</var>: The name of the pipeline to create.
+    - <var>template</var>：要复制的模板的名称。
+    - <var>pipeline-name</var>：要创建的流水线的名称。
     - <var>destination-path</var>：要将模板复制到的路径。
 
-    Learn more about the [`tfx template copy` command](cli#copy).
+    详细了解 [`tfx template copy` 命令](cli#copy)。
 
-3. A copy of the pipeline template has been created at the path you specified.
+3. 已在您指定的路径上创建了流水线模板的副本。
 
 注：本指南的其余部分假设您选择了 `penguin` 模板。
 
-### Explore the pipeline template
+### 探索流水线模板
 
 本部分将概述通过模板创建的基架。
 
@@ -87,7 +87,7 @@ The following sections describe how to create a copy of a template and customize
     该命令使用 `LocalDagRunner` 创建流水线运行，将以下目录添加到流水线中：
 
     - **tfx_metadata** 目录，其中包含本地使用的 ML Metadata 库。
-    - A **tfx_pipeline_output** directory which contains the pipeline's file outputs.
+    - **tfx_pipeline_output** 目录，其中包含流水线的文件输出。
 
     注：`LocalDagRunner` 是 TFX 中支持的几种编排器之一。它特别适合在本地运行流水线以实现更快迭代，数据集也可能更小。`LocalDagRunner` 可能不适合生产使用，因为它在单台机器上运行，系统变得不可用时更容易丢失工作。TFX 还支持 Apache Beam、Apache Airflow 和 Kubeflow Pipeline 等编排器。如果要配合其他编排器使用 TFX，请为该编排器使用适当的 DAG 运行程序。
 
@@ -103,38 +103,38 @@ The following sections describe how to create a copy of a template and customize
 
 6. 您已经查看了通过模板创建的基架，并使用 `LocalDagRunner` 创建了一个流水线运行。接下来，对模板进行自定义以满足您的要求。
 
-### Customize your pipeline
+### 自定义流水线
 
 本部分将概述如何开始自定义模板。
 
-1. Design your pipeline. The scaffolding that a template provides helps you implement a pipeline for tabular data using the TFX standard components. If you are moving an existing ML workflow into a pipeline, you may need to revise your code to make full use of [TFX standard components](index#tfx_standard_components). You may also need to create [custom components](understanding_custom_components) that implement features which are unique to your workflow or that are not yet supported by TFX standard components.
+1. 设计流水线。模板提供的基架可以帮助您使用 TFX 标准组件为表格数据实现流水线。若要将现有 ML 工作流移入流水线，则可能需要修改代码以充分利用 [TFX 标准组件](index#tfx_standard_components)。您可能还需要创建[自定义组件](understanding_custom_components)，以实现您的工作流所独有的功能或 TFX 标准组件尚不支持的功能。
 
-2. Once you have designed your pipeline, iteratively customize the pipeline using the following process. Start from the component that ingests data into your pipeline, which is usually the `ExampleGen` component.
+2. 完成流水线设计后，使用下列过程以迭代方式自定义流水线。从将数据提取到流水线的组件开始，通常是 `ExampleGen` 组件。
 
-    1. Customize the pipeline or a component to fit your use case. These customizations may include changes like:
+    1. 自定义流水线或组件以适合您的用例。这些自定义可能包括如下更改：
 
-        - Changing pipeline parameters.
-        - Adding components to the pipeline or removing them.
-        - Replacing the data input source. This data source can either be a file or queries into services such as BigQuery.
-        - Changing a component's configuration in the pipeline.
-        - Changing a component's customization function.
+        - 更改流水线参数。
+        - 向流水线添加组件或移除组件。
+        - 替换数据输入源。该数据源可以是文件，也可以是对 BigQuery 等服务的查询。
+        - 更改流水线中组件的配置。
+        - 更改组件的自定义函数。
 
     2. 使用 `local_runner.py` 脚本（如果您使用的是其他编排器，则使用其他合适的 DAG 运行程序）在本地运行组件。如果脚本失败，请对故障进行调试并尝试重试运行脚本。
 
-    3. Once this customization is working, move on to the next customization.
+    3. 该自定义正常工作后，继续下一个自定义。
 
-3. Working iteratively, you can customize each step in the template workflow to meet your needs.
+3. 以迭代方式进行工作，您可以自定义模版工作流中的每个步骤以满足您的需求。
 
-## Build a custom pipeline
+## 构建自定义流水线
 
-Use the following instructions to learn more about building a custom pipeline without using a template.
+使用以下说明详细了解如何在不使用模板的情况下构建自定义流水线。
 
-1. Design your pipeline. The TFX standard components provide proven functionality to help you implement a complete ML workflow. If you are moving an existing ML workflow into a pipeline, you may need to revise your code to make full use of TFX standard components. You may also need to create [custom components](understanding_custom_components) that implement features such as data augmentation.
+1. 设计流水线。TFX 标准组件提供了经过验证的功能，以帮助您实现完整的 ML 工作流。如果要将现有的 ML 工作流移入流水线，则可能需要修改代码以充分利用 TFX 标准组件。您可能还需要创建[自定义组件](understanding_custom_components)来实现数据增强之类的功能。
 
-    - Learn more about [standard TFX components](index#tfx_standard_components).
-    - Learn more about [custom components](understanding_custom_components).
+    - 详细了解[标准 TFX 组件](index#tfx_standard_components)。
+    - 详细了解[自定义组件](understanding_custom_components)。
 
-2. Create a script file to define your pipeline using the following example. This guide refers to this file as `my_pipeline.py`.
+2. 使用以下示例创建脚本文件以定义您的流水线。本指南将该文件命名为 `my_pipeline.py`。
 
     <pre class="devsite-click-to-copy prettyprint">    import os
         from typing import Optional, Text, List
@@ -183,23 +183,23 @@ Use the following instructions to learn more about building a custom pipeline wi
 
     在接下来的步骤中，您将在 `create_pipeline` 中定义流水线并使用本地运行程序在本地运行流水线。
 
-    Iteratively build your pipeline using the following process.
+    使用以下过程以迭代方式构建流水线。
 
-    1. Customize the pipeline or a component to fit your use case. These customizations may include changes like:
+    1. 自定义流水线或组件以适合您的用例。这些自定义可能包括如下更改：
 
-        - Changing pipeline parameters.
-        - Adding components to the pipeline or removing them.
-        - Replacing a data input file.
-        - Changing a component's configuration in the pipeline.
-        - Changing a component's customization function.
+        - 更改流水线参数。
+        - 向流水线添加组件或移除组件。
+        - 替换数据输入文件。
+        - 更改流水线中组件的配置。
+        - 更改组件的自定义函数。
 
     2. 使用本地运行程序或直接通过运行脚本来在本地运行组件。如果脚本失败，请对故障进行调试并尝试重试运行脚本。
 
-    3. Once this customization is working, move on to the next customization.
+    3. 该自定义正常工作后，继续下一个自定义。
 
-    Start from the first node in your pipeline's workflow, typically the first node ingests data into your pipeline.
+    从流水线工作流中的第一个节点开始，通常第一个节点会将数据提取到流水线中。
 
-3. Add the first node in your workflow to your pipeline. In this example, the pipeline uses the `ExampleGen` standard component to load a CSV from a directory at `./data`.
+3. 将工作流中的第一个节点添加到流水线。在此示例中，流水线使用 `ExampleGen` 标准组件从 `./data` 目录加载 CSV 文件。
 
     <pre class="devsite-click-to-copy prettyprint">    from tfx.components import CsvExampleGen
 
@@ -242,14 +242,14 @@ Use the following instructions to learn more about building a custom pipeline wi
 
     `CsvExampleGen` 使用指定数据路径的 CSV 中的数据创建序列化示例记录，方法是使用数据根设置 `CsvExampleGen` 组件的 `input_base` 参数。
 
-4. Create a `data` directory in the same directory as `my_pipeline.py`. Add a small CSV file to the `data` directory.
+4. 在与 `my_pipeline.py` 相同的目录中创建 `data` 目录。将一个小型 CSV 文件添加到 `data` 目录。
 
 5. 使用以下命令运行 `my_pipeline.py` 脚本。
 
     <pre class="devsite-click-to-copy devsite-terminal">    python my_pipeline.py
         </pre>
 
-    The result should be something like the following:
+    结果应大致如下所示：
 
     <pre>    INFO:absl:Component CsvExampleGen depends on [].
         INFO:absl:Component CsvExampleGen is scheduled.
@@ -267,4 +267,4 @@ Use the following instructions to learn more about building a custom pipeline wi
         INFO:absl:Component CsvExampleGen is finished.
         </pre>
 
-6. Continue to iteratively add components to your pipeline.
+6. 继续以迭代方式将组件添加到流水线。
