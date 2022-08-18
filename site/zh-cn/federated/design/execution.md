@@ -30,12 +30,12 @@ TFF 运行时通常处理 [AST](compilation.md#ast) 的执行，并将数学计�
 
 ## 执行栈
 
-执行栈是 [Executor](#executor) 的层次结构。[executor_stacks](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) 模块包含用于构造和组成特定执行栈的逻辑。
+执行栈是 [Executor](#executor) 的层次结构。[executor_stacks](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executor_stacks) 软件包内含用于构造和组成特定执行栈的逻辑。
 
 ### 本地执行栈
 
-[executor_stacks.local_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) 函数构造一个本地执行栈，该执行栈对一定数量的客户端执行 [AST](compilation.md#ast)。
+[python_executor_stacks.local_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executor_stacks/python_executor_stacks.py) 函数构造一个本地执行栈，该执行栈对一定数量的客户端执行 [AST](compilation.md#ast)。
 
 ### 远程执行栈
 
-[executor_stacks.remote_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) 函数构造一个远程执行栈，该执行栈对一些服务执行 [AST](compilation.md#ast)。
+[python_executor_stacks.remote_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executor_stacks/python_executor_stacks.py) 函数构造一个远程执行栈，该执行栈对一些服务执行 [AST](compilation.md#ast)。
