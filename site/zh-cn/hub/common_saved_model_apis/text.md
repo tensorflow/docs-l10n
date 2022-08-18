@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'kempy' reviewed: '2021-03-09' } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2022-05-22' } *-->
 
 # 文本任务的通用 SavedModel API
 
@@ -13,7 +13,7 @@
 - *包含预处理输入的文本嵌入向量*的 API 可解决相同的任务，但它由两个单独的 SavedModel 实现：
 
     - 一个*预处理程序*，可以在 tf.data 输入流水线中运行并将字符串和其他可变长度数据转换为数值张量，
-    - 一个*编码器*，接受预处理程序的结果并执行嵌入向量计算的可训练部分。
+    - an *encoder* that accepts the results of the preprocessor and performs the trainable part of the embedding computation.
 
     这种拆分允许在馈送到训练循环之前对输入进行异步预处理。特别是，它允许构建可在 [TPU](https://www.tensorflow.org/guide/tpu) 上运行和微调的编码器。
 
@@ -73,7 +73,7 @@ embeddings = hub.KerasLayer("path/to/model", trainable=...)(text_input)
 **包含预处理输入的文本嵌入向量**由两个单独的 SavedModel 实现：
 
 - 一个**预处理程序**，可将形状为 `[batch_size]` 的字符串张量映射到数值张量词典，
-- 一个**编码器**，接受预处理程序返回的张量字典，执行嵌入向量计算的可训练部分，并返回一个输出字典。键 `"default"` 下的输出是一个形状为 `[batch_size, dim]` 的 float32 张量。
+- an **encoder** that accepts a dict of Tensors as returned by the preprocessor, performs the trainable part of the embedding computation, and returns a dict of outputs. The output under key `"default"` is a float32 Tensor of shape `[batch_size, dim]`.
 
 这允许在输入流水线中运行预处理程序，但会将编码器计算的嵌入向量作为更大模型的一部分进行微调。特别是，它允许构建可在 [TPU](https://www.tensorflow.org/guide/tpu) 上运行和微调的编码器。
 
@@ -160,7 +160,7 @@ encoder_inputs = preprocessor.bert_pack_inputs(
     seq_length=seq_length)  # Optional argument.
 ```
 
-在 Keras 中，计算过程可表示为：
+In Keras, this computation can be expressed as
 
 ```python
 tokenize = hub.KerasLayer(preprocessor.tokenize)
@@ -200,7 +200,7 @@ encoder_inputs = bert_pack_inputs([tokenized_premises, tokenized_hypotheses])
 
 编码器在 `encoder_inputs` 的字典上调用，其方式与包含预处理输入的文本嵌入向量的 API 相同（请参阅上文），包括[可重用 SavedModel API](../reusable_saved_models.md) 中的规定 。
 
-#### 用法概要
+#### Usage synopsis
 
 ```python
 enocder = hub.load("path/to/encoder")
@@ -228,7 +228,7 @@ encoder_outputs = encoder(encoder_inputs)
 
 - `"input_word_ids"`：一个形状为 `[batch_size, seq_length]` 的 int32 张量，包含打包输入序列（即，包括序列开始词例、段结束词例和填充）的词例 ID。
 - `"input_mask"`：一个形状为 `[batch_size, seq_length]` 的 int32 张量，填充之前存在的所有输入词例的位置处的值为 1，填充词例的值为 0。
-- `"input_type_ids"`：一个形状为 `[batch_size, seq_length]` 的 int32 张量，包含在相应位置处产生输入词例的输入段的索引。第一个输入段（索引 0）包括序列开始词例及其段结束词例。第二段和后续段（如果存在）包括其重复的段结束词例。填充词例再次获得索引 0。
+- `"input_type_ids"`: an int32 Tensor of shape `[batch_size, seq_length]` with the index of the input segment that gave rise to the input token at the respective position. The first input segment (index 0) includes the start-of-sequence token and its end-of-segment token. The second and later segments (if present) include their respective end-of-segment token. Padding tokens get index 0 again.
 
 ### 分布式训练
 
@@ -236,4 +236,4 @@ encoder_outputs = encoder(encoder_inputs)
 
 ### 示例
 
-- Colab 教程[在 TPU 上使用 BERT 解决 GLUE 任务](https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/text/solve_glue_tasks_using_bert_on_tpu.ipynb)。
+- Colab 教程：[在 TPU 上使用 BERT 解决 GLUE 任务](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb)。
