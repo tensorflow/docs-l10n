@@ -1,3 +1,5 @@
+<!--* freshness: { owner: 'maringeo' reviewed: '2022-07-11' } *-->
+
 # 在使用 TensorFlow Hub 的情况下从 TF1 迁移到 TF2
 
 本页介绍了在将 TensorFlow 代码从 TensorFlow 1 迁移到 TensorFlow 2 时如何继续使用 TensorFlow Hub，旨在补充 TensorFlow 的常规[迁移指南](https://www.tensorflow.org/guide/migrate)。
@@ -29,8 +31,8 @@ model = tf.keras.Sequential([
 
 许多教程都展示了这些 API 的实际运行。具体请参阅：
 
-- [文本分类示例笔记本](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
-- [图像分类示例笔记本](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
+- [Text classification example notebook](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
+- [Image classification example notebook](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
 
 ### 在 Estimator 训练中使用新版 API
 
