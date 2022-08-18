@@ -20,7 +20,7 @@ TFF 初始版本中包含的默认运行时仅适用于小型实验，例如我�
 
 ## 如何做贡献？
 
-请参阅[自述文件](../README.md)和[贡献者准则](../CONTRIBUTING.md)。
+请参阅[自述文件](https://github.com/tensorflow/federated/blob/main/README.md)、[贡献](https://github.com/tensorflow/federated/blob/main/CONTRIBUTING.md)准则和[c协作](collaborations/README.md)。
 
 ## FedJAX 和 TensorFlow Federated 之间是什么关系？
 
