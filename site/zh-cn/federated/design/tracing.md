@@ -12,19 +12,19 @@ TODO(b/153500547)：描述并链接跟踪系统的各个组件。
 
 ### 打包参数
 
-在内部，TFF 计算拥有零个或仅有一个参数。提供给 [computations.federated_computation](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/api/computations.py) 装饰器的参数描述了 TFF 计算的参数的类型签名。TFF 使用此信息来确定如何将 Python 函数的参数打包到单个 [structure.Struct](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/common_libs/structure.py) 中。
+在内部，TFF 计算拥有零个或仅有一个参数。提供给 [federated_computation.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation.py) 装饰器的参数描述了 TFF 计算的参数的类型签名。TFF 使用此信息来确定如何将 Python 函数的参数打包到单个 [structure.Struct](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/common_libs/structure.py) 中。
 
 注：由于使用 `Struct` 作为用于表示 Python `args` 和 `kwargs` 的单一数据结构，因此 `Struct` 也同时接受命名字段和未命名字段。
 
-有关详细信息，请参阅 [function_utils.wrap_as_zero_or_one_arg_callable](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/utils/function_utils.py)。
+See [function_utils.create_argument_unpacking_fn](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/computation/function_utils.py) for more information.
 
 ### 跟踪函数
 
-跟踪 `federated_computation` 时，可以将 [value_impl.Value](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/federated_context/value_impl.py) 用作各个参数的替代来调用用户的函数。`Value` 会尝试通过实现常见的 Python dunder 方法（例如 `__getattr__`）来模拟原始参数类型的行为。
+When tracing a `federated_computation`, the user's function is called using [value_impl.Value](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) as a stand-in replacement for each argument. `Value` attempts to emulate the behavior of the original argument type by implementing common Python dunder methods (e.g. `__getattr__`).
 
 具体而言，只有一个参数时，将通过以下方式执行跟踪：
 
-1. 构造由 [building_blocks.Reference](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler/building_blocks.py) 支持的 [value_impl.ValueImpl](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/value_impl.py)，使用适当的类型签名表示参数。
+1. 构造由 [building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) 支持的 [value_impl.ValueImpl](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py)，使用适当的类型签名表示参数。
 
 2. 在 `ValueImpl` 上调用函数。这样，Python 运行时会调用由 `ValueImpl` 实现的 dunder 方法，这会将那些 dunder 方法转换为 AST 构造。每个 dunder 方法都会构造 AST 并返回该 AST 支持的 `ValueImpl`。
 
@@ -35,13 +35,13 @@ def foo(x):
   return x[0]
 ```
 
-在这里，函数的参数为元组，在函数体中选择第 0 个元素。这会调用 Python 的 `__getitem__` 方法，该方法在 `ValueImpl` 上被重写。在最简单的情况下，实现 `ValueImpl.__getitem__` 会构造 [building_blocks.Selection](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler/building_blocks.py) 以表示调用 `__getitem__` 并返回由此新的 `Selection` 支持的 `ValueImpl`。
+Here the function’s parameter is a tuple and in the body of the fuction the 0th element is selected. This invokes Python’s `__getitem__` method, which is overridden on `ValueImpl`. In the simplest case, the implementation of `ValueImpl.__getitem__` constructs a [building_blocks.Selection](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) to represent the invocation of `__getitem__` and returns a `ValueImpl` backed by this new `Selection`.
 
 由于每个 dunder 方法都返回一个 `ValueImpl`，而在函数体中每完成一个运算就会调用一个重写的 dunder 方法，因此将会持续跟踪。
 
 ### 构造 AST
 
-跟踪该函数的结果会被打包到 [building_blocks.Lambda](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler/building_blocks.py) 中，其 `parameter_name` 和 `parameter_type` 会映射至创建的 [building_block.Reference](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/core/impl/compiler/building_blocks.py) 以表示打包的参数。随后，会将生成的 `Lambda` 作为能够完全表示用户 Python 函数的 Python 对象返回。
+The result of tracing the function is packaged into a [building_blocks.Lambda](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) whose `parameter_name` and `parameter_type` map to the [building_block.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) created to represent the packed arguments. The resulting `Lambda` is then returned as a Python object that fully represents the user’s Python function.
 
 ## 跟踪 TensorFlow 计算
 
