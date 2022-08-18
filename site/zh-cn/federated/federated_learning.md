@@ -118,9 +118,9 @@ TFF 是一种函数式编程环境，但是，联合学习中许多相关的过�
 
 ### 可用构建器
 
-At the moment, TFF provides various builder functions that generate federated computations for federated training and evaluation. Two notable examples include:
+目前，TFF 提供了各种构建器函数来生成用于联合训练和评估的联合计算。两个值得注意的例子包括：
 
-- `tff.learning.algorithms.build_weighted_fed_avg`, which takes as input a *model function* and a *client optimizer*, and returns a stateful `tff.learning.templates.LearningProcess` (which subclasses `tff.templates.IterativeProcess`).
+- `tff.learning.algorithms.build_weighted_fed_avg`，它将*模型函数*和*客户端优化器*作为输入，并返回有状态的 `tff.learning.templates.LearningProcess`（它是 `tff.templates.IterativeProcess` 的子类）。
 
 - `tff.learning.build_federated_evaluation` 使用一个 *model 函数*，并为模型的联合评估返回一个单一的联合计算，因为评估没有状态。
 
