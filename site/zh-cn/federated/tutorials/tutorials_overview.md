@@ -6,8 +6,8 @@
 
 **联合学习入门**
 
-- [Federated Learning for image classification](federated_learning_for_image_classification.ipynb) introduces the key parts of the Federated Learning (FL) API, and demonstrates how to use TFF to simulate federated learning on federated MNIST-like data.
-- [Federated Learning for text generation](federated_learning_for_text_generation.ipynb) further demonstrates how to use TFF's FL API to refine a serialized pre-trained model for a language modeling task.
+- [图像分类联合学习](federated_learning_for_image_classification.ipynb)介绍了 Federated Learning (FL) API 的主要部分，并在类 MNIST 联合数据上演示了如何使用 TFF 模拟联合学习。
+- [文本生成联合学习](federated_learning_for_text_generation.ipynb)进一步演示了如何使用 TFF 的 FL API 为语言建模任务优化序列化预训练模型。
 - [调整推荐的学习聚合](tuning_recommended_aggregators.ipynb)展示了如何将 `tff.learning` 中的基本 FL 计算与提供稳健性、差分隐私、压缩等功能的专用聚合结合使用。
 - [矩阵分解的联合重建](federated_reconstruction_for_matrix_factorization.ipynb)引入了部分本地联合学习，其中某些客户端参数从不在服务器上聚合。本教程演示了如何使用 Federated Learning API 训练部分局部矩阵分解模型。
 
