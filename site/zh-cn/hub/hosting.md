@@ -2,7 +2,7 @@
 
 # 模型托管协议
 
-This document describes the URL conventions used when hosting all model types on [tfhub.dev](https://tfhub.dev) - TFJS, TF Lite and TensorFlow models. It also describes the HTTP(S)-based protocol implemented by the `tensorflow_hub` library in order to load TensorFlow models from [tfhub.dev](https://tfhub.dev) and compatible services into TensorFlow programs.
+本文档介绍了在 [tfhub.dev](https://tfhub.dev) 上托管所有模型类型（TFJS、TF Lite 和 TensorFlow 模型）时使用的网址惯例。此外，本文档还介绍了由 `tensorflow_hub` 库实现的基于 HTTP(S) 的协议，目的是将 [tfhub.dev](https://tfhub.dev) 中的 TensorFlow 模型和兼容服务加载到 TensorFlow 程序中。
 
 它的关键功能是在代码中使用相同的网址来加载模型，并在浏览器中使用相同的网址来查看模型文档。
 
@@ -14,13 +14,13 @@ This document describes the URL conventions used when hosting all model types on
 - TF Hub 集合遵循 `https://tfhub.dev/<publisher>/collection/<collection_name>`
 - TF Hub 模型具有版本化网址 `https://tfhub.dev/<publisher>/<model_name>/<version>` 和可解析为最新版本模型的未版本化网址 `https://tfhub.dev/<publisher>/<model_name>`。
 
-TF Hub models can be downloaded as compressed assets by appending URL parameters to the [tfhub.dev](https://tfhub.dev) model URL. However, the URL parameters required to achieve that depend on the model type:
+通过将网址参数附加到 [tfhub.dev](https://tfhub.dev) 模型网址，可以将 TF Hub 模型下载为压缩资源。但是，实现该目标所需的网址参数取决于模型类型：
 
 - TensorFlow 模型（SavedModel 和 TF1 Hub 格式）：将 `?tf-hub-format=compressed` 附加到 TensorFlow 模型网址。
 - TFJS 模型：将 `?tfjs-format=compressed` 附加到 TFJS 模型网址以下载压缩资源，或者附加 `/model.json?tfjs-format=file` 以便从远程存储空间读取。
 - TF Lite 模型：将 `?lite-format=tflite` 附加到 TF Lite 模型网址。
 
-**压缩**格式表示客户端期望一个包含模型内容的 `tar.gz` 归档。归档的根是模型目录的根，并且应包含 SavedModel，如下面的示例中所示：
+例如：
 
 <table style="width: 100%;">
   <tr style="text-align: center">
