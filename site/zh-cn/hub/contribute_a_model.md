@@ -1,10 +1,18 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2021-02-25' review_interval: '3 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2022-05-25' } *-->
 
-# 为模型做贡献
+# 提交拉取请求
 
-本页面介绍如何将 Markdown 文档文件添加到 GitHub。有关如何编写 Markdown 文件的更多信息，请参阅[编写模型文档](writing_model_documentation.md)指南。
+本页面介绍如何向 [tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) GitHub 仓库提交包含 Markdown 文档文件提交拉取请求。有关如何首先编写 Markdown 文件的更多信息，请参阅[编写文档](writing_documentation.md)指南。
 
-## 提交模型
+## GitHub 操作检查
+
+[tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) 仓库使用 GitHub 操作来验证拉取请求中的文件格式。工作流用于验证 [.github/workflows/contributions-validator.yml](https://github.com/tensorflow/tfhub.dev/blob/master/.github/workflows/contributions-validator.yml) 中定义的拉取请求。您可以在工作流之外您自己的分支上运行验证器脚本，但需要确保已安装了所有正确的 PIP 软件包依赖项。
+
+根据 [GitHub 策略](https://github.blog/changelog/2021-04-22-github-actions-maintainers-must-approve-first-time-contributor-workflow-runs/)，首次贡献者只能在仓库维护人员批准的情况下运行自动检查。我们鼓励发布者提交一个用来修复拼写错误的小拉取请求，或改进模型文档，或提交一份只包含其发布者页面的拉取请求作为第一拉取请求，以便能够对后续拉取请求进行自动检查。
+
+重要提示：您的拉取请求必须通过自动检查，然后才能进行审核！
+
+## 提交拉取请求
 
 可以通过以下方式之一将完整的 Markdown 文件拉取到 [tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev/tree/master) 的 master 分支。
 
