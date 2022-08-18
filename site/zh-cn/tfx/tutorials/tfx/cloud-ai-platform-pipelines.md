@@ -17,7 +17,7 @@ This tutorial is designed to introduce [TensorFlow Extended (TFX)](https://www.t
 <!-- Image free for commercial use, does not require attribution:
 https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
-![Taxi](images/airflow_workshop/taxi.jpg) ![Chicago taxi](images/airflow_workshop/chicago.png)
+![Taxi](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/taxi.jpg?raw=true) ![芝加哥出租车](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/chicago.png?raw=true)
 
 您将使用芝加哥市发布的 [Taxi Trips 数据集](https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew)。
 
@@ -41,8 +41,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 同意 Google Cloud 条款及条件
 
-
-    <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/welcome-popup.png">
+     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/welcome-popup.png?raw=true">
 
 3. If you would like to start with a free trial account, click on [**Try For Free**](https://console.cloud.google.com/freetrial) (or [**Get started for free**](https://console.cloud.google.com/freetrial)).
 
@@ -76,18 +75,15 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. Click **+ New Instance** to create a new cluster.
 
-
-    <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-instance.png">
+     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/new-instance.png?raw=true">
 
 3. On the **Kubeflow Pipelines** overview page, click **Configure**.
 
-
-    <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/configure.png">
+     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/configure.png?raw=true">
 
 4. Click "Enable" to enable the Kubernetes Engine API
 
-
-    <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/enable_api.png">
+    <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/select-notebook.png?raw=true" alt="select-notebook" data-md-type="image">
 
     Note: You may have to wait several minutes before moving on, while the Kubernetes Engine APIs are being enabled for you.
 
@@ -97,8 +93,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     2. **IMPORTANT** Check the box labeled *Allow access to the following cloud APIs*. (This is required for this cluster to access the other pieces of your project. If you miss this step, fixing it later is a bit tricky.)
 
-
-        <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/check-the-box.png">
+        <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
     3. Click **Create New Cluster**, and wait several minutes until the cluster has been created.  This will take a few minutes.  When it completes you will see a message like:
 
@@ -118,8 +113,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 3. Create a **New Notebook** with TensorFlow Enterprise 2.7 (or above) installed.
 
-
-    <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-notebook.png">
+    <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/open-dashboard.png?raw=true" alt="open-dashboard" data-md-type="image">
 
     New Notebook -&gt; TensorFlow Enterprise 2.7 -&gt; Without GPU
 
@@ -130,7 +124,6 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
     1. Select **Advanced Options** at the bottom of the **New notebook** form.
 
     2. Under **Machine configuration** you may want to select a configuration with 1 or 2 vCPUs if you need to stay in the free tier.
-
 
         <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
@@ -146,17 +139,15 @@ Note: You may experience slow performance in your notebook if you use 1 or 2 vCP
 
 2. On the line for the cluster you are using in this tutorial, click **Open Pipelines Dashboard**.
 
-
     <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
 
 3. On the **Getting Started** page, click **Open a Cloud AI Platform Notebook on Google Cloud**.
-
 
     <img src="images/cloud-ai-platform-pipelines/open-template.png">
 
 4. Select the Notebook instance you are using for this tutorial and **Continue**, and then **Confirm**.
 
-    ![select-notebook](images/cloud-ai-platform-pipelines/select-notebook.png)
+     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/check-the-box.png?raw=true">
 
 ## 5. 继续在笔记本中操作
 
@@ -168,7 +159,7 @@ Getting Started 笔记本首先会将 [TFX](https://www.tensorflow.org/tfx) 和 
 
 然后，它会检查已安装的 TFX 版本，进行导入，并设置和打印项目 ID：
 
-![check python version and import](images/cloud-ai-platform-pipelines/check-version-nb-cell.png)
+![Install tf and kfp](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/pip-install-nb-cell.png?raw=true)
 
 ### 连接您的 Google Cloud 服务
 
@@ -296,7 +287,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ### 组件
 
-![Data Components](images/airflow_workshop/examplegen1.png) ![Data Components](images/airflow_workshop/examplegen2.png)
+![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/examplegen1.png?raw=true) ![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/examplegen2.png?raw=true)
 
 - [ExampleGen](https://www.tensorflow.org/tfx/guide/examplegen) 用于提取并拆分输入数据集。
 - [StatisticsGen](https://www.tensorflow.org/tfx/guide/statsgen) 用于计算数据集的统计信息。
@@ -350,7 +341,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ### 组件
 
-![Transform](images/airflow_workshop/transform.png)
+![set path](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/set-path-nb-cell.png?raw=true)
 
 - [Transform](https://www.tensorflow.org/tfx/guide/transform) performs feature engineering on the dataset.
 
@@ -415,7 +406,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ### 查看流水线输出
 
-For Kubeflow Orchestrator, visit KFP dashboard and find pipeline outputs in the page for your pipeline run. Click "Experiments" tab on the left, and "All runs" in the Experiments page. You should be able to find the run with the name of your pipeline.
+对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”选项卡，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
 
 ### 更高级的示例
 
@@ -458,7 +449,7 @@ components.append(evaluator)
 
 ### 查看流水线输出
 
-For Kubeflow Orchestrator, visit KFP dashboard and find pipeline outputs in the page for your pipeline run. Click "Experiments" tab on the left, and "All runs" in the Experiments page. You should be able to find the run with the name of your pipeline.
+对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”选项卡，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
 
 ## 12. 应用模型
 
@@ -548,7 +539,7 @@ kubeflow_dag_runner.KubeflowDagRunner(config=config).run(pipeline)
 
 **浏览到上一级目录。**点击文件列表上方的目录名称。该目录名称为流水线的名称，如果您未更改流水线名称，则为 `my_pipeline`。
 
-**Double-click to open `kubeflow_runner.py`**. Uncomment two arguments, `query` and `beam_pipeline_args`, for the `create_pipeline` function.
+**双击打开 `kubeflow_runner.py`**。为 `create_pipeline` 函数取消注释 `query` 和 `beam_pipeline_args` 两个参数。
 
 现在，流水线已准备好使用 BigQuery 作为样本源。像之前一样更新流水线，并像在第 5 和第 6 步中那样创建新的执行运行。
 
@@ -590,7 +581,7 @@ gcloud services enable dataflow.googleapis.com
 
 **浏览到上一级目录。**点击文件列表上方的目录名称。该目录名称为流水线的名称，如果未进行更改，则为 `my_pipeline`。
 
-**Double-click to open `kubeflow_runner.py`**. Uncomment `beam_pipeline_args`. (Also make sure to comment out current `beam_pipeline_args` that you added in Step 7.)
+**双击打开 `kubeflow_runner.py`**。取消注释 `beam_pipeline_args`。（还要确保注释掉您在第 7 步中添加的当前 `beam_pipeline_args`。）
 
 #### 更新流水线并重新运行
 
