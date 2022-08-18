@@ -56,7 +56,7 @@ example_gen = ImportExampleGen(input_base=path_to_tfrecord_dir)
 
 跨度内的每个版本可以进一步细分为多个拆分。拆分跨度的最常见用例是将其拆分为训练数据和评估数据。
 
-![Spans and Splits](images/spans_splits.png)
+![跨度和拆分](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/guide/images/spans_splits.png?raw=true)
 
 ### 自定义输入/输出拆分
 
