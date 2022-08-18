@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/beans)
 - [Huggingface](https://huggingface.co/datasets/beans)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:beans')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Beans is a dataset of images of beans taken in the field using smartphone
@@ -21,7 +21,7 @@ by experts from the National Crops Resources Research Institute (NaCRRI) in
 Uganda and collected by the Makerere AI research lab.
 ```
 
-- **License**: No known license
+- **许可证**：无已知许可证
 - **版本**：0.0.0
 - **拆分**：
 
