@@ -19,4 +19,4 @@ TensorFlow Model Analysis 的目标是为 TFX 中的模型评估提供一种机�
 
 查看我们的 [GitHub](https://github.com/tensorflow/model-analysis) 页面了解有关支持的[指标与图表](../model_analysis/metrics)以及关联的笔记本[可视化效果](../model_analysis/visualizations)的详细信息。
 
-参阅[安装](../model_analysis/install)和[使用入门](../model_analysis/get_started)指南，了解有关在独立流水线中进行[设置](../model_analysis/setup)的信息和示例。回想一下，TFMA 也在 TFC 的 [Evaluator](evaluator.md) 组件中使用，因此，这些资源也有助于开始使用 TFX。
+有关如何在独立流水线中进行[设置](../model_analysis/install)的信息和示例，请参阅[安装](../model_analysis/get_started)和[入门](../model_analysis/setup)指南。回想一下，TFMA 还在 TFX 的 [Evaluator](evaluator.md) 组件中使用，因此这些资源对于 TFX 入门也很有用。
