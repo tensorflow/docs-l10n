@@ -34,8 +34,13 @@ MetadataStore 对象接收与使用的存储后端相对应的连接配置。
 - **假数据库**为快速实验和本地运行提供了一个内存中数据库（使用 SQLite）。销毁存储对象时，将删除此数据库。
 
 ```python
-from ml_metadata import metadata_store
+import ml_metadata as mlmd
+from ml_metadata.metadata_store import metadata_store
 from ml_metadata.proto import metadata_store_pb2
+
+connection_config = metadata_store_pb2.ConnectionConfig()
+connection_config.fake_database.SetInParent() # Sets an empty fake database proto.
+store = metadata_store.MetadataStore(connection_config)
 ```
 
 - **SQLite** 从磁盘读取和写入文件。
@@ -129,11 +134,14 @@ artifact_types = store.get_artifact_types()
 1. 为 ML 工作流中的所有步骤注册执行类型
 
 ```python
-# Create ExecutionType, e.g., Trainer
+# Create an ExecutionType, e.g., Trainer
 trainer_type = metadata_store_pb2.ExecutionType()
 trainer_type.name = "Trainer"
 trainer_type.properties["state"] = metadata_store_pb2.STRING
 trainer_type_id = store.put_execution_type(trainer_type)
+
+# Query a registered Execution type with the returned id
+[registered_type] = store.get_execution_types_by_id([trainer_type_id])
 ```
 
 1. 创建 DataSet ArtifactType 工件
@@ -178,26 +186,26 @@ executions_with_conditions = store.get_executions(
 1. 定义输入事件并读取数据
 
 ```python
-# Declare the input event
+# Define the input event
 input_event = metadata_store_pb2.Event()
 input_event.artifact_id = data_artifact_id
 input_event.execution_id = run_id
 input_event.type = metadata_store_pb2.Event.DECLARED_INPUT
 
-# Submit input event to the Metadata Store
+# Record the input event in the metadata store
 store.put_events([input_event])
 ```
 
 1. 声明输出工件
 
 ```python
-# Declare output artifact of type SavedModel
+# Declare the output artifact of type SavedModel
 model_artifact = metadata_store_pb2.Artifact()
 model_artifact.uri = 'path/to/model/file'
 model_artifact.properties["version"].int_value = 1
 model_artifact.properties["name"].string_value = 'MNIST-v1'
 model_artifact.type_id = model_type_id
-model_artifact_id = store.put_artifacts([model_artifact])[0]
+[model_artifact_id] = store.put_artifacts([model_artifact])
 ```
 
 1. 记录输出事件
@@ -320,12 +328,12 @@ request.artifact_type.CopyFrom(model_type)
 stub.PutArtifactType(request)
 ```
 
-## Resources
+## 资源
 
 MLMD 库有一个高级 API，您可以很容易地将其与 ML 流水线一起使用。请参阅 [MLMD API 文档](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd)，了解更多详细信息。
 
 查看 [MLMD 声明性节点过滤](https://github.com/google/ml-metadata/blob/v1.2.0/ml_metadata/proto/metadata_store.proto#L708-L786)，了解如何在属性和 1 近邻节点上使用 MLMD 声明性节点过滤功能。
 
-Also check out the [MLMD tutorial](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial) to learn how to use MLMD to trace the lineage of your pipeline components.
+另外，请查看 [MLMD 教程](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial)，了解如何使用 MLMD 跟踪流水线组件的沿袭。
 
 MLMD 提供了实用程序来处理跨版本的架构和数据迁移。有关详细信息，请参阅 MLMD [指南](https://github.com/google/ml-metadata/blob/master/g3doc/get_started.md#upgrade-the-mlmd-library)。
