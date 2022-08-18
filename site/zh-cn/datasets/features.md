@@ -108,16 +108,16 @@ info.features['label'].str2int('cat')  # 0
 - 如果您的特征是单个张量值，最好从 `tfds.features.Tensor` 继承并在需要时使用 `super()`。有关示例，请参阅 `tfds.features.BBoxFeature` 源代码。
 - 如果您的特征是多个张量的容器，最好从 `tfds.features.FeaturesDict` 继承并使用 `super()` 自动编码子连接器。
 
-The `tfds.features.FeatureConnector` object abstracts away how the feature is encoded on disk from how it is presented to the user. Below is a diagram showing the abstraction layers of the dataset and the transformation from the raw dataset files to the `tf.data.Dataset` object.
+`tfds.features.FeatureConnector` 对象可将特征在磁盘中的编码方式从特征如何呈现给用户中抽象出来。下图显示了数据集的抽象层，以及从原始数据集文件到 `tf.data.Dataset` 对象的转换。
 
 <p align="center">   <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/datasets/dataset_layers.png?raw=true" alt="DatasetBuilder abstraction layers" class=""></p>
 
-To create your own feature connector, subclass `tfds.features.FeatureConnector` and implement the abstract methods:
+要创建您自己的特征连接器，请将  `tfds.features.FeatureConnector` 子类化并实现抽象方法：
 
 - `encode_example(data)`：定义如何将在生成器 `_generate_examples()` 中给定的数据编码成兼容 `tf.train.Example` 的数据。可以返回单个值或值的 `dict`。
 - `decode_example(data)`：定义如何将从 `tf.train.Example` 读取的张量中的数据解码成 `tf.data.Dataset` 返回的用户张量。
 - `get_tensor_info()`：指定 `tf.data.Dataset` 返回的张量的形状/数据类型。如果从另一个 `tfds.features` 继承，则是可选项。
-- (optionally) `get_serialized_info()`: If the info returned by `get_tensor_info()` is different from how the data are actually written on disk, then you need to overwrite `get_serialized_info()` to match the specs of the `tf.train.Example`
+- （可选）`get_serialized_info()`：如果 `get_tensor_info()` 返回的信息与实际将数据写入磁盘的方式不同，那么您需要重写 `get_serialized_info()` 以匹配 `tf.train.Example` 的规范
 - `to_json_content`/`from_json_content`：这是允许在没有原始源代码的情况下加载数据集所必需的。有关示例，请参阅[音频特征](https://github.com/tensorflow/datasets/blob/65a76cb53c8ff7f327a3749175bc4f8c12ff465e/tensorflow_datasets/core/features/audio_feature.py#L121)。
 
 注：确保使用 `self.assertFeature` 和 `tfds.testing.FeatureExpectationItem` 测试您的特征连接器。请查看[测试示例](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature_test.py)：
