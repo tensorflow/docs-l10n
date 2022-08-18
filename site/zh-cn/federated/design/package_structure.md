@@ -24,7 +24,7 @@ TFF [TFF API 文档](https://www.tensorflow.org/federated/api_docs/python/tff)�
 
 #### TFF Python 软件包
 
-在 [PyPI](https://pypi.org) 上分发的 Python [软件包](https://pypi.org/project/tensorflow-federated/)。
+在 https://pypi.org 上分发的 Python [软件包](https://pypi.org/project/tensorflow-federated/)。
 
 请注意，Python 软件包同时包含[公共 TFF API](#public-tff-api) 和[私有 TFF API](#private-tff-api)，*检查软件包*无法明确哪些 API 是公共的，哪些是私有的，例如：
 
@@ -39,12 +39,32 @@ tff.proto.v0.computation_pb2.Computation  # Private TFF API
 
 ### 图表
 
+#### 概览
+
 ```dot
-<!--#include file="package_structure.dot"-->
+<!--#include file="package_structure_overview.dot"-->
 ```
 
-**绿色**节点表示属于 [GitHub](https://github.com) 上 [TFF 仓库](https://github.com/tensorflow/federated)并使用[公共 TFF API](#public-tff-api) 的目录。
+#### 模拟
 
-**蓝色**节点表示属于[公共 TFF API](#public-tff-api) 的软件包。
+```dot
+<!--#include file="package_structure_simulation.dot"-->
+```
 
-**灰色**节点表示不属于[公共 TFF API](#public-tff-api) 的目录或软件包。
+#### 学习
+
+```dot
+<!--#include file="package_structure_learning.dot"-->
+```
+
+#### 分析
+
+```dot
+<!--#include file="package_structure_analytics.dot"-->
+```
+
+#### 核心
+
+```dot
+<!--#include file="package_structure_core.dot"-->
+```
