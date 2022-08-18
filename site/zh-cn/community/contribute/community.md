@@ -2,13 +2,27 @@
 
 一个开源项目不仅涉及代码，还是一个包含用户、开发者、作者、研究员和其他贡献者的社区。您可以为发展和支持这一社区提供帮助。
 
-请阅读 TensorFlow [代码和协作治理](https://github.com/tensorflow/community/blob/master/governance/code-and-collaboration.md)
+请阅读 TensorFlow [代码和协作治理](https://github.com/tensorflow/community/blob/master/governance/code-and-collaboration.md)。
 
 ## 社区支持
 
-许多人[在 Stack Overflow 上询问有关 TensorFlow 的问题](https://stackoverflow.com/questions/tagged/tensorflow)。回答这些问题并指导人们找到相关文档对社区意义重大。
+许多人[在 TensorFlow Forum 上询问有关 TensorFlow 的问题](https://discuss.tensorflow.org/)。回答这些问题并指导人们找到相关文档对社区意义重大。
 
 一些用户也会将支持问题作为 GitHub 问题提出。我们并不鼓励这种做法，因为 GitHub 问题并不是寻求技术支持的最佳途径。但是，如果您注意到这些问题，我们鼓励您回答它们，并指导人们找到相关文档。
+
+### TensorFlow Forum
+
+[TensorFlow Forum](https://discuss.tensorflow.org/) 是社区讨论和支持的中心平台。它将我们的社区成员聚集在一起，分享与 TensorFlow 相关的想法、最佳做法和用例。我们致力于依据 [TensorFlow 行为准则](https://discuss.tensorflow.org/faq)营造开放友好的环境。
+
+TensorFlow Forum 按照类别、子类别和标签进行组织。我们鼓励您创建一个帐号并关注感兴趣的类别和标签。创建新帖子时，请选择最合适的[类别或子类别](https://discuss.tensorflow.org/categories)和[标签](https://discuss.tensorflow.org/tags)，以帮助其他用户找到您的话题。
+
+有关 Discourse 功能的更多信息，请参阅 [Discourse 新用户指南](https://meta.discourse.org/t/discourse-new-user-guide/96331)。
+
+### 成为 Forum 专家
+
+Discourse 使用[信任级别](https://blog.discourse.org/2018/06/understanding-discourse-trust-levels/)来奖励论坛参与度不断提升的用户。Forum 致力于促进从实践中学习的模式，让您可以收集显示在您的个人资料中的[徽章](https://discuss.tensorflow.org/badges)。这种方式能够非常有效地使他人获知您能够为社区成员提供帮助。您对社区成员提供的帮助越多，就能解锁越多的徽章和论坛工具。
+
+诸如 TensorFlow 团队成员以及机器学习 GDE 的某些小组会显示特殊图标以便识别。
 
 ## 沟通
 
@@ -18,78 +32,33 @@ TensorFlow 社区有许多正式和非正式的联系方式。
 
 我们主要在 [GitHub 上的 TensorFlow 仓库](https://github.com/tensorflow)中交流关于 TensorFlow 的工作。在这里可以讨论错误、新功能和进行中的工作。
 
-<!--
-### Forums
--->
-
 ### 邮寄名单
 
-邮寄名单保留用于公告和贡献者对话。它们的作用不是提供技术支持。
-
-#### TensorFlow 一般名单
+交流大多在 TensorFlow Forum 上进行。下列邮寄名单仍被用于公告以及与贡献者交流。请注意，它们的用途并非提供技术支持。
 
 - [announce@tensorflow.org](mailto:announce@tensorflow.org) - 所有主要版本和重要公告都会发送到此邮寄组。如果您以任何方式依赖 TensorFlow，我们建议您加入此名单。
-- [discuss@tensorflow.org](mailto:discuss@tensorflow.org) - 关于 TensorFlow 开发和方向的一般讨论。
 - [developers@tensorflow.org](mailto:developers@tensorflow.org) - 为 TensorFlow 做贡献的开发者的讨论。
 
-#### 项目特定名单
+有关项目特定通信的详细信息，请访问[为 SIG 做贡献](https://tensorflow.org/community/contribute/sigs)页面。
 
-- [docs@tensorflow.org](mailto:docs@tensorflow.org) - 如果您对为 TensorFlow 文档做贡献有兴趣，请加入此邮寄名单。
-- [hub@tensorflow.org](mailto:hub@tensorflow.org) - 围绕 TensorFlow Hub 的讨论与协作。
-- [magenta-discuss@tensorflow.org](mailto:magenta-discuss@tensorflow.org) - 关于 Magenta 开发和方向的一般讨论。
-- [swift@tensorflow.org](mailto:swift@tensorflow.org) - 围绕 Swift for TensorFlow 的社区与协作。
-- [tensor2tensor@tensorflow.org](mailto:tensor2tensor@tensorflow.org) - Tensor2Tensor 的讨论和同侪支持。
-- [tfjs-announce@tensorflow.org](mailto:tfjs-announce@tensorflow.org) - 新 TensorFlow.js 版本的公告。
-- [tfjs@tensorflow.org](mailto:tfjs@tensorflow.org) - TensorFlow.js 的讨论和同侪支持。
-- [tflite@tensorflow.org](mailto:tflite@tensorflow.org) - TensorFlow Lite 的讨论和同侪支持。
-- [tfprobability@tensorflow.org](mailto:tfprobability@tensorflow.org) - TensorFlow Probability 的讨论和同侪支持。
-- [tpu-users@tensorflow.org](mailto:tpu-users@tensorflow.org) - TPU 用户的社区讨论和支持。
+### 博客和社交媒体
 
-### 博客
+[TensorFlow 博客](http://blog.tensorflow.org/)汇集了来自 Google 团队和广大社区的精彩内容。我们很想倾听您的想法，因此如果您想投稿以供审核，请发送电子邮件至 tensorflow-blog@google.com 与我们联系。请注意，我们会收到大量出色的投稿，因此请有所预期，我们只能发布其中一些内容。
 
-我们会定期在 [TensorFlow 博客](http://blog.tensorflow.org/)中发布文章，这些内容均来自 TensorFlow 开发者和更广泛的社区。如果您想提交一篇文章以供审核，请联系 TensorFlow 开发者关系团队。
+我们会在 [Twitter](https://twitter.com/tensorflow) 上分享社区的最新鲜和最精彩的内容，我们的 [YouTube 频道](https://www.youtube.com/tensorflow)提供了免费的教育内容，可以帮助您创建、理解和部署各种应用的模型。
 
-### 社交媒体
+## TensorFlow Community Spotlight
 
-有关 TensorFlow 项目的新闻和动态，请在 Twitter 上关注 [@tensorflow](https://twitter.com/tensorflow)。要观看与 TensorFlow 相关的内容，请查看我们的 [YouTube](http://youtube.com/tensorflow/) 频道。
+TensorFlow Community Spotlight 计划提供了一个展示您使用 TensorFlow 打造的酷爱项目的机会。[提交您的项目](https://services.google.com/fb/forms/tensorflowprojectrecognitionform/)，就有机会在 TensorFlow 的 Twitter 账号上获得推荐和认可。
 
-### 用户小组
+关注 [#TFCommunitySpotlight](https://twitter.com/hashtag/TFCommunitySpotlight?src=hashtag_click) 话题标签，并在[此处](https://blog.tensorflow.org/2020/11/tensorflow-community-spotlight-program-update.html)详细了解往期获奖者。
 
-TensorFlow 在世界各地拥有许多社区！有关完整列表，请参阅 TensorFlow 网站上的[社区](https://www.tensorflow.org/community/groups)部分。
+## 用户小组
 
-### 特殊兴趣小组 (SIG)
+[TensorFlow 用户小组](https://www.tensorflow.org/community/groups)（简称 TFUG）是全球开发者和研究人员的本地社区。如果您所在的国家/地区或城市没有 TFUG，我们鼓励您联系 [tfug-help@tensorflow.org](mailto:tfug-help@tensorflow.org) 以开始组建一个用户小组。
 
-为了在 TensorFlow 的特定领域开展重点协作，我们建立了特殊兴趣小组 (SIG)。SIG 公开工作。如果您想加入并做贡献，请查看小组的工作，然后与相关 SIG 负责人取得联系。成员资格政策因 SIG 而异。
+## 活动
 
-#### 当前的 SIG
+TensorFlow 团队在全球各地举办及支持各项活动！如果您的 TFUG 正在计划近期活动或聚会，请在 TensorFlow Forum 的[活动类别](https://discuss.tensorflow.org/c/events/27)下发布相关信息，以便让我们的社区知道。
 
-截至 2019 年 1 月，当前的 TF-SIG 包括：
-
-<table>
-  <tr>
-   <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/addons">SIG Addons</a></td>
-   <td>维护一个符合完善的 API 模式，但实现了核心 TensorFlow 中未提供的新功能的贡献仓库。</td>
-  </tr>
-  <tr>
-   <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/build">SIG Build</a></td>
-   <td>专注于 TensorFlow 的构建、打包和分发方面的问题。</td>
-  </tr>
-  <tr>
-   <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/io">SIG IO</a></td>
-   <td>致力于为除核心 TensorFlow 以外的文件系统和格式（如 Apache Ignite FS 或 Apache Hadoop SequenceFile）提供支持，作为 tf.data.Dataset 和 TensorFlow 文件系统的子类。</td>
-  </tr>
-  <tr>
-   <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/networking">SIG Networking</a></td>
-   <td>维护核心 TensorFlow 中未提供的网络结构和协议。</td>
-  </tr>
-  <tr>
-   <td><a href="https://groups.google.com/a/tensorflow.org/d/forum/tensorboard">SIG TensorBoard</a></td>
-   <td>TensorBoard 及其插件的进一步开发和方向。</td>
-  </tr>
-  <tr>
-   <td><a href="https://groups.google.com/a/tensorflow.org/forum/#!forum/rust">SIG Rust</a></td>
-   <td>协作开发 TensorFlow 的 Rust 绑定。</td>
-  </tr>
-</table>
-
-如果您认为对新的 SIG 有强烈需求，请阅读 [SIG 指南]()并与 TensorFlow 开发者关系团队联系。
+如果您已经举办过活动，请在[此处](https://docs.google.com/forms/d/e/1FAIpQLSdvb8c2ZFXxS05aX6dpUVZlfYA0WsFFq-sUAzjiohVKAQ1RLw/viewform)与我们分享反馈！欢迎随时在 Forum 上分享活动回顾和录像。
