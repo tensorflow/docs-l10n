@@ -31,8 +31,8 @@ model = tf.keras.Sequential([
 
 许多教程都展示了这些 API 的实际运行。具体请参阅：
 
-- [Text classification example notebook](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
-- [Image classification example notebook](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
+- [文本分类示例笔记本](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
+- [图像分类示例笔记本](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
 
 ### 在 Estimator 训练中使用新版 API
 
