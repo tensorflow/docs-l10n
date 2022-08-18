@@ -404,13 +404,13 @@ $ python zero_out_op_test.py
   }
 ```
 
-This asserts that the input is a vector, and returns having set the `InvalidArgument` status if it isn't.  The [`OP_REQUIRES` macro](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h) takes three arguments:
+上述代码会声明输入是一个向量，如果不是，返回将设置 `InvalidArgument` 状态。[`OP_REQUIRES` 宏](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h)采用三个参数：
 
 - `context`，可以是其 `SetStatus()` 方法的 `OpKernelContext` 或 `OpKernelConstruction` 指针（请参阅 [`tensorflow/core/framework/op_kernel.h`](https://www.tensorflow.org/code/tensorflow/core/framework/op_kernel.h)）。
 - 条件。例如，[`tensorflow/core/framework/tensor_shape.h`](https://www.tensorflow.org/code/tensorflow/core/framework/tensor_shape.h) 中存在用于验证张量形状的函数。
-- The error itself, which is represented by a `Status` object, see [`tensorflow/core/platform/status.h`](https://www.tensorflow.org/code/tensorflow/core/platform/status.h). A `Status` has both a type (frequently `InvalidArgument`, but see the list of types) and a message.  Functions for constructing an error may be found in [`tensorflow/core/platform/errors.h`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h).
+- 错误本身，由 `Status` 对象表示，请参见 [`tensorflow/core/platform/status.h`](https://www.tensorflow.org/code/tensorflow/core/platform/status.h)。`Status` 包含类型（通常为 `InvalidArgument`，但具体请参见类型列表）和消息。可以在 [`tensorflow/core/platform/core/errors.h`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h) 中找到用于构造错误的函数。
 
-Alternatively, if you want to test whether a `Status` object returned from some function is an error, and if so return it, use [`OP_REQUIRES_OK`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h).  Both of these macros return from the function on error.
+或者，如果您要测试从某个函数返回的 `Status` 对象是否为错误，请使用 [`OP_REQUIRES_OK`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h)（如果是，则返回错误）。这两个宏都会在出错时从函数返回。
 
 ### 运算注册
 
