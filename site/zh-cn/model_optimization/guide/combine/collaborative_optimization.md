@@ -10,13 +10,13 @@
 
 协作优化的理念建立在个别技术的基础上，通过逐个应用这些技术来实现累积的优化效果。可以实现以下优化的各种组合：
 
-- [Weight pruning](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-pruning-api-42cac9157a6a)
+- [权重剪枝](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-pruning-api-42cac9157a6a)
 
-- [Weight clustering](https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html)
+- [权重聚类](https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html)
 
 - 量化
 
-    - [Post-training quantization](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantization-b4964a1ea9ba)
+    - [训练后量化](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantization-b4964a1ea9ba)
     - [量化感知训练](https://blog.tensorflow.org/2020/04/quantization-aware-training-with-tensorflow-model-optimization-toolkit.html) (QAT)
 
 试图将这些技术链接在一起时出现的问题是，应用一种技术通常会破坏先前技术的结果，因而会损害同时应用所有这些技术的整体效益；例如，聚类不会保留剪枝 API 引入的稀疏性。为了解决这个问题，我们引入了以下实验性的协作优化技术：
