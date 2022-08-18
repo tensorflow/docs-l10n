@@ -6,6 +6,7 @@
 
 ## 开始
 
+
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
 如果您是 TensorFlow Lite 新用户，并且使用的是 Android 系统，我们建议您浏览 [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/nl_classifier) 的指南，将图像分割模型集成到几行代码中。您也可以使用 [TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java) 集成模型。
@@ -26,7 +27,7 @@
 
 下面是使用该模型对段落进行分类的步骤：
 
-1. 对段落进行分词，并使用预定义词汇表将其转换为一个单词 ID 列表。
+1. Tokenize the paragraph and convert it to a list of word ids using a predefined vocabulary.
 2. 将该列表馈送到 TensorFlow Lite 模型。
 3. 从模型输出获取该段落为正面或负面评价的概率。
 
@@ -78,7 +79,7 @@ What a waste of my time. | 72.5% | 27.5%
 
 ## 使用训练数据集
 
-使用您自己的数据集，按照本[教程](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)运用本文使用的相同技术训练文本分类模型。利用正确的数据集，您可以为文档分类或负面评论检测等用例创建模型。
+Follow this [tutorial](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) to apply the same technique used here to train a text classification model using your own datasets. With the right dataset, you can create a model for use cases such as document categorization or toxic comments detection.
 
 ## 详细了解文本分类
 
