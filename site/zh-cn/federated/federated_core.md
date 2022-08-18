@@ -14,13 +14,13 @@
 
 ### 目标、预期用途和使用范围
 
-对联合核心 (FC) 的最佳理解是将其当作一种实现分布式计算的编程环境。所谓分布式计算，就是由多种设备（手机、平板电脑、嵌入式设备、桌面计算机、传感器、数据库服务器等）分别在本地执行不常用处理，并通过网络通信来协调工作的一种计算机制。
+对 Federated Core (FC) 的最佳理解是将其当做一种实施分布计算的编程环境。所谓分布计算，就是由多种设备（手机、平板电脑、嵌入式设备、桌面计算机、传感器、数据库服务器等）分别在本地执行非常用处理，并通过网络通信来协调工作的一种计算机制。
 
 *分布式*是一个非常通用的词汇，但 TFF 并非旨在支持所有可能的分布式算法类型，所以我们更倾向于使用一个不那么宽泛的词：*联合计算*，以便描述可在此框架中表示的算法类型。
 
 虽然以非常正式的方式定义*联合计算*超出了本文档的讨论范围，但是，不妨想一想在介绍一种新分布式学习算法的[研究论文](https://arxiv.org/pdf/1602.05629.pdf)中以伪代码表示的的算法类型。
 
-简而言之，FC 的目标就是以相当于伪代码级别的抽象来实现编程逻辑的类似紧凑表示，但这种编程逻辑并*非*伪代码，而是可在各种目标环境中执行的程序。
+The goal of FC, in a nutshell, is to enable similarly compact representation, at a similar pseudocode-like level of abstraction, of program logic that is *not* pseudocode, but rather, that's executable in a variety of target environments.
 
 根据 FC 的设计，用于表达这些算法类型的关键定义特征是以集合方式描述系统参与者的行为。因此，我们倾向于讨论在本地转换数据的*各个设备*，以及通过*广播*、*收集*或*聚合*结果来协调工作的集中式协调器。
 
@@ -34,14 +34,14 @@
 
 ### Python 接口
 
-TFF 使用内部语言表示联合计算，其语法由 [computation.proto](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/proto/v0/computation.proto) 中的可序列化表示形式进行定义。不过，FC API 用户通常不需要直接与该语言交互。这相当于我们提供了一个将代码包装起来的 Python API（`tff` 命名空间），作为定义计算的方式。
+TFF uses an internal language to represent federated computations, the syntax of which is defined by the serializable representation in [computation.proto](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/proto/v0/computation.proto). Users of FC API generally won't need to interact with this language directly, though. Rather, we provide a Python API (the `tff` namespace) that wraps arounds it as a way to define computations.
 
 具体而言，TFF 提供 `tff.federated_computation` 之类的 Python 函数装饰器，用于跟踪装饰函数的主体，并使用 TFF 的语言生成联合计算逻辑的序列化表示形式。使用 `tff.federated_computation` 装饰的函数作为此类序列化表示形式的载体，可将其作为构建模块嵌入另一个计算的主体中，或者在调用时按需求执行。
 
 下面仅举一个例子；在[自定义算法](tutorials/custom_federated_algorithms_1.ipynb)教程中可以找到更多示例。
 
 ```python
-@tff.federated_computation(tff.FederatedType(tf.float32, tff.CLIENTS))
+@tff.federated_computation(tff.type_at_clients(tf.float32))
 def get_average_temperature(sensor_readings):
   return tff.federated_mean(sensor_readings)
 ```
@@ -59,6 +59,8 @@ Federated Core 提供了以下几种类型。在描述这些类型时，我们�
 首先，以下是在概念上与现有主流语言相似的几种类型：
 
 - **张量类型** (`tff.TensorType`)。就像在 TensorFlow 中一样，这些类型有 `dtype` 和 `shape`。唯一的区别是这种类型的对象不仅限于在 TensorFlow 计算图中表示 TensorFlow 运算输出的 Python 的 `tf.Tensor` 实例，而是也可能包括可产生的数据单位，例如，作为分布聚合协议的输出。因此，TFF 张量类型是 Python 或 TensorFlow 中此类类型的具体物理表示形式的抽象版本。
+
+    TFF's `TensorTypes` can be stricter in their (static) treatment of shapes than TensorFlow. For example, TFF's typesystem treats a tensor with unknown rank as assignable *from* any other tensor of the same `dtype`, but not assignable *to* any tensor with fixed rank. This treatment prevents certain runtime failures (e.g., attempting to reshape a tensor of unknown rank into a shape with incorrect number of elements), at the cost of greater strictness in what computations TFF accepts as valid.
 
     张量类型的紧凑表示法为 `dtype` 或 `dtype[shape]`。例如，`int32` 和 `int32[10]` 分别是整数和整数向量的类型。
 
@@ -82,7 +84,7 @@ Federated Core 提供了以下几种类型。在描述这些类型时，我们�
 
     定义布局概念的主要目的是作为定义*联合类型*的基础。
 
-- **联合类型** (`tff.FederatedType`)。联合类型的值是由特定布局（如 `tff.SERVER` 或 `tff.CLIENTS`）定义的一组系统参与者托管的值。联合类型通过*布局*值（因此，它是一种[依赖类型](https://en.wikipedia.org/wiki/Dependent_type)）, *成员组成要素*（每个参与者在本地托管的内容类型），以及指定所有参与者是否在本地托管同一项目的附加部分 `all_equal` 进行定义。
+- **联合类型** (`tff.FederatedType`)。联合类型通过*布局*值（因此，它是一种[依赖类型](https://en.wikipedia.org/wiki/Dependent_type)）、*成员组成*类型（每个参与者在本地托管的内容种类）和附加位 `all_equal`（指定所有参与者是否在本地托管同一项目）进行定义。
 
     对于包含 `T` 类型项目（成员组成）的值的联合类型，如果每个项目由组（布局）`G` 托管，则其紧凑表示法为 `T@G` 或 `{T}@G`，分别设置或不设置 `all_equal` 位。
 
@@ -125,7 +127,7 @@ Federated Core 的语言是一种 [λ 演算](https://en.wikipedia.org/wiki/Lamb
     下面是我们之前讲过的一个 λ 表达式示例：
 
     ```python
-    @tff.federated_computation(tff.FederatedType(tf.float32, tff.CLIENTS))
+    @tff.federated_computation(tff.type_at_clients(tf.float32))
     def get_average_temperature(sensor_readings):
       return tff.federated_mean(sensor_readings)
     ```
