@@ -12,11 +12,11 @@ TFF 是一个可扩展的强大框架，通过在实际代理数据集上模拟�
 
 在 TFF 中实现的研究 FL 模拟通常包括三种主要的逻辑类型。
 
-1. 单个 TensorFlow 代码段（通常为 `tf.function`），它会封装在单个位置（例如客户端或服务器）上运行的逻辑。此代码在编写或测试时通常没有任何 `tff.*` 引用，且可以在 TFF 之外重用。例如，[联合平均中的客户端训练循环](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tf.py#L184-L222)就是在此级别上实现的。
+1. Individual pieces of TensorFlow code, typically `tf.function`s, that encapsulate logic that runs in a single location (e.g., on clients or on a server). This code is typically written and tested without any `tff.*` references, and can be re-used outside of TFF. For example, the [client training loop in Federated Averaging](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/simple_fedavg/simple_fedavg_tf.py#L184-L222) is implemented at this level.
 
-2. TensorFlow Federated 编排逻辑，它会通过将第 1 点中的各个 `tf.function` 封装成 `tff.tf_computation` 从而将其绑定在一起，然后使用抽象（如 `tff.federated_computation` 中的 `tff.federated_broadcast` 和 `tff.federated_mean` ）对其进行编排。相关示例请参阅[联合平均编排](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tff.py#L112-L140)。
+2. TensorFlow Federated orchestration logic, which binds together the individual `tf.function`s from 1. by wrapping them as `tff.tf_computation`s and then orchestrating them using abstractions like `tff.federated_broadcast` and `tff.federated_mean` inside a `tff.federated_computation`. See, for example, this [orchestration for Federated Averaging](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/simple_fedavg/simple_fedavg_tff.py#L112-L140).
 
-3. 外部驱动程序脚本，它能模拟生产 FL 系统的控制逻辑，从数据集中选择模拟客户端，然后在这些客户端上执行第 2 点中定义的联合计算。例如，[Federated EMNIST 实验驱动程序](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/emnist_fedavg_main.py)。
+3. An outer driver script that simulates the control logic of a production FL system, selecting simulated clients from a dataset and then executing federated computations defined in 2. on those clients. For example, [a Federated EMNIST experiment driver](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/simple_fedavg/emnist_fedavg_main.py).
 
 ## 联合学习数据集
 
@@ -26,13 +26,13 @@ TensorFlow Federated [托管了多个数据集](https://www.tensorflow.org/feder
 
 数据集包括：
 
-- [**StackOverflow**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data)一个用于语言建模或监督学习任务的真实文本数据集，训练集中有 342,477 个唯一用户和 135,818,730 个样本（句子）。
+- [**StackOverflow**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data) A realistic text dataset for language modeling or supervised learning tasks, with 342,477 unique users with 135,818,730 examples (sentences) in the training set.
 
-- [**Federated EMNIST**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/emnist/load_data)EMNIST 字符和数字数据集的联合预处理，其中每个客户端对应一个不同的编写器。完整的训练集包含 3400 个用户和来自 62 个标签的 671,585 个样本。
+- [**Federated EMNIST**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/emnist/load_data)。EMNIST 字符和数字数据集的联合预处理，其中每个客户端对应一个不同的编写器。完整的训练集包含 3400 个用户和来自 62 个标签的 671,585 个样本。
 
-- [**Shakespeare**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/shakespeare/load_data)基于威廉·莎士比亚全集的较小的字符级文本数据集。该数据集由 715 个用户（莎士比亚戏剧中的角色）组成，其中每个样本对应给定戏剧中的角色所说的一组连续台词。
+- [**Shakespeare**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/shakespeare/load_data)。基于威廉·莎士比亚全集的较小的字符级文本数据集。该数据集由 715 个用户（莎士比亚戏剧中的角色）组成，其中每个样本对应给定戏剧中的角色所说的一组连续台词。
 
-- [**CIFAR-100**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)CIFAR-100 数据集在 500 个训练客户端和 100 个测试客户端上的联合分区。 每个客户端都有 100 个唯一样本。 分区的完成方式是在客户端之间创建更实际的异构性。 有关更多详细信息，请参阅 [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)。
+- [**CIFAR-100**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data) A federated partitioning of the CIFAR-100 dataset across 500 training clients and 100 test clients. Each client has 100 unique examples. The partitioning is done in a way to create more realistic heterogeneity between clients. For more details, see the [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data).
 
 - [**Google Landmark v2 数据集。**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data)该数据集由各种世界地标的照片组成，图像按摄影师分组以实现数据的联合分区。提供两种形式的数据集：较小的数据集包括 233 个客户端和 23080 个图像，较大的数据集包括 1262 个客户端和 164172 个图像。
 
@@ -42,7 +42,7 @@ TensorFlow Federated [托管了多个数据集](https://www.tensorflow.org/feder
 
 ## 高性能模拟
 
-虽然 FL *模拟*的时钟时间不是评估算法的相关指标（因为模拟硬件不代表真实的 FL 部署环境），但是快速运行 FL 模拟的能力对于提高研究效率至关重要。因此，TFF 投入了大量资源来提供高性能的单机和多机运行时。相关文档正在编写中，但现在您可以参阅[使用 TFF 进行高性能模拟](https://www.tensorflow.org/federated/tutorials/simulations)教程、有关[使用加速器进行 TFF 模拟](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators)的说明，以及有关[设置 GCP 上的 TFF 模拟](https://www.tensorflow.org/federated/gcp_setup)的说明。默认情况下，高性能 TFF 运行时处于启用状态。
+虽然 FL *模拟*的时钟时间不是评估算法的相关指标（因为模拟硬件不代表真实的 FL 部署环境），但是快速运行 FL 模拟的能力对于提高研究效率至关重要。因此，TFF 投入了大量资源来提供高性能的单机和多机运行时。相关文档正在编写中，但现在您可以参阅[使用 Kubernetes 进行高性能模拟](https://www.tensorflow.org/federated/tutorials/high_performance_simulation_with_kubernetes)教程、有关[使用加速器进行 TFF 模拟](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators)的说明，以及有关[设置 GCP 上的 TFF 模拟](https://www.tensorflow.org/federated/gcp_setup)的说明。默认情况下，高性能 TFF 运行时处于启用状态。
 
 ## 针对不同研究领域的 TFF
 
@@ -50,19 +50,15 @@ TensorFlow Federated [托管了多个数据集](https://www.tensorflow.org/feder
 
 在 TFF 中，根据所需自定义程度的不同，可以采用不同的方法对联合优化算法进行研究。
 
-[此处](https://arxiv.org/abs/1602.05629)提供了[联合平均](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg)算法的最小独立实现。举例来说，代码包括用于本地计算的 [TF 函数](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tf.py)、用于编排的 [TFF 计算](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/simple_fedavg_tff.py)，以及 EMNIST 数据集上的[驱动程序脚本](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/emnist_fedavg_main.py)。这些文件可按照 [README](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/simple_fedavg/README.md) 中的详细说明轻松适应自定义的应用程序和算法更改。
+A minimal stand-alone implementation of the [Federated Averaging](https://arxiv.org/abs/1602.05629) algorithm is provided [here](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/simple_fedavg). The code includes [TF functions](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/simple_fedavg/simple_fedavg_tf.py) for local computation, [TFF computations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/simple_fedavg/simple_fedavg_tff.py) for orchestration, and a [driver script](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/simple_fedavg/emnist_fedavg_main.py) on the EMNIST dataset as an example. These files can easily be adapted for customized applciations and algorithmic changes following detailed instructions in the [README](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/simple_fedavg/README.md).
 
-点击[此处](https://github.com/google-research/federated/blob/master/optimization/fed_avg_schedule.py)可查看关于联合平均更通用的实现。此实现支持更复杂的优化技术，包括学习率调度以及在服务器和客户端上使用不同的优化器。点击[此处](https://github.com/google-research/federated/blob/master/optimization)查看将此泛化的联合平均应用于各种任务和联合数据集的代码。
+A more general implementation of Federated Averaging can be found [here](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/algorithms/fed_avg.py). This implementation allows for more sophisticated optimization techniques, including the use of different optimizers on both the server and client. Other federated learning algorithms, including federated k-means clustering, can be found [here](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/algorithms/).
 
-### 模型和更新压缩
+### 模型更新压缩
 
-TFF 使用 [tensor_encoding](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/internal/tensor_encoding) API 启用有损压缩算法，来降低服务器和客户端之间的通信成本。有关[使用联合平均算法](https://arxiv.org/abs/1812.07210)对服务器到客户端和客户端到服务器的压缩进行训练的示例，请参阅[此实验](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/research/compression/run_experiment.py)。
+模型更新的有损压缩可以降低通信成本，进而减少总体训练时间。
 
-要实现自定义压缩算法并将其应用于训练循环，您可以进行以下操作：
-
-1. 作为 [`EncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L75) 的子类或其更通用的变型 [`AdaptiveEncodingStageInterface`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L274)，实现一种新的压缩算法，如[此示例](https://github.com/google-research/federated/blob/master/compression/sparsity.py)所示。
-2. 构造新的 [`Encoder`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/core_encoder.py#L38) ，并将其专门用于[模型广播](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L118)或[模型更新平均](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L144)。
-3. 使用这些对象来构建整个[训练计算](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L247)。
+要复制最近的[论文](https://arxiv.org/abs/2201.02664)，请参阅[本研究项目](https://github.com/google-research/federated/tree/master/compressed_communication)。要实现自定义压缩算法，请参阅基线项目中的 [comparison_methods](https://github.com/google-research/federated/tree/master/compressed_communication/aggregators/comparison_methods) 作为示例，如果您尚不熟悉，请参阅 [TFF 聚合器教程](https://www.tensorflow.org/federated/tutorials/custom_aggregators)。
 
 ### 差分隐私
 
@@ -91,8 +87,14 @@ TFF 可用于研究 GAN 的联合训练。例如，[最近研究工作](https://
 
 联合学习设置中的个性化是一个活跃的研究领域。个性化的目的是为不同的用户提供不同的推理模型。此问题可能有不同的解决方法。
 
-其中一种方法是让每个客户端使用自己的本地数据微调单个全局模型（使用联合学习进行训练）。这种方法与元学习有关，请参阅[此论文](https://arxiv.org/abs/1909.12488)。[`emnist_p13n_main.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/personalization/emnist_p13n_main.py) 中给出了此方法的示例。要探索和比较不同的个性化策略，您可以进行如下操作：
+One approach is to let each client fine-tune a single global model (trained using federated learning) with their local data. This approach has connections to meta-learning, see, e.g., [this paper](https://arxiv.org/abs/1909.12488). An example of this approach is given in [`emnist_p13n_main.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/personalization/emnist_p13n_main.py). To explore and compare different personalization strategies, you can:
 
-- 通过实现 `tf.function` 来定义个性化策略，该函数从初始模型开始，使用每个客户端的本地数据集训练和评估个性化模型。[`build_personalize_fn`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/personalization/p13n_utils.py) 中给出了一个示例。
+- Define a personalization strategy by implementing a `tf.function` that starts from an initial model, trains and evaluates a personalized model using each client's local datasets. An example is given by [`build_personalize_fn`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/personalization/p13n_utils.py).
 
 - 定义一个 `OrderedDict`，将策略名称映射到相应的个性化策略，并将其用作 [`tff.learning.build_personalization_eval`](https://www.tensorflow.org/federated/api_docs/python/tff/learning/build_personalization_eval) 中的 `personalize_fn_dict` 参数。
+
+Another approach is to avoid training a fully global model by training part of a model entirely locally. An instantiation of this approach is described in [this blog post](https://ai.googleblog.com/2021/12/a-scalable-approach-for-partially-local.html). This approach is also connected to meta learning, see [this paper](https://arxiv.org/abs/2102.03448). To explore partially local federated learning, you can:
+
+- Check out the [tutorial](https://www.tensorflow.org/federated/tutorials/federated_reconstruction_for_matrix_factorization) for a complete code example applying Federated Reconstruction and [follow-up exercises](https://www.tensorflow.org/federated/tutorials/federated_reconstruction_for_matrix_factorization#further_explorations).
+
+- Create a partially local training process using [`tff.learning.reconstruction.build_training_process`](https://www.tensorflow.org/federated/api_docs/python/tff/learning/reconstruction/build_training_process), modifying `dataset_split_fn` to customize process behavior.
