@@ -3,7 +3,7 @@
 参考：
 
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/beans)
-- [Huggingface](https://huggingface.co/datasets/beans)
+- [拥抱脸](https://huggingface.co/datasets/beans)
 
 使用以下命令在 TFDS 中加载此数据集：
 
