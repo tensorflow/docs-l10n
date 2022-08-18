@@ -27,7 +27,7 @@ Tuner 需要具有以下签名的用户模块函数 `tuner_fn`：
 
 ```python
 ...
-from kerastuner.engine import base_tuner
+from keras_tuner.engine import base_tuner
 
 TunerFnResult = NamedTuple('TunerFnResult', [('tuner', base_tuner.BaseTuner),
                                              ('fit_kwargs', Dict[Text, Any])])
@@ -68,7 +68,6 @@ tuner = Tuner(
 
 trainer = Trainer(
     module_file=module_file,  # Contains `run_fn`.
-    custom_executor_spec=executor_spec.ExecutorClassSpec(GenericExecutor),
     examples=transform.outputs['transformed_examples'],
     transform_graph=transform.outputs['transform_graph'],
     schema=schema_gen.outputs['schema'],
@@ -82,12 +81,12 @@ trainer = Trainer(
 您可能不想在每次重新训练模型时都调节超参数。一旦使用 Tuner 确定一组合适的超参数，就可以从流水线中移除 Tuner，并使用 `ImporterNode` 从先前的训练运行中导入 Tuner 工件，以馈入 Trainer。
 
 ```python
-hparams_importer = ImporterNode(
-    instance_name='import_hparams',
+hparams_importer = Importer(
     # This can be Tuner's output file or manually edited file. The file contains
-    # text format of hyperparameters (kerastuner.HyperParameters.get_config())
+    # text format of hyperparameters (keras_tuner.HyperParameters.get_config())
     source_uri='path/to/best_hyperparameters.txt',
-    artifact_type=HyperParameters)
+    artifact_type=HyperParameters,
+).with_id('import_hparams')
 
 trainer = Trainer(
     ...
@@ -100,33 +99,32 @@ trainer = Trainer(
 
 在 Google Cloud Platform (GCP) 上运行时，Tuner 组件可以利用以下两项服务：
 
-- [AI Platform Optimizer](https://cloud.google.com/ai-platform/optimizer/docs/overview)（通过 CloudTuner 实现）
+- [AI Platform Vizier](https://cloud.google.com/ai-platform/optimizer/docs/overview)（通过 CloudTuner 实现）
 - [AI Platform Training](https://cloud.google.com/ai-platform/training/docs)（作为分布式调节的群管理器）
 
-### AI Platform Optimizer 作为超参数调节的后端
+### AI Platform Vizier 作为超参数调节的后端
 
-[AI Platform Optimizer](https://cloud.google.com/ai-platform/optimizer/docs/overview) 是一项托管服务，可基于 [Google Vizier](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/bcb15507f4b52991a0783013df4222240e942381.pdf) 技术执行黑盒优化。
+[AI Platform Vizier](https://cloud.google.com/ai-platform/optimizer/docs/overview) 是一项托管服务，可基于 [Google Vizier](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/bcb15507f4b52991a0783013df4222240e942381.pdf) 技术执行黑盒优化。
 
-[CloudTuner](https://github.com/GoogleCloudPlatform/tensorflow-gcp-tools/blob/master/python/tensorflow_enterprise_addons/cloudtuner/cloud_tuner.py) 是 [KerasTuner](https://www.tensorflow.org/tutorials/keras/keras_tuner) 的一个实现，可与作为研究后端的 AI Platform Optimizer 服务对话。由于 CloudTuner 是 `kerastuner.Tuner` 的子类，因此它可以用作 `tuner_fn` 模块中的直接替代，并作为 TFX Tuner 组件的一部分执行。
+[CloudTuner](https://github.com/tensorflow/cloud/blob/master/src/python/tensorflow_cloud/tuner/tuner.py) is an implementation of [KerasTuner](https://www.tensorflow.org/tutorials/keras/keras_tuner) which talks to the AI Platform Vizier service as the study backend. Since CloudTuner is a subclass of `keras_tuner.Tuner`, it can be used as a drop-in replacement in the `tuner_fn` module, and execute as a part of the TFX Tuner component.
 
 下面是一个如何使用 `CloudTuner` 的代码段。请注意，对 `CloudTuner` 进行配置需要特定于 GCP 的条目，例如 `project_id` 和 `region`。
 
 ```python
 ...
-from tensorflow_enterprise_addons import cloudtuner
+from tensorflow_cloud import CloudTuner
 
 ...
 def tuner_fn(fn_args: FnArgs) -> TunerFnResult:
   """An implementation of tuner_fn that instantiates CloudTuner."""
 
   ...
-  tuner = cloudtuner.CloudTuner(
+  tuner = CloudTuner(
       _build_model,
       hyperparameters=...,
       ...
       project_id=...,       # GCP Project ID
-      region=...,           # GCP Region where Optimizer service is run.
-      study_id=...,         # Unique ID of the tuning study
+      region=...,           # GCP Region where Vizier service is run.
   )
 
   ...
@@ -134,6 +132,7 @@ def tuner_fn(fn_args: FnArgs) -> TunerFnResult:
       tuner=tuner,
       fit_kwargs={...}
   )
+
 ```
 
 ### AI Platform Training 分布式工作进程群上的并行调节
@@ -141,17 +140,13 @@ def tuner_fn(fn_args: FnArgs) -> TunerFnResult:
 作为 Tuner 组件的底层实现，KerasTuner 框架具有并行执行超参数搜索的能力。尽管固有 Tuner 组件不能并行执行多个搜索工作进程，但是通过使用 [Google Cloud AI Platform 扩展 Tuner 组件](https://github.com/tensorflow/tfx/blob/master/tfx/extensions/google_cloud_ai_platform/tuner/component.py)，它可以利用 AI Platform Training 作业作为分布式工作进程群管理器来运行并行调节。[TuneArgs](https://github.com/tensorflow/tfx/blob/master/tfx/proto/tuner.proto) 是为此组件指定的配置。这是固有 Tuner 组件的直接替代。
 
 ```python
-from tfx.extensions.google_cloud_ai_platform.tuner.component import Tuner
-from tfx.extensions.google_cloud_ai_platform.trainer import executor as ai_platform_trainer_executor
-
-...
-tuner = Tuner(
+tuner = google_cloud_ai_platform.Tuner(
     ...   # Same kwargs as the above stock Tuner component.
-    tune_args=tuner_pb2.TuneArgs(num_parallel_trials=3),  # 3-worker parallel
+    tune_args=proto.TuneArgs(num_parallel_trials=3),  # 3-worker parallel
     custom_config={
         # Configures Cloud AI Platform-specific configs . For for details, see
         # https://cloud.google.com/ai-platform/training/docs/reference/rest/v1/projects.jobs#traininginput.
-        ai_platform_trainer_executor.TRAINING_ARGS_KEY:
+        TUNING_ARGS_KEY:
             {
                 'project': ...,
                 'region': ...,
@@ -162,20 +157,25 @@ tuner = Tuner(
             }
     })
 ...
+
 ```
 
-扩展 Tuner 组件的行为和输出与固有 Tuner 组件相同，只是多个超参数搜索会在不同的工作进程机器上并行执行，因此，`num_trials` 将更快地完成。当搜索算法极易并行化（例如 `RandomSearch`）时，这特别有效。但是，如果搜索算法使用来自前期试验结果（例如 AI Platform Optimizer 中实现的 Google Vizier 算法）的信息，则过度并行搜索会对搜索效率造成负面影响。
+扩展 Tuner 组件的行为和输出与固有 Tuner 组件相同，只是多个超参数搜索会在不同的工作进程机器上并行执行，因此，`num_trials` 将更快地完成。当搜索算法极易并行化（例如 `RandomSearch`）时，这会特别有效。但是，如果搜索算法使用来自前期试验结果（例如 AI Platform Vizier 中实现的 Google Vizier 算法）的信息，则过度并行搜索会对搜索效率造成负面影响。
 
-注：每个并行搜索中的每次试验都是在工作进程群中的单一机器上进行的，即模型训练没有利用多工作进程分布式训练的优势。我们计划在 CloudTuner 中添加相应的支持，即在每次试验中并行执行 Tuner 的情况下进行多工作进程分布式训练。
+注：每个并行搜索中的每次试验都是在工作进程群中的单一机器上进行的，即每次试验都没有利用多工作进程分布式训练的优势。如果每次试验都需要多工作进程分发，请参考 [`DistributingCloudTuner`](https://github.com/tensorflow/cloud/blob/b9c8752f5c53f8722dfc0b5c7e05be52e62597a8/src/python/tensorflow_cloud/tuner/tuner.py#L384-L676)，而不是 `CloudTuner`。
 
-注：`CloudTuner` 和 Google Cloud AI Platform 扩展 Tuner 组件可以一起使用，在这种情况下，它允许由 AI Platform Optimizer 的超参数搜索算法提供支持的分布式并行调节。不过，为了做到这一点，Cloud AI Platform 作业必须获得访问 AI Platform Optimizer 服务的权限。
+注：`CloudTuner` 和 Google Cloud AI Platform 扩展 Tuner 组件可以一起使用，在这种情况下，它允许由 AI Platform Vizier 的超参数搜索算法提供支持的分布式并行调节。不过，为了做到这一点，Cloud AI Platform 作业必须获得访问 AI Platform Vizier 服务的权限。请参阅此[指南](https://cloud.google.com/ai-platform/training/docs/custom-service-account#custom)设置自定义服务账户。之后，您应该在流水线代码中为训练作业指定该自定义服务账户。有关更多详细信息，请参阅 [GCP 上的 E2E CloudTuner 示例](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow_gcp.py)。
 
 ## 链接
 
 [E2E 示例](https://github.com/tensorflow/tfx/blob/master/tfx/examples/iris/iris_pipeline_native_keras.py)
 
+[GCP 上的 E2E CloudTuner 示例](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow.py)
+
 [KerasTuner 教程](https://www.tensorflow.org/tutorials/keras/keras_tuner)
 
-[CloudTuner 教程](https://github.com/GoogleCloudPlatform/ai-platform-samples/blob/master/notebooks/samples/optimizer/ai_platform_optimizer_tuner.ipynb)
+[CloudTuner 教程](https://github.com/GoogleCloudPlatform/ai-platform-samples/blob/master/notebooks/samples/optimizer/ai_platform_vizier_tuner.ipynb)
 
-[提案](https://github.com/tensorflow/community/blob/master/rfcs/20200420-tfx-tuner-component.md)
+[Proposal](https://github.com/tensorflow/community/blob/master/rfcs/20200420-tfx-tuner-component.md)
+
+有关更多详细信息，请参阅 [Tuner API 参考](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/Tuner)。
