@@ -159,14 +159,14 @@ TF2 中的 Eager Execution 不支持基于 `tf.Graph` 集合的 API。这会影�
 model.fit(dataset, epochs=5)
 ```
 
-They can be iterated over directly standard Python:
+它们可以直接通过标准 Python 进行迭代：
 
 ```python
 for example_batch, label_batch in dataset:
     break
 ```
 
-If you are still using `tf.queue`, these are now only supported as data-structures, not as input pipelines.
+如果您仍在使用 `tf.queue`，则现在仅支持将它们作为数据结构，而不能作为输入流水线。
 
 您还应迁移所有使用 `tf.feature_columns` 的特征预处理代码。阅读[迁移指南](./migrating_feature_columns.ipynb)来了解详情。
 
