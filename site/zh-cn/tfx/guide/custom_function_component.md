@@ -22,11 +22,11 @@ def MyValidationComponent(
   }
 ```
 
-Under the hood, this defines a custom component that is a subclass of [`BaseComponent`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_component.py){: .external } and its Spec and Executor classes.
+在底层，这定义了一个自定义组件，该组件是 [`BaseComponent`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_component.py) {: .external } 及其 Spec 和 Executor 类的子类。
 
-Note: the feature (BaseBeamComponent based component by annotating a function with `@component(use_beam=True)`) described below is experimental and there is no public backwards compatibility guarantees.
+注：下面描述的功能（基于 BaseBeamComponent 的组件，使用 `@component(use_beam=True)` 来注释函数）为实验性功能，没有公开的向后兼容性保证。
 
-If you want to define a subclass of [`BaseBeamComponent`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_beam_component.py){: .external } such that you could use a beam pipeline with TFX-pipeline-wise shared configuration, i.e., `beam_pipeline_args` when compiling the pipeline ([Chicago Taxi Pipeline Example](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_pipeline_simple.py#L192){: .external }) you could set `use_beam=True` in the decorator and add another `BeamComponentParameter` with default value `None` in your function as the following example:
+如果您想定义 [`BaseBeamComponent`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_beam_component.py) {: .external } 的子类，以便能够在编译流水线（[芝加哥出租车流水线示例](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_pipeline_simple.py#L192){: .external }）时使用具有 TFX-pipeline-wise 共享配置的 Beam 流水线，即 `beam_pipeline_args`，则您可以在装饰器中设置 `use_beam=True` 并在函数中添加另一个默认值为 `None` 的 `BeamComponentParameter`，如下例所示：
 
 ```python
 @component(use_beam=True)
@@ -63,7 +63,7 @@ def MyDataProcessor(
 
 - 对于每个**形参**，请使用类型提示注解 `Parameter[T]`。将 `T` 替换为形参的类型。我们目前仅支持原始 Python 类型：`bool`、`int`、`float`、`str` 或 `bytes`。
 
-- For **beam pipeline**, use the type hint annotation `BeamComponentParameter[beam.Pipeline]`. Set the default value to be `None`. The value `None` will be replaced by an instantiated beam pipeline created by `_make_beam_pipeline()` of [`BaseBeamExecutor`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_beam_executor.py){: .external }
+- 对于 **Beam 流水线**，使用类型提示注释 `BeamComponentParameter[beam.Pipeline]`。将默认值设置为 `None`。值 `None` 将由 <a><code>BaseBeamExecutor</code></a> {: .external } 的 `_make_beam_pipeline()` 创建的实例化 Beam 流水线所取代
 
 - 对于每个在流水线构造时未知的**简单数据类型输入**（`int`、`float`、`str` 或 `bytes`），请使用类型提示 `T`。请注意，在 TFX 0.22 版本中，无法在流水线构造时为此类型的输入传递具体值（如前一个部分中所述，请使用 `Parameter` 注解）。此实参可以是可选实参，也可以使用默认值进行定义。如果您的组件具有简单数据类型输出（`int`、`float`、`str` 或 `bytes`），您可以使用 `OutputDict` 实例返回这些输出。将 `OutputDict` 类型提示应用为组件的返回值。
 
