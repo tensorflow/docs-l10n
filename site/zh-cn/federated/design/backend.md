@@ -63,7 +63,7 @@ set_default_context.set_default_context(context)
 
 ### 编译器
 
-The [compiler](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/compiler.py) module contains [Building Block](compilation.md#building-block) and [TensorFlow Computation](compilation.md#tensorflow-computation) transformations required to compile an AST to a [MapReduceForm](#canonicalform).
+[编译器](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/compiler.py)模块包含将 AST 编译为 [MapReduceForm](compilation.md#building-block) 所需的[构建块](compilation.md#tensorflow-computation)和 [TensorFlow 计算](#canonicalform)转换。
 
 [form_utils](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/form_utils.py) 模块包含 MapReduce 后端的编译器并且会构造 [MapReduceForm](#canonicalform)。
 
