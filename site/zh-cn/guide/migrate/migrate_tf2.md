@@ -189,6 +189,6 @@ TF2 使用基于对象的检查点。阅读[检查点迁移指南](./migrating_c
 
 但是，可以选择将现有用法迁移到非旧版 TF2 API。各个 `compat.v1` 符号的文档字符串通常会解释如何将它们迁移到非旧版 TF2 API。此外，[模型映射指南中关于增量迁移到惯用 TF2 API 的部分](./model_mapping.ipynb#incremental_migration_to_native_tf2)也可能对此有所帮助。
 
-## Resources and further reading
+## 资源和延伸阅读
 
 如前面所述，最好将所有 TF1.x 代码迁移到 TF2。阅读 TensorFlow 指南的[迁移到 TF2 部分](https://tensorflow.org/guide/migrate)中的指南以了解详情。
