@@ -2,7 +2,7 @@
 
 ## 简介
 
-This tutorial is designed to introduce [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx) and [AIPlatform Pipelines] (https://cloud.google.com/ai-platform/pipelines/docs/introduction), and help you learn to create your own machine learning pipelines on Google Cloud. It shows integration with TFX, AI Platform Pipelines, and Kubeflow, as well as interaction with TFX in Jupyter notebooks.
+本教程旨在介绍 TensorFlow Extended (TFX) 和 [AIPlatform Pipelines] (https://cloud.google.com/ai-platform/pipelines/docs/introduction)，并帮助您学习在 Google Cloud 上创建自己的机器学习流水线。教程展示了与 TFX、AI Platform Pipelines 和 Kubeflow 的集成，以及在 Jupyter 笔记本中与 TFX 的交互。
 
 在本教程结束时，您将完成对托管在 Google Cloud 上的 ML 流水线的创建和运行。您将能够呈现每个运行的结果，并查看创建的工件的沿袭。
 
@@ -37,13 +37,13 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 警告：此演示旨在不超过 [Google Cloud 的免费层级](https://cloud.google.com/free)限制。如果您已有 Google 帐号，您可能已经达到免费层级限制，或已用尽送给新用户的 Google Cloud 赠金。**在这种情况下，执行此演示将导致您的 Google Cloud 帐号产生费用**。
 
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
+1. 转到 [Google Cloud Console](https://console.cloud.google.com/)。
 
 2. 同意 Google Cloud 条款及条件
 
      <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/welcome-popup.png?raw=true">
 
-3. If you would like to start with a free trial account, click on [**Try For Free**](https://console.cloud.google.com/freetrial) (or [**Get started for free**](https://console.cloud.google.com/freetrial)).
+3. 如果您想从免费试用帐号开始，请点击 [**Try For Free**](https://console.cloud.google.com/freetrial)（或 [**Get started for free**](https://console.cloud.google.com/freetrial)）。
 
     1. 选择您的国家/地区。
 
@@ -51,7 +51,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     3. 输入结算信息。
 
-        You will not be charged at this point. If you have no other Google Cloud projects, you can complete this tutorial without exceeding the [Google Cloud Free Tier](https://cloud.google.com/free) limits, which includes a max of 8 cores running at the same time.
+        此时，您不会被收取费用。如果您没有其他 Google Cloud 项目，您可以在不超出 [Google Cloud 免费层级](https://cloud.google.com/free)限制（最多同时运行 8 个核心）的情况下完成本教程。
 
 注：此时，您可以选择成为付费用户，而不必依赖免费试用。由于本教程处于免费层级限制之内，因此如果这是您的唯一项目且您不超出限制，则仍然不会向您收取费用。有关详情，请参阅 [Google Cloud 价格计算器](https://cloud.google.com/products/calculator/)和 [Google Cloud Platform 免费层级](https://cloud.google.com/free)。
 
@@ -61,91 +61,91 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 注：创建项目之前，您必须登记一张经过验证的信用卡。
 
-1. From the [main Google Cloud dashboard](https://console.cloud.google.com/home/dashboard), click the project dropdown next to the **Google Cloud Platform** header, and select **New Project**.
+1. 在 [Google Cloud 信息中心](https://console.cloud.google.com/home/dashboard)主界面上，点击 **Google Cloud Platform** 标题旁边的项目下拉菜单，然后选择 **New Project**。
 2. 输入项目名称和其他项目详细信息
-3. **Once you have created a project, make sure to select it from the project drop-down.**
+3. **创建后，从项目下拉菜单中选择该项目。**
 
 ## 2. 在新的 Kubernetes 集群上设置并部署 AI Platform 流水线
 
 注：这最长可能需要 10 分钟，因为它需要在几个点上等待资源配置。
 
-1. Go to the [AI Platform Pipelines Clusters](https://console.cloud.google.com/ai-platform/pipelines) page.
+1. 转到 [AI Platform Pipelines Clusters](https://console.cloud.google.com/ai-platform/pipelines) 页面。
 
-    Under the Main Navigation Menu: ≡ &gt; AI Platform &gt; Pipelines
+    在主导航菜单下：≡ &gt; AI Platform &gt; Pipelines
 
-2. Click **+ New Instance** to create a new cluster.
+2. 点击 **+ New Instance** 创建一个新集群。
 
      <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/new-instance.png?raw=true">
 
-3. On the **Kubeflow Pipelines** overview page, click **Configure**.
+3. 在 **Kubeflow Pipelines** 概览页面上，点击 **Configure**。
 
      <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/configure.png?raw=true">
 
-4. Click "Enable" to enable the Kubernetes Engine API
+4. 点击“Enable”以启用 Kubernetes Engine API
 
     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/select-notebook.png?raw=true" alt="select-notebook" data-md-type="image">
 
-    Note: You may have to wait several minutes before moving on, while the Kubernetes Engine APIs are being enabled for you.
+    注：您可能需要等待几分钟才能继续，此时我们将为您启用 Kubernetes Engine API。
 
-5. On the **Deploy Kubeflow Pipelines** page:
+5. 在 **Deploy Kubeflow Pipelines** 页面上：
 
-    1. Select a [zone](https://cloud.google.com/compute/docs/regions-zones) (or "region") for your cluster. The network and subnetwork can be set, but for the purposes of this tutorial we will leave them as defaults.
+    1. 为您的集群选择一个[区域](https://cloud.google.com/compute/docs/regions-zones)。可以设置网络和子网络，但出于本教程目的，我们将它们保留为默认值。
 
-    2. **IMPORTANT** Check the box labeled *Allow access to the following cloud APIs*. (This is required for this cluster to access the other pieces of your project. If you miss this step, fixing it later is a bit tricky.)
+    2. **重要提示**：选中标有*允许访问以下 Cloud API* 的复选框。（此群集需要此权限才能访问项目的其他部分。如果跳过此步骤，稍后修复会有些棘手。）
 
         <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
-    3. Click **Create New Cluster**, and wait several minutes until the cluster has been created.  This will take a few minutes.  When it completes you will see a message like:
+    3. 点击 **Create New Cluster** 并稍候几分钟，直到集群创建完成为止。此过程需要几分钟时间。完成后，您将看到如下消息：
 
         > Cluster "cluster-1" successfully created in zone "us-central1-a".
 
-    4. Select a namespace and instance name (using the defaults is fine). For the purposes of this tutorial do not check *executor.emissary* or *managedstorage.enabled*.
+    4. 选择命名空间和实例名称（使用默认值即可）。出于本教程的目的，无需选中 *executor.emissary* 或 *managedstorage.enabled*。
 
-    5. Click **Deploy**, and wait several moments until the pipeline has been deployed. By deploying Kubeflow Pipelines, you accept the Terms of Service.
+    5. 点击 **Deploy**，然后等待几分钟，直到流水线部署完毕。部署 Kubeflow 流水线，即表示您接受《服务条款》。
 
 ## 3. 设置 Cloud AI Platform 笔记本实例
 
-1. Go to the [Vertex AI Workbench](https://console.cloud.google.com/vertex-ai/workbench) page.  The first time you run Workbench you will need to enable the Notebooks API.
+1. 转到 [Vertex AI Workbench](https://console.cloud.google.com/vertex-ai/workbench) 页面。首次运行 Workbench 时，您需要启用 Notebooks API。
 
-    Under the Main Navigation Menu: ≡ -&gt; Vertex AI -&gt; Workbench
+    在主导航菜单下：≡ -&gt; Vertex AI -&gt; Workbench
 
 2. 如果出现提示，请启用 Compute Engine API。
 
-3. Create a **New Notebook** with TensorFlow Enterprise 2.7 (or above) installed.
+3. 创建已安装 TensorFlow Enterprise 2.7（或更高版本）的**新笔记本**。
 
     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/open-dashboard.png?raw=true" alt="open-dashboard" data-md-type="image">
 
     New Notebook -&gt; TensorFlow Enterprise 2.7 -&gt; Without GPU
 
-    Select a region and zone, and give the notebook instance a name.
+    选择区域，并为笔记本实例命名。
 
-    To stay within the Free Tier limits, you may need to change the default settings here to reduce the number of vCPUs available to this instance from 4 to 2:
+    为了不超出免费层级限制，您可能需要在此更改默认设置，将此实例可用的 vCPU 数量从 4 个减少到 2 个：
 
-    1. Select **Advanced Options** at the bottom of the **New notebook** form.
+    1. 在 **New notebook** 表单底部选择 **Advanced Options**。
 
-    2. Under **Machine configuration** you may want to select a configuration with 1 or 2 vCPUs if you need to stay in the free tier.
+    2. 如果您需要留在免费层级，则需要在 **Machine configuration** 下选择 1 个或 2 个 vCPU 的配置。
 
         <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
-    3. Wait for the new notebook to be created, and then click **Enable Notebooks API**
+    3. 等待新笔记本创建完成，然后点击 **Enable Notebooks API**
 
-Note: You may experience slow performance in your notebook if you use 1 or 2 vCPUs instead of the default or higher. This should not seriously hinder your completion of this tutorial. If would like to use the default settings, [upgrade your account](https://cloud.google.com/free/docs/gcp-free-tier#to_upgrade_your_account) to at least 12 vCPUs. This will accrue charges. See [Google Kubernetes Engine Pricing](https://cloud.google.com/kubernetes-engine/pricing/) for more details on pricing, including a [pricing calculator](https://cloud.google.com/products/calculator) and information about the [Google Cloud Free Tier](https://cloud.google.com/free).
+注：如果使用 1 个或 2 个而非默认数量或更多的 vCPU，笔记本的性能可能会变慢。这不会严重妨碍您完成本教程。如果要使用默认设置，请[将您的帐号升级](https://cloud.google.com/free/docs/gcp-free-tier#to_upgrade_your_account)到至少 12 个 vCPU。这将产生费用。有关价格的详细信息，请参阅 [Google Kubernetes Engine 价格](https://cloud.google.com/kubernetes-engine/pricing/)，包括[价格计算器](https://cloud.google.com/products/calculator)和有关 [Google Cloud 免费层级](https://cloud.google.com/free)的信息。
 
 ## 4. 启动 Getting Started 笔记本
 
-1. Go to the [**AI Platform Pipelines Clusters**] (https://console.cloud.google.com/ai-platform/pipelines) page.
+1. 转到 [**AI Platform Pipelines Clusters**] (https://console.cloud.google.com/ai-platform/pipelines) 页面。
 
-    Under the Main Navigation Menu: ≡ -&gt; AI Platform -&gt; Pipelines
+    在主导航菜单下：≡ -&gt; AI Platform -&gt; Pipelines
 
-2. On the line for the cluster you are using in this tutorial, click **Open Pipelines Dashboard**.
+2. 在本教程中使用的集群所在行上，点击 **Open Pipelines Dashboard**。
 
     <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
 
-3. On the **Getting Started** page, click **Open a Cloud AI Platform Notebook on Google Cloud**.
+3. 在 **Getting Started** 页面上，点击 **Open a Cloud AI Platform Notebook on Google Cloud**。
 
     <img src="images/cloud-ai-platform-pipelines/open-template.png">
 
-4. Select the Notebook instance you are using for this tutorial and **Continue**, and then **Confirm**.
+4. 选择您用于本教程的笔记本实例并点击 **Continue**，然后点击 **Confirm**。
 
      <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/check-the-box.png?raw=true">
 
@@ -229,7 +229,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
     - `pipeline.py` - 定义 TFX 组件和流水线
 - `models` - 此目录包含 ML 模型定义
     - `features.py` `features_test.py` 定义模型的特征
-    - `preprocessing.py` / `preprocessing_test.py` — defines preprocessing jobs using `tf::Transform`
+    - `preprocessing.py` / `preprocessing_test.py` - 使用 `tf::Transform` 定义预处理作业
     - `estimator` - 此目录包含一个基于 Estimator 的模型
         - `constants.py` - 定义模型的常量
         - `model.py` / `model_test.py` - 使用 TF Estimator 定义 DNN 模型
@@ -343,7 +343,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ![set path](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/set-path-nb-cell.png?raw=true)
 
-- [Transform](https://www.tensorflow.org/tfx/guide/transform) performs feature engineering on the dataset.
+- [Transform](https://www.tensorflow.org/tfx/guide/transform) 会对数据集执行特征工程。
 
 ### 在 JupyterLab 文件编辑器中：
 
@@ -383,7 +383,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ### 组件
 
-- [Trainer](https://www.tensorflow.org/tfx/guide/trainer) trains a TensorFlow model.
+- [Trainer](https://www.tensorflow.org/tfx/guide/trainer) 用于训练 TensorFlow 模型。
 
 ### 在 JupyterLab 文件编辑器中：
 
@@ -410,7 +410,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ### 更高级的示例
 
-The example presented here is really only meant to get you started. For a more advanced example see the [TensorBoard Tutorial](https://www.tensorflow.org/tensorboard/get_started).
+本教程展示的示例仅帮助您入门。如需更高级的示例，请参阅 [TensorBoard 教程](https://www.tensorflow.org/tensorboard/get_started)。
 
 ## 11. 分析模型性能
 
@@ -426,7 +426,7 @@ The example presented here is really only meant to get you started. For a more a
 
 ### 组件
 
-- [Evaluator](https://www.tensorflow.org/tfx/guide/evaluator) performs deep analysis of the training results.
+- [Evaluator](https://www.tensorflow.org/tfx/guide/evaluator) 会对训练结果执行深度分析。
 
 ### 在 JupyterLab 文件编辑器中：
 
@@ -466,7 +466,7 @@ components.append(evaluator)
 
 ### 组件
 
-- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) deploys the model to a serving infrastructure.
+- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) 会将模型部署到应用基础架构。
 
 ### 在 JupyterLab 文件编辑器中：
 
@@ -535,7 +535,7 @@ kubeflow_dag_runner.KubeflowDagRunner(config=config).run(pipeline)
 
 **双击打开 `configs.py`**。取消注释 `BIG_QUERY_WITH_DIRECT_RUNNER_BEAM_PIPELINE_ARGS` 和 `BIG_QUERY_QUERY` 的定义。您应将此文件中的项目 ID 和区域值替换为用于您的 GCP 项目的正确值。
 
-> **Note: You MUST set your GCP project ID and region in the `configs.py` file before proceeding.**
+> **注：您必须先在 `configs.py` 文件中设置您的 GCP 项目 ID 和区域，然后才能继续。**
 
 **浏览到上一级目录。**点击文件列表上方的目录名称。该目录名称为流水线的名称，如果您未更改流水线名称，则为 `my_pipeline`。
 
@@ -558,7 +558,7 @@ kubeflow_dag_runner.KubeflowDagRunner(config=config).run(pipeline)
 
 多个 [TFX 组件使用 Apache Beam](https://www.tensorflow.org/tfx/guide/beam) 来实现数据并行流水线，这意味着您可以使用 [Google Cloud Dataflow](https://cloud.google.com/dataflow/) 分布数据处理工作负载。在此步骤中，我们将设置 Kubeflow 编排器，将 Dataflow 用作 Apache Beam 的数据处理后端。
 
-> **Note:** If the Dataflow API is not already enabled, you can enable it using the console, or from the CLI using this command (for example, in the Cloud Shell):
+> **注**：如果尚未启用 Dataflow API，您可以使用控制台或在 CLI 中使用以下命令（例如，在 Cloud Shell 中）启用：
 
 ```bash
 # Select your project:
@@ -575,7 +575,7 @@ gcloud services list --available | grep Dataflow
 gcloud services enable dataflow.googleapis.com
 ```
 
-> **Note:** Execution speed may be limited by default [Google Compute Engine (GCE)](https://cloud.google.com/compute) quota. We recommend setting a sufficient quota for approximately 250 Dataflow VMs: **250 CPUs, 250 IP Addresses, and 62500 GB of Persistent Disk**. For more details, please see the [GCE Quota](https://cloud.google.com/compute/quotas) and [Dataflow Quota](https://cloud.google.com/dataflow/quotas) documentation. If you are blocked by IP Address quota, using a bigger [`worker_type`](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options) will reduce the number of needed IPs.
+> **注**：执行速度可能受限于默认的 [Google Compute Engine (GCE)](https://cloud.google.com/compute) 配额。我们建议为大约 250 个 Dataflow 虚拟机设置足够的配额： **250 个 CPU、250 个 IP 地址，以及 62500 GB 永久性磁盘**。有关详情，请参阅 [GCE 配额](https://cloud.google.com/compute/quotas)和 [Dataflow 配额](https://cloud.google.com/dataflow/quotas)文档。如果您受到 IP 地址配额的限制，使用更大的 [`worker_type`](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options) 将减少所需的 IP 数量。
 
 **双击 `pipeline` 更改目录，然后双击打开 `configs.py`**。取消注释 `GOOGLE_CLOUD_REGION` 和 `DATAFLOW_BEAM_PIPELINE_ARGS` 的定义。
 
@@ -606,7 +606,7 @@ TFX 可与多种代管式 GCP 服务（例如，[Cloud AI Platform Training 和 
 
 **浏览到上一级目录，然后双击打开 `kubeflow_runner.py`**。取消注释 `ai_platform_training_args` 和 `ai_platform_serving_args`。
 
-> Note: If you receive a permissions error in the Training step, you may need to provide Storage Object Viewer permissions to the Cloud Machine Learning Engine (AI Platform Prediction &amp; Training) service account. More information is available in the [Container Registry documentation](https://cloud.google.com/container-registry/docs/access-control#grant).
+> 注：如果您在训练步骤中收到权限错误，则可能需要为 Cloud Machine Learning Engine (AI Platform Prediction &amp; Training) 服务帐号提供 Storage Object Viewer 权限。可在 [Container Registry 文档](https://cloud.google.com/container-registry/docs/access-control#grant)中获得更多信息。
 
 #### 更新流水线并重新运行
 
