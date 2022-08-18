@@ -60,8 +60,7 @@ author={
     Yuan~Yu and
     Xiaoqiang~Zheng},
   year={2015},
-}
-</pre>
+}</pre>
 
 或以文本形式：
 
