@@ -6,14 +6,14 @@
 - 要在本地计算机上使用 TensorFlow Quantum，请使用 Python 的 pip 软件包管理器安装 TFQ 软件包。
 - 或者从源代码构建 TensorFlow Quantum。
 
-TensorFlow Quantum 在 Python 3.6、3.7 和 3.8 上受支持，并且直接依赖于 [Cirq](https://github.com/quantumlib/Cirq)。
+TensorFlow Quantum 在 Python 3.7、3.8 和 3.9 上受支持，并且直接依赖于 [Cirq](https://github.com/quantumlib/Cirq)。
 
 ## Pip 软件包
 
 ### 要求
 
 - pip 19.0 或更高版本（需要 `manylinux2010` 支持）
-- [TensorFlow == 2.5.1](https://www.tensorflow.org/install/pip)
+- [TensorFlow == 2.7.0](https://www.tensorflow.org/install/pip)
 
 要设置您的 Python 开发环境和一个（可选的）虚拟环境，请参阅 [TensorFlow 安装指南](https://www.tensorflow.org/install/pip)。
 
@@ -23,7 +23,7 @@ TensorFlow Quantum 在 Python 3.6、3.7 和 3.8 上受支持，并且直接依�
 
 <pre class="devsite-click-to-copy">
   <code class="devsite-terminal">pip3 install --upgrade pip</code>
-  <code class="devsite-terminal">pip3 install tensorflow==2.5.1</code>
+  <code class="devsite-terminal">pip3 install tensorflow==2.7.0</code>
 </pre>
 
 <!-- common_typos_enable -->
@@ -42,7 +42,7 @@ TensorFlow Quantum 在 Python 3.6、3.7 和 3.8 上受支持，并且直接依�
 
 成功：TensorFlow Quantum 现已完成安装。
 
-安装最新 Nightly 版本的 TensorFlow Quantum：
+可以使用以下代码安装可能依赖于较新版本 TensorFlow 的 Nightly 构建：
 
 <!-- common_typos_disable -->
 
@@ -88,7 +88,7 @@ TensorFlow Quantum 在 Python 3.6、3.7 和 3.8 上受支持，并且直接依�
 
 如 TensorFlow [从源代码构建](https://www.tensorflow.org/install/source#install_bazel)指南中所述，将需要 <a href="https://bazel.build/" class="external">Bazel</a> 构建系统。
 
-我们最新的源代码构建使用 TensorFlow 2.5.1。为确保兼容性，我们使用 `bazel` 版本 3.7.2。要移除任何现有版本的 Bazel，请运行以下命令：
+我们最新的源代码构建使用 TensorFlow 2.7.0。为确保兼容性，我们使用 `bazel` 版本 3.7.2。要移除任何现有版本的 Bazel，请运行以下命令：
 
 <!-- common_typos_disable -->
 
@@ -132,7 +132,7 @@ TensorFlow Quantum 在 Python 3.6、3.7 和 3.8 上受支持，并且直接依�
 
 ### 4. 从源代码构建 TensorFlow
 
-在这里，我们改编了 TensorFlow [从源代码构建](https://www.tensorflow.org/install/source)指南中的说明，请点击链接以了解详情。TensorFlow Quantum 与 TensorFlow 版本 2.5 兼容。
+在这里，我们改编了 TensorFlow [从源代码构建](https://www.tensorflow.org/install/source)指南中的说明，请点击链接以了解详情。TensorFlow Quantum 与 TensorFlow 版本 2.7.0 兼容。
 
 下载 <a href="https://github.com/tensorflow/tensorflow" class="external">TensorFlow 源代码</a>：
 
@@ -141,7 +141,7 @@ TensorFlow Quantum 在 Python 3.6、3.7 和 3.8 上受支持，并且直接依�
 <pre class="devsite-click-to-copy">
   <code class="devsite-terminal">git clone https://github.com/tensorflow/tensorflow.git</code>
   <code class="devsite-terminal">cd tensorflow</code>
-  <code class="devsite-terminal">git checkout v2.5.1</code>
+  <code class="devsite-terminal">git checkout v2.7.0</code>
 </pre>
 
 确保您在第 2 步中创建的虚拟环境已激活。随后，安装 TensorFlow 依赖项：
