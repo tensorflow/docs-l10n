@@ -38,7 +38,7 @@ TFF 中的抽象语法树 (AST) 描述了联合计算的结构。
 
 [transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/transformations.py) 模块中包含复合[构建块](#building-block)转换。
 
-The [tensorflow_computation_transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/tensorflow_computation_transformations.py) module contains atomic [TensorFlow computation](#tensorflow-computation) transformations.
+[tensorflow_computation_transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/tensorflow_computation_transformations.py) 模块中包含原子 [TensorFlow 计算](#tensorflow-computation)转换。
 
 The [compiled_computation_transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/compiled_computation_transformations.py) module contains atomic and composite [Compiled Computation](#compiled-computation) transformations.
 
