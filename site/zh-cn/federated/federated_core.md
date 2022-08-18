@@ -24,7 +24,7 @@ The goal of FC, in a nutshell, is to enable similarly compact representation, at
 
 根据 FC 的设计，用于表达这些算法类型的关键定义特征是以集合方式描述系统参与者的行为。因此，我们倾向于讨论在本地转换数据的*各个设备*，以及通过*广播*、*收集*或*聚合*结果来协调工作的集中式协调器。
 
-虽然在设计时，TFF 超越了简单的*客户端-服务器*架构，但集合处理的概念仍然是基础。这是由于 TFF 源自联合学习——一种最初设计为支持潜在敏感数据计算的技术。出于隐私保护，这种敏感数据仍受客户端设备控制，并且不能简单地下载到集中位置。此类系统中的每一个客户端都会为系统计算结果（一种我们通常认为对所有参与者都有意义的结果）提供数据和处理能力，同时还努力保持每个客户端的隐私性和匿名性。
+虽然在设计时，TFF 超越了简单的*客户端-服务器*架构，但集合处理的概念仍然是基础。这是由于 TFF 源自联合学习 – 一种最初设计为支持潜在敏感数据计算的技术。出于隐私保护，这种敏感数据仍受客户端设备控制，并且不能简单地下载到集中位置。此类系统中的每一个客户端都会为系统计算结果（一种我们通常认为对所有参与者都有意义的结果）提供数据和处理能力，同时还努力保持每个客户端的隐私性和匿名性。
 
 因此，虽然大多数分布式计算的框架设计为从各个参与者（即，在各个点对点消息交换的级别上）的角度表达处理，并利用传入和传出消息表达参与者本地状态转换的相互依赖性，但 TFF 的联合核心设计为从*全局*系统级角度（例如，类似于 [MapReduce](https://research.google/pubs/pub62/)）描述系统的行为。
 
@@ -34,7 +34,7 @@ The goal of FC, in a nutshell, is to enable similarly compact representation, at
 
 ### Python 接口
 
-TFF uses an internal language to represent federated computations, the syntax of which is defined by the serializable representation in [computation.proto](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/proto/v0/computation.proto). Users of FC API generally won't need to interact with this language directly, though. Rather, we provide a Python API (the `tff` namespace) that wraps arounds it as a way to define computations.
+TFF 使用内部语言表示联合计算，其语法由 [computation.proto](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/proto/v0/computation.proto) 中的可序列化表示形式进行定义。不过，FC API 用户通常不需要直接与该语言交互。这相当于我们提供了一个将代码封装起来的 Python API（`tff` 命名空间），作为定义计算的方式。
 
 具体而言，TFF 提供 `tff.federated_computation` 之类的 Python 函数装饰器，用于跟踪装饰函数的主体，并使用 TFF 的语言生成联合计算逻辑的序列化表示形式。使用 `tff.federated_computation` 装饰的函数作为此类序列化表示形式的载体，可将其作为构建模块嵌入另一个计算的主体中，或者在调用时按需求执行。
 
@@ -60,7 +60,7 @@ Federated Core 提供了以下几种类型。在描述这些类型时，我们�
 
 - **张量类型** (`tff.TensorType`)。就像在 TensorFlow 中一样，这些类型有 `dtype` 和 `shape`。唯一的区别是这种类型的对象不仅限于在 TensorFlow 计算图中表示 TensorFlow 运算输出的 Python 的 `tf.Tensor` 实例，而是也可能包括可产生的数据单位，例如，作为分布聚合协议的输出。因此，TFF 张量类型是 Python 或 TensorFlow 中此类类型的具体物理表示形式的抽象版本。
 
-    TFF's `TensorTypes` can be stricter in their (static) treatment of shapes than TensorFlow. For example, TFF's typesystem treats a tensor with unknown rank as assignable *from* any other tensor of the same `dtype`, but not assignable *to* any tensor with fixed rank. This treatment prevents certain runtime failures (e.g., attempting to reshape a tensor of unknown rank into a shape with incorrect number of elements), at the cost of greater strictness in what computations TFF accepts as valid.
+    与 TensorFlow 相比，TFF 的 `TensorTypes` 在其对形状的（静态）处理中更严格。例如，TFF 的类型系统会将具有未知秩的张量视为可*从* `dtype` 相同的任何其他张量分配，但无法分配*至*具有固定秩的任何张量。这种处理可以防止某些运行时失败（例如，试图将未知秩的张量的形状调整为具有不正确元素数量的形状），代价是 TFF 接受的有效计算的标准更严格。
 
     张量类型的紧凑表示法为 `dtype` 或 `dtype[shape]`。例如，`int32` 和 `int32[10]` 分别是整数和整数向量的类型。
 
@@ -96,13 +96,13 @@ Federated Core 提供了以下几种类型。在描述这些类型时，我们�
 
     - `<weights=float32[10,5],bias=float32[5]>@SERVER` 表示服务器上的权重和偏差张量的命名元组。我们省略了花括号，这表示已设置 `all_equal` 位，其中只有一个元组（不管托管该值的集群中有多少个服务器副本）。
 
-### 构建模块
+### 构建块
 
 Federated Core 的语言是一种 [λ 演算](https://en.wikipedia.org/wiki/Lambda_calculus)，另外还有几个额外的元素。
 
 它提供了当前在公共 API 中公开的以下编程抽象：
 
-- **TensorFlow** 计算 (`tff.tf_computation`)。TFF 中有一些使用 `tff.tf_computation` 装饰器包装为可重用组件的 TensorFlow 代码部分。这些代码一般都是函数式类型，但是与 TensorFlow 中的函数不同，它们可以接受结构化参数或返回序列类型的结构化结果。
+- **TensorFlow** 计算 (`tff.tf_computation`)。TFF 中有一些使用 `tff.tf_computation` 装饰器封装为可重用组件的 TensorFlow 代码部分。这些代码总是函数式类型，但是与 TensorFlow 中的函数不同，它们可以接受结构化参数或返回序列类型的结构化结果。
 
     下面是一个示例，即使用 `tf.data.Dataset.reduce` 算子来计算整数和的 `(int32* -> int)` 类型的 TF 计算：
 
