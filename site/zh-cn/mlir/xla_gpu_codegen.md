@@ -15,7 +15,7 @@ XLA 在 `HloInstruction` 上进行运算并对此表示执行许多优化，同�
 
  | 主机 | 设备
 --- | --- | ---
-| 主机 | 设备 --- | --- | --- 输入格式 | HloInstruction*（任务 1） | HloInstruction*（任务 1） 输出格式 | xla::Thunk（任务 2） | LLVM IR（任务 3） | HloInstruction*（任务 1） | HloInstruction*（任务 1）
+Input format | HloInstruction*（任务 1） | HloInstruction*（任务 1）
 输出格式 | xla::Thunk（任务 2） | LLVM IR（任务 3）
 
 - **任务 1** 将主机和设备的输入格式从 HloInstruction* 更改为 LHLO。
