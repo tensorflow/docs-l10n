@@ -1,46 +1,46 @@
-# Using the TFX Command-line Interface
+# 使用 TFX 命令行接口
 
 The TFX command-line interface (CLI) performs a full range of pipeline actions using pipeline orchestrators, such as Kubeflow Pipelines, Vertex Pipelines. Local orchestrator can be also used for faster development or debugging. Apache Beam and Apache airflow is supported as experimental features. For example, you can use the CLI to:
 
-- Create, update, and delete pipelines.
-- Run a pipeline and monitor the run on various orchestrators.
-- List pipelines and pipeline runs.
+- 创建、更新和删除流水线。
+- 运行流水线并监视在各种编排器上的运行。
+- 列出流水线和流水线运行。
 
-Note: The TFX CLI doesn't currently provide compatibility guarantees. The CLI interface might change as new versions are released.
+注：TFX CLI 目前不提供兼容性保证。随着新版本的发布，CLI 接口可能会更改。
 
-## About the TFX CLI
+## 关于 TFX CLI
 
-The TFX CLI is installed as a part of the TFX package. All CLI commands follow the structure below:
+TFX CLI 作为 TFX 软件包的一部分进行安装。所有 CLI 命令都遵循以下结构：
 
 <pre class="devsite-terminal">tfx &lt;var&gt;command-group&lt;/var&gt; &lt;var&gt;command&lt;/var&gt; &lt;var&gt;flags&lt;/var&gt;
 </pre>
 
-The following <var>command-group</var> options are currently supported:
+目前支持以下 <var>command-group</var> 选项：
 
-- [tfx pipeline](#tfx-pipeline) - Create and manage TFX pipelines.
-- [tfx run](#tfx-run) - Create and manage runs of TFX pipelines on various orchestration platforms.
-- [tfx template](#tfx-template-experimental) - Experimental commands for listing and copying TFX pipeline templates.
+- [tfx pipeline](#tfx-pipeline) - 创建并管理 TFX 流水线。
+- [tfx run](#tfx-run) - 在各种编排平台上创建和管理 TFX 流水线的运行。
+- [tfx template](#tfx-template-experimental) - 用于列出和复制 TFX 流水线模板的实验性命令。
 
 Each command group provides a set of <var>commands</var>. Follow the instructions in the [pipeline commands](#tfx-pipeline), [run commands](#tfx-run), and [template commands](#tfx-template-experimental) sections to learn more about using these commands.
 
-Warning: Currently not all commands are supported in every orchestrator. Such commands explicitly mention the engines supported.
+警告：目前并非每个编排器都支持所有命令。这些命令明确提到了支持的引擎。
 
-Flags let you pass arguments into CLI commands. Words in flags are separated with either a hyphen (`-`) or an underscore (`_`). For example, the pipeline name flag can be specified as either `--pipeline-name` or `--pipeline_name`. This document specifies flags with underscores for brevity. Learn more about [<var>flags</var> used in the TFX CLI](#understanding-tfx-cli-flags).
+您可以通过标记将参数传递到 CLI 命令中。标记中的单词用连字符 (`-`) 或下划线 (`_`) 分隔。例如，流水线名称标记可以指定为 `--pipeline-name` 或 `--pipeline_name`。为了简洁起见，本文档将使用下划线指定标记。详细了解[在 TFX CLI 中使用的 <var>flags</var>](#understanding-tfx-cli-flags)。
 
 ## tfx pipeline
 
-The structure for commands in the `tfx pipeline` command group is as follows:
+`tfx pipeline` 命令组中的命令结构如下：
 
 <pre class="devsite-terminal">tfx pipeline &lt;var&gt;command&lt;/var&gt; &lt;var&gt;required-flags&lt;/var&gt; [&lt;var&gt;optional-flags&lt;/var&gt;]
 </pre>
 
-Use the following sections to learn more about the commands in the `tfx pipeline` command group.
+使用以下各个部分详细了解 `tfx pipeline` 命令组中的命令。
 
 ### create
 
-Creates a new pipeline in the given orchestrator.
+在给定的编排器中创建新的流水线。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx pipeline create --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; \
@@ -50,11 +50,11 @@ Usage:
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var>
 </dt>
-  <dd>The path to the pipeline configuration file.</dd>
+  <dd>流水线配置文件的路径。</dd>
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -79,74 +79,74 @@ Usage:
   <dt>--engine=<var>engine</var>
 </dt>
   <dd>
-    <p>       (Optional.) The orchestrator to be used for the pipeline. The value of       engine must match on of the following values:     </p>
+    <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
+      <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
       <li>
-<strong>kubeflow</strong>: sets engine to Kubeflow</li>
+<strong>local</strong>：将引擎设置为本地编排器</li>
       <li>
-<strong>local</strong>: sets engine to local orchestrator</li>
+<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
       <li>
-<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
-      <li>
-<strong>beam</strong>: (experimental) sets engine to Apache Beam</li>
+<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
-    <p>       ** Important note: The orchestrator required by the DagRunner in the       pipeline config file must match the selected or autodetected engine.       Engine auto-detection is based on user environment. If Apache Airflow       and Kubeflow Pipelines are not installed, then the local orchestrator is       used by default.     </p>
+    <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
+    <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint when using Kubeflow Pipelines.   </dd>
+  <dd>（可选）使用 Kubeflow Pipelines 时受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
+  <dt>--namespace=<var>namespace</var>
+</dt>
 <dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
 
 
   <dt>--build_image</dt>
   <dd>
-    <p>       (Optional.) When the <var>engine</var> is <strong>kubeflow</strong> or <strong>vertex</strong>, TFX       creates a container image for your pipeline if specified. `Dockerfile` in       the current directory will be used, and TFX will automatically generate       one if not exists.     </p>
-    <p>       The built image will be pushed to the remote registry which is specified       in `KubeflowDagRunnerConfig` or `KubeflowV2DagRunnerConfig`.     </p>
+    <p>（可选）当 <var>engine</var> 为 <strong>kubeflow</strong> 或 <strong>vertex</strong> 时，TFX 会为您的流水线创建容器镜像（如果已指定）。将使用当前目录下的 `Dockerfile`，如果不存在，则 TFX 会自动生成。</p>
+    <p>构建的镜像将被推送到在 `KubeflowDagRunnerConfig` 或 `KubeflowV2DagRunnerConfig` 中指定的远程注册表。</p>
   </dd>
   <dt>--build_base_image=<var>build-base-image</var>
 </dt>
   <dd>
-    <p>       (Optional.) When the <var>engine</var> is <strong>kubeflow</strong>, TFX       creates a container image for your pipeline. The build base image       specifies the base container image to use when building the pipeline       container image.     </p>
+    <p>（可选）当 <var>engine</var> 为 <strong>kubeflow</strong> 时，TFX 会为您的流水线创建容器镜像。build-base-image 指定要在构建流水线容器镜像时使用的基础容器镜像。</p>
   </dd>
 
 
 
-#### Examples:
+#### 示例：
 
-Kubeflow:
+Kubeflow：
 
 <pre class="devsite-terminal">tfx pipeline create --engine=kubeflow --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
 --build_image
 </pre>
 
-Local:
+本地：
 
 <pre class="devsite-terminal">tfx pipeline create --engine=local --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;
 </pre>
 
-Vertex:
+Vertex：
 
 <pre class="devsite-terminal">tfx pipeline create --engine=vertex --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; \
 --build_image
 </pre>
 
-To autodetect engine from user environment, simply avoid using the engine flag like the example below. For more details, check the flags section.
+要从用户环境自动检测引擎，只需避免使用引擎标记（如下面的示例所示）。有关更多详细信息，请查看标记部分。
 
 <pre class="devsite-terminal">tfx pipeline create --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;
 </pre>
 
 ### update
 
-Updates an existing pipeline in the given orchestrator.
+更新给定编排器中的现有流水线。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx pipeline update --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --build_image]
@@ -155,11 +155,11 @@ Usage:
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var>
 </dt>
-  <dd>The path to the pipeline configuration file.</dd>
+  <dd>流水线配置文件的路径。</dd>
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -184,52 +184,52 @@ Usage:
   <dt>--engine=<var>engine</var>
 </dt>
   <dd>
-    <p>       (Optional.) The orchestrator to be used for the pipeline. The value of       engine must match on of the following values:     </p>
+    <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
+      <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
       <li>
-<strong>kubeflow</strong>: sets engine to Kubeflow</li>
+<strong>local</strong>：将引擎设置为本地编排器</li>
       <li>
-<strong>local</strong>: sets engine to local orchestrator</li>
+<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
       <li>
-<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
-      <li>
-<strong>beam</strong>: (experimental) sets engine to Apache Beam</li>
+<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
-    <p>       ** Important note: The orchestrator required by the DagRunner in the       pipeline config file must match the selected or autodetected engine.       Engine auto-detection is based on user environment. If Apache Airflow       and Kubeflow Pipelines are not installed, then the local orchestrator is       used by default.     </p>
+    <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
+    <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+  <dt>--namespace=<var>namespace</var>
+</dt>
+<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
   <dt>--build_image</dt>
   <dd>
-    <p>       (Optional.) When the <var>engine</var> is <strong>kubeflow</strong> or <strong>vertex</strong>, TFX       creates a container image for your pipeline if specified. `Dockerfile` in       the current directory will be used.     </p>
-    <p>       The built image will be pushed to the remote registry which is specified       in `KubeflowDagRunnerConfig` or `KubeflowV2DagRunnerConfig`.     </p>
+    <p>（可选）当 <var>engine</var> 为 <strong>kubeflow</strong> 或 <strong>vertex</strong> 时，TFX 会为您的流水线创建容器镜像（如果已指定）。将使用当前目录中的 `Dockerfile`。</p>
+    <p>构建的镜像将被推送到在 `KubeflowDagRunnerConfig` 或 `KubeflowV2DagRunnerConfig` 中指定的远程注册表。</p>
   </dd>
 
 
 
-#### Examples:
+#### 示例：
 
-Kubeflow:
+Kubeflow：
 
 <pre class="devsite-terminal">tfx pipeline update --engine=kubeflow --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
 --build_image
 </pre>
 
-Local:
+本地：
 
 <pre class="devsite-terminal">tfx pipeline update --engine=local --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;
 </pre>
 
-Vertex:
+Vertex：
 
 <pre class="devsite-terminal">tfx pipeline update --engine=vertex --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; \
 --build_image
@@ -237,16 +237,16 @@ Vertex:
 
 ### compile
 
-Compiles the pipeline config file to create a workflow file in Kubeflow and performs the following checks while compiling:
+编译流水线配置文件，以在 Kubeflow 中创建工作流文件并在编译时执行以下检查：
 
-1. Checks if the pipeline path is valid.
+1. 检查流水线路径是否有效。
 2. Checks if the pipeline details are extracted successfully from the pipeline config file.
-3. Checks if the DagRunner in the pipeline config matches the engine.
+3. 检查流水线配置中的 DagRunner 是否与引擎匹配。
 4. Checks if the workflow file is created successfully in the package path provided (only for Kubeflow).
 
-Recommended to use before creating or updating a pipeline.
+建议在创建或更新流水线之前使用。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx pipeline compile --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--engine=&lt;var&gt;engine&lt;/var&gt;]
 </pre>
@@ -254,50 +254,49 @@ Usage:
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var>
 </dt>
-  <dd>The path to the pipeline configuration file.</dd>
+  <dd>流水线配置文件的路径。</dd>
   <dt>--engine=<var>engine</var>
 </dt>
   <dd>
-    <p>       (Optional.) The orchestrator to be used for the pipeline. The value of       engine must match on of the following values:     </p>
+    <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
+      <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
       <li>
-<strong>kubeflow</strong>: sets engine to Kubeflow</li>
+<strong>local</strong>：将引擎设置为本地编排器</li>
       <li>
-<strong>local</strong>: sets engine to local orchestrator</li>
+<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
       <li>
-<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
-      <li>
-<strong>beam</strong>: (experimental) sets engine to Apache Beam</li>
+<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
-    <p>       ** Important note: The orchestrator required by the DagRunner in the       pipeline config file must match the selected or autodetected engine.       Engine auto-detection is based on user environment. If Apache Airflow       and Kubeflow Pipelines are not installed, then the local orchestrator is       used by default.     </p>
+    <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
+    <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
 </dl>
 
-#### Examples:
+#### 示例：
 
-Kubeflow:
+Kubeflow：
 
 <pre class="devsite-terminal">tfx pipeline compile --engine=kubeflow --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;
 </pre>
 
-Local:
+本地：
 
 <pre class="devsite-terminal">tfx pipeline compile --engine=local --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;
 </pre>
 
-Vertex:
+Vertex：
 
 <pre class="devsite-terminal">tfx pipeline compile --engine=vertex --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt;
 </pre>
 
 ### delete
 
-Deletes a pipeline from the given orchestrator.
+从给定的编排器中删除流水线。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx pipeline delete --pipeline_path=&lt;var&gt;pipeline-path&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -306,11 +305,11 @@ Usage:
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var>
 </dt>
-  <dd>The path to the pipeline configuration file.</dd>
+  <dd>流水线配置文件的路径。</dd>
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -335,55 +334,55 @@ Usage:
   <dt>--engine=<var>engine</var>
 </dt>
   <dd>
-    <p>       (Optional.) The orchestrator to be used for the pipeline. The value of       engine must match on of the following values:     </p>
+    <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
+      <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
       <li>
-<strong>kubeflow</strong>: sets engine to Kubeflow</li>
+<strong>local</strong>：将引擎设置为本地编排器</li>
       <li>
-<strong>local</strong>: sets engine to local orchestrator</li>
+<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
       <li>
-<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
-      <li>
-<strong>beam</strong>: (experimental) sets engine to Apache Beam</li>
+<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
-    <p>       ** Important note: The orchestrator required by the DagRunner in the       pipeline config file must match the selected or autodetected engine.       Engine auto-detection is based on user environment. If Apache Airflow       and Kubeflow Pipelines are not installed, then the local orchestrator is       used by default.     </p>
+    <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
+    <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+  <dt>--namespace=<var>namespace</var>
+</dt>
+<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
 
-#### Examples:
+#### 示例：
 
-Kubeflow:
+Kubeflow：
 
 <pre class="devsite-terminal">tfx pipeline delete --engine=kubeflow --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
 </pre>
 
-Local:
+本地：
 
 <pre class="devsite-terminal">tfx pipeline delete --engine=local --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt;
 </pre>
 
-Vertex:
+Vertex：
 
 <pre class="devsite-terminal">tfx pipeline delete --engine=vertex --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt;
 </pre>
 
 ### list
 
-Lists all the pipelines in the given orchestrator.
+列出给定编排器中的所有流水线。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx pipeline list [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -393,7 +392,7 @@ Usage:
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -418,64 +417,64 @@ Usage:
   <dt>--engine=<var>engine</var>
 </dt>
   <dd>
-    <p>       (Optional.) The orchestrator to be used for the pipeline. The value of       engine must match on of the following values:     </p>
+    <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
+      <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
       <li>
-<strong>kubeflow</strong>: sets engine to Kubeflow</li>
+<strong>local</strong>：将引擎设置为本地编排器</li>
       <li>
-<strong>local</strong>: sets engine to local orchestrator</li>
+<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
       <li>
-<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
-      <li>
-<strong>beam</strong>: (experimental) sets engine to Apache Beam</li>
+<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
-    <p>       ** Important note: The orchestrator required by the DagRunner in the       pipeline config file must match the selected or autodetected engine.       Engine auto-detection is based on user environment. If Apache Airflow       and Kubeflow Pipelines are not installed, then the local orchestrator is       used by default.     </p>
+    <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
+    <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+  <dt>--namespace=<var>namespace</var>
+</dt>
+<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
 
-#### Examples:
+#### 示例：
 
-Kubeflow:
+Kubeflow：
 
 <pre class="devsite-terminal">tfx pipeline list --engine=kubeflow --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
 --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
 </pre>
 
-Local:
+本地：
 
 <pre class="devsite-terminal">tfx pipeline list --engine=local
 </pre>
 
-Vertex:
+Vertex：
 
 <pre class="devsite-terminal">tfx pipeline list --engine=vertex
 </pre>
 
 ## tfx run
 
-The structure for commands in the `tfx run` command group is as follows:
+`tfx run` 命令组中的命令结构如下：
 
 <pre class="devsite-terminal">tfx run &lt;var&gt;command&lt;/var&gt; &lt;var&gt;required-flags&lt;/var&gt; [&lt;var&gt;optional-flags&lt;/var&gt;]
 </pre>
 
-Use the following sections to learn more about the commands in the `tfx run` command group.
+使用以下各个部分详细了解 `tfx run` 命令组中的命令。
 
 ### create
 
-Creates a new run instance for a pipeline in the orchestrator. For Kubeflow, the most recent pipeline version of the pipeline in the cluster is used.
+在编排器中为流水线创建新的运行实例。对于 Kubeflow，会使用集群中流水线的最新版本。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx run create --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
 --engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -484,11 +483,11 @@ Usage:
 <dl>
   <dt>--pipeline_name=<var>pipeline-name</var>
 </dt>
-  <dd>The name of the pipeline.</dd>
+  <dd>流水线的名称。</dd>
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -513,66 +512,65 @@ Usage:
   <dt>--engine=<var>engine</var>
 </dt>
   <dd>
-    <p>       (Optional.) The orchestrator to be used for the pipeline. The value of       engine must match on of the following values:     </p>
+    <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
+      <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
       <li>
-<strong>kubeflow</strong>: sets engine to Kubeflow</li>
+<strong>local</strong>：将引擎设置为本地编排器</li>
       <li>
-<strong>local</strong>: sets engine to local orchestrator</li>
+<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
       <li>
-<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
-      <li>
-<strong>beam</strong>: (experimental) sets engine to Apache Beam</li>
+<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
-    <p>       ** Important note: The orchestrator required by the DagRunner in the       pipeline config file must match the selected or autodetected engine.       Engine auto-detection is based on user environment. If Apache Airflow       and Kubeflow Pipelines are not installed, then the local orchestrator is       used by default.     </p>
+    <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
+    <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
 
 
   <dt>--runtime_parameter=<var>parameter-name</var>=<var>parameter-value</var>
 </dt>
-  <dd>     (Optional.) Sets a runtime parameter value. Can be set multiple times to set     values of multiple variables. Only applicable to `airflow`, `kubeflow` and     `vertex` engine.   </dd>
+  <dd>（可选）设置运行时参数值。可以多次设置来设置多个变量的值。仅适用于 `airflow`、`kubeflow` 和 `vertex` 引擎。</dd>
 
 
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
   <dt>--namespace=<var>namespace</var>
 </dt>
-  <dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+  <dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
   <dt>--project=<var>GCP-project-id</var>
 </dt>
-  <dd>     (Required for Vertex.) GCP project id for the vertex pipeline.   </dd>
+  <dd>（Vertex 必需）Vertex 流水线的 GCP 项目 ID。</dd>
 
 
   <dt>--region=<var>GCP-region</var>
 </dt>
-  <dd>     (Required for Vertex.) GCP region name like us-central1. See [Vertex documentation](https://cloud.google.com/vertex-ai/docs/general/locations) for available regions.   </dd>
+  <dd>（Vertex 必需）GCP 区域名称，例如 us-central1。有关可用区域，请参阅 [Vertex 文档] (https://cloud.google.com/vertex-ai/docs/general/locations)。</dd>
 
 
 
 
 
-#### Examples:
+#### 示例：
 
-Kubeflow:
+Kubeflow：
 
 <pre class="devsite-terminal">tfx run create --engine=kubeflow --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
 --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
 </pre>
 
-Local:
+本地：
 
 <pre class="devsite-terminal">tfx run create --engine=local --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt;
 </pre>
 
-Vertex:
+Vertex：
 
 <pre class="devsite-terminal">tfx run create --engine=vertex --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \
   --runtime_parameter=&lt;var&gt;var_name&lt;/var&gt;=&lt;var&gt;var_value&lt;/var&gt; \
@@ -581,11 +579,11 @@ Vertex:
 
 ### terminate
 
-Stops a run of a given pipeline.
+停止给定流水线的运行。
 
-** Important Note: Currently supported only in Kubeflow.
+** 重要说明：目前仅在 Kubeflow 中受支持。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx run terminate --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -594,11 +592,11 @@ Usage:
 <dl>
   <dt>--run_id=<var>run-id</var>
 </dt>
-  <dd>Unique identifier for a pipeline run.</dd>
+  <dd>流水线运行的唯一标识符。</dd>
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -623,27 +621,27 @@ Usage:
   <dt>--engine=<var>engine</var>
 </dt>
   <dd>
-    <p>       (Optional.) The orchestrator to be used for the pipeline. The value of       engine must match on of the following values:     </p>
+    <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
-      <li>
-<strong>kubeflow</strong>: sets engine to Kubeflow</li>
+      <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
-    <p>       ** Important note: The orchestrator required by the DagRunner in the       pipeline config file must match the selected or autodetected engine.       Engine auto-detection is based on user environment. If Apache Airflow       and Kubeflow Pipelines are not installed, then the local orchestrator is       used by default.     </p>
+    <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
+    <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
+  <dt>--namespace=<var>namespace</var>
+</dt>
 <dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
 
 
 
-#### Examples:
+#### 示例：
 
-Kubeflow:
+Kubeflow：
 
 <pre class="devsite-terminal">tfx run delete --engine=kubeflow --run_id=&lt;var&gt;run-id&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
 --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
@@ -651,11 +649,11 @@ Kubeflow:
 
 ### list
 
-Lists all runs of a pipeline.
+列出流水线的所有运行。
 
-** Important Note: Currently not supported in Local and Apache Beam.
+** 重要说明：目前在本地和 Apache Beam 中不受支持。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx run list --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
 --engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -664,11 +662,11 @@ Usage:
 <dl>
   <dt>--pipeline_name=<var>pipeline-name</var>
 </dt>
-  <dd>The name of the pipeline.</dd>
+  <dd>流水线的名称。</dd>
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -693,29 +691,29 @@ Usage:
   <dt>--engine=<var>engine</var>
 </dt>
   <dd>
-    <p>       (Optional.) The orchestrator to be used for the pipeline. The value of       engine must match on of the following values:     </p>
+    <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
+      <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
       <li>
-<strong>kubeflow</strong>: sets engine to Kubeflow</li>
-      <li>
-<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
+<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
-    <p>       ** Important note: The orchestrator required by the DagRunner in the       pipeline config file must match the selected or autodetected engine.       Engine auto-detection is based on user environment. If Apache Airflow       and Kubeflow Pipelines are not installed, then the local orchestrator is       used by default.     </p>
+    <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
+    <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+  <dt>--namespace=<var>namespace</var>
+</dt>
+<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
 
-#### Examples:
+#### 示例：
 
-Kubeflow:
+Kubeflow：
 
 <pre class="devsite-terminal">tfx run list --engine=kubeflow --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
 --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
@@ -723,11 +721,11 @@ Kubeflow:
 
 ### status
 
-Returns the current status of a run.
+返回运行的当前状态。
 
-** Important Note: Currently not supported in Local and Apache Beam.
+** 重要说明：目前在本地和 Apache Beam 中不受支持。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx run status --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
 --engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
@@ -736,14 +734,14 @@ Usage:
 <dl>
   <dt>--pipeline_name=<var>pipeline-name</var>
 </dt>
-  <dd>The name of the pipeline.</dd>
+  <dd>流水线的名称。</dd>
   <dt>--run_id=<var>run-id</var>
 </dt>
-  <dd>Unique identifier for a pipeline run.</dd>
+  <dd>流水线运行的唯一标识符。</dd>
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -768,29 +766,29 @@ Usage:
   <dt>--engine=<var>engine</var>
 </dt>
   <dd>
-    <p>       (Optional.) The orchestrator to be used for the pipeline. The value of       engine must match on of the following values:     </p>
+    <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
+      <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
       <li>
-<strong>kubeflow</strong>: sets engine to Kubeflow</li>
-      <li>
-<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
+<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
-    <p>       ** Important note: The orchestrator required by the DagRunner in the       pipeline config file must match the selected or autodetected engine.       Engine auto-detection is based on user environment. If Apache Airflow       and Kubeflow Pipelines are not installed, then the local orchestrator is       used by default.     </p>
+    <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
+    <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+  <dt>--namespace=<var>namespace</var>
+</dt>
+<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
 
-#### Examples:
+#### 示例：
 
-Kubeflow:
+Kubeflow：
 
 <pre class="devsite-terminal">tfx run status --engine=kubeflow --run_id=&lt;var&gt;run-id&lt;/var&gt; --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \
 --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
@@ -798,11 +796,11 @@ Kubeflow:
 
 ### delete
 
-Deletes a run of a given pipeline.
+删除给定流水线的运行。
 
-** Important Note: Currently supported only in Kubeflow
+** 重要说明：目前仅在 Kubeflow 中受支持。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx run delete --run_id=&lt;var&gt;run-id&lt;/var&gt; [--engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
 --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;]
@@ -811,11 +809,11 @@ Usage:
 <dl>
   <dt>--run_id=<var>run-id</var>
 </dt>
-  <dd>Unique identifier for a pipeline run.</dd>
+  <dd>流水线运行的唯一标识符。</dd>
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -840,55 +838,55 @@ Usage:
   <dt>--engine=<var>engine</var>
 </dt>
   <dd>
-    <p>       (Optional.) The orchestrator to be used for the pipeline. The value of       engine must match on of the following values:     </p>
+    <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
-      <li>
-<strong>kubeflow</strong>: sets engine to Kubeflow</li>
+      <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
-    <p>       ** Important note: The orchestrator required by the DagRunner in the       pipeline config file must match the selected or autodetected engine.       Engine auto-detection is based on user environment. If Apache Airflow       and Kubeflow Pipelines are not installed, then the local orchestrator is       used by default.     </p>
+    <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
+    <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+  <dt>--namespace=<var>namespace</var>
+</dt>
+<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
 
-#### Examples:
+#### 示例：
 
-Kubeflow:
+Kubeflow：
 
 <pre class="devsite-terminal">tfx run delete --engine=kubeflow --run_id=&lt;var&gt;run-id&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
 --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
 </pre>
 
-## tfx template [Experimental]
+## tfx template [实验性]
 
-The structure for commands in the `tfx template` command group is as follows:
+`tfx template` 命令组中的命令结构如下：
 
 <pre class="devsite-terminal">tfx template &lt;var&gt;command&lt;/var&gt; &lt;var&gt;required-flags&lt;/var&gt; [&lt;var&gt;optional-flags&lt;/var&gt;]
 </pre>
 
-Use the following sections to learn more about the commands in the `tfx template` command group. Template is an experimental feature and subject to change at any time.
+使用以下部分详细了解 `tfx template` 命令组中的命令。模板是一项实验性功能，随时可能更改。
 
 ### list
 
-List available TFX pipeline templates.
+列出可用的 TFX 流水线模板。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx template list
 </pre>
 
 ### copy
 
-Copy a template to the destination directory.
+将模板复制到目标目录。
 
-Usage:
+用法：
 
 <pre class="devsite-click-to-copy devsite-terminal">tfx template copy --model=&lt;var&gt;model&lt;/var&gt; --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \
 --destination_path=&lt;var&gt;destination-path&lt;/var&gt;
@@ -897,66 +895,65 @@ Usage:
 <dl>
   <dt>--model=<var>model</var>
 </dt>
-  <dd>The name of the model built by the pipeline template.</dd>
+  <dd>由流水线模板构建的模型的名称。</dd>
   <dt>--pipeline_name=<var>pipeline-name</var>
 </dt>
-  <dd>The name of the pipeline.</dd>
+  <dd>流水线的名称。</dd>
   <dt>--destination_path=<var>destination-path</var>
 </dt>
-  <dd>The path to copy the template to.</dd>
+  <dd>要将模板复制到的路径。</dd>
 </dl>
 
-## Understanding TFX CLI Flags
+## 了解 TFX CLI 标记
 
-### Common flags
+### 通用标记
 
 <dl>
   <dt>--engine=<var>engine</var>
 </dt>
   <dd>
-    <p>       The orchestrator to be used for the pipeline. The value of engine must       match on of the following values:     </p>
+    <p>用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
+      <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
       <li>
-<strong>kubeflow</strong>: sets engine to Kubeflow</li>
+<strong>local</strong>：将引擎设置为本地编排器</li>
       <li>
-<strong>local</strong>: sets engine to local orchestrator</li>
+<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
       <li>
-<strong>vertex</strong>: sets engine to Vertex Pipelines</li>
+<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
       <li>
-<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
-      <li>
-<strong>beam</strong>: (experimental) sets engine to Apache Beam</li>
+<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
-    <p>       ** Important note: The orchestrator required by the DagRunner in the       pipeline config file must match the selected or autodetected engine.       Engine auto-detection is based on user environment. If Apache Airflow       and Kubeflow Pipelines are not installed, then the local orchestrator is       used by default.     </p>
+    <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
+    <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
 </dl>
 
   <dt>--pipeline_name=<var>pipeline-name</var>
 </dt>
-  <dd>The name of the pipeline.</dd>
+  <dd>流水线的名称。</dd>
 
 
   <dt>--pipeline_path=<var>pipeline-path</var>
 </dt>
-  <dd>The path to the pipeline configuration file.</dd>
+  <dd>流水线配置文件的路径。</dd>
 
 
   <dt>--run_id=<var>run-id</var>
 </dt>
-  <dd>Unique identifier for a pipeline run.</dd>
+  <dd>流水线运行的唯一标识符。</dd>
 
 
 
 
 
-### Kubeflow specific flags
+### Kubeflow 专用标记
 
 <dl>
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -982,22 +979,23 @@ Usage:
 
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>     Client ID for IAP protected endpoint.   </dd>
+  <dd>受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
-<dd>     Kubernetes namespace to connect to the Kubeflow Pipelines API. If the     namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+  <dt>--namespace=<var>namespace</var>
+</dt>
+<dd>要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
 
-## Generated files by TFX CLI
+## 由 TFX CLI 生成的文件
 
-When pipelines are created and run, several files are generated for pipeline management.
+创建并运行流水线后，会生成几个文件用于流水线管理。
 
-- ${HOME}/tfx/local, beam, airflow, vertex
-    - Pipeline metadata read from the configuration is stored under `${HOME}/tfx/${ORCHESTRATION_ENGINE}/${PIPELINE_NAME}`. This location can be customized by setting environment varaible like `AIRFLOW_HOME` or `KUBEFLOW_HOME`. This behavior might be changed in future releases. This directory is used to store pipeline information including pipeline ids in the Kubeflow Pipelines cluster which is needed to create runs or update pipelines.
-    - Before TFX 0.25, these files were located under `${HOME}/${ORCHESTRATION_ENGINE}`. In TFX 0.25, files in the old location will be moved to the new location automatically for smooth migration.
-    - From TFX 0.27, kubeflow doesn't create these metadata files in local filesystem. However, see below for other files that kubeflow creates.
-- (Kubeflow only) Dockerfile and a container image
-    - Kubeflow Pipelines requires two kinds of input for a pipeline. These files are generated by TFX in the current directory.
-    - One is a container image which will be used to run components in the pipeline. This container image is built when a pipeline for Kubeflow Pipelines is created or updated with `--build-image` flag. TFX CLI will generate `Dockerfile` if not exists, and will build and push a container image to the registry specified in KubeflowDagRunnerConfig.
+- ${HOME}/tfx/local、beam、airflow、vertex
+    - 从配置中读取的流水线元数据存储在 `${HOME}/tfx/${ORCHESTRATION_ENGINE}/${PIPELINE_NAME}` 下。可以通过设置环境变量（如 `AIRFLOW_HOME` 或 `KUBEFLOW_HOME`）来自定义此位置。在未来的版本中可能会改变此行为。此目录用于存储流水线信息，包括创建运行或更新流水线所需的 Kubeflow Pipelines 集群中的流水线 ID。
+    - 在 TFX 0.25 之前，这些文件位于 `${HOME}/${ORCHESTRATION_ENGINE}` 下。在 TFX 0.25 中，旧位置中的文件将自动移动到新位置，以便顺利迁移。
+    - 从 TFX 0.27 开始，Kubeflow 不会在本地文件系统中创建这些元数据文件。但是，请参阅以下内容，了解 Kubeflow 创建的其他文件。
+- （仅限 Kubeflow）Dockerfile 和容器镜像
+    - Kubeflow Pipelines 需要两种流水线输入。这些文件由 TFX 在当前目录下生成。
+    - 一种是容器镜像，用于在流水线中运行组件。此容器镜像在使用 `--build-image` 标志创建或更新 Kubeflow Pipelines 的流水线时构建。如果不存在，TFX CLI 将生成 `Dockerfile`，并构建容器镜像并将其推送到 KubeflowDagRunnerConfig 中指定的注册表。
