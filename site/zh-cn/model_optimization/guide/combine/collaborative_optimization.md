@@ -28,7 +28,7 @@
 
 这些技术提供了多个可用于压缩机器学习模型和在推断时利用硬件加速的部署路径。下图展示了几个可以在搜索具有所需部署特征的模型时进行探索的部署路径，其中的叶节点是部署就绪模型，意味着它们被部分或完全量化并采用 tflite 格式。填充为绿色的步骤表示需要重新训练/微调，协作优化步骤用红色虚线边框突出显示。在给定节点用于获取模型的技术在相应的标签中加以指示。
 
-![collaborative optimization](images/collaborative_optimization.png "collaborative optimization")
+![协作优化](images/collaborative_optimization.png "协同优化")
 
 上图省略了直接仅量化（训练后或 QAT）部署路径。
 
@@ -36,7 +36,7 @@
 
 下图显示了通过协作优化流水线的样本权重内核的密度图。
 
-![collaborative optimization density plot](images/collaborative_optimization_dist.png "collaborative optimization density plot")
+![协作优化密度图](images/collaborative_optimization_dist.png "collaborative optimization density plot")
 
 结果是一个减少了唯一值并具有大量稀疏权重的量化部署模型，权重量取决于训练时指定的目标稀疏度。除了显著的模型压缩优势，特定的硬件支持还可以利用这些稀疏的聚类模型来大幅减少推断延迟。
 
