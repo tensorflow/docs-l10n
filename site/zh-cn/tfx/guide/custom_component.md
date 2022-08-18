@@ -6,7 +6,7 @@
 
 ## 自定义执行器或自定义组件
 
-If only custom processing logic is needed while the inputs, outputs, and execution properties of the component are the same as an existing component, a custom executor is sufficient. A fully custom component is needed when any of the inputs, outputs, or execution properties are different from any existing TFX components.
+如果仅需要自定义处理逻辑，而组件的输入、输出和执行属性与现有组件相同，那么自定义执行器就足够了。当输入、输出或执行属性与任何现有 TFX 组件不同时，都需要完全自定义的组件。
 
 ## 如何创建自定义组件？
 
@@ -17,9 +17,9 @@ If only custom processing logic is needed while the inputs, outputs, and executi
 
 ### ComponentSpec
 
-The `ComponentSpec` class defines the component contract by defining the input and output artifacts to a component as well as the parameters that are used for the component execution. It has three parts:
+`ComponentSpec` 类通过定义组件的输入和输出工件以及用于组件执行的参数来定义组件协定。它有三个部分：
 
-- *INPUTS*: A dictionary of typed parameters for the input artifacts that are passed into the component executor. Normally input artifacts are the outputs from upstream components and thus share the same type.
+- *INPUTS*：传入组件执行器的输入工件的类型化参数字典。通常输入工件是上游组件的输出，因此共享相同类型。
 - *OUTPUTS*：组件生成的输出工件的类型化参数字典。
 - *PARAMETERS*：其他 [ExecutionParameter](https://github.com/tensorflow/tfx/blob/54aa6fbec6bffafa8352fe51b11251b1e44a2bf1/tfx/types/component_spec.py#L274) 项的字典，这些项将被传递到组件执行器。这些是我们希望在流水线 DSL 中灵活定义并传递给执行的非工件参数。
 
