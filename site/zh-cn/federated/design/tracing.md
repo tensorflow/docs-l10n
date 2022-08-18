@@ -16,11 +16,11 @@ TODO(b/153500547)：描述并链接跟踪系统的各个组件。
 
 注：由于使用 `Struct` 作为用于表示 Python `args` 和 `kwargs` 的单一数据结构，因此 `Struct` 也同时接受命名字段和未命名字段。
 
-See [function_utils.create_argument_unpacking_fn](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/computation/function_utils.py) for more information.
+有关详细信息，请参阅 [function_utils.wrap_as_zero_or_one_arg_callable](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/computation/function_utils.py)。
 
 ### 跟踪函数
 
-When tracing a `federated_computation`, the user's function is called using [value_impl.Value](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) as a stand-in replacement for each argument. `Value` attempts to emulate the behavior of the original argument type by implementing common Python dunder methods (e.g. `__getattr__`).
+跟踪 `federated_computation` 时，可以将 [value_impl.Value](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) 用作各个参数的替代来调用用户的函数。`Value` 会尝试通过实现常见的 Python dunder 方法（例如 `__getattr__`）来模拟原始参数类型的行为。
 
 具体而言，只有一个参数时，将通过以下方式执行跟踪：
 
@@ -35,13 +35,13 @@ def foo(x):
   return x[0]
 ```
 
-Here the function’s parameter is a tuple and in the body of the fuction the 0th element is selected. This invokes Python’s `__getitem__` method, which is overridden on `ValueImpl`. In the simplest case, the implementation of `ValueImpl.__getitem__` constructs a [building_blocks.Selection](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) to represent the invocation of `__getitem__` and returns a `ValueImpl` backed by this new `Selection`.
+在这里，函数的参数为元组，在函数体中选择第 0 个元素。这会调用 Python 的 `__getitem__` 方法，该方法在 `ValueImpl` 上被重写。在最简单的情况下，实现 `ValueImpl.__getitem__` 会构造 [building_blocks.Selection](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) 以表示调用 `__getitem__` 并返回由此新的 `Selection` 支持的 `ValueImpl`。
 
 由于每个 dunder 方法都返回一个 `ValueImpl`，而在函数体中每完成一个运算就会调用一个重写的 dunder 方法，因此将会持续跟踪。
 
 ### 构造 AST
 
-The result of tracing the function is packaged into a [building_blocks.Lambda](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) whose `parameter_name` and `parameter_type` map to the [building_block.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) created to represent the packed arguments. The resulting `Lambda` is then returned as a Python object that fully represents the user’s Python function.
+跟踪该函数的结果会被打包到 [building_blocks.Lambda](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) 中，其 `parameter_name` 和 `parameter_type` 会映射至创建的 [building_block.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) 以表示打包的参数。随后，会将生成的 `Lambda` 作为能够完全表示用户 Python 函数的 Python 对象返回。
 
 ## 跟踪 TensorFlow 计算
 
