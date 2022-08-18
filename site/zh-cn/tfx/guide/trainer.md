@@ -15,7 +15,7 @@ Trainer 需要：
 - 用于训练和评估的 tf.Examples。
 - 由用户提供、用于定义 Trainer 逻辑的模块文件。
 - 训练参数和评估参数的 [Protobuf](https://developers.google.com/protocol-buffers) 定义。
-- (Optional) A data schema created by a SchemaGen pipeline component and optionally altered by the developer.
+- （可选）由 SchemaGen 流水线组件创建并且可由开发者选择性更改的数据架构。
 - （可选）由上游 Transform 组件生成的转换计算图。
 - （可选）用于热启动等场景的预训练模型。
 - （可选）将传递给用户模块函数的超参数。可以在[此处](tuner.md)找到与 Tuner 集成的详细信息。
