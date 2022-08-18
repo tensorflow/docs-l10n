@@ -155,7 +155,7 @@ Step n+1 =   o_t+1, a_t+1, r_t+1, d_t+1, is_first = False, is_last = true, is_te
 
 如果片段以 `is_terminal = False` 的步骤结束，则意味着该片段已被截断。在这种情况下，根据环境，操作、奖励和折扣也可能为空。
 
-![RLDS step to TF-Agents trajectory](images/rlds/rlds_step_to_trajectory.png)
+![RLDS 步骤到 TF-Agents 轨迹](images/rlds/rlds_step_to_trajectory.png)
 
 ### 转换过程
 
