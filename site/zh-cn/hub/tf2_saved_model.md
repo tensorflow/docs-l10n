@@ -97,7 +97,7 @@ piece_to_share = tf.keras.Model(sharing_input, sharing_output)
 piece_to_share.save(..., include_optimizer=False)
 ```
 
-[TensorFlow Models](https://github.com/tensorflow/models) on GitHub uses the former approach for BERT (see [nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py), note the split between `core_model` for export and the `pretrainer` for restoring the checkpoint) and the latter approach for ResNet (see [legacy/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/legacy/image_classification/resnet/tfhub_export.py)).
+GitHub 上的 [TensorFlow 模型](https://github.com/tensorflow/models)对 BERT 使用前一种方法（请参见 [nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py)，注意用于导出的 `core_model` 和用于恢复检查点的 `pretrainer` 之间的区别），对 ResNet 使用后一种方法（请参见 [legacy/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/legacy/image_classification/resnet/tfhub_export.py)）。
 
 ### 从低级 TensorFlow 保存
 
