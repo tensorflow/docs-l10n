@@ -6,6 +6,7 @@
 
 ## 开始
 
+
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
 如果您是 TensorFlow Lite 新用户，并且使用的是 Android 或 iOS 平台，我们建议您研究以下可以帮助您入门的示例应用。
@@ -44,9 +45,8 @@
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a>
-</td>
-    <td rowspan="3">       100.5 Mb</td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a> </td>
+    <td rowspan="3">       100.5 Mb     </td>
     <td>Pixel 3 (Android 10)</td>
     <td>123ms*</td>
   </tr>
