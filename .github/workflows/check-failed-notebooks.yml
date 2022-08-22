@@ -1,0 +1,28 @@
+name: Update lists of failing notebooks
+
+on:
+  schedule:
+    # Every week
+    - cron: '0 23 * * 1'
+  # Allow the action to be manually run
+  workflow_dispatch:
+
+jobs:
+  check-notebooks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update list of failing nootebooks
+        run: bash ./tools/notebook-status.sh
+
+      - name: setup git config
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "<>"
+
+      - name: Commit changes
+        run: |
+          # Stage, commit and push
+          git add *
+          git commit -m "Update failing notebook lists"
+          git push
