@@ -59,7 +59,7 @@ dependencies {
 从 2.3.0 版本开始，默认情况下会从 Pod 中排除 GPU 委托，以缩减二进制文件的大小。您可以通过指定子规范来包含 GPU 委托。对于 `TensorFlowLiteSwift` Pod：
 
 ```ruby
-pod 'TensorFlowLiteSwift/Metal', '~> 0.0.1-nightly',
+#define TFLITE_USE_GPU_DELEGATE 1
 ```
 
 或者
@@ -101,15 +101,15 @@ pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['Metal']
 
 在第 4 步中以调试模式运行时，为了获得更高性能，您应当更改为具有适当优化 Metal 设置的发布构建。特别是，要编辑这些设置，请转至 `Product > Scheme > Edit Scheme…`。选择 `Run`。在 `Info` 标签页中，将 `Build Configuration` 从 `Debug` 更改为 `Release`，取消选中 `Debug executable`。
 
-![设置 Metal 选项](https://gitlocalize.com/repo/4592/zh-cn/site/en-snapshot/lite/performance/images/iosmetal.png)
+![设置 Metal 选项](images/iosdebug.png)
 
 然后，点击 `Options` 标签页并将 `GPU Frame Capture` 更改为 `Disabled`，将 `Metal API Validation` 更改为 `Disabled`。
 
-![设置发布](https://gitlocalize.com/repo/4592/zh-cn/site/en-snapshot/lite/performance/images/iosdebug.png)
+![设置发布](https://gitlocalize.com/repo/4592/zh-cn/site/en-snapshot/lite/performance/images/iosrelease.png)
 
 最后，确保在 64 位架构上选择仅发布构建。在 `Project navigator -> tflite_camera_example -> PROJECT -> tflite_camera_example -> Build Settings` 下，将 `Build Active Architecture Only > Release` 设置为 Yes。
 
-![设置发布选项](https://gitlocalize.com/repo/4592/zh-cn/site/en-snapshot/lite/performance/images/iosrelease.png)
+![设置发布选项](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/lite/performance/images/iosrelease.png?raw=true)
 
 ## 在您自己的模型上尝试 GPU 委托
 
