@@ -7,13 +7,13 @@
 
 ## clean
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_speech_corpus/clean')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This Speech corpus has been developed as part of PhD work carried out by Nawar Halabi at the University of Southampton.
