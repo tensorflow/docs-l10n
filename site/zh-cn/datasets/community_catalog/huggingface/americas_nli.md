@@ -7,20 +7,20 @@
 
 ## aym
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:americas_nli/aym')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural language inference (NLI) dataset covering 15 high-resource languages – to 10 low-resource indigenous languages spoken in the Americas: Ashaninka, Aymara, Bribri, Guarani, Nahuatl, Otomi, Quechua, Raramuri, Shipibo-Konibo, and Wixarika. As with MNLI, the goal is to predict textual entailment (does sentence A imply/contradict/neither sentence B) and is a classification task (given two sentences, predict one of three labels).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -58,20 +58,20 @@ AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural languag
 
 ## bzd
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:americas_nli/bzd')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural language inference (NLI) dataset covering 15 high-resource languages – to 10 low-resource indigenous languages spoken in the Americas: Ashaninka, Aymara, Bribri, Guarani, Nahuatl, Otomi, Quechua, Raramuri, Shipibo-Konibo, and Wixarika. As with MNLI, the goal is to predict textual entailment (does sentence A imply/contradict/neither sentence B) and is a classification task (given two sentences, predict one of three labels).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -109,20 +109,20 @@ AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural languag
 
 ## cni
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:americas_nli/cni')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural language inference (NLI) dataset covering 15 high-resource languages – to 10 low-resource indigenous languages spoken in the Americas: Ashaninka, Aymara, Bribri, Guarani, Nahuatl, Otomi, Quechua, Raramuri, Shipibo-Konibo, and Wixarika. As with MNLI, the goal is to predict textual entailment (does sentence A imply/contradict/neither sentence B) and is a classification task (given two sentences, predict one of three labels).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -160,20 +160,20 @@ AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural languag
 
 ## gn
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:americas_nli/gn')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural language inference (NLI) dataset covering 15 high-resource languages – to 10 low-resource indigenous languages spoken in the Americas: Ashaninka, Aymara, Bribri, Guarani, Nahuatl, Otomi, Quechua, Raramuri, Shipibo-Konibo, and Wixarika. As with MNLI, the goal is to predict textual entailment (does sentence A imply/contradict/neither sentence B) and is a classification task (given two sentences, predict one of three labels).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -211,20 +211,20 @@ AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural languag
 
 ## hch
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:americas_nli/hch')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural language inference (NLI) dataset covering 15 high-resource languages – to 10 low-resource indigenous languages spoken in the Americas: Ashaninka, Aymara, Bribri, Guarani, Nahuatl, Otomi, Quechua, Raramuri, Shipibo-Konibo, and Wixarika. As with MNLI, the goal is to predict textual entailment (does sentence A imply/contradict/neither sentence B) and is a classification task (given two sentences, predict one of three labels).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -262,20 +262,20 @@ AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural languag
 
 ## nah
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:americas_nli/nah')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural language inference (NLI) dataset covering 15 high-resource languages – to 10 low-resource indigenous languages spoken in the Americas: Ashaninka, Aymara, Bribri, Guarani, Nahuatl, Otomi, Quechua, Raramuri, Shipibo-Konibo, and Wixarika. As with MNLI, the goal is to predict textual entailment (does sentence A imply/contradict/neither sentence B) and is a classification task (given two sentences, predict one of three labels).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -313,20 +313,20 @@ AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural languag
 
 ## oto
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:americas_nli/oto')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural language inference (NLI) dataset covering 15 high-resource languages – to 10 low-resource indigenous languages spoken in the Americas: Ashaninka, Aymara, Bribri, Guarani, Nahuatl, Otomi, Quechua, Raramuri, Shipibo-Konibo, and Wixarika. As with MNLI, the goal is to predict textual entailment (does sentence A imply/contradict/neither sentence B) and is a classification task (given two sentences, predict one of three labels).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -364,20 +364,20 @@ AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural languag
 
 ## quy
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:americas_nli/quy')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural language inference (NLI) dataset covering 15 high-resource languages – to 10 low-resource indigenous languages spoken in the Americas: Ashaninka, Aymara, Bribri, Guarani, Nahuatl, Otomi, Quechua, Raramuri, Shipibo-Konibo, and Wixarika. As with MNLI, the goal is to predict textual entailment (does sentence A imply/contradict/neither sentence B) and is a classification task (given two sentences, predict one of three labels).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -415,20 +415,20 @@ AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural languag
 
 ## shp
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:americas_nli/shp')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural language inference (NLI) dataset covering 15 high-resource languages – to 10 low-resource indigenous languages spoken in the Americas: Ashaninka, Aymara, Bribri, Guarani, Nahuatl, Otomi, Quechua, Raramuri, Shipibo-Konibo, and Wixarika. As with MNLI, the goal is to predict textual entailment (does sentence A imply/contradict/neither sentence B) and is a classification task (given two sentences, predict one of three labels).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -466,20 +466,20 @@ AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural languag
 
 ## tar
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:americas_nli/tar')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural language inference (NLI) dataset covering 15 high-resource languages – to 10 low-resource indigenous languages spoken in the Americas: Ashaninka, Aymara, Bribri, Guarani, Nahuatl, Otomi, Quechua, Raramuri, Shipibo-Konibo, and Wixarika. As with MNLI, the goal is to predict textual entailment (does sentence A imply/contradict/neither sentence B) and is a classification task (given two sentences, predict one of three labels).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -517,20 +517,20 @@ AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural languag
 
 ## all_languages
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:americas_nli/all_languages')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmericasNLI is an extension of XNLI (Conneau et al., 2018) – a natural language inference (NLI) dataset covering 15 high-resource languages – to 10 low-resource indigenous languages spoken in the Americas: Ashaninka, Aymara, Bribri, Guarani, Nahuatl, Otomi, Quechua, Raramuri, Shipibo-Konibo, and Wixarika. As with MNLI, the goal is to predict textual entailment (does sentence A imply/contradict/neither sentence B) and is a classification task (given two sentences, predict one of three labels).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
