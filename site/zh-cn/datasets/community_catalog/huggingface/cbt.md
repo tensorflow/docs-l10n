@@ -7,13 +7,13 @@
 
 ## raw
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cbt/raw')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Children’s Book Test (CBT) is designed to measure directly
@@ -22,7 +22,7 @@ The CBT is built from books that are freely available.
 ```
 
 - **许可**：GNU Free Documentation License v1.3
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -50,13 +50,13 @@ The CBT is built from books that are freely available.
 
 ## V
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cbt/V')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Children’s Book Test (CBT) is designed to measure directly
@@ -65,7 +65,7 @@ The CBT is built from books that are freely available.
 ```
 
 - **许可**：GNU Free Documentation License v1.3
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -113,13 +113,13 @@ The CBT is built from books that are freely available.
 
 ## P
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cbt/P')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Children’s Book Test (CBT) is designed to measure directly
@@ -128,7 +128,7 @@ The CBT is built from books that are freely available.
 ```
 
 - **许可**：GNU Free Documentation License v1.3
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -176,13 +176,13 @@ The CBT is built from books that are freely available.
 
 ## NE
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cbt/NE')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Children’s Book Test (CBT) is designed to measure directly
@@ -191,7 +191,7 @@ The CBT is built from books that are freely available.
 ```
 
 - **许可**：GNU Free Documentation License v1.3
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -239,13 +239,13 @@ The CBT is built from books that are freely available.
 
 ## CN
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cbt/CN')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Children’s Book Test (CBT) is designed to measure directly
@@ -254,7 +254,7 @@ The CBT is built from books that are freely available.
 ```
 
 - **许可**：GNU Free Documentation License v1.3
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
