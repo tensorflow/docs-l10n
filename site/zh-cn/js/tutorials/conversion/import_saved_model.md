@@ -1,30 +1,30 @@
-# 在TensorFlow.js中引入TensorFlow GraphDef模型
+# 将基于 TensorFlow GraphDef 的模型导入 TensorFlow.js
 
-TensorFlow GraphDef模型（一般是通过Python API创建的）可以保存成以下几种格式：
-1. TensorFlow [SavedModel](https://tensorflow.google.cn/programmers_guide/saved_model#overview_of_saving_and_restoring_models)
-2. [Frozen Model](https://tensorflow.google.cn/mobile/prepare_models#how_do_you_get_a_model_you_can_use_on_mobile)
-3. [Session Bundle](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/session_bundle/README.md)
-4. [Tensorflow Hub module](https://tensorflow.google.cn/hub/)
+基于 TensorFlow GraphDef 的模型（一般通过 Python API 创建）可以保存成以下几种格式：
 
-以上所有格式都可以被[TensorFlow.js converter](https://github.com/tensorflow/tfjs-converter)转换成TensorFlow.js可读取的模型格式，并用于推算（inference）。
+1. TensorFlow [SavedModel](https://www.tensorflow.org/tutorials/keras/save_and_load)
+2. <a>冻结模型</a>
+3. [Tensorflow Hub module](https://www.tensorflow.org/hub/)
 
-（注意：TensorFlow已经淘汰了session bundle格式，请将您的模型转换成SavedModel格式。）
+以上所有格式都可以通过 [TensorFlow.js 转换器](https://github.com/tensorflow/tfjs-converter)转换成可直接加载到 TensorFlow.js 中进行推断的格式。
+
+（注：TensorFlow 已弃用会话包格式，请将您的模型迁移至 SavedModel 格式。）
 
 ## 必要条件
 
-模型转换的工作需要用到Python环境；你可以用[pipenv](https://github.com/pypa/pipenv) 或 [virtualenv](https://virtualenv.pypa.io)创建一个隔离的环境。用这条命令安装模型转换器：
+转换过程需要 Python 环境；您可能需要使用 [pipenv](https://github.com/pypa/pipenv) 或 [virtualenv](https://virtualenv.pypa.io) 创建一个隔离环境。要安装转换器，请运行以下命令：
 
 ```bash
  pip install tensorflowjs
 ```
 
-将TensorFlow模型引入到TensorFlow.js需要两个步骤。首先，将您的模型转换为TensorFlow.js可用的web格式，然后载入到TensorFlow.js中。
+将 TensorFlow 模型导入 TensorFlow.js 需要两个步骤。首先，将现有模型转换成 TensorFlow.js 网络格式，然后将其加载到 TensorFlow.js 中。
 
-## 第一步：将TensorFlow模型转换至TensorFlow.js可用的 web 格式模型
+## 第1 步：将现有 TensorFlow 模型转换成 TensorFlow.js 网络格式
 
-运行转换器提供的转换脚本：
+运行 pip 软件包提供的转换器脚本：
 
-用法：以SavedModel为例：
+使用方法：SavedModel 示例：
 
 ```bash
 tensorflowjs_converter \
@@ -35,7 +35,7 @@ tensorflowjs_converter \
     /mobilenet/web_model
 ```
 
-Frozen model 为例:
+冻结模型示例：
 
 ```bash
 tensorflowjs_converter \
@@ -45,7 +45,7 @@ tensorflowjs_converter \
     /mobilenet/web_model
 ```
 
-Tensorflow Hub module 为例:
+Tensorflow Hub 模块示例：
 
 ```bash
 tensorflowjs_converter \
@@ -54,32 +54,32 @@ tensorflowjs_converter \
     /mobilenet/web_model
 ```
 
-|脚本参数 | 描述 |
-|---|---|
-|`input_path`  | saved model, session bundle 或 frozen model的完整的路径，或TensorFlow Hub模块的路径。|
-|`output_path` | 输出文件的保存路径。|
+脚本参数 | 描述
+--- | ---
+`input_path` | SavedModel 目录、会话包目录、冻结模型文件的完整路径，TensorFlow Hub 模块句柄或路径。
+`output_path` | 所有输出工件的路径。
 
-| 选项 | 描述
-|---|---|
-|`--input_format`     | 要转换的模型的格式。SavedModel 为 tf_saved_model, frozen model 为 tf_frozen_model, session bundle 为 tf_session_bundle, TensorFlow Hub module 为 tf_hub，Keras HDF5 为 keras。 |
-|`--output_node_names`| 输出节点的名字，每个名字用逗号分离。|
-|`--saved_model_tags` | 只对SavedModel转换用的选项：输入需要加载的MetaGraphDef相对应的tag，多个tag请用逗号分隔。默认为 `serve`。|
-|`--signature_name`   | 只对TensorFlow Hub module转换用的选项：对应要加载的签名，默认为`default`。请参考 https://tensorflow.google.cn/hub/common_signatures/.|
+选项 | 描述
+--- | ---
+`--input_format` | 输入模型的格式。SavedModel 为 tf_saved_model，冻结模型为 tf_frozen_model，会话包为 tf_session_bundle，TensorFlow Hub 模块为 tf_hub，Keras HDF5 为 keras。
+`--output_node_names` | 输出节点的名称，用逗号分隔。
+`--saved_model_tags` | 仅适用于 SavedModel 转换，要加载的 MetaGraphDef 的标记，用逗号分隔。默认为 `serve`。
+`--signature_name` | 仅适用于 TensorFlow Hub 模块转换，要加载的签名。默认为 `default`。请参阅 https://tensorflow.google.cn/hub/common_signatures/。
 
-用以下命令查看帮助信息：
+使用以下命令获取详细的帮助消息：
 
 ```bash
 tensorflowjs_converter --help
 ```
 
-### 转换器产生的文件
+### 转换器生成的文件
 
-转换脚本会产生两种文件：
+上述转换脚本会产生两种类型的文件：
 
-* `model.json` （数据流图和权重清单）
-* `group1-shard\*of\*` （二进制权重文件）
+- `model.json` （数据流图和权重清单）
+- `group1-shard\*of\*` （二进制权重文件）
 
-这里举例Mobilenet v2模型转换后输出的文件：
+例如，以下是转换 MobileNet v2 的输出：
 
 ```html
   output_directory/model.json
@@ -88,13 +88,13 @@ tensorflowjs_converter --help
   output_directory/group1-shard5of5
 ```
 
-## 第二步：在浏览器加载和运行模型
+## 第 2 步：在浏览器加载并运行模型
 
-1. 安装tfjs-convert npm包：
+1. 安装 tfjs-convert npm 软件包
 
 `yarn add @tensorflow/tfjs` 或 `npm install @tensorflow/tfjs`
 
-2. 创建 [FrozenModel class](https://github.com/tensorflow/tfjs-converter/blob/master/src/executor/frozen_model.ts) 并开始推算：
+1. 实例化 [FrozenModel 类](https://github.com/tensorflow/tfjs-converter/blob/master/src/executor/frozen_model.ts)并运行推断：
 
 ```js
 import * as tf from '@tensorflow/tfjs';
@@ -107,17 +107,17 @@ const cat = document.getElementById('cat');
 model.execute(tf.fromPixels(cat));
 ```
 
-具体代码请参考 [MobileNet 演示](https://github.com/tensorflow/tfjs-converter/tree/master/demo/mobilenet).
+请查看我们的 [MobileNet 演示](https://github.com/tensorflow/tfjs-converter/tree/master/demo/mobilenet)。
 
-`loadGraphModel` API中的`LoadOptions`参数可以用来发送密钥或者自定义请求中的头文件。更多信息请参考 [loadGraphModel() 文档](https://js.tensorflow.org/api/1.0.0/#loadGraphModel)。
+`loadGraphModel` API 接受一个附加 `LoadOptions` 参数，该参数可以用于随请求发送凭据或自定义头。请参阅 [loadGraphModel() 文档](https://js.tensorflow.org/api/1.0.0/#loadGraphModel)了解更多详细信息。
 
 ## 支持的操作
 
-目前，TensorFlow.js只支持部分TensorFlow算子。若您的模型包含了不被支持的算子，`tensorflowjs_converter`脚本会报错并列出您的模型中不被支持的算子。请在github上发起 [issue](https://github.com/tensorflow/tfjs/issues)让我们知道您需要支持的算子。
+目前，TensorFlow.js 只支持有限的 TensorFlow 运算。如果您的模型使用不受支持的运算，`tensorflowjs_converter` 脚本将失败并打印您的模型中不受支持的运算的列表。请在 GitHub 上提交[议题](https://github.com/tensorflow/tfjs/issues)告诉我们您需要支持的运算。
 
-## 加载模型权重
+## 仅加载权重
 
-若您只需要加载模型的权重，请参考以下代码：
+如果您想仅加载权重，可以使用以下代码段：
 
 ```js
 import * as tf from '@tensorflow/tfjs';
