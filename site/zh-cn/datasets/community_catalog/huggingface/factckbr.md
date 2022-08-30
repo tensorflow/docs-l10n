@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/factckbr)
 - [Huggingface](https://huggingface.co/datasets/factckbr)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:factckbr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset to study Fake News in Portuguese, presenting a supposedly false News along with their respective fact check and classification.
@@ -20,7 +20,7 @@ The FACTCK.BR dataset contains 1309 claims with its corresponding label.
 ```
 
 - **许可**：MIT
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
