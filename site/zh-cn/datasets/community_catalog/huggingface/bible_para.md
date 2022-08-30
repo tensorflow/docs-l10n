@@ -7,13 +7,13 @@
 
 ## de-en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bible_para/de-en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a multilingual parallel corpus created from translations of the Bible compiled by Christos Christodoulopoulos and Mark Steedman.
@@ -25,7 +25,7 @@ total number of sentence fragments: 2.84M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -54,13 +54,13 @@ total number of sentence fragments: 2.84M
 
 ## en-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bible_para/en-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a multilingual parallel corpus created from translations of the Bible compiled by Christos Christodoulopoulos and Mark Steedman.
@@ -72,7 +72,7 @@ total number of sentence fragments: 2.84M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -101,13 +101,13 @@ total number of sentence fragments: 2.84M
 
 ## en-es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bible_para/en-es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a multilingual parallel corpus created from translations of the Bible compiled by Christos Christodoulopoulos and Mark Steedman.
@@ -119,7 +119,7 @@ total number of sentence fragments: 2.84M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -148,13 +148,13 @@ total number of sentence fragments: 2.84M
 
 ## en-fi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bible_para/en-fi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a multilingual parallel corpus created from translations of the Bible compiled by Christos Christodoulopoulos and Mark Steedman.
@@ -166,7 +166,7 @@ total number of sentence fragments: 2.84M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -195,13 +195,13 @@ total number of sentence fragments: 2.84M
 
 ## en-no
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bible_para/en-no')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a multilingual parallel corpus created from translations of the Bible compiled by Christos Christodoulopoulos and Mark Steedman.
@@ -213,7 +213,7 @@ total number of sentence fragments: 2.84M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -242,13 +242,13 @@ total number of sentence fragments: 2.84M
 
 ## en-hi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bible_para/en-hi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a multilingual parallel corpus created from translations of the Bible compiled by Christos Christodoulopoulos and Mark Steedman.
@@ -260,7 +260,7 @@ total number of sentence fragments: 2.84M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
