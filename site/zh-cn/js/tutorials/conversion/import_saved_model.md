@@ -4,7 +4,7 @@
 
 1. TensorFlow [SavedModel](https://www.tensorflow.org/tutorials/keras/save_and_load)
 2. <a>冻结模型</a>
-3. [Tensorflow Hub module](https://www.tensorflow.org/hub/)
+3. [Tensorflow Hub 模块](https://www.tensorflow.org/hub/)
 
 以上所有格式都可以通过 [TensorFlow.js 转换器](https://github.com/tensorflow/tfjs-converter)转换成可直接加载到 TensorFlow.js 中进行推断的格式。
 
@@ -111,7 +111,7 @@ model.execute(tf.fromPixels(cat));
 
 `loadGraphModel` API 接受一个附加 `LoadOptions` 参数，该参数可以用于随请求发送凭据或自定义头。请参阅 [loadGraphModel() 文档](https://js.tensorflow.org/api/1.0.0/#loadGraphModel)了解更多详细信息。
 
-## 支持的操作
+## 受支持的运算
 
 目前，TensorFlow.js 只支持有限的 TensorFlow 运算。如果您的模型使用不受支持的运算，`tensorflowjs_converter` 脚本将失败并打印您的模型中不受支持的运算的列表。请在 GitHub 上提交[议题](https://github.com/tensorflow/tfjs/issues)告诉我们您需要支持的运算。
 
