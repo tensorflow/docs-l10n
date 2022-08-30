@@ -7,13 +7,13 @@
 
 ## en2bg
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2bg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -24,7 +24,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -58,13 +58,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2cs
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2cs')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -75,7 +75,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -109,13 +109,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2da
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2da')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -126,7 +126,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -160,13 +160,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2de
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2de')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -177,7 +177,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -211,13 +211,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2el
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2el')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -228,7 +228,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -262,13 +262,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -279,7 +279,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -313,13 +313,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2et
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2et')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -330,7 +330,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -364,13 +364,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2fi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2fi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -381,7 +381,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -415,13 +415,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -432,7 +432,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -466,13 +466,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -483,7 +483,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -517,13 +517,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2is
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2is')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -534,7 +534,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -568,13 +568,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -585,7 +585,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -619,13 +619,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -636,7 +636,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -670,13 +670,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -687,7 +687,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -721,13 +721,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2mt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2mt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -738,7 +738,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -772,13 +772,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2nb
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2nb')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -789,7 +789,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -823,13 +823,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -840,7 +840,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -874,13 +874,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -891,7 +891,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -925,13 +925,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -942,7 +942,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -976,13 +976,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -993,7 +993,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1027,13 +1027,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -1044,7 +1044,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1078,13 +1078,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -1095,7 +1095,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1129,13 +1129,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -1146,7 +1146,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1180,13 +1180,13 @@ All documents and sentences were originally written in English (source language 
 
 ## en2tr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europa_eac_tm/en2tr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 In October 2012, the European Union's (EU) Directorate General for Education and Culture ( DG EAC) released a translation memory (TM), i.e. a collection of sentences and their professionally produced translations, in twenty-six languages. This resource bears the name EAC Translation Memory, short EAC-TM.
@@ -1197,7 +1197,7 @@ All documents and sentences were originally written in English (source language 
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International(CC BY 4.0) licence © European Union, 1995-2020
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
