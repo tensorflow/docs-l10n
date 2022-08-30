@@ -7,13 +7,13 @@
 
 ## full
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:assin/full')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The ASSIN (Avaliação de Similaridade Semântica e INferência textual) corpus is a corpus annotated with pairs of sentences written in
@@ -42,7 +42,7 @@ and half in European Portuguese. Either language variant has 2,500 pairs for tra
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -91,13 +91,13 @@ and half in European Portuguese. Either language variant has 2,500 pairs for tra
 
 ## ptpt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:assin/ptpt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The ASSIN (Avaliação de Similaridade Semântica e INferência textual) corpus is a corpus annotated with pairs of sentences written in
@@ -126,7 +126,7 @@ and half in European Portuguese. Either language variant has 2,500 pairs for tra
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -175,13 +175,13 @@ and half in European Portuguese. Either language variant has 2,500 pairs for tra
 
 ## ptbr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:assin/ptbr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The ASSIN (Avaliação de Similaridade Semântica e INferência textual) corpus is a corpus annotated with pairs of sentences written in
@@ -210,7 +210,7 @@ and half in European Portuguese. Either language variant has 2,500 pairs for tra
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
