@@ -79,11 +79,11 @@ ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
 
 ## 大型数据集
 
-Large datasets are sharded (split in multiple files) and typically do not fit in memory, so they should not be cached.
+大型数据集需分片（拆分为多个文件），通常无法装入内存，因此不应进行缓存。
 
 ### 打乱顺序和训练
 
-During training, it's important to shuffle the data well - poorly shuffled data can result in lower training accuracy.
+在训练过程中，有效地打乱数据顺序非常重要。未能有效地打乱数据顺序会导致训练准确率降低。
 
 除了使用 `ds.shuffle` 来打乱记录顺序，还应设置 `shuffle_files=True` 以使分片成多个文件的大型数据集获得良好的乱序行为。否则，周期将以相同的顺序读取分片，因此无法真正地随机化数据。
 
@@ -133,7 +133,7 @@ split = splits[jax.process_index()]
 
 ### 提高图像解码速度
 
-By default, TFDS automatically decodes images. However, there are cases where it can be more performant to skip the image decoding with `tfds.decode.SkipDecoding` and manually apply the `tf.io.decode_image` op:
+默认情况下，TFDS 会自动解码图像。但在某些情况下，使用 `tfds.decode.SkipDecoding` 跳过图像解码并手动应用 `tf.io.decode_image` 运算可以提高性能：
 
 - （使用 `tf.data.Dataset.filter`）筛选样本时，在筛选样本后对图像进行解码。
 - 裁剪图像时，使用融合的 `tf.image.decode_and_crop_jpeg` 运算。
