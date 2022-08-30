@@ -7,13 +7,13 @@
 
 ## abstract_narrative_understanding
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/abstract_narrative_understanding')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -21,7 +21,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -79,13 +79,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## anachronisms
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/anachronisms')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -93,7 +93,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -151,13 +151,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## analogical_similarity
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/analogical_similarity')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -165,7 +165,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -223,13 +223,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## analytic_entailment
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/analytic_entailment')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -237,7 +237,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -295,13 +295,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## arithmetic
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/arithmetic')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -309,7 +309,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -367,13 +367,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## ascii_word_recognition
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/ascii_word_recognition')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -381,7 +381,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -439,13 +439,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## authorship_verification
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/authorship_verification')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -453,7 +453,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -511,13 +511,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## auto_categorization
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/auto_categorization')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -525,7 +525,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -583,13 +583,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## auto_debugging
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/auto_debugging')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -597,7 +597,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -655,13 +655,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## bbq_lite_json
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/bbq_lite_json')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -669,7 +669,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -727,13 +727,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## bridging_anaphora_resolution_barqa
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/bridging_anaphora_resolution_barqa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -741,7 +741,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -799,13 +799,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## causal_judgment
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/causal_judgment')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -813,7 +813,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -871,13 +871,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## cause_and_effect
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/cause_and_effect')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -885,7 +885,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -943,13 +943,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## checkmate_in_one
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/checkmate_in_one')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -957,7 +957,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1015,13 +1015,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## chess_state_tracking
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/chess_state_tracking')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1029,7 +1029,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1087,13 +1087,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## chinese_remainder_theorem
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/chinese_remainder_theorem')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1101,7 +1101,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1159,13 +1159,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## cifar10_classification
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/cifar10_classification')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1173,7 +1173,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1231,13 +1231,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## code_line_description
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/code_line_description')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1245,7 +1245,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1303,13 +1303,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## codenames
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/codenames')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1317,7 +1317,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1375,13 +1375,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## color
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/color')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1389,7 +1389,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1447,13 +1447,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## common_morpheme
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/common_morpheme')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1461,7 +1461,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1519,13 +1519,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## conceptual_combinations
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/conceptual_combinations')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1533,7 +1533,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1591,13 +1591,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## conlang_translation
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/conlang_translation')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1605,7 +1605,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1663,13 +1663,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## contextual_parametric_knowledge_conflicts
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/contextual_parametric_knowledge_conflicts')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1677,7 +1677,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1735,13 +1735,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## crash_blossom
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/crash_blossom')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1749,7 +1749,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1807,13 +1807,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## crass_ai
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/crass_ai')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1821,7 +1821,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1879,13 +1879,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## cryobiology_spanish
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/cryobiology_spanish')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1893,7 +1893,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1951,13 +1951,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## cryptonite
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/cryptonite')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -1965,7 +1965,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2023,13 +2023,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## cs_algorithms
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/cs_algorithms')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2037,7 +2037,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2095,13 +2095,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## dark_humor_detection
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/dark_humor_detection')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2109,7 +2109,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2167,13 +2167,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## date_understanding
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/date_understanding')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2181,7 +2181,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2239,13 +2239,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## disambiguation_qa
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/disambiguation_qa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2253,7 +2253,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2311,13 +2311,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## discourse_marker_prediction
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/discourse_marker_prediction')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2325,7 +2325,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2383,13 +2383,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## disfl_qa
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/disfl_qa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2397,7 +2397,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2455,13 +2455,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## dyck_languages
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/dyck_languages')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2469,7 +2469,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2527,13 +2527,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## elementary_math_qa
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/elementary_math_qa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2541,7 +2541,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2599,13 +2599,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## emoji_movie
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/emoji_movie')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2613,7 +2613,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2671,13 +2671,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## emojis_emotion_prediction
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/emojis_emotion_prediction')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2685,7 +2685,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2743,13 +2743,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## empirical_judgments
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/empirical_judgments')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2757,7 +2757,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2815,13 +2815,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## english_proverbs
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/english_proverbs')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2829,7 +2829,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2887,13 +2887,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## english_russian_proverbs
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/english_russian_proverbs')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2901,7 +2901,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2959,13 +2959,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## entailed_polarity
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/entailed_polarity')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -2973,7 +2973,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3031,13 +3031,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## entailed_polarity_hindi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/entailed_polarity_hindi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3045,7 +3045,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3103,13 +3103,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## epistemic_reasoning
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/epistemic_reasoning')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3117,7 +3117,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3175,13 +3175,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## evaluating_information_essentiality
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/evaluating_information_essentiality')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3189,7 +3189,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3247,13 +3247,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## fact_checker
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/fact_checker')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3261,7 +3261,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3319,13 +3319,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## fantasy_reasoning
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/fantasy_reasoning')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3333,7 +3333,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3391,13 +3391,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## few_shot_nlg
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/few_shot_nlg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3405,7 +3405,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3463,13 +3463,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## figure_of_speech_detection
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/figure_of_speech_detection')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3477,7 +3477,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3535,13 +3535,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## formal_fallacies_syllogisms_negation
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/formal_fallacies_syllogisms_negation')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3549,7 +3549,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3607,13 +3607,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## gem
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/gem')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3621,7 +3621,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3679,13 +3679,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## gender_inclusive_sentences_german
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/gender_inclusive_sentences_german')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3693,7 +3693,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3751,13 +3751,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## general_knowledge
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/general_knowledge')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3765,7 +3765,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3823,13 +3823,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## geometric_shapes
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/geometric_shapes')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3837,7 +3837,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3895,13 +3895,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## goal_step_wikihow
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/goal_step_wikihow')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3909,7 +3909,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3967,13 +3967,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## gre_reading_comprehension
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/gre_reading_comprehension')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -3981,7 +3981,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4039,13 +4039,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## hhh_alignment
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/hhh_alignment')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4053,7 +4053,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4111,13 +4111,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## hindi_question_answering
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/hindi_question_answering')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4125,7 +4125,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4183,13 +4183,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## hindu_knowledge
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/hindu_knowledge')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4197,7 +4197,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4255,13 +4255,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## hinglish_toxicity
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/hinglish_toxicity')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4269,7 +4269,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4327,13 +4327,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## human_organs_senses
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/human_organs_senses')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4341,7 +4341,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4399,13 +4399,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## hyperbaton
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/hyperbaton')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4413,7 +4413,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4471,13 +4471,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## identify_math_theorems
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/identify_math_theorems')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4485,7 +4485,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4543,13 +4543,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## identify_odd_metaphor
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/identify_odd_metaphor')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4557,7 +4557,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4615,13 +4615,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## implicatures
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/implicatures')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4629,7 +4629,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4687,13 +4687,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## implicit_relations
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/implicit_relations')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4701,7 +4701,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4759,13 +4759,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## intent_recognition
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/intent_recognition')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4773,7 +4773,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4831,13 +4831,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## international_phonetic_alphabet_nli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/international_phonetic_alphabet_nli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4845,7 +4845,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4903,13 +4903,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## international_phonetic_alphabet_transliterate
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/international_phonetic_alphabet_transliterate')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4917,7 +4917,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -4975,13 +4975,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## intersect_geometry
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/intersect_geometry')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -4989,7 +4989,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5047,13 +5047,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## irony_identification
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/irony_identification')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5061,7 +5061,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5119,13 +5119,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## kanji_ascii
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/kanji_ascii')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5133,7 +5133,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5191,13 +5191,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## kannada
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/kannada')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5205,7 +5205,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5263,13 +5263,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## key_value_maps
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/key_value_maps')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5277,7 +5277,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5335,13 +5335,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## known_unknowns
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/known_unknowns')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5349,7 +5349,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5407,13 +5407,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## language_games
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/language_games')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5421,7 +5421,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5479,13 +5479,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## language_identification
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/language_identification')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5493,7 +5493,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5551,13 +5551,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## linguistic_mappings
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/linguistic_mappings')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5565,7 +5565,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5623,13 +5623,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## linguistics_puzzles
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/linguistics_puzzles')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5637,7 +5637,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5695,13 +5695,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## list_functions
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/list_functions')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5709,7 +5709,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5767,13 +5767,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## logic_grid_puzzle
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/logic_grid_puzzle')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5781,7 +5781,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5839,13 +5839,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## logical_args
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/logical_args')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5853,7 +5853,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5911,13 +5911,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## logical_deduction
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/logical_deduction')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5925,7 +5925,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -5983,13 +5983,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## logical_fallacy_detection
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/logical_fallacy_detection')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -5997,7 +5997,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6055,13 +6055,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## logical_sequence
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/logical_sequence')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6069,7 +6069,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6127,13 +6127,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## mathematical_induction
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/mathematical_induction')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6141,7 +6141,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6199,13 +6199,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## matrixshapes
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/matrixshapes')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6213,7 +6213,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6271,13 +6271,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## metaphor_boolean
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/metaphor_boolean')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6285,7 +6285,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6343,13 +6343,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## metaphor_understanding
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/metaphor_understanding')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6357,7 +6357,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6415,13 +6415,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## minute_mysteries_qa
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/minute_mysteries_qa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6429,7 +6429,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6487,13 +6487,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## misconceptions
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/misconceptions')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6501,7 +6501,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6559,13 +6559,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## misconceptions_russian
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/misconceptions_russian')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6573,7 +6573,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6631,13 +6631,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## mnist_ascii
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/mnist_ascii')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6645,7 +6645,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6703,13 +6703,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## modified_arithmetic
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/modified_arithmetic')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6717,7 +6717,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6775,13 +6775,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## moral_permissibility
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/moral_permissibility')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6789,7 +6789,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6847,13 +6847,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## movie_dialog_same_or_different
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/movie_dialog_same_or_different')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6861,7 +6861,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6919,13 +6919,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## movie_recommendation
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/movie_recommendation')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -6933,7 +6933,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -6991,13 +6991,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## mult_data_wrangling
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/mult_data_wrangling')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7005,7 +7005,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7063,13 +7063,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## multiemo
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/multiemo')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7077,7 +7077,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7135,13 +7135,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## natural_instructions
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/natural_instructions')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7149,7 +7149,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7207,13 +7207,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## navigate
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/navigate')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7221,7 +7221,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7279,13 +7279,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## nonsense_words_grammar
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/nonsense_words_grammar')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7293,7 +7293,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7351,13 +7351,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## novel_concepts
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/novel_concepts')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7365,7 +7365,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7423,13 +7423,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## object_counting
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/object_counting')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7437,7 +7437,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7495,13 +7495,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## odd_one_out
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/odd_one_out')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7509,7 +7509,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7567,13 +7567,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## operators
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/operators')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7581,7 +7581,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7639,13 +7639,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## paragraph_segmentation
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/paragraph_segmentation')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7653,7 +7653,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7711,13 +7711,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## parsinlu_qa
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/parsinlu_qa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7725,7 +7725,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7783,13 +7783,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## parsinlu_reading_comprehension
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/parsinlu_reading_comprehension')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7797,7 +7797,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7855,13 +7855,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## penguins_in_a_table
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/penguins_in_a_table')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7869,7 +7869,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7927,13 +7927,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## periodic_elements
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/periodic_elements')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -7941,7 +7941,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -7999,13 +7999,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## persian_idioms
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/persian_idioms')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8013,7 +8013,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8071,13 +8071,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## phrase_relatedness
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/phrase_relatedness')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8085,7 +8085,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8143,13 +8143,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## physical_intuition
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/physical_intuition')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8157,7 +8157,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8215,13 +8215,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## physics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/physics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8229,7 +8229,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8287,13 +8287,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## physics_questions
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/physics_questions')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8301,7 +8301,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8359,13 +8359,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## play_dialog_same_or_different
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/play_dialog_same_or_different')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8373,7 +8373,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8431,13 +8431,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## polish_sequence_labeling
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/polish_sequence_labeling')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8445,7 +8445,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8503,13 +8503,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## presuppositions_as_nli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/presuppositions_as_nli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8517,7 +8517,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8575,13 +8575,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## qa_wikidata
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/qa_wikidata')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8589,7 +8589,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8647,13 +8647,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## question_selection
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/question_selection')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8661,7 +8661,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8719,13 +8719,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## real_or_fake_text
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/real_or_fake_text')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8733,7 +8733,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8791,13 +8791,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## reasoning_about_colored_objects
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/reasoning_about_colored_objects')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8805,7 +8805,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8863,13 +8863,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## repeat_copy_logic
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/repeat_copy_logic')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8877,7 +8877,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -8935,13 +8935,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## rephrase
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/rephrase')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -8949,7 +8949,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9007,13 +9007,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## riddle_sense
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/riddle_sense')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9021,7 +9021,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9079,13 +9079,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## ruin_names
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/ruin_names')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9093,7 +9093,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9151,13 +9151,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## salient_translation_error_detection
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/salient_translation_error_detection')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9165,7 +9165,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9223,13 +9223,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## scientific_press_release
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/scientific_press_release')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9237,7 +9237,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9295,13 +9295,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## semantic_parsing_in_context_sparc
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/semantic_parsing_in_context_sparc')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9309,7 +9309,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9367,13 +9367,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## semantic_parsing_spider
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/semantic_parsing_spider')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9381,7 +9381,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9439,13 +9439,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## sentence_ambiguity
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/sentence_ambiguity')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9453,7 +9453,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9511,13 +9511,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## similarities_abstraction
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/similarities_abstraction')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9525,7 +9525,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9583,13 +9583,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## simp_turing_concept
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/simp_turing_concept')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9597,7 +9597,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9655,13 +9655,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## simple_arithmetic_json
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/simple_arithmetic_json')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9669,7 +9669,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9727,13 +9727,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## simple_arithmetic_json_multiple_choice
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/simple_arithmetic_json_multiple_choice')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9741,7 +9741,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9799,13 +9799,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## simple_arithmetic_json_subtasks
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/simple_arithmetic_json_subtasks')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9813,7 +9813,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9871,13 +9871,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## simple_arithmetic_multiple_targets_json
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/simple_arithmetic_multiple_targets_json')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9885,7 +9885,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -9943,13 +9943,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## simple_ethical_questions
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/simple_ethical_questions')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -9957,7 +9957,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10015,13 +10015,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## simple_text_editing
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/simple_text_editing')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10029,7 +10029,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10087,13 +10087,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## snarks
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/snarks')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10101,7 +10101,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10159,13 +10159,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## social_iqa
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/social_iqa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10173,7 +10173,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10231,13 +10231,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## social_support
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/social_support')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10245,7 +10245,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10303,13 +10303,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## sports_understanding
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/sports_understanding')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10317,7 +10317,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10375,13 +10375,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## strange_stories
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/strange_stories')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10389,7 +10389,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10447,13 +10447,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## strategyqa
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/strategyqa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10461,7 +10461,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10519,13 +10519,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## sufficient_information
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/sufficient_information')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10533,7 +10533,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10591,13 +10591,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## suicide_risk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/suicide_risk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10605,7 +10605,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10663,13 +10663,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## swahili_english_proverbs
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/swahili_english_proverbs')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10677,7 +10677,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10735,13 +10735,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## swedish_to_german_proverbs
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/swedish_to_german_proverbs')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10749,7 +10749,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10807,13 +10807,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## symbol_interpretation
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/symbol_interpretation')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10821,7 +10821,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10879,13 +10879,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## temporal_sequences
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/temporal_sequences')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10893,7 +10893,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -10951,13 +10951,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## tense
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/tense')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -10965,7 +10965,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11023,13 +11023,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## timedial
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/timedial')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11037,7 +11037,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11095,13 +11095,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## topical_chat
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/topical_chat')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11109,7 +11109,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11167,13 +11167,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## tracking_shuffled_objects
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/tracking_shuffled_objects')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11181,7 +11181,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11239,13 +11239,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## understanding_fables
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/understanding_fables')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11253,7 +11253,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11311,13 +11311,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## undo_permutation
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/undo_permutation')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11325,7 +11325,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11383,13 +11383,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## unit_conversion
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/unit_conversion')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11397,7 +11397,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11455,13 +11455,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## unit_interpretation
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/unit_interpretation')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11469,7 +11469,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11527,13 +11527,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## unnatural_in_context_learning
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/unnatural_in_context_learning')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11541,7 +11541,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11599,13 +11599,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## vitaminc_fact_verification
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/vitaminc_fact_verification')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11613,7 +11613,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11671,13 +11671,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## what_is_the_tao
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/what_is_the_tao')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11685,7 +11685,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11743,13 +11743,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## which_wiki_edit
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/which_wiki_edit')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11757,7 +11757,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11815,13 +11815,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## winowhy
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/winowhy')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11829,7 +11829,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11887,13 +11887,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## word_sorting
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/word_sorting')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11901,7 +11901,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -11959,13 +11959,13 @@ probe large language models, and extrapolate their future capabilities.
 
 ## word_unscrambling
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bigbench/word_unscrambling')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Beyond the Imitation Game Benchmark (BIG-bench) is a collaborative benchmark intended to
@@ -11973,7 +11973,7 @@ probe large language models, and extrapolate their future capabilities.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
