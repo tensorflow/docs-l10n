@@ -7,13 +7,13 @@
 
 ## light
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ambig_qa/light')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmbigNQ, a dataset covering 14,042 questions from NQ-open, an existing open-domain QA benchmark. We find that over half of the questions in NQ-open are ambiguous. The types of ambiguity are diverse and sometimes subtle, many of which are only apparent after examining evidence provided by a very large text corpus.  AMBIGNQ, a dataset with
@@ -22,7 +22,7 @@ We provide two distributions of our new dataset AmbigNQ: a full version with all
 ```
 
 - **许可**：CC BY-SA 3.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -93,13 +93,13 @@ We provide two distributions of our new dataset AmbigNQ: a full version with all
 
 ## full
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ambig_qa/full')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AmbigNQ, a dataset covering 14,042 questions from NQ-open, an existing open-domain QA benchmark. We find that over half of the questions in NQ-open are ambiguous. The types of ambiguity are diverse and sometimes subtle, many of which are only apparent after examining evidence provided by a very large text corpus.  AMBIGNQ, a dataset with
@@ -108,7 +108,7 @@ We provide two distributions of our new dataset AmbigNQ: a full version with all
 ```
 
 - **许可**：CC BY-SA 3.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
