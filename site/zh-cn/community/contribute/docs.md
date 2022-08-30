@@ -15,7 +15,7 @@ TensorFlow 欢迎文档贡献 - 如果您改进文档，等同于改进 TensorFl
 
 ## API 参考
 
-For details, use the [TensorFlow API docs contributor guide](docs_ref.md). This shows you how to find the [source file](https://www.tensorflow.org/code/tensorflow/python/) and edit the symbol's <a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a>. Many API reference pages on tensorflow.org include a link to the source file where the symbol is defined. Docstrings support <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown</a> and can be (approximately) previewed using any <a href="http://tmpvar.com/markdown.html" class="external">Markdown previewer</a>.
+有关详细信息，请使用 [TensorFlow API 文档贡献者指南](docs_ref.md)。这向您展示了如何找到[源文件](https://www.tensorflow.org/code/tensorflow/python/)并编辑符号的 <a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a>。tensorflow.org 上的许多 API 参考页面都包含指向定义符号的源文件的链接。Docstring 支持 <a href="https://www.python.org/dev/peps/pep-0257/" class="external">Markdown</a> 并且（绝大多数时候）都能使用任意 <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown 预览程序</a>进行浏览。
 
 ### 版本和分支
 
