@@ -7,20 +7,20 @@
 
 ## SelfRC
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:duorc/SelfRC')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 DuoRC contains 186,089 unique question-answer pairs created from a collection of 7680 pairs of movie plots where each pair in the collection reflects two versions of the same movie.
 ```
 
 - **许可**：https://raw.githubusercontent.com/duorc/duorc/master/LICENSE
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -78,20 +78,20 @@ DuoRC contains 186,089 unique question-answer pairs created from a collection of
 
 ## ParaphraseRC
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:duorc/ParaphraseRC')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 DuoRC contains 186,089 unique question-answer pairs created from a collection of 7680 pairs of movie plots where each pair in the collection reflects two versions of the same movie.
 ```
 
 - **许可**：https://raw.githubusercontent.com/duorc/duorc/master/LICENSE
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
