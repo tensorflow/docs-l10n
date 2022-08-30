@@ -7,13 +7,13 @@
 
 ## go
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_cloze_testing_maxmin/go')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE ClozeTesting-maxmin dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/ClozeTesting-maxmin
@@ -24,7 +24,7 @@ The only difference between ClozeTest-maxmin and ClozeTest-all is their selected
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -70,13 +70,13 @@ The only difference between ClozeTest-maxmin and ClozeTest-all is their selected
 
 ## java
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_cloze_testing_maxmin/java')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE ClozeTesting-maxmin dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/ClozeTesting-maxmin
@@ -87,7 +87,7 @@ The only difference between ClozeTest-maxmin and ClozeTest-all is their selected
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -133,13 +133,13 @@ The only difference between ClozeTest-maxmin and ClozeTest-all is their selected
 
 ## javascript
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_cloze_testing_maxmin/javascript')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE ClozeTesting-maxmin dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/ClozeTesting-maxmin
@@ -150,7 +150,7 @@ The only difference between ClozeTest-maxmin and ClozeTest-all is their selected
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -196,13 +196,13 @@ The only difference between ClozeTest-maxmin and ClozeTest-all is their selected
 
 ## php
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_cloze_testing_maxmin/php')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE ClozeTesting-maxmin dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/ClozeTesting-maxmin
@@ -213,7 +213,7 @@ The only difference between ClozeTest-maxmin and ClozeTest-all is their selected
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -259,13 +259,13 @@ The only difference between ClozeTest-maxmin and ClozeTest-all is their selected
 
 ## python
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_cloze_testing_maxmin/python')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE ClozeTesting-maxmin dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/ClozeTesting-maxmin
@@ -276,7 +276,7 @@ The only difference between ClozeTest-maxmin and ClozeTest-all is their selected
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -322,13 +322,13 @@ The only difference between ClozeTest-maxmin and ClozeTest-all is their selected
 
 ## ruby
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_cloze_testing_maxmin/ruby')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE ClozeTesting-maxmin dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/ClozeTesting-maxmin
@@ -339,7 +339,7 @@ The only difference between ClozeTest-maxmin and ClozeTest-all is their selected
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
