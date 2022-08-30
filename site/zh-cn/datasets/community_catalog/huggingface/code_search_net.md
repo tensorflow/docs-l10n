@@ -7,20 +7,20 @@
 
 ## all
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_search_net/all')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeSearchNet corpus contains about 6 million functions from open-source code spanning six programming languages (Go, Java, JavaScript, PHP, Python, and Ruby). The CodeSearchNet Corpus also contains automatically generated query-like natural language for 2 million functions, obtained from mechanically scraping and preprocessing associated function documentation.
 ```
 
 - **许可**：各种
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -103,20 +103,20 @@ CodeSearchNet corpus contains about 6 million functions from open-source code sp
 
 ## java
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_search_net/java')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeSearchNet corpus contains about 6 million functions from open-source code spanning six programming languages (Go, Java, JavaScript, PHP, Python, and Ruby). The CodeSearchNet Corpus also contains automatically generated query-like natural language for 2 million functions, obtained from mechanically scraping and preprocessing associated function documentation.
 ```
 
 - **许可**：各种
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -199,20 +199,20 @@ CodeSearchNet corpus contains about 6 million functions from open-source code sp
 
 ## go
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_search_net/go')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeSearchNet corpus contains about 6 million functions from open-source code spanning six programming languages (Go, Java, JavaScript, PHP, Python, and Ruby). The CodeSearchNet Corpus also contains automatically generated query-like natural language for 2 million functions, obtained from mechanically scraping and preprocessing associated function documentation.
 ```
 
 - **许可**：各种
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -295,20 +295,20 @@ CodeSearchNet corpus contains about 6 million functions from open-source code sp
 
 ## python
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_search_net/python')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeSearchNet corpus contains about 6 million functions from open-source code spanning six programming languages (Go, Java, JavaScript, PHP, Python, and Ruby). The CodeSearchNet Corpus also contains automatically generated query-like natural language for 2 million functions, obtained from mechanically scraping and preprocessing associated function documentation.
 ```
 
 - **许可**：各种
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -391,20 +391,20 @@ CodeSearchNet corpus contains about 6 million functions from open-source code sp
 
 ## javascript
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_search_net/javascript')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeSearchNet corpus contains about 6 million functions from open-source code spanning six programming languages (Go, Java, JavaScript, PHP, Python, and Ruby). The CodeSearchNet Corpus also contains automatically generated query-like natural language for 2 million functions, obtained from mechanically scraping and preprocessing associated function documentation.
 ```
 
 - **许可**：各种
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -487,20 +487,20 @@ CodeSearchNet corpus contains about 6 million functions from open-source code sp
 
 ## ruby
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_search_net/ruby')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeSearchNet corpus contains about 6 million functions from open-source code spanning six programming languages (Go, Java, JavaScript, PHP, Python, and Ruby). The CodeSearchNet Corpus also contains automatically generated query-like natural language for 2 million functions, obtained from mechanically scraping and preprocessing associated function documentation.
 ```
 
 - **许可**：各种
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -583,20 +583,20 @@ CodeSearchNet corpus contains about 6 million functions from open-source code sp
 
 ## php
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_search_net/php')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeSearchNet corpus contains about 6 million functions from open-source code spanning six programming languages (Go, Java, JavaScript, PHP, Python, and Ruby). The CodeSearchNet Corpus also contains automatically generated query-like natural language for 2 million functions, obtained from mechanically scraping and preprocessing associated function documentation.
 ```
 
 - **许可**：各种
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
