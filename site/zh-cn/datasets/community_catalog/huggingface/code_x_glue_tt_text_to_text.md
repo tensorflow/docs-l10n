@@ -7,13 +7,13 @@
 
 ## da_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_tt_text_to_text/da_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE text-to-text dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Text-Text/text-to-text
@@ -22,7 +22,7 @@ The dataset we use is crawled and filtered from Microsoft Documentation, whose d
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -55,13 +55,13 @@ The dataset we use is crawled and filtered from Microsoft Documentation, whose d
 
 ## lv_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_tt_text_to_text/lv_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE text-to-text dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Text-Text/text-to-text
@@ -70,7 +70,7 @@ The dataset we use is crawled and filtered from Microsoft Documentation, whose d
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -103,13 +103,13 @@ The dataset we use is crawled and filtered from Microsoft Documentation, whose d
 
 ## no_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_tt_text_to_text/no_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE text-to-text dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Text-Text/text-to-text
@@ -118,7 +118,7 @@ The dataset we use is crawled and filtered from Microsoft Documentation, whose d
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -151,13 +151,13 @@ The dataset we use is crawled and filtered from Microsoft Documentation, whose d
 
 ## zh_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_tt_text_to_text/zh_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE text-to-text dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Text-Text/text-to-text
@@ -166,7 +166,7 @@ The dataset we use is crawled and filtered from Microsoft Documentation, whose d
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
