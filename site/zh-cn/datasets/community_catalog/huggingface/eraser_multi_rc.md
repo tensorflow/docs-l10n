@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/eraser_multi_rc)
 - [Huggingface](https://huggingface.co/datasets/eraser_multi_rc)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:eraser_multi_rc')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Eraser Multi RC is a dataset for queries over multi-line passages, along with
