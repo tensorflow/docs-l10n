@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/hate_speech_pl)
 - [Huggingface](https://huggingface.co/datasets/hate_speech_pl)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hate_speech_pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 HateSpeech corpus in the current version contains over 2000 posts crawled from public Polish web. They represent various types and degrees of offensive language, expressed toward minorities (eg. ethnical, racial). The data were annotated manually.
 ```
 
 - **许可**：CC BY-NC-SA
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
