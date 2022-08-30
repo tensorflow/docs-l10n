@@ -7,13 +7,13 @@
 
 ## sentences_allagree
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:financial_phrasebank/sentences_allagree')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The key arguments for the low utilization of statistical techniques in
@@ -50,7 +50,7 @@ annotators agree.
 ```
 
 - **许可**：Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -82,13 +82,13 @@ annotators agree.
 
 ## sentences_75agree
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:financial_phrasebank/sentences_75agree')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The key arguments for the low utilization of statistical techniques in
@@ -125,7 +125,7 @@ annotators agree.
 ```
 
 - **许可**：Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -157,13 +157,13 @@ annotators agree.
 
 ## sentences_66agree
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:financial_phrasebank/sentences_66agree')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The key arguments for the low utilization of statistical techniques in
@@ -200,7 +200,7 @@ annotators agree.
 ```
 
 - **许可**：Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -232,13 +232,13 @@ annotators agree.
 
 ## sentences_50agree
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:financial_phrasebank/sentences_50agree')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The key arguments for the low utilization of statistical techniques in
@@ -275,7 +275,7 @@ annotators agree.
 ```
 
 - **许可**：Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
