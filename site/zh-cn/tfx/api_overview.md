@@ -30,6 +30,6 @@
 
 - [ML Metadata](https://www.tensorflow.org/tfx/tf_metadata/api_docs/python/tfmd/proto)
 
-## TFX Basic Shared Libraries (`tfx_bsl`)
+## TFX 基本共享库 (`tfx_bsl`)
 
 - [tfx_bsl](https://www.tensorflow.org/tfx/tfx_bsl/api_docs/python/tfx_bsl/public)
