@@ -1,6 +1,6 @@
 # 量子机器学习概念
 
-Google's <a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">quantum beyond-classical experiment</a> used 53 *noisy* qubits to demonstrate it could perform a calculation in 200 seconds on a quantum computer that would take 10,000 years on the largest classical computer using existing algorithms. This marks the beginning of the <a href="https://quantum-journal.org/papers/q-2018-08-06-79/" class="external">Noisy Intermediate-Scale Quantum</a> (NISQ) computing era. In the coming years, quantum devices with tens-to-hundreds of noisy qubits are expected to become a reality.
+Google 的<a href="https://ai.googleblog.com/2019/10/quantum-supremacy-using-programmable.html" class="external">量子超越传统实验</a>使用了 53 个*嘈杂*量子位，证明一台量子计算机只需 200 秒就可以完成采用现有算法的最大传统计算机需要大约 10,000 年才能完成的一项计算。这标志着<a href="https://quantum-journal.org/papers/q-2018-08-06-79/" class="external">嘈杂中型量子</a> (NISQ) 计算时代正式开启。在未来几年中，具有数十乃至数百个嘈杂量子位的量子设备有望成为现实。
 
 ## 量子计算
 
