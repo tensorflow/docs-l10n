@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/crd3)
 - [Huggingface](https://huggingface.co/datasets/crd3)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:crd3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Storytelling with Dialogue: A Critical Role Dungeons and Dragons Dataset.
@@ -23,7 +23,7 @@ and semantic ties to the previous dialogues.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
