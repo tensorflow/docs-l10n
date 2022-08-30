@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/harem)
 - [Huggingface](https://huggingface.co/datasets/harem)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:harem')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The HAREM is a Portuguese language corpus commonly used for Named Entity Recognition tasks. It includes about 93k words, from 129 different texts,
@@ -27,7 +27,7 @@ The dataset version processed here ONLY USE the "Category" level of the original
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -94,13 +94,13 @@ The dataset version processed here ONLY USE the "Category" level of the original
 
 ## selective
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:harem/selective')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The HAREM is a Portuguese language corpus commonly used for Named Entity Recognition tasks. It includes about 93k words, from 129 different texts,
@@ -116,7 +116,7 @@ The dataset version processed here ONLY USE the "Category" level of the original
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
