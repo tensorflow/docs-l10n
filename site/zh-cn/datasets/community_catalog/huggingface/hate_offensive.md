@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/hate_offensive)
 - [Huggingface](https://huggingface.co/datasets/hate_offensive)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hate_offensive')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset contains annotated tweets for automated hate-speech recognition
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
