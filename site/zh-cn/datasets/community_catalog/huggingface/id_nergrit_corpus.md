@@ -7,13 +7,13 @@
 
 ## ner
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:id_nergrit_corpus/ner')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Nergrit Corpus is a dataset collection for Indonesian Named Entity Recognition, Statement Extraction, and Sentiment
@@ -41,7 +41,7 @@ follow:
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -126,13 +126,13 @@ follow:
 
 ## sentiment
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:id_nergrit_corpus/sentiment')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Nergrit Corpus is a dataset collection for Indonesian Named Entity Recognition, Statement Extraction, and Sentiment
@@ -160,7 +160,7 @@ follow:
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -213,13 +213,13 @@ follow:
 
 ## statement
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:id_nergrit_corpus/statement')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Nergrit Corpus is a dataset collection for Indonesian Named Entity Recognition, Statement Extraction, and Sentiment
@@ -247,7 +247,7 @@ follow:
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
