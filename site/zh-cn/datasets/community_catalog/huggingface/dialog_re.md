@@ -7,13 +7,13 @@
 
 ## dialog_re
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:dialog_re/dialog_re')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 DialogRE is the first human-annotated dialogue based relation extraction (RE) dataset aiming
@@ -23,7 +23,7 @@ of arguments in the 1,788 dialogues originating from the complete transcripts of
 ```
 
 - **许可**：https://github.com/nlpdata/dialogre/blob/master/license.txt
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
