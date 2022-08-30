@@ -7,13 +7,13 @@
 
 ## raw
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:go_emotions/raw')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The GoEmotions dataset contains 58k carefully curated Reddit comments labeled for 27 emotion categories or Neutral.
@@ -23,7 +23,7 @@ optimism, pride, realization, relief, remorse, sadness, surprise.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -224,13 +224,13 @@ optimism, pride, realization, relief, remorse, sadness, surprise.
 
 ## simplified
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:go_emotions/simplified')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The GoEmotions dataset contains 58k carefully curated Reddit comments labeled for 27 emotion categories or Neutral.
@@ -240,7 +240,7 @@ optimism, pride, realization, relief, remorse, sadness, surprise.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
