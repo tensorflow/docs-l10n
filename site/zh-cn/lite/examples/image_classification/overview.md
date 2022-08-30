@@ -1,24 +1,22 @@
 # 图像分类
 
-
 <img src="../images/image.png" class="attempt-right">
 
 The task of identifying what an image represents is called *image classification*. An image classification model is trained to recognize various classes of images. For example, you may train a model to recognize photos representing three different types of animals: rabbits, hamsters, and dogs. TensorFlow Lite provides optimized pre-trained models that you can deploy in your mobile applications. Learn more about image classification using TensorFlow [here](https://www.tensorflow.org/tutorials/images/classification).
 
 The following image shows the output of the image classification model on Android.
 
-
-<img src="images/android_banana.png" alt="Screenshot of Android example" width="30%">
+<img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/lite/examples/image_classification/images/android_banana.png?raw=true" alt="Screenshot of Android example" class="">
 
 Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/image_classifier). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/image_classification).
 
 ## 开始
 
-If you are new to TensorFlow Lite and are working with Android or iOS, it is recommended you explore the following example applications that can help you get started.
+如果您是 TensorFlow Lite 新用户，并且使用的是 Android 或 iOS，我们建议您研究以下可以帮助您入门的示例应用。
 
 You can leverage the out-of-box API from [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/image_classifier) to integrate image classification models in just a few lines of code. You can also build your own custom inference pipeline using the [TensorFlow Lite Support Library](../../inference_with_metadata/lite_support).
 
-The Android example below demonstrates the implementation for both methods as [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_task_api) and [lib_support](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_support), respectively.
+下面的 Android 示例分别以 [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_task_api) 和 [lib_support](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_support) 形式演示了两个方法的实现。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android">View Android example</a>
 
@@ -47,15 +45,15 @@ When you subsequently provide a new image as input to the model, it will output 
   </thead>
   <tbody>
     <tr>
-      <td>Rabbit</td>
+      <td>兔子</td>
       <td>0.07</td>
     </tr>
     <tr>
-      <td>Hamster</td>
+      <td>仓鼠</td>
       <td>0.02</td>
     </tr>
     <tr>
-      <td style="background-color: #fcb66d;">Dog</td>
+      <td style="background-color: #fcb66d;">狗</td>
       <td style="background-color: #fcb66d;">0.91</td>
     </tr>
   </tbody>
@@ -63,15 +61,15 @@ When you subsequently provide a new image as input to the model, it will output 
 
 Each number in the output corresponds to a label in the training data. Associating the output with the three labels the model was trained on, you can see that the model has predicted a high probability that the image represents a dog.
 
-You might notice that the sum of all the probabilities (for rabbit, hamster, and dog) is equal to 1. This is a common type of output for models with multiple classes (see <a href="https://developers.google.com/machine-learning/crash-course/multi-class-neural-networks/softmax">Softmax</a> for more information).
+您可能注意到（兔子、仓鼠和狗的）概率的总和是 1。这是多类模型的常见输出。（请参阅 <a href="https://developers.google.com/machine-learning/crash-course/multi-class-neural-networks/softmax">Softmax</a> 了解更多信息）。
 
 Note: Image classification can only tell you the probability that an image represents one or more of the classes that the model was trained on. It cannot tell you the position or identity of objects within the image. If you need to identify objects and their positions within images, you should use an <a href="../object_detection/overview">object detection</a> model.
 
-<h4>Ambiguous results</h4>
+<h4>模棱两可的结果</h4>
 
 Since the output probabilities will always sum to 1, if an image is not confidently recognized as belonging to any of the classes the model was trained on you may see the probability distributed throughout the labels without any one value being significantly larger.
 
-For example, the following might indicate an ambiguous result:
+例如，下表可能表示一个模棱两可的结果：
 
 
 <table style="width: 40%;">   <thead>     <tr>       <th>Label</th>       <th>Probability</th>     </tr>   </thead>   <tbody>     <tr>       <td>rabbit</td>       <td>0.31</td>     </tr>     <tr>       <td>hamster</td>       <td>0.35</td>     </tr>     <tr>       <td>dog</td>       <td>0.34</td>     </tr>   </tbody> </table> If your model frequently returns ambiguous results, you may need a different, more accurate model.
@@ -88,7 +86,7 @@ The TensorFlow Lite image classification models are useful for single-label clas
 
 如果您想要训练模型来识别新类，请参阅<a href="#customize_model">自定义模型</a>。
 
-For the following use cases, you should use a different type of model:
+针对以下用例，您应该使用不同的模型：
 
 <ul>
   <li>Predicting the type and position of one or more objects within an image (see <a href="../object_detection/overview">Object detection</a>)</li>
@@ -97,7 +95,7 @@ For the following use cases, you should use a different type of model:
 
 Once you have the starter model running on your target device, you can experiment with different models to find the optimal balance between performance, accuracy, and model size.
 
-<h3>Customize model</h3>
+<h3>自定义模型</h3>
 
 The pre-trained models provided are trained to recognize 1000 classes of images. For a full list of classes, see the labels file in the <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">model zip</a>.
 
@@ -105,7 +103,7 @@ You can also use transfer learning to re-train a model to recognize classes not 
 
 Learn how to perform transfer learning with the <a href="https://www.tensorflow.org/lite/models/modify/model_maker/image_classification">TFLite Model Maker</a>, or in the <a href="https://codelabs.developers.google.com/codelabs/recognize-flowers-with-tensorflow-on-android/index.html#0">Recognize flowers with TensorFlow</a> codelab.
 
-<h2>Performance benchmarks</h2>
+<h2>性能基准</h2>
 
 Model performance is measured in terms of the amount of time it takes for a model to run inference on a given piece of hardware. The lower the time, the faster the model.
 
@@ -118,9 +116,9 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>模型名称</th>
       <th>模型大小</th>
-      <th>Device </th>
+      <th>设备</th>
       <th>NNAPI</th>
       <th>CPU</th>
     </tr>
@@ -130,25 +128,25 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a>
     </td>
     <td rowspan="3">       4.3 Mb     </td>
-    <td>Pixel 3 (Android 10) </td>
+    <td>Pixel 3 (Android 10)</td>
     <td>6ms</td>
     <td>13ms*</td>
   </tr>
    <tr>
-     <td>Pixel 4 (Android 10) </td>
+     <td>Pixel 4 (Android 10)</td>
     <td>3.3ms</td>
     <td>5ms*</td>
   </tr>
    <tr>
-     <td>iPhone XS (iOS 12.4.1) </td>
+     <td>iPhone XS (iOS 12.4.1)</td>
      <td></td>
-    <td>11ms** </td>
+    <td>11ms**</td>
   </tr>
 </table>
 
 使用 4 个线程。
 
-** 2 threads used on iPhone for the best performance result.
+** 为了获得最佳性能结果，在 iPhone 上使用 2 个线程。
 
 ### 模型准确率
 
