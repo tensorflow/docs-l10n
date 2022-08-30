@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/gnad10)
 - [Huggingface](https://huggingface.co/datasets/gnad10)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gnad10')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset is intended to advance topic classification for German texts. A classifier that is efffective in
@@ -23,7 +23,7 @@ for German topic classification.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
