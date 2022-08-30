@@ -1,6 +1,6 @@
 # Android 快速入门
 
-This tutorial shows you how to build an Android app using TensorFlow Lite to analyze a live camera feed and identify objects using a machine learning model, using a minimal amount of code. If you are updating an existing project you can use the example app as a reference and skip ahead to the instructions for [modifying your project](#add_dependencies).
+本教程将向您展示如何使用 TensorFlow Lite 构建 Android 应用，以使用最少的代码来分析实时摄像头画面并使用机器学习模型识别目标。如果您正在更新现有项目，则可以使用示例应用作为参考，并跳到[修改项目](#add_dependencies)的说明。
 
 ## 基于机器学习的目标检测
 
@@ -8,7 +8,7 @@ This tutorial shows you how to build an Android app using TensorFlow Lite to ana
 
 ## 设置并运行示例
 
-For the first part of this tutorial, download the example app from GitHub and run it using [Android Studio](https://developer.android.com/studio/). The following sections of this tutorial explore the relevant sections of the code example, so you can apply them to your own Android apps. You need the following versions of these tools installed:
+在本教程的第一部分中，从 GitHub 下载示例应用并使用 [Android Studio](https://developer.android.com/studio/) 运行。本教程的以下部分将探索代码示例的相关部分，以便您可以将它们应用于您自己的 Android 应用。您需要安装以下版本的下列工具：
 
 - Android Studio 4.2.2 或更高版本
 - Android SDK 31 或更高版本
@@ -17,7 +17,7 @@ For the first part of this tutorial, download the example app from GitHub and ru
 
 ### 获取示例代码
 
-Create a local copy of the example code. You will use this code to create a project in Android Studio and run the example application.
+创建一个示例代码的本地副本。您将使用此代码在 Android Studio 中创建一个项目并运行示例应用。
 
 要克隆和设置示例代码，请执行以下操作：
 
