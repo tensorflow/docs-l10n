@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/boolq)
 - [Huggingface](https://huggingface.co/datasets/boolq)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:boolq')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BoolQ is a question answering dataset for yes/no questions containing 15942 examples. These questions are naturally
