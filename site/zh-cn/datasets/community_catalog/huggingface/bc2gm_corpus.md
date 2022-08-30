@@ -7,13 +7,13 @@
 
 ## bc2gm_corpus
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bc2gm_corpus/bc2gm_corpus')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Nineteen teams presented results for the Gene Mention Task at the BioCreative II Workshop.
@@ -30,7 +30,7 @@ This dataset has been converted to CoNLL format for NER using the following tool
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
