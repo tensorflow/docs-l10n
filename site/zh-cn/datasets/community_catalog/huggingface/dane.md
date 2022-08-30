@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/dane)
 - [Huggingface](https://huggingface.co/datasets/dane)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:dane')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The DaNE dataset has been annotated with Named Entities for PER, ORG and LOC
@@ -24,7 +24,7 @@ from Parole (Britt, 1998).
 ```
 
 - **许可**：CC BY-SA 4.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
