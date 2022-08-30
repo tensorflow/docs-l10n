@@ -1,6 +1,6 @@
 # TensorFlow 传递
 
-[TOC]
+[目录]
 
 ## TF dialect 传递
 
