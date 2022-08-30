@@ -7,13 +7,13 @@
 
 ## conllpp
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conllpp/conllpp')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoNLLpp is a corrected version of the CoNLL2003 NER dataset where labels of 5.38% of the sentences in the test set
@@ -22,7 +22,7 @@ For more details see https://www.aclweb.org/anthology/D19-1519/ and https://gith
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
