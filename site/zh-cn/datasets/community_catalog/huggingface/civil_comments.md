@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/civil_comments)
 - [Huggingface](https://huggingface.co/datasets/civil_comments)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:civil_comments')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The comments in this dataset come from an archive of the Civil Comments
