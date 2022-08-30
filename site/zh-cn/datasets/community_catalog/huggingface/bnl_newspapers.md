@@ -7,13 +7,13 @@
 
 ## processed
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bnl_newspapers/processed')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Digitised historic newspapers from the Bibliothèque nationale (BnL) - the National Library of Luxembourg.
