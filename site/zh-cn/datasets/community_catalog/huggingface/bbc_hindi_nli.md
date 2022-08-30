@@ -7,13 +7,13 @@
 
 ## bbc hindi nli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bbc_hindi_nli/bbc hindi nli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset is used to train models for Natural Language Inference Tasks in Low-Resource Languages like Hindi.
@@ -21,7 +21,7 @@ This dataset is used to train models for Natural Language Inference Tasks in Low
 
 - **许可**：MIT 许可
 
-- **Version**: 1.1.0
+- **版本**：1.0.0
 
 - **拆分**：
 
