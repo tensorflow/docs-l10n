@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/banking77)
 - [Huggingface](https://huggingface.co/datasets/banking77)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:banking77')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BANKING77 dataset provides a very fine-grained set of intents in a banking domain.
@@ -20,7 +20,7 @@ It focuses on fine-grained single-domain intent detection.
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
