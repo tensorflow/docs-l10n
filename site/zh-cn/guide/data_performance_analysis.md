@@ -4,7 +4,7 @@
 
 本文假定用户熟悉 TensorFlow [Profiler](https://tensorflow.google.cn/guide/profiler) 和 [`tf.data`](https://www.tensorflow.org/guide/data)，旨在提供包含示例的分步说明来帮助用户诊断和修复输入流水线性能问题。
 
-首先，请收集您的 TensorFlow 作业的分析。有关如何执行此操作的说明适用于 [CPU/GPU](https://tensorflow.google.cn/guide/profiler#collect_performance_data) 和 [Cloud TPU](https://cloud.google.com/tpu/docs/cloud-tpu-tools#capture_profile)。
+首先，请收集您的 TensorFlow 作业的性能剖析文件。有关如何执行此操作的说明适用于 [CPU/GPU](https://tensorflow.google.cn/guide/profiler#collect_performance_data) 和 [Cloud TPU](https://cloud.google.com/tpu/docs/cloud-tpu-tools#capture_profile)。
 
 ![TensorFlow Trace Viewer](images/data_performance_analysis/trace_viewer.png "The trace viewer page of the TensorFlow Profiler")
 
@@ -184,6 +184,6 @@ dataset = dataset.prefetch(tf.data.AUTOTUNE)
 ## 其他资源
 
 - 关于如何编写高性能 `tf.data` 输入流水线的 [tf.data 性能指南](https://tensorflow.google.cn/guide/data_performance)
-- [TensorFlow 内部视频：`tf.data` 最佳做法](https://www.youtube.com/watch?v=ZnukSLKEw34)
+- [Inside TensorFlow video: `tf.data` best practices ](https://www.youtube.com/watch?v=ZnukSLKEw34)
 - [Profiler 指南](https://tensorflow.google.cn/guide/profiler)
 - [Colab 中的 Profiler 教程](https://tensorflow.google.cn/tensorboard/tensorboard_profiling_keras)
