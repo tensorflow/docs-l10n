@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/eli5_category)
 - [Huggingface](https://huggingface.co/datasets/eli5_category)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:eli5_category')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The ELI5-Category dataset is a smaller but newer and categorized version of the original ELI5 dataset. After 2017, a tagging system was introduced to this subreddit so that the questions can be categorized into different topics according to their tags. Since the training and validation set is built by questions in different topics, the dataset is expected to alleviate the train/validation overlapping issue in the original ELI5 dataset.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
