@@ -21,5 +21,13 @@
 您也可以从源代码安装。这需要 [Bazel](https://bazel.build/) 构建系统。
 
 ```shell
-# To install dependencies on Ubuntu: # sudo apt-get install bazel git python-pip # For other platforms, see Bazel docs above. git clone https://github.com/tensorflow/model-optimization.git cd model_optimization bazel build --copt=-O3 --copt=-march=native :pip_pkg PKGDIR=$(mktemp -d) ./bazel-bin/pip_pkg $PKGDIR pip install --user --upgrade $PKGDIR/*.whl
+# To install dependencies on Ubuntu:
+# sudo apt-get install bazel git python-pip
+# For other platforms, see Bazel docs above.
+git clone https://github.com/tensorflow/model-optimization.git
+cd model-optimization
+bazel build --copt=-O3 --copt=-march=native :pip_pkg
+PKGDIR=$(mktemp -d)
+./bazel-bin/pip_pkg $PKGDIR
+pip install --user --upgrade $PKGDIR/*.whl
 ```
