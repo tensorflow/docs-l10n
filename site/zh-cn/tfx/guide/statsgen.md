@@ -14,11 +14,7 @@ StatisticsGen 广泛使用 [TensorFlow Data Validation](tfdv.md) 来根据您的
 StatisticsGen 流水线组件通常非常易于部署，而且几乎不需要自定义。典型代码如下所示：
 
 ```python
-from tfx import components
-
-...
-
-compute_eval_stats = components.StatisticsGen(
+compute_eval_stats = StatisticsGen(
       examples=example_gen.outputs['examples'],
       name='compute-eval-stats'
       )
@@ -31,17 +27,11 @@ compute_eval_stats = components.StatisticsGen(
 在此设置中，您将使用由 ImporterNode 导入的精选架构调用 StatisticsGen，代码如下所示：
 
 ```python
-from tfx import components
-from tfx.types import standard_artifacts
-
-...
-
-user_schema_importer = components.ImporterNode(
-    instance_name='import_user_schema',
+user_schema_importer = Importer(
     source_uri=user_schema_dir, # directory containing only schema text proto
-    artifact_type=standard_artifacts.Schema)
+    artifact_type=standard_artifacts.Schema).with_id('schema_importer')
 
-compute_eval_stats = components.StatisticsGen(
+compute_eval_stats = StatisticsGen(
       examples=example_gen.outputs['examples'],
       schema=user_schema_importer.outputs['result'],
       name='compute-eval-stats'
@@ -50,10 +40,12 @@ compute_eval_stats = components.StatisticsGen(
 
 ### 创建精选架构
 
-TFX 中的 `Schema` 是 TensorFlow Metadata <a href="https://github.com/tensorflow/metadata/blob/master/tensorflow_metadata/proto/v0/schema.proto" data-md-type="link">`Schema` proto</a> 的一个实例。这可以从头开始以[文本格式](https://googleapis.dev/python/protobuf/latest/google/protobuf/text_format.html)创作。但是，将 `SchemaGen` 生成的推断架构用作起点要容易得多。执行 `SchemaGen` 组件后，架构将位于以下路径的流水线根目录下：
+TFX 中的 `Schema` 是 TensorFlow Metadata <a data-md-type="raw_html" href="https://github.com/tensorflow/metadata/blob/master/tensorflow_metadata/proto/v0/schema.proto">`Schema` proto</a> 的一个实例。这可以从头开始以[文本格式](https://googleapis.dev/python/protobuf/latest/google/protobuf/text_format.html)创作。但是，将 `SchemaGen` 生成的推断架构用作起点要容易得多。执行 `SchemaGen` 组件后，架构将位于以下路径的流水线根目录下：
 
 ```
 <pipeline_root>/SchemaGen/schema/<artifact_id>/schema.pbtxt
 ```
 
 其中，`<artifact_id>` 表示 MLMD 中此版本架构的唯一 ID。随后，可以修改此架构 proto 以传达有关无法可靠推断的数据集的信息，这样，`StatisticsGen` 的输出便会更加有用，而且 [`ExampleValidator`](https://www.tensorflow.org/tfx/guide/exampleval) 组件中执行的验证也会更加严格。
+
+有关更多详细信息，请参阅 [StatisticsGen API 参考](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/StatisticsGen)。
