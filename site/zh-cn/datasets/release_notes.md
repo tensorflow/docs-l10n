@@ -7,7 +7,7 @@
 - 更好的分片、打乱顺序和子拆分
 - 现在可以将任意元数据添加到 `tfds.core.DatasetInfo` <br> 中，它将随数据集进行存储/恢复。请参见 `tfds.core.Metadata`。
 - 更好的代理支持，支持添加证书
-- 添加 `decoders` 关键字参数以重写默认特征解码（[指南](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)）。
+- 添加 `decoders` 关键字参数以重写默认特征解码（[指南](https://github.com/tensorflow/datasets/blob/master/docs/decode.md)）。
 - 从 [MimickNet 论文](https://arxiv.org/abs/1908.05782)添加 `duke_ultrasound` 超声体模和活体肝脏图像数据集
 - 从 [VTAB 基准](https://arxiv.org/abs/1910.04867)添加 Dmlab 数据集。
 - 从 [e-SNLI](http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-natural-language-explanations.pdf) 论文添加 e-SNLI 数据集。
