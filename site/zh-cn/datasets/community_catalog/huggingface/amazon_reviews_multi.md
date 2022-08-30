@@ -7,13 +7,13 @@
 
 ## all_languages
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:amazon_reviews_multi/all_languages')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 We provide an Amazon product reviews dataset for multilingual text classification. The dataset contains reviews in English, Japanese, German, French, Chinese and Spanish, collected between November 1, 2015 and November 1, 2019. Each record in the dataset contains the review text, the review title, the star rating, an anonymized reviewer ID, an anonymized product ID and the coarse-grained product category (e.g. ‘books’, ‘appliances’, etc.) The corpus is balanced across stars, so each star rating constitutes 20% of the reviews in each language.
@@ -27,7 +27,7 @@ Note that the language of a review does not necessarily match the language of it
 
 除了根据《使用条件》授予的许可权利外，Amazon 或其内容提供商还授予您有限、非排他性、不可转让、不可再许可、可撤销的许可，允许您出于学术研究目的访问和使用评论语料库。您不得转售、重新发布或者将评论语料库或其内容用于任何商业用途，包括将评论语料库用于商业研究，例如与资助或咨询合同、实习或者有偿提供或交付给营利性组织的其他关系相关的研究。您不得 (a) 将评论语料库中的内容与任何个人信息（包括 Amazon 客户账户）链接或关联，或 (b) 尝试确定评论语料库中任何内容的作者的身份。如果您违反上述任何条件，您访问和使用评论语料库的许可将自动终止，但不影响 Amazon 可能拥有的任何其他权利或补救措施。
 
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -85,13 +85,13 @@ Note that the language of a review does not necessarily match the language of it
 
 ## de
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:amazon_reviews_multi/de')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 We provide an Amazon product reviews dataset for multilingual text classification. The dataset contains reviews in English, Japanese, German, French, Chinese and Spanish, collected between November 1, 2015 and November 1, 2019. Each record in the dataset contains the review text, the review title, the star rating, an anonymized reviewer ID, an anonymized product ID and the coarse-grained product category (e.g. ‘books’, ‘appliances’, etc.) The corpus is balanced across stars, so each star rating constitutes 20% of the reviews in each language.
@@ -105,7 +105,7 @@ Note that the language of a review does not necessarily match the language of it
 
 除了根据《使用条件》授予的许可权利外，Amazon 或其内容提供商还授予您有限、非排他性、不可转让、不可再许可、可撤销的许可，允许您出于学术研究目的访问和使用评论语料库。您不得转售、重新发布或者将评论语料库或其内容用于任何商业用途，包括将评论语料库用于商业研究，例如与资助或咨询合同、实习或者有偿提供或交付给营利性组织的其他关系相关的研究。您不得 (a) 将评论语料库中的内容与任何个人信息（包括 Amazon 客户账户）链接或关联，或 (b) 尝试确定评论语料库中任何内容的作者的身份。如果您违反上述任何条件，您访问和使用评论语料库的许可将自动终止，但不影响 Amazon 可能拥有的任何其他权利或补救措施。
 
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -163,13 +163,13 @@ Note that the language of a review does not necessarily match the language of it
 
 ## en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:amazon_reviews_multi/en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 We provide an Amazon product reviews dataset for multilingual text classification. The dataset contains reviews in English, Japanese, German, French, Chinese and Spanish, collected between November 1, 2015 and November 1, 2019. Each record in the dataset contains the review text, the review title, the star rating, an anonymized reviewer ID, an anonymized product ID and the coarse-grained product category (e.g. ‘books’, ‘appliances’, etc.) The corpus is balanced across stars, so each star rating constitutes 20% of the reviews in each language.
@@ -183,7 +183,7 @@ Note that the language of a review does not necessarily match the language of it
 
 除了根据《使用条件》授予的许可权利外，Amazon 或其内容提供商还授予您有限、非排他性、不可转让、不可再许可、可撤销的许可，允许您出于学术研究目的访问和使用评论语料库。您不得转售、重新发布或者将评论语料库或其内容用于任何商业用途，包括将评论语料库用于商业研究，例如与资助或咨询合同、实习或者有偿提供或交付给营利性组织的其他关系相关的研究。您不得 (a) 将评论语料库中的内容与任何个人信息（包括 Amazon 客户账户）链接或关联，或 (b) 尝试确定评论语料库中任何内容的作者的身份。如果您违反上述任何条件，您访问和使用评论语料库的许可将自动终止，但不影响 Amazon 可能拥有的任何其他权利或补救措施。
 
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -241,13 +241,13 @@ Note that the language of a review does not necessarily match the language of it
 
 ## es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:amazon_reviews_multi/es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 We provide an Amazon product reviews dataset for multilingual text classification. The dataset contains reviews in English, Japanese, German, French, Chinese and Spanish, collected between November 1, 2015 and November 1, 2019. Each record in the dataset contains the review text, the review title, the star rating, an anonymized reviewer ID, an anonymized product ID and the coarse-grained product category (e.g. ‘books’, ‘appliances’, etc.) The corpus is balanced across stars, so each star rating constitutes 20% of the reviews in each language.
@@ -261,7 +261,7 @@ Note that the language of a review does not necessarily match the language of it
 
 除了根据《使用条件》授予的许可权利外，Amazon 或其内容提供商还授予您有限、非排他性、不可转让、不可再许可、可撤销的许可，允许您出于学术研究目的访问和使用评论语料库。您不得转售、重新发布或者将评论语料库或其内容用于任何商业用途，包括将评论语料库用于商业研究，例如与资助或咨询合同、实习或者有偿提供或交付给营利性组织的其他关系相关的研究。您不得 (a) 将评论语料库中的内容与任何个人信息（包括 Amazon 客户账户）链接或关联，或 (b) 尝试确定评论语料库中任何内容的作者的身份。如果您违反上述任何条件，您访问和使用评论语料库的许可将自动终止，但不影响 Amazon 可能拥有的任何其他权利或补救措施。
 
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -319,13 +319,13 @@ Note that the language of a review does not necessarily match the language of it
 
 ## fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:amazon_reviews_multi/fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 We provide an Amazon product reviews dataset for multilingual text classification. The dataset contains reviews in English, Japanese, German, French, Chinese and Spanish, collected between November 1, 2015 and November 1, 2019. Each record in the dataset contains the review text, the review title, the star rating, an anonymized reviewer ID, an anonymized product ID and the coarse-grained product category (e.g. ‘books’, ‘appliances’, etc.) The corpus is balanced across stars, so each star rating constitutes 20% of the reviews in each language.
@@ -339,7 +339,7 @@ Note that the language of a review does not necessarily match the language of it
 
 除了根据《使用条件》授予的许可权利外，Amazon 或其内容提供商还授予您有限、非排他性、不可转让、不可再许可、可撤销的许可，允许您出于学术研究目的访问和使用评论语料库。您不得转售、重新发布或者将评论语料库或其内容用于任何商业用途，包括将评论语料库用于商业研究，例如与资助或咨询合同、实习或者有偿提供或交付给营利性组织的其他关系相关的研究。您不得 (a) 将评论语料库中的内容与任何个人信息（包括 Amazon 客户账户）链接或关联，或 (b) 尝试确定评论语料库中任何内容的作者的身份。如果您违反上述任何条件，您访问和使用评论语料库的许可将自动终止，但不影响 Amazon 可能拥有的任何其他权利或补救措施。
 
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -397,13 +397,13 @@ Note that the language of a review does not necessarily match the language of it
 
 ## ja
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:amazon_reviews_multi/ja')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 We provide an Amazon product reviews dataset for multilingual text classification. The dataset contains reviews in English, Japanese, German, French, Chinese and Spanish, collected between November 1, 2015 and November 1, 2019. Each record in the dataset contains the review text, the review title, the star rating, an anonymized reviewer ID, an anonymized product ID and the coarse-grained product category (e.g. ‘books’, ‘appliances’, etc.) The corpus is balanced across stars, so each star rating constitutes 20% of the reviews in each language.
@@ -417,7 +417,7 @@ Note that the language of a review does not necessarily match the language of it
 
 除了根据《使用条件》授予的许可权利外，Amazon 或其内容提供商还授予您有限、非排他性、不可转让、不可再许可、可撤销的许可，允许您出于学术研究目的访问和使用评论语料库。您不得转售、重新发布或者将评论语料库或其内容用于任何商业用途，包括将评论语料库用于商业研究，例如与资助或咨询合同、实习或者有偿提供或交付给营利性组织的其他关系相关的研究。您不得 (a) 将评论语料库中的内容与任何个人信息（包括 Amazon 客户账户）链接或关联，或 (b) 尝试确定评论语料库中任何内容的作者的身份。如果您违反上述任何条件，您访问和使用评论语料库的许可将自动终止，但不影响 Amazon 可能拥有的任何其他权利或补救措施。
 
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -475,13 +475,13 @@ Note that the language of a review does not necessarily match the language of it
 
 ## zh
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:amazon_reviews_multi/zh')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 We provide an Amazon product reviews dataset for multilingual text classification. The dataset contains reviews in English, Japanese, German, French, Chinese and Spanish, collected between November 1, 2015 and November 1, 2019. Each record in the dataset contains the review text, the review title, the star rating, an anonymized reviewer ID, an anonymized product ID and the coarse-grained product category (e.g. ‘books’, ‘appliances’, etc.) The corpus is balanced across stars, so each star rating constitutes 20% of the reviews in each language.
@@ -495,7 +495,7 @@ Note that the language of a review does not necessarily match the language of it
 
 除了根据《使用条件》授予的许可权利外，Amazon 或其内容提供商还授予您有限、非排他性、不可转让、不可再许可、可撤销的许可，允许您出于学术研究目的访问和使用评论语料库。您不得转售、重新发布或者将评论语料库或其内容用于任何商业用途，包括将评论语料库用于商业研究，例如与资助或咨询合同、实习或者有偿提供或交付给营利性组织的其他关系相关的研究。您不得 (a) 将评论语料库中的内容与任何个人信息（包括 Amazon 客户账户）链接或关联，或 (b) 尝试确定评论语料库中任何内容的作者的身份。如果您违反上述任何条件，您访问和使用评论语料库的许可将自动终止，但不影响 Amazon 可能拥有的任何其他权利或补救措施。
 
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
