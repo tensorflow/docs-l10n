@@ -7,13 +7,13 @@
 
 ## microphone-single
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ami/microphone-single')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The AMI Meeting Corpus consists of 100 hours of meeting recordings. The recordings use a range of signals
@@ -157,13 +157,13 @@ Far field audio of single microphone. This configuration only includes audio bel
 
 ## microphone-multi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ami/microphone-multi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The AMI Meeting Corpus consists of 100 hours of meeting recordings. The recordings use a range of signals
@@ -335,13 +335,13 @@ Far field audio of microphone array. This configuration includes audio of the fi
 
 ## headset-single
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ami/headset-single')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The AMI Meeting Corpus consists of 100 hours of meeting recordings. The recordings use a range of signals
@@ -485,13 +485,13 @@ Close talking audio of single headset. This configuration only includes audio be
 
 ## headset-multi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ami/headset-multi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The AMI Meeting Corpus consists of 100 hours of meeting recordings. The recordings use a range of signals
