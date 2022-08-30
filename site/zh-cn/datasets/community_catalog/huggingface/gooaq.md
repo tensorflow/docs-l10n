@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/gooaq)
 - [Huggingface](https://huggingface.co/datasets/gooaq)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gooaq')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GooAQ is a large-scale dataset with a variety of answer types. This dataset contains over
