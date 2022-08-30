@@ -7,13 +7,13 @@
 
 ## abstractive
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:aquamuse/abstractive')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AQuaMuSe is a novel scalable approach to automatically mine dual query based multi-document summarization datasets for extractive and abstractive summaries using question answering dataset (Google Natural Questions) and large document corpora (Common Crawl)
@@ -58,13 +58,13 @@ AQuaMuSe is a novel scalable approach to automatically mine dual query based mul
 
 ## extractive
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:aquamuse/extractive')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AQuaMuSe is a novel scalable approach to automatically mine dual query based multi-document summarization datasets for extractive and abstractive summaries using question answering dataset (Google Natural Questions) and large document corpora (Common Crawl)
