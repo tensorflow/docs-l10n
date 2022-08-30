@@ -7,13 +7,13 @@
 
 ## metadata
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cord19/metadata')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Covid-19 Open Research Dataset (CORD-19) is a growing resource of scientific papers on Covid-19 and related
@@ -26,7 +26,7 @@ questions to be solved with the dataset: https://www.kaggle.com/allen-institute-
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -92,13 +92,13 @@ questions to be solved with the dataset: https://www.kaggle.com/allen-institute-
 
 ## fulltext
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cord19/fulltext')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Covid-19 Open Research Dataset (CORD-19) is a growing resource of scientific papers on Covid-19 and related
@@ -111,7 +111,7 @@ questions to be solved with the dataset: https://www.kaggle.com/allen-institute-
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -182,13 +182,13 @@ questions to be solved with the dataset: https://www.kaggle.com/allen-institute-
 
 ## embeddings
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cord19/embeddings')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Covid-19 Open Research Dataset (CORD-19) is a growing resource of scientific papers on Covid-19 and related
@@ -201,7 +201,7 @@ questions to be solved with the dataset: https://www.kaggle.com/allen-institute-
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
