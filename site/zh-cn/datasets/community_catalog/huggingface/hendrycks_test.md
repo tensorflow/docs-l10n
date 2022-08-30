@@ -7,20 +7,20 @@
 
 ## abstract_algebra
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/abstract_algebra')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -66,20 +66,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## anatomy
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/anatomy')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -125,20 +125,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## astronomy
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/astronomy')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -184,20 +184,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## business_ethics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/business_ethics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -243,20 +243,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## clinical_knowledge
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/clinical_knowledge')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -302,20 +302,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## college_biology
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/college_biology')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -361,20 +361,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## college_chemistry
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/college_chemistry')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -420,20 +420,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## college_computer_science
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/college_computer_science')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -479,20 +479,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## college_mathematics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/college_mathematics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -538,20 +538,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## college_medicine
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/college_medicine')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -597,20 +597,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## college_physics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/college_physics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -656,20 +656,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## computer_security
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/computer_security')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -715,20 +715,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## conceptual_physics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/conceptual_physics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -774,20 +774,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## econometrics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/econometrics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -833,20 +833,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## electrical_engineering
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/electrical_engineering')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -892,20 +892,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## elementary_mathematics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/elementary_mathematics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -951,20 +951,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## formal_logic
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/formal_logic')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1010,20 +1010,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## global_facts
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/global_facts')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1069,20 +1069,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_biology
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_biology')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1128,20 +1128,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_chemistry
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_chemistry')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1187,20 +1187,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_computer_science
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_computer_science')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1246,20 +1246,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_european_history
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_european_history')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1305,20 +1305,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_geography
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_geography')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1364,20 +1364,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_government_and_politics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_government_and_politics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1423,20 +1423,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_macroeconomics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_macroeconomics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1482,20 +1482,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_mathematics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_mathematics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1541,20 +1541,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_microeconomics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_microeconomics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1600,20 +1600,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_physics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_physics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1659,20 +1659,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_psychology
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_psychology')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1718,20 +1718,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_statistics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_statistics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1777,20 +1777,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_us_history
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_us_history')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1836,20 +1836,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## high_school_world_history
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/high_school_world_history')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1895,20 +1895,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## human_aging
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/human_aging')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1954,20 +1954,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## human_sexuality
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/human_sexuality')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2013,20 +2013,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## international_law
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/international_law')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2072,20 +2072,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## jurisprudence
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/jurisprudence')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2131,20 +2131,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## logical_fallacies
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/logical_fallacies')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2190,20 +2190,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## machine_learning
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/machine_learning')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2249,20 +2249,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## management
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/management')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2308,20 +2308,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## marketing
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/marketing')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2367,20 +2367,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## medical_genetics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/medical_genetics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2426,20 +2426,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## miscellaneous
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/miscellaneous')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2485,20 +2485,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## moral_disputes
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/moral_disputes')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2544,20 +2544,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## moral_scenarios
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/moral_scenarios')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2603,20 +2603,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## nutrition
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/nutrition')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2662,20 +2662,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## philosophy
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/philosophy')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2721,20 +2721,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## prehistory
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/prehistory')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2780,20 +2780,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## professional_accounting
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/professional_accounting')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2839,20 +2839,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## professional_law
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/professional_law')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2898,20 +2898,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## professional_medicine
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/professional_medicine')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2957,20 +2957,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## professional_psychology
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/professional_psychology')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3016,20 +3016,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## public_relations
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/public_relations')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3075,20 +3075,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## security_studies
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/security_studies')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3134,20 +3134,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## sociology
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/sociology')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3193,20 +3193,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## us_foreign_policy
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/us_foreign_policy')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3252,20 +3252,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## virology
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/virology')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -3311,20 +3311,20 @@ This is a massive multitask test consisting of multiple-choice questions from va
 
 ## world_religions
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hendrycks_test/world_religions')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a massive multitask test consisting of multiple-choice questions from various branches of knowledge, covering 57 tasks including elementary mathematics, US history, computer science, law, and more.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
