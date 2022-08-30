@@ -7,13 +7,13 @@
 
 ## main
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gsm8k/main')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GSM8K (Grade School Math 8K) is a dataset of 8.5K high quality
@@ -23,7 +23,7 @@ on basic mathematical problems that require multi-step reasoning.
 ```
 
 - **许可**：MIT
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -50,13 +50,13 @@ on basic mathematical problems that require multi-step reasoning.
 
 ## socratic
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gsm8k/socratic')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GSM8K (Grade School Math 8K) is a dataset of 8.5K high quality
@@ -66,7 +66,7 @@ on basic mathematical problems that require multi-step reasoning.
 ```
 
 - **许可**：MIT
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
