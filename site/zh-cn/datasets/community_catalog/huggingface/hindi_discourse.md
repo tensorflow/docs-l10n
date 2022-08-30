@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/hindi_discourse)
 - [Huggingface](https://huggingface.co/datasets/hindi_discourse)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hindi_discourse')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Hindi Discourse Analysis dataset is a corpus for analyzing discourse modes present in its sentences.
@@ -22,7 +22,7 @@ but some of them were written in other Indian languages and later translated to 
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
