@@ -7,13 +7,13 @@
 
 ## en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covid_qa_ucsd/en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 COVID-Dialogue-Dataset is amedical dialogue dataset about COVID-19 and other types of pneumonia.
@@ -22,7 +22,7 @@ There are 603 consultations in English and 1393 consultations in Chinese.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -70,13 +70,13 @@ There are 603 consultations in English and 1393 consultations in Chinese.
 
 ## zh
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covid_qa_ucsd/zh')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 COVID-Dialogue-Dataset is amedical dialogue dataset about COVID-19 and other types of pneumonia.
@@ -85,7 +85,7 @@ There are 603 consultations in English and 1393 consultations in Chinese.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
