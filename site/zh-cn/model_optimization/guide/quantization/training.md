@@ -68,9 +68,9 @@ to launch. -->
 <figure>
   <table>
     <tr>
-      <th>模型</th>
-      <th>非量化的 Top-1 准确率</th>
-      <th>8 位量化准确率</th>
+      <th>Model</th>
+      <th>Non-quantized Top-1 Accuracy </th>
+      <th>8-bit Quantized Accuracy </th>
     </tr>
     <tr>
       <td>MobilenetV1 224</td>
@@ -97,11 +97,10 @@ to launch. -->
 <figure>
   <table>
     <tr>
-      <th>模型</th>
-      <th>非量化的 Top-1 准确率</th>
-      <th>8 位量化准确率</th>
-    </tr>
-<tr>
+      <th>Model</th>
+      <th>Non-quantized Top-1 Accuracy </th>
+      <th>8-Bit Quantized Accuracy </th>
+    <tr>
       <td>Nasnet-Mobile</td>
       <td>74%</td>
       <td>73%</td>
