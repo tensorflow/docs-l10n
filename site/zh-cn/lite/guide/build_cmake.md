@@ -16,13 +16,13 @@ sudo apt-get install cmake
 
 或者您也可以按照 [CMake 官方安装指南](https://cmake.org/install/)进行操作。
 
-### Step 2. Clone TensorFlow repository
+### 步骤 2. 克隆 TensorFlow 仓库
 
 ```sh
 git clone https://github.com/tensorflow/tensorflow.git tensorflow_src
 ```
 
-**Note:** If you're using the TensorFlow Docker image, the repo is already provided in `/tensorflow_src/`.
+**注**：如果您使用的是 TensorFlow Docker 镜像，则 `/tensorflow_src/` 中已经提供了该仓库。
 
 ### 第 3 步：创建 CMake 构建目录
 
@@ -228,7 +228,7 @@ cmake --build . -j
 
 此命令在当前目录中生成以下共享库。
 
-Platform | Library name
+平台 | 库名称
 --- | ---
 Linux | libtensorflowlite_c.so
 macOS | libtensorflowlite_c.dylib
