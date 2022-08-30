@@ -570,6 +570,6 @@ Google Play 服务 API 中的 TensorFlow Lite 可能会不时联系 Google 服�
 - 错误代码。用于诊断。
 - 性能指标。用于诊断。
 
-## Next steps
+## 后续步骤
 
 有关使用 TensorFlow Lite 在移动应用中实现机器学习的更多信息，请参阅 [TensorFlow Lite 开发者指南](https://www.tensorflow.org/lite/guide)。您可以在 [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite) 上找到用于图像分类、目标检测和其他应用的其他 TensorFlow Lite 模型。
