@@ -1,26 +1,26 @@
-# Android 对象检测
+# Android 目标检测
 
-本教程展示如何使用 TensorFlow Lite 构建 Android 应用，以连续检测设备摄像头捕获的帧中的对象。此应用专为实体 Android 设备设计。如果您要更新现有项目，可以使用代码示例作为参考，并跳至[修改项目](#add_dependencies)的说明。
+本教程展示如何使用 TensorFlow Lite 构建 Android 应用，以连续检测设备摄像头捕获的帧中的目标。此应用专为实体 Android 设备设计。如果您要更新现有项目，可以使用代码示例作为参考，并跳至[修改项目](#add_dependencies)的说明。
 
-## 对象检测概述
+## 目标检测概述
 
-*对象检测*是识别图像中多类对象的存在和位置的机器学习任务。对象检测模型是在包含一组已知对象的数据集上训练出来的。
+*目标检测*是识别图像中多类目标的存在和位置的机器学习任务。目标检测模型是在包含一组已知目标的数据集上训练出来的。
 
-经过训练的模型接收图像帧作为输入，并尝试根据它被训练识别的已知类别集合对图像中的项目进行分类。对于每个图像帧，对象检测模型都会输出它检测到的对象列表、每个对象的边框位置以及指示对象被正确分类的置信度的分数。
+经过训练的模型接收图像帧作为输入，并尝试根据它被训练识别的已知类别集合对图像中的项目进行分类。对于每个图像帧，目标检测模型都会输出它检测到的目标列表、每个目标的边框位置以及指示目标被正确分类的置信度的分数。
 
 ## 模型和数据集
 
-本教程使用的模型是用 [COCO 数据集](http://cocodataset.org/)训练的。 COCO 是一个大规模对象检测数据集，其中包含 33 万个图像、150 万个对象实例和 80 个对象类别。
+本教程使用的模型是用 [COCO 数据集](http://cocodataset.org/)训练的。 COCO 是一个大规模目标检测数据集，其中包含 33 万个图像、150 万个目标实例和 80 个目标类别。
 
 您可以选择使用以下预训练模型之一：
 
-- [EfficientDet-Lite0](https://tfhub.dev/tensorflow/lite-model/efficientdet/lite0/detection/metadata/1) *[推荐]* - 一个轻量级对象检测模型，包含 BiFPN 特征提取器、共享框预测器和焦点损失。COCO 2017 验证数据集的 mAP（平均精度均值）为 25.69%。
+- [EfficientDet-Lite0](https://tfhub.dev/tensorflow/lite-model/efficientdet/lite0/detection/metadata/1) *[推荐]* - 一个轻量级目标检测模型，包含 BiFPN 特征提取器、共享框预测器和焦点损失。COCO 2017 验证数据集的 mAP（平均精度均值）为 25.69%。
 
-- [EfficientDet-Lite1](https://tfhub.dev/tensorflow/lite-model/efficientdet/lite1/detection/metadata/1) - 一个中型 EfficientDet 对象检测模型。COCO 2017 验证数据集的 mAP 为 30.55%。
+- [EfficientDet-Lite1](https://tfhub.dev/tensorflow/lite-model/efficientdet/lite1/detection/metadata/1) - 一个中型 EfficientDet 目标检测模型。COCO 2017 验证数据集的 mAP 为 30.55%。
 
-- [EfficientDet-Lite2](https://tfhub.dev/tensorflow/lite-model/efficientdet/lite2/detection/metadata/1) - 一个大型 EfficientDet 对象检测模型。COCO 2017 验证数据集的 mAP 为 33.97%。
+- [EfficientDet-Lite2](https://tfhub.dev/tensorflow/lite-model/efficientdet/lite2/detection/metadata/1) - 一个大型 EfficientDet 目标检测模型。COCO 2017 验证数据集的 mAP 为 33.97%。
 
-- [MobileNetV1-SSD](https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/2) - 一个极其轻量级的模型，经过优化，可与 TensorFlow Lite 配合使用进行对象检测。COCO 2017 验证数据集的 mAP 为 21%。
+- [MobileNetV1-SSD](https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/2) - 一个极其轻量级的模型，经过优化，可与 TensorFlow Lite 配合使用进行目标检测。COCO 2017 验证数据集的 mAP 为 21%。
 
 对于本教程，*EfficientDet-Lite0* 模型在大小和准确性之间取得了良好的平衡。
 
@@ -28,7 +28,7 @@
 
 ## 设置并运行示例
 
-要设置对象检测应用，请从 [GitHub](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android) 下载示例并使用 [Android Studio](https://developer.android.com/studio/) 运行该示例。本教程的以下部分将探索代码示例的相关部分，以便您将它们应用于您自己的 Android 应用。
+要设置目标检测应用，请从 [GitHub](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android) 下载示例并使用 [Android Studio](https://developer.android.com/studio/) 运行该示例。本教程的以下部分将探索代码示例的相关部分，以便您将它们应用于您自己的 Android 应用。
 
 ### 系统要求
 
@@ -46,12 +46,12 @@
 
 1. 克隆 git 仓库
     <pre class="devsite-click-to-copy">    git clone https://github.com/tensorflow/examples.git
-        </pre>
-2. （可选）将您的 git 实例配置为使用稀疏签出，这样您就只有对象检测示例应用的文件：
+            </pre>
+2. （可选）将您的 git 实例配置为使用稀疏签出，这样您就只有目标检测示例应用的文件：
     <pre class="devsite-click-to-copy">    cd examples
-        git sparse-checkout init --cone
-        git sparse-checkout set lite/examples/object_detection/android
-        </pre>
+            git sparse-checkout init --cone
+            git sparse-checkout set lite/examples/object_detection/android
+            </pre>
 
 ### 导入并运行项目
 
@@ -95,7 +95,7 @@
 
 在您自己的应用中，您必须添加特定的项目依赖项才能运行 TensorFlow Lite 机器学习模型，并访问能够将图像等数据转换为您所使用的模型可以处理的张量数据格式的效用函数。
 
-示例应用使用 TensorFlow Lite [Task library for vision](../../inference_with_metadata/task_library/overview#supported_tasks) 来实现对象检测机器学习模型的执行。以下说明解释了如何将所需的库依赖项添加到您自己的 Android 应用项目中。
+示例应用使用 TensorFlow Lite [Task library for vision](../../inference_with_metadata/task_library/overview#supported_tasks) 来实现目标检测机器学习模型的执行。以下说明解释了如何将所需的库依赖项添加到您自己的 Android 应用项目中。
 
 以下说明解释了如何将所需的项目和模块依赖项添加到您自己的 Android 应用项目中。
 
@@ -119,9 +119,9 @@
 
 ## 初始化机器学习模型
 
-在您的 Android 应用中，必须先使用参数初始化 TensorFlow Lite 机器学习模型，然后才能使用该模型运行预测。这些初始化参数在对象检测模型中是一致的，并且可以包括预测的最小准确度阈值等设置。
+在您的 Android 应用中，必须先使用参数初始化 TensorFlow Lite 机器学习模型，然后才能使用该模型运行预测。这些初始化参数在目标检测模型中是一致的，并且可以包括预测的最小准确度阈值等设置。
 
-TensorFlow Lite 模型包括一个含有模型代码的 `.tflite` 文件，并且经常包括一个含有模型预测的类别名称的标签文件。在进行对象检测时，类别是人、狗、猫或汽车等对象。
+TensorFlow Lite 模型包括一个含有模型代码的 `.tflite` 文件，并且经常包括一个含有模型预测的类别名称的标签文件。在进行目标检测时，类别是人、狗、猫或汽车等目标。
 
 此示例将下载 `download_models.gradle` 中指定的几个模型，`ObjectDetectorHelper` 类为模型提供选择器：
 
@@ -175,7 +175,7 @@ val modelName =
 
 TensorFlow Lite *委托*是使用移动设备上的专用处理硬件（如图形处理单元 (GPU)、张量处理单元 (TPU) 和数字信号处理器 (DSP)）加速机器学习模型执行的软件模块。建议使用委托来运行 TensorFlow Lite 模型，但非必需。
 
-对象检测器通过正在使用它的线程上的当前设置进行初始化。对于在主线程上创建和在后台线程上使用的检测器，可以使用 CPU 和 [NNAPI](../../android/delegates/nnapi) 委托，但对于初始化了检测器的线程，必须使用 GPU 委托。
+目标检测器通过正在使用它的线程上的当前设置进行初始化。对于在主线程上创建和在后台线程上使用的检测器，可以使用 CPU 和 [NNAPI](../../android/delegates/nnapi) 委托，但对于初始化了检测器的线程，必须使用 GPU 委托。
 
 委托在 `ObjectDetectionHelper.setupObjectDetector()` 函数内设置：
 
@@ -275,7 +275,7 @@ TensorFlow Lite Interpreter 对象接收该数据，在模型上运行该数据�
 
 在您的 Android 应用中，在目标检测模型上运行图像数据后，它会生成一个预测列表，您的应用代码必须通过执行额外的业务逻辑来处理这些预测，从而向用户显示结果或采取其他操作。
 
-任何给定的 TensorFlow Lite 模型的输出都根据其产生的预测数量（一个或多个）以及每个预测的描述性信息而有所不同。在使用对象检测模型的情况下，预测通常包括用于指示在图像中检测到目标的位置的边框数据。在示例代码中，结果传递给 `CameraFragment.kt` 中的 `onResults` 函数，该函数在对象检测过程中充当 DetectorListener。
+任何给定的 TensorFlow Lite 模型的输出都根据其产生的预测数量（一个或多个）以及每个预测的描述性信息而有所不同。在使用目标检测模型的情况下，预测通常包括用于指示在图像中检测到目标的位置的边框数据。在示例代码中，结果传递给 `CameraFragment.kt` 中的 `onResults` 函数，该函数在目标检测过程中充当 DetectorListener。
 
 ```
 interface DetectorListener {
@@ -289,7 +289,7 @@ interface DetectorListener {
 }
 ```
 
-对于本示例中使用的模型，每个预测都包括对象的边框位置、对象的标签以及一个介于 0 和 1 之间的预测分数（作为表示预测置信度的浮点数），其中 1 是最高置信度。一般来说，分数低于 50% (0.5) 的预测被认为是不确定的。但是，如何处理低值预测结果取决于您和您应用的需求。
+对于本示例中使用的模型，每个预测都包括目标的边框位置、目标的标签以及一个介于 0 和 1 之间的预测分数（作为表示预测置信度的浮点数），其中 1 是最高置信度。一般来说，分数低于 50% (0.5) 的预测被认为是不确定的。但是，如何处理低值预测结果取决于您和您应用的需求。
 
 要处理模型预测结果，请执行以下操作：
 
@@ -330,7 +330,7 @@ interface DetectorListener {
     }
     ```
 
-一旦模型返回预测结果，您的应用就可以根据预测执行操作，将结果呈现给用户或执行其他逻辑。对于示例代码，应用在识别的对象周围绘制边框，并在屏幕上显示类名。
+一旦模型返回预测结果，您的应用就可以根据预测执行操作，将结果呈现给用户或执行其他逻辑。对于示例代码，应用在识别的目标周围绘制边框，并在屏幕上显示类名。
 
 ## 后续步骤
 
