@@ -1,6 +1,6 @@
 # 使用 TFX 命令行接口
 
-The TFX command-line interface (CLI) performs a full range of pipeline actions using pipeline orchestrators, such as Kubeflow Pipelines, Vertex Pipelines. Local orchestrator can be also used for faster development or debugging. Apache Beam and Apache airflow is supported as experimental features. For example, you can use the CLI to:
+TFX 命令行接口 (CLI) 使用流水线编排器（例如 Kubeflow Pipelines、Vertex Pipelines）执行各种流水线操作。本地编排器还可以用于加快开发或调试速度。支持 Apache Beam 和 Apache Airflow 作为实验性功能。例如，您可以使用 CLI 执行以下操作：
 
 - 创建、更新和删除流水线。
 - 运行流水线并监视在各种编排器上的运行。
@@ -21,7 +21,7 @@ TFX CLI 作为 TFX 软件包的一部分进行安装。所有 CLI 命令都遵�
 - [tfx run](#tfx-run) - 在各种编排平台上创建和管理 TFX 流水线的运行。
 - [tfx template](#tfx-template-experimental) - 用于列出和复制 TFX 流水线模板的实验性命令。
 
-Each command group provides a set of <var>commands</var>. Follow the instructions in the [pipeline commands](#tfx-pipeline), [run commands](#tfx-run), and [template commands](#tfx-template-experimental) sections to learn more about using these commands.
+每个命令组都提供一组 <var>commands</var>。请遵循[流水线命令](#tfx-pipeline)、[运行命令](#tfx-run)和[模板命令](#tfx-template-experimental)部分中的说明，详细了解这些命令的用法。
 
 警告：目前并非每个编排器都支持所有命令。这些命令明确提到了支持的引擎。
 
