@@ -7,13 +7,13 @@
 
 ## CSRestaurants
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cs_restaurants/CSRestaurants')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a dataset for NLG in task-oriented spoken dialogue systems with Czech as the target language. It originated as
@@ -21,7 +21,7 @@ a translation of the English San Francisco Restaurants dataset by Wen et al. (20
 ```
 
 - **许可**：Creative Commons 4.0 BY-SA
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
