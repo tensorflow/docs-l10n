@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/disfl_qa)
 - [Huggingface](https://huggingface.co/datasets/disfl_qa)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:disfl_qa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Disfl-QA is a targeted dataset for contextual disfluencies in an information seeking setting,
@@ -29,7 +29,7 @@ Disfl-QA. Detailed experiments and analyses can be found in our paper.
 ```
 
 - **许可**：Disfl-QA 数据集在 CC BY 4.0 下许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
