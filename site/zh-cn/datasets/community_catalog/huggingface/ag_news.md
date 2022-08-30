@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/ag_news)
 - [Huggingface](https://huggingface.co/datasets/ag_news)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ag_news')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AG is a collection of more than 1 million news articles. News articles have been
@@ -31,7 +31,7 @@ in Neural Information Processing Systems 28 (NIPS 2015).
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
