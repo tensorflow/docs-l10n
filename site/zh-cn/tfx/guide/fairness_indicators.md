@@ -24,7 +24,7 @@ Pip 软件包下载包括以下内容：
 - **[TensorFlow Data Validation (TFDV)](https://www.tensorflow.org/tfx/data_validation/get_started)**
 - **[TensorFlow Model Analysis (TFMA)](https://www.tensorflow.org/tfx/model_analysis/get_started)**
     - **Fairness Indicators**
-- **[What-If 工具 (WIT)](https://www.tensorflow.org/tensorboard/what_if_tool)**
+- **What-If 工具 (WIT)**
 
 ## 在 TensorFlow 模型中使用 Fairness Indicators
 
