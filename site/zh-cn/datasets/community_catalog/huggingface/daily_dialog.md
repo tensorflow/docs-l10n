@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/daily_dialog)
 - [Huggingface](https://huggingface.co/datasets/daily_dialog)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:daily_dialog')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 We develop a high-quality multi-turn dialog dataset, DailyDialog, which is intriguing in several aspects.
@@ -22,7 +22,7 @@ benefit the research field of dialog systems.
 ```
 
 - **许可**：cc-by-nc-sa-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
