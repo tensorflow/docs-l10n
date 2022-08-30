@@ -377,17 +377,17 @@ $ python zero_out_op_test.py
 
 现在，您已经知道如何构建一个基本（并受到一些限制的）运算和实现，我们来看看您通常需要构建到运算中的一些更复杂内容。这些包括：
 
-- [Conditional checks and validation](#conditional-checks-and-validation)
-- [Op registration](#op-registration)
-    - [Attrs](#attrs)
-    - [Attr types](#attr-types)
-    - [Polymorphism](#polymorphism)
-    - [Inputs and outputs](#inputs-and-outputs)
-    - [Backwards compatibility](#backwards-compatibility)
-- [GPU support](#gpu-support)
-    - [Compiling the kernel for the GPU device](#compiling-the-kernel-for-the-gpu-device)
-- [Implement the gradient in Python](#implement-the-gradient-in-python)
-- [Shape functions in C++](#shape-functions-in-c)
+- [条件检查和验证](#conditional-checks-and-validation)
+- [运算注册](#op-registration)
+    - [特性](#attrs)
+    - [特性类型](#attr-types)
+    - [多态性](#polymorphism)
+    - [输入和输出](#inputs-and-outputs)
+    - [向后兼容性](#backwards-compatibility)
+- [GPU 支持](#gpu-support)
+    - [编译 GPU 设备的内核](#compiling-the-kernel-for-the-gpu-device)
+- [在 Python 中实现梯度](#implement-the-gradient-in-python)
+- [C++ 中的形状函数](#shape-functions-in-c)
 
 ### 条件检查和验证
 
