@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2021-04-12' review_interval: '6 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2022-04-09' review_interval: '6 months' } *-->
 
 # 导出 SavedModel
 
-本页介绍将模型从 TensorFlow 程序导出（保存）到 [TensorFlow 2 的 SavedModel 格式](https://www.tensorflow.org/guide/saved_model)的详细信息。此格式是在 TensorFlow Hub 上共享预训练模型和模型部分的推荐方式。它取代了旧的 [TF1 Hub 格式](tf1_hub_module.md)，并提供了一组新 API。您可以参阅 [TF1 Hub 格式导出](exporting_hub_format.md)，获取有关导出 TF1 Hub 格式模型的更多信息。
+This page describes the details of exporting (saving) a model from a TensorFlow program to the [SavedModel format of TensorFlow 2](https://www.tensorflow.org/guide/saved_model). This format is the recommended way to share pre-trained models and model pieces on TensorFlow Hub. It replaces the older [TF1 Hub format](tf1_hub_module.md) and comes with a new set of APIs. You can find more information on exporting the TF1 Hub format models in [TF1 Hub format export](exporting_hub_format.md). You can find details on how to compress the SavedModel for sharing it on TensorFlow Hub [here](writing_documentation.md#model-specific_asset_content).
 
 某些模型构建工具包已经提供执行此操作的工具（请参阅下文的 [TensorFlow Model Garden](#tensorflow-model-garden)）。
 
@@ -35,7 +35,7 @@ piece_to_share = tf.keras.Model(sharing_input, sharing_output)
 piece_to_share.save(..., include_optimizer=False)
 ```
 
-GitHub 上的 [TensorFlow 模型](https://github.com/tensorflow/models)为 BERT 使用前一种方式（请参阅 [nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py)，请注意用于导出的 `core_model` 和用于恢复检查点的 `pretrainer` 间的拆分），并为 ResNet 使用后一种方式（请参阅 [vision/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/vision/image_classification/resnet/tfhub_export.py)）。
+[TensorFlow Models](https://github.com/tensorflow/models) on GitHub uses the former approach for BERT (see [nlp/tools/export_tfhub_lib.py](https://github.com/tensorflow/models/blob/master/official/nlp/tools/export_tfhub_lib.py), note the split between `core_model` for export and the `pretrainer` for restoring the checkpoint) and the the latter approach for ResNet (see [legacy/image_classification/tfhub_export.py](https://github.com/tensorflow/models/blob/master/official/legacy/image_classification/resnet/tfhub_export.py)).
 
 ## 从低级 TensorFlow 保存
 
