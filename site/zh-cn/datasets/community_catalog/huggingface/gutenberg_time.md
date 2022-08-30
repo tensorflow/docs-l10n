@@ -7,20 +7,20 @@
 
 ## gutenberg
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gutenberg_time/gutenberg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A clean data resource containing all explicit time references in a dataset of 52,183 novels whose full text is available via Project Gutenberg.
 ```
 
 - **许可**：[需要更多信息]
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
