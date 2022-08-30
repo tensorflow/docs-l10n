@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/dart)
 - [Huggingface](https://huggingface.co/datasets/dart)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:dart')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 DART is a large and open-domain structured DAta Record to Text generation corpus with high-quality
@@ -25,7 +25,7 @@ https://arxiv.org/abs/2007.02871
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
