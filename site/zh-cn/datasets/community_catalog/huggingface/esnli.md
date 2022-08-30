@@ -7,13 +7,13 @@
 
 ## plain_text
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:esnli/plain_text')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The e-SNLI dataset extends the Stanford Natural Language Inference Dataset to
