@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/bn_hate_speech)
 - [Huggingface](https://huggingface.co/datasets/bn_hate_speech)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bn_hate_speech')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Bengali Hate Speech Dataset is a collection of Bengali articles collected from Bengali news articles,
@@ -24,7 +24,7 @@ This dataset was prepared for hate-speech text classification benchmark on Benga
 ```
 
 - **许可**：MIT License
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
