@@ -101,7 +101,7 @@ Each command group provides a set of <var>commands</var>. Follow the instruction
 
   <dt>--namespace=<var>namespace</var>
 </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值默认为 <code>kubeflow</code>。</dd>
 
 
   <dt>--build_image</dt>
@@ -240,9 +240,9 @@ Vertex：
 编译流水线配置文件，以在 Kubeflow 中创建工作流文件并在编译时执行以下检查：
 
 1. 检查流水线路径是否有效。
-2. Checks if the pipeline details are extracted successfully from the pipeline config file.
+2. 检查是否从流水线配置文件中成功提取了流水线详细信息。
 3. 检查流水线配置中的 DagRunner 是否与引擎匹配。
-4. Checks if the workflow file is created successfully in the package path provided (only for Kubeflow).
+4. 检查是否在提供的软件包路径中成功创建了工作流文件（仅适用于 Kubeflow）。
 
 建议在创建或更新流水线之前使用。
 
@@ -635,7 +635,7 @@ Vertex：
 
   <dt>--namespace=<var>namespace</var>
 </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值默认为 <code>kubeflow</code>。</dd>
 
 
 
