@@ -7,13 +7,13 @@
 
 ## conll2003
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conll2003/conll2003')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The shared task of CoNLL-2003 concerns language-independent named entity recognition. We will concentrate on
@@ -32,7 +32,7 @@ For more details see https://www.clips.uantwerpen.be/conll2003/ner/ and https://
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
