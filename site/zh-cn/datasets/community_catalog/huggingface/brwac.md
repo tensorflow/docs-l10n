@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/brwac)
 - [Huggingface](https://huggingface.co/datasets/brwac)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:brwac')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The BrWaC (Brazilian Portuguese Web as Corpus) is a large corpus constructed following the Wacky framework,
@@ -22,7 +22,7 @@ Manually download at https://www.inf.ufrgs.br/pln/wiki/index.php?title=BrWaC
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
