@@ -7,13 +7,13 @@
 
 ## h1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ett/h1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The data of Electricity Transformers from two separated counties
@@ -23,7 +23,7 @@ Each data point consists of the target value "oil temperature" and
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International License。https://creativecommons.org/licenses/by/4.0/
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -86,13 +86,13 @@ Each data point consists of the target value "oil temperature" and
 
 ## h2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ett/h2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The data of Electricity Transformers from two separated counties
@@ -102,7 +102,7 @@ Each data point consists of the target value "oil temperature" and
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International License。https://creativecommons.org/licenses/by/4.0/
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -165,13 +165,13 @@ Each data point consists of the target value "oil temperature" and
 
 ## m1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ett/m1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The data of Electricity Transformers from two separated counties
@@ -181,7 +181,7 @@ Each data point consists of the target value "oil temperature" and
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International License。https://creativecommons.org/licenses/by/4.0/
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -244,13 +244,13 @@ Each data point consists of the target value "oil temperature" and
 
 ## m2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ett/m2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The data of Electricity Transformers from two separated counties
@@ -260,7 +260,7 @@ Each data point consists of the target value "oil temperature" and
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International License。https://creativecommons.org/licenses/by/4.0/
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
