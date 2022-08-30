@@ -16,7 +16,7 @@ Task Library 的 `NLClassifier` API 可以将输入的文本分为不同类别�
 
 - <a href="../../examples/text_classification/overview">电影评论情感分类</a>模型。
 
-- 由<a>适用于文本分类的 TensorFlow Lite Model Maker</a> 创建的具有 <code>average_word_vec</code> 规范的模型。
+- 由[适用于文本分类的 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) 创建的具有 `average_word_vec` 规范的模型。
 
 - 符合[模型兼容性要求](#model-compatibility-requirements)的自定义模型。
 
@@ -139,7 +139,7 @@ category[1]: 'Positive' : '0.18687'
 
     - 模型的输入应为 kTfLiteString 张量原始输入字符串或用于原始输入字符串的正则表达式标记化索引的 kTfLiteInt32 张量。
     - 如果输入类型为 kTfLiteString，则模型不需要[元数据](../../models/convert/metadata)。
-    - 如果输入类型为 kTfLiteInt32，则需要在输入张量的<a>元数据</a>中设置 <code>RegexTokenizer</code>。
+    - If input type is kTfLiteInt32, a `RegexTokenizer` needs to be set up in the input tensor's [Metadata](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers).
 
 - 输入分数张量：(kTfLiteUInt8/kTfLiteInt8/kTfLiteInt16/kTfLiteFloat32/kTfLiteFloat64)
 
