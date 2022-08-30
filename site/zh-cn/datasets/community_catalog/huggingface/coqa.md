@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/coqa)
 - [Huggingface](https://huggingface.co/datasets/coqa)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:coqa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoQA: A Conversational Question Answering Challenge
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
