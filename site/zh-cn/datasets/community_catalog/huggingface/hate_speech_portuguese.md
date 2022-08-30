@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/hate_speech_portuguese)
 - [Huggingface](https://huggingface.co/datasets/hate_speech_portuguese)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hate_speech_portuguese')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Portuguese dataset for hate speech detection composed of 5,668 tweets with binary annotations (i.e. 'hate' vs. 'no-hate').
 ```
 
 - **许可**：未知
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
