@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/food101)
 - [Huggingface](https://huggingface.co/datasets/food101)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:food101')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset consists of 101 food categories, with 101'000 images. For each class, 250 manually reviewed test images are provided as well as 750 training images. On purpose, the training images were not cleaned, and thus still contain some amount of noise. This comes mostly in the form of intense colors and sometimes wrong labels. All images were rescaled to have a maximum side length of 512 pixels.
@@ -23,7 +23,7 @@ This dataset consists of 101 food categories, with 101'000 images. For each clas
 
 [1] http://www.foodspotting.com/ [2] http://www.foodspotting.com/terms/
 
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
