@@ -7,13 +7,13 @@
 
 ## all
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blbooks/all')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset comprising of text created by OCR from the 49,455 digitised books, equating to 65,227 volumes (25+ million pages), published between c. 1510 - c. 1900.
@@ -142,13 +142,13 @@ The books cover a wide range of subject areas including philosophy, history, poe
 
 ## 1800s
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blbooks/1800s')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset comprising of text created by OCR from the 49,455 digitised books, equating to 65,227 volumes (25+ million pages), published between c. 1510 - c. 1900.
@@ -277,13 +277,13 @@ The books cover a wide range of subject areas including philosophy, history, poe
 
 ## 1700s
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blbooks/1700s')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset comprising of text created by OCR from the 49,455 digitised books, equating to 65,227 volumes (25+ million pages), published between c. 1510 - c. 1900.
@@ -412,13 +412,13 @@ The books cover a wide range of subject areas including philosophy, history, poe
 
 ## 1510_1699
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blbooks/1510_1699')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset comprising of text created by OCR from the 49,455 digitised books, equating to 65,227 volumes (25+ million pages), published between c. 1510 - c. 1900.
@@ -547,13 +547,13 @@ The books cover a wide range of subject areas including philosophy, history, poe
 
 ## 1500_1899
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blbooks/1500_1899')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset comprising of text created by OCR from the 49,455 digitised books, equating to 65,227 volumes (25+ million pages), published between c. 1510 - c. 1900.
@@ -682,13 +682,13 @@ The books cover a wide range of subject areas including philosophy, history, poe
 
 ## 1800_1899
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blbooks/1800_1899')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset comprising of text created by OCR from the 49,455 digitised books, equating to 65,227 volumes (25+ million pages), published between c. 1510 - c. 1900.
@@ -817,13 +817,13 @@ The books cover a wide range of subject areas including philosophy, history, poe
 
 ## 1700_1799
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blbooks/1700_1799')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset comprising of text created by OCR from the 49,455 digitised books, equating to 65,227 volumes (25+ million pages), published between c. 1510 - c. 1900.
