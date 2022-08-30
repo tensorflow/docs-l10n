@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/fquad)
 - [Huggingface](https://huggingface.co/datasets/fquad)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:fquad')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 FQuAD: French Question Answering Dataset
