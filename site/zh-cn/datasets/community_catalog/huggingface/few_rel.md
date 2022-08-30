@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/few_rel)
 - [Huggingface](https://huggingface.co/datasets/few_rel)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:few_rel')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 FewRel is a large-scale few-shot relation extraction dataset, which contains more than one hundred relations and tens of thousands of annotated instances cross different domains.
 ```
 
 - **许可**：https://raw.githubusercontent.com/thunlp/FewRel/master/LICENSE
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -118,20 +118,20 @@ FewRel is a large-scale few-shot relation extraction dataset, which contains mor
 
 ## pid2name
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:few_rel/pid2name')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 FewRel is a large-scale few-shot relation extraction dataset, which contains more than one hundred relations and tens of thousands of annotated instances cross different domains.
 ```
 
 - **许可**：https://raw.githubusercontent.com/thunlp/FewRel/master/LICENSE
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
