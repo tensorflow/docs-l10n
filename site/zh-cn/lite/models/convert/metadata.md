@@ -262,7 +262,7 @@ populator.load_associated_files(["your_path_to_label_file"])
 populator.populate()
 ```
 
-You can pack as many associated files as you want into the model through `load_associated_files`. However, it is required to pack at least those files documented in the metadata. In this example, packing the label file is mandatory.
+您可以通过 `load_associated_files` 将所需数量的关联文件打包到模型中。但是，至少须对元数据内记录的文件进行打包。在本例中，必须对标签文件进行打包。
 
 ## 可视化元数据
 
