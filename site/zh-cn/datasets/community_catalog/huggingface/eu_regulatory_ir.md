@@ -7,20 +7,20 @@
 
 ## eu2uk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:eu_regulatory_ir/eu2uk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EURegIR: Regulatory Compliance IR (EU/UK)
 ```
 
 - **许可**：CC BY-SA (Creative Commons / Attribution-ShareAlike)
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -64,20 +64,20 @@ EURegIR: Regulatory Compliance IR (EU/UK)
 
 ## uk2eu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:eu_regulatory_ir/uk2eu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EURegIR: Regulatory Compliance IR (EU/UK)
 ```
 
 - **许可**：CC BY-SA (Creative Commons / Attribution-ShareAlike)
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
