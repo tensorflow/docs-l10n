@@ -1,3 +1,5 @@
+<!--* freshness: { owner: 'maringeo' reviewed: '2022-04-09' review_interval: '6 months' } *-->
+
 # TF1 Hub 格式
 
 TensorFlow Hub 在 2018 年发布时提供了一种资源类型：可导入TensorFlow 1 程序的 TF1 Hub 格式。
@@ -107,4 +109,4 @@ spec = hub.create_module_spec(module_fn)
 
 - 在发布者模型中，请避免通过 `tf.train.FtrlOptimizer`、`tf.train.ProximalGradientDescentOptimizer` 和其他近端优化器的 `l1_` 和 `l2_regularization_strength` 参数定义 L1/L2 正则化。这些参数不会随模块一起导出，并且全局设置正则化强度可能不适合于使用者。除了在宽度模型（即稀疏线性模型）或宽度和深度模型中的 L1 正则化之外，还应可以改用单独的正则化损失。
 
-- 如果使用随机失活、批次归一化或类似训练技术，请将其超参数设置为对多种预期用途均有意义的值。随机失活率可能需要根据目标问题的过拟合倾向进行调整。在批次归一化中，动量（也称为衰减系数）应足够小，以支持使用小型数据集和/或大批次进行微调。对于高级使用者，请考虑添加签名以公开对关键超参数的控制。
+- If you use dropout, batch normalization, or similar training techniques, set their hyperparameters to values that make sense across many expected uses. The dropout rate may have to be adjusted to the target problem's propensity to overfitting. In batch normalization, the momentum (a.k.a. decay coefficient) should be small enough to enable fine-tuning with small datasets and/or large batches. For advanced consumers, consider adding a signature that exposes control over critical hyperparameters.
