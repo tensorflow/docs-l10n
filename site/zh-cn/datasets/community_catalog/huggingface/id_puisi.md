@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/id_puisi)
 - [Huggingface](https://huggingface.co/datasets/id_puisi)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:id_puisi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Puisi (poem) is an Indonesian poetic form. The dataset contains 7223 Indonesian puisi with its title and author.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
