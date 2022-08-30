@@ -22,7 +22,7 @@ The Android example below demonstrates the implementation for both methods as [l
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android">View Android example</a>
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">View iOS example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">查看 iOS 示例</a>
 
 If you are using a platform other than Android/iOS, or if you are already familiar with the [TensorFlow Lite APIs](https://www.tensorflow.org/api_docs/python/tf/lite), download the starter model and supporting files (if applicable).
 
@@ -32,7 +32,7 @@ If you are using a platform other than Android/iOS, or if you are already famili
 
 ### How it works
 
-During training, an image classification model is fed images and their associated *labels*. Each label is the name of a distinct concept, or class, that the model will learn to recognize.
+在训练中，向图像分类模型馈送图像及其关联*标签*。每个标签是不同概念或类的名称，模型将学习识别这些标签。
 
 Given sufficient training data (often hundreds or thousands of images per label), an image classification model can learn to predict whether new images belong to any of the classes it has been trained on. This process of prediction is called *inference*. Note that you can also use [transfer learning](https://www.tensorflow.org/tutorials/images/transfer_learning) to identify new classes of images by using a pre-existing model. Transfer learning does not require a very large training dataset.
 
@@ -86,7 +86,7 @@ Note that the <a href="https://www.tensorflow.org/lite/guide/hosted_models#image
 
 The TensorFlow Lite image classification models are useful for single-label classification; that is, predicting which single label the image is most likely to represent. They are trained to recognize 1000 image classes. For a full list of classes, see the labels file in the <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">model zip</a>.
 
-If you want to train a model to recognize new classes, see <a href="#customize_model">Customize model</a>.
+如果您想要训练模型来识别新类，请参阅<a href="#customize_model">自定义模型</a>。
 
 For the following use cases, you should use a different type of model:
 
@@ -109,7 +109,7 @@ Learn how to perform transfer learning with the <a href="https://www.tensorflow.
 
 Model performance is measured in terms of the amount of time it takes for a model to run inference on a given piece of hardware. The lower the time, the faster the model.
 
-The performance you require depends on your application. Performance can be important for applications like real-time video, where it may be important to analyze each frame in the time before the next frame is drawn (e.g. inference must be faster than 33ms to perform real-time inference on a 30fps video stream).
+您需要的性能取决于您的应用。对实时视频等应用，性能可能非常重要，因为需要在下一帧绘制完之前及时分析每一帧（例如，推断用时必须少于 33 ms 才能实时推断 30fps 视频流）。
 
 The TensorFlow Lite quantized MobileNet models' performance range from 3.7ms to 80.3 ms.
 
@@ -119,7 +119,7 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
   <thead>
     <tr>
       <th>Model Name</th>
-      <th>Model size </th>
+      <th>模型大小</th>
       <th>Device </th>
       <th>NNAPI</th>
       <th>CPU</th>
@@ -150,7 +150,7 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
 
 ** 2 threads used on iPhone for the best performance result.
 
-### Model accuracy
+### 模型准确率
 
 Accuracy is measured in terms of how often the model correctly classifies an image. For example, a model with a stated accuracy of 60% can be expected to classify an image correctly an average of 60% of the time.
 
@@ -158,9 +158,9 @@ The most relevant accuracy metrics are Top-1 and Top-5. Top-1 refers to how ofte
 
 The TensorFlow Lite quantized MobileNet models’ Top-5 accuracy range from 64.4 to 89.9%.
 
-### Model size
+### 模型规模
 
-The size of a model on-disk varies with its performance and accuracy. Size may be important for mobile development (where it might impact app download sizes) or when working with hardware (where available storage might be limited).
+磁盘上模型的大小因其性能和准确率而异。大小对移动开发（可能影响应用的下载大小）或在使用硬件时（可用存储空间可能有限）很重要。
 
 The TensorFlow Lite quantized MobileNet models' sizes range from 0.5 to 3.4 MB.
 
@@ -171,4 +171,4 @@ Use the following resources to learn more about concepts related to image classi
 - [Image classification using TensorFlow](https://www.tensorflow.org/tutorials/images/classification)
 - [Image classification with CNNs](https://www.tensorflow.org/tutorials/images/cnn)
 - [Transfer learning](https://www.tensorflow.org/tutorials/images/transfer_learning)
-- [Data augmentation](https://www.tensorflow.org/tutorials/images/data_augmentation)
+- 数据增强
