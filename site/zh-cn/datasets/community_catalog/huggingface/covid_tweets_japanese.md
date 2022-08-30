@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/covid_tweets_japanese)
 - [Huggingface](https://huggingface.co/datasets/covid_tweets_japanese)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covid_tweets_japanese')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 53,640 Japanese tweets with annotation if a tweet is related to COVID-19 or not. The annotation is by majority decision by 5 - 10 crowd workers. Target tweets include "COVID" or "コロナ". The period of the tweets is from around January 2020 to around June 2020. The original tweets are not contained. Please use Twitter API to get them, for example.
