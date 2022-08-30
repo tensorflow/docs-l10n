@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/germaner)
 - [Huggingface](https://huggingface.co/datasets/germaner)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:germaner')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GermaNER is a freely available statistical German Named Entity Tagger based on conditional random fields(CRF). The tagger is trained and evaluated on the NoSta-D Named Entity dataset, which was used in the GermEval 2014 for named entity recognition. The tagger comes close to the performance of the best (proprietary) system in the competition with 77% F-measure (this is the latest result; the one reported in the paper is 76%) test set performance on the four standard NER classes (PERson, LOCation, ORGanisation and OTHer).
