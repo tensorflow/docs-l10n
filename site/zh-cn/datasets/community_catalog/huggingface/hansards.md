@@ -7,13 +7,13 @@
 
 ## senate
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hansards/senate')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This release contains 1.3 million pairs of aligned text chunks (sentences or smaller fragments)
@@ -40,7 +40,7 @@ from the DARPA TIDES program.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -67,13 +67,13 @@ from the DARPA TIDES program.
 
 ## house
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hansards/house')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This release contains 1.3 million pairs of aligned text chunks (sentences or smaller fragments)
@@ -100,7 +100,7 @@ from the DARPA TIDES program.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
