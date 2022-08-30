@@ -561,7 +561,7 @@ Profiler 在四个不同的轴上涵盖了许多用例。目前已支持部分�
 
 <a name="profiling_api_table"></a>
 
-| 性能剖析 API                | 本地     | 远程    | 多  | 硬件  | :                              :           :           : 工作进程   : 平台 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 支持 | 不       | 不       | CPU、GPU  | : Callback**                   :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | Not       | 不       | CPU、GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | 支持 | 支持 | CPU、GPU、| : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 支持 | 不       | 不       | CPU、GPU  | :                              :           : 支持 : 支持 :           :
+| 性能剖析 API                | 本地     | 远程    | 多  | 硬件  | :                              :           :           : 工作进程   : 平台 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 支持 | 不       | 不       | CPU、GPU  | : Callback**                   :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | Not       | 不       | CPU、GPU  | : start/stop [API]**    :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | 支持 | 支持 | CPU、GPU、| : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 支持 | 不       | 不       | CPU、GPU  | :                              :           : 支持 : 支持 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -718,3 +718,6 @@ TensorFlow 2.2 和 2.3 仅支持单主机系统的多 GPU 性能剖析；不支�
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
+
+
+[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2
