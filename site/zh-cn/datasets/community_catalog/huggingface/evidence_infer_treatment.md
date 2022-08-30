@@ -7,13 +7,13 @@
 
 ## 2.0
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:evidence_infer_treatment/2.0')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Data and code from our "Inferring Which Medical Treatments Work from Reports of Clinical Trials", NAACL 2019. This work concerns inferring the results reported in clinical trials from text.
@@ -146,13 +146,13 @@ The dataset could be used for automatic data extraction of the results of a give
 
 ## 1.1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:evidence_infer_treatment/1.1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Data and code from our "Inferring Which Medical Treatments Work from Reports of Clinical Trials", NAACL 2019. This work concerns inferring the results reported in clinical trials from text.
@@ -163,7 +163,7 @@ The dataset could be used for automatic data extraction of the results of a give
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
