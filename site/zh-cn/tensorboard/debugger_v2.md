@@ -48,7 +48,7 @@ tf.debugging.experimental.enable_dump_debug_info(
 
 “FULL_HEALTH”模式适用于调试涉及 NaN 和无穷的错误。请参阅下文了解其他受支持的 `tensor_debug_mode`。
 
-`circular_buffer_size` 参数控制保存到 logdir 中的张量事件的数量。默认值为 1000，这样仅会将所检测的 TF2 程序结束前的最后 1000 个张量保存到磁盘。此默认行为会以牺牲调试数据的完整性来减少调试器的开销。如果首选完整性（比如在本文所述的情况下），我们可以通过将参数设置为负值（例如，本文为 -1）来停用循环缓冲区。
+`circular_buffer_size` 参数控制保存到 logdir 中的张量事件的数量。默认值为 1000，这样仅会将所测试的 TF2 程序结束前的最后 1000 个张量保存到磁盘。此默认行为会以牺牲调试数据的完整性来减少调试器的开销。如果首选完整性（比如在本文所述的情况下），我们可以通过将参数设置为负值（例如，本文为 -1）来停用循环缓冲区。
 
 debug_mnist_v2 示例通过向 `enable_dump_debug_info()` 传递命令行标记来对它进行调用。要在启用调试检测的情况下再次运行有问题的 TF2 程序，请执行以下代码：
 
@@ -88,7 +88,7 @@ TensorBoard 中的 Debugger V2 GUI 分为六个版块：
 
 更仔细地查看一下第 85 行的 `probs:0` 张量的数值分解，我们就能发现使用者 `Log:0` 产生 -∞ 的原因：在 `probs:0` 的 1000 个元素中，有一个元素的值是 0。-∞ 是计算 0 的自然对数的结果！如果我们能以某种方式确保 `Log` 运算只获得正输入，就能够防止 NaN/∞ 的发生。为此，我们可以在 `probs` 占位张量上应用裁剪（例如，通过使用 [`tf.clip_by_value()`](https://www.tensorflow.org/api_docs/python/tf/clip_by_value)）。
 
-我们离解决错误越来越近了，但还没有完成。要应用修复，我们需要知道 Log 运算及其占位输入在 Python 源代码中的位置。Debugger V2 提供了一流的支持，可跟踪计算图运算和执行事件到它们的源代码。当我们在 Graph Executions 中点击 `Log:0` 张量后，Stack Trace 版块会使用 Log 运算创建的原始堆栈跟踪进行填充。堆栈跟踪有点大，因为它包含来自 TensorFlow 内部代码（例如，gen_math_ops.py 和 dumping_callback.py）的许多帧，对于大多数调试任务，我们可以放心地忽略这些帧。我们需要关注的帧是 debug_mnist_v2.py（即，我们实际上正在尝试调试的 Python 文件）中的第 216 行。点击“Line 204”会在 Source Code 版块显示相应代码行的视图。
+我们离解决错误越来越近了，但还没有完成。要应用修复，我们需要知道 `Log` 运算及其占位输入在 Python 源代码中的位置。Debugger V2 提供了一流的支持，可跟踪计算图运算和执行事件到它们的源代码。当我们在 Graph Executions 中点击 `Log:0` 张量后，Stack Trace 版块会使用 `Log` 运算创建的原始堆栈跟踪进行填充。堆栈跟踪有点大，因为它包含来自 TensorFlow 内部代码（例如，gen_math_ops.py 和 dumping_callback.py）的许多帧，对于大多数调试任务，我们可以放心地忽略这些帧。我们需要关注的帧是 debug_mnist_v2.py（即，我们实际上正在尝试调试的 Python 文件）中的第 216 行。点击“Line 204”会在 Source Code 版块显示相应代码行的视图。
 
 ![Debugger V2: Source code and stack trace](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tensorboard/images/debugger_v2_4_source_code.png?raw=true)
 
@@ -127,7 +127,7 @@ Debugger V2 在级别相对较低的 TensorFlow 软件堆栈上实现，因此�
 
 ## 性能开销
 
-调试 API 会增加所检测的 TensorFlow 程序的性能开销。开销因 `tensor_debug_mode`、硬件类型和所检测的 TensorFlow 程序的性质而异。作为参考，在 GPU 上，对于批次大小为 64 的 [Transformer 模型，](https://github.com/tensorflow/models/tree/master/official/nlp/transformer)`NO_TENSOR` 模式会在其训练期间增加 15% 的开销。其他 tensor_debug_modes 的开销百分比更高：对于 `CURT_HEALTH`、`CONCISE_HEALTH`、`FULL_HEALTH` 和 `SHAPE` 模式大约为 50%。在 CPU 上，开销略低。在 TPU 上，开销目前较高。
+The debugging API introduces performance overhead to the instrumented TensorFlow program. The overhead varies by `tensor_debug_mode`, hardware type, and nature of the instrumented TensorFlow program. As a reference point, on a GPU, the `NO_TENSOR` mode adds a 15% overhead during the training of a [Transformer model](https://github.com/tensorflow/models/tree/master/official/legacy/transformer) under batch size 64. The percent overhead for other tensor_debug_modes are higher: approximately 50% for the `CURT_HEALTH`, `CONCISE_HEALTH`, `FULL_HEALTH` and `SHAPE` modes. On CPUs, the overhead is slightly lower. On TPUs, the overhead is currently higher.
 
 ## 与其他 TensorFlow 调试 API 的关系
 
