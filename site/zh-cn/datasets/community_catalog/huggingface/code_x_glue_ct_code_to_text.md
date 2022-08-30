@@ -7,13 +7,13 @@
 
 ## go
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_ct_code_to_text/go')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE code-to-text dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Text/code-to-text
@@ -26,7 +26,7 @@ The dataset we use comes from CodeSearchNet and we filter the dataset as the fol
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -114,13 +114,13 @@ The dataset we use comes from CodeSearchNet and we filter the dataset as the fol
 
 ## java
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_ct_code_to_text/java')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE code-to-text dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Text/code-to-text
@@ -133,7 +133,7 @@ The dataset we use comes from CodeSearchNet and we filter the dataset as the fol
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -221,13 +221,13 @@ The dataset we use comes from CodeSearchNet and we filter the dataset as the fol
 
 ## javascript
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_ct_code_to_text/javascript')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE code-to-text dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Text/code-to-text
@@ -240,7 +240,7 @@ The dataset we use comes from CodeSearchNet and we filter the dataset as the fol
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -328,13 +328,13 @@ The dataset we use comes from CodeSearchNet and we filter the dataset as the fol
 
 ## php
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_ct_code_to_text/php')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE code-to-text dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Text/code-to-text
@@ -347,7 +347,7 @@ The dataset we use comes from CodeSearchNet and we filter the dataset as the fol
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -435,13 +435,13 @@ The dataset we use comes from CodeSearchNet and we filter the dataset as the fol
 
 ## python
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_ct_code_to_text/python')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE code-to-text dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Text/code-to-text
@@ -454,7 +454,7 @@ The dataset we use comes from CodeSearchNet and we filter the dataset as the fol
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -542,13 +542,13 @@ The dataset we use comes from CodeSearchNet and we filter the dataset as the fol
 
 ## ruby
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_ct_code_to_text/ruby')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE code-to-text dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Text/code-to-text
@@ -561,7 +561,7 @@ The dataset we use comes from CodeSearchNet and we filter the dataset as the fol
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
