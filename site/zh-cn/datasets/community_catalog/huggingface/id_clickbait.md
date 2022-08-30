@@ -7,13 +7,13 @@
 
 ## annotated
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:id_clickbait/annotated')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The CLICK-ID dataset is a collection of Indonesian news headlines that was collected from 12 local online news
@@ -25,7 +25,7 @@ sample, our annotation shows 6,290 clickbait and 8,710 non-clickbait.
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International license
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -61,13 +61,13 @@ sample, our annotation shows 6,290 clickbait and 8,710 non-clickbait.
 
 ## raw
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:id_clickbait/raw')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The CLICK-ID dataset is a collection of Indonesian news headlines that was collected from 12 local online news
@@ -79,7 +79,7 @@ sample, our annotation shows 6,290 clickbait and 8,710 non-clickbait.
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International license
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
