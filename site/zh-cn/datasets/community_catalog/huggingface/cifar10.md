@@ -7,13 +7,13 @@
 
 ## plain_text
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cifar10/plain_text')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images
@@ -21,7 +21,7 @@ per class. There are 50000 training images and 10000 test images.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
