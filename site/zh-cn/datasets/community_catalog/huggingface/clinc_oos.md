@@ -7,13 +7,13 @@
 
 ## small
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clinc_oos/small')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset is for evaluating the performance of intent classification systems in the
@@ -26,7 +26,7 @@ Small, in which there are only 50 training queries per each in-scope intent
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -208,13 +208,13 @@ Small, in which there are only 50 training queries per each in-scope intent
 
 ## imbalanced
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clinc_oos/imbalanced')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset is for evaluating the performance of intent classification systems in the
@@ -227,7 +227,7 @@ Imbalanced, in which intents have either 25, 50, 75, or 100 training queries.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -409,13 +409,13 @@ Imbalanced, in which intents have either 25, 50, 75, or 100 training queries.
 
 ## plus
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clinc_oos/plus')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset is for evaluating the performance of intent classification systems in the
@@ -428,7 +428,7 @@ OOS+, in which there are 250 out-of-scope training examples, rather than 100.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
