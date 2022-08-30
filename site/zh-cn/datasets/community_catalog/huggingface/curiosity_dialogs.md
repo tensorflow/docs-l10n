@@ -7,13 +7,13 @@
 
 ## curiosity_dialogs
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:curiosity_dialogs/curiosity_dialogs')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset contains 14K dialogs (181K utterances) where users and assistants converse about geographic topics like
@@ -22,7 +22,7 @@ acts, grounding to Wikipedia, and user reactions to messages.
 ```
 
 - **许可**：https://github.com/facebookresearch/curiosity/blob/master/LICENSE
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
