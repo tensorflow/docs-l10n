@@ -7,13 +7,13 @@
 
 ## conceptnet5
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conceptnet5/conceptnet5')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 \ This dataset is designed to provide training data
@@ -112,13 +112,13 @@ useful, or appropriate.
 
 ## omcs_sentences_free
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conceptnet5/omcs_sentences_free')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 \ This dataset is designed to provide training data
@@ -192,13 +192,13 @@ useful, or appropriate.
 
 ## omcs_sentences_more
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conceptnet5/omcs_sentences_more')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 \ This dataset is designed to provide training data
