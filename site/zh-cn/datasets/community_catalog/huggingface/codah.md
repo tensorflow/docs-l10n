@@ -7,20 +7,20 @@
 
 ## codah
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:codah/codah')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The COmmonsense Dataset Adversarially-authored by Humans (CODAH) is an evaluation set for commonsense question-answering in the sentence completion style of SWAG. As opposed to other automatically generated NLI datasets, CODAH is adversarially constructed by humans who can view feedback from a pre-trained model and use this information to design challenging commonsense questions. Our experimental results show that CODAH questions present a complementary extension to the SWAG dataset, testing additional modes of common sense.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -75,20 +75,20 @@ The COmmonsense Dataset Adversarially-authored by Humans (CODAH) is an evaluatio
 
 ## fold_0
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:codah/fold_0')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The COmmonsense Dataset Adversarially-authored by Humans (CODAH) is an evaluation set for commonsense question-answering in the sentence completion style of SWAG. As opposed to other automatically generated NLI datasets, CODAH is adversarially constructed by humans who can view feedback from a pre-trained model and use this information to design challenging commonsense questions. Our experimental results show that CODAH questions present a complementary extension to the SWAG dataset, testing additional modes of common sense.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -145,20 +145,20 @@ The COmmonsense Dataset Adversarially-authored by Humans (CODAH) is an evaluatio
 
 ## fold_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:codah/fold_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The COmmonsense Dataset Adversarially-authored by Humans (CODAH) is an evaluation set for commonsense question-answering in the sentence completion style of SWAG. As opposed to other automatically generated NLI datasets, CODAH is adversarially constructed by humans who can view feedback from a pre-trained model and use this information to design challenging commonsense questions. Our experimental results show that CODAH questions present a complementary extension to the SWAG dataset, testing additional modes of common sense.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -215,20 +215,20 @@ The COmmonsense Dataset Adversarially-authored by Humans (CODAH) is an evaluatio
 
 ## fold_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:codah/fold_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The COmmonsense Dataset Adversarially-authored by Humans (CODAH) is an evaluation set for commonsense question-answering in the sentence completion style of SWAG. As opposed to other automatically generated NLI datasets, CODAH is adversarially constructed by humans who can view feedback from a pre-trained model and use this information to design challenging commonsense questions. Our experimental results show that CODAH questions present a complementary extension to the SWAG dataset, testing additional modes of common sense.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -285,20 +285,20 @@ The COmmonsense Dataset Adversarially-authored by Humans (CODAH) is an evaluatio
 
 ## fold_3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:codah/fold_3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The COmmonsense Dataset Adversarially-authored by Humans (CODAH) is an evaluation set for commonsense question-answering in the sentence completion style of SWAG. As opposed to other automatically generated NLI datasets, CODAH is adversarially constructed by humans who can view feedback from a pre-trained model and use this information to design challenging commonsense questions. Our experimental results show that CODAH questions present a complementary extension to the SWAG dataset, testing additional modes of common sense.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -355,20 +355,20 @@ The COmmonsense Dataset Adversarially-authored by Humans (CODAH) is an evaluatio
 
 ## fold_4
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:codah/fold_4')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The COmmonsense Dataset Adversarially-authored by Humans (CODAH) is an evaluation set for commonsense question-answering in the sentence completion style of SWAG. As opposed to other automatically generated NLI datasets, CODAH is adversarially constructed by humans who can view feedback from a pre-trained model and use this information to design challenging commonsense questions. Our experimental results show that CODAH questions present a complementary extension to the SWAG dataset, testing additional modes of common sense.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
