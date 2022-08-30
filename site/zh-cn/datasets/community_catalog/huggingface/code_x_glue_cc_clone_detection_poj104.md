@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/code_x_glue_cc_clone_detection_poj104)
 - [Huggingface](https://huggingface.co/datasets/code_x_glue_cc_clone_detection_poj104)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_clone_detection_poj104')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE Clone-detection-POJ-104 dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/Clone-detection-POJ-104
@@ -21,7 +21,7 @@ We use POJ-104 dataset on this task.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
