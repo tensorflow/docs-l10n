@@ -7,13 +7,13 @@
 
 ## adjunct_island
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/adjunct_island')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -90,13 +90,13 @@ expert-crafted grammars.
 
 ## anaphor_gender_agreement
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/anaphor_gender_agreement')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -173,13 +173,13 @@ expert-crafted grammars.
 
 ## anaphor_number_agreement
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/anaphor_number_agreement')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -256,13 +256,13 @@ expert-crafted grammars.
 
 ## animate_subject_passive
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/animate_subject_passive')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -339,13 +339,13 @@ expert-crafted grammars.
 
 ## animate_subject_trans
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/animate_subject_trans')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -422,13 +422,13 @@ expert-crafted grammars.
 
 ## causative
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/causative')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -505,13 +505,13 @@ expert-crafted grammars.
 
 ## complex_NP_island
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/complex_NP_island')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -588,13 +588,13 @@ expert-crafted grammars.
 
 ## coordinate_structure_constraint_complex_left_branch
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/coordinate_structure_constraint_complex_left_branch')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -671,13 +671,13 @@ expert-crafted grammars.
 
 ## coordinate_structure_constraint_object_extraction
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/coordinate_structure_constraint_object_extraction')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -754,13 +754,13 @@ expert-crafted grammars.
 
 ## determiner_noun_agreement_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/determiner_noun_agreement_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -837,13 +837,13 @@ expert-crafted grammars.
 
 ## determiner_noun_agreement_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/determiner_noun_agreement_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -920,13 +920,13 @@ expert-crafted grammars.
 
 ## determiner_noun_agreement_irregular_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/determiner_noun_agreement_irregular_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1003,13 +1003,13 @@ expert-crafted grammars.
 
 ## determiner_noun_agreement_irregular_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/determiner_noun_agreement_irregular_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1086,13 +1086,13 @@ expert-crafted grammars.
 
 ## determiner_noun_agreement_with_adj_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/determiner_noun_agreement_with_adj_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1169,13 +1169,13 @@ expert-crafted grammars.
 
 ## determiner_noun_agreement_with_adj_irregular_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/determiner_noun_agreement_with_adj_irregular_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1252,13 +1252,13 @@ expert-crafted grammars.
 
 ## determiner_noun_agreement_with_adj_irregular_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/determiner_noun_agreement_with_adj_irregular_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1335,13 +1335,13 @@ expert-crafted grammars.
 
 ## determiner_noun_agreement_with_adjective_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/determiner_noun_agreement_with_adjective_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1418,13 +1418,13 @@ expert-crafted grammars.
 
 ## distractor_agreement_relational_noun
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/distractor_agreement_relational_noun')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1501,13 +1501,13 @@ expert-crafted grammars.
 
 ## distractor_agreement_relative_clause
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/distractor_agreement_relative_clause')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1584,13 +1584,13 @@ expert-crafted grammars.
 
 ## drop_argument
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/drop_argument')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1667,13 +1667,13 @@ expert-crafted grammars.
 
 ## ellipsis_n_bar_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/ellipsis_n_bar_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1750,13 +1750,13 @@ expert-crafted grammars.
 
 ## ellipsis_n_bar_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/ellipsis_n_bar_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1833,13 +1833,13 @@ expert-crafted grammars.
 
 ## existential_there_object_raising
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/existential_there_object_raising')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1916,13 +1916,13 @@ expert-crafted grammars.
 
 ## existential_there_quantifiers_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/existential_there_quantifiers_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -1999,13 +1999,13 @@ expert-crafted grammars.
 
 ## existential_there_quantifiers_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/existential_there_quantifiers_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2082,13 +2082,13 @@ expert-crafted grammars.
 
 ## existential_there_subject_raising
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/existential_there_subject_raising')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2165,13 +2165,13 @@ expert-crafted grammars.
 
 ## expletive_it_object_raising
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/expletive_it_object_raising')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2248,13 +2248,13 @@ expert-crafted grammars.
 
 ## inchoative
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/inchoative')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2331,13 +2331,13 @@ expert-crafted grammars.
 
 ## intransitive
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/intransitive')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2414,13 +2414,13 @@ expert-crafted grammars.
 
 ## irregular_past_participle_adjectives
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/irregular_past_participle_adjectives')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2497,13 +2497,13 @@ expert-crafted grammars.
 
 ## irregular_past_participle_verbs
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/irregular_past_participle_verbs')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2580,13 +2580,13 @@ expert-crafted grammars.
 
 ## irregular_plural_subject_verb_agreement_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/irregular_plural_subject_verb_agreement_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2663,13 +2663,13 @@ expert-crafted grammars.
 
 ## irregular_plural_subject_verb_agreement_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/irregular_plural_subject_verb_agreement_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2746,13 +2746,13 @@ expert-crafted grammars.
 
 ## left_branch_island_echo_question
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/left_branch_island_echo_question')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2829,13 +2829,13 @@ expert-crafted grammars.
 
 ## left_branch_island_simple_question
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/left_branch_island_simple_question')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2912,13 +2912,13 @@ expert-crafted grammars.
 
 ## matrix_question_npi_licensor_present
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/matrix_question_npi_licensor_present')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -2995,13 +2995,13 @@ expert-crafted grammars.
 
 ## npi_present_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/npi_present_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3078,13 +3078,13 @@ expert-crafted grammars.
 
 ## npi_present_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/npi_present_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3161,13 +3161,13 @@ expert-crafted grammars.
 
 ## only_npi_licensor_present
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/only_npi_licensor_present')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3244,13 +3244,13 @@ expert-crafted grammars.
 
 ## only_npi_scope
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/only_npi_scope')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3327,13 +3327,13 @@ expert-crafted grammars.
 
 ## passive_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/passive_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3410,13 +3410,13 @@ expert-crafted grammars.
 
 ## passive_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/passive_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3493,13 +3493,13 @@ expert-crafted grammars.
 
 ## principle_A_c_command
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/principle_A_c_command')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3576,13 +3576,13 @@ expert-crafted grammars.
 
 ## principle_A_case_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/principle_A_case_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3659,13 +3659,13 @@ expert-crafted grammars.
 
 ## principle_A_case_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/principle_A_case_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3742,13 +3742,13 @@ expert-crafted grammars.
 
 ## principle_A_domain_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/principle_A_domain_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3825,13 +3825,13 @@ expert-crafted grammars.
 
 ## principle_A_domain_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/principle_A_domain_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3908,13 +3908,13 @@ expert-crafted grammars.
 
 ## principle_A_domain_3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/principle_A_domain_3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -3991,13 +3991,13 @@ expert-crafted grammars.
 
 ## principle_A_reconstruction
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/principle_A_reconstruction')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4074,13 +4074,13 @@ expert-crafted grammars.
 
 ## regular_plural_subject_verb_agreement_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/regular_plural_subject_verb_agreement_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4157,13 +4157,13 @@ expert-crafted grammars.
 
 ## regular_plural_subject_verb_agreement_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/regular_plural_subject_verb_agreement_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4240,13 +4240,13 @@ expert-crafted grammars.
 
 ## sentential_negation_npi_licensor_present
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/sentential_negation_npi_licensor_present')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4323,13 +4323,13 @@ expert-crafted grammars.
 
 ## sentential_negation_npi_scope
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/sentential_negation_npi_scope')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4406,13 +4406,13 @@ expert-crafted grammars.
 
 ## sentential_subject_island
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/sentential_subject_island')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4489,13 +4489,13 @@ expert-crafted grammars.
 
 ## superlative_quantifiers_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/superlative_quantifiers_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4572,13 +4572,13 @@ expert-crafted grammars.
 
 ## superlative_quantifiers_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/superlative_quantifiers_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4655,13 +4655,13 @@ expert-crafted grammars.
 
 ## tough_vs_raising_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/tough_vs_raising_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4738,13 +4738,13 @@ expert-crafted grammars.
 
 ## tough_vs_raising_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/tough_vs_raising_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4821,13 +4821,13 @@ expert-crafted grammars.
 
 ## transitive
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/transitive')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4904,13 +4904,13 @@ expert-crafted grammars.
 
 ## wh_island
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/wh_island')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -4987,13 +4987,13 @@ expert-crafted grammars.
 
 ## wh_questions_object_gap
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/wh_questions_object_gap')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -5070,13 +5070,13 @@ expert-crafted grammars.
 
 ## wh_questions_subject_gap
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/wh_questions_subject_gap')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -5153,13 +5153,13 @@ expert-crafted grammars.
 
 ## wh_questions_subject_gap_long_distance
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/wh_questions_subject_gap_long_distance')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -5236,13 +5236,13 @@ expert-crafted grammars.
 
 ## wh_vs_that_no_gap
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/wh_vs_that_no_gap')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -5319,13 +5319,13 @@ expert-crafted grammars.
 
 ## wh_vs_that_no_gap_long_distance
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/wh_vs_that_no_gap_long_distance')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -5402,13 +5402,13 @@ expert-crafted grammars.
 
 ## wh_vs_that_with_gap
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/wh_vs_that_with_gap')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
@@ -5485,13 +5485,13 @@ expert-crafted grammars.
 
 ## wh_vs_that_with_gap_long_distance
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blimp/wh_vs_that_with_gap_long_distance')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BLiMP is a challenge set for evaluating what language models (LMs) know about
