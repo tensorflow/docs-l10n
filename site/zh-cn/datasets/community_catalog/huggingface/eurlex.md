@@ -7,20 +7,20 @@
 
 ## eurlex57k
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:eurlex/eurlex57k')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EURLEX57K contains 57k legislative documents in English from EUR-Lex portal, annotated with EUROVOC concepts.
 ```
 
 - **许可**：CC BY-SA (Creative Commons / Attribution-ShareAlike)
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
