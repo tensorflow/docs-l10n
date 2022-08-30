@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/gigaword)
 - [Huggingface](https://huggingface.co/datasets/gigaword)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gigaword')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Headline-generation on a corpus of article pairs from Gigaword consisting of
