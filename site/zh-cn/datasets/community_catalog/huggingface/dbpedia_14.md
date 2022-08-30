@@ -7,13 +7,13 @@
 
 ## dbpedia_14
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:dbpedia_14/dbpedia_14')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The DBpedia ontology classification dataset is constructed by picking 14 non-overlapping classes
