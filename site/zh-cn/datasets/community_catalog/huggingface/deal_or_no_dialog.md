@@ -7,20 +7,20 @@
 
 ## dialogues
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:deal_or_no_dialog/dialogues')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A large dataset of human-human negotiations on a multi-issue bargaining task, where agents who cannot observe each other’s reward functions must reach anagreement (o a deal) via natural language dialogue.
 ```
 
 - **许可**：该项目在 CC-by-NC 下许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -82,20 +82,20 @@ A large dataset of human-human negotiations on a multi-issue bargaining task, wh
 
 ## self_play
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:deal_or_no_dialog/self_play')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A large dataset of human-human negotiations on a multi-issue bargaining task, where agents who cannot observe each other’s reward functions must reach anagreement (o a deal) via natural language dialogue.
 ```
 
 - **许可**：该项目在 CC-by-NC 下许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
