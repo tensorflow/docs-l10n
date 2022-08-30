@@ -106,7 +106,7 @@ trainer = Trainer(
 
 [AI Platform Vizier](https://cloud.google.com/ai-platform/optimizer/docs/overview) 是一项托管服务，可基于 [Google Vizier](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/bcb15507f4b52991a0783013df4222240e942381.pdf) 技术执行黑盒优化。
 
-[CloudTuner](https://github.com/tensorflow/cloud/blob/master/src/python/tensorflow_cloud/tuner/tuner.py) is an implementation of [KerasTuner](https://www.tensorflow.org/tutorials/keras/keras_tuner) which talks to the AI Platform Vizier service as the study backend. Since CloudTuner is a subclass of `keras_tuner.Tuner`, it can be used as a drop-in replacement in the `tuner_fn` module, and execute as a part of the TFX Tuner component.
+[CloudTuner](https://github.com/tensorflow/cloud/blob/master/src/python/tensorflow_cloud/tuner/tuner.py) 是 [KerasTuner](https://www.tensorflow.org/tutorials/keras/keras_tuner) 的一个实现，可与作为研究后端的 AI Platform Vizier 服务对话。由于 CloudTuner 是 `kerastuner.Tuner` 的子类，因此它可以用作 `tuner_fn` 模块中的直接替代，并作为 TFX Tuner 组件的一部分执行。
 
 下面是一个如何使用 `CloudTuner` 的代码段。请注意，对 `CloudTuner` 进行配置需要特定于 GCP 的条目，例如 `project_id` 和 `region`。
 
@@ -176,6 +176,6 @@ tuner = google_cloud_ai_platform.Tuner(
 
 [CloudTuner 教程](https://github.com/GoogleCloudPlatform/ai-platform-samples/blob/master/notebooks/samples/optimizer/ai_platform_vizier_tuner.ipynb)
 
-[Proposal](https://github.com/tensorflow/community/blob/master/rfcs/20200420-tfx-tuner-component.md)
+[提议](https://github.com/tensorflow/community/blob/master/rfcs/20200420-tfx-tuner-component.md)
 
 有关更多详细信息，请参阅 [Tuner API 参考](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/Tuner)。
