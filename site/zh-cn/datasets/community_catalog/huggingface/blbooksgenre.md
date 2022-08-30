@@ -7,13 +7,13 @@
 
 ## title_genre_classifiction
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blbooksgenre/title_genre_classifiction')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset contains metadata for resources belonging to the British Library’s digitised printed books (18th-19th century) collection (bl.uk/collection-guides/digitised-printed-books).
@@ -23,7 +23,7 @@ This metadata dataset should be considered a snapshot of this metadata.
 ```
 
 - **许可**：CC0 1.0 Universal Public Domain
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -59,13 +59,13 @@ This metadata dataset should be considered a snapshot of this metadata.
 
 ## annotated_raw
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blbooksgenre/annotated_raw')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset contains metadata for resources belonging to the British Library’s digitised printed books (18th-19th century) collection (bl.uk/collection-guides/digitised-printed-books).
@@ -75,7 +75,7 @@ This metadata dataset should be considered a snapshot of this metadata.
 ```
 
 - **许可**：CC0 1.0 Universal Public Domain
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -353,13 +353,13 @@ This metadata dataset should be considered a snapshot of this metadata.
 
 ## raw
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blbooksgenre/raw')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset contains metadata for resources belonging to the British Library’s digitised printed books (18th-19th century) collection (bl.uk/collection-guides/digitised-printed-books).
@@ -369,7 +369,7 @@ This metadata dataset should be considered a snapshot of this metadata.
 ```
 
 - **许可**：CC0 1.0 Universal Public Domain
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
