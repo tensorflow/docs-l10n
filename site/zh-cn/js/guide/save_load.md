@@ -87,7 +87,7 @@ await model.save('http://model-server.domain/upload')
 
 请注意，这两个文件的名称需要始终与上面所指定的完全相同（因为名称内置于函数中）。此 [API 文档](https://js.tensorflow.org/api/latest/#tf.io.browserHTTPRequest)包含一个 Python 代码段，演示了如何使用 [Flask](http://flask.pocoo.org/) Web 框架处理源自 `save` 的请求。
 
-Often you will have to pass more arguments or request headers to your HTTP server (e.g. for authentication or if you want to specify a folder that the model should be saved in). You can gain fine-grained control over these aspects of the requests from `save` by replacing the URL string argument in `tf.io.browserHTTPRequest`. This API affords greater flexibility in controlling HTTP requests.
+通常，您必须向 HTTP 服务器传递更多参数或请求头（例如，用于身份验证，或者如果要指定应保存模型的文件夹）。您可以通过替换 `tf.io.browserHTTPRequest` 中的网址字符串参数来获得对来自 `save` 的请求在这些方面的细粒度控制。此 API 在控制 HTTP 请求方面提供了更大的灵活性。
 
 例如：
 
@@ -105,7 +105,7 @@ await model.save(tf.io.browserHTTPRequest(
 await model.save('file:///path/to/my-model');
 ```
 
-When running on Node.js we also have direct access to the filesystem and can save models there. The command above will save two files to the `path` specified after the `scheme`.
+在 Node.js 上运行时，我们还可以直接访问文件系统并保存模型。上面的命令会将两个文件保存到在 `scheme` 后指定的 `path` 中。
 
 1. 一个名为 `[model].json` 的 JSON 文本文件，其中包含模型拓扑和对下文所述权重文件的引用。
 2. 一个二进制文件，其中包含名为 `[model].weights.bin` 的权重值。
@@ -162,7 +162,7 @@ const model = await tf.loadLayersModel('http://model-server.domain/download/mode
 
 这将从 HTTP 端点加载模型。加载 `json` 文件后，函数将请求 `json` 文件引用的对应 `.bin` 文件。
 
-> NOTE: This implementation relies on the presence of the [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method, if you are in an environment that does not provide the fetch method natively you can provide a global method names [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) that satisfies that interface or use a library like [`node-fetch`](https://www.npmjs.com/package/node-fetch).
+> 注：此实现依赖于 [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) 方法，如果您的环境没有原生提供 fetch 方法，您可以提供满足接口要求的全局方法名称 [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)，或者使用类似于 [`node-fetch`](https://www.npmjs.com/package/node-fetch) 的库。
 
 ### 原生文件系统（仅限 Node.js）
 
