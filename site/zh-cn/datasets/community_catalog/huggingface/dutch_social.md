@@ -7,13 +7,13 @@
 
 ## dutch_social
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:dutch_social/dutch_social')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The dataset contains around 271,342 tweets. The tweets are filtered via the official Twitter API to
@@ -26,7 +26,7 @@ Interoperable, Reusable) way. Twitter's Terms of Service Licensed under Attribut
 ```
 
 - **许可**：CC BY-NC 4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
