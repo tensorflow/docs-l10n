@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/app_reviews)
 - [Huggingface](https://huggingface.co/datasets/app_reviews)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:app_reviews')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 It is a large dataset of Android applications belonging to 23 differentapps categories, which provides an overview of the types of feedback users report on the apps and documents the evolution of the related code metrics. The dataset contains about 395 applications of the F-Droid repository, including around 600 versions, 280,000 user reviews (extracted with specific text mining approaches)
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
