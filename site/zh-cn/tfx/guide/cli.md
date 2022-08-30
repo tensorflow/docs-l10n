@@ -12,7 +12,8 @@ TFX 命令行接口 (CLI) 使用流水线编排器（例如 Kubeflow Pipelines�
 
 TFX CLI 作为 TFX 软件包的一部分进行安装。所有 CLI 命令都遵循以下结构：
 
-<pre class="devsite-terminal">tfx &lt;var&gt;command-group&lt;/var&gt; &lt;var&gt;command&lt;/var&gt; &lt;var&gt;flags&lt;/var&gt;
+<pre class="devsite-terminal">
+tfx &lt;var&gt;command-group&lt;/var&gt; &lt;var&gt;command&lt;/var&gt; &lt;var&gt;flags&lt;/var&gt;
 </pre>
 
 目前支持以下 <var>command-group</var> 选项：
