@@ -7,13 +7,13 @@
 
 ## compguesswhat-original
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:compguesswhat/compguesswhat-original')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CompGuessWhat?! is an instance of a multi-task framework for evaluating the quality of learned neural representations,
@@ -198,13 +198,13 @@ CompGuessWhat?! is an instance of a multi-task framework for evaluating the qual
 
 ## compguesswhat-zero_shot
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:compguesswhat/compguesswhat-zero_shot')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CompGuessWhat?! is an instance of a multi-task framework for evaluating the quality of learned neural representations,
