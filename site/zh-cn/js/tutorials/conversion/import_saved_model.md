@@ -104,7 +104,7 @@ const MODEL_URL = 'model_directory/model.json';
 
 const model = await loadGraphModel(MODEL_URL);
 const cat = document.getElementById('cat');
-model.execute(tf.fromPixels(cat));
+model.execute(tf.browser.fromPixels(cat));
 ```
 
 请查看我们的 [MobileNet 演示](https://github.com/tensorflow/tfjs-converter/tree/master/demo/mobilenet)。
