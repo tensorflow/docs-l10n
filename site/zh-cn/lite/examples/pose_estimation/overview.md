@@ -9,7 +9,7 @@
 
 <a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite">下载此模块</a>
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android 示例</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS 示例</a>
+<a data-md-type="raw_html" class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android 示例</a> <a data-md-type="raw_html" class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS 示例</a>
 
 如果您熟悉 [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite)，请下载入门 MoveNet 姿态预测模型和支持文件。
 
@@ -142,8 +142,7 @@ MoveNet 在各种数据集上的表现都优于 PoseNet，尤其是在包含健�
 </thead>
 <tbody>
   <tr>
-    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/float16/4">MoveNet.Thunder（FP16 量化）</a>
-</td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/float16/4">MoveNet.Thunder（FP16 量化）</a> </td>
     <td>12.6MB</td>
     <td>72.0</td>
     <td>155ms</td>
@@ -151,8 +150,7 @@ MoveNet 在各种数据集上的表现都优于 PoseNet，尤其是在包含健�
     <td>594ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/int8/4">MoveNet.Thunder（INT8 量化）</a>
-</td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/int8/4">MoveNet.Thunder（INT8 量化）</a> </td>
     <td>7.1MB</td>
     <td>68.9</td>
     <td>100ms</td>
@@ -160,8 +158,7 @@ MoveNet 在各种数据集上的表现都优于 PoseNet，尤其是在包含健�
     <td>251ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/float16/4">MoveNet.Lightning（FP16 量化）</a>
-</td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/float16/4">MoveNet.Lightning（FP16 量化）</a> </td>
     <td>4.8MB</td>
     <td>63.0</td>
     <td>60ms</td>
@@ -169,8 +166,7 @@ MoveNet 在各种数据集上的表现都优于 PoseNet，尤其是在包含健�
     <td>186ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/int8/4">MoveNet.Lightning（INT8 量化）</a>
-</td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/int8/4">MoveNet.Lightning（INT8 量化）</a> </td>
     <td>2.9MB</td>
     <td>57.4</td>
     <td>52ms</td>
@@ -178,8 +174,7 @@ MoveNet 在各种数据集上的表现都优于 PoseNet，尤其是在包含健�
     <td>95ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">PoseNet（MobileNetV1 主干，FP32）</a>
-</td>
+    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">PoseNet（MobileNetV1 主干，FP32）</a> </td>
     <td>13.3MB</td>
     <td>45.6</td>
     <td>80ms</td>
