@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/bbaw_egyptian)
 - [Huggingface](https://huggingface.co/datasets/bbaw_egyptian)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bbaw_egyptian')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The project `Strukturen und Transformationen des Wortschatzes der ägyptischen Sprache`
@@ -20,7 +20,7 @@ This publication comprises an excerpt of the internal database's contents.
 ```
 
 - **许可**：Creative Commons-Lizenz - CC BY-SA - 4.0 International
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
