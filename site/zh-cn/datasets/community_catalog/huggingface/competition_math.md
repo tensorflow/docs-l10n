@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/competition_math)
 - [Huggingface](https://huggingface.co/datasets/competition_math)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:competition_math')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Mathematics Aptitude Test of Heuristics (MATH) dataset consists of problems
@@ -21,7 +21,7 @@ models to generate answer derivations and explanations.
 ```
 
 - **许可**：https://github.com/hendrycks/math/blob/main/LICENSE
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
