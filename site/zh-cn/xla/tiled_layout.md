@@ -4,7 +4,7 @@
 
 <p align="center">   <img src="images/xla_array_layout_figure1.png">   Figure 1</p>
 
-Figure 1 shows how an array F32[3,5] is laid out in memory with 2x2 tiling. A shape with this layout is written as F32[3,5]{1,0:T(2,2)}, where 1,0 relates to the physical order of dimensions (minor_to_major field in Layout) while (2,2) after the colon indicates tiling of the physical dimensions by a 2x2 tile.
+图 1 显示了如何使用 2x2 平铺在内存中布置数组 F32[3,5]。具有此布局的形状写为 F32[3,5]{1,0:(2,2)}，其中 1,0 与维度的物理顺序（布局中的 minor_to_major 字段）相关，而冒号后面的 (2,2) 表示通过 2x2 图块来平铺物理维度。
 
 以直观方式布置图块来覆盖形状，随后在每个图块中以不平铺的方式布置各元素，如上面的示例中所示。此示例的右侧部分显示了内存中的布局，包括为获得完整的 2x2 图块而添加的白色填充元素（即使原始数组边界不平坦也是如此）。
 
