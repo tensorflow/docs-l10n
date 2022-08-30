@@ -7,13 +7,13 @@
 
 ## dialogue_domain
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:doc2dial/dialogue_domain')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Doc2dial is dataset of goal-oriented dialogues that are grounded in the associated documents. It includes over 4500 annotated conversations with an average of 14 turns that are grounded in over 450 documents from four domains. Compared to the prior document-grounded dialogue datasets this dataset covers a variety of dialogue scenes in information-seeking conversations.
@@ -90,13 +90,13 @@ Doc2dial is dataset of goal-oriented dialogues that are grounded in the associat
 
 ## document_domain
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:doc2dial/document_domain')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Doc2dial is dataset of goal-oriented dialogues that are grounded in the associated documents. It includes over 4500 annotated conversations with an average of 14 turns that are grounded in over 450 documents from four domains. Compared to the prior document-grounded dialogue datasets this dataset covers a variety of dialogue scenes in information-seeking conversations.
@@ -208,13 +208,13 @@ Doc2dial is dataset of goal-oriented dialogues that are grounded in the associat
 
 ## doc2dial_rc
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:doc2dial/doc2dial_rc')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Doc2dial is dataset of goal-oriented dialogues that are grounded in the associated documents. It includes over 4500 annotated conversations with an average of 14 turns that are grounded in over 450 documents from four domains. Compared to the prior document-grounded dialogue datasets this dataset covers a variety of dialogue scenes in information-seeking conversations.
