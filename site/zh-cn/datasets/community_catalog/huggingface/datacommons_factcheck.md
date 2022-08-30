@@ -7,20 +7,20 @@
 
 ## fctchk_politifact_wapo
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:datacommons_factcheck/fctchk_politifact_wapo')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset of fact checked claims by news media maintained by datacommons.org
 ```
 
 - **许可**：CC-BY-NC-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -71,20 +71,20 @@ A dataset of fact checked claims by news media maintained by datacommons.org
 
 ## weekly_standard
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:datacommons_factcheck/weekly_standard')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset of fact checked claims by news media maintained by datacommons.org
 ```
 
 - **许可**：CC-BY-NC-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
