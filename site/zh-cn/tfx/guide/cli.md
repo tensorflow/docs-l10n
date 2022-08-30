@@ -879,8 +879,7 @@ Kubeflow：
 
 用法：
 
-<pre class="devsite-click-to-copy devsite-terminal">tfx template list
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx template list</pre>
 
 ### copy
 
