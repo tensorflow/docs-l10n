@@ -7,13 +7,13 @@
 
 ## all
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:big_patent/all')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents
@@ -31,7 +31,7 @@ There are two features:
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -59,13 +59,13 @@ There are two features:
 
 ## a
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:big_patent/a')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents
@@ -83,7 +83,7 @@ There are two features:
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -111,13 +111,13 @@ There are two features:
 
 ## b
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:big_patent/b')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents
@@ -135,7 +135,7 @@ There are two features:
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -163,13 +163,13 @@ There are two features:
 
 ## c
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:big_patent/c')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents
@@ -187,7 +187,7 @@ There are two features:
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -215,13 +215,13 @@ There are two features:
 
 ## d
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:big_patent/d')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents
@@ -239,7 +239,7 @@ There are two features:
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -267,13 +267,13 @@ There are two features:
 
 ## e
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:big_patent/e')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents
@@ -291,7 +291,7 @@ There are two features:
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -319,13 +319,13 @@ There are two features:
 
 ## f
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:big_patent/f')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents
@@ -343,7 +343,7 @@ There are two features:
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -371,13 +371,13 @@ There are two features:
 
 ## g
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:big_patent/g')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents
@@ -395,7 +395,7 @@ There are two features:
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -423,13 +423,13 @@ There are two features:
 
 ## h
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:big_patent/h')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents
@@ -447,7 +447,7 @@ There are two features:
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -475,13 +475,13 @@ There are two features:
 
 ## y
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:big_patent/y')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents
@@ -499,7 +499,7 @@ There are two features:
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
