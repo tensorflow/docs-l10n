@@ -7,20 +7,20 @@
 
 ## generics_kb_best
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:generics_kb/generics_kb_best')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The GenericsKB contains 3.4M+ generic sentences about the world, i.e., sentences expressing general truths such as "Dogs bark," and "Trees remove carbon dioxide from the atmosphere." Generics are potentially useful as a knowledge source for AI systems requiring general world knowledge. The GenericsKB is the first large-scale resource containing naturally occurring generic sentences (as opposed to extracted or crowdsourced triples), and is rich in high-quality, general, semantically complete statements. Generics were primarily extracted from three large text sources, namely the Waterloo Corpus, selected parts of Simple Wikipedia, and the ARC Corpus. A filtered, high-quality subset is also available in GenericsKB-Best, containing 1,020,868 sentences. We recommend you start with GenericsKB-Best.
 ```
 
 - **许可**：cc-by-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -66,20 +66,20 @@ The GenericsKB contains 3.4M+ generic sentences about the world, i.e., sentences
 
 ## generics_kb
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:generics_kb/generics_kb')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The GenericsKB contains 3.4M+ generic sentences about the world, i.e., sentences expressing general truths such as "Dogs bark," and "Trees remove carbon dioxide from the atmosphere." Generics are potentially useful as a knowledge source for AI systems requiring general world knowledge. The GenericsKB is the first large-scale resource containing naturally occurring generic sentences (as opposed to extracted or crowdsourced triples), and is rich in high-quality, general, semantically complete statements. Generics were primarily extracted from three large text sources, namely the Waterloo Corpus, selected parts of Simple Wikipedia, and the ARC Corpus. A filtered, high-quality subset is also available in GenericsKB-Best, containing 1,020,868 sentences. We recommend you start with GenericsKB-Best.
 ```
 
 - **许可**：cc-by-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -125,20 +125,20 @@ The GenericsKB contains 3.4M+ generic sentences about the world, i.e., sentences
 
 ## generics_kb_simplewiki
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:generics_kb/generics_kb_simplewiki')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The GenericsKB contains 3.4M+ generic sentences about the world, i.e., sentences expressing general truths such as "Dogs bark," and "Trees remove carbon dioxide from the atmosphere." Generics are potentially useful as a knowledge source for AI systems requiring general world knowledge. The GenericsKB is the first large-scale resource containing naturally occurring generic sentences (as opposed to extracted or crowdsourced triples), and is rich in high-quality, general, semantically complete statements. Generics were primarily extracted from three large text sources, namely the Waterloo Corpus, selected parts of Simple Wikipedia, and the ARC Corpus. A filtered, high-quality subset is also available in GenericsKB-Best, containing 1,020,868 sentences. We recommend you start with GenericsKB-Best.
 ```
 
 - **许可**：cc-by-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -229,20 +229,20 @@ The GenericsKB contains 3.4M+ generic sentences about the world, i.e., sentences
 
 ## generics_kb_waterloo
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:generics_kb/generics_kb_waterloo')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The GenericsKB contains 3.4M+ generic sentences about the world, i.e., sentences expressing general truths such as "Dogs bark," and "Trees remove carbon dioxide from the atmosphere." Generics are potentially useful as a knowledge source for AI systems requiring general world knowledge. The GenericsKB is the first large-scale resource containing naturally occurring generic sentences (as opposed to extracted or crowdsourced triples), and is rich in high-quality, general, semantically complete statements. Generics were primarily extracted from three large text sources, namely the Waterloo Corpus, selected parts of Simple Wikipedia, and the ARC Corpus. A filtered, high-quality subset is also available in GenericsKB-Best, containing 1,020,868 sentences. We recommend you start with GenericsKB-Best.
 ```
 
 - **许可**：cc-by-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
