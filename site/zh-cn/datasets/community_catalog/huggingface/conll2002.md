@@ -7,13 +7,13 @@
 
 ## es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conll2002/es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Named entities are phrases that contain the names of persons, organizations, locations, times and quantities.
@@ -34,7 +34,7 @@ For more details see https://www.clips.uantwerpen.be/conll2002/ner/ and https://
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -162,13 +162,13 @@ For more details see https://www.clips.uantwerpen.be/conll2002/ner/ and https://
 
 ## nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conll2002/nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Named entities are phrases that contain the names of persons, organizations, locations, times and quantities.
@@ -189,7 +189,7 @@ For more details see https://www.clips.uantwerpen.be/conll2002/ner/ and https://
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
