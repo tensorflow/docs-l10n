@@ -7,13 +7,13 @@
 
 ## cola
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/cola')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -22,7 +22,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -60,13 +60,13 @@ evaluating, and analyzing natural language understanding systems.
 
 ## sst2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/sst2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -75,7 +75,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -113,13 +113,13 @@ evaluating, and analyzing natural language understanding systems.
 
 ## mrpc
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/mrpc')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -128,7 +128,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -171,13 +171,13 @@ evaluating, and analyzing natural language understanding systems.
 
 ## qqp
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/qqp')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -186,7 +186,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -229,13 +229,13 @@ evaluating, and analyzing natural language understanding systems.
 
 ## stsb
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/stsb')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -244,7 +244,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -282,13 +282,13 @@ evaluating, and analyzing natural language understanding systems.
 
 ## mnli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/mnli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -297,7 +297,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -343,13 +343,13 @@ evaluating, and analyzing natural language understanding systems.
 
 ## mnli_mismatched
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/mnli_mismatched')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -358,7 +358,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -401,13 +401,13 @@ evaluating, and analyzing natural language understanding systems.
 
 ## mnli_matched
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/mnli_matched')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -416,7 +416,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -459,13 +459,13 @@ evaluating, and analyzing natural language understanding systems.
 
 ## qnli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/qnli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -474,7 +474,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -517,13 +517,13 @@ evaluating, and analyzing natural language understanding systems.
 
 ## rte
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/rte')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -532,7 +532,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -575,13 +575,13 @@ evaluating, and analyzing natural language understanding systems.
 
 ## wnli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/wnli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -590,7 +590,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -633,13 +633,13 @@ evaluating, and analyzing natural language understanding systems.
 
 ## ax
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glue/ax')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GLUE, the General Language Understanding Evaluation benchmark
@@ -648,7 +648,7 @@ evaluating, and analyzing natural language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
