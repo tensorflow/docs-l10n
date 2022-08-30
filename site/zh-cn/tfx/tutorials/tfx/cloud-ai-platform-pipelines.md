@@ -537,7 +537,7 @@ kubeflow_dag_runner.KubeflowDagRunner(config=config).run(pipeline)
 
 > **注：您必须先在 `configs.py` 文件中设置您的 GCP 项目 ID 和区域，然后才能继续。**
 
-**Change directory one level up.** Click the name of the directory above the file list. The name of the directory is the name of the pipeline which is `my_pipeline` if you didn't change the pipeline name.
+**浏览到上一级目录**。点击文件列表上方的目录名称。该目录名称为流水线的名称，如果您未更改流水线名称，则为 `my_pipeline`。
 
 **双击打开 `kubeflow_runner.py`**。为 `create_pipeline` 函数取消注释 `query` 和 `beam_pipeline_args` 两个参数。
 
