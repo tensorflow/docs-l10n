@@ -7,20 +7,20 @@
 
 ## plain_text
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cc_news/plain_text')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CC-News containing news articles from news sites all over the world The data is available on AWS S3 in the Common Crawl bucket at /crawl-data/CC-NEWS/. This version of the dataset has 708241 articles. It represents a small portion of English  language subset of the CC-News dataset created using news-please(Hamborg et al.,2017) to collect and extract English language portion of CC-News.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
