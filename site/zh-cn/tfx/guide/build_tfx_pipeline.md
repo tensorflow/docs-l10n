@@ -8,7 +8,8 @@
 
 TFX 流水线使用 [`Pipeline` 类](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/pipeline.py) {: .external } 进行定义。以下示例将演示如何使用 `Pipeline` 类。
 
-<pre class="devsite-click-to-copy prettyprint">pipeline.Pipeline(
+<pre class="devsite-click-to-copy prettyprint">
+pipeline.Pipeline(
     pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt;,
     pipeline_root=&lt;var&gt;pipeline-root&lt;/var&gt;,
     components=&lt;var&gt;components&lt;/var&gt;,
