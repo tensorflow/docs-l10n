@@ -7,13 +7,13 @@
 
 ## alignments
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/alignments')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -22,7 +22,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -53,13 +53,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## multilingual
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/multilingual')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -68,7 +68,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -142,13 +142,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## multilingual_with_para
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/multilingual_with_para')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -157,7 +157,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -231,13 +231,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_test
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_test')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -246,7 +246,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -318,13 +318,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_test
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_test')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -333,7 +333,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -405,13 +405,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_bg
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_bg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -420,7 +420,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -493,13 +493,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_bg
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_bg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -508,7 +508,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -581,13 +581,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_hr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_hr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -596,7 +596,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -669,13 +669,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_hr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_hr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -684,7 +684,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -757,13 +757,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -772,7 +772,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -845,13 +845,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -860,7 +860,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -933,13 +933,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -948,7 +948,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1021,13 +1021,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -1036,7 +1036,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1109,13 +1109,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_mk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_mk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -1124,7 +1124,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1197,13 +1197,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_mk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_mk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -1212,7 +1212,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1285,13 +1285,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -1300,7 +1300,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1373,13 +1373,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -1388,7 +1388,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1461,13 +1461,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -1476,7 +1476,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1549,13 +1549,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -1564,7 +1564,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1637,13 +1637,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_sq
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_sq')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -1652,7 +1652,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1725,13 +1725,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_sq
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_sq')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -1740,7 +1740,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1813,13 +1813,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_sr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_sr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -1828,7 +1828,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1901,13 +1901,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_sr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_sr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -1916,7 +1916,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1989,13 +1989,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_tr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_tr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -2004,7 +2004,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2077,13 +2077,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_tr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_tr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -2092,7 +2092,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2165,13 +2165,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_vi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_vi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -2180,7 +2180,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2253,13 +2253,13 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 
 ## crosslingual_with_para_vi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:exams/crosslingual_with_para_vi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 EXAMS is a benchmark dataset for multilingual and cross-lingual question answering from high school examinations.
@@ -2268,7 +2268,7 @@ covering 8 language families and 24 school subjects from Natural Sciences and So
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
