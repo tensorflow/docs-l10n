@@ -4,7 +4,7 @@
 
 ## 准备工作
 
-在为 TensorFlow 项目贡献源代码之前，请查看该项目的 GitHub 仓库中的 `CONTRIBUTING.md` 文件。（例如，请参阅[核心 TensorFlow 仓库的 CONTRIBUTING.md 文件](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md)。）所有代码贡献者都需要签署[贡献者许可协议](https://cla.developers.google.com/clas) (CLA)。
+Before you contribute source code to a TensorFlow project, please review the `CONTRIBUTING.md` file in the GitHub repo of the project. For example, see the [CONTRIBUTING.md](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md) file in the core TensorFlow repo. All code contributors are required to sign a [Contributor License Agreement](https://cla.developers.google.com/clas) (CLA).
 
 为避免重复工作，在开始处理非普通功能之前，请查看[当前](https://github.com/tensorflow/community/tree/master/rfcs)或[提议的](https://github.com/tensorflow/community/labels/RFC%3A%20Proposed) RFC 并与 TensorFlow 论坛上的开发者 ([developers@tensorflow.org](https://groups.google.com/u/1/a/tensorflow.org/g/developers)) 联系。在决定添加新功能时，我们是有选择性的，为项目做贡献和提供帮助的最佳方法是处理已知问题。
 
@@ -116,8 +116,8 @@
 
 其他 `git` 和 GitHub 资源：
 
-- [Git 文档](https://git-scm.com/documentation)
-- [Git 开发工作流](https://docs.scipy.org/doc/numpy/dev/gitwash/development_workflow.html)
+- [Git documentation](https://git-scm.com/documentation)
+- [Git 开发工作流](https://docs.scipy.org/doc/numpy/dev/development_workflow.html)
 - [解决合并冲突](https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/)。
 
 ## 贡献者核对清单
