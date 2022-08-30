@@ -7,13 +7,13 @@
 
 ## en_to_ku
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bianet/en_to_ku')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel news corpus in Turkish, Kurdish and English.
@@ -25,7 +25,7 @@ total number of sentence fragments: 0.14M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -54,13 +54,13 @@ total number of sentence fragments: 0.14M
 
 ## en_to_tr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bianet/en_to_tr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel news corpus in Turkish, Kurdish and English.
@@ -72,7 +72,7 @@ total number of sentence fragments: 0.14M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -101,13 +101,13 @@ total number of sentence fragments: 0.14M
 
 ## ku_to_tr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bianet/ku_to_tr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel news corpus in Turkish, Kurdish and English.
@@ -119,7 +119,7 @@ total number of sentence fragments: 0.14M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
