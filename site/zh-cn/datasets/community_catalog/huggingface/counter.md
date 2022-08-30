@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/counter)
 - [Huggingface](https://huggingface.co/datasets/counter)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:counter')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The COrpus of Urdu News TExt Reuse (COUNTER) corpus contains 1200 documents with real examples of text reuse from the field of journalism. It has been manually annotated at document level with three levels of reuse: wholly derived, partially derived and non derived.
 ```
 
 - **许可**：该语料库在 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License 下许可。
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
