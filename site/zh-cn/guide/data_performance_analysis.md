@@ -184,6 +184,6 @@ dataset = dataset.prefetch(tf.data.AUTOTUNE)
 ## 其他资源
 
 - 关于如何编写高性能 `tf.data` 输入流水线的 [tf.data 性能指南](https://tensorflow.google.cn/guide/data_performance)
-- [Inside TensorFlow video: `tf.data` best practices ](https://www.youtube.com/watch?v=ZnukSLKEw34)
+- [TensorFlow 内部视频：`tf.data` 最佳做法](https://www.youtube.com/watch?v=ZnukSLKEw34)
 - [Profiler 指南](https://tensorflow.google.cn/guide/profiler)
 - [Colab 中的 Profiler 教程](https://tensorflow.google.cn/tensorboard/tensorboard_profiling_keras)
