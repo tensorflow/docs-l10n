@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/ar_sarcasm)
 - [Huggingface](https://huggingface.co/datasets/ar_sarcasm)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ar_sarcasm')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 ArSarcasm is a new Arabic sarcasm detection dataset.
@@ -20,7 +20,7 @@ The dataset was created using previously available Arabic sentiment analysis dat
 ```
 
 - **许可**：MIT
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
