@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/biwi_kinect_head_pose)
 - [Huggingface](https://huggingface.co/datasets/biwi_kinect_head_pose)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:biwi_kinect_head_pose')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Biwi Kinect Head Pose Database is acquired with the Microsoft Kinect sensor, a structured IR light device.It contains 15K images of 20 people with 6 females and 14 males where 4 people were recorded twice.
 ```
 
 - **许可**：此数据库可用于非商业用途，例如大学研究和教育。
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
