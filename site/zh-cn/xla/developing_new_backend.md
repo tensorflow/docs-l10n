@@ -30,7 +30,7 @@ XLA 的 [GPU 后端](https://www.tensorflow.org/code/tensorflow/compiler/xla/ser
 
 如果无法使用 LLVM，则最佳选择是为所需的硬件实现新的 XLA 后端。此选项涉及的工作量最大。需要实现的类如下：
 
-- [`StreamExecutor`](https://www.tensorflow.org/code/tensorflow/stream_executor/stream_executor.h)：对于许多设备而言，并不需要 `StreamExecutor` 的所有方法。有关详细信息，请参阅现有 `StreamExecutor` 实现。
+- [`StreamExecutor`](https://www.tensorflow.org/code/tensorflow/compiler/xla/stream_executor/stream_executor.h)：对于许多设备而言，并不需要 `StreamExecutor` 的所有方法。请参阅现有 `StreamExecutor` 实现以了解详情。
 - [`xla::Compiler`](https://www.tensorflow.org/code/tensorflow/compiler/xla/service/compiler.h)：此类可将 HLO 计算的编译封装为 `xla::Executable`。
 - [`xla::Executable`](https://www.tensorflow.org/code/tensorflow/compiler/xla/service/executable.h)：此类用于在平台上启动编译的计算。
 - [`xla::TransferManager`](https://www.tensorflow.org/code/tensorflow/compiler/xla/service/transfer_manager.h)：此类使后端能够提供特定于平台的机制，用于通过给定的设备内存句柄构造 XLA 文字数据。换言之，它可以帮助封装主机与设备之间的双向数据传输。
