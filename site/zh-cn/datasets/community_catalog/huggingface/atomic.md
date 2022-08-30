@@ -7,13 +7,13 @@
 
 ## atomic
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:atomic/atomic')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset provides the template sentences and
@@ -33,7 +33,7 @@ you have any concerns.
 ```
 
 - **许可**：The Creative Commons Attribution 4.0 International License. https://creativecommons.org/licenses/by/4.0/
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
