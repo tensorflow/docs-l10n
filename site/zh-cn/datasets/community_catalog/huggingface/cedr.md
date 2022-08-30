@@ -7,13 +7,13 @@
 
 ## main
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cedr/main')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This new dataset is designed to solve emotion recognition task for text data in Russian. The Corpus for Emotions Detecting in
@@ -69,13 +69,13 @@ is include tokenization and lemmatization. Dataset with predefined train/test sp
 
 ## enriched
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cedr/enriched')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This new dataset is designed to solve emotion recognition task for text data in Russian. The Corpus for Emotions Detecting in
