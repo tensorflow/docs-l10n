@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/craigslist_bargains)
 - [Huggingface](https://huggingface.co/datasets/craigslist_bargains)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:craigslist_bargains')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 We study negotiation dialogues where two agents, a buyer and a seller,
@@ -22,7 +22,7 @@ The challenge is to handle both the negotiation strategy and the rich language f
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
