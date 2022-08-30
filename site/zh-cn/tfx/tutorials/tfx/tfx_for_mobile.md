@@ -68,7 +68,9 @@ TFX Trainer 要求在模块文件中指定用户定义的 `run_fn`。此 `run_fn
       examples=example_gen.outputs['examples'],
       model=trainer_lite.outputs['model'],
       eval_config=eval_config_lite,
-      instance_name='mnist_lite')
+  ).with_id('mnist_lite')
 ```
 
 如上所示，我们只需将 `model_type` 字段更改为 `tf_lite`。无需其他配置更改即可分析 TFLite 模型。无论是分析 TFLite 模型还是 SavedModel，`Evaluator` 的输出都将具有完全相同的结构。
+
+However, please note that the Evaluator assumes that the TFLite model is saved in a file named `tflite` within trainer_lite.outputs['model'].
