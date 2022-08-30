@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/cats_vs_dogs)
 - [Huggingface](https://huggingface.co/datasets/cats_vs_dogs)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cats_vs_dogs')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A large set of images of cats and dogs. There are 1738 corrupted images that are dropped.
