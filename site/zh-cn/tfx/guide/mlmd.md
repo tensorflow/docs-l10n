@@ -100,7 +100,7 @@ Metadata Store 使用以下数据模型从存储后端记录和检索元数据�
 
 请参阅 [MLMD 教程](https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial)中的示例，该示例展示了如何使用 MLMD API 和 Metadata Store 检索沿袭信息。
 
-### 使用 ML Metadata 跟踪 ML 工作流
+### 将 ML Metadata 集成到 ML 工作流中
 
 如果您是平台开发者，且有兴趣将 MLMD 集成到您的系统，请使用下面的示例工作流来使用低级 MLMD API 跟踪训练任务的执行。您还可以在笔记本环境中使用更高级别的 Python API 记录实验元数据。
 
