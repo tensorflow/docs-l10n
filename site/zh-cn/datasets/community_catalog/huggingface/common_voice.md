@@ -7,13 +7,13 @@
 
 ## ab
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/ab')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -99,13 +99,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## ar
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/ar')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -191,13 +191,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## as
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/as')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -283,13 +283,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## br
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/br')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -375,13 +375,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## ca
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/ca')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -467,13 +467,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## cnh
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/cnh')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -559,13 +559,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## cs
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/cs')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -651,13 +651,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## cv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/cv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -743,13 +743,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## cy
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/cy')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -835,13 +835,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## de
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/de')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -927,13 +927,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## dv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/dv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -1019,13 +1019,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## el
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/el')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -1111,13 +1111,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -1203,13 +1203,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## eo
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/eo')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -1295,13 +1295,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -1387,13 +1387,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## et
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/et')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -1479,13 +1479,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## eu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/eu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -1571,13 +1571,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## fa
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/fa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -1663,13 +1663,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## fi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/fi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -1755,13 +1755,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -1847,13 +1847,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## fy-NL
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/fy-NL')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -1939,13 +1939,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## ga-IE
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/ga-IE')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -2031,13 +2031,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## hi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/hi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -2123,13 +2123,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## hsb
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/hsb')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -2215,13 +2215,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -2307,13 +2307,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## ia
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/ia')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -2399,13 +2399,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## id
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/id')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -2491,13 +2491,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -2583,13 +2583,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## ja
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/ja')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -2675,13 +2675,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## ka
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/ka')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -2767,13 +2767,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## kab
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/kab')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -2859,13 +2859,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## ky
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/ky')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -2951,13 +2951,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## lg
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/lg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -3043,13 +3043,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -3135,13 +3135,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -3227,13 +3227,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## mn
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/mn')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -3319,13 +3319,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## mt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/mt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -3411,13 +3411,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -3503,13 +3503,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## or
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/or')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -3595,13 +3595,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## pa-IN
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/pa-IN')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -3687,13 +3687,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -3779,13 +3779,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -3871,13 +3871,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## rm-sursilv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/rm-sursilv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -3963,13 +3963,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## rm-vallader
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/rm-vallader')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -4055,13 +4055,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -4147,13 +4147,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## ru
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/ru')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -4239,13 +4239,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## rw
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/rw')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -4331,13 +4331,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## sah
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/sah')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -4423,13 +4423,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -4515,13 +4515,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## sv-SE
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/sv-SE')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -4607,13 +4607,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## ta
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/ta')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -4699,13 +4699,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## th
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/th')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -4791,13 +4791,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## tr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/tr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -4883,13 +4883,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## tt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/tt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -4975,13 +4975,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## uk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/uk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -5067,13 +5067,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## vi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/vi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -5159,13 +5159,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## vot
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/vot')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -5251,13 +5251,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## zh-CN
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/zh-CN')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -5343,13 +5343,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## zh-HK
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/zh-HK')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
@@ -5435,13 +5435,13 @@ The dataset currently consists of 7,335 validated hours of speech in 60 language
 
 ## zh-TW
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:common_voice/zh-TW')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Common Voice is Mozilla's initiative to help teach machines how real people speak.
