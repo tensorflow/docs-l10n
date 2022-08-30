@@ -7,13 +7,13 @@
 
 ## mlsum_de
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/mlsum_de')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -29,7 +29,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -97,13 +97,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## mlsum_es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/mlsum_es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -119,7 +119,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -187,13 +187,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_es_en_v0
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_es_en_v0')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -209,7 +209,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -254,13 +254,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_ru_en_v0
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_ru_en_v0')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -276,7 +276,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -321,13 +321,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_tr_en_v0
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_tr_en_v0')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -343,7 +343,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -388,13 +388,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_vi_en_v0
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_vi_en_v0')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -410,7 +410,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -455,13 +455,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_arabic_ar
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_arabic_ar')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -477,7 +477,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -538,13 +538,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_chinese_zh
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_chinese_zh')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -560,7 +560,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -621,13 +621,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_czech_cs
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_czech_cs')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -643,7 +643,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -704,13 +704,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_dutch_nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_dutch_nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -726,7 +726,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -787,13 +787,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_english_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_english_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -809,7 +809,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -870,13 +870,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_french_fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_french_fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -892,7 +892,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -953,13 +953,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_german_de
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_german_de')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -975,7 +975,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1036,13 +1036,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_hindi_hi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_hindi_hi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1058,7 +1058,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1119,13 +1119,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_indonesian_id
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_indonesian_id')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1141,7 +1141,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1202,13 +1202,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_italian_it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_italian_it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1224,7 +1224,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1285,13 +1285,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_japanese_ja
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_japanese_ja')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1307,7 +1307,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1368,13 +1368,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_korean_ko
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_korean_ko')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1390,7 +1390,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1451,13 +1451,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_portuguese_pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_portuguese_pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1473,7 +1473,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1534,13 +1534,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_russian_ru
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_russian_ru')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1556,7 +1556,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1617,13 +1617,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_spanish_es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_spanish_es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1639,7 +1639,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1700,13 +1700,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_thai_th
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_thai_th')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1722,7 +1722,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1783,13 +1783,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_turkish_tr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_turkish_tr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1805,7 +1805,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1866,13 +1866,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_lingua_vietnamese_vi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_lingua_vietnamese_vi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1888,7 +1888,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1949,13 +1949,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## xsum
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/xsum')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -1971,7 +1971,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2028,13 +2028,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## common_gen
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/common_gen')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -2050,7 +2050,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2105,13 +2105,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## cs_restaurants
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/cs_restaurants')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -2127,7 +2127,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2185,13 +2185,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## dart
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/dart')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -2207,7 +2207,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2273,13 +2273,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## e2e_nlg
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/e2e_nlg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -2295,7 +2295,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2343,13 +2343,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## totto
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/totto')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -2365,7 +2365,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2502,13 +2502,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## web_nlg_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/web_nlg_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -2524,7 +2524,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2585,13 +2585,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## web_nlg_ru
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/web_nlg_ru')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -2607,7 +2607,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2667,13 +2667,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## wiki_auto_asset_turk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/wiki_auto_asset_turk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -2689,7 +2689,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2745,13 +2745,13 @@ by extending existing data or developing datasets for additional languages.
 
 ## schema_guided_dialog
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gem/schema_guided_dialog')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GEM is a benchmark environment for Natural Language Generation with a focus on its Evaluation,
@@ -2767,7 +2767,7 @@ by extending existing data or developing datasets for additional languages.
 ```
 
 - **许可**：CC-BY-SA-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
