@@ -7,13 +7,13 @@
 
 ## anli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:art/anli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 the Abductive Natural Language Inference Dataset from AI2
