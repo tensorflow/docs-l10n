@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/hebrew_this_world)
 - [Huggingface](https://huggingface.co/datasets/hebrew_this_world)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hebrew_this_world')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 HebrewThisWorld is a data set consists of 2028 issues of the newspaper 'This World' edited by Uri Avnery and were published between 1950 and 1989. Released under the AGPLv3 license.
