@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/cryptonite)
 - [Huggingface](https://huggingface.co/datasets/cryptonite)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cryptonite')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 We study negotiation dialogues where two agents, a buyer and a seller,
@@ -22,7 +22,7 @@ The challenge is to handle both the negotiation strategy and the rich language f
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -131,13 +131,13 @@ The challenge is to handle both the negotiation strategy and the rich language f
 
 ## cryptonite
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cryptonite/cryptonite')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Cryptonite: A Cryptic Crossword Benchmark for Extreme Ambiguity in Language
@@ -151,7 +151,7 @@ par with the accuracy of a rule-based clue solver (8.6%).
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
