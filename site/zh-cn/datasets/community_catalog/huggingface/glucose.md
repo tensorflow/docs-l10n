@@ -7,20 +7,20 @@
 
 ## glucose
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:glucose/glucose')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 When humans read or listen, they make implicit commonsense inferences that frame their understanding of what happened and why. As a step toward AI systems that can build similar mental models, we introduce GLUCOSE, a large-scale dataset of implicit commonsense causal knowledge, encoded as causal mini-theories about the world, each grounded in a narrative context.
 ```
 
 - **许可**：Creative Commons Attribution-NonCommercial 4.0 International Public License
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
