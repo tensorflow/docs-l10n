@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/e2e_nlg)
 - [Huggingface](https://huggingface.co/datasets/e2e_nlg)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:e2e_nlg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The E2E dataset is used for training end-to-end, data-driven natural language generation systems in the restaurant domain, which is ten times bigger than existing, frequently used datasets in this area.
@@ -25,7 +25,7 @@ https://arxiv.org/abs/1706.09254
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
