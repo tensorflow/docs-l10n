@@ -51,7 +51,7 @@ docker run option '--privileged=true'
 
 ## Profiler 工具
 
-Access the Profiler from the **Profile** tab in TensorBoard, which appears only after you have captured some model data.
+从 TensorBoard 的 **Profile** 标签页中访问 Profiler，只有您捕获一些模型数据后，Profiler 才会出现。
 
 注：Profiler 需要访问互联网才能加载 [Google Chart 库](https://developers.google.com/chart/interactive/docs/basic_load_libs#basic-library-loading)。如果您在本地计算机上、在公司防火墙后或者数据中心中完全离线运行 TensorBoard，某些图表和表可能缺失。
 
@@ -88,7 +88,7 @@ Profiler 提供了多种工具来帮助您进行性能分析：
         - 设备端计算时间。
         - 所有其他时间，包括 Python 开销。
 
-    2. Device compute precisions - Reports the percentage of device compute time that uses 16 and 32-bit computations.
+    2. 设备计算精度 - 报告使用 16 位和 32 位计算的设备计算时间的百分比
 
 - **Step-time Graph**：显示所有采样步骤中的设备单步用时图（以毫秒为单位）。每个步骤分为多个类别（以不同颜色标识）。红色区域对应设备闲置等待主机的输入数据所需的单步用时部分。绿色区域显示设备的实际工作时长。
 
@@ -164,8 +164,8 @@ Profiler 提供了多种工具来帮助您进行性能分析：
 2. **Count**：显示性能剖析期间运算执行的实例总数。
 3. **Total Time (in ms)**：显示每个实例所用时间的累计和。
 4. **Total Time %**：显示在一个运算上花费的总时间占输入处理总时间的比例。
-5. **Total Self Time (in ms)**: Shows the cumulative sum of the self time spent on each of those instances. The self time here measures the time spent inside the function body, excluding the time spent in the function it calls.
-6. **Total Self Time %**. Shows the total self time as a fraction of the total time spent on input processing.
+5. **Total Self Time (in ms)** - 显示其中每个实例所用的自我时间的累计和。此处的自我时间是指在函数体内部所用的时间，不包括它调用的函数所用的时间。
+6. **Total Self Time %** - 显示在总自我时间占输入处理总时间的比例
 7. **Category** - 显示输入运算的处理类别。
 
 <a name="tf_stats"></a>
@@ -240,10 +240,10 @@ Timeline 窗格包含以下元素：
 
 Trace Viewer 包含以下版块：
 
-- **One section for each device node**, labeled with the number of the device chip and the device node within the chip (for example, `/device:GPU:0 (pid 0)`). Each device node section contains the following tracks:
+- **每个设备节点一个版块**，使用设备芯片编号和芯片内的设备节点进行标记（例如，`/device:GPU:0 (pid 0)`）。每个节点版块都包含以下轨道：
     - **Step**：显示在设备上运行的训练步骤的持续时间
     - **TensorFlow Ops**：显示在设备上执行的运算
-    - **XLA Ops**: Shows [XLA](https://www.tensorflow.org/xla/) operations (ops) that ran on the device if XLA is the compiler used (each TensorFlow op is translated into one or several XLA ops. The XLA compiler translates the XLA ops into code that runs on the device).
+    - **XLA Ops** - 如果使用的编译器是 XLA，则显示在设备上运行的 [XLA](https://www.tensorflow.org/xla/) 运算（每个 TensorFlow 运算都会转换成一个或多个 XLA 运算。XLA 编译器可以将 XLA 运算转换成在设备上运行的代码）。
 - **用于在主机的 CPU 上运行的线程的版块**，标有 **Host Threads**。该版块为每个 CPU 线程包含一个轨道。请注意，您可以忽略显示的信息和版块标签。
 
 ##### 事件
@@ -264,7 +264,7 @@ Trace Viewer 还可以显示您的 TensorFlow 程序中 Python 函数调用的�
 
 该工具在两个窗格中显示信息：
 
-- The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
+- 上部窗格显示了一个饼图，其中所示为经过的总时间最长的 CUDA 内核
 
 - 下部窗格显示了一个表，其中包含每个内核-运算对的以下数据：
 
@@ -289,7 +289,7 @@ Trace Viewer 还可以显示您的 TensorFlow 程序中 Python 函数调用的�
 
 内存性能剖析工具可在性能剖析间隔期间监视设备的内存使用量。您可以使用此工具执行以下操作：
 
-- Debug out of memory (OOM) issues by pinpointing peak memory usage and the corresponding memory allocation to TensorFlow ops. You can also debug OOM issues that may arise when you run [multi-tenancy](https://arxiv.org/pdf/1901.06887.pdf) inference.
+- 通过查明峰值内存使用量和为 TensorFlow 运算分配的相应内存来调试内存不足 (OOM) 问题。您还可以调试运行[多租户](https://arxiv.org/pdf/1901.06887.pdf)推断时可能出现的 OOM 问题
 - 调试内存碎片问题。
 
 内存性能剖析工具在三个版块中显示数据：
@@ -418,7 +418,7 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 
 ![image](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/guide/images/tf_profiler/tf_data_all_hosts.png?raw=true)
 
-This section provides the summary of all input pipelines across all hosts. Typically there is one input pipeline. When using the distribution strategy, there is one host input pipeline running the program's `tf.data` code and multiple device input pipelines retrieving data from the host input pipeline and transferring it to the devices.
+本部分提供了所有主机上的所有输入流水线的摘要。通常只有一个输入流水线。使用分配策略时，有一个主机输入流水线运行程序的 `tf.data` 代码，多个设备输入流水线从主机输入流水线中检索数据并将其传送到设备。
 
 对于每个输入流水线，它显示其执行时间的统计信息。如果调用花费的时间超过 50μs，则算作缓慢。
 
@@ -692,7 +692,7 @@ os.environ['TF_GPU_THREAD_COUNT']='1'
 
 - 使用 `tf.function` 执行计算，并且可以选择启用 `jit_compile=True` 标志 (`tf.function(jit_compile=True`)。要了解更详情，请转到[使用 XLA tf.function](https://www.tensorflow.org/xla/tutorials/jit_compile)。
 
-- Minimize host Python operations between steps and reduce callbacks. Calculate metrics every few steps instead of at every step.
+- 最大程度减少步骤之间的主机 Python 运算并减少回调。每几步（而不是每一步）计算指标
 
 - 使设备计算单元保持忙碌状态。
 
