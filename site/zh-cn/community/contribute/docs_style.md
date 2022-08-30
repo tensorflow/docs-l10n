@@ -16,15 +16,15 @@
 
 #### 代码的内嵌提及
 
-在文本中使用以下符号时，请在符号周围加上 <code>&lt;code data-md-type="codespan"&gt;backticks</code>：
+在文本中使用以下符号时，请在符号周围加上 <code>`backticks`</code>：
 
-- 参数名称：<code>&lt;code data-md-type="codespan"&gt;input</code>、<code>&lt;code data-md-type="codespan"&gt;x</code>、<code>&lt;code data-md-type="codespan"&gt;tensor</code>
-- 返回的张量名称：<code>&lt;code data-md-type="codespan"&gt;output</code>、<code>&lt;code data-md-type="codespan"&gt;idx</code>、<code>&lt;code data-md-type="codespan"&gt;out</code>
-- 数据类型：<code>&lt;code data-md-type="codespan"&gt;int32</code>、<code>&lt;code data-md-type="codespan"&gt;float</code>、<code>&lt;code data-md-type="codespan"&gt;uint8</code>
-- 文本中引用的其他运算名称：<code>&lt;code data-md-type="codespan"&gt;list_diff()</code>、<code>&lt;code data-md-type="codespan"&gt;shuffle()</code>
-- 类名：<code>&lt;code data-md-type="codespan"&gt;tf.Tensor</code>、<code>&lt;code data-md-type="codespan"&gt;Strategy</code>
-- 文件名：<code>&lt;code data-md-type="codespan"&gt;image_ops.py</code>、<code>&lt;code data-md-type="codespan"&gt;/path_to_dir/file_name</code>
-- 数学表达式或条件：<code>&lt;code data-md-type="codespan"&gt;-1-input.dims() &lt;= dim &lt;= input.dims()</code>
+- 参数名称：<code>`input`</code>、<code>`x`</code>、<code>`tensor`</code>
+- 返回的张量名称：<code>`output`</code>、<code>`idx`</code>、<code>`out`</code>
+- 数据类型：<code>`int32`</code>、<code>`float`</code>、<code>`uint8`</code>
+- 文本中引用的其他运算名称：<code>`list_diff()`</code>、<code>`shuffle()`</code>
+- 类名：<code>`tf.Tensor`</code>、<code>`Strategy`</code>
+- 文件名：<code>`image_ops.py`</code>、<code>`/path_to_dir/file_name`</code>
+- 数学表达式或条件：<code>`-1-input.dims() &lt;= dim &lt;=     input.dims()`</code>
 
 #### 代码块
 
@@ -35,35 +35,59 @@
 # some python code here
 ```</code></pre>
 
-### Markdown 中的链接
+### Markdown 和笔记本中的链接
 
-#### 此仓库中各文件之间的链接
+#### 仓库中各文件之间的链接
 
-在仓库中的各文件之间使用相对链接。这适用于 [tensorflow.org](https://www.tensorflow.org) 和 [GitHub](https://github.com/tensorflow/docs/tree/master/site/en)：<br><code>[Custom layers](../tutorials/eager/custom_layers.ipynb)</code> 会在网站上生成[自定义层](https://www.tensorflow.org/tutorials/eager/custom_layers)。
+在单个 GitHub 仓库中的各文件之间使用相对链接。包括文件扩展名。
 
-#### API 文档的链接
+例如，**您正在阅读的这个文件**来自 [https://github.com/tensorflow/docs](https://github.com/tensorflow/docs) 仓库。因此，它可以使用相对路径链接到同一仓库中的其他文件，如下所示：
 
-网站发布后会转换 API 链接。要链接到符号的 API 参考页面，请在反引号中包含完整的符号路径：
+- <code>\[Basics\]\(../../guide/basics.ipynb\)</code> 产生 [Basics](../../guide/basics.ipynb)。
 
-- <code>&lt;code data-md-type="codespan"&gt;tf.data.Dataset</code> 生成 [`tf.data.Dataset`](https://www.tensorflow.org/api_docs/python/tf/data/Dataset)
+这是首选方式，因为这样可让 [tensorflow.org](https://www.tensorflow.org)、[GitHub](https://github.com/tensorflow/docs){:.external} 和 [Colab](https://github.com/tensorflow/docs/tree/master/site/en/guide/bazics.ipynb){:.external} 上的链接都正常工作。此外，当读者点击链接时，他们会停留在同一个站点。
 
-对于 C++ API，请使用命名空间路径：
-
-- `tensorflow::Tensor` 生成 [tensorflow::Tensor](https://www.tensorflow.org/api_docs/cc/class/tensorflow/tensor)
+注：您应当为相关链接包含文件扩展名，例如 `.ipynb` 或 `.md`。它将在没有扩展名的情况下呈现在 `tensorflow.org` 上。
 
 #### 外部链接
 
-对于外部链接（包括 <var>https://www.tensorflow.org</var> 上不在 `tensorflow/docs` 仓库中的文件），请使用具有完整 URI 的标准 Markdown 链接。
+对于不在当前仓库中的文件的链接，请使用包含完整 URI 的标准 Markdown 链接。如果可用，首选链接到 [tensorflow.org](https://www.tensorflow.org) URI。
 
 要链接到源代码，请使用以 <var>https://www.github.com/tensorflow/tensorflow/blob/master/</var> 开头的链接，后接以 GitHub 根开头的文件名。
 
-这种 URI 命名方案确保 <var>https://www.tensorflow.org</var> 可以将链接转发到与您正在查看的文档版本相对应的代码分支。
+从 [tensorflow.org](https://www.tensorflow.org) 链接时，请在 Markdown 链接上包含 `{:.external}` 以便显示“外部链接”符号。
 
-不要在链接中包含 URI 查询参数。
+- `[GitHub](https://github.com/tensorflow/docs){:.external}` 产生 [GitHub](https://github.com/tensorflow/docs){:.external}
 
-文件路径使用下划线表示空格，例如 `custom_layers.ipynb`。
+不要在链接中包含 URI 查询参数：
 
-在链接中包含要在网站*和* GitHub 上使用的文件扩展名，例如，<br><code>[Custom layers](../tutorials/eager/custom_layers.ipynb)</code>。
+- 使用：`https://www.tensorflow.org/guide/data`
+- 不使用：`https://www.tensorflow.org/guide/data?hl=en`
+
+#### 图片
+
+上一部分中的建议适用于页面的链接。图片的处理方式不同。
+
+通常，您不应签入图片，而是将 [TensorFlow-Docs 团队](https://github.com/tensorflow/docs)添加到您的 PR，并要求他们在 [tensorflow.org](https://www.tensorflow.org) 上托管图片。这有助于减小仓库的大小。
+
+如果您确实将图片提交到仓库，请注意某些系统不会处理图片的相对路径。首选使用指向图片在 [tensorflow.org](https://www.tensorflow.org) 上的最终位置的完整 URL。
+
+#### API 文档的链接
+
+网站发布后会转换 API 链接。要链接到符号的 API 参考页面，请使用反引号括起符号路径：
+
+- <code>`tf.data.Dataset`</code> 产生 [`tf.data.Dataset`](https://www.tensorflow.org/api_docs/python/tf/data/Dataset)
+
+除了长路径外，完整路径是略好的选择。可以通过删除前导路径组件来缩写路径。如果出现以下情况，部分路径将被转换为链接：
+
+- 路径中至少有一个 `.`，并且
+- 部分路径在项目中是唯一的。
+
+**每个项目的** API 路径都与 [tensorflow.org](https://www.tensorflow.org) 上发布的 Python API 相链接。通过用反引号包装 API 名称，可以轻松地从单个文件链接到多个子项目。例如：
+
+- <code>`tf.metrics`</code>、<code>`tf_agents.metrics`</code>、<code>`text.metrics`</code> 产生：`tf.metrics`、`tf_agents.metrics`、`text.metrics`。
+
+对于具有多个路径别名的符号，更好的选择是与 [tensorflow.org](https://www.tensorflow.org) 上的 API 页面匹配的路径。所有别名都将重定向到正确的页面。
 
 ### Markdown 中的数学表达式
 
