@@ -7,20 +7,20 @@
 
 ## discovery
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:discovery/discovery')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Discourse marker prediction with 174 different markers
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -235,20 +235,20 @@ Discourse marker prediction with 174 different markers
 
 ## discoverysmall
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:discovery/discoverysmall')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Discourse marker prediction with 174 different markers
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
