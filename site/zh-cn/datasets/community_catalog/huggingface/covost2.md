@@ -7,13 +7,13 @@
 
 ## en_de
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_de')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -35,7 +35,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -78,13 +78,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_tr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_tr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -106,7 +106,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -149,13 +149,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_fa
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_fa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -177,7 +177,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -220,13 +220,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_sv-SE
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_sv-SE')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -248,7 +248,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -291,13 +291,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_mn
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_mn')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -319,7 +319,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -362,13 +362,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_zh-CN
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_zh-CN')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -390,7 +390,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -433,13 +433,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_cy
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_cy')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -461,7 +461,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -504,13 +504,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_ca
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_ca')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -532,7 +532,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -575,13 +575,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -603,7 +603,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -646,13 +646,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_et
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_et')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -674,7 +674,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -717,13 +717,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_id
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_id')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -745,7 +745,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -788,13 +788,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_ar
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_ar')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -816,7 +816,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -859,13 +859,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_ta
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_ta')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -887,7 +887,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -930,13 +930,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -958,7 +958,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1001,13 +1001,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## en_ja
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/en_ja')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1029,7 +1029,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1072,13 +1072,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## fr_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/fr_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1100,7 +1100,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1143,13 +1143,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## de_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/de_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1171,7 +1171,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1214,13 +1214,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## es_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/es_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1242,7 +1242,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1285,13 +1285,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## ca_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/ca_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1313,7 +1313,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1356,13 +1356,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## it_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/it_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1384,7 +1384,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1427,13 +1427,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## ru_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/ru_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1455,7 +1455,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1498,13 +1498,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## zh-CN_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/zh-CN_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1526,7 +1526,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1569,13 +1569,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## pt_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/pt_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1597,7 +1597,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1640,13 +1640,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## fa_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/fa_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1668,7 +1668,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1711,13 +1711,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## et_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/et_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1739,7 +1739,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1782,13 +1782,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## mn_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/mn_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1810,7 +1810,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1853,13 +1853,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## nl_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/nl_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1881,7 +1881,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1924,13 +1924,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## tr_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/tr_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -1952,7 +1952,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -1995,13 +1995,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## ar_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/ar_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -2023,7 +2023,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2066,13 +2066,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## sv-SE_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/sv-SE_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -2094,7 +2094,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2137,13 +2137,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## lv_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/lv_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -2165,7 +2165,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2208,13 +2208,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## sl_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/sl_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -2236,7 +2236,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2279,13 +2279,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## ta_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/ta_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -2307,7 +2307,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2350,13 +2350,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## ja_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/ja_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -2378,7 +2378,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2421,13 +2421,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## id_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/id_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -2449,7 +2449,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -2492,13 +2492,13 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 
 ## cy_en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covost2/cy_en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CoVoST 2, a large-scale multilingual speech translation corpus covering translations from 21 languages into English and from English into 15 languages. The dataset is created using Mozilla’s open source Common Voice database of crowdsourced voice recordings.
@@ -2520,7 +2520,7 @@ dataset = dataset.map(map_to_array, remove_columns=["file"])
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
