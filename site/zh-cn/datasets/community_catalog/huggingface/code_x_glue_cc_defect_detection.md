@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/code_x_glue_cc_defect_detection)
 - [Huggingface](https://huggingface.co/datasets/code_x_glue_cc_defect_detection)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_defect_detection')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE Defect-detection dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/Defect-detection
@@ -21,7 +21,7 @@ The dataset we use comes from the paper Devign: Effective Vulnerability Identifi
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
