@@ -7,13 +7,13 @@
 
 ## en-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:giga_fren/en-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Giga-word corpus for French-English from WMT2010 collected by Chris Callison-Burch
