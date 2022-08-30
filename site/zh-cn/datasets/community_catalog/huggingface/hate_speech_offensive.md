@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/hate_speech_offensive)
 - [Huggingface](https://huggingface.co/datasets/hate_speech_offensive)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hate_speech_offensive')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 An annotated dataset for hate speech and offensive language detection on tweets.
 ```
 
 - **许可**：MIT
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
