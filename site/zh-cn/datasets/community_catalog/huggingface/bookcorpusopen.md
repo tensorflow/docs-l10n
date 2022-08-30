@@ -7,13 +7,13 @@
 
 ## plain_text
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bookcorpusopen/plain_text')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Books are a rich source of both fine-grained information, how a character, an object or a scene looks like, as well as high-level semantics, what someone is thinking, feeling and how these states evolve through a story.
@@ -21,7 +21,7 @@ This version of bookcorpus has 17868 dataset items (books). Each item contains t
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
