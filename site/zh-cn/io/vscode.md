@@ -20,7 +20,7 @@ bazel build -s --verbose_failures --compilation_mode dbg //tensorflow_io/...
 
 有关在 Ubuntu 上如何设置开发环境的详细信息，请查看项目[自述](https://github.com/tensorflow/io#ubuntu-18042004)文件。其中的 --compilation_mode dbg 标记表示产生的二进制文件应包含调试符号。一旦您可以从命令行编译项目，还可以对 VSCode 进行配置，以便调用相同的命令。
 
-打开 View->Command Pallete (**Ctrl+Shift+P**)，然后开始输入：“Tasks: Configure Build Task”。如果您是首次执行此操作，编辑器会建议创建 tasks.json 文件。创建该文件后，请粘贴以下 json 内容：
+打开 View-&gt;Command Pallete (**Ctrl+Shift+P**)，然后开始输入：“Tasks: Configure Build Task”。如果您是首次执行此操作，编辑器会建议创建 tasks.json 文件。创建该文件后，请粘贴以下 json 内容：
 
 ```jsonc
 {
@@ -95,7 +95,7 @@ VSCode 还提供了 GDB 调试器支持。它允许添加断点，观察变量�
 }
 ```
 
-如果全部配置正确，您应该可以执行 *Run -> Start Debugging* (**F5**) 或 *Run -> Run Without Debugging* (**Ctrl + F5**)。这样就会在调试器下运行您的代码：
+如果全部配置正确，您应该可以执行 *Run -&gt; Start Debugging* (**F5**) 或 *Run -&gt; Run Without Debugging* (**Ctrl + F5**)。这样就会在调试器下运行您的代码：
 
 ![VSCode debugger](./images/vscode_debugger.png)
 
@@ -109,13 +109,13 @@ skip -gfi /usr/include/c++/*
 
 ## 格式化文件
 
-通过*点击右键 -> Format Document* (**Ctrl + Shift + I**)，您随时可以重新格式化 C++ 或 Python 文件，但是，VSCode 使用不同的样式惯例。幸运地是，这很容易更改。
+通过*点击右键 -&gt; Format Document* (**Ctrl + Shift + I**)，您随时可以重新格式化 C++ 或 Python 文件，但是，VSCode 使用不同的样式惯例。幸运地是，这很容易更改。
 
 对于 Python 格式化，请参阅 https://donjayamanne.github.io/pythonVSCodeDocs/docs/formatting/
 
 对于 C++ 格式化，请按以下步骤操作：
 
-- 转到 *Preferences -> Settings*
+- 转到 *Preferences -&gt; Settings*
 - 搜索“C_Cpp.clang_format_fallbackStyle”
 - 通过添加以下内容直接修改 `file:setting.json` 文件
 
