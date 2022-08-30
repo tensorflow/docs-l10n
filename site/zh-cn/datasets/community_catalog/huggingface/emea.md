@@ -7,13 +7,13 @@
 
 ## bg-el
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:emea/bg-el')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a parallel corpus made out of PDF documents from the European Medicines Agency. All files are automatically converted from PDF to plain text using pdftotext with the command line arguments -layout -nopgbrk -eol unix. There are some known problems with tables and multi-column layouts - some of them are fixed in the current version.
@@ -56,13 +56,13 @@ total number of sentence fragments: 26.51M
 
 ## cs-et
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:emea/cs-et')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a parallel corpus made out of PDF documents from the European Medicines Agency. All files are automatically converted from PDF to plain text using pdftotext with the command line arguments -layout -nopgbrk -eol unix. There are some known problems with tables and multi-column layouts - some of them are fixed in the current version.
@@ -105,13 +105,13 @@ total number of sentence fragments: 26.51M
 
 ## de-mt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:emea/de-mt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a parallel corpus made out of PDF documents from the European Medicines Agency. All files are automatically converted from PDF to plain text using pdftotext with the command line arguments -layout -nopgbrk -eol unix. There are some known problems with tables and multi-column layouts - some of them are fixed in the current version.
@@ -154,13 +154,13 @@ total number of sentence fragments: 26.51M
 
 ## fr-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:emea/fr-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a parallel corpus made out of PDF documents from the European Medicines Agency. All files are automatically converted from PDF to plain text using pdftotext with the command line arguments -layout -nopgbrk -eol unix. There are some known problems with tables and multi-column layouts - some of them are fixed in the current version.
@@ -203,13 +203,13 @@ total number of sentence fragments: 26.51M
 
 ## es-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:emea/es-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This is a parallel corpus made out of PDF documents from the European Medicines Agency. All files are automatically converted from PDF to plain text using pdftotext with the command line arguments -layout -nopgbrk -eol unix. There are some known problems with tables and multi-column layouts - some of them are fixed in the current version.
