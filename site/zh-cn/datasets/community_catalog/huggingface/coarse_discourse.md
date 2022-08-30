@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/coarse_discourse)
 - [Huggingface](https://huggingface.co/datasets/coarse_discourse)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:coarse_discourse')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 dataset contains discourse annotation and relation on threads from reddit during 2016
