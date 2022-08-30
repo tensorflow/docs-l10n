@@ -7,13 +7,13 @@
 
 ## en-qa1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -85,13 +85,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -163,13 +163,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -241,13 +241,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa4
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa4')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -319,13 +319,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa5
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa5')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -397,13 +397,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa6
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa6')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -475,13 +475,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa7
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa7')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -553,13 +553,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa8
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa8')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -631,13 +631,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa9
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa9')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -709,13 +709,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa10
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa10')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -787,13 +787,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa11
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa11')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -865,13 +865,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa12
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa12')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -943,13 +943,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa13
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa13')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1021,13 +1021,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa14
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa14')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1099,13 +1099,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa15
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa15')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1177,13 +1177,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa16
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa16')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1255,13 +1255,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa17
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa17')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1333,13 +1333,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa18
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa18')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1411,13 +1411,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa19
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa19')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1489,13 +1489,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-qa20
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-qa20')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1567,13 +1567,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1645,13 +1645,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1723,13 +1723,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1801,13 +1801,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa4
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa4')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1879,13 +1879,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa5
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa5')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -1957,13 +1957,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa6
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa6')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2035,13 +2035,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa7
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa7')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2113,13 +2113,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa8
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa8')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2191,13 +2191,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa9
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa9')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2269,13 +2269,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa10
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa10')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2347,13 +2347,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa11
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa11')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2425,13 +2425,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa12
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa12')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2503,13 +2503,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa13
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa13')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2581,13 +2581,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa14
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa14')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2659,13 +2659,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa15
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa15')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2737,13 +2737,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa16
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa16')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2815,13 +2815,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa17
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa17')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2893,13 +2893,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa18
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa18')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -2971,13 +2971,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa19
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa19')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3049,13 +3049,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-qa20
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-qa20')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3127,13 +3127,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3205,13 +3205,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3283,13 +3283,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3361,13 +3361,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa4
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa4')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3439,13 +3439,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa5
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa5')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3517,13 +3517,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa6
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa6')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3595,13 +3595,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa7
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa7')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3673,13 +3673,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa8
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa8')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3751,13 +3751,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa9
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa9')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3829,13 +3829,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa10
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa10')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3907,13 +3907,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa11
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa11')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -3985,13 +3985,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa12
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa12')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4063,13 +4063,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa13
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa13')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4141,13 +4141,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa14
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa14')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4219,13 +4219,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa15
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa15')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4297,13 +4297,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa16
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa16')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4375,13 +4375,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa17
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa17')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4453,13 +4453,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa18
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa18')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4531,13 +4531,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa19
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa19')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4609,13 +4609,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-10k-qa20
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-10k-qa20')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4687,13 +4687,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4766,13 +4766,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4845,13 +4845,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -4924,13 +4924,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa4
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa4')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5003,13 +5003,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa5
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa5')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5082,13 +5082,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa6
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa6')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5161,13 +5161,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa7
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa7')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5240,13 +5240,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa8
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa8')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5319,13 +5319,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa9
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa9')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5398,13 +5398,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa10
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa10')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5477,13 +5477,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa11
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa11')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5556,13 +5556,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa12
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa12')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5635,13 +5635,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa13
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa13')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5714,13 +5714,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa14
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa14')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5793,13 +5793,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa15
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa15')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5872,13 +5872,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa16
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa16')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -5951,13 +5951,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa17
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa17')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6030,13 +6030,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa18
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa18')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6109,13 +6109,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa19
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa19')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6188,13 +6188,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-qa20
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-qa20')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6267,13 +6267,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6346,13 +6346,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6425,13 +6425,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6504,13 +6504,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa4
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa4')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6583,13 +6583,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa5
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa5')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6662,13 +6662,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa6
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa6')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6741,13 +6741,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa7
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa7')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6820,13 +6820,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa8
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa8')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6899,13 +6899,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa9
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa9')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -6978,13 +6978,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa10
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa10')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7057,13 +7057,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa11
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa11')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7136,13 +7136,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa12
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa12')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7215,13 +7215,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa13
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa13')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7294,13 +7294,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa14
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa14')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7373,13 +7373,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa15
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa15')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7452,13 +7452,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa16
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa16')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7531,13 +7531,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa17
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa17')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7610,13 +7610,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa18
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa18')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7689,13 +7689,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa19
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa19')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7768,13 +7768,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## en-valid-10k-qa20
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/en-valid-10k-qa20')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7847,13 +7847,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -7925,13 +7925,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8003,13 +8003,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8081,13 +8081,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa4
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa4')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8159,13 +8159,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa5
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa5')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8237,13 +8237,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa6
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa6')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8315,13 +8315,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa7
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa7')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8393,13 +8393,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa8
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa8')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8471,13 +8471,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa9
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa9')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8549,13 +8549,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa10
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa10')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8627,13 +8627,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa11
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa11')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8705,13 +8705,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa12
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa12')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8783,13 +8783,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa13
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa13')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8861,13 +8861,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa14
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa14')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -8939,13 +8939,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa15
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa15')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9017,13 +9017,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa16
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa16')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9095,13 +9095,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa17
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa17')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9173,13 +9173,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa18
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa18')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9251,13 +9251,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa19
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa19')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9329,13 +9329,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## hn-10k-qa20
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/hn-10k-qa20')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9407,13 +9407,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9485,13 +9485,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9563,13 +9563,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9641,13 +9641,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa4
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa4')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9719,13 +9719,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa5
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa5')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9797,13 +9797,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa6
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa6')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9875,13 +9875,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa7
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa7')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -9953,13 +9953,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa8
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa8')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10031,13 +10031,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa9
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa9')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10109,13 +10109,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa10
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa10')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10187,13 +10187,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa11
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa11')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10265,13 +10265,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa12
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa12')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10343,13 +10343,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa13
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa13')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10421,13 +10421,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa14
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa14')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10499,13 +10499,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa15
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa15')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10577,13 +10577,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa16
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa16')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10655,13 +10655,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa17
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa17')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10733,13 +10733,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa18
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa18')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10811,13 +10811,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa19
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa19')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10889,13 +10889,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-qa20
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-qa20')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -10967,13 +10967,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11045,13 +11045,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11123,13 +11123,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11201,13 +11201,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa4
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa4')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11279,13 +11279,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa5
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa5')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11357,13 +11357,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa6
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa6')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11435,13 +11435,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa7
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa7')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11513,13 +11513,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa8
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa8')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11591,13 +11591,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa9
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa9')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11669,13 +11669,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa10
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa10')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11747,13 +11747,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa11
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa11')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11825,13 +11825,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa12
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa12')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11903,13 +11903,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa13
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa13')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -11981,13 +11981,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa14
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa14')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -12059,13 +12059,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa15
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa15')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -12137,13 +12137,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa16
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa16')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -12215,13 +12215,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa17
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa17')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -12293,13 +12293,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa18
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa18')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -12371,13 +12371,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa19
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa19')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
@@ -12449,13 +12449,13 @@ can identify (and then rectify)the failings of their systems.
 
 ## shuffled-10k-qa20
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:babi_qa/shuffled-10k-qa20')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The (20) QA bAbI tasks are a set of proxy tasks that evaluate reading
