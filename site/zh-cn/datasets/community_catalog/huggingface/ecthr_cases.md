@@ -7,20 +7,20 @@
 
 ## alleged-violation-prediction
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ecthr_cases/alleged-violation-prediction')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The ECtHR Cases dataset is designed for experimentation of neural judgment prediction and rationale extraction considering ECtHR cases.
 ```
 
 - **许可**：CC BY-NC-SA (Creative Commons / Attribution-NonCommercial-ShareAlike)
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -78,20 +78,20 @@ The ECtHR Cases dataset is designed for experimentation of neural judgment predi
 
 ## violation-prediction
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ecthr_cases/violation-prediction')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The ECtHR Cases dataset is designed for experimentation of neural judgment prediction and rationale extraction considering ECtHR cases.
 ```
 
 - **许可**：CC BY-NC-SA (Creative Commons / Attribution-NonCommercial-ShareAlike)
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
