@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/com_qa)
 - [Huggingface](https://huggingface.co/datasets/com_qa)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:com_qa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 ComQA is a dataset of 11,214 questions, which were collected from WikiAnswers, a community question answering website.
