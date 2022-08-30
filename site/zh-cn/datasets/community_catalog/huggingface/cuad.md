@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/cuad)
 - [Huggingface](https://huggingface.co/datasets/cuad)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cuad')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Contract Understanding Atticus Dataset (CUAD) v1 is a corpus of more than 13,000 labels in 510
@@ -20,7 +20,7 @@ clauses that lawyers look for when reviewing contracts in connection with corpor
 ```
 
 - **许可**：CUAD 在 Creative Commons Attribution 4.0 (CC BY 4.0) 许可下许可。
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
