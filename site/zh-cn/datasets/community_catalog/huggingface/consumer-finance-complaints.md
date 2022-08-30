@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/consumer-finance-complaints)
 - [Huggingface](https://huggingface.co/datasets/consumer-finance-complaints)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:consumer-finance-complaints')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Consumer Complaint Database is a collection of complaints about consumer financial products and services that we sent to companies for response. Complaints are published after the company responds, confirming a commercial relationship with the consumer, or after 15 days, whichever comes first. Complaints referred to other regulators, such as complaints about depository institutions with less than $10 billion in assets, are not published in the Consumer Complaint Database. The database generally updates daily.
@@ -22,7 +22,7 @@ There are multiple Text Classification problems that can be solved with this dat
 ```
 
 - **许可**：https://cfpb.github.io/source-code-policy/
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
