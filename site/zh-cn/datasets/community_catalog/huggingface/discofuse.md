@@ -7,20 +7,20 @@
 
 ## discofuse-sport
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:discofuse/discofuse-sport')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 DISCOFUSE is a large scale dataset for discourse-based sentence fusion.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -78,20 +78,20 @@ DISCOFUSE is a large scale dataset for discourse-based sentence fusion.
 
 ## discofuse-wikipedia
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:discofuse/discofuse-wikipedia')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 DISCOFUSE is a large scale dataset for discourse-based sentence fusion.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
