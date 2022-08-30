@@ -7,20 +7,20 @@
 
 ## egy
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_pos_dialect/egy')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Dialectal Arabic Datasets contain four dialects of Arabic, Etyptian (EGY), Levantine (LEV), Gulf (GLF), and Maghrebi (MGR). Each dataset consists of a set of 350 manually segmented and POS tagged tweets.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -76,20 +76,20 @@ The Dialectal Arabic Datasets contain four dialects of Arabic, Etyptian (EGY), L
 
 ## lev
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_pos_dialect/lev')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Dialectal Arabic Datasets contain four dialects of Arabic, Etyptian (EGY), Levantine (LEV), Gulf (GLF), and Maghrebi (MGR). Each dataset consists of a set of 350 manually segmented and POS tagged tweets.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -145,20 +145,20 @@ The Dialectal Arabic Datasets contain four dialects of Arabic, Etyptian (EGY), L
 
 ## glf
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_pos_dialect/glf')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Dialectal Arabic Datasets contain four dialects of Arabic, Etyptian (EGY), Levantine (LEV), Gulf (GLF), and Maghrebi (MGR). Each dataset consists of a set of 350 manually segmented and POS tagged tweets.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -214,20 +214,20 @@ The Dialectal Arabic Datasets contain four dialects of Arabic, Etyptian (EGY), L
 
 ## mgr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_pos_dialect/mgr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Dialectal Arabic Datasets contain four dialects of Arabic, Etyptian (EGY), Levantine (LEV), Gulf (GLF), and Maghrebi (MGR). Each dataset consists of a set of 350 manually segmented and POS tagged tweets.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
