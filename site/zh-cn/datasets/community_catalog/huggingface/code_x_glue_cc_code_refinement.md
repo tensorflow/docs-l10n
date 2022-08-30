@@ -7,13 +7,13 @@
 
 ## medium
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_code_refinement/medium')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE code-refinement dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/code-refinement
@@ -22,7 +22,7 @@ We use the dataset released by this paper(https://arxiv.org/pdf/1812.08693.pdf).
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -55,13 +55,13 @@ We use the dataset released by this paper(https://arxiv.org/pdf/1812.08693.pdf).
 
 ## small
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_code_refinement/small')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE code-refinement dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/code-refinement
@@ -70,7 +70,7 @@ We use the dataset released by this paper(https://arxiv.org/pdf/1812.08693.pdf).
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
