@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/code_x_glue_tc_text_to_code)
 - [Huggingface](https://huggingface.co/datasets/code_x_glue_tc_text_to_code)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_tc_text_to_code')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE text-to-code dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Text-Code/text-to-code
@@ -20,7 +20,7 @@ We use concode dataset which is a widely used code generation dataset from Iyer'
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
