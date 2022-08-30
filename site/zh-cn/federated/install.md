@@ -4,7 +4,7 @@
 
 - 学习和使用 TFF 的最简单方式无需安装——您可以使用 [Google Colaboratory](https://colab.research.google.com/notebooks/welcome.ipynb) 直接在浏览器中运行 TensorFlow Federated 教程。
 - 要在本地计算机上使用 TensorFlow Federated，请使用 Python 的 <code>pip</code> 软件包管理器安装 <a>TFF 软件包</a>。
-- If you have a unique machine configuration, [build the TFF package from source](#build-the-tensorflow-federated-python-package-from-source) .
+- 如果您的计算机配置比较独特，请[从源代码构建 TFF 软件包](#build-the-tensorflow-federated-python-package-from-source)。
 
 ## 使用 `pip` 安装 TensorFlow Federated
 
@@ -25,7 +25,7 @@
 
 注：要退出虚拟环境，请运行 `deactivate`。
 
-### 3. Install the released TensorFlow Federated Python package.
+### 3. 安装已发布的 TensorFlow Federated Python 软件包。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade tensorflow-federated</code>
