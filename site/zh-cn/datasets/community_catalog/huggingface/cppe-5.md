@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/cppe-5)
 - [Huggingface](https://huggingface.co/datasets/cppe-5)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cppe-5')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CPPE - 5 (Medical Personal Protective Equipment) is a new challenging dataset with the goal
@@ -20,7 +20,7 @@ which is not possible with other popular data sets that focus on broad level cat
 ```
 
 - **许可**：未知
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
