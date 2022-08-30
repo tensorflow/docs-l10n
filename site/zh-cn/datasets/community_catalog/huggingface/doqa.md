@@ -7,13 +7,13 @@
 
 ## cooking
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:doqa/cooking')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 DoQA is a dataset for accessing Domain Specific FAQs via conversational QA that contains 2,437 information-seeking question/answer dialogues
@@ -117,13 +117,13 @@ DoQA enables the development and evaluation of conversational QA systems that he
 
 ## movies
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:doqa/movies')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 DoQA is a dataset for accessing Domain Specific FAQs via conversational QA that contains 2,437 information-seeking question/answer dialogues
@@ -225,13 +225,13 @@ DoQA enables the development and evaluation of conversational QA systems that he
 
 ## travel
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:doqa/travel')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 DoQA is a dataset for accessing Domain Specific FAQs via conversational QA that contains 2,437 information-seeking question/answer dialogues
