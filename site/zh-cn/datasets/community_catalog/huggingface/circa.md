@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/circa)
 - [Huggingface](https://huggingface.co/datasets/circa)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:circa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Circa (meaning ‘approximately’) dataset aims to help machine learning systems
@@ -26,7 +26,7 @@ The original dataset contains no train/dev/test splits.
 ```
 
 - **许可**：Creative Commons Attribution 4.0 License
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
