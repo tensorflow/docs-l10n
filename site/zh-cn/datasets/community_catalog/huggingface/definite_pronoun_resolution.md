@@ -7,13 +7,13 @@
 
 ## plain_text
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:definite_pronoun_resolution/plain_text')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Composed by 30 students from one of the author's undergraduate classes. These
@@ -28,7 +28,7 @@ more than once in the sentence, its first occurrence is the one to be resolved.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
