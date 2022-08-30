@@ -7,13 +7,13 @@
 
 ## volume
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:greek_legal_code/volume')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Greek_Legal_Code contains 47k classified legal resources from Greek Legislation. Its origin is “Permanent Greek Legislation Code - Raptarchis”,
@@ -21,7 +21,7 @@ a collection of Greek legislative documents classified into multi-level (from br
 ```
 
 - **许可**：CC BY-SA (Creative Commons / Attribution-ShareAlike)
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -99,13 +99,13 @@ a collection of Greek legislative documents classified into multi-level (from br
 
 ## chapter
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:greek_legal_code/chapter')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Greek_Legal_Code contains 47k classified legal resources from Greek Legislation. Its origin is “Permanent Greek Legislation Code - Raptarchis”,
@@ -113,7 +113,7 @@ a collection of Greek legislative documents classified into multi-level (from br
 ```
 
 - **许可**：CC BY-SA (Creative Commons / Attribution-ShareAlike)
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -533,13 +533,13 @@ a collection of Greek legislative documents classified into multi-level (from br
 
 ## subject
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:greek_legal_code/subject')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Greek_Legal_Code contains 47k classified legal resources from Greek Legislation. Its origin is “Permanent Greek Legislation Code - Raptarchis”,
@@ -547,7 +547,7 @@ a collection of Greek legislative documents classified into multi-level (from br
 ```
 
 - **许可**：CC BY-SA (Creative Commons / Attribution-ShareAlike)
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
