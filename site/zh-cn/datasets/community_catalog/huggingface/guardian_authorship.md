@@ -7,13 +7,13 @@
 
 ## cross_topic_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -33,7 +33,7 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -90,13 +90,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_genre_1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_genre_1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -173,13 +173,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_topic_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -256,13 +256,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_topic_3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -339,13 +339,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_topic_4
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_4')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -422,13 +422,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_topic_5
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_5')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -505,13 +505,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_topic_6
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_6')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -588,13 +588,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_topic_7
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_7')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -671,13 +671,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_topic_8
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_8')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -754,13 +754,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_topic_9
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_9')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -837,13 +837,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_topic_10
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_10')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -920,13 +920,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_topic_11
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_11')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -1003,13 +1003,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_topic_12
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_topic_12')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -1086,13 +1086,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_genre_2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_genre_2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -1169,13 +1169,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_genre_3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_genre_3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
@@ -1252,13 +1252,13 @@ IMPORTANT: train+validation+test[:60%] will generate the wrong splits becasue th
 
 ## cross_genre_4
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:guardian_authorship/cross_genre_4')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset cross-topic authorship attribution. The dataset is provided by Stamatatos 2013.
