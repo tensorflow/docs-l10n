@@ -7,20 +7,20 @@
 
 ## covid_qa_deepset
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covid_qa_castorini/covid_qa_deepset')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 COVID-QA is a Question Answering dataset consisting of 2,019 question/answer pairs annotated by volunteer biomedical experts on scientific articles related to COVID-19.
 ```
 
 - **许可**：Apache License 2.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -78,13 +78,13 @@ COVID-QA is a Question Answering dataset consisting of 2,019 question/answer pai
 
 ## covidqa
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covid_qa_castorini/covidqa')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CovidQA is the beginnings of a question answering dataset specifically designed for COVID-19, built by hand from knowledge gathered from Kaggle's COVID-19 Open Research Dataset Challenge.
@@ -144,13 +144,13 @@ CovidQA is the beginnings of a question answering dataset specifically designed 
 
 ## covid_qa_castorini
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:covid_qa_castorini/covid_qa_castorini')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CovidQA is the beginnings of a question answering dataset specifically designed for COVID-19, built by hand from knowledge gathered from Kaggle's COVID-19 Open Research Dataset Challenge.
