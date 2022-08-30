@@ -59,9 +59,9 @@ def MyDataProcessor(
 
 - 对于每个**工件输入**，应用 `InputArtifact[ArtifactType]` 类型提示注解。将 `ArtifactType` 替换为工件的类型，该类型是 `tfx.types.Artifact` 的子类。这些输入可以是可选实参。
 
-- For each **output artifact**, apply the `OutputArtifact[ArtifactType]` type hint annotation. Replace `ArtifactType` with the artifact’s type, which is a subclass of `tfx.types.Artifact`. Component output artifacts should be passed as input arguments of the function, so that your component can write outputs to a system-managed location and set appropriate artifact metadata properties. This argument can be optional or this argument can be defined with a default value.
+- 对于每个**输出工件**，应用 `OutputArtifact[ArtifactType]` 类型提示注解。将 `ArtifactType` 替换为工件的类型，该类型是 `tfx.types.Artifact` 的子类。组件输出工件应作为函数的输入实参传递，以便您的组件可以将输出写入系统管理的位置并设置适当的工件元数据属性。此实参可以是可选实参，也可以使用默认值进行定义。
 
-- For each **parameter**, use the type hint annotation `Parameter[T]`. Replace `T` with the type of the parameter. We currently only support primitive python types: `bool`, `int`, `float`, `str`, or `bytes`.
+- 对于每个**形参**，请使用类型提示注解 `Parameter[T]`。将 `T` 替换为形参的类型。我们目前仅支持原始 Python 类型：`bool`、`int`、`float`、`str` 或 `bytes`。
 
 - For **beam pipeline**, use the type hint annotation `BeamComponentParameter[beam.Pipeline]`. Set the default value to be `None`. The value `None` will be replaced by an instantiated beam pipeline created by `_make_beam_pipeline()` of [`BaseBeamExecutor`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_beam_executor.py){: .external }
 
