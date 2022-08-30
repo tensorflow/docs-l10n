@@ -7,13 +7,13 @@
 
 ## autshumato-en-tn
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:autshumato/autshumato-en-tn')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Multilingual information access is stipulated in the South African constitution. In practise, this
@@ -23,7 +23,7 @@ project is to develop machine translation systems for three South African langua
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -47,13 +47,13 @@ project is to develop machine translation systems for three South African langua
 
 ## autshumato-en-zu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:autshumato/autshumato-en-zu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Multilingual information access is stipulated in the South African constitution. In practise, this
@@ -63,7 +63,7 @@ project is to develop machine translation systems for three South African langua
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -87,13 +87,13 @@ project is to develop machine translation systems for three South African langua
 
 ## autshumato-en-ts
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:autshumato/autshumato-en-ts')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Multilingual information access is stipulated in the South African constitution. In practise, this
@@ -103,7 +103,7 @@ project is to develop machine translation systems for three South African langua
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -127,13 +127,13 @@ project is to develop machine translation systems for three South African langua
 
 ## autshumato-en-ts-manual
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:autshumato/autshumato-en-ts-manual')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Multilingual information access is stipulated in the South African constitution. In practise, this
@@ -143,7 +143,7 @@ project is to develop machine translation systems for three South African langua
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -167,13 +167,13 @@ project is to develop machine translation systems for three South African langua
 
 ## autshumato-tn
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:autshumato/autshumato-tn')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Multilingual information access is stipulated in the South African constitution. In practise, this
@@ -183,7 +183,7 @@ project is to develop machine translation systems for three South African langua
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -204,13 +204,13 @@ project is to develop machine translation systems for three South African langua
 
 ## autshumato-ts
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:autshumato/autshumato-ts')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Multilingual information access is stipulated in the South African constitution. In practise, this
@@ -220,7 +220,7 @@ project is to develop machine translation systems for three South African langua
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
