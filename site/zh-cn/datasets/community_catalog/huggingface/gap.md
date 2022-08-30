@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/gap)
 - [Huggingface](https://huggingface.co/datasets/gap)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:gap')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of
