@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/cornell_movie_dialog)
 - [Huggingface](https://huggingface.co/datasets/cornell_movie_dialog)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cornell_movie_dialog')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This corpus contains a large metadata-rich collection of fictional conversations extracted from raw movie scripts:
