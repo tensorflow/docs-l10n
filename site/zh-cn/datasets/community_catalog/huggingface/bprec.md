@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/bprec)
 - [Huggingface](https://huggingface.co/datasets/bprec)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bprec')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Dataset consisting of Polish language texts annotated to recognize brand-product relations.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -124,20 +124,20 @@ Dataset consisting of Polish language texts annotated to recognize brand-product
 
 ## all
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bprec/all')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Dataset consisting of Polish language texts annotated to recognize brand-product relations.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -245,20 +245,20 @@ Dataset consisting of Polish language texts annotated to recognize brand-product
 
 ## tele
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bprec/tele')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Dataset consisting of Polish language texts annotated to recognize brand-product relations.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -366,20 +366,20 @@ Dataset consisting of Polish language texts annotated to recognize brand-product
 
 ## electro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bprec/electro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Dataset consisting of Polish language texts annotated to recognize brand-product relations.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -487,20 +487,20 @@ Dataset consisting of Polish language texts annotated to recognize brand-product
 
 ## cosmetics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bprec/cosmetics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Dataset consisting of Polish language texts annotated to recognize brand-product relations.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -608,20 +608,20 @@ Dataset consisting of Polish language texts annotated to recognize brand-product
 
 ## banking
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:bprec/banking')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Dataset consisting of Polish language texts annotated to recognize brand-product relations.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
