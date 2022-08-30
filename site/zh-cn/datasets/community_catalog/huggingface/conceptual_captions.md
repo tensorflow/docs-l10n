@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/conceptual_captions)
 - [Huggingface](https://huggingface.co/datasets/conceptual_captions)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conceptual_captions')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Image captioning dataset
@@ -19,7 +19,7 @@ The resulting dataset (version 1.1) has been split into Training, Validation, an
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -51,13 +51,13 @@ The resulting dataset (version 1.1) has been split into Training, Validation, an
 
 ## unlabeled
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conceptual_captions/unlabeled')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Google's Conceptual Captions dataset has more than 3 million images, paired with natural-language captions.
@@ -69,7 +69,7 @@ informativeness, fluency, and learnability of the resulting captions.
 
 - **许可**：数据集可以免费用于任何目的，但我们将感谢您承认 Google LLC（“Google”）作为数据源。数据集按“原样”提供，不提供任何明示或暗示的保证。对于因使用数据集而导致的任何直接或间接损害，Google 不承担任何责任。
 
-- **Version**: 0.0.0
+- **版本**：0.0.0
 
 - **拆分**：
 
@@ -97,13 +97,13 @@ informativeness, fluency, and learnability of the resulting captions.
 
 ## labeled
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conceptual_captions/labeled')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Google's Conceptual Captions dataset has more than 3 million images, paired with natural-language captions.
@@ -115,7 +115,7 @@ informativeness, fluency, and learnability of the resulting captions.
 
 - **许可**：数据集可以免费用于任何目的，但我们将感谢您承认 Google LLC（“Google”）作为数据源。数据集按“原样”提供，不提供任何明示或暗示的保证。对于因使用数据集而导致的任何直接或间接损害，Google 不承担任何责任。
 
-- **Version**: 0.0.0
+- **版本**：0.0.0
 
 - **拆分**：
 
