@@ -14,7 +14,7 @@ TensorFlow Lite 提供了许多工具，用于将模型集成到 Android 应用�
 
 TensorFlow Lite Task Library 包含了一套功能强大且易于使用的任务专用库，供应用开发者使用 TensorFlow Lite 进行构建。它为热门的机器学习任务（如图像分类、问答等）提供了经过优化的开箱即用的模型接口。模型接口专为每个任务而设计，以实现最佳性能和可用性。Task Library 可跨平台工作，并且支持 Java 和 C++。
 
-To use the Task Library in your Android app, use the AAR from MavenCentral for [Task Vision library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-vision) , [Task Text library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-text) and [Task Audio Library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-audio) , respectively.
+要在您的 Android 应用中使用 Task Library，请分别为 [Task Vision 库](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-vision)、[Task Text 库](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-text)和 [Task Audio 库](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-audio)使用 MavenCentral 的 AAR。
 
 您可以在 `build.gradle` 依赖项中加以指定，如下所示：
 
