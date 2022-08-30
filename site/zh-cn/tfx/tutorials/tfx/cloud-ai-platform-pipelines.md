@@ -41,7 +41,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 同意 Google Cloud 条款及条件
 
-     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/welcome-popup.png?raw=true">
+      <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/welcome-popup.png?raw=true">
 
 3. 如果您想从免费试用帐号开始，请点击 [**Try For Free**](https://console.cloud.google.com/freetrial)（或 [**Get started for free**](https://console.cloud.google.com/freetrial)）。
 
@@ -75,15 +75,15 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 点击 **+ New Instance** 创建一个新集群。
 
-     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/new-instance.png?raw=true">
+      <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/new-instance.png?raw=true">
 
 3. 在 **Kubeflow Pipelines** 概览页面上，点击 **Configure**。
 
-     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/configure.png?raw=true">
+      <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/configure.png?raw=true">
 
 4. 点击“Enable”以启用 Kubernetes Engine API
 
-    <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/select-notebook.png?raw=true" alt="select-notebook" data-md-type="image">
+     <img src="images/cloud-ai-platform-pipelines/open-template.png">
 
     注：您可能需要等待几分钟才能继续，此时我们将为您启用 Kubernetes Engine API。
 
@@ -91,9 +91,9 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     1. 为您的集群选择一个[区域](https://cloud.google.com/compute/docs/regions-zones)。可以设置网络和子网络，但出于本教程目的，我们将它们保留为默认值。
 
-    2. **重要提示**：选中标有*允许访问以下 Cloud API* 的复选框。（此群集需要此权限才能访问项目的其他部分。如果跳过此步骤，稍后修复会有些棘手。）
+    2. **重要提示**：选中标有 *Allow access to the following cloud APIs* 的复选框。（此群集需要此权限才能访问项目的其他部分。如果跳过此步骤，稍后修复会有些棘手。）
 
-        <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
+         <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
     3. 点击 **Create New Cluster** 并稍候几分钟，直到集群创建完成为止。此过程需要几分钟时间。完成后，您将看到如下消息：
 
@@ -113,7 +113,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 3. 创建已安装 TensorFlow Enterprise 2.7（或更高版本）的**新笔记本**。
 
-    <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/open-dashboard.png?raw=true" alt="open-dashboard" data-md-type="image">
+     <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
 
     New Notebook -&gt; TensorFlow Enterprise 2.7 -&gt; Without GPU
 
@@ -125,7 +125,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     2. 如果您需要留在免费层级，则需要在 **Machine configuration** 下选择 1 个或 2 个 vCPU 的配置。
 
-        <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
+         <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
     3. 等待新笔记本创建完成，然后点击 **Enable Notebooks API**
 
@@ -139,15 +139,15 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 在本教程中使用的集群所在行上，点击 **Open Pipelines Dashboard**。
 
-    <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
+     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/select-notebook.png?raw=true" alt="select-notebook" data-md-type="image">
 
 3. 在 **Getting Started** 页面上，点击 **Open a Cloud AI Platform Notebook on Google Cloud**。
 
-    <img src="images/cloud-ai-platform-pipelines/open-template.png">
+     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/open-dashboard.png?raw=true" alt="open-dashboard" data-md-type="image">
 
 4. 选择您用于本教程的笔记本实例并点击 **Continue**，然后点击 **Confirm**。
 
-     <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/check-the-box.png?raw=true">
+      <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/check-the-box.png?raw=true">
 
 ## 5. 继续在笔记本中操作
 
@@ -319,7 +319,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ### 查看流水线
 
-对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”选项卡，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
+对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”标签页，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
 
 ### 更高级的示例
 
@@ -341,7 +341,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ### 组件
 
-![set path](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/set-path-nb-cell.png?raw=true)
+![set path](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/transform.png?raw=true)
 
 - [Transform](https://www.tensorflow.org/tfx/guide/transform) 会对数据集执行特征工程。
 
@@ -478,7 +478,7 @@ components.append(evaluator)
 
 ### 查看流水线输出
 
-对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”选项卡，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
+对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”标签页，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
 
 ### 可用部署目标
 
@@ -537,7 +537,7 @@ kubeflow_dag_runner.KubeflowDagRunner(config=config).run(pipeline)
 
 > **注：您必须先在 `configs.py` 文件中设置您的 GCP 项目 ID 和区域，然后才能继续。**
 
-**浏览到上一级目录。**点击文件列表上方的目录名称。该目录名称为流水线的名称，如果您未更改流水线名称，则为 `my_pipeline`。
+**Change directory one level up.** Click the name of the directory above the file list. The name of the directory is the name of the pipeline which is `my_pipeline` if you didn't change the pipeline name.
 
 **双击打开 `kubeflow_runner.py`**。为 `create_pipeline` 函数取消注释 `query` 和 `beam_pipeline_args` 两个参数。
 
@@ -579,7 +579,7 @@ gcloud services enable dataflow.googleapis.com
 
 **双击 `pipeline` 更改目录，然后双击打开 `configs.py`**。取消注释 `GOOGLE_CLOUD_REGION` 和 `DATAFLOW_BEAM_PIPELINE_ARGS` 的定义。
 
-**浏览到上一级目录。**点击文件列表上方的目录名称。该目录名称为流水线的名称，如果未进行更改，则为 `my_pipeline`。
+**浏览到上一级目录**。点击文件列表上方的目录名称。该目录名称为流水线的名称，如果您未更改流水线名称，则为 `my_pipeline`。
 
 **双击打开 `kubeflow_runner.py`**。取消注释 `beam_pipeline_args`。（还要确保注释掉您在第 7 步中添加的当前 `beam_pipeline_args`。）
 
@@ -598,7 +598,7 @@ gcloud services enable dataflow.googleapis.com
 
 ### 使用 KFP 尝试 Cloud AI Platform Training 和 Cloud AI Platform Prediction
 
-TFX 可与多种代管式 GCP 服务（例如，[Cloud AI Platform Training 和 Cloud AI Platform Prediction](https://cloud.google.com/ai-platform/)）互操作。您可以设置 `Trainer` 组件以使用 Cloud AI Platform Training（一项用于训练 ML 模型的代管式服务）。此外，当您完成模型构建并准备应用时，可以将您的模型*推送*到 Cloud AI Platform Prediction 进行应用。在此步骤中，我们将设置 `Trainer` 和 `Pusher` 组件以使用 Cloud AI Platform 服务。
+TFX 可与多种代管式 GCP 服务（例如，[Cloud AI Platform Training 和 Cloud AI Platform Prediction](https://cloud.google.com/ai-platform/)）互操作。您可以设置 `Trainer` 组件以使用 Cloud AI Platform Training（一项用于训练机器学习模型的代管式服务）。此外，当您完成模型构建并准备应用时，可以将您的模型*推送*到 Cloud AI Platform Prediction 进行应用。在此步骤中，我们将设置 `Trainer` 和 `Pusher` 组件以使用 Cloud AI Platform 服务。
 
 在编辑文件之前，您可能必须首先启用 *AI Platform Training &amp; Prediction API*。
 
@@ -606,7 +606,7 @@ TFX 可与多种代管式 GCP 服务（例如，[Cloud AI Platform Training 和 
 
 **浏览到上一级目录，然后双击打开 `kubeflow_runner.py`**。取消注释 `ai_platform_training_args` 和 `ai_platform_serving_args`。
 
-> 注：如果您在训练步骤中收到权限错误，则可能需要为 Cloud Machine Learning Engine (AI Platform Prediction &amp; Training) 服务帐号提供 Storage Object Viewer 权限。可在 [Container Registry 文档](https://cloud.google.com/container-registry/docs/access-control#grant)中获得更多信息。
+> 注：如果您在训练步骤中收到权限错误，则可能需要为 Cloud Machine Learning Engine（AI Platform Prediction 和 AI Platform Training）服务帐号提供 Storage Object Viewer 权限。可在 [Container Registry 文档](https://cloud.google.com/container-registry/docs/access-control#grant)中获得更多信息。
 
 #### 更新流水线并重新运行
 
