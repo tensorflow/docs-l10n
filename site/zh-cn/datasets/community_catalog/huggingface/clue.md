@@ -7,13 +7,13 @@
 
 ## afqmc
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/afqmc')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -22,7 +22,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -65,13 +65,13 @@ evaluating, and analyzing Chinese language understanding systems.
 
 ## tnews
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/tnews')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -80,7 +80,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -131,13 +131,13 @@ evaluating, and analyzing Chinese language understanding systems.
 
 ## iflytek
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/iflytek')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -146,7 +146,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -301,13 +301,13 @@ evaluating, and analyzing Chinese language understanding systems.
 
 ## cmnli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/cmnli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -316,7 +316,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -360,13 +360,13 @@ evaluating, and analyzing Chinese language understanding systems.
 
 ## cluewsc2020
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/cluewsc2020')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -375,7 +375,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -435,13 +435,13 @@ evaluating, and analyzing Chinese language understanding systems.
 
 ## csl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/csl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -450,7 +450,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -503,13 +503,13 @@ evaluating, and analyzing Chinese language understanding systems.
 
 ## cmrc2018
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/cmrc2018')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -518,7 +518,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -569,13 +569,13 @@ evaluating, and analyzing Chinese language understanding systems.
 
 ## drcd
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/drcd')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -584,7 +584,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -634,13 +634,13 @@ evaluating, and analyzing Chinese language understanding systems.
 
 ## chid
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/chid')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -649,7 +649,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -709,13 +709,13 @@ evaluating, and analyzing Chinese language understanding systems.
 
 ## c3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/c3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -724,7 +724,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -777,13 +777,13 @@ evaluating, and analyzing Chinese language understanding systems.
 
 ## ocnli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/ocnli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -792,7 +792,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -836,13 +836,13 @@ evaluating, and analyzing Chinese language understanding systems.
 
 ## diagnostics
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:clue/diagnostics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CLUE, A Chinese Language Understanding Evaluation Benchmark
@@ -851,7 +851,7 @@ evaluating, and analyzing Chinese language understanding systems.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
