@@ -7,13 +7,13 @@
 
 ## bg-cs
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-cs')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -46,13 +46,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-da
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-da')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -85,13 +85,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-de
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-de')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -124,13 +124,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-el
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-el')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -163,13 +163,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -202,13 +202,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -241,13 +241,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-et
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-et')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -280,13 +280,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-fi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-fi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -319,13 +319,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -358,13 +358,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -397,13 +397,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -436,13 +436,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -475,13 +475,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -514,13 +514,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -553,13 +553,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -592,13 +592,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -631,13 +631,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -670,13 +670,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -709,13 +709,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -748,13 +748,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## bg-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/bg-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -787,13 +787,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-da
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-da')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -826,13 +826,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-de
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-de')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -865,13 +865,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-el
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-el')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -904,13 +904,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -943,13 +943,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -982,13 +982,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-et
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-et')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1021,13 +1021,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-fi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-fi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1060,13 +1060,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1099,13 +1099,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1138,13 +1138,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1177,13 +1177,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1216,13 +1216,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1255,13 +1255,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1294,13 +1294,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1333,13 +1333,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1372,13 +1372,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1411,13 +1411,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1450,13 +1450,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1489,13 +1489,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## cs-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/cs-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1528,13 +1528,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-de
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-de')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1567,13 +1567,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-el
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-el')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1606,13 +1606,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1645,13 +1645,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1684,13 +1684,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-et
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-et')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1723,13 +1723,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-fi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-fi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1762,13 +1762,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1801,13 +1801,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1840,13 +1840,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1879,13 +1879,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1918,13 +1918,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1957,13 +1957,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -1996,13 +1996,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2035,13 +2035,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2074,13 +2074,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2113,13 +2113,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2152,13 +2152,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2191,13 +2191,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## da-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/da-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2230,13 +2230,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-el
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-el')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2269,13 +2269,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2308,13 +2308,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2347,13 +2347,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-et
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-et')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2386,13 +2386,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-fi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-fi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2425,13 +2425,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2464,13 +2464,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2503,13 +2503,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2542,13 +2542,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2581,13 +2581,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2620,13 +2620,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2659,13 +2659,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2698,13 +2698,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2737,13 +2737,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2776,13 +2776,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2815,13 +2815,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2854,13 +2854,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## de-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/de-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2893,13 +2893,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2932,13 +2932,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -2971,13 +2971,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-et
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-et')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3010,13 +3010,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-fi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-fi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3049,13 +3049,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3088,13 +3088,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3127,13 +3127,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3166,13 +3166,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3205,13 +3205,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3244,13 +3244,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3283,13 +3283,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3322,13 +3322,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3361,13 +3361,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3400,13 +3400,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3439,13 +3439,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3478,13 +3478,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## el-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/el-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3517,13 +3517,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3556,13 +3556,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-et
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-et')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3595,13 +3595,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-fi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-fi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3634,13 +3634,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3673,13 +3673,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3712,13 +3712,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3751,13 +3751,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3790,13 +3790,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3829,13 +3829,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3868,13 +3868,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3907,13 +3907,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3946,13 +3946,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -3985,13 +3985,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4024,13 +4024,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4063,13 +4063,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## en-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/en-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4102,13 +4102,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-et
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-et')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4141,13 +4141,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-fi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-fi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4180,13 +4180,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4219,13 +4219,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4258,13 +4258,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4297,13 +4297,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4336,13 +4336,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4375,13 +4375,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4414,13 +4414,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4453,13 +4453,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4492,13 +4492,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4531,13 +4531,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4570,13 +4570,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4609,13 +4609,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## es-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/es-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4648,13 +4648,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-fi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-fi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4687,13 +4687,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4726,13 +4726,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4765,13 +4765,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4804,13 +4804,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4843,13 +4843,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4882,13 +4882,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4921,13 +4921,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4960,13 +4960,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -4999,13 +4999,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5038,13 +5038,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5077,13 +5077,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5116,13 +5116,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## et-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/et-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5155,13 +5155,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5194,13 +5194,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5233,13 +5233,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5272,13 +5272,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5311,13 +5311,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5350,13 +5350,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5389,13 +5389,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5428,13 +5428,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5467,13 +5467,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5506,13 +5506,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5545,13 +5545,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5584,13 +5584,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fi-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fi-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5623,13 +5623,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fr-hu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fr-hu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5662,13 +5662,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fr-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fr-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5701,13 +5701,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fr-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fr-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5740,13 +5740,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fr-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fr-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5779,13 +5779,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fr-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fr-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5818,13 +5818,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fr-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fr-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5857,13 +5857,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fr-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fr-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5896,13 +5896,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fr-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fr-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5935,13 +5935,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fr-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fr-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -5974,13 +5974,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fr-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fr-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6013,13 +6013,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## fr-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/fr-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6052,13 +6052,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## hu-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/hu-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6091,13 +6091,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## hu-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/hu-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6130,13 +6130,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## hu-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/hu-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6169,13 +6169,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## hu-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/hu-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6208,13 +6208,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## hu-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/hu-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6247,13 +6247,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## hu-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/hu-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6286,13 +6286,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## hu-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/hu-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6325,13 +6325,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## hu-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/hu-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6364,13 +6364,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## hu-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/hu-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6403,13 +6403,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## hu-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/hu-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6442,13 +6442,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## it-lt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/it-lt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6481,13 +6481,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## it-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/it-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6520,13 +6520,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## it-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/it-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6559,13 +6559,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## it-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/it-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6598,13 +6598,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## it-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/it-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6637,13 +6637,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## it-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/it-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6676,13 +6676,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## it-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/it-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6715,13 +6715,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## it-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/it-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6754,13 +6754,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## it-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/it-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6793,13 +6793,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lt-lv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lt-lv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6832,13 +6832,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lt-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lt-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6871,13 +6871,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lt-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lt-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6910,13 +6910,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lt-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lt-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6949,13 +6949,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lt-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lt-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -6988,13 +6988,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lt-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lt-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7027,13 +7027,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lt-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lt-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7066,13 +7066,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lt-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lt-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7105,13 +7105,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lv-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lv-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7144,13 +7144,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lv-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lv-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7183,13 +7183,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lv-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lv-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7222,13 +7222,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lv-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lv-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7261,13 +7261,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lv-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lv-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7300,13 +7300,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lv-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lv-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7339,13 +7339,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## lv-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/lv-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7378,13 +7378,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## nl-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/nl-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7417,13 +7417,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## nl-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/nl-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7456,13 +7456,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## nl-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/nl-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7495,13 +7495,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## nl-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/nl-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7534,13 +7534,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## nl-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/nl-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7573,13 +7573,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## nl-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/nl-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7612,13 +7612,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## pl-pt
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/pl-pt')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7651,13 +7651,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## pl-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/pl-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7690,13 +7690,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## pl-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/pl-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7729,13 +7729,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## pl-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/pl-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7768,13 +7768,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## pl-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/pl-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7807,13 +7807,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## pt-ro
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/pt-ro')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7846,13 +7846,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## pt-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/pt-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7885,13 +7885,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## pt-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/pt-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7924,13 +7924,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## pt-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/pt-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -7963,13 +7963,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## ro-sk
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/ro-sk')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -8002,13 +8002,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## ro-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/ro-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -8041,13 +8041,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## ro-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/ro-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -8080,13 +8080,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## sk-sl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/sk-sl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -8119,13 +8119,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## sk-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/sk-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
@@ -8158,13 +8158,13 @@ A parallel corpus extracted from the European Parliament web site by Philipp Koe
 
 ## sl-sv
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:europarl_bilingual/sl-sv')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A parallel corpus extracted from the European Parliament web site by Philipp Koehn (University of Edinburgh). The main intended use is to aid statistical machine translation research.
