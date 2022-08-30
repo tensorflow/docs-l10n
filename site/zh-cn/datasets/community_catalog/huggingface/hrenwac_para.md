@@ -7,20 +7,20 @@
 
 ## hrenWaC
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hrenwac_para/hrenWaC')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The hrenWaC corpus version 2.0 consists of parallel Croatian-English texts crawled from the .hr top-level domain for Croatia. The corpus was built with Spidextor (https://github.com/abumatran/spidextor), a tool that glues together the output of SpiderLing used for crawling and Bitextor used for bitext extraction. The accuracy of the extracted bitext on the segment level is around 80% and on the word level around 84%.
 ```
 
 - **许可**：CC BY-SA 3.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
