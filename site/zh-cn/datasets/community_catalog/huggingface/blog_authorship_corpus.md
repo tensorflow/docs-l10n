@@ -7,13 +7,13 @@
 
 ## blog_authorship_corpus
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:blog_authorship_corpus/blog_authorship_corpus')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers gathered from blogger.com in August 2004. The corpus incorporates a total of 681,288 posts and over 140 million words - or approximately 35 posts and 7250 words per person.
@@ -33,7 +33,7 @@ The corpus may be freely used for non-commercial research purposes.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
