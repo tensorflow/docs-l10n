@@ -7,13 +7,13 @@
 
 ## java
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_code_completion_line/java')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE CodeCompletion-line dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/CodeCompletion-line
@@ -24,7 +24,7 @@ Line level code completion task shares the train/dev dataset with token level co
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -55,13 +55,13 @@ Line level code completion task shares the train/dev dataset with token level co
 
 ## python
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:code_x_glue_cc_code_completion_line/python')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 CodeXGLUE CodeCompletion-line dataset, available at https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/CodeCompletion-line
@@ -72,7 +72,7 @@ Line level code completion task shares the train/dev dataset with token level co
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
