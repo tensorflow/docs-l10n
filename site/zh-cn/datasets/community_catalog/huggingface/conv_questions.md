@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/conv_questions)
 - [Huggingface](https://huggingface.co/datasets/conv_questions)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conv_questions')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 ConvQuestions is the first realistic benchmark for conversational question answering over knowledge graphs.
@@ -20,7 +20,7 @@ question phenomena like comparisons, aggregations, compositionality, and tempora
 ```
 
 - **许可**：CC BY 4.0
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
