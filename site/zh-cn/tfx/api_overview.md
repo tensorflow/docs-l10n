@@ -6,7 +6,7 @@
 
 ## Data Validation
 
-- [Data Validation](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv)
+- Data Validation
 
 ## Transform
 
@@ -19,16 +19,16 @@
 
 ## Serving
 
-- [Client API (REST)](https://www.tensorflow.org/tfx/serving/api_rest)
-- [Server API (C++)](https://www.tensorflow.org/tfx/serving/api_docs/cc)
+- [客户端 API (REST)](https://www.tensorflow.org/tfx/serving/api_rest)
+- [服务器 API (C++)](https://www.tensorflow.org/tfx/serving/api_docs/cc)
 
 ## ML Metadata
 
-- [ML Metadata](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd)
+- [机器学习元数据](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd)
 
 ## TF Metadata
 
-- [ML Metadata](https://www.tensorflow.org/tfx/tf_metadata/api_docs/python/tfmd/proto)
+- [机器学习元数据](https://www.tensorflow.org/tfx/tf_metadata/api_docs/python/tfmd/proto)
 
 ## TFX 基本共享库 (`tfx_bsl`)
 
