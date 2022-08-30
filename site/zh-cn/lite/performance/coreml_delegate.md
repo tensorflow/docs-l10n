@@ -8,7 +8,7 @@
 
 **支持的 iOS 版本和设备：**
 
-- iOS 12 and later. In the older iOS versions, Core ML delegate will automatically fallback to CPU.
+- iOS 12 及更高版本。在旧 iOS 版本中，Core ML 委托会自动回退到 CPU。
 - 默认情况下，仅在使用 A12 SoC 及更高版本（iPhone XS 及更新型号）的设备上启用 Core ML 委托，从而使用 Neural Engine 加快推断速度。如果要在旧设备上也使用 Core ML 委托，请参阅[最佳做法](#best-practices)。
 
 **Supported models**
@@ -250,7 +250,7 @@ Core ML 委托支持以下运算。
 
 ## 常见问题解答
 
-- Does CoreML delegate support fallback to CPU if a graph contains unsupported ops?
+- 如果计算图包含不受支持的运算，CoreML 委托支持会回退到 CPU 吗？
     - 会
 - CoreML 委托可以在 iOS 模拟器上工作吗？
     - 可以。该库包括 x86 和 x86_64 目标，因此，它可以在模拟器上运行，但是性能不会高于 CPU。
