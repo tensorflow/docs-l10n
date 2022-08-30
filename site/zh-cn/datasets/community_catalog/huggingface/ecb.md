@@ -7,13 +7,13 @@
 
 ## de-fr
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ecb/de-fr')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Original source: Website and documentatuion from the European Central Bank, compiled and made available by Alberto Simoes (thank you very much!)
@@ -24,7 +24,7 @@ total number of sentence fragments: 30.55M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -53,13 +53,13 @@ total number of sentence fragments: 30.55M
 
 ## cs-en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ecb/cs-en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Original source: Website and documentatuion from the European Central Bank, compiled and made available by Alberto Simoes (thank you very much!)
@@ -70,7 +70,7 @@ total number of sentence fragments: 30.55M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -99,13 +99,13 @@ total number of sentence fragments: 30.55M
 
 ## el-it
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ecb/el-it')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Original source: Website and documentatuion from the European Central Bank, compiled and made available by Alberto Simoes (thank you very much!)
@@ -116,7 +116,7 @@ total number of sentence fragments: 30.55M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -145,13 +145,13 @@ total number of sentence fragments: 30.55M
 
 ## en-nl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ecb/en-nl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Original source: Website and documentatuion from the European Central Bank, compiled and made available by Alberto Simoes (thank you very much!)
@@ -162,7 +162,7 @@ total number of sentence fragments: 30.55M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -191,13 +191,13 @@ total number of sentence fragments: 30.55M
 
 ## fi-pl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ecb/fi-pl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Original source: Website and documentatuion from the European Central Bank, compiled and made available by Alberto Simoes (thank you very much!)
@@ -208,7 +208,7 @@ total number of sentence fragments: 30.55M
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
