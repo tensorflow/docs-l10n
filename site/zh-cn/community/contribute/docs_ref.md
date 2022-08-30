@@ -95,7 +95,7 @@ TensorFlow uses a few customizations to the builtin doctest logic:
 
     ```
     def NewLayer():
-      “””This layer does cool stuff.
+      """This layer does cool stuff.
 
       Example usage:
 
@@ -103,7 +103,7 @@ TensorFlow uses a few customizations to the builtin doctest logic:
       >>> new_layer = NewLayer(x)
       >>> new_layer
       <tf.Tensor: shape=(1, 14, 14, 3), dtype=int32, numpy=...>
-      “””
+      """
     ```
 
 *   *Floating point values*: The TensorFlow doctest extracts float values from
@@ -178,30 +178,4 @@ There are two ways to test the code in the docstring locally:
 
     <pre class="prettyprint lang-bsh">
     <code class="devsite-terminal">python tf_doctest.py --file=<file_path>
-    </pre>
-
-    This will run it using your installed version of TensorFlow. To be sure
-    you're running the same code that you're testing:
-
-    *   Use an up to date [tf-nightly](https://pypi.org/project/tf-nightly/)
-        `pip install -U tf-nightly`
-    *   Rebase your pull request onto a recent pull from
-        [TensorFlow's](https://github.com/tensorflow/tensorflow) master branch.
-
-*   If you are changing the code and the docstring of a class/function/method,
-    then you will need to
-    [build TensorFlow from source](../../install/source.md). Once you are setup
-    to build from source, you can run the tests:
-
-    <pre class="prettyprint lang-bsh">
-    bazel run //tensorflow/tools/docs:tf_doctest
-    </pre>
-
-    or
-
-    <pre class="prettyprint lang-bsh">
-    bazel run //tensorflow/tools/docs:tf_doctest -- --module=ops.array_ops
-    </pre>
-
-    The `--module` is relative to `tensorflow.python`.
 ```
