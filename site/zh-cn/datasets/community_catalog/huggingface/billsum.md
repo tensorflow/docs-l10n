@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/billsum)
 - [Huggingface](https://huggingface.co/datasets/billsum)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:billsum')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 BillSum, summarization of US Congressional and California state bills.
