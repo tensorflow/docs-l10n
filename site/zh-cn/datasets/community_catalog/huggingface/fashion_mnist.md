@@ -7,13 +7,13 @@
 
 ## fashion_mnist
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:fashion_mnist/fashion_mnist')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Fashion-MNIST is a dataset of Zalando's article images—consisting of a training set of
@@ -24,7 +24,7 @@ It shares the same image size and structure of training and testing splits.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
