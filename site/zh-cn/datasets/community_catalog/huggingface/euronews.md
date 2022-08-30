@@ -7,20 +7,20 @@
 
 ## fr-bnf
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:euronews/fr-bnf')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The corpora comprise of files per data provider that are encoded in the IOB format (Ramshaw & Marcus, 1995). The IOB format is a simple text chunking format that divides texts into single tokens per line, and, separated by a whitespace, tags to mark named entities. The most commonly used categories for tags are PER (person), LOC (location) and ORG (organization). To mark named entities that span multiple tokens, the tags have a prefix of either B- (beginning of named entity) or I- (inside of named entity). O (outside of named entity) tags are used to mark tokens that are not a named entity.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -71,20 +71,20 @@ The corpora comprise of files per data provider that are encoded in the IOB form
 
 ## nl-kb
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:euronews/nl-kb')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The corpora comprise of files per data provider that are encoded in the IOB format (Ramshaw & Marcus, 1995). The IOB format is a simple text chunking format that divides texts into single tokens per line, and, separated by a whitespace, tags to mark named entities. The most commonly used categories for tags are PER (person), LOC (location) and ORG (organization). To mark named entities that span multiple tokens, the tags have a prefix of either B- (beginning of named entity) or I- (inside of named entity). O (outside of named entity) tags are used to mark tokens that are not a named entity.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -135,20 +135,20 @@ The corpora comprise of files per data provider that are encoded in the IOB form
 
 ## de-sbb
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:euronews/de-sbb')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The corpora comprise of files per data provider that are encoded in the IOB format (Ramshaw & Marcus, 1995). The IOB format is a simple text chunking format that divides texts into single tokens per line, and, separated by a whitespace, tags to mark named entities. The most commonly used categories for tags are PER (person), LOC (location) and ORG (organization). To mark named entities that span multiple tokens, the tags have a prefix of either B- (beginning of named entity) or I- (inside of named entity). O (outside of named entity) tags are used to mark tokens that are not a named entity.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -199,20 +199,20 @@ The corpora comprise of files per data provider that are encoded in the IOB form
 
 ## de-onb
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:euronews/de-onb')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The corpora comprise of files per data provider that are encoded in the IOB format (Ramshaw & Marcus, 1995). The IOB format is a simple text chunking format that divides texts into single tokens per line, and, separated by a whitespace, tags to mark named entities. The most commonly used categories for tags are PER (person), LOC (location) and ORG (organization). To mark named entities that span multiple tokens, the tags have a prefix of either B- (beginning of named entity) or I- (inside of named entity). O (outside of named entity) tags are used to mark tokens that are not a named entity.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -263,20 +263,20 @@ The corpora comprise of files per data provider that are encoded in the IOB form
 
 ## de-lft
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:euronews/de-lft')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The corpora comprise of files per data provider that are encoded in the IOB format (Ramshaw & Marcus, 1995). The IOB format is a simple text chunking format that divides texts into single tokens per line, and, separated by a whitespace, tags to mark named entities. The most commonly used categories for tags are PER (person), LOC (location) and ORG (organization). To mark named entities that span multiple tokens, the tags have a prefix of either B- (beginning of named entity) or I- (inside of named entity). O (outside of named entity) tags are used to mark tokens that are not a named entity.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
