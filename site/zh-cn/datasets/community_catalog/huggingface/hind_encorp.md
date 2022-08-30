@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/hind_encorp)
 - [Huggingface](https://huggingface.co/datasets/hind_encorp)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hind_encorp')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 HindEnCorp parallel texts (sentence-aligned) come from the following sources:
@@ -36,7 +36,7 @@ Other smaller datasets. This time, we added Wikipedia entities as crawled in 201
 ```
 
 - **许可**：CC BY-NC-SA 3.0
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
