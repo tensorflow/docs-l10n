@@ -7,13 +7,13 @@
 
 ## hausa_voa_ner
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hausa_voa_ner/hausa_voa_ner')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Hausa VOA NER dataset is a labeled dataset for named entity recognition in Hausa. The texts were obtained from
@@ -30,7 +30,7 @@ For more details, see https://www.aclweb.org/anthology/2020.emnlp-main.204/
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
