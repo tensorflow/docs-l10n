@@ -7,13 +7,13 @@
 
 ## coached_conv_pref
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:coached_conv_pref/coached_conv_pref')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset consisting of 502 English dialogs with 12,000 annotated utterances between a user and an assistant discussing
@@ -27,7 +27,7 @@ entities.
 ```
 
 - **许可**：https://creativecommons.org/licenses/by-sa/4.0/
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
