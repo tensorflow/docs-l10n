@@ -21,7 +21,7 @@ Google Play 服务中的 TensorFlow Lite 可以通过 [TensorFlow Lite Task API]
 
 以下说明提供了有关如何在 Google Play 服务中实现 Interpreter API 和 Task Library API 的更多详细信息。虽然应用可以同时使用 Interpreter API 和 Task Library API，但大多数应用应只使用一组 API。
 
-Note: If you are already using TensorFlow Lite in your app, you should review the [Migrating from stand-alone TensorFlow Lite](#migrating) section.
+注：如果您已经在应用中使用 TensorFlow Lite，则应查看[从独立 TensorFlow Lite 迁移](#migrating)部分。
 
 ### Task Library 示例应用
 
@@ -368,7 +368,7 @@ TensorFlow Lite 允许您使用图形处理单元 (GPU) 等专用硬件处理器
     </devsite-selector>
     </div>
 
-## Migrating from stand-alone TensorFlow Lite {:#migrating}
+## 从独立的 TensorFlow Lite 迁移 {:#migrating}
 
 如果您计划将应用从独立 TensorFlow Lite 迁移到 Play 服务 API，请查看以下有关更新应用项目代码的附加指南：
 
@@ -381,7 +381,7 @@ TensorFlow Lite 允许您使用图形处理单元 (GPU) 等专用硬件处理器
 7. 将 `.setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)` 追加到对 `InterpreterApi.create()` 的任何调用的最后一个参数。
 8. 将 `org.tensorflow.lite.Interpreter` 类的其他匹配项替换为 `org.tensorflow.lite.InterpreterApi`。
 
-If you want to use stand-alone TensorFlow Lite and the Play services API side-by-side, you must use TensorFlow Lite 2.9 (or later). TensorFlow Lite 2.8 and earlier versions are not compatible with the Play services API version.
+如果想同时使用独立的 TensorFlow Lite 和 Play 服务 API，您必须使用 TensorFlow Lite 2.9 或更高版本。TensorFlow Lite 2.8 及之前的版本与 Play 服务 API 版本不兼容。
 
 ## 已知问题
 
