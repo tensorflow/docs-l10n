@@ -7,13 +7,13 @@
 
 ## mcd1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cfq/mcd1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The CFQ dataset (and it's splits) for measuring compositional generalization.
@@ -52,13 +52,13 @@ data = datasets.load_dataset('cfq/mcd1')
 
 ## mcd2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cfq/mcd2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The CFQ dataset (and it's splits) for measuring compositional generalization.
@@ -97,13 +97,13 @@ data = datasets.load_dataset('cfq/mcd1')
 
 ## mcd3
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cfq/mcd3')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The CFQ dataset (and it's splits) for measuring compositional generalization.
@@ -142,13 +142,13 @@ data = datasets.load_dataset('cfq/mcd1')
 
 ## question_complexity_split
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cfq/question_complexity_split')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The CFQ dataset (and it's splits) for measuring compositional generalization.
@@ -187,13 +187,13 @@ data = datasets.load_dataset('cfq/mcd1')
 
 ## question_pattern_split
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cfq/question_pattern_split')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The CFQ dataset (and it's splits) for measuring compositional generalization.
@@ -232,13 +232,13 @@ data = datasets.load_dataset('cfq/mcd1')
 
 ## query_complexity_split
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cfq/query_complexity_split')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The CFQ dataset (and it's splits) for measuring compositional generalization.
@@ -277,13 +277,13 @@ data = datasets.load_dataset('cfq/mcd1')
 
 ## query_pattern_split
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cfq/query_pattern_split')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The CFQ dataset (and it's splits) for measuring compositional generalization.
@@ -322,13 +322,13 @@ data = datasets.load_dataset('cfq/mcd1')
 
 ## random_split
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:cfq/random_split')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The CFQ dataset (and it's splits) for measuring compositional generalization.
