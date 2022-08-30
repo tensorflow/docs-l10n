@@ -7,13 +7,13 @@
 
 ## ehealth_kd
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ehealth_kd/ehealth_kd')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Dataset of the eHealth Knowledge Discovery Challenge at IberLEF 2020. It is designed for
@@ -21,7 +21,7 @@ the identification of semantic entities and relations in Spanish health document
 ```
 
 - **许可**：https://creativecommons.org/licenses/by-nc-sa/4.0/
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
