@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/empathetic_dialogues)
 - [Huggingface](https://huggingface.co/datasets/empathetic_dialogues)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:empathetic_dialogues')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 PyTorch original implementation of Towards Empathetic Open-domain Conversation Models: a New Benchmark and Dataset
