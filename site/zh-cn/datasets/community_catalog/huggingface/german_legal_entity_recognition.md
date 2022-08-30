@@ -7,20 +7,20 @@
 
 ## bag
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:german_legal_entity_recognition/bag')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -103,20 +103,20 @@ ds = tfds.load('huggingface:german_legal_entity_recognition/bag')
 
 ## bfh
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:german_legal_entity_recognition/bfh')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -199,20 +199,20 @@ ds = tfds.load('huggingface:german_legal_entity_recognition/bfh')
 
 ## bgh
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:german_legal_entity_recognition/bgh')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -295,20 +295,20 @@ ds = tfds.load('huggingface:german_legal_entity_recognition/bgh')
 
 ## bpatg
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:german_legal_entity_recognition/bpatg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -391,20 +391,20 @@ ds = tfds.load('huggingface:german_legal_entity_recognition/bpatg')
 
 ## bag
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:german_legal_entity_recognition/bsg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -487,20 +487,20 @@ ds = tfds.load('huggingface:german_legal_entity_recognition/bsg')
 
 ## bverfg
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:german_legal_entity_recognition/bverfg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -583,20 +583,20 @@ ds = tfds.load('huggingface:german_legal_entity_recognition/bverfg')
 
 ## bverwg
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:german_legal_entity_recognition/bverwg')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -679,20 +679,20 @@ ds = tfds.load('huggingface:german_legal_entity_recognition/bverwg')
 
 ## all
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:german_legal_entity_recognition/all')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
