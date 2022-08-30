@@ -7,20 +7,20 @@
 
 ## air_dialogue_data
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:air_dialogue/air_dialogue_data')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AirDialogue, is a large dataset that contains 402,038 goal-oriented conversations. To collect this dataset, we create a contextgenerator which provides travel and flight restrictions. Then the human annotators are asked to play the role of a customer or an agent and interact with the goal of successfully booking a trip given the restrictions.
 ```
 
 - **许可**：cc-by-nc-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -182,20 +182,20 @@ AirDialogue, is a large dataset that contains 402,038 goal-oriented conversation
 
 ## air_dialogue_kb
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:air_dialogue/air_dialogue_kb')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AirDialogue, is a large dataset that contains 402,038 goal-oriented conversations. To collect this dataset, we create a contextgenerator which provides travel and flight restrictions. Then the human annotators are asked to play the role of a customer or an agent and interact with the goal of successfully booking a trip given the restrictions.
 ```
 
 - **许可**：cc-by-nc-4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
