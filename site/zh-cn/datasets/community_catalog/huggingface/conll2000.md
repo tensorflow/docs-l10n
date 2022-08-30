@@ -7,13 +7,13 @@
 
 ## conll2000
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:conll2000/conll2000')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Text chunking consists of dividing a text in syntactically correlated parts of words. For example, the sentence
@@ -29,7 +29,7 @@ Sabine Buchholz from Tilburg University, The Netherlands.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
