@@ -1,6 +1,6 @@
 # トレーニング後の量子化
 
-トレーニング後の量子化は、わずかなモデルの精度の低下を伴いますが、モデルの大きさを削減し、CPU とハードウェアアクセラレータのレイテンシを改善する変換手法です。[TensorFlow Lite Converter](../convert/) を使って TensorFlow Lite 形式に変換する場合、トレーニング済みの浮動小数点数の TensorFlow モデルを使ってこれらの手法を実行できます。
+トレーニング後の量子化は、わずかなモデルの精度の低下を伴いますが、モデルの大きさを削減し、CPU とハードウェアアクセラレータのレイテンシを改善する変換手法です。[TensorFlow Lite Converter](../models/convert/) を使って TensorFlow Lite 形式に変換する場合、トレーニング済みの浮動小数点数の TensorFlow モデルを使ってこれらの手法を実行できます。
 
 注意：このページの手法には TensorFlow 1.15 以上が必要です。
 
@@ -42,7 +42,7 @@ tflite_quant_model = converter.convert()
 
 こうするためにはサンプルの入力データを変換器に与え、活性化関数の入力と出力の範囲を計測する必要があります。重みやバイアスなどの一定テンソルとは異なり、モデル入力、活性化（中間層の出力）、モデル出力などの可変テンソルは、いくつかの推論サイクルを実行しない限り、キャリブレーションできません。そのため、コンバータはそれらをキャリブレーションするために代表的なデータセットを必要とします。このデータセットには、トレーニングデータまたは検証データの小さなサブセット（約100〜500サンプル）を使用できます。以下のコードで使用されている `representative_dataset_gen()` 関数を参照してください。
 
-TensorFlow 2.7 バージョンより、以下の例のように[シグネチャ](/lite/guide/signatures)を通じて、代表データセットを指定できます。
+TensorFlow 2.7 バージョンより、以下の例のように[シグネチャ](../guide/signatures.ipynb)を通じて、代表データセットを指定できます。
 
 <pre>def representative_dataset():
   for data in dataset:
@@ -173,7 +173,7 @@ tflite_quant_model = converter.convert()
 
 この量子化スキームにより*超解像、*ノイズキャンセリングやビームフォーミングなどのオーディオ信号処理、*画像のノイズ除去、*単一画像からの HDR 再構成などの使用例で精度が向上します。
 
-この量子化の欠点は以下のとおりです。
+The disadvantage of this quantization is:
 
 - 現在、最適化されたカーネル実装がないため、推論は 8 ビットの完全整数よりも著しく遅くなります。
 - 現在、既存のハードウェアアクセラレータを使用する TF Lite デリゲートとは互換性がありません。
@@ -184,7 +184,7 @@ tflite_quant_model = converter.convert()
 
 ### モデルの精度
 
-重みはトレーニング後に量子化されるため、特に小規模なネットワークでは、精度が低下する可能性があります。トレーニング済みの完全に量子化されたモデルは、[TensorFlow Lite モデルリポジトリ](../models/)の特定のネットワーク用に提供されています。量子化されたモデルの精度をチェックして、精度の低下が許容範囲内にあることを確認することが重要です。[TensorFlow Lite モデルの精度](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}を評価するためのツールがあります。
+重みはトレーニング後に量子化されるため、特に小規模なネットワークでは、精度が低下する可能性があります。トレーニング済みの完全に量子化されたモデルは、[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&q=quantized){:.external} の特定のネットワーク用に提供されています。量子化されたモデルの精度をチェックして、精度の低下が許容範囲内にあることを確認することが重要です。[TensorFlow Lite モデルの精度](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}を評価するためのツールがあります。
 
 または、精度の劣化が大きすぎる場合は、[量子化対応トレーニング](https://www.tensorflow.org/model_optimization/guide/quantization/training)の使用を検討してください。ただし、これを行うには、モデルトレーニング中に偽の量子化ノードを追加するために変更する必要がありますが、このページのトレーニング後の量子化手法では、既存の事前トレーニング済みモデルを使用します。
 
@@ -200,4 +200,4 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 - テンソルごとの活性化/入力は、[-128, 127]の範囲のゼロ点、 [-127、127] の範囲の int8 の 2 の補数値で表されます。
 
-量子化スキームの詳細については、[量子化仕様](./quantization_spec.md)を参照してください。TensorFlow Lite のデリゲートインターフェイスにプラグインするハードウェアベンダーには、ここに説明されている量子化スキームを実装することをお勧めします。
+量子化スキームの詳細については、[量子化仕様](./quantization_spec)を参照してください。TensorFlow Lite のデリゲートインターフェイスにプラグインするハードウェアベンダーには、ここに説明されている量子化スキームを実装することをお勧めします。
