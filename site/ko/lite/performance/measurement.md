@@ -204,8 +204,7 @@ nnapi 대리자로 실행하려면 `--use_nnapi=true`를 설정합니다. GPU �
     <td>14.8 ms</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz">Mobilenet_1.0_224 (quant)</a>
-</td>
+    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz">Mobilenet_1.0_224 (quant)</a> </td>
     <td>Pixel 3</td>
     <td>13.4 ms</td>
     <td>---</td>
@@ -218,8 +217,7 @@ nnapi 대리자로 실행하려면 `--use_nnapi=true`를 설정합니다. GPU �
     <td>3.2 ms</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/nasnet_mobile_2018_04_27.tgz">NASNet mobile</a>
-</td>
+    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/nasnet_mobile_2018_04_27.tgz">NASNet mobile</a> </td>
     <td>Pixel 3</td>
     <td>56 ms</td>
     <td>---</td>
@@ -232,8 +230,7 @@ nnapi 대리자로 실행하려면 `--use_nnapi=true`를 설정합니다. GPU �
     <td>99.0 ms</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/squeezenet_2018_04_27.tgz">SqueezeNet</a>
-</td>
+    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/squeezenet_2018_04_27.tgz">SqueezeNet</a> </td>
     <td>Pixel 3</td>
     <td>35.8 ms</td>
     <td>9.5 ms</td>
@@ -246,8 +243,7 @@ nnapi 대리자로 실행하려면 `--use_nnapi=true`를 설정합니다. GPU �
     <td>19.0 ms</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_resnet_v2_2018_04_27.tgz">Inception_ResNet_V2</a>
-</td>
+    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_resnet_v2_2018_04_27.tgz">Inception_ResNet_V2</a> </td>
     <td>Pixel 3</td>
     <td>422 ms</td>
     <td>99.8 ms</td>
@@ -260,8 +256,7 @@ nnapi 대리자로 실행하려면 `--use_nnapi=true`를 설정합니다. GPU �
     <td>171.1 ms</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_v4_2018_04_27.tgz">Inception_V4</a>
-</td>
+    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_v4_2018_04_27.tgz">Inception_V4</a> </td>
     <td>Pixel 3</td>
     <td>486 ms</td>
     <td>93 ms</td>
@@ -297,36 +292,31 @@ iOS 벤치마크를 실행하기 위해 적절한 모델을 포함하도록 벤�
     <td>3.4 ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz)">Mobilenet_1.0_224 (quant)</a>
-</td>
+    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz)">Mobilenet_1.0_224 (quant)</a> </td>
     <td>iPhone XS</td>
     <td>11 ms</td>
     <td>---</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/nasnet_mobile_2018_04_27.tgz">NASNet mobile</a>
-</td>
+    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/nasnet_mobile_2018_04_27.tgz">NASNet mobile</a> </td>
     <td>iPhone XS</td>
     <td>30.4 ms</td>
     <td>---</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/squeezenet_2018_04_27.tgz">SqueezeNet</a>
-</td>
+    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/squeezenet_2018_04_27.tgz">SqueezeNet</a> </td>
     <td>iPhone XS</td>
     <td>21.1 ms</td>
     <td>15.5 ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_resnet_v2_2018_04_27.tgz">Inception_ResNet_V2</a>
-</td>
+    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_resnet_v2_2018_04_27.tgz">Inception_ResNet_V2</a> </td>
     <td>iPhone XS</td>
     <td>261.1 ms</td>
     <td>45.7 ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_v4_2018_04_27.tgz">Inception_V4</a>
-</td>
+    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/model_zoo/upload_20180427/inception_v4_2018_04_27.tgz">Inception_V4</a> </td>
     <td>iPhone XS</td>
     <td>309 ms</td>
     <td>54.4 ms</td>
