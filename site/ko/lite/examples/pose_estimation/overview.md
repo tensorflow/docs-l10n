@@ -6,7 +6,7 @@
 
 ## 시작하기
 
-If you are new to TensorFlow Lite and are working with Android or iOS, explore the following example applications that can help you get started.
+<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">스타터 모델 다운로드하기</a>
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android 예제</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS 예제</a>
 
