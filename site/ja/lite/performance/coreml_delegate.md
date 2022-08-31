@@ -257,7 +257,7 @@ Core ML デリゲートがサポートする演算子は以下の通りです。
 - TensorFlow Lite と CoreML デリゲートは MacOS をサポートしていますか？
     - TensorFlow Lite は iOS のみでテストを行っており、MacOS ではテストしていません。
 - カスタムの TensorFlow Lite 演算子はサポートされますか？
-    - No, CoreML delegate does not support custom ops and they will fallback to CPU.
+    - いいえ、CoreML デリゲートはカスタム演算子をサポートしていないため、CPU にフォールバックします。
 
 ## API
 
