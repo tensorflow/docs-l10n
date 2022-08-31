@@ -20,7 +20,7 @@ Federated Core(FC)는 분산 계산을 구현하기 위한 프로그래밍 환�
 
 완전히 공식적인 방식으로 *페더레이션 계산*이라는 용어를 정의하는 것은 이 문서의 범위를 벗어나지만, 새로운 분산 학습 알고리즘을 설명하는 [연구 간행물](https://arxiv.org/pdf/1602.05629.pdf)에서 의사 코드로 표현될 수 있는 알고리즘 유형으로 생각할 수 있습니다.
 
-FC의 목표는 간단히 말하자면, 의사 코드가 *아니라* 다양한 대상 환경에서 실행 가능한 프로그램 논리를 의사 코드와 같은 추상화 수준에서 유사하게 컴팩트하게 표현하는 것입니다.
+The goal of FC, in a nutshell, is to enable similarly compact representation, at a similar pseudocode-like level of abstraction, of program logic that is *not* pseudocode, but rather, that's executable in a variety of target environments.
 
 FC가 표현하는 알고리즘 종류의 특징을 정의하는 핵심은 시스템 참가자들의 행동이 집합적으로 설명된다는 것입니다. 따라서 데이터를 로컬로 변환하는 *각 기기*와 결과를 *브로드캐스팅*하고 *수집*하거나 *집계*하는 중앙 집중식 코디네이터를 통해 작업을 조정하는 기기에 대해 이야기하는 경향이 있습니다.
 
