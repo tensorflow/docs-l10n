@@ -10,25 +10,25 @@
 
 ![Graph of accuracy vs latency](../images/performance/accuracy_vs_latency.png "Accuracy vs Latency")
 
-モバイルデバイス用に最適化されたモデルの 1 例である [MobileNets](https://arxiv.org/abs/1704.04861) は、モバイルビジョンアプリ向けに最適化されています。モバイルおよび組み込みデバイスに特化して最適化されたその他のモデルは、[ホステッドモデル](../guide/hosted_models.md)にリスト表示されています。
+モバイルデバイス向けに最適化されたモデルの一例には [MobileNets](https://arxiv.org/abs/1704.04861) がありますが、これはモバイルビジョンアプリケーション向けに最適化されています。[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite) には、モバイルデバイスや組み込みデバイス向けに最適化されたモデルがほかにも複数掲載されています。
 
-転移学習を使用してリストにあるモデルを独自のデータセットで再トレーニングすることができます。[画像分類](/lite/tutorials/model_maker_image_classification)と[物体検出](https://medium.com/tensorflow/training-and-serving-a-realtime-mobile-object-detector-in-30-minutes-with-cloud-tpus-b78971cf1193)については、転移学習チュートリアルをご覧ください。
+掲載されているモデルは、転移学習を用いることで、独自のデータセットで再トレーニングすることが可能です。TensorFlow Liteの[モデルメーカー](../models/modify/model_maker/)を使った、転移学習のチュートリアルをご覧ください。
 
 ## モデルをプロファイルする
 
 タスクに適した候補モデルを選択したら、モデルのプロファイルとベンチマークを行うことをお勧めします。TensorFlow Lite [ベンチマークツール](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)には、演算子ごとのプロファイル統計を表示するプロファイラが組み込まれています。これはパフォーマンスのボトルネックや、どの演算子が計算時間を支配しているかを理解するのに有用です。
 
-また、[TensrFlow Lite トレーシング](measurement.md#trace_tensorflow_lite_internals_in_android)を使用して、標準的な Android システムのトレーシングで Android アプリ内のモデルをプロファイルしたり、GUI ベースのプロファイルツールで演算子呼び出しを時間ごとに可視化したりすることも可能です。
+また、[TensorFlow Lite トレーシング](measurement#trace_tensorflow_lite_internals_in_android)を使用して、標準的な Android システムのトレーシングで Android アプリ内のモデルをプロファイルしたり、GUI ベースのプロファイルツールで演算子呼び出しを時間ごとに可視化したりすることも可能です。
 
 ## グラフ内の演算子をプロファイルして最適化する
 
-モデル内で特定の演算子が頻繁に現れ、その演算子が最も時間を消費することがプロファイルで分かっている場合は、その演算子の最適化の検討をお勧めします。TensorFlow Lite の演算子のほとんどは最適化されたバージョンなので、このようなシナリオは稀なはずです。しかし、演算実行の制約が分かっている場合には、より高速なバージョンのカスタム演算子を記述することができる可能性があります。詳しくは[カスタム演算子のドキュメント](../custom_operators.md)をご覧ください。
+モデル内で特定の演算子が頻繁に現れ、その演算子が最も時間を消費することがプロファイルで分かっている場合は、その演算子の最適化の検討をお勧めします。TensorFlow Lite の演算子のほとんどは最適化されたバージョンなので、このようなシナリオは稀なはずです。しかし、演算実行の制約が分かっている場合には、より高速なバージョンのカスタム演算子を記述することができる可能性があります。詳しくは[カスタム演算子のガイド](../guide/ops_custom)をご覧ください。
 
 ## モデルを最適化する
 
 モデル最適化は、モバイルデバイスにデプロイできるようにするため、一般的に高速でエネルギー効率の良い小規模モデルの作成を目的としています。TensorFlow Lite は量子化など複数の最適化手法をサポートしています。
 
-詳細については、[モデル最適化ドキュメント](model_optimization.md)をご覧ください。
+詳細については、[モデル最適化のドキュメント](model_optimization)をご覧ください。
 
 ## スレッド数を微調整する
 
@@ -46,14 +46,14 @@ TensorFlow Lite は、多くの演算子のマルチスレッドカーネルを�
 
 ## デバイスのハードウェアアクセラレータでモデルにメリットがあるか評価する
 
-TensorFlow Lite は、GPU、DSP、ニューラルアクセラレータなど、より高速なハードウェアを使用してモデルを高速化する新しい方法を追加しました。通常、これらのアクセラレータはインタプリタの実行の一部を引き継ぐ[デリゲート](delegates.md)サブモジュールから利用することができます。TensorFlow Lite では、以下の方法でデリゲートの使用が可能です。
+TensorFlow Lite には、GPU、DSP、ニューラルアクセラレータなど、より高速なハードウェアを使用してモデルを高速化する新しい方法が追加されました。通常、これらのアクセラレータはインタプリタの実行の一部を引き継ぐ[デリゲート](delegates)サブモジュールから利用することができます。TensorFlow Lite では、以下の方法でデリゲートの使用が可能です。
 
-- Android の[ニューラルネットワーク API](https://developer.android.com/ndk/guides/neuralnetworks/) を使用します。ハードウェアアクセラレータバックエンドを利用して、モデルの速度と効率を向上させることができます。ニューラルネットワーク API を有効にするには、[NNAPI デレゲート](nnapi.md)ガイドを参照してください。
-- GPU デリゲートは、Android と iOS でそれぞれ OpenGL/OpenCL と Metal を使用して利用できます。これを試す場合は、[GPU デリゲートのチュートリアル](gpu.md)と[ドキュメント](gpu_advanced.md)を参照してください。
-- Hexagon デリゲートは Android で利用可能です。デバイスで利用可能な場合には、Qualcomm Hexagon DSP を使用します。詳細については、[Hexagon デリゲートチュートリアル](hexagon_delegate.md)を参照してください。
-- 非標準のハードウェアへのアクセスが可能な場合、独自のデリゲートを作成することができます。詳細は [TensorFlow Lite のデリゲート](delegates.md)を参照してください。
+- Android の[ニューラルネットワーク API](https://developer.android.com/ndk/guides/neuralnetworks/) を使用します。ハードウェアアクセラレータバックエンドを利用して、モデルの速度と効率を向上させることができます。ニューラルネットワーク API を有効にするには、[NNAPI デリゲート](https://www.tensorflow.org/lite/android/delegates/nnapi)ガイドをご覧ください。
+- GPU デリゲートは、Android と iOS でそれぞれ OpenGL/OpenCL と Metal を使用して利用できます。これを試す場合は、[GPU デリゲートのチュートリアル](gpu)と[ドキュメント](gpu_advanced)をご覧ください。
+- Hexagon デリゲートは Android で利用可能です。デバイスで利用可能な場合には、Qualcomm Hexagon DSP を使用します。詳細については、[Hexagon デリゲートチュートリアル](https://www.tensorflow.org/lite/android/delegates/hexagon)をご覧ください。
+- 非標準のハードウェアへのアクセスが可能な場合、独自のデリゲートを作成することができます。詳細は、[TensorFlow Lite デリゲート](delegates)をご覧ください。
 
-アクセラレータによっては、モデルの型次第で動作が良くなる場合があるので留意してください。一部のデリゲートは、浮動小数点数モデルや特定の方法で最適化されたモデルのみをサポートしています。各デリゲートを[ベンチマーク](measurement.md)して、それがアプリケーションに適しているかどうかを確認することが重要です。例えば、非常に小規模のモデルの場合は、モデルを NN API や GPU にデリゲートする価値はない可能性があります。反対に、算術強度の高い大規模モデルにはアクセラレータが適します。
+アクセラレータによっては、モデルの種類次第で動作が良くなる場合があることに留意してください。一部のデリゲートは、浮動小数点数モデルや特定の方法で最適化されたモデルのみをサポートしています。各デリゲートを[ベンチマーク](measurement)して、それがアプリケーションに適しているかどうかを確認することが重要です。たとえば、非常に小規模のモデルの場合は、モデルを NN API や GPU にデリゲートする価値はない可能性があります。逆に、算術強度の高い大規模モデルにはアクセラレータが適しています。
 
 ## さらにヘルプが必要な場合
 
