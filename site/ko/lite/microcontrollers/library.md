@@ -1,30 +1,30 @@
 # C++ 라이브러리 이해하기
 
-TensorFlow Lite for Microcontrollers C++ 라이브러리는 [TensorFlow 리포지토리](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro)의 일부이며, 읽기 쉽고 수정하기 쉬운 외에도 잘 테스트되고 쉽게 통합되며 일반 TensorFlow Lite와 호환되도록 설계되었습니다.
+마이크로컨트롤러용 TensorFlow Lite C++ 라이브러리는 [TensorFlow 리포지토리](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro)의 일부이며, 읽기 쉽고 수정하기 쉬우며 잘 테스트되고 쉽게 통합되며 일반 TensorFlow Lite와 호환되도록 설계되었습니다.
 
 다음 문서에서는 C++ 라이브러리의 기본 구조에 대한 요약과 고유한 프로젝트를 만드는 방법에 대한 정보를 제공합니다.
 
 ## 파일 구조
 
-[`micro`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro) 루트 디렉토리는 비교적 간단한 구조를 가지고 있습니다. 그러나, 광범위한 TensorFlow 리포지토리 내에 있으므로 다양한 임베디드 개발 환경 내에서 독립적으로 관련 소스 파일을 제공하는 스크립트와 사전 생성된 프로젝트 파일을 마련했습니다.
+[`micro`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro) 루트 디렉토리는 비교적 간단한 구조를 가지고 있습니다. 그러나, 광범위한 TensorFlow 리포지토리 내에 있으므로 다양한 임베디드 개발 환경 내에서 독립적으로 관련 소스 파일을 제공하는 스크립트와 사전 생성된 프로젝트 파일을 마련했습니다.
 
 ### 주요 파일
 
 마이크로컨트롤러용 TensorFlow Lite 인터프리터를 사용하는 데 가장 중요한 파일들은 프로젝트의 루트에 있으며 테스트가 함께 제공됩니다.
 
-- [`all_ops_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.h) 또는 [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_mutable_op_resolver.h)를 사용하여 인터프리터가 모델을 실행하는 데 사용하는 연산을 제공할 수 있습니다. `all_ops_resolver.h`는 사용 가능한 모든 연산을 가져오기 때문에 많은 메모리를 사용합니다. 운영 애플리케이션에서는 `micro_mutable_op_resolver.h`를 사용하여 모델에 필요한 연산만 가져와야 합니다.
-- [`micro_error_reporter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_error_reporter.h)는 디버그 정보를 출력합니다.
-- [`micro_interpreter.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/micro_interpreter.h)에는 모델을 처리하고 실행하는 코드가 포함되어 있습니다.
+- [`all_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.h) 또는 [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_mutable_op_resolver.h)를 사용하여 인터프리터가 모델을 실행하는 데 사용하는 연산을 제공할 수 있습니다. `all_ops_resolver.h`는 사용 가능한 모든 연산을 가져오기 때문에 많은 메모리를 사용합니다. 운영 애플리케이션에서는 `micro_mutable_op_resolver.h`를 사용하여 모델에 필요한 연산만 가져와야 합니다.
+- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_error_reporter.h)는 디버그 정보를 출력합니다.
+- [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_interpreter.h)에는 모델을 처리하고 실행하는 코드가 포함되어 있습니다.
 
-일반적인 사용법에 대한 안내는 [마이크로컨트롤러 시작하기](get_started.md)를 참조하세요.
+일반적인 사용법에 대한 안내는 [마이크로컨트롤러 시작하기](get_started_low_level.md)를 참조하세요.
 
-빌드 시스템은 특정 파일의 플랫폼별 구현을 제공합니다. 이들 구현은 플랫폼 이름을 가진 디렉토리(예: [`sparkfun_edge`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/sparkfun_edge))에 들어 있습니다.
+빌드 시스템은 특정 파일의 플랫폼별 구현을 제공합니다. 이들 구현은 플랫폼 이름을 가진 디렉토리(예: [`sparkfun_edge`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/sparkfun_edge))에 들어 있습니다.
 
 다음을 포함한 다른 여러 디렉토리가 있습니다.
 
-- [`kernel`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/kernels) - 연산 구현 및 관련 코드를 포함합니다.
-- [`tools`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/tools) - 빌드 도구 및 해당 출력이 포함됩니다.
-- [`examples`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples) - 샘플 코드를 포함합니다.
+- [`kernel`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/kernels) - 연산 구현 및 관련 코드를 포함합니다.
+- [`tools`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/tools) - 빌드 도구 및 해당 출력이 포함됩니다.
+- [`examples`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples) - 샘플 코드를 포함합니다.
 
 ## 새 프로젝트 시작하기
 
@@ -118,4 +118,4 @@ Arduino 라이브러리의 야간 빌드는 Arduino IDE의 라이브러리 관�
 
 ## 새 기기로 이식하기
 
-마이크로컨트롤러용 TensorFlow Lite를 새로운 플랫폼 및 기기로 이식하는 방법에 대한 지침은 [`micro/README.md`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/README.md)에서 찾을 수 있습니다.
+Guidance on porting TensorFlow Lite for Microcontrollers to new platforms and devices can be found in [`micro/docs/new_platform_support.md`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/docs/new_platform_support.md).
