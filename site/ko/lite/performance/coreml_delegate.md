@@ -206,7 +206,7 @@ Core ML 대리자가 생성되지 않은 경우에도 여전히 [Metal 대리자
 
 ### 이전 Core ML 버전 사용하기
 
-Although iOS 13 supports Core ML 3, the model might work better when it is converted with Core ML 2 model specification. The target conversion version is set to the latest version by default, but you can change this by setting `coreMLVersion` (in Swift, `coreml_version` in C API) in the delegate option to older version.
+iOS 13은 Core ML 3을 지원하지만 Core ML 2 모델 사양으로 변환하면 모델이 더 잘 동작할 수 있습니다. 대상 변환 버전은 기본적으로 최신 버전으로 설정되어 있지만 대리자 옵션에서 `coreMLVersion`(Swift에서는 C API의 `coreml_version`)을 이전 버전으로 설정하여 변경할 수 있습니다.
 
 ## 지원되는 연산
 
@@ -223,7 +223,7 @@ Core ML 대리자는 다음 연산을 지원합니다.
     - 가중치와 바이어스는 일정해야 합니다.
 - FullyConnected(일명 Dense 또는 InnerProduct)
     - 가중치와 바이어스(있는 경우)는 일정해야 합니다.
-    - Only supports single-batch case. Input dimensions should be 1, except the last dimension.
+    - 단일 배치 케이스만 지원합니다. 입력 차원은 마지막 차원을 제외하고 1이어야 합니다.
 - Hardswish
 - Logistic(일명 Sigmoid)
 - MaxPool2D
@@ -250,7 +250,7 @@ Core ML 대리자는 다음 연산을 지원합니다.
 
 ## 자주하는 질문
 
-- Does CoreML delegate support fallback to CPU if a graph contains unsupported ops?
+- 그래프에 지원되지 않는 연산이 포함된 경우 CoreML 대리자가 CPU로 폴백을 지원합니까?
     - 예
 - CoreML 대리자는 iOS 시뮬레이터에서 동작합니까?
     - 예. 라이브러리에는 x86 및 x86_64 대상이 포함되어 있으므로 시뮬레이터에서 실행할 수 있지만 CPU에 비해 성능이 향상되지는 않습니다.
