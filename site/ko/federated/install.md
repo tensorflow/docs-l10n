@@ -4,7 +4,7 @@ TensorFlow Federated(TFF)를 사용하도록 환경을 설정하는 몇 가지 �
 
 - TFF를 배우고 사용하는 가장 쉬운 방법에는 설치가 필요하지 않습니다. [Google Colaboratory](https://colab.research.google.com/notebooks/welcome.ipynb)를 사용하여 브라우저에서 직접 TensorFlow Federated 가이드를 실행합니다.
 - 로컬 머신에서 TensorFlow Federated를 사용하려면 Python의 `pip` 패키지 관리자로 [TFF 패키지](#install-tensorflow-federated-using-pip)를 설치합니다.
-- If you have a unique machine configuration, [build the TFF package from source](#build-the-tensorflow-federated-python-package-from-source) .
+- 고유한 머신 구성이 있는 경우, [소스에서 TFF 패키지를 빌드](#build-the-tensorflow-federated-python-package-from-source)합니다.
 
 ## `pip`를 사용하여 TensorFlow Federated 설치하기
 
@@ -25,7 +25,7 @@ TensorFlow Federated(TFF)를 사용하도록 환경을 설정하는 몇 가지 �
 
 참고: 가상 환경을 종료하려면, `deactivate`를 실행하세요.
 
-### 3. Install the released TensorFlow Federated Python package.
+### 3. 출시된 TensorFlow Federated Python 패키지를 설치합니다.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade tensorflow-federated</code>
