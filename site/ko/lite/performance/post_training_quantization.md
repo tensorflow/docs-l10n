@@ -99,7 +99,7 @@ converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 converter.representative_dataset = representative_dataset&amp;lt;/b&amp;gt;
 tflite_quant_model = converter.convert()</pre>
 
-Note: This `tflite_quant_model` won't be compatible with integer only devices (such as 8-bit microcontrollers) and accelerators (such as the Coral Edge TPU) because the input and output still remain float in order to have the same interface as the original float only model.
+참고: `tflite_quant_model`은 정수 전용 기기(예: 8bit 마이크로 컨트롤러) 및 가속기(예: Coral 에지 TPU)와 호환되지 않습니다. 입력 및 출력이 원본 부동 모델과 같은 인터페이스를 갖기 위해 여전히 부동 상태로 남아 있기 때문입니다.
 
 #### 정수 전용
 
