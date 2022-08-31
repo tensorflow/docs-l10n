@@ -101,11 +101,11 @@ GPU デリゲートを使用するコードを有効にするには、`CameraExa
 
 パフォーマンスを向上させるには、ステップ 4 でデバッグモードで実行している間、適切な最適な Metal 設定でリリースビルドに変更する必要があります。特に、これらの設定を編集するには、`Product > Scheme > Edit Scheme...`に移動します。 `Run`を選択します。`Info`タブで、`Build Configuration `を`Debug` から`Release`に変更し、`Debug executable`のチェックを外します。
 
-![メタルオプションの設定](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/performance/images/iosmetal.png?raw=true)
+![メタルオプションの設定](images/iosdebug.png)
 
 次に、`Options`タブをクリックし、`GPU Frame Capture`を`Disabled`に、`Metal API Validation`をc`Disabled`に変更します。
 
-![リリースの設定](images/iosdebug.png)
+![リリースの設定](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/performance/images/iosmetal.png?raw=true)
 
 最後に、必ず 64 ビットアーキテクチャでリリースのみのビルドを選択してください。`Project navigator -> tflite_camera_example -> PROJECT -> tflite_camera_example -> Build Settings`で、`Build Active Architecture Only> Release`を「Yes」に設定します。
 
@@ -278,15 +278,15 @@ GPU デリゲートを使用するコードを有効にするには、`CameraExa
 GPU デリゲートのリリースには、バックエンドで実行できるいくつかのモデルが含まれています。
 
 - [MobileNet v1（224x224）画像分類](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [[ダウンロード]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobilenet_v1_1.0_224.tflite) <br><i>（モバイルおよび組み込みベースのビジョンアプリケーション向けに設計された画像分類モデル）</i>
-- [DeepLab セグメンテーション (257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[ダウンロード]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite) <br><i>（入力画像のすべてのピクセルにセマンティックラベル（犬、猫、車など）を割り当てる画像セグメンテーションモデル）</i>
-- [MobileNet SSD 物体検出](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [[ダウンロード]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br><i>（境界ボックスで複数のオブジェクトを検出する画像分類モデル）</i>
-- [ポーズ推定のための PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [[ダウンロード]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br><i>（画像または動画内の人物のポーズを推定するビジョンモデル）</i>
+- [DeepLab セグメンテーション (257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[ダウンロード]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite) <br><i>(入力画像のすべてのピクセルにセマンティックラベル（犬、猫、車など）を割り当てる画像セグメンテーションモデル)</i>
+- [MobileNet SSD 物体検出](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [[ダウンロード]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br><i>(バウンディングボックスで複数のオブジェクトを検出する画像分類モデル)</i>
+- [ポーズ推定のための PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [[ダウンロード]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br><i>(画像または動画内の人物のポーズを推定するビジョンモデル)</i>
 
 サポートされている演算の完全なリストは、[アドバンストドキュメント](gpu_advanced.md)を参照してください。
 
 ## サポートされていないモデルと演算
 
-一部の演算が GPU デリゲートでサポートされていない場合、フレームワークは GPU でグラフの一部のみを実行し、残りの部分を CPU で実行します。CPU と GPU 同期のコストは高いため、このような分割実行モードでは、ネットワーク全体が CPU のみで実行されている場合よりもパフォーマンスが遅くなることがよくあります。この場合、ユーザーには次のような警告が表示されます。
+If some of the ops are not supported by the GPU delegate, the framework will only run a part of the graph on the GPU and the remaining part on the CPU. Due to the high cost of CPU/GPU synchronization, a split execution mode like this will often result in slower performance than when the whole network is run on the CPU alone. In this case, the user will get a warning like:
 
 ```none
 WARNING: op code #42 cannot be handled by this delegate.
