@@ -19,4 +19,4 @@ TensorFlow Model Analysis は、TFX でモデルを評価するための仕組�
 
 [GitHub](https://github.com/tensorflow/model-analysis) ページで、サポートされている[メトリクスとグラフ](../model_analysis/metrics)、および関連するノートブックの[視覚化](../model_analysis/visualizations)に関する詳細をご覧ください。
 
-[インストール](../model_analysis/install)ガイドと[基礎](../model_analysis/get_started)ガイドでは、スタンドアロンパイプラインでの[セットアップ](../model_analysis/setup)方法に関する情報と例が掲載されています。TFMA は TFX の [Evaluator](evaluator.md) コンポーネントでも使用されているため、これらのリソースは TFX の使用開始にも役立ちます。
+[インストール](../model_analysis/install)ガイドと[スタート](../model_analysis/get_started)ガイドでは、スタンドアロンパイプラインでの[セットアップ](../model_analysis/setup)方法に関する情報と例が掲載されています。TFMA は TFX の [Evaluator](evaluator.md) コンポーネントでも使用されているため、これらのリソースは TFX の使用開始にも役立ちます。
