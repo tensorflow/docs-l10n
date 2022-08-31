@@ -33,7 +33,7 @@ WebGL バックエンド 「WebGL」は、現在ブラウザの最も強力な�
 
 ##### UI スレッドのブロックを回避する
 
-When an operation is called, like tf.matMul(a, b), the resulting tf.Tensor is synchronously returned, however the computation of the matrix multiplication may not actually be ready yet. This means the tf.Tensor returned is just a handle to the computation. When you call `x.data()` or `x.array()`, the values will resolve when the computation has actually completed. This makes it important to use the asynchronous `x.data()` and `x.array()` methods over their synchronous counterparts `x.dataSync()` and `x.arraySync()` to avoid blocking the UI thread while the computation completes.
+tf.matMul(a, b) のような演算が呼び出されると、結果の tf.Tensor は同期的に返されますが、行列乗算の計算は実際には準備ができていない場合があります。これは、返される tf.Tensor が計算の単なるハンドルであることを意味します。`x.data()` または `x.array()` を呼び出すと、計算が実際に完了したときに値が解決されます。計算が完了するまで UI スレッドをブロックしないように非同期の `x.data()` および `x.array()` メソッドを対応する同期する `x.dataSync()` および `x.arraySync()` に対して使用することが重要になります。
 
 ##### メモリ管理
 
@@ -46,7 +46,7 @@ const a = tf.tensor([[1, 2], [3, 4]]);
 a.dispose();
 ```
 
-It is very common to chain multiple operations together in an application. Holding a reference to all of the intermediate variables to dispose them can reduce code readability. To solve this problem, TensorFlow.js provides a `tf.tidy()` method which cleans up all `tf.Tensor`s that are not returned by a function after executing it, similar to the way local variables are cleaned up when a function is executed:
+アプリケーションで複数の演算をチェーン化することは非常に一般的です。それらを破棄する場合、すべての中間変数への参照を保持すると、コードが読みにくくなる可能性があります。この問題を解決するために、TensorFlow.js は `tf.tidy()` メソッドを提供します。これは、関数の実行時にローカル変数がクリーンアップされるように、関数の実行後に関数から返されないすべての `tf.Tensor` をクリーンアップします。
 
 ```js
 const a = tf.tensor([[1, 2], [3, 4]]);
@@ -56,17 +56,17 @@ const y = tf.tidy(() => {
 });
 ```
 
-> Note: there is no downside of using `dispose()` or `tidy()` in non-webgl environments (like Node.js or a CPU backend) that have automatic garbage collection. In fact, it often can be a performance win to free tensor memory faster than would naturally happen with garbage collection.
+> 注: 自動ガベージコレクションを持つ非 WebGL 環境（Node.js や CPU バックエンドなど）で `dispose()` や `tidy()` を使用しても問題はありません。多くの場合、ガベージコレクションは、自動的に発生するガベージコレクションよりも速くテンソルメモリを解放できるのでパフォーマンスが向上します。
 
 ##### 精度
 
-On mobile devices, WebGL might only support 16 bit floating point textures. However, most machine learning models are trained with 32 bit floating point weights and activations. This can cause precision issues when porting a model for a mobile device as 16 bit floating numbers can only represent numbers in the range `[0.000000059605, 65504]`. This means that you should be careful that weights and activations in your model do not exceed this range. To check whether the device supports 32 bit textures, check the value of `tf.ENV.getBool('WEBGL_RENDER_FLOAT32_CAPABLE')`, if this is false then the device only supports 16 bit floating point textures. You can use `tf.ENV.getBool('WEBGL_RENDER_FLOAT32_ENABLED')` to check if TensorFlow.js is currently using 32 bit textures.
+モバイルデバイスでは、WebGL は 16 ビットの浮動小数点テクスチャのみをサポートする場合があります。ただし、ほとんどの機械学習モデルは、32 ビット浮動小数点の重みとアクティベーションでトレーニングされています。16 ビットの浮動小数点数が `[0.000000059605, 65504]` の範囲の数値しか表現できないため、モバイルデバイスのモデルを移植するときに精度の問題を引き起こす可能性があります。そのため、モデルの重みとアクティブ化がこの範囲を超えないように注意する必要があります。デバイスが 32 ビットテクスチャをサポートするかどうかを確認するには、`tf.ENV.getBool('WEBGL_RENDER_FLOAT32_CAPABLE')` の値を確認します。これが false の場合、デバイスは 16 ビット浮動小数点テクスチャのみをサポートします。TensorFlow.js がその時点で 32 ビットテクスチャを使用しているかどうかを確認するには `tf.ENV.getBool('WEBGL_RENDER_FLOAT32_ENABLED')` を使用します。
 
 ##### シェーダーのコンパイルとテクスチャのアップロード
 
 TensorFlow.js は、WebGL シェーダープログラムを実行することにより、GPU で演算を実行します。これらのシェーダーは、ユーザーが演算の実行を要求すると、レイジーにアセンブルおよびコンパイルされます。シェーダーのコンパイルはメインスレッドの CPU で行われ、遅くなる可能性があります。TensorFlow.js はコンパイルされたシェーダーを自動的にキャッシュし、同じ形状の入力テンソルと出力テンソルで同じ演算を 2 回目に呼び出します。通常、TensorFlow.js アプリケーションは、アプリケーションの存続期間中に同じ演算を複数回使用するため、機械学習モデルの 2 回目のパスははるかに高速です。
 
-TensorFlow.js also stores tf.Tensor data as WebGLTextures. When a `tf.Tensor` is created, we do not immediately upload data to the GPU, rather we keep the data on the CPU until the `tf.Tensor` is used in an operation. If the `tf.Tensor` is used a second time, the data is already on the GPU so there is no upload cost. In a typical machine learning model, this means weights are uploaded during the first prediction through the model and the second pass through the model will be much faster.
+TensorFlow.js はまた、tf.Tensor データを WebGLTextures として保存します。`tf.Tensor`が作成されると、データをすぐに GPU にアップロードするのではなく、演算で `tf.Tensor` が使用されるまで CPU にデータを保持します。`tf.Tensor` が 2 回目に使用される場合、データはすでに GPU にあるため、アップロードのコストはありません。典型的な機械学習モデルでは、モデルを介して最初の予測時に重みがアップロードされ、モデルの 2 回目のパスがはるかに高速になります。
 
 モデルまたは TensorFlow.js コードによる最初の予測のパフォーマンスを向上するには、実際のデータを使用する前に、同じ形状の入力テンソルを渡すことでモデルをウォームアップすることをお勧めします。
 
@@ -88,7 +88,7 @@ const result = model.predict(userData);
 
 TensorFlow Node.js のバックエンド「ノード」は、TensorFlow C APIを使用して演算を高速化します。これは、CUDA などのマシンで利用可能なハードウェアアクセラレーションを使用します。
 
-In this backend, just like the WebGL backend, operations return `tf.Tensor`s synchronously. However, unlike the WebGL backend, the operation is completed before you get the tensor back. This means that a call to `tf.matMul(a, b)` will block the UI thread.
+このバックエンドでは、WebGL バックエンドと同様に、演算は `tf.Tensor` を同期的に返します。ただし、WebGL バックエンドとは異なり、テンソルを取得する前に演算が完了します。つまり、`tf.matMul(a, b)` を呼び出すと、UI スレッドがブロックされます。
 
 このため、本番環境アプリケーションでこれを使用する場合は、メインスレッドをブロックしないようにワーカースレッドで TensorFlow.js を実行する必要があります。
 
@@ -96,7 +96,7 @@ Node.js についての詳細はこちらを参照してください。
 
 #### WASM バックエンド
 
-TensorFlow.js provides a [WebAssembly backend](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/README.md) (`wasm`), which offers CPU acceleration and can be used as an alternative to the vanilla JavaScript CPU (`cpu`) and WebGL accelerated (`webgl`) backends.  To use it:
+TensorFlow.js は [WebAssembly バックエンド](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/README.md) <br>（`wasm`）を提供します。これは、CPU アクセラレーションを提供し、標準的な JavaScript CPU（`cpu`）および WebGL アクセラレーション（`webgl`）バックエンドの代替として使用できます。以下のように使用します。
 
 ```js
 // Set the backend to WASM and wait for the module to be ready.
@@ -104,7 +104,7 @@ tf.setBackend('wasm');
 tf.ready().then(() => {...});
 ```
 
-If your server is serving the `.wasm` file on a different path or a different name, use `setWasmPath` before you initialize the backend. See the ["Using Bundlers"](https://github.com/tensorflow/tfjs/tree/master/tfjs-backend-wasm#using-bundlers) section in the README for more info:
+サーバーが `.wasm` ファイルを別のパスまたは別の名前で提供している場合は、バックエンドを初期化する前に `setWasmPath` を使用します。詳細については、README の[「Bundlers の使用」](https://github.com/tensorflow/tfjs/tree/master/tfjs-backend-wasm#using-bundlers)セクションを参照してください。
 
 ```js
 import {setWasmPath} from '@tensorflow/tfjs-backend-wasm';
@@ -137,7 +137,7 @@ WebGL と同様に、WASM はすべての主要なブラウザで公式にサポ
 
 **モデルのサイズと計算の要件**
 
-In general, WASM is a good choice when models are smaller or you care about lower-end devices that lack WebGL support (`OES_texture_float` extension) or have less powerful GPUs. The chart below shows inference times (as of TensorFlow.js 1.5.2) in Chrome on a 2018 MacBook Pro for 5 of our officially supported [models](https://github.com/tensorflow/tfjs-models) across the WebGL, WASM, and CPU backends:
+一般的に、WASM はモデルが小さい場合、または WebGL（`OES_texture_float` 拡張機能）サポートがないか、性能が低い GPU が搭載されたローエンドデバイスがある場合に適しています。以下の表は、WebGL、WASM、および CPU バックエンドで公式にサポートされている 5 つの[モデル](https://github.com/tensorflow/tfjs-models)の 2018 MacBook Pro 上の Chrome における推論時間（TensorFlow.js 1.5.2）を示しています。
 
 **小規模モデル**
 
@@ -154,13 +154,13 @@ PoseNet | 42.5 ms | 173.9 ms | 1514.7 ms | 4.5 MB
 BodyPix | 77 ms | 188.4 ms | 2683 ms | 4.6 MB
 MobileNet v2 | 37 ms | 94 ms | 923.6 ms | 13 MB
 
-The table above shows that WASM is 10-30x faster than the plain JS CPU backend across models, and competitive with WebGL for smaller models like [BlazeFace](https://github.com/tensorflow/tfjs-models/tree/master/blazeface), which is lightweight (400KB), yet has a decent number of ops (~140). Given that WebGL programs have a fixed overhead cost per op execution, this explains why models like BlazeFace are faster on WASM.
+上記の表は、WASM がモデル全体で標準的な JS CPU バックエンドよりも 10〜30 倍速く、[BlazeFace](https://github.com/tensorflow/tfjs-models/tree/master/blazeface) のような小規模モデルの WebGL と同等であることを示しています。BlazeFace は小型（400KB）ですが、演算数（〜140）は適切です。WebGL プログラムでは演算を実行するたびに固定オーバーヘッドコストが発生するため、BlazeFace などのモデルでは WASM の方が高速になります。
 
 **これらの結果は、デバイスによって異なります。WASM がアプリケーションに適しているかどうかを判断するするには、さまざまなバックエンドで WASM をテストしてみてください。**
 
 ##### 推論とトレーニング
 
-To address the primary use-case for deployment of pre-trained models, the WASM backend development will prioritize *inference* over *training* support. See an [up-to-date list](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/src/kernels/all_kernels.ts) of supported ops in WASM and [let us know](https://github.com/tensorflow/tfjs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) if your model has an unsupported op. For training models, we recommend using the Node (TensorFlow C++) backend or the WebGL backend.
+事前トレーニング済みモデルのデプロイの主なユースケースに対処するために、WASM バックエンド開発では、*トレーニング*サポートよりも*推論*サポートを優先します。WASM でサポートされている演算の[最新リスト](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/src/kernels/all_kernels.ts)を参照し、モデルにサポートされていない演算がある場合は[お知らせください](https://github.com/tensorflow/tfjs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)。モデルのトレーニングには、Node（TensorFlow C++）バックエンドまたは WebGL バックエンドの使用をお勧めします。
 
 #### CPU バックエンド
 
