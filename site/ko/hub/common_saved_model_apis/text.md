@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2021-11-22' } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2022-05-22' } *-->
 
 # 텍스트 작업을 위한 일반적인 SavedModel API
 
@@ -236,4 +236,4 @@ encoder_outputs = encoder(encoder_inputs)
 
 ### 예제
 
-- Colab 튜토리얼 [TPU에서 BERT를 사용하여 GLUE 작업 해결](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb).
+- Colab tutorial [Solve GLUE tasks using BERT on TPU](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb).
