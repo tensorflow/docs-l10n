@@ -16,13 +16,13 @@ sudo apt-get install cmake
 
 또는 [공식 cmake 설치 가이드](https://cmake.org/install/)를 따를 수 있습니다.
 
-### Step 2. Clone TensorFlow repository
+### 2단계. TensorFlow 리포지토리를 복제합니다.
 
 ```sh
 git clone https://github.com/tensorflow/tensorflow.git tensorflow_src
 ```
 
-**Note:** If you're using the TensorFlow Docker image, the repo is already provided in `/tensorflow_src/`.
+**참고**: TensorFlow Docker 이미지를 사용하는 경우, 리포지토리는 `/tensorflow_src/` 에 이미 제공되어 있습니다.
 
 ### 3단계. CMake 빌드 디렉터리 만들기
 
@@ -178,19 +178,19 @@ cmake --build . -j -t label_image
 
 다음은 사용 가능한 옵션 목록입니다. `-D<option_name>=[ON|OFF]`로 재정의 가능합니다. 예를 들어 `-DTFLITE_ENABLE_XNNPACK=OFF`는 기본적으로 활성화된 XNNPACK을 비활성화합니다.
 
-옵션 이름 | 기능 | Android | Linux | macOS | Windows
+옵션 이름 | 기능 | Android | 리눅스 | macOS | Windows
 --- | --- | --- | --- | --- | ---
 TFLITE_ENABLE_RUY | RUY 활성화 | ON | OFF | OFF | OFF
 :                       : matrix         :         :       :       :         : |  |  |  |  |
 :                       : multiplication :         :       :       :         : |  |  |  |  |
 :                       : library        :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_NNAPI | NNAPI 활성화 | ON | OFF | N/A | N/A
+TFLITE_ENABLE_NNAPI | NNAPI 활성화 | ON | OFF | 해당 없음 | 해당 없음
 :                       : delegate       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_GPU | GPU 활성화 | OFF | OFF | N/A | N/A
+TFLITE_ENABLE_GPU | GPU 활성화 | OFF | OFF | 해당 없음 | 해당 없음
 :                       : delegate       :         :       :       :         : |  |  |  |  |
 TFLITE_ENABLE_XNNPACK | XNNPACK 활성화 | ON | ON | ON | ON
 :                       : delegate       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_MMAP | MMAP 활성화 | ON | ON | ON | N/A
+TFLITE_ENABLE_MMAP | MMAP 활성화 | ON | ON | ON | 해당 없음
 
 ## TensorFlow Lite를 사용하는 CMake 프로젝트 만들기
 
@@ -228,9 +228,9 @@ cmake --build . -j
 
 이 명령은 현재 디렉터리에 다음 공유 라이브러리를 생성합니다.
 
-Platform | Library name
+플랫폼 | 라이브러리 이름
 --- | ---
-Linux | libtensorflowlite_c.so
+리눅스 | libtensorflowlite_c.so
 macOS | libtensorflowlite_c.dylib
 Windows | tensorflowlite_c.dll
 
