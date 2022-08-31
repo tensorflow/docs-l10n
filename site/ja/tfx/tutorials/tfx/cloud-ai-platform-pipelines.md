@@ -410,7 +410,7 @@ Kubeflow Orchestrator の場合、KFP ダッシュボードにアクセスし、
 
 ### より高度な例
 
-The example presented here is really only meant to get you started. For a more advanced example see the [TensorBoard Tutorial](https://www.tensorflow.org/tensorboard/get_started).
+ここに示されている例は、初心者向けのものです。より高度な例については、[TensorFlow チュートリアル](https://www.tensorflow.org/tensorboard/get_started)を参照してください。
 
 ## 11. モデルのパフォーマンスの分析
 
