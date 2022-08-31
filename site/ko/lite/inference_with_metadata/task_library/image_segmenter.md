@@ -89,7 +89,7 @@ end
 
 추론에 사용할 `.tflite` 모델이 앱 번들에 있어야 합니다.
 
-### Step 2: Using the model
+### 2단계: 모델 사용하기
 
 #### Swift
 
@@ -157,7 +157,7 @@ TFLSegmentationResult *segmentationResult =
 pip install tflite-support
 ```
 
-### Step 2: Using the model
+### 2단계: 모델 사용하기
 
 ```python
 # Imports
@@ -180,7 +180,7 @@ image_file = vision.TensorImage.create_from_file(image_path)
 segmentation_result = segmenter.segment(image_file)
 ```
 
-See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/vision/image_segmenter.py) for more options to configure `ImageSegmenter`.
+<code>ImageSegmenter</code> 구성에 대한 추가 옵션은 <a>소스 코드</a>를 참조하세요.
 
 ## C++에서 추론 실행하기
 
