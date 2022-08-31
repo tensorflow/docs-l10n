@@ -7,7 +7,7 @@
 - [announce](https://groups.google.com/a/tensorflow.org/d/forum/announce) - 新しいリリースのお知らせ（少量）。
 - [announce](https://groups.google.com/a/tensorflow.org/d/forum/discuss) - TensorFlowに関する一般的なコミュニティディスカッション。
 - [developers](https://groups.google.com/a/tensorflow.org/d/forum/developers) - TensorFlowに貢献している開発者向けのディスカッション。
-- [documentation](https://discuss.tensorflow.org/tag/docs) - Discussion for contributing to TensorFlow documentation. See [community translations](https://www.tensorflow.org/community/contribute/docs#community_translations) for language-specific docs lists.
+- [ドキュメント](https://discuss.tensorflow.org/tag/docs) - TensorFlowのドキュメントに貢献するためのディスカッション。言語別のドキュメントリストについては、[コミュニティ翻訳](https://www.tensorflow.org/community/contribute/docs#community_translations)を参照してください。
 - [developers](https://groups.google.com/a/tensorflow.org/d/forum/testing) - TensorFlow 2テストに関するディスカッションと質問。
 
 ## プロジェクト専用リスト
