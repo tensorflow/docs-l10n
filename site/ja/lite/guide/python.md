@@ -1,8 +1,8 @@
-# Quickstart for Linux-based devices with Python
+# Linux ベースのデバイスで Python を使用するためのクイックスタートガイド
 
 TensorFlow Lite と Python の使用は、[Raspberry Pi](https://www.raspberrypi.org/){:.external} や [Edge TPU を使用した Coral デバイス](https://coral.withgoogle.com/){:.external} などの Linux ベースの組み込みデバイスに最適です。
 
-This page shows how you can start running TensorFlow Lite models with Python in just a few minutes. All you need is a TensorFlow model [converted to TensorFlow Lite](../models/convert/). (If you don't have a model converted yet, you can experiment using the model provided with the example linked below.)
+このページでは、Python で TensorFlow Lite モデルをすぐに実行できるようにする方法を説明します。必要なのは、[TensorFlow Lite に変換された](../models/convert/) TensorFlow モデルのみです。（変換済みのモデルがまだ用意されていない場合は、以下にリンクされた例で使用されているモデルを使って実験できます。）
 
 ## TensorFlow Lite ランタイムパッケージについて
 
@@ -10,7 +10,7 @@ TensorFlow Lite モデルを Python で素早く実行できるようにする�
 
 この `tflite_runtime` のパッケージは、`TensorFlow` のフルパッケージのわずか一部のサイズで、TensorFlow Lite で推論を実行するために最小限必要なコードのみが含まれます。含まれているのは、<a></a>[`Interpreter`](https://www.tensorflow.org/api_docs/python/tf/lite/Interpreter) Python クラスのみです。パッケージサイズが小さいため、`.tflite` モデルの実行のみが必要であり、大規模な TensorFlow ライブラリによるディスクスペースの浪費を避ける場合に理想的と言えます。
 
-Note: If you need access to other Python APIs, such as the [TensorFlow Lite Converter](../models/convert/), you must install the [full TensorFlow package](https://www.tensorflow.org/install/). For example, the [Select TF ops] (https://www.tensorflow.org/lite/guide/ops_select) are not included in the `tflite_runtime` package. If your models have any dependencies to the Select TF ops, you need to use the full TensorFlow package instead.
+注意: [TensorFlow Lite Converter](../models/convert/) などの他の Python API にアクセスする必要がある場合、[完全な TensorFlow パッケージ](https://www.tensorflow.org/install/)をインストールする必要があります。`tflite_runtime` パッケージには、Select TF 演算（https://www.tensorflow.org/lite/guide/ops_select）などが含まれていません。モデルに Select TF 演算への依存関係が含まれる場合は、代わりに完全な TensorFlow パッケージを使用する必要があります。
 
 ## Python 向け TensorFlow Lite のインストール
 
@@ -69,10 +69,10 @@ interpreter = tflite.Interpreter(model_path=args.model_file)
 
 - `Interpreter` API の詳細については、[Python でモデルを読み込んで実行する](inference.md#load-and-run-a-model-in-python)をお読みください。
 
-- If you have a Raspberry Pi, check out a [video series](https://www.youtube.com/watch?v=mNjXEybFn98&list=PLQY2H8rRoyvz_anznBg6y3VhuSMcpN9oe) about how to run object detection on Raspberry Pi using TensorFlow Lite.
+- Raspberry Pi を使用している場合は、TensorFlow Lite を使用して Rasberry Pi でオブジェクト検出を実行する方法を説明した[動画シリーズ](https://www.youtube.com/watch?v=mNjXEybFn98&list=PLQY2H8rRoyvz_anznBg6y3VhuSMcpN9oe)をご覧ください。
 
 - Coral ML アクセラレータを使用している場合は、[GitHub の Coral サンプル](https://github.com/google-coral/tflite/tree/master/python/examples)をご覧ください。
 
-- To convert other TensorFlow models to TensorFlow Lite, read about the [TensorFlow Lite Converter](../models/convert/).
+- 他の TensorFlow モデルを TensorFlow Lite に変換するには、[TensorFlow Lite コンバーター](../models/convert/) についてお読みください。
 
 - `tflite_runtime` ホイールをビルドする場合は、[TensorFlow Lite Python ホイールパッケージをビルドする](build_cmake_pip.md)をお読みください。
