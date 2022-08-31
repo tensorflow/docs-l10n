@@ -2,27 +2,27 @@
 
 <img src="../images/image.png" class="attempt-right">
 
-The task of identifying what an image represents is called *image classification*. An image classification model is trained to recognize various classes of images. For example, you may train a model to recognize photos representing three different types of animals: rabbits, hamsters, and dogs. TensorFlow Lite provides optimized pre-trained models that you can deploy in your mobile applications. Learn more about image classification using TensorFlow [here](https://www.tensorflow.org/tutorials/images/classification).
+画像の内容を特定するタスクは、*画像分類*と呼ばれます。画像分類モデルは、画像のさまざまなクラスを認識するようにトレーニングされます。たとえば、ウサギ、ハムスター、イヌという 3 つの異なる種類の動物を表す写真を認識するようにモデルをトレーニングできます。TensorFlow Lite は最適化されたトレーニング済みモデルを提供しており、モバイルアプリケーションにデプロイできます。TensorFlow を使用した画像分類の詳細については、[こちら](https://www.tensorflow.org/tutorials/images/classification)を参照してください。
 
-The following image shows the output of the image classification model on Android.
+次の画像は、Android での画像分類モデルの出力を示します。
 
 <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/image_classification/images/android_banana.png?raw=true" alt="Screenshot of Android example" class="">
 
-Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/image_classifier). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/image_classification).
+注意: (1) 既存のモデルを統合するには、[TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/image_classifier) を試してください。(2) モデルをカスタマイズするには、[TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/image_classification) を試してください。
 
 ## はじめに
 
-If you are new to TensorFlow Lite and are working with Android or iOS, it is recommended you explore the following example applications that can help you get started.
+TensorFlow Lite を初めて使用する場合、Android または iOS を使用する場合は、以下のサンプルアプリをご覧ください。
 
-You can leverage the out-of-box API from [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/image_classifier) to integrate image classification models in just a few lines of code. You can also build your own custom inference pipeline using the [TensorFlow Lite Support Library](../../inference_with_metadata/lite_support).
+[TensorFlow Lite Task Library](../../inference_with_metadata/task_library/image_classifier) のそのまま簡単に使用できる API を利用して、わずか数行のコードで画像分類モデルを統合できます。また、[TensorFlow Lite Support Library](../../inference_with_metadata/lite_support) を使用して、独自のカスタム推論パイプラインを構築することもできます。
 
-The Android example below demonstrates the implementation for both methods as [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_task_api) and [lib_support](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_support), respectively.
+以下の Android の例では、両方のメソッドをそれぞれ [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_task_api) および [lib_support](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_support) として実装しています。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android">Android の例を見る</a>
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">View iOS example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS の例を見る</a>
 
-If you are using a platform other than Android/iOS, or if you are already familiar with the [TensorFlow Lite APIs](https://www.tensorflow.org/api_docs/python/tf/lite), download the starter model and supporting files (if applicable).
+Android/iOS 以外のプラットフォームを使用する場合、または、すでに [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite) に精通している場合は、スターターモデルと追加ファイル (該当する場合) をダウンロードしてください。
 
 スターターモデルをダウンロードする
 
@@ -32,9 +32,9 @@ If you are using a platform other than Android/iOS, or if you are already famili
 
 トレーニング中、画像分類モデルには画像とそれに関連付けられた*ラベル*が提供されます。各ラベルは、モデルが認識することを学習する個別の概念またはクラスの名前です。
 
-Given sufficient training data (often hundreds or thousands of images per label), an image classification model can learn to predict whether new images belong to any of the classes it has been trained on. This process of prediction is called *inference*. Note that you can also use [transfer learning](https://www.tensorflow.org/tutorials/images/transfer_learning) to identify new classes of images by using a pre-existing model. Transfer learning does not require a very large training dataset.
+十分なトレーニングデータ (一般的には、ラベルごとに数百または数千個の画像) が入力されると、画像分類モデルは学習して、新しい画像がトレーニングされたクラスのいずれかに属するかどうかを予測できます。この予測プロセスは*推論*と呼ばれます。すでに[転移学習](https://www.tensorflow.org/tutorials/images/transfer_learning)を使用して、既存のモデルを利用することで、新しい画像のクラスを特定することもできます。転移学習には、大量のトレーニングデータセットは必要ありません。
 
-When you subsequently provide a new image as input to the model, it will output the probabilities of the image representing each of the types of animal it was trained on. An example output might be as follows:
+その後、モデルへの入力として新しい画像を提供すると、トレーニングされた動物の各種類を表す画像の確率が出力されます。出力例は次のようになります。
 
 <table style="width: 40%;">
   <thead>
@@ -59,7 +59,7 @@ When you subsequently provide a new image as input to the model, it will output 
   </tbody>
 </table>
 
-Each number in the output corresponds to a label in the training data. Associating the output with the three labels the model was trained on, you can see that the model has predicted a high probability that the image represents a dog.
+出力の各数値は、トレーニングデータのラベルに対応しています。出力をモデルがトレーニングされた 3 つのラベルに関連付けると、モデルが画像が犬を表すことが確率高いことを予測したことがわかります。
 
 すべての確率 (ウサギ、ハムスター、イヌ) の合計が 1 であることにお気づきかもしれません。これは、複数のクラスを持つモデルの一般的なタイプの出力です (詳細については、<a href="https://developers.google.com/machine-learning/crash-course/multi-class-neural-networks/softmax">Softmax</a> を参照してください)。
 
@@ -67,51 +67,51 @@ Each number in the output corresponds to a label in the training data. Associati
 
 <h4>不確実な結果</h4>
 
-Since the output probabilities will always sum to 1, if an image is not confidently recognized as belonging to any of the classes the model was trained on you may see the probability distributed throughout the labels without any one value being significantly larger.
+確率の合計は常に 1 になるため、画像がモデルがトレーニングされたどのクラスにも属していると確信して認識されない場合、1 つの値が大幅に大きくならずラベル全体に確率が分布することがあります。
 
 たとえば、次の結果は不確実な結果を示している可能性があります。
 
 
-<table style="width: 40%;">   <thead>     <tr>       <th>Label</th>       <th>Probability</th>     </tr>   </thead>   <tbody>     <tr>       <td>rabbit</td>       <td>0.31</td>     </tr>     <tr>       <td>hamster</td>       <td>0.35</td>     </tr>     <tr>       <td>dog</td>       <td>0.34</td>     </tr>   </tbody> </table> If your model frequently returns ambiguous results, you may need a different, more accurate model.
+<table style="width: 40%;">   <thead>     <tr>       <th>ラベル</th>       <th>確率</th>     </tr>   </thead>   <tbody>     <tr>       <td>ウザギ</td>       <td>0.31</td>     </tr>     <tr>       <td>ハムスター</td>       <td>0.35</td>     </tr>     <tr>       <td>イヌ</td>       <td>0.34</td>     </tr>   </tbody> </table> モデルが頻繁に曖昧な結果を返す場合は、別のより正確なモデルが必要になることがあります。
 
-<h3>Choosing a model architecture</h3>
+<h3>モデルアーキテクチャの選択</h3>
 
-TensorFlow Lite provides you with a variety of image classification models which are all trained on the original dataset. Model architectures like MobileNet, Inception, and NASNet are available on <a href="https://tfhub.dev/s?deployment-format=lite">TensorFlow Hub</a>. To choose the best model for your use case, you need to consider the individual architectures as well as some of the tradeoffs between various models. Some of these model tradeoffs are based on metrics such as performance, accuracy, and model size. For example, you might need a faster model for building a bar code scanner while you might prefer a slower, more accurate model for a medical imaging app.
+TensorFlow Lite には、さまざまな画像分類モデルが用意されており、すべて元のデータセットでトレーニング済みです。MobileNet、Inception、NASNet などのモデルアーキテクチャは、<a href="https://tfhub.dev/s?deployment-format=lite">TensorFlow Hub</a> で提供されています。ユースケースに最適なモデルを選択するには、個別のアーキテクチャと、各種モデル間のトレードオフをある程度検討する必要があります。これらのモデルトレードオフの一部は、パフォーマンス、精度、モデルサイズなどのメトリックに基づいています。たとえば、医療画像アプリで低速でも精度の高いモデルが必要なときに、バーコードスキャナを構築するための高速なモデルが必要になる場合があります。
 
-Note that the <a href="https://www.tensorflow.org/lite/guide/hosted_models#image_classification">image classification models</a> provided accept varying sizes of input. For some models, this is indicated in the filename. For example, the Mobilenet_V1_1.0_224 model accepts an input of 224x224 pixels. All of the models require three color channels per pixel (red, green, and blue). Quantized models require 1 byte per channel, and float models require 4 bytes per channel. The <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/EXPLORE_THE_CODE.md">Android</a> and <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md">iOS</a> code samples demonstrate how to process full-sized camera images into the required format for each model.
+提供される<a href="https://www.tensorflow.org/lite/guide/hosted_models#image_classification">画像分類モデル</a>は、さまざまなサイズの入力を許可します。一部のモデルでは、これはファイル名に示されています。たとえば、Mobilenet_V1_1.0_224 モデルは、224x224 ピクセルの入力を受け入れます。すべてのモデルで、ピクセルごとに 3 つのカラーチャネル (赤、緑、青) が必要です。量子化モデルはチャネルごとに 1 バイトを必要とし、浮動小数点モデルはチャネルごとに 4 バイトを必要とします。<a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/EXPLORE_THE_CODE.md">Android</a> と <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md">iOS</a> コードサンプルは、フルサイズのカメラ画像を各モデルに必要な形式に処理する方法を示しています。
 
 <h3>使用と制限</h3>
 
-The TensorFlow Lite image classification models are useful for single-label classification; that is, predicting which single label the image is most likely to represent. They are trained to recognize 1000 image classes. For a full list of classes, see the labels file in the <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">model zip</a>.
+TensorFlow Lite 画像分類モデルは、単一ラベル分類に役立ちます。つまり、画像が表す可能性が最も高い単一ラベルを予測します。これらは 1000 クラスの画像を認識するようにトレーニングされています。クラスの完全なリストについては、<a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">モデル zip</a> のラベルファイルをご覧ください。
 
 新しいクラスを認識するようにモデルをトレーニングする場合は、<a href="#customize_model">モデルのカスタマイズ</a>をご覧ください。
 
 次の使用例では、別のタイプのモデルを使用する必要があります。
 
 <ul>
-  <li>Predicting the type and position of one or more objects within an image (see <a href="../object_detection/overview">Object detection</a>)</li>
-  <li>Predicting the composition of an image, for example subject versus background (see <a href="../segmentation/overview">Segmentation</a>)</li>
+  <li>画像内の 1 つ以上の物体の種類と位置を予測する場合（<a href="../object_detection/overview">物体検出</a>を参照）</li>
+  <li>画像の構成 (被写体と背景) を予測する場合 (<a href="../segmentation/overview">セグメンテーション</a>を参照)</li>
 </ul>
 
-Once you have the starter model running on your target device, you can experiment with different models to find the optimal balance between performance, accuracy, and model size.
+ターゲットデバイスでスターターモデルを実行してから、さまざまなモデルを試し、パフォーマンス、精度、モデルサイズの最適なバランスを見つけてください。
 
 <h3>モデルをカスタマイズする</h3>
 
-The pre-trained models provided are trained to recognize 1000 classes of images. For a full list of classes, see the labels file in the <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">model zip</a>.
+提供される事前トレーニング済みモデルは、1000 クラスの画像を検出するようにトレーニングされています。クラスの完全なリストについては、<a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">モデル zip</a> のラベルファイルをご覧ください。
 
-You can also use transfer learning to re-train a model to recognize classes not in the original set. For example, you could re-train the model to distinguish between different species of tree, despite there being no trees in the original training data. To do this, you will need a set of training images for each of the new labels you wish to train.
+元のセットにないクラスを認識するようにモデルを再トレーニングするには転移学習を使用できます。たとえば、元のトレーニングデータには木がない場合でも、モデルを再トレーニングすると複数の種類の木を検出できます。これを行うには、トレーニングする新しいラベルごとに一連のトレーニング画像が必要です。
 
-Learn how to perform transfer learning with the <a href="https://www.tensorflow.org/lite/models/modify/model_maker/image_classification">TFLite Model Maker</a>, or in the <a href="https://codelabs.developers.google.com/codelabs/recognize-flowers-with-tensorflow-on-android/index.html#0">Recognize flowers with TensorFlow</a> codelab.
+<a href="https://www.tensorflow.org/lite/models/modify/model_maker/image_classification">TFLite Model Maker</a> で転移学習を実行する方法については、<a href="https://codelabs.developers.google.com/codelabs/recognize-flowers-with-tensorflow-on-android/index.html#0">Recognize flowers with TensorFlow</a> codelab を参照してください。
 
 <h2>パフォーマンスベンチマーク</h2>
 
-Model performance is measured in terms of the amount of time it takes for a model to run inference on a given piece of hardware. The lower the time, the faster the model.
+モデルパフォーマンスは、モデルが特定のハードウェアで推論を実行するのにかかる時間に基づいて測定されます。この時間が短いほど、モデルが高速になります。
 
 必要とされるパフォーマンスは、アプリによって異なります。パフォーマンスは、次のフレームに対してドローが実行される前にリアルタイムで各フレームを分析することが重要な場合があるリアルタイムビデオなどのアプリでは重要になる場合があります。(たとえば、推論は 30fps ビデオストリームでリアルタイム推論を実行するために 33ms よりも高速でなければなりません)。
 
-The TensorFlow Lite quantized MobileNet models' performance range from 3.7ms to 80.3 ms.
+TensorFlow Lite 量子化 MobileNet モデルのパフォーマンスは、3.7ms から 80.3ms の範囲です。
 
-Performance benchmark numbers are generated with the <a href="https://www.tensorflow.org/lite/performance/benchmarks">benchmarking tool</a>.
+パフォーマンスベンチマークの数値は、<a href="https://www.tensorflow.org/lite/performance/benchmarks">ベンチマークツール</a>で生成されます。
 
 <table>
   <thead>
@@ -125,7 +125,7 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a></td>
-    <td rowspan="3">       4.3 Mb     </td>
+    <td rowspan="3">       4.3 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>6ms</td>
     <td>13ms*</td>
@@ -148,23 +148,23 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
 
 ### モデルの精度
 
-Accuracy is measured in terms of how often the model correctly classifies an image. For example, a model with a stated accuracy of 60% can be expected to classify an image correctly an average of 60% of the time.
+精度はモデルが画像を正確に分類する頻度として測定します。たとえば、指定された精度が 60％ のモデルでは、平均して 60％ の場合、画像が正しく分類されることが期待できます。
 
-The most relevant accuracy metrics are Top-1 and Top-5. Top-1 refers to how often the correct label appears as the label with the highest probability in the model’s output. Top-5 refers to how often the correct label appears in the 5 highest probabilities in the model’s output.
+モデル関連性精度メトリックは、Top-1 と Top-5 です。Top-1 は、モデルの出力において、最も高い確率で、正しいラベルが表示される頻度を示します。Top-5 は、モデルの出力において、5 番目に高い確率で正しいラベルが表示される頻度を示します。
 
-The TensorFlow Lite quantized MobileNet models’ Top-5 accuracy range from 64.4 to 89.9%.
+TensorFlow Lite 量子化 MobileNet モデルの上位 5 の精度の範囲は 64.4〜89.9％ です。
 
 ### モデルサイズ
 
 ディスク上のモデルのサイズは、そのパフォーマンスと精度によって異なります。サイズは、モバイル開発 (アプリのダウンロードサイズに影響を与える可能性がある) や、ハードウェアで作業する (利用可能なストレージが制限される可能性がある) 場合に重要です。
 
-The TensorFlow Lite quantized MobileNet models' sizes range from 0.5 to 3.4 MB.
+TensorFlow Lite 量子化 MobileNet モデルのサイズは、0.5〜3.4 Mb です。
 
-## Further reading and resources
+## その他の資料とリソース
 
-Use the following resources to learn more about concepts related to image classification:
+画像分類に関連する概念の詳細については、次のリソースを使用してください。
 
-- [Image classification using TensorFlow](https://www.tensorflow.org/tutorials/images/classification)
-- [Image classification with CNNs](https://www.tensorflow.org/tutorials/images/cnn)
-- [Transfer learning](https://www.tensorflow.org/tutorials/images/transfer_learning)
+- [TensorFlow を使用した画像分類](https://www.tensorflow.org/tutorials/images/classification)
+- [CNN を使用した画像分類](https://www.tensorflow.org/tutorials/images/cnn)
+- [転移学習](https://www.tensorflow.org/tutorials/images/transfer_learning)
 - [データ拡張](https://www.tensorflow.org/tutorials/images/data_augmentation)
