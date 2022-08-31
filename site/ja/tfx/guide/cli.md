@@ -68,7 +68,7 @@ TFX CLI は、TFX パッケージの一部としてインストールされま�
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -80,8 +80,7 @@ TFX CLI は、TFX パッケージの一部としてインストールされま�
     <ul>
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
-      <li>
-<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
+      <li> <strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
@@ -164,7 +163,7 @@ Vertex:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -176,9 +175,9 @@ Vertex:
     <ul>
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
+      <li> <strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li>
-<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
-      <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
+<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
     <p>エンジンが設定されていない場合、エンジンは環境に基づいて自動検出されます。</p>
@@ -243,8 +242,7 @@ Vertex:
     <ul>
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
-      <li>
-<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
+      <li> <strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
@@ -301,7 +299,7 @@ Vertex:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -313,9 +311,9 @@ Vertex:
     <ul>
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
+      <li> <strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li>
-<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
-      <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
+<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
     <p>エンジンが設定されていない場合、エンジンは環境に基づいて自動検出されます。</p>
@@ -377,7 +375,7 @@ Vertex:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -389,8 +387,7 @@ Vertex:
     <ul>
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
-      <li>
-<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
+      <li> <strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
@@ -464,7 +461,7 @@ Vertex:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -476,9 +473,9 @@ Vertex:
     <ul>
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
+      <li> <strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li>
-<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
-      <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
+<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
       <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
     </ul>
     <p>エンジンが設定されていない場合、エンジンは環境に基づいて自動検出されます。</p>
@@ -486,12 +483,12 @@ Vertex:
   </dd>
 
 
-  <dt>--runtime_parameter=<var>parameter-name</var>=<var>parameter-value</var>
-</dt>
+  <dt>--runtime_parameter=<var>parameter-name</var>=<var>parameter-value</var> </dt>
   <dd>     （オプション）ランタイムパラメータ値を設定します。複数の変数の値を設定するために、複数回、設定できます。`airflow`、`kubeflow`、および `vertex` エンジンのみに適用できます。</dd>
 
 
-  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
+  <dt>--iap_client_id=<var>iap-client-id</var>
+</dt>
   <dd>    （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
@@ -499,13 +496,11 @@ Vertex:
   <dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで<code>kubeflow</code>になります。</dd>
 
 
-  <dt>--project=<var>GCP-project-id</var>
-</dt>
+  <dt>--project=<var>GCP-project-id</var> </dt>
   <dd>     （Vertex では必須）vertex パイプラインの GCP プロジェクト ID。</dd>
 
 
-  <dt>--region=<var>GCP-region</var>
-</dt>
+  <dt>--region=<var>GCP-region</var> </dt>
   <dd>     （Vertex では必須）us-central1 などの GCP リージョン名。利用できるリージョンは、「Vertex ドキュメント」（https://cloud.google.com/vertex-ai/docs/general/locations）をご覧ください。</dd>
 
 
@@ -565,7 +560,7 @@ Vertex:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -580,12 +575,13 @@ Vertex:
     <p>エンジンが設定されていない場合、エンジンは環境に基づいて自動検出されます。</p>
     <p>      **要注意：パイプライン構成ファイルの DagRunner に必要とされるオーケストレーターは、選択されたエンジンまたは自動検出されたエンジンと一致する必要があります。エンジンの自動検出は、ユーザー環境に基づいています。Apache Airflow と Kubeflow Pipelines がインストールされていない場合、デフォルトでローカルオーケストレーターが使用されます。</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
+  <dt>--iap_client_id=<var>iap-client-id</var>
+</dt>
   <dd>    （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var> </dt>
-<dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで<code>kubeflow</code>になります。</dd>
+  <dt>--namespace=<var>namespace</var>   </dt>
+<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
 
 
 
@@ -630,7 +626,7 @@ Kubeflow:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -646,9 +642,8 @@ Kubeflow:
     <p>エンジンが設定されていない場合、エンジンは環境に基づいて自動検出されます。</p>
     <p>      **要注意：パイプライン構成ファイルの DagRunner に必要とされるオーケストレーターは、選択されたエンジンまたは自動検出されたエンジンと一致する必要があります。エンジンの自動検出は、ユーザー環境に基づいています。Apache Airflow と Kubeflow Pipelines がインストールされていない場合、デフォルトでローカルオーケストレーターが使用されます。</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
-  <dd>    （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
+  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
 
 
   <dt>--namespace=<var>namespace</var> </dt>
@@ -681,7 +676,8 @@ Kubeflow:
   <dd>パイプラインの名前。</dd>
   <dt>--run_id=<var>run-id</var> </dt>
   <dd>パイプライン実行の一意の識別子。</dd>
-  <dt>--endpoint=<var>endpoint</var> </dt>
+  <dt>--endpoint=<var>endpoint</var>
+</dt>
   <dd>
     <p>（オプション）Kubeflow Pipelines API サービスのエンドポイント。Kubeflow Pipelines API サービスのエンドポイントは、Kubeflow Pipelines ダッシュボードの URL と同じです。エンドポイント値は次のようになります。</p>
 </dd>
@@ -699,7 +695,7 @@ Kubeflow:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -765,7 +761,7 @@ Kubeflow:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -781,10 +777,10 @@ Kubeflow:
     <p>      **要注意：パイプライン構成ファイルの DagRunner に必要とされるオーケストレーターは、選択されたエンジンまたは自動検出されたエンジンと一致する必要があります。エンジンの自動検出は、ユーザー環境に基づいています。Apache Airflow と Kubeflow Pipelines がインストールされていない場合、デフォルトでローカルオーケストレーターが使用されます。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
-  <dd>    （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
+  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
 
 
-  <dt>--namespace=<var>namespace</var> </dt>
+  <dt>--namespace=<var>namespace</var>   </dt>
 <dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで<code>kubeflow</code>になります。</dd>
 
 
@@ -844,12 +840,13 @@ Kubeflow:
     <ul>
       <li> <strong>kubeflow</strong>: エンジンを Kubeflow に設定します</li>
       <li> <strong>local</strong>: エンジンをローカルオーケストレーターに設定します</li>
+      <li> <strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
       <li>
-<strong>vertex</strong>: エンジンを Vertex Pipelines に設定します</li>
-      <li> <strong>airflow</strong>: エンジンを Apache Airflow に設定します</li>
-      <li> <strong>beam</strong>: エンジンを Apache Beam に設定します</li>
+<strong>airflow</strong>: (experimental) sets engine to Apache Airflow</li>
+      <li>
+<strong>beam</strong>: (experimental) sets engine to Apache Beam</li>
     </ul>
-    <p>エンジンが設定されていない場合、エンジンは環境に基づいて自動検出されます。</p>
+    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
     <p>      **要注意：パイプライン構成ファイルの DagRunner に必要とされるオーケストレーターは、選択されたエンジンまたは自動検出されたエンジンと一致する必要があります。エンジンの自動検出は、ユーザー環境に基づいています。Apache Airflow と Kubeflow Pipelines がインストールされていない場合、デフォルトでローカルオーケストレーターが使用されます。</p>
   </dd>
 </dl>
@@ -890,7 +887,7 @@ Kubeflow:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -902,8 +899,7 @@ Kubeflow:
   <dd>IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
+  <dt>--namespace=<var>namespace</var> </dt>
 <dd>Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで<code>kubeflow</code>になります。</dd>
 
 
