@@ -14,9 +14,9 @@ Task Library의 `NLClassifier` API는 입력 텍스트를 여러 범주로 분�
 
 다음 모델은 `NLClassifier` API와의 호환성이 보장됩니다.
 
-- The <a href="../../examples/text_classification/overview">movie review sentiment classification</a> model.
+- <a href="../../examples/text_classification/overview">영화 리뷰 감상 분류</a> 모델
 
-- Models with `average_word_vec` spec created by [TensorFlow Lite Model Maker for text Classification](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification).
+- <a>텍스트 분류를 위한 TensorFlow Lite Model Maker</a>에서 생성된 <code>average_word_vec</code> 사양이 있는 모델
 
 - [모델 호환성 요구 사항](#model-compatibility-requirements)을 충족하는 사용자 정의 모델
 
@@ -116,7 +116,7 @@ std::vector<core::Category> categories = classifier->Classify(input_text);
 
 ## 예제 결과
 
-Here is an example of the classification results of the [movie review model](https://www.tensorflow.org/lite/examples/text_classification/overview).
+다음은 [영화 리뷰 모델](https://www.tensorflow.org/lite/examples/text_classification/overview)의 분류 결과를 보여주는 예입니다.
 
 입력: "시간만 낭비했습니다."
 
@@ -131,15 +131,15 @@ category[1]: 'Positive' : '0.18687'
 
 ## 모델 호환성 요구 사항
 
-Depending on the use case, the `NLClassifier` API can load a TFLite model with or without [TFLite Model Metadata](../../models/convert/metadata). See examples of creating metadata for natural language classifiers using the [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#nl_classifiers).
+사용 사례에 따라 `NLClassifier` API는 [TFLite 모델 메타데이터](../../models/convert/metadata)가 있거나 없는 TFLite 모델을 로드할 수 있습니다. [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#nl_classifiers)를 사용하여 자연어 분류기에 대한 메타데이터를 생성하는 예를 참조하세요.
 
 호환되는 모델은 다음 요구 사항을 충족해야 합니다.
 
 - 입력 텐서: (kTfLiteString/kTfLiteInt32)
 
     - 모델의 입력은 kTfLiteString 텐서 원시 입력 문자열이거나 원시 입력 문자열의 토큰화된 regex 인덱스의 kTfLiteInt32 텐서여야 합니다.
-    - If input type is kTfLiteString, no [Metadata](../../models/convert/metadata) is required for the model.
-    - If input type is kTfLiteInt32, a `RegexTokenizer` needs to be set up in the input tensor's [Metadata](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers).
+    - 입력 유형이 kTfLiteString이면 모델에 [메타데이터](../../models/convert/metadata)가 필요하지 않습니다.
+    - 입력 유형이 kTfLiteInt32이면 입력 텐서의 <a>메타데이터</a>에서 <code>RegexTokenizer</code>를 설정해야 합니다.
 
 - 출력 스코어 텐서: (kTfLiteUInt8/kTfLiteInt8/kTfLiteInt16/kTfLiteFloat32/kTfLiteFloat64)
 
@@ -147,7 +147,7 @@ Depending on the use case, the `NLClassifier` API can load a TFLite model with o
 
     - 유형이 Int 유형 중 하나이면 해당 플랫폼에 대해 double/float로 역양자화합니다.
 
-    - Can have an optional associated file in the output tensor's corresponding [Metadata](../../models/convert/metadata) for category labels, the file should be a plain text file with one label per line, and the number of labels should match the number of categories as the model outputs. See the [example label file](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/python/tests/testdata/nl_classifier/labels.txt).
+    - 범주 레이블에 대한 출력 텐서의 해당 [메타데이터](../../models/convert/metadata)에 선택적 관련 파일이 있을 수 있고, 이 파일은 한 줄에 레이블이 하나씩 있는 일반 텍스트 파일이어야 하며, 레이블 수는 모델 출력의 범주 수와 일치해야 합니다. [예제 레이블 파일](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/python/tests/testdata/nl_classifier/labels.txt)을 참조하세요.
 
 - 출력 레이블 텐서: (kTfLiteString/kTfLiteInt32)
 
