@@ -40,13 +40,13 @@ TensorFlow 추론 API는 [Android](#android-platform), [iOS](#ios-platform) 및 
 
 Android에서는 Java 또는 C++ API를 사용하여 TensorFlow Lite 추론을 수행할 수 있습니다. Java API는 편의성을 제공하며 Android Activity 클래스 내에서 직접 사용할 수 있습니다. C++ API는 더 많은 유연성과 속도를 제공하지만 Java와 C++ 레이어 간에 데이터를 이동하려면 JNI 래퍼를 작성해야 할 수 있습니다.
 
-[C++](#load-and-run-a-model-in-c) 및 [Java](#load-and-run-a-model-in-java) 사용에 대한 자세한 내용은 아래를 참조하거나 [Android 빠른 시작](#load-and-run-a-model-in-c)의 튜토리얼 및 예제 코드를 따르세요.
+C++ 및 Java 사용에 대한 자세한 내용은 아래를 참조하거나 [Android 빠른 시작](#load-and-run-a-model-in-c)의 튜토리얼 및 예제 코드를 따르세요.
 
 #### TensorFlow Lite Android 래퍼 코드 생성기
 
 참고: TensorFlow Lite 래퍼 코드 생성기는 실험(베타) 단계에 있으며 현재 Android만 지원합니다.
 
-[메타데이터](../convert/metadata.md)로 강화된 TensorFlow Lite 모델의 경우, 개발자는 TensorFlow Lite Android 래퍼 코드 생성기를 사용하여 플랫폼별 래퍼 코드를 만들 수 있습니다. 래퍼 코드는 Android에서 `ByteBuffer`와 직접 상호 작용할 필요성을 없애줍니다. 대신, 개발자는 `Bitmap` 및 `Rect`와 같은 형식화된 객체를 사용하여 TensorFlow Lite 모델과 상호 작용할 수 있습니다. 자세한 내용은 [TensorFlow Lite Android 래퍼 코드 생성기](../inference_with_metadata/codegen.md)를 참조하세요.
+[메타데이터](../inference_with_metadata/overview)로 강화된 TensorFlow Lite 모델의 경우, 개발자는 TensorFlow Lite Android 래퍼 코드 생성기를 사용하여 플랫폼별 래퍼 코드를 만들 수 있습니다. 래퍼 코드는 Android에서 `ByteBuffer`와 직접 상호 작용할 필요성을 없애줍니다. 대신, 개발자는 `Bitmap` 및 `Rect`와 같은 형식화된 객체를 사용하여 TensorFlow Lite 모델과 상호 작용할 수 있습니다. 자세한 내용은 [TensorFlow Lite Android 래퍼 코드 생성기](../inference_with_metadata/codegen.md)를 참조하세요.
 
 ### iOS 플랫폼
 
@@ -56,7 +56,7 @@ iOS에서 TensorFlow Lite는 [Swift](https://www.tensorflow.org/code/tensorflow/
 
 ### Linux 플랫폼
 
-Linux 플랫폼([Raspberry Pi](build_rpi.md) 포함)에서는 다음 섹션과 같이 [C++](#load-and-run-a-model-in-c) 및 [Python](#load-and-run-a-model-in-python)에서 사용할 수 있는 TensorFlow Lite API를 사용하여 추론을 실행할 수 있습니다.
+Linux 플랫폼([Raspberry Pi](build_arm) 포함)에서는 다음 섹션과 같이 C++ 및 Python에서 사용할 수 있는 TensorFlow Lite API를 사용하여 추론을 실행할 수 있습니다.
 
 ## 모델 실행하기
 
@@ -122,7 +122,7 @@ interpreter.runForMultipleInputsOutputs(inputs, map_of_indices_to_outputs);
 
 이 경우, `inputs`의 각 항목은 입력 텐서에 해당하고 `map_of_indices_to_outputs`는 출력 텐서의 인덱스를 해당 출력 데이터에 매핑합니다.
 
-두 경우 모두, 텐서 인덱스는 모델을 생성할 때 [TensorFlow Lite 변환기](../convert/)에 제공한 값과 일치해야 합니다. `input`의 텐서 순서는 TensorFlow Lite 변환기에 지정된 순서와 일치해야 합니다.
+두 경우 모두, 텐서 인덱스는 모델을 생성할 때 [TensorFlow Lite 변환기](../models/convert/)에 제공한 값과 일치해야 합니다. `input`의 텐서 순서는 TensorFlow Lite 변환기에 지정된 순서와 일치해야 합니다.
 
 `Interpreter` 클래스는 연산 이름을 사용하여 모델 입력 또는 출력의 인덱스를 가져올 수 있는 편리한 함수도 제공합니다.
 
@@ -177,7 +177,43 @@ import TensorFlowLite
 ```
 
 ```swift
-// Getting model path guard   let modelPath = Bundle.main.path(forResource: "model", ofType: "tflite") else {   // Error handling... }  do {   // Initialize an interpreter with the model.   let interpreter = try Interpreter(modelPath: modelPath)    // Allocate memory for the model's input `Tensor`s.   try interpreter.allocateTensors()    let inputData: Data  // Should be initialized    // input data preparation...    // Copy the input data to the input `Tensor`.   try self.interpreter.copy(inputData, toInputAt: 0)    // Run inference by invoking the `Interpreter`.   try self.interpreter.invoke()    // Get the output `Tensor`   let outputTensor = try self.interpreter.output(at: 0)    // Copy output to `Data` to process the inference results.   let outputSize = outputTensor.shape.dimensions.reduce(1, {x, y in x * y})   let outputData =         UnsafeMutableBufferPointer<Float32>.allocate(capacity: outputSize)   outputTensor.data.copyBytes(to: outputData)    if (error != nil) { /* Error handling... */ } } catch error {   // Error handling... }
+// Getting model path
+guard
+  let modelPath = Bundle.main.path(forResource: "model", ofType: "tflite")
+else {
+  // Error handling...
+}
+
+do {
+  // Initialize an interpreter with the model.
+  let interpreter = try Interpreter(modelPath: modelPath)
+
+  // Allocate memory for the model's input `Tensor`s.
+  try interpreter.allocateTensors()
+
+  let inputData: Data  // Should be initialized
+
+  // input data preparation...
+
+  // Copy the input data to the input `Tensor`.
+  try self.interpreter.copy(inputData, toInputAt: 0)
+
+  // Run inference by invoking the `Interpreter`.
+  try self.interpreter.invoke()
+
+  // Get the output `Tensor`
+  let outputTensor = try self.interpreter.output(at: 0)
+
+  // Copy output to `Data` to process the inference results.
+  let outputSize = outputTensor.shape.dimensions.reduce(1, {x, y in x * y})
+  let outputData =
+        UnsafeMutableBufferPointer<Float32>.allocate(capacity: outputSize)
+  outputTensor.data.copyBytes(to: outputData)
+
+  if (error != nil) { /* Error handling... */ }
+} catch error {
+  // Error handling...
+}
 ```
 
 ## Objective-C에서 모델 로드 및 실행하기
@@ -298,7 +334,7 @@ class FlatBufferModel {
 
 주의: `FlatBufferModel` 객체는 이 객체를 사용하는 `Interpreter`의 모든 인스턴스가 소멸될 때까지 유효해야 합니다.
 
-`Interpreter` API의 중요한 부분은 아래 코드 조각에 나와 있습니다. 다음 사항에 유의하세요.
+The important parts of the `Interpreter` API are shown in the code snippet below. It should be noted that:
 
 - 문자열 비교(및 문자열 라이브러리에 대한 고정 종속성)를 피하기 위해 텐서는 정수로 표시됩니다.
 - 인터프리터는 여러 스레드에서 동시에 액세스할 수 없습니다.
@@ -346,13 +382,51 @@ class TestModel(tf.Module):   def __init__(self):     super(TestModel, self).__i
 모델에 SignatureDefs가 정의되지 않은 경우의 또 다른 예입니다.
 
 ```python
-import numpy as np import tensorflow as tf  # Load the TFLite model and allocate tensors. interpreter = tf.lite.Interpreter(model_path="converted_model.tflite") interpreter.allocate_tensors()  # Get input and output tensors. input_details = interpreter.get_input_details() output_details = interpreter.get_output_details()  # Test the model on random input data. input_shape = input_details[0]['shape'] input_data = np.array(np.random.random_sample(input_shape), dtype=np.float32) interpreter.set_tensor(input_details[0]['index'], input_data)  interpreter.invoke()  # The function `get_tensor()` returns a copy of the tensor data. # Use `tensor()` in order to get a pointer to the tensor. output_data = interpreter.get_tensor(output_details[0]['index']) print(output_data)
+import numpy as np
+import tensorflow as tf
+
+# Load the TFLite model and allocate tensors.
+interpreter = tf.lite.Interpreter(model_path="converted_model.tflite")
+interpreter.allocate_tensors()
+
+# Get input and output tensors.
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+
+# Test the model on random input data.
+input_shape = input_details[0]['shape']
+input_data = np.array(np.random.random_sample(input_shape), dtype=np.float32)
+interpreter.set_tensor(input_details[0]['index'], input_data)
+
+interpreter.invoke()
+
+# The function `get_tensor()` returns a copy of the tensor data.
+# Use `tensor()` in order to get a pointer to the tensor.
+output_data = interpreter.get_tensor(output_details[0]['index'])
+print(output_data)
 ```
 
-모델을 미리 변환된 `.tflite` 파일로 로드하는 대신 코드를 [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/convert/python_api)( `tf.lite.TFLiteConverter`)와 결합하여 TensorFlow 모델을 TensorFlow Lite 형식으로 변환한 다음 추론을 실행할 수 있습니다.
+모델을 미리 변환된 `.tflite` 파일로 로드하는 대신 코드를 [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/api_docs/python/tf/lite/TFLiteConverter)( `tf.lite.TFLiteConverter`)와 결합하여 TensorFlow 모델을 TensorFlow Lite 형식으로 변환한 다음 추론을 실행할 수 있습니다.
 
 ```python
-import numpy as np import tensorflow as tf  img = tf.placeholder(name="img", dtype=tf.float32, shape=(1, 64, 64, 3)) const = tf.constant([1., 2., 3.]) + tf.constant([1., 4., 4.]) val = img + const out = tf.identity(val, name="out")  # Convert to TF Lite format with tf.Session() as sess:   converter = tf.lite.TFLiteConverter.from_session(sess, [img], [out])   tflite_model = converter.convert()  # Load the TFLite model and allocate tensors. interpreter = tf.lite.Interpreter(model_content=tflite_model) interpreter.allocate_tensors()  # Continue to get tensors and so forth, as shown above...
+import numpy as np
+import tensorflow as tf
+
+img = tf.placeholder(name="img", dtype=tf.float32, shape=(1, 64, 64, 3))
+const = tf.constant([1., 2., 3.]) + tf.constant([1., 4., 4.])
+val = img + const
+out = tf.identity(val, name="out")
+
+# Convert to TF Lite format
+with tf.Session() as sess:
+  converter = tf.lite.TFLiteConverter.from_session(sess, [img], [out])
+  tflite_model = converter.convert()
+
+# Load the TFLite model and allocate tensors.
+interpreter = tf.lite.Interpreter(model_content=tflite_model)
+interpreter.allocate_tensors()
+
+# Continue to get tensors and so forth, as shown above...
 ```
 
 Python 샘플 코드는 [`label_image.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/examples/python/label_image.py)를 참조하세요.
