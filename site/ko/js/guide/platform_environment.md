@@ -6,11 +6,11 @@ TensorFlow.js는 브라우저와 Node.js에서 동작하며 두 플랫폼에서 
 
 Node.js에서 TensorFlow.js는 TensorFlow API에 직접 바인딩하거나 더 느린 vanilla CPU 구현으로 실행하는 것을 지원합니다.
 
-## Environments
+## 환경
 
 TensorFlow.js 프로그램이 실행될 때 특정 구성을 환경이라고 합니다. 환경은 단일 글로벌 백엔드와 TensorFlow.js의 세분화된 특성을 제어하는 플래그 세트로 구성됩니다.
 
-### Backends
+### 백엔드
 
 TensorFlow.js는 텐서 저장소 및 수학 연산을 구현하는 여러 다중 백엔드를 지원합니다. 주어진 시간에 하나의 백엔드만 활성화됩니다. 대부분은 TensorFlow.js는 현재 환경에서 가장 적합한 백엔드를 자동으로 선택합니다. 그러나 때때로 사용 중인 백엔드와 해당 백엔드를 전환하는 방법을 아는 것도 중요합니다.
 
@@ -27,7 +27,7 @@ tf.setBackend('cpu');
 console.log(tf.getBackend());
 ```
 
-#### WebGL backend
+#### WebGL 백엔드
 
 WebGL 백엔드인 'webgl'은 현재 브라우저용으로 가장 강력한 백엔드입니다. 이 백엔드는 vanilla CPU 백엔드보다 속도가 최대 100배 빠릅니다. 텐서는 WebGL 텍스처로 저장되고 수학 연산은 WebGL 셰이더에서 구현됩니다. 이 백엔드를 사용할 때 알아야 할 몇 가지 유용한 정보는 다음과 같습니다. \
 
@@ -35,7 +35,7 @@ WebGL 백엔드인 'webgl'은 현재 브라우저용으로 가장 강력한 백�
 
 tf.matMul (a, b)와 같은 연산이 호출되면 결과 tf.Tensor가 동기식으로 반환되지만, 행렬식 곱셈 계산이 실제로 아직 준비되지 않았을 수 있습니다. 즉, 반환된 tf.Tensor는 계산에 대한 핸들일 뿐입니다. `x.data()` 또는 `x.array()`를 호출하면 계산이 실제로 완료된 후 값이 해결됩니다. 따라서 계산하는 동안 UI 스레드 차단을 방지하려면 동기식 `x.dataSync()`와 `x.arraySync()` 메서드 대신 비 동기 `x.data()`와 `x.array()` 메서드를 사용하는 것이 중요합니다.
 
-##### Memory management
+##### 메모리 관리
 
 WebGL 백엔드를 사용할 때 한 가지 주의해야 할 점은 명시적인 메모리 관리가 필요하다는 것입니다. 텐서 데이터가 궁극적으로 저장되는 WebGLTextures는 브라우저에서 자동으로 가비지 모음이 되지 않습니다.
 
@@ -62,7 +62,7 @@ const y = tf.tidy(() => {
 
 모바일 기기에서 WebGL은 16비트 부동 소수점 텍스처만 지원할 수 있습니다. 그러나 대부분의 머신러닝 모델은 32비트 부동 소수점 가중치 및 활성화로 훈련됩니다. 16비트 부동 숫자는 `[0.000000059605, 65504]` 범위의 숫자만 나타낼 수 있으므로 모바일 기기용 모델을 포팅할 때 정밀도 문제가 발생할 수 있습니다. 즉, 모델의 가중치와 활성화가 이 범위를 초과하지 않도록 주의해야 합니다. 기기가 32비트 텍스처를 지원하는지 확인하려면 `tf.ENV.getBool('WEBGL_RENDER_FLOAT32_CAPABLE')` 값을 확인하세요. 이 값이 거짓이면 기기는 16비트 부동 소수점 텍스처만 지원합니다. `tf.ENV.getBool('WEBGL_RENDER_FLOAT32_ENABLED')`를 사용하여 TensorFlow.js가 현재 32비트 텍스처를 사용하고 있는지 확인할 수 있습니다.
 
-##### Shader compilation &amp; texture uploads
+##### 셰이더 컴파일 및 텍스처 업로드
 
 TensorFlow.js는 WebGL 셰이더 프로그램을 실행하여 GPU에서 연산을 실행합니다. 이 셰이더는 사용자가 연산 실행을 요청할 때 느리게 어셈블되고 컴파일됩니다. 셰이더 컴파일은 메인 스레드의 CPU에서 발생하며 속도가 느릴 수 있습니다. TensorFlow.js는 컴파일된 셰이더를 자동으로 캐시해서 같은 형상의 입력 및 출력 텐서를 사용하여 같은 연산에 대한 두 번째 호출을 훨씬 빠르게 만듭니다. 일반적으로 TensorFlow.js 애플리케이션은 해당 애플리케이션 수명 동안 같은 연산을 여러 번 사용하므로 머신러닝 모델을 통한 두 번째 전달이 훨씬 빠릅니다.
 
@@ -84,7 +84,7 @@ warmupResult.dispose();
 const result = model.predict(userData);
 ```
 
-#### Node.js TensorFlow backend
+#### Node.js TensorFlow 백엔드
 
 TensorFlow Node.js 백엔드 '노드'에서 TensorFlow C API는 연산을 가속하는 데 사용됩니다. 이때 가능한 경우 CUDA와 같은 컴퓨터의 사용 가능한 하드웨어 가속을 사용합니다.
 
@@ -94,7 +94,7 @@ TensorFlow Node.js 백엔드 '노드'에서 TensorFlow C API는 연산을 가속
 
 Node.js에 대한 자세한 내용은 이 가이드를 참조하세요.
 
-#### WASM backend
+#### WASM 백엔드
 
 TensorFlow.js는 CPU 가속을 제공하고 vanilla JavaScript CPU(<code>cpu</code>) 및 WebGL 가속(`webgl`) 백엔드의 대안으로 사용할 수 있는 <a>WebAssembly 백엔드</a>(`wasm`)를 제공합니다. 사용 방법은 아래와 같습니다.
 
@@ -115,7 +115,7 @@ tf.ready().then(() => {...});
 
 > 참고: TensorFlow.js는 각 백엔드의 우선순위를 정의하고 주어진 환경에 대해 가장 잘 지원되는 백엔드를 자동으로 선택합니다. WASM 백엔드를 명시적으로 사용하려면 `tf.setBackend('wasm')`을 호출해야 합니다.
 
-##### Why WASM?
+##### 왜 WASM인가?
 
 [WASM](https://webassembly.org/)은 2015년 새로운 웹 기반 바이너리 형식으로 도입되어 웹에서 실행하기 위한 컴파일 대상인 JavaScript, C, C++ 등으로 작성된 프로그램을 제공합니다. WASM는 Chrome, Safari, Firefox, 및 Edge에서 2017년부터 [지원되고 있으며](https://webassembly.org/roadmap/) [기기의 90%](https://caniuse.com/#feat=wasm)가 전 세계적으로 지원됩니다.
 
@@ -135,40 +135,40 @@ WebGL과 마찬가지로 WASM은 모든 주요 브라우저에서 공식적으�
 
 ##### WASM은 언제 사용해야 하나요?
 
-**Model size and computational demand**
+**모델 크기 및 계산 수요**
 
 일반적으로 WASM은 모델이 작은 편이거나 WebGL 지원(` OES_texture_float` 익스텐션)이 부족하거나 GPU가 덜 강력한 저가형 기기에 관심이 있을 때 좋은 선택입니다. 아래 차트는 WebGL, WASM 및 CPU 백엔드에서 공식적으로 지원되는 5개의 [모델](https://github.com/tensorflow/tfjs-models)에 대한 2018 MacBook Pro의 Chrome에서 추론 시간(TensorFlow.js 1.5.2 기준)을 보여줍니다.
 
 **소규모 모델**
 
-Model | WebGL | WASM | CPU | 메모리
+모델 | WebGL | WASM | CPU | 메모리
 --- | --- | --- | --- | ---
-BlazeFace | 22.5 ms | 15.6 ms | 315.2 ms | 0.4MB
-FaceMesh | 19.3 ms | 19.2 ms | 335 ms | 2.8MB
+BlazeFace | 22.5ms | 15.6ms | 315.2ms | 0.4MB
+FaceMesh | 19.3ms | 19.2ms | 335ms | 2.8MB
 
 **대규모 모델**
 
-Model | WebGL | WASM | CPU | 메모리
+모델 | WebGL | WASM | CPU | 메모리
 --- | --- | --- | --- | ---
-PoseNet | 42.5 ms | 173.9 ms | 1514.7 ms | 4.5MB
-BodyPix | 77 ms | 188.4 ms | 2683 ms | 4.6MB
-MobileNet v2 | 37 ms | 94 ms | 923.6 ms | 13 MB
+PoseNet | 42.5ms | 173.9ms | 1514.7ms | 4.5MB
+BodyPix | 77ms | 188.4ms | 2683ms | 4.6MB
+MobileNet v2 | 37ms | 94ms | 923.6ms | 13MB
 
 위의 표는 WASM이 모델 전체에서 일반 JS CPU 백엔드보다 10배에서 30배 더 빠르며, 가볍지만(400KB) 적절한 수(~140)의 연산을 수행하는 [BlazeFace](https://github.com/tensorflow/tfjs-models/tree/master/blazeface)와 같은 작은 모델에 대해 WebGL과 경쟁한다는 것을 보여줍니다. WebGL 프로그램은 연산 실행당 고정된 오버헤드 비용이 발생한다는 점을 고려할 때 BlazeFace와 같은 모델이 WASM에서 더 빠른 이유가 설명됩니다.
 
 **결과는 기기에 따라 다릅니다. WASM이 애플리케이션에 적합한지 확인하는 가장 좋은 방법은 다른 백엔드에서 테스트해보는 것입니다.**
 
-##### Inference vs Training
+##### 추론 vs 훈련
 
 사전 훈련된 모델 배포의 주요 사용 사례를 다루기 위해 WASM 백엔드 개발은 *훈련* 지원보다 *추론*을 우선시합니다. WASM에서 지원되는 연산의 [최신 목록](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/src/kernels/all_kernels.ts)을 확인하고 모델에 지원되지 않는 연산이 있는 경우 [팀에게 알려주세요](https://github.com/tensorflow/tfjs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc). 훈련 모델의 경우는 Node(TensorFlow C++) 백엔드 또는 WebGL 백엔드를 사용하는 것이 좋습니다.
 
-#### CPU backend
+#### CPU 백엔드
 
 CPU 백엔드 'cpu'는 성능이 가장 떨어지는 백엔드이지만 사용하기가 가장 간단합니다. 연산은 모두 vanilla JavaScript로 구현되어 병렬화 가능성이 낮습니다. 또한 UI 스레드를 차단합니다.
 
 이 백엔드는 테스트 또는 WebGL을 사용할 수 없는 기기에서 매우 유용할 수 있습니다.
 
-### Flags
+### 플래그
 
 TensorFlow.js에는 자동으로 평가되고 현재 플랫폼에서 최상의 구성을 결정하는 일련의 환경 플래그가 있습니다. 이러한 플래그는 대부분 내부용이지만 일부 글로벌 플래그는 공용 API로 제어될 수 있습니다.
 
