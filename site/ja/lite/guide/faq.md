@@ -6,7 +6,7 @@
 
 #### TensorFlow から TensorFlow Lite への変換では、どの形式がサポートされていますか？
 
-The supported formats are listed [here](../models/convert/index#python_api)
+サポートされている形式は、[こちら](../models/convert/index#python_api)にリストされています。
 
 #### TensorFlow Lite に実装されていない演算があるのはなぜですか？
 
@@ -14,7 +14,7 @@ TFLite を軽量に維持するため、TFLite では特定の TF 演算子の�
 
 #### モデルを変換できない場合があるのはなぜですか？
 
-Since the number of TensorFlow Lite operations is smaller than TensorFlow's, some models may not be able to convert. Some common errors are listed [here](../models/convert/index#conversion-errors).
+TensorFlow Lite 演算の数は、TensorFlow の演算よりも少ないため、変換できないモデルがある場合があります。一部の一般的なエラーは、[こちら](../models/convert/index#conversion-errors)にリストされています。
 
 サポートされていない演算や制御フロー演算に関連しない変換の問題については、[GitHub 課題](https://github.com/tensorflow/tensorflow/issues?q=label%3Acomp%3Alite+)を検索するか、[新しい課題](https://github.com/tensorflow/tensorflow/issues)を提出してください。
 
@@ -69,7 +69,7 @@ TensorFlow Lite に変換する際に[トレーニング後の量子化](../perf
 
 TensorFlow Lite のパフォーマンスを最適化する高レベルのプロセスは、次のようになります。
 
-- *Make sure that you have the right model for the task.* For image classification, check out the [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&module-type=image-classification).
+- *モデルがタスクに適していることを確認します。*画像の分類については、[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&module-type=image-classification) を確認してください。
 - *スレッド数を微調整します。*多くの TensorFlow Lite 演算子はマルチスレッドカーネルをサポートしています。これを行うには、[C++ API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L345) で`SetNumThreads()`を使用します。ただし、スレッドを増やすと、環境によってパフォーマンスが変動します。
 - *ハードウェアアクセラレータを使用します。*TensorFlow Lite は、デリゲートを使用した特定のハードウェアのモデルアクセラレーションをサポートします。サポートされているアクセラレータと、デバイス上のモデルでそれらを使用する方法については、[デリゲート](../performance/delegates)ガイドを参照してください。
 - *(高度) プロファイルモデル。*Tensorflow Lite [ベンチマークツール](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)には、演算子ごとの統計を表示できる組み込みのプロファイラがあります。特定のプラットフォームで演算子のパフォーマンスを最適化する方法をご存じの場合は、[カスタム演算子](ops_custom)を実装できます。
