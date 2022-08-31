@@ -6,7 +6,7 @@
 - ディスクとの間のシリアル化を抽象化します。
 - 追加メタデータ（ラベル名、音声サンプルレートなど）を公開します。
 
-## Overview
+## 概要
 
 `tfds.features.FeatureConnector` は、データセットの特徴量の構造を定義します（`tfds.core.DatasetInfo` 内）:
 
@@ -108,16 +108,16 @@ info.features['label'].str2int('cat')  # 0
 - 特徴量が単一のテンソル値である場合、`tfds.features.Tensor` から継承して、必要に応じて `super()` を使用するのが最善です。例については、`tfds.features.BBoxFeature` のソースコードをご覧ください。
 - 特徴量が複数のテンソルのコンテナである場合、`tfds.features.FeaturesDict` から継承して、`super()` を使用して自動的にサブコネクタをエンコードするのが最善です。
 
-The `tfds.features.FeatureConnector` object abstracts away how the feature is encoded on disk from how it is presented to the user. Below is a diagram showing the abstraction layers of the dataset and the transformation from the raw dataset files to the `tf.data.Dataset` object.
+`tfds.features.FeatureConnector` オブジェクトは、特徴慮がユーザーに提供される方法から、特徴量をディスクにエンコードする方法を抽象化します。次の図は、データセットの抽象レイヤーと、生のデータセットファイルから `tf.data.Dataset` オブジェクトへの変換を示します。
 
 <p align="center">   <img src="dataset_layers.png" width="700" alt="DatasetBuilder 抽象化レイヤー"></p>
 
-To create your own feature connector, subclass `tfds.features.FeatureConnector` and implement the abstract methods:
+独自の特徴量コネクタを作成するには、`tfds.features.FeatureConnector` をサブクラス化し、抽象メソッドを実装します。
 
 - `encode_example(data)`: ジェネレータ `_generate_examples()` に指定されたデータを `tf.train.Example` 対応データにエンコードする方法を定義します。単一の値、または複数の値の `dict` を返します。
 - `decode_example(data)`: `tf.train.Example` から読み取られたテンソルから `tf.data.Dataset` が返すユーザーテンソルにデータをデコードする方法を定義します。
 - `get_tensor_info()`: `tf.data.Dataset` によって返されたテンソルの形状/dtype を示します。別の `tfds.features` から継承する場合はオプションの場合があります。
-- (optionally) `get_serialized_info()`: If the info returned by `get_tensor_info()` is different from how the data are actually written on disk, then you need to overwrite `get_serialized_info()` to match the specs of the `tf.train.Example`
+- （オプション）`get_serialized_info()`: `get_tensor_info()` から返された情報がディスクに実際に書き込まれたものと異なる場合、`get_serialized_info()` を、`tf.train.Example` の仕様に一致するにように上書きする必要があります。
 - `to_json_content`/`from_json_content`: これは、元のソースコードなしでデータセットを読み込む場合に必須です。例については、[音声特徴量](https://github.com/tensorflow/datasets/blob/65a76cb53c8ff7f327a3749175bc4f8c12ff465e/tensorflow_datasets/core/features/audio_feature.py#L121)をご覧ください。
 
 注意: 作成した特徴量コネクタは、`self.assertFeature` と `tfds.testing.FeatureExpectationItem` を使って必ずテストしてください。[テスト例](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature_test.py)をご覧ください。
