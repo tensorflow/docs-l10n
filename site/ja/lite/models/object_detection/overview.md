@@ -37,7 +37,7 @@ TensorFlow Lite Task Library のそのまま簡単に使用できる API を利�
 
 以下の Android の例では、両方のメソッドをそれぞれ [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_task_api) および [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_interpreter) として実装しています。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android">View Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android">Android の例を見る</a>
 
 #### iOS
 
@@ -210,7 +210,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
 
 ## パフォーマンスベンチマーク
 
-Performance benchmark numbers for our <a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">starter model</a> are generated with the tool [described here](https://www.tensorflow.org/lite/performance/benchmarks).
+<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">スターターモデル</a>のパフォーマンスベンチマークの数値は、[ここで説明する](https://www.tensorflow.org/lite/performance/benchmarks)ツールで生成されます。
 
 <table>
   <thead>
@@ -267,7 +267,7 @@ Most of the download zips contain a `model.tflite` file. If there isn't one, a T
 
 ## カスタムデータを使用するモデルのファインチューニング
 
-The pre-trained models we provide are trained to detect 90 classes of objects. For a full list of classes, see the labels file in the <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">model metadata</a>.
+提供される事前トレーニング済みモデルは、90 クラスの物体を検出するようにトレーニングされています。クラスの完全なリストについては、<a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">モデルメタデータ</a>のラベルファイルをご覧ください。
 
 You can use a technique known as transfer learning to re-train a model to recognize classes not in the original set. For example, you could re-train the model to detect multiple types of vegetable, despite there only being one vegetable in the original training data. To do this, you will need a set of training images for each of the new labels you wish to train. The recommended way is to use [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) library which simplifies the process of training a TensorFlow Lite model using custom dataset, with a few lines of codes. It uses transfer learning to reduce the amount of required training data and time. You can also learn from [Few-shot detection Colab](https://github.com/tensorflow/models/blob/master/research/object_detection/colab_tutorials/eager_few_shot_od_training_tflite.ipynb) as an example of fine-tuning a pre-trained model with few examples.
 
