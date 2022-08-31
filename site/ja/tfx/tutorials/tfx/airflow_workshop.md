@@ -1,7 +1,6 @@
 # TFX Airflow のチュートリアル
 
-[](https://github.com/tensorflow/tfx)
-[![Python](https://badge.fury.io/py/tfx.svg)](https://badge.fury.io/py/tfx)
+[](https://github.com/tensorflow/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)
 
 ## はじめに
 
@@ -387,7 +386,7 @@ TensorFlow モデルを、クリーンアップおよび変換されたデータ
 
 ### より高度な例
 
-The example presented here is really only meant to get you started. For a more advanced example see the [TensorBoard Tutorial](https://www.tensorflow.org/tensorboard/get_started).
+ここに示されている例は、初心者向けのものです。より高度な例については、[TensorFlow チュートリアル](https://www.tensorflow.org/tensorboard/get_started) を参照してください。
 
 ## ステップ 6: モデルのパフォーマンスの分析
 
