@@ -20,7 +20,7 @@ TFF には、フェデレーテッドコンピューティングがコアに含�
 
 ## どうすれば貢献できますか？
 
-[README](../README.md)、[貢献者向けガイドライン](../CONTRIBUTING.md)、および[コラボレーション](collaborations/README.md)をご覧ください。
+[README](https://github.com/tensorflow/federated/blob/main/README.md)、[貢献者向けガイドライン](https://github.com/tensorflow/federated/blob/main/CONTRIBUTING.md)、および[コラボレーション](collaborations/README.md)をご覧ください。
 
 ## FedJAX と TensorFlow Federated? にはどのような関係がありますか？
 
