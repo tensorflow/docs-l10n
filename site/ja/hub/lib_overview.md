@@ -30,5 +30,5 @@ print(embeddings.shape, embeddings.dtype)
 
 ## 次のステップ
 
-- ライブラリを使用する
+- [ライブラリを使用する](tf2_saved_model.md)
 - [再利用可能な SavedModels](reusable_saved_models.md)
