@@ -88,7 +88,7 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
         - On-device compute time.
         - All others, including Python overhead.
 
-    2. Device compute precisions - Reports the percentage of device compute time that uses 16 and 32-bit computations.
+    2. 기기 컴퓨팅 정밀도 - 16 및 32bit 계산을 사용하는 기기 컴퓨팅 시간의 백분율을 보고합니다.
 
 - **스텝-시간 그래프**: 샘플링한 모든 스텝에서 기기 스텝 시간(밀리 초)의 그래프를 표시합니다. 각 스텝은 시간이 사용된 여러 범주(서로 다른 색상)로 세분됩니다. 빨간색 영역은 기기가 호스트로부터 입력 데이터를 기다리는 동안 유휴 상태로 있었던 스텝 시간 부분에 해당합니다. 녹색 영역은 기기가 실제로 작동한 시간을 나타냅니다.
 
@@ -264,7 +264,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 이 도구는 두 개의 창에서 정보를 표시합니다.
 
-- The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
+- 상단 창에는 총 시간이 가장 높은 CUDA 커널을 보여주는 파이 차트가 표시됩니다.
 
 - 하단 창에 표시되는 표에서는 각 고유 kernel-op 쌍에 대한 다음 데이터를 보여줍니다.
 
@@ -485,7 +485,7 @@ TensorFlow 프로파일러는 TensorFlow 모델의 호스트 활동 및 GPU 추�
 
 <a name="sampling_mode"></a>
 
-- Sampling mode: Perform on-demand profiling by using `tf.profiler.experimental.server.start` to start a gRPC server with your TensorFlow model run. After starting the gRPC server and running your model, you can capture a profile through the **Capture Profile** button in the TensorBoard profile plugin. Use the script in the Install profiler section above to launch a TensorBoard instance if it is not already running.
+- 샘플링 모드 - `tf.profiler.experimental.server.start()`를 사용하여 주문형 프로파일링을 수행하여 TensorFlow 모델이 실행된 상태에서 gRPC 서버를 시작하세요. gRPC 서버를 시작하고 모델을 실행한 후 TensorBoard 프로파일 플러그인의 **Capture Profile** 버튼을 통해 프로파일을 캡처할 수 있습니다. 위의 프로파일러 설치 섹션에서 나오는 스크립트를 사용하여 TensorBoard 인스턴스가 아직 실행 중이 아니라면 실행하세요.
 
     예를 들면 다음과 같습니다.
 
