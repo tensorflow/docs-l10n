@@ -31,7 +31,7 @@ Android 以外のプラットフォームを使用する場合、または、す
 
 ### 使い方
 
-Semantic image segmentation predicts whether each pixel of an image is associated with a certain class. This is in contrast to <a href="../object_detection/overview.md">object detection</a>, which detects objects in rectangular regions, and <a href="../image_classification/overview.md">image classification</a>, which classifies the overall image.
+セマンティック画像セグメンテーションは、画像の各ピクセルが特定のクラスに関連付けられているかどうかを予測します。これは、矩形の領域でオブジェクトを検出する<a href="../object_detection/overview.md">オブジェクト検出</a>、および画像全体を分類する<a href="../image_classification/overview.md">画像分類</a>とは対照的です。
 
 現在の実装は、以下のような機能を備えています。
 
