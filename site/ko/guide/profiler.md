@@ -83,10 +83,10 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
         - 입력: 입력 데이터를 읽는 데 소요된 시간
         - 출력: 출력 데이터를 읽는 데 소요된 시간
         - 커널 시작: 호스트가 커널을 시작하는 데 소요된 시간
-        - Host compute time..
-        - Device-to-device communication time.
-        - On-device compute time.
-        - All others, including Python overhead.
+        - 호스트 컴퓨팅 시간
+        - 기기 간 통신 시간
+        - 기기 내 컴퓨팅 시간
+        - Python 오버헤드를 포함한 기타
 
     2. 기기 컴퓨팅 정밀도 - 16 및 32bit 계산을 사용하는 기기 컴퓨팅 시간의 백분율을 보고합니다.
 
@@ -98,9 +98,9 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
 
 - **실행 환경**: 다음을 포함하여 모델 실행 환경에 대한 높은 수준의 요약을 표시합니다.
 
-    - Number of hosts used.
-    - Device type (GPU/TPU).
-    - Number of device cores.
+    - 사용된 호스트 수
+    - 기기 유형(GPU/TPU)
+    - 기기 코어 수
 
 - **다음 단계를 위한 권장 사항**: 모델이 입력 바운드될 때 보고하고, 모델의 성능 병목 현상을 찾아 해결하는 데 사용할 수 있는 도구를 권장합니다.
 
@@ -269,15 +269,15 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 - 하단 창에 표시되는 표에서는 각 고유 kernel-op 쌍에 대한 다음 데이터를 보여줍니다.
 
     - 총 경과 GPU 기간을 kernel-op 쌍으로 그룹화하여 내림차순으로 나타낸 순위
-    - The name of the launched kernel.
-    - The number of GPU registers used by the kernel.
+    - 시작된 커널의 이름
+    - 커널이 사용하는 GPU 레지스터 수
     - 사용된 공유(정적 + 동적 공유) 메모리의 총 크기(바이트 단위)
-    - The block dimension expressed as `blockDim.x, blockDim.y, blockDim.z`.
-    - The grid dimensions expressed as `gridDim.x, gridDim.y, gridDim.z`.
+    - `blockDim.x, blockDim.y, blockDim.z`로 표현된 블록 치수
+    - `gridDim.x, gridDim.y, gridDim.z`로 표현된 그리드 치수
     - 연산이 [Tensor Cores](https://www.nvidia.com/en-gb/data-center/tensor-cores/)를 사용할 수 있는지 여부
-    - Whether the kernel contains Tensor Core instructions.
+    - 커널에 TensorCore 명령어가 포함되어 있는지 여부
     - 이 커널을 시작한 연산의 이름
-    - The number of occurrences of this kernel-op pair.
+    - 이 kernel-op 쌍의 발생 횟수
     - 총 GPU 경과 시간(마이크로 초)
     - 평균 GPU 경과 시간(마이크로 초)
     - 최소 GPU 경과 시간(마이크로 초)
@@ -561,7 +561,7 @@ Profiler는 4가지 축을 따라 여러 가지 사용 사례를 다룹니다. �
 
 <a name="profiling_api_table"></a>
 
-| 프로파일링 API                | 로컬     | 원격    | 다중  | 하드웨어  | :                              :           :           : 작업자   : 플랫폼 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 지원됨 | 아님       | 아님       | CPU, GPU  | : Callback**                   :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 아님       | 아님       | CPU, GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 지원됨 | 지원됨 | CPU, GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 지원됨 | 아님       | 아님       | CPU, GPU  | :                              :           : 지원됨 : 지원됨 :           :
+| 프로파일링 API                | 로컬     | 원격    | 다중  | 하드웨어  | :                              :           :           : 작업자   : 플랫폼 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 지원됨 | 아님       | 아님       | CPU, GPU  | : Callback**                   :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 아님       | 아님       | CPU, GPU  | : start/stop [API]**    :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 지원됨 | 지원됨 | CPU, GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 지원됨 | 아님       | 아님       | CPU, GPU  | :                              :           : 지원됨 : 지원됨 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -688,7 +688,7 @@ os.environ['TF_GPU_THREAD_COUNT']='1'
 
 - 컨볼루션 레이어가 있는 모델에서 배치 정규화를 사용하는 경우 편향 추가를 제거합니다. 배치 정규화로 인해 값이 평균만큼 이동하므로 일정한 편향 항을 가질 필요가 없습니다.
 
-- Use TF Stats to find out how efficiently on-device ops run.
+- TF 통계를 사용하여 기기 연산이 얼마나 효율적으로 실행되는지 확인합니다.
 
 - `tf.function`을 사용하여 계산을 수행하고 선택적으로 `jit_compile=True` 플래그를 지정합니다(`tf.function(jit_compile=True`). 자세히 알아보려면 [XLA tf.function 사용하기](https://www.tensorflow.org/xla/tutorials/jit_compile)로 이동하세요.
 
@@ -718,3 +718,6 @@ TensorFlow 2.2 및 2.3은 단일 호스트 시스템에 대해서만 다중 GPU 
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
+
+
+[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2
