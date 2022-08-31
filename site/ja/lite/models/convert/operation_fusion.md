@@ -4,7 +4,7 @@
 
 このページでは、TensorFlow の複合演算を TensorFlow Lite の融合演算に変換するために必要な設計とステップを説明します。このインフラストラクチャは汎用であり、TensorFlow のあらゆる複合演算を TensorFlow Lite の対応する融合演算に変換する操作をサポートしています。
 
-An example use of this infrastructure is TensorFlow RNN operation fusion to TensorFlow Lite, as detailed [here](https://www.tensorflow.org/lite/models/convert/rnn).
+このインフラストラクチャの使用例では、[こちら](https://www.tensorflow.org/lite/models/convert/rnn)に説明される通りに、TensorFlow RNN 演算を TensorFlow Lite に融合しています。
 
 ### 融合演算とは
 
@@ -32,13 +32,13 @@ TensorFlow Lite には、前述の理由により、融合演算のインスタ�
 
 そのため、融合演算の変換は、難易度が非常に高いことが証明されています。
 
-## Converting from composite op to a TFLite custom operation (recommended)
+## 複合演算から TFLite カスタム演算に変換する (推奨)
 
 ### 複合演算を `tf.function` でラッピングする
 
-In many cases, some part of the model can be mapped to a single operation in TFLite. This can help with performance when writing an optimized implementation for specific operations. To be able to create a fused operation in TFLite, identify the part of the graph that represents a fused operation and wrap it in a `tf.function` with "experimental_implements" attribute to a `tf.function`, which has attribute value `tfl_fusable_op` with value `true`. If the custom operation takes attributes then pass them as part of the same "experimental_implements".
+多くの場合、モデルの一部の部分を TFLite の単一の演算にマッピングできます。これにより、特定の演算の最適化された実装を作成するときに、パフォーマンスが改善されます。TFLite で融合演算を作成するには、融合演算を表すグラフの部分を特定し、`tf.function` <br> と "experimental_implements" 属性で、`tfl_fusable_op` と値 `true` の `tf.function` にマッピングします。カスタム演算が属性を取る場合は、同じ "experimental_implements" の部分として属性を渡します。
 
-Example,
+例
 
 ```python
 def get_implements_signature():
@@ -74,15 +74,15 @@ class TestModel(tf.Module):
     return my_custom_fused_op(self.conv_1(input_a), self.conv_2(input_b))
 ```
 
-Note that you don't need to set `allow_custom_ops` on the converter as `tfl_fusable_op` attribute imply this already.
+コンバータで `allow_custom_ops` を設定する必要はありません。`tfl_fusable_op` 属性には、この設定がすでに含まれています。
 
-### Implement custom op and register with TFLite Interpreter
+### カスタム演算の実装と TFLite インタープリタでの登録
 
-Implement your fused operation as a TFLite Custom operation - see [instructions](https://www.tensorflow.org/lite/guide/ops_custom).
+融合演算を TFLite カスタム演算として実装します。[手順](https://www.tensorflow.org/lite/guide/ops_custom)を参照してください。
 
-Note that, the name to register the op with should be similar to the name specified in the `name` attribute in the implements signature.
+演算を登録する名前は、実装シグネチャの `name` 属性で指定した名前に近い名前にしてください。
 
-An example for the op in the example is
+演算の例を示します。
 
 ```c++
   TfLiteRegistration reg;
@@ -101,13 +101,13 @@ An example for the op in the example is
   resolver->AddCustom(kOpName, &reg);
 ```
 
-## Converting from composite to fused operation (Advanced)
+## 複合演算から融合演算に変換する (上級)
 
 TensorFlow 複合演算から TensorFlow Lite 融合演算への変換をおこなうための全体的なアーキテクチャは、次のようになっています。
 
 ![drawing](https://gitlocalize.com/repo/4592/ja/site/en-snapshot/lite/images/convert/op_fusion.png)
 
-### Wrap the composite operation in a `tf.function`
+### 複合演算を `tf.function` でラッピングする
 
 TensorFlow モデルのソースコードで、複合演算を特定し、それを [experimental_implements](https://github.com/tensorflow/tensorflow/blob/c11d5d8881fd927165eeb09fd524a80ebaf009f2/tensorflow/python/eager/def_function.py#L470) 注釈を使って `tf.function` に抽象化します。[埋め込みルックアップ](#composing_ops)の例をご覧ください。この関数はインターフェースを定義し、変換ロジックにその引数が使用されます。
 
