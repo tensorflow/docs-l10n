@@ -7,13 +7,13 @@
 
 스마트 답장 모델은 채팅 메시지를 기반으로 답장 제안을 생성합니다. 사용자가 수신 메시지에 쉽게 응답할 수 있도록 상황에 맞는 원터치 응답을 제공하는 제안입니다.
 
-<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/smartreply/1/default/1?lite-format=tflite">Download starter model</a>
+<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/smartreply/1/default/1?lite-format=tflite">스타터 모델 다운로드하기</a>
 
 ### 샘플 애플리케이션
 
 Android에서 스마트 답장 모델을 보여주는 TensorFlow Lite 샘플 애플리케이션이 있습니다.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/smart_reply/android">View Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/smart_reply/android">Android 예제 보기</a>
 
 앱 동작 방식을 알아보려면 [GitHub 페이지](https://github.com/tensorflow/examples/tree/master/lite/examples/smart_reply/android/)를 읽어보세요. 이 프로젝트에서는 사용자 정의 C++ 작업을 사용하여 앱을 빌드하는 방법도 알아봅니다.
 
