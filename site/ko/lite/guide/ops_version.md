@@ -39,16 +39,16 @@ table DepthwiseConv2DOptions {
 새 매개변수가 추가된 후 테이블은 다음과 같습니다.
 
 ```
-table Conv2DOptions {
-  // Parameters supported by version 1:
+table DepthwiseConv2DOptions {
+  // Parameters for DepthwiseConv version 1 or above.
   padding:Padding;
   stride_w:int;
   stride_h:int;
+  depth_multiplier:int;
   fused_activation_function:ActivationFunctionType;
-
-  // Parameters supported by version 2:
-  dilation_width_factor:int = 1;
-  dilation_height_factor:int = 1;
+  // Parameters for DepthwiseConv version 2 or above.
+  dilation_w_factor:int = 1;
+  dilation_h_factor:int = 1;
 }
 ```
 
