@@ -8,15 +8,15 @@ Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](htt
 
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
-If you are new to TensorFlow Lite and are working with Android, we recommend exploring the guide of [TensorFLow Lite Task Library](../../inference_with_metadata/task_library/nl_classifier) to integrate text classification models within just a few lines of code. You can also integrate the model using the [TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java).
+TensorFlow Lite を初めて使用する場合、Android を使用する場合は、TensorFLow Lite タスクライブラリのガイドを参考にして、数行のコードを使って[テキスト分類モデルの統合を行う](../../inference_with_metadata/task_library/nl_classifier)ことをお勧めします。また、[TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java) を使用してもモデルの統合が可能です。
 
 以下の Android の例では、両方のメソッドをそれぞれ [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android/lib_task_api) および [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android/lib_interpreter) として実装しています。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android">Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android">Android の例</a>
 
 Android 以外のプラットフォームを使用する場合、または、すでに TensorFlow Lite API に精通している場合は、テキスト分類スターターモデルをダウンロードしてください。
 
-<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">Download starter model</a>
+スターターモデルをダウンロードする
 
 ## 使い方
 
