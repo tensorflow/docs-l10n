@@ -18,7 +18,7 @@ You can leverage the out-of-box API from [TensorFlow Lite Task Library](../../in
 
 The Android example below demonstrates the implementation for both methods as [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_task_api) and [lib_support](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_support), respectively.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android">View Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android">Android 예제 보기</a>
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">View iOS example</a>
 
@@ -28,9 +28,9 @@ If you are using a platform other than Android/iOS, or if you are already famili
 
 ## Model description
 
-### How it works
+### 동작 원리
 
-During training, an image classification model is fed images and their associated *labels*. Each label is the name of a distinct concept, or class, that the model will learn to recognize.
+훈련 중에 이미지 분류 모델에는 이미지 및 관련 *레이블*이 제공됩니다. 각 레이블은 모델이 인식하는 방법을 배울 수 있는 고유한 개념 또는 클래스의 이름입니다.
 
 Given sufficient training data (often hundreds or thousands of images per label), an image classification model can learn to predict whether new images belong to any of the classes it has been trained on. This process of prediction is called *inference*. Note that you can also use [transfer learning](https://www.tensorflow.org/tutorials/images/transfer_learning) to identify new classes of images by using a pre-existing model. Transfer learning does not require a very large training dataset.
 
@@ -61,7 +61,7 @@ When you subsequently provide a new image as input to the model, it will output 
 
 Each number in the output corresponds to a label in the training data. Associating the output with the three labels the model was trained on, you can see that the model has predicted a high probability that the image represents a dog.
 
-You might notice that the sum of all the probabilities (for rabbit, hamster, and dog) is equal to 1. This is a common type of output for models with multiple classes (see <a href="https://developers.google.com/machine-learning/crash-course/multi-class-neural-networks/softmax">Softmax</a> for more information).
+모든 확률의 합(토끼, 햄스터 및 개)이 1이라는 것을 알 수 있습니다. 이것은 여러 클래스가 있는 모델에 대한 일반적인 출력 유형입니다(자세한 내용은 <a href="https://developers.google.com/machine-learning/crash-course/multi-class-neural-networks/softmax">소프트맥스</a>를 참조).
 
 Note: Image classification can only tell you the probability that an image represents one or more of the classes that the model was trained on. It cannot tell you the position or identity of objects within the image. If you need to identify objects and their positions within images, you should use an <a href="../object_detection/overview">object detection</a> model.
 
@@ -84,7 +84,7 @@ Note that the <a href="https://www.tensorflow.org/lite/guide/hosted_models#image
 
 The TensorFlow Lite image classification models are useful for single-label classification; that is, predicting which single label the image is most likely to represent. They are trained to recognize 1000 image classes. For a full list of classes, see the labels file in the <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">model zip</a>.
 
-If you want to train a model to recognize new classes, see <a href="#customize_model">Customize model</a>.
+새 클래스를 인식하도록 모델을 훈련하려면 <a href="#customize_model">모델 사용자 정의</a>를 참조하세요.
 
 다음과 같은 사용 사례의 경우 다른 유형의 모델을 사용해야 합니다.
 
@@ -117,7 +117,7 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
   <thead>
     <tr>
       <th>모델명</th>
-      <th>Model size </th>
+      <th>모델 크기</th>
       <th>기기</th>
       <th>NNAPI</th>
       <th>CPU</th>
@@ -148,7 +148,7 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
 
 ** 최상의 결과를 위해 iPhone에서 2개의 스레드가 사용되었습니다.
 
-### Model accuracy
+### 모델 정확성
 
 Accuracy is measured in terms of how often the model correctly classifies an image. For example, a model with a stated accuracy of 60% can be expected to classify an image correctly an average of 60% of the time.
 
@@ -158,7 +158,7 @@ The TensorFlow Lite quantized MobileNet models’ Top-5 accuracy range from 64.4
 
 ### 모델 크기
 
-The size of a model on-disk varies with its performance and accuracy. Size may be important for mobile development (where it might impact app download sizes) or when working with hardware (where available storage might be limited).
+디스크에 있는 모델의 크기는 성능과 정확성에 따라 다릅니다. 크기는 모바일 개발(앱 다운로드 크기에 영향을 줄 수 있음) 또는 하드웨어 작업(사용 가능한 저장 용량이 제한될 수 있음)에 중요할 수 있습니다.
 
 The TensorFlow Lite quantized MobileNet models' sizes range from 0.5 to 3.4 MB.
 
@@ -169,4 +169,4 @@ Use the following resources to learn more about concepts related to image classi
 - [Image classification using TensorFlow](https://www.tensorflow.org/tutorials/images/classification)
 - [Image classification with CNNs](https://www.tensorflow.org/tutorials/images/cnn)
 - [Transfer learning](https://www.tensorflow.org/tutorials/images/transfer_learning)
-- [Data augmentation](https://www.tensorflow.org/tutorials/images/data_augmentation)
+- [데이터 증강](https://www.tensorflow.org/tutorials/images/data_augmentation)
