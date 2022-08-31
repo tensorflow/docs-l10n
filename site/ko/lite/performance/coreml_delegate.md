@@ -216,7 +216,7 @@ Core ML 대리자는 다음 연산을 지원합니다.
     - 특정 형상만 브로드캐스팅할 수 있습니다. Core ML 텐서 레이아웃에서 다음 텐서 형상을 브로드캐스팅할 수 있습니다. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]` .
 - AveragePool2D
 - Concat
-    - Concatenation should be done along the channel axis.
+    - 채널 축을 따라 연결해야 합니다.
 - Conv2D
     - 가중치와 바이어스는 일정해야 합니다.
 - DepthwiseConv2D
@@ -242,7 +242,7 @@ Core ML 대리자는 다음 연산을 지원합니다.
 - SoftMax
 - Tanh
 - TransposeConv
-    - Weights should be constant.
+    - 가중치는 일정해야 합니다.
 
 ## 피드백
 
