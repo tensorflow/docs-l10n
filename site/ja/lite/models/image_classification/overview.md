@@ -1,14 +1,12 @@
 # 画像分類
 
-
 <img src="../images/image.png" class="attempt-right">
 
 The task of identifying what an image represents is called *image classification*. An image classification model is trained to recognize various classes of images. For example, you may train a model to recognize photos representing three different types of animals: rabbits, hamsters, and dogs. TensorFlow Lite provides optimized pre-trained models that you can deploy in your mobile applications. Learn more about image classification using TensorFlow [here](https://www.tensorflow.org/tutorials/images/classification).
 
 The following image shows the output of the image classification model on Android.
 
-
-<img src="images/android_banana.png" alt="Screenshot of Android example" width="30%">
+<img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/image_classification/images/android_banana.png?raw=true" alt="Screenshot of Android example" class="">
 
 Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/image_classifier). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/image_classification).
 
@@ -20,19 +18,19 @@ You can leverage the out-of-box API from [TensorFlow Lite Task Library](../../in
 
 The Android example below demonstrates the implementation for both methods as [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_task_api) and [lib_support](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_support), respectively.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android">View Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android">Android の例を見る</a>
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">View iOS example</a>
 
 If you are using a platform other than Android/iOS, or if you are already familiar with the [TensorFlow Lite APIs](https://www.tensorflow.org/api_docs/python/tf/lite), download the starter model and supporting files (if applicable).
 
-<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Download starter model</a>
+スターターモデルをダウンロードする
 
-## Model description
+## モデルの説明
 
-### How it works
+### 使い方
 
-During training, an image classification model is fed images and their associated *labels*. Each label is the name of a distinct concept, or class, that the model will learn to recognize.
+トレーニング中、画像分類モデルには画像とそれに関連付けられた*ラベル*が提供されます。各ラベルは、モデルが認識することを学習する個別の概念またはクラスの名前です。
 
 Given sufficient training data (often hundreds or thousands of images per label), an image classification model can learn to predict whether new images belong to any of the classes it has been trained on. This process of prediction is called *inference*. Note that you can also use [transfer learning](https://www.tensorflow.org/tutorials/images/transfer_learning) to identify new classes of images by using a pre-existing model. Transfer learning does not require a very large training dataset.
 
@@ -63,9 +61,9 @@ When you subsequently provide a new image as input to the model, it will output 
 
 Each number in the output corresponds to a label in the training data. Associating the output with the three labels the model was trained on, you can see that the model has predicted a high probability that the image represents a dog.
 
-You might notice that the sum of all the probabilities (for rabbit, hamster, and dog) is equal to 1. This is a common type of output for models with multiple classes (see <a href="https://developers.google.com/machine-learning/crash-course/multi-class-neural-networks/softmax">Softmax</a> for more information).
+すべての確率 (ウサギ、ハムスター、イヌ) の合計が 1 であることにお気づきかもしれません。これは、複数のクラスを持つモデルの一般的なタイプの出力です (詳細については、<a href="https://developers.google.com/machine-learning/crash-course/multi-class-neural-networks/softmax">Softmax</a> を参照してください)。
 
-Note: Image classification can only tell you the probability that an image represents one or more of the classes that the model was trained on. It cannot tell you the position or identity of objects within the image. If you need to identify objects and their positions within images, you should use an <a href="../object_detection/overview">object detection</a> model.
+注: 画像分類は、画像がモデルがトレーニングされた 1 つ以上のクラスを表す確率のみを予測できます。画像内の物体が何であるか特定したり、物体の位置を知ることはできません。画像内の物体とその位置を特定する必要がある場合は、<a href="../object_detection/overview">物体検出</a>モデルを使用する必要があります。
 
 <h4>不確実な結果</h4>
 
@@ -119,7 +117,7 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
   <thead>
     <tr>
       <th>モデル名</th>
-      <th>Model size </th>
+      <th>モデルサイズ</th>
       <th>デバイス</th>
       <th>NNAPI</th>
       <th>CPU</th>
@@ -148,7 +146,7 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
 
 ** 最高のパフォーマンス結果を得るために、iPhone では 2 つのスレッドを使用。
 
-### Model accuracy
+### モデルの精度
 
 Accuracy is measured in terms of how often the model correctly classifies an image. For example, a model with a stated accuracy of 60% can be expected to classify an image correctly an average of 60% of the time.
 
@@ -158,7 +156,7 @@ The TensorFlow Lite quantized MobileNet models’ Top-5 accuracy range from 64.4
 
 ### モデルサイズ
 
-The size of a model on-disk varies with its performance and accuracy. Size may be important for mobile development (where it might impact app download sizes) or when working with hardware (where available storage might be limited).
+ディスク上のモデルのサイズは、そのパフォーマンスと精度によって異なります。サイズは、モバイル開発 (アプリのダウンロードサイズに影響を与える可能性がある) や、ハードウェアで作業する (利用可能なストレージが制限される可能性がある) 場合に重要です。
 
 The TensorFlow Lite quantized MobileNet models' sizes range from 0.5 to 3.4 MB.
 
@@ -169,4 +167,4 @@ Use the following resources to learn more about concepts related to image classi
 - [Image classification using TensorFlow](https://www.tensorflow.org/tutorials/images/classification)
 - [Image classification with CNNs](https://www.tensorflow.org/tutorials/images/cnn)
 - [Transfer learning](https://www.tensorflow.org/tutorials/images/transfer_learning)
-- [Data augmentation](https://www.tensorflow.org/tutorials/images/data_augmentation)
+- [データ拡張](https://www.tensorflow.org/tutorials/images/data_augmentation)
