@@ -32,7 +32,7 @@ dependencies {
 }
 ```
 
-Note: starting from version 4.1 of the Android Gradle plugin, .tflite will be added to the noCompress list by default and the aaptOptions above is not needed anymore.
+注：Android Gradle プラグインのバージョン 4.1 以降、.tflite はデフォルトで noCompress リストに追加され、上記の aaptOptions は不要になりました。
 
 Explore the [TensorFlow Lite Support Library AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-support) for different versions of the Support Library.
 
