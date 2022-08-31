@@ -19,4 +19,4 @@ TensorFlow 모델 분석의 목표는 TFX에서 모델 평가를 위한 메커�
 
 지원되는 [메트릭과 플롯](https://github.com/tensorflow/model-analysis) 및 관련 노트북 [시각화](../model_analysis/metrics)에 대한 자세한 내용은 [github](../model_analysis/visualizations) 페이지를 확인하세요.
 
-독립형 파이프라인에서 [설정](../model_analysis/install)하는 방법에 대한 정보와 예제는 [설치](../model_analysis/get_started) 및 [get_started](../model_analysis/setup) 가이드를 참조하세요. TFMA는 TFX의 [Evaluator](evaluator.md) 구성 요소 내에서도 사용되므로 이러한 리소스는 TFX를 시작하는 데에도 유용할 것입니다.
+독립형 파이프라인에서 [설정](../model_analysis/setup)하는 방법에 대한 정보와 예제는 [설치](../model_analysis/install) 및 [시작하기](../model_analysis/get_started) 가이드를 참조하세요. TFMA는 TFX의 [Evaluator](evaluator.md) 구성 요소 내에서도 사용되므로 이러한 리소스는 TFX를 시작하는 데에도 유용할 것입니다.
