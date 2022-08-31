@@ -1,6 +1,6 @@
 # 메타데이터를 이용한 TensorFlow Lite 추론
 
-[메타데이터를 사용하여 모델](../convert/metadata.md)을 추론하는 작업은 코드 몇 줄만 작성하면 될 만큼 쉽습니다. TensorFlow Lite 메타데이터에는 모델이 하는 작업과 모델 사용 방법에 대한 풍부한 설명이 포함되어 있습니다. 이를 통해 코드 생성기가 [Android Studio ML Binding 특성](codegen.md#mlbinding)이나 [TensorFlow Lite Android 코드 생성기](codegen.md#codegen)를 사용하는 등 추론 코드를 자동으로 생성할 수 있습니다. 또한 사용자 정의 추론 파이프라인을 구성하는 데 사용할 수도 있습니다.
+[메타데이터를 사용하여 모델](../models/convert/metadata.md)을 추론하는 작업은 코드 몇 줄만 작성하면 될 만큼 쉽습니다. TensorFlow Lite 메타데이터에는 모델이 하는 작업과 모델 사용 방법에 대한 풍부한 설명이 포함되어 있습니다. 이를 통해 코드 생성기가 [Android Studio ML Binding 특성](codegen.md#mlbinding)이나 [TensorFlow Lite Android 코드 생성기](codegen.md#codegen)를 사용하는 등 추론 코드를 자동으로 생성할 수 있습니다. 또한 사용자 정의 추론 파이프라인을 구성하는 데 사용할 수도 있습니다.
 
 ## 도구 및 라이브러리
 
@@ -24,7 +24,7 @@ TensorFlow Lite는 다음과 같이 다양한 계층의 배포 요구 사항을 
 
 ## 메타데이터를 포함한 사전 훈련된 모델 찾아보기
 
-[TensorFlow Lite 호스팅 모델](https://www.tensorflow.org/lite/guide/hosted_models) 및 [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite)를 검색하여 비전 및 텍스트 작업에 모두 사용할 수 있는 메타데이터가 포함된 사전 훈련된 모델을 다운로드하세요. 또한 [메타데이터 시각화](../convert/metadata.md#visualize-the-metadata)의 다양한 옵션을 참조하세요.
+[TensorFlow Lite 호스팅 모델](https://www.tensorflow.org/lite/guide/hosted_models) 및 [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite)를 검색하여 비전 및 텍스트 작업에 모두 사용할 수 있는 메타데이터가 포함된 사전 훈련된 모델을 다운로드하세요. 또한 [메타데이터 시각화](../models/convert/metadata.md#visualize-the-metadata)의 다양한 옵션을 참조하세요.
 
 ## TensorFlow Lite Support GitHub repo
 
