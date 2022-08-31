@@ -334,7 +334,7 @@ class FlatBufferModel {
 
 주의: `FlatBufferModel` 객체는 이 객체를 사용하는 `Interpreter`의 모든 인스턴스가 소멸될 때까지 유효해야 합니다.
 
-The important parts of the `Interpreter` API are shown in the code snippet below. It should be noted that:
+`Interpreter` API의 중요한 부분은 아래 코드 조각에 나와 있습니다. 다음 사항에 유의하세요.
 
 - 문자열 비교(및 문자열 라이브러리에 대한 고정 종속성)를 피하기 위해 텐서는 정수로 표시됩니다.
 - 인터프리터는 여러 스레드에서 동시에 액세스할 수 없습니다.
