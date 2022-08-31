@@ -6,7 +6,7 @@
 
 **참고:** 이 기능은 버전 2.4부터 사용할 수 있습니다.
 
-#### Prerequisites
+#### 전제 조건
 
 CMake가 설치되어 있고 TensorFlow 소스 코드 사본이 필요합니다. 자세한 내용은 [CMake로 TensorFlow Lite 빌드하기](https://www.tensorflow.org/lite/guide/build_cmake) 페이지를 확인하세요.
 
@@ -35,7 +35,7 @@ make -C tensorflow/lite/tools/pip_package docker-build \
 
 `tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh` 스크립트에는 대상 아키텍처를 파악하기 위해 대상 이름이 필요합니다. 다음은 지원 대상 목록입니다.
 
-대상 | Target architecture | 주석
+대상 | 대상 아키텍처 | 주석
 --- | --- | ---
 armhf | Neon이 포함된 ARMv7 VFP | Raspberry Pi 3 및 4와 호환
 rpi0 | ARMv6 | Raspberry Pi Zero와 호환
@@ -65,7 +65,7 @@ make -C tensorflow/lite/tools/pip_package docker-build \
 
 생성된 바이너리가 대상과 호환되지 않는 경우, 자체 툴체인을 사용하거나 사용자 지정 빌드 플래그를 제공해야 합니다. (대상 환경을 이해하려면 [이 내용](https://www.tensorflow.org/lite/guide/build_cmake_arm#check_your_target_environment)을 확인하세요.) 이 경우 `tensorflow/lite/tools/cmake/download_toolchains.sh`를 수정하여 고유한 툴체인을 사용해야 합니다. 툴체인 스크립트는 `build_pip_package_with_cmake.sh` 스크립트에 대해 다음 두 변수를 정의합니다.
 
-변수 | Purpose | 예시
+변수 | 목적 | 예시
 --- | --- | ---
 ARMCC_PREFIX | 툴체인 접두사 정의 | arm-linux-gnueabihf-
 ARMCC_FLAGS | 컴파일 플래그 | -march=armv7-a -mfpu=neon-vfpv4
