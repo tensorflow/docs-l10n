@@ -1,24 +1,37 @@
 # セグメンテーション
 
-<img src="../images/segmentation.png" class="attempt-right">
-
-## はじめに
-
-*DeepLab* は、セマンティック画像セグメンテーションの最先端のディープラーニングモデルであり、入力画像の各ピクセルにセマンティックラベル（例えば、人、犬、猫など）を割り当てることを目的としています。
+Image segmentation is the process of partitioning a digital image into multiple segments (sets of pixels, also known as image objects). The goal of segmentation is to simplify and/or change the representation of an image into something that is more meaningful and easier to analyze.
 
 TensorFlow Lite を初めて使用する場合、Android または iOS を使用する場合は、以下のサンプルアプリをご覧ください。
 
+
+<img src="../images/segmentation.png" class="attempt-right">
+
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android">Android の例</a>
+
+## はじめに
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/ios">iOS example</a>
 
+You can leverage the out-of-box API from [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/image_segmenter) to integrate image segmentation models within just a few lines of code. You can also integrate the model using the [TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java).
+
+以下の Android の例では、両方のメソッドをそれぞれ [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android/lib_task_api) および [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android/lib_interpreter) として実装しています。
+
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android">Android の例を見る</a>
+
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/ios">View iOS example</a>
+
 Android 以外のプラットフォームを使用する場合、または、すでに <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite API</a> に精通している場合は、画像セグメンテーション スターターモデルをダウンロードしてください。
 
-<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">スターターモデルをダウンロードする</a>
+スターターモデルをダウンロードする
 
-## 使い方
+## モデルの説明
 
-セマンティック画像セグメンテーションは、画像の各ピクセルが特定のクラスに関連付けられているかどうかを予測します。これは、矩形の領域でオブジェクトを検出する<a href="../object_detection/overview.md">オブジェクト検出</a>、および画像全体を分類する<a href="../image_classification/overview.md">画像分類</a>とは対照的です。
+*DeepLab* は、セマンティック画像セグメンテーションの最先端のディープラーニングモデルであり、入力画像の各ピクセルにセマンティックラベル（例えば、人、犬、猫など）を割り当てることを目的としています。
+
+### 使い方
+
+Semantic image segmentation predicts whether each pixel of an image is associated with a certain class. This is in contrast to <a href="../object_detection/overview.md">object detection</a>, which detects objects in rectangular regions, and <a href="../image_classification/overview.md">image classification</a>, which classifies the overall image.
 
 現在の実装は、以下のような機能を備えています。
 
@@ -44,7 +57,9 @@ Android 以外のプラットフォームを使用する場合、または、す
     </tr>
   </thead>
   <tr>
-    <td rowspan="3"><a href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">Deeplab v3</a></td>
+    <td rowspan="3">
+      <a href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">Deeplab v3</a>
+    </td>
     <td rowspan="3">       2.7 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>16ms</td>
@@ -62,20 +77,14 @@ Android 以外のプラットフォームを使用する場合、または、す
   </tr>
 </table>
 
-* 4 つのスレッドを使用。
+* 4 threads used.
 
 ** 最高のパフォーマンス結果を得るために、iPhone では 2 つのスレッドを使用。
 
-## 出力例
-
-モデルは、ターゲットオブジェクトの上に高精度でマスクを作成します。
-
- <img alt="Animation showing image segmentation" src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/segmentation/images/segmentation.gif?raw=true" class="">
-
-## セグメンテーションについてもっと読む
+## Further reading and resources
 
 <ul>
-  <li><p data-md-type="paragraph"><a href="https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html">TensorFlow で DeepLab を使用したセマンティック画像セグメンテーション</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://medium.com/tensorflow/tensorflow-lite-now-faster-with-mobile-gpus-developer-preview-e15797e6dee7">モバイル GPU で高速化した TensorFlow Lite（開発者プレビュー）</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://github.com/tensorflow/models/tree/master/research/deeplab">DeepLab: セマンティック画像セグメンテーションのためのディープラベリング</a></p></li>
+  <li><a href="https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html">Semantic Image Segmentation with DeepLab in TensorFlow</a></li>
+  <li><a href="https://medium.com/tensorflow/tensorflow-lite-now-faster-with-mobile-gpus-developer-preview-e15797e6dee7">TensorFlow Lite Now Faster with Mobile GPUs (Developer Preview)</a></li>
+  <li><a href="https://github.com/tensorflow/models/tree/master/research/deeplab">DeepLab: Deep Labelling for Semantic Image Segmentation</a></li>
 </ul>
