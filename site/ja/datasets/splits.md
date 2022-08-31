@@ -30,7 +30,7 @@ Split には次のものがあります。
 
 ```python
 # Returns both train and test split separately
-train_ds, test_ds = tfds.load('mnist', split=['train', 'test[50%]'])
+train_ds, test_ds = tfds.load('mnist', split=['train', 'test[:50%]'])
 ```
 
 注意: シャードは[インターリーブ](https://www.tensorflow.org/api_docs/python/tf/data/Dataset?version=nightly#interleave)されるため、サブスプリット間での順序の一貫性は保証されません。つまり、`test[0:100]` の後に `test[100:200]` を読み取る場合と `test[:200]` を読み取る場合では、Example の順序が異なることがあります。TFDS が Example を読み取る順序についての詳細は、[決定論ガイド](https://www.tensorflow.org/datasets/determinism#determinism_when_reading)を参照してください。
