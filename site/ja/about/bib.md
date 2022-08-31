@@ -1,22 +1,71 @@
-# TensorFlow ホワイトペーパー
+# TensorFlow を引用する
 
-このドキュメントでは、TensorFlow に関するホワイトペーパーを紹介します。
+TensorFlow は Zenodo.org（[10.5281/zenodo.4724125](https://doi.org/10.5281/zenodo.4724125)） を使用してオープンソースコードの DOI を公開しています。
+
+[このホワイトペーパーにアクセスする。](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45166.pdf)
 
 ## 異種分散システムにおける大規模機械学習
 
 [このホワイトペーパーにアクセスする。](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45166.pdf)
 
-**要約:** TensorFlow は、機械学習アルゴリズムを表現するためのインターフェースであり、そのアルゴリズムを実行するための実装です。TensorFlow を用いて表現された計算は、携帯電話やタブレットなどのモバイルデバイスから、数百台のマシンやGPU カードなど数千台の計算デバイスから成る大規模分散システムに至るまで、多種多様な異種システム上でほとんど変更せずに実行することができます。このシステムには柔軟性があり、ディープニューラルネットワークモデルのトレーニングアルゴリズムや推論アルゴリズムなど、多様なアルゴリズムの表現に使用することができます。また、音声認識、コンピュータビジョン、ロボット工学、情報検索、自然言語処理、地理情報抽出、計算創薬など、コンピュータサイエンスをはじめとする 10 数分野にわたる研究の実施や機械学習システムの本番展開に利用されています。本ペーパーでは、TensorFlow インターフェースと Google で構築したインターフェースの実装について説明します。TensorFlow API とリファレンス実装は、Apache 2.0 ライセンス下のオープンソースパッケージとして 2015 年 11 月にリリースされ、www.tensorflow.org から入手可能です。
+**抜粋:** TensorFlow は、機械学習アルゴリズムを表現するためのインターフェースであり、そのアルゴリズムを実行するための実装です。TensorFlow を用いて表現された計算は、携帯電話やタブレットなどのモバイルデバイスから、数百台のマシンやGPU カードなどの数千台の計算デバイスから成る大規模分散システムに至るまで、多種多様な異種システム上でほとんど変更することなく実行することができます。このシステムには柔軟性があり、ディープニューラルネットワークモデルのトレーニングアルゴリズムや推論アルゴリズムなど、多様なアルゴリズムの表現に使用することができます。また、音声認識、コンピュータビジョン、ロボット工学、情報検索、自然言語処理、地理情報抽出、計算創薬など、コンピュータサイエンスをはじめとする十数分野にわたる研究の実施や機械学習システムの本番展開に利用されています。本ペーパーでは、TensorFlow インターフェースと Google で構築したインターフェースの実装について説明します。TensorFlow API とリファレンス実装は、Apache 2.0 ライセンス下のオープンソースパッケージとして 2015 年 11 月にリリースされ、 www.tensorflow.org から入手可能です。
 
 ### BibTeX 形式
 
 研究に TensorFlow を使用し、TensorFlow システムの引用が必要な場合には、このホワイトペーパーの引用をお勧めします。
 
-<pre>@misc{tensorflow2015-whitepaper,<br>title={ {TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},<br>url={https://www.tensorflow.org/},<br>note={Software available from tensorflow.org},<br>author={<br>    Mart\'{\i}n~Abadi and<br>    Ashish~Agarwal and<br>    Paul~Barham and<br>    Eugene~Brevdo and<br>    Zhifeng~Chen and<br>    Craig~Citro and<br>    Greg~S.~Corrado and<br>    Andy~Davis and<br>    Jeffrey~Dean and<br>    Matthieu~Devin and<br>    Sanjay~Ghemawat and<br>    Ian~Goodfellow and<br>    Andrew~Harp and<br>    Geoffrey~Irving and<br>    Michael~Isard and<br>    Yangqing Jia and<br>    Rafal~Jozefowicz and<br>    Lukasz~Kaiser and<br>    Manjunath~Kudlur and<br>    Josh~Levenberg and<br>    Dandelion~Man\'{e} and<br>    Rajat~Monga and<br>    Sherry~Moore and<br>    Derek~Murray and<br>    Chris~Olah and<br>    Mike~Schuster and<br>    Jonathon~Shlens and<br>    Benoit~Steiner and<br>    Ilya~Sutskever and<br>    Kunal~Talwar and<br>    Paul~Tucker and<br>    Vincent~Vanhoucke and<br>    Vijay~Vasudevan and<br>    Fernanda~Vi\'{e}gas and<br>    Oriol~Vinyals and<br>    Pete~Warden and<br>    Martin~Wattenberg and<br>    Martin~Wicke and<br>    Yuan~Yu and<br>    Xiaoqiang~Zheng},<br>  year={2015},<br>}</pre>
+<pre>@misc{tensorflow2015-whitepaper,
+title={ {TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},
+url={https://www.tensorflow.org/},
+note={Software available from tensorflow.org},
+author={
+    Mart\'{i}n~Abadi and
+    Ashish~Agarwal and
+    Paul~Barham and
+    Eugene~Brevdo and
+    Zhifeng~Chen and
+    Craig~Citro and
+    Greg~S.~Corrado and
+    Andy~Davis and
+    Jeffrey~Dean and
+    Matthieu~Devin and
+    Sanjay~Ghemawat and
+    Ian~Goodfellow and
+    Andrew~Harp and
+    Geoffrey~Irving and
+    Michael~Isard and
+    Yangqing Jia and
+    Rafal~Jozefowicz and
+    Lukasz~Kaiser and
+    Manjunath~Kudlur and
+    Josh~Levenberg and
+    Dandelion~Man\'{e} and
+    Rajat~Monga and
+    Sherry~Moore and
+    Derek~Murray and
+    Chris~Olah and
+    Mike~Schuster and
+    Jonathon~Shlens and
+    Benoit~Steiner and
+    Ilya~Sutskever and
+    Kunal~Talwar and
+    Paul~Tucker and
+    Vincent~Vanhoucke and
+    Vijay~Vasudevan and
+    Fernanda~Vi\'{e}gas and
+    Oriol~Vinyals and
+    Pete~Warden and
+    Martin~Wattenberg and
+    Martin~Wicke and
+    Yuan~Yu and
+    Xiaoqiang~Zheng},
+  year={2015},
+}
+</pre>
 
-また、テキスト形式の場合は以下のようになります。
+[このホワイトペーパーにアクセスする。](https://www.usenix.org/system/files/conference/osdi16/osdi16-abadi.pdf)
 
-<pre>Martín Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo,<br>Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis,<br>Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow,<br>Andrew Harp, Geoffrey Irving, Michael Isard, Rafal Jozefowicz, Yangqing Jia,<br>Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dan Mané, Mike Schuster,<br>Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Jonathon Shlens,<br>Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker,<br>Vincent Vanhoucke, Vijay Vasudevan, Fernanda Viégas,<br>Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke,<br>Yuan Yu, and Xiaoqiang Zheng.<br>TensorFlow: Large-scale machine learning on heterogeneous systems,<br>2015. Software available from tensorflow.org.</pre>
+<pre>Martín Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo,&lt;br&gt;Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis,&lt;br&gt;Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow,&lt;br&gt;Andrew Harp, Geoffrey Irving, Michael Isard, Rafal Jozefowicz, Yangqing Jia,&lt;br&gt;Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dan Mané, Mike Schuster,&lt;br&gt;Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Jonathon Shlens,&lt;br&gt;Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker,&lt;br&gt;Vincent Vanhoucke, Vijay Vasudevan, Fernanda Viégas,&lt;br&gt;Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke,&lt;br&gt;Yuan Yu, and Xiaoqiang Zheng.&lt;br&gt;TensorFlow: Large-scale machine learning on heterogeneous systems,&lt;br&gt;2015. Software available from tensorflow.org.</pre>
 
 ## TensorFlow: 大規模機械学習のためのシステム
 
