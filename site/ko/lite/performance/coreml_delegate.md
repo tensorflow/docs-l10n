@@ -213,7 +213,7 @@ iOS 13은 Core ML 3을 지원하지만 Core ML 2 모델 사양으로 변환하�
 Core ML 대리자는 다음 연산을 지원합니다.
 
 - Add
-    - Only certain shapes are broadcastable. In Core ML tensor layout, following tensor shapes are broadcastable. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
+    - 특정 형상만 브로드캐스팅할 수 있습니다. Core ML 텐서 레이아웃에서 다음 텐서 형상을 브로드캐스팅할 수 있습니다. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]` .
 - AveragePool2D
 - Concat
     - Concatenation should be done along the channel axis.
