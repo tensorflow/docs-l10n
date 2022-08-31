@@ -118,4 +118,4 @@ Arduino 라이브러리의 야간 빌드는 Arduino IDE의 라이브러리 관�
 
 ## 새 기기로 이식하기
 
-Guidance on porting TensorFlow Lite for Microcontrollers to new platforms and devices can be found in [`micro/docs/new_platform_support.md`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/docs/new_platform_support.md).
+마이크로컨트롤러용 TensorFlow Lite를 새로운 플랫폼 및 장치로 이식하는 방법에 대한 지침은 [`micro/docs/new_platform_support.md`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/docs/new_platform_support.md)에서 찾을 수 있습니다.
