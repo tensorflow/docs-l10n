@@ -2,11 +2,11 @@
 
 ## TensorFlow 확장
 
-- [TensorFlow Extended](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1)
+- [TensorFlow 확장](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1)
 
 ## 데이터 검증
 
-- [Data Validation](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv)
+- [데이터 검증](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv)
 
 ## 변환
 
@@ -15,7 +15,7 @@
 
 ## 모델 분석
 
-- [Model Analysis](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma)
+- [모델 분석](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma)
 
 ## 서비스 제공
 
@@ -24,11 +24,11 @@
 
 ## ML 메타데이터
 
-- [ML Metadata](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd)
+- [ML 메타데이터](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd)
 
 ## TF 메타데이터
 
-- [ML Metadata](https://www.tensorflow.org/tfx/tf_metadata/api_docs/python/tfmd/proto)
+- [ML 메타데이터](https://www.tensorflow.org/tfx/tf_metadata/api_docs/python/tfmd/proto)
 
 ## TFX 기본 공유 라이브러리(`tfx_bsl`)
 
