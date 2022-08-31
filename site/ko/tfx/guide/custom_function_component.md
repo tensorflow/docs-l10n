@@ -1,7 +1,5 @@
 # 사용자 정의 Python 함수 구성 요소
 
-참고: TFX 0.22부터 새로운 Python 함수 기반의 구성 요소 정의 스타일에 대한 실험적인 지원이 제공됩니다.
-
 Python 함수 기반 구성 요소 정의를 사용하면 구성 요소 사양 클래스, 실행기 클래스 및 구성 요소 인터페이스 클래스를 정의하는 불편이 해소되어 TFX 사용자 정의 구성 요소를 더 쉽게 만들 수 있습니다. 이 구성 요소 정의 스타일에서 유형 힌트로 주석이 달린 함수를 작성합니다. 유형 힌트는 구성 요소의 입력 아티팩트, 출력 아티팩트 및 매개변수를 설명합니다.
 
 이 스타일로 사용자 정의 구성 요소를 작성하는 작업은 다음 예제와 같이 매우 간단합니다.
@@ -24,6 +22,27 @@ def MyValidationComponent(
   }
 ```
 
+Under the hood, this defines a custom component that is a subclass of [`BaseComponent`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_component.py){: .external } and its Spec and Executor classes.
+
+Note: the feature (BaseBeamComponent based component by annotating a function with `@component(use_beam=True)`) described below is experimental and there is no public backwards compatibility guarantees.
+
+If you want to define a subclass of [`BaseBeamComponent`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_beam_component.py){: .external } such that you could use a beam pipeline with TFX-pipeline-wise shared configuration, i.e., `beam_pipeline_args` when compiling the pipeline ([Chicago Taxi Pipeline Example](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_pipeline_simple.py#L192){: .external }) you could set `use_beam=True` in the decorator and add another `BeamComponentParameter` with default value `None` in your function as the following example:
+
+```python
+@component(use_beam=True)
+def MyDataProcessor(
+    examples: InputArtifact[Example],
+    processed_examples: OutputArtifact[Example],
+    beam_pipeline: BeamComponentParameter[beam.Pipeline] = None,
+    ) -> None:
+  '''My simple custom model validation component.'''
+
+  with beam_pipeline as p:
+    # data pipeline definition with beam_pipeline begins
+    ...
+    # data pipeline definition with beam_pipeline ends
+```
+
 TFX 파이프라인을 처음 사용하는 경우, [TFX 파이프라인의 핵심 개념에 대해 자세히 알아보세요](understanding_tfx_pipelines).
 
 ## 입력, 출력 및 매개변수
@@ -40,7 +59,11 @@ TFX에서 입력 및 출력은 기본 데이터와 관련된 메타데이터 속
 
 - 각 **아티팩트 입력**에 대해 `InputArtifact[ArtifactType]` 유형 힌트 주석을 적용합니다. `ArtifactType`을 `tfx.types.Artifact`의 서브 클래스인 아티팩트 유형으로 대체합니다. 이러한 입력은 선택적 인수일 수 있습니다.
 
-- 각 **출력 아티팩트**에 대해 `OutputArtifact[ArtifactType]` 유형 힌트 주석을 적용합니다. `ArtifactType`을 `tfx.types.Artifact`의 서브 클래스인 아티팩트 유형으로 대체합니다. 구성 요소 출력 아티팩트는 함수의 입력 인수로 전달되어야 구성 요소가 시스템 관리 위치에 출력을 쓰고 적절한 아티팩트 메타데이터 속성을 설정할 수 있습니다. 각 매개변수에 대해, 유형 힌트 주석 `Parameter[T]`을 사용합니다. `T`를 `int`, `float`, `str` 또는 `bytes`와 같은 매개변수 유형으로 대체합니다. 이 인수는 선택 사항이거나 기본값으로 정의할 수 있습니다.
+- For each **output artifact**, apply the `OutputArtifact[ArtifactType]` type hint annotation. Replace `ArtifactType` with the artifact’s type, which is a subclass of `tfx.types.Artifact`. Component output artifacts should be passed as input arguments of the function, so that your component can write outputs to a system-managed location and set appropriate artifact metadata properties. This argument can be optional or this argument can be defined with a default value.
+
+- For each **parameter**, use the type hint annotation `Parameter[T]`. Replace `T` with the type of the parameter. We currently only support primitive python types: `bool`, `int`, `float`, `str`, or `bytes`.
+
+- For **beam pipeline**, use the type hint annotation `BeamComponentParameter[beam.Pipeline]`. Set the default value to be `None`. The value `None` will be replaced by an instantiated beam pipeline created by `_make_beam_pipeline()` of [`BaseBeamExecutor`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_beam_executor.py){: .external }
 
 - 파이프라인 생성 시 알려지지 않은 각 **단순 데이터 유형 입력**(`int`, `float`, `str` 또는 `bytes`)에 대해 유형 힌트 `T`를 사용합니다. TFX 0.22 릴리스에서는 이 유형의 입력에 대한 파이프라인 구성 시 구체적인 값을 전달할 수 없습니다(이전 섹션의 설명과 같이 `Parameter` 주석을 대신 사용). 이 인수는 선택 사항이거나 기본값으로 정의할 수 있습니다. 구성 요소에 단순 데이터 유형 출력(`int`, `float`, `str` 또는 `bytes`)이 있는 경우, `OutputDict` 인스턴스를 사용하여 이러한 출력을 반환할 수 있습니다. `OutputDict` 유형 힌트를 구성 요소의 반환 값으로 적용합니다.
 
@@ -51,21 +74,16 @@ TFX에서 입력 및 출력은 기본 데이터와 관련된 메타데이터 속
 완성된 함수 구성 요소는 다음과 같습니다.
 
 ```python
-from tfx.dsl.component.experimental.annotations import OutputDict
-from tfx.dsl.component.experimental.annotations import InputArtifact
-from tfx.dsl.component.experimental.annotations import OutputArtifact
-from tfx.dsl.component.experimental.annotations import Parameter
+import tfx.v1 as tfx
 from tfx.dsl.component.experimental.decorators import component
-from tfx.types.standard_artifacts import Examples
-from tfx.types.standard_artifacts import Model
 
 @component
 def MyTrainerComponent(
-    training_data: InputArtifact[Examples],
-    model: OutputArtifact[Model],
+    training_data: tfx.dsl.components.InputArtifact[tfx.types.standard_artifacts.Examples],
+    model: tfx.dsl.components.OutputArtifact[tfx.types.standard_artifacts.Model],
     dropout_hyperparameter: float,
-    num_iterations: Parameter[int] = 10
-    ) -> OutputDict(loss=float, accuracy=float):
+    num_iterations: tfx.dsl.components.Parameter[int] = 10
+    ) -> tfx.v1.dsl.components.OutputDict(loss=float, accuracy=float):
   '''My simple trainer component.'''
 
   records = read_examples(training_data.uri)
