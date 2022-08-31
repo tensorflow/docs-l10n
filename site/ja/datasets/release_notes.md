@@ -7,7 +7,7 @@
 - シャーディング、シャッフル、およびサブスプリットの改善
 - 任意のメタデータをデータセットとともに保存/復元される `tfds.core.DatasetInfo` に追加できるようになりました。`tfds.core.Metadata` をご覧ください。
 - プロキシサポートの改善、証明書の追加
-- デフォルトの特徴量デコードをオーバーライドする `decoders` kwargs の追加（[ガイド](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)）
+- デフォルトの特徴量デコードをオーバーライドする `decoders` kwargs の追加（[ガイド](https://github.com/tensorflow/datasets/blob/master/docs/decode.md)）
 - [MimickNet 論文](https://arxiv.org/abs/1908.05782)の、超音波ファントムと生体内肝臓画像の `duke_ultrasound` データセットの追加
 - [VTAB benchmark](https://arxiv.org/abs/1910.04867) の Dmlab データセットの追加
 - 論文 [e-SNLI](http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-natural-language-explanations.pdf) の e-SNLI データセットの追加
