@@ -6,7 +6,7 @@
 
 ## はじめに
 
-If you are new to TensorFlow Lite and are working with Android or iOS, explore the following example applications that can help you get started.
+<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">スターターモデルをダウンロードする</a>
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android の例</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS の例</a>
 
