@@ -8,7 +8,8 @@
 
 TFX 파이프라인은 [`Pipeline` 클래스](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/pipeline.py){: .external}를 사용하여 정의됩니다. 다음 예는 `Pipeline` 클래스를 사용하는 방법입니다.
 
-<pre class="devsite-click-to-copy prettyprint">pipeline.Pipeline(
+<pre class="devsite-click-to-copy prettyprint">
+pipeline.Pipeline(
     pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt;,
     pipeline_root=&lt;var&gt;pipeline-root&lt;/var&gt;,
     components=&lt;var&gt;components&lt;/var&gt;,
