@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'mroff' reviewed: '2021-03-09' } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2022-04-15' review_interval: '7 months' } *-->
 
 # 画像の一般的なシグネチャ
 
