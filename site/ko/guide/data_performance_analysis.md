@@ -149,7 +149,7 @@ TFRecord 파일에서 읽을 때와 같이 데이터세트 소스를 병목 상�
 ```python
 dataset = tf.data.Dataset.from_tensor_slices(filenames)
 dataset = dataset.interleave(tf.data.TFRecordDataset,
-  num_parallel_calls=tf.data.experimental.AUTOTUNE,
+  num_parallel_calls=tf.data.AUTOTUNE,
   deterministic=False)
 ```
 
@@ -177,8 +177,8 @@ def make_dataset(shard_index):
 
 indices = tf.data.Dataset.range(NUM_SHARDS)
 dataset = indices.interleave(make_dataset,
-                             num_parallel_calls=tf.data.experimental.AUTOTUNE)
-dataset = dataset.prefetch(tf.data.experimental.AUTOTUNE)
+                             num_parallel_calls=tf.data.AUTOTUNE)
+dataset = dataset.prefetch(tf.data.AUTOTUNE)
 ```
 
 ## 추가 자료
