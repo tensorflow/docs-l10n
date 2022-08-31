@@ -2,7 +2,7 @@
 
 注意: TensorFlow Lite サポートライブラリは現在、Android のみをサポートしています。
 
-モバイルアプリケーション開発者は通常、ビットマップなどの型指定されたオブジェクトや整数などのプリミティブを操作します。ただし、デバイス上の機械学習モデルを実行する TensorFlow Lite インタープリターは ByteBuffer の形式でテンソルを使用するため、デバッグや操作が難しい場合があります。[TensorFlow Lite Android サポートライブラリ](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/java) は、TensorFlow Lite モデルの入力と出力の処理を支援し、TensorFlow Lite インタープリターを使いやすくするように設計されています。
+Mobile application developers typically interact with typed objects such as bitmaps or primitives such as integers. However, the TensorFlow Lite interpreter API that runs the on-device machine learning model uses tensors in the form of ByteBuffer, which can be difficult to debug and manipulate. The [TensorFlow Lite Android Support Library](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/java) is designed to help process the input and output of TensorFlow Lite models, and make the TensorFlow Lite interpreter easier to use.
 
 ## はじめに
 
@@ -32,13 +32,16 @@ dependencies {
 }
 ```
 
-各種バージョンのサポートライブラリについては、[JCenter で提供されている TensorFlow Lite サポートライブラリ AAR](https://bintray.com/google/tensorflow/tensorflow-lite-support) を参照してください。
+Note: starting from version 4.1 of the Android Gradle plugin, .tflite will be added to the noCompress list by default and the aaptOptions above is not needed anymore.
+
+Explore the [TensorFlow Lite Support Library AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-support) for different versions of the Support Library.
 
 ### 基本的な画像の操作と変換
 
 TensorFlow Lite サポートライブラリには、トリミングやサイズ変更などの基本的な画像操作メソッド一式が含まれています。このようなメソッドを使用するには、`ImagePreprocessor` を作成し、必要な操作を追加します。画像を TensorFlow Lite インタープリターに必要なテンソル形式に変換するには、次のように入力として使用する `TensorImage` を作成します。
 
 ```java
+import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.image.ImageProcessor;
 import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.image.ops.ResizeOp;
@@ -53,21 +56,43 @@ ImageProcessor imageProcessor =
 
 // Create a TensorImage object. This creates the tensor of the corresponding
 // tensor type (uint8 in this case) that the TensorFlow Lite interpreter needs.
-TensorImage tImage = new TensorImage(DataType.UINT8);
+TensorImage tensorImage = new TensorImage(DataType.UINT8);
 
 // Analysis code for every frame
 // Preprocess the image
-tImage.load(bitmap);
-tImage = imageProcessor.process(tImage);
+tensorImage.load(bitmap);
+tensorImage = imageProcessor.process(tensorImage);
 ```
 
-テンソルの `DataType` は[メタデータ抽出ライブラリ](../convert/metadata.md#read-the-metadata-from-models)やその他のモデル情報を介して読み取ることができます。
+`DataType` of a tensor can be read through the [metadata extractor library](../models/convert/metadata.md#read-the-metadata-from-models) as well as other model information.
+
+### Basic audio data processing
+
+The TensorFlow Lite Support Library also defines a `TensorAudio` class wrapping some basic audio data processing methods. It's mostly used together with [AudioRecord](https://developer.android.com/reference/android/media/AudioRecord) and captures audio samples in a ring buffer.
+
+```java
+import android.media.AudioRecord;
+import org.tensorflow.lite.support.audio.TensorAudio;
+
+// Create an `AudioRecord` instance.
+AudioRecord record = AudioRecord(...)
+
+// Create a `TensorAudio` object from Android AudioFormat.
+TensorAudio tensorAudio = new TensorAudio(record.getFormat(), size)
+
+// Load all audio samples available in the AudioRecord without blocking.
+tensorAudio.load(record)
+
+// Get the `TensorBuffer` for inference.
+TensorBuffer buffer = tensorAudio.getTensorBuffer()
+```
 
 ### 出力オブジェクトを作成してモデルを実行する
 
 モデルを実行する前に、次のように結果を格納するコンテナオブジェクトを作成する必要があります。
 
 ```java
+import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 // Create a container for the result and specify that this is a quantized model.
@@ -79,14 +104,17 @@ TensorBuffer probabilityBuffer =
 次のようにモデルをロードして推論を実行します。
 
 ```java
-import org.tensorflow.lite.support.model.Model;
+import java.nio.MappedByteBuffer;
+import org.tensorflow.lite.InterpreterFactory;
+import org.tensorflow.lite.InterpreterApi;
 
 // Initialise the model
 try{
     MappedByteBuffer tfliteModel
         = FileUtil.loadMappedFile(activity,
             "mobilenet_v1_1.0_224_quant.tflite");
-    Interpreter tflite = new Interpreter(tfliteModel)
+    InterpreterApi tflite = new InterpreterFactory().create(
+        tfliteModel, new InterpreterApi.Options());
 } catch (IOException e){
     Log.e("tfliteSupport", "Error reading model", e);
 }
@@ -109,7 +137,7 @@ if(null != tflite) {
 import org.tensorflow.lite.support.common.FileUtil;
 
 final String ASSOCIATED_AXIS_LABELS = "labels.txt";
-List associatedAxisLabels = null;
+List<String> associatedAxisLabels = null;
 
 try {
     associatedAxisLabels = FileUtil.loadLabels(this, ASSOCIATED_AXIS_LABELS);
@@ -121,7 +149,9 @@ try {
 次のスニペットは、確率をカテゴリラベルに関連付ける方法を示しています。
 
 ```java
+import java.util.Map;
 import org.tensorflow.lite.support.common.TensorProcessor;
+import org.tensorflow.lite.support.common.ops.NormalizeOp;
 import org.tensorflow.lite.support.label.TensorLabel;
 
 // Post-processor which dequantize the result
@@ -134,7 +164,7 @@ if (null != associatedAxisLabels) {
         probabilityProcessor.process(probabilityBuffer));
 
     // Create a map to access the result based on label
-    Map floatMap = labels.getMapWithFloatValue();
+    Map<String, Float> floatMap = labels.getMapWithFloatValue();
 }
 ```
 
@@ -142,7 +172,7 @@ if (null != associatedAxisLabels) {
 
 TensorFlow Lite サポートライブラリの現在のバージョンは以下に対応しています。
 
-- tflite モデルの入力および出力としての一般的なデータ型（float、uint8、画像、およびこれらのオブジェクトの配列）。
+- common data types (float, uint8, images, audio and array of these objects) as inputs and outputs of tflite models.
 - 基本的な画像操作（画像のトリミング、サイズ変更、回転）。
 - 正規化と量子化
 - ファイルユーティリティ
@@ -151,9 +181,15 @@ TensorFlow Lite サポートライブラリの現在のバージョンは以下�
 
 ## ImageProcessor のアーキテクチャ
 
-`ImageProcessor` の設計では、事前に画像操作演算を定義し、ビルドプロセス中に最適化できていました。`ImageProcessor` は現在、次のような 3 つの基本的な前処理演算をサポートしています。
+The design of the `ImageProcessor` allowed the image manipulation operations to be defined up front and optimised during the build process. The `ImageProcessor` currently supports three basic preprocessing operations, as described in the three comments in the code snippet below:
 
 ```java
+import org.tensorflow.lite.support.common.ops.NormalizeOp;
+import org.tensorflow.lite.support.common.ops.QuantizeOp;
+import org.tensorflow.lite.support.image.ops.ResizeOp;
+import org.tensorflow.lite.support.image.ops.ResizeWithCropOrPadOp;
+import org.tensorflow.lite.support.image.ops.Rot90Op;
+
 int width = bitmap.getWidth();
 int height = bitmap.getHeight();
 
@@ -172,7 +208,7 @@ ImageProcessor imageProcessor =
         .build();
 ```
 
-正規化と量子化の詳細については、[こちら](../convert/metadata.md#normalization-and-quantization-parameters)を参照してください。
+See more details [here](../models/convert/metadata.md#normalization-and-quantization-parameters) about normalization and quantization.
 
 このサポートライブラリの最終的な目標は、すべての [`tf.image`](https://www.tensorflow.org/api_docs/python/tf/image) 変換をサポートすることです。つまり、変換が TensorFlow と同じものになり、その実装がオペレーティングシステムに依存しないものになることを目指しています。
 
@@ -183,7 +219,7 @@ ImageProcessor imageProcessor =
 `TensorImage` または `TensorBuffer` のような入力オブジェクトや出力オブジェクトを初期化する場合、その型を `DataType.UINT8` または `DataType.FLOAT32` に指定する必要があります。
 
 ```java
-TensorImage tImage = new TensorImage(DataType.UINT8);
+TensorImage tensorImage = new TensorImage(DataType.UINT8);
 TensorBuffer probabilityBuffer =
     TensorBuffer.createFixedSize(new int[]{1, 1001}, DataType.UINT8);
 ```
@@ -199,4 +235,4 @@ TensorProcessor probabilityProcessor =
 TensorBuffer dequantizedBuffer = probabilityProcessor.process(probabilityBuffer);
 ```
 
-テンソルの量子化パラメーターは、[メタデータ実行ライブラリを](../convert/metadata.md#read-the-metadata-from-models)を介して読み取ることができます。
+The quantization parameters of a tensor can be read through the [metadata extractor library](../models/convert/metadata.md#read-the-metadata-from-models).
