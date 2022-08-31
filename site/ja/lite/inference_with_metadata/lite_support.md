@@ -64,7 +64,7 @@ tensorImage.load(bitmap);
 tensorImage = imageProcessor.process(tensorImage);
 ```
 
-`DataType` of a tensor can be read through the [metadata extractor library](../models/convert/metadata.md#read-the-metadata-from-models) as well as other model information.
+テンソルの `DataType` は[メタデータ抽出ライブラリ](../models/convert/metadata.md#read-the-metadata-from-models)やその他のモデル情報を介して読み取ることができます。
 
 ### オーディオデータの基本処理
 
@@ -208,7 +208,7 @@ ImageProcessor imageProcessor =
         .build();
 ```
 
-See more details [here](../models/convert/metadata.md#normalization-and-quantization-parameters) about normalization and quantization.
+正規化と量子化の詳細については、[こちら](../models/convert/metadata.md#normalization-and-quantization-parameters)を参照してください。
 
 このサポートライブラリの最終的な目標は、すべての [`tf.image`](https://www.tensorflow.org/api_docs/python/tf/image) 変換をサポートすることです。つまり、変換が TensorFlow と同じものになり、その実装がオペレーティングシステムに依存しないものになることを目指しています。
 
@@ -235,4 +235,4 @@ TensorProcessor probabilityProcessor =
 TensorBuffer dequantizedBuffer = probabilityProcessor.process(probabilityBuffer);
 ```
 
-The quantization parameters of a tensor can be read through the [metadata extractor library](../models/convert/metadata.md#read-the-metadata-from-models).
+テンソルの量子化パラメーターは、[メタデータ実行ライブラリを](../models/convert/metadata.md#read-the-metadata-from-models)を介して読み取ることができます。
