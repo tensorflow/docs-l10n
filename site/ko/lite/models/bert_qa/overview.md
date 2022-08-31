@@ -1,8 +1,8 @@
-# BERT Question and Answer
+# BERT 질문 및 답변
 
-Use a TensorFlow Lite model to answer questions based on the content of a given passage.
+TensorFlow Lite 모델을 사용하여 주어진 구절의 내용을 기반으로 질문에 답합니다.
 
-Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/bert_question_answerer). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/question_answer).
+참고: (1) 기존 모델을 통합하려면 [TensorFlow Lite 작업 라이브러리](https://www.tensorflow.org/lite/inference_with_metadata/task_library/bert_question_answerer)를 사용해 보세요. (2) 모델을 사용자 지정하려면 [TensorFlow Lite 모델 제작기](https://www.tensorflow.org/lite/models/modify/model_maker/question_answer)를 사용해 보세요.
 
 ## 시작하기
 
@@ -10,15 +10,13 @@ Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](htt
 
 TensorFlow Lite를 처음 사용하고 Android 또는 iOS로 작업하는 경우, 다음 예제 애플리케이션을 탐색하면 시작하는 데 도움이 됩니다.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android example</a>
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/ios">iOS
-example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android 예제</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/ios">iOS 예제</a>
 
 Android/iOS 이외의 플랫폼을 사용 중이거나 [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite)에 이미 익숙한 경우 스타터 질문 및 답변 모델을 다운로드할 수 있습니다.
 
-<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Download starter model and vocab</a>
+<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">스타터 모델 및 어휘 다운로드</a>
 
-For more information about metadata and associated fields (e.g. `vocab.txt`) see <a href="https://www.tensorflow.org/lite/models/convert/metadata#read_the_metadata_from_models">Read the metadata from models</a>.
+메타 데이터 및 관련 필드(예: `vocab.txt`)에 대한 자세한 내용은 <a href="https://www.tensorflow.org/lite/models/convert/metadata#read_the_metadata_from_models">모델에서 메타 데이터 읽기</a>를 참조하세요.
 
 ## 동작 원리
 
@@ -46,10 +44,9 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">
-      <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a>
-    </td>
-    <td rowspan="3">       100.5 Mb     </td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a>
+</td>
+    <td rowspan="3">       100.5Mb</td>
     <td>Pixel 3(Android 10)</td>
     <td>123ms *</td>
   </tr>
@@ -86,4 +83,4 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
 ## BERT에 대해 자세히 알아보기
 
 - 학술 논문: [BERT: 언어 이해를 위한 Deep Bidirectional Transformers의 사전 교육](https://arxiv.org/abs/1810.04805)
-- [Open-source implementation of BERT](https://github.com/google-research/bert)
+- [BERT의 오픈 소스 구현](https://github.com/google-research/bert)
