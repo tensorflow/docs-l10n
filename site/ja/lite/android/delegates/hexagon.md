@@ -1,6 +1,6 @@
 # TensorFlow Lite Hexagon デリゲート
 
-This document explains how to use the TensorFlow Lite Hexagon Delegate in your application using the Java and/or C API. The delegate leverages the Qualcomm Hexagon library to execute quantized kernels on the DSP. Note that the delegate is intended to *complement* NNAPI functionality, particularly for devices where NNAPI DSP acceleration is unavailable (e.g., on older devices, or devices that don’t yet have a DSP NNAPI driver).
+このドキュメントでは、Java または C 、あるいはその両方の API を使用して、アプリで TensorFlow Lite Hexagon デレゲートを使用する方法について説明します。デリゲートは、Qualcomm Hexagon ライブラリを利用して、DSP で量子化されたカーネルを実行します。デリゲートは、特に NNAPI DSP アクセラレーションが利用できないデバイス（古いデバイス、または DSP NNAPI ドライバをまだ備えていないデバイスなど）の NNAPI 機能を*補完*することを目的としていることに注意してください。
 
 注意: このデリゲートは実験（ベータ）段階です。
 
@@ -19,7 +19,7 @@ This document explains how to use the TensorFlow Lite Hexagon Delegate in your a
 
 **サポートされているモデル：**
 
-The Hexagon delegate supports all models that conform to our [8-bit symmetric quantization spec](https://www.tensorflow.org/lite/performance/quantization_spec), including those generated using [post-training integer quantization](https://www.tensorflow.org/lite/performance/post_training_integer_quant). UInt8 models trained with the legacy [quantization-aware training](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize) path are also supported, for e.g., [these quantized versions](https://www.tensorflow.org/lite/guide/hosted_models#quantized_models) on our Hosted Models page.
+Hexagon デリゲートは、[トレーニング後の整数量子化](https://www.tensorflow.org/lite/performance/quantization_spec)を使用して生成されたものを含め、[8 ビット対称量子化仕様](https://www.tensorflow.org/lite/performance/post_training_integer_quant)に準拠するすべてのモデルをサポートしています。従来の[量子化認識トレーニング](https://github.com/tensorflow/tensorflow/tree/r1.13/tensorflow/contrib/quantize)パスでトレーニングされた UInt8 モデルもサポートされています（例：ホステッドモデルページの[これらの量子化バージョン](https://www.tensorflow.org/lite/guide/hosted_models#quantized_models)）。
 
 ## Hexagon デレゲート Java API
 
@@ -59,21 +59,21 @@ dependencies {
 #### ステップ 2. Hexagon ライブラリを Android アプリに追加する
 
 - hexagon_nn_skel.run をダウンロードして実行します。3 つの異なる共有ライブラリ「libhexagon_nn_skel.so」、「libhexagon_nn_skel_v65.so」、「libhexagon_nn_skel_v66.so」が提供されます。
-    - [v1.10.3](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_1_10_3_1.run)
-    - [v1.14](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.14.run)
-    - [v1.17](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.17.0.0.run)
-    - [v1.20](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.0.run)
+    - v1.10.3
+    - v1.14
+    - v1.17
+    - v1.20
     - [v1.20.0.1](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
 
 注意：ライセンス契約に同意する必要があります。
 
 Note: As of 02/23/2021 you should use v1.20.0.1.
 
-Note: You must use the hexagon_nn libraries with the compatible version of interface library. Interface library is part of the AAR and fetched by bazel through the [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) The version in the bazel config is the version you should use.
+注意：hexagon_nn ライブラリは、互換性のあるバージョンのインターフェイスライブラリと使用する必要があります。インターフェイスライブラリは AAR の一部であり、[config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) を通じて bazel によりフェッチされます。bazelconfig のバージョンを使用する必要があります。
 
 - Include all 3 in your app with other shared libraries. See [How to add shared library to your app](#how-to-add-shared-library-to-your-app). The delegate will automatically pick the one with best performance depending on the device.
 
-Note: If your app will be built for both 32 and 64-bit ARM devices, then you will need to add the Hexagon shared libs to both 32 and 64-bit lib folders.
+注意: アプリが 32 ビットと 64 ビットの両方の ARM デバイス用に構築される場合、32 ビットと 64 ビットの両方の lib フォルダに Hexagon 共有ライブラリを追加する必要があります。
 
 #### ステップ 3. デリゲートを作成して TensorFlow Lite インタプリタを初期化する
 
@@ -157,21 +157,21 @@ dependencies {
 #### ステップ 2. Hexagon ライブラリを Android アプリに追加する
 
 - hexagon_nn_skel.run をダウンロードして実行します。3 つの異なる共有ライブラリ「libhexagon_nn_skel.so」、「libhexagon_nn_skel_v65.so」、「libhexagon_nn_skel_v66.so」が提供されます。
-    - [v1.10.3](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_1_10_3_1.run)
-    - [v1.14](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.14.run)
-    - [v1.17](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.17.0.0.run)
-    - [v1.20](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.0.run)
+    - v1.10.3
+    - v1.14
+    - v1.17
+    - v1.20
     - [v1.20.0.1](https://storage.cloud.google.com/download.tensorflow.org/tflite/hexagon_nn_skel_v1.20.0.1.run)
 
 注意：ライセンス契約に同意する必要があります。
 
 Note: As of 02/23/2021 you should use v1.20.0.1.
 
-Note: You must use the hexagon_nn libraries with the compatible version of interface library. Interface library is part of the AAR and fetched by bazel through the [config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl). The version in the bazel config is the version you should use.
+注意：hexagon_nn ライブラリは、互換性のあるバージョンのインターフェイスライブラリと使用する必要があります。インターフェイスライブラリは AAR の一部であり、[config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) を通じて bazel によりフェッチされます。bazelconfig のバージョンを使用する必要があります。
 
 - 他の共有ライブラリと共にアプリに 3 つすべて追加します。 [アプリに共有ライブラリを追加する方法](#how-to-add-shared-library-to-your-app)を参照してください。デリゲートは、デバイスに応じて最高のパフォーマンスを持つものを自動的に選択します。
 
-Note: If your app will be built for both 32 and 64-bit ARM devices, then you will need to add the Hexagon shared libs to both 32 and 64-bit lib folders.
+注意: アプリが 32 ビットと 64 ビットの両方の ARM デバイス用に構築される場合、32 ビットと 64 ビットの両方の lib フォルダに Hexagon 共有ライブラリを追加する必要があります。
 
 #### ステップ 3. C ヘッダーを含める
 
@@ -213,11 +213,11 @@ TfLiteHexagonTearDown();  // Needed once at end of app/DSP usage.
     - ARM 32-bit: `app/src/main/jniLibs/armeabi-v7a`
 - アーキテクチャに一致するディレクトリに .so を配置します。
 
-Note: If you're using App Bundle for publishing your Application, you might want to set android.bundle.enableUncompressedNativeLibs=false in the gradle.properties file.
+注意: アプリケーションの公開に App Bundle を使用している場合は、gradle.properties ファイルで android.bundle.enableUncompressedNativeLibs = false を設定することをお勧めします。
 
 ## フィードバック
 
-For issues, please create a [GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) issue with all the necessary repro details, including the phone model and board used (`adb shell getprop ro.product.device` and `adb shell getprop ro.board.platform`).
+問題がありましたら、[GitHub](https://github.com/tensorflow/tensorflow/issues/new?template=50-other-issues.md) issue を作成して使用するモバイルデバイスのモデルとボードなど、再現に必要な詳細をすべて記載してください (`adb shell getprop ro.product.device` および `adb shell getprop ro.board.platform`)。
 
 ## よくある質問
 
