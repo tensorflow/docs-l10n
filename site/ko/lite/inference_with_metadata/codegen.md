@@ -1,10 +1,10 @@
 # 메타데이터를 사용하여 모델 인터페이스 생성
 
-개발자는 [TensorFlow Lite Metadata](../convert/metadata)를 사용하여 래퍼 코드를 생성하여 Android에서 통합할 수 있습니다. 대부분의 개발자들에게 [Android Studio ML Model Binding](#mlbinding)의 그래픽 인터페이스가 가장 사용하기 쉽습니다. 더 많은 맞춤화가 필요하거나 명령 줄 도구를 사용하는 경우 [TensorFlow Lite Codegen](#codegen)도 사용할 수 있습니다.
+개발자는 [TensorFlow Lite Metadata](../models/convert/metadata)를 사용하여 래퍼 코드를 생성하여 Android에서 통합할 수 있습니다. 대부분의 개발자들에게 [Android Studio ML Model Binding](#mlbinding)의 그래픽 인터페이스가 가장 사용하기 쉽습니다. 더 많은 맞춤화가 필요하거나 명령 줄 도구를 사용하는 경우 [TensorFlow Lite Codegen](#codegen)도 사용할 수 있습니다.
 
 ## Android Studio ML Model Binding {:#mlbinding} 사용
 
-[메타데이터](../convert/metadata.md)로 강화된 TensorFlow Lite 모델의 경우 개발자는 Android Studio ML Model Binding을 사용하여 프로젝트를 위한 설정을 자동으로 구성하고 모델 메타데이터에 기초한 래퍼 클래스를 생성할 수 있습니다. 래퍼 코드를 사용하면 `ByteBuffer`와 직접 상호 작용할 필요가 없습니다. 대신, 개발자는 `Bitmap` 및 `Rect`와 같은 형식화된 객체를 통해 TensorFlow Lite 모델과 상호 작용할 수 있습니다.
+[메타데이터](../models/convert/metadata.md)로 강화된 TensorFlow Lite 모델의 경우 개발자는 Android Studio ML Model Binding을 사용하여 프로젝트를 위한 설정을 자동으로 구성하고 모델 메타데이터에 기초한 래퍼 클래스를 생성할 수 있습니다. 래퍼 코드를 사용하면 `ByteBuffer`와 직접 상호 작용할 필요가 없습니다. 대신, 개발자는 `Bitmap` 및 `Rect`와 같은 형식화된 객체를 통해 TensorFlow Lite 모델과 상호 작용할 수 있습니다.
 
 참고: [Android Studio 4.1](https://developer.android.com/studio) 이상 필요
 
@@ -91,9 +91,9 @@ ML Model Binding은 개발자가 대리자 및 스레드 수를 사용하여 코
 
 ## TensorFlow Lite 코드 생성기로 모델 인터페이스 생성 {: #codegen}
 
-For TensorFlow Lite model enhanced with [metadata](../convert/metadata.md), developers can use the TensorFlow Lite Android wrapper code generator to create platform specific wrapper code. The wrapper code removes the need to interact directly with `ByteBuffer`. Instead, developers can interact with the TensorFlow Lite model with typed objects such as `Bitmap` and `Rect`.
+참고: TensorFlow Lite 래퍼 코드 생성기는 현재 Android만 지원합니다.
 
-The usefulness of the code generator depend on the completeness of the TensorFlow Lite model's metadata entry. Refer to the `<Codegen usage>` section under relevant fields in [metadata_schema.fbs](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs), to see how the codegen tool parses each field.
+[메타데이터](../models/convert/metadata.md)로 강화된 TensorFlow Lite 모델의 경우, 개발자는 TensorFlow Lite Android 래퍼 코드 생성기를 사용하여 플랫폼별 래퍼 코드를 만들 수 있습니다. 래퍼 코드를 사용하면 `ByteBuffer`와 직접 상호 작용할 필요가 없습니다. 대신, 개발자는 `Bitmap` 및 `Rect`와 같은 형식화된 객체를 사용하여 TensorFlow Lite 모델과 상호 작용할 수 있습니다.
 
 코드 생성기의 유용성은 TensorFlow Lite 모델의 메타데이터 항목이 얼마나 완전한지에 달려 있습니다. codegen 도구가 각 필드를 어떻게 구문 분석하는지 확인하려면 <a>metadata_schema.fbs</a>에서 관련 필드의 <code>&lt;Codegen usage&gt;</code> 섹션을 참조하십시오.
 
