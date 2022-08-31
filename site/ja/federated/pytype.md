@@ -10,7 +10,7 @@ Pytype を使用することには多くのメリットがあります。詳細�
 
 Pytype は、アノテーションを付けている関数に対してアノテーションをチェックします。関数がデコレートされていると、同じアノテーションが適用されなくなる新しい関数が作成される場合があります。TensorFlow と TensorFlow Federated はどちらも、デコレートされた関数の入力と出力を大きく変換するデコレータを使用します。つまり、`@tff.tf_computation`、`@tff.tf_computation`、または `@tff.federated_computation` でデコレートされた関数は、pytype で分析すると驚くような動作をする可能性があります。
 
-For example:
+以下に例を示します。
 
 ```
 def decorator(fn):
