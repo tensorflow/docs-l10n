@@ -100,7 +100,7 @@ Flex デリゲートを介して TF 演算をサポートする ナイトリ―�
 - android_aarch64
 - android_arm
 
-[TensorFlow Lite Hexagon デリゲート](https://www.tensorflow.org/lite/performance/hexagon_delegate)でベンチマークを行うために、必要な `libhexagon_interface.so` ファイル（このファイルの詳細は[こちら](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)）も事前ビルドしました。対応するプラットフォームのファイルを以下のリンクからダウンロードしたら、ファイルの名前を `libhexagon_interface.so` に変更してください。
+[TensorFlow Lite Hexagon デリゲート](https://www.tensorflow.org/lite/android/delegates/hexagon)でベンチマークを行うために、必要な `libhexagon_interface.so` ファイル（このファイルの詳細は[こちら](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)）も事前ビルドしました。対応するプラットフォームのファイルを以下のリンクからダウンロードしたら、ファイルの名前を `libhexagon_interface.so` に変更してください。
 
 - linux_x86-64
 - linux_aarch64
