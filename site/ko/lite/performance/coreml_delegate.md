@@ -8,8 +8,8 @@ Note: This delegate is in experimental (beta) phase. It is available from Tensor
 
 **지원되는 iOS 버전 및 장치:**
 
-- iOS 12 and later. In the older iOS versions, Core ML delegate will automatically fallback to CPU.
-- By default, Core ML delegate will only be enabled on devices with A12 SoC and later (iPhone Xs and later) to use Neural Engine for faster inference. If you want to use Core ML delegate also on the older devices, please see [best practices](#best-practices)
+- iOS 12 이상. 이전 iOS 버전에서 Core ML 대리자는 자동으로 CPU로 대체됩니다.
+- 기본적으로 Core ML 대리자는 A12 SoC 이상 (iPhone Xs 이상)이 있는 기기에서만 활성화되어 더 빠른 추론을 위해 Neural Engine을 사용합니다. Core ML 대리자를 이전 기기에서도 사용하려면 [모범 사례](#best-practices)를 참조하세요.
 
 **지원되는 모델**
 
