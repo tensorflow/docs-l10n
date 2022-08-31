@@ -42,7 +42,7 @@ TensorFlow 페더레이션은 페더레이션 학습으로 해결할 수 있는 
 
 ## 고성능 시뮬레이션
 
-*FL 시뮬레이션* 의 실제 시간은 알고리즘을 평가하기 위한 관련 측정항목이 아니지만(시뮬레이션 하드웨어는 실제 FL 배포 환경을 나타내지 않기 때문에) FL 시뮬레이션을 빠르게 실행할 수 있는 것은 연구 생산성에 매우 중요합니다. 따라서 TFF는 고성능 단일 및 다중 시스템 런타임을 제공하는 데 많은 투자를 했습니다. 문서가 개발 중이지만 지금은 [TFF를 사용한 고성능 시뮬레이션](https://www.tensorflow.org/federated/tutorials/simulations) 자습서, [가속기를 사용한 TFF 시뮬레이션](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators) [지침 및 GCP에서 TFF를 사용한 시뮬레이션 설정](https://www.tensorflow.org/federated/gcp_setup) 지침을 참조하십시오. 고성능 TFF 런타임은 기본적으로 활성화되어 있습니다.
+While the wall-clock time of an FL *simulation* is not a relevant metric for evaluating algorithms (as simulation hardware isn't representative of real FL deployment environments), being able to run FL simulations quickly is critical for research productivity. Hence, TFF has invested heavily in providing high-performance single and multi-machine runtimes. Documentation is under development, but for now see the [High-performance simulations with Kubernetes](https://www.tensorflow.org/federated/tutorials/high_performance_simulation_with_kubernetes) tutorial, instructions on [TFF simulations with accelerators](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators), and instructions on [setting up simulations with TFF on GCP](https://www.tensorflow.org/federated/gcp_setup). The high-performance TFF runtime is enabled by default.
 
 ## 다양한 연구 분야를 위한 TFF
 
@@ -54,15 +54,11 @@ TensorFlow 페더레이션은 페더레이션 학습으로 해결할 수 있는 
 
 페더레이션 평균의 보다 일반적인 구현은 [여기](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/algorithms/fed_avg.py)에서 확인할 수 있습니다. 이 구현은 서버와 클라이언트 모두에서 다른 옵티마이저의 사용을 포함하여 보다 정교한 최적화 기술을 허용합니다. 페더레이션 k-평균 클러스터링을 포함한 다른 페더레이션 훈련 알고리즘은 [여기](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/algorithms/)에서 확인할 수 있습니다.
 
-### 압축 모델링 및 업데이트
+### Model update compression
 
-TFF는 [tensor_encoding](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/internal/tensor_encoding) API를 사용하여 손실 압축 알고리즘을 활성화하여 서버와 클라이언트 간의 통신 비용을 줄입니다. [Federated Averaging 알고리즘](https://arxiv.org/abs/1812.07210)을 사용한 서버-클라이언트 및 클라이언트-서버 압축을 사용한 훈련의 예는 [이 실험](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/research/compression/run_experiment.py)을 참조하세요.
+Lossy compression of model updates can lead to reduced communication costs, which in turn can lead to reduced overall training time.
 
-사용자 정의 압축 알고리즘을 구현하고 훈련 루프에 적용하기 위해 다음을 수행할 수 있습니다.
-
-1. [이 예제](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L75)에 따라 <a><code>EncodingStageInterface</code></a>의 서브 클래스 또는 더 일반적인 변형인 <a><code>AdaptiveEncodingStageInterface</code></a>로 새 압축 알고리즘을 구현합니다.
-2. 새 [`Encoder`](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/core_encoder.py#L38)를 생성하고 [모델 브로드캐스트](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L118) 또는 [모델 업데이트 평균](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L144)을 위해 특수화합니다.
-3. 이러한 개체를 사용하여 전체 [학습 계산을 작성](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L247) 합니다.
+To reproduce a recent [paper](https://arxiv.org/abs/2201.02664), see [this research project](https://github.com/google-research/federated/tree/master/compressed_communication). To implement a custom compression algorithm, see [comparison_methods](https://github.com/google-research/federated/tree/master/compressed_communication/aggregators/comparison_methods) in the project for baselines as an example, and [TFF Aggregators tutorial](https://www.tensorflow.org/federated/tutorials/custom_aggregators) if not already familiar with.
 
 ### 차등 프라이버시
 
