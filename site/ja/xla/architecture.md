@@ -7,15 +7,15 @@
 
 XLA を TensorFlow と連携させるに当たって、以下のようないくつかの目標がありました。
 
-- *実行速度の改善。*サブグラフをコンパイルして存続期間の短い Op の実行時間を短縮することで、TensorFlowランタイムからのオーバーヘッドを排除し、パイプライン演算を融合してメモリオーバーヘッドを削減し、既知のテンソル形状に特化して、より積極的な定数伝播を可能にします。
+- *Improve execution speed.* Compile subgraphs to reduce the execution time of short-lived Ops to eliminate overhead from the TensorFlow runtime, fuse pipelined operations to reduce memory overhead, and specialize to known tensor shapes to allow for more aggressive constant propagation.
 
-- *メモリ使用率の改善。*原則として、多くの中間ストレージバッファを排除することで、メモリ使用量の分析とスケジュールを行います。
+- *Improve memory usage.* Analyze and schedule memory usage, in principle eliminating many intermediate storage buffers.
 
-- *カスタム Op への依存の抑制。*自動的に融合された低レベル Op のパフォーマンスを改善し、手動で融合されたカスタム Op のパフォーマンスに一致させることで、多数のカスタム Op の必要性を除きます。
+- *Reduce reliance on custom Ops.* Remove the need for many custom Ops by improving the performance of automatically fused low-level Ops to match the performance of custom Ops that were fused by hand.
 
-- *モバイルフットプリントの削減。*サブグラフを事前にコンパイルし、別のアプリケーションに直接リンクできるオブジェクト/ヘッダーファイルのペアを発行することで、TensorFlow ランタイムを排除します。これにより、モバイル推論のフットプリントを数桁削減できます。
+- *Reduce mobile footprint.* Eliminate the TensorFlow runtime by ahead-of-time compiling the subgraph and emitting an object/header file pair that can be linked directly into another application. The results can reduce the footprint for mobile inference by several orders of magnitude.
 
-- *移植性の改善。*新しいハードウェア用の新しいバックエンドを比較的簡単に作成できるようにします。その時点で、TensorFlow プログラムの大部分がそのハードウェア上で変更されずに実行されます。これは、個々のモノリシック Op を新しいハードウェアに特化するアプローチとは対照的であり、その場合、これらの Op を使用するために TensorFlow プログラムを書き直す必要があります。
+- *Improve portability.* Make it relatively easy to write a new backend for novel hardware, at which point a large fraction of TensorFlow programs will run unmodified on that hardware. This is in contrast with the approach of specializing individual monolithic Ops for new hardware, which requires TensorFlow programs to be rewritten to make use of those Ops.
 
 ## XLA の仕組み
 
