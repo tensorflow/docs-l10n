@@ -8,7 +8,7 @@
 
 아래 다이어그램은 모델 변환을 위한 고차원적 워크플로를 보여줍니다.
 
-![TFLite converter workflow](../../images/convert/convert.png)
+![TFLite 변환기 워크플로](../../images/convert/convert.png)
 
 **그림 1.** 변환기 워크플로.
 
