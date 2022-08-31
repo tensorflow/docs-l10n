@@ -1,6 +1,6 @@
 # メタデータを使用する TensorFlow Lite 推論
 
-[メタデータを使用するモデル](../convert/metadata.md)の推論は、コードを数行記述するだけで簡単に実行できます。TensorFlow Lite メタデータには、モデルの機能とモデルの使用方法に関する豊富な説明が含まれています。[TensorFlow Lite Android コードジェネレータ](codegen.md#mlbinding)や [Android Studio ML Binding 機能](codegen.md#codegen)を使用するなど、コードジェネレータが自動的に推論コードを生成できるようになります。また、カスタム推論パイプラインを構成するために使用することもできます。
+[メタデータを使用するモデル](../models/convert/metadata.md)の推論は、コードを数行記述するだけで簡単に実行できます。TensorFlow Lite メタデータには、モデルの機能とモデルの使用方法に関する豊富な説明が含まれています。[TensorFlow Lite Android コードジェネレータ](codegen.md#mlbinding)や [Android Studio ML Binding 機能](codegen.md#codegen)を使用するなど、コードジェネレータが自動的に推論コードを生成できるようになります。また、カスタム推論パイプラインを構成するために使用することもできます。
 
 ## ツールとライブラリ
 
@@ -24,7 +24,7 @@ TensorFlow Lite は、次のようにデプロイメント要件のさまざま�
 
 ## メタデータを含む事前トレーニング済みモデルを探索する
 
-ビジョンタスクとテキストタスク向けのメタデータを含む事前トレーニング済みモデルをダウンロードするには [TensorFlow Lite ホステッドモデル](https://www.tensorflow.org/lite/guide/hosted_models)と [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite) を参照してください。また、[メタデータの視覚化](../convert/metadata.md#visualize-the-metadata)のさまざまなオプションも参照してください。
+ビジョンタスクとテキストタスク向けのメタデータを含む事前トレーニング済みモデルをダウンロードするには [TensorFlow Lite ホステッドモデル](https://www.tensorflow.org/lite/guide/hosted_models)と [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite) を参照してください。また、[メタデータの視覚化](../models/convert/metadata.md#visualize-the-metadata)のさまざまなオプションも参照してください。
 
 ## TensorFlow Lite サポート GitHub リポジトリ
 
