@@ -257,7 +257,7 @@ GPU 대리자의 생성자는 옵션의 `struct`를 수락합니다([Swift API](
 이 섹션에서는 GPU 대리자가 8bit 양자화된 모델을 가속화하는 방법을 설명합니다. 여기에는 다음을 포함한 모든 종류의 양자화가 포함됩니다.
 
 -  [양자화 인식 훈련으로](https://www.tensorflow.org/lite/models/convert/quantization) 훈련된 모델
-- [Post-training dynamic-range quantization](https://www.tensorflow.org/lite/performance/post_training_quant)
+- [훈련 후 동적 범위 양자화](https://www.tensorflow.org/lite/performance/post_training_quant)
 - [훈련 후 정수 양자화](https://www.tensorflow.org/lite/performance/post_training_integer_quant)
 
 성능을 최적화하려면 부동 소수점 입력 및 출력 텐서를 가진 모델을 사용하세요.
