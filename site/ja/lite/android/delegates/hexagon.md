@@ -71,7 +71,7 @@ Note: As of 02/23/2021 you should use v1.20.0.1.
 
 注意：hexagon_nn ライブラリは、互換性のあるバージョンのインターフェイスライブラリと使用する必要があります。インターフェイスライブラリは AAR の一部であり、[config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) を通じて bazel によりフェッチされます。bazelconfig のバージョンを使用する必要があります。
 
-- Include all 3 in your app with other shared libraries. See [How to add shared library to your app](#how-to-add-shared-library-to-your-app). The delegate will automatically pick the one with best performance depending on the device.
+- 他の共有ライブラリと共にアプリに 3 つすべて追加します。 [アプリに共有ライブラリを追加する方法](#how-to-add-shared-library-to-your-app)を参照してください。デリゲートは、デバイスに応じて最高のパフォーマンスを持つものを自動的に選択します。
 
 注意: アプリが 32 ビットと 64 ビットの両方の ARM デバイス用に構築される場合、32 ビットと 64 ビットの両方の lib フォルダに Hexagon 共有ライブラリを追加する必要があります。
 
@@ -175,7 +175,7 @@ Note: As of 02/23/2021 you should use v1.20.0.1.
 
 #### ステップ 3. C ヘッダーを含める
 
-- The header file "hexagon_delegate.h" can be downloaded from [GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/hexagon_delegate.h) or extracted from the Hexagon delegate AAR.
+- ヘッダーファイル「hexagon_delegate.h」は、[GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/hexagon_delegate.h) からダウンロードするか、Hexagon デリゲート AAR から抽出できます。
 
 #### ステップ 4. デリゲートを作成して TensorFlow Lite インタプリタを初期化する
 
@@ -222,7 +222,7 @@ TfLiteHexagonTearDown();  // Needed once at end of app/DSP usage.
 ## よくある質問
 
 - デリゲートがサポートする演算は？
-    - See the current list of [supported ops and constraints](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)
+    - 最新の[サポートされている演算と制約](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)のリストをご覧ください
 - デリゲートが有効になっている場合、モデルが DSP を使用していることをどのように確認できますか？
     - デリゲートを有効にすると、以下の 2 つのログメッセージが出力されます。1 つはデリゲートが作成されたかどうかを示し、もう 1 つはデリゲートを使用して実行されているノードの数を示します。<br> `Created TensorFlow Lite delegate for Hexagon.` <br> `Hexagon delegate: X nodes delegated out of Y nodes.`
 - デリゲートを実行するには、モデル内のすべての演算がサポートされる必要がありますか？
