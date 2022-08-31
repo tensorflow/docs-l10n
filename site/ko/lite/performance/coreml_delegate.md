@@ -160,7 +160,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 
 ### Metal(GPU) 대리자를 폴백으로 사용하기
 
-When the Core ML delegate is not created, alternatively you can still use [Metal delegate](https://www.tensorflow.org/lite/performance/gpu#ios) to get performance benefits. Following example shows how to do this:
+Core ML 대리자가 생성되지 않은 경우에도 여전히 [Metal 대리자](https://www.tensorflow.org/lite/performance/gpu#ios)를 사용하여 성능 이점을 얻을 수 있습니다. 다음 예에서는 이를 수행하는 방법을 보여줍니다.
 
 <div>
   <devsite-selector>
