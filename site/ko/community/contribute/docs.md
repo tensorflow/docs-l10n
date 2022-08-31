@@ -1,16 +1,16 @@
 # TensorFlow 설명서에 참여
 
-TensorFlow welcomes documentation contributions—if you improve the documentation, you improve the TensorFlow library itself. Documentation on tensorflow.org falls into the following categories:
+TensorFlow는 문서 기여를 환영합니다. 문서를 개선하면 TensorFlow 라이브러리 자체도 개선됩니다. tensorflow.org의 문서는 다음 범주로 분류됩니다.
 
-- *API reference* —The [API reference docs](https://www.tensorflow.org/api_docs/) are generated from docstrings in the [TensorFlow source code](https://github.com/tensorflow/tensorflow).
-- *Narrative documentation* —These are [tutorials](https://www.tensorflow.org/tutorials), [guides](https://www.tensorflow.org/guide), and other writing that's not part of the TensorFlow code. This documentation is in the [tensorflow/docs](https://github.com/tensorflow/docs) GitHub repository.
-- *Community translations* —These are guides and tutorials translated by the community. All community translations live in the [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site) repo.
+- *API 참조* — [API 참조 문서](https://www.tensorflow.org/api_docs/)는 [TensorFlow source code](https://github.com/tensorflow/tensorflow)에 있는 docstrings로 부터 시작되었습니다.
+- *설명 문서* -TensorFlow 코드의 일부가 아닌 [튜토리얼](https://www.tensorflow.org/tutorials) , [가이드](https://www.tensorflow.org/guide) 및 기타 글입니다. 이 문서는 [tensorflow / docs](https://github.com/tensorflow/docs) GitHub 저장소에 있습니다.
+- *커뮤니티 번역* — 커뮤니타에서 번역한 가이드와 튜토리얼입니다. 모든 커뮤니티 번역은 [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site) 리포지토리에 있습니다.
 
-Some [TensorFlow projects](https://github.com/tensorflow) keep documentation source files near the code in a separate repository, usually in a `docs/` directory. See the project's `CONTRIBUTING.md` file or contact the maintainer to contribute.
+일부 [TensorFlow 프로젝트](https://github.com/tensorflow) 는 일반적으로 `docs/` 디렉토리에있는 코드 근처 별도의 저장소에 문서 소스 파일을 보관합니다. 기여하기 위해서는 프로젝트의 `CONTRIBUTING.md` 파일을 보거나 관리자에게 연락하십시오.
 
 To participate in the TensorFlow docs community:
 
-- Watch the [tensorflow/docs](https://github.com/tensorflow/docs) GitHub repository.
+- [tensorflow / docs](https://github.com/tensorflow/docs) GitHub 저장소를 확인하세요.
 - Follow the [docs](https://discuss.tensorflow.org/tag/docs) tag on the [TensorFlow Forum](https://discuss.tensorflow.org/).
 
 ## API reference
@@ -19,25 +19,25 @@ For details, use the [TensorFlow API docs contributor guide](docs_ref.md). This 
 
 ### Versions and branches
 
-The site's [API reference](https://www.tensorflow.org/api_docs/python/tf) version defaults to the latest stable binary—this matches the package installed with `pip install tensorflow`.
+사이트의 [API 참조](https://www.tensorflow.org/api_docs/python/tf) 버전은 기본적으로 안정적인 최신 바이너리로 설정됩니다. 이는 `pip install tensorflow` 설치된 패키지와 일치합니다.
 
-The default TensorFlow package is built from the stable branch `rX.x` in the main <a href="https://github.com/tensorflow/tensorflow" class="external">tensorflow/tensorflow</a> repo. The reference documentation is generated from code comments and docstrings in the source code for <a href="https://www.tensorflow.org/code/tensorflow/python/" class="external">Python</a>, <a href="https://www.tensorflow.org/code/tensorflow/cc/" class="external">C++</a>, and <a href="https://www.tensorflow.org/code/tensorflow/java/" class="external">Java</a>.
+기본 TensorFlow package는 <a>tensorflow/tensorflow</a> 저장소의 안전한 분기 <code>rX.x</code>로 부터 만들어집니다. 참조 문서는 소스 코드의 <a href="https://www.tensorflow.org/code/tensorflow/python/" class="external">Python</a>, <a href="https://www.tensorflow.org/code/tensorflow/cc/" class="external">C++</a>, and <a href="https://www.tensorflow.org/code/tensorflow/java/" class="external">Java</a>를 위한 코드 주석과 독 스트링으로 부터 시작됩니다.
 
-Previous versions of the TensorFlow documentation are available as [rX.x branches](https://github.com/tensorflow/docs/branches) in the TensorFlow Docs repository. These branches are added when a new version is released.
+TensorFlow 문서의 이전 버전은 TensorFlow Docs 저장소에서 [rX.x 분기](https://github.com/tensorflow/docs/branches) 로 제공됩니다. 이러한 분기는 새 버전이 출시 될 때 추가됩니다.
 
 ### Build API docs
 
-Note: This step is not required to edit or preview API docstrings, only to generate the HTML used on tensorflow.org.
+참고 :이 단계는 API 독 스트링을 편집하거나 미리 보는 데 필요하지 않으며 tensorflow.org에서 사용되는 HTML을 생성하는 데만 필요합니다.
 
 #### Python reference
 
-The `tensorflow_docs` package includes the generator for the [Python API reference docs](https://www.tensorflow.org/api_docs/python/tf). To install:
+`tensorflow_docs` 패키지에는 [Python API 참조 문서](https://www.tensorflow.org/api_docs/python/tf) 용 생성기가 포함되어 있습니다. 설치:
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">pip install git+https://github.com/tensorflow/docs</code>
 </pre>
 
-To generate the TensorFlow 2 reference docs, use the `tensorflow/tools/docs/generate2.py` script:
+TensorFlow 2 참조 문서를 생성하려면 `tensorflow/tools/docs/generate2.py` 스크립트를 사용하세요.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git clone https://github.com/tensorflow/tensorflow tensorflow</code>
@@ -46,42 +46,42 @@ To generate the TensorFlow 2 reference docs, use the `tensorflow/tools/docs/gene
 <code class="devsite-terminal">python generate2.py --output_dir=/tmp/out</code>
 </pre>
 
-Note: This script uses the *installed* TensorFlow package to generate docs and only works for TensorFlow 2.x.
+참고 :이 스크립트는 *설치된* TensorFlow 패키지를 사용하여 문서를 생성하고 TensorFlow 2.x에서만 작동합니다.
 
 ## Narrative documentation
 
-TensorFlow [guides](https://www.tensorflow.org/guide) and [tutorials](https://www.tensorflow.org/tutorials) are written as <a href="https://guides.github.com/features/mastering-markdown/" class="external">Markdown</a> files and interactive <a href="https://jupyter.org/" class="external">Jupyter</a> notebooks. Notebooks can be run in your browser using <a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a>. The narrative docs on [tensorflow.org](https://www.tensorflow.org) are built from the <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> `master` branch. Older versions are available in GitHub on the `rX.x` release branches.
+TensorFlow [가이드](https://www.tensorflow.org/guide) 및 [가이드](https://www.tensorflow.org/tutorials) 는 <a href="https://guides.github.com/features/mastering-markdown/" class="external">Markdown</a> 파일 및 대화 형 <a href="https://jupyter.org/" class="external">Jupyter</a> 노트북으로 작성됩니다. <a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory를</a> 사용하여 브라우저에서 노트북을 실행할 수 있습니다. [tensorflow.org](https://www.tensorflow.org) 의 내러티브 문서는 <a href="https://github.com/tensorflow/docs" class="external">tensorflow / docs</a> `master` 브랜치에서 빌드됩니다. 이전 버전은 `rX.x` 릴리스 브랜치의 GitHub에서 사용할 수 있습니다.
 
 ### Simple changes
 
-The easiest way to make straightforward documentation updates to Markdown files is to use GitHub's <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">web-based file editor</a>. Browse the [tensorflow/docs](https://github.com/tensorflow/docs/tree/master/site/en) repository to find the Markdown that roughly corresponds to the <a href="https://www.tensorflow.org">tensorflow.org</a> URL structure. In the upper right corner of the file view, click the pencil icon <svg version="1.1" width="14" height="16" viewbox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"></svg><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path> to open the file editor. Edit the file and then submit a new pull request.
+Markdown 파일에 대한 간단한 문서 업데이트를 만드는 가장 쉬운 방법은 GitHub의 <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">웹 기반 파일 편집기를 사용하는 것</a> 입니다. 찾아보기 [tensorflow / 문서](https://github.com/tensorflow/docs/tree/master/site/en) 저장소 약은에 해당하는 마크 다운을 찾을 수 <a href="https://www.tensorflow.org">tensorflow.org의</a> URL 구조. 파일보기의 오른쪽 상단에서 연필 아이콘을 클릭합니다. <svg version="1.1" width="14" height="16" viewbox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"></svg><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path> 파일 편집기를 엽니 다. 파일을 편집 한 다음 새 풀 요청을 제출하십시오.
 
 ### Set up a local Git repo
 
-For multi-file edits or more complex updates, it's better to use a local Git workflow to create a pull request.
+다중 파일 편집 또는 더 복잡한 업데이트의 경우 로컬 Git 워크 플로를 사용하여 풀 요청을 만드는 것이 좋습니다.
 
-Note: <a href="https://git-scm.com/" class="external">Git</a> is the open source version control system (VCS) used to track changes to source code. <a href="https://github.com" class="external">GitHub</a> is an online service that provides collaboration tools that work with Git. See the <a href="https://help.github.com" class="external">GitHub Help</a> to set up your GitHub account and get started.
+참고 : <a href="https://git-scm.com/" class="external">Git</a> 은 소스 코드의 변경 사항을 추적하는 데 사용되는 오픈 소스 버전 제어 시스템 (VCS)입니다. <a href="https://github.com" class="external">GitHub</a> 는 Git에서 작동하는 협업 도구를 제공하는 온라인 서비스입니다. GitHub 계정을 설정하고 시작하려면 <a href="https://help.github.com" class="external">GitHub 도움말</a> 을 참조하십시오.
 
 The following Git steps are only required the first time you set up a local project.
 
 #### Fork the tensorflow/docs repo
 
-On the <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> GitHub page, click the *Fork* button <svg class="octicon octicon-repo-forked" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"></svg><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path> to create your own repo copy under your GitHub account. Once forked, you're responsible for keeping your repo copy up-to-date with the upstream TensorFlow repo.
+<a href="https://github.com/tensorflow/docs" class="external">tensorflow / docs</a> GitHub 페이지에서 *Fork* 버튼을 클릭합니다. <svg class="octicon octicon-repo-forked" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"></svg><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path> GitHub 계정에서 자신의 저장소 사본을 만들 수 있습니다. 분기 된 후에는 업스트림 TensorFlow 저장소를 사용하여 저장소 사본을 최신 상태로 유지할 책임이 있습니다.
 
 #### Clone your repo
 
-Download a copy of *your* remote <var>username</var>/docs repo to your local machine. This is the working directory where you will make changes:
+당신의 원격 리포지토리 <var>username</var>/docs 에서 당신의 로컬 기기로 다운로드 하십시오. 이 곳이 당신이 작얼할 디렉토리 입니다.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git clone git@github.com:&lt;var&gt;username&lt;/var&gt;/docs</code>
 <code class="devsite-terminal">cd ./docs</code>
 </pre>
 
-#### Add an upstream repo to keep up-to-date (optional)
+#### 최신 상태로 유지하려면 업스트림 리포지토리 추가 (선택 사항)
 
-To keep your local repository in sync with `tensorflow/docs`, add an *upstream* remote to download the latest changes.
+로컬 리포지토리를 `tensorflow/docs` 와 동기화 상태로 유지하려면 *업스트림* 원격을 추가하여 최신 변경 사항을 다운로드하세요.
 
-Note: Make sure to update your local repo *before* starting a contribution. Regular syncs to upstream reduce the chance of a <a href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line" class="external">merge conflict</a> when you submit your pull request.
+참고: 기여  *전에* 당신의 로컬 리포지토리 업데이트를 확인하십시오. 업스트림에 대한 정기적 싱크는 풀 요청시 <a href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line" class="external">merge conflict</a>를 줄여줍니다.
 
 Add a remote:
 
@@ -107,7 +107,7 @@ To update:
 
 #### 1. Create a new branch
 
-After you update your repo from `tensorflow/docs`, create a new branch from the local *master* branch:
+`tensorflow/docs` 에서 리포지토리를 업데이트 한 후 로컬 *마스터* 브랜치에서 새 브랜치를 만듭니다.
 
 <pre class="prettyprint lang-bsh">&lt;code class="devsite-terminal"&gt;git checkout -b &lt;var&gt;feature-name&lt;/var&gt;&lt;/code&gt;
 
@@ -118,7 +118,7 @@ After you update your repo from `tensorflow/docs`, create a new branch from the 
 
 #### 2. Make changes
 
-Edit files in your favorite editor and please follow the [TensorFlow documentation style guide](./docs_style.md).
+좋아하는 편집기에서 파일을 편집하고 [TensorFlow 문서 스타일 가이드](./docs_style.md) 를 따르세요.
 
 Commit your file change:
 
@@ -134,31 +134,31 @@ Add more commits, as necessary.
 
 #### 3. Create a pull request
 
-Upload your local branch to your remote GitHub repo (github.com/<var>username</var>/docs):
+로컬 브랜치를 원격 GitHub 저장소 (github.com/ <var>username</var> / docs)에 업로드합니다.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git push</code>
 </pre>
 
-After the push completes, a message may display a URL to automatically submit a pull request to the upstream repo. If not, go to the <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> repo—or your own repo—and GitHub will prompt you to create a pull request.
+push가 완료된 후, 업스트림 리포지토리에 대한 풀 요청을 자동 제출하는 URL 메세지가 보일것입니다. 그렇지 않다면 <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> 리포지토리 혹은 당신의 리포지토리, 깃허브는 당신에게 풀 요청을 해야한다는 것을 알려줄 것입니다.
 
 #### 4. Review
 
-Maintainers and other contributors will review your pull request. Please participate in the discussion and make the requested changes. When your pull request is approved, it will be merged into the upstream TensorFlow docs repo.
+유지 관리자 및 기타 기여자가 귀하의 풀 요청을 검토 할 것입니다. 토론에 참여하고 요청 된 사항을 변경하십시오. 풀 요청이 승인되면 업스트림 TensorFlow 문서 리포지토리에 병합됩니다.
 
 Success: Your changes have been accepted to the TensorFlow documentation.
 
-There is a separate publishing step to update [tensorflow.org](https://www.tensorflow.org) from the GitHub repo. Typically, changes are batched together and the site is updated on a regular cadence.
+GitHub 리포지토리에서 [tensorflow.org](https://www.tensorflow.org) 를 업데이트하는 별도의 게시 단계가 있습니다. 일반적으로 변경 사항은 일괄 처리되고 사이트는 정기적으로 업데이트됩니다.
 
 ## Interactive notebooks
 
-While it's possible to edit the notebook JSON file with GitHub's <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">web-based file editor</a>, it's not recommended since malformed JSON can corrupt the file. Make sure to test the notebook before submitting a pull request.
+GitHub의 <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">웹 기반 파일 편집기를 사용</a> 하여 노트북 JSON 파일을 편집 할 수 있지만 잘못된 JSON으로 인해 파일이 손상 될 수 있으므로 권장하지 않습니다. 풀 요청을 제출하기 전에 노트북을 테스트해야합니다.
 
-<a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a> is a hosted notebook environment that makes it easy to edit—and run—notebook documentation. Notebooks in GitHub are loaded in Google Colab by passing the path to the Colab URL, for example, the notebook located in GitHub here: <a href="https://github.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">https://github.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a><br> can be loaded into Google Colab at this URL: <a href="https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a>
+<a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory</a>  작성과 실행이 편한 는 노트북 환경을 만들었습니다. 노트북의 GitHub는 다음의 Colab URL을 통해 노트북에 로딩됩니다.<a href="https://github.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">https://github.com/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a><br> can be loaded into Google Colab at this URL: <a href="https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb">https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/classification.ipynb</a>
 
 <!-- github.com path intentionally formatted to hide from import script. -->
 
-There is an <a href="https://chrome.google.com/webstore/detail/open-in-colab/iogfkhleblhcpcekbiedikdehleodpjo" class="external">Open in Colab</a> Chrome extension that performs this URL substitution when browsing a notebook on GitHub. This is useful when opening a notebook in your repo fork, because the top buttons always link to the TensorFlow Docs `master` branch.
+GitHub에서 노트북을 검색 할 때이 URL 대체를 수행하는 <a href="https://chrome.google.com/webstore/detail/open-in-colab/iogfkhleblhcpcekbiedikdehleodpjo" class="external">Open in Colab</a> Chrome 확장 프로그램이 있습니다. 상단 버튼은 항상 TensorFlow Docs `master` 브랜치에 연결되므로 저장소 포크에서 노트북을 열 때 유용합니다.
 
 ### Notebook formatting
 
@@ -197,12 +197,12 @@ Instead of downloading a notebook file and using a local Git workflow, you can e
 
 Success: Your changes have been accepted to the TensorFlow documentation.
 
-## Translations
+## 번역
 
-The TensorFlow team works with the community and vendors to provide translations for tensorflow.org. Translations of notebooks and other technical content are located in the <a class="external" href="https://github.com/tensorflow/docs-l10n">tensorflow/docs-l10n</a> GitHub repo. Please submit pull requests through the <a class="external" href="https://gitlocalize.com/tensorflow/docs-l10n">TensorFlow GitLocalize project</a>.
+TensorFlow 팀은 tensorflow.org에 대한 번역을 제공하기위해 커뮤니티나 업체와 함께합니다. 노트북에 대한 번역이나 다른 기술적인 내용은 <a class="external" href="https://github.com/tensorflow/docs-l10n">tensorflow/docs-l10n</a> GitHub 리포지토리에 있습니다. <a class="external" href="https://gitlocalize.com/tensorflow/docs-l10n">TensorFlow GitLocalize project</a>를 통해 풀 요청을 제출하시기 바랍니다.
 
-The English docs are the *source-of-truth* and translations should follow these guides as close as possible. That said, translations are written for the communities they serve. If the English terminology, phrasing, style, or tone does not translate to another language, please use a translation appropriate for the reader.
+영어 문서는 *source-of-truth*이며 번역된 문서는 가이드를 따라 최대한 가깝게 작성되어야 합니다. 즉, 번역은 텐서플로우를 사용하는 커뮤니티를 위해 작성되어야 합니다. 만약 영어의 술어, 문단, 스타일, 톤이 다른 언어로 바뀌지 않는다면 읽는 이 에게 적절하도록 번역을 해야합니다.
 
-Language support is determined by a number of factors including—but not limited to—site metrics and demand, community support, <a class="external" href="https://en.wikipedia.org/wiki/EF_English_Proficiency_Index">English proficiency</a>, audience preference, and other indicators. Since each supported language incurs a cost, unmaintained languages are removed. Support for new languages will be announced on the <a class="external" href="https://blog.tensorflow.org/">TensorFlow blog</a> or <a class="external" href="https://twitter.com/TensorFlow">Twitter</a>.
+언어 지원은 사이트 지표 및 수요, 커뮤니티 지원, <a class="external" href="https://en.wikipedia.org/wiki/EF_English_Proficiency_Index">영어 능력</a> , 청중 선호도 및 기타 지표를 포함하되 이에 국한되지 않는 여러 요인에 의해 결정됩니다. 지원되는 각 언어에는 비용이 발생하므로 관리되지 않는 언어는 제거됩니다. 새로운 언어에 대한 지원은 <a class="external" href="https://blog.tensorflow.org/">TensorFlow 블로그</a> 또는 <a class="external" href="https://twitter.com/TensorFlow">Twitter</a> 에서 발표됩니다.
 
-If your preferred language is not supported, you are welcome to maintain a community fork for open source contributors. These are not published to tensorflow.org.
+선호하는 언어가 지원되지 않는 경우 오픈 소스 기여자를위한 커뮤니티 포크를 유지하는 것을 환영합니다. 이들은 tensorflow.org에 게시되지 않습니다.
