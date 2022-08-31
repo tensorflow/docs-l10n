@@ -175,7 +175,7 @@ dependencies {
 
 #### 3단계: C 헤더를 포함합니다.
 
-- The header file "hexagon_delegate.h" can be downloaded from [GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/hexagon_delegate.h) or extracted from the Hexagon delegate AAR.
+- 헤더 파일 "hexagon_delegate.h"는 [GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/hexagon_delegate.h)에서 다운로드하거나 Hexagon delegate AAR에서 추출할 수 있습니다.
 
 #### 4단계: 대리자를 생성하고 TensorFlow Lite 인터프리터를 초기화합니다.
 
@@ -222,7 +222,7 @@ TfLiteHexagonTearDown();  // Needed once at end of app/DSP usage.
 ## 자주하는 질문
 
 - 대리자는 어떤 연산을 지원하나요?
-    - See the current list of [supported ops and constraints](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)
+    - 현재 [지원되는 연산 및 제약 조건](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md) 목록을 참조하세요.
 - 대리자를 활성화할 때 모델이 DSP를 사용하고 있음을 어떻게 알 수 있습니까?
     - 대리자를 활성화하면 두 개의 로그 메시지가 출력됩니다. 하나는 대리자가 생성되었는지 여부를 나타내고 다른 하나는 대리자를 사용하여 실행 중인 노드 수를 나타냅니다. <br> `Created TensorFlow Lite delegate for Hexagon.` <br> `Hexagon delegate: X nodes delegated out of Y nodes.`
 - 대리자를 실행하려면 모델의 모든 연산이 지원되어야 합니까?
