@@ -4,8 +4,7 @@
 
 예를 들어, 이 <a href="#get_started">예제 애플리케이션</a> 스크린샷은 두 객체가 인식되고 해당 위치에 주석이 추가되는 방식을 보여줍니다.
 
-
-<img src="images/android_apple_banana.png" alt="Screenshot of Android example" width="30%">
+<img src="../images/detection.png" class="attempt-right">
 
 참고: (1) 기존 모델을 통합하려면 [TensorFlow Lite 작업 라이브러리](https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector)를 사용해 보세요. (2) 모델을 사용자 지정하려면 [TensorFlow Lite 모델 제작기](https://www.tensorflow.org/lite/guide/model_maker)를 사용해 보세요.
 
@@ -69,25 +68,25 @@ Android에서 이 사전 처리를 수행하는 방법을 이해하려면 [예�
 <table>
   <thead>
     <tr>
-      <th>Index</th>
-      <th>Name</th>
+      <th>인덱스</th>
+      <th>이름</th>
       <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>0</td>
-      <td>Locations</td>
+      <td>위치</td>
       <td>0과 1 사이의 [N][4] 부동 소수점 값의 다차원 배열, [상단, 좌측, 하단, 우측] 형식의 경계 상자를 나타내는 내부 배열</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>Classes</td>
+      <td>클래스</td>
       <td>레이블 파일에서 클래스 레이블의 인덱스를 각각 나타내는 N개의 정수 배열(부동 소수점 값으로 출력)</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>Scores</td>
+      <td>점수</td>
       <td>클래스가 감지될 확률을 나타내는 0과 1 사이의 N개의 부동 소수점 값 배열</td>
     </tr>
     <tr>
@@ -106,40 +105,40 @@ Android에서 이 사전 처리를 수행하는 방법을 이해하려면 [예�
   <thead>
     <tr>
       <th>클래스</th>
-      <th>Score</th>
-      <th>Location</th>
+      <th>점수</th>
+      <th>위치</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Apple</td>
+      <td>사과</td>
       <td>0.92</td>
       <td>[18, 21, 57, 63]</td>
     </tr>
     <tr>
-      <td>Banana</td>
+      <td>바나나</td>
       <td>0.88</td>
       <td>[100, 30, 180, 150]</td>
     </tr>
     <tr>
-      <td>Strawberry</td>
+      <td>딸기</td>
       <td>0.87</td>
-      <td>[7, 82, 89, 163] </td>
+      <td>[7, 82, 89, 163]</td>
     </tr>
     <tr>
-      <td>Banana</td>
+      <td>바나나</td>
       <td>0.23</td>
       <td>[42, 66, 57, 83]</td>
     </tr>
     <tr>
-      <td>Apple</td>
+      <td>사과</td>
       <td>0.11</td>
       <td>[6, 42, 31, 58]</td>
     </tr>
   </tbody>
 </table>
 
-#### Confidence score
+#### 신뢰도 점수
 
 출력된 결과를 해석하기 위해 감지된 각 객체의 점수와 위치를 볼 수 있습니다. 점수는 0에서 1 사이의 숫자로 객체가 실제로 감지되었다는 확신을 나타냅니다. 숫자가 1에 가까울수록 모델의 신뢰도가 높아집니다.
 
@@ -149,33 +148,33 @@ Android에서 이 사전 처리를 수행하는 방법을 이해하려면 [예�
   <thead>
     <tr>
       <th>클래스</th>
-      <th>Score</th>
-      <th>Location</th>
+      <th>점수</th>
+      <th>위치</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Apple</td>
+      <td>사과</td>
       <td>0.92</td>
       <td>[18, 21, 57, 63]</td>
     </tr>
     <tr>
-      <td>Banana</td>
+      <td>바나나</td>
       <td>0.88</td>
       <td>[100, 30, 180, 150]</td>
     </tr>
     <tr>
-      <td>Strawberry</td>
+      <td>딸기</td>
       <td>0.87</td>
-      <td>[7, 82, 89, 163] </td>
+      <td>[7, 82, 89, 163]</td>
     </tr>
     <tr>
-      <td style="background-color: #e9cecc; text-decoration-line: line-through;">Banana</td>
+      <td style="background-color: #e9cecc; text-decoration-line: line-through;">바나나</td>
       <td style="background-color: #e9cecc; text-decoration-line: line-through;">0.23</td>
       <td style="background-color: #e9cecc; text-decoration-line: line-through;">[42, 66, 57, 83]</td>
     </tr>
     <tr>
-      <td style="background-color: #e9cecc; text-decoration-line: line-through;">Apple</td>
+      <td style="background-color: #e9cecc; text-decoration-line: line-through;">사과</td>
       <td style="background-color: #e9cecc; text-decoration-line: line-through;">0.11</td>
       <td style="background-color: #e9cecc; text-decoration-line: line-through;">[6, 42, 31, 58]</td>
     </tr>
@@ -186,10 +185,9 @@ Android에서 이 사전 처리를 수행하는 방법을 이해하려면 [예�
 
 예를 들어, 다음 이미지에서 배(모델이 감지하도록 훈련된 객체가 아님)는 '사람'으로 잘못 식별되었습니다. 이는 적절한 컷오프를 선택하여 무시할 수 있는 거짓양성의 예입니다. 이 경우 0.6(또는 60%)의 컷오프는 거짓양성을 수월하게 배제합니다.
 
+<img src="images/android_apple_banana.png" alt="Android 예시 스크린 샷" width="30%">
 
-<img src="images/false_positive.png" alt="Screenshot of Android example showing a false positive" width="30%">
-
-#### Location
+#### 위치
 
 감지된 각 객체에 대해 모델은 위치를 둘러싸는 경계 사각형을 나타내는 4개의 숫자 배열을 반환합니다. 제공된 스타터 모델의 경우 숫자는 다음과 같이 주문됩니다.
 
@@ -197,7 +195,7 @@ Android에서 이 사전 처리를 수행하는 방법을 이해하려면 [예�
   <tbody>
     <tr style="border-top: none;">
       <td>[</td>
-      <td>top,</td>
+      <td>상단,</td>
       <td>좌측,</td>
       <td>하단,</td>
       <td>우측</td>
@@ -217,7 +215,7 @@ Android에서 이 사전 처리를 수행하는 방법을 이해하려면 [예�
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>모델명</th>
       <th>모델 크기</th>
       <th>기기</th>
       <th>GPU</th>
@@ -230,17 +228,17 @@ Android에서 이 사전 처리를 수행하는 방법을 이해하려면 [예�
     <td rowspan="3">       27Mb</td>
     <td>Pixel 3(Android 10)</td>
     <td>22ms</td>
-    <td>46ms*</td>
+    <td>46ms *</td>
   </tr>
    <tr>
      <td>Pixel 4(Android 10)</td>
     <td>20ms</td>
-    <td>29ms*</td>
+    <td>29ms *</td>
   </tr>
    <tr>
      <td>iPhone XS(iOS 12.4.1)</td>
      <td>7.6ms</td>
-    <td>11ms** </td>
+    <td>11ms **</td>
   </tr>
 </table>
 
