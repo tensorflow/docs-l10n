@@ -26,13 +26,13 @@ TensorFlow の連合学習データセットは、連合学習で解決できる
 
 データセットには以下が含まれています。
 
-- [**StackOverflow**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data)言語モデリングや教師あり学習タスク用の現実的なテキストデータセット。342,477人のユニークユーザーがトレーニングセットで135,818,730例（センテンス）を使用します。
+- [**StackOverflow**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data) A realistic text dataset for language modeling or supervised learning tasks, with 342,477 unique users with 135,818,730 examples (sentences) in the training set.
 
 - [**Federated EMNIST**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/emnist/load_data)各クライアントが異なるライターに対応する、EMNIST文字と数字のデータセットの連合前処理。完全なトレインセットには、62のラベルからの671,585の例を持つ3400人のユーザーが含まれています。
 
 - [**Shakespeare**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/shakespeare/load_data)ウィリアムシェイクスピアの全作品に基づいた、文字レベルの小さなテキストデータセット。 データセットは715人のユーザー（シェイクスピア劇のキャラクター）で構成されます。各例は、特定の劇のキャラクターが話す連続した一連の行に対応しています。
 
-- [**CIFAR-100**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)500のトレーニングクライアントと100のテストクライアントにわたるCIFAR-100データセットの連合パーティション。各クライアントには100のユニークな例があります。 パーティションは、クライアント間でより現実的な異質性を作成する方法で行われます。 詳細については、[API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)をご覧ください。
+- [**CIFAR-100**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data) A federated partitioning of the CIFAR-100 dataset across 500 training clients and 100 test clients. Each client has 100 unique examples. The partitioning is done in a way to create more realistic heterogeneity between clients. For more details, see the [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data).
 
 - [**Google Landmark v2 データセット。**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data) データセットにはさまざまな世界的名所の写真で構成されており、データの連合パーティションを得られるよう、画像は写真家ごとにグループ化されています。データベースには、233 件のクライアントと 23080 枚の画像が含まれる小さいデータセットと、1262 件のクライアントと 164172 枚の画像が含まれる大きなデータセットの 2 種類があります。
 
@@ -42,7 +42,7 @@ TensorFlow の連合学習データセットは、連合学習で解決できる
 
 ## 高性能シミュレーション
 
-FL *シミュレーション*の実時間は、アルゴリズムを評価するための適切な指標ではありませんが（シミュレーションハードウェアは実際のフェデレーテッドラーニングデプロイメント環境を表していないため）、フェデレーテッドラーニングシミュレーションをすばやく実行できることは、研究の生産性にとって重要です。そのため、TFF は単一および複数のマシンで高性能なランタイムを提供するために多額の投資を行ってきました。現在、ドキュメントは開発中ですが、[「TFF を使用した高性能シミュレーション」](https://www.tensorflow.org/federated/tutorials/simulations)チュートリアルと[ GCP で TFF を使用したシミュレーションを設定する](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators)手順をご覧ください。高性能 TFF ランタイムはデフォルトで有効になっています。
+FL *シミュレーション*の実時間は、アルゴリズムを評価するための適切な指標ではありませんが（シミュレーションハードウェアは実際の連合学習デプロイメント環境を表していないため）、連合学習シミュレーションをすばやく実行できることは、研究の生産性にとって重要です。そのため、TFF は単一および複数のマシンで高性能なランタイムを提供するために多額の投資を行ってきました。現在、ドキュメントは開発中ですが、[Kubernetes を使用した高性能シミュレーション](https://www.tensorflow.org/federated/tutorials/high_performance_simulation_with_kubernetes)チュートリアルと [TFF を使用した高性能シミュレーション](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators)、[ GCP で TFF を使用したシミュレーションを設定する](https://www.tensorflow.org/federated/gcp_setup)手順を参照してください。高性能 TFF ランタイムはデフォルトで有効になっています。
 
 ## さまざまな研究分野の TFF
 
@@ -54,15 +54,11 @@ TFF を利用すると指定するカスタマイズレベルに応じて連合�
 
 Federated Averaging のより一般的な実装は、[こちら](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/algorithms/fed_avg.py)にあります。この実装により、サーバーとクライアントの両方でさまざまなオプティマイザを使用するなど、より高度な最適化手法を適用することができます。連合 k-平均クラスタリングなどの他の連合学習アルゴリズムは[こちら](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/algorithms/)をご覧ください。
 
-### モデルと圧縮の更新
+### モデル更新の圧縮
 
-TFF は[ tensor_encoding ](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/internal/tensor_encoding) API を使用して非可逆圧縮アルゴリズムを有効にし、サーバーとクライアント間の通信コストを削減します。サーバーからクライアントおよびクライアントからサーバーへの [Federated Averaging](https://arxiv.org/abs/1812.07210) アルゴリズムを使用した圧縮のトレーニング例については、[この実験](https://github.com/tensorflow/federated/blob/master/tensorflow_federated/python/research/compression/run_experiment.py)をご覧ください。
+モデル更新の非可逆圧縮は、通信コストの削減につながり、全体的なトレーニング時間の短縮につながる可能性があります。
 
-カスタム圧縮アルゴリズムを実装してトレーニングループに適用するには、次の手順に従います。
-
-1. 新しい圧縮アルゴリズムを[ `EncodingStageInterface ` ](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L75)のサブクラスとして実装します。または、[この例](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/encoding_stage.py#L274)のようにより一般的なバリアント<a><code>AdaptiveEncodingStageInterface</code></a>として実装します。
-2. 新しい[ `Encoder` ](https://github.com/tensorflow/model-optimization/blob/master/tensorflow_model_optimization/python/core/internal/tensor_encoding/core/core_encoder.py#L38)を作成し、[モデルブロードキャスト](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L118)または[モデル更新の平均化](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L144)に特化します。
-3. これらのオブジェクトを使用して、[トレーニング計算全体](https://github.com/google-research/federated/blob/master/compression/run_experiment.py#L247)を構築します。
+最近の[論文](https://arxiv.org/abs/2201.02664)を再現するには、[この研究プロジェクト](https://github.com/google-research/federated/tree/master/compressed_communication)を参照してください。 カスタム圧縮アルゴリズムを実装するには、ベースラインの例としてプロジェクトの[ Comparison_methods ](https://github.com/google-research/federated/tree/master/compressed_communication/aggregators/comparison_methods)を参照してください。まだ慣れていない場合は、[TFF Aggregators チュートリアル](https://www.tensorflow.org/federated/tutorials/custom_aggregators)を参照してください。
 
 ### 差別的なプライバシー
 
