@@ -1,20 +1,25 @@
-# 質問と回答
+# BERT Question and Answer
 
-事前トレーニング済みモデルを使用して、与えられたパッセージの内容に基づいて質問に答えます。
+Use a TensorFlow Lite model to answer questions based on the content of a given passage.
+
+Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/bert_question_answerer). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/question_answer).
 
 ## はじめに
+
 
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
 TensorFlow Lite を初めて使用する場合、Android または iOS を使用する場合は、以下のサンプルアプリをご覧ください。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android の例</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/ios">iOS
+example</a>
 
 Android または iOS 以外のプラットフォームを使用する場合、または、すでに [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite) に精通している場合は、質問と回答スターターモデルをダウンロードしてください。
 
-<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">スターターモデルと語彙をダウンロードする</a>
+スターターモデルと語彙をダウンロードする
 
-メタデータと関連フィールド (`vocab.txt`など) の詳細については、「<a href="https://www.tensorflow.org/lite/convert/metadata#read_the_metadata_from_models">モデルからメタデータを読み取る</a>」をご覧ください。
+For more information about metadata and associated fields (e.g. `vocab.txt`) see <a href="https://www.tensorflow.org/lite/models/convert/metadata#read_the_metadata_from_models">Read the metadata from models</a>.
 
 ## 使い方
 
@@ -30,7 +35,7 @@ Android または iOS 以外のプラットフォームを使用する場合、�
 
 ## パフォーマンスベンチマーク
 
-パフォーマンスベンチマークの数値は、[ここで説明する](https://www.tensorflow.org/lite/performance/benchmarks)ツールで生成されています。
+パフォーマンスベンチマークの数値は、[ここで説明する](https://www.tensorflow.org/lite/performance/benchmarks)ツールで生成されます。
 
 <table>
   <thead>
@@ -42,8 +47,10 @@ Android または iOS 以外のプラットフォームを使用する場合、�
     </tr>
   </thead>
   <tr>
-    <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/bert_qa/mobilebert_qa_vocab.zip">Mobile Bert</a></td>
-    <td rowspan="3">       100.5 Mb</td>
+    <td rowspan="3">
+      <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a>
+    </td>
+    <td rowspan="3">       100.5 Mb     </td>
     <td>Pixel 3 (Android 10)</td>
     <td>123ms*</td>
   </tr>
@@ -57,7 +64,7 @@ Android または iOS 以外のプラットフォームを使用する場合、�
   </tr>
 </table>
 
-* 4 つのスレッドを使用。
+* 4 threads used.
 
 ** 最高のパフォーマンス結果を得るために、iPhone では 2 つのスレッドを使用。
 
@@ -65,8 +72,9 @@ Android または iOS 以外のプラットフォームを使用する場合、�
 
 ### パッセージ (入力)
 
-> Google LLC は、オンライン広告技術、検索エンジン、クラウドコンピューティング、ソフトウェア、ハードウェアなど、インターネット関連のサービスと製品を専門とするアメリカの多国籍テクノロジー企業です。アマゾン、アップル、フェイスブックと並んで、4 大テクノロジー企業の 1 つと見なされています。
-> 当時カリフォルニア州のスタンフォード大学の博士課程に在籍していたラリー・ペイジとサーゲイ・ブリンにより設立されました。現在でも  2 人 合わせて約 14% の株を保有し、スーパー投票株を通じて株主投票権の 56% を制御しています。Google は 1998 年 9 月 4 日にカリフォルニア州でカリフォルニアの非公開会社として設立されました。その後、Google は 2002 年 10 月 22 日にデラウェア州で再度法人として設立されました。2004 年 8 月 19 日に株式公開 (IPO) が行われ、Google は Googleplex と呼ばれるカリフォルニア州マウンテンビューの本社に移転しました。2015 年 8 月、Google は Alphabet Inc と呼ばれるコングロマリットとしてさまざまな事業を再編成する計画を発表しました。Google は Alphabet 社の主要な子会社として、引き続きインターネット関係の事業に包括的に取り組みます。 ラリー・ペイジの後任としてスンダー・ピチャイが新 CEO に就任し、ラリー・ペイジは Alphabet の CEO に着任しました。
+> Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. It is considered one of the Big Four technology companies, alongside Amazon, Apple, and Facebook.
+>
+> Google was founded in September 1998 by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University in California. Together they own about 14 percent of its shares and control 56 percent of the stockholder voting power through supervoting stock. They incorporated Google as a California privately held company on September 4, 1998, in California. Google was then reincorporated in Delaware on October 22, 2002. An initial public offering (IPO) took place on August 19, 2004, and Google moved to its headquarters in Mountain View, California, nicknamed the Googleplex. In August 2015, Google announced plans to reorganize its various interests as a conglomerate called Alphabet Inc. Google is Alphabet's leading subsidiary and will continue to be the umbrella company for Alphabet's Internet interests. Sundar Pichai was appointed CEO of Google, replacing Larry Page who became the CEO of Alphabet.
 
 ### 質問 (入力)
 
@@ -78,5 +86,5 @@ Android または iOS 以外のプラットフォームを使用する場合、�
 
 ## BERT の詳細を読む
 
-- 学術論文: [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (自然言語処理のための Transformer を用いたディープ双方向型事前トレーニング)](https://arxiv.org/abs/1810.04805)
-- [BERT のオープンソース実装](https://github.com/google-research/bert)
+- Academic paper: [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)
+- [Open-source implementation of BERT](https://github.com/google-research/bert)
