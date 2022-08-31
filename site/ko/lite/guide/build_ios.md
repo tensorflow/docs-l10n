@@ -35,7 +35,7 @@ Bazel은 TensorFlow의 기본 빌드 시스템입니다. [Bazel 웹 사이트의
 Bazel이 iOS 지원으로 올바르게 구성되면 다음 명령을 사용하여 `TensorFlowLiteC` 프레임워크를 빌드할 수 있습니다.
 
 ```sh
-bazel build --config=ios_fat -c opt \
+bazel build --config=ios_fat -c opt --cxxopt=--std=c++17 \
   //tensorflow/lite/ios:TensorFlowLiteC_framework
 ```
 
@@ -46,7 +46,7 @@ bazel build --config=ios_fat -c opt \
 기본적으로 Cocoapods를 통해서만 동적 프레임워크를 배포합니다. 대신 정적 프레임워크를 사용하려는 경우 다음 명령으로 `TensorFlowLiteC` 정적 프레임워크를 빌드할 수 있습니다.
 
 ```
-bazel build --config=ios_fat -c opt \
+bazel build --config=ios_fat -c opt --cxxopt=--std=c++17 \
   //tensorflow/lite/ios:TensorFlowLiteC_static_framework
 ```
 
