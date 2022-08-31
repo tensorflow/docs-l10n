@@ -20,7 +20,7 @@ TensorFlow Lite에는 GPU, DSP, EdgeTPU 및 Android NNAPI와 같은 프레임워
 - 알려진 시나리오에 대한 런타임을 개선하는 사용자 지정 하드웨어 가속기가 있습니다.
 - 특정 모델의 속도를 높일 수 있는 CPU 최적화(예: 연산자 융합)를 개발 중입니다.
 
-## How do delegates work?
+## 대리자는 어떻게 동작합니까?
 
 다음과 같은 간단한 모델 그래프와 Conv2D 및 Mean 작업을 더 빠르게 구현하는 대리자 "MyDelegate"를 고려합니다.
 
@@ -430,7 +430,7 @@ cc_binary(
 
 *외부 대리자*는 <a>여기</a>에 표시된 것처럼 Tensorflow Lite Python 바인딩에서 해당 <em>대리자</em>의 C++ 구현이라는 점에 주목할 필요가 있습니다. 따라서 여기에서 만든 동적 외부 대리자 어댑터 라이브러리를 Tensorflow Lite Python API와 함께 직접 사용할 수 있습니다.
 
-## Resources
+## 리소스
 
 ### 야간 사전 구축 TFLite 도구 바이너리에 대한 링크 다운로드
 
