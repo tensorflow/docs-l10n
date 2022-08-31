@@ -101,11 +101,11 @@ GPU 대리자를 사용할 코드를 활성화하려면 `CameraExampleViewContro
 
 4단계에서 디버그 모드로 실행하는 동안 성능을 향상하려면 적절한 최적의 Metal 설정을 사용하여 릴리스 빌드로 변경해야 합니다. 특히 해당 설정을 편집하려면 `Product> Scheme> Edit Scheme...`으로 이동합니다. `Run`을 선택합니다. `Info` 탭에서 `Build Configuration`을 `Debug`에서 `Release`로 변경하고 `Debug executable`을 선택 취소합니다.
 
-![금속 옵션 설정](images/iosmetal.png)
+![금속 옵션 설정](images/iosdebug.png)
 
 그런 다음 `Options` 탭을 클릭하고 `GPU Frame Capture`를 `Disabled`로 변경하고 `Metal API Validation`을 `Disabled`로 바꿉니다.
 
-![릴리스 설정](images/iosdebug.png)
+![릴리스 설정](images/iosmetal.png)
 
 마지막으로 64bit 아키텍처에서 릴리스 전용 빌드를 선택해야 합니다. `Project navigator -> tflite_camera_example -> PROJECT -> tflite_camera_example -> Build Settings`에서 `Build Active Architecture Only > Release`를 Yes로 설정합니다.
 
@@ -278,15 +278,15 @@ GPU 대리자를 사용할 코드를 활성화하려면 `CameraExampleViewContro
 릴리스된 GPU 대리자에 백엔드에서 실행할 수 있는 몇 가지 모델이 포함되었습니다.
 
 - [MobileNet v1(224x224) 이미지 분류](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobilenet_v1_1.0_224.tflite) <br><i>(모바일 및 임베디드 기반 비전 애플리케이션을 위해 설계된 이미지 분류 모델)</i>
-- [DeepLab 분할(257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite) <br><i>(입력 이미지의 모든 픽셀에 의미론적 레이블(예: 개, 고양이, 자동차)을 할당하는 이미지 분할 모델)</i>
-- [MobileNet SSD 개체 감지](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br><i>(경계 상자가 있는 여러 개체를 감지하는 이미지 분류 모델)</i>
-- [포즈 추정을 위한 PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br><i>(이미지 또는 동영상에서 사람의 포즈를 추정하는 비전 모델)</i>
+- [DeepLab segmentation (257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite)<br><i>(image segmentation model that assigns semantic labels (e.g., dog, cat, car) to every pixel in the input image)</i>
+-  [MobileNet SSD 객체 감지](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br><i>(경계 상자가 있는 여러 객체를 감지하는 이미지 분류 모델)</i>
+-  [포즈 추정을 위한 PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br><i>(이미지 또는 비디오에서 사람의 포즈를 추정하는 비전 모델)</i>
 
 지원되는 연산의 전체 목록을 보려면 [고급 설명서](gpu_advanced.md)를 참조하세요.
 
 ## 지원되지 않는 모델 및 작업
 
-일부 작업이 GPU 대리자에서 지원되지 않는 경우 프레임워크는 GPU에서 그래프의 일부만 실행하고 CPU에서 나머지 부분을 실행합니다. CPU/GPU 동기화 비용이 높기 때문에 이와 같은 분할 실행 모드는 전체 네트워크가 CPU에서만 실행될 때보다 성능이 저하되는 경우가 많습니다. 이 경우 사용자는 다음과 같은 경고를 받게 됩니다.
+If some of the ops are not supported by the GPU delegate, the framework will only run a part of the graph on the GPU and the remaining part on the CPU. Due to the high cost of CPU/GPU synchronization, a split execution mode like this will often result in slower performance than when the whole network is run on the CPU alone. In this case, the user will get a warning like:
 
 ```none
 WARNING: op code #42 cannot be handled by this delegate.
@@ -294,11 +294,11 @@ WARNING: op code #42 cannot be handled by this delegate.
 
 실패에 대한 콜백이 제공되지 않았습니다. 이 실패는 진정한 런타임 실패가 아니기 때문에 개발자가 대리자에서 네트워크를 실행하는 동안 관찰할 수 있습니다.
 
-## 최적화를 위한 팁
+## Tips for optimization
 
 ### 모바일 장치를 위한 최적화
 
-<br>CPU에서는 사소한 작업이 모바일 장치의 GPU에서는 높은 비용을 지급해야 하는 작업일 수 있습니다. `BATCH_TO_SPACE`, `SPACE_TO_BATCH`, `SPACE_TO_DEPTH` 등의 형상 변경 작업은 실행 비용이 많이 듭니다. 형상 변경 작업의 사용을 자세히 조사하고 데이터 탐색이나 초기에 모델을 반복하는 작업에만 적용되었을 수 있음을 고려해야 합니다. 형상 변경 작업을 제거하면 성능이 크게 향상될 수 있습니다.
+<br>CPU에서는 사소한 작업이 모바일 장치의 GPU에서는 높은 비용을 지급해야 하는 작업일 수 있습니다. `BATCH_TO_SPACE`, `SPACE_TO_BATCH`, <code>SPACE_TO_DEPTH</code> 등의 형상 변경 작업은 실행 비용이 많이 듭니다. 형상 변경 작업의 사용을 자세히 조사하고 데이터 탐색이나 초기에 모델을 반복하는 작업에만 적용되었을 수 있음을 고려해야 합니다. 형상 변경 작업을 제거하면 성능이 크게 향상될 수 있습니다.
 
 GPU에서 텐서 데이터는 4채널로 분할됩니다. 따라서 `[B,H,W,5]` 형상의 텐서에 대한 계산은 `[B,H,W,8]` 형상의 텐서에 대한 계산과 거의 동일하게 수행되지만 `[B,H,W,4]`에 대한 계산보다 훨씬 좋지 않습니다. 그런 의미에서 카메라 하드웨어가 RGBA의 이미지 프레임을 지원하는 경우 메모리 복사(3채널 RGB에서 4채널 RGBX로)를 피할 수 있으므로 해당 4채널 입력을 공급하는 것이 훨씬 더 빠릅니다.
 
