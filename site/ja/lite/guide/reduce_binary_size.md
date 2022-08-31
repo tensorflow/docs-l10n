@@ -32,8 +32,7 @@
     <td>tensorflow-lite.aar (382,892 バイト)</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a>
-</td>
+    <td rowspan="2">       <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a> </td>
     <td rowspan="2">音声のピッチ抽出</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar (375,813 bytes)<br>tensorflow-lite-select-tf-ops.aar (1,676,380 バイト)</td>
@@ -43,8 +42,7 @@
     <td>tensorflow-lite.aar (421,826 bytes)<br>tensorflow-lite-select-tf-ops.aar (2,298,630 バイト)</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a>
-</td>
+    <td rowspan="2">       <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a> </td>
     <td rowspan="2">動画分類</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar (240,085 bytes)<br>tensorflow-lite-select-tf-ops.aar (1,708,597 バイト)</td>
@@ -59,7 +57,7 @@
 
 ## Bazel を使用して TensorFlow Lite を選択的に構築する
 
-このセクションでは、TensorFlow ソースコードをダウンロードし、Bazel に[ローカル開発環境をセットアップ](https://www.tensorflow.org/lite/guide/android#build_tensorflow_lite_locally)していることを前提としています。
+このセクションでは、TensorFlow ソースコードをダウンロードし、Bazel に[ローカル開発環境をセットアップ](https://www.tensorflow.org/lite/android/lite_build#set_up_build_environment_without_docker)していることを前提としています。
 
 ### Android プロジェクトの AAR ファイルを構築する
 
@@ -219,14 +217,14 @@ tflite_cc_shared_object(
 新たに追加されたターゲットは、以下のようにして構築できます。
 
 ```sh
-bazel build -c opt --cxxopt=--std=c++14 \
+bazel build -c opt --cxxopt=--std=c++17 \
   //tmp:tensorflowlite_c
 ```
 
 また、Android については以下のようにします（64 ビットの場合は、`android_arm` を `android_arm64` に置き換えます）。
 
 ```sh
-bazel build -c opt --cxxopt=--std=c++14 --config=android_arm \
+bazel build -c opt --cxxopt=--std=c++17 --config=android_arm \
   //tmp:tensorflowlite_c
 ```
 
@@ -282,14 +280,14 @@ tflite_cc_shared_object(
 新たに追加されたターゲットは、以下のようにして構築できます。
 
 ```sh
-bazel build -c opt  --cxxopt=--std=c++14 \
+bazel build -c opt  --cxxopt=--std=c++17 \
   //tmp:tensorflowlite
 ```
 
 また、Android については以下のようにします（64 ビットの場合は、`android_arm` を `android_arm64` に置き換えます）。
 
 ```sh
-bazel build -c opt --cxxopt=--std=c++14 --config=android_arm \
+bazel build -c opt --cxxopt=--std=c++17 --config=android_arm \
   //tmp:tensorflowlite
 ```
 
@@ -319,7 +317,7 @@ tflite_flex_shared_library(
 新たに追加されたターゲットは、以下のようにして構築できます。
 
 ```sh
-bazel build -c opt --cxxopt='--std=c++14' \
+bazel build -c opt --cxxopt='--std=c++17' \
       --config=monolithic \
       --host_crosstool_top=@bazel_tools//tools/cpp:toolchain \
       //tmp:tensorflowlite_flex
@@ -328,7 +326,7 @@ bazel build -c opt --cxxopt='--std=c++14' \
 また、Android については以下のようにします（64 ビットの場合は、`android_arm` を `android_arm64` に置き換えます）。
 
 ```sh
-bazel build -c opt --cxxopt='--std=c++14' \
+bazel build -c opt --cxxopt='--std=c++17' \
       --config=android_arm \
       --config=monolithic \
       --host_crosstool_top=@bazel_tools//tools/cpp:toolchain \
@@ -337,7 +335,7 @@ bazel build -c opt --cxxopt='--std=c++14' \
 
 ## Docker を使用して TensorFlow Lite を選択的に構築する
 
-このセクションでは、ローカルマシンに [Docker](https://docs.docker.com/get-docker/) をインストールし、[こちら](https://www.tensorflow.org/lite/guide/build_android#set_up_build_environment_using_docker)の TensorFlow Lite Docker ファイルをダウンロードしていることを前提としています。
+このセクションでは、ローカルマシンに [Docker](https://docs.docker.com/get-docker/) をインストールし、[こちら](https://www.tensorflow.org/lite/android/lite_build#set_up_build_environment_using_docker)の TensorFlow Lite Docker ファイルをダウンロードしていることを前提としています。
 
 上記の Dockerfile をダウンロードした後、次のコマンドを実行して Docker イメージを構築できます。
 
@@ -371,7 +369,7 @@ sh build_aar_with_docker.sh \
 
 ## プロジェクトに AAR ファイルを追加する
 
-直接[プロジェクトに AAR をインポート](https://www.tensorflow.org/lite/guide/android#add_aar_directly_to_project)するか、[カスタム AAR をローカルの Maven リポジトリに公開](https://www.tensorflow.org/lite/guide/android#install_aar_to_local_maven_repository)して、AAR ファイルを追加します。生成する場合は、`tensorflow-lite-select-tf-ops.aar`の AAR ファイルも追加する必要があることに注意してください。
+直接[プロジェクトに AAR をインポート](https://www.tensorflow.org/lite/android/lite_build#add_aar_directly_to_project)するか、[カスタム AAR をローカルの Maven リポジトリに公開](https://www.tensorflow.org/lite/android/lite_build#install_aar_to_local_maven_repository)して、AAR ファイルを追加します。生成する場合は、`tensorflow-lite-select-tf-ops.aar`の AAR ファイルも追加する必要があることに注意してください。
 
 ## iOS 用の選択的ビルド
 
