@@ -6,7 +6,7 @@
 
 ## データ検証
 
-- [Data Validation](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv)
+- [ データ検証 ](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv)
 
 ## 変換
 
@@ -15,21 +15,21 @@
 
 ## モデル分析
 
-- [Model Analysis](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma)
+- [ モデル分析 ](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma)
 
 ## 配信
 
-- Client API（REST）
+- [Client API（REST) ](https://www.tensorflow.org/tfx/serving/api_rest)
 - [Server API（C++）](https://www.tensorflow.org/tfx/serving/api_docs/cc)
 
 ## ML メタデータ
 
-- [ML Metadata](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd)
+- [ ML メタデータ](https://www.tensorflow.org/tfx/ml_metadata/api_docs/python/mlmd)
 
 ## TF メタデータ
 
-- ML メタデータ
+- [ ML メタデータ ](https://www.tensorflow.org/tfx/tf_metadata/api_docs/python/tfmd/proto)
 
 ## TFX 基本共有ライブラリ（`tfx_bsl`）
 
-- [tfx_bsl](https://www.tensorflow.org/tfx/tfx_bsl/api_docs/python/tfx_bsl/public)
+- [ tfx_bsl ](https://www.tensorflow.org/tfx/tfx_bsl/api_docs/python/tfx_bsl/public)
