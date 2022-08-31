@@ -10,7 +10,7 @@ train_hello_world_model.ipynb
 
 ## モデル変換
 
-トレーニング済みの TensorFlow モデルをマイクロコントローラで実行するように変換するには、[ TensorFlow Lite コンバータ Python API ](https://www.tensorflow.org/lite/convert/)を使用する必要があります。これにより、モデルが[ `FlatBuffer`](https://google.github.io/flatbuffers/)に変換され、モデルのサイズが小さくなり、TensorFlow Lite 演算を使用するようにモデルが変更されます。
+トレーニング済みの TensorFlow モデルをマイクロコントローラで実行するように変換するには、[ TensorFlow Lite コンバータ Python API ](https://www.tensorflow.org/lite/models/convert/)を使用する必要があります。これにより、モデルが[ `FlatBuffer`](https://google.github.io/flatbuffers/)に変換され、モデルのサイズが小さくなり、TensorFlow Lite 演算を使用するようにモデルが変更されます。
 
 モデルサイズを最小化するには、[トレーニング後の量子化](https://www.tensorflow.org/lite/performance/post_training_quantization)の使用を検討してください。
 
