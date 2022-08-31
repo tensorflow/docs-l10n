@@ -6,25 +6,25 @@
 
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
-If you are new to TensorFlow Lite and are working with Android, we recommend exploring the following example application that can help you get started.
+TensorFlow Lite를 처음 사용하고 Android로 작업하는 경우, 다음 예제 애플리케이션을 탐색하면 시작하는 데 도움이 됩니다.
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/optical_character_recognition/android">Android 예제</a>
 
 Android 이외의 플랫폼을 사용 중이거나 이미 [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite)에 익숙하다면 [TF Hub](https://tfhub.dev/)에서 모델을 다운로드할 수 있습니다.
 
-## How it works
+## 동작 원리
 
 OCR 작업은 2단계로 나뉘는 경우가 많습니다. 먼저 텍스트 감지 모델을 사용하여 가능한 텍스트 주변의 경계 상자를 감지합니다. 둘째, 처리된 경계 상자를 텍스트 인식 모델에 입력하여 경계 상자 내부의 특정 문자를 결정합니다(텍스트 인식 전에 Non-Maximal Suppression, 원근 변환 등도 수행해야 함). 여기서의 경우 두 모델 모두 TensorFlow Hub에서 가져오며 FP16 양자화 모델입니다.
 
-## Performance benchmarks
+## 성능 벤치마크
 
-Performance benchmark numbers are generated with the tool described [here](https://www.tensorflow.org/lite/performance/benchmarks).
+성능 벤치 마크 수치는 [여기에 설명된](https://www.tensorflow.org/lite/performance/benchmarks) 도구를 사용하여 생성됩니다.
 
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
-      <th>Model size </th>
+      <th>모델명</th>
+      <th>모델 크기</th>
       <th>장치</th>
       <th>CPU</th>
       <th>GPU</th>
@@ -46,7 +46,7 @@ Performance benchmark numbers are generated with the tool described [here](https
   </tr>
 </table>
 
-* 4 threads used.
+* 4개의 스레드가 사용되었습니다.
 
 ** 이 모델은 실행을 위해 TensorFlow 작업이 필요하기 때문에 GPU 대리자를 사용할 수 없습니다.
 
@@ -62,7 +62,7 @@ Performance benchmark numbers are generated with the tool described [here](https
 
 텍스트 인식 모델은 알파벳 목록 '0123456789abcdefghijklmnopqrstuvwxyz'에 대한 매핑 인덱스로 형상 (1, 48)의 2차원 `float32` 텐서를 반환합니다.
 
-## Limitations
+## 한계
 
 - 현재의 [텍스트 인식 모델](https://tfhub.dev/tulasiram58827/lite-model/keras-ocr/float16/2)은 영문자와 숫자가 포함된 합성 데이터를 사용하여 훈련되므로 영어만 지원됩니다.
 
@@ -75,7 +75,7 @@ Performance benchmark numbers are generated with the tool described [here](https
 - ML Kit에서 지원되지 않는 언어를 지원하려고 합니다.
 - 대상 사용자 장치에 Google Play 서비스가 설치되어 있지 않을 수도 있습니다.
 
-## References
+## 참고 자료
 
 - OpenCV 텍스트 감지/인식 예: https://github.com/opencv/opencv/blob/master/samples/dnn/text_detection.cpp
 - 커뮤니티 기여자의 OCR TFLite 커뮤니티 프로젝트: https://github.com/tulasiram58827/ocr_tflite
