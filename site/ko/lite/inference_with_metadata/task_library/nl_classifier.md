@@ -14,9 +14,9 @@ Task Library의 `NLClassifier` API는 입력 텍스트를 여러 범주로 분�
 
 다음 모델은 `NLClassifier` API와의 호환성이 보장됩니다.
 
-- <a href="../../models/text_classification/overview.md">영화 리뷰 감상 분류</a> 모델
+- The <a href="../../examples/text_classification/overview">movie review sentiment classification</a> model.
 
-- [텍스트 분류를 위한 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification)에서 생성된 `average_word_vec` 사양이 있는 모델
+- Models with `average_word_vec` spec created by [TensorFlow Lite Model Maker for text Classification](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification).
 
 - [모델 호환성 요구 사항](#model-compatibility-requirements)을 충족하는 사용자 정의 모델
 
@@ -42,20 +42,30 @@ android {
 dependencies {
     // Other dependencies
 
-    // Import the Task Text Library dependency
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
+    // Import the Task Vision Library dependency (NNAPI is included)
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
+    // Import the GPU delegate plugin Library for GPU inference
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.3.0'
 }
 ```
+
+참고: Android Gradle 플러그인 버전 4.1부터는 .tflite가 기본적으로 noCompress 목록에 추가되며 위의 aaptOptions는 더 이상 필요하지 않습니다.
 
 ### 2단계: API를 사용하여 추론 실행하기
 
 ```java
 // Initialization, use NLClassifierOptions to configure input and output tensors
-NLClassifierOptions options = NLClassifierOptions.builder().setInputTensorName(INPUT_TENSOR_NAME).setOutputScoreTensorName(OUTPUT_SCORE_TENSOR_NAME).build();
-NLClassifier classifier = NLClassifier.createFromFileAndOptions(context, modelFile, options);
+NLClassifierOptions options =
+    NLClassifierOptions.builder()
+        .setBaseOptions(BaseOptions.builder().useGpu().build())
+        .setInputTensorName(INPUT_TENSOR_NAME)
+        .setOutputScoreTensorName(OUTPUT_SCORE_TENSOR_NAME)
+        .build();
+NLClassifier classifier =
+    NLClassifier.createFromFileAndOptions(context, modelFile, options);
 
 // Run inference
-List results = classifier.classify(input);
+List<Category> results = classifier.classify(input);
 ```
 
 `NLClassifier` 구성을 위한 추가 옵션은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/text/nlclassifier/NLClassifier.java)를 참조하세요.
@@ -69,7 +79,7 @@ Podfile에 TensorFlowLiteTaskText 포드를 추가합니다.
 ```
 target 'MySwiftAppWithTaskAPI' do
   use_frameworks!
-  pod 'TensorFlowLiteTaskText', '~> 0.0.1-nightly'
+  pod 'TensorFlowLiteTaskText', '~> 0.2.0'
 end
 ```
 
@@ -92,26 +102,21 @@ let categories = nlClassifier.classify(text: input)
 
 ## C++에서 추론 실행하기
 
-참고: 사전 빌드된 바이너리를 제공하고 소스 코드에서 빌드할 사용자 친화적인 워크플로를 만드는 등 C++ Task Library의 사용 편리성을 개선하기 위해 노력하고 있습니다. C++ API는 변경될 수 있습니다.
-
 ```c++
 // Initialization
-std::unique_ptr classifier = NLClassifier::CreateFromFileAndOptions(
-    model_path,
-    {
-      .input_tensor_name=kInputTensorName,
-      .output_score_tensor_name=kOutputScoreTensorName,
-    }).value();
+NLClassifierOptions options;
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
+std::unique_ptr<NLClassifier> classifier = NLClassifier::CreateFromOptions(options).value();
 
-// Run inference
-std::vector categories = classifier->Classify(kInput);
+// Run inference with your input, `input_text`.
+std::vector<core::Category> categories = classifier->Classify(input_text);
 ```
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/nl_classifier.h)를 참조하세요.
 
 ## 예제 결과
 
-다음은 [영화 리뷰 모델](https://www.tensorflow.org/lite/models/text_classification/overview)의 분류 결과를 보여주는 예입니다.
+Here is an example of the classification results of the [movie review model](https://www.tensorflow.org/lite/examples/text_classification/overview).
 
 입력: "시간만 낭비했습니다."
 
@@ -126,15 +131,15 @@ category[1]: 'Positive' : '0.18687'
 
 ## 모델 호환성 요구 사항
 
-사용 사례에 따라 `NLClassifier` API는 [TFLite 모델 메타데이터](../../convert/metadata.md)가 있거나 없는 TFLite 모델을 로드할 수 있습니다.
+Depending on the use case, the `NLClassifier` API can load a TFLite model with or without [TFLite Model Metadata](../../models/convert/metadata). See examples of creating metadata for natural language classifiers using the [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#nl_classifiers).
 
 호환되는 모델은 다음 요구 사항을 충족해야 합니다.
 
 - 입력 텐서: (kTfLiteString/kTfLiteInt32)
 
     - 모델의 입력은 kTfLiteString 텐서 원시 입력 문자열이거나 원시 입력 문자열의 토큰화된 regex 인덱스의 kTfLiteInt32 텐서여야 합니다.
-    - 입력 유형이 kTfLiteString이면 모델에 [메타데이터](../../convert/metadata.md)가 필요하지 않습니다.
-    - 입력 유형이 kTfLiteInt32이면 입력 텐서의 [메타데이터](../../convert/metadata.md)에서 `RegexTokenizer`를 설정해야 합니다.
+    - If input type is kTfLiteString, no [Metadata](../../models/convert/metadata) is required for the model.
+    - If input type is kTfLiteInt32, a `RegexTokenizer` needs to be set up in the input tensor's [Metadata](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers).
 
 - 출력 스코어 텐서: (kTfLiteUInt8/kTfLiteInt8/kTfLiteInt16/kTfLiteFloat32/kTfLiteFloat64)
 
@@ -142,7 +147,7 @@ category[1]: 'Positive' : '0.18687'
 
     - 유형이 Int 유형 중 하나이면 해당 플랫폼에 대해 double/float로 역양자화합니다.
 
-    - 범주 레이블에 대한 출력 텐서의 해당 [메타데이터](../../convert/metadata.md)에 선택적 관련 파일이 있을 수 있고, 파일은 한 줄에 레이블이 하나씩 있는 일반 텍스트 파일이어야 하며, 레이블 수는 모델 출력의 범주 수와 일치해야 합니다.
+    - Can have an optional associated file in the output tensor's corresponding [Metadata](../../models/convert/metadata) for category labels, the file should be a plain text file with one label per line, and the number of labels should match the number of categories as the model outputs. See the [example label file](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/python/tests/testdata/nl_classifier/labels.txt).
 
 - 출력 레이블 텐서: (kTfLiteString/kTfLiteInt32)
 
