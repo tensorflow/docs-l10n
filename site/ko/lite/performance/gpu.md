@@ -278,7 +278,7 @@ GPU 대리자를 사용할 코드를 활성화하려면 `CameraExampleViewContro
 릴리스된 GPU 대리자에 백엔드에서 실행할 수 있는 몇 가지 모델이 포함되었습니다.
 
 - [MobileNet v1(224x224) 이미지 분류](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobilenet_v1_1.0_224.tflite) <br><i>(모바일 및 임베디드 기반 비전 애플리케이션을 위해 설계된 이미지 분류 모델)</i>
-- [DeepLab segmentation (257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[download]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite)<br><i>(image segmentation model that assigns semantic labels (e.g., dog, cat, car) to every pixel in the input image)</i>
+- [DeepLab 분할(257x257)](https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/deeplabv3_257_mv_gpu.tflite) <br><i>(입력 이미지의 모든 픽셀에 의미론적 레이블(예: 개, 고양이, 자동차)을 할당하는 이미지 분할 모델)</i>
 -  [MobileNet SSD 객체 감지](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br><i>(경계 상자가 있는 여러 객체를 감지하는 이미지 분류 모델)</i>
 -  [포즈 추정을 위한 PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [[다운로드]](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br><i>(이미지 또는 비디오에서 사람의 포즈를 추정하는 비전 모델)</i>
 
