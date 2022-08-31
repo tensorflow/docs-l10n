@@ -74,7 +74,7 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
 
 > Google LLC は、オンライン広告技術、検索エンジン、クラウドコンピューティング、ソフトウェア、ハードウェアなど、インターネット関連のサービスと製品を専門とするアメリカの多国籍テクノロジー企業です。アマゾン、アップル、フェイスブックと並んで、4 大テクノロジー企業の 1 つと見なされています。
 >
-> Google was founded in September 1998 by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University in California. Together they own about 14 percent of its shares and control 56 percent of the stockholder voting power through supervoting stock. They incorporated Google as a California privately held company on September 4, 1998, in California. Google was then reincorporated in Delaware on October 22, 2002. An initial public offering (IPO) took place on August 19, 2004, and Google moved to its headquarters in Mountain View, California, nicknamed the Googleplex. In August 2015, Google announced plans to reorganize its various interests as a conglomerate called Alphabet Inc. Google is Alphabet's leading subsidiary and will continue to be the umbrella company for Alphabet's Internet interests. Sundar Pichai was appointed CEO of Google, replacing Larry Page who became the CEO of Alphabet.
+> 当時カリフォルニア州のスタンフォード大学の博士課程に在籍していたラリー・ペイジとサーゲイ・ブリンにより設立されました。現在でも  2 人 合わせて約 14% の株を保有し、スーパー投票株を通じて株主投票権の 56% を制御しています。Google は 1998 年 9 月 4 日にカリフォルニア州でカリフォルニアの非公開会社として設立されました。その後、Google は 2002 年 10 月 22 日にデラウェア州で再度法人として設立されました。2004 年 8 月 19 日に株式公開 (IPO) が行われ、Google は Googleplex と呼ばれるカリフォルニア州マウンテンビューの本社に移転しました。2015 年 8 月、Google は Alphabet Inc と呼ばれるコングロマリットとしてさまざまな事業を再編成する計画を発表しました。Google は Alphabet 社の主要な子会社として、引き続きインターネット関係の事業に包括的に取り組みます。 ラリー・ペイジの後任としてスンダー・ピチャイが新 CEO に就任し、ラリー・ペイジは Alphabet の CEO に着任しました。
 
 ### 質問 (入力)
 
