@@ -2,15 +2,15 @@
 
 TFX を使用すると、次の目的で機械学習（ML）ワークフローをパイプラインとして簡単に調整できます。
 
-- Automate your ML process, which lets you regularly retrain, evaluate, and deploy your model.
-- Create ML pipelines which include deep analysis of model performance and validation of newly trained models to ensure performance and reliability.
-- Monitor training data for anomalies and eliminate training-serving skew
-- Increase the velocity of experimentation by running a pipeline with different sets of hyperparameters.
+- モデルを定期的に再トレーニングし、評価してデプロイできるように、ML プロセスを自動化する。
+- モデルパフォーマンスのディープ解析や新たにトレーニングされたモデルの検証を含む ML パイプラインを作成し、パフォーマンスと信頼性を確保する。
+- 異常に関するトレーニングデータを監視し、トレーニングとサービング間の歪みを排除する
+- パイプラインをさまざまなハイパーパラメータの組み合わせで実行することで、実験を加速させる。
 
 一般的なパイプライン開発プロセスは、ローカルマシンで開始され、データ分析とコンポーネントのセットアップが行われてから本番環境にデプロイされます。このガイドでは、パイプラインをローカルで構築する 2 つの方法について説明します。
 
-- Customize a TFX pipeline template to fit the needs of your ML workflow. TFX pipeline templates are prebuilt workflows that demonstrate best practices using the TFX standard components.
-- Build a pipeline using TFX. In this use case, you define a pipeline without starting from a template.
+- ML ワークフローのニーズに適合するように TFX パイプラインテンプレートをカスタマイズします。TFX パイプラインテンプレートは事前構築済みのワークフローであり、TFX 標準コンポーネントを使ったベストプラクティスを実演します。
+- TFX を使ってパイプラインを構築します。このユースケースでは、テンプレートを使用せずにパイプラインを定義します。
 
 パイプラインを開発しているときに、 `LocalDagRunner` を使用してパイプラインを実行できます。パイプラインコンポーネントが適切に定義およびテストされたら、Kubeflow や Airflow などの本番環境グレードのオーケストレーターを使用します。
 
@@ -22,15 +22,15 @@ TFX は Python パッケージであるため、仮想環境や Docker コンテ
 pip install tfx
 ```
 
-If you are new to TFX pipelines, [learn more about the core concepts for TFX pipelines](understanding_tfx_pipelines) before continuing.
+TFX パイプラインが初めての方は、読み進める前に、[TFX パイプラインの中心的概念を学習](understanding_tfx_pipelines)してください。
 
-## Build a pipeline using a template
+## テンプレートを使用してパイプラインを構築する
 
 TFX パイプラインテンプレートを使用すると、ユースケースに合わせてカスタマイズできるパイプライン定義のビルド済みセットを提供して、パイプライン開発を簡単に開始できます。
 
-The following sections describe how to create a copy of a template and customize it to meet your needs.
+以降のセクションでは、テンプレートのコピーを作成し、ニーズに合わせてカスタマイズする方法を説明します。
 
-### Create a copy of the pipeline template
+### パイプラインテンプレートのコピーを作成する
 
 1. 利用可能な TFX パイプラインテンプレートを一覧表示します。
 
@@ -43,19 +43,19 @@ The following sections describe how to create a copy of a template and customize
         --destination_path=&lt;var&gt;destination-path&lt;/var&gt;
         </pre>
 
-    Replace the following:
+    上記のコードから、次の項目を置き換えてください。
 
-    - <var>template</var>: The name of the template you want to copy.
-    - <var>pipeline-name</var>: The name of the pipeline to create.
-    - <var>destination-path</var>: The path to copy the template into.
+    - <var>template</var>: コピーするテンプレートの名前です。
+    - <var>pipeline-name</var>: 作成するテンプレートの名前です。
+    - <var>destination-path</var>: テンプレートのコピー先のパスです。
 
-    Learn more about the [`tfx template copy` command](cli#copy).
+    詳細は、[`tfx template copy` コマンド](cli#copy)をご覧ください。
 
-3. A copy of the pipeline template has been created at the path you specified.
+3. パイプラインテンプレートのコピーが、指定したパスに作成されました。
 
 注意: このガイドの残りの部分は、`penguin` テンプレートを選択したことを前提としています。
 
-### Explore the pipeline template
+### パイプラインテンプレートを調べる
 
 このセクションでは、テンプレートによって作成される基盤の概要を説明します。
 
@@ -103,38 +103,38 @@ The following sections describe how to create a copy of a template and customize
 
 6. テンプレートが作成した基盤を確認し、`LocalDagRunner` を使ったパイプライン実行を作成しました。次のステップでは、要件に合わせてテンプレートをカスタマイズします。
 
-### Customize your pipeline
+### パイプラインをカスタマイズする
 
 このセクションでは、テンプレートのカスタマイズを開始する方法の概要を説明します。
 
-1. Design your pipeline. The scaffolding that a template provides helps you implement a pipeline for tabular data using the TFX standard components. If you are moving an existing ML workflow into a pipeline, you may need to revise your code to make full use of [TFX standard components](index#tfx_standard_components). You may also need to create [custom components](understanding_custom_components) that implement features which are unique to your workflow or that are not yet supported by TFX standard components.
+1. パイプラインを設計します。テンプレートが提供する基盤を元に TFX 標準コンポーネントを使ってタブ区切りデータのパイプラインを実装することができます。既存の ML ワークフローをパイプラインに移動する場合、[TFX 標準コンポーネント](index#tfx_standard_components)を活用できるようにコードを校正する必要がある場合があります。また、ワークフロー独自の特徴量を実装する、またはTFX 標準コンポーネントが未対応の[カスタムコンポーネント](understanding_custom_components)を作成する必要もあります。
 
-2. Once you have designed your pipeline, iteratively customize the pipeline using the following process. Start from the component that ingests data into your pipeline, which is usually the `ExampleGen` component.
+2. パイプラインを設計したら、次のプロセスに従ってパイプラインのカスタマイズを繰り返し行います。パイプラインへのデータを飲み込むコンポーネントから始めます。通常は`ExampleGen` コンポーネントです。
 
-    1. Customize the pipeline or a component to fit your use case. These customizations may include changes like:
+    1. ユースケースに合うように、パイプラインまたはコンポーネントをカスタマイズします。このカスタマイズには次のような変更が含まれることがあります。
 
-        - Changing pipeline parameters.
-        - Adding components to the pipeline or removing them.
-        - Replacing the data input source. This data source can either be a file or queries into services such as BigQuery.
-        - Changing a component's configuration in the pipeline.
-        - Changing a component's customization function.
+        - パイプラインパラメータの変更
+        - パイプラインへのコンポーネントの追加、またはパイプラインからの削除
+        - データ入力ソースの変更。このデータソースはファイルまたは BigQuery などのサービスのクエリです。
+        - パイプライン内のコンポーネントの構成の変更
+        - コンポーネントのカスタマイズ関数の変更
 
     2. `local_runner.py` スクリプト、または異なるオーケストレーターを使用している場合は、別の該当する DAG ランナーを使用してローカルでコンポーネントを実行します。スクリプトが失敗した場合、失敗をデバッグし、スクリプトの実行を再試行します。
 
-    3. Once this customization is working, move on to the next customization.
+    3. このカスタマイズがうまくいったら、次のカスタマイズに進みます。
 
-3. Working iteratively, you can customize each step in the template workflow to meet your needs.
+3. この作業を進めると、テンプレートの各ステップをニーズに合わせてカスタマイズできます。
 
-## Build a custom pipeline
+## カスタムパイプラインを構築する
 
-Use the following instructions to learn more about building a custom pipeline without using a template.
+次の手順に従って、テンプレートを使用せずにカスタムパイプラインを構築する方法を学習します。
 
-1. Design your pipeline. The TFX standard components provide proven functionality to help you implement a complete ML workflow. If you are moving an existing ML workflow into a pipeline, you may need to revise your code to make full use of TFX standard components. You may also need to create [custom components](understanding_custom_components) that implement features such as data augmentation.
+1. パイプラインを設計します。TFX 標準コンポーネントには、完全な ML ワークフローの実装に役立つ実績のある機能が提供されています。既存の ML ワークフローをパイプラインに移動する場合、TFX 標準コンポーネントを活用できるようにコードを校正する必要がある場合があります。また、データ拡張などの特徴量を実装する[カスタムコンポーネント](understanding_custom_components)を作成する必要もある場合があります。
 
-    - Learn more about [standard TFX components](index#tfx_standard_components).
-    - Learn more about [custom components](understanding_custom_components).
+    - [標準 TFX コンポーネント](index#tfx_standard_components)についてお読みください。
+    - [カスタムコンポーネント](understanding_custom_components)についてお読みください。
 
-2. Create a script file to define your pipeline using the following example. This guide refers to this file as `my_pipeline.py`.
+2. スクリプトファイルを作成して、次の例を参考にパイプラインを定義します。このガイドではこのファイルを `my_pipeline.py` を呼びます。
 
     <pre class="devsite-click-to-copy prettyprint">    import os
         from typing import Optional, Text, List
@@ -183,23 +183,23 @@ Use the following instructions to learn more about building a custom pipeline wi
 
     以降のステップでは、`create_pipeline` でパイプラインを定義し、ローカルランナーを使ってパイプラインをローカル実行します。
 
-    Iteratively build your pipeline using the following process.
+    次のプロセスに従って、対話的にパイプラインを構築します。
 
-    1. Customize the pipeline or a component to fit your use case. These customizations may include changes like:
+    1. ユースケースに合うように、パイプラインまたはコンポーネントをカスタマイズします。このカスタマイズには次のような変更が含まれることがあります。
 
-        - Changing pipeline parameters.
-        - Adding components to the pipeline or removing them.
-        - Replacing a data input file.
-        - Changing a component's configuration in the pipeline.
-        - Changing a component's customization function.
+        - パイプラインパラメータの変更
+        - パイプラインへのコンポーネントの追加、またはパイプラインからの削除
+        - データ入力ファイルの変更
+        - パイプライン内のコンポーネントの構成の変更
+        - コンポーネントのカスタマイズ関数の変更
 
     2. ローカルランナーを使用するか、スクリプトを直接実行して、ローカルでコンポーネントを実行します。スクリプトが失敗した場合、失敗をデバッグし、スクリプトの実行を再試行します。
 
-    3. Once this customization is working, move on to the next customization.
+    3. このカスタマイズがうまくいったら、次のカスタマイズに進みます。
 
-    Start from the first node in your pipeline's workflow, typically the first node ingests data into your pipeline.
+    パイプラインのワークフローの最初のノードから開始します。通常、最初のノードはパイプラインにデータを取り込みます。
 
-3. Add the first node in your workflow to your pipeline. In this example, the pipeline uses the `ExampleGen` standard component to load a CSV from a directory at `./data`.
+3. ワークフローの最初のノードをパイプラインに追加します。この例のパイプラインは、`ExampleGen` 標準コンポーネントを使用して、`./data` にあるディレクトリから CSV を読み込みます。
 
     <pre class="devsite-click-to-copy prettyprint">    from tfx.components import CsvExampleGen
 
@@ -242,14 +242,14 @@ Use the following instructions to learn more about building a custom pipeline wi
 
     `CsvExampleGen` は、指定されたデータパスの CSV 内のデータを使用して、シリアル化されたサンプルレコードを作成します。`CsvExampleGen` コンポーネントの `input_base` パラメータをデータルートに設定します。
 
-4. Create a `data` directory in the same directory as `my_pipeline.py`. Add a small CSV file to the `data` directory.
+4. `my_pipeline.py` と同じディレクトリに `data` ディレクトリを作成します。小さな CSV ファイルを `data` ディレクトリに追加します。
 
 5. 次のコマンドを使用して、`my_pipeline.py` スクリプトを実行します。
 
     <pre class="devsite-click-to-copy devsite-terminal">    python my_pipeline.py
         </pre>
 
-    The result should be something like the following:
+    結果は次のようになります。
 
     <pre>    INFO:absl:Component CsvExampleGen depends on [].
         INFO:absl:Component CsvExampleGen is scheduled.
@@ -267,4 +267,4 @@ Use the following instructions to learn more about building a custom pipeline wi
         INFO:absl:Component CsvExampleGen is finished.
         </pre>
 
-6. Continue to iteratively add components to your pipeline.
+6. 続けて、繰り返しながらパイプラインにコンポーネントを追加します。
