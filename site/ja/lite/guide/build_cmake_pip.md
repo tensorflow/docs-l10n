@@ -6,7 +6,7 @@
 
 **注意:** この機能はバージョン 2.4 以降で利用できます。
 
-#### Prerequisites
+#### 前提条件
 
 CMake をインストールし、TensorFlow ソースコードをコピーする必要があります。詳細については、[CMake を使用した TensorFlow Lite の構築](https://www.tensorflow.org/lite/guide/build_cmake)ページを参照してください。
 
@@ -35,7 +35,7 @@ make -C tensorflow/lite/tools/pip_package docker-build \
 
 `tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh` スクリプトでは、ターゲットアーキテクチャを識別するために、ターゲット名が必要です。サポートされているターゲットの一覧は次のとおりです。
 
-ターゲット | Target architecture | コメント
+ターゲット | ターゲットアーキテクチャ | コメント
 --- | --- | ---
 armhf | ARMv7 VFP と Neon | Raspberry Pi 3 および 4 に対応
 rpi0 | ARMv6 | Raspberry Pi Zero に対応
