@@ -4,8 +4,7 @@
 
 たとえば、以下の<a href="#get_started">サンプルアプリ</a>のスクリーンショットは、2 つのオブジェクトがどのように認識され、それらの位置に注釈が付けられていることを示しています。
 
-
-<img src="images/android_apple_banana.png" alt="Screenshot of Android example" width="30%">
+ <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/images/detection.png?raw=true">
 
 Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker).
 
@@ -13,7 +12,7 @@ Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](htt
 
 モバイルアプリで物体検出を使用する方法については、<a href="#example_applications_and_guides">サンプルアプリとガイド</a>をご覧になることをお勧めします。
 
-If you are using a platform other than Android or iOS, or if you are already familiar with the <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite APIs</a>, you can download our starter object detection model and the accompanying labels.
+Android または iOS 以外のプラットフォームを使用する場合、または、すでに <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite API</a> に精通している場合は、物体検出スターターモデルと付随するラベルをダウンロードしてください。
 
 <a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">Download starter model with Metadata</a>
 
@@ -28,15 +27,15 @@ For more information about Metadata and associated fields (eg: `labels.txt`) see
   <li>画像の構成（被写体と背景など）を予測する場合（<a href="../segmentation/overview.md">セグメンテーション</a>を参照）</li>
 </ul>
 
-### Example applications and guides
+### サンプルアプリとガイド
 
-If you are new to TensorFlow Lite and are working with Android or iOS, we recommend exploring the following example applications that can help you get started.
+TensorFlow Lite を初めて使用する場合、Android または iOS を使用する場合は、以下のサンプルアプリをご覧ください。
 
 #### Android
 
 TensorFlow Lite Task Library のそのまま簡単に使用できる API を利用して、わずか数行のコードで[物体検出モデルを統合する](../../inference_with_metadata/task_library/object_detector)ことができます。また、TensorFlow Lite Interpreter Java API を使用して、[独自のカスタム推論パイプライン](../../guide/inference#load_and_run_a_model_in_java)を構築することもできます。
 
-The Android example below demonstrates the implementation for both methods as [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_task_api) and [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_interpreter), respectively.
+以下の Android の例では、両方のメソッドをそれぞれ [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_task_api) および [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_interpreter) として実装しています。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android">View Android example</a>
 
@@ -46,7 +45,7 @@ The Android example below demonstrates the implementation for both methods as [l
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/ios">View iOS example</a>
 
-## Model description
+## モデルの説明
 
 このセクションでは、[TensorFlow Object Detection API](https://arxiv.org/abs/1512.02325) から TensorFlowLite に変換された [Single-Shot Detector](https://github.com/tensorflow/models/blob/master/research/object_detection/) モデルの署名について説明します。
 
