@@ -2,7 +2,7 @@
 
 注意: TensorFlow Lite サポートライブラリは現在、Android のみをサポートしています。
 
-Mobile application developers typically interact with typed objects such as bitmaps or primitives such as integers. However, the TensorFlow Lite interpreter API that runs the on-device machine learning model uses tensors in the form of ByteBuffer, which can be difficult to debug and manipulate. The [TensorFlow Lite Android Support Library](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/java) is designed to help process the input and output of TensorFlow Lite models, and make the TensorFlow Lite interpreter easier to use.
+モバイルアプリケーション開発者は通常、ビットマップなどの型指定されたオブジェクトや整数などのプリミティブを操作します。ただし、デバイス上の機械学習モデルを実行する TensorFlow Lite インタープリターは ByteBuffer の形式でテンソルを使用するため、デバッグや操作が難しい場合があります。[TensorFlow Lite Android サポートライブラリ](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/java) は、TensorFlow Lite モデルの入力と出力の処理を支援し、TensorFlow Lite インタープリターを使いやすくするように設計されています。
 
 ## はじめに
 
@@ -34,7 +34,7 @@ dependencies {
 
 注：Android Gradle プラグインのバージョン 4.1 以降、.tflite はデフォルトで noCompress リストに追加され、上記の aaptOptions は不要になりました。
 
-Explore the [TensorFlow Lite Support Library AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-support) for different versions of the Support Library.
+各種バージョンのサポートライブラリについては、[MavenCentral で提供されている TensorFlow Lite サポートライブラリ AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-support) を参照してください。
 
 ### 基本的な画像の操作と変換
 
@@ -66,9 +66,9 @@ tensorImage = imageProcessor.process(tensorImage);
 
 `DataType` of a tensor can be read through the [metadata extractor library](../models/convert/metadata.md#read-the-metadata-from-models) as well as other model information.
 
-### Basic audio data processing
+### オーディオデータの基本処理
 
-The TensorFlow Lite Support Library also defines a `TensorAudio` class wrapping some basic audio data processing methods. It's mostly used together with [AudioRecord](https://developer.android.com/reference/android/media/AudioRecord) and captures audio samples in a ring buffer.
+TensorFlow Lite Support Library では、基本的なオーディオデータ処理メソッドをラップする `TensorAudio` クラスも定義されています。ほとんどの場合に [AudioRecord](https://developer.android.com/reference/android/media/AudioRecord) とともに使用され、リングバッファーでオーディオサンプルをキャプチャします。
 
 ```java
 import android.media.AudioRecord;
@@ -172,7 +172,7 @@ if (null != associatedAxisLabels) {
 
 TensorFlow Lite サポートライブラリの現在のバージョンは以下に対応しています。
 
-- common data types (float, uint8, images, audio and array of these objects) as inputs and outputs of tflite models.
+- tflite モデルの入力および出力としての一般的なデータ型（浮動小数点、uint8、画像、オーディオ、およびこれらのオブジェクトの配列）。
 - 基本的な画像操作（画像のトリミング、サイズ変更、回転）。
 - 正規化と量子化
 - ファイルユーティリティ
@@ -181,7 +181,7 @@ TensorFlow Lite サポートライブラリの現在のバージョンは以下�
 
 ## ImageProcessor のアーキテクチャ
 
-The design of the `ImageProcessor` allowed the image manipulation operations to be defined up front and optimised during the build process. The `ImageProcessor` currently supports three basic preprocessing operations, as described in the three comments in the code snippet below:
+`ImageProcessor` の設計では、事前に画像操作演算を定義し、ビルドプロセス中に最適化できていました。`ImageProcessor` は現在、以下のコードスニペットの 3 つのコメントで説明されているとおり、3 つの基本的な前処理演算をサポートしています。
 
 ```java
 import org.tensorflow.lite.support.common.ops.NormalizeOp;
