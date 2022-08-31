@@ -18,7 +18,7 @@ print(embeddings.shape, embeddings.dtype)
 
 ## API の安定性
 
-変更による破損を回避することに努めてはいますが、このプロジェクトは現在開発中であるため、安定した API やモデル形式を保証していません。
+変更による破損を回避することに努めてはいますが、このプロジェクトは現在開発中であるため、安定した API やモデル形式は保証されていません。
 
 ## 公平性
 
@@ -31,4 +31,4 @@ print(embeddings.shape, embeddings.dtype)
 ## 次のステップ
 
 - ライブラリを使用する
-- Reusable SavedModel
+- [再利用可能な SavedModels](reusable_saved_models.md)
