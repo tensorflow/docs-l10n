@@ -72,7 +72,7 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
 
 ### パッセージ (入力)
 
-> Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. It is considered one of the Big Four technology companies, alongside Amazon, Apple, and Facebook.
+> Google LLC は、オンライン広告技術、検索エンジン、クラウドコンピューティング、ソフトウェア、ハードウェアなど、インターネット関連のサービスと製品を専門とするアメリカの多国籍テクノロジー企業です。アマゾン、アップル、フェイスブックと並んで、4 大テクノロジー企業の 1 つと見なされています。
 >
 > Google was founded in September 1998 by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University in California. Together they own about 14 percent of its shares and control 56 percent of the stockholder voting power through supervoting stock. They incorporated Google as a California privately held company on September 4, 1998, in California. Google was then reincorporated in Delaware on October 22, 2002. An initial public offering (IPO) took place on August 19, 2004, and Google moved to its headquarters in Mountain View, California, nicknamed the Googleplex. In August 2015, Google announced plans to reorganize its various interests as a conglomerate called Alphabet Inc. Google is Alphabet's leading subsidiary and will continue to be the umbrella company for Alphabet's Internet interests. Sundar Pichai was appointed CEO of Google, replacing Larry Page who became the CEO of Alphabet.
 
@@ -86,5 +86,5 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
 
 ## BERT の詳細を読む
 
-- Academic paper: [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)
+- 学術論文: [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (自然言語処理のための Transformer を用いたディープ双方向型事前トレーニング)](https://arxiv.org/abs/1810.04805)
 - [Open-source implementation of BERT](https://github.com/google-research/bert)
