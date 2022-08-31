@@ -16,7 +16,7 @@
 
 Web ブラウザでポーズ推定を試す場合は、<a href="https://storage.googleapis.com/tfjs-models/demos/pose-detection/index.html?model=movenet">TensorFlow JS デモ</a>を参照してください。
 
-## Model description
+## モデルの説明
 
 ### 使い方
 
