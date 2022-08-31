@@ -65,7 +65,7 @@ Android이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미 
   </tr>
 </table>
 
-* 4 threads used.
+* 4개의 스레드가 사용되었습니다.
 
 ** 최상의 결과를 위해 iPhone에서 2개의 스레드가 사용되었습니다.
 
