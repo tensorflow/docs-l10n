@@ -1,6 +1,6 @@
 # TensorFlow 연산 융합
 
-## Overview
+## 개요
 
 이 페이지에서는 TensorFlow의 복합 연산을 TensorFlow Lite의 융합 연산으로 변환하는 데 필요한 설계 및 단계를 설명합니다. 이 인프라는 범용이며 TensorFlow의 모든 복합 연산을 TensorFlow Lite의 해당 융합 연산으로 변환하는 작업을 지원합니다.
 
@@ -8,7 +8,7 @@
 
 ### 융합 연산이란?
 
-![drawing](../../images/convert/op_fusion_banner.jpg)
+![그림](../images/convert/op_fusion_banner.jpg)
 
 TensorFlow 연산은 기본 연산(예: [tf.add)](https://www.tensorflow.org/api_docs/python/tf/math/add)이거나 다른 기본 연산(예: [tf.einsum)](https://www.tensorflow.org/api_docs/python/tf/einsum)을 바탕으로 구성될 수 있습니다. 기본 연산은 TensorFlow 그래프에서 단일 노드로 표시되는 반면, 복합 연산은 TensorFlow 그래프에서 노드의 집합체입니다. 복합 연산을 실행하는 것은 이를 구성하는 기본 연산 각각을 실행하는 것과 같습니다.
 
@@ -105,7 +105,7 @@ Op를 등록할 이름은 구현 서명의 `name` 속성에 지정된 이름과 
 
 TensorFlow 복합 연산을 TensorFlow Lite 융합 연산으로 변환하기 위한 전반적인 아키텍처는 다음과 같습니다.
 
-![drawing](../../images/convert/op_fusion.png)
+![그림](../images/convert/op_fusion.png)
 
 ### 복합 연산을 `tf.function`으로 래핑
 
@@ -121,7 +121,7 @@ prepare-composite-functions 전달에서 [변환 코드](https://github.com/tens
 
 ### TensorFlow Lite로 변환하기
 
-Use the [TFLiteConverter.from_saved_model](https://www.tensorflow.org/api_docs/python/tf/lite/TFLiteConverter#from_saved_model) API to convert to TensorFlow Lite.
+[TFLiteConverter.from_saved_model](https://www.tensorflow.org/api_docs/python/tf/lite/TFLiteConverter#from_saved_model) API를 사용하여 TensorFlow Lite로 변환합니다.
 
 ## 배경
 
@@ -206,7 +206,7 @@ Use the [TFLiteConverter.from_saved_model](https://www.tensorflow.org/api_docs/p
 
 연산 융합 전달에 대해 좀 더 자세히 살펴보겠습니다. 이 전달은 다음을 수행합니다.
 
-1. Loop through all functions in the MLIR module.
+1. MLIR 모듈의 모든 기능을 반복합니다.
 2. 함수에 tf._implements 속성이 있는 경우, 속성 값에 따라 적절한 연산 융합 유틸리티를 호출합니다.
 3. 연산 융합 유틸리티는 함수의 피연산자 및 속성(변환을 위한 인터페이스 역할을 함)에서 동작하며, 함수 본문을 융합 연산을 포함하는 동등한 함수 본문으로 바꿉니다.
 4. 대부분의 경우, 대체된 본문에는 융합 연산 이외의 연산이 포함됩니다. 이러한 연산은 융합 연산의 피연산자를 얻기 위해 함수의 피연산자에 이루어진 일부 정적 변환에 해당합니다. 이러한 계산은 모두 상수 접기를 지원하므로 융합 연산만 존재하는 내보낸 flatbuffer에는 나타나지 않습니다.
