@@ -2,36 +2,34 @@
 
 <img src="../images/pose.png" class="attempt-right">
 
-*PoseNet* は、主要な体の関節の位置を推定することにより、画像や動画内の人物のポーズを推定するために使用できるビジョンモデルです。
+ポーズ推定は、ML モデルを使用して、主要な体の関節 (キーポイント) の空間的な位置を推定することで、画像または動画から人のポーズを推定するタスクです。
 
 ## はじめに
 
 If you are new to TensorFlow Lite and are working with Android or iOS, explore the following example applications that can help you get started.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android"> Android example</a>
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">
-iOS example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android の例</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS の例</a>
 
-If you are familiar with the [TensorFlow Lite APIs](https://www.tensorflow.org/api_docs/python/tf/lite), download the starter MoveNet pose estimation model and supporting files.
+[TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite) に慣れている場合は、スターター MoveNet ポーズ推定モデルと追加ファイルをダウンロードしてください。
 
-<a class="button button-primary" href="https://tfhub.dev/s?q=movenet"> Download starter model</a>
+<a class="button button-primary" href="https://tfhub.dev/s?q=movenet"> スターターモデルをダウンロードする</a>
 
-If you want to try pose estimation on a web browser, check out the <a href="https://storage.googleapis.com/tfjs-models/demos/pose-detection/index.html?model=movenet"> TensorFlow JS Demo</a>.
+Web ブラウザでポーズ推定を試す場合は、<a href="https://storage.googleapis.com/tfjs-models/demos/pose-detection/index.html?model=movenet">TensorFlow JS デモ</a>を参照してください。
 
 ## Model description
 
 ### 使い方
 
-Pose estimation refers to computer vision techniques that detect human figures in images and videos, so that one could determine, for example, where someone’s elbow shows up in an image. It is important to be aware of the fact that pose estimation merely estimates where key body joints are and does not recognize who is in an image or video.
+ポーズ推定は、コンピュータビジョン手法を参照して、画像や動画の人物を検出するため、たとえば、誰かのひじが画像に現れる場所を判定できます。ポーズ推定では、主要な体の関節の場所を推定することはほとんどなく、画像や動画の人物が誰なのかを認識することもないという事実を理解することが重要です。
 
-The pose estimation models takes a processed camera image as the input and outputs information about keypoints. The keypoints detected are indexed by a part ID, with a confidence score between 0.0 and 1.0. The confidence score indicates the probability that a keypoint exists in that position.
+ポーズ推定モデルは、処理済みのカメラ画像を入力として受け取り、キーポイントに関する情報を出力します。検出されたキーポイントは、信頼度スコア 0.0 ～ 1.0 のパーツ ID によってインデックス付けされます。信頼度スコアは、キーポイントがその位置に存在する確率を示します。
 
-We provides reference implementation of two TensorFlow Lite pose estimation models:
+次の TensorFlow Lite の 2 つのポーズ推定モデルについて、実装の参考情報が提供されています。
 
-- MoveNet: the state-of-the-art pose estimation model available in two flavors: Lighting and Thunder. See a comparison between these two in the section below.
-- PoseNet: the previous generation pose estimation model released in 2017.
+- MoveNet: Lighting と Thunder という 2 つのバージョンで提供されている最先端のポーズ推定モデル。この 2 つの比較については、以下のセクションを参照してください。
+- PoseNet: 2017 年にリリースされた前の世代のポーズ推定モデル。
 
-The various body joints detected by the pose estimation model are tabulated below:
+ポーズ推定モデルで検出されたさまざまな体の関節は、次の表のとおりです。
 
 <table style="width: 30%;">
   <thead>
@@ -112,40 +110,39 @@ The various body joints detected by the pose estimation model are tabulated belo
   </tbody>
 </table>
 
-検出されたキーポイントは「部位 ID」でインデックス化され、信頼度スコアは 0.0 ～ 1.0 で、1.0 が最も高い信頼度となります。
+次に、出力の例を示します。
 
  <img alt="Animation showing pose estimation" src="https://www.tensorflow.org/images/lite/models/pose_estimation.gif">
 
 ## パフォーマンスベンチマーク
 
-MoveNet is available in two flavors:
+MoveNet は次の 2 つのバージョンで提供されています。
 
-- MoveNet.Lightning is smaller, faster but less accurate than the Thunder version. It can run in realtime on modern smartphones.
-- MoveNet.Thunder is the more accurate version but also larger and slower than Lightning. It is useful for the use cases that require higher accuracy.
+- MoveNet.Lightning は小さく高速ですが、Thunder バージョンよりも精度が劣ります。最新のスマートフォンでリアルタイムで実行できます。
+- MoveNet.Thunder は精度が高いバージョンですが、Lightning よりもサイズが大きく低速です。高い精度が求められるユースケースで有用です。
 
-MoveNet outperforms PoseNet on a variety of datasets, especially in images with fitness action images. Therefore, we recommend using MoveNet over PoseNet.
+MoveNet は、さまざまなデータセットに対して、PoseNet よりも優れています。特に、フィットネスアクション画像を含む画像で優れています。このため、PoseNet よりも MoveNet を使用することをお勧めします。
 
-Performance benchmark numbers are generated with the tool [described here](../../performance/measurement). Accuracy (mAP) numbers are measured on a subset of the [COCO dataset](https://cocodataset.org/#home) in which we filter and crop each image to contain only one person .
+パフォーマンスベンチマークの数値は、[こちらで説明されている](../../performance/measurement)ツールを使用して生成されています。精度 (mAP) は、各画像が 1 人の人物だけを含むようにフィルタおよび切り取りされた [COCO データセット](https://cocodataset.org/#home)のサブセットに対して測定されます。
 
 <table>
 <thead>
   <tr>
-    <th rowspan="2">Model</th>
-    <th rowspan="2">Size (MB)</th>
+    <th rowspan="2">モデル</th>
+    <th rowspan="2">サイズ (MB)</th>
     <th rowspan="2">mAP</th>
-    <th colspan="3">Latency (ms)</th>
+    <th colspan="3">レイテンシ (ms)</th>
   </tr>
   <tr>
-    <td>Pixel 5 - CPU 4 threads</td>
+    <td>Pixel 5 - CPU 4 スレッド</td>
     <td>Pixel 5 - GPU</td>
-    <td>Raspberry Pi 4 - CPU 4 threads</td>
+    <td>Raspberry Pi 4 - CPU 4 スレッド</td>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>
-      <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/float16/4">MoveNet.Thunder (FP16 quantized)</a>
-    </td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/float16/4">MoveNet.Thunder (FP16 量子化)</a>
+</td>
     <td>12.6MB</td>
     <td>72.0</td>
     <td>155ms</td>
@@ -153,9 +150,8 @@ Performance benchmark numbers are generated with the tool [described here](../..
     <td>594ms</td>
   </tr>
   <tr>
-    <td>
-      <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/int8/4">MoveNet.Thunder (INT8 quantized)</a>
-    </td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/int8/4">MoveNet.Thunder (INT8 量子化)</a>
+</td>
     <td>7.1MB</td>
     <td>68.9</td>
     <td>100ms</td>
@@ -163,9 +159,8 @@ Performance benchmark numbers are generated with the tool [described here](../..
     <td>251ms</td>
   </tr>
   <tr>
-    <td>
-      <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/float16/4">MoveNet.Lightning (FP16 quantized)</a>
-    </td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/float16/4">MoveNet.Lightning (FP16 量子化)</a>
+</td>
     <td>4.8MB</td>
     <td>63.0</td>
     <td>60ms</td>
@@ -173,9 +168,8 @@ Performance benchmark numbers are generated with the tool [described here](../..
     <td>186ms</td>
   </tr>
   <tr>
-    <td>
-      <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/int8/4">MoveNet.Lightning (INT8 quantized)</a>
-    </td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/int8/4">MoveNet.Lightning (INT8 量子化)</a>
+</td>
     <td>2.9MB</td>
     <td>57.4</td>
     <td>52ms</td>
@@ -183,9 +177,8 @@ Performance benchmark numbers are generated with the tool [described here](../..
     <td>95ms</td>
   </tr>
   <tr>
-    <td>
-      <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">PoseNet(MobileNetV1 backbone, FP32)</a>
-    </td>
+    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">PoseNet(MobileNetV1 バックボーン、FP32)</a>
+</td>
     <td>13.3MB</td>
     <td>45.6</td>
     <td>80ms</td>
@@ -195,22 +188,22 @@ Performance benchmark numbers are generated with the tool [described here](../..
 </tbody>
 </table>
 
-## 出力例
+## その他の資料とリソース
 
-- Check out this [blog post](https://blog.tensorflow.org/2021/08/pose-estimation-and-classification-on-edge-devices-with-MoveNet-and-TensorFlow-Lite.html) to learn more about pose estimation using MoveNet and TensorFlow Lite.
-- Check out this [blog post](https://blog.tensorflow.org/2021/05/next-generation-pose-detection-with-movenet-and-tensorflowjs.html) to learn more about pose estimation on the web.
-- Check out this [tutorial](https://www.tensorflow.org/hub/tutorials/movenet) to learn about running MoveNet on Python using a model from TensorFlow Hub.
-- Coral/EdgeTPU can make pose estimation run much faster on edge devices. See [EdgeTPU-optimized models](https://coral.ai/models/pose-estimation/) for more details.
-- Read the PoseNet paper [here](https://arxiv.org/abs/1803.08225)
+- MoveNet と TensorFlow Lite を使用したポーズ推定の詳細については、こちらの[ブログ投稿](https://blog.tensorflow.org/2021/08/pose-estimation-and-classification-on-edge-devices-with-MoveNet-and-TensorFlow-Lite.html)をお読みください。
+- Web でのポーズ推定の詳細については、こちらの[ブログ投稿](https://blog.tensorflow.org/2021/05/next-generation-pose-detection-with-movenet-and-tensorflowjs.html)をお読みください。
+- TensorFlow Hub のモデルを使用した Python での MoveNet の実行の詳細については、こちらの[チュートリアル](https://www.tensorflow.org/hub/tutorials/movenet)を参照してください。
+- Coral/EdgeTPU では、エッジデバイスでポーズ推定を大幅に高速化して実行できます。詳細については、[EdgeTPU 最適化モデル](https://coral.ai/models/pose-estimation/)を参照してください。
+- [こちら](https://arxiv.org/abs/1803.08225)から PoseNet ドキュメントをお読みください。
 
-Also, check out these use cases of pose estimation.
+次のポーズ推定のユースケースも確認してください。
 
 <ul>
   <li><a href="https://vimeo.com/128375543">‘PomPom Mirror’</a></li>
   <li><a href="https://youtu.be/I5__9hq-yas">Amazing Art Installation Turns You Into A Bird | Chris Milk "The Treachery of Sanctuary"</a></li>
   <li><a href="https://vimeo.com/34824490">Puppet Parade - Interactive Kinect Puppets</a></li>
   <li><a href="https://vimeo.com/2892576">Messa di Voce (Performance), Excerpts</a></li>
-  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">Augmented reality</a></li>
-  <li><a href="https://www.instagram.com/p/Bg1EgOihgyh/">Interactive animation</a></li>
-  <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">Gait analysis</a></li>
+  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">拡張現実</a></li>
+  <li><a href="https://www.instagram.com/p/Bg1EgOihgyh/">対話型アニメーション</a></li>
+  <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">歩容解析</a></li>
 </ul>
