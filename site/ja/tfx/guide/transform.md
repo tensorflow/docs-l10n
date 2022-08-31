@@ -162,7 +162,7 @@ def create_estimator(pipeline_inputs, hparams):
 
 ## 変換前および変換後の統計の構成
 
-上記のように、変換コンポーネントは TFDV を呼び出して、変換前と変換後の両方の統計を計算します。TFDV は、オプションの [StatsOptions](https://github.com/tensorflow/datavalidation/blob/master/tensorflow_data_validation/statistics/stats_options.py) オブジェクトを入力として受け取ります。ユーザーには、特定の追加統計 (NLP 統計など) を有効にするか、検証されるしきい値 (最小/最大トークン頻度) を設定するようにこのオブジェクトを構成することをお勧めします。これを行うには、モジュールファイルで `stats_options_updater_fn` を定義します。
+上記のように、変換コンポーネントは TFDV を呼び出して、変換前と変換後の両方の統計を計算します。TFDV は、オプションの [StatsOptions](https://github.com/tensorflow/data-validation/blob/master/tensorflow_data_validation/statistics/stats_options.py) オブジェクトを入力として受け取ります。特定の追加統計（NLP 統計など）を有効にするか、検証されるしきい値（最小/最大トークン頻度）を設定して、このオブジェクトを構成することをお勧めします。これを行うには、モジュールファイルで `stats_options_updater_fn` を定義します。
 
 ```python
 def stats_options_updater_fn(stats_type, stats_options):
