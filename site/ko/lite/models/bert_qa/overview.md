@@ -6,7 +6,6 @@ Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](htt
 
 ## 시작하기
 
-
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
 TensorFlow Lite를 처음 사용하고 Android 또는 iOS로 작업하는 경우, 다음 예제 애플리케이션을 탐색하면 시작하는 데 도움이 됩니다.
@@ -40,7 +39,7 @@ The model can be used to build a system that can answer users’ questions in na
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
+      <th>모델명</th>
       <th>모델 크기</th>
       <th>기기</th>
       <th>CPU</th>
@@ -52,15 +51,15 @@ The model can be used to build a system that can answer users’ questions in na
     </td>
     <td rowspan="3">       100.5 Mb     </td>
     <td>Pixel 3(Android 10)</td>
-    <td>123ms*</td>
+    <td>123ms *</td>
   </tr>
    <tr>
      <td>Pixel 4(Android 10)</td>
-    <td>74ms*</td>
+    <td>74ms *</td>
   </tr>
    <tr>
      <td>iPhone XS(iOS 12.4.1)</td>
-    <td>257ms** </td>
+    <td>257ms **</td>
   </tr>
 </table>
 
@@ -68,7 +67,7 @@ The model can be used to build a system that can answer users’ questions in na
 
 ** 최상의 결과를 위해 iPhone에서 2개의 스레드가 사용되었습니다.
 
-## Example output
+## 예제 출력
 
 ### 구절(입력)
 
@@ -78,13 +77,13 @@ The model can be used to build a system that can answer users’ questions in na
 
 ### 질문(입력)
 
-> Who is the CEO of Google?
+> Google의 CEO는 누구입니까?
 
 ### 답변(출력)
 
 > Sundar Pichai
 
-## Read more about BERT
+## BERT에 대해 자세히 알아보기
 
 - 학술 논문: [BERT: 언어 이해를 위한 Deep Bidirectional Transformers의 사전 교육](https://arxiv.org/abs/1810.04805)
 - [Open-source implementation of BERT](https://github.com/google-research/bert)
