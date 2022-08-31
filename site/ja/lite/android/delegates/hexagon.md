@@ -67,7 +67,7 @@ dependencies {
 
 注意：ライセンス契約に同意する必要があります。
 
-Note: As of 02/23/2021 you should use v1.20.0.1.
+注意：2021 年 2 月 23 日時点では、v1.20.0.1 を使用する必要があります。
 
 注意：hexagon_nn ライブラリは、互換性のあるバージョンのインターフェイスライブラリと使用する必要があります。インターフェイスライブラリは AAR の一部であり、[config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) を通じて bazel によりフェッチされます。bazelconfig のバージョンを使用する必要があります。
 
@@ -165,7 +165,7 @@ dependencies {
 
 注意：ライセンス契約に同意する必要があります。
 
-Note: As of 02/23/2021 you should use v1.20.0.1.
+注意：2021 年 2 月 23 日時点では、v1.20.0.1 を使用する必要があります。
 
 注意：hexagon_nn ライブラリは、互換性のあるバージョンのインターフェイスライブラリと使用する必要があります。インターフェイスライブラリは AAR の一部であり、[config](https://github.com/tensorflow/tensorflow/blob/master/third_party/hexagon/workspace.bzl) を通じて bazel によりフェッチされます。bazelconfig のバージョンを使用する必要があります。
 
