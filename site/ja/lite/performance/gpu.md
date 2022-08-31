@@ -286,7 +286,7 @@ GPU デリゲートのリリースには、バックエンドで実行できる�
 
 ## サポートされていないモデルと演算
 
-If some of the ops are not supported by the GPU delegate, the framework will only run a part of the graph on the GPU and the remaining part on the CPU. Due to the high cost of CPU/GPU synchronization, a split execution mode like this will often result in slower performance than when the whole network is run on the CPU alone. In this case, the user will get a warning like:
+一部の演算が GPU デリゲートでサポートされていない場合、フレームワークは GPU でグラフの一部のみを実行し、残りの部分を CPU で実行します。CPU と GPU 同期のコストは高いため、このような分割実行モードでは、ネットワーク全体が CPU のみで実行されている場合よりもパフォーマンスが遅くなることがよくあります。この場合、ユーザーには次のような警告が表示されます。
 
 ```none
 WARNING: op code #42 cannot be handled by this delegate.
