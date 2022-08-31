@@ -117,6 +117,8 @@ GPU 커널은 OpKernel 및 CUDA 커널과 시작 코드의 두 부분으로 구�
 #ifndef KERNEL_EXAMPLE_H_
 #define KERNEL_EXAMPLE_H_
 
+#include <unsupported/Eigen/CXX11/Tensor>
+
 template <typename Device, typename T>
 struct ExampleFunctor {
   void operator()(const Device& d, int size, const T* in, T* out);
@@ -136,12 +138,24 @@ struct ExampleFunctor<Eigen::GpuDevice, T> {
 ```c++
 // kernel_example.cc
 #include "kernel_example.h"
+
+#include "tensorflow/core/framework/op.h"
+#include "tensorflow/core/framework/shape_inference.h"
 #include "tensorflow/core/framework/op_kernel.h"
 
 using namespace tensorflow;
 
 using CPUDevice = Eigen::ThreadPoolDevice;
 using GPUDevice = Eigen::GpuDevice;
+
+REGISTER_OP("Example")
+    .Attr("T: numbertype")
+    .Input("input: T")
+    .Output("input_times_two: T")
+    .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
+      c->set_output(0, c->input(0));
+      return Status::OK();
+    });
 
 // CPU specialization of actual computation.
 template <typename T>
@@ -205,7 +219,7 @@ REGISTER_GPU(int32);
 // kernel_example.cu.cc
 #ifdef GOOGLE_CUDA
 #define EIGEN_USE_GPU
-#include "example.h"
+#include "kernel_example.h"
 #include "tensorflow/core/util/gpu_kernel_helper.h"
 
 using namespace tensorflow;
@@ -262,7 +276,7 @@ $ python
 ```bash
 TF_CFLAGS=( $(python -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_compile_flags()))') )
 TF_LFLAGS=( $(python -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_link_flags()))') )
-g++ -std=c++11 -shared zero_out.cc -o zero_out.so -fPIC ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} -O2
+g++ -std=c++14 -shared zero_out.cc -o zero_out.so -fPIC ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} -O2
 ```
 
 macOS에서는 `.so` 파일을 빌드할 때 추가 플래그 "-undefined dynamic_lookup"이 필요합니다.
@@ -288,7 +302,26 @@ tf_custom_op_library(
 $ bazel build --config opt //tensorflow/core/user_ops:zero_out.so
 ```
 
-참고: 위에서 설명한 대로 gcc>=5로 컴파일하는 경우, Bazel 명령줄 인수에 `--cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0"`을 추가합니다.
+For compiling the `Example` operation, with the CUDA Kernel, you need to use the `gpu_srcs` parameter of `tf_custom_op_library`. Place a BUILD file with the following Bazel build rule in a new folder inside the [`tensorflow/core/user_ops`](https://www.tensorflow.org/code/tensorflow/core/user_ops/) directory (e.g. "example_gpu").
+
+```python
+load("//tensorflow:tensorflow.bzl", "tf_custom_op_library")
+
+tf_custom_op_library(
+    # kernel_example.cc  kernel_example.cu.cc  kernel_example.h
+    name = "kernel_example.so",
+    srcs = ["kernel_example.h", "kernel_example.cc"],
+    gpu_srcs = ["kernel_example.cu.cc", "kernel_example.h"],
+)
+```
+
+Run the following command to build `kernel_example.so`.
+
+```bash
+$ bazel build --config opt //tensorflow/core/user_ops/example_gpu:kernel_example.so
+```
+
+참고: 위에서 설명한 대로 gcc&gt;=5로 컴파일하는 경우, Bazel 명령줄 인수에 `--cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0"`을 추가합니다.
 
 > 참고: 표준 `cc_library` 규칙을 사용하여 공유 라이브러리(`.so` 파일)를 만들 수 있지만, `tf_custom_op_library` 매크로를 사용하는 것이 좋습니다. 이 매크로는 필수 종속성을 추가하고 공유 라이브러리가 TensorFlow의 플러그인 로딩 메커니즘과 호환되는지 확인합니다.
 
@@ -299,8 +332,7 @@ TensorFlow Python API는 `tf.load_op_library` 함수를 제공하여 동적 라�
 ```python
 import tensorflow as tf
 zero_out_module = tf.load_op_library('./zero_out.so')
-with tf.Session(''):
-  zero_out_module.zero_out([[1, 2], [3, 4]]).eval()
+print(zero_out_module.zero_out([[1, 2], [3, 4]]).numpy())
 
 # Prints
 array([[1, 0], [0, 0]], dtype=int32)
@@ -372,13 +404,13 @@ $ python zero_out_op_test.py
   }
 ```
 
-입력이 벡터임을 인증하는 내용이며, 그렇지 않은 경우, `InvalidArgument` 상태를 설정하여 반환합니다. [`OP_REQUIRES` 매크로](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h)는 세 가지 인수를 사용합니다.
+입력이 벡터임을 인증하는 내용이며, 그렇지 않은 경우, `InvalidArgument` 상태를 설정하여 반환합니다. [`OP_REQUIRES` 매크로](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h)는 세 가지 인수를 사용합니다.
 
 - `context`는 `SetStatus()` 메서드에 대한 `OpKernelContext` 또는 `OpKernelConstruction` 포인터([`tensorflow/core/framework/op_kernel.h`](https://www.tensorflow.org/code/tensorflow/core/framework/op_kernel.h) 참조)일 수 있습니다.
 - 조건. 예를 들어, [`tensorflow/core/framework/tensor_shape.h`](https://www.tensorflow.org/code/tensorflow/core/framework/tensor_shape.h)에 텐서의 형상을 확인하는 함수가 있습니다.
-- `Status` 객체로 표시되는 오류 자체는 [`tensorflow/core/lib/core/status.h`](https://www.tensorflow.org/code/tensorflow/core/lib/core/status.h)를 참조하세요. `Status`에는 유형(종종 `InvalidArgument`이지만, 유형의 목록 참조)과 메시지가 있습니다. 오류 생성 함수는 [`tensorflow/core/lib/core/errors.h`](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h)에서 찾을 수 있습니다.
+- `Status` 객체로 표시되는 오류 자체는 [`tensorflow/core/platform/status.h`](https://www.tensorflow.org/code/tensorflow/core/platform/status.h)를 참조하세요. `Status`에는 유형(종종 `InvalidArgument`이지만, 유형의 목록 참조)과 메시지가 있습니다. 오류 생성 함수는 [`tensorflow/core/lib/core/errors.h`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h)에서 찾을 수 있습니다.
 
-일부 함수에서 반환된 `Status` 객체가 오류인지 테스트하려는 경우, [`OP_REQUIRES_OK`](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h)를 사용합니다. 이 두 매크로는 모두 오류 시 함수로부터 반환합니다.
+일부 함수에서 반환된 `Status` 객체가 오류인지 테스트하려는 경우, [`OP_REQUIRES_OK`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h)를 사용합니다. 이 두 매크로는 모두 오류 시 함수로부터 반환합니다.
 
 ### Op 등록
 
@@ -967,7 +999,7 @@ REGISTER_OP("MultipleInsAndOuts")
 
 안전하거나 안전하지 않은 변경 사항의 전체 목록은 [`tensorflow/core/framework/op_compatibility_test.cc`](https://www.tensorflow.org/code/tensorflow/core/framework/op_compatibility_test.cc) 에서 찾을 수 있습니다. 이전 버전과 호환되도록 연산을 변경할 수 없는 경우, 새 의미 체계를 사용하여 새 이름으로 새 연산을 만듭니다.
 
-또한, 이러한 변경 사항은 `GraphDef` 호환성을 유지할 수 있지만, 생성된 Python 코드는 이전 호출자와 호환되지 않는 방식으로 변경될 수 있습니다. Python API는 새로운 선택적 인수를 끝에 추가하는 것을 제외하고 이전 서명을 유지함으로써 손으로 작성한 Python 래퍼를 신중하게 변경하여 호환성을 유지할 수 있습니다. 일반적으로, 호환되지 않는 변경 사항은 TensorFlow의 주요 버전이 변경될 때만 수행될 수 있으며 <a data-md-type="link" href="./versions.md#compatibility_of_graphs_and_checkpoints">`GraphDef`버전 의미 체계</a>를 준수해야 합니다.
+또한, 이러한 변경 사항은 `GraphDef` 호환성을 유지할 수 있지만, 생성된 Python 코드는 이전 호출자와 호환되지 않는 방식으로 변경될 수 있습니다. Python API는 새로운 선택적 인수를 끝에 추가하는 것을 제외하고 이전 서명을 유지함으로써 손으로 작성한 Python 래퍼를 신중하게 변경하여 호환성을 유지할 수 있습니다. 일반적으로, 호환되지 않는 변경 사항은 TensorFlow의 주요 버전이 변경될 때만 수행될 수 있으며 <a data-md-type="raw_html" href="./versions.md#compatibility_of_graphs_and_checkpoints">`GraphDef`버전 의미 체계</a>를 준수해야 합니다.
 
 ### GPU 지원
 
@@ -991,10 +1023,10 @@ REGISTER_OP("MultipleInsAndOuts")
 CUDA 커널을 사용하여 op를 구현하는 예는 [cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc)를 참조하세요. `tf_custom_op_library`은 CUDA 커널(`*.cu.cc` 파일)을 포함하는 소스 파일의 목록을 지정할 수있는 `gpu_srcs` 인수를 허용합니다. TensorFlow의 바이너리 설치에서 사용하려면, CUDA 커널을 NVIDIA의 `nvcc` 컴파일러로 컴파일해야 합니다. 다음은 [cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc) 및 [cuda_op_kernel.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cc)를 동적으로 로드 가능한 단일 라이브러리로 컴파일하는 데 사용할 수 있는 명령 시퀀스입니다.
 
 ```bash
-nvcc -std=c++11 -c -o cuda_op_kernel.cu.o cuda_op_kernel.cu.cc \
+nvcc -std=c++14 -c -o cuda_op_kernel.cu.o cuda_op_kernel.cu.cc \
   ${TF_CFLAGS[@]} -D GOOGLE_CUDA=1 -x cu -Xcompiler -fPIC
 
-g++ -std=c++11 -shared -o cuda_op_kernel.so cuda_op_kernel.cc \
+g++ -std=c++14 -shared -o cuda_op_kernel.so cuda_op_kernel.cc \
   cuda_op_kernel.cu.o ${TF_CFLAGS[@]} -fPIC -lcudart ${TF_LFLAGS[@]}
 ```
 
@@ -1008,7 +1040,7 @@ CUDA 라이브러리가 `/usr/local/lib64`에 설치되지 않은 경우, 위의
 
 ops의 그래프에서 TensorFlow는 자동 미분(역전파)을 사용하여 기존 op에 대한 그래디언트를 나타내는 새 ops를 추가합니다. 새로운 ops에 대해 자동 미분을 수행하려면, ops의 출력에 대한 그래디언트가 지정된 ops의 입력에 대한 그래디언트를 계산하는 그래디언트 함수를 등록해야 합니다.
 
-수학적으로, op가 \(y = f(x)\)를 계산하는 경우, 등록된 그래디언트 op는 \(y\)에 대한 손실 \(L\)의 그래디언트 \(\partial L/ \partial y\)를 연쇄 규칙을 통해 \(x\)에 대한 그래디언트 \(\partial L/ \ partial x\)로 변환합니다.
+수학적으로, op가 (y = f(x))를 계산하는 경우, 등록된 그래디언트 op는 (y)에 대한 손실 (L)의 그래디언트 (\partial L/ \partial y)를 연쇄 규칙을 통해 (x)에 대한 그래디언트 (\partial L/ \ partial x)로 변환합니다.
 
 $$\frac{\partial L}{\partial x} = \frac{\partial L}{\partial y} \frac{\partial y}{\partial x} = \frac{\partial L}{\partial y} \frac{\partial f}{\partial x}.$$
 
