@@ -1,6 +1,6 @@
 # 이미지 분할기 통합하기
 
-이미지 분할기는 이미지의 각 픽셀이 특정 클래스와 연관되어 있는지 여부를 예측합니다. 이는 직사각형 영역에서 객체를 감지하는 <a href="../../models/object_detection/overview.md">객체 감지</a>, 그리고 전체 이미지를 분류하는 <a href="../../models/image_classification/overview.md">이미지 분류</a>와 대조적입니다. 이미지 분할기에 대한 자세한 내용은 [이미지 분할 소개](../../models/segmentation/overview.md)를 참조하세요.
+이미지 분할기는 이미지의 각 픽셀이 특정 클래스와 연관되어 있는지 여부를 예측합니다. 이는 직사각형 영역에서 객체를 감지하는 <a href="../../examples/object_detection/overview">객체 감지</a>, 그리고 전체 이미지를 분류하는 <a href="../../examples/image_classification/overview">이미지 분류</a>와 대조적입니다. 이미지 분할기에 대한 자세한 내용은 [이미지 분할 개요](../../examples/segmentation/overview)를 참조하세요.
 
 Task Library `ImageSegmenter` API를 사용하여 사용자 정의 이미지 분할기 또는 사전 훈련된 분할기를 모델 앱에 배포합니다.
 
@@ -38,16 +38,15 @@ android {
     aaptOptions {
         noCompress "tflite"
     }
-
 }
 
 dependencies {
     // Other dependencies
 
     // Import the Task Vision Library dependency (NNAPI is included)
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-vision'
     // Import the GPU delegate plugin Library for GPU inference
-    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin'
 }
 ```
 
@@ -71,13 +70,130 @@ List<Segmentation> results = imageSegmenter.segment(image);
 
 `ImageSegmenter` 구성에 대한 추가 옵션은 [소스 코드 및 javadoc](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/vision/segmenter/ImageSegmenter.java)를 참조하세요.
 
+## iOS에서 추론 실행하기
+
+### 1단계: 종속성 설치하기
+
+작업 라이브러리는 CocoaPods를 사용한 설치를 지원합니다. 시스템에 CocoaPods가 설치되어 있는지 확인하세요. 지침은 [CocoaPods 설치 가이드](https://guides.cocoapods.org/using/getting-started.html#getting-started)를 참조하세요.
+
+Xcode 프로젝트에 포드를 추가하는 방법에 대한 자세한 내용은 [CocoaPods 가이드](https://guides.cocoapods.org/using/using-cocoapods.html)를 참조하세요.
+
+Podfile에 `TensorFlowLiteTaskVision` 포드를 추가합니다.
+
+```
+target 'MyAppWithTaskAPI' do
+  use_frameworks!
+  pod 'TensorFlowLiteTaskVision'
+end
+```
+
+추론에 사용할 `.tflite` 모델이 앱 번들에 있어야 합니다.
+
+### Step 2: Using the model
+
+#### Swift
+
+```swift
+// Imports
+import TensorFlowLiteTaskVision
+
+// Initialization
+guard let modelPath = Bundle.main.path(forResource: "deeplabv3",
+                                            ofType: "tflite") else { return }
+
+let options = ImageSegmenterOptions(modelPath: modelPath)
+
+// Configure any additional options:
+// options.outputType = OutputType.confidenceMasks
+
+let segmenter = try ImageSegmenter.segmenter(options: options)
+
+// Convert the input image to MLImage.
+// There are other sources for MLImage. For more details, please see:
+// https://developers.google.com/ml-kit/reference/ios/mlimage/api/reference/Classes/GMLImage
+guard let image = UIImage (named: "plane.jpg"), let mlImage = MLImage(image: image) else { return }
+
+// Run inference
+let segmentationResult = try segmenter.segment(mlImage: mlImage)
+```
+
+#### Objective C
+
+```objc
+// Imports
+#import <TensorFlowLiteTaskVision/TFLTaskVision.h>
+
+// Initialization
+NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"deeplabv3" ofType:@"tflite"];
+
+TFLImageSegmenterOptions *options =
+    [[TFLImageSegmenterOptions alloc] initWithModelPath:modelPath];
+
+// Configure any additional options:
+// options.outputType = TFLOutputTypeConfidenceMasks;
+
+TFLImageSegmenter *segmenter = [TFLImageSegmenter imageSegmenterWithOptions:options
+                                                                      error:nil];
+
+// Convert the input image to MLImage.
+UIImage *image = [UIImage imageNamed:@"plane.jpg"];
+
+// There are other sources for GMLImage. For more details, please see:
+// https://developers.google.com/ml-kit/reference/ios/mlimage/api/reference/Classes/GMLImage
+GMLImage *gmlImage = [[GMLImage alloc] initWithImage:image];
+
+// Run inference
+TFLSegmentationResult *segmentationResult =
+    [segmenter segmentWithGMLImage:gmlImage error:nil];
+```
+
+<code>TFLImageSegmenter</code> 구성을 위한 추가 옵션은 <a>소스 코드</a>를 참조하세요.
+
+## Python에서 추론 실행하기
+
+### 1단계: pip 패키지 설치하기
+
+```
+pip install tflite-support
+```
+
+### Step 2: Using the model
+
+```python
+# Imports
+from tflite_support.task import vision
+from tflite_support.task import core
+from tflite_support.task import processor
+
+# Initialization
+base_options = core.BaseOptions(file_name=model_path)
+segmentation_options = processor.SegmentationOptions(
+    output_type=processor.SegmentationOptions.OutputType.CATEGORY_MASK)
+options = vision.ImageSegmenterOptions(base_options=base_options, segmentation_options=segmentation_options)
+segmenter = vision.ImageSegmenter.create_from_options(options)
+
+# Alternatively, you can create an image segmenter in the following manner:
+# segmenter = vision.ImageSegmenter.create_from_file(model_path)
+
+# Run inference
+image_file = vision.TensorImage.create_from_file(image_path)
+segmentation_result = segmenter.segment(image_file)
+```
+
+See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/vision/image_segmenter.py) for more options to configure `ImageSegmenter`.
+
 ## C++에서 추론 실행하기
 
 ```c++
 // Initialization
 ImageSegmenterOptions options;
-options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
 std::unique_ptr<ImageSegmenter> image_segmenter = ImageSegmenter::CreateFromOptions(options).value();
+
+// Create input frame_buffer from your inputs, `image_data` and `image_dimension`.
+// See more information here: tensorflow_lite_support/cc/task/vision/utils/frame_buffer_common_utils.h
+std::unique_ptr<FrameBuffer> frame_buffer = CreateFromRgbRawBuffer(
+      image_data, image_dimension);
 
 // Run inference
 const SegmentationResult result = image_segmenter->Segment(*frame_buffer).value();
@@ -88,6 +204,7 @@ const SegmentationResult result = image_segmenter->Segment(*frame_buffer).value(
 ## 예제 결과
 
 다음은 TensorFlow Hub에서 사용할 수 있는 일반적인 분할 모델인 [deeplab_v3](https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/1)의 분할 결과를 보여주는 예입니다.
+
 
 <img src="images/plane.jpg" alt="비행기" width="50%">
 
@@ -114,13 +231,14 @@ this legend.
 
 분할 범주 마스크는 다음과 같아야 합니다.
 
+
 <img src="images/segmentation-output.png" alt="분할 출력" width="30%">
 
 자체 모델 및 테스트 데이터로 간단한 [ImageSegmenter용 CLI 데모 도구](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop#image-segmenter)를 시도해 보세요.
 
 ## 모델 호환성 요구 사항
 
-`ImageSegmenter` API는 필수 [TFLite 모델 메타데이터](../../convert/metadata.md)가 있는 TFLite 모델을 예상합니다. [TensorFlow Lite Metadata Writer API](../../convert/metadata_writer_tutorial.ipynb#image_segmenters)를 사용하여 이미지 분류자에 대한 메타데이터를 생성하는 예를 참조하세요.
+`ImageSegmenter` API는 필수 [TFLite 모델 메타데이터](../../models/convert/metadata)가 있는 TFLite 모델을 예상합니다. [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#image_segmenters)를 사용하여 이미지 분류자에 대한 메타데이터를 생성하는 예를 참조하세요.
 
 - 입력 이미지 텐서(kTfLiteUInt8/kTfLiteFloat32)
 
