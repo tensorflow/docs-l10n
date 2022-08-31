@@ -213,7 +213,7 @@ iOS 13 は Core ML 3 をサポートしていますが、Core ML 2 のモデル�
 Core ML デリゲートがサポートする演算子は以下の通りです。
 
 - Add
-    - Only certain shapes are broadcastable. In Core ML tensor layout, following tensor shapes are broadcastable. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
+    - 特定の形状に限りブロードキャストが可能です。Core ML のテンソルレイアウトでは、次のテンソル形状をブロードキャストできます。`[B, C, H, W]`、`[B, C, 1, 1]`、`[B, 1, H, W]`、 `[B, 1, 1, 1]`。
 - AveragePool2D
 - Concat
     - 連結はチャンネル軸に沿って行う必要があります。
@@ -223,7 +223,7 @@ Core ML デリゲートがサポートする演算子は以下の通りです。
     - 重みやバイアスは定数である必要があります。
 - FullyConnected（別名 Dense または InnerProduct）
     - 重みやバイアスは（存在する場合）定数である必要があります。
-    - Only supports single-batch case. Input dimensions should be 1, except the last dimension.
+    - 単一バッチケースのみをサポートします。入力次元は、最後の次元以外は 1 である必要があります。
 - Hardswish
 - Logistic（別名 Sigmoid）
 - MaxPool2D
