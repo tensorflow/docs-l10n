@@ -44,16 +44,15 @@ android {
     aaptOptions {
         noCompress "tflite"
     }
-
 }
 
 dependencies {
     // Other dependencies
 
     // Import the Task Vision Library dependency (NNAPI is included)
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-vision'
     // Import the GPU delegate plugin Library for GPU inference
-    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin'
 }
 ```
 
@@ -78,13 +77,127 @@ List<Detection> results = objectDetector.detect(image);
 
 `ObjectDetector`를 구성하는 추가 옵션은 [소스 코드 및 javadoc](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/vision/detector/ObjectDetector.java)를 참조하세요.
 
+## iOS에서 추론 실행하기
+
+### 1단계: 종속성 설치하기
+
+작업 라이브러리는 CocoaPods를 사용한 설치를 지원합니다. 시스템에 CocoaPods가 설치되어 있는지 확인하세요. 지침은 [CocoaPods 설치 가이드](https://guides.cocoapods.org/using/getting-started.html#getting-started)를 참조하세요.
+
+Xcode 프로젝트에 포드를 추가하는 방법에 대한 자세한 내용은 [CocoaPods 가이드](https://guides.cocoapods.org/using/using-cocoapods.html)를 참조하세요.
+
+Podfile에 `TensorFlowLiteTaskVision` 포드를 추가합니다.
+
+```
+target 'MyAppWithTaskAPI' do
+  use_frameworks!
+  pod 'TensorFlowLiteTaskVision'
+end
+```
+
+추론에 사용할 `.tflite` 모델이 앱 번들에 있어야 합니다.
+
+### Step 2: Using the model
+
+#### Swift
+
+```swift
+// Imports
+import TensorFlowLiteTaskVision
+
+// Initialization
+guard let modelPath = Bundle.main.path(forResource: "ssd_mobilenet_v1",
+                                            ofType: "tflite") else { return }
+
+let options = ObjectDetectorOptions(modelPath: modelPath)
+
+// Configure any additional options:
+// options.classificationOptions.maxResults = 3
+
+let detector = try ObjectDetector.detector(options: options)
+
+// Convert the input image to MLImage.
+// There are other sources for MLImage. For more details, please see:
+// https://developers.google.com/ml-kit/reference/ios/mlimage/api/reference/Classes/GMLImage
+guard let image = UIImage (named: "cats_and_dogs.jpg"), let mlImage = MLImage(image: image) else { return }
+
+// Run inference
+let detectionResult = try detector.detect(mlImage: mlImage)
+```
+
+#### Objective C
+
+```objc
+// Imports
+#import <TensorFlowLiteTaskVision/TFLTaskVision.h>
+
+// Initialization
+NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"ssd_mobilenet_v1" ofType:@"tflite"];
+
+TFLObjectDetectorOptions *options = [[TFLObjectDetectorOptions alloc] initWithModelPath:modelPath];
+
+// Configure any additional options:
+// options.classificationOptions.maxResults = 3;
+
+TFLObjectDetector *detector = [TFLObjectDetector objectDetectorWithOptions:options
+                                                                     error:nil];
+
+// Convert the input image to MLImage.
+UIImage *image = [UIImage imageNamed:@"dogs.jpg"];
+
+// There are other sources for GMLImage. For more details, please see:
+// https://developers.google.com/ml-kit/reference/ios/mlimage/api/reference/Classes/GMLImage
+GMLImage *gmlImage = [[GMLImage alloc] initWithImage:image];
+
+// Run inference
+TFLDetectionResult *detectionResult = [detector detectWithGMLImage:gmlImage error:nil];
+```
+
+<code>TFLObjectDetector</code> 구성을 위한 추가 옵션은 <a>소스 코드</a>를 참조하세요.
+
+## Python에서 추론 실행하기
+
+### 1단계: pip 패키지 설치하기
+
+```
+pip install tflite-support
+```
+
+### Step 2: Using the model
+
+```python
+# Imports
+from tflite_support.task import vision
+from tflite_support.task import core
+from tflite_support.task import processor
+
+# Initialization
+base_options = core.BaseOptions(file_name=model_path)
+detection_options = processor.DetectionOptions(max_results=2)
+options = vision.ObjectDetectorOptions(base_options=base_options, detection_options=detection_options)
+detector = vision.ObjectDetector.create_from_options(options)
+
+# Alternatively, you can create an object detector in the following manner:
+# detector = vision.ObjectDetector.create_from_file(model_path)
+
+# Run inference
+image = vision.TensorImage.create_from_file(image_path)
+detection_result = detector.detect(image)
+```
+
+See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/vision/object_detector.py) for more options to configure `ObjectDetector`.
+
 ## C++에서 추론 실행하기
 
 ```c++
 // Initialization
 ObjectDetectorOptions options;
-options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
 std::unique_ptr<ObjectDetector> object_detector = ObjectDetector::CreateFromOptions(options).value();
+
+// Create input frame_buffer from your inputs, `image_data` and `image_dimension`.
+// See more information here: tensorflow_lite_support/cc/task/vision/utils/frame_buffer_common_utils.h
+std::unique_ptr<FrameBuffer> frame_buffer = CreateFromRgbRawBuffer(
+      image_data, image_dimension);
 
 // Run inference
 const DetectionResult result = object_detector->Detect(*frame_buffer).value();
@@ -95,6 +208,7 @@ const DetectionResult result = object_detector->Detect(*frame_buffer).value();
 ## 예제 결과
 
 다음은 TensorFlow Hub에서 [ssd mobilenet v1](https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1)의 감지 결과를 보여주는 예입니다.
+
 
 <img src="images/dogs.jpg" alt="개" width="50%">
 
@@ -116,13 +230,14 @@ Results:
 
 경계 상자를 입력 이미지에 렌더링합니다.
 
+
 <img src="images/detection-output.png" alt="감지 출력" width="50%">
 
 자체 모델 및 테스트 데이터로 간단한 [ObjectDetector용 CLI 데모 도구](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop#object-detector)를 시도해 보세요.
 
 ## 모델 호환성 요구 사항
 
-`ObjectDetector` API는 필수 [TFLite 모델 메타데이터](../../convert/metadata.md)가 있는 TFLite 모델을 예상합니다. [TensorFlow Lite Metadata Writer API](../../convert/metadata_writer_tutorial.ipynb#object_detectors)를 사용하여 객체 감지기에 대한 메타데이터를 생성하는 예를 참조하세요.
+`ObjectDetector` API는 필수 [TFLite 모델 메타데이터](../../models/convert/metadata)가 있는 TFLite 모델을 예상합니다. [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#object_detectors)를 사용하여 객체 감지기에 대한 메타데이터를 생성하는 예를 참조하세요.
 
 호환되는 객체 감지기 모델은 다음 요구 사항을 충족해야 합니다.
 
