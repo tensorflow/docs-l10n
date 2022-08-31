@@ -6,8 +6,7 @@
 
 다음 이미지는 Android에서 오디오 분류 모델의 출력을 보여줍니다.
 
-
-<img src="images/android_audio_classification.png" alt="Screenshot of Android example" width="30%">
+<img src="images/android_audio_classification.png" width="30%" alt="Android 예제의 스크린샷">
 
 참고: (1) 기존 모델을 통합하려면 [TensorFlow Lite 작업 라이브러리](https://www.tensorflow.org/lite/inference_with_metadata/task_library/audio_classifier)를 사용해 보세요. (2) 모델을 사용자 지정하려면 [TensorFlow Lite 모델 제작기](https://www.tensorflow.org/lite/models/modify/model_maker/audio_classification)를 사용해 보세요.
 
