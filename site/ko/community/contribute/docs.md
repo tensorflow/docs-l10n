@@ -62,7 +62,7 @@ Markdown 파일에 대한 간단한 문서 업데이트를 만드는 가장 쉬�
 
 참고 : <a href="https://git-scm.com/" class="external">Git</a> 은 소스 코드의 변경 사항을 추적하는 데 사용되는 오픈 소스 버전 제어 시스템 (VCS)입니다. <a href="https://github.com" class="external">GitHub</a> 는 Git에서 작동하는 협업 도구를 제공하는 온라인 서비스입니다. GitHub 계정을 설정하고 시작하려면 <a href="https://help.github.com" class="external">GitHub 도움말</a> 을 참조하십시오.
 
-The following Git steps are only required the first time you set up a local project.
+다음 Git 단계는 로컬 프로젝트를 처음 설정할 때만 필요합니다.
 
 #### Fork the tensorflow/docs repo
 
@@ -179,7 +179,7 @@ To create a new notebook, copy and edit the <a href="https://github.com/tensorfl
 
 Within the Google Colab environment, double-click cells to edit text and code blocks. Text cells use Markdown and should follow the [TensorFlow docs style guide](./docs_style.md).
 
-Download notebook files from Colab with *File &gt; Download .pynb*. Commit this file to your [local Git repo](##set_up_a_local_git_repo) and send a pull request.
+Colab에서 *File &gt; Download .pynb*를 이용해 노트북 파일을 다운로드합니다. 이 파일을 자신의 [local Git repo](##set_up_a_local_git_repo)에 커밋하고 풀 요청을 보냅니다.
 
 To create a new notebook, copy and edit the <a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow notebook template</a>.
 
