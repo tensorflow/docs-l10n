@@ -4,10 +4,10 @@
 
 ## テスト可能なドキュメンテーション文字列
 
-TensorFlow は [DocTest](https://docs.python.org/3/library/doctest.html) を使用して Python ドキュメント文字列（docstring）のコードスニペットをテストします。スニペットは、実行可能な Python コードである必要があります。テストを有効にするには、行の先頭に `>>>`（3 つの右山括弧）を追加します。例えば、以下は [array_ops.py](https://www.tensorflow.org/code/tensorflow/python/ops/array_ops.py) ソースファイルの `tf.concat` 関数からの抜粋です。
+TensorFlow は [DocTest](https://docs.python.org/3/library/doctest.html) を使用して Python ドキュメント文字列（docstring）のコードスニペットをテストします。スニペットは、実行可能な Python コードである必要があります。テストを有効にするには、行の先頭に `>>>`（3 つの右山括弧）を追加します。例えば、以下は <a>array_ops.py</a> ソースファイルの <code>tf.concat</code> 関数からの抜粋です。
 
 ```
-def concat(values, axis, name="concat"):
+<code>def concat(values, axis, name="concat"):
   """Concatenates tensors along one dimension.
   ...
 
@@ -95,7 +95,7 @@ TensorFlow uses a few customizations to the builtin doctest logic:
 
     ```
     def NewLayer():
-      “””This layer does cool stuff.
+      """This layer does cool stuff.
 
       Example usage:
 
@@ -103,7 +103,7 @@ TensorFlow uses a few customizations to the builtin doctest logic:
       >>> new_layer = NewLayer(x)
       >>> new_layer
       <tf.Tensor: shape=(1, 14, 14, 3), dtype=int32, numpy=...>
-      “””
+      """
     ```
 
 *   *Floating point values*: The TensorFlow doctest extracts float values from
@@ -177,7 +177,7 @@ There are two ways to test the code in the docstring locally:
     For example:
 
     <pre class="prettyprint lang-bsh">
-    <code class="devsite-terminal">python tf_doctest.py --file=<file_path>
+    <code class="devsite-terminal">python tf_doctest.py --file=<file_path></code>
     </pre>
 
     This will run it using your installed version of TensorFlow. To be sure
@@ -194,13 +194,13 @@ There are two ways to test the code in the docstring locally:
     to build from source, you can run the tests:
 
     <pre class="prettyprint lang-bsh">
-    bazel run //tensorflow/tools/docs:tf_doctest
+    <code class="devsite-terminal">bazel run //tensorflow/tools/docs:tf_doctest</code>
     </pre>
 
     or
 
     <pre class="prettyprint lang-bsh">
-    bazel run //tensorflow/tools/docs:tf_doctest -- --module=ops.array_ops
+    <code class="devsite-terminal">bazel run //tensorflow/tools/docs:tf_doctest -- --module=ops.array_ops</code>
     </pre>
 
     The `--module` is relative to `tensorflow.python`.
