@@ -4,7 +4,7 @@
 
 ## 테스트 가능한 문서 문자열
 
-TensorFlow uses [DocTest](https://docs.python.org/3/library/doctest.html) to test code snippets in Python docstrings. The snippet must be executable Python code. To enable testing, prepend the line with `>>>` (three left-angle brackets). For example, here's a excerpt from the `tf.concat` function in the [array_ops.py](https://www.tensorflow.org/code/tensorflow/python/ops/array_ops.py) source file:
+TensorFlow는 [DocTest](https://docs.python.org/3/library/doctest.html) 를 사용하여 Python docstring에서 코드 스 니펫을 테스트합니다. 스 니펫은 실행 가능한 Python 코드 여야합니다. 테스트를 가능하게하려면 `>>>` (세 개의 왼쪽 꺾쇠 괄호)로 줄을 추가하십시오. 예를 들어, 다음은 <a>array_ops.py</a> 소스 파일의 <code>tf.concat</code> 함수에서 발췌 한 것입니다.
 
 ```
 def concat(values, axis, name="concat"):
