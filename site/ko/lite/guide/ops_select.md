@@ -40,7 +40,7 @@ dependencies {
 }
 ```
 
-야간 스냅샷을 사용하려면 [Sonatype 스냅샷 저장소](./build_android#use_nightly_snapshots)를 추가했는지 확인하세요.
+To use nightly snapshots, make sure that you have added [Sonatype snapshot repository](../android/lite_build.md#use_nightly_snapshots).
 
 종속성을 추가한 경우, 그래프의 TensorFlow ops를 처리하는 데 필요한 대리자가 이러한 연산자가 필요한 그래프에 대해 자동으로 설치됩니다.
 
@@ -58,7 +58,7 @@ android {
 
 #### Android AAR 빌드하기
 
-바이너리 크기를 줄이거나 다른 높은 수준의 경우, 라이브러리를 수동으로 빌드할 수도 있습니다. <a href="android.md">제대로 작동하는 TensorFlow Lite 빌드 환경</a>을 가정하고 다음과 같이 특정 TensorFlow ops로 Android AAR을 빌드합니다.
+For reducing the binary size or other advanced cases, you can also build the library manually. Assuming a [working TensorFlow Lite build environment](../android/quickstart.md), build the Android AAR with select TensorFlow ops as follows:
 
 ```sh
 sh tensorflow/lite/tools/build_aar.sh \
@@ -105,7 +105,7 @@ dependencies {
 
 #### CocoaPods 사용하기
 
-`TensorFlowLiteSwift` 또는 `TensorFlowLiteObjC` CocoaPods와 함께 사용할 수 있는 `armv7` 및 `arm64`에 대해 야간에 사전 빌드되는 특정 TF ops CocoaPods가 제공됩니다.
+TensorFlow Lite provides nightly prebuilt select TF ops CocoaPods for `arm64`, which you can depend on alongside the `TensorFlowLiteSwift` or `TensorFlowLiteObjC` CocoaPods.
 
 *참고*: `x86_64` 시뮬레이터에서 선택한 TF ops를 사용해야 하는 경우, 선택한 ops 프레임워크를 직접 빌드할 수 있습니다. 자세한 내용은 [Bazel + Xcode 사용](#using_bazel_xcode) 섹션을 참조하세요.
 
@@ -135,7 +135,7 @@ iOS를 위한 특정 TensorFlow ops를 포함한 TensorFlow Lite는 Bazel을 사
 iOS 지원이 활성화된 상태로 작업 공간을 구성한 후에는 다음 명령을 사용하여 일반 `TensorFlowLiteC.framework`에 추가할 수 있는 특정 TF ops 애드온 프레임워크를 빌드할 수 있습니다. 특정 TF ops 프레임워크는 `i386` 아키텍처용으로 빌드할 수 없으므로, `i386`이 아닌 대상 아키텍처의 목록을 명시적으로 제공할 필요가 있습니다.
 
 ```sh
-bazel build -c opt --config=ios --ios_multi_cpus=armv7,arm64,x86_64 \
+bazel build -c opt --config=ios --ios_multi_cpus=arm64,x86_64 \
   //tensorflow/lite/ios:TensorFlowLiteSelectTfOps_framework
 ```
 
