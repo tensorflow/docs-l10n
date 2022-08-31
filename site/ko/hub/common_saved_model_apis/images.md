@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2021-10-15'  } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2022-04-16' review_interval: '6 months' } *-->
 
 # 이미지 작업을 위한 일반적인 SavedModel API
 
@@ -55,7 +55,7 @@ Keras에서는 `hub.KerasLayer`에서 처리합니다. `trainable=True`로 초�
 
 ### 사용법 요약
 
-**이미지 분류**는 *모듈 게시자가 선택한 * 분류 체계의 등급(class)에서 이미지의 픽셀을 멤버십에 대한 선형 점수(logit)에 매핑합니다. 이를 통해 모델 소비자는 게시자 모듈에서 학습한 특정 분류에서 결론을 도출할 수 있습니다. (새로운 등급의 세트를 사용한 이미지 분류의 경우, 대신 새 분류자로 [이미지 특성 벡터](#feature-vector) 모델을 재사용하는 것이 일반적입니다.)
+**Image classification** maps the pixels of an image to linear scores (logits) for membership in the classes of a taxonomy *selected by the module publisher*. This allows model consumers to to draw conclusions from the particular classification learned by the publisher module. (For image classification with a new set of classes, it is common to reuse an [Image Feature Vector](#feature-vector) model with a new classifier instead.)
 
 이미지 분류를 위한 Reusable SavedModel에는 이미지 배치를 로짓 배치에 매핑하는 루트 객체에 대한 `__call__` 메서드가 있습니다. 다음과 같이 사용할 수 있습니다.
 
