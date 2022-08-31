@@ -1,8 +1,8 @@
-# BERT Question and Answer
+# BERT 質問と回答
 
-Use a TensorFlow Lite model to answer questions based on the content of a given passage.
+TensorFlow Lite モデルを使用して、特定のパッセージの内容に基づいて質問に答えます。
 
-Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/bert_question_answerer). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/question_answer).
+注意: (1) 既存のモデルを統合するには、[TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/bert_question_answerer) を試してください。(2) モデルをカスタマイズするには、[TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/question_answer) を試してください。
 
 ## はじめに
 
@@ -11,15 +11,13 @@ Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](htt
 
 TensorFlow Lite を初めて使用する場合、Android または iOS を使用する場合は、以下のサンプルアプリをご覧ください。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android example</a>
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/ios">iOS
-example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android の例</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/ios">iOS の例</a>
 
 Android または iOS 以外のプラットフォームを使用する場合、または、すでに [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite) に精通している場合は、質問と回答スターターモデルをダウンロードしてください。
 
 スターターモデルと語彙をダウンロードする
 
-For more information about metadata and associated fields (e.g. `vocab.txt`) see <a href="https://www.tensorflow.org/lite/models/convert/metadata#read_the_metadata_from_models">Read the metadata from models</a>.
+メタデータと関連フィールド (`vocab.txt`など) の詳細については、「<a href="https://www.tensorflow.org/lite/models/convert/metadata#read_the_metadata_from_models">モデルからメタデータを読み取る</a>」をご覧ください。
 
 ## 使い方
 
@@ -47,10 +45,9 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">
-      <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a>
-    </td>
-    <td rowspan="3">       100.5 Mb     </td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a>
+</td>
+    <td rowspan="3">       100.5 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>123ms*</td>
   </tr>
@@ -87,4 +84,4 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
 ## BERT の詳細を読む
 
 - 学術論文: [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (自然言語処理のための Transformer を用いたディープ双方向型事前トレーニング)](https://arxiv.org/abs/1810.04805)
-- [Open-source implementation of BERT](https://github.com/google-research/bert)
+- [BERT のオープンソース実装](https://github.com/google-research/bert)
