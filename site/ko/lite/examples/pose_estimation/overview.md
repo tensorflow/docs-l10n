@@ -1,28 +1,38 @@
-# 포즈 예측
+# 포즈 추정
+
 
 <img src="../images/pose.png" class="attempt-right">
 
-## 시작하기
-
 *PoseNet*는 주요 신체 관절의 위치를 예측하여 이미지 또는 비디오에서 사람의 포즈를 예측하는 데 사용할 수 있는 비전 모델입니다.
 
-<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">스타터 모델 다운로드하기</a>
+## 시작하기
 
-웹 브라우저에서 포즈 예측을 실험하고 싶다면 <a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet">TensorFlow.js GitHub 리포지토리</a>를 확인하세요.
+If you are new to TensorFlow Lite and are working with Android or iOS, explore the following example applications that can help you get started.
 
-### 예제 애플리케이션 및 가이드
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android"> Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">
+iOS example</a>
 
-Android 및 iOS용 PoseNet 모델을 보여주는 TensorFlow Lite 애플리케이션 예제를 제공합니다.
+If you are familiar with the [TensorFlow Lite APIs](https://www.tensorflow.org/api_docs/python/tf/lite), download the starter MoveNet pose estimation model and supporting files.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/posenet/android">Android 예제</a>
+<a class="button button-primary" href="https://tfhub.dev/s?q=movenet"> Download starter model</a>
 
-## 동작 원리
+If you want to try pose estimation on a web browser, check out the <a href="https://storage.googleapis.com/tfjs-models/demos/pose-detection/index.html?model=movenet"> TensorFlow JS Demo</a>.
+
+## Model description
+
+### 동작 원리
+
+Pose estimation refers to computer vision techniques that detect human figures in images and videos, so that one could determine, for example, where someone’s elbow shows up in an image. It is important to be aware of the fact that pose estimation merely estimates where key body joints are and does not recognize who is in an image or video.
+
+The pose estimation models takes a processed camera image as the input and outputs information about keypoints. The keypoints detected are indexed by a part ID, with a confidence score between 0.0 and 1.0. The confidence score indicates the probability that a keypoint exists in that position.
+
+We provides reference implementation of two TensorFlow Lite pose estimation models:
+
+- MoveNet: the state-of-the-art pose estimation model available in two flavors: Lighting and Thunder. See a comparison between these two in the section below.
+- PoseNet: the previous generation pose estimation model released in 2017.
 
 포즈 예측은 이미지와 비디오에서 사람의 모습을 감지하는 컴퓨터 비전 기술을 의미하며, 예를 들어 이미지에서 누군가의 팔꿈치가 나타나는 위치를 결정할 수 있습니다.
-
-분명히 하자면 이 기술로 이미지에 있는 사람은 인식하지 못합니다. 알고리즘은 단순히 주요 신체 관절의 위치를 예측할 뿐입니다.
-
-감지된 키포인트는 0.0에서 1.0 사이의 신뢰도 점수와 함께 '파트 ID'로 인덱싱되며 1.0이 가장 높습니다.
 
 <table style="width: 30%;">
   <thead>
@@ -103,75 +113,106 @@ Android 및 iOS용 PoseNet 모델을 보여주는 TensorFlow Lite 애플리케�
   </tbody>
 </table>
 
-## 성능 벤치마크
+감지된 키포인트는 0.0에서 1.0 사이의 신뢰도 점수와 함께 '파트 ID'로 인덱싱되며 1.0이 가장 높습니다.
 
-성능 벤치마크 수치는 [여기에 설명된](https://www.tensorflow.org/lite/performance/benchmarks) 도구를 사용하여 생성됩니다.
-
-<table>
-  <thead>
-    <tr>
-      <th>모델명</th>
-      <th>모델 크기</th>
-      <th>기기</th>
-      <th>GPU</th>
-      <th>CPU</th>
-    </tr>
-  </thead>
-  <tr>
-    <td rowspan="3">
-      <p data-md-type="paragraph"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">Posenet</a></p>
-    </td>
-    <td rowspan="3">12.7Mb</td>
-    <td>Pixel 3(Android 10)</td>
-    <td>12ms</td>
-    <td>31ms *</td>
-  </tr>
-   <tr>
-     <td>Pixel 4(Android 10)</td>
-    <td>12ms</td>
-    <td>19ms *</td>
-  </tr>
-   <tr>
-     <td>iPhone XS(iOS 12.4.1)</td>
-     <td>4.8ms</td>
-    <td>22ms **</td>
-  </tr>
-</table>
-
-* 4개의 스레드가 사용되었습니다.
-
-** 최상의 결과를 위해 iPhone에서 2개의 스레드가 사용되었습니다.
-
-## 예제 출력
 
 <img alt="포즈 추정을 보여주는 애니메이션" src="https://www.tensorflow.org/images/lite/models/pose_estimation.gif">
 
-## 수행 방법
+## 성능 벤치마크
 
-성능은 기기 및 출력 보폭(히트맵 및 오프셋 벡터)에 따라 다릅니다. PoseNet 모델은 이미지 크기가 불변하므로 이미지가 축소되었는지와 관계없이 원본 이미지와 같은 배율로 포즈 위치를 예측할 수 있습니다. 즉, PoseNet은 성능은 희생하면서 더 높은 정확성을 갖도록 구성될 수 있습니다.
+MoveNet is available in two flavors:
 
-출력 보폭은 입력 이미지 크기를 기준으로 출력을 축소 조정하는 정도를 결정합니다. 레이어의 크기와 모델 출력에 영향을 줍니다. 출력 보폭이 높을수록 네트워크 및 출력 레이어의 해상도와 그에 따른 정확성이 낮아집니다. 이 구현에서 출력 보폭은 8, 16 또는 32의 값을 가질 수 있습니다. 즉, 출력 보폭이 32이면 성능은 가장 빠르지만 정확성은 가장 낮고 8은 정확성은 높지만 성능은 가장 느립니다. 따라서 16으로 시작하는 것이 좋습니다.
+- MoveNet.Lightning is smaller, faster but less accurate than the Thunder version. It can run in realtime on modern smartphones.
+- MoveNet.Thunder is the more accurate version but also larger and slower than Lightning. It is useful for the use cases that require higher accuracy.
 
-다음 이미지는 출력 보폭이 입력 이미지 크기를 기준으로 출력을 축소 조정하는 정도를 결정하는 방법을 보여줍니다. 출력 보폭이 높을수록 더 빠르지만 정확성이 떨어집니다.
+MoveNet outperforms PoseNet on a variety of datasets, especially in images with fitness action images. Therefore, we recommend using MoveNet over PoseNet.
 
-<img alt="출력 보폭 및 히트 맵 해상도" src="../images/output_stride.png">
+Performance benchmark numbers are generated with the tool [described here](../../performance/measurement). Accuracy (mAP) numbers are measured on a subset of the [COCO dataset](https://cocodataset.org/#home) in which we filter and crop each image to contain only one person .
 
-## 포즈 예측에 대해 자세히 알아보기
+<table>
+<thead>
+  <tr>
+    <th rowspan="2">Model</th>
+    <th rowspan="2">Size (MB)</th>
+    <th rowspan="2">mAP</th>
+    <th colspan="3">Latency (ms)</th>
+  </tr>
+  <tr>
+    <td>Pixel 5 - CPU 4 threads</td>
+    <td>Pixel 5 - GPU</td>
+    <td>Raspberry Pi 4 - CPU 4 threads</td>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>
+      <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/float16/4">MoveNet.Thunder (FP16 quantized)</a>
+    </td>
+    <td>12.6MB</td>
+    <td>72.0</td>
+    <td>155ms</td>
+    <td>45ms</td>
+    <td>594ms</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/int8/4">MoveNet.Thunder (INT8 quantized)</a>
+    </td>
+    <td>7.1MB</td>
+    <td>68.9</td>
+    <td>100ms</td>
+    <td>52ms</td>
+    <td>251ms</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/float16/4">MoveNet.Lightning (FP16 quantized)</a>
+    </td>
+    <td>4.8MB</td>
+    <td>63.0</td>
+    <td>60ms</td>
+    <td>25ms</td>
+    <td>186ms</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/int8/4">MoveNet.Lightning (INT8 quantized)</a>
+    </td>
+    <td>2.9MB</td>
+    <td>57.4</td>
+    <td>52ms</td>
+    <td>28ms</td>
+    <td>95ms</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">PoseNet(MobileNetV1 backbone, FP32)</a>
+    </td>
+    <td>13.3MB</td>
+    <td>45.6</td>
+    <td>80ms</td>
+    <td>40ms</td>
+    <td>338ms</td>
+  </tr>
+</tbody>
+</table>
+
+## 예제 출력
+
+- Check out this [blog post](https://blog.tensorflow.org/2021/08/pose-estimation-and-classification-on-edge-devices-with-MoveNet-and-TensorFlow-Lite.html) to learn more about pose estimation using MoveNet and TensorFlow Lite.
+- Check out this [blog post](https://blog.tensorflow.org/2021/05/next-generation-pose-detection-with-movenet-and-tensorflowjs.html) to learn more about pose estimation on the web.
+- Check out this [tutorial](https://www.tensorflow.org/hub/tutorials/movenet) to learn about running MoveNet on Python using a model from TensorFlow Hub.
+- Coral/EdgeTPU can make pose estimation run much faster on edge devices. See [EdgeTPU-optimized models](https://coral.ai/models/pose-estimation/) for more details.
+- Read the PoseNet paper [here](https://arxiv.org/abs/1803.08225)
+
+Also, check out these use cases of pose estimation.
 
 <ul>
-  <li><p data-md-type="paragraph"><a href="https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5">블로그 게시물: Real-time Human Pose Estimation in the Browser with TensorFlow.js</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet">TF.js GitHub: Pose Detection in the Browser: Posenet Model</a></p></li>
-   <li><p data-md-type="paragraph"><a href="https://medium.com/tensorflow/track-human-poses-in-real-time-on-android-with-tensorflow-lite-e66d0f3e6f9e">블로그 게시물: Track human poses in real-time on Android with TensorFlow Lite</a></p></li>
-</ul>
-
-### 사용 사례
-
-<ul>
-  <li><p data-md-type="paragraph"><a href="https://vimeo.com/128375543">'PomPom Mirror'</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://youtu.be/I5__9hq-yas">Amazing Art Installation Turns You Into A Bird | Chris Milk "The Treachery of Sanctuary"</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://vimeo.com/34824490">Puppet Parade-Interactive Kinect Puppets</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://vimeo.com/2892576">Messa di Voce(퍼포먼스), 발췌</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://www.instagram.com/p/BbkKLiegrTR/">증강 현실</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://www.instagram.com/p/Bg1EgOihgyh/">인터랙티브 애니메이션</a></p></li>
-  <li><p data-md-type="paragraph"><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">보행 분석</a></p></li>
+  <li><a href="https://vimeo.com/128375543">‘PomPom Mirror’</a></li>
+  <li><a href="https://youtu.be/I5__9hq-yas">Amazing Art Installation Turns You Into A Bird | Chris Milk "The Treachery of Sanctuary"</a></li>
+  <li><a href="https://vimeo.com/34824490">Puppet Parade - Interactive Kinect Puppets</a></li>
+  <li><a href="https://vimeo.com/2892576">Messa di Voce (Performance), Excerpts</a></li>
+  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">Augmented reality</a></li>
+  <li><a href="https://www.instagram.com/p/Bg1EgOihgyh/">Interactive animation</a></li>
+  <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">Gait analysis</a></li>
 </ul>
