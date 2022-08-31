@@ -28,7 +28,7 @@ GPU では TensorFlow Lite は、16 ビットおよび 32 ビットの浮動小�
 - `EXP`
 - `FULLY_CONNECTED`
 - `LOGISTIC`
-- `LSTM v2 (Basic LSTM only)`
+- `LSTM v2（Basic LSTM のみ）`
 - `MAX_POOL_2D`
 - `MAXIMUM`
 - `MINIMUM`
@@ -256,9 +256,9 @@ GPU デリゲートのコンストラクタは、オプションの`struct`を�
 
 このセクションでは、GPU デリゲートが 8 ビットの量子化モデルを高速化する方法について説明します。以下のようなあらゆる種類の量子化が対象となります。
 
-- [量子化認識トレーニング](https://www.tensorflow.org/lite/convert/quantization)でトレーニングされたモデル
+- [量子化認識トレーニング](https://www.tensorflow.org/lite/models/convert/quantization)でトレーニングされたモデル
 - トレーニング後のダイナミックレンジ量子化
-- [トレーニング後の完全整数量子化](https://www.tensorflow.org/lite/performance/post_training_integer_quant)
+- [トレーニング後の完全な整数量子化](https://www.tensorflow.org/lite/performance/post_training_integer_quant)
 
 パフォーマンスを最適化するには、浮動小数点入出力テンソルを持つモデルを使用します。
 
