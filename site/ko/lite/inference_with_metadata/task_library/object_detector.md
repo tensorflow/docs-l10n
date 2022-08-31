@@ -96,7 +96,7 @@ end
 
 추론에 사용할 `.tflite` 모델이 앱 번들에 있어야 합니다.
 
-### Step 2: Using the model
+### 2단계: 모델 사용하기
 
 #### Swift
 
@@ -162,7 +162,7 @@ TFLDetectionResult *detectionResult = [detector detectWithGMLImage:gmlImage erro
 pip install tflite-support
 ```
 
-### Step 2: Using the model
+### 2단계: 모델 사용하기
 
 ```python
 # Imports
@@ -184,7 +184,7 @@ image = vision.TensorImage.create_from_file(image_path)
 detection_result = detector.detect(image)
 ```
 
-See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/vision/object_detector.py) for more options to configure `ObjectDetector`.
+<code>ObjectDetector</code>를 구성하기 위한 추가 옵션은 <a>소스 코드</a>를 참조하세요.
 
 ## C++에서 추론 실행하기
 
