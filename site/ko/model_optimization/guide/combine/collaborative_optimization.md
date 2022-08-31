@@ -10,13 +10,13 @@
 
 공동 작업 아이디어는 누적된 최적화 효과를 달성하기 위해 차례로 이를 적용함으로써 개별 기술에 구축하기 위한 것입니다. 다음과 같은 최적화의 다양한 조합이 가능합니다.
 
-- [Weight pruning](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-pruning-api-42cac9157a6a)
+- [가중치 잘라내기](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-pruning-api-42cac9157a6a)
 
-- [Weight clustering](https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html)
+- [가중치 클러스터링](https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html)
 
 - 양자화
 
-    - [Post-training quantization](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantization-b4964a1ea9ba)
+    - 사후 훈련 양자화
     - [양자화 인식 훈련](https://blog.tensorflow.org/2020/04/quantization-aware-training-with-tensorflow-model-optimization-toolkit.html) (QAT)
 
 이러한 기술을 함께 연결하려고 할 때 발생하는 문제는 하나를 적용하면 일반적으로 이전 기술의 결과를 파괴하여, 모든 기술을 동시에 적용하여 얻는 전반적인 이점을 망치는 것입니다. 예를 들어, 클러스터링은 잘라내기 API에 의해 도입된 희소성을 보존하지 않습니다. 이 문제를 해결하기 위해, 다음과 같은 실험적인 공동 작업 최적화 기술을 소개합니다.
