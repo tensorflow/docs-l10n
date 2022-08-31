@@ -60,7 +60,7 @@ example_gen = ImportExampleGen(input_base=path_to_tfrecord_dir)
 
 ### 사용자 정의 입력/출력 분할
 
-참고: 이 기능은 TFX 0.14 이후부터만 사용할 수 있습니다.
+Note: this feature is only available after TFX 0.14.
 
 ExampleGen이 출력할 훈편/평가 분할 비율을 사용자 정의하려면 ExampleGen 구성 요소에 대한 `output_config`를 설정합니다. 예를 들면, 다음과 같습니다.
 
