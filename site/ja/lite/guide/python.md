@@ -39,7 +39,7 @@ Coral Edge TPU で TensorFlow を使用している場合は、適切な [Coral 
 
 そのため、`tensorflow` モジュールから `Interpreter` をインポートする代わりに、`tflite_runtime` からインポートする必要があります。
 
-For example, after you install the package above, copy and run the [`label_image.py`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/examples/python/) file. It will (probably) fail because you don't have the `tensorflow` library installed. To fix it, edit this line of the file:
+たとえば、上記のパッケージをインストールした後に、[`label_image.py`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/examples/python/) ファイルをコピーして実行するとします。`tensorflow` ライブラリがインストールされていないため、これは失敗するでしょう。これを修正するには、ファイルの次の行を編集します。
 
 ```python
 import tensorflow as tf
