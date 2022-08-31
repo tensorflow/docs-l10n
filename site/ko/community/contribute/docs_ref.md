@@ -7,7 +7,7 @@
 TensorFlow는 [DocTest](https://docs.python.org/3/library/doctest.html) 를 사용하여 Python docstring에서 코드 스 니펫을 테스트합니다. 스 니펫은 실행 가능한 Python 코드 여야합니다. 테스트를 가능하게하려면 `>>>` (세 개의 왼쪽 꺾쇠 괄호)로 줄을 추가하십시오. 예를 들어, 다음은 <a>array_ops.py</a> 소스 파일의 <code>tf.concat</code> 함수에서 발췌 한 것입니다.
 
 ```
-def concat(values, axis, name="concat"):
+<code>def concat(values, axis, name="concat"):
   """Concatenates tensors along one dimension.
   ...
 
@@ -177,5 +177,31 @@ There are two ways to test the code in the docstring locally:
     For example:
 
     <pre class="prettyprint lang-bsh">
-    <code class="devsite-terminal">python tf_doctest.py --file=<file_path>
+    <code class="devsite-terminal">python tf_doctest.py --file=<file_path></code>
+    </pre>
+
+    This will run it using your installed version of TensorFlow. To be sure
+    you're running the same code that you're testing:
+
+    *   Use an up to date [tf-nightly](https://pypi.org/project/tf-nightly/)
+        `pip install -U tf-nightly`
+    *   Rebase your pull request onto a recent pull from
+        [TensorFlow's](https://github.com/tensorflow/tensorflow) master branch.
+
+*   If you are changing the code and the docstring of a class/function/method,
+    then you will need to
+    [build TensorFlow from source](../../install/source.md). Once you are setup
+    to build from source, you can run the tests:
+
+    <pre class="prettyprint lang-bsh">
+    <code class="devsite-terminal">bazel run //tensorflow/tools/docs:tf_doctest</code>
+    </pre>
+
+    or
+
+    <pre class="prettyprint lang-bsh">
+    <code class="devsite-terminal">bazel run //tensorflow/tools/docs:tf_doctest -- --module=ops.array_ops</code>
+    </pre>
+
+    The `--module` is relative to `tensorflow.python`.
 ```
