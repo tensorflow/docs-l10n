@@ -203,11 +203,14 @@ example_gen = CsvExampleGen(input_base='/tmp', input_config=input)
 また、以下のような入力構成があるとします。
 
 ```python
-from tfx.examples.custom_components.presto_example_gen.proto import presto_config_pb2
-from tfx.examples.custom_components.presto_example_gen.presto_component.component import PrestoExampleGen
-
-presto_config = presto_config_pb2.PrestoConnConfig(host='localhost', port=8080)
-example_gen = PrestoExampleGen(presto_config, query='SELECT * FROM chicago_taxi_trips')
+splits {
+  name: 'train'
+  pattern: '{YYYY}-{MM}-{DD}/train/*'
+}
+splits {
+  name: 'eval'
+  pattern: '{YYYY}-{MM}-{DD}/eval/*'
+}
 ```
 
 パイプラインをトリガーすると、次のように処理されます。
@@ -395,7 +398,7 @@ Apache Beam は、[その他にも多数のデータ形式](https://beam.apache.
 
 まず、カスタム Beam PTransform を使って BaseExampleGenExecutor を拡張します。外部のデータソースからデータを読み取るものです。次に、QueryBasedExampleGen を拡張して単純なコンポーネントを作成します。
 
-これには追加の接続構成が必要となる場合とならない場合があります。たとえば、[BigQuery Executor](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/big_query_example_gen/executor.py) はデフォルトの beam.io コネクタを使った読み取るため、接続構成情報が抽出されます。[Presto Executor](https://github.com/tensorflow/tfx/blob/master/tfx/examples/custom_components/presto_example_gen/presto_component/executor.py) の場合は、カスタム Beam PTransform と[カスタム接続構成の protobuf](https://github.com/tensorflow/tfx/blob/master/tfx/examples/custom_components/presto_example_gen/proto/presto_config.proto)が入力として必要です。
+これには追加の接続構成が必要となる場合とならない場合があります。たとえば、[BigQuery Executor](https://github.com/tensorflow/tfx/blob/master/tfx/extensions/google_cloud_big_query/example_gen/executor.py) はデフォルトの beam.io コネクタを使って読み取るため、接続構成情報が抽象化されます。[Presto Executor](https://github.com/tensorflow/tfx/blob/master/tfx/examples/custom_components/presto_example_gen/presto_component/executor.py) の場合は、カスタム Beam PTransform と[カスタム接続構成の protobuf](https://github.com/tensorflow/tfx/blob/master/tfx/examples/custom_components/presto_example_gen/proto/presto_config.proto) が入力として必要です。
 
 カスタム ExampleGen コンポーネントで接続構成が必要な場合は、新しい protobuf を作成して custom_config を介して渡します。現時点ではオプションの実行パラメーターです。以下に、構成済みのコンポーネントの使用例を示します。
 
