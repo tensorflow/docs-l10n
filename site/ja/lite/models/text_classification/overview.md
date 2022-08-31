@@ -1,8 +1,8 @@
 # テキスト分類
 
-Use a TensorFlow Lite model to category a paragraph into predefined groups.
+TensorFlow Lite モデルを使用して、段落を定義済みのグループに分類します。
 
-Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/nl_classifier). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification).
+注意: (1) 既存のモデルを統合するには、[TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/nl_classifier) を試してください。(2) モデルをカスタマイズするには、[TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) を試してください。
 
 ## はじめに
 
@@ -49,10 +49,9 @@ This pretrained model predicts if a paragraph's sentiment is positive or negativ
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">
-      <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">Text Classification</a>
-    </td>
-    <td rowspan="3">       0.6 Mb     </td>
+    <td rowspan="3">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">Text Classification</a>
+</td>
+    <td rowspan="3">       0.6 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>0.05ms*</td>
   </tr>
@@ -80,8 +79,8 @@ This pretrained model predicts if a paragraph's sentiment is positive or negativ
 
 ## 独自のトレーニングデータセットを使用する
 
-Follow this [tutorial](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) to apply the same technique used here to train a text classification model using your own datasets. With the right dataset, you can create a model for use cases such as document categorization or toxic comments detection.
+独自のデータセットを使用してテキスト分類モデルをトレーニングする場合は、この[チュートリアル](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)に従い、ここで使用するのと同じ手法を適用してください。適切なデータセットを使用して、ドキュメント分類や有害コメント検出などのユースケースに用いるモデルを作成することができます。
 
 ## テキスト分類についてもっと読む
 
-- [Word embeddings and tutorial to train this model](https://www.tensorflow.org/tutorials/text/word_embeddings)
+- [このモデルをトレーニングするための単語埋め込みとチュートリアル](https://www.tensorflow.org/tutorials/text/word_embeddings)
