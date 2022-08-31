@@ -12,7 +12,7 @@ Task 라이브러리 `BertNLClassifier` API는 입력 텍스트를 여러 범주
 
 다음 모델이 `BertNLClassifier` API와 호환됩니다.
 
-- [텍스트 분류용 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification)에 의해 생성된 Bert 모델
+- Bert Models created by [TensorFlow Lite Model Maker for text Classfication](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification).
 
 - [모델 호환성 요구 사항](#model-compatibility-requirements)을 충족하는 사용자 정의 모델
 
@@ -91,18 +91,18 @@ let categories = bertNLClassifier.classify(text: input)
 ```c++
 // Initialization
 BertNLClassifierOptions options;
-options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
 std::unique_ptr<BertNLClassifier> classifier = BertNLClassifier::CreateFromOptions(options).value();
 
-// Run inference
-std::vector<core::Category> categories = classifier->Classify(kInput);
+// Run inference with your input, `input_text`.
+std::vector<core::Category> categories = classifier->Classify(input_text);
 ```
 
-자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/bert_nl_classifier.h)를 참조하세요.
+See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_nl_classifier.h) for more details.
 
 ## 예제 결과
 
-다음은 Model Maker의 [MobileBert](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification) 모델을 사용하여 영화 리뷰를 분류한 결과의 예입니다.
+Here is an example of the classification results of movie reviews using the [MobileBert](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) model from Model Maker.
 
 입력: "it's a charming and often affecting journey"
 
@@ -117,7 +117,7 @@ category[1]: 'positive' : '0.99994'
 
 ## 모델 호환성 요구 사항
 
-`BetNLClassifier` API는 필수 [TFLite 모델 메타데이터](../../convert/metadata.md)가 있는 TFLite 모델을 예상합니다.
+The `BetNLClassifier` API expects a TFLite model with mandatory [TFLite Model Metadata](../../models/convert/metadata.md).
 
 메타데이터는 다음 요구 사항을 충족해야 합니다.
 
