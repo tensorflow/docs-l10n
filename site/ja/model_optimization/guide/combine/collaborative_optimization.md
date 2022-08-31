@@ -4,7 +4,7 @@
 
 このドキュメントでは、さまざまな手法を組み合わせて機械学習モデルを最適化してデプロイするための実験的な API について概説します。
 
-## Overview
+## 概要
 
 協調最適化は、最適な推論速度、モデルサイズ、精度などのバランスをデプロイメントの際に達成するモデルを作成するためのさまざまな手法を含む包括的なプロセスです。
 
@@ -12,11 +12,11 @@
 
 - [重みプルーニング](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-pruning-api-42cac9157a6a)
 
-- [Weight clustering](https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html)
+- [重みクラスタリング](https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html)
 
-- Quantization
+- <a>量子化</a>
 
-    - [Post-training quantization](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantization-b4964a1ea9ba)
+    - [ポストトレーニング量子化](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantization-b4964a1ea9ba)
     - [量子化認識トレーニング](https://blog.tensorflow.org/2020/04/quantization-aware-training-with-tensorflow-model-optimization-toolkit.html)（QAT）
 
 通常、これらの手法を組み合わせて適用すると前に適用された手法の結果が破壊され、すべてを同時に適用することにより全体的な利点が損なわれるという問題が発生します。たとえば、クラスタリングでは、プルーニング API によるスパース性は保持されません。この問題を解決するために、次の実験的な協調最適化手法を紹介します。
