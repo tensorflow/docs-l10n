@@ -6,7 +6,7 @@
 
 **注意:** この機能はバージョン 2.4 以降で利用できます。
 
-### Prerequisites
+### 前提条件
 
 CMake をインストールし、TensorFlow ソースコードをダウンロードする必要があります。詳細については、[CMake を使用した TensorFlow Lite の構築](https://www.tensorflow.org/lite/guide/build_cmake)ページを参照してください。
 
