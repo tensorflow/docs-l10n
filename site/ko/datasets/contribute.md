@@ -4,8 +4,8 @@
 
 ## 시작하며
 
-- If you're new with TFDS, the easiest way to get started is to implement one of our [requested datasets](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc), focusing on the most requested ones. [Follow our guide](https://www.tensorflow.org/datasets/add_dataset) for instructions.
-- Issues, feature requests, bugs,... have a much bigger impact than adding new datasets, as they benefit the entire TFDS community. See the [potential contribution list](https://github.com/tensorflow/datasets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+-label%3A%22dataset+request%22+). Starts with the ones labeled with [contribution-welcome](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22contributions+welcome%22) which are small self-contained easy issues to get started with.
+- 만약 당신이 TFDS가 처음이라면, 시작하는 가장 빠른 방법은 가장 많이 요청된 것에 집중해서 우리의[requested dataset](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc)중 하나를 구현해보는 것입니다. 지침은 [Follow our guide](https://www.tensorflow.org/datasets/add_dataset)에 있습니다.
+- 이슈들, 기능요청들과 버그들,... 은 그것들이 전체 TFDS 커뮤니티에 이익을 주기 때문에 새로운 데이타셋을 추가하는 것보다 더욱 큰 영향이 있습니다.[potential contribution list](https://github.com/tensorflow/datasets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+-label%3A%22dataset+request%22+)을 보십시오. Starts with the ones labeled with [contribution-welcome](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22contributions+welcome%22)의 이름을 가진 것으로 시작해보십시오. 그것은 시작하기에 쉽고 작은 이슈가 포함되어 있습니다.
 - 이미 할당되었지만 한동안 업데이트되지 않은 버그를 주저하지 마십시오.
 - 문제를 할당받을 필요가 없습니다. 작업을 시작할 때 문제에 대해 간단히 언급하십시오. :)
 - 문제에 관심이 있지만 시작하는 방법을 모르는 경우 주저하지 말고 도움을 요청하십시오. 조기 피드백을 원하시면 PR 초안을 보내 주시기 바랍니다.
@@ -108,7 +108,7 @@ pytest -vv tensorflow_datasets/core/
 
 `pytest` vs `unittest`: 전통적으로, 우리는 작성 테스트를 위해 `unittest` 모듈을 사용해왔습니다. 새로운 테스트 `pytest`는 더욱 간단하고, 융통성 있고, 현대적이며 많은 라이브러리(numpy, pandas, sklearn, matplotlib, scipy, six,...)에서 사용합니다. pytest가 익숙하지 않다면 [pytest guide](https://docs.pytest.org/en/stable/getting-started.html#getstarted)를 참고하십시오.
 
-Tests for DatasetBuilders are special and are documented in the [guide to add a dataset](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md#test-your-dataset).
+DatasetBuilder를 위한 테스트는 특별하며,  [guide to add a dataset](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md#test-your-dataset)안에 문서화되어 있습니다.
 
 ### 리뷰를 위해 PR을 보내십시오!
 
