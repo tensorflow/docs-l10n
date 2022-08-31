@@ -71,7 +71,7 @@ The model can be used to build a system that can answer users’ questions in na
 
 ### 구절(입력)
 
-> Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. It is considered one of the Big Four technology companies, alongside Amazon, Apple, and Facebook.
+> Google LLC는 온라인 광고 기술, 검색 엔진, 클라우드 컴퓨팅, 소프트웨어 및 하드웨어를 포함하는 인터넷 관련 서비스 및 제품을 전문으로 하는 미국의 다국적 기술 회사입니다. Amazon, Apple 및 Facebook과 함께 Big Four 기술 회사 중 하나로 간주합니다.
 >
 > Google은 1998년 9월 Larry Page와 Sergey Brin이 캘리포니아 스탠포드 대학의 박사 학위 시절에 설립했습니다.  그들은 함께 주식의 약 14%를 소유하고 슈퍼 투표 주식을 통해 주주의 투표권의 56%를 통제합니다. 1998년 9월 4일 캘리포니아에서 Google을 캘리포니아 비상장 기업으로 통합했습니다. 그 후 Google은 2002 년 10 월 22 일 델라웨어에서 재편되었습니다. 2004년 8 월 19 일에 기업 공개 (IPO)가 이루어졌고 Google은 Googleplex라는 별명을 가진 캘리포니아 주 마운틴 뷰에있는 본사로 이전했습니다. 2015 년 8 월 Google은 Alphabet Inc.라는 대기업으로 다양한 이해 관계를 재편 할 계획을 발표했습니다. Google은 Alphabet의 선도적 인 자회사이며 앞으로도 Alphabet의 인터넷 이익을위한 우산 회사가 될 것입니다. Sundar Pichai는 Google의 CEO로 임명되어 Alphabet의 CEO가 된 Larry Page를 대신했습니다.
 
