@@ -6,7 +6,7 @@ Note: This delegate is in experimental (beta) phase. It is available from Tensor
 
 참고: Core ML 대리자는 Core ML 버전 2 이상을 지원합니다.
 
-**지원되는 iOS 버전 및 기기**
+**지원되는 iOS 버전 및 장치:**
 
 - iOS 12 and later. In the older iOS versions, Core ML delegate will automatically fallback to CPU.
 - By default, Core ML delegate will only be enabled on devices with A12 SoC and later (iPhone Xs and later) to use Neural Engine for faster inference. If you want to use Core ML delegate also on the older devices, please see [best practices](#best-practices)
@@ -17,7 +17,7 @@ Core ML 대리자는 현재 float(FP32 및 FP16) 모델을 지원합니다.
 
 ## Trying the Core ML delegate on your own model
 
-The Core ML delegate is already included in nightly release of TensorFlow lite CocoaPods. To use Core ML delegate, change your TensorFlow lite pod to include subspec `CoreML` in your `Podfile`.
+Core ML 대리자는 TensorFlow lite CocoaPods의 야간 릴리스에 이미 포함되어 있습니다. Core ML 대리자를 사용하려면 `Podfile`에 하위 사양 `CoreML`을 포함하도록 TensorFlow lite 포드를 변경합니다.
 
 Note: If you want to use C API instead of Objective-C API, you can include `TensorFlowLiteC/CoreML` pod to do so.
 
@@ -126,7 +126,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 <div>
   <devsite-selector>
     <section>
-      <h3> Swift</h3>
+      <h3>Swift</h3>
       <p></p>
 <pre class="prettyprint lang-swift">    var options = CoreMLDelegate.Options()
     options.enabledDevices = .all
@@ -160,7 +160,7 @@ Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorF
 
 ### Metal(GPU) 대리자를 폴백으로 사용하기
 
-Core ML 대리자가 생성되지 않은 경우에도 여전히 [Metal 대리자](https://www.tensorflow.org/lite/performance/gpu#ios)를 사용하여 성능 이점을 얻을 수 있습니다. 다음 예에서는 이를 수행하는 방법을 보여줍니다.
+When the Core ML delegate is not created, alternatively you can still use [Metal delegate](https://www.tensorflow.org/lite/performance/gpu#ios) to get performance benefits. Following example shows how to do this:
 
 <div>
   <devsite-selector>
@@ -206,31 +206,31 @@ Core ML 대리자가 생성되지 않은 경우에도 여전히 [Metal 대리자
 
 ### 이전 Core ML 버전 사용하기
 
-iOS 13은 Core ML 3을 지원하지만 Core ML 2 모델 사양으로 변환하면 모델이 더 잘 동작할 수 있습니다. 대상 변환 버전은 기본적으로 최신 버전으로 설정되어 있지만 대리자 옵션에서 `coreMLVersion`(Swift에서는 C API의 `coreml_version`)을 이전 버전으로 설정하여 변경할 수 있습니다.
+Although iOS 13 supports Core ML 3, the model might work better when it is converted with Core ML 2 model specification. The target conversion version is set to the latest version by default, but you can change this by setting `coreMLVersion` (in Swift, `coreml_version` in C API) in the delegate option to older version.
 
 ## 지원되는 연산
 
 Core ML 대리자는 다음 연산을 지원합니다.
 
 - Add
-    - 특정 형상만 브로드캐스팅할 수 있습니다. Core ML 텐서 레이아웃에서 다음 텐서 형상을 브로드캐스팅할 수 있습니다. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
+    - Only certain shapes are broadcastable. In Core ML tensor layout, following tensor shapes are broadcastable. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
 - AveragePool2D
 - Concat
-    - 채널 축을 따라 연결해야 합니다.
+    - Concatenation should be done along the channel axis.
 - Conv2D
     - 가중치와 바이어스는 일정해야 합니다.
 - DepthwiseConv2D
     - 가중치와 바이어스는 일정해야 합니다.
 - FullyConnected(일명 Dense 또는 InnerProduct)
     - 가중치와 바이어스(있는 경우)는 일정해야 합니다.
-    - 단일 배치 케이스만 지원합니다. 입력 차원은 마지막 차원을 제외하고 1이어야 합니다.
+    - Only supports single-batch case. Input dimensions should be 1, except the last dimension.
 - Hardswish
 - Logistic(일명 Sigmoid)
 - MaxPool2D
 - MirrorPad
-    -  `REFLECT` 모드의 4D 입력만 지원됩니다. 패딩은 일정해야 하며 H 및 W 차원에만 허용됩니다.
+    - `REFLECT` 모드의 4D 입력만 지원됩니다. 패딩은 일정해야 하며 H 및 W 차원에만 허용됩니다.
 - Mul
-    - 특정 형상만 브로드캐스팅할 수 있습니다. Core ML 텐서 레이아웃에서 다음 텐서 형상을 브로드캐스팅할 수 있습니다. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
+    - 특정 형상만 브로드캐스팅할 수 있습니다. Core ML 텐서 레이아웃에서 다음 텐서 형상을 브로드캐스팅할 수 있습니다. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]` .
 - Pad 및 PadV2
     - 4D 입력만 지원됩니다. 패딩은 일정해야 하며 H 및 W 차원에만 허용됩니다.
 - Relu
@@ -242,7 +242,7 @@ Core ML 대리자는 다음 연산을 지원합니다.
 - SoftMax
 - Tanh
 - TransposeConv
-    - 가중치는 일정해야 합니다.
+    - Weights should be constant.
 
 ## 피드백
 
@@ -250,14 +250,14 @@ Core ML 대리자는 다음 연산을 지원합니다.
 
 ## 자주하는 질문
 
-- 그래프에 지원되지 않는 연산이 포함된 경우 CoreML 대리자가 CPU로 폴백을 지원합니까?
+- Does CoreML delegate support fallback to CPU if a graph contains unsupported ops?
     - 예
 - CoreML 대리자는 iOS 시뮬레이터에서 동작합니까?
     - 예. 라이브러리에는 x86 및 x86_64 대상이 포함되어 있으므로 시뮬레이터에서 실행할 수 있지만 CPU에 비해 성능이 향상되지는 않습니다.
 - TensorFlow Lite 및 CoreML 대리자는 MacOS를 지원하나요?
     - TensorFlow Lite는 iOS에서만 테스트되고 MacOS에서는 테스트되지 않습니다.
 - 사용자 정의 TF Lite 연산이 지원되나요?
-    - 아니요, CoreML 대리자는 사용자 정의 ops를 지원하지 않으며 CPU로 폴백됩니다.
+    - 아니요, CoreML 대리자는 사용자 정의 연산을 지원하지 않으며 CPU로 대체됩니다.
 
 ## API
 
