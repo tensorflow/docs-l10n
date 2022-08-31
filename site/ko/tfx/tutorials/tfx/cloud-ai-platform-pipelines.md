@@ -41,7 +41,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. Google Cloud 이용 약관에 동의합니다.
 
-    <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/welcome-popup.png">
+     <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/welcome-popup.png">
 
 3. 무료 평가판 계정으로 시작하려면 [**무료로 사용하기**](https://console.cloud.google.com/freetrial)(또는 [**무료로 시작하기**](https://console.cloud.google.com/freetrial))를 클릭하세요.
 
@@ -73,17 +73,17 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     기본 탐색 메뉴 아래: ≡&gt; AI Platform&gt; 파이프라인
 
-2. **+ New Instance(+ 새 인스턴스)**를 클릭하여 새 클러스터를 만듭니다.
+2. Click **+ New Instance** to create a new cluster.
 
-    <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-instance.png">
+     <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-instance.png">
 
 3. **Kubeflow Pipelines(Kubeflow 파이프라인)** 개요 페이지에서 **Configure(구성)**을 클릭합니다.
 
-    <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/configure.png">
+     <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/configure.png">
 
 4. "활성화"를 클릭하여 Kubernetes Engine API를 활성화합니다.
 
-    <img src="images/cloud-ai-platform-pipelines/select-notebook.png" alt="선택 노트북" data-md-type="image">
+     <img src="images/cloud-ai-platform-pipelines/open-template.png">
 
     참고: 계속 진행하기 전에 Kubernetes Engine API를 사용할 수 있게 준비되는 동안 몇 분 정도 기다려야 할 수 있습니다.
 
@@ -93,7 +93,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     2. **중요** *다음 Cloud API에 대한 액세스 허용* 상자를 선택 표시합니다. (이 클러스터가 프로젝트의 다른 부분에 액세스하는 데 필요합니다. 이 단계를 놓치면 나중에 수정하기가 약간 까다롭습니다.)
 
-        <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
+         <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
     3. **새 클러스터 만들기**를 클릭하고 클러스터가 생성될 때까지 몇 분 정도 기다립니다. 이 작업은 몇 분 정도 걸립니다. 완료되면 다음과 같은 메시지가 표시됩니다.
 
@@ -113,7 +113,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 3. TensorFlow Enterprise 2.7(또는 그 이상)이 설치된 **새 노트북**을 생성합니다.
 
-    <img src="images/cloud-ai-platform-pipelines/open-dashboard.png" alt="오픈 대시 보드" data-md-type="image">
+     <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
 
     새 노트북 -&gt; TensorFlow Enterprise 2.7 -&gt; Without GPU
 
@@ -125,7 +125,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     2. 무료 등급을 유지해야 하는 경우 **머신 구성**에서 vCPU가 1개 또는 2개인 구성을 선택할 수 있습니다.
 
-        <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
+         <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
     3. 새 노트북이 생성될 때까지 기다린 후 **Notebooks API 사용 설정**을 클릭합니다.
 
@@ -139,15 +139,15 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 이 튜토리얼에서 사용중인 클러스터 라인에서 **Open Pipelines Dashboard를** 클릭합니다.
 
-    <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
+     <img src="images/cloud-ai-platform-pipelines/select-notebook.png" alt="선택 노트북" data-md-type="image">
 
 3. **시작하기** 페이지에서 **Google Cloud에서 Cloud AI Platform 노트북 열기**를 클릭합니다.
 
-    <img src="images/cloud-ai-platform-pipelines/open-template.png">
+     <img src="images/cloud-ai-platform-pipelines/open-dashboard.png" alt="오픈 대시 보드" data-md-type="image">
 
 4. 이 튜토리얼에서 사용 중인 노트북 인스턴스를 선택하고 **계속**을 선택한 후 **확인**을 선택합니다.
 
-    <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/check-the-box.png">
+     <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/check-the-box.png">
 
 ## 5. 노트북에서 계속 작업
 
@@ -193,7 +193,7 @@ CUSTOM_TFX_IMAGE='gcr.io/' + GCP_PROJECT_ID + '/tfx-pipeline'
 
 ```python
 PIPELINE_NAME="my_pipeline"
-PROJECT_DIR=os.path.join(os.path.expanduser("~"),"deployed_notebook",PIPELINE_NAME)
+PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 ```
 
 그런 다음 노트북은 `tfx` CLI를 사용하여 파이프 라인 템플릿을 복사합니다. 이 가이드에서는 Chicago Taxi 데이터 세트를 사용하여 이진 분류를 수행하므로 템플릿은 모델을 `taxi` 설정합니다.
@@ -343,7 +343,7 @@ TFX 사용의 이점 중 하나는 변환 코드를 한 번 작성하면 결과 
 
 ![변환](images/airflow_workshop/transform.png)
 
-- [Transform](https://www.tensorflow.org/tfx/guide/transform)은 데이터세트에서 특성 엔지니어링을 수행합니다.
+- Transform은 데이터세트에서 특성 엔지니어링을 수행합니다.
 
 ### Jupyter 랩 파일 편집기에서 :
 
@@ -410,7 +410,7 @@ Kubeflow Orchestrator의 경우 KFP 대시 보드를 방문하여 파이프 라�
 
 ### 고급 예
 
-여기에 제시된 예는 실제로 시작하기위한 것입니다. 고급 예제는 [TensorBoard Tutorial을](https://www.tensorflow.org/tensorboard/r1/summaries) 참조하십시오.
+The example presented here is really only meant to get you started. For a more advanced example see the [TensorBoard Tutorial](https://www.tensorflow.org/tensorboard/get_started).
 
 ## 11. 모델 성능 분석
 
