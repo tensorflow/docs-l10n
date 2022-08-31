@@ -105,12 +105,9 @@ NNAPI デリゲートがモデル内の一部の演算子またはパラメー�
 NNAPI は、モデルが[サポートされている演算子](https://developer.android.com/ndk/guides/neuralnetworks#model)のみを使用する場合に最適に機能します。以下のモデルは、NNAPI と互換性があることが確認されています。
 
 - [MobileNet v1 (224x224) 画像分類（浮動小数点数モデルのダウンロード）](https://ai.googleblog.com/2017/06/mobilenets-open-source-models-for.html) [(量子化モデルのダウンロード)](http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz) <br>(モバイルおよび組み込みベースのビジョンアプリケーション向けに設計された画像分類モデル)
-- [MobileNet v2 SSD object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html)[(download)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite)
-    *(image classification model that detects multiple objects with bounding
-    boxes)*
-- [MobileNet v1(300x300) Single Shot Detector (SSD) object detection](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(download)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
-- [PoseNet for pose estimation](https://github.com/tensorflow/tfjs-models/tree/master/posenet)[(download)](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite)
-    *(vision model that estimates the poses of a person(s) in image or video)*
+- [MobileNet SSD 物体検出](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html)[（ダウンロード）](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/mobile_ssd_v2_float_coco.tflite) <br>*(バウンディングボックスで複数のオブジェクトを検出する画像分類モデル)*
+- [MobileNet v1(300x300) Single Shot Detector (SSD) 物体検出](https://ai.googleblog.com/2018/07/accelerated-training-and-inference-with.html) [(ダウンロード)] (https://storage.googleapis.com/download.tensorflow.org/models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip)
+- [ポーズ推定のための PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet) [（ダウンロード）](https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite) <br><i>(画像または動画内の人物のポーズを推定するビジョンモデル)</i>
 
 また、モデルに動的サイズの出力が含まれている場合も、NNAPI アクセラレーションはサポートされません。この場合、次のような警告が表示されます。
 
