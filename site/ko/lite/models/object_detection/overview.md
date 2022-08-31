@@ -1,25 +1,25 @@
 # 객체 감지
 
-Given an image or a video stream, an object detection model can identify which of a known set of objects might be present and provide information about their positions within the image.
+이미지 또는 비디오 스트림이 주어지면 객체 감지 모델은 알려진 객체 세트 중 어떤 것이 존재할 수 있는지 식별하고 이미지 내 위치에 대한 정보를 제공할 수 있습니다.
 
-For example, this screenshot of the <a href="#get_started">example application</a> shows how two objects have been recognized and their positions annotated:
+예를 들어, 이 <a href="#get_started">예제 애플리케이션</a> 스크린샷은 두 객체가 인식되고 해당 위치에 주석이 추가되는 방식을 보여줍니다.
 
 
 <img src="images/android_apple_banana.png" alt="Screenshot of Android example" width="30%">
 
-Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker).
+참고: (1) 기존 모델을 통합하려면 [TensorFlow Lite 작업 라이브러리](https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector)를 사용해 보세요. (2) 모델을 사용자 지정하려면 [TensorFlow Lite 모델 제작기](https://www.tensorflow.org/lite/guide/model_maker)를 사용해 보세요.
 
 ## 시작하기
 
-To learn how to use object detection in a mobile app, explore the <a href="#example_applications_and_guides">Example applications and guides</a>.
+모바일 앱에서 객체 감지를 사용하는 방법을 알아보려면 <a href="#example_applications_and_guides">예제 애플리케이션 및 가이드</a>를 살펴보세요.
 
-If you are using a platform other than Android or iOS, or if you are already familiar with the <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite APIs</a>, you can download our starter object detection model and the accompanying labels.
+Android 또는 iOS 이외의 플랫폼을 사용 중이거나 <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite API</a>에 이미 익숙한 경우 스타터 객체 감지 모델과 함께 제공되는 레이블을 다운로드할 수 있습니다.
 
-<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">Download starter model with Metadata</a>
+<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">메타데이터가 있는 스타터 모델 다운로드</a>
 
-For more information about Metadata and associated fields (eg: `labels.txt`) see <a href="../../models/convert/metadata#read_the_metadata_from_models">Read the metadata from models</a>
+메타데이터 및 관련 필드(예: `labels.txt`)에 대한 자세한 내용은 <a href="../../models/convert/metadata#read_the_metadata_from_models">모델에서 메타데이터 읽기</a>를 참조하세요.
 
-If you want to train a custom detection model for your own task, see <a href="#model-customization">Model customization</a>.
+자신의 작업에 대한 사용자 지정 감지 모델을 훈련하려면 <a href="#model-customization">모델 사용자 지정</a>을 참조하세요.
 
 다음 사용 사례의 경우 다른 유형의 모델을 사용해야 합니다.
 
@@ -28,43 +28,43 @@ If you want to train a custom detection model for your own task, see <a href="#m
   <li>이미지 구성 예측하기(예: 피사체 대 배경)(<a href="../segmentation/overview.md">세분화</a> 참조)</li>
 </ul>
 
-### Example applications and guides
+### 예제 애플리케이션 및 가이드
 
-If you are new to TensorFlow Lite and are working with Android or iOS, we recommend exploring the following example applications that can help you get started.
+TensorFlow Lite를 처음 사용하고 Android 또는 iOS로 작업하는 경우, 다음 예제 애플리케이션을 탐색하면 시작하는 데 도움이 됩니다.
 
 #### Android
 
-You can leverage the out-of-box API from [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/object_detector) to integrate object detection models in just a few lines of code. You can also build your own custom inference pipeline using the [TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java).
+[TensorFlow Lite 작업 라이브러리](../../inference_with_metadata/task_library/object_detector)의 기본 API를 활용하여 몇 줄의 코드로 객체 감지 모델을 통합할 수 있습니다. [TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java)를 사용하여 사용자 지정 추론 파이프라인을 구축할 수도 있습니다.
 
-The Android example below demonstrates the implementation for both methods as [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_task_api) and [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_interpreter), respectively.
+아래 Android 예제는 각각 [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_task_api) 및 [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_interpreter)로 두 메서드를 구현한 내용을 보여줍니다.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android">View Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android">Android 예제 보기</a>
 
 #### iOS
 
-You can integrate the model using the [TensorFlow Lite Interpreter Swift API](../../guide/inference#load_and_run_a_model_in_swift). See the iOS example below.
+[TensorFlow Lite Interpreter Swift API](../../guide/inference#load_and_run_a_model_in_swift)를 사용하여 모델을 통합할 수 있습니다. 아래의 iOS 예를 참조하세요.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/ios">View iOS example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/ios">iOS 예제 보기</a>
 
-## Model description
+## 모델 설명
 
-This section describes the signature for [Single-Shot Detector](https://arxiv.org/abs/1512.02325) models converted to TensorFlow Lite from the [TensorFlow Object Detection API](https://github.com/tensorflow/models/blob/master/research/object_detection/).
+이 섹션에서는 [TensorFlow Object Detection API](https://arxiv.org/abs/1512.02325)에서 TensorFlow Lite로 변환된 [Single-Shot Detector](https://github.com/tensorflow/models/blob/master/research/object_detection/) 모델의 서명을 설명합니다.
 
 객체 감지 모델은 여러 클래스의 객체 존재와 위치를 감지하도록 훈련되었습니다. 예를 들어, 다양한 과일 조각이 포함된 이미지, 과일이 나타내는 과일의 종류(예: 사과, 바나나 또는 딸기)를 지정하는 *레이블* 및 각 객체가 이미지에서 나타나는 위치를 지정하는 데이터로 모델을 훈련할 수 있습니다.
 
-When an image is subsequently provided to the model, it will output a list of the objects it detects, the location of a bounding box that contains each object, and a score that indicates the confidence that detection was correct.
+이후에 모델에 이미지를 제공하면 감지된 객체 목록, 각 객체가 포함된 경계 상자의 위치 및 감지가 정확하다는 확신을 나타내는 점수가 출력됩니다.
 
-### Input Signature
+### 입력 서명
 
-The model takes an image as input.
+모델은 이미지를 입력으로 사용합니다.
 
-Lets assume the expected image is 300x300 pixels, with three channels (red, blue, and green) per pixel. This should be fed to the model as a flattened buffer of 270,000 byte values (300x300x3). If the model is <a href="../../performance/post_training_quantization.md">quantized</a>, each value should be a single byte representing a value between 0 and 255.
+예상 이미지는 300x300픽셀이며 픽셀당 3개의 채널(빨간색, 파란색, 녹색)이 있습니다. 이는 270,000바이트 값(300x300x3)의 평면화된 버퍼로 모델에 제공되어야 합니다. 모델이 <a href="../../performance/post_training_quantization.md">양자화</a>된 경우, 각 값은 0에서 255 사이의 값을 나타내는 단일 바이트여야 합니다.
 
-You can take a look at our [example app code](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android) to understand how to do this pre-processing on Android.
+Android에서 이 사전 처리를 수행하는 방법을 이해하려면 [예제 앱 코드](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android)를 살펴보세요.
 
-### Output Signature
+### 출력 서명
 
-The model outputs four arrays, mapped to the indices 0-4. Arrays 0, 1, and 2 describe `N` detected objects, with one element in each array corresponding to each object.
+모델은 인덱스 0-4에 매핑된 4개의 배열을 출력합니다. 배열 0, 1 및 2는 `N`개의 감지된 객체를 설명하며 각 배열의 요소 하나가 각 객체에 해당합니다.
 
 <table>
   <thead>
@@ -78,29 +78,29 @@ The model outputs four arrays, mapped to the indices 0-4. Arrays 0, 1, and 2 des
     <tr>
       <td>0</td>
       <td>Locations</td>
-      <td>Multidimensional array of [N][4] floating point values between 0 and 1, the inner arrays representing bounding boxes in the form [top, left, bottom, right]</td>
+      <td>0과 1 사이의 [N][4] 부동 소수점 값의 다차원 배열, [상단, 좌측, 하단, 우측] 형식의 경계 상자를 나타내는 내부 배열</td>
     </tr>
     <tr>
       <td>1</td>
       <td>Classes</td>
-      <td>Array of N integers (output as floating point values) each indicating the index of a class label from the labels file</td>
+      <td>레이블 파일에서 클래스 레이블의 인덱스를 각각 나타내는 N개의 정수 배열(부동 소수점 값으로 출력)</td>
     </tr>
     <tr>
       <td>2</td>
       <td>Scores</td>
-      <td>Array of N floating point values between 0 and 1 representing probability that a class was detected</td>
+      <td>클래스가 감지될 확률을 나타내는 0과 1 사이의 N개의 부동 소수점 값 배열</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>Number of detections</td>
-      <td>Integer value of N</td>
+      <td>감지 수</td>
+      <td>N의 정수 값</td>
     </tr>
   </tbody>
 </table>
 
-NOTE: The number of results (10 in the above case) is a parameter set while exporting the detection model to TensorFlow Lite. See <a href="#model-customization">Model customization</a> for more details.
+참고: 결과 수(위의 경우 10)는 감지 모델을 TensorFlow Lite로 내보낼 때 설정되는 매개변수입니다. 자세한 내용은 <a href="#model-customization">모델 사용자 지정</a>을 참조하세요.
 
-For example, imagine a model has been trained to detect apples, bananas, and strawberries. When provided an image, it will output a set number of detection results - in this example, 5.
+예를 들어, 모델이 사과, 바나나, 딸기를 감지하도록 훈련되었다고 생각해 보겠습니다. 이미지가 제공되면 설정된 수의 감지 결과(이 예에서는 5)를 출력합니다.
 
 <table style="width: 60%;">
   <thead>
@@ -141,9 +141,9 @@ For example, imagine a model has been trained to detect apples, bananas, and str
 
 #### Confidence score
 
-To interpret these results, we can look at the score and the location for each detected object. The score is a number between 0 and 1 that indicates confidence that the object was genuinely detected. The closer the number is to 1, the more confident the model is.
+출력된 결과를 해석하기 위해 감지된 각 객체의 점수와 위치를 볼 수 있습니다. 점수는 0에서 1 사이의 숫자로 객체가 실제로 감지되었다는 확신을 나타냅니다. 숫자가 1에 가까울수록 모델의 신뢰도가 높아집니다.
 
-Depending on your application, you can decide a cut-off threshold below which you will discard detection results. For the current example, a sensible cut-off is a score of 0.5 (meaning a 50% probability that the detection is valid). In that case, the last two objects in the array would be ignored because those confidence scores are below 0.5:
+애플리케이션에 따라 감지 결과를 버릴 컷오프 임계값을 결정할 수 있습니다. 현재 예에서는 합리적인 컷오프가 0.5점(감지가 유효할 확률이 50%임을 의미)이라고 결정할 수 있습니다. 이 경우 배열의 마지막 두 객체를 무시하게 되는데, 이에 대한 신뢰도 점수가 0.5 미만이기 때문입니다.
 
 <table style="width: 60%;">
   <thead>
@@ -182,7 +182,7 @@ Depending on your application, you can decide a cut-off threshold below which yo
   </tbody>
 </table>
 
-The cut-off you use should be based on whether you are more comfortable with false positives (objects that are wrongly identified, or areas of the image that are erroneously identified as objects when they are not), or false negatives (genuine objects that are missed because their confidence was low).
+사용하는 컷오프는 거짓양성(잘못 식별된 객체 또는 그렇지 않은 경우 객체로 잘못 식별된 이미지 영역) 또는 거짓음성(신뢰도 점수가 낮기 때문에 놓친 실제 객체)에 더 익숙한지 여부에 근거해야 합니다.
 
 예를 들어, 다음 이미지에서 배(모델이 감지하도록 훈련된 객체가 아님)는 '사람'으로 잘못 식별되었습니다. 이는 적절한 컷오프를 선택하여 무시할 수 있는 거짓양성의 예입니다. 이 경우 0.6(또는 60%)의 컷오프는 거짓양성을 수월하게 배제합니다.
 
@@ -191,7 +191,7 @@ The cut-off you use should be based on whether you are more comfortable with fal
 
 #### Location
 
-For each detected object, the model will return an array of four numbers representing a bounding rectangle that surrounds its position. For the starter model provided, the numbers are ordered as follows:
+감지된 각 객체에 대해 모델은 위치를 둘러싸는 경계 사각형을 나타내는 4개의 숫자 배열을 반환합니다. 제공된 스타터 모델의 경우 숫자는 다음과 같이 주문됩니다.
 
 <table style="width: 50%; margin: 0 auto;">
   <tbody>
@@ -212,7 +212,7 @@ For each detected object, the model will return an array of four numbers represe
 
 ## 성능 벤치마크
 
-Performance benchmark numbers for our <a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">starter model</a> are generated with the tool [described here](https://www.tensorflow.org/lite/performance/benchmarks).
+<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">스타터 모델</a>에 대한 성능 벤치마크 수치는 [여기에 설명](https://www.tensorflow.org/lite/performance/benchmarks)된 도구로 생성됩니다.
 
 <table>
   <thead>
@@ -225,10 +225,9 @@ Performance benchmark numbers for our <a class="button button-primary" href="htt
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">
-      <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a>
-    </td>
-    <td rowspan="3">       27 Mb     </td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a>
+</td>
+    <td rowspan="3">       27Mb</td>
     <td>Pixel 3(Android 10)</td>
     <td>22ms</td>
     <td>46ms*</td>
@@ -249,28 +248,28 @@ Performance benchmark numbers for our <a class="button button-primary" href="htt
 
 ** 최상의 결과를 위해 iPhone에서 2개의 스레드가 사용되었습니다.
 
-## Model Customization
+## 모델 사용자 지정
 
-### Pre-trained models
+### 사전 훈련된 모델
 
-Mobile-optimized detection models with a variety of latency and precision characteristics can be found in the [Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md#mobile-models). Each one of them follows the input and output signatures described in the following sections.
+다양한 지연 및 정밀도 특성을 가진 모바일에 최적화된 감지 모델은 [감지 동물원](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md#mobile-models)에서 찾을 수 있습니다. 각각은 다음 섹션에서 설명하는 입력 및 출력 서명을 따릅니다.
 
-Most of the download zips contain a `model.tflite` file. If there isn't one, a TensorFlow Lite flatbuffer can be generated using [these instructions](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md). SSD models from the [TF2 Object Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md) can also be converted to TensorFlow Lite using the instructions [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md). It is important to note that detection models cannot be converted directly using the [TensorFlow Lite Converter](../../models/convert), since they require an intermediate step of generating a mobile-friendly source model. The scripts linked above perform this step.
+대부분의 다운로드 zip에는 `model.tflite` 파일이 포함되어 있습니다. 없는 경우 [이 지침](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)에 따라 TensorFlow Lite 플랫 버퍼를 생성할 수 있습니다. [TF2 객체 감지 동물원](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md)의 SSD 모델은 [여기](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md)의 지침을 사용하여 TensorFlow Lite로 변환할 수도 있습니다. 감지 모델은 모바일 친화적인 소스 모델을 생성하는 중간 단계가 필요하기 때문에 [TensorFlow Lite Converter](../../models/convert)를 사용하여 직접 변환할 수 없다는 점에 유의해야 합니다. 위에 링크된 스크립트가 이 단계를 수행합니다.
 
-Both the [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) &amp; [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) exporting scripts have parameters that can enable a larger number of output objects or slower, more-accurate post processing. Please use `--help` with the scripts to see an exhaustive list of supported arguments.
+[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) 및 [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) 내보내기 스크립트에는 더 많은 수의 출력 객체 또는 더 느리고 정확한 사후 처리를 활성화할 수 있는 매개변수가 있습니다. 지원되는 인수의 전체 목록을 보려면 스크립트와 함께 `--help`를 사용하세요.
 
-> Currently, on-device inference is only optimized with SSD models. Better support for other architectures like CenterNet and EfficientDet is being investigated.
+> 현재 온디바이스 추론은 SSD 모델에만 최적화되어 있습니다. CenterNet 및 EfficientDet과 같은 다른 아키텍처의 지원을 개선하기 위한 기회를 찾고 있습니다.
 
-### How to choose a model to customize?
+### 사용자 지정할 모델을 선택하는 방법은?
 
-Each model comes with its own precision (quantified by mAP value) and latency characteristics. You should choose a model that works the best for your use-case and intended hardware. For example, the [Edge TPU](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md#pixel4-edge-tpu-models) models are ideal for inference on Google's Edge TPU on Pixel 4.
+각 모델에는 고유한 정밀도(mAP 값으로 정량화됨) 및 대기 시간 특성이 있습니다. 사용 사례와 의도한 하드웨어에 가장 적합한 모델을 선택해야 합니다. 예를 들어 [Edge TPU](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md#pixel4-edge-tpu-models) 모델은 Pixel 4에서 Google의 Edge TPU에 대한 추론에 이상적입니다.
 
-You can use our [benchmark tool](https://www.tensorflow.org/lite/performance/measurement) to evaluate models and choose the most efficient option available.
+[벤치마크 도구](https://www.tensorflow.org/lite/performance/measurement)를 사용하여 모델을 평가하고 사용 가능한 가장 효율적인 옵션을 선택할 수 있습니다.
 
-## Fine-tuning models on custom data
+## 사용자 지정 데이터에 대한 모델 미세 조정
 
-The pre-trained models we provide are trained to detect 90 classes of objects. For a full list of classes, see the labels file in the <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">model metadata</a>.
+제공되고 있는 사전 훈련된 모델은 90개의 객체 클래스를 감지하도록 훈련되었습니다. 전체 클래스 목록은 <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">모델 메타데이터</a>의 레이블 파일을 참조하세요.
 
-You can use a technique known as transfer learning to re-train a model to recognize classes not in the original set. For example, you could re-train the model to detect multiple types of vegetable, despite there only being one vegetable in the original training data. To do this, you will need a set of training images for each of the new labels you wish to train. The recommended way is to use [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) library which simplifies the process of training a TensorFlow Lite model using custom dataset, with a few lines of codes. It uses transfer learning to reduce the amount of required training data and time. You can also learn from [Few-shot detection Colab](https://github.com/tensorflow/models/blob/master/research/object_detection/colab_tutorials/eager_few_shot_od_training_tflite.ipynb) as an example of fine-tuning a pre-trained model with few examples.
+전이 학습이라고 하는 기술을 사용하여 원래 세트에 없는 클래스를 인식하도록 모델을 다시 훈련할 수 있습니다. 예를 들어, 원래 훈련 데이터에 야채가 하나만 있음에도 불구하고 여러 유형의 야채를 감지하도록 모델을 다시 훈련할 수 있습니다. 이를 위해 훈련하려는 새 레이블 각각에 대한 훈련 이미지 세트가 필요합니다. 권장되는 방법은 몇 줄의 코드로 사용자 지정 데이터세트를 사용하여 TensorFlow Lite 모델 훈련 프로세스를 단순화하는 [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) 라이브러리를 사용하는 것입니다. 필요한 훈련 데이터의 양과 시간을 줄이기 위해 전이 학습이 사용됩니다. 몇 가지 예를 통해 사전 훈련된 모델을 미세 조정하는 예로서 [Few-shot detection Colab](https://github.com/tensorflow/models/blob/master/research/object_detection/colab_tutorials/eager_few_shot_od_training_tflite.ipynb)을 배울 수도 있습니다.
 
-For fine-tuning with larger datasets, take a look at the these guides for training your own models with the TensorFlow Object Detection API: [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_training_and_evaluation.md), [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md). Once trained, they can be converted to a TFLite-friendly format with the instructions here: [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md), [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)
+더 큰 데이터세트로 미세 조정하려면 TensorFlow Object Detection API를 사용하여 자신의 모델을 훈련하기 위한 다음 가이드를 살펴보세요: [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_training_and_evaluation.md), [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md). 훈련 후에는 다음 지침에 따라 TFLite 친화적인 형식으로 변환할 수 있습니다: [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md), [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)
