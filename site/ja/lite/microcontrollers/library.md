@@ -118,4 +118,4 @@ Arduino ライブラリのナイトリービルドは、Arduino IDE のライブ
 
 ## 新規デバイスに移植する
 
-Guidance on porting TensorFlow Lite for Microcontrollers to new platforms and devices can be found in [`micro/docs/new_platform_support.md`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/docs/new_platform_support.md).
+TensorFlow Lite for Microcontrollers を新しいプラットフォームやデバイスに移植するためのガイドは、[`micro/docs/new_platform_support.md`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/docs/new_platform_support.md) をご覧ください。
