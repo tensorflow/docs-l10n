@@ -110,7 +110,7 @@ Android 이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미
         <td>0.13ms*</td>
       </tr>
        <tr>
-         <td>Pixel 4 </td>
+         <td>Pixel 4</td>
         <td>0.06ms*</td>
       </tr>
     
@@ -119,11 +119,11 @@ Android 이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미
 
 * 4개의 스레드가 사용되었습니다.
 
-## Use your training data
+## 고유한 훈련 데이터 사용하기
 
-In addition to the trained model, we provide an open-sourced [toolkit in GitHub](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml) to train models with your own data. You can follow this tutorial to learn how to use the toolkit and deploy trained models in your own mobile applications.
+훈련된 모델 외에도 고유한 데이터로 모델을 훈련할 수 있는 오픈 소스 [GitHub 도구 키트](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml)가 제공됩니다. 이 튜토리얼의 설명에 따라 도구 키트를 사용하고 자신의 모바일 애플리케이션에서 훈련된 모델을 배포하는 방법을 배울 수 있습니다.
 
-Please follow this [tutorial](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb) to apply the same technique used here to train a recommendation model using your own datasets.
+이 [튜토리얼](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb)에 따라 여기서 사용된 것과 같은 기술을 적용하여 고유한 데이터세트로 추천 모델을 훈련해 보세요.
 
 ## 고유 데이터를 사용한 모델 사용자 정의 팁
 
