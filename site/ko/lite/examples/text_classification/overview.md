@@ -28,7 +28,7 @@ Android이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미 
 
 1. 단락을 토큰화하고 사전 정의된 어휘를 사용하여 단어 ID 목록으로 변환하세요.
 2. TensorFlow Lite 모델에 목록을 제공합니다.
-3. Get the probability of the paragraph being positive or negative from the model outputs.
+3. 모델 출력에서 단락이 양수 또는 음수일 확률을 가져옵니다.
 
 ### 참고
 
