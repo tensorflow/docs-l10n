@@ -2,20 +2,19 @@
 
 エージェントを相手にボードゲームをします。エージェントは、強化学習を使用してトレーニングされ、TensorFlow Lite でデプロイされています。
 
-## Get started
-
+## はじめに
 
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
-If you are new to TensorFlow Lite and are working with Android, we recommend exploring the following example application that can help you get started.
+TensorFlow Lite を初めて使用する場合、Android を使用する場合は、以下のサンプルアプリをご覧ください。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/reinforcement_learning/android">Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/reinforcement_learning/android">Android の例</a>
 
 Android 以外のプラットフォームを使用する場合、または、すでに [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite) に精通している場合は、トレーニング済みモデルをダウンロードできます。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/blob/master/lite/examples/reinforcement_learning/android/app/src/main/assets/planestrike_tf.tflite">モデルのダウンロード</a>
 
-## How it works
+## 使い方
 
 ゲームエージェントが「Plane Strike」という小さいボードゲームをするためのモデルが構築されています。このゲームの簡単な概要とルールについては、[README](https://github.com/tensorflow/examples/tree/master/lite/examples/reinforcement_learning/android) を参照してください。
 
@@ -23,15 +22,15 @@ Android 以外のプラットフォームを使用する場合、または、す
 
 Android アプリでの実際のゲーム中、エージェントの番になると、エージェントは人間の対戦相手のボード状態 (下部のボード) を確認します。このボード状態には、以前の成功と失敗 (当たりと外れ) に関する情報が含まれています。そして、トレーニング済みのモデルを使用して、次に狙う場所を予測し、人間の対戦相手よりも早くゲームを終わらせることができるようにします。
 
-## Performance benchmarks
+## パフォーマンスベンチマーク
 
-Performance benchmark numbers are generated with the tool described [here](https://www.tensorflow.org/lite/performance/benchmarks).
+パフォーマンスベンチマークの数値は、[ここで説明する](https://www.tensorflow.org/lite/performance/benchmarks)ツールで生成されます。
 
 <table>
   <thead>
     <tr>
-      <th>Model Name</th>
-      <th>Model size </th>
+      <th>モデル名</th>
+      <th>モデルサイズ</th>
       <th>デバイス</th>
       <th>CPU</th>
     </tr>
@@ -40,11 +39,11 @@ Performance benchmark numbers are generated with the tool described [here](https
     <td rowspan="2">       <a href="https://github.com/tensorflow/examples/blob/master/lite/examples/reinforcement_learning/android/app/src/main/assets/planestrike.tflite">方策勾配</a>
 </td>
     <td rowspan="2">       84 Kb</td>
-    <td>Pixel 3 (Android 10) </td>
+    <td>Pixel 3 (Android 10)</td>
     <td>0.01ms*</td>
   </tr>
    <tr>
-     <td>Pixel 4 (Android 10) </td>
+     <td>Pixel 4 (Android 10)</td>
     <td>0.01ms*</td>
   </tr>
 </table>
