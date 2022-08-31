@@ -13,7 +13,7 @@ To participate in the TensorFlow docs community:
 - [tensorflow / docs](https://github.com/tensorflow/docs) GitHub 저장소를 확인하세요.
 - Follow the [docs](https://discuss.tensorflow.org/tag/docs) tag on the [TensorFlow Forum](https://discuss.tensorflow.org/).
 
-## API reference
+## API 참조
 
 For details, use the [TensorFlow API docs contributor guide](docs_ref.md). This shows you how to find the [source file](https://www.tensorflow.org/code/tensorflow/python/) and edit the symbol's <a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a>. Many API reference pages on tensorflow.org include a link to the source file where the symbol is defined. Docstrings support <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown</a> and can be (approximately) previewed using any <a href="http://tmpvar.com/markdown.html" class="external">Markdown previewer</a>.
 
@@ -52,7 +52,7 @@ TensorFlow 2 참조 문서를 생성하려면 `tensorflow/tools/docs/generate2.p
 
 TensorFlow [가이드](https://www.tensorflow.org/guide) 및 [가이드](https://www.tensorflow.org/tutorials) 는 <a href="https://guides.github.com/features/mastering-markdown/" class="external">Markdown</a> 파일 및 대화 형 <a href="https://jupyter.org/" class="external">Jupyter</a> 노트북으로 작성됩니다. <a href="https://colab.research.google.com/notebooks/welcome.ipynb" class="external">Google Colaboratory를</a> 사용하여 브라우저에서 노트북을 실행할 수 있습니다. [tensorflow.org](https://www.tensorflow.org) 의 내러티브 문서는 <a href="https://github.com/tensorflow/docs" class="external">tensorflow / docs</a> `master` 브랜치에서 빌드됩니다. 이전 버전은 `rX.x` 릴리스 브랜치의 GitHub에서 사용할 수 있습니다.
 
-### Simple changes
+### 간단한 변경
 
 Markdown 파일에 대한 간단한 문서 업데이트를 만드는 가장 쉬운 방법은 GitHub의 <a href="https://help.github.com/en/articles/editing-files-in-your-repository" class="external">웹 기반 파일 편집기를 사용하는 것</a> 입니다. 찾아보기 [tensorflow / 문서](https://github.com/tensorflow/docs/tree/master/site/en) 저장소 약은에 해당하는 마크 다운을 찾을 수 <a href="https://www.tensorflow.org">tensorflow.org의</a> URL 구조. 파일보기의 오른쪽 상단에서 연필 아이콘을 클릭합니다. <svg version="1.1" width="14" height="16" viewbox="0 0 14 16" class="octicon octicon-pencil" aria-hidden="true"></svg><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path> 파일 편집기를 엽니 다. 파일을 편집 한 다음 새 풀 요청을 제출하십시오.
 
@@ -177,11 +177,11 @@ To create a new notebook, copy and edit the <a href="https://github.com/tensorfl
 
 ### Edit in Colab
 
-Within the Google Colab environment, double-click cells to edit text and code blocks. Text cells use Markdown and should follow the [TensorFlow docs style guide](./docs_style.md).
+Google Colab 환경에서 셀을 두 번 클릭하여 텍스트 및 코드 블록을 편집하십시오. 텍스트 셀은 마크 다운을 사용하며 [TensorFlow 문서 스타일 가이드를](./docs_style.md) 따라야합니다.
 
 Colab에서 *File &gt; Download .pynb*를 이용해 노트북 파일을 다운로드합니다. 이 파일을 자신의 [local Git repo](##set_up_a_local_git_repo)에 커밋하고 풀 요청을 보냅니다.
 
-To create a new notebook, copy and edit the <a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow notebook template</a>.
+새 노트북을 작성하려면 <a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow 노트북 템플리트를</a> 복사하고 편집하십시오.
 
 ### Colab-GitHub workflow
 
