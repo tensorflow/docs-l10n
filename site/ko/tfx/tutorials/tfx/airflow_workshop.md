@@ -1,7 +1,6 @@
 # TFX Airflow 튜토리얼
 
-[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[ ](https://github.com/tensorflow/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)[](https://github.com/tensorflow/tfx)
-[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)
+[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[ ](https://github.com/tensorflow/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)[](https://github.com/tensorflow/tfx) [](https://badge.fury.io/py/tfx)<a href="https://badge.fury.io/py/tfx" data-md-type="link">![PyPI](https://badge.fury.io/py/tfx.svg)</a>[](https://badge.fury.io/py/tfx)
 
 ## 가중치 값만 저장합니다. 이것은 일반적으로 모델을 훈련할 때 사용됩니다.
 
