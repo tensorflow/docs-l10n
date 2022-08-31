@@ -1,10 +1,11 @@
 # レコメンド
 
-<table class="tfo-notebook-buttons" align="left">   <td>     <a target="_blank" href="https://www.tensorflow.org/lite/examples/recommendation/overview"><img src="https://www.tensorflow.org/images/tf_logo_32px.png">View on TensorFlow.org</a>   </td>   {% dynamic if request.tld != 'cn' %}<td>     <a target="_blank" href="https://colab.research.google.com/github/tensorflow/examples/blob/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb"><img src="https://www.tensorflow.org/images/colab_logo_32px.png">Run in Google Colab</a>   </td>{% dynamic endif %}   <td>     <a target="_blank" href="https://github.com/tensorflow/examples/blob/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb"><img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png">View source on GitHub</a>   </td> </table>
+<table class="tfo-notebook-buttons" align="left">   <td>     <a target="_blank" href="https://www.tensorflow.org/lite/examples/recommendation/overview"><img src="https://www.tensorflow.org/images/tf_logo_32px.png">TensorFlow.org で表示</a>   </td>   {% dynamic if request.tld != 'cn' %}<td>     <a target="_blank" href="https://colab.research.google.com/github/tensorflow/examples/blob/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb"><img src="https://www.tensorflow.org/images/colab_logo_32px.png">Google Colab で実行</a>   </td>{% dynamic endif %}   <td>     <a target="_blank" href="https://github.com/tensorflow/examples/blob/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb"><img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png">GitHub でソースを表示</a>   </td>
+</table>
 
 個別のレコメンドは、メディアコンテンツの検索、ショッピングの商品提案、アプリの次のレコメンドなど、モバイルデバイス上のさまざまなユースケースで広く使用されています。ユーザーのプライバシーを尊重しながらアプリで個別のレコメンドを提供することに興味がある場合には、以下の例とツールキットの検討をお勧めします。
 
-Note: To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker).
+注意: モデルをカスタマイズするには、[TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) を試してください。
 
 ## はじめに
 
@@ -19,7 +20,7 @@ Android 以外のプラットフォームを使用する場合、または、す
 
 <a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/recommendation/20200720/recommendation.tar.gz">Download starter model</a>
 
-We also provide training script in Github to train your own model in a configurable way.
+また、構成可能な方法で独自のモデルをトレーニングするためのトレーニングスクリプトも GitHub で提供されています。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml">トレーニング用コード</a>
 
@@ -33,9 +34,9 @@ Sequential にユーザー履歴をエンコードするコンテキストエン
 - 畳み込みニューラルネットワークエンコーダ (CNN): 畳み込みニューラルネットワークの複数のレイヤーを適用してコンテキストエンコーディングを生成します。
 - 再帰ニューラルネットワークエンコーダ (RNN): 再帰ニューラルネットワークを適用してコンテキストシーケンスをエンコードします。
 
-To model each user activity, we could use the ID of the activity item (ID-based) , or multiple features of the item (feature-based), or a combination of both. The feature-based model utilizing multiple features to collectively encode users’ behavior. With this code base, you could create either ID-based or feature-based models in a configurable way.
+各ユーザーアクティビティをモデル化するには、アクティビティ項目の ID (ID ベース)、項目の複数の特徴 (特徴ベース)、またはその両方の組み合わせを使用できます。特徴ベースのモデルでは、複数の特徴を使用して、ユーザーの動作が集合的にエンコードされます。このコードベースでは、構成可能な方法で ID ベースまたは特徴ベースのモデルを作成できます。
 
-After training, a TensorFlow Lite model will be exported which can directly provide top-K predictions among the recommendation candidates.
+トレーニング後、レコメンド候補に上位 K 予測を直接提供できる、TensorFlow Lite モデルがエクスポートされます。
 
 ## 独自のトレーニングデータを使用する
 
@@ -45,33 +46,33 @@ After training, a TensorFlow Lite model will be exported which can directly prov
 
 ## 使用例
 
-As examples, we trained recommendation models with both ID-based and feature-based approaches. The ID-based model takes only the movie IDs as input, and the feature-based model takes both movie IDs and movie genre IDs as inputs. Please find the following inputs and outputs examples.
+例として、ID ベースのアプローチと特徴ベースのアプローチの両方を使用して、リコメンドモデルをトレーニングしました。ID ベースのモデルでは、動画 ID のみを入力として取ります。特徴ベースのモデルでは、動画 ID と動画ジャンル ID を入力として取ります。次の入出力の例を確認してください。
 
-Inputs
+入力
 
-- Context movie IDs:
+- コンテキスト動画 ID:
 
     - The Lion King (ID: 362)
     - Toy Story (ID: 1)
     - （その他）
 
-- Context movie genre IDs:
+- コンテキスト動画ジャンル ID:
 
-    - Animation (ID: 15)
-    - Children's (ID: 9)
-    - Musical (ID: 13)
-    - Animation (ID: 15)
-    - Children's (ID: 9)
-    - Comedy (ID: 2)
+    - アニメ (ID: 15)
+    - キッズ (ID: 9)
+    - ミュージカル (ID: 13)
+    - アニメ (ID: 15)
+    - キッズ (ID: 9)
+    - コメディ (ID: 2)
     - （その他）
 
-Outputs:
+出力:
 
-- Recommended movie IDs:
+- リコメンドされた動画 ID:
     - Toy Story 2 (ID: 3114)
-    - (and more)
+    - (その他)
 
-Note: The pretrained model is built based on [MovieLens](https://grouplens.org/datasets/movielens/1m/) dataset for research purpose.
+注意: このトレーニング済みモデルは、研究目的のために [MovieLens](https://grouplens.org/datasets/movielens/1m/) データセットに基づいて構築されています。
 
 ## パフォーマンスベンチマーク
 
@@ -90,9 +91,8 @@ Note: The pretrained model is built based on [MovieLens](https://grouplens.org/d
     <tr>
       </tr>
 <tr>
-        <td rowspan="3">
-          <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/recommendation/20200720/model.tar.gz">recommendation (movie ID as input)</a>
-        </td>
+        <td rowspan="3">           <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/recommendation/20200720/model.tar.gz">リコメンド (入力は動画 ID)</a>
+</td>
         <td rowspan="3">       0.52 Mb</td>
         <td>Pixel 3</td>
         <td>0.09ms*</td>
@@ -105,10 +105,9 @@ Note: The pretrained model is built based on [MovieLens](https://grouplens.org/d
     <tr>
       </tr>
 <tr>
-        <td rowspan="3">
-          <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/recommendation/20210317/recommendation_cnn_i10i32o100.tflite">recommendation (movie ID and movie genre as inputs)</a>
-        </td>
-        <td rowspan="3">           1.3 Mb         </td>
+        <td rowspan="3">           <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/recommendation/20210317/recommendation_cnn_i10i32o100.tflite">リコメンド (入力は動画 ID と動画ジャンル)</a>
+</td>
+        <td rowspan="3">           1.3 Mb</td>
         <td>Pixel 3</td>
         <td>0.13ms*</td>
       </tr>
@@ -136,4 +135,4 @@ Please follow this [tutorial](https://github.com/tensorflow/examples/tree/master
 
 - エンコーダタイプの選択: 入力コンテキストの長さに基づいて適切なエンコーダのタイプを選択することをお勧めします。Bag of Words エンコーダは入力コンテキストの長さが短い場合（例えば 10 未満）でよく機能しますが、CNN や RNN エンコーダは入力コンテキストの長さが長い場合により優れた要約力を発揮します。
 
-- Using underlying features to represent items or user activities could improve model performance, better accommodate fresh items, possibly down scale embedding spaces hence reduce memory consumption and more on-device friendly.
+- 基本の特徴を使用して、項目またはユーザーアクティビティを表すと、メモリ消費量が減り、デバイスに適合しやすくなるため、モデルパフォーマンスが改善され、新しい項目への対応が効果的になり、埋め込みスペースが減る可能性があります。
