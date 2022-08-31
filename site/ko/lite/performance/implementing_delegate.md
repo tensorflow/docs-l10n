@@ -24,11 +24,11 @@ TensorFlow Lite에는 GPU, DSP, EdgeTPU 및 Android NNAPI와 같은 프레임워
 
 다음과 같은 간단한 모델 그래프와 Conv2D 및 Mean 작업을 더 빠르게 구현하는 대리자 "MyDelegate"를 고려합니다.
 
-![Original graph](../images/performance/tflite_delegate_graph_1.png "Original Graph")
+![원본 그래프](../images/performance/tflite_delegate_graph_1.png "원본 그래프")
 
 이 "MyDelegate"를 적용하면 원본 TensorFlow Lite 그래프가 다음과 같이 업데이트됩니다.
 
-![Graph with delegate](../images/performance/tflite_delegate_graph_2.png "Graph with delegate")
+![대리자가 있는 그래프](../images/performance/tflite_delegate_graph_2.png "Graph with delegate")
 
 위의 그래프는 TensorFlow Lite가 두 가지 규칙에 따라 원본 그래프를 분할할 때 얻어집니다.
 
