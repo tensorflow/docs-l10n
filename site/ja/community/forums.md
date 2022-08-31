@@ -1,13 +1,13 @@
 # メーリングリスト
 
-コミュニティでは、公開メーリングリストを介して数多くのコラボレーションを行っています。TensorFlowの使用に関するヘルプをお探しの場合は、 まず、[Stack Overflow](https://stackoverflow.com/questions/tagged/tensorflow)と[GitHub issues](https://github.com/tensorflow/tensorflow/issues)を確認してください。
+私たちはコミュニティとして、公開メーリングリストで数多くのコラボレーションを行っています。TensorFlow の使用に関するヘルプを探している場合は、まず、[TensorFlow Forum](https://discuss.tensorflow.org/)、[Stack Overflow](https://stackoverflow.com/questions/tagged/tensorflow)、および [GitHub issues](https://github.com/tensorflow/tensorflow/issues) を確認してください。
 
-## 一般的なTensorFlowリスト
+## TensorFlow 全般のリストとフォーラム
 
 - [announce](https://groups.google.com/a/tensorflow.org/d/forum/announce) - 新しいリリースのお知らせ（少量）。
 - [announce](https://groups.google.com/a/tensorflow.org/d/forum/discuss) - TensorFlowに関する一般的なコミュニティディスカッション。
 - [developers](https://groups.google.com/a/tensorflow.org/d/forum/developers) - TensorFlowに貢献している開発者向けのディスカッション。
-- [developers](https://groups.google.com/a/tensorflow.org/d/forum/docs) - TensorFlowのドキュメントに貢献するためのディスカッション。言語別のドキュメントリストについては、[コミュニティ翻訳](https://www.tensorflow.org/community/contribute/docs#community_translations)を参照してください。
+- [documentation](https://discuss.tensorflow.org/tag/docs) - Discussion for contributing to TensorFlow documentation. See [community translations](https://www.tensorflow.org/community/contribute/docs#community_translations) for language-specific docs lists.
 - [developers](https://groups.google.com/a/tensorflow.org/d/forum/testing) - TensorFlow 2テストに関するディスカッションと質問。
 
 ## プロジェクト専用リスト
