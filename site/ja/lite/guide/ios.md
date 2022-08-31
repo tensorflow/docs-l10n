@@ -2,7 +2,7 @@
 
 iOS で TensorFlow Lite を使い始めるには、次の例をご覧ください。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS image classification example</a>
+<a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS 画像分類の例</a>
 
 ソースコードの説明については、[TensorFlow Lite iOS 画像分類](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md)もあわせてお読みください。
 
