@@ -105,8 +105,8 @@ info.features['label'].str2int('cat')  # 0
 
 자신만의 피쳐 커넥터(특성 커넥터)를 만들기 위해서는 `tfds.features.FeatureConnector`로 부터 상속 받아 추상 메소드를 구현해야 합니다.
 
-- If your feature is a single tensor value, it's best to inherit from `tfds.features.Tensor` and use `super()` when needed. See `tfds.features.BBoxFeature` source code for an example.
-- If your feature is a container of multiple tensors, it's best to inherit from `tfds.features.FeaturesDict` and use the `super()` to automatically encode sub-connectors.
+- 특성이 단일 텐서 값인 경우, ` tfds.feature.Tensor {/ code0}에서 상속하고 필요한 경우 <code> super () `을 사용하는 것이 가장 좋습니다. 예는 ` tfds.features.BBoxFeature ` 소스 코드를 참조하세요.
+- 특성이 여러 텐서 값을 갖고있는 컨테이너일 경우,  `tfds.features.FeaturesDict`로 부터 상속받고 `super()` 메소드를 사용하여 하위 커넥터를 자동으로 인코딩하는 것이 가장 좋습니다.
 
 `tfds.features.FeatureConnector` 객체는 특성이 사용자에게 제공되는 방식에서 디스크에 인코딩되는 방식을 추상화합니다. 아래는 데이터세트의 추상화 레이어와 원시 데이터세트 파일에서 `tf.data.Dataset` 객체로의 변환을 보여주는 다이어그램입니다.
 
