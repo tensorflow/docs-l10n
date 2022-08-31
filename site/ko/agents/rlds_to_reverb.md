@@ -22,7 +22,7 @@ RLDS(Reinforcement Learning Datasets)는 강화 학습(RL), 데모 학습, 오�
 
 - **'reward'**: `TensorSpec(shape = (), dtype = tf.float32, name = None)}, TensorShape([]))`
 
-## API of the RLDS to TF-Agents utils
+## RLDS to TF-Agents util의 API
 
 ### 데이터세트에서 궤적 사양 만들기
 
@@ -97,7 +97,7 @@ def push_rlds_to_reverb(rlds_data: tf.data.Dataset, reverb_observer: Union[
 
 - `rlds_data`: RLDS 데이터세트는 RLDS 에피소드의 `tf.data.Dataset`이며, 여기서 각 에피소드에는 RLDS 단계의 `tf.data.Dataset` (및 선택적으로 에피소드 메타데이터)이 포함됩니다. RLDS 단계는 `is_first`, `is_last`, `observation`, `action`, `reward`, `is_terminal`, `discount` (및 선택적으로 단계 메타데이터)를 포함하는 텐서의 사전입니다.
 - `reverb_observer`: Reverb에 궤적 데이터를 쓰기 위한 Reverb 관찰자.
-- `policy_info_fn`: An optional function to create some policy.info to be used while generating TF-Agents trajectories.
+- `policy_info_fn`: TF-Agent 궤적을 생성하는 동안 사용할 policy.info를 일부 생성하는 선택적 기능.
 
 **반환**:
 
@@ -111,7 +111,7 @@ def push_rlds_to_reverb(rlds_data: tf.data.Dataset, reverb_observer: Union[
 
 - `InvalidArgumentError`: 제공된 RLDS 데이터세트에 다음과 같은 에피소드가 있는 경우:
 
-    - Incorrectly end i.e. does not end in the last step.
+    - 잘못 종료(마지막 단계에서 끝나지 않음)
     - 잘못 종료(종료 단계가 마지막 단계가 아닌 경우)
     - 잘못 시작(마지막 단계 다음에 첫 번째 단계가 오지 않는 경우. 마지막 에피소드의 마지막 단계는 함수에서 처리되며 사용자는 마지막 에피소드의 마지막 단계 다음에 첫 번째 단계가 오는지 확인할 필요가 없음)
 
