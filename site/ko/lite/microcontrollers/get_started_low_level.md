@@ -15,7 +15,7 @@
 
 The example application we'll be using has been tested on the following devices:
 
-- [Arduino Nano 33 BLE Sense](https://store.arduino.cc/usa/nano-33-ble-sense-with-headers)(Arduino IDE 사용)
+- [Arduino Nano 33 BLE Sense](https://store-usa.arduino.cc/products/arduino-nano-33-ble-sense-with-headers)(Arduino IDE 사용)
 - [SparkFun Edge](https://www.sparkfun.com/products/15170)(소스에서 직접 빌드)
 - [STM32F746 Discovery 키트](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html)(Mbed 사용)
 - [Adafruit EdgeBadge](https://www.adafruit.com/product/4400)(Arduino IDE 사용)
