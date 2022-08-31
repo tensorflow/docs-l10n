@@ -86,7 +86,7 @@ docker run option '--privileged=true'
         - Host Compute Time: ホストの計算時間
         - Device to Device Time: デバイス間の通信時間
         - Device Compute Time: デバイス上の計算時間
-        - All others, including Python overhead.
+        - Python のオーバーヘッドを含むその他すべての時間
 
     2. Device Compute Precisions - 16 ビットおよび 32 ビット計算を使用するデバイス演算時間の割合を報告します。
 
@@ -98,9 +98,9 @@ docker run option '--privileged=true'
 
 - **実行環境**: 以下を含むモデルの実行環境の高度な概要が表示されます。
 
-    - Number of hosts used.
-    - Device type (GPU/TPU).
-    - Number of device cores.
+    - 使用されたホストの数
+    - デバイスのタイプ（GPU/TPU）
+    - デバイスコアの数
 
 - **次の推奨ステップ**: モデルが入力限界にある場合に報告され、モデルのパフォーマンス ボトルネックを特定して解消するのに使用できるツールが提案されます。
 
@@ -180,10 +180,10 @@ TensorFlow Stats ツールには、プロファイリングセッション中に
 
 - 上のペインには、最大 4 つの円グラフが表示されます。
 
-    1. The distribution of self-execution time of each op on the host.
-    2. The distribution of self-execution time of each op type on the host.
-    3. The distribution of self-execution time of each op on the device.
-    4. The distribution of self-execution time of each op type on the device.
+    1. ホスト上の各演算の自己実行時間の分布
+    2. ホスト上の各演算タイプの自己実行時間の分布
+    3. デバイス上の各演算の自己実行時間の分布
+    4. デバイス上の各演算タイプの自己実行時間の分布
 
 - 下のペインには、TensorFlow 演算に関するデータを報告するテーブルが表示されており、各演算に 1 行、各タイプのデータに 1 列（列の見出しをクリックして列をソート）が割り当てられています。上のペインの右側にある Export as CSV ボタンをクリックすると、このテーブルのデータが CSV ファイルとしてエクスポートされます。
 
@@ -191,18 +191,18 @@ TensorFlow Stats ツールには、プロファイリングセッション中に
 
     - 子の演算を持つ演算がある場合:
 
-        - The total "accumulated" time of an op includes the time spent inside the child ops.
+        - 演算の合計「累積」時間には、子の演算内で費やされた時間が含まれています。
         - 演算の合計「自己」時間には、子の演算内で費やされた時間が含まれています。
 
     - 演算がホスト上で実行される場合:
 
-        - The percentage of the total self-time on device incurred by the op on will be 0.
-        - The cumulative percentage of the total self-time on device up to and including this op will be 0.
+        - 演算によって発生するデバイスの合計自己時間のパーセンテージは 0 になります。
+        - この演算までを含むデバイスの合計自己時間の累積パーセンテージは 0 になります。
 
     - 演算がデバイス上で実行される場合:
 
-        - The percentage of the total self-time on host incurred by this op will be 0.
-        - The cumulative percentage of the total self-time on host up to and including this op will be 0.
+        - この演算で発生するホストの合計自己時間の割合は 0 になります。
+        - この演算までを含むホストの合計自己時間の累積的な割合は 0 になります。
 
 円グラフとテーブルにアイドル時間を含めるか除外するかを選択できます。
 
@@ -268,18 +268,18 @@ Timeline ペインには、次の要素が含まれます。
 
 - 下のペインには、一意のカーネルと演算のペアごとに次のデータを含むテーブルが表示されます。
 
-    - A rank in descending order of total elapsed GPU duration grouped by kernel-op pair.
-    - The name of the launched kernel.
-    - The number of GPU registers used by the kernel.
-    - The total size of shared (static + dynamic shared) memory used in bytes.
-    - The block dimension expressed as `blockDim.x, blockDim.y, blockDim.z`.
-    - The grid dimensions expressed as `gridDim.x, gridDim.y, gridDim.z`.
+    - カーネルと演算のペアでグループ化された合計経過 GPU 時間の順位（降順）
+    - 起動されたカーネルの名前
+    - カーネルが使用している GPU レジスタの数
+    - 使用されている共有（静的+動的共有）メモリの合計サイズ（バイト単位）
+    - `blockDim.x, blockDim.y, blockDim.z` で表現されたブロックの次元
+    - `gridDim.x, gridDim.y, gridDim.z` で表現されたグリッドの次元
     - 演算が [Tensor Cores](https://www.nvidia.com/en-gb/data-center/tensor-cores/) を使用可能かどうか
-    - Whether the kernel contains Tensor Core instructions.
-    - The name of the op that launched this kernel.
-    - The number of occurrences of this kernel-op pair.
-    - The total elapsed GPU time in microseconds.
-    - The average elapsed GPU time in microseconds.
+    - カーネルに TensorCore 命令が含まれているかどうか
+    - このカーネルを起動した演算の名前
+    - このカーネルと演算のペアが発生した数
+    - 合計経過 GPU 時間（マイクロ秒）
+    - 平均経過 GPU 時間（マイクロ秒）
     - 最小経過 GPU 時間（マイクロ秒）
     - 最大経過 GPU 時間（マイクロ秒）
 
@@ -561,7 +561,7 @@ for step, train_data in enumerate(dataset):
 
 <a name="profiling_api_table"></a>
 
-| プロファイリング API                | ローカル     | リモート    | 複数  | ハードウェア  | :                              :           :           : ワーカー   : プラットフォーム : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | サポート対象 | サポート       | サポート       | CPU、GPU  | : コールバック**                   :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート       | サポート       | CPU、GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート対象 | サポート対象 | CPU、GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **コンテキストマネージャ API**      | サポート対象 | サポート       | サポート       | CPU、GPU  | :                              :           : 対象外 : 対象外 :           :
+| プロファイリング API                | ローカル     | リモート    | 複数  | ハードウェア  | :                              :           :           : ワーカー   : プラットフォーム : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | サポート対象 | サポート       | サポート       | CPU、GPU  | : コールバック**                   :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート       | サポート       | CPU、GPU  | : start/stop [API]**    :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート対象 | サポート対象 | CPU、GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **コンテキストマネージャ API**      | サポート対象 | サポート       | サポート       | CPU、GPU  | :                              :           : 対象外 : 対象外 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -718,3 +718,6 @@ CUDA® Toolkit 10.2 以降では、マルチ GPU のプロファイリングが�
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
+
+
+[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2
