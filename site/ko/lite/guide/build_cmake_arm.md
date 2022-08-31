@@ -6,7 +6,7 @@
 
 **참고:** 이 기능은 버전 2.4부터 사용할 수 있습니다.
 
-### Prerequisites
+### 전제 조건
 
 CMake를 설치하고 TensorFlow 소스 코드를 다운로드해야 합니다. 자세한 내용 [CMake로 TensorFlow Lite 빌드하기](https://www.tensorflow.org/lite/guide/build_cmake) 페이지를 확인하세요.
 
