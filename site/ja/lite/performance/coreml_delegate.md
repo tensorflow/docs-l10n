@@ -6,12 +6,12 @@ TensorFlow Lite Core ML デリゲートは、[Core ML フレームワーク](htt
 
 注意: Core ML デリゲートは、Core ML のバージョン 2 以降をサポートしています。
 
-**サポートする iOS のバージョンとデバイス:**
+**サポートされている iOS のバージョンとデバイス:**
 
 - iOS 12 以降。古い iOS バージョンの場合、Core ML デリゲートは自動的に CPU にフォールバックします。
 - デフォルトでは、Core ML デリゲートは A12 SoC 以降のデバイス（iPhone Xs 以降）でのみ有効で、Neural Engine（ニューラルエンジン）を推論の高速化に使用します。古いデバイスで Core ML デリゲートを使用する場合は、[ベストプラクティス](#best-practices)を参照してください。
 
-**サポートするモデル**
+**サポートされているモデル**
 
 現在、Core ML のデリゲートは浮動小数点数（FP32 と FP16）モデルをサポートしています。
 
@@ -128,12 +128,12 @@ target 'YourProjectName'
     <section>
       <h3>Swift</h3>
       <p></p>
-<pre class="prettyprint lang-swift">var options = CoreMLDelegate.Options()
-options.enabledDevices = .all
-let coreMLDelegate = CoreMLDelegate(options: options)!
-let interpreter = try Interpreter(modelPath: modelPath,
-                                  delegates: [coreMLDelegate])
-</pre>
+<pre class="prettyprint lang-swift">    var options = CoreMLDelegate.Options()
+    options.enabledDevices = .all
+    let coreMLDelegate = CoreMLDelegate(options: options)!
+    let interpreter = try Interpreter(modelPath: modelPath,
+                                      delegates: [coreMLDelegate])
+      </pre>
     </section>
     <section>
       <h3>Objective-C</h3>
@@ -213,7 +213,7 @@ iOS 13 は Core ML 3 をサポートしていますが、Core ML 2 のモデル�
 Core ML デリゲートがサポートする演算子は以下の通りです。
 
 - Add
-    - 特定の形状に限りブロードキャストが可能です。Core ML のテンソルレイアウトでは、次のテンソル形状をブロードキャストできます。`[B, C, H, W]`、`[B, C, 1, 1]`、`[B, 1, H, W]`、 `[B, 1, 1, 1]`。
+    - Only certain shapes are broadcastable. In Core ML tensor layout, following tensor shapes are broadcastable. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
 - AveragePool2D
 - Concat
     - 連結はチャンネル軸に沿って行う必要があります。
@@ -223,7 +223,7 @@ Core ML デリゲートがサポートする演算子は以下の通りです。
     - 重みやバイアスは定数である必要があります。
 - FullyConnected（別名 Dense または InnerProduct）
     - 重みやバイアスは（存在する場合）定数である必要があります。
-    - 単一バッチケースのみをサポートします。入力次元は、最後の次元以外は 1 である必要があります。
+    - Only supports single-batch case. Input dimensions should be 1, except the last dimension.
 - Hardswish
 - Logistic（別名 Sigmoid）
 - MaxPool2D
@@ -257,7 +257,7 @@ Core ML デリゲートがサポートする演算子は以下の通りです。
 - TensorFlow Lite と CoreML デリゲートは MacOS をサポートしていますか？
     - TensorFlow Lite は iOS のみでテストを行っており、MacOS ではテストしていません。
 - カスタムの TensorFlow Lite 演算子はサポートされますか？
-    - いいえ、CoreML デリゲートはカスタム演算子をサポートしていないため、CPU にフォールバックします。
+    - No, CoreML delegate does not support custom ops and they will fallback to CPU.
 
 ## API
 
