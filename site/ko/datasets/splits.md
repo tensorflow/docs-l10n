@@ -30,7 +30,7 @@ ds = builder.as_dataset(split='test+train[:75%]')
 
 ```python
 # Returns both train and test split separately
-train_ds, test_ds = tfds.load('mnist', split=['train', 'test[50%]'])
+train_ds, test_ds = tfds.load('mnist', split=['train', 'test[:50%]'])
 ```
 
 참고: 샤드가 [인터리브 처리](https://www.tensorflow.org/api_docs/python/tf/data/Dataset?version=nightly#interleave)되기 때문에 하위 분할 간에 순서가 일치하지 않을 수 있습니다. 즉, `test[0:100]` 다음에 `test[100:200]`를 판독하면 `test[:200]`를 읽는 것과 다른 순서로 예제가 생성될 수 있습니다. TFDS가 예제를 읽는 순서를 이해하려면 [결정론 가이드](https://www.tensorflow.org/datasets/determinism#determinism_when_reading)를 참조하세요.
