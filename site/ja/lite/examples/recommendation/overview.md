@@ -14,11 +14,11 @@
 
 Android 上でユーザーに関連するアイテムを推奨する方法を実演する TensorFlow Lite のサンプルアプリを提供しています。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/android">Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/android">Android の例</a>
 
 Android 以外のプラットフォームを使用する場合、または、すでに TensorFlow Lite API に精通している場合は、レコメンドスターターモデルをダウンロードしてください。
 
-<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/recommendation/20200720/recommendation.tar.gz">Download starter model</a>
+スターターモデルをダウンロードする
 
 また、構成可能な方法で独自のモデルをトレーニングするためのトレーニングスクリプトも GitHub で提供されています。
 
@@ -112,7 +112,7 @@ Sequential にユーザー履歴をエンコードするコンテキストエン
         <td>0.13ms*</td>
       </tr>
        <tr>
-         <td>Pixel 4 </td>
+         <td>Pixel 4</td>
         <td>0.06ms*</td>
       </tr>
     
@@ -121,11 +121,11 @@ Sequential にユーザー履歴をエンコードするコンテキストエン
 
 * 4 つのスレッドを使用。
 
-## Use your training data
+## 独自のトレーニングデータを使用する
 
-In addition to the trained model, we provide an open-sourced [toolkit in GitHub](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml) to train models with your own data. You can follow this tutorial to learn how to use the toolkit and deploy trained models in your own mobile applications.
+トレーニング済みモデルに加え、オープンソースの[ツールキットを GitHub](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml) で提供しているので、独自のデータを使用してモデルをトレーニングすることができます。本チュートリアルでは、ツールキットの使い方、そしてトレーニング済みモデルを独自のモバイルアプリにデプロイする方法を学ぶことができます。
 
-Please follow this [tutorial](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb) to apply the same technique used here to train a recommendation model using your own datasets.
+独自のデータセットを用いてレコメンドモデルをトレーニングする場合は、この[チュートリアル](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb)に従い、ここで使用したのと同じ手法を適用してください。
 
 ## 独自のデータによるモデルカスタマイズのヒント
 
