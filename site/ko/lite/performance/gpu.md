@@ -286,7 +286,7 @@ GPU 대리자를 사용할 코드를 활성화하려면 `CameraExampleViewContro
 
 ## 지원되지 않는 모델 및 작업
 
-If some of the ops are not supported by the GPU delegate, the framework will only run a part of the graph on the GPU and the remaining part on the CPU. Due to the high cost of CPU/GPU synchronization, a split execution mode like this will often result in slower performance than when the whole network is run on the CPU alone. In this case, the user will get a warning like:
+일부 작업이 GPU 대리자에서 지원되지 않는 경우 프레임워크는 GPU에서 그래프의 일부만 실행하고 CPU에서 나머지 부분을 실행합니다. CPU/GPU 동기화 비용이 높기 때문에 이와 같은 분할 실행 모드는 전체 네트워크가 CPU에서만 실행될 때보다 성능이 저하되는 경우가 많습니다. 이 경우 사용자는 다음과 같은 경고를 받게 됩니다.
 
 ```none
 WARNING: op code #42 cannot be handled by this delegate.
@@ -294,7 +294,7 @@ WARNING: op code #42 cannot be handled by this delegate.
 
 실패에 대한 콜백이 제공되지 않았습니다. 이 실패는 진정한 런타임 실패가 아니기 때문에 개발자가 대리자에서 네트워크를 실행하는 동안 관찰할 수 있습니다.
 
-## Tips for optimization
+## 최적화를 위한 팁
 
 ### 모바일 장치를 위한 최적화
 
