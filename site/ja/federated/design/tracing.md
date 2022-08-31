@@ -12,7 +12,7 @@ TODO(b/153500547): トレースシステムの個別のコンポーネントを�
 
 ### 引数をパックする
 
-内部的に、TFF computation にはゼロまたは 1 つの引数シカありません。[computations.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/api/computations.py) デコレータに指定された引数が TFF computation の引数の型シグネチャを記述します。TFF はこの情報を使用して、Python 関数の引数を 1 つの [structure.Struct](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/common_libs/structure.py) にパックする方法を決定します。
+内部的に、TFF computation にはゼロまたは 1 つの引数しかありません。[federated_computation.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation.py) デコレータに指定された引数が TFF computation の引数の型シグネチャを記述します。TFF はこの情報を使用して、Python 関数の引数を 1 つの [structure.Struct](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/common_libs/structure.py) にパックする方法を決定します。
 
 注意: `Struct` が名前付きと名前なしの両方のフィールドを受け入れるのは、`Struct` を単一のデータ構造として使用して Python の `args` と `kwargs` の両方を表現しているためです。
 
@@ -24,7 +24,7 @@ TODO(b/153500547): トレースシステムの個別のコンポーネントを�
 
 さらに詳しく述べると、ちょうど 1 つの引数がある場合、トレースは次のようにして行われます。
 
-1. 引数を表す適切な型シグネチャを使用して、[building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) に基づいて [value_impl.ValueImpl](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) を構築します。
+1. 引数を表す適切な型シグネチャを使用して、[building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) に基づいて [value_impl.ValueImpl](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) を構築します。
 
 2. `ValueImpl` で関数を呼び出します。これにより、Python ランタイムが `ValueImpl` によって実装されるダンダーメソッドを呼び出し、それらを AST 構造として解釈します。各ダンダーメソッドは AST を構築して AST に基づく `ValueImpl` を返します。
 
