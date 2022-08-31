@@ -63,7 +63,7 @@ set_default_context.set_default_context(context)
 
 ### コンパイラ
 
-[transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/transformations.py) モジュールには、[ビルディングブロック](compilation.md#building-block)と [TensorFlow Computation](compilation.md#tensorflow-computation) 変換が含まれます。これらは、AST を [MapReduceForm](#canonicalform) に変換するために必要です。
+[compiler](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/compiler.py) モジュールには、[ビルディングブロック](compilation.md#building-block)と [TensorFlow Computation](compilation.md#tensorflow-computation) 変換が含まれます。これらは、AST を [MapReduceForm](#canonicalform) に変換するために必要です。
 
 [form_utils](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/form_utils.py) モジュールには MapReduce バックエンドのコンパイラが含まれており、[MapReduceForm](#canonicalform) を構築します。
 
