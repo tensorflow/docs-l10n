@@ -1,6 +1,6 @@
 # 훈련 후 양자화
 
-훈련 후 양자화는 모델 정확성을 거의 저하시키지 않으면서 CPU 및 하드웨어 가속기 지연 시간을 개선하고 모델 크기를 줄일 수 있는 변환 기술입니다. [TensorFlow Lite 변환기](../convert/)를 사용하여 TensorFlow Lite 형식으로 변환할 때 이미 훈련된 부동 TensorFlow 모델을 양자화할 수 있습니다.
+훈련 후 양자화는 모델 정확성을 거의 저하시키지 않으면서 CPU 및 하드웨어 가속기 지연 시간을 개선하고 모델 크기를 줄일 수 있는 변환 기술입니다. [TensorFlow Lite 변환기](../models/convert/)를 사용하여 TensorFlow Lite 형식으로 변환할 때 이미 훈련된 부동 TensorFlow 모델을 양자화할 수 있습니다.
 
 참고: 해당 페이지의 절차를 따르려면 TensorFlow 1.15 이상이 필요합니다.
 
@@ -41,7 +41,7 @@ tflite_quant_model = converter.convert()
 
 완전한 정수 양자화의 경우, 모델에 있는 모든 부동 소수점 텐서의 범위, 즉 (최소, 최대)를 보정하거나 추정해야 합니다. 가중치 및 편향과 같은 상수 텐서와 달리 모델 입력, 활성화 (중간 계층의 출력) 및 모델 출력과 같은 가변 텐서는 몇 가지 추론 주기를 실행하지 않는 한 보정할 수 없습니다. 결과적으로, 변환기는 이를 보정하기 위해 대표적 데이터세트가 필요합니다. 이 데이터세트는 훈련 또는 검증 데이터의 작은 하위 집합(약 100 ~ 500개 샘플)일 수 있습니다. 아래의 `representative_dataset()` 함수를 참조하세요.
 
-TensorFlow 2.7 버전부터 다음 예제와 같이 [서명](/lite/guide/signatures)을 통해 대표 데이터세트를 지정할 수 있습니다.
+TensorFlow 2.7 버전부터 다음 예제와 같이 [서명](../guide/signatures.ipynb)을 통해 대표 데이터세트를 지정할 수 있습니다.
 
 <pre>def representative_dataset():
   for data in dataset:
@@ -99,7 +99,7 @@ converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 converter.representative_dataset = representative_dataset&amp;lt;/b&amp;gt;
 tflite_quant_model = converter.convert()</pre>
 
-참고: `tflite_quant_model`은 정수 전용 기기(예: 8bit 마이크로 컨트롤러) 및 가속기(예: Coral 에지 TPU)와 호환되지 않습니다. 입력 및 출력이 원본 부동 모델과 같은 인터페이스를 갖기 위해 여전히 부동 상태로 남아 있기 때문입니다.
+Note: This `tflite_quant_model` won't be compatible with integer only devices (such as 8-bit microcontrollers) and accelerators (such as the Coral Edge TPU) because the input and output still remain float in order to have the same interface as the original float only model.
 
 #### 정수 전용
 
@@ -107,7 +107,7 @@ tflite_quant_model = converter.convert()</pre>
 
 참고: TensorFlow 2.3.0부터는 `inference_input_type` 및 `inference_output_type` 속성을 지원합니다.
 
-또한 정수 전용 기기(예: 8bit 마이크로 컨트롤러) 및 가속기(예: Coral 에지 TPU)와의 호환성을 보장하기 위해 다음 스탭을 사용하여 입력 및 출력을 포함한 모든 연산에 대해 전체 정수 양자화를 적용할 수 있습니다.
+Additionally, to ensure compatibility with integer only devices (such as 8-bit microcontrollers) and accelerators (such as the Coral Edge TPU), you can enforce full integer quantization for all ops including the input and output, by using the following steps:
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -181,7 +181,7 @@ tflite_quant_model = converter.convert()
 
 ### 모델 정확성
 
-가중치는 훈련 후에 양자화되기 때문에 특히 소규모 네트워크의 경우 정확성 손실이 있을 수 있습니다. [TensorFlow Lite 모델 리포지토리](../models/)에서 특정 네트워크에 대해 사전 훈련된 전체 양자화 모델이 제공됩니다. 정확성 저하가 허용 가능한 한계 내에 있는지 확인하기 위해 양자화된 모델의 정확성을 확인하는 것이 중요합니다. [TensorFlow Lite 모델 정확성](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}을 평가하는 도구가 있습니다.
+가중치는 훈련 후에 양자화되기 때문에 특히 소규모 네트워크의 경우 정확성 손실이 있을 수 있습니다. [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&q=quantized){:.external}에서 특정 네트워크에 대해 사전 훈련된 전체 양자화 모델이 제공됩니다. 정확성 저하가 허용 가능한 한계 내에 있는지 확인하기 위해 양자화된 모델의 정확성을 확인하는 것이 중요합니다. [TensorFlow Lite 모델 정확성](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}을 평가하는 도구가 있습니다.
 
 또는 정확성 저하가 너무 크면 [양자화 인식 훈련](https://www.tensorflow.org/model_optimization/guide/quantization/training)을 사용해 볼 수 있습니다. 그러나 해당 훈련을 사용하려면 모델 훈련 중에 수정하여 가짜 양자화 노드를 추가해야 하지만, 이 페이지의 훈련 후 양자화 기술은 기존의 사전 훈련된 모델을 사용합니다.
 
@@ -197,4 +197,4 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 - 텐서별 활성화/입력은 [-128, 127] 범위의 int8 2의 보수 값으로 표시되며 [-128, 127] 범위의 영점을 포함합니다.
 
-양자화 체계에 대한 자세한 내용은 [양자화 사양](./quantization_spec.md)을 참조하세요. TensorFlow Lite의 대리자 인터페이스에 연결하려는 하드웨어 공급 업체는 여기에 설명된 양자화 체계를 구현해보는 것이 좋습니다.
+양자화 체계에 대한 자세한 내용은 [양자화 사양](./quantization_spec)을 참조하세요. TensorFlow Lite의 대리자 인터페이스에 연결하려는 하드웨어 공급 업체는 여기에 설명된 양자화 체계를 구현해보는 것이 좋습니다.
