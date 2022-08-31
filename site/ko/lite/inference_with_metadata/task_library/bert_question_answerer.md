@@ -1,6 +1,6 @@
 # BERT 질문 응답기 통합하기
 
-Task Library `BertQuestionAnswerer` API는 Bert 모델을 로드하고 주어진 문구의 내용을 바탕으로 질문에 답합니다. 자세한 내용은 <a href="../../models/bert_qa/overview.md">여기</a>에서 질문-답변 모델에 대한 문서를 참조하세요.
+Task Library `BertQuestionAnswerer` API는 Bert 모델을 로드하고 주어진 문구의 내용을 바탕으로 질문에 답합니다. 자세한 내용은 <a href="../../examples/bert_qa/overview">여기</a>에서 질문-답변 모델에 대한 문서를 참조하세요.
 
 ## BertQuestionAnswerer API의 주요 특징
 
@@ -12,7 +12,7 @@ Task Library `BertQuestionAnswerer` API는 Bert 모델을 로드하고 주어진
 
 다음 모델은 `BertNLClassifier` API와 호환됩니다.
 
-- [질문 응답기를 위한 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/tutorials/model_maker_question_answer)에서 만든 모델
+- [질문 응답기를 위한 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/question_answer)에서 만든 모델
 
 - [TensorFlow Hub에서 사전 훈련된 BERT 모델](https://tfhub.dev/tensorflow/collections/lite/task-library/bert-question-answerer/1)
 
@@ -95,20 +95,20 @@ let answers = mobileBertAnswerer.answer(
 ```c++
 // Initialization
 BertQuestionAnswererOptions options;
-options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
 std::unique_ptr<BertQuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromOptions(options).value();
 
-// Run inference
+// Run inference with your inputs, `context_of_question` and `question_to_ask`.
 std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, question_to_ask);
 ```
 
-자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/qa/bert_question_answerer.h)를 참조하세요.
+자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_question_answerer.h)를 참조하세요.
 
 ## 예제 결과
 
 다음은 [ALBERT 모델](https://tfhub.dev/tensorflow/lite-model/albert_lite_base/squadv1/1)의 답변 결과를 보여주는 예입니다.
 
-컨텍스트: "The Amazon rainforest, alternatively, the Amazon Jungle, also known in English as Amazonia, is a moist broadleaf tropical rainforest in the Amazon biome that covers most of the Amazon basin of South America. This basin encompasses 7,000,000 km2 (2,700,000 sq mi), of which 5,500,000 km2 (2,100,000 sq mi) are covered by the rainforest. This region includes territory belonging to nine nations."
+컨텍스트: "아마존 열대 우림, 또는 영어로 Amazonia로도 알려진 아마존 정글은 남아메리카 아마존 분지 대부분을 덮고있는 아마존 생물 군계의 축축한 활엽 열대 우림입니다. 이 분지는 7,000,000km2(2,700,000평방마일 ), 그중 5,500,000km2(2,100,000평방마일)이 열대 우림으로 덮여 있습니다. 이 지역에는 9개국에 속한 영토가 포함됩니다."
 
 질문: "Where is Amazon rainforest?"
 
@@ -131,7 +131,7 @@ logit: -0.774266, start_index: 37, end_index: 40
 
 ## 모델 호환성 요구 사항
 
-`BertQuestionAnswerer` API는 필수 [TFLite 모델 메타데이터](../../convert/metadata.md)가 있는 TFLite 모델을 예상합니다.
+`BertQuestionAnswerer` API는 필수 [TFLite 모델 메타데이터](../../models/convert/metadata)가 있는 TFLite 모델을 예상합니다.
 
 메타 데이터는 다음 요구 사항을 충족해야 합니다.
 
