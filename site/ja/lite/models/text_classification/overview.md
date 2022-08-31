@@ -20,24 +20,24 @@ Android 以外のプラットフォームを使用する場合、または、す
 
 ## 使い方
 
-Text classification categorizes a paragraph into predefined groups based on its content.
+テキスト分類は、その内容に基づいて段落を事前定義済みのグループに分類します。
 
 This pretrained model predicts if a paragraph's sentiment is positive or negative. It was trained on [Large Movie Review Dataset v1.0](http://ai.stanford.edu/~amaas/data/sentiment/) from Mass et al, which consists of IMDB movie reviews labeled as either positive or negative.
 
 ここでは、モデルを使用して段落を分類する手順を紹介します。
 
-1. Tokenize the paragraph and convert it to a list of word ids using a predefined vocabulary.
+1. 段落をトークン化し、事前定義済みの語彙を使用して単語 ID のリストに変換します。
 2. リストを TensorFlow Lite モデルに与えます。
-3. Get the probability of the paragraph being positive or negative from the model outputs.
+3. モデルの出力から、段落がポジティブかネガティブかの確率を取得します。
 
 ### 注意事項
 
 - 英語のみに対応しています。
-- This model was trained on movie reviews dataset so you may experience reduced accuracy when classifying text of other domains.
+- このモデルは映画レビューのデータセットでトレーニングされているため、他のドメインのテキスト分類をする場合には精度が低下する可能性があります。
 
 ## パフォーマンスベンチマーク
 
-Performance benchmark numbers are generated with the tool [described here](https://www.tensorflow.org/lite/performance/benchmarks).
+パフォーマンスベンチマークの数値は、[ここで説明する](https://www.tensorflow.org/lite/performance/benchmarks)ツールで生成されます。
 
 <table>
   <thead>
