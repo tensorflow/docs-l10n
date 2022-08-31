@@ -217,14 +217,14 @@ tflite_cc_shared_object(
 새로 추가된 대상은 다음과 같이 빌드할 수 있습니다.
 
 ```sh
-bazel build -c opt --cxxopt=--std=c++14 \
+bazel build -c opt --cxxopt=--std=c++17 \
   //tmp:tensorflowlite_c
 ```
 
 Android의 경우(64bit의 경우 `android_arm`을 `android_arm64`로 교체):
 
 ```sh
-bazel build -c opt --cxxopt=--std=c++14 --config=android_arm \
+bazel build -c opt --cxxopt=--std=c++17 --config=android_arm \
   //tmp:tensorflowlite_c
 ```
 
@@ -280,14 +280,14 @@ tflite_cc_shared_object(
 새로 추가된 대상은 다음과 같이 빌드할 수 있습니다.
 
 ```sh
-bazel build -c opt  --cxxopt=--std=c++14 \
+bazel build -c opt  --cxxopt=--std=c++17 \
   //tmp:tensorflowlite
 ```
 
 Android의 경우(64bit의 경우 `android_arm`을 `android_arm64`로 교체):
 
 ```sh
-bazel build -c opt --cxxopt=--std=c++14 --config=android_arm \
+bazel build -c opt --cxxopt=--std=c++17 --config=android_arm \
   //tmp:tensorflowlite
 ```
 
@@ -317,7 +317,7 @@ tflite_flex_shared_library(
 새로 추가된 대상은 다음과 같이 빌드할 수 있습니다.
 
 ```sh
-bazel build -c opt --cxxopt='--std=c++14' \
+bazel build -c opt --cxxopt='--std=c++17' \
       --config=monolithic \
       --host_crosstool_top=@bazel_tools//tools/cpp:toolchain \
       //tmp:tensorflowlite_flex
@@ -326,7 +326,7 @@ bazel build -c opt --cxxopt='--std=c++14' \
 Android의 경우(64bit의 경우 `android_arm`을 `android_arm64`로 교체):
 
 ```sh
-bazel build -c opt --cxxopt='--std=c++14' \
+bazel build -c opt --cxxopt='--std=c++17' \
       --config=android_arm \
       --config=monolithic \
       --host_crosstool_top=@bazel_tools//tools/cpp:toolchain \
