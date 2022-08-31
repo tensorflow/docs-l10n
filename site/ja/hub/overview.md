@@ -23,4 +23,4 @@ print(embeddings.shape)  #(4,128)
 - <a>TensorFlow Hub ライブラリ</a>
     - [TensorFlow Hub をインストールする](installation.md)
     - [ライブラリの概要](lib_overview.md)
-- [Follow tutorials](tutorials)
+- [チュートリアルを実行する](tutorials)
