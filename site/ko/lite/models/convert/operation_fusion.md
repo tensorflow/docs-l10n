@@ -196,9 +196,9 @@ prepare-composite-functions 전달에서 [변환 코드](https://github.com/tens
 따라서 복합 연산 융합 사용 사례를 지원하기 위해 변환기에서 TensorFlow 모델을 가져오고 변환하는 새로운 워크플로를 구현했습니다. 특히 다음과 같은 특성들이 추가되었습니다.
 
 1. TensorFlow [저장 모델을 MLIR](https://github.com/tensorflow/tensorflow/blob/1099faa8d6a941ef44d09ed8c372ff0ffda94112/tensorflow/compiler/mlir/tensorflow/translate/import_model.cc#L3748)로 가져오기
-2. [fuse composite operations](https://github.com/tensorflow/tensorflow/blob/1099faa8d6a941ef44d09ed8c372ff0ffda94112/tensorflow/compiler/mlir/lite/transforms/prepare_composite_functions_tf.cc#L103)
-3. [variable mutability analysis](https://github.com/tensorflow/tensorflow/blob/1099faa8d6a941ef44d09ed8c372ff0ffda94112/tensorflow/compiler/mlir/tensorflow/transforms/optimize_global_tensors.cc#L43)
-4. [freeze all read-only variables](https://github.com/tensorflow/tensorflow/blob/1099faa8d6a941ef44d09ed8c372ff0ffda94112/tensorflow/compiler/mlir/tensorflow/transforms/freeze_global_tensors.cc#L44)
+2. [복합 연산 융합](https://github.com/tensorflow/tensorflow/blob/1099faa8d6a941ef44d09ed8c372ff0ffda94112/tensorflow/compiler/mlir/lite/transforms/prepare_composite_functions_tf.cc#L103)
+3. [변수 변경 가능성 분석](https://github.com/tensorflow/tensorflow/blob/1099faa8d6a941ef44d09ed8c372ff0ffda94112/tensorflow/compiler/mlir/tensorflow/transforms/optimize_global_tensors.cc#L43)
+4. [모든 읽기 전용 변수 고정](https://github.com/tensorflow/tensorflow/blob/1099faa8d6a941ef44d09ed8c372ff0ffda94112/tensorflow/compiler/mlir/tensorflow/transforms/freeze_global_tensors.cc#L44)
 
 이를 통해 함수를 인라인 배치하고 변수를 고정하기 전에 복합 연산을 나타내는 함수를 사용하여 연산 융합을 수행할 수 있습니다.
 
