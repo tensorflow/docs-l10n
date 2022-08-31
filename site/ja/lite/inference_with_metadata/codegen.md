@@ -1,10 +1,10 @@
 # メタデータを使用してモデルインターフェイスを生成する
 
-[TensorFlow Lite メタデータ](../convert/metadata)を使用すると、開発者はラッパーコードを生成して、Android での統合を有効にできます。ほとんどの開発者にとって最も使いやすいのは、[Android Studio ML モデルバインディング](#mlbinding)のグラフィカルインターフェイスです。さらにカスタマイズが必要な場合、またはコマンドラインツールを使用している場合は、[TensorFlow Lite Codegen](#codegen) も利用できます。
+Using [TensorFlow Lite Metadata](../models/convert/metadata), developers can generate wrapper code to enable integration on Android. For most developers, the graphical interface of [Android Studio ML Model Binding](#mlbinding) is the easiest to use. If you require more customisation or are using command line tooling, the [TensorFlow Lite Codegen](#codegen) is also available.
 
 ## Android Studio ML モデルバインディングを使用する {:#mlbinding}
 
-[メタデータ](../convert/metadata.md)で拡張された TensorFlow Lite モデルの場合、開発者は Android Studio ML モデルバインディングを使用して、プロジェクトの設定を自動的に構成し、モデルメタデータに基づいてラッパークラスを生成できます。ラッパーコードを使用すると、`ByteBuffer`と直接対話する必要がなくなり、開発者は`Bitmap`や`Rect`などの型付きオブジェクトを使用して TensorFlow Lite モデルと対話できます。
+For TensorFlow Lite models enhanced with [metadata](../models/convert/metadata.md), developers can use Android Studio ML Model Binding to automatically configure settings for the project and generate wrapper classes based on the model metadata. The wrapper code removes the need to interact directly with `ByteBuffer`. Instead, developers can interact with the TensorFlow Lite model with typed objects such as `Bitmap` and `Rect`.
 
 注意: [Android Studio 4.1](https://developer.android.com/studio) 以上が必要です。
 
@@ -93,7 +93,7 @@ ML Model Binding を利用すると、開発者はデリゲートや様々なス
 
 注意：TensorFlow Lite ラッパーコードジェネレータは現在、Android のみをサポートしています。
 
-[メタデータ](../convert/metadata.md)で拡張された TensorFlow Lite モデルの場合、開発者は TensorFlow Lite Android ラッパーコードジェネレータを使用してプラットフォーム固有のラッパーコードを作成できます。ラッパーコードにより、`ByteBuffer`と直接対話する必要がなくなり、開発者は`Bitmap`や`Rect`などの型付きオブジェクトを使用して TensorFlow Lite モデルと対話できます。
+For TensorFlow Lite model enhanced with [metadata](../models/convert/metadata.md), developers can use the TensorFlow Lite Android wrapper code generator to create platform specific wrapper code. The wrapper code removes the need to interact directly with `ByteBuffer`. Instead, developers can interact with the TensorFlow Lite model with typed objects such as `Bitmap` and `Rect`.
 
 コードジェネレータの有用性は、TensorFlow Lite モデルのメタデータエントリの完全性に依存します。codegen ツールが各フィールドを解析する方法については、[metadata_schema.fbs](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs) の関連フィールドの下にある<code>&lt;Codegen usage&gt;</code>セクションを参照してください。
 
@@ -183,9 +183,9 @@ if(null != myImageClassifier) {
 
 ### モデル推論の高速化
 
-生成されたコードを使用すると、開発者は[デリゲート](../performance/delegates.md)とスレッド数を使用してコードを高速化できます。これは、次の 3 つのパラメータを使用し、モデルオブジェクトを開始するときに設定できます。
+The generated code provides a way for developers to accelerate their code through the use of [delegates](../performance/delegates.md) and the number of threads. These can be set when initializing the model object as it takes three parameters:
 
--  **`Context`**：Android アクティビティまたはサービスからのコンテキスト
+- **`Context`**：Android アクティビティまたはサービスからのコンテキスト
 - （オプション）**`Device`**：GPUDelegate や NNAPIDelegate などの TFLite アクセラレーションデリゲート
 - （オプション）**`numThreads`**：モデルの実行に使用されるスレッドの数。デフォルトは 1 です。
 
