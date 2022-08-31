@@ -64,7 +64,7 @@ tensorImage.load(bitmap);
 tensorImage = imageProcessor.process(tensorImage);
 ```
 
-`DataType` of a tensor can be read through the [metadata extractor library](../models/convert/metadata.md#read-the-metadata-from-models) as well as other model information.
+텐서의 `DataType`은 [메타데이터 추출기 라이브러리](../models/convert/metadata.md#read-the-metadata-from-models) 및 기타 모델 정보를 통해 읽을 수 있습니다.
 
 ### 기본 오디오 데이터 처리
 
@@ -208,7 +208,7 @@ ImageProcessor imageProcessor =
         .build();
 ```
 
-See more details [here](../models/convert/metadata.md#normalization-and-quantization-parameters) about normalization and quantization.
+[여기](../models/convert/metadata.md#normalization-and-quantization-parameters)에서 정규화 및 양자화에 대한 자세한 내용을 참조하세요.
 
 지원 라이브러리의 최종 목표는 모든 [`tf.image`](https://www.tensorflow.org/api_docs/python/tf/image) 변환을 지원하는 것입니다. 이는 변환이 TensorFlow와 동일하고 구현이 운영 체제와 독립적임을 의미합니다.
 
@@ -235,4 +235,4 @@ TensorProcessor probabilityProcessor =
 TensorBuffer dequantizedBuffer = probabilityProcessor.process(probabilityBuffer);
 ```
 
-The quantization parameters of a tensor can be read through the [metadata extractor library](../models/convert/metadata.md#read-the-metadata-from-models).
+텐서의 양자화 매개변수는 [메타데이터 추출기 라이브러리](../models/convert/metadata.md#read-the-metadata-from-models)를 통해 읽을 수 있습니다.
