@@ -12,7 +12,7 @@ Task 라이브러리 `BertNLClassifier` API는 입력 텍스트를 여러 범주
 
 다음 모델이 `BertNLClassifier` API와 호환됩니다.
 
-- Bert Models created by [TensorFlow Lite Model Maker for text Classfication](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification).
+- [텍스트 분류용 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)에 의해 생성된 Bert 모델
 
 - [모델 호환성 요구 사항](#model-compatibility-requirements)을 충족하는 사용자 정의 모델
 
@@ -98,11 +98,11 @@ std::unique_ptr<BertNLClassifier> classifier = BertNLClassifier::CreateFromOptio
 std::vector<core::Category> categories = classifier->Classify(input_text);
 ```
 
-See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_nl_classifier.h) for more details.
+자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_nl_classifier.h)를 참조하세요.
 
 ## 예제 결과
 
-Here is an example of the classification results of movie reviews using the [MobileBert](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) model from Model Maker.
+다음은 Model Maker의 [MobileBert](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) 모델을 사용하여 영화 리뷰를 분류한 결과의 예입니다.
 
 입력: "it's a charming and often affecting journey"
 
@@ -117,7 +117,7 @@ category[1]: 'positive' : '0.99994'
 
 ## 모델 호환성 요구 사항
 
-The `BetNLClassifier` API expects a TFLite model with mandatory [TFLite Model Metadata](../../models/convert/metadata.md).
+`BetNLClassifier` API는 필수 [TFLite 모델 메타데이터](../../models/convert/metadata.md)가 있는 TFLite 모델을 예상합니다.
 
 메타데이터는 다음 요구 사항을 충족해야 합니다.
 
