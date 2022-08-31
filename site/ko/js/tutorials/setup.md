@@ -20,25 +20,16 @@
 
 <section class="expandable">
   <h4 class="showalways">스크립트 태그 설정 코드 샘플 보기</h4>
-  <pre class="prettyprint">
-// Define a model for linear regression.
-const model = tf.sequential();
-model.add(tf.layers.dense({units: 1, inputShape: [1]}));
+  <pre class="prettyprint">// 선형 회귀 모델을 정의합니다. const 모델 = tf.sequential (); model.add (tf.layers.dense ({units : 1, inputShape : [1]}));</pre></section>
 
-model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
+model.compile ({loss : 'meanSquaredError', 최적화 프로그램 : 'sgd'});
 
-// Generate some synthetic data for training.
-const xs = tf.tensor2d([1, 2, 3, 4], [4, 1]);
-const ys = tf.tensor2d([1, 3, 5, 7], [4, 1]);
+// 훈련을 위해 합성 데이터를 생성합니다. const xs = tf.tensor2d ([1, 2, 3, 4], [4, 1]); const ys = tf.tensor2d ([1, 3, 5, 7], [4, 1]);
 
-// Train the model using the data.
-model.fit(xs, ys, {epochs: 10}).then(() => {
-  // Use the model to do inference on a data point the model hasn't seen before:
-  model.predict(tf.tensor2d([5], [1, 1])).print();
-  // Open the browser devtools to see the output
-});
-  </pre>
-</section>
+// Train the model using the data. model.fit(xs, ys, {epochs: 10}).then(() =&gt; { // Use the model to do inference on a data point the model hasn't seen before: model.predict(tf.tensor2d([5], [1, 1])).print(); // Open the browser devtools to see the output });
+
+
+
 
 ### NPM에서 설치
 
@@ -56,31 +47,22 @@ npm install @tensorflow/tfjs
 
 <section class="expandable">
   <h4 class="showalways">NPM을 통한 설치 샘플 코드 보기</h4>
-  <pre class="prettyprint">
-import * as tf from '@tensorflow/tfjs';
+  <pre class="prettyprint"> import * as tf from '@tensorflow/tfjs'; </pre></section>
 
-// Define a model for linear regression.
-const model = tf.sequential();
-model.add(tf.layers.dense({units: 1, inputShape: [1]}));
+// Define a model for linear regression. const model = tf.sequential(); model.add(tf.layers.dense({units: 1, inputShape: [1]}));
 
-model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
+model.compile ({loss : 'meanSquaredError', 최적화 프로그램 : 'sgd'});
 
-// Generate some synthetic data for training.
-const xs = tf.tensor2d([1, 2, 3, 4], [4, 1]);
-const ys = tf.tensor2d([1, 3, 5, 7], [4, 1]);
+// 훈련을 위해 합성 데이터를 생성합니다. const xs = tf.tensor2d ([1, 2, 3, 4], [4, 1]); const ys = tf.tensor2d ([1, 3, 5, 7], [4, 1]);
 
-// Train the model using the data.
-model.fit(xs, ys, {epochs: 10}).then(() => {
-  // Use the model to do inference on a data point the model hasn't seen before:
-  model.predict(tf.tensor2d([5], [1, 1])).print();
-  // Open the browser devtools to see the output
-});
-  </pre>
-</section>
+// Train the model using the data. model.fit(xs, ys, {epochs: 10}).then(() =&gt; { // Use the model to do inference on a data point the model hasn't seen before: model.predict(tf.tensor2d([5], [1, 1])).print(); // Open the browser devtools to see the output });
+
+
+
 
 ## Node.js 설정
 
-[npm cli](https://docs.npmjs.com/cli/npm) 도구 또는 [yarn](https://yarnpkg.com/en/)을 사용하여 TensorFlow.js를 설치할 수 있습니다.
+[npm cli](https://docs.npmjs.com/cli/npm) 도구 또는 [yarn](https://yarnpkg.com/en/) 을 사용하여 TensorFlow.js를 설치할 수 있습니다.
 
 **옵션 1:** 네이티브 C++ 바인딩으로 TensorFlow.js를 설치합니다.
 
@@ -120,30 +102,18 @@ npm install @tensorflow/tfjs
 
 <section class="expandable">
   <h4 class="showalways">Node.js 사용법에 대한 샘플 코드 보기</h4>
-  <pre class="prettyprint">
-const tf = require('@tensorflow/tfjs');
+  <pre class="prettyprint"> const tf = require('@tensorflow/tfjs'); </pre></section>
 
-// Optional Load the binding:
-// Use '@tensorflow/tfjs-node-gpu' if running with GPU.
-require('@tensorflow/tfjs-node');
+// 선택 사항 바인딩로드 : // GPU로 실행하는 경우 '@ tensorflow / tfjs-node-gpu'를 사용합니다. require ( '@ tensorflow / tfjs-node');
 
-// Train a simple model:
-const model = tf.sequential();
-model.add(tf.layers.dense({units: 100, activation: 'relu', inputShape: [10]}));
-model.add(tf.layers.dense({units: 1, activation: 'linear'}));
-model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+// 간단한 모델 학습 : const model = tf.sequential (); model.add (tf.layers.dense ({units : 100, 활성화 : 'relu', inputShape : [10]})); model.add (tf.layers.dense ({units : 1, activation : 'linear'})); model.compile ({optimizer : 'sgd', 손실 : 'meanSquaredError'});
 
-const xs = tf.randomNormal([100, 10]);
-const ys = tf.randomNormal([100, 1]);
+const xs = tf.randomNormal ([100, 10]); const ys = tf.randomNormal ([100, 1]);
 
-model.fit(xs, ys, {
-  epochs: 100,
-  callbacks: {
-    onEpochEnd: (epoch, log) => console.log(`Epoch ${epoch}: loss = ${log.loss}`)
-  }
-});
-  </pre>
-</section>
+model.fit (xs, ys, {epochs : 100, callbacks : {onEpochEnd : (epoch, log) =&gt; console.log ( `Epoch ${epoch}: loss = ${log.loss}` )}});
+
+
+
 
 ### TypeScript
 
