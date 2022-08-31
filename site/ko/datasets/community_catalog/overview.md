@@ -10,7 +10,7 @@ original build_community_catalog.py file.
 
 ---
 
-## Usage
+## 사용법
 
 빠른 시작을 위해 [시작하기 가이드](https://www.tensorflow.org/datasets/overview)를 참조하세요.
 
