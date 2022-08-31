@@ -48,10 +48,9 @@ TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아�
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var> </dt>
   <dd>파이프라인 구성 파일의 경로입니다.</dd>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -67,7 +66,7 @@ TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아�
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -79,12 +78,9 @@ TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아�
     <ul>
       <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
       <li> <strong>local</strong>: 엔진을 로컬 오케스트레이터로 설정합니다.</li>
-      <li>
-<strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
-      <li>
-<strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
-      <li>
-<strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
+      <li> <strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
+      <li> <strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
+      <li> <strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
@@ -164,7 +160,7 @@ Vertex:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -174,15 +170,11 @@ Vertex:
   <dd>
     <p>(선택 사항) 파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
-      <li>
-<strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+      <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
       <li> <strong>local</strong>: 엔진을 로컬 오케스트레이터로 설정합니다.</li>
-      <li>
-<strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
-      <li>
-<strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
-      <li>
-<strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
+      <li> <strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
+      <li> <strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
+      <li> <strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
@@ -243,15 +235,11 @@ Vertex:
   <dd>
     <p>(선택 사항) 파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
-      <li>
-<strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+      <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
       <li> <strong>local</strong>: 엔진을 로컬 오케스트레이터로 설정합니다.</li>
-      <li>
-<strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
-      <li>
-<strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
-      <li>
-<strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
+      <li> <strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
+      <li> <strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
+      <li> <strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
@@ -285,8 +273,7 @@ Vertex:
 <dl>
   <dt>--pipeline_path=<var>pipeline-path</var> </dt>
   <dd>파이프라인 구성 파일의 경로입니다.</dd>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 끝점은 Kubeflow Pipelines 대시보드의 URL과 동일합니다. 끝점 값은 다음과 같아야 합니다.</p>
 </dd>
@@ -304,7 +291,7 @@ Vertex:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -314,21 +301,16 @@ Vertex:
   <dd>
     <p>(선택 사항) 파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
-      <li>
-<strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+      <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
       <li> <strong>local</strong>: 엔진을 로컬 오케스트레이터로 설정합니다.</li>
-      <li>
-<strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
-      <li>
-<strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
-      <li>
-<strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
+      <li> <strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
+      <li> <strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
+      <li> <strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>(선택 사항) IAP 보호 끝점의 클라이언트 ID입니다.</dd>
 
 
@@ -361,10 +343,9 @@ Vertex:
 <pre class="devsite-click-to-copy devsite-terminal">tfx pipeline list [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \&lt;br&gt;--iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]</pre>
 
 <dl>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -390,21 +371,16 @@ Vertex:
   <dd>
     <p>(선택 사항) 파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
-      <li>
-<strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+      <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
       <li> <strong>local</strong>: 엔진을 로컬 오케스트레이터로 설정합니다.</li>
-      <li>
-<strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
-      <li>
-<strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
-      <li>
-<strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
+      <li> <strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
+      <li> <strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
+      <li> <strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>(선택 사항) IAP 보호 끝점의 클라이언트 ID입니다.</dd>
 
 
@@ -450,7 +426,7 @@ Vertex:
   <dd>파이프라인의 이름입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 끝점은 Kubeflow Pipelines 대시보드의 URL과 동일합니다. 끝점 값은 다음과 같아야 합니다.</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -466,7 +442,7 @@ Vertex:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -476,43 +452,34 @@ Vertex:
   <dd>
     <p>(선택 사항) 파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
-      <li>
-<strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+      <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
       <li> <strong>local</strong>: 엔진을 로컬 오케스트레이터로 설정합니다.</li>
-      <li>
-<strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
-      <li>
-<strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
-      <li>
-<strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
+      <li> <strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
+      <li> <strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
+      <li> <strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
   </dd>
 
 
-  <dt>--runtime_parameter=<var>parameter-name</var>=<var>parameter-value</var>
-</dt>
+  <dt>--runtime_parameter=<var>parameter-name</var>=<var>parameter-value</var> </dt>
   <dd>(선택 사항) 런타임 매개변수 값을 설정합니다. 여러 변수의 값을 설정하기 위해 여러 번 설정할 수 있습니다. 'airflow', 'kubeflow', 'vertex' 엔진에만 적용됩니다.</dd>
 
 
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>(선택 사항) IAP 보호 끝점의 클라이언트 ID입니다.</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
+  <dt>--namespace=<var>namespace</var> </dt>
   <dd>(선택 사항) Kubeflow Pipelines API에 연결하기 위한 Kubernetes 네임스페이스입니다. 네임스페이스가 지정되지 않으면, <code>kubeflow</code>가 기본값으로 사용됩니다.</dd>
 
 
-  <dt>--project=<var>GCP-project-id</var>
-</dt>
+  <dt>--project=<var>GCP-project-id</var> </dt>
   <dd>(Vertex에 필수) Vertex 파이프라인의 GCP 프로젝트 ID입니다.</dd>
 
 
-  <dt>--region=<var>GCP-region</var>
-</dt>
+  <dt>--region=<var>GCP-region</var> </dt>
   <dd>(Vertex에 필수) us-central1과 같은 GCP 영역 이름입니다. 사용 가능한 영역은 [Vertex 문서](https://cloud.google.com/vertex-ai/docs/general/locations)를 참조하세요.</dd>
 
 
@@ -552,7 +519,7 @@ Vertex:
   <dd>파이프라인 실행의 고유 식별자입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 끝점은 Kubeflow Pipelines 대시보드의 URL과 동일합니다. 끝점 값은 다음과 같아야 합니다.</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -568,7 +535,7 @@ Vertex:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -578,13 +545,13 @@ Vertex:
   <dd>
     <p>(선택 사항) 파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
-      <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+      <li>
+<strong>kubeflow</strong>: sets engine to Kubeflow</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>(선택 사항) IAP 보호 끝점의 클라이언트 ID입니다.</dd>
 
 
@@ -630,7 +597,7 @@ Kubeflow:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -640,16 +607,13 @@ Kubeflow:
   <dd>
     <p>(선택 사항) 파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
-      <li>
-<strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
-      <li>
-<strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
+      <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+      <li> <strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>(선택 사항) IAP 보호 끝점의 클라이언트 ID입니다.</dd>
 
 
@@ -676,12 +640,12 @@ Kubeflow:
 
 <dl>
   <dt>--pipeline_name=<var>pipeline-name</var> </dt>
-  <dd>파이프라인의 이름입니다.</dd>
+  <dd>The name of the pipeline.</dd>
   <dt>--run_id=<var>run-id</var> </dt>
   <dd>파이프라인 실행의 고유 식별자입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 끝점은 Kubeflow Pipelines 대시보드의 URL과 동일합니다. 끝점 값은 다음과 같아야 합니다.</p>
+    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
 </dd>
 </dl>
 
@@ -697,7 +661,7 @@ Kubeflow:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -707,16 +671,13 @@ Kubeflow:
   <dd>
     <p>(선택 사항) 파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
-      <li>
-<strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
-      <li>
-<strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
+      <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+      <li> <strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>(선택 사항) IAP 보호 끝점의 클라이언트 ID입니다.</dd>
 
 
@@ -746,7 +707,7 @@ Kubeflow:
   <dd>파이프라인 실행의 고유 식별자입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -772,14 +733,12 @@ Kubeflow:
   <dd>
     <p>(선택 사항) 파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
-      <li>
-<strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+      <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>(선택 사항) IAP 보호 끝점의 클라이언트 ID입니다.</dd>
 
 
@@ -837,14 +796,11 @@ Kubeflow:
     <p>파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
       <li>
-<strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+<strong>kubeflow</strong>: sets engine to Kubeflow</li>
       <li> <strong>local</strong>: 엔진을 로컬 오케스트레이터로 설정합니다.</li>
-      <li>
-<strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
-      <li>
-<strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
-      <li>
-<strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
+      <li> <strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
+      <li> <strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
+      <li> <strong>beam</strong>: (실험적) 엔진을 Apache Beam으로 설정합니다.</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
@@ -860,7 +816,7 @@ Kubeflow:
 
 
   <dt>--run_id=<var>run-id</var> </dt>
-  <dd>파이프라인 실행의 고유 식별자입니다.</dd>
+  <dd>Unique identifier for a pipeline run.</dd>
 
 
 
@@ -887,7 +843,7 @@ Kubeflow:
   If the <code>--endpoint</code> is not specified, the in-cluster service
   DNS name is used as the default value. This name works only if the
   CLI command executes in a pod on the Kubeflow Pipelines cluster, such as a
-  <a href="https://www.kubeflow.org/docs/notebooks/why-use-jupyter-notebook/"
+  <a href="https://www.kubeflow.org/docs/components/notebooks/jupyter-tensorflow-examples/"
        class="external">Kubeflow Jupyter notebooks</a> instance.
 </p>
 ```
@@ -895,8 +851,7 @@ Kubeflow:
   
 
 
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>IAP 보호 끝점의 클라이언트 ID입니다.</dd>
 
 
