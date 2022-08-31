@@ -16,15 +16,15 @@
 
 #### 인라인 코드 언급
 
-Put <code>`backticks`</code> around the following symbols when used in text:
+텍스트에서 사용할 때 다음 기호 주위에 <code>`backticks`</code>를 놓습니다.
 
-- Argument names: <code>`input`</code>, <code>`x`</code>, <code>`tensor`</code>
-- Returned tensor names: <code>`output`</code>, <code>`idx`</code>, <code>`out`</code>
-- Data types: <code>`int32`</code>, <code>`float`</code>, <code>`uint8`</code>
-- Other op names reference in text: <code>`list_diff()`</code>, <code>`shuffle()`</code>
-- Class names: <code>`tf.Tensor`</code>, <code>`Strategy`</code>
-- File name: <code>`image_ops.py`</code>, <code>`/path_to_dir/file_name`</code>
-- Math expressions or conditions: <code>`-1-input.dims() &lt;= dim &lt;=     input.dims()`</code>
+- 인수 이름: <code>`input`</code>, <code>`x`</code>, <code>`tensor`</code>
+- 반환된 텐서 이름: <code>`output`</code>, <code>`idx`</code>, <code>`out`</code>
+- 데이터 유형: <code>`int32`</code>, <code>`float`</code>, <code>`uint8`</code>
+- 텍스트 내 기타 op 이름 참조: <code>`list_diff()`</code>, <code>`shuffle()`</code>
+- 클래스 이름: <code>`tf.Tensor`</code>, <code>`Strategy`</code>
+- 파일 이름: <code>`image_ops.py`</code>, <code>`/path_to_dir/file_name`</code>
+- 산술 표현식 또는 조건: <code>`-1-input.dims() &lt;= dim &lt;=     input.dims()`</code>
 
 #### 코드 블록
 
@@ -36,59 +36,59 @@ Put <code>`backticks`</code> around the following symbols when used in text:
 ```
 </code></pre>
 
-### Links in Markdown and notebooks
+### Markdown 및 노트북의 링크
 
-#### Links between files in a repository
+#### 리포지토리의 파일 간 링크
 
-Use relative links between files in a single GitHub repository. Include the file extension.
+단일 GitHub 리포지토리의 파일 사이에 상대 링크를 사용합니다. 파일 확장자를 포함합니다.
 
-For example, **this file you're reading** is from the [https://github.com/tensorflow/docs](https://github.com/tensorflow/docs) repository. Therefore, it can use relative paths to link to other files in the same repository like this:
+예를 들어 **읽고 있는 이 파일**은 [https://github.com/tensorflow/docs](https://github.com/tensorflow/docs) 리포지토리에서 가져온 것입니다. 따라서 다음과 같이 상대 경로를 사용하여 동일한 리포지토리의 다른 파일에 연결할 수 있습니다.
 
-- <code>\[Basics\]\(../../guide/basics.ipynb\)</code> produces [Basics](../../guide/basics.ipynb).
+- <code>\[Basics\]\(../../guide/basics.ipynb\)</code>은 [기본](../../guide/basics.ipynb)을 생성합니다.
 
-This is the prefered approach because this way the links on [tensorflow.org](https://www.tensorflow.org), [GitHub](https://github.com/tensorflow/docs){:.external} and [Colab](https://github.com/tensorflow/docs/tree/master/site/en/guide/bazics.ipynb){:.external} all work. Also, the reader stays in the same site when they click a link.
+이 접근 방식은 [tensorflow.org](https://www.tensorflow.org), [GitHub](https://github.com/tensorflow/docs){:.external} 및 [Colab](https://github.com/tensorflow/docs/tree/master/site/en/guide/bazics.ipynb){:.external}에 대한 링크가 모두 작동하기 때문에 선호됩니다. 또한 사용자가 링크를 클릭할 경우 동일한 사이트에 머물게 됩니다.
 
-Note: You should include the file extension—such as `.ipynb` or `.md`—for relative links. It will rendered on `tensorflow.org` without an extension.
+참고: 상대 링크의 경우 `.ipynb` 혹은 `.md`와 같은 파일 확장자를 포함해야 합니다. 확장자가 없을 경우 `tensorflow.org`에서 렌더링됩니다.
 
 #### 외부 링크
 
-For links to files that are not in the current repository, use standard Markdown links with the full URI. Prefer to link to the [tensorflow.org](https://www.tensorflow.org) URI if it's available.
+현재 리포지토리에 없는 파일에 대한 링크의 경우 전체 URI를 사용하는 표준 Markdown 링크를 사용해야 합니다. 가능한 경우 [tensorflow.org](https://www.tensorflow.org) URI에 연결하는 것이 좋습니다.
 
 소스 코드에 연결하려면 <var>https://www.github.com/tensorflow/tensorflow/blob/master/</var>로 시작하고 GitHub 루트에서 시작하는 파일 이름이 붙은 링크를 사용합니다.
 
-When linking off of [tensorflow.org](https://www.tensorflow.org), include a `{:.external}` on the Markdown link so that the "external link" symbol is shown.
+[tensorflow.org](https://www.tensorflow.org)에 대한 링크를 해제할 때에는 Markdown 링크에 `{:.external}`를 포함해야 "외부 링크" 기호가 표시됩니다.
 
-- `[GitHub](https://github.com/tensorflow/docs){:.external}` produces [GitHub](https://github.com/tensorflow/docs){:.external}
+- `[GitHub](https://github.com/tensorflow/docs){:.external}`은 [GitHub](https://github.com/tensorflow/docs){:.external}를 생성합니다.
 
-Do not include URI query parameters in the link:
+링크에 URI 쿼리 매개변수는 포함하지 않습니다.
 
-- Use: `https://www.tensorflow.org/guide/data`
-- Not: `https://www.tensorflow.org/guide/data?hl=en`
+- 사용 가능: `https://www.tensorflow.org/guide/data`
+- 사용 불가: `https://www.tensorflow.org/guide/data?hl=en`
 
-#### Images
+#### 이미지
 
-The advice in the previous section is for links to pages. Images are handled differently.
+이전 섹션의 내용은 페이지 링크에 대한 것입니다. 이미지는 다르게 처리됩니다.
 
-Generally, you should not check in images, and instead add the [TensorFlow-Docs team](https://github.com/tensorflow/docs) to your PR, and ask them to host the images on [tensorflow.org](https://www.tensorflow.org). This helps keep the size of your repository down.
+일반적으로 이미지는 체크 인하기보다는 PR에 [TensorFlow-Docs 팀](https://github.com/tensorflow/docs)을 추가하고 이들에게 [tensorflow.org](https://www.tensorflow.org)에서 이미지를 호스팅하도록 요청해야 합니다. 이렇게 하면 리포지토리의 크기를 줄이는 데 도움이 됩니다.
 
-If you do submit images to your repository, note that some systems do not handle relative paths to images. Prefer to use a full URL pointing to the image's eventual location on [tensorflow.org](https://www.tensorflow.org).
+자신의 리포지토리에 이미지를 제출하는 경우 일부 시스템은 이미지에 대한 상대 경로를 처리하지 않습니다. [tensorflow.org](https://www.tensorflow.org)의 이미지의 최종 위치를 가리키는 전체 URL을 사용하는 것이 좋습니다.
 
 #### API 설명서에 대한 링크
 
-API links are converted when the site is published. To link to a symbol's API reference page, enclose the symbol path in backticks:
+사이트를 게시하면 API 링크가 변환됩니다. 기호의 API 참조 페이지에 연결하려면 기호 경로를 백틱으로 감쌉니다.
 
-- <code>`tf.data.Dataset`</code> produces [`tf.data.Dataset`](https://www.tensorflow.org/api_docs/python/tf/data/Dataset)
+- <code>`tf.data.Dataset`</code>은 [`tf.data.Dataset`](https://www.tensorflow.org/api_docs/python/tf/data/Dataset)를 생성합니다.
 
-Full paths are slightly preferred except for long paths. Paths can be abbreviated by dropping the leading path components. Partial paths will be converted to links if:
+긴 경로를 제외하고는 전체 경로가 약간 더 선호됩니다. 선행 경로 구성 요소를 삭제하여 경로를 축약할 수 있습니다. 다음과 같은 경우 부분 경로가 링크로 변환됩니다.
 
-- There is at least one `.` in the path, and
-- The partial path is unique within the project.
+- 경로에 `.`이 하나 이상 있음
+- 부분 경로가 프로젝트 내에서 고유함
 
-API paths are linked **for every project** with a Python API published on [tensorflow.org](https://www.tensorflow.org). You can easily link to multiple subprojects from a single file by wrapping the API names with backticks. For example:
+API 경로는 [tensorflow.org](https://www.tensorflow.org)에 게시된 Python API를 사용하는 **모든 프로젝트**와 연결되어 있습니다. API 이름을 백틱으로 래핑하여 단일 파일에서 여러 하위 프로젝트로 쉽게 연결할 수 있습니다. 예시:
 
-- <code>`tf.metrics`</code>, <code>`tf_agents.metrics`</code>, <code>`text.metrics`</code> produces: `tf.metrics`, `tf_agents.metrics`, `text.metrics`.
+- <code>`tf.metrics`</code>, <code>`tf_agents.metrics`</code>, <code>`text.metrics`</code>는 `tf.metrics`, `tf_agents.metrics`, `text.metrics`를 생성합니다.
 
-For symbols with multiple path aliases there is a slight preference for the path that matches the API-page on [tensorflow.org](https://www.tensorflow.org). All aliases will redirect to the correct page.
+여러 경로 별칭을 사용하는 기호의 경우 [tensorflow.org](https://www.tensorflow.org)의 API 페이지로 연결하는 경로에 대한 약간의 기본 설정이 있습니다. 모든 별칭은 올바른 페이지로 리디렉션됩니다.
 
 ### Markdown의 수학
 
@@ -115,7 +115,7 @@ This is an example of an inline MathJax expression: $ 2 \times 2 = 4 $
 
 다음은 인라인 MathJax 표현식의 예입니다. $ 2 \times 2 = 4 $
 
-<code>\( ... \)</code> delimiters also work for inline math, but the $ form is sometimes more readable.
+<code>\( ... \)</code> 구분 기호도 인라인 수학에 사용할 수 있지만 $ 형식이 더 읽기 쉽습니다.
 
 참고: 텍스트 또는 MathJax 표현식에 달러 기호를 사용해야 하는 경우 앞에 슬래시를 넣어 이스케이프 처리합니다(`\$`). 코드 블록 내에서 달러 기호(예: Bash 변수 이름)는 이스케이프 처리할 필요가 없습니다.
 
