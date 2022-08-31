@@ -16,7 +16,7 @@
 
 이 가이드를 최대한으로 활용하려면 TensorFlow.js 소스 코드를 쉽게 읽을 수 있어야 합니다.
 
-## Terminology
+## 용어
 
 이 가이드의 경우 몇몇 주요 용어가 선행 설명에 유용합니다.
 
@@ -24,7 +24,7 @@
 
 **커널** — 특정 하드웨어/플랫폼 역량과 관련 있는 연산의 특정 구현입니다. 커널은 '저수준'이며 백엔드에 따라 다릅니다. 일부 연산은 연산에서 커널로 1 대 1 매핑을 하는 반면 다른 연산은 여러 커널을 사용합니다.
 
-**Gradient** **/ GradFunc** — The ‘backward mode’ definition of an **op/kernel** that computes the derivative of that function with regards to some input. Gradients are ‘high level’ code (not backend specific) and can call other ops or kernels.
+**그래디언트** **/ GradFunc** — 일부 입력과 관련된 해당 함수의 도함수를 계산하는 **연산/커널**의 '역방향 모드' 정의입니다. 그래디언트는 '고수준' 코드(백엔드마다 다르지 않음)이며 다른 ops 또는 커널을 호출할 수 있습니다.
 
 **커널 레지스트리** - **(커널명, 백엔드명)** 튜플에서 커널 구현까지의 맵.
 
@@ -42,8 +42,8 @@
 
 사용자 정의 op를 사고하는 한 가지 방식은 일부 텐서 출력을 반환하는 JavaScript 함수로서, 종종 출력으로 텐서를 사용하는 것입니다.
 
-- Some ops can be completely defined in terms of existing ops, and should just import and call these functions directly. [Here is an example](https://github.com/tensorflow/tfjs/blob/1bec37b9364df6164a4a0ad64c29e0859382f0b4/tfjs-core/src/ops/moving_average.ts).
-- The implementation of an op can also dispatch to backend specific kernels. This is done via `Engine.runKernel` and will be described further in the “implementing custom kernels” section. [Here is an example](https://github.com/tensorflow/tfjs/blob/1bec37b9364df6164a4a0ad64c29e0859382f0b4/tfjs-core/src/ops/sqrt.ts).
+- 일부 ops는 기존 ops 측면에서 완전히 정의될 수 있으며 이러한 함수를 직접 가져와 호출해야 합니다. [여기에서 예시를 확인할 수 있습니다](https://github.com/tensorflow/tfjs/blob/1bec37b9364df6164a4a0ad64c29e0859382f0b4/tfjs-core/src/ops/moving_average.ts).
+- op 구현은 또한 백엔드별 커널로 디스패치할 수 있습니다. 이는 `Engine.runKernel`을 통해 이루어지며 "사용자 정의 커널 구현" 섹션에서 더 자세히 설명합니다. [여기에서 예시를 확인할 수 있습니다](https://github.com/tensorflow/tfjs/blob/1bec37b9364df6164a4a0ad64c29e0859382f0b4/tfjs-core/src/ops/sqrt.ts).
 
 ## 사용자 정의 커널 구현
 
@@ -51,8 +51,8 @@
 
 - 커널 이름.
 - 커널이 구현된 백엔드.
-- Inputs: Tensor arguments to the kernel function.
-- Attributes: Non-tensor arguments to the kernel function.
+- 입력: 커널 함수에 대한 텐서 인수
+- 속성: 커널 함수에 대한 비텐서 인수
 
 여기 [커널 구현](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-cpu/src/kernels/Square.ts) 예시가 있습니다. 구현을 위해 사용된 규칙은 벡엔드에 따라 다르며 각 특정 벡엔드의 구현 및 설명서를 보면 가장 잘 이해할 수 있습니다.
 
@@ -67,12 +67,12 @@
 사용자 정의 그래디언트 구현은 다음 작업에 유용합니다.
 
 - 라이브러리에 나타나지 않을 수 있는 그래디언트 정의 추가
-- Overriding an existing gradient definition to customize the gradient computation for a given kernel.
+- 기존의 그래디언트 정의를 재정의하여 지정된 커널에 대한 그래디언트 계산을 사용자 정의
 
 [여기에서 그래디언트 구현](https://github.com/tensorflow/tfjs/tree/master/tfjs-core/src/gradients) 예시를 볼 수 있습니다.
 
 지정된 호출에 대한 그래디언트를 구현하면 tfjs-core에서 <br>[`registerGradient` 함수](https://cs.opensource.google/tensorflow/tfjs/+/master:tfjs-core/src/kernel_registry.ts?q=registerGradient&ss=tensorflow%2Ftfjs:tfjs-core%2F)를 사용하여 TensorFlow.js와 등록될 수 있습니다.
 
-The other approach to implementing custom gradients that by-passes the gradient registry (and thus allows for computing gradients for arbitrary functions in arbitrary ways is using [tf.customGrad](https://js.tensorflow.org/api/latest/#customGrad).
+그래디언트 레지스트리를 우회함으로써 임의의 방식으로 임의의 함수에 대한 그래디언트 계산을 허용하는 사용자 정의 그래디언트를 구현하는 다른 접근 방식은 [tf.customGrad](https://js.tensorflow.org/api/latest/#customGrad)를 사용하는 것입니다.
 
-Here is an [example of an op within the library](https://github.com/tensorflow/tfjs/blob/f111dc03a87ab7664688011812beba4691bae455/tfjs-core/src/ops/losses/softmax_cross_entropy.ts#L64) of using customGrad
+여기에서 customGrad를 사용하는 [라이브러리 내 op 예시](https://github.com/tensorflow/tfjs/blob/f111dc03a87ab7664688011812beba4691bae455/tfjs-core/src/ops/losses/softmax_cross_entropy.ts#L64)를 확인할 수 있습니다.
