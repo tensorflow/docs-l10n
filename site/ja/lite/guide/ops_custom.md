@@ -207,7 +207,7 @@ resolver.AddCustom("Sin", Register_SIN());
 
 組み込み演算子のセットが大きすぎる場合、演算子の特定のサブセットに基づいて、新しい`OpResolver`をコード生成することができます。おそらく特定のモデルに含まれる演算子のみが含まれます。これが、TensorFlow の選択的登録に相当するものです（また、この単純なバージョンは、`tools`ディレクトリに提供されています）。
 
-カスタム演算子を Java で定義する場合、現時点では、独自のカスタム JNI レイヤーを構築し、[この jni コードに](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/builtin_ops_jni.cc)独自の AAR をコンパイルする必要があります。同様に、Python でこれらの演算子を定義する場合、[Python ラッパーコード](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc)に登録を配置することができます。
+If you want to define your custom operators in Java, you would currently need to build your own custom JNI layer and compile your own AAR [in this jni code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/nativeinterpreterwrapper_jni.cc). Similarly, if you wish to define these operators available in Python you can place your registrations in the [Python wrapper code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc).
 
 上記に類似するプロセスは、単一の演算子ではなく一連の演算子をサポートするために使用することができます。必要な数の`AddCustom`演算子を追加してください。また、`BuiltinOpResolver`を使用することで、`AddBuiltin`を使用して、組み込みの実装をオーバーライドできます。
 
