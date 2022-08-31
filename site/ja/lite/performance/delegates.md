@@ -77,7 +77,7 @@ TensorFlow Lite には、2 つの画像ベースのタスクの正確さを評�
 
 - [ILSVRC 2012](http://image-net.org/challenges/LSVRC/2012/)（画像分類）[ top-K 精度](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Precision_at_K)
 
-- [COCO 物体検出（バウンディングボックス付き）](https://cocodataset.org/#detection-2020) [MAP（mean Average Precision）付き](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Mean_average_precision)
+- [COCO Object Detection (w/ bounding boxes)](https://cocodataset.org/#detection-2020) with [mean Average Precision (mAP)](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Mean_average_precision)
 
 これらのツール（Android、64 ビット ARM アーキテクチャ）のビルド済みバイナリとドキュメントは、以下にあります。
 
