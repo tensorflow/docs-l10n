@@ -6,7 +6,7 @@ TFX パイプラインが初めての方は、[TFX パイプラインの中心�
 
 ## カスタム Executor またはカスタムコンポーネント
 
-コンポーネントの入力、出力、および実行プロパティが既存のコンポーネントと同じで、カスタム処理ロジックのみが必要な場合は、カスタム Executor で十分です。入力、出力、または実行プロパティのいずれかが既存の TFX コンポーネントと異なる場合は、フルカスタムコンポーネントが必要です。
+If only custom processing logic is needed while the inputs, outputs, and execution properties of the component are the same as an existing component, a custom executor is sufficient. A fully custom component is needed when any of the inputs, outputs, or execution properties are different from any existing TFX components.
 
 ## カスタムコンポーネントの作成
 
@@ -17,9 +17,9 @@ TFX パイプラインが初めての方は、[TFX パイプラインの中心�
 
 ### ComponentSpec
 
-`ComponentSpec`クラスは、コンポーネントへの入力アーティファクトと出力アーティファクト、およびコンポーネントの実行に使用されるパラメータを定義することにより、コンポーネントコントラクトを定義します。これには 3 つの部分があります。
+The `ComponentSpec` class defines the component contract by defining the input and output artifacts to a component as well as the parameters that are used for the component execution. It has three parts:
 
-- *入力*: コンポーネント Executor にある入力アーティファクトの型付きパラメータのディクショナリ。通常、入力アーティファクトはアップストリームコンポーネントからの出力であるため、同じ型を共有します。
+- *INPUTS*: A dictionary of typed parameters for the input artifacts that are passed into the component executor. Normally input artifacts are the outputs from upstream components and thus share the same type.
 - *出力*: コンポーネントが生成する出力アーティファクトの型付きパラメータのディクショナリ。
 - *パラメータ*: コンポーネント Executor に渡される追加の[ExecutionParameter](https://github.com/tensorflow/tfx/blob/54aa6fbec6bffafa8352fe51b11251b1e44a2bf1/tfx/types/component_spec.py#L274) アイテムのディクショナリ。これらは、パイプライン DSL で柔軟に定義し、実行に渡すアーティファクト以外のパラメータです。
 
