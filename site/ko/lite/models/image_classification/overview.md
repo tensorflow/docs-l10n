@@ -10,7 +10,7 @@ The following image shows the output of the image classification model on Androi
 
 Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/image_classifier). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/image_classification).
 
-## Get started
+## 시작하기
 
 If you are new to TensorFlow Lite and are working with Android or iOS, it is recommended you explore the following example applications that can help you get started.
 
@@ -40,7 +40,7 @@ When you subsequently provide a new image as input to the model, it will output 
   <thead>
     <tr>
       <th>동물 유형</th>
-      <th>Probability</th>
+      <th>확률</th>
     </tr>
   </thead>
   <tbody>
@@ -86,7 +86,7 @@ The TensorFlow Lite image classification models are useful for single-label clas
 
 If you want to train a model to recognize new classes, see <a href="#customize_model">Customize model</a>.
 
-For the following use cases, you should use a different type of model:
+다음과 같은 사용 사례의 경우 다른 유형의 모델을 사용해야 합니다.
 
 <ul>
   <li>Predicting the type and position of one or more objects within an image (see <a href="../object_detection/overview">Object detection</a>)</li>
@@ -95,7 +95,7 @@ For the following use cases, you should use a different type of model:
 
 Once you have the starter model running on your target device, you can experiment with different models to find the optimal balance between performance, accuracy, and model size.
 
-<h3>Customize model</h3>
+<h3>모델을 사용자 정의하기</h3>
 
 The pre-trained models provided are trained to recognize 1000 classes of images. For a full list of classes, see the labels file in the <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">model zip</a>.
 
@@ -103,11 +103,11 @@ You can also use transfer learning to re-train a model to recognize classes not 
 
 Learn how to perform transfer learning with the <a href="https://www.tensorflow.org/lite/models/modify/model_maker/image_classification">TFLite Model Maker</a>, or in the <a href="https://codelabs.developers.google.com/codelabs/recognize-flowers-with-tensorflow-on-android/index.html#0">Recognize flowers with TensorFlow</a> codelab.
 
-<h2>Performance benchmarks</h2>
+<h2>성능 벤치마크</h2>
 
 Model performance is measured in terms of the amount of time it takes for a model to run inference on a given piece of hardware. The lower the time, the faster the model.
 
-The performance you require depends on your application. Performance can be important for applications like real-time video, where it may be important to analyze each frame in the time before the next frame is drawn (e.g. inference must be faster than 33ms to perform real-time inference on a 30fps video stream).
+필요한 성능은 애플리케이션에 따라 다릅니다. 다음 프레임이 그려지기 전에 각 프레임을 분석하는 것이 중요할 수 있는 실시간 비디오와 같은 애플리케이션의 경우, 성능이 중요할 수 있습니다(예: 30fps 비디오 스트림에서 실시간 추론을 수행하려면 추론이 33ms보다 빨라야 함).
 
 The TensorFlow Lite quantized MobileNet models' performance range from 3.7ms to 80.3 ms.
 
@@ -118,7 +118,7 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
     <tr>
       <th>모델명</th>
       <th>Model size </th>
-      <th>Device </th>
+      <th>기기</th>
       <th>NNAPI</th>
       <th>CPU</th>
     </tr>
@@ -128,25 +128,25 @@ Performance benchmark numbers are generated with the <a href="https://www.tensor
       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a>
     </td>
     <td rowspan="3">       4.3 Mb     </td>
-    <td>Pixel 3 (Android 10) </td>
+    <td>Pixel 3(Android 10)</td>
     <td>6ms</td>
     <td>13ms *</td>
   </tr>
    <tr>
-     <td>Pixel 4 (Android 10) </td>
+     <td>Pixel 4(Android 10)</td>
     <td>3.3ms</td>
     <td>5ms *</td>
   </tr>
    <tr>
-     <td>iPhone XS (iOS 12.4.1) </td>
+     <td>iPhone XS(iOS 12.4.1)</td>
      <td></td>
     <td>11ms **</td>
   </tr>
 </table>
 
-* 4 threads used.
+* 4개의 스레드가 사용되었습니다.
 
-** 2 threads used on iPhone for the best performance result.
+** 최상의 결과를 위해 iPhone에서 2개의 스레드가 사용되었습니다.
 
 ### Model accuracy
 
@@ -156,7 +156,7 @@ The most relevant accuracy metrics are Top-1 and Top-5. Top-1 refers to how ofte
 
 The TensorFlow Lite quantized MobileNet models’ Top-5 accuracy range from 64.4 to 89.9%.
 
-### Model size
+### 모델 크기
 
 The size of a model on-disk varies with its performance and accuracy. Size may be important for mobile development (where it might impact app download sizes) or when working with hardware (where available storage might be limited).
 
