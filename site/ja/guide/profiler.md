@@ -88,7 +88,7 @@ docker run option '--privileged=true'
         - Device Compute Time: デバイス上の計算時間
         - All others, including Python overhead.
 
-    2. Device compute precisions - Reports the percentage of device compute time that uses 16 and 32-bit computations.
+    2. Device Compute Precisions - 16 ビットおよび 32 ビット計算を使用するデバイス演算時間の割合を報告します。
 
 - **Step-time Graph**: サンプリングされたすべてのステップのデバイスステップ時間（ミリ秒単位）のグラフを表示します。各ステップは、時間を費やしている箇所によって複数のカテゴリに（別々の色で）分かれています。赤い領域は、デバイスがホストからの入力データを待機してアイドル状態であったステップ時間の部分に対応しています。緑の領域は、デバイスが実際に動作していた時間の長さを示しています。
 
@@ -240,10 +240,10 @@ Timeline ペインには、次の要素が含まれます。
 
 トレースビューアには、次のセクションがあります。
 
-- **One section for each device node**, labeled with the number of the device chip and the device node within the chip (for example, `/device:GPU:0 (pid 0)`). Each device node section contains the following tracks:
+- **デバイスノードごとに 1 つのセクション**。ラベルとしてデバイスチップの数とチップ内のデバイスノードの数が使用されます（例: 「`/device:GPU:0 (pid 0)`」）。デバイスノードのセクションには、次のトラックが含まれます。
     - **Step**: デバイスで実行されていたレーニングステップの期間が表示されます。
     - **TensorFlow Ops**: デバイス上で実行された演算が表示されます。
-    - **XLA Ops**: Shows [XLA](https://www.tensorflow.org/xla/) operations (ops) that ran on the device if XLA is the compiler used (each TensorFlow op is translated into one or several XLA ops. The XLA compiler translates the XLA ops into code that runs on the device).
+    - **XLA Ops -** [XLA](https://www.tensorflow.org/xla/) が使用されているコンパイラである場合にデバイス上で実行された XLA 演算が表示されます。1 つの TensorFlow 演算が 1 つ以上の XLA 演算に変換されます。XLA コンパイラにより、XLA 演算がデバイス上で実行されるコードに変換されます。
 - **ホストマシンの CPU 上で実行されるスレッドのセクション** - **「Host Threads」**というラベルが付いています。このセクションには、CPU スレッドごとに 1 つのトラックが含まれます。セクションラベルと一緒に表示される情報は無視してもかまいません。
 
 ##### イベント
@@ -264,9 +264,9 @@ Timeline ペインには、次の要素が含まれます。
 
 このツールでは 2 つのペインで情報が表示されます。
 
-- The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
+- 上部のペインには、合計経過時間が最も長い CUDA カーネルを示す円グラフが表示されます。
 
-- The lower pane displays a table with the following data for each unique kernel-op pair:
+- 下のペインには、一意のカーネルと演算のペアごとに次のデータを含むテーブルが表示されます。
 
     - A rank in descending order of total elapsed GPU duration grouped by kernel-op pair.
     - The name of the launched kernel.
@@ -485,7 +485,7 @@ TensorFlow プロファイラは、TensorFlow モデルのホストアクティ�
 
 <a name="sampling_mode"></a>
 
-- Sampling mode: Perform on-demand profiling by using `tf.profiler.experimental.server.start` to start a gRPC server with your TensorFlow model run. After starting the gRPC server and running your model, you can capture a profile through the **Capture Profile** button in the TensorBoard profile plugin. Use the script in the Install profiler section above to launch a TensorBoard instance if it is not already running.
+- サンプリングモード - `tf.profiler.experimental.server.start()`を使用してオンデマンドプロファイリングを実行し、gRPC サーバーを起動して TensorFlow モデルを実行します。gRPC サーバーを起動してモデルを実行したら、TensorBoard プロファイルプラグインの[プロファイルの **Capture Profile** ボタンを使用してプロファイルをキャプチャできます。まだ実行されていない場合は、上記の「プロファイラのインストール」セクションのスクリプトを使用して TensorBoard インスタンスを起動してください。
 
     以下に例を示します。
 
