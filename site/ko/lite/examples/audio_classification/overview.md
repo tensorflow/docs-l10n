@@ -12,13 +12,13 @@
 
 ## 시작하기
 
-If you are new to TensorFlow Lite and are working with Android, we recommend exploring the following example applications that can help you get started.
+TensorFlow Lite를 처음 사용하고 Android로 작업하는 경우, 다음 예제 애플리케이션을 탐색하면 시작하는 데 도움이 됩니다.
 
 [TensorFlow Lite 작업 라이브러리](../../inference_with_metadata/task_library/audio_classifier)의 기본 API를 활용하여 몇 줄의 코드로 오디오 분류 모델을 통합할 수 있습니다. [TensorFlow Lite 지원 라이브러리](../../inference_with_metadata/lite_support)를 사용하여 사용자 지정 추론 파이프라인을 구축할 수도 있습니다.
 
 아래 Android 예제는 [TFLite 작업 라이브러리](https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android)를 사용한 구현을 보여줍니다.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android">View Android example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android">Android 예제 보기</a>
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/ios">iOS 예제 보기</a>
 
@@ -30,7 +30,7 @@ Android/iOS 이외의 플랫폼을 사용 중이거나 이미 [TensorFlow Lite A
 
 YAMNet은 오디오 파형을 입력으로 사용하고 [AudioSet](https://g.co/audioset) 온톨로지에서 521개의 오디오 이벤트 각각에 대해 독립적인 예측을 수행하는 오디오 이벤트 분류기입니다. 이 모델은 MobileNet v1 아키텍처를 사용하고 AudioSet 말뭉치를 사용하여 훈련되었습니다. 이 모델은 원래 TensorFlow Model Garden에서 릴리스되었으며, 여기에 모델 소스 코드, 원래 모델 체크포인트 및 자세한 문서가 있습니다.
 
-### How it works
+### 동작 원리
 
 TFLite로 변환된 YAMNet 모델에는 두 가지 버전이 있습니다.
 
@@ -54,7 +54,7 @@ YAMNet은 다음과 같이 사용할 수 있습니다.
 - 고수준 특성 추출기: YAMNet의 1024-D 임베딩 출력은 다른 모델의 입력 특성으로 사용될 수 있으며, 이는 다시 특정 작업에 대해 소량의 데이터로 훈련할 수 있습니다. 이를 통해 레이블이 지정된 많은 데이터가 필요하지 않고 대규모 모델을 처음부터 끝까지 훈련하지 않고도 전문화된 오디오 분류기를 빠르게 생성할 수 있습니다.
 - 웜 스타트로 사용됩니다. YAMNet 모델 매개변수는 보다 빠른 미세 조정과 모델 탐색을 가능하게 하는 더 큰 모델의 일부를 초기화하는 데 사용할 수 있습니다.
 
-### Limitations
+### 한계
 
 - YAMNet의 분류기 출력은 클래스 간에 보정되지 않았으므로 출력을 확률로 직접 처리할 수 없습니다. 주어진 작업에 대해 적절한 클래스별 점수 임계값 및 척도를 할당할 수 있는 작업별 데이터로 보정을 수행해야 할 개연성이 매우 높습니다.
 - YAMNet은 수백만 개의 YouTube 동영상에 대해 훈련되었으며 이러한 동영상은 매우 다양하지만 주어진 작업에 대해 예상되는 평균 YouTube 동영상과 오디오 입력 간에 여전히 도메인 불일치가 있을 수 있습니다. 구축하는 모든 시스템에서 YAMNet을 사용할 수 있도록 하려면 어느 정도의 미세 조정 및 보정을 수행해야 합니다.
