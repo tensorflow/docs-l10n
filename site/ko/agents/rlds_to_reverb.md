@@ -155,7 +155,7 @@ Step n+1 =   o_t+1, a_t+1, r_t+1, d_t+1, is_first = False, is_last = true, is_te
 
 에피소드가 `is_terminal = False`인 단계에서 끝나면 이 에피소드가 중단되었음을 의미합니다. 이런 경우, 환경에 따라 행동, 보상, 감가율도 비어있을 수 있습니다.
 
-![RLDS step to TF-Agents trajectory](images/rlds/rlds_step_to_trajectory.png)
+![RLDS step to TF-Agents trajectory](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/agents/images/rlds/rlds_step_to_trajectory.png?raw=true)
 
 ### 변환 프로세스
 
@@ -163,16 +163,16 @@ Step n+1 =   o_t+1, a_t+1, r_t+1, d_t+1, is_first = False, is_last = true, is_te
 
 RLDS 데이터 세트는 순차적으로 RLDS 단계의 데이터세트가 되는 에피소드의 데이터세트이며, 단계의 데이터세트로 우선 병합됩니다.
 
-![Flatten RLDS](images/rlds/flatten_rlds.png)
+![Flatten RLDS](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/agents/images/rlds/flatten_rlds.png?raw=true)
 
 #### 인접한 단계의 겹치는 쌍 만들기
 
 그런 다음 병합된 RLDS 데이터세트를 일괄 처리하고 인접한 RLDS 단계에서 겹치는 쌍의 데이터세트로 변환합니다.
 
-![RLDS to overlapping pairs](images/rlds/rlds_to_pairs.png)
+![RLDS to overlapping pairs](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/agents/images/rlds/rlds_to_pairs.png?raw=true)
 
 #### TF 에이전트 궤적으로 변환
 
 데이터세트는 그런 다음 TF-Agents 궤적으로 변환됩니다.
 
-![RLDS pairs to TF-Agents trajectories](images/rlds/pairs_to_trajectories.png)
+![RLDS pairs to TF-Agents trajectories](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/agents/images/rlds/pairs_to_trajectories.png?raw=true)
