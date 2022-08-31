@@ -302,7 +302,7 @@ tf_custom_op_library(
 $ bazel build --config opt //tensorflow/core/user_ops:zero_out.so
 ```
 
-For compiling the `Example` operation, with the CUDA Kernel, you need to use the `gpu_srcs` parameter of `tf_custom_op_library`. Place a BUILD file with the following Bazel build rule in a new folder inside the [`tensorflow/core/user_ops`](https://www.tensorflow.org/code/tensorflow/core/user_ops/) directory (e.g. "example_gpu").
+CUDA 커널을 사용하여 `Example` 연산을 컴파일하려면 `tf_custom_op_library`의 `gpu_srcs` 매개변수를 사용해야 합니다. 다음 Bazel 빌드 규칙이 있는 BUILD 파일을 [`tensorflow/core/user_ops`](https://www.tensorflow.org/code/tensorflow/core/user_ops/) 디렉터리(예: "example_gpu") 내의 새 폴더에 배치합니다.
 
 ```python
 load("//tensorflow:tensorflow.bzl", "tf_custom_op_library")
@@ -315,7 +315,7 @@ tf_custom_op_library(
 )
 ```
 
-Run the following command to build `kernel_example.so`.
+다음 명령을 실행하여 `kernel_example.so`를 빌드합니다.
 
 ```bash
 $ bazel build --config opt //tensorflow/core/user_ops/example_gpu:kernel_example.so
