@@ -22,9 +22,9 @@ For more information about metadata and associated fields (e.g. `vocab.txt`) see
 
 ## 동작 원리
 
-The model can be used to build a system that can answer users’ questions in natural language. It was created using a pre-trained BERT model fine-tuned on SQuAD 1.1 dataset.
+모델은 자연어로 사용자의 질문에 답할 수 있는 시스템을 구축하는 데 사용할 수 있습니다. 모델은 SQuAD 1.1 데이터세트에서 미세 조정되고 사전 훈련된 BERT 모델을 사용하여 생성되었습니다.
 
-[BERT](https://github.com/google-research/bert), or Bidirectional Encoder Representations from Transformers, is a method of pre-training language representations which obtains state-of-the-art results on a wide array of Natural Language Processing tasks.
+[BERT](https://github.com/google-research/bert) 또는 Bidirectional Encoder Representations from Transformers는 다양한 배열의 자연어 처리 작업에 대한 최신 결과를 얻는 언어 표현을 사전 훈련하는 메서드입니다.
 
 이 앱은 BERT의 압축 버전인 MobileBERT를 사용하는데 실행 속도는 4배가 더 빠르고 모델 크기는 4배 더 작습니다.
 
