@@ -6,7 +6,7 @@
 
  <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/images/detection.png?raw=true">
 
-Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector). (2) To customize a model, try [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker).
+注意: (1) 既存のモデルを統合するには、[TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector) を試してください。(2) モデルをカスタマイズするには、[TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) を試してください。
 
 ## はじめに
 
@@ -14,9 +14,9 @@ Note: (1) To integrate an existing model, try [TensorFlow Lite Task Library](htt
 
 Android または iOS 以外のプラットフォームを使用する場合、または、すでに <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite API</a> に精通している場合は、物体検出スターターモデルと付随するラベルをダウンロードしてください。
 
-<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">Download starter model with Metadata</a>
+<a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">メタデータを含むスターターモデルをダウンロードする</a>
 
-For more information about Metadata and associated fields (eg: `labels.txt`) see <a href="../../models/convert/metadata#read_the_metadata_from_models">Read the metadata from models</a>
+メタデータと関連フィールド（`labels.txt`など）の詳細については、<a href="../../models/convert/metadata#read_the_metadata_from_models">モデルからメタデータを読み取る</a>をご覧ください。
 
 独自のタスク用にカスタム検出モデルをトレーニングする場合は、<a href="#model-customization">モデルのカスタマイズ</a>をご覧ください。
 
@@ -43,7 +43,7 @@ TensorFlow Lite Task Library のそのまま簡単に使用できる API を利�
 
 [TensorFlow Lite Interpreter Swift API](../../guide/inference#load_and_run_a_model_in_swift) を使用してモデルを統合できます。以下の iOS の例を参照してください。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/ios">View iOS example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/ios">iOS の例を見る</a>
 
 ## モデルの説明
 
@@ -223,10 +223,9 @@ Android でこの前処理を行う方法については[サンプルアプリ�
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">
-      <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a>
-    </td>
-    <td rowspan="3">       27 Mb     </td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a>
+</td>
+    <td rowspan="3">       27 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>22ms</td>
     <td>46ms*</td>
@@ -253,7 +252,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
 
 [Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md#mobile-models) には、さまざまなレイテンシと精度の特性を備えたモバイル向けに最適化された検出モデルがあります。それぞれ、次のセクションで説明する入力署名および出力署名に従います。
 
-Most of the download zips contain a `model.tflite` file. If there isn't one, a TensorFlow Lite flatbuffer can be generated using [these instructions](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md). SSD models from the [TF2 Object Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md) can also be converted to TensorFlow Lite using the instructions [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md). It is important to note that detection models cannot be converted directly using the [TensorFlow Lite Converter](../../models/convert), since they require an intermediate step of generating a mobile-friendly source model. The scripts linked above perform this step.
+ほとんどのダウンロード zip には、`model.tflite `ファイルが含まれています。含まれていない場合は、[これらの手順](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)で TensorFlowLite フラットバッファーを生成できます。[TF2 Object Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md)の SSD モデルは、[こちら](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md)の手順を使用して TensorFlowLite に変換することもできます。検出モデルは、モバイル対応のソースモデルを生成する中間ステップを必要とするため、[TensorFlow Lite Converter](../../models/convert) を使用して直接変換できないことに注意してください。上記リンクのスクリプトは、このステップを実行します。
 
 [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) と [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) の両方のエクスポートスクリプトには、より多くの出力オブジェクトや、より低速でより正確な後処理を可能にするパラメータがあります。サポートされている引数の完全なリストを表示するには、スクリプトで`--help`を使用してください。
 
@@ -269,6 +268,6 @@ Most of the download zips contain a `model.tflite` file. If there isn't one, a T
 
 提供される事前トレーニング済みモデルは、90 クラスの物体を検出するようにトレーニングされています。クラスの完全なリストについては、<a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">モデルメタデータ</a>のラベルファイルをご覧ください。
 
-You can use a technique known as transfer learning to re-train a model to recognize classes not in the original set. For example, you could re-train the model to detect multiple types of vegetable, despite there only being one vegetable in the original training data. To do this, you will need a set of training images for each of the new labels you wish to train. The recommended way is to use [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) library which simplifies the process of training a TensorFlow Lite model using custom dataset, with a few lines of codes. It uses transfer learning to reduce the amount of required training data and time. You can also learn from [Few-shot detection Colab](https://github.com/tensorflow/models/blob/master/research/object_detection/colab_tutorials/eager_few_shot_od_training_tflite.ipynb) as an example of fine-tuning a pre-trained model with few examples.
+元のセットにないクラスを認識するようにモデルを再トレーニングするには転移学習と呼ばれる手法を使用します。たとえば、元のトレーニングデータには野菜は 1 つしかありませんが、モデルを再トレーニングすると複数の種類の野菜を検出できます。これを行うには、トレーニングする新しいラベルごとに一連のトレーニング画像が必要です。推奨される方法は、[TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) ライブラリを使用することです。このライブラリは、カスタムデータセットと数行のコードを使用して、TensorFlow Lite モデルのトレーニングプロセスを簡素化します。また、転移学習が使用されるため、必要なトレーニングデータと時間が少なくなります。いくつかの例を含む事前トレーニング済みモデルのファインチューニングの例は、[少数ショット検出 Colab](https://www.tensorflow.org/lite/guide/model_maker) でも確認できます。
 
 より大きなデータセットでファインチューニングするには、TensorFlow Object Detection API を使用して独自のモデルをトレーニングするためのガイド、[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_training_and_evaluation.md) と [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md) をご覧ください。トレーニングが完了すると、[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)、[TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) の手順で、TFLite に適した形式に変換できます。
