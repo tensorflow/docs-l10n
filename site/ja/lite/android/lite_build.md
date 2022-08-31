@@ -1,10 +1,10 @@
 # Android 用の TensorFlow Lite を構築する
 
-This document describes how to build TensorFlow Lite Android library on your own. Normally, you do not need to locally build TensorFlow Lite Android library. If you just want to use it, the easiest way is using the [TensorFlow Lite AAR hosted at MavenCentral](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite). See [Android quickstart](../guide/android.md) for more details on how to use them in your Android projects.
+このドキュメントでは、TensorFlow Lite Android ライブラリを独自に構築する方法について説明します。通常、TensorFlow Lite Android ライブラリをローカルで構築する必要はありません。使用するだけの場合、最も簡単な方法は、[MavenCentral でホストされている TensorFlow Lite AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite) を使用することです。Android プロジェクトでこれらを使用する方法の詳細については、[Android クイックスタート](../guide/android.md)をご覧ください。
 
-## Use Nightly Snapshots
+## Nightly スナップショットを使用する
 
-To use nightly snapshots, add the following repo to your root Gradle build config.
+Nightly スナップショットを使用するには、以下のリポジトリをルートの Gradle ビルド構成に追加します。
 
 ```build
 allprojects {
@@ -20,7 +20,7 @@ allprojects {
 
 ## ローカルで TensorFlow Lite を構築する
 
-In some cases, you might wish to use a local build of TensorFlow Lite. For example, you may be building a custom binary that includes [operations selected from TensorFlow](https://www.tensorflow.org/lite/guide/ops_select), or you may wish to make local changes to TensorFlow Lite.
+場合によっては、TensorFlow Lite のローカルビルドの使用も可能です。例えば、[TensorFlow から選択した演算](https://www.tensorflow.org/lite/guide/ops_select) を含むカスタムバイナリを構築する場合や、TensorFlow Lite にローカルの変更を加える場合などがあります。
 
 ### Docker を使用して構築環境をセットアップする
 
@@ -40,7 +40,7 @@ In some cases, you might wish to use a local build of TensorFlow Lite. For examp
 docker build . -t tflite-builder -f tflite-android.Dockerfile
 ```
 
-- Start the docker container interactively by mounting your current folder to /host_dir inside the container (note that /tensorflow_src is the TensorFlow repository inside the container):
+- 現在のフォルダをコンテナ内の /host_dir にマウントして、Docker コンテナをインタラクティブに起動します（/tensorflow_src はコンテナ内の TensorFlow リポジトリであることに注意してください）。
 
 ```shell
 docker run -it -v $PWD:/host_dir tflite-builder bash
@@ -48,7 +48,7 @@ docker run -it -v $PWD:/host_dir tflite-builder bash
 
 Windows で PowerShell を使用する場合は、"$PWD" を "pwd" に置き換えます。
 
-If you would like to use a TensorFlow repository on the host, mount that host directory instead (-v hostDir:/host_dir).
+ホスト上で TensorFlow リポジトリを使用する場合は、代わりにそのホストディレクトリ (-v hostDir:/host_dir) をマウントします。
 
 - コンテナの中に入ると、以下を実行して追加の Android ツールやライブラリをダウンロードすることができます（ライセンスに同意する必要があるかもしれないので注意してください）。
 
@@ -59,30 +59,30 @@ sdkmanager \
   "platforms;android-${ANDROID_API_LEVEL}"
 ```
 
-Now you should proceed to the [Configure WORKSPACE and .bazelrc](#configure_workspace_and_bazelrc) section to configure the build settings.
+次に、[WORKSPACE と .bazelrc の構成](#configure_workspace_and_bazelrc) セクションに進み、ビルド設定を構成します。
 
-After you finish building the libraries, you can copy them to /host_dir inside the container so that you can access them on the host.
+ライブラリの構築が終了したら、コンテナ内の /host_dir にコピーして、ホスト上でアクセスできるようにします。
 
 ### Docker を使用せずに構築環境をセットアップする
 
 #### Bazel と Android の前提条件をインストールする
 
-Bazel is the primary build system for TensorFlow. To build with it, you must have it and the Android NDK and SDK installed on your system.
+Bazel は TensorFlow の主なビルドシステムです。これを使用して構築する場合には、Bazel および Android の NDK と SDK をシステムにインストールする必要がありあます。
 
-1. Install the latest version of the [Bazel build system](https://bazel.build/versions/master/docs/install.html).
-2. The Android NDK is required to build the native (C/C++) TensorFlow Lite code. The current recommended version is 19c, which may be found [here](https://developer.android.com/ndk/downloads/older_releases.html#ndk-19c-downloads).
-3. The Android SDK and build tools may be obtained [here](https://developer.android.com/tools/revisions/build-tools.html), or alternatively as part of [Android Studio](https://developer.android.com/studio/index.html). Build tools API &gt;= 23 is the recommended version for building TensorFlow Lite.
+1. [Bazel ビルドシステム](https://bazel.build/versions/master/docs/install.html)の最新バージョンをインストールします。
+2. TensorFlow Lite のネイティブコード (C/C++) を構築するには、Android NDK が必要です。現在の推奨バージョンは 19c で、[こちら](https://developer.android.com/ndk/downloads/older_releases.html#ndk-19c-downloads)から入手できます。
+3. Android SDK とビルドツールは[こちら](https://developer.android.com/tools/revisions/build-tools.html)から、または [Android Studio](https://developer.android.com/studio/index.html) の一部として入手できます。TensorFlow Lite の構築に推奨されるビルドツールの API バージョンは 23 かそれ以降です。
 
 ### WORKSPACE と .bazelrc の構成
 
-This is a one-time configuration step that is required to build the TF Lite libraries. Run the `./configure` script in the root TensorFlow checkout directory, and answer "Yes" when the script asks to interactively configure the `./WORKSPACE` for Android builds. The script will attempt to configure settings using the following environment variables:
+これは、TF Lite ライブラリを構築するために必要となる一度限りの構成ステップです。ルートの TensorFlow チェックアウトディレクトリにある `./configure` スクリプトを実行して、Android ビルド用の `./WORKSPACE` をインタラクティブに設定するかを尋ねられたら「Yes」と答えます。スクリプトは以下の環境変数を使用して設定を試みます。
 
 - `ANDROID_SDK_HOME`
 - `ANDROID_SDK_API_LEVEL`
 - `ANDROID_NDK_HOME`
 - `ANDROID_NDK_API_LEVEL`
 
-If these variables aren't set, they must be provided interactively in the script prompt. Successful configuration should yield entries similar to the following in the `.tf_configure.bazelrc` file in the root folder:
+これらの変数が設定されていない場合は、スクリプトのプロンプトでインタラクティブに提供する必要があります。構成が正しく完了する、ルートフォルダ内の `.tf_configure.bazelrc` ファイルに以下に類似したエントリが生成されます。
 
 ```shell
 build --action_env ANDROID_NDK_HOME="/usr/local/android/android-ndk-r19c"
@@ -104,7 +104,7 @@ bazel build -c opt --fat_apk_cpu=x86,x86_64,arm64-v8a,armeabi-v7a \
 
 これにより、`bazel-bin/tensorflow/lite/java/` に AAR ファイルが生成されます。これは、複数の異なるアーキテクチャの「大きな」AAR を構築するので注意してください。その全部が必要ではない場合は、デプロイ環境に適切なサブセットを使用します。
 
-You can build smaller AAR files targeting only a set of models as follows:
+以下のようにすると、1 つのモデルセットのみをターゲットするより小型の AAR ファイルを構築できます。
 
 ```sh
 bash tensorflow/lite/tools/build_aar.sh \
