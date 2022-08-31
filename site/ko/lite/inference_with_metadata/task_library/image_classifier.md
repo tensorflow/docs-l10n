@@ -6,17 +6,17 @@
 
 ## ImageClassifier API의 주요 기능
 
-- Input image processing, including rotation, resizing, and color space conversion.
+- 회전, 크기 조정 및 색 공간 변환을 포함한 입력 이미지 처리
 
 - 입력 이미지의 관심 영역
 
-- Label map locale.
+- 레이블 맵 로케일
 
-- Score threshold to filter results.
+- 결과를 필터링하기 위한 스코어 임계값
 
 - Top-k 분류 결과
 
-- Label allowlist and denylist.
+- 레이블 허용 목록 및 거부 목록
 
 ## 지원되는 이미지 분류자 모델
 
@@ -28,15 +28,15 @@
 
 - [AutoML Vision Edge 이미지 분류](https://cloud.google.com/vision/automl/docs/edge-quickstart)로 만들어진 모델
 
-- Custom models that meet the [model compatibility requirements](#model-compatibility-requirements).
+- [모델 호환성 요구 사항](#model-compatibility-requirements)을 충족하는 사용자 정의 모델
 
-## Run inference in Java
+## Java에서 추론 실행하기
 
 Android 앱에서 `ImageClassifier`를 사용하는 방법의 예는 [이미지 분류 참조 앱](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/android/EXPLORE_THE_CODE.md)을 참조하세요.
 
-### Step 1: Import Gradle dependency and other settings
+### 1단계: Gradle 종속성 및 기타 설정 가져오기
 
-Copy the `.tflite` model file to the assets directory of the Android module where the model will be run. Specify that the file should not be compressed, and add the TensorFlow Lite library to the module’s `build.gradle` file:
+`.tflite` 모델 파일을 모델이 실행될 Android 모듈의 assets 디렉토리에 복사합니다. 파일을 압축하지 않도록 지정하고 TensorFlow Lite 라이브러리를 모듈의 `build.gradle` 파일에 추가합니다.
 
 ```java
 android {
@@ -58,7 +58,7 @@ dependencies {
 }
 ```
 
-### Step 2: Using the model
+### 2단계: 모델 사용하기
 
 ```java
 // Initialization
@@ -188,7 +188,7 @@ classification_result = classifier.classify(image)
 
 <code>ImageClassifier</code> 구성에 대한 추가 옵션은 <a>소스 코드</a>를 참조하세요.
 
-## Run inference in C++
+## C++에서 추론 실행하기
 
 ```c++
 // Initialization
@@ -208,7 +208,7 @@ const ClassificationResult result = image_classifier->Classify(*frame_buffer).va
 
 `ImageClassifier` 구성에 대한 추가 옵션은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/vision/image_classifier.h)를 참조하세요.
 
-## Example results
+## 예제 결과
 
 다음은 [새 분류자](https://tfhub.dev/google/lite-model/aiy/vision/classifier/birds_V1/3)의 분류 결과를 보여주는 예입니다.
 
@@ -235,18 +235,18 @@ Results:
 
 자체 모델 및 테스트 데이터로 [ImageClassifier를 위한 간단한 CLI 데모 도구](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop#image-classifier)를 사용해 보세요.
 
-## Model compatibility requirements
+## 모델 호환성 요구 사항
 
 `ImageClassifier` API는 필수 [TFLite 모델 메타데이터](../../models/convert/metadata)가 있는 TFLite 모델을 예상합니다. [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#image_classifiers)를 사용하여 이미지 분류자에 대한 메타데이터를 생성하는 예를 참조하세요.
 
 호환되는 이미지 분류자 모델은 다음 요구 사항을 충족해야 합니다.
 
-- Input image tensor (kTfLiteUInt8/kTfLiteFloat32)
+- 입력 이미지 텐서(kTfLiteUInt8/kTfLiteFloat32)
 
-    - image input of size `[batch x height x width x channels]`.
-    - batch inference is not supported (`batch` is required to be 1).
-    - only RGB inputs are supported (`channels` is required to be 3).
-    - if type is kTfLiteFloat32, NormalizationOptions are required to be attached to the metadata for input normalization.
+    - 이미지 입력 크기는 `[batch x height x width x channels]`입니다.
+    - 배치 추론은 지원되지 않습니다(`batch`는 1이어야 함).
+    - RGB 입력만 지원됩니다(`channels`은 3이어야 함).
+    - 유형이 kTfLiteFloat32인 경우, 입력 정규화를 위해 NormalizationOptions를 메타데이터에 첨부해야 합니다.
 
 - 출력 점수 텐서(kTfLiteUInt8/kTfLiteFloat32)
 
