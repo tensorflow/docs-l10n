@@ -1,8 +1,8 @@
 # セグメンテーション
 
-Image segmentation is the process of partitioning a digital image into multiple segments (sets of pixels, also known as image objects). The goal of segmentation is to simplify and/or change the representation of an image into something that is more meaningful and easier to analyze.
+画像セグメンテーションは、デジタル画像を複数のセグメント (ピクセル (画像オブジェクト) の集合) に分割するプロセスです。セグメンテーションの目的は、画像の表示を簡素化したり、より有意義で分析しやすい形態に変更したりすることです。
 
-TensorFlow Lite を初めて使用する場合、Android または iOS を使用する場合は、以下のサンプルアプリをご覧ください。
+次の画像は、Android での画像セグメンテーションの出力を示します。モデルは、高い精度で、対象オブジェクトにマスクを作成します。
 
 
 <img src="../images/segmentation.png" class="attempt-right">
@@ -13,13 +13,13 @@ TensorFlow Lite を初めて使用する場合、Android または iOS を使用
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/ios">iOS example</a>
 
-You can leverage the out-of-box API from [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/image_segmenter) to integrate image segmentation models within just a few lines of code. You can also integrate the model using the [TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java).
+[TensorFlow Lite Task Library](../../inference_with_metadata/task_library/image_segmenter) のそのまま簡単に使用できる API を利用して、わずか数行のコードで画像セグメンテーションモデルを統合できます。また、[TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java) を使用して、モデルを統合することもできます。
 
 以下の Android の例では、両方のメソッドをそれぞれ [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android/lib_task_api) および [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android/lib_interpreter) として実装しています。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/android">Android の例を見る</a>
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/ios">View iOS example</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation/ios">iOS の例を見る</a>
 
 Android 以外のプラットフォームを使用する場合、または、すでに <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite API</a> に精通している場合は、画像セグメンテーション スターターモデルをダウンロードしてください。
 
@@ -57,9 +57,8 @@ Android 以外のプラットフォームを使用する場合、または、す
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">
-      <a href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">Deeplab v3</a>
-    </td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">Deeplab v3</a>
+</td>
     <td rowspan="3">       2.7 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>16ms</td>
@@ -81,10 +80,10 @@ Android 以外のプラットフォームを使用する場合、または、す
 
 ** 最高のパフォーマンス結果を得るために、iPhone では 2 つのスレッドを使用。
 
-## Further reading and resources
+## その他の資料とリソース
 
 <ul>
-  <li><a href="https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html">Semantic Image Segmentation with DeepLab in TensorFlow</a></li>
-  <li><a href="https://medium.com/tensorflow/tensorflow-lite-now-faster-with-mobile-gpus-developer-preview-e15797e6dee7">TensorFlow Lite Now Faster with Mobile GPUs (Developer Preview)</a></li>
-  <li><a href="https://github.com/tensorflow/models/tree/master/research/deeplab">DeepLab: Deep Labelling for Semantic Image Segmentation</a></li>
+  <li><a href="https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html">TensorFlow で DeepLab を使用したセマンティック画像セグメンテーション</a></li>
+  <li><a href="https://medium.com/tensorflow/tensorflow-lite-now-faster-with-mobile-gpus-developer-preview-e15797e6dee7">TensorFlow Lite が Mobile GPU で高速化 (開発者プレビュー)</a></li>
+  <li><a href="https://github.com/tensorflow/models/tree/master/research/deeplab">DeepLab: セマンティック画像セグメンテーションのディープラベリング</a></li>
 </ul>
