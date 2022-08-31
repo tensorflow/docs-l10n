@@ -40,14 +40,10 @@ TFF の抽象構文木（AST）は、連合コンピュテーションの構造�
 
 [tensorflow_computation_transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/tensorflow_computation_transformations.py) モジュールには、アトミック [TensorFlow computation](#tensorflow-computation) 変換が含まれます。
 
-[compiled_computation_transforms](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/compiled_computation_transforms.py) モジュールには、アトミックと複合の [Compiled Computation](#compiled-computation) 変換が含まれます。
+[compiled_computation_transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/compiled_computation_transformations.py) モジュールには、アトミックと複合の [Compiled Computation](#compiled-computation) 変換が含まれます。
 
 [transformation_utils](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/transformation_utils.py) モジュールには、他の変換モジュールが使用する関数、トラバーサルロジック、およびデータ構造が含まれます。
 
 ## コンパイラ
 
 コンパイラは、実行可能な形態を構築する[変換](#transformation)のコレクションです。
-
-### `CompilerPipeline`
-
-[compiler_pipeline.CompilerPipeline](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/compiler_pipeline.py) は、[AST](#ast) をコンパイルしてコンパイルされたものをキャッシュするデータ構造です。AST のコンパイルパフォーマンスは、コンパイル関数の複雑さに依存し、`CompilerPipeline` によって、同じ AST を何度もコンパイルしてもシステムのパフォーマンスに影響がないように保証されています。
