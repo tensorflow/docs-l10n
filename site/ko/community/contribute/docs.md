@@ -11,11 +11,11 @@ TensorFlow는 문서 기여를 환영합니다. 문서를 개선하면 TensorFlo
 TensorFlow 문서 커뮤니티에 참여하려면 다음과 같이 합니다.
 
 - [tensorflow / docs](https://github.com/tensorflow/docs) GitHub 저장소를 확인하세요.
-- Follow the [docs](https://discuss.tensorflow.org/tag/docs) tag on the [TensorFlow Forum](https://discuss.tensorflow.org/).
+- [TensorFlow 포럼](https://discuss.tensorflow.org/)에서 [설명서](https://discuss.tensorflow.org/tag/docs) 태그를 따라가세요.
 
 ## API 참조
 
-For details, use the [TensorFlow API docs contributor guide](docs_ref.md). This shows you how to find the [source file](https://www.tensorflow.org/code/tensorflow/python/) and edit the symbol's <a href="https://www.python.org/dev/peps/pep-0257/" class="external">docstring</a>. Many API reference pages on tensorflow.org include a link to the source file where the symbol is defined. Docstrings support <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown</a> and can be (approximately) previewed using any <a href="http://tmpvar.com/markdown.html" class="external">Markdown previewer</a>.
+자세한 내용은 [TensorFlow API 설명서 기여자 가이드](docs_ref.md)를 참조하세요. [소스 파일](https://www.tensorflow.org/code/tensorflow/python/)을 찾고 심볼의 <a href="https://www.python.org/dev/peps/pep-0257/" class="external">독스트링</a>을 편집하는 방법을 보여줍니다. ​tensorflow.org의 많은 API 참조 페이지에는 기호가 정의 된 소스 파일에 대한 링크가 포함되어 있습니다. 독스트링은 <a href="https://help.github.com/en/articles/about-writing-and-formatting-on-github" class="external">Markdown</a>을 지원하며 <a href="http://tmpvar.com/markdown.html" class="external">Markdown 미리 보기</a> 프로그램을 사용하여 (대략적으로) 미리 볼 수 있습니다.
 
 ### 버전과 분기
 
