@@ -25,6 +25,18 @@ wll be replaced by `_replication_info="cluster"` and  `_xla_compile_device_type=
 ```mlir
 %control = tf_executor.island wraps "tf.TPUReplicateMetadata"() {_replication_info = "cluster", _xla_compile_device_type = "TPU", allow_soft_placement = false, computation_shape = [], device = "", device_assignment = [], host_compute_core = [], name = "TPUReplicateMetadata", num_cores_per_replica = 1 : i64, num_replicas = 1 : i64, step_marker_location = "STEP_MARK_AT_ENTRY", topology = "", use_spmd_for_xla_partitioning = false, use_tpu = true} : () -> ()
 ```
+
+`_XlaMustCompile=true` in the following code
+
+```mlir
+%outputs_67, %control_68 = tf_executor.island wraps "tf.PartitionedCall"(%arg0, %outputs_0) {_XlaMustCompile = true, _collective_manager_ids = [], _read_only_resource_inputs = [], config = "", config_proto = "\0A\07\0A\03CPU\10\01\0A\07\0A\03GPU\10\00\0A\07\0A\03TPU\10\02\0A\0E\0A\0ATPU_SYSTEM\10\012\02J\008\01\82\01\05h\01\88\01\01", device = "", executor_type = "", f = @__inference__jit_compiled_convolution_op_1510} : (tensor<4x32x32x8xf32>, tensor<*xf32>) -> tensor<*xf32>
+```
+
+will be replaced by `_xla_compile_device_type`, with its value set to the value of `device`.
+
+```mlir
+%outputs_67, %control_68 = tf_executor.island wraps "tf.PartitionedCall"(%arg0, %outputs_0) {_collective_manager_ids = [], _read_only_resource_inputs = [], _xla_compile_device_type = "", config = "", config_proto = "\0A\07\0A\03CPU\10\01\0A\07\0A\03GPU\10\00\0A\07\0A\03TPU\10\02\0A\0E\0A\0ATPU_SYSTEM\10\012\02J\008\01\82\01\05h\01\88\01\01", device = "", executor_type = "", f = @__inference__jit_compiled_convolution_op_1510} : (tensor<4x32x32x8xf32>, tensor<*xf32>) -> tensor<*xf32>
+```
 ### `-tf-convert-to-legacy-compile-and-replicate-attributes`: Convert unified compilation and replication attributes back to legacy attributes.
 This transformation pass converts unified compilation and replication
 attributes (`_replication_info` and `_xla_compile_device_type`) into legacy
@@ -248,6 +260,54 @@ refine operand/result shapes of these ops. This is only safe to do when
 compiling to XLA.
 ### `-tf-einsum`: Transform Einsum to other TF Ops for the supported variants
 ### `-tf-executor-break-up-islands`: Transform from TF control dialect to TF executor dialect.
+### `-tf-executor-check-control-dependencies`: Checks control dependencies
+This pass analyzes control dependencies between islands and warns about
+dependencies that are not explainable by side effects of the involved ops.
+More precisely, for every minimal unexplainable control dependency path
+we emit op warnings for all involved ops. The pass does not report
+intermediate dummy ops for grouping control dependencies (Identity, NoOp),
+unless they are part of an unexplainable path between other ops.
+This pass is useful to understand control dependency conservatism for a
+given MLIR module.
+
+For example, the following function
+```mlir
+func.func @path_with_intermediate_ops(
+  %arg0: tensor<!tf_type.resource<tensor<f32>>>,
+  %arg1: tensor<!tf_type.resource<tensor<f32>>>,
+  %arg2: tensor<f32>) -> () {
+  tf_executor.graph {
+    %island1 = tf_executor.island wraps "tf.AssignVariableOp"(%arg0, %arg2) : (tensor<!tf_type.resource<tensor<f32>>>, tensor<f32>) -> ()
+    %island2 = tf_executor.island(%island1) wraps "tf.NoOp"() : () -> ()
+    %island3 = tf_executor.island(%island2) wraps "tf.NoOp"() : () -> ()
+    %island4 = tf_executor.island(%island3) wraps "tf.AssignVariableOp"(%arg1, %arg2) : (tensor<!tf_type.resource<tensor<f32>>>, tensor<f32>) -> ()
+    tf_executor.fetch
+  }
+  func.return
+}
+```
+produces the following warnings
+```mlir
+  6:45: warning: unexpected control dependency path: path 0, node 0 (source)
+  %island1 = tf_executor.island wraps "tf.AssignVariableOp"(%arg0, %arg2) : (tensor<!tf_type.resource<tensor<f32>>>, tensor<f32>) -> ()
+                                      ^
+  6:45: note: see current operation: %control = tf_executor.island wraps "tf.AssignVariableOp"(%arg0, %arg2) : (tensor<!tf_type.resource<tensor<f32>>>, tensor<f32>) -> ()
+  7:55: warning: unexpected control dependency path: path 0, node 1 (intermediate)
+  %island2 = tf_executor.island(%island1) wraps "tf.NoOp"() : () -> ()
+                                                ^
+  7:55: note: see current operation: %control_0 = tf_executor.island(%control) wraps "tf.NoOp"() : () -> ()
+  8:55: warning: unexpected control dependency path: path 0, node 2 (intermediate)
+  %island3 = tf_executor.island(%island2) wraps "tf.NoOp"() : () -> ()
+                                                ^
+  8:55: note: see current operation: %control_1 = tf_executor.island(%control_0) wraps "tf.NoOp"() : () -> ()
+  9:55: warning: unexpected control dependency path: path 0, node 3 (target)
+  %island4 = tf_executor.island(%island3) wraps "tf.AssignVariableOp"(%arg1, %arg2) : (tensor<!tf_type.resource<tensor<f32>>>, tensor<f32>) -> ()
+                                                ^
+  9:55: note: see current operation: %control_2 = tf_executor.island(%control_1) wraps "tf.AssignVariableOp"(%arg1, %arg2) : (tensor<!tf_type.resource<tensor<f32>>>, tensor<f32>) -> ()
+```
+because the first and last `AssignVariableOp`s access different resources
+and therefore should be independent. Note that the `NoOp`s are considered
+as intermediate ops for control dependency grouping.
 ### `-tf-executor-convert-control-to-data-outputs`: Chain control outputs of while loop body
 This pass converts the control outputs of a while loop body function to data
 outputs. Thus, inter iteration control dependencies are transformed to
