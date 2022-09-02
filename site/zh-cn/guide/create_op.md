@@ -276,7 +276,7 @@ $ python
 ```bash
 TF_CFLAGS=( $(python -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_compile_flags()))') )
 TF_LFLAGS=( $(python -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_link_flags()))') )
-g++ -std=c++11 -shared zero_out.cc -o zero_out.so -fPIC ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} -O2
+g++ -std=c++14 -shared zero_out.cc -o zero_out.so -fPIC ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} -O2
 ```
 
 在 macOS 上，构建 `.so` 文件时需要添加附加标志 "-undefined dynamic_lookup"。
@@ -377,17 +377,17 @@ $ python zero_out_op_test.py
 
 现在，您已经知道如何构建一个基本（并受到一些限制的）运算和实现，我们来看看您通常需要构建到运算中的一些更复杂内容。这些包括：
 
-- [条件检查和验证](#conditional-checks-and-validation)
-- [运算注册](#op-registration)
-    - [特性](#attrs)
-    - [特性类型](#attr-types)
-    - [多态性](#polymorphism)
-    - [输入和输出](#inputs-and-outputs)
-    - [向后兼容性](#backwards-compatibility)
-- [GPU 支持](#gpu-support)
-    - [编译 GPU 设备的内核](#compiling-the-kernel-for-the-gpu-device)
-- [在 Python 中实现梯度](#implement-the-gradient-in-python)
-- [C++ 中的形状函数](#shape-functions-in-c)
+- [Conditional checks and validation](#conditional-checks-and-validation)
+- [Op registration](#op-registration)
+    - [Attrs](#attrs)
+    - [Attr types](#attr-types)
+    - [Polymorphism](#polymorphism)
+    - [Inputs and outputs](#inputs-and-outputs)
+    - [Backwards compatibility](#backwards-compatibility)
+- [GPU support](#gpu-support)
+    - [Compiling the kernel for the GPU device](#compiling-the-kernel-for-the-gpu-device)
+- [Implement the gradient in Python](#implement-the-gradient-in-python)
+- [Shape functions in C++](#shape-functions-in-c)
 
 ### 条件检查和验证
 
@@ -404,13 +404,13 @@ $ python zero_out_op_test.py
   }
 ```
 
-上述代码会声明输入是一个向量，如果不是，返回将设置 `InvalidArgument` 状态。[`OP_REQUIRES` 宏](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h)采用三个参数：
+This asserts that the input is a vector, and returns having set the `InvalidArgument` status if it isn't.  The [`OP_REQUIRES` macro](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h) takes three arguments:
 
 - `context`，可以是其 `SetStatus()` 方法的 `OpKernelContext` 或 `OpKernelConstruction` 指针（请参阅 [`tensorflow/core/framework/op_kernel.h`](https://www.tensorflow.org/code/tensorflow/core/framework/op_kernel.h)）。
 - 条件。例如，[`tensorflow/core/framework/tensor_shape.h`](https://www.tensorflow.org/code/tensorflow/core/framework/tensor_shape.h) 中存在用于验证张量形状的函数。
-- 错误本身，由 `Status` 对象表示，请参阅 [`tensorflow/core/lib/core/status.h`](https://www.tensorflow.org/code/tensorflow/core/lib/core/status.h)。`Status` 包含类型（通常为 `InvalidArgument`，但具体请参见类型列表）和消息。可以在 [`tensorflow/core/lib/core/errors.h`](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h) 中找到用于构造错误的函数。
+- The error itself, which is represented by a `Status` object, see [`tensorflow/core/platform/status.h`](https://www.tensorflow.org/code/tensorflow/core/platform/status.h). A `Status` has both a type (frequently `InvalidArgument`, but see the list of types) and a message.  Functions for constructing an error may be found in [`tensorflow/core/platform/errors.h`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h).
 
-或者，如果您要测试从某个函数返回的 `Status` 对象是否为错误，请使用 [`OP_REQUIRES_OK`](https://www.tensorflow.org/code/tensorflow/core/lib/core/errors.h)（如果是，则返回错误）。这两个宏都会在出错时从函数返回。
+Alternatively, if you want to test whether a `Status` object returned from some function is an error, and if so return it, use [`OP_REQUIRES_OK`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h).  Both of these macros return from the function on error.
 
 ### 运算注册
 
@@ -1023,10 +1023,10 @@ REGISTER_OP("MultipleInsAndOuts")
 要了解使用 CUDA 内核实现运算的示例，请参阅 [cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc)。`tf_custom_op_library` 会接受 `gpu_srcs` 参数，可以在其中指定包含 CUDA 内核的源文件（`*.cu.cc` 文件）列表。要与 TensorFlow 的二进制文件安装一起使用，必须使用 NVIDIA 的 `nvcc` 编译器编译 CUDA 内核。您可以使用以下命令序列将 [cuda_op_kernel.cu.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cu.cc) 和 [cuda_op_kernel.cc](https://www.tensorflow.org/code/tensorflow/examples/adding_an_op/cuda_op_kernel.cc) 编译成一个可动态加载的库：
 
 ```bash
-nvcc -std=c++11 -c -o cuda_op_kernel.cu.o cuda_op_kernel.cu.cc \
+nvcc -std=c++14 -c -o cuda_op_kernel.cu.o cuda_op_kernel.cu.cc \
   ${TF_CFLAGS[@]} -D GOOGLE_CUDA=1 -x cu -Xcompiler -fPIC
 
-g++ -std=c++11 -shared -o cuda_op_kernel.so cuda_op_kernel.cc \
+g++ -std=c++14 -shared -o cuda_op_kernel.so cuda_op_kernel.cc \
   cuda_op_kernel.cu.o ${TF_CFLAGS[@]} -fPIC -lcudart ${TF_LFLAGS[@]}
 ```
 
@@ -1040,7 +1040,7 @@ g++ -std=c++11 -shared -o cuda_op_kernel.so cuda_op_kernel.cc \
 
 给定运算的计算图后，TensorFlow 会使用自动微分（反向传播）添加表示相对于现有运算的梯度的新运算。要使自动微分对新运算生效，您必须注册一个梯度函数，在给定相对于运算输出的梯度时，计算相对于运算输入的梯度。
 
-在数学上，如果运算计算 \(y = f(x)\)，注册的梯度运算会通过链式法则将相对于 \(y\) 的损失 \(L\) 的梯度 \(\partial L/ \partial y\) 转换为相对于 \(x\) 的梯度 \(\partial L/ \partial x\)：
+在数学上，如果运算计算 (y = f(x))，注册的梯度运算会通过链式法则将相对于 (y) 的损失 (L) 的梯度 (\partial L/ \partial y) 转换为相对于 (x) 的梯度 (\partial L/ \partial x)：
 
 $$\frac{\partial L}{\partial x} = \frac{\partial L}{\partial y} \frac{\partial y}{\partial x} = \frac{\partial L}{\partial y} \frac{\partial f}{\partial x}.$$
 
