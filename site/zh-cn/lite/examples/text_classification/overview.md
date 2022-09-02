@@ -27,9 +27,9 @@
 
 下面是使用该模型对段落进行分类的步骤：
 
-1. 对段落进行分词，并使用预定义词汇表将其转换为一个单词 ID 列表。
+1. Tokenize the paragraph and convert it to a list of word ids using a predefined vocabulary.
 2. 将该列表馈送到 TensorFlow Lite 模型。
-3. 从模型输出获取该段落为正面或负面评价的概率。
+3. Get the probability of the paragraph being positive or negative from the model outputs.
 
 ### 说明
 
@@ -51,7 +51,7 @@
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification.tflite">文本分类</a></td>
-    <td rowspan="3">       0.6 Mb</td>
+    <td rowspan="3">       0.6 Mb     </td>
     <td>Pixel 3 (Android 10)</td>
     <td>0.05ms*</td>
   </tr>
@@ -65,7 +65,7 @@
   </tr>
 </table>
 
-* 使用 4 个线程。
+使用 4 个线程。
 
 ** 为了获得最佳性能结果，在 iPhone 上使用 2 个线程。
 
@@ -79,7 +79,7 @@ What a waste of my time. | 72.5% | 27.5%
 
 ## 使用训练数据集
 
-使用您自己的数据集，按照本[教程](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)运用本文使用的相同技术训练文本分类模型。利用正确的数据集，您可以为文档分类或负面评论检测等用例创建模型。
+Follow this [tutorial](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) to apply the same technique used here to train a text classification model using your own datasets. With the right dataset, you can create a model for use cases such as document categorization or toxic comments detection.
 
 ## 详细了解文本分类
 
