@@ -42,9 +42,9 @@ feature {
 - TensorFlow Transform
 - TensorFlow Model Analysis
 
-在典型的 TFX 流水线中，SchemaGen 会生成一个将由其他流水线组件使用的架构。
+在典型的 TFX 流水线中，SchemaGen 会生成一个架构，供其他流水线组件使用。但是，自动生成的架构为最大努力，并且仅尝试推断数据的基本属性。开发者应根据需要对其进行审阅和修改。
 
-注：自动生成的架构是一种尽力而为的架构，仅会尝试推断数据的基本属性。开发者应根据需要对其进行检查和修改。
+可以使用 ImportSchemaGen 组件将修改后的架构带回流水线中。可以移除用于初始架构生成的 SchemaGen 组件，并且所有下游组件都可以使用 ImportSchemaGen 的输出。还建议使用导入的架构添加 [ExampleValidator](https://www.tensorflow.org/tfx/guide/exampleval) 以连续检查训练数据。
 
 ## SchemaGen 和 TensorFlow Data Validation
 
@@ -52,13 +52,26 @@ SchemaGen 广泛使用 [TensorFlow Data Validation](tfdv.md) 来推断架构。
 
 ## 使用 SchemaGen 组件
 
+### 用于初始架构生成
+
 SchemaGen 流水线组件通常非常易于部署，而且几乎不需要自定义。典型代码如下所示：
 
 ```python
-from tfx import components
-
-...
-
-infer_schema = components.SchemaGen(
-    statistics=compute_training_stats.outputs['statistics'])
+schema_gen = tfx.components.SchemaGen(
+    statistics=stats_gen.outputs['statistics'])
 ```
+
+有关更多详细信息，请参阅 [SchemaGen API 参考](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/SchemaGen)。
+
+### 用于已审阅的架构导入
+
+将 ImportSchemaGen 组件添加到流水线，以将已审阅的架构定义带入流水线。
+
+```python
+schema_gen = tfx.components.ImportSchemaGen(
+    schema_file='/some/path/schema.pbtxt')
+```
+
+`schema_file` 应该是文本 protobuf 文件的完整路径。
+
+有关更多详细信息，请参阅 [ImportSchemaGen API 参考](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/ImportSchemaGen)。
