@@ -7,20 +7,20 @@
 
 ## eze_goes_to_school
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:igbo_monolingual/eze_goes_to_school')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset is a collection of Monolingual Igbo sentences.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -63,20 +63,20 @@ A dataset is a collection of Monolingual Igbo sentences.
 
 ## bbc-igbo
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:igbo_monolingual/bbc-igbo')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset is a collection of Monolingual Igbo sentences.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -132,20 +132,20 @@ A dataset is a collection of Monolingual Igbo sentences.
 
 ## igbo-radio
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:igbo_monolingual/igbo-radio')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset is a collection of Monolingual Igbo sentences.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -191,20 +191,20 @@ A dataset is a collection of Monolingual Igbo sentences.
 
 ## jw-ot-igbo
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:igbo_monolingual/jw-ot-igbo')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset is a collection of Monolingual Igbo sentences.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -247,20 +247,20 @@ A dataset is a collection of Monolingual Igbo sentences.
 
 ## jw-nt-igbo
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:igbo_monolingual/jw-nt-igbo')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset is a collection of Monolingual Igbo sentences.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -303,20 +303,20 @@ A dataset is a collection of Monolingual Igbo sentences.
 
 ## jw-books
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:igbo_monolingual/jw-books')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset is a collection of Monolingual Igbo sentences.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -352,20 +352,20 @@ A dataset is a collection of Monolingual Igbo sentences.
 
 ## jw-teta
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:igbo_monolingual/jw-teta')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset is a collection of Monolingual Igbo sentences.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -401,20 +401,20 @@ A dataset is a collection of Monolingual Igbo sentences.
 
 ## jw-ulo_nche
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:igbo_monolingual/jw-ulo_nche')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset is a collection of Monolingual Igbo sentences.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -450,20 +450,20 @@ A dataset is a collection of Monolingual Igbo sentences.
 
 ## jw-ulo_nche_naamu
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:igbo_monolingual/jw-ulo_nche_naamu')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A dataset is a collection of Monolingual Igbo sentences.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
