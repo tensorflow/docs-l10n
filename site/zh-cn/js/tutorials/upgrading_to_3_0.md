@@ -146,4 +146,4 @@ import @tensorflow/tfjs-core
 
 #### 选择后端
 
-In TensorFlow.js 2.0 we removed the cpu and webgl backends into their own packages. See [@tensorflow/tfjs-backend-cpu](https://www.npmjs.com/package/@tensorflow/tfjs-backend-cpu), [@tensorflow/tfjs-backend-webgl](https://www.npmjs.com/package/@tensorflow/tfjs-backend-webgl), [@tensorflow/tfjs-backend-wasm](https://www.npmjs.com/package/@tensorflow/tfjs-backend-wasm), [@tensorflow/tfjs-backend-webgpu](https://www.npmjs.com/package/@tensorflow/tfjs-backend-webgpu) for instructions on how to include those backends.
+在 TensorFlow.js 2.0 中，我们将 cpu 和 webgl 后端移到它们自己的软件包中。有关如何包含这些后端的说明，请参阅 [@tensorflow/tfjs-backend-cpu](https://www.npmjs.com/package/@tensorflow/tfjs-backend-cpu)、[@tensorflow/tfjs-backend-webgl](https://www.npmjs.com/package/@tensorflow/tfjs-backend-webgl)、[@tensorflow/tfjs-backend-wasm](https://www.npmjs.com/package/@tensorflow/tfjs-backend-wasm)、[@tensorflow/tfjs-backend-webgpu](https://www.npmjs.com/package/@tensorflow/tfjs-backend-webgpu)。
