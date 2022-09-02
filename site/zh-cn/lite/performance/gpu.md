@@ -105,7 +105,7 @@ pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['Metal']
 
 然后，点击 `Options` 标签页并将 `GPU Frame Capture` 更改为 `Disabled`，将 `Metal API Validation` 更改为 `Disabled`。
 
-![设置发布](https://gitlocalize.com/repo/4592/zh-cn/site/en-snapshot/lite/performance/images/iosrelease.png)
+![设置发布](images/iosmetal.png)
 
 最后，确保在 64 位架构上选择仅发布构建。在 `Project navigator -> tflite_camera_example -> PROJECT -> tflite_camera_example -> Build Settings` 下，将 `Build Active Architecture Only > Release` 设置为 Yes。
 
