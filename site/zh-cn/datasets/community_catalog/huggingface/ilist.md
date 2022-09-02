@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/ilist)
 - [Huggingface](https://huggingface.co/datasets/ilist)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:ilist')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset is introduced in a task which aimed at identifying 5 closely-related languages of Indo-Aryan language family –
@@ -19,7 +19,7 @@ Hindi (also known as Khari Boli), Braj Bhasha, Awadhi, Bhojpuri, and Magahi.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
