@@ -7,20 +7,20 @@
 
 ## english
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hope_edi/english')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A Hope Speech dataset for Equality, Diversity and Inclusion (HopeEDI) containing user-generated comments from the social media platform YouTube with 28,451, 20,198 and 10,705 comments in English, Tamil and Malayalam, respectively, manually labelled as containing hope speech or not.
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International Licence
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -53,20 +53,20 @@ A Hope Speech dataset for Equality, Diversity and Inclusion (HopeEDI) containing
 
 ## tamil
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hope_edi/tamil')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A Hope Speech dataset for Equality, Diversity and Inclusion (HopeEDI) containing user-generated comments from the social media platform YouTube with 28,451, 20,198 and 10,705 comments in English, Tamil and Malayalam, respectively, manually labelled as containing hope speech or not.
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International Licence
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -99,20 +99,20 @@ A Hope Speech dataset for Equality, Diversity and Inclusion (HopeEDI) containing
 
 ## malayalam
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hope_edi/malayalam')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A Hope Speech dataset for Equality, Diversity and Inclusion (HopeEDI) containing user-generated comments from the social media platform YouTube with 28,451, 20,198 and 10,705 comments in English, Tamil and Malayalam, respectively, manually labelled as containing hope speech or not.
 ```
 
 - **许可**：Creative Commons Attribution 4.0 International Licence
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
