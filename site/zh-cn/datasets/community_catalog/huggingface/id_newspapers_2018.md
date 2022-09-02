@@ -7,13 +7,13 @@
 
 ## id_newspapers_2018
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:id_newspapers_2018/id_newspapers_2018')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The dataset contains around 500K articles (136M of words) from 7 Indonesian newspapers: Detik, Kompas, Tempo,
@@ -25,7 +25,7 @@ from the online news website
 ```
 
 - **许可**：Creative Commons Attribution-ShareAlike 4.0 International Public License
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
