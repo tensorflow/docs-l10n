@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/hlgd)
 - [Huggingface](https://huggingface.co/datasets/hlgd)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hlgd')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 HLGD is a binary classification dataset consisting of 20,056 labeled news headlines pairs indicating
@@ -19,7 +19,7 @@ whether the two headlines describe the same underlying world event or not.
 ```
 
 - **许可**：Apache-2.0 License
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
