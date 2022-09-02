@@ -1,10 +1,12 @@
 # 图像分类
 
+
 <img src="../images/image.png" class="attempt-right">
 
 识别图像所表示内容的任务称为*图像分类*。我们可以对图像分类模型进行训练以识别各类图像。例如，您可以训练模型来识别表示三种不同类型动物的照片：兔子、仓鼠和狗。TensorFlow Lite 提供经过优化的预训练模型，您可以将其部署在您的移动应用中。请点击[这里](https://www.tensorflow.org/tutorials/images/classification)了解有关使用 TensorFlow 进行图像分类的更多信息。
 
 下图展示了图像分类模型在 Android 上的输出。
+
 
 <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/lite/examples/image_classification/images/android_banana.png?raw=true" alt="Screenshot of Android example" class="">
 
@@ -124,8 +126,7 @@ TensorFlow Lite 图像分类模型对于单标签分类很有用；即，预测�
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a>
-</td>
+    <td rowspan="3">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a> </td>
     <td rowspan="3">       4.3 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>6ms</td>
