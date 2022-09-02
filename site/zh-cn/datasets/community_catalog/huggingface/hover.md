@@ -5,20 +5,20 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/hover)
 - [Huggingface](https://huggingface.co/datasets/hover)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hover')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 HoVer is an open-domain, many-hop fact extraction and claim verification dataset built upon the Wikipedia corpus. The original 2-hop claims are adapted from question-answer pairs from HotpotQA. It is collected by a team of NLP researchers at UNC Chapel Hill and Verisk Analytics.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
