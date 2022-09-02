@@ -110,7 +110,9 @@ const model = new tf.Sequential();  // !!! DON'T DO THIS !!!
 
 ```js
 // JavaScript:
-model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+const model = tf.sequential();
+
+const layer = tf.layers.batchNormalization({axis: 1});
 ```
 
 ## 选项字符串值为小驼峰式命名法，而不是蛇形命名法
@@ -124,11 +126,8 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 例如，如上例所示：
 
 ```js
-# Python:
-my_input = keras.Input(shape=[2, 4])
-flatten = keras.layers.Flatten()
-
-print(flatten(my_input).shape)
+// JavaScript:
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 ```
 
 对于模型序列化和反序列化，请放心。TensorFlow.js 的内部机制可以确保正确处理 JSON 对象中的蛇形命名法，例如，在从 Python Keras 加载预训练模型时。
@@ -160,8 +159,10 @@ console.log(flatten.apply(myInput).shape);
 目前，在 Keras 中，<strong>调用</strong>方法只能在 (Python) TensorFlow 的 `tf.Tensor` 对象上运行（假设 TensorFlow 是后端），这些对象是符号对象并且不包含实际数值。这就是上一部分中的示例所显示的内容。但是，在 TensorFlow.js 中，层的 `apply()` 方法可以在符号和命令模式下运行。如果使用 SymbolicTensor（类似于 tf.Tensor）调用 `apply()`，返回值将为 SymbolicTensor。这通常发生在模型构建期间。但是，如果使用实际的具体张量值调用 `apply()`，将返回一个具体的张量。例如：
 
 ```js
-# Python:
-my_sgd = keras.optimizers.sgd(lr=0.2)
+// JavaScript:
+const flatten = tf.layers.flatten();
+
+flatten.apply(tf.ones([2, 3, 4])).print();
 ```
 
 这个特性让人联想到 (Python) TensorFlow 的 [Eager Execution](https://tensorflow.google.cn/guide/eager)。它在模型开发期间提供了更出色的交互性和可调试性，并且为构建动态神经网络打开了大门。
@@ -177,7 +178,7 @@ my_sgd = keras.optimizers.sgd(lr=0.2)
 
 ```js
 // JavaScript:
-const model = await tf.loadLayersModel('https://foo.bar/model.json');
+const mySGD = tf.train.sgd({lr: 0.2});
 ```
 
 ## loadLayersModel() 从网址而不是 HDF5 文件加载
