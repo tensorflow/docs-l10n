@@ -23,7 +23,7 @@
 
 1. 克隆 Git 仓库：
     <pre class="devsite-click-to-copy">    git clone https://github.com/android/camera-samples.git
-            </pre>
+                </pre>
 2. 将您的 Git 实例配置为使用稀疏签出，这样您就只有目标检测示例应用的文件：
     ```
     cd camera-samples
