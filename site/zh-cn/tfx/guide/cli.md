@@ -92,8 +92,9 @@ tfx &lt;var&gt;command-group&lt;/var&gt; &lt;var&gt;command&lt;/var&gt; &lt;var&
   <dd>（可选）使用 Kubeflow Pipelines 时受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+  <dt>--namespace=<var>namespace</var>
+</dt>
+<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
   <dt>--build_image</dt>
@@ -394,7 +395,7 @@ Vertex：
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
   <dt>--namespace=<var>namespace</var> </dt>
@@ -641,7 +642,7 @@ Kubeflow：
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
   <dt>--namespace=<var>namespace</var> </dt>
@@ -677,7 +678,7 @@ Kubeflow：
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -714,7 +715,7 @@ Kubeflow：
 
 
   <dt>--namespace=<var>namespace</var> </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
 
