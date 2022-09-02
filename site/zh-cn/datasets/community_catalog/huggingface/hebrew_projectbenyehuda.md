@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/hebrew_projectbenyehuda)
 - [Huggingface](https://huggingface.co/datasets/hebrew_projectbenyehuda)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hebrew_projectbenyehuda')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This repository contains a dump of thousands of public domain works in Hebrew, from Project Ben-Yehuda, in plaintext UTF-8 files, with and without diacritics (nikkud). The metadata (pseudocatalogue.csv) file is a list of titles, authors, genres, and file paths, to help you process the dump.
