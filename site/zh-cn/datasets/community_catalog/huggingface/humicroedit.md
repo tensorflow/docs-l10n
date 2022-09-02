@@ -7,20 +7,20 @@
 
 ## subtask-1
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:humicroedit/subtask-1')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This new dataset is designed to assess the funniness of edited news headlines.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -64,20 +64,20 @@ This new dataset is designed to assess the funniness of edited news headlines.
 
 ## subtask-2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:humicroedit/subtask-2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This new dataset is designed to assess the funniness of edited news headlines.
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
