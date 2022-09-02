@@ -46,7 +46,7 @@
   </thead>
   <tr>
     <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a> </td>
-    <td rowspan="3">       100.5 Mb</td>
+    <td rowspan="3">       100.5 Mb     </td>
     <td>Pixel 3 (Android 10)</td>
     <td>123ms*</td>
   </tr>
@@ -60,7 +60,7 @@
   </tr>
 </table>
 
-* 使用 4 个线程。
+使用 4 个线程。
 
 ** 为了获得最佳性能结果，在 iPhone 上使用 2 个线程。
 
