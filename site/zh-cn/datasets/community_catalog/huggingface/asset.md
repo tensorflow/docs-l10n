@@ -7,13 +7,13 @@
 
 ## simplification
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:asset/simplification')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 ASSET is a dataset for evaluating Sentence Simplification systems with multiple rewriting transformations,
@@ -23,7 +23,7 @@ The corpus also contains human judgments of meaning preservation, fluency and si
 ```
 
 - **许可**：Creative Common Attribution-NonCommercial 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -55,13 +55,13 @@ The corpus also contains human judgments of meaning preservation, fluency and si
 
 ## ratings
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:asset/ratings')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 ASSET is a dataset for evaluating Sentence Simplification systems with multiple rewriting transformations,
@@ -71,7 +71,7 @@ The corpus also contains human judgments of meaning preservation, fluency and si
 ```
 
 - **许可**：Creative Common Attribution-NonCommercial 4.0 International
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
