@@ -49,11 +49,9 @@ tfx &lt;var&gt;command-group&lt;/var&gt; &lt;var&gt;command&lt;/var&gt; &lt;var&
 </pre>
 
 <dl>
-  <dt>--pipeline_path=<var>pipeline-path</var>
-</dt>
+  <dt>--pipeline_path=<var>pipeline-path</var> </dt>
   <dd>流水线配置文件的路径。</dd>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
@@ -77,32 +75,25 @@ tfx &lt;var&gt;command-group&lt;/var&gt; &lt;var&gt;command&lt;/var&gt; &lt;var&
 ```
 
   
-  <dt>--engine=<var>engine</var>
-</dt>
+  <dt>--engine=<var>engine</var> </dt>
   <dd>
     <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
       <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
-      <li>
-<strong>local</strong>：将引擎设置为本地编排器</li>
-      <li>
-<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
-      <li>
-<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
-      <li>
-<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
+      <li> <strong>local</strong>：将引擎设置为本地编排器</li>
+      <li> <strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
+      <li> <strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
+      <li> <strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
     <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>（可选）使用 Kubeflow Pipelines 时受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
-<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值默认为 <code>kubeflow</code>。</dd>
+  <dt>--namespace=<var>namespace</var>   </dt>
+<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
 
 
   <dt>--build_image</dt>
@@ -110,8 +101,7 @@ tfx &lt;var&gt;command-group&lt;/var&gt; &lt;var&gt;command&lt;/var&gt; &lt;var&
     <p>（可选）当 <var>engine</var> 为 <strong>kubeflow</strong> 或 <strong>vertex</strong> 时，TFX 会为您的流水线创建容器镜像（如果已指定）。将使用当前目录下的 `Dockerfile`，如果不存在，则 TFX 会自动生成。</p>
     <p>构建的镜像将被推送到在 `KubeflowDagRunnerConfig` 或 `KubeflowV2DagRunnerConfig` 中指定的远程注册表。</p>
   </dd>
-  <dt>--build_base_image=<var>build-base-image</var>
-</dt>
+  <dt>--build_base_image=<var>build-base-image</var> </dt>
   <dd>
     <p>（可选）当 <var>engine</var> 为 <strong>kubeflow</strong> 时，TFX 会为您的流水线创建容器镜像。build-base-image 指定要在构建流水线容器镜像时使用的基础容器镜像。</p>
   </dd>
@@ -154,11 +144,9 @@ Vertex：
 </pre>
 
 <dl>
-  <dt>--pipeline_path=<var>pipeline-path</var>
-</dt>
+  <dt>--pipeline_path=<var>pipeline-path</var> </dt>
   <dd>流水线配置文件的路径。</dd>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
@@ -182,31 +170,24 @@ Vertex：
 ```
 
   
-  <dt>--engine=<var>engine</var>
-</dt>
+  <dt>--engine=<var>engine</var> </dt>
   <dd>
     <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
       <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
-      <li>
-<strong>local</strong>：将引擎设置为本地编排器</li>
-      <li>
-<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
-      <li>
-<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
-      <li>
-<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
+      <li> <strong>local</strong>：将引擎设置为本地编排器</li>
+      <li> <strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
+      <li> <strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
+      <li> <strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
     <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
+  <dt>--namespace=<var>namespace</var> </dt>
 <dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
   <dt>--build_image</dt>
   <dd>
@@ -253,23 +234,17 @@ Vertex：
 </pre>
 
 <dl>
-  <dt>--pipeline_path=<var>pipeline-path</var>
-</dt>
+  <dt>--pipeline_path=<var>pipeline-path</var> </dt>
   <dd>流水线配置文件的路径。</dd>
-  <dt>--engine=<var>engine</var>
-</dt>
+  <dt>--engine=<var>engine</var> </dt>
   <dd>
     <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
       <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
-      <li>
-<strong>local</strong>：将引擎设置为本地编排器</li>
-      <li>
-<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
-      <li>
-<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
-      <li>
-<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
+      <li> <strong>local</strong>：将引擎设置为本地编排器</li>
+      <li> <strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
+      <li> <strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
+      <li> <strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
     <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
@@ -304,11 +279,9 @@ Vertex：
 </pre>
 
 <dl>
-  <dt>--pipeline_path=<var>pipeline-path</var>
-</dt>
+  <dt>--pipeline_path=<var>pipeline-path</var> </dt>
   <dd>流水线配置文件的路径。</dd>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
@@ -332,31 +305,24 @@ Vertex：
 ```
 
   
-  <dt>--engine=<var>engine</var>
-</dt>
+  <dt>--engine=<var>engine</var> </dt>
   <dd>
     <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
       <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
-      <li>
-<strong>local</strong>：将引擎设置为本地编排器</li>
-      <li>
-<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
-      <li>
-<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
-      <li>
-<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
+      <li> <strong>local</strong>：将引擎设置为本地编排器</li>
+      <li> <strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
+      <li> <strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
+      <li> <strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
     <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
+  <dt>--namespace=<var>namespace</var> </dt>
 <dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
@@ -390,8 +356,7 @@ Vertex：
 </pre>
 
 <dl>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
@@ -415,31 +380,24 @@ Vertex：
 ```
 
   
-  <dt>--engine=<var>engine</var>
-</dt>
+  <dt>--engine=<var>engine</var> </dt>
   <dd>
     <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
       <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
-      <li>
-<strong>local</strong>：将引擎设置为本地编排器</li>
-      <li>
-<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
-      <li>
-<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
-      <li>
-<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
+      <li> <strong>local</strong>：将引擎设置为本地编排器</li>
+      <li> <strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
+      <li> <strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
+      <li> <strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
     <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
-  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
+  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
+  <dt>--namespace=<var>namespace</var> </dt>
 <dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
@@ -482,11 +440,9 @@ Vertex：
 </pre>
 
 <dl>
-  <dt>--pipeline_name=<var>pipeline-name</var>
-</dt>
+  <dt>--pipeline_name=<var>pipeline-name</var> </dt>
   <dd>流水线的名称。</dd>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
@@ -510,28 +466,22 @@ Vertex：
 ```
 
   
-  <dt>--engine=<var>engine</var>
-</dt>
+  <dt>--engine=<var>engine</var> </dt>
   <dd>
     <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
       <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
-      <li>
-<strong>local</strong>：将引擎设置为本地编排器</li>
-      <li>
-<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
-      <li>
-<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
-      <li>
-<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
+      <li> <strong>local</strong>：将引擎设置为本地编排器</li>
+      <li> <strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
+      <li> <strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
+      <li> <strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
     <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
 
 
-  <dt>--runtime_parameter=<var>parameter-name</var>=<var>parameter-value</var>
-</dt>
+  <dt>--runtime_parameter=<var>parameter-name</var>=<var>parameter-value</var> </dt>
   <dd>（可选）设置运行时参数值。可以多次设置来设置多个变量的值。仅适用于 `airflow`、`kubeflow` 和 `vertex` 引擎。</dd>
 
 
@@ -540,18 +490,15 @@ Vertex：
   <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
+  <dt>--namespace=<var>namespace</var> </dt>
   <dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
-  <dt>--project=<var>GCP-project-id</var>
-</dt>
+  <dt>--project=<var>GCP-project-id</var> </dt>
   <dd>（Vertex 必需）Vertex 流水线的 GCP 项目 ID。</dd>
 
 
-  <dt>--region=<var>GCP-region</var>
-</dt>
+  <dt>--region=<var>GCP-region</var> </dt>
   <dd>（Vertex 必需）GCP 区域名称，例如 us-central1。有关可用区域，请参阅 [Vertex 文档] (https://cloud.google.com/vertex-ai/docs/general/locations)。</dd>
 
 
@@ -591,11 +538,9 @@ Vertex：
 </pre>
 
 <dl>
-  <dt>--run_id=<var>run-id</var>
-</dt>
+  <dt>--run_id=<var>run-id</var> </dt>
   <dd>流水线运行的唯一标识符。</dd>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
@@ -619,8 +564,7 @@ Vertex：
 ```
 
   
-  <dt>--engine=<var>engine</var>
-</dt>
+  <dt>--engine=<var>engine</var> </dt>
   <dd>
     <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
@@ -629,13 +573,11 @@ Vertex：
     <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
+  <dt>--namespace=<var>namespace</var> </dt>
 <dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值默认为 <code>kubeflow</code>。</dd>
 
 
@@ -661,11 +603,9 @@ Kubeflow：
 </pre>
 
 <dl>
-  <dt>--pipeline_name=<var>pipeline-name</var>
-</dt>
+  <dt>--pipeline_name=<var>pipeline-name</var> </dt>
   <dd>流水线的名称。</dd>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
@@ -695,19 +635,16 @@ Kubeflow：
     <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
       <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
-      <li>
-<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
+      <li> <strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
     </ul>
     <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
-  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
+  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
+  <dt>--namespace=<var>namespace</var> </dt>
 <dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
@@ -733,16 +670,14 @@ Kubeflow：
 </pre>
 
 <dl>
-  <dt>--pipeline_name=<var>pipeline-name</var>
-</dt>
+  <dt>--pipeline_name=<var>pipeline-name</var> </dt>
   <dd>流水线的名称。</dd>
-  <dt>--run_id=<var>run-id</var>
-</dt>
+  <dt>--run_id=<var>run-id</var> </dt>
   <dd>流水线运行的唯一标识符。</dd>
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -764,26 +699,22 @@ Kubeflow：
 ```
 
   
-  <dt>--engine=<var>engine</var>
-</dt>
+  <dt>--engine=<var>engine</var> </dt>
   <dd>
     <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
       <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
-      <li>
-<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
+      <li> <strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
     </ul>
     <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
-<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
+  <dt>--namespace=<var>namespace</var> </dt>
+<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
 
 
 
@@ -808,11 +739,9 @@ Kubeflow：
 </pre>
 
 <dl>
-  <dt>--run_id=<var>run-id</var>
-</dt>
+  <dt>--run_id=<var>run-id</var> </dt>
   <dd>流水线运行的唯一标识符。</dd>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
@@ -836,8 +765,7 @@ Kubeflow：
 ```
 
   
-  <dt>--engine=<var>engine</var>
-</dt>
+  <dt>--engine=<var>engine</var> </dt>
   <dd>
     <p>（可选）用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
@@ -846,13 +774,11 @@ Kubeflow：
     <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
+  <dt>--namespace=<var>namespace</var> </dt>
 <dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
@@ -893,14 +819,11 @@ Kubeflow：
 </pre>
 
 <dl>
-  <dt>--model=<var>model</var>
-</dt>
+  <dt>--model=<var>model</var> </dt>
   <dd>由流水线模板构建的模型的名称。</dd>
-  <dt>--pipeline_name=<var>pipeline-name</var>
-</dt>
+  <dt>--pipeline_name=<var>pipeline-name</var> </dt>
   <dd>流水线的名称。</dd>
-  <dt>--destination_path=<var>destination-path</var>
-</dt>
+  <dt>--destination_path=<var>destination-path</var> </dt>
   <dd>要将模板复制到的路径。</dd>
 </dl>
 
@@ -909,38 +832,30 @@ Kubeflow：
 ### 通用标记
 
 <dl>
-  <dt>--engine=<var>engine</var>
-</dt>
+  <dt>--engine=<var>engine</var> </dt>
   <dd>
     <p>用于流水线的编排器。引擎的值必须与以下值匹配：</p>
     <ul>
       <li> <strong>kubeflow</strong>：将引擎设置为 Kubeflow</li>
-      <li>
-<strong>local</strong>：将引擎设置为本地编排器</li>
-      <li>
-<strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
-      <li>
-<strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
-      <li>
-<strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
+      <li> <strong>local</strong>：将引擎设置为本地编排器</li>
+      <li> <strong>vertex</strong>：将引擎设置为 Vertex Pipelines</li>
+      <li> <strong>airflow</strong>：（实验性）将引擎设置为 Apache Airflow</li>
+      <li> <strong>beam</strong> ：（实验性）将引擎设置为 Apache Beam</li>
     </ul>
     <p>如果未设置引擎，则会根据环境自动检测引擎。</p>
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
 </dl>
 
-  <dt>--pipeline_name=<var>pipeline-name</var>
-</dt>
+  <dt>--pipeline_name=<var>pipeline-name</var> </dt>
   <dd>流水线的名称。</dd>
 
 
-  <dt>--pipeline_path=<var>pipeline-path</var>
-</dt>
+  <dt>--pipeline_path=<var>pipeline-path</var> </dt>
   <dd>流水线配置文件的路径。</dd>
 
 
-  <dt>--run_id=<var>run-id</var>
-</dt>
+  <dt>--run_id=<var>run-id</var> </dt>
   <dd>流水线运行的唯一标识符。</dd>
 
 
@@ -950,8 +865,7 @@ Kubeflow：
 ### Kubeflow 专用标记
 
 <dl>
-  <dt>--endpoint=<var>endpoint</var>
-</dt>
+  <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
     <p>Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
@@ -977,13 +891,11 @@ Kubeflow：
   
 
 
-  <dt>--iap_client_id=<var>iap-client-id</var>
-</dt>
+  <dt>--iap_client_id=<var>iap-client-id</var> </dt>
   <dd>受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
+  <dt>--namespace=<var>namespace</var> </dt>
 <dd>要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
