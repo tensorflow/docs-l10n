@@ -230,7 +230,7 @@ Core ML 委托支持以下运算。
 - MirrorPad
     - 仅支持使用 `REFLECT` 模式的四维输入。填充应为常量，并且只能用于 H 和 W 维度。
 - Mul
-    - Only certain shapes are broadcastable. In Core ML tensor layout, following tensor shapes are broadcastable. `[B, C, H, W]`, `[B, C, 1, 1]`, `[B, 1, H, W]`, `[B, 1, 1, 1]`.
+    - 只能广播某些形状。在 Core ML 张量布局中，可以广播以下张量形状：`[B, C, H, W]`、`[B, C, 1, 1]`、`[B, 1, H, W]`、`[B, 1, 1, 1]`。
 - Pad 和 PadV2
     - 仅支持四维输入。填充应为常量，并且只能用于 H 和 W 维度。
 - Relu
