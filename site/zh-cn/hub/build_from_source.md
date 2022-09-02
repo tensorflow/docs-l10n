@@ -26,11 +26,11 @@ limitations under the License.
 - Python
 - TensorFlow
 - Git
-- [Bazel](https://docs.bazel.build/versions/master/install.html)
+- Bazel
 
 或者，如果您安装 protobuf 编译器，则可以[在不使用 bazel 的情况下尝试更改](#develop)。
 
-## Setup a virtualenv {:#setup}
+## 设置虚拟环境 {:#setup}
 
 ### 激活 virtualenv
 
