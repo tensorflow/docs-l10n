@@ -7,13 +7,13 @@
 
 ## es
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:head_qa/es')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 HEAD-QA is a multi-choice HEAlthcare Dataset. The questions come from exams to access a specialized position in the
@@ -24,7 +24,7 @@ The dataset contains questions about the following topics: medicine, nursing, ps
 ```
 
 - **许可**：MIT License
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -90,13 +90,13 @@ The dataset contains questions about the following topics: medicine, nursing, ps
 
 ## en
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:head_qa/en')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 HEAD-QA is a multi-choice HEAlthcare Dataset. The questions come from exams to access a specialized position in the
@@ -107,7 +107,7 @@ The dataset contains questions about the following topics: medicine, nursing, ps
 ```
 
 - **许可**：MIT License
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
