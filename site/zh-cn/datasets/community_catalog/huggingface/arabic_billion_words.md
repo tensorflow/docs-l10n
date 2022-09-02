@@ -7,13 +7,13 @@
 
 ## Alittihad
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_billion_words/Alittihad')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Abu El-Khair Corpus is an Arabic text corpus, that includes more than five million newspaper articles.
@@ -23,7 +23,7 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -59,13 +59,13 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 
 ## Almasryalyoum
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_billion_words/Almasryalyoum')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Abu El-Khair Corpus is an Arabic text corpus, that includes more than five million newspaper articles.
@@ -75,7 +75,7 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -111,13 +111,13 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 
 ## Almustaqbal
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_billion_words/Almustaqbal')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Abu El-Khair Corpus is an Arabic text corpus, that includes more than five million newspaper articles.
@@ -127,7 +127,7 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -163,13 +163,13 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 
 ## Alqabas
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_billion_words/Alqabas')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Abu El-Khair Corpus is an Arabic text corpus, that includes more than five million newspaper articles.
@@ -179,7 +179,7 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -215,13 +215,13 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 
 ## Echoroukonline
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_billion_words/Echoroukonline')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Abu El-Khair Corpus is an Arabic text corpus, that includes more than five million newspaper articles.
@@ -231,7 +231,7 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -267,13 +267,13 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 
 ## Ryiadh
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_billion_words/Ryiadh')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Abu El-Khair Corpus is an Arabic text corpus, that includes more than five million newspaper articles.
@@ -283,7 +283,7 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -319,13 +319,13 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 
 ## Sabanews
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_billion_words/Sabanews')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Abu El-Khair Corpus is an Arabic text corpus, that includes more than five million newspaper articles.
@@ -335,7 +335,7 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -371,13 +371,13 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 
 ## SaudiYoum
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_billion_words/SaudiYoum')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Abu El-Khair Corpus is an Arabic text corpus, that includes more than five million newspaper articles.
@@ -387,7 +387,7 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -423,13 +423,13 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 
 ## Techreen
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_billion_words/Techreen')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Abu El-Khair Corpus is an Arabic text corpus, that includes more than five million newspaper articles.
@@ -439,7 +439,7 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -475,13 +475,13 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 
 ## Youm7
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:arabic_billion_words/Youm7')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Abu El-Khair Corpus is an Arabic text corpus, that includes more than five million newspaper articles.
@@ -491,7 +491,7 @@ Also it was marked with two mark-up languages, namely: SGML, and XML.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
