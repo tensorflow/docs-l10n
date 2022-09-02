@@ -7,13 +7,13 @@
 
 ## amazon_polarity
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:amazon_polarity/amazon_polarity')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 The Amazon reviews dataset consists of reviews from amazon.
