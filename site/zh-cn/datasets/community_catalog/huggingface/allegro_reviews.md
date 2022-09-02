@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/allegro_reviews)
 - [Huggingface](https://huggingface.co/datasets/allegro_reviews)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:allegro_reviews')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Allegro Reviews is a sentiment analysis dataset, consisting of 11,588 product reviews written in Polish and extracted
@@ -23,7 +23,7 @@ You can evaluate your model using the online evaluation tool available on klejbe
 ```
 
 - **许可**：CC BY-SA 4.0
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
