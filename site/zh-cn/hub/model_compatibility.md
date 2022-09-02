@@ -6,7 +6,7 @@
 
 TF Hub 提供了可重用的模型，可以在 TensorFlow 程序中重新加载、以之为基础进行构建以及重新训练。这些模型有两种不同的格式：
 
-- 自定义 [TF1 Hub 格式](https://www.tensorflow.org/hub/tf1_hub_module)。该格式主要通过其 [hub.Module API](https://www.tensorflow.org/hub/api_docs/python/hub/Module) 用于 TF1（或 TF2 中的 TF1 兼容性模式）。[下文](#compatibility_of_hubmodule)介绍了完整的兼容性详细信息。
+- 自定义 [TF1 Hub 格式](https://www.tensorflow.org/hub/tf1_hub_module)。该格式主要通过其 [hub.Module API](https://www.tensorflow.org/hub/api_docs/python/hub/Module) 用于 TF1（或 TF2 中的 TF1 兼容模式）。[下文](#compatibility_of_hubmodule)介绍了完整的兼容性详细信息。
 - 原生 [TF2 SavedModel](https://www.tensorflow.org/hub/tf2_saved_model) 格式。该格式主要通过 [hub.load](https://www.tensorflow.org/hub/api_docs/python/hub/load) 和 [hub.KerasLayer](https://www.tensorflow.org/hub/api_docs/python/hub/KerasLayer) API 用于 TF2。[下文](#compatibility_of_tf2_savedmodel)介绍了完整的兼容性详细信息。
 
 [tfhub.dev](https://tfhub.dev) 上的模型页面提供了模型格式信息。根据模型格式，TF1/2 中可能不支持模型**加载/推断**、**微调**或**创建**。
