@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/health_fact)
 - [Huggingface](https://huggingface.co/datasets/health_fact)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:health_fact')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 PUBHEALTH is a comprehensive dataset for explainable automated fact-checking of
@@ -31,7 +31,7 @@ NOTE: There are missing labels in the dataset and we have replaced them with -1.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
