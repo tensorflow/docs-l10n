@@ -29,7 +29,7 @@ Google Play 服务中的 TensorFlow Lite 可以通过 [TensorFlow Lite Task API]
 
 ### 使用 Task Library API
 
-TensorFlow Lite Task API 封装了 Interpreter API，并为使用视觉、音频和文本数据的常见机器学习任务提供了高级编程接口。如果您的应用需要[支持的任务](../api_docs/java/org/tensorflow/lite/inference_with_metadata/task_library/overview#supported_tasks)之一，您应该使用 Task API。
+The TensorFlow Lite Task API wraps the Interpreter API and provides a high-level programming interface for common machine learning tasks that use visual, audio, and text data. You should use the Task API if your application requires one of the [supported tasks](../inference_with_metadata/task_library/overview#supported_tasks).
 
 #### 1. 添加项目依赖项
 
@@ -262,12 +262,12 @@ TensorFlow Lite 允许您使用图形处理单元 (GPU) 等专用硬件处理器
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">          TfLiteVision.initialize(context, TfLiteInitializationOptions.builder().setEnableGpuDelegateSupport(true).build())
-            </pre>
+                </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">          TfLiteVision.initialize(context, TfLiteInitializationOptions.builder().setEnableGpuDelegateSupport(true).build());
-            </pre>
+                </pre>
     </section>
     </devsite-selector>
     </div>
@@ -279,12 +279,12 @@ TensorFlow Lite 允许您使用图形处理单元 (GPU) 等专用硬件处理器
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">          val baseOptions = BaseOptions.builder().useGpu().build()
-            </pre>
+                </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">          BaseOptions baseOptions = BaseOptions.builder().useGpu().build();
-            </pre>
+                </pre>
     </section>
     </devsite-selector>
     </div>
@@ -296,20 +296,20 @@ TensorFlow Lite 允许您使用图形处理单元 (GPU) 等专用硬件处理器
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">        val options =
-                ObjectDetectorOptions.builder()
-                    .setBaseOptions(baseOptions)
-                    .setMaxResults(1)
-                    .build()
-            </pre>
+                    ObjectDetectorOptions.builder()
+                        .setBaseOptions(baseOptions)
+                        .setMaxResults(1)
+                        .build()
+                </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">        ObjectDetectorOptions options =
-                ObjectDetectorOptions.builder()
-                    .setBaseOptions(baseOptions)
-                    .setMaxResults(1)
-                    .build();
-            </pre>
+                    ObjectDetectorOptions.builder()
+                        .setBaseOptions(baseOptions)
+                        .setMaxResults(1)
+                        .build();
+                </pre>
     </section>
     </devsite-selector>
     </div>
@@ -331,18 +331,18 @@ TensorFlow Lite 允许您使用图形处理单元 (GPU) 等专用硬件处理器
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">          TfLite.initialize(this,
-                TfLiteInitializationOptions.builder()
-                 .setEnableGpuDelegateSupport(true)
-                 .build())
-            </pre>
+                    TfLiteInitializationOptions.builder()
+                     .setEnableGpuDelegateSupport(true)
+                     .build())
+                </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">          TfLite.initialize(this,
-                TfLiteInitializationOptions.builder()
-                 .setEnableGpuDelegateSupport(true)
-                 .build());
-            </pre>
+                    TfLiteInitializationOptions.builder()
+                     .setEnableGpuDelegateSupport(true)
+                     .build());
+                </pre>
     </section>
     </devsite-selector>
     </div>
@@ -354,18 +354,18 @@ TensorFlow Lite 允许您使用图形处理单元 (GPU) 等专用硬件处理器
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">
-              val interpreterOption = InterpreterApi.Options()
-               .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-               .addDelegateFactory(GpuDelegateFactory())
-            </pre>
+                  val interpreterOption = InterpreterApi.Options()
+                   .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+                   .addDelegateFactory(GpuDelegateFactory())
+                </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">
-              Options interpreterOption = InterpreterApi.Options()
-                .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-                .addDelegateFactory(new GpuDelegateFactory());
-            </pre>
+                  Options interpreterOption = InterpreterApi.Options()
+                    .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+                    .addDelegateFactory(new GpuDelegateFactory());
+                </pre>
     </section>
     </devsite-selector>
     </div>
@@ -546,7 +546,7 @@ Google Play 服务中的 TensorFlow Lite 存在以下限制：
 
 ## 支持和反馈 {:#support}
 
-您可以通过 TensorFlow 问题跟踪器提供反馈并获得支持。请使用适用于 Google Play 服务中的 TensorFlow Lite 的[议题模板](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md)报告议题和支持请求。
+You can provide feedback and get support through the TensorFlow Issue Tracker. Please report issues and support requests using the [Issue template](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md) for TensorFlow Lite in Google Play services.
 
 ## 服务条款 {:#tos}
 
