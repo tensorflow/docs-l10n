@@ -7,13 +7,13 @@
 
 ## amttl
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:amttl/amttl')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Chinese word segmentation (CWS) trained from open source corpus faces dramatic performance drop
@@ -31,7 +31,7 @@ For more details see https://www.aclweb.org/anthology/C18-1307/
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
