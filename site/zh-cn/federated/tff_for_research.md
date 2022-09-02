@@ -32,7 +32,7 @@ TensorFlow Federated [托管了多个数据集](https://www.tensorflow.org/feder
 
 - [**Shakespeare**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/shakespeare/load_data)。基于威廉·莎士比亚全集的较小的字符级文本数据集。该数据集由 715 个用户（莎士比亚戏剧中的角色）组成，其中每个样本对应给定戏剧中的角色所说的一组连续台词。
 
-- [**CIFAR-100**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data) A federated partitioning of the CIFAR-100 dataset across 500 training clients and 100 test clients. Each client has 100 unique examples. The partitioning is done in a way to create more realistic heterogeneity between clients. For more details, see the [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data).
+- [**CIFAR-100**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)。CIFAR-100 数据集跨 500 个训练客户端和 100 个测试客户端的联合分区。每个客户都有 100 个独特的样本。分区以在客户端之间创建更现实异构性的方式完成。有关详情，请参阅 [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)。
 
 - [**Google Landmark v2 数据集。**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data)该数据集由各种世界地标的照片组成，图像按摄影师分组以实现数据的联合分区。提供两种形式的数据集：较小的数据集包括 233 个客户端和 23080 个图像，较大的数据集包括 1262 个客户端和 164172 个图像。
 
