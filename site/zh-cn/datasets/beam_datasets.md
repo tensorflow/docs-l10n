@@ -85,13 +85,13 @@ builder.download_and_prepare(download_config=dl_config)
 
 为了编写 Apache Beam 数据集，您应该熟悉以下概念：
 
-- 熟悉 [`tfds` 数据集创建指南](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)，因为其中大部分内容仍适用于 Beam 数据集。
+- 熟悉 [`tfds` 数据集创建指南](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md)，因为其中大部分内容仍适用于 Beam 数据集。
 - 借助 [Beam 编程指南](https://beam.apache.org/documentation/programming-guide/)了解 Apache Beam。
 - 如果要使用 Cloud Dataflow 生成数据集，请阅读 [Google Cloud 文档](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python)和 [Apache Beam 依赖项指南](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/)。
 
 ### 说明
 
-如果您熟悉[数据集创建指南](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)，则仅需修改 `_generate_examples` 函数即可添加 Beam 数据集。此函数应当返回一个 Beam 对象，而不是一个生成器：
+如果您熟悉[数据集创建指南](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md)，则仅需修改 `_generate_examples` 函数即可添加 Beam 数据集。此函数应当返回一个 Beam 对象，而不是一个生成器：
 
 非 Beam 数据集：
 
