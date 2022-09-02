@@ -7,13 +7,13 @@
 
 ## adversarialQA
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:adversarial_qa/adversarialQA')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AdversarialQA is a Reading Comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles using an adversarial model-in-the-loop.
@@ -21,8 +21,8 @@ We use three different models; BiDAF (Seo et al., 2016), BERT-Large (Devlin et a
 The adversarial human annotation paradigm ensures that these datasets consist of questions that current state-of-the-art models (at least the ones used as adversaries in the annotation loop) find challenging.
 ```
 
-- **License**: No known license
-- **Version**: 1.0.0
+- **许可证**：无已知许可证
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -89,13 +89,13 @@ The adversarial human annotation paradigm ensures that these datasets consist of
 
 ## dbidaf
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:adversarial_qa/dbidaf')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AdversarialQA is a Reading Comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles using an adversarial model-in-the-loop.
@@ -103,8 +103,8 @@ We use three different models; BiDAF (Seo et al., 2016), BERT-Large (Devlin et a
 The adversarial human annotation paradigm ensures that these datasets consist of questions that current state-of-the-art models (at least the ones used as adversaries in the annotation loop) find challenging.
 ```
 
-- **License**: No known license
-- **Version**: 1.0.0
+- **许可证**：无已知许可证
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -171,13 +171,13 @@ The adversarial human annotation paradigm ensures that these datasets consist of
 
 ## dbert
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:adversarial_qa/dbert')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AdversarialQA is a Reading Comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles using an adversarial model-in-the-loop.
@@ -185,8 +185,8 @@ We use three different models; BiDAF (Seo et al., 2016), BERT-Large (Devlin et a
 The adversarial human annotation paradigm ensures that these datasets consist of questions that current state-of-the-art models (at least the ones used as adversaries in the annotation loop) find challenging.
 ```
 
-- **License**: No known license
-- **Version**: 1.0.0
+- **许可证**：无已知许可证
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -253,13 +253,13 @@ The adversarial human annotation paradigm ensures that these datasets consist of
 
 ## droberta
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:adversarial_qa/droberta')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 AdversarialQA is a Reading Comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles using an adversarial model-in-the-loop.
@@ -267,8 +267,8 @@ We use three different models; BiDAF (Seo et al., 2016), BERT-Large (Devlin et a
 The adversarial human annotation paradigm ensures that these datasets consist of questions that current state-of-the-art models (at least the ones used as adversaries in the annotation loop) find challenging.
 ```
 
-- **License**: No known license
-- **Version**: 1.0.0
+- **许可证**：无已知许可证
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
