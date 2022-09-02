@@ -12,17 +12,36 @@ Pusher 组件使用 [SavedModel](/guide/saved_model) 格式的训练模型，并
 Pusher 流水线组件通常非常易于部署，而且几乎不需要自定义，因为所有工作均由 Pusher TFX 组件完成。典型代码如下所示：
 
 ```python
-from tfx import components
-
-...
-
-pusher = components.Pusher(
+pusher = Pusher(
   model=trainer.outputs['model'],
   model_blessing=evaluator.outputs['blessing'],
   infra_blessing=infra_validator.outputs['blessing'],
-  push_destination=pusher_pb2.PushDestination(
-    filesystem=pusher_pb2.PushDestination.Filesystem(
+  push_destination=tfx.proto.PushDestination(
+    filesystem=tfx.proto.PushDestination.Filesystem(
         base_directory=serving_model_dir)
   )
 )
 ```
+
+### 推送从 InfraValidator 生成的模型。
+
+（从版本 0.30.0 开始）
+
+InfraValidator 还可以生成包含<a>带预热模型</a>的 <code>InfraBlessing</code> 工件。可以像`Model` 工件一样由 Pusher 对其进行推送。
+
+```python
+infra_validator = InfraValidator(
+    ...,
+    # make_warmup=True will produce a model with warmup requests in its
+    # 'blessing' output.
+    request_spec=tfx.proto.RequestSpec(..., make_warmup=True)
+)
+
+pusher = Pusher(
+    # Push model from 'infra_blessing' input.
+    infra_blessing=infra_validator.outputs['blessing'],
+    push_destination=tfx.proto.PushDestination(...)
+)
+```
+
+有关更多详细信息，请参阅 [Pusher API 参考](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/Pusher)。
