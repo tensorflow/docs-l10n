@@ -5,13 +5,13 @@
 - [代码](https://github.com/huggingface/datasets/blob/master/datasets/hausa_voa_topics)
 - [Huggingface](https://huggingface.co/datasets/hausa_voa_topics)
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hausa_voa_topics')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A collection of news article headlines in Hausa from VOA Hausa.
@@ -25,7 +25,7 @@ African Languages (EMNLP 2020).
 ```
 
 - **许可**：无已知许可
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
