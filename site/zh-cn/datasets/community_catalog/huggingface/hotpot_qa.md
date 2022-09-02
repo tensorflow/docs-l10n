@@ -7,20 +7,20 @@
 
 ## distractor
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hotpot_qa/distractor')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 HotpotQA is a new dataset with 113k  Wikipedia-based question-answer  pairs with  four  key  features:  (1)  the  questions  require finding and reasoning over multiple supporting  documents  to  answer;  (2)  the  questions  are  diverse  and  not  constrained  to  any pre-existing  knowledge  bases  or  knowledge schemas;  (3)  we  provide  sentence-level  supporting facts required for reasoning, allowingQA systems to reason with strong supervisionand explain the predictions; (4) we offer a new type  of  factoid  comparison  questions  to  testQA  systems’  ability  to  extract  relevant  facts and perform necessary comparison.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -101,20 +101,20 @@ HotpotQA is a new dataset with 113k  Wikipedia-based question-answer  pairs with
 
 ## fullwiki
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hotpot_qa/fullwiki')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 HotpotQA is a new dataset with 113k  Wikipedia-based question-answer  pairs with  four  key  features:  (1)  the  questions  require finding and reasoning over multiple supporting  documents  to  answer;  (2)  the  questions  are  diverse  and  not  constrained  to  any pre-existing  knowledge  bases  or  knowledge schemas;  (3)  we  provide  sentence-level  supporting facts required for reasoning, allowingQA systems to reason with strong supervisionand explain the predictions; (4) we offer a new type  of  factoid  comparison  questions  to  testQA  systems’  ability  to  extract  relevant  facts and perform necessary comparison.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
