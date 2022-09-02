@@ -7,13 +7,13 @@
 
 ## adv_sst2
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:adv_glue/adv_sst2')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Adversarial GLUE Benchmark (AdvGLUE) is a comprehensive robustness evaluation benchmark
@@ -23,7 +23,7 @@ version of GLUE benchmark.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -49,13 +49,13 @@ version of GLUE benchmark.
 
 ## adv_qqp
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:adv_glue/adv_qqp')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Adversarial GLUE Benchmark (AdvGLUE) is a comprehensive robustness evaluation benchmark
@@ -65,7 +65,7 @@ version of GLUE benchmark.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -96,13 +96,13 @@ version of GLUE benchmark.
 
 ## adv_mnli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:adv_glue/adv_mnli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Adversarial GLUE Benchmark (AdvGLUE) is a comprehensive robustness evaluation benchmark
@@ -112,7 +112,7 @@ version of GLUE benchmark.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -143,13 +143,13 @@ version of GLUE benchmark.
 
 ## adv_mnli_mismatched
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:adv_glue/adv_mnli_mismatched')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Adversarial GLUE Benchmark (AdvGLUE) is a comprehensive robustness evaluation benchmark
@@ -159,7 +159,7 @@ version of GLUE benchmark.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -190,13 +190,13 @@ version of GLUE benchmark.
 
 ## adv_qnli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:adv_glue/adv_qnli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Adversarial GLUE Benchmark (AdvGLUE) is a comprehensive robustness evaluation benchmark
@@ -206,7 +206,7 @@ version of GLUE benchmark.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -237,13 +237,13 @@ version of GLUE benchmark.
 
 ## adv_rte
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:adv_glue/adv_rte')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Adversarial GLUE Benchmark (AdvGLUE) is a comprehensive robustness evaluation benchmark
@@ -253,7 +253,7 @@ version of GLUE benchmark.
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
