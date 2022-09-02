@@ -7,20 +7,20 @@
 
 ## HDA hindi nli
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hda_nli_hindi/HDA hindi nli')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset is a recasted version of the Hindi Discourse Analysis Dataset used to train models for Natural Language Inference Tasks in Low-Resource Languages like Hindi.
 ```
 
 - **许可**：MIT License
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -71,20 +71,20 @@ This dataset is a recasted version of the Hindi Discourse Analysis Dataset used 
 
 ## hda nli hindi
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hda_nli_hindi/hda nli hindi')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 This dataset is a recasted version of the Hindi Discourse Analysis Dataset used to train models for Natural Language Inference Tasks in Low-Resource Languages like Hindi.
 ```
 
 - **许可**：MIT License
-- **Version**: 1.1.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
