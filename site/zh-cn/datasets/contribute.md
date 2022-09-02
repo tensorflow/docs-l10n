@@ -2,7 +2,7 @@
 
 感谢您对我们库的关注！我们很高兴拥有这样一个积极主动的社区。
 
-## Get started
+## 开始
 
 - 如果您是 TFDS 的新用户，最简单的入门方式是实现我们的[请求数据集](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc)之一，重点关注呼声最高的数据集。请[按照我们的指南](https://www.tensorflow.org/datasets/add_dataset)获取说明。
 - 议题、功能请求、错误等比添加新数据集的影响要大得多，因为它们会使整个 TFDS 社区受益。请参阅[潜在贡献列表](https://github.com/tensorflow/datasets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+-label%3A%22dataset+request%22+)。从标有 [contribution-welcome](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22contributions+welcome%22) 的议题开始，这些都是容易上手的独立小议题。
