@@ -7,13 +7,13 @@
 
 ## raw
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:aqua_rat/raw')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A large-scale dataset consisting of approximately 100,000 algebraic word problems.
@@ -24,15 +24,15 @@ while generating the program that solves the question.
 
 - **许可**：Copyright 2017 Google Inc.
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+根据 Apache 许可 2.0（“许可”）获得许可；除非遵循许可要求，否则您不得使用此文件。您可在以下网址获得许可的副本：
 
 ```
 http://www.apache.org/licenses/LICENSE-2.0
 ```
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+除非适用法律要求或以书面形式同意，否则在本许可下分发的软件将在“按原样”的基础上分发，不存在任何明示或暗示的任何类型的保证或条件。有关在本许可下管理权限和限制的特定语言，请参阅本许可。
 
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -75,13 +75,13 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 ## tokenized
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:aqua_rat/tokenized')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 A large-scale dataset consisting of approximately 100,000 algebraic word problems.
@@ -92,15 +92,15 @@ while generating the program that solves the question.
 
 - **许可**：Copyright 2017 Google Inc.
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+根据 Apache 许可 2.0（“许可”）获得许可；除非遵循许可要求，否则您不得使用此文件。您可在以下网址获得许可的副本：
 
 ```
 http://www.apache.org/licenses/LICENSE-2.0
 ```
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+除非适用法律要求或以书面形式同意，否则在本许可下分发的软件将在“按原样”的基础上分发，不存在任何明示或暗示的任何类型的保证或条件。有关在本许可下管理权限和限制的特定语言，请参阅本许可。
 
-- **Version**: 0.0.0
+- **版本**：0.0.0
 - **拆分**：
 
 拆分 | 样本
