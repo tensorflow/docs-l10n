@@ -1,3 +1,5 @@
+<!--* freshness: { owner: 'akhorlin' reviewed: '2022-03-19' } *-->
+
 <!-- Copyright 2018 The TensorFlow Hub Authors. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,9 +30,7 @@ limitations under the License.
 
 或者，如果您安装 protobuf 编译器，则可以[在不使用 bazel 的情况下尝试更改](#develop)。
 
-## 设置 virtualenv
-
-<a id="setup"></a>
+## Setup a virtualenv {:#setup}
 
 ### 激活 virtualenv
 
@@ -145,7 +145,10 @@ limitations under the License.
 (tensorflow_hub_env)~/hub/$ ls -1 tensorflow_hub/*_pb2.py
 ```
 
-<pre> tensorflow_hub/image_module_info_pb2.py tensorflow_hub/module_attachment_pb2.py tensorflow_hub/module_def_pb2.py</pre>
+<pre>tensorflow_hub/image_module_info_pb2.py
+tensorflow_hub/module_attachment_pb2.py
+tensorflow_hub/module_def_pb2.py
+</pre>
 
 注：如果对 `.proto` 定义进行更改，请不要忘记重新编译 `_pb2.py` 文件。
 
