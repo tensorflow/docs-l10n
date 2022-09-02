@@ -7,13 +7,13 @@
 
 ## byarticle
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hyperpartisan_news_detection/byarticle')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Hyperpartisan News Detection was a dataset created for PAN @ SemEval 2019 Task 4.
@@ -25,7 +25,7 @@ There are 2 parts:
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
@@ -66,13 +66,13 @@ There are 2 parts:
 
 ## bypublisher
 
-Use the following command to load this dataset in TFDS:
+使用以下命令在 TFDS 中加载此数据集：
 
 ```python
 ds = tfds.load('huggingface:hyperpartisan_news_detection/bypublisher')
 ```
 
-- **Description**:
+- **说明**：
 
 ```
 Hyperpartisan News Detection was a dataset created for PAN @ SemEval 2019 Task 4.
@@ -84,7 +84,7 @@ There are 2 parts:
 ```
 
 - **许可**：无已知许可
-- **Version**: 1.0.0
+- **版本**：1.0.0
 - **拆分**：
 
 拆分 | 样本
