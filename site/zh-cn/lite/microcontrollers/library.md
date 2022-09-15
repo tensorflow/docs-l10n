@@ -46,9 +46,9 @@ TensorFlow Lite for Microcontrollers 能够使用 `Makefile` 生成包含所有�
 make -f tensorflow/lite/micro/tools/make/Makefile generate_projects
 ```
 
-这需要几分钟的时间，因为它要下载一些大型工具链来建立依赖关系。完成后，您应该会看到在类似 `tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/` 这样的路径（具体路径取决于您的主机操作系统）下创建了一些文件夹。这些文件夹包含了生成的项目和源文件。
+这将花费几分钟，因为它要为依赖项下载一些大型工具链。完成后，您应该会看到在类似 `gen/linux_x86_64/prj/` 的路径（具体路径取决于您的主机操作系统）下创建了一些文件夹。这些文件夹包含了生成的项目和源文件。
 
-运行该命令后，您将能够在 `tensorflow/ite/micro/tools/make/gen/linux_x86_64/prj/hello_world` 中找到 *Hello World* 项目。例如，`hello_world/keil` 将包含 Keil 项目。
+运行该命令后，您将能够在 <code>gen/linux_x86_64/prj/hello_world</code> 中找到 <em>Hello World</em> 项目。例如，`hello_world/keil` 将包含 Keil 项目。
 
 ## 写入新设备
 
@@ -114,7 +114,7 @@ make -f tensorflow/lite/micro/tools/make/Makefile TAGS=<subdirectory_name> gener
 ./tensorflow/lite/micro/tools/ci_build/test_arduino.sh
 ```
 
-生成的库可在 `tensorflow/lite/micro/tools/make/gen/arduino_x86_64/prj/tensorflow_lite.zip` 中找到。
+生成的库可在 `gen/arduino_x86_64/prj/tensorflow_lite.zip` 中找到。
 
 ## 移植到新设备
 
