@@ -20,9 +20,9 @@ TensorFlow Lite Task Library 包含了一套功能强大且易于使用的任务
 
 ```build
 dependencies {
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.0'
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
-    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:+'
+    implementation 'org.tensorflow:tensorflow-lite-task-text:+'
+    implementation 'org.tensorflow:tensorflow-lite-task-audio:+'
 }
 ```
 
@@ -38,7 +38,7 @@ dependencies {
 
 ```build
 dependencies {
-    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
+    implementation 'org.tensorflow:tensorflow-lite:+'
 }
 ```
 
@@ -72,7 +72,7 @@ android {
 
 ```build
 dependencies {
-    implementation 'org.tensorflow:tensorflow-lite-support:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-support:+'
 }
 ```
 
