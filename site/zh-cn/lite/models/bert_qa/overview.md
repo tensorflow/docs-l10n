@@ -46,7 +46,7 @@
   </thead>
   <tr>
     <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a> </td>
-    <td rowspan="3">       100.5 Mb</td>
+    <td rowspan="3">       100.5 Mb     </td>
     <td>Pixel 3 (Android 10)</td>
     <td>123ms*</td>
   </tr>
@@ -83,4 +83,4 @@
 ## 详细了解 BERT
 
 - 学术论文：[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)
-- [BERT 的开源实现](https://github.com/google-research/bert)
+- [Open-source implementation of BERT](https://github.com/google-research/bert)
