@@ -186,6 +186,7 @@ top 的值代表了矩形框的顶部距离图片上部的距离，单位为像�
 
 例如，在下面的图像中，一个梨（它不是模型被训练来检测的目标）被错误地识别为了“人”。这是一个可以通过选择适当的截止值来忽略的假正例的例子。在这种情况下，0.6（或 60%）的临界值将轻松排除假正例。
 
+
 <img src="images/android_apple_banana.png" width="30%" alt="Screenshot of Android example">
 
 #### 坐标
@@ -224,8 +225,7 @@ top 值表示矩形的顶边距图像顶部的距离，以像素为单位。left
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a>
-</td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a> </td>
     <td rowspan="3">       27 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>22ms</td>
@@ -255,7 +255,7 @@ top 值表示矩形的顶边距图像顶部的距离，以像素为单位。left
 
 大多数下载压缩包都包含一个 `model.tflite` 文件。如果没有，则可以使用[这些指令](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)生成 TensorFlow Lite 平面缓冲区。也可以根据[此处](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md)的说明，将来自 [TF2 Object Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md) 的 SSD 模型转换为 TensorFlow Lite。需要注意的是，检测模型不能使用 [TensorFlow Lite Converter](../../models/convert) 直接转换，因为它们需要一个中间步骤来生成对移动设备友好的源模型。上面链接的脚本会执行此步骤。
 
-[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) 和 [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) 导出脚本都具有可启用更多输出对象或更慢、更准确的后处理的参数。请将 `--help` 与脚本一起使用，以查看支持的参数的详尽列表。
+[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) 和 [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md) 导出脚本都具有可启用更多输出对象或更慢、更准确的后处理的参数。请将 `--help` 与脚本一起使用，以查看支持的参数的详尽列表。
 
 > 目前，设备端推断仅通过 SSD 模型进行优化。我们正在研究如何更好地支持其他架构，如 CenterNet 和 EfficientDet。
 
@@ -271,4 +271,4 @@ top 值表示矩形的顶边距图像顶部的距离，以像素为单位。left
 
 您可以使用一种称为迁移学习的技术来重新训练模型，以识别不在原始集合中的类。例如，您可以重新训练模型以检测多种蔬菜。为此，您需要为您希望训练的每个新标签提供一组训练图像。推荐的方式是使用 [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) 库，该库只需几行代码即可简化使用自定义数据集训练 TensorFlow Lite 模型的过程。它使用迁移学习来减少所需的训练数据量和时间。您还可以学习[少样本检测 Colab](https://github.com/tensorflow/models/blob/master/research/object_detection/colab_tutorials/eager_few_shot_od_training_tflite.ipynb)，作为微调只有几个样本的预训练模型的示例。
 
-要对更大的数据集进行微调，请查看以下使用 TensorFlow 目标检测 API 训练您自己的模型的指南：[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_training_and_evaluation.md)，[TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md)。经过训练后，可以按照以下说明将其转换为 TFLite 友好格式：[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)，[TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)
+要对更大的数据集进行微调，请查看以下使用 TensorFlow 目标检测 API 训练您自己的模型的指南：[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_training_and_evaluation.md)，[TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md)。经过训练后，可以按照以下说明将其转换为 TFLite 友好格式：[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)，[TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md)
