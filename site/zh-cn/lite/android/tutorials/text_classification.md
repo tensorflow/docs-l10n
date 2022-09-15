@@ -4,11 +4,11 @@
 
 [示例应用](https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android)使用 TensorFlow Lite 将文本分类为正面或负面，使用[自然语言 (NL) 任务库](../../inference_with_metadata/task_library/overview#supported_tasks)来执行文本分类机器学习模型。
 
-如果您要更新现有项目，则可以将示例应用用作参考或模板。有关如何向现有应用添加文本分类的说明，请参阅[更新和修改您的应用](#modify_applications)。
+如果您要更新现有项目，则可以将示例应用用作参考或模板。有关如何向现有应用添加文本分类的说明，请参阅[更新和修改应用](#modify_applications)。
 
 ## 文本分类概述
 
-*文本分类*是将一组预定义类别分配给开放式文本的机器学习任务。文本分类模型是在自然语言文本语料库上训练的，其中的单词或短语是手动分类的。
+*文本分类*是将一组预定义类别分配给开放式文本的机器学习任务。文本分类模型在自然语言文本语料库上进行训练，其中的单词或短语为手动分类。
 
 训练后的模型接收文本作为输入，并尝试根据训练分类的一组已知类对文本进行分类。例如，此示例中的模型接受一段文本，并确定文本的情绪是正面的还是负面的。对于每个文本片段，文本分类模型都会输出一个分数，该分数指示文本被正确分类为正面或负面的置信度。
 
@@ -16,17 +16,17 @@
 
 ## 模型和数据集
 
-本教程采用了使用 [SST-2](https://nlp.stanford.edu/sentiment/index.html) (Stanford Sentiment Treebank) 数据集训练的模型。SST-2 包含 67,349 条用于训练的电影评论和 872 条用于测试的电影评论，每条评论都被分类为正面的或负面的。此应用中使用的模型是使用 TensorFlow Lite [Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) 工具训练的。
+本教程采用了使用 [SST-2](https://nlp.stanford.edu/sentiment/index.html) (Stanford Sentiment Treebank) 数据集训练的模型。SST-2 包含 67,349 条用于训练的电影评论和 872 条用于测试的电影评论，每条评论都被分类为正面或负面。此应用中的模型使用 TensorFlow Lite [Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) 工具进行训练。
 
 示例应用使用以下预训练模型：
 
-- [平均词向量](https://www.tensorflow.org/lite/inference_with_metadata/task_library/nl_classifier) (`NLClassifier`) - 任务库的 `NLClassifier` 将输入文本分类为不同的类别，并且可以处理大多数文本分类模型。
+- [平均词向量](https://www.tensorflow.org/lite/inference_with_metadata/task_library/nl_classifier) (`NLClassifier`) - Task Library 的 `NLClassifier` 将输入文本分类为不同的类别，并且可以处理大多数文本分类模型。
 
-- [MobileBERT](https://www.tensorflow.org/lite/inference_with_metadata/task_library/bert_nl_classifier) (`BertNLClassifier`) - 任务库的 `BertNLClassifier` 类似于 NLClassifier，但专为需要计算图外 Wordpiece 和 Sentencepiece 词例化的情况而定制。
+- [MobileBERT](https://www.tensorflow.org/lite/inference_with_metadata/task_library/bert_nl_classifier) (`BertNLClassifier`) - Task Library 的 `BertNLClassifier` 类似于 NLClassifier，但专为需要计算图外 Wordpiece 和 Sentencepiece 词例化的情况而定制。
 
 ## 设置并运行示例应用
 
-要设置文本分类应用，请从 [GitHub](https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android) 下载示例应用并使用 [Android Studio](https://developer.android.com/studio/) 运行它。
+要设置文本分类应用，请从 [GitHub](https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android) 下载示例应用并使用 [Android Studio](https://developer.android.com/studio/) 运行。
 
 ### 系统要求
 
@@ -42,12 +42,12 @@
 
 1. 克隆 git 仓库
     <pre class="devsite-click-to-copy">    git clone https://github.com/tensorflow/examples.git
-        </pre>
+            </pre>
 2. （可选）将您的 git 实例配置为使用稀疏签出，这样您就只有文本分类示例应用的文件：
     <pre class="devsite-click-to-copy">    cd examples
-        git sparse-checkout init --cone
-        git sparse-checkout set lite/examples/text_classification/android
-        </pre>
+            git sparse-checkout init --cone
+            git sparse-checkout set lite/examples/text_classification/android
+            </pre>
 
 ### 导入并运行项目
 
@@ -74,24 +74,24 @@
 
 在 Android Studio 中运行项目后，应用将自动在连接的设备或设备模拟器上打开。
 
-要使用文本分类器：
+要使用文本分类器，请执行以下操作：
 
 1. 在文本框中输入一段文本。
 2. 从 **Delegate** 下拉列表中，选择 `CPU` 或 `NNAPI`。
 3. 通过选择 `AverageWordVec` 或 `MobileBERT` 指定模型。
 4. 选择 **Classify**。
 
-应用程序输出*正*分和*负*分。这两个分数总和为 1，并衡量输入文本的情绪是正面还是负面的可能性。数字越大表示置信度越高。
+应用输出*正*分和*负*分。这两个分数总和为 1，并衡量输入文本的情绪是正面还是负面的可能性。数字越大表示置信度越高。
 
-您现在有一个正常运行的文本分类应用。使用以下部分可以更好地了解示例应用的工作原理，以及如何在您的生产应用中实现文本分类功能：
+您现在有一个正常运行的文本分类应用。使用以下部分可以更好地了解示例应用的运作方式，以及如何在您的生产应用中实现文本分类功能：
 
-- [应用的工作原理](#how_it_works) - 示例应用的结构和关键文件的演练。
+- [应用的运作方式](#how_it_works) - 示例应用的结构和关键文件的演练。
 
 - [修改您的应用](#modify_applications) - 将文本分类添加到现有应用的说明。
 
-## 示例应用的工作原理 {:#how_it_works}
+## 示例应用的运作方式 {:#how_it_works}
 
-该应用使用[自然语言 (NL) 的任务库](../../inference_with_metadata/task_library/overview#supported_tasks)程序包来实现文本分类模型。这两个模型 Average Word Vector 和 MobileBERT 是使用 TensorFlow Lite [Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) 训练的。该应用默认在 CPU 上运行，也可以选择使用 NNAPI 委托进行硬件加速。
+该应用使用[自然语言 (NL) 的任务库](../../inference_with_metadata/task_library/overview#supported_tasks)软件包来实现文本分类模型。Average Word Vector 和 MobileBERT 这两个模型使用 TensorFlow Lite [Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) 进行训练。该应用默认在 CPU 上运行，也可以选择使用 NNAPI 委托进行硬件加速。
 
 以下文件和目录包含此文本分类应用的关键代码：
 
@@ -111,7 +111,7 @@
 
 - 在 Android Studio 中，选择 *File &gt; Open* 并选择一个现有项目。
 
-要创建一个基本的 Android 开发项目：
+创建一个基本的 Android 开发项目：
 
 - 按照 Android Studio 中的说明[创建一个基本项目](https://developer.android.com/studio/projects/create-project)。
 
@@ -197,7 +197,7 @@ TensorFlow Lite 模型存储为 `*.tflite` 文件。该模型文件包含预测�
 
 在您的应用中初始化 TensorFlow Lite 模型时，您应该考虑使用硬件加速功能来加速模型的预测计算。TensorFlow Lite [委托](https://www.tensorflow.org/lite/performance/delegates)是使用移动设备上的专用处理硬件（如图形处理单元 (GPU) 或张量处理单元 (TPU)）加速机器学习模型执行的软件模块。
 
-要在您的应用中启用硬件加速：
+要在您的应用中启用硬件加速，请执行以下操作：
 
 1. 创建一个变量来定义应用将使用的委托。在示例应用中，此变量位于 [TextClassificationHelper.kt](https://github.com/tensorflow/examples/blob/master/lite/examples/text_classification/android/app/src/main/java/org/tensorflow/lite/examples/textclassification/TextClassificationHelper.kt) 中：
 
@@ -227,11 +227,11 @@ TensorFlow Lite 模型存储为 `*.tflite` 文件。该模型文件包含预测�
 
 在您的 Android 应用中，您的代码通过将现有数据（如原始文本）转换为可以被模型处理的[张量](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/Tensor)数据格式，向模型提供数据进行解释。传递给模型的张量中的数据必须具有与用于训练模型的数据格式相匹配的特定尺寸或形状。
 
-此文本分类应用接受[字符串](https://developer.android.com/reference/java/lang/String.html)作为输入，并且模型专门在英语语料库上进行训练。推断过程中会忽略特殊字符和非英文单词。
+此文本分类应用接受[字符串](https://developer.android.com/reference/java/lang/String.html)作为输入，并且模型专门在英语语料库上进行训练。推断过程中会忽略特殊字符和非英语单词。
 
 向模型提供文本数据：
 
-1. 确保 `initClassifier` 函数包含委托和模型的代码，如[初始化 ML 模型](#initialize_models)和[启用硬件加速](#hardware_acceleration)部分中所述。
+1. 确保 `initClassifier` 函数包含委托和模型的代码，如[初始化机器学习模型](#initialize_models)和[启用硬件加速](#hardware_acceleration)部分中所述。
 
 2. 使用 `init` 块调用 `initClassifier` 函数。在示例应用中，`init` 位于 [TextClassificationHelper.kt](https://github.com/tensorflow/examples/blob/master/lite/examples/text_classification/android/app/src/main/java/org/tensorflow/lite/examples/textclassification/TextClassificationHelper.kt) 中：
 
@@ -243,11 +243,11 @@ TensorFlow Lite 模型存储为 `*.tflite` 文件。该模型文件包含预测�
 
 ### 运行预测
 
-在您的 Android 应用中，一旦您初始化了 [BertNLClassifier](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/text/nlclassifier/BertNLClassifier) 或 [NLClassifier](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/text/nlclassifier/NLClassifier) 对象，就可以开始为模型提供输入文本以将其分类为“正面”或“负面”。
+在您的 Android 应用中，初始化 [BertNLClassifier](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/text/nlclassifier/BertNLClassifier) 或 [NLClassifier](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/text/nlclassifier/NLClassifier) 对象后，就可以开始为模型提供输入文本以将其分类为“正面”或“负面”。
 
-要运行预测：
+要运行预测，请执行以下操作：
 
-1. 创建一个 `classify` 函数，该函数使用选定的分类器 (`currentModel`) 并测量对输入文本进行分类所花费的时间 (`inferenceTime`)。在示例应用中，`classify` 函数位于 [TextClassificationHelper.kt](https://github.com/tensorflow/examples/blob/master/lite/examples/text_classification/android/app/src/main/java/org/tensorflow/lite/examples/textclassification/TextClassificationHelper.kt) 中：
+1. 创建一个 `classify` 函数，该函数使用所选分类器 (`currentModel`) 并测量对输入文本进行分类所花费的时间 (`inferenceTime`)。在示例应用中，`classify` 函数位于 [TextClassificationHelper.kt](https://github.com/tensorflow/examples/blob/master/lite/examples/text_classification/android/app/src/main/java/org/tensorflow/lite/examples/textclassification/TextClassificationHelper.kt) 中：
 
     ```
     fun classify(text: String) {
@@ -288,7 +288,7 @@ TensorFlow Lite 模型存储为 `*.tflite` 文件。该模型文件包含预测�
 
 要从模型获取预测结果，请执行以下操作：
 
-1. 为侦听器对象创建一个 `onResult` 函数来处理输出。在示例应序中，侦听器对象位于 [MainActivity.kt](https://github.com/tensorflow/examples/blob/master/lite/examples/text_classification/android/app/src/main/java/org/tensorflow/lite/examples/textclassification/MainActivity.kt) 中
+1. 为侦听器对象创建一个 `onResult` 函数来处理输出。在示例应用中，侦听器对象位于 [MainActivity.kt](https://github.com/tensorflow/examples/blob/master/lite/examples/text_classification/android/app/src/main/java/org/tensorflow/lite/examples/textclassification/MainActivity.kt) 中
 
     ```
     private val listener = object : TextClassificationHelper.TextResultsListener {
@@ -323,7 +323,7 @@ TensorFlow Lite 模型存储为 `*.tflite` 文件。该模型文件包含预测�
 
 ## 后续步骤
 
-- 要从头开始训练和实现模型，请参阅[使用 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) 教程。
+- 要从头开始训练和实现模型，请参阅[使用 TensorFlow Lite Model Maker 进行文本分类](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)教程。
 - 探索更多[适用于 TensorFlow 的文本处理工具](https://www.tensorflow.org/text)。
 - 在 [TensorFlow Hub](https://tfhub.dev/google/collections/bert/1) 上下载其他 BERT 模型。
 - 在[示例](../../examples)中探索 TensorFlow Lite 的各种用法。
