@@ -2,6 +2,8 @@
 
 本教程展示如何使用 TensorFlow Lite 构建 Android 应用，以连续检测设备摄像头捕获的帧中的目标。此应用专为实体 Android 设备设计。如果您要更新现有项目，可以使用代码示例作为参考，并跳至[修改项目](#add_dependencies)的说明。
 
+![Object detection animated demo](https://storage.googleapis.com/download.tensorflow.org/tflite/examples/obj_detection_cat.gif){: .attempt-right width="250px"}
+
 ## 目标检测概述
 
 *目标检测*是识别图像中多类目标的存在和位置的机器学习任务。目标检测模型是在包含一组已知目标的数据集上训练出来的。
@@ -46,12 +48,12 @@
 
 1. 克隆 git 仓库
     <pre class="devsite-click-to-copy">    git clone https://github.com/tensorflow/examples.git
-            </pre>
+                </pre>
 2. （可选）将您的 git 实例配置为使用稀疏签出，这样您就只有目标检测示例应用的文件：
     <pre class="devsite-click-to-copy">    cd examples
-            git sparse-checkout init --cone
-            git sparse-checkout set lite/examples/object_detection/android
-            </pre>
+                git sparse-checkout init --cone
+                git sparse-checkout set lite/examples/object_detection/android
+                </pre>
 
 ### 导入并运行项目
 
