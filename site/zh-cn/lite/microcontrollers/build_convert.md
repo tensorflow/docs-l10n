@@ -36,7 +36,12 @@ unsigned int converted_model_tflite_len = 18200;
 
 一旦你已经生成了此文件，你可以将它包含入你的程序。在嵌入式平台上，将数组声明改变为 `const` 类型以获得更好的内存效率是重要的。
 
-有关如何在程序中包含并使用模型的示例，请参阅 <em>Hello World</em> 示例中的 <a><code>model.cc</code></a>。
+<!--
+Removing this link for now because it is broken. Need to update TF example repos. b/244204652
+For an example of how to include and use a model in your program, see
+[`model.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/model.cc)
+in the *Hello World* example.
+-->
 
 ## 模型结构与训练
 
