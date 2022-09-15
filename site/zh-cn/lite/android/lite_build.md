@@ -1,6 +1,6 @@
 # 为 Android 构建 TensorFlow Lite 库
 
-本文介绍如何自行构建 TensorFlow Lite Android 库。通常，您不需要在本地构建 TensorFlow Lite Android 库。如果您只是希望使用此库，最简单的方法是使用 [MavenCentral 中托管的 TensorFlow Lite AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite)。有关在 Android 项目中如何使用这些库的更多详细信息，请参阅 [Android 快速入门](../guide/android.md)。
+本文介绍如何自行构建 TensorFlow Lite Android 库。通常，您不需要在本地构建 TensorFlow Lite Android 库。如果您只是希望使用此库，请参阅 [Android 快速入门](../android/quickstart.md)，了解有关如何在 Android 项目中使用的更多详细信息。
 
 ## 使用 Nightly 快照
 
