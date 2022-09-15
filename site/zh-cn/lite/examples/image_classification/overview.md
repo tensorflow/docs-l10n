@@ -169,4 +169,4 @@ TensorFlow Lite 图像分类模型对于单标签分类很有用；即，预测�
 - [使用 TensorFlow 进行图像分类](https://www.tensorflow.org/tutorials/images/classification)
 - [使用 CNN 进行图像分类](https://www.tensorflow.org/tutorials/images/cnn)
 - [迁移学习](https://www.tensorflow.org/tutorials/images/transfer_learning)
-- 数据增强
+- [数据增强](https://www.tensorflow.org/tutorials/images/data_augmentation)
