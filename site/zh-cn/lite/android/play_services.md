@@ -1,18 +1,18 @@
 # Google Play 服务中的 TensorFlow Lite
 
-TensorFlow Lite is available in Google Play services runtime for all Android devices running the current version of Play services. This runtime allows you to run machine learning (ML) models without statically bundling TensorFlow Lite libraries into your app.
+TensorFlow Lite 可以在 Google Play 服务运行时中用于所有运行当前版本 Play 服务的 Android 设备。利用此运行时，您可以运行机器学习模型，无需将 TensorFlow Lite 库静态捆绑到您的应用中。
 
-With the Google Play services API, you can reduce the size of your apps and gain improved performance from the latest stable version of the libraries. TensorFlow Lite in Google Play services is the recommended way to use TensorFlow Lite on Android.
+使用 Google Play 服务 API，您可以缩减应用的大小并从最新稳定版本的库中获得改进的性能。Google Play 服务中的 TensorFlow Lite 是在 Android 上使用 TensorFlow Lite 的推荐方式。
 
-You can get started with the Play services runtime with the [Quickstart](../android/quickstart), which provides a step-by-step guide to implement a sample application. If you are already using stand-alone TensorFlow Lite in your app, refer to the [Migrating from stand-alone TensorFlow Lite](#migrating) section to update an existing app to use the Play services runtime. For more information about Google Play services, see the [Google Play services](https://developers.google.com/android/guides/overview) website.
+您可以通过[快速入门](../android/quickstart)开始使用 Play 服务运行时，它提供了实现示例应用的分步指南。如果您已经在应用中使用独立的 TensorFlow Lite，请参阅[从独立的 TensorFlow Lite 迁移](#migrating)部分，以更新现有应用来使用 Play 服务运行时。有关 Google Play 服务的更多信息，请参阅 [Google Play 服务](https://developers.google.com/android/guides/overview)网站。
 
-<aside class="note"> <b>Terms:</b> By accessing or using TensorFlow Lite in Google Play services APIs, you agree to the <a href="#tos">Terms of Service</a>. Please read and understand all applicable terms and policies before accessing the APIs. </aside>
+<aside class="note"><b>条款</b>：访问或使用 Google Play 服务中的 TensorFlow Lite，即表示您同意<a href="#tos">服务条款</a>。在访问 API 之前，请阅读并理解所有适用的条款和政策。</aside>
 
-## Using the Play services runtime
+## 使用 Play 服务运行时
 
 Google Play 服务中的 TensorFlow Lite 可以通过 [TensorFlow Lite Task API](../api_docs/java/org/tensorflow/lite/task/core/package-summary) 和 [TensorFlow Lite Interpreter API](../api_docs/java/org/tensorflow/lite/InterpreterApi) 获得。Task Library 为使用视觉、音频和文本数据的常见机器学习任务提供了优化的开箱即用模型接口。TensorFlow Lite Interpreter API 由 TensorFlow 运行时和支持库提供，为构建和运行机器学习模型提供了更通用的接口。
 
-The following sections provide instructions on how to implement the Interpreter and Task Library APIs in Google Play services. While it is possible for an app to use both the Interpreter APIs and Task Library APIs, most apps should only use one set of APIs.
+以下部分提供了有关如何在 Google Play 服务中实现 Interpreter API 和 Task Library API 的说明。虽然应用可以同时使用 Interpreter API 和 Task Library API，但大多数应用只应使用一组 API。
 
 ### 使用 Task Library API
 
@@ -26,7 +26,7 @@ TensorFlow Lite Task API 封装了 Interpreter API，并为使用视觉、音频
 - 音频库：`org.tensorflow:tensorflow-lite-task-audio-play-services`
 - 文本库：`org.tensorflow:tensorflow-lite-task-text-play-services`
 
-Add one of the dependencies to your app project code to access the Play services API for TensorFlow Lite. For example, use the following to implement a vision task:
+将依赖项之一添加到您的应用项目代码中，以访问适用于 TensorFlow Lite 的 Play 服务 API。例如，要实现一个视觉任务，请使用以下代码：
 
 ```
 dependencies {
@@ -36,7 +36,7 @@ dependencies {
 }
 ```
 
-Caution: The TensorFlow Lite Tasks Audio library version 0.4.2 maven repository is incomplete. Use version 0.4.2.1 for this library instead: `org.tensorflow:tensorflow-lite-task-audio-play-services:0.4.2.1`.
+注意：TensorFlow Lite Task Audio 库版本 0.4.2 maven 仓库不完整。作为替代，将版本 0.4.2.1 用于此库：`org.tensorflow:tensorflow-lite-task-audio-play-services:0.4.2.1`。
 
 #### 2. 添加 TensorFlow Lite 的初始化
 
@@ -99,7 +99,7 @@ Interpreter API 比 Task Library API 提供更多的控制和灵活性。如果 
 
 #### 1. 添加项目依赖项
 
-Add the following dependencies to your app project code to access the Play services API for TensorFlow Lite:
+将以下依赖项添加到您的应用项目代码中，以访问适用于 TensorFlow Lite 的 Play 服务 API：
 
 ```
 dependencies {
@@ -226,7 +226,7 @@ InterpreterApi initializeInterpreter() {
 
 ## 硬件加速 {:#hardware-acceleration}
 
-TensorFlow Lite allows you to accelerate the performance of your model using specialized hardware processors, such as graphics processing units (GPUs). You can take advantage of these specialized processors using hardware drivers called [*delegates*](https://www.tensorflow.org/lite/performance/delegates). You can use the following hardware acceleration delegates with TensorFlow Lite in Google Play services:
+TensorFlow Lite 允许您使用图形处理单元 (GPU) 等专用硬件处理器来加速模型的性能。您可以使用称为[*委托*](https://www.tensorflow.org/lite/performance/delegates)的硬件驱动程序来利用这些专用处理器。您可以在 Google Play 服务中将以下硬件加速委托与 TensorFlow Lite 一起使用：
 
 - *[GPU 委托](https://www.tensorflow.org/lite/performance/gpu)（推荐）* – 此委托通过 Google Play 服务提供并动态加载，就像 Play 服务版本的 Task API 和 Interpreter API 一样。
 
@@ -234,17 +234,17 @@ TensorFlow Lite allows you to accelerate the performance of your model using spe
 
 有关使用 TensorFlow Lite 进行硬件加速的更多信息，请参阅 [TensorFlow Lite 委托](https://www.tensorflow.org/lite/performance/delegates)页面。
 
-### Checking device compatibility
+### 检查设备兼容性
 
-Not all devices support GPU hardware acceleration with TFLite. In order to mitigate errors and potential crashes, use the `TfLiteGpu.isGpuDelegateAvailable` method to check whether a device is compatible with the GPU delegate.
+并非所有设备都支持使用 TFLite 进行 GPU 硬件加速。为了减少错误和潜在的崩溃，请使用 `TfLiteGpu.isGpuDelegateAvailable` 方法检查设备与 GPU 委托是否兼容。
 
-Use this method to confirm whether a device is compatible with GPU, and use CPU or the NNAPI delegate as a fallback for when GPU is not supported.
+使用此方法确认设备与 GPU 是否兼容，并且在不支持 GPU 时使用 CPU 或 NNAPI 委托作为后备。
 
 ```
 useGpuTask = TfLiteGpu.isGpuDelegateAvailable(context)
 ```
 
-Once you have a variable like `useGpuTask`, you can use it to determine whether devices use the GPU delegate. The following examples show how this can be done with both the Task Library and Interpreter APIs.
+一旦拥有 `useGpuTask` 之类的变量，就可以使用它来确定设备是否使用 GPU 委托。下面的示例显示了如何使用 Task Library 和 Interpreter API 完成此操作。
 
 **使用 Task API**
 
@@ -316,7 +316,7 @@ Once you have a variable like `useGpuTask`, you can use it to determine whether 
 
 要将 GPU 委托与 Task API 一起使用，请执行以下操作：
 
-1. Update the project dependencies to use the GPU delegate from Play services:
+1. 更新项目依赖项以使用来自 Play 服务的 GPU 委托：
 
     ```
     implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
@@ -385,7 +385,7 @@ Once you have a variable like `useGpuTask`, you can use it to determine whether 
 
 要将 GPU 委托与 Interpreter API 一起使用，请执行以下操作：
 
-1. Update the project dependencies to use the GPU delegate from Play services:
+1. 更新项目依赖项以使用来自 Play 服务的 GPU 委托：
 
     ```
     implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
@@ -462,19 +462,19 @@ Google Play 服务中的 TensorFlow Lite 存在以下限制：
 
 ## 支持和反馈 {:#support}
 
-You can provide feedback and get support through the TensorFlow Issue Tracker. Please report issues and support requests using the [Issue template](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md) for TensorFlow Lite in Google Play services.
+您可以通过 TensorFlow 问题跟踪器提供反馈并获得支持。请使用适用于 Google Play 服务中的 TensorFlow Lite 的[议题模板](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md)报告议题和支持请求。
 
 ## 服务条款 {:#tos}
 
-Use of TensorFlow Lite in Google Play services APIs is subject to the [Google APIs Terms of Service](https://developers.google.com/terms/).
+使用 Google Play 服务中的 TensorFlow Lite 需遵守 [Google API 服务条款](https://developers.google.com/terms/)。
 
 ### 隐私和数据收集
 
-When you use TensorFlow Lite in Google Play services APIs, processing of the input data, such as images, video, text, fully happens on-device, and TensorFlow Lite in Google Play services APIs does not send that data to Google servers. As a result, you can use our APIs for processing data that should not leave the device.
+当您使用 Google Play 服务 API 中的 TensorFlow Lite 时，图像、视频、文本等输入数据的处理完全在设备端进行，而 Google Play 服务 API 中的 TensorFlow Lite 不会将这些数据发送到 Google 服务器。因此，您可以使用我们的 API 处理不应离开设备的数据。
 
 Google Play 服务 API 中的 TensorFlow Lite 可能会不时联系 Google 服务器，以便接收错误修复、更新的模型和硬件加速器兼容性信息等内容。Google Play 服务 API 中的 TensorFlow Lite 还将有关应用中 API 的性能和利用率的指标发送给 Google。Google 使用这些指标数据来衡量性能，调试、维护和改进 API，并检测误用或滥用，有关详细信息，请参阅我们的[隐私权政策](https://policies.google.com/privacy)。
 
-**You are responsible for informing users of your app about Google's processing of TensorFlow Lite in Google Play services APIs metrics data as required by applicable law.**
+**您有责任根据适用法律的要求，将 Google 对 Google Play 服务 API 中的 TensorFlow Lite 指标数据的处理告知您应用的用户。**
 
 我们收集的数据包括：
 
