@@ -184,7 +184,7 @@ Native API와 마찬가지로 API 객체를 빌드하려면 클라이언트가 �
     }
     ```
 
-- **Create factory functions of the API** - This also mirrors native factory functions, except Android factory functions also need to take [`Context`](https://developer.android.com/reference/android/content/Context) for file access. The implementation calls one of the utilities in [`TaskJniUtils`](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/core/TaskJniUtils.java) to build the corresponding C++ API object and pass its pointer to the `BaseTaskApi` constructor.
+- **API의 팩터리 함수 만들기** - Android 팩터리 함수가 파일 액세스를 위해 [`Context`](https://developer.android.com/reference/android/content/Context)도 받아야 한다는 점을 제외하고, 네이티브 팩터리 함수를 미러링합니다. 구현을 위해 [`TaskJniUtils`](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/core/TaskJniUtils.java)의 유틸리티 중 하나를 호출하여 해당 C++ API 객체를 빌드하고 포인터를 `BaseTaskApi` 생성자로 전달합니다.
 
     ```java
       class BertQuestionAnswerer extends BaseTaskApi {
