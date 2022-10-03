@@ -30,7 +30,7 @@ XLA의 [GPU 백엔드](https://www.tensorflow.org/code/tensorflow/compiler/xla/s
 
 LLVM을 사용할 수 없는 경우, 가장 좋은 방법은 원하는 하드웨어에 맞게 XLA용 새 백엔드를 구현하는 것입니다. 이 옵션에 가장 많은 노력이 필요합니다. 구현해야 하는 클래스는 다음과 같습니다.
 
-- [`StreamExecutor`](https://www.tensorflow.org/code/tensorflow/stream_executor/stream_executor.h): 많은 기기의 경우, `StreamExecutor`의 모든 메서드가 필요하지는 않습니다. 자세한 내용은 기존 `StreamExecutor` 구현을 참조하세요.
+- [`StreamExecutor`](https://www.tensorflow.org/code/tensorflow/compiler/xla/stream_executor/stream_executor.h): 많은 기기의 경우, `StreamExecutor`의 모든 메서드가 필요하지는 않습니다. 자세한 내용은 기존 `StreamExecutor` 구현을 참조하세요.
 - [`xla::Compiler`](https://www.tensorflow.org/code/tensorflow/compiler/xla/service/compiler.h): 이 클래스는 HLO 계산의 컴파일을 `xla::Executable`로 캡슐화합니다.
 - [`xla::Executable`](https://www.tensorflow.org/code/tensorflow/compiler/xla/service/executable.h): 이 클래스는 플랫폼에서 컴파일된 계산을 시작하는 데 사용됩니다.
 - [`xla::TransferManager`](https://www.tensorflow.org/code/tensorflow/compiler/xla/service/transfer_manager.h): 이 클래스를 사용하면 백엔드가 지정된 기기 메모리 핸들에서 XLA 리터럴 데이터를 구성하기 위한 플랫폼별 메커니즘을 제공할 수 있습니다. 즉, 호스트에서 기기로, 또는 그 반대로 데이터 전송을 캡슐화하는 데 도움이 됩니다.
