@@ -57,9 +57,8 @@ Android 以外のプラットフォームを使用する場合、または、す
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">
-      <a href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">Deeplab v3</a>
-    </td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">Deeplab v3</a>
+</td>
     <td rowspan="3">       2.7 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>16ms</td>
