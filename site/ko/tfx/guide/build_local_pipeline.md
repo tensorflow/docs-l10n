@@ -2,15 +2,15 @@
 
 TFX를 사용하면 머신러닝(ML) 워크플로를 파이프라인으로 쉽게 오케스트레이션하여 다음과 같은 결과를 얻을 수 있습니다.
 
-- Automate your ML process, which lets you regularly retrain, evaluate, and deploy your model.
-- Create ML pipelines which include deep analysis of model performance and validation of newly trained models to ensure performance and reliability.
-- Monitor training data for anomalies and eliminate training-serving skew
-- Increase the velocity of experimentation by running a pipeline with different sets of hyperparameters.
+- ML 프로세스를 자동화하여 모델을 정기적으로 재훈련, 평가 및 배포할 수 있습니다.
+- 모델 성능에 대한 심층적인 분석과 새로 훈련된 모델의 검증을 포함한 ML 파이프라인을 생성하여 성능과 안정성을 보장합니다.
+- 훈련 데이터에 이상이 있는지 모니터링하고 이상 징후를 발견하고 훈련이 편향적으로 적용되는 것을 방지합니다.
+- 다양한 하이퍼 매개변수 세트로 파이프라인을 실행하여 실험 속도를 높입니다.
 
 일반적인 파이프라인 개발 프로세스는 운영에 배포되기 전에 데이터 분석 및 구성 요소 설정과 함께 로컬 시스템에서 시작됩니다. 이 가이드에서는 로컬에서 파이프라인을 구축하는 두 가지 방법을 설명합니다.
 
-- Customize a TFX pipeline template to fit the needs of your ML workflow. TFX pipeline templates are prebuilt workflows that demonstrate best practices using the TFX standard components.
-- Build a pipeline using TFX. In this use case, you define a pipeline without starting from a template.
+- ML 워크플로의 요구 사항에 맞게 TFX 파이프라인 템플릿을 사용자 정의합니다. TFX 파이프라인 템플릿은 TFX 표준 구성 요소를 사용한 모범 사례를 보여주는 사전 빌드된 워크플로입니다.
+- TFX를 사용하여 파이프라인을 빌드합니다. 이 사용 사례에서는 템플릿으로 시작하지 않고 파이프라인을 정의합니다.
 
 파이프라인을 개발하는 동안 `LocalDagRunner`을 파이프라인과 함께 실행할 수 있습니다. 파이프라인 구성 요소를 잘 정의하고 테스트한 후에는 Kubeflow 혹은 Airflow와 같은 운영 등급 오케스트레이터를 사용할 수 있습니다.
 
@@ -22,15 +22,15 @@ TFX는 Python 패키지이므로 가상 환경이나 Docker 컨테이너와 같�
 pip install tfx
 ```
 
-If you are new to TFX pipelines, [learn more about the core concepts for TFX pipelines](understanding_tfx_pipelines) before continuing.
+TFX 파이프라인을 처음 접하는 경우, 우선 [TFX 파이프라인의 핵심 개념에 대해 자세히 알아보세요](understanding_tfx_pipelines).
 
-## Build a pipeline using a template
+## 템플릿을 사용하여 파이프라인 빌드하기
 
 TFX 파이프라인 템플릿을 사용하면 사용 사례에 맞게 사용자 정의할 수 있는 사전 빌드된 파이프라인 정의 세트를 제공하기에 파이프라인 개발을 더 쉽게 시작할 수 있습니다.
 
-The following sections describe how to create a copy of a template and customize it to meet your needs.
+다음 섹션에서는 템플릿 사본을 만들고 필요에 맞게 사용자 정의하는 방법에 대해 설명합니다.
 
-### Create a copy of the pipeline template
+### 파이프라인 템플릿의 복사본 만들기
 
 1. 사용 가능한 TFX 파이프라인 템플릿을 확인합니다.
 
@@ -43,19 +43,19 @@ The following sections describe how to create a copy of a template and customize
         --destination_path=&lt;var&gt;destination-path&lt;/var&gt;
         </pre>
 
-    Replace the following:
+    다음을 교체하십시오.
 
-    - <var>template</var>: The name of the template you want to copy.
-    - <var>pipeline-name</var>: The name of the pipeline to create.
-    - <var>destination-path</var>: The path to copy the template into.
+    - <var>template</var>: 복사할 템플릿의 이름입니다.
+    - <var>pipeline-name</var>: 생성할 파이프라인의 이름입니다.
+    - <var>destination-path</var>: 템플릿을 복사해 넣을 경로입니다.
 
-    Learn more about the [`tfx template copy` command](cli#copy).
+    [`tfx template copy` 명령](cli#copy)에 대해 자세히 알아보세요.
 
-3. A copy of the pipeline template has been created at the path you specified.
+3. 지정한 경로에 파이프라인 템플릿의 복사본이 생성됩니다.
 
 참고: 이 가이드의 나머지 부분에서는 여러분이 `penguin` 템플릿을 선택했다고 가정합니다.
 
-### Explore the pipeline template
+### 파이프라인 템플릿 살펴보기
 
 이 섹션에서는 템플릿으로 만든 스캐폴딩을 개괄적으로 설명합니다.
 
@@ -103,38 +103,38 @@ The following sections describe how to create a copy of a template and customize
 
 6. 템플릿으로 생성한 스캐폴딩을 검토하고 `LocalDagRunner`을 사용하여 파이프라인 실행을 생성했습니다. 이제, 요구 사항에 맞게 템플릿을 사용자 정의합니다.
 
-### Customize your pipeline
+### 파이프라인 사용자 정의하기
 
 이 섹션에서는 템플릿 사용자 정의를 시작하는 방법을 개괄적으로 설명합니다.
 
-1. Design your pipeline. The scaffolding that a template provides helps you implement a pipeline for tabular data using the TFX standard components. If you are moving an existing ML workflow into a pipeline, you may need to revise your code to make full use of [TFX standard components](index#tfx_standard_components). You may also need to create [custom components](understanding_custom_components) that implement features which are unique to your workflow or that are not yet supported by TFX standard components.
+1. 파이프라인을 설계합니다. 템플릿이 제공하는 스캐폴딩은 TFX 표준 구성 요소를 사용하여 테이블 형식 데이터에 적합하게 파이프라인을 구현하는 데 도움을 줍니다. 기존 ML 워크플로를 파이프라인으로 이동하는 경우, [TFX 표준 구성 요소](index#tfx_standard_components)를 최대한 활용하도록 코드를 수정해야 할 수 있습니다. 워크플로에 고유하거나 아직 TFX 표준 구성 요소에서 지원하지 않는 기능을 구현하는 [사용자 정의 구성 요소](understanding_custom_components)를 만들어야 할 수도 있습니다.
 
-2. Once you have designed your pipeline, iteratively customize the pipeline using the following process. Start from the component that ingests data into your pipeline, which is usually the `ExampleGen` component.
+2. 파이프라인을 설계했으면 다음 프로세스를 사용하여 파이프라인을 반복적으로 사용자 정의합니다. 일반적으로, `ExampleGen` 구성 요소인 파이프라인으로 데이터를 수집하는 구성 요소부터 시작합니다.
 
-    1. Customize the pipeline or a component to fit your use case. These customizations may include changes like:
+    1. 사용 사례에 맞게 파이프라인 또는 구성 요소를 사용자 정의합니다. 이러한 사용자 정의에는 다음과 같은 변경이 포함될 수 있습니다.
 
-        - Changing pipeline parameters.
-        - Adding components to the pipeline or removing them.
-        - Replacing the data input source. This data source can either be a file or queries into services such as BigQuery.
-        - Changing a component's configuration in the pipeline.
-        - Changing a component's customization function.
+        - 파이프라인 매개변수 변경
+        - 파이프라인에 구성 요소를 추가하거나 제거
+        - 데이터 입력 소스 교체, 이 데이터 소스는 파일이거나 BigQuery와 같은 서비스에 대한 쿼리일 수 있습니다.
+        - 파이프라인에서 구성 요소의 구성 변경
+        - 구성요소의 사용자 정의 함수 변경
 
     2. `local_runner.py` 스크립트를 사용하거나, 다른 오케스트레이터를 사용하는 경우 다른 적절한 DAG 실행기를 사용하여 구성 요소를 로컬에서 실행합니다. 스크립트가 실패하면 오류를 디버그하고 스크립트를 다시 실행합니다.
 
-    3. Once this customization is working, move on to the next customization.
+    3. 이 사용자 정의가 문제 없이 동작하면 다음 사용자 정의로 진행합니다.
 
-3. Working iteratively, you can customize each step in the template workflow to meet your needs.
+3. 반복적으로 작업하면서 필요에 맞게 템플릿 워크플로의 각 스텝을 사용자 정의할 수 있습니다.
 
-## Build a custom pipeline
+## 사용자 정의 파이프라인 빌드하기
 
-Use the following instructions to learn more about building a custom pipeline without using a template.
+템플릿을 사용하지 않고 사용자 정의 파이프라인을 빌드하는 방법에 대해 자세히 알아보려면 다음 지침을 따르세요.
 
-1. Design your pipeline. The TFX standard components provide proven functionality to help you implement a complete ML workflow. If you are moving an existing ML workflow into a pipeline, you may need to revise your code to make full use of TFX standard components. You may also need to create [custom components](understanding_custom_components) that implement features such as data augmentation.
+1. 파이프라인을 설계합니다. TFX 표준 구성 요소는 완전한 ML 워크플로를 구현하는 데 도움이 되는 입증된 기능을 제공합니다. 기존 ML 워크플로를 파이프라인으로 이동하는 경우, TFX 표준 구성 요소를 최대한 활용하기 위해 코드를 수정해야 할 수 있습니다. 또한 데이터 증대와 같은 기능을 구현하는 [사용자 정의 구성 요소](understanding_custom_components)를 만들어야 할 수도 있습니다.
 
-    - Learn more about [standard TFX components](index#tfx_standard_components).
-    - Learn more about [custom components](understanding_custom_components).
+    - [표준 TFX 구성 요소](index#tfx_standard_components)에 대해 자세히 알아보세요.
+    - [사용자 정의 구성 요소](understanding_custom_components)에 대해 자세히 알아보세요.
 
-2. Create a script file to define your pipeline using the following example. This guide refers to this file as `my_pipeline.py`.
+2. 다음 예를 사용하여 파이프라인을 정의하는 스크립트 파일을 만듭니다. 이 가이드에서는 이 파일을 `my_pipeline.py`라고 합니다.
 
     <pre class="devsite-click-to-copy prettyprint">    import os
         from typing import Optional, Text, List
@@ -183,21 +183,21 @@ Use the following instructions to learn more about building a custom pipeline wi
 
     다음 단계에서는 `create_pipeline`에서 파이프라인을 정의하고 로컬 실행기를 사용하여 파이프라인을 로컬로 실행합니다.
 
-    Iteratively build your pipeline using the following process.
+    다음 프로세스를 사용하여 파이프라인을 반복적으로 빌드합니다.
 
-    1. Customize the pipeline or a component to fit your use case. These customizations may include changes like:
+    1. 사용 사례에 맞게 파이프라인 또는 구성 요소를 사용자 정의합니다. 이러한 사용자 정의에는 다음과 같은 변경이 포함될 수 있습니다.
 
-        - Changing pipeline parameters.
-        - Adding components to the pipeline or removing them.
-        - Replacing a data input file.
-        - Changing a component's configuration in the pipeline.
-        - Changing a component's customization function.
+        - 파이프라인 매개변수 변경
+        - 파이프라인에 구성 요소를 추가하거나 제거
+        - 데이터 입력 파일 교체
+        - 파이프라인에서 구성 요소의 구성 변경
+        - 구성요소의 사용자 정의 함수 변경
 
     2. 로컬 실행기를 사용하거나 스크립트를 직접 실행하여 구성 요소를 로컬에서 실행합니다. 스크립트가 실패하면 오류를 디버그하고 스크립트를 다시 실행합니다.
 
-    3. Once this customization is working, move on to the next customization.
+    3. 이 사용자 정의가 문제 없이 동작하면 다음 사용자 정의로 진행합니다.
 
-    Start from the first node in your pipeline's workflow, typically the first node ingests data into your pipeline.
+    파이프라인 워크플로의 첫 번째 노드부터 시작합니다. 일반적으로, 첫 번째 노드는 파이프라인으로 데이터를 수집합니다.
 
 3. 워크플로의 첫 번째 노드를 파이프라인에 추가합니다. 이 예에서 파이프라인은 `ExampleGen` 표준 구성 요소를 사용하여 `./data`의 디렉터리에서 CSV를 로드합니다.
 
@@ -249,7 +249,7 @@ Use the following instructions to learn more about building a custom pipeline wi
     <pre class="devsite-click-to-copy devsite-terminal">    python my_pipeline.py
         </pre>
 
-    The result should be something like the following:
+    결과는 다음과 같아야 합니다.
 
     <pre>    INFO:absl:Component CsvExampleGen depends on [].
         INFO:absl:Component CsvExampleGen is scheduled.
@@ -267,4 +267,4 @@ Use the following instructions to learn more about building a custom pipeline wi
         INFO:absl:Component CsvExampleGen is finished.
         </pre>
 
-6. Continue to iteratively add components to your pipeline.
+6. 계속해서 파이프라인에 구성 요소를 반복적으로 추가합니다.
