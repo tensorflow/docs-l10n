@@ -86,15 +86,15 @@ List<Classifications> results = audioClassifier.classify(audioTensor);
 
 [ソースコードと javadoc](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/audio/classifier/AudioClassifier.java) を参照し、`AudioClassifier` を構成するその他のオプションについてご覧ください。
 
-## Run inference in iOS
+## iOS で推論を実行する
 
-### Step 1: Install the dependencies
+### ステップ 1: 依存関係をインストールする
 
-The Task Library supports installation using CocoaPods. Make sure that CocoaPods is installed on your system. Please see the [CocoaPods installation guide](https://guides.cocoapods.org/using/getting-started.html#getting-started) for instructions.
+タスクライブラリは、CocoaPods を使用したインストールをサポートしています。CocoaPods がシステムにインストールされていることを確認してください。手順については、[CocoaPods インストールガイド](https://guides.cocoapods.org/using/getting-started.html#getting-started)を参照してください。
 
-Please see the [CocoaPods guide](https://guides.cocoapods.org/using/using-cocoapods.html) for details on adding pods to an Xcode project.
+ポッドを Xcode プロジェクトに追加する詳細な方法については、[CocoaPods ガイド](https://guides.cocoapods.org/using/using-cocoapods.html)を参照してください。
 
-Add the `TensorFlowLiteTaskAudio` pod in the Podfile.
+Podfile に `TensorFlowLiteTaskText` ポッドを追加します。
 
 ```
 target 'MyAppWithTaskAPI' do
@@ -103,7 +103,7 @@ target 'MyAppWithTaskAPI' do
 end
 ```
 
-Make sure that the `.tflite` model you will be using for inference is present in your app bundle.
+推論で使用する `.tflite` モデルがアプリバンドルに存在することを確認します。
 
 ### ステップ 2: モデルを使用する
 
@@ -204,7 +204,7 @@ TFLAudioRecord *audioRecord = [classifier createAudioRecordWithError:nil];
 }];
 ```
 
-See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/audio/sources/TFLAudioClassifier.h) for more options to configure `TFLAudioClassifier`.
+`TFLAudioClassifier` を構成するその他のオプションについては、[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/audio/sources/TFLAudioClassifier.h)を参照してください。
 
 ## Python で推論を実行する
 
@@ -219,7 +219,7 @@ pip install tflite-support
 - Linux: `sudo apt-get update && apt-get install libportaudio2` を実行します。
 - Mac および Windows: `tflite-support` pip パッケージをインストールするときに、PortAudio が自動的にインストールされます。
 
-### Step 2: Using the model
+### ステップ 2: モデルを使用する
 
 ```python
 # Imports
@@ -241,7 +241,7 @@ audio_file = audio.TensorAudio.create_from_wav_file(audio_path, classifier.requi
 audio_result = classifier.classify(audio_file)
 ```
 
-See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/audio/audio_classifier.py) for more options to configure `AudioClassifier`.
+`AudioClassifier` を構成するその他のオプションについては、[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/audio/audio_classifier.py)を参照してください。
 
 ## C++ で推論を実行する
 
