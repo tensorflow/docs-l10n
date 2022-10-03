@@ -23,7 +23,7 @@ Evaluator 파이프라인 구성 요소는 일반적으로 배포가 매우 쉽�
 Evaluator를 설정하려면 다음 정보가 필요합니다.
 
 - 구성할 메트릭(모델과 함께 저장된 메트릭 외에 다른 메트릭이 추가되는 경우에만 필요함). 자세한 내용은 [Tensorflow 모델 분석 메트릭](https://github.com/tensorflow/model-analysis/blob/master/g3doc/metrics.md)을 참조하세요.
-- Slices to configure (if no slices are given then an "overall" slice will be added by default). See [Tensorflow Model Analysis Setup](https://github.com/tensorflow/model-analysis/blob/master/g3doc/setup.md) for more information.
+- 구성할 슬라이스(슬라이스가 제공되지 않은 경우, 기본적으로 "전체" 슬라이스가 추가됨). 자세한 내용은 [Tensorflow 모델 분석 설정](https://github.com/tensorflow/model-analysis/blob/master/g3doc/setup.md)을 참조하세요.
 
 검증이 포함되는 경우, 다음 추가 정보가 필요합니다.
 
