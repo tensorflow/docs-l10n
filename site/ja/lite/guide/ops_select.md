@@ -40,7 +40,7 @@ dependencies {
 }
 ```
 
-ナイトリーのスナップショットを使用するには、[Sonatype スナップショットリポジトリ](./build_android#use_nightly_snapshots)が追加されていることを確認してください。
+ナイトリーのスナップショットを使用するには、[Sonatype スナップショットリポジトリ](../android/lite_build.md#use_nightly_snapshots)が追加されていることを確認してください。
 
 依存関係を追加したら、グラフの TensorFlow 演算子を処理するために必要なデリゲートが、それを必要とするグラフに自動的にインストールされます。
 
@@ -58,7 +58,7 @@ android {
 
 #### Android AAR を構築する
 
-バイナリサイズを縮小するケースやより高度なケースでは、手動でライブラリを構築することもできます。<a href="android.md">稼働中の TensorFlow Lite ビルド環境</a>がある場合、次のように、セレクト TensorFlow 演算子を使用して Android AAR を構築することができます。
+バイナリサイズを縮小する場合、または、より高度なケースでは、手動でライブラリを構築することもできます。[稼働中の TensorFlow Lite ビルド環境](../android/quickstart.md)がある場合、次のように、Select TensorFlow 演算子を使用して Android AAR を構築することができます。
 
 ```sh
 sh tensorflow/lite/tools/build_aar.sh \
@@ -105,7 +105,7 @@ dependencies {
 
 #### CocoaPods を使用する
 
-`armv7`および`arm64`の構築済みの Select TensorFlow 演算子 CocoaPods はナイトリーで提供されています。これらは、`TensorFlowLiteSwift`または`TensorFlowLiteObjC`CocoaPods と合わせて使用できます。
+TensorFlow Lite provides nightly prebuilt select TF ops CocoaPods for `arm64`, which you can depend on alongside the `TensorFlowLiteSwift` or `TensorFlowLiteObjC` CocoaPods.
 
 *注*: `x86_64`シミュレーターでセレクト TF 演算を使用する必要がある場合は、セレクト演算フレームワークを自分で構築できます 詳細については、[Bazel を使用する、および、Xcode](#using_bazel_xcode) のセクションを参照してください。
 
@@ -116,6 +116,14 @@ dependencies {
 ```
 
 `pod install` を実行後、セレクト TF 演算子フレームワークをプロジェクトに強制読み込みできるように、追加のリンカーフラグを指定する必要があります。Xcode プロジェクトで、`Build Settings` -&gt; `Other Linker Flags` に移動し、次を追加します。
+
+For versions &gt;= 2.9.0:
+
+```text
+-force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.xcframework/ios-arm64/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
+```
+
+For versions &lt; 2.9.0:
 
 ```text
 -force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
@@ -135,8 +143,8 @@ iOS 用の Select TensorFlow 演算子を使った TensorFlow Lite は Bazel を
 iOS サポートを有効化したワークスペースを構成したら、次のコマンドを使用して、セレクト TF 演算子のアドオンフレームワークを構築します。これは、通常の `TensorFlowLiteC.framework` の上に追加されるフレームワークです。セレクト TF 演算子フレームワークは、`i386` アーキテクチャには構築できまないため、`i386` を除くターゲットアーキテクチャのｎリストを明示的に指定する必要があります。
 
 ```sh
-bazel build -c opt --config=ios --ios_multi_cpus=armv7,arm64,x86_64 \
-  //tensorflow/lite/experimental/ios:TensorFlowLiteSelectTfOps_framework
+bazel build -c opt --config=ios --ios_multi_cpus=arm64,x86_64 \
+  //tensorflow/lite/ios:TensorFlowLiteSelectTfOps_framework
 ```
 
 これにより、`bazel-bin/tensorflow/lite/ios/`ディレクトリにフレームワークが生成されます。iOS 構築ガイドの [Xcode プロジェクト設定](./build_ios.md#modify_xcode_project_settings_directly)セクションに説明された手順と同様の手順を実行し、この新しいフレームワークを Xcode プロジェクトに追加することができます。
@@ -200,7 +208,7 @@ TF 演算子のみを使用（`SELECT_TF_OPS`） | 264.5
 
 ## 既知の制限
 
-- 特定の TensorFlow 演算子は、ストック TensorFlow で通常利用可能な全セットの入力型/出力型をサポートしていない場合があります。
+- Unsupported types: Certain TensorFlow ops may not support the full set of input/output types that are typically available in TensorFlow.
 
 ## 更新
 
