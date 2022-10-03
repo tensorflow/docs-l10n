@@ -45,9 +45,8 @@ Android または iOS 以外のプラットフォームを使用する場合、�
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a>
-</td>
-    <td rowspan="3">       100.5 Mb</td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a> </td>
+    <td rowspan="3">       100.5 Mb     </td>
     <td>Pixel 3 (Android 10)</td>
     <td>123ms*</td>
   </tr>
@@ -83,5 +82,5 @@ Android または iOS 以外のプラットフォームを使用する場合、�
 
 ## BERT の詳細を読む
 
-- 学術論文: [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding (自然言語処理のための Transformer を用いたディープ双方向型事前トレーニング)](https://arxiv.org/abs/1810.04805)
+- 4 threads used.
 - [BERT のオープンソース実装](https://github.com/google-research/bert)
