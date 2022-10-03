@@ -36,7 +36,12 @@ unsigned int converted_model_tflite_len = 18200;
 
 ファイルを生成したら、プログラムに含めることができます。組み込みプラットフォームでのメモリ効率を向上させるには、配列宣言を`const`に変更することが重要です。
 
-プログラムにモデルを含めて使用する方法の例については、<em>Hello World</em>の例の<a> <code>model.cc</code></a>  をご覧ください。
+<!--
+Removing this link for now because it is broken. Need to update TF example repos. b/244204652
+For an example of how to include and use a model in your program, see
+[`model.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/model.cc)
+in the *Hello World* example.
+-->
 
 ## モデルのアーキテクチャとトレーニング
 
