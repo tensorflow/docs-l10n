@@ -12,7 +12,7 @@
 
 [execution_context.ExecutionContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/execution_contexts/sync_execution_context.py)는 컴파일 함수를 사용하여 계산을 컴파일하고 [Executor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py)를 사용하여 계산을 실행하는 [context_base.Context](execution.md#executor)입니다.
 
-이 API는 [Executor](execution.md#executor)가 실행에 사용될 때 사용해야 하는 **상위 수준의 추상화**를 정의합니다. [native](backend.md#native) 및 [IREE](backend.md#iree) 백엔드는 이 수준에서 통합됩니다.
+이 API는 실행을 위해 <a>Executor</a>가 사용될 때 사용해야 하는 <strong>상위 수준 추상화</strong>를 정의합니다. [네이티브](backend.md#native)는 이 수준에서 통합됩니다.
 
 ### `FederatedComputationContext`
 
