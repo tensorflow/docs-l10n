@@ -25,7 +25,7 @@ print(model.predict(np.array([[5]])))
 
 ```js
 // JavaScript:
-import * as tf from '@tensorlowjs/tfjs';
+import * as tf from '@tensorflow/tfjs';
 
 // Build and compile model.
 const model = tf.sequential();
@@ -47,7 +47,7 @@ model.predict(tf.tensor2d([[5]], [1, 1])).print();
 
 ## コンストラクタは JavaScript オブジェクトを構成として受け取る
 
-上記の例の次の Python の行と JavaScript の行を比較します。どちらも [Dense](https://keras.io/layers/core/#dense) レイヤーを作成します。
+上記の例の次の Python の行と JavaScript の行を比較します。どちらも [Dense](https://keras.io/api/layers/core_layers/dense) レイヤーを作成します。
 
 ```python
 # Python:
@@ -59,7 +59,7 @@ keras.layers.Dense(units=1, inputShape=[1])
 tf.layers.dense({units: 1, inputShape: [1]});
 ```
 
-JavaScript 関数には、Python 関数のキーワード引数に相当するものはありません。忘れやすいことですが、JavaScript の位置引数としてコンストラクタオプションを実装することは避けます。また、多数のキーワード引数を持つコンストラクタ([ LSTM ](https://keras.io/layers/recurrent/#lstm)など) での使用を避けます。これが、JavaScript 構成オブジェクトを使用する理由です。<br>このようなオブジェクトは、Python キーワード引数と同じレベルの位置の不変性と柔軟性を提供します。
+JavaScript 関数には、Python 関数のキーワード引数に相当するものはありません。忘れやすいことですが、JavaScript の位置引数としてコンストラクタオプションを実装することは避けます。また、多数のキーワード引数を持つコンストラクタ([ LSTM ](https://keras.io/api/layers/recurrent_layers/lstm)など) での使用を避けます。これが、JavaScript 構成オブジェクトを使用する理由です。<br>このようなオブジェクトは、Python キーワード引数と同じレベルの位置の不変性と柔軟性を提供します。
 
 Model クラスの一部のメソッド( [`Model.compile()`](https://keras.io/models/model/#model-class-api)) も、JavaScript 構成オブジェクトを入力として受け取ります。ただし、`Model.fit()`、 `Model.evaluate()`および`Model.predict()`は少し異なることに注意してください。これらのメソッドは必須の`x` (特徴) および`y` (ラベルまたはターゲット) データを入力として受け取るため、 `x`と`y`は、キーワード引数の役割を果たす後続の構成オブジェクトとは別の位置引数です。以下に例を示します。
 
@@ -183,7 +183,7 @@ const mySGD = tf.train.sgd({lr: 0.2});
 
 ## HDF5 ファイルではなく URL から読み込む loadLayersModel()
 
-Keras ではモデルは通常、HDF5 (.h5) ファイルとして[保存](https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model)され、後で`keras.models.load_model()`メソッドを使用して読み込みます。このメソッドは、.h5 ファイルへのパスを取得します。[`tf.loadLayersModel()`](https://js.tensorflow.org/api/latest/#loadLayersModel)は、TensorFlow.js の`load_model()`に対応します。HDF5 はブラウザフレンドリーなファイル形式ではないため、`tf.loadLayersModel()`は TensorFlow.js 固有の形式を取ります。`tf.loadLayersModel()`は、入力引数として model.json ファイルを取ります。model.json は、tensorflowjs pip パッケージを使用して Keras HDF5 ファイルから変換できます。
+Keras ではモデルは通常、HDF5 (.h5) ファイルとして[保存](https://keras.io/getting_started/faq/#what-are-my-options-for-saving-models)され、後で`keras.models.load_model()`メソッドを使用して読み込みます。このメソッドは、.h5 ファイルへのパスを取得します。<a><code>tf.loadLayersModel()</code></a>は、TensorFlow.js の`load_model()`に対応します。HDF5 はブラウザフレンドリーなファイル形式ではないため、`tf.loadLayersModel()`は TensorFlow.js 固有の形式を取ります。`tf.loadLayersModel()`は、入力引数として model.json ファイルを取ります。model.json は、tensorflowjs pip パッケージを使用して Keras HDF5 ファイルから変換できます。
 
 ```js
 // JavaScript:
@@ -192,7 +192,7 @@ const model = await tf.loadLayersModel('https://foo.bar/model.json');
 
 また、`tf.loadLayersModel()`は[`tf.Model`](https://js.tensorflow.org/api/latest/#class:Model)の[`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)を返すことに注意してください。
 
-一般的に、TensorFlow.js での`tf.Model`の保存は`tf.Model.save`メソッド、読み込みは、`tf.loadLayersModel`メソッドを使用して実行されます。これらの API は、Keras の [save と load_model API](https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model) と同様に設計されています。しかし、ブラウザ環境は Keras のような主要なディープラーニングフレームワークが実行されるバックエンド環境とはかなり異なります。特に、データを永続化および変換するための一連のルートが異なります。したがって、TensorFlow.js と Keras の保存/読み込み API の間にはいくつかの興味深い違いがあります。詳細については、「[tf.Model](./save_load.md) の保存と読み込み」チュートリアルを参照してください。
+一般的に、TensorFlow.js での`tf.Model`の保存は`tf.Model.save`メソッド、読み込みは、`tf.loadLayersModel`メソッドを使用して実行されます。これらの API は、Keras の [save と load_model API](https://keras.io/getting_started/faq/#what-are-my-options-for-saving-models) と同様に設計されています。しかし、ブラウザ環境は Keras のような主要なディープラーニングフレームワークが実行されるバックエンド環境とはかなり異なります。特に、データを永続化および変換するための一連のルートが異なります。したがって、TensorFlow.js と Keras の保存/読み込み API の間にはいくつかの興味深い違いがあります。詳細については、「[tf.Model](./save_load.md) の保存と読み込み」チュートリアルを参照してください。
 
 ## `fitDataset()`を使用し、`tf.data.Dataset`オブジェクトを使用してモデルをトレーニングする
 
