@@ -2,7 +2,7 @@
 
 이 [colab 기반](https://colab.research.google.com/) 튜토리얼은 실제 예제를 사용하여 주요 TFF 개념과 API를 안내합니다. 참조 문서는 [TFF 가이드](../get_started.md)에서 찾을 수 있습니다.
 
-Note: TFF currently requires Python 3.9 or later, but [Google Colaboratory](https://research.google.com/colaboratory/)'s hosted runtimes currently use Python 3.7, and so in order to run these notebooks you will need to use a [custom local runtime](https://research.google.com/colaboratory/local-runtimes.html).
+참고: TFF에는 현재 Python 3.9 이상이 필요하지만 [Google Colaboratory](https://research.google.com/colaboratory/)의 호스팅 런타임은 현재 Python 3.7을 사용하므로 이러한 노트북을 실행하려면 [사용자 지정 로컬 런타임](https://research.google.com/colaboratory/local-runtimes.html)을 사용해야 합니다.
 
 **페더레이션 학습으로 시작하기**
 
@@ -25,7 +25,7 @@ Note: TFF currently requires Python 3.9 or later, but [Google Colaboratory](http
 
 **시뮬레이션 모범 사례**
 
-- [High-performance simulations with Kubernetes](high_performance_simulation_with_kubernetes.ipynb) describes how to setup and configure a high-performance TFF runtime running on Kubernetes.
+- [Kubernetes를 사용한 고성능 시뮬레이션](high_performance_simulation_with_kubernetes.ipynb)에서는 Kubernetes에서 실행되는 고성능 TFF 런타임을 설정하고 구성하는 방법을 설명합니다.
 
 - [가속기(GPU)를 사용한 TFF 시뮬레이션](simulations_with_accelerators.ipynb)은 TFF의 고성능 런타임을 GPU와 함께 사용할 수 있는 방법을 보여줍니다.
 
@@ -43,6 +43,6 @@ Note: TFF currently requires Python 3.9 or later, but [Google Colaboratory](http
 
 - [TFF의 차등 개인 정보 보호 페더레이션 학습](federated_learning_with_differential_privacy.ipynb)은 TFF를 사용하여 사용자 수준 차등 개인 정보 보호를 사용하여 모델을 훈련하는 방법을 보여줍니다.
 
-- [Loading Remote Data with TFF](loading_remote_data.ipynb) describes how to embed custom logic in the TFF runtime to load data on remote machines.
+- [TFF를 사용하여 원격 데이터 로드](loading_remote_data.ipynb)에서는 TFF 런타임에 사용자 지정 논리를 포함하여 원격 컴퓨터에 데이터를 로드하는 방법을 설명합니다.
 
-- [Support for JAX in TFF](../tutorials/jax_support.ipynb) shows how [JAX](https://github.com/google/jax) computations can be used in TFF, demonstrating how TFF is designed to be able to interoperate with other frontend and backend ML frameworks.
+- [TFF에서 JAX에 대한 지원](../tutorials/jax_support.ipynb)은 TFF에서 [JAX](https://github.com/google/jax) 계산을 사용하는 방법을 보여주고 TFF가 다른 프런트엔드 및 백엔드 ML 프레임워크와 상호 운용될 수 있도록 설계된 방식을 보여줍니다.
