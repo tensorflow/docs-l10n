@@ -22,11 +22,11 @@ def MyValidationComponent(
   }
 ```
 
-Under the hood, this defines a custom component that is a subclass of [`BaseComponent`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_component.py){: .external } and its Spec and Executor classes.
+내부에서 이것은 [`BaseComponent`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_component.py){: .external }의 하위 클래스인 사용자 정의 구성 요소와 해당 스펙 및 실행기 클래스를 정의합니다.
 
-Note: the feature (BaseBeamComponent based component by annotating a function with `@component(use_beam=True)`) described below is experimental and there is no public backwards compatibility guarantees.
+아래에 설명된 기능(함수에 `@component(use_beam=True)`로 주석을 추가하는 BaseBeamComponent 기반 구성 요소))은 실험적이며 공개된 이전 기능과의 호환성은 보장되지 않습니다.
 
-If you want to define a subclass of [`BaseBeamComponent`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_beam_component.py){: .external } such that you could use a beam pipeline with TFX-pipeline-wise shared configuration, i.e., `beam_pipeline_args` when compiling the pipeline ([Chicago Taxi Pipeline Example](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_pipeline_simple.py#L192){: .external }) you could set `use_beam=True` in the decorator and add another `BeamComponentParameter` with default value `None` in your function as the following example:
+`BaseBeamComponent`{: .external }의 하위 클래스를 정의하려는 경우 TFX 파이프라인에 대한 공유 구성(예: `beam_pipeline_args`)을 사용한 Beam 파이프라인을 사용할 수 있습니다. 파이프라인을 컴파일할 때([Chicago Taxi Pipeline Example](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_pipeline_simple.py#L192){: .external }) 데코레이터에서 `use_beam=True`를 설정하고, 다음 예시와 같이 함수에서 기본값 `None`와 함께 `BeamComponentParameter`을 추가로 추가할 수 있습니다.
 
 ```python
 @component(use_beam=True)
@@ -59,11 +59,11 @@ TFX에서 입력 및 출력은 기본 데이터와 관련된 메타데이터 속
 
 - 각 **아티팩트 입력**에 대해 `InputArtifact[ArtifactType]` 유형 힌트 주석을 적용합니다. `ArtifactType`을 `tfx.types.Artifact`의 서브 클래스인 아티팩트 유형으로 대체합니다. 이러한 입력은 선택적 인수일 수 있습니다.
 
-- For each **output artifact**, apply the `OutputArtifact[ArtifactType]` type hint annotation. Replace `ArtifactType` with the artifact’s type, which is a subclass of `tfx.types.Artifact`. Component output artifacts should be passed as input arguments of the function, so that your component can write outputs to a system-managed location and set appropriate artifact metadata properties. This argument can be optional or this argument can be defined with a default value.
+- 각 **출력 아티팩트**에 대해 `OutputArtifact[ArtifactType]` 유형 힌트 주석을 적용합니다. `ArtifactType`을 `tfx.types.Artifact`의 서브 클래스인 아티팩트 유형으로 대체합니다. 구성 요소 출력 아티팩트는 함수의 입력 인수로 전달되어야 구성 요소가 시스템 관리 위치에 출력을 쓰고 적절한 아티팩트 메타데이터 속성을 설정할 수 있습니다. 이 인수는 선택 사항이거나 기본값으로 정의할 수 있습니다.
 
-- For each **parameter**, use the type hint annotation `Parameter[T]`. Replace `T` with the type of the parameter. We currently only support primitive python types: `bool`, `int`, `float`, `str`, or `bytes`.
+- 각 **매개변수**에 대해 유형 힌트 주석 `Parameter[T]`를 사용합니다. `T`를 매개변수 유형으로 교체합니다. 현재는 기본 Python 유형인 `bool`, `int`, `float`, `str` 또는 `bytes`만 지원합니다.
 
-- For **beam pipeline**, use the type hint annotation `BeamComponentParameter[beam.Pipeline]`. Set the default value to be `None`. The value `None` will be replaced by an instantiated beam pipeline created by `_make_beam_pipeline()` of [`BaseBeamExecutor`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_beam_executor.py){: .external }
+- **Beam 파이프라인**의 경우 유형 힌트 주석인 `BeamComponentParameter[beam.Pipeline]`을 사용합니다. 기본값을 `None`으로 설정합니다. `None` 값은 [`BaseBeamExecutor`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_beam_executor.py){: .external }의 `_make_beam_pipeline()`로 생성한 인스턴스화된 Beam 파이프라인으로 교체됩니다.
 
 - 파이프라인 생성 시 알려지지 않은 각 **단순 데이터 유형 입력**(`int`, `float`, `str` 또는 `bytes`)에 대해 유형 힌트 `T`를 사용합니다. TFX 0.22 릴리스에서는 이 유형의 입력에 대한 파이프라인 구성 시 구체적인 값을 전달할 수 없습니다(이전 섹션의 설명과 같이 `Parameter` 주석을 대신 사용). 이 인수는 선택 사항이거나 기본값으로 정의할 수 있습니다. 구성 요소에 단순 데이터 유형 출력(`int`, `float`, `str` 또는 `bytes`)이 있는 경우, `OutputDict` 인스턴스를 사용하여 이러한 출력을 반환할 수 있습니다. `OutputDict` 유형 힌트를 구성 요소의 반환 값으로 적용합니다.
 
