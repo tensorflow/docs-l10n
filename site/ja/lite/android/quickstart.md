@@ -148,22 +148,22 @@ To initialize the model:
     }
 
     ```
-5. Use the settings from this object to construct a TensorFlow Lite [`ObjectDetector`](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/vision/detector/ObjectDetector#createFromFile(Context,%20java.lang.String)) object that contains the model:
+5. このオブジェクトの設定を使用して、モデルを含む TensorFlow Lite [`ObjectDetector`](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/vision/detector/ObjectDetector#createFromFile(Context,%20java.lang.String)) オブジェクトを作成します。
     ```
     objectDetector =
         ObjectDetector.createFromFileAndOptions(
             context, modelName, optionsBuilder.build())
     ```
 
-For more information about using hardware acceleration delegates with TensorFlow Lite, see [TensorFlow Lite Delegates](../performance/delegates).
+TensorFlow Lite でのハードウェアアクセラレーションデリゲートの使用の詳細については、[TensorFlow Lite デリゲート](../performance/delegates)を参照してください。
 
-### Prepare data for the model
+### モデルのデータの準備
 
 You prepare data for interpretation by the model by transforming existing data such as images into the [Tensor](../api_docs/java/org/tensorflow/lite/Tensor) data format, so it can be processed by your model. The data in a Tensor must have specific dimensions, or shape, that matches the format of data used to train the model. Depending on the model you use, you may need to transform the data to fit what the model expects. The example app uses an [`ImageAnalysis`](https://developer.android.com/reference/androidx/camera/core/ImageAnalysis) object to extract image frames from the camera subsystem.
 
 To prepare data for processing by the model:
 
-1. Build an `ImageAnalysis` object to extract images in the required format:
+1. `ImageAnalysis` オブジェクトをビルドし、必要な形式で画像を抽出します。
     ```
     imageAnalyzer =
         ImageAnalysis.Builder()
@@ -174,7 +174,7 @@ To prepare data for processing by the model:
             .build()
             ...
     ```
-2. Connect the analyzer to the camera subsystem and create a bitmap buffer to contain the data received from the camera:
+2. 分析器をカメラサブシステムに接続し、カメラから受信したデータを格納するビットマップバッファを作成します。
     ```
             .also {
             it.setAnalyzer(cameraExecutor) { image ->
@@ -189,7 +189,7 @@ To prepare data for processing by the model:
             }
         }
     ```
-3. Extract the specific image data needed by the model, and pass the image rotation information:
+3. モデルで必要な特定の画像データを抽出し、画像回転情報を渡します。
     ```
     private fun detectObjects(image: ImageProxy) {
         // Copy out RGB bits to the shared bitmap buffer
@@ -198,7 +198,7 @@ To prepare data for processing by the model:
         objectDetectorHelper.detect(bitmapBuffer, imageRotation)
     }
     ```
-4. Complete any final data transformations and add the image data to a `TensorImage` object, as shown in the `ObjectDetectorHelper.detect()` method of the example app:
+4. サンプルアプリの `ObjectDetectorHelper.detect()` メソッドで示すように、最終データ変換を完了し、画像データを `TensorImage` オブジェクトに追加します。
     ```
     val imageProcessor = ImageProcessor.Builder().add(Rot90Op(-imageRotation / 90)).build()
 
@@ -212,7 +212,7 @@ Once you create a [TensorImage](../api_docs/java/org/tensorflow/lite/support/ima
 
 To run a the model and generate predictions from image data:
 
-- Run the prediction by passing the image data to your predict function:
+- 画像データを予測関数に渡して、予測を実行します。
     ```
     val results = objectDetector?.detect(tensorImage)
     ```
@@ -221,9 +221,9 @@ To run a the model and generate predictions from image data:
 
 After you run image data against the object detection model, it produces a list of prediction results which your app code must handle by executing additional business logic, displaying results to the user, or taking other actions. The object detection model in the example app produces a list of predictions and bounding boxes for the detected objects. In the example app, the prediction results are passed to a listener object for further processing and display to the user.
 
-To handle model prediction results:
+モデル予測結果を処理するには、次の手順に従います。
 
-1. Use a listener pattern to pass results to your app code or user interface objects. The example app uses this pattern to pass detection results from the `ObjectDetectorHelper` object to the `CameraFragment` object:
+1. リスナーパターンを使用して、結果をアプリコードまたはユーザーインターフェイスオブジェクトに渡します。サンプルアプリは、このパターンを使用して、`ObjectDetectorHelper` オブジェクトの検出結果を `CameraFragment` オブジェクトに渡します。
     ```
     objectDetectorListener.onResults( // instance of CameraFragment
         results,
