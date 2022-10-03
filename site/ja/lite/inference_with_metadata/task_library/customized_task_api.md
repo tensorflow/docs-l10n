@@ -107,7 +107,7 @@ API オブジェクトを作成するには、[`BaseTaskApi`](https://github.com
 
     注意: デフォルトでは、[`BuiltInOpResolver` ](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/core/task_api_factory.h)は [`TaskAPIFactory`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/kernels/register.h) を提供します。モデルにカスタマイズされた演算または組み込み演算のサブセットが必要な場合は、[`MutableOpResolver`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/mutable_op_resolver.h) を作成して登録できます。
 
-    You must also provide any files associated with the model. e.g, `BertQuestionAnswerer` can also have an additional file for its tokenizer's vocabulary.
+    また、モデルに関連付けられているファイルも提供する必要があります。たとえば、`BertQuestionAnswerer` には、トークナイザーの語彙用のファイルを追加することもできます。
 
     ```cpp
     class BertQuestionAnswerer : public BaseTaskApi<
