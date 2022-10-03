@@ -14,7 +14,7 @@
 
 このチュートリアルのモデルの生成方法の詳細については、[TensorFlow Lite Model Maker チュートリアルを使用したテキスト分類](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)を参照してください。
 
-## Models and dataset
+## モデルとデータセット
 
 このチュートリアルでは、[SST-2](https://nlp.stanford.edu/sentiment/index.html) (Stanford Sentiment Treebank) データセットを使用してトレーニングされたモデルを使用します。 SST-2 には、トレーニング用の 67,349 件の映画レビューと、テスト用の 872 件の映画レビューが含まれており、各レビューは肯定または否定に分類されています。このアプリで使用されるモデルは、TensorFlow Lite [Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) ツールを使用してトレーニングされました。
 
@@ -28,19 +28,19 @@
 
 テキスト分類アプリケーションをセットアップするには、サンプルアプリを [GitHub](https://github.com/tensorflow/examples/tree/master/lite/examples/text_classification/android) からダウンロードし、[Android Studio](https://developer.android.com/studio/) を使用して実行します。
 
-### System requirements
+### システム要件
 
-- **[Android Studio](https://developer.android.com/studio/index.html)** version 2021.1.1 (Bumblebee) or higher.
-- Android SDK version 31 or higher
+- <a>Android Studio</a> バージョン 2021.1.1 (Bumblebee) 以上
+- Android SDK バージョン 31 以上
 - OS バージョン SDK 21 (Android 7.0 - Nougat) 以上が搭載された Android デバイス (開発者モードが有効であること、または Android Emulator を使用)
 
-### Get the example code
+### サンプルコードの取得
 
 サンプルコードのローカルコピーを作成します。このコードを使用して、Android Studio でプロジェクトを作成し、サンプルアプリケーションを実行します。
 
-To clone and setup the example code:
+サンプルコードを複製してセットアップするには、次の手順を実行します。
 
-1. Clone the git repository
+1. git リポジトリを複製します。
     <pre class="devsite-click-to-copy">    git clone https://github.com/tensorflow/examples.git
         </pre>
 2. 必要に応じて、sparse checkout を使用するように git インスタンスを構成します。これで、テキスト分類のサンプルアプリのファイルのみを取得できます。
@@ -49,28 +49,28 @@ To clone and setup the example code:
         git sparse-checkout set lite/examples/text_classification/android
         </pre>
 
-### Import and run the project
+### プロジェクトのインポートと実行
 
-Create a project from the downloaded example code, build the project, and then run it.
+ダウンロードしたサンプルコードからプロジェクトを作成し、プロジェクトをビルドして、実行します。
 
-To import and build the example code project:
+サンプルコードプロジェクトをインポートしてビルドするには、次の手順を実行します。
 
-1. Start [Android Studio](https://developer.android.com/studio).
-2. From the Android Studio, select **File &gt; New &gt; Import Project**.
+1. [Android Studio](https://developer.android.com/studio) を起動します。
+2. Android Studio で、**[File] &gt; [New] &gt; [Import Project]** を選択します。
 3. build.gradle ファイルがあるサンプルコードディレクトリ (`.../examples/lite/examples/text_classification/android/build.gradle`) に移動し、ディレクトリを選択します。
-4. If Android Studio requests a Gradle Sync, choose OK.
-5. Ensure that your Android device is connected to your computer and developer mode is enabled. Click the green `Run` arrow.
+4. Android Studio で Gradle Sync が要求される場合は、[OK] をクリックします。
+5. Android デバイスがコンピュータに接続され、開発者モードが有効であることを確認します。緑色の `Run` 矢印をクリックします。
 
-If you select the correct directory, Android Studio creates a new project and builds it. This process can take a few minutes, depending on the speed of your computer and if you have used Android Studio for other projects. When the build completes, the Android Studio displays a `BUILD SUCCESSFUL` message in the **Build Output** status panel.
+正しいディレクトリを選択すると、Android Studio で新しいプロジェクトが作成、ビルドされます。Android Studio を他のプロジェクトでも使用している場合、コンピューターの速度によっては、この処理に数分かかる場合があります。ビルドが完了すると、Android Studio の <strong>[Build Output]</strong> ステータスパネルに <code>BUILD SUCCESSFUL</code> メッセージが表示されます。
 
-To run the project:
+プロジェクトを実行するには、次の手順を実行します。
 
-1. From Android Studio, run the project by selecting **Run &gt; Run…**.
+1. Android Studio で **[Run] &gt; [Run…]** を選択して、プロジェクトを実行します。
 2. 接続されている Android デバイス (またはエミュレーター) を選択して、アプリをテストします。
 
 ### アプリケーションの使用
 
-![Text classification example app in Android](../../../images/lite/android/text-classification-screenshot.png){: .attempt-right width="250px"}
+![Object detection animated demo](../../../images/lite/android/text-classification-screenshot.png){: .attempt-right width="250px"}
 
 Android Studio でプロジェクトを実行すると、接続されたデバイスまたはデバイスエミュレーターでアプリケーションが自動的に開きます。
 
@@ -117,13 +117,13 @@ Android Studio でプロジェクトを実行すると、接続されたデバ�
 
 Android Studio の使用の詳細については、[Android Studio のドキュメント](https://developer.android.com/studio/intro)を参照してください。
 
-### Add project dependencies
+### プロジェクト依存関係の追加
 
 独自のアプリケーションでは、特定のプロジェクト依存関係を追加して TensorFlow Lite 機械学習モデルを実行し、文字列などのデータを、使用しているモデルで処理できるテンソルデータ形式に変換するユーティリティ関数にアクセスする必要があります。
 
-The following instructions explain how to add the required project and module dependencies to your own Android app project.
+次の手順では、必要なプロジェクトおよびモデル依存関係を Android アプリプロジェクトに追加する方法について説明します。
 
-To add module dependencies:
+モジュール依存関係を追加するには、次の手順を実行します。
 
 1. TensorFlow Lite を使用するモジュールで、モジュールの `build.gradle` ファイルを更新して、次の依存関係を追加します。
 
@@ -140,7 +140,7 @@ To add module dependencies:
 
     グラフィックス処理装置 (GPU) で実行するためにこのアプリを変更する場合、GPU ライブラリ ( `tensorflow-lite-gpu-delegate-plugin` ) は GPU でアプリを実行するためのインフラストラクチャを提供し、デリゲート ( `tensorflow-lite-gpu` ) は、互換性リストを提供します。このアプリを GPU で実行することは、このチュートリアルの範囲外です。
 
-2. In Android Studio, sync the project dependencies by selecting: **File &gt; Sync Project with Gradle Files**.
+2. Android Studio で、**[File] &gt; [Sync Project with Gradle Files]** を選択して、プロジェクト依存関係を同期します。
 
 ### ML モデルの初期化 {:#initialize_models}
 
@@ -153,9 +153,9 @@ TensorFlow Lite モデルは `*.tflite` ファイルとして保存されます�
 
 注意: サンプルアプリでは、`[download_model.gradle](https://github.com/tensorflow/examples/blob/master/lite/examples/text_classification/android/app/download_model.gradle)` ファイルを使用して、ビルド時に[平均単語ベクトル](https://www.tensorflow.org/lite/inference_with_metadata/task_library/nl_classifier)および [MobileBERT](https://www.tensorflow.org/lite/inference_with_metadata/task_library/bert_nl_classifier) モデルをダウンロードします。このアプローチは、本番アプリには不要または推奨されません。
 
-For convenience and code readability, the example declares a companion object that defines the settings for the model.
+便宜上の観点と、コードを読みやすくするため、この例では、モデルの設定を定義する比較オブジェクトが宣言されています。
 
-To initialize the model in your app:
+アプリでモデルを初期化するには、次の手順を実行します。
 
 1. コンパニオンオブジェクトを作成して、モデルの設定を定義します。サンプルアプリケーションでは、このオブジェクトは [TextClassificationHelper.kt](https://github.com/tensorflow/examples/blob/master/lite/examples/text_classification/android/app/src/main/java/org/tensorflow/lite/examples/textclassification/TextClassificationHelper.kt) にあります。
 
@@ -221,9 +221,9 @@ To initialize the model in your app:
 
 注意: GPU デリゲートを使用するようにこのアプリを変更することは可能ですが、これには、分類子を使用している同じスレッドで分類子を作成する必要があります。これは、このチュートリアルの範囲外です。
 
-Using delegates for running TensorFlow Lite models is recommended, but not required. For more information about using delegates with TensorFlow Lite, see [TensorFlow Lite Delegates](https://www.tensorflow.org/lite/performance/delegates).
+デリゲートを使用して TensorFlow Lite モデルを実行することをお勧めしますが、必須ではありません。TensorFlow Lite でのデリゲートの使用の詳細については、[TensorFlow Lite Delegates](https://www.tensorflow.org/lite/performance/delegates) を参照してください。
 
-### Prepare data for the model
+### モデルのデータの準備
 
 Android アプリでは、コードによって、未加工のテキストなどの既存のデータが、モデルで処理できる[テンソル](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/Tensor)データ形式に変換されて、モデルに入力され、解釈されます。モデルに渡されるテンソル内のデータには、モデルのトレーニングに使用されるデータの形式と一致する特定の次元または形状が必要です。
 
@@ -241,7 +241,7 @@ Android アプリでは、コードによって、未加工のテキストなど
     }
     ```
 
-### Run predictions
+### 予測の実行
 
 Android アプリでは、[BertNLClassifier](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/text/nlclassifier/BertNLClassifier) または [NLClassifier](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/text/nlclassifier/NLClassifier) オブジェクトのいずれかを初期化したら、モデルの入力テキストのフィードを開始して、「肯定」または「否定」に分類できます。
 
@@ -282,11 +282,11 @@ Android アプリでは、[BertNLClassifier](https://www.tensorflow.org/lite/api
     }
     ```
 
-### Handle model output
+### モデル出力の処理
 
 テキスト行を入力すると、モデルは「肯定」カテゴリと「否定」カテゴリの 0 から 1 までの浮動小数点数で表される予測スコアを生成します。
 
-To get the prediction results from the model:
+モデルから予測結果を取得するには、次の手順を実行します。
 
 1. 出力を処理するリスナーオブジェクトの `onResult` 関数を作成します。サンプルアプリケーションでは、リスナーオブジェクトは [MainActivity.kt](https://github.com/tensorflow/examples/blob/master/lite/examples/text_classification/android/app/src/main/java/org/tensorflow/lite/examples/textclassification/MainActivity.kt) にあります。
 
@@ -326,6 +326,6 @@ To get the prediction results from the model:
 - [TensorFlow Lite Model Maker を使用したテキスト分類](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)チュートリアルを使用して、モデルを最初からトレーニングして実装します。
 - その他の [TensorFlow 用のテキスト処理ツール](https://www.tensorflow.org/text)を考察します。
 - [TensorFlow Hub](https://tfhub.dev/google/collections/bert/1) で他の BERT モデルをダウンロードします。
-- Explore various uses of TensorFlow Lite in the [examples](../../examples).
-- Learn more about using machine learning models with TensorFlow Lite in the [Models](../../models) section.
-- Learn more about implementing machine learning in your mobile application in the [TensorFlow Lite Developer Guide](../../guide).
+- [例](../../examples)を使って、TensorFlow Lite のさまざまな使用方法を考察します。
+- [モデル](../../models)セクションで、TensorFlow Lite の機械学習モデルの使用方法について詳細に説明します。
+- [TensorFlow Lite 開発者ガイド](../../guide)で、モデルアプリケーションでの機械学習の実装について詳細に説明します。
