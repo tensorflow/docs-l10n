@@ -24,7 +24,7 @@ Python 패키지는 Python 모듈을 구성하는 방법입니다. 자세한 내
 
 #### TFF Python 패키지
 
-[PyPI](https://pypi.org/project/tensorflow-federated/)에 배포된 Python [패키지](https://pypi.org)입니다.
+https://pypi.org에서 배포되는 Python [패키지](https://pypi.org/project/tensorflow-federated/)
 
 Python 패키지에는 [공개 TFF API](#public-tff-api)와 [비공개 TFF API](#private-tff-api)가 모두 포함되어 있으며, 어떤 API가 공개이고 어떤 API가 비공개인지는 *패키지를 검사*해도 불분명합니다. 예를 들면, 다음과 같습니다.
 
@@ -39,12 +39,32 @@ tff.proto.v0.computation_pb2.Computation  # Private TFF API
 
 ### 다이어그램
 
+#### Overview
+
 ```dot
-<!--#include file="package_structure.dot"-->
+<!--#include file="package_structure_overview.dot"-->
 ```
 
-**녹색** 노드는 [공개 TFF API](https://github.com/tensorflow/federated)를 사용하는 [GitHub](https://github.com)에서 [TFF 리포지토리](https://github.com/tensorflow/federated)의 일부인 디렉토리를 나타냅니다.
+#### 시뮬레이션
 
-**파란색** 노드는 [공개 TFF API](#public-tff-api)의 일부인 패키지를 나타냅니다.
+```dot
+<!--#include file="package_structure_simulation.dot"-->
+```
 
-**회색** 노드는 [공개 TFF API](#public-tff-api)의 일부가 아닌 디렉토리 또는 패키지를 나타냅니다.
+#### 학습
+
+```dot
+<!--#include file="package_structure_learning.dot"-->
+```
+
+#### 분석
+
+```dot
+<!--#include file="package_structure_analytics.dot"-->
+```
+
+#### 코어
+
+```dot
+<!--#include file="package_structure_core.dot"-->
+```
