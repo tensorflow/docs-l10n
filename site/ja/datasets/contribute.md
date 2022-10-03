@@ -2,16 +2,16 @@
 
 ライブラリにご関心いただきありがとうございます！これほど意気込みに満ちたコミュニティが存在することを嬉しく思っています。
 
-## Get started
+## はじめに
 
-- If you're new with TFDS, the easiest way to get started is to implement one of our [requested datasets](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc), focusing on the most requested ones. [Follow our guide](https://www.tensorflow.org/datasets/add_dataset) for instructions.
-- Issues, feature requests, bugs,... have a much bigger impact than adding new datasets, as they benefit the entire TFDS community. See the [potential contribution list](https://github.com/tensorflow/datasets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+-label%3A%22dataset+request%22+). Starts with the ones labeled with [contribution-welcome](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22contributions+welcome%22) which are small self-contained easy issues to get started with.
+- TFDS に新しい方は、[リクエストされたデータセット](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc)の 1 つを実装することから始めるのが最も簡単です。一番リクエストの多いデータセットに専念してください。手順については、[ガイドに従ってください](https://www.tensorflow.org/datasets/add_dataset)。
+- 課題、機能リクエスト、バグなどには、新しいデータセットを追加するよりもはるかに大きなインパクトがあります。これらは TFDS コミュニティ全体にメリットをもたらすためです。[potential contribution list](https://github.com/tensorflow/datasets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+-label%3A%22dataset+request%22+)（潜在的な貢献リスト）をご覧ください。[contribution-welcome](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22contributions+welcome%22) のラベルが付いたものから着手してください。これらは手始めに対応できる規模の小さな自己完結型の簡単な課題です。
 - 割り当て済みであっても、しばらく更新のないバグにぜひ対応してください。
 - 課題の割り当てを待つ必要はありません。対応し始める際に、コメントを残してください :)
 - 課題に関心があっても対応の仕方がわからない場合は、すぐに気軽に問い合わせください。早期にフィードバックが必要な場合は、PR 草案を送信してください。
 - 不要な重複作業を行わないためにも、[pending Pull Requests](https://github.com/tensorflow/datasets/pulls)（保留中のプルリクエスト）リストを確認し、作業中の課題にはコメントを残すようにしてください。
 
-## Setup
+## MNIST モデルをビルドする
 
 ### リポジトリを複製する
 
