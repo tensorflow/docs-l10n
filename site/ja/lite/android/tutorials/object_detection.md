@@ -177,7 +177,7 @@ val modelName =
 
 TensorFlow Lite *デリゲート*は、グラフィックス処理装置 (GPU)、テンソル処理装置 (TPU)、デジタルシグナルプロセッサ (DSP) といったモバイルデバイスの特殊な処理ハードウェアを使用して、機械学習モデルの実行を高速化するソフトウェアモジュールです。TensorFlow Lite モデルの実行では、デリゲートを使用することをお勧めします。ただし必須ではありません。
 
-The object detector is initialized using the current settings on the thread that is using it. You can use CPU and [NNAPI](../../android/delegates/nnapi) delegates with detectors that are created on the main thread and used on a background thread, but the thread that initialized the detector must use the GPU delegate.
+物体検出器は、使用中のスレッドで現在の設定を使用して初期化されます。CPU と [NNAPI](../../android/delegates/nnapi) デリゲートを、メインスレッドで作成され、バックグラウンドスレッドで使用される検出器と組み合わせて使用することができますが、検出器を初期化したスレッドでは GPU デリゲートを使用する必要があります。
 
 デリゲートは、`ObjectDetectionHelper.setupObjectDetector()` 関数内で設定されます。
 
