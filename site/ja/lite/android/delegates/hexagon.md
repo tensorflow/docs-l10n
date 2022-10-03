@@ -13,9 +13,9 @@
 - Hexagon 682
     - SoC の例：Snapdragon 835
 - Hexagon 685
-    - SoC examples: Snapdragon 845, Snapdragon 710, QCS410, QCS610, QCS605, QCS603
+    - SoC の例: Snapdragon 845、Snapdragon 710、QCS410、QCS610、QCS605、QCS603
 - Hexagon 690
-    - SoC examples: Snapdragon 855, RB5
+    - SoC の例: Snapdragon 855、RB5
 
 **サポートされているモデル：**
 
@@ -175,7 +175,7 @@ dependencies {
 
 #### ステップ 3. C ヘッダーを含める
 
-- The header file "hexagon_delegate.h" can be downloaded from [GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/hexagon_delegate.h) or extracted from the Hexagon delegate AAR.
+- ヘッダーファイル「hexagon_delegate.h」は、[GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/hexagon_delegate.h) からダウンロードするか、Hexagon デリゲート AAR から抽出できます。
 
 #### ステップ 4. デリゲートを作成して TensorFlow Lite インタプリタを初期化する
 
@@ -222,7 +222,7 @@ TfLiteHexagonTearDown();  // Needed once at end of app/DSP usage.
 ## よくある質問
 
 - デリゲートがサポートする演算は？
-    - See the current list of [supported ops and constraints](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)
+    - 最新の[サポートされている演算と制約](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)のリストをご覧ください
 - デリゲートが有効になっている場合、モデルが DSP を使用していることをどのように確認できますか？
     - デリゲートを有効にすると、以下の 2 つのログメッセージが出力されます。1 つはデリゲートが作成されたかどうかを示し、もう 1 つはデリゲートを使用して実行されているノードの数を示します。<br> `Created TensorFlow Lite delegate for Hexagon.` <br> `Hexagon delegate: X nodes delegated out of Y nodes.`
 - デリゲートを実行するには、モデル内のすべての演算がサポートされる必要がありますか？
