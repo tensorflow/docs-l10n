@@ -2,7 +2,7 @@
 
 이 튜토리얼에서는 TensorFlow Lite로 Android 앱을 빌드하여 장치 카메라로 캡처한 프레임에서 객체를 연속적으로 감지하는 방법을 보여줍니다. 이 애플리케이션은 실제 Android 장치용으로 설계되었습니다. 기존 프로젝트를 업데이트하는 경우 코드 샘플을 참조로 사용하고 [프로젝트 수정](#add_dependencies) 지침으로 건너뛸 수 있습니다.
 
-![Object detection animated demo](https://storage.googleapis.com/download.tensorflow.org/tflite/examples/obj_detection_cat.gif){: .attempt-right width="250px"}
+![객체 감지 애니메이션 데모](https://storage.googleapis.com/download.tensorflow.org/tflite/examples/obj_detection_cat.gif){: .attempt-right width="250px"}
 
 ## 객체 감지 개요
 
@@ -177,7 +177,7 @@ val modelName =
 
 TensorFlow Lite *대리자*는 그래픽 처리 장치(GPU), 텐서 처리 장치(TPU) 및 디지털 신호 프로세서(DSP)와 같은 모바일 장치의 특수 처리 하드웨어를 사용하여 머신 러닝 모델의 실행을 가속화하는 소프트웨어 모듈입니다. TensorFlow Lite 모델을 실행하기 위해 대리자를 사용하는 것이 권장되지만 필수는 아닙니다.
 
-The object detector is initialized using the current settings on the thread that is using it. You can use CPU and [NNAPI](../../android/delegates/nnapi) delegates with detectors that are created on the main thread and used on a background thread, but the thread that initialized the detector must use the GPU delegate.
+객체 감지기는 이를 사용 중인 스레드의 현재 설정을 사용하여 초기화됩니다. 메인 스레드에서 생성되고 백그라운드 스레드에서 사용되는 감지기와 함께 CPU 및 [NNAPI](../../android/delegates/nnapi) 대리자를 사용할 수 있지만 감지기를 초기화한 스레드는 GPU 대리자를 사용해야 합니다.
 
 대리자는 `ObjectDetectionHelper.setupObjectDetector()` 함수 내에서 설정됩니다.
 
