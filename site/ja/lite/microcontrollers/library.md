@@ -1,6 +1,6 @@
 # C++ ライブラリを理解する
 
- TensorFlow Lite for Microcontrollers C++ ライブラリは [TensorFlow リポジトリ](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro)の一部です。読みやすさ、変更しやさ、統合しやすさが考慮されており、徹底してテストすることで、標準の TensorFlow Lite との互換性を維持できるように設計されています。
+TensorFlow Lite for Microcontrollers C++ ライブラリは [TensorFlow リポジトリ](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro)の一部です。読みやすさ、変更しやさ、統合しやすさが考慮されており、徹底してテストすることで、標準の TensorFlow Lite との互換性を維持できるように設計されています。
 
 以下のドキュメントでは、C++ ライブラリの基本構造の概要を説明し、独自のプロジェクト作成に関する情報を提供します。
 
@@ -46,9 +46,9 @@ TensorFlow Lite for Microcontrollers は、`Makefile` を使用して、必要�
 make -f tensorflow/lite/micro/tools/make/Makefile generate_projects
 ```
 
-依存関係に必要となる大規模なツールチェーンをダウンロードする必要があるため、この作業には数分かかります。完了したら、`tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/` といったパス（正確なパスはホストのオペレーティングシステムによって異なります）に複数のフォルダが生成されます。 これらのフォルダには生成されたプロジェクトとソースファイルが含まれます。
+依存関係に必要となる大規模なツールチェーンをダウンロードする必要があるため、この作業には数分かかります。完了したら、`gen/linux_x86_64/prj/` といったパス（正確なパスはホストのオペレーティングシステムによって異なります）に複数のフォルダが生成されます。 これらのフォルダには生成されたプロジェクトとソースファイルが含まれます。
 
-コマンドを実行すると、*Hello World* プロジェクトが `tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/hello_world` に表示されるようになります。たとえば、`hello_world/keil` には Keil プロジェクトが含まれています。
+コマンドを実行すると、*Hello World* プロジェクトが `gen/linux_x86_64/prj/hello_world` に表示されます。たとえば、`hello_world/keil` には Keil プロジェクトが含まれています。
 
 ## テストを実行する
 
@@ -114,7 +114,7 @@ Arduino ライブラリのナイトリービルドは、Arduino IDE のライブ
 ./tensorflow/lite/micro/tools/ci_build/test_arduino.sh
 ```
 
-生成されたライブラリは、 `tensorflow/lite/micro/tools/make/gen/arduino_x86_64/prj/tensorflow_lite.zip` にあります。
+生成されたライブラリは、`gen/arduino_x86_64/prj/tensorflow_lite.zip` にあります。
 
 ## 新規デバイスに移植する
 
