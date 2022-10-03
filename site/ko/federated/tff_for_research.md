@@ -32,7 +32,7 @@ TensorFlow 페더레이션은 페더레이션 학습으로 해결할 수 있는 
 
 - [**Shakespeare**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/shakespeare/load_data) William Shakespeare의 전체 작품을 기반으로 한 더 작은 문자 수준의 텍스트 데이터세트입니다. 데이터세트는 715명의 사용자 (셰익스피어 연극의 캐릭터)로 구성되며, 각 예제는 주어진 연극에서 캐릭터가 말한 연속적인 라인 세트에 해당합니다.
 
-- [**CIFAR-100**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data) 500개의 훈련 클라이언트와 100개의 테스트 클라이언트에 대한 CIFAR-100 데이터세트의 페더레이션 파티셔닝입니다. 각 클라이언트에는 100개의 고유한 예제가 있습니다. 파티셔닝은 클라이언트 간에 보다 현실적인 이질성을 생성하는 방식으로 수행됩니다. 자세한 내용은 [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)를 참조하세요.
+- [**CIFAR-100**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data). 500개의 훈련 클라이언트와 100개의 테스트 클라이언트에 대한 CIFAR-100 데이터세트의 페더레이션 파티셔닝입니다. 각 클라이언트에는 100개의 고유한 예제가 있습니다. 파티셔닝은 클라이언트 간에 보다 현실적인 이질성을 생성하는 방식으로 수행됩니다. 자세한 내용은 [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)를 참조하세요.
 
 - [**Google Landmark v2 데이터세트 데이터**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data) 세트는 다양한 세계 랜드마크의 사진으로 구성되며, 데이터의 연합 분할을 달성하기 위해 사진사가 이미지를 그룹화합니다. 233개의 클라이언트와 23080개의 이미지가 있는 더 작은 데이터 세트와 1262개의 클라이언트와 164172개의 이미지가 있는 더 큰 데이터 세트의 두 가지 유형의 데이터 세트를 사용할 수 있습니다.
 
