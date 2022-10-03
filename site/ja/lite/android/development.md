@@ -14,7 +14,7 @@ Android コードを簡単に作成するための基本事項については、
 
 TensorFlow Lite タスクライブラリには、強力で使いやすいタスク固有の一連のライブラリが含まれているので、アプリ開発者は TensorFlow Lite を使用して機械学習を利用できます。画像分類や質疑応答といった一般的な機械学習タスクにすぐに使用できるように、最適化されたモデルインターフェースが用意されており、モデルインターフェイスは、タスクごとに最高のパフォーマンスと使いやすさが得られるように設計されています。タスクライブラリはクロスプラットフォームで動作し、Java および C++ でサポートされています。
 
-To use the Task Library in your Android app, use the AAR from MavenCentral for [Task Vision library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-vision) , [Task Text library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-text) and [Task Audio Library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-audio) , respectively.
+Android アプリでタスクライブラリを使用するには、それぞれ [Task Vision ライブラリ](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-vision)、[Task Text ライブラリ](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-text)、および [Task Audio ライブラリ](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-audio)用の MavenCentral から AAR を使用してください。
 
 これは、`build.gradle` 依存関係に次のように指定できます。
 
