@@ -221,9 +221,9 @@ Vertex:
 パイプライン構成ファイルをコンパイルして Kubeflow にワークフローファイルを作成し、コンパイル時に次のチェックを実行します。
 
 1. パイプラインパスが有効かどうかを確認します。
-2. Checks if the pipeline details are extracted successfully from the pipeline config file.
+2. パイプラインの詳細がパイプライン構成ファイルから正常に抽出されているかどうかを確認します。
 3. パイプライン構成の DagRunner がエンジンと一致するかどうかを確認します。
-4. Checks if the workflow file is created successfully in the package path provided (only for Kubeflow).
+4. 提供されたパッケージパスにワークフローファイルが正常に作成されているかどうかを確認します（Kubeflow の場合のみ）。
 
 パイプラインを作成または更新する前に使用することが推薦されます。
 
@@ -681,7 +681,7 @@ tfx run status --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --run_id=&lt
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
+    <p>（オプション）Kubeflow Pipelines API サービスのエンドポイント。Kubeflow Pipelines API サービスのエンドポイントは、Kubeflow Pipelines ダッシュボードの URL と同じです。エンドポイント値は次のようになります。</p>
 </dd>
 </dl>
 
