@@ -34,7 +34,7 @@ TensorFlow Lite Task ライブラリには、強力で使いやすいタスク�
 
 - **Audio API**
 
-    - [AudioClassifier](audio_classifier.md)
+    - AudioClassifier
 
 - **カスタム API**
 
