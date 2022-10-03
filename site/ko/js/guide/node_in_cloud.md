@@ -6,13 +6,13 @@ tfjs-node@1.2.4부터 클라우드 플랫폼에서 Node.js 프로젝트를 실�
 
 ## Heroku에 Node.js 프로젝트 배포하기
 
-### Prerequisites
+### 전제 조건
 
-1. Node.js and npm installed
-2. Heroku account
+1. Node.js 및 npm 설치
+2. Heroku 계정
 3. Heroku CLI
 
-### Create the Node.js app
+### Node.js 앱 만들기
 
 1. 폴더를 만들고 <a>mnist-node</a> 예제에서 <code>data.js</code>, <code>main.js</code>, `model.js` 및 `package.json` 파일을 복사합니다.
 2. @tensorflow/tfjs-node 종속성이 @1.2.4 이상 버전인지 확인합니다.
@@ -106,7 +106,7 @@ Heroku [콘솔](https://devcenter.heroku.com/articles/heroku-dashboard#applicati
 
 ## Google Cloud Platform에 Node.js 프로젝트 배포하기
 
-###Prerequisites
+### 전제 조건
 
 1. 결제 계정이있는 유효한 Google Cloud 프로젝트가 있어야 합니다.
 2. Google Cloud [클라이언트 도구](https://cloud.google.com/storage/docs/gsutil_install)를 설치합니다.
