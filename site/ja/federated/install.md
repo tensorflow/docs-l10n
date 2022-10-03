@@ -20,7 +20,7 @@ TensorFlow Federated（TFF）を使用するための環境は、いくつかの
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">python3 -m venv "venv"</code>
 <code class="devsite-terminal">source "venv/bin/activate"</code>
-<code class="devsite-terminal tfo-terminal-venv">pip install --upgrade pip</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
 </pre>
 
 注意: 仮想環境を終了するには、`deactivate` を実行してください。
@@ -84,7 +84,7 @@ TensorFlow Federated（TFF）を使用するための環境は、いくつかの
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">python3 -m venv "venv"</code>
 <code class="devsite-terminal">source "venv/bin/activate"</code>
-<code class="devsite-terminal tfo-terminal-venv">pip install --upgrade pip</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
 </pre>
 
 注意: 仮想環境を終了するには、`deactivate` を実行してください。
