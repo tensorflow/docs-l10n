@@ -6,7 +6,7 @@ TFX 파이프라인을 처음 사용하는 경우, [TFX 파이프라인의 핵�
 
 ## 사용자 정의 실행기 또는 사용자 정의 구성 요소
 
-If only custom processing logic is needed while the inputs, outputs, and execution properties of the component are the same as an existing component, a custom executor is sufficient. A fully custom component is needed when any of the inputs, outputs, or execution properties are different from any existing TFX components.
+구성 요소의 입력, 출력 및 실행 속성이 기존 구성 요소와 동일하지만 사용자 정의 처리 논리만 필요한 경우, 사용자 정의 실행기로 충분합니다. 입력, 출력 또는 실행 속성이 기존 TFX 구성 요소와 다른 경우에는 완전 사용자 정의 구성 요소가 필요합니다.
 
 ## 사용자 정의 구성 요소를 만드는 방법은?
 
@@ -17,9 +17,9 @@ If only custom processing logic is needed while the inputs, outputs, and executi
 
 ### ComponentSpec
 
-The `ComponentSpec` class defines the component contract by defining the input and output artifacts to a component as well as the parameters that are used for the component execution. It has three parts:
+`ComponentSpec` 클래스는 구성 요소 실행에 사용되는 매개변수뿐만 아니라 구성 요소에 대한 입력 및 출력 아티팩트를 정의하여 구성 요소 계약을 정의합니다. 이는 세 부분으로 구성되어 있습니다.
 
-- *INPUTS*: A dictionary of typed parameters for the input artifacts that are passed into the component executor. Normally input artifacts are the outputs from upstream components and thus share the same type.
+- *INPUTS*: 구성 요소 실행기로 전달된 입력 아티팩트에 대한 형식 지정된 매개변수 사전입니다. 일반적으로, 입력 아티팩트는 업스트림 구성 요소의 출력이므로 같은 유형을 공유합니다.
 - *OUTPUTS*: 구성 요소가 생성하는 출력 아티팩트에 대한 형식 지정된 매개변수 사전입니다.
 - *PARAMETERS*: 구성 요소 실행기에 전달될 추가 [ExecutionParameter](https://github.com/tensorflow/tfx/blob/54aa6fbec6bffafa8352fe51b11251b1e44a2bf1/tfx/types/component_spec.py#L274) 항목의 사전입니다. 이들 사전은 파이프라인 DSL에서 유연하게 정의하고 실행으로 전달하려는 아티팩트가 아닌 매개변수입니다.
 
