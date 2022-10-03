@@ -24,7 +24,7 @@ TODO(b/153500547): 추적 시스템의 개별 구성 요소를 설명하고 연�
 
 구체적으로, 정확히 하나의 인수가 있을 때 추적은 다음과 같이 수행됩니다.
 
-1. Constructing a [value_impl.ValueImpl](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) backed by a [building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) with appropriate type signature to represent the argument.
+1. 인수를 나타내는 적절한 형식 서명을 사용하여 [building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py)에서 지원되는 [value_impl.ValueImpl](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py)를 생성합니다.
 
 2. `ValueImpl`에 대한 함수를 호출합니다. 이로 인해 Python 런타임이 ValueImpl에 의해 구현된 `ValueImpl` 메서드를 호출하여 dunder 메서드를 AST 구성으로 변환합니다. 각 dunder 메서드는 AST를 구성하고 해당 AST가 지원하는 `ValueImpl`을 반환합니다.
 
