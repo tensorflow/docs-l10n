@@ -1,6 +1,6 @@
 # ポーズ推定
 
-<img src="../images/pose.png" class="attempt-right">
+ <img alt="Animation showing pose estimation" src="https://www.tensorflow.org/images/lite/models/pose_estimation.gif">
 
 ポーズ推定は、ML モデルを使用して、主要な体の関節 (キーポイント) の空間的な位置を推定することで、画像または動画から人のポーズを推定するタスクです。
 
@@ -8,7 +8,7 @@
 
 <a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">スターターモデルをダウンロードする</a>
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android の例</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS の例</a>
+<a data-md-type="raw_html" class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android の例</a> <a data-md-type="raw_html" class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS の例</a>
 
 [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite) に慣れている場合は、スターター MoveNet ポーズ推定モデルと追加ファイルをダウンロードしてください。
 
@@ -112,7 +112,7 @@ Web ブラウザでポーズ推定を試す場合は、<a href="https://storage.
 
 次に、出力の例を示します。
 
- <img alt="Animation showing pose estimation" src="https://www.tensorflow.org/images/lite/models/pose_estimation.gif">
+ <img alt="Animation showing pose estimation" src="https://storage.googleapis.com/download.tensorflow.org/example_images/movenet_demo.gif" class="">
 
 ## パフォーマンスベンチマーク
 
@@ -141,8 +141,7 @@ MoveNet は、さまざまなデータセットに対して、PoseNet よりも�
 </thead>
 <tbody>
   <tr>
-    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/float16/4">MoveNet.Thunder (FP16 量子化)</a>
-</td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/float16/4">MoveNet.Thunder (FP16 量子化)</a> </td>
     <td>12.6MB</td>
     <td>72.0</td>
     <td>155ms</td>
@@ -150,8 +149,7 @@ MoveNet は、さまざまなデータセットに対して、PoseNet よりも�
     <td>594ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/int8/4">MoveNet.Thunder (INT8 量子化)</a>
-</td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/tflite/int8/4">MoveNet.Thunder (INT8 量子化)</a> </td>
     <td>7.1MB</td>
     <td>68.9</td>
     <td>100ms</td>
@@ -159,8 +157,7 @@ MoveNet は、さまざまなデータセットに対して、PoseNet よりも�
     <td>251ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/float16/4">MoveNet.Lightning (FP16 量子化)</a>
-</td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/float16/4">MoveNet.Lightning (FP16 量子化)</a> </td>
     <td>4.8MB</td>
     <td>63.0</td>
     <td>60ms</td>
@@ -168,8 +165,7 @@ MoveNet は、さまざまなデータセットに対して、PoseNet よりも�
     <td>186ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/int8/4">MoveNet.Lightning (INT8 量子化)</a>
-</td>
+    <td>       <a href="https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/int8/4">MoveNet.Lightning (INT8 量子化)</a> </td>
     <td>2.9MB</td>
     <td>57.4</td>
     <td>52ms</td>
@@ -177,8 +173,7 @@ MoveNet は、さまざまなデータセットに対して、PoseNet よりも�
     <td>95ms</td>
   </tr>
   <tr>
-    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">PoseNet(MobileNetV1 バックボーン、FP32)</a>
-</td>
+    <td>       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">PoseNet(MobileNetV1 バックボーン、FP32)</a> </td>
     <td>13.3MB</td>
     <td>45.6</td>
     <td>80ms</td>
@@ -203,7 +198,7 @@ MoveNet は、さまざまなデータセットに対して、PoseNet よりも�
   <li><a href="https://youtu.be/I5__9hq-yas">Amazing Art Installation Turns You Into A Bird | Chris Milk "The Treachery of Sanctuary"</a></li>
   <li><a href="https://vimeo.com/34824490">Puppet Parade - Interactive Kinect Puppets</a></li>
   <li><a href="https://vimeo.com/2892576">Messa di Voce (Performance), Excerpts</a></li>
-  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">拡張現実</a></li>
+  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">Augmented reality</a></li>
   <li><a href="https://www.instagram.com/p/Bg1EgOihgyh/">対話型アニメーション</a></li>
   <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">歩容解析</a></li>
 </ul>
