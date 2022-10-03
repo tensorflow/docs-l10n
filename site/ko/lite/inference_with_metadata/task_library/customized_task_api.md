@@ -22,7 +22,7 @@ TensorFlow Lite는 주요 <a href="overview.md#supported_tasks">Vision 및 NLP �
 
 모든 TFLite 세부 내용은 네이티브 API에서 구현됩니다. 팩터리 함수 중 하나를 사용하여 API 객체를 만들고 인터페이스에 정의된 함수를 호출하여 모델 결과를 가져옵니다.
 
-#### Sample usage
+#### 샘플 사용법
 
 다음은 [MobileBert](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/qa/bert_question_answerer.h)용 C++ <a><code>BertQuestionAnswerer</code></a>를 사용하는 예입니다.
 
@@ -141,7 +141,7 @@ API 객체를 빌드하려면 [`BaseTaskApi`](https://github.com/tensorflow/tfli
 
 Java/Kotlin 인터페이스를 정의하고 JNI를 통해 C++ 레이어에 논리를 위임하여 Android API를 만듭니다. Android API를 사용하려면 먼저 네이티브 API를 빌드해야 합니다.
 
-#### Sample usage
+#### 샘플 사용법
 
 다음은 [MobileBert](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/text/qa/BertQuestionAnswerer.java)용 Java <a><code>BertQuestionAnswerer</code></a>를 사용하는 예입니다.
 
@@ -284,7 +284,7 @@ Native API와 마찬가지로 API 객체를 빌드하려면 클라이언트가 �
 
 네이티브 API 객체를 ObjC API 개체로 래핑하여 iOS API를 만듭니다. 생성된 API 객체는 ObjC 또는 Swift에서 사용할 수 있습니다. iOS API를 사용하려면 먼저 네이티브 API를 빌드해야 합니다.
 
-#### Sample usage
+#### 샘플 사용법
 
 Here is an example using ObjC [`TFLBertQuestionAnswerer`](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/text/qa/Sources/TFLBertQuestionAnswerer.h) for [MobileBert](https://tfhub.dev/tensorflow/lite-model/mobilebert/1/default/1) in Swift.
 
@@ -312,7 +312,7 @@ iOS API는 네이티브 API 상위에 있는 간단한 ObjC 래퍼입니다. 아
 
 - **Define the ObjC wrapper** - Define an ObjC class and delegate the implementations to the corresponding native API object. Note the native dependencies can only appear in a .mm file due to Swift's inability to interop with C++.
 
-    - .h file
+    - .h 파일
 
     ```objc
       @interface TFLBertQuestionAnswerer : NSObject
@@ -329,7 +329,7 @@ iOS API는 네이티브 API 상위에 있는 간단한 ObjC 래퍼입니다. 아
     }
     ```
 
-    - .mm file
+    - .mm 파일
 
     ```objc
       using BertQuestionAnswererCPP = ::tflite::task::text::BertQuestionAnswerer;
