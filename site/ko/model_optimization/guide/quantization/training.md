@@ -68,9 +68,9 @@ to launch. -->
 <figure>
   <table>
     <tr>
-      <th>모델</th>
-      <th>비 양자화 Top-1 정확성</th>
-      <th>8bit 양자화 정확성</th>
+      <th>Model</th>
+      <th>Non-quantized Top-1 Accuracy </th>
+      <th>8-bit Quantized Accuracy </th>
     </tr>
     <tr>
       <td>MobilenetV1 224</td>
@@ -97,19 +97,18 @@ to launch. -->
 <figure>
   <table>
     <tr>
-      <th>모델</th>
-      <th>비 양자화 Top-1 정확성</th>
-      <th>8bit 양자화 정확성</th>
-    </tr>
-<tr>
+      <th>Model</th>
+      <th>Non-quantized Top-1 Accuracy </th>
+      <th>8-Bit Quantized Accuracy </th>
+    <tr>
       <td>Nasnet-Mobile</td>
-      <td>74 %</td>
-      <td>73 %</td>
+      <td>74%</td>
+      <td>73%</td>
     </tr>
     <tr>
       <td>Resnet-v2 50</td>
-      <td>75.6 %</td>
-      <td>75 %</td>
+      <td>75.6%</td>
+      <td>75%</td>
     </tr>
  </table>
 </figure>
