@@ -97,7 +97,7 @@ val results = objectDetector?.detect(tensorImage)
 
 Interpreter API は、Task Library API よりも優れた制御と柔軟性を提供します。機械学習タスクが Task ライブラリでサポートされていない場合、または ML モデルを構築および実行するためにより汎用的なインターフェースが必要な場合は、Interpreter API を使用する必要があります。
 
-#### 1. Add project dependencies
+#### 1. プロジェクト依存関係の追加
 
 次の依存関係をアプリプロジェクトコードに追加し、TensorFlow Lite 用の Play サービス API にアクセスします。
 
@@ -112,7 +112,7 @@ dependencies {
 }
 ```
 
-#### 2. Add initialization of TensorFlow Lite
+#### 2. TensorFlow Lite の初期化
 
 TensorFlow Lite API を使用する*前*に、Google Play services API の TensorFlow Lite コンポーネントを初期化します。
 
@@ -437,20 +437,20 @@ Interpreter API で GPU デリゲートを使用するには:
 
 ## スタンドアロン TensorFlow Lite からの移行 {:#migrating}
 
-If you are planning to migrate your app from stand-alone TensorFlow Lite to the Play services API, review the following additional guidance for updating your app project code:
+スタンドアロン TensorFlow Lite から Play services API にアプリを移行する計画の場合は、アプリのプロジェクトコードの更新について、次の追加の指針を確認してください。
 
 1. このページの[制限事項](#limitations)セクションを確認し、ユースケースがサポートされていることを確かめます。
 2. コードを更新する前に、特にバージョン 2.1 より前の TensorFlow Lite を使用している場合は、モデルのパフォーマンスチェックと精度チェックを実行して、新しい実装と比較するベースラインを策定します。
 3. すべてのコードを移行し、TensorFlow Lite で Play services API を使用する場合は、既存の TensorFlow Lite *ランタイムライブラリ*の依存関係 (<code>org.tensorflow:**tensorflow-lite**:*</code> のエントリ) を build.gradle ファイルから削除し、アプリのサイズを小さくしてください。
-4. Identify all occurrences of `new Interpreter` object creation in your code, and modify it so that it uses the InterpreterApi.create() call. This new API is asynchronous, which means in most cases it's not a drop-in replacement, and you must register a listener for when the call completes. Refer to the code snippet in [Step 3](#step_3_interpreter) code.
+4. コードで `new Interpreter` オブジェクト作成処理をすべて特定し、InterpreterApi.create() 呼び出しを使用するように修正します。この新しい API は非同期です。つまり、ほとんどの場合、ドロップイン置換ではありません。このため、呼び出しの完了時にリスナーを登録する必要があります。[手順 3](#step_3_interpreter) のコードのコードスニペットを参照してください。
 5. `org.tensorflow.lite.Interpreter` または `org.tensorflow.lite.InterpreterApi` クラスを使用して、`import org.tensorflow.lite.InterpreterApi;` と `import org.tensorflow.lite.InterpreterApi.Options.TfLiteRuntime;` をすべてのソースファイルに追加します。
 6. 結果として `InterpreterApi.create()` の呼び出しのいずれかで引数が 1 つしかない場合は、`new InterpreterApi.Options()` を引数リストの最後に追加します。
 7. `.setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)` を、`InterpreterApi.create()` の呼び出しの最後の引数に追加します。
 8. `org.tensorflow.lite.Interpreter` クラスの部分をすべて `org.tensorflow.lite.InterpreterApi` で置換します。
 
-If you want to use stand-alone TensorFlow Lite and the Play services API side-by-side, you must use TensorFlow Lite 2.9 (or later). TensorFlow Lite 2.8 and earlier versions are not compatible with the Play services API version.
+スタンドアロン TensorFlow Lite と Play services API をサイドバイサイドで使用する場合は、TensorFlow Lite 2.9 (以降) を使用する必要があります。TensorFlow Lite 2.8 以前のバージョンは、Play services API バージョンと互換性がありません。
 
-## Limitations
+## 制限事項
 
 Google Play サービスの TensorFlow Lite には次の制限があります。
 
