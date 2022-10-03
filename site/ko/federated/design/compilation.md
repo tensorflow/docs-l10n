@@ -40,14 +40,10 @@ TFF의 추상 구문 트리(AST)는 페더레이션 계산의 구조를 설명�
 
 [tensorflow_computation_transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/tensorflow_computation_transformations.py) 모듈에는 원자 [TensorFlow 계산](#tensorflow-computation) 변환이 포함되어 있습니다.
 
-[compiled_computation_transforms](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/compiled_computation_transforms.py) 모듈에는 원자 및 복합 [컴파일 계산](#compiled-computation) 변환이 포함되어 있습니다.
+[compiled_computation_transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/compiled_computation_transformations.py) 모듈에는 원자 및 복합 [컴파일된 계산](#compiled-computation) 변환이 포함되어 있습니다.
 
 [transformation_utils](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/transformation_utils.py) 모듈에는 다른 변환 모듈에서 사용하는 함수, 순회 논리 및 데이터 구조가 포함되어 있습니다.
 
 ## 컴파일러
 
 컴파일러는 실행할 수 있는 양식을 구성하는 [transformations](#transformation) 모음입니다.
-
-### `CompilerPipeline`
-
-[compiler_pipeline.CompilerPipeline](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/compiler_pipeline.py)은 [AST](#ast)를 컴파일하고 컴파일된 결과를 캐시하는 데이터 구조입니다. AST를 컴파일하는 성능은 컴파일 함수의 복잡성에 따라 달라집니다. `CompilerPipeline`은 같은 AST를 여러 번 컴파일해도 시스템 성능에 영향을 미치지 않도록 합니다.
