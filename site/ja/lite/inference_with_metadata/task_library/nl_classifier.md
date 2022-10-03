@@ -49,7 +49,7 @@ dependencies {
 }
 ```
 
-Note: starting from version 4.1 of the Android Gradle plugin, .tflite will be added to the noCompress list by default and the aaptOptions above is not needed anymore.
+注：Android Gradle プラグインのバージョン 4.1 以降、.tflite はデフォルトで noCompress リストに追加され、上記の aaptOptions は不要になりました。
 
 ### ステップ 2: API を使用して推論を実行する
 
@@ -139,7 +139,7 @@ Depending on the use case, the `NLClassifier` API can load a TFLite model with o
 
     - モデルの入力は、kTfLiteString テンソル生入力文字列または生入力文字列の正規表現トークン化インデックス用の kTfLiteInt32 テンソルのいずれかである必要があります。
     - If input type is kTfLiteString, no [Metadata](../../models/convert/metadata) is required for the model.
-    - If input type is kTfLiteInt32, a `RegexTokenizer` needs to be set up in the input tensor's [Metadata](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers).
+    - 入力型が kTfLiteInt32 の場合、`RegexTokenizer`を入力テンソルの[メタデータ](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers)に設定する必要があります。
 
 - 出力スコアテンソル：(kTfLiteUInt8/kTfLiteInt8/kTfLiteInt16/kTfLiteFloat32/kTfLiteFloat64)
 
