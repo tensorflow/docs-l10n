@@ -105,7 +105,7 @@ dependencies {
 
 #### CocoaPods を使用する
 
-TensorFlow Lite provides nightly prebuilt select TF ops CocoaPods for `arm64`, which you can depend on alongside the `TensorFlowLiteSwift` or `TensorFlowLiteObjC` CocoaPods.
+TensorFlow Lite は、`TensorFlowLiteSwift` または `TensorFlowLiteObjC` と一緒に依存できる、`arm64` 用の夜間に構築済みのセレクト TF 演算 CocoaPod を提供します。
 
 *注*: `x86_64`シミュレーターでセレクト TF 演算を使用する必要がある場合は、セレクト演算フレームワークを自分で構築できます 詳細については、[Bazel を使用する、および、Xcode](#using_bazel_xcode) のセクションを参照してください。
 
@@ -117,13 +117,13 @@ TensorFlow Lite provides nightly prebuilt select TF ops CocoaPods for `arm64`, w
 
 `pod install` を実行後、セレクト TF 演算子フレームワークをプロジェクトに強制読み込みできるように、追加のリンカーフラグを指定する必要があります。Xcode プロジェクトで、`Build Settings` -&gt; `Other Linker Flags` に移動し、次を追加します。
 
-For versions &gt;= 2.9.0:
+バージョン &gt;= 2.9.0 の場合:
 
 ```text
 -force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.xcframework/ios-arm64/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
 ```
 
-For versions &lt; 2.9.0:
+バージョン &lt; 2.9.0 の場合:
 
 ```text
 -force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
