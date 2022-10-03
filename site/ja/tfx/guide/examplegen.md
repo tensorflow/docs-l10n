@@ -13,14 +13,14 @@ ExampleGen は [TensorFlow Data Validation](tfdv.md) ライブラリを利用す
 
 現在、標準的な TFX のインストールには、以下のデータソースと形式をサポートする完全な ExampleGen コンポーネントが含まれています。
 
-- CSV
-- tf.Record
-- BigQuery
+- [CSV](https://github.com/tensorflow/tfx/tree/master/tfx/components/example_gen/csv_example_gen)
+- [tf.Record](https://github.com/tensorflow/tfx/tree/master/tfx/components/example_gen/import_example_gen)
+- [BigQuery](https://github.com/tensorflow/tfx/tree/master/tfx/extensions/google_cloud_big_query/example_gen)
 
 以下のデータソースと形式をサポートする ExampleGen コンポーネントの開発を可能にするカスタム Executor も利用できます。
 
-- Avro
-- Parquet
+- [Avro](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/custom_executors/avro_executor.py)
+- [Parquet](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/custom_executors/parquet_executor.py)
 
 カスタム Executor の使用方法と開発方法についての詳細は、ソースコードに含まれる使用例と[こちらのディスカッション](/tfx/guide/examplegen#custom_examplegen)をご覧ください。
 
@@ -501,4 +501,4 @@ evaluator = Evaluator(
       example_splits=['eval1', 'eval2'])
 ```
 
-さらに詳細については、[CsvExampleGen API リファレンス](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/CsvExampleGen)、[FileBasedExampleGen API リファレンス](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/FileBasedExampleGen)、および [ImportExampleGen API リファレンス](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/ImportExampleGen)をご覧ください。
+さらに詳細については、[CsvExampleGen API リファレンス](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/CsvExampleGen)、[FileBasedExampleGen API の実装](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/component.py)、および [ImportExampleGen API リファレンス](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/ImportExampleGen)をご覧ください。
