@@ -16,13 +16,13 @@ sudo apt-get install cmake
 
 [公式の cmake インストールガイド](https://cmake.org/install/)の手順でもインストールできます。
 
-### Step 2. Clone TensorFlow repository
+### 手順 2. TensorFlow レポジトリをクローンする
 
 ```sh
 git clone https://github.com/tensorflow/tensorflow.git tensorflow_src
 ```
 
-**Note:** If you're using the TensorFlow Docker image, the repo is already provided in `/tensorflow_src/`.
+**注意:** TensorFlow Docker イメージを使用している場合、リポジトリは `/tensorflow_src/` にあります。
 
 ### 手順 3. CMake ビルドディレクトリを作成する
 
@@ -228,7 +228,7 @@ cmake --build . -j
 
 このコマンドでは、現在のディレクトリに次の共有ライブラリが生成されます。
 
-Platform | Library name
+プラットフォーム | ライブラリ名
 --- | ---
 Linux | libtensorflowlite_c.so
 macOS | libtensorflowlite_c.dylib
