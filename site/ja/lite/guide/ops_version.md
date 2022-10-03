@@ -39,8 +39,6 @@ table DepthwiseConv2DOptions {
 新しいパラメータを追加した後のテーブルは次のようになります。
 
 ```
-table Conv2DOptions {
-  // Parameters supported by version 1:
 table DepthwiseConv2DOptions {
   // Parameters for DepthwiseConv version 1 or above.
   padding:Padding;
@@ -67,8 +65,9 @@ typedef struct {
   TfLitePadding padding;
   int stride_width;
   int stride_height;
+  int depth_multiplier;
   TfLiteFusedActivation activation;
-} TfLiteConvParams;
+} TfLiteDepthwiseConvParams;
 ```
 
 FlatBuffer スキーマと同様に、どのパラメータがどのバージョン以降でサポートされているかを示すコメントを追加します。結果は以下のようになります。
