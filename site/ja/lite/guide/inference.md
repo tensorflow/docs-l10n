@@ -40,13 +40,13 @@ TensorFlow の推論 API は、[Android](#android-platform)、[iOS](#ios-platfor
 
 Android では、TensorFlow Lite の推論は、Java または C++ API のいずれかを使用して実行できます。Java API は、利便性を提供し、Android Activity クラス内で直接使用できます。C++ API は、さらに柔軟性と速度を提供しますが、Java と C++ レイヤー間でデータを移動するには、JNI ラッパーを書く必要がある場合があります。
 
-See below for details about using [C++](#load-and-run-a-model-in-c) and [Java](#load-and-run-a-model-in-java), or follow the [Android quickstart](../android) for a tutorial and example code.
+C++ と Java の使用に関する詳細は以下をご覧ください。または、チュートリアルとサンプルコードについては、[Android クイックスタート](#load-and-run-a-model-in-c)をご覧ください。
 
 #### TensorFlow Lite Android ラッパーコードジェネレータ
 
 注意: TensorFlow Lite ラッパーコードジェネレータは試験（ベータ）フェーズにあり、現在 Android のみをサポートしています。
 
-For TensorFlow Lite model enhanced with [metadata](../inference_with_metadata/overview), developers can use the TensorFlow Lite Android wrapper code generator to create platform specific wrapper code. The wrapper code removes the need to interact directly with `ByteBuffer` on Android. Instead, developers can interact with the TensorFlow Lite model with typed objects such as `Bitmap` and `Rect`. For more information, please refer to the [TensorFlow Lite Android wrapper code generator](../inference_with_metadata/codegen.md).
+[メタデータ](../inference_with_metadata/overview)で強化された TensorFlow Lite モデルの場合、開発者は TensorFlow Lite Android ラッパーコードジェネレータを使用して、プラットフォーム固有のラッパーコードを作成できます。ラッパーコードにより、`ByteBuffer`と直接やり取りする必要がなくなり、開発者は`Bitmap`や`Rect`などの型付きオブジェクトを使用して TensorFlow Lite モデルとやり取りできます。詳細は、[TensorFlow Lite Android ラッパーコードジェネレータ](../inference_with_metadata/codegen.md)をご覧ください。
 
 ### iOS プラットフォーム
 
@@ -56,7 +56,7 @@ iOS では、TensorFlow Lite は [Swift](https://www.tensorflow.org/code/tensorf
 
 ### Linux プラットフォーム
 
-On Linux platforms (including [Raspberry Pi](build_arm)), you can run inferences using TensorFlow Lite APIs available in [C++](#load-and-run-a-model-in-c) and [Python](#load-and-run-a-model-in-python), as shown in the following sections.
+Linux プラットフォーム（[Raspberry Pi](build_arm) を含む）では、次のセクションで説明される通り、C++ とPython で提供されている TensorFlow Lite API を使用して推論を実行できます。
 
 ## モデルを実行する
 
@@ -129,7 +129,7 @@ interpreter.runForMultipleInputsOutputs(inputs, map_of_indices_to_outputs);
 
 この場合、`inputs`の各エントリは入力テンソルに対応し、`map_of_indices_to_outputs`は、出力テンソルのインデックスを対応する出力データにマッピングします。
 
-In both cases, the tensor indices should correspond to the values you gave to the [TensorFlow Lite Converter](../models/convert/) when you created the model. Be aware that the order of tensors in `input` must match the order given to the TensorFlow Lite Converter.
+両方のケースでは、テンソルのインテックスはモデルを作成したときに [TensorFlow Lite コンバータ](../models/convert/)に指定した値に対応しています。`input`内のテンソルの順序が TensorFlow Lite コンバータに指定した順序と一致している必要があることに注意してください。
 
 `Interpreter`クラスには、演算名を使用してモデルの入力または出力のインデックスを取得するための便利な関数もあります。
 
