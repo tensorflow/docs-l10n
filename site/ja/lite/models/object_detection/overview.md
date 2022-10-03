@@ -12,7 +12,7 @@
 
 モバイルアプリで物体検出を使用する方法については、<a href="#example_applications_and_guides">サンプルアプリとガイド</a>をご覧になることをお勧めします。
 
-Android または iOS 以外のプラットフォームを使用する場合、または、すでに <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite API</a> に精通している場合は、物体検出スターターモデルと付随するラベルをダウンロードしてください。
+If you are using a platform other than Android or iOS, or if you are already familiar with the <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite APIs</a>, you can download our starter object detection model and the accompanying labels.
 
 <a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">メタデータを含むスターターモデルをダウンロードする</a>
 
@@ -99,7 +99,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
 
 注意：結果の数（上記の場合は 10）は、検出モデルをTensorFlowLite にエクスポートするときに設定されるパラメータです。詳細については、<a href="#model-customization">モデルのカスタマイズ</a>をご覧ください。
 
-リンゴ、バナナ、イチゴを検出するようにモデルがトレーニングされているとします。画像を渡すと、設定した数の検出結果が出力されます。この例では 5 です。
+For example, imagine a model has been trained to detect apples, bananas, and strawberries. When provided an image, it will output a set number of detection results - in this example, 5.
 
 <table style="width: 60%;">
   <thead>
@@ -185,6 +185,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
 
 たとえば、次の画像では、ナシ（モデルが検出するようにトレーニングされた物体ではない）が「人」として誤って識別されました。これは、適切なカットオフを選択することで無視できる誤検知の例です。この場合、0.6（または 60％）のカットオフは、誤検知を適切に除外します。
 
+
 <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/object_detection/images/android_apple_banana.png?raw=true" alt="Screenshot of Android example">
 
 #### 位置
@@ -223,9 +224,8 @@ Android でこの前処理を行う方法については[サンプルアプリ�
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a>
-</td>
-    <td rowspan="3">       27 Mb</td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a> </td>
+    <td rowspan="3">       27 Mb     </td>
     <td>Pixel 3 (Android 10)</td>
     <td>22ms</td>
     <td>46ms*</td>
@@ -252,9 +252,9 @@ Android でこの前処理を行う方法については[サンプルアプリ�
 
 [Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md#mobile-models) には、さまざまなレイテンシと精度の特性を備えたモバイル向けに最適化された検出モデルがあります。それぞれ、次のセクションで説明する入力署名および出力署名に従います。
 
-ほとんどのダウンロード zip には、`model.tflite `ファイルが含まれています。含まれていない場合は、[これらの手順](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)で TensorFlowLite フラットバッファーを生成できます。[TF2 Object Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md)の SSD モデルは、[こちら](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md)の手順を使用して TensorFlowLite に変換することもできます。検出モデルは、モバイル対応のソースモデルを生成する中間ステップを必要とするため、[TensorFlow Lite Converter](../../models/convert) を使用して直接変換できないことに注意してください。上記リンクのスクリプトは、このステップを実行します。
+Most of the download zips contain a `model.tflite` file. If there isn't one, a TensorFlow Lite flatbuffer can be generated using [these instructions](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md). SSD models from the [TF2 Object Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md) can also be converted to TensorFlow Lite using the instructions [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md). It is important to note that detection models cannot be converted directly using the [TensorFlow Lite Converter](../../models/convert), since they require an intermediate step of generating a mobile-friendly source model. The scripts linked above perform this step.
 
-[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) と [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) の両方のエクスポートスクリプトには、より多くの出力オブジェクトや、より低速でより正確な後処理を可能にするパラメータがあります。サポートされている引数の完全なリストを表示するには、スクリプトで`--help`を使用してください。
+Both the [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) &amp; [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md) exporting scripts have parameters that can enable a larger number of output objects or slower, more-accurate post processing. Please use `--help` with the scripts to see an exhaustive list of supported arguments.
 
 > 現在、デバイス上の推論は SSD モデルでのみ最適化されています。CenterNet や EfficientDet などの他のアーキテクチャに対するサポートの改善は研究されています。
 
@@ -270,4 +270,4 @@ Android でこの前処理を行う方法については[サンプルアプリ�
 
 元のセットにないクラスを認識するようにモデルを再トレーニングするには転移学習と呼ばれる手法を使用します。たとえば、元のトレーニングデータには野菜は 1 つしかありませんが、モデルを再トレーニングすると複数の種類の野菜を検出できます。これを行うには、トレーニングする新しいラベルごとに一連のトレーニング画像が必要です。推奨される方法は、[TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) ライブラリを使用することです。このライブラリは、カスタムデータセットと数行のコードを使用して、TensorFlow Lite モデルのトレーニングプロセスを簡素化します。また、転移学習が使用されるため、必要なトレーニングデータと時間が少なくなります。いくつかの例を含む事前トレーニング済みモデルのファインチューニングの例は、[少数ショット検出 Colab](https://www.tensorflow.org/lite/guide/model_maker) でも確認できます。
 
-より大きなデータセットでファインチューニングするには、TensorFlow Object Detection API を使用して独自のモデルをトレーニングするためのガイド、[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_training_and_evaluation.md) と [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md) をご覧ください。トレーニングが完了すると、[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)、[TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) の手順で、TFLite に適した形式に変換できます。
+For fine-tuning with larger datasets, take a look at the these guides for training your own models with the TensorFlow Object Detection API: [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_training_and_evaluation.md), [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_training_and_evaluation.md). Once trained, they can be converted to a TFLite-friendly format with the instructions here: [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md), [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md)
