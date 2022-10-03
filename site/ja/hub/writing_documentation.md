@@ -4,28 +4,28 @@
 
 tfhub.dev にモデルを貢献するには、Markdown 形式のドキュメントを提供する必要があります。tfhub.dev にモデルを追加するプロセスの完全な概要については、[モデルの貢献](contribute_a_model.md)ガイドをご覧ください。
 
-## Types of Markdown documentation
+## Markdown ドキュメントの種類
 
-There are 3 types of Markdown documentation used in tfhub.dev:
+tfhub.dev では次の 3 種類の Markdown ドキュメントが使用されています。
 
 - パブリッシャー Markdown - パブリッシャーに関する情報（[Markdown 構文をご覧ください](#publisher)）
 - モデル Markdown - 特定のモデルとその使用方法に関する情報 ([Markdown 構文をご覧ください](#model))
 - コレクション Markdown - パブリッシャーが定義したモデルコレクションに関する情報が含まれます（[Markdown 構文をご覧ください](#collection)）。
 
-## Content organization
+## コンテンツの編成
 
 [TensorFlow Hub GitHub](https://github.com/tensorflow/tfhub.dev) リポジトリに貢献する際は、次のコンテンツで編成する必要があります。
 
 - 各パブリッシャーディレクトリは  `assets/docs` ディレクトリに配置します。
-- each publisher directory contains optional `models` and `collections` directories
+- オプションの `models` ディレクトリと `collections` ディレクトリは、各パブリッシャディレクトリに含めます。
 - 各モデルには、`assets/docs/<publisher_name>/models` の下にそれぞれのディレクトリを用意します。
 - 各コレクションには、`assets/docs/<publisher_name>/collections` の下にそれぞれのディレクトリを用意します。
 
 パブリッシャーの Markdown はバージョン管理されていませんが、モデルにはさまざまなバージョンを設けることができます。モデルの各バージョンには、そのバージョンにちなんだ個別の Markdown ファイル（1.md、2.md など）が必要です。コレクションはバージョン管理されていますが、1つのバージョンのみ（1.md）がサポートされています。
 
-All model versions for a given model should be located in the model directory.
+特定のモデルのすべてのバージョンを、そのモデルのディレクトリに配置してください。
 
-Below is an illustration on how the Markdown content is organized:
+Markdown コンテンツの編成を次の図に示しています。
 
 ```
 assets/docs
@@ -68,17 +68,17 @@ challenging benchmark to evaluate image representations.
 
 上記の例では、パブリッシャー ID、パブリッシャー名、使用するアイコンへのパス、およびより長い自由形式の Markdown ドキュメントを指定しています。パブリッシャーIDには、小文字、数字、ハイフンのみを含める必要があることに注意してください。
 
-### Publisher name guideline
+### パブリッシャーの名前のガイドライン
 
-Your publisher name can be your GitHub username or the name of the GitHub organization you manage.
+パブリッシャーの名前には GitHub ユーザー名または管理する GitHub 組織の名前を使用します。
 
 ## モデルページの Markdown 形式 {:#model}
 
-The model documentation is a Markdown file with some add-on syntax. See the example below for a minimal example or [a more realistic example Markdown file](https://github.com/tensorflow/tfhub.dev/blob/master/examples/docs/tf2_model_example.md).
+モデルドキュメントは、複数のアドオンの構文を備えた Markdown ファイルです。最小限の例、またはより現実的な例の Markdown ファイルについては以下をご覧ください。
 
-### Example documentation
+### ドキュメントの例
 
-A high-quality model documentation contains code snippets, information how the model was trained and intended usage. You should also make use of model-specific metadata properties [explained below](#metadata) so users can find your models on tfhub.dev faster.
+高品質のモデルドキュメントには、コードスニペット、モデルのトレーニング方法および使用目的に関する情報が含まれています。また、ユーザーがあなたのモデルを tfhub.dev で素早く検索できるように、以下に説明されているモデル固有のメタデータプロパティもご利用ください。
 
 ```markdown
 # Module google/text-embedding-model/1
@@ -106,14 +106,14 @@ output = model(inputs)
 ```
 ```
 
-### Model deployments and grouping deployments together
+### モデルのデプロイとデプロイのグループ化
 
 tfhub.dev では、TensorFlow SavedModel を TF.js、TFLite、およびCoral デプロイで公開できます。
 
 Markdown ファイルの最初の行には、形式の種類が指定されている必要があります。
 
 - SavedModel 用の `# Module publisher/model/version`
-- `# Tfjs publisher/model/version` for TF.js deployments
+- TF.js デプロイ用の # Tfjs publisher/model/version
 - Lite デプロイ用の `# Lite publisher/model/version`
 - Coral デプロイ用の `# Coral publisher/model/version`
 
@@ -123,7 +123,7 @@ tfhub.dev の同じモデルページ上にこれらの異なる形式の同じ�
 <!-- parent-model: publisher/model/version -->
 ```
 
-Sometimes you might want to publish one or more deployments without a TensorFlow SavedModel. In that case, you'll need to create a Placeholder model and specify its handle in the `parent-model` tag. The placeholder Markdown is identical to TensorFlow model Markdown, except that the first line is: `# Placeholder publisher/model/version` and it doesn't require the `asset-path` property.
+場合によっては TensorFlow SavedModel なしで 1 つ以上のデプロイを公開することが考えられます。その場合は、プレースホルダーモデルを作成して、parent-model のタグにそのハンドルを指定します。プレースホルダーの Markdown は TensorFlow モデルの Markdownとまったく同じですが、最初の行だけは # Placeholder publisher/model/version とし、asset-path プロパティは必要ありません。
 
 ### モデルの Markdown 固有のメタデータプロパティ {:#metadata}
 
@@ -139,9 +139,9 @@ Encoder of greater-than-word length text trained on a variety of data.
 
 次のメタデータプロパティがサポートされています。
 
-- `format`: For TensorFlow models: the TensorFlow Hub format of the model. Valid values are `hub` when the model was exported via the legacy [TF1 hub format](exporting_hub_format.md) or `saved_model_2` when the model was exported via a [TF2 Saved Model](exporting_tf2_saved_model.md).
+- format: TensorFlow モデルの場合: TensorFlow Hub 形式のモデル。有効な値として、hub はモデルがレガシーの TF1 hub 形式である場合、そして  saved_model_2 はモデルが TF2 Saved Model 経由でエクスポートされている場合に使用できます。
 - `asset-path`: Google Cloud Storage バケットなど、アップロードする実際のモデルアセットへの world-readable なリモートパスです。URL は、robots.txt ファイルによって取得できる必要があります（この理由により、"https://github.com/./releases/download/." は https://github.com/robots.txt で禁止されているためサポートされていません）。必要なファイルの種類とコンテンツに関する詳しい情報は、[以下](#model-specific-asset-content)をご覧ください。
-- `parent-model`: For TF.js/TFLite/Coral models: handle of the accompanying SavedModel/Placeholder
+- parent-model: TF.js、TFLite、Coral モデルの場合: 同伴する SavedModel/プレースホルダーのハンドルです。
 - fine-tunable: ブール値。ユーザーがモデルをファインチューニングできるかどうか。
 - `task`: 問題のドメイン、たとえば "text-embedding" です。サポートされているすべての値は [task.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/task.yaml) で定義されています。
 - `dataset`: モデルがトレーニングされたデータセット、たとえば、"wikipedia" です。サポートされているすべての値は、[dataset.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/dataset.yaml) で定義されています。
@@ -152,22 +152,22 @@ Encoder of greater-than-word length text trained on a variety of data.
 - `demo`: TF.js モデルの使用方法を示すWebサイトへの HTTPS URL（[posenet](https://teachablemachine.withgoogle.com/train/pose) の[例](https://tfhub.dev/tensorflow/tfjs-model/posenet/mobilenet/float/075/1/default/1)）。
 - `interactive-visualizer`: モデルページに埋め込む必要のあるビジュアライザー名、たとえば "vision"。ビジュアライザーを表示すると、ユーザーはモデルの予測をインタラクティブに調べることができます。サポートされているすべての値は、 [interactive_visualizer.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/interactive_visualizer.yaml) で定義されています。
 
-The Markdown documentation types support different required and optional metadata properties:
+Markdown ドキュメントの種類は、さまざまな必須メタデータプロパティとオプションのメタデータプロパティをサポートしています。
 
-タイプ | Required | Optional
+タイプ | 必須 | オプション
 --- | --- | ---
 パブリッシャー |  |
 コレクション | task | dataset, language,
 : : : network-architecture : |  |
-Placeholder | task | dataset, fine-tunable,
+プレースホルダー | task | dataset, fine-tunable,
 : : : interactive-visualizer, language, : |  |
 : : : license, network-architecture : |  |
 SavedModel | asset-path, task, | colab, dataset,
 : : fine-tunable, format : interactive-visualizer, language, : |  |
 : : : license, network-architecture : |  |
-Tfjs | asset-path, parent-model | colab, demo, interactive-visualizer
-Lite | asset-path, parent-model | colab, demo, interactive-visualizer
-Coral | asset-path, parent-model | colab, interactive-visualizer
+Tfjs | asset-path、parent-model | colab, demo, interactive-visualizer
+Lite | asset-path、parent-model | colab, demo, interactive-visualizer
+Coral | asset-path、parent-model | colab, interactive-visualizer
 
 ### モデル固有のアセットコンテンツ
 
@@ -206,9 +206,9 @@ tar.gz アーカイブの場合: モデルファイルがディレクトリ `my_
 
 ## コレクションページの Markdown 形式 <br>{:#collection}
 
-Collections are a feature of tfhub.dev that enables publishers to bundle related models together to improve user search experience.
+コレクションは、パブリッシャーが関連するモデルをバンドルすることにより、ユーザーの検索体験の向上を可能にする tfhub.dev の機能です。
 
-See the [list of all collections](https://tfhub.dev/s?subtype=model-family) on tfhub.dev.
+すべてのコレクションリストは tfhub.dev をご覧ください。
 
 リポジトリ [github.com/tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) 内のコレクションファイルの正しい場所は、[assets/docs](https://github.com/tensorflow/tfhub.dev)/<b>publisher_name&gt;</b>/collections/<b>&lt;collection_name&gt;</b>/<b>1</b>.md です。
 
