@@ -84,11 +84,11 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
         - 출력: 출력 데이터를 읽는 데 소요된 시간
         - 커널 시작: 호스트가 커널을 시작하는 데 소요된 시간
         - Host compute time..
-        - Device-to-device communication time.
-        - On-device compute time.
+        - 장치 간 통신 시간
+        - 장치 내 컴퓨팅 시간
         - All others, including Python overhead.
 
-    2. Device compute precisions - Reports the percentage of device compute time that uses 16 and 32-bit computations.
+    2. 장치 컴퓨팅 정밀도 - 16bit 및 32bit 계산을 사용하는 장치 컴퓨팅 시간의 백분율을 보고합니다.
 
 - **스텝-시간 그래프**: 샘플링한 모든 스텝에서 기기 스텝 시간(밀리 초)의 그래프를 표시합니다. 각 스텝은 시간이 사용된 여러 범주(서로 다른 색상)로 세분됩니다. 빨간색 영역은 기기가 호스트로부터 입력 데이터를 기다리는 동안 유휴 상태로 있었던 스텝 시간 부분에 해당합니다. 녹색 영역은 기기가 실제로 작동한 시간을 나타냅니다.
 
@@ -99,8 +99,8 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
 - **실행 환경**: 다음을 포함하여 모델 실행 환경에 대한 높은 수준의 요약을 표시합니다.
 
     - Number of hosts used.
-    - Device type (GPU/TPU).
-    - Number of device cores.
+    - 장치 유형(GPU/TPU)
+    - 장치 코어 수
 
 - **다음 단계를 위한 권장 사항**: 모델이 입력 바운드될 때 보고하고, 모델의 성능 병목 현상을 찾아 해결하는 데 사용할 수 있는 도구를 권장합니다.
 
@@ -240,7 +240,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 추적 뷰어에는 다음 섹션이 포함되어 있습니다.
 
-- **One section for each device node**, labeled with the number of the device chip and the device node within the chip (for example, `/device:GPU:0 (pid 0)`). Each device node section contains the following tracks:
+- **장치 노드별 섹션 하나**, 장치 칩 번호와 칩 내 기기 노드로 표시됩니다(예를 들어, `/device:GPU:0 (pid 0)`). 각 장치 노드 섹션에는 다음 트랙이 포함되어 있습니다.
     - **스텝**: 기기에서 실행 중인 학습 스텝의 기간을 표시합니다.
     - **TensorFlow 연산**: 기기에서 실행된 연산을 표시합니다.
     - **XLA 연산 -** XLA 컴파일러가 사용된 경우에는 기기에서 실행된 [XLA](https://www.tensorflow.org/xla/) 연산(ops)을 표시합니다. (각 TensorFlow 연산은 하나 또는 여러 개의 XLA 연산으로 변환됩니다. XLA 컴파일러는 XLA 연산을 기기에서 실행되는 코드로 변환합니다.)
@@ -266,18 +266,18 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 - The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
 
-- The lower pane displays a table with the following data for each unique kernel-op pair:
+- 하단 창에 표시되는 표에서는 각 고유 커널-연산 쌍에 대한 다음 데이터가 표시됩니다.
 
     - 총 경과 GPU 기간을 kernel-op 쌍으로 그룹화하여 내림차순으로 나타낸 순위
     - The name of the launched kernel.
-    - The number of GPU registers used by the kernel.
+    - 커널이 사용하는 GPU 레지스터의 수
     - 사용된 공유(정적 + 동적 공유) 메모리의 총 크기(바이트 단위)
-    - The block dimension expressed as `blockDim.x, blockDim.y, blockDim.z`.
-    - The grid dimensions expressed as `gridDim.x, gridDim.y, gridDim.z`.
+    - `blockDim.x, blockDim.y, blockDim.z`로 표현된 블록 차원
+    - code0}gridDim.x, gridDim.y, gridDim.z로 표현된 그리드 차원
     - 연산이 [Tensor Cores](https://www.nvidia.com/en-gb/data-center/tensor-cores/)를 사용할 수 있는지 여부
     - Whether the kernel contains Tensor Core instructions.
     - 이 커널을 시작한 연산의 이름
-    - The number of occurrences of this kernel-op pair.
+    - 이 커널-연산 쌍의 발생 횟수
     - 총 GPU 경과 시간(마이크로 초)
     - 평균 GPU 경과 시간(마이크로 초)
     - 최소 GPU 경과 시간(마이크로 초)
@@ -485,7 +485,7 @@ TensorFlow 프로파일러는 TensorFlow 모델의 호스트 활동 및 GPU 추�
 
 <a name="sampling_mode"></a>
 
-- Sampling mode: Perform on-demand profiling by using `tf.profiler.experimental.server.start` to start a gRPC server with your TensorFlow model run. After starting the gRPC server and running your model, you can capture a profile through the **Capture Profile** button in the TensorBoard profile plugin. Use the script in the Install profiler section above to launch a TensorBoard instance if it is not already running.
+- 샘플링 모드: `tf.profiler.experimental.server.start`를 사용하여 주문형 프로파일링을 수행하여 TensorFlow 모델이 실행된 상태에서 gRPC 서버를 시작합니다. gRPC 서버를 시작하고 모델을 실행한 후 TensorBoard 프로파일 플러그인의 **Capture Profile** 버튼을 통해 프로파일을 캡처할 수 있습니다. TensorBoard 인스턴스를 아직 실행하고 있지 않다면 위의 프로파일러 설치 섹션에 있는 스크립트를 사용하여 실행합니다.
 
     예를 들면 다음과 같습니다.
 
@@ -688,7 +688,7 @@ os.environ['TF_GPU_THREAD_COUNT']='1'
 
 - 컨볼루션 레이어가 있는 모델에서 배치 정규화를 사용하는 경우 편향 추가를 제거합니다. 배치 정규화로 인해 값이 평균만큼 이동하므로 일정한 편향 항을 가질 필요가 없습니다.
 
-- Use TF Stats to find out how efficiently on-device ops run.
+- TF 통계를 사용하여 장치 내부 연산이 얼마나 효율적으로 실행되는지 확인합니다.
 
 - `tf.function`을 사용하여 계산을 수행하고 선택적으로 `jit_compile=True` 플래그를 지정합니다(`tf.function(jit_compile=True`). 자세히 알아보려면 [XLA tf.function 사용하기](https://www.tensorflow.org/xla/tutorials/jit_compile)로 이동하세요.
 
