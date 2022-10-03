@@ -4,17 +4,13 @@ TensorFlow Lite Task 라이브러리에는 앱 개발자가 TFLite로 ML 경험�
 
 ## Task 라이브러리에서 기대할 수 있는 사항
 
-- **Clean and well-defined APIs usable by non-ML-experts**
-     Inference can be done within just 5 lines of code. Use the powerful and easy-to-use APIs in the Task library as building blocks to help you easily develop ML with TFLite on mobile devices.
+- **ML 전문가가 아니더라도 사용할 수 있는 명료하고 잘 구성된 API** <br> 단 5줄의 코드 내에서 추론을 수행할 수 있습니다. Task 라이브러리의 강력하고 사용하기 쉬운 API를 빌딩 블록으로 사용하여 모바일 기기에서 TFLite로 ML을 쉽게 개발할 수 있습니다.
 
-- **Complex but common data processing**
-     Supports common vision and natural language processing logic to convert between your data and the data format required by the model. Provides the same, shareable processing logic for training and inference.
+- **복잡하지만 일반적인 데이터 처리** <br> 공통 비전 및 자연어 처리 논리를 지원하여 데이터와 모델에 필요한 데이터 형식 사이에서 변환할 수 있습니다. 학습 및 추론에 동일하고 공유 가능한 처리 로직을 제공합니다.
 
-- **High performance gain**
-     Data processing would take no more than a few milliseconds, ensuring the fast inference experience using TensorFlow Lite.
+- **높은 성능 향상** <br> 데이터 처리에 수 밀리 초 이상 걸리지 않으므로 TensorFlow Lite를 사용한 빠른 추론 경험이 보장됩니다.
 
-- **Extensibility and customization**
-     You can leverage all benefits the Task Library infrastructure provides and easily build your own Android/iOS inference APIs.
+- **확장성 및 사용자 정의 기능**<br> Task 라이브러리 인프라가 제공하는 모든 이점을 활용하고 자신만의 Android/iOS 추론 API를 쉽게 구축할 수 있습니다.
 
 ## 지원되는 작업
 
@@ -106,7 +102,7 @@ deps = [
 ]
 ```
 
-Note: the `gpu_plugin` target is a separate one from the [GPU delegate target](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/delegates/gpu). `gpu_plugin` wraps the GPU delegate target, and can provide safety guard, i.e. fallback to TFLite CPU path on delegation errors.
+참고: `gpu_plugin` 대상은 [GPU 대리자 대상](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/delegates/gpu)과 별개입니다. `gpu_plugin`은 GPU 대리자 대상을 래핑하고 안전한 보호를 제공할 수 있습니다. 즉, 대리자 오류 시 TFLite CPU 경로로 대체합니다.
 
 Other delegate options include:
 
@@ -138,9 +134,9 @@ std::vector<QaAnswer> results = answerer->Answer(context_of_question, question_t
 
 Explore more advanced accelerator settings [here](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto).
 
-### Example usage of Coral Edge TPU in Python
+### Python에서 Coral Edge TPU 사용의 예
 
-Configure Coral Edge TPU in the base options of the task. For example, you can set up Coral Edge TPU in `ImageClassifier` as follows:
+작업 옵션에서 Coral Edge TPU를 구성합니다. 예를 들어 다음과 같이 `ImageClassifier`에서 Coral Edge TPU를 설정할 수 있습니다.
 
 ```python
 # Imports
