@@ -501,4 +501,4 @@ evaluator = Evaluator(
       example_splits=['eval1', 'eval2'])
 ```
 
-More details are available in the [CsvExampleGen API reference](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/CsvExampleGen), [FileBasedExampleGen API implementation](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/component.py) and [ImportExampleGen API reference](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/ImportExampleGen).
+자세한 내용은 [CsvExampleGen API 참조](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/CsvExampleGen), [FileBasedExampleGen API 구현](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/component.py) 및 [ImportExampleGen API 참조](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/ImportExampleGen)에서 확인할 수 있습니다.
