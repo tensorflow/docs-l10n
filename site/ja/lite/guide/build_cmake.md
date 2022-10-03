@@ -57,11 +57,11 @@ cmake ../tensorflow_src/tensorflow/lite -DCMAKE_BUILD_TYPE=Debug
 cmake ../tensorflow_src/tensorflow/lite -DTFLITE_KERNEL_TEST=on
 ```
 
-#### Build installable package
+#### インストール可能なパッケージのビルド
 
-To build an installable package that can be used as a dependency by another CMake project with `find_package(tensorflow-lite CONFIG)`, use the `-DTFLITE_ENABLE_INSTALL=ON` option.
+`find_package(tensorflow-lite CONFIG)` を使用して別の CMake プロジェクトで依存関係として使用できるインストール可能なパッケージをビルドするには、`-DTFLITE_ENABLE_INSTALL=ON` オプションを使用します。
 
-You should ideally also provide your own versions of library dependencies. These will also need to used by the project that depends on TF Lite. You can use the `-DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON` and set the `<PackageName>_DIR` variables to point to your library installations.
+理想的には、独自のバージョンのライブラリ依存関係も提供する必要があります。これらは、TF Lite に依存するプロジェクトでも使用する必要があります。`-DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON` を使用して、ライブラリのインストールを指すように `<PackageName>_DIR` 変数を設定できます。
 
 ```sh
 cmake ../tensorflow_src/tensorflow/lite -DTFLITE_ENABLE_INSTALL=ON \
@@ -74,7 +74,7 @@ cmake ../tensorflow_src/tensorflow/lite -DTFLITE_ENABLE_INSTALL=ON \
   -Druy_DIR=<install path>/lib/cmake/ruy
 ```
 
-**Note:** Refer to CMake documentation for [`find_package`](https://cmake.org/cmake/help/latest/command/find_package.html) to learn more about handling and locating packages.
+**注意: **パッケージの処理と検索の詳細については、[`find_package`](https://cmake.org/cmake/help/latest/command/find_package.html) の CMake ドキュメントを参照してください。
 
 #### クロスコンパイル
 
