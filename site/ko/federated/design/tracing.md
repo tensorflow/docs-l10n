@@ -12,7 +12,7 @@ TODO(b/153500547): 추적 시스템의 개별 구성 요소를 설명하고 연�
 
 ### 인수 압축하기
 
-Internally, a TFF computation only ever have zero or one argument. The arguments provided to the [federated_computation.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation.py) decorator describe type signature of the arguments to the TFF computation. TFF uses this information to to determine how to pack the arguments of the Python function into a single [structure.Struct](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/common_libs/structure.py).
+내부적으로, TFF 계산에는 0 또는 1개의 인수만 있습니다. [federated_computation.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation.py) 데코레이터에 제공된 인수는 TFF 계산에 대한 인수의 유형 서명을 설명합니다. TFF는 이 정보를 사용하여 Python 함수의 인수를 단일 [structure.Struct](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/common_libs/structure.py)로 묶는 방법을 결정합니다.
 
 참고: `Struct`를 단일 데이터 구조로 사용하여 Python `args`와 `kwargs`를 나타내는 것은 `Struct`에서 명명된 필드와 명명되지 않은 필드를 모두 허용하는 이유입니다.
 
