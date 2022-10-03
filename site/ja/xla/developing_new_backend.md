@@ -30,7 +30,7 @@ XLA の [GPU バックエンド](https://www.tensorflow.org/code/tensorflow/comp
 
 LLVM を使用できない場合の最善のオプションは、目的のハードウェア向けに XLA 用の新しい バックエンドを実装することです。このオプションには多大な労力が伴います。以下は、実装が必要なクラスです。
 
-- [`StreamExecutor`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/stream_executor/stream_executor.h): 多くのデバイスでは、`StreamExecutor` のすべてのメソッドが必要になることはありません。詳細は既存の `StreamExecutor` の実装をご覧ください。
+- [`StreamExecutor`](https://www.tensorflow.org/code/tensorflow/compiler/xla/stream_executor/stream_executor.h): 多くのデバイスでは、`StreamExecutor` のすべてのメソッドが必要になることはありません。詳細は既存の `StreamExecutor` の実装をご覧ください。
 - [`xla::Compiler`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/compiler/xla/service/compiler.h): このクラスは、HLO コンピュテーションのコンパイルを `xla::Executable` にカプセル化します。
 - [`xla::Executable`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/compiler/xla/service/executable.h): このクラスは、コンパイルされたコンピュテーションをプラットフォーム上で起動するために使用します。
 - [`xla::TransferManager`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/compiler/xla/service/transfer_manager.h): このクラスは、特定のバイスメモリのハンドルから XLA のリテラルデータを構築するための、プラットフォーム特有の仕組みをバックエンドが提供できるようにします。言い換えれば、ホストからデバイスまたはその逆方向のデータ転送処理をカプセル化します。
