@@ -162,7 +162,7 @@ const model = await tf.loadLayersModel('http://model-server.domain/download/mode
 
 http 엔드 포인트에서 모델을 로드합니다. `json` 파일을 로드한 후 함수는 `json` 파일이 참조하는 해당 `.bin` 파일을 요청합니다.
 
-> NOTE: This implementation relies on the presence of the [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method, if you are in an environment that does not provide the fetch method natively you can provide a global method names [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) that satisfies that interface or use a library like [`node-fetch`](https://www.npmjs.com/package/node-fetch).
+> 참고 :이 구현은 [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) 메소드의 존재에 의존합니다. 기본적으로 fetch 메소드를 제공하지 않는 환경에 있는 경우 해당 인터페이스를 충족하는 전역 메소드 이름 [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)를 입력하거나 <code>node-fetch</code>와 같은 라이브러리를 사용할 수 있습니다.
 
 ### 네이티브 파일 시스템(Node.js만 해당)
 
