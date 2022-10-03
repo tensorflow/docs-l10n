@@ -1,6 +1,6 @@
 # Android 用の TensorFlow Lite を構築する
 
-このドキュメントでは、TensorFlow Lite Android ライブラリを独自に構築する方法について説明します。通常、TensorFlow Lite Android ライブラリをローカルで構築する必要はありません。使用するだけの場合、最も簡単な方法は、[MavenCentral でホストされている TensorFlow Lite AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite) を使用することです。Android プロジェクトでこれらを使用する方法の詳細については、[Android クイックスタート](../guide/android.md)をご覧ください。
+このドキュメントでは、TensorFlow Lite Android ライブラリを独自に構築する方法について説明します。通常、TensorFlow Lite Android ライブラリをローカルでビルドする必要はありません。使用するだけの場合、Android プロジェクトでこれらを使用する方法の詳細については、[Android クイックスタート](../android/quickstart.md)を参照してください。
 
 ## Nightly スナップショットを使用する
 
