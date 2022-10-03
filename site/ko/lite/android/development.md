@@ -20,9 +20,9 @@ Android 앱에서 태스크 라이브러리를 사용하려면 각각 [Task Visi
 
 ```build
 dependencies {
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.0'
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
-    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:+'
+    implementation 'org.tensorflow:tensorflow-lite-task-text:+'
+    implementation 'org.tensorflow:tensorflow-lite-task-audio:+'
 }
 ```
 
@@ -38,7 +38,7 @@ dependencies {
 
 ```build
 dependencies {
-    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
+    implementation 'org.tensorflow:tensorflow-lite:+'
 }
 ```
 
@@ -72,7 +72,7 @@ TensorFlow Lite Android 지원 라이브러리를 사용하면 모델을 애플�
 
 ```build
 dependencies {
-    implementation 'org.tensorflow:tensorflow-lite-support:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-support:+'
 }
 ```
 
