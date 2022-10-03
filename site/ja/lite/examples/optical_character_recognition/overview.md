@@ -4,6 +4,7 @@
 
 ## はじめに
 
+
 <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/examples/optical_character_recognition/images/screenshot.gif?raw=true" class="">
 
 TensorFlow Lite を初めて使用する場合、Android を使用する場合は、以下のサンプルアプリをご覧ください。
@@ -31,16 +32,14 @@ Android 以外のプラットフォームを使用する場合、または、す
     </tr>
   </thead>
   <tr>
-    <td>       <a href="https://tfhub.dev/sayakpaul/lite-model/east-text-detector/fp16/1">テキスト検出</a>
-</td>
+    <td>       <a href="https://tfhub.dev/sayakpaul/lite-model/east-text-detector/fp16/1">テキスト検出</a> </td>
     <td>45.9 Mb</td>
      <td>Pixel 4 (Android 10)</td>
      <td>181.93ms*</td>
      <td>89.77ms*</td>
   </tr>
   <tr>
-    <td>       <a href="https://tfhub.dev/tulasiram58827/lite-model/keras-ocr/float16/2">テキスト認識</a>
-</td>
+    <td>       <a href="https://tfhub.dev/tulasiram58827/lite-model/keras-ocr/float16/2">テキスト認識</a> </td>
     <td>16.8 Mb</td>
      <td>Pixel 4 (Android 10)</td>
      <td>338.33ms*</td>
