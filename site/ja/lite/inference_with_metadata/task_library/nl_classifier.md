@@ -14,9 +14,9 @@ Task Library の`NLClassifier` API は、入力テキストをさまざまなカ
 
 次のモデルは、`NLClassifier` API との互換性が保証されています。
 
-- The <a href="../../examples/text_classification/overview">movie review sentiment classification</a> model.
+- <a href="../../examples/text_classification/overview">映画レビューの感情分類</a>モデル。
 
-- Models with `average_word_vec` spec created by [TensorFlow Lite Model Maker for text Classification](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification).
+- <a>テキスト分類用 TensorFlow Lite Model Maker </a>によって作成された <code>average_word_vec</code> 仕様のモデル。
 
 - [モデルの互換性要件](#model-compatibility-requirements)を満たすカスタムモデル。
 
@@ -116,7 +116,7 @@ std::vector<core::Category> categories = classifier->Classify(input_text);
 
 ## 結果の例
 
-Here is an example of the classification results of the [movie review model](https://www.tensorflow.org/lite/examples/text_classification/overview).
+これは、[映画レビューモデル](https://www.tensorflow.org/lite/examples/text_classification/overview)の分類結果の例です。
 
 入力：時間の無駄。
 
@@ -131,14 +131,14 @@ category[1]: 'Positive' : '0.18687'
 
 ## モデルの互換性要件
 
-Depending on the use case, the `NLClassifier` API can load a TFLite model with or without [TFLite Model Metadata](../../models/convert/metadata). See examples of creating metadata for natural language classifiers using the [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#nl_classifiers).
+ユースケースに応じて、`NLClassifier` API は、[TFLite モデルメタデータ](../../models/convert/metadata)の有無に関係なく、TFLite モデルを読み込めます。[TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#nl_classifiers) を使用して自然言語分類器のメタデータを作成する例をご覧ください。
 
 互換性のあるモデルは、次の要件を満たす必要があります。
 
 - 入力テンソル：(kTfLiteString/kTfLiteInt32)
 
     - モデルの入力は、kTfLiteString テンソル生入力文字列または生入力文字列の正規表現トークン化インデックス用の kTfLiteInt32 テンソルのいずれかである必要があります。
-    - If input type is kTfLiteString, no [Metadata](../../models/convert/metadata) is required for the model.
+    - 入力型が kTfLiteString の場合、モデルに[メタデータ](../../models/convert/metadata)は必要ありません。
     - 入力型が kTfLiteInt32 の場合、`RegexTokenizer`を入力テンソルの[メタデータ](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers)に設定する必要があります。
 
 - 出力スコアテンソル：(kTfLiteUInt8/kTfLiteInt8/kTfLiteInt16/kTfLiteFloat32/kTfLiteFloat64)
@@ -147,7 +147,7 @@ Depending on the use case, the `NLClassifier` API can load a TFLite model with o
 
     - 型が Int 型のいずれかである場合は、対応するプラットフォームに倍精度/浮動小数点数で非量子化します。
 
-    - Can have an optional associated file in the output tensor's corresponding [Metadata](../../models/convert/metadata) for category labels, the file should be a plain text file with one label per line, and the number of labels should match the number of categories as the model outputs. See the [example label file](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/python/tests/testdata/nl_classifier/labels.txt).
+    - カテゴリラベルの出力テンソルの対応する[メタデータ](../../models/convert/metadata)にオプションの関連ファイルを含めることができます。ファイルは 1 行に 1 つのラベルを持つプレーンテキストファイルである必要があり、ラベルの数はモデル出力としてカテゴリの数と一致する必要があります。[サンプルラベルファイル](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/python/tests/testdata/nl_classifier/labels.txt)をご覧ください。
 
 - 出力ラベルテンソル：(kTfLiteString/kTfLiteInt32)
 
