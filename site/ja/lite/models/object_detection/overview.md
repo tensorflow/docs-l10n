@@ -99,7 +99,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
 
 注意：結果の数（上記の場合は 10）は、検出モデルをTensorFlowLite にエクスポートするときに設定されるパラメータです。詳細については、<a href="#model-customization">モデルのカスタマイズ</a>をご覧ください。
 
-For example, imagine a model has been trained to detect apples, bananas, and strawberries. When provided an image, it will output a set number of detection results - in this example, 5.
+リンゴ、バナナ、イチゴを検出するようにモデルがトレーニングされているとします。画像を渡すと、設定した数の検出結果が出力されます。この例では 5 です。
 
 <table style="width: 60%;">
   <thead>
