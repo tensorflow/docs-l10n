@@ -69,13 +69,13 @@ graphは必須パラメータです。
 logcatコマンドを使用して結果を表示します。
 
 ```shell
-adb logcat | grep "Average inference"
+adb logcat | grep "Inference timings"
 ```
 
 ベンチマーク結果は次のように報告されます。
 
 ```
-... tflite  : Average inference timings in us: Warmup: 91471, Init: 4108, Inference: 80660.1
+... tflite  : Inference timings in us: Init: 5685, First inference: 18535, Warmup (avg): 14462.3, Inference (avg): 14575.2
 ```
 
 ### ネイティブベンチマークバイナリ
