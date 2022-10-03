@@ -20,8 +20,8 @@ TFX 도구는 데이터 버그를 찾는 데 도움이 되고 특성 엔지니�
 
 ## TensorFlow 데이터 검증
 
-- [개요](#overview)
-- [스키마 기반 예제 검증](#schema_based_example_validation)
+- [Overview](#overview)
+- [Schema Based Example Validation](#schema_based_example_validation)
 - [훈련-서빙 편향 감지](#skewdetect)
 - [편향 감지](#drift_detection)
 
@@ -35,7 +35,7 @@ TensorFlow 데이터 검증은 훈련 및 적용 데이터에서 이상을 식�
 
 이러한 각 기능을 독립적으로 문서화합니다.
 
-- [스키마 기반 예제 검증](#schema_based_example_validation)
+- [Schema Based Example Validation](#schema_based_example_validation)
 - 훈련-서빙 편향 감지[](#skewdetect)
 - [편향 감지](#drift_detection)
 
