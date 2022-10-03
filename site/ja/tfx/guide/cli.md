@@ -645,7 +645,7 @@ tfx run list --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; [--endpoint=&l
     <p>**要注意: パイプライン構成ファイルの DagRunner に必要とされるオーケストレーターは、選択されたエンジンまたは自動検出されたエンジンと一致する必要があります。エンジンの自動検出は、ユーザー環境に基づいています。Apache Airflow と Kubeflow Pipelines がインストールされていない場合、デフォルトでローカルオーケストレーターが使用されます。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>    （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
   <dt>--namespace=<var>namespace</var> </dt>
@@ -853,7 +853,7 @@ tfx template copy --model=&lt;var&gt;model&lt;/var&gt; --pipeline_name=&lt;var&g
       <li> <strong>airflow</strong>:（実験的）エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>:（実験的）エンジンを Apache Beam に設定します</li>
     </ul>
-    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
+    <p>エンジンが設定されていない場合、エンジンは環境に基づいて自動検出されます。</p>
     <p>**要注意: パイプライン構成ファイルの DagRunner に必要とされるオーケストレーターは、選択されたエンジンまたは自動検出されたエンジンと一致する必要があります。エンジンの自動検出は、ユーザー環境に基づいています。Apache Airflow と Kubeflow Pipelines がインストールされていない場合、デフォルトでローカルオーケストレーターが使用されます。</p>
   </dd>
 </dl>
