@@ -12,7 +12,7 @@ Task Library の`BertNLClassifier`API は、入力テキストをさまざまな
 
 以下のモデルは、`BertNLClassifier` API と互換性があります。
 
-- [TensorFlow Lite Model Maker for text Classfication](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification) が作成した Bert モデル。
+- [TensorFlow Lite Model Maker for text Classfication](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) が作成した Bert モデル。
 
 - [モデルの互換性要件](#model-compatibility-requirements)を満たすカスタムモデル。
 
@@ -91,18 +91,18 @@ let categories = bertNLClassifier.classify(text: input)
 ```c++
 // Initialization
 BertNLClassifierOptions options;
-options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
 std::unique_ptr<BertNLClassifier> classifier = BertNLClassifier::CreateFromOptions(options).value();
 
-// Run inference
-std::vector<core::Category> categories = classifier->Classify(kInput);
+// Run inference with your input, `input_text`.
+std::vector<core::Category> categories = classifier->Classify(input_text);
 ```
 
-詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/bert_nl_classifier.h)をご覧ください。
+詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_nl_classifier.h)をご覧ください。
 
 ## 結果の例
 
-これは、モデルメーカーの [MobileBert](https://www.tensorflow.org/lite/tutorials/model_maker_text_classification) モデルを使用した映画レビューの分類結果の例です。
+これは、モデルメーカーの [MobileBert](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) モデルを使用した映画レビューの分類結果の例です。
 
 入力: "it's a charming and often affecting journey"
 
@@ -117,7 +117,7 @@ category[1]: 'positive' : '0.99994'
 
 ## モデルの互換性要件
 
-`BetNLClassifier` API では、[ TFLite モデルメタデータ](../../convert/metadata.md)を持つ TFLite モデルが必要です。
+`BetNLClassifier` API では、[ TFLite モデルメタデータ](../../models/convert/metadata.md)を持つ TFLite モデルが必要です。
 
 メタデータは次の要件を満たす必要があります。
 
