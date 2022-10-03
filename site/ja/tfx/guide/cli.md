@@ -580,8 +580,9 @@ tfx run terminate --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;
   <dd>（オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+  <dt>--namespace=<var>namespace</var>
+</dt>
+<dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで <code>kubeflow</code> になります。</dd>
 
 
 
@@ -783,7 +784,8 @@ tfx run delete --run_id=&lt;var&gt;run-id&lt;/var&gt; [--engine=&lt;var&gt;engin
   <dd>    （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
+  <dt>--namespace=<var>namespace</var>
+</dt>
 <dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで <code>kubeflow</code> になります。</dd>
 
 
