@@ -1,32 +1,32 @@
 # Google Play サービスの TensorFlow Lite
 
-TensorFlow Lite is available in Google Play services runtime for all Android devices running the current version of Play services. This runtime allows you to run machine learning (ML) models without statically bundling TensorFlow Lite libraries into your app.
+TensorFlow Lite は、最新バージョンの Play サービスを実行しているすべての Android デバイスを対象に、Google Play サービスランタイムで提供されています。このランタイムでは、TensorFlow Lite ライブラリを静的にアプリにバンドルせずに、機械学習モデルを実行することができます。
 
-With the Google Play services API, you can reduce the size of your apps and gain improved performance from the latest stable version of the libraries. TensorFlow Lite in Google Play services is the recommended way to use TensorFlow Lite on Android.
+Google Play サービス API を使用すると、アプリのサイズを縮小し、最新の安定したバージョンのライブラリによりパフォーマンスを向上させることができます。 Android で TensorFlow Lite を使用するには、Google Play サービスの TensorFlow Lite を使用することをお勧めします。
 
-You can get started with the Play services runtime with the [Quickstart](../android/quickstart), which provides a step-by-step guide to implement a sample application. If you are already using stand-alone TensorFlow Lite in your app, refer to the [Migrating from stand-alone TensorFlow Lite](#migrating) section to update an existing app to use the Play services runtime. For more information about Google Play services, see the [Google Play services](https://developers.google.com/android/guides/overview) website.
+サンプルアプリケーションを実装するためのステップバイステップガイドを提供する[クイックスタート](../android/quickstart)を使用して、Play サービスランタイムを開始できます。アプリでスタンドアロンの TensorFlow Lite を既に使用している場合は、[スタンドアロンの TensorFlow Lite からの移行](#migrating)セクションを参照して、Play サービスランタイムを使用するように既存のアプリを更新してください。Google Play サービスの詳細については、 [Google Play サービス](https://developers.google.com/android/guides/overview)のウェブサイトを参照してください。
 
-<aside class="note"> <b>Terms:</b> By accessing or using TensorFlow Lite in Google Play services APIs, you agree to the <a href="#tos">Terms of Service</a>. Please read and understand all applicable terms and policies before accessing the APIs. </aside>
+<aside class="note"><b>利用規約:</b> Google Play サービス API で TensorFlow Lite にアクセスまたは使用することにより、<a href="#tos">利用規約</a>に同意したことになります。API にアクセスする前に、該当するすべての条件とポリシーを読み、理解してください。</aside>
 
-## Using the Play services runtime
+## Play サービス ランタイムの使用
 
-TensorFlow Lite in Google Play services is available through the [TensorFlow Lite Task API](../api_docs/java/org/tensorflow/lite/task/core/package-summary) and [TensorFlow Lite Interpreter API](../api_docs/java/org/tensorflow/lite/InterpreterApi). The Task Library provides optimized out-of-box model interfaces for common machine learning tasks using visual, audio, and text data. The TensorFlow Lite Interpreter API, provided by the TensorFlow runtime and support libraries, provides a more general-purpose interface for building and running ML models.
+Google Play サービスの TensorFlow Lite は、[TensorFlow Lite Task API](../api_docs/java/org/tensorflow/lite/task/core/package-summary) および [TensorFlow Lite Interpreter API](../api_docs/java/org/tensorflow/lite/InterpreterApi) を通じて利用できます。Task Library は、ビジュアル、オーディオ、およびテキストデータを使用して、一般的な機械学習タスク用に最適化されたすぐに使えるモデルインターフェースを提供します。TensorFlow ランタイムおよびサポートライブラリによって提供される TensorFlow Lite Interpreter API は、ML モデルを構築および実行するためのより汎用的なインターフェースを提供します。
 
-The following sections provide instructions on how to implement the Interpreter and Task Library APIs in Google Play services. While it is possible for an app to use both the Interpreter APIs and Task Library APIs, most apps should only use one set of APIs.
+以下のセクションでは、Google Play サービスで Interpreter API と Task Library API を実装する方法について説明します。アプリで Interpreter API と Task Library API の両方を使用することは可能ですが、ほとんどのアプリでは 1 つの API セットのみを使用する必要があります。
 
-### Using the Task Library APIs
+### Task Library API の使用
 
-The TensorFlow Lite Task API wraps the Interpreter API and provides a high-level programming interface for common machine learning tasks that use visual, audio, and text data. You should use the Task API if your application requires one of the [supported tasks](../inference_with_metadata/task_library/overview#supported_tasks).
+TensorFlow Lite Task API は Interpreter API をラップし、ビジュアル、オーディオ、およびテキストデータを使用する一般的な機械学習タスク用の高レベルのプログラミングインターフェースを提供します。[サポートされているタスク](../inference_with_metadata/task_library/overview#supported_tasks)のいずれかがアプリケーションに必要な場合は、Task API を使用する必要があります。
 
 #### 1. プロジェクト依存関係の追加
 
-Your project dependency depends on your machine learning use case. The Task APIs contain the following libraries:
+プロジェクトの依存関係は、機械学習のユースケースによって異なります。Task API には、次のライブラリが含まれています。
 
-- Vision library: `org.tensorflow:tensorflow-lite-task-vision-play-services`
-- Audio library: `org.tensorflow:tensorflow-lite-task-audio-play-services`
-- Text library: `org.tensorflow:tensorflow-lite-task-text-play-services`
+- ビジョンライブラリ: `org.tensorflow:tensorflow-lite-task-vision-play-services`
+- オーディオライブラリ: `org.tensorflow:tensorflow-lite-task-audio-play-services`
+- テキストライブラリ: `org.tensorflow:tensorflow-lite-task-text-play-services`
 
-Add one of the dependencies to your app project code to access the Play services API for TensorFlow Lite. For example, use the following to implement a vision task:
+依存関係の 1 つをアプリプロジェクトコードに追加して、TensorFlow Lite の Play サービス API にアクセスします。たとえば、次を使用してビジョンタスクを実装します。
 
 ```
 dependencies {
@@ -36,11 +36,11 @@ dependencies {
 }
 ```
 
-Caution: The TensorFlow Lite Tasks Audio library version 0.4.2 maven repository is incomplete. Use version 0.4.2.1 for this library instead: `org.tensorflow:tensorflow-lite-task-audio-play-services:0.4.2.1`.
+注意: TensorFlow Lite Tasks Audio ライブラリバージョン 0.4.2 の maven リポジトリは不完全です。代わりに、このライブラリにはバージョン 0.4.2.1 を使用してください: `org.tensorflow:tensorflow-lite-task-audio-play-services:0.4.2.1` 。
 
 #### 2. TensorFlow Lite の初期化
 
-Initialize the TensorFlow Lite component of the Google Play services API *before* using the TensorFlow Lite APIs. The following example initializes the vision library:
+TensorFlow Lite API を使用する*前*に、Google Play サービス API の TensorFlow Lite コンポーネントを初期化します。
 
 <div>
   <devsite-selector>
@@ -55,13 +55,13 @@ Initialize the TensorFlow Lite component of the Google Play services API *before
   </devsite-selector>
 </div>
 
-Important: Make sure the `TfLite.initialize` task completes before executing code that accesses TensorFlow Lite APIs.
+重要: TensorFlow Lite API にアクセスするコードを実行する前に、 `TfLite.initialize` タスクが完了していることを確認してください。
 
-Tip: The TensorFlow Lite modules are installed at the same time your application is installed or updated from the Play Store. You can check the availability of the modules by using `ModuleInstallClient` from the Google Play services APIs. For more information on checking module availability, see [Ensuring API availability with ModuleInstallClient](https://developers.google.com/android/guides/module-install-apis).
+ヒント: TensorFlow Lite モジュールは、アプリケーションが Play Store からインストールまたは更新されると同時にインストールされます。Google Play サービス API から `ModuleInstallClient` を使用して、モジュールの可用性を確認できます。モジュールの可用性の確認の詳細については、[ModuleInstallClient による API の可用性の確保](https://developers.google.com/android/guides/module-install-apis)を参照してください。
 
-#### 3. Run inferences
+#### 3. 推論の実行
 
-After initializing the TensorFlow Lite component, call the `detect()` method to generate inferences. The exact code within the `detect()` method varies depending on the library and use case. The following is for a simple object detection use case with the `TfLiteVision` library:
+TensorFlow Lite コンポーネントを初期化した後、`detect()` メソッドを呼び出して推論を生成します。`detect()` メソッド内の正確なコードは、ライブラリとユースケースによって異なります。以下は、 `TfLiteVision` ライブラリを使用した単純なオブジェクト検出のユースケースです。
 
 <div>
   <devsite-selector>
@@ -85,7 +85,7 @@ After initializing the TensorFlow Lite component, call the `detect()` method to 
   </devsite-selector>
 </div>
 
-Depending on the data format, you may also need to preprocess and convert your data within the `detect()` method before generating inferences. For example, image data for an object detector requires the following:
+データ形式によっては、推論を生成する前に、`detect()` メソッド内でデータを前処理して変換する必要がある場合もあります。たとえば、オブジェクト検出器の画像データには次が必要です。
 
 ```kotlin
 val imageProcessor = ImageProcessor.Builder().add(Rot90Op(-imageRotation / 90)).build()
@@ -93,13 +93,13 @@ val tensorImage = imageProcessor.process(TensorImage.fromBitmap(image))
 val results = objectDetector?.detect(tensorImage)
 ```
 
-### Using the Interpreter APIs
+### Interpreter API の使用
 
-The Interpreter APIs offer more control and flexibility than the Task Library APIs. You should use the Interpreter APIs if your machine learning task is not supported by the Task library, or if you require a more general-purpose interface for building and running ML models.
+Interpreter API は、Task Library API よりも優れた制御と柔軟性を提供します。機械学習タスクが Task ライブラリでサポートされていない場合、または ML モデルを構築および実行するためにより汎用的なインターフェースが必要な場合は、Interpreter API を使用する必要があります。
 
 #### 1. Add project dependencies
 
-Add the following dependencies to your app project code to access the Play services API for TensorFlow Lite:
+次の依存関係をアプリプロジェクトコードに追加し、TensorFlow Lite 用の Play サービス API にアクセスします。
 
 ```
 dependencies {
@@ -133,7 +133,7 @@ TensorFlow Lite API を使用する*前*に、Google Play services API の Tenso
 
 注意: TensorFlow Lite API にアクセスするコードを実行する前に、`TfLite.initialize` タスクが完了していることを確認してください。次のセクションで示すように、`addOnSuccessListener()` メソッドを使用してください。
 
-#### 3. Create an Interpreter and set runtime option {:#step_3_interpreter}
+#### 3. Interpreter の作成とランタイムオプションの設定{:#step_3_interpreter}
 
 次のサンプルコードで示すように、`InterpreterApi.create()` を使用してインタープリタを作成し、`InterpreterApi.Options.setRuntime()` を呼び出して Google Play サービスランタイムを使用するように構成します。
 
@@ -178,7 +178,7 @@ initializeTask.addOnSuccessListener(a -&gt; {
   </devsite-selector>
 </div>
 
-You should use the implementation above because it avoids blocking the Android user interface thread. If you need to manage thread execution more closely, you can add a `Tasks.await()` call to interpreter creation:
+上記の方法で実装してください。この方法では、Android ユーザーインターフェーススレッドのブロックを回避できます。スレッド実行をさらに細かく管理する必要がある場合は、次のように、`Tasks.await()` 呼び出しをインタープリタ作成に追加できます。
 
 <div>
   <devsite-selector>
@@ -203,7 +203,7 @@ InterpreterApi initializeInterpreter() {
   </devsite-selector>
 </div>
 
-Warning: Do not call `.await()` on the foreground user interface thread because it interrupts display of user interface elements and creates a poor user experience.
+警告: `.await()` は、フォアグラウンドユーザーインターフェーススレッドで呼び出さないでください。ユーザーインターフェース要素の表示が中断され、ユーザーエクスペリエンスの質が低下します。
 
 #### 4. 推論の実行
 
@@ -224,29 +224,29 @@ Warning: Do not call `.await()` on the foreground user interface thread because 
   </devsite-selector>
 </div>
 
-## Hardware acceleration {:#hardware-acceleration}
+## ハードウェアアクセラレーション {:#hardware-acceleration}
 
-TensorFlow Lite allows you to accelerate the performance of your model using specialized hardware processors, such as graphics processing units (GPUs). You can take advantage of these specialized processors using hardware drivers called [*delegates*](https://www.tensorflow.org/lite/performance/delegates). You can use the following hardware acceleration delegates with TensorFlow Lite in Google Play services:
+TensorFlow Lite を使用すると、グラフィックス処理装置 (GPU) などの特殊なハードウェアプロセッサを使用して、モデルのパフォーマンスを高速化できます。[*デリゲート*](https://www.tensorflow.org/lite/performance/delegates)と呼ばれるハードウェアドライバーを使用して、これらの特殊なプロセッサを利用できます。Google Play サービスの TensorFlow Lite では、次のハードウェアアクセラレーションデリゲートを使用できます。
 
-- *[GPU delegate](https://www.tensorflow.org/lite/performance/gpu) (recommended)* - This delegate is provided through Google Play services and is dynamically loaded, just like the Play services versions of the Task API and Interpreter API.
+- *[GPU デリゲート](https://www.tensorflow.org/lite/performance/gpu)（おすすめ）* - このデリゲートは Google Play サービスを通じて提供され、Task API および Interpreter API の Play サービスバージョンと同様に動的に読み込まれます。
 
-- [*NNAPI delegate*](https://www.tensorflow.org/lite/android/delegates/nnapi) - This delegate is available as an included library dependency in your Android development project, and is bundled into your app.
+- [*NNAPI デリゲート*](https://www.tensorflow.org/lite/android/delegates/nnapi) - このデリゲートは Android 開発プロジェクトに含まれるライブラリの依存関係として利用でき、アプリにバンドルされています。
 
-For more information about hardware acceleration with TensorFlow Lite, see the [TensorFlow Lite Delegates](https://www.tensorflow.org/lite/performance/delegates) page.
+TensorFlow Lite でのハードウェアアクセラレーションの詳細については、[TensorFlow Lite デリゲート](https://www.tensorflow.org/lite/performance/delegates)ページを参照してください。
 
-### Checking device compatibility
+### デバイスの互換性の確認
 
-Not all devices support GPU hardware acceleration with TFLite. In order to mitigate errors and potential crashes, use the `TfLiteGpu.isGpuDelegateAvailable` method to check whether a device is compatible with the GPU delegate.
+すべてのデバイスが TFLite による GPU ハードウェアアクセラレーションをサポートしているわけではありません。エラーと潜在的なクラッシュを軽減するために、`TfLiteGpu.isGpuDelegateAvailable` メソッドを使用して、デバイスに GPU デリゲートとの互換性があるかどうかを確認します。
 
-Use this method to confirm whether a device is compatible with GPU, and use CPU or the NNAPI delegate as a fallback for when GPU is not supported.
+このメソッドを使用して、デバイスに GPU との互換性があるかどうかを確認し、GPU がサポートされていない場合のフォールバックとして CPU または NNAPI デリゲートを使用します。
 
 ```
 useGpuTask = TfLiteGpu.isGpuDelegateAvailable(context)
 ```
 
-Once you have a variable like `useGpuTask`, you can use it to determine whether devices use the GPU delegate. The following examples show how this can be done with both the Task Library and Interpreter APIs.
+`useGpuTask` のような変数を取得したら、それを使用して、デバイスが GPU デリゲートを使用するかどうかを判断できます。次の例は、Task Library API と Interpreter API の両方を使用してこれを行う方法を示しています。
 
-**With the Task Api**
+**Task API の使用**
 
 <div>
 <devsite-selector>
@@ -281,7 +281,7 @@ Once you have a variable like `useGpuTask`, you can use it to determine whether 
 </devsite-selector>
 </div>
 
-**With the Interpreter Api**
+**Interpreter API の使用**
 
 <div>
 <devsite-selector>
@@ -312,17 +312,17 @@ Once you have a variable like `useGpuTask`, you can use it to determine whether 
 </devsite-selector>
 </div>
 
-### GPU with Task Library APIs
+### Task Library API を使用した GPU
 
-To use the GPU delegate with the Task APIs:
+Task API で GPU デリゲートを使用するには:
 
-1. Update the project dependencies to use the GPU delegate from Play services:
+1. プロジェクトの依存関係を更新して、Play サービスから GPU デリゲートを使用します。
 
     ```
     implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
     ```
 
-2. Initialize the GPU delegate with `setEnableGpuDelegateSupport`. For example, you can initialize the GPU delegate for `TfLiteVision` with the following:
+2. GPU デリゲートを `setEnableGpuDelegateSupport` で初期化します。たとえば、`TfLiteVision` の GPU デリゲートを次のように初期化できます。
 
     <div>
     <devsite-selector>
@@ -339,7 +339,7 @@ To use the GPU delegate with the Task APIs:
     </devsite-selector>
     </div>
 
-3. Enable the GPU delegate option with [`BaseOptions`](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/core/BaseOptions.Builder):
+3. [`BaseOptions`](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/core/BaseOptions.Builder) で GPU デリゲートオプションを有効にします。
 
     <div>
     <devsite-selector>
@@ -356,7 +356,7 @@ To use the GPU delegate with the Task APIs:
     </devsite-selector>
     </div>
 
-4. Configure the options using `.setBaseOptions`. For example, you can set up GPU in `ObjectDetector` with the following:
+4. `.setBaseOptions` を使用してオプションを構成します。たとえば、次のように `ObjectDetector` で GPU を設定できます。
 
     <div>
     <devsite-selector>
@@ -381,17 +381,17 @@ To use the GPU delegate with the Task APIs:
     </devsite-selector>
     </div>
 
-### GPU with Interpreter APIs
+### Interpreter API を使用した GPU
 
-To use the GPU delegate with the Interpreter APIs:
+Interpreter API で GPU デリゲートを使用するには:
 
-1. Update the project dependencies to use the GPU delegate from Play services:
+1. プロジェクトの依存関係を更新して、Play サービスから GPU デリゲートを使用します。
 
     ```
     implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
     ```
 
-2. Enable the GPU delegate option in the TFlite initialization:
+2. TFlite の初期化で GPU デリゲートオプションを有効にします。
 
     <div>
     <devsite-selector>
@@ -414,7 +414,7 @@ To use the GPU delegate with the Interpreter APIs:
     </devsite-selector>
     </div>
 
-3. Set GPU delegate in interpreter options to use `DelegateFactory` by calling `addDelegateFactory()` within `InterpreterApi.Options()`:
+3. `InterpreterApi.Options()` 内で `addDelegateFactory()` を呼び出して、 `DelegateFactory` を使用するようにインタープリタオプションで GPU デリゲートを設定します。
 
     <div>
     <devsite-selector>
@@ -435,7 +435,7 @@ To use the GPU delegate with the Interpreter APIs:
     </devsite-selector>
     </div>
 
-## Migrating from stand-alone TensorFlow Lite {:#migrating}
+## スタンドアロン TensorFlow Lite からの移行 {:#migrating}
 
 If you are planning to migrate your app from stand-alone TensorFlow Lite to the Play services API, review the following additional guidance for updating your app project code:
 
@@ -452,27 +452,27 @@ If you want to use stand-alone TensorFlow Lite and the Play services API side-by
 
 ## Limitations
 
-TensorFlow Lite in Google Play services has the following limitations:
+Google Play サービスの TensorFlow Lite には次の制限があります。
 
-- Support for hardware acceleration delegates is limited to the delegates listed in the [Hardware acceleration](#hardware-acceleration) section. No other acceleration delegates are supported.
+- ハードウェアアクセラレーションデリゲートのサポートは、[ハードウェアアクセラレーション](#hardware-acceleration)セクションにリストされているデリゲートに限定されます。その他のアクセラレーションデリゲートはサポートされていません。
 - [ネイティブ API](https://www.tensorflow.org/lite/guide/inference#load_and_run_a_model_in_c) 経由での TensorFlow Lite へのアクセスはサポートされていません。TensorFlow Lite Java API のみが Google Play サービスで提供されています。
 - カスタム ops を含む実験用または廃止予定の TensorFlow Lite API はサポートされていません。
 
 ## サポートとフィードバック {:#support}
 
-You can provide feedback and get support through the TensorFlow Issue Tracker. Please report issues and support requests using the [Issue template](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md) for TensorFlow Lite in Google Play services.
+TensorFlow Issue Tracker を使用すると、フィードバックを提出し、サポートを受けることができます。Google Play サービスの TensorFlow Lite 用の[問題テンプレート](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md)を使用して、問題およびサポート要求を報告してください。
 
-## Terms of service {:#tos}
+## 利用規約 {:#tos}
 
-Use of TensorFlow Lite in Google Play services APIs is subject to the [Google APIs Terms of Service](https://developers.google.com/terms/).
+Google Play サービス API での TensorFlow Lite の使用には、[Google API サービス利用規約](https://developers.google.com/terms/)が適用されます。
 
-### Privacy and data collection
+### プライバシーとデータ収集
 
-When you use TensorFlow Lite in Google Play services APIs, processing of the input data, such as images, video, text, fully happens on-device, and TensorFlow Lite in Google Play services APIs does not send that data to Google servers. As a result, you can use our APIs for processing data that should not leave the device.
+Google Play サービス API で TensorFlow Lite を使用する場合、画像、動画、テキストなどの入力データの処理はすべてデバイス上で行われ、Google Play サービス API の TensorFlow Lite はデータを Google サーバーに送信しません。その結果、デバイスから出てはならないデータを処理するために API を使用できます。
 
 Google Play services API の TensorFlow Lite は、バグ修正、更新されたモデル、ハードウェアアクセラレータの互換性情報といったデータを受信するために、時々 Google サーバーに接続することがあります。Google Play services API の TensorFlow Lite では、アプリの API のパフォーマンスと使用状況に関するメトリクスも Google に送信されます。Google は、このメトリクスデータを使用して、パフォーマンス測定、デバッグ、API の保守と改良、誤用または悪用を検出します。詳細については、[プライバシーポリシー](https://policies.google.com/privacy)を参照してください。
 
-**You are responsible for informing users of your app about Google's processing of TensorFlow Lite in Google Play services APIs metrics data as required by applicable law.**
+**適用される法律の義務に従い、Google が Google Play サービスメトリクスデータで行う TensorFlow Lite の処理について、アプリのユーザーに通知するのは、あなたの責任です。**
 
 Google が収集するデータは次のとおりです。
 
@@ -486,4 +486,4 @@ Google が収集するデータは次のとおりです。
 
 ## Next steps
 
-For more information about implementing machine learning in your mobile application with TensorFlow Lite, see the [TensorFlow Lite Developer Guide](https://www.tensorflow.org/lite/guide). You can find additional TensorFlow Lite models for image classification, object detection, and other applications on the [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite).
+TensorFlow Lite を使用したモバイルアプリケーションでの機械学習の実装の詳細については、[TensorFlow Lite 開発者ガイド](https://www.tensorflow.org/lite/guide)を参照してください。画像分類、オブジェクト検出、他の用途で使用されるその他の TensorFlow Lite モデルについては、[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite) を参照してください。
