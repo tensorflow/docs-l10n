@@ -14,7 +14,7 @@
 
 **파란색** 노드는 TFF [코어](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core)에서 제공됩니다.
 
-**녹색** , **빨간색** , **노란색** 및 **보라색** 노드는 각각 [native](#native), [mapreduce](#mapreduce), [iree](#iree) 및 [reference](#reference) 백엔드에서 제공됩니다.
+**녹색**, **빨간색**, **노란색** 및 **보라색** 노드는 각각 [기본](#native), [mapreduce](#mapreduce) 및 [참조](#reference) 백엔드에서 제공합니다.
 
 **점선** 노드는 외부 시스템에서 제공됩니다.
 
@@ -63,7 +63,7 @@ set_default_context.set_default_context(context)
 
 ### 컴파일러
 
-[transformations](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/transformations.py) 모듈에는 AST를 [MapReduceForm](#canonicalform)으로 컴파일하는 데 필요한 [빌딩 블록(Building Block)](compilation.md#building-block) 및 [TensorFlow 계산(Computation)](#canonicalform) 변환이 포함되어 있습니다.
+[컴파일러](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/compiler.py) 모듈에는 AST를 [MapReduceForm](compilation.md#building-block)으로 컴파일하는 데 필요한 [빌딩 블록](compilation.md#tensorflow-computation) 및 [TensorFlow 계산](#canonicalform) 변환이 포함되어 있습니다.
 
 [form_utils](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/mapreduce/form_utils.py) 모듈은 MapReduce 백엔드용 컴파일러를 포함하고 [MapReduceForm](#canonicalform)을 구성합니다.
 
@@ -74,21 +74,3 @@ MapReduce 런타임은 TFF에서 제공하지 않습니다. 대신 외부 MapRed
 ### 컨텍스트
 
 MapReduce 컨텍스트는 TFF에서 제공하지 않습니다.
-
-## IREE
-
-[IREE](https://github.com/google/iree)는 [MLIR](https://mlir.llvm.org/)를 위한 실험용 컴파일러 백엔드입니다.
-
-[iree](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree) 백엔드에는 AST를 실행하는 데 필요한 데이터 구조, 컴파일러 및 런타임이 포함됩니다.
-
-### 컴파일러
-
-[컴파일러](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/compiler.py) 모듈에는 [executor.IreeExecutor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/executor.py)를 사용하여 예상할 수 있는 형식으로 AST를 컴파일하는 데 필요한 변환이 포함되어 있습니다.
-
-### 런타임
-
-[executor.IreeExecutor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/executor.py)는 IREE 런타임에 위임하여 계산을 실행하는 [Executor](execution.md#executor)입니다. 이 실행기는 IREE 런타임을 나타내는 [실행 스택](execution.md#executor)을 구성하기 위해 TFF 런타임의 다른 [실행기](execution.md#execution-stack)와 함께 구성될 수 있습니다.
-
-### 컨텍스트
-
-iree 컨텍스트는 외부 IREE 런타임에 위임하는 [executor.IreeExecutor](context.md#executioncontext)가 있는 [실행 스택](execution.md#execution-stack)과 iree 컴파일러로 구성된 [ExecutionContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/executor.py)입니다.
