@@ -46,7 +46,7 @@ Android または iOS 以外のプラットフォームを使用する場合、�
   </thead>
   <tr>
     <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a> </td>
-    <td rowspan="3">       100.5 Mb     </td>
+    <td rowspan="3">       100.5 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>123ms*</td>
   </tr>
