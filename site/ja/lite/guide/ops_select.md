@@ -208,7 +208,7 @@ TF 演算子のみを使用（`SELECT_TF_OPS`） | 264.5
 
 ## 既知の制限
 
-- Unsupported types: Certain TensorFlow ops may not support the full set of input/output types that are typically available in TensorFlow.
+- サポートされていない型：特定の TensorFlow 演算子は、ストック TensorFlow で通常利用可能な全セットの入力型/出力型をサポートしていない場合があります。
 
 ## 更新
 
