@@ -118,9 +118,9 @@ TFF는 함수형이므로 상태 저장 프로세스는 현재 상태를 입력�
 
 ### 사용 가능한 빌더
 
-At the moment, TFF provides various builder functions that generate federated computations for federated training and evaluation. Two notable examples include:
+현재 TFF는 페더레이션 훈련 및 평가를 위한 페더레이션 계산을 생성하는 다양한 빌더 기능을 제공합니다. 두 가지 주목할만한 예는 다음과 같습니다.
 
-- `tff.learning.algorithms.build_weighted_fed_avg`, which takes as input a *model function* and a *client optimizer*, and returns a stateful `tff.learning.templates.LearningProcess` (which subclasses `tff.templates.IterativeProcess`).
+- `tff.learning.algorithms.build_weighted_fed_avg`는 *모델 함수*와 *클라이언트 옵티마이저*를 입력으로 받고 상태 저장 `tff.learning.templates.LearningProcess`(`tff.templates.IterativeProcess`의 하위 클래스)를 반환합니다.
 
 - 평가는 상태 저장이 아니므로 `tff.learning.build_federated_evaluation`은 *모델 함수*를 사용하여 모델의 페더레이션 평가를 위한 단일 페더레이션 계산을 반환합니다.
 
