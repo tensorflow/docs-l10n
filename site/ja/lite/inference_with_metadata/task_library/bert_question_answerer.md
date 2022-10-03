@@ -1,6 +1,6 @@
 # BERT 質問応答機能を統合する
 
-Task Library `BertQuestionAnswerer` API は Bert モデルを読み込み、特定のパッセージの内容に基づいて質問に答えます。詳細については、質問応答モデルのドキュメントを<a href="../../models/bert_qa/overview.md">こちら</a>からご覧ください。
+タスクライブラリの `BertQuestionAnswerer` API は Bert モデルを読み込み、特定のパッセージの内容に基づいて質問に答えます。詳細については、質問応答モデルのドキュメントを<a href="../../examples/bert_qa/overview">こちら</a>からご覧ください。
 
 ## BertQuestionAnswerer API の主な機能
 
@@ -12,7 +12,7 @@ Task Library `BertQuestionAnswerer` API は Bert モデルを読み込み、特�
 
 以下のモデルは、`BertNLClassifier` API と互換性があります。
 
-- [TensorFlow Lite Model Maker for BERT Question Answer ](https://www.tensorflow.org/lite/tutorials/model_maker_question_answer)により作成されたモデル。
+- [TensorFlow Lite Model Maker for BERT Question Answer ](https://www.tensorflow.org/lite/models/modify/model_maker/question_answer)により作成されたモデル。
 
 - [TensorFlow Hub の事前トレーニング済み BERT モデル](https://tfhub.dev/tensorflow/collections/lite/task-library/bert-question-answerer/1)。
 
@@ -95,14 +95,14 @@ let answers = mobileBertAnswerer.answer(
 ```c++
 // Initialization
 BertQuestionAnswererOptions options;
-options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
 std::unique_ptr<BertQuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromOptions(options).value();
 
-// Run inference
+// Run inference with your inputs, `context_of_question` and `question_to_ask`.
 std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, question_to_ask);
 ```
 
-詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/qa/bert_question_answerer.h)をご覧ください。
+詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_question_answerer.h)をご覧ください。
 
 ## 結果の例
 
@@ -131,7 +131,7 @@ logit: -0.774266, start_index: 37, end_index: 40
 
 ## モデルの互換性要件
 
-`BertQuestionAnswerer` API では、[ TFLite モデルメタデータ](../../convert/metadata.md)を持つ TFLite モデル が必要です。
+`BertQuestionAnswerer` API では、[ TFLite モデルメタデータ](../../models/convert/metadata)を持つ TFLite モデル が必要です。
 
 メタデータは次の要件を満たす必要があります。
 
