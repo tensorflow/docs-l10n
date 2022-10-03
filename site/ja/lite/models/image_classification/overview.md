@@ -158,7 +158,7 @@ TensorFlow Lite 量子化 MobileNet モデルの上位 5 の精度の範囲は 6
 
 ### モデルサイズ
 
-The size of a model on-disk varies with its performance and accuracy. Size may be important for mobile development (where it might impact app download sizes) or when working with hardware (where available storage might be limited).
+ディスク上のモデルのサイズは、そのパフォーマンスと精度によって異なります。サイズは、モバイル開発 (アプリのダウンロードサイズに影響を与える可能性がある) や、ハードウェアで作業する (利用可能なストレージが制限される可能性がある) 場合に重要です。
 
 TensorFlow Lite 量子化 MobileNet モデルのサイズは、0.5〜3.4 Mb です。
 
