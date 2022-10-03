@@ -118,9 +118,9 @@ TFF는 함수형이므로 상태 저장 프로세스는 현재 상태를 입력�
 
 ### 사용 가능한 빌더
 
-현재 TFF는 페더레이션 훈련 및 평가를 위한 페더레이션 계산을 생성하는 두 가지 빌더 함수를 제공합니다.
+At the moment, TFF provides various builder functions that generate federated computations for federated training and evaluation. Two notable examples include:
 
-- `tff.learning.build_federated_averaging_process`는 *모델 함수*와 *클라이언트 옵티마이저*를 사용하여 상태 저장 `tff.templates.IterativeProcess`를 반환합니다.
+- `tff.learning.algorithms.build_weighted_fed_avg`, which takes as input a *model function* and a *client optimizer*, and returns a stateful `tff.learning.templates.LearningProcess` (which subclasses `tff.templates.IterativeProcess`).
 
 - 평가는 상태 저장이 아니므로 `tff.learning.build_federated_evaluation`은 *모델 함수*를 사용하여 모델의 페더레이션 평가를 위한 단일 페더레이션 계산을 반환합니다.
 
@@ -137,7 +137,7 @@ TFF는 함수형이므로 상태 저장 프로세스는 현재 상태를 입력�
 페더레이션 학습 코드의 실제 배포를 시뮬레이션하기 위해 일반적으로 다음과 같은 훈련 루프를 작성합니다.
 
 ```python
-trainer = tff.learning.build_federated_averaging_process(...)
+trainer = tff.learning.algorithms.build_weighted_fed_avg(...)
 state = trainer.initialize()
 federated_training_data = ...
 
@@ -146,7 +146,8 @@ def sample(federate_data):
 
 while True:
   data_for_this_round = sample(federated_training_data)
-  state, metrics = trainer.next(state, data_for_this_round)
+  result = trainer.next(state, data_for_this_round)
+  state = result.state
 ```
 
 이를 용이하게 하기 위해 시뮬레이션에서 TFF를 사용할 때 페더레이션 데이터는 Python `list`로 허용되며, 참여 클라이언트 기기당 하나의 요소가 해당 기기의 로컬 `tf.data.Dataset`를 나타냅니다.
