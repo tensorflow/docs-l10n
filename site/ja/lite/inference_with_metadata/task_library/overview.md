@@ -21,12 +21,16 @@ TensorFlow Lite Task ライブラリには、強力で使いやすいタスク�
     - [ImageClassifier](image_classifier.md)
     - [ObjectDetector](object_detector.md)
     - [ImageSegmenter](image_segmenter.md)
+    - [ImageSearcher](image_searcher.md)
+    - [ImageEmbedder](image_embedder.md)
 
 - **Natural Language (NL) API**
 
     - [NLClassifier](nl_classifier.md)
-    - [BertNLCLassifier](bert_nl_classifier.md)
+    - [BertNLClassifier](bert_nl_classifier.md)
     - [BertQuestionAnswerer](bert_question_answerer.md)
+    - [TextSearcher](text_searcher.md)
+    - [TextEmbedder](text_embedder.md)
 
 - **Audio API**
 
@@ -40,18 +44,55 @@ TensorFlow Lite Task ライブラリには、強力で使いやすいタスク�
 
 [デリゲート](https://www.tensorflow.org/lite/performance/delegates)を使うと、[GPU](https://www.tensorflow.org/lite/performance/gpu) や [Coral Edge TPU](https://coral.ai/) などのオンデバイスアクセラレーターを利用することで、TensorFlow Lite モデルのハードウェアアクセラレーションを有効にできます。ニューラルネットワークの演算にこれらを使用すると、レイテンシーと電源効率性の観点で大きなメリットを得ることができます。たとえば、GPU の場合はモバイルデバイスで最大 [5 倍の加速化](https://blog.tensorflow.org/2020/08/faster-mobile-gpu-inference-with-opencl.html)を得られ、Coral Edge TPU の推論の場合は、デスクトップ CPU の [10 倍の速さ](https://coral.ai/docs/edgetpu/benchmarks/)を得ることができます。
 
-タスクライブラリには、ユーザーがデリゲートをセットアップして使用できるようにするための、使いやすい構成とフォールバックオプションが提供されています。Task C++ API で現在サポートされているアクセラレーターは次のとおりです。
+Task Library provides easy configuration and fall back options for you to set up and use delegates. The following accelerators are now supported in the Task API:
 
 - Android
-    - [GPU](https://www.tensorflow.org/lite/performance/gpu)
-    - NNAPI
-    - Hexagon
+    - [GPU](https://www.tensorflow.org/lite/performance/gpu): Java / C++
+    - [NNAPI](https://www.tensorflow.org/lite/android/delegates/nnapi): Java / C++
+    - [Hexagon](https://www.tensorflow.org/lite/android/delegates/hexagon): C++
 - Linux / Mac
-    - [Coral Edge TPU](https://coral.ai/)
+    - [Coral Edge TPU](https://coral.ai/): C++
+- iOS
+    - [Core ML delegate](https://www.tensorflow.org/lite/performance/coreml_delegate): C++
 
-iOS 向けの [Core ML デリゲート](https://www.tensorflow.org/lite/performance/coreml_delegate)と Task Java / Swift / Web API でのアクセラレーションサポートは近日追加予定です。
+Acceleration support in Task Swift / Web API are coming soon.
 
-### Android における GPU の使用例
+### Example usage of GPU on Android in Java
+
+Step 1. Add the GPU delegate plugin library to your module's `build.gradle` file:
+
+```java
+dependencies {
+    // Import Task Library dependency for vision, text, or audio.
+
+    // Import the GPU delegate plugin Library for GPU inference
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin'
+}
+```
+
+Note: NNAPI comes with the Task Library targets for vision, text, and audio by default.
+
+Step 2. Configure GPU delegate in the task options through [BaseOptions](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/core/BaseOptions.Builder). For example, you can set up GPU in `ObjectDetecor` as follows:
+
+```java
+// Turn on GPU delegation.
+BaseOptions baseOptions = BaseOptions.builder().useGpu().build();
+// Configure other options in ObjectDetector
+ObjectDetectorOptions options =
+    ObjectDetectorOptions.builder()
+        .setBaseOptions(baseOptions)
+        .setMaxResults(1)
+        .build();
+
+// Create ObjectDetector from options.
+ObjectDetector objectDetector =
+    ObjectDetector.createFromFileAndOptions(context, modelFile, options);
+
+// Run inference
+List<Detection> results = objectDetector.detect(image);
+```
+
+### Example usage of GPU on Android in C++
 
 ステップ 1. 次のように、bazel ビルドターゲットの GPU デリゲートプラグインに依存します。
 
@@ -61,7 +102,7 @@ deps = [
 ]
 ```
 
-注意: `gpu_plugin` ターゲットは [GPU デリゲートターゲット](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/delegates/gpu)のものとは異なります。`gpu_plugin` は GPU デリゲートターゲットをラップし、デリゲートエラーが発生した場合には、TFLite CPU の経路にフォールバックするというセーフガードを提供することができます。
+Note: the `gpu_plugin` target is a separate one from the [GPU delegate target](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/delegates/gpu). `gpu_plugin` wraps the GPU delegate target, and can provide safety guard, i.e. fallback to TFLite CPU path on delegation errors.
 
 その他のデリゲートオプションには、次のようなものが含まれます。
 
@@ -93,7 +134,28 @@ std::vector<QaAnswer> results = answerer->Answer(context_of_question, question_t
 
 より高度なアクセラレーター設定については、[こちら](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto)をご覧ください。
 
-### Coral Edge TPU の使用例
+### Example usage of Coral Edge TPU in Python
+
+Configure Coral Edge TPU in the base options of the task. For example, you can set up Coral Edge TPU in `ImageClassifier` as follows:
+
+```python
+# Imports
+from tflite_support.task import vision
+from tflite_support.task import core
+
+# Initialize options and turn on Coral Edge TPU delegation.
+base_options = core.BaseOptions(file_name=model_path, use_coral=True)
+options = vision.ImageClassifierOptions(base_options=base_options)
+
+# Create ImageClassifier from options.
+classifier = vision.ImageClassifier.create_from_options(options)
+
+# Run inference on Coral Edge TPU.
+image = vision.TensorImage.create_from_file(image_path)
+classification_result = classifier.classify(image)
+```
+
+### Example usage of Coral Edge TPU in C++
 
 ステップ 1. 次のように、bazel ビルドターゲットの Goral Edge TPU デリゲートプラグインに依存します。
 
@@ -146,3 +208,35 @@ brew install libusb
 ```
 
 Coral Edge TPU デバイスで [Task Library CLI デモツール](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop)を試してみてください。[トレーニング済みの Edge TPU モデル](https://coral.ai/models/)と[高度な Edge TPU 設定](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto#L275)をご覧ください。
+
+### Example usage of Core ML Delegate in C++
+
+A complete example can be found at [Image Classifier Core ML Delegate Test](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/test/task/vision/image_classifier/TFLImageClassifierCoreMLDelegateTest.mm).
+
+Step 1. Depend on the Core ML delegate plugin in your bazel build target, such as:
+
+```
+deps = [
+  "//tensorflow_lite_support/acceleration/configuration:coreml_plugin", # for Core ML Delegate
+]
+```
+
+Step 2. Configure Core ML Delegate in the task options. For example, you can set up Core ML Delegate in `ImageClassifier` as follows:
+
+```c++
+// Initialization
+ImageClassifierOptions options;
+// Load the TFLite model.
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
+// Turn on Core ML delegation.
+options.mutable_base_options()->mutable_compute_settings()->mutable_tflite_settings()->set_delegate(::tflite::proto::Delegate::CORE_ML);
+// Set DEVICES_ALL to enable Core ML delegation on any device (in contrast to
+// DEVICES_WITH_NEURAL_ENGINE which creates Core ML delegate only on devices
+// with Apple Neural Engine).
+options.mutable_base_options()->mutable_compute_settings()->mutable_tflite_settings()->mutable_coreml_settings()->set_enabled_devices(::tflite::proto::CoreMLSettings::DEVICES_ALL);
+// Create ImageClassifier from options.
+std::unique_ptr<ImageClassifier> image_classifier = ImageClassifier::CreateFromOptions(options).value();
+
+// Run inference on Core ML.
+const ClassificationResult result = image_classifier->Classify(*frame_buffer).value();
+```
