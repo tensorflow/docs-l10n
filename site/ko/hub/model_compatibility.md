@@ -24,23 +24,22 @@ TF Hub는 TensorFlow 프로그램에서 다시 로드, 빌드 및 재훈련할 �
   </tr>
   <tr>
     <td>로딩/추론</td>
-    <td>       Fully supported (<a href="https://www.tensorflow.org/hub/tf1_hub_module#using_a_module">complete TF1 Hub format loading guide</a>)       <pre style="font-size: 12px;" lang="python">m = hub.Module(handle)
-outputs = m(inputs)</pre>     </td>
-    <td> It's recommended to use either hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
-outputs = m.signatures["sig"](inputs)</pre>       or hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle, signature="sig")
-outputs = m(inputs)</pre>     </td>
+    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf1_hub_module#using_a_module">전체 TF1 Hub 형식 로딩 가이드</a>)<pre style="font-size: 12px;" lang="python">m = hub.Module(handle) outputs = m(inputs)</pre>
+</td>
+    <td> hub.load 사용 권장     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
+outputs = m.signatures["sig"](inputs)</pre>       또는 hub.KerasLayer 사용 권장      <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle, signature="sig")
+outputs = m(inputs)</pre>
+</td>
   </tr>
   <tr>
     <td>미세 조정</td>
-    <td>       Fully supported (<a href="https://www.tensorflow.org/hub/tf1_hub_module#for_consumers">complete TF1 Hub format fine-tuning guide</a>)     <pre style="font-size: 12px;" lang="python">m = hub.Module(handle,
-               trainable=True,
-               tags=["train"]*is_training)
-outputs = m(inputs)</pre>       <div style="font-style: italic; font-size: 14px">       Note: modules that don't need a separate train graph don't have a train         tag.       </div>     </td>
+    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf1_hub_module#for_consumers">전체 TF1 Hub 형식 미세 조정 가이드</a>)<pre style="font-size: 12px;" lang="python">m = hub.Module(handle, trainable=True, tags=["train"]*is_training) outputs = m(inputs)</pre> <div style="font-style: italic; font-size: 14px"> 참고: 별도의 훈련 그래프가 필요하지 않은 모듈에는 훈련 태그가 없습니다.</div>
+</td>
     <td style="text-align: center">지원되지 않음</td>
   </tr>
   <tr>
     <td>생성</td>
-    <td> Fully supported (see <a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">complete TF1 Hub format creation guide</a>) <br> <div style="font-style: italic; font-size: 14px">       Note: The TF1 Hub format is geared towards TF1 and is only partially supported in TF2. Consider creating a TF2 SavedModel.       </div>
+    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">전체 TF1 Hub 형식 생성 가이드 참조</a>) <br><div style="font-style: italic; font-size: 14px"> 참고: TF1 Hub 형식은 TF1에 맞춰져 있으며 TF2에서는 부분적으로만 지원됩니다. TF2 SavedModel의 생성을 고려해 보세요.</div>
 </td>
     <td style="text-align: center">지원되지 않음</td>
   </tr>
@@ -61,12 +60,12 @@ TF1.15 이전에는 지원되지 않습니다.
   </tr>
   <tr>
     <td>로딩/추론</td>
-    <td>       Use either hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
-outputs = m(inputs)</pre>       or hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
-outputs = m(inputs)</pre>     </td>
-    <td> Fully supported (<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">complete TF2 SavedModel loading guide</a>). Use either hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
-outputs = m(inputs)</pre>       or hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
-outputs = m(inputs)</pre>     </td>
+    <td>       hub.load 사용     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
+outputs = m(inputs)</pre>       또는 hub.KerasLayer 사용      <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
+outputs = m(inputs)</pre>
+</td>
+    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">전체 TF2 SavedModel 로딩 가이드</a>). 다음 중 하나를 사용하세요. hub.load <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre> 또는 hub.KerasLayer <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre>
+</td>
   </tr>
   <tr>
     <td>미세 조정</td>
@@ -76,7 +75,7 @@ outputs = m(inputs)</pre>     </td>
   </tr>
   <tr>
     <td>생성</td>
-    <td>      The TF2 API <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save">       tf.saved_model.save()</a> can be called from within compat mode.    </td>
+    <td>TF2 API <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save">tf.saved_model.save()</a>는 호환 모드에서 호출할 수 있습니다.</td>
    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf2_saved_model#creating_savedmodels_for_tf_hub">전체 TF2 SavedModel 생성 가이드</a> 참조)</td>
   </tr>
 </table>
