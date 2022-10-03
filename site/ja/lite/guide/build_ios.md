@@ -22,7 +22,7 @@ sudo xcodebuild -license accept
 
 ### Bazel をインストールする
 
-Bazel は TensorFlow の主要なビルドシステムです。[Bazel Web サイトの指示]に従って Bazel をインストールします。`tensorflow`リポジトリのルートの [`configure.py` ファイル]から `_TF_MIN_BAZEL_VERSION` または `_TF_MAX_BAZEL_VERSION` を選択します。
+Bazel は TensorFlow の主要なビルドシステムです。[Bazel Web サイトの指示](https://docs.bazel.build/versions/master/install-os-x.html)に従って Bazel をインストールします。`tensorflow`リポジトリのルートの [`configure.py` ファイル](https://github.com/tensorflow/tensorflow/blob/master/configure.py)から `_TF_MIN_BAZEL_VERSION` または `_TF_MAX_BAZEL_VERSION` を選択します。
 
 ### WORKSPACE と .bazelrc の構成
 
@@ -35,18 +35,18 @@ Bazel は TensorFlow の主要なビルドシステムです。[Bazel Web サイ
 Bazel が iOS サポートで適切に設定されたら、次のコマンドで `TensorFlowLiteC` フレームワークを構築できます。
 
 ```sh
-bazel build --config=ios_fat -c opt \
+bazel build --config=ios_fat -c opt --cxxopt=--std=c++17 \
   //tensorflow/lite/ios:TensorFlowLiteC_framework
 ```
 
-このコマンドは、TensorFlow ルートディレクトリにある `bazel-bin/tensorflow/lite/ios/` ディレクトリに `TensorFlowLiteC_framework.zip` ファイルを生成します。デフォルトでは、生成されたフレームワークには、armv7、arm64、x86_64（i386 は含まない）を含む「ファット」バイナリが含まれています。`--config=ios_fat`を指定するときに使用されるビルドフラグの完全なリストを確認するには、[`.bazelrc` ファイル]の iOS 構成セクションを参照してください。
+このコマンドは、TensorFlow ルートディレクトリにある `bazel-bin/tensorflow/lite/ios/` ディレクトリに `TensorFlowLiteC_framework.zip` ファイルを生成します。デフォルトでは、生成されたフレームワークには、armv7、arm64、x86_64（i386 は含まない）を含む「ファット」バイナリが含まれています。`--config=ios_fat`を指定するときに使用されるビルドフラグの完全なリストを確認するには、[`.bazelrc` ファイル](https://github.com/tensorflow/tensorflow/blob/master/.bazelrc)の iOS 構成セクションを参照してください。
 
 ### TensorFlowLiteC 静的フレームワークの構築
 
 デフォルトでは、Cocoapod 経由でのみ動的フレームワークを配布していますが、代わりに静的フレームワークを使用する場合は、次のコマンドを使って `TensorFlowLiteC` 静的フレームワークを構築できます。
 
 ```
-bazel build --config=ios_fat -c opt \
+bazel build --config=ios_fat -c opt --cxxopt=--std=c++17 \
   //tensorflow/lite/ios:TensorFlowLiteC_static_framework
 ```
 
@@ -105,7 +105,7 @@ CocoaPods を使用していて、TensorFlow Lite の [Swift API](https://github
   ...
 ```
 
-独自の `TensorFlowLiteC.podspec` ファイルを作成したら、[プライベート CocoaPods の使用に関する指示]に従って、独自のプロジェクトで使用できます。また、`TensorFlowLite(Swift|ObjC).podspec` を変更して、カスタムの `TensorFlowLiteC` ポッドをポイントし、アプリプロジェクトで Swift または Objective-C ポッドを使用することもできます。
+独自の `TensorFlowLiteC.podspec` ファイルを作成したら、[プライベート CocoaPods の使用に関する指示](https://guides.cocoapods.org/making/private-cocoapods.html)に従って、独自のプロジェクトで使用できます。また、`TensorFlowLite(Swift|ObjC).podspec` を変更して、カスタムの `TensorFlowLiteC` ポッドをポイントし、アプリプロジェクトで Swift または Objective-C ポッドを使用することもできます。
 
 ### Bazel 開発者
 
@@ -145,9 +145,3 @@ TensorFlow Lite の依存関係をプロジェクトに追加するには、Coco
 フレームワークを埋め込みバイナリとして追加すると、Xcode はフレームワークの親ディレクトリを含むように Build Settings タブの Framework Search Paths エントリも更新します。これが自動的に行われない場合は、`TensorFlowLiteC.framework` ディレクトリの親ディレクトリを手動で追加する必要があります。
 
 これら 2 つの設定が完了すると、`TensorFlowLiteC.framework/Headers` ディレクトリにあるヘッダーファイルで定義された TensorFlow Lite の C API をインポートして呼び出すことができるようになります。
-
-
-[Bazel Web サイトの指示]: https://docs.bazel.build/versions/master/install-os-x.html
-[`.bazelrc` ファイル]: https://github.com/tensorflow/tensorflow/blob/master/.bazelrc
-[`configure.py` ファイル]: https://github.com/tensorflow/tensorflow/blob/master/configure.py
-[プライベート CocoaPods の使用に関する指示]: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/objc
