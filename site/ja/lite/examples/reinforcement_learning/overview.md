@@ -4,6 +4,7 @@
 
 ## はじめに
 
+
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
 TensorFlow Lite を初めて使用する場合、Android を使用する場合は、以下のサンプルアプリをご覧ください。
@@ -36,8 +37,7 @@ Android アプリでの実際のゲーム中、エージェントの番になる
     </tr>
   </thead>
   <tr>
-    <td rowspan="2">       <a href="https://github.com/tensorflow/examples/blob/master/lite/examples/reinforcement_learning/android/app/src/main/assets/planestrike.tflite">方策勾配</a>
-</td>
+    <td rowspan="2">       <a href="https://github.com/tensorflow/examples/blob/master/lite/examples/reinforcement_learning/android/app/src/main/assets/planestrike.tflite">方策勾配</a> </td>
     <td rowspan="2">       84 Kb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>0.01ms*</td>
