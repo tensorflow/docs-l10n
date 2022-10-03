@@ -102,7 +102,7 @@ deps = [
 ]
 ```
 
-Note: the `gpu_plugin` target is a separate one from the [GPU delegate target](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/delegates/gpu). `gpu_plugin` wraps the GPU delegate target, and can provide safety guard, i.e. fallback to TFLite CPU path on delegation errors.
+注意: `gpu_plugin` ターゲットは [GPU デリゲートターゲット](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/delegates/gpu)のものとは異なります。`gpu_plugin` は GPU デリゲートターゲットをラップし、デリゲートエラーが発生した場合には、TFLite CPU の経路にフォールバックするというセーフガードを提供することができます。
 
 その他のデリゲートオプションには、次のようなものが含まれます。
 
@@ -134,9 +134,9 @@ std::vector<QaAnswer> results = answerer->Answer(context_of_question, question_t
 
 より高度なアクセラレーター設定については、[こちら](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto)をご覧ください。
 
-### Example usage of Coral Edge TPU in Python
+### Coral Edge TPU における使用例（Python）
 
-Configure Coral Edge TPU in the base options of the task. For example, you can set up Coral Edge TPU in `ImageClassifier` as follows:
+タスクの基本オプションで Coral Edge TPU を構成します。たとえば、次のように `ImageClassifier` で Coral Edge TPU をセットアップできます。
 
 ```python
 # Imports
