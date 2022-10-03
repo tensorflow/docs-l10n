@@ -454,7 +454,7 @@ output_data = interpreter.get_tensor(output_details[0]['index'])
 print(output_data)
 ```
 
-As an alternative to loading the model as a pre-converted `.tflite` file, you can combine your code with the [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/api_docs/python/tf/lite/TFLiteConverter) (`tf.lite.TFLiteConverter`), allowing you to convert your TensorFlow model into the TensorFlow Lite format and then run inference:
+事前変換された`.tflite`ファイルとしてモデルを読み込む代わりに、コードを [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/api_docs/python/tf/lite/TFLiteConverter)（`tf.lite.TFLiteConverter`）と組み合わせて、TensorFlow モデルを TensorFlow Lite 形式に変換してから推論を実行することができます。
 
 ```python
 import numpy as np
