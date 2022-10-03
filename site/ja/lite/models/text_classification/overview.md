@@ -6,6 +6,7 @@ TensorFlow Lite モデルを使用して、段落を定義済みのグループ�
 
 ## はじめに
 
+
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
 TensorFlow Lite を初めて使用する場合、Android を使用する場合は、TensorFLow Lite タスクライブラリのガイドを参考にして、数行のコードを使って[テキスト分類モデルの統合を行う](../../inference_with_metadata/task_library/nl_classifier)ことをお勧めします。また、[TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java) を使用してもモデルの統合が可能です。
@@ -49,9 +50,8 @@ This pretrained model predicts if a paragraph's sentiment is positive or negativ
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">Text Classification</a>
-</td>
-    <td rowspan="3">       0.6 Mb</td>
+    <td rowspan="3">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">Text Classification</a> </td>
+    <td rowspan="3">       0.6 Mb     </td>
     <td>Pixel 3 (Android 10)</td>
     <td>0.05ms*</td>
   </tr>
@@ -79,8 +79,8 @@ This pretrained model predicts if a paragraph's sentiment is positive or negativ
 
 ## 独自のトレーニングデータセットを使用する
 
-独自のデータセットを使用してテキスト分類モデルをトレーニングする場合は、この[チュートリアル](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)に従い、ここで使用するのと同じ手法を適用してください。適切なデータセットを使用して、ドキュメント分類や有害コメント検出などのユースケースに用いるモデルを作成することができます。
+Follow this [tutorial](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) to apply the same technique used here to train a text classification model using your own datasets. With the right dataset, you can create a model for use cases such as document categorization or toxic comments detection.
 
 ## テキスト分類についてもっと読む
 
-- [このモデルをトレーニングするための単語埋め込みとチュートリアル](https://www.tensorflow.org/tutorials/text/word_embeddings)
+- 4 threads used.
