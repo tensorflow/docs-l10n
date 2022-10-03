@@ -8,7 +8,7 @@ TensorFlow Lite で使用できる TensorFlow モデルを構築する方法を�
 
 ## サポートされている型
 
-ほとんどの TensorFlow Lite 演算は、浮動小数点数（`float32`）と量子化（`uint8`、`int8`）推論の両方をターゲットしていますが、多くの演算子は、`tf.float16` や文字列といったほかの型をまだターゲットしていません。
+Most TensorFlow Lite operations target both floating-point (`float32`) and quantized (`uint8`, `int8`) inference, but many ops do not yet for other types like `tf.float16` and strings.
 
 浮動小数点数モデルと量子化モデルの間には、異なるバージョンの演算を使用するというだけでなく、ほかにも変換方法に違いがあります。量子化変換には、テンソルのダイナミックレンジ情報が必要です。これには、モデルのトレーニング中に「偽量子化」が必要で、較正データセット経由でレンジ情報を取得するか、「その場で」レンジ推測を行う必要があります。[量子化](../performance/model_optimization.md)をご覧ください。
 
