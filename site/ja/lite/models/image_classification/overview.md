@@ -1,10 +1,12 @@
 # 画像分類
 
+
 <img src="../images/image.png" class="attempt-right">
 
 画像の内容を特定するタスクは、*画像分類*と呼ばれます。画像分類モデルは、画像のさまざまなクラスを認識するようにトレーニングされます。たとえば、ウサギ、ハムスター、イヌという 3 つの異なる種類の動物を表す写真を認識するようにモデルをトレーニングできます。TensorFlow Lite は最適化されたトレーニング済みモデルを提供しており、モバイルアプリケーションにデプロイできます。TensorFlow を使用した画像分類の詳細については、[こちら](https://www.tensorflow.org/tutorials/images/classification)を参照してください。
 
 次の画像は、Android での画像分類モデルの出力を示します。
+
 
 <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/image_classification/images/android_banana.png?raw=true" alt="Screenshot of Android example" class="">
 
@@ -125,7 +127,7 @@ TensorFlow Lite 量子化 MobileNet モデルのパフォーマンスは、3.7ms
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a></td>
-    <td rowspan="3">       4.3 Mb</td>
+    <td rowspan="3">       4.3 Mb     </td>
     <td>Pixel 3 (Android 10)</td>
     <td>6ms</td>
     <td>13ms*</td>
@@ -142,7 +144,7 @@ TensorFlow Lite 量子化 MobileNet モデルのパフォーマンスは、3.7ms
   </tr>
 </table>
 
-* 4 つのスレッドを使用。
+* 4 threads used.
 
 ** 最高のパフォーマンス結果を得るために、iPhone では 2 つのスレッドを使用。
 
@@ -156,7 +158,7 @@ TensorFlow Lite 量子化 MobileNet モデルの上位 5 の精度の範囲は 6
 
 ### モデルサイズ
 
-ディスク上のモデルのサイズは、そのパフォーマンスと精度によって異なります。サイズは、モバイル開発 (アプリのダウンロードサイズに影響を与える可能性がある) や、ハードウェアで作業する (利用可能なストレージが制限される可能性がある) 場合に重要です。
+The size of a model on-disk varies with its performance and accuracy. Size may be important for mobile development (where it might impact app download sizes) or when working with hardware (where available storage might be limited).
 
 TensorFlow Lite 量子化 MobileNet モデルのサイズは、0.5〜3.4 Mb です。
 
