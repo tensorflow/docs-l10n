@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-01-12'} *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2022-07-11'} *-->
 
 # TensorFlow 2 における TF Hub の SavedModel
 
@@ -165,7 +165,7 @@ tf.saved_model.save(loaded_obj, export_module_dir)
 
 ### SavedModel 作成者に対する注意事項
 
-TensorFlow Hub で共有する SavedModel を作成する場合は、それを消費するユーザーがファインチューンを行うのか、どのように行うのか、ということを予め考え、ドキュメントにガイダンスを提供するようにしてください。
+TensorFlow Hub で共有する SavedModel を作成する場合は、それを消費するユーザーがファインチューニングを行うのか、どのように行うのか、ということを予め考え、ドキュメントにガイダンスを提供するようにしてください。
 
 Keras モデルから保存すると、ファインチューニングのすべての仕組みを機能させることができます（重み正則化損失の保存、トレーニング対象変数の宣言、`training=True` と `training=False` の両方の `__call__` のトレースなど）。
 
