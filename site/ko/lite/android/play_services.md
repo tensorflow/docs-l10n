@@ -437,7 +437,7 @@ To use the GPU delegate with the Interpreter APIs:
 
 ## Migrating from stand-alone TensorFlow Lite {:#migrating}
 
-If you are planning to migrate your app from stand-alone TensorFlow Lite to the Play services API, review the following additional guidance for updating your app project code:
+앱을 독립형 TensorFlow Lite에서 Play Services API로 마이그레이션하려는 경우, 앱 프로젝트 코드 업데이트에 대한 다음 추가 지침을 검토하세요.
 
 1. 이 페이지의 [제한 사항](#limitations) 섹션을 검토하여 해당 사례가 지원되는지 확인합니다.
 2. 코드를 업데이트하기 전에 특히 TensorFlow Lite 버전 2.1 이전 버전을 사용하는 경우 모델에 대한 성능 및 정확도 검사를 수행하여 새 구현과 비교할 기준선을 확보하세요.
@@ -448,9 +448,9 @@ If you are planning to migrate your app from stand-alone TensorFlow Lite to the 
 7. `InterpreterApi.create()`에 대한 호출의 마지막 인수에 `.setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)`을 추가합니다.
 8. `org.tensorflow.lite.Interpreter` 클래스의 다른 모든 항목을 `org.tensorflow.lite.InterpreterApi` 로 교체하세요.
 
-If you want to use stand-alone TensorFlow Lite and the Play services API side-by-side, you must use TensorFlow Lite 2.9 (or later). TensorFlow Lite 2.8 and earlier versions are not compatible with the Play services API version.
+독립형 TensorFlow Lite와 Play Services API를 나란히 사용하려면 TensorFlow Lite 2.9(또는 그 이상)를 사용해야 합니다. TensorFlow Lite 2.8 및 이전 버전은 Play Services API 버전과 호환되지 않습니다.
 
-## Limitations
+## 한계
 
 TensorFlow Lite in Google Play services has the following limitations:
 
@@ -484,6 +484,6 @@ Google Play Services API의 TensorFlow Lite는 버그 수정, 업데이트된 �
 - 오류 코드. 진단에 사용됩니다.
 - 성능 메트릭. 진단에 사용됩니다.
 
-## Next steps
+## 다음 단계
 
 TensorFlow Lite를 사용하여 모바일 애플리케이션에서 머신 러닝을 구현하는 방법에 대한 자세한 내용은 [TensorFlow Lite 개발자 가이드](https://www.tensorflow.org/lite/guide)를 참조하세요. [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite)에서 이미지 분류, 객체 감지 및 기타 애플리케이션을 위한 추가 TensorFlow Lite 모델을 찾을 수 있습니다.
