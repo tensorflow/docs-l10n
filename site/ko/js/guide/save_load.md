@@ -87,7 +87,7 @@ await model.save('http://model-server.domain/upload')
 
 두 파일의 이름은 항상 위에 지정된 것과 정확히 일치합니다(이름은 함수에 내장됨). 이 [api 문서](https://js.tensorflow.org/api/latest/#tf.io.browserHTTPRequest)에는 [플라스크](http://flask.pocoo.org/) 웹 프레임워크를 사용하여 `save`에서 시작된 요청을 처리하는 방법을 보여주는 Python 코드 조각이 포함되어 있습니다.
 
-Often you will have to pass more arguments or request headers to your HTTP server (e.g. for authentication or if you want to specify a folder that the model should be saved in). You can gain fine-grained control over these aspects of the requests from `save` by replacing the URL string argument in `tf.io.browserHTTPRequest`. This API affords greater flexibility in controlling HTTP requests.
+종종 더 많은 인수 또는 요청 헤더를 HTTP 서버에 전달해야합니다 (예 : 인증을 위해 또는 모델을 저장해야하는 폴더를 지정하려는 경우). `tf.io.browserHTTPRequest` 의 URL 문자열 인수를 대체하여 `save` 에서 요청의 이러한 측면을 세밀하게 제어 할 수 있습니다. 이 API는 HTTP 요청을 제어하는 데 더 큰 유연성을 제공합니다.
 
 아래 예제를 봅시다.
 
@@ -105,7 +105,7 @@ await model.save(tf.io.browserHTTPRequest(
 await model.save('file:///path/to/my-model');
 ```
 
-When running on Node.js we also have direct access to the filesystem and can save models there. The command above will save two files to the `path` specified after the `scheme`.
+Node.js에서 실행할 때 파일 시스템에 직접 액세스할 수 있으며 모델을 저장할 수 있습니다. 위의 명령은 `scheme`에 따라 지정된 `path`에 두 개의 파일을 저장합니다.
 
 1. `[model].json` 이라는 텍스트 JSON 파일(아래 설명된 가중치 파일에 대한 토폴로지 및 참조를 전달함)
 2. `[model].weights.bin` 이라는 가중치 값을 포함하는 바이너리 파일
