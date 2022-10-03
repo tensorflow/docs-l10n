@@ -96,15 +96,6 @@ Here we give more information about the model including how it was trained,
 expected use cases, and code snippets demonstrating how to use the model:
 
 ```
-Code snippet demonstrating use (e.g. for a TF model using the tensorflow_hub library)
-
-import tensorflow_hub as hub
-
-model = hub.KerasLayer(<model name>)
-inputs = ...
-output = model(inputs)
-```
-```
 
 ### 배포를 모델링하고 배포를 그룹화
 
