@@ -1,5 +1,6 @@
 # 動画分類
 
+
 <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/examples/images/video.png?raw=true" class="">
 
 *動画分類*は、動画が表す内容を特定する機械学習タスクです。動画分類モデルは、さまざまなアクションや動きといった固有のクラスのセットを含む動画データセットに対してトレーニングされます。モデルは動画フレームを入力として受け取り、各クラスが動画で表示される確率を出力します。
@@ -7,6 +8,7 @@
 動画分類モデルと画像分類モデルはいずれも、画像を入力として使用し、その画像が定義済みのクラスに属する確率を予測します。ただし、動画分類モデルは、隣接するフレームの間の空間と時間の関係も処理し、動画のアクションを認識します。
 
 たとえば、*動画行動認識*モデルをトレーニングして、走る、拍手、手を振るといった人間の行動を特定できます。次の図は、Android での動画分類モデルの出力を示します。
+
 
 <img alt="Screenshot of Android example" src="https://storage.googleapis.com/download.tensorflow.org/models/tflite/screenshots/push-up-classification.gif" class="">
 
