@@ -15,7 +15,7 @@
 
 使用するサンプルアプリケーションは、次のデバイスでテストされています。
 
-- [Arduino Nano 33 BLE Sense](https://store.arduino.cc/usa/nano-33-ble-sense-with-headers) (Arduino IDE を使用する)
+- [Arduino Nano 33 BLE Sense](https://store-usa.arduino.cc/products/arduino-nano-33-ble-sense-with-headers) (Arduino IDE を使用する)
 - [SparkFun Edge](https://www.sparkfun.com/products/15170) (ソースから直接構築する)
 - [STM32F746 Discovery kit](https://www.st.com/en/evaluation-tools/32f746gdiscovery.html) (Mbed を使用する)
 - [Adafruit EdgeBadge](https://www.adafruit.com/product/4400) (Arduino IDE を使用する)
