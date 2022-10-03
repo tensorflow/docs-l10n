@@ -25,8 +25,7 @@ TF Hub は TensorFlow プログラムで再読み込み、構築、再トレー�
   <tr>
     <td>読み込み / 推論</td>
     <td>       完全サポート (<a href="https://www.tensorflow.org/hub/tf1_hub_module#using_a_module">包括的な TF1 Hub 形式読み込みガイド</a>)       <pre style="font-size: 12px;" lang="python">m = hub.Module(handle)
-outputs = m(inputs)</pre>
-</td>
+outputs = m(inputs)</pre> </td>
     <td>hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m.signatures["sig"](inputs)</pre>       または hub.KerasLayer        <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle, signature="sig") outputs = m(inputs)</pre> のいずれかを使用してください。</td>
   </tr>
   <tr>
@@ -34,14 +33,12 @@ outputs = m(inputs)</pre>
     <td>       完全サポート (<a href="https://www.tensorflow.org/hub/tf1_hub_module#for_consumers">包括的な TF1 Hub 形式のファインチューニングガイド</a>)     <pre style="font-size: 12px;" lang="python">m = hub.Module(handle,
                trainable=True,
                tags=["train"]*is_training)
-outputs = m(inputs)</pre>       <div style="font-style: italic; font-size: 14px">       注: 個別のトレーニンググラフを必要としないモジュールにはトレーニングタグがありません。</div>
-</td>
-    <td style="text-align: center">サポート対象外</td>
+outputs = m(inputs)</pre>       <div style="font-style: italic; font-size: 14px">       注: 個別のトレーニンググラフを必要としないモジュールにはトレーニングタグがありません。</div> </td>
+    <td style="text-align: center">       Not supported</td>
   </tr>
   <tr>
     <td>作成</td>
-    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">包括的な TF1 Hub 形式の作成ガイド</a>をご覧ください） <br> <div style="font-style: italic; font-size: 14px">       注意: TF1 Hub 形式は TF1 向けであり、TF2 では部分的にのみサポートされています。TF2 SavedModel の作成を検討してください。       </div>
-</td>
+    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">包括的な TF1 Hub 形式の作成ガイド</a>をご覧ください） <br> <div style="font-style: italic; font-size: 14px">       注意: TF1 Hub 形式は TF1 向けであり、TF2 では部分的にのみサポートされています。TF2 SavedModel の作成を検討してください。       </div> </td>
     <td style="text-align: center">サポート対象外</td>
   </tr>
 </table>
@@ -61,20 +58,23 @@ TF1.15 以前はサポートされていません。
   </tr>
   <tr>
     <td>読み込み / 推論</td>
-    <td>hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m.signatures["sig"](inputs)</pre>       または hub.KerasLayer        <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle, signature="sig") outputs = m(inputs)</pre> のいずれかを使用することをお勧めします。</td>
-    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">包括的な TF2 SavedModel の読み込みガイド</a>）。hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre>       または hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre> のいずれかを使用してください。</td>
+    <td>       Use either hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
+outputs = m(inputs)</pre>       or hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
+outputs = m(inputs)</pre>     </td>
+    <td> Fully supported (<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">complete TF2 SavedModel loading guide</a>). Use either hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
+outputs = m(inputs)</pre>       or hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
+outputs = m(inputs)</pre>     </td>
   </tr>
   <tr>
     <td>微調整</td>
-    <td>Model.fit() でトレーニングされる場合、または <a href="https://www.tensorflow.org/guide/migrate#using_a_custom_model_fn">カスタム model_fn ガイド</a> に従って Model をラップする model_fn を持つ Estimator でトレーニングされる場合にtf.keras.Model で使用される hub.KerasLayer でサポートされます。       <br><div style="font-style: italic; font-size: 14px;">         注意: hub.KerasLayer は古い tf.compat.v1.layers または hub.Module API のようにグラフコレクションを<span style="font-weight: bold;">埋めません</span>。       </div>
-</td>
+    <td>       Supported for a hub.KerasLayer used in  tf.keras.Model when trained with       Model.fit() or trained in an Estimator whose model_fn wraps the Model per the <a href="https://www.tensorflow.org/guide/migrate#using_a_custom_model_fn">custom model_fn guide</a>.       <br><div style="font-style: italic; font-size: 14px;">         Note: hub.KerasLayer <span style="font-weight: bold;">does not</span>         fill in graph collections like the old tf.compat.v1.layers or hub.Module         APIs did.       </div>     </td>
     <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf2_saved_model#for_savedmodel_consumers">包括的な TF2 SavedModel のファインチューニングガイド</a>）。hub.load:       <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs, training=is_training)</pre>       または hub.KerasLayer:       <pre style="font-size: 12px;" lang="python">m =  hub.KerasLayer(handle, trainable=True) outputs = m(inputs)</pre> のいずれかを使用してください。</td>
   </tr>
   <tr>
     <td>作成</td>
-    <td>TF2 API <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save">       tf.saved_model.save()</a> は互換モード内から呼び出すことができます。</td>
+    <td>      The TF2 API <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save">       tf.saved_model.save()</a> can be called from within compat mode.    </td>
    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf2_saved_model#creating_savedmodels_for_tf_hub">包括的な TF2 SavedModel の作成ガイド</a>）</td>
   </tr>
 </table>
 
-<p id="compatfootnote">[1] "TF2 の TF1 互換モード" とは、<a>TensorFlow 移行ガイド</a>に記載されているように TF2 を <code style="font-size: 12px;" lang="python">import tensorflow.compat.v1 as tf</code> でインポートして <code>tf.disable_v2_behavior()</code> を実行する場合の複合効果を指します。</p>
+<p id="compatfootnote">[1] "TF1 compat mode in TF2" refers to the combined   effect of importing TF2 with   <code style="font-size: 12px;" lang="python">import tensorflow.compat.v1 as tf</code>   and running   <code style="font-size: 12px;" lang="python">tf.disable_v2_behavior()</code>  as described in the   <a href="https://www.tensorflow.org/guide/migrate">TensorFlow Migration guide   </a>.</p>
