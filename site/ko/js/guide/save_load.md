@@ -87,7 +87,7 @@ await model.save('http://model-server.domain/upload')
 
 두 파일의 이름은 항상 위에 지정된 것과 정확히 일치합니다(이름은 함수에 내장됨). 이 [api 문서](https://js.tensorflow.org/api/latest/#tf.io.browserHTTPRequest)에는 [플라스크](http://flask.pocoo.org/) 웹 프레임워크를 사용하여 `save`에서 시작된 요청을 처리하는 방법을 보여주는 Python 코드 조각이 포함되어 있습니다.
 
-더 많은 인수 또는 요청 헤더를 HTTP 서버에 전달해야 하는 경우가 종종 있습니다(예: 인증하거나 모델을 저장해야 하는 폴더를 지정하려는 경우). 요청의 이런 측면도 `tf.io.browserHTTPRequest`의 URL 문자열 인수를 대체하여 `save`에서 세밀하게 제어할 수 있습니다. 이 API는 HTTP 요청을 제어하는 데 더 큰 유연성을 제공합니다.
+Often you will have to pass more arguments or request headers to your HTTP server (e.g. for authentication or if you want to specify a folder that the model should be saved in). You can gain fine-grained control over these aspects of the requests from `save` by replacing the URL string argument in `tf.io.browserHTTPRequest`. This API affords greater flexibility in controlling HTTP requests.
 
 아래 예제를 봅시다.
 
@@ -105,7 +105,7 @@ await model.save(tf.io.browserHTTPRequest(
 await model.save('file:///path/to/my-model');
 ```
 
-Node.js에서 실행할 때 파일 시스템에 직접 액세스할 수 있으며 모델을 저장할 수 있습니다. 위의 명령은 `scheme`에 따라 지정된 `path`에 두 개의 파일을 저장합니다.
+When running on Node.js we also have direct access to the filesystem and can save models there. The command above will save two files to the `path` specified after the `scheme`.
 
 1. `[model].json` 이라는 텍스트 JSON 파일(아래 설명된 가중치 파일에 대한 토폴로지 및 참조를 전달함)
 2. `[model].weights.bin` 이라는 가중치 값을 포함하는 바이너리 파일
@@ -162,7 +162,7 @@ const model = await tf.loadLayersModel('http://model-server.domain/download/mode
 
 http 엔드 포인트에서 모델을 로드합니다. `json` 파일을 로드한 후 함수는 `json` 파일이 참조하는 해당 `.bin` 파일을 요청합니다.
 
-> 참고: 이 구현 방식은 [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) 메서드의 존재에 의존합니다. 기본적으로 fetch 메서드를 제공하지 않는 환경에 있는 경우 해당 인터페이스를 충족하는 전역 메서드 이름 [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)를 제공하거나 (`node-fetch`)와 같은 라이브러리를 사용할 수 있습니다. [https://www.npmjs.com/package/node-fetch]
+> NOTE: This implementation relies on the presence of the [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method, if you are in an environment that does not provide the fetch method natively you can provide a global method names [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) that satisfies that interface or use a library like [`node-fetch`](https://www.npmjs.com/package/node-fetch).
 
 ### 네이티브 파일 시스템(Node.js만 해당)
 
