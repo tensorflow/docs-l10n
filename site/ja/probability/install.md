@@ -4,7 +4,7 @@
 
 TensorFlow Probability の最新バージョンをインストールします。
 
-<pre class="devsite-terminal devsite-click-to-copy prettyprint lang-shell"> pip install --upgrade tensorflow-probability</pre>
+<pre class="devsite-terminal devsite-click-to-copy prettyprint lang-shell"> pip install --upgrade tensorflow-probability </pre>
 
 TensorFlow Probability は、[TensorFlow](https://www.tensorflow.org/install) の最近の安定版 (pip パッケージ`tensorflow`) に依存します。TensorFlow と TensorFlow Probability の間の依存関係の詳細については、[TFP リリースノート](https://github.com/tensorflow/probability/releases)をご覧ください。
 
