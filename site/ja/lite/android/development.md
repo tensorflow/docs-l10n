@@ -16,7 +16,7 @@ TensorFlow Lite タスクライブラリには、強力で使いやすいタス�
 
 To use the Task Library in your Android app, use the AAR from MavenCentral for [Task Vision library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-vision) , [Task Text library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-text) and [Task Audio Library](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-task-audio) , respectively.
 
-You can specify this in your `build.gradle` dependencies as follows:
+これは、`build.gradle` 依存関係に次のように指定できます。
 
 ```build
 dependencies {
@@ -34,7 +34,7 @@ dependencies {
 
 [MavenCentral にホストされている AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite) を開発プロジェクトに追加するには、Android アプリで TensorFlow Lite ライブラリを使用します。
 
-You can specify this in your `build.gradle` dependencies as follows:
+これは、`build.gradle` 依存関係に次のように指定できます。
 
 ```build
 dependencies {
@@ -44,7 +44,7 @@ dependencies {
 
 毎日夜間に実行されるスナップショットを使用するには、[Sonatype スナップショットリポジトリ](./lite_build#use_nightly_snapshots)が追加されていることを確認してください。
 
-This AAR includes binaries for all of the [Android ABIs](https://developer.android.com/ndk/guides/abis). You can reduce the size of your application's binary by only including the ABIs you need to support.
+この AAR には、すべての [Android ABI](https://developer.android.com/ndk/guides/abis) のバイナリが含まれています。サポートする必要のある ABI のみを含めることで、アプリケーションのバイナリのサイズを削減できます。
 
 ほとんどの場合において、特定のハードウェアを対象としていないかぎりは、`x86`、`x86_64`、および `arm32` ABI を省略してください。これは、次の Gradle 構成を使って実現できます。この構成には、最新のほとんどの Android デバイスに対応する `armeabi-v7a` と `arm64-v8a` のみが含まれています。
 
@@ -62,13 +62,13 @@ android {
 
 ### TensorFlow Lite Support Library {:#support_lib}
 
-The TensorFlow Lite Android Support Library makes it easier to integrate models into your application. It provides high-level APIs that help transform raw input data into the form required by the model, and interpret the model's output, reducing the amount of boilerplate code required.
+TensorFlow Lite Android Support ライブラリを使用すると、モデルをアプリケーションに簡単に統合できます。生の入力データをモデルが必要とする形式に変換し、モデルの出力を解釈するのに役立つ高レベルの API を提供し、必要なボイラープレートコードの量を減らします。
 
-It supports common data formats for inputs and outputs, including images and arrays. It also provides pre- and post-processing units that perform tasks such as image resizing and cropping.
+画像や配列など、入力と出力の一般的なデータ形式をサポートしています。また、画像のサイズ変更やトリミングなどのタスクを実行する前処理ユニットと後処理ユニットも提供されています。
 
 Android アプリで Support ライブラリを使用するには、[MavenCentral でホスティングされている TensorFlow Lite Support ライブラリ AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-support) を追加してください。
 
-You can specify this in your `build.gradle` dependencies as follows:
+これは、`build.gradle` 依存関係に次のように指定できます。
 
 ```build
 dependencies {
@@ -82,17 +82,17 @@ dependencies {
 
 ### ライブラリに対応する最低 Android SDK バージョン
 
-Library | `minSdkVersion` | Device Requirements
+ライブラリ | `minSdkVersion` | デバイス要件
 --- | --- | ---
-tensorflow-lite | 19 | NNAPI usage requires
+tensorflow-lite | 19 | NNAPI の使用が必要
 :                             :                 : API 27+                : |  |
-tensorflow-lite-gpu | 19 | GLES 3.1 or OpenCL
-:                             :                 : (typically only        : |  |
-:                             :                 : available on API 21+   : |  |
+tensorflow-lite-gpu | 19 | GLES 3.1 または OpenCL
+:                             :                 : （通常        : |  |
+:                             :                 : API 21+ のみで利用可  : |  |
 tensorflow-lite-hexagon | 19 | -
 tensorflow-lite-support | 19 | -
 tensorflow-lite-task-vision | 21 | android.graphics.Color
-:                             :                 : related API requires   : |  |
+:                             :                 : 関連 API が必要   : |  |
 :                             :                 : API 26+                : |  |
 tensorflow-lite-task-text | 21 | -
 tensorflow-lite-task-audio | 23 | -
@@ -106,7 +106,7 @@ tensorflow-lite-metadata | 19 | -
 
 Android Studio 4.1 以降の ML モデルバインディング機能では、`.tflite` モデルファイルを既存の Android アプリにインポートし、インターフェイスクラスを生成して、簡単にコードをモデルに統合できます。
 
-To import a TensorFlow Lite (TFLite) model:
+TensorFlow Lite（TFLite）モデルをインポートするには、次を行います。
 
 1. TF Lite モデルを使用するモジュールを右クリックするか、**File &gt; New &gt; Other &gt; TensorFlow Lite Model** をクリックします。
 
@@ -128,11 +128,11 @@ TensorFlow Lite の C および C++ ライブラリは、主に、Android Native
 
 この API の使用は、NDK を使用する開発者向けに*推薦される*アプローチです。[MavenCentral でホスティングされている TensorFlow Lite AAR ](https://search.maven.org/artifact/org.tensorflow/tensorflow/tensorflow-lite) ファイルをダウンロードし、名前を `tensorflow-lite-*.zip` に変更して、解凍します。`headers/tensorflow/lite/` および `headers/tensorflow/lite/c/` フォルダに 4 つのヘッダーファイルを含め、NDK プロジェクトの `jni/` フォルダに関連する `libtensorflowlite_jni.so` 動的ライブラリを含める必要があります。
 
-The `c_api.h` header file contains basic documentation about using the TFLite C API.
+`c_api.h` ヘッダーファイルには、TFLite C API の使用に関する基本的なドキュメントが含まれています。
 
 ### TFLite C++ API
 
-If you want to use TFLite through C++ API, you can build the C++ shared libraries:
+C++ API を介して TFLite を使用する場合は、C++ 共有ライブラリを構築します。
 
 32bit armeabi-v7a:
 
@@ -146,4 +146,4 @@ bazel build -c opt --config=android_arm //tensorflow/lite:libtensorflowlite.so
 bazel build -c opt --config=android_arm64 //tensorflow/lite:libtensorflowlite.so
 ```
 
-Currently, there is no straightforward way to extract all header files needed, so you must include all header files in `tensorflow/lite/` from the TensorFlow repository. Additionally, you will need header files from [FlatBuffers](https://github.com/google/flatbuffers) and [Abseil](https://github.com/abseil/abseil-cpp).
+現在、必要なすべてのヘッダーファイルを抽出する簡単な方法はないため、TensorFlow リポジトリから`tensorflow/lite/` にすべてのヘッダーファイルを含める必要があります。さらに、[FlatBuffers](https://github.com/google/flatbuffers) および [Abseil](https://github.com/abseil/abseil-cpp) からのヘッダーファイルが必要になります。
