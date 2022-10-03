@@ -12,7 +12,7 @@
 
 モバイルアプリで物体検出を使用する方法については、<a href="#example_applications_and_guides">サンプルアプリとガイド</a>をご覧になることをお勧めします。
 
-If you are using a platform other than Android or iOS, or if you are already familiar with the <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite APIs</a>, you can download our starter object detection model and the accompanying labels.
+Android または iOS 以外のプラットフォームを使用する場合、または、すでに <a href="https://www.tensorflow.org/api_docs/python/tf/lite">TensorFlow Lite API</a> に精通している場合は、物体検出スターターモデルと付随するラベルをダウンロードしてください。
 
 <a class="button button-primary" href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">メタデータを含むスターターモデルをダウンロードする</a>
 
@@ -225,7 +225,7 @@ For example, imagine a model has been trained to detect apples, bananas, and str
   </thead>
   <tr>
     <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a> </td>
-    <td rowspan="3">       27 Mb     </td>
+    <td rowspan="3">       27 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>22ms</td>
     <td>46ms*</td>
