@@ -420,16 +420,18 @@ Interpreter API で GPU デリゲートを使用するには:
     <devsite-selector>
     <section>
       <h3>Kotlin</h3>
-        <pre class="prettyprint">        val interpreterOption = InterpreterApi.Options()
-             .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-             .addDelegateFactory(GpuDelegateFactory())
+        <pre class="prettyprint">
+              val interpreterOption = InterpreterApi.Options()
+               .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+               .addDelegateFactory(GpuDelegateFactory())
             </pre>
     </section>
     <section>
       <h3>Java</h3>
-        <pre class="prettyprint">        Options interpreterOption = InterpreterApi.Options()
-              .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-              .addDelegateFactory(new GpuDelegateFactory());
+        <pre class="prettyprint">
+              Options interpreterOption = InterpreterApi.Options()
+                .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+                .addDelegateFactory(new GpuDelegateFactory());
             </pre>
     </section>
     </devsite-selector>
