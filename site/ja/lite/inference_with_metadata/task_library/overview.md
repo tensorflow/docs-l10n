@@ -44,7 +44,7 @@ TensorFlow Lite Task ライブラリには、強力で使いやすいタスク�
 
 [デリゲート](https://www.tensorflow.org/lite/performance/delegates)を使うと、[GPU](https://www.tensorflow.org/lite/performance/gpu) や [Coral Edge TPU](https://coral.ai/) などのオンデバイスアクセラレーターを利用することで、TensorFlow Lite モデルのハードウェアアクセラレーションを有効にできます。ニューラルネットワークの演算にこれらを使用すると、レイテンシーと電源効率性の観点で大きなメリットを得ることができます。たとえば、GPU の場合はモバイルデバイスで最大 [5 倍の加速化](https://blog.tensorflow.org/2020/08/faster-mobile-gpu-inference-with-opencl.html)を得られ、Coral Edge TPU の推論の場合は、デスクトップ CPU の [10 倍の速さ](https://coral.ai/docs/edgetpu/benchmarks/)を得ることができます。
 
-Task Library provides easy configuration and fall back options for you to set up and use delegates. The following accelerators are now supported in the Task API:
+タスクライブラリには、ユーザーがデリゲートをセットアップして使用できるようにするための、使いやすい構成とフォールバックオプションが提供されています。Task API で現在サポートされているアクセラレーターは次のとおりです。
 
 - Android
     - [GPU](https://www.tensorflow.org/lite/performance/gpu): Java / C++
@@ -53,13 +53,13 @@ Task Library provides easy configuration and fall back options for you to set up
 - Linux / Mac
     - [Coral Edge TPU](https://coral.ai/): C++
 - iOS
-    - [Core ML delegate](https://www.tensorflow.org/lite/performance/coreml_delegate): C++
+    - [Core ML デリゲート](https://www.tensorflow.org/lite/performance/coreml_delegate): C++
 
-Acceleration support in Task Swift / Web API are coming soon.
+Task Swift / Web API でのアクセラレーションサポートは近日追加予定です。
 
-### Example usage of GPU on Android in Java
+### Android における GPU の使用例（Java）
 
-Step 1. Add the GPU delegate plugin library to your module's `build.gradle` file:
+ステップ 1. GPU デリゲートプラグインライブラリをモジュールの `build.gradle` ファイルに追加します。
 
 ```java
 dependencies {
@@ -70,9 +70,9 @@ dependencies {
 }
 ```
 
-Note: NNAPI comes with the Task Library targets for vision, text, and audio by default.
+注意: NNAPI にはデフォルトで、ビジョン、テキスト、およびオーディオ用のタスクライブラリターゲットが含まれます。
 
-Step 2. Configure GPU delegate in the task options through [BaseOptions](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/core/BaseOptions.Builder). For example, you can set up GPU in `ObjectDetecor` as follows:
+ステップ 2. [BaseOptions](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/core/BaseOptions.Builder) を通じてタスクオプションに GPU デリゲートを構成します。たとえば、次のように <code>ObjectDetecor</code> で GPU をセットアップできます。
 
 ```java
 // Turn on GPU delegation.
@@ -92,7 +92,7 @@ ObjectDetector objectDetector =
 List<Detection> results = objectDetector.detect(image);
 ```
 
-### Example usage of GPU on Android in C++
+### Android における GPU の使用例（C++）
 
 ステップ 1. 次のように、bazel ビルドターゲットの GPU デリゲートプラグインに依存します。
 
@@ -155,7 +155,7 @@ image = vision.TensorImage.create_from_file(image_path)
 classification_result = classifier.classify(image)
 ```
 
-### Example usage of Coral Edge TPU in C++
+### Coral Edge TPU における使用例（C++）
 
 ステップ 1. 次のように、bazel ビルドターゲットの Goral Edge TPU デリゲートプラグインに依存します。
 
@@ -209,11 +209,11 @@ brew install libusb
 
 Coral Edge TPU デバイスで [Task Library CLI デモツール](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop)を試してみてください。[トレーニング済みの Edge TPU モデル](https://coral.ai/models/)と[高度な Edge TPU 設定](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto#L275)をご覧ください。
 
-### Example usage of Core ML Delegate in C++
+### C++ での Core ML デリゲートの使用例
 
-A complete example can be found at [Image Classifier Core ML Delegate Test](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/test/task/vision/image_classifier/TFLImageClassifierCoreMLDelegateTest.mm).
+完全な例は、[画像分類器の Core ML デリゲートテスト](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/test/task/vision/image_classifier/TFLImageClassifierCoreMLDelegateTest.mm)をご覧ください。
 
-Step 1. Depend on the Core ML delegate plugin in your bazel build target, such as:
+ステップ 1. 次のように、bazel ビルドターゲットの Core ML デリゲートプラグインに依存します。
 
 ```
 deps = [
@@ -221,7 +221,7 @@ deps = [
 ]
 ```
 
-Step 2. Configure Core ML Delegate in the task options. For example, you can set up Core ML Delegate in `ImageClassifier` as follows:
+ステップ 2. タスクオプションで Core ML Delegate を構成します。たとえば、次のように `ImageClassifier` で Core ML Delegate をセットアップできます。
 
 ```c++
 // Initialization
