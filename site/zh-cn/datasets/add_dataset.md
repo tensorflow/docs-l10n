@@ -1,168 +1,59 @@
-# 增加数据集
+# 编写自定义数据集
 
-按照本指南将数据集添加到 TFDS。
+按照本指南创建新的数据集（可在 TFDS 或您自己的仓库中创建）。
 
-请参阅我们的[数据集列表](catalog/overview.md)来查看您所需的数据集是否尚未添加。
+请查看我们的[数据集列表](catalog/overview.md)，了解您希望使用的数据集是否已存在。
 
-*   [总览](#总览)
-*   [编写 `my_dataset.py`](#编写-my_datasetpy)
-    *   [使用默认模版](#使用默认模版)
-    *   [DatasetBuilder](#datasetbuilder)
-    *   [my_dataset.py](#my_datasetpy)
-*   [指定 `DatasetInfo`](#指定-datasetinfo)
-    *   [`FeatureConnector`s](#featureconnectors)
-*   [下载和提取源数据](#下载和提取源数据)
-    *   [手动下载和提取](#手动下载和提取)
-*   [指定数据集分割](#指定数据集分割)
-*   [编写样本生成器](#编写样本生成器)
-    *   [文件存取及 `tf.io.gfile`](#文件存取及-tfiogfile)
-    *   [额外的依赖](#额外的依赖)
-    *   [数据损坏](#数据损坏)
-    *   [数据不一致](#数据不一致)
-*   [数据集配置](#数据集配置)
-    *   [使用 `BuilderConfig` 进行重型配置](#使用-builderconfig-进行重型配置)
-    *   [使用构造函数参数进行轻型配置](#使用构造函数参数进行轻型配置)
-*   [创建您自己的 `FeatureConnector`](#创建您自己的-featureconnector)
-*   [添加数据集到 `tensorflow/datasets`](#添加数据集到-tensorflowdatasets)
-    *   [1. 为注册添加导入](#1-为注册添加导入)
-    *   [2. 本地运行 `download_and_prepare`](#2-本地运行-download_and_prepare)
-    *   [3. 仔细检查引文](#3-仔细检查引文)
-    *   [4. 添加测试](#4-添加测试)
-    *   [5. 检查您的代码样式](#5-检查您的代码样式)
-    *   [6. 提交以供审阅!](#6-提交以供审阅)
-*   [在 TFDS 之外定义数据集](#在-tfds-之外定义数据集)
-*   [大型数据集和分布式生成](#大型数据集和分布式生成)
-*   [测试 `MyDataset`](#测试-mydataset)
+## TL;DR
 
-## 总览
+编写新数据集的最简单方式是使用 [TFDS CLI](https://www.tensorflow.org/datasets/cli)：
 
-数据集以各种格式分布于各个角落，它们并不总是以可以立即送入机器学习流水线的格式进行存储。
-
-TFDS 提供了一种将所有数据集转换成一种标准格式的方法，进行必要的预处理，以使数据集为机器学习流水线做好准备，并通过 `tf.data` 提供了一种标准的输入流水线。
-
-为了实现这一点，每个数据集都实现了 `DatasetBuilder` 的子类，该子类指定了：
-
-* 数据从何处来（例如它的 URL）；
-* 数据集看起来像什么（例如它的特征）；
-* 数据应该如何划分（例如 `训练` 与 `测试`）；
-* 以及数据集中的各条记录（records）。
-
-首次使用数据集时，将下载，准备好数据集，并以标准格式写入磁盘。后续访问将直接从这些预处理后的文件中读取。
-
-**Note**: 目前我们不支持在一台机器上需要超过 1 天才能生成的数据集。请参看[下面有关大型数据集的部分](#大型数据集和分布式生成)。
-
-## 编写 `my_dataset.py`
-
-### 使用默认模版
-
-如果您想要[为我们的资源库做贡献](https://github.com/tensorflow/datasets/blob/master/CONTRIBUTING.md)并添加新数据集，以下脚本将通过生成所需的 python 文件等方式帮助您入门。要使用它们，请克隆 `tfds` 资源库并运行以下命令：
-
-```
-python tensorflow_datasets/scripts/create_new_dataset.py \
-  --dataset my_dataset \
-  --type image  # text, audio, translation,...
+```sh
+cd path/to/my/project/datasets/
+tfds new my_dataset  # Create `my_dataset/my_dataset.py` template files
+# [...] Manually modify `my_dataset/my_dataset.py` to implement your dataset.
+cd my_dataset/
+tfds build  # Download and prepare the dataset to `~/tensorflow_datasets/`
 ```
 
+要将新数据集与 `tfds.load('my_dataset')` 搭配使用：
 
-然后在生成的文件中搜索 `TODO(my_dataset)` 去做修改。
-
-### `DatasetBuilder`
-
-每个数据集都被定义为 
-[`tfds.core.DatasetBuilder`](api_docs/python/tfds/core/DatasetBuilder.md) 的一个子类，实现了以下的方法：
-
-* `_info`：建立描述数据集的 [`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) 对象
-* `_download_and_prepare`：将源数据下载并序列化到磁盘
-* `_as_dataset`：从序列化数据中产生一个 `tf.data.Dataset`
-
-大多数数据集是 [`tfds.core.GeneratorBasedBuilder`](api_docs/python/tfds/core/GeneratorBasedBuilder.md) 的子类，该类是 `tfds.core.DatasetBuilder` 的子类，可简化定义数据集。它适用于能在单个机器上生成的数据集。该类的子类实现了：
-
-* `_info`: 建立描述数据集的 [`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) 对象
-* `_split_generators`: 下载源数据并定义数据分割
-* `_generate_examples`: 从源数据中产生 `(key, example)` 元组
-
-本指南将使用 `GeneratorBasedBuilder`。
-
-### `my_dataset.py`
-
-`my_dataset.py` 首先看起来像这样：
+- `tfds.load` 将自动检测并加载在 `~/tensorflow_datasets/my_dataset/` 中生成的数据集（例如，由 `tfds build` 生成）。
+- 或者，您也可以显式 `import my.project.datasets.my_dataset` 以注册您的数据集。
 
 ```python
-import tensorflow_datasets.public_api as tfds
+import my.project.datasets.my_dataset  # Register `my_dataset`
 
-class MyDataset(tfds.core.GeneratorBasedBuilder):
-  """对我的数据集的简短描述。"""
-
-  VERSION = tfds.core.Version('0.1.0')
-
-  def _info(self):
-    # 指定 tfds.core.DatasetInfo 对象
-    pass # TODO
-
-  def _split_generators(self, dl_manager):
-    # 下载数据并定义划分
-    # dl_manager 是一个 tfds.download.DownloadManager，其能够被用于
-    # 下载并提取 URLs
-    pass  # TODO
-
-  def _generate_examples(self):
-    # 从数据集中产生样本
-    yield 'key', {}
+ds = tfds.load('my_dataset')  # `my_dataset` registered
 ```
 
-如果您想要遵循测试驱动的开发工作流程，这可以帮助您更快迭代，那么请先跳到下面的[测试说明](#测试-mydataset)，添加测试，然后回到这里。
+## 概述
 
-有关版本说明，请阅读[数据集版本](datasets_versioning.md)。
+数据集以各种格式分布于各个角落，它们并不总是以可以立即馈入机器学习流水线的格式进行存储。
 
-## 指定 `DatasetInfo`
+TFDS 将这些数据集处理成标准格式（外部数据 -&gt; 序列化文件），并随后作为机器学习流水线加载（序列化文件 -&gt; `tf.data.Dataset`）。序列化仅进行一次。后续访问将直接从这些预处理的文件读取。
 
-[`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) 描述了数据集。
+大多数预处理都自动进行。每个数据集都实现 `tfds.core.DatasetBuilder` 的一个子类，该子类指定以下信息：
 
-```python
-class MyDataset(tfds.core.GeneratorBasedBuilder):
+- 数据从何处来（即它的网址）；
+- 数据集看起来像什么（即它的特征）；
+- 数据应如何拆分（例如 `TRAIN` 和 `TEST`）；
+- 以及数据集中的各个样本。
 
-  def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
-        # 这是将在数据集页面上显示的描述。
-        description=("This is the dataset for xxx. It contains yyy. The "
-                     "images are kept at their original dimensions."),
-        # tfds.features.FeatureConnectors
-        features=tfds.features.FeaturesDict({
-            "image_description": tfds.features.Text(),
-            "image": tfds.features.Image(),
-            # 在这里，标签可以是5个不同的值。
-            "label": tfds.features.ClassLabel(num_classes=5),
-        }),
-        # 如果特征中有一个通用的（输入，目标）元组，
-        # 请在此处指定它们。它们将会在
-        # builder.as_dataset 中的 
-        # as_supervised=True 时被使用。
-        supervised_keys=("image", "label"),
-        # 用于文档的数据集主页
-        homepage="https://dataset-homepage.org",
-        # 数据集的 Bibtex 引用
-        citation=r"""@article{my-awesome-dataset-2020,
-                              author = {Smith, John},"}""",
-    )
+## 编写数据集
+
+### 默认模板：`tfds new`
+
+使用 [TFDS CLI](https://github.com/tensorflow/datasets/blob/master/CONTRIBUTING.md) 生成所需的模板 Python 文件。
+
+```sh
+cd path/to/project/datasets/  # Or use `--dir=path/to/project/datasets/` below
+tfds new my_dataset
 ```
 
-### `FeatureConnector`s
+此命令将生成一个具有以下结构的新 `my_dataset/` 文件夹：
 
-每种特征都在 `DatasetInfo` 中指定为 [`tfds.features.FeatureConnector`](api_docs/python/tfds/features.md)。
-`FeatureConnector`记录了每种特征，提供了形状和类型检查，并对串行写入及读取磁盘进行了抽象。有许多的特征种类已经被定义，您也可以[添加一个新的特征](#创建您自己的-featureconnector)。
-
-如果您已经实现了测试工具，那么 `test_info` 现在应该通过了测试。
-
-## 下载和提取源数据
-
-大多数数据集都需要从网络下载数据。所有下载和提取必须经过
-[`tfds.download.DownloadManager`](api_docs/python/tfds/download/DownloadManager.md)。
-`DownloadManager` 当前支持提取 `.zip`， `.gz` 和 `.tar` 文件。
-
-例如，使用 `download_and_extract` 可以下载和提取 URLs：
-
-```python
+```sh
 def _split_generators(self, dl_manager):
   # 相当于 dl_manager.extract(dl_manager.download(urls))
   dl_paths = dl_manager.download_and_extract({
@@ -172,43 +63,65 @@ def _split_generators(self, dl_manager):
   dl_paths['foo'], dl_paths['bar']
 ```
 
-### 手动下载和提取
+在此处搜索 `TODO(my_dataset)` 并进行相应修改。
 
-对于不能自动下载的源数据（例如，下载可能需要登陆），用户将手动下载源数据并将其放在 `manual_dir` 中，您可以通过 `dl_manager.manual_dir` 访问该文件夹（默认为 `~/tensorflow_datasets/manual/my_dataset`）。
+### 数据集样本
 
-## 指定数据集分割
+所有数据集都作为可以处理大多数样板的 `tfds.core.DatasetBuilder` 的子类实现。它支持：
 
-如果数据集带有预定义的分割（例如，MNSIT 有训练和测试分割），那么就在 `DatasetBuilder` 中保留那些分割。如果数据集没有预定义的分割，则 `DatasetBuilder` 应指定一个 `tfds.Split.TRAIN` 分割。用户可以用 [subsplit API](https://github.com/tensorflow/datasets/tree/master/docs/splits.md) 动态创建他们自己的子分割（例如，`split='train[80%:]'`）。
+- 可以在单台计算机上生成的中小型数据集（本教程）。
+- Very large datasets which require distributed generation (using [Apache Beam](https://beam.apache.org/), see our [huge dataset guide](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset))
+
+以下是基于 `tfds.core.GeneratorBasedBuilder` 的数据集构建器的最简单示例：
 
 ```python
-  def _split_generators(self, dl_manager):
-    # 下载源数据
-    extracted_path = dl_manager.download_and_extract(...)
+class MyDataset(tfds.core.GeneratorBasedBuilder):
+  """DatasetBuilder for my_dataset dataset."""
 
-    # 指定分割
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "images_dir_path": os.path.join(extracted_path, "train"),
-                "labels": os.path.join(extracted_path, "train_labels.csv"),
-            },
-        ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
-                "images_dir_path": os.path.join(extracted_path, "test"),
-                "labels": os.path.join(extracted_path, "test_labels.csv"),
-            },
-        ),
-    ]
+  VERSION = tfds.core.Version('1.0.0')
+  RELEASE_NOTES = {
+      '1.0.0': 'Initial release.',
+  }
+
+  def _info(self) -> tfds.core.DatasetInfo:
+    """Dataset metadata (homepage, citation,...)."""
+    return tfds.core.DatasetInfo(
+        builder=self,
+        features=tfds.features.FeaturesDict({
+            'image': tfds.features.Image(shape=(256, 256, 3)),
+            'label': tfds.features.ClassLabel(
+                names=['no', 'yes'],
+                doc='Whether this is a picture of a cat'),
+        }),
+    )
+
+  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
+    """Download the data and define splits."""
+    extracted_path = dl_manager.download_and_extract('http://data.org/data.zip')
+    # dl_manager returns pathlib-like objects with `path.read_text()`,
+    # `path.iterdir()`,...
+    return {
+        'train': self._generate_examples(path=extracted_path / 'train_images'),
+        'test': self._generate_examples(path=extracted_path / 'test_images'),
+    }
+
+  def _generate_examples(self, path) -> Iterator[Tuple[Key, Example]]:
+    """Generator of examples for each split."""
+    for img_path in path.glob('*.jpeg'):
+      # Yields (key, example)
+      yield img_path.name, {
+          'image': img_path,
+          'label': 'yes' if img_path.name.startswith('yes_') else 'no',
+      }
 ```
 
-`SplitGenerator` 描述了一个分割应该如何生成。`gen_kwargs` 将作为关键字参数传递到 `_generate_examples`，我们将在后续定义。
+请注意，对于某些特定的数据格式，我们提供了现成的[数据集构建器](https://www.tensorflow.org/datasets/format_specific_dataset_builders)来负责大多数数据处理。
 
-## 编写样本生成器
+我们来详细了解要覆盖的 3 个抽象方法。
 
-`_generate_examples` 从源数据的每种分割中生成样本。对于上述定义的有着 `gen_kwargs` 的 `TRAIN` 分割，`_generate_examples` 将被调用成：
+### `_info`：数据集元数据
+
+`_info` 可返回包含[数据集元数据](https://www.tensorflow.org/datasets/overview#access_the_dataset_metadata)的 <code>tfds.core.DatasetInfo</code>。
 
 ```python
 builder._generate_examples(
@@ -217,7 +130,19 @@ builder._generate_examples(
 )
 ```
 
-该方法通常将读取源数据集加工件（如 CSV 文件）并产生（键值，特征字典）元组，对应于在 `DatasetInfo` 中指定的特征。
+大多数字段均一目了然。以下是一些具体信息：
+
+- `features`：该属性指定数据集结构、形状等内容。支持复杂数据类型（音频、视频、嵌套序列等）。有关详细信息，请参阅[可用特征](api_docs/python/tfds/core/DatasetInfo.md)或[特征连接器指南](https://www.tensorflow.org/datasets/features)。
+- `disable_shuffling`：请参阅[维护数据集顺序](#maintain-dataset-order)部分。
+- `citation`：要查找 `BibText` 引用，请执行以下操作：
+    - 在数据集网站中搜索引用说明（使用 BibTex 格式）。
+    - 对于 [arXiv](https://arxiv.org/) 论文：查找论文并点击右侧的 `BibText` 链接。
+    - 在 [Google Scholar](https://scholar.google.com) 上查找论文，并点击标题下方的双引号标志，然后在弹出窗口中点击 `BibTeX`。
+    - 如果没有相关的论文（例如，只有一个网站），您可以使用 [BibTeX 在线编辑器](https://truben.no/latex/bibtex/)创建一个自定义 BibTeX 条目（下拉菜单有一个 `Online` 条目类型）。
+
+#### 维护数据集顺序
+
+认情况下，数据集记录在存储时会打乱顺序以使数据集中各个类的分布更加均匀，因为通常属于同一类的记录是连续的。为了指定应按 `_generate_examples` 提供的生成键对数据集进行排序，应将字段 `disable_shuffling` 设置为 `True`。该字段在默认情况下设置为 `False`。
 
 ```python
 def _generate_examples(self, images_dir_path, labels):
@@ -236,221 +161,235 @@ def _generate_examples(self, images_dir_path, labels):
     }
 ```
 
-`DatasetInfo.features.encode_example` 将把这些字典编码成适于写到磁盘中的格式（当前我们使用 `tf.train.Example` 协议缓冲区（protocol buffers）格式）。例如，`tfds.features.Image` 将自动复制出传递的图像文件的 JPEG 内容。
+请记住，停用打乱顺序会对性能产生影响，因为将无法并行读取分片。
 
-键值（此处：`image_id`）应该唯一地标识记录。它用于全局数据集顺序随机化。如果生成的两条记录使用了相同的键值，那么在准备数据集期间将会引发异常。
+### `_split_generators`：下载和拆分数据
 
-如果您已经实现了测试工具，那么您的构建器测试现在应该通过了。
+#### 下载和提取源数据
 
-### 文件存取及 `tf.io.gfile`
+大多数据集都需要从网络下载数据。可使用 `_split_generators` 的输入参数 `tfds.download.DownloadManager` 实现。`dl_manager` 具有以下方法：
 
-为了支持云存储系统，对所有文件系统的访问，请使用 `tf.io.gfile` 或者其他 TensorFlow 文件 APIs（例如，`tf.python_io`）。避免使用 Python 内置的文件操作（如 `open`，`os.rename`，`gzip` 等）。
+- `download`：支持 `http(s)://`、`ftp(s)://`
+- `extract`：目前支持 `.zip`、`.gz` 和 `.tar` 文件。
+- `download_and_extract`：与 `dl_manager.extract(dl_manager.download(urls))` 相同
 
-### 额外的依赖
+上述所有方法均返回 `tfds.core.Path`（[`epath.Path`](https://github.com/google/etils) 的别名），后者是[类 pathlib.Path](https://docs.python.org/3/library/pathlib.html) 对象。
 
-一些数据集在数据生成过程中需要额外的 Python 依赖。例如，SVHN 数据集使用 `scipy` 来导入一些数据。为了保证 `tensorflow-datasets` 包较小，并允许用户仅在需要时才安装额外依赖，请使用 `tfds.core.lazy_imports`。
+这些方法支持任意嵌套结构（`list`、`dict`），例如：
 
-要使用 `lazy_imports`：
-
-*   将数据集的条目添加到 [`setup.py`](https://github.com/tensorflow/datasets/tree/master/setup.py) 里的 `DATASET_EXTRAS` 中。这样一来，用户就可以执行诸如 `pip install 'tensorflow-datasets[svhn]'` 来安装额外的依赖。
-*   将要导入的条目添加到 [`LazyImporter`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib.py) 和 [`LazyImportsTest`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib_test.py)。
-*   使用 `tfds.core.lazy_imports` 在您的 `DatasetBuilder` 中访问依赖（例如，`tfds.core.lazy_imports.scipy`）。
-
-
-### 数据损坏
-
-一些数据集不是完全干净，包含了一些损坏的数据（例如，图像在 JPEG 文件中，但有些是无效的 JPEG）。应该跳过这些样本，但在数据集描述中要注明删除了多少条样本及其原因。
-
-### 数据不一致
-
-一些数据集为单个记录或特征，提供了可能存在或者可能不再存在的一组 URLs（例如，网上各种图片的 URLs）。这些数据集很难正确版本化，因为源数据不稳定（URLs 来来去去）。
-
-如果数据集本来就不稳定（也就是说，如果长时间运行多次可能不会产生相同的数据），通过向 `DatasetBuilder` 添加一个类常量，将数据集标记为不稳定：`UNSTABLE = "<为什么这个数据集不稳定>"`。例如，`UNSTABLE = "来源于网络的下载 URLs。"`
-
-## 数据集配置
-
-某些数据集可能具有应公开的变体，或有关如何预处理数据的选项。这些配置可以分为两类：
-
-1. “重型”：影响数据如何写入磁盘的配置。我们将其称为“重型”配置。
-2. “轻型”：影响运行时预处理的配置（即可以在 `tf.data` 输入流水线中完成的配置）。我们将其称为“轻型”配置。
-
-### 使用 `BuilderConfig` 进行重型配置
-
-重型配置影响数据如何写入磁盘。例如，对于文本数据集，不同的 `TextEncoder` 和词汇表影响写入磁盘的单词 id。
-
-重型配置通过 [`tfds.core.BuilderConfig`](https://tensorflow.google.cn/datasets/api_docs/python/tfds/core/BuilderConfig.md) 完成：
-
-1. 将配置对象定义为 `tfds.core.BuilderConfig` 的子类。例如，`MyDatasetConfig`。
-2. 在 `MyDataset` 中定义 `BUILDER_CONFIGS` 类成员，该成员列出了数据集公开的 `MyDatasetConfig`。
-3. 使用 `MyDataset` 中的 `self.builder_config` 来配置数据生成。这可能包括在 `_info()` 中设置不同的值，或更改下载数据的访问权限。
-
-有 `BuilderConfig` 的数据集，对每种配置都有一个名称和版本号与之对应，因此数据集特定变体的完全合格的名称为`数据集名称/配置名称`（例如，`"lm1b/bytes"`）。配置默认为 `BUILDER_CONFIGS` 中的第一个（例如，"`lm1b`" 默认为 `"lm1b/plain_text"`）。
-
-有关使用 `BuilderConfig` 的数据集的示例，请参阅 [`Lm1b`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/lm1b.py)。
-
-### 使用构造函数参数进行轻型配置
-
-对于可以在 `tf.data` 输入流水线中即时更改的情况，可在 `MyDataset` 构造函数中添加关键字参数，将值存储在成员变量中，并在后续使用它们。例如，重载 `_as_dataset()`，调用 `super()` 得到 `tf.data.Dataset`，然后依据成员变量进行额外的转换。
-
-## 创建您自己的 `FeatureConnector`
-
-请注意，大多数数据集[当前一系列的 `tfds.features.FeatureConnector`](api_docs/python/tfds/features.md)已足够，但有时可能需要定义一个新的。
-
-Note: 如果您需要一个新的不在默认设置中出现的 `FeatureConnector`，并计划将其提交到 `tensorflow/datasets`，请根据您的建议在 GitHub 上开启一个
-[新的 issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)。
-
-`DatasetInfo` 中的 [`tfds.features.FeatureConnector`](api_docs/python/tfds/features/FeatureConnector.md) 对应着 `tf.data.Dataset` 对象返回的元素。例如：
-
-```
-tfds.DatasetInfo(features=tfds.features.FeatureDict({
-    'input': tfds.features.Image(),
-    'output': tfds.features.Text(encoder=tfds.text.ByteEncoder()),
-    'metadata': {
-        'description': tfds.features.Text(),
-        'img_id': tf.int32,
-    },
-}))
-```
-
-`tf.data.Dataset` 对象中的项看起来像：
-
-```
-{
-    'input': tf.Tensor(shape=(None, None, 3), dtype=tf.uint8),
-    'output': tf.Tensor(shape=(None,), dtype=tf.int32),  # 词 id 序列
-    'metadata': {
-        'description': tf.Tensor(shape=(), dtype=tf.string),
-        'img_id': tf.Tensor(shape=(), dtype=tf.int32),
-    },
+```python
+extracted_paths = dl_manager.download_and_extract({
+    'foo': 'https://example.com/foo.zip',
+    'bar': 'https://example.com/bar.zip',
+})
+# This returns:
+assert extracted_paths == {
+    'foo': Path('/path/to/extracted_foo/'),
+    'bar': Path('/path/extracted_bar/'),
 }
 ```
 
-`tfds.features.FeatureConnector` 对象，将特征如何在磁盘中编码，从特征如何呈现给用户中抽象了出来。下图显示了数据集的抽象层，以及从原始数据集文件到 `tf.data.Dataset` 对象的转换。
+#### 手动下载和提取
 
-<p align="center">
-  <img src="https://github.com/tensorflow/datasets/raw/master/docs/dataset_layers.png" alt="DatasetBuilder abstraction layers" width="700"/>
-</p>
+某些数据无法自动下载（例如需要登录），在这种情况下，用户将手动下载源数据并将其放置在 `manual_dir/` 中（默认为 `~/tensorflow_datasets/downloads/manual/`）。
 
-要创建自己的特征连接器（feature connector），请继承 `tfds.features.FeatureConnector` 并实现抽象方法：
-
-*   `get_tensor_info()`：指定 `tf.data.Dataset` 返回的张量形状/类型。
-*   `encode_example(input_data)`：定义了如何将在生成器 `_generate_examples()` 中给定的数据编码成兼容 `tf.train.Example` 的数据。
-*   `decode_example`：定义了如何将从 `tf.train.Example` 读取的张量中的数据解码成 `tf.data.Dataset` 返回的用户张量。
-*   （可选）`get_serialized_info()`：如果 `get_tensor_info()` 返回的信息与实际将数据写入磁盘的方式不同，那么您需要重载 `get_serialized_info()` 以匹配 `tf.train.Example` 的规范。
-
-1.  如果您的连接器仅含一个数值，那么 `get_tensor_info`、`encode_example` 和 `decode_example` 方法能直接返回单个数值（不需要将数值包装在字典中）。
-
-2.  如果您的连接器是多个子特征的容器，那么最简单的方式是继承 `tfds.features.FeaturesDict` 并使用 `super()` 方法自动编码/解码子连接器。
-
-请参看 [`tfds.features.FeatureConnector`](api_docs/python/tfds/features/FeatureConnector.md) 了解更多详细信息，参看 [特征软件包](api_docs/python/tfds/features.md) 了解更多示例。
-
-## 添加数据集到 `tensorflow/datasets`
-
-如果您想与社区共享您的工作，则可以将您的数据实现录入到 `tensorflow/datasets`中。感谢您的贡献！
-
-在发送拉取请求（pull request）之前，请遵循以下最后几个步骤：
-
-### 1. 为注册添加导入
-
-所有 `tfds.core.DatasetBuilder` 的子类在它们的模块被导入时，会自动注册，这样它们可以通过 `tfds.builder` 和 `tfds.load` 进行访问。
-
-如果您为 `tensorflow/datasets` 贡献数据集，则请在其子文件夹的 `__init__.py`（如 [`image/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/__init__.py)）添加模块导入。
-
-### 2. 本地运行 `download_and_prepare`
-
-如果您为 `tensorflow/datasets` 贡献数据集，则请为数据集添加一个校验和文件。在第一次下载时，`DownloadManager` 将自动将所有下载 URLs 的大小和校验和添加到该文件中。这样可以确保在后续数据生成中，下载的文件符合预期。
-
-```sh
-touch tensorflow_datasets/url_checksums/my_new_dataset.txt
-```
-
-本地运行 `download_and_prepare` 确保数据生成有效：
-
-```
-# 默认的 data_dir 为 ~/tensorflow_datasets
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --register_checksums \
-  --datasets=my_new_dataset
-```
-
-注意 `--register_checksums` 标志只能在开发中使用。
-
-将 `dataset_info.json` 文件中的内容复制到 [GitHub gist](https://gist.github.com/)，并在您的拉取请求中链接至该文件。
-
-
-### 3. 仔细检查引文
-
-在 `DatasetInfo.citation` 中包含数据集的引文很重要。向社区贡献数据集是一项艰巨而重要的工作，我们希望简化数据集用户引用该工作的过程。
-
-如果数据集的网站有特别要求的引用，请使用该引用（以 BibTex 格式）。
-
-如果论文在 [arXiv](https://arxiv.org/) 上，在 arXiv 找到该论文，并在右侧点击 `bibtex` 链接。
-
-如果论文不在 arXiv上，在 [Google Scholar](https://scholar.google.com) 上找到该篇论文，并点击标题下方的双引号标志，在弹出框中点击 `BibTeX`。
-
-如果没有相关的论文（例如，只有一个网站），您可以使用 [BibTeX 在线编辑器](https://truben.no/latex/bibtex/) 创建一个自定义的 BibTeX 条目（下拉菜单有一个 `Online` 输入类型）。
-
-### 4. 添加测试
-
-TFDS 中的大多数数据集应该有一个单元测试，并且您的审阅人可能会要求您添加一个（如果您还没有的话）。请参阅下方的[测试部分](#测试-mydataset)。
-
-### 5. 检查您的代码样式
-
-除了 TensorFlow 使用 2 个空格而非 4 个空格外，请遵循 [PEP 8 Python 样式指南](https://www.python.org/dev/peps/pep-0008)。请遵守 [Google Python 样式指南](https://github.com/google/styleguide/blob/gh-pages/pyguide.md)。
-
-最重要的是，使用 [`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/oss_scripts/lint.sh) 确保您的代码格式正确。例如，检查 `image` 目录：
-
-```sh
-./oss_scripts/lint.sh tensorflow_datasets/image
-```
-
-参看 [TensorFlow 代码样式指南](https://tensorflow.google.cn/community/contribute/code_style)了解更多信息。
-
-### 6. 提交以供审阅!
-
-发送拉取请求以供审阅。
-
-当创建拉取请求时，请填写名称，issue 参考，和 GitHub Gist 链接的区域。当使用核对表时，将每个 `[ ]` 替换为 `[x]` 进行标记。
-
-
-## 在 TFDS 之外定义数据集
-
-您可以使用 `tfds` API 在 `tfds` 库之外，定义自己的自定义的数据集。这些说明与上面的内容基本相同，但有一些细微的调整，请参见下文。
-
-### 1. 调整校验和文件夹
-
-为了确保重新分发数据集时的安全性和可重复性，`tfds` 在 [`tensorflow_datasets/url_checksums`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/url_checksums) 中包含了全部数据集下载的 URL 校验和。
-
-您可以在您的代码中调用 `tfds.download.add_checksums_dir('/path/to/checksums_dir')` 注册一个外部的校验和文件夹，这样您的数据集的用户会自动使用您的校验和。
-
-首次创建此校验和文件，您可以使用 `tensorflow_datasets.scripts.download_and_prepare` 脚本并给出 `--register_checksums --checksums_dir=/path/to/checksums_dir` 标志。
-
-### 2. 调整伪造样本文件夹
-
-为了进行测试，您可以通过设定 `tfds.testing.DatasetBuilderTestCase` 中的 `EXAMPLE_DIR` 属性，定义您自己的伪造样本文件夹，而不是使用默认的[伪造样本文件夹](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples)：
-
-```
-class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
-  EXAMPLE_DIR = 'path/to/fakedata'
-```
-
-## 大型数据集和分布式生成
-
-一些数据集非常大，以至于需要多台计算机来下载和生成。我们使用 Apache Beam 支持此用例。请阅读 [Beam 数据集指南](beam_datasets.md)以开始使用。
-
-## 测试 `MyDataset`
-
-`tfds.testing.DatasetBuilderTestCase` 是一个基本的 `TestCase`，用于完全测试一个数据集。它使用“伪造样本”作为模拟源数据集结构的测试数据。
-
-测试数据应该放在 `my_dataset` 文件夹下的 [`testing/test_data/fake_examples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples/) 中，并且应该在下载和提取时模拟源数据集加工件。它可以手工创建，也可以用一个脚本自动创建（[示例脚本](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)）。
-
-如果您使用自动化生成测试数据，请将该脚本包含在[`测试`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing)中。
-
-确保在测试数据分割中使用不同的数据，因为如果数据集分割重叠，则测试将失败。
-
-**测试数据不应包含任何受版权保护的材料**。如有疑问，请勿使用原始数据集中的材料创建数据。
+然后即可通过 `dl_manager.manual_dir` 访问文件：
 
 ```python
+class MyDataset(tfds.core.GeneratorBasedBuilder):
+
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """
+  Register into https://example.org/login to get the data. Place the `data.zip`
+  file in the `manual_dir/`.
+  """
+
+  def _split_generators(self, dl_manager):
+    # data_path is a pathlib-like `Path('<manual_dir>/data.zip')`
+    archive_path = dl_manager.manual_dir / 'data.zip'
+    # Extract the manually downloaded `data.zip`
+    extracted_path = dl_manager.extract(archive_path)
+    ...
+```
+
+`manual_dir` 的位置可以使用 `tfds build --manual_dir=` 或使用 `tfds.download.DownloadConfig` 进行自定义。
+
+#### 直接读取归档
+
+`dl_manager.iter_archive` 可以在不提取的情况下按顺序读取归档。这样可以节省存储空间并提高某些文件系统的性能。
+
+```python
+for filename, fobj in dl_manager.iter_archive('path/to/archive.zip'):
+  ...
+```
+
+`fobj` 具有与 `with open('rb') as fobj:` 相同的方法（例如 `fobj.read()`）
+
+#### <a>指定数据集拆分</a>
+
+如果数据集带有预定义的拆分（例如 `MNIST` 具有 `train` 和 `test` 拆分），请保留这些拆分。否则，请仅指定一项 `tfds.Split.TRAIN` 拆分。用户可以使用 [subsplit API](https://www.tensorflow.org/datasets/splits) 动态创建自己的子拆分（例如 `split='train[80%:]'`）。
+
+```python
+def _split_generators(self, dl_manager):
+  # Download source data
+  extracted_path = dl_manager.download_and_extract(...)
+
+  # Specify the splits
+  return {
+      'train': self._generate_examples(
+          images_path=extracted_path / 'train_imgs',
+          label_path=extracted_path / 'train_labels.csv',
+      ),
+      'test': self._generate_examples(
+          images_path=extracted_path / 'test_imgs',
+          label_path=extracted_path / 'test_labels.csv',
+      ),
+  }
+```
+
+### `_generate_examples`：样本生成器
+
+`_generate_examples` 可为元数据中的每项拆分生成样本。
+
+此方法通常将读取源数据集工件（例如 CSV 文件）并产生 `(key, feature_dict)` 元组：
+
+- `key`：样本标识符。用于使用 `hash(key)` 确定性地打乱样本顺序，或者在停用打乱顺序时根据键排序（请参阅[维护数据集顺序](#maintain-dataset-order)部分）。应为：
+    - **唯一**：如果两个样本使用相同的键，则会引发异常。
+    - **确定**：不应取决于 `download_dir`、`os.path.listdir` 顺序等。两次生成数据应产生相同的键。
+    - **可比**：如果停用打乱顺序，将使用键对数据集排序。
+- `feature_dict`：包含样本值的 `dict`。
+    - 该结构应与 `tfds.core.DatasetInfo` 中定义的 `features=` 结构相匹配。
+    - 复杂数据类型（图像、视频、音频等）将自动编码。
+    - 每个特征通常都可接受多种输入类型（例如，视频接受 `/path/to/vid.mp4`、`np.array(shape=(l, h, w, c))`、`List[paths]`、`List[np.array(shape=(h, w, c)]`、`List[img_bytes]` 等）。
+    - 如需了解详情，请参阅[特征连接器指南](https://www.tensorflow.org/datasets/features)。
+
+```python
+def _generate_examples(self, images_path, label_path):
+  # Read the input data out of the source files
+  with label_path.open() as f:
+    for row in csv.DictReader(f):
+      image_id = row['image_id']
+      # And yield (key, feature_dict)
+      yield image_id, {
+          'image_description': row['description'],
+          'image': images_path / f'{image_id}.jpeg',
+          'label': row['label'],
+      }
+```
+
+#### <a>文件访问和 <code>tf.io.gfile</code></a>
+
+为了支持云存储系统，请避免使用 Python 内置 I/O 运算。
+
+`dl_manager` 将返回直接与 Google Cloud Storage 兼容的[类 pathlib](https://docs.python.org/3/library/pathlib.html) 对象：
+
+```python
+path = dl_manager.download_and_extract('http://some-website/my_data.zip')
+
+json_path = path / 'data/file.json'
+
+json.loads(json_path.read_text())
+```
+
+或者，使用 `tf.io.gfile` API 而非内置功能进行文件操作：
+
+- `open` -&gt; `tf.io.gfile.GFile`
+- `os.rename` -&gt; `tf.io.gfile.rename`
+- ...
+
+Pathlib 应优先于 `tf.io.gfile`（请参阅[原因](https://www.tensorflow.org/datasets/common_gotchas#prefer_to_use_pathlib_api)）。
+
+#### <a>额外依赖项</a>
+
+某些数据集仅在生成期间需要额外 Python 依赖项。例如，SVHN 数据集会使用 `scipy` 来加载某些数据。
+
+如果要将数据集添加到 TFDS 存储库中，请使用 `tfds.core.lazy_imports` 以控制 `tensorflow-datasets` 软件包的大小。用户将仅在需要时安装额外依赖项。
+
+要使用 `lazy_imports`，请执行以下操作：
+
+- 将数据集的条目添加到 <a><code>setup.py</code></a> 的 `DATASET_EXTRAS` 中。这样一来，用户就可以执行诸如 `pip install 'tensorflow-datasets[svhn]'` 来安装额外依赖项。
+- 将要导入的条目添加到 [`LazyImporter`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib.py) 和 [`LazyImportsTest`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib_test.py)。
+- 使用 `tfds.core.lazy_imports` 在您的 `DatasetBuilder` 中访问依赖项（例如，`tfds.core.lazy_imports.scipy`）。
+
+#### 损坏的数据
+
+某些数据集不是完全干净，包含一些损坏的数据（例如，图像在 JPEG 文件中，但有些是无效的 JPEG）。应跳过这些样本，但在数据集描述中要注明舍弃了多少样本及其原因。
+
+### 数据集配置/变体 (tfds.core.BuilderConfig)
+
+某些数据集可能具有多种变体，或在数据预处理和磁盘写入方式方面具有多种选项。例如，[cycle_gan](https://www.tensorflow.org/datasets/catalog/cycle_gan) 为每个对象对（`cycle_gan/horse2zebra`、`cycle_gan/monet2photo` 等）都提供了一个配置。
+
+这可通过 `tfds.core.BuilderConfig` 实现：
+
+1. 将您的配置对象定义为 `tfds.core.BuilderConfig` 的子类。例如 `MyDatasetConfig`。
+
+    ```python
+    @dataclasses.dataclass
+    class MyDatasetConfig(tfds.core.BuilderConfig):
+      img_size: Tuple[int, int] = (0, 0)
+    ```
+
+    注：必须使用默认值，原因请参见 https://bugs.python.org/issue33129。
+
+2. 在 `MyDataset` 中定义 `BUILDER_CONFIGS = []` 类成员，该成员列出数据集公开的 `MyDatasetConfig`。
+
+    ```python
+    class MyDataset(tfds.core.GeneratorBasedBuilder):
+      VERSION = tfds.core.Version('1.0.0')
+      # pytype: disable=wrong-keyword-args
+      BUILDER_CONFIGS = [
+          # `name` (and optionally `description`) are required for each config
+          MyDatasetConfig(name='small', description='Small ...', img_size=(8, 8)),
+          MyDatasetConfig(name='big', description='Big ...', img_size=(32, 32)),
+      ]
+      # pytype: enable=wrong-keyword-args
+    ```
+
+    注：必须使用 `# pytype: disable=wrong-keyword-args`，原因是数据类继承的 [Pytype 错误](https://github.com/google/pytype/issues/628)。
+
+3. 在 `MyDataset` 中使用 `self.builder_config` 配置数据生成（例如 `shape=self.builder_config.img_size`）。这可能包括在 `_info()` 中设置不同的值，或更改下载数据的访问权限。
+
+注：
+
+- 每个配置都具有唯一的名称。配置的完全限定名称为 `dataset_name/config_name`（例如 `coco/2017`）。
+- 如果未指定，将使用 `BUILDER_CONFIGS` 中的第一个配置（例如 `tfds.load('c4')` 默认值为 `c4/en`）
+
+请参阅 [`anli`](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/text/anli.py#L69) 以查看使用 `BuilderConfig` 的数据集样本。
+
+### 版本
+
+版本有两种不同含义：
+
+- “外部”原始数据版本：例如 COCO v2019、v2017 等
+- “内部”TFDS 代码版本：例如，重命名 `tfds.features.FeaturesDict` 中的特征、修正 `_generate_examples` 中的错误
+
+要更新数据集，请执行以下操作：
+
+- For "external" data update: Multiple users may want to access a specific year/version simultaneously. This is done by using one `tfds.core.BuilderConfig` per version (e.g. `coco/2017`, `coco/2019`) or one class per version (e.g. `Voc2007`, `Voc2012`).
+- 对于“内部”代码更新：用户仅下载最新版本。任何代码更新都应按照[语义化版本控制](https://www.tensorflow.org/datasets/datasets_versioning#semantic)提高 `VERSION` 类特性（例如从 `1.0.0` 到 `VERSION = tfds.core.Version('2.0.0')`）。
+
+### 添加要注册的导入
+
+不要忘记将数据集模块导入到项目 `__init__` 中，以在 `tfds.load`、`tfds.builder` 中自动注册。
+
+```python
+import my_project.datasets.my_dataset  # Register MyDataset
+
+ds = tfds.load('my_dataset')  # MyDataset available
+```
+
+例如，如果您要向 `tensorflow/datasets` 贡献数据集，请将模块导入添加到其子目录的 `__init__.py`（例如 [`image/__init__.py`](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)）中。
+
+### 检查有无常见实现问题
+
+请检查有无[常见实现问题](https://www.tensorflow.org/datasets/common_gotchas)。
+
+## 测试您的数据集
+
+### 下载并准备：`tfds build`
+
+要生成数据集，请从 `my_dataset/` 目录运行 `tfds build`：
+
+```sh
 import tensorflow as tf
 from tensorflow_datasets import my_dataset
 import tensorflow_datasets.testing as tfds_test
@@ -472,5 +411,64 @@ if __name__ == "__main__":
   tfds_test.test_main()
 ```
 
-您可以在继续实现 `MyDataset` 的同时运行测试。
-如果您完成了上述所有步骤，则应该可以通过测试。
+Some useful flags for development:
+
+- `--pdb`：如果引发异常情况，则进入调试模式。
+- `--overwrite`：如果数据集已经生成，则删除现有文件。
+- `--max_examples_per_split`：仅生成前 X 个样本（默认为 1），而非完整数据集。
+- `--register_checksums`：记录下载网址的校验和。应仅在开发时使用。
+
+有关标志的完整列表，请参阅 [CLI 文档](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset)。
+
+### 校验和
+
+建议记录数据集的校验和以保证确定性，以及帮助编写文档等。可通过使用 `--register_checksums` 生成数据集予以实现（请参阅上一部分内容）。
+
+如果您通过 PyPI 发布数据集，请不要忘记导出 `checksums.tsv` 文件（例如，在 `setup.py` 的 `package_data` 中）。
+
+### 对数据集执行单元测试
+
+`tfds.testing.DatasetBuilderTestCase` 是用于完整训练数据集的基础 `TestCase`。它使用“虚拟数据”作为测试数据来模拟源数据集的结构。
+
+- 测试数据应放置在 `my_dataset/dummy_data/` 目录中，并应模拟下载和提取的源数据集工件。可以手动创建，也可以使用脚本（[示例脚本](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/bccd/dummy_data_generation.py)）自动创建。
+- 确保在测试数据拆分中使用不同的数据，因为如果数据集拆分重叠，测试将失败。
+- **测试数据不应包含任何受版权保护的材料**。如有疑问，请勿使用原始数据集中的材料创建数据。
+
+```python
+import tensorflow_datasets as tfds
+from . import my_dataset
+
+
+class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for my_dataset dataset."""
+  DATASET_CLASS = my_dataset.MyDataset
+  SPLITS = {
+      'train': 3,  # Number of fake train example
+      'test': 1,  # Number of fake test example
+  }
+
+  # If you are calling `download/download_and_extract` with a dict, like:
+  #   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})
+  # then the tests needs to provide the fake output paths relative to the
+  # fake data directory
+  DL_EXTRACT_RESULT = {
+      'name1': 'path/to/file1',  # Relative to my_dataset/dummy_data dir.
+      'name2': 'file2',
+  }
+
+
+if __name__ == '__main__':
+  tfds.testing.test_main()
+```
+
+运行以下命令以测试数据集。
+
+```sh
+python my_dataset_test.py
+```
+
+## 向我们发送反馈
+
+我们一直在努力改进数据集创建工作流，但只有在我们意识到这些问题的情况下才能这样做。您在创建数据集时遇到了哪些问题或错误？是否有部分令人困惑，或者第一次没有运行？
+
+请在 [GitHub](https://github.com/tensorflow/datasets/issues) 上分享您的反馈。
