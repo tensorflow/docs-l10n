@@ -70,7 +70,7 @@ def _split_generators(self, dl_manager):
 所有数据集都作为可以处理大多数样板的 `tfds.core.DatasetBuilder` 的子类实现。它支持：
 
 - 可以在单台计算机上生成的中小型数据集（本教程）。
-- Very large datasets which require distributed generation (using [Apache Beam](https://beam.apache.org/), see our [huge dataset guide](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset))
+- 需要分布式生成的特大型数据集（使用 [Apache Beam](https://beam.apache.org/)，请参阅我们的[大型数据集指南](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset)）。
 
 以下是基于 `tfds.core.GeneratorBasedBuilder` 的数据集构建器的最简单示例：
 
@@ -364,7 +364,7 @@ Pathlib 应优先于 `tf.io.gfile`（请参阅[原因](https://www.tensorflow.or
 
 要更新数据集，请执行以下操作：
 
-- For "external" data update: Multiple users may want to access a specific year/version simultaneously. This is done by using one `tfds.core.BuilderConfig` per version (e.g. `coco/2017`, `coco/2019`) or one class per version (e.g. `Voc2007`, `Voc2012`).
+- 对于“外部”数据更新：可能同时会有多个用户希望访问特定的年份/版本。这可以通过对每个版本使用一个 `tfds.core.BuilderConfig`（例如 `coco/2017`、`coco/2019`）或对每个版本使用一个类（例如 `Voc2007`、`Voc2012`）来实现。
 - 对于“内部”代码更新：用户仅下载最新版本。任何代码更新都应按照[语义化版本控制](https://www.tensorflow.org/datasets/datasets_versioning#semantic)提高 `VERSION` 类特性（例如从 `1.0.0` 到 `VERSION = tfds.core.Version('2.0.0')`）。
 
 ### 添加要注册的导入
@@ -411,7 +411,7 @@ if __name__ == "__main__":
   tfds_test.test_main()
 ```
 
-Some useful flags for development:
+一些适用于开发的实用标志：
 
 - `--pdb`：如果引发异常情况，则进入调试模式。
 - `--overwrite`：如果数据集已经生成，则删除现有文件。
