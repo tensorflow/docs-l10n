@@ -1,9 +1,8 @@
 # TFX Airflow 教程
 
-[![Python](https://img.shields.io/pypi/pyversions/tfx.svg?style=plastic)](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)
-[![PyPI](https://badge.fury.io/py/tfx.svg)](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)
+[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[ ](https://github.com/tensorflow/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)
 
-## 简介
+## Introduction
 
 本教程旨在介绍 TensorFlow Extended (TFX) 并帮助您学习创建自己的机器学习流水线。它在本地运行，并在 Jupyter 笔记本中显示与 TFX 和 TensorBoard 集成以及与 TFX 互动的情况。
 
@@ -11,9 +10,9 @@
 
 您将遵循典型的 ML 开发流程，从检查数据集开始，最后得到一个完整且有效的流水线。在此过程中，您将探索用于调试和更新流水线以及衡量性能的方式。
 
-### 了解详情
+### 了解更多
 
-请参阅 [TFX 用户指南](https://www.tensorflow.org/tfx/guide)了解详情
+Please see the [TFX User Guide](https://www.tensorflow.org/tfx/guide) to learn more.
 
 ## 分步说明
 
@@ -27,7 +26,7 @@
 6. [分析模型性能](#step_6_analyzing_model_performance)
 7. [为投入生产环境做好准备](#step_7_ready_for_production)
 
-## 前提条件
+## <a>先决条件</a>
 
 - Linux / MacOS
 - Virtualenv
@@ -75,7 +74,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /u
 
 ### MacOS 环境
 
-如果您尚未安装 Python 3 和 Git，可以使用 [Homebrew](https://brew.sh/) 软件包管理器进行安装：
+如果您尚未安装 Python 3 和 Git，可以使用 [Homebrew](https://brew.sh/) 软件包管理器安装它们：
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -125,7 +124,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 - 提取、理解并清理数据
 - 特征工程
-- 训练
+- Training
 - 分析模型性能
 - 不断优化
 - 为投入生产环境做好准备
@@ -136,12 +135,12 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 您将为每个步骤添加的代码通常分为 4 个代码区域：
 
-- 导入
+- imports
 - DAG 配置
 - 从 create_pipeline() 调用返回的列表
 - taxi_utils.py 中的支持代码
 
-在学习本教程时，您需要取消注释当前所执行的教程步骤对应的代码行。这样会添加相应步骤的代码，并更新流水线。在执行此操作时，**我们强烈建议您检查要取消注释的代码**。
+在学习本教程时，您需要取消注释当前所执行的教程步骤对应的代码行。这样会添加相应步骤的代码，并更新流水线。在执行此操作时，我们强烈建议您检查要取消注释的代码。
 
 ## 芝加哥出租车数据集
 
@@ -152,9 +151,9 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 您将使用芝加哥市发布的 [Taxi Trips 数据集](https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew)。
 
-注：本网站提供的应用所使用的数据来自原始源（www.cityofchicago.org，芝加哥市官方网站），但在使用时进行了修改。芝加哥市不对本网站提供的任何数据的内容、准确性、时效性或完整性承担任何责任。本网站提供的数据可能会随时更改。您了解并同意，使用本网站提供的数据须自担风险。
+注：本网站提供的应用所使用的数据来自原始源（www.cityofchicago.org，芝加哥市官方网站），但已经过修改以供使用。芝加哥市对本网站提供的任何数据的内容、准确性、及时性或完整性不做任何声明。本网站提供的数据随时可能更改。使用本网站提供的数据须自负风险。
 
-您可以在 [Google BigQuery](https://cloud.google.com/bigquery/public-data/chicago-taxi) 中[详细了解](https://cloud.google.com/bigquery/)此数据集，并在 [BigQuery 界面](https://bigquery.cloud.google.com/dataset/bigquery-public-data:chicago_taxi_trips)中探索完整的数据集。
+您可以在 [Google BigQuery](https://cloud.google.com/bigquery/) 中详细了解此数据集，并在 [BigQuery 界面](https://bigquery.cloud.google.com/dataset/bigquery-public-data:chicago_taxi_trips)中探索完整的数据集。
 
 ### 模型目标 - 二元分类
 
@@ -162,9 +161,9 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 ## 第 1 步：设置环境
 
-安装脚本（`setup_demo.sh`）会安装 TFX 和 [Airflow](https://airflow.apache.org/)，并配置 Airflow 以使其易于在本教程中使用。
+The setup script (`setup_demo.sh`) installs TFX and [Airflow](https://airflow.apache.org/), and configures Airflow in a way that makes it easy to work with for this tutorial.
 
-在 Shell 中：
+在 shell 中：
 
 ```bash
 cd
@@ -185,7 +184,7 @@ cd ~/tfx/tfx/examples/airflow_workshop/setup
 
 ### Hello World
 
-在 Shell 中：
+在 shell 中：
 
 ```bash
 # Open a new terminal window, and in that window ...
@@ -221,12 +220,12 @@ airflow webserver -p 7070
 
 ![DAG buttons](images/airflow_workshop/airflow_dag_buttons.png)
 
-- 可使用左侧按钮*启用* DAG
-- 进行更改后，可使用右侧按钮*刷新* DAG
-- 可使用右侧按钮*触发* DAG
+- 可使用左侧按钮启用 DAG
+- 进行更改后，可使用右侧按钮刷新 DAG
+- 可使用右侧按钮触发 DAG
 - 点击“taxi”可转到 DAG 的计算图视图
 
-![Graph refresh button](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/graph_refresh_button.png?raw=true)
+![Graph refresh button](images/airflow_workshop/graph_refresh_button.png)
 
 #### Airflow CLI
 
@@ -245,11 +244,11 @@ airflow trigger_dag <your DAG name>
 
 在 DAG 视图中触发流水线后，您可以观察流水线完成处理。当每个组件运行时，DAG 计算图中组件的轮廓颜色会更改，以显示相应状态。当组件完成处理后，其轮廓会变为深绿色，表示已处理完毕。
 
-注：运行时，您需要使用右侧的<em>计算图刷新</em>按钮或刷新页面来查看的更新状态。
+注：运行时，您需要使用右侧的计算图刷新按钮或刷新页面来查看的更新状态。
 
 到目前为止，流水线中只有 CsvExampleGen 组件，因此您需要等待其变为深绿色（约 1 分钟）。
 
-![Setup complete](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step2.png?raw=true)
+![Setup complete](images/airflow_workshop/step2.png)
 
 ## 第 3 步：深入剖析数据
 
@@ -259,14 +258,14 @@ airflow trigger_dag <your DAG name>
 - 查找异常和缺失值
 - 了解每个特征的分布
 
-### 组件
+### Components
 
-![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/examplegen1.png?raw=true) ![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/examplegen2.png?raw=true)
+![Data Components](images/airflow_workshop/examplegen1.png) ![Data Components](images/airflow_workshop/examplegen2.png)
 
-- [ExampleGen](https://www.tensorflow.org/tfx/guide/examplegen) 用于提取并拆分输入数据集。
-- [StatisticsGen](https://www.tensorflow.org/tfx/guide/statsgen) 用于计算数据集的统计信息。
-- [SchemaGen](https://www.tensorflow.org/tfx/guide/schemagen) 用于检查统计信息并创建数据架构。
-- [ExampleValidator](https://www.tensorflow.org/tfx/guide/exampleval) 用于查找数据集中的异常和缺失值。
+- [ExampleGen](https://www.tensorflow.org/tfx/guide/examplegen) 引入并拆分输入数据集。
+- [StatisticsGen](https://www.tensorflow.org/tfx/guide/statsgen) 计算数据集的统计信息。
+- [SchemaGen](https://www.tensorflow.org/tfx/guide/schemagen) 检查统计信息并创建数据架构。
+- [ExampleValidator](https://www.tensorflow.org/tfx/guide/exampleval) 查找数据集中的异常和缺失值。
 
 ### 在编辑器中：
 
@@ -277,44 +276,44 @@ airflow trigger_dag <your DAG name>
 
 - 点击左上角的“DAGs”链接返回 Airflow 中的 DAG 列表页面
 - 点击 taxi DAG 右侧的刷新按钮
-    - 此时，您应该会看到“DAG [taxi] is now fresh as a daisy”
+    - 此时，您应该会看到“DAG [taxi] is now fresh as a daisy”消息
 - 触发 taxi
 - 等待流水线处理完毕
     - 全部变为深绿色
     - 使用右侧的刷新按钮或刷新页面
 
-![Dive into data](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step3.png?raw=true)
+![Dive into data](images/airflow_workshop/step3.png)
 
-### 回到 Jupyter：
+### 返回 Jupyter：
 
 之前，您运行了 `jupyter notebook`，它在浏览器标签页中打开了一个 Jupyter 会话。现在，请返回浏览器中的该标签页。
 
 - 打开 step3.ipynb
 - 按照笔记本进行操作
 
-![Dive into data](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step3notebook.png?raw=true)
+![Dive into data](images/airflow_workshop/step3notebook.png)
 
 ### 更高级的示例
 
-本教程展示的示例仅帮助您入门。如需更高级的示例，请参阅 [TensorFlow Data Validation Colab](https://www.tensorflow.org/tfx/tutorials/data_validation/chicago_taxi)。
+本教程展示的示例仅供入门指导。如需更高级的示例，请参阅 [TensorFlow Data Validation Colab](https://www.tensorflow.org/tfx/tutorials/data_validation/chicago_taxi)。
 
-要详细了解如何使用 TFDV 探索和验证数据集，请参阅[ tensorflow.org 中的示例](https://www.tensorflow.org/tfx/data_validation)。
+要详细了解如何使用 TFDV 探索和验证数据集，请参阅 [tensorflow.org 中的示例](https://www.tensorflow.org/tfx/data_validation)。
 
 ## 第 4 步：特征工程
 
-您可以通过特征工程提高数据的预测质量和/或降低维数。
+您可以通过特征工程提高数据的预测质量和/或降维。
 
 - 特征交叉
 - 词汇
-- 嵌入向量
+- Embeddings
 - PCA
 - 分类编码
 
 使用 TFX 的一个好处是，您只需编写一次转换代码，生成的转换将在训练和应用之间保持一致。
 
-### 组件
+### Components
 
-![Transform](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/transform.png?raw=true)
+![Transform](images/airflow_workshop/transform.png)
 
 - [Transform](https://www.tensorflow.org/tfx/guide/transform) 会对数据集执行特征工程。
 
@@ -327,15 +326,15 @@ airflow trigger_dag <your DAG name>
 
 - 返回 Airflow 中的 DAG 列表页面
 - 点击 taxi DAG 右侧的刷新按钮
-    - 此时，您应该会看到“DAG [taxi] is now fresh as a daisy”
+    - 此时，您应该会看到“DAG [taxi] is now fresh as a daisy”消息
 - 触发 taxi
 - 等待流水线处理完毕
     - 全部变为深绿色
     - 使用右侧的刷新按钮或刷新页面
 
-![Feature Engineering](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step4.png?raw=true)
+![Feature Engineering](images/airflow_workshop/step4.png)
 
-### 回到 Jupyter：
+### 返回 Jupyter：
 
 返回浏览器中的 Jupyter 标签页。
 
@@ -348,16 +347,16 @@ airflow trigger_dag <your DAG name>
 
 ## 第 5 步：训练
 
-使用干净、整洁并经过转换的数据训练 TensorFlow 模型。
+使用干净、整洁并已经过转换的数据训练 TensorFlow 模型。
 
 - 包括来自第 4 步的转换，以便一致地应用它们
-- 将结果保存为 SavedModel 以便投入生产环境
+- 将结果保存为 SavedModel 以便投入正式环境
 - 使用 TensorBoard 呈现并探索训练过程
 - 还要保存 EvalSavedModel 以分析模型的性能
 
-### 组件
+### Components
 
-- [Trainer](https://www.tensorflow.org/tfx/guide/trainer) 会使用 TensorFlow [Estimator](https://github.com/tensorflow/docs/blob/master/site/en/r1/guide/estimators.md) 训练模型
+- [Trainer](https://www.tensorflow.org/tfx/guide/trainer) trains the model using TensorFlow [Estimators](https://github.com/tensorflow/docs/blob/master/site/en/r1/guide/estimators.md)
 
 ### 在编辑器中：
 
@@ -368,41 +367,41 @@ airflow trigger_dag <your DAG name>
 
 - 返回 Airflow 中的 DAG 列表页面
 - 点击 taxi DAG 右侧的刷新按钮
-    - 此时，您应该会看到“DAG [taxi] is now fresh as a daisy”
+    - 此时，您应该会看到“DAG [taxi] is now fresh as a daisy”消息
 - 触发 taxi
 - 等待流水线处理完毕
     - 全部变为深绿色
     - 使用右侧的刷新按钮或刷新页面
 
-![Training a Model](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step5.png?raw=true)
+![Training a Model](images/airflow_workshop/step5.png)
 
-### 回到 Jupyter：
+### 返回 Jupyter：
 
 返回浏览器中的 Jupyter 标签页。
 
 - 打开 step5.ipynb
 - 按照笔记本进行操作
 
-![Training a Model](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step5tboard.png?raw=true)
+![Training a Model](images/airflow_workshop/step5tboard.png)
 
 ### 更高级的示例
 
-本教程展示的示例仅帮助您入门。如需更高级的示例，请参阅 [TensorBoard 教程](https://www.tensorflow.org/tensorboard/r1/summaries)。
+本教程展示的示例仅帮助您入门。如需更高级的示例，请参阅 TensorBoard 教程。
 
 ## 第 6 步：分析模型性能
 
-不仅仅要了解顶级指标。
+除了顶级指标外还要了解更多信息。
 
 - 用户只会体验到模型的查询性能
 - 顶级指标可能会掩盖部分数据切片性能不佳的问题
 - 模型的公平性十分重要
 - 通常，用户或数据的关键子集非常重要，并且可能会很小
-    - 在重要但不常见的条件下的性能
+    - 在不常见的临界条件下的性能
     - 针对关键受众（如意见领袖）的性能
-- 如果要替换目前在生产环境中的模型，首先应确保新模型的性能更优
+- 如果要替换目前在正式环境中的模型，首先应确保新模型的性能更优
 - Evaluator 会告诉 Pusher 组件模型是否正常
 
-### 组件
+### Components
 
 - [Evaluator](https://www.tensorflow.org/tfx/guide/evaluator) 会深入分析训练结果，并确保模型“足够好”，可以推送到生产环境。
 
@@ -415,22 +414,22 @@ airflow trigger_dag <your DAG name>
 
 - 返回 Airflow 中的 DAG 列表页面
 - 点击 taxi DAG 右侧的刷新按钮
-    - 此时，您应该会看到“DAG [taxi] is now fresh as a daisy”
+    - 此时，您应该会看到“DAG [taxi] is now fresh as a daisy”消息
 - 触发 taxi
 - 等待流水线处理完毕
     - 全部变为深绿色
     - 使用右侧的刷新按钮或刷新页面
 
-![Analyzing model performance](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step6.png?raw=true)
+![Analyzing model performance](images/airflow_workshop/step6.png)
 
-### 回到 Jupyter：
+### 返回 Jupyter：
 
 返回浏览器中的 Jupyter 标签页。
 
 - 打开 step6.ipynb
 - 按照笔记本进行操作
 
-![Analyzing model performance](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/step6notebook.png?raw=true)
+![Analyzing model performance](images/airflow_workshop/step6notebook.png)
 
 ### 更高级的示例
 
@@ -449,20 +448,20 @@ airflow trigger_dag <your DAG name>
 - TensorFlow JS
 - TensorFlow Hub
 
-### 组件
+### Components
 
-- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) 会将模型部署到应用基础架构。
+- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) 会将模型部署到应用基础结构。
 
 ### 在编辑器中：
 
-- 在 ~/airflow/dags 中，对两个 `taxi_pipeline.py` 中标有 `Step 7` 的行取消注释
+- 在 ~/airflow/dags 中，对两个 taxi_pipeline.py 中标有 Step 7 的行取消注释
 - 花点时间检查取消注释的代码
 
 ### 在浏览器中：
 
 - 返回 Airflow 中的 DAG 列表页面
 - 点击 taxi DAG 右侧的刷新按钮
-    - 此时，您应该会看到“DAG [taxi] is now fresh as a daisy”
+    - 此时，您应该会看到“DAG [taxi] is now fresh as a daisy”消息
 - 触发 taxi
 - 等待流水线处理完毕
     - 全部变为深绿色
