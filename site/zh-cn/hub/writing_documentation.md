@@ -4,15 +4,15 @@
 
 要向 tfhub.dev 贡献内容，必须提供 Markdown 格式的文档。有关向 tfhub.dev 贡献模型的过程的完整概述，请参阅[贡献模型](contribute_a_model.md)指南。
 
-## Types of Markdown documentation
+## Markdown 文档类型
 
-There are 3 types of Markdown documentation used in tfhub.dev:
+tfhub.dev 中使用了以下 3 种 Markdown 文档类型：
 
 - 发布者 Markdown - 有关发布者的信息（[请参阅 markdown 语法](#publisher)）
 - 模型 Markdown - 有关特定模型及其使用方法的信息（[请参阅 markdown 语法](#model)）
 - 集合 Markdown - 包含有关由发布者定义的模型集合的信息（[请参阅 markdown 语法](#collection)）
 
-## Content organization
+## 内容组织
 
 向 [TensorFlow Hub GitHub](https://github.com/tensorflow/tfhub.dev) 仓库贡献内容时，需要使用以下内容组织：
 
@@ -23,9 +23,9 @@ There are 3 types of Markdown documentation used in tfhub.dev:
 
 发布者 Markdown 不受版本控制，而模型可以具有不同的版本。每个模型版本都需要一个单独的 Markdown 文件，以其描述的版本命名（即 1.md、2.md）。集合 Markdown 有版本控制，但只支持单个版本 (1.md)。
 
-All model versions for a given model should be located in the model directory.
+给定模型的所有模型版本应位于模型目录中。
 
-Below is an illustration on how the Markdown content is organized:
+下图展示了 Markdown 内容的组织方式：
 
 ```
 assets/docs
@@ -68,17 +68,17 @@ challenging benchmark to evaluate image representations.
 
 上面的示例指定了发布者 ID、发布者名称、要使用的图标的路径以及较长的自由格式 markdown 文档。请注意，发布者 ID 应该仅包含小写字母、数字和连字符。
 
-### Publisher name guideline
+### 发布者名称准则
 
-Your publisher name can be your GitHub username or the name of the GitHub organization you manage.
+您的发布者名称既可以是您的 GitHub 用户名，也可以是您所管理的 GitHub 组织的名称。
 
 ## 模型页面 markdown 格式 {:#model}
 
-The model documentation is a Markdown file with some add-on syntax. See the example below for a minimal example or [a more realistic example Markdown file](https://github.com/tensorflow/tfhub.dev/blob/master/examples/docs/tf2_model_example.md).
+模型文档是带有某些附加语法的 Markdown 文件。请参见下文提供的精简示例，或参见更真实的 Markdown 文件示例。
 
-### Example documentation
+### 示例文档
 
-A high-quality model documentation contains code snippets, information how the model was trained and intended usage. You should also make use of model-specific metadata properties [explained below](#metadata) so users can find your models on tfhub.dev faster.
+高质量的模型文档中包含代码段，以及有关如何训练模型和模型预期用途的信息。您还应该使用下述模型特定的元数据属性，以便用户在 tfhub.dev 上更快地找到您的模型。
 
 ```markdown
 # Module google/text-embedding-model/1
@@ -106,16 +106,16 @@ output = model(inputs)
 ```
 ```
 
-### Model deployments and grouping deployments together
+### 模型部署以及将部署分组到一起
 
 tfhub.dev 允许发布 TensorFlow SavedModel 的 TF.js、TFLite 和 Coral 部署。
 
 Markdown 文件的首行应指定部署格式的类型：
 
 - `# Module publisher/model/version` 用于 SavedModel
-- `# Tfjs publisher/model/version` for TF.js deployments
-- `# Lite publisher/model/version` for Lite deployments
-- `# Coral publisher/model/version` for Coral deployments
+- `# Tfjs publisher/model/version` 用于 TF.js 部署
+- `# Lite publisher/model/version` 用于 Lite 部署
+- `# Coral publisher/model/version` 用于 Coral 部署
 
 最好将这些同一概念模型的不同格式显示在 tfhub.dev 上的同一模型页面中。要将给定的 TF.js、TFLite 或 Coral 部署关联至 TensorFlow SavedModel 模型，请指定 parent-model 标记：
 
@@ -123,7 +123,7 @@ Markdown 文件的首行应指定部署格式的类型：
 <!-- parent-model: publisher/model/version -->
 ```
 
-Sometimes you might want to publish one or more deployments without a TensorFlow SavedModel. In that case, you'll need to create a Placeholder model and specify its handle in the `parent-model` tag. The placeholder Markdown is identical to TensorFlow model Markdown, except that the first line is: `# Placeholder publisher/model/version` and it doesn't require the `asset-path` property.
+有时，您可能需要发布一个或多个不含 TensorFlow SavedModel 的部署。这种情况下，您需要创建一个占位符模型，并在 parent-model 标记中指定其句柄。占位符 Markdown 与 TensorFlow 模型 Markdown 基本相同，区别在于其首行为 # Placeholder publisher/model/version 并且不需要 asset-path 属性。
 
 ### 模型 Markdown 特定的元数据属性 {:#metadata}
 
@@ -152,22 +152,22 @@ Encoder of greater-than-word length text trained on a variety of data.
 - `demo`：演示如何使用 TF.js 模型（[posenet](https://tfhub.dev/tensorflow/tfjs-model/posenet/mobilenet/float/075/1/default/1) [示例](https://teachablemachine.withgoogle.com/train/pose)）的网站的 HTTPS URL。
 - `interactive-visualizer`：应嵌入到模型页面上的可视化工具的名称，例如“vision”。通过显示可视化工具，用户能以交互方式探索模型的预测。[interactive_visualizer.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/interactive_visualizer.yaml) 中定义了所有支持的值。
 
-The Markdown documentation types support different required and optional metadata properties:
+Markdown 文档类型支持不同的必选和可选元数据属性：
 
-类型 | Required | Optional
+类型 | 必选 | 可选
 --- | --- | ---
-Publisher |  |
-Collection | task | dataset、language
+发布者 |  |
+集合 | task | dataset、language
 :             :                          : network-architecture                : |  |
-Placeholder | task | dataset、fine-tunable
+占位符 | task | dataset、fine-tunable
 :             :                          : interactive-visualizer、language   : |  |
 :             :                          : license、network-architecture       : |  |
 SavedModel | asset-path、task | colab、dataset
 :             : fine-tunable、format     : interactive-visualizer、language,   : |  |
 :             :                          : license、network-architecture       : |  |
-Tfjs | asset-path, parent-model | colab、demo、interactive-visualizer
-Lite | asset-path, parent-model | colab、interactive-visualizer
-Coral | asset-path, parent-model | colab、interactive-visualizer
+Tfjs | asset-path、parent-model | colab、demo、interactive-visualizer
+Lite | asset-path、parent-model | colab、interactive-visualizer
+Coral | asset-path、parent-model | colab、interactive-visualizer
 
 ### 模型特定的资产内容
 
@@ -206,9 +206,9 @@ tf_js_model.tar.gz
 
 ## 集合页面 markdown 格式 {:#collection}
 
-Collections are a feature of tfhub.dev that enables publishers to bundle related models together to improve user search experience.
+集合是 tfhub.dev 的一项功能，借助集合，发布者可以将相关模型捆绑在一起来改善用户搜索体验。
 
-See the [list of all collections](https://tfhub.dev/s?subtype=model-family) on tfhub.dev.
+请参见 tfhub.dev 上的所有集合的列表。
 
 [github.com/tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) 仓库中集合文件的正确位置为 [assets/docs](https://github.com/tensorflow/tfhub.dev/tree/master/assets/docs)/<b>&lt;发布者名称&gt;</b>/collections/<b>&lt;集合名称&gt;</b>/<b>1</b>.md
 
@@ -234,4 +234,4 @@ evaluated on VTAB. Results can be seen in
 |------------------------------------------------------|
 ```
 
-The example specifies the name of the collection, a short one sentence description, problem domain metadata and free-form markdown documentation.
+该示例指定了集合的名称、简短的一句话描述、问题领域元数据和形式不限的 Markdown 文档。
