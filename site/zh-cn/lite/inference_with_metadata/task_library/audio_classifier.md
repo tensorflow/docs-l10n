@@ -86,6 +86,126 @@ List<Classifications> results = audioClassifier.classify(audioTensor);
 
 请参阅[源代码和 Javadoc](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/audio/classifier/AudioClassifier.java)，了解有关配置 `AudioClassifier` 的更多选项。
 
+## 在 iOS 中运行推断
+
+### 第 1 步：安装依赖项
+
+Task Library 支持使用 CocoaPods 进行安装。请确保您的系统上已安装 CocoaPods。有关说明，请参阅 [CocoaPods 安装指南](https://guides.cocoapods.org/using/getting-started.html#getting-started)。
+
+有关向 Xcode 项目添加 Pod 的详细信息，请参阅 [CocoaPods 指南](https://guides.cocoapods.org/using/using-cocoapods.html)。
+
+在 Podfile 中添加 `TensorFlowLiteTaskAudio` pod。
+
+```
+target 'MyAppWithTaskAPI' do
+  use_frameworks!
+  pod 'TensorFlowLiteTaskAudio'
+end
+```
+
+请确保您的应用捆绑包中存在用于推断的 `.tflite` 模型。
+
+### 第 2 步：使用模型
+
+#### Swift
+
+```swift
+// Imports
+import TensorFlowLiteTaskAudio
+import AVFoundation
+
+// Initialization
+guard let modelPath = Bundle.main.path(forResource: "sound_classification",
+                                            ofType: "tflite") else { return }
+
+let options = AudioClassifierOptions(modelPath: modelPath)
+
+// Configure any additional options:
+// options.classificationOptions.maxResults = 3
+
+let classifier = try AudioClassifier.classifier(options: options)
+
+// Create Audio Tensor to hold the input audio samples which are to be classified.
+// Created Audio Tensor has audio format matching the requirements of the audio classifier.
+// For more details, please see:
+// https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/audio/core/audio_tensor/sources/TFLAudioTensor.h
+let audioTensor = classifier.createInputAudioTensor()
+
+// Create Audio Record to record the incoming audio samples from the on-device microphone.
+// Created Audio Record has audio format matching the requirements of the audio classifier.
+// For more details, please see:
+https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/audio/core/audio_record/sources/TFLAudioRecord.h
+let audioRecord = try classifier.createAudioRecord()
+
+// Request record permissions from AVAudioSession before invoking audioRecord.startRecording().
+AVAudioSession.sharedInstance().requestRecordPermission { granted in
+    if granted {
+        DispatchQueue.main.async {
+            // Start recording the incoming audio samples from the on-device microphone.
+            try audioRecord.startRecording()
+
+            // Load the samples currently held by the audio record buffer into the audio tensor.
+            try audioTensor.load(audioRecord: audioRecord)
+
+            // Run inference
+            let classificationResult = try classifier.classify(audioTensor: audioTensor)
+        }
+    }
+}
+```
+
+#### Objective C
+
+```objc
+// Imports
+#import <TensorFlowLiteTaskAudio/TensorFlowLiteTaskAudio.h>
+#import <AVFoundation/AVFoundation.h>
+
+// Initialization
+NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"sound_classification" ofType:@"tflite"];
+
+TFLAudioClassifierOptions *options =
+    [[TFLAudioClassifierOptions alloc] initWithModelPath:modelPath];
+
+// Configure any additional options:
+// options.classificationOptions.maxResults = 3;
+
+TFLAudioClassifier *classifier = [TFLAudioClassifier audioClassifierWithOptions:options
+                                                                          error:nil];
+
+// Create Audio Tensor to hold the input audio samples which are to be classified.
+// Created Audio Tensor has audio format matching the requirements of the audio classifier.
+// For more details, please see:
+// https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/audio/core/audio_tensor/sources/TFLAudioTensor.h
+TFLAudioTensor *audioTensor = [classifier createInputAudioTensor];
+
+// Create Audio Record to record the incoming audio samples from the on-device microphone.
+// Created Audio Record has audio format matching the requirements of the audio classifier.
+// For more details, please see:
+https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/audio/core/audio_record/sources/TFLAudioRecord.h
+TFLAudioRecord *audioRecord = [classifier createAudioRecordWithError:nil];
+
+// Request record permissions from AVAudioSession before invoking -[TFLAudioRecord startRecordingWithError:].
+[[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+    if (granted) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Start recording the incoming audio samples from the on-device microphone.
+            [audioRecord startRecordingWithError:nil];
+
+            // Load the samples currently held by the audio record buffer into the audio tensor.
+            [audioTensor loadAudioRecord:audioRecord withError:nil];
+
+            // Run inference
+            TFLClassificationResult *classificationResult =
+                [classifier classifyWithAudioTensor:audioTensor error:nil];
+
+        });
+    }
+}];
+```
+
+请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/audio/sources/TFLAudioClassifier.h)，了解有关配置 `TFLAudioClassifier` 的更多选项。
+
 ## 用 Python 运行推断
 
 ### 第 1 步：安装 pip 软件包
