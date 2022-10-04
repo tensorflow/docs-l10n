@@ -54,13 +54,12 @@ tfds new my_dataset
 此命令将生成一个具有以下结构的新 `my_dataset/` 文件夹：
 
 ```sh
-def _split_generators(self, dl_manager):
-  # 相当于 dl_manager.extract(dl_manager.download(urls))
-  dl_paths = dl_manager.download_and_extract({
-      'foo': 'https://example.com/foo.zip',
-      'bar': 'https://example.com/bar.zip',
-  })
-  dl_paths['foo'], dl_paths['bar']
+my_dataset/
+    __init__.py
+    my_dataset.py # Dataset definition
+    my_dataset_test.py # (optional) Test
+    dummy_data/ # (optional) Fake data (used for testing)
+    checksum.tsv # (optional) URL checksums (see `checksums` section).
 ```
 
 在此处搜索 `TODO(my_dataset)` 并进行相应修改。
@@ -124,10 +123,33 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 `_info` 可返回包含[数据集元数据](https://www.tensorflow.org/datasets/overview#access_the_dataset_metadata)的 <code>tfds.core.DatasetInfo</code>。
 
 ```python
-builder._generate_examples(
-    images_dir_path="{extracted_path}/train",
-    labels="{extracted_path}/train_labels.csv",
-)
+def _info(self):
+  return tfds.core.DatasetInfo(
+      builder=self,
+      # Description and homepage used for documentation
+      description="""
+      Markdown description of the dataset. The text will be automatically
+      stripped and dedent.
+      """,
+      homepage='https://dataset-homepage.org',
+      features=tfds.features.FeaturesDict({
+          'image_description': tfds.features.Text(),
+          'image': tfds.features.Image(),
+          # Here, 'label' can be 0-4.
+          'label': tfds.features.ClassLabel(num_classes=5),
+      }),
+      # If there's a common `(input, target)` tuple from the features,
+      # specify them here. They'll be used if as_supervised=True in
+      # builder.as_dataset.
+      supervised_keys=('image', 'label'),
+      # Specify whether to disable shuffling on the examples. Set to False by default.
+      disable_shuffling=False,
+      # Bibtex citation for the dataset
+      citation=r"""
+      @article{my-awesome-dataset-2020,
+               author = {Smith, John},}
+      """,
+  )
 ```
 
 大多数字段均一目了然。以下是一些具体信息：
@@ -145,20 +167,12 @@ builder._generate_examples(
 认情况下，数据集记录在存储时会打乱顺序以使数据集中各个类的分布更加均匀，因为通常属于同一类的记录是连续的。为了指定应按 `_generate_examples` 提供的生成键对数据集进行排序，应将字段 `disable_shuffling` 设置为 `True`。该字段在默认情况下设置为 `False`。
 
 ```python
-def _generate_examples(self, images_dir_path, labels):
-  # 从源文件中读取输入数据
-  for image_file in tf.io.gfile.listdir(images_dir_path):
-    ...
-  with tf.io.gfile.GFile(labels) as f:
-    ...
-
-  # 并以特征字典的方式生成样本
-  for image_id, description, label in data:
-    yield image_id, {
-        "image_description": description,
-        "image": "%s/%s.jpeg" % (images_dir_path, image_id),
-        "label": label,
-    }
+def _info(self):
+  return tfds.core.DatasetInfo(
+    # [...]
+    disable_shuffling=True,
+    # [...]
+  )
 ```
 
 请记住，停用打乱顺序会对性能产生影响，因为将无法并行读取分片。
@@ -390,25 +404,8 @@ ds = tfds.load('my_dataset')  # MyDataset available
 要生成数据集，请从 `my_dataset/` 目录运行 `tfds build`：
 
 ```sh
-import tensorflow as tf
-from tensorflow_datasets import my_dataset
-import tensorflow_datasets.testing as tfds_test
-
-
-class MyDatasetTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = my_dataset.MyDataset
-  SPLITS = {  # 伪造样本中每种分割的期望样本量。
-      "train": 12,
-      "test": 12,
-  }
-  # 如果数据集 `download_and_extract` 有多种来源：
-  DL_EXTRACT_RESULT = {
-      "name1": "path/to/file1",  # 相对于 fake_examples/my_dataset 文件夹的路径。
-      "name2": "file2",
-  }
-
-if __name__ == "__main__":
-  tfds_test.test_main()
+cd path/to/datasets/my_dataset/
+tfds build --register_checksums
 ```
 
 一些适用于开发的实用标志：
