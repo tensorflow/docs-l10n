@@ -117,13 +117,13 @@ TensorFlow Lite 提供适用于 `arm64` 的 Nightly 预构建精选 TF 算子 Co
 
 运行 `pod install` 后，您需要提供一个附加的链接器标志，以将精选 TF 算子框架强制加载到您的项目中。在您的 Xcode 项目中，转到 `Build Settings` -&gt; `Other Linker Flags`，然后添加：
 
-For versions &gt;= 2.9.0:
+对于 &gt;= 2.9.0 的版本：
 
 ```text
 -force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.xcframework/ios-arm64/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
 ```
 
-For versions &lt; 2.9.0:
+对于 &lt; 2.9.0 的版本：
 
 ```text
 -force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
