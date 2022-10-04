@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'mroff' reviewed: '2021-03-09' } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2022-04-15' review_interval: '7 months' } *-->
 
 # 图像的常用签名
 
