@@ -2,7 +2,7 @@
 
 所有 TFDS 数据集都公开了可以在[目录](https://www.tensorflow.org/datasets/catalog/overview)中浏览的各种数据拆分（例如 `'train'`、`'test'`）。
 
-In addition of the "official" dataset splits, TFDS allow to select slice(s) of split(s) and various combinations.
+除了“官方”数据集拆分之外，TFDS 还允许选择拆分的切片和各种组合。
 
 ## Slicing API
 
@@ -37,7 +37,7 @@ train_ds, test_ds = tfds.load('mnist', split=['train', 'test[:50%]'])
 
 ## `tfds.even_splits` 和多主机训练
 
-`tfds.even_splits` generates a list of non-overlapping sub-splits of the same size.
+`tfds.even_splits` 可以生成大小相同的非重叠子拆分列表。
 
 ```python
 # Divide the dataset into 3 even parts, each containing 1/3 of the data
@@ -129,4 +129,4 @@ ds = tfds.load('my_dataset', split=split)
 
 同样，subsplit API 将始终选择相同的样本 `set`，无论平台、架构等如何。这意味着 `set('train[:20%]') == set('train[:10%]') + set('train[10%:20%]')`。
 
-However, the order in which examples are read might **not** be deterministic. This depends on other parameters (e.g. whether `shuffle_files=True`).
+但是，读取样本的顺序可能**不**是确定性的。这取决于其他参数（例如，无论 `shuffle_files=True` 与否）。
