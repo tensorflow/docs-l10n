@@ -20,7 +20,7 @@ $ pip install --user tf-agents[reverb]
 # Use this tag get the matching examples and colabs.
 $ git clone https://github.com/tensorflow/agents.git
 $ cd agents
-$ git checkout v0.13.0
+$ git checkout v0.14.0
 ```
 
 如果您希望将 TF-Agents 与在 pip 依赖项检查中被标记为不兼容的 TensorFlow 或 [Reverb](https://github.com/deepmind/reverb) 版本一起安装，请使用以下模式并自行承担风险。
@@ -74,11 +74,12 @@ TF Agents 包含稳定版本和 Nightly 版本。Nightly 版本通常表现良�
 版本 | 分支/标签 | TensorFlow 版本
 --- | --- | ---
 Nightly 版本 | [master](https://github.com/tensorflow/agents) | tf-nightly
+0.14.0 | [v0.14.0](https://github.com/tensorflow/agents/tree/v0.14.0) | 2.10.0
 0.13.0 | [v0.13.0](https://github.com/tensorflow/agents/tree/v0.13.0) | 2.9.0
 0.12.0 | [v0.12.0](https://github.com/tensorflow/agents/tree/v0.12.0) | 2.8.0
 0.9.0 | [v0.11.0](https://github.com/tensorflow/agents/tree/v0.11.0) | 2.7.0
-0.8.0 | [v0.10.0](https://github.com/tensorflow/agents/tree/v0.10.0) | 2.5.0
-0.9.0 | [v0.9.0](https://github.com/tensorflow/agents/tree/v0.9.0) | 2.6.0
+0.8.0 | [v0.10.0](https://github.com/tensorflow/agents/tree/v0.10.0) | 2.6.0
+0.9.0 | [v0.9.0](https://github.com/tensorflow/agents/tree/v0.9.0) | 2.5.0
 0.8.0 | [v0.8.0](https://github.com/tensorflow/agents/tree/v0.8.0) | 2.5.0
 0.7.1 | [v0.7.1](https://github.com/tensorflow/agents/tree/v0.7.1) | 2.4.0
 0.6.0 | [v0.6.0](https://github.com/tensorflow/agents/tree/v0.6.0) | 2.3.0
