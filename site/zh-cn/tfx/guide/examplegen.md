@@ -501,4 +501,4 @@ evaluator = Evaluator(
       example_splits=['eval1', 'eval2'])
 ```
 
-More details are available in the [CsvExampleGen API reference](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/CsvExampleGen), [FileBasedExampleGen API implementation](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/component.py) and [ImportExampleGen API reference](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/ImportExampleGen).
+有关更多详细信息，请参阅 [CsvExampleGen API 参考](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/CsvExampleGen)、[FileBasedExampleGen API 实现](https://github.com/tensorflow/tfx/blob/master/tfx/components/example_gen/component.py)和 [ImportExampleGen API 参考](https://www.tensorflow.org/tfx/api_docs/python/tfx/v1/components/ImportExampleGen)。
