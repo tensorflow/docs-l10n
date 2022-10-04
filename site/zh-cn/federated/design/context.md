@@ -12,7 +12,7 @@
 
 [execution_context.ExecutionContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/execution_contexts/sync_execution_context.py) 是使用编译函数来编译计算并使用[执行器](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py)来执行计算的 [context_base.Context](execution.md#executor)。
 
-此 API 可定义在使用[执行器](execution.md#executor)执行时应使用的**高级抽象**；[原生](backend.md#native)和 [IREE](backend.md#iree) 后端在此级别集成。
+此 API 定义了在使用[执行器](execution.md#executor)执行时应使用的**高级抽象**；[原生](backend.md#native)后端在此级别集成。
 
 ### `FederatedComputationContext`
 
