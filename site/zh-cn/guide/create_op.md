@@ -219,7 +219,7 @@ REGISTER_GPU(int32);
 // kernel_example.cu.cc
 #ifdef GOOGLE_CUDA
 #define EIGEN_USE_GPU
-#include "example.h"
+#include "kernel_example.h"
 #include "tensorflow/core/util/gpu_kernel_helper.h"
 
 using namespace tensorflow;
