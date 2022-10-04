@@ -2,7 +2,7 @@
 
 [](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[ ](https://github.com/tensorflow/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)
 
-## Introduction
+## 简介
 
 本教程旨在介绍 TensorFlow Extended (TFX) 并帮助您学习创建自己的机器学习流水线。它在本地运行，并在 Jupyter 笔记本中显示与 TFX 和 TensorBoard 集成以及与 TFX 互动的情况。
 
@@ -12,7 +12,7 @@
 
 ### 了解更多
 
-Please see the [TFX User Guide](https://www.tensorflow.org/tfx/guide) to learn more.
+请参阅 [TFX 用户指南](https://www.tensorflow.org/tfx/guide)了解详细信息。
 
 ## 分步说明
 
@@ -124,7 +124,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 - 提取、理解并清理数据
 - 特征工程
-- Training
+- 训练
 - 分析模型性能
 - 不断优化
 - 为投入生产环境做好准备
@@ -135,7 +135,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 您将为每个步骤添加的代码通常分为 4 个代码区域：
 
-- imports
+- 导入
 - DAG 配置
 - 从 create_pipeline() 调用返回的列表
 - taxi_utils.py 中的支持代码
@@ -161,7 +161,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 ## 第 1 步：设置环境
 
-The setup script (`setup_demo.sh`) installs TFX and [Airflow](https://airflow.apache.org/), and configures Airflow in a way that makes it easy to work with for this tutorial.
+安装脚本 (`setup_demo.sh`) 会安装 TFX 和 [Airflow](https://airflow.apache.org/)，并配置 Airflow 以使其易于在本教程中使用。
 
 在 shell 中：
 
@@ -258,7 +258,7 @@ airflow trigger_dag <your DAG name>
 - 查找异常和缺失值
 - 了解每个特征的分布
 
-### Components
+### 组件
 
 ![Data Components](images/airflow_workshop/examplegen1.png) ![Data Components](images/airflow_workshop/examplegen2.png)
 
@@ -305,13 +305,13 @@ airflow trigger_dag <your DAG name>
 
 - 特征交叉
 - 词汇
-- Embeddings
+- 嵌入向量
 - PCA
 - 分类编码
 
 使用 TFX 的一个好处是，您只需编写一次转换代码，生成的转换将在训练和应用之间保持一致。
 
-### Components
+### 组件
 
 ![Transform](images/airflow_workshop/transform.png)
 
@@ -354,9 +354,9 @@ airflow trigger_dag <your DAG name>
 - 使用 TensorBoard 呈现并探索训练过程
 - 还要保存 EvalSavedModel 以分析模型的性能
 
-### Components
+### 组件
 
-- [Trainer](https://www.tensorflow.org/tfx/guide/trainer) trains the model using TensorFlow [Estimators](https://github.com/tensorflow/docs/blob/master/site/en/r1/guide/estimators.md)
+- [Trainer](https://www.tensorflow.org/tfx/guide/trainer) 会使用 TensorFlow [Estimators](https://github.com/tensorflow/docs/blob/master/site/en/r1/guide/estimators.md) 训练模型
 
 ### 在编辑器中：
 
@@ -401,7 +401,7 @@ airflow trigger_dag <your DAG name>
 - 如果要替换目前在正式环境中的模型，首先应确保新模型的性能更优
 - Evaluator 会告诉 Pusher 组件模型是否正常
 
-### Components
+### 组件
 
 - [Evaluator](https://www.tensorflow.org/tfx/guide/evaluator) 会深入分析训练结果，并确保模型“足够好”，可以推送到生产环境。
 
@@ -448,7 +448,7 @@ airflow trigger_dag <your DAG name>
 - TensorFlow JS
 - TensorFlow Hub
 
-### Components
+### 组件
 
 - [Pusher](https://www.tensorflow.org/tfx/guide/pusher) 会将模型部署到应用基础结构。
 
