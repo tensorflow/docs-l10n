@@ -23,7 +23,7 @@ Float16 量化 | 大小缩减至原来的二分之一，GPU | CPU、GPU
 
 ### 动态范围量化
 
-训练后量化最简单的形式是仅将权重从浮点静态量化为整数（具有 8 位精度）：
+动态范围量化是推荐的起点，因为它可以减少内存用量并加快计算速度，而无需提供有代表性的数据集进行校准。这种类型的量化，仅在转换时将权重从浮点静态量化为整数，提供 8 位精度：
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -31,9 +31,7 @@ converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 tflite_quant_model = converter.convert()
 </pre>
 
-推断时，权重从 8 位精度转换为浮点，并使用浮点内核进行计算。此转换会完成一次并缓存，以减少延迟。
-
-为了进一步改善延迟，“动态范围”算子会根据激活的范围将其动态量化为 8 位，并使用 8 位权重和激活执行计算。此优化提供的延迟接近全定点推断。但是，输出仍使用浮点进行存储，因此使用动态范围算子的加速小于全定点计算。
+为了进一步减小推断期间的延迟，“动态范围”算子会根据激活的范围将其动态量化为 8 位，并使用 8 位权重和激活执行计算。此优化提供的延迟接近全定点推断。但是，输出仍使用浮点进行存储，因此使用动态范围算子的加速小于全定点计算。
 
 ### 全整数量化
 
@@ -104,7 +102,7 @@ converter.representative_dataset = representative_dataset&lt;/b&gt;
 tflite_quant_model = converter.convert()
 </pre>
 
-注：为了与原始的全浮点模型具有相同的接口，此 `tflite_quant_model` 不兼容仅支持整数的设备（如 8 位微控制器）和加速器（如 Coral Edge TPU），因为输入和输出仍为浮点。
+Note: This `tflite_quant_model` won't be compatible with integer only devices (such as 8-bit microcontrollers) and accelerators (such as the Coral Edge TPU) because the input and output still remain float in order to have the same interface as the original float only model.
 
 #### 仅整数
 
@@ -190,7 +188,7 @@ tflite_quant_model = converter.convert()
 
 ### 模型准确率
 
-由于权重是在训练后量化的，因此可能会造成准确率损失，对于较小的网络尤其如此。[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&q=quantized){:.external} 为特定网络提供了预训练的完全量化模型。请务必检查量化模型的准确率，以验证准确率的任何下降都在可接受的范围内。有一些工具可以评估 [TensorFlow Lite 模型准确率](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}。
+由于权重是在训练后量化的，可能会造成准确率损失，对于较小的网络尤其如此。[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&q=quantized){:.external} 为特定网络提供了预训练的完全量化模型。请务必检查量化模型的准确率，以验证准确率的任何下降都在可接受的范围内。有一些工具可以评估 [TensorFlow Lite 模型准确率](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}。
 
 另外，如果准确率下降过多，请考虑使用[量化感知训练](https://www.tensorflow.org/model_optimization/guide/quantization/training)。但是，这样做需要在模型训练期间进行修改以添加伪量化节点，而此页面上的训练后量化技术使用的是现有的预训练模型。
 
@@ -204,6 +202,6 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 - 由 int8 补码值表示的逐轴（即逐通道）或逐张量权重，范围为 [-127, 127]，零点等于 0。
 
-- 由 int8 补码值表示的按张量激活/输入，范围为 [-128, 127]，零点范围为 [-128, 127]。
+- Per-tensor activations/inputs represented by int8 two’s complement values in the range [-128, 127], with a zero-point in range [-128, 127].
 
 有关量化方案的详细信息，请参阅我们的[量化规范](./quantization_spec)。对于想要插入 TensorFlow Lite 委托接口的硬件供应商，我们鼓励您实现此规范中描述的量化方案。
