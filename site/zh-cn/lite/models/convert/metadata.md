@@ -64,58 +64,58 @@ TensorFlow Lite 模型可能随附不同的关联文件。例如，自然语言�
 
 就预处理和后处理而言，归一化和量化是两个独立的步骤。详情如下。
 
- | 归一化 | 量化
+ | Normalization | Quantization
 :-: | --- | ---
-\ | **浮动模型**：\ | **浮动模型**：\
-: MobileNet 中分别       : - 平均：127.5 \        : - 零点：0 \        : |  |
-: 针对浮动模型和 : - 标准：127.5 \         : - 缩放：1.0 \          : |  |
-: 量化模型的          : **量化模型**: \     : **量化模型**: \      : |  |
-: 输入图像 : - 平均：127.5 \        : - 零点：128.0 \    : |  |
-: 的参数值          : - 标准：127.5           : - 缩放：0.0078125f \    : |  |
-: 示例。          :                         :                          : |  |
-\ | \ | **浮动模型**
-: \                       : \                       : 不需要量化。\ : |  |
-: \                       : **输入**：如果在训练中   : **量化模型**再预处理/  : |  |
-: \                       : 对输入数据进行了   : 后处理中          : |  |
-: When to invoke?         : 归一化，则需要对     : 可能需要量化， : |  |
-:                         : 推断的输入数据 : 也可能不需要量化。具体取决于   : |  |
-:                         : 执行相应的        : on 输入/输出张量的       : |  |
-:                         : 归一化。\          : 数据类型。\  : |  |
-:                         : **输出**：输出    : - 浮动张量：预处理/     : |  |
-:                         : 数据通常        : 后处理中不需要 : |  |
-:                         : 不进行归一化。  : 进行量化。量化 : |  |
-:                         :                         : 运算和去量化运算    : |  |
-:                         :                         : 被烘焙到模型     : |  |
-:                         :                         : 计算图中。\                 : |  |
-:                         :                         : - int8/uint8 张量：  : |  |
-:                         :                         : 需要再预处理/后处理    : |  |
-:                         :                         : 中进行量化。     : |  |
-\ | \ | **对输入进行量化**：
+\ | **Float model**: \ | **Float model**: \
+: An example of the       : - mean: 127.5 \        : - zeroPoint: 0 \        : |  |
+: parameter values of the : - std: 127.5 \         : - scale: 1.0 \          : |  |
+: input image in          : **Quant model**: \     : **Quant model**: \      : |  |
+: MobileNet for float and : - mean: 127.5 \        : - zeroPoint: 128.0 \    : |  |
+: quant models,           : - std: 127.5           : - scale:0.0078125f \    : |  |
+: respectively.           :                         :                          : |  |
+\ | \ | **Float models** does
+: \                       : \                       : not need quantization. \ : |  |
+: \                       : **Inputs**: If input   : **Quantized model** may  : |  |
+: \                       : data is normalized in   : or may not need          : |  |
+: When to invoke?         : training, the input     : quantization in pre/post : |  |
+:                         : data of inference needs : processing. It depends   : |  |
+:                         : to be normalized        : on the datatype of       : |  |
+:                         : accordingly. \          : input/output tensors. \  : |  |
+:                         : **Outputs**: output    : - float tensors: no     : |  |
+:                         : data will not be        : quantization in pre/post : |  |
+:                         : normalized in general.  : processing needed. Quant : |  |
+:                         :                         : op and dequant op are    : |  |
+:                         :                         : baked into the model     : |  |
+:                         :                         : graph. \                 : |  |
+:                         :                         : - int8/uint8 tensors:   : |  |
+:                         :                         : need quantization in     : |  |
+:                         :                         : pre/post processing.     : |  |
+\ | \ | **Quantize for inputs**:
 : \                       : \                       : \                        : |  |
-: 公式                 : normalized_input =      : q = f / 缩放 +          : |  |
-:                         : (输入 - 平均) / 标准    : 零点 \              : |  |
-:                         :                         : **对输出进行         : |  |
-:                         :                         : 去量化**：\            : |  |
-:                         :                         : f = (q - 零点) *    : |  |
-:                         :                         : 缩放                    : |  |
-\ | 由模型创建者填充 | 由 TFLite 转换器
-: 参数位于           : 并存储在模型     : 自动填充，并    : |  |
-: 什么位置              : 元数据中，作为            : 存储在 tflite 模型   : |  |
-:                         : `NormalizationOptions`  : 文件中。                  : |  |
-如何获得 | 通过 | 通过 TFLite
-: 参数？            : `MetadataExtractor` API : `Tensor` API [1] 或      : |  |
-:                         : [2]                     : 通过              : |  |
+: Formula                 : normalized_input =      : q = f / scale +          : |  |
+:                         : (input - mean) / std    : zeroPoint \              : |  |
+:                         :                         : **Dequantize for         : |  |
+:                         :                         : outputs**: \            : |  |
+:                         :                         : f = (q - zeroPoint) *    : |  |
+:                         :                         : scale                    : |  |
+\ | Filled by model creator | Filled automatically by
+: Where are the           : and stored in model     : TFLite converter, and    : |  |
+: parameters              : metadata, as            : stored in tflite model   : |  |
+:                         : `NormalizationOptions`  : file.                    : |  |
+How to get the | Through the | Through the TFLite
+: parameters?             : `MetadataExtractor` API : `Tensor` API [1] or      : |  |
+:                         : [2]                     : through the              : |  |
 :                         :                         : `MetadataExtractor` API  : |  |
 :                         :                         : [2]                      : |  |
-浮动和量化 | 是，浮点和量化 | 否，浮动模型
-: 模型是否共享相同的   : 模型使用相同的   : 不需要量化。   : |  |
-: 值？                  : 归一化           :                          : |  |
-:                         : 参数              :                          : |  |
-TFLite 代码 | \ | \
-: 生成器或 Android    : 是                     : 是                      : |  |
-: Studio 机器学习绑定       :                         :                          : |  |
-: 是否会在数据处理过程中  :                         :                          : |  |
-: 自动生成参数？  :                         :                          : |  |
+Do float and quant | 是，浮点和量化 | No, the float model does
+: models share the same   : models have the same    : not need quantization.   : |  |
+: value?                  : Normalization           :                          : |  |
+:                         : parameters              :                          : |  |
+Does TFLite Code | \ | \
+: generator or Android    : Yes                     : Yes                      : |  |
+: Studio ML binding       :                         :                          : |  |
+: automatically generate  :                         :                          : |  |
+: it in data processing?  :                         :                          : |  |
 
 [1] [TensorFlow Lite Java API](https://github.com/tensorflow/tensorflow/blob/09ec15539eece57b257ce9074918282d88523d56/tensorflow/lite/java/src/main/java/org/tensorflow/lite/Tensor.java#L73) 和 [TensorFlow Lite C++ API](https://github.com/tensorflow/tensorflow/blob/09ec15539eece57b257ce9074918282d88523d56/tensorflow/lite/c/common.h#L391)。<br> [2] [Metadata Extractor 库](../guide/codegen.md#read-the-metadata-from-models)
 
@@ -290,7 +290,7 @@ Android Studio 还支持通过 [Android Studio 机器学习绑定功能](https:/
 
 ### FlatBuffers 文件标识
 
-在符合规则的情况下，语义化版本控制能够保证兼容性，但无法指示真实版本的不兼容性。当 MAJOR 编号增大时，不一定表示向后兼容性被破坏。因此，我们使用 [FlatBuffers 文件标识](https://google.github.io/flatbuffers/md__schemas.html) ([file_identifiler](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L61)) 来表示元数据模式的真实兼容性。文件标识符长度为 4 个字符。该长度对于特定元数据模式是固定的，不支持用户更改。如果出于某种原因必须破坏元数据模式的向后兼容性，则 file_identifier 将增大（例如从“M001”变为“M002”）。与 metadata_version 相比，file_identifiler 的预期变更频率要低得多。
+Semantic versioning guarantees the compatibility if following the rules, but it does not imply the true incompatibility. When bumping up the MAJOR number, it does not necessarily mean the backward compatibility is broken. Therefore, we use the [Flatbuffers file identification](https://google.github.io/flatbuffers/md__schemas.html), [file_identifier](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L61), to denote the true compatibility of the metadata schema. The file identifier is exactly 4 characters long. It is fixed to a certain metadata schema and not subject to change by users. If the backward compatibility of the metadata schema has to be broken for some reason, the file_identifier will bump up, for example, from “M001” to “M002”. File_identifier is expected to be changed much less frequently than the metadata_version.
 
 ### 所需元数据解析器最低版本
 
@@ -322,7 +322,7 @@ public MetadataExtractor(ByteBuffer buffer);
 
 `ByteBuffer` 在 `MetadataExtractor` 对象的整个生命周期中必须保持不变。如果模型元数据的 FlatBuffers 文件标识符与元数据解析器的标识符不匹配，则初始化可能会失败。请参阅[元数据版本控制](#metadata-versioning)，了解更多信息。
 
-在文件标识符匹配的情况下，由于 FlatBuffers 的向前和向后兼容机制，元数据提取器将能成功读取所有由过去和未来模式生成的元数据。但是，来自未来模式的字段不能被旧的元数据提取器提取。元数据的[所需元数据解析器最低版本](#the-minimum-necessary-metadata-parser-version)指示了能够完整读取元数据 FlatBuffers 的元数据解析器的最低版本。您可以使用以下方法来验证是否满足所需元数据解析器最低版本的条件：
+With matching file identifiers, the metadata extractor will successfully read metadata generated from all past and future schema due to the Flatbuffers' forwards and backward compatibility mechanism. However, fields from future schemas cannot be extracted by older metadata extractors. The [minimum necessary parser version](#the-minimum-necessary-metadata-parser-version) of the metadata indicates the minimum version of metadata parser that can read the metadata Flatbuffers in full. You can use the following method to verify if the minimum necessary parser version condition is met:
 
 ```java
 public final boolean isMinimumParserVersionSatisfied();
