@@ -13,9 +13,9 @@
 - Hexagon 682
     - SoC 示例：Snapdragon 835
 - Hexagon 685
-    - SoC 示例：Snapdragon 845、Snapdragon 710、QCS605、QCS603
+    - SoC examples: Snapdragon 845, Snapdragon 710, QCS410, QCS610, QCS605, QCS603
 - Hexagon 690
-    - SoC 示例：Snapdragon 855、QCS610、QCS410、RB5
+    - SoC examples: Snapdragon 855, RB5
 
 **支持的模型：**
 
@@ -175,7 +175,7 @@ dependencies {
 
 #### 第 3 步. 包含 C 头
 
-- 头文件“hexagon_delegate.h”既可以从 [GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/hexagon_delegate.h) 下载，也可以从 Hexagon 委托 AAR 提取。
+- The header file "hexagon_delegate.h" can be downloaded from [GitHub](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/hexagon_delegate.h) or extracted from the Hexagon delegate AAR.
 
 #### 第 4 步. 创建委托并初始化 TensorFlow Lite 解释器
 
@@ -222,7 +222,7 @@ TfLiteHexagonTearDown();  // Needed once at end of app/DSP usage.
 ## 常见问题解答
 
 - 委托支持哪些运算？
-    - 请参见[支持的运算和约束](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)的最新列表
+    - See the current list of [supported ops and constraints](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/hexagon/README.md)
 - 启用委托时，如何确定模型是否使用 DSP？
     - 启用委托时会打印两条消息：其中一条指示是否创建了委托，另一条指示有多少节点使用委托运行。<br> `Created TensorFlow Lite delegate for Hexagon.` <br> `Hexagon delegate: X nodes delegated out of Y nodes.`
 - 是否需要支持模型中的所有运算才能运行委托？
