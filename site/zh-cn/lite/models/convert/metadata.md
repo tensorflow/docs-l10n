@@ -1,6 +1,6 @@
 # 向 TensorFlow Lite 模型添加元数据
 
-TensorFlow Lite 元数据为模型描述提供了标准。元数据是与模型功能及其输入/输出信息有关的重要信息来源。元数据包含以下两个部分：231321
+TensorFlow Lite 元数据为模型描述提供了标准。元数据是与模型功能及其输入/输出信息有关的重要信息来源。元数据包含以下两个部分：
 
 - 人员可读部分，用于传达使用模型时的最佳做法，以及
 - 机器可读部分，可供诸如 [TensorFlow Lite Android 代码生成器](../../inference_with_metadata/codegen#generate-code-with-tensorflow-lite-android-code-generator)和 [Android Studio 机器学习绑定特征](../../inference_with_metadata/codegen#generate-code-with-android-studio-ml-model-binding)等代码生成器使用。
@@ -372,5 +372,4 @@ public InputStream getAssociatedFile(String fileName);
 ```c++
 tflite::support::StatusOr<absl::string_view> GetAssociatedFile(
       const std::string& filename) const;
-213qewqewqew
 ```
