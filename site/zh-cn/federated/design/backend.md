@@ -14,7 +14,7 @@
 
 **蓝色**节点由 TFF [核心](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core)提供。
 
-**绿色**、**红色**、**黄色**和**紫色**节点分别由[原生](#native)、[mapreduce](#mapreduce)、[iree](#iree) 和[参考](#reference)后端提供。
+**绿色**、**红色**、**黄色**和**紫色**节点分别由[原生](#native)、[mapreduce](#mapreduce) 和[参考](#reference)后端提供。
 
 **虚线**节点由外部系统提供。
 
@@ -74,21 +74,3 @@ MapReduce 运行时不由 TFF 提供，而应由外部类似 MapReduce 的系统
 ### 上下文
 
 TFF 不提供 MapReduce 上下文。
-
-## IREE
-
-[IREE](https://github.com/google/iree) 是 [MLIR](https://mlir.llvm.org/) 的一个实验性编译器后端。
-
-[iree](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree) 后端包含执行 AST 所需的数据结构、编译器和运行时。
-
-### 编译器
-
-[编译器](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/compiler.py)模块包含将 AST 编译为可以使用 [executor.IreeExecutor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/executor.py) 执行的形式所需的转换。
-
-### 运行时
-
-[executor.IreeExecutor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/executor.py) 是一个[执行器](execution.md#executor)，它通过委托给 IREE 运行时来执行计算。此执行器可与来自 TFF 运行时的其他[执行器](execution.md#executor)组合在一起，以构造代表 IREE 运行时的[执行堆栈](execution.md#execution-stack)。
-
-### 上下文
-
-iree 上下文是使用 iree 编译器和[执行堆栈](execution.md#execution-stack)构造的 [ExecutionContext](context.md#executioncontext)，其中的 [executor.IreeExecutor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/executor.py) 委托给外部 IREE 运行时。
