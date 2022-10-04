@@ -174,7 +174,7 @@ for example_batch, label_batch in dataset:
 
 TF2 使用基于对象的检查点。阅读[检查点迁移指南](./migrating_checkpoints.ipynb)，详细了解如何迁移基于名称的 TF1.x 检查点。另外，请阅读核心 TensorFlow 文档中的[检查点指南](https://www.tensorflow.org/guide/checkpoint)。
 
-保存的模型没有重大兼容性问题。要了解如何将 TF1.x 中的 `SavedModel` 迁移到 TF2，请阅读 <a href="./saved_model.ipynb" data-md-type="link">`SavedModel` 指南</a>。一般而言：
+保存的模型没有重大兼容性问题。要了解如何将 TF1.x 中的 `SavedModel` 迁移到 TF2，请阅读 <a data-md-type="raw_html" href="./saved_model.ipynb">`SavedModel` 指南</a>。一般而言：
 
 - TF1.x saved_model 可以在 TF2 中运行。
 - 如果所有运算均受到支持，TF2 saved_model 可以在 TF1.x 中运行。
