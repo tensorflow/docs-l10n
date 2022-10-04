@@ -10,7 +10,7 @@
 
 您可以通过 XLA 的客户端 API 创建代表自定义调用的 HLO 指令。在撰写本文时，尚未通过 TensorFlow 公开此功能。
 
-例如，以下代码使用自定义调用在 CPU 上计算 `A[i] = B[i % 128] + C[i]`。（当然，您可以并且应当使用常规 HLO 进行此操作。）
+例如，以下代码使用自定义调用来计算 `A[i] = B[i % 128]
 
 ```c++
 #include "tensorflow/compiler/xla/client/xla_builder.h"
@@ -19,12 +19,12 @@
 void do_it() {
   xla::XlaBuilder b("do_it");
   xla::XlaOp param0 =
-      xla::Parameter(0, xla::ShapeUtil::CreateShape(F32, {128}), "p0");
+      xla::Parameter(&b, 0, xla::ShapeUtil::MakeShape(xla::F32, {128}), "p0");
   xla::XlaOp param1 =
-      xla::Parameter(1, xla::ShapeUtil::CreateShape(F32, {2048}), "p1");
+      xla::Parameter(&b, 1, xla::ShapeUtil::MakeShape(xla::F32, {2048}), "p1");
   xla::XlaOp custom_call =
       xla::CustomCall(&b, "do_custom_call", /*operands=*/{param0, param1},
-                      /*output_shape=*/ShapeUtil::CreateShape(F32, {2048}));
+                      /*shape=*/xla::ShapeUtil::MakeShape(xla::F32, {2048}));
 }
 
 void do_custom_call(void* out, const void** in) {
@@ -48,7 +48,7 @@ GPU 自定义调用框架与 CPU 上的框架有所不同。下面是一个 CUDA
 void do_it() { /* same implementation as above */ }
 
 __global__ custom_call_kernel(const float* in0, const float* in1, float* out) {
-  size_t idx = threadIdx.x * blockSize.x + gridIdx.x;
+  size_t idx = blockIdx.x * blockDim.x + threadIdx.x;
   out[idx] = in0[idx % 128] + in1[idx];
 }
 
@@ -58,8 +58,8 @@ void do_custom_call(CUstream stream, void** buffers,
   const float* in1 = reinterpret_cast<const float*>(buffers[1]);
   float* out = reinterpret_cast<float*>(buffers[2]);
 
-  const int64 block_dim = 64;
-  const int64 grid_dim = 2048 / block_dim;
+  const int64_t block_dim = 64;
+  const int64_t grid_dim = 2048 / block_dim;
   custom_call_kernel<<<grid_dim, block_dim,
                        /*dynamic_shared_mem_bytes=*/0, stream>>>(in0, in1, out);
 }
@@ -68,7 +68,7 @@ XLA_REGISTER_CUSTOM_CALL_TARGET(do_custom_call, "CUDA");
 
 首先请注意，GPU 自定义调用函数*仍然是在 CPU 上执行的函数*。我们的 `do_custom_call` CPU 函数负责将 GPU 上的工作加入队列。在这里，它会启动 CUDA 内核，但也可以执行其他操作，例如调用 cublas。
 
-`buffers` 是驻留在主机上的指针数组，它包含的每个元素都指向设备（即 GPU）内存。首先是参数，随后是输出值。这与具有两个参数 `ins` 和 `out` 的 CPU 调用惯例明显不同。我们产生分歧的主要原因是为了能够有效处理元组形的输入/输出；请参阅下文。
+此功能仅适用于 GPU 自定义调用；无法为 CPU 自定义调用发出失败信号。
 
 与 CPU 示例中一样，我们已将输入和输出缓冲区的大小硬编码到我们的自定义调用中。但是，与 CPU 情况不同，将缓冲区大小作为运算对象传递给自定义调用将无法正常工作。通常，我们需要 CPU 上可用的缓冲区大小；例如，在启动内核时，我们需要了解要使用的块/网格大小。但是，如果我们将缓冲区大小作为运算对象传递给自定义调用，它们的值将驻留在 GPU 内存中。随后，我们必须在运算开始时执行一个消耗大量资源的同步设备-主机 memcpy 来读取大小。
 
@@ -77,11 +77,63 @@ XLA_REGISTER_CUSTOM_CALL_TARGET(do_custom_call, "CUDA");
 ```c++
 std::string opaque = "...";
 xla::CustomCall(&b, "do_custom_call", /*operands=*/{param0, param1},
-                /*output_shape=*/ShapeUtil::CreateShape(F32, {2048}),
+                /*output_shape=*/xla::ShapeUtil::MakeShape(xla::F32, {2048}),
                 opaque);
 ```
 
 由于 `xla::Shape` 具有协议缓冲区表示，因此您可以将此序列化 proto 存储在 `opaque` 中，并在 GPU 自定义调用中将其反序列化。不过请注意，尽管 `xla::ShapeProto` 不会经常变化，但有时*确实*会变化。检查 git 日志以查看其过去发生的变化。
+
+## 发出错误信号。
+
+如果您的自定义调用遇到错误，您可以通过在 CPU 上为函数使用以下签名来向 XLA 运行时发出错误信号（而不是崩溃或在输出缓冲区中返回废话）：
+
+```c++
+#include "tensorflow/compiler/xla/service/custom_call_status.h"
+
+void do_custom_call(void* out, const void** in, XlaCustomCallStatus* status);
+```
+
+… 在 GPU 上：
+
+```c++
+#include "tensorflow/compiler/xla/service/custom_call_status.h"
+
+void do_custom_call(CUstream stream, void** buffers, const char* opaque,
+                    size_t opaque_len, xla::XlaCustomCallStatus* status);
+```
+
+您可以使用 `XlaCustomCallStatusSetFailure` 发出失败信号，例如：
+
+```c++
+void do_custom_call(void* out, const void** in, XlaCustomCallStatus* status) {
+  // ... do some work.
+
+  if (bad_condition) {
+    char* error_message = "An error occurred";
+    XlaCustomCallStatusSetFailure(status, error_message, strlen(error_message));
+    return;
+  }
+
+  // ... continue.
+}
+```
+
+您也可以使用 `XlaCustomCallStatusSetSuccess` 来指示成功，但 `XlaCustomCallStatus` 默认处于成功状态，因此完全忽略它也会指示成功。
+
+使用具有此签名的自定义调用函数时，您必须使用适当的 API 版本集创建相应的 `custom-call` 运算，例如：
+
+```c++
+xla::CustomCall(&b, "do_custom_call", /*operands=*/{param0, param1},
+                /*output_shape=*/xla::ShapeUtil::MakeShape(F32, {2048}),
+                opaque, /*has_side_effect=*/false,
+                /*output_operand_aliasing=*/{}, /*literal=*/nullptr,
+                /*schedule=*/xla::CustomCallSchedule::SCHEDULE_NONE,
+                /*api_version=*/API_VERSION_STATUS_RETURNING);
+```
+
+注：在将来，所有客户端都需要将其自定义调用函数迁移到新的 API 版本，旧版本将被弃用。对于不会失败的自定义调用，您可以简单地添加新的 `XlaCustomCallStatus*` 参数，然后忽略它。
+
+失败时，不会使用任何自定义调用输出；XLA 运行时将终止计算。HLO 计算无法从错误中恢复（例如通过捕获和处理错误）。
 
 ## 将元组传递给自定义调用
 
@@ -89,6 +141,7 @@ xla::CustomCall(&b, "do_custom_call", /*operands=*/{param0, param1},
 
 ```c++
 using xla::ShapeUtil;
+using xla::F32;
 Shape p0_shape = ShapeUtil::MakeTuple({
     ShapeUtil::MakeShape(F32, {32}),
     ShapeUtil::MakeTuple({
