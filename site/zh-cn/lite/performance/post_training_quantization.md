@@ -102,7 +102,7 @@ converter.representative_dataset = representative_dataset&lt;/b&gt;
 tflite_quant_model = converter.convert()
 </pre>
 
-Note: This `tflite_quant_model` won't be compatible with integer only devices (such as 8-bit microcontrollers) and accelerators (such as the Coral Edge TPU) because the input and output still remain float in order to have the same interface as the original float only model.
+注：此 `tflite_quant_model` 不兼容仅支持整数的设备（如 8 位微控制器）和加速器（如 Coral Edge TPU），因为输入和输出仍为浮点，以便与原始的全浮点模型具有相同的接口。
 
 #### 仅整数
 
@@ -202,6 +202,6 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 - 由 int8 补码值表示的逐轴（即逐通道）或逐张量权重，范围为 [-127, 127]，零点等于 0。
 
-- Per-tensor activations/inputs represented by int8 two’s complement values in the range [-128, 127], with a zero-point in range [-128, 127].
+- 由 int8 补码值表示的按张量激活/输入，范围为 [-128, 127]，零点范围为 [-128, 127]。
 
 有关量化方案的详细信息，请参阅我们的[量化规范](./quantization_spec)。对于想要插入 TensorFlow Lite 委托接口的硬件供应商，我们鼓励您实现此规范中描述的量化方案。
