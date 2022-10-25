@@ -196,7 +196,7 @@ on WASM.
 ##### Inference vs Training
 
 To address the primary use-case for deployment of pre-trained models, the WASM backend development will prioritize
-*inference* over *training* support. See an [up-to-date list](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/src/kernels/all_kernels.ts)
+*inference* over *training* support. See an [up-to-date list](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/src/register_all_kernels.ts)
 of supported ops in WASM and [let us know](https://github.com/tensorflow/tfjs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
 if your model has an unsupported op. For training models, we recommend using the Node (TensorFlow C++) backend or the
 WebGL backend.
