@@ -83,4 +83,4 @@ Android이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미 
 
 ## 텍스트 분류에 대해 자세히 알아보기
 
-- 4개의 스레드가 사용되었습니다.
+- [이 모델을 훈련하기 위한 워드 임베딩 및 튜토리얼](https://www.tensorflow.org/tutorials/text/word_embeddings)
