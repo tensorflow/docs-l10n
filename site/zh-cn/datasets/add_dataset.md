@@ -71,7 +71,7 @@ my_dataset/
 - 可以在单台计算机上生成的中小型数据集（本教程）。
 - 需要分布式生成的特大型数据集（使用 [Apache Beam](https://beam.apache.org/)，请参阅我们的[大型数据集指南](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset)）。
 
-以下是基于 `tfds.core.GeneratorBasedBuilder` 的数据集构建器的最简单示例：
+以下是基于 `tfds.core.GeneratorBasedBuilder` 的数据集构建工具的最简单示例：
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedBuilder):
@@ -114,7 +114,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
       }
 ```
 
-请注意，对于某些特定的数据格式，我们提供了现成的[数据集构建器](https://www.tensorflow.org/datasets/format_specific_dataset_builders)来负责大多数数据处理。
+请注意，对于某些特定的数据格式，我们提供了现成的[数据集构建工具](https://www.tensorflow.org/datasets/format_specific_dataset_builders)来负责大多数数据处理。
 
 我们来详细了解要覆盖的 3 个抽象方法。
 
@@ -164,7 +164,7 @@ def _info(self):
 
 #### 维护数据集顺序
 
-认情况下，数据集记录在存储时会打乱顺序以使数据集中各个类的分布更加均匀，因为通常属于同一类的记录是连续的。为了指定应按 `_generate_examples` 提供的生成键对数据集进行排序，应将字段 `disable_shuffling` 设置为 `True`。该字段在默认情况下设置为 `False`。
+认情况下，数据集记录在存储时会重排以使数据集中各个类的分布更加均匀，因为通常属于同一类的记录是连续的。为了指定应按 `_generate_examples` 提供的生成键对数据集进行排序，应将字段 `disable_shuffling` 设置为 `True`。该字段在默认情况下设置为 `False`。
 
 ```python
 def _info(self):
@@ -175,7 +175,7 @@ def _info(self):
   )
 ```
 
-请记住，停用打乱顺序会对性能产生影响，因为将无法并行读取分片。
+请记住，停用重排会对性能产生影响，因为将无法并行读取分片。
 
 ### `_split_generators`：下载和拆分数据
 
@@ -238,7 +238,7 @@ for filename, fobj in dl_manager.iter_archive('path/to/archive.zip'):
 
 `fobj` 具有与 `with open('rb') as fobj:` 相同的方法（例如 `fobj.read()`）
 
-#### <a>指定数据集拆分</a>
+#### 指定数据集拆分
 
 如果数据集带有预定义的拆分（例如 `MNIST` 具有 `train` 和 `test` 拆分），请保留这些拆分。否则，请仅指定一项 `tfds.Split.TRAIN` 拆分。用户可以使用 [subsplit API](https://www.tensorflow.org/datasets/splits) 动态创建自己的子拆分（例如 `split='train[80%:]'`）。
 
@@ -266,10 +266,10 @@ def _split_generators(self, dl_manager):
 
 此方法通常将读取源数据集工件（例如 CSV 文件）并产生 `(key, feature_dict)` 元组：
 
-- `key`：样本标识符。用于使用 `hash(key)` 确定性地打乱样本顺序，或者在停用打乱顺序时根据键排序（请参阅[维护数据集顺序](#maintain-dataset-order)部分）。应为：
+- `key`：样本标识符。用于使用 `hash(key)` 确定性地重排样本，或者在停用重排时根据键排序（请参阅[维护数据集顺序](#maintain-dataset-order)部分）。应为：
     - **唯一**：如果两个样本使用相同的键，则会引发异常。
     - **确定**：不应取决于 `download_dir`、`os.path.listdir` 顺序等。两次生成数据应产生相同的键。
-    - **可比**：如果停用打乱顺序，将使用键对数据集排序。
+    - **可比**：如果停用重排，将使用键对数据集排序。
 - `feature_dict`：包含样本值的 `dict`。
     - 该结构应与 `tfds.core.DatasetInfo` 中定义的 `features=` 结构相匹配。
     - 复杂数据类型（图像、视频、音频等）将自动编码。
@@ -290,7 +290,7 @@ def _generate_examples(self, images_path, label_path):
       }
 ```
 
-#### <a>文件访问和 <code>tf.io.gfile</code></a>
+#### 文件访问和 <code>tf.io.gfile</code>
 
 为了支持云存储系统，请避免使用 Python 内置 I/O 运算。
 
@@ -312,15 +312,15 @@ json.loads(json_path.read_text())
 
 Pathlib 应优先于 `tf.io.gfile`（请参阅[原因](https://www.tensorflow.org/datasets/common_gotchas#prefer_to_use_pathlib_api)）。
 
-#### <a>额外依赖项</a>
+#### 额外依赖项
 
 某些数据集仅在生成期间需要额外 Python 依赖项。例如，SVHN 数据集会使用 `scipy` 来加载某些数据。
 
-如果要将数据集添加到 TFDS 存储库中，请使用 `tfds.core.lazy_imports` 以控制 `tensorflow-datasets` 软件包的大小。用户将仅在需要时安装额外依赖项。
+如果要将数据集添加到 TFDS 仓库中，请使用 `tfds.core.lazy_imports` 以控制 `tensorflow-datasets` 软件包的大小。用户将仅在需要时安装额外依赖项。
 
 要使用 `lazy_imports`，请执行以下操作：
 
-- 将数据集的条目添加到 <a><code>setup.py</code></a> 的 `DATASET_EXTRAS` 中。这样一来，用户就可以执行诸如 `pip install 'tensorflow-datasets[svhn]'` 来安装额外依赖项。
+- 将数据集的条目添加到 [`setup.py`](https://github.com/tensorflow/datasets/tree/master/setup.py). 的 `DATASET_EXTRAS` 中。这样一来，用户就可以执行诸如 `pip install 'tensorflow-datasets[svhn]'` 来安装额外依赖项。
 - 将要导入的条目添加到 [`LazyImporter`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib.py) 和 [`LazyImportsTest`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib_test.py)。
 - 使用 `tfds.core.lazy_imports` 在您的 `DatasetBuilder` 中访问依赖项（例如，`tfds.core.lazy_imports.scipy`）。
 
@@ -391,7 +391,7 @@ import my_project.datasets.my_dataset  # Register MyDataset
 ds = tfds.load('my_dataset')  # MyDataset available
 ```
 
-例如，如果您要向 `tensorflow/datasets` 贡献数据集，请将模块导入添加到其子目录的 `__init__.py`（例如 [`image/__init__.py`](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)）中。
+例如，如果您要向 `tensorflow/datasets` 贡献数据集，请将模块导入添加到其子目录的 `__init__.py`（例如 [`image/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/__init__.py)）中。
 
 ### 检查有无常见实现问题
 
@@ -408,7 +408,7 @@ cd path/to/datasets/my_dataset/
 tfds build --register_checksums
 ```
 
-一些适用于开发的实用标志：
+Some useful flags for development:
 
 - `--pdb`：如果引发异常情况，则进入调试模式。
 - `--overwrite`：如果数据集已经生成，则删除现有文件。
@@ -427,7 +427,7 @@ tfds build --register_checksums
 
 `tfds.testing.DatasetBuilderTestCase` 是用于完整训练数据集的基础 `TestCase`。它使用“虚拟数据”作为测试数据来模拟源数据集的结构。
 
-- 测试数据应放置在 `my_dataset/dummy_data/` 目录中，并应模拟下载和提取的源数据集工件。可以手动创建，也可以使用脚本（[示例脚本](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/bccd/dummy_data_generation.py)）自动创建。
+- The test data should be put in `my_dataset/dummy_data/` directory and should mimic the source dataset artifacts as downloaded and extracted. It can be created manually or automatically with a script ([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/bccd/dummy_data_generation.py)).
 - 确保在测试数据拆分中使用不同的数据，因为如果数据集拆分重叠，测试将失败。
 - **测试数据不应包含任何受版权保护的材料**。如有疑问，请勿使用原始数据集中的材料创建数据。
 
