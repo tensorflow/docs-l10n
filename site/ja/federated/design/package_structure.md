@@ -24,7 +24,7 @@ Python パッケージは、Python モジュールを構造化する手法です
 
 #### TFF Python パッケージ
 
-[PyPI](https://pypi.org) で配布されている Python [パッケージ](https://pypi.org/project/tensorflow-federated/)です。
+The Python [package](https://pypi.org/project/tensorflow-federated/) distributed on https://pypi.org.
 
 Python パッケージには、[パブリック TFF API](#public-tff-api)と[プライベート TFF API](#private-tff-api)の両方が含まれており、たとえばどの API がパブリックでどれがプライベートかは、*パッケージを調べる*だけではわかりません。
 
@@ -39,12 +39,32 @@ tff.proto.v0.computation_pb2.Computation  # Private TFF API
 
 ### ダイアグラム
 
+#### 概要
+
 ```dot
-<!--#include file="package_structure.dot"-->
+<!--#include file="package_structure_overview.dot"-->
 ```
 
-**緑**ノードは、[GitHub](https://github.com) の [TFF リポジトリ](https://github.com/tensorflow/federated)にあるディレクトリを示し、[パブリック TFF API](#public-tff-api) を使用します。
+#### シミュレーション
 
-**青**ノードは、[パブリック TFF API](#public-tff-api) を構成するパッケージを示します。
+```dot
+<!--#include file="package_structure_simulation.dot"-->
+```
 
-**グレー**ノードは、[パブリック TFF API](#public-tff-api) に含まれないディレクトリまたはパッケージを示します。
+#### 学習
+
+```dot
+<!--#include file="package_structure_learning.dot"-->
+```
+
+#### 分析
+
+```dot
+<!--#include file="package_structure_analytics.dot"-->
+```
+
+#### コア
+
+```dot
+<!--#include file="package_structure_core.dot"-->
+```
