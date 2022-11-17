@@ -32,7 +32,7 @@ TensorFlow Lite for Microcontrollers C++ 库是 [TensorFlow 仓库](https://gith
 
 ### 使用 Arduino 库
 
-If you are using Arduino, the *Hello World* example is included in the `Arduino_TensorFlowLite` Arduino library, which you can manually install in the Arduino IDE and in [Arduino Create](https://create.arduino.cc/).
+如果您使用的是 Arduino，则 *Hello World* 示例包含在 `Arduino_TensorFlowLite` Arduino 库中，您可以在 Arduino IDE 和 [Arduino Create](https://create.arduino.cc/) 中手动安装该库。
 
 添加库后，请转到 `File -> Examples`。应该会在列表底部看到一个名为 `TensorFlowLite:hello_world` 的示例。选择它并点击 `hello_world` 来加载这个示例。然后，您可以保存该示例的副本，并将其用作自己项目的基础。
 
