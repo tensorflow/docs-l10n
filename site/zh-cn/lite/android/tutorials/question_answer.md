@@ -1,6 +1,6 @@
 # 使用 Android 实现问答
 
-![Question answering example app in Android](../../examples/bert_qa/images/screenshot.gif){: .attempt-right width="250px"}
+![Android 中的问题示例应用](../../examples/bert_qa/images/screenshot.gif){: .attempt-right width="250px"}
 
 本教程向您展示如何使用 TensorFlow Lite 构建 Android 应用，以提供以自然语言文本组织的问题的答案。[示例应用](https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android)使用[自然语言 (NL) 的 Task 库](../../inference_with_metadata/task_library/overview#supported_tasks)中的 *BERT 问答器* ([`BertQuestionAnswerer`](../../inference_with_metadata/task_library/bert_question_answerer)) API 来启用问答机器学习模型。此应用是为实体 Android 设备设计的，但也可以在设备模拟器上运行。
 
