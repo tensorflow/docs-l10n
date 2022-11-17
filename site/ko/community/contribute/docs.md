@@ -185,7 +185,7 @@ Colab에서 *File &gt; Download .pynb*를 이용해 노트북 파일을 다운�
 
 ### Colab-GitHub 워크플로
 
-Instead of downloading a notebook file and using a local Git workflow, you can edit and update your forked GitHub repo directly from Google Colab:
+노트북 파일을 다운로드하고 로컬 Git 워크플로를 사용하는 대신 Google Colab에서 직접 분기된 GitHub 리포지토리를 편집하고 업데이트할 수 있습니다.
 
 1. 당신의 Fork <var>username</var>/docs 리포지토리는 <a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">새 브랜치 만들기</a>를 위해 GitHub 웹의 UI를 사용합니다.
 2. 편집할 노트북 파일로 이동합니다.
