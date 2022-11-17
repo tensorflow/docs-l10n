@@ -6,7 +6,7 @@
 
 모델을 빌드하고 변환하는 실행 가능한 엔드 투 엔드 예제는 *Hello World* 예제의 일부인 다음 Colab을 참조하세요.
 
-train_hello_world_model.ipynb
+<a class="button button-primary" href="https://colab.research.google.com/github/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb">train_hello_world_model.ipynb</a>
 
 ## 모델 변환
 
@@ -36,7 +36,12 @@ unsigned int converted_model_tflite_len = 18200;
 
 파일을 생성한 후에는 프로그램에 포함할 수 있습니다. 임베디드 플랫폼에서 메모리 효율을 개선하기 위해 배열 선언을 `const`로 변경하는 것이 중요합니다.
 
-모델을 프로그램에 포함하고 사용하는 방법을 보여주는 예는 <em>Hello World</em> 예제의 <a><code>model.cc</code></a>를 참조하세요.
+<!--
+Removing this link for now because it is broken. Need to update TF example repos. b/244204652
+For an example of how to include and use a model in your program, see
+[`model.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/model.cc)
+in the *Hello World* example.
+-->
 
 ## 모델 아키텍처 및 훈련
 
