@@ -1,8 +1,9 @@
 # 광학 문자 인식(OCR)
 
-광학 문자 인식(OCR)은 컴퓨터 비전과 머신 러닝 기술을 사용하여 이미지에서 문자를 인식하는 프로세스입니다. 이 참조 앱은 TensorFlow Lite를 사용하여 OCR을 수행하는 방법을 보여줍니다. [텍스트 감지 모델](https://tfhub.dev/sayakpaul/lite-model/east-text-detector/fp16/1)과 [텍스트 인식 모델](https://tfhub.dev/tulasiram58827/lite-model/keras-ocr/float16/2)의 조합을 텍스트 문자를 인식하기 위한 OCR 파이프라인으로 사용합니다.
+광학 문자 인식(OCR)은 컴퓨터 비전과 머신러닝 기술을 사용하여 이미지에서 문자를 인식하는 프로세스입니다. 이 참조 앱은 TensorFlow Lite를 사용하여 OCR을 수행하는 방법을 보여줍니다. [텍스트 감지 모델](https://tfhub.dev/sayakpaul/lite-model/east-text-detector/fp16/1)과 [텍스트 인식 모델](https://tfhub.dev/tulasiram58827/lite-model/keras-ocr/float16/2)의 조합을 텍스트 문자를 인식하기 위한 OCR 파이프라인으로 사용합니다.
 
 ## 시작하기
+
 
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
@@ -25,7 +26,7 @@ OCR 작업은 2단계로 나뉘는 경우가 많습니다. 먼저 텍스트 감�
     <tr>
       <th>모델명</th>
       <th>모델 크기</th>
-      <th>장치</th>
+      <th>기기</th>
       <th>CPU</th>
       <th>GPU</th>
     </tr>
@@ -33,20 +34,20 @@ OCR 작업은 2단계로 나뉘는 경우가 많습니다. 먼저 텍스트 감�
   <tr>
     <td><a href="https://tfhub.dev/sayakpaul/lite-model/east-text-detector/fp16/1">텍스트 감지</a></td>
     <td>45.9Mb</td>
-     <td>Pixel 4 (Android 10)</td>
+     <td>Pixel 4(Android 10)</td>
      <td>181.93ms*</td>
      <td>89.77ms*</td>
   </tr>
   <tr>
     <td><a href="https://tfhub.dev/tulasiram58827/lite-model/keras-ocr/float16/2">텍스트 인식</a></td>
     <td>16.8Mb</td>
-     <td>Pixel 4 (Android 10)</td>
+     <td>Pixel 4(Android 10)</td>
      <td>338.33ms*</td>
      <td>해당 없음**</td>
   </tr>
 </table>
 
-* 4개의 스레드가 사용되었습니다.
+* 4 threads used.
 
 ** 이 모델은 실행을 위해 TensorFlow 작업이 필요하기 때문에 GPU 대리자를 사용할 수 없습니다.
 
