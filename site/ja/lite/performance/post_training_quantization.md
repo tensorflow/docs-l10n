@@ -194,8 +194,8 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 表現には以下の2つの主要な部分があります。
 
-- Per-axis (aka per-channel) or per-tensor weights represented by int8 two’s complement values in the range [-127, 127] with zero-point equal to 0.
+- 軸ごと（チャネルごと）またはテンソルごとの重みは、ゼロ点が 0 に等しく、範囲が [-127、127] の int8 の 2 の補数値で表されます。
 
-- Per-tensor activations/inputs represented by int8 two’s complement values in the range [-128, 127], with a zero-point in range [-128, 127].
+- テンソルごとの活性化/入力は、[-128, 127]の範囲のゼロ点、 [-127、127] の範囲の int8 の 2 の補数値で表されます。
 
 量子化スキームの詳細については、[量子化仕様](./quantization_spec)を参照してください。TensorFlow Lite のデリゲートインターフェイスにプラグインするハードウェアベンダーには、ここに説明されている量子化スキームを実装することをお勧めします。
