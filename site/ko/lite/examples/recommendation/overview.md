@@ -80,7 +80,7 @@ Android 이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미
 <table>
   <thead>
     <tr>
-      <th>모델 이름</th>
+      <th>모델명</th>
       <th>모델 크기</th>
       <th>기기</th>
       <th>CPU</th>
@@ -97,7 +97,7 @@ Android 이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미
       </tr>
        <tr>
          <td>Pixel 4</td>
-        <td>0.05ms*</td>
+        <td>0.05ms *</td>
       </tr>
     
     <tr>
