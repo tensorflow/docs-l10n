@@ -13,7 +13,7 @@
 - *包含预处理输入的文本嵌入向量*的 API 可解决相同的任务，但它由两个单独的 SavedModel 实现：
 
     - 一个*预处理程序*，可以在 tf.data 输入流水线中运行并将字符串和其他可变长度数据转换为数值张量，
-    - 一个*编码器*，接受预处理程序的结果并执行嵌入向量计算的可训练部分。
+    - an *encoder* that accepts the results of the preprocessor and performs the trainable part of the embedding computation.
 
     这种拆分允许在馈送到训练循环之前对输入进行异步预处理。特别是，它允许构建可在 [TPU](https://www.tensorflow.org/guide/tpu) 上运行和微调的编码器。
 
