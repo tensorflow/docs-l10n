@@ -66,12 +66,12 @@ my_dataset/
 
 ### データセットの Example
 
-すべてのデータセットは、`tfds.core.GeneratorBasedBuilder`、つまり ほとんどのボイラープレートを処理する `tfds.core.DatasetBuilder` のサブクラスとして実装されます。これは次の項目をサポートします。
+すべてのデータセットには、ほとんどのボイラープレートを処理する `tfds.core.DatasetBuilder` のサブクラスが実装されています。これは以下の項目をサポートします。
 
 - 単一のマシンで生成できる小または中規模のデータセット（このチュートリアル）。
 - 分散型の生成が必要な非常に大規模なデータセット（[Apache Beam](https://beam.apache.org/) を使用。[大規模なデータセットのガイド](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset)をご覧ください）。
 
-以下は、データセットクラスの最小限の Example です。
+以下は、`tfds.core.GeneratorBasedBuilder` に基づく最低限のデータセットビルダーの例です。
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedBuilder):
@@ -113,6 +113,8 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
           'label': 'yes' if img_path.name.startswith('yes_') else 'no',
       }
 ```
+
+特定のデータ形式では、ほとんどのデータ処理を処理できる [データセットビルダー](https://www.tensorflow.org/datasets/format_specific_dataset_builders)が用意されていることに注意してください。
 
 では、上書きする 3 つの抽象メソッドを詳しく見てみましょう。
 
@@ -425,7 +427,7 @@ PyPI を介してデータセットをリリースする場合、忘れずに �
 
 `tfds.testing.DatasetBuilderTestCase` は、データセットを完全に演習するためのベースの `TestCase` です。テストデータとして、ソースデータセットの構造を模倣した「ダミーデータ」が使用されます。
 
-- テストデータは、`my_dataset/dummy_data/` ディレクトリに配置し、ソースデータセットアーチファクトをダウンロードおよび抽出されたとおりに模倣しています。作成は手動のほか、スクリプト（[サンプルスクリプト](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/bccd/dummy_data_generation.py)）を使用して自動的に作成することもできます。
+- テストデータは、`my_dataset/dummy_data/` ディレクトリに配置し、ソースデータセットアーティファクトをダウンロードされ、抽出されたとおりに模倣しています。作成は手動のほか、スクリプト（[サンプルスクリプト](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/bccd/dummy_data_generation.py)）を使用して自動的に作成することもできます。
 - データセット分割が重なっている場合、テストは失敗してしまうため、テストデータ分割に異なるデータが使用されるようにしてください。
 - **テストデータには、著作権で保護された資料を含めてはいけません**。不明な場合は、元のデータセットの資料を使ってデータを作成しないでください。
 
@@ -464,4 +466,6 @@ python my_dataset_test.py
 
 ## フィードバックをお送りください
 
-データセットの作成ワークフローの改善に絶えず努めていますが、問題がわからなければ、改善することはできません。データセットの作成中にどのような問題やエラーが発生しましたか？わかりにくい部分やボイラープレートがありますか？または最初、機能していませんでしたか？[GitHub にフィードバック](https://github.com/tensorflow/datasets/issues)をお送りください。
+データセット作成ワークフローは継続的な改善が進められていますが、問題を認識していなければ、改善することはできません。データセットの作成中にどのような問題またはエラーが発生しましたか？混乱したり、初めて使用したときに機能しなかった部分はありませんでしたか？
+
+フィードバックを [GitHub](https://github.com/tensorflow/datasets/issues) にお送りください。
