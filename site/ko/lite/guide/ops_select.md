@@ -117,6 +117,14 @@ TensorFlow Lite는 `TensorFlowLiteSwift` 또는 `TensorFlowLiteObjC` CocoaPods�
 
 `pod install`을 실행한 후에는 추가 링커 플래그를 제공하여 특정 TF ops 프레임워크를 프로젝트에 강제로 로드해야 합니다. Xcode 프로젝트에서 `Build Settings` -&gt; `Other Linker Flags`로 이동하여 다음을 추가합니다.
 
+For versions &gt;= 2.9.0:
+
+```text
+-force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.xcframework/ios-arm64/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
+```
+
+For versions &lt; 2.9.0:
+
 ```text
 -force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
 ```
