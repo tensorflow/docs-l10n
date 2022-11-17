@@ -427,7 +427,7 @@ PyPI를 통해 데이터세트를 릴리스하는 경우 `checksums.tsv` 파일�
 
 `tfds.testing.DatasetBuilderTestCase`는 데이터세트를 완전히 실행해보기 위한 기본 `TestCase`입니다. 이 때 "더미 예제"를 소스 데이터세트의 구조를 모방한 테스트 데이터로 사용합니다.
 
-- The test data should be put in `my_dataset/dummy_data/` directory and should mimic the source dataset artifacts as downloaded and extracted. It can be created manually or automatically with a script ([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/bccd/dummy_data_generation.py)).
+- 테스트 데이터는 `my_dataset/dummy_data/` 디렉토리에 넣어야 하며 다운로드 및 추출된 소스 데이터세트 아티팩트를 모방해야 합니다. 스크립트([예제 스크립트](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/bccd/dummy_data_generation.py))를 사용하여 이 데이터를 수동 또는 자동으로 생성할 수 있습니다.
 - 데이터세트가 겹치면 테스트가 실패하므로 테스트 데이터 분할에 서로 다른 데이터를 사용해야 합니다.
 - **테스트 데이터에는 저작권이 있는 자료가 포함되어서는 안 됩니다**. 의심스러운 경우, 원래 데이터세트의 자료를 사용하여 데이터를 생성하지 마세요.
 
