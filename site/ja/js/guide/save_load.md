@@ -87,7 +87,7 @@ await model.save('http://model-server.domain/upload')
 
 2 つのファイルの名前は常に上記で指定されたとおりになることに注意してください（名前は関数に組み込まれています）。この [API ドキュメント](https://js.tensorflow.org/api/latest/#tf.io.browserHTTPRequest)には、<a>Flask</a> ウェブフレームワークを使用して <code>save</code> からのリクエストを処理する方法を示す Python コードスニペットが含まれています。
 
-Often you will have to pass more arguments or request headers to your HTTP server (e.g. for authentication or if you want to specify a folder that the model should be saved in). You can gain fine-grained control over these aspects of the requests from `save` by replacing the URL string argument in `tf.io.browserHTTPRequest`. This API affords greater flexibility in controlling HTTP requests.
+多くの場合、HTTP サーバーに追加の引数またはリクエストヘッダーを渡す必要があります（認証、またはモデルを保存するフォルダを指定するため）。`tf.io.browserHTTPRequest` の URL 文字列引数を置き換えることにより、`save` からのリクエストのこれらの側面を細かく制御できます。この API は、HTTP リクエストを制御する際の柔軟性を高めます。
 
 以下に例を示します。
 
@@ -105,7 +105,7 @@ await model.save(tf.io.browserHTTPRequest(
 await model.save('file:///path/to/my-model');
 ```
 
-When running on Node.js we also have direct access to the filesystem and can save models there. The command above will save two files to the `path` specified after the `scheme`.
+Node.js で実行すると、ファイルシステムに直接アクセスしてモデルを保存することもできます。上記のコマンドは、`scheme` の後に指定された `path` に 2 つのファイルを保存します。
 
 1. `[model].json` という名前のテキスト JSON ファイル。これには、以下で説明するトポロジと重みファイルへの参照が含まれます。
 2. `[model].weights.bin` という名前の重み値を含むバイナリファイル。
