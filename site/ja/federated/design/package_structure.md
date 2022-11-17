@@ -24,7 +24,7 @@ Python パッケージは、Python モジュールを構造化する手法です
 
 #### TFF Python パッケージ
 
-The Python [package](https://pypi.org/project/tensorflow-federated/) distributed on https://pypi.org.
+https://pypi.org で配布されている Python [パッケージ](https://pypi.org/project/tensorflow-federated/)です。
 
 Python パッケージには、[パブリック TFF API](#public-tff-api)と[プライベート TFF API](#private-tff-api)の両方が含まれており、たとえばどの API がパブリックでどれがプライベートかは、*パッケージを調べる*だけではわかりません。
 
