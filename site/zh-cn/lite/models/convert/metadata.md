@@ -86,18 +86,18 @@ TensorFlow Lite 模型可能随附不同的关联文件。例如，自然语言�
 :                         : normalized in general.  : processing needed. Quant : |  |
 :                         :                         : op and dequant op are    : |  |
 :                         :                         : baked into the model     : |  |
-:                         :                         : graph. \                 : |  |
+: : : 图表。 \ : |  |
 :                         :                         : - int8/uint8 tensors:   : |  |
 :                         :                         : need quantization in     : |  |
 :                         :                         : pre/post processing.     : |  |
 \ | \ | **Quantize for inputs**:
-: \                       : \                       : \                        : |  |
+: \ : \ : \ : |  |
 : Formula                 : normalized_input =      : q = f / scale +          : |  |
 :                         : (input - mean) / std    : zeroPoint \              : |  |
 :                         :                         : **Dequantize for         : |  |
-:                         :                         : outputs**: \            : |  |
+: : : 输出**: \ : |  |
 :                         :                         : f = (q - zeroPoint) *    : |  |
-:                         :                         : scale                    : |  |
+： ： ： 规模 ： |  |
 \ | Filled by model creator | Filled automatically by
 : Where are the           : and stored in model     : TFLite converter, and    : |  |
 : parameters              : metadata, as            : stored in tflite model   : |  |
@@ -106,11 +106,11 @@ How to get the | Through the | Through the TFLite
 : parameters?             : `MetadataExtractor` API : `Tensor` API [1] or      : |  |
 :                         : [2]                     : through the              : |  |
 :                         :                         : `MetadataExtractor` API  : |  |
-:                         :                         : [2]                      : |  |
+: : : [2] : |  |
 Do float and quant | 是，浮点和量化 | No, the float model does
 : models share the same   : models have the same    : not need quantization.   : |  |
 : value?                  : Normalization           :                          : |  |
-:                         : parameters              :                          : |  |
+： ： 参数 ： ： |  |
 Does TFLite Code | \ | \
 : generator or Android    : Yes                     : Yes                      : |  |
 : Studio ML binding       :                         :                          : |  |
@@ -170,7 +170,7 @@ model_meta.license = ("Apache License. Version 2.0 "
 
 #### 输入/输出信息
 
-本部分介绍如何描述模型的输入和输出签名。自动代码生成器可以使用此元数据创建预处理和后处理代码。要创建有关张量的输入或输出信息，请运行以下代码：
+本节向您展示如何描述模型的输入和输出签名。自动代码生成器可以使用此元数据来创建预处理和后处理代码。要创建有关张量的输入或输出信息：
 
 ```python
 # Creates input info.
