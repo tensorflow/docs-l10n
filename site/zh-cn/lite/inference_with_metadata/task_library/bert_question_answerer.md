@@ -104,6 +104,29 @@ std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, q
 
 请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_question_answerer.h)，了解详细信息。
 
+## 在 Python 中运行推断
+
+### 第 1 步：安装 pip 软件包
+
+```
+pip install tflite-support
+```
+
+### 第 2 步：使用模型
+
+```python
+# Imports
+from tflite_support.task import text
+
+# Initialization
+answerer = text.BertQuestionAnswerer.create_from_file(model_path)
+
+# Run inference
+bert_qa_result = answerer.answer(context, question)
+```
+
+请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/bert_question_answerer.py)，了解有关配置 `BertQuestionAnswerer` 的更多选项。
+
 ## 结果示例
 
 下面是 [ALBERT 模型](https://tfhub.dev/tensorflow/lite-model/albert_lite_base/squadv1/1)回答结果的示例。
