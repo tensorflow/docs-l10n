@@ -150,20 +150,20 @@ TfLiteModelDelete(model);
 
 注意: これらの手順には、XCode v10.1 以降が必要です。
 
-リリースビルドに変更するには:
+リリースビルドに変更するには、以下の手順を実行します。
 
-1. **[Product] &gt; [Scheme] &gt; [Edit Scheme...]** を選択し、[**Run**] を選択して、ビルド設定を編集します。
-2. [**Info**] タブで、[**Build Configuration**] を [**Release**] に変更し、 [**Debug executable**] のチェックを外します。![リリースの設定](../../../images/lite/ios/iosdebug.png)
-3. [**Options**] タブをクリックし、 [**GPU Frame Capture**] を [**Disabled**] に変更し、[**Metal API Validation**] を [**Disabled**] に変更します。 <br>![メタルオプションの設定](../../../images/lite/ios/iosmetal.png)
-4. 64 ビットアーキテクチャのリリース専用ビルドを選択してください。**[Project navigator] &gt; [tflite_camera_example] &gt; [PROJECT] &gt; [your_project_name] &gt; [Build Settings]** で **[Build Active Architecture Only] &gt; [Release]** を **[Yes]** に設定します。![リリース オプションの設定](../../../images/lite/ios/iosrelease.png)
+1. **Product &gt; Scheme &gt; Edit Scheme...** を選択し、**Run** を選択して、ビルド設定を編集します。
+2. **Info** タブで、**Build Configuration** を **Release** に変更し、**Debug executable** のチェックを外します。![リリースの設定](../../../images/lite/ios/iosdebug.png)
+3. **Options** タブをクリックし、**GPU Frame Capture** を **Disabled** に変更し、**Metal API Validation** を **Disabled** に変更します。<br>![メタルオプションの設定](../../../images/lite/ios/iosmetal.png)
+4. 64 ビットアーキテクチャのリリース専用ビルドを選択してください。**Project navigator &gt; tflite_camera_example &gt; PROJECT &gt; your_project_name &gt; Build Settings** で **Build Active Architecture Only &gt; Release** を **Yes** に設定します。![リリース オプションの設定](../../../images/lite/ios/iosrelease.png)
 
 ## 高度な GPU サポート
 
-このセクションでは、デリゲートオプション、入力および出力バッファー、量子化モデルの使用など、iOS の GPU デリゲートの高度な使用法について説明します。
+このセクションでは、デリゲートオプション、入力および出力バッファ、量子化モデルの使用など、iOS の GPU デリゲートの高度な使用法について説明します。
 
 ### iOS のデリゲートオプション
 
-GPU デリゲートのコンストラクターは、[Swift API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/swift/Sources/MetalDelegate.swift)、[Objective-C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/objc/apis/TFLMetalDelegate.h)、[C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/gpu/metal_delegate.h) のオプションの `struct` を受け入れます。初期化子に `nullptr` を渡す（C API）か、または何も渡さない（Objective-C および Swift API）ことにより、デフォルトオプション（上記の基本的な使用例で説明されています）が設定されます。
+GPU デリゲートのコンストラクタは、[Swift API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/swift/Sources/MetalDelegate.swift)、[Objective-C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/objc/apis/TFLMetalDelegate.h)、[C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/gpu/metal_delegate.h) のオプションの `struct` を受け入れます。初期化子に `nullptr` を渡す（C API）か、または何も渡さない（Objective-C および Swift API）ことにより、デフォルトオプション（上記の基本的な使用例で説明されています）が設定されます。
 
 <div>
   <devsite-selector>
@@ -217,7 +217,7 @@ TfLiteDelegate* delegate = TFLGpuDelegateCreate(nullptr);
 
 ヒント: `nullptr` またはデフォルトコンストラクタを使用すると便利ですが、将来デフォルト値が変更された場合に予期しない動作が発生しないように、オプションを明示的に設定する必要があります。
 
-### C++ API を使用した入出力バッファー
+### C++ API を使用した入出力バッファ
 
 GPU での計算では、データが GPU で利用可能である必要があります。この要件は、多くの場合、メモリコピーを実行する必要があることを意味します。かなりの時間がかかる可能性があるため、データが CPU/GPU メモリの境界を超えることは可能な限り避ける必要があります。通常、このような交差は避けられませんが、特殊なケースではどちらか一方を省略できます。
 
@@ -261,7 +261,7 @@ if (interpreter-&gt;Invoke() != kTfLiteOk) return false;
   </devsite-selector>
 </div>
 
-デフォルトの動作を無効にすると、推論出力を GPU メモリから CPU メモリにコピーするには、出力テンソルごとに `Interpreter::EnsureTensorDataIsReadable()` を明示的に呼び出す必要があります。このアプローチは量子化されたモデルでも機能しますが、バッファーが内部の非量子化バッファーにバインドされているため、**float32 データで float32 サイズのバッファー**を使用する必要があります。
+デフォルトの動作を無効にすると、推論出力を GPU メモリから CPU メモリにコピーするには、出力テンソルごとに `Interpreter::EnsureTensorDataIsReadable()` を明示的に呼び出す必要があります。このアプローチは量子化されたモデルでも機能しますが、バッファが内部の非量子化バッファにバインドされているため、**float32 データで float32 サイズのバッファ**を使用する必要があります。
 
 ### 量子化モデル {:#quantized-models}
 
