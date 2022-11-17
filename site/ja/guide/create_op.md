@@ -380,9 +380,9 @@ $ python zero_out_op_test.py
 - [条件チェックと検証](#conditional-checks-and-validation)
 - [演算子の登録](#op-registration)
     - [属性](#attrs)
-    - 属性のタイプ
-    - [Polymorphism](#polymorphism)
-    - [Inputs and outputs](#inputs-and-outputs)
+    - [属性の型](#attr-types)
+    - [ポリモーフィズム](#polymorphism)
+    - [入力と出力](#inputs-and-outputs)
     - [下位互換性](#backwards-compatibility)
 - [GPU のサポート](#gpu-support)
     - [GPU デバイス向けのカーネルのコンパイル](#compiling-the-kernel-for-the-gpu-device)
