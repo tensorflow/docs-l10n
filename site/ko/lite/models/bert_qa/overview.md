@@ -6,6 +6,7 @@ TensorFlow Lite 모델을 사용하여 주어진 구절의 내용을 기반으�
 
 ## 시작하기
 
+
 <img src="images/screenshot.gif" class="attempt-right" style="max-width: 300px">
 
 TensorFlow Lite를 처음 사용하고 Android 또는 iOS로 작업하는 경우, 다음 예제 애플리케이션을 탐색하면 시작하는 데 도움이 됩니다.
@@ -44,9 +45,8 @@ Android/iOS 이외의 플랫폼을 사용 중이거나 [TensorFlow Lite API](htt
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a>
-</td>
-    <td rowspan="3">       100.5Mb</td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a> </td>
+    <td rowspan="3">       100.5 Mb     </td>
     <td>Pixel 3(Android 10)</td>
     <td>123ms *</td>
   </tr>
