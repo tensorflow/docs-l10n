@@ -85,4 +85,4 @@ outputs = m(inputs)</pre> のいずれかを使用します。</td>
   </tr>
 </table>
 
-<p id="compatfootnote">[1] "TF1 compat mode in TF2" refers to the combined   effect of importing TF2 with   <code style="font-size: 12px;" lang="python">import tensorflow.compat.v1 as tf</code>   and running   <code style="font-size: 12px;" lang="python">tf.disable_v2_behavior()</code>  as described in the   <a href="https://www.tensorflow.org/guide/migrate">TensorFlow Migration guide   </a>.</p>
+<p id="compatfootnote">[1] "TF2 の TF1 互換モード" とは、<a href="https://www.tensorflow.org/guide/migrate">TensorFlow 移行ガイド</a>に記載されているように TF2 を <code style="font-size: 12px;" lang="python">import tensorflow.compat.v1 as tf</code> でインポートして <code style="font-size: 12px;" lang="python">tf.disable_v2_behavior()</code> を実行する場合の複合効果を指します。</p>
