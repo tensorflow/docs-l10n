@@ -29,9 +29,9 @@
  | Estimator | Keras | TF2 | TF Datasets | BERT | Kaggle APIs
 --- | --- | --- | --- | --- | --- | ---
 [텍스트 분류](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  |
-[Text classification with Keras](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub) |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |
-[Predicting Movie Review Sentiment with BERT on TF Hub](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |
-[IMDB classification on Kaggle](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png)
+[Keras를 이용한 텍스트 분류](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub) |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |
+[TF Hub에서 BERT를 이용한 영화 리뷰 감성 예측](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |
+[Kaggle에서 IMDB 분류](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  | ![끝난](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png)
 
 ### FastText 임베딩을 사용한 Bangla 작업
 
