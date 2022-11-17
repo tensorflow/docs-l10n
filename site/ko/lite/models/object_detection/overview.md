@@ -186,8 +186,7 @@ Android에서 이 사전 처리를 수행하는 방법을 이해하려면 [예�
 
 예를 들어, 다음 이미지에서 배(모델이 감지하도록 훈련된 객체가 아님)는 '사람'으로 잘못 식별되었습니다. 이는 적절한 컷오프를 선택하여 무시할 수 있는 거짓양성의 예입니다. 이 경우 0.6(또는 60%)의 컷오프는 거짓양성을 수월하게 배제합니다.
 
-
-<img src="images/false_positive.png" alt="Android 예시 스크린 샷" width="30%">
+<img src="images/false_positive.png" width="30%" alt="Android 예시 스크린 샷">
 
 #### 위치
 
