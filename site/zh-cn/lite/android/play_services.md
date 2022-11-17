@@ -105,9 +105,9 @@ Interpreter API 比 Task Library API 提供更多的控制和灵活性。如果 
 dependencies {
 ...
     // Tensorflow Lite dependencies for Google Play services
-    implementation 'com.google.android.gms:play-services-tflite-java:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-java:16.0.1'
     // Optional: include Tensorflow Lite Support Library
-    implementation 'com.google.android.gms:play-services-tflite-support:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-support:16.0.1'
 ...
 }
 ```
@@ -319,7 +319,7 @@ useGpuTask = TfLiteGpu.isGpuDelegateAvailable(context)
 1. 更新项目依赖项以使用来自 Play 服务的 GPU 委托：
 
     ```
-    implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-gpu:16.1.0'
     ```
 
 2. 使用 `setEnableGpuDelegateSupport` 初始化 GPU委托。例如，您可以使用以下代码初始化 `TfLiteVision` 的 GPU 委托：
@@ -329,12 +329,12 @@ useGpuTask = TfLiteGpu.isGpuDelegateAvailable(context)
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">          TfLiteVision.initialize(context, TfLiteInitializationOptions.builder().setEnableGpuDelegateSupport(true).build())
-                        </pre>
+                            </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">          TfLiteVision.initialize(context, TfLiteInitializationOptions.builder().setEnableGpuDelegateSupport(true).build());
-                        </pre>
+                            </pre>
     </section>
     </devsite-selector>
     </div>
@@ -346,12 +346,12 @@ useGpuTask = TfLiteGpu.isGpuDelegateAvailable(context)
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">          val baseOptions = BaseOptions.builder().useGpu().build()
-                        </pre>
+                            </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">          BaseOptions baseOptions = BaseOptions.builder().useGpu().build();
-                        </pre>
+                            </pre>
     </section>
     </devsite-selector>
     </div>
@@ -363,20 +363,20 @@ useGpuTask = TfLiteGpu.isGpuDelegateAvailable(context)
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">        val options =
-                            ObjectDetectorOptions.builder()
-                                .setBaseOptions(baseOptions)
-                                .setMaxResults(1)
-                                .build()
-                        </pre>
+                                ObjectDetectorOptions.builder()
+                                    .setBaseOptions(baseOptions)
+                                    .setMaxResults(1)
+                                    .build()
+                            </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">        ObjectDetectorOptions options =
-                            ObjectDetectorOptions.builder()
-                                .setBaseOptions(baseOptions)
-                                .setMaxResults(1)
-                                .build();
-                        </pre>
+                                ObjectDetectorOptions.builder()
+                                    .setBaseOptions(baseOptions)
+                                    .setMaxResults(1)
+                                    .build();
+                            </pre>
     </section>
     </devsite-selector>
     </div>
@@ -388,7 +388,7 @@ useGpuTask = TfLiteGpu.isGpuDelegateAvailable(context)
 1. 更新项目依赖项以使用来自 Play 服务的 GPU 委托：
 
     ```
-    implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-gpu:16.1.0'
     ```
 
 2. 在 TFlite 初始化中启用 GPU 委托选项：
@@ -398,18 +398,18 @@ useGpuTask = TfLiteGpu.isGpuDelegateAvailable(context)
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">        TfLite.initialize(context,
-                  TfLiteInitializationOptions.builder()
-                   .setEnableGpuDelegateSupport(true)
-                   .build())
-                </pre>
+                      TfLiteInitializationOptions.builder()
+                       .setEnableGpuDelegateSupport(true)
+                       .build())
+                    </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">        TfLite.initialize(context,
-                  TfLiteInitializationOptions.builder()
-                   .setEnableGpuDelegateSupport(true)
-                   .build());
-                </pre>
+                      TfLiteInitializationOptions.builder()
+                       .setEnableGpuDelegateSupport(true)
+                       .build());
+                    </pre>
     </section>
     </devsite-selector>
     </div>
@@ -421,18 +421,18 @@ useGpuTask = TfLiteGpu.isGpuDelegateAvailable(context)
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">
-                          val interpreterOption = InterpreterApi.Options()
-                           .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-                           .addDelegateFactory(GpuDelegateFactory())
-                        </pre>
+                              val interpreterOption = InterpreterApi.Options()
+                               .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+                               .addDelegateFactory(GpuDelegateFactory())
+                            </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">
-                          Options interpreterOption = InterpreterApi.Options()
-                            .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-                            .addDelegateFactory(new GpuDelegateFactory());
-                        </pre>
+                              Options interpreterOption = InterpreterApi.Options()
+                                .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+                                .addDelegateFactory(new GpuDelegateFactory());
+                            </pre>
     </section>
     </devsite-selector>
     </div>
