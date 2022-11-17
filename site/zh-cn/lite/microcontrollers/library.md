@@ -32,7 +32,7 @@ TensorFlow Lite for Microcontrollers C++ 库是 [TensorFlow 仓库](https://gith
 
 ### 使用 Arduino 库
 
-如果您使用的是 Arduino，则 *Hello World* 示例包含在 `Arduino_TensorFlowLite` 中。您可以从 Arduino IDE 和 [Arduino Create](https://create.arduino.cc/) 中下载 Arduino 库。
+If you are using Arduino, the *Hello World* example is included in the `Arduino_TensorFlowLite` Arduino library, which you can manually install in the Arduino IDE and in [Arduino Create](https://create.arduino.cc/).
 
 添加库后，请转到 `File -> Examples`。应该会在列表底部看到一个名为 `TensorFlowLite:hello_world` 的示例。选择它并点击 `hello_world` 来加载这个示例。然后，您可以保存该示例的副本，并将其用作自己项目的基础。
 
@@ -40,7 +40,7 @@ TensorFlow Lite for Microcontrollers C++ 库是 [TensorFlow 仓库](https://gith
 
 TensorFlow Lite for Microcontrollers 能够使用 `Makefile` 生成包含所有必要源文件的独立项目。目前支持的环境有 Keil、Make 和 Mbed。
 
-要使用 Make 生成这些项目，请克隆 [TensorFlow 仓库{/ a0}，然后运行以下命令：](http://github.com/tensorflow/tensorflow)
+要使用 Make 生成这些项目，请克隆 [TensorFlow 仓库](http://github.com/tensorflow/tensorflow)，然后运行以下命令：
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile generate_projects
@@ -105,8 +105,6 @@ make -f tensorflow/lite/micro/tools/make/Makefile TAGS=<subdirectory_name> gener
 您可以通过创建新的子文件夹来添加自己的优化。我们鼓励对新的优化实现进行拉取请求。
 
 ## 生成 Arduino 库
-
-通过 Arduino IDE 的库管理器可以获得 Arduino 库的 Nightly 版本。
 
 如果需要生成库的新版本，您可以从 TensorFlow 仓库中运行以下脚本：
 
