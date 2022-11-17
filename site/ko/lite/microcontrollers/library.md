@@ -6,7 +6,7 @@
 
 ## 파일 구조
 
-[`micro`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro) 루트 디렉토리는 비교적 간단한 구조를 가지고 있습니다. 그러나, 광범위한 TensorFlow 리포지토리 내에 있으므로 다양한 임베디드 개발 환경 내에서 독립적으로 관련 소스 파일을 제공하는 스크립트와 사전 생성된 프로젝트 파일을 마련했습니다.
+[`micro`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro) 루트 디렉터리는 비교적 간단한 구조를 가지고 있습니다. 그러나, 광범위한 TensorFlow 리포지토리 내에 있으므로 다양한 임베디드 개발 환경 내에서 독립적으로 관련 소스 파일을 제공하는 스크립트와 사전 생성된 프로젝트 파일을 마련했습니다.
 
 ### 주요 파일
 
@@ -18,9 +18,9 @@
 
 일반적인 사용법에 대한 안내는 [마이크로컨트롤러 시작하기](get_started_low_level.md)를 참조하세요.
 
-빌드 시스템은 특정 파일의 플랫폼별 구현을 제공합니다. 이들 구현은 플랫폼 이름을 가진 디렉토리(예: [`sparkfun_edge`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/sparkfun_edge))에 들어 있습니다.
+빌드 시스템은 특정 파일의 플랫폼별 구현을 제공합니다. 이들 구현은 플랫폼 이름을 가진 디렉터리(예: [`sparkfun_edge`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/sparkfun_edge))에 들어 있습니다.
 
-다음을 포함한 다른 여러 디렉토리가 있습니다.
+다음을 포함한 다른 여러 디렉터리가 있습니다.
 
 - [`kernel`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/kernels) - 연산 구현 및 관련 코드를 포함합니다.
 - [`tools`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/tools) - 빌드 도구 및 해당 출력이 포함됩니다.
@@ -32,7 +32,7 @@
 
 ### Arduino 라이브러리 사용하기
 
-Arduino를 사용하는 경우, *Hello World* 예제는 `Arduino_TensorFlowLite` Arduino 라이브러리에 포함되어 있고, 이 라이브러리는 Arduino IDE 및 [Arduino Create](https://create.arduino.cc/)에서 다운로드할 수 있습니다.
+If you are using Arduino, the *Hello World* example is included in the `Arduino_TensorFlowLite` Arduino library, which you can manually install in the Arduino IDE and in [Arduino Create](https://create.arduino.cc/).
 
 라이브러리가 추가되면 `File -> Examples`로 이동합니다. 목록 하단 근처에 `TensorFlowLite:hello_world`라는 예제가 표시됩니다. 이 예제를 선택하고 `hello_world`를 클릭하여 예제를 로드합니다. 그런 다음 예제의 사본을 저장하여 고유한 프로젝트의 기초로 이용할 수 있습니다.
 
@@ -46,9 +46,9 @@ Make로 이러한 프로젝트를 생성하려면 [TensorFlow 리포지토리](h
 make -f tensorflow/lite/micro/tools/make/Makefile generate_projects
 ```
 
-종속성에 대한 대용량 도구 체인을 다운로드해야 하므로 몇 분 정도 걸립니다. 완료되면 `tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/`(정확한 경로는 호스트 운영 체제에 따라 다름)와 같은 경로 내에 생성된 일부 폴더가 나타납니다. 이들 폴더에는 생성된 프로젝트와 소스 파일이 들어 있습니다.
+종속성에 대한 대용량 도구 체인을 다운로드해야 하므로 몇 분 정도 걸립니다. 완료되면 `gen/linux_x86_64/prj/`(정확한 경로는 호스트 운영 체제에 따라 다음)와 같은 경로 내에 생성된 일부 폴더가 나타납니다. 이들 폴더에는 생성된 프로젝트와 소스 파일이 들어있습니다.
 
-명령을 실행한 후, `tensorflow/lite/micro/tools/make/gen/linux_x86_64/prj/hello_world`에서 *Hello World* 프로젝트를 찾을 수 있습니다. 예를 들어, `hello_world/keil`에는 Keil 프로젝트가 포함됩니다.
+명령을 실행한 후, `gen/linux_x86_64/prj/hello_world`에서 *Hello World* 프로젝트를 찾을 수 있습니다. 예를 들어, `hello_world/keil`에는 Keil 프로젝트가 포함됩니다.
 
 ## 테스트 실행하기
 
@@ -86,7 +86,7 @@ make -f tensorflow/lite/micro/tools/make/Makefile hello_world_bin
 make -f tensorflow/lite/micro/tools/make/Makefile TARGET=sparkfun_edge hello_world_bin
 ```
 
-대상이 지정되면 사용 가능한 대상별 소스 파일이 원본 코드 대신 사용됩니다. 예를 들어, `examples/hello_world/sparkfun_edge` 하위 디렉토리에는 대상 `sparkfun_edge`가 지정될 때 사용되는 파일인 `constants.cc` 및 `output_handler.cc`의 SparkFun Edge 구현이 포함됩니다.
+대상이 지정되면 사용 가능한 대상별 소스 파일이 원본 코드 대신 사용됩니다. 예를 들어, `examples/hello_world/sparkfun_edge` 하위 디렉터리에는 대상 `sparkfun_edge`가 지정될 때 사용되는 파일인 `constants.cc` 및 `output_handler.cc`의 SparkFun Edge 구현이 포함됩니다.
 
 프로젝트의 Makefile에서 프로젝트 이름을 찾을 수 있습니다. 예를 들어, `examples/hello_world/Makefile.inc`는 *Hello World* 예제의 바이너리 이름을 지정합니다.
 
@@ -94,9 +94,9 @@ make -f tensorflow/lite/micro/tools/make/Makefile TARGET=sparkfun_edge hello_wor
 
 `tensorflow/lite/micro/kernels`의 루트에 있는 참조 커널은 순수 C/C++로 구현되며 플랫폼별 하드웨어 최적화를 포함하지 않습니다.
 
-최적화된 커널 버전은 하위 디렉토리에 제공됩니다. 예를 들어, `kernels/cmsis-nn`에는 Arm의 CMSIS-NN 라이브러리를 사용하는 여러 최적화된 커널이 포함되어 있습니다.
+최적화된 커널 버전은 하위 디렉터리에 제공됩니다. 예를 들어, `kernels/cmsis-nn`에는 Arm의 CMSIS-NN 라이브러리를 사용하는 여러 최적화된 커널이 포함되어 있습니다.
 
-최적화된 커널을 사용하여 프로젝트를 생성하려면 다음 명령을 사용하여 `<subdirectory_name>`을 최적화가 포함된 하위 디렉토리의 이름으로 바꿉니다.
+최적화된 커널을 사용하여 프로젝트를 생성하려면 다음 명령을 사용하여 `<subdirectory_name>`을 최적화가 포함된 하위 디렉터리의 이름으로 바꿉니다.
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile TAGS=<subdirectory_name> generate_projects
@@ -106,15 +106,13 @@ make -f tensorflow/lite/micro/tools/make/Makefile TAGS=<subdirectory_name> gener
 
 ## Arduino 라이브러리 생성하기
 
-Arduino 라이브러리의 야간 빌드는 Arduino IDE의 라이브러리 관리자를 통해 사용할 수 있습니다.
-
 라이브러리의 새 빌드를 생성해야 하는 경우, TensorFlow 리포지토리에서 다음 스크립트를 실행할 수 있습니다.
 
 ```bash
 ./tensorflow/lite/micro/tools/ci_build/test_arduino.sh
 ```
 
-결과 라이브러리는 `tensorflow/lite/micro/tools/make/gen/arduino_x86_64/prj/tensorflow_lite.zip`에서 찾을 수 있습니다.
+결과 라이브러리는 `gen/arduino_x86_64/prj/tensorflow_lite.zip`에서 찾을 수 있습니다.
 
 ## 새 기기로 이식하기
 
