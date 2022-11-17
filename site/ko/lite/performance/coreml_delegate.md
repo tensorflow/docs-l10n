@@ -2,7 +2,7 @@
 
 TensorFlow Lite Core ML 대리자를 사용하면 [Core ML 프레임워크](https://developer.apple.com/documentation/coreml)에서 TensorFlow Lite 모델을 실행할 수 있으므로 iOS 기기에서 모델 추론이 더 빨라집니다.
 
-Note: This delegate is in experimental (beta) phase. It is available from TensorFlow Lite 2.4.0 and latest nightly releases.
+참고: 이 대리자는 실험 (베타) 단계입니다. TensorFlow Lite 2.4.0 및 최신 야간 릴리스에서 사용할 수 있습니다.
 
 참고: Core ML 대리자는 Core ML 버전 2 이상을 지원합니다.
 
@@ -15,7 +15,7 @@ Note: This delegate is in experimental (beta) phase. It is available from Tensor
 
 Core ML 대리자는 현재 float(FP32 및 FP16) 모델을 지원합니다.
 
-## Trying the Core ML delegate on your own model
+## 자신의 모델에서 Core ML 대리자 시도
 
 Core ML 대리자는 TensorFlow lite CocoaPods의 야간 릴리스에 이미 포함되어 있습니다. Core ML 대리자를 사용하려면 `Podfile`에 하위 사양 `CoreML`을 포함하도록 TensorFlow lite 포드를 변경합니다.
 
@@ -34,7 +34,7 @@ target 'YourProjectName'
   pod 'TensorFlowLiteSwift', '~> 2.4.0', :subspecs => ['CoreML']
 ```
 
-Note: Core ML delegate can also use C API for Objective-C code. Prior to TensorFlow Lite 2.4.0 release, this was the only option.
+참고 : Core ML 대리자는 Objective-C 코드에 C API를 사용할 수도 있습니다. TensorFlow Lite 2.4.0 릴리스 이전에는 이것이 유일한 옵션이었습니다.
 
 <div>
   <devsite-selector>
