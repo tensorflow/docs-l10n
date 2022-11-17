@@ -574,7 +574,7 @@ Vertex：
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
-  <dd>     (Optional.) Client ID for IAP protected endpoint.   </dd>
+  <dd>     （可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
   <dt>--namespace=<var>namespace</var> </dt>
@@ -910,4 +910,4 @@ Kubeflow：
     - 从 TFX 0.27 开始，Kubeflow 不会在本地文件系统中创建这些元数据文件。但是，请参阅以下内容，了解 Kubeflow 创建的其他文件。
 - （仅限 Kubeflow）Dockerfile 和容器镜像
     - Kubeflow Pipelines 需要两种流水线输入。这些文件由 TFX 在当前目录下生成。
-    - 一种是容器镜像，用于在流水线中运行组件。此容器镜像在使用 `--build-image` 标志创建或更新 Kubeflow Pipelines 的流水线时构建。如果不存在，TFX CLI 将生成 `Dockerfile`，并构建容器镜像并将其推送到 KubeflowDagRunnerConfig 中指定的注册表。
+    - 一种是容器镜像，用于在流水线中运行组件。此容器镜像在使用 `--build-image` 标记创建或更新 Kubeflow Pipelines 的流水线时构建。如果不存在，TFX CLI 将生成 `Dockerfile`，并构建容器镜像并将其推送到 KubeflowDagRunnerConfig 中指定的注册表。
