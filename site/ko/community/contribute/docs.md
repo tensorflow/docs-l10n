@@ -189,11 +189,11 @@ Instead of downloading a notebook file and using a local Git workflow, you can e
 
 1. 당신의 Fork <var>username</var>/docs 리포지토리는 <a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">새 브랜치 만들기</a>를 위해 GitHub 웹의 UI를 사용합니다.
 2. 편집할 노트북 파일로 이동합니다.
-3. Open the notebook in Google Colab: use the URL swap or the *Open in Colab* Chrome extension.
+3. Google Colab에서 노트북을 엽니 다. URL 스왑 또는 *Open in Colab* Chrome 확장 프로그램을 사용합니다.
 4. Colab에서 노트북을 편집합니다.
 5. *File &gt; Save a copy in GitHub...*을 사용하여 Colab에서 리포지토리로 변경 사항을 커밋합니다. 저장 대화 상자는 해당 리포지토리 및 분기에 연결됩니다. 의미 있는 커밋 메시지를 추가합니다.
 6. 저장 후, 당신의 리포지토리 혹은<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> 리포지토리를 찾기 위해, GitHub는 새로운 풀 요청을 할 것을 알려줍니다.
-7. The pull request is reviewed by maintainers.
+7. 풀 요청은 관리자가 검토합니다.
 
 성공: TensorFlow 문서에 대한 변경 사항이 승인되었습니다.
 
