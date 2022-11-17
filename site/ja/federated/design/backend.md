@@ -14,7 +14,7 @@
 
 **青**のノードは、TFFの[コア](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core)によって提供されます。
 
-**緑**、**赤**、**黄色**、および**紫**のノードはそれぞれ、[native](#native)、[mapreduce](#mapreduce)、[iree](#iree)、および [reference](#reference) バックエンドによって提供されます。
+**緑**、**赤**、**黄色**、および**紫**のノードはそれぞれ、[native](#native)、[mapreduce](#mapreduce)、および [reference](#reference) バックエンドによって提供されます。
 
 **破線**のノードは、外部システムによって提供されます。
 
@@ -74,21 +74,3 @@ MapReduce ランタイムは、TFF によってではなく外部の MapReduce �
 ### コンテキスト
 
 MapReduce コンテキストは TFF によって提供されません。
-
-## IREE
-
-[IREE](https://github.com/google/iree) は [MLIR](https://mlir.llvm.org/) の実験的なコンパイラバックエンドです。
-
-[iree](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree) バックエンドには、AST を実行するために必要なデータ構造、コンパイラ、およびランタイムが含まれます。
-
-### コンパイラ
-
-[compiler](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/compiler.py) モジュールには、[executor.IreeExecutor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/executor.py) を使用して実行できる形態に AST をコンパイルするために必要な変換が含まれます。
-
-### ランタイム
-
-[executor.IreeExecutor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/executor.py) は、IREE ランタイムにデリゲートすることで計算を実行する [Executor](execution.md#executor) です。この executor は、TFF ランタイムのほかの [Executor](execution.md#executor) で構成して、IREE ランタイムを表現する[実行スタック](execution.md#execution-stack)を構成することが可能です。
-
-### コンテキスト
-
-iree コンテキストは [ExecutionContext](context.md#executioncontext) で、iree コンパイラと[実行スタック](execution.md#execution-stack)で構成されています。この実行スタックには、外部 IREE ランタイムにデリゲートする [executor.IreeExecutor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/iree/executor.py) が備わっています。
