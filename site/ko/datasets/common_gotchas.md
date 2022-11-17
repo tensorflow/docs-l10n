@@ -26,16 +26,16 @@ def _split_generator(...):
 
 **이유**: 새로운 API는 장황하지 않고 더욱 명확합니다. 오래된 API는 추후 버전에서 삭제될 것입니다.
 
-## New datasets should be self-contained in a folder
+## 새로운 데이터세트는 폴더에 자체 포함되어야 합니다
 
-When adding a dataset inside the `tensorflow_datasets/` repository, please make sure to follow the dataset-as-folder structure (all checksums, dummy data, implementation code self-contained in a folder).
+`tensorflow_datasets/` 리포지토리 내에 데이터세트를 추가할 때, 폴더로서의 데이터세트 구조(모든 체크섬, 더미 데이터, 폴더에 자체 포함된 구현 코드)를 따르도록 하세요.
 
 - 오래된 데이터세트 (나쁨): `<category>/<ds_name>.py`
 - 새로운 데이터세트 (좋음): `<category>/<ds_name>/<ds_name>.py`
 
 [TFDS CLI](https://www.tensorflow.org/datasets/cli#tfds_new_implementing_a_new_dataset)(`tfds new` 또는 구글러용 `gtfds new`)를 사용하여 템플릿을 생성합니다.
 
-**Rationale**: Old structure required absolute paths for checksums, fake data and was distributing the dataset files in many places. It was making it harder to implement datasets outside the TFDS repository. For consistency, the new structure should be used everywhere now.
+**이유**: 오래된 구조는 체크섬, 가짜 데이터의 절대적 경로가 필요하고 여러 위치에 데이터세트 파일을 분산시켰습니다. 이로 인해 TFDS 리포지토리 외부에 데이터세트를 구현하기 어려웠습니다. 이제 일관성을 위해 모든 위치에서 새로운 구조를 사용해야 합니다.
 
 ## 설명 목록은 마크다운 형식이어야 합니다
 
@@ -59,7 +59,7 @@ Some text. 1. Item 1 2. Item 1 3. Item 1 Some other text
 
 ## ClassLabel 이름을 잊었습니다
 
-When using `tfds.features.ClassLabel`, try to provide the human-readable labels `str` with `names=` or `names_file=` (instead of `num_classes=10`).
+`tfds.features.ClassLabel`을 사용하는 경우, `names=` 또는 `names_file=`(`num_classes=10` 대신)을 포함한 사람이 읽을 수 있는 라벨 `str`을 제공하세요.
 
 ```python
 features = {
@@ -67,7 +67,7 @@ features = {
 }
 ```
 
-**Rationale**: Human readable labels are used in many places:
+**이유**: 사람이 읽을 수 있는 라벨이 많은 곳에 사용됩니다.
 
 - `str`를 `_generate_examples`에서 직접 산출 허용: `yield {'label': 'dog'}`
 - `info.features['label'].names` (변환 메서드 `.str2int('dog')`,... 또한 가능)와 같은 사용자에게 노출됨
@@ -83,7 +83,7 @@ features = {
 }
 ```
 
-**Rationale**: It allow static shape inference (e.g. `ds.element_spec['image'].shape`), which is required for batching (batching images of unknown shape would require resizing them first).
+**이유**: 이는 배치 처리에 필요한 정적 형상 추론(예: `ds.element_spec['image'].shape`)을 허용합니다(형상을 알 수 없는 이미지의 배치 처리는 우선 크기 조절이 필요함).
 
 ## `tfds.features.Tensor` 대신 보다 구체적인 유형 선호
 
