@@ -225,7 +225,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
   </thead>
   <tr>
     <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a> </td>
-    <td rowspan="3">       27 Mb     </td>
+    <td rowspan="3">       27 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>22ms</td>
     <td>46ms*</td>
