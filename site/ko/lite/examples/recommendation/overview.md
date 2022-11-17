@@ -1,7 +1,6 @@
 # 추천
 
-<table class="tfo-notebook-buttons" align="left">   <td>     <a target="_blank" href="https://www.tensorflow.org/lite/examples/recommendation/overview"><img src="https://www.tensorflow.org/images/tf_logo_32px.png">TensorFlow.org에서 보기</a>   </td>   {% dynamic if request.tld != 'cn' %}<td>     <a target="_blank" href="https://colab.research.google.com/github/tensorflow/examples/blob/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb"><img src="https://www.tensorflow.org/images/colab_logo_32px.png">Google Colab에서 실행하기</a>   </td>{% dynamic endif %}   <td>     <a target="_blank" href="https://github.com/tensorflow/examples/blob/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb"><img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png">GitHub에서 소스 보기</a>   </td>
-</table>
+<table class="tfo-notebook-buttons" align="left">   <td>     <a target="_blank" href="https://www.tensorflow.org/lite/examples/recommendation/overview"><img src="https://www.tensorflow.org/images/tf_logo_32px.png">TensorFlow.org에서 보기</a>   </td>   {% dynamic if request.tld != 'cn' %}<td>     <a target="_blank" href="https://colab.research.google.com/github/tensorflow/examples/blob/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb"><img src="https://www.tensorflow.org/images/colab_logo_32px.png">Google Colab에서 실행하기</a>   </td>{% dynamic endif %}   <td>     <a target="_blank" href="https://github.com/tensorflow/examples/blob/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb"><img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png">GitHub에서 소스 보기</a>   </td> </table>
 
 개인화된 추천은 미디어 콘텐츠 검색, 쇼핑 제품 제안 및 다음 앱 추천과 같은 모바일 기기의 다양한 사용 사례에 널리 사용됩니다. 사용자 개인 정보를 보호하면서 애플리케이션에 개인화된 추천을 제공하는 데 관심이 있다면 다음 예제와 도구 키트를 살펴보세요.
 
@@ -28,13 +27,13 @@ Android 이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미
 
 컨텍스트 인코더를 사용하여 순차 사용자 기록을 인코딩하고 레이블 인코더를 사용하여 예측된 추천 후보를 인코딩하는 이중 인코더 모델 아키텍처를 이용합니다. 컨텍스트와 레이블 인코딩 간의 유사성은 예측된 후보가 사용자의 요구를 충족할 가능성을 나타내는 데 사용됩니다.
 
-이 코드베이스에는 다음의 세 가지 순차적 사용자 기록 인코딩 기술이 제공됩니다.
+이 코드 베이스에는 다음의 세 가지 순차적 사용자 기록 인코딩 기술이 제공됩니다.
 
 - BOW(bag-of-words encoder): 컨텍스트 순서를 고려하지 않고 사용자 활동의 임베딩을 평균화합니다.
 - CNN(컨볼루셔널 신경망 인코더): 여러 레이어의 컨볼루셔널 신경망을 적용하여 컨텍스트 인코딩을 생성합니다.
 - RNN(순환 신경망): 순환 신경망을 적용하여 컨텍스트 시퀀스를 인코딩합니다.
 
-각 사용자 활동을 모델링하기 위해 활동 항목의 ID(ID 기반) 또는 항목의 여러 요소(요소 기반) 또는 둘의 조합을 사용할 수 있습니다. 요소 기반 모델은 사용자의 행동을 집합적으로 인코딩하기 위해 여러 요소를 활용합니다. 이 코드 기반을 사용하여 구성 가능한 방식으로 ID 기반 또는 요소 기반 모델을 만들 수 있습니다.
+각 사용자 활동을 모델링하기 위해 활동 항목의 ID(ID 기반) 또는 항목의 여러 특성(특성 기반) 또는 둘의 조합을 사용할 수 있습니다. 특성 기반 모델은 사용자의 동작을 집합적으로 인코딩하기 위해 여러 특성을 활용합니다. 이 코드 베이스를 사용하여 구성 가능한 방식으로 ID 기반 또는 특성 기반 모델을 만들 수 있습니다.
 
 훈련 후, TensorFlow Lite 모델을 내보내 추천 후보 중에서 top-K 예측을 직접 제공할 수 있습니다.
 
@@ -44,9 +43,9 @@ Android 이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미
 
 이 [튜토리얼](https://github.com/tensorflow/examples/tree/master/lite/examples/recommendation/ml/ondevice_recommendation.ipynb)에 따라 여기서 사용된 것과 같은 기술을 적용하여 고유한 데이터세트로 추천 모델을 훈련해 보세요.
 
-## 예
+## 예시
 
-예를 들어 ID 기반 및 요소 기반 접근 방식을 모두 사용하여 추천 모델을 훈련했습니다. ID 기반 모델은 영화 ID만 입력으로 사용하고 요소 기반 모델은 영화 ID와 영화 장르 ID를 모두 입력으로 사용합니다. 다음 입력 및 출력 예를 확인해 보세요.
+예를 들어 ID 기반 및 특성 기반 접근 방식을 모두 사용하여 추천 모델을 훈련했습니다. ID 기반 모델은 영화 ID만 입력으로 사용하고 특성 기반 모델은 영화 ID와 영화 장르 ID를 모두 입력으로 사용합니다. 다음 입력 및 출력 예를 확인해 보세요.
 
 입력
 
@@ -76,7 +75,7 @@ Android 이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미
 
 ## 성능 벤치마크
 
-성능 벤치마크 수치는 [여기에 설명된](https://www.tensorflow.org/lite/performance/benchmarks) 도구를 사용하여 생성됩니다.
+성능 벤치 마크 수치는 [여기에 설명된](https://www.tensorflow.org/lite/performance/benchmarks) 도구를 사용하여 생성됩니다.
 
 <table>
   <thead>
@@ -117,7 +116,7 @@ Android 이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미
   </tbody>
 </table>
 
-* 4개의 스레드가 사용되었습니다.
+* 4 threads used.
 
 ## 고유한 훈련 데이터 사용하기
 
