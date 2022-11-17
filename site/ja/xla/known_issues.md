@@ -37,3 +37,13 @@ XLA は `tf.TensorArray` をサポートしていますが、TF と XLA 間の*�
 XLA は現在、ランダム演算に対する TF シードを無視しています。これは、`tf.random.normal` や `tf.nn.dropout` などのステートフル TF ランダム演算に影響を与えます。XLA は、実行ごとに新しい一意のシードがコンパイルにシードされたかのように動作します。
 
 *回避策*: `tf.random.stateless_uniform` または、`tf.random.Generator` などの[推薦される RNG](https://www.tensorflow.org/guide/random_numbers#stateless_rngs) を直接使用します。
+
+## 誘導変数の関数である定数入力はサポートされていません
+
+*エラーメッセージ*: `XLA compilation requires that operator arguments that represent shapes or dimensions be evaluated to concrete values at compile time. This error means that a shape or dimension argument could not be evaluated at compile time, usually because the value of the argument depends on a parameter to the computation, on a variable, or on a stateful operation such as a random number generator`.
+
+XLA では、還元演算の還元軸や転置次元など、特定の値がコンパイル時に認識される必要があります。例として還元軸が誘導変数 `tf.range` の関数として定義されている場合のケースを考えてみましょう。ループ全体を展開しなければ、統計的にこれを解決することはできません。これはユーザーにとって好ましくない可能性があります。
+
+*回避策*: `tf.range` を Python `range` に変換するなどして、ループを展開します。
+
+注意: 上記のエラーメッセージはこの課題固有のものであり、他の制限やバグが原因で発生する可能性があります。
