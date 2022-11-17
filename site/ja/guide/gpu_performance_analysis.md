@@ -1,250 +1,250 @@
-# Optimize TensorFlow GPU performance with the TensorFlow Profiler
+# TensorFlow Profiler を使用した TensorFlow GPU パフォーマンスの最適化
 
 ## 概要
 
-This guide will show you how to use the TensorFlow Profiler with TensorBoard to gain insight into and get the maximum performance out of your GPUs, and debug when one or more of your GPUs are underutilized.
+このガイドでは、TensorBoard で TensorFlow Profiler を使用して、GPU の洞察を得て最大のパフォーマンスを引き出し、1 つ以上の GPU が十分に活用されていない場合にデバッグする方法を示します。
 
-If you are new to the Profiler:
+Profiler を初めて使用する場合は、次を行います。
 
-- Get started with the [TensorFlow Profiler: Profile model performance](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras) notebook with a Keras example and [TensorBoard](https://www.tensorflow.org/tensorboard).
-- Learn about various profiling tools and methods available for optimizing TensorFlow performance on the host (CPU) with the [Optimize TensorFlow performance using the Profiler](https://www.tensorflow.org/guide/profiler#profiler_tools) guide.
+- Keras の例と [TensorBoard](https://www.tensorflow.org/tensorboard) を使って、[TensorFlow Profiler: モデルパフォーマンスをプロファイリングする](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras)ノートブックを使い始める。
+- [Profiler を使用した TensorFlow のパフォーマンス最適化](https://www.tensorflow.org/guide/profiler#profiler_tools)ガイドで、ホスト（CPU）で TensorFlow のパフォーマンスを最適化するために使用できるさまざまなプロファイリングツールと方法について学びます。
 
-Keep in mind that offloading computations to GPU may not always be beneficial, particularly for small models. There can be overhead due to:
+計算を GPU にオフロードすることは、特に小さなモデルの場合、常にメリットがあるとは限らないことに注意してください。次の理由により、オーバーヘッドが発生する可能性があります。
 
-- Data transfer between the host (CPU) and the device (GPU); and
-- Due to the latency involved when the host launches GPU kernels.
+- ホスト（CPU）とデバイス（GPU）間のデータ転送
+- ホストが GPU カーネルを起動するときの遅延のため
 
-### Performance optimization workflow
+### パフォーマンス最適化のワークフロー
 
-This guide outlines how to debug performance issues starting with a single GPU, then moving to a single host with multiple GPUs.
+このガイドでは、単一の GPU から始めて、複数の GPU を備えた単一のホストに移行して、パフォーマンスの問題をデバッグする方法について概説します。
 
-It is recommended to debug performance issues in the following order:
+次の順序でパフォーマンスの問題をデバッグすることをお勧めします。
 
-1. Optimize and debug the performance on one GPU:
-    1. Check if the input pipeline is a bottleneck.
-    2. Debug the performance of one GPU.
-    3. Enable mixed precision (with `fp16` (float16)) and optionally enable [XLA](https://www.tensorflow.org/xla).
-2. Optimize and debug the performance on the multi-GPU single host.
+1. 1 つの GPU でパフォーマンスを最適化してデバッグします。
+    1. 入力パイプラインがボトルネックになっていないか確認します。
+    2. 1 つの GPU でパフォーマンスをデバッグします。
+    3. 混合精度（`fp16`（float16）を使用）を有効にし、オプションで [XLA](https://www.tensorflow.org/xla) を有効にします。
+2. マルチ GPU 単一ホストでのパフォーマンスを最適化してデバッグします。
 
-For example, if you are using a TensorFlow [distribution strategy](https://www.tensorflow.org/guide/distributed_training) to train a model on a single host with multiple GPUs and notice suboptimal GPU utilization, you should first optimize and debug the performance for one GPU before debugging the multi-GPU system.
+たとえば、TensorFlow [分散戦略](https://www.tensorflow.org/guide/distributed_training)を使用して、複数の GPU を備えた単一のホストでモデルをトレーニングし、最適でない GPU 使用率に気付いた場合、マルチ GPU システムをデバッグする前に、最初に 1 つの GPU のパフォーマンスを最適化してデバッグする必要があります。
 
-As a baseline for getting performant code on GPUs, this guide assumes you are already using `tf.function`. The Keras `Model.compile` and `Model.fit` APIs will utilize `tf.function` automatically under the hood. When writing a custom training loop with `tf.GradientTape`, refer to the [Better performance with tf.function](https://www.tensorflow.org/guide/function) on how to enable `tf.function`s.
+GPU でパフォーマンスの高いコードを取得するためのベースラインとして、このガイドでは既に `tf.function` を使用していることを前提としています。Keras `Model.compile` および `Model.fit` API は、内部で `tf.function` を自動的に利用します。`tf.GradientTape` を使用してカスタムトレーニングループを作成する場合、`tf.function` を有効にする方法については、[tf.function によるパフォーマンスの改善](https://www.tensorflow.org/guide/function)をご覧ください。
 
-The next sections discuss suggested approaches for each of the scenarios above to help identify and fix performance bottlenecks.
+次のセクションでは、パフォーマンスのボトルネックを特定して修正するために、上記のシナリオごとに推奨されるアプローチについて説明します。
 
-## 1. Optimize the performance on one GPU
+## 1. 1 つの GPU でパフォーマンスを最適化する
 
-In an ideal case, your program should have high GPU utilization, minimal CPU (the host) to GPU (the device) communication, and no overhead from the input pipeline.
+理想的なケースでは、プログラムの GPU 使用率が高く、CPU（ホスト）から GPU（デバイス）への通信が最小限であり、入力パイプラインからのオーバーヘッドがない必要があります。
 
-The first step in analyzing the performance is to get a profile for a model running with one GPU.
+パフォーマンスを分析する最初のステップは、1 つの GPU で実行されているモデルのプロファイルを取得することです。
 
-TensorBoard's Profiler [overview page](https://www.tensorflow.org/guide/profiler#overview_page)—which shows a top level view of how your model performed during a profile run—can provide an idea of how far away your program is from the ideal scenario.
+TensorBoard の Profiler [概要ページ](https://www.tensorflow.org/guide/profiler#overview_page)（プロファイル実行中にモデルがどのように実行されたかのトップレベルビューを表示）は、プログラムが理想的なシナリオからどれだけ離れているかを示すことができます。
 
-![TensorFlow Profiler Overview Page](images/gpu_perf_analysis/overview_page.png "The overview page of the TensorFlow Profiler")
+![TensorFlow Profiler Overview Page](images/gpu_perf_analysis/overview_page.png "TensorFlow Profiler の概要ページ")
 
-The key numbers to pay attention to the overview page are:
+概要ページで注意すべき重要な点は次のとおりです。
 
-1. How much of the step time is from actual device execution
-2. The percentage of ops placed on device vs host
-3. How many kernels use `fp16`
+1. 実際のデバイスの実行からのステップ時間の割合
+2. デバイスとホストに配置された演算の割合
+3. `fp16` を使用するカーネルの数
 
-Achieving optimal performance means maximizing these numbers in all three cases. To get an in-depth understanding of your program, you will need to be familiar with TensorBoard's Profiler [trace viewer](https://www.tensorflow.org/guide/profiler#trace_viewer). The sections below show some common trace viewer patterns that you should look for when diagnosing performance bottlenecks.
+パフォーマンスの最適化を実現するということは、3 つのケースすべてでこれらの数値を最大化することを意味します。プログラムを深く理解するには、TensorBoard の Profiler [トレースビューア](https://www.tensorflow.org/guide/profiler#trace_viewer)に精通している必要があります。以下のセクションでは、パフォーマンスのボトルネックを診断するときに探す必要がある一般的なトレースビューアのパターンをいくつか示します。
 
-Below is an image of a model trace view running on one GPU. From the *TensorFlow Name Scope* and *TensorFlow Ops* sections, you can identify different parts of the model, like the forward pass, the loss function, backward pass/gradient calculation, and the optimizer weight update. You can also have the ops running on the GPU next to each *Stream*, which refer to CUDA streams. Each stream is used for specific tasks. In this trace, *Stream#118* is used to launch compute kernels and device-to-device copies. *Stream#119* is used for host-to-device copy and *Stream#120* for device to host copy.
+以下は、1 つの GPU で実行されているモデルトレースビューの画像です。*TensorFlow Name Scope* セクションと *TensorFlow Ops* セクションから、フォワードパス、損失関数、バックワードパス/勾配計算、オプティマイザの重み値の更新など、モデルのさまざまな部分を識別できます。また、CUDA ストリームを参照する各 *Stream* の隣の GPU で演算を実行することもできます。各ストリームは特定のタスクに使用されます。このトレースでは、*Stream#118* を使用して計算カーネルとデバイス間のコピーを起動します。*Stream#119* はホストからデバイスへのコピーに使用され、*Stream#120* はデバイスからホストへのコピーに使用されます。
 
-The trace below shows common characteristics of a performant model.
+以下のトレースは、パフォーマンスモデルの一般的な特性を示しています。
 
 ![image](images/gpu_perf_analysis/traceview_ideal.png "An example TensorFlow Profiler trace view")
 
-For example, the GPU compute timeline (*Stream#118*) looks "busy" with very few gaps. There are minimal copies from host to device (*Stream #119*) and from device to host (*Stream #120*), as well as minimal gaps between steps. When you run the Profiler for your program, you may not be able to identify these ideal characteristics in your trace view. The rest of this guide covers common scenarios and how to fix them.
+たとえば、GPU 計算タイムライン（*Stream#118*）はギャップがほとんどなく「ビジー」に見えます。ホストからデバイスへのコピー（*ストリーム #119*）およびデバイスからホストへのコピー（*ストリーム #120*）は最小限であり、ステップ間のギャップも最小限です。プログラムの Profiler を実行すると、トレースビューでこれらの理想的な特性を特定できない場合があります。このガイドの残りの部分では、一般的なシナリオとその修正方法について説明します。
 
-### 1. Debug the input pipeline
+### 1. 入力パイプラインをデバッグする
 
-The first step in GPU performance debugging is to determine if your program is input-bound. The easiest way to figure this out is to use the Profiler’s [Input-pipeline analyzer](https://www.tensorflow.org/guide/profiler#input_pipeline_analyzer), on TensorBoard, which provides an overview of time spent in the input pipeline.
+GPU パフォーマンスのデバッグでの最初のステップは、プログラムが入力バウンドかどうかを判断することです。これを把握する最も簡単な方法は、TensorBoard で Profiler の[入力パイプラインアナライザー](https://www.tensorflow.org/guide/profiler#input_pipeline_analyzer)を使用することです。これは、入力パイプラインで費やされた時間の概要を提供します。
 
 ![image](images/gpu_perf_analysis/input_pipeline_analyzer.png "TensorFlow Profiler Input-Analyzer")
 
-You can take the following potential actions if your input-pipeline contributes significantly to step time:
+入力パイプラインがステップ時間に大きく影響する場合、次のアクションが実行可能です。
 
-- You can use the `tf.data`-specific [guide](https://www.tensorflow.org/guide/data_performance_analysis) to learn how to debug your input pipeline.
-- Another quick way to check if the input pipeline is the bottleneck is to use randomly generated input data that does not need any pre-processing. [Here is an example](https://github.com/tensorflow/models/blob/4a5770827edf1c3974274ba3e4169d0e5ba7478a/official/vision/image_classification/resnet/resnet_runnable.py#L50-L57) of using this technique for a ResNet model. If the input pipeline is optimal, you should experience similar performance with real data and with generated random/synthetic data. The only overhead in the synthetic data case will be due to input data copy which again can be prefetched and optimized.
+- `tf.data` 固有の[ガイド](https://www.tensorflow.org/guide/data_performance_analysis)を使用して、入力パイプラインをデバッグする方法を学習できます。
+- 入力パイプラインがボトルネックかどうかを確認するもう 1 つの簡単な方法は、前処理を必要としない、ランダムに生成された入力データを使用することです。ResNet モデルでこの手法を使用する[例を次に示します](https://github.com/tensorflow/models/blob/4a5770827edf1c3974274ba3e4169d0e5ba7478a/official/vision/image_classification/resnet/resnet_runnable.py#L50-L57)。入力パイプラインが最適であれば、実際のデータと生成されたランダム/合成データで同様のパフォーマンスが得られるはずです。合成データの場合の唯一のオーバーヘッドは、プリフェッチして最適化できる入力データのコピーによるものです。
 
-In addition, refer to the [best practices for optimizing the input data pipeline](https://www.tensorflow.org/guide/profiler#optimize_the_input_data_pipeline).
+さらに、[入力データパイプラインを最適化するためのベストプラクティス](https://www.tensorflow.org/guide/profiler#optimize_the_input_data_pipeline)もご覧ください。
 
-### 2. Debug the performance of one GPU
+### 2. 1 つの GPU のパフォーマンスをデバッグする
 
-There are several factors that can contribute to low GPU utilization. Below are some scenarios commonly observed when looking at the [trace viewer](https://www.tensorflow.org/guide/profiler#trace_viewer) and potential solutions.
+GPU 使用率が低くなる要因はいくつかあります。以下は、[トレースビューア](https://www.tensorflow.org/guide/profiler#trace_viewer)と考えられる解決策を確認する際によく見られるいくつかのシナリオです。
 
-#### 1. Analyze gaps between steps
+#### 1. ステップ間のギャップを分析する
 
-A common observation when your program is not running optimally is gaps between training steps. In the image of the trace view below, there is a large gap between steps 8 and 9, meaning that the GPU is idle during that time.
+プログラムが最適に実行されていない場合によく観測されるのは、トレーニングステップ間のギャップです。以下のトレースビューの画像では、ステップ 8 と 9 の間に大きなギャップがあり、その間 GPU がアイドル状態になっていることを意味します。
 
-![image](images/gpu_perf_analysis/traceview_step_gaps.png "TensorFlow Profile trace view showing gaps between steps")
+![image](images/gpu_perf_analysis/traceview_step_gaps.png "ステップ間のギャップを示す TensorFlow プロファイル トレース ビュー")
 
-If your trace viewer shows large gaps between steps, this could be an indication that your program is input bound. In that case you should refer to the previous section on debugging your input pipeline if you have not already done so.
+トレースビューアでステップ間に大きなギャップが表示される場合は、プログラムが入力バウンドであることを示している可能性があります。その場合、入力パイプラインのデバッグに関する前のセクションをまだ参照していない場合は参照する必要があります。
 
-However, even with an optimized input pipeline, you can still have gaps between the end of one step and the start of another due to CPU thread contention. `tf.data` makes use of background threads to parallelize pipeline processing. These threads may interfere with GPU host-side activity that happens at the beginning of each step, such as copying data or scheduling GPU operations.
+ただし、最適化された入力パイプラインを使用しても、CPU スレッドの競合により、あるステップの終了と別のステップの開始の間にギャップが生じる可能性があります。`tf.data` は、バックグラウンドスレッドを利用してパイプライン処理を並列化します。これらのスレッドは、データのコピーや GPU 演算のスケジューリングなど、各ステップの開始時に発生する GPU ホスト側のアクティビティに干渉する可能性があります。
 
-If you notice large gaps on the host side, which schedules these ops on the GPU, you can set the environment variable `TF_GPU_THREAD_MODE=gpu_private`. This ensures that GPU kernels are launched from their own dedicated threads, and don't get queued behind `tf.data` work.
+GPU でこれらの演算をスケジュールするホスト側で大きなギャップに気付いた場合は、環境変数 `TF_GPU_THREAD_MODE=gpu_private` を設定できます。これにより、GPU カーネルが独自の専用スレッドから起動され、`tf.data` 作業の背後でキューに入れられないことが保証されます。
 
-Gaps between steps can also be caused by metric calculations, Keras callbacks, or ops outside of `tf.function` that run on the host. These ops don’t have as good performance as the ops inside a TensorFlow graph. Additionally, some of these ops run on the CPU and copy tensors back and forth from the GPU.
+ステップ間のギャップは、指標の計算、Keras コールバック、またはホストで実行される `tf.function` の外部の演算によっても発生する可能性があります。これらの演算は、TensorFlow グラフ内の演算ほどパフォーマンスが良くありません。さらに、これらの演算の一部は CPU 上で実行され、GPU との間でテンソルをコピーします。
 
-If after optimizing your input pipeline you still notice gaps between steps in the trace viewer, you should look at the model code between steps and check if disabling callbacks/metrics improves performance. Some details of these ops are also on the trace viewer (both device and host side).The recommendation in this scenario is to amortize the overhead of these ops by executing them after a fixed number of steps instead of every step. When using the `Model.compile` method in the `tf.keras` API, setting the `steps_per_execution` flag does this automatically. For custom training loops, use `tf.while_loop`.
+入力パイプラインを最適化した後も、トレースビューアのステップ間にギャップがあることに気付いた場合は、ステップ間のモデルコードを調べて、コールバック/指標を無効にすることでパフォーマンスが改善されるかどうかを確認する必要があります。これらの操作の詳細の一部は、トレースビューアでも（デバイス側とホスト側の両方に）表示されます。このシナリオで推奨されるのは、これらの演算のオーバーヘッドを、すべてのステップではなく一定数のステップの後に実行することによって償却することです。`tf.keras` API で `Model.compile` メソッドを使用する場合、`steps_per_execution` フラグを設定すると、これが自動的に行われます。カスタムトレーニングループには、`tf.while_loop` を使用します。
 
-#### 2. Achieve higher device utilization
+#### 2. より高いデバイス使用率を達成する
 
-##### 1. Small GPU kernels and host kernel launch delays
+##### 1. 小さな GPU カーネルとホストカーネルの起動遅延
 
-The host enqueues kernels to be run on the GPU, but there is a latency (around 20-40 μs) involved before kernels are actually executed on the GPU. In an ideal case, the host enqueues enough kernels on the GPU such that the GPU spends most of its time executing, rather than waiting on the host to enqueue more kernels.
+ホストはカーネルを GPU で実行するためにキューに入れますが、カーネルが実際に GPU で実行されるまでに遅延（約 20 ～ 40 μs）が伴います。理想的なケースでは、ホストがさらに多くのカーネルをエンキューするのを待つのではなく、GPU がほとんどの時間を実行に費やすように、ホストは GPU に十分な数のカーネルをエンキューします。
 
-The Profiler's [overview page](https://www.tensorflow.org/guide/profiler#overview_page) on TensorBoard shows how much time the GPU was idle due to waiting on the host to launch kernels. In the image below, the GPU is idle for about 10% of the step time waiting on kernels to be launched.
+TensorBoard の Profiler の[概要ページ](https://www.tensorflow.org/guide/profiler#overview_page)には、ホストがカーネルを起動するのを待っていたために GPU がアイドル状態だった時間が表示されます。下の画像では、カーネルが起動されるのを待っているステップ時間の約 10% の間、GPU がアイドル状態になっています。
 
 ![image](images/gpu_perf_analysis/performance_summary.png "Summary of performance from TensorFlow Profile")
 
-The [trace viewer](https://www.tensorflow.org/guide/profiler#trace_viewer) for this same program shows small gaps between kernels where the host is busy launching kernels on the GPU.
+この同じプログラムの[トレースビューア](https://www.tensorflow.org/guide/profiler#trace_viewer)は、ホストが GPU でカーネルを起動するためにビジー状態であるカーネル間に小さなギャップを示しています。
 
 ![image](images/gpu_perf_analysis/traceview_kernel_gaps.png "TensorFlow Profile trace view demonstrating gaps between kernels")
 
-By launching a lot of small ops on the GPU (like a scalar add, for example), the host might not keep up with the GPU. The [TensorFlow Stats](https://www.tensorflow.org/guide/profiler#tensorflow_stats) tool in TensorBoard for the same Profile shows 126,224 Mul operations taking 2.77 seconds. Thus, each kernel is about 21.9 μs, which is very small (around the same time as launch latency) and can potentially result in host kernel launch delays.
+GPU で多数の小さな演算（スカラー加算など）を起動すると、ホストが GPU に追いつかない可能性があります。同じプロファイルの TensorBoard の [TensorFlow Stats](https://www.tensorflow.org/guide/profiler#tensorflow_stats) ツールは、2.77 秒かかる 126,224 Mul 演算を示しています。したがって、各カーネルは約 21.9 μs であり、これは非常に小さく（起動レイテンシとほぼ同じ時間）、ホストカーネルの起動遅延が発生する可能性があります。
 
 ![image](images/gpu_perf_analysis/tensorflow_stats_page.png "TensorFlow Profile stats page")
 
-If your [trace viewer](https://www.tensorflow.org/guide/profiler#trace_viewer) shows many small gaps between ops on the GPU like in the image above, you can:
+上記の画像のように、[トレースビューア](https://www.tensorflow.org/guide/profiler#trace_viewer)が GPU 上の演算間に多くの小さなギャップを示している場合は、次のことができます。
 
-- Concatenate small tensors and use vectorized ops or use a larger batch size to make each launched kernel do more work, which will keep the GPU busy for longer.
-- Make sure you are using `tf.function` to create TensorFlow graphs, so that you are not running ops in a pure eager mode. If you are using `Model.fit` (as oppose to a custom training loop with `tf.GradientTape`), then `tf.keras.Model.compile` will automatically do this for you.
-- Fuse kernels using XLA with `tf.function(jit_compile=True)` or auto-clustering. For more details, go to the [Enable mixed precision and XLA](#3._enable_mixed_precision_and_xla) section below to learn how to enable XLA to get higher performance. This feature can lead to high device utilization.
+- 小さなテンソルを連結し、ベクトル化された演算を使用するか、より大きなバッチサイズを使用して、起動された各カーネルがより多くの作業を行うようにします。これにより、GPU がビジー状態になる時間が長くなります。
+- `tf.function` を使用して TensorFlow グラフを作成していることを確認して、演算を純粋な Eager Modeで実行していないことを確認してください。`Model.fit` を使用している場合（`tf.GradientTape` を使用したカスタムトレーニングループではなく）、`tf.keras.Model.compile`は自動的にこれを行います。
+- `tf.function(jit_compile=True)` または自動クラスタリングで XLA を使用してカーネルを融合します。詳細については、以下の[混合精度と XLA を有効にする](#3._enable_mixed_precision_and_xla)セクションに移動して、XLA を有効にしてパフォーマンスを向上させる方法を学習してください。この特徴量により、デバイスの使用率が高くなる可能性があります。
 
-##### 2. TensorFlow op placement
+##### 2. TensorFlow 演算の配置
 
-The Profiler [overview page](https://www.tensorflow.org/guide/profiler#overview_page) shows you the percentage of ops placed on the host vs. the device (you can also verify the placement of specific ops by looking at the [trace viewer](https://www.tensorflow.org/guide/profiler#trace_viewer). Like in the image below, you want the percentage of ops on the host to be very small compared to the device.
+Profiler の[概要ページ](https://www.tensorflow.org/guide/profiler#overview_page)には、ホストとデバイスに配置された演算のパーセンテージが表示されます（[トレースビューア](https://www.tensorflow.org/guide/profiler#trace_viewer)を参照して、特定の演算の配置を確認することもできます）。下の画像のように、デバイスに比べて、ホスト上の演算のパーセンテージが非常に小さくなるようにします。
 
 ![image](images/gpu_perf_analysis/opp_placement.png "TF Op Placement")
 
-Ideally, most of the compute intensive ops should be placed on the GPU.
+理想的には、計算集約型演算のほとんどを GPU に配置する必要があります。
 
-To find out which devices the operations and tensors in your model are assigned to, set `tf.debugging.set_log_device_placement(True)` as the first statement of your program.
+モデルの演算とテンソルが割り当てられているデバイスを見つけるには、プログラムの最初のステートメントとして `tf.debugging.set_log_device_placement(True)` を設定します。
 
-Note that in some cases, even if you specify an op to be placed on a particular device, its implementation might override this condition (example:`tf.unique`). Even for single GPU training, specifying a distribution strategy, such as `tf.distribute.OneDeviceStrategy`, can result in more deterministic placement of ops on your device.
+場合によっては、演算を特定のデバイスに配置するように指定した場合でも、その実装がこの条件をオーバーライドする可能性があることに注意してください（例: `tf.unique`）。単一の GPU トレーニングの場合でも、`tf.distribute.OneDeviceStrategy` などの分散ストラテジーを指定すると、デバイス上で演算をより確定的に配置できます。
 
-One reason for having the majority of ops placed on the GPU is to prevent excessive memory copies between the host and the device (memory copies for model input/output data between host and device are expected). An example of excessive copying is demonstrated in the trace view below on GPU streams *#167*, *#168*, and *#169*.
+演算の大部分を GPU に配置する理由の 1 つは、ホストとデバイス間の過剰なメモリコピーを防ぐことです（ホストとデバイス間のモデル入力/出力データのメモリコピーが予想されます）。過度のコピーの例は、GPU ストリーム *#167*、*#168*、および *#169* に関する以下のトレースビューに示されています。
 
 ![image](images/gpu_perf_analysis/traceview_excessive_copy.png "TensorFlow Profile trace view demonstrating excessive H2D/D2H copies")
 
-These copies can sometimes hurt the performance if they block GPU kernels from executing. Memory copy operations in the [trace viewer](https://www.tensorflow.org/guide/profiler#trace_viewer) have more information about the ops that are the source of these copied tensors, but it might not always be easy to associate a memCopy with an op. In these cases, it is helpful to look at the ops nearby to check if the memory copy happens at the same location in every step.
+これらのコピーが GPU カーネルの実行をブロックすると、パフォーマンスが低下することがあります。[トレースビューア](https://www.tensorflow.org/guide/profiler#trace_viewer)のメモリコピー演算には、これらのコピーされたテンソルのソースである演算に関する詳細情報がありますが、memCopy を 演算に関連付けるのは必ずしも容易ではない場合があります。このような場合、近くの演算を調べて、すべてのステップでメモリコピーが同じ場所で発生しているかどうかを確認すると役立ちます。
 
-#### 3. More efficient kernels on GPUs
+#### 3. GPU 上のより効率的なカーネル
 
-Once your program's GPU utilization is acceptable, the next step is to look into increasing the efficiency of the GPU kernels by utilizing Tensor Cores or fusing ops.
+プログラムの GPU 使用率が許容範囲内になると、次のステップとして、テンソルコアを利用するか演算を融合することによって、GPU カーネルの効率を高めることを検討します。
 
-##### 1. Utilize Tensor Cores
+##### 1. テンソルコアを利用する
 
-Modern NVIDIA® GPUs have specialized [Tensor Cores](https://www.nvidia.com/en-gb/data-center/tensor-cores/) that can significantly improve the performance of eligible kernels.
+最新の NVIDIA® GPU には、適格なカーネルのパフォーマンスを大幅に向上させることができる特殊な [テンソルコア](https://www.nvidia.com/en-gb/data-center/tensor-cores/)があります。
 
-You can use TensorBoard's [GPU kernel stats](https://www.tensorflow.org/guide/profiler#gpu_kernel_stats) to visualize which GPU kernels are Tensor Core-eligible, and which kernels are using Tensor Cores. Enabling `fp16` (see Enabling Mixed Precision section below) is one way to make your program’s General Matrix Multiply (GEMM) kernels (matmul ops) utilize the Tensor Core. GPU kernels use the Tensor Cores efficiently when the precision is fp16 and input/output tensor dimensions are divisible by 8 or 16 (for `int8`).
+TensorBoard の[GPU カーネル統計](https://www.tensorflow.org/guide/profiler#gpu_kernel_stats)を使用して、どの GPU カーネルがテンソルコアに適しているか、どのカーネルがテンソルコアを使用しているかを視覚化できます。`fp16` を有効にする（以下の「混合精度を有効にする」セクションを参照）ことは、プログラムの General Matrix Multiply（GEMM）カーネル（matmul ops）がテンソルコアを利用するようにする 1 つの方法です。精度が fp16 で、入力/出力テンソルの次元が 8 または 16 で割り切れる場合（`int8` の場合）、GPU カーネルはテンソルコアを効率的に使用します。
 
-Note: With cuDNN v7.6.3 and later, convolution dimensions will automatically be padded where necessary to leverage Tensor Cores.
+注意: cuDNN v7.6.3 以降では、テンソルコアを活用するために必要な場所に畳み込み次元が自動的にパディングされます。
 
-For other detailed recommendations on how to make kernels efficient for GPUs, refer to the [NVIDIA® deep learning performance](https://docs.nvidia.com/deeplearning/performance/index.html#perf-guidelines) guide.
+GPU でカーネルを効率的にする方法についてのその他の詳細な推奨事項については、[NVIDIA® ディープラーニングパフォーマンス](https://docs.nvidia.com/deeplearning/performance/index.html#perf-guidelines)ガイドをご覧ください。
 
-##### 2. Fuse ops
+##### 2. 融合演算
 
-Use `tf.function(jit_compile=True)` to fuse smaller ops to form bigger kernels leading to significant performance gains. To learn more, refer to the [XLA](https://www.tensorflow.org/xla) guide.
+`tf.function(jit_compile=True)` を使用して小さな演算を融合し、大きなカーネルを形成してパフォーマンスを大幅に向上させます。詳細については、[XLA](https://www.tensorflow.org/xla) ガイドをご覧ください。
 
-### 3. Enable mixed precision and XLA
+### 3. 混合精度と XLA を有効にする
 
-After following the above steps, enabling mixed precision and XLA are two optional steps you can take to improve performance further. The suggested approach is to enable them one by one and verify that the performance benefits are as expected.
+上記の手順を実行した後、混合精度と XLA を有効にすることは、パフォーマンスをさらに向上させるために実行できる 2 つのオプションの手順です。推奨されるアプローチは、それらを 1 つずつ有効にして、パフォーマンス上のメリットが期待どおりであることを確認することです。
 
-#### 1. Enable mixed precision
+#### 1. 混合精度を有効にする
 
-The TensorFlow [Mixed precision](https://www.tensorflow.org/guide/keras/mixed_precision) guide shows how to enable `fp16` precision on GPUs. Enable [AMP](https://developer.nvidia.com/automatic-mixed-precision) on NVIDIA® GPUs to use Tensor Cores and realize up to 3x overall speedups when compared to using just `fp32` (float32) precision on Volta and newer GPU architectures.
+TensorFlow [混合精度](https://www.tensorflow.org/guide/keras/mixed_precision)ガイドは、GPU で `fp16` 精度を有効にする方法を示しています。NVIDIA® GPU で [AMP](https://developer.nvidia.com/automatic-mixed-precision) を有効にしてテンソルコアを使用し、Volta および新しい GPU アーキテクチャで `fp32`（float32）精度のみを使用する場合と比較して、最大 3 倍の全体的なスピードアップを実現します。
 
-Make sure that matrix/tensor dimensions satisfy requirements for calling kernels that use Tensor Cores. GPU kernels use the Tensor Cores efficiently when the precision is fp16 and input/output dimensions are divisible by 8 or 16 (for int8).
+行列/テンソルの次元が、テンソルコアを使用するカーネルを呼び出すための要件を満たしていることを確認してください。精度が fp16 で、入出力次元が 8 または 16（int8 の場合）で割り切れる場合、GPU カーネルはテンソルコアを効率的に使用します。
 
-Note that with cuDNN v7.6.3 and later, convolution dimensions will automatically be padded where necessary to leverage Tensor Cores.
+cuDNN v7.6.3 以降では、テンソルコアを活用するために必要な場所に畳み込み次元が自動的にパディングされることに注意してください。
 
-Follow the best practices below to maximize the performance benefits of `fp16` precision.
+`fp16` 精度のパフォーマンス上のメリットを最大化するには、以下のベストプラクティスに従ってください。
 
-##### 1. Use optimal fp16 kernels
+##### 1. 最適な fp16 カーネルを使用する
 
-With `fp16` enabled, your program’s matrix multiplications (GEMM) kernels, should use the corresponding `fp16` version that utilizes the Tensor Cores. However, in some cases, this does not happen and you do not experience the expected speedup from enabling `fp16`, as your program falls back to the inefficient implementation instead.
+`fp16` を有効にすると、プログラムの行列乗算（GEMM）カーネルは、テンソルコアを利用する対応する `fp16` バージョンを使用する必要があります。ただし、場合によっては、プログラムが非効率的な実装にフォールバックするため、これが発生せず、`fp16` を有効にしても期待される速度向上が得られません。
 
 ![image](images/gpu_perf_analysis/gpu_kernels.png "TensorFlow Profile GPU Kernel Stats page")
 
-The [GPU kernel](https://www.tensorflow.org/guide/profiler#gpu_kernel_stats) stats page shows which ops are Tensor Core eligible and which kernels are actually using the efficient Tensor Core. The [NVIDIA® guide on deep learning performance](https://docs.nvidia.com/deeplearning/performance/mixed-precision-training/index.html#opt-tensor-cores) contains additional suggestions on how to leverage Tensor Cores. Additionally, the benefits of using `fp16` will also show in kernels that were previously memory bound, as now the ops will take half the time.
+[GPU カーネル](https://www.tensorflow.org/guide/profiler#gpu_kernel_stats)統計ページには、どの演算がテンソルコアに適しているか、どのカーネルが実際に効率的なテンソルコアを使用しているかが表示されます。[ディープラーニングパフォーマンスに関する NVIDIA® ガイド](https://docs.nvidia.com/deeplearning/performance/mixed-precision-training/index.html#opt-tensor-cores)には、テンソルコアの活用方法についての追加の提案が含まれています。さらに、演算にかかる時間が半減したため、以前はメモリにバインドされていたカーネルでも `fp16` を使用することによるメリットが見られます。
 
-##### 2. Dynamic vs. static loss scaling
+##### 2.動的と静的損失スケーリングの対比
 
-Loss scaling is necessary when using `fp16` to prevent underflow due to low precision. There are two types of loss scaling, dynamic and static, both of which are explained in greater detail in the [Mixed Precision guide](https://www.tensorflow.org/guide/keras/mixed_precision). You can use the `mixed_float16` policy to automatically enable loss scaling within the Keras optimizer.
+低精度によるアンダーフローを防ぐために、`fp16` を使用する場合は、損失スケーリングが必要です。損失スケーリングには動的と静的の 2 種類があり、どちらも[混合精度ガイド](https://www.tensorflow.org/guide/keras/mixed_precision)で詳しく説明されています。`mixed_float16` ポリシーを使用して、Keras オプティマイザ内で自動的に損失スケーリングを有効にすることができます。
 
-Note: The Keras mixed precision API defaults to evaluating standalone softmax ops (ops not part of a Keras loss function) as `fp16` which can lead to numerical issues and poor convergence. Cast such ops to `fp32` for optimal performance.
+注意: Keras 混合精度 API は、デフォルトでスタンドアロンのソフトマックス演算（Keras 損失関数の一部ではない演算）を `fp16` として評価するため、数値の問題や収束の低下につながる可能性があります。パフォーマンスの最適化には、そのような演算を `fp32` にキャストします。
 
-When trying to optimize performance, it is important to remember that dynamic loss scaling can introduce additional conditional ops that run on the host, and lead to gaps that will be visible between steps in the trace viewer. On the other hand, static loss scaling does not have such overheads and can be a better option in terms of performance with the catch that you need to specify the correct static-loss scale value.
+パフォーマンスを最適化しようとする場合、動的損失スケーリングによって、ホストで実行される追加の条件付き演算が導入され、トレースビューアのステップ間にギャップが生じる可能性があることを覚えておくことが重要です。一方、静的損失スケーリングにはそのようなオーバーヘッドがなく、正しい静的損失スケール値を指定する必要があるため、パフォーマンスの点で優れたオプションになる可能性があります。
 
-#### 2. Enable XLA with tf.function(jit_compile=True) or auto-clustering
+#### 2. tf.function(jit_compile=True) または自動クラスタリングで XLA を有効にする
 
-As a final step in getting the best performance with a single GPU, you can experiment with enabling XLA, which will fuse ops and lead to better device utilization and a lower memory footprint. For details on how to enable XLA in your program with `tf.function(jit_compile=True)` or auto-clustering, refer to the [XLA](https://www.tensorflow.org/xla) guide.
+単一の GPU で最高のパフォーマンスを得るための最後のステップとして、XLA を有効にして実験できます。これにより、演算が融合され、デバイスの使用率が向上し、メモリフットプリントが削減されます。プログラムで `tf.function(jit_compile=True)` または自動クラスタリングを使用して XLA を有効にする方法の詳細については、[XLA](https://www.tensorflow.org/xla) ガイドをご覧ください。
 
-You can set the global JIT level to `-1` (off), `1`, or `2`. A higher level is more aggressive and may reduce parallelism and use more memory. Set the value to `1` if you have memory restrictions. Note that XLA does not perform well for models with variable input tensor shapes as the XLA compiler would have to keep compiling kernels whenever it encounters new shapes.
+グローバル JIT レベルを `-1`（オフ）、`1`、または `2` に設定できます。レベルが高いほどアグレッシブになり、並列処理が減り、より多くのメモリを使用する可能性があります。メモリに制限がある場合は、値を `1` に設定します。 XLA コンパイラは、新しい形状に遭遇するたびにカーネルをコンパイルし続ける必要があるため、変数入力テンソル形状を持つモデルでは XLA が適切に機能しないことに注意してください。
 
-## 2. Optimize the performance on the multi-GPU single host
+## 2. マルチ GPU 単一ホストでパフォーマンスを最適化する
 
-The `tf.distribute.MirroredStrategy` API can be used to scale model training from one GPU to multiple GPUs on a single host. (To learn more about how to do distributed training with TensorFlow, refer to the [Distributed training with TensorFlow](https://www.tensorflow.org/guide/distributed_training), [Use a GPU](https://www.tensorflow.org/guide/gpu), and [Use TPUs](https://www.tensorflow.org/guide/tpu) guides and the [Distributed training with Keras](https://www.tensorflow.org/tutorials/distribute/keras) tutorial.)
+`tf.distribute.MirroredStrategy` API を使用して、単一ホスト上の 1 つの GPU から複数の GPU にモデル トレーニングをスケーリングできます。（TensorFlow を使用して分散トレーニングを行う方法の詳細については、[TensorFlow を使用した分散トレーニング](https://www.tensorflow.org/guide/distributed_training)、[GPU を使用する](https://www.tensorflow.org/guide/gpu)、[TPUを使用する](https://www.tensorflow.org/guide/tpu)ガイド、および [Keras を使用した分散トレーニング](https://www.tensorflow.org/tutorials/distribute/keras)チュートリアルをご覧ください。）
 
-Although the transition from one GPU to multiple GPUs should ideally be scalable out of the box, you can sometimes encounter performance issues.
+1 つの GPU から複数の GPU への移行は理想的にはそのままでスケーラブルであるべきですが、パフォーマンスの問題が発生する場合があります。
 
-When going from training with a single GPU to multiple GPUs on the same host, ideally you should experience the performance scaling with only the additional overhead of gradient communication and increased host thread utilization. Because of this overhead, you will not have an exact 2x speedup if you move from 1 to 2 GPUs, for example.
+単一の GPU を使用したトレーニングから同じホスト上の複数の GPU に移行する場合、理想的には、勾配通信の追加のオーバーヘッドとホストスレッドの使用率の増加のみでパフォーマンスのスケーリングを経験するはずです。このオーバーヘッドのため、例えば GPU を 1 つから 2 つに変更した場合、正確に 2 倍のスピードアップは得られません。
 
-The trace view below shows an example of the extra communication overhead when training on multiple GPUs. There is some overhead to concatenate the gradients, communicate them across replicas, and split them before doing the weight update.
+以下のトレースビューは、複数の GPU でトレーニングする場合の余分な通信オーバーヘッドの例を示しています。重みの更新を行う前に、勾配を連結し、レプリカ間で伝達し、分割するためのオーバーヘッドがあります。
 
 ![image](images/gpu_perf_analysis/traceview_multi_gpu.png "TensorFlow Profile trace view for single host multi GPU scenario")
 
-The following checklist will help you achieve better performance when optimizing the performance in the multi-GPU scenario:
+次のチェックリストは、マルチ GPU シナリオでパフォーマンスを最適化するときにパフォーマンスを向上させるのに役立ちます。
 
-1. Try to maximize the batch size, which will lead to higher device utilization and amortize the costs of communication across multiple GPUs. Using the [memory profiler](https://www.tensorflow.org/guide/profiler#memory_profile_summary) helps get a sense of how close your program is to peak memory utilization. Note that while a higher batch size can affect convergence, this is usually outweighed by the performance benefits.
-2. When moving from a single GPU to multiple GPUs, the same host now has to process much more input data. So, after (1), it is recommended to re-check the input pipeline performance and make sure it is not a bottleneck.
-3. Check the GPU timeline in your program's trace view for any unnecessary AllReduce calls, as this results in a synchronization across all devices. In the trace view shown above, the AllReduce is done via the [NCCL](https://developer.nvidia.com/nccl) kernel, and there is only one NCCL call on each GPU for the gradients on each step.
-4. Check for unnecessary D2H, H2D and D2D copy operations that can be minimized.
-5. Check the step time to make sure each replica is doing the same work. For example, it can happen that one GPU (typically, `GPU0`) is oversubscribed because the host mistakenly ends up putting more work on it.
-6. Lastly, check the training step across all GPUs in your trace view for any ops that are executing sequentially. This usually happens when your program includes control dependencies from one GPU to another. In the past, debugging the performance in this situation has been solved on a case-by-case basis. If you observe this behavior in your program, [file a GitHub issue](https://github.com/tensorflow/tensorflow/issues/new/choose) with images of your trace view.
+1. バッチサイズを最大化するようにしてください。これにより、デバイスの使用率が向上し、複数の GPU 間の通信コストが償却されます。[メモリプロファイラ](https://www.tensorflow.org/guide/profiler#memory_profile_summary)を使用すると、プログラムがメモリ使用率のピークにどれだけ近づいているかを把握するのに役立ちます。バッチサイズを大きくすると収束に影響を与える可能性がありますが、通常はパフォーマンス上のメリットがそれを上回ります。
+2. 単一の GPU から複数の GPU に移行する場合、同じホストでより多くの入力データを処理する必要があります。そのため、（1）の後、入力パイプラインのパフォーマンスを再確認し、ボトルネックになっていないことを確認することをお勧めします。
+3. プログラムのトレースビューで GPU タイムラインをチェックして、不要な AllReduce 呼び出しがないか確認してください。この呼び出しにより、すべてのデバイス間で同期が行われるためです。上記のトレースビューでは、AllReduce は [NCCL](https://developer.nvidia.com/nccl) カーネルを介して実行され、各ステップの勾配に対して各 GPU で 1 つの NCCL 呼び出しのみが行われます。
+4. 最小化できる不要な D2H、H2D、および D2D コピー操作を確認します。
+5. ステップ時間をチェックして、各レプリカが同じ作業を行っていることを確認します。例えば、1 つの GPU（通常は`GPU0`）がオーバーサブスクライブされることがあります。これは、ホストが誤って GPU により多くの作業を行うことになるためです。
+6. 最後に、トレースビューですべての GPU のトレーニングステップをチェックして、順番に実行されている演算を確認します。これは通常、ある GPU から別の GPU への制御の依存関係がプログラムに含まれている場合に発生します。以前は、この状況でのパフォーマンスのデバッグは個別に解決されていました。プログラムでこの動作が確認された場合は、トレースビューの画像を添えて [GitHub の課題を提出](https://github.com/tensorflow/tensorflow/issues/new/choose)してください。
 
-### 1. Optimize gradient AllReduce
+### 1. 勾配 AllReduce を最適化する
 
-When training with a synchronous strategy, each device receives a portion of the input data.
+同期ストラテジーでトレーニングする場合、各デバイスは入力データの一部を受け取ります。
 
-After computing the forward and backwards passes through the model, the gradients calculated on each device need to be aggregated and reduced. This *gradient AllReduce* happens after the gradient calculation on each device, and before the optimizer updates the model weights.
+モデルのフォワードパスとバックワードパスを計算した後、各デバイスで計算された勾配を集計して削減する必要があります。この*勾配 AllReduce* は、各デバイスでの勾配計算の後、オプティマイザがモデルの重みを更新する前に発生します。
 
-Each GPU first concatenates the gradients across the model layers, communicates them across GPUs using `tf.distribute.CrossDeviceOps` (`tf.distribute.NcclAllReduce` is the default), and then returns the gradients after reduction per layer.
+各 GPU は最初にモデルレイヤー全体で勾配を連結し、`tf.distribute.CrossDeviceOps`（`tf.distribute.NcclAllReduce` がデフォルト）を使用して GPU 間でそれらを通信し、レイヤーごとに削減した後に勾配を返します。
 
-The optimizer will use these reduced gradients to update the weights of your model. Ideally, this process should happen at the same time on all GPUs to prevent any overheads.
+オプティマイザは、これらの減少した勾配を使用して、モデルの重みを更新します。理想的には、オーバーヘッドを防ぐために、このプロセスはすべての GPU で同時に発生する必要があります。
 
-The time to AllReduce should be approximately the same as:
+AllReduce にかかる時間は、次とほぼ同じになります。
 
 ```
 (number of parameters * 4bytes)/ (communication bandwidth)
 ```
 
-This calculation is useful as a quick check to understand whether the performance you have when running a distributed training job is as expected, or if you need to do further performance debugging. You can get the number of parameters in your model from `Model.summary`.
+この計算は、分散トレーニングジョブを実行したときのパフォーマンスが期待どおりかどうか、またはさらにパフォーマンスのデバッグを行う必要があるかどうかを理解するためのクイックチェックとして役立ちます。`Model.summary` からモデル内のパラメーターの数を取得できます。
 
-Note that each model parameter is 4 bytes in size since TensorFlow uses `fp32` (float32) to communicate gradients. Even when you have `fp16` enabled, NCCL AllReduce utilizes `fp32` parameters.
+TensorFlow は勾配の伝達に `fp32`（float32）を使用するため、各モデルパラメータのサイズは 4 バイトであることに注意してください。`fp16` を有効にしても、NCCL AllReduce は `fp32` パラメータを利用します。
 
-To get the benefits of scaling, the step-time needs to be much higher compared to these overheads. One way to achieve this is to use a higher batch size as batch size affects step time, but does not impact the communication overhead.
+スケーリングのメリットを得るには、これらのオーバーヘッドに比べてステップ時間を大幅に長くする必要があります。これを実現する 1 つの方法は、バッチサイズがステップ時間に影響するため、より大きなバッチサイズを使用することですが、通信のオーバーヘッドには影響しません。
 
-### 2. GPU host thread contention
+### 2. GPU ホストスレッドの競合
 
-When running multiple GPUs, the CPU’s job is to keep all of the devices busy by efficiently launching GPU kernels across the devices.
+複数の GPU を実行している場合、CPU の仕事は、デバイス間で GPU カーネルを効率的に起動することで、すべてのデバイスをビジー状態に保つことです。
 
-However, when there are a lot of independent operations that the CPU can schedule on one GPU, the CPU can decide to use a lot of its host threads to keep one GPU busy, and then launch kernels on another GPU in a non-deterministic order. This can cause a skew or negative scaling, which can negatively affect the performance.
+ただし、CPU が 1 つの GPU でスケジュールできる独立した演算が多数ある場合、CPU は多くのホストスレッドを使用して 1 つの GPU をビジー状態に保ち、別の GPU で非確定的な順序でカーネルを起動することを決定できます。これにより、スキューまたは負のスケーリングが発生し、パフォーマンスに悪影響を及ぼす可能性があります。
 
-The [trace viewer](https://www.tensorflow.org/guide/profiler#trace_viewer) below shows the overhead when the CPU staggers GPU kernel launches inefficiently, as `GPU1` is idle and then starts running ops after `GPU2` has started.
+以下の[トレースビューア](https://www.tensorflow.org/guide/profiler#trace_viewer)は、`GPU1` がアイドル状態で、`GPU2` の起動後に演算の実行を開始するため、CPU が GPU カーネルを非効率的に起動する際のオーバーヘッドを示しています。
 
 ![image](images/gpu_perf_analysis/traceview_gpu_idle.png "TensorFlow Profile device trace view demonstrating inefficient kernel launch")
 
-The trace view for the host shows that the host is launching kernels on `GPU2` before launching them on `GPU1` (note that the below `tf_Compute*` ops are not indicative of CPU threads).
+ホストのトレースビューは、ホストがカーネルを `GPU1` で起動する前に `GPU2` で起動していることを示しています（以下の `tf_Compute*` 演算は CPU スレッドを示すものではないことに注意してください）。
 
 ![image](images/gpu_perf_analysis/traceview_host_contention.png "TensorFlow Profile host trace view demonstrating inefficient kernel launch")
 
-If you experience this kind of staggering of GPU kernels in your program’s trace view, the recommended action is to:
+プログラムのトレースビューでこの種の GPU カーネルのずれが発生した場合、推奨されるアクションは次のとおりです。
 
-- Set the TensorFlow environment variable `TF_GPU_THREAD_MODE` to `gpu_private`. This environment variable will tell the host to keep threads for a GPU private.
-- By default,`TF_GPU_THREAD_MODE=gpu_private` sets the number of threads to 2, which is sufficient in most cases. However, that number can be changed by setting the TensorFlow environment variable `TF_GPU_THREAD_COUNT` to the desired number of threads.
+- TensorFlow 環境変数 `TF_GPU_THREAD_MODE` を `gpu_private` に設定します。この環境変数は、GPU のスレッドを非公開にするようにホストに指示します。
+- デフォルトでは、`TF_GPU_THREAD_MODE=gpu_private` はスレッド数を 2 に設定します。ほとんどの場合、これで十分です。ただし、TensorFlow 環境変数 `TF_GPU_THREAD_COUNT` を目的のスレッド数に設定することで変更できます。
