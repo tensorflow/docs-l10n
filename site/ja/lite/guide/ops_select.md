@@ -66,7 +66,7 @@ sh tensorflow/lite/tools/build_aar.sh \
   --target_archs=x86,x86_64,arm64-v8a,armeabi-v7a
 ```
 
-上記のコードは、TensorFlow Lite の組み込み演算子とカスタム演算子用に、AAR ファイル`bazel-bin/tmp/tensorflow-lite.aar`を生成します。稼働中のビルド環境がない場合は、<a>Docker を使って上記のファイルを作成</a>することも可能です。
+上記のコードは、TensorFlow Lite の組み込み演算子とカスタム演算子用に、AAR ファイル`bazel-bin/tmp/tensorflow-lite.aar`を生成します。稼働中のビルド環境がない場合は、[Docker を使って上記のファイルを作成](../guide/reduce_binary_size.md#selectively_build_tensorflow_lite_with_docker)することも可能です。
 
 生成したら、AAR ファイルを直接プロジェクトにインポートするか、カスタム AAR ファイルをローカルの Maven リポジトリに公開することが可能です。
 
@@ -129,7 +129,7 @@ TensorFlow Lite は、`TensorFlowLiteSwift` または `TensorFlowLiteObjC` と�
 -force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
 ```
 
-すると、`SELECT_TF_OPS` で変換されたモデルを iOS アプリで実行できるようになります。たとえば、[Image Classification iOS アプリ](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios)を変更して、セレクト TF 演算子の機能をテストすることができます。
+すると、`SELECT_TF_OPS`で変換されたモデルを iOS アプリで実行できるようになります。たとえば、[Image Classification iOS アプリ](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios)を変更して、Select TF 演算子の機能をテストすることができます。
 
 - モデルファイルを `SELECT_TF_OPS` が有効化された状態で変換されたファイルと置き換えます。
 - 指示されたとおりに、`TensorFlowLiteSelectTfOps` 依存関係を `Podfile` に追加します。
