@@ -160,7 +160,7 @@ MobileNet v2 | 37 ms | 94 ms | 923.6 ms | 13 MB
 
 ##### 推断与训练
 
-为解决部署预训练模型的主要用例，WASM 后端的开发工作在*推断*方面的支持将优先于*训练*。请参见 WASM 所支持运算的[最新列表](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/src/kernels/all_kernels.ts)，如果您的模型具有不受支持的运算，请[告诉我们](https://github.com/tensorflow/tfjs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)。对于训练模型，建议使用 Node (TensorFlow C++) 后端或 WebGL 后端。
+为解决部署预训练模型的主要用例，WASM 后端的开发工作在*推断*方面的支持将优先于*训练*。请参见 WASM 所支持运算的[最新列表](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/src/register_all_kernels.ts)，如果您的模型具有不受支持的运算，请[告诉我们](https://github.com/tensorflow/tfjs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)。对于训练模型，建议使用 Node (TensorFlow C++) 后端或 WebGL 后端。
 
 #### CPU 后端
 
