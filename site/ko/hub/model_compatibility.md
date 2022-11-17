@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-04-09' review_interval: '6 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-07' } *-->
 
 # TF1/TF2의 모델 호환성
 
@@ -28,8 +28,7 @@ TF Hub는 TensorFlow 프로그램에서 다시 로드, 빌드 및 재훈련할 �
 </td>
     <td> hub.load 사용 권장     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
 outputs = m.signatures["sig"](inputs)</pre>       또는 hub.KerasLayer 사용 권장      <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle, signature="sig")
-outputs = m(inputs)</pre>
-</td>
+outputs = m(inputs)</pre> </td>
   </tr>
   <tr>
     <td>미세 조정</td>
@@ -39,8 +38,7 @@ outputs = m(inputs)</pre>
   </tr>
   <tr>
     <td>생성</td>
-    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">전체 TF1 Hub 형식 생성 가이드 참조</a>) <br><div style="font-style: italic; font-size: 14px"> 참고: TF1 Hub 형식은 TF1에 맞춰져 있으며 TF2에서는 부분적으로만 지원됩니다. TF2 SavedModel의 생성을 고려해 보세요.</div>
-</td>
+    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">전체 TF1 Hub 형식 생성 가이드 참조</a>) <br><div style="font-style: italic; font-size: 14px"> 참고: TF1 Hub 형식은 TF1에 맞춰져 있으며 TF2에서는 부분적으로만 지원됩니다. TF2 SavedModel의 생성을 고려해 보세요.</div> </td>
     <td style="text-align: center">지원되지 않음</td>
   </tr>
 </table>
@@ -62,10 +60,8 @@ TF1.15 이전에는 지원되지 않습니다.
     <td>로딩/추론</td>
     <td>       hub.load 사용     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
 outputs = m(inputs)</pre>       또는 hub.KerasLayer 사용      <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
-outputs = m(inputs)</pre>
-</td>
-    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">전체 TF2 SavedModel 로딩 가이드</a>). 다음 중 하나를 사용하세요. hub.load <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre> 또는 hub.KerasLayer <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre>
-</td>
+outputs = m(inputs)</pre> </td>
+    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">전체 TF2 SavedModel 로딩 가이드</a>). 다음 중 하나를 사용하세요. hub.load <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre> 또는 hub.KerasLayer <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre> </td>
   </tr>
   <tr>
     <td>미세 조정</td>
@@ -75,9 +71,9 @@ outputs = m(inputs)</pre>
   </tr>
   <tr>
     <td>생성</td>
-    <td>TF2 API <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save">tf.saved_model.save()</a>는 호환 모드에서 호출할 수 있습니다.</td>
+    <td>TF2 API <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save">tf.saved_model.save ()</a> 는 compat 모드에서 호출 할 수 있습니다.</td>
    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf2_saved_model#creating_savedmodels_for_tf_hub">전체 TF2 SavedModel 생성 가이드</a> 참조)</td>
   </tr>
 </table>
 
-<p id="compatfootnote">[1] "TF2의 TF1 호환 모드"는 <a href="https://www.tensorflow.org/guide/migrate">TensorFlow 마이그레이션 가이드</a>의 설명과 같이 <code style="font-size: 12px;" lang="python">import tensorflow.compat.v1 as tf</code>로 TF2를 가져오고 <code style="font-size: 12px;" lang="python">tf.disable_v2_behavior()</code>를 실행하는 결합된 효과를 말합니다.</p>
+<p id="compatfootnote">[1] "TF2의 TF1 호환 모드"는 <a>TensorFlow 마이그레이션 가이드</a>의 설명과 같이 <code style="font-size: 12px;" lang="python">import tensorflow.compat.v1 as tf</code>로 TF2를 가져오고 <code>tf.disable_v2_behavior()</code>를 실행하는 결합된 효과를 말합니다.</p>
