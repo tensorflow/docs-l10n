@@ -427,7 +427,7 @@ tfds build --register_checksums
 
 `tfds.testing.DatasetBuilderTestCase` 是用于完整训练数据集的基础 `TestCase`。它使用“虚拟数据”作为测试数据来模拟源数据集的结构。
 
-- The test data should be put in `my_dataset/dummy_data/` directory and should mimic the source dataset artifacts as downloaded and extracted. It can be created manually or automatically with a script ([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/bccd/dummy_data_generation.py)).
+- 测试数据应放置在 `my_dataset/dummy_data/` 目录中，并应模拟下载和提取的源数据集工件。可以手动创建，也可以使用脚本（[示例脚本](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/bccd/dummy_data_generation.py)）自动创建。
 - 确保在测试数据拆分中使用不同的数据，因为如果数据集拆分重叠，测试将失败。
 - **测试数据不应包含任何受版权保护的材料**。如有疑问，请勿使用原始数据集中的材料创建数据。
 
