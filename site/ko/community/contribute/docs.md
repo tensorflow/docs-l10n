@@ -179,7 +179,7 @@ TensorFlow 문서 프로젝트의 경우, 출력 셀이 *없는* 노트북이 �
 
 Google Colab 환경에서 셀을 두 번 클릭하여 텍스트 및 코드 블록을 편집하십시오. 텍스트 셀은 마크 다운을 사용하며 [TensorFlow 문서 스타일 가이드를](./docs_style.md) 따라야합니다.
 
-Download notebook files from Colab with *File &gt; Download .pynb*. Commit this file to your [local Git repo](##set_up_a_local_git_repo) and send a pull request.
+Colab에서 *File &gt; Download .pynb*를 이용해 노트북 파일을 다운로드합니다. 이 파일을 자신의 [local Git repo](##set_up_a_local_git_repo)에 커밋하고 풀 요청을 보냅니다.
 
 새 노트북을 작성하려면 <a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow 노트북 템플리트를</a> 복사하고 편집하십시오.
 
