@@ -118,9 +118,9 @@ TFF は関数的であるため、ステートフルプロセスは、その時�
 
 ### 利用可能なビルダー
 
-現在、TFF は、フェデレーテッドトレーニングと評価のための連合コンピュテーションを生成する 2 つのビルダー関数を提供しています。
+At the moment, TFF provides various builder functions that generate federated computations for federated training and evaluation. Two notable examples include:
 
-- `tff.learning.build_federated_averaging_process`*はモデル関数*と*クライアントオプティマイザ*を受け取り、ステートフルな`tff.templates.IterativeProcess`を返します。
+- `tff.learning.algorithms.build_weighted_fed_avg`, which takes as input a *model function* and a *client optimizer*, and returns a stateful `tff.learning.templates.LearningProcess` (which subclasses `tff.templates.IterativeProcess`).
 
 - 評価はステートフルではないため、`tff.learning.build_federated_evaluation`は*モデル関数*を取り、モデルの連合評価のための一つの連合コンピュテーションを返します。
 
@@ -137,7 +137,7 @@ TFF は関数的であるため、ステートフルプロセスは、その時�
 フェデレーテッドラーニングコードの現実的なデプロイメントをシミュレートするには、通常、次のようなトレーニングループを記述します。
 
 ```python
-trainer = tff.learning.build_federated_averaging_process(...)
+trainer = tff.learning.algorithms.build_weighted_fed_avg(...)
 state = trainer.initialize()
 federated_training_data = ...
 
@@ -146,7 +146,8 @@ def sample(federate_data):
 
 while True:
   data_for_this_round = sample(federated_training_data)
-  state, metrics = trainer.next(state, data_for_this_round)
+  result = trainer.next(state, data_for_this_round)
+  state = result.state
 ```
 
 これを容易にするために、シミュレーションで TFF を使用する場合、連合データは Python`list`として受け入れられ、参加しているクライアントデバイスごとに 1 つの要素を使用して、そのデバイスのローカル`tf.data.Dataset`を表します。
