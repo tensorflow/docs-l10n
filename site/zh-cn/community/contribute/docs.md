@@ -190,7 +190,7 @@ $ python3 -m tensorflow_docs.tools.nbfmt [options] notebook.ipynb [...]
 1. 在您复制的 <var>username</var>/docs 仓库中，使用 GitHub Web 界面<a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">创建新分支</a>。
 2. 导航到要编辑的笔记本文件。
 3. 在 Google Colab 中打开笔记本：使用网址替换或 *Open in Colab* Chrome 扩展程序。
-4. 在 Colab 中编辑笔记本。
+4. Edit the notebook in Colab.
 5. 点击 *File &gt; Save a copy in GitHub...* 从 Colab 中向您的仓库提交变更。保存对话框应链接到相应的仓库和分支。添加一条有意义的提交消息。
 6. 保存后，浏览到您的仓库或者 <a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> 仓库，GitHub 应提示您创建拉取请求。
 7. 维护者会审查拉取请求。
