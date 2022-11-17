@@ -199,7 +199,7 @@ MoveNet은 다양한 데이터세트, 특히 피트니스 동작 이미지가 �
   <li><a href="https://youtu.be/I5__9hq-yas">놀라운 예술 설치물이 당신을 새로 만들어줍니다 | Chris Milk "성역의 배반"</a></li>
   <li><a href="https://vimeo.com/34824490">퍼펫 퍼레이드 - 인터랙티브 Kinect Puppets</a></li>
   <li><a href="https://vimeo.com/2892576">Messa di Voce(공연), 발췌</a></li>
-  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">Augmented reality</a></li>
+  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">증강 현실</a></li>
   <li><a href="https://www.instagram.com/p/Bg1EgOihgyh/">대화형 애니메이션</a></li>
-  <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">Gait analysis</a></li>
+  <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">보행 분석</a></li>
 </ul>
