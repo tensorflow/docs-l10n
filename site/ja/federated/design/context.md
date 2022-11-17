@@ -12,7 +12,7 @@
 
 [execution_context.ExecutionContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/execution_contexts/sync_execution_context.py) は、コンパイル関数を使用して計算をコンパイルし、[Executor](execution.md#executor) を使用して計算を実行する [context_base.Context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) です。
 
-この API は、[Executor](execution.md#executor) が実行に使用される場合に使用される **high-level abstraction** を定義します。[native](backend.md#native) と [IREE](backend.md#iree) のバックエンドはこのレベルで統合されます。
+この API は、[Executor](execution.md#executor) が実行に使用される時に使用される **高レベルの抽象化**を定義します。[native](backend.md#native) はこのレベルで統合されます。
 
 ### `FederatedComputationContext`
 
