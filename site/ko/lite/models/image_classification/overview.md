@@ -158,7 +158,7 @@ TensorFlow Lite는 MobileNet 모델의 Top-5 정확도 범위를 64.4~89.9%로 �
 
 ### 모델 크기
 
-The size of a model on-disk varies with its performance and accuracy. Size may be important for mobile development (where it might impact app download sizes) or when working with hardware (where available storage might be limited).
+디스크에 있는 모델의 크기는 성능과 정확성에 따라 다릅니다. 크기는 모바일 개발(앱 다운로드 크기에 영향을 줄 수 있음) 또는 하드웨어 작업(사용 가능한 저장 용량이 제한될 수 있음)에 중요할 수 있습니다.
 
 TensorFlow Lite는 MobileNet 모델의 크기 범위를 0.5~3.4MB로 양자화했습니다.
 
