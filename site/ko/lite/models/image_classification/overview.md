@@ -47,15 +47,15 @@ Android/iOS 이외의 플랫폼을 사용 중이거나 이미 [TensorFlow Lite A
   </thead>
   <tbody>
     <tr>
-      <td>Rabbit</td>
+      <td>토끼</td>
       <td>0.07</td>
     </tr>
     <tr>
-      <td>Hamster</td>
+      <td>햄스터</td>
       <td>0.02</td>
     </tr>
     <tr>
-      <td style="background-color: #fcb66d;">Dog</td>
+      <td style="background-color: #fcb66d;">개</td>
       <td style="background-color: #fcb66d;">0.91</td>
     </tr>
   </tbody>
