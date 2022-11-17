@@ -26,7 +26,7 @@ TensorFlow Federated [托管了多个数据集](https://www.tensorflow.org/feder
 
 数据集包括：
 
-- [**StackOverflow**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data) A realistic text dataset for language modeling or supervised learning tasks, with 342,477 unique users with 135,818,730 examples (sentences) in the training set.
+- [**StackOverflow**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data)一个用于语言建模或监督学习任务的真实文本数据集，训练集中有 342,477 个唯一用户和 135,818,730 个样本（句子）。
 
 - [**Federated EMNIST**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/emnist/load_data)。EMNIST 字符和数字数据集的联合预处理，其中每个客户端对应一个不同的编写器。完整的训练集包含 3400 个用户和来自 62 个标签的 671,585 个样本。
 
