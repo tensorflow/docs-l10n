@@ -88,7 +88,7 @@ docker run option '--privileged=true'
         - Device Compute Time: オンデバイスの計算時間
         - All others, including Python overhead.
 
-    2. Device compute precisions - Reports the percentage of device compute time that uses 16 and 32-bit computations.
+    2. Device Compute Precisions - 16 ビットおよび 32 ビット計算を使用するデバイス演算時間の割合を報告します。
 
 - **Step-time Graph**: サンプリングされたすべてのステップのデバイスステップ時間（ミリ秒単位）のグラフを表示します。各ステップは、時間を費やしている箇所によって複数のカテゴリに（別々の色で）分かれています。赤い領域は、デバイスがホストからの入力データを待機してアイドル状態であったステップ時間の部分に対応しています。緑の領域は、デバイスが実際に動作していた時間の長さを示しています。
 
@@ -266,7 +266,7 @@ Timeline ペインには、次の要素が含まれます。
 
 - 上のペインには、合計経過時間が最も長い CUDA カーネルを示す円グラフが表示されます。
 
-- The lower pane displays a table with the following data for each unique kernel-op pair:
+- 下のペインには、一意のカーネルと演算のペアごとに次のデータを含むテーブルが表示されます。
 
     - A rank in descending order of total elapsed GPU duration grouped by kernel-op pair.
     - The name of the launched kernel.
