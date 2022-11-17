@@ -96,15 +96,6 @@ Here we give more information about the model including how it was trained,
 expected use cases, and code snippets demonstrating how to use the model:
 
 ```
-Code snippet demonstrating use (e.g. for a TF model using the tensorflow_hub library)
-
-import tensorflow_hub as hub
-
-model = hub.KerasLayer(<model name>)
-inputs = ...
-output = model(inputs)
-```
-```
 
 ### モデルのデプロイとデプロイのグループ化
 
@@ -208,7 +199,7 @@ tar.gz アーカイブの場合: モデルファイルがディレクトリ `my_
 
 コレクションは、パブリッシャーが関連するモデルをバンドルすることにより、ユーザーの検索体験の向上を可能にする tfhub.dev の機能です。
 
-すべてのコレクションリストは tfhub.dev をご覧ください。
+[すべてのコレクションリスト](https://tfhub.dev/s?subtype=model-family)は tfhub.dev をご覧ください。
 
 リポジトリ [github.com/tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) 内のコレクションファイルの正しい場所は、[assets/docs](https://github.com/tensorflow/tfhub.dev)/<b>publisher_name&gt;</b>/collections/<b>&lt;collection_name&gt;</b>/<b>1</b>.md です。
 
