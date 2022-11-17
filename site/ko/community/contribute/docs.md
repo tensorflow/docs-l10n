@@ -1,4 +1,4 @@
-# TensorFlow 설명서에 참여
+# TensorFlow 문서에 기여하기
 
 TensorFlow는 문서 기여를 환영합니다. 문서를 개선하면 TensorFlow 라이브러리 자체도 개선됩니다. tensorflow.org의 문서는 다음 범주로 분류됩니다.
 
@@ -179,21 +179,21 @@ TensorFlow 문서 프로젝트의 경우, 출력 셀이 *없는* 노트북이 �
 
 Google Colab 환경에서 셀을 두 번 클릭하여 텍스트 및 코드 블록을 편집하십시오. 텍스트 셀은 마크 다운을 사용하며 [TensorFlow 문서 스타일 가이드를](./docs_style.md) 따라야합니다.
 
-Colab에서 *File &gt; Download .pynb*를 이용해 노트북 파일을 다운로드합니다. 이 파일을 자신의 [local Git repo](##set_up_a_local_git_repo)에 커밋하고 풀 요청을 보냅니다.
+Download notebook files from Colab with *File &gt; Download .pynb*. Commit this file to your [local Git repo](##set_up_a_local_git_repo) and send a pull request.
 
 새 노트북을 작성하려면 <a href="https://github.com/tensorflow/docs/blob/master/tools/templates/notebook.ipynb" external="class">TensorFlow 노트북 템플리트를</a> 복사하고 편집하십시오.
 
 ### Colab-GitHub 워크플로
 
-노트북 파일을 다운로드하고 로컬 Git 워크플로를 사용하는 대신 Google Colab에서 직접 포크된 GitHub 리포지토리를 편집하고 업데이트할 수 있습니다.
+Instead of downloading a notebook file and using a local Git workflow, you can edit and update your forked GitHub repo directly from Google Colab:
 
 1. 당신의 Fork <var>username</var>/docs 리포지토리는 <a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository" class="external">새 브랜치 만들기</a>를 위해 GitHub 웹의 UI를 사용합니다.
-2. 편집 할 전자 필기장 파일로 이동하십시오.
-3. Google Colab에서 노트북을 엽니 다. URL 스왑 또는 *Open in Colab* Chrome 확장 프로그램을 사용합니다.
-4. Colab에서 노트북을 편집하십시오.
-5. *파일&gt; GitHub에 사본 저장 ...을 사용하여* Colab에서 리포지토리에 대한 변경 사항을 커밋합니다. 저장 대화 상자는 적절한 저장소 및 분기에 링크되어야합니다. 의미있는 커밋 메시지를 추가합니다.
+2. 편집할 노트북 파일로 이동합니다.
+3. Open the notebook in Google Colab: use the URL swap or the *Open in Colab* Chrome extension.
+4. Colab에서 노트북을 편집합니다.
+5. *File &gt; Save a copy in GitHub...*을 사용하여 Colab에서 리포지토리로 변경 사항을 커밋합니다. 저장 대화 상자는 해당 리포지토리 및 분기에 연결됩니다. 의미 있는 커밋 메시지를 추가합니다.
 6. 저장 후, 당신의 리포지토리 혹은<a href="https://github.com/tensorflow/docs" class="external">tensorflow/docs</a> 리포지토리를 찾기 위해, GitHub는 새로운 풀 요청을 할 것을 알려줍니다.
-7. 풀 요청은 관리자가 검토합니다.
+7. The pull request is reviewed by maintainers.
 
 성공: TensorFlow 문서에 대한 변경 사항이 승인되었습니다.
 
