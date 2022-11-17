@@ -86,13 +86,13 @@ builder.download_and_prepare(download_config=dl_config)
 
 Apache Beam のデータセットを書き込むにあたり、以下の概念を理解しておく必要があります。
 
-- ほとんどの内容が Beam のデータセットにも適用されるため、[`tfds` データセット作成ガイド](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)に精通しましょう。
+- [`tfds` データセット作成ガイド](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md)をよく読みましょう。ほとんどの内容は Beam データセットにも適用されます。
 - [Beam プログラミングガイド](https://beam.apache.org/documentation/programming-guide/)で Apache Beam の概要を把握しましょう。
 - Cloud Dataflow を使用してデータセットを生成する場合は、[Google Cloud ドキュメント](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python) と [Apache Beam 依存性ガイド](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/)をお読みください。
 
 ### 手順
 
-[データセット作成ガイド](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)を理解しているのであれば、Beam データセットの追加には、`_generate_examples` 関数のみを変更する必要があることはお分かりでしょう。この関数はジェネレータではなく Beam 関数を返します。
+[データセット作成ガイド](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md)を理解しているのであれば、Beam データセットの追加には、`_generate_examples` 関数を変更することだけが必要です。この関数はジェネレータではなく beam オブジェクトを返します。
 
 Beam 以外のデータセット:
 
