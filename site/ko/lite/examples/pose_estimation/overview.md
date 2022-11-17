@@ -1,14 +1,15 @@
 # 포즈 추정
 
+
 <img src="../images/pose.png" class="attempt-right">
 
 포즈 추정은 ML 모델을 사용하여 주요 신체 관절(키포인트)의 공간적 위치를 추정하여 이미지 또는 비디오로부터 사람의 포즈를 추정하는 작업입니다.
 
 ## 시작하기
 
-<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite">스타터 모델 다운로드하기</a>
+TensorFlow Lite를 처음 사용하고 Android 또는 iOS로 작업하는 경우, 다음 예제 애플리케이션을 탐색하면 시작하는 데 도움이 됩니다.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android 예제</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS 예제</a>
+<a data-md-type="raw_html" class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android 예제</a> <a data-md-type="raw_html" class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS 예제</a>
 
 [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite)에 익숙하다면 스타터 MoveNet 포즈 추정 모델 및 지원 파일을 다운로드하세요.
 
@@ -112,19 +113,18 @@
 
 아래에 출력의 예를 나타내었습니다.
 
-
-<img alt="포즈 추정을 보여주는 애니메이션" src="https://www.tensorflow.org/images/lite/models/pose_estimation.gif">
+<img src="https://www.tensorflow.org/images/lite/models/pose_estimation.gif" alt="포즈 추정을 보여주는 애니메이션">
 
 ## 성능 벤치마크
 
 MoveNet은 두 가지 버전으로 제공됩니다.
 
 - MoveNet.Lightning은 Thunder 버전보다 더 작고 빠르지만 덜 정확합니다. 최신 스마트폰에서 실시간으로 실행할 수 있습니다.
-- MoveNet.Thunder는 더 정확한 버전이지만 Lightning보다 크고 느립니다. 더 높은 정확도가 필요한 사용 사례에 유용합니다.
+- MoveNet.Thunder는 더 정확한 버전이지만 Lightning보다 크고 느립니다. 더 높은 정확성이 필요한 사용 사례에 유용합니다.
 
 MoveNet은 다양한 데이터세트, 특히 피트니스 동작 이미지가 있는 이미지에서 PoseNet을 능가합니다. 따라서 PoseNet보다 MoveNet을 사용하는 것이 좋습니다.
 
-성능 벤치마크 수치는 [여기에 설명](../../performance/measurement)된 도구로 생성됩니다. 정확도(mAP) 수치는 [COCO 데이터세트](https://cocodataset.org/#home)의 일부분에서 측정되며, 여기에서 한 사람만 포함하도록 각 이미지를 필터링하고 자릅니다.
+성능 벤치마크 수치는 [여기에 설명](../../performance/measurement)된 도구로 생성됩니다. 정확성(mAP) 수치는 [COCO 데이터세트](https://cocodataset.org/#home)의 일부분에서 측정되며, 여기에서 한 사람만 포함하도록 각 이미지를 필터링하고 자릅니다.
 
 <table>
 <thead>
@@ -199,7 +199,7 @@ MoveNet은 다양한 데이터세트, 특히 피트니스 동작 이미지가 �
   <li><a href="https://youtu.be/I5__9hq-yas">놀라운 예술 설치물이 당신을 새로 만들어줍니다 | Chris Milk "성역의 배반"</a></li>
   <li><a href="https://vimeo.com/34824490">퍼펫 퍼레이드 - 인터랙티브 Kinect Puppets</a></li>
   <li><a href="https://vimeo.com/2892576">Messa di Voce(공연), 발췌</a></li>
-  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">증강 현실</a></li>
+  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">Augmented reality</a></li>
   <li><a href="https://www.instagram.com/p/Bg1EgOihgyh/">대화형 애니메이션</a></li>
-  <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">보행 분석</a></li>
+  <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">Gait analysis</a></li>
 </ul>
