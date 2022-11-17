@@ -23,7 +23,7 @@ Float16 양자화 | 2배 더 작아진 GPU | CPU, GPU
 
 ### 동적 범위 양자화
 
-훈련 후 양자화의 가장 간단한 형태는 8bit의 정밀도를 가진 부동 소수점에서 정수까지 가중치만 정적으로 양자화합니다.
+동적 범위 양자화는 보정을 위한 대표 데이터세트를 제공하지 않아도 메모리 사용량을 줄여주고 더 빠른 컴퓨팅을 할 수 있도록 해주므로 시작 지점으로 좋습니다. 이러한 유형의 양자화는 변환 시 부동 소수점부터 정수까지의 가중치로만 정적으로 양자화하여 8비트의 정밀도를 제공합니다.
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -31,9 +31,7 @@ converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
 tflite_quant_model = converter.convert()
 </pre>
 
-추론에서 가중치는 8bit 정밀도에서 부동 소수점으로 변환되고 부동 소수점 커널을 사용하여 계산됩니다. 이 변환은 한 번 수행되고 캐시되어 지연 시간을 줄입니다.
-
-지연 시간을 더욱 개선하기 위해 '동적 범위' 연산자는 8bit까지 범위를 기반으로 활성화를 동적으로 양자화하고 8bit 가중치 및 활성화를 사용하여 계산을 수행합니다. 이 최적화는 전체 고정 소수점 추론에 가까운 지연 시간을 제공합니다. 그러나 출력은 여전히 부동 소수점을 사용하여 저장되므로 동적 범위 연산을 통한 속도 향상은 전체 고정 소수점 계산보다 적습니다.
+지연 시간을 더욱 개선하기 위해 "동적 범위" 연산자는 8비트까지의 범위를 기반으로 활성화를 동적으로 양자화하고 8비트 가중치 및 활성화를 사용하여 계산을 수행합니다. 이 최적화는 전체 고정 소수점 추론에 가까운 지연을 제공합니다. 그러나 출력은 여전히 부동 소수점을 허용하여 저장되므로 향상된 동적 범위 연산 속도는 전체 고정 소수점 계산보다 적습니다.
 
 ### 전체 정수 양자화
 
@@ -91,7 +89,7 @@ TensorFlow 2.7 버전부터 입력 텐서 목록 기반 접근 방식보다 서�
 
 #### 부동 폴 백이 있는 정수(기본 부동 입력/출력 사용하기)
 
-모델을 완전히 정수로 양자화하지만 정수 구현이 없는 경우 부동 연산자를 사용하려면(원활하게 변환을 수행하기 위해) 다음 스탭을 사용합니다.
+모델을 완전히 정수로 양자화하지만 정수 구현이 없는 경우 부동 연산자를 사용하려면(원활하게 변환을 수행하기 위해) 다음 단계를 사용합니다.
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -103,11 +101,11 @@ tflite_quant_model = converter.convert()</pre>
 
 #### 정수 전용
 
-*정수 전용 모델을 만드는 것은 [마이크로 컨트롤러용 TensorFlow Lite](https://www.tensorflow.org/lite/microcontrollers) 및 [Coral 에지 TPU](https://coral.ai/)의 일반적인 사용 사례입니다.*
+*정수 전용 모델을 만드는 것은 [마이크로콘트롤러용 TensorFlow Lite](https://www.tensorflow.org/lite/microcontrollers) 및 [Coral Edge TPU](https://coral.ai/)의 일반적인 사용 사례입니다.*
 
 참고: TensorFlow 2.3.0부터는 `inference_input_type` 및 `inference_output_type` 속성을 지원합니다.
 
-또한 정수 전용 기기(예: 8bit 마이크로 컨트롤러) 및 가속기(예: Coral 에지 TPU)와의 호환성을 보장하기 위해 다음 스탭을 사용하여 입력 및 출력을 포함한 모든 연산에 대해 전체 정수 양자화를 적용할 수 있습니다.
+또한 정수 전용 기기(예: 8bit 마이크로컨트롤러) 및 가속기(예: Coral Edge TPU)와의 호환성을 보장하기 위해 다음 단계를 사용하여 입력 및 출력을 포함한 모든 연산에 대해 전체 정수 양자화를 적용할 수 있습니다.
 
 <pre>import tensorflow as tf
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir)
@@ -195,6 +193,6 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 - 축당(일명 채널당) 또는 텐서당 가중치는 0과 같은 영점이 있는 [-127, 127] 범위의 int8 2의 보수 값으로 표시됩니다.
 
-- 텐서별 활성화/입력은 [-128, 127] 범위의 int8 2의 보수 값으로 표시되며 [-128, 127] 범위의 영점을 포함합니다.
+- Per-tensor activations/inputs represented by int8 two’s complement values in the range [-128, 127], with a zero-point in range [-128, 127].
 
 양자화 체계에 대한 자세한 내용은 [양자화 사양](./quantization_spec)을 참조하세요. TensorFlow Lite의 대리자 인터페이스에 연결하려는 하드웨어 공급 업체는 여기에 설명된 양자화 체계를 구현해보는 것이 좋습니다.
