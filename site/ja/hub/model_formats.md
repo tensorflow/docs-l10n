@@ -12,7 +12,7 @@
 
 TF2 SavedModel は、TensorFlow モデルを共有する際の推奨形式です。SavedModel 形式の詳細については、[TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) ガイドをご覧ください。
 
-You can browse SavedModels on tfhub.dev by using the TF2 version filter on the [tfhub.dev browse page](https://tfhub.dev/s?subtype=module,placeholder) or by following [this link](https://tfhub.dev/s?subtype=module,placeholder&tf-version=tf2).
+[tfhub.dev の参照ページ](https://tfhub.dev/s?subtype=module,placeholder)で TF2 バージョンフィルタを使用するか、[こちらのリンク](https://tfhub.dev/s?subtype=module,placeholder&tf-version=tf2)に従って、tfhub.dev の SavedModel を参照できます。
 
 この形式は TensorFlow のコアの一部であるため、tfhub.dev の SavedModel を `tensorflow_hub` ライブラリに依存せずに使用することができます。
 
@@ -26,7 +26,7 @@ SavedModel については、TF Hub でさらにご覧ください。
 
 TF1 Hub 形式は、TF Hub ライブラリで使用されるカスタムシリアル化形式です。TF1 Hub 形式は、TensorFlow 1 の SavedModel 形式と構文レベルで似ていますが（同じファイル名とプロトコルメッセージ）、セマンティックレベルでは、モジュールの再利用、合成および再トレーニングが可能という点で異なります（リソースイニシャライザのストレージが異なる、メタグラフのタグ規則が異なるなど）。ディスク上で区別するには、`tfhub_module.pb`ファイルの有無を確認することが最も簡単です。
 
-You can browse models in the TF1 Hub format on tfhub.dev by using the TF1 version filter on the [tfhub.dev browse page](https://tfhub.dev/s?subtype=module,placeholder) or by following [this link](https://tfhub.dev/s?subtype=module,placeholder&tf-version=tf1).
+[tfhub.dev の参照ページ](https://tfhub.dev/s?subtype=module,placeholder)で TF1 バージョンフィルタを使用するか、[こちらのリンク](https://tfhub.dev/s?subtype=module,placeholder&tf-version=tf1)に従って、tfhub.dev の TF1 Hub 形式のモデルを参照できます。
 
 TF1 Hub 形式のモデルについては、さらに TF Hub でご覧ください。
 
