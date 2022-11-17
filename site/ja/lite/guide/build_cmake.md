@@ -176,7 +176,7 @@ cmake --build . -j -t label_image
 
 ## TensorFlow Lite の構築で使用可能なオプション
 
-使用可能なオプションは次のとおりです。`-D<option_name>=[ON|OFF]` で上書きできます。たとえば、`-DTFLITE_ENABLE_XNNPACK=OFF` を使用すると、既定で有効な XNNPACK が無効になります。
+使用可能なオプションは次のとおりです。`-D<option_name>=[ON|OFF]` でオーバーライドできます。たとえば、`-DTFLITE_ENABLE_XNNPACK=OFF` を使用すると、既定で有効な XNNPACK が無効になります。
 
 オプション名 | 機能 | Android | Linux | macOS | Windows
 --- | --- | --- | --- | --- | ---
