@@ -26,7 +26,7 @@ dependencies {
 }
 ```
 
-ナイトリーのスナップショットを使用する場合は、プロジェクトに [Sonatype スナップショットリポジトリ](./lite_build#use_nightly_snapshots)が追加されていることを確認してください。
+毎日夜間に実行されるスナップショットを使用するには、[Sonatype スナップショットリポジトリ](./lite_build#use_nightly_snapshots)が追加されていることを確認してください。
 
 詳細は、[TensorFlow Lite タスクライブラリの概要](../inference_with_metadata/task_library/overview.md)の概要のセクションをご覧ください。
 
@@ -76,7 +76,7 @@ dependencies {
 }
 ```
 
-ナイトリーのスナップショットを使用する場合は、プロジェクトに [Sonatype スナップショットリポジトリ](./lite_build#use_nightly_snapshots)が追加されていることを確認してください。
+毎日夜間に実行されるスナップショットを使用するには、[Sonatype スナップショットリポジトリ](./lite_build#use_nightly_snapshots)が追加されていることを確認してください。
 
 基本的な手順については、[TensorFlow Lite Android Support Library](../inference_with_metadata/lite_support.md) を参照してください。
 
