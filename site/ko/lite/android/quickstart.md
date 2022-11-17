@@ -17,14 +17,14 @@
 
 ### 예제 코드 가져오기
 
-예제 코드를 구축하고 실행할 수 있도록 예제 코드의 로컬 복사본을 생성합니다.
+예제 코드를 구축하고 실행할 수 있도록 예제 코드의 로컬 사본을 생성합니다.
 
 예제 코드를 복제하고 설정하려면:
 
 1. git 리포지토리를 복제합니다.
     <pre class="devsite-click-to-copy">    git clone https://github.com/tensorflow/examples.git
             </pre>
-2. 스파스 체크아웃을 사용하도록 git 인스턴스를 구성하면 물체 감지 예제 앱에 대한 파일만 남게 됩니다.
+2. 희소 체크아웃을 사용하도록 git 인스턴스를 구성하면 객체 감지 예제 앱에 대한 파일만 남게 됩니다.
     <pre class="devsite-click-to-copy">    cd examples
             git sparse-checkout init --cone
             git sparse-checkout set lite/examples/object_detection/android_play_services
@@ -159,7 +159,7 @@ TensorFlow Lite와 함께 하드웨어 가속 대리자를 사용하는 방법�
 
 ### 모델에 대한 데이터 준비하기
 
-모델이 처리할 수 있도록 이미지와 같은 기존 데이터를 [Tensor](../api_docs/java/org/tensorflow/lite/Tensor) 데이터 형식으로 변환하여 모델이 해석할 수 있도록 데이터를 준비합니다. Tensor의 데이터는 모델을 훈련하는 데 사용되는 데이터 형식과 일치하는 특정 치수나 모양이 있어야 합니다. 사용하는 모델에 따라, 모델이 기대하는 것에 맞도록 데이터를 변환해야 할 수 있습니다. 예제 앱은 [`ImageAnalysis`](https://developer.android.com/reference/androidx/camera/core/ImageAnalysis) 객체를 사용하여 카메라 하위 시스템에서 이미지 프레임을 추출합니다.
+모델이 처리할 수 있도록 이미지와 같은 기존 데이터를 [텐서](../api_docs/java/org/tensorflow/lite/Tensor) 데이터 형식으로 변환하여 모델이 해석할 수 있도록 데이터를 준비합니다. 텐서의 데이터는 모델을 훈련하는 데 사용되는 데이터 형식과 일치하는 특정 치수나 형상이 있어야 합니다. 사용하는 모델에 따라, 모델이 기대하는 것에 맞도록 데이터를 변환해야 할 수 있습니다. 예제 앱은 [`ImageAnalysis`](https://developer.android.com/reference/androidx/camera/core/ImageAnalysis) 객체를 사용하여 카메라 하위 시스템에서 이미지 프레임을 추출합니다.
 
 모델이 처리할 데이터를 준비하려면 다음을 수행합니다.
 
@@ -262,4 +262,4 @@ TensorFlow Lite와 함께 하드웨어 가속 대리자를 사용하는 방법�
 - [Interpreter API](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/InterpreterApi)에 대해 더 자세히 알아봅니다.
 - [예제](../examples)에서 TensorFlow Lite의 용도를 살펴봅니다.
 - [모델](../models) 섹션에서 TensorFlow Lite를 통해 머신러닝 모델을 사용하고 구축하는 것에 대해 더 자세히 알아봅니다.
-- [TensorFlow Lite 개발자 가이드](../guide)에서 모바일 애플리케이션에서 머신 러닝을 구현하는 방법에 대해 자세히 알아봅니다.
+- [TensorFlow Lite 개발자 가이드](../guide)에서 모바일 애플리케이션에서 머신러닝을 구현하는 방법에 대해 자세히 알아봅니다.
