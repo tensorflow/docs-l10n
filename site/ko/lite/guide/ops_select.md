@@ -40,7 +40,7 @@ dependencies {
 }
 ```
 
-야간 스냅샷을 사용하려면 [Sonatype 스냅샷 저장소](../android/lite_build.md#use_nightly_snapshots)를 추가했는지 확인하세요.
+야간 스냅샷을 사용하려면 [Sonatype 스냅샷 리포지토리](../android/lite_build.md#use_nightly_snapshots)를 추가했는지 확인하세요.
 
 종속성을 추가한 경우, 그래프의 TensorFlow ops를 처리하는 데 필요한 대리자가 이러한 연산자가 필요한 그래프에 대해 자동으로 설치됩니다.
 
@@ -117,13 +117,13 @@ TensorFlow Lite는 `TensorFlowLiteSwift` 또는 `TensorFlowLiteObjC` CocoaPods�
 
 `pod install`을 실행한 후에는 추가 링커 플래그를 제공하여 특정 TF ops 프레임워크를 프로젝트에 강제로 로드해야 합니다. Xcode 프로젝트에서 `Build Settings` -&gt; `Other Linker Flags`로 이동하여 다음을 추가합니다.
 
-For versions &gt;= 2.9.0:
+2.9.0 버전 이상인 경우:
 
 ```text
 -force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.xcframework/ios-arm64/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
 ```
 
-For versions &lt; 2.9.0:
+2.9.0 버전 미만인 경우:
 
 ```text
 -force_load $(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps
