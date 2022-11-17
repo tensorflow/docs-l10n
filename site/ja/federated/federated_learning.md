@@ -118,9 +118,9 @@ TFF は関数的であるため、ステートフルプロセスは、その時�
 
 ### 利用可能なビルダー
 
-At the moment, TFF provides various builder functions that generate federated computations for federated training and evaluation. Two notable examples include:
+現時点では、TFF は、連合トレーニングと評価のための連合コンピュテーションを生成するビルダー関数をいくか提供しています。中でも重要な関数には、以下の 2 つが含まれます。
 
-- `tff.learning.algorithms.build_weighted_fed_avg`, which takes as input a *model function* and a *client optimizer*, and returns a stateful `tff.learning.templates.LearningProcess` (which subclasses `tff.templates.IterativeProcess`).
+- `tff.learning.algorithms.build_weighted_fed_avg`: 入力として*モデル関数*と*クライアントオプティマイザ*を取り、ステートフルな `tff.learning.templates.LearningProcess`（`tff.templates.IterativeProcess` をサブクラス化する）を返します。
 
 - 評価はステートフルではないため、`tff.learning.build_federated_evaluation`は*モデル関数*を取り、モデルの連合評価のための一つの連合コンピュテーションを返します。
 
