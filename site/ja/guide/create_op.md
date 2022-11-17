@@ -384,7 +384,7 @@ $ python zero_out_op_test.py
     - [Polymorphism](#polymorphism)
     - [Inputs and outputs](#inputs-and-outputs)
     - [下位互換性](#backwards-compatibility)
-- [GPU support](#gpu-support)
+- [GPU のサポート](#gpu-support)
     - [GPU デバイス向けのカーネルのコンパイル](#compiling-the-kernel-for-the-gpu-device)
 - [Python での勾配の実装](#implement-the-gradient-in-python)
 - [C++ での形状関数](#shape-functions-in-c)
@@ -404,13 +404,13 @@ $ python zero_out_op_test.py
   }
 ```
 
-This asserts that the input is a vector, and returns having set the `InvalidArgument` status if it isn't.  The [`OP_REQUIRES` macro](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h) takes three arguments:
+これは入力がベクトルであることを表明し、ベクトルでない場合は `InvalidArgument` ステータスを設定して戻します。[`OP_REQUIRES` マクロ](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h)は、次の 3 つの引数を取ります。
 
 - `context`。`OpKernelContext` または `OpKernelConstruction` のポインタで（[`tensorflow/core/framework/op_kernel.h`](https://www.tensorflow.org/code/tensorflow/core/framework/op_kernel.h) を参照）、`SetStatus()` メソッドに使用します。
 - 条件文。例として [`tensorflow/core/framework/tensor_shape.h`](https://www.tensorflow.org/code/tensorflow/core/framework/tensor_shape.h) には、テンソルの形状を検証するための関数があります。
-- The error itself, which is represented by a `Status` object, see [`tensorflow/core/platform/status.h`](https://www.tensorflow.org/code/tensorflow/core/platform/status.h). A `Status` has both a type (frequently `InvalidArgument`, but see the list of types) and a message.  Functions for constructing an error may be found in [`tensorflow/core/platform/errors.h`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h).
+- エラー。`Status` オブジェクトで表現されます。[`tensorflow/core/lib/core/status.h`](https://www.tensorflow.org/code/tensorflow/core/platform/status.h) をご覧ください。`Status` には、型（通常は `InvalidArgument` ですが、型のリストをご覧ください）とメッセージの両方があります。エラーを構築する関数は、[`tensorflow/core/platform/errors.h`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h) にある場合があります。
 
-Alternatively, if you want to test whether a `Status` object returned from some function is an error, and if so return it, use [`OP_REQUIRES_OK`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h).  Both of these macros return from the function on error.
+または、ある関数から返された `Status` オブジェクトがエラーであるかをテストし、エラーである場合はそれを返して [`OP_REQUIRES_OK`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h) を使用することもできます。これらのマクロは、エラー時に関数から返されます。
 
 ### 演算子の登録
 
