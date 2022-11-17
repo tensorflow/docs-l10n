@@ -100,6 +100,29 @@ std::vector<core::Category> categories = classifier->Classify(input_text);
 
 请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_nl_classifier.h)，了解详细信息。
 
+## 在 Python 中运行推断
+
+### 第 1 步：安装 pip 软件包
+
+```
+pip install tflite-support
+```
+
+### 第 2 步：使用模型
+
+```python
+# Imports
+from tflite_support.task import text
+
+# Initialization
+classifier = text.BertNLClassifier.create_from_file(model_path)
+
+# Run inference
+text_classification_result = classifier.classify(text)
+```
+
+请参阅[源代码](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/bert_nl_classifier.py)，了解有关配置 `BertNLClassifier` 的更多选项。
+
 ## 结果示例
 
 下面是使用 Model Maker 中的 [MobileBert](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) 模型对电影评论进行分类的结果示例。
