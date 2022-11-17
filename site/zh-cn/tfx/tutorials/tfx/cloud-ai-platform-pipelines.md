@@ -2,7 +2,7 @@
 
 ## 简介
 
-本教程旨在介绍 TensorFlow Extended (TFX) 和 [AIPlatform Pipelines] (https://cloud.google.com/ai-platform/pipelines/docs/introduction)，并帮助您学习在 Google Cloud 上创建自己的机器学习流水线。教程展示了与 TFX、AI Platform Pipelines 和 Kubeflow 的集成，以及在 Jupyter 笔记本中与 TFX 的交互。
+本教程旨在介绍 [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx) 和 [AIPlatform Pipelines] (https://cloud.google.com/ai-platform/pipelines/docs/introduction)，并帮助您学习在 Google Cloud 上创建自己的机器学习流水线。教程展示了与 TFX、AI Platform Pipelines 和 Kubeflow 的集成，以及在 Jupyter 笔记本中与 TFX 的交互。
 
 在本教程结束时，您将完成对托管在 Google Cloud 上的 ML 流水线的创建和运行。您将能够呈现每个运行的结果，并查看创建的工件的沿袭。
 
@@ -21,7 +21,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 您将使用芝加哥市发布的 [Taxi Trips 数据集](https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew)。
 
-注：本网站提供的应用所使用的数据来自原始源（www.cityofchicago.org，芝加哥市官方网站），但在使用时进行了修改。芝加哥市不对本网站提供的任何数据的内容、准确性、时效性或完整性承担任何责任。本网站提供的数据可能会随时更改。您了解并同意，使用本网站提供的数据须自担风险。
+注：本网站提供的应用所使用的数据来自原始源（www.cityofchicago.org，芝加哥市官方网站），但在使用时进行了修改。芝加哥市不对本网站提供的任何数据的内容、准确率、时效性或完整性承担任何责任。本网站提供的数据可能会随时更改。您了解并同意，使用本网站提供的数据须自担风险。
 
 您可以在 [Google BigQuery](https://cloud.google.com/bigquery/public-data/chicago-taxi) 中[详细了解](https://cloud.google.com/bigquery/)此数据集，并在 [BigQuery 界面](https://bigquery.cloud.google.com/dataset/bigquery-public-data:chicago_taxi_trips)中探索完整的数据集。
 
@@ -41,7 +41,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 同意 Google Cloud 条款及条件
 
-       <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/welcome-popup.png?raw=true">
+    <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/welcome-popup.png">
 
 3. 如果您想从免费试用帐号开始，请点击 [**Try For Free**](https://console.cloud.google.com/freetrial)（或 [**Get started for free**](https://console.cloud.google.com/freetrial)）。
 
@@ -75,15 +75,15 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 点击 **+ New Instance** 创建一个新集群。
 
-       <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/new-instance.png?raw=true">
+    <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-instance.png">
 
 3. 在 **Kubeflow Pipelines** 概览页面上，点击 **Configure**。
 
-       <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/configure.png?raw=true">
+    <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/configure.png">
 
 4. 点击“Enable”以启用 Kubernetes Engine API
 
-      <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/open-dashboard.png?raw=true" alt="open-dashboard" data-md-type="image">
+       <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
 
     注：您可能需要等待几分钟才能继续，此时我们将为您启用 Kubernetes Engine API。
 
@@ -93,7 +93,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     2. **重要提示**：选中标有 *Allow access to the following cloud APIs* 的复选框。（此群集需要此权限才能访问项目的其他部分。如果跳过此步骤，稍后修复会有些棘手。）
 
-          <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
+           <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
     3. 点击 **Create New Cluster** 并稍候几分钟，直到集群创建完成为止。此过程需要几分钟时间。完成后，您将看到如下消息：
 
@@ -101,7 +101,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     4. 选择命名空间和实例名称（使用默认值即可）。出于本教程的目的，无需选中 *executor.emissary* 或 *managedstorage.enabled*。
 
-    5. 点击 **Deploy**，然后等待几分钟，直到流水线部署完毕。部署 Kubeflow 流水线，即表示您接受《服务条款》。
+    5. 点击 **Deploy**，然后等待几分钟，直到流水线部署完毕。部署 Kubeflow Pipelines，即表示您接受《服务条款》。
 
 ## 3. 设置 Cloud AI Platform 笔记本实例
 
@@ -113,7 +113,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 3. 创建已安装 TensorFlow Enterprise 2.7（或更高版本）的**新笔记本**。
 
-      <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/select-notebook.png?raw=true" alt="select-notebook" data-md-type="image">
+       <img src="images/cloud-ai-platform-pipelines/open-template.png">
 
     New Notebook -&gt; TensorFlow Enterprise 2.7 -&gt; Without GPU
 
@@ -125,7 +125,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     2. 如果您需要留在免费层级，则需要在 **Machine configuration** 下选择 1 个或 2 个 vCPU 的配置。
 
-          <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
+           <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
     3. 等待新笔记本创建完成，然后点击 **Enable Notebooks API**
 
@@ -139,15 +139,15 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 在本教程中使用的集群所在行上，点击 **Open Pipelines Dashboard**。
 
-      <img src="images/cloud-ai-platform-pipelines/open-template.png">
+       <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/open-dashboard.png?raw=true" alt="open-dashboard" data-md-type="image">
 
 3. 在 **Getting Started** 页面上，点击 **Open a Cloud AI Platform Notebook on Google Cloud**。
 
-      <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
+       <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/select-notebook.png?raw=true" alt="select-notebook" data-md-type="image">
 
 4. 选择您用于本教程的笔记本实例并点击 **Continue**，然后点击 **Confirm**。
 
-       <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/cloud-ai-platform-pipelines/check-the-box.png?raw=true">
+    ![select-notebook](images/cloud-ai-platform-pipelines/select-notebook.png)
 
 ## 5. 继续在笔记本中操作
 
@@ -366,7 +366,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ### 查看流水线输出
 
-对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”选项卡，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
+对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”标签页，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
 
 ### 更高级的示例
 
@@ -406,7 +406,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ### 查看流水线输出
 
-对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”选项卡，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
+对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”标签页，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
 
 ### 更高级的示例
 
@@ -449,7 +449,7 @@ components.append(evaluator)
 
 ### 查看流水线输出
 
-对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”选项卡，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
+对于 Kubeflow 编排器，访问 KFP 信息中心并在流水线运行页面中找到流水线输出。点击左侧的“Experiments”标签页，然后在“Experiments”页面中点击“All runs”。您应该能够找到带有流水线名称的运行。
 
 ## 12. 应用模型
 
@@ -494,7 +494,7 @@ components.append(evaluator)
 
 ### Kubeflow Pipelines 资源注意事项
 
-根据载荷的要求，Kubeflow Pipelines 部署的默认配置可能满足也可能不满足您的需求。您可以在调用 `KubeflowDagRunnerConfig` 时使用 `pipeline_operator_funcs` 自定义您的资源配置。
+根据工作负载的要求，Kubeflow Pipelines 部署的默认配置可能满足也可能不满足您的需求。您可以在调用 `KubeflowDagRunnerConfig` 时使用 `pipeline_operator_funcs` 自定义您的资源配置。
 
 `pipeline_operator_funcs` 是 `OpFunc` 项的列表，它会转换在 KFP 流水线规范（从 `KubeflowDagRunner` 编译）中生成的所有 `ContainerOp` 实例。
 
