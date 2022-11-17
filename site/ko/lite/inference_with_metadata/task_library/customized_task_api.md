@@ -105,7 +105,7 @@ API 객체를 빌드하려면 [`BaseTaskApi`](https://github.com/tensorflow/tfli
 
 - **API의 팩터리 함수 만들기** - [`tflite::Interpreter`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/core/api/op_resolver.h)를 초기화하려면 모델 파일과 [`OpResolver`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h)가 필요합니다. [`TaskAPIFactory`](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/core/task_api_factory.h)는 BaseTaskApi 인스턴스를 생성하는 유틸리티 함수를 제공합니다.
 
-    Note: By default [`TaskAPIFactory`](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/core/task_api_factory.h) provides a [`BuiltInOpResolver`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/kernels/register.h). If your model needs customized ops or a subset of built-in ops, you can register them by creating a [`MutableOpResolver`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/mutable_op_resolver.h).
+    참고: 기본적으로, [`TaskAPIFactory`](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/core/task_api_factory.h)는 [`BuiltInOpResolver`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/kernels/register.h)를 제공합니다. 해당 모델에 사용자 정의 ops 또는 내장 ops의 일부가 필요한 경우, [`MutableOpResolver`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/mutable_op_resolver.h)를 만들어 이러한 ops를 등록할 수 있습니다.
 
     모델과 관련된 모든 파일도 제공해야 합니다. 예를 들어, `BertQuestionAnswerer`에는 토큰화된 어휘의 추가 파일이 있을 수도 있습니다.
 
