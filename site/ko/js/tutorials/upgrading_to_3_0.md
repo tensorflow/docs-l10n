@@ -61,7 +61,7 @@ npm을 통해 tensorflow.js를 사용하고 번들을 사용하는 경우, ES201
 
 ### 기본적으로 @tensorflow/tfjs-core는 더욱 빈약합니다.
 
-보다 더 나은 [트리 쉐이킹](https://developers.google.com/web/fundamentals/performance/optimizing-javascript/tree-shaking)을 활성화하려면 @tensorflow/tfjs-core의 기본으로 텐서에 대해 Chaining/Fluent API를 더 이상 포함하지 않습니다. 연산(ops)을 직접 사용하여 가장 작은 번들을 확보하는 것이 좋습니다. Chaining API를 복구하는  가져오기 `import '@tensorflow/tfjs-core/dist/public/chained_ops/register_all_chained_ops';`를 제공합니다.
+보다 더 나은 [트리 쉐이킹](https://developers.google.com/web/fundamentals/performance/optimizing-javascript/tree-shaking)을 활성화하려면 @tensorflow/tfjs-core의 기본으로 텐서에 대해 Chaining/Fluent API를 더 이상 포함하지 않습니다. 연산(ops)을 직접 사용하여 가장 작은 번들을 확보하는 것이 좋습니다. Chaining API를 복구하는 가져오기 `import '@tensorflow/tfjs-core/dist/public/chained_ops/register_all_chained_ops';`를 제공합니다.
 
 또한 기본적으로 커널에 대해 더 이상 그래디언트를 등록하지 않습니다. 그래디언트/훈련 지원을 원한다면 `import '@tensorflow/tfjs-core/dist/register_all_gradients';`가 가능합니다.
 
@@ -69,7 +69,7 @@ npm을 통해 tensorflow.js를 사용하고 번들을 사용하는 경우, ES201
 
 ### 코드 재구성, 커널 및 그래디언트 레지스트리
 
-사용자 지정 ops, 커널 및 그래디언트를 구현하고 ops 및 커널을 기여하는 것이 쉽도록 코드를 재구성했습니다. [자세한 정보는 이 설명서를 참조하십시오.](custom_ops_kernels_gradients.md)
+사용자 정의 ops, 커널 및 그래디언트를 구현하고 ops 및 커널을 기여하는 것이 쉽도록 코드를 재구성했습니다. [자세한 정보는 이 설명서를 참조하십시오.](custom_ops_kernels_gradients.md)
 
 ### 주요 변경 사항
 
@@ -126,7 +126,7 @@ const b = tf.sum(a);
 
 #### 초기화 코드 가져오기
 
-전적으로 명명된 가져오기(`import *  as ...` 대신)를 사용한다면 몇몇 사례의 경우 다음을 수행해야 합니다.
+전적으로 명명된 가져오기(`import * as ...` 대신)를 사용한다면 몇몇 사례의 경우 다음을 수행해야 합니다.
 
 ```
 import @tensorflow/tfjs-core
