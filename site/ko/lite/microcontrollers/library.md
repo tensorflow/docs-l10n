@@ -32,7 +32,7 @@
 
 ### Arduino 라이브러리 사용하기
 
-If you are using Arduino, the *Hello World* example is included in the `Arduino_TensorFlowLite` Arduino library, which you can manually install in the Arduino IDE and in [Arduino Create](https://create.arduino.cc/).
+Arduino를 사용하는 경우, *Hello World* 예제는 `Arduino_TensorFlowLite` Arduino 라이브러리에 포함되어 있고, 이 라이브러리는 Arduino IDE 및 [Arduino Create](https://create.arduino.cc/)에서 다운로드할 수 있습니다.
 
 라이브러리가 추가되면 `File -> Examples`로 이동합니다. 목록 하단 근처에 `TensorFlowLite:hello_world`라는 예제가 표시됩니다. 이 예제를 선택하고 `hello_world`를 클릭하여 예제를 로드합니다. 그런 다음 예제의 사본을 저장하여 고유한 프로젝트의 기초로 이용할 수 있습니다.
 
