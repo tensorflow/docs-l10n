@@ -23,12 +23,12 @@
 
 1. git 리포지토리를 복제합니다.
     <pre class="devsite-click-to-copy">    git clone https://github.com/tensorflow/examples.git
-        </pre>
+            </pre>
 2. 스파스 체크아웃을 사용하도록 git 인스턴스를 구성하면 물체 감지 예제 앱에 대한 파일만 남게 됩니다.
     <pre class="devsite-click-to-copy">    cd examples
-        git sparse-checkout init --cone
-        git sparse-checkout set lite/examples/object_detection/android_play_services
-        </pre>
+            git sparse-checkout init --cone
+            git sparse-checkout set lite/examples/object_detection/android_play_services
+            </pre>
 
 ### 프로젝트 가져오기 및 실행하기
 
@@ -79,7 +79,7 @@ Android Studio를 사용해 다운로드한 예제 코드에서 프로젝트를 
     ...
         // Tensorflow Lite dependencies
         implementation 'org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2'
-        implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
+        implementation 'com.google.android.gms:play-services-tflite-gpu:16.1.0'
     ...
     }
     ```
