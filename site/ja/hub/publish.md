@@ -2,13 +2,13 @@
 
 # 公開プロセス
 
-## Terms of service
+## 利用規約
 
-By submitting a model for publication, you agree to the TensorFlow Hub Terms of Service at [https://tfhub.dev/terms](https://tfhub.dev/terms).
+公開のためにモデルを提出することで、[https://tfhub.dev/terms](https://tfhub.dev/terms) の TensorFlow Hub 利用規約に同意したことになります。
 
-## Overview of the publishing process
+## 公開プロセスの概要
 
-The full process of publishing consists of:
+公開の全プロセスは以下のように構成されています。
 
 1. 公開するモデルアセットをエクスポートする（[モデルをエクスポートする](exporting_tf2_saved_model.md)方法を参照）
 2. パブリッシャーページとモデルドキュメントを記述する（[ドキュメントを記述する](writing_documentation.md)方法を参照）
