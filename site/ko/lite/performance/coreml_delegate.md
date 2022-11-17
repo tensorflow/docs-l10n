@@ -19,7 +19,7 @@ Core ML 대리자는 현재 float(FP32 및 FP16) 모델을 지원합니다.
 
 Core ML 대리자는 TensorFlow lite CocoaPods의 야간 릴리스에 이미 포함되어 있습니다. Core ML 대리자를 사용하려면 `Podfile`에 하위 사양 `CoreML`을 포함하도록 TensorFlow lite 포드를 변경합니다.
 
-Note: If you want to use C API instead of Objective-C API, you can include `TensorFlowLiteC/CoreML` pod to do so.
+참고: Objective-C API 대신 C API를 사용하고자 하는 경우, `TensorFlowLiteC/CoreML` 포드를 포함시킬 수 있습니다.
 
 ```
 target 'YourProjectName'
