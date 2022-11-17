@@ -30,12 +30,12 @@ TFF ランタイムは通常、[AST](compilation.md#ast) の実行を処理し�
 
 ## 実行スタック
 
-実行スタックは、[Executor](#executor) の階層です。[executor_stacks](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) モジュールには、特定の実行スタックを構築・作成するためのロジックが含まれます。
+実行スタックは、[Executor](#executor) の階層です。[executor_stacks](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executor_stacks) パッケージには、特定の実行スタックを構築・作成するためのロジックが含まれます。
 
 ### ローカル実行スタック
 
-[executor_stacks.local_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) 関数は、クライアントで [AST](compilation.md#ast) を実行するローカル実行スタックを構築します。
+[python_executor_stacks.local_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executor_stacks/python_executor_stacks.py) 関数は、クライアントで [AST](compilation.md#ast) を実行するローカル実行スタックを構築します。
 
 ### リモート実行スタック
 
-[executor_stacks.remote_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/executor_stacks.py) 関数は、サービスで [AST](compilation.md#ast) を実行するリモート実行スタックを構築します。
+[python_executor_stacks.remote_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executor_stacks/python_executor_stacks.py) 関数は、サービスで [AST](compilation.md#ast) を実行するリモート実行スタックを構築します。
