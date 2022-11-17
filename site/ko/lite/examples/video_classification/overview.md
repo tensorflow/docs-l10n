@@ -1,5 +1,6 @@
 # 비디오 분류
 
+
 <img src="../images/video.png" class="attempt-right">
 
 *비디오 분류*는 비디오가 나타내는 내용을 식별하는 머신 러닝 작업입니다. 비디오 분류 모델은 다양한 동작이나 움직임과 같은 고유한 클래스 세트가 포함된 비디오 데이터세트에서 학습됩니다. 모델은 비디오 프레임을 입력으로 받고 각 클래스가 비디오에서 표현될 확률을 출력합니다.
@@ -7,6 +8,7 @@
 비디오 분류 및 이미지 분류 모델은 모두 이미지를 입력으로 사용하여 사전 정의된 클래스에 속하는 이러한 이미지의 확률을 예측합니다. 그러나 비디오 분류 모델은 비디오의 동작을 인식하기 위해 인접 프레임 간의 시공간 관계도 처리합니다.
 
 예를 들어, *비디오 동작 인식* 모델은 달리기, 박수, 손 흔드는 것과 같은 인간의 동작을 식별하도록 훈련될 수 있습니다. 다음 이미지는 Android에서 비디오 분류 모델의 출력을 보여줍니다.
+
 
 <img alt="Screenshot of Android example" src="https://storage.googleapis.com/download.tensorflow.org/models/tflite/screenshots/push-up-classification.gif" class="">
 
