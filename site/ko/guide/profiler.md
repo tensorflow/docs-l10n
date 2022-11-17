@@ -264,7 +264,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 이 도구는 두 개의 창에서 정보를 표시합니다.
 
-- The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
+- 상단 창에는 총 시간이 가장 높은 CUDA 커널을 보여주는 파이 차트가 표시됩니다.
 
 - 하단 창에 표시되는 표에서는 각 고유 커널-연산 쌍에 대한 다음 데이터가 표시됩니다.
 
