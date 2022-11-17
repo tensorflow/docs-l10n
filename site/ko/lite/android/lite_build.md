@@ -1,10 +1,10 @@
 # Android용 TensorFlow Lite 빌드하기
 
-이 문서는 TensorFlow Lite Android 라이브러리를 직접 빌드하는 방법을 설명합니다. 일반적으로 TensorFlow Lite Android 라이브러리를 로컬로 빌드할 필요는 없지만 사용하는 가장 쉬운 방법은 [MavenCentral에서 호스팅되는 TensorFlow Lite AAR](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite)을 사용하는 것입니다. Android 프로젝트에서 사용하는 방법에 대한 자세한 내용은 [Android 빠른 시작](../guide/android.md)을 참조하세요.
+이 문서는 TensorFlow Lite Android 라이브러리를 직접 빌드하는 방법을 설명합니다. 일반적으로 TensorFlow Lite Android 라이브러리를 로컬로 빌드할 필요는 없습니다. 사용하길 원하시는 경우 Android 프로젝트에서 사용하는 방법에 대한 자세한 내용은 [Android 빠른 시작](../android/quickstart.md)을 참조하세요.
 
 ## 야간 스냅샷 사용하기
 
-야간 스냅샷을 사용하려면 루트 Gradle 빌드 구성에 다음 저장소를 추가하세요.
+야간 스냅샷을 사용하려면 루트 Gradle 빌드 구성에 다음 리포지토리를 추가하세요.
 
 ```build
 allprojects {
@@ -40,7 +40,7 @@ allprojects {
 docker build . -t tflite-builder -f tflite-android.Dockerfile
 ```
 
-- 컨테이너 내부의 /host_dir에 현재 폴더를 마운트하여 대화형으로 docker 컨테이너를 시작합니다(/tensorflow_src는 컨테이너 내부의 TensorFlow 저장소입니다).
+- 컨테이너 내부의 /host_dir에 현재 폴더를 마운트하여 대화형으로 docker 컨테이너를 시작합니다(/tensorflow_src는 컨테이너 내부의 TensorFlow 리포지토리입니다).
 
 ```shell
 docker run -it -v $PWD:/host_dir tflite-builder bash
@@ -75,7 +75,7 @@ Bazel은 TensorFlow의 기본 빌드 시스템입니다. Bazel을 사용하여 �
 
 ### WORKSPACE 및 .bazelrc 구성하기
 
-루트 TensorFlow 체크아웃 디렉토리에서 `./configure` 스크립트를 실행하고 스크립트가 Android 빌드용 `./WORKSPACE`를 대화식으로 구성할 것인지 물으면 "Yes"를 선택합니다. 스크립트는 다음 환경 변수를 사용하여 설정 구성을 시도합니다.
+이것은 TF Lite 라이브러리 빌드에 필요한 일회성 구성 단계입니다. 루트 TensorFlow 체크아웃 디렉터리에서 `./configure` 스크립트를 실행하고 스크립트가 Android 빌드용 `./WORKSPACE`를 대화식으로 구성할 것인지 물으면 "Yes"를 선택합니다. 스크립트는 다음 환경 변수를 사용하여 설정 구성을 시도합니다.
 
 - `ANDROID_SDK_HOME`
 - `ANDROID_SDK_API_LEVEL`
@@ -94,7 +94,7 @@ build --action_env ANDROID_SDK_HOME="/usr/local/android/android-sdk-linux"
 
 ### 빌드 및 설치하기
 
-Bazel이 올바르게 구성되면 다음과 같이 루트 체크아웃 디렉토리에서 TensorFlow Lite AAR을 빌드할 수 있습니다.
+Bazel이 올바르게 구성되면 다음과 같이 루트 체크아웃 디렉터리에서 TensorFlow Lite AAR을 빌드할 수 있습니다.
 
 ```sh
 bazel build -c opt --fat_apk_cpu=x86,x86_64,arm64-v8a,armeabi-v7a \
@@ -116,7 +116,7 @@ bash tensorflow/lite/tools/build_aar.sh \
 
 #### 프로젝트에 직접 AAR 추가하기
 
-`tensorflow-lite.aar` 파일을 프로젝트의 `libs`라고 하는 디렉토리로 이동합니다. 새 디렉토리를 참조하도록 앱의 `build.gradle` 파일을 수정하고 기존 TensorFlow Lite 종속성을 새 로컬 라이브러리로 바꿉니다. 예를 들면 다음과 같습니다.
+`tensorflow-lite.aar` 파일을 프로젝트의 `libs`라고 하는 디렉터리로 이동합니다. 새 디렉터리를 참조하도록 앱의 `build.gradle` 파일을 수정하고 기존 TensorFlow Lite 종속성을 새 로컬 라이브러리로 바꿉니다. 예를 들면 다음과 같습니다.
 
 ```
 allprojects {
@@ -139,7 +139,7 @@ dependencies {
 
 #### 로컬 Maven 리포지토리에 AAR 설치하기
 
-루트 체크아웃 디렉토리에서 다음 명령을 실행합니다.
+루트 체크아웃 디렉터리에서 다음 명령을 실행합니다.
 
 ```sh
 mvn install:install-file \
