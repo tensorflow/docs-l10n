@@ -24,7 +24,7 @@ TensorFlow Lite는 주요 <a href="overview.md#supported_tasks">Vision 및 NLP �
 
 #### 샘플 사용법
 
-다음은 [MobileBert](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/qa/bert_question_answerer.h)용 C++ <a><code>BertQuestionAnswerer</code></a>를 사용하는 예입니다.
+다음은 [MobileBert](https://tfhub.dev/tensorflow/lite-model/mobilebert/1/default/1)용 C++ [`BertQuestionAnswerer`](https://tfhub.dev/tensorflow/lite-model/mobilebert/1/default/1)를 사용하는 예입니다.
 
 ```cpp
   char kBertModelPath[] = "path/to/model.tflite";
@@ -47,7 +47,7 @@ TensorFlow Lite는 주요 <a href="overview.md#supported_tasks">Vision 및 NLP �
 
 API 객체를 빌드하려면 [`BaseTaskApi`](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/core/base_task_api.h)를 확장하여 다음 정보를 제공해야 합니다.
 
-- **API I/O 결정** - 해당 API는 여러 플랫폼에 걸쳐 비슷한 입력/출력을 노출해야 합니다. 예를 들어, `BertQuestionAnswerer`는 두 개의 문자열 `(std::string& context, std::string& question)`을 입력으로 받아서 가능한 답변 및 확률 벡터를 `std::vector<QaAnswer>`로 출력합니다. 이를 위해 `BaseTaskApi`의 [템플릿 매개변수](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/core/base_task_api.h?q="template &lt;class OutputType, class... InputTypes&gt;")에서 해당 유형을 지정합니다. 템플릿 매개변수가 지정되면 [`BaseTaskApi::Infer`](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/core/base_task_api.h?q="Infer(InputTypes... args)") 함수가 올바른 입력/출력 유형을 갖게 됩니다. 이 함수는 API 클라이언트에서 직접 호출할 수 있지만, 모델에 특정한 함수, 이 경우에는 `BertQuestionAnswerer::Answer` 내에서 이를 래핑하는 것이 좋은 습관입니다.
+- **Determine the API I/O** - Your API should expose similar input/output across different platforms. e.g. `BertQuestionAnswerer` takes two strings `(std::string& context, std::string& question)` as input and outputs a vector of possible answer and probabilities as `std::vector<QaAnswer>`. This is done by specifying the corresponding types in `BaseTaskApi`'s [template parameter](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/core/base_task_api.h?q="template &lt;class OutputType, class... InputTypes&gt;"). With the template parameters specified, the [`BaseTaskApi::Infer`](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/core/base_task_api.h?q="Infer(InputTypes... args)") function will have the correct input/output types. This function can be directly called by API clients, but it is a good practice to wrap it inside a model-specific function, in this case, `BertQuestionAnswerer::Answer`.
 
     ```cpp
     class BertQuestionAnswerer : public BaseTaskApi<
@@ -143,7 +143,7 @@ Java/Kotlin 인터페이스를 정의하고 JNI를 통해 C++ 레이어에 논�
 
 #### 샘플 사용법
 
-다음은 [MobileBert](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/text/qa/BertQuestionAnswerer.java)용 Java <a><code>BertQuestionAnswerer</code></a>를 사용하는 예입니다.
+다음은 [MobileBert](https://tfhub.dev/tensorflow/lite-model/mobilebert/1/default/1)용 Java [`BertQuestionAnswerer`](https://tfhub.dev/tensorflow/lite-model/mobilebert/1/default/1)를 사용하는 예입니다.
 
 ```java
   String BERT_MODEL_FILE = "path/to/model.tflite";
@@ -168,7 +168,7 @@ Java/Kotlin 인터페이스를 정의하고 JNI를 통해 C++ 레이어에 논�
 
 Native API와 마찬가지로 API 객체를 빌드하려면 클라이언트가 모든 Java Task API에 대한 JNI 처리를 제공하는 [`BaseTaskApi`](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/java/src/java/org/tensorflow/lite/task/core/BaseTaskApi.java)를 확장하여 다음 정보를 제공해야 합니다.
 
-- **API I/O 결정** - 일반적으로, 기본 인터페이스를 미러링합니다. 예를 들어, `BertQuestionAnswerer`는 `(String context, String question)`을 입력으로 받아 `List<QaAnswer>`를 출력합니다. 이 구현은 C++에서 반환된 포인터인 추가 매개변수 `long nativeHandle`이 있다는 점을 제외하고 유사한 서명을 사용하여 비공개 네이티브 함수를 호출합니다.
+- **Determine the API I/O** - This usually mirrors the native interfaces. e.g `BertQuestionAnswerer` takes `(String context, String question)` as input and outputs `List<QaAnswer>`. The implementation calls a private native function with similar signature, except it has an additional parameter `long nativeHandle`, which is the pointer returned from C++.
 
     ```java
     class BertQuestionAnswerer extends BaseTaskApi {
@@ -286,7 +286,7 @@ Native API와 마찬가지로 API 객체를 빌드하려면 클라이언트가 �
 
 #### 샘플 사용법
 
-다음은 [MobileBert](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/text/qa/Sources/TFLBertQuestionAnswerer.h)용 ObjC <a><code>TFLBertQuestionAnswerer</code></a>를 Swift로 사용하는 예입니다.
+다음은 [MobileBert](https://tfhub.dev/tensorflow/lite-model/mobilebert/1/default/1)용 ObjC [`TFLBertQuestionAnswerer`](https://tfhub.dev/tensorflow/lite-model/mobilebert/1/default/1)를 Swift로 사용하는 예입니다.
 
 ```swift
   static let mobileBertModelPath = "path/to/model.tflite";
