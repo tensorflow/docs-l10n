@@ -1,10 +1,12 @@
 # 이미지 분류
 
+
 <img src="../images/image.png" class="attempt-right">
 
 이미지가 나타내는 내용을 식별하는 작업을 *이미지 분류*라고 합니다. 이미지 분류 모델은 다양한 이미지 클래스를 인식하도록 훈련됩니다. 예를 들어 토끼, 햄스터, 개 등 세 가지 유형의 동물을 나타내는 사진을 인식하도록 모델을 훈련시킬 수 있습니다. TensorFlow Lite는 모바일 애플리케이션에 배포할 수 있는 최적화된 사전 학습된 모델을 제공합니다. [여기](https://www.tensorflow.org/tutorials/images/classification)에서 TensorFlow를 사용한 이미지 분류에 대해 자세히 알아보세요.
 
 다음 이미지는 Android에서 이미지 분류 모델의 출력을 보여줍니다.
+
 
 <img src="images/android_banana.png" alt="Android 예시 스크린 샷" width="30%">
 
@@ -45,15 +47,15 @@ Android/iOS 이외의 플랫폼을 사용 중이거나 이미 [TensorFlow Lite A
   </thead>
   <tbody>
     <tr>
-      <td>토끼</td>
+      <td>Rabbit</td>
       <td>0.07</td>
     </tr>
     <tr>
-      <td>햄스터</td>
+      <td>Hamster</td>
       <td>0.02</td>
     </tr>
     <tr>
-      <td style="background-color: #fcb66d;">개</td>
+      <td style="background-color: #fcb66d;">Dog</td>
       <td style="background-color: #fcb66d;">0.91</td>
     </tr>
   </tbody>
@@ -124,9 +126,8 @@ TensorFlow Lite는 MobileNet 모델의 성능 범위를 3.7ms에서 80.3ms까지
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a>
-</td>
-    <td rowspan="3">       4.3Mb</td>
+    <td rowspan="3">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a> </td>
+    <td rowspan="3">       4.3 Mb     </td>
     <td>Pixel 3(Android 10)</td>
     <td>6ms</td>
     <td>13ms *</td>
@@ -157,7 +158,7 @@ TensorFlow Lite는 MobileNet 모델의 Top-5 정확도 범위를 64.4~89.9%로 �
 
 ### 모델 크기
 
-디스크에 있는 모델의 크기는 성능과 정확성에 따라 다릅니다. 크기는 모바일 개발(앱 다운로드 크기에 영향을 줄 수 있음) 또는 하드웨어 작업(사용 가능한 저장 용량이 제한될 수 있음)에 중요할 수 있습니다.
+The size of a model on-disk varies with its performance and accuracy. Size may be important for mobile development (where it might impact app download sizes) or when working with hardware (where available storage might be limited).
 
 TensorFlow Lite는 MobileNet 모델의 크기 범위를 0.5~3.4MB로 양자화했습니다.
 
