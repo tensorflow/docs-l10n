@@ -116,7 +116,7 @@ Android 이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미
   </tbody>
 </table>
 
-* 4 threads used.
+* 4개의 스레드가 사용되었습니다.
 
 ## 고유한 훈련 데이터 사용하기
 
