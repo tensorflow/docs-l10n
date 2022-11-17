@@ -17,7 +17,7 @@
 
 [Google Cloud Dataflow](https://cloud.google.com/dataflow/)를 사용하여 파이프라인을 실행하고 분산 계산을 이용하려면, 먼저 [빠른 시작 지침](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python)을 따르세요.
 
-환경이 설정되면 [GCS](https://cloud.google.com/storage/)의 데이터 디렉토리를 사용하고 `--beam_pipeline_options` 플래그에 [필요한 옵션](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)을 지정하여 [`tfds build` CLI](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset)를 실행할 수 있습니다.
+환경이 설정되면 [GCS](https://cloud.google.com/storage/)의 데이터 디렉터리를 사용하고 `--beam_pipeline_options` 플래그에 [필요한 옵션](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)을 지정하여 [`tfds build` CLI](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset)를 실행할 수 있습니다.
 
 스크립트를 보다 쉽게 시작하려면 GCP/GCS 설정의 실제 값과 생성하려는 데이터세트를 사용하여 다음 변수를 정의하면 도움이 됩니다.
 
@@ -86,13 +86,13 @@ builder.download_and_prepare(download_config=dl_config)
 
 Apache Beam 데이터세트를 작성하려면 다음 개념에 익숙해야 합니다.
 
-- 대부분의 내용이 Beam 데이터세트에 적용되므로 [`tfds`데이터세트 작성 가이드](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)를 숙지하세요.
+- 대부분의 콘텐츠가 여전히 Beam 데이터세트에 적용되므로 [`tfds`데이터세트 작성 가이드](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md)를 숙지하세요.
 - Apache Beam에 대한 소개는 [Beam 프로그래밍 가이드](https://beam.apache.org/documentation/programming-guide/)를 참조하세요.
 - Cloud Dataflow를 사용하여 데이터세트를 생성하려면, [Google 클라우드 설명서](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python) 및 [Apache Beam 종속성 가이드](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/)를 참조하세요.
 
 ### 지침
 
-[데이터세트 생성 가이드](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)에 익숙한 경우, Beam 데이터세트를 추가하려면 `_generate_examples` 함수만 수정하면 됩니다. 이 함수는 생성기가 아닌 빔 객체를 반환합니다.
+[데이터세트 생성 가이드](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md)에 익숙한 경우, Beam 데이터세트를 추가하려면 `_generate_examples` 함수만 수정하면 됩니다. 이 함수는 생성기가 아닌 빔 객체를 반환합니다.
 
 빔이 아닌 데이터세트:
 
@@ -119,7 +119,7 @@ def _generate_examples(self, path):
 - `tfds.core.lazy_imports`를 사용하여 Apache Beam을 가져옵니다. 지연 종속성(lazy dependency)을 사용하면 사용자는 Beam을 설치하지 않고도 생성된 데이터세트를 읽을 수 있습니다.
 - Python 닫힘에 주의하세요. 파이프라인을 실행할 때 `beam.Map` 및 `beam.DoFn` 함수는 `pickle`를 사용하여 직렬화되어 모든 작업자에게 전송됩니다. 상태를 작업자 간에 공유해야 하는 경우 `beam.PTransform` 내에서 개체를 변경할 수 없습니다.
 - `tfds.core.DatasetBuilder`가 피클을 사용하여 직렬화되는 방식으로 인해 데이터 생성 중 `tfds.core.DatasetBuilder` 변경은 작업자에서 무시됩니다(예: `_split_generators`에서 `self.info.metadata['offset'] = 123`를 설정하고 `beam.Map(lambda x: x + self.info.metadata['offset'])`와 같은 작업자로부터 여기에 액세스할 수 없음).
-- 분할 사이에 일부 파이프라인 단계를 공유해야 하는 경우 `_split_generator`에 별도의 `pipeline: beam.Pipeline` kwarg를 추가하고 전체 세대의 파이프라인을 제어할 수 있습니다. `tfds.core.GeneratorBasedBuilder`의 `_generate_examples` 문서를 참조하세요.
+- 분할 사이에 일부 파이프라인 단계를 공유해야 하는 경우 `_split_generator`에 별도의 `pipeline: beam.Pipeline` kwarg를 추가하고 전체 세대의 파이프라인을 제어할 수 있습니다. `tfds.core.GeneratorBasedBuilder`의 `_generate_examples` 설명서를 참조하세요.
 
 ### 예제
 
