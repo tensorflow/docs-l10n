@@ -149,24 +149,24 @@ TF2 コードモデリング shim を使用して既存の `get_variable` およ
 
 ### データ入力パイプラインをアップグレードする
 
-There are many ways to feed data to a `tf.keras` model. They will accept Python generators and Numpy arrays as input.
+データをtf.kerasモデルに供給するには多くの方法があります。それらは入力として Python ジェネレータと Numpy 配列を受け取ります。
 
 モデルへのデータ供給方法として推奨しているのは、データ操作用の高パフォーマンスなクラスのコレクションを含んだ `tf.data` パッケージの使用です。`tf.data` に属する `dataset` は効率的で表現力があり、TF2 と統合できます。
 
-They can be passed directly to the `tf.keras.Model.fit` method.
+次のように、tf.keras.Model.fit メソッドに直接渡すことができます。
 
 ```python
 model.fit(dataset, epochs=5)
 ```
 
-They can be iterated over directly standard Python:
+また、標準的な Python で直接イテレートすることもできます。
 
 ```python
 for example_batch, label_batch in dataset:
     break
 ```
 
-If you are still using `tf.queue`, these are now only supported as data-structures, not as input pipelines.
+依然としてtf.queueを使用している場合、これらは入力パイプラインとしてではなく、データ構造としてのみ対応されます。
 
 `tf.feature_columns` を使用する特徴前処理コードもすべて移行する必要があります。詳細については、[移行ガイド](./migrating_feature_columns.ipynb)を参照してください。
 
@@ -189,6 +189,6 @@ TF2 は、オブジェクトベースのチェックポイントを使用しま�
 
 ただし、既存の使用法を非レガシー TF2 API に移行することがあるかもしれません。多くの場合、個々の `compat.v1` シンボルのドキュメント文字列は、それらを非レガシー TF2 API に移行する方法を説明しています。また、[慣用的な TF2 API への増分移行に関するモデルマッピングガイドのセクション](./model_mapping.ipynb#incremental_migration_to_native_tf2)も参照してください。
 
-## Resources and further reading
+## リソースとその他の文献
 
 前述のとおり、すべての TF1.x コードを TF2 に移行することを推薦します。詳細については、TensorFlow ガイドの [TF2 の移行セクション](https://tensorflow.org/guide/migrate)を参照してください。
