@@ -240,7 +240,7 @@ Timeline ペインには、次の要素が含まれます。
 
 トレースビューアには、次のセクションがあります。
 
-- **One section for each device node**, labeled with the number of the device chip and the device node within the chip (for example, `/device:GPU:0 (pid 0)`). Each device node section contains the following tracks:
+- **デバイスノードごとに 1 つのセクション**。ラベルとしてデバイスチップの数とチップ内のデバイスノードの数が使用されます（例: 「`/device:GPU:0 (pid 0)`」）。デバイスノードのセクションには、次のトラックが含まれます。
     - **Step**: デバイスで実行されていたレーニングステップの期間が表示されます。
     - **TensorFlow Ops**: デバイス上で実行された演算が表示されます。
     - **XLA Ops**: [XLA](https://www.tensorflow.org/xla/) が使用されているコンパイラである場合にデバイス上で実行された XLA 演算が表示されます。各 TensorFlow 演算が 1 つ以上の XLA 演算に変換されます。XLA コンパイラにより、XLA 演算がデバイス上で実行されるコードに変換されます。
@@ -450,7 +450,7 @@ TensorFlow プロファイラは、TensorFlow モデルのホストアクティ�
 
 次の API を使用してプロファイリングを実行できます。
 
-- Programmatic mode using the TensorBoard Keras Callback (`tf.keras.callbacks.TensorBoard`)
+- TensorBoard Keras のコールバックを使用したプログラムモード（`tf.keras.callbacks.TensorBoard`）
 
     ```python
     # Profile from batches 10 to 15
