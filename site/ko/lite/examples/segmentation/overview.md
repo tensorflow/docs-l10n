@@ -57,9 +57,8 @@ Android 또는 iOS 이외의 플랫폼을 사용 중이거나 <a href="https://w
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">
-      <a href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">Deeplab v3</a>
-    </td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/2?lite-format=tflite">Deeplab v3</a>
+</td>
     <td rowspan="3">       2.7 Mb</td>
     <td>Pixel 3(Android 10)</td>
     <td>16ms</td>
@@ -84,7 +83,7 @@ Android 또는 iOS 이외의 플랫폼을 사용 중이거나 <a href="https://w
 ## 추가 자료 및 리소스
 
 <ul>
-  <li><a href="https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html">Semantic Image Segmentation with DeepLab in TensorFlow</a></li>
+  <li><a href="https://ai.googleblog.com/2018/03/semantic-image-segmentation-with.html">TensorFlow에서 DeepLab을 사용한 시맨틱 이미지 세분화</a></li>
   <li><a href="https://medium.com/tensorflow/tensorflow-lite-now-faster-with-mobile-gpus-developer-preview-e15797e6dee7">이제 모바일 GPU로 더 빨라진 TensorFlow Lite(개발자 프리뷰)</a></li>
-  <li><a href="https://github.com/tensorflow/models/tree/master/research/deeplab">DeepLab: Deep Labelling for Semantic Image Segmentation</a></li>
+  <li><a href="https://github.com/tensorflow/models/tree/master/research/deeplab">DeepLab: 시맨틱 이미지 세분화를 위한 딥 라벨링</a></li>
 </ul>
