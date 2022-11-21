@@ -23,12 +23,12 @@
 
 1. 克隆 Git 仓库：
     <pre class="devsite-click-to-copy">    git clone https://github.com/tensorflow/examples.git
-            </pre>
+                </pre>
 2. 将您的 Git 实例配置为使用稀疏签出，这样您就只有目标检测示例应用的文件：
     <pre class="devsite-click-to-copy">    cd examples
-            git sparse-checkout init --cone
-            git sparse-checkout set lite/examples/object_detection/android_play_services
-            </pre>
+                git sparse-checkout init --cone
+                git sparse-checkout set lite/examples/object_detection/android_play_services
+                </pre>
 
 ### 导入并运行项目
 
@@ -79,7 +79,7 @@
     ...
         // Tensorflow Lite dependencies
         implementation 'org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2'
-        implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
+        implementation 'com.google.android.gms:play-services-tflite-gpu:16.1.0'
     ...
     }
     ```
