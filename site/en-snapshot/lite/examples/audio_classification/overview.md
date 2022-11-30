@@ -32,7 +32,7 @@ also build your own custom inference pipeline using the
 [TensorFlow Lite Support Library](../../inference_with_metadata/lite_support).
 
 The Android example below demonstrates the implementation using the
-[TFLite Task Library](https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android)
+[TFLite Task Library](https://github.com/tensorflow/examples/tree/master/lite/examples/audio_classification/android)
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android">View
 Android example</a>
