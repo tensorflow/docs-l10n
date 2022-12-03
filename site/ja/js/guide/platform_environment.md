@@ -160,7 +160,7 @@ MobileNet v2 | 37 ms | 94 ms | 923.6 ms | 13 MB
 
 ##### 推論とトレーニング
 
-事前トレーニング済みモデルのデプロイの主なユースケースに対処するために、WASM バックエンド開発では、*トレーニング*サポートよりも*推論*サポートを優先します。WASM でサポートされている演算の[最新リスト](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/src/kernels/all_kernels.ts)を参照し、モデルにサポートされていない演算がある場合は[お知らせください](https://github.com/tensorflow/tfjs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)。モデルのトレーニングには、Node（TensorFlow C++）バックエンドまたは WebGL バックエンドの使用をお勧めします。
+To address the primary use-case for deployment of pre-trained models, the WASM backend development will prioritize *inference* over *training* support. See an [up-to-date list](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/src/register_all_kernels.ts) of supported ops in WASM and [let us know](https://github.com/tensorflow/tfjs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) if your model has an unsupported op. For training models, we recommend using the Node (TensorFlow C++) backend or the WebGL backend.
 
 #### CPU バックエンド
 
