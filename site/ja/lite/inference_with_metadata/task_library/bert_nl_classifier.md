@@ -102,13 +102,13 @@ std::vector<core::Category> categories = classifier->Classify(input_text);
 
 ## Run inference in Python
 
-### Step 1: Install the pip package
+### ステップ 1: pip パッケージをインストールする
 
 ```
 pip install tflite-support
 ```
 
-### Step 2: Using the model
+### ステップ 2: モデルの使用
 
 ```python
 # Imports
@@ -121,7 +121,7 @@ classifier = text.BertNLClassifier.create_from_file(model_path)
 text_classification_result = classifier.classify(text)
 ```
 
-See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/bert_nl_classifier.py) for more options to configure `BertNLClassifier`.
+`BertNLClassifier` を構成するその他のオプションについては、[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/bert_nl_classifier.py)をご覧ください。
 
 ## 結果の例
 
