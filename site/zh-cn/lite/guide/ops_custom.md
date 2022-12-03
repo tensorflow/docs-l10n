@@ -6,7 +6,7 @@
 
 使用自定义算子包括四个步骤。
 
-- [创建 TensorFlow 模型。](#create-a-tensorflow-model)确保 Saved Model（或 Graph Def）引用正确命名的 TensorFlow Lite 算子。
+- [创建 TensorFlow 模型。](#create-a-tensorflow-model)确保 Saved Model（或 GraphDef）引用正确命名的 TensorFlow Lite 算子。
 
 - [转换为 TensorFlow Lite 模型。](#convert-to-a-tensorflow-lite-model)确保设置正确的 TensorFlow Lite 转换器特性，以便成功转换模型。
 
@@ -14,19 +14,19 @@
 
 - [对算子进行测试和性能分析。](#test-and-profile-your-operator)如果只想测试您的自定义算子，最好仅使用您的自定义算子来创建模型，并使用 [benchmark_model](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/benchmark/benchmark_model.cc) 程序。
 
-Let’s walk through an end-to-end example of running a model with a custom operator `tf.atan` (named as `Atan`, refer to #create-a-tensorflow-model) which is supported in TensorFlow, but unsupported in TensorFlow Lite.
+我们来通过一个端到端的示例演练一下，运行一个具有自定义算子的模型，该算子为 `tf.sin`（名为 `Atan`，请参阅 #create-a-tensorflow-model），在 TensorFlow 中受支持，但在 TensorFlow Lite 中不受支持。
 
-Note: The `tf.atan` function is **not** a custom operator. It is a regular operator which is supported by both TensorFlow and TensorFlow Lite. But we **assume** that it is a custom operator in the following example in order to demonstrate a simple workflow.
+注：`tf.atan` 函数并**不是**自定义算子。它是一个 TensorFlow 和 TensorFlow Lite 都支持的常规算子。但在下面的示例中，我们**假设**它是一个自定义算子，以便演示一个简单的工作流。
 
-The TensorFlow Text operator is an example of a custom operator. See the <a href="https://tensorflow.org/text/guide/text_tf_lite" class="external"> Convert TF Text to TF Lite</a> tutorial for a code example.
+TensorFlow Text 算子是自定义算子的示例。请参阅<a href="https://tensorflow.org/text/guide/text_tf_lite" class="external">将 TF Text 转换为 TF Lite</a> 教程了解代码示例。
 
-## Example: Custom `Atan` operator
+## 示例：自定义 `Atan` 算子
 
-Let’s walk through an example of supporting a TensorFlow operator that TensorFlow Lite does not have. Assume we are using the `Atan` operator and that we are building a very simple model for a function `y = atan(x + offset)`, where `offset` is trainable.
+我们来看一个支持 TensorFlow 算子的示例，该算子是 TensorFlow Lite 所没有的。假设我们使用的是 `Atan` 算子，并且要为函数 `y = atan(x + offset)`（其中 `offset` 可训练）构建一个非常简单的模型。
 
 ### 创建 TensorFlow 模型
 
-The following code snippet trains a simple TensorFlow model. This model just contains a custom operator named `Atan`, which is a function `y = atan(x + offset)`, where `offset` is trainable.
+下面的代码段训练了一个简单的 TensorFlow 模型。这个模型只包含一个名为 `Atan` 的自定义算子，它是函数 `y = atan(x + offset)`，其中 `offset` 可训练。
 
 ```python
 import tensorflow as tf
@@ -78,14 +78,14 @@ error: 'tf.Atan' op is neither a custom op nor a flex op.
 tflite_model = converter.convert()
 </pre>
 
-At this point, if you run it with the default interpreter using commands such as follows:
+此时，如果您使用默认解释器利用以下命令运行它：
 
 ```python
 interpreter = tf.lite.Interpreter(model_content=tflite_model)
 interpreter.allocate_tensors()
 ```
 
-You will still get the error:
+您仍然会收到错误：
 
 ```none
 Encountered unresolved custom op: Atan.
@@ -181,7 +181,7 @@ TfLiteRegistration* Register_ATAN() {
 }
 ```
 
-When initializing the `OpResolver`, add the custom op into the resolver (see below for an example). This will register the operator with Tensorflow Lite so that TensorFlow Lite can use the new implementation. Note that the last two arguments in `TfLiteRegistration` correspond to the `AtanPrepare` and `AtanEval` functions you defined for the custom op. If you used `AtanInit` and `AtanFree` functions to initialize variables used in the op and to free up space, respectively, then they would be added to the first two arguments of `TfLiteRegistration`; those arguments are set to `nullptr` in this example.
+初始化 `OpResolver` 时，将自定义算子添加到解析器中（见以下示例）。这将向 Tensorflow Lite 注册算子，以便 TensorFlow Lite 可以使用新的实现。请注意，`TfLiteRegistration` 中的最后两个参数对应于您为自定义算子定义的 `AtanPrepare` 和 `AtanEval` 函数。如果使用 `AtanInit` 和 `AtanFree` 函数来分别初始化在算子中使用的变量并释放空间，则它们将被添加到 `TfLiteRegistration` 的前两个参数中；在此示例中，这些参数被设置为 `nullptr`。
 
 ### 在内核库中注册算子
 
@@ -212,13 +212,13 @@ resolver.AddCustom("Atan", Register_ATAN());
 
 如果觉得内置算子集过大，可以基于给定的算子子集（可能仅包含给定模型中的算子）通过代码生成新的 `OpResolver`。这相当于 TensorFlow 的选择性注册（其简单版本可在 `tools` 目录中获得）。
 
-If you want to define your custom operators in Java, you would currently need to build your own custom JNI layer and compile your own AAR [in this jni code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/nativeinterpreterwrapper_jni.cc). Similarly, if you wish to define these operators available in Python you can place your registrations in the [Python wrapper code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc).
+如果想用 Java 定义自定义算子，目前需要您自行构建自定义 JNI 层并[在此 JNI 代码中](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/nativeinterpreterwrapper_jni.cc)编译自己的 AAR。同样，如果想定义在 Python 中可用的上述算子，可以将注册放在 [Python 封装容器代码](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc)中。
 
 请注意，可以按照与上文类似的过程支持一组运算（而不是单个算子），只需添加所需数量的 `AddCustom` 算子。另外，`BuiltinOpResolver` 还允许您使用 `AddBuiltin` 重写内置算子的实现。
 
 ### 对您的算子进行测试和性能分析
 
-To profile your op with the TensorFlow Lite benchmark tool, you can use the [benchmark model tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#tflite-model-benchmark-tool) for TensorFlow Lite. For testing purposes, you can make your local build of TensorFlow Lite aware of your custom op by adding the appropriate `AddCustom` call (as show above) to [register.cc](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/core/kernels/register.cc)
+要使用 TensorFlow Lite 基准测试工具对您的算子进行性能分析，您可以使用 TensorFlow Lite 的[基准模型工具](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#tflite-model-benchmark-tool)。出于测试目的，您可以通过向 [register.cc](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/core/kernels/register.cc) 添加合适的 <code>AddCustom</code> 调用（如上所示），使您本地构建的 TensorFlow Lite 认识您的自定义算子。
 
 ## 最佳做法
 
