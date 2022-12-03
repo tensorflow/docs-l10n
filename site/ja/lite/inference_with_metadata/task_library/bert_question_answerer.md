@@ -104,15 +104,15 @@ std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, q
 
 詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_question_answerer.h)をご覧ください。
 
-## Run inference in Python
+## Python で推論を実行する
 
-### Step 1: Install the pip package
+### ステップ 1: pip パッケージをインストールする
 
 ```
 pip install tflite-support
 ```
 
-### Step 2: Using the model
+### ステップ 2: モデルを使用する
 
 ```python
 # Imports
@@ -125,7 +125,7 @@ answerer = text.BertQuestionAnswerer.create_from_file(model_path)
 bert_qa_result = answerer.answer(context, question)
 ```
 
-See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/bert_question_answerer.py) for more options to configure `BertQuestionAnswerer`.
+`BertQuestionAnswerer` を構成するその他のオプションについては、[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/bert_question_answerer.py)をご覧ください。
 
 ## 結果の例
 
