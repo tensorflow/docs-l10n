@@ -127,7 +127,7 @@ TensorFlow Lite 量子化 MobileNet モデルのパフォーマンスは、3.7ms
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a></td>
-    <td rowspan="3">       4.3 Mb</td>
+    <td rowspan="3">       4.3 Mb     </td>
     <td>Pixel 3 (Android 10)</td>
     <td>6ms</td>
     <td>13ms*</td>
@@ -144,7 +144,7 @@ TensorFlow Lite 量子化 MobileNet モデルのパフォーマンスは、3.7ms
   </tr>
 </table>
 
-* 4 threads used.
+* 4 つのスレッドを使用。
 
 ** 最高のパフォーマンス結果を得るために、iPhone では 2 つのスレッドを使用。
 
@@ -158,7 +158,7 @@ TensorFlow Lite 量子化 MobileNet モデルの上位 5 の精度の範囲は 6
 
 ### モデルサイズ
 
-ディスク上のモデルのサイズは、そのパフォーマンスと精度によって異なります。サイズは、モバイル開発 (アプリのダウンロードサイズに影響を与える可能性がある) や、ハードウェアで作業する (利用可能なストレージが制限される可能性がある) 場合に重要です。
+The size of a model on-disk varies with its performance and accuracy. Size may be important for mobile development (where it might impact app download sizes) or when working with hardware (where available storage might be limited).
 
 TensorFlow Lite 量子化 MobileNet モデルのサイズは、0.5〜3.4 Mb です。
 
