@@ -1,6 +1,6 @@
 # ポーズ推定
 
- <img alt="Animation showing pose estimation" src="https://www.tensorflow.org/images/lite/models/pose_estimation.gif">
+ <img alt="Animation showing pose estimation" src="https://storage.googleapis.com/download.tensorflow.org/example_images/movenet_demo.gif" class="">
 
 ポーズ推定は、ML モデルを使用して、主要な体の関節 (キーポイント) の空間的な位置を推定することで、画像または動画から人のポーズを推定するタスクです。
 
@@ -112,7 +112,7 @@ Web ブラウザでポーズ推定を試す場合は、<a href="https://storage.
 
 次に、出力の例を示します。
 
- <img alt="Animation showing pose estimation" src="https://storage.googleapis.com/download.tensorflow.org/example_images/movenet_demo.gif" class="">
+<img src="https://storage.googleapis.com/download.tensorflow.org/example_images/movenet_demo.gif" alt="Animation showing pose estimation">
 
 ## パフォーマンスベンチマーク
 
@@ -194,11 +194,11 @@ MoveNet は、さまざまなデータセットに対して、PoseNet よりも�
 次のポーズ推定のユースケースも確認してください。
 
 <ul>
-  <li><a href="https://vimeo.com/128375543">‘PomPom Mirror’</a></li>
+  <li><a href="https://vimeo.com/128375543">‘ポムポムミラー’</a></li>
   <li><a href="https://youtu.be/I5__9hq-yas">Amazing Art Installation Turns You Into A Bird | Chris Milk "The Treachery of Sanctuary"</a></li>
-  <li><a href="https://vimeo.com/34824490">Puppet Parade - Interactive Kinect Puppets</a></li>
-  <li><a href="https://vimeo.com/2892576">Messa di Voce (Performance), Excerpts</a></li>
-  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">拡張現実</a></li>
+  <li><a href="https://vimeo.com/34824490">パペットパレード - 対話型 Kinect パペット</a></li>
+  <li><a href="https://vimeo.com/2892576">Messa di Voce (Performance)、引用</a></li>
+  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">Augmented reality</a></li>
   <li><a href="https://www.instagram.com/p/Bg1EgOihgyh/">対話型アニメーション</a></li>
   <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">歩容解析</a></li>
 </ul>
