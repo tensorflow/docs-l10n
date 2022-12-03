@@ -162,7 +162,7 @@ category[1]: 'Positive' : '0.18687'
 
     - モデルの入力は、kTfLiteString テンソル生入力文字列または生入力文字列の正規表現トークン化インデックス用の kTfLiteInt32 テンソルのいずれかである必要があります。
     - 入力型が kTfLiteString の場合、モデルに[メタデータ](../../models/convert/metadata)は必要ありません。
-    - If input type is kTfLiteInt32, a `RegexTokenizer` needs to be set up in the input tensor's [Metadata](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers).
+    - 入力型が kTfLiteInt32 の場合、`RegexTokenizer`を入力テンソルの[メタデータ](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers)に設定する必要があります。
 
 - 出力スコアテンソル：(kTfLiteUInt8/kTfLiteInt8/kTfLiteInt16/kTfLiteFloat32/kTfLiteFloat64)
 
