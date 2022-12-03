@@ -32,7 +32,7 @@ TensorFlow Lite for Microcontrollers インタプリタを使用する上で最�
 
 ### Arduino ライブラリを使用する
 
-Arduino を使用している場合、*Hello World* サンプルは、`Arduino_TensorFlowLite` Arduino ライブラリに含まれています。このライブラリは、Arduino IDE または [Arduino Create](https://create.arduino.cc/) からダウンロードできます。
+Arduino を使用している場合、*Hello World* の例は `Arduino_TensorFlowLite` Arduino ライブラリに含まれており、Arduino IDE および [Arduino Create](https://create.arduino.cc/) に手動でインストールできます。
 
 ライブラリが追加されたら、`File -> Examples` を選択します。リストの下の方に `TensorFlowLite:hello_world` というサンプルがあります。それを選択し、`hello_world` をクリックしてサンプルを読み込みます。すると、サンプルのコピーを保存して独自のプロジェクトの基礎として使用できるようになります。
 
@@ -105,8 +105,6 @@ make -f tensorflow/lite/micro/tools/make/Makefile TAGS=<subdirectory_name> gener
 独自の最適化を追加するには、その最適化用の新しいサブフォルダを作成します。新しい最適化済みの実装についてはプルリクエストを作成してください。
 
 ## Arduino ライブラリを生成する
-
-Arduino ライブラリのナイトリービルドは、Arduino IDE のライブラリマネージャーから利用できます。
 
 ライブラリの新規ビルドを生成する必要がある場合は、TensorFlow レポジトリから以下のスクリプトを実行できます。
 
