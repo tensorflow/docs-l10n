@@ -114,15 +114,15 @@ std::vector<core::Category> categories = classifier->Classify(input_text);
 
 詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/nl_classifier.h)をご覧ください。
 
-## Run inference in Python
+## Python で推論を実行する
 
-### Step 1: Install the pip package
+### ステップ 1: pip パッケージをインストールする
 
 ```
 pip install tflite-support
 ```
 
-### Step 2: Using the model
+### ステップ 2: モデルを使用する
 
 ```python
 # Imports
@@ -135,7 +135,7 @@ classifier = text.NLClassifier.create_from_file(model_path)
 text_classification_result = classifier.classify(text)
 ```
 
-See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/nl_classifier.py) for more options to configure `NLClassifier`.
+<code>NLClassifier</code> を構成するその他のオプションについては、<a>ソースコード</a>をご覧ください。
 
 ## 結果の例
 
