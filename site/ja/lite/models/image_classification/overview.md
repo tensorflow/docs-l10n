@@ -92,7 +92,7 @@ TensorFlow Lite 画像分類モデルは、単一ラベル分類に役立ちま�
 
 <ul>
   <li>画像内の 1 つ以上の物体の種類と位置を予測する場合（<a href="../object_detection/overview">物体検出</a>を参照）</li>
-  <li>画像の構成 (被写体と背景) を予測する場合 (<a href="../segmentation/overview">セグメンテーション</a>を参照)</li>
+  <li>画像の構成（被写体と背景）を予測する場合（<a href="../segmentation/overview">セグメンテーション</a>をご覧ください）</li>
 </ul>
 
 ターゲットデバイスでスターターモデルを実行してから、さまざまなモデルを試し、パフォーマンス、精度、モデルサイズの最適なバランスを見つけてください。
@@ -158,7 +158,7 @@ TensorFlow Lite 量子化 MobileNet モデルの上位 5 の精度の範囲は 6
 
 ### モデルサイズ
 
-The size of a model on-disk varies with its performance and accuracy. Size may be important for mobile development (where it might impact app download sizes) or when working with hardware (where available storage might be limited).
+オンディスクモデルのサイズは、そのパフォーマンスと精度によって異なります。サイズは、モバイル開発（アプリのダウンロードサイズに影響を与える可能性がある）や、ハードウェアで作業する（利用可能なストレージが制限される可能性がある）場合に重要です。
 
 TensorFlow Lite 量子化 MobileNet モデルのサイズは、0.5〜3.4 Mb です。
 
