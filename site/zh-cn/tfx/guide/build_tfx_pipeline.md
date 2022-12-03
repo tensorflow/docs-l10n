@@ -2,7 +2,7 @@
 
 注：有关 TFX 流水线的概念视图，请参阅[理解 TFX 流水线](understanding_tfx_pipelines)。
 
-Note: Want to build your first pipeline before you dive into the details? Get started [building a pipeline using a template](https://www.tensorflow.org/tfx/guide/build_local_pipeline#build_a_pipeline_using_a_template).
+注：想在深入了解详细信息之前构建您的第一个流水线？请从[使用模板构建流水线](https://www.tensorflow.org/tfx/guide/build_local_pipeline#build_a_pipeline_using_a_template)开始。
 
 ## 使用 `Pipeline` 类
 
