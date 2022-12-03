@@ -88,7 +88,7 @@ let answers = mobileBertAnswerer.answer(
       context: context, question: question)
 ```
 
-詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/qa/bert_question_answerer.h)をご覧ください。
+詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/text/qa/Sources/TFLBertQuestionAnswerer.h)をご覧ください。
 
 ## C++ で推論を実行する
 
@@ -103,6 +103,29 @@ std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, q
 ```
 
 詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_question_answerer.h)をご覧ください。
+
+## Run inference in Python
+
+### Step 1: Install the pip package
+
+```
+pip install tflite-support
+```
+
+### Step 2: Using the model
+
+```python
+# Imports
+from tflite_support.task import text
+
+# Initialization
+answerer = text.BertQuestionAnswerer.create_from_file(model_path)
+
+# Run inference
+bert_qa_result = answerer.answer(context, question)
+```
+
+See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/bert_question_answerer.py) for more options to configure `BertQuestionAnswerer`.
 
 ## 結果の例
 
