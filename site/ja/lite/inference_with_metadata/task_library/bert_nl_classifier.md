@@ -84,7 +84,7 @@ let bertNLClassifier = TFLBertNLClassifier.bertNLClassifier(
 let categories = bertNLClassifier.classify(text: input)
 ```
 
-詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/bert_nl_classifier.h)をご覧ください。
+詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/ios/task/text/nlclassifier/Sources/TFLBertNLClassifier.h)をご覧ください。
 
 ## C++ で推論を実行する
 
@@ -99,6 +99,29 @@ std::vector<core::Category> categories = classifier->Classify(input_text);
 ```
 
 詳細については[ソースコード](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_nl_classifier.h)をご覧ください。
+
+## Run inference in Python
+
+### Step 1: Install the pip package
+
+```
+pip install tflite-support
+```
+
+### Step 2: Using the model
+
+```python
+# Imports
+from tflite_support.task import text
+
+# Initialization
+classifier = text.BertNLClassifier.create_from_file(model_path)
+
+# Run inference
+text_classification_result = classifier.classify(text)
+```
+
+See the [source code](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/bert_nl_classifier.py) for more options to configure `BertNLClassifier`.
 
 ## 結果の例
 
