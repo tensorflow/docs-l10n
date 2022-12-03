@@ -198,7 +198,7 @@ MoveNet は、さまざまなデータセットに対して、PoseNet よりも�
   <li><a href="https://youtu.be/I5__9hq-yas">Amazing Art Installation Turns You Into A Bird | Chris Milk "The Treachery of Sanctuary"</a></li>
   <li><a href="https://vimeo.com/34824490">パペットパレード - 対話型 Kinect パペット</a></li>
   <li><a href="https://vimeo.com/2892576">Messa di Voce (Performance)、引用</a></li>
-  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">Augmented reality</a></li>
+  <li><a href="https://www.instagram.com/p/BbkKLiegrTR/">拡張現実</a></li>
   <li><a href="https://www.instagram.com/p/Bg1EgOihgyh/">対話型アニメーション</a></li>
   <li><a href="https://www.runnersneed.com/expert-advice/gear-guides/gait-analysis.html">歩容解析</a></li>
 </ul>
