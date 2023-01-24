@@ -1,6 +1,6 @@
-# Upgrading to TensorFlow.js 3.0
+# Upgrading to TensorFlow.js 4.0
 
-## What’s changed in TensorFlow.js 3.0
+## What’s changed in TensorFlow.js 4.0
 
 Release notes are [available here](https://github.com/tensorflow/tfjs/releases). This release upgrades TypeScript to 4.8.4 and `@webgpu/types` to 0.1.21. If you don't use TypeScript, you can update to 4.0 without reading this doc.
 
