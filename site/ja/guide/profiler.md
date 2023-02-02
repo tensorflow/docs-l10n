@@ -266,7 +266,7 @@ Timeline ペインには、次の要素が含まれます。
 
 - The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
 
-- The lower pane displays a table with the following data for each unique kernel-op pair:
+- 下のペインには、一意のカーネルと演算のペアごとに次のデータを含むテーブルが表示されます。
 
     - A rank in descending order of total elapsed GPU duration grouped by kernel-op pair.
     - The name of the launched kernel.
