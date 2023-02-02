@@ -105,9 +105,9 @@ Interpreter API は、Task Library API よりも優れた制御と柔軟性を�
 dependencies {
 ...
     // Tensorflow Lite dependencies for Google Play services
-    implementation 'com.google.android.gms:play-services-tflite-java:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-java:16.0.1'
     // Optional: include Tensorflow Lite Support Library
-    implementation 'com.google.android.gms:play-services-tflite-support:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-support:16.0.1'
 ...
 }
 ```
@@ -319,7 +319,7 @@ Task API で GPU デリゲートを使用するには:
 1. プロジェクトの依存関係を更新して、Play サービスから GPU デリゲートを使用します。
 
     ```
-    implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-gpu:16.1.0'
     ```
 
 2. GPU デリゲートを `setEnableGpuDelegateSupport` で初期化します。たとえば、`TfLiteVision` の GPU デリゲートを次のように初期化できます。
@@ -329,12 +329,12 @@ Task API で GPU デリゲートを使用するには:
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">        TfLiteVision.initialize(context, TfLiteInitializationOptions.builder().setEnableGpuDelegateSupport(true).build())
-            </pre>
+                </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">        TfLiteVision.initialize(context, TfLiteInitializationOptions.builder().setEnableGpuDelegateSupport(true).build());
-            </pre>
+                </pre>
     </section>
     </devsite-selector>
     </div>
@@ -346,12 +346,12 @@ Task API で GPU デリゲートを使用するには:
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">        val baseOptions = BaseOptions.builder().useGpu().build()
-            </pre>
+                </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">        BaseOptions baseOptions = BaseOptions.builder().useGpu().build();
-            </pre>
+                </pre>
     </section>
     </devsite-selector>
     </div>
@@ -363,20 +363,20 @@ Task API で GPU デリゲートを使用するには:
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">        val options =
-                ObjectDetectorOptions.builder()
-                    .setBaseOptions(baseOptions)
-                    .setMaxResults(1)
-                    .build()
-            </pre>
+                    ObjectDetectorOptions.builder()
+                        .setBaseOptions(baseOptions)
+                        .setMaxResults(1)
+                        .build()
+                </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">        ObjectDetectorOptions options =
-                ObjectDetectorOptions.builder()
-                    .setBaseOptions(baseOptions)
-                    .setMaxResults(1)
-                    .build();
-            </pre>
+                    ObjectDetectorOptions.builder()
+                        .setBaseOptions(baseOptions)
+                        .setMaxResults(1)
+                        .build();
+                </pre>
     </section>
     </devsite-selector>
     </div>
@@ -388,7 +388,7 @@ Interpreter API で GPU デリゲートを使用するには:
 1. プロジェクトの依存関係を更新して、Play サービスから GPU デリゲートを使用します。
 
     ```
-    implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-gpu:16.1.0'
     ```
 
 2. TFlite の初期化で GPU デリゲートオプションを有効にします。
@@ -398,18 +398,18 @@ Interpreter API で GPU デリゲートを使用するには:
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">        TfLite.initialize(context,
-              TfLiteInitializationOptions.builder()
-               .setEnableGpuDelegateSupport(true)
-               .build())
-            </pre>
+                  TfLiteInitializationOptions.builder()
+                   .setEnableGpuDelegateSupport(true)
+                   .build())
+                </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">        TfLite.initialize(context,
-              TfLiteInitializationOptions.builder()
-               .setEnableGpuDelegateSupport(true)
-               .build());
-            </pre>
+                  TfLiteInitializationOptions.builder()
+                   .setEnableGpuDelegateSupport(true)
+                   .build());
+                </pre>
     </section>
     </devsite-selector>
     </div>
@@ -421,18 +421,18 @@ Interpreter API で GPU デリゲートを使用するには:
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">
-              val interpreterOption = InterpreterApi.Options()
-               .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-               .addDelegateFactory(GpuDelegateFactory())
-            </pre>
+                  val interpreterOption = InterpreterApi.Options()
+                   .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+                   .addDelegateFactory(GpuDelegateFactory())
+                </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">
-              Options interpreterOption = InterpreterApi.Options()
-                .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-                .addDelegateFactory(new GpuDelegateFactory());
-            </pre>
+                  Options interpreterOption = InterpreterApi.Options()
+                    .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+                    .addDelegateFactory(new GpuDelegateFactory());
+                </pre>
     </section>
     </devsite-selector>
     </div>
@@ -462,7 +462,7 @@ Google Play サービスの TensorFlow Lite には次の制限があります。
 
 ## サポートとフィードバック {:#support}
 
-TensorFlow Issue Tracker を使用すると、フィードバックを提出し、サポートを受けることができます。Google Play サービスの TensorFlow Lite 用の[問題テンプレート](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md)を使用して、問題およびサポート要求を報告してください。
+TensorFlow 課題トラッカーを使用すると、フィードバックを提出し、サポートを受けることができます。Google Play サービスの TensorFlow Lite 用の[課題テンプレート](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md)を使用して、問題およびサポート要求を報告してください。
 
 ## 利用規約 {:#tos}
 
@@ -486,6 +486,6 @@ Google が収集するデータは次のとおりです。
 - エラーコード。診断で使用されます。
 - パフォーマンスメトリクス。診断で使用されます。
 
-## Next steps
+## 次のステップ
 
 TensorFlow Lite を使用したモバイルアプリケーションでの機械学習の実装の詳細については、[TensorFlow Lite 開発者ガイド](https://www.tensorflow.org/lite/guide)を参照してください。画像分類、オブジェクト検出、他の用途で使用されるその他の TensorFlow Lite モデルについては、[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite) を参照してください。
