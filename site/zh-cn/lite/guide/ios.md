@@ -4,7 +4,7 @@
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS 图像分类示例</a>
 
-有关源代码的说明，您还应阅读 [TensorFlow Lite iOS 图像分类](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md)。
+有关源代码的说明，您还应阅读 [TensorFlow Lite iOS 图像分类](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/README.md)。
 
 此示例应用使用[图像分类](https://www.tensorflow.org/lite/examples/image_classification/overview)持续对从设备的后置摄像头看到的内容进行分类，并显示最可能的分类。它允许用户在浮点或[量化](https://www.tensorflow.org/lite/performance/post_training_quantization)模型之间进行选择，并选择执行推断的线程数。
 
@@ -37,10 +37,10 @@ pod 'TensorFlowLiteObjC'
 
 `TensorFlowLiteSwift` Pod 和 `TensorFlowLiteObjC` Pod 都有稳定版本和 Nightly 版本。如果您没有像上述示例那样指定版本约束，CocoaPods 将默认拉取最新的稳定版本。
 
-您还可以指定版本约束。例如，如果您希望依赖版本 2.0.0，可以按照如下代码编写依赖关系：
+您还可以指定版本约束。例如，如果您希望依赖版本 2.10.0，可以按照如下代码编写依赖关系：
 
 ```ruby
-pod 'TensorFlowLiteSwift', '~> 2.0.0'
+pod 'TensorFlowLiteSwift', '~> 2.10.0'
 ```
 
 这将确保您的应用中使用的是 `TensorFlowLiteSwift` Pod 最新可用的 2.x.y 版本。或者，如果您想依赖 Nightly 版本，可以编写如下代码：
