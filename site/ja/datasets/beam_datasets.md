@@ -34,7 +34,7 @@ GCS_BUCKET=gs://my-gcs-bucket
 echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
-If you're using `tfds-nightly`, make sure to echo from `tfds-nightly` in case the dataset has been updated since the last release.
+`tfds-nightly` を使用している場合には、データセットが前回のリリースから更新されている場合に備え、`tfds-nightly` からエコーするようにします。
 
 ```sh
 echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
@@ -54,7 +54,7 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
 
 ### ローカルで生成する
 
-To run your script locally using the [default Apache Beam runner](https://beam.apache.org/documentation/runners/direct/) (it must fit all data in memory), the command is the same as for other datasets:
+[デフォルトの Apache Beam ランナー](https://beam.apache.org/documentation/runners/direct/)を使用してローカルでスクリプトを実行する場合（すべてのデータがメモリに収まる必要があります）のコマンドは、他のデータセットと同じです。
 
 ```sh
 tfds build my_dataset
@@ -62,11 +62,11 @@ tfds build my_dataset
 
 **警告**: Beam のデータセットは**巨大な**（テラバイト以上）場合があり、生成には相当量のリソースを必要とします（ローカルコンピュータでは数週間かかることもあります）。データセットの生成には分散環境の使用を推奨しています。サポートされているランタイムのリストについては [Apache Beam ドキュメント](https://beam.apache.org/)を参照してください。
 
-### With Apache Flink
+### Apache Flink を使用する
 
-To run the pipeline using [Apache Flink](https://flink.apache.org/) you can read the [official documentation](https://beam.apache.org/documentation/runners/flink). Make sure your Beam is compliant with [Flink Version Compatibility](https://beam.apache.org/documentation/runners/flink/#flink-version-compatibility)
+[Apache Flink](https://flink.apache.org/) を使用してパイプラインを実行する場合は、[公式ドキュメント](https://beam.apache.org/documentation/runners/flink)をお読みください。Beam が [Flink のバージョン互換性](https://beam.apache.org/documentation/runners/flink/#flink-version-compatibility)に準拠していることを確認してください。
 
-To make it easier to launch the script, it's helpful to define the following variables using the actual values for your Flink setup and the dataset you want to generate:
+スクリプトの起動を容易にするには、Flink セットアップと生成するデータセットの実際の値を使って、以下の変数を定義すると便利です。
 
 ```sh
 DATASET_NAME=<dataset-name>
@@ -75,7 +75,7 @@ FLINK_CONFIG_DIR=<flink-config-directory>
 FLINK_VERSION=<flink-version>
 ```
 
-To run on an embedded Flink cluster, you can launch the job using the command below:
+組み込みの Flink クラスタで実行するには、以下のコマンドを使用してジョブを起動できます。
 
 ```sh
 tfds build $DATASET_NAME/$DATASET_CONFIG \
