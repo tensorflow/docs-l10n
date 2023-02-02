@@ -1,235 +1,286 @@
-# TFX Airflow 튜토리얼
+# **TFX Airflow 튜토리얼**
 
-[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[ ](https://github.com/tensorflow/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)[](https://github.com/tensorflow/tfx) [](https://badge.fury.io/py/tfx)<a href="https://badge.fury.io/py/tfx" data-md-type="link">![PyPI](https://badge.fury.io/py/tfx.svg)</a>[](https://badge.fury.io/py/tfx)
+## 개요
 
-## 가중치 값만 저장합니다. 이것은 일반적으로 모델을 훈련할 때 사용됩니다.
+## 개요
 
-이 튜토리얼은 TensorFlow Extended(TFX)를 소개하고 자체 머신러닝 파이프라인을 만드는 방법을 배우는 데 도움이 되도록 설계되었습니다. 로컬에서 실행되며 TFX 및 TensorBoard와의 통합과 더불어 Jupyter 노트북에서 TFX와의 상호 작용도 보여줍니다.
+이 튜토리얼은 TensorFlow Extended(TFX) 및 Apache Airflow를 오케스트레이터로 사용하여 자체 머신러닝 파이프라인을 생성하는 방법을 배우는 데 도움을 주도록 설계되었습니다. Vertex AI Workbench에서 실행되며 TFX 및 TensorBoard와의 통합은 물론 Jupyter Lab 환경에서 TFX와의 상호 작용도 보여줍니다.
 
-핵심 용어: TFX 파이프라인은 Directed Acyclic Graph 또는 "DAG"입니다. 종종 파이프라인을 DAG라고 합니다.
+### 수행할 작업
 
-데이터세트를 검사하는 것으로 시작하여 완전하게 작동하는 파이프라인을 만드는 것으로 완성되는 일반적인 ML 개발 프로세스를 따릅니다. 그 과정에서 파이프라인을 디버그 및 업데이트하고 성능을 측정하는 방법을 살펴봅니다.
+TFX를 사용하여 ML 파이프라인을 만드는 방법을 배웁니다.
 
-### 자세히 알아보기
-
-자세한 내용은 TFX 사용 설명서를 참조하세요.
-
-## 단계별 안내
-
-일반적인 ML 개발 프로세스에 따라 단계별로 작업하여 점차적으로 파이프라인을 생성합니다. 단계는 다음과 같습니다.
-
-1. [환경 설정](#step_1_setup_your_environment)
-2. [초기 파이프라인 골격 가져오기](#step_2_bring_up_initial_pipeline_skeleton)
-3. [데이터 고찰하기](#step_3_dive_into_your_data)
-4. [특성 엔지니어링](#step_4_feature_engineering)
-5. [훈련](#step_5_training)
-6. [모델 성능 분석](#step_6_analyzing_model_performance)
-7. [프로덕션 준비](#step_7_ready_for_production)
-
-## 전제 조건
-
-- Linux / MacOS
-- Virtualenv
-- Python 3.5+
-- Git
-
-### 필수 패키지
-
-환경에 따라 여러 패키지를 설치해야 할 수 있습니다.
-
-```bash
-sudo apt-get install \
-    build-essential libssl-dev libffi-dev \
-    libxml2-dev libxslt1-dev zlib1g-dev \
-    python3-pip git software-properties-common
-```
-
-Python 3.6을 실행 중인 경우 python3.6-dev를 설치해야 합니다.
-
-```bash
-sudo apt-get install python3.6-dev
-```
-
-Python 3.7을 실행 중인 경우 python3.7-dev를 설치해야 합니다.
-
-```bash
-sudo apt-get install python3.7-dev
-```
-
-또한 시스템의 GCC 버전이 7 미만이면 GCC를 업데이트해야 합니다. 그렇지 않으면 airflow webserver를 실행할 때 오류가 표시됩니다. 다음을 사용하여 현재 버전을 확인할 수 있습니다.
-
-```bash
-gcc --version
-```
-
-GCC를 업데이트해야 하는 경우 다음을 실행할 수 있습니다.
-
-```bash
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-sudo apt update
-sudo apt install gcc-7
-sudo apt install g++-7
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7
-```
-
-### MacOS 환경
-
-Python 3 및 git이 아직 설치되지 않은 경우 Homebrew 패키지 관리자를 사용하여 설치할 수 있습니다.
-
-```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-brew update
-brew install python
-brew install git
-```
-
-MacOS는 구성에 따라 Airflow를 실행할 때 스레드 분기에서 문제를 일으키는 경우가 종종 있습니다. 이러한 문제를 방지하려면 ~/.bash_profile을 편집하고 파일 끝에 다음 줄을 추가해야 합니다.
-
-```bash
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-```
-
-## 튜토리얼 자료
-
-이 튜토리얼의 코드는 https://github.com/tensorflow/tfx/tree/master/tfx/examples/airflow_workshop에서 확인할 수 있습니다.
-
-코드는 작업하는 대상 단계별로 구성되어 있으므로 각 단계마다 필요한 코드와 함께 수행할 작업에 대한 지침이 제공됩니다.
-
-튜토리얼 파일에는 연습과 함께 문제가 발생할 경우를 대비하여 연습에 대한 솔루션이 모두 포함되어 있습니다.
-
-#### 연습
-
-- taxi_pipeline.py
-- taxi_utils.py
-- taxi DAG
-
-#### 솔루션
-
-- taxi_pipeline_solution.py
-- taxi_utils_solution.py
-- taxi_solution DAG
-
-## 수행하는 작업
-
-TFX를 사용하여 ML 파이프라인을 생성하는 방법을 배우게 됩니다.
-
+- TFX 파이프라인은 Directed Acyclic Graph 또는 "DAG"입니다. 파이프라인을 종종 DAG라고 부릅니다.
 - TFX 파이프라인은 프로덕션 ML 애플리케이션을 배포할 때 적합합니다.
-- TFX 파이프라인은 데이터세트가 클 때 적합합니다.
+- TFX 파이프라인은 데이터세트가 크거나 커질 수 있는 경우에 적합합니다.
 - TFX 파이프라인은 훈련/서비스 일관성이 중요한 경우에 적합합니다.
 - TFX 파이프라인은 추론을 위한 버전 관리가 중요한 경우에 적합합니다.
 - Google은 프로덕션 ML에 TFX 파이프라인을 사용합니다.
 
-일반적인 ML 개발 프로세스를 따릅니다.
+자세한 내용은 TFX 사용 설명서를 참조하세요.
+
+일반적인 ML 개발 프로세스를 따르게 됩니다.
 
 - 데이터 수집, 이해 및 정리
 - 특성 엔지니어링
 - 훈련
-- 모델 성능 분석
+- [모델 성능 분석](#step_6_analyzing_model_performance)
 - 다듬고 정리하고 반복
 - 프로덕션 준비
 
-### 각 단계에 대한 코드 추가하기
+## **파이프라인 오케스트레이션을 위한 Apache Airflow**
 
-이 튜토리얼은 모든 코드가 파일에 포함되도록 설계되었지만 3-7 단계의 모든 코드는 주석 처리되고 인라인 주석으로 표시됩니다. 인라인 주석은 코드 줄이 적용되는 단계를 나타냅니다. 예를 들어, 3단계의 코드는 # Step 3 주석으로 표시됩니다.
+TFX 오케스트레이터는 파이프라인에서 정의한 종속성을 기반으로 TFX 파이프라인의 구성 요소를 예약하는 작업을 담당합니다. TFX는 여러 환경 및 오케스트레이션 프레임워크에 이식할 수 있도록 설계되었습니다. TFX에서 지원하는 기본 오케스트레이터 중 하나는 [Apache Airflow](https://www.tensorflow.org/tfx/guide/airflow)입니다. 이 실습에서는 TFX 파이프라인 오케스트레이션에 Apache Airflow를 사용하는 방법을 보여줍니다. Apache Airflow는 프로그래밍 방식으로 워크플로를 작성, 예약 및 모니터링하기 위한 플랫폼입니다. TFX는 Airflow를 사용하여 작업의 DAG(방향성 비순환 그래프)로 워크플로를 작성합니다. 풍부한 사용자 인터페이스를 통해 프로덕션에서 실행되는 파이프라인을 쉽게 시각화하고 진행 상황을 모니터링하며 필요할 때 문제를 해결할 수 있습니다. Apache Airflow 워크플로는 코드로 정의됩니다. 이를 통해 유지 관리, 버전 관리, 테스트 및 협업이 더 쉬워집니다. Apache Airflow는 일괄 처리 파이프라인에 적합합니다. 부담이 없이 배우기 쉽습니다.
 
-각 단계에 대해 추가할 코드는 일반적으로 세 가지 코드 영역에 속합니다.
+이 예제에서는 Airflow를 수동으로 설정하여 인스턴스에서 TFX 파이프라인을 실행합니다.
 
-- 가져오기
-- DAG 구성
-- create_pipeline () 호출에서 반환된 목록
-- taxi_utils.py의 지원 코드
+TFX에서 지원하는 다른 기본 오케스트레이터는 Apache Beam과 Kubeflow입니다. [Apache Beam](https://www.tensorflow.org/tfx/guide/beam_orchestrator)은 여러 데이터 처리 백엔드(Beam Runners)에서 실행할 수 있습니다. Cloud Dataflow는 TFX 파이프라인을 실행하는 데 사용할 수 있는 이러한 빔 러너 중 하나입니다. Apache Beam은 스트리밍과 일괄 처리 파이프라인 모두에 사용할 수 있습니다.<br> [Kubeflow](https://www.tensorflow.org/tfx/guide/kubeflow)는 Kubernetes에서 머신러닝(ML) 워크플로를 간단하고 이식 가능하며 확장 가능하게 배포하는 데 중점을 둔 오픈소스 ML 플랫폼입니다. Kubernetes 클러스터에 배포해야 하는 경우 Kubeflow를 TFFX 파이프라인의 오케스트레이터로 사용할 수 있습니다. 또한 고유한 [사용자 지정 오케스트레이터](https://www.tensorflow.org/tfx/guide/custom_orchestrator)를 사용하여 TFX 파이프라인을 실행할 수도 있습니다.
 
-튜토리얼을 진행하면서 현재 작업 중인 튜토리얼 단계에 적용되는 코드 줄의 주석 처리를 제거합니다. 그러면 해당 단계에 대한 코드가 추가되고 파이프라인이 업데이트됩니다. 이 때 주석 처리를 제거하는 코드를 검토할 것을 강력히 권장합니다.
+Airflow에 대한 자세한 내용은 [여기](https://airflow.apache.org/)를 참조하세요.
 
-## Chicago Taxi 데이터세트
+## **Chicago Taxi 데이터세트**
 
-<!-- Image free for commercial use, does not require attribution:
-https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
+[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[](https://github.com/tensorflow/tfx)[ ](https://github.com/tensorflow/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)[](https://badge.fury.io/py/tfx)[](https://github.com/tensorflow/tfx) [](https://badge.fury.io/py/tfx)<a href="https://badge.fury.io/py/tfx"></a>![PyPI](https://badge.fury.io/py/tfx.svg)[](https://badge.fury.io/py/tfx)
 
-![택시](images/airflow_workshop/taxi.jpg) ![시카고 택시](images/airflow_workshop/chicago.png)
+![특성 엔지니어링](images/airflow_workshop/step4.png)
 
-시카고 시에서 공개한 [Taxi Trips 데이터세트](https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew)를 사용하고 있습니다.
+시카고 시에서 공개한 [Taxi Trips 데이터세트](https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew)를 사용합니다.
 
-참고: 이 사이트는 원 출처인 시카고 시의 공식 웹 사이트 www.cityofchicago.org를 바탕으로 수정된 데이터를 사용하는 애플리케이션을 제공합니다. 시카고 시는 이 사이트에서 제공되는 데이터의 내용, 정확성, 적시성 또는 완전성에 대해 어떠한 주장도하지 않습니다. 이 사이트에서 제공되는 데이터는 언제든지 변경될 수 있습니다. 이 사이트에서 제공하는 데이터는 자신의 책임 하에 사용되는 것으로 이해됩니다.
-
-[Google BigQuery](https://cloud.google.com/bigquery/public-data/chicago-taxi)에서 데이터세트에 대해 [자세히](https://cloud.google.com/bigquery/) 알아볼 수 있습니다. [BigQuery UI](https://bigquery.cloud.google.com/dataset/bigquery-public-data:chicago_taxi_trips)에서 전체 데이터세트를 살펴보세요.
+참고: 이 튜토리얼은 원 출처인 시카고 시의 공식 웹 사이트인 www.cityofchicago.org의 자료를 기초로 수정된 데이터를 사용하여 애플리케이션을 빌드합니다. 시카고 시는 이 튜토리얼에서 제공되는 데이터의 내용, 정확성, 적시성 또는 완전성에 대해 어떠한 주장도 하지 않습니다. 이 사이트에서 제공되는 데이터는 언제든지 변경될 수 있습니다. 이 튜토리얼에서 제공되는 데이터는 자신의 책임 하에 사용되는 것으로 간주합니다.
 
 ### 모델 목표 - 이진 분류
 
 고객이 20% 이상 팁을 줄까요?
 
-## 1단계: 환경 설정
+## Google Cloud 프로젝트 설정하기
 
-설정 스크립트(setup_demo.sh)는 TFX 및 Airflow를 설치하고 이 튜토리얼에서 쉽게 작업할 수 있는 방식으로 Airflow를 구성합니다.
+**실습 시작 버튼을 클릭하기 전에** 다음 지침을 읽으세요. 실습은 시간 제한이 있으며 일시 중지할 수 없습니다. **실습 시작**을 클릭하면 시작되는 타이머는 Google Cloud 리소스를 사용할 수 있는 시간을 보여줍니다.
 
-셸에서:
+이 실습 랩에서는 시뮬레이션이나 데모 환경이 아닌 실제 클라우드 환경에서 랩 활동을 직접 수행할 수 있습니다. 실습 기간 동안 Google Cloud에 로그인하고 액세스하는 데 사용되는 새로운 임시 사용자 인증 정보가 제공됩니다.
 
-```bash
-cd
-virtualenv -p python3 tfx-env
-source ~/tfx-env/bin/activate
+**필요 사항** 이 실습을 완료하려면 다음이 필요합니다.
 
-git clone https://github.com/tensorflow/tfx.git
-cd ~/tfx
-# These instructions are specific to the 0.21 release
-git checkout -f origin/r0.21
-cd ~/tfx/tfx/examples/airflow_workshop/setup
-./setup_demo.sh
-```
+- 표준 인터넷 브라우저에 액세스(Chrome 브라우저 권장)
+- 실습을 완료할 시간
 
-setup_demo.sh를 검토하여 어떤 작업을 하는지 확인해야 합니다.
+**참고:** 개인 Google Cloud 계정이나 프로젝트가 이미 있는 경우 이 실습에 사용하지 마세요.
 
-## 2단계: 초기 파이프라인 골격 가져오기
+**참고:** Chrome OS 기기를 사용하는 경우 Incognito 창을 열어 이 실습을 실행하세요.
 
-### Hello World
+**실습을 시작하고 Google Cloud Console에 로그인하는 방법** 1. **실습 시작** 버튼을 클릭합니다. 실습 비용을 지불해야 하는 경우 지불 방법을 선택할 수 있는 팝업이 열립니다. 왼쪽에는 이 실습에 사용해야 하는 임시 인증 정보가 들어간 패널이 있습니다.
 
-셸에서:
+![택시](images/airflow_workshop/taxi.jpg) ![시카고 택시](images/airflow_workshop/chicago.png)
 
-```bash
-# Open a new terminal window, and in that window ...
-source ~/tfx-env/bin/activate
-airflow webserver -p 8080
+1. 사용자 이름을 복사한 다음 **Google 콘솔 열기**를 클릭합니다. 실습에서 리소스를 가동한 다음 **로그인** 페이지를 표시하는 다른 탭을 엽니다.
 
-# Open another new terminal window, and in that window ...
-source ~/tfx-env/bin/activate
-airflow scheduler
+![데이터 구성 요소](images/airflow_workshop/examplegen1.png) ![데이터 구성 요소](images/airflow_workshop/examplegen2.png)
 
-# Open yet another new terminal window, and in that window ...
-# Assuming that you've cloned the TFX repo into ~/tfx
-source ~/tfx-env/bin/activate
-cd ~/tfx/tfx/examples/airflow_workshop/notebooks
-jupyter notebook
-```
-
-이 단계에서 Jupyter 노트북을 시작했습니다. 나중에 이 폴더에서 노트북을 실행하게 됩니다.
-
-### 브라우저에서:
-
-- 브라우저를 열고 http://127.0.0.1:8080으로 이동합니다.
-
-#### 문제 해결
-
-웹 브라우저에서 Airflow 콘솔을 로드하는 데 문제가 있거나 airflow webserver를 실행할 때 오류가 발생한 경우, 포트 8080에서 다른 애플리케이션이 실행 중일 수 있습니다. 이 포트는 Airflow의 기본 포트이지만 사용되지 않는 다른 사용자 포트로 변경할 수 있습니다. 예를 들어, 포트 7070에서 Airflow를 실행하려면 다음을 실행할 수 있습니다.
-
-```bash
-airflow webserver -p 7070
-```
-
-#### DAG 보기 버튼
+***팁:*** 별도의 창에서 탭을 나란히 여세요.
 
 ![DAG 버튼](images/airflow_workshop/airflow_dag_buttons.png)
 
-- 왼쪽에 있는 버튼을 사용하여 DAG를 활성화합니다.
-- 오른쪽에 있는 버튼을 사용하여 변경을 수행할 때 DAG를 새로 고침합니다.
-- 오른쪽에 있는 버튼을 사용하여 DAG를 트리거합니다.
-- 택시를 클릭하여 DAG의 그래프 보기로 이동합니다.
+1. **로그인** 페이지에서 왼쪽 패널에서 복사한 사용자 이름을 붙여넣습니다. 그런 다음 비밀번호를 복사하여 붙여 넣으세요.
+
+***중요:*** - 왼쪽 패널의 인증 정보를 사용해야 합니다. Google Cloud Training 사용자 인증 정보를 사용하지 마세요. 자체 Google Cloud 계정이 있는 경우 이 실습에 사용하지 마세요(요금이 부과되지 않도록).
+
+1. 이어지는 페이지를 클릭하면서 진행합니다.
+2. 이용 약관에 동의합니다.
+
+- 복구 옵션 또는 이중 인증을 추가하지 마세요(임시 계정이기 때문).
+
+- 무료 평가판을 등록하지 마세요.
+
+잠시 후 이 탭에서 Cloud Console이 열립니다.
+
+**참고:** 왼쪽 상단의 **탐색 메뉴**를 클릭하면 Google Cloud 제품 및 서비스 목록이 포함된 메뉴를 볼 수 있습니다.
+
+![프로덕션 준비](images/airflow_workshop/step7.png)
+
+### Cloud Shell 활성화하기
+
+Cloud Shell은 개발 도구가 로드되는 가상 머신으로, 영구 5GB 홈 디렉터리를 제공하고 Google Cloud에서 실행됩니다. Cloud Shell은 Google Cloud 리소스에 대한 명령줄 액세스를 제공합니다.
+
+Cloud Console의 오른쪽 상단 도구 모음에서 **Cloud Shell 활성화** 버튼을 클릭합니다.
 
 ![그래프 새로 고침 버튼](images/airflow_workshop/graph_refresh_button.png)
 
-#### Airflow CLI
+**계속**을 클릭합니다.
 
-Airflow CLI를 사용하여 DAG를 활성화하고 트리거할 수도 있습니다.
+![설정 완료](images/airflow_workshop/step2.png)
+
+프로비저닝 후 환경에 연결하는 데 약간의 시간이 걸립니다. 연결되면 인증이 된 것이며 프로젝트는 *PROJECT_ID*로 설정됩니다. 예를 들면 다음과 같습니다.
+
+![그래프 새로 고침 버튼](images/airflow_workshop/step5.png)
+
+`gcloud`는 Google Cloud를 위한 명령줄 도구입니다. Cloud Shell에 사전 설치되어 제공되며 탭 완성을 지원합니다.
+
+다음 명령으로 활성 계정 이름을 나열할 수 있습니다.
+
+```
+gcloud auth list
+```
+
+(출력)
+
+> ACTIVE: * ACCOUNT: student-01-xxxxxxxxxxxx@qwiklabs.net To set the active account, run: $ gcloud config set account `ACCOUNT`
+
+`gcloud config list project`(출력) 명령으로 프로젝트 ID를 나열할 수 있습니다.
+
+> [core] project = &lt;project_ID&gt;
+
+(출력 예)
+
+> [core] project = qwiklabs-gcp-44776a13dea667a6
+
+gcloud에 대한 전체 문서는 [gcloud 명령줄 도구 개요](https://cloud.google.com/sdk/gcloud)를 참조하세요.
+
+## Google 클라우드 서비스 사용하기
+
+1. Cloud Shell에서 gcloud를 사용하여 실습에서 사용되는 서비스를 활성화합니다. `gcloud services enable notebooks.googleapis.com`
+
+## Vertex 노트북 인스턴스 배포하기
+
+1. **탐색 메뉴**를 클릭하고 **Vertex AI**로 이동한 다음 **Workbench**로 이동합니다.
+
+![데이터 고찰하기](images/airflow_workshop/step3.png)
+
+1. 노트북 인스턴스 페이지에서 **새 노트북**을 클릭합니다.
+
+2. 인스턴스 사용자 지정 메뉴에서 **TensorFlow Enterprise**를 선택하고 **TensorFlow Enterprise 2.x(with LTS)** &gt; **Without GPUs** 버전을 선택합니다.
+
+![데이터 고찰하기](images/airflow_workshop/step3notebook.png)
+
+1. **새 노트북 인스턴스** 대화 상자에서 연필 아이콘을 클릭하여 인스턴스 속성을 **편집**합니다.
+
+2. **인스턴스 이름**에 인스턴스 이름을 입력합니다.
+
+3. **지역**에 대해 `us-east1`을 선택하고 **구역**에 대해 선택한 지역 내의 구역을 선택합니다.
+
+4. 머신 구성까지 아래로 스크롤하고 머신 유형으로 **e2-standard-2**를 선택합니다.
+
+5. 나머지 필드는 기본값으로 두고 **만들기**를 클릭합니다.
+
+몇 분 후 Vertex AI 콘솔에 해당 인스턴스 이름이 표시되고 그 다음에 **Jupyterlab 열기**가 표시됩니다.
+
+1. **JupyterLab 열기**를 클릭합니다. JupyterLab 창이 새 탭에서 열립니다.
+
+## 환경 설정하기
+
+### 실습 리포지토리 복제하기
+
+다음으로 JupyterLab 인스턴스에서 `tfx` 리포지토리를 복제합니다. 1. JupyterLab에서 **터미널** 아이콘을 클릭하여 새 터미널을 엽니다.
+
+{ql-infobox0}<strong>참고:</strong> 메시지가 표시되면 빌드 권장 사항에 대해 <code>취소</code>를 클릭합니다.{/ql-infobox0}
+
+1. `tfx` Github 리포지토리를 복제하려면 다음 명령을 입력하고 **Enter**를 누릅니다.
+
+```
+git clone https://github.com/tensorflow/tfx.git
+```
+
+1. 리포지토리를 복제했는지 확인하려면 `tfx` 디렉터리를 두 번 클릭하고 해당 콘텐츠를 볼 수 있는지 확인합니다.
+
+![변환](images/airflow_workshop/transform.png)
+
+### 실습 종속성 설치하기
+
+1. 다음을 실행하여 `tfx/tfx/examples/airflow_workshop/taxi/setup/` 폴더로 이동한 다음 `./setup_demo.sh`를 실행하여 실습 종속성을 설치합니다.
+
+```bash
+cd ~/tfx/tfx/examples/airflow_workshop/taxi/setup/
+./setup_demo.sh
+```
+
+위의 코드는 다음을 수행합니다.
+
+- 필요한 패키지를 설치합니다.
+- 홈 폴더에 `airflow` 폴더를 생성합니다.
+- `dags` 폴더를 `tfx/tfx/examples/airflow_workshop/taxi/setup/` 폴더에서 `~/airflow/` 폴더로 복사합니다.
+- csv 파일을 `tfx/tfx/examples/airflow_workshop/taxi/setup/data`에서 `~/airflow/data`로 복사합니다.
+
+![모델 성능 분석](images/airflow_workshop/step6.png)
+
+## Airflow 서버 구성하기
+
+### 브라우저에서 Airflow 서버에 액세스하기 위한 방화벽 규칙 생성하기
+
+1. `https://console.cloud.google.com/networking/firewalls/list`로 이동하여 프로젝트 이름이 적절하게 선택되었는지 확인합니다.
+2. 상단의 `CREATE FIREWALL RULE` 옵션을 클릭합니다.
+
+![변환](images/airflow_workshop/step5tboard.png)
+
+**방화벽 만들기 대화 상자**에서 아래 나열된 단계를 따릅니다.
+
+1. **이름**에 `airflow-tfx`를 입력합니다.
+2. **우선 순위**로 `1`을 선택합니다.
+3. **대상**으로 `All instances in the network`를 선택합니다.
+4. **소스 IPv4 범위**에 대해 `0.0.0.0/0`을 선택합니다.
+5. **프로토콜 및 포트**에 대해 `tcp`를 클릭하고 `tcp` 옆의 상자에 `7000`을 입력합니다.
+6. `Create`를 클릭합니다.
+
+![모델 성능 분석](images/airflow_workshop/step6notebook.png)
+
+### 쉘에서 Airflow 서버 실행하기
+
+Jupyter 실습 터미널 창에서 홈 디렉터리로 변경하고 `airflow users create` 명령을 실행하여 Airflow에 대한 관리 사용자를 생성합니다.
+
+```bash
+cd
+airflow users  create --role Admin --username admin --email admin --firstname admin --lastname admin --password admin
+```
+
+그런 다음 `airflow webserver` 및 `airflow scheduler` 명령을 실행하여 서버를 실행합니다. 방화벽을 통과하도록 허용되는 포트 `7000`을 선택합니다.
+
+```bash
+nohup airflow webserver -p 7000 &> webserver.out &
+nohup airflow scheduler &> scheduler.out &
+```
+
+### 외부 IP 가져오기
+
+1. Cloud Shell에서 `gcloud`를 사용하여 외부 IP를 가져옵니다.
+
+```
+gcloud compute instances list
+```
+
+![모델 훈련](images/airflow_workshop/gcloud-instance-ip.png)
+
+## DAG/파이프라인 실행
+
+### 브라우저에서
+
+브라우저를 열고 http://&lt;external_ip&gt;:7000으로 이동합니다.
+
+- 로그인 페이지에서 `airflow users create` 명령을 실행할 때 선택한 사용자 이름(`admin`)과 비밀번호(`admin`)를 입력합니다.
+
+![모델 훈련](images/airflow_workshop/airflow-login.png)
+
+Airflow는 Python 소스 파일에서 DAG를 로드합니다. 각 파일을 가져와서 실행합니다. 그런 다음 해당 파일에서 모든 DAG 객체를 로드합니다. DAG 객체를 정의하는 모든 `.py` 파일은 Airflow 홈페이지에서 파이프라인으로 나열됩니다.
+
+이 튜토리얼에서 Airflow는 `~/airflow/dags/` 폴더에서 DAG 객체를 검색합니다.
+
+`~/airflow/dags/taxi_pipeline.py`를 열고 하단으로 스크롤하면 `DAG`라는 변수에 DAG 객체를 생성하여 저장하는 것을 확인할 수 있습니다. 따라서 아래와 같이 Airflow 홈페이지에 파이프라인으로 나열됩니다.
+
+![dag-home-full.png](images/airflow_workshop/dag-home-full.png)
+
+택시를 클릭하면 DAG의 그리드 보기로 리디렉션됩니다. 상단의 `Graph` 옵션을 클릭하여 DAG의 그래프 보기를 얻을 수 있습니다.
+
+![airflow-dag-graph.png](images/airflow_workshop/airflow-dag-graph.png)
+
+### 택시 파이프라인 트리거
+
+홈페이지에서 DAG와 상호 작용하는 데 사용할 수 있는 버튼을 볼 수 있습니다.
+
+![dag-buttons.png](images/airflow_workshop/dag-buttons.png)
+
+**작업** 헤더 아래에서 **트리거** 버튼을 클릭하여 파이프라인을 트리거합니다.
+
+택시 **DAG** 페이지에서 오른쪽에 있는 버튼을 사용하여 파이프라인이 실행될 때 DAG의 그래프 보기 상태를 새로 고칩니다. 또한 **자동 새로 고침**을 활성화하여 상태가 변경될 때 그래프 보기를 자동으로 새로 고치도록 Airflow에 지시할 수 있습니다.
+
+![dag-button-refresh.png](images/airflow_workshop/dag-button-refresh.png)
+
+터미널에서 [Airflow CLI](https://airflow.apache.org/cli.html)를 사용하여 DAG를 활성화하고 트리거할 수도 있습니다.
 
 ```bash
 # enable/disable
@@ -242,237 +293,18 @@ airflow trigger_dag <your DAG name>
 
 #### 파이프라인이 완료될 때까지 대기
 
-DAG 보기에서 파이프라인을 트리거한 후, 파이프라인이 처리를 완료하는 것을 볼 수 있습니다. 각 구성 요소가 실행됨에 따라 DAG 그래프에서 구성 요소의 외곽선 색상이 변경되어 해당 상태를 표시합니다. 구성 요소 처리가 완료되면 윤곽선이 진한 녹색으로 바뀌어 완료되었음을 나타냅니다.
+파이프라인을 트리거한 후 DAG 보기에서 실행 중인 파이프라인의 진행 상황을 볼 수 있습니다. 각 구성 요소가 실행되면 DAG 그래프에서 구성 요소의 윤곽선 색상이 상태를 표시하도록 변경됩니다. 구성 요소의 처리가 완료되면 윤곽선이 짙은 녹색으로 바뀌어 완료되었음을 나타냅니다.
 
-참고: 구성 요소가 실행될 때 업데이트된 상태를 보려면 오른쪽에 있는 그래프 새로 고침 버튼을 사용하거나 페이지를 새로 고쳐야 합니다.
+![dag-step7.png](images/airflow_workshop/dag-step7.png)
 
-지금까지는 파이프라인에 CsvExampleGen 구성 요소만 있으므로 짙은 녹색으로 변할 때까지 기다려야 합니다(~ 1분).
+## 구성 요소 이해하기
 
-![설정 완료](images/airflow_workshop/step2.png)
+이제 이 파이프라인의 구성 요소를 자세히 알아보고 파이프라인의 각 단계에서 생성된 출력을 개별적으로 살펴보겠습니다.
 
-## 3단계: 데이터 고찰하기
+1. JupyterLab에서 `~/tfx/tfx/examples/airflow_workshop/taxi/notebooks/`로 이동합니다.
 
-데이터 과학 또는 ML 프로젝트의 첫 번째 작업은 데이터를 이해하고 정리하는 것입니다.
+2. **notebook.ipynb.** ![notebook-ipynb.png](images/airflow_workshop/notebook-ipynb.png)를 엽니다.
 
-- 각 특성의 데이터 유형 이해
-- 이상 및 누락된 값 찾기
-- 각 특성의 분포 이해
+3. 노트북에서 실습을 계속하고 화면 상단에서 **실행**(<img src="images/airflow_workshop/f1abc657d9d2845c.png" width="28.00" alt="run-button.png">) 아이콘을 클릭하여 각 셀을 실행합니다. 또는 **SHIFT + ENTER**를 사용하여 셀에서 코드를 실행할 수 있습니다.
 
-### 구성 요소
-
-![데이터 구성 요소](images/airflow_workshop/examplegen1.png) ![데이터 구성 요소](images/airflow_workshop/examplegen2.png)
-
-- ExampleGen은 입력 데이터세트를 수집하고 분할합니다.
-- StatisticsGen은 데이터세트에 대한 통계를 계산합니다.
-- SchemaGen SchemaGen은 통계를 검사하고 데이터 스키마를 생성합니다.
-- ExampleValidator는 데이터세트에서 이상 항목과 누락된 값을 찾습니다.
-
-### 편집기에서:
-
-- ~/airflow/dags에서 taxi_pipeline.py의 Step 3으로 표시된 줄의 주석 처리를 제거합니다.
-- 주석 처리를 제거할 코드를 잠시 검토합니다.
-
-### 브라우저에서:
-
-- 왼쪽 상단 모서리에 있는 "DAG" 링크를 클릭하여 Airflow의 DAG 목록 페이지로 돌아갑니다.
-- 택시 DAG의 오른쪽에 있는 새로 고침 버튼을 클릭합니다.
-    - "DAG [taxi] is now fresh as a daisy"라는 메시지가 표시됩니다.
-- 택시를 트리거합니다.
-- 파이프라인이 완료될 때까지 기다립니다.
-    - 모든 진한 녹색
-    - 오른쪽에서 새로 고침을 사용하거나 페이지를 새로 고칩니다.
-
-![데이터 고찰하기](images/airflow_workshop/step3.png)
-
-### Jupyter로 돌아가기:
-
-이전에 jupyter notebook을 실행했을 때는 브라우저 탭에서 Jupyter 세션이 열렸습니다. 이제 브라우저에서 해당 탭으로 돌아갑니다.
-
-- step3.ipynb를 엽니다.
-- 노트북을 따릅니다.
-
-![데이터 고찰하기](images/airflow_workshop/step3notebook.png)
-
-### 고급 예제
-
-여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 TensorFlow Data Validation Colab을 참조하세요.
-
-TFDV를 사용하여 데이터세트를 탐색하고 유효성을 검사하는 방법에 대한 자세한 내용은 tensorflow.org의 예를 참조하세요.
-
-## 4단계: 특성 엔지니어링
-
-특성 엔지니어링을 통해 데이터의 예측 품질을 높이거나 차원을 줄일 수 있습니다.
-
-- 특성 교차
-- 어휘
-- 임베딩
-- PCA
-- 범주형 인코딩
-
-TFX를 사용할 때의 이점 중 하나는 변환 코드를 한 번 작성하면 결과 변환이 훈련과 서비스 사이에서 일관되다는 것입니다.
-
-### 구성 요소
-
-![변환](images/airflow_workshop/transform.png)
-
-- Transform은 데이터세트에서 특성 엔지니어링을 수행합니다.
-
-### 편집기에서:
-
-- ~/airflow/dags에서 taxi_pipeline.py 및 taxi_utils.py의 Step 4로 표시된 줄의 주석 처리를 제거합니다.
-- 주석 처리를 제거할 코드를 잠시 검토합니다.
-
-### 브라우저에서:
-
-- Airflow의 DAG 목록 페이지로 돌아갑니다.
-- 택시 DAG의 오른쪽에 있는 새로 고침 버튼을 클릭합니다.
-    - "DAG [taxi] is now fresh as a daisy"라는 메시지가 표시됩니다.
-- 택시를 트리거합니다.
-- 파이프라인이 완료될 때까지 기다립니다.
-    - 모든 진한 녹색
-    - 오른쪽에서 새로 고침을 사용하거나 페이지를 새로 고칩니다.
-
-![특성 엔지니어링](images/airflow_workshop/step4.png)
-
-### Jupyter로 돌아가기:
-
-브라우저의 Jupyter 탭으로 돌아갑니다.
-
-- step4.ipynb를 엽니다.
-- 노트북을 따릅니다.
-
-### 고급 예제
-
-여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 TensorFlow Transform Colab을 참조하세요.
-
-## 5단계: 훈련
-
-멋지고 깔끔하게 변환된 데이터로 TensorFlow 모델을 훈련시킵니다.
-
-- 일관되게 적용되도록 4단계의 변환을 포함합니다.
-- 프로덕션을 위해 결과를 SavedModel로 저장합니다.
-- TensorBoard를 사용하여 훈련 프로세스를 시각화하고 탐색합니다.
-- 모델 성능 분석을 위해 EvalSavedModel도 저장합니다.
-
-### 구성 요소
-
-- Trainer는 TensorFlow Estimators를 사용하여 모델 훈련합니다.
-
-### 편집기에서:
-
-- ~/airflow/dags에서 taxi_pipeline.py 및 taxi_utils.py의 Step 5로 표시된 줄의 주석 처리를 제거합니다.
-- 주석 처리를 제거할 코드를 잠시 검토합니다.
-
-### 브라우저에서:
-
-- Airflow의 DAG 목록 페이지로 돌아갑니다.
-- 택시 DAG의 오른쪽에 있는 새로 고침 버튼을 클릭합니다.
-    - "DAG [taxi] is now fresh as a daisy"라는 메시지가 표시됩니다.
-- 택시를 트리거합니다.
-- 파이프라인이 완료될 때까지 기다립니다.
-    - 모든 진한 녹색
-    - 오른쪽에서 새로 고침을 사용하거나 페이지를 새로 고칩니다.
-
-![모델 훈련](images/airflow_workshop/step5.png)
-
-### Jupyter로 돌아가기:
-
-브라우저의 Jupyter 탭으로 돌아갑니다.
-
-- step5.ipynb를 엽니다.
-- 노트북을 따릅니다.
-
-![모델 훈련](images/airflow_workshop/step5tboard.png)
-
-### 고급 예제
-
-여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 TensorBoard 튜토리얼을 참조하세요.
-
-## 6단계: 모델 성능 분석
-
-최상위 메트릭 그 이상을 이해합니다.
-
-- 사용자는 쿼리에 대해서만 모델 성능을 경험합니다.
-- 데이터 조각에서의 성능 저하는 최상위 메트릭에 의해 숨겨질 수 있습니다.
-- 모델 공정성이 중요합니다.
-- 종종 사용자 또는 데이터에서 중요한 일부분이 매우 중요하지만 작을 수 있습니다.
-    - 중요하지만 비정상적인 조건에서 발휘되는 성능
-    - 인플루언서와 같은 주요 대상이 경험하는 성능
-- 현재 프로덕션 상태인 모델을 교체하는 경우, 먼저 새 모델이 더 나은지 확인하세요.
-- Evaluator는 모델이 정상인지 여부를 Pusher 구성 요소에 알립니다.
-
-### 구성 요소
-
-- Evaluator는 훈련 결과에 대한 심층 분석을 수행하고 모델이 프로덕션으로 푸시하기에 "충분히 좋은지" 확인합니다.
-
-### 편집기에서:
-
-- ~/airflow/dags에서 taxi_pipeline.py의 Step 6로 표시된 줄의 주석 처리를 제거합니다.
-- 주석 처리를 제거할 코드를 잠시 검토합니다.
-
-### 브라우저에서:
-
-- Airflow의 DAG 목록 페이지로 돌아갑니다.
-- 택시 DAG의 오른쪽에 있는 새로 고침 버튼을 클릭합니다.
-    - "DAG [taxi] is now fresh as a daisy"라는 메시지가 표시됩니다.
-- 택시를 트리거합니다.
-- 파이프라인이 완료될 때까지 기다립니다.
-    - 모든 진한 녹색
-    - 오른쪽에서 새로 고침을 사용하거나 페이지를 새로 고칩니다.
-
-![모델 성능 분석](images/airflow_workshop/step6.png)
-
-### Jupyter로 돌아가기:
-
-브라우저의 Jupyter 탭으로 돌아갑니다.
-
-- step6.ipynb를 엽니다.
-- 노트북을 따릅니다.
-
-![모델 성능 분석](images/airflow_workshop/step6notebook.png)
-
-### 고급 예제
-
-여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 TFMA Chicago Taxi 튜토리얼을 참조하세요.
-
-## 7단계: 프로덕션 준비
-
-새 모델이 준비되었으면 계속 진행합니다.
-
-- Pusher가 SavedModel을 잘 알려진 위치에 배포합니다.
-
-배포 대상은 잘 알려진 위치에서 새 모델을 받습니다.
-
-- TensorFlow Serving
-- TensorFlow Lite
-- TensorFlow JS
-- TensorFlow Hub
-
-### 구성 요소
-
-- Pusher는 모델을 적용 인프라에 배포합니다.
-
-### 편집기에서:
-
-- ~/airflow/dags에서 taxi_pipeline.py의 Step 7로 표시된 줄의 주석 처리를 제거합니다.
-- 주석 처리를 제거할 코드를 잠시 검토합니다.
-
-### 브라우저에서:
-
-- Airflow의 DAG 목록 페이지로 돌아갑니다.
-- 택시 DAG의 오른쪽에 있는 새로 고침 버튼을 클릭합니다.
-    - "DAG [taxi] is now fresh as a daisy"라는 메시지가 표시됩니다.
-- 택시를 트리거합니다.
-- 파이프라인이 완료될 때까지 기다립니다.
-    - 모든 진한 녹색
-    - 오른쪽에서 새로 고침을 사용하거나 페이지를 새로 고칩니다.
-
-![프로덕션 준비](images/airflow_workshop/step7.png)
-
-## 다음 단계
-
-이제 모델을 훈련하고 유효성을 검증했고 SavedModel 파일을 ~/airflow/saved_models/taxi 디렉토리 아래에 내보냈습니다. 이제 모델의 프로덕션 준비가 완료되었습니다. 이제 다음을 포함하여 모든 TensorFlow 배포 대상에 모델을 배포할 수 있습니다.
-
-- TensorFlow Serving - 서버 또는 서버 팜에서 모델을 제공하고 REST 및/또는 gRPC 추론 요청을 처리합니다.
-- TensorFlow Lite - Android 또는 iOS 네이티브 모바일 애플리케이션 또는 Raspberry Pi, IoT 또는 마이크로 컨트롤러 애플리케이션에 모델을 포함합니다.
-- TensorFlow.js - 웹 브라우저 또는 Node.JS 애플리케이션에서 모델을 실행합니다.
+내용을 읽고 각 세포에서 무슨 일이 일어나고 있는지 이해하도록 하세요.
