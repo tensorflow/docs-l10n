@@ -255,7 +255,7 @@ Android에서 이 사전 처리를 수행하는 방법을 이해하려면 [예�
 
 대부분의 다운로드 zip에는 `model.tflite` 파일이 포함되어 있습니다. 없는 경우 [이 지침](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)에 따라 TensorFlow Lite 플랫 버퍼를 생성할 수 있습니다. [TF2 객체 감지 동물원](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md)의 SSD 모델은 [여기](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md)의 지침을 사용하여 TensorFlow Lite로 변환할 수도 있습니다. 감지 모델은 모바일 친화적인 소스 모델을 생성하는 중간 단계가 필요하기 때문에 [TensorFlow Lite Converter](../../models/convert)를 사용하여 직접 변환할 수 없다는 점에 유의해야 합니다. 위에 링크된 스크립트가 이 단계를 수행합니다.
 
-Both the [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) &amp; [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md) exporting scripts have parameters that can enable a larger number of output objects or slower, more-accurate post processing. Please use `--help` with the scripts to see an exhaustive list of supported arguments.
+[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) 및 [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md) 내보내기 스크립트에는 더 많은 수의 출력 객체 또는 더 느리고 정확한 사후 처리를 활성화할 수 있는 매개변수가 있습니다. 지원되는 인수의 전체 목록을 보려면 스크립트와 함께 `--help`를 사용하세요.
 
 > 현재 온디바이스 추론은 SSD 모델에만 최적화되어 있습니다. CenterNet 및 EfficientDet과 같은 다른 아키텍처의 지원을 개선하기 위한 기회를 찾고 있습니다.
 
