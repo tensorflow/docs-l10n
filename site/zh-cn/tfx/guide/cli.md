@@ -92,7 +92,8 @@ tfx &lt;var&gt;command-group&lt;/var&gt; &lt;var&gt;command&lt;/var&gt; &lt;var&
   <dd>（可选）使用 Kubeflow Pipelines 时受 IAP 保护的端点的客户端 ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>   </dt>
+  <dt>--namespace=<var>namespace</var>
+</dt>
 <dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
@@ -578,7 +579,7 @@ Vertex：
 
 
   <dt>--namespace=<var>namespace</var> </dt>
-<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
+<dd>（可选）要连接到 Kubeflow Pipelines API 的 Kubernetes 命名空间。如果未指定命名空间，则值将默认为 <code>kubeflow</code>。</dd>
 
 
 
