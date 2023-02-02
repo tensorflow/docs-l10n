@@ -265,7 +265,7 @@ Both the [TF1](https://github.com/tensorflow/models/blob/master/research/object_
 
 ## カスタムデータを使用するモデルのファインチューニング
 
-The pre-trained models we provide are trained to detect 90 classes of objects. For a full list of classes, see the labels file in the <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">model metadata</a>.
+提供される事前トレーニング済みモデルは、90 クラスの物体を検出するようにトレーニングされています。クラスの完全なリストについては、<a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">モデルメタデータ</a>のラベルファイルをご覧ください。
 
 元のセットにないクラスを認識するようにモデルを再トレーニングするには転移学習と呼ばれる手法を使用します。たとえば、元のトレーニングデータには野菜は 1 つしかありませんが、モデルを再トレーニングすると複数の種類の野菜を検出できます。これを行うには、トレーニングする新しいラベルごとに一連のトレーニング画像が必要です。推奨される方法は、[TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) ライブラリを使用することです。このライブラリは、カスタムデータセットと数行のコードを使用して、TensorFlow Lite モデルのトレーニングプロセスを簡素化します。また、転移学習が使用されるため、必要なトレーニングデータと時間が少なくなります。いくつかの例を含む事前トレーニング済みモデルのファインチューニングの例は、[少数ショット検出 Colab](https://www.tensorflow.org/lite/guide/model_maker) でも確認できます。
 
