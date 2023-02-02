@@ -11,7 +11,7 @@
 ```sh
 cd path/to/my/project/datasets/
 tfds new my_dataset  # Create `my_dataset/my_dataset.py` template files
-# [...] Manually modify `my_dataset/my_dataset.py` to implement your dataset.
+# [...] Manually modify `my_dataset/my_dataset_dataset_builder.py` to implement your dataset.
 cd my_dataset/
 tfds build  # Download and prepare the dataset to `~/tensorflow_datasets/`
 ```
@@ -56,8 +56,11 @@ tfds new my_dataset
 ```sh
 my_dataset/
     __init__.py
-    my_dataset.py # Dataset definition
-    my_dataset_test.py # (optional) Test
+    README.md # Markdown description of the dataset.
+    CITATIONS.bib # Bibtex citation for the dataset.
+    TAGS.txt # List of tags describing the dataset.
+    my_dataset_dataset_builder.py # Dataset definition
+    my_dataset_dataset_builder_test.py # Test
     dummy_data/ # (optional) Fake data (used for testing)
     checksum.tsv # (optional) URL checksums (see `checksums` section).
 ```
@@ -74,7 +77,7 @@ my_dataset/
 다음은 `tfds.core.GeneratorBasedBuilder`를 바탕으로 하는 데이터세트 빌더의 최소 예시입니다.
 
 ```python
-class MyDataset(tfds.core.GeneratorBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for my_dataset dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
@@ -84,8 +87,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Dataset metadata (homepage, citation,...)."""
-    return tfds.core.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(256, 256, 3)),
             'label': tfds.features.ClassLabel(
@@ -124,13 +126,11 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 
 ```python
 def _info(self):
-  return tfds.core.DatasetInfo(
-      builder=self,
-      # Description and homepage used for documentation
-      description="""
-      Markdown description of the dataset. The text will be automatically
-      stripped and dedent.
-      """,
+  # The `dataset_info_from_configs` base method will construct the
+  # `tfds.core.DatasetInfo` object using the passed-in parameters and
+  # adding: builder (self), description/citations/tags from the config
+  # files located in the same package.
+  return self.dataset_info_from_configs(
       homepage='https://dataset-homepage.org',
       features=tfds.features.FeaturesDict({
           'image_description': tfds.features.Text(),
@@ -144,11 +144,6 @@ def _info(self):
       supervised_keys=('image', 'label'),
       # Specify whether to disable shuffling on the examples. Set to False by default.
       disable_shuffling=False,
-      # Bibtex citation for the dataset
-      citation=r"""
-      @article{my-awesome-dataset-2020,
-               author = {Smith, John},}
-      """,
   )
 ```
 
@@ -156,11 +151,20 @@ def _info(self):
 
 - `features`: 데이터세트 구조, 형상 등을 지정합니다. 복잡한 데이터 형식(오디오, 비디오, 중첩 시퀀스 등)을 지원합니다. 자세한 내용은 [사용 가능한 기능](https://www.tensorflow.org/datasets/api_docs/python/tfds/features#classes) 또는 [기능 커넥터 가이드](https://www.tensorflow.org/datasets/features)를 참조하세요.
 - `disable_shuffling`: [데이터세트 순서 유지](#maintain-dataset-order) 섹션을 참조하세요.
-- `citation`: `BibText` 인용을 찾으려면:
-    - 데이터세트 웹사이트에서 인용 명령어를 검색합니다(BibTex 형식으로 사용).
-    - [arXiv](https://arxiv.org/) 논문의 경우: 논문을 찾아 오른쪽에 있는 `BibText` 링크를 클릭합니다.
-    - [Google Scholar](https://scholar.google.com)에서 논문을 찾아 제목 아래에 있는 큰따옴표를 클릭하고 팝업에서 `BibTeX`를 클릭합니다.
-    - 관련 논문이 없으면(예를 들어, 웹 사이트만 있음), [BibTeX 온라인 편집기](https://truben.no/latex/bibtex/)를 사용하여 사용자 정의 BibTeX 항목을 작성할 수 있습니다(드롭다운 메뉴에 `Online` 항목 유형이 있음).
+
+`BibText` `CITATIONS.bib` 파일 작성:
+
+- 데이터세트 웹사이트에서 인용 명령어를 검색합니다(BibTex 형식으로 사용).
+- [arXiv](https://arxiv.org/) 논문의 경우: 논문을 찾아 오른쪽에 있는 `BibText` 링크를 클릭합니다.
+- [Google Scholar](https://scholar.google.com)에서 논문을 찾아 제목 아래에 있는 큰따옴표를 클릭하고 팝업에서 `BibTeX`를 클릭합니다.
+- 관련 논문이 없으면(예를 들어, 웹 사이트만 있음), [BibTeX 온라인 편집기](https://truben.no/latex/bibtex/)를 사용하여 사용자 정의 BibTeX 항목을 작성할 수 있습니다(드롭다운 메뉴에 `Online` 항목 유형이 있음).
+
+`TAGS.txt` 파일 업데이트:
+
+- 허용된 모든 태그는 생성된 파일에 미리 채워집니다.
+- 데이터세트에 적용되지 않는 모든 태그를 제거합니다.
+- 유효한 태그는 [tensorflow_datasets/core/valid_tags.txt](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/valid_tags.txt)에 나열됩니다.
+- 해당 목록에 태그를 추가하려면 PR을 보내세요.
 
 #### 데이터세트 순서 유지
 
@@ -168,7 +172,7 @@ def _info(self):
 
 ```python
 def _info(self):
-  return tfds.core.DatasetInfo(
+  return self.dataset_info_from_configs(
     # [...]
     disable_shuffling=True,
     # [...]
@@ -289,6 +293,8 @@ def _generate_examples(self, images_path, label_path):
           'label': row['label'],
       }
 ```
+
+경고: 문자열 또는 정수에서 부울 값을 구문 분석할 때 util 함수 `tfds.core.utils.bool_utils.parse_bool`을 사용하여 구문 분석 오류를 방지하세요(예: `bool("False") == True`).
 
 #### 파일 액세스 및 `tf.io.gfile`
 
@@ -433,12 +439,12 @@ PyPI를 통해 데이터세트를 릴리스하는 경우 `checksums.tsv` 파일�
 
 ```python
 import tensorflow_datasets as tfds
-from . import my_dataset
+from . import my_dataset_dataset_builder
 
 
 class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for my_dataset dataset."""
-  DATASET_CLASS = my_dataset.MyDataset
+  DATASET_CLASS = my_dataset_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'test': 1,  # Number of fake test example
