@@ -83,10 +83,10 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
         - 입력: 입력 데이터를 읽는 데 소요된 시간
         - 출력: 출력 데이터를 읽는 데 소요된 시간
         - 커널 시작: 호스트가 커널을 시작하는 데 소요된 시간
-        - Host compute time..
-        - 장치 간 통신 시간
-        - 장치 내 컴퓨팅 시간
-        - All others, including Python overhead.
+        - 호스트 컴퓨팅 시간
+        - 기기 간 통신 시간
+        - 기기 내 컴퓨팅 시간
+        - Python 오버헤드를 포함한 기타
 
     2. 기기 컴퓨팅 정밀도 - 16bit 및 32bit 계산을 사용하는 기기 컴퓨팅 시간의 백분율을 보고합니다.
 
@@ -98,9 +98,9 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
 
 - **실행 환경**: 다음을 포함하여 모델 실행 환경에 대한 높은 수준의 요약을 표시합니다.
 
-    - Number of hosts used.
-    - 장치 유형(GPU/TPU)
-    - 장치 코어 수
+    - 사용된 호스트 수
+    - 기기 유형(GPU/TPU)
+    - 기기 코어 수
 
 - **다음 단계를 위한 권장 사항**: 모델이 입력 바운드될 때 보고하고, 모델의 성능 병목 현상을 찾아 해결하는 데 사용할 수 있는 도구를 권장합니다.
 
@@ -269,7 +269,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 - 하단 창에 표시되는 표에서는 각 고유 커널-연산 쌍에 대한 다음 데이터가 표시됩니다.
 
     - 총 경과 GPU 기간을 kernel-op 쌍으로 그룹화하여 내림차순으로 나타낸 순위
-    - The name of the launched kernel.
+    - 시작된 커널의 이름
     - 커널이 사용하는 GPU 레지스터의 수
     - 사용된 공유(정적 + 동적 공유) 메모리의 총 크기(바이트 단위)
     - `blockDim.x, blockDim.y, blockDim.z`로 표현된 블록 차원
@@ -561,7 +561,7 @@ Profiler는 4가지 축을 따라 여러 가지 사용 사례를 다룹니다. �
 
 <a name="profiling_api_table"></a>
 
-| 프로파일링 API                | 로컬     | 원격    | 다중  | 하드웨어  | :                              :           :           : 작업자   : 플랫폼 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 지원됨 | 아님       | 아님       | CPU, GPU  | : Callback**                   :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 아님       | 아님       | CPU, GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 지원됨 | 지원됨 | CPU, GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 지원됨 | 아님       | 아님       | CPU, GPU  | :                              :           : 지원됨 : 지원됨 :           :
+| 프로파일링 API                | 로컬     | 원격    | 다중  | 하드웨어  | :                              :           :           : 작업자   : 플랫폼 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 지원됨 | 아님       | 아님       | CPU, GPU  | : Callback**                   :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 아님       | 아님       | CPU, GPU  | : start/stop [API]**    :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 지원됨 | 지원됨 | CPU, GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 지원됨 | 아님       | 아님       | CPU, GPU  | :                              :           : 지원됨 : 지원됨 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -718,3 +718,6 @@ TensorFlow 2.2 및 2.3은 단일 호스트 시스템에 대해서만 다중 GPU 
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
+
+
+[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2
