@@ -1,235 +1,286 @@
-# TFX Airflow のチュートリアル
+# **TFX Airflow のチュートリアル**
 
-[](https://github.com/tensorflow/tfx)[](https://badge.fury.io/py/tfx)![PyPI](https://badge.fury.io/py/tfx.svg)
+## 概要
 
-## はじめに
+## 概要
 
-このチュートリアルでは、TensorFlow Extended（TFX）を紹介し、独自の機械学習パイプラインを作成する方法を見ていきます。本チュートリアルはローカルで実行され、TFX および TensorBoard と統合し、Jupyter Notebook の TFX とインタラクティブに動作します。
+このチュートリアルは、TensorFlow Extended（TFX）とオーケストレータとしての Apache Airflow を使用して、独自の機械学習パイプラインを作成する方法を学習できるように設計されています。Vertex AI Workbench で実行し、TFX と TensorBoard との統合と、Jupyter Lab 環境での TFX の操作を説明します。
 
-重要な用語：TFX パイプラインは、有向非巡回グラフ（DAG）で DAG と呼ばれることもあります。
+### 学習内容
 
-典型的な機械学習開発プロセスに従い、データセットを調べてから最終的に完全に機能するパイプラインを作成します。その過程で、パイプラインをデバッグおよび更新し、パフォーマンスを測定する方法を学びます。
+TFX を使用して ML パイプラインを作成する方法を学習します。
 
-### 詳細情報
-
-詳細については、[TFX ユーザーガイド](https://www.tensorflow.org/tfx/guide)を参照してください。
-
-## ステップバイステップ
-
-典型的な機械学習開発プロセスに従って、段階的に作業し、パイプラインを作成します。手順は次のとおりです。
-
-1. [環境をセットアップする](#step_1_setup_your_environment)
-2. [最初のパイプラインスケルトンを表示する](#step_2_bring_up_initial_pipeline_skeleton)
-3. [データを調査する](#step_3_dive_into_your_data)
-4. [特徴量エンジニアリング](#step_4_feature_engineering)
-5. [トレーニング](#step_5_training)
-6. [モデルのパフォーマンスの分析](#step_6_analyzing_model_performance)
-7. [実稼働の準備完了](#step_7_ready_for_production)
-
-## 前提条件
-
-- Linux / MacOS
-- Virtualenv
-- Python 3.5+
-- Git
-
-### 必要なパッケージ
-
-環境によっては、いくつかのパッケージをインストールする必要がある場合があります。
-
-```bash
-sudo apt-get install \
-    build-essential libssl-dev libffi-dev \
-    libxml2-dev libxslt1-dev zlib1g-dev \
-    python3-pip git software-properties-common
-```
-
-Python 3.6 を実行している場合は、python3.6-dev をインストールする必要があります。
-
-```bash
-sudo apt-get install python3.6-dev
-```
-
-Python 3.7 を実行している場合は、python3.7-dev をインストールする必要があります。
-
-```bash
-sudo apt-get install python3.7-dev
-```
-
-さらに、システムの GCC バージョンが 7 未満の場合は、GCC を更新する必要があります。そうしないと、`airflow webserver`の実行時にエラーが発生します。現在のバージョンは次の方法で確認できます。
-
-```bash
-gcc --version
-```
-
-GCC を更新する必要がある場合は、次のコマンドを実行します。
-
-```bash
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-sudo apt update
-sudo apt install gcc-7
-sudo apt install g++-7
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7
-```
-
-### MacOS 環境
-
-Python 3 と git がまだインストールされていない場合は、[ Homebrew](https://brew.sh/) パッケージマネージャーを使用してインストールします。
-
-```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-brew update
-brew install python
-brew install git
-```
-
-構成によっては、MacOS で Airflow の実行時にスレッドのフォークに問題が発生することがあります。これらの問題を回避するには、`~/.bash_profile`を編集して、ファイルの最後に次の行を追加する必要があります。
-
-```bash
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-```
-
-## チュートリアル資料
-
-このチュートリアルのコードは、次から入手できます。[https://github.com/tensorflow/tfx/tree/master/tfx/examples/airflow_workshop](https://github.com/tensorflow/tfx/tree/master/tfx/examples/airflow_workshop)
-
-コードは作業のステップごとに編成されています。各ステップには、必要なコードとその説明があります。
-
-チュートリアルファイルには、演習と演習の解決策（問題が発生した場合に備えて）の両方が含まれています。
-
-#### 演習
-
-- taxi_pipeline.py
-- taxi_utils.py
-- taxi DAG
-
-#### 解決策
-
-- taxi_pipeline_solution.py
-- taxi_utils_solution.py
-- taxi_solution DAG
-
-## 学習内容
-
-TFX を使用して機械学習パイプラインを作成する方法を学びます
-
+- TFX パイプラインは、有向非巡回グラフ（DAG）です。パイプラインを通常 DAG と呼びます。
 - TFX パイプラインは、実稼働環境の機械学習アプリケーションをデプロイする場合に適しています。
-- TFX パイプラインは、データセットが大きい場合に適しています。
+- TFX パイプラインは、データセットが大きい場合や大規模に成長する可能性がある場合に適しています。
 - TFX パイプラインは、トレーニング/サービングの一貫性が重要な場合に適しています。
 - TFX パイプラインは、推論のバージョン管理が重要な場合に適しています。
 - Google は実稼働環境の機械学習に TFX パイプラインを使用しています。
 
-典型的な機械学習の開発プロセスに従います
+詳細については、[TFX ユーザーガイド](https://www.tensorflow.org/tfx/guide)を参照してください。
+
+典型的な ML 開発プロセスに従います。
 
 - データの取り込み、理解、クリーニング
 - 特徴量エンジニアリング
 - トレーニング
-- モデルのパフォーマンスを分析する
+- [モデルのパフォーマンスの分析](#step_6_analyzing_model_performance)
 - サイクルを繰り返す
 - 実稼働の準備完了
 
-### 各ステップのコードの追加
+## **パイプラインオーケストレーション用の Apache Airflow**
 
-このチュートリアルでは、すべてのコードがファイルに含まれるように設計されていますが、ステップ 3 ～ 7 のすべてのコードはコメント アウトされ、インライン コメントでマークされています。インライン コメントは、コード行が適用されるステップを識別します。たとえば、ステップ 3 のコードは、コメント`# Step 3`でマークされています。
+パイプラインが定義する依存関係に基づいて TFX のコンポーネントをスケジューリングするのが TFX オーケストレータです。TFX は複数の環境とオーケストレーションフレームワークに移植できるように設計されています。TFX がサポートするデフォルトのオーケストレータの 1 つは [Apache Airflow](https://www.tensorflow.org/tfx/guide/airflow) です。このラブでは、TFX パイプラインオーケストレーションに Apache Airflow を使用する方法を説明します。Apache Airflow はワークフローの作成、スケジューリング、および監視をプログラムで行うためのプラットフォームです。TFX では、タスクの有向非巡回グラフ（DAG）としてワークフローを作成するのに Airflow を使用しています。リッチユーザーインターフェースが備わっているため、本番環境で実行するパイプラインの可視化、進捗状況の監視、必要に応じた課題のトラブルシューティングを簡単に行うことができます。Apache Airflow ワークフローはコードとして定義されるため、保守、バージョン管理、テスト、共同作業をより簡単に行えます。Apache Airflow はバッチ処理パイプラインに適しており、軽量で学びやすい特徴があります。
 
-各ステップに追加するコードは、通常、コードの 3 つの領域に分類されます。
+この例では、Airflow を手動でセットアップすることで、インスタンス上で TFX パイプラインを実行することにします。
 
-- インポート
-- DAG 構成
-- create_pipeline() 呼び出しから返されるリスト
-- taxy_utils.py のサポート コード
+TFX がサポートする他のデフォルトのオーケストレータには Apache Beam と Kubeflow があります。[Apache Beam](https://www.tensorflow.org/tfx/guide/beam_orchestrator) は複数のデータ処理バックエンド（Beam ランナー）で実行できます。Cloud Dataflow はこのような Beam ランナーの 1 つであり、TFX パイプラインの実行に使用できます。Apache Beam はパイプラインのストリーミングとバッチ処理のいずれにも使用可能です。<br> [Kubeflow](https://www.tensorflow.org/tfx/guide/kubeflow) は、Kubernetes での機械学習（ML）ワークフローのデプロイに単純さ、移植性、および拡張性を備えさせることに特化したオープンソースの ML プラットフォームです。Kubeflow は、TFX パイプラインを Kubernetes クラスタにデプロイする必要がある場合のオーケストレータとして使用できます。また、独自の[カスタムオーケストレータ](https://www.tensorflow.org/tfx/guide/custom_orchestrator)を使用して TFX パイプラインを実行することも可能です。
 
-チュートリアルを進める際に、現在取り組んでいるチュートリアル ステップのコード行のコメントを外します。そうすることにより、そのステップのコードが追加され、パイプラインが更新されます。その際、**コメントを外すコードを確認することを強くおすすめします**。
+Airflow についての詳細は、[こちら](https://airflow.apache.org/)をお読みください。
 
-## シカゴのタクシー データセット
+## **シカゴのタクシー データセット**
 
-<!-- Image free for commercial use, does not require attribution:
-https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
+![taxi.jpg](images/airflow_workshop/taxi.jpg)
 
-![Taxi](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/taxi.jpg?raw=true) ![Chicago taxi](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/chicago.png?raw=true)
+![Feature Engineering](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step4.png?raw=true)
 
-シカゴ市からリリースされた[タクシートリップデータセット](https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew)のデータを使用します。
+シカゴ市がリリースした [Taxi Trips データセット](https://data.cityofchicago.org/Transportation/Taxi-Trips/wrvz-psew)を使用します。
 
-注意：このWeb サイトは、シカゴ市の公式 Web サイト www.cityofchicago.org で公開されたデータを変更して使用するアプリケーションを提供します。シカゴ市は、この Web サイトで提供されるデータの内容、正確性、適時性、または完全性について一切の表明を行いません。この Web サイトで提供されるデータは、随時変更される可能性があります。かかる Web サイトで提供されるデータはユーザーの自己責任で利用されるものとします。
-
-データセットの詳細については、[Google BigQuery](https://cloud.google.com/bigquery/public-data/chicago-taxi) を[参照](https://cloud.google.com/bigquery/)してください。[BigQuery UI](https://bigquery.cloud.google.com/dataset/bigquery-public-data:chicago_taxi_trips) でデータセット全体をご確認ください。
+注意: このチュートリアルでは、シカゴ市の公式ウェブサイト www.cityofchicago.org がオリジナルとして提供するデータを変更して使用するアプリケーションを構築します。シカゴ市は、このチュートリアルで提供されるデータの内容、正確性、適時性、または完全性について一切の表明を行いません。このサイトで提供されるデータは、随時変更される可能性があり、このチュートリアルで提供されるデータはユーザーの自己責任で使用するものとします。
 
 ### モデル目標 - 二項分類
 
 顧客は 20% 以上のチップを払うでしょうか？
 
-## ステップ 1: 環境をセットアップする
+## Google Cloud プロジェクトをセットアップする
 
-セットアップ スクリプト (`setup_demo.sh`) は、TFX と [Airflow](https://airflow.apache.org/) をインストールし、このチュートリアルで作業しやすいように Airflow を構成します。
+**Start Lab ボタンをクリックする前に**、これらの指示をお読みください。ラボには時間制限があり、一時停止することはできません。 このタイマーは **Start Lab** をクリックした時点で開始し、Google Cloud リソースを使用できる時間を示します。
 
-シェルで次を行います。
+このハンズオンラボでは、シミュレーションやデモ環境ではなく、実際のクラウド環境で作業を行うことができます。ラボの期間中、提供される新しい一時的な資格情報を使って Google Cloud　にサインインし、アクセスできます。
 
-```bash
-cd
-virtualenv -p python3 tfx-env
-source ~/tfx-env/bin/activate
+**必要なもの** このラボを実行するには、以下が必要です。
 
-git clone https://github.com/tensorflow/tfx.git
-cd ~/tfx
-# These instructions are specific to the 0.21 release
-git checkout -f origin/r0.21
-cd ~/tfx/tfx/examples/airflow_workshop/setup
-./setup_demo.sh
-```
+- 標準のインターネットブラウザへのアクセス（Chrome ブラウザ推奨）。
+- ラボの所要時間。
 
-`setup_demo.sh`を確認して、何が行われているかを確認してください。
+**注意:** 個人の Google Cloud アカウントまたはプロジェクトをお持ちの場合は、このラボで使用しないようにしてください。
 
-## ステップ 2: 最初のパイプラインスケルトンを表示する
+**注意:** Chrome OS デバイスを使用している場合は、シークレットウィンドウを開いてこのラボを実行してください。
 
-### Hello World
+**ラボを起動して Google Cloud Console にサインインするには** 1. **Start Lab** ボタンをクリックします。ラボの料金を支払う必要がある場合は、決済方法を選択するポップアップが開きます。左側のパネルに、このラボで使用する一時的な資格情報が表示されます。
 
-シェルで次を行います
+![Taxi](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/taxi.jpg?raw=true)
 
-```bash
-# Open a new terminal window, and in that window ...
-source ~/tfx-env/bin/activate
-airflow webserver -p 8080
+1. ユーザー名をコピーして、**Open Google Console** をクリックします。ラボのリソースが起動し、**Sign in** ページが表示された別のタブが開きます。
 
-# Open another new terminal window, and in that window ...
-source ~/tfx-env/bin/activate
-airflow scheduler
+![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/examplegen1.png?raw=true)
 
-# Open yet another new terminal window, and in that window ...
-# Assuming that you've cloned the TFX repo into ~/tfx
-source ~/tfx-env/bin/activate
-cd ~/tfx/tfx/examples/airflow_workshop/notebooks
-jupyter notebook
-```
-
-このステップでは Jupyter Notebook を開始しました。後で、このフォルダで Notebook を実行します。
-
-### ブラウザで次を行います
-
-- ブラウザを開いて http://127.0.0.1:8080 にアクセスします。
-
-#### トラブルシューティング
-
-Web ブラウザでの Airflow コンソールの読み込みに問題がある場合、または `airflow webserver`の実行時にエラーが発生した場合は、ポート 8080 で別のアプリケーションが実行されている可能性があります。これは Airflow のデフォルト ポートですが、使用されていない他のユーザー ポートに変更できます。たとえば、ポート 7070 で Airflow を実行するには、次のように実行できます。
-
-```bash
-airflow webserver -p 7070
-```
-
-#### DAG ビュー ボタン
+***ヒント:*** タブは別のウィンドウに隣り合わせに開きます。
 
 ![DAG buttons](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/airflow_dag_buttons.png?raw=true)
 
-- 左側のボタンを使用して DAG を*有効化*します
-- 変更を加えるときは、右側のボタンを使用して DAG を*更新*します。
-- 右側のボタンを使用して DAG を*トリガー*します
-- タクシーをクリックすると、その日のグラフビューに移動します
+1. **Sign in** ページで左のパネルからコピーしたユーザー名を貼り付けます。そしてパスワードをコピーして貼り付けます。
+
+***重要:***- 左のパネルに表示される資格情報を使用する必要があります。Google Cloud Training の資格情報を使用してはいけません。自分の Google Cloud アカウントをお持ちの場合は、このラボでは使用してはいけません（料金が発生してしまいます）。
+
+1. 以降のページをクリックして進みます。
+2. 利用規約に同意します。
+
+- リカバリオプションや二要素認証を追加してはいけません（これは一時アカウントであるため）。
+
+- 無料トライアルに登録しないでください。
+
+しばらくすると、このタブに Cloud Console が開きます。
+
+**注意:** 左上の**ナビゲーションメニュー**をクリックすると、Google Cloud の製品とサービスのリストメニューが表示されます。
+
+![Ready for production](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step7.png?raw=true)
+
+### Cloud Shell のアクティベーション
+
+Cloud Shell は、開発ツールが読み込まれた仮想マシンです。永続的な 5GB のホームディレクトリを提供し、Google Cloud で実行します。Cloud Shell では、コマンドラインで Google Cloud リソースにアクセスできます。
+
+Cloud Console の右上のツールバーにある **Activate Cloud Shell** ボタンをクリックします。
 
 ![Graph refresh button](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/graph_refresh_button.png?raw=true)
 
-#### Airflow CLI
+**Continue** をクリックします。
 
-[Airflow CLI](https://airflow.apache.org/cli.html) を使用して DAG を有効にしてトリガーすることもできます。
+![Setup complete](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step2.png?raw=true)
+
+環境のプロビジョニングと接続にしばらくかかります。接続したら、認証が完了し、プロジェクトが *PROJECT_ID* に設定されます。以下に例を示します。
+
+![Graph refresh button](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step5.png?raw=true)
+
+`gcloud` は Google Cloud のコマンドラインツールです。Cloud Shell に事前にインストールされており、タブ補間をサポートしています。
+
+以下のコマンドで、アクティブなアカウント名をリスト表示できます。
+
+```
+gcloud auth list
+```
+
+（出力）
+
+> ACTIVE: * ACCOUNT: student-01-xxxxxxxxxxxx@qwiklabs.net To set the active account, run: $ gcloud config set account `ACCOUNT`
+
+次のコマンドを使って、プロジェクト ID をリスト表示できます: `gcloud config list project` （出力）
+
+> [core] project = &lt;project_ID&gt;
+
+（出力例）
+
+> [core] project = qwiklabs-gcp-44776a13dea667a6
+
+gcloud の完全なドキュメントについては、[gcloud コマンドラインツールの概要](https://cloud.google.com/sdk/gcloud)をご覧ください。
+
+## Google Cloud サービスを有効にする
+
+1. Cloud Shell で gcloud を使って、ラボで使用するサービスを有効にします: `gcloud services enable notebooks.googleapis.com`
+
+## Vertex Notebook インスタンスをデプロイする
+
+1. **ナビゲーションメニュー**をクリックし、まず **Vertex AI**、次に **Workbench** にアクセスします。
+
+![Dive into data](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step3.png?raw=true)
+
+1. ノートブックのインスタンスページで、**New Notebook** をクリックします。
+
+2. Customize instance メニューで **TensorFlow Enterprise** を選択し、バージョンに **TensorFlow Enterprise 2.x (with LTS)** &gt; **Without GPUs** を指定します。
+
+![Dive into data](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step3notebook.png?raw=true)
+
+1. **New notebook instance** ダイアログの鉛筆アイコンをクリックし、**Edit** インスタンスプロパティをクリックします。
+
+2. **Instance name** にインスタンスの名前を入力します。
+
+3. **Region** に `us-east1` を選択し、**Zone** に選択した地域内のゾーンを指定します。
+
+4. Machine configuration まで下にスクロールし、Machine type に **e2-standard-2** を選択します。
+
+5. 残りのフィールドはデフォルトのままにし、**Create** をクリックします。
+
+数分経つと、Vertex AI コンソールにインスタンス名と **Open Jupyterlab** が表示されます。
+
+1. **Open JupyterLab** をクリックします。新しいタブに JupyterLab ウィンドウが開きます。
+
+## 環境をセットアップする
+
+### ラボのリポジトリをクローンする
+
+次に、JupyterLab インスタンスに、`tfx` リポジトリをクローンします。1. JupyterLab で **Terminal** アイコンをクリックし、新しいターミナルを開きます。
+
+{ql-infobox0}<strong>注意:</strong> Build Recommended が表示されたら、<code>Cancel</code> をクリックしてください。{/ql-infobox0}
+
+1. `tfx` Github リポジトリをクローンするには、以下のコマンドを入力して **Enter** を押します。
+
+```
+git clone https://github.com/tensorflow/tfx.git
+```
+
+1. リポジトリのクローンを確認するには、`tfx` ディレクトリをダブルクリックして、その内容を確認してください。
+
+![Transform](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/transform.png?raw=true)
+
+### ラボの依存関係をインストールする
+
+1. 以下を実行して `tfx/tfx/examples/airflow_workshop/taxi/setup/` フォルダに移動し、ラボの依存関係をインストールする `./setup_demo.sh` を実行します。
+
+```bash
+cd ~/tfx/tfx/examples/airflow_workshop/taxi/setup/
+./setup_demo.sh
+```
+
+上記のコードは以下の内容を実行します。
+
+- 必要なパッケージをインストールする
+- ホームフォルダに `airflow` フォルダを作成する
+- `dags` フォルダを `tfx/tfx/examples/airflow_workshop/taxi/setup/` フォルダから `~/airflow/` フォルダにコピーする
+- csv ファイルを `tfx/tfx/examples/airflow_workshop/taxi/setup/data` から `~/airflow/data` にコピーする
+
+![Analyzing model performance](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step6.png?raw=true)
+
+## Airflow サーバーの構成
+
+### ブラウザで airflow サーバーにアクセスするためのファイアウォールルールを作成する
+
+1. `https://console.cloud.google.com/networking/firewalls/list` に移動し、プロジェクト名が正しく選択されていることを確認します。
+2. 上部の `CREATE FIREWALL RULE` オプションをクリックします。
+
+![Transform](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step5tboard.png?raw=true)
+
+**Create a firewall ダイアログ**で、以下の指示に従います。
+
+1. **Name** に `airflow-tfx` を指定します。
+2. **Priority** に `1` を指定します。
+3. **Targets** に `All instances in the network` を指定します。
+4. **Source IPv4 ranges** に `0.0.0.0/0` を指定します。
+5. **Protocols and ports** では、`tcp` をクリックして、`tcp` の横のボックスに `7000` を入力します。
+6. `Create` をクリックします。
+
+![Analyzing model performance](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step6notebook.png?raw=true)
+
+### シェルから airflow サーバーを実行する
+
+Jupyter Lab Terminal ウィンドウでホームディレクトリに切り替え、`airflow users create` コマンドを実行して Airflow の管理者ユーザーを作成します。
+
+```bash
+cd
+airflow users  create --role Admin --username admin --email admin --firstname admin --lastname admin --password admin
+```
+
+次に、`airflow webserver` と `airflow scheduler` コマンドを実行して、サーバーを実行します。ファイアウォールを通過できる `7000` ポートを選択します。
+
+```bash
+nohup airflow webserver -p 7000 &> webserver.out &
+nohup airflow scheduler &> scheduler.out &
+```
+
+### 外部 IP を取得する
+
+1. Cloud Shell で `gcloud` を使って、外部 IP を取得します。
+
+```
+gcloud compute instances list
+```
+
+![Training a Model](images/airflow_workshop/gcloud-instance-ip.png)
+
+## DAG/パイプラインの実行
+
+### ブラウザでの操作
+
+ブラウザを開き、http://&lt;external_ip&gt;:7000 にアクセスします。
+
+- ログインページで、`airflow users create` コマンドを実行したときに選択したユーザー名（`admin`）とパスワード（`admin`）を入力します。
+
+![Training a Model](images/airflow_workshop/airflow-login.png)
+
+Airflow は DAG を Python ソースリストから読み込みます。ファイルを 1 つずつ取得して実行し、そのファイルからすべての DAG オブジェクトを読み込みます。airflow ホームページに、DAG オブジェクトを定義するすべての `.py` ファイルがリスト表示されます。
+
+このチュートリアルでは、Airflow は `~/airflow/dags/` フォルダの DAG オブジェクトをスキャンします。
+
+`~/airflow/dags/taxi_pipeline.py` を開いて下にスクロールすると、DAG オブジェクトが作成され、`DAG` という変数に格納されるのが分かります。したがって、airflow ホームページに以下のようにパイプラインとして表示されます。
+
+![dag-home-full.png](images/airflow_workshop/dag-home-full.png)
+
+taxi をクリックすると、DAG のグリッドビューにリダイレクトされます。トップにある `Graph` オプションをクリックすると、DAG のグラフビューが表示されます。
+
+![airflow-dag-graph.png](images/airflow_workshop/airflow-dag-graph.png)
+
+### taxi パイプラインをトリガーする
+
+ホームページには、DAG の操作に使用できるボタンが表示されています。
+
+![dag-buttons.png](images/airflow_workshop/dag-buttons.png)
+
+**actions** ヘッダーの **trigger** ボタンをクリックすると、パイプラインがトリガーされます。
+
+taxi の **DAG** ページでは、右側のボタンを使って、パイプラインの実行中に、DAG のグラフビューを更新することができます。また、**Auto Refresh** を有効に擦れば、状態の変更時にグラフビューを自動更新するように Airflow に指示することができます。
+
+![dag-button-refresh.png](images/airflow_workshop/dag-button-refresh.png)
+
+また、ターミナルで [Airflow CLI](https://airflow.apache.org/cli.html) を使用しても、DAG を有効にしてトリガーすることができます。
 
 ```bash
 # enable/disable
@@ -240,239 +291,20 @@ airflow unpause <your DAG name>
 airflow trigger_dag <your DAG name>
 ```
 
-#### パイプラインが完了するのを待ちます
+#### パイプラインの完了を待つ
 
-DAG ビューでパイプラインをトリガーした後、パイプラインが処理を完了するのを確認できます。各コンポーネントが実行されると、DAG グラフ内のコンポーネントのアウトラインの色が変わり、状態を示します。コンポーネントの処理が完了すると、アウトラインが濃い緑色に変わり、処理が完了したことを示します。
+パイプラインをトリガーすると、パイプラインが実行する間、DAG ビューでパイプラインの進行状況を見ることができます。コンポーネントが実行するごとに、コンポーネントのアウトラインの色が変化し、状態を示します。コンポーネントの処理が完了すると、アウトラインが濃い緑色に変わって処理の完了を示します。
 
-注意: 実行中のコンポーネントの更新された状態を表示するには、右側の*グラフ更新*ボタンを使用するか、ページを更新する必要があります。
+![dag-step7.png](images/airflow_workshop/dag-step7.png)
 
-この時点では、パイプラインには CsvExampleGen コンポーネントしかありません。アウトラインの色が濃い緑色になるまで待つ必要があります (~1 分)。
+## コンポーネントを理解する
 
-![Setup complete](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step2.png?raw=true)
+このパイプラインのコンポーネントを詳しく見てみましょう。パイプラインの各ステップで生成された出力を個別に見てみます。
 
-## ステップ 3: データを調査する
+1. JupyterLab で、`~/tfx/tfx/examples/airflow_workshop/taxi/notebooks/` に移動します。
 
-データ サイエンスや機械学習プロジェクトの最初のタスクは、データを理解してクリーンアップすることです。
+2. **notebook.ipynb.** を開きます。![notebook-ipynb.png](images/airflow_workshop/notebook-ipynb.png)
 
-- 各特徴のデータ型を理解する
-- 異常と欠損値を探す
-- 各特徴の分布を理解する
+3. ノートブックでラボを続け、画面の上にある **Run**（<img src="images/airflow_workshop/f1abc657d9d2845c.png" width="28.00" alt="run-button.png">）アイコンをクリックして、各セルを実行します。または、**SHIFT + ENTER** で、セル内のコードを実行することもできます。
 
-### コンポーネント
-
-![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/examplegen1.png?raw=true) ![Data Components](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/examplegen2.png?raw=true)
-
-- [ExampleGen](https://www.tensorflow.org/tfx/guide/examplegen) は入力データセットを取り込み、分割します。
-- [StatisticsGen](https://www.tensorflow.org/tfx/guide/statsgen) はデータセットの統計を計算します。
-- [SchemaGen](https://www.tensorflow.org/tfx/guide/schemagen) は統計を調べ、データ スキーマを作成します。
-- [ExampleValidator](https://www.tensorflow.org/tfx/guide/exampleval) はデータセット内の異常と欠損値を探します。
-
-### エディタで次を行います
-
-- ~/airflow/dags で、`taxi_pipeline.py`の`Step 3`とマークされた行のコメントを外します。
-- 少し時間を取って、コメントを外したコードを確認してください。
-
-### ブラウザで次を行います
-
-- 左上隅にある [DAG] リンクをクリックして、Airflow の DAG リスト ページに戻ります。
-- タクシー DAG の右側にある更新ボタンをクリックします。
-    - 「DAG [taxi] is now fresh as a daisy」が表示されます。
-- タクシーをトリガーします
-- パイプラインが完了するのを待ちます
-    - 全てダークグリーンになります
-    - 右側の更新を使用するか、ページを更新します
-
-![Dive into data](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step3.png?raw=true)
-
-### Jupyter に戻ります
-
-前にブラウザ タブで Jupyter セッションを開くために`jupyter notebook`を実行しました。ブラウザでそのタブに戻ります。
-
-- step3.ipynb を開きます
-- notebook をフォローします
-
-![Dive into data](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step3notebook.png?raw=true)
-
-### より高度な例
-
-ここに示されている例は、初心者向けのものです。より高度な例については、[TensorFlow Data Validation Colab](https://www.tensorflow.org/tfx/tutorials/data_validation/chicago_taxi) を参照してください。
-
-TFDV を使用してデータセットを調査および検証する方法の詳細については、[tensorflow.org の例を参照してください](https://www.tensorflow.org/tfx/data_validation)。
-
-## ステップ 4: 特徴量エンジニアリング
-
-特徴量エンジニアリングを使用すると、データの予測品質を向上させたり、次元を減らしたりすることができます。
-
-- 特徴量クロス
-- 語彙
-- 埋め込み
-- PCA
-- カテゴリカル変数のエンコーディング
-
-TFX を使用する利点の 1 つは、変換コードを 1 回記述すれば、結果として得られる変換はトレーニングとサービングの間で一貫性を保てることです。
-
-### コンポーネント
-
-![Transform](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/transform.png?raw=true)
-
-- [Transform](https://www.tensorflow.org/tfx/guide/transform)は、データセットに対する特徴量エンジニアリングを実行します。
-
-### エディタで次を行います
-
-- ~/airflow/dags で、`taxi_pipeline.py`と`taxi_utils.py`の両方で`Step 4`とマークされた行のコメントを外します。
-- 少し時間を取って、コメントを外したコードを確認してください。
-
-### ブラウザで次を行います
-
-- Airflow の DAG リスト ページに戻ります
-- タクシー DAG の右側にある更新ボタンをクリックします。
-    - 「DAG [taxi] is now fresh as a daisy」が表示されます。
-- タクシーをトリガーします
-- パイプラインが完了するのを待ちます
-    - 全てダークグリーンになります。
-    - 右側の更新を使用するか、ページを更新します。
-
-![Feature Engineering](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step4.png?raw=true)
-
-### Jupyter に戻ります
-
-ブラウザの Jupyter タブに戻ります。
-
-- step4.ipynb を開きます
-- notebook をフォローします
-
-### より高度な例
-
-ここに示されている例は、初心者向けのものです。より高度な例については、[TensorFlow Transform Colab](https://www.tensorflow.org/tfx/tutorials/transform/census) を参照してください。
-
-## ステップ 5: トレーニング
-
-TensorFlow モデルを、クリーンアップおよび変換されたデータでトレーニングします。
-
-- ステップ 4 の変換が一貫して適用されるように含めます。
-- 実稼働用に結果を SavedModel として保存します。
-- TensorBoard を使用してトレーニング プロセスを視覚化して調査します。
-- また、モデル パフォーマンスの分析のために EvalSavedModel を保存します。
-
-### コンポーネント
-
-- [Trainer](https://www.tensorflow.org/tfx/guide/trainer) は TensorFlow [Estimators](https://github.com/tensorflow/docs/blob/master/site/en/r1/guide/estimators.md) を使用してモデルをトレーニングします。
-
-### エディタで:
-
-- ~/airflow/dags で、`taxi_pipeline.py`と`taxi_utils.py`の両方で`Step 5`とマークされた行のコメントを外します。
-- 少し時間を取って、コメントを外したコードを確認してください。
-
-### ブラウザで次を行います
-
-- Airflow の DAG リスト ページに戻ります。
-- タクシー DAG の右側にある更新ボタンをクリックします。
-    - 「DAG [taxi] is now fresh as a daisy」が表示されます。
-- タクシーをトリガーします。
-- パイプラインが完了するのを待ちます。
-    - 全てダークグリーンになります。
-    - 右側の更新を使用するか、ページを更新します。
-
-![Training a Model](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step5.png?raw=true)
-
-### Jupyter に戻ります
-
-ブラウザの Jupyter タブに戻ります。
-
-- step5.ipynb を開きます。
-- notebook をフォローします。
-
-![Training a Model](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step5tboard.png?raw=true)
-
-### より高度な例
-
-ここに示されている例は、初心者向けのものです。より高度な例については、[TensorFlow チュートリアル](https://www.tensorflow.org/tensorboard/get_started) を参照してください。
-
-## ステップ 6: モデルのパフォーマンスの分析
-
-トップレベルの指標以上のことを理解します。
-
-- ユーザーは自分のクエリに対してのみモデルのパフォーマンスを体験します。
-- データ スライスのパフォーマンスの低下は、トップレベルの指標には示されない可能性があります。
-- モデルの公平性は重要です。
-- 多くの場合、ユーザーまたはデータの主要なサブセットは非常に重要です。これは小さい場合があります。
-    - 重要かつ異常な状態でのパフォーマンス
-    - インフルエンサーなどの主要オーディエンスに対するパフォーマンス
-- 実稼働中のモデルを置き換える場合は、まず新しいモデルの方が優れていることを確認してください。
-- Evaluator コンポーネントは、モデルが OK かどうかを Pusher コンポーネントに通知します。
-
-### コンポーネント
-
-- [Evaluator](https://www.tensorflow.org/tfx/guide/evaluator) はトレーニング結果の詳細な分析を実行し、モデルが実稼働環境にプッシュするのに「十分」であることを確認します。
-
-### エディタで次を行います
-
-- ~/airflow/dags で、`taxi_pipeline.py`の両方の`Step 6` とマークされた行のコメントを外します。
-- 少し時間を取って、コメントを外したコードを確認してください。
-
-### ブラウザで次を行います
-
-- Airflow の DAG リスト ページに戻ります。
-- タクシー DAG の右側にある更新ボタンをクリックします。
-    - 「DAG [taxi] is now fresh as a daisy」が表示されます。
-- タクシーをトリガーします。
-- パイプラインが完了するのを待ちます。
-    - 全てダークグリーンになります
-    - 右側の更新を使用するか、ページを更新します。
-
-![Analyzing model performance](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step6.png?raw=true)
-
-### Jupyter に戻ります：
-
-ブラウザの Jupyter タブに戻ります。
-
-- step6.ipynb を開きます。
-- notebook をフォローします。
-
-![Analyzing model performance](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step6notebook.png?raw=true)
-
-### より高度な例
-
-ここに示されている例は、初心者向けのものです。より高度な例については、[TFMA シカゴ タクシー チュートリアル](https://www.tensorflow.org/tfx/tutorials/model_analysis/chicago_taxi)を参照してください。
-
-## ステップ 7: 実稼働の準備完了
-
-新しいモデルの準備ができている場合は、準備を完了します。
-
-- Pusher は SavedModels を既知の場所にデプロイします
-
-デプロイメントターゲットは、既知の場所から新しいモデルを受け取ります。
-
-- TensorFlow Serving
-- TensorFlow Lite
-- TensorFlow JS
-- TensorFlow Hub
-
-### コンポーネント
-
-- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) モデルをサービング インフラストラクチャにデプロイします。
-
-### エディタで次を行います
-
-- ~/airflow/dags で、両方の`taxi_pipeline.py`の`Step 7`とマークされた行のコメントを外します。
-- 少し時間を取って、コメントを外したコードを確認してください。
-
-### ブラウザで次を行います
-
-- Airflow の DAG リスト ページに戻ります。
-- タクシー DAG の右側にある更新ボタンをクリックします。
-    - 「DAG [taxi] is now fresh as a daisy」が表示されます。
-- タクシーをトリガーします。
-- パイプラインが完了するのを待ちます
-    - 全てダークグリーンになります。
-    - 右側の更新を使用するか、ページを更新します。
-
-![Ready for production](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/tfx/tutorials/tfx/images/airflow_workshop/step7.png?raw=true)
-
-## 次のステップ
-
-以上で、モデルのトレーニングと検証が完了し、`~/airflow/saved_models/taxi`ディレクトリに`SavedModel`ファイルがエクスポートされました。これで、モデルの実稼働の準備が完了ました。 次のような TensorFlow デプロイメント ターゲットのいずれかにモデルをデプロイできるようになりました。
-
-- [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) はサーバーまたはサーバー ファームでモデルをサービングし、REST および/または gRPC 推論リクエストを処理します。
-- [TensorFlow Lite](https://www.tensorflow.org/lite) は、モデルを Android または iOS のネイティブ モバイル アプリケーション、または Raspberry Pi、IoT、またはマイクロコントローラー アプリケーションに含めます。
-- [TensorFlow.js](https://www.tensorflow.org/js) は、モデルを Web ブラウザまたは Node.JS アプリケーションで実行します。
+説明を読んで、各セルで何が起きているかを理解してください。
