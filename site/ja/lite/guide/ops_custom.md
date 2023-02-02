@@ -14,36 +14,38 @@ TensorFlow Lite のビルトイン演算子ライブラリがサポートする 
 
 - [演算子をテストしプロファイリングする。](#test-and-profile-your-operator)カスタム演算子のみをテストする場合は、カスタム演算子のみでモデルを作成し、[benchmark_model](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/benchmark/benchmark_model.cc) プログラムを使用することをお勧めします。
 
-では、カスタム演算子`tf.sin`（`Sin`と名付けられています。#create-a-tensorflow-model をご覧ください）を使ってモデルを実行するエンドツーエンドの例を見てみましょう。このカスタム演算子は TensorFlow ではサポートされていますが、TensorFlow Lite ではサポートされていません。
+Let’s walk through an end-to-end example of running a model with a custom operator `tf.atan` (named as `Atan`, refer to #create-a-tensorflow-model) which is supported in TensorFlow, but unsupported in TensorFlow Lite.
 
-注意: 実際には、`tf.sin`は**カスタム演算子ではありません**。これは、TensorFlow と TensorFlow Lite の両方でサポートされている通常の演算子ですが、単純なワークフローを実演するために、次の例ではカスタム演算子であると**仮定しています**。
+Note: The `tf.atan` function is **not** a custom operator. It is a regular operator which is supported by both TensorFlow and TensorFlow Lite. But we **assume** that it is a custom operator in the following example in order to demonstrate a simple workflow.
 
-## 例: カスタム `Sin` 演算子
+The TensorFlow Text operator is an example of a custom operator. See the <a href="https://tensorflow.org/text/guide/text_tf_lite" class="external"> Convert TF Text to TF Lite</a> tutorial for a code example.
 
-TensorFlow Lite にはない TensorFlow 演算子をサポートする例を見てみましょう。`Sin` 演算子を使用し、関数 `y = sin(x + offset)` の非常に簡単なモデルを構築するとします。この関数の`offset`はトレーニング可能です。
+## Example: Custom `Atan` operator
+
+Let’s walk through an example of supporting a TensorFlow operator that TensorFlow Lite does not have. Assume we are using the `Atan` operator and that we are building a very simple model for a function `y = atan(x + offset)`, where `offset` is trainable.
 
 ### TensorFlow モデルを作成する
 
-次は、単純な TensorFlow モデルをトレーニングするコードスニペットです。このモデルには、`Sin` というカスタム演算子のみが含まれています。このカスタム演算は関数`y = sin(x + offset)`で、`offset`はトレーニング可能です。
+The following code snippet trains a simple TensorFlow model. This model just contains a custom operator named `Atan`, which is a function `y = atan(x + offset)`, where `offset` is trainable.
 
 ```python
 import tensorflow as tf
 
 # Define training dataset and variables
 x = [-8, 0.5, 2, 2.2, 201]
-y = [-0.6569866 ,  0.99749499,  0.14112001, -0.05837414,  0.80641841]
+y = [-1.4288993, 0.98279375, 1.2490457, 1.2679114, 1.5658458]
 offset = tf.Variable(0.0)
 
-# Define a simple model which just contains a custom operator named `Sin`
-@tf.function
-def sin(x):
-  return tf.sin(x + offset, name="Sin")
+# Define a simple model which just contains a custom operator named `Atan`
+@tf.function(input_signature=[tf.TensorSpec.from_tensor(tf.constant(x))])
+def atan(x):
+  return tf.atan(x + offset, name="Atan")
 
-  # Train model
+# Train model
 optimizer = tf.optimizers.Adam(0.01)
 def train(x, y):
     with tf.GradientTape() as t:
-      predicted_y = sin(x)
+      predicted_y = atan(x)
       loss = tf.reduce_sum(tf.square(predicted_y - y))
     grads = t.gradient(loss, [offset])
     optimizer.apply_gradients(zip(grads, [offset]))
@@ -57,33 +59,36 @@ print("The predicted offset is:", offset.numpy())
 
 ```python
 The actual offset is: 1.0
-The predicted offset is: 1.0000001
+The predicted offset is: 0.99999905
 ```
 
 この時点では、デフォルトのコンバータフラグを使って TensorFlow Lite モデルを生成しようとすると、次のようなエラーメッセージが発生します。
 
 ```none
 Error:
-Some of the operators in the model are not supported by the standard TensorFlow
-Lite runtime...... Here is
-a list of operators for which you will need custom implementations: Sin.
+error: 'tf.Atan' op is neither a custom op nor a flex op.
 ```
 
 ### TensorFlow Lite モデルに変換する
 
 カスタム演算子を使った TensorFlow Lite モデルを作成しましょう。次に示すように、コンバータの属性を`allow_custom_ops`に設定してください。
 
-<pre>converter = tf.lite.TFLiteConverter.from_concrete_functions([sin.get_concrete_function(x)], sin)
+<pre>converter = tf.lite.TFLiteConverter.from_concrete_functions([atan.get_concrete_function()], atan)
 &lt;b&gt;converter.allow_custom_ops = True&lt;/b&gt;
 tflite_model = converter.convert()
 </pre>
 
-この時点では、デフォルトのインタプリタで実行しようとすると、次のようなエラーメッセージが発生します。
+At this point, if you run it with the default interpreter using commands such as follows:
+
+```python
+interpreter = tf.lite.Interpreter(model_content=tflite_model)
+interpreter.allocate_tensors()
+```
+
+You will still get the error:
 
 ```none
-Error:
-Didn't find custom operator for name 'Sin'
-Registration failed.
+Encountered unresolved custom op: Atan.
 ```
 
 ### 演算を作成して登録する
@@ -132,7 +137,7 @@ namespace custom {
 TensorFlow Lite でこの演算子を使用できるようにするには、2 つの関数（`Prepare`および`Eval`）を定義し、`TfLiteRegistration`を構築する必要があります。
 
 ```cpp
-TfLiteStatus SinPrepare(TfLiteContext* context, TfLiteNode* node) {
+TfLiteStatus AtanPrepare(TfLiteContext* context, TfLiteNode* node) {
   using namespace tflite;
   TF_LITE_ENSURE_EQ(context, NumInputs(node), 1);
   TF_LITE_ENSURE_EQ(context, NumOutputs(node), 1);
@@ -150,13 +155,13 @@ TfLiteStatus SinPrepare(TfLiteContext* context, TfLiteNode* node) {
   return context->ResizeTensor(context, output, output_size);
 }
 
-TfLiteStatus SinEval(TfLiteContext* context, TfLiteNode* node) {
+TfLiteStatus AtanEval(TfLiteContext* context, TfLiteNode* node) {
   using namespace tflite;
-  const TfLiteTensor* input = GetInput(context, node,0);
-  TfLiteTensor* output = GetOutput(context, node,0);
+  const TfLiteTensor* input = GetInput(context, node, 0);
+  TfLiteTensor* output = GetOutput(context, node, 0);
 
-  float* input_data = input->data.f;
-  float* output_data = output->data.f;
+  float* input_data = GetTensorData<float>(input);
+  float* output_data = GetTensorData<float>(output);
 
   size_t count = 1;
   int num_dims = NumDimensions(input);
@@ -165,18 +170,18 @@ TfLiteStatus SinEval(TfLiteContext* context, TfLiteNode* node) {
   }
 
   for (size_t i=0; i<count; ++i) {
-    output_data[i] = sin(input_data[i]);
+    output_data[i] = atan(input_data[i]);
   }
   return kTfLiteOk;
 }
 
-TfLiteRegistration* Register_SIN() {
-  static TfLiteRegistration r = {nullptr, nullptr, SinPrepare, SinEval};
+TfLiteRegistration* Register_ATAN() {
+  static TfLiteRegistration r = {nullptr, nullptr, AtanPrepare, AtanEval};
   return &r;
 }
 ```
 
-`OpResolver`を初期化する際に、カスタム演算子をレゾルバに追加します（以下の例をご覧ください）。これにより、演算子は TensorFlow Lite に登録され、TensorFlow Lite で新しい実装として使用できるようになります。`TfLiteRegistration`の最後の 2 つの引数は、カスタム演算子に定義した`SinPrepare`と`SinEval`関数に対応しています。`SinInit`と`SinFree`関数を使用して、それぞれ演算子に使用される変数を初期化して容量を解放すると、`TfLiteRegistration`の最初の 2 つの引数に追加されます。この例ではこれらの引数は`nullptr`に設定されます。
+When initializing the `OpResolver`, add the custom op into the resolver (see below for an example). This will register the operator with Tensorflow Lite so that TensorFlow Lite can use the new implementation. Note that the last two arguments in `TfLiteRegistration` correspond to the `AtanPrepare` and `AtanEval` functions you defined for the custom op. If you used `AtanInit` and `AtanFree` functions to initialize variables used in the op and to free up space, respectively, then they would be added to the first two arguments of `TfLiteRegistration`; those arguments are set to `nullptr` in this example.
 
 ### カーネルライブラリで演算子を登録する
 
@@ -202,18 +207,18 @@ tflite::ops::builtin::BuiltinOpResolver resolver;
 上記で作成したカスタム演算子を追加するには、（レゾルバを`InterpreterBuilder`に渡す前に）`AddOp`を呼び出します。
 
 ```c++
-resolver.AddCustom("Sin", Register_SIN());
+resolver.AddCustom("Atan", Register_ATAN());
 ```
 
 組み込み演算子のセットが大きすぎる場合、演算子の特定のサブセットに基づいて、新しい`OpResolver`をコード生成することができます。おそらく特定のモデルに含まれる演算子のみが含まれます。これが、TensorFlow の選択的登録に相当するものです（また、この単純なバージョンは、`tools`ディレクトリに提供されています）。
 
-カスタム演算を Java で定義する場合、現時点では、独自のカスタム JNI レイヤーを構築し、[この jni コードに](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/nativeinterpreterwrapper_jni.cc)独自の AAR をコンパイルする必要があります。同様に、Python でこれらの演算を定義する場合、[Python ラッパーコード](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc)に登録を配置することができます。
+If you want to define your custom operators in Java, you would currently need to build your own custom JNI layer and compile your own AAR [in this jni code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/nativeinterpreterwrapper_jni.cc). Similarly, if you wish to define these operators available in Python you can place your registrations in the [Python wrapper code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc).
 
 上記に類似するプロセスは、単一の演算子ではなく一連の演算子をサポートするために使用することができます。必要な数の`AddCustom`演算子を追加してください。また、`BuiltinOpResolver`を使用することで、`AddBuiltin`を使用して、組み込みの実装をオーバーライドできます。
 
 ### 演算子をテストしてプロファイリングする
 
-TensorFlow Lite のベンチマークツールで演算子をプロファイリングするには、TensorFlow Lite 用の[ベンチマークモデルツール](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#tflite-model-benchmark-tool)を使用できます。テスト目的により、該当する`AddCustom`呼び出しを（上記に示すとおり）[register.cc](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/kernels/register.cc) に追加すれば、TensorFlow Lite のローカルビルドにカスタム演算子を認識させることができます。
+To profile your op with the TensorFlow Lite benchmark tool, you can use the [benchmark model tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#tflite-model-benchmark-tool) for TensorFlow Lite. For testing purposes, you can make your local build of TensorFlow Lite aware of your custom op by adding the appropriate `AddCustom` call (as show above) to [register.cc](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/core/kernels/register.cc)
 
 ## ベストプラクティス
 
@@ -233,7 +238,7 @@ TensorFlow Lite のベンチマークツールで演算子をプロファイリ�
 
 3. メモリの浪費がかさばらないようであれば、実行のイテレーションごとに動的に割り当てられる`std::vector`よりも、静的な固定サイズの配列（または`Resize`の事前割り当て済みの `std::vector`）を使用することをお勧めします。
 
-4. 存在しない標準ライブラリコンテナテンプレートをインスタンス化しないようにしてください。バイナリサイズが大きくなります。たとえば、ほかのカーネルに存在しない `std::map` が演算に必要な場合、直接インデックスマッピングで `std::vector` を使用すれば、バイナリサイズを小さくしたまま機能させることが可能です。ほかのカーネルが何を使用して洞察を得ているのかご覧ください。
+4. 存在しない標準ライブラリコンテナテンプレートをインスタンス化しないようにしてください。バイナリサイズが大きくなります。たとえば、ほかのカーネルに存在しない`std::map`が演算に必要な場合、直接インデックスマッピングで`std::vector`を使用すれば、バイナリサイズを小さくしたまま機能させることが可能です。ほかのカーネルが何を使用して洞察を得ているのかご覧ください。
 
 5. `malloc`が返すメモリへのポインタを確認してください。このポインタが`nullptr`である場合、そのポイントを使って演算を実行してはいけません。関数で`malloc`を行い、エラーが存在する場合は、終了する前にメモリを解放してください。
 
