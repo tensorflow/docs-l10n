@@ -36,7 +36,7 @@ TF Hub は TensorFlow プログラムで再読み込み、構築、再トレー�
   </tr>
   <tr>
     <td>作成</td>
-    <td> Fully supported (see <a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">complete TF1 Hub format creation guide</a>) <br> <div style="font-style: italic; font-size: 14px">       Note: The TF1 Hub format is geared towards TF1 and is only partially supported in TF2. Consider creating a TF2 SavedModel.       </div>
+    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">包括的な TF1 Hub 形式の作成ガイド</a>をご覧ください） <br> <div style="font-style: italic; font-size: 14px">       注意: TF1 Hub 形式は TF1 向けであり、TF2 では部分的にのみサポートされています。TF2 SavedModel の作成を検討してください。       </div>
 </td>
     <td style="text-align: center">サポートされていません</td>
   </tr>
