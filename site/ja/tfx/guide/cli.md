@@ -6,7 +6,7 @@ TFX コマンドラインインターフェース（CLI）は、Kubeflow Pipelin
 - パイプラインを実行し、さまざまなオーケストレーターでの実行を監視する。
 - パイプラインとパイプラインの実行を一覧表示する。
 
-注: TFX CLI は現在、互換性を保証していません。新しいバージョンがリリースされると、CLI インターフェイスが変更される可能性があります。
+注意: TFX CLI は現在、互換性を保証していません。新しいバージョンがリリースされると、CLI インターフェイスが変更される可能性があります。
 
 ## TFX CLI の概要
 
@@ -221,7 +221,7 @@ Vertex:
 パイプライン構成ファイルをコンパイルして Kubeflow にワークフローファイルを作成し、コンパイル時に次のチェックを実行します。
 
 1. パイプラインパスが有効かどうかを確認します。
-2. パイプラインの詳細がパイプライン構成ファイルから正常に抽出されているかどうかを確認します。
+2. Checks if the pipeline details are extracted successfully from the pipeline config file.
 3. パイプライン構成の DagRunner がエンジンと一致するかどうかを確認します。
 4. 指定されたパッケージパスにワークフローファイルが正常に作成されているかどうかを確認します（Kubeflow の場合のみ）。
 
@@ -421,12 +421,12 @@ Vertex:
 
 ## tfx run
 
-`tfx run`コマンドグループのコマンドの構造は次のとおりです。
+`tfx run` コマンドグループのコマンドの構造は次のとおりです。
 
 <pre class="devsite-terminal">tfx run &lt;var&gt;command&lt;/var&gt; &lt;var&gt;required-flags&lt;/var&gt; [&lt;var&gt;optional-flags&lt;/var&gt;]
 </pre>
 
-`tfx run`コマンドグループのコマンドの詳細については次のセクションを参照してください。
+`tfx run` コマンドグループのコマンドの詳細については次のセクションを参照してください。
 
 ### create
 
@@ -576,12 +576,11 @@ tfx run terminate --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>    （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
+  <dd>（オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
-<dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで <code>kubeflow</code> になります。</dd>
+  <dt>--namespace=<var>namespace</var>   </dt>
+<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
 
 
 
@@ -597,7 +596,7 @@ Kubeflow:
 
 パイプラインのすべての実行を一覧表示します。
 
-** 要注意: 現在、ローカルおよび ApacheBeam ではサポートされていません。
+** 要注意: 現在、ローカルおよび Apache Beam ではサポートされていません。
 
 使用法：
 
@@ -664,7 +663,7 @@ Kubeflow:
 
 現在の実行のステータスを返します。
 
-** 要注意: 現在、ローカルおよび ApacheBeam ではサポートされていません。
+** 要注意: 現在、ローカルおよび Apache Beam ではサポートされていません。
 
 使用法：
 
@@ -681,7 +680,7 @@ tfx run status --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --run_id=&lt
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>（オプション）Kubeflow Pipelines API サービスのエンドポイント。Kubeflow Pipelines API サービスのエンドポイントは、Kubeflow Pipelines ダッシュボードの URL と同じです。エンドポイント値は次のようになります。</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -718,7 +717,7 @@ tfx run status --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --run_id=&lt
 
 
   <dt>--namespace=<var>namespace</var> </dt>
-<dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで <code>kubeflow</code> になります。</dd>
+<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
 
 
 
@@ -780,12 +779,11 @@ tfx run delete --run_id=&lt;var&gt;run-id&lt;/var&gt; [--engine=&lt;var&gt;engin
     <p>**要注意: パイプライン構成ファイルの DagRunner に必要とされるオーケストレーターは、選択されたエンジンまたは自動検出されたエンジンと一致する必要があります。エンジンの自動検出は、ユーザー環境に基づいています。Apache Airflow と Kubeflow Pipelines がインストールされていない場合、デフォルトでローカルオーケストレーターが使用されます。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
-  <dd>（オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
+  <dd> （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
-  <dt>--namespace=<var>namespace</var>
-</dt>
-<dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで <code>kubeflow</code> になります。</dd>
+  <dt>--namespace=<var>namespace</var>   </dt>
+<dd>     (Optional.) Kubernetes namespace to connect to the Kubeflow Pipelines API.     If the namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
 
 
 
@@ -811,7 +809,7 @@ tfx template &lt;var&gt;command&lt;/var&gt; &lt;var&gt;required-flags&lt;/var&gt
 
 利用可能な TFX パイプラインテンプレートを一覧表示します。
 
-使用法：
+使用法:
 
 <pre class="devsite-click-to-copy devsite-terminal">
 tfx template list
@@ -852,7 +850,7 @@ tfx template copy --model=&lt;var&gt;model&lt;/var&gt; --pipeline_name=&lt;var&g
       <li> <strong>airflow</strong>:（実験的）エンジンを Apache Airflow に設定します</li>
       <li> <strong>beam</strong>:（実験的）エンジンを Apache Beam に設定します</li>
     </ul>
-    <p>エンジンが設定されていない場合、エンジンは環境に基づいて自動検出されます。</p>
+    <p>       If the engine is not set, the engine is auto-detected based on the       environment.     </p>
     <p>**要注意: パイプライン構成ファイルの DagRunner に必要とされるオーケストレーターは、選択されたエンジンまたは自動検出されたエンジンと一致する必要があります。エンジンの自動検出は、ユーザー環境に基づいています。Apache Airflow と Kubeflow Pipelines がインストールされていない場合、デフォルトでローカルオーケストレーターが使用されます。</p>
   </dd>
 </dl>
@@ -907,7 +905,7 @@ tfx template copy --model=&lt;var&gt;model&lt;/var&gt; --pipeline_name=&lt;var&g
 
 
   <dt>--namespace=<var>namespace</var> </dt>
-<dd>Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで <code>kubeflow</code> になります。</dd>
+<dd>     Kubernetes namespace to connect to the Kubeflow Pipelines API. If the     namespace is not specified, the value defaults to     <code>kubeflow</code>.   </dd>
 
 
 
