@@ -14,7 +14,7 @@ TensorFlow Lite 元数据为模型描述提供了标准。元数据是与模型�
 
 模型元数据在 [FlatBuffers](https://google.github.io/flatbuffers/index.html#flatbuffers_overview) 文件 [metadata_schema.fbs](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs) 中进行定义。如图 1 所示，它以 `"TFLITE_METADATA"` 的名称存储在 [TFLite 模型模式](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema.fbs)的 [metadata](https://github.com/tensorflow/tensorflow/blob/bd73701871af75539dd2f6d7fdba5660a8298caf/tensorflow/lite/schema/schema.fbs#L1208) 字段中。某些模型可能随附关联文件，例如[分类标签文件](https://github.com/tensorflow/examples/blob/dd98bc2b595157c03ac9fa47ac8659bb20aa8bbd/lite/examples/image_classification/android/models/src/main/assets/labels.txt#L1)。这些文件将使用 ZipFile [“附加”模式](https://pymotw.com/2/zipfile/#appending-to-files)（`'a'` 模式）作为 ZIP 文件连接到原始模型文件的末尾。TFLite 解释器可以像之前一样使用新文件格式。请参阅[打包关联文件](#pack-the-associated-files)，了解更多信息。
 
-请参阅以下有关如何填充、可视化和读取元数据的说明。
+请参阅以下有关如何填充、呈现和读取元数据的说明。
 
 ## 设置元数据工具
 
@@ -66,56 +66,56 @@ TensorFlow Lite 模型可能随附不同的关联文件。例如，自然语言�
 
  | Normalization | Quantization
 :-: | --- | ---
-\ | **Float model**: \ | **Float model**: \
-: An example of the       : - mean: 127.5 \        : - zeroPoint: 0 \        : |  |
-: parameter values of the : - std: 127.5 \         : - scale: 1.0 \          : |  |
-: input image in          : **Quant model**: \     : **Quant model**: \      : |  |
-: MobileNet for float and : - mean: 127.5 \        : - zeroPoint: 128.0 \    : |  |
-: quant models,           : - std: 127.5           : - scale:0.0078125f \    : |  |
-: respectively.           :                         :                          : |  |
-\ | \ | **Float models** does
-: \                       : \                       : not need quantization. \ : |  |
-: \                       : **Inputs**: If input   : **Quantized model** may  : |  |
-: \                       : data is normalized in   : or may not need          : |  |
-: When to invoke?         : training, the input     : quantization in pre/post : |  |
-:                         : data of inference needs : processing. It depends   : |  |
-:                         : to be normalized        : on the datatype of       : |  |
-:                         : accordingly. \          : input/output tensors. \  : |  |
-:                         : **Outputs**: output    : - float tensors: no     : |  |
-:                         : data will not be        : quantization in pre/post : |  |
-:                         : normalized in general.  : processing needed. Quant : |  |
-:                         :                         : op and dequant op are    : |  |
-:                         :                         : baked into the model     : |  |
+\ | **浮动模型**：\ | **浮动模型**：\
+: MobileNet 中分别       : - 平均：127.5 \        : - 零点：0 \        : |  |
+: 针对浮点模型和 : - std：127.5 \         : - scale：1.0 \          : |  |
+: 量化模型的          : **量化模型**: \     : **量化模型**: \      : |  |
+: 输入图像 : - 平均：127.5 \        : - 零点：128.0 \    : |  |
+: 的参数值          : - 标准：127.5           : - 缩放：0.0078125f \    : |  |
+: 示例。          :                         :                          : |  |
+\ | \ | **浮动模型**
+: \                       : \                       : 不需要量化。\ : |  |
+: \                       : **输入**：如果在训练中   : **量化模型**再预处理/  : |  |
+: \                       : 对输入数据进行了   : 后处理中          : |  |
+: When to invoke?         : 归一化，则需要对     : 可能需要量化， : |  |
+:                         : 推断的输入数据 : 也可能不需要量化。具体取决于   : |  |
+:                         : 执行相应的        : on 输入/输出张量的       : |  |
+:                         : 归一化。\          : 数据类型。\  : |  |
+:                         : **输出**：输出    : - 浮点张量：预处理/     : |  |
+:                         : 数据通常        : 后处理中不需要 : |  |
+:                         : 不进行归一化。  : 进行量化。量化 : |  |
+:                         :                         : 运算和去量化运算    : |  |
+:                         :                         : 被烘焙到模型     : |  |
 :                         :                         : graph. \                 : |  |
-:                         :                         : - int8/uint8 tensors:   : |  |
-:                         :                         : need quantization in     : |  |
-:                         :                         : pre/post processing.     : |  |
-\ | \ | **Quantize for inputs**:
+:                         :                         : - int8/uint8 张量：  : |  |
+:                         :                         : 需要再预处理/后处理    : |  |
+:                         :                         : 中进行量化。     : |  |
+\ | \ | **对输入进行量化**：
 : \                       : \                       : \                        : |  |
-: Formula                 : normalized_input =      : q = f / scale +          : |  |
-:                         : (input - mean) / std    : zeroPoint \              : |  |
-:                         :                         : **Dequantize for         : |  |
+: 公式                 : normalized_input =      : q = f / scale +          : |  |
+:                         : (输入 - 平均) / 标准    : 零点 \              : |  |
+:                         :                         : **对输出进行         : |  |
 :                         :                         : outputs**: \            : |  |
-:                         :                         : f = (q - zeroPoint) *    : |  |
+:                         :                         : f = (q - 零点) *    : |  |
 :                         :                         : scale                    : |  |
-\ | Filled by model creator | Filled automatically by
-: Where are the           : and stored in model     : TFLite converter, and    : |  |
-: parameters              : metadata, as            : stored in tflite model   : |  |
-:                         : `NormalizationOptions`  : file.                    : |  |
-How to get the | Through the | Through the TFLite
-: parameters?             : `MetadataExtractor` API : `Tensor` API [1] or      : |  |
-:                         : [2]                     : through the              : |  |
+\ | 由模型创建者填充 | 由 TFLite 转换器
+: 参数位于           : 并存储在模型     : 自动填充，并    : |  |
+: 什么位置              : 元数据中，作为            : 存储在 tflite 模型   : |  |
+:                         : `NormalizationOptions`  : 文件中。                  : |  |
+如何获得 | 通过 | 通过 TFLite
+: 参数？            : `MetadataExtractor` API : `Tensor` API [1] 或      : |  |
+:                         : [2]                     : 通过              : |  |
 :                         :                         : `MetadataExtractor` API  : |  |
 :                         :                         : [2]                      : |  |
-Do float and quant | 是，浮点和量化 | No, the float model does
-: models share the same   : models have the same    : not need quantization.   : |  |
-: value?                  : Normalization           :                          : |  |
+Do float and quant | 是，浮点和量化 | 否，浮动模型
+: 模型是否共享相同的   : 模型使用相同的   : 不需要量化。   : |  |
+: 值？                  : 归一化           :                          : |  |
 :                         : parameters              :                          : |  |
-Does TFLite Code | \ | \
-: generator or Android    : Yes                     : Yes                      : |  |
-: Studio ML binding       :                         :                          : |  |
-: automatically generate  :                         :                          : |  |
-: it in data processing?  :                         :                          : |  |
+TFLite 代码 | \ | \
+: 生成器或 Android    : 是                     : 是                      : |  |
+: Studio 机器学习绑定       :                         :                          : |  |
+: 是否会在数据处理过程中  :                         :                          : |  |
+: 自动生成参数？  :                         :                          : |  |
 
 [1] [TensorFlow Lite Java API](https://github.com/tensorflow/tensorflow/blob/09ec15539eece57b257ce9074918282d88523d56/tensorflow/lite/java/src/main/java/org/tensorflow/lite/Tensor.java#L73) 和 [TensorFlow Lite C++ API](https://github.com/tensorflow/tensorflow/blob/09ec15539eece57b257ce9074918282d88523d56/tensorflow/lite/c/common.h#L391)。<br> [2] [Metadata Extractor 库](../guide/codegen.md#read-the-metadata-from-models)
 
@@ -264,9 +264,9 @@ populator.populate()
 
 您可以通过 `load_associated_files` 将所需数量的关联文件打包到模型中。但是，至少须对元数据内记录的文件进行打包。在本例中，必须对标签文件进行打包。
 
-## 可视化元数据
+## 呈现元数据
 
-您可以使用 [Netron](https://github.com/lutzroeder/netron) 可视化您的元数据，也可以使用 `MetadataDisplayer` 将 TensorFlow Lite 模型中的元数据读取为 json 格式：
+您可以使用 [Netron](https://github.com/lutzroeder/netron) 呈现您的元数据，也可以使用 `MetadataDisplayer` 将 TensorFlow Lite 模型中的元数据读取为 json 格式：
 
 ```python
 displayer = _metadata.MetadataDisplayer.with_model_file(export_model_path)
