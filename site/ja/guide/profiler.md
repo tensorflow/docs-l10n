@@ -98,9 +98,9 @@ docker run option '--privileged=true'
 
 - **実行環境**: 以下を含むモデルの実行環境の高度な概要が表示されます。
 
-    - Number of hosts used.
+    - 使用されたホストの数。
     - デバイスタイプ（GPU/TPU）
-    - Number of device cores.
+    - デバイスコアの数。
 
 - **次の推奨ステップ**: モデルが入力限界にある場合に報告され、モデルのパフォーマンス ボトルネックを特定して解消するのに使用できるツールが提案されます。
 
@@ -180,10 +180,10 @@ TensorFlow Stats ツールには、プロファイリングセッション中に
 
 - 上のペインには、最大 4 つの円グラフが表示されます。
 
-    1. The distribution of self-execution time of each op on the host.
-    2. The distribution of self-execution time of each op type on the host.
-    3. The distribution of self-execution time of each op on the device.
-    4. The distribution of self-execution time of each op type on the device.
+    1. ホスト上の各演算の自己実行時間の分布。
+    2. ホスト上の各演算タイプの自己実行時間の分布。
+    3. デバイス上の各演算の自己実行時間の分布。
+    4. デバイス上の各演算タイプの自己実行時間の分布。
 
 - 下のペインには、TensorFlow 演算に関するデータを報告するテーブルが表示されており、各演算に 1 行、各タイプのデータに 1 列（列の見出しをクリックして列をソート）が割り当てられています。上のペインの右側にある **Export as CSV ボタン**をクリックすると、このテーブルのデータが CSV ファイルとしてエクスポートされます。
 
@@ -264,16 +264,16 @@ Timeline ペインには、次の要素が含まれます。
 
 このツールでは 2 つのペインで情報が表示されます。
 
-- The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
+- 上のペインには、合計経過時間が最も長い CUDA カーネルを示す円グラフが表示されます。
 
 - 下のペインには、一意のカーネルと演算のペアごとに次のデータを含むテーブルが表示されます。
 
     - カーネルと演算のペアでグループ化された合計経過 GPU 時間の順位（降順）
-    - The name of the launched kernel.
-    - The number of GPU registers used by the kernel.
-    - The total size of shared (static + dynamic shared) memory used in bytes.
-    - The block dimension expressed as `blockDim.x, blockDim.y, blockDim.z`.
-    - The grid dimensions expressed as `gridDim.x, gridDim.y, gridDim.z`.
+    - 起動されたカーネルの名前。
+    - カーネルが使用している GPU レジスタの数。
+    - 使用されている共有（静的+動的共有）メモリの合計サイズ（バイト単位）。
+    - `blockDim.x, blockDim.y, blockDim.z` で表現されたブロックの次元。
+    - `gridDim.x, gridDim.y, gridDim.z` で表現されたグリッドの次元。
     - 演算が[テンソルコア](https://www.nvidia.com/en-gb/data-center/tensor-cores/)を使用可能かどうか
     - カーネルにテンソルコア命令が含まれているかどうか
     - このカーネルを起動した演算の名前
@@ -561,7 +561,7 @@ for step, train_data in enumerate(dataset):
 
 <a name="profiling_api_table"></a>
 
-| プロファイリング API                | ローカル     | リモート    | 複数  | ハードウェア  | :                              :           :           : ワーカー   : プラットフォーム : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | サポート対象 | サポート       | サポート       | CPU、GPU  | : コールバック**                   :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート       | サポート       | CPU、GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート対象 | サポート対象 | CPU、GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **コンテキストマネージャ API**      | サポート対象 | サポート       | サポート       | CPU、GPU  | :                              :           : 対象外 : 対象外 :           :
+| プロファイリング API                | ローカル     | リモート    | 複数  | ハードウェア  | :                              :           :           : ワーカー   : プラットフォーム : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | サポート対象 | サポート       | サポート       | CPU、GPU  | : コールバック**                   :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート       | サポート       | CPU、GPU  | : start/stop [API]**    :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート対象 | サポート対象 | CPU、GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **コンテキストマネージャ API**      | サポート対象 | サポート       | サポート       | CPU、GPU  | :                              :           : 対象外 : 対象外 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -718,3 +718,6 @@ CUDA® Toolkit 10.2 以降では、マルチ GPU のプロファイリングが�
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
+
+
+[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2
