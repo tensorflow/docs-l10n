@@ -34,7 +34,7 @@ GCS_BUCKET=gs://my-gcs-bucket
 echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
-If you're using `tfds-nightly`, make sure to echo from `tfds-nightly` in case the dataset has been updated since the last release.
+如果您使用的是 `tfds-nightly`，并且自上次发布以来数据集进行了更新，请确保从 `tfds-nightly` 回送数据。
 
 ```sh
 echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
@@ -53,7 +53,7 @@ tfds build $DATASET_NAME/$DATASET_CONFIG \
 
 ### 在本地生成
 
-To run your script locally using the [default Apache Beam runner](https://beam.apache.org/documentation/runners/direct/) (it must fit all data in memory), the command is the same as for other datasets:
+要使用[默认的 Apache Beam 运行程序](https://beam.apache.org/documentation/runners/direct/)在本地运行您的脚本（它必须将所有数据装入内存），该命令与其他数据集相同：
 
 ```sh
 tfds build my_dataset
@@ -61,11 +61,11 @@ tfds build my_dataset
 
 **警告**：Beam 数据集可能非常**庞大**（数 TB 或更大），并且生成数据集会占用大量资源（在本地计算机上可能需要数周）。建议使用分布式环境生成数据集。请参阅 [Apache Beam 文档](https://beam.apache.org/)以查看受支持的运行时列表。
 
-### With Apache Flink
+### 使用 Apache Flink
 
-To run the pipeline using [Apache Flink](https://flink.apache.org/) you can read the [official documentation](https://beam.apache.org/documentation/runners/flink). Make sure your Beam is compliant with [Flink Version Compatibility](https://beam.apache.org/documentation/runners/flink/#flink-version-compatibility)
+要使用 [Apache Flink](https://flink.apache.org/) 运行流水线，您可以阅读[官方文档](https://beam.apache.org/documentation/runners/flink)。确保您的 Beam 符合 [Flink 版本兼容性](https://beam.apache.org/documentation/runners/flink/#flink-version-compatibility)要求
 
-To make it easier to launch the script, it's helpful to define the following variables using the actual values for your Flink setup and the dataset you want to generate:
+为了便于启动脚本，建议您使用自己的 Flink 设置和您要生成的数据集的实际值来定义以下变量：
 
 ```sh
 DATASET_NAME=<dataset-name>
@@ -74,7 +74,7 @@ FLINK_CONFIG_DIR=<flink-config-directory>
 FLINK_VERSION=<flink-version>
 ```
 
-To run on an embedded Flink cluster, you can launch the job using the command below:
+要在嵌入式 Flink 集群上运行，您可以使用以下命令启动作业：
 
 ```sh
 tfds build $DATASET_NAME/$DATASET_CONFIG \
