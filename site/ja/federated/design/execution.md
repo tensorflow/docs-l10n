@@ -1,6 +1,6 @@
 # 実行
 
-[TOC]
+[目次]
 
 [executors](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors) パッケージには、コア [Executors](#executor) クラスとと[ランタイム](#runtime)関連の機能が含まれます。
 
