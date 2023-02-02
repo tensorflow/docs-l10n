@@ -34,7 +34,7 @@ GCS_BUCKET=gs://my-gcs-bucket
 echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
-`tfds-nightly` を使用している場合には、データセットが前回のリリースから更新されている場合に備え、`tfds-nightly` からエコーするようにします。
+If you're using `tfds-nightly`, make sure to echo from `tfds-nightly` in case the dataset has been updated since the last release.
 
 ```sh
 echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
@@ -54,13 +54,34 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
 
 ### ローカルで生成する
 
-デフォルトの Apache Beam ランナーを使用してローカルでスクリプトを実行する場合、コマンドは他のデータセットの場合と同じです。
+To run your script locally using the [default Apache Beam runner](https://beam.apache.org/documentation/runners/direct/) (it must fit all data in memory), the command is the same as for other datasets:
 
 ```sh
 tfds build my_dataset
 ```
 
 **警告**: Beam のデータセットは**巨大な**（テラバイト以上）場合があり、生成には相当量のリソースを必要とします（ローカルコンピュータでは数週間かかることもあります）。データセットの生成には分散環境の使用を推奨しています。サポートされているランタイムのリストについては [Apache Beam ドキュメント](https://beam.apache.org/)を参照してください。
+
+### With Apache Flink
+
+To run the pipeline using [Apache Flink](https://flink.apache.org/) you can read the [official documentation](https://beam.apache.org/documentation/runners/flink). Make sure your Beam is compliant with [Flink Version Compatibility](https://beam.apache.org/documentation/runners/flink/#flink-version-compatibility)
+
+To make it easier to launch the script, it's helpful to define the following variables using the actual values for your Flink setup and the dataset you want to generate:
+
+```sh
+DATASET_NAME=<dataset-name>
+DATASET_CONFIG=<dataset-config>
+FLINK_CONFIG_DIR=<flink-config-directory>
+FLINK_VERSION=<flink-version>
+```
+
+To run on an embedded Flink cluster, you can launch the job using the command below:
+
+```sh
+tfds build $DATASET_NAME/$DATASET_CONFIG \
+  --beam_pipeline_options=\
+"runner=FlinkRunner,flink_version=$FLINK_VERSION,flink_conf_dir=$FLINK_CONFIG_DIR"
+```
 
 ### カスタムスクリプト内で生成する
 
@@ -126,13 +147,12 @@ def _generate_examples(self, path):
 Beam データセットの例を以下に示します。
 
 ```python
-class DummyBeamDataset(tfds.core.BeamBasedBuilder):
+class DummyBeamDataset(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(16, 16, 1)),
             'label': tfds.features.ClassLabel(names=['dog', 'cat']),
@@ -141,18 +161,12 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
 
   def _split_generators(self, dl_manager):
     ...
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=dict(file_dir='path/to/train_data/'),
-        ),
-        splits_lib.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs=dict(file_dir='path/to/test_data/'),
-        ),
-    ]
+    return {
+        'train': self._generate_examples(file_dir='path/to/train_data/'),
+        'test': self._generate_examples(file_dir='path/to/test_data/'),
+    }
 
-  def _build_pcollection(self, pipeline, file_dir):
+  def _generate_examples(self, file_dir: str):
     """Generate examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
 
@@ -164,8 +178,7 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
       }
 
     return (
-        pipeline
-        | beam.Create(tf.io.gfile.listdir(file_dir))
+        beam.Create(tf.io.gfile.listdir(file_dir))
         | beam.Map(_process_example)
     )
 
