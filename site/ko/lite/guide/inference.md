@@ -433,6 +433,41 @@ Python 샘플 코드는 [`label_image.py`](https://github.com/tensorflow/tensorf
 
 팁: 인터프리터에 대한 자세한 설명을 보려면 Python 단말기에서 `help(tf.lite.Interpreter)`를 실행하세요.
 
+## Run inference with dynamic shape model
+
+If you want to run a model with dynamic input shape, *resize the input shape* before running inference. Otherwise, the `None` shape in Tensorflow models will be replaced by a placeholder of `1` in TFLite models.
+
+The following examples show how to resize the input shape before running inference in different languages. All the examples assume that the input shape is defined as `[1/None, 10]`, and need to be resized to `[3, 10]`.
+
+<section class="tabs">
+</section>
+
+###### C++ {.new-tab}
+
+```c++
+// Resize input tensors before allocate tensors
+interpreter->ResizeInputTensor(/*tensor_index=*/0, std::vector<int>{3,10});
+interpreter->AllocateTensors();
+```
+
+###### Python {.new-tab}
+
+```python
+# Load the TFLite model in TFLite Interpreter
+interpreter = tf.lite.Interpreter(model_path=TFLITE_FILE_PATH)
+  
+# Resize input shape for dynamic shape model and allocate tensor
+interpreter.resize_tensor_input(interpreter.get_input_details()[0]['index'], [3, 10])
+interpreter.allocate_tensors()
+  
+# Get input and output tensors.
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+```
+
+
+
+
 ## 지원되는 연산
 
 TensorFlow Lite는 TensorFlow 연산의 일부를 지원하며 몇 가지 제한 사항이 있습니다. 연산 및 제한 사항의 전체 목록은 [TF Lite 연산 페이지](https://www.tensorflow.org/mlir/tfl_ops)를 참조하세요.
