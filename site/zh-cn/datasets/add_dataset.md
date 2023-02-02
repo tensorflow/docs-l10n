@@ -4,14 +4,14 @@
 
 请查看我们的[数据集列表](catalog/overview.md)，了解您希望使用的数据集是否已存在。
 
-## TL;DR
+## 精彩速览
 
 编写新数据集的最简单方式是使用 [TFDS CLI](https://www.tensorflow.org/datasets/cli)：
 
 ```sh
 cd path/to/my/project/datasets/
 tfds new my_dataset  # Create `my_dataset/my_dataset.py` template files
-# [...] Manually modify `my_dataset/my_dataset.py` to implement your dataset.
+# [...] Manually modify `my_dataset/my_dataset_dataset_builder.py` to implement your dataset.
 cd my_dataset/
 tfds build  # Download and prepare the dataset to `~/tensorflow_datasets/`
 ```
@@ -56,8 +56,11 @@ tfds new my_dataset
 ```sh
 my_dataset/
     __init__.py
-    my_dataset.py # Dataset definition
-    my_dataset_test.py # (optional) Test
+    README.md # Markdown description of the dataset.
+    CITATIONS.bib # Bibtex citation for the dataset.
+    TAGS.txt # List of tags describing the dataset.
+    my_dataset_dataset_builder.py # Dataset definition
+    my_dataset_dataset_builder_test.py # Test
     dummy_data/ # (optional) Fake data (used for testing)
     checksum.tsv # (optional) URL checksums (see `checksums` section).
 ```
@@ -74,7 +77,7 @@ my_dataset/
 以下是基于 `tfds.core.GeneratorBasedBuilder` 的数据集构建工具的最简单示例：
 
 ```python
-class MyDataset(tfds.core.GeneratorBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for my_dataset dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
@@ -84,8 +87,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Dataset metadata (homepage, citation,...)."""
-    return tfds.core.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(256, 256, 3)),
             'label': tfds.features.ClassLabel(
@@ -124,13 +126,11 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 
 ```python
 def _info(self):
-  return tfds.core.DatasetInfo(
-      builder=self,
-      # Description and homepage used for documentation
-      description="""
-      Markdown description of the dataset. The text will be automatically
-      stripped and dedent.
-      """,
+  # The `dataset_info_from_configs` base method will construct the
+  # `tfds.core.DatasetInfo` object using the passed-in parameters and
+  # adding: builder (self), description/citations/tags from the config
+  # files located in the same package.
+  return self.dataset_info_from_configs(
       homepage='https://dataset-homepage.org',
       features=tfds.features.FeaturesDict({
           'image_description': tfds.features.Text(),
@@ -144,11 +144,6 @@ def _info(self):
       supervised_keys=('image', 'label'),
       # Specify whether to disable shuffling on the examples. Set to False by default.
       disable_shuffling=False,
-      # Bibtex citation for the dataset
-      citation=r"""
-      @article{my-awesome-dataset-2020,
-               author = {Smith, John},}
-      """,
   )
 ```
 
@@ -156,11 +151,20 @@ def _info(self):
 
 - `features`：该属性指定数据集结构、形状等内容。支持复杂数据类型（音频、视频、嵌套序列等）。有关详细信息，请参阅[可用特征](api_docs/python/tfds/core/DatasetInfo.md)或[特征连接器指南](https://www.tensorflow.org/datasets/features)。
 - `disable_shuffling`：请参阅[维护数据集顺序](#maintain-dataset-order)部分。
-- `citation`：要查找 `BibText` 引用，请执行以下操作：
-    - 在数据集网站中搜索引用说明（使用 BibTex 格式）。
-    - 对于 [arXiv](https://arxiv.org/) 论文：查找论文并点击右侧的 `BibText` 链接。
-    - 在 [Google Scholar](https://scholar.google.com) 上查找论文，并点击标题下方的双引号标志，然后在弹出窗口中点击 `BibTeX`。
-    - 如果没有相关的论文（例如，只有一个网站），您可以使用 [BibTeX 在线编辑器](https://truben.no/latex/bibtex/)创建一个自定义 BibTeX 条目（下拉菜单有一个 `Online` 条目类型）。
+
+编写 `BibText` `CITATIONS.bib` 文件：
+
+- 在数据集网站中搜索引用说明（使用 BibTex 格式）。
+- 对于 [arXiv](https://arxiv.org/) 论文：查找论文并点击右侧的 `BibText` 链接。
+- 在 [Google Scholar](https://scholar.google.com) 上查找论文，并点击标题下方的双引号标志，然后在弹出窗口中点击 `BibTeX`。
+- 如果没有相关的论文（例如，只有一个网站），您可以使用 [BibTeX 在线编辑器](https://truben.no/latex/bibtex/)创建一个自定义 BibTeX 条目（下拉菜单有一个 `Online` 条目类型）。
+
+更新 `TAGS.txt` 文件：
+
+- 所有允许的标签都预先填充在生成的文件中。
+- 移除所有不适用于数据集的标签。
+- [tensorflow_datasets/core/valid_tags.txt](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/valid_tags.txt) 中列出了有效标签。
+- 要向该列表添加标签，请发送 PR。
 
 #### 维护数据集顺序
 
@@ -168,7 +172,7 @@ def _info(self):
 
 ```python
 def _info(self):
-  return tfds.core.DatasetInfo(
+  return self.dataset_info_from_configs(
     # [...]
     disable_shuffling=True,
     # [...]
@@ -289,6 +293,8 @@ def _generate_examples(self, images_path, label_path):
           'label': row['label'],
       }
 ```
+
+警告：从字符串或整数解析布尔值时，请使用效用函数 `tfds.core.utils.bool_utils.parse_bool`，以避免解析错误（例如，`bool("False") == True`）。
 
 #### 文件访问和 <code>tf.io.gfile</code>
 
@@ -433,12 +439,12 @@ tfds build --register_checksums
 
 ```python
 import tensorflow_datasets as tfds
-from . import my_dataset
+from . import my_dataset_dataset_builder
 
 
 class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for my_dataset dataset."""
-  DATASET_CLASS = my_dataset.MyDataset
+  DATASET_CLASS = my_dataset_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'test': 1,  # Number of fake test example
