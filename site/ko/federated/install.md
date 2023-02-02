@@ -23,7 +23,7 @@ TensorFlow Federated(TFF)를 사용하도록 환경을 설정하는 몇 가지 �
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
 </pre>
 
-참고: 가상 환경을 종료하려면, `deactivate`를 실행하세요.
+참고: 가상 환경을 종료하려면 `deactivate`를 실행하세요.
 
 ### 3. 출시된 TensorFlow Federated Python 패키지를 설치합니다.
 
