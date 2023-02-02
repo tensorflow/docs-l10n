@@ -11,7 +11,7 @@
 ```sh
 cd path/to/my/project/datasets/
 tfds new my_dataset  # Create `my_dataset/my_dataset.py` template files
-# [...] Manually modify `my_dataset/my_dataset.py` to implement your dataset.
+# [...] Manually modify `my_dataset/my_dataset_dataset_builder.py` to implement your dataset.
 cd my_dataset/
 tfds build  # Download and prepare the dataset to `~/tensorflow_datasets/`
 ```
@@ -56,8 +56,11 @@ tfds new my_dataset
 ```sh
 my_dataset/
     __init__.py
-    my_dataset.py # Dataset definition
-    my_dataset_test.py # (optional) Test
+    README.md # Markdown description of the dataset.
+    CITATIONS.bib # Bibtex citation for the dataset.
+    TAGS.txt # List of tags describing the dataset.
+    my_dataset_dataset_builder.py # Dataset definition
+    my_dataset_dataset_builder_test.py # Test
     dummy_data/ # (optional) Fake data (used for testing)
     checksum.tsv # (optional) URL checksums (see `checksums` section).
 ```
@@ -74,7 +77,7 @@ my_dataset/
 以下は、`tfds.core.GeneratorBasedBuilder` に基づく最低限のデータセットビルダーの例です。
 
 ```python
-class MyDataset(tfds.core.GeneratorBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for my_dataset dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
@@ -84,8 +87,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Dataset metadata (homepage, citation,...)."""
-    return tfds.core.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(256, 256, 3)),
             'label': tfds.features.ClassLabel(
@@ -124,13 +126,11 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 
 ```python
 def _info(self):
-  return tfds.core.DatasetInfo(
-      builder=self,
-      # Description and homepage used for documentation
-      description="""
-      Markdown description of the dataset. The text will be automatically
-      stripped and dedent.
-      """,
+  # The `dataset_info_from_configs` base method will construct the
+  # `tfds.core.DatasetInfo` object using the passed-in parameters and
+  # adding: builder (self), description/citations/tags from the config
+  # files located in the same package.
+  return self.dataset_info_from_configs(
       homepage='https://dataset-homepage.org',
       features=tfds.features.FeaturesDict({
           'image_description': tfds.features.Text(),
@@ -144,11 +144,6 @@ def _info(self):
       supervised_keys=('image', 'label'),
       # Specify whether to disable shuffling on the examples. Set to False by default.
       disable_shuffling=False,
-      # Bibtex citation for the dataset
-      citation=r"""
-      @article{my-awesome-dataset-2020,
-               author = {Smith, John},}
-      """,
   )
 ```
 
@@ -156,11 +151,20 @@ def _info(self):
 
 - `features`: これは、データセットの構造や形状などを指定します。複雑なデータタイプ（音声、動画、ネストされたシーケンスなど）をサポートしています。詳細は、[利用可能な特徴量](https://www.tensorflow.org/datasets/api_docs/python/tfds/features#classes)または[特徴量コネクタガイド](https://www.tensorflow.org/datasets/features)をご覧ください。
 - `disable_shuffling`: 「[データセットの順序を維持する](#maintain-dataset-order)」をご覧ください。
-- `citation`: 次のようにして `BibText` の引用を見つけます。
-    - データセットのウェブサイトで引用方法を検索します（BibTex 形式で使用します）。
-    - [arXiv](https://arxiv.org/) の論文: 論文を見つけ、右側の `BibText` リンクをクリックします。
-    - [Google Scholar](https://scholar.google.com) で論文を検索し、題名の下にある二重引用符をクリックし、ポップアップ表示に示される `BibTeX` をクリックします。
-    - 関連する論文がない場合（ウェブサイトのみなど）、[BibTeX Online Editor](https://truben.no/latex/bibtex/) を使用して、カスタム BibTeX エントリを作成します（`Online` エントリタイプ）。
+
+`BibText` `CITATIONS.bib` ファイルを書く:
+
+- データセットのウェブサイトで引用方法を検索します（BibTex 形式で使用します）。
+- [arXiv](https://arxiv.org/) の論文: 論文を見つけ、右側の `BibText` リンクをクリックします。
+- [Google Scholar](https://scholar.google.com) で論文を検索し、題名の下にある二重引用符をクリックし、ポップアップ表示に示される `BibTeX` をクリックします。
+- 関連する論文がない場合（ウェブサイトのみなど）、[BibTeX Online Editor](https://truben.no/latex/bibtex/) を使用して、カスタム BibTeX エントリを作成します（`Online` エントリタイプ）。
+
+`TAGS.txt` ファイルを更新する:
+
+- 許可されているすべてのタグは、生成されたファイルにあらかじめ入力されています。
+- データセットに該当しないすべてのタグを削除します。
+- 有効なタグは、[tensorflow_datasets/core/valid_tags.txt](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/valid_tags.txt) に記載されています。
+- リストにタグを追加する必要がある場合は、PR を送信してください。
 
 #### データセットの順序を維持する
 
@@ -168,7 +172,7 @@ def _info(self):
 
 ```python
 def _info(self):
-  return tfds.core.DatasetInfo(
+  return self.dataset_info_from_configs(
     # [...]
     disable_shuffling=True,
     # [...]
@@ -236,7 +240,7 @@ for filename, fobj in dl_manager.iter_archive('path/to/archive.zip'):
   ...
 ```
 
-`fobj` には、`with open('rb') as fobj:` と同じメソッドがあります（`fobj.read()`  など）。
+`fobj` には、`with open('rb') as fobj:` と同じメソッドがあります（`fobj.read()` など）。
 
 #### データセットの分割を指定する
 
@@ -266,9 +270,9 @@ def _split_generators(self, dl_manager):
 
 このメソッドは通常、ソースデータセットのアーティファクト（CSV ファイルなど）を読み取り、`(key, feature_dict)` タプルを生成します。
 
-- `key`: Example の識別子。`hash(key)` を使って Example を決定的にシャッフルするか、シャッフルが無効である場合に key で並べ替えるために使用されます（「[データセットの順序を維持する](#maintain-dataset-order)」をご覧ください）。次のようである必要があります。
+- `key`: Example の識別子。`hash(key)` を使って Example を確定的にシャッフルするか、シャッフルが無効である場合に key で並べ替えるために使用されます（「[データセットの順序を維持する](#maintain-dataset-order)」をご覧ください）。次のようである必要があります。
     - **一意であること**: 2 つの Example が同じ key を使用している場合、例がが発生します。
-    - **決定的であること**: `download_dir`、 `os.path.listdir` の順などに依存してはいけません。データを 2 回生成すると、同じ kye が生成されてしまいます。
+    - **確定的であること**: `download_dir`、 `os.path.listdir` の順などに依存してはいけません。データを 2 回生成すると、同じ kye が生成されてしまいます。
     - **比較可能であること**: シャッフルが無効である場合、key はデータセットの並べ替えに使用されます。
 - `feature_dict`: Example の値を含む `dict` です。
     - 構造は `tfds.core.DatasetInfo` で定義されている `features=` 構造に一致する必要があります。
@@ -289,6 +293,8 @@ def _generate_examples(self, images_path, label_path):
           'label': row['label'],
       }
 ```
+
+警告: 整数または文字列のブール値を解析する場合は、`tfds.core.utils.bool_utils.parse_bool` ユーティリティ関数を使用して、解析エラーを回避してください（例: `bool("False") == True`）。
 
 #### ファイルのアクセスと `tf.io.gfile`
 
@@ -433,12 +439,12 @@ PyPI を介してデータセットをリリースする場合、忘れずに �
 
 ```python
 import tensorflow_datasets as tfds
-from . import my_dataset
+from . import my_dataset_dataset_builder
 
 
 class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for my_dataset dataset."""
-  DATASET_CLASS = my_dataset.MyDataset
+  DATASET_CLASS = my_dataset_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'test': 1,  # Number of fake test example
