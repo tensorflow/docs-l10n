@@ -433,11 +433,11 @@ Python 샘플 코드는 [`label_image.py`](https://github.com/tensorflow/tensorf
 
 팁: 인터프리터에 대한 자세한 설명을 보려면 Python 단말기에서 `help(tf.lite.Interpreter)`를 실행하세요.
 
-## Run inference with dynamic shape model
+## 동적 형상 모델로 추론 실행
 
-If you want to run a model with dynamic input shape, *resize the input shape* before running inference. Otherwise, the `None` shape in Tensorflow models will be replaced by a placeholder of `1` in TFLite models.
+동적 입력 형상으로 모델을 실행하려면 추론을 실행하기 전에 *입력 형상의 크기*를 조정하세요. 그렇지 않으면 Tensorflow 모델의 `None` 형상이 TFLite 모델에서 자리 표시자 `1`로 대체됩니다.
 
-The following examples show how to resize the input shape before running inference in different languages. All the examples assume that the input shape is defined as `[1/None, 10]`, and need to be resized to `[3, 10]`.
+다음 예는 서로 다른 언어로 추론을 실행하기 전에 입력 형상의 크기를 조정하는 방법을 보여줍니다. 모든 예제는 입력 형상이 `[1/None, 10]`으로 정의되고 크기를 `[3, 10]`으로 조정해야 한다고 가정합니다.
 
 <section class="tabs">
 </section>
