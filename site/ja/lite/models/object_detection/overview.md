@@ -4,7 +4,7 @@
 
 たとえば、以下の<a href="#get_started">サンプルアプリ</a>のスクリーンショットは、2 つのオブジェクトがどのように認識され、それらの位置に注釈が付けられていることを示しています。
 
- <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/images/detection.png?raw=true">
+<img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/images/detection.png?raw=true" alt="Android の例のスクリーンショット">
 
 注意: (1) 既存のモデルを統合するには、[TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector) を試してください。(2) モデルをカスタマイズするには、[TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) を試してください。
 
@@ -47,13 +47,13 @@ TensorFlow Lite Task Library のそのまま簡単に使用できる API を利�
 
 ## モデルの説明
 
-このセクションでは、[TensorFlow Object Detection API](https://arxiv.org/abs/1512.02325) から TensorFlowLite に変換された [Single-Shot Detector](https://github.com/tensorflow/models/blob/master/research/object_detection/) モデルの署名について説明します。
+このセクションでは、[TensorFlow Object Detection API](https://arxiv.org/abs/1512.02325) から TensorFlowLite に変換された [Single-Shot Detector](https://github.com/tensorflow/models/blob/master/research/object_detection/) モデルのシグネチャについて説明します。
 
 物体検出モデルは、物体の複数のクラスの存在と位置を検出するようにトレーニングされています。たとえば、さまざまな果物を含む画像、果物の種類を示す*ラベル*（リンゴ、バナナ、イチゴなど）、および各物体が画像のどこにあるかを指定するデータでモデルをトレーニングすることができます。
 
 その後、モデルに画像を提供すると、検出した物体のリスト、各物体を含む境界矩形の場所、および検出に対する信頼度を示すスコアを出力します。
 
-### 入力署名
+### 入力シグネチャ
 
 モデルは画像を入力として受け取ります。
 
@@ -61,7 +61,7 @@ TensorFlow Lite Task Library のそのまま簡単に使用できる API を利�
 
 Android でこの前処理を行う方法については[サンプルアプリコード](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android)をご覧ください。
 
-### 出力署名
+### 出力シグネチャ
 
 モデルは、インデックス 0〜4 にマップされた 4 つの配列を出力します。配列 0、1、2 は`N`個の検出されたオブジェクトを表し、各配列の 1 つの要素は各オブジェクトに対応します。
 
@@ -97,7 +97,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
   </tbody>
 </table>
 
-注意：結果の数（上記の場合は 10）は、検出モデルをTensorFlowLite にエクスポートするときに設定されるパラメータです。詳細については、<a href="#model-customization">モデルのカスタマイズ</a>をご覧ください。
+注意: 結果の数（上記の場合は 10）は、検出モデルをTensorFlowLite にエクスポートするときに設定されるパラメータです。詳細については、<a href="#model-customization">モデルのカスタマイズ</a>をご覧ください。
 
 リンゴ、バナナ、イチゴを検出するようにモデルがトレーニングされているとします。画像を渡すと、設定した数の検出結果が出力されます。この例では 5 です。
 
@@ -185,7 +185,6 @@ Android でこの前処理を行う方法については[サンプルアプリ�
 
 たとえば、次の画像では、ナシ（モデルが検出するようにトレーニングされた物体ではない）が「人」として誤って識別されました。これは、適切なカットオフを選択することで無視できる誤検知の例です。この場合、0.6（または 60％）のカットオフは、誤検知を適切に除外します。
 
-
 <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/object_detection/images/android_apple_banana.png?raw=true" alt="Screenshot of Android example">
 
 #### 位置
@@ -225,7 +224,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
   </thead>
   <tr>
     <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a> </td>
-    <td rowspan="3">       27 Mb     </td>
+    <td rowspan="3">27 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>22ms</td>
     <td>46ms*</td>
@@ -250,13 +249,13 @@ Android でこの前処理を行う方法については[サンプルアプリ�
 
 ### 事前トレーニング済みモデル
 
-[Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md#mobile-models) には、さまざまなレイテンシと精度の特性を備えたモバイル向けに最適化された検出モデルがあります。それぞれ、次のセクションで説明する入力署名および出力署名に従います。
+[Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md#mobile-models) には、さまざまなレイテンシと精度の特性を備えたモバイル向けに最適化された検出モデルがあります。それぞれ、次のセクションで説明する入力シグネチャおよび出力シグネチャに従います。
 
 [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) と [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md) の両方のエクスポートスクリプトには、より多くの出力オブジェクトや、より低速でより正確な後処理を可能にするパラメータがあります。サポートされている引数の完全なリストを表示するには、スクリプトで`--help`を使用してください。
 
 Both the [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) &amp; [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md) exporting scripts have parameters that can enable a larger number of output objects or slower, more-accurate post processing. Please use `--help` with the scripts to see an exhaustive list of supported arguments.
 
-> 現在、デバイス上の推論は SSD モデルでのみ最適化されています。CenterNet や EfficientDet などの他のアーキテクチャに対するサポートの改善は研究されています。
+> 現在、オンデバイス推論は SSD モデルでのみ最適化されています。CenterNet や EfficientDet などの他のアーキテクチャに対するサポートの改善は研究されています。
 
 ### カスタマイズするモデルを選択するには
 
