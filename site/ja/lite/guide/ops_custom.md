@@ -18,7 +18,7 @@ TensorFlow Lite のビルトイン演算子ライブラリがサポートする 
 
 注意: `tf.atan` 関数はカスタム演算子では**ありません**。TensorFlow と TensorFlow Lite の両方でサポートされている通常の演算子ですが、単純なワークフローを実演するために、次の例ではカスタム演算子であると**仮定しています**。
 
-The TensorFlow Text operator is an example of a custom operator. See the <a href="https://tensorflow.org/text/guide/text_tf_lite" class="external"> Convert TF Text to TF Lite</a> tutorial for a code example.
+TensorFlow Text 演算子はカスタム演算子の例です。コードサンプルについては、<a href="https://tensorflow.org/text/guide/text_tf_lite" class="external">TF Text を TF Lite に変換</a>チュートリアルをご覧ください。
 
 ## 例: カスタム `Atan` 演算子
 
