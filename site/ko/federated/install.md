@@ -64,7 +64,16 @@ Tensorflow Federated를 컴파일하는 데 사용되는 빌드 도구인 [Bazel
 <code class="devsite-terminal">cd "federated"</code>
 </pre>
 
-### 4. TensorFlow Federated Python 패키지를 빌드합니다.
+### 4. Create a virtual environment.
+
+<pre class="prettyprint lang-bsh">
+<code class="devsite-terminal">python3.9 -m venv "venv"</code>
+<code class="devsite-terminal">source "venv/bin/activate"</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install numpy</code>
+</pre>
+
+### 5. Build the TensorFlow Federated Python package.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">mkdir "/tmp/tensorflow_federated"</code>
@@ -72,30 +81,36 @@ Tensorflow Federated를 컴파일하는 데 사용되는 빌드 도구인 [Bazel
     --output_dir="/tmp/tensorflow_federated"</code>
 </pre>
 
-### 5. 새 프로젝트를 만듭니다.
+### 6. Exit the virtual environment
+
+<pre class="prettyprint lang-bsh">
+<code class="devsite-terminal">deactivate</code>
+</pre>
+
+### 7. Create a new project.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">mkdir "/tmp/project"</code>
 <code class="devsite-terminal">cd "/tmp/project"</code>
 </pre>
 
-### 6. 가상 환경을 만듭니다.
+### 8. Create a new virtual environment.
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal">python3 -m venv "venv"</code>
+<code class="devsite-terminal">python3.9 -m venv "venv"</code>
 <code class="devsite-terminal">source "venv/bin/activate"</code>
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
 </pre>
 
-참고: 가상 환경을 종료하려면, `deactivate`를 실행하세요.
+Note: To exit the virtual environment, run `deactivate`.
 
-### 7. TensorFlow Federated Python 패키지를 설치합니다.
+### 9. Install the TensorFlow Federated Python package.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "/tmp/tensorflow_federated/"*".whl"</code>
 </pre>
 
-### 8. Tensorflow Federated를 테스트합니다.
+### 10. Test Tensorflow Federated.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">python -c "import tensorflow_federated as tff; print(tff.federated_computation(lambda: 'Hello World')())"</code>
