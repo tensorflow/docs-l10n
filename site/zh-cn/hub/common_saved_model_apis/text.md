@@ -236,4 +236,4 @@ encoder_outputs = encoder(encoder_inputs)
 
 ### 示例
 
-- Colab tutorial [Solve GLUE tasks using BERT on TPU](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb).
+- Colab 教程[在 TPU 上使用 BERT 解决 GLUE 任务](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb)。
