@@ -14,19 +14,19 @@ TensorFlow Lite のビルトイン演算子ライブラリがサポートする 
 
 - [演算子をテストしプロファイリングする。](#test-and-profile-your-operator)カスタム演算子のみをテストする場合は、カスタム演算子のみでモデルを作成し、[benchmark_model](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/benchmark/benchmark_model.cc) プログラムを使用することをお勧めします。
 
-Let’s walk through an end-to-end example of running a model with a custom operator `tf.atan` (named as `Atan`, refer to #create-a-tensorflow-model) which is supported in TensorFlow, but unsupported in TensorFlow Lite.
+では、カスタム演算子 `tf.atan`（`Atan` と名付けられています。TensorFlow モデルを作成するのセクションをご覧ください）を使ってモデルを実行するエンドツーエンドの例を見てみましょう。このカスタム演算子は TensorFlow ではサポートされていますが、TensorFlow Lite ではサポートされていません。
 
-Note: The `tf.atan` function is **not** a custom operator. It is a regular operator which is supported by both TensorFlow and TensorFlow Lite. But we **assume** that it is a custom operator in the following example in order to demonstrate a simple workflow.
+注意: `tf.atan` 関数はカスタム演算子では**ありません**。TensorFlow と TensorFlow Lite の両方でサポートされている通常の演算子ですが、単純なワークフローを実演するために、次の例ではカスタム演算子であると**仮定しています**。
 
 The TensorFlow Text operator is an example of a custom operator. See the <a href="https://tensorflow.org/text/guide/text_tf_lite" class="external"> Convert TF Text to TF Lite</a> tutorial for a code example.
 
-## Example: Custom `Atan` operator
+## 例: カスタム `Atan` 演算子
 
-Let’s walk through an example of supporting a TensorFlow operator that TensorFlow Lite does not have. Assume we are using the `Atan` operator and that we are building a very simple model for a function `y = atan(x + offset)`, where `offset` is trainable.
+TensorFlow Lite にはない TensorFlow 演算子をサポートする例を見てみましょう。`Atan` 演算子を使用し、関数 `y = atan(x + offset)` の非常に簡単なモデルを構築するとします。この関数の `offset` はトレーニング可能です。
 
 ### TensorFlow モデルを作成する
 
-The following code snippet trains a simple TensorFlow model. This model just contains a custom operator named `Atan`, which is a function `y = atan(x + offset)`, where `offset` is trainable.
+次は、単純な TensorFlow モデルをトレーニングするコードスニペットです。このモデルには、`Atan` というカスタム演算子のみが含まれています。このカスタム演算は関数 `y = atan(x + offset)` で、`offset` はトレーニング可能です。
 
 ```python
 import tensorflow as tf
@@ -78,14 +78,14 @@ error: 'tf.Atan' op is neither a custom op nor a flex op.
 tflite_model = converter.convert()
 </pre>
 
-At this point, if you run it with the default interpreter using commands such as follows:
+この時点では、以下のようなコマンドを使ってデフォルトのインタプリタで実行しようとすると:
 
 ```python
 interpreter = tf.lite.Interpreter(model_content=tflite_model)
 interpreter.allocate_tensors()
 ```
 
-You will still get the error:
+以下のようなエラーメッセージが発生します。
 
 ```none
 Encountered unresolved custom op: Atan.
@@ -93,7 +93,7 @@ Encountered unresolved custom op: Atan.
 
 ### 演算を作成して登録する
 
-すべての TensorFlow Lite 演算子（カスタムとビルトインの両方）は、次の 4 つの関数で構成される単純な Pure-C インターフェイスを使って定義されています。
+すべての TensorFlow Lite 演算子（カスタムとビルトインの両方）は、次の 4 つの関数で構成される単純な Pure C インターフェースを使って定義されています。
 
 ```c++
 typedef struct {
@@ -104,7 +104,7 @@ typedef struct {
 } TfLiteRegistration;
 ```
 
-`TfLiteContext`と<code>TfLiteNode</code>の詳細については、<a><code>common.h</code></a>をご覧ください。前者はエラー報告ファシリティと、すべてのテンソルを含むグローバルオブジェクトへのアクセスを提供し、後者は実装が入力と出力にアクセスできるようにします。
+`TfLiteContext` と <code>TfLiteNode</code> の詳細については、<a><code>common.h</code></a> をご覧ください。前者はエラー報告ファシリティと、すべてのテンソルを含むグローバルオブジェクトへのアクセスを提供し、後者は実装が入力と出力にアクセスできるようにします。
 
 インタプリタがモデルを読み込む際、グラフの各ノード当たり`init()`が一度呼び出されます。つまりグラフで演算が 2 回以上使用される場合、`init()`は 2 回以上呼び出されることになります。カスタム演算子の場合、パラメータ名を値にマッピングする flexbuffer が含まれる構成バッファが提供されます。このバッファは、インタプリタが演算子のパラメータをパースするため、組み込み演算子の場合は空です。ステートが必要なカーネル実装はここで初期化して、オーナーシップを呼び出し元に移譲します。各 `init()`呼び出しには`free()`への対応する呼び出しがあるため、実装は、`init()`に割り当てられていた可能性のあるバッファを利用できるようになります。
 
@@ -181,7 +181,7 @@ TfLiteRegistration* Register_ATAN() {
 }
 ```
 
-When initializing the `OpResolver`, add the custom op into the resolver (see below for an example). This will register the operator with Tensorflow Lite so that TensorFlow Lite can use the new implementation. Note that the last two arguments in `TfLiteRegistration` correspond to the `AtanPrepare` and `AtanEval` functions you defined for the custom op. If you used `AtanInit` and `AtanFree` functions to initialize variables used in the op and to free up space, respectively, then they would be added to the first two arguments of `TfLiteRegistration`; those arguments are set to `nullptr` in this example.
+`OpResolver` を初期化する際に、カスタム演算子をレゾルバに追加します（以下の例をご覧ください）。これにより、演算子は TensorFlow Lite に登録され、TensorFlow Lite で新しい実装として使用できるようになります。`TfLiteRegistration` の最後の 2 つの引数は、カスタム演算子に定義した `AtanPrepare` と `AtanEval` 関数に対応しています。`AtanInit` と `AtanFree` 関数を使用して、それぞれ演算子に使用される変数を初期化して容量を解放すると、`TfLiteRegistration` の最初の 2 つの引数に追加されます。この例ではこれらの引数は `nullptr` に設定されます。
 
 ### カーネルライブラリで演算子を登録する
 
@@ -212,13 +212,13 @@ resolver.AddCustom("Atan", Register_ATAN());
 
 組み込み演算子のセットが大きすぎる場合、演算子の特定のサブセットに基づいて、新しい`OpResolver`をコード生成することができます。おそらく特定のモデルに含まれる演算子のみが含まれます。これが、TensorFlow の選択的登録に相当するものです（また、この単純なバージョンは、`tools`ディレクトリに提供されています）。
 
-If you want to define your custom operators in Java, you would currently need to build your own custom JNI layer and compile your own AAR [in this jni code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/nativeinterpreterwrapper_jni.cc). Similarly, if you wish to define these operators available in Python you can place your registrations in the [Python wrapper code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc).
+カスタム演算を Java で定義する場合、現時点では、独自のカスタム JNI レイヤーを構築し、[この jni コードに](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/nativeinterpreterwrapper_jni.cc)独自の AAR をコンパイルする必要があります。同様に、Python でこれらの演算を定義する場合、[Python ラッパーコード](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc)に登録を配置することができます。
 
 上記に類似するプロセスは、単一の演算子ではなく一連の演算子をサポートするために使用することができます。必要な数の`AddCustom`演算子を追加してください。また、`BuiltinOpResolver`を使用することで、`AddBuiltin`を使用して、組み込みの実装をオーバーライドできます。
 
 ### 演算子をテストしてプロファイリングする
 
-To profile your op with the TensorFlow Lite benchmark tool, you can use the [benchmark model tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#tflite-model-benchmark-tool) for TensorFlow Lite. For testing purposes, you can make your local build of TensorFlow Lite aware of your custom op by adding the appropriate `AddCustom` call (as show above) to [register.cc](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/core/kernels/register.cc)
+TensorFlow Lite のベンチマークツールで演算子をプロファイリングするには、TensorFlow Lite 用の[ベンチマークモデルツール](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#tflite-model-benchmark-tool)を使用できます。テスト目的により、該当する `AddCustom` 呼び出しを（上記に示すとおり）[register.cc](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/core/kernels/register.cc) に追加すれば、TensorFlow Lite のローカルビルドにカスタム演算子を認識させることができます。
 
 ## ベストプラクティス
 
