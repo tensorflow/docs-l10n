@@ -14,36 +14,38 @@ TensorFlow Lite 내장 연산자 라이브러리는 제한된 수의 TensorFlow 
 
 - [연산자를 테스트하고 프로파일링합니다.](#test-and-profile-your-operator) 사용자 정의 연산자만 테스트하려면 사용자 정의 연산자만 사용하여 모델을 만들고 [benchmark_model](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/benchmark/benchmark_model.cc) 프로그램을 사용하는 것이 가장 좋습니다.
 
-TensorFlow에서는 지원되지만 TensorFlow Lite에서는 지원되지 않는 사용자 정의 연산자 `tf.sin`(`Sin`으로 명명됨, #create-a-tensorflow-model 참조)을 사용하여 모델을 실행하는 엔드 투 엔드 예제를 살펴보겠습니다.
+Let’s walk through an end-to-end example of running a model with a custom operator `tf.atan` (named as `Atan`, refer to #create-a-tensorflow-model) which is supported in TensorFlow, but unsupported in TensorFlow Lite.
 
-참고: 실제로 `tf.sin`은 사용자 정의 연산자가 **아닙니다**. TensorFlow와 TensorFlow Lite에서 모두 지원하는 정규 연산자입니다. 그러나 간단한 워크플로를 보여주기 위해 다음 예제에서는 이를 사용자 정의 연산자라고 **가정**합니다.
+Note: The `tf.atan` function is **not** a custom operator. It is a regular operator which is supported by both TensorFlow and TensorFlow Lite. But we **assume** that it is a custom operator in the following example in order to demonstrate a simple workflow.
 
-## 예: 사용자 정의 `Sin` 연산자
+TensorFlow Text 연산자는 사용자 정의 연산자의 한 예입니다. 코드 예제의 경우 <a href="https://tensorflow.org/text/guide/text_tf_lite" class="external">TF Text에서 TF Lite로 변환</a> 튜토리얼을 참조하세요.
 
-TensorFlow Lite에 없는 TensorFlow 연산자를 지원하는 예를 살펴보겠습니다. `Sin` 연산자를 사용하고 `offset`의 훈련 가능한 함수 `y = sin(x + offset)`에 대한 매우 간단한 모델을 빌드한다고 가정합니다.
+## Example: Custom `Atan` operator
+
+Let’s walk through an example of supporting a TensorFlow operator that TensorFlow Lite does not have. Assume we are using the `Atan` operator and that we are building a very simple model for a function `y = atan(x + offset)`, where `offset` is trainable.
 
 ### TensorFlow 모델 만들기
 
-다음 코드 조각은 간단한 TensorFlow 모델을 훈련합니다. 이 모델에는 함수 `y = sin(x + offset)`인 사용자 정의 연산자 `Sin`만 포함되어 있으며, 여기서 `offset`을 훈련할 수 있습니다.
+The following code snippet trains a simple TensorFlow model. This model just contains a custom operator named `Atan`, which is a function `y = atan(x + offset)`, where `offset` is trainable.
 
 ```python
 import tensorflow as tf
 
 # Define training dataset and variables
 x = [-8, 0.5, 2, 2.2, 201]
-y = [-0.6569866 ,  0.99749499,  0.14112001, -0.05837414,  0.80641841]
+y = [-1.4288993, 0.98279375, 1.2490457, 1.2679114, 1.5658458]
 offset = tf.Variable(0.0)
 
-# Define a simple model which just contains a custom operator named `Sin`
-@tf.function
-def sin(x):
-  return tf.sin(x + offset, name="Sin")
+# Define a simple model which just contains a custom operator named `Atan`
+@tf.function(input_signature=[tf.TensorSpec.from_tensor(tf.constant(x))])
+def atan(x):
+  return tf.atan(x + offset, name="Atan")
 
-  # Train model
+# Train model
 optimizer = tf.optimizers.Adam(0.01)
 def train(x, y):
     with tf.GradientTape() as t:
-      predicted_y = sin(x)
+      predicted_y = atan(x)
       loss = tf.reduce_sum(tf.square(predicted_y - y))
     grads = t.gradient(loss, [offset])
     optimizer.apply_gradients(zip(grads, [offset]))
@@ -57,33 +59,36 @@ print("The predicted offset is:", offset.numpy())
 
 ```python
 The actual offset is: 1.0
-The predicted offset is: 1.0000001
+The predicted offset is: 0.99999905
 ```
 
 이 시점에서 기본 변환기 플래그를 사용하여 TensorFlow Lite 모델을 생성하려고 하면 다음 오류 메시지가 표시됩니다.
 
 ```none
 Error:
-Some of the operators in the model are not supported by the standard TensorFlow
-Lite runtime...... Here is
-a list of operators for which you will need custom implementations: Sin.
+error: 'tf.Atan' op is neither a custom op nor a flex op.
 ```
 
 ### TensorFlow Lite 모델로 변환하기
 
-아래와 같이 변환기 특성 `allow_custom_ops`를 설정하여 사용자 정의 연산자로 TensorFlow Lite 모델을 만듭니다.
+아래와 같이 변환기 속성 `allow_custom_ops`를 설정하여 사용자 정의 연산자로 TensorFlow Lite 모델을 만듭니다.
 
-<pre>converter = tf.lite.TFLiteConverter.from_concrete_functions([sin.get_concrete_function(x)], sin)
+<pre>converter = tf.lite.TFLiteConverter.from_concrete_functions([atan.get_concrete_function()], atan)
 &lt;b&gt;converter.allow_custom_ops = True&lt;/b&gt;
 tflite_model = converter.convert()
 </pre>
 
-이 시점에서 기본 인터프리터로 실행하면 다음 오류 메시지가 표시됩니다.
+At this point, if you run it with the default interpreter using commands such as follows:
+
+```python
+interpreter = tf.lite.Interpreter(model_content=tflite_model)
+interpreter.allocate_tensors()
+```
+
+You will still get the error:
 
 ```none
-Error:
-Didn't find custom operator for name 'Sin'
-Registration failed.
+Encountered unresolved custom op: Atan.
 ```
 
 ### 연산자를 생성하고 등록합니다.
@@ -132,7 +137,7 @@ namespace custom {
 TensorFlow Lite에서 op를 사용하려면 두 가지 함수(`Prepare` 및 `Eval`)를 정의하고 `TfLiteRegistration`을 구성하기만 하면 됩니다.
 
 ```cpp
-TfLiteStatus SinPrepare(TfLiteContext* context, TfLiteNode* node) {
+TfLiteStatus AtanPrepare(TfLiteContext* context, TfLiteNode* node) {
   using namespace tflite;
   TF_LITE_ENSURE_EQ(context, NumInputs(node), 1);
   TF_LITE_ENSURE_EQ(context, NumOutputs(node), 1);
@@ -150,13 +155,13 @@ TfLiteStatus SinPrepare(TfLiteContext* context, TfLiteNode* node) {
   return context->ResizeTensor(context, output, output_size);
 }
 
-TfLiteStatus SinEval(TfLiteContext* context, TfLiteNode* node) {
+TfLiteStatus AtanEval(TfLiteContext* context, TfLiteNode* node) {
   using namespace tflite;
-  const TfLiteTensor* input = GetInput(context, node,0);
-  TfLiteTensor* output = GetOutput(context, node,0);
+  const TfLiteTensor* input = GetInput(context, node, 0);
+  TfLiteTensor* output = GetOutput(context, node, 0);
 
-  float* input_data = input->data.f;
-  float* output_data = output->data.f;
+  float* input_data = GetTensorData<float>(input);
+  float* output_data = GetTensorData<float>(output);
 
   size_t count = 1;
   int num_dims = NumDimensions(input);
@@ -165,18 +170,18 @@ TfLiteStatus SinEval(TfLiteContext* context, TfLiteNode* node) {
   }
 
   for (size_t i=0; i<count; ++i) {
-    output_data[i] = sin(input_data[i]);
+    output_data[i] = atan(input_data[i]);
   }
   return kTfLiteOk;
 }
 
-TfLiteRegistration* Register_SIN() {
-  static TfLiteRegistration r = {nullptr, nullptr, SinPrepare, SinEval};
+TfLiteRegistration* Register_ATAN() {
+  static TfLiteRegistration r = {nullptr, nullptr, AtanPrepare, AtanEval};
   return &r;
 }
 ```
 
-`OpResolver`를 초기화할 때 사용자 정의 op를 resolver에 추가합니다(아래 예 참조). 그러면 TensorFlow Lite가 새 구현을 사용할 수 있도록 연산자가 Tensorflow Lite에 등록됩니다. `TfLiteRegistration`의 마지막 두 인수는 사용자 정의 op에 대해 정의한 `SinPrepare` 및 `SinEval` 함수에 해당합니다. `SinInit` 및 `SinFree` 함수를 사용하여 op에 사용된 변수를 초기화하고 공간을 확보한 경우, 이들 함수는 `TfLiteRegistration`의 처음 두 인수에 추가됩니다. 이 예제에서 이들 인수는 `nullptr`로 설정됩니다.
+When initializing the `OpResolver`, add the custom op into the resolver (see below for an example). This will register the operator with Tensorflow Lite so that TensorFlow Lite can use the new implementation. Note that the last two arguments in `TfLiteRegistration` correspond to the `AtanPrepare` and `AtanEval` functions you defined for the custom op. If you used `AtanInit` and `AtanFree` functions to initialize variables used in the op and to free up space, respectively, then they would be added to the first two arguments of `TfLiteRegistration`; those arguments are set to `nullptr` in this example.
 
 ### 커널 라이브러리에 연산자 등록하기
 
@@ -202,24 +207,24 @@ tflite::ops::builtin::BuiltinOpResolver resolver;
 위에서 만든 사용자 정의 op를 추가하려면 `AddOp`를 호출합니다(resolver를 `InterpreterBuilder`에 전달하기 전).
 
 ```c++
-resolver.AddCustom("Sin", Register_SIN());
+resolver.AddCustom("Atan", Register_ATAN());
 ```
 
-내장 연산자 세트가 너무 큰 것으로 여겨지면 주어진 연산자 하위 집합(보통은 주어진 모델에 포함된 연산자)을 바탕으로 새 `OpResolver`를 코드로 생성할 수 있습니다. 이는 TensorFlow의 선택적 등록과 동일하며 `tools` 디렉토리에서 간단한 버전을 사용할 수 있습니다.
+내장 연산자 세트가 너무 큰 것으로 여겨지면 주어진 연산자 하위 집합(보통은 주어진 모델에 포함된 연산자)을 바탕으로 새 `OpResolver`를 코드로 생성할 수 있습니다. 이는 TensorFlow의 선택적 등록과 동일하며 `tools` 디렉터리에서 간단한 버전을 사용할 수 있습니다.
 
-Java에서 사용자 정의 연산자를 정의하려면, 고유한 사용자 정의 JNI 레이어를 빌드하고 [이 jni 코드](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/builtin_ops_jni.cc)에서 자체 AAR을 컴파일해야 합니다. 마찬가지로, Python에서 사용할 수 있는 이러한 연산자를 정의하려면 [Python 래퍼 코드](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc)에 등록할 수 있습니다.
+If you want to define your custom operators in Java, you would currently need to build your own custom JNI layer and compile your own AAR [in this jni code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/java/src/main/native/nativeinterpreterwrapper_jni.cc). Similarly, if you wish to define these operators available in Python you can place your registrations in the [Python wrapper code](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc).
 
 단일 연산자 대신 일련의 연산자를 지원하는 경우에도 위와 유사한 프로세스를 따를 수 있습니다. 추가할 수 있는 `AddCustom` 연산자에 제한은 없습니다. 또한 `BuiltinOpResolver`를 사용하면 `AddBuiltin`을 통해 내장 구현을 재정의할 수도 있습니다.
 
 ### 연산자 테스트 및 프로파일링하기
 
-TensorFlow Lite 벤치마크 도구로 op를 프로파일링하려면 TensorFlow Lite용 [벤치마크 모델 도구](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#tflite-model-benchmark-tool)를 사용할 수 있습니다. 테스트 목적으로 [register.cc](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/kernels/register.cc)에 적절한 `AddCustom` 호출을 추가하여(위에 나타낸 바와 같이) TensorFlow Lite의 로컬 빌드가 사용자 정의 op를 인식하도록 할 수 있습니다.
+To profile your op with the TensorFlow Lite benchmark tool, you can use the [benchmark model tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark#tflite-model-benchmark-tool) for TensorFlow Lite. For testing purposes, you can make your local build of TensorFlow Lite aware of your custom op by adding the appropriate `AddCustom` call (as show above) to [register.cc](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/core/kernels/register.cc)
 
 ## 모범 사례
 
 1. 메모리 할당 및 할당 해제를 신중하게 최적화하세요. `Prepare`에서 메모리를 할당하는 것이 `Invoke`보다 효율적이며, 루프 전에 메모리를 할당하는 것이 매번 반복하는 것보다 낫습니다. Malloc을 직접 수행하지 말고 임시 텐서 데이터를 사용하세요(항목 2 참조). 복사하는 대신 되도록 포인터/참조를 사용하세요.
 
-2. 전체 연산 중에 데이터 구조가 유지되는 경우, 임시 텐서를 사용하여 메모리를 미리 할당하는 것이 좋습니다. 다른 함수에서 텐서 인덱스를 참조하려면 OpData 구조체를 사용해야 할 수 있습니다. [컨볼루션 커널](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/kernels/conv.cc)의 예를 참조하세요. 다음은 샘플 코드입니다.
+2. 전체 연산 중에 데이터 구조가 유지되는 경우, 임시 텐서를 사용하여 메모리를 미리 할당하는 것이 좋습니다. 다른 함수에서 텐서 인덱스를 참조하려면 OpData 구조체를 사용해야 할 수 있습니다. [컨볼루션 커널](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/kernels/conv.cc)의 예를 참조하세요. 다음은 (코드) 조각 샘플 코드입니다.
 
     ```
     auto* op_data = reinterpret_cast<OpData*>(node->user_data);
@@ -233,7 +238,7 @@ TensorFlow Lite 벤치마크 도구로 op를 프로파일링하려면 TensorFlow
 
 3. 낭비되는 메모리가 너무 많지 않은 경우, 실행을 반복할 때마다 동적으로 할당된 `std::vector`를 사용하는 것보다 고정된 정적 크기 배열(또는 `Resize`의 미리 할당된 `std::vector`)을 사용하는 것이 좋습니다.
 
-4. 바이너리 크기에 영향을 미치므로 아직 존재하지 않는 표준 라이브러리 컨테이너 템플릿을 인스턴스화하지 마세요. 예를 들어, 다른 커널에 존재하지 않는 `std::map`이 연산에 필요한 경우, 직접 인덱싱 매핑과 함께 `std::vector`를 사용하면 바이너리 크기를 작게 유지하면서 동작할 수 있습니다. 정보를 얻거나 요청하기 위해 다른 커널이 무엇을 사용하는지 확인하세요.
+4. Avoid instantiating standard library container templates that don't already exist, because they affect binary size. For example, if you need a `std::map` in your operation that doesn't exist in other kernels, using a `std::vector` with direct indexing mapping could work while keeping the binary size small. See what other kernels use to gain insight (or ask).
 
 5. `malloc`이 반환하는 메모리에 대한 포인터를 확인합니다. 이 포인터가 `nullptr`이면 해당 포인터를 사용하여 연산을 수행하지 않아야 합니다. 함수에서 `malloc`을 수행하고 오류 종료가 발생하면 종료하기 전에 메모리 할당을 해제하세요.
 
