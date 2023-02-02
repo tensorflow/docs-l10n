@@ -481,6 +481,41 @@ interpreter.allocate_tensors()
 
 ヒント: Python ターミナルで`help(tf.lite.Interpreter)`を実行すると、インタプリタの詳細なドキュメントを閲覧できます。
 
+## 動的形状モデルで推論を実行する
+
+動的入力形状でモデルを実行する場合は、推論を実行する前に、*入力形状のサイズを変更*します。そうしない場合は、TensorFlow モデルの `None` 形状が、TFLite モデルで `1` のプレースホルダーに置き換わってしまいます。
+
+以下の例は、別の言語で推論を実行する前に、入力形状のサイズを変更する方法を示します。すべての例は、形状が `[1/None, 10]` に定義されており、サイズを`[3, 10]` に変更する必要があることが前提となっています。
+
+<section class="tabs">
+</section>
+
+###### C++ {.new-tab}
+
+```c++
+// Resize input tensors before allocate tensors
+interpreter->ResizeInputTensor(/*tensor_index=*/0, std::vector<int>{3,10});
+interpreter->AllocateTensors();
+```
+
+###### Python {.new-tab}
+
+```python
+# Load the TFLite model in TFLite Interpreter
+interpreter = tf.lite.Interpreter(model_path=TFLITE_FILE_PATH)
+  
+# Resize input shape for dynamic shape model and allocate tensor
+interpreter.resize_tensor_input(interpreter.get_input_details()[0]['index'], [3, 10])
+interpreter.allocate_tensors()
+  
+# Get input and output tensors.
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+```
+
+
+
+
 ## サポートされている演算
 
 TensorFlow Lite は、いくつかの制約を伴う TensorFlow のサブセットをサポートしています。演算と制限の全リストについては、[TF Lite 演算のページ](https://www.tensorflow.org/mlir/tfl_ops)をご覧ください。
