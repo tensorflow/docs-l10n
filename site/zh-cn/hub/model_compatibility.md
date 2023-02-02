@@ -24,23 +24,19 @@ TF Hub 提供了可重用的模型，可以在 TensorFlow 程序中重新加载�
   </tr>
   <tr>
     <td>加载/推断</td>
-    <td>完全支持（<a href="https://www.tensorflow.org/hub/tf1_hub_module#using_a_module">完整的 TF1 Hub 格式加载指南</a>）      <pre style="font-size: 12px;" lang="python">m = hub.Module(handle) outputs = m(inputs)</pre>
-</td>
+    <td>完全支持（<a href="https://www.tensorflow.org/hub/tf1_hub_module#using_a_module">完整的 TF1 Hub 格式加载指南</a>）      <pre style="font-size: 12px;" lang="python">m = hub.Module(handle) outputs = m(inputs)</pre> </td>
     <td>建议使用 hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
 outputs = m.signatures["sig"](inputs)</pre>       或 hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle, signature="sig")
-outputs = m(inputs)</pre>
-</td>
+outputs = m(inputs)</pre> </td>
   </tr>
   <tr>
     <td>微调</td>
-    <td>完全支持（<a href="https://www.tensorflow.org/hub/tf1_hub_module#for_consumers">完整的 TF1 Hub 格式微调指南</a>）<pre style="font-size: 12px;" lang="python">m = hub.Module(handle, trainable=True, tags=["train"]*is_training) outputs = m(inputs)</pre> <div style="font-style: italic; font-size: 14px"> 注：不需要单独的训练计算图的模块没有训练标签。</div>
-</td>
+    <td>完全支持（<a href="https://www.tensorflow.org/hub/tf1_hub_module#for_consumers">完整的 TF1 Hub 格式微调指南</a>）<pre style="font-size: 12px;" lang="python">m = hub.Module(handle, trainable=True, tags=["train"]*is_training) outputs = m(inputs)</pre> <div style="font-style: italic; font-size: 14px"> 注：不需要单独的训练计算图的模块没有训练标签。</div> </td>
     <td style="text-align: center">       不受支持</td>
   </tr>
   <tr>
     <td>创建</td>
-    <td>完全支持（请参阅<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">完整的 TF1 Hub 格式创建指南</a>）<br> <div style="font-style: italic; font-size: 14px"> 注：TF1 Hub 格式适用于 TF1，而在 TF2 中仅部分受支持。请考虑创建 TF2 SavedModel。      </div>
-</td>
+    <td>完全支持（请参阅<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">完整的 TF1 Hub 格式创建指南</a>）<br> <div style="font-style: italic; font-size: 14px"> 注：TF1 Hub 格式适用于 TF1，而在 TF2 中仅部分受支持。请考虑创建 TF2 SavedModel。      </div> </td>
     <td style="text-align: center">不受支持</td>
   </tr>
 </table>
@@ -60,25 +56,21 @@ TF1.15 之前的版本不支持。
   </tr>
   <tr>
     <td>加载/推断</td>
-    <td>       使用 hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre>       或 hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre>
-</td>
+    <td>       使用 hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre>       或 hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre> </td>
     <td> 完全支持（<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">完整的 TF2 SavedModel 加载指南）。使用 hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
 outputs = m(inputs)</pre>       或 hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
-outputs = m(inputs)</pre></a>
-</td>
+outputs = m(inputs)</pre></a> </td>
   </tr>
   <tr>
     <td>微调</td>
-    <td>当通过 Model.fit() 训练或在 Estimator（model_fn 根据<a href="https://www.tensorflow.org/guide/migrate#using_a_custom_model_fn">自定义 model_fn 指南</a>封装模型）中进行训练时，在 tf.keras.Model 中使用的 hub.KerasLayer 支持。       <br><div style="font-style: italic; font-size: 14px;"> 注：hub.KerasLayer <span style="font-weight: bold;">不会</span>像旧 tf.compat.v1.layers 或 hub.Module API 一样填充计算图集合。</div>
-</td>
+    <td>当通过 Model.fit() 训练或在 Estimator（model_fn 根据<a href="https://www.tensorflow.org/guide/migrate#using_a_custom_model_fn">自定义 model_fn 指南</a>封装模型）中进行训练时，在 tf.keras.Model 中使用的 hub.KerasLayer 支持。       <br><div style="font-style: italic; font-size: 14px;"> 注：hub.KerasLayer <span style="font-weight: bold;">不会</span>像旧 tf.compat.v1.layers 或 hub.Module API 一样填充计算图集合。</div> </td>
     <td>       完全支持（<a href="https://www.tensorflow.org/hub/tf2_saved_model#for_savedmodel_consumers">完整的 TF2 SavedModel 微调指南</a>）。      使用 hub.load：      <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
 outputs = m(inputs, training=is_training)</pre>       或 hub.KerasLayer：      <pre style="font-size: 12px;" lang="python">m =  hub.KerasLayer(handle, trainable=True)
-outputs = m(inputs)</pre>
-</td>
+outputs = m(inputs)</pre> </td>
   </tr>
   <tr>
     <td>创建</td>
-    <td>可以在兼容模式下调用 TF2 API <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save">tf.saved_model.save()</a>。</td>
+    <td>可以在兼容性模式下调用 TF2 API <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save">tf.saved_model.save()</a>。</td>
    <td>完全支持（请参阅<a href="https://www.tensorflow.org/hub/tf2_saved_model#creating_savedmodels_for_tf_hub">完整的 TF2 SavedModel 创建指南</a>）</td>
   </tr>
 </table>
