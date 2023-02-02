@@ -1,6 +1,6 @@
 # バックエンド
 
-[TOC]
+[目次]
 
 バックエンドは[コンパイラ](compilation.md#compiler)と[ランタイム](execution.md#runtime)の構成で、[コンテキスト](context.md#context)内で AST を[構築](tracing.md)、[コンパイル](compilation.md)、および[実行](execution.md)するために使用されます。つまり、バックエンドは、[AST](compilation.md#ast) を評価する環境を構築します。
 
