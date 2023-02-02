@@ -75,7 +75,7 @@ docker run option '--privileged=true'
 
 ![image](./images/tf_profiler/overview_page.png)
 
-- **Performance Summary**: モデルのパフォーマンスの概要が表示されます。パフォーマンスの概要は、次の 2 つの部分に分かれています。
+- **パフォーマンスの概要**: モデルのパフォーマンスの概要が表示されます。パフォーマンスの概要は、次の 2 つの部分に分かれています。
 
     1. ステップ時間の内訳: 平均ステップ時間を、時間を消費した場所に応じて複数のカテゴリに分類しています。
 
@@ -86,11 +86,11 @@ docker run option '--privileged=true'
         - Host Compute Time: ホストの計算時間
         - Device to Device Time: デバイス間の通信時間
         - Device Compute Time: オンデバイスの計算時間
-        - All others, including Python overhead.
+        - Python のオーバーヘッドを含むその他すべての時間
 
-    2. Device compute precisions - Reports the percentage of device compute time that uses 16 and 32-bit computations.
+    2. デバイスの計算精度 - 16 ビットおよび 32 ビット計算を使用するデバイス演算時間の割合を報告します。
 
-- **Step-time Graph**: サンプリングされたすべてのステップのデバイスステップ時間（ミリ秒単位）のグラフを表示します。各ステップは、時間を費やしている箇所によって複数のカテゴリに（別々の色で）分かれています。赤い領域は、デバイスがホストからの入力データを待機してアイドル状態であったステップ時間の部分に対応しています。緑の領域は、デバイスが実際に動作していた時間の長さを示しています。
+- **ステップ時間グラフ**: サンプリングされたすべてのステップのデバイスステップ時間（ミリ秒単位）のグラフを表示します。各ステップは、時間を費やしている箇所によって複数のカテゴリに（別々の色で）分かれています。赤い領域は、デバイスがホストからの入力データを待機してアイドル状態であったステップ時間の部分に対応しています。緑の領域は、デバイスが実際に動作していた時間の長さを示しています。
 
 - **デバイスでの上位 10 個の TensorFlow 演算（例 GPU）**: 最も多くの時間が費やされたオンデバイスの演算が表示されます。
 
@@ -191,18 +191,18 @@ TensorFlow Stats ツールには、プロファイリングセッション中に
 
     - 子の演算を持つ演算がある場合:
 
-        - The total "accumulated" time of an op includes the time spent inside the child ops.
+        - 演算の合計「累積」時間には、子の演算内で費やされた時間が含まれています。
         - 演算の合計「自己」時間には、子の演算内で費やされた時間が含まれています。
 
     - 演算がホスト上で実行される場合:
 
-        - The percentage of the total self-time on device incurred by the op on will be 0.
-        - The cumulative percentage of the total self-time on device up to and including this op will be 0.
+        - 演算によって発生するデバイスの合計自己時間のパーセンテージは 0 になります。
+        - この演算までを含むデバイスの合計自己時間の累積パーセンテージは 0 になります。
 
     - 演算がデバイス上で実行される場合:
 
-        - The percentage of the total self-time on host incurred by this op will be 0.
-        - The cumulative percentage of the total self-time on host up to and including this op will be 0.
+        - この演算で発生するホストの合計自己時間の割合は 0 になります。
+        - この演算までを含むホストの合計自己時間の累積的な割合は 0 になります。
 
 円グラフとテーブルにアイドル時間を含めるか除外するかを選択できます。
 
@@ -268,7 +268,7 @@ Timeline ペインには、次の要素が含まれます。
 
 - 下のペインには、一意のカーネルと演算のペアごとに次のデータを含むテーブルが表示されます。
 
-    - A rank in descending order of total elapsed GPU duration grouped by kernel-op pair.
+    - カーネルと演算のペアでグループ化された合計経過 GPU 時間の順位（降順）
     - The name of the launched kernel.
     - The number of GPU registers used by the kernel.
     - The total size of shared (static + dynamic shared) memory used in bytes.
@@ -276,10 +276,10 @@ Timeline ペインには、次の要素が含まれます。
     - The grid dimensions expressed as `gridDim.x, gridDim.y, gridDim.z`.
     - 演算が[テンソルコア](https://www.nvidia.com/en-gb/data-center/tensor-cores/)を使用可能かどうか
     - カーネルにテンソルコア命令が含まれているかどうか
-    - The name of the op that launched this kernel.
-    - The number of occurrences of this kernel-op pair.
-    - The total elapsed GPU time in microseconds.
-    - The average elapsed GPU time in microseconds.
+    - このカーネルを起動した演算の名前
+    - このカーネルと演算のペアが発生した数
+    - 合計経過 GPU 時間（マイクロ秒）
+    - 平均経過 GPU 時間（マイクロ秒）
     - 最小経過 GPU 時間（マイクロ秒）
     - 最大経過 GPU 時間（マイクロ秒）
 
