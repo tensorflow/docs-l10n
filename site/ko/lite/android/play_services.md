@@ -105,9 +105,9 @@ TensorFlow Lite용 Play 서비스 API에 액세스하려면 앱 프로젝트 코
 dependencies {
 ...
     // Tensorflow Lite dependencies for Google Play services
-    implementation 'com.google.android.gms:play-services-tflite-java:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-java:16.0.1'
     // Optional: include Tensorflow Lite Support Library
-    implementation 'com.google.android.gms:play-services-tflite-support:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-support:16.0.1'
 ...
 }
 ```
@@ -319,7 +319,7 @@ Task API가 있는 GPU 대리자를 사용하려면 다음을 수행합니다.
 1. 프로젝트 종속성을 업데이트하여 Play 서비스에서 GPU 대리자를 사용하세요.
 
     ```
-    implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-gpu:16.1.0'
     ```
 
 2. `setEnableGpuDelegateSupport`로 GPU 대리자를 초기화합니다. 예를 들어, 다음을 통해 `TfLiteVision`의 GPU 대리자를 초기화할 수 있습니다.
@@ -388,7 +388,7 @@ Interpreter API가 있는 GPU 대리자를 사용하려면 다음을 수행합�
 1. 프로젝트 종속성을 업데이트하여 Play 서비스에서 GPU 대리자를 사용하세요.
 
     ```
-    implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
+    implementation 'com.google.android.gms:play-services-tflite-gpu:16.1.0'
     ```
 
 2. TFlite 초기화의 GPU 대리자 옵션을 활성화합니다.
@@ -420,18 +420,16 @@ Interpreter API가 있는 GPU 대리자를 사용하려면 다음을 수행합�
     <devsite-selector>
     <section>
       <h3>Kotlin</h3>
-        <pre class="prettyprint">
-              val interpreterOption = InterpreterApi.Options()
-               .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-               .addDelegateFactory(GpuDelegateFactory())
+        <pre class="prettyprint">        val interpreterOption = InterpreterApi.Options()
+             .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+             .addDelegateFactory(GpuDelegateFactory())
             </pre>
     </section>
     <section>
       <h3>Java</h3>
-        <pre class="prettyprint">
-              Options interpreterOption = InterpreterApi.Options()
-                .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-                .addDelegateFactory(new GpuDelegateFactory());
+        <pre class="prettyprint">        Options interpreterOption = InterpreterApi.Options()
+              .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+              .addDelegateFactory(new GpuDelegateFactory());
             </pre>
     </section>
     </devsite-selector>
@@ -462,7 +460,7 @@ Google Play 서비스의 TensorFlow Lite는 다음과 같은 제한 사항이 �
 
 ## 지원 및 피드백 {:#support}
 
-TensorFlow Issue Tracker를 통해 피드백을 제공하고 지원을 받을 수 있습니다. Google Play 서비스의 TensorFlow Lite용 [Issue 템플릿](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md)을 사용하여 문제 및 지원 요청을 보고하세요.
+You can provide feedback and get support through the TensorFlow Issue Tracker. Please report issues and support requests using the [Issue template](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md) for TensorFlow Lite in Google Play services.
 
 ## 서비스 약관 {:#tos}
 
