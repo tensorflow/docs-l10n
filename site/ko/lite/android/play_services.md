@@ -460,7 +460,7 @@ Google Play 서비스의 TensorFlow Lite는 다음과 같은 제한 사항이 �
 
 ## 지원 및 피드백 {:#support}
 
-You can provide feedback and get support through the TensorFlow Issue Tracker. Please report issues and support requests using the [Issue template](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md) for TensorFlow Lite in Google Play services.
+TensorFlow Issue Tracker를 통해 피드백을 제공하고 지원을 받을 수 있습니다. Google Play 서비스의 TensorFlow Lite용 [이슈 템플릿](https://github.com/tensorflow/tensorflow/issues/new?title=TensorFlow+Lite+in+Play+Services+issue&template=tflite-in-play-services.md)을 사용하여 문제 및 지원 요청을 보고하세요.
 
 ## 서비스 약관 {:#tos}
 
