@@ -93,7 +93,7 @@ TFDS は、シャードごとの正確なサンプル数を知る必要があり
     ]
     ```
 
-- この情報がない場合は、`compute_split_info.py` スクリプトを使用して（または独自のスクリプトに  `tfds.folder_dataset.compute_split_info` を使用して）その情報を計算できます。特定のディレクトリのすべてのシャードを読み取って情報を計算する beam パイプラインが起動します。
+- この情報がない場合は、`compute_split_info.py` スクリプトを使用して（または独自のスクリプトに `tfds.folder_dataset.compute_split_info` を使用して）その情報を計算できます。特定のディレクトリのすべてのシャードを読み取って情報を計算する beam パイプラインが起動します。
 
 ### メタデータファイルを追加する
 
@@ -131,7 +131,7 @@ tfds.folder_dataset.write_metadata(
 ```python
 builder = tfds.builder_from_directory('~/path/to/my_dataset/3.0.0/')
 
-# Metadata are avalailable as usual
+# Metadata are available as usual
 builder.info.splits['train'].num_examples
 
 # Construct the tf.data.Dataset pipeline
@@ -153,7 +153,7 @@ builder = tfds.builder_from_directories(builder_dirs=[
     '~/path/my_dataset/agent3/1.0.0/',
 ])
 
-# Metadata are avalailable as usual
+# Metadata are available as usual
 builder.info.splits['train'].num_examples
 
 # Construct the tf.data.Dataset pipeline
