@@ -8,14 +8,14 @@ TensorFlow Federated（TFF）を使用するための環境は、いくつかの
 
 ## `pip` を使用して TensorFlow Federated をインストールする
 
-### 1. Python 開発環境をインストールします。
+### 1. Python 開発環境をインストールする
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">sudo apt update</code>
 <code class="devsite-terminal">sudo apt install python3-dev python3-pip  # Python 3</code>
 </pre>
 
-### 2. 仮想環境を作成します。
+### 2. 仮想環境を作成する
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">python3 -m venv "venv"</code>
@@ -25,13 +25,13 @@ TensorFlow Federated（TFF）を使用するための環境は、いくつかの
 
 注意: 仮想環境を終了するには、`deactivate` を実行してください。
 
-### 3. リリースされている TensorFlow Federated Python パッケージをインストールします。
+### 3. リリースされている TensorFlow Federated Python パッケージをインストールする
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade tensorflow-federated</code>
 </pre>
 
-### 4. Tensorflow Federated をテストします。
+### 4. Tensorflow Federated をテストする
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">python -c "import tensorflow_federated as tff; print(tff.federated_computation(lambda: 'Hello World')())"</code>
@@ -53,18 +53,27 @@ TensorFlow Federated（TFF）を使用するための環境は、いくつかの
 <code class="devsite-terminal">sudo apt install python3-dev python3-pip  # Python 3</code>
 </pre>
 
-### 2. Bazel をインストールします。
+### 2. Bazel をインストールする
 
 [Bazel をインストール](https://docs.bazel.build/versions/master/install.html)します。これは、Tensorflow Federated をコンパイルするために使用するビルドツールです。
 
-### 3. TensorFlow Federated リポジトリを複製します。
+### 3. TensorFlow Federated リポジトリをクローンする
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">git clone https://github.com/tensorflow/federated.git</code>
 <code class="devsite-terminal">cd "federated"</code>
 </pre>
 
-### 4. TensorFlow Federated Python パッケージを構築します。
+### 4. 仮想環境を作成する
+
+<pre class="prettyprint lang-bsh">
+<code class="devsite-terminal">python3.9 -m venv "venv"</code>
+<code class="devsite-terminal">source "venv/bin/activate"</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install numpy</code>
+</pre>
+
+### 5. TensorFlow Federated Python パッケージをビルドする
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">mkdir "/tmp/tensorflow_federated"</code>
@@ -72,30 +81,36 @@ TensorFlow Federated（TFF）を使用するための環境は、いくつかの
     --output_dir="/tmp/tensorflow_federated"</code>
 </pre>
 
-### 5. 新規プロジェクトを作成します。
+### 6. 仮想環境を終了する
+
+<pre class="prettyprint lang-bsh">
+<code class="devsite-terminal">deactivate</code>
+</pre>
+
+### 7. 新しいプロジェクトを作成する
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">mkdir "/tmp/project"</code>
 <code class="devsite-terminal">cd "/tmp/project"</code>
 </pre>
 
-### 6. 仮想環境を作成します。
+### 8. 新しい仮想環境を作成する
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal">python3 -m venv "venv"</code>
+<code class="devsite-terminal">python3.9 -m venv "venv"</code>
 <code class="devsite-terminal">source "venv/bin/activate"</code>
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
 </pre>
 
 注意: 仮想環境を終了するには、`deactivate` を実行してください。
 
-### 7. TensorFlow Federated Python パッケージをインストールします。
+### 9. TensorFlow Federated Python パッケージをインストールする
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "/tmp/tensorflow_federated/"*".whl"</code>
 </pre>
 
-### 8. Tensorflow Federated をテストします。
+### 10. Tensorflow Federated をテストする
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">python -c "import tensorflow_federated as tff; print(tff.federated_computation(lambda: 'Hello World')())"</code>
