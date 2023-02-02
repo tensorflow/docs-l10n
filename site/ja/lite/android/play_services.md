@@ -329,12 +329,12 @@ Task API で GPU デリゲートを使用するには:
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">        TfLiteVision.initialize(context, TfLiteInitializationOptions.builder().setEnableGpuDelegateSupport(true).build())
-                </pre>
+            </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">        TfLiteVision.initialize(context, TfLiteInitializationOptions.builder().setEnableGpuDelegateSupport(true).build());
-                </pre>
+            </pre>
     </section>
     </devsite-selector>
     </div>
@@ -346,12 +346,12 @@ Task API で GPU デリゲートを使用するには:
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">        val baseOptions = BaseOptions.builder().useGpu().build()
-                </pre>
+            </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">        BaseOptions baseOptions = BaseOptions.builder().useGpu().build();
-                </pre>
+            </pre>
     </section>
     </devsite-selector>
     </div>
@@ -363,20 +363,20 @@ Task API で GPU デリゲートを使用するには:
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">        val options =
-                    ObjectDetectorOptions.builder()
-                        .setBaseOptions(baseOptions)
-                        .setMaxResults(1)
-                        .build()
-                </pre>
+                ObjectDetectorOptions.builder()
+                    .setBaseOptions(baseOptions)
+                    .setMaxResults(1)
+                    .build()
+            </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">        ObjectDetectorOptions options =
-                    ObjectDetectorOptions.builder()
-                        .setBaseOptions(baseOptions)
-                        .setMaxResults(1)
-                        .build();
-                </pre>
+                ObjectDetectorOptions.builder()
+                    .setBaseOptions(baseOptions)
+                    .setMaxResults(1)
+                    .build();
+            </pre>
     </section>
     </devsite-selector>
     </div>
@@ -398,18 +398,18 @@ Interpreter API で GPU デリゲートを使用するには:
     <section>
       <h3>Kotlin</h3>
         <pre class="prettyprint">        TfLite.initialize(context,
-                  TfLiteInitializationOptions.builder()
-                   .setEnableGpuDelegateSupport(true)
-                   .build())
-                </pre>
+              TfLiteInitializationOptions.builder()
+               .setEnableGpuDelegateSupport(true)
+               .build())
+            </pre>
     </section>
     <section>
       <h3>Java</h3>
         <pre class="prettyprint">        TfLite.initialize(context,
-                  TfLiteInitializationOptions.builder()
-                   .setEnableGpuDelegateSupport(true)
-                   .build());
-                </pre>
+              TfLiteInitializationOptions.builder()
+               .setEnableGpuDelegateSupport(true)
+               .build());
+            </pre>
     </section>
     </devsite-selector>
     </div>
@@ -420,19 +420,17 @@ Interpreter API で GPU デリゲートを使用するには:
     <devsite-selector>
     <section>
       <h3>Kotlin</h3>
-        <pre class="prettyprint">
-                  val interpreterOption = InterpreterApi.Options()
-                   .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-                   .addDelegateFactory(GpuDelegateFactory())
-                </pre>
+        <pre class="prettyprint">        val interpreterOption = InterpreterApi.Options()
+             .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+             .addDelegateFactory(GpuDelegateFactory())
+            </pre>
     </section>
     <section>
       <h3>Java</h3>
-        <pre class="prettyprint">
-                  Options interpreterOption = InterpreterApi.Options()
-                    .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
-                    .addDelegateFactory(new GpuDelegateFactory());
-                </pre>
+        <pre class="prettyprint">        Options interpreterOption = InterpreterApi.Options()
+              .setRuntime(TfLiteRuntime.FROM_SYSTEM_ONLY)
+              .addDelegateFactory(new GpuDelegateFactory());
+            </pre>
     </section>
     </devsite-selector>
     </div>
