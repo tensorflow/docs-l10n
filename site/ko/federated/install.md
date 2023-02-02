@@ -64,7 +64,7 @@ Tensorflow Federated를 컴파일하는 데 사용되는 빌드 도구인 [Bazel
 <code class="devsite-terminal">cd "federated"</code>
 </pre>
 
-### 4. Create a virtual environment.
+### 4. 가상 환경을 만듭니다.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">python3.9 -m venv "venv"</code>
@@ -73,7 +73,7 @@ Tensorflow Federated를 컴파일하는 데 사용되는 빌드 도구인 [Bazel
 <code class="devsite-terminal tfo-terminal-venv">pip install numpy</code>
 </pre>
 
-### 5. Build the TensorFlow Federated Python package.
+### 5. TensorFlow Federated Python 패키지를 빌드합니다.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">mkdir "/tmp/tensorflow_federated"</code>
@@ -81,20 +81,20 @@ Tensorflow Federated를 컴파일하는 데 사용되는 빌드 도구인 [Bazel
     --output_dir="/tmp/tensorflow_federated"</code>
 </pre>
 
-### 6. Exit the virtual environment
+### 6. 가상 환경을 종료합니다.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">deactivate</code>
 </pre>
 
-### 7. Create a new project.
+### 7. 새 프로젝트를 만듭니다.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">mkdir "/tmp/project"</code>
 <code class="devsite-terminal">cd "/tmp/project"</code>
 </pre>
 
-### 8. Create a new virtual environment.
+### 8. 새 가상 환경을 만듭니다.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">python3.9 -m venv "venv"</code>
@@ -102,15 +102,15 @@ Tensorflow Federated를 컴파일하는 데 사용되는 빌드 도구인 [Bazel
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
 </pre>
 
-Note: To exit the virtual environment, run `deactivate`.
+참고: 가상 환경을 종료하려면 `deactivate`를 실행하세요.
 
-### 9. Install the TensorFlow Federated Python package.
+### 9. TensorFlow Federated Python 패키지를 설치합니다.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "/tmp/tensorflow_federated/"*".whl"</code>
 </pre>
 
-### 10. Test Tensorflow Federated.
+### 10. Tensorflow Federated를 테스트합니다.
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">python -c "import tensorflow_federated as tff; print(tff.federated_computation(lambda: 'Hello World')())"</code>
