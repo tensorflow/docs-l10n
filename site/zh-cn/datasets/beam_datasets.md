@@ -34,7 +34,7 @@ GCS_BUCKET=gs://my-gcs-bucket
 echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
-如果您使用的是 `tfds-nightly`，并且自上次发布以来数据集进行了更新，请确保从 `tfds-nightly` 回送数据。
+If you're using `tfds-nightly`, make sure to echo from `tfds-nightly` in case the dataset has been updated since the last release.
 
 ```sh
 echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
@@ -53,13 +53,34 @@ tfds build $DATASET_NAME/$DATASET_CONFIG \
 
 ### 在本地生成
 
-要使用默认的 Apache Beam 运行程序在本地运行脚本，该命令与其他数据集的命令相同：
+To run your script locally using the [default Apache Beam runner](https://beam.apache.org/documentation/runners/direct/) (it must fit all data in memory), the command is the same as for other datasets:
 
 ```sh
 tfds build my_dataset
 ```
 
 **警告**：Beam 数据集可能非常**庞大**（数 TB 或更大），并且生成数据集会占用大量资源（在本地计算机上可能需要数周）。建议使用分布式环境生成数据集。请参阅 [Apache Beam 文档](https://beam.apache.org/)以查看受支持的运行时列表。
+
+### With Apache Flink
+
+To run the pipeline using [Apache Flink](https://flink.apache.org/) you can read the [official documentation](https://beam.apache.org/documentation/runners/flink). Make sure your Beam is compliant with [Flink Version Compatibility](https://beam.apache.org/documentation/runners/flink/#flink-version-compatibility)
+
+To make it easier to launch the script, it's helpful to define the following variables using the actual values for your Flink setup and the dataset you want to generate:
+
+```sh
+DATASET_NAME=<dataset-name>
+DATASET_CONFIG=<dataset-config>
+FLINK_CONFIG_DIR=<flink-config-directory>
+FLINK_VERSION=<flink-version>
+```
+
+To run on an embedded Flink cluster, you can launch the job using the command below:
+
+```sh
+tfds build $DATASET_NAME/$DATASET_CONFIG \
+  --beam_pipeline_options=\
+"runner=FlinkRunner,flink_version=$FLINK_VERSION,flink_conf_dir=$FLINK_CONFIG_DIR"
+```
 
 ### 使用自定义脚本生成
 
@@ -130,8 +151,7 @@ class DummyBeamDataset(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(16, 16, 1)),
             'label': tfds.features.ClassLabel(names=['dog', 'cat']),
