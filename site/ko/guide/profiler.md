@@ -2,7 +2,7 @@
 
 [TOC]
 
-이 가이드는 TensorFlow Profiler와 함께 이용할 수 있는 도구를 사용하여 TensorFlow 모델의 성능을 추적하는 방법을 보여줍니다. 모델이 호스트(CPU), 장치(GPU) 또는 호스트와 장치의 조합에서 어떻게 작동하는지 이해하는 방법을 배웁니다.
+이 가이드는 TensorFlow Profiler와 함께 이용할 수 있는 도구를 사용하여 TensorFlow 모델의 성능을 추적하는 방법을 보여줍니다. 모델이 호스트(CPU), 기기(GPU) 또는 호스트와 기기의 조합에서 어떻게 작동하는지 이해하는 방법을 배웁니다.
 
 프로파일링을 통해 모델에서 다양한 TensorFlow 연산(ops)이 사용하는 하드웨어 리소스(시간 및 메모리)를 이해하고 성능 병목 현상을 해결함으로써 궁극적으로 모델의 실행 속도를 높일 수 있습니다.
 
@@ -29,7 +29,7 @@ GPU를 프로파일링하려면 다음을 수행해야 합니다.
     grep libcupti
     ```
 
-경로에 CUPTI가 없으면, 다음을 실행하여 설치 디렉토리를 `$LD_LIBRARY_PATH` 환경 변수에 추가합니다.
+경로에 CUPTI가 없으면, 다음을 실행하여 설치 디렉터리를 `$LD_LIBRARY_PATH` 환경 변수에 추가합니다.
 
 ```shell
 export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
@@ -88,7 +88,7 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
         - 장치 내 컴퓨팅 시간
         - All others, including Python overhead.
 
-    2. 장치 컴퓨팅 정밀도 - 16bit 및 32bit 계산을 사용하는 장치 컴퓨팅 시간의 백분율을 보고합니다.
+    2. 기기 컴퓨팅 정밀도 - 16bit 및 32bit 계산을 사용하는 기기 컴퓨팅 시간의 백분율을 보고합니다.
 
 - **스텝-시간 그래프**: 샘플링한 모든 스텝에서 기기 스텝 시간(밀리 초)의 그래프를 표시합니다. 각 스텝은 시간이 사용된 여러 범주(서로 다른 색상)로 세분됩니다. 빨간색 영역은 기기가 호스트로부터 입력 데이터를 기다리는 동안 유휴 상태로 있었던 스텝 시간 부분에 해당합니다. 녹색 영역은 기기가 실제로 작동한 시간을 나타냅니다.
 
@@ -264,7 +264,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 이 도구는 두 개의 창에서 정보를 표시합니다.
 
-- The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
+- 상단 창에는 총 시간이 가장 높은 CUDA 커널을 보여주는 원형 차트가 표시됩니다.
 
 - 하단 창에 표시되는 표에서는 각 고유 커널-연산 쌍에 대한 다음 데이터가 표시됩니다.
 
@@ -272,10 +272,10 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
     - The name of the launched kernel.
     - 커널이 사용하는 GPU 레지스터의 수
     - 사용된 공유(정적 + 동적 공유) 메모리의 총 크기(바이트 단위)
-    - The block dimension expressed as `blockDim.x, blockDim.y, blockDim.z`.
-    - code0}gridDim.x, gridDim.y, gridDim.z로 표현된 그리드 차원
+    - `blockDim.x, blockDim.y, blockDim.z`로 표현된 블록 차원
+    - `gridDim.x, gridDim.y, gridDim.z`로 표현된 그리드 차원
     - 연산이 [Tensor Cores](https://www.nvidia.com/en-gb/data-center/tensor-cores/)를 사용할 수 있는지 여부
-    - Whether the kernel contains Tensor Core instructions.
+    - 커널에 Tensor Core 명령어가 포함되어 있는지 여부
     - 이 커널을 시작한 연산의 이름
     - 이 커널-연산 쌍의 발생 횟수
     - 총 GPU 경과 시간(마이크로 초)
@@ -320,7 +320,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 #### 메모리 타임라인 그래프
 
-이 섹션에는 메모리 사용량(GiB) 및 시간에 따른 조각화 비율(ms)이 표시됩니다.
+이 섹션에는 메모리 사용량(GiB) 플롯 및 시간에 따른 조각화 비율(ms)이 표시됩니다.
 
 ![image](./images/tf_profiler/memory_breakdown_table.png)
 
@@ -418,7 +418,7 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 
 ![image](./images/tf_profiler/memory_timeline_graph.png)
 
-이 섹션에서는 모든 호스트의 모든 입력 파이프라인에 대한 요약을 제공합니다. 일반적으로 하나의 입력 파이프라인이 있습니다. 배포 전략을 사용하는 경우, 프로그램의 `tf.data` 코드를 실행하는 하나의 호스트 입력 파이프라인과 호스트 입력 파이프라인에서 데이터를 검색하여 장치로 전송하는 여러 개의 장치 입력 파이프라인이 있습니다.
+이 섹션에서는 모든 호스트의 모든 입력 파이프라인에 대한 요약을 제공합니다. 일반적으로 하나의 입력 파이프라인이 있습니다. 배포 전략을 사용하는 경우, 프로그램의 `tf.data` 코드를 실행하는 하나의 호스트 입력 파이프라인과 호스트 입력 파이프라인에서 데이터를 검색하여 장치로 전송하는 여러 개의 기기 입력 파이프라인이 있습니다.
 
 각 입력 파이프라인에 대해 실행 시간의 통계가 표시됩니다. 호출이 50μs 이상 오래 걸리면 느린 것으로 간주됩니다.
 
@@ -522,7 +522,7 @@ TensorFlow 프로파일러는 TensorFlow 모델의 호스트 활동 및 GPU 추�
 
 ### 사용자 정의 훈련 루프 프로파일링
 
-TensorFlow 코드에서 사용자 지정 훈련 루프를 프로파일링하려면 `tf.profiler.experimental.Trace` API로 훈련 루프를 계측하여 프로파일러의 스텝 경계를 표시합니다.
+TensorFlow 코드에서 사용자 정의 훈련 루프를 프로파일링하려면 `tf.profiler.experimental.Trace` API로 훈련 루프를 계측하여 프로파일러의 스텝 경계를 표시합니다.
 
 `name` 인수는 스텝 이름에 대한 접두사로 사용되고 `step_num` 키워드 인수는 스텝 이름에 추가되며 `_r` 키워드 인수는 이 추적 이벤트가 프로파일러에 의해 스텝 이벤트로 처리되도록 합니다.
 
@@ -573,7 +573,7 @@ Profiler는 4가지 축을 따라 여러 가지 사용 사례를 다룹니다. �
 
 ### 입력 데이터 파이프라인의 최적화
 
-[#input_pipeline_analyzer]의 데이터를 사용하여 데이터 입력 파이프라인을 최적화하세요. 효율적인 데이터 입력 파이프라인은 장치 유휴 시간을 줄여 모델 실행 속도를 크게 향상시킬 수 있습니다. [tf.data API로 성능 향상](https://www.tensorflow.org/guide/data_performance) 가이드와 아래에서 자세히 설명하는 모범 사례를 도입하여 데이터 입력 파이프라인을 보다 효율적으로 만드세요.
+[#input_pipeline_analyzer]의 데이터를 사용하여 데이터 입력 파이프라인을 최적화하세요. 효율적인 데이터 입력 파이프라인은 기기 유휴 시간을 줄여 모델 실행 속도를 크게 향상시킬 수 있습니다. [tf.data API로 성능 향상](https://www.tensorflow.org/guide/data_performance) 가이드와 아래에서 자세히 설명하는 모범 사례를 도입하여 데이터 입력 파이프라인을 보다 효율적으로 만드세요.
 
 - 일반적으로, 순차적으로 실행할 필요가 없는 연산을 병렬화하면 데이터 입력 파이프라인을 크게 최적화할 수 있습니다.
 
@@ -603,7 +603,7 @@ Profiler는 4가지 축을 따라 여러 가지 사용 사례를 다룹니다. �
 
 GPU 대 CPU 비율이 높은 시스템과 같은 일부의 경우에 위의 모든 최적화가 CPU 주기의 제한으로 인해 발생하는 데이터 로더의 병목 현상을 제거하기에 충분하지 않을 수 있습니다.
 
-컴퓨터 비전 및 오디오 딥러닝 애플리케이션에 NVIDIA® GPU를 사용하는 경우, 데이터 로딩 라이브러리([DALI](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/examples/getting%20started.html))를 사용하여 데이터 파이프라인을 가속화하는 것이 좋습니다.
+컴퓨터 비전 및 오디오 딥 러닝 애플리케이션에 NVIDIA® GPU를 사용하는 경우, 데이터 로딩 라이브러리([DALI](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/examples/getting%20started.html))를 사용하여 데이터 파이프라인을 가속화하는 것이 좋습니다.
 
 지원되는 DALI 연산 목록은 [NVIDIA® DALI: 연산](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/supported_ops.html) 설명서를 확인하세요.
 
@@ -623,7 +623,7 @@ NVIDIA® GPU에서 더 작은 모델로 작업하는 경우, `tf.compat.v1.Confi
 
 ### 기기 성능 향상하기
 
-본 내용과 [GPU 성능 최적화 가이드](https://www.tensorflow.org/guide/gpu_performance_analysis)에 자세히 설명된 모범 사례에 따라 장치 내 TensorFlow 모델 성능을 최적화하세요.
+본 내용과 [GPU 성능 최적화 가이드](https://www.tensorflow.org/guide/gpu_performance_analysis)에 자세히 설명된 모범 사례에 따라 기기 내 TensorFlow 모델 성능을 최적화하세요.
 
 NVIDIA GPU를 사용하는 경우, 다음을 실행하여 GPU 및 메모리 사용률을 CSV 파일에 기록합니다.
 
@@ -637,7 +637,7 @@ memory.free,memory.used --format=csv
 
 채널 정보(예: 이미지)가 포함된 데이터로 작업하는 경우, 채널을 마지막으로 선호하도록 데이터 레이아웃 형식을 최적화하세요(NCHW보다 NHWC를 선호).
 
-마지막 채널 데이터 형식은 [Tensor Core](https://www.nvidia.com/en-gb/data-center/tensor-cores/) 활용도를 향상시키고 특히 AMP와 결합 시, 컨볼루션 모델에서 상당한 성능 향상을 제공합니다. NCHW 데이터 레이아웃은 여전히 Tensor Core에 의해 작동할 수 있지만 자동 전치 작업으로 인해 추가 오버헤드가 발생합니다.
+마지막 채널 데이터 형식은 [Tensor Core](https://www.nvidia.com/en-gb/data-center/tensor-cores/) 활용도를 향상시키고 특히 AMP와 결합 시, 컨볼루셔널 모델에서 상당한 성능 향상을 제공합니다. NCHW 데이터 레이아웃은 여전히 Tensor Core에 의해 작동할 수 있지만 자동 전치 작업으로 인해 추가 오버헤드가 발생합니다.
 
 `tf.keras.layers.Conv2D`, `tf.keras.layers.Conv3D` 및 `tf.keras.layers.RandomRotation`과 같은 레이어에 대해 `data_format="channels_last"`를 설정하여 NHWC 레이아웃을 선호하도록 데이터 레이아웃을 최적화할 수 있습니다.
 
@@ -645,7 +645,7 @@ memory.free,memory.used --format=csv
 
 #### L2 캐시 최대화하기
 
-NVIDIA® GPU로 작업할 때 훈련 루프 전에 아래 코드 스니펫을 실행하여 L2 가져오기 단위를 128바이트로 최대화합니다.
+NVIDIA® GPU로 작업할 때 훈련 루프 전에 아래 코드 조각을 실행하여 L2 가져오기 단위를 128바이트로 최대화합니다.
 
 ```python
 import ctypes
@@ -663,7 +663,7 @@ assert pValue.contents.value == 128
 
 GPU 스레드 모드는 GPU 스레드가 사용되는 방식을 결정합니다.
 
-전처리로 모든 GPU 스레드가 빼앗기지  않도록 스레드 모드를 `gpu_private`로 설정합니다. 그러면 훈련 중 커널 실행 지연이 줄어듭니다. GPU당 스레드 수를 설정할 수도 있습니다. 환경 변수를 사용하여 이러한 값을 설정합니다.
+전처리로 모든 GPU 스레드가 빼앗기지 않도록 스레드 모드를 `gpu_private`로 설정합니다. 그러면 훈련 중 커널 실행 지연이 줄어듭니다. GPU당 스레드 수를 설정할 수도 있습니다. 환경 변수를 사용하여 이러한 값을 설정합니다.
 
 ```python
 import os
@@ -676,19 +676,19 @@ os.environ['TF_GPU_THREAD_COUNT']='1'
 
 일반적으로, 배치 크기를 늘리고 모델을 확장하여 GPU를 더 잘 활용하고 더 높은 처리량을 얻습니다. 배치 크기를 늘리면 모델의 정확도가 변경되므로 학습률과 같은 하이퍼파라미터를 조정하여 목표 정확도를 충족하도록 모델을 확장해야 합니다.
 
-또한 `tf.config.experimental.set_memory_growth`를 사용하여 사용 가능한 모든 메모리가 메모리의 일부만 필요한 연산에 완전히 할당되는 것을 방지하기 위해 GPU 메모리가 증가하도록 허용합니다. 이를 통해 GPU 메모리를 사용하는 다른 프로세스를 동일한 장치에서 실행할 수 있습니다.
+또한 `tf.config.experimental.set_memory_growth`를 사용하여 사용 가능한 모든 메모리가 메모리의 일부만 필요한 연산에 완전히 할당되는 것을 방지하기 위해 GPU 메모리가 증가하도록 허용합니다. 이를 통해 GPU 메모리를 사용하는 다른 프로세스를 동일한 기기에서 실행할 수 있습니다.
 
 자세히 알아보려면 GPU 가이드에서 [GPU 메모리 증가 제한](https://www.tensorflow.org/guide/gpu#limiting_gpu_memory_growth) 지침을 확인하세요.
 
 #### 기타
 
-- GPU의 메모리 부족(OOM) 오류 없이 적합한 최대까지 훈련 미니 배치 크기(훈련 루프의 한 반복에서 장치당 사용되는 훈련 샘플의 수)를 늘립니다. 배치 크기를 늘리면 모델의 정확도에 영향을 미치므로 목표 정확도를 충족하도록 하이퍼파라미터를 조정하여 모델을 확장해야 합니다.
+- GPU의 메모리 부족(OOM) 오류 없이 적합한 최대까지 훈련 미니 배치 크기(훈련 루프의 한 반복에서 기기당 사용되는 훈련 샘플의 수)를 늘립니다. 배치 크기를 늘리면 모델의 정확도에 영향을 미치므로 목표 정확도를 충족하도록 하이퍼파라미터를 조정하여 모델을 확장해야 합니다.
 
-- 프로덕션 코드에서 텐서 할당 중 OOM 오류 보고를 비활성화합니다. `tf.compat.v1.RunOptions`에서 `report_tensor_allocations_upon_oom=False`를 설정합니다.
+- 운영 코드에서 텐서 할당 중 OOM 오류 보고를 비활성화합니다. `tf.compat.v1.RunOptions`에서 `report_tensor_allocations_upon_oom=False`를 설정합니다.
 
 - 컨볼루션 레이어가 있는 모델에서 배치 정규화를 사용하는 경우 편향 추가를 제거합니다. 배치 정규화로 인해 값이 평균만큼 이동하므로 일정한 편향 항을 가질 필요가 없습니다.
 
-- TF 통계를 사용하여 장치 내부 연산이 얼마나 효율적으로 실행되는지 확인합니다.
+- TF 통계를 사용하여 기기 내부 연산이 얼마나 효율적으로 실행되는지 확인합니다.
 
 - `tf.function`을 사용하여 계산을 수행하고 선택적으로 `jit_compile=True` 플래그를 지정합니다(`tf.function(jit_compile=True`). 자세히 알아보려면 [XLA tf.function 사용하기](https://www.tensorflow.org/xla/tutorials/jit_compile)로 이동하세요.
 
