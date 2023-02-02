@@ -38,7 +38,7 @@ outputs = m(inputs)</pre> </td>
   </tr>
   <tr>
     <td>생성</td>
-    <td> Fully supported (see <a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">complete TF1 Hub format creation guide</a>) <br> <div style="font-style: italic; font-size: 14px">       Note: The TF1 Hub format is geared towards TF1 and is only partially supported in TF2. Consider creating a TF2 SavedModel.       </div>
+    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">전체 TF1 Hub 형식 생성 가이드 참조</a>) <br><div style="font-style: italic; font-size: 14px"> 참고: TF1 Hub 형식은 TF1에 맞춰져 있으며 TF2에서는 부분적으로만 지원됩니다. TF2 SavedModel의 생성을 고려해 보세요.</div>
 </td>
     <td style="text-align: center">지원되지 않음</td>
   </tr>
@@ -62,9 +62,8 @@ TF1.15 이전에는 지원되지 않습니다.
     <td>       hub.load 사용     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
 outputs = m(inputs)</pre>       또는 hub.KerasLayer 사용      <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
 outputs = m(inputs)</pre> </td>
-    <td> Fully supported (<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">complete TF2 SavedModel loading guide</a>). Use either hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
-outputs = m(inputs)</pre>       or hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
-outputs = m(inputs)</pre>     </td>
+    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">전체 TF2 SavedModel 로딩 가이드</a>). 다음 중 하나를 사용하세요. hub.load <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre> 또는 hub.KerasLayer <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre>
+</td>
   </tr>
   <tr>
     <td>미세 조정</td>
@@ -74,7 +73,7 @@ outputs = m(inputs)</pre>     </td>
   </tr>
   <tr>
     <td>생성</td>
-    <td>      The TF2 API <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save">       tf.saved_model.save()</a> can be called from within compat mode.    </td>
+    <td>TF2 API <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save">tf.saved_model.save()</a>는 호환 모드 내에서 호출할 수 있습니다.</td>
    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf2_saved_model#creating_savedmodels_for_tf_hub">전체 TF2 SavedModel 생성 가이드</a> 참조)</td>
   </tr>
 </table>
