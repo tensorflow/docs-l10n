@@ -6,7 +6,7 @@ the projects listed below.
 
 Please submit translations from the GitLocalize project: https://gitlocalize.com/tensorflow/docs-l10n
 
-Updated: Sat Apr 22 07:00:39 UTC 2023
+Updated: Mon Apr 24 07:00:59 UTC 2023
 
 Projects and last commit:
 
@@ -22,14 +22,14 @@ Projects and last commit:
 - [js](https://github.com/tensorflow/tfjs-website/tree/master/docs) @ <a href='https://github.com/tensorflow/tfjs-website/commit/d2b7a6b5ef8db8c386e8e509f0600d9a3dd66c4c'><code>d2b7a6b5</code></a>
 - [keras_guides](https://github.com/tensorflow/docs/tree/snapshot-keras/site/en/guide/keras) @ <a href='https://github.com/tensorflow/docs/commit/1553ae1e4a149be71703e2ee60173b3d1e0e8c00'><code>1553ae1e</code></a>
 - [lattice](https://github.com/tensorflow/lattice/tree/master/docs) @ <a href='https://github.com/tensorflow/lattice/commit/7ea1727de1e0309eb324296bc445e0bf5c5c6d74'><code>7ea1727d</code></a>
-- [lite](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/7e4400fdbb90f56364fabcb86d71e6eb86381130'><code>7e4400fd</code></a>
-- [mlir](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/mlir/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/7e4400fdbb90f56364fabcb86d71e6eb86381130'><code>7e4400fd</code></a>
+- [lite](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/af92cf224ee8e7ed4d8f577f9e24cbeab86f1738'><code>af92cf22</code></a>
+- [mlir](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/mlir/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/af92cf224ee8e7ed4d8f577f9e24cbeab86f1738'><code>af92cf22</code></a>
 - [model_optimization](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/g3doc) @ <a href='https://github.com/tensorflow/model-optimization/commit/8b1a8013ea036377e1d978ba8ec6d55b0a46c4d0'><code>8b1a8013</code></a>
 - [neural_structured_learning](https://github.com/tensorflow/neural-structured-learning/tree/master/g3doc) @ <a href='https://github.com/tensorflow/neural-structured-learning/commit/34773c366a9e384cc32811b7b61acf5f0b54d9f5'><code>34773c36</code></a>
 - [probability](https://github.com/tensorflow/probability/tree/main/tensorflow_probability/g3doc) @ <a href='https://github.com/tensorflow/probability/commit/c57d0f4cc34502e238ee1d7d5f31b0278eb40e82'><code>c57d0f4c</code></a>
 - [probability_examples](https://github.com/tensorflow/probability/tree/main/tensorflow_probability/examples/jupyter_notebooks) @ <a href='https://github.com/tensorflow/probability/commit/c57d0f4cc34502e238ee1d7d5f31b0278eb40e82'><code>c57d0f4c</code></a>
 - [quantum](https://github.com/tensorflow/quantum/tree/master/docs) @ <a href='https://github.com/tensorflow/quantum/commit/7131f9e4d2d289e51f9705161b29c45159da1921'><code>7131f9e4</code></a>
 - [tensorboard](https://github.com/tensorflow/tensorboard/tree/master/docs) @ <a href='https://github.com/tensorflow/tensorboard/commit/8e852e5dc28231cab29218ea39d3a02e7fa82cd3'><code>8e852e5d</code></a>
-- [tfx](https://github.com/tensorflow/tfx/tree/master/docs) @ <a href='https://github.com/tensorflow/tfx/commit/29b40a2352584086222d350aefd308dd35a4ec04'><code>29b40a23</code></a>
-- [xla](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/xla/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/7e4400fdbb90f56364fabcb86d71e6eb86381130'><code>7e4400fd</code></a>
+- [tfx](https://github.com/tensorflow/tfx/tree/master/docs) @ <a href='https://github.com/tensorflow/tfx/commit/82b8284a3a639192454a3df6b0f8de12feb5bd91'><code>82b8284a</code></a>
+- [xla](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/compiler/xla/g3doc) @ <a href='https://github.com/tensorflow/tensorflow/commit/af92cf224ee8e7ed4d8f577f9e24cbeab86f1738'><code>af92cf22</code></a>
 
