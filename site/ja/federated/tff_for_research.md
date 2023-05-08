@@ -42,7 +42,7 @@ TensorFlow の連合学習データセットは、連合学習で解決できる
 
 ## 高性能シミュレーション
 
-While the wall-clock time of an FL *simulation* is not a relevant metric for evaluating algorithms (as simulation hardware isn't representative of real FL deployment environments), being able to run FL simulations quickly is critical for research productivity. Hence, TFF has invested heavily in providing high-performance single and multi-machine runtimes. Documentation is under development, but for now see the instructions on [TFF simulations with accelerators](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators), and instructions on [setting up simulations with TFF on GCP](https://www.tensorflow.org/federated/gcp_setup). The high-performance TFF runtime is enabled by default.
+FL *シミュレーション*の実時間は、アルゴリズムを評価するための適切な指標ではありませんが（シミュレーションハードウェアは実際の連合学習デプロイメント環境を表していないため）、連合学習シミュレーションをすばやく実行できることは、研究の生産性にとって重要です。そのため、TFF は単一および複数のマシンで高性能なランタイムを提供するために多額の投資を行ってきました。現在、ドキュメントは開発中ですが、[アクセラレータを使用した TFF シミュレーション](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators)チュートリアルと [ GCP で TFF を使用したシミュレーションを設定する](https://www.tensorflow.org/federated/gcp_setup)手順を参照してください。高性能 TFF ランタイムはデフォルトで有効になっています。
 
 ## さまざまな研究分野の TFF
 
