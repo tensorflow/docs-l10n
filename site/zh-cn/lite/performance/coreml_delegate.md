@@ -250,7 +250,7 @@ Core ML 委托支持以下运算。
 
 ## 常见问题解答
 
-- Does CoreML delegate support fallback to CPU if a graph contains unsupported ops?
+- 如果计算图包含不受支持的运算，CoreML 委托支持会回退到 CPU 吗？
     - 会
 - CoreML 委托可以在 iOS 模拟器上工作吗？
     - 可以。该库包括 x86 和 x86_64 目标，因此，它可以在模拟器上运行，但是性能不会高于 CPU。
