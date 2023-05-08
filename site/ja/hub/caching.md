@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2021-01-28' } *-->
+<!--* freshness: { owner: 'wgierke' reviewed: '2023-02-27' } *-->
 
 # TF Hub からダウンロードしたモデルのキャッシュ
 
@@ -54,3 +54,5 @@ load_options =
 tf.saved_model.LoadOptions(experimental_io_device='/job:localhost')
 reloaded_model = hub.load("https://tfhub.dev/...", options=load_options)
 ```
+
+**注意:** 有効なハンドルについての詳細は、[こちら](tf2_saved_model.md#model_handles)をご覧ください。
