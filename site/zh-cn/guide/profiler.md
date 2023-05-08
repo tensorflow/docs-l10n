@@ -88,7 +88,7 @@ Profiler 提供了多种工具来帮助您进行性能分析：
         - 设备端计算时间。
         - 所有其他时间，包括 Python 开销。
 
-    2. Device compute precisions - Reports the percentage of device compute time that uses 16 and 32-bit computations.
+    2. 设备计算精度 - 报告使用 16 位和 32 位计算的设备计算时间的百分比
 
 - **Step-time Graph**：显示所有采样步骤中的设备单步用时图（以毫秒为单位）。每个步骤分为多个类别（以不同颜色标识）。红色区域对应设备闲置等待主机的输入数据所需的单步用时部分。绿色区域显示设备的实际工作时长。
 
@@ -240,10 +240,10 @@ Timeline 窗格包含以下元素：
 
 Trace Viewer 包含以下版块：
 
-- **One section for each device node**, labeled with the number of the device chip and the device node within the chip (for example, `/device:GPU:0 (pid 0)`). Each device node section contains the following tracks:
+- **每个设备节点一个版块**，使用设备芯片编号和芯片内的设备节点进行标记（例如，`/device:GPU:0 (pid 0)`）。每个节点版块都包含以下轨道：
     - **Step**：显示在设备上运行的训练步骤的持续时间
     - **TensorFlow Ops**：显示在设备上执行的运算
-    - **XLA Ops**: Shows [XLA](https://www.tensorflow.org/xla/) operations (ops) that ran on the device if XLA is the compiler used (each TensorFlow op is translated into one or several XLA ops. The XLA compiler translates the XLA ops into code that runs on the device).
+    - **XLA Ops** - 如果使用的编译器是 XLA，则显示在设备上运行的 [XLA](https://www.tensorflow.org/xla/) 运算（每个 TensorFlow 运算都会转换成一个或多个 XLA 运算。XLA 编译器可以将 XLA 运算转换成在设备上运行的代码）。
 - **用于在主机的 CPU 上运行的线程的版块**，标有 **Host Threads**。该版块为每个 CPU 线程包含一个轨道。请注意，您可以忽略显示的信息和版块标签。
 
 ##### 事件
@@ -264,7 +264,7 @@ Trace Viewer 还可以显示您的 TensorFlow 程序中 Python 函数调用的�
 
 该工具在两个窗格中显示信息：
 
-- The upper pane displays a pie chart which shows the CUDA kernels that have the highest total time elapsed.
+- 上部窗格显示了一个饼图，其中所示为经过的总时间最长的 CUDA 内核
 
 - 下部窗格显示了一个表，其中包含每个内核-运算对的以下数据：
 
@@ -561,7 +561,7 @@ Profiler 在四个不同的轴上涵盖了许多用例。目前已支持部分�
 
 <a name="profiling_api_table"></a>
 
-| 性能剖析 API                | 本地     | 远程    | 多  | 硬件  | :                              :           :           : 工作进程   : 平台 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 支持 | 不       | 不       | CPU、GPU  | : Callback**                   :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | Not       | 不       | CPU、GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | 支持 | 支持 | CPU、GPU、| : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 支持 | 不       | 不       | CPU、GPU  | :                              :           : 支持 : 支持 :           :
+| 性能剖析 API                | 本地     | 远程    | 多  | 硬件  | :                              :           :           : 工作进程   : 平台 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 支持 | 不       | 不       | CPU、GPU  | : Callback**                   :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | Not       | 不       | CPU、GPU  | : start/stop [API]**    :           : 支持 : 支持 :           : | **`tf.profiler.experimental` | 支持 | 支持 | 支持 | CPU、GPU、| : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 支持 | 不       | 不       | CPU、GPU  | :                              :           : 支持 : 支持 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -692,7 +692,7 @@ os.environ['TF_GPU_THREAD_COUNT']='1'
 
 - 使用 `tf.function` 执行计算，并且可以选择启用 `jit_compile=True` 标志 (`tf.function(jit_compile=True`)。要了解更详情，请转到[使用 XLA tf.function](https://www.tensorflow.org/xla/tutorials/jit_compile)。
 
-- Minimize host Python operations between steps and reduce callbacks. Calculate metrics every few steps instead of at every step.
+- 最大程度减少步骤之间的主机 Python 运算并减少回调。每几步（而不是每一步）计算指标
 
 - 使设备计算单元保持忙碌状态。
 
@@ -718,3 +718,6 @@ TensorFlow 2.2 和 2.3 仅支持单主机系统的多 GPU 性能剖析；不支�
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
+
+
+[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2
