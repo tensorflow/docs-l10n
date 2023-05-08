@@ -15,7 +15,7 @@ TensorFlow 프로젝트에 소스 코드를 제공하기 전에 프로젝트의 
 - [쉬운 첫 문제](https://github.com/tensorflow/tensorflow/labels/good%20first%20issue)
 - [기여 환영](https://github.com/tensorflow/tensorflow/labels/stat%3Acontributions%20welcome)
 
-보다 큰 규모의 문제나 새로운 기능을 다루기 위해 팀을 구성하고 싶다면 [developers@ group](https://groups.google.com/a/tensorflow.org/forum/#!forum/developers)에 이메일을 보내 현재 RFC 목록을 검토하세요.
+If you are interested in recruiting a team to help tackle a large-scale problem or a new feature, please email the [developers@ group](https://groups.google.com/a/tensorflow.org/g/developers) and review our current list of RFCs.
 
 ## 코드 검토
 
