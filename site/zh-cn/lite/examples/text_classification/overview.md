@@ -29,7 +29,7 @@
 
 1. 对段落进行分词，并使用预定义词汇表将其转换为一个单词 ID 列表。
 2. 将该列表馈送到 TensorFlow Lite 模型。
-3. 从模型输出获取该段落为正面或负面评价的概率。
+3. Get the probability of the paragraph being positive or negative from the model outputs.
 
 ### 说明
 
@@ -51,7 +51,7 @@
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification.tflite">文本分类</a></td>
-    <td rowspan="3">       0.6 Mb</td>
+    <td rowspan="3">       0.6 Mb     </td>
     <td>Pixel 3 (Android 10)</td>
     <td>0.05ms*</td>
   </tr>
