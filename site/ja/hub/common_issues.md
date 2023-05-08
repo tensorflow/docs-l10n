@@ -4,7 +4,7 @@
 
 このリストに該当する課題が掲載されていない場合は、新しい課題を送信する前に [GitHub の課題](https://github.com/tensorflow/hub/issues)を検索してください。
 
-**Note:** This documentation uses TFhub.dev URL handles in examples. See more information regarding other valid handle types [here](tf2_saved_model.md#model_handles).
+**注意:** このドキュメントの例では、TFhub.dev URL ハンドルを使用しています。その他の有効なハンドルタイプについては、[こちら](tf2_saved_model.md#model_handles)をご覧ください。
 
 ## TypeError: 'AutoTrackable' object is not callable
 
