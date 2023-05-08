@@ -15,7 +15,7 @@ TensorFlow プロジェクトにソースコードを提供する前に、プロ
 - [good first issue](https://github.com/tensorflow/tensorflow/labels/good%20first%20issue)
 - [contributions welcome](https://github.com/tensorflow/tensorflow/labels/stat%3Acontributions%20welcome)
 
-If you are interested in recruiting a team to help tackle a large-scale problem or a new feature, please email the [developers@ group](https://groups.google.com/a/tensorflow.org/g/developers) and review our current list of RFCs.
+大規模な問題や新機能への取り組みを支援するチームの採用に関心がある場合は、[developers@ group](https://groups.google.com/a/tensorflow.org/g/developers) にメールでお問い合わせください。また、RFC の最新リストをご確認ください。
 
 ## コードレビュー
 
