@@ -1,6 +1,6 @@
-# 升级到 TensorFlow.js 3.0
+# 升级到 TensorFlow.js 4.0
 
-## TensorFlow.js 3.0 变化
+## TensorFlow.js 4.0 变化
 
 [此处](https://github.com/tensorflow/tfjs/releases)提供了版本说明。此版本将 TypeScript 升级到 4.8.4，将 `@webgpu/types` 升级到 0.1.21。如果您不使用 TypeScript，则无需阅读此文档即可更新到 4.0。
 
