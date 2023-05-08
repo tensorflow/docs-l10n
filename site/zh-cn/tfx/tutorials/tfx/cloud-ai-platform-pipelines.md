@@ -51,7 +51,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     3. 输入结算信息。
 
-        You will not be charged at this point. If you have no other Google Cloud projects, you can complete this tutorial without exceeding the [Google Cloud Free Tier](https://cloud.google.com/free) limits, which includes a max of 8 cores running at the same time.
+        此时，您不会被收取费用。如果您没有其他 Google Cloud 项目，您可以在不超出 [Google Cloud 免费层级](https://cloud.google.com/free)限制（最多同时运行 8 个核心）的情况下完成本教程。
 
 注：此时，您可以选择成为付费用户，而不必依赖免费试用。由于本教程处于免费层级限制之内，因此如果这是您的唯一项目且您不超出限制，则仍然不会向您收取费用。有关详情，请参阅 [Google Cloud 价格计算器](https://cloud.google.com/products/calculator/)和 [Google Cloud Platform 免费层级](https://cloud.google.com/free)。
 
@@ -229,7 +229,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
     - `pipeline.py` - 定义 TFX 组件和流水线
 - `models` - 此目录包含 ML 模型定义
     - `features.py` `features_test.py` 定义模型的特征
-    - `preprocessing.py` / `preprocessing_test.py` — defines preprocessing jobs using `tf::Transform`
+    - `preprocessing.py` / `preprocessing_test.py` - 使用 `tf::Transform` 定义预处理作业
     - `estimator` - 此目录包含一个基于 Estimator 的模型
         - `constants.py` - 定义模型的常量
         - `model.py` / `model_test.py` - 使用 TF Estimator 定义 DNN 模型
@@ -343,7 +343,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ![set path](https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/tfx/tutorials/tfx/images/airflow_workshop/transform.png?raw=true)
 
-- [Transform](https://www.tensorflow.org/tfx/guide/transform) performs feature engineering on the dataset.
+- [Transform](https://www.tensorflow.org/tfx/guide/transform) 会对数据集执行特征工程。
 
 ### 在 JupyterLab 文件编辑器中：
 
@@ -383,7 +383,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ### 组件
 
-- [Trainer](https://www.tensorflow.org/tfx/guide/trainer) trains a TensorFlow model.
+- [Trainer](https://www.tensorflow.org/tfx/guide/trainer) 用于训练 TensorFlow 模型。
 
 ### 在 JupyterLab 文件编辑器中：
 
@@ -426,7 +426,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 
 ### 组件
 
-- [Evaluator](https://www.tensorflow.org/tfx/guide/evaluator) performs deep analysis of the training results.
+- [Evaluator](https://www.tensorflow.org/tfx/guide/evaluator) 会对训练结果执行深度分析。
 
 ### 在 JupyterLab 文件编辑器中：
 
@@ -466,7 +466,7 @@ components.append(evaluator)
 
 ### 组件
 
-- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) deploys the model to a serving infrastructure.
+- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) 会将模型部署到应用基础结构。
 
 ### 在 JupyterLab 文件编辑器中：
 
@@ -535,7 +535,7 @@ kubeflow_dag_runner.KubeflowDagRunner(config=config).run(pipeline)
 
 **双击打开 `configs.py`**。取消注释 `BIG_QUERY_WITH_DIRECT_RUNNER_BEAM_PIPELINE_ARGS` 和 `BIG_QUERY_QUERY` 的定义。您应将此文件中的项目 ID 和区域值替换为用于您的 GCP 项目的正确值。
 
-> **Note: You MUST set your GCP project ID and region in the `configs.py` file before proceeding.**
+> **注：您必须先在 `configs.py` 文件中设置您的 GCP 项目 ID 和区域，然后才能继续。**
 
 **浏览到上一级目录**。点击文件列表上方的目录名称。该目录名称为流水线的名称，如果您未更改流水线名称，则为 `my_pipeline`。
 
@@ -558,7 +558,7 @@ kubeflow_dag_runner.KubeflowDagRunner(config=config).run(pipeline)
 
 多个 [TFX 组件使用 Apache Beam](https://www.tensorflow.org/tfx/guide/beam) 来实现数据并行流水线，这意味着您可以使用 [Google Cloud Dataflow](https://cloud.google.com/dataflow/) 分布数据处理工作负载。在此步骤中，我们将设置 Kubeflow 编排器，将 Dataflow 用作 Apache Beam 的数据处理后端。
 
-> **Note:** If the Dataflow API is not already enabled, you can enable it using the console, or from the CLI using this command (for example, in the Cloud Shell):
+> **注**：如果尚未启用 Dataflow API，您可以使用控制台或在 CLI 中使用以下命令（例如，在 Cloud Shell 中）启用：
 
 ```bash
 # Select your project:
@@ -575,7 +575,7 @@ gcloud services list --available | grep Dataflow
 gcloud services enable dataflow.googleapis.com
 ```
 
-> **Note:** Execution speed may be limited by default [Google Compute Engine (GCE)](https://cloud.google.com/compute) quota. We recommend setting a sufficient quota for approximately 250 Dataflow VMs: **250 CPUs, 250 IP Addresses, and 62500 GB of Persistent Disk**. For more details, please see the [GCE Quota](https://cloud.google.com/compute/quotas) and [Dataflow Quota](https://cloud.google.com/dataflow/quotas) documentation. If you are blocked by IP Address quota, using a bigger [`worker_type`](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options) will reduce the number of needed IPs.
+> **注**：执行速度可能受限于默认的 [Google Compute Engine (GCE)](https://cloud.google.com/compute) 配额。我们建议为大约 250 个 Dataflow 虚拟机设置足够的配额： **250 个 CPU、250 个 IP 地址，以及 62500 GB 永久性磁盘**。有关详情，请参阅 [GCE 配额](https://cloud.google.com/compute/quotas)和 [Dataflow 配额](https://cloud.google.com/dataflow/quotas)文档。如果您受到 IP 地址配额的限制，使用更大的 [`worker_type`](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options) 将减少所需的 IP 数量。
 
 **双击 `pipeline` 更改目录，然后双击打开 `configs.py`**。取消注释 `GOOGLE_CLOUD_REGION` 和 `DATAFLOW_BEAM_PIPELINE_ARGS` 的定义。
 
