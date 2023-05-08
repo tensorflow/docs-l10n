@@ -26,13 +26,13 @@ TensorFlow の連合学習データセットは、連合学習で解決できる
 
 データセットには以下が含まれています。
 
-- [**StackOverflow**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data) A realistic text dataset for language modeling or supervised learning tasks, with 342,477 unique users with 135,818,730 examples (sentences) in the training set.
+- [**StackOverflow**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data)言語モデリングや教師あり学習タスク用の現実的なテキストデータセット。342,477人のユニークユーザーがトレーニングセットで135,818,730例（センテンス）を使用します。
 
 - [**Federated EMNIST**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/emnist/load_data)各クライアントが異なるライターに対応する、EMNIST文字と数字のデータセットの連合前処理。完全なトレインセットには、62のラベルからの671,585の例を持つ3400人のユーザーが含まれています。
 
 - [**Shakespeare**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/shakespeare/load_data)ウィリアムシェイクスピアの全作品に基づいた、文字レベルの小さなテキストデータセット。 データセットは715人のユーザー（シェイクスピア劇のキャラクター）で構成されます。各例は、特定の劇のキャラクターが話す連続した一連の行に対応しています。
 
-- [**CIFAR-100**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data) A federated partitioning of the CIFAR-100 dataset across 500 training clients and 100 test clients. Each client has 100 unique examples. The partitioning is done in a way to create more realistic heterogeneity between clients. For more details, see the [API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data).
+- [**CIFAR-100**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)500のトレーニングクライアントと100のテストクライアントにわたるCIFAR-100データセットの連合パーティション。各クライアントには100のユニークな例があります。 パーティションは、クライアント間でより現実的な異質性を作成する方法で行われます。 詳細については、[API](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/cifar100/load_data)をご覧ください。
 
 - [**Google Landmark v2 データセット。**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/gldv2/load_data) データセットにはさまざまな世界的名所の写真で構成されており、データの連合パーティションを得られるよう、画像は写真家ごとにグループ化されています。データベースには、233 件のクライアントと 23080 枚の画像が含まれる小さいデータセットと、1262 件のクライアントと 164172 枚の画像が含まれる大きなデータセットの 2 種類があります。
 
