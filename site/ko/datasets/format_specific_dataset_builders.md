@@ -127,20 +127,21 @@ class MyDatasetBuilder(tfds.dataset_builders.TfDataBuilder):
     ds_train = tf.data.Dataset.from_tensor_slices([1, 2, 3])
     ds_test = tf.data.Dataset.from_tensor_slices([4, 5])
     super().__init__(
-        name="my_dataset",
-        version="1.0.0",
-        split_datasets={
-            "train": ds_train,
-            "test": ds_test,
-        },
-        features=tfds.features.FeaturesDict({
-            "number": tfds.features.Scalar(dtype=tf.int64),
-        }),
-        config="single_number",
-        description="My dataset with a single number.",
-        release_notes={
-            "1.0.0": "Initial release with numbers up to 5!",
-        })
+      name="my_dataset",
+      version="1.0.0",
+      split_datasets={
+          "train": ds_train,
+          "test": ds_test,
+      },
+      features=tfds.features.FeaturesDict({
+          "number": tfds.features.Scalar(dtype=tf.int64),
+      }),
+      config="single_number",
+      description="My dataset with a single number.",
+      release_notes={
+          "1.0.0": "Initial release with numbers up to 5!",
+      }
+    )
 ```
 
 ## CoNLL
@@ -182,7 +183,7 @@ class MyCoNNLDataset(tfds.dataset_builders.ConllDatasetBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     return self.create_dataset_info(
-        # ...
+      # ...
     )
 
   def _split_generators(self, dl_manager):
