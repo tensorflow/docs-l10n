@@ -27,7 +27,7 @@ Android이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미 
 
 모델로 단락을 분류하는 단계는 다음과 같습니다.
 
-1. 단락을 토큰화하고 사전 정의된 어휘를 사용하여 단어 ID 목록으로 변환하세요.
+1. Tokenize the paragraph and convert it to a list of word ids using a predefined vocabulary.
 2. TensorFlow Lite 모델에 목록을 제공합니다.
 3. 모델 출력에서 단락이 양수 또는 음수일 확률을 가져옵니다.
 
@@ -51,7 +51,7 @@ Android이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미 
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification.tflite">텍스트 분류</a></td>
-    <td rowspan="3">       0.6 Mb</td>
+    <td rowspan="3">       0.6 Mb     </td>
     <td>Pixel 3(Android 10)</td>
     <td>0.05ms *</td>
   </tr>
@@ -79,7 +79,7 @@ Android이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미 
 
 ## 훈련 데이터세트 사용하기
 
-[튜토리얼](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)에 따라 여기에 사용된 것과 같은 기술을 적용하여 자체 데이터세트로 텍스트 분류 모델을 훈련하세요. 올바른 데이터세트를 사용하면 설명서 분류 또는 악성 댓글 감지와 같은 사용 사례에 대한 모델을 만들 수 있습니다.
+Follow this [tutorial](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) to apply the same technique used here to train a text classification model using your own datasets. With the right dataset, you can create a model for use cases such as document categorization or toxic comments detection.
 
 ## 텍스트 분류에 대해 자세히 알아보기
 
