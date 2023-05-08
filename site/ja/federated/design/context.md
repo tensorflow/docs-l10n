@@ -1,26 +1,26 @@
-# コンテキスト
+# Context
 
 [TOC]
 
 ## `Context`
 
-[context_base.Context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) は [AST](compilation.md#ast) を[構築](tracing.md)、[コンパイル](compilation.md)、または[実行](execution.md)できる環境です。
+A [context_base.SyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) or [context_base.AsyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) is an environment that can [construct](tracing.md), [compile](compilation.md), or [execute](execution.md) an [AST](compilation.md#ast).
 
 この API は、[Executor](execution.md#executor) が実行に**使用されない**場合に使用される **low-level abstraction** を定義します。バックエンドの [Reference](backend.md#reference) はこのレベルで統合されます。
 
 ### `ExecutionContext`
 
-[execution_context.ExecutionContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/execution_contexts/sync_execution_context.py) は、コンパイル関数を使用して計算をコンパイルし、[Executor](execution.md#executor) を使用して計算を実行する [context_base.Context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) です。
+An [execution_context.ExecutionContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/execution_contexts/execution_context.py) is [context_base.SyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) or [context_base.AsyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) that compiles computations using a compilation function and executes computations using an [Executor](execution.md#executor).
 
 この API は、[Executor](execution.md#executor) が実行に使用される時に使用される **高レベルの抽象化**を定義します。[native](backend.md#native) はこのレベルで統合されます。
 
 ### `FederatedComputationContext`
 
-[federated_computation_context.FederatedComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation_context.py) は連合コンピュテーションを構築する [context_base.Context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) です。このコンテキストは、[federated_computation.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation.py) デコレータが使用された Python 関数をトレースするために使用されます。
+A [federated_computation_context.FederatedComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation_context.py) is a context that constructs federated computations. This context is used trace Python functions decorated with the [federated_computation.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation.py) decorator.
 
 ### `TensorFlowComputationContext`
 
-[tensorflow_computation_context.TensorFlowComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/tensorflow_context/tensorflow_computation_context.py) は TensorFlow computations を構築する [context_base.Context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) です。このコンテキストは、[tensorflow_computation.tf_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/tensorflow_context/tensorflow_computation.py) デコレータが使用された Python をシリアル化するために使用されます。
+A [tensorflow_computation_context.TensorFlowComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/tensorflow_context/tensorflow_computation_context.py) is a context that constructs TensorFlow computations. This context is used to serialize Python functions decorated with the [tensorflow_computation.tf_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/tensorflow_context/tensorflow_computation.py) decorator.
 
 ## `ContextStack`
 
