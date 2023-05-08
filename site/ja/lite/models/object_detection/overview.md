@@ -36,7 +36,7 @@ TensorFlow Lite を初めて使用する場合、Android または iOS を使用
 
 TensorFlow Lite Task Library のそのまま簡単に使用できる API を利用して、わずか数行のコードで[物体検出モデルを統合する](../../inference_with_metadata/task_library/object_detector)ことができます。また、TensorFlow Lite Interpreter Java API を使用して、[独自のカスタム推論パイプライン](../../guide/inference#load_and_run_a_model_in_java)を構築することもできます。
 
-The Android example below demonstrates the implementation for both methods as [lib_task_api](https://github.com/tensorflow/examples/tree/r2.12/lite/examples/object_detection/android/lib_task_api) and [lib_interpreter](https://github.com/tensorflow/examples/tree/eb925e460f761f5ed643d17f0c449e040ac2ac45/lite/examples/object_detection/android/lib_interpreter), respectively.
+以下の Android の例では、両方のメソッドをそれぞれ [lib_task_api](https://github.com/tensorflow/examples/tree/r2.12/lite/examples/object_detection/android/lib_task_api) および [lib_interpreter](https://github.com/tensorflow/examples/tree/eb925e460f761f5ed643d17f0c449e040ac2ac45/lite/examples/object_detection/android/lib_interpreter) として実装しています。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android">Android の例を見る</a>
 
@@ -226,7 +226,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
   </thead>
   <tr>
     <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a> </td>
-    <td rowspan="3">       27 Mb     </td>
+    <td rowspan="3">27 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>22ms</td>
     <td>46ms*</td>
