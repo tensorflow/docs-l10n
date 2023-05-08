@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-07-11'} *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2023-01-09'} *-->
 
 # TensorFlow 2 における TF Hub の SavedModel
 
@@ -49,6 +49,10 @@ model = tf.keras.Sequential([
 TensorFlow Hub から（または [ホスティング](hosting.md)プロトコルを実装するほかの HTTPS サーバーから）SavedModel を使用すると、すでに存在しない限りその SavedModel をローカルファイルシステムにダウンロードして解凍します。ダウンロードして解凍される SavedModel のキャッシュに使用するデフォルトの一時的な場所は、環境変数 `TFHUB_CACHE_DIR` を設定してオーバーライドすることができます。詳細は、[キャッシング](caching.md)をご覧ください。
 
 ### 低レベルの TensorFlow で SavedModel を使用する
+
+#### Model Handles
+
+SavedModels can be loaded from a specified `handle`, where the `handle` is a filesystem path, valid TFhub.dev model URL (e.g. "https://tfhub.dev/..."). Kaggle Models URLs mirror TFhub.dev handles in accordance with our Terms and the license associated with the model assets, e.g. "https://www.kaggle.com/...". Handles from Kaggle Models are equivalent to their corresponding TFhub.dev handle.
 
 関数 `hub.load(handle)` は、（`handle` がファイルシステムにすでに存在しない場合は）SavedModel をダウンロードして解凍し、TensorFlow のビルトイン関数 `tf.saved_model.load()` で読み込んだ結果を返します。したがって、`hub.load()` はあらゆる有効な SavedModel を処理することができます（以前の TF1 の `hub.Module` とは異なります）。
 
