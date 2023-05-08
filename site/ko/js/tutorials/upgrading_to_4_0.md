@@ -1,6 +1,6 @@
-# TensorFlow.js 3.0으로 업그레이드
+# TensorFlow.js 4.0으로 업그레이드
 
-## TensorFlow.js 3.0 변경 사항
+## TensorFlow.js 4.0 변경 사항
 
 릴리스 노트는 [여기에서 확인할 수 있습니다](https://github.com/tensorflow/tfjs/releases). 이 릴리스는 TypeScript를 4.8.4로, `@webgpu/types`를 0.1.21로 업그레이드합니다. TypeScript를 사용하지 않는다면 이 문서를 읽지 않고 4.0으로 업데이트할 수 있습니다.
 
