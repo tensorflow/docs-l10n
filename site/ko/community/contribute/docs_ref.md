@@ -1,4 +1,4 @@
-# TensorFlow API 설명서에 기여하기
+# TensorFlow API 문서화에 기여하기
 
 <a id="doctest"></a>
 
@@ -7,7 +7,7 @@
 TensorFlow는 [DocTest](https://docs.python.org/3/library/doctest.html)를 사용하여 Python docstring에서 코드 조각을 테스트합니다. 코드 조각은 실행 가능한 Python 코드여야 합니다. 테스트를 가능하게 하려면 `>>>` (세 개의 왼쪽 꺾쇠괄호)로 줄을 추가하십시오. 예를 들어, 다음은 [array_ops.py](https://www.tensorflow.org/code/tensorflow/python/ops/array_ops.py) 소스 파일의 `tf.concat` 함수에서 발췌한 것입니다.
 
 ```
-<code>def concat(values, axis, name="concat"):
+def concat(values, axis, name="concat"):
   """Concatenates tensors along one dimension.
   ...
 
