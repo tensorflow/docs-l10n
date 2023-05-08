@@ -1,8 +1,10 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-04-08' review_interval: '6 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-05' review_interval: '6 months' } *-->
 
 # 一般的な課題
 
 このリストに該当する課題が掲載されていない場合は、新しい課題を送信する前に [GitHub の課題](https://github.com/tensorflow/hub/issues)を検索してください。
+
+**Note:** This documentation uses TFhub.dev URL handles in examples. See more information regarding other valid handle types [here](tf2_saved_model.md#model_handles).
 
 ## TypeError: 'AutoTrackable' object is not callable
 
