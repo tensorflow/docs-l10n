@@ -1,10 +1,10 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-07-11' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2023-01-09' } *-->
 
 # TensorFlow Hub를 사용하여 TF1에서 TF2로 마이그레이션하기
 
 이 페이지에서는 TensorFlow 코드를 TensorFlow 1에서 TensorFlow 2로 마이그레이션하는 동안 TensorFlow Hub를 계속 사용하는 방법을 설명합니다. TensorFlow의 일반 [마이그레이션 가이드](https://www.tensorflow.org/guide/migrate)를 보완합니다.
 
-TF2의 경우, TF Hub는 `tf.contrib.v1.layers`처럼 `tf.compat.v1.Graph`를 빌드하기 위해 레거시 `hub.Module` API에서 전환했습니다. 대신 `tf.keras.Model`(일반적으로 TF2의 새로운 [즉시 실행 환경](https://www.tensorflow.org/guide/eager_)) 및 하위 수준 TensorFlow 코드에 대한 기본 `hub.load()` 메서드를 빌드하기 위해 다른 Keras 레이어와 함께 사용할 수 있는 `hub.KerasLayer`가 있습니다.
+For TF2, TF Hub has switched away from the legacy `hub.Module` API for building a `tf.compat.v1.Graph` like `tf.contrib.v1.layers` do. Instead, there is now a `hub.KerasLayer` for use alongside other Keras layers for building a `tf.keras.Model` (typically in TF2's new [eager execution environment](https://www.tensorflow.org/api_docs/python/tf/executing_eagerly)) and its underlying `hub.load()` method for low-level TensorFlow code.
 
 `hub.Module` API는 TF1 및 TF2의 TF1 호환성 모드에서 사용할 수 있도록 `tensorflow_hub` 라이브러리에서 계속 사용할 수 있습니다. [TF1 Hub 형식](tf1_hub_module.md)의 모델만 로드할 수 있습니다.
 
