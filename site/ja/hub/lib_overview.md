@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'akhorlin' } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2023-02-17'} *-->
 
 # TensorFlow Hub ライブラリの概要
 
@@ -11,6 +11,8 @@ embed = hub.KerasLayer("https://tfhub.dev/google/nnlm-en-dim128/2")
 embeddings = embed(["A long sentence.", "single-word", "http://example.com"])
 print(embeddings.shape, embeddings.dtype)
 ```
+
+**注意:** このドキュメントの例では、TFhub.dev URL ハンドルを使用しています。その他の有効なハンドルタイプについては、[こちら](tf2_saved_model.md#model_handles)をご覧ください。
 
 ## ダウンロードのキャッシュロケーションを設定する
 
