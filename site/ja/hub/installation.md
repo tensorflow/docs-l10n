@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2022-07-04' } *-->
+<!--* freshness: { owner: 'wgierke' reviewed: '2023-02-17' } *-->
 
 # インストール
 
@@ -42,4 +42,4 @@ $ pip install --upgrade tf-hub-nightly
     - [テキスト分類](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
     - [画像分類](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
     - [GitHub](https://github.com/tensorflow/hub/blob/master/examples/README.md) のその他の例
-- [tfhub.dev](https://tfhub.dev) でモデルを検索してください
+- [tfhub.dev](https://tfhub.dev) でモデルを検索する
