@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-04-09' review_interval: '6 months' } *-->
+<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-07' } *-->
 
 # TF1 Hub 形式
 
@@ -17,6 +17,8 @@ TF1 Hub 形式のモデルは、次のように、URL とファイルシステ�
 ```python
 m = hub.Module("path/to/a/module_dir")
 ```
+
+**Note:** See more information regarding other valid handle types [here](tf2_saved_model.md#model_handles).
 
 これは、モジュールの変数を現在の TensorFlow グラフに追加します。イニシャライザを実行すると、ディスクからトレーニング済みの値が読み取られます。同様に、テーブルとその他の状態もグラフに追加されます。
 
