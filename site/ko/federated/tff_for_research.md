@@ -42,7 +42,7 @@ TensorFlow 페더레이션은 페더레이션 학습으로 해결할 수 있는 
 
 ## 고성능 시뮬레이션
 
-FL *시뮬레이션*의 벽시계 시간은 알고리즘 평가를 위한 관련 메트릭이 아니지만(시뮬레이션 하드웨어가 실제 FL 배포 환경을 대표하지 않기 때문에), FL 시뮬레이션을 빠르게 실행할 수 있는 것은 연구 생산성에 중요합니다. 따라서 TFF는 고성능 단일 및 다중 머신 런타임을 제공하는 데 많은 투자를 했습니다. 설명서는 개발 중이지만, 지금은 [Kubernetes를 사용한 고성능 시뮬레이션](https://www.tensorflow.org/federated/tutorials/high_performance_simulation_with_kubernetes) 튜토리얼, [가속기를 사용한 TFF 시뮬레이션](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators) 지침 및 [GCP에서 TFF로 시뮬레이션 설정](https://www.tensorflow.org/federated/gcp_setup) 지침을 참조하세요. 고성능 TFF 런타임은 기본적으로 활성화되어 있습니다.
+FL *시뮬레이션*의 벽시계 시간은 알고리즘 평가를 위한 관련 메트릭이 아니지만(시뮬레이션 하드웨어가 실제 FL 배포 환경을 대표하지 않기 때문에), FL 시뮬레이션을 빠르게 실행할 수 있기에 연구 생산성에 중요합니다. 따라서 TFF는 고성능 단일 및 다중 머신 런타임을 제공하는 데 많은 투자를 했습니다. 설명서는 개발 중이기에 지금은 [가속기를 사용한 TFF 시뮬레이션](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators) 지침 및 [GCP에서 TFF로 시뮬레이션 설정하기](https://www.tensorflow.org/federated/gcp_setup) 지침을 참조하세요. 고성능 TFF 런타임은 기본적으로 활성화되어 있습니다.
 
 ## 다양한 연구 분야를 위한 TFF
 
