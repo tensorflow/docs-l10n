@@ -24,9 +24,9 @@ TODO(b/153500547): 추적 시스템의 개별 구성 요소를 설명하고 연�
 
 구체적으로, 정확히 하나의 인수가 있을 때 추적은 다음과 같이 수행됩니다.
 
-1. 인수를 나타내는 적절한 형식 서명을 사용하여 [building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py)에서 지원되는 [value_impl.ValueImpl](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py)를 생성합니다.
+1. 인수를 나타내는 적절한 형식 서명을 사용하여 [building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py)에서 지원되는 [value_impl.Value](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py)를 생성합니다.
 
-2. `ValueImpl`에 대한 함수를 호출합니다. 이로 인해 Python 런타임이 ValueImpl에 의해 구현된 `ValueImpl` 메서드를 호출하여 dunder 메서드를 AST 구성으로 변환합니다. 각 dunder 메서드는 AST를 구성하고 해당 AST가 지원하는 `ValueImpl`을 반환합니다.
+2. `Value`에 대한 함수를 호출합니다. 이로 인해 Python 런타임이 ValueImpl에 의해 구현된 `Value` 메서드를 호출하여 dunder 메서드를 AST 구성으로 변환합니다. 각 dunder 메서드는 AST를 구성하고 AST가 지원하는 `Value`을 반환합니다.
 
 예를 들면:
 
@@ -35,9 +35,9 @@ def foo(x):
   return x[0]
 ```
 
-여기서 함수의 매개변수는 튜플이고, 함수 본문에서 0번째 요소가 선택됩니다. 그러면 `ValueImpl`에서 재정의된 Python의 `__getitem__` 메서드가 호출됩니다. 가장 간단한 경우, `ValueImpl.__getitem__`의 구현은 <code>&lt;strong data-md-type="double_emphasis"&gt;getitem&lt;/strong&gt;</code>의 호출을 나타내는 <a>building_blocks.Selection</a>을 구성하고 새로운 `Selection`에서 지원되는 `ValueImpl`을 반환합니다.
+여기서 함수의 매개변수는 튜플이고, 함수 본문에서 0번째 요소가 선택됩니다. 그러면 `__getitem__`에서 재정의된 Python의 `Value` 메서드가 호출됩니다. 가장 간단한 경우, `Value.__getitem__`의 구현은 `__getitem__`의 호출을 나타내는 [building_blocks.Selection](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py)을 구성하고 새로운 `Selection`에서 지원되는 `Value`을 반환합니다.
 
-각 dunder 메서드가 `ValueImpl`을 반환하여 재정의된 dunder 메서드 중 하나를 호출하는 함수의 본문에서 모든 연산을 스탬프 처리하므로 추적이 계속됩니다.
+각 dunder 메서드가 `Value`을 반환하여 재정의된 dunder 메서드 중 하나를 호출하는 함수의 본문에서 모든 연산을 스탬프 처리하므로 추적이 계속됩니다.
 
 ### AST 생성하기
 
