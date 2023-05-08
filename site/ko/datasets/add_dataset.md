@@ -300,7 +300,7 @@ def _generate_examples(self, images_path, label_path):
 
 클라우드 스토리지 시스템을 지원하려면 Python 내장 I/O ops를 사용하지 마세요.
 
-Instead, the `dl_manager` returns [pathlib-like](https://docs.python.org/3/library/pathlib.html) objects directly compatible with Google Cloud storage:
+대신 `dl_manager`는 Google Cloud Storage와 직접 호환되는 [pathlib 유사](https://docs.python.org/3/library/pathlib.html) 객체를 반환합니다.
 
 ```python
 path = dl_manager.download_and_extract('http://some-website/my_data.zip')
