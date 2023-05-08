@@ -175,7 +175,12 @@ converter.target_spec.supported_ops = [tf.lite.OpsSet.EXPERIMENTAL_TFLITE_BUILTI
 tflite_quant_model = converter.convert()
 </pre>
 
-通过此量化方案提高了准确率的用例示例包括：* 超分辨率、* 音频信号处理（如降噪和波束成形）、* 图像降噪、* 单个图像 HDR 重建。
+Examples of the use cases where accuracy improvements provided by this quantization scheme include:
+
+- super-resolution,
+- audio signal processing such as noise cancelling and beamforming,
+- image de-noising,
+- HDR reconstruction from a single image.
 
 这种量化的缺点是：
 
@@ -188,7 +193,7 @@ tflite_quant_model = converter.convert()
 
 ### 模型准确率
 
-由于权重是在训练后量化的，可能会造成准确率损失，对于较小的网络尤其如此。[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&q=quantized){:.external} 为特定网络提供了预训练的完全量化模型。请务必检查量化模型的准确率，以验证准确率的任何下降都在可接受的范围内。有一些工具可以评估 [TensorFlow Lite 模型准确率](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}。
+Since weights are quantized post training, there could be an accuracy loss, particularly for smaller networks. Pre-trained fully quantized models are provided for specific networks on [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&q=quantized){:.external}. It is important to check the accuracy of the quantized model to verify that any degradation in accuracy is within acceptable limits. There are tools to evaluate [TensorFlow Lite model accuracy](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}.
 
 另外，如果准确率下降过多，请考虑使用[量化感知训练](https://www.tensorflow.org/model_optimization/guide/quantization/training)。但是，这样做需要在模型训练期间进行修改以添加伪量化节点，而此页面上的训练后量化技术使用的是现有的预训练模型。
 
