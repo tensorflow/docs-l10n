@@ -67,7 +67,7 @@ TensorFlow Federated（TFF）を使用するための環境は、いくつかの
 ### 4. 仮想環境を作成する
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal">python3.9 -m venv "venv"</code>
+<code class="devsite-terminal">python3 -m venv "venv"</code>
 <code class="devsite-terminal">source "venv/bin/activate"</code>
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
 <code class="devsite-terminal tfo-terminal-venv">pip install numpy</code>
@@ -97,7 +97,7 @@ TensorFlow Federated（TFF）を使用するための環境は、いくつかの
 ### 8. 新しい仮想環境を作成する
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal">python3.9 -m venv "venv"</code>
+<code class="devsite-terminal">python3 -m venv "venv"</code>
 <code class="devsite-terminal">source "venv/bin/activate"</code>
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
 </pre>
