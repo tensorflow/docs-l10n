@@ -73,7 +73,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     기본 탐색 메뉴 아래: ≡&gt; AI Platform&gt; 파이프라인
 
-2. **+ New Instance(+ 새 인스턴스)**를 클릭하여 새 클러스터를 만듭니다.
+2. Click **+ New Instance** to create a new cluster.
 
      <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-instance.png">
 
@@ -410,7 +410,7 @@ Kubeflow Orchestrator의 경우 KFP 대시 보드를 방문하여 파이프 라�
 
 ### 고급 예
 
-여기에 제시된 예는 처음 시작을 위한 것일 뿐입니다. 고급 예제를 보려면 TensorBoard 튜토리얼을 참조하세요.
+The example presented here is really only meant to get you started. For a more advanced example see the [TensorBoard Tutorial](https://www.tensorflow.org/tensorboard/get_started).
 
 ## 11. 모델 성능 분석
 
