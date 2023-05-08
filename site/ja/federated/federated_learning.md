@@ -6,7 +6,7 @@
 
 このレイヤーにより提供されるインターフェースは、次の 3 つの主要部分で構成されています。
 
-- **モデル**。TFF で使用するために既存のモデルをラップできるようにするクラスとヘルパー関数。モデルのラッピングは、１つのラッピング関数 (`tff.learning.from_keras_model`) を呼び出して簡単に実行できます。または、完全にカスタマイズできるように`tff.learning.Model`インターフェースのサブクラスを定義することもできます。
+- **モデル**。TFF で使用するために既存のモデルをラップできるようにするクラスとヘルパー関数。モデルのラッピングは、1 つのラッピング関数（`tff.learning.from_keras_model`）を呼び出して簡単に実行できます。または、完全にカスタマイズできるように `tff.learning.models.VariableModel` インターフェースのサブクラスを定義することもできます。
 
 - **連合計算ビルダー**。既存のモデルを使用して、トレーニングまたは評価するための連合計算を構築するヘルパー関数。
 
@@ -26,11 +26,11 @@ TFF は、さまざまな分散学習シナリオをサポートすることを�
 
 eager モードの使用など、最新のベストプラクティスに従って TF コードを開発することができますが、最終的なコードはシリアル化可能である必要があります (eager-modeコードの場合は`tf.function`としてラップできます)。これにより、実行時に必要な Python の状態または制御フローを ([Autograph ](https://www.tensorflow.org/guide/autograph)などを使用して) シリアル化できるようになります 。
 
-現在、TensorFlow は、eager モードの TensorFlow のシリアラル化と逆シリアル化を完全にはサポートしていません。TFF でのシリアル化は現在、TF 1.0 パターンに従い、すべてのコードは TFF が制御する`tf.Graph`内に構築する必要があります。つまり、現在 TFF は既に構築されたモデルを使用できません。モデル定義ロジックは、`tff.learning.Model`を返す引数なしの関数にパッケージ化され、この関数が TFF によって呼び出され、モデルのすべてのコンポーネントが確実にシリアル化されます。さらに、強く型付けされた環境であるため、TFF にはモデルの入力タイプの仕様など追加の*メタデータ*が少し必要になります。
+現在、TensorFlowは、Eager モードの TensorFlow のシリアル化と逆シリアル化を完全にはサポートしていません。TFF でのシリアル化は現在、TF 1.0 パターンに従い、すべてのコードは、TFF が制御する ` tf.Graph ` 内に構築する必要があります。これは、現在 TFF が既に構築されたモデルを消費できないことを意味します。 代わりに、モデル定義ロジックは、`tff.learning.models.VariableModel` を返す引数なしの関数にパッケージ化されます。次に、この関数が TFF によって呼び出され、モデルのすべてのコンポーネントが確実にシリアル化されます。さらに、強く型付けされた環境であるため、TFF にはモデルの入力タイプの仕様など、追加の*メタデータ*が少し必要になります。
 
 #### 集計
 
-ほとんどの場合、Keras を使用してモデルを構築することを強くお勧めします。以下の [Keras コンバータ](#converters-for-keras)セクションを参照してください。これらのラッパーは、モデルの更新の集計とモデルに定義されたメトリックを自動的に処理します。 ただし、一般的な`tff.learning.Model`の集計がどのように処理されるかを理解することは有用です。
+ほとんどの場合、Keras を使用してモデルを構築することを強くお勧めします。以下の [Keras コンバータ](#converters-for-keras)セクションを参照してください。これらのラッパーは、モデルの更新の集計とモデルに定義されたメトリックを自動的に処理します。 ただし、一般的な `tff.learning.models.VariableModel` の集計がどのように処理されるかを理解することは有用です。
 
 連合学習には常に少なくともローカルオンデバイス集計とクロスデバイス (または連合) 集計の 2 つの集計レイヤーがあります。
 
@@ -60,26 +60,26 @@ eager モードの使用など、最新のベストプラクティスに従っ�
 
 ### 抽象インターフェース
 
-この基本的な *constructor* と *metadata* インターフェースは、次のようにインターフェース`tff.learning.Model `で表されます。
+この基本的な *constructor* と *metadata* インターフェースは、次のようにインターフェース `tff.learning.models.VariableModel` で表されます。
 
 - コンストラクター、`forward_pass`、および `report_local_unfinalized_metrics` メソッドは、対応するモデル変数、フォワードパス、およびレポートする統計をそれぞれ構成する必要があります。これらのメソッドで構築される TensorFlow は、上述のとおり、シリアル化する必要があります。
 
 - `input_spec`プロパティと、トレーニング可能な変数、トレーニング不可能な変数、およびローカル変数のサブセットを返す 3 つのプロパティは、メタデータを表します。TFF はこの情報を使用して、モデルの部分を連合最適化アルゴリズムに接続する方法を決定し、構築されたシステムの正確性を検証するのに役立つ内部型シグネチャを定義します (モデルが使用するように設計されているものと一致しないデータに対してモデルをインスタンス化しないようにするため)。
 
-また、抽象インターフェースの `tff.learning.Model` は、メトリックの未完成の値（`report_local_unfinalized_metrics()` が戻す）を取って最終的なメトリック値を返す `metric_finalizers` プロパティを公開します。`metric_finalizers` と `report_local_unfinalized_metrics()` メソッドは、連合トレーニングプロセスまたは評価コンピュテーションを定義する際に、クライアント間のメトリクスアグリゲータを構築するために同時に使用されます。たとえば、単純な `tff.learning.metrics.sum_then_finalize` アグリゲータは、まずクライアントからの未完成のメトリック値を加算して空、ファイナライザー関数をサーバー側で呼び出します。
+また、抽象インターフェースの `tff.learning.models.VariableModel` は、メトリックの未完成の値（`report_local_unfinalized_metrics()` が戻す）を取って最終的なメトリック値を返す `metric_finalizers` プロパティを公開します。`metric_finalizers` と `report_local_unfinalized_metrics()` メソッドは、連合トレーニングプロセスまたは評価コンピュテーションを定義する際に、クライアント間のメトリクスアグリゲータを構築するために同時に使用されます。たとえば、単純な `tff.learning.metrics.sum_then_finalize` アグリゲータは、まずクライアントからの未完成のメトリック値を加算して空、ファイナライザー関数をサーバー側で呼び出します。
 
-独自のカスタム`tf.learning.Model`を定義する方法の例は、[画像分類](tutorials/federated_learning_for_image_classification.ipynb)チュートリアルの後半と、[`model_examples.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/model_examples.py)のテストで使用するサンプルモデルにあります。
+独自のカスタム `tff.learning.models.VariableModel` を定義する方法の例は、[画像分類](tutorials/federated_learning_for_image_classification.ipynb)チュートリアルの後半と、[`model_examples.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/models/model_examples.py) のテストで使用するサンプルモデルにあります。
 
 ### Keras 用コンバータ
 
-TFF に必要なほぼすべての情報は、`tf.keras`インターフェースを呼び出すことで取得できます。Keras モデルがある場合は`tff.learning.from_keras_model`を使用して`tff.learning.Model`を構築できます。
+TFF に必要なほぼすべての情報は、`tf.keras` インターフェースを呼び出すことで取得できます。したがって、Keras モデルがある場合は `tff.learning.from_keras_model` を使用して `tff.learning.models.VariableModel` を構築できます。
 
 TFF は、コンストラクター（次のような引数のない*モデル関数*）を提供することを求めていることに注意してください。
 
 ```python
 def model_fn():
   keras_model = ...
-  return tff.learning.from_keras_model(keras_model, sample_batch, loss=...)
+  return tff.learning.models.from_keras_model(keras_model, sample_batch, loss=...)
 ```
 
 モデル自体に加えて、TFF がモデルの入力のタイプと形状を決定するために使用するデータのサンプルバッチを提供します。これにより、TFF がクライアントデバイスに実際に存在するデータのモデルを適切にインスタンス化できるようになります (このデータは、シリアル化する TensorFlow を構築しているときには一般に利用できないと想定されているため)。
