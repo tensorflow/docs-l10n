@@ -24,19 +24,25 @@ TF Hub は TensorFlow プログラムで再読み込み、構築、再トレー�
   </tr>
   <tr>
     <td>読み込み / 推論</td>
-    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf1_hub_module#using_a_module">包括的な TF1 Hub 形式の読み込みガイド</a>）       <pre style="font-size: 12px;" lang="python">m = hub.Module(handle) outputs = m(inputs)</pre>
+    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf1_hub_module#using_a_module">包括的な TF1 Hub 形式の読み込みガイド</a>） <pre style="font-size: 12px;" lang="python">m = hub.Module(handle)
+outputs = m(inputs)</pre>
 </td>
-    <td>hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m.signatures["sig"](inputs)</pre>       または hub.KerasLayer        <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle, signature="sig") outputs = m(inputs)</pre> のいずれかを使用することをお勧めします。</td>
+    <td>hub.load <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
+outputs = m.signatures["sig"](inputs)</pre> または hub.KerasLayer <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle, signature="sig")
+outputs = m(inputs)</pre> のいずれかを使用することをお勧めします。</td>
   </tr>
   <tr>
     <td>ファインチューニング</td>
-    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf1_hub_module#for_consumers">包括的な TF1 Hub 形式の微調整ガイド</a>）     <pre style="font-size: 12px;" lang="python">m = hub.Module(handle,                trainable=True,                tags=["train"]*is_training) outputs = m(inputs)</pre>       <div style="font-style: italic; font-size: 14px">       注意: 個別の train グラフを必要としないモジュールには train タグがありません。       </div>
+    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf1_hub_module#for_consumers">包括的な TF1 Hub 形式の微調整ガイド</a>）<pre style="font-size: 12px;" lang="python">m = hub.Module(handle,
+trainable=True,
+tags=["train"]*is_training)
+outputs = m(inputs)</pre> <div style="font-style: italic; font-size: 14px"> 注意: 個別の train グラフを必要としないモジュールには train タグがありません。</div>
 </td>
     <td style="text-align: center">サポートされていません</td>
   </tr>
   <tr>
     <td>作成</td>
-    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">包括的な TF1 Hub 形式の作成ガイド</a>をご覧ください） <br> <div style="font-style: italic; font-size: 14px">       注意: TF1 Hub 形式は TF1 向けであり、TF2 では部分的にのみサポートされています。TF2 SavedModel の作成を検討してください。       </div>
+    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">包括的な TF1 Hub 形式の作成ガイド</a>をご覧ください）<br> <div style="font-style: italic; font-size: 14px"> 注意: TF1 Hub 形式は TF1 向けであり、TF2 では部分的にのみサポートされています。TF2 SavedModel の作成を検討してください。</div>
 </td>
     <td style="text-align: center">サポートされていません</td>
   </tr>
@@ -60,7 +66,9 @@ TF1.15 以前はサポートされていません。
     <td>hub.load <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
 outputs = m(inputs)</pre> または hub.KerasLayer <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
 outputs = m(inputs)</pre> のいずれかを使用します。</td>
-    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">包括的な TF2 SavedModel の読み込みガイド</a>）。hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre>       または hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre> のいずれかを使用してください。</td>
+    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">包括的な TF2 SavedModel の読み込みガイド</a>）。hub.load <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
+outputs = m(inputs)</pre> または hub.KerasLayer <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
+outputs = m(inputs)</pre> のいずれかを使用してください。</td>
   </tr>
   <tr>
     <td>ファインチューニング</td>
