@@ -16,7 +16,7 @@ Task Library의 `NLClassifier` API는 입력 텍스트를 여러 범주로 분�
 
 - <a href="../../examples/text_classification/overview">영화 리뷰 감상 분류</a> 모델
 
-- Models with `average_word_vec` spec created by [TensorFlow Lite Model Maker for text Classification](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification).
+- [텍스트 분류를 위한 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)에서 생성된 `average_word_vec` 사양이 있는 모델
 
 - [모델 호환성 요구 사항](#model-compatibility-requirements)을 충족하는 사용자 정의 모델
 
