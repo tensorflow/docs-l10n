@@ -104,6 +104,29 @@ std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, q
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_question_answerer.h)를 참조하세요.
 
+## Python에서 추론 실행하기
+
+### 1단계: pip 패키지 설치하기
+
+```
+pip install tflite-support
+```
+
+### 2단계: 모델 사용하기
+
+```python
+# Imports
+from tflite_support.task import text
+
+# Initialization
+answerer = text.BertQuestionAnswerer.create_from_file(model_path)
+
+# Run inference
+bert_qa_result = answerer.answer(context, question)
+```
+
+`BertQuestionAnswerer` 구성에 대한 추가 옵션은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/bert_question_answerer.py)를 참조하세요.
+
 ## 예제 결과
 
 다음은 [ALBERT 모델](https://tfhub.dev/tensorflow/lite-model/albert_lite_base/squadv1/1)의 답변 결과를 보여주는 예입니다.
