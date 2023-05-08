@@ -166,12 +166,12 @@ converter.target_spec.supported_ops = [tf.lite.OpsSet.EXPERIMENTAL_TFLITE_BUILTI
 tflite_quant_model = converter.convert()
 </pre>
 
-Examples of the use cases where accuracy improvements provided by this quantization scheme include:
+이 양자화 체계가 제공하는 정확성 향상의 사용 사례는 다음과 같습니다.
 
-- super-resolution,
-- audio signal processing such as noise cancelling and beamforming,
-- image de-noising,
-- HDR reconstruction from a single image.
+- 초고해상도
+- 소음 상쇄(노이즈 캔슬링) 및 빔포밍과 같은 오디오 신호 처리
+- 이미지 노이즈 제거
+- 단일 이미지에서 HDR 재구성
 
 이 양자화의 단점은 다음과 같습니다.
 
@@ -184,7 +184,7 @@ Examples of the use cases where accuracy improvements provided by this quantizat
 
 ### 모델 정확성
 
-Since weights are quantized post training, there could be an accuracy loss, particularly for smaller networks. Pre-trained fully quantized models are provided for specific networks on [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&q=quantized){:.external}. It is important to check the accuracy of the quantized model to verify that any degradation in accuracy is within acceptable limits. There are tools to evaluate [TensorFlow Lite model accuracy](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}.
+가중치는 훈련 후에 양자화되기 때문에 특히 소규모 네트워크의 경우 정확성 손실이 있을 수 있습니다. [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&q=quantized){:.external}의 특정 네트워크에 대한 사전 훈련된 전체 양자화 모델이 제공됩니다. 정확성 저하가 허용 가능한 한계 내에 있는지 확인하기 위해 양자화된 모델의 정확성을 확인하는 것이 중요합니다. [TensorFlow Lite 모델 정확성](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}을 평가하는 도구가 있습니다.
 
 또는 정확성 저하가 너무 크면 [양자화 인식 훈련](https://www.tensorflow.org/model_optimization/guide/quantization/training)을 사용해 볼 수 있습니다. 그러나 해당 훈련을 사용하려면 모델 훈련 중에 수정하여 가짜 양자화 노드를 추가해야 하지만, 이 페이지의 훈련 후 양자화 기술은 기존의 사전 훈련된 모델을 사용합니다.
 
