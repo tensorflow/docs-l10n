@@ -4,7 +4,7 @@
 
 최신 버전의 TensorFlow Probability를 설치합니다.
 
-<pre class="devsite-terminal devsite-click-to-copy prettyprint lang-shell"> pip install --upgrade tensorflow-probability </pre>
+<pre class="devsite-terminal devsite-click-to-copy prettyprint lang-shell"> pip install --upgrade tensorflow-probability</pre>
 
 TensorFlow Probability는 최신 버전의 안정적 [TensorFlow](https://www.tensorflow.org/install)입니다(PIP 패키지 `tensorflow`). TensorFlow와 TensorFlow Probability 간의 종속성에 대한 자세한 내용은 [TFP 릴리스 노트](https://github.com/tensorflow/probability/releases)를 참조하세요.
 
