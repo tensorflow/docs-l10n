@@ -223,7 +223,7 @@ Core ML 대리자는 다음 연산을 지원합니다.
     - 가중치와 바이어스는 일정해야 합니다.
 - FullyConnected(일명 Dense 또는 InnerProduct)
     - 가중치와 바이어스(있는 경우)는 일정해야 합니다.
-    - 단일 배치 케이스만 지원합니다. 입력 차원은 마지막 차원을 제외하고 1이어야 합니다.
+    - Only supports single-batch case. Input dimensions should be 1, except the last dimension.
 - Hardswish
 - Logistic(일명 Sigmoid)
 - MaxPool2D
