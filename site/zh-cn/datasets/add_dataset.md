@@ -414,7 +414,7 @@ cd path/to/datasets/my_dataset/
 tfds build --register_checksums
 ```
 
-Some useful flags for development:
+一些适用于开发的实用标志：
 
 - `--pdb`：如果引发异常情况，则进入调试模式。
 - `--overwrite`：如果数据集已经生成，则删除现有文件。
