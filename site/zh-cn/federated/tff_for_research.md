@@ -26,7 +26,7 @@ TensorFlow Federated [托管了多个数据集](https://www.tensorflow.org/feder
 
 数据集包括：
 
-- [**StackOverflow**。](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data)一个用于语言建模或监督学习任务的真实文本数据集，训练集中有 342,477 个唯一用户和 135,818,730 个样本（句子）。
+- [**StackOverflow**.](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/stackoverflow/load_data) A realistic text dataset for language modeling or supervised learning tasks, with 342,477 unique users with 135,818,730 examples (sentences) in the training set.
 
 - [**Federated EMNIST**](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/emnist/load_data)。EMNIST 字符和数字数据集的联合预处理，其中每个客户端对应一个不同的编写器。完整的训练集包含 3400 个用户和来自 62 个标签的 671,585 个样本。
 
@@ -42,7 +42,7 @@ TensorFlow Federated [托管了多个数据集](https://www.tensorflow.org/feder
 
 ## 高性能模拟
 
-虽然 FL *模拟*的时钟时间不是评估算法的相关指标（因为模拟硬件不代表真实的 FL 部署环境），但是快速运行 FL 模拟的能力对于提高研究效率至关重要。因此，TFF 投入了大量资源来提供高性能的单机和多机运行时。相关文档正在编写中，但现在您可以参阅[使用 Kubernetes 进行高性能模拟](https://www.tensorflow.org/federated/tutorials/high_performance_simulation_with_kubernetes)教程、有关[使用加速器进行 TFF 模拟](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators)的说明，以及有关[设置 GCP 上的 TFF 模拟](https://www.tensorflow.org/federated/gcp_setup)的说明。默认情况下，高性能 TFF 运行时处于启用状态。
+While the wall-clock time of an FL *simulation* is not a relevant metric for evaluating algorithms (as simulation hardware isn't representative of real FL deployment environments), being able to run FL simulations quickly is critical for research productivity. Hence, TFF has invested heavily in providing high-performance single and multi-machine runtimes. Documentation is under development, but for now see the instructions on [TFF simulations with accelerators](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators), and instructions on [setting up simulations with TFF on GCP](https://www.tensorflow.org/federated/gcp_setup). The high-performance TFF runtime is enabled by default.
 
 ## 针对不同研究领域的 TFF
 
