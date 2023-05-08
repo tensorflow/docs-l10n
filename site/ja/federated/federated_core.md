@@ -20,7 +20,7 @@
 
 全く正式に*フェデレーテッドコンピュテーション*という言葉を定義するのは、このドキュメントの趣旨から外れてしまいますが、新しい分散型学習アルゴリズムを説明する[研究発表](https://arxiv.org/pdf/1602.05629.pdf)で、疑似コードで表現されたアルゴリズムの種類と考えるとよいでしょう。
 
-The goal of FC, in a nutshell, is to enable similarly compact representation, at a similar pseudocode-like level of abstraction, of program logic that is *not* pseudocode, but rather, that's executable in a variety of target environments.
+FC の目標は、要約すると、疑似コード*ではなく*、多様なターゲット環境で実行可能なプログラムロジックの同様にコンパクトな表現を、同様の疑似コードのようなレベルの抽象化で実現することです。
 
 FC が表現するように設計されているアルゴリズムの種類の主な決定的な特性は、システムの要素のアクションが集合的に記述されていることです。したがって、ローカルでデータを変換する*各デバイス*おと、その結果を*ブロードキャスト*、*収集*、または*集計*する中央コーディネータによって調整するデバイスについて言及する傾向にあります。
 
