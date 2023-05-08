@@ -4,23 +4,23 @@
 
 ## `Context`
 
-[context_base.Context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py)는 [AST](tracing.md)를 [구성](compilation.md), [컴파일](execution.md) 또는 [실행](compilation.md#ast)할 수 있는 환경입니다.
+[context_base.SyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) 또는 [context_base.AsyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py)는 [AST](compilation.md#ast)를 [구성](tracing.md)하거나 [컴파일](compilation.md)하거나 [실행](execution.md)할 수 있는 환경입니다.
 
 이 API는 [Executor](execution.md#executor)가 실행에 사용되지 **않을 때** 사용해야 하는 **하위 수준의 추상화**를 정의합니다. [Reference](backend.md#reference) 백엔드는 이 수준에서 통합됩니다.
 
 ### `ExecutionContext`
 
-[execution_context.ExecutionContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/execution_contexts/sync_execution_context.py)는 컴파일 함수를 사용하여 계산을 컴파일하고 [Executor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py)를 사용하여 계산을 실행하는 [context_base.Context](execution.md#executor)입니다.
+[execution_context.ExecutionContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/execution_contexts/execution_context.py)는 컴파일 함수를 사용하여 계산을 컴파일하고 [Executor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py)를 사용하여 계산을 실행하는  [context_base.SyncContext](execution.md#executor) 또는 [context_base.AsyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py)입니다.
 
 이 API는 실행을 위해 <a>Executor</a>가 사용될 때 사용해야 하는 <strong>상위 수준 추상화</strong>를 정의합니다. [네이티브](backend.md#native)는 이 수준에서 통합됩니다.
 
 ### `FederatedComputationContext`
 
-[federated_computation_context.FederatedComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation_context.py)는 페더레이션 계산을 구성하는 [context_base.Context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py)입니다. 이 컨텍스트는 [computations.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/api/computations.py) 데코레이터로 데코레이팅된 Python 함수를 추적하는 데 사용됩니다.
+[federated_computation_context.FederatedComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation_context.py)는 페더레이션 계산을 구성하는 컨텍스트입니다. 이 컨텍스트는 [federated_computation.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation.py) 데코레이터로 데코레이팅된 Python 함수를 추적하는 데 사용됩니다.
 
 ### `TensorFlowComputationContext`
 
-[tensorflow_computation_context.TensorFlowComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/tensorflow_context/tensorflow_computation_context.py)는 TensorFlow 계산을 구성하는 [context_base.Context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py)입니다. 이 컨텍스트는[computations.tf_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/api/computations.py) 데코레이터로 데코레이팅된 Python 함수를 직렬화하는 데 사용됩니다.
+[tensorflow_computation_context.TensorFlowComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/tensorflow_context/tensorflow_computation_context.py)는 TensorFlow 계산을 구성하는 컨텍스트입니다. 이 컨텍스트는 [tensorflow_computation.tf_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/tensorflow_context/tensorflow_computation.py) 데코레이터로 데코레이팅된 Python 함수를 직렬화하는 데 사용됩니다.
 
 ## `ContextStack`
 
