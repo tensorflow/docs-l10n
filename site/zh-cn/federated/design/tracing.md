@@ -24,9 +24,9 @@ TODO(b/153500547)：描述并链接跟踪系统的各个组件。
 
 具体而言，只有一个参数时，将通过以下方式执行跟踪：
 
-1. Constructing a [value_impl.Value](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) backed by a [building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) with appropriate type signature to represent the argument.
+1. 构造由 [building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) 支持的 [value_impl.Value](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py)，使用适当的类型签名表示参数。
 
-2. Invoking the function on the `Value`. This causes the Python runtime to invoke the dunder methods implemented by `Value`, which translates those dunder methods as AST construction. Each dunder method constructs a AST and returns a `Value` backed by that AST.
+2. 在 `Value` 上调用函数。这样，Python 运行时会调用由 `Value` 实现的 dunder 方法，这会将那些 dunder 方法转换为 AST 构造。每个 dunder 方法都会构造 AST 并返回该 AST 支持的 `Value`。
 
 例如：
 
@@ -35,9 +35,9 @@ def foo(x):
   return x[0]
 ```
 
-Here the function’s parameter is a tuple and in the body of the fuction the 0th element is selected. This invokes Python’s `__getitem__` method, which is overridden on `Value`. In the simplest case, the implementation of `Value.__getitem__` constructs a [building_blocks.Selection](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) to represent the invocation of `__getitem__` and returns a `Value` backed by this new `Selection`.
+在这里，函数的参数为元组，在函数体中选择第 0 个元素。这会调用 Python 的 `__getitem__` 方法，该方法在 `Value` 上被重写。在最简单的情况下，实现 `Value.__getitem__` 会构造 [building_blocks.Selection](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) 以表示调用 `__getitem__` 并返回由此新的 `Selection` 支持的 `Value`。
 
-Tracing continues because each dunder methods return a `Value`, stamping out every operation in the body of the function which causes one of the overriden dunder methods to be invoked.
+由于每个 dunder 方法都返回一个 `Value`，而在函数体中每完成一个运算就会调用一个重写的 dunder 方法，将会持续跟踪。
 
 ### 构造 AST
 
