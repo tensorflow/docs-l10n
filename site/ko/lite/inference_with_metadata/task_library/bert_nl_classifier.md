@@ -100,6 +100,29 @@ std::vector<core::Category> categories = classifier->Classify(input_text);
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_nl_classifier.h)를 참조하세요.
 
+## Python에서 추론 실행하기
+
+### 1단계: pip 패키지 설치하기
+
+```
+pip install tflite-support
+```
+
+### 2단계: 모델 사용하기
+
+```python
+# Imports
+from tflite_support.task import text
+
+# Initialization
+classifier = text.BertNLClassifier.create_from_file(model_path)
+
+# Run inference
+text_classification_result = classifier.classify(text)
+```
+
+`BertNLClassifier` 구성에 대한 추가 옵션은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/bert_nl_classifier.py)를 참조하세요.
+
 ## 예제 결과
 
 다음은 Model Maker의 [MobileBert](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification) 모델을 사용하여 영화 리뷰를 분류한 결과의 예입니다.
