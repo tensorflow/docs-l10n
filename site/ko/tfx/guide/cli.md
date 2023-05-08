@@ -50,7 +50,7 @@ TFX CLI는 TFX 패키지의 일부로 설치됩니다. 모든 CLI 명령은 아�
   <dd>파이프라인 구성 파일의 경로입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -345,7 +345,7 @@ Vertex:
 <dl>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -426,7 +426,7 @@ Vertex:
   <dd>파이프라인의 이름입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -490,21 +490,16 @@ Vertex:
 
 Kubeflow:
 
-<pre class="devsite-terminal">
-tfx run create --engine=kubeflow --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
---namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
-</pre>
+<pre class="devsite-terminal">tfx run create --engine=kubeflow --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \&lt;br&gt;--namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;</pre>
 
 Local:
 
-<pre class="devsite-terminal">
-tfx run create --engine=local --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt;
+<pre class="devsite-terminal">tfx run create --engine=local --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt;
 </pre>
 
 Vertex:
 
-<pre class="devsite-terminal">
-tfx run create --engine=vertex --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \
+<pre class="devsite-terminal">tfx run create --engine=vertex --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \
   --runtime_parameter=&lt;var&gt;var_name&lt;/var&gt;=&lt;var&gt;var_value&lt;/var&gt; \
   --project=&lt;var&gt;gcp-project-id&lt;/var&gt; --region=&lt;var&gt;gcp-region&lt;/var&gt;
 </pre>
@@ -517,17 +512,14 @@ tfx run create --engine=vertex --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">
-tfx run terminate --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
---iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx run terminate --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \&lt;br&gt;--iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]</pre>
 
 <dl>
   <dt>--run_id=<var>run-id</var> </dt>
   <dd>파이프라인 실행의 고유 식별자입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -553,7 +545,8 @@ tfx run terminate --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;
   <dd>
     <p>(선택 사항) 파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
-      <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+      <li>
+<strong>kubeflow</strong>: sets engine to Kubeflow</li>
     </ul>
     <p>엔진이 설정되지 않으면, 환경에 따라 엔진이 자동 감지됩니다.</p>
     <p>** 중요 참고 사항: 파이프라인 구성 파일에서 DagRunner에 필요한 오케스트레이터는 선택되거나 자동 감지된 엔진과 일치해야 합니다. 엔진 자동 감지는 사용자 환경을 기반으로 합니다. Apache Airflow 및 Kubeflow Pipelines가 설치되지 않은 경우, 기본적으로 로컬 오케스트레이터가 사용됩니다.</p>
@@ -571,10 +564,7 @@ tfx run terminate --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;
 
 Kubeflow:
 
-<pre class="devsite-terminal">
-tfx run delete --engine=kubeflow --run_id=&lt;var&gt;run-id&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
---namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
-</pre>
+<pre class="devsite-terminal">tfx run delete --engine=kubeflow --run_id=&lt;var&gt;run-id&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \&lt;br&gt;--namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;</pre>
 
 ### list
 
@@ -584,10 +574,7 @@ tfx run delete --engine=kubeflow --run_id=&lt;var&gt;run-id&lt;/var&gt; --iap_cl
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">
-tfx run list --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
---engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx run list --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; \&lt;br&gt;--engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]</pre>
 
 <dl>
   <dt>--pipeline_name=<var>pipeline-name</var> </dt>
@@ -639,10 +626,7 @@ tfx run list --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; [--endpoint=&l
 
 Kubeflow:
 
-<pre class="devsite-terminal">
-tfx run list --engine=kubeflow --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
---namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
-</pre>
+<pre class="devsite-terminal">tfx run list --engine=kubeflow --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \&lt;br&gt;--namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;</pre>
 
 ### status
 
@@ -652,14 +636,11 @@ tfx run list --engine=kubeflow --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">
-tfx run status --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; \
---engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx run status --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; \&lt;br&gt;--engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt;]</pre>
 
 <dl>
   <dt>--pipeline_name=<var>pipeline-name</var> </dt>
-  <dd>파이프라인의 이름입니다.</dd>
+  <dd>The name of the pipeline.</dd>
   <dt>--run_id=<var>run-id</var> </dt>
   <dd>파이프라인 실행의 고유 식별자입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
@@ -709,10 +690,7 @@ tfx run status --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --run_id=&lt
 
 Kubeflow:
 
-<pre class="devsite-terminal">
-tfx run status --engine=kubeflow --run_id=&lt;var&gt;run-id&lt;/var&gt; --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \
---iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
-</pre>
+<pre class="devsite-terminal">tfx run status --engine=kubeflow --run_id=&lt;var&gt;run-id&lt;/var&gt; --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \&lt;br&gt;--iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; --namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;</pre>
 
 ### delete
 
@@ -722,17 +700,14 @@ tfx run status --engine=kubeflow --run_id=&lt;var&gt;run-id&lt;/var&gt; --pipeli
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">
-tfx run delete --run_id=&lt;var&gt;run-id&lt;/var&gt; [--engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
---namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;]
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx run delete --run_id=&lt;var&gt;run-id&lt;/var&gt; [--engine=&lt;var&gt;engine&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \&lt;br&gt;--namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;]</pre>
 
 <dl>
   <dt>--run_id=<var>run-id</var> </dt>
   <dd>파이프라인 실행의 고유 식별자입니다.</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>(선택 사항) Kubeflow Pipelines API 서비스의 끝점입니다. Kubeflow Pipelines API 서비스의 엔드 포인트는 Kubeflow Pipelines 대시 보드의 URL과 동일합니다. 엔드 포인트 값은 다음과 같아야합니다.</p>
+    <p>       (Optional.) Endpoint of the Kubeflow Pipelines API service. The endpoint       of your Kubeflow Pipelines API service is the same as URL of the Kubeflow       Pipelines dashboard. Your endpoint value should be something like:     </p>
 </dd>
 </dl>
 
@@ -776,18 +751,13 @@ tfx run delete --run_id=&lt;var&gt;run-id&lt;/var&gt; [--engine=&lt;var&gt;engin
 
 Kubeflow:
 
-<pre class="devsite-terminal">
-tfx run delete --engine=kubeflow --run_id=&lt;var&gt;run-id&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \
---namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;
-</pre>
+<pre class="devsite-terminal">tfx run delete --engine=kubeflow --run_id=&lt;var&gt;run-id&lt;/var&gt; --iap_client_id=&lt;var&gt;iap-client-id&lt;/var&gt; \&lt;br&gt;--namespace=&lt;var&gt;namespace&lt;/var&gt; --endpoint=&lt;var&gt;endpoint&lt;/var&gt;</pre>
 
 ## tfx template [실험적]
 
 `tfx template` 명령 그룹의 명령 구조는 다음과 같습니다.
 
-<pre class="devsite-terminal">
-tfx template &lt;var&gt;command&lt;/var&gt; &lt;var&gt;required-flags&lt;/var&gt; [&lt;var&gt;optional-flags&lt;/var&gt;]
-</pre>
+<pre class="devsite-terminal">tfx template &lt;var&gt;command&lt;/var&gt; &lt;var&gt;required-flags&lt;/var&gt; [&lt;var&gt;optional-flags&lt;/var&gt;]</pre>
 
 다음 섹션을 통해 `tfx template` 명령 그룹의 명령에 대해 자세히 알아보세요. 템플릿은 실험적인 기능이며 언제든지 변경될 수 있습니다.
 
@@ -797,9 +767,7 @@ tfx template &lt;var&gt;command&lt;/var&gt; &lt;var&gt;required-flags&lt;/var&gt
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">
-tfx template list
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx template list</pre>
 
 ### copy
 
@@ -807,10 +775,7 @@ tfx template list
 
 사용법:
 
-<pre class="devsite-click-to-copy devsite-terminal">
-tfx template copy --model=&lt;var&gt;model&lt;/var&gt; --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \
---destination_path=&lt;var&gt;destination-path&lt;/var&gt;
-</pre>
+<pre class="devsite-click-to-copy devsite-terminal">tfx template copy --model=&lt;var&gt;model&lt;/var&gt; --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \&lt;br&gt;--destination_path=&lt;var&gt;destination-path&lt;/var&gt;</pre>
 
 <dl>
   <dt>--model=<var>model</var> </dt>
@@ -830,7 +795,8 @@ tfx template copy --model=&lt;var&gt;model&lt;/var&gt; --pipeline_name=&lt;var&g
   <dd>
     <p>파이프라인에 사용할 오케스트레이터입니다. 엔진 값은 다음 값 중 하나와 일치해야 합니다.</p>
     <ul>
-      <li> <strong>kubeflow</strong>: 엔진을 Kubeflow로 설정합니다.</li>
+      <li>
+<strong>kubeflow</strong>: sets engine to Kubeflow</li>
       <li> <strong>local</strong>: 엔진을 로컬 오케스트레이터로 설정합니다.</li>
       <li> <strong>vertex</strong>: 엔진을 정점 파이프라인으로 설정합니다.</li>
       <li> <strong>airflow</strong>: (실험적) 엔진을 Apache Airflow로 설정합니다.</li>
@@ -850,7 +816,7 @@ tfx template copy --model=&lt;var&gt;model&lt;/var&gt; --pipeline_name=&lt;var&g
 
 
   <dt>--run_id=<var>run-id</var> </dt>
-  <dd>파이프라인 실행의 고유 식별자입니다.</dd>
+  <dd>Unique identifier for a pipeline run.</dd>
 
 
 
