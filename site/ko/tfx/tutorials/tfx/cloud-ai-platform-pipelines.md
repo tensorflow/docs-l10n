@@ -73,7 +73,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     기본 탐색 메뉴 아래: ≡&gt; AI Platform&gt; 파이프라인
 
-2. Click **+ New Instance** to create a new cluster.
+2. **+ New Instance(+ 새 인스턴스)**를 클릭하여 새 클러스터를 만듭니다.
 
      <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-instance.png">
 
