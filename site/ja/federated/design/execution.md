@@ -18,7 +18,7 @@ TFF ランタイムは通常、[AST](compilation.md#ast) の実行を処理し�
 
 #### TensorFlow
 
-[TensorFlow](https://www.tensorflow.org/) は機械学習用のオープンソースプラットフォームです。今日、TFF ランタイムは、[実行スタック](#execution-stack)と呼ばれる階層に構成できる [eager_tf_executor.EagerTFExecutor](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executors/eager_tf_executor.py) を使用して、数学的計算を TensorFlow にデリゲートしています。
+[TensorFlow](https://www.tensorflow.org/) は機械学習用のオープンソースプラットフォームです。今日、TFF ランタイムは、[実行スタック](#execution-stack)と呼ばれる階層に構成できる [Executor](#Executor) を使用して、数学的計算を TensorFlow にデリゲートしています。
 
 ## `Executor`
 
@@ -31,11 +31,3 @@ TFF ランタイムは通常、[AST](compilation.md#ast) の実行を処理し�
 ## 実行スタック
 
 実行スタックは、[Executor](#executor) の階層です。[executor_stacks](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executor_stacks) パッケージには、特定の実行スタックを構築・作成するためのロジックが含まれます。
-
-### ローカル実行スタック
-
-[python_executor_stacks.local_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executor_stacks/python_executor_stacks.py) 関数は、クライアントで [AST](compilation.md#ast) を実行するローカル実行スタックを構築します。
-
-### リモート実行スタック
-
-[python_executor_stacks.remote_executor_factory](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/executor_stacks/python_executor_stacks.py) 関数は、サービスで [AST](compilation.md#ast) を実行するリモート実行スタックを構築します。
