@@ -41,7 +41,7 @@ await model.save('localstorage://my-model');
 
 このスキームは、モデルを `my-model` という名前でブラウザの[ローカルストレージ](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)に保存します。これは更新の間も持続しますが、スペースが問題になる場合は、ユーザーまたはブラウザによってローカルストレージが消去されるようになっています。また、特定のドメインのローカルストレージに保存できるデータ量は、ブラウザごとに制限されています。
 
-### IndexedDB (ブラウザのみ)
+### IndexedDB（ブラウザのみ）
 
 **スキーム:** `indexeddb://`
 
@@ -51,7 +51,7 @@ await model.save('indexeddb://my-model');
 
 このスキームは、モデルをブラウザの [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) ストレージに保存します。ローカルストレージと同様に、更新の間も保持されますが、保存されるオブジェクトのサイズに対する制限も大きくなる傾向があります。
 
-### ファイルダウンロード (ブラウザのみ)
+### ファイルダウンロード（ブラウザのみ）
 
 **スキーム:** `downloads://`
 
@@ -97,7 +97,7 @@ await model.save(tf.io.browserHTTPRequest(
     {method: 'PUT', headers: {'header_key_1': 'header_value_1'}}));
 ```
 
-### ネイティブファイルシステム (Node.js のみ)
+### ネイティブファイルシステム（Node.js のみ）
 
 **スキーム:** `file://`
 
@@ -132,7 +132,7 @@ const model = await tf.loadLayersModel('localstorage://my-model-1');
 
 以下では、利用可能なさまざまなスキームを説明します。
 
-### ローカルストレージ (ブラウザのみ)
+### ローカルストレージ（ブラウザのみ）
 
 **スキーム:** `localstorage://`
 
@@ -164,7 +164,7 @@ const model = await tf.loadLayersModel('http://model-server.domain/download/mode
 
 > 注意: この実装は [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) メソッドがあることに依存しています。ネイティブで fetch メソッドを提供していない環境を使用している場合は、そのインターフェースを満たす [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) を提供するか、[`node-fetch`](https://www.npmjs.com/package/node-fetch) のようなライブラリを使用してください。
 
-### ネイティブファイルシステム (Node.js のみ)
+### ネイティブファイルシステム（Node.js のみ）
 
 **スキーム:** `file://`
 
