@@ -50,9 +50,9 @@ TensorFlow Hub から（または [ホスティング](hosting.md)プロトコ�
 
 ### 低レベルの TensorFlow で SavedModel を使用する
 
-#### Model Handles
+#### モデルのハンドル
 
-SavedModels can be loaded from a specified `handle`, where the `handle` is a filesystem path, valid TFhub.dev model URL (e.g. "https://tfhub.dev/..."). Kaggle Models URLs mirror TFhub.dev handles in accordance with our Terms and the license associated with the model assets, e.g. "https://www.kaggle.com/...". Handles from Kaggle Models are equivalent to their corresponding TFhub.dev handle.
+SavedModels は指定された `handle` から読み込むことができます。ここで、`handle` はファイルシステムのパスであり、有効な TFhub.dev モデル URL（"https://tfhub.dev/..." など）です。Kaggle のモデル URL はモデルアセットに関連する規約とライセンスに従って、TFhub.dev ハンドルをミラーリングしています（"https://www.kaggle.com/..." など）。Kaggle モデルのハンドルは、対応する TFhub.dev ハンドルと同じです。
 
 関数 `hub.load(handle)` は、（`handle` がファイルシステムにすでに存在しない場合は）SavedModel をダウンロードして解凍し、TensorFlow のビルトイン関数 `tf.saved_model.load()` で読み込んだ結果を返します。したがって、`hub.load()` はあらゆる有効な SavedModel を処理することができます（以前の TF1 の `hub.Module` とは異なります）。
 
