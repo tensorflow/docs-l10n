@@ -100,21 +100,7 @@ def preprocessing_fn(inputs):
 
 ### preprocessing_fn에 대한 입력 이해하기
 
-`preprocessing_fn`은 텐서(즉, `Tensor` 또는 `SparseTensor`)에 대한 일련의 연산을 설명하므로 `preprocessing_fn`을 올바르게 작성하기 위해 데이터가 텐서로 표현되는 방식을 이해해야 합니다. `preprocessing_fn`에 대한 입력은 스키마로 결정됩니다. `Schema` proto에는 `Feature`의 목록이 포함되어 있으며, Transform은 특성 목록을 '특성 사양'('구문 분석 사양'이라고도 함)으로 변환합니다. 이때 특성 사양은 키가 특성 이름이고 값이 `FixedLenFeature` 또는 `VarLenFeature`(또는 TensorFlow Transform에서 사용되지 않는 기타 옵션) 중 하나인 사전입니다.
-
-`Schema`에서 특성 사양을 추론하는 규칙은 다음과 같습니다.
-
-- `shape`가 설정된 각 `feature`의 결과는 형상 및 `default_value=None`이 있는 `tf.FixedLenFeature`입니다.`presence.min_fraction`은 `1`이어야 합니다. 그렇지 않으면 오류가 발생합니다. 기본값이 없으면 `tf.FixedLenFeature`는 특성이 항상 필요하기 때문입니다.
-- `shape`가 설정되지 않은 각 `feature`의 결과는 `VarLenFeature`입니다.
-- 각 `sparse_feature`의 결과는 `size` 및 `is_sorted`가 `fixed_shape` 및 `SparseFeature` 메시지의 `is_sorted` 필드로 결정되는 `tf.SparseFeature`입니다.
-- `sparse_feature`의 `index_feature` 또는 `value_feature`로 사용되는 특성에는 특성 사양에서 생성된 자체 항목이 없습니다.
-- `feature`의 `type` 필드(또는 `sparse_feature` proto의 값 특성)와 특성 사양의 `dtype` 간의 대응은 다음 표에 나와 있습니다.
-
-`type` | `dtype`
---- | ---
-`schema_pb2.INT` | `tf.int64`
-`schema_pb2.FLOAT` | `tf.float32`
-`schema_pb2.BYTES` | `tf.string`
+`preprocessing_fn`은 텐서(즉, `Tensor`, `SparseTensor` 또는 `RaggedTensor`)에 대한 일련의 연산을 설명합니다. `preprocessing_fn`을 올바르게 정의하려면 데이터가 텐서로 표현되는 방식을 이해해야 합니다. `preprocessing_fn`에 대한 입력은 스키마에 의해 결정됩니다. [`Schema` proto](https://github.com/tensorflow/metadata/blob/master/tensorflow_metadata/proto/v0/schema.proto#L72)는 결국 데이터 구문 분석에 사용되는 "기능 사양"(때로 "구문 분석 사양"이라고 함)으로 변환됩니다. [여기](https://github.com/tensorflow/metadata/blob/master/tfx_bsl/docs/schema_interpretation.md)에서 변환 논리에 대한 자세한 내용을 참조하세요.
 
 ## TensorFlow Transform을 사용하여 문자열 레이블 처리하기
 
