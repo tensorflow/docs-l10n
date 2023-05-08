@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2022-04-16' review_interval: '6 months' } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2022-10-17' review_interval: '6 months' } *-->
 
 # 画像タスクの一般的な SavedModel API
 
