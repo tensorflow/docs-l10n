@@ -31,7 +31,7 @@ const saveResult = await model.save('localstorage://my-model-1');
 
 以下では、利用可能なさまざまなスキームを説明します。
 
-### ローカルストレージ (ブラウザのみ)
+### ローカルストレージ（ブラウザのみ）
 
 **スキーム:** `localstorage://`
 
