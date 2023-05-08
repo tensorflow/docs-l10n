@@ -1,8 +1,10 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2022-07-27' review_interval: '6 months' } *-->
+<!--* freshness: { owner: 'wgierke' reviewed: '2023-02-27' review_interval: '6 months' } *-->
 
 # ドキュメントの作成
 
 tfhub.dev にモデルを貢献するには、Markdown 形式のドキュメントを提供する必要があります。tfhub.dev にモデルを追加するプロセスの完全な概要については、[モデルの貢献](contribute_a_model.md)ガイドをご覧ください。
+
+**注意:** このドキュメントでは「パブリッシャー」という用語が使用されています。これは、tfhub.dev にホストされているモデルのレコード所有者を指します。
 
 ## Markdown ドキュメントの種類
 
