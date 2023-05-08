@@ -58,9 +58,9 @@ TensorFlow 的某些部分可能随时以向后不兼容的方式更改。包括
 
 - **其他语言**：Python 和 C 以外的其他语言中的 TensorFlow API，例如：
 
-    -  [C++](https://github.com/tensorflow/docs-l10n/blob/master/site/en-snapshot/install/lang_c.md)（通过 [`tensorflow/cc`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/cc) 中的头文件公开）。
-    - [Java](https://github.com/tensorflow/docs-l10n/blob/master/site/en-snapshot/install/lang_java.md)
-    - [Go](https://github.com/tensorflow/docs-l10n/blob/master/site/en-snapshot/install/lang_go.md)
+    - [C++](../install/lang_c.ipynb)（通过 [`tensorflow/cc`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/cc) 中的头文件公开）。
+    - [Java](../install/lang_java_legacy.md)
+    - [Go](https://github.com/tensorflow/build/blob/master/golang_install_guide/README.md)
     - [JavaScript](https://tensorflow.google.cn/js)
 
 - **复合运算的详细信息**：Python 中的许多 public 函数都会在计算图中展开为多个基元运算，这些详细信息将成为任何计算图（以 `GraphDef` 形式保存到磁盘中）的一部分。对于次要版本，这些详细信息可能会发生变化。特别是，检查计算图之间精确匹配度的回归测试在次要版本中可能会中断，即使计算图的行为应保持不变且现有检查点仍然有效。
@@ -85,7 +85,7 @@ SavedModel 是 TensorFlow 程序中使用的首选序列化格式。SavedModel �
 
 许多 TensorFlow 用户创建 SavedModel，并使用新版本的 TensorFlow 加载和执行这些 SavedModel。按照 [semver](https://semver.org)，使用一个版本的 TensorFlow 编写的 SavedModel 可以使用主要版本相同的新版本 TensorFlow 进行加载和评估。
 
-我们还为*受支持的* SavedModel 提供其他保证。我们将 TensorFlow 主要版本 `N` 中使用**仅非弃用、非实验性、非兼容性 API** 创建的 SavedModel 称为<em data-md-type="emphasis">版本 `N` 中受支持的 SavedModel</em>。TensorFlow 主要版本 `N` 中支持的任何 SavedModel 都可以使用 TensorFlow 主要版本 `N+1` 加载和执行。不过，构建或修改此类模型所需的功能可能不再提供，因此该保证仅适用于未修改的 SavedModel。
+我们还为*受支持的* SavedModel 提供其他保证。我们将 TensorFlow 主要版本 `N` 中使用**仅非弃用、非实验性、非兼容性 API** 创建的 SavedModel 称为<em data-md-type="raw_html">版本 `N` 中受支持的 SavedModel</em>。TensorFlow 主要版本 `N` 中支持的任何 SavedModel 都可以使用 TensorFlow 主要版本 `N+1` 加载和执行。不过，构建或修改此类模型所需的功能可能不再提供，因此该保证仅适用于未修改的 SavedModel。
 
 我们会尽可能长期保留向后兼容性，使序列化文件在很长一段时间内可用。
 
@@ -144,8 +144,8 @@ SavedModel 是 TensorFlow 程序中使用的首选序列化格式。SavedModel �
 
 默认情况下，当生产者生成一些数据时，数据将继承该生产者的 `producer` 和 `min_consumer` 版本。如果已知特定使用者版本包含错误并且必须加以避免，则可以设置 `bad_consumers`。如果以下条件均成立，使用者可以接受一项数据：
 
-- `consumer` >= 数据的 `min_consumer`
-- 数据的 `producer` >= 使用者的 `min_producer`
+- `consumer` &gt;= 数据的 `min_consumer`
+- 数据的 `producer` &gt;= 使用者的 `min_producer`
 - `consumer` 不在数据的 `bad_consumers` 范围内
 
 由于生产者和使用者来自同一个 TensorFlow 代码库，[`core/public/version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/public/version.h) 包含的主数据版本将被视为 `producer` 或 `consumer`，具体取决于上下文以及 `min_consumer` 和 `min_producer`（分别为生产者和使用者所需）。具体而言，
