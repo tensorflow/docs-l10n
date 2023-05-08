@@ -1,4 +1,4 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2022-05-22' } *-->
+<!--* freshness: { owner: 'akhorlin' reviewed: '2022-11-28' } *-->
 
 # テキストタスクの一般的な SavedModel API
 
@@ -236,4 +236,4 @@ encoder_outputs = encoder(encoder_inputs)
 
 ### Examples
 
-- Colab チュートリアル「[Solve GLUE tasks using BERT on TPU ](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb)」
+- Colab tutorial [Solve GLUE tasks using BERT on TPU](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb).
