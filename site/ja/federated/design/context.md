@@ -1,32 +1,32 @@
 # Context
 
-[TOC]
+[目次]
 
 ## `Context`
 
-A [context_base.SyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) or [context_base.AsyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) is an environment that can [construct](tracing.md), [compile](compilation.md), or [execute](execution.md) an [AST](compilation.md#ast).
+[context_base.SyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) または [context_base.AsyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) は、[AST](compilation.md#ast) を[構築](tracing.md)、[コンパイル](compilation.md)、または[実行](execution.md)できる環境です。
 
 この API は、[Executor](execution.md#executor) が実行に**使用されない**場合に使用される **low-level abstraction** を定義します。バックエンドの [Reference](backend.md#reference) はこのレベルで統合されます。
 
 ### `ExecutionContext`
 
-An [execution_context.ExecutionContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/execution_contexts/execution_context.py) is [context_base.SyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) or [context_base.AsyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) that compiles computations using a compilation function and executes computations using an [Executor](execution.md#executor).
+[execution_context.ExecutionContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/execution_contexts/execution_context.py) は、コンパイル関数を使用して計算をコンパイルし、[Executor](execution.md#executor) を使用して計算を実行する [context_base.SyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) または [context_base.AsyncContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_base.py) です。
 
 この API は、[Executor](execution.md#executor) が実行に使用される時に使用される **高レベルの抽象化**を定義します。[native](backend.md#native) はこのレベルで統合されます。
 
 ### `FederatedComputationContext`
 
-A [federated_computation_context.FederatedComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation_context.py) is a context that constructs federated computations. This context is used trace Python functions decorated with the [federated_computation.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation.py) decorator.
+[federated_computation_context.FederatedComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation_context.py) は、連合計算を構築するコンテキストです。このコンテキストは [federated_computation.federated_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/federated_computation.py) デコレータでデコレートされた Python 関数をトレースするために使用されます。
 
 ### `TensorFlowComputationContext`
 
-A [tensorflow_computation_context.TensorFlowComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/tensorflow_context/tensorflow_computation_context.py) is a context that constructs TensorFlow computations. This context is used to serialize Python functions decorated with the [tensorflow_computation.tf_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/tensorflow_context/tensorflow_computation.py) decorator.
+[tensorflow_computation_context.TensorFlowComputationContext](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/tensorflow_context/tensorflow_computation_context.py) は、TensorFlow 計算を構築するコンテキストです。このコンテキストは [tensorflow_computation.tf_computation](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/tensorflow_context/tensorflow_computation.py) デコレータでデコレートされた Python 関数をシリアル化するために使用されます。
 
 ## `ContextStack`
 
 [context_stack_base.ContextStack](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/context_stack_base.py) は[Contexts](#context) スタックを操作するためのデータ構造です。
 
-TFF が[構築](tracing.md)、[コンパイル](compilation.md)、または[実行](execution.md)するために使用するコンテキストは、以下のようにして設定できます。
+TFF が [AST](compilation.md#ast) を[構築](tracing.md)、[コンパイル](compilation.md)、または[実行](execution.md)するために使用するコンテキストは、以下のようにして設定できます。
 
 - [set_default_context.set_default_context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/context_stack/set_default_context.py) を呼び出してデフォルトのコンテキストを設定します。この API は通常、計算をコンパイルまたは実行するコンテキストをインストールする際に使用されます。
 
