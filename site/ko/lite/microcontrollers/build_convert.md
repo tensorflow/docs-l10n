@@ -45,22 +45,22 @@ in the *Hello World* example.
 
 ## 모델 아키텍처 및 훈련
 
-When designing a model for use on microcontrollers, it is important to consider the model size, workload, and the operations that are used.
+마이크로컨트롤러에서 사용할 모델을 설계할 때 모델 크기, 워크로드 및 사용되는 연산을 고려하는 것이 중요합니다.
 
 ### 모델 크기
 
-A model must be small enough to fit within your target device's memory alongside the rest of your program, both as a binary and at runtime.
+모델은 바이너리와 런타임 모두에서 프로그램의 나머지 부분과 함께 대상 기기의 메모리 내에 맞도록 충분히 작아야 합니다.
 
-To create a smaller model, you can use fewer and smaller layers in your architecture. However, small models are more likely to suffer from underfitting. This means for many problems, it makes sense to try and use the largest model that will fit in memory. However, using larger models will also lead to increased processor workload.
+더 작은 모델을 만들려면 아키텍처에서 더 작은 레이어를 더 적게 사용할 수 있습니다. 그러나 작은 모델은 과소적합의 문제를 유발할 가능성이 높습니다. 따라서 메모리를 넘지 않는 범위에서 가장 큰 모델을 시도하고 사용하는 것이 합리적입니다. 그러나 더 큰 모델을 사용하면 프로세서 워크로드도 증가합니다.
 
-Note: The core runtime for TensorFlow Lite for Microcontrollers fits in 16KB on a Cortex M3.
+참고: 마이크로컨트롤러용 TensorFlow Lite의 코어 런타임은 Cortex M3에서 16KB에 맞습니다.
 
 ### 워크로드
 
-The size and complexity of the model has an impact on workload. Large, complex models might result in a higher duty cycle, which means your device's processor is spending more time working and less time idle. This will increase power consumption and heat output, which might be an issue depending on your application.
+모델의 크기와 복잡성은 워크로드에 영향을 미칩니다. 크고 복잡한 모델은 효율 주기를 높이는 결과를 가져올 수 있습니다. 즉, 기기 프로세서의 작동 시간이 늘어나고 유휴 시간은 줄어듭니다. 이로 인해 전력 소비와 발열량이 증가하여 애플리케이션에 따라 문제가 될 수 있습니다.
 
 ### 연산 지원
 
-TensorFlow Lite for Microcontrollers currently supports a limited subset of TensorFlow operations, which impacts the model architectures that it is possible to run. We are working on expanding operation support, both in terms of reference implementations and optimizations for specific architectures.
+마이크로컨트롤러용 TensorFlow Lite는 현재 TensorFlow 연산의 일부만 지원하기 때문에 실행 가능한 모델 아키텍처에서 제약이 따릅니다. 특정 아키텍처의 참조 구현과 최적화 측면에서 연산 지원을 확대하기 위해 노력하고 있습니다.
 
 지원되는 연산은 [`all_ops_resolver.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.cc) 파일에서 확인할 수 있습니다.
