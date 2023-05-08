@@ -185,7 +185,7 @@ Windows | tensorflowlite_flex.dll
 
 ### 성능
 
-When using a mixture of both builtin and select TensorFlow ops, all of the same TensorFlow Lite optimizations and optimized builtin ops will be available and usable with the converted model.
+내장 및 특정 TensorFlow ops를 혼합하여 사용하는 경우, 동일한 TensorFlow Lite 최적화 및 최적화된 내장 ops를 모두 사용할 수 있으며 변환된 모델과 함께 사용할 수 있습니다.
 
 다음 표는 Pixel 2의 MobileNet에서 추론을 실행하는 데 걸린 평균 시간을 설명합니다. 다음은 100회 실행한 평균 시간입니다. 이러한 연산 작업은 `--config=android_arm64 -c opt` 플래그를 사용하여 Android용으로 빌드되었습니다.
 
