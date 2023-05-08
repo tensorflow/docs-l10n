@@ -4,7 +4,7 @@
 
 このページでは、TensorFlow コードを TensorFlow 1 から TensorFlow 2 に移行する間に、TensoFlow Hub を使用し続ける方法を説明します。TensorFlow の一般的な[移行ガイド](https://www.tensorflow.org/guide/migrate)を補足する内容です。
 
-For TF2, TF Hub has switched away from the legacy `hub.Module` API for building a `tf.compat.v1.Graph` like `tf.contrib.v1.layers` do. Instead, there is now a `hub.KerasLayer` for use alongside other Keras layers for building a `tf.keras.Model` (typically in TF2's new [eager execution environment](https://www.tensorflow.org/api_docs/python/tf/executing_eagerly)) and its underlying `hub.load()` method for low-level TensorFlow code.
+TF2 では、TF Hub は、`tf.contrib.v1.layers` などが行うような `tf.compat.v1.Graph` を構築するためのレガシー `hub.Module` API を排除しました。その代わり、ほかの Keras レイヤーとともに使用する、`tf.keras.Model` を（通常、TF2 の新しい [Eager execution 環境](https://www.tensorflow.org/api_docs/python/tf/executing_eagerly)で）構築するための `hub.KerasLayer` と、低レベル TensorFlow コード用の基になる `hub.load()` メソッドが追加されています。
 
 `hub.Module` API は、TF1 と TF2 の TF1 互換モードで使用できるように、`tensorflow_hub` ライブラリに残されていますが、[TF1 Hub 形式](tf1_hub_module.md)のモデルのみを読み込むことができます。
 
