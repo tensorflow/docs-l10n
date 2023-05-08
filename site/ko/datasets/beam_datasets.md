@@ -34,7 +34,7 @@ Dataflow가 다음 작업자에서 `tfds`를 설치하도록 지시하는 파일
 echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
-`tfds-nightly`를 사용하는 경우, 마지막 릴리스 이후 데이터세트가 업데이트된 경우를 위해 `tfds-nightly`에서 echo해야 합니다.
+If you're using `tfds-nightly`, make sure to echo from `tfds-nightly` in case the dataset has been updated since the last release.
 
 ```sh
 echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
@@ -54,13 +54,34 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
 
 ### 로컬에서
 
-기본 Apache Beam 러너를 사용하여 스크립트를 로컬로 실행하기 위한 명령은 다른 데이터세트에서와 같습니다.
+To run your script locally using the [default Apache Beam runner](https://beam.apache.org/documentation/runners/direct/) (it must fit all data in memory), the command is the same as for other datasets:
 
 ```sh
 tfds build my_dataset
 ```
 
 **경고**: Beam 데이터세트는 **매우** 클 수 있으며(테라바이트 이상), 상당한 양의 리소스가 생성될 수 있습니다(로컬 컴퓨터에서 몇 주가 걸릴 수 있음). 분산 환경을 사용하여 데이터세트를 생성하는 것이 좋습니다. 지원되는 런타임 목록은 [Apache Beam 설명서](https://beam.apache.org/)를 참조하세요.
+
+### With Apache Flink
+
+To run the pipeline using [Apache Flink](https://flink.apache.org/) you can read the [official documentation](https://beam.apache.org/documentation/runners/flink). Make sure your Beam is compliant with [Flink Version Compatibility](https://beam.apache.org/documentation/runners/flink/#flink-version-compatibility)
+
+To make it easier to launch the script, it's helpful to define the following variables using the actual values for your Flink setup and the dataset you want to generate:
+
+```sh
+DATASET_NAME=<dataset-name>
+DATASET_CONFIG=<dataset-config>
+FLINK_CONFIG_DIR=<flink-config-directory>
+FLINK_VERSION=<flink-version>
+```
+
+To run on an embedded Flink cluster, you can launch the job using the command below:
+
+```sh
+tfds build $DATASET_NAME/$DATASET_CONFIG \
+  --beam_pipeline_options=\
+"runner=FlinkRunner,flink_version=$FLINK_VERSION,flink_conf_dir=$FLINK_CONFIG_DIR"
+```
 
 ### 사용자 정의 스크립트
 
@@ -131,8 +152,7 @@ class DummyBeamDataset(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(16, 16, 1)),
             'label': tfds.features.ClassLabel(names=['dog', 'cat']),
