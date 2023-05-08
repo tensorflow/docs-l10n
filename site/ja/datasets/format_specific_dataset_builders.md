@@ -260,26 +260,28 @@ class MyCoNNLUDataset(tfds.dataset_builders.ConllUDatasetBuilder):
 
   # conllu_lib contains a set of ready-to-use features.
   BUILDER_CONFIGS = [
-    conllu_lib.get_universal_morphology_config(
-      language="en",
-      features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,)
+      conllu_lib.get_universal_morphology_config(
+          language='en',
+          features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,
+      )
   ]
 
   def _info(self) -> tfds.core.DatasetInfo:
     return self.create_dataset_info(
-      # ...
+        # ...
     )
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download_and_extract('https://data-url')
 
-    return {'train':
-               self._generate_examples(
-                 path=path / 'train.txt',
-                 # If necessary, add optional custom processing (see conllu_lib
-                 # for examples).
-                 # process_example_fn=...,
-               )
+    return {
+        'train':
+            self._generate_examples(
+                path=path / 'train.txt',
+                # If necessary, add optional custom processing (see conllu_lib
+                # for examples).
+                # process_example_fn=...,
+            )
     }
 ```
 
