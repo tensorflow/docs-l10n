@@ -157,3 +157,28 @@ x = f(y)  # Clear inputs/outputs
 
 x = self.f(y)  # Does f depend on additional hidden variables ? Is it stateful ?
 ```
+
+## Python での遅延インポート
+
+TensorFlow などの大規模なモジュールは遅延インポートします。遅延インポートは、モジュールが初めて使用されるまで実際のインポートを遅らせる手法です。そのため、その大規模なモジュールを必要としないユーザーがそれをインポートすることはありません。
+
+```python
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+# After this statement, TensorFlow is not imported yet
+
+...
+
+features = tfds.features.Image(dtype=tf.uint8)
+# After using it (`tf.uint8`), TensorFlow is now imported
+```
+
+内部では、[`LazyModule` class](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/utils/lazy_imports_utils.py) がファクトリとして機能し、属性へのアクセスがあったときにのみ（`__getattr__`）モジュールが実際にインポートされるようになっています。
+
+これをコンテキストマネージャーと利用することもできます。
+
+```python
+from tensorflow_datasets.core.utils.lazy_imports_utils import lazy_imports
+
+with lazy_imports(error_callback=..., success_callback=...):
+  import some_big_module
+```
