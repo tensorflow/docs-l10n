@@ -138,7 +138,7 @@ tf.ready().then(() => {...});
 ##### Why WASM?
 
 [WASM](https://webassembly.org/) was introduced in 2015 as a new web-based binary format, providing programs written
-in JavaScript, C, C++, etc. a compilation target for running on the web. WASM has been [supported](https://webassembly.org/roadmap/)
+in JavaScript, C, C++, etc. with a compilation target for running on the web. WASM has been [supported](https://webassembly.org/roadmap/)
 by Chrome, Safari, Firefox, and Edge since 2017, and is supported by [90% of devices](https://caniuse.com/#feat=wasm)
 worldwide.
 

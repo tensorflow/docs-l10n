@@ -1,7 +1,7 @@
 # TensorFlow.js layers API for Keras users
 
 The Layers API of TensorFlow.js is modeled after Keras and we strive to make the
-[Layers API](https://js.tensorflow.org/api/latest/) as
+[Layers API](https://js.tensorflow.org/api/latest/#Layers) as
 similar to Keras as reasonable given the differences between JavaScript and
 Python. This makes it easier for users with experience developing Keras models
 in Python to migrate to TensorFlow.js Layers in JavaScript. For example, the
