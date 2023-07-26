@@ -71,7 +71,7 @@ Trainer のユーザーモジュールファイルを除き、残りのパイプ
 
 以下は、ネイティブ Keras を使用したいくつかの例です。
 
-- [Penguin](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py) ([module file](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils_keras.py)): 'Hello world' end-to-end example.
+- [Penguin](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py)（[モジュールファイル](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils_keras.py)）: 「Hello world」のエンドツーエンドの例
 - [MNIST](https://github.com/tensorflow/tfx/blob/master/tfx/examples/mnist/mnist_pipeline_native_keras.py)（[モジュールファイル](https://github.com/tensorflow/tfx/blob/master/tfx/examples/mnist/mnist_utils_native_keras.py)）: 画像と TFLite のエンドツーエンドの例
 - [Taxi](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_pipeline_native_keras.py)（[モジュールファイル](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_utils_native_keras.py)）: 高度な Transform を使用したエンドツーエンドの例
 
@@ -159,7 +159,7 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
   return serve_tf_examples_fn
 ```
 
-In above serving function, tf.Transform transformations need to be applied to the raw data for inference, using the [`tft.TransformFeaturesLayer`](https://www.tensorflow.org/tfx/transform/api_docs/python/tft/TransformFeaturesLayer) layer. The previous `_serving_input_receiver_fn` which was required for Estimators will no longer be needed with Keras.
+上記のサービング関数では、[`tft.TransformFeaturesLayer`](https://www.tensorflow.org/tfx/transform/api_docs/python/tft/TransformFeaturesLayer) レイヤーを使用して、tf.Transform 変換を生データに適用して推論する必要があります。Estimator に必要であった以前の `_serving_input_receiver_fn` は Keras では使用する必要がなくなりました。
 
 ##### Transform を使用しない Keras モジュールファイル
 
