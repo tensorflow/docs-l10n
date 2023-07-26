@@ -100,21 +100,7 @@ def preprocessing_fn(inputs):
 
 ### preprocessing_fn への入力を理解する
 
-`preprocessing_fn` はテンソル（`Tensor` または `SparseTensor`）における一連の演算を記述するため、`preprocessing_fn` を正しく記述するにはデータがテンソルとしてどのように表現されているかを理解する必要があります。`preprocessing_fn` への入力はスキーマによって決定されます。`Schema` proto には `Feature` のリストが含まれており、Transform はこれらを「特徴量仕様」（「解析仕様」と呼ばれこともあります）に変換します。これは、特徴量名をキー、その値を `FixedLenFeature` または `VarLenFeature`（または TensorFlow Transform が使用していないその他のオプション）とする dict です。
-
-`Schema` から特徴量仕様を推論する際のルールは次のとおりです。
-
-- `shape` が設定されている `feature` はそれぞれ形状と `default_value=None` を持つ `tf.FixedLenFeature` になります。 `presence.min_fraction` は `1` である必要がありますが、そうでない場合はエラーが発生します。デフォルト値がない場合、`tf.FixedLenFeature` には必ず特徴量が必要であるためです。
-- `shape` が設定されていない `feature` は、`VarLenFeature` になります。
-- `sparse_feature` は `tf.SparseFeature` になります。その `size` と `is_sorted` は `SparseFeature` メッセージの `fixed_shape` と `is_sorted` フィールドによって決まります。
-- `sparse_feature` の `index_feature` または `value_feature` として使用される特徴量には、特徴量仕様に生成される独自のエントリはありません。
-- `feature` の `type` フィールド（または `sparse_feature` proto の値特徴量）と特徴量仕様の `dtype` の対応は以下の表のとおりです。
-
-`type` | `dtype`
---- | ---
-`schema_pb2.INT` | `tf.int64`
-`schema_pb2.FLOAT` | `tf.float32`
-`schema_pb2.BYTES` | `tf.string`
+`preprocessing_fn` は、テンソル（`Tensor`、`SparseTensor`、または `RaggedTensor`）に対する一連の演算を記述します。`preprocessing_fn` を正しく定義するには、データがテンソルとしてどのように表現されているかを理解する必要があります。`preprocessing_fn` への入力は、スキーマによって決定されます。[`Schema` proto](https://github.com/tensorflow/metadata/blob/master/tensorflow_metadata/proto/v0/schema.proto#L72) は最終的にデータ解析に使用される「特徴量仕様」（「解析仕様」と呼ばれることもあります）変換されます。変換ロジックについての詳細は、[こちら](https://github.com/tensorflow/metadata/blob/master/tfx_bsl/docs/schema_interpretation.md)をご覧ください。
 
 ## TensorFlow Transform を使用して文字列のラベルを処理する
 
