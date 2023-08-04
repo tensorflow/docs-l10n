@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-05' review_interval: '6 months' } *-->
 
 # Common issues
 

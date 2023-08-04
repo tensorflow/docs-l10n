@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2023-01-09' } *-->
 
 # Migrating from TF1 to TF2 with TensorFlow Hub
 
@@ -49,8 +48,8 @@ model = tf.keras.Sequential([
 
 Many tutorials show these APIs in action. See in particular
 
-*   [Text classification example notebook](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
-*   [Image classification example notebook](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
+*   [Text classification example notebook](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_text_classification.ipynb)
+*   [Image classification example notebook](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_image_retraining.ipynb)
 
 ### Using the new API in Estimator training
 

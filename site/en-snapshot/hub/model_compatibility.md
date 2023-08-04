@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-07' } *-->
 
 # Model compatibility for TF1/TF2
 

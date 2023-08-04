@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2023-02-27' } *-->
 
 # Caching model downloads from TF Hub
 

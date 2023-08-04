@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2023-02-27' } *-->
 
 # TensorFlow Hub
 

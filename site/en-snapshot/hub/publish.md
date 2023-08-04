@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2023-01-03' review_interval: '6 months' } *-->
 
 # Publishing process
 

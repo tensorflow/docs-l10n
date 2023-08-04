@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2021-03-09' } *-->
 
 # Common Signatures for Text
 

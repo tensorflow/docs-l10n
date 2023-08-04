@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2022-11-28' } *-->
 
 # Common SavedModel APIs for Text Tasks
 
@@ -95,7 +94,7 @@ distributed way. For example
 ### Examples
 
 *   Colab tutorial
-    [Text Classification with Movie Reviews](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb).
+    [Text Classification with Movie Reviews](https://colab.research.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_text_classification.ipynb).
 
 <a name="text-embeddings-preprocessed"></a>
 

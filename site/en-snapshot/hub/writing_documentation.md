@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2023-02-27' review_interval: '6 months' } *-->
 
 # Write documentation
 
@@ -210,7 +209,7 @@ The following metadata properties are supported:
     case.
 *   `colab`: HTTPS URL to a notebook that demonstrates how the model can be used
     or trained
-    ([example](https://colab.sandbox.google.com/github/tensorflow/hub/blob/master/examples/colab/bigbigan_with_tf_hub.ipynb)
+    ([example](https://colab.sandbox.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/bigbigan_with_tf_hub.ipynb)
     for [bigbigan-resnet50](https://tfhub.dev/deepmind/bigbigan-resnet50/1)).
     Must lead to `colab.research.google.com`. Note that Jupyter notebooks hosted
     on GitHub can be accessed via

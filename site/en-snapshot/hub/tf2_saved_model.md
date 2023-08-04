@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2023-01-09'} *-->
 
 # SavedModels from TF Hub in TensorFlow 2
 
@@ -52,7 +51,7 @@ model = tf.keras.Sequential([
 ```
 
 The [Text classification
-colab](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
+colab](https://colab.research.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_text_classification.ipynb)
 is a complete example how to train and evaluate such a classifier.
 
 The model weights in a `hub.KerasLayer` are set to non-trainable by default.
@@ -245,7 +244,7 @@ to the Keras model, and runs the SavedModel's computation in training
 mode (think of dropout etc.).
 
 The [image classification
-colab](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
+colab](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_image_retraining.ipynb)
 contains an end-to-end example with optional fine-tuning.
 
 #### Re-exporting the fine-tuning result

@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-12-12'} *-->
 
 # Model hosting protocol
 

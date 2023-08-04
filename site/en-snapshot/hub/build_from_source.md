@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2022-09-19' } *-->
 
 <!-- Copyright 2018 The TensorFlow Hub Authors. All Rights Reserved.
 

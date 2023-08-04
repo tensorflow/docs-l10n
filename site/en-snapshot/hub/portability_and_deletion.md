@@ -1,4 +1,3 @@
-<!--* freshness: { exempt: true } *-->
 
 ## I want to see what I’ve uploaded to TensorFlow Hub. Can I get a copy of my data?
 

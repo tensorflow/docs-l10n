@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-07' } *-->
 
 # Export a SavedModel
 
@@ -121,7 +120,7 @@ Advise consumers of your SavedModel accordingly.
 ## TensorFlow Model Garden
 
 The
-[TensorFlow Model Garden](https://github.com/tensorflow/models/tree/master/official)
+[TensorFlow Model Garden](https://github.com/tensorflow/models/tree/master/research/official)
 repo contains a lot of examples of creating reusable TF2 Saved Models to be
 uploaded on [tfhub.dev](https://tfhub.dev/).
 

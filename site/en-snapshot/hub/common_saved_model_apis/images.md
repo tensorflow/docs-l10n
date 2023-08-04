@@ -1,4 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2023-06-28' review_interval: '6 months' } *-->
 
 # Common SavedModel APIs for Image Tasks
 
@@ -71,7 +70,7 @@ consumer. The SavedModel itself should not perform dropout on the actual outputs
 Reusable SavedModels for image feature vectors are used in
 
 *   the Colab tutorial
-    [Retraining an Image Classifier](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb),
+    [Retraining an Image Classifier](https://colab.research.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_image_retraining.ipynb),
 
 <a name="classification"></a>
 
