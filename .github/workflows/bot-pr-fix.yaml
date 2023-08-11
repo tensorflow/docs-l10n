@@ -24,7 +24,7 @@ jobs:
       with:
         # Head repo is the user's fork. Ref is the branch name.
         repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
-        ref: ${{ github.event.client_payload.pull_request.head.ref }}
+        ref: ${{ github.event.client_payload.pull_request.head.sha }}
     - name: Fetch base master branch
       run: git fetch -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" master:master
     - name: Format notebooks
@@ -59,7 +59,7 @@ jobs:
       with:
         # Head repo is the user's fork. Ref is the branch name.
         repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
-        ref: ${{ github.event.client_payload.pull_request.head.ref }}
+        ref: ${{ github.event.client_payload.pull_request.head.sha }}
     - name: Fetch base master branch
       run: git fetch -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" master:master
     - name: Fix lint warnings in notebooks
