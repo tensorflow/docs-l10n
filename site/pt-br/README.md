@@ -21,7 +21,7 @@ To volunteer to write or review community translations, contact the
 
 Note: Please focus translation efforts on
 [TensorFlow 2](https://www.tensorflow.org) in the
-[site/pt-br/](https://github.com/tensorflow/docs/tree/master/site/pt-br/)
+[site/pt-br/](https://github.com/tensorflow/docs-l10n/tree/master/site/pt-br/)
 directory. TF 1.x community docs will no longer be updated as we prepare for the
 2.0 release. See
 [the announcement](https://groups.google.com/a/tensorflow.org/d/msg/docs/vO0gQnEXcSM/YK_ybv7tBQAJ).
