@@ -51,7 +51,7 @@ This pretrained model predicts if a paragraph's sentiment is positive or negativ
   </thead>
   <tr>
     <td rowspan="3">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification_v2.tflite">Text Classification</a> </td>
-    <td rowspan="3">       0.6 Mb</td>
+    <td rowspan="3">0.6 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>0.05ms*</td>
   </tr>
@@ -83,4 +83,4 @@ This pretrained model predicts if a paragraph's sentiment is positive or negativ
 
 ## テキスト分類についてもっと読む
 
-- 4 threads used.
+- [このモデルをトレーニングするための単語埋め込みとチュートリアル](https://www.tensorflow.org/tutorials/text/word_embeddings)

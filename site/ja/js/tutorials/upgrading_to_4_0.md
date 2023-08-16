@@ -1,6 +1,6 @@
-# TensorFlow.js 3.0 にアップグレードする
+# TensorFlow.js 4.0 へのアップグレード
 
-## TensorFlow.js 3.0 での変更点
+## TensorFlow.js 4.0 での変更点
 
 リリースノートは[こちらにあります](https://github.com/tensorflow/tfjs/releases)。このリリースでは、TypeScript が 4.8.4 に、`@webgpu/types` が 0.1.21 にアップグレードされました。TypeScript を使用しない場合は、このドキュメントを読まずに 4.0 に更新できます。
 

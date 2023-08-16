@@ -21,6 +21,7 @@ TensorFlow Lite GPU デリゲートによって高速化できる TensorFlow ML 
 - `DEPTHWISE_CONV_2D v1-2`
 - `EXP`
 - `FULLY_CONNECTED`
+- `LOGICAL_AND`
 - `LOGISTIC`
 - `LSTM v2（基本的な LSTM のみ）`
 - `MAX_POOL_2D`

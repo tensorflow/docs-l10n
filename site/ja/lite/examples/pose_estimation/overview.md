@@ -1,6 +1,6 @@
 # ポーズ推定
 
- <img alt="Animation showing pose estimation" src="https://storage.googleapis.com/download.tensorflow.org/example_images/movenet_demo.gif" class="">
+<img src="../images/pose.png" class="attempt-right">
 
 ポーズ推定は、ML モデルを使用して、主要な体の関節 (キーポイント) の空間的な位置を推定することで、画像または動画から人のポーズを推定するタスクです。
 

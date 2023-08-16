@@ -1,12 +1,12 @@
 # TFX パイプラインを構築する
 
-注意：TFX パイプラインの概念図については、[TFX パイプラインを理解する](understanding_tfx_pipelines)を参照してください。
+注意: TFX パイプラインの概念図については、[TFX パイプラインを理解する](understanding_tfx_pipelines)を参照してください。
 
-注意: 詳しい内容に掘り下げる前に、まずはパイプラインを構築してみようと思う方は、[テンプレートを使ってパイプラインを構築する](#build_a_pipeline_using_a_template)ことから始めてください。
+注意: 詳しい内容に掘り下げる前に、まずはパイプラインを構築してみようと思う方は、[テンプレートを使ってパイプラインを構築する](https://www.tensorflow.org/tfx/guide/build_local_pipeline#build_a_pipeline_using_a_template)ことから始めてください。
 
-## `Pipeline`クラスを使用する
+## `Pipeline` クラスの使用
 
-TFX パイプラインは、[`Pipeline`クラス](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/pipeline.py){: .external } を使って定義されます。次の例では`Pipeline`クラスの使用方法を実演しています。
+TFX パイプラインは、[`Pipeline` クラス](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/pipeline.py){: .external } を使って定義されます。次の例では `Pipeline` クラスの使用方法を実演しています。
 
 <pre class="devsite-click-to-copy prettyprint">pipeline.Pipeline(
     pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt;,
@@ -35,13 +35,13 @@ TFX パイプラインは、[`Pipeline`クラス](https://github.com/tensorflow/
 
 コンポーネントインスタンスは、アーティファクトを出力として生成し、通常は上流のコンポーネントインスタンスで入力として生成されたアーティファクトに依存します。コンポーネントインスタンスの実行シーケンスは、アーティファクト依存関係の有向非巡回グラフ（DAG）を作成することで決定されます。
 
-たとえば、`ExampleGen`標準コンポーネントは CSV ファイルからデータを取り込み、シリアル化されたサンプルレコードを出力します。`StatisticsGen`標準コンポーネントはそのサンプルレコードを入力として受け取り、データセットの統計を生成します。この例では、`SchemaGen`が`ExampleGen`の出力に依存しているため、`StatisticsGen`のインスタンスは`ExampleGen`の後に続く必要があります。
+たとえば、`ExampleGen` 標準コンポーネントは CSV ファイルからデータを取り込み、シリアル化されたサンプルレコードを出力します。`StatisticsGen` 標準コンポーネントはそのサンプルレコードを入力として受け取り、データセットの統計を生成します。この例では、`SchemaGen` が `ExampleGen` の出力に依存しているため、`StatisticsGen` のインスタンスは `ExampleGen` の後に続く必要があります。
 
 ### タスクベースの依存関係
 
 注意: 通常、タスクベースの依存関係の使用は推奨されません。アーティファクト依存関係で実行グラフを定義すると、TFX のアーティファクト系統の自動トラッキングとキャシング機能を利用できます。
 
-また、コンポーネントの[`add_upstream_node`と`add_downstream_node`](https://github.com/tensorflow/tfx/blob/master/tfx/components/base/base_node.py){: .external }メソッドを使って、タスクベースの依存関係を定義することもできます。現在のコンポーネントを指定されたコンポーネントの後に実行する場合は`add_upstream_node`、現在のコンポーネントを指定されたコンポーネントの前に実行する場合は`add_upstream_node`を使用します。
+また、コンポーネントの[`add_upstream_node` と `add_downstream_node`](https://github.com/tensorflow/tfx/blob/master/tfx/components/base/base_node.py){: .external } メソッドを使って、タスクベースの依存関係を定義することもできます。現在のコンポーネントを指定されたコンポーネントの後に実行する場合は `add_upstream_node`、現在のコンポーネントを指定されたコンポーネントの前に実行する場合は `add_upstream_node` を使用します。
 
 ## パイプラインテンプレート
 

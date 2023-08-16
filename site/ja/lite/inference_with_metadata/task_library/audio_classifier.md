@@ -32,7 +32,7 @@ Task Library `AudioClassifier` APIを使用して、カスタム音声分類器�
 
 ## Java で推論を実行する
 
-Android アプリで `AudioClassifier` を使用する例については、[音声分類リファレンスアプリ](https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android)を参照してください。
+Android アプリで `AudioClassifier` を使用する例については、[音声分類リファレンスアプリ](https://github.com/tensorflow/examples/tree/master/lite/examples/audio_classification/android)をご覧ください。
 
 ### ステップ 1: Gradle の依存関係とその他の設定をインポートする
 
@@ -52,9 +52,9 @@ dependencies {
     // Other dependencies
 
     // Import the Audio Task Library dependency (NNAPI is included)
-    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.4.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.4.4'
     // Import the GPU delegate plugin Library for GPU inference
-    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.4'
 }
 ```
 

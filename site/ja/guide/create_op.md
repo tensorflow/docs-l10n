@@ -16,7 +16,7 @@
 2. C++ で演算子を実装します。演算子の実装はカーネルとして知られており、手順 1 で登録した仕様の具象実装です。さまざまな入力/出力の型またはアーキテクチャ（CPU、GPU など）に対し複数のカーネルが存在することがあります。
 3. Python のラッパーを作成します（オプション）。このラッパーは Python で演算子を作成するために使用されるパブリック API です。デフォルトのラッパーは演算子の登録によって生成されるため、それを直接使用することも追加することもできます。
 4. 演算子に使用する勾配を計算する関数を記述します（オプション）。
-5. 演算子をテストします。通常は便宜上、Python でテストしますが、C++ でテストすることも可能です。勾配を定義した場合は、Python の `tf.test.compute_gradient_error` を使って検証することができます。Relu に似た演算子のフォワード関数と勾配をテストする例は、[`relu_op_test.py`](https://www.tensorflow.org/code/tensorflow/python/kernel_tests/relu_op_test.py) をご覧ください。
+5. 演算子をテストします。通常は便宜上、Python でテストしますが、C++ でテストすることも可能です。勾配を定義した場合は、Python の `tf.test.compute_gradient_error` を使って検証することができます。Relu に似た演算子のフォワード関数と勾配をテストする例は、[`relu_op_test.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/kernel_tests/nn_ops/relu_op_test.py) をご覧ください。
 
 ### 前提条件
 
@@ -281,7 +281,7 @@ g++ -std=c++14 -shared zero_out.cc -o zero_out.so -fPIC ${TF_CFLAGS[@]} ${TF_LFL
 
 macOS では、`.so` ファイルをビルドするときに、"-undefined dynamic_lookup" という追加フラグが必要です。
 
-> `gcc` のバージョンが `>=5` のときの注意点: gccは、バージョン `5` から新しい C++ [ABI](https://gcc.gnu.org/gcc-5/changes.html#libstdcxx) を利用しています。TensorFlow のウェブサイトで提供されているパッケージは、古い ABI を利用する `gcc4` でビルドされています。演算子ライブラリを `gcc>=5` でコンパイルする場合、コマンドラインに `-D_GLIBCXX_USE_CXX11_ABI=0` を追加し、ライブラリが古い ABI に対応できるようにしてください。
+> `gcc` バージョン `>=5` に関する注意事項: gcc はバージョン `5` 以降、新しい C++ [ABI](https://gcc.gnu.org/gcc-5/changes.html#libstdcxx) を使用しています。TensorFlow 2.8 およびそれ以前は、古い ABI を使用する `gcc4` でビルドされています。これらのバージョンの TensorFlow を使用しており、`gcc>=5` で演算子ライブラリをコンパイルしようとしている場合は、コマンドラインに `-D_GLIBCXX_USE_CXX11_ABI=0` を追加して、ライブラリを古い ABI に対応させてください。TensorFlow 2.9+ パッケージはデフォルトで新しい ABI に対応しています。
 
 ### bazel を使って演算子をコンパイルする（TensorFlow ソースインストール）
 
