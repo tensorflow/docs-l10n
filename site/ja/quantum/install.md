@@ -13,7 +13,7 @@ TensorFlow Quantum は Python  3.7、3.8 および 3.9 でサポートされて�
 ### 要件
 
 - pip 19.0 以降 (`manylinux2010`サポートが必要)
-- [TensorFlow == 2.7.0](https://www.tensorflow.org/install/pip)
+- [TensorFlow == 2.11.0](https://www.tensorflow.org/install/pip)
 
 Python 開発環境と（オプションの）仮想環境をセットアップするには、[TensorFlow インストールガイド](https://www.tensorflow.org/install/pip)を参照してください。
 
@@ -23,7 +23,7 @@ Python 開発環境と（オプションの）仮想環境をセットアップ�
 
 <pre class="devsite-click-to-copy">
   <code class="devsite-terminal">pip3 install --upgrade pip</code>
-  <code class="devsite-terminal">pip3 install tensorflow==2.7.0</code>
+  <code class="devsite-terminal">pip3 install tensorflow==2.11.0</code>
 </pre>
 
 <!-- common_typos_enable -->
@@ -88,7 +88,7 @@ TensorFlow Quantum の最新のステーブル版をインストールします�
 
 TensorFlow の[ソースから構築する](https://www.tensorflow.org/install/source#install_bazel)ガイドに記載されているように、<a href="https://bazel.build/" class="external">Bazel </a>ビルドシステムが必要になります。
 
-最新のソースビルドには、TensorFlow 2.7.0 が使用されています。互換性を確保するために、`bazel` バージョン 3.7.2 を使用しています。Bazel の既存のバージョンを削除するには、以下を実行します。
+最新のソースビルドには、TensorFlow 2.11.0 が使用されています。互換性を確保するために、`bazel` バージョン 5.3.0 を使用しています。Bazel の既存のバージョンを削除するには、以下を実行します。
 
 <!-- common_typos_disable -->
 
@@ -98,14 +98,14 @@ TensorFlow の[ソースから構築する](https://www.tensorflow.org/install/s
 
 <!-- common_typos_enable -->
 
-`bazel` バージョン 3.7.2 をダウンロードしてインストールします。
+`bazel` バージョン 5.3.0 をダウンロードしてインストールします。
 
 <!-- common_typos_disable -->
 
 <pre class="devsite-click-to-copy">
-  <code class="devsite-terminal">wget https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel_3.7.2-linux-x86_64.deb
+  <code class="devsite-terminal">wget https://github.com/bazelbuild/bazel/releases/download/5.3.0/bazel_5.3.0-linux-x86_64.deb
 </code>
-  <code class="devsite-terminal">sudo dpkg -i bazel_3.7.2-linux-x86_64.deb</code>
+  <code class="devsite-terminal">sudo dpkg -i bazel_5.3.0-linux-x86_64.deb</code>
 </pre>
 
 <!-- common_typos_enable -->
@@ -132,7 +132,7 @@ TensorFlow の[ソースから構築する](https://www.tensorflow.org/install/s
 
 ### 4. ソースから TensorFlow Quantum を構築する
 
-ここでは、TensorFlow [ソースから構築する](https://www.tensorflow.org/install/source)ガイドからの説明を使用しました。詳細はリンクをご覧ください。TensorFlow Quantum は、TensorFlow バージョン 2.7.0 と互換性があります。
+ここでは、TensorFlow の[ソースから構築する](https://www.tensorflow.org/install/source)ガイドからの説明を使用しました。詳細はリンクをご覧ください。TensorFlow Quantum は、TensorFlow バージョン 2.11.0 と互換性があります。
 
 <a href="https://github.com/tensorflow/tensorflow" class="external">TensorFlow ソースコード</a>をダウンロードします。
 
@@ -141,7 +141,7 @@ TensorFlow の[ソースから構築する](https://www.tensorflow.org/install/s
 <pre class="devsite-click-to-copy">
   <code class="devsite-terminal">git clone https://github.com/tensorflow/tensorflow.git</code>
   <code class="devsite-terminal">cd tensorflow</code>
-  <code class="devsite-terminal">git checkout v2.7.0</code>
+  <code class="devsite-terminal">git checkout v2.11.0</code>
 </pre>
 
 ステップ 2 で作成した仮想環境がアクティブになっていることを確認します。次に、TensorFlow の依存関係をインストールします。
@@ -152,7 +152,8 @@ TensorFlow の[ソースから構築する](https://www.tensorflow.org/install/s
   <code class="devsite-terminal">pip install -U pip six numpy wheel setuptools mock 'future&gt;=0.17.1'</code>
   <code class="devsite-terminal">pip install -U keras_applications --no-deps</code>
   <code class="devsite-terminal">pip install -U keras_preprocessing --no-deps</code>
-  <code class="devsite-terminal">pip install numpy==1.19.5</code>
+  <code class="devsite-terminal">pip install numpy==1.24.2</code>
+  <code class="devsite-terminal">pip install packaging requests</code>
 </pre>
 
 <!-- common_typos_enable -->
@@ -167,12 +168,12 @@ TensorFlow ビルドを構成します。Python インタープリタとライ�
 
 <!-- common_typos_enable -->
 
-TensorFlow パッケージを構築します。
+TensorFlow パッケージをビルドします（TF v2.8 以降、`_GLIBCXX_USE_CXX11_ABI` は 1 に設定されており、c++ コードは `-std=c++17` でコンパイルされています）。
 
 <!-- common_typos_disable -->
 
 <pre class="devsite-click-to-copy">
-  <code class="devsite-terminal">bazel build -c opt --cxxopt="-O3" --cxxopt="-march=native" --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" //tensorflow/tools/pip_package:build_pip_package</code>
+  <code class="devsite-terminal">bazel build -c opt --cxxopt="-O3" --cxxopt="-march=native" --cxxopt="-std=c++17" --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=1" //tensorflow/tools/pip_package:build_pip_package</code>
 </pre>
 
 <!-- common_typos_enable -->
@@ -213,7 +214,7 @@ TensorFlow Quantum pip パッケージを構築し、以下をインストール
 
 <pre class="devsite-click-to-copy">
   <code class="devsite-terminal">./configure.sh</code>
-  <code class="devsite-terminal">bazel build -c opt --cxxopt="-O3" --cxxopt="-march=native" --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" release:build_pip_package</code>
+  <code class="devsite-terminal">bazel build -c opt --cxxopt="-O3" --cxxopt="-march=native" --cxxopt="-std=c++17" --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=1" release:build_pip_package</code>
   <code class="devsite-terminal">bazel-bin/release/build_pip_package /tmp/tfquantum/</code>
   <code class="devsite-terminal">python3 -m pip install /tmp/tfquantum/&lt;var&gt;name_of_generated_wheel&lt;/var&gt;.whl</code>
 </pre>

@@ -23,12 +23,12 @@
 
 1. git リポジトリを複製します。
     <pre class="devsite-click-to-copy">    git clone https://github.com/tensorflow/examples.git
-        </pre>
+            </pre>
 2. sparse checkout を使用するように git インスタンスを構成します。これで、物体検出サンプルアプリのファイルのみを取得できます。
     <pre class="devsite-click-to-copy">    cd examples
-        git sparse-checkout init --cone
-        git sparse-checkout set lite/examples/object_detection/android_play_services
-        </pre>
+            git sparse-checkout init --cone
+            git sparse-checkout set lite/examples/object_detection/android_play_services
+            </pre>
 
 ### プロジェクトのインポートと実行
 
@@ -40,7 +40,7 @@ Android Studio を使用して、ダウンロードしたサンプルコード�
 2. Android Studio の **[Welcome]** ページで **[Import Project]** を選択するか、**[File] &gt; [New] &gt; [Import Project]** を選択します。
 3. build.gradle ファイル（`...examples/lite/examples/object_detection/android_play_services/build.gradle`）があるサンプルコードディレクトリに移動し、ディレクトリを選択します。
 
-このディレクトリを選択すると、Android Studio によって新しいプロジェクトが作成され、ビルドされます。ビルドが完了すると、Android Studio は<strong>ビルド出力</strong>ステータスパネルに <code>BUILD SUCCESSFUL</code> メッセージを表示します。
+このディレクトリを選択すると、Android Studio によって新しいプロジェクトが作成され、ビルドされます。ビルドが完了すると、Android Studio は**ビルド出力**ステータスパネルに `BUILD SUCCESSFUL` メッセージを表示します。
 
 プロジェクトを実行するには、次の手順を実行します。
 
@@ -79,7 +79,7 @@ Android Studio を使用して、ダウンロードしたサンプルコード�
     ...
         // Tensorflow Lite dependencies
         implementation 'org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2'
-        implementation 'com.google.android.gms:play-services-tflite-gpu:16.0.0'
+        implementation 'com.google.android.gms:play-services-tflite-gpu:16.1.0'
     ...
     }
     ```
@@ -127,7 +127,7 @@ TensorFlow Lite を Google Play サービスで初期化するには、以下の
 
 モデルを初期化するには、以下の手順を実行します。
 
-1. <a>ssd_mobilenet_v1</a> などの開発プロジェクトの `src/main/assets` ディレクトリに <code>.tflite</code> モデルファイルを追加します。
+1. [ssd_mobilenet_v1](https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/2) などの開発プロジェクトの `src/main/assets` ディレクトリに `.tflite` モデルファイルを追加します。
 2. `modelName` 変数を設定して、ML モデルのファイル名を指定します。
     ```
     val modelName = "mobilenetv1.tflite"
@@ -260,6 +260,6 @@ TensorFlow Lite でのハードウェアアクセラレーションデリゲー�
 
 - [Task Library API](../inference_with_metadata/task_library/overview#supported_tasks) の詳細
 - [Interpreter API](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/InterpreterApi) の詳細
-- [例](../examples)を使って、TensorFlow Lite のさまざまな使用方法を考察します。
+- [例](../examples)を使って、TensorFlow Lite の使用方法を考察します。
 - [モデル](../models)セクションで、TensorFlow Lite の機械学習モデルの使用およびビルド方法について詳細に説明します。
 - [TensorFlow Lite 開発者ガイド](../guide)で、モデルアプリケーションでの機械学習の実装について詳細に説明します。

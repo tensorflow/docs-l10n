@@ -1,10 +1,12 @@
 # 音声分類
 
+
 <img src="../images/audio.png" class="attempt-right">
 
 音声が表している内容を特定するタスクは、*音声分類*と呼ばれます。音声分類モデルは、さまざまな音声イベントを認識するようにトレーニングされています。たとえば、モデルをトレーニングして、拍手、指を鳴らす音、タイピングという 3 つの異なるイベントを表すイベントを認識できます。TensorFlow Lite は、モバイルアプリケーションでデプロイできる、最適化された事前トレーニング済みモデルを提供します。TensorFlow を使用した音声分類の詳細については、[こちら](https://www.tensorflow.org/tutorials/audio/simple_audio)を参照してください。
 
 次の図は、Android での音声分類モデルの出力を示します。
+
 
 <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/examples/audio_classification/images/android_audio_classification.png?raw=true" alt="Screenshot of Android example" class="">
 
@@ -16,9 +18,9 @@ TensorFlow Lite を初めて使用する場合、Android を使用する場合�
 
 [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/audio_classifier) のそのまま簡単に使用できる API を利用して、わずか数行のコードで音声分類モデルを統合できます。また、[TensorFlow Lite Support Library](../../inference_with_metadata/lite_support) を使用して、独自のカスタム推論パイプラインを構築することもできます。
 
-次の Android の例では、[TFLite Task Library](https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android) を使用した実装を示します。
+次の Android の例では、[TFLite Task Library](https://github.com/tensorflow/examples/tree/master/lite/examples/audio_classification/android) を使用した実装が説明されています。
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android">Android の例を見る</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/audio_classification/android">Android の例を見る</a>
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/ios">iOS の例を見る</a>
 

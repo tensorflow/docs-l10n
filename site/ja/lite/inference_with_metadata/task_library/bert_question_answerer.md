@@ -4,7 +4,7 @@
 
 ## BertQuestionAnswerer API の主な機能
 
-- 質問と文脈の 2 つのテキストを入力として受け取り、可能性の高い回答のリストを出力します。
+- 質問と文脈の 2 つのテキストを入力として受け取り、可能性の高い応答のリストを出力します。
 
 - 入力するテキストに対してグラフ外の Wordpiece または Sentencepiece トークン化を実行します。
 
@@ -39,7 +39,7 @@ dependencies {
     // Other dependencies
 
     // Import the Task Text Library dependency (NNAPI is included)
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.4.4'
 }
 ```
 
@@ -72,7 +72,7 @@ Podfile に TensorFlowLiteTaskText ポッドを追加します
 ```
 target 'MySwiftAppWithTaskAPI' do
   use_frameworks!
-  pod 'TensorFlowLiteTaskText', '~> 0.0.1-nightly'
+  pod 'TensorFlowLiteTaskText', '~> 0.4.4'
 end
 ```
 
@@ -129,13 +129,13 @@ bert_qa_result = answerer.answer(context, question)
 
 ## 結果の例
 
-[ALBERT モデル](https://tfhub.dev/tensorflow/lite-model/albert_lite_base/squadv1/1)の回答結果の例を次に示します。
+[ALBERT モデル](https://tfhub.dev/tensorflow/lite-model/albert_lite_base/squadv1/1)の応答結果の例を次に示します。
 
 文脈: "The Amazon rainforest, alternatively, the Amazon Jungle, also known in English as Amazonia, is a moist broadleaf tropical rainforest in the Amazon biome that covers most of the Amazon basin of South America. This basin encompasses 7,000,000 km2 (2,700,000 sq mi), of which 5,500,000 km2 (2,100,000 sq mi) are covered by the rainforest. This region includes territory belonging to nine nations."
 
 質問: "Where is Amazon rainforest?"
 
-回答:
+応答:
 
 ```
 answer[0]:  'South America.'
@@ -150,7 +150,7 @@ answer[4]:  'Amazon basin of South America.'
 logit: -0.774266, start_index: 37, end_index: 40
 ```
 
-独自のモデルとテストデータを使用して、シンプルな[BertQuestionAnswerer用 CLI デモツール](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/examples/task/text/desktop/README.md#bert-question-answerer)をお試しください。
+独自のモデルとテストデータを使用して、シンプルな[BertQuestionAnswerer 用 CLI デモツール](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/examples/task/text/desktop/README.md#bert-question-answerer)をお試しください。
 
 ## モデルの互換性要件
 
@@ -162,4 +162,4 @@ logit: -0.774266, start_index: 37, end_index: 40
 
 - Tokenizer の出力用の「ids」、「mask」、「segment_ids」という名前の 3 つの入力テンソル
 
-- 「end_logits」および「start_logits」という名前の 2 つの出力テンソルは、コンテキストにおける回答の相対位置を示します。
+- 「end_logits」および「start_logits」という名前の 2 つの出力テンソルは、コンテキストにおける応答の相対位置を示します。

@@ -164,7 +164,7 @@ tuner = google_cloud_ai_platform.Tuner(
 
 注意: 並列検索の各トライアルは、ワーカーフロックの 1 つのマシンで実行されるため、各トライアルはマルチワーカーの分散型トレーニングを利用しません。マルチワーカー分散を各トライアルで実施する場合は、[`DistributingCloudTuner`](https://github.com/tensorflow/cloud/blob/b9c8752f5c53f8722dfc0b5c7e05be52e62597a8/src/python/tensorflow_cloud/tuner/tuner.py#L384-L676) を参照してください（`CloudTuner` は使用しません）。
 
-注意: `CloudTuner` と Google Cloud AI Platform 拡張機能 Tuner コンポーネントを合わせて使用することができます。この場合、Ai Platform Vizier のハイパーパラメータ検索アルゴリズムのサポートで、分散型並列検索が可能です。ただし、これを行うにはCloud AI Platform ジョブが AI Platform Vizier サービスにアクセスする必要があります。カスタムサービスアカウントをセットアップするには、こちらの[ガイド](https://cloud.google.com/ai-platform/training/docs/custom-service-account#custom)をご覧ください。その後で、パイプラインコードにトレーニングジョブのカスタムサービスアカウントを指定する必要があります。詳細は、[GCP における E2E CloudTuner の例](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow_gcp.py)をご覧ください。
+注意: `CloudTuner` と Google Cloud AI Platform 拡張機能 Tuner コンポーネントを合わせて使用することができます。この場合、AI Platform Vizier のハイパーパラメータ検索アルゴリズムのサポートで、分散型並列検索が可能です。ただし、これを行うには Cloud AI Platform ジョブが AI Platform Vizier サービスにアクセスする必要があります。カスタムサービスアカウントをセットアップするには、こちらの[ガイド](https://cloud.google.com/ai-platform/training/docs/custom-service-account#custom)をご覧ください。その後で、パイプラインコードにトレーニングジョブのカスタムサービスアカウントを指定する必要があります。詳細は、[GCP における E2E CloudTuner の例](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow.py)をご覧ください。
 
 ## リンク
 

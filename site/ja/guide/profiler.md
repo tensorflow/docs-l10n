@@ -1,6 +1,6 @@
 # プロファイラを使用した TensorFlow のパフォーマンス最適化
 
-[目次]
+[TOC]
 
 このガイドでは、TensorFlow Profiler で提供されているツールを使用して、TensorFlow モデルのパフォーマンスを追跡する方法を説明します。また、ホスト（CPU）、デバイス（GPU）、またはホストとデバイスの両方の組み合わせでモデルがどのように機能するかを確認します。
 
@@ -12,7 +12,7 @@ Cloud TPU 上でモデルのパフォーマンスをプロファイリングす�
 
 ## プロファイラのインストールと GPU の要件
 
-TensorBoard 用の Profiler プラグインを pip でインストールします。TensorFlow Profiler には、最新バージョンの TensorFlow と TensorBoard（2.2 以上）が必要です。
+TensorBoard 用の Profiler プラグインを pip でインストールします。プロファイラには、最新バージョンの TensorFlow と TensorBoard（2.2 以上）が必要です。
 
 ```shell
 pip install -U tensorboard_plugin_profile
@@ -126,7 +126,7 @@ TensorFlow プログラムがファイルからデータを読み込むと、Ten
 
 入力パイプライン分析ツールを開くには、**Profile** を選択し、**Tools** プルダウンから **input_pipeline_analyzer** を選択します。
 
-![image](./images/tf_profiler/tf_stats.png)
+![image](./images/tf_profiler/input_op_stats.png)
 
 ダッシュボードには次の 3 つのセクションがあります。
 
@@ -156,7 +156,7 @@ TensorFlow プログラムがファイルからデータを読み込むと、Ten
 
 個々の入力演算の統計とそのカテゴリの内訳を実行時間別に表示するには、**Input Op Statistics** を展開します。
 
-![image](./images/tf_profiler/input_pipeline_analyzer.png)
+![image](./images/tf_profiler/tf_data_graph.png)
 
 ソース データテーブルには、次の情報を含む各エントリが表示されます。
 
@@ -174,7 +174,7 @@ TensorFlow プログラムがファイルからデータを読み込むと、Ten
 
 TensorFlow Stats ツールには、プロファイリングセッション中にホストまたはデバイスで実行されるすべての TensorFlow演算（op）のパフォーマンスが表示されます。
 
-![image](./images/tf_profiler/tf_data_graph.png)
+![image](./images/tf_profiler/trace_viewer.png)
 
 このツールでは 2 つのペインでパフォーマンス情報が表示されます。
 
@@ -244,7 +244,7 @@ Timeline ペインには、次の要素が含まれます。
     - **Step**: デバイスで実行されていたレーニングステップの期間が表示されます。
     - **TensorFlow Ops**: デバイス上で実行された演算が表示されます。
     - **XLA Ops**: [XLA](https://www.tensorflow.org/xla/) が使用されているコンパイラである場合にデバイス上で実行された XLA 演算が表示されます。各 TensorFlow 演算が 1 つ以上の XLA 演算に変換されます。XLA コンパイラにより、XLA 演算がデバイス上で実行されるコードに変換されます。
-- **ホストマシンの CPU 上で実行されるスレッドのセクション** - **「Host Threads」**というラベルが付いています。このセクションには、CPU スレッドごとに 1 つのトラックが含まれます。セクションラベルと一緒に表示される情報は無視してもかまいません。
+- **ホストマシンの CPU 上で実行されるスレッドのセクション** - **「**Host Threads**」**というラベルが付いています。このセクションには、CPU スレッドごとに 1 つのトラックが含まれます。セクションラベルと一緒に表示される情報は無視してもかまいません。
 
 ##### イベント
 
@@ -260,15 +260,15 @@ Timeline ペインには、次の要素が含まれます。
 
 このツールには、すべての GPU アクセラレータカーネルのパフォーマンス統計と元の演算を表示されます。
 
-![image](./images/tf_profiler/tf_data_graph_selector.png)
+![image](./images/tf_profiler/memory_breakdown_table.png)
 
 このツールでは 2 つのペインで情報が表示されます。
 
 - 上のペインには、合計経過時間が最も長い CUDA カーネルを示す円グラフが表示されます。
 
-- 下のペインには、一意のカーネルと演算のペアごとに次のデータを含むテーブルが表示されます。
+- 下のペインには、一意のカーネル演算ペアごとに次のデータを含むテーブルが表示されます。
 
-    - カーネルと演算のペアでグループ化された合計経過 GPU 時間の順位（降順）
+    - カーネルと演算のペアでグループ化された合計経過 GPU 時間の階数（降順）
     - 起動されたカーネルの名前。
     - カーネルが使用している GPU レジスタの数。
     - 使用されている共有（静的+動的共有）メモリの合計サイズ（バイト単位）。
@@ -277,7 +277,7 @@ Timeline ペインには、次の要素が含まれます。
     - 演算が[テンソルコア](https://www.nvidia.com/en-gb/data-center/tensor-cores/)を使用可能かどうか
     - カーネルにテンソルコア命令が含まれているかどうか
     - このカーネルを起動した演算の名前
-    - このカーネルと演算のペアが発生した数
+    - このカーネル演算のペアが発生した数
     - 合計経過 GPU 時間（マイクロ秒）
     - 平均経過 GPU 時間（マイクロ秒）
     - 最小経過 GPU 時間（マイクロ秒）
@@ -309,7 +309,7 @@ Timeline ペインには、次の要素が含まれます。
 1. **Memory ID**: すべての利用可能なデバイスメモリシステムをリストするドロップダウン。ドロップダウンから、表示するメモリシステムを選択できます。
 2. **#Allocation**: プロファイリングのインターバル中に作成されるメモリ割り当ての数です。
 3. **#Deallocation**: プロファイリングのインターバル中に行われるメモリ割り当て解除の数です。
-4. **Memory Capacity**: 選択したメモリシステムの合計容量（GB）です。
+4. **Memory Capacity**: 選択したメモリシステムの合計容量（GiB）です。
 5. **Peak Heap Usage**: モデルが実行し始めてからのピークメモリ使用率（GiB）です。
 6. **Peak Memory Usage**: プロファイリングのインターバル中のピークメモリ使用率（GiB）です。このフィールドには次のサブフィールドがあります。
     1. **Timestamp**: タイムライングラフ上でピークメモリ使用率が発生したときのタイムスタンプです。
@@ -345,7 +345,7 @@ X 軸は、プロファイリングインターバルのタイムライン（ms�
 
 このテーブルには、プロファイリングインターバルのピークメモリ使用率の時点でアクティブなメモリの割り当てが示されます。
 
-![image](./images/tf_profiler/tf_data_all_hosts.png)
+![image](./images/tf_profiler/tf_stats.png)
 
 TensorFlow 演算ごとに 1 つの行があり、各行には次の列があります。
 
@@ -416,19 +416,19 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 
 #### すべての入力パイプラインのサマリー
 
-![image](./images/tf_profiler/memory_breakdown_table.png)
+![image](./images/tf_profiler/input_pipeline_analyzer.png)
 
-このセクションには、全ホストのすべての入力パイプラインの概要が示されます。通常、入力パイプラインは 1 つです。分散ストラテジーを使用している場合、プログラムの `tf.data` コードを実行しているホストにゅうりょくパイプラインが 1 つと、そのホスト入力パイプラインからデータを取得してデバイスに転送しているデバイス入力パイプラインが複数あります。
+このセクションには、全ホストのすべての入力パイプラインの概要が示されます。通常、入力パイプラインは 1 つです。分散ストラテジーを使用している場合、プログラムの `tf.data` コードを実行しているホスト入力パイプラインが 1 つと、そのホスト入力パイプラインからデータを取得してデバイスに転送しているデバイス入力パイプラインが複数あります。
 
 入力パイプラインごとに、実行時間の統計が表示されます。50 μs より長くかかる呼び出しは、遅いと見なされます。
 
 #### 入力パイプラインのグラフ
 
-![image](./images/tf_profiler/trace_viewer.png)
+![image](./images/tf_profiler/tf_data_all_hosts.png)
 
 このセクションには、入力パイプラインのグラフが実行時間と共に示されます。「Host」と「Input Pipeline」を使って、どのホストと入力パイプラインを表示するかを選択できます。入力パイプラインの実行は、実行時間別に降順で並べ替えられており、この順序は **Rank** ドロップダウンを使って選択できます。
 
-![image](./images/tf_profiler/input_op_stats.png)
+![image](./images/tf_profiler/tf_data_graph_selector.png)
 
 重要なパスにあるノードは太いアウトラインで示されます。ボトルネックノードは重要なパスにある、それ自体の処理に最も時間のかかったノードで、赤いアウトラインで示されます。その他の重要でないノードは、グレーの破線で示されます。
 
@@ -561,7 +561,7 @@ for step, train_data in enumerate(dataset):
 
 <a name="profiling_api_table"></a>
 
-| プロファイリング API                | ローカル     | リモート    | 複数  | ハードウェア  | :                              :           :           : ワーカー   : プラットフォーム : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | サポート対象 | サポート       | サポート       | CPU、GPU  | : コールバック**                   :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート       | サポート       | CPU、GPU  | : start/stop [API]**    :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート対象 | サポート対象 | CPU、GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **コンテキストマネージャ API**      | サポート対象 | サポート       | サポート       | CPU、GPU  | :                              :           : 対象外 : 対象外 :           :
+| プロファイリング API                | ローカル     | リモート    | 複数  | ハードウェア  | :                              :           :           : ワーカー   : プラットフォーム : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | サポート対象 | サポート       | サポート       | CPU、GPU  | : コールバック**                   :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート       | サポート       | CPU、GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート対象 | サポート対象 | CPU、GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **コンテキストマネージャ API**      | サポート対象 | サポート       | サポート       | CPU、GPU  | :                              :           : 対象外 : 対象外 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -688,7 +688,7 @@ os.environ['TF_GPU_THREAD_COUNT']='1'
 
 - 畳み込みレイヤーのあるモデルでは、バッチ正規化を使用する場合は、バイアスの追加を取り除きます。バッチ正規化は、平均値で値をシフトするため、定数のバイアス項を含める必要がなくなります。
 
-- TensorFlow 統計を使用し、オンデバイスの演算がどの程度効率的に実行されているかを確認します。
+- TF Stats を使用し、オンデバイスの演算がどの程度効率的に実行されているかを確認します。
 
 - `tf.function` を使用して計算を実行し、オプションとして、`jit_compile=True` フラグを有効にします（`tf.function(jit_compile=True`）。詳細は、[XLA tf.function を使用する](https://www.tensorflow.org/xla/tutorials/jit_compile)をご覧ください。
 
@@ -703,7 +703,7 @@ os.environ['TF_GPU_THREAD_COUNT']='1'
 ## 追加リソース
 
 - Keras と TensorBoard を使用した [TensorFlow Profiler: プロファイルモデルのパフォーマンス](https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras)チュートリアル。このガイドの推奨事項を適用できます。
-- TensorFlow Dev Summit 2020 の講演「[TF 2 のパフォーマンスプロファイリング](https://www.youtube.com/watch?v=pXHAQIhhMhI)」
+- TensorFlow Dev Summit 2020 の講演「[TensorFlow 2 のパフォーマンスプロファイリング](https://www.youtube.com/watch?v=pXHAQIhhMhI)」
 - TensorFlow Dev Summit 2020 の [TensorFlow Profiler でも](https://www.youtube.com/watch?v=e4_4D7uNvf8)
 
 ## 既知の制限
@@ -718,6 +718,3 @@ CUDA® Toolkit 10.2 以降では、マルチ GPU のプロファイリングが�
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
-
-
-[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2

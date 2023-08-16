@@ -51,7 +51,7 @@ set_default_context.set_default_context(context)
 
 ただし、共通する構成がいくつかあります。
 
-[execution_context.set_local_python_execution_context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/native/execution_context.py) 関数は、`ExecutionContext` を native コンパイラと[ローカルの実行スタック](execution.md#local-execution-stack)を使って構築します。
+[execution_context.set_sync_local_cpp_execution_context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/native/execution_context.py) 関数は、`ExecutionContext` を native コンパイラと[ローカルの実行スタック](execution.md#local-execution-stack)を使って構築します。
 
 ## MapReduce
 

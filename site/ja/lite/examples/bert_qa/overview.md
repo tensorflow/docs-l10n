@@ -1,4 +1,4 @@
-# BERT 質問と回答
+# BERT 質問応答
 
 TensorFlow Lite モデルを使用して、特定のパッセージの内容に基づいて質問に答えます。
 
@@ -13,7 +13,7 @@ TensorFlow Lite を初めて使用する場合、Android または iOS を使用
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/android">Android の例</a> <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/bert_qa/ios">iOS の例</a>
 
-Android または iOS 以外のプラットフォームを使用する場合、または、すでに [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite) に精通している場合は、質問と回答スターターモデルをダウンロードしてください。
+Android または iOS 以外のプラットフォームを使用する場合、または、すでに [TensorFlow Lite API](https://www.tensorflow.org/api_docs/python/tf/lite) に精通している場合は、質問応答スターターモデルをダウンロードしてください。
 
 スターターモデルと語彙をダウンロードする
 
@@ -21,15 +21,15 @@ Android または iOS 以外のプラットフォームを使用する場合、�
 
 ## 使い方
 
-このモデルを使用すると、ユーザーの質問に自然言語で回答できるシステムを構築できます。これは、SQuAD 1.1 データセットでファインチューニングされた事前トレーニング済み BERT モデルを使用して作成されました。
+このモデルを使用すると、ユーザーの質問に自然言語で応答できるシステムを構築できます。これは、SQuAD 1.1 データセットでファインチューニングされた事前トレーニング済み BERT モデルを使用して作成されました。
 
 [BERT](https://github.com/google-research/bert) (Bidirectional Encoder Representations from Transformers) は、言語表現を事前トレーニングする方法で、さまざまな自然言語処理タスクで最先端の結果を取得できます。
 
 このアプリは、BERT の圧縮バージョンである MobileBERT を使用します。これは 4 倍の速度で実行し、モデルサイズは 1/4 になります。
 
-[SQuAD](https://rajpurkar.github.io/SQuAD-explorer/) (Stanford Question Answering Dataset) は、ウィキペディアの記事と、各記事の一連の質問と回答のペアで構成される読解データセットです。
+[SQuAD](https://rajpurkar.github.io/SQuAD-explorer/) (Stanford Question Answering Dataset) は、ウィキペディアの記事と、各記事の一連の質問と応答のペアで構成される読解データセットです。
 
-モデルは、パッセージと質問を入力として取り、質問の回答しての可能性が最も高いパッセージのセグメントを返します。これには、トークン化と後処理ステップを含むやや複雑な前処理が必要です。これらは BERT に関する[論文](https://arxiv.org/abs/1810.04805)で説明され、サンプルアプリで実装されています。
+モデルは、パッセージと質問を入力として取り、質問への応答としての可能性が最も高いパッセージのセグメントを返します。これには、トークン化と後処理ステップを含むやや複雑な前処理が必要です。これらは BERT に関する[論文](https://arxiv.org/abs/1810.04805)で説明され、サンプルアプリで実装されています。
 
 ## パフォーマンスベンチマーク
 
@@ -45,9 +45,8 @@ Android または iOS 以外のプラットフォームを使用する場合、�
     </tr>
   </thead>
   <tr>
-    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a>
-</td>
-    <td rowspan="3">       100.5 Mb</td>
+    <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/mobilebert/1/metadata/1?lite-format=tflite">Mobile Bert</a> </td>
+    <td rowspan="3">100.5 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>123ms*</td>
   </tr>
@@ -73,15 +72,15 @@ Android または iOS 以外のプラットフォームを使用する場合、�
 >
 > 当時カリフォルニア州のスタンフォード大学の博士課程に在籍していたラリー・ペイジとサーゲイ・ブリンにより設立されました。現在でも  2 人 合わせて約 14% の株を保有し、スーパー投票株を通じて株主投票権の 56% を制御しています。Google は 1998 年 9 月 4 日にカリフォルニア州でカリフォルニアの非公開会社として設立されました。その後、Google は 2002 年 10 月 22 日にデラウェア州で再度法人として設立されました。2004 年 8 月 19 日に株式公開 (IPO) が行われ、Google は Googleplex と呼ばれるカリフォルニア州マウンテンビューの本社に移転しました。2015 年 8 月、Google は Alphabet Inc と呼ばれるコングロマリットとしてさまざまな事業を再編成する計画を発表しました。Google は Alphabet 社の主要な子会社として、引き続きインターネット関係の事業に包括的に取り組みます。 ラリー・ペイジの後任としてスンダー・ピチャイが新 CEO に就任し、ラリー・ペイジは Alphabet の CEO に着任しました。
 
-### 質問 (入力)
+### 質問（入力）
 
 > Google の CEO は誰ですか？
 
-### 回答 (出力)
+### 応答（出力）
 
 > スンダー・ピチャイ
 
 ## BERT の詳細を読む
 
-- 4 threads used.
+- 4 つのスレッドを使用。
 - [BERT のオープンソース実装](https://github.com/google-research/bert)

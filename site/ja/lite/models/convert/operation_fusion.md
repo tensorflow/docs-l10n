@@ -85,7 +85,7 @@ class TestModel(tf.Module):
 演算の例を示します。
 
 ```c++
-  TfLiteRegistration reg;
+  TfLiteRegistration reg = {};
   // This name must match the name specified in the implements signature.
   static constexpr char kOpName[] = "my_custom_fused_op";
   reg.custom_name = kOpName;
@@ -94,7 +94,7 @@ class TestModel(tf.Module):
     return kTfLiteOk;
   };
   reg.invoke = [](TfLiteContext* context, TfLiteNode* node) -> TfLiteStatus {
-    // Add your coder.
+    // Add your code.
     return kTfLiteOk;
   };
   reg.builtin_code = kTfLiteCustom;

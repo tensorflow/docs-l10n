@@ -1,6 +1,6 @@
 # 物体検出器の統合
 
-物体検出器は、既知の物体セットのどれが存在するかを識別し、特定の画像またはビデオストリーム内のそれらの位置に関する情報を提供できます。物体検出器は、物体の複数のクラスの存在と位置を検出するようにトレーニングされています。たとえば、さまざまな果物を含む画像でモデルをトレーニングし、それらが表す果物のクラスを指定する*ラベル* (リンゴ、バナナ、イチゴなど) と各物体が画像のどこに現れるかを特定するデータを提供できます。物体検出器の詳細については、[物体検出の概要](../../models/object_detection/overview.md)をご覧ください。
+物体検出器は、既知の物体セットのどれが存在するかを識別し、特定の画像またはビデオストリーム内のそれらの位置に関する情報を提供します。物体検出器は、物体の複数のクラスの存在と位置を検出するようにトレーニングされています。たとえば、さまざまな果物を含む画像でモデルをトレーニングし、それらが表す果物のクラスを指定する*ラベル* (リンゴ、バナナ、イチゴなど) と各物体が画像のどこに現れるかを特定するデータを提供できます。物体検出器の詳細については、[物体検出の概要](../../examples/object_detection/overview)をご覧ください。
 
 Task Library `ObjectDetector` API を使用して、カスタム物体検出器または事前トレーニング済みの検出器をモバイルアプリにデプロイします。
 
@@ -44,16 +44,15 @@ android {
     aaptOptions {
         noCompress "tflite"
     }
-
 }
 
 dependencies {
     // Other dependencies
 
     // Import the Task Vision Library dependency (NNAPI is included)
-    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-vision'
     // Import the GPU delegate plugin Library for GPU inference
-    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin'
 }
 ```
 
@@ -78,12 +77,127 @@ List<Detection> results = objectDetector.detect(image);
 
 <code>ObjectDetector</code>を構成するその他のオプションについては、<a>ソースコードと javadoc</a> をご覧ください。
 
+## iOS で推論を実行する
+
+### 手順 1: 依存関係をインストールする
+
+タスクライブラリは、CocoaPods を使用したインストールをサポートしています。CocoaPods がシステムにインストールされていることを確認してください。手順については、[CocoaPods インストールガイド](https://guides.cocoapods.org/using/getting-started.html#getting-started)を参照してください。
+
+ポッドを Xcode に追加する詳細な方法については、[CocoaPods ガイド](https://guides.cocoapods.org/using/using-cocoapods.html)を参照してください。
+
+Podfile に `TensorFlowLiteTaskVision` ポッドを追加します。
+
+```
+target 'MyAppWithTaskAPI' do
+  use_frameworks!
+  pod 'TensorFlowLiteTaskVision'
+end
+```
+
+推論で使用する `.tflite` モデルがアプリバンドルに存在することを確認します。
+
+### 手順 2: モデルを使用する
+
+#### Swift
+
+```swift
+// Imports
+import TensorFlowLiteTaskVision
+
+// Initialization
+guard let modelPath = Bundle.main.path(forResource: "ssd_mobilenet_v1",
+                                            ofType: "tflite") else { return }
+
+let options = ObjectDetectorOptions(modelPath: modelPath)
+
+// Configure any additional options:
+// options.classificationOptions.maxResults = 3
+
+let detector = try ObjectDetector.detector(options: options)
+
+// Convert the input image to MLImage.
+// There are other sources for MLImage. For more details, please see:
+// https://developers.google.com/ml-kit/reference/ios/mlimage/api/reference/Classes/GMLImage
+guard let image = UIImage (named: "cats_and_dogs.jpg"), let mlImage = MLImage(image: image) else { return }
+
+// Run inference
+let detectionResult = try detector.detect(mlImage: mlImage)
+```
+
+#### Objective C
+
+```objc
+// Imports
+#import <TensorFlowLiteTaskVision/TensorFlowLiteTaskVision.h>
+
+// Initialization
+NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"ssd_mobilenet_v1" ofType:@"tflite"];
+
+TFLObjectDetectorOptions *options = [[TFLObjectDetectorOptions alloc] initWithModelPath:modelPath];
+
+// Configure any additional options:
+// options.classificationOptions.maxResults = 3;
+
+TFLObjectDetector *detector = [TFLObjectDetector objectDetectorWithOptions:options
+                                                                     error:nil];
+
+// Convert the input image to MLImage.
+UIImage *image = [UIImage imageNamed:@"dogs.jpg"];
+
+// There are other sources for GMLImage. For more details, please see:
+// https://developers.google.com/ml-kit/reference/ios/mlimage/api/reference/Classes/GMLImage
+GMLImage *gmlImage = [[GMLImage alloc] initWithImage:image];
+
+// Run inference
+TFLDetectionResult *detectionResult = [detector detectWithGMLImage:gmlImage error:nil];
+```
+
+`TFLObjectDetector` を構成するその他のオプションについては、<a>ソースコード</a>を参照してください。
+
+## Python で推論を実行する
+
+### 手順 1: pip パッケージをインストールする
+
+```
+pip install tflite-support
+```
+
+### 手順 2: モデルを使用する
+
+```python
+# Imports
+from tflite_support.task import vision
+from tflite_support.task import core
+from tflite_support.task import processor
+
+# Initialization
+base_options = core.BaseOptions(file_name=model_path)
+detection_options = processor.DetectionOptions(max_results=2)
+options = vision.ObjectDetectorOptions(base_options=base_options, detection_options=detection_options)
+detector = vision.ObjectDetector.create_from_options(options)
+
+# Alternatively, you can create an object detector in the following manner:
+# detector = vision.ObjectDetector.create_from_file(model_path)
+
+# Run inference
+image = vision.TensorImage.create_from_file(image_path)
+detection_result = detector.detect(image)
+```
+
+<code>ObjectDetector</code>を構成するその他のオプションについては、<a>ソースコード</a>をご覧ください。
+
 ## C++ で推論を実行する
 
 ```c++
+// Initialization
 ObjectDetectorOptions options;
-options.mutable_base_options()->mutable_model_file()->set_file_name(model_file);
+options.mutable_base_options()->mutable_model_file()->set_file_name(model_path);
 std::unique_ptr<ObjectDetector> object_detector = ObjectDetector::CreateFromOptions(options).value();
+
+// Create input frame_buffer from your inputs, `image_data` and `image_dimension`.
+// See more information here: tensorflow_lite_support/cc/task/vision/utils/frame_buffer_common_utils.h
+std::unique_ptr<FrameBuffer> frame_buffer = CreateFromRgbRawBuffer(
+      image_data, image_dimension);
 
 // Run inference
 const DetectionResult result = object_detector->Detect(*frame_buffer).value();
@@ -121,7 +235,7 @@ Results:
 
 ## モデルの互換性要件
 
-`ObjectDetector` API は、必須の [TFLite モデル メタデータ](../../convert/metadata.md)を持つ TFLite モデルを想定しています。[TensorFlow Lite Metadata Writer API](../../convert/metadata_writer_tutorial.ipynb#object_detectors) を使用して物体検出器のメタデータを作成する例をご覧ください。
+`ObjectDetector` API は、必須の [TFLite モデル メタデータ](../../models/convert/metadata)を持つ TFLite モデルを想定しています。[TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#object_detectors) を使用して物体検出器のメタデータを作成する例をご覧ください。
 
 互換性のある物体検出モデルは、次の要件を満たす必要があります。
 

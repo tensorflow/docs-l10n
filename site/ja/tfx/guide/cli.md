@@ -531,7 +531,7 @@ tfx run create --engine=vertex --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&
 
 ** 要注意: 現在、Kubeflow でのみサポートされています。
 
-使用法：
+使用法:
 
 <pre class="devsite-click-to-copy devsite-terminal">
 tfx run terminate --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;endpoint&lt;/var&gt; --engine=&lt;var&gt;engine&lt;/var&gt; \
@@ -576,7 +576,7 @@ tfx run terminate --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var>
 </dt>
-  <dd>（オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
+  <dd> （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
   <dt>--namespace=<var>namespace</var>
