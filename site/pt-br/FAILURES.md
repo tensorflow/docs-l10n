@@ -15,6 +15,6 @@ Last run: Tue, 12 Oct 2021 00:18:15 GMT
 
 Failures in <code>site/pt-br/</code>:
 
-* [tutorials/images/transfer_learning.ipynb](https://github.com/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/images/transfer_learning.ipynb) · [[Sync in GitLocalize](https://gitlocalize.com/repo/4592/pt-br/site/en-snapshot/tutorials/images/transfer_learning.ipynb)] · [[Test in Colab](https://colab.research.google.com/github/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/images/transfer_learning.ipynb)]
-* [tutorials/quickstart/advanced.ipynb](https://github.com/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/quickstart/advanced.ipynb) · [[Sync in GitLocalize](https://gitlocalize.com/repo/4592/pt-br/site/en-snapshot/tutorials/quickstart/advanced.ipynb)] · [[Test in Colab](https://colab.research.google.com/github/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/quickstart/advanced.ipynb)]
+* [tutorials/images/transfer_learning.ipynb](https://github.com/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/images/transfer_learning.ipynb) · [[Sync in GitLocalize](https://gitlocalize.com/repo/4592/pt-br/site/pt-br-snapshot/tutorials/images/transfer_learning.ipynb)] · [[Test in Colab](https://colab.research.google.com/github/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/images/transfer_learning.ipynb)]
+* [tutorials/quickstart/advanced.ipynb](https://github.com/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/quickstart/advanced.ipynb) · [[Sync in GitLocalize](https://gitlocalize.com/repo/4592/pt-br/site/pt-br-snapshot/tutorials/quickstart/advanced.ipynb)] · [[Test in Colab](https://colab.research.google.com/github/tensorflow/docs-l10n/blob/master/site/pt-br/tutorials/quickstart/advanced.ipynb)]
 
