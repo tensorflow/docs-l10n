@@ -85,7 +85,7 @@ Op를 등록할 이름은 구현 서명의 `name` 속성에 지정된 이름과 
 예제의 op에 대한 예는 다음과 같습니다.
 
 ```c++
-  TfLiteRegistration reg;
+  TfLiteRegistration reg = {};
   // This name must match the name specified in the implements signature.
   static constexpr char kOpName[] = "my_custom_fused_op";
   reg.custom_name = kOpName;
@@ -94,7 +94,7 @@ Op를 등록할 이름은 구현 서명의 `name` 속성에 지정된 이름과 
     return kTfLiteOk;
   };
   reg.invoke = [](TfLiteContext* context, TfLiteNode* node) -> TfLiteStatus {
-    // Add your coder.
+    // Add your code.
     return kTfLiteOk;
   };
   reg.builtin_code = kTfLiteCustom;

@@ -4,7 +4,7 @@ iOS에서 TensorFlow Lite를 시작하려면 다음 예제를 살펴볼 것을 �
 
 <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS 이미지 분류 예제</a>
 
-소스 코드에 대한 설명은 TensorFlow Lite iOS 이미지 분류를 읽어보아야 합니다.
+소스 코드에 대한 설명은 [TensorFlow Lite iOS 이미지 분류](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/README.md)를 읽어보아야 합니다.
 
 이 예제 앱은 이미지 분류를 사용하여 기기의 후면 카메라에서 보이는 내용을 지속적으로 분류하여 가장 가능성이 높은 분류를 표시합니다. 이를 통해 사용자는 부동 소수점 또는 양자화 모델 중에서 선택하고 추론을 수행할 스레드 수를 선택할 수 있습니다.
 
@@ -40,7 +40,7 @@ TensorFlowLiteSwift 및 TensorFlowLiteObjC 포드 모두에 안정적인 릴리�
 버전 제약 조건을 지정할 수도 있습니다. 예를 들어, 버전 2.0.0을 이용하려는 경우 종속성을 다음과 같이 작성할 수 있습니다.
 
 ```ruby
-pod 'TensorFlowLiteSwift', '~> 2.0.0'
+pod 'TensorFlowLiteSwift', '~> 2.10.0'
 ```
 
 그러면 TensorFlowLiteSwift 포드의 최신 2.xy 버전이 앱에서 사용됩니다. 또는 야간 빌드를 사용하려는 경우, 다음과 같이 작성할 수 있습니다.
@@ -98,7 +98,7 @@ objc_library(
 # Using C++ API directly
 objc_library(
   deps = [
-      "//third_party/tensorflow/lite:framework",
+      "//tensorflow/lite:framework",
   ],
 )
 ```

@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-04-09' review_interval: '6 months' } *-->
-
 # TF1 Hub 형식
 
 2018년 출시 당시 TensorFlow Hub는 TensorFlow 1 프로그램으로 가져올 수 있는 단일 유형의 자산인 TF1 Hub 형식을 제공했습니다.
@@ -17,6 +15,8 @@ TF1 Hub 형식의 모델은 다음과 같이 URL 또는 파일 시스템 경로�
 ```python
 m = hub.Module("path/to/a/module_dir")
 ```
+
+**참고:** 다른 유효한 핸들 유형에 대한 자세한 정보는 [여기](tf2_saved_model.md#model_handles)에서 확인하세요.
 
 그러면 현재 TensorFlow 그래프에 모듈의 변수가 추가됩니다. 이니셜라이저를 실행하면 디스크에서 사전 훈련된 값을 읽습니다. 마찬가지로, 테이블 및 기타 상태가 그래프에 추가됩니다.
 

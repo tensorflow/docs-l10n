@@ -113,7 +113,7 @@ TensorFlow Lite를 처음 사용하고 Android 또는 iOS로 작업하는 경우
 
 아래에 출력의 예를 나타내었습니다.
 
-<img src="https://www.tensorflow.org/images/lite/models/pose_estimation.gif" alt="포즈 추정을 보여주는 애니메이션">
+<img src="https://storage.googleapis.com/download.tensorflow.org/example_images/movenet_demo.gif" alt="포즈 추정을 보여주는 애니메이션">
 
 ## 성능 벤치마크
 

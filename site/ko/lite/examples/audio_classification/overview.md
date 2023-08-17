@@ -1,10 +1,12 @@
 # 오디오 분류
 
+
 <img src="../images/audio.png" class="attempt-right">
 
 오디오가 나타내는 것을 식별하는 작업을 *오디오 분류*라고 합니다. 오디오 분류 모델은 다양한 오디오 이벤트를 인식하도록 학습됩니다. 예를 들어 박수, 손가락 튕기기, 타이핑의 세 가지 이벤트를 나타내는 이벤트를 인식하도록 모델을 훈련할 수 있습니다. TensorFlow Lite는 모바일 애플리케이션에 배포할 수 있는 최적화된 사전 학습된 모델을 제공합니다. [여기](https://www.tensorflow.org/tutorials/audio/simple_audio)에서 TensorFlow를 사용한 오디오 분류에 대해 자세히 알아보세요.
 
 다음 이미지는 Android에서 오디오 분류 모델의 출력을 보여줍니다.
+
 
 <img src="images/android_audio_classification.png" width="30%" alt="Android 예제의 스크린샷">
 
@@ -16,9 +18,9 @@ TensorFlow Lite를 처음 사용하고 Android로 작업하는 경우, 다음 �
 
 [TensorFlow Lite 작업 라이브러리](../../inference_with_metadata/task_library/audio_classifier)의 기본 API를 활용하여 몇 줄의 코드로 오디오 분류 모델을 통합할 수 있습니다. [TensorFlow Lite 지원 라이브러리](../../inference_with_metadata/lite_support)를 사용하여 사용자 지정 추론 파이프라인을 구축할 수도 있습니다.
 
-아래 Android 예제는 [TFLite 작업 라이브러리](https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android)를 사용한 구현을 보여줍니다.
+아래 Android 예제는 [TFLite 작업 라이브러리](https://github.com/tensorflow/examples/tree/master/lite/examples/audio_classification/android)를 사용한 구현을 보여줍니다.
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android">Android 예제 보기</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/audio_classification/android">Android 예제 보기</a>
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/ios">iOS 예제 보기</a>
 

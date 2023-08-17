@@ -128,7 +128,7 @@ let detectionResult = try detector.detect(mlImage: mlImage)
 
 ```objc
 // Imports
-#import <TensorFlowLiteTaskVision/TFLTaskVision.h>
+#import <TensorFlowLiteTaskVision/TensorFlowLiteTaskVision.h>
 
 // Initialization
 NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"ssd_mobilenet_v1" ofType:@"tflite"];

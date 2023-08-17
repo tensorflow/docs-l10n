@@ -71,7 +71,7 @@ Trainer의 사용자 모듈 파일을 제외하고 나머지 파이프라인은 
 
 다음은 기본 Keras를 사용한 몇 가지 예입니다.
 
-- [Penguin](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py)([모듈 파일](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils.py)): 'Hello world' 엔드 투 엔드 예제
+- [Penguin](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py)([모듈 파일](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils_keras.py)): 'Hello world' 엔드 투 엔드 예제
 - [MNIST](https://github.com/tensorflow/tfx/blob/master/tfx/examples/mnist/mnist_pipeline_native_keras.py)([모듈 파일](https://github.com/tensorflow/tfx/blob/master/tfx/examples/mnist/mnist_utils_native_keras.py)): 이미지 및 TFLite 엔드 투 엔드 예제
 - [Taxi](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_pipeline_native_keras.py)([모듈 파일](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_utils_native_keras.py)): 고급 Transform 사용법을 사용한 엔드 투 엔드 예제
 
@@ -159,7 +159,7 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
   return serve_tf_examples_fn
 ```
 
-위의 적용 함수에서 추론을 위해 [`tft.TransformFeaturesLayer`](https://github.com/tensorflow/transform/blob/master/docs/api_docs/python/tft/TransformFeaturesLayer.md) 레이어로 이들 tf.Transform 변환을 원시 데이터에 적용해야 합니다. Estimator에 필요했던 이전 `_serving_input_receiver_fn`은 더는 Keras에 필요하지 않습니다.
+위의 적용 함수에서 추론을 위해 [`tft.TransformFeaturesLayer`](https://www.tensorflow.org/tfx/transform/api_docs/python/tft/TransformFeaturesLayer) 레이어로 tf.Transform 변환을 원시 데이터에 적용해야 합니다. Estimator에 필요했던 이전 `_serving_input_receiver_fn`은 더 이상 Keras에 필요하지 않습니다.
 
 ##### Transform이 없는 Keras 모듈 파일
 
@@ -202,9 +202,7 @@ def run_fn(fn_args: TrainerFnArgs):
   model.save(fn_args.serving_model_dir, save_format='tf', signatures=signatures)
 ```
 
-#####
-
-[tf.distribute.Strategy](https://www.tensorflow.org/guide/distributed_training)
+##### [tf.distribute.Strategy](https://www.tensorflow.org/guide/distributed_training)
 
 현재 TFX는 단일 작업자 전략(예: [MirroredStrategy](https://www.tensorflow.org/api_docs/python/tf/distribute/MirroredStrategy), [OneDeviceStrategy](https://www.tensorflow.org/api_docs/python/tf/distribute/OneDeviceStrategy))만 지원합니다.
 

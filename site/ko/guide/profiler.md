@@ -86,7 +86,7 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
         - 호스트 컴퓨팅 시간
         - 기기 간 통신 시간
         - 기기 내 컴퓨팅 시간
-        - Python 오버헤드를 포함한 기타
+        - 모든 기타 시간(Python 오버헤드 포함)
 
     2. 기기 컴퓨팅 정밀도 - 16bit 및 32bit 계산을 사용하는 기기 컴퓨팅 시간의 백분율을 보고합니다.
 
@@ -221,7 +221,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 추적 뷰어를 열면 가장 최근에 실행된 내용이 표시됩니다.
 
-![image](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/guide/images/tf_profiler/tf_data_graph.png?raw=true)
+![image](./images/tf_profiler/trace_viewer.png)
 
 이 화면에는 다음과 같은 주요 요소가 포함되어 있습니다.
 
@@ -260,20 +260,20 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 이 도구는 모든 GPU 가속 커널에 대한 성능 통계 및 원래 op를 보여줍니다.
 
-![image](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/guide/images/tf_profiler/tf_data_graph_selector.png?raw=true)
+![image](./images/tf_profiler/tf_data_all_hosts.png)
 
 이 도구는 두 개의 창에서 정보를 표시합니다.
 
-- 상단 창에는 총 시간이 가장 높은 CUDA 커널을 보여주는 원형 차트가 표시됩니다.
+- 상단 창에는 총 경과 시간이 가장 긴 CUDA 커널을 보여주는 원형 차트가 표시됩니다.
 
 - 하단 창에 표시되는 표에서는 각 고유 커널-연산 쌍에 대한 다음 데이터가 표시됩니다.
 
     - 총 경과 GPU 기간을 kernel-op 쌍으로 그룹화하여 내림차순으로 나타낸 순위
-    - 시작된 커널의 이름
+    - 실행된 커널의 이름
     - 커널이 사용하는 GPU 레지스터의 수
     - 사용된 공유(정적 + 동적 공유) 메모리의 총 크기(바이트 단위)
     - `blockDim.x, blockDim.y, blockDim.z`로 표현된 블록 차원
-    - `gridDim.x, gridDim.y, gridDim.z`로 표현된 그리드 차원
+    - `gridDim.x, gridDim.y, gridDim.z`.<br>code0}로 표현된 그리드 차원
     - 연산이 [Tensor Cores](https://www.nvidia.com/en-gb/data-center/tensor-cores/)를 사용할 수 있는지 여부
     - 커널에 Tensor Core 명령어가 포함되어 있는지 여부
     - 이 커널을 시작한 연산의 이름
@@ -322,7 +322,7 @@ TensorFlow 통계 도구는 프로파일링 세션 동안 호스트 또는 기�
 
 이 섹션에는 메모리 사용량(GiB) 플롯 및 시간에 따른 조각화 비율(ms)이 표시됩니다.
 
-![image](./images/tf_profiler/memory_breakdown_table.png)
+![image](./images/tf_profiler/pod_viewer.png)
 
 X축은 프로파일링 기간의 타임라인(ms)을 나타냅니다. 왼쪽의 Y축은 메모리 사용량(GiB)을 나타내고 오른쪽의 Y축은 조각화 비율을 나타냅니다. X축의 각 시점에서 총 메모리는 스택(빨간색), 힙(주황색) 및 여유(녹색)의 세 가지 범주로 분류됩니다. 특정 타임스탬프 위로 마우스를 가져가면 아래와 같이 해당 시점의 메모리 할당/할당 해제 이벤트에 대한 세부 정보를 볼 수 있습니다.
 
@@ -345,7 +345,7 @@ X축은 프로파일링 기간의 타임라인(ms)을 나타냅니다. 왼쪽의
 
 이 표에는 프로파일링 기간 동안 최대 메모리 사용량 시점에서 활성 메모리 할당량이 표시됩니다.
 
-![image](./images/tf_profiler/tf_data_all_hosts.png)
+![image](./images/tf_profiler/gpu_kernel_stats.png)
 
 TensorFlow 연산마다 하나의 행이 있으며 각 행에는 다음 열이 있습니다.
 
@@ -365,7 +365,7 @@ TensorFlow 연산마다 하나의 행이 있으며 각 행에는 다음 열이 �
 
 Pod 뷰어 도구는 모든 작업자의 학습 스텝 분석을 보여줍니다.
 
-![image](./images/tf_profiler/gpu_kernel_stats.png)
+![image](./images/tf_profiler/memory_breakdown_table.png)
 
 - 상단 창에는 스텝 번호를 선택하는 슬라이더가 있습니다.
 - 아래쪽 창에는 누적 세로 막대형 차트가 표시됩니다. 이것은 분류된 스텝 시간 범주를 서로의 위에 배치한 고차원적인 보기입니다. 누적된 각 열은 고유한 작업자를 나타냅니다.
@@ -391,7 +391,7 @@ UI는 **성능 분석 요약**, **모든 입력 파이프라인 요약** 및 **�
 
 #### 성능 분석 요약
 
-![image](./images/tf_profiler/tf_stats.png)
+![image](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/guide/images/tf_profiler/tf_data_graph.png?raw=true)
 
 이 섹션에서는 분석 요약을 제공합니다. 프로파일에서 느린 `tf.data` 입력 파이프라인이 감지되는지 여부가 보고됩니다. 이 섹션에는 또한 입력 바운드가 가장 큰 호스트와 지연 시간이 가장 큰 가장 느린 입력 파이프라인이 표시됩니다. 그리고 가장 중요한 부분으로, 입력 파이프라인의 어느 부분이 병목인지, 이 병목을 해결할 방법을 알려줍니다. 병목 현상 정보는 반복기 유형과 해당하는 긴 이름과 함께 제공됩니다.
 
@@ -416,7 +416,7 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 
 #### 모든 입력 파이프라인 요약
 
-![image](./images/tf_profiler/memory_timeline_graph.png)
+![image](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/guide/images/tf_profiler/tf_data_graph_selector.png?raw=true)
 
 이 섹션에서는 모든 호스트의 모든 입력 파이프라인에 대한 요약을 제공합니다. 일반적으로 하나의 입력 파이프라인이 있습니다. 배포 전략을 사용하는 경우, 프로그램의 `tf.data` 코드를 실행하는 하나의 호스트 입력 파이프라인과 호스트 입력 파이프라인에서 데이터를 검색하여 장치로 전송하는 여러 개의 기기 입력 파이프라인이 있습니다.
 
@@ -424,11 +424,11 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 
 #### 입력 파이프라인 그래프
 
-![image](./images/tf_profiler/pod_viewer.png)
+![image](./images/tf_profiler/memory_timeline_graph.png)
 
 이 섹션에서는 실행 시간 정보와 함께 입력 파이프라인 그래프가 표시됩니다. "호스트" 및 "입력 파이프라인"을 사용하여 보려는 호스트와 입력 파이프라인을 선택할 수 있습니다. 입력 파이프라인의 실행은 실행 시간을 기준으로 정렬되며, **Rank** 드롭다운을 사용하여 내림차순으로 정렬할 수 있습니다.
 
-![image](./images/tf_profiler/trace_viewer.png)
+![image](./images/tf_profiler/tf_stats.png)
 
 중요 경로의 노드에는 굵은 윤곽선이 있습니다. 중요 경로에서 가장 긴 자체 시간을 가진 노드인 병목 노드는 빨간색 윤곽선으로 표시됩니다. 중요하지 않은 다른 노드에는 회색 점선 윤곽선이 있습니다.
 
@@ -561,7 +561,7 @@ Profiler는 4가지 축을 따라 여러 가지 사용 사례를 다룹니다. �
 
 <a name="profiling_api_table"></a>
 
-| 프로파일링 API                | 로컬     | 원격    | 다중  | 하드웨어  | :                              :           :           : 작업자   : 플랫폼 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 지원됨 | 아님       | 아님       | CPU, GPU  | : Callback**                   :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 아님       | 아님       | CPU, GPU  | : start/stop [API]**    :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 지원됨 | 지원됨 | CPU, GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 지원됨 | 아님       | 아님       | CPU, GPU  | :                              :           : 지원됨 : 지원됨 :           :
+| 프로파일링 API                | 로컬     | 원격    | 다중  | 하드웨어  | :                              :           :           : 작업자   : 플랫폼 : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | 지원됨 | 아님       | 아님       | CPU, GPU  | : Callback**                   :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 아님       | 아님       | CPU, GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 지원됨 : 지원됨 :           : | **`tf.profiler.experimental` | 지원됨 | 지원됨 | 지원됨 | CPU, GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **Context manager API**      | 지원됨 | 아님       | 아님       | CPU, GPU  | :                              :           : 지원됨 : 지원됨 :           :
 
 <a name="performance_best_practices"></a>
 
@@ -718,6 +718,3 @@ TensorFlow 2.2 및 2.3은 단일 호스트 시스템에 대해서만 다중 GPU 
 sudo ln -s /usr/local/cuda/lib64/libcudart.so.10.2 /usr/local/cuda/lib64/libcudart.so.10.1
 sudo ln -s /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.2 /usr/local/cuda/extras/CUPTI/lib64/libcupti.so.10.1
 ```
-
-
-[API]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2

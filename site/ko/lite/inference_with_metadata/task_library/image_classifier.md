@@ -1,6 +1,6 @@
 # 이미지 분류자 통합
 
-이미지 분류는 이미지가 나타내는 내용을 식별하기 위해 머신 러닝을 활용하는 일반적인 예입니다. 예를 들어 주어진 그림에 어떤 종류의 동물이 나타나는지 알고 싶을 수 있습니다. 이미지가 나타내는 내용을 예측하는 작업을 *이미지 분류*라고 합니다. 이미지 분류자는 다양한 이미지 클래스를 인식하도록 훈련됩니다. 예를 들어 모델은 토끼, 햄스터, 개 등 세 가지 동물 유형을 나타내는 사진을 인식하도록 훈련될 수 있습니다. 이미지 분류 자에 대한 자세한 내용은 [이미지 분류 개요](../../examples/image_classification/overview)를 참조하세요.
+이미지 분류는 이미지가 나타내는 내용을 식별하기 위해 머신 러닝을 활용하는 일반적인 예입니다. 예를 들어 주어진 그림에 어떤 종류의 동물이 나타나는지 알고 싶을 수 있습니다. 이미지가 나타내는 내용을 예측하는 작업을 *이미지 분류*라고 합니다. 이미지 분류자는 다양한 이미지 클래스를 인식하도록 훈련됩니다. 예를 들어 모델은 토끼, 햄스터, 개 등 세 가지 동물 유형을 나타내는 사진을 인식하도록 훈련될 수 있습니다. 이미지 분류자에 대한 자세한 내용은 [이미지 분류 개요](https://www.tensorflow.org/lite/examples/image_classification/overview)를 참조하세요.
 
 작업 라이브러리 `ImageClassifier` API를 사용하여 사용자 정의 이미지 분류자 또는 사전 훈련된 분류자를 모델 앱에 배포합니다.
 
@@ -32,7 +32,7 @@
 
 ## Java에서 추론 실행하기
 
-Android 앱에서 `ImageClassifier`를 사용하는 방법의 예는 [이미지 분류 참조 앱](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/android/EXPLORE_THE_CODE.md)을 참조하세요.
+Android 앱에서 <code>ImageClassifier</code>를 사용하는 방법에 대한 예제는 <a>이미지 분류 참조 앱</a>을 참조하세요.
 
 ### 1단계: Gradle 종속성 및 기타 설정 가져오기
 
@@ -128,7 +128,7 @@ let classificationResults = try classifier.classify(mlImage: mlImage)
 
 ```objc
 // Imports
-#import <TensorFlowLiteTaskVision/TFLTaskVision.h>
+#import <TensorFlowLiteTaskVision/TensorFlowLiteTaskVision.h>
 
 // Initialization
 NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"birds_V1" ofType:@"tflite"];
@@ -212,6 +212,7 @@ const ClassificationResult result = image_classifier->Classify(*frame_buffer).va
 
 다음은 [새 분류자](https://tfhub.dev/google/lite-model/aiy/vision/classifier/birds_V1/3)의 분류 결과를 보여주는 예입니다.
 
+
 <img src="images/sparrow.jpg" alt="sparrow" width="50%">
 
 ```
@@ -237,7 +238,7 @@ Results:
 
 ## 모델 호환성 요구 사항
 
-`ImageClassifier` API는 필수 [TFLite 모델 메타데이터](../../models/convert/metadata)가 있는 TFLite 모델을 예상합니다. [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#image_classifiers)를 사용하여 이미지 분류자에 대한 메타데이터를 생성하는 예를 참조하세요.
+`ImageClassifier` API는 필수 [TFLite 모델 메타데이터](https://www.tensorflow.org/lite/models/convert/metadata)가 있는 TFLite 모델을 예상합니다. [TensorFlow Lite 메타데이터 작성기 API](../../models/convert/metadata_writer_tutorial.ipynb#image_classifiers)를 사용하는 이미지 분류자용 메타데이터 생성 예제를 참조하세요.
 
 호환되는 이미지 분류자 모델은 다음 요구 사항을 충족해야 합니다.
 

@@ -51,7 +51,7 @@ set_default_context.set_default_context(context)
 
 그러나 몇 가지 일반적인 구성이 있습니다.
 
-[execution_context.set_local_python_execution_context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/native/execution_context.py) 함수는 네이티브 컴파일러와 [로컬 실행 스택](execution.md#local-execution-stack)으로 `ExecutionContext`를 구성합니다.
+&lt;a0}execution_context.set_sync_local_cpp_execution_context 함수는 네이티브 컴파일러와 [로컬 실행 스택](execution.md#local-execution-stack)을 사용하여 `ExecutionContext`를 구성합니다.
 
 ## MapReduce
 
