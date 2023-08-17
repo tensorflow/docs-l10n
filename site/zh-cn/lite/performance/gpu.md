@@ -21,6 +21,7 @@ TensorFlow Lite GPU 委托可以加速哪些 TensorFlow ML 运算（或 *op*）�
 - `DEPTHWISE_CONV_2D v1-2`
 - `EXP`
 - `FULLY_CONNECTED`
+- `LOGICAL_AND`
 - `LOGISTIC`
 - `LSTM v2 (Basic LSTM only)`
 - `MAX_POOL_2D`

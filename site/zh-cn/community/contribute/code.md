@@ -15,7 +15,7 @@
 - [good first issue](https://github.com/tensorflow/tensorflow/labels/good%20first%20issue)
 - [contributions welcome](https://github.com/tensorflow/tensorflow/labels/stat%3Acontributions%20welcome)
 
-如果您有兴趣招募一个团队来帮助解决大规模问题或处理新功能，请给 [developers@ 小组](https://groups.google.com/a/tensorflow.org/forum/#!forum/developers)发送电子邮件，并查看我们当前的 RFC 列表。
+如果您有兴趣招募一个团队来帮助解决大规模问题或处理新特性，请给 [developers@ 小组](https://groups.google.com/a/tensorflow.org/g/developers)发送电子邮件，并查看我们当前的 RFC 列表。
 
 ## 代码审查
 

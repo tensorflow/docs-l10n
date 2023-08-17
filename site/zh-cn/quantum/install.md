@@ -13,7 +13,7 @@ TensorFlow Quantum 在 Python 3.7、3.8 和 3.9 上受支持，并且直接依�
 ### 要求
 
 - pip 19.0 或更高版本（需要 `manylinux2010` 支持）
-- [TensorFlow == 2.7.0](https://www.tensorflow.org/install/pip)
+- [TensorFlow == 2.11.0](https://www.tensorflow.org/install/pip)
 
 要设置您的 Python 开发环境和一个（可选的）虚拟环境，请参阅 [TensorFlow 安装指南](https://www.tensorflow.org/install/pip)。
 
@@ -23,7 +23,7 @@ TensorFlow Quantum 在 Python 3.7、3.8 和 3.9 上受支持，并且直接依�
 
 <pre class="devsite-click-to-copy">
   <code class="devsite-terminal">pip3 install --upgrade pip</code>
-  <code class="devsite-terminal">pip3 install tensorflow==2.7.0</code>
+  <code class="devsite-terminal">pip3 install tensorflow==2.11.0</code>
 </pre>
 
 <!-- common_typos_enable -->
@@ -88,7 +88,7 @@ TensorFlow Quantum 在 Python 3.7、3.8 和 3.9 上受支持，并且直接依�
 
 如 TensorFlow [从源代码构建](https://www.tensorflow.org/install/source#install_bazel)指南中所述，将需要 <a href="https://bazel.build/" class="external">Bazel</a> 构建系统。
 
-我们最新的源代码构建使用 TensorFlow 2.7.0。为确保兼容性，我们使用 `bazel` 版本 3.7.2。要移除任何现有版本的 Bazel，请运行以下命令：
+我们最新的源代码构建使用 TensorFlow 2.11.0。为确保兼容性，我们使用 `bazel` 版本 5.3.0。要移除任何现有版本的 Bazel，请运行以下命令：
 
 <!-- common_typos_disable -->
 
@@ -98,14 +98,14 @@ TensorFlow Quantum 在 Python 3.7、3.8 和 3.9 上受支持，并且直接依�
 
 <!-- common_typos_enable -->
 
-下载并安装 `bazel` 版本 3.7.2：
+下载并安装 `bazel` 版本 5.3.0：
 
 <!-- common_typos_disable -->
 
 <pre class="devsite-click-to-copy">
-  <code class="devsite-terminal">wget https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel_3.7.2-linux-x86_64.deb
+  <code class="devsite-terminal">wget https://github.com/bazelbuild/bazel/releases/download/5.3.0/bazel_5.3.0-linux-x86_64.deb
 </code>
-  <code class="devsite-terminal">sudo dpkg -i bazel_3.7.2-linux-x86_64.deb</code>
+  <code class="devsite-terminal">sudo dpkg -i bazel_5.3.0-linux-x86_64.deb</code>
 </pre>
 
 <!-- common_typos_enable -->
@@ -132,7 +132,7 @@ TensorFlow Quantum 在 Python 3.7、3.8 和 3.9 上受支持，并且直接依�
 
 ### 4. 从源代码构建 TensorFlow
 
-在这里，我们改编了 TensorFlow [从源代码构建](https://www.tensorflow.org/install/source)指南中的说明，请点击链接以了解详情。TensorFlow Quantum 与 TensorFlow 版本 2.7.0 兼容。
+Here we adapt instructions from the TensorFlow [build from source](https://www.tensorflow.org/install/source) guide, see the link for further details. TensorFlow Quantum is compatible with TensorFlow version 2.11.0.
 
 下载 <a href="https://github.com/tensorflow/tensorflow" class="external">TensorFlow 源代码</a>：
 
@@ -141,7 +141,7 @@ TensorFlow Quantum 在 Python 3.7、3.8 和 3.9 上受支持，并且直接依�
 <pre class="devsite-click-to-copy">
   <code class="devsite-terminal">git clone https://github.com/tensorflow/tensorflow.git</code>
   <code class="devsite-terminal">cd tensorflow</code>
-  <code class="devsite-terminal">git checkout v2.7.0</code>
+  <code class="devsite-terminal">git checkout v2.11.0</code>
 </pre>
 
 确保您在第 2 步中创建的虚拟环境已激活。随后，安装 TensorFlow 依赖项：
@@ -152,7 +152,8 @@ TensorFlow Quantum 在 Python 3.7、3.8 和 3.9 上受支持，并且直接依�
   <code class="devsite-terminal">pip install -U pip six numpy wheel setuptools mock 'future&gt;=0.17.1'</code>
   <code class="devsite-terminal">pip install -U keras_applications --no-deps</code>
   <code class="devsite-terminal">pip install -U keras_preprocessing --no-deps</code>
-  <code class="devsite-terminal">pip install numpy==1.19.5</code>
+  <code class="devsite-terminal">pip install numpy==1.24.2</code>
+  <code class="devsite-terminal">pip install packaging requests</code>
 </pre>
 
 <!-- common_typos_enable -->
@@ -167,12 +168,12 @@ TensorFlow Quantum 在 Python 3.7、3.8 和 3.9 上受支持，并且直接依�
 
 <!-- common_typos_enable -->
 
-构建 TensorFlow 软件包：
+构建 TensorFlow 软件包（自 TF v2.8 起，`_GLIBCXX_USE_CXX11_ABI` 设置为 1，并且所有 c++ 代码都使用 `-std=c++17` 编译）：
 
 <!-- common_typos_disable -->
 
 <pre class="devsite-click-to-copy">
-  <code class="devsite-terminal">bazel build -c opt --cxxopt="-O3" --cxxopt="-march=native" --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" //tensorflow/tools/pip_package:build_pip_package</code>
+  <code class="devsite-terminal">bazel build -c opt --cxxopt="-O3" --cxxopt="-march=native" --cxxopt="-std=c++17" --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=1" //tensorflow/tools/pip_package:build_pip_package</code>
 </pre>
 
 <!-- common_typos_enable -->
@@ -213,7 +214,7 @@ TensorFlow Quantum 在 Python 3.7、3.8 和 3.9 上受支持，并且直接依�
 
 <pre class="devsite-click-to-copy">
   <code class="devsite-terminal">./configure.sh</code>
-  <code class="devsite-terminal">bazel build -c opt --cxxopt="-O3" --cxxopt="-march=native" --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" release:build_pip_package</code>
+  <code class="devsite-terminal">bazel build -c opt --cxxopt="-O3" --cxxopt="-march=native" --cxxopt="-std=c++17" --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=1" release:build_pip_package</code>
   <code class="devsite-terminal">bazel-bin/release/build_pip_package /tmp/tfquantum/</code>
   <code class="devsite-terminal">python3 -m pip install /tmp/tfquantum/&lt;var&gt;name_of_generated_wheel&lt;/var&gt;.whl</code>
 </pre>

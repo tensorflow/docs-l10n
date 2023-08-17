@@ -16,7 +16,7 @@
 2. 使用 C++ 实现运算。运算的实现称为内核，它是您在第 1 步中注册的规范的具体实现。可以有多个内核用于不同的输入/输出类型或架构（例如，CPU、GPU）。
 3. 创建一个 Python 封装容器（可选）。此封装容器是用于以 Python 创建运算的公共 API。默认封装容器是根据运算注册生成的，用户可以直接使用它或向其中添加内容。
 4. 编写一个函数来计算运算的梯度（可选）。
-5. 测试运算。为方便起见，我们通常在 Python 中进行测试，但您也可以在 C++ 中测试运算。如果您要定义梯度，可以使用 Python `tf.test.compute_gradient_error` 验证梯度。要了解如何测试 ReLu 之类的算子及其梯度的前向函数，请参阅 [`relu_op_test.py`](https://www.tensorflow.org/code/tensorflow/python/kernel_tests/relu_op_test.py)。
+5. 测试运算。为方便起见，我们通常在 Python 中进行测试，但您也可以在 C++ 中测试运算。如果您要定义梯度，可以使用 Python `tf.test.compute_gradient_error` 验证梯度。要了解如何测试 ReLu 之类的算子及其梯度的前向函数，请参阅 [`relu_op_test.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/kernel_tests/nn_ops/relu_op_test.py)。
 
 ### 前提条件
 
@@ -281,7 +281,7 @@ g++ -std=c++14 -shared zero_out.cc -o zero_out.so -fPIC ${TF_CFLAGS[@]} ${TF_LFL
 
 在 macOS 上，构建 `.so` 文件时需要添加附加标志 "-undefined dynamic_lookup"。
 
-> 关于 `>=5` 的 `gcc` 版本的注意事项：gcc 自版本 `5` 起使用新的 C++ [ABI](https://gcc.gnu.org/gcc-5/changes.html#libstdcxx)。TensorFlow 网站上提供的二进制 pip 软件包使用 `gcc4` 构建，该编译器使用旧版 ABI。如果您使用 `gcc>=5` 编译运算库，请在命令行中添加 `-D_GLIBCXX_USE_CXX11_ABI=0`，使库与旧版 ABI 兼容。
+> 关于 `gcc` 版本 `>=5` 的说明：自版本 `5` 起，gcc 使用新的 C++ [ABI](https://gcc.gnu.org/gcc-5/changes.html#libstdcxx)。TensorFlow 2.8 及更早版本是使用利用较旧 ABI 的 `gcc4` 构建的。如果您正在使用这些版本的 TensorFlow 并尝试使用 `gcc>=5` 编译您的运算库，请将 `-D_GLIBCXX_USE_CXX11_ABI=0` 添加到命令行以使库与较旧的 ABI 兼容。默认情况下，TensorFlow 2.9+ 软件包与较新的 ABI 兼容。
 
 ### 使用 Bazel 编译运算（TensorFlow 源代码安装）
 

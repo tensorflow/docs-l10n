@@ -1,10 +1,12 @@
 # 音频分类
 
+
 <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/zh-cn/lite/examples/images/audio.png?raw=true" class="">
 
 识别音频所表示内容的任务称为*音频分类*。我们可以对音频分类模型进行训练以识别各种音频事件。例如，您可以训练模型来识别表示三种不同事件的事件：鼓掌、打响指动和打字。TensorFlow Lite 提供经过优化的预训练模型，您可以将其部署在您的移动应用中。请点击[这里](https://www.tensorflow.org/tutorials/audio/simple_audio)了解有关使用 TensorFlow 进行音频分类的更多信息。
 
 下图展示了音频分类模型在 Android 上的输出。
+
 
 <img src="images/android_audio_classification.png" width="30%" alt="Android 示例屏幕截图">
 
@@ -16,9 +18,9 @@
 
 您可以利用 [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/audio_classifier) 中开箱即用的 API，只需几行代码即可集成音频分类模型。您也可以使用 [TensorFlow Lite Support Library](../../inference_with_metadata/task_library/audio_classifier) 构建自己的自定义推断流水线。
 
-下面的 Android 示例使用[TFLite Task Library](https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android) 演示了实现：
+下面的 Android 示例使用[TFLite Task Library](https://github.com/tensorflow/examples/tree/master/lite/examples/audio_classification/android) 演示了实现：
 
-<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android">查看 Android 示例</a>
+<a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/audio_classification/android">查看 Android 示例</a>
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/ios">查看 iOS 示例</a>
 
