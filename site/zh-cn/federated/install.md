@@ -64,7 +64,16 @@
 <code class="devsite-terminal">cd "federated"</code>
 </pre>
 
-### 4. 构建 TensorFlow Federated Python 软件包。
+### 4. 创建虚拟环境。
+
+<pre class="prettyprint lang-bsh">
+<code class="devsite-terminal">python3 -m venv "venv"</code>
+<code class="devsite-terminal">source "venv/bin/activate"</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
+<code class="devsite-terminal tfo-terminal-venv">pip install numpy</code>
+</pre>
+
+### 5. 构建 TensorFlow Federated Python 软件包。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">mkdir "/tmp/tensorflow_federated"</code>
@@ -72,14 +81,20 @@
     --output_dir="/tmp/tensorflow_federated"</code>
 </pre>
 
-### 5. 创建新项目。
+### 6. 退出虚拟环境。
+
+<pre class="prettyprint lang-bsh">
+<code class="devsite-terminal">deactivate</code>
+</pre>
+
+### 7. 创建新项目。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">mkdir "/tmp/project"</code>
 <code class="devsite-terminal">cd "/tmp/project"</code>
 </pre>
 
-### 6. 创建虚拟环境。
+### 8. 创建新创建虚拟环境。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal">python3 -m venv "venv"</code>
@@ -89,13 +104,13 @@
 
 注：要退出虚拟环境，请运行 `deactivate`。
 
-### 7. 安装 TensorFlow Federated Python 软件包。
+### 9. 安装 TensorFlow Federated Python 软件包。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "/tmp/tensorflow_federated/"*".whl"</code>
 </pre>
 
-### 8. 测试 Tensorflow Federated。
+### 10. 测试 TensorFlow Federated。
 
 <pre class="prettyprint lang-bsh">
 <code class="devsite-terminal tfo-terminal-venv">python -c "import tensorflow_federated as tff; print(tff.federated_computation(lambda: 'Hello World')())"</code>

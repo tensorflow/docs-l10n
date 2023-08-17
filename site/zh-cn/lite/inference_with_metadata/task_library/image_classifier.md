@@ -1,6 +1,6 @@
 # 集成图像分类器
 
-图像分类是机器学习的一种常见用途，用于识别图像所代表的内容。例如，我们可能想知道一张给定的图片中出现了哪种类型的动物。预测图像所代表内容的任务称为*图像分类*。图像分类器经过训练，可以识别各种类别的图像。例如，可以训练一个模型来识别代表三种不同类型动物的照片：兔子、仓鼠和狗。请参阅[图像分类概述](../../examples/image_classification/overview)，了解有关图像分类器的详细信息。
+图像分类是机器学习的一种常见用途，用于识别图像所代表的内容。例如，我们可能想知道一张给定的图片中出现了哪种类型的动物。预测图像所代表内容的任务称为*图像分类*。图像分类器经过训练，可以识别各种类别的图像。例如，可以训练一个模型来识别代表三种不同类型动物的照片：兔子、仓鼠和狗。请参阅[图像分类概述](https://www.tensorflow.org/lite/examples/image_classification/overview)，了解有关图像分类器的详细信息。
 
 使用 Task Library `ImageClassifier` API 可将自定义图像分类器或预训练图像分类器部署到您的模型应用中。
 
@@ -32,7 +32,7 @@
 
 ## 用 Java 运行推断
 
-请参阅[图像分类参考应用](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/android/EXPLORE_THE_CODE.md)，获得如何在 Android 应用中使用 `ImageClassifier` 的示例。
+请参阅[图像分类参考应用](https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/android/README.md)，获得如何在 Android 应用中使用 `ImageClassifier` 的示例。
 
 ### 步骤 1：导入 Gradle 依赖项和其他设置
 
@@ -238,7 +238,7 @@ Results:
 
 ## 模型兼容性要求
 
-`ImageClassifier` API 需要具有强制性 [TFLite Model Metadata](../../models/convert/metadata) 的 TFLite 模型。请参阅使用 [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#image_classifiers) 为图像分类器创建元数据的示例。
+`ImageClassifier` API 需要具有强制性 [TFLite Model Metadata](https://www.tensorflow.org/lite/models/convert/metadata) 的 TFLite 模型。请参阅使用 [TensorFlow Lite Metadata Writer API](../../models/convert/metadata_writer_tutorial.ipynb#image_classifiers) 为图像分类器创建元数据的示例。
 
 兼容的图像分类器模型应满足以下要求：
 

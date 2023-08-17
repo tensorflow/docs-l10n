@@ -32,7 +32,7 @@
 
 ## 用 Java 运行推断
 
-请参阅[音频分类参考应用](https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android)，获得如何在 Android 应用中使用 `AudioClassifier` 的示例。
+请参阅[音频分类参考应用](https://github.com/tensorflow/examples/tree/master/lite/examples/audio_classification/android)，获得如何在 Android 应用中使用 `AudioClassifier` 的示例。
 
 ### 步骤 1：导入 Gradle 依赖项和其他设置
 
@@ -52,9 +52,9 @@ dependencies {
     // Other dependencies
 
     // Import the Audio Task Library dependency (NNAPI is included)
-    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.4.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.4.4'
     // Import the GPU delegate plugin Library for GPU inference
-    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.4'
 }
 ```
 

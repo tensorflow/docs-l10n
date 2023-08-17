@@ -98,7 +98,7 @@ objc_library(
 # Using C++ API directly
 objc_library(
   deps = [
-      "//third_party/tensorflow/lite:framework",
+      "//tensorflow/lite:framework",
   ],
 )
 ```

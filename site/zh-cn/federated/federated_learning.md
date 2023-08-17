@@ -6,7 +6,7 @@
 
 该层提供的接口包括以下三个主要部分：
 
-- **模型**。可用于包装现有模型，以便与 TFF 一起使用的类和帮助函数。包装模型可以像调用单个包装函数（如 `tff.learning.from_keras_model`）或为了实现全定制而定义 `tff.learning.Model` 接口的子类一样简单。
+- **模型**。可用于包装现有模型，以便与 TFF 一起使用的类和帮助函数。包装模型可以像调用单个包装函数（如 `tff.learning.models.from_keras_model`）或为了实现全定制而定义 `tff.learning.models.VariableModel` 接口的子类一样简单。
 
 - **联合计算构建器**。使用现有模型为训练或评估构造联合计算的帮助函数。
 
@@ -26,11 +26,11 @@ TFF 旨在支持各种分布学习场景，在这些场景中，您编写的机�
 
 您仍可以（且应该）按照最新的最佳做法（比如使用 Eager 模式）开发 TF 代码。但是，最终代码必须可序列化（例如，对于 Eager 模式代码，可包装为 `tf.function`）。这样可以确保在执行时必需的任何 Python 状态或控制流都可以进行序列化（可能需要利用 [Autograph](https://www.tensorflow.org/guide/autograph)）。
 
-目前，TensorFlow 并不完全支持序列化和反序列化 Eager 模式 TensorFlow。因此，TFF 中的序列化目前遵循 TF 1.0 模式，其中所有代码必须在 TFF 控制的 `tf.Graph` 中构造。这意味着 TFF 目前不能使用已构造的模型；实际上，该模型定义逻辑打包在返回 `tff.learning.Model` 的无参数函数中。随后，TFF 会调用此函数来确保序列化该模型的所有组件。此外，作为一个强类型环境，TFF 需要一些额外的*元数据*，例如您的模型输入类型的规范。
+目前，TensorFlow 并不完全支持序列化和反序列化 Eager 模式 TensorFlow。因此，TFF 中的序列化目前遵循 TF 1.0 模式，其中所有代码必需在 TFF 控制的 `tf.Graph` 中构造。这意味着 TFF 目前不能使用已构造的模型；实际上，该模型定义逻辑打包在返回 `tff.learning.models.VariableModel` 的无参数函数中。随后，TFF 会调用此函数来确保序列化该模型的所有组件。此外，作为一个强类型环境，TFF 需要一些额外的*元数据*，例如您的模型输入类型的规范。
 
 #### 聚合
 
-我们强烈建议大部分用户使用 Keras 构造模型，请参阅下面的 [Keras 转换器](#converters-for-keras)部分。这些包装器自动处理模型更新的聚合以及为模型定义的任何指标。但是，了解如何为一般 `tff.learning.Model` 处理聚合仍非常有用。
+我们强烈建议大部分用户使用 Keras 构造模型，请参阅下面的 [Keras 转换器](#converters-for-keras)部分。这些包装器自动处理模型更新的聚合以及为模型定义的任何指标。但是，了解如何为一般 `tff.learning.models.VariableModel` 处理聚合仍非常有用。
 
 一般来说，联合学习中至少有两个聚合层：本地设备端聚合和跨设备聚合（或称联合聚合）：
 
@@ -60,26 +60,26 @@ TFF 旨在支持各种分布学习场景，在这些场景中，您编写的机�
 
 ### 抽象接口
 
-这种基本*构造函数* + *元数据*接口由接口 `tff.learning.Model` 表示，如下所述：
+这种基本*构造函数* + *元数据*接口由接口 `tff.learning.models.VariableModel` 表示，如下所述：
 
 - 构造函数、`forward_pass` 和 `report_local_unfinalized_metrics` 方法应相应地构造模型变量、前向传递以及要报告的统计数据。如上所述，这些方法构造的 TensorFlow 必须可序列化。
 
 - `input_spec` 属性以及返回可训练、不可训练和本地变量的 3 个属性表示元数据。TFF 使用此信息确定如何将您的模型的各个部分连接到联合优化算法，同时定义内部类型签名来帮助验证构造的系统的正确性（这样，当数据与模型预期要使用的数据不相符时，您的模型不能在这些数据上进行实例化）。
 
-此外，抽象接口 `tff.learning.Model` 会公开属性 `metric_finalizers`，后者会接受指标的未确定值（由 `report_local_unfinalized_metrics()` 返回）并返回确定的指标值。定义联合训练流程或评估计算时，`metric_finalizers` 和 `report_local_unfinalized_metrics()` 方法将一起用于构建跨客户端指标聚合器。例如，简单的 `tff.learning.metrics.sum_then_finalize` 聚合器首先对客户端中的未确定指标值求和，然后在服务器端调用终结器函数。
+此外，抽象接口 `tff.learning.models.VariableModel` 会公开属性 `metric_finalizers`，后者会接受指标的未确定值（由 `report_local_unfinalized_metrics()` 返回）并返回确定的指标值。定义联合训练流程或评估计算时，`metric_finalizers` 和 `report_local_unfinalized_metrics()` 方法将一起用于构建跨客户端指标聚合器。例如，简单的 `tff.learning.metrics.sum_then_finalize` 聚合器首先对客户端中的未确定指标值求和，然后在服务器端调用终结器函数。
 
-在[图像分类](tutorials/federated_learning_for_image_classification.ipynb)教程的第二部分，以及我们用于在 [`model_examples.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/model_examples.py) 中进行测试的示例模型中，您可以找到有关如何定义自定义 `tff.learning.Model` 的示例。
+在<a>图像分类</a>教程的第二部分，以及我们用于在 [<code>model_examples.py</code>](tutorials/federated_learning_for_image_classification.ipynb) 中进行测试的示例模型中，您可以找到有关如何定义自定义 `tff.learning.models.VariableModel` 的示例。
 
 ### Keras 转换器
 
-TFF 需要的几乎所有信息都可以通过调用 `tf.keras` 接口获得，因此，如果您有一个 Keras 模型，则可以利用 `tff.learning.from_keras_model` 来构造 `tff.learning.Model`。
+TFF 需要的几乎所有信息都可以通过调用 `tf.keras` 接口获得，因此，如果您有一个 Keras 模型，则可以利用 `tff.learning.models.from_keras_model` 来构造 `tff.learning.models.VariableModel`。
 
 请注意，TFF 仍需要您提供构造函数——无参数*模型函数*，如下所示：
 
 ```python
 def model_fn():
   keras_model = ...
-  return tff.learning.from_keras_model(keras_model, sample_batch, loss=...)
+  return tff.learning.models.from_keras_model(keras_model, sample_batch, loss=...)
 ```
 
 除了模型本身外，您还需要提供一批示例数据，以便 TFF 用于确定您的模型输入的类型和形状。这样可以确保 TFF 能够正确实例化将实际出现在客户端设备上的数据的模型（因为我们假设当您构造要序列化的 TensorFlow 时，该数据一般不可用）。
