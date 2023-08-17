@@ -39,7 +39,7 @@ dependencies {
     // Other dependencies
 
     // Import the Task Text Library dependency (NNAPI is included)
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.4.4'
 }
 ```
 
@@ -72,7 +72,7 @@ Podfile에 TensorFlowLiteTaskText 포드를 추가합니다.
 ```
 target 'MySwiftAppWithTaskAPI' do
   use_frameworks!
-  pod 'TensorFlowLiteTaskText', '~> 0.2.0'
+  pod 'TensorFlowLiteTaskText', '~> 0.4.4'
 end
 ```
 
@@ -103,6 +103,29 @@ std::vector<QaAnswer> positive_results = answerer->Answer(context_of_question, q
 ```
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/bert_question_answerer.h)를 참조하세요.
+
+## Python에서 추론 실행하기
+
+### 1단계: pip 패키지 설치하기
+
+```
+pip install tflite-support
+```
+
+### 2단계: 모델 사용하기
+
+```python
+# Imports
+from tflite_support.task import text
+
+# Initialization
+answerer = text.BertQuestionAnswerer.create_from_file(model_path)
+
+# Run inference
+bert_qa_result = answerer.answer(context, question)
+```
+
+`BertQuestionAnswerer` 구성에 대한 추가 옵션은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/python/task/text/bert_question_answerer.py)를 참조하세요.
 
 ## 예제 결과
 

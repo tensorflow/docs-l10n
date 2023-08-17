@@ -21,6 +21,7 @@ TensorFlow Lite GPU 대리자가 가속할 수 있는 TensorFlow ML 연산(또�
 - `DEPTHWISE_CONV_2D v1-2`
 - `EXP`
 - `FULLY_CONNECTED`
+- `LOGICAL_AND`
 - `LOGISTIC`
 - `LSTM v2 (Basic LSTM only)`
 - `MAX_POOL_2D`

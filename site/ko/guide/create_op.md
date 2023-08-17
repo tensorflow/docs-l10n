@@ -16,7 +16,7 @@
 2. C++로 op를 구현합니다. op의 구현을 커널이라고 하며 1단계에서 등록한 사양의 구체적인 구현입니다. 다양한 입력/출력 유형 또는 아키텍처(예: CPU, GPU)를 위한 커널이 여러 개 있을 수 있습니다.
 3. Python 래퍼를 만듭니다(선택 사항). 이 래퍼는 Python에서 op를 만드는 데 사용되는 공개 API입니다. 기본 래퍼는 op 등록에서 생성되며 직접 사용하거나 추가할 수 있습니다.
 4. op의 그래디언트를 계산하는 함수를 작성합니다(선택 사항).
-5. op를 테스트합니다. 보통 편의를 위해 Python에서 이 연산을 테스트하지만, C++에서 op를 테스트할 수도 있습니다. 그래디언트를 정의하면 Python `tf.test.compute_gradient_error`을 사용하여 확인할 수 있습니다. Relu 같은 연산자의 전달 함수와 그래디언트를 테스트하는 예제는 [`relu_op_test.py`](https://www.tensorflow.org/code/tensorflow/python/kernel_tests/relu_op_test.py)를 참조하세요.
+5. op를 테스트합니다. 보통 편의를 위해 파이썬에서 이 연산을 테스트하지만, C++에서 op를 테스트할 수도 있습니다. 그래디언트를 정의하면 파이썬 `tf.test.compute_gradient_error`을 사용하여 확인할 수 있습니다. Relu 같은 연산자의 전달 함수와 그래디언트를 테스트하는 예제는 [`relu_op_test.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/kernel_tests/nn_ops/relu_op_test.py)를 참조하세요.
 
 ### 전제 조건
 
@@ -281,7 +281,7 @@ g++ -std=c++14 -shared zero_out.cc -o zero_out.so -fPIC ${TF_CFLAGS[@]} ${TF_LFL
 
 macOS에서는 `.so` 파일을 빌드할 때 추가 플래그 "-undefined dynamic_lookup"이 필요합니다.
 
-> `gcc` 버전 `>=5`에 대한 참고 사항: gcc는 버전 `5`부터 새로운 [C++ ABI](https://gcc.gnu.org/gcc-5/changes.html#libstdcxx)를 사용합니다. TensorFlow 웹 사이트에서 사용 가능한 2진 pip 패키지는 이전 ABI를 사용하는 `gcc4`로 빌드되었습니다. `gcc>=5`로 op 라이브러리를 컴파일하는 경우, 명령줄에 `-D_GLIBCXX_USE_CXX11_ABI=0`을 추가하여 라이브러리가 이전 abi와 호환되도록 하세요.
+> `gcc` 버전 `>=5`에 대한 참고 사항: gcc는 버전 `5`부터 새로운 C++ [ABI](https://gcc.gnu.org/gcc-5/changes.html#libstdcxx)를 사용합니다. TensorFlow 2.8과 이전 버전은 기존 ABI를 사용하는 `gcc4`로 빌드됐습니다. 이러한 버전의 TensorFlow를 사용 중이고 `gcc>=5`로 연산 라이브러리를 컴파일하려는 경우, 명령줄에 `-D_GLIBCXX_USE_CXX11_ABI=0`을 추가하여 라이브러리가 기존 ABI와 호환되도록 합니다. TensorFlow 2.9+ 패키지는 기본적으로 최신 ABI와 호환됩니다.
 
 ### bazel(TensorFlow 소스 설치)을 사용하여 op 컴파일하기
 

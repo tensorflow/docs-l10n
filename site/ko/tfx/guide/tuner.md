@@ -164,7 +164,7 @@ tuner = google_cloud_ai_platform.Tuner(
 
 참고: 각 병렬 검색의 각 시도는 작업자 무리의 단일 시스템에서 수행됩니다. 즉, 각 시도는 다중 작업자 분산 교육을 활용하지 않습니다. 각 시도에 대해 다중 작업자 분산이 필요한 경우 `CloudTuner` 대신 [`DistributingCloudTuner`](https://github.com/tensorflow/cloud/blob/b9c8752f5c53f8722dfc0b5c7e05be52e62597a8/src/python/tensorflow_cloud/tuner/tuner.py#L384-L676)를 참조하세요.
 
-참고: `CloudTuner`와 Google Cloud AI Platform 확장 Tuner 구성 요소를 함께 사용할 수 있으며, 이 경우 AI Platform Vizier의 하이퍼 매개변수 검색 알고리즘이 지원하는 분산 병렬 조정이 기능합니다. 그러나 이렇게 하려면 Cloud AI Platform 작업에 AI Platform Vizier 서비스에 대한 액세스 권한이 부여되어야 합니다. 사용자 지정 서비스 계정을 설정하려면 이 [가이드](https://cloud.google.com/ai-platform/training/docs/custom-service-account#custom)를 참조하세요. 그런 다음 파이프라인 코드에서 훈련 작업에 대한 사용자 지정 서비스 계정을 지정해야 합니다. 자세한 내용은 [GCP 예제의 E2E CloudTuner](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow_gcp.py)를 참조하세요.
+참고: `CloudTuner`와 Google Cloud AI Platform 확장 Tuner 구성 요소를 함께 사용할 수 있으며, 이 경우 AI Platform Vizier의 하이퍼 매개변수 검색 알고리즘이 지원하는 분산 병렬 조정을 사용할 수 있습니다. 다만 그렇게 하려면 Cloud AI Platform 작업에 AI Platform Vizier 서비스에 대한 액세스 권한이 부여되어야 합니다. 사용자 정의 서비스 계정을 설정하려면 이 [가이드](https://cloud.google.com/ai-platform/training/docs/custom-service-account#custom)를 참조합니다. 그런 다음 파이프라인 코드에서 훈련 작업에 대한 사용자 지정 서비스 계정을 지정해야 합니다. 자세한 내용은 [GCP 예제의 E2E CloudTuner](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow.py)를 참조합니다.
 
 ## 링크
 

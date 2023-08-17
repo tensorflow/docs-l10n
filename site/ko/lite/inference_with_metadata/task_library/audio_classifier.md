@@ -32,7 +32,7 @@ Task Library `AudioClassifier` API를 사용하여 사용자 정의 오디오 �
 
 ## Java에서 추론 실행하기
 
-Android 앱에서 `AudioClassifier`를 사용하는 예는 [오디오 분류 참조 앱](https://github.com/tensorflow/examples/tree/master/lite/examples/sound_classification/android)을 참조하세요.
+Android 앱에서 `AudioClassifier`를 사용하는 예제는 [오디오 분류 참조 앱](https://github.com/tensorflow/examples/tree/master/lite/examples/audio_classification/android)을 참조하세요.
 
 ### 1단계: Gradle 종속성 및 기타 설정 가져오기
 
@@ -52,9 +52,9 @@ dependencies {
     // Other dependencies
 
     // Import the Audio Task Library dependency (NNAPI is included)
-    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.4.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.4.4'
     // Import the GPU delegate plugin Library for GPU inference
-    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.4'
 }
 ```
 

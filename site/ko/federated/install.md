@@ -1,4 +1,4 @@
-# TensorFlow Federated 설치
+# TensorFlow Federated 설치하기
 
 TensorFlow Federated(TFF)를 사용하도록 환경을 설정하는 몇 가지 방법이 있습니다.
 
@@ -67,7 +67,7 @@ Tensorflow Federated를 컴파일하는 데 사용되는 빌드 도구인 [Bazel
 ### 4. 가상 환경을 만듭니다.
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal">python3.9 -m venv "venv"</code>
+<code class="devsite-terminal">python3 -m venv "venv"</code>
 <code class="devsite-terminal">source "venv/bin/activate"</code>
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
 <code class="devsite-terminal tfo-terminal-venv">pip install numpy</code>
@@ -97,7 +97,7 @@ Tensorflow Federated를 컴파일하는 데 사용되는 빌드 도구인 [Bazel
 ### 8. 새 가상 환경을 만듭니다.
 
 <pre class="prettyprint lang-bsh">
-<code class="devsite-terminal">python3.9 -m venv "venv"</code>
+<code class="devsite-terminal">python3 -m venv "venv"</code>
 <code class="devsite-terminal">source "venv/bin/activate"</code>
 <code class="devsite-terminal tfo-terminal-venv">pip install --upgrade "pip"</code>
 </pre>

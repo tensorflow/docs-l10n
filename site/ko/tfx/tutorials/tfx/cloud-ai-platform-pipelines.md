@@ -2,7 +2,7 @@
 
 ## 시작하기
 
-This tutorial is designed to introduce [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx) and [AIPlatform Pipelines] (https://cloud.google.com/ai-platform/pipelines/docs/introduction), and help you learn to create your own machine learning pipelines on Google Cloud. It shows integration with TFX, AI Platform Pipelines, and Kubeflow, as well as interaction with TFX in Jupyter notebooks.
+이 튜토리얼은 TensorFlow Extended(TFX) 및 [AIPlatform Pipelines] (https://cloud.google.com/ai-platform/pipelines/docs/introduction)을 소개하고 Google Cloud에서 자체 머신러닝 파이프라인을 만드는 방법을 배우는 데 도움이 되도록 설계되었습니다. TFX, AI Platform Pipelines, Kubeflow와의 통합은 물론 Jupyter 노트북에서 TFX와의 상호 작용도 보여줍니다.
 
 이 튜토리얼이 끝나면 GCP에서 호스팅되는 ML 파이프라인을 만들고 실행할 수 있게 됩니다. 각 실행의 결과를 시각화하고 생성된 아티팩트의 계보를 볼 수 있습니다.
 

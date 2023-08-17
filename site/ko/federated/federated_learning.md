@@ -6,7 +6,7 @@
 
 이 레이어에서 제공하는 인터페이스는 다음 3가지 주요 부분으로 구성됩니다.
 
-- **모델**: TFF에서 사용하기 위해 기존 모델을 래핑할 수 있는 클래스 및 도우미 함수입니다. 모델 래핑은 단일 래핑 함수(예: `tff.learning.from_keras_model`)를 호출하거나 전체 사용자 정의를 위해 `tff.learning.Model` 인터페이스의 서브 클래스를 정의하는 것처럼 간단할 수 있습니다.
+- **모델**. 기존 모델을 TFF에서 사용할 수 있도록 래핑할 수 있는 클래스 및 도우미 함수입니다. 모델 래핑은 단일 래핑 함수(예: `tff.learning.models.from_keras_model`)를 호출하거나 `tff.learning.models.VariableModel` 인터페이스의 하위 클래스를 정의하여 완전히 사용자 정의하는 것처럼 간단할 수 있습니다.
 
 - **페더레이션 계산 빌더**: 기존 모델을 사용하여 훈련 또는 평가를 위한 페더레이션 계산을 구성하는 도우미 함수입니다.
 
@@ -26,11 +26,11 @@ TFF는 작성하는 머신러닝 모델 코드가 다양한 기능을 가진 수
 
 즉시 모드를 사용하는 것과 같은 최신 모범 사례에 따라 TF 코드를 계속 개발할 수 있고 또 그래야 합니다. 그러나 최종 코드는 직렬화 가능해야 합니다(예: 즉시 모드 코드의 경우 `tf.function`로 래핑될 수 있음). 이를 통해 실행 시 필요한 Python 상태 또는 제어 흐름을 직렬화할 수 있습니다([Autograph](https://www.tensorflow.org/guide/autograph)의 도움으로).
 
-현재 TensorFlow는 즉시 모드 TensorFlow의 직렬화 및 역직렬화를 완전히 지원하지 않습니다. 따라서 TFF에서 직렬화는 현재 TF 1.0 패턴을 따르며, 모든 코드는 TFF가 제어하는 `tf.Graph` 내에 구성되어야 합니다. 이것은 현재 TFF가 이미 구성된 모델을 소비할 수 없음을 의미합니다. 대신, 모델 정의 로직은 `tff.learning.Model`을 반환하는 인수 없는 함수로 패키지됩니다. 그런 다음, 이 함수를 TFF에서 호출하여 모델의 모든 컴포넌트가 직렬화되도록 합니다. 또한, 강력한 형식의 환경인 TFF에는 모델의 입력 유형 사양과 같은 약간의 추가 *메타 데이터*가 필요합니다.
+현재 TensorFlow는 Eager 모드 TensorFlow의 직렬화 및 역직렬화를 완전히 지원하지 않습니다. 따라서 현재 TFF의 직렬화는 TF 1.0 패턴을 따르며, 모든 코드는 TFF가 제어하는 `tf.Graph` 내에서 구성되어야 합니다. 즉, 현재 TFF는 이미 구성된 모델을 사용할 수 없음을 의미합니다. 대신 모델 정의 로직은 `tff.learning.models.VariableModel`을 반환하는 인수없는 함수로 패키징됩니다. 그런 다음 이 함수는 TFF에서 호출되어 모델의 모든 구성 요소가 직렬화되도록 합니다. 또한 강력한 형식의 환경이기 때문에 TFF에는 모델의 입력 유형 사양과 같은 약간의 추가 *메타 데이터*가 필요합니다.
 
 #### 집계
 
-대부분의 사용자는 Keras를 사용하여 모델을 구성하는 것이 좋습니다. 아래 [Keras용 변환기](#converters-for-keras) 섹션을 참조하세요. 이들 래퍼는 모델 업데이트 및 모델에 대해 정의된 모든 메트릭의 집계를 자동으로 처리합니다. 그러나 일반 `tff.learning.Model`에 대한 집계가 처리되는 방식을 이해하는 것이 여전히 유용할 수 있습니다.
+대부분의 사용자는 Keras를 사용해 모델을 구축할 것이 좋습니다. 아래의 [Keras용 변환기](#converters-for-keras) 섹션을 참조해주세요. 이러한 래퍼는 모델 업데이트와 모델에 대해 정의된 모든 메트릭의 집계를 자동으로 처리합니다. 다만 일반 `tff.learning.models.VariableModel`의 집계를 처리하는 방식을 이해하는 것은 여전히 유용할 수 있습니다.
 
 페더레이션 학습에는 로컬 기기 내 집계 및 교차 기기(또는 페더레이션) 집계라는 최소한 두 개의 집계 레이어가 있습니다.
 
@@ -60,26 +60,26 @@ TFF는 작성하는 머신러닝 모델 코드가 다양한 기능을 가진 수
 
 ### 추상 인터페이스
 
-이 기본 *생성자* + *메타 데이터* 인터페이스는 다음과 같이 `tff.learning.Model` 인터페이스로 표시됩니다.
+이 기본 *생성자* + *메타 데이터* 인터페이스는 다음과 같이 `tff.learning.models.VariableModel` 인터페이스로 표현됩니다.
 
 - 생성자, `forward_pass` 및 `report_local_unfinalized_metrics` 메서드는 해당하는 모델 변수, 전달 패스 및 보고하려는 통계를 구성해야합니다. 이러한 방법으로 구성된 TensorFlow는 위에서 설명한대로 직렬화가 가능해야합니다.
 
 - `input_spec` 속성과 훈련 가능, 훈련 불가능 및 로컬 변수의 하위 세트를 반환하는 3개의 속성은 메타 데이터를 나타냅니다. TFF는 이 정보를 사용하여 모델의 일부를 페더레이션 최적화 알고리즘에 연결하는 방법을 결정하고, 생성된 시스템의 정확성을 확인하는 데 도움이 되는 내부 유형 시그니처를 정의합니다(모델이 소비하도록 설계된 것과 일치하지 않는 데이터에 대해 모델을 인스턴스화할 수 없도록).
 
-또한 추상 인터페이스 `tff.learning.Model`은 메트릭의 미완료 값을 사용하는 `metric_finalizers` 속성을 노출하며(`report_local_unfinalized_metrics()`으로 반환됨) 완료된 메트릭 값을 반환합니다. `metric_finalizers` 및 `report_local_unfinalized_metrics()` 메서드는 페더레이션 훈련 프로세스 또는 평가 계산을 정의할 때 교차 클라이언트 메트릭 집계를 구축하는 데 함께 사용됩니다. 예를 들어 간단한 `tff.learning.metrics.sum_then_finalize` 집계는 먼저 클라이언트의 미완료 메트릭 값을 합산한 다음 서버에서 종료자 함수를 호출합니다.
+또한 추상 인터페이스 `tff.learning.models.VariableModel`은 메트릭의 미완료 값을 사용하는 `metric_finalizers` 속성을 노출하며(`report_local_unfinalized_metrics()`으로 반환됨) 완료된 메트릭 값을 반환합니다. `metric_finalizers` and 및 `report_local_unfinalized_metrics()` 메서드는 페더레이션 훈련 프로세스 또는 평가 계산을 정의할 때 클라이언트 메트릭 집계를 구축하는 데 함께 사용됩니다. 예를 들어, 간단한 `tff.learning.metrics.sum_then_finalize` 집계는 먼저 클라이언트의 미완료 메트릭 값을 합산한 다음 서버에서 종료자 함수를 호출합니다.
 
-당신은 당신의 자신의 사용자 정의 정의하는 방법의 예를 찾을 수 있습니다 `tf.learning.Model` 우리의 두 번째 부분에서 [이미지 분류](tutorials/federated_learning_for_image_classification.ipynb) 뿐만 아니라 우리가 테스트에 사용할 예제 모델, 튜토리얼 [`model_examples.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/model_examples.py) .
+사용자 정의 `tff.learning.models.VariableModel`을 정의하는 방법에 대한 예제는 [이미지 분류](tutorials/federated_learning_for_image_classification.ipynb) 튜토리얼의 두 번째 부분과 [`model_exples.py`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/learning/models/model_examples.py)에서 테스트에 사용하는 예제 모델에서 찾아보실 수 있습니다.
 
 ### Keras용 변환기
 
-TFF에 필요한 거의 모든 정보는 `tf.keras` 인터페이스를 호출하여 얻을 수 있으므로 Keras 모델이 있다면, `tff.learning.from_keras_model`을 사용하여 `tff.learning.Model`을 구성할 수 있습니다.
+TFF에 필요한 거의 모든 정보는 `tf.keras` 인터페이스를 호출하여 얻을 수 있으므로 Keras 모델이 있는 경우 `tff.learning.models.from_keras_model`을 사용해 `tff.learning.models.VariableModel`을 구성할 수 있습니다.
 
 TFF는 여전히 다음과 같은 생성자(인수가 없는 *모델 함수*)를 제공하기를 원합니다.
 
 ```python
 def model_fn():
   keras_model = ...
-  return tff.learning.from_keras_model(keras_model, sample_batch, loss=...)
+  return tff.learning.models.from_keras_model(keras_model, sample_batch, loss=...)
 ```
 
 모델 자체 외에도, TFF가 모델 입력의 유형 및 형상을 결정하는 데 사용하는 샘플 데이터 배치를 제공합니다. 이렇게 하면 TFF가 클라이언트 기기에 실제로 존재하는 데이터를 위한 모델을 올바르게 인스턴스화할 수 있습니다 (여러분이 직렬화하려는 TensorFlow를 구성할 때 이 데이터는 일반적으로 사용할 수 없다고 가정하기 때문에).
@@ -156,7 +156,7 @@ while True:
 
 시뮬레이션된 페더레이션 데이터세트 처리를 표준화하기 위해 TFF는 클라이언트 세트를 열거하고 특정 클라이언트의 데이터를 포함하는 `tf.data.Dataset`를 구성할 수 있는 추상 인터페이스인 `tff.simulation.datasets.ClientData`를 제공합니다. 이러한 `tf.data.Dataset`은 강제 실행 모드에서 생성된 페더레이션 계산에 입력으로 직접 공급될 수 있습니다.
 
-클라이언트 ID에 액세스하는 기능은 시뮬레이션에 사용하기 위해 데이터세트에서만 제공되는 기능으로, 클라이언트의 특정 하위 세트에서 데이터에 대해 훈련하는 기능이 필요할 수 있습니다(예: 다양한 클라이언트 유형의 하루 동안의 가용성을 시뮬레이션합니다). 컴파일된 계산 및 기본 런타임에는 클라이언트 ID의 개념이 포함되지 *않습니다*. 특정 클라이언트 하위 세트의 데이터가 입력으로 선택되면(예: `tff.templates.IterativeProcess.next` 호출), 클라이언트 ID가 더 이상 표시되지 않습니다.
+클라이언트 ID에 액세스하는 기능은 시뮬레이션에 사용하기 위해 데이터세트에서만 제공되는 기능으로, 클라이언트의 특정 하위 세트에서 데이터를 훈련하는 기능이 필요할 수 있습니다(예: 다양한 유형의 클라이언트의 일일 가용성을 시뮬레이션하는 경우). 컴파일 된 계산 및 기본 런타임에는 클라이언트 ID 개념이 포함되지 *않습니다*. 예를 들어 `tff.templates.IterativeProcess.next`에 대한 호출에서 특정 클라이언트 서브 세트의 데이터가 입력으로 선택되면 클라이언트 ID가 더 이상 나타나지 않습니다.
 
 ### 사용 가능한 데이터세트
 
