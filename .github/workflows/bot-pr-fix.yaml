@@ -5,14 +5,12 @@ name: Auto-fix pull request
 on:
   repository_dispatch:
     types: [opened, synchronize]
+  workflow_dispatch:
 
 jobs:
   nbfmt:
     name: Fix notebook formatting
     # Check for opt-out label.
-    if: >-
-      ${{ github.actor == 'tfdocsbot' &&
-          !contains(github.event.client_payload.pull_request.labels.*.name, 'disable-autofix') }}
     runs-on: ubuntu-latest
     steps:
     - name: Set up Python
@@ -32,22 +30,22 @@ jobs:
         git restore -s master -- ./tools/ci/utils.sh
         source ./tools/ci/utils.sh
 
+        workingdir=$(pwd)
+        cd ..
+
         # Snapshot formatting already handled in sync script.
         readarray -t changed_files < <(get_changed_files | grep '\.ipynb$' | grep -v 'en-snapshot')
         if [[ ${#changed_files[@]} == 0 ]]; then
           echo "No notebooks modified in this pull request."
           exit 0
         fi
-        python3 -m tensorflow_docs.tools.nbfmt "${changed_files[@]}"
+        python3 -m tensorflow_docs.tools.nbfmt "${changed_files[@]/#/${workingdir}/}"
         # If changes, push to the forked PR branch submitted by head.
         push_commit "nbfmt"
 
   nblint-fix:
     name: Fix lint warnings
     # Check for opt-out label.
-    if: >-
-      ${{ github.actor == 'tfdocsbot' &&
-          !contains(github.event.client_payload.pull_request.labels.*.name, 'disable-autofix') }}
     runs-on: ubuntu-latest
     steps:
     - name: Set up Python
@@ -59,7 +57,7 @@ jobs:
       with:
         # Head repo is the user's fork. Ref is the branch name.
         repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
-        ref: ${{ github.event.client_payload.pull_request.head.sha }}
+        ref: ${{ github.event.client_payload.pull_request.head.ref }}
     - name: Fetch base master branch
       run: git fetch -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" master:master
     - name: Fix lint warnings in notebooks
@@ -67,14 +65,18 @@ jobs:
         git restore -s master -- ./tools/ci/utils.sh
         source ./tools/ci/utils.sh
 
+        workingdir=$(pwd)
+        cd ..
+
         readarray -t changed_files < <(get_changed_files | grep '\.ipynb$' | grep -v 'en-snapshot')
         if [[ ${#changed_files[@]} == 0 ]]; then
           echo "No notebooks modified in this pull request."
           exit 0
         fi
+        # ${changed_files[@]/#/${workingdir}} prefixes each element of `changed_files` with `workingdir/`.
         python3 -m tensorflow_docs.tools.nblint --fix --verbose \
           --styles=tensorflow,tensorflow_docs_l10n \
           --arg=repo:tensorflow/docs-l10n \
-          "${changed_files[@]}"
+          "${changed_files[@]/#/${workingdir}/}"
         # If changes, push to the forked PR branch submitted by head.
         push_commit "nblint fix"
