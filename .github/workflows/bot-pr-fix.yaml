@@ -28,23 +28,6 @@ jobs:
     - name: Format notebooks
       run: |
         echo "Hello World!"
-        git restore -s master -- ./tools/ci/utils.sh
-        source ./tools/ci/utils.sh
-
-        # Snapshot formatting already handled in sync script.
-        readarray -t changed_files < <(get_changed_files | grep '\.ipynb$' | grep -v 'en-snapshot')
-        if [[ ${#changed_files[@]} == 0 ]]; then
-          echo "No notebooks modified in this pull request."
-          exit 0
-        fi
-
-        workingdir=$(pwd)
-        pushd ..
-        python3 -m tensorflow_docs.tools.nbfmt "${changed_files[@]/#/${workingdir}/}"
-        popd
-
-        # If changes, push to the forked PR branch submitted by head.
-        push_commit "nbfmt"
 
   nblint-fix:
     name: Fix lint warnings
@@ -65,23 +48,4 @@ jobs:
       run: git fetch -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" master:master
     - name: Fix lint warnings in notebooks
       run: |
-        git restore -s master -- ./tools/ci/utils.sh
-        source ./tools/ci/utils.sh
-
-        readarray -t changed_files < <(get_changed_files | grep '\.ipynb$' | grep -v 'en-snapshot')
-        if [[ ${#changed_files[@]} == 0 ]]; then
-          echo "No notebooks modified in this pull request."
-          exit 0
-        fi
-
-        # ${changed_files[@]/#/${workingdir}} prefixes each element of `changed_files` with `workingdir/`.
-        workingdir=$(pwd)
-        pushd ..
-        python3 -m tensorflow_docs.tools.nblint --fix --verbose \
-          --styles=tensorflow,tensorflow_docs_l10n \
-          --arg=repo:tensorflow/docs-l10n \
-          "${changed_files[@]/#/${workingdir}/}"
-        popd
-
-        # If changes, push to the forked PR branch submitted by head.
-        push_commit "nblint fix"
+        echo "Hello World!"
