@@ -27,6 +27,7 @@ jobs:
       run: git fetch -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" master:master
     - name: Format notebooks
       run: |
+        echo "Hello World!"
         git restore -s master -- ./tools/ci/utils.sh
         source ./tools/ci/utils.sh
 
