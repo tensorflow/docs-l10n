@@ -1,7 +1,5 @@
 # TensorFlow Docs Translations
 
-!!!!!
-
 This project contains translations of the technical content and Jupyter
 notebooks published on [tensorflow.org](https://www.tensorflow.org/guide).
 
