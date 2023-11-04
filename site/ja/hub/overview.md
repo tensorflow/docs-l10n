@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2020-09-14' } *-->
-
 # TensorFlow Hub
 
 TensorFlow Hub は、再利用可能な機械学習用のオープンリポジトリとライブラリです。[tfhub.dev](https://tfhub.dev) リポジトリには、テキスト埋め込み、画像分類モデル、TF.js/TFLite モデルなど、事前トレーニング済みのモデルが多数用意されています。このリポジトリは[コミュニティ貢献者](https://tfhub.dev/s?subtype=publisher)に公開されています。

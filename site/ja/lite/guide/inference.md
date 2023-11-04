@@ -157,7 +157,7 @@ TensorFlow Lite を使用するには、入力テンソルと出力テンソル�
 - `long`
 - `byte`
 
-`String`型もサポートされていますが、プリミティブ型とはエンコードが異なります。特に、文字列テンソルの形状はテンソル内の文字列の数と配置を示し、各要素そのものが可変長の文字列です。このため、テンソルの（バイト）サイズを形状と型からだけでは計算できず、その結果文字列は単一のフラットな`ByteBuffer`引数として指定することができません。
+`String` 型もサポートされていますが、プリミティブ型とはエンコードが異なります。特に、文字列テンソルの形状はテンソル内の文字列の数と配置を示し、各要素そのものが可変長の文字列です。このため、テンソルの（バイト）サイズを形状と型からだけでは計算できず、その結果文字列は単一のフラットな `ByteBuffer` 引数として指定することができません。その他の例は、こちらの[ページ](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/Interpreter)をご覧ください。
 
 `Integer`や`Float`などのボックス型を含むほかのデータ型が使用される場合、`IllegalArgumentException`がスローされます。
 
@@ -454,21 +454,20 @@ output_data = interpreter.get_tensor(output_details[0]['index'])
 print(output_data)
 ```
 
-事前変換された`.tflite`ファイルとしてモデルを読み込む代わりに、コードを [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/api_docs/python/tf/lite/TFLiteConverter)（`tf.lite.TFLiteConverter`）と組み合わせて、TensorFlow モデルを TensorFlow Lite 形式に変換してから推論を実行することができます。
+事前変換された `.tflite` ファイルとしてモデルを読み込む代わりに、コードを [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/api_docs/python/tf/lite/TFLiteConverter)（`tf.lite.TFLiteConverter`）と組み合わせて、Keras モデルを TensorFlow Lite 形式に変換してから推論を実行することができます。
 
 ```python
 import numpy as np
 import tensorflow as tf
 
-img = tf.placeholder(name="img", dtype=tf.float32, shape=(1, 64, 64, 3))
+img = tf.keras.Input(shape=(64, 64, 3), name="img")
 const = tf.constant([1., 2., 3.]) + tf.constant([1., 4., 4.])
 val = img + const
 out = tf.identity(val, name="out")
 
 # Convert to TF Lite format
-with tf.Session() as sess:
-  converter = tf.lite.TFLiteConverter.from_session(sess, [img], [out])
-  tflite_model = converter.convert()
+converter = tf.lite.TFLiteConverter.from_keras_model(tf.keras.models.Model(inputs=[img], outputs=[out]))
+tflite_model = converter.convert()
 
 # Load the TFLite model and allocate tensors.
 interpreter = tf.lite.Interpreter(model_content=tflite_model)
@@ -487,10 +486,7 @@ interpreter.allocate_tensors()
 
 以下の例は、別の言語で推論を実行する前に、入力形状のサイズを変更する方法を示します。すべての例は、形状が `[1/None, 10]` に定義されており、サイズを`[3, 10]` に変更する必要があることが前提となっています。
 
-<section class="tabs">
-</section>
-
-###### C++ {.new-tab}
+C++ の例:
 
 ```c++
 // Resize input tensors before allocate tensors
@@ -498,7 +494,7 @@ interpreter->ResizeInputTensor(/*tensor_index=*/0, std::vector<int>{3,10});
 interpreter->AllocateTensors();
 ```
 
-###### Python {.new-tab}
+Python の例:
 
 ```python
 # Load the TFLite model in TFLite Interpreter

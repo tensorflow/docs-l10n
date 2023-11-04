@@ -2,7 +2,7 @@
 
 <a id="doctest"></a>
 
-## テスト可能なドキュメント文字列
+## テスト可能なドキュメンテーション文字列
 
 TensorFlow は [DocTest](https://docs.python.org/3/library/doctest.html) を使用して Python ドキュメント文字列（docstring）のコードスニペットをテストします。スニペットは、実行可能な Python コードである必要があります。テストを有効にするには、行の先頭に `>>>`（3 つの右山括弧）を追加します。例えば、以下は <a>array_ops.py</a> ソースファイルの <code>tf.concat</code> 関数からの抜粋です。
 

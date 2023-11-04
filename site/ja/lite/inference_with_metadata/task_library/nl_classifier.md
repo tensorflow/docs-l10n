@@ -43,13 +43,13 @@ dependencies {
     // Other dependencies
 
     // Import the Task Vision Library dependency (NNAPI is included)
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.4.4'
     // Import the GPU delegate plugin Library for GPU inference
-    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.4'
 }
 ```
 
-注：Android Gradle プラグインのバージョン 4.1 以降、.tflite はデフォルトで noCompress リストに追加され、上記の aaptOptions は不要になりました。
+注意: Android Gradle プラグインのバージョン 4.1 以降、.tflite はデフォルトで noCompress リストに追加され、上記の aaptOptions は不要になりました。
 
 ### ステップ 2: API を使用して推論を実行する
 
@@ -79,7 +79,7 @@ Podfile に TensorFlowLiteTaskText ポッドを追加します
 ```
 target 'MySwiftAppWithTaskAPI' do
   use_frameworks!
-  pod 'TensorFlowLiteTaskText', '~> 0.2.0'
+  pod 'TensorFlowLiteTaskText', '~> 0.4.4'
 end
 ```
 
@@ -162,7 +162,7 @@ category[1]: 'Positive' : '0.18687'
 
     - モデルの入力は、kTfLiteString テンソル生入力文字列または生入力文字列の正規表現トークン化インデックス用の kTfLiteInt32 テンソルのいずれかである必要があります。
     - 入力型が kTfLiteString の場合、モデルに[メタデータ](../../models/convert/metadata)は必要ありません。
-    - 入力型が kTfLiteInt32 の場合、`RegexTokenizer`を入力テンソルの[メタデータ](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers)に設定する必要があります。
+    - 入力型が kTfLiteInt32 の場合、`RegexTokenizer` を入力テンソルの[メタデータ](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers)に設定する必要があります。
 
 - 出力スコアテンソル：(kTfLiteUInt8/kTfLiteInt8/kTfLiteInt16/kTfLiteFloat32/kTfLiteFloat64)
 

@@ -5,12 +5,15 @@ Python 関数ベースのコンポーネント定義を使用すると、コン�
 次の例のように、簡単にカスタムコンポーネントを作成できます。
 
 ```python
+class MyOutput(TypedDict):
+  accuracy: float
+
 @component
 def MyValidationComponent(
     model: InputArtifact[Model],
     blessing: OutputArtifact[Model],
     accuracy_threshold: Parameter[int] = 10,
-    ) -> OutputDict(accuracy=float):
+) -> MyOutput:
   '''My simple custom model validation component.'''
 
   accuracy = evaluate_model(model)
@@ -65,17 +68,20 @@ TFX では、入力と出力は、基になるデータの場所とそれに関�
 
 - **ビームパイプライン**の場合は、型ヒント注釈 `BeamComponentParameter[beam.Pipeline]` を使用します。デフォルト値を `None` に設定します。値 `None` は、[`BaseBeamExecutor`](https://github.com/tensorflow/tfx/blob/master/tfx/dsl/components/base/base_beam_executor.py){: .external } の `_make_beam_pipeline()` によって作成されたインスタンス化されたビームパイプラインに置き換えられます。
 
-- パイプラインの構築時に不明な**単純なデータ型の入力**（`int`、`float`、`str` または `bytes`）には、それぞれ型ヒント `T` を使用してください。TFX 0.22 リリースでは、この型の入力のパイプライン構築時に具象値を渡すことができないことに注意してください（前のセクションで説明したように、代わりに `Parameter` 注釈を使用します）。この引数はオプションにすることも、デフォルト値で定義することもできます。コンポーネントに単純なデータ型出力（`int`、`float`、`str`または`bytes`）がある場合、これらの出力は、`OutputDict` インスタンスを使用して返すことができます。`OutputDict` 型のヒントをコンポーネントの戻り値として適用します。
-
-- それぞれの**出力**で、引数 `<output_name>=<T>` を `OutputDict` コンストラクタに追加します。`<output_name>` は出力名、`<T>` は出力の型です（`int`、`float`、`str` または `bytes`など）。
+- パイプラインの構築時に不明な**単純なデータ型の入力**（`int`、`float`、`str`、または `bytes`）には、それぞれ型ヒント `T` を使用してください。TFX 0.22 リリースでは、この型の入力のパイプライン構築時に具象値を渡すことができないことに注意してください。（前のサクションで説明したように、代わりに `Parameter` 注釈を使用します）。この引数はオプションにすることも、デフォルト値で定義することもできます。コンポーネントに単純なデータ型の出力（`int`、`float`、`str`、または `bytes`）がある場合、戻り値型の注釈として `TypedDict` を使い、適切な dict オブジェクトを戻して、これらの出力を返すことができます。
 
 関数の本体では、入力アーティファクトと出力アーティファクトは`tfx.types.Artifact`オブジェクトとして渡されます。`.uri`を調べて、システム管理の場所を取得し、プロパティを読み取り/設定できます。入力パラメータと単純なデータ型の入力は、指定された型のオブジェクトとして渡されます。単純なデータ型の出力はディクショナリとして返される必要があります。鍵は適切な出力名であり、値は期待される戻り値です。
 
 完成した関数コンポーネントは次のようになります。
 
 ```python
+from typing import TypedDict
 import tfx.v1 as tfx
 from tfx.dsl.component.experimental.decorators import component
+
+class MyOutput(TypedDict):
+  loss: float
+  accuracy: float
 
 @component
 def MyTrainerComponent(
@@ -83,7 +89,7 @@ def MyTrainerComponent(
     model: tfx.dsl.components.OutputArtifact[tfx.types.standard_artifacts.Model],
     dropout_hyperparameter: float,
     num_iterations: tfx.dsl.components.Parameter[int] = 10
-    ) -> tfx.v1.dsl.components.OutputDict(loss=float, accuracy=float):
+) -> MyOutput:
   '''My simple trainer component.'''
 
   records = read_examples(training_data.uri)

@@ -6,7 +6,7 @@ TensorFlow Lite Task ライブラリには、強力で使いやすいタスク�
 
 - **機械学習の専門家ではない人向けに分かりやすく明確に定義された API ** <br>推論はわずか 5 行のコードで実行できます。Task ライブラリの強力で使いやすい API をビルディングブロックとして使用して、モバイルデバイスで TFLite を使用して機械学習を簡単に開発できるようにします。
 
-- **複雑かつ一般的なデータ処理** <br> モデルに必要とされるデータ形式にデータを変換するための一般的なビジョンと自然言語処理ロジックをサポートします。 トレーニングと推論のために同じ共有可能な処理ロジックを提供します。
+- **複雑かつ一般的なデータ処理** <br> モデルに必要とされるデータ形式にデータを変換するための一般的なビジョンと自然言語処理ロジックをサポートします。トレーニングと推論のために同じ共有可能な処理ロジックを提供します。
 
 - **高性能ゲイン** <br> データ処理にかかる時間は数ミリ秒以内なので、TensorFlow Lite を使用した高速推論が可能になります。
 
@@ -72,7 +72,7 @@ dependencies {
 
 注意: NNAPI にはデフォルトで、ビジョン、テキスト、およびオーディオ用のタスクライブラリターゲットが含まれます。
 
-ステップ 2. [BaseOptions](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/core/BaseOptions.Builder) を通じてタスクオプションに GPU デリゲートを構成します。たとえば、次のように <code>ObjectDetecor</code> で GPU をセットアップできます。
+ステップ 2. [BaseOptions](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/task/core/BaseOptions.Builder) を通じてタスクオプションに GPU デリゲートを構成します。たとえば、次のように `ObjectDetecor` で GPU をセットアップできます。
 
 ```java
 // Turn on GPU delegation.
@@ -132,7 +132,7 @@ std::unique_ptr<QuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromOpt
 std::vector<QaAnswer> results = answerer->Answer(context_of_question, question_to_ask);
 ```
 
-より高度なアクセラレーター設定については、[こちら](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto)をご覧ください。
+より高度なアクセラレーター設定については、[こちら](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/acceleration/configuration/configuration.proto)をご覧ください。
 
 ### Coral Edge TPU における使用例（Python）
 
@@ -207,7 +207,7 @@ brew install libusb
 # Windows is not supported yet.
 ```
 
-Coral Edge TPU デバイスで [Task Library CLI デモツール](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop)を試してみてください。[トレーニング済みの Edge TPU モデル](https://coral.ai/models/)と[高度な Edge TPU 設定](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto#L275)をご覧ください。
+Coral Edge TPU デバイスで [Task Library CLI デモツール](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop)を試してみてください。[トレーニング済みの Edge TPU モデル](https://coral.ai/models/)と[高度な Edge TPU 設定](https://github.com/tensorflow/tensorflow/blob/4d999fda8d68adfdfacd4d0098124f1b2ea57927/tensorflow/lite/acceleration/configuration/configuration.proto#L594)をご覧ください。
 
 ### C++ での Core ML デリゲートの使用例
 

@@ -23,12 +23,12 @@
 
 1. git リポジトリを複製します。
     <pre class="devsite-click-to-copy">    git clone https://github.com/tensorflow/examples.git
-            </pre>
+                </pre>
 2. sparse checkout を使用するように git インスタンスを構成します。これで、物体検出サンプルアプリのファイルのみを取得できます。
     <pre class="devsite-click-to-copy">    cd examples
-            git sparse-checkout init --cone
-            git sparse-checkout set lite/examples/object_detection/android_play_services
-            </pre>
+                git sparse-checkout init --cone
+                git sparse-checkout set lite/examples/object_detection/android_play_services
+                </pre>
 
 ### プロジェクトのインポートと実行
 

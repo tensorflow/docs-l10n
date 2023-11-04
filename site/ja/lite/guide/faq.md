@@ -10,7 +10,7 @@
 
 #### TensorFlow Lite に実装されていない演算があるのはなぜですか？
 
-TFLite を軽量に維持するため、TFLite では特定の TF 演算子のみがサポートされています（[allowlist](op_select_allowlist) を参照）。
+TFLite を軽量に維持するため、TFLite では特定の TF 演算子のみがサポートされています（[allowlist](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/g3doc/guide/op_select_allowlist.md) を参照）。
 
 #### モデルを変換できない場合があるのはなぜですか？
 
@@ -69,8 +69,8 @@ TensorFlow Lite に変換する際に[トレーニング後の量子化](../perf
 
 TensorFlow Lite のパフォーマンスを最適化する高レベルのプロセスは、次のようになります。
 
-- *モデルがタスクに適していることを確認します。*画像の分類については、[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&module-type=image-classification) を確認してください。
-- *スレッド数を微調整します。*多くの TensorFlow Lite 演算子はマルチスレッドカーネルをサポートしています。これを行うには、[C++ API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L345) で`SetNumThreads()`を使用します。ただし、スレッドを増やすと、環境によってパフォーマンスが変動します。
+- *モデルがタスクに適していることを確認します。*画像の分類については、[TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&module-type=image-classification) をご覧ください。
+- *スレッド数を微調整します。*多くの TensorFlow Lite 演算子はマルチスレッドカーネルをサポートしています。これを行うには、[C++ API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/core/interpreter_builder.h#L110) で `SetNumThreads()` を使用します。ただし、スレッドを増やすと、環境によってパフォーマンスが変動します。
 - *ハードウェアアクセラレータを使用します。*TensorFlow Lite は、デリゲートを使用した特定のハードウェアのモデルアクセラレーションをサポートします。サポートされているアクセラレータと、デバイス上のモデルでそれらを使用する方法については、[デリゲート](../performance/delegates)ガイドを参照してください。
 - *(高度) プロファイルモデル。*Tensorflow Lite [ベンチマークツール](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)には、演算子ごとの統計を表示できる組み込みのプロファイラがあります。特定のプラットフォームで演算子のパフォーマンスを最適化する方法をご存じの場合は、[カスタム演算子](ops_custom)を実装できます。
 

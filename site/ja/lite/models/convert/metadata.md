@@ -64,7 +64,7 @@ TensorFlow Lite モデルにはさまざまな関連ファイルが含まれる�
 
 前処理と後処理の観点では、正規化と量子化は 2 つの独立したステップです。次に詳細を示します。
 
- | 正規化 | 量子化
+ | 正規化 | Quantization
 :-: | --- | ---
 \ | **Float モデル**: \ | **Float モデル**: \
 : An example of the       : - mean: 127.5 \        : - zeroPoint: 0 \        : |  |
@@ -98,11 +98,11 @@ TensorFlow Lite モデルにはさまざまな関連ファイルが含まれる�
 :                         :                         : outputs**: \            : |  |
 :                         :                         : f = (q - zeroPoint) *    : |  |
 :                         :                         : scale                    : |  |
-\ | Filled by model creator | Filled automatically by
+\ | モデル作成者が提出 | 自動的に提出
 : Where are the           : and stored in model     : TFLite converter, and    : |  |
 : parameters              : metadata, as            : stored in tflite model   : |  |
 :                         : `NormalizationOptions`  : file.                    : |  |
-How to get the | Through the | Through the TFLite
+How to get the | 方法 | Through the TFLite
 : parameters?             : `MetadataExtractor` API : `Tensor` API [1] or      : |  |
 :                         : [2]                     : through the              : |  |
 :                         :                         : `MetadataExtractor` API  : |  |
@@ -304,7 +304,7 @@ Metadata Extractor ライブラリは、さまざまなプラットフォーム�
 
 Android アプリで Metadata Extractor ライブラリを使用するには、[JCenter にホストされている TensorFlow Lite Metadata AAR ](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-metadata) がお勧めです。`MetadataExtractor` クラスだけでなく、[メタデータスキーマ](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs)と[モデルスキーマ](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema.fbs)の FlatBuffers Java バインディングも含まれています。
 
-これは、`build.gradle` 依存関係で次のように指定できます。
+これは、`build.gradle` 依存関係に次のように指定できます。
 
 ```build
 dependencies {
