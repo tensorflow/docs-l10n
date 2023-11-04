@@ -51,7 +51,7 @@ Android이외의 플랫폼을 사용 중이거나 TensorFlow Lite API에 이미 
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/text_classification.tflite">텍스트 분류</a></td>
-    <td rowspan="3">       0.6Mb</td>
+    <td rowspan="3">       0.6 Mb</td>
     <td>Pixel 3(Android 10)</td>
     <td>0.05ms *</td>
   </tr>

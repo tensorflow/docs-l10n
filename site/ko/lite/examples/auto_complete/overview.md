@@ -183,6 +183,7 @@ run_inference("I'm enjoying a", quant_generate_tflite)
 
 ### 컨텍스트 창 크기
 
+
 <img src="https://www.tensorflow.org/lite/examples/auto_complete/images/context_window.png" class="attempt-right">
 
 앱에는 변경 가능한 매개변수 '컨텍스트 창 크기'가 있습니다. 이는 현재 LLM이 일반적으로 모델에 '프롬프트'로 공급될 수 있는 단어/토큰의 수를 제한하는 고정된 컨텍스트 크기를 갖기 때문에 필요합니다('단어'와 '토큰'은 토큰화 방법이 다르기 때문에 이 경우 컨텍스트 크기가 반드시 동일하지는 않습니다). 이 숫자가 중요한 이유는 다음과 같습니다.

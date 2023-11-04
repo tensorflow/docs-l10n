@@ -24,7 +24,7 @@
 
 <!-- This doc uses plain text cost information because the pricing calculator is pre-configured -->
 
-이 튜토리얼을 실행하는 비용을 추정하려면 하루 종일 모든 리소스를 사용한다고 가정하고 미리 구성된 [가격 계산기](/products/calculator/#id=fad4d8-dd68-45b8-954e-5a56a5d148){: .external }를 사용하세요.
+이 튜토리얼을 실행하는 비용을 추정하려면 하루 종일 모든 리소스를 사용한다고 가정하고 미리 구성된 [가격 계산기](/products/calculator/#id=fad4d8-dd68-45b8-954e-5a56a5d){: .external }를 사용하세요.
 
 ## 시작하기 전에
 
@@ -42,7 +42,7 @@
 
 다음 Jupyter 노트북은 구현 예제를 보여줍니다.
 
-- [Notebook 1](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/blogs/babyweight_tft/babyweight_tft_keras_01.ipynb){: .external }은 데이터 전처리에 대한 내용을 다룹니다. 자세한 내용은 나중에 [Apache Beam 파이프라인 구현하기](#implement-the-apache-beam-pipeline) 섹션에서 제공됩니다.
+- [Notebook 1](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/blogs/babyweight_tft/babyweight_tft_keras_.ipynb){: .external }은 데이터 전처리에 대한 내용을 다룹니다. 자세한 내용은 나중에 [Apache Beam 파이프라인 구현하기](#implement-the-apache-beam-pipeline) 섹션에서 제공됩니다.
 - [Notebook 2](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/blogs/babyweight_tft/babyweight_tft_keras_02.ipynb){: .external }는 모델 훈련에 대한 내용을 다룹니다. 자세한 내용은 나중에 [TensorFlow 모델 구현하기](#implement-the-tensorflow-model) 섹션에서 제공됩니다.
 
 다음 섹션에서는 이러한 노트북을 복제하고 노트북을 실행하여 구현 예제가 작동하는 방식을 알아봅니다.
@@ -372,8 +372,7 @@ def preprocess_fn(input_features):
   <tr>
     <td><code>tfidf</code></td>
     <td>텍스트 특성</td>
-    <td>
-<i>x</i>의 용어를 해당 용어 빈도 * 역 문서 빈도에 매핑</td>
+    <td> <i>x</i>의 용어를 해당 용어 빈도 * 역 문서 빈도에 매핑</td>
   </tr>
   <tr>
     <td><code>compute_and_apply_vocabulary</code></td>
