@@ -4,7 +4,7 @@
 
 Python 関数から [AST](compilation.md#ast) を構築するプロセスをトレースします。
 
-TODO(b/153500547): トレースシステムの個別のコンポーネントを説明し、リンクを示してください。
+TODO: b/153500547 - トレースシステムの個別のコンポーネントを説明し、リンクしてください。
 
 ## 連合コンピュテーションをトレースする
 
@@ -24,9 +24,9 @@ TODO(b/153500547): トレースシステムの個別のコンポーネントを�
 
 さらに詳しく述べると、ちょうど 1 つの引数がある場合、トレースは次のようにして行われます。
 
-1. 引数を表す適切な型シグネチャを使用して、[building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) に基づいて [value_impl.ValueImpl](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) を構築します。
+1. 引数を表す適切な型シグネチャを使用して、[building_blocks.Reference](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) に基づいて [value_impl.Value](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/federated_context/value_impl.py) を構築します。
 
-2. `ValueImpl` で関数を呼び出します。これにより、Python ランタイムが `ValueImpl` によって実装されるダンダーメソッドを呼び出し、それらを AST 構造として解釈します。各ダンダーメソッドは AST を構築して AST に基づく `ValueImpl` を返します。
+2. `Value` で関数を呼び出します。これにより、Python ランタイムが `Value` によって実装されるダンダーメソッドを呼び出し、それらを AST 構造として解釈します。各ダンダーメソッドは AST を構築して AST に基づく `Value` を返します。
 
 以下に例を示します。
 
@@ -35,9 +35,9 @@ def foo(x):
   return x[0]
 ```
 
-ここでは、関数のパラメーターはタプルであり、関数の本体の 0 番目の要素が選択されています。これが Python の `__getitem__` メソッドを呼び出して、`ValueImpl` で上書きされます。最も単純なケースでは、`ValueImpl.__getitem__` の実装は [building_blocks.Selection](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) を構築して `__getitem__` の呼び出しを表現し、この新しい `Selection` に基づく `ValueImpl` を返します。
+ここでは、関数のパラメーターはタプルであり、関数の本体の 0 番目の要素が選択されています。これが Python の `__getitem__` メソッドを呼び出して、`Value` で上書きされます。最も単純なケースでは、`Value.__getitem__` の実装は [building_blocks.Selection](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/impl/compiler/building_blocks.py) を構築して `__getitem__` の呼び出しを表現し、この新しい `Selection` に基づく `Value` を返します。
 
-各ダンダーメソッドが `ValueImpl` を返し、オーバーライドされたダンダーメソッドの 1 つを呼び出す関数の本体にあるすべての演算をスタンプアウトするため、トレースは続行されます。
+各ダンダーメソッドが `Value` を返し、オーバーライドされたダンダーメソッドの 1 つを呼び出す関数の本体にあるすべての演算をスタンプアウトするため、トレースは続行されます。
 
 ### AST を構築する
 
@@ -45,7 +45,7 @@ def foo(x):
 
 ## TensorFlow Computation をトレースする
 
-TODO(b/153500547): TensorFlow computation をトレースするプロセスを説明してください。
+TODO: b/153500547 - TensorFlow の計算をトレースするプロセスを説明してください。
 
 ## トレース中に例外のエラーメッセージをクリーンアップする
 

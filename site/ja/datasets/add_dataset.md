@@ -244,7 +244,7 @@ for filename, fobj in dl_manager.iter_archive('path/to/archive.zip'):
 
 #### データセットの分割を指定する
 
-データセットに事前定義済みの Split が含まれる場合（たとえば `MNIST` には `train` と `test` の Split が含まれます）、それらを維持してください。含まれない場合は、単一の `tfds.Split.TRAIN` Split のみを指定します。ユーザーは[サブスプリット API](https://www.tensorflow.org/datasets/splits) で独自のサブスプリットを動的に作成できます（`split='train[80%:]'` など）。
+データセットに事前定義済みの Split が含まれる場合（たとえば `MNIST` には `train` と `test` の Split が含まれます）、それらを維持してください。含まれない場合は、単一の `all` Split のみを指定します。ユーザーは[サブスプリット API](https://www.tensorflow.org/datasets/splits) で独自のサブスプリットを動的に作成できます（`split='train[80%:]'` など）。Split 名には、前述の `all` を除くすべての英字文字列を使用できることに注意してください。
 
 ```python
 def _split_generators(self, dl_manager):

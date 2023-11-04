@@ -100,7 +100,7 @@ converter.representative_dataset = representative_dataset&lt;/b&gt;
 tflite_quant_model = converter.convert()
 </pre>
 
-注意：この `tflite_quant_model` は、整数のみのデバイス（8 ビットマイクロコントローラなど）やアクセラレータ（Coral Edge TPU など）と互換性がありません。元の浮動小数点数のみのモデルと同じインターフェイスを保持するために、入力と出力は浮動小数点数のままです。
+注意: この `tflite_quant_model` は、整数のみのデバイス（8 ビットマイクロコントローラなど）やアクセラレータ（Coral Edge TPU など）と互換性がありません。元の浮動小数点数のみのモデルと同じインターフェースを保持するために、入力と出力は浮動小数点数のままです。
 
 #### 整数のみ
 
@@ -119,8 +119,6 @@ converter.representative_dataset = representative_dataset
 &lt;b&gt;converter.inference_output_type = tf.int8&lt;/b&gt;  # or tf.uint8
 tflite_quant_model = converter.convert()
 </pre>
-
-注意：現在量子化できない演算がある場合、コンバータは、エラーをスローします。
 
 ### 半精度浮動小数点数の量子化
 
@@ -169,7 +167,12 @@ converter.target_spec.supported_ops = [tf.lite.OpsSet.EXPERIMENTAL_TFLITE_BUILTI
 tflite_quant_model = converter.convert()
 </pre>
 
-この量子化スキームにより*超解像、*ノイズキャンセリングやビームフォーミングなどのオーディオ信号処理、*画像のノイズ除去、*単一画像からの HDR 再構成などの使用例で精度が向上します。
+この量子化スキームで精度の改善が得られたユースケースには、以下のような例があります。
+
+- 超解像
+- ノイズキャンセリングやビームフォーミングなどのオーディオ信号処理
+- 画像ノイズ除去
+- 単一の画像からの HDR 再構成
 
 この量子化の欠点は以下のとおりです。
 
@@ -198,4 +201,4 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 - テンソルごとの活性化/入力は、[-128, 127]の範囲のゼロ点、 [-127、127] の範囲の int8 の 2 の補数値で表されます。
 
-量子化スキームの詳細については、[量子化仕様](./quantization_spec)を参照してください。TensorFlow Lite のデリゲートインターフェイスにプラグインするハードウェアベンダーには、ここに説明されている量子化スキームを実装することをお勧めします。
+量子化スキームの詳細については、[量子化仕様](./quantization_spec)を参照してください。TensorFlow Lite のデリゲートインターフェースにプラグインするハードウェアベンダーには、ここに説明されている量子化スキームを実装することをお勧めします。

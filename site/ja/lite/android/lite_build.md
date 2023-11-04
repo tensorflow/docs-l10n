@@ -30,7 +30,7 @@ allprojects {
 
 <!-- mdformat off(devsite fails if there are line-breaks in templates) -->
 
-{% dynamic if 'tflite-android-tos' in user.acknowledged_walls and request.tld != 'cn' %} Docker ファイルは<a href="https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/tools/dockerfiles/tflite-android.Dockerfile">こちら</a>からダウンロードできます。{% dynamic else %}ファイルをダウンロードするには、利用規約に同意する必要があります。<a class="button button-blue devsite-acknowledgement-link" data-globally-unique-wall-id="tflite-android-tos">同意する</a> {% dynamic endif %}
+{% dynamic if 'tflite-android-tos' in user.acknowledged_walls and request.tld != 'cn' %} Docker ファイルは<a href="https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/lite/tools/tflite-android.Dockerfile">こちら</a>からダウンロードできます。 {% dynamic else %} ファイルをダウンロードするには利用規約に同意する必要があります。<a class="button button-blue devsite-acknowledgement-link" data-globally-unique-wall-id="tflite-android-tos">同意する</a> {% dynamic endif %}
 
 <!-- mdformat on -->
 
@@ -70,7 +70,7 @@ sdkmanager \
 Bazel は TensorFlow の主なビルドシステムです。これを使用して構築する場合には、Bazel および Android の NDK と SDK をシステムにインストールする必要がありあます。
 
 1. [Bazel ビルドシステム](https://bazel.build/versions/master/docs/install.html)の最新バージョンをインストールします。
-2. TensorFlow Lite のネイティブコード (C/C++) を構築するには、Android NDK が必要です。現在の推奨バージョンは 19c で、[こちら](https://developer.android.com/ndk/downloads/older_releases.html#ndk-19c-downloads)から入手できます。
+2. TensorFlow Lite のネイティブコード（C/C++）を構築するには、Android NDK が必要です。現在の推奨バージョンは 21e で、[こちら](https://developer.android.com/ndk/downloads/older_releases.html#ndk-21e-downloads)から入手できます。
 3. Android SDK とビルドツールは[こちら](https://developer.android.com/tools/revisions/build-tools.html)から、または [Android Studio](https://developer.android.com/studio/index.html) の一部として入手できます。TensorFlow Lite の構築に推奨されるビルドツールの API バージョンは 23 かそれ以降です。
 
 ### WORKSPACE と .bazelrc の構成
@@ -85,10 +85,10 @@ Bazel は TensorFlow の主なビルドシステムです。これを使用し�
 これらの変数が設定されていない場合は、スクリプトのプロンプトでインタラクティブに提供する必要があります。構成が正しく完了する、ルートフォルダ内の `.tf_configure.bazelrc` ファイルに以下に類似したエントリが生成されます。
 
 ```shell
-build --action_env ANDROID_NDK_HOME="/usr/local/android/android-ndk-r19c"
-build --action_env ANDROID_NDK_API_LEVEL="21"
-build --action_env ANDROID_BUILD_TOOLS_VERSION="28.0.3"
-build --action_env ANDROID_SDK_API_LEVEL="23"
+build --action_env ANDROID_NDK_HOME="/usr/local/android/android-ndk-r21e"
+build --action_env ANDROID_NDK_API_LEVEL="26"
+build --action_env ANDROID_BUILD_TOOLS_VERSION="30.0.3"
+build --action_env ANDROID_SDK_API_LEVEL="30"
 build --action_env ANDROID_SDK_HOME="/usr/local/android/android-sdk-linux"
 ```
 
@@ -99,6 +99,8 @@ Bazel が正しく設定されたら、以下のようにしてルートチェ�
 ```sh
 bazel build -c opt --fat_apk_cpu=x86,x86_64,arm64-v8a,armeabi-v7a \
   --host_crosstool_top=@bazel_tools//tools/cpp:toolchain \
+  --define=android_dexmerger_tool=d8_dexmerger \
+  --define=android_incremental_dexing_tool=d8_dexbuilder \
   //tensorflow/lite/java:tensorflow-lite
 ```
 

@@ -42,7 +42,7 @@ TensorFlow の連合学習データセットは、連合学習で解決できる
 
 ## 高性能シミュレーション
 
-FL *シミュレーション*の実時間は、アルゴリズムを評価するための適切な指標ではありませんが（シミュレーションハードウェアは実際の連合学習デプロイメント環境を表していないため）、連合学習シミュレーションをすばやく実行できることは、研究の生産性にとって重要です。そのため、TFF は単一および複数のマシンで高性能なランタイムを提供するために多額の投資を行ってきました。現在、ドキュメントは開発中ですが、[Kubernetes を使用した高性能シミュレーション](https://www.tensorflow.org/federated/tutorials/high_performance_simulation_with_kubernetes)チュートリアルと [TFF を使用した高性能シミュレーション](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators)、[ GCP で TFF を使用したシミュレーションを設定する](https://www.tensorflow.org/federated/gcp_setup)手順を参照してください。高性能 TFF ランタイムはデフォルトで有効になっています。
+FL *シミュレーション*の実時間は、アルゴリズムを評価するための適切な指標ではありませんが（シミュレーションハードウェアは実際の連合学習デプロイメント環境を表していないため）、連合学習シミュレーションをすばやく実行できることは、研究の生産性にとって重要です。そのため、TFF は単一および複数のマシンで高性能なランタイムを提供するために多額の投資を行ってきました。現在、ドキュメントは開発中ですが、[アクセラレータを使用した TFF シミュレーション](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators)チュートリアルと [ GCP で TFF を使用したシミュレーションを設定する](https://www.tensorflow.org/federated/gcp_setup)手順を参照してください。高性能 TFF ランタイムはデフォルトで有効になっています。
 
 ## さまざまな研究分野の TFF
 
@@ -91,7 +91,7 @@ TFF は、GAN の連合学習の研究に使用できます。たとえば、[�
 
 - 初期モデルから開始し、各クライアントのローカルデータセットを使用してパーソナライズモデルをトレーニングおよび評価する`tf.function `を定義します。 例は、[`build_personalize_fn`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/examples/personalization/p13n_utils.py)をご覧ください。
 
-- 戦略名を対応するパーソナライズ戦略にマップする`OrderedDict`を定義し、それを [`tff.learning.build_personalization_eval`](https://www.tensorflow.org/federated/api_docs/python/tff/learning/build_personalization_eval)の`personalize_fn_dict` 引数として使用します。
+- 戦略名を対応するパーソナライズ戦略にマップする `OrderedDict` を定義し、それを [`tff.learning.build_personalization_eval_computation`](https://www.tensorflow.org/federated/api_docs/python/tff/learning/build_personalization_eval_computation) の `personalize_fn_dict` 引数として使用します。
 
 もう 1 つのアプローチは、モデルの一部を完全にローカルでトレーニングすることで、完全にグローバルなモデルをトレーニングしないようにすることです。[こちらのブログ記事](https://ai.googleblog.com/2021/12/a-scalable-approach-for-partially-local.html)には、このアプローチの一種が説明されています。このアプローチはメタ学習にも関連しています。[こちらの論文](https://arxiv.org/abs/2102.03448)をご覧ください。部分的なローカルな連合学習を探索するには、次の方法があります。
 

@@ -23,7 +23,7 @@ TFX パイプラインのステップの出力は**アーティファクト**と
 
 たとえば、`ExampleGen` 標準コンポーネントはシリアル化された Example を出力し、その出力は `StatisticsGen` などの標準コンポーネントによって入力として使用されます。
 
-アーティファクトは**アーティファクト型**という [ML メタデータ](mlmd)ストアに登録されている型を使って強力に型付けされている必要があります。詳細は、[ML メタデータで使用されている概念](mlmd#concepts)をご覧ください。
+アーティファクトは**アーティファクト型**という  [ML メタデータ](mlmd.md)ストアに登録されている型を使って強力に型付けされている必要があります。詳細は、[ML メタデータで使用されている概念](mlmd.md#concepts)をご覧ください。
 
 アーティファクト型には名前があり、そのプロパティのスキーマを定義しています。アーティファクト型名は ML メタデータストアで一意である必要があります。TFX には、文字列、整数、浮動小数点数などの複雑なデータ型や値の型を記述する[標準アーティファクト型](https://github.com/tensorflow/tfx/blob/master/tfx/types/standard_artifacts.py){: .external }が備わっています。または、[`Artifact`](https://github.com/tensorflow/tfx/blob/master/tfx/types/artifact.py){: .external } から派生したカスタムアーティファクト型を定義することも可能です。
 
@@ -45,7 +45,7 @@ TFX パイプラインのステップの出力は**アーティファクト**と
 - Executor:  データの変換と取り込みやモデルのトレーニングと評価など、ML ワークフローのステップを実行するコードを実装します。
 - コンポーネントインターフェース: パイプラインで使用できるようにコンポーネント仕様と Executor をパッケージ化します。
 
-TFX には、パイプラインで使用できる[標準コンポーネント](index#tfx_standard_components)が複数備わっています。これらのコンポーネントでニーズを満たせない場合は、カスタムコンポーネントを構築することができます。[カスタムコンポーネントについて詳しくお読みください](understanding_custom_components)。
+TFX には、パイプラインで使用できる[標準コンポーネント](index.md#tfx-standard-components)が複数備わっています。これらのコンポーネントでニーズを満たせない場合は、カスタムコンポーネントを構築することができます。[カスタムコンポーネントについて詳しくお読みください](understanding_custom_components.md)。
 
 ## パイプライン
 
@@ -83,13 +83,13 @@ TFX パイプラインは ML ワークフローの移植可能な実装で、Apa
 - ExampleValidator と Transform コンポーネントは入力アーティファクト依存関係を共有しており、互いの出力には依存していないため、並行して実行できます。
 - Transform コンポーネントが完了したら、Trainer、Evaluator、カスタムデプロイヤーコンポーネントインスタンスを順に実行します。
 
-詳細は、[TFX パイプラインを構築する](build_tfx_pipeline)をご覧ください。
+詳細は、[TFX パイプラインを構築する](build_tfx_pipeline.md)をご覧ください。
 
 ## TFX パイプラインテンプレート
 
 TFX パイプラインテンプレートを使うと、事前構築済みのパイプラインをユースケースに合わせてカスタマイズできるため、パイプラインの作成をより簡単に行えます。
 
-詳細は、[TFX パイプラインテンプレートをカスタマイズする](build_tfx_pipeline#build-a-pipeline-using-a-template)をご覧ください。
+詳細は、[TFX パイプラインテンプレートをカスタマイズする](build_tfx_pipeline.md#pipeline-templates)をご覧ください。
 
 ## パイプラインラン
 
@@ -97,4 +97,4 @@ TFX パイプラインテンプレートを使うと、事前構築済みのパ�
 
 ## オーケストレータ
 
-オーケストレータは、パイプラインランを実行できるシステムです。TFX は、[Apache Airflow](airflow)、[Apache Beam](beam_orchestrator)、[Kubeflow Pipelines](kubeflow) などのオーケストレータをサポートしています。TFX ではオーケストレータをサポートする実装を *DagRunner* という用語で呼んでいます。
+オーケストレータは、パイプラインランを実行できるシステムです。TFX は、[Apache Airflow](airflow.md)、[Apache Beam](beam.md)、[Kubeflow Pipelines](kubeflow.md) などのオーケストレータをサポートしています。TFX ではオーケストレータをサポートする実装を *DagRunner* という用語で呼んでいます。

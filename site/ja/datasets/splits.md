@@ -1,6 +1,6 @@
 # Split とスライス
 
-すべての TFDS データセットは、さまざまなデータの Split（`'train'`、`'test'` など）を公開しており、[カタログ](https://www.tensorflow.org/datasets/catalog/overview)で閲覧することができるようになっています。
+すべての TFDS データセットは、[カタログ](https://www.tensorflow.org/datasets/catalog/overview)で詳しく見ることのできる様々なデータの Split（`'train'`、`'test'` など）を公開します。Split 名には、`all`（すべての Split の結合に対応する予約語。以下参照）を除く任意の英字の文字列を使用できます。
 
 TFDS では、「公式」のデータセットの Split に加え、Split のスライスやさまざまな組み合わせを選択することができます。
 
@@ -19,10 +19,10 @@ ds = builder.as_dataset(split='test+train[:75%]')
 
 Split には次のものがあります。
 
-- **プレーンな Split**（`'train'`、`'test'`）: 選択された Split 内のすべての Example。
+- **プレーンな Split 名**（`'train'`、`'test'` などの文字列）: 選択された Split 内のすべての Example。
 - **スライス**: スライスのセマンティックは[Python のスライス表記法](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations)と同じです。スライスには次のものがあります。
-    - **全体的** (`'train[123:450]'`、`train[:4000]`): (読み取り順序に関する警告については、以下の注意事項を参照してください)
-    - **パーセント率**（`'train[:75%]'`、`'train[25%:75%]'`）: 全データを 100 個の均一なスライスに分けます。データを 100 で割り切れない場合は、一部の 100 分の 1 のスライスに追加の Example が含まれる場合があります。
+    - **絶対** (`'train[123:450]'`、`train[:4000]`): (読み取り順序に関する警告については、以下の注意事項を参照してください)
+    - **パーセント率**（`'train[:75%]'`、`'train[25%:75%]'`）: 全データを 100 個の均一なスライスに分けます。データを均等に割り切れない場合は、一部の 100 分の 1 のスライスに追加の Example が含まれる場合があります。小数点以下のパーセントはサポートされています。
     - **シャード**（`train[:4shard]`、`train[4shard]`）: リクエストされたシャードのすべての Example を選択します。（Split のシャード数を取得するには、`info.splits['train'].num_shards` を確認します。）
 - **Split の和集合**（`'train+test'`、`'train[:25%]+test'`）: Split は共にインターリーブされます。
 - **完全なデータセット** (`'all'`): `'all'` すべての Split の和集合に対応する特別な Split 名です ( `'train+test+...'` と同等)。
@@ -118,7 +118,7 @@ ds = tfds.load('my_dataset', split=split)
 - `%`: パーセント率スライス
 - `shard`: シャードスライス
 
-`tfds.ReadInstruction` には四捨五入の引数もあります。データセットの Example 数が `100` で均等に割り切れない場合は、次のようになります。
+`tfds.ReadInstruction` には四捨五入の引数もあります。データセットの Example 数が均等に割り切れない場合は、次のようになります。
 
 - `rounding='closest'`（デフォルト）: 残りの Example は、パーセント率で配分され、一部のパーセントに追加の Example が含まれることがあります。
 - `rounding='pct1_dropremainder'`: 残りの Example はドロップされますが、こうすることですべての 100 分の 1 スライスにまったく同じ数の Example が確実に含まれることになります（`len(5%) == 5 * len(1%)` など）。

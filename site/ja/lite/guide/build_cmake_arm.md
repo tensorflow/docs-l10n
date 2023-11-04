@@ -81,7 +81,7 @@ cmake -DCMAKE_C_COMPILER=${ARMCC_PREFIX}gcc \
   ../tensorflow/lite/
 ```
 
-**注意:** ターゲットデバイスで OpenCL 1.2 以上がサポートされている場合は、"-DTFLITE_ENABLE_GPU=ON" を使用して GPU デリゲートを有効化できます。
+**注意:** ターゲットデバイスで OpenCL 1.2 以上がサポートされている場合は、`-DTFLITE_ENABLE_GPU=ON` を使用して GPU デリゲートを有効化できます。
 
 ## NEON に対応した ARMv7 向けの構築
 
@@ -122,19 +122,21 @@ cmake -DCMAKE_C_COMPILER=${ARMCC_PREFIX}gcc \
 
 #### ツールチェーンのダウンロード
 
-これらのコマンドを実行すると、arm-rpi-linux-gnueabihf ツールチェーンが ${HOME}/toolchains の下にインストールされます。
+これらのコマンドを実行すると、gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf ツールチェーンが ${HOME}/toolchains の下にインストールされます。
 
 ```sh
-curl -L https://github.com/rvagg/rpi-newer-crosstools/archive/eb68350c5c8ec1663b7fe52c742ac4271e3217c5.tar.gz -o rpi-toolchain.tar.gz
-tar xzf rpi-toolchain.tar.gz -C ${HOME}/toolchains
-mv ${HOME}/toolchains/rpi-newer-crosstools-eb68350c5c8ec1663b7fe52c742ac4271e3217c5 ${HOME}/toolchains/arm-rpi-linux-gnueabihf
+curl -LO https://storage.googleapis.com/mirror.tensorflow.org/developer.arm.com/media/Files/downloads/gnu-a/8.3-2019.03/binrel/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf.tar.xz
+mkdir -p ${HOME}/toolchains
+tar xvf gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf.tar.xz -C ${HOME}/toolchains
 ```
+
+**注意:** GCC 8.3 で構築されたバイナリでは、glibc 2.28 以上が必要です。glibc バージョンがこれよりも低い場合は、古い GCC ツールチェーンを使用する必要があります。
 
 #### CMake の実行
 
 ```sh
-ARMCC_PREFIX=${HOME}/toolchains/arm-rpi-linux-gnueabihf/x64-gcc-6.5.0/arm-rpi-linux-gnueabihf/bin/arm-rpi-linux-gnueabihf-
-ARMCC_FLAGS="-march=armv6 -mfpu=vfp -funsafe-math-optimizations"
+ARMCC_FLAGS="-march=armv6 -mfpu=vfp -mfloat-abi=hard -funsafe-math-optimizations"
+ARMCC_PREFIX=${HOME}/toolchains/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
 cmake -DCMAKE_C_COMPILER=${ARMCC_PREFIX}gcc \
   -DCMAKE_CXX_COMPILER=${ARMCC_PREFIX}g++ \
   -DCMAKE_C_FLAGS="${ARMCC_FLAGS}" \

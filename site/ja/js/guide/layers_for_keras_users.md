@@ -1,6 +1,6 @@
 # Keras ユーザー向け TensorFlow.js Layers API
 
-TensorFlow.js の Layers API は Keras に基づいてモデル化されています。[Layers API](https://js.tensorflow.org/api/latest/) は JavaScript と Python の違いを考慮し、 Keras と同様に作成されています。そのため、Python で Keras モデルを開発した経験のあるユーザーは、JavaScript の TensorFlow.js レイヤーに移行しやすくなります。たとえば、次の Keras コードは以下のように JavaScript に変換されます。
+TensorFlow.js の Layers API は Keras に基づいてモデル化されています。[Layers API](https://js.tensorflow.org/api/latest/#Layers) は JavaScript と Python の違いを考慮し、Keras と同様に作成されています。そのため、Python で Keras モデルを開発した経験のあるユーザーは、JavaScript の TensorFlow.js レイヤーに移行しやすくなります。たとえば、次の Keras コードは以下のように JavaScript に変換されます。
 
 ```python
 # Python:

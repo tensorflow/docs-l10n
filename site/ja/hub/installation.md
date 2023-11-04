@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2022-07-04' } *-->
-
 # インストール
 
 ## tensorflow_hub をインストールする
@@ -39,7 +37,7 @@ $ pip install --upgrade tf-hub-nightly
 
 - [ライブラリの概要](lib_overview.md)
 - チュートリアル:
-    - [テキスト分類](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
-    - [画像分類](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
+    - [テキスト分類](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_text_classification.ipynb)
+    - Image classification
     - [GitHub](https://github.com/tensorflow/hub/blob/master/examples/README.md) のその他の例
-- [tfhub.dev](https://tfhub.dev) でモデルを検索してください
+- [tfhub.dev](https://tfhub.dev) でモデルを検索する

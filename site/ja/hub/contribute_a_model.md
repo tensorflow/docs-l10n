@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-05-25' } *-->
-
 # プルリクエストを送信する
 
 このページは、[tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) GitHub リポジトリに Markdown ドキュメントを含むプルリクエストを送信する方法を説明しています。まず Markdown ファイルの記述方法に関する詳細を確認するには、[ドキュメントの作成ガイド](writing_documentation.md)をご覧ください。
+
+**注意:** モデルを他のモデルハブにミラーリングするには、MIT、CC0、または Apache ライセンスを使用してください。モデルを他のモデルハブにミラーリングしない場合は、別の適切なライセンスを使用してください。
 
 ## GitHub Actions のチェック
 

@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-07' } *-->
-
 # TF1/TF2 モデルの互換性
 
 ## TF Hub のモデル形式
@@ -30,7 +28,7 @@ TF Hub は TensorFlow プログラムで再読み込み、構築、再トレー�
   </tr>
   <tr>
     <td>ファインチューニング</td>
-    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf1_hub_module#for_consumers">包括的な TF1 Hub 形式の微調整ガイド</a>）     <pre style="font-size: 12px;" lang="python">m = hub.Module(handle,                trainable=True,                tags=["train"]*is_training) outputs = m(inputs)</pre>       <div style="font-style: italic; font-size: 14px">       注意: 個別の train グラフを必要としないモジュールには train タグがありません。       </div>
+    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf1_hub_module#for_consumers">包括的な TF1 Hub 形式のファインチューニングガイド</a>）     <pre style="font-size: 12px;" lang="python">m = hub.Module(handle,                trainable=True,                tags=["train"]*is_training) outputs = m(inputs)</pre>       <div style="font-style: italic; font-size: 14px">       注意: 個別の train グラフを必要としないモジュールには train タグがありません。       </div>
 </td>
     <td style="text-align: center">サポートされていません</td>
   </tr>
@@ -59,22 +57,24 @@ TF1.15 以前はサポートされていません。
     <td>読み込み / 推論</td>
     <td>hub.load <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
 outputs = m(inputs)</pre> または hub.KerasLayer <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
-outputs = m(inputs)</pre> のいずれかを使用します。</td>
-    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">包括的な TF2 SavedModel の読み込みガイド</a>）。hub.load     <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre>       または hub.KerasLayer       <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre> のいずれかを使用してください。</td>
+outputs = m(inputs)</pre> のいずれかを使用することをお勧めします。</td>
+    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">包括的な TF2 SavedModel の読み込みガイド</a>）。hub.load <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
+outputs = m(inputs)</pre> または hub.KerasLayer <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
+outputs = m(inputs)</pre> のいずれかを使用してください。</td>
   </tr>
   <tr>
     <td>ファインチューニング</td>
-    <td>Model.fit() でトレーニングされる場合、または <a href="https://www.tensorflow.org/guide/migrate#using_a_custom_model_fn">カスタム model_fn ガイド</a> に従って Model をラップする model_fn を持つ Estimator でトレーニングされる場合に tf.keras.Model で使用される hub.KerasLayer でサポートされます。<br><div style="font-style: italic; font-size: 14px;">         注意: hub.KerasLayer は古い tf.compat.v1.layers または hub.Module API のようにグラフコレクションを<span style="font-weight: bold;">埋めません</span>。       </div>
+    <td>Model.fit() でトレーニングされる場合、または <a href="https://www.tensorflow.org/guide/migrate#using_a_custom_model_fn">カスタム model_fn ガイド</a> に従って Model をラップする model_fn を持つ Estimator でトレーニングされる場合にtf.keras.Model で使用される hub.KerasLayer でサポートされます。 <br><div style="font-style: italic; font-size: 14px;">         注意: hub.KerasLayer は古い tf.compat.v1.layers または hub.Module API のようにグラフコレクションを<span style="font-weight: bold;">埋めません</span>。       </div>
 </td>
     <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf2_saved_model#for_savedmodel_consumers">包括的な TF2 SavedModel の微調整ガイド</a>）。hub.load: <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
 outputs = m(inputs, training=is_training)</pre> または hub.KerasLayer: <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle, trainable=True)
-outputs = m(inputs)</pre> のいずれかを使用します。</td>
+outputs = m(inputs)</pre> のいずれかを使用してください。</td>
   </tr>
   <tr>
     <td>作成</td>
-    <td>TF2 API  <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save"> tf.saved_model.save()</a> は互換モード内から呼び出すことができます。</td>
+    <td>TF2 API <a href="https://www.tensorflow.org/api_docs/python/tf/saved_model/save"> tf.saved_model.save()</a> は互換モード内から呼び出すことができます。</td>
    <td>完全サポート（<a href="https://www.tensorflow.org/hub/tf2_saved_model#creating_savedmodels_for_tf_hub">包括的な TF2 SavedModel の作成ガイド</a> をご覧ください）</td>
   </tr>
 </table>
 
-<p id="compatfootnote">[1] "TF2 の TF1 互換モード" とは、<a href="https://www.tensorflow.org/guide/migrate">TensorFlow 移行ガイド</a>に記載されているように TF2 を <code style="font-size: 12px;" lang="python">import tensorflow.compat.v1 as tf</code> でインポートして <code style="font-size: 12px;" lang="python">tf.disable_v2_behavior()</code> を実行する場合の複合効果を指します。</p>
+<p id="compatfootnote">[1] "TF2 の TF1 互換モード" とは、<a>TensorFlow 移行ガイド</a>に記載されているように TF2 を <code style="font-size: 12px;" lang="python">import tensorflow.compat.v1 as tf</code> でインポートして <code>tf.disable_v2_behavior()</code> を実行する場合の複合効果を指します。</p>

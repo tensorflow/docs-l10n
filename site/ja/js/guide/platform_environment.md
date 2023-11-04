@@ -117,7 +117,7 @@ tf.ready().then(() => {...});
 
 ##### WASM を使用する理由
 
-[WASM](https://webassembly.org/) は 2015 年に新しい Web ベースのバイナリ形式として公開され、JavaScript、C、C ++などで記述されたプログラムに Web 上で実行するためのコンパイルターゲットを提供します。WASM は 2017 年からChrome、Safari、Firefox、Edge で[サポート](https://webassembly.org/roadmap/)されており、世界中の[デバイスの 90% ](https://caniuse.com/#feat=wasm)でサポートされています。
+[WASM](https://webassembly.org/) は 2015 年に新しい Web ベースのバイナリ形式として公開され、JavaScript、C、C ++などで記述されたプログラムにウェブ上で実行するためのコンパイルターゲットを提供します。WASM は 2017 年から Chrome、Safari、Firefox、Edge で[サポート](https://webassembly.org/roadmap/)されており、世界中の[デバイスの 90%](https://caniuse.com/#feat=wasm) でサポートされています。
 
 **パフォーマンス**
 

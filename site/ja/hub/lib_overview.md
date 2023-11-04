@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' } *-->
-
 # TensorFlow Hub ライブラリの概要
 
 [`tensorflow_hub`](https://github.com/tensorflow/hub) ライブラリでは、最小限のコードでトレーニング済みのモデルをダウンロードし、TensorFlow プログラムで再利用することができます。トレーニング済みモデルの読み込みには、主に `hub.KerasLayer` API が使用されます。
@@ -11,6 +9,8 @@ embed = hub.KerasLayer("https://tfhub.dev/google/nnlm-en-dim128/2")
 embeddings = embed(["A long sentence.", "single-word", "http://example.com"])
 print(embeddings.shape, embeddings.dtype)
 ```
+
+**注意:** このドキュメントの例では、TFhub.dev URL ハンドルを使用しています。その他の有効なハンドルタイプについては、[こちら](tf2_saved_model.md#model_handles)をご覧ください。
 
 ## ダウンロードのキャッシュロケーションを設定する
 

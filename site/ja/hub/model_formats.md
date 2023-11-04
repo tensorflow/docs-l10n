@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-06-13' } *-->
-
 # モデルの形式
 
 [tfhub.dev](https://tfhub.dev) は、TF2 SavedModel、TF1 Hub 形式、TF.js、および TFLite のモデル形式をホストします。このページでは、各モデル形式の概要を説明します。
+
+tfhub.dev に公開されるコンテンツは、特殊フォーマットに従っており、規約（https://tfhub.dev/terms）で許可されている場合、自動的に他のモデルハブにミラーリングされる可能性があります。詳細については、[公開に関するドキュメント](publish.md)をご覧ください。また、ミラーリングからオプトアウトするには、[貢献に関するドキュメント](contribute_a_model.md)をご覧ください。
 
 ## TensorFlow 形式
 

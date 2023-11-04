@@ -42,7 +42,7 @@
 
 以下の Jupyter ノートブックには、実装例が示されています。
 
-- [Notebook 1](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/blogs/babyweight_tft/babyweight_tft_keras_01.ipynb){: .external } は、データの前処理に対応しています。詳細は、後の「[Apache Beam パイプラインの実装](#implement-the-apache-beam-pipeline)」で説明されています。
+- [Notebook 1](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/blogs/babyweight_tft/babyweight_tft_keras_.ipynb){: .external } は、データの前処理に対応しています。詳細は、後の「[Apache Beam パイプラインの実装](#implement-the-apache-beam-pipeline)」で説明されています。
 - [Notebook 2](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/blogs/babyweight_tft/babyweight_tft_keras_02.ipynb){: .external } は、モデルのトレーニングに対応しています。詳細は、後の「[TensorFlow モデルの実装](#implement-the-tensorflow-model)」セクションで説明されています。
 
 以下のセクションでは、これらのノートブックをクローンした後でノートブックを実行し、実装例がどのように動作するかを学習します。
@@ -372,8 +372,7 @@ def preprocess_fn(input_features):
   <tr>
     <td><code>tfidf</code></td>
     <td>テキスト特徴量</td>
-    <td>
-<i>x</i> の用語を用語頻度 * 逆文書頻度にマッピングします。</td>
+    <td> <i>x</i> の用語を用語頻度 * 逆文書頻度にマッピングします。</td>
   </tr>
   <tr>
     <td><code>compute_and_apply_vocabulary</code></td>
