@@ -73,7 +73,7 @@ Profiler에는 성능 분석에 도움이 되는 다양한 도구가 있습니�
 
 개요 페이지에는 다음과 같은 데이터가 표시됩니다.
 
-![image](https://github.com/tensorflow/docs-l10n/blob/master/site/ko/guide/images/tf_profiler/overview_page.png?raw=true)
+ ![image](./images/tf_profiler/overview_page.png?raw=true)
 
 - **성능 요약**: 모델 성능에 대한 높은 수준의 요약을 표시합니다. 성능 요약은 두 부분으로 구성됩니다.
 
@@ -391,7 +391,7 @@ UI는 **성능 분석 요약**, **모든 입력 파이프라인 요약** 및 **�
 
 #### 성능 분석 요약
 
-![image](./images/tf_profiler/trace_viewer.png)
+ ![image](./images/tf_profiler/tf_data_graph.png?raw=true)
 
 이 섹션에서는 분석 요약을 제공합니다. 프로파일에서 느린 `tf.data` 입력 파이프라인이 감지되는지 여부가 보고됩니다. 이 섹션에는 또한 입력 바운드가 가장 큰 호스트와 지연 시간이 가장 큰 가장 느린 입력 파이프라인이 표시됩니다. 그리고 가장 중요한 부분으로, 입력 파이프라인의 어느 부분이 병목인지, 이 병목을 해결할 방법을 알려줍니다. 병목 현상 정보는 반복기 유형과 해당하는 긴 이름과 함께 제공됩니다.
 
@@ -416,7 +416,7 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 
 #### 모든 입력 파이프라인 요약
 
-![image](./images/tf_profiler/tf_data_all_hosts.png)
+ ![image](./images/tf_profiler/tf_data_graph_selector.png?raw=true)
 
 이 섹션에서는 모든 호스트의 모든 입력 파이프라인에 대한 요약을 제공합니다. 일반적으로 하나의 입력 파이프라인이 있습니다. 배포 전략을 사용하는 경우, 프로그램의 `tf.data` 코드를 실행하는 하나의 호스트 입력 파이프라인과 호스트 입력 파이프라인에서 데이터를 검색하여 장치로 전송하는 여러 개의 기기 입력 파이프라인이 있습니다.
 
