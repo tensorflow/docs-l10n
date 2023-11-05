@@ -157,7 +157,7 @@ interpreter.close();
 - `long`
 - `byte`
 
-`String` 类型也受支持，但它们的编码方式与基元类型不同。特别是，字符串张量的形状决定了张量中字符串的数量和排列，每个元素本身都是可变长度字符串。从这个意义上说，不能仅通过形状和类型计算张量的（字节）大小，因此字符串不能作为单个扁平 `ByteBuffer` 参数提供。
+`String` 类型也受支持，但它们的编码方式与基元类型不同。特别是，字符串张量的形状决定了张量中字符串的数量和排列，每个元素本身都是可变长度字符串。从这个意义上说，不能仅通过形状和类型计算张量的（字节）大小，因此字符串不能作为单个扁平 `ByteBuffer` 参数提供。您可以在此[页面](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/Interpreter)中看到一些示例。
 
 如果使用了其他数据类型（例如 `Integer` 和 `Float` 这样的装箱类型），则会引发 `IllegalArgumentException`。
 
@@ -454,21 +454,20 @@ output_data = interpreter.get_tensor(output_details[0]['index'])
 print(output_data)
 ```
 
-除了将模型作为预转换的 `.tflite` 文件进行加载外，您还可以将代码与 [TensorFlow Lite 转换器 Python API](https://www.tensorflow.org/lite/api_docs/python/tf/lite/TFLiteConverter) (`tf.lite.TFLiteConverter`) 组合，进而将 TensorFlow 模型转换为 TensorFlow Lite 格式，然后运行推断：
+除了将模型作为预转换的 `.tflite` 文件进行加载外，您还可以将代码与 [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/api_docs/python/tf/lite/TFLiteConverter) (`tf.lite.TFLiteConverter`) 组合，进而将 Keras 模型转换为 TensorFlow Lite 格式，然后运行推断：
 
 ```python
 import numpy as np
 import tensorflow as tf
 
-img = tf.placeholder(name="img", dtype=tf.float32, shape=(1, 64, 64, 3))
+img = tf.keras.Input(shape=(64, 64, 3), name="img")
 const = tf.constant([1., 2., 3.]) + tf.constant([1., 4., 4.])
 val = img + const
 out = tf.identity(val, name="out")
 
 # Convert to TF Lite format
-with tf.Session() as sess:
-  converter = tf.lite.TFLiteConverter.from_session(sess, [img], [out])
-  tflite_model = converter.convert()
+converter = tf.lite.TFLiteConverter.from_keras_model(tf.keras.models.Model(inputs=[img], outputs=[out]))
+tflite_model = converter.convert()
 
 # Load the TFLite model and allocate tensors.
 interpreter = tf.lite.Interpreter(model_content=tflite_model)
@@ -480,6 +479,38 @@ interpreter.allocate_tensors()
 有关更多 Python 示例代码，请参阅 [`label_image.py`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/examples/python/label_image.py)。
 
 提示：可以在 Python 终端运行 `help(tf.lite.Interpreter)` 获得有关解释器的详细文档。
+
+## 使用动态形状模型运行推断
+
+如果要运行具有动态输入形状的模型，请在运行推断之前*调整输入形状的大小* 。否则，TensorFlow 模型中的 `None` 形状将被 TFLite 模型中的占位符 `1` 替换。
+
+以下示例展示了如何在使用不同语言运行推断之前调整输入形状的大小。所有示例都假定输入形状定义为 `[1/None, 10]`，并且需要将其大小调整为 `[3, 10]`。
+
+C++ 示例：
+
+```c++
+// Resize input tensors before allocate tensors
+interpreter->ResizeInputTensor(/*tensor_index=*/0, std::vector<int>{3,10});
+interpreter->AllocateTensors();
+```
+
+Python 示例：
+
+```python
+# Load the TFLite model in TFLite Interpreter
+interpreter = tf.lite.Interpreter(model_path=TFLITE_FILE_PATH)
+  
+# Resize input shape for dynamic shape model and allocate tensor
+interpreter.resize_tensor_input(interpreter.get_input_details()[0]['index'], [3, 10])
+interpreter.allocate_tensors()
+  
+# Get input and output tensors.
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+```
+
+
+
 
 ## 支持的运算
 

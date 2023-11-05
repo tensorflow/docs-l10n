@@ -132,7 +132,7 @@ std::unique_ptr<QuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromOpt
 std::vector<QaAnswer> results = answerer->Answer(context_of_question, question_to_ask);
 ```
 
-在[此处](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto)浏览更多高级加速器设置。
+在[此处](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/acceleration/configuration/configuration.proto)浏览更多高级加速器设置。
 
 ### 用 Python 实现 Coral Edge TPU 使用的示例
 
@@ -207,7 +207,7 @@ brew install libusb
 # Windows is not supported yet.
 ```
 
-在您的 Coral Edge TPU 设备上试用 [Task Library CLI 演示工具](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop)。了解更多有关[预训练的 Edge TPU 模型](https://coral.ai/models/)和[高级 Edge TPU 设置](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto#L275)的详细信息。
+在您的 Coral Edge TPU 设备上试用 [Task Library CLI 演示工具](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop)。了解更多有关[预训练的 Edge TPU 模型](https://coral.ai/models/)和[高级 Edge TPU 设置](https://github.com/tensorflow/tensorflow/blob/4d999fda8d68adfdfacd4d0098124f1b2ea57927/tensorflow/lite/acceleration/configuration/configuration.proto#L594)的详细信息。
 
 ### 用 C++ 实现 Core ML Delegate 使用的示例
 

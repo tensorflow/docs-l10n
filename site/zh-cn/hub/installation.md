@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2022-07-04' } *-->
-
 # 安装
 
 ## 安装 tensorflow_hub
@@ -39,7 +37,7 @@ $ pip install --upgrade tf-hub-nightly
 
 - [库概览](lib_overview.md)
 - 教程：
-    - [文本分类](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
-    - [图像分类](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
+    - 文本分类
+    - 图像分类
     - [GitHub](https://github.com/tensorflow/hub/blob/master/examples/README.md) 上的更多示例
-- 在 [tfhub.dev](https://tfhub.dev) 上查找模型
+- 在 [tfhub.dev](https://tfhub.dev) 上查找模型。

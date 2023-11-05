@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-04-09' review_interval: '6 months' } *-->
-
 # 导出 SavedModel
 
 本页面介绍将模型从 TensorFlow 程序导出（保存）到 [TensorFlow 2 的 SavedModel 格式](https://www.tensorflow.org/guide/saved_model)的详细信息。此格式是在 TensorFlow Hub 上共享预训练模型和模型部分的推荐方式。它取代了旧的 [TF1 Hub 格式](tf1_hub_module.md)，并提供了一组新 API。您可以参阅 [TF1 Hub 格式导出](exporting_hub_format.md)，获取有关导出 TF1 Hub 格式模型的更多信息。您可以在[这里](writing_documentation.md#model-specific_asset_content)找到有关如何压缩 SavedModel 以在 TensorFlow Hub 上进行共享的详细信息。
@@ -83,7 +81,7 @@ print(layer.losses)  # 0.004
 
 ## TensorFlow Model Garden
 
-[TensorFlow Model Garden](https://github.com/tensorflow/models/tree/master/official) 仓库中包含许多创建可重用的 TF2 SavedModel 以供上传到 [tfhub.dev](https://tfhub.dev/) 的示例。
+[TensorFlow Model Garden](https://github.com/tensorflow/models/tree/master/research/official) 仓库中包含许多创建可重用的 TF2 SavedModel 以供上传到 [tfhub.dev](https://tfhub.dev/) 的示例。
 
 ## 社区请求
 

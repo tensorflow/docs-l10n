@@ -157,3 +157,28 @@ x = f(y)  # Clear inputs/outputs
 
 x = self.f(y)  # Does f depend on additional hidden variables ? Is it stateful ?
 ```
+
+## Python 中的延迟导入
+
+我们延迟导入像 TensorFlow 这样的大模块。延迟导入会将模块的实际导入推迟到模块的第一次使用。因此，不需要这个大模块的用户永远不会导入。
+
+```python
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+# After this statement, TensorFlow is not imported yet
+
+...
+
+features = tfds.features.Image(dtype=tf.uint8)
+# After using it (`tf.uint8`), TensorFlow is now imported
+```
+
+在幕后，[`LazyModule` 类](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/utils/lazy_imports_utils.py)充当工厂，只有在访问属性 (`__getattr__`) 时才会实际导入模块。
+
+您还可以通过上下文管理器方便地使用它：
+
+```python
+from tensorflow_datasets.core.utils.lazy_imports_utils import lazy_imports
+
+with lazy_imports(error_callback=..., success_callback=...):
+  import some_big_module
+```

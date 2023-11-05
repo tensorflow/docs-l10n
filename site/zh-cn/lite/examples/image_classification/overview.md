@@ -16,7 +16,7 @@
 
 如果您是 TensorFlow Lite 新用户，并且使用的是 Android 或 iOS，我们建议您研究以下可以帮助您入门的示例应用。
 
-利用 TensorFlow Lite Task Library 中开箱即用的 API，只需几行代码即可[集成图像分类模型](../../inference_with_metadata/task_library/image_classifier)。您也可以使用 TensorFlow Lite Support Library [构建自己的自定义推断流水线](../../inference_with_metadata/lite_support)。
+利用 TensorFlow Lite Task Library 中开箱即用的 API，只需几行代码即可[集成图像分类模型](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/g3doc/inference_with_metadata/task_library/image_classifier.md)。您也可以使用 TensorFlow Lite Support Library [构建自己的自定义推断流水线](../../inference_with_metadata/lite_support)。
 
 下面的 Android 示例分别以 [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_task_api) 和 [lib_support](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_support) 形式演示了两个方法的实现。
 
@@ -80,7 +80,7 @@
 
 TensorFlow Lite 为您提供了各种图像分类模型，这些模型都在原始数据集上进行训练。<a href="https://tfhub.dev/s?deployment-format=lite">TensorFlow Hub</a> 上提供了 MobileNet、Inception 和 NASNet 等模型架构。要为您的用例选择最佳模型，您需要考虑各个架构以及各种模型之间的一些权衡。其中一些模型权衡是基于性能、准确率和模型大小等指标。例如，您可能需要一个更快的模型来构建条码扫描器，而可能更喜欢一个更慢、更准确的模型来构建医学成像应用。
 
-请注意，我们提供的<a href="https://www.tensorflow.org/lite/guide/hosted_models#image_classification">图像分类模型</a>接受的输入大小各不相同。对于某些模型，大小标注在文件名中。例如，Mobilenet_V1_1.0_224 模型接受 224x224 像素的输入。所有模型都要求每个像素有三个颜色通道（红、绿、蓝）。经过量化的模型要求每个通道 1 个字节，浮点模型要求每个通道 4 个字节。我们的 <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/EXPLORE_THE_CODE.md">Android</a> 和 <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md">iOS</a> 代码示例展示了如何将全尺寸相机图像处理为每个模型需要的格式。
+请注意，我们提供的<a href="https://www.tensorflow.org/lite/guide/hosted_models#image_classification">图像分类模型</a>接受的输入大小各不相同。对于某些模型，大小标注在文件名中。例如，Mobilenet_V1_1.0_224 模型接受 224x224 像素的输入。所有模型都要求每个像素有三个颜色通道（红、绿、蓝）。经过量化的模型要求每个通道 1 个字节，浮点模型要求每个通道 4 个字节。我们的 <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android_java">Android</a> 和 <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS</a> 代码示例展示了如何将全尺寸相机图像处理为每个模型需要的格式。
 
 <h3>使用和局限性</h3>
 

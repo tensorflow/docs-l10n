@@ -25,8 +25,6 @@
 
 **模拟最佳做法**
 
-- [使用 Kubernetes 进行高性能模拟](high_performance_simulation_with_kubernetes.ipynb)介绍了如何设置和配置在 Kubernetes 上运行的高性能 TFF 运行时。
-
 - [使用加速器 (GPU) 进行 TFF 模拟](simulations_with_accelerators.ipynb)展示了如何将 TFF 的高性能运行时与 GPU 配合使用。
 
 - [使用 ClientData](working_with_client_data.ipynb) 提供了将 TFF 的基于 [ClientData](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/ClientData) 的模拟数据集集成到 TFF 计算中的最佳做法。
@@ -42,7 +40,5 @@
 - [用于联合学习研究的 TFF：模型和更新压缩](tff_for_federated_learning_research_compression.ipynb)演示了如何在 TFF 中使用基于 [tensor_encoding API](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/internal/tensor_encoding) 构建的自定义聚合。
 
 - [使用 TFF 中的差分隐私的联合学习](federated_learning_with_differential_privacy.ipynb)演示了如何使用 TFF 训练具有用户级差分隐私的模型。
-
-- [使用 TFF 加载远程数据](loading_remote_data.ipynb)描述了如何在 TFF 运行时中嵌入自定义逻辑以在远程机器上加载数据。
 
 - [TFF 中对 JAX 的支持](../tutorials/jax_support.ipynb)展示了如何在 TFF 中使用 [JAX](https://github.com/google/jax) 计算，演示了如何将 TFF 设计为能够与其他前端和后端 ML 框架进行互操作。

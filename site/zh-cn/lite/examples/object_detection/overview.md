@@ -2,12 +2,12 @@
 
 在给定图像或视频流的情况下，目标检测模型可以识别可能存在已知目标集合中的哪些目标，并提供关于它们在图像中的位置的信息。
 
-例如，此<a href="#get_started">示例应用程序</a>的屏幕截图显示了如何识别两个目标并注解它们的位置：
+例如，此<a href="#get_started">示例应用</a>的屏幕截图显示了如何识别两个目标并注解它们的位置：
 
 
 <img src="../images/detection.png" class="attempt-right">
 
-注：(1) 要集成现有模型，请尝试 [TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector)。(2) 要自定义模型，请尝试 [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker)。
+注：(1) 要集成现有模型，请尝试 [TensorFlow Lite Task Library](../../inference_with_metadata/task_library/object_detector)。(2) 要自定义模型，请尝试 [TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker)。
 
 ## 开始使用
 
@@ -36,7 +36,7 @@
 
 我们使用信任分数和所检测到目标的坐标来表示检测结果。分数反应了被检测到物体的可信度，范围在 0 和 1 之间。最大值为1，数值越大可信度越高。
 
-下面的 Android 示例分别以 [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_task_api) 和 [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_interpreter) 形式演示了两个方法的实现。
+下面的 Android 示例演示了分别使用 [Task Library](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android_play_services) 和 [Interpreter API](https://github.com/tensorflow/examples/tree/eb925e460f761f5ed643d17f0c449e040ac2ac45/lite/examples/object_detection/android/lib_interpreter) 两种方法的实现。
 
 使用裁切功能必须基于误判位置（物体识别错误或物体位置识别有误）或错误（由于可信度过低导致的物体未被捕捉）。 如下图所示，梨子（未被模块训练检测的物体）被误判为“人”。实例中的误判可以通过适当的图片裁切来忽略。在此示例中，裁剪 0.6 （或 60% ）可以适当的排除误判。
 

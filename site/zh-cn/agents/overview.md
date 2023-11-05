@@ -10,6 +10,10 @@
 
 TF-Agents发布有测试版和稳定版。有关发行列表，请阅读 <a href="#Releases">发行</a> 部分。以下命令包含从 [pypi.org](https://pypi.org)以及GitHub克隆安装TF-Agents的稳定版和测试版。
 
+> 警告：如果使用 Reverb（回放缓冲区），这种做法很常见，TF-Agents 将仅支持 Linux。
+
+> 注：Python 3.11 需要 pygame 2.1.3 或更高版本。
+
 ### 稳定版本
 
 运行以下命令安装最新的稳定版本。[tensorflow.org](https://www.tensorflow.org/agents/api_docs/python/tf_agents) 上提供了版本的 API 文档。
@@ -20,7 +24,7 @@ $ pip install --user tf-agents[reverb]
 # Use this tag get the matching examples and colabs.
 $ git clone https://github.com/tensorflow/agents.git
 $ cd agents
-$ git checkout v0.14.0
+$ git checkout v0.17.0
 ```
 
 如果您希望将 TF-Agents 与在 pip 依赖项检查中被标记为不兼容的 TensorFlow 或 [Reverb](https://github.com/deepmind/reverb) 版本一起安装，请使用以下模式并自行承担风险。
@@ -69,23 +73,32 @@ $ pip install --user --upgrade tf-agents-nightly
 
 ## 版本
 
-TF Agents 包含稳定版本和 Nightly 版本。Nightly 版本通常表现良好，但是由于上游库在不断变化，因此可能存在一些问题。下表列出了测试每个 TF Agents 版本所用的 TensorFlow 版本，以帮助可能被限制为特定版本 TensorFlow 的用户。
+TF Agents 具有稳定版和 Nightly 版。Nightly 版通常可以使用，但由于上游库处于不稳定状态，可能会出现问题。下表列出了与每个 TF Agents 版本对齐的 TensorFlow 版本。相关版本如下：
 
-版本 | 分支/标签 | TensorFlow 版本
---- | --- | ---
-Nightly 版本 | [master](https://github.com/tensorflow/agents) | tf-nightly
-0.14.0 | [v0.14.0](https://github.com/tensorflow/agents/tree/v0.14.0) | 2.10.0
-0.13.0 | [v0.13.0](https://github.com/tensorflow/agents/tree/v0.13.0) | 2.9.0
-0.12.0 | [v0.12.0](https://github.com/tensorflow/agents/tree/v0.12.0) | 2.8.0
-0.9.0 | [v0.11.0](https://github.com/tensorflow/agents/tree/v0.11.0) | 2.7.0
-0.8.0 | [v0.10.0](https://github.com/tensorflow/agents/tree/v0.10.0) | 2.6.0
-0.9.0 | [v0.9.0](https://github.com/tensorflow/agents/tree/v0.9.0) | 2.5.0
-0.8.0 | [v0.8.0](https://github.com/tensorflow/agents/tree/v0.8.0) | 2.5.0
-0.7.1 | [v0.7.1](https://github.com/tensorflow/agents/tree/v0.7.1) | 2.4.0
-0.6.0 | [v0.6.0](https://github.com/tensorflow/agents/tree/v0.6.0) | 2.3.0
-0.5.0 | [v0.5.0](https://github.com/tensorflow/agents/tree/v0.5.0) | 2.2.0
-0.4.0 | [v0.4.0](https://github.com/tensorflow/agents/tree/v0.4.0) | 2.1.0
-0.3.0 | [v0.3.0](https://github.com/tensorflow/agents/tree/v0.3.0) | 1.15.0 和 2.0.0
+- 0.16.0 是支持 Python 3.11 的第一个版本。
+- 0.15.0 是与 Python 3.7 兼容的最后一个版本。
+- 如果使用的 numpy 版本低于 1.19，请使用 TF-Agents 0.15.0 或更早版本。
+- 0.9.0 是与 Python 3.6 兼容的最后一个版本。
+- 0.3.0 是与 Python 2.x 兼容的最后一个版本。
+
+版本 | 分支/标签 | TensorFlow 版本 | dm-reverb 版本
+--- | --- | --- | ---
+Nightly 版本 | [master](https://github.com/tensorflow/agents) | tf-nightly | dm-reverb-nightly
+0.17.0 | [v0.17.0](https://github.com/tensorflow/agents/tree/v0.17.0) | 2.13.0 | 0.12.0
+0.16.0 | [v0.16.0](https://github.com/tensorflow/agents/tree/v0.16.0) | 2.12.0 | 0.9.0
+0.15.0 | [v0.15.0](https://github.com/tensorflow/agents/tree/v0.15.0) | 2.11.0 | 0.8.0
+0.14.0 | [v0.14.0](https://github.com/tensorflow/agents/tree/v0.14.0) | 2.10.0 | 0.9.0
+0.13.0 | [v0.13.0](https://github.com/tensorflow/agents/tree/v0.13.0) | 2.9.0 | 0.8.0
+0.12.0 | [v0.12.0](https://github.com/tensorflow/agents/tree/v0.12.0) | 2.8.0 | 0.7.0
+0.11.0 | [v0.11.0](https://github.com/tensorflow/agents/tree/v0.11.0) | 2.7.0 | 0.6.0
+0.10.0 | [v0.10.0](https://github.com/tensorflow/agents/tree/v0.10.0) | 2.5.0 |
+0.9.0 | [v0.9.0](https://github.com/tensorflow/agents/tree/v0.9.0) | 2.6.0 |
+0.8.0 | [v0.8.0](https://github.com/tensorflow/agents/tree/v0.8.0) | 2.5.0 |
+0.7.1 | [v0.7.1](https://github.com/tensorflow/agents/tree/v0.7.1) | 2.4.0 |
+0.6.0 | [v0.6.0](https://github.com/tensorflow/agents/tree/v0.6.0) | 2.3.0 |
+0.5.0 | [v0.5.0](https://github.com/tensorflow/agents/tree/v0.5.0) | 2.2.0 |
+0.4.0 | [v0.4.0](https://github.com/tensorflow/agents/tree/v0.4.0) | 2.1.0 |
+0.3.0 | [v0.3.0](https://github.com/tensorflow/agents/tree/v0.3.0) | 1.15.0 和 2.0.0 |
 
 <a id="Principles"></a>
 

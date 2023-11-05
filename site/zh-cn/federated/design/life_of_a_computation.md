@@ -9,7 +9,7 @@
 **从用户角度：**
 
 ```python
-tff.backends.native.set_local_python_execution_context()  # 3
+tff.backends.native.set_sync_local_cpp_execution_context()  # 3
 
 @tff.tf_computation(tf.int32)  # 2
 def add_one(x):  # 1
@@ -37,7 +37,7 @@ result = add_one(2) # 4
 ## TF、TFF 与 Python 间的对比
 
 ```python
-tff.backends.native.set_local_python_execution_context()
+tff.backends.native.set_sync_local_cpp_execution_context()
 
 @tff.tf_computation(tf.int32)
 def add_one(x):

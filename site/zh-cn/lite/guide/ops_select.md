@@ -167,9 +167,9 @@ bazel build -c opt --config=monolithic tensorflow/lite/delegates/flex:tensorflow
 
 平台 | 库名称
 --- | ---
-Linux | libtensorflowlite_flex.so
-macOS | libtensorflowlite_flex.dylib
-Windows | tensorflowlite_flex.dll
+Linux | `libtensorflowlite_flex.so`
+macOS | `libtensorflowlite_flex.dylib`
+Windows | `tensorflowlite_flex.dll`
 
 请注意，只要链接了共享库，在运行时创建解释器时，就会自动安装必要的 `TfLiteDelegate`。不需要像其他委托类型通常要求的那样显式安装委托实例。
 

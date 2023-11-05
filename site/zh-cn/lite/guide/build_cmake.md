@@ -43,7 +43,7 @@ cmake ../tensorflow_src/tensorflow/lite
 
 #### 调试构建
 
-如果需要生成包含符号信息的调试版本，则需要提供 `-DCMAKE_BUILD_TYPE=Debug` 选项。
+如果您需要生成具有符号信息的调试版本，则需要提供 `-DCMAKE_BUILD_TYPE=Debug` 选项。
 
 ```sh
 cmake ../tensorflow_src/tensorflow/lite -DCMAKE_BUILD_TYPE=Debug
@@ -51,7 +51,7 @@ cmake ../tensorflow_src/tensorflow/lite -DCMAKE_BUILD_TYPE=Debug
 
 #### 使用内核单元测试进行构建
 
-为了能够运行内核测试，您需要提供 '-DTFLITE_KERNEL_TEST=on' 标志。单元测试交叉编译的详情可以在下一小节中找到。
+为了能够运行内核测试，您需要提供 {code 0}-DTFLITE_KERNEL_TEST=on{/code 0} 标志。单元测试交叉编译细节可以在下一小节中找到。
 
 ```sh
 cmake ../tensorflow_src/tensorflow/lite -DTFLITE_KERNEL_TEST=on
@@ -66,9 +66,12 @@ cmake ../tensorflow_src/tensorflow/lite -DTFLITE_KERNEL_TEST=on
 ```sh
 cmake ../tensorflow_src/tensorflow/lite -DTFLITE_ENABLE_INSTALL=ON \
   -DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON \
+  -DSYSTEM_FARMHASH=ON \
+  -DSYSTEM_PTHREADPOOL=ON \
   -Dabsl_DIR=<install path>/lib/cmake/absl \
   -DEigen3_DIR=<install path>/share/eigen3/cmake \
-  -DFlatbuffers_DIR=<install path>/lib/cmake/flatbuffers \
+  -DFlatBuffers_DIR=<install path>/lib/cmake/flatbuffers \
+  -Dgemmlowp_DIR=<install path>/lib/cmake/gemmlowp \
   -DNEON_2_SSE_DIR=<install path>/lib/cmake/NEON_2_SSE \
   -Dcpuinfo_DIR=<install path>/share/cpuinfo \
   -Druy_DIR=<install path>/lib/cmake/ruy
@@ -180,17 +183,17 @@ cmake --build . -j -t label_image
 
 选项名称 | 功能 | Android | Linux | macOS | Windows
 --- | --- | --- | --- | --- | ---
-TFLITE_ENABLE_RUY | 启用 RUY | 开 | 关 | 关 | 关
+`TFLITE_ENABLE_RUY` | 启用 RUY | 开 | 关 | 关 | 关
 :                       : matrix         :         :       :       :         : |  |  |  |  |
 :                       : multiplication :         :       :       :         : |  |  |  |  |
 :                       : library        :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_NNAPI | 启用 NNAPI | 开 | 关 | 不适用 | 不适用
+`TFLITE_ENABLE_NNAPI` | 启用 NNAPI | 开 | 关 | 不适用 | 不适用
 :                       : 委托       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_GPU | 启用 GPU | 关 | 关 | 不适用 | 不适用
+`TFLITE_ENABLE_GPU` | 启用 GPU | 关 | 关 | 不适用 | 不适用
 :                       : 委托       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_XNNPACK | 启用 XNNPACK | 开 | 开 | 开 | 开
+`TFLITE_ENABLE_XNNPACK` | 启用 XNNPACK | 开 | 开 | 开 | 开
 :                       : 委托       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_MMAP | 启用 MMAP | 开 | 开 | 开 | 不适用
+`TFLITE_ENABLE_MMAP` | 启用 MMAP | 开 | 开 | 开 | 不适用
 
 ## 创建使用 TensorFlow Lite 的 CMake 项目
 
@@ -228,10 +231,12 @@ cmake --build . -j
 
 此命令在当前目录中生成以下共享库。
 
+**注**：在 Windows 系统上，您可以在 `debug` 目录下找到 `tensorflowlite_c.dll`。
+
 平台 | 库名称
 --- | ---
-Linux | libtensorflowlite_c.so
-macOS | libtensorflowlite_c.dylib
-Windows | tensorflowlite_c.dll
+Linux | `libtensorflowlite_c.so`
+macOS | `libtensorflowlite_c.dylib`
+Windows | `tensorflowlite_c.dll`
 
-**注**：您需要必要的头文件（c_api.h, c_api_experimental.h 和 common.h）来使用生成的共享库。
+**注**：您需要公共头（`tensorflow/lite/c_api.h`、`tensorflow/lite/c_api_experimental.h`、`tensorflow/ lite/c_api_types.h` 和 `tensorflow/lite/common.h`），以及这些公共头包含的私有头（`tensorflow/lite/core/builtin_ops.h{ /code5}、<code data-md-type="codespan">tensorflow/lite/core/c/*.h` 和 `tensorflow/lite/core/async/c/*.h`）来使用生成的共享库。

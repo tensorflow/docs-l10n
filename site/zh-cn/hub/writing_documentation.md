@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2022-07-27' review_interval: '6 months' } *-->
-
 # 编写文档
 
 要向 tfhub.dev 贡献内容，必须提供 Markdown 格式的文档。有关向 tfhub.dev 贡献模型的过程的完整概述，请参阅[贡献模型](contribute_a_model.md)指南。
+
+**注**：本文档通篇使用术语“发布者”– 这是指托管在 tfhub.dev 上的模型的记录所有者。
 
 ## Markdown 文档类型
 
@@ -139,7 +139,7 @@ Encoder of greater-than-word length text trained on a variety of data.
 - `network-architecture`：模型所基于的网络架构，例如“mobilenet-v3”。[network_architecture.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/network_architecture.yaml) 中定义了所有支持的值。
 - `language`：训练文本模型所用语言的语言代码，例如“en”。[language.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/language.yaml) 中定义了所有支持的值。
 - `license`：适用于模型的许可证，例如“mit”。已发布模型的默认假定许可证为 [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0)。[license.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/license.yaml) 中定义了所有支持的值。请注意，`custom` 许可证需要根据具体情况进行特殊考虑。
-- `colab`：演示如何使用或训练模型（[bigbigan-resnet50](https://tfhub.dev/deepmind/bigbigan-resnet50/1) [示例](https://colab.sandbox.google.com/github/tensorflow/hub/blob/master/examples/colab/bigbigan_with_tf_hub.ipynb)）的笔记本的 HTTPS URL。必须指向 `colab.research.google.com`。请注意，托管在 GitHub 上的 Jupyter 笔记本可以通过 `https://colab.research.google.com/github/ORGANIZATION/PROJECT/ blob/master/.../my_notebook.ipynb` 访问。
+- `colab`：演示如何使用或训练模型（[bigbigan-resnet50](https://colab.sandbox.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/bigbigan_with_tf_hub.ipynb) [示例](https://tfhub.dev/deepmind/bigbigan-resnet50/1)）的笔记本的 HTTPS URL。必须指向 `colab.research.google.com`。请注意，托管在 GitHub 上的 Jupyter 笔记本可以通过 `https://colab.research.google.com/github/ORGANIZATION/PROJECT/ blob/master/.../my_notebook.ipynb` 访问。
 - `demo`：演示如何使用 TF.js 模型（[posenet](https://tfhub.dev/tensorflow/tfjs-model/posenet/mobilenet/float/075/1/default/1) [示例](https://teachablemachine.withgoogle.com/train/pose)）的网站的 HTTPS URL。
 - `interactive-visualizer`：应嵌入到模型页面上的可视化工具的名称，例如“vision”。通过显示可视化工具，用户能以交互方式探索模型的预测。[interactive_visualizer.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/interactive_visualizer.yaml) 中定义了所有支持的值。
 

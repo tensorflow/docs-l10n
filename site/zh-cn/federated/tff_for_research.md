@@ -42,7 +42,7 @@ TensorFlow Federated [托管了多个数据集](https://www.tensorflow.org/feder
 
 ## 高性能模拟
 
-虽然 FL *模拟*的时钟时间不是评估算法的相关指标（因为模拟硬件不代表真实的 FL 部署环境），但是快速运行 FL 模拟的能力对于提高研究效率至关重要。因此，TFF 投入了大量资源来提供高性能的单机和多机运行时。相关文档正在编写中，但现在您可以参阅[使用 Kubernetes 进行高性能模拟](https://www.tensorflow.org/federated/tutorials/high_performance_simulation_with_kubernetes)教程、有关[使用加速器进行 TFF 模拟](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators)的说明，以及有关[设置 GCP 上的 TFF 模拟](https://www.tensorflow.org/federated/gcp_setup)的说明。默认情况下，高性能 TFF 运行时处于启用状态。
+虽然 FL *模拟*的时钟时间不是评估算法的相关指标（因为模拟硬件不代表真实的 FL 部署环境），但是快速运行 FL 模拟的能力对于提高研究效率至关重要。因此，TFF 投入了大量资源来提供高性能的单机和多机运行时。相关文档正在编写中，但现在您可以参阅[使用 TFF 进行高性能模拟](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators)教程、以及有关[设置 GCP 上的 TFF 模拟](https://www.tensorflow.org/federated/gcp_setup)的说明。默认情况下，高性能 TFF 运行时处于启用状态。
 
 ## 针对不同研究领域的 TFF
 
@@ -91,7 +91,7 @@ TFF 可用于研究 GAN 的联合训练。例如，[最近研究工作](https://
 
 - 通过实现 `tf.function` 来定义个性化策略，该函数从初始模型开始，使用每个客户端的本地数据集训练和评估个性化模型。[`build_personalize_fn`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/personalization/p13n_utils.py) 中给出了一个示例。
 
-- 定义一个 `OrderedDict`，将策略名称映射到相应的个性化策略，并将其用作 [`tff.learning.build_personalization_eval`](https://www.tensorflow.org/federated/api_docs/python/tff/learning/build_personalization_eval) 中的 `personalize_fn_dict` 参数。
+- 定义一个 `OrderedDict`，将策略名称映射到相应的个性化策略，并将其用作 [`tff.learning.build_personalization_eval_computation`](https://www.tensorflow.org/federated/api_docs/python/tff/learning/build_personalization_eval_computation) 中的 `personalize_fn_dict` 参数。
 
 另一种方法是完全以本地方式训练部分模型，从而避免训练完全全局的模型。[本博文](https://ai.googleblog.com/2021/12/a-scalable-approach-for-partially-local.html)中介绍了这种方法的实例化。这种方法也与元学习有关，请参阅[本文](https://arxiv.org/abs/2102.03448)。要探索部分本地联合学习，您可以：
 
