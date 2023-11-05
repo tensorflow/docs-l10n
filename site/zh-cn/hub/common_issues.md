@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-05' review_interval: '6 months' } *-->
-
 # 常见问题
 
 如果您的问题未在此处列出，请先搜索 [GitHub 议题](https://github.com/tensorflow/hub/issues)，然后再提交新问题。
+
+**注**：本文档在示例中使用 TFhub.dev 网址句柄。点击[此处](tf2_saved_model.md#model_handles)查看有关其他有效句柄类型的更多信息。
 
 ## TypeError: 'AutoTrackable' object is not callable
 

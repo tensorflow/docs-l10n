@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'kempy' reviewed: '2020-09-14' } *-->
-
 # TensorFlow Hub
 
 TensorFlow Hub 是用于存储可重用机器学习资产的开放仓库和库。[tfhub.dev](https://tfhub.dev) 仓库中提供了许多预训练模型：文本嵌入向量、图像分类模型、TF.js/TFLite 模型等。该仓库向[社区贡献者](https://tfhub.dev/s?subtype=publisher)开放。

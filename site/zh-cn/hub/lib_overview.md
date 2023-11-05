@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'kempy' } *-->
-
 # TensorFlow Hub 库概述
 
 借助 [`tensorflow_hub`](https://github.com/tensorflow/hub) 库，您能够以最少的代码量在 TensorFlow 程序中下载并重用经过训练的模型。加载训练的模型的主要方式是使用 `hub.KerasLayer` API。
@@ -11,6 +9,8 @@ embed = hub.KerasLayer("https://tfhub.dev/google/nnlm-en-dim128/2")
 embeddings = embed(["A long sentence.", "single-word", "http://example.com"])
 print(embeddings.shape, embeddings.dtype)
 ```
+
+**注**：本文档在示例中使用 TFhub.dev 网址句柄。点击[此处](tf2_saved_model.md#model_handles)查看有关其他有效句柄类型的更多信息。
 
 ## 设置下载的缓存位置。
 

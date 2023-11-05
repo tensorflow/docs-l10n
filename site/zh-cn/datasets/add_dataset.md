@@ -244,7 +244,7 @@ for filename, fobj in dl_manager.iter_archive('path/to/archive.zip'):
 
 #### 指定数据集拆分
 
-如果数据集带有预定义的拆分（例如 `MNIST` 具有 `train` 和 `test` 拆分），请保留这些拆分。否则，请仅指定一项 `tfds.Split.TRAIN` 拆分。用户可以使用 [subsplit API](https://www.tensorflow.org/datasets/splits) 动态创建自己的子拆分（例如 `split='train[80%:]'`）。
+如果数据集带有预定义的拆分（例如 `MNIST` 具有 `train` 和 `test` 拆分），请保留这些拆分。否则，请仅指定一个 `all` 拆分。用户可以使用 [subsplit API](https://www.tensorflow.org/datasets/splits) 动态创建自己的子拆分（例如 `split='train[80%:]'`）。请注意，除了上述 `all` 之外，任何字母字符串都可以用作拆分名称。
 
 ```python
 def _split_generators(self, dl_manager):

@@ -36,7 +36,7 @@ auth.authenticate_user()
 如果您在本地计算机上（或 VM 中）运行，则可以通过运行以下代码来使用您的帐号进行身份验证：
 
 ```shell
-gcloud login application-default
+gcloud auth application-default login
 ```
 
 如果要使用服务帐号登录，请下载 JSON 文件密钥并设置

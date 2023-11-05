@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-07' } *-->
-
 # TF1 Hub 格式
 
 TensorFlow Hub 在 2018 年发布时提供了一种资源类型：可导入TensorFlow 1 程序的 TF1 Hub 格式。
@@ -17,6 +15,8 @@ TensorFlow 2（非 TF1 兼容模式）的用户必须使用[新版 API 和 `hub.
 ```python
 m = hub.Module("path/to/a/module_dir")
 ```
+
+**注**：在[此处](tf2_saved_model.md#model_handles)查看有关其他有效句柄的更多信息。
 
 这会将模块的变量添加到当前的 TensorFlow 计算图中。运行其初始值设定项将从磁盘读取它们的预训练值。同样，表和其他状态也会添加到计算图中。
 

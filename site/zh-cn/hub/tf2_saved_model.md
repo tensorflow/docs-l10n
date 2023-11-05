@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-07-11'} *-->
-
 # 在 TensorFlow 2 中使用 TF Hub 中的 SavedModel
 
 建议使用 [TensorFlow 2 的 SavedModel 格式](https://www.tensorflow.org/guide/saved_model)在 TensorFlow Hub 上共享预训练模型和模型部分。该格式取代了旧的 [TF1 Hub 格式](tf1_hub_module.md)并提供了一组新的 API。
@@ -36,7 +34,7 @@ model = tf.keras.Sequential([
 ])
 ```
 
-[文本分类 Colab](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb) 完整地展示了如何训练和评估此类分类器。
+[文本分类 Colab](https://colab.research.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_text_classification.ipynb) 完整地展示了如何训练和评估此类分类器。
 
 `hub.KerasLayer` 中的模型权重默认设置为不可训练。请参阅下文中有关微调的部分来了解如何更改该设置。按照 Keras 惯例，会在同一层对象的所有应用之间共享权重。
 
@@ -49,6 +47,10 @@ model = tf.keras.Sequential([
 使用 TensorFlow Hub（或实现其[托管](hosting.md)协议的其他 HTTPS 服务器）中的 SavedModel 时，如果尚不存在，需要将模型下载并解压到本地文件系统中。可以设置环境变量 `TFHUB_CACHE_DIR` 以重写用于缓存下载并解压的 SavedModel 的默认临时位置。有关详情，请参阅[缓存](caching.md)。
 
 ### 在低级 TensorFlow 中使用 SavedModel
+
+#### 模型句柄
+
+SavedModel 可以从指定的 `handle` 加载，其中 `handle` 是文件系统路径、有效的 TFhub.dev 模型网址（例如“https://tfhub.dev/.. ”）。Kaggle 模型网址根据我们的条款以及与模型资产相关的许可（例如 “https://www.kaggle.com/...”）镜像 TFhub.dev 句柄。来自 Kaggle 模型的句柄等同于它们相应的 TFhub.dev 句柄。
 
 `hub.load(handle)` 函数可以下载并解压 SavedModel（ 除非 `handle` 已经是文件系统路径），然后返回使用 TensorFlow 的内置函数 `tf.saved_model.load()` 加载该模型的结果。因此，`hub.load()` 可以处理任何有效的 SavedModel（与其 TF1 的前身 `hub.Module` 不同）。
 
@@ -145,7 +147,7 @@ layer = hub.KerasLayer(..., trainable=True)
 
 将对由层加载的 SavedModel 启用微调。这会将 SavedModel 中声明的可训练权重和权重正则化器添加到 Keras 模型中，并在训练模式下运行 SavedModel 的计算（随机失活等）。
 
-[图像分类 Colab](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb) 中提供了包含可选微调的端到端训练示例。
+[图像分类 Colab](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_image_retraining.ipynb) 中contains an end-to-end example with optional fine-tuning.
 
 #### 重新导出微调结果
 

@@ -1,5 +1,7 @@
 # 使用 What-If Tool 仪表板理解模型
 
+> **警告**：此文档仅适用于TensorBoard 2.11及更低版本，因为 What-If Tool 不再得到积极维护。请改用正在积极维护的[语言可解释性工具 (LIT)](https://pair-code.github.io/lit/)。
+
 ![What-If Tool](./images/what_if_tool.png)
 
 What-If Tool (WIT) 提供了易于使用的界面，可以帮助您加深对黑盒分类和回归机器学习模型的理解。使用该插件，您可以基于大量样本执行推断，并立即以多种方式可视化结果。此外，还可以手动或以编程方式编辑样本，然后在模型中重新运行样本以查看变更的结果。WIT 包含的工具可用于分析模型在数据集子集上的性能和公平性。
@@ -27,7 +29,7 @@ What-If Tool (WIT) 提供了易于使用的界面，可以帮助您加深对黑�
 
 将环境变量 MODEL_PATH 设置为计算机上生成的模型的目录位置。
 
-按照[官方文档](https://www.tensorflow.org/serving/docker)安装 Docker 和 TensorFlow Serving。
+按照[官方文档](https://www.tensorflow.org/tfx/serving/docker)安装 Docker 和 TensorFlow Serving。
 
 通过 `docker run -p 8500:8500 --mount type=bind,source=${MODEL_PATH},target=/models/uci_income -e MODEL_NAME=uci_income -t tensorflow/serving` 使用 Docker 提供模型。请注意，您可能需要使用 `sudo` 运行命令，具体取决于您的 Docker 设置。
 
@@ -45,4 +47,4 @@ What-If Tool (WIT) 提供了易于使用的界面，可以帮助您加深对黑�
 
 要深入了解该工具的功能，请参阅 [What-If Tool 演练](https://pair-code.github.io/what-if-tool/walkthrough.html)。
 
-请注意，此模型试图预测的数据集内的真实特征名为“Target”，因此，使用“Performance & Fairness”标签页时，应在真实特征下拉列表中指定“Target”。
+请注意，此模型试图预测的数据集内的真实特征名为“Target”，因此，使用“Performance &amp; Fairness”标签页时，应在真实特征下拉列表中指定“Target”。

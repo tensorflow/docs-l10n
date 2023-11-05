@@ -1,6 +1,6 @@
 # 适用于 Keras 用户的 TensorFlow.js 层 API
 
-TensorFlow.js 的 Layers API 以 Keras 为模型。考虑到 JavaScript 与 Python 之间的差异，我们努力使 [Layers API](https://js.tensorflow.org/api/latest/) 与 Keras 类似。这样，具有使用 Python 开发 Keras 模型经验的用户可以更轻松地迁移到使用 JavaScript 编写的 TensorFlow.js 层。例如，以下 Keras 代码可以转换为 JavaScript：
+TensorFlow.js 的 Layers API 以 Keras 为模型。考虑到 JavaScript 与 Python 之间的差异，我们努力使 [Layers API](https://js.tensorflow.org/api/latest/#Layers) 与 Keras 类似。这样，具有使用 Python 开发 Keras 模型经验的用户可以更轻松地迁移到使用 JavaScript 编写的 TensorFlow.js 层。例如，以下 Keras 代码可以转换为 JavaScript：
 
 ```python
 # Python:

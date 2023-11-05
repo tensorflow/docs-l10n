@@ -3,7 +3,7 @@
 TensorFlow Lite 元数据为模型描述提供了标准。元数据是与模型功能及其输入/输出信息有关的重要信息来源。元数据包含以下两个部分：
 
 - 人员可读部分，用于传达使用模型时的最佳做法，以及
-- 机器可读部分，可供诸如 [TensorFlow Lite Android 代码生成器](../../inference_with_metadata/codegen#generate-code-with-tensorflow-lite-android-code-generator)和 [Android Studio 机器学习绑定特征](../../inference_with_metadata/codegen#generate-code-with-android-studio-ml-model-binding)等代码生成器使用。
+- 机器可读部分，可供诸如 [TensorFlow Lite Android 代码生成器](../../inference_with_metadata/codegen.md#generate-model-interfaces-with-tensorflow-lite-code-generator-codegen)和 [Android Studio 机器学习绑定特征](../../inference_with_metadata/codegen.md#use-android-studio-ml-model-binding-mlbinding)等代码生成器使用。
 
 [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite) 上发布的所有图像模型都已填充元数据。
 
@@ -38,7 +38,7 @@ TensorFlow Lite 元数据工具支持 Python 3。
 2. **输入信息** - 输入以及诸如归一化等所需预处理的描述。请参阅 [SubGraphMetadata.input_tensor_metadata](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L590)。
 3. **输出信息** - 输出以及诸如标签映射等所需后处理的描述，请参阅 [SubGraphMetadata.output_tensor_metadata](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L599)。
 
-由于 TensorFlow Lite 目前仅支持单一子图，因此在显示元数据和生成代码时，[TensorFlow Lite 代码生成器](../../inference_with_metadata/codegen#generate-code-with-tensorflow-lite-android-code-generator) 和 [Android Studio 机器学习绑定特征](../../inference_with_metadata/codegen#generate-code-with-android-studio-ml-model-binding)将使用 `ModelMetadata.name` 和 `ModelMetadata.description`，而非 `SubGraphMetadata.name` 和 `SubGraphMetadata.description`。
+由于 TensorFlow Lite 目前仅支持单一子图，因此在显示元数据和生成代码时，[TensorFlow Lite 代码生成器](../../inference_with_metadata/codegen..md#generate-model-interfaces-with-tensorflow-lite-code-generator-codegen) 和 [Android Studio 机器学习绑定特征](../../inference_with_metadata/codegen.md#use-android-studio-ml-model-binding-mlbinding)将使用 `ModelMetadata.name` 和 `ModelMetadata.description`，而非 `SubGraphMetadata.name` 和 `SubGraphMetadata.description`。
 
 ### 支持的输入/输出类型
 
@@ -54,7 +54,7 @@ TensorFlow Lite 模型可能随附不同的关联文件。例如，自然语言�
 
 现在可以通过元数据 Python 库将关联文件与模型捆绑在一起。新的 TensorFlow Lite 模型现在以包含模型和关联文件的 zip 文件形式提供。该文件可使用常用的 zip 工具进行解包。这种新模型格式沿用了相同的文件扩展名 `.tflite`。它与现有的 TFLite 框架和解释器兼容。请参阅[将元数据和关联文件打包到模型中](#pack-metadata-and-associated-files-into-the-model)，了解详细信息。
 
-关联文件信息可以记录在元数据内。根据文件类型和文件附加到的位置（即 `ModelMetadata`、`SubGraphMetadata` 和 `TensorMetadata`），[TensorFlow Lite Android 代码生成器](../../inference_with_metadata/codegen)可能会将相应的预处理/后处理自动应用于对象。请参阅元数据模式[各种关联文件类型的 &lt;Codegen usage&gt; 部分](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L77-L127)，了解详细信息 。
+关联文件信息可以记录在元数据内。根据文件类型和文件附加到的位置（即 `ModelMetadata`、`SubGraphMetadata` 和 `TensorMetadata`），[TensorFlow Lite Android 代码生成器](../../inference_with_metadata/codegen.md)可能会将相应的预处理/后处理自动应用于对象。请参阅元数据模式[各种关联文件类型的 &lt;Codegen usage&gt; 部分](https://github.com/tensorflow/tflite-support/blob/4cd0551658b6e26030e0ba7fc4d3127152e0d4ae/tensorflow_lite_support/metadata/metadata_schema.fbs#L77-L127)，了解详细信息 。
 
 ### 归一化和量化参数
 
@@ -68,7 +68,7 @@ TensorFlow Lite 模型可能随附不同的关联文件。例如，自然语言�
 :-: | --- | ---
 \ | **浮动模型**：\ | **浮动模型**：\
 : MobileNet 中分别       : - 平均：127.5 \        : - 零点：0 \        : |  |
-: 针对浮点模型和 : - std：127.5 \         : - scale：1.0 \          : |  |
+: 针对浮动模型和 : - 标准：127.5 \         : - 缩放：1.0 \          : |  |
 : 量化模型的          : **量化模型**: \     : **量化模型**: \      : |  |
 : 输入图像 : - 平均：127.5 \        : - 零点：128.0 \    : |  |
 : 的参数值          : - 标准：127.5           : - 缩放：0.0078125f \    : |  |
@@ -81,7 +81,7 @@ TensorFlow Lite 模型可能随附不同的关联文件。例如，自然语言�
 :                         : 推断的输入数据 : 也可能不需要量化。具体取决于   : |  |
 :                         : 执行相应的        : on 输入/输出张量的       : |  |
 :                         : 归一化。\          : 数据类型。\  : |  |
-:                         : **输出**：输出    : - 浮点张量：预处理/     : |  |
+:                         : **输出**：输出    : - 浮动张量：预处理/     : |  |
 :                         : 数据通常        : 后处理中不需要 : |  |
 :                         : 不进行归一化。  : 进行量化。量化 : |  |
 :                         :                         : 运算和去量化运算    : |  |
@@ -92,7 +92,7 @@ TensorFlow Lite 模型可能随附不同的关联文件。例如，自然语言�
 :                         :                         : 中进行量化。     : |  |
 \ | \ | **对输入进行量化**：
 : \                       : \                       : \                        : |  |
-: 公式                 : normalized_input =      : q = f / scale +          : |  |
+: 公式                 : normalized_input =      : q = f / 缩放 +          : |  |
 :                         : (输入 - 平均) / 标准    : 零点 \              : |  |
 :                         :                         : **对输出进行         : |  |
 :                         :                         : outputs**: \            : |  |
@@ -271,7 +271,7 @@ populator.populate()
 ```python
 displayer = _metadata.MetadataDisplayer.with_model_file(export_model_path)
 export_json_file = os.path.join(FLAGS.export_directory,
-                    os.path.splitext(model_basename)[0] + ".json")
+                                os.path.splitext(model_basename)[0] + ".json")
 json_file = displayer.get_metadata_json()
 # Optional: write out the metadata as a json file
 with open(export_json_file, "w") as f:

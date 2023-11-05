@@ -1,6 +1,6 @@
 # 格式特定的数据集构建器
 
-[目录]
+[TOC]
 
 本指南介绍了 TFDS 中当前可用的所有格式特定的数据集构建器。
 
@@ -183,8 +183,6 @@ class MyCoNNLDataset(tfds.dataset_builders.ConllDatasetBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     return self.create_dataset_info(
-      description="My dataset description",
-      citation="My dataset citation",
       # ...
     )
 
@@ -262,28 +260,28 @@ class MyCoNNLUDataset(tfds.dataset_builders.ConllUDatasetBuilder):
 
   # conllu_lib contains a set of ready-to-use features.
   BUILDER_CONFIGS = [
-    conllu_lib.get_universal_morphology_config(
-      language="en",
-      features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,)
+      conllu_lib.get_universal_morphology_config(
+          language='en',
+          features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,
+      )
   ]
 
   def _info(self) -> tfds.core.DatasetInfo:
     return self.create_dataset_info(
-      description="My dataset description",
-      citation="My dataset citation",
-      # ...
+        # ...
     )
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download_and_extract('https://data-url')
 
-    return {'train':
-               self._generate_examples(
-                 path=path / 'train.txt',
-                 # If necessary, add optional custom processing (see conllu_lib
-                 # for examples).
-                 # process_example_fn=...,
-               )
+    return {
+        'train':
+            self._generate_examples(
+                path=path / 'train.txt',
+                # If necessary, add optional custom processing (see conllu_lib
+                # for examples).
+                # process_example_fn=...,
+            )
     }
 ```
 

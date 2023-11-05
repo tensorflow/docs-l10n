@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-05-25' } *-->
-
 # 提交拉取请求
 
 本页面介绍如何向 [tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) GitHub 仓库提交包含 Markdown 文档文件提交拉取请求。有关如何首先编写 Markdown 文件的更多信息，请参阅[编写文档](writing_documentation.md)指南。
+
+**注**：如果您希望将您的模型镜像到其他模型中心，请使用 MIT、CC0 或 Apache 许可。如果您不希望您的模型被镜像到其他模型中心，请使用其他适当的许可证。
 
 ## GitHub 操作检查
 

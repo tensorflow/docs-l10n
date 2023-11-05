@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-07' } *-->
-
 # TF1/TF2 的模型兼容性
 
 ## TF Hub 模型格式
@@ -32,12 +30,12 @@ outputs = m(inputs)</pre> </td>
   <tr>
     <td>微调</td>
     <td>完全支持（<a href="https://www.tensorflow.org/hub/tf1_hub_module#for_consumers">完整的 TF1 Hub 格式微调指南</a>）<pre style="font-size: 12px;" lang="python">m = hub.Module(handle, trainable=True, tags=["train"]*is_training) outputs = m(inputs)</pre> <div style="font-style: italic; font-size: 14px"> 注：不需要单独的训练计算图的模块没有训练标签。</div> </td>
-    <td style="text-align: center">       不受支持</td>
+    <td style="text-align: center">       Not supported</td>
   </tr>
   <tr>
     <td>创建</td>
-    <td>完全支持（请参阅<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">完整的 TF1 Hub 格式创建指南</a>）<br> <div style="font-style: italic; font-size: 14px"> 注：TF1 Hub 格式适用于 TF1，而在 TF2 中仅部分受支持。请考虑创建 TF2 SavedModel。      </div> </td>
-    <td style="text-align: center">不受支持</td>
+    <td>完全支持（请参阅<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">完整的 TF1 Hub 格式创建指南</a>）<br> <div style="font-style: italic; font-size: 14px"> 注：TF1 Hub 格式适用于 TF1，而在 TF2 中仅部分受支持。请考虑创建一个 TF2 SavedModel。      </div> </td>
+    <td style="text-align: center">Not supported</td>
   </tr>
 </table>
 

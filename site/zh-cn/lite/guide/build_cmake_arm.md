@@ -81,7 +81,7 @@ cmake -DCMAKE_C_COMPILER=${ARMCC_PREFIX}gcc \
   ../tensorflow/lite/
 ```
 
-**注**：如果您的目标设备支持 OpenCL 1.2 或更高版本，您可以使用 "-DTFLITE_ENABLE_GPU=ON" 启用 GPU 委托。
+**注**：如果您的目标设备支持 OpenCL 1.2 或更高版本，您可以使用 `-DTFLITE_ENABLE_GPU=ON` 启用 GPU 委托。
 
 ## 为已启用 NEON 的 ARMv7 构建
 
@@ -122,19 +122,21 @@ cmake -DCMAKE_C_COMPILER=${ARMCC_PREFIX}gcc \
 
 #### 下载工具链
 
-以下命令会将 arm-rpi-linux-gnueabihf 工具链安装到 ${HOME}/toolchains 下。
+以下命令会将 gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf 工具链安装到 ${HOME}/toolchains 下。
 
 ```sh
-curl -L https://github.com/rvagg/rpi-newer-crosstools/archive/eb68350c5c8ec1663b7fe52c742ac4271e3217c5.tar.gz -o rpi-toolchain.tar.gz
-tar xzf rpi-toolchain.tar.gz -C ${HOME}/toolchains
-mv ${HOME}/toolchains/rpi-newer-crosstools-eb68350c5c8ec1663b7fe52c742ac4271e3217c5 ${HOME}/toolchains/arm-rpi-linux-gnueabihf
+curl -LO https://storage.googleapis.com/mirror.tensorflow.org/developer.arm.com/media/Files/downloads/gnu-a/8.3-2019.03/binrel/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf.tar.xz
+mkdir -p ${HOME}/toolchains
+tar xvf gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf.tar.xz -C ${HOME}/toolchains
 ```
+
+**注**：使用 GCC 8.3 构建的二进制文件需要 glibc 2.28 或更高版本。如果您的目标是较低版本的 glibc，则需要使用旧版 GCC 工具链。
 
 #### 运行 CMake
 
 ```sh
-ARMCC_PREFIX=${HOME}/toolchains/arm-rpi-linux-gnueabihf/x64-gcc-6.5.0/arm-rpi-linux-gnueabihf/bin/arm-rpi-linux-gnueabihf-
-ARMCC_FLAGS="-march=armv6 -mfpu=vfp -funsafe-math-optimizations"
+ARMCC_FLAGS="-march=armv6 -mfpu=vfp -mfloat-abi=hard -funsafe-math-optimizations"
+ARMCC_PREFIX=${HOME}/toolchains/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
 cmake -DCMAKE_C_COMPILER=${ARMCC_PREFIX}gcc \
   -DCMAKE_CXX_COMPILER=${ARMCC_PREFIX}g++ \
   -DCMAKE_C_FLAGS="${ARMCC_FLAGS}" \

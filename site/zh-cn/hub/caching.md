@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2021-07-28' } *-->
-
 # 从 TF Hub 缓存下载的模型
 
 ## 概述
@@ -54,3 +52,5 @@ load_options =
 tf.saved_model.LoadOptions(experimental_io_device='/job:localhost')
 reloaded_model = hub.load("https://tfhub.dev/...", options=load_options)
 ```
+
+**注**：在[此处](tf2_saved_model.md#model_handles)查看有关有效句柄的更多信息。
