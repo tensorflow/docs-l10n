@@ -322,7 +322,7 @@ Timeline ペインには、次の要素が含まれます。
 
 このセクションには、メモリ使用率（GiB）と断片率を時間（ms）比較した図が表示されます。
 
-![image](https://github.com/tensorflow/docs-l10n/blob/master/site/ja/guide/images/tf_profiler/memory_timeline_graph.png?raw=true)
+ ![image](./images/tf_profiler/memory_timeline_graph.png?raw=true)
 
 X 軸は、プロファイリングインターバルのタイムライン（ms）を表します。左の Y 軸はメモリ使用率（GiB）を、右の Y 軸は断片率を表します。合計メモリは、X 軸のある時点で、スタック（赤）、ヒープ（オレンジ）、空き（緑）の 3 つに分けて示されています。特定のタイムスタンプにマウスポインタを合わせると、以下のように、その時点でのメモリの割り当てと割り当て解除の詳細を確認できます。
 
