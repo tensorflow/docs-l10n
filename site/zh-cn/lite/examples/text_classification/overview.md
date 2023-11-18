@@ -71,11 +71,11 @@
 
 ## 示例输出
 
-Text | Negative (0) | Positive (1)
---- | --- | ---
-This is the best movie I’ve seen in recent | 25.3% | 74.7%
-: years. Strongly recommend it!              :              :              : |  |
-What a waste of my time. | 72.5% | 27.5%
+| 文本                                       | 负面 (0) | 正面 (1) |
+| ------------------------------------------ | -------- | -------- |
+| This is the best movie I’ve seen in recent | 25.3%    | 74.7%    |
+: years. Strongly recommend it!              :          :          :
+| What a waste of my time.                   | 72.5%    | 27.5%    |
 
 ## 使用训练数据集
 

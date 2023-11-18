@@ -23,12 +23,12 @@ XNNPack | 支持 | 支持
 
 如果您有一个 Bazel 项目，或者您想使用 TF 运算，那么您最好使用 Bazel 构建系统。您将使用集成的 [ARM GCC 8.3 工具链](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tools/toolchains/embedded/arm-linux)配合 Bazel 构建 ARM32/64 共享库。
 
-目标架构 | Bazel 配置 | 兼容设备
---- | --- | ---
-armhf (ARM32) | --config=elinux_armhf | RPI3、RPI4 运行 32 位
-:                     :                         : Raspberry Pi OS            : |  |
-AArch64 (ARM64) | --config=elinux_aarch64 | Coral、RPI4 运行 Ubuntu 64
-:                     :                         : 位                        : |  |
+| 目标架构        | Bazel 配置              | 兼容设备                   |
+| --------------- | ----------------------- | -------------------------- |
+| armhf (ARM32)   | --config=elinux_armhf   | RPI3、RPI4 运行 32 位      |
+:                 :                         : Raspberry Pi OS            :
+| AArch64 (ARM64) | --config=elinux_aarch64 | Coral、RPI4 运行 Ubuntu 64 |
+:                 :                         : 位                         :
 
 注：生成的共享库需要 glibc 2.28 或更高版本才能运行。
 

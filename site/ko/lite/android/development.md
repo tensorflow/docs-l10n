@@ -82,21 +82,21 @@ dependencies {
 
 ### 라이브러리용 최소 Android SDK 버전
 
-라이브러리 | `minSdkVersion` | 장치 요구 사항
---- | --- | ---
-tensorflow-lite | 19 | NNAPI 사용 필요
-:                             :                 : API 27+                : |  |
-tensorflow-lite-gpu | 19 | GLES 3.1 또는 OpenCL
-:                             :                 : (일반적으로 유일        : |  |
-:                             :                 : API 21+에서 사용 가능   : |  |
-tensorflow-lite-hexagon | 19 | -
-tensorflow-lite-support | 19 | -
-tensorflow-lite-task-vision | 21 | android.graphics.Color
-:                             :                 : 관련 API 필요   : |  |
-:                             :                 : API 26+                : |  |
-tensorflow-lite-task-text | 21 | -
-tensorflow-lite-task-audio | 23 | -
-tensorflow-lite-metadata | 19 | -
+| 라이브러리                  | `minSdkVersion` | 장치 요구 사항         |
+| --------------------------- | --------------- | ---------------------- |
+| tensorflow-lite             | 19              | NNAPI 사용 필요        |
+:                             :                 : API 27+                :
+| tensorflow-lite-gpu         | 19              | GLES 3.1 또는 OpenCL   |
+:                             :                 : (일반적으로 유일       :
+:                             :                 : API 21+에서 사용 가능  :
+| tensorflow-lite-hexagon     | 19              | -                      |
+| tensorflow-lite-support     | 19              | -                      |
+| tensorflow-lite-task-vision | 21              | android.graphics.Color |
+:                             :                 : 관련 API 필요          :
+:                             :                 : API 26+                :
+| tensorflow-lite-task-text   | 21              | -                      |
+| tensorflow-lite-task-audio  | 23              | -                      |
+| tensorflow-lite-metadata    | 19              | -                      |
 
 ### Android Studio 사용하기
 

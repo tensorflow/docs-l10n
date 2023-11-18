@@ -82,21 +82,21 @@ dependencies {
 
 ### ライブラリに対応する最低 Android SDK バージョン
 
-ライブラリ | `minSdkVersion` | デバイス要件
---- | --- | ---
-tensorflow-lite | 19 | NNAPI の使用が必要
-:                             :                 : API 27+                : |  |
-tensorflow-lite-gpu | 19 | GLES 3.1 または OpenCL
-:                             :                 : （通常        : |  |
-:                             :                 : API 21+ のみで利用可  : |  |
-tensorflow-lite-hexagon | 19 | -
-tensorflow-lite-support | 19 | -
-tensorflow-lite-task-vision | 21 | android.graphics.Color
-:                             :                 : 関連 API が必要   : |  |
-:                             :                 : API 26+                : |  |
-tensorflow-lite-task-text | 21 | -
-tensorflow-lite-task-audio | 23 | -
-tensorflow-lite-metadata | 19 | -
+| ライブラリ                  | `minSdkVersion` | デバイス要件           |
+| --------------------------- | --------------- | ---------------------- |
+| tensorflow-lite             | 19              | NNAPI の使用が必要     |
+:                             :                 : API 27+                :
+| tensorflow-lite-gpu         | 19              | GLES 3.1 または OpenCL |
+:                             :                 : （通常                 :
+:                             :                 : API 21+ のみで利用可   :
+| tensorflow-lite-hexagon     | 19              | -                      |
+| tensorflow-lite-support     | 19              | -                      |
+| tensorflow-lite-task-vision | 21              | android.graphics.Color |
+:                             :                 : 関連 API が必要        :
+:                             :                 : API 26+                :
+| tensorflow-lite-task-text   | 21              | -                      |
+| tensorflow-lite-task-audio  | 23              | -                      |
+| tensorflow-lite-metadata    | 19              | -                      |
 
 ### Android Studio の使用
 

@@ -178,19 +178,19 @@ cmake --build . -j -t label_image
 
 使用可能なオプションは次のとおりです。`-D<option_name>=[ON|OFF]` でオーバーライドできます。たとえば、`-DTFLITE_ENABLE_XNNPACK=OFF` を使用すると、既定で有効な XNNPACK が無効になります。
 
-オプション名 | 機能 | Android | Linux | macOS | Windows
---- | --- | --- | --- | --- | ---
-TFLITE_ENABLE_RUY | RUY を有効にする | ON | OFF | OFF | OFF
-:                       : matrix         :         :       :       :         : |  |  |  |  |
-:                       : multiplication :         :       :       :         : |  |  |  |  |
-:                       : library        :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_NNAPI | NNAPI を有効にする | ON | OFF | N/A | N/A
-:                       : delegate       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_GPU | GPU を有効にする | OFF | OFF | N/A | N/A
-:                       : delegate       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_XNNPACK | XNNPACK を有効にする | ON | ON | ON | ON
-:                       : delegate       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_MMAP | MMAP を有効にする | ON | ON | ON | N/A
+| オプション名            | 機能                 | Android | Linux | macOS | Windows |
+| ----------------------- | -------------------- | ------- | ----- | ----- | ------- |
+| `TFLITE_ENABLE_RUY`     | RUY を有効にする     | ON      | OFF   | OFF   | OFF     |
+:                         : matrix               :         :       :       :         :
+:                         : multiplication       :         :       :       :         :
+:                         : library              :         :       :       :         :
+| `TFLITE_ENABLE_NNAPI`   | NNAPI を有効にする   | ON      | OFF   | N/A   | N/A     |
+:                         : delegate             :         :       :       :         :
+| `TFLITE_ENABLE_GPU`     | GPU を有効にする     | OFF     | OFF   | N/A   | N/A     |
+:                         : delegate             :         :       :       :         :
+| `TFLITE_ENABLE_XNNPACK` | XNNPACK を有効にする | ON      | ON    | ON    | ON      |
+:                         : delegate             :         :       :       :         :
+| `TFLITE_ENABLE_MMAP`    | MMAP を有効にする    | ON      | ON    | ON    | N/A     |
 
 ## TensorFlow Lite を使用する CMake プロジェクトの作成
 

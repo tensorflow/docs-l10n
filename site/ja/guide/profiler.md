@@ -561,7 +561,20 @@ for step, train_data in enumerate(dataset):
 
 <a name="profiling_api_table"></a>
 
-| プロファイリング API                | ローカル     | リモート    | 複数  | ハードウェア  | :                              :           :           : ワーカー   : プラットフォーム : | :--------------------------- | :-------- | :-------- | :-------- | :-------- | | **TensorBoard Keras          | サポート対象 | サポート       | サポート       | CPU、GPU  | : コールバック**                   :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート       | サポート       | CPU、GPU  | : start/stop [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**    :           : 対象外 : 対象外 :           : | **`tf.profiler.experimental` | サポート対象 | サポート対象 | サポート対象 | CPU、GPU, | : client.trace [API](https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2)**  :           :           :           : TPU       : | **コンテキストマネージャ API**      | サポート対象 | サポート       | サポート       | CPU、GPU  | :                              :           : 対象外 : 対象外 :           :
+| プロファイリング API           | ローカル     | リモート     | 複数         | ハードウェア     |
+:                                :              :              : ワーカー     : プラットフォーム :
+| :----------------------------- | :----------- | :----------- | :----------- | :-------- |
+| **TensorBoard Keras            | サポート対象 | サポート     | サポート     | CPU、GPU  |
+: コールバック**                 :              : 対象外       : 対象外       :           :
+| **`tf.profiler.experimental`   | サポート対象 | サポート     | サポート     | CPU、GPU  |
+: start/stop [API][API_0]**      :              : 対象外       : 対象外       :           :
+ **`tf.profiler.experimental`    | サポート対象 | サポート対象 | サポート対象 | CPU、GPU, |
+: client.trace [API][API_1]**    :              :              :              : TPU       :
+| **コンテキストマネージャ API** | サポート対象 | サポート     | サポート     | CPU、GPU  |
+:                                :              : 対象外       : 対象外       :           :
+
+[API_0]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental#functions_2
+[API_1]: https://www.tensorflow.org/api_docs/python/tf/profiler/experimental/client/trace
 
 <a name="performance_best_practices"></a>
 

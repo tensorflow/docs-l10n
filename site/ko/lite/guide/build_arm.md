@@ -23,12 +23,12 @@ CMake 프로젝트가 있거나 사용자 정의 툴체인을 사용하려는 �
 
 Bazel 프로젝트가 있거나 TF op를 사용하려는 경우, Bazel 빌드 시스템을 사용하는 것이 좋습니다. Bazel과 통합된 [ARM GCC 8.3 툴체인](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tools/toolchains/embedded/arm-linux)을 사용하여 ARM32/64 공유 라이브러리를 빌드합니다.
 
-대상 아키텍처 | Bazel 구성 | 호환 기기
---- | --- | ---
-armhf (ARM32) | --config=elinux_armhf | RPI3, 32bit RPI4
-:                     :                         : Raspberry Pi OS            : |  |
-AArch64 (ARM64) | --config=elinux_aarch64 | Coral, Ubuntu 64가 설치된 RPI4
-:                     :                         : bit                        : |  |
+| 대상 아키텍처   | Bazel 구성              | 호환 기기                      |
+| --------------- | ----------------------- | ------------------------------ |
+| armhf (ARM32)   | --config=elinux_armhf   | RPI3, 32bit RPI4               |
+:                 :                         : Raspberry Pi OS                :
+| AArch64 (ARM64) | --config=elinux_aarch64 | Coral, Ubuntu 64가 설치된 RPI4 |
+:                 :                         : bit                            :
 
 참고: 생성된 공유 라이브러리를 실행하려면 glibc 2.28 이상이 필요합니다.
 

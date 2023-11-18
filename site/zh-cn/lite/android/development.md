@@ -82,21 +82,21 @@ dependencies {
 
 ### 用于库的最低 Android SDK 版本
 
-库 | `minSdkVersion` | 设备要求
---- | --- | ---
-tensorflow-lite | 19 | NNAPI 使用要求
-:                             :                 : API 27+                : |  |
-tensorflow-lite-gpu | 19 | GLES 3.1 或 OpenCL
-:                             :                 : （通常仅）        : |  |
-:                             :                 : 适用于 API 21+ : |  |
-tensorflow-lite-hexagon | 19 | -
-tensorflow-lite-support | 19 | -
-tensorflow-lite-task-vision | 21 | android.graphics.Color
-:                             :                 : 相关 API 要求   : |  |
-:                             :                 : API 26+                : |  |
-tensorflow-lite-task-text | 21 | -
-tensorflow-lite-task-audio | 23 | -
-tensorflow-lite-metadata | 19 | -
+| 库                          | `minSdkVersion` | 设备要求               |
+| --------------------------- | --------------- | ---------------------- |
+| tensorflow-lite             | 19              | NNAPI 使用要求         |
+:                             :                 : API 27+                :
+| tensorflow-lite-gpu         | 19              | GLES 3.1 或 OpenCL     |
+:                             :                 : （通常仅               :
+:                             :                 : 适用于 API 21+         :
+| tensorflow-lite-hexagon     | 19              | -                      |
+| tensorflow-lite-support     | 19              | -                      |
+| tensorflow-lite-task-vision | 21              | android.graphics.Color |
+:                             :                 : 相关 API 要求          :
+:                             :                 : API 26+                :
+| tensorflow-lite-task-text   | 21              | -                      |
+| tensorflow-lite-task-audio  | 23              | -                      |
+| tensorflow-lite-metadata    | 19              | -                      |
 
 ### 使用 Android Studio
 

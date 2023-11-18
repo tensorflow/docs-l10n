@@ -178,19 +178,19 @@ cmake --build . -j -t label_image
 
 以下是可用选项列表。您可以使用 `-D<option_name>=[ON|OFF]` 对其进行重写。例如，通过 `-DTFLITE_ENABLE_XNNPACK=OFF` 禁用默认情况下处于启用状态的 XNNPACK。
 
-选项名称 | 功能 | Android | Linux | macOS | Windows
---- | --- | --- | --- | --- | ---
-TFLITE_ENABLE_RUY | 启用 RUY | 开 | 关 | 关 | 关
-:                       : matrix         :         :       :       :         : |  |  |  |  |
-:                       : multiplication :         :       :       :         : |  |  |  |  |
-:                       : library        :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_NNAPI | 启用 NNAPI | 开 | 关 | 不适用 | 不适用
-:                       : 委托       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_GPU | 启用 GPU | 关 | 关 | 不适用 | 不适用
-:                       : 委托       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_XNNPACK | 启用 XNNPACK | 开 | 开 | 开 | 开
-:                       : 委托       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_MMAP | 启用 MMAP | 开 | 开 | 开 | 不适用
+| 选项名称                | 功能           | Android | Linux | macOS  | Windows |
+| ----------------------- | -------------- | ------- | ----- | ------ | ------- |
+| `TFLITE_ENABLE_RUY`     | 启用 RUY       | 开      | 关    | 关     | 关      |
+:                         : matrix         :         :       :        :         :
+:                         : multiplication :         :       :        :         :
+:                         : library        :         :       :        :         :
+| `TFLITE_ENABLE_NNAPI`   | 启用 NNAPI     | 开      | 关    | 不适用 | 不适用  |
+:                         : 委托           :         :       :        :         :
+| `TFLITE_ENABLE_GPU`     | 启用 GPU       | 关      | 关    | 不适用 | 不适用  |
+:                         : 委托           :         :       :        :         :
+| `TFLITE_ENABLE_XNNPACK` | 启用 XNNPACK   | 开      | 开    | 开     | 开      |
+:                         : 委托           :         :       :        :         :
+| `TFLITE_ENABLE_MMAP`    | 启用 MMAP      | 开      | 开    | 开     | 不适用  |
 
 ## 创建使用 TensorFlow Lite 的 CMake 项目
 

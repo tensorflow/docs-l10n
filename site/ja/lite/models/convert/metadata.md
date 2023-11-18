@@ -64,58 +64,58 @@ TensorFlow Lite モデルにはさまざまな関連ファイルが含まれる�
 
 前処理と後処理の観点では、正規化と量子化は 2 つの独立したステップです。次に詳細を示します。
 
- | 正規化 | 量子化
-:-: | --- | ---
-\ | **Float モデル**: \ | **Float モデル**: \
-: An example of the       : - mean: 127.5 \        : - zeroPoint: 0 \        : |  |
-: parameter values of the : - std: 127.5 \         : - scale: 1.0 \          : |  |
-: input image in          : **Quant model**: \     : **Quant model**: \      : |  |
-: MobileNet for float and : - mean: 127.5 \        : - zeroPoint: 128.0 \    : |  |
-: quant models,           : - std: 127.5           : - scale:0.0078125f \    : |  |
-: respectively.           :                         :                          : |  |
-\ | \ | **浮動小数点数モデル**
-: \                       : \                       : not need quantization. \ : |  |
-: \                       : **Inputs**: If input   : **Quantized model** may  : |  |
-: \                       : data is normalized in   : or may not need          : |  |
-: When to invoke?         : training, the input     : quantization in pre/post : |  |
-:                         : data of inference needs : processing. It depends   : |  |
-:                         : to be normalized        : on the datatype of       : |  |
-:                         : accordingly. \          : input/output tensors. \  : |  |
-:                         : **Outputs**: output    : - float tensors: no     : |  |
-:                         : data will not be        : quantization in pre/post : |  |
-:                         : normalized in general.  : processing needed. Quant : |  |
-:                         :                         : op and dequant op are    : |  |
-:                         :                         : baked into the model     : |  |
-:                         :                         : graph. \                 : |  |
-:                         :                         : - int8/uint8 tensors:   : |  |
-:                         :                         : need quantization in     : |  |
-:                         :                         : pre/post processing.     : |  |
-\ | \ | **入力の量子化**:
-: \                       : \                       : \                        : |  |
-: Formula                 : normalized_input =      : q = f / scale +          : |  |
-:                         : (input - mean) / std    : zeroPoint \              : |  |
-:                         :                         : **Dequantize for         : |  |
-:                         :                         : outputs**: \            : |  |
-:                         :                         : f = (q - zeroPoint) *    : |  |
-:                         :                         : scale                    : |  |
-\ | Filled by model creator | Filled automatically by
-: Where are the           : and stored in model     : TFLite converter, and    : |  |
-: parameters              : metadata, as            : stored in tflite model   : |  |
-:                         : `NormalizationOptions`  : file.                    : |  |
-How to get the | Through the | Through the TFLite
-: parameters?             : `MetadataExtractor` API : `Tensor` API [1] or      : |  |
-:                         : [2]                     : through the              : |  |
-:                         :                         : `MetadataExtractor` API  : |  |
-:                         :                         : [2]                      : |  |
-Do float and quant | Yes, float and quant | No, the float model does
-: models share the same   : models have the same    : not need quantization.   : |  |
-: value?                  : Normalization           :                          : |  |
-:                         : parameters              :                          : |  |
-Does TFLite Code | \ | \
-: generator or Android    : Yes                     : Yes                      : |  |
-: Studio ML binding       :                         :                          : |  |
-: automatically generate  :                         :                          : |  |
-: it in data processing?  :                         :                          : |  |
+|                         | 正規化                  | 量子化                   |
+| :---------------------: | ----------------------- | ------------------------ |
+| \                       | **Float モデル**: \     | **Float モデル**: \      |
+: An example of the       : - mean\: 127.5 \        : - zeroPoint\: 0 \        :
+: parameter values of the : - std\: 127.5 \         : - scale\: 1.0 \          :
+: input image in          : **Quant model**\: \     : **Quant model**\: \      :
+: MobileNet for float and : - mean\: 127.5 \        : - zeroPoint\: 128.0 \    :
+: quant models,           : - std\: 127.5           : - scale\:0.0078125f \    :
+: respectively.           :                         :                          :
+| \                       | \                       | **浮動小数点数モデル**   |
+: \                       : \                       : not need quantization. \ :
+: \                       : **Inputs**\: If input   : **Quantized model** may  :
+: \                       : data is normalized in   : or may not need          :
+: When to invoke?         : training, the input     : quantization in pre/post :
+:                         : data of inference needs : processing. It depends   :
+:                         : to be normalized        : on the datatype of       :
+:                         : accordingly. \          : input/output tensors. \  :
+:                         : **Outputs**\: output    : - float tensors\: no     :
+:                         : data will not be        : quantization in pre/post :
+:                         : normalized in general.  : processing needed. Quant :
+:                         :                         : op and dequant op are    :
+:                         :                         : baked into the model     :
+:                         :                         : graph. \                 :
+:                         :                         : - int8/uint8 tensors\:   :
+:                         :                         : need quantization in     :
+:                         :                         : pre/post processing.     :
+| \                       | \                       | **入力の量子化**:        |
+: \                       : \                       : \                        :
+: Formula                 : normalized_input =      : q = f / scale +          :
+:                         : (input - mean) / std    : zeroPoint \              :
+:                         :                         : **Dequantize for         :
+:                         :                         : outputs**\: \            :
+:                         :                         : f = (q - zeroPoint) *    :
+:                         :                         : scale                    :
+| \                       | Filled by model creator | Filled automatically by
+: Where are the           : and stored in model     : TFLite converter, and    :
+: parameters              : metadata, as            : stored in tflite model   :
+:                         : `NormalizationOptions`  : file.                    :
+| How to get the          | Through the             | Through the TFLite       |
+: parameters?             : `MetadataExtractor` API : `Tensor` API [1] or      :
+:                         : [2]                     : through the              :
+:                         :                         : `MetadataExtractor` API  :
+:                         :                         : [2]                      :
+| Do float and quant      | Yes, float and quant    | No, the float model does |
+: models share the same   : models have the same    : not need quantization.   :
+: value?                  : Normalization           :                          :
+:                         : parameters              :                          :
+| Does TFLite Code        | \                       | \                        |
+: generator or Android    : Yes                     : Yes                      :
+: Studio ML binding       :                         :                          :
+: automatically generate  :                         :                          :
+: it in data processing?  :                         :                          :
 
 [1] [TensorFlow Lite Java API](https://github.com/tensorflow/tensorflow/blob/09ec15539eece57b257ce9074918282d88523d56/tensorflow/lite/java/src/main/java/org/tensorflow/lite/Tensor.java#L73) および [TensorFlow Lite C++ API](https://github.com/tensorflow/tensorflow/blob/09ec15539eece57b257ce9074918282d88523d56/tensorflow/lite/c/common.h#L391)。 <br> [2] [メタデータ抽出ライブラリ](../guide/codegen.md#read-the-metadata-from-models)
 

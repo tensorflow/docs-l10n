@@ -23,12 +23,12 @@ CMake プロジェクトがある場合、またはカスタムツールチェ�
 
 Bazel プロジェクトがある場合、または TF 演算を使用する場合は、Bazel ビルドシステムの使用が推奨されます。ARM32/64 共有ライブラリを構築するには、統合されている [ARM GCC 8.3 ツールチェーン](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tools/toolchains/embedded/arm-linux)を Bazel を使用します。
 
-ターゲットアーキテクチャ | Bazel 構成 | 対応デバイス
---- | --- | ---
-armhf（ARM32） | --config=elinux_armhf | RPI3、32ビットの RPI4
-:                     :                         : Raspberry Pi OS            : |  |
-AArch64（ARM64） | --config=elinux_aarch64 | Coral、Ubuntu 64ビット の RPI4
-:                     :                         : bit                        : |  |
+| ターゲットアーキテクチャ | Bazel 構成              | 対応デバイス                   |
+| ------------------------ | ----------------------- | ------------------------------ |
+| armhf（ARM32）           | --config=elinux_armhf   | RPI3、32ビットの RPI4          |
+:                          :                         : Raspberry Pi OS                :
+| AArch64（ARM64）         | --config=elinux_aarch64 | Coral、Ubuntu 64ビット の RPI4 |
+:                          :                         : bit                            :
 
 注: 生成された共有ライブラリを実行するには、glibc 2.28 以降が必要です。
 
