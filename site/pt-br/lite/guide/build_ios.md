@@ -1,6 +1,6 @@
 # Compile o TensorFlow Lite para iOS
 
-This document describes how to build TensorFlow Lite iOS library on your own. Normally, you do not need to locally build TensorFlow Lite iOS library. If you just want to use it, the easiest way is using the prebuilt stable or nightly releases of the TensorFlow Lite CocoaPods. See [iOS quickstart](ios.md) for more details on how to use them in your iOS projects.<br><br>Este documento descreve como compilar a biblioteca iOS do TensorFlow Lite por conta própria. Normalmente, você não precisa compilar localmente a biblioteca iOS do TensorFlow Lite. Se você só quiser usá-la, a forma mais fácil é utilizar as versões estáveis ou noturnas pré-compiladas do CocoaPods do TensorFlow Lite. Confira mais detalhes de como usá-las nos seus projetos para iOS no [Guia de início rápido para iOS](ios.md).
+Este documento descreve como compilar a biblioteca iOS do TensorFlow Lite por conta própria. Normalmente, você não precisa compilar localmente a biblioteca iOS do TensorFlow Lite. Se você só quiser usá-la, a forma mais fácil é utilizar as versões estáveis ou noturnas pré-compiladas do CocoaPods do TensorFlow Lite. Confira mais detalhes de como usá-las nos seus projetos para iOS no [Guia de início rápido para iOS](ios.md).
 
 ## Compilando localmente
 
