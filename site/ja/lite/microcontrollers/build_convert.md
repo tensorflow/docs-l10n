@@ -36,12 +36,7 @@ unsigned int converted_model_tflite_len = 18200;
 
 ファイルを生成したら、プログラムに含めることができます。組み込みプラットフォームでのメモリ効率を向上させるには、配列宣言を`const`に変更することが重要です。
 
-<!--
-Removing this link for now because it is broken. Need to update TF example repos. b/244204652
-For an example of how to include and use a model in your program, see
-[`model.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/model.cc)
-in the *Hello World* example.
--->
+プログラムにモデルを含めて使用する方法の例については、*Hello World* の例の [`evaluate_test.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/evaluate_test.cc) をご覧ください。
 
 ## モデルのアーキテクチャとトレーニング
 
@@ -49,11 +44,11 @@ in the *Hello World* example.
 
 ### モデルサイズ
 
-モデルは、バイナリとしても実行時にも、プログラムの残りの部分と共にターゲットデバイスのメモリ内に収まるように十分に小さくなければなりません。
+モデルは、バイナリとしても実行時にも、プログラムの残りの部分と共にターゲットデバイスのメモリ内に収まるのに十分なサイズにする必要があります。
 
-より小さなモデルを作成するためには、アーキテクチャで使用するレイヤーを少なくします。ただし、小さいモデルでは、適合不足になる可能性が高くなります。そのため、多くの問題では、メモリに収まる最大のモデルを使用してみてください。ただし、より大きなモデルを使用すると、プロセッサのワークロードも増加します。
+より小さなモデルを作成するためには、アーキテクチャで使用するレイヤーを少なくします。 ただし、小さいモデルは、適合不足になる可能性が高くなります。そのため、多くの問題では、メモリに収まる最大のモデルを使用してみてください。 ただし、より大きなモデルを使用すると、プロセッサのワークロードも増加します。
 
-注: マイクロコントローラ向け TensorFlow Lite のコアランタイムは、Cortex M3 の 16KB に収まります。
+注意: マイクロコントローラ向け TensorFlow Lite のコアランタイムは、Cortex M3 の 16KB に収まります。
 
 ### ワークロード
 
@@ -63,4 +58,4 @@ in the *Hello World* example.
 
 マイクロコントローラ向け TensorFlow Lite は、現在、限られた TensorFlow 演算のサブセットをサポートしているため実行可能なモデルアーキテクチャが影響されますが、リファレンス実装と特定のアーキテクチャの最適化における演算のサポートの拡大に取り組んでいます。
 
-サポートされている演算は、以下のファイルからご覧いただけます。[`all_ops_resolver.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.cc)
+サポートされている演算は、[`micro_mutable_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_mutable_op_resolver.h) でご覧ください。

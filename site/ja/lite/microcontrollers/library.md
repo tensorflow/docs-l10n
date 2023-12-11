@@ -12,13 +12,18 @@ TensorFlow Lite for Microcontrollers C++ ライブラリは [TensorFlow リポ�
 
 TensorFlow Lite for Microcontrollers インタプリタを使用する上で最も重要なファイルは、プロジェクトのルートにテストと共に配置されています。
 
-- [`all_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.h) または [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_mutable_op_resolver.h) は、モデルを実行するためにインタプリタが使用する演算を提供します。`all_ops_resolver.h` は利用可能なすべての演算を取り込むため、大量のメモリを使用してしまいます。本番アプリケーションにおいては、モデルが必要とする演算のみを読み込む `micro_mutable_op_resolver.h` を使用することをお勧めします。
-- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_error_reporter.h) はデバッグ情報を出力します。
+```
+[`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_mutable_op_resolver.h)
+can be used to provide the operations used by the interpreter to run the
+model.
+```
+
+- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/tflite_bridge/micro_error_reporter.h) はデバッグ情報を出力します。
 - [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_interpreter.h) にはモデルを処理して実行するコードが含まれます。
 
 一般的な使用方法のウォークスルーについては、[マイクロコントローラの基礎](get_started_low_level.md)をご覧ください。
 
-ビルドシステムは、特定のファイルのプラットフォーム固有の実装を提供します。これらは、[`sparkfun_edge`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/sparkfun_edge) のようなプラットフォーム名をもつディレクトリに配置されています。
+ビルドシステムは、特定のファイルのプラットフォーム固有の実装を提供します。これらは、[`cortex-m`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/cortex_m_generic) のようなプラットフォーム名をもつディレクトリに配置されています。
 
 その他、次のようなディレクトリがあります。
 
@@ -40,7 +45,7 @@ Arduino を使用している場合、*Hello World* の例は `Arduino_TensorFlo
 
 TensorFlow Lite for Microcontrollers は、`Makefile` を使用して、必要なすべてのソースファイルを含むスタンドアロンのプロジェクトを生成することができます。現在サポートされている環境は、Keil、Make、および Mbed です。
 
-これらのプロジェクトを Make で生成するには、[TensorFlow リポジトリ](http://github.com/tensorflow/tensorflow)をクローンして、以下のコマンドを実行します。
+これらのプロジェクトを Make で生成するには、[TensorFlow/tflite-micro リポジトリ](https://github.com/tensorflow/tflite-micro)をクローンして、以下のコマンドを実行します。
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile generate_projects
@@ -80,13 +85,13 @@ make -f tensorflow/lite/micro/tools/make/Makefile <project_name>_bin
 make -f tensorflow/lite/micro/tools/make/Makefile hello_world_bin
 ```
 
-デフォルトでは、プロジェクトはホストのオペレーティングシステム用にコンパイルされます。別のターゲットアーキテクチャを指定するには、`TARGET=` を使用します。 以下の例は、*Hello World* サンプルを SparkFun Edge 向けにビルドする方法を示しています。
+デフォルトでは、プロジェクトはホストのオペレーティングシステム用にコンパイルされます。別のターゲットアーキテクチャを指定するには、`TARGET=` と `TARGET_ARCH=` を使用します。 以下の例は、*Hello World* サンプルを一般的な cortex-m0 向けにビルドする方法を示しています。
 
 ```bash
-make -f tensorflow/lite/micro/tools/make/Makefile TARGET=sparkfun_edge hello_world_bin
+make -f tensorflow/lite/micro/tools/make/Makefile TARGET=cortex_m_generic TARGET_ARCH=cortex-m0 hello_world_bin
 ```
 
-ターゲットが指定されている場合、元のコードの代わりに、利用可能なターゲット固有のソースファイルが使用されます。たとえば、`examples/hello_world/sparkfun_edge` サブディレクトリには `constants.cc` ファイルと `output_handler.cc` ファイルの SparkFun Edge 向けの実装が含まれており、ターゲットに `sparkfun_edge` が指定された場合に使用されます。
+ターゲットが指定されている場合、元のコードの代わりに、利用可能なターゲット固有のソースファイルが使用されます。たとえば、`examples/hello_world/cortex_m_generic` サブディレクトリには `constants.cc` ファイルと `output_handler.cc` ファイルの SparkFun Edge 向けの実装が含まれており、ターゲットに `cortex_m_generic` が指定された場合に使用されます。
 
 プロジェクト名はプロジェクトの Makefile で確認できます。たとえば、`examples/hello_world/Makefile.inc` は *Hello World* サンプルのバイナリ名を示します。
 

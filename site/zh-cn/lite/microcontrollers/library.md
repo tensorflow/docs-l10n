@@ -12,13 +12,18 @@ TensorFlow Lite for Microcontrollers C++ 库是 [TensorFlow 仓库](https://gith
 
 使用 TensorFlow Lite for Microcontrollers 解释器最重要的文件位于项目的根目录，并附带测试：
 
-- [`all_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.h) 或 [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_mutable_op_resolver.h) 可以用来提供解释器运行模型时所使用的运算。由于 `all_ops_resolver.h` 会拉取每一个可用的运算，因此它会占用大量内存。在生产应用中，您应该仅使用 `micro_mutable_op_resolver.h` 拉取您的模型所需的运算。
-- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_error_reporter.h) 输出调试信息。
+```
+[`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_mutable_op_resolver.h)
+can be used to provide the operations used by the interpreter to run the
+model.
+```
+
+- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/tflite_bridge/micro_error_reporter.h) 输出调试信息。
 - [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_interpreter.h) 包含用于处理和运行模型的代码。
 
 请参阅[微处理器入门](get_started_low_level.md)获取典型用法的演练。
 
-构建系统提供了某些文件的特定于平台的实现。它们位于具有平台名称的目录中，例如 [`sparkfun_edge`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/sparkfun_edge)。
+构建系统提供了某些文件的特定于平台的实现。它们位于包含平台名称的目录中，例如 [`cortex-m`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/cortex_m_generic)。
 
 还有其他几个目录，包括：
 
@@ -40,7 +45,7 @@ TensorFlow Lite for Microcontrollers C++ 库是 [TensorFlow 仓库](https://gith
 
 TensorFlow Lite for Microcontrollers 能够使用 `Makefile` 生成包含所有必要源文件的独立项目。目前支持的环境有 Keil、Make 和 Mbed。
 
-要使用 Make 生成这些项目，请克隆 [TensorFlow 仓库](http://github.com/tensorflow/tensorflow)，然后运行以下命令：
+要使用 Make 生成这些项目，请克隆 [TensorFlow/tflite-micro 仓库](https://github.com/tensorflow/tflite-micro)，然后运行以下命令：
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile generate_projects
@@ -80,13 +85,13 @@ make -f tensorflow/lite/micro/tools/make/Makefile <project_name>_bin
 make -f tensorflow/lite/micro/tools/make/Makefile hello_world_bin
 ```
 
-默认情况下，项目将针对主机操作系统进行编译。如需指定不同的目标架构，请使用 `TARGET=`。下面的示例展示了如何为 SparkFun Edge 构建 *Hello World* 示例：
+默认情况下，项目将针对主机操作系统进行编译。如需指定不同的目标架构，请使用 `TARGET=` 和 `TARGET_ARCH=`。下面的示例展示了如何为通用 cortext-mo 构建 *Hello World* 示例：
 
 ```bash
-make -f tensorflow/lite/micro/tools/make/Makefile TARGET=sparkfun_edge hello_world_bin
+make -f tensorflow/lite/micro/tools/make/Makefile TARGET=cortex_m_generic TARGET_ARCH=cortex-m0 hello_world_bin
 ```
 
-指定目标后，任何可用的特定于目标的源文件将被用来代替原始代码。例如，子目录 `examples/hello_world/sparkfun_edge` 中包含了文件 `constants.cc` 和 `output_handler.cc` 的 SparkFun Edge 实现，指定目标 `sparkfun_edge` 后，将使用这些文件。
+指定目标后，任何可用的特定于目标的源文件将被用来代替原始代码。例如，子目录 `examples/hello_world/cortex_m_generic` 中包含文件 `constants.cc` 和 `output_handler.cc` 的 SparkFun Edge 实现，指定目标 `cortex_m_generic` 后，将使用这些文件。
 
 您可以在项目的 Makefile 中找到项目名称。例如，`examples/hello_world/Makefile.inc` 指定了 *Hello World* 示例的二进制名称。
 

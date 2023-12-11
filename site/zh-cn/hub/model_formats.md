@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-06-13' } *-->
-
 # 模型格式
 
 [tfhub.dev](https://tfhub.dev) 托管以下模型格式：TF2 SavedModel、TF1 Hub 格式、TF.js 和 TFLite。本页概述了每种模型格式。
+
+发布到 tfhub.dev 的内容可以自动镜像到其他模型中心，前提是它遵循指定的格式并且我们的条款 (https://tfhub.dev/terms) 允许。请参阅[我们的发布文档](publish.md)，了解更多详细信息。如果您想选择退出镜像，请参阅[我们的贡献文档](contribute_a_model.md)。
 
 ## TensorFlow 格式
 
@@ -26,7 +26,7 @@ TF2 SavedModel 是共享 TensorFlow 模型时的推荐格式。您可以参阅 [
 
 TF1 Hub 格式是 TF Hub 库所使用的自定义序列化格式。在语法层面上，TF1 Hub 格式与 TensorFlow 2 的 SavedModel 格式类似（文件名和协议消息相同），但在针对模块重用、构成和重新训练的语义上有所不同（例如，资源初始值设定项的存储方式不同，元图的标记惯例不同）。最简单的区分方式是查看磁盘上是否存在 `tfhub_module.pb` 文件。
 
-您可以通过在 [tfhub.dev 浏览页面](https://tfhub.dev/s?subtype=module,placeholder)中使用 TF1 版本筛选器，或通过访问[此链接](https://tfhub.dev/s?subtype=module,placeholder&tf-version=tf1)在 tfhub.dev 上浏览 TF1 Hub 格式的模型。
+您可以通过在 [thub.dev 浏览页面](https://tfhub.dev/s?subtype=module,placeholder)中使用 TF1 版本筛选器，或通过访问[此链接](https://tfhub.dev/s?subtype=module,placeholder&tf-version=tf1)在 tfhub.dev 上浏览 TF1 Hub 格式的模型。
 
 详细了解 TF Hub 上 TF1 Hub 格式的模型：
 

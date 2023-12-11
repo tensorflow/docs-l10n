@@ -51,7 +51,7 @@ set_default_context.set_default_context(context)
 
 但是，有一些常见的配置：
 
-[execution_context.set_local_python_execution_context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/native/execution_context.py) 函数使用原生编译器和[本地执行堆栈](execution.md#local-execution-stack)构造 `ExecutionContext`。
+[execution_context.set_local_cpp_execution_context](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/python/core/backends/native/execution_context.py) 函数使用原生编译器和<a>本地执行堆栈</a>构造 <code>ExecutionContext</code>。
 
 ## MapReduce
 

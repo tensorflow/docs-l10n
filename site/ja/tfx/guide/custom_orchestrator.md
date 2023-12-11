@@ -2,11 +2,11 @@
 
 ## カスタムオーケストレータ
 
-TFX は、複数の環境とオーケストレーションフレームワークに移植できるように設計されており、開発者はカスタムオーケストレータを作成するか、TFX がサポートしているデフォルトのオーケストレータ（[Airflow](airflow.md)、[Beam](beam_orchestrator.md)、および [Kubeflow](kubeflow.md)）のほかにオーケストレータを追加することができます。
+TFX は、複数の環境とオーケストレーションフレームワークに移植できるように設計されており、開発者はカスタムオーケストレータを作成するか、TFX がサポートしているデフォルトのオーケストレータ（[Local](local_orchestrator.md)、[Vertex AI](vertex.md)、[Airflow](airflow.md)、および [Kubeflow](kubeflow.md)）のほかにさらにオーケストレータを追加することができます。
 
 すべてのオーケストレータは [TfxRunner](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/tfx_runner.py) を継承している必要があります。TFX オーケストレータは論理パイプラインオブジェクトを取ります。このオブジェクトにはパイプライン引数、コンポーネント、および DAG が含まれており、TFX パイプラインのコンポーネントを DAG が定義する依存関係に基づいてスケジューリングを管理します。
 
-例として、[ComponentLauncher](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/component_launcher.py) でカスタムオーケストレータを作成する方法を見てみましょう。ComponentLauncher はすでに 1 つのコンポーネントのドライバ、executor、およびパブリッシャを処理するため、新しいオーケストレータでは DAG に基づいて ComponentLauncher をスケジューリングすることだけが必要です。単純なオーケストレータは、LocalDagRunner（https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/local/local_dag_runner.py）として提供されており、DAG のトポロジー順でコンポーネントを 1 つずつ実行します。
+例として、[BaseComponentLauncher](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/launcher/base_component_launcher.py) でカスタムオーケストレータを作成する方法を見てみましょう。BaseComponentLauncher はすでに 1 つのコンポーネントのドライバ、executor、およびパブリッシャを処理するため、新しいオーケストレータでは DAG に基づいて ComponentLauncher をスケジューリングすることだけが必要です。単純なオーケストレータは、[LocalDagRunner](https://github.com/tensorflow/tfx/blob/master/tfx/orchestration/local/local_dag_runner.py) として提供されており、DAG のトポロジー順でコンポーネントを 1 つずつ実行します。
 
 このオーケストレータは、Python DSL で次のように使用することができます。
 

@@ -36,31 +36,26 @@ unsigned int converted_model_tflite_len = 18200;
 
 一旦你已经生成了此文件，你可以将它包含入你的程序。在嵌入式平台上，将数组声明改变为 `const` 类型以获得更好的内存效率是重要的。
 
-<!--
-Removing this link for now because it is broken. Need to update TF example repos. b/244204652
-For an example of how to include and use a model in your program, see
-[`model.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/model.cc)
-in the *Hello World* example.
--->
+有关如何在程序中包含并使用模型的示例，请参阅 <em>Hello World</em> 示例中的 <a><code>evaluate_test.cc</code></a>。
 
 ## 模型结构与训练
 
-在设计一个面向微控制器的模型时，考虑模型的规模、工作负载，以及用到的运算是非常重要的。
+设计要在微控制器上使用的模型时，必须考虑模型的大小、工作负载和使用的运算。
 
 ### 模型规模
 
 模型必须在二进制文件和运行时方面都足够小，才能与程序的其他部分一起装入目标设备的内存。
 
-为了创建一个更小的模型，你可以在你的结构里使用更少和更小的层。然而，小规模的模型更易面临欠拟合问题。这意味着对于许多问题，尝试并使用符合内存限制的尽可能大规模的模型是有意义的。但是，使用更大规模的模型也会导致处理器工作负载的增加。
+为了创建一个更小的模型，您可以在架构中使用更少和更小的层。不过，小模型更易面临欠拟合问题。这意味着对于许多问题，明智的做法是尝试并使用可以装入内存的最大模型。但是，使用更大的模型也会导致处理器工作负载增加。
 
 注：在一个 Cortex M3 上，面向微控制器的 TensorFlow Lite 的核心运行时占 16 KB。
 
 ### 工作负载
 
-工作负载受到模型规模与复杂度的影响。大规模、复杂的模型可能会导致更高的占空比，即导致你所用设备处理器的工作时间增长、空闲时间缩短。视你的应用，这种情况所带来的电力消耗与热量输出的增加可能会成为一个问题。
+工作负载受到模型大小和复杂度的影响。大而复杂的模型可能会导致更高的占空比，即设备处理器的工作时间延长，空闲时间缩短。根据您的应用，能耗和热量输出增加可能会成为一个问题。
 
 ### 运算支持
 
-面向微控制器的 TensorFlow Lite 目前仅支持有限的部分 TensorFlow 运算，这影响了可以运行的模型结构。我们正致力于在参考实现和针对特定结构的优化方面扩展运算支持。
+面向微控制器的 TensorFlow Lite 目前仅支持有限的一部分 TensorFlow 运算，这影响了可以运行的模型架构。我们正致力于在参考实现和针对特定架构的优化方面扩展运算支持。
 
-可以在 [`all_ops_resolver.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.cc) 文件中查看支持的运算。
+可以在 [`micro_mutable_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_mutable_op_resolver.h) 文件中查看支持的运算。

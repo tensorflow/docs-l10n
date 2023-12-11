@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2021-10-10' review_interval: '6 months' } *-->
-
 # SavedModel をエクスポートする
 
 このページでは、TensorFlow プログラムのモデルを [TensorFlow 2 の SavedModel 形式](https://www.tensorflow.org/guide/saved_model)でエクスポートする方法について説明します。この形式は、TensorFlow Hub 上で事前トレーニングされたモデルとモデルピースの共有に推奨される方法です。これは以前の [TF1 Hub 形式](tf1_hub_module.md)に置き換わるもので、新しい API セットが付属しています。TF1 Hub 形式モデルのエクスポートに関する詳細は、[TF1 Hub 形式のエクスポート](exporting_hub_format.md)をご覧ください。TensorFlow Hub で共有するために  SavedModel を圧縮する方法については、[こちら](writing_documentation.md#model-specific_asset_content)をご覧ください。
@@ -83,10 +81,10 @@ Keras モデルから保存すると、ファインチューニングのすべ�
 
 ## TensorFlow Model Garden
 
-[TensorFlow Model Garden](https://github.com/tensorflow/models/tree/master/official) リポジトリには、[tfhub.dev](https://tfhub.dev/) にアップロードするために再利用可能な TF2 SavedModel を作成している、多くの例があります。
+[TensorFlow Model Garden](https://github.com/tensorflow/models/tree/master/research/official) リポジトリには、[tfhub.dev](https://tfhub.dev/) にアップロードするために再利用可能な TF2 SavedModel を作成している、多くの例があります。
 
 ## コミュニティリクエスト
 
-TensorFlow Hub チームは、tfhub.dev で利用可能なアセットのごく一部を生成しています。モデルの作成は、主に Google や Deepmind の研究者、企業や学術研究機関、ML 愛好家の方々を頼りとしています。そのため、特定のアセットに対するコミュニティの要求を満たす保証や、新しいアセットが利用可能になるまでの時間の見積もりはできません。
+TensorFlow Hub チームは、tfhub.dev で利用可能なアセットのごく一部を生成しています。モデルの作成は、主に Google や DeepMind の研究者、企業や学術研究機関、ML 愛好家の方々を頼りとしています。そのため、特定のアセットに対するコミュニティの要求を満たす保証や、新しいアセットが利用可能になるまでの時間の見積もりはできません。
 
 以下の[コミュニティモデルリクエスト マイルストーン](https://github.com/tensorflow/hub/milestone/1)には、コミュニティからの特定のアセットのリクエストが含まれています。ご自身やお知り合いでアセットを制作して tfhub.dev で共有したいという方があれば、ぜひご提供ください！

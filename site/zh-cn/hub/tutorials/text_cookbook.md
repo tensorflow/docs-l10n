@@ -16,7 +16,7 @@
 
 ### Estimator
 
-[文本分类](https://github.com/tensorflow/hub/blob/master/docs/tutorials/text_classification_with_tf_hub.ipynb) - 使用 Estimator 构建 IMDB 情感分类器的示例。包含多个改进提示和模块比较部分。
+[文本分类](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/text_classification_with_tf_hub.ipynb) - 使用 Estimator 构建 IMDB 情感分类器的示例。包含多个改进提示和模块比较部分。
 
 ### BERT
 
@@ -24,20 +24,19 @@
 
 ### Kaggle
 
-[Kaggle 上的 IMDB 分类](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) - 演示如何在 Colab 中与 Kaggle 竞赛轻松交互，包括下载数据和提交结果。
+| Estimator | Keras | TF2 | TF Datasets | BERT | Kaggle API --- | --- | --- | --- | --- | --- | --- 文本分类 |  |  |  |  |  | 使用 Keras 进行文本分类 |  |  |  |  |  | 使用 TF Hub 上的 BERT 预测电影评论情感 |  |  |  |  |  | Kaggle 上的 IMDB 分类 |  |  |  |  |  |
 
- | Estimator | Keras | TF2 | TF Datasets | BERT | Kaggle API
---- | --- | --- | --- | --- | --- | ---
-[文本分类](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  |
-[使用 Keras 进行文本分类](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub) |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |
-[使用 TF Hub 上的 BERT 预测电影评论情感](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |
-[Kaggle 上的 IMDB 分类](https://github.com/tensorflow/hub/blob/master/examples/colab/text_classification_with_tf_hub_on_kaggle.ipynb) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |  |  |  |  | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png)
+```
+                                                                                                                                                                                     | Estimator                                                                                         | Keras                                                                                             | TF2                                                                                               | TF Datasets                                                                                       | BERT                                                                                              | Kaggle APIs
+```
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------- [Text classification](https://www.tensorflow.org/hub/tutorials/text_classification_with_tf_hub)                                                                                          | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |                                                                                                   |                                                                                                   |                                                                                                   |                                                                                                   | [Text classification with Keras](https://www.tensorflow.org/tutorials/keras/text_classification_with_hub)                                                                                |                                                                                                   | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |                                                                                                   | [Predicting Movie Review Sentiment with BERT on TF Hub](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb)                          | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |                                                                                                   |                                                                                                   |                                                                                                   | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) | [IMDB classification on Kaggle](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/text_classification_with_tf_hub_on_kaggle.ipynb) | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png) |                                                                                                   |                                                                                                   |                                                                                                   |                                                                                                   | ![done](https://www.gstatic.com/images/icons/material/system_gm/1x/bigtop_done_googblue_18dp.png)
 
 ### 使用 FastText 嵌入向量的孟加拉语任务
 
 TensorFlow Hub 提供的模块目前不支持所有语言。下面的教程展示了利用 TensorFlow Hub 进行快速试验和模块化 ML 开发的方法。
 
-[孟加拉语文章分类器](https://github.com/tensorflow/hub/blob/master/examples/colab/bangla_article_classifier.ipynb) - 演示如何创建可重用的 TensorFlow Hub 文本嵌入向量，以及如何用它为 [BARD 孟加拉语文章数据集](https://github.com/tanvirfahim15/BARD-Bangla-Article-Classifier)训练 Keras 分类器。
+[孟加拉语文章分类器](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/bangla_article_classifier.ipynb) - 演示如何创建可重用的 TensorFlow Hub 文本嵌入向量，以及如何用它为 [BARD 孟加拉语文章数据集](https://github.com/tanvirfahim15/BARD-Bangla-Article-Classifier)训练 Keras 分类器。
 
 ## 语义相似度
 
@@ -47,19 +46,19 @@ TensorFlow Hub 提供的模块目前不支持所有语言。下面的教程展�
 
 ### 基础
 
-[语义相似度](https://github.com/tensorflow/hub/blob/master/examples/colab/semantic_similarity_with_tf_hub_universal_encoder.ipynb) - 展示如何使用句子编码器模块计算句子相似度。
+[语义相似度](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/semantic_similarity_with_tf_hub_universal_encoder.ipynb) - 展示如何使用句子编码器模块计算句子相似度。
 
 ### 跨语言
 
-[跨语言语义相似度](https://github.com/tensorflow/hub/blob/master/examples/colab/cross_lingual_similarity_with_tf_hub_multilingual_universal_encoder.ipynb) - 展示如何使用其中一种跨语言句子编码器跨语言计算句子相似度。
+[跨语言语义相似度](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/cross_lingual_similarity_with_tf_hub_multilingual_universal_encoder.ipynb) - 展示如何使用其中一种跨语言句子编码器跨语言计算句子相似度。
 
 ### 语义检索
 
-[语义检索](https://github.com/tensorflow/hub/blob/master/examples/colab/retrieval_with_tf_hub_universal_encoder_qa.ipynb) - 展示如何使用问答句子编码器为文档集合建立索引，以基于语义相似度进行检索。
+[语义检索](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/retrieval_with_tf_hub_universal_encoder_qa.ipynb) - 展示如何使用问答句子编码器为文档集合建立索引，以基于语义相似度进行检索。
 
 ### SentencePiece 输入
 
-[使用通用编码器 Lite 计算语义相似度](https://github.com/tensorflow/hub/blob/master/examples/colab/semantic_similarity_with_tf_hub_universal_encoder_lite.ipynb) - 展示如何在输入而非文本上使用接受 [SentencePiece](https://github.com/google/sentencepiece) ID 的句子编码器模块。
+[使用通用编码器 Lite 计算语义相似度](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/semantic_similarity_with_tf_hub_universal_encoder_lite.ipynb) - 展示如何在输入而非文本上使用接受 [SentencePiece](https://github.com/google/sentencepiece) ID 的句子编码器模块。
 
 ## 模块创建
 

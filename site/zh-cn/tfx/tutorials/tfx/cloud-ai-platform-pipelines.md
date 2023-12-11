@@ -41,7 +41,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 同意 Google Cloud 条款及条件
 
-     <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/welcome-popup.png">
+      <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/welcome-popup.png">
 
 3. 如果您想从免费试用帐号开始，请点击 [**Try For Free**](https://console.cloud.google.com/freetrial)（或 [**Get started for free**](https://console.cloud.google.com/freetrial)）。
 
@@ -75,15 +75,15 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 点击 **+ New Instance** 创建一个新集群。
 
-     <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-instance.png">
+      <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-instance.png">
 
 3. 在 **Kubeflow Pipelines** 概览页面上，点击 **Configure**。
 
-     <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/configure.png">
+      <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/configure.png">
 
 4. 点击“Enable”以启用 Kubernetes Engine API
 
-    <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/enable_api.png">
+     <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/enable_api.png">
 
     注：您可能需要等待几分钟才能继续，此时我们将为您启用 Kubernetes Engine API。
 
@@ -93,7 +93,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     2. **重要提示**：选中标有 *Allow access to the following cloud APIs* 的复选框。（此群集需要此权限才能访问项目的其他部分。如果跳过此步骤，稍后修复会有些棘手。）
 
-        <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/check-the-box.png">
+         <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/check-the-box.png">
 
     3. 点击 **Create New Cluster** 并稍候几分钟，直到集群创建完成为止。此过程需要几分钟时间。完成后，您将看到如下消息：
 
@@ -113,7 +113,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 3. 创建已安装 TensorFlow Enterprise 2.7（或更高版本）的**新笔记本**。
 
-    <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-notebook.png">
+     <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-notebook.png">
 
     New Notebook -&gt; TensorFlow Enterprise 2.7 -&gt; Without GPU
 
@@ -125,7 +125,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     2. 如果您需要留在免费层级，则需要在 **Machine configuration** 下选择 1 个或 2 个 vCPU 的配置。
 
-        <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
+         <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
     3. 等待新笔记本创建完成，然后点击 **Enable Notebooks API**
 
@@ -139,11 +139,11 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 在本教程中使用的集群所在行上，点击 **Open Pipelines Dashboard**。
 
-    <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
+     <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
 
 3. 在 **Getting Started** 页面上，点击 **Open a Cloud AI Platform Notebook on Google Cloud**。
 
-    <img src="images/cloud-ai-platform-pipelines/open-template.png">
+     <img src="images/cloud-ai-platform-pipelines/open-template.png">
 
 4. 选择您用于本教程的笔记本实例并点击 **Continue**，然后点击 **Confirm**。
 
@@ -466,7 +466,7 @@ components.append(evaluator)
 
 ### 组件
 
-- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) 会将模型部署到应用基础架构。
+- [Pusher](https://www.tensorflow.org/tfx/guide/pusher) 会将模型部署到应用基础结构。
 
 ### 在 JupyterLab 文件编辑器中：
 

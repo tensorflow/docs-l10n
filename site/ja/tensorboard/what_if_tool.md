@@ -1,5 +1,7 @@
 # What-If Tool ダッシュボードを使ったモデルの理解
 
+> **警告** このドキュメントは TensorBoard 2.11 以前のみを対象としています。What-If Tool のアクティブメンテナンスは終了しました。代わりに、アクティブメンテナンスが行われている[Learning Interpretability Tool（LIT）](https://pair-code.github.io/lit/)をご覧ください。
+
 ![What-If Tool](./images/what_if_tool.png)
 
 What-If Tool（WIT）は、ブラックボックス分類と回帰 ML モデルの理解を広げるための使いやすいインターフェースを提供しています。このプラグインを使用すると、大規模なサンプルセットで推論を実行し、さまざまな方法で即時に結果を視覚化することができます。また、サンプルを手動またはプログラムで編集し、モデルを再実行して変更の結果を確認することも可能です。データセットのサブセットにおけるモデルのパフォーマンスと公平性を調べるためのツールも含まれています。
@@ -27,7 +29,7 @@ TensorBoard で事前トレーニング済みのモデルを使用して WIT を
 
 環境変数 MODEL_PATH をマシン上の結果のモデルディレクトリの場所に設定します。
 
-次に、[公式ドキュメント](https://www.tensorflow.org/serving/docker)に従って、docker と TensorFlow Serving をインストールします。
+次に、[公式ドキュメント](https://www.tensorflow.org/tfx/serving/docker)に従って、docker と TensorFlow Serving をインストールします。
 
 docker を使用して、`docker run -p 8500:8500 --mount type=bind,source=${MODEL_PATH},target=/models/uci_income -e MODEL_NAME=uci_income -t tensorflow/serving` でモデルを配信します。docker のセットアップによっては、コマンドを `sudo` で実行する必要があります。
 
@@ -45,4 +47,4 @@ docker を使用して、`docker run -p 8500:8500 --mount type=bind,source=${MOD
 
 ツールの機能に関する詳細は、[What-If Tool のウォークスルー](https://pair-code.github.io/what-if-tool/walkthrough.html)をご覧ください。
 
-このモデルが予測しようとしているデータセットのグラウンドトゥルースの特徴量は「Target」と名付けられているため、「Performance & Fairness」タブを使用する際、「Target」はグラウンドトゥルース特徴量ドロップダウンに指定するものとなります。
+このモデルが予測しようとしているデータセットのグラウンドトゥルースの特徴量は「Target」と名付けられているため、「Performance &amp; Fairness」タブを使用する際、「Target」はグラウンドトゥルース特徴量ドロップダウンに指定するものとなります。

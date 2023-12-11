@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-04-08' review_interval: '6 months' } *-->
-
 # 一般的な課題
 
 このリストに該当する課題が掲載されていない場合は、新しい課題を送信する前に [GitHub の課題](https://github.com/tensorflow/hub/issues)を検索してください。
+
+**注意:** このドキュメントの例では、TFhub.dev URL ハンドルを使用しています。その他の有効なハンドルタイプについては、[こちら](tf2_saved_model.md#model_handles)をご覧ください。
 
 ## TypeError: 'AutoTrackable' object is not callable
 

@@ -304,7 +304,7 @@ Metadata Extractor ライブラリは、さまざまなプラットフォーム�
 
 Android アプリで Metadata Extractor ライブラリを使用するには、[JCenter にホストされている TensorFlow Lite Metadata AAR ](https://search.maven.org/artifact/org.tensorflow/tensorflow-lite-metadata) がお勧めです。`MetadataExtractor` クラスだけでなく、[メタデータスキーマ](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/metadata/metadata_schema.fbs)と[モデルスキーマ](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema.fbs)の FlatBuffers Java バインディングも含まれています。
 
-これは、`build.gradle` 依存関係で次のように指定できます。
+これは、`build.gradle` 依存関係に次のように指定できます。
 
 ```build
 dependencies {

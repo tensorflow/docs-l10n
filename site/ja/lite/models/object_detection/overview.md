@@ -6,7 +6,7 @@
 
 <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/images/detection.png?raw=true" alt="Android の例のスクリーンショット">
 
-注意: (1) 既存のモデルを統合するには、[TensorFlow Lite Task Library](https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector) を試してください。(2) モデルをカスタマイズするには、[TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) を試してください。
+注意: (1) 既存のモデルを統合するには、[TensorFlow Lite Task Library](../../inference_with_metadata/task_library/object_detector) を試してください。(2) モデルをカスタマイズするには、[TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/guide/model_maker) を試してください。
 
 ## はじめに
 
@@ -35,7 +35,7 @@ TensorFlow Lite を初めて使用する場合、Android または iOS を使用
 
 TensorFlow Lite Task Library のそのまま簡単に使用できる API を利用して、わずか数行のコードで[物体検出モデルを統合する](../../inference_with_metadata/task_library/object_detector)ことができます。また、TensorFlow Lite Interpreter Java API を使用して、[独自のカスタム推論パイプライン](../../guide/inference#load_and_run_a_model_in_java)を構築することもできます。
 
-以下の Android の例では、両方のメソッドをそれぞれ [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_task_api) および [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_interpreter) として実装しています。
+以下の Android の例では、両方のメソッドをそれぞれ [Task ライブラリ](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android_play_services)と [Interpreter API](https://github.com/tensorflow/examples/tree/eb925e460f761f5ed643d17f0c449e040ac2ac45/lite/examples/object_detection/android/lib_interpreter) で実装しています。
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android">Android の例を見る</a>
 
@@ -185,6 +185,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
 
 たとえば、次の画像では、ナシ（モデルが検出するようにトレーニングされた物体ではない）が「人」として誤って識別されました。これは、適切なカットオフを選択することで無視できる誤検知の例です。この場合、0.6（または 60％）のカットオフは、誤検知を適切に除外します。
 
+
 <img src="https://github.com/tensorflow/docs-l10n/blob/master/site/ja/lite/models/object_detection/images/android_apple_banana.png?raw=true" alt="Screenshot of Android example">
 
 #### 位置
@@ -224,7 +225,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
   </thead>
   <tr>
     <td rowspan="3">       <a href="https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1?lite-format=tflite">COCO SSD MobileNet v1</a> </td>
-    <td rowspan="3">27 Mb</td>
+    <td rowspan="3">       27 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>22ms</td>
     <td>46ms*</td>
@@ -253,7 +254,7 @@ Android でこの前処理を行う方法については[サンプルアプリ�
 
 ほとんどのダウンロード zip には、`model.tflite `ファイルが含まれています。含まれていない場合は、[これらの手順](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md)で TensorFlowLite フラットバッファーを生成できます。[TF2 Object Detection Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md)の SSD モデルは、[こちら](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md)の手順を使用して TensorFlowLite に変換することもできます。検出モデルは、モバイル対応のソースモデルを生成する中間ステップを必要とするため、[TensorFlow Lite Converter](../../models/convert) を使用して直接変換できないことに注意してください。上記リンクのスクリプトは、このステップを実行します。
 
-[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) と [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md) の両方のエクスポートスクリプトには、より多くの出力オブジェクトや、より低速でより正確な後処理を可能にするパラメータがあります。サポートされている引数の完全なリストを表示するには、スクリプトで`--help`を使用してください。
+[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) と [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md) の両方のエクスポートスクリプトには、より多くの出力オブジェクトや、より低速でより正確な後処理を可能にするパラメータがあります。サポートされている引数の完全なリストを表示するには、スクリプトで `--help` を使用してください。
 
 > 現在、オンデバイス推論は SSD モデルでのみ最適化されています。CenterNet や EfficientDet などの他のアーキテクチャに対するサポートの改善は研究されています。
 

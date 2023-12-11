@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-07-11'} *-->
-
 # TensorFlow 2 における TF Hub の SavedModel
 
 TensorFlow Hub でトレーニング済みのモデルやモデルピースを共有するには、[TensorFlow 2 の SavedModel 形式](https://www.tensorflow.org/guide/saved_model)が推奨されます。古い [TF1 Hub 形式](tf1_hub_module.md)に置き換わるものであり、新しい API が含まれます。
@@ -36,7 +34,7 @@ model = tf.keras.Sequential([
 ])
 ```
 
-[Text classification colab](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb) は、こういった分類器をトレーニングして評価する方法を示す完全なサンプルです。
+[Text classification colab](https://colab.research.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_text_classification.ipynb) は、こういった分類器をトレーニングして評価する方法を示す完全なサンプルです。
 
 `hub.KerasLayer` のモデルの重みは、デフォルトでトレーニング対象外に設定されています。これを変更する方法は、以下のファインチューニングのセクションで説明されています。Keras では通常通り、重みは同じレイヤーのすべてのアプリケーションで共有されます。
 
@@ -49,6 +47,10 @@ model = tf.keras.Sequential([
 TensorFlow Hub から（または [ホスティング](hosting.md)プロトコルを実装するほかの HTTPS サーバーから）SavedModel を使用すると、すでに存在しない限りその SavedModel をローカルファイルシステムにダウンロードして解凍します。ダウンロードして解凍される SavedModel のキャッシュに使用するデフォルトの一時的な場所は、環境変数 `TFHUB_CACHE_DIR` を設定してオーバーライドすることができます。詳細は、[キャッシング](caching.md)をご覧ください。
 
 ### 低レベルの TensorFlow で SavedModel を使用する
+
+#### モデルのハンドル
+
+SavedModels は指定された `handle` から読み込むことができます。ここで、`handle` はファイルシステムのパスであり、有効な TFhub.dev モデル URL（"https://tfhub.dev/..." など）です。Kaggle のモデル URL はモデルアセットに関連する規約とライセンスに従って、TFhub.dev ハンドルをミラーリングしています（"https://www.kaggle.com/..." など）。Kaggle モデルのハンドルは、対応する TFhub.dev ハンドルと同じです。
 
 関数 `hub.load(handle)` は、（`handle` がファイルシステムにすでに存在しない場合は）SavedModel をダウンロードして解凍し、TensorFlow のビルトイン関数 `tf.saved_model.load()` で読み込んだ結果を返します。したがって、`hub.load()` はあらゆる有効な SavedModel を処理することができます（以前の TF1 の `hub.Module` とは異なります）。
 
@@ -145,7 +147,7 @@ layer = hub.KerasLayer(..., trainable=True)
 
 上記のようにすることで、レイヤーが読み込む SavedModel をファインチューニングすることができます。SavedModel に宣言されたトレーニング対象の重みと重み正則化器を Keras モデルに追加し、SavedModel の計算をトレーニングモードで実行します（ドロップアウトなど）。
 
-[image classification colab](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb) には、エンドツーエンドの例が、オプションのファインチューニングとともに含まれています。
+[image classification colab](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_image_retraining.ipynb) には、エンドツーエンドの例が、オプションのファインチューニングとともに含まれています。
 
 #### ファインチューニングの結果を再エクスポートする
 

@@ -123,8 +123,6 @@ converter.representative_dataset = representative_dataset
 tflite_quant_model = converter.convert()
 </pre>
 
-注：如果遇到当前无法量化的运算，转换器会引发错误。
-
 ### float16 量化
 
 您可以通过将权重量化为 float16（16 位浮点数的 IEEE 标准）来缩减浮点模型的大小。要启用权重的 float16 量化，请使用以下步骤：
@@ -175,7 +173,12 @@ converter.target_spec.supported_ops = [tf.lite.OpsSet.EXPERIMENTAL_TFLITE_BUILTI
 tflite_quant_model = converter.convert()
 </pre>
 
-通过此量化方案提高了准确率的用例示例包括：* 超分辨率、* 音频信号处理（如降噪和波束成形）、* 图像降噪、* 单个图像 HDR 重建。
+此量化方案提供的准确率改进的用例示例包括：
+
+- 超分辨率，
+- 音频信号处理，如噪声消除和波束成形，
+- 图像降噪，
+- 基于单张图像的 HDR 重建。
 
 这种量化的缺点是：
 

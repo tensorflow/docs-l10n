@@ -167,9 +167,9 @@ bazel build -c opt --config=monolithic tensorflow/lite/delegates/flex:tensorflow
 
 プラットフォーム | ライブラリ名
 --- | ---
-Linux | libtensorflowlite_flex.so
-macOS | libtensorflowlite_flex.dylib
-Windows | tensorflowlite_flex.dll
+Linux | `libtensorflowlite_flex.so`
+macOS | `libtensorflowlite_flex.dylib`
+Windows | `tensorflowlite_flex.dll`
 
 `TfLiteDelegate` は、共有ライブラリがリンクされている限り、ランタイム時にインタープリタを作成する際に自動的に作成されます。通常は他のデリゲートタイプでも必要とされるため、デリゲートインスタンスを明示的にインストールする必要はありません。
 

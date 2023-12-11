@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2022-07-27' review_interval: '6 months' } *-->
-
 # ドキュメントの作成
 
 tfhub.dev にモデルを貢献するには、Markdown 形式のドキュメントを提供する必要があります。tfhub.dev にモデルを追加するプロセスの完全な概要については、[モデルの貢献](contribute_a_model.md)ガイドをご覧ください。
+
+**注意:** このドキュメントでは「パブリッシャー」という用語が使用されています。これは、tfhub.dev にホストされているモデルのレコード所有者を指します。
 
 ## Markdown ドキュメントの種類
 
@@ -139,7 +139,7 @@ Encoder of greater-than-word length text trained on a variety of data.
 - `network-architecture`: モデルがトレーニングされたネットワークアーキテクチャ、たとえば "mobilenet-v3" です。 サポートされているすべての値は [network_architecture.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/network_architecture.yaml) で定義されています。
 - `language`: テキストがトレーニングされた言語の言語コード、たとえば "en" です。サポートされているすべての値は [language.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/language.yaml) で定義されています。
 - `license`: モデルに適用されるライセンス、たとえば "mit" です。公開されたモデルのデフォルトの想定ライセンスは、[Apache2.0ライセンス](https://opensource.org/licenses/Apache-2.0)です。サポートされているすべての値は [license.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/license.yaml) で定義されています。`custom` ライセンスでは、個別にで特別な配慮が必要になることに注意してください。
-- `colab`: モデルの使用方法またはトレーニング方法を示すノートブックへの HTTPS URL（[bigbigan-resnet50 の](https://colab.sandbox.google.com/github/tensorflow/hub/blob/master/examples/colab/bigbigan_with_tf_hub.ipynb)[例](https://tfhub.dev/deepmind/bigbigan-resnet50/1)）。 `colab.research.google.com` である必要があります。 GitHub でホストされている Jupyter ノートブックには、 `https://colab.research.google.com/github/ORGANIZATION/PROJECT/ blob/master/.../my_notebook.ipynb` からアクセスできることに注意してください。
+- `colab`: モデルの使用方法またはトレーニング方法を示すノートブックへの HTTPS URL（[bigbigan-resnet50 の](https://colab.sandbox.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/bigbigan_with_tf_hub.ipynb)[例](https://tfhub.dev/deepmind/bigbigan-resnet50/1)）。 `colab.research.google.com` である必要があります。 GitHub でホストされている Jupyter ノートブックには、 `https://colab.research.google.com/github/ORGANIZATION/PROJECT/ blob/master/.../my_notebook.ipynb` からアクセスできることに注意してください。
 - `demo`: TF.js モデルの使用方法を示すWebサイトへの HTTPS URL（[posenet](https://teachablemachine.withgoogle.com/train/pose) の[例](https://tfhub.dev/tensorflow/tfjs-model/posenet/mobilenet/float/075/1/default/1)）。
 - `interactive-visualizer`: モデルページに埋め込む必要のあるビジュアライザー名、たとえば "vision"。ビジュアライザーを表示すると、ユーザーはモデルの予測をインタラクティブに調べることができます。サポートされているすべての値は、 [interactive_visualizer.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/interactive_visualizer.yaml) で定義されています。
 

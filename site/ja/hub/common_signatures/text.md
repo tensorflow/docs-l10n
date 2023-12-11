@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2021-03-09' } *-->
-
 # テキストの一般的なシグネチャ
 
 このページでは、テキスト入力を受け入れる  [TF1 Hub 形式](../tf1_hub_module.md) のモジュ―ルで実装すべき一般的なシグネチャを説明します。（[TF2 SavedModel 形式](../tf2_saved_model.md)については、同様の [SavedModel API](../common_saved_model_apis/text.md) をご覧ください。）

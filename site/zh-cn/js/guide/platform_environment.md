@@ -117,7 +117,7 @@ tf.ready().then(() => {...});
 
 ##### 为何使用 WASM？
 
-[WASM](https://webassembly.org/) 于 2015 年作为一种基于 Web 的新型二进制格式面世，提供以 JavaScript、C、C++ 等语言编写的程序。WASM 自 2017 年起受到 Chrome、Safari、Firefox 和 Edge [支持](https://webassembly.org/roadmap/)，并获得全球 [90% 设备](https://caniuse.com/#feat=wasm)的支持。
+[WASM](https://webassembly.org/) 于 2015 年作为一种基于 Web 的新型二进制格式面世，提供以 JavaScript、C、C++ 等语言编写的程序，具有用于在 Web 上运行的编译目标。WASM 自 2017 年起受到 Chrome、Safari、Firefox 和 Edge [支持](https://webassembly.org/roadmap/)，并获得全球 [90% 设备](https://caniuse.com/#feat=wasm)的支持。
 
 **性能**
 

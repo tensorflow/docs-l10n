@@ -16,7 +16,7 @@
 
 TensorFlow Lite を初めて使用する場合、Android または iOS を使用する場合は、以下のサンプルアプリをご覧ください。
 
-[TensorFlow Lite Task Library](../../inference_with_metadata/task_library/image_classifier) のそのまま簡単に使用できる API を利用して、わずか数行のコードで画像分類モデルを統合できます。また、[TensorFlow Lite Support Library](../../inference_with_metadata/lite_support) を使用して、独自のカスタム推論パイプラインを構築することもできます。
+[TensorFlow Lite Task Library](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/g3doc/inference_with_metadata/task_library/image_classifier.md) のそのまま簡単に使用できる API を利用して、わずか数行のコードで画像分類モデルを統合できます。また、[TensorFlow Lite Support Library](../../inference_with_metadata/lite_support) を使用して、独自のカスタム推論パイプラインを構築することもできます。
 
 以下の Android の例では、両方のメソッドをそれぞれ [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_task_api) および [lib_support](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_support) として実装しています。
 
@@ -80,7 +80,7 @@ Android/iOS 以外のプラットフォームを使用する場合、または�
 
 TensorFlow Lite には、さまざまな画像分類モデルが用意されており、すべて元のデータセットでトレーニング済みです。MobileNet、Inception、NASNet などのモデルアーキテクチャは、<a href="https://tfhub.dev/s?deployment-format=lite">TensorFlow Hub</a> で提供されています。ユースケースに最適なモデルを選択するには、個別のアーキテクチャと、各種モデル間のトレードオフをある程度検討する必要があります。これらのモデルトレードオフの一部は、パフォーマンス、精度、モデルサイズなどのメトリックに基づいています。たとえば、医療画像アプリで低速でも精度の高いモデルが必要なときに、バーコードスキャナを構築するための高速なモデルが必要になる場合があります。
 
-提供される<a href="https://www.tensorflow.org/lite/guide/hosted_models#image_classification">画像分類モデル</a>は、さまざまなサイズの入力を許可します。一部のモデルでは、これはファイル名に示されています。たとえば、Mobilenet_V1_1.0_224 モデルは、224x224 ピクセルの入力を受け入れます。すべてのモデルで、ピクセルごとに 3 つのカラーチャネル (赤、緑、青) が必要です。量子化モデルはチャネルごとに 1 バイトを必要とし、浮動小数点モデルはチャネルごとに 4 バイトを必要とします。<a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/EXPLORE_THE_CODE.md">Android</a> と <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md">iOS</a> コードサンプルは、フルサイズのカメラ画像を各モデルに必要な形式に処理する方法を示しています。
+提供される<a href="https://www.tensorflow.org/lite/guide/hosted_models#image_classification">画像分類モデル</a>は、さまざまなサイズの入力を許可します。一部のモデルでは、これはファイル名に示されています。たとえば、Mobilenet_V1_1.0_224 モデルは、224x224 ピクセルの入力を受け入れます。すべてのモデルで、ピクセルごとに 3 つのカラーチャネル（赤、緑、青）が必要です。量子化モデルはチャネルごとに 1 バイトを必要とし、浮動小数点モデルはチャネルごとに 4 バイトを必要とします。<a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android_java">Android</a> と <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS</a> コードサンプルは、フルサイズのカメラ画像を各モデルに必要な形式に処理する方法を示しています。
 
 <h3>使用と制限</h3>
 
@@ -92,7 +92,7 @@ TensorFlow Lite 画像分類モデルは、単一ラベル分類に役立ちま�
 
 <ul>
   <li>画像内の 1 つ以上の物体の種類と位置を予測する場合（<a href="../object_detection/overview">物体検出</a>を参照）</li>
-  <li>画像の構成（被写体と背景）を予測する場合（<a href="../segmentation/overview">セグメンテーション</a>をご覧ください）</li>
+  <li>画像の構成 (被写体と背景) を予測する場合 (<a href="../segmentation/overview">セグメンテーション</a>を参照)</li>
 </ul>
 
 ターゲットデバイスでスターターモデルを実行してから、さまざまなモデルを試し、パフォーマンス、精度、モデルサイズの最適なバランスを見つけてください。
@@ -127,7 +127,7 @@ TensorFlow Lite 量子化 MobileNet モデルのパフォーマンスは、3.7ms
   </thead>
   <tr>
     <td rowspan="3"><a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a></td>
-    <td rowspan="3">       4.3 Mb</td>
+    <td rowspan="3">4.3 Mb</td>
     <td>Pixel 3 (Android 10)</td>
     <td>6ms</td>
     <td>13ms*</td>

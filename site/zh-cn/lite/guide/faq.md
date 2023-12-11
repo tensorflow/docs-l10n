@@ -10,7 +10,7 @@
 
 #### 为何有些运算未在 TensorFlow Lite 中实现？
 
-为了使 TFLite 保持轻量，TFLite 中只支持某些 TF 算子（列在[允许列表](op_select_allowlist)中）。
+为了使 TFLite 保持轻量，TFLite 中只支持某些 TF 算子（列在[允许列表](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/g3doc/guide/op_select_allowlist.md)中）。
 
 #### 为什么我的模型无法转换？
 
@@ -70,7 +70,7 @@ bazel run //tensorflow/lite/tools:visualize model.tflite visualized_model.html
 优化 TensorFlow Lite 性能的高级过程如下所示：
 
 - *确保您为任务选用了合适的模型*。对于图像分类，请查看 [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&module-type=image-classification)。
-- *调整线程数*。许多 TensorFlow Lite 算子都支持多线程内核。您可以在 [C++ API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L345) 中使用 `SetNumThreads()` 执行调整。但是，增加线程数会导致性能发生变化，具体取决于环境。
+- *调整线程数*。许多 TensorFlow Lite 算子都支持多线程内核。您可以在 <a>C++ API</a> 中使用 <code>SetNumThreads()</code> 执行调整。但是，增加线程数会导致性能发生变化，具体取决于环境。
 - *使用硬件加速器*。TensorFlow Lite 支持使用委托针对特定硬件进行模型加速。请参阅我们的[委托](../performance/delegates)指南，了解支持哪些加速器以及如何在设备端模型中使用它们。
 - *（高级）对模型进行性能分析*。TensorFlow Lite [基准测试工具](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)具有内置性能分析器，可显示每个算子的统计信息。如果您了解如何针对您的特定平台优化算子性能，那么您可以实现[自定义算子](ops_custom)。
 

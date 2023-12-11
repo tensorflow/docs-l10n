@@ -131,7 +131,7 @@ tfds.folder_dataset.write_metadata(
 ```python
 builder = tfds.builder_from_directory('~/path/to/my_dataset/3.0.0/')
 
-# Metadata are avalailable as usual
+# Metadata are available as usual
 builder.info.splits['train'].num_examples
 
 # Construct the tf.data.Dataset pipeline
@@ -153,7 +153,7 @@ builder = tfds.builder_from_directories(builder_dirs=[
     '~/path/my_dataset/agent3/1.0.0/',
 ])
 
-# Metadata are avalailable as usual
+# Metadata are available as usual
 builder.info.splits['train'].num_examples
 
 # Construct the tf.data.Dataset pipeline

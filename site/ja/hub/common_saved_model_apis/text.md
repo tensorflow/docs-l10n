@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2022-05-22' } *-->
-
 # テキストタスクの一般的な SavedModel API
 
 このページでは、テキスト関連のタスクに使用する [TF2 SavedModel](../tf2_saved_model.md) が [Reusable SavedModel API](../reusable_saved_models.md) をどのように実装しているかを説明します。（これは、[テキストの共通シグネチャ](../common_signatures/text.md)に置き換わります。[TF1 Hub 形式](../tf1_hub_module)は使用廃止となっています。）
@@ -64,7 +62,7 @@ embeddings = hub.KerasLayer("path/to/model", trainable=...)(text_input)
 
 ### 例
 
-- Colab チュートリアル「[映画レビューを使ったテキスト分類](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)」
+- Colab チュートリアル「[映画レビューを使ったテキスト分類](https://colab.research.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_text_classification.ipynb)」
 
 <a name="text-embeddings-preprocessed"></a>
 
@@ -234,6 +232,6 @@ encoder_outputs = encoder(encoder_inputs)
 
 分散ストラテジースコープの内外でのプリプロセッサとエンコーダオブジェクトの読み込みについては、事前処理された入力によるテキスト埋め込みに使用する API（上参照）と同じルールが適用されます。
 
-### Examples
+### 例
 
 - Colab チュートリアル「[Solve GLUE tasks using BERT on TPU ](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb)」

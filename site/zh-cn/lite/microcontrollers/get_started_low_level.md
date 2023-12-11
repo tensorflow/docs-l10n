@@ -8,8 +8,8 @@
 
 端到端工作流包括以下步骤：
 
-1. [训练模型](#train_a_model)（用 Python 编写）：Jupyter 笔记本，用于训练、转换和优化模型供设备端使用。
-2. [运行推断](#run_inference)（用 C++ 11 编写）：端到端单元测试，使用 [C++ 库](library.md)在模型上运行推断。
+1. [训练一个模型](#train_a_model)（使用Python 编写）：一个用于训练、转换和优化模型以在设备端使用的 Python 文件。
+2. [运行推断](#run_inference)（使用 C++ 17 编写）：端到端单元测试，使用 [C++ 库](library.md)在模型上运行推断。
 
 ## 获得支持的设备
 
@@ -30,9 +30,9 @@
 
 注：您可以跳过本部分，使用示例代码中包含的训练好的模型。
 
-请使用 Google Colab 来[训练您自己的模型](https://colab.research.google.com/github/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/train/train_hello_world_model.ipynb)。有关更多详细信息，请参考 `README.md`：
+为 hello world 模型训练使用 [train.py](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/train.py) 以识别正弦波
 
-<a class="button button-primary" href="https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/train/README.md">Hello World Training README.md</a>
+运行：`bazel build tensorflow/lite/micro/examples/hello_world:train` `bazel-bin/tensorflow/lite/micro/examples/hello_world/train --save_tf_model --save_dir=/tmp/model_created/`
 
 ## 运行推断
 
@@ -40,22 +40,22 @@
 
 <a class="button button-primary" href="https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/README.md">Hello World README.md</a>
 
-以下各部分逐步介绍了示例的 [`hello_world_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/hello_world_test.cc)，这是一个演示如何使用 TensorFlow Lite for Microcontrollers 运行推断的单元测试。它会加载模型并多次运行推断。
+以下各部分逐步介绍了示例的 [`evaluate_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/hello_world/evaluate_test.cc)，这是一个演示如何使用 TensorFlow Lite for Microcontrollers 运行推断的单元测试。它会加载模型并多次运行推断。
 
 ### 1. 包括库头文件
 
 要使用 TensorFlow Lite for Microcontrollers 库，我们必须包含以下头文件：
 
 ```C++
-#include "tensorflow/lite/micro/all_ops_resolver.h"
+#include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
 #include "tensorflow/lite/micro/micro_error_reporter.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
 #include "tensorflow/lite/schema/schema_generated.h"
 #include "tensorflow/lite/version.h"
 ```
 
-- [`all_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/all_ops_resolver.h) 提供解释器用来运行模型的运算。
-- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_error_reporter.h) 输出调试信息。
+- [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_mutable_op_resolver.h) 提供解释器用来运行模型的运算。
+- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/tflite_bridge/micro_error_reporter.h) 输出调试信息。
 - [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_interpreter.h) 包含用于加载和运行模型的代码。
 - [`schema_generated.h`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/schema/schema_generated.h) 包含 TensorFlow Lite [`FlatBuffer`](https://google.github.io/flatbuffers/) 模型文件架构的模式。
 - [`version.h`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/version.h) 提供 Tensorflow Lite 架构的版本控制信息。
@@ -118,15 +118,24 @@ if (model->version() != TFLITE_SCHEMA_VERSION) {
 
 ### 6. 实例化运算解析器
 
-声明了一个 [`AllOpsResolver`](github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/all_ops_resolver.h) 实例。解释器将使用它来访问模型所使用的运算：
+声明了一个 [`MicroMutableOpResolver`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/micro_mutable_op_resolver.h) 实例。解释器将使用它来访问模型所使用的运算：
 
 ```C++
-tflite::AllOpsResolver resolver;
+using HelloWorldOpResolver = tflite::MicroMutableOpResolver<1>;
+
+TfLiteStatus RegisterOps(HelloWorldOpResolver& op_resolver) {
+  TF_LITE_ENSURE_STATUS(op_resolver.AddFullyConnected());
+  return kTfLiteOk;
+
 ```
 
-`AllOpsResolver` 会加载 TensorFlow Lite for Microcontrollers 中可用的所有运算，而这些运算会占用大量内存。由于给定的模型仅会用到这些运算中的一部分，因此建议在实际应用中仅加载所需的运算。
+`MicroMutableOpResolver` 需要一个模板参数来指示将要注册的运算数。`RegisterOps` 函数会将运算注册到解析器。
 
-这是使用另一个类 `MicroMutableOpResolver` 来实现的。您可以在 *Micro speech* 示例的 [`micro_speech_test.cc`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples/micro_speech/micro_speech_test.cc) 中了解如何使用它。
+```C++
+HelloWorldOpResolver op_resolver;
+TF_LITE_ENSURE_STATUS(RegisterOps(op_resolver));
+
+```
 
 ### 分配内存
 
@@ -257,7 +266,3 @@ interpreter.Invoke();
 value = output->data.f[0];
 TF_LITE_MICRO_EXPECT_NEAR(-0.959, value, 0.05);
 ```
-
-### 15. 阅读应用代码
-
-完成此单元测试后，您应该能够理解位于 [`main_functions.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/main_functions.cc) 的示例应用代码。它遵循类似的过程，但会根据已运行推断的次数生成输入值，并调用特定于设备的函数，将模型的输出显示给用户。

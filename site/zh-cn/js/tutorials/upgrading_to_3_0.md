@@ -6,7 +6,7 @@
 
 ### 自定义模块
 
-我们提供了对创建自定义 tfjs 模块的支持，以支持生成大小经过优化的浏览器软件包，从而向您的用户传送更少的 JavaScript。要了解更多相关信息，[请参阅此教程](size_optimized_bundles.md)。
+我们提供了对创建自定义 tfjs 模块的支持，以支持生成大小经过优化的浏览器软件包，从而向您的用户传送更少的 JavaScript。要了解更多相关信息，[请参阅此教程](https://github.com/tensorflow/tfjs-website/blob/master/docs/tutorials/deployment/size_optimized_bundles.md)。
 
 此功能面向浏览器中的部署，但是启用此功能会产生如下所述的一些变化。
 
@@ -51,7 +51,7 @@
   </tr>
 </table>
 
-* [package] 指的是主 tf.js 包的子包的内核/转换器/层等名称。[min] 说明除了未缩小的文件外，我们还提供缩小的文件。
+[package] 指的是主 tf.js 包的子包的内核/转换器/层等名称。[min] 说明除了未缩小的文件外，我们还提供缩小的文件。
 
 ** 我们的 package.json `main` 入口指向此文件。
 
@@ -69,7 +69,7 @@
 
 ### 代码重组，内核和梯度注册
 
-我们重新组织了代码，以便更容易贡献运算和内核，以及实现自定义运算、内核和梯度。[有关详细信息，请参阅本指南](custom_ops_kernels_gradients.md)。
+我们重新组织了代码，以便更容易贡献运算和内核，以及实现自定义运算、内核和梯度。[有关详情，请参阅本指南](https://www.tensorflow.org/js/guide/custom_ops_kernels_gradients)。
 
 ### 重大更改
 

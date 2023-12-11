@@ -25,8 +25,6 @@
 
 **シミュレーションのベストプラクティス**
 
-- [Kubernetes を使用した高性能シミュレーション](high_performance_simulation_with_kubernetes.ipynb): Kubernetes で実行される高性能 TFF ランタイムをセットアップおよび構成する方法について説明します。
-
 - [アクセラレータを使用した TFF シミュレーション（GPU）](simulations_with_accelerators.ipynb): TFF の高性能ランタイムを GPU で使用する方法を実演します。
 
 - [ClientData の使用](working_with_client_data.ipynb):  TFF の [ClientData](https://www.tensorflow.org/federated/api_docs/python/tff/simulation/datasets/ClientData) ベースのシミュレーションデータセットを TFF 計算に統合するためのベストプラクティスを示します。
@@ -42,7 +40,5 @@
 - [連合学習研究のための TFF: モデルと更新の圧縮](tff_for_federated_learning_research_compression.ipynb): [tensor_encoding API](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/internal/tensor_encoding) に基づいて構築されたカスタム集計を TFF で使用する方法を示します。
 
 - [TFF での差分プライバシーによる連合学習](federated_learning_with_differential_privacy.ipynb): TFF を使用して、ユーザーレベルの差分プライバシーを使用してモデルをトレーニングする方法を示します。
-
-- [TFF を使用したリモートデータの読み込み](loading_remote_data.ipynb): TFF ランタイムにカスタムロジックを埋め込み、リモートマシンにデータを読み込む方法について説明します。
 
 - [TFF での JAX のサポート](../tutorials/jax_support.ipynb): TFF で[ JAX ](https://github.com/google/jax)計算を使用する方法を示し、TFF が他のフロントエンドおよびバックエンドの  ML フレームワークと相互運用できるようにどのように設計されているかを示します。
