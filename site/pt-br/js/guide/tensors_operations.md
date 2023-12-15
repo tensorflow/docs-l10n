@@ -1,21 +1,20 @@
 # Tensores e Operações
 
-TensorFlow.js é um framework para definir e executar computação usando tensores em JavaScript. Um *tensor* é uma generalização de vetores e matrizes para dimensões maiores.
+O TensorFlow.js é um framework para definir e executar computações usando tensores em JavaScript. Um  *tensor* é uma generalização de vetores e matrizes com dimensões superiores.
 
 ## Tensores
 
-A unidade central de dados em TensorFlow.js é o `tf.Tensor`: um conjunto de valores formatados dentro de um array de uma ou mais dimensões. `tf.Tensor`s são muito similares à arrays multidimensionais.
+A unidade central de dados no TensorFlow.js é o  `tf.Tensor`, um conjunto de valores formatados em um array com uma ou mais dimensões. Os `tf.Tensor`s são muito similares a arrays multidimensionais.
 
 Um `tf.Tensor` também contém as seguintes propriedades:
 
-*   `rank`: Define quantas dimensões tem o tensor.
-*   `shape`: Que define o tamanho de cada dimensão do dado.
-*   `dtype`: Que define o tipo de dado do tensor.
+- `rank`: define quantas dimensões o tensor contém
+- `shape`: define o tamanho de cada dimensão dos dados
+- `dtype`: define o tipo de dados do tensor
 
-Note: Nós podemos usar o termo "dimensão" no lugar de rank. Às vezes, no aprendizado de máquina, "dimensionalidade" de um tensor também pode se referir ao tamanho de uma dimensão particular (Por exemplo, uma matriz de formato [10, 5] é um tensor rank-2, ou um tensor bidimensional. A dimensionalidade da primeira dimensão é 10. Isso pode ser confuso, mas colocamos essa nota aqui porque você provavelmente encontrará esses usos duplos do termo).
+Observação: usaremos o termo "dimensão" de forma intercambiável com posto. Às vezes, em aprendizado de máquina, a "dimensionalidade" de um tensor também pode se referir ao tamanho de uma dimensão específica (por exemplo: uma matriz de formato [10, 5] é um tensor de posto 2 ou um tensor  bidimensional. A dimensionalidade da primeira dimensão é 10. Isso pode ser confuso, mas adicionamos esta observação porque provavelmente você vai se deparar com esses dois usos do termo).
 
 Um `tf.Tensor` pode ser criado a partir de um array com o método `tf.tensor()`:
-
 
 ```js
 // Cria um tensor rank-2 (matriz) a partir de um array multidimensional.
@@ -30,9 +29,7 @@ console.log('shape:', b.shape);
 b.print();
 ```
 
-
-Por padrão, `tf.Tensor`s terão `dtype` como `float32`. `tf.Tensor`s também podem ser criados com o dtype igual à bool, int32, complex64 e string:
-
+Por padrão, os `tf.Tensor`s terão `float32` como o  `dtype`. Os   `tf.Tensor`s também podem ser criados com o dtypes bool, int32, complex64 e string:
 
 ```js
 const a = tf.tensor([[1, 2], [3, 4]], [2, 2], 'int32');
@@ -41,13 +38,11 @@ console.log('dtype:', a.dtype);
 a.print();
 ```
 
+O TensorFlow.js também oferece um conjunto de métodos convenientes para criar tensores aleatórios, tensores preenchidos com um valor específico, tensores a partir de `HTMLImageElement`s e muitos outros, que você pode conferir [aqui](https://js.tensorflow.org/api/latest/#Tensors-Creation).
 
-TensorFlow.js também fornece um conjunto de métodos convenientes para criar tensores aleatórios, tensores preenchidos com um valor específico, tensores a partir de `HTMLImageElement`s, e muito mais que você pode encontrar [aqui](https://js.tensorflow.org/api/latest/#Tensors-Creation).
+#### Alteração do formato de um tensor
 
-#### Mudando o formato de um Tensor
-
-O número de elementos em um `tf.Tensor` é o produto dos tamanhos em seu formato. Como muitas vezes podem haver múltiplas formas com o mesmo tamanho, é útil poder reformatar um `tf.Tensor` para outro formato com o mesmo tamanho. Isso pode ser feito com o método `reshape()`:
-
+O número de elementos em um `tf.Tensor` é o produto dos tamanhos em seu formato. Como muitas vezes podem existir múltiplos formatos com o mesmo tamanho, é útil poder reformatar um `tf.Tensor` para outro formato com o mesmo tamanho. Isso pode ser feito usando o método `reshape()`:
 
 ```js
 const a = tf.tensor([[1, 2], [3, 4]]);
@@ -59,11 +54,9 @@ console.log('b shape:', b.shape);
 b.print();
 ```
 
+#### Obtenção de valores de um tensor
 
-#### Obtendo valores de um tensor
-
-Você também pode obter os valores de um `tf.Tensor` usando os métodos `Tensor.array()` ou `Tensor.data()`:
-
+Também é possível obter os valores de um `tf.Tensor` usando o método `Tensor.array()` ou `Tensor.data()`:
 
 ```js
  const a = tf.tensor([[1, 2], [3, 4]]);
@@ -73,9 +66,7 @@ Você também pode obter os valores de um `tf.Tensor` usando os métodos `Tensor
  a.data().then(data => console.log(data));
 ```
 
-
-Nós também fornecemos versões síncronas destes métodos que são mais simples de usar, mas que irão causar problemas de performance em sua aplicação. Você deve sempre preferir os métodos assíncronos em aplicações de produção.
-
+Também oferecemos versões síncronas desses métodos, que são mais simples de usar, mas causarão problemas de desempenho em sua aplicação. Sempre prefira os métodos assíncronos para aplicações em produção.
 
 ```js
 const a = tf.tensor([[1, 2], [3, 4]]);
@@ -85,14 +76,11 @@ console.log(a.arraySync());
 console.log(a.dataSync());
 ```
 
-
-
 ## Operações
 
-Enquanto tensores permitem você armazenar dados, operações (ops) permitem você manipular estes dados. TensorFlow.js também fornece uma larga variedade de operações adequadas para álgebra linear e aprendizado de máquina que podem ser realizadas sobre tensores.
+Embora os tensores permitam armazenar dados, as operações (ops) permitem manipular esses dados. O TensorFlow.js também oferece diversas operações adequadas para álgebra linear e aprendizado de máquina que podem ser realizadas em tensores.
 
-Exemplo: calcular x² de todos os elementos em um [tf.Tensor](link):
-
+Exemplo: computar x<sup>2</sup> de todos os elementos em um `tf.Tensor`:
 
 ```js
 const x = tf.tensor([1, 2, 3, 4]);
@@ -100,9 +88,7 @@ const y = x.square();  // Equivalennte à tf.square(x)
 y.print();
 ```
 
-
-Exemplo: adicionar elemento por elemento de dois `tf.Tensor`s:
-
+Exemplo: adicionar elementos de dois `tf.Tensor`s com reconhecimento de elementos:
 
 ```js
 const a = tf.tensor([1, 2, 3, 4]);
@@ -111,29 +97,24 @@ const y = a.add(b);  // Equivalente à tf.add(a, b)
 y.print();
 ```
 
+Como os tensores são imutáveis, essas operações não mudam os valores deles. Em vez disso, elas sempre retornam novos `tf.Tensor`s.
 
-Como tensores são imutáveis, estas operações não mudam seus valores. Ao invés disso, o resultado de operações sempre retornam novos `tf.Tensor`s.
+> Observação: a maioria das operações retorna  `tf.Tensor`s. Entretanto, o resultado pode ainda não estar pronto. Isso significa que o `tf.Tensor` obtido é na verdade um identificador da computação. Quando você chama `Tensor.data()` ou `Tensor.array()`, esses métodos retornam promises que resolvem para valores somente quando a computação é concluída. Ao executar em um contexto de interface gráfica (como uma aplicação para navegador), você sempre deve preferir usar as versões assíncronas desses métodos em vez das contrapartes síncronas para evitar bloquear o thread de interface gráfica até que a computação seja concluída.
 
-> Note: A maioria das operações retornam `tf.Tensor`s, no entanto, o resultado pode não estar pronto ainda. Isso significa que o `tf.Tensor` que você obtém é, na verdade, um identificador para o cálculo. Quando você chama `Tensor.data()` ou `Tensor.array()`, estes métodos retornam promises que resolvem com valores apenas quando o cálculo é finalizado. Ao executar em um contexto de interface do usuário (Como um aplicativo de navegador), você sempre deve preferir as versões assíncronas destes métodos em vez de suas contrapartes síncronas para evitar bloquear a thread da interface do usuário até que o cálculo seja concluído.
-
-Você pode encontrar a lista de operações que o TensorFlow.js suporta [aqui](https://js.tensorflow.org/api/latest/#Operations).
-
+Confira a lista das operações compatíveis com o TensorFlow.js [aqui](https://js.tensorflow.org/api/latest/#Operations).
 
 ## Memória
 
-Ao usar o backend WebGL, a memória de um `tf.Tensor` deve ser gerenciada explicitamente (**Não é suficiente** deixar um `tf.Tensor` sair do sair para que sua memória seja liberada).
+Ao usar o back-end WebGEL, a memória do `tf.Tensor` precisa ser gerenciada explicitamente (**não é suficiente** deixar o `tf.Tensor` sair do escopo para que sua memória seja liberada).
 
-Para liberar/desalocar a memória de um `tf.Tensor`, você pode usar o método `dispose()` ou `tf.dispose()`:
-
+Para destruir a memória de um tf.Tensor, você pode usar o método `dispose()` ou `tf.dispose()`:
 
 ```js
 const a = tf.tensor([[1, 2], [3, 4]]);
 a.dispose(); // Equivalente à tf.dispose(a)
 ```
 
-
-É muito comum encadear várias operações juntas em uma aplicação. Manter uma referência para todos as variáveis intermediárias, para descartá-las, pode reduzir a ligibilidade do código. Para resolver este problema, TensorFlow.js fornece um método `tf.tidy()` que limpa todos os `tf.Tensor`s que não são retornados por uma função após executá-la, semelhante à maneira como as variáveis locais são limpas quando a função é executada:
-
+É muito comum encadear diversas operações em uma aplicação. Armazenar uma referência a todas as variáveis intermediárias para descartá-las depois pode reduzir a legibilidade do código. Para resolver esse problema, o TensorFlow.js conta com o método   `tf.tidy()`, que elimina todos os `tf.Tensor`s que não são retornados por uma função após a execução, similar à forma como as variáveis locais são eliminadas quando uma função é executada:
 
 ```js
 const a = tf.tensor([[1, 2], [3, 4]]);
@@ -143,15 +124,12 @@ const y = tf.tidy(() => {
 });
 ```
 
+Neste exemplo, o resultado de  `square()` e `log()` será descartado automaticamente. O resultado de `neg()` não será descartado, pois é o valor de retorno de tf.tidy().
 
-Neste exemplo, o resultado de `square()` e `log()` serão automaticamente descartados. O resultado de `neg()` não será descartado já que é o valor de retorno de tf.tidy().
-
-Você também pode obter o número de Tensores monitorados pelo TensorFlow.js:
-
+Também é possível obter o número de tensores controlados pelo TensorFlow.js:
 
 ```js
 console.log(tf.memory());
 ```
 
-
-O objeto impresso por `tf.memory()` conterá informação sobre quanta memória está atualmente alocada. Você pode encontrar mais informação [aqui](https://js.tensorflow.org/api/latest/#memory).
+O objeto exibido via print por `tf.memory()` conterá informações de quanta memória está alocada no momento. Confira mais informações [aqui](https://js.tensorflow.org/api/latest/#memory).
