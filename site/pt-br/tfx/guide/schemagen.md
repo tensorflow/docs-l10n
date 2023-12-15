@@ -48,7 +48,7 @@ O esquema modificado pode ser trazido de volta ao pipeline usando o componente I
 
 ## SchemaGen e TensorFlow Data Validation
 
-O SchemaGen faz uso extensivo do [TensorFlow Data Validator](tfdv.md) para inferir um esquema.
+O SchemaGen faz uso extensivo do [TensorFlow Data Validation](tfdv.md) para inferir um esquema.
 
 ## Usando o componente SchemaGen
 

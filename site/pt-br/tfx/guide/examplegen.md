@@ -400,7 +400,7 @@ Primeiro, estenda o BaseExampleGenExecutor com um Beam PTransform personalizado,
 
 Isto poderá ou não exigir configurações de conexão adicionais. Por exemplo, o [executor BigQuery](https://github.com/tensorflow/tfx/blob/master/tfx/extensions/google_cloud_big_query/example_gen/executor.py) lê usando um conector beam.io padrão, que abstrai os detalhes de configuração da conexão. O [executor Presto](https://github.com/tensorflow/tfx/blob/master/tfx/examples/custom_components/presto_example_gen/presto_component/executor.py) requer um Beam PTransform personalizado e um [protobuf de configuração de conexão personalizada](https://github.com/tensorflow/tfx/blob/master/tfx/examples/custom_components/presto_example_gen/proto/presto_config.proto) como entrada.
 
-Se uma configuração de conexão for necessária para um componente SampleGen personalizado, crie um novo protobuf e passe-o via custom_config, que agora é um parâmetro de execução opcional. Abaixo está um exemplo de como usar um componente configurado.
+Se uma configuração de conexão for necessária para um componente ExampleGen personalizado, crie um novo protobuf e passe-o via custom_config, que agora é um parâmetro de execução opcional. Abaixo está um exemplo de como usar um componente configurado.
 
 ```python
 from tfx.examples.custom_components.presto_example_gen.proto import presto_config_pb2

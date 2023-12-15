@@ -212,6 +212,7 @@ Confira o [código-fonte](https://github.com/tensorflow/tflite-support/blob/mast
 
 Veja um exemplo dos resultados de classificação do [classificador de pássaros](https://tfhub.dev/google/lite-model/aiy/vision/classifier/birds_V1/3).
 
+
 <img src="images/sparrow.jpg" width="50%" alt="sparrow">
 
 ```

@@ -98,7 +98,7 @@ O LSTMCellSimple do Lingvo está definido [aqui](https://github.com/tensorflow/l
 
 4. **{input, recurrent}** de **{cell, input gate, forget gate, output gate}** são extraídos por meio do fatiamento do tensor de pesos transposto.
 
-5.  **{bias}** de **{cell, input gate, forget gate, output gate}** é extraído pelo fatiamento do tensor bias.
+5. **{bias}** de **{cell, input gate, forget gate, output gate}** é extraído pelo fatiamento do tensor bias.
 
 6. **projection** é extraída pelo fatiamento do tensor de projeção transposto.
 

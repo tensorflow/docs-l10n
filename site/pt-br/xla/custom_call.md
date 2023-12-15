@@ -85,7 +85,7 @@ Como `xla::Shape` tem uma representação de buffer de protocolo, você pode arm
 
 ## Sinalizando um erro.
 
-Se sua chamada personalizada encontrar um erro, você poderá sinalizar o erro para o tempo de execução do XLA (em vez de, por exemplo, travar ou retornar texto sem sentido nos buffers de saída) usando a seguinte assinatura para sua função na CPU:
+Se sua chamada personalizada encontrar um erro, você poderá sinalizar o erro para o runtime do XLA (em vez de, por exemplo, travar ou retornar texto sem sentido nos buffers de saída) usando a seguinte assinatura para sua função na CPU:
 
 ```c++
 #include "tensorflow/compiler/xla/service/custom_call_status.h"

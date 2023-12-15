@@ -44,6 +44,6 @@ Atualmente, o XLA ignora sementes TF para operações aleatórias. Isto afeta op
 
 O XLA exige que certos valores sejam conhecidos em tempo de compilação, como o eixo de redução de uma operação reduce ou dimensões de transposição. Considere o caso quando, por exemplo, o eixo de redução é definido como uma função de uma variável de indução de `tf.range`: resolvê-lo estaticamente não é possível sem desenrolar todo o loop, o que pode não ser o que o usuário deseja.
 
-*Solução alternativa*: desenrole os loops, por exemplo, convertendo `tf.range` para  `range` do Python.
+*Solução alternativa*: desenrole os loops, por exemplo, convertendo `tf.range` para `range` do Python.
 
 OBSERVAÇÃO: A mensagem de erro acima não é exclusiva deste problema e pode surgir devido a outras limitações ou bugs.

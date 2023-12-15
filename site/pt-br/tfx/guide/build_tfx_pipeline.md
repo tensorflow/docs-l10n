@@ -22,7 +22,7 @@ Substitua o seguinte:
 
 - <var>pipeline-name</var>: o nome deste pipeline. O nome do pipeline deve ser único.
 
-    O TFX usa o nome do pipeline ao consultar metadados de ML para artefatos de componentes de entrada. Reusar o nome de um pipeline pode resultar em comportamentos inesperados.
+    O TFX usa o nome do pipeline ao consultar o ML Metadata para artefatos de componentes de entrada. Reusar o nome de um pipeline pode resultar em comportamentos inesperados.
 
 - <var>pipeline-root</var>: o caminho raiz das saídas deste pipeline. O caminho raiz deve ser o caminho completo para um diretório ao qual seu orquestrador tenha acesso de leitura e gravação. Em tempo de execução, o TFX usa a raiz do pipeline para gerar caminhos de saída para artefatos de componentes. Esse diretório pode ser local ou num sistema de arquivos distribuído compatível, como Google Cloud Storage ou HDFS.
 

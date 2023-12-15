@@ -45,7 +45,7 @@ trainer = Trainer(
     eval_args=trainer_pb2.EvalArgs(num_steps=5000))
 ```
 
-O Trainer invoca um módulo de treinamento, que é especificado no parâmetro `module_file` (arquivo de módulo). Em vez de `trainer_fn`], um `run_fn` será necessário no arquivo do módulo se `GenericExecutor` for especificado em `custom_executor_spec`. O `trainer_fn` foi o responsável pela criação do modelo. Além disso, `run_fn` também precisa cuidar da parte de treinamento e enviar o modelo treinado para o local desejado fornecido por [FnArgs](https://github.com/tensorflow/tfx/blob/master/tfx/components/trainer/fn_args_utils.py):
+O Trainer invoca um módulo de treinamento, que é especificado no parâmetro `module_file` (arquivo de módulo). Em vez de `trainer_fn`, um `run_fn` será necessário no arquivo do módulo se `GenericExecutor` for especificado em `custom_executor_spec`. O `trainer_fn` foi o responsável pela criação do modelo. Além disso, `run_fn` também precisa cuidar da parte de treinamento e enviar o modelo treinado para o local desejado fornecido por [FnArgs](https://github.com/tensorflow/tfx/blob/master/tfx/components/trainer/fn_args_utils.py):
 
 ```python
 from tfx.components.trainer.fn_args_utils import FnArgs

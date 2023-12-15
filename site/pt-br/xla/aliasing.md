@@ -40,7 +40,7 @@ Veja a API [`XlaBuilder::SetUpAlias`](https://www.tensorflow.org/code/tensorflow
 
 O aliasing definido na etapa anterior é especificado durante a *compilação*. Durante a execução, você pode escolher se realmente deseja doar o buffer usando a API [`LocalClient::RunAsync`](https://www.tensorflow.org/code/tensorflow/compiler/xla/client/local_client.h).
 
-Os buffers de entrada para o programa são agrupados em [`ExecutionInput`](https://www.tensorflow.org/code/tensorflow/compiler/xla/service/executable.h), que por sua vez contém uma árvore de `MaybeOwningDeviceMemory`. Se a memória for especificada como *proprietária* (a propriedade do buffer é passada para o tempo de execução do XLA), o buffer é doado e a atualização é executada no local, conforme solicitado pela API de aliasing em tempo de compilação.
+Os buffers de entrada para o programa são agrupados em [`ExecutionInput`](https://www.tensorflow.org/code/tensorflow/compiler/xla/service/executable.h), que por sua vez contém uma árvore de `MaybeOwningDeviceMemory`. Se a memória for especificada como *proprietária* (a propriedade do buffer é passada para o runtime do XLA), o buffer é doado e a atualização é executada no local, conforme solicitado pela API de aliasing em tempo de compilação.
 
 Se, no entanto, o buffer que tem aliasing em tempo de compilação *não* for doado em tempo de execução, *a proteção contra cópia* entra em ação: um buffer de saída extra `O` é alocado e o conteúdo do buffer de entrada `P` que deveria ter aliasing é copiado para `O` (de forma tão eficaz que o programa pode ser executado como se o buffer `O` tivesse sido doado em tempo de execução).
 

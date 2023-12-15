@@ -209,6 +209,7 @@ Confira o [código-fonte](https://github.com/tensorflow/tflite-support/blob/mast
 
 Veja abaixo um exemplo dos resultados de detecção de [ssd mobilenet v1](https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/1) do TensorFlow Hub.
 
+
 <img src="images/dogs.jpg" width="50%" alt="dogs">
 
 ```
@@ -228,6 +229,7 @@ Results:
 ```
 
 Renderize os retângulos limítrofes na imagem de entrada:
+
 
 <img src="images/detection-output.png" width="50%" alt="detection output">
 

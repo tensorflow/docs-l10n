@@ -205,6 +205,7 @@ Confira o [código-fonte](https://github.com/tensorflow/tflite-support/blob/mast
 
 Veja abaixo um exemplo dos resultados de segmentação de [deeplab_v3](https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/1), um modelo genérico de segmentação disponível no TensorFlow Hub.
 
+
 <img src="images/plane.jpg" width="50%" alt="plane">
 
 ```
@@ -229,6 +230,7 @@ this legend.
 ```
 
 A máscara de categoria de segmentação deve ficar assim:
+
 
 <img src="images/segmentation-output.png" width="30%" alt="segmentation-output">
 

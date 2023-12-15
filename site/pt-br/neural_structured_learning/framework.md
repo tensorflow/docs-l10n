@@ -1,0 +1,31 @@
+# O framework Neural Structured Learning
+
+A Neural Structured Learning (NSL) concentra-se no treinamento de redes neurais profundas, aproveitando sinais estruturados (quando disponíveis) junto com entradas de características. Conforme apresentado por [Bui et al. (WSDM'18)](https://research.google/pubs/pub46568.pdf), esses sinais estruturados são usados ​​para regularizar o treinamento de uma rede neural, forçando o modelo a aprender previsões precisas (minimizando a perda supervisionada), enquanto ao mesmo tempo mantém a similaridade estrutural de entrada (minimizando a perda vizinha; veja a figura abaixo). Esta técnica é genérica e pode ser aplicada em arquiteturas neurais arbitrárias (como NNs feed-forward, NNs convolucionais e NNs recorrentes).
+
+![NSL Concept](https://github.com/tensorflow/docs-l10n/blob/master/site/pt-br/neural_structured_learning/images/nlink_figure.png?raw=true)
+
+Observe que a equação generalizada de perda vizinha é flexível e pode ter outras formas além da ilustrada acima. Por exemplo, também podemos selecionar $$\sum_{x_j \in \mathcal{N}(x_i)}\mathcal{E}(y_i,g_\theta(x_j))$$ como a perda vizinha, que calcula a distância entre a verdade absoluta (ground truth) $$y_i$$ e a previsão do vizinho $$g_\theta(x_j)$$. Isto é frequentemente usado na aprendizagem adversária [(Goodfellow et al., ICLR'15)](https://arxiv.org/pdf/1412.6572.pdf). Portanto, NSL generaliza para o **Neural Graph Learning** se os vizinhos forem explicitamente representados por um grafo, e para **Aprendizagem Adversária** se os vizinhos forem implicitamente induzidos por perturbação adversária.
+
+O workflow geral para o Neural Structured Learning está ilustrado abaixo. As setas pretas representam o workflow de treinamento convencional e as setas vermelhas representam o novo workflow introduzido pela NSL para aproveitar sinais estruturados. Primeiro, as amostras de treinamento são aumentadas para incluir sinais estruturados. Quando os sinais estruturados não são fornecidos explicitamente, eles podem ser construídos ou induzidos (o último se aplica à aprendizagem adversária). Em seguida, as amostras de treinamento aumentadas (incluindo as amostras originais e seus vizinhos correspondentes) são alimentadas na rede neural para calcular seus embeddings. A distância entre o embedding de uma amostra e o embedding de seu vizinho é calculada e usada como a perda vizinha, que é tratada como um termo de regularização e adicionada à perda final. Para regularização explícita baseada nos vizinhos, normalmente calculamos a perda vizinha como a distância entre o embedding da amostra e o embedding do vizinho. No entanto, qualquer camada da rede neural pode ser usada para calcular a perda vizinha. Por outro lado, para a regularização induzida baseada nos vizinhos (adversária), calculamos a perda vizinha como a distância entre a previsão de saída do vizinho adversário induzido e o rótulo da verdade absoluta (ground truth).
+
+![NSL workflow](https://github.com/tensorflow/docs-l10n/blob/master/site/pt-br/neural_structured_learning/images/workflow_overview.png?raw=true)
+
+## Por que usar a NSL?
+
+A NSL traz as seguintes vantagens:
+
+- **Maior exatidão**: os sinais estruturados entre as amostras podem fornecer informações que nem sempre estão disponíveis nas entradas das características; portanto, foi demonstrado que a abordagem de treinamento conjunto (com sinais e características estruturadas) supera muitos métodos existentes (que dependem apenas de treinamento com características) numa ampla gama de tarefas, como a classificação de documentos e a classificação de intenção semântica ([Bui et al ., WSDM'18](https://research.google/pubs/pub46568.pdf) &amp; [Kipf et al., ICLR'17](https://arxiv.org/pdf/1609.02907.pdf)).
+- **Robustez**: modelos treinados com exemplos adversários demonstraram ser robustos contra perturbações adversárias projetadas para enganar a previsão ou classificação de um modelo ([Goodfellow et al., ICLR'15](https://arxiv.org/pdf/1412.6572.pdf) &amp; [Miyato et al., ICLR'16](https://arxiv.org/pdf/1704.03976.pdf)). Quando o número de amostras de treinamento é pequeno, o treinamento com exemplos adversários também ajuda a melhorar a precisão do modelo ([Tsipras et al., ICLR'19](https://arxiv.org/pdf/1805.12152.pdf)).
+- **São necessários menos dados rotulados**: a NSL permite que as redes neurais aproveitem dados rotulados e não rotulados, o que estende o paradigma de aprendizagem à [aprendizagem semi-supervisionada](https://en.wikipedia.org/wiki/Semi-supervised_learning). Especificamente, a NSL permite que a rede treine usando dados rotulados como no ambiente supervisionado e, ao mesmo tempo, leva a rede a aprender representações ocultas similares para as "amostras vizinhas" que podem ou não ter rótulos. Esta técnica tem se mostrado muito promissora para melhorar a precisão do modelo quando a quantidade de dados rotulados é relativamente pequena ([Bui et al., WSDM'18](https://research.google/pubs/pub46568.pdf) &amp; [Miyato et al., ICLR'16](https://arxiv.org/pdf/1704.03976.pdf)).
+
+## Tutoriais passo a passo
+
+Para obter experiência prática com aprendizagem estruturada neural, temos tutoriais que abrangem vários cenários onde sinais estruturados podem ser dados, construídos ou induzidos explicitamente. Aqui estão alguns:
+
+- [Regularização de grafos para classificação de documentos utilizando grafos naturais](tutorials/graph_keras_mlp_cora.ipynb). Neste tutorial, exploramos o uso da regularização de grafos para classificar documentos que formam um grafo natural (orgânico).
+
+- [Regularização de grafos para classificação de sentimentos usando grafos sintetizados](tutorials/graph_keras_lstm_imdb.ipynb). Neste tutorial, demonstramos o uso da regularização de grafos para classificar sentimentos de avaliações de filmes através da construção (sintetização) de sinais estruturados.
+
+- [Aprendizagem adversária para classificação de imagens](tutorials/adversarial_keras_cnn_mnist.ipynb). Neste tutorial, exploramos o uso de aprendizagem adversária (onde sinais estruturados são induzidos) para classificar imagens contendo dígitos numéricos.
+
+Mais exemplos e tutoriais podem ser encontrados no diretório [examples](https://github.com/tensorflow/neural-structured-learning/tree/master/neural_structured_learning/examples) do nosso repositório GitHub.

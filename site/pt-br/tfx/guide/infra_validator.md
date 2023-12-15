@@ -144,7 +144,7 @@ infra_validator = InfraValidator(
 )
 ```
 
-Em seguida, o artefato de saída `InfraBlessing`  conterá um SavedModel com warmup e também poderá ser enviado pelo [Pusher](pusher.md), assim como o artefato `Model`.
+Em seguida, o artefato de saída `InfraBlessing` conterá um SavedModel com warmup e também poderá ser enviado pelo [Pusher](pusher.md), assim como o artefato `Model`.
 
 ## Limitações
 
