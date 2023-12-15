@@ -1,25 +1,88 @@
-# Documentação Oficial TensorFlow
+# Citando o TensorFlow
 
-Esse artigo reconhece os documentos oficiais sobre o TensorFlow.
+O TensorFlow publica um DOI para a base de código aberto usando Zenodo.org: [10.5281/zenodo.4724125](https://doi.org/10.5281/zenodo.4724125)
 
-## Aprendizado-de-Máquina de Alta Escalabilidade em Sistemas Heterogêneos Distribuídos.
+Os documentos técnicos do TensorFlow são listados para citação abaixo.
 
-<a class="" href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45166.pdf">Acesse esse Artigo em inglês.</a>
+## Aprendizado de máquina em grande escala em sistemas distribuídos heterogêneos
 
-**Resumo:** TensorFlow é uma interface para expressão de algoritmos de aprendizado de máquina e sua implementação para execução desses algoritmos. Uma computação expressada usando o TensorFlow pode ser executada com pouco ou nenhuma alteração em uma ampla variedade de sistemas heterogêneos, desde de dispositivos móveis como telefones e tablets até sistemas distribuídos de larga escala com centenas de máquinas e milhares de dispositivos computacionais como placas gráficas GPU. O sistema é flexível e pode ser usado para expressar uma ampla variedade de algoritmos, incluindo os de treinamento e inferência para modelos de redes neurais profundas, e tem sido utilizado para condução de pesquisa e para implementação de sistemas de aprendizado de máquina em produção em mais de uma dúzia de áreas das ciências da computação e outros campos, que incluem reconhecimento de fala, visão computacional, robótica, recuperação de informação, processamento de linguagem natural, extração de informação geográfica e descoberta computacional de drogas farmacológicas. Essa documentação descreve a interface do TensorFlow e a implementação da interface que construímos na Google. A API do TensorFlow e a implementação de referência estão disponibilizadas como pacote de código-aberto sob a licença Apache 2.0 de Novembro, 2015 e está disponível no www.tensorflow.org.
+[Acesse este documento técnico.](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45166.pdf)
+
+**Resumo:** O TensorFlow é uma interface para expressar algoritmos de aprendizado de máquina e uma implementação para executar esses algoritmos. Uma computação expressa usando o TensorFlow pode ser executada com pouca ou nenhuma alteração em uma grande variedade de sistemas heterogêneos, desde dispositivos móveis, como smartphones e tablets, até sistemas distribuídos em grande escala, com centenas de máquinas e milhares de dispositivos computacionais, como placas GPU. O sistema é flexível e pode ser usado para expressar uma ampla gama de algoritmos, incluindo os de treinamento e inferência para modelos de redes neurais profundas, e tem sido usado para conduzir pesquisas e implantar sistemas de aprendizado de máquina para produção em mais de uma dúzia de áreas da ciência da computação e outros campos, incluindo reconhecimento de fala, visão computacional, robótica, recuperação de informações, processamento de linguagem natural, extração de informações geográficas e descoberta computacional de medicamentos. Esta documentação descreve a interface do TensorFlow e uma implementação dessa interface que criamos no Google. A API do TensorFlow e uma implementação de referência foram publicadas como um pacote de código aberto sob a licença Apache 2.0 em novembro de 2015, que está disponível em www.tensorflow.org.
 
 ### No formato BibTeX
 
-Se você utiliza o TensorFlow na sua pesquisa acadêmica e quer citar o sistema TensorFlow, nós sugerimos que cite esse documento.
+Se você usa o TensorFlow na sua pesquisa acadêmica e quer citar o sistema TensorFlow, recomendamos citar este documento.
 
-<pre>@misc{tensorflow2015-whitepaper,<br>title={ {TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},<br>url={https://www.tensorflow.org/},<br>note={Software available from tensorflow.org},<br>author={<br>    Mart\'{\i}n~Abadi and<br>    Ashish~Agarwal and<br>    Paul~Barham and<br>    Eugene~Brevdo and<br>    Zhifeng~Chen and<br>    Craig~Citro and<br>    Greg~S.~Corrado and<br>    Andy~Davis and<br>    Jeffrey~Dean and<br>    Matthieu~Devin and<br>    Sanjay~Ghemawat and<br>    Ian~Goodfellow and<br>    Andrew~Harp and<br>    Geoffrey~Irving and<br>    Michael~Isard and<br>    Yangqing Jia and<br>    Rafal~Jozefowicz and<br>    Lukasz~Kaiser and<br>    Manjunath~Kudlur and<br>    Josh~Levenberg and<br>    Dandelion~Man\'{e} and<br>    Rajat~Monga and<br>    Sherry~Moore and<br>    Derek~Murray and<br>    Chris~Olah and<br>    Mike~Schuster and<br>    Jonathon~Shlens and<br>    Benoit~Steiner and<br>    Ilya~Sutskever and<br>    Kunal~Talwar and<br>    Paul~Tucker and<br>    Vincent~Vanhoucke and<br>    Vijay~Vasudevan and<br>    Fernanda~Vi\'{e}gas and<br>    Oriol~Vinyals and<br>    Pete~Warden and<br>    Martin~Wattenberg and<br>    Martin~Wicke and<br>    Yuan~Yu and<br>    Xiaoqiang~Zheng},<br>  year={2015},<br>}</pre>
+<pre>
+@misc{tensorflow2015-whitepaper,
+title={ {TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},
+url={https://www.tensorflow.org/},
+note={Software available from tensorflow.org},
+author={
+    Mart\'{i}n~Abadi and
+    Ashish~Agarwal and
+    Paul~Barham and
+    Eugene~Brevdo and
+    Zhifeng~Chen and
+    Craig~Citro and
+    Greg~S.~Corrado and
+    Andy~Davis and
+    Jeffrey~Dean and
+    Matthieu~Devin and
+    Sanjay~Ghemawat and
+    Ian~Goodfellow and
+    Andrew~Harp and
+    Geoffrey~Irving and
+    Michael~Isard and
+    Yangqing Jia and
+    Rafal~Jozefowicz and
+    Lukasz~Kaiser and
+    Manjunath~Kudlur and
+    Josh~Levenberg and
+    Dandelion~Man\'{e} and
+    Rajat~Monga and
+    Sherry~Moore and
+    Derek~Murray and
+    Chris~Olah and
+    Mike~Schuster and
+    Jonathon~Shlens and
+    Benoit~Steiner and
+    Ilya~Sutskever and
+    Kunal~Talwar and
+    Paul~Tucker and
+    Vincent~Vanhoucke and
+    Vijay~Vasudevan and
+    Fernanda~Vi\'{e}gas and
+    Oriol~Vinyals and
+    Pete~Warden and
+    Martin~Wattenberg and
+    Martin~Wicke and
+    Yuan~Yu and
+    Xiaoqiang~Zheng},
+  year={2015},
+}
+</pre>
 
-Ou em sua forma textual:
+Ou em formato de texto:
 
-<pre>Martín Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo,<br>Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis,<br>Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow,<br>Andrew Harp, Geoffrey Irving, Michael Isard, Rafal Jozefowicz, Yangqing Jia,<br>Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dan Mané, Mike Schuster,<br>Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Jonathon Shlens,<br>Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker,<br>Vincent Vanhoucke, Vijay Vasudevan, Fernanda Viégas,<br>Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke,<br>Yuan Yu, and Xiaoqiang Zheng.<br>TensorFlow: Large-scale machine learning on heterogeneous systems,<br>2015. Software available from tensorflow.org.</pre>
+<pre>
+Martín Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo,
+Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis,
+Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow,
+Andrew Harp, Geoffrey Irving, Michael Isard, Rafal Jozefowicz, Yangqing Jia,
+Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dan Mané, Mike Schuster,
+Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Jonathon Shlens,
+Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker,
+Vincent Vanhoucke, Vijay Vasudevan, Fernanda Viégas,
+Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke,
+Yuan Yu, and Xiaoqiang Zheng.
+TensorFlow: Large-scale machine learning on heterogeneous systems,
+2015. Software available from tensorflow.org.
+</pre>
 
-## TensorFlow: Um sistema para Aprendizado de Máquina de Larga Escala
+## TensorFlow: um sistema para o aprendizado de máquina em grande escala
 
-<a class="" href="https://www.usenix.org/system/files/conference/osdi16/osdi16-abadi.pdf">Acesse esse Artigo em inglês.</a>
+[Acesse este documento técnico.](https://www.usenix.org/system/files/conference/osdi16/osdi16-abadi.pdf)
 
-**Resumo:** TensorFlow é um sistema de aprendizado de máquina que opera em larga escala e em ambiente heterogêneos. TensorFlow utiliza grafos com fluxos de dados para representar computacionalmente, um estado compartilhado e as operações que alteram esse estado. O TensorFlow mapeia os nós de grafo de fluxo de dados através de muitas máquinas em grupo e com máquinas em múltiplos dispositivos computacionais, incluindo CPUs com muitos núcleos, placas de vídeos comuns e projetos customizados ASICs, conhecidos por Tensor Processing Units (TPUs). Essa arquitetura dá flexibilidade para o desenvolvedor da aplicação: considerando que nas arquiteturas de “servidores parametrizados” anteriores o gerenciamento de estado compartilhado seja nativo do sistema, TensorFlow permite que desenvolvedores experimentem novas otimizações e algoritmos de treinamento. TensorFlow oferece uma variedade de aplicações com foco no treinamento e inferência com redes neurais profundas. Vários serviços da Google utilizam o TensorFlow em produção, nós temos implementado o como projeto de código aberto e tem se tornado vastamente utilizado para pesquisa com aprendizado de máquina. Nesse artigo, nós descrevemos o modelo de fluxo de dados do TensorFlow e demonstramos o convincente desempenho que o TensorFlow alcança em diversos aplicações no mundo real.
+**Resumo:** O TensorFlow é um sistema de aprendizado de máquina que opera em grande escala e em ambientes heterogêneos. O TensorFlow usa grafos de fluxo de dados para representar computações, estado compartilhado e operações que transformam esse estado. Ele mapeia os nós de um grafo de fluxo de dados em várias máquinas de um cluster e dentro de uma máquina em vários dispositivos computacionais, incluindo CPUs multicore, GPUs de uso geral e ASICs personalizados conhecidos como Unidades de Processamento de Tensor (TPUs). Essa arquitetura dá flexibilidade ao desenvolvedor do aplicativo: enquanto o gerenciamento de estado compartilhado é integrado ao sistema nos designs de "servidores parametrizados" anteriores, o TensorFlow permite que os desenvolvedores testem novas otimizações e algoritmos de treinamento. O TensorFlow oferece suporte a uma variedade de aplicativos, com foco no treinamento e na inferência de redes neurais profundas. Vários serviços do Google usam o TensorFlow em produção, que foi lançado como um projeto de código aberto e se tornou amplamente usado em pesquisas com aprendizado de máquina. Neste documento, descrevemos o modelo de fluxo de dados do TensorFlow e mostramos o desempenho convincente do TensorFlow em várias aplicações no mundo real.
