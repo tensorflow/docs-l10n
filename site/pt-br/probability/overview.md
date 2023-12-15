@@ -19,7 +19,7 @@ As *operações numéricas* — especificamente, a classe `LinearOperator` — p
 
 ### Camada 2: criação do modelo
 
-- Distribuições conjuntas (por exemplo: [`tfp.distributions.JointDistributionSequential`](https://github.com/tensorflow/probability/tree/main/tensorflow_probability/python/distributions/joint_distribution_sequential.py)): distribuições conjuntas de uma ou mais distribuições possivelmente interdependentes. Confira uma introdução da modelagem com `JointDistribution`s do TFP [neste colab](https://github.com/tensorflow/probability/blob/main/tensorflow_probability/examples/jupyter_notebooks/Modeling_with_JointDistribution.ipynb).
+- Distribuições conjuntas (por exemplo: [`tfp.distributions.JointDistributionSequential`](https://github.com/tensorflow/probability/tree/main/tensorflow_probability/python/distributions/joint_distribution_sequential.py)): distribuições conjuntas de uma ou mais distribuições possivelmente interdependentes. Confira uma introdução da modelagem com `JointDistribution`s do TFP [neste colab](https://github.com/tensorflow/docs-l10n/blob/master/site/pt-br/probability/examples/Modeling_with_JointDistribution.ipynb).
 - *Camadas probabilísticas* ([`tfp.layers`](https://github.com/tensorflow/probability/tree/main/tensorflow_probability/python/layers)): camadas de redes neurais com incerteza sobre as funções representadas, que estendem as camadas do TensorFlow.
 
 ### Camada 3: inferência probabilística
