@@ -1,85 +1,71 @@
 # TensorFlow.js no Node
 
-
 ## TensorFlow CPU
 
 O pacote TensorFlow CPU pode ser importado da seguinte forma:
-
 
 ```js
 import * as tf from '@tensorflow/tfjs-node'
 ```
 
+Ao importar o TensorFlow.js por meio desse pacote, o módulo obtido será acelerado pelo binário C do TensorFlow e executado na CPU. O TensorFlow na CPU usa aceleração de hardware para aumentar a velocidade da computação de álgebra linear nos bastidores.
 
-Ao importar TensorFlow.js à partir desse pacote, o módulo que você obtém será acelerado pelo binário do TensorFlow C e executado na CPU. TensorFlow na CPU usa aceleração do hardware para executar o cálculo de álgebra linear por debaixo dos panos.
+Esse pacote funciona nas plataformas Linux, Windows e Mac com as quais o TensorFlow é compatível.
 
-Este pacote funcionará nas plataformas Linux, Windows e Mac nas quais o TensorFlow é suportado.
-
-> Nota: Você não precisa importar '@tensorflow/tfjs' ou adicioná-lo ao seu package.json. Este pacote é importado indiretamente pela biblioteca do node.
-
+> Observação: você não precisa importar '@tensorflow/tfjs' ou adicioná-lo ao seu package.json. Este pacote é importado indiretamente pela biblioteca do Node.
 
 ## TensorFlow GPU
 
 O pacote TensorFlow GPU pode ser importado da seguinte forma:
 
-
 ```js
 import * as tf from '@tensorflow/tfjs-node-gpu'
 ```
 
+Assim como o pacote de CPU, o módulo obtido será acelerado pelo binário C do TensorFlow. Entretanto, ele executará operações dos tensores na GPU com CUDA e, portanto, somente no Linux. Esse binding pode ser pelo menos uma ordem de  magnitude mais rápido do que outras opções de binding.
 
-Assim como o pacote CPU, o módulo que você obtém será acelarado pelo binário do TensorFlow C, no entanto, ele executará operações de tensores na GPU com CUDA e, portanto, apenas linux. Essa conexão pode ser, pelo menos em uma ordem de magnitude, mais rápida que as outras opções.
+> Observação: esse pacote funciona somente com o CUDA. Você precisa ter o CUDA instalado na máquina com uma placa gráfica da NVIDIA antes de seguir por este caminho.
 
-> Nota: Atualmente, este pacote funciona apenas com CUDA. Você precisa ter o CUDA instalado em sua máquina com uma placa gráfica NVIDIA antes de seguir esta rota.
+> Observação: você não precisa importar '@tensorflow/tfjs' ou adicioná-lo ao seu package.json. Este pacote é importado indiretamente pela biblioteca do Node.
 
-> Nota: Você não precisa importar '@tensorflow/tfjs' ou adicioná-lo ao seu package.json. Este pacote é importado indiretamente pela biblioteca do node.
+## CPU vanilla
 
-
-## CPU Vanilla
-
-A versão do TensorFlow.js rodando com CPU vanilla pode ser importado da seguinte forma:
-
+A versão do TensorFlow.js que executa operações de CPU vanilla pode ser importada da seguinte forma:
 
 ```js
 import * as tf from '@tensorflow/tfjs'
 ```
 
+Este pacote é o mesmo que você usaria no navegador. Nele, as operações são executados no JavaScript vanilla na CPU. Este pacote é muito menor do que os outros porque não precisa do binário do TensorFlow, porém é muito mais lento.
 
-Este pacote é o mesmo pacote que você usaria no navegador. Neste pacote, as operações são executadas com JavaScript vanilla na CPU. Este pacote é muito menor que os outros porque ele não precisa dos binários do TensorFlow, no entanto, é muito mais lento.
-
-Como este pacote não depende do TensorFlow, ele pode ser usado em mais dispositivos compatíveis com Node.js do que apenas Linux, Windows e Mac.
-
+Como este pacote não depende do TensorFlow, pode ser usado em mais dispositivos com suporte ao Node.js do que somente Linux, Windows e Mac.
 
 ## Considerações de produção
 
-As ligações do Node.js fornecem um backend para TensorFlow.js que implementa operações de forma síncrona. Isso significa que quando você chama uma operação `tf.matMul(a, b)`, por exemplo, ele bloqueará a thread principal até que a operação seja concluída.
+Os bindings do Node.js fornecem um back-end para o TensorFlow.js que implementa as operações de forma síncrona. Portanto, quando você chama uma operação, como `tf.matMul(a, b)`, ela bloqueará o thread principal até que a operação seja concluída.
 
-Por esta razão, as ligações atualmente são adequadas para script e tarefas offline. Se você deseja usar as ligações Node.js em produção, como em um servidor, você deve configurar uma fila de tarefas ou threads workers, para que seu código TensorFlow.js não bloqueie a thread principal.
-
+Por esse motivo, os bindings são adequados atualmente para scripts e para tarefas offline. Se você deseja usar os bindings do Node.js em uma aplicação em produção, como um servidor web,  deve configurar uma fila de trabalhos ou threads workers para que o código do TensorFlow.js não bloqueie o thread principal.
 
 ## APIs
 
-Depoir de importar o pacote como `tf` em qualquer das opções acima, todos os símbolos normais do TensorFlow.js aparecerão no módulo importado.
-
+Após importar o pacote como tf em qualquer uma das opções acima, todos os símbolos normais do TensorFlow.js aparecerão no módulo importado.
 
 ### tf.browser
 
-No pacote TensorFlow.js normal, os símbolos no namespace `tf.browser.*` não serão úteis no Node.js, pois eles usam APIs específicas do navegador.
+No pacote normal do TensorFlow.js, os símbolos no namespace  `tf.browser.*` não serão utilizáveis no Node.js, pois usam APIs específicas de navegador.
 
-Atualmente, são eles:
+Atualmente, são estes:
 
-*  tf.browser.fromPixels
-*  tf.browser.toPixels
-
+- tf.browser.fromPixels
+- tf.browser.toPixels
 
 ### tf.node
 
-Os dois pacotes Node.js também fornecem um namespace, `tf.node`, que contém APIs específicas do Node.
+Os dois pacotes do Node.js também fornecem um namespace, `tf.node`, que contém APIs específicas do Node.
 
-TensorBoard é um exemplo notável das APIs específicas do Node.js.
+O TensorBoard é um exemplo notável de APIs específicas do Node.js.
 
-Um exemplo de exportação de resumos para o TensorBoard no Node.js:
-
+Veja um exemplo de exportação de resumos para o TensorBoard no Node.js:
 
 ```js
 const model = tf.sequential();
