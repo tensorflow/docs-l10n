@@ -234,4 +234,4 @@ Para carregar os objetos pré-processador e encoder dentro ou fora de um escopo 
 
 ### Exemplos
 
-- Tutorial [Resolva tarefas GLUE usando BERT em TPUs](https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/bert_glue.ipynb) no Colab.
+- Tutorial [Resolva tarefas GLUE usando BERT em TPUs](https://colab.research.google.com/github/tensorflow/docs-l10n/blob/master/site/pt-br/text/tutorials/bert_glue.ipynb) no Colab.

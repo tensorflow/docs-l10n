@@ -2,7 +2,7 @@
 
 ### Introdução
 
-**Você deve concluir o tutorial [template.ipynb](https://github.com/tensorflow/tfx/blob/master/docs/tutorials/tfx/template.ipynb) até o *Passo 6* para prosseguir com este tutorial.**
+**Você deve concluir o tutorial [template.ipynb](https://github.com/tensorflow/docs-l10n/blob/master/site/pt-br/tfx/tutorials/tfx/template.ipynb) até o *Passo 6* para prosseguir com este tutorial.**
 
 Este documento fornecerá instruções para testar um pipeline TensorFlow Extended (TFX) usando o `BaseStubExecuctor`, que gera artefatos falsos usando os dados de teste dourados. O objetivo é que os usuários substituam os executores que não desejam testar, para que possam economizar tempo na execução dos executores reais. O stub executor é fornecido com o pacote TFX Python em `tfx.experimental.pipeline_testing.base_stub_executor`.
 
