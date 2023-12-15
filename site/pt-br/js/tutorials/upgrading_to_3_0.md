@@ -6,7 +6,7 @@ As notas de versão estão [disponíveis aqui](https://github.com/tensorflow/tfj
 
 ### Módulos personalizados
 
-Oferecemos suporte à criação de módulos tfjs personalizados para permitir pacotes de navegador otimizados para produção. Envie menos código JavaScript aos usuários. Para saber mais, [confira este tutorial](https://github.com/tensorflow/tfjs-website/blob/master/docs/tutorials/deployment/size_optimized_bundles.md).
+Oferecemos suporte à criação de módulos tfjs personalizados para permitir pacotes de navegador otimizados para produção. Envie menos código JavaScript aos usuários. Para saber mais, [confira este tutorial](https://github.com/tensorflow/docs-l10n/blob/master/site/pt-br/tfjs-website/tutorials/deployment/size_optimized_bundles.md).
 
 Este recurso é destinado à implantação no navegador. Porém, o suporte a essa funcionalidade motivou algumas das mudanças descritas abaixo.
 
