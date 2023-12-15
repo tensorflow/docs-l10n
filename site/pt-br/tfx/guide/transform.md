@@ -1,6 +1,6 @@
 # O componente de pipeline Transform TFX
 
-O componente de pipeline Transform TFX executa engenharia de recursos em tf.Examples produzidos por um componente [ExampleGen](examplegen.md), usando um esquema de dados criado por um componente [SchemaGen](schemagen.md) e produz um SavedModel, bem como estatísticas sobre dados pré-transformação e pós-transformação. Quando executado, o SavedModel aceitará tf.Examples produzido por um componente ExampleGen e produzirá os dados do recurso transformado.
+O componente de pipeline Transform TFX executa engenharia de características em tf.Examples produzidos por um componente [ExampleGen](examplegen.md), usando um esquema de dados criado por um componente [SchemaGen](schemagen.md) e produz um SavedModel, bem como estatísticas sobre dados pré-transformação e pós-transformação. Quando executado, o SavedModel aceitará tf.Examples produzido por um componente ExampleGen e produzirá os dados da característica transformada.
 
 - Consome: tf.Examples de um componente ExampleGen e um esquema de dados de um componente SchemaGen.
 - Produz: Um SavedModel para um componente Trainer, estatísticas de pré-transformação e pós-transformação.
@@ -34,7 +34,7 @@ O TensorFlow Transform oferece suporte para estas e muitos outros tipos de trans
 
 - Realizar transformações arbitrárias nos seus dados antes de enviá-los ao seu modelo. O TensorFlow Transform cria transformações no grafo do TensorFlow para seu modelo para que as mesmas transformações sejam realizadas no momento do treinamento e da inferência. Você pode definir transformações que se referem a propriedades globais dos dados, como o valor máximo de uma característica em todas as instâncias de treinamento.
 
-Você pode transformar seus dados como quiser antes de executar o TFX. Mas se você fizer isto no TensorFlow Transform, as transformações se tornarão parte do grafo do TensorFlow. Essa abordagem ajuda a evitar distorções de treinamento/serviço.
+Você pode transformar seus dados como quiser antes de executar o TFX. Mas se você fizer isto no TensorFlow Transform, as transformações se tornarão parte do grafo do TensorFlow. Essa abordagem ajuda a evitar desvios de treinamento/serviço.
 
 As transformações dentro do seu código de modelagem usam FeatureColumns. Usando FeatureColumns, você pode definir bucketizações, transformações em inteiro que usam vocabulários predefinidos ou quaisquer outras transformações que possam ser definidas sem examinar os dados.
 

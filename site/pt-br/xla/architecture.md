@@ -3,7 +3,7 @@
 <div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;"> <img style="width:50%" src="./images/xlalogo.png">
 </div>
 
-## Por que construímos o XLA?
+## Por que criamos o XLA?
 
 Tínhamos diversos objetivos para o XLA trabalhar com o TensorFlow:
 
@@ -21,7 +21,7 @@ Tínhamos diversos objetivos para o XLA trabalhar com o TensorFlow:
 
 A linguagem de entrada para o XLA é chamada de "HLO IR", ou apenas HLO (High Level Operations). A semântica do HLO está descrita na página [Operation Semantics](./operation_semantics.md). É mais conveniente pensar no HLO como um [compilador IR](https://en.wikipedia.org/wiki/Intermediate_representation).
 
-XLA recebe grafos ("computações") definidos em HLO e os compila para instruções de máquina de várias arquiteturas. O XLA é modular no sentido de que é fácil inserir um back-end alternativo para [atingir alguma nova arquitetura de HW](./developing_new_backend.md). O back-end da CPU para x64 e ARM64, bem como o back-end da GPU NVIDIA estão na árvore de fontes do TensorFlow.
+XLA recebe grafos ("computações") definidos em HLO e os compila para instruções de máquina de várias arquiteturas. O XLA é modular no sentido de que é fácil inserir um back-end alternativo visando [alguma nova arquitetura de HW](./developing_new_backend.md). O back-end da CPU para x64 e ARM64, bem como o back-end da GPU NVIDIA estão na árvore de fontes do TensorFlow.
 
 O diagrama a seguir mostra o processo de compilação em XLA:
 

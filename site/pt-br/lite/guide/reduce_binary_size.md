@@ -22,8 +22,7 @@ A tabela abaixo indica o impacto de builds seletivas para alguns casos de uso co
     </tr>
   </thead>
   <tr>
-    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a>
-</td>
+    <td rowspan="2">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz">Mobilenet_1.0_224(float)</a> </td>
     <td rowspan="2">Classificação de imagens</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar (296.635 bytes)</td>
@@ -33,8 +32,7 @@ A tabela abaixo indica o impacto de builds seletivas para alguns casos de uso co
     <td>tensorflow-lite.aar (382.892 bytes)</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a>
-</td>
+    <td rowspan="2">       <a href="https://tfhub.dev/google/lite-model/spice/">SPICE</a> </td>
     <td rowspan="2">Extração de tons sonoros</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar (375.813 bytes)<br>tensorflow-lite-select-tf-ops.aar (1.676.380 bytes)</td>
@@ -44,8 +42,7 @@ A tabela abaixo indica o impacto de builds seletivas para alguns casos de uso co
     <td>tensorflow-lite.aar (421.826 bytes)<br>tensorflow-lite-select-tf-ops.aar (2.298.630 bytes)</td>
   </tr>
   <tr>
-    <td rowspan="2">       <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a>
-</td>
+    <td rowspan="2">       <a href="https://tfhub.dev/deepmind/i3d-kinetics-400/1">i3d-kinetics-400</a> </td>
     <td rowspan="2">Classificação de vídeos</td>
     <td>armeabi-v7a</td>
     <td>tensorflow-lite.aar (240.085 bytes)<br>tensorflow-lite-select-tf-ops.aar (1.708.597 bytes)</td>

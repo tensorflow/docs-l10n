@@ -92,7 +92,7 @@ O SavedModel é o formato de serialização preferencial para o uso nos programa
 
 Vários usuários do TensorFlow criam SavedModels e os carregam e executam com uma versão mais recente do TensorFlow. Em conformidade com o [semver](https://semver.org), os SavedModels escritos com uma versão do TensorFlow podem ser carregados e avaliados com uma versão mais recente do TensorFlow com o mesmo major.
 
-Fazemos garantias adicionais para SavedModels *compatíveis*. Chamamos um SavedModel que foi criado usando **apenas APIs não compatíveis, não descontinuadas e não experimentais** na versão major `N` do TensorFlow um <em data-md-type="emphasis">SavedModel compatível com a versão `N`</em>. Qualquer SavedModel compatível com a versão major `N` do TensorFlow pode ser carregado e executado com a versão major `N+1` do TensorFlow. No entanto, a funcionalidade necessária para criar ou modificar esse modelo pode não estar mais disponível, então essa garantia só se aplica ao SavedModel não modificado.
+Fazemos garantias adicionais para SavedModels *compatíveis*. Chamamos um SavedModel que foi criado usando **apenas APIs não compatíveis, não descontinuadas e não experimentais** na versão major `N` do TensorFlow um <em data-md-type="raw_html">SavedModel compatível com a versão `N`</em>. Qualquer SavedModel compatível com a versão major `N` do TensorFlow pode ser carregado e executado com a versão major `N+1` do TensorFlow. No entanto, a funcionalidade necessária para criar ou modificar esse modelo pode não estar mais disponível, então essa garantia só se aplica ao SavedModel não modificado.
 
 Vamos nos empenhar para preservar a compatibilidade com versões anteriores o máximo possível, para que os arquivos serializados possam ser utilizados por um longo período.
 

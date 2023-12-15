@@ -115,7 +115,7 @@ Dicas para usar Fairness Indicators:
 - **Altere a fatia de referência**, a primeira barra do grafo, usando o menu dropdown. Os deltas serão calculados com base neste valor de referência.
 - **Selecione limites** usando o menu dropdown. Você pode visualizar vários limites no mesmo grafo. Os limites selecionados estarão em negrito e você pode clicar sobre um limite em negrito para deselecioná-lo.
 - **Passe o mouse sobre uma barra** para ver as métricas dessa fatia.
-- **Identifique disparidades com a linha de referência** usando a coluna "Diferença com linha de referência", que identifica a diferença percentual entre a fatia atual e a referência.
+- **Identifique disparidades com a linha de referência** usando a coluna "Diff w. baseline" ("Diferença com linha de referência"), que identifica a diferença percentual entre a fatia atual e a referência.
 - **Explore detalhadamente os pontos de dados de uma fatia** usando a [ferramenta What-If](https://pair-code.github.io/what-if-tool/). Veja [aqui](https://github.com/tensorflow/fairness-indicators/) um exemplo.
 
 #### Renderizando Fairness Indicators para múltiplos modelos
@@ -167,9 +167,9 @@ tf.Example {
 
 ### Modelos
 
-Em vez de especificar um modelo, você cria uma configuração e um extrator de avaliação independente do modelo para analisar e fornecer os dados que o TFMA precisa para calcular as métricas. A especificação [ModelAgnosticConfig](https://github.com/tensorflow/model-analysis/blob/master/tensorflow_model_analysis/model_agnostic_eval/model_agnostic_predict.py) define as características, previsões e rótulos a serem usados ​​nos exemplos de entrada.
+Em vez de especificar um modelo, você cria um extrator e configuração de avaliação independente do modelo para processar e fornecer os dados que o TFMA precisa para computar as métricas. A especificação [ModelAgnosticConfig](https://github.com/tensorflow/model-analysis/blob/master/tensorflow_model_analysis/model_agnostic_eval/model_agnostic_predict.py) define as características, previsões e rótulos a serem usados ​​nos exemplos de entrada.
 
-Para isso, crie um mapa de características com chaves que representam todas as características, incluindo chaves de rótulo e predição e valores que representam o tipo de dados da característica.
+Para isso, crie um mapa de características com chaves que representam todas as características, incluindo chaves de rótulo e previsão e valores que representam o tipo de dados da característica.
 
 ```python
 feature_map[label_key] = tf.FixedLenFeature([], tf.float32, default_value=[0])

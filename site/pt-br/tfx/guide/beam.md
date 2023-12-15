@@ -21,9 +21,9 @@ Uma complexidade notável do uso do Beamnum pipeline TFX é lidar com código pe
 O TFX conta com o suporte do Beam para [gerenciar dependências de pipeline do Python](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/) para lidar com dependências do Python. Atualmente existem duas maneiras de gerenciar isso:
 
 1. Fornecendo código Python e dependências como um pacote fonte
-2. [Somente Dataflow] Usando uma imagem de container para um worker
+2. [Somente Dataflow] Usando uma imagem de container como worker
 
-Esses são discutidos a seguir.
+Essas soluções são discutidas a seguir.
 
 ### Fornecendo código Python e dependências como um pacote fonte
 

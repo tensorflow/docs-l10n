@@ -30,7 +30,7 @@ As organizações orientadas por IA estão usando dados e aprendizado de máquin
 
 *“As empresas que absorverem totalmente a IA nos seus workflows de produção de valor até 2025 dominarão a economia mundial de 2030, com um crescimento de fluxo de caixa de +120%”,* de acordo com o McKinsey Global Institute.
 
-Mas não é fácil agora. Os sistemas de aprendizao de máquina (ML) têm uma capacidade especial de criar dívida técnica se não forem bem geridos. <a href="https://cloud.google.com/blog/products/ai-machine-learning/key-requirements-for-an-mlops-foundation" class="external" target="_blank">Leia mais</a>
+Mas não é fácil agora. Os sistemas de aprendizado de máquina (ML) têm uma capacidade especial de criar dívida técnica se não forem bem geridos. <a href="https://cloud.google.com/blog/products/ai-machine-learning/key-requirements-for-an-mlops-foundation" class="external" target="_blank">Leia mais</a>
 
 ## Como criar e implantar um cartão modelo (model card) na nuvem com Scikit-Learn
 

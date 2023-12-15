@@ -4,13 +4,13 @@ O TFX facilita a orquestração do fluxo de trabalho de machine learning (ML) co
 
 - Automatizar seu processo de ML, o que permite treinar, avaliar e implantar regularmente seu modelo.
 - Criar pipelines de ML que incluem análise profunda do desempenho do modelo e validação de modelos recém-treinados para garantir desempenho e confiabilidade.
-- Monitorar dados de treinamento em busca de anomalias e eliminar distorções no fornecimento de treinamento
+- Monitorar dados de treinamento em busca de anomalias e eliminar desvios no fornecimento de treinamento
 - Aumentar a velocidade da experimentação executando um pipeline com diferentes conjuntos de hiperparâmetros.
 
 Um processo típico de desenvolvimento de pipeline começa numa máquina local, com análise de dados e configuração de componentes, antes de ser implantado na produção. Este guia descreve duas maneiras de construir um pipeline localmente.
 
-- Personalizando um modelo de pipeline do TFX para atender às necessidades do seu workflows de ML. Os modelos de pipeline do TFX são workflows pré-construídos que demonstram as práticas recomendadas usando os componentes padrão do TFX.
-- Criando um pipeline usando TFX. Neste caso de uso, você define um pipeline sem partir de um modelo.
+- Personalizando um template de pipeline do TFX para atender às necessidades do seu workflows de ML. Os templates de pipeline do TFX são workflows pré-construídos que demonstram as práticas recomendadas usando os componentes padrão do TFX.
+- Criando um pipeline usando TFX. Neste caso de uso, você define um pipeline sem partir de um template.
 
 Ao desenvolver seu pipeline, você poderá executá-lo com `LocalDagRunner`. Depois que os componentes do pipeline tiverem sido bem definidos e testados, você pode usar um orquestrador de nível de produção, como Kubeflow ou Airflow.
 
@@ -24,21 +24,21 @@ pip install tfx
 
 Se você é novato em pipelines TFX, [aprenda mais sobre os principais conceitos dos pipelines TFX](understanding_tfx_pipelines) antes de continuar.
 
-## Crie um pipeline usando um modelo
+## Crie um pipeline usando um template
 
-Os modelos de pipeline do TFX facilitam o início do desenvolvimento de um pipeline, fornecendo um conjunto pré-construído de definições de pipeline que você pode adaptar para seu caso de uso.
+Os templates de pipeline do TFX facilitam o início do desenvolvimento de um pipeline, fornecendo um conjunto pré-construído de definições de pipeline que você pode adaptar para seu caso de uso.
 
-As seções a seguir descrevem como criar uma cópia de um modelo e personalizá-lo para atender às suas necessidades.
+As seções a seguir descrevem como criar uma cópia de um template e personalizá-lo para atender às suas necessidades.
 
-### Crie uma cópia do modelo do pipeline
+### Crie uma cópia do template do pipeline
 
-1. Veja a lista dos modelos de pipeline TFX disponíveis:
+1. Veja a lista dos templates de pipeline TFX disponíveis:
 
     <pre class="devsite-click-to-copy devsite-terminal">
         tfx template list
         </pre>
 
-2. Selecione um modelo da lista
+2. Selecione um template da lista
 
     <pre class="devsite-click-to-copy devsite-terminal">
         tfx template copy --model=&lt;var&gt;template&lt;/var&gt; --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; \
@@ -47,19 +47,19 @@ As seções a seguir descrevem como criar uma cópia de um modelo e personalizá
 
     Substitua o seguinte:
 
-    - <var>template</var>: O nome do modelo que você deseja copiar.
+    - <var>template</var>: O nome do template que você deseja copiar.
     - <var>pipeline-name</var>: o nome do pipeline a ser criado.
-    - <var>destination-path</var>: o caminho para copiar o modelo.
+    - <var>destination-path</var>: o caminho para copiar o template.
 
     Saiba mais sobre o [comando `tfx template copy`](cli#copy).
 
-3. Uma cópia do modelo de pipeline foi criada no caminho especificado.
+3. Uma cópia do template de pipeline foi criada no caminho especificado.
 
-Observação: O restante deste guia pressupõe que você selecionou o modelo `penguin`.
+Observação: O restante deste guia pressupõe que você selecionou o template `penguin`.
 
-### Explore o modelo do pipeline
+### Explore o template do pipeline
 
-Esta seção fornece uma visão geral da estrutura criada por um modelo.
+Esta seção fornece uma visão geral da estrutura criada por um template.
 
 1. Explore os diretórios e arquivos que foram copiados para o diretório raiz do seu pipeline
 
@@ -74,9 +74,9 @@ Esta seção fornece uma visão geral da estrutura criada por um modelo.
 
     - Um diretório **models** com código de pré-processamento e implementações de modelo
 
-    - O modelo copia executores DAG para ambiente local e Kubeflow.
+    - O template copia executores DAG para ambiente local e Kubeflow.
 
-    - Alguns modelos também incluem Notebooks Python para que você possa explorar seus dados e artefatos com metadados de aprendizado de máquina.
+    - Alguns template também incluem Notebooks Python para que você possa explorar seus dados e artefatos com metadados de aprendizado de máquina.
 
 2. Execute os seguintes comandos no diretório do pipeline:
 
@@ -90,12 +90,12 @@ Esta seção fornece uma visão geral da estrutura criada por um modelo.
 
     O comando cria uma execução de pipeline usando `LocalDagRunner`, que adiciona os seguintes diretórios ao pipeline:
 
-    - Um diretório **tfx_metadata** que contém o armazenamento de metadados de ML usado localmente.
+    - Um diretório **tfx_metadata** que contém o armazenamento ML Metadata usado localmente.
     - Um diretório **tfx_pipeline_output** que contém as saídas de arquivos do pipeline.
 
     Observação: `LocalDagRunner` é um dos vários orquestradores suportados no TFX. É especialmente adequado para executar pipelines localmente para iterações mais rápidas, possivelmente com datasets menores. `LocalDagRunner` pode não ser adequado para uso em produção, pois é executado numa única máquina, o que é mais vulnerável à perda de trabalho se o sistema ficar indisponível. O TFX também oferece suporte a orquestradores como Apache Beam, Apache Airflow e Kubeflow Pipeline. Se você estiver usando o TFX com um orquestrador diferente, use o executor DAG apropriado para esse orquestrador.
 
-    Observação: no momento em que este artigo foi escrito, `LocalDagRunner` era usado no modelo `penguin`, enquanto o modelo `taxi` usava Apache Beam. Os arquivos de configuração do modelo `taxi` estão configurados para usar o Beam e o comando CLI é o mesmo.
+    Observação: no momento em que este artigo foi escrito, `LocalDagRunner` era usado no template `penguin`, enquanto o template `taxi` usava Apache Beam. Os arquivos de configuração do template `taxi` estão configurados para usar o Beam e o comando CLI é o mesmo.
 
 3. Abra o arquivo `pipeline/configs.py` do seu pipeline e revise seu conteúdo. Este script define as opções de configuração usadas pelo pipeline e pelas funções do componente. É aqui que você especificaria coisas como a localização da fonte de dados ou o número de passos de treinamento numa execução.
 
@@ -105,13 +105,13 @@ Esta seção fornece uma visão geral da estrutura criada por um modelo.
 
 5. Abra o arquivo `local_runner.py` e revise seu conteúdo. Este script cria uma execução de pipeline e especifica os *parâmetros* da execução, como `data_path` e `preprocessing_fn`.
 
-6. Você revisou a estrutura criado pelo modelo e criou uma execução de pipeline usando `LocalDagRunner`. Em seguida, você precisa personalizar o modelo para atender às suas necessidades.
+6. Você revisou a estrutura criado pelo template e criou uma execução de pipeline usando `LocalDagRunner`. Em seguida, você precisa personalizar o template para atender às suas necessidades.
 
 ### Personalize seu pipeline
 
-Esta seção fornece uma visão geral de como começar a personalizar seu modelo.
+Esta seção fornece uma visão geral de como começar a personalizar seu template.
 
-1. Projete seu pipeline. A estrutura fornecida por um modelo ajuda a implementar um pipeline para dados tabulares usando os componentes padrão do TFX. Se você estiver migrando um workflow de ML existente para um pipeline, talvez seja necessário revisar seu código para aproveitar ao máximo [os componentes padrão do TFX](index#tfx_standard_components). Você também pode precisar criar [componentes personalizados](understanding_custom_components) que implementem recursos exclusivos do seu workflow ou que ainda não sejam suportados pelos componentes padrão do TFX.
+1. Projete seu pipeline. A estrutura fornecida por um template ajuda a implementar um pipeline para dados tabulares usando os componentes padrão do TFX. Se você estiver migrando um workflow de ML existente para um pipeline, talvez seja necessário revisar seu código para aproveitar ao máximo [os componentes padrão do TFX](index#tfx_standard_components). Você também pode precisar criar [componentes personalizados](understanding_custom_components) que implementem recursos exclusivos do seu workflow ou que ainda não sejam suportados pelos componentes padrão do TFX.
 
 2. Depois de projetar seu pipeline, personalize-o iterativamente seguindo o processo a seguir. Comece pelo componente que consome dados no seu pipeline, que geralmente é o componente `ExampleGen`.
 
@@ -127,13 +127,13 @@ Esta seção fornece uma visão geral de como começar a personalizar seu modelo
 
     3. Assim que essa personalização estiver funcionando, passe para a próxima personalização.
 
-3. Trabalhando de forma iterativa, você poderá personalizar cada etapa do fluxo de trabalho do modelo para atender às suas necessidades.
+3. Trabalhando de forma iterativa, você poderá personalizar cada etapa do fluxo de trabalho do template para atender às suas necessidades.
 
 ## Crie um pipeline personalizado
 
-Use as instruções a seguir para saber mais sobre como criar um pipeline personalizado sem usar um modelo.
+Use as instruções a seguir para saber mais sobre como criar um pipeline personalizado sem usar um template.
 
-1. Projete seu pipeline. Os componentes padrão do TFX fornecem funcionalidade comprovada para ajudá-lo a implementar um workflow de ML completo. Se você estiver migrando um workflow de ML existente para um pipeline, talvez seja necessário revisar seu código para aproveitar ao máximo os componentes padrão do TFX. Também pode ser necessário criar [componentes personalizados](understanding_custom_components) que implementem recursos como aumento de dados.
+1. Projete seu pipeline. Os componentes padrão do TFX fornecem funcionalidade comprovada para ajudá-lo a implementar um workflow de ML completo. Se você estiver migrando um workflow de ML existente para um pipeline, talvez seja necessário revisar seu código para aproveitar ao máximo os componentes padrão do TFX. Também pode ser necessário criar [componentes personalizados](understanding_custom_components) que implementem recursos como ampliação de dados.
 
     - Saiba mais sobre os [componentes padrão do TFX](index#tfx_standard_components).
     - Saiba mais sobre [componentes personalizados](understanding_custom_components).

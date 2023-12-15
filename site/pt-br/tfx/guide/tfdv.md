@@ -10,7 +10,7 @@ Existem muitos motivos para analisar e transformar seus dados:
     - Características com valores fora do intervalo esperado.
     - Anomalias de dados.
     - O modelo de transferência aprendida com pré-processamento que não corresponde aos dados de treinamento.
-- Para projetar conjuntos de recursos mais eficazes. Por exemplo, você poderá identificar:
+- Para projetar conjuntos de características mais eficazes. Por exemplo, você poderá identificar:
     - Características especialmente informativas.
     - Características redundantes.
     - Características que variam tanto em escala que podem retardar o aprendizado.
@@ -45,7 +45,7 @@ O TensorFlow Data Validation identifica quaisquer anomalias nos dados de entrada
 
 O Tensorflow Data Validation normalmente é chamado várias vezes no contexto do pipeline TFX: (i) para cada divisão obtida do ExampleGen, (ii) para todos os dados pré-transformação usados ​​pelo Transform e (iii) para todos os dados pós-transformação gerados pelo Transform. Quando chamado no contexto de Transform (ii-iii), as opções de estatísticas e restrições baseadas em esquema podem ser definidas definindo [`stats_options_updater_fn`](tft.md). Isto é útil ao validar dados não estruturados (por exemplo, características em formato texto). Veja o [user code](https://github.com/tensorflow/tfx/blob/master/tfx/examples/bert/mrpc/bert_mrpc_utils.py), como exemplo.
 
-#### Recursos avançados de esquemas
+#### Características em esquemas avançados
 
 Esta seção aborda configurações mais avançadas para esquemas que podem ser úteis em determinadas situações.
 
@@ -122,7 +122,7 @@ Veja o [Guia de introdução ao TensorFlow Data Validation](https://www.tensorfl
 
 ### Detecção de deriva (drift) de dados
 
-A detecção de deriva é suportada entre intervalos consecutivos de dados (ou seja, entre o intervalo N e o intervalo N+1), como por exemplo, entre diferentes dias de dados de treinamento. Expressamos a deriva em termos de [distância L-infinito](https://en.wikipedia.org/wiki/Chebyshev_distance) para características categóricas e [divergência aproximada de Jensen-Shannon](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence) para características numéricas. Você pode definir a distância limite para receber avisos quando a deriva for maior do que a aceitável. Definir a distância correta é normalmente um processo iterativo que requer conhecimento de domínio e experimentação.
+A detecção de deriva é suportada entre spans consecutivos de dados (ou seja, entre o span N e o span N+1), como por exemplo, entre diferentes dias de dados de treinamento. Expressamos a deriva em termos de [distância L-infinito](https://en.wikipedia.org/wiki/Chebyshev_distance) para características categóricas e [divergência aproximada de Jensen-Shannon](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence) para características numéricas. Você pode definir a distância limite para receber avisos quando a deriva for maior do que a aceitável. Definir a distância correta é normalmente um processo iterativo que requer conhecimento de domínio e experimentação.
 
 Veja o [Guia de introdução ao TensorFlow Data Validation](https://www.tensorflow.org/tfx/data_validation/get_started#checking_data_skew_and_drift) para mais informações sobre como configurar a detecção de derivas (drift).
 
@@ -152,7 +152,7 @@ Para detectar características distribuídas uniformemente numa Facets Overview,
 
 ![Histograma de dados uniformes](images/uniform.png)
 
-Os dados em formato string são representados usando gráficos de barras se houver 20 ou menos valores exclusivos e como um gráfico de distribuição cumulativa se houver mais de 20 valores exclusivos. Portanto, para dados em formato string, distribuições uniformes poderão aparecer como gráficos de barras planas como o mostrado acima ou linhas retas como mostrado abaixo:
+Os dados em formato string são representados usando gráficos de barras se houver 20 ou menos valores exclusivos e como um grafo de distribuição cumulativa se houver mais de 20 valores exclusivos. Portanto, para dados em formato string, distribuições uniformes poderão aparecer como gráficos de barras planas como o mostrado acima ou linhas retas como mostrado abaixo:
 
 ![Gráfico de linhas: distribuição cumulativa de dados uniformes](images/uniform_cumulative.png)
 
