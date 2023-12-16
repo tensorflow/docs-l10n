@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-06-13' } *-->
-
 # 모델 형식
 
 [tfhub.dev](https://tfhub.dev)는 TF2 SavedModel, TF1 Hub 형식, TF.js 및 TFLite와 같은 모델 형식을 호스팅합니다. 이 페이지는 각 모델 형식에 대한 개요를 제공합니다.
+
+tfhub.dev에 게시된 콘텐츠는 지정된 형식을 따르고 당사 약관(https://tfhub.dev/terms)에서 허용하는 경우 다른 모델 허브에 자동으로 미러링될 수 있습니다. 자세한 내용은 [문서 게시](publish.md) 글을 참조하고 미러링을 선택 해제하려면 [기여 문서](contribute_a_model.md)를 참조해주세요.
 
 ## TensorFlow 형식
 

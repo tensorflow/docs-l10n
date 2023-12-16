@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-07-11'} *-->
-
 # TensorFlow 2에서 TF 허브의 SavedModel
 
 [TensorFlow 2의 SavedModel 형식](https://www.tensorflow.org/guide/saved_model)은 TensorFlow 허브에서 사전 훈련된 모델 및 모델 조각을 공유하는 권장 방법입니다. 이 형식은 이전 [TF1 허브 형식](tf1_hub_module.md)을 대체하고 새로운 API 세트와 함께 제공됩니다.
@@ -36,7 +34,7 @@ model = tf.keras.Sequential([
 ])
 ```
 
-[텍스트 분류 colab](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)은 이러한 분류자를 훈련하고 평가하는 방법을 보여주는 완벽한 예입니다.
+[텍스트 분류 colab](https://colab.research.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_text_classification.ipynb)은 이러한 분류자를 훈련하고 평가하는 방법을 보여주는 완벽한 예입니다.
 
 `hub.KerasLayer`의 모델 가중치는 기본적으로 훈련 불가능한 것으로 설정됩니다. 이를 변경하는 방법은 아래 미세 조정 섹션을 참조하세요. Keras에서 일반적으로 그렇듯이 동일한 레이어 객체의 모든 애플리케이션 간에 가중치가 공유됩니다.
 
@@ -49,6 +47,10 @@ model = tf.keras.Sequential([
 TensorFlow 허브(또는 [호스팅](hosting.md) 프로토콜을 구현하는 다른 HTTPS 서버)의 SavedModel을 사용하면 로컬 파일 시스템에 이러한 모델(아직 없는 경우)이 다운로드되어 압축이 풀립니다. 환경 변수 `TFHUB_CACHE_DIR` 설정을 통해 다운로드하고 압축 해제하지 않은 SavedModel을 캐싱하기 위한 기본 임시 위치를 재정의할 수 있습니다. 자세한 내용은 [캐싱](caching.md)을 참조하세요.
 
 ### 하위 수준 TensorFlow에서 SavedModel 사용하기
+
+#### 모델 핸들
+
+SavedModels는 지정된 `handle`에서 로드할 수 있으며, 여기서 `handle`은 파일 시스템 경로, 유효한 TFhub.dev 모델 URL(예: "https://tfhub.dev/...")입니다. Kaggle 모델 URL은 약관 및 모델 자산과 관련된 라이선스(예: "https://www.kaggle.com/...")에 따라 TFhub.dev 핸들을 미러링합니다. Kaggle 모델의 핸들은 해당 TFhub.dev 핸들과 동일합니다.
 
 ` hub.load(handle)` 함수는 SavedModel을 다운로드하고 압축을 해제한 다음(`handle`이 이미 파일 시스템 경로인 경우는 제외) TensorFlow의 내장 함수 `tf.saved_model.load()`를 이용해 로드 결과를 반환합니다. 따라서 `hub.load()`는 유효한 모든 SavedModel을 처리할 수 있습니다(이 점에서 TF1의 이전 `hub.Module`과 다름).
 
@@ -145,7 +147,7 @@ layer = hub.KerasLayer(..., trainable=True)
 
 레이어에서 로드한 SavedModel을 미세 조정할 수 있습니다. SavedModel에 선언된 훈련 가능한 가중치 및 가중치 regularizer를 Keras 모델에 추가하고 훈련 모드에서 SavedModel의 계산을 실행합니다(드롭아웃 등을 고려).
 
-[이미지 분류 colab](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)에 선택적 미세 조정이 포함된 엔드 투 엔드 예제가 있습니다.
+[이미지 분류 colab](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_image_retraining.ipynb) 에는 선택적 미세 조정이 포함 된 종단 간 예제가 포함되어 있습니다.
 
 #### 미세 조정 결과 다시 내보내기
 

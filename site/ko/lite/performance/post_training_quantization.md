@@ -117,8 +117,6 @@ converter.representative_dataset = representative_dataset
 tflite_quant_model = converter.convert()
 </pre>
 
-참고: 변환기는 현재 양자화할 수 없는 연산이 일어나면 오류를 발생시킵니다.
-
 ### Float16 양자화
 
 가중치를 16bit 부동 소수점 숫자에 대한 IEEE 표준인 float16으로 양자화하여 부동 소수점 모델의 크기를 줄일 수 있습니다. 가중치의 float16 양자화를 활성화하려면 다음 스탭을 사용합니다.
@@ -166,7 +164,12 @@ converter.target_spec.supported_ops = [tf.lite.OpsSet.EXPERIMENTAL_TFLITE_BUILTI
 tflite_quant_model = converter.convert()
 </pre>
 
-이 양자화 체계에 의해 정확도가 향상되는 사용 사례의 예는 다음과 같습니다: * 초고해상도, * 노이즈 제거 및 빔포밍과 같은 오디오 신호 처리, * 이미지 노이즈 제거, * 단일 이미지에서 HDR 재구성.
+이 양자화 체계가 제공하는 정확성 향상의 사용 사례는 다음과 같습니다.
+
+- 초고해상도
+- 소음 상쇄(노이즈 캔슬링) 및 빔포밍과 같은 오디오 신호 처리
+- 이미지 노이즈 제거
+- 단일 이미지에서 HDR 재구성
 
 이 양자화의 단점은 다음과 같습니다.
 
@@ -179,7 +182,7 @@ tflite_quant_model = converter.convert()
 
 ### 모델 정확성
 
-가중치는 훈련 후에 양자화되기 때문에 특히 소규모 네트워크의 경우 정확성 손실이 있을 수 있습니다. [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&q=quantized){:.external}에서 특정 네트워크에 대해 사전 훈련된 전체 양자화 모델이 제공됩니다. 정확성 저하가 허용 가능한 한계 내에 있는지 확인하기 위해 양자화된 모델의 정확성을 확인하는 것이 중요합니다. [TensorFlow Lite 모델 정확성](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}을 평가하는 도구가 있습니다.
+가중치는 훈련 후에 양자화되기 때문에 특히 소규모 네트워크의 경우 정확성 손실이 있을 수 있습니다. [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&q=quantized){:.external}의 특정 네트워크에 대한 사전 훈련된 전체 양자화 모델이 제공됩니다. 정확성 저하가 허용 가능한 한계 내에 있는지 확인하기 위해 양자화된 모델의 정확성을 확인하는 것이 중요합니다. [TensorFlow Lite 모델 정확성](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/evaluation/tasks){:.external}을 평가하는 도구가 있습니다.
 
 또는 정확성 저하가 너무 크면 [양자화 인식 훈련](https://www.tensorflow.org/model_optimization/guide/quantization/training)을 사용해 볼 수 있습니다. 그러나 해당 훈련을 사용하려면 모델 훈련 중에 수정하여 가짜 양자화 노드를 추가해야 하지만, 이 페이지의 훈련 후 양자화 기술은 기존의 사전 훈련된 모델을 사용합니다.
 
@@ -195,4 +198,4 @@ $$real_value = (int8_value - zero_point) \times scale$$
 
 - 텐서별 활성화/입력은 [-128, 127] 범위의 int8 2의 보수 값으로 표시되며 [-128, 127] 범위의 영점을 포함합니다.
 
-양자화 체계에 대한 자세한 내용은 [양자화 사양](./quantization_spec)을 참조하세요. TensorFlow Lite의 대리자 인터페이스에 연결하려는 하드웨어 공급 업체는 여기에 설명된 양자화 체계를 구현해보는 것이 좋습니다.
+양자화 체계에 대한 자세한 내용은 [정량화 사양](./quantization_spec)을 참조하세요. TensorFlow Lite의 대리자 인터페이스에 연결하려는 하드웨어 공급 업체 여기에 설명된 양자화 체계를 구현해보는 것이 좋습니다.

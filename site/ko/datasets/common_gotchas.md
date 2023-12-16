@@ -157,3 +157,28 @@ x = f(y)  # Clear inputs/outputs
 
 x = self.f(y)  # Does f depend on additional hidden variables ? Is it stateful ?
 ```
+
+## Python에서 Lazy imports
+
+우리는 TensorFlow와 같은 큰 모듈을 느리게(lazy) 가져옵니다. Lazy imports는 모듈의 실제 가져오기를 모듈의 첫 번째 사용으로 연기합니다. 따라서 이 큰 모듈이 필요하지 않은 사용자는 이러한 모듈을 가져오게 되는 일이 없게 됩니다.
+
+```python
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+# After this statement, TensorFlow is not imported yet
+
+...
+
+features = tfds.features.Image(dtype=tf.uint8)
+# After using it (`tf.uint8`), TensorFlow is now imported
+```
+
+내부적으로 [`LazyModule` 클래스](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/utils/lazy_imports_utils.py)는 속성이 액세스될 때(`__getattr__`)만 모듈을 실제로 가져오는 팩토리 역할을 합니다.
+
+여러분은 이를 컨텍스트 관리자와 함께 편리하게 사용할 수도 있습니다.
+
+```python
+from tensorflow_datasets.core.utils.lazy_imports_utils import lazy_imports
+
+with lazy_imports(error_callback=..., success_callback=...):
+  import some_big_module
+```

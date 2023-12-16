@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-07' } *-->
-
 # TF1/TF2의 모델 호환성
 
 ## TF Hub 모델 형식
@@ -38,8 +36,7 @@ outputs = m(inputs)</pre> </td>
   </tr>
   <tr>
     <td>생성</td>
-    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">전체 TF1 Hub 형식 생성 가이드 참조</a>) <br><div style="font-style: italic; font-size: 14px"> 참고: TF1 Hub 형식은 TF1에 맞춰져 있으며 TF2에서는 부분적으로만 지원됩니다. TF2 SavedModel의 생성을 고려해 보세요.</div>
-</td>
+    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf1_hub_module#general_approach">전체 TF1 Hub 형식 생성 가이드 참조</a>) <br><div style="font-style: italic; font-size: 14px"> 참고: TF1 Hub 형식은 TF1에 맞춰져 있으며 TF2에서는 부분적으로만 지원됩니다. TF2 SavedModel의 생성을 고려해 보세요.</div> </td>
     <td style="text-align: center">지원되지 않음</td>
   </tr>
 </table>
@@ -62,8 +59,7 @@ TF1.15 이전에는 지원되지 않습니다.
     <td>       hub.load 사용     <pre style="font-size: 12px;" lang="python">m = hub.load(handle)
 outputs = m(inputs)</pre>       또는 hub.KerasLayer 사용      <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle)
 outputs = m(inputs)</pre> </td>
-    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">전체 TF2 SavedModel 로딩 가이드</a>). 다음 중 하나를 사용하세요. hub.load <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre> 또는 hub.KerasLayer <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre>
-</td>
+    <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf2_saved_model#using_savedmodels_from_tf_hub">전체 TF2 SavedModel 로딩 가이드</a>). 다음 중 하나를 사용하세요. hub.load <pre style="font-size: 12px;" lang="python">m = hub.load(handle) outputs = m(inputs)</pre> 또는 hub.KerasLayer <pre style="font-size: 12px;" lang="python">m = hub.KerasLayer(handle) outputs = m(inputs)</pre> </td>
   </tr>
   <tr>
     <td>미세 조정</td>

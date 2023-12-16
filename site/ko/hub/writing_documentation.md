@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2022-07-27' review_interval: '6 months' } *-->
-
 # 문서 작성
 
 tfhub.dev에 모델을 제공하려면 마크다운 형식의 설명서를 제공해야 합니다. tfhub.dev에 모델을 추가하는 과정에 대한 전체 개요는 [모델 기여](contribute_a_model.md) 가이드를 참조하세요.
+
+**참고:** 이 문서 전체에서는 "게시자"(publisher)라는 용어를 사용하며 이는 tfhub.dev에서 호스팅되는 모델의 기록 소유자를 의미합니다.
 
 ## 마크다운 설명서의 유형
 
@@ -139,7 +139,7 @@ Encoder of greater-than-word length text trained on a variety of data.
 - `network-architecture`: 모델이 기반으로 하는 네트워크 아키텍처(예: "mobilenet-v3"). 지원되는 모든 값은 [network_architecture.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/network_architecture.yaml)에 정의되어 있습니다.
 - `language`: 텍스트 모델이 훈련된 언어의 언어 코드(예: "en"). 지원되는 모든 값은 [language.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/language.yaml)에 정의되어 있습니다.
 - `license`: 모델에 적용되는 라이선스(예: "mit"). 게시된 모델의 기본 가정 라이선스는 [Apache 2.0 라이선스](https://opensource.org/licenses/Apache-2.0) 입니다. 지원되는 모든 값은 [license.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/license.yaml)에 정의되어 있습니다. `custom` 라이선스는 경우에 따라 특별히 고려할 필요가 있습니다.
-- `colab`: 모델을 사용하거나 훈련하는 방법을 보여주는 노트북의 HTTPS URL([예](https://colab.sandbox.google.com/github/tensorflow/hub/blob/master/examples/colab/bigbigan_with_tf_hub.ipynb): [bigbigan-resnet50](https://tfhub.dev/deepmind/bigbigan-resnet50/1)). `colab.research.google.com`으로 연결되어야 합니다. GitHub에서 호스팅되는 Jupyter 노트북은 `https://colab.research.google.com/github/ORGANIZATION/PROJECT/ blob/master/.../my_notebook.ipynb`를 통해 액세스할 수 있습니다.
+- `colab`: 모델을 사용하거나 훈련하는 방법을 보여주는 노트북의 HTTPS URL([예](https://colab.sandbox.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/bigbigan_with_tf_hub.ipynb): [bigbigan-resnet50](https://tfhub.dev/deepmind/bigbigan-resnet50/1)). `colab.research.google.com`으로 연결되어야 합니다. GitHub에서 호스팅되는 Jupyter 노트북은 `https://colab.research.google.com/github/ORGANIZATION/PROJECT/ blob/master/.../my_notebook.ipynb`를 통해 액세스할 수 있습니다.
 - `demo`: TF.js 모델을 사용할 수 있는 방법을 보여주는 웹사이트의 HTTPS URL([예](https://teachablemachine.withgoogle.com/train/pose): [posenet](https://tfhub.dev/tensorflow/tfjs-model/posenet/mobilenet/float/075/1/default/1)).
 - `interactive-visualizer`: 모델 페이지에 포함되어야 하는 비주얼라이저의 이름(예: "vision"). 비주얼라이저를 표시하면 사용자가 모델의 예측을 대화식으로 탐색할 수 있습니다. 지원되는 모든 값은 [interactive_visualizer.yaml](https://github.com/tensorflow/tfhub.dev/blob/master/tags/interactive_visualizer.yaml)에 정의되어 있습니다.
 

@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2021-11-25' review_interval: '6 months' } *-->
-
 # 풀 요청 제출하기
 
 이 페이지는 Markdown 문서 파일이 포함된 풀 요청을 [tensorflow/tfhub.dev](https://github.com/tensorflow/tfhub.dev) GitHub 저장소에 제출하는 내용을 다룹니다. 먼저 Markdown 파일을 작성하는 방법에 대한 자세한 내용은 [문서 작성 가이드](writing_documentation.md)를 참조하세요.
+
+**참고:** 모델을 다른 모델 허브에 미러링하려면 MIT, CC0 또는 Apache 라이선스를 사용하세요. 모델이 다른 모델 허브에 미러링되지 않게 하려면 다른 적절한 라이선스를 사용하세요.
 
 ## GitHub 작업 확인
 

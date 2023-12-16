@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'arnoegw' reviewed: '2020-09-11' } *-->
-
 # 텍스트에 대한 공통 서명
 
 이 페이지에서는 텍스트 입력을 수용하는 작업을 위해 [TF1 Hub 형식](../tf1_hub_module.md)의 모듈에서 구현해야 하는 일반적인 서명을 설명합니다. [TF2 SavedModel 형식](../tf2_saved_model.md)에 대해서는 유사한 [SavedModel API](../common_saved_model_apis/text.md)를 참조하세요.

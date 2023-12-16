@@ -36,7 +36,7 @@ auth.authenticate_user()
 로컬 머신(또는 VM)에서 실행하는 경우, 다음을 실행하여 계정으로 인증할 수 있습니다.
 
 ```shell
-gcloud login application-default
+gcloud auth application-default login
 ```
 
 서비스 계정으로 로그인하려면, JSON 파일 키를 다운로드하고 설정하세요.

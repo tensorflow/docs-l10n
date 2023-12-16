@@ -1,8 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-10-05' review_interval: '6 months' } *-->
-
 # 일반적인 문제
 
 문제를 여기에서 찾을 수 없는 경우, 새 문제를 등록하기 전에 [github 문제](https://github.com/tensorflow/hub/issues)를 검색하세요.
+
+**참고:** 이 문서에서는 예제에서 TFhub.dev URL 핸들을 사용합니다. 다른 유효한 핸들 유형에 대한 자세한 정보는 [여기](tf2_saved_model.md#model_handles)를 참조하세요.
 
 ## TypeError: 'AutoTrackable' 객체를 호출할 수 없습니다.
 
@@ -45,7 +45,7 @@ $ python
 
 ## 사전 초기화된 모듈에서 추론 실행하기
 
-입력 데이터에 모듈을 여러 번 적용하는 Python 프로그램을 작성하는 경우 다음 레시피를 적용할 수 있습니다. (참고: 프로덕션 서비스에서 요청을 처리하려면 [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) 또는 기타 확장 가능한 Python이 없는 솔루션을 고려하세요.)
+입력 데이터에 모듈을 여러 번 적용하는 Python 프로그램을 작성하는 경우 다음 레시피를 적용할 수 있습니다. (참고: 운영 서비스에서 요청을 처리하려면 [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) 또는 기타 확장 가능한 Python 없는 솔루션을 고려하세요.)
 
 사용 사례 모델이 **초기화** 및 후속 **요청**(예: Django, Flask, 사용자 정의 HTTP 서버 등)이라고 가정하면, 다음과 같이 서비스를 설정할 수 있습니다.
 

@@ -2,7 +2,7 @@
 
 TensorFlow Probability는 TensorFlow에서 확률적 추론 및 통계 분석을 수행하기 위한 라이브러리입니다. TensorFlow 에코시스템의 일부인 TensorFlow Probability는 확률적 방법과 심층 네트워크의 통합, 자동 미분을 사용한 그래디언트 기반 추론, 하드웨어 가속(GPU) 및 분산 계산을 통한 대규모 데이터세트 및 모델로의 확장성을 제공합니다.
 
-TensorFlow Probability를 시작하려면 [설치 가이드](./install)를 참조하고 [Python 노트북 튜토리얼](https://github.com/tensorflow/probability/blob/main/tensorflow_probability/examples/jupyter_notebooks/){:.external}를 살펴보세요.
+TensorFlow Probability를 시작하려면 [설치 가이드](./install.md)와 [Python 노트북 튜토리얼](https://github.com/tensorflow/probability/blob/main/tensorflow_probability/examples/jupyter_notebooks/){:.external}을 확인해 보세요.
 
 ## 구성 요소
 

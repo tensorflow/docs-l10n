@@ -4,13 +4,13 @@ TensorFlow Lite Task 라이브러리에는 앱 개발자가 TFLite로 ML 경험�
 
 ## Task 라이브러리에서 기대할 수 있는 사항
 
-- **ML 전문가가 아니더라도 사용할 수 있는 명료하고 잘 구성된 API** <br> 단 5줄의 코드 내에서 추론을 수행할 수 있습니다. Task 라이브러리의 강력하고 사용하기 쉬운 API를 빌딩 블록으로 사용하여 모바일 기기에서 TFLite로 ML을 쉽게 개발할 수 있습니다.
+- **ML 전문가가 아니더라도 사용할 수 있는 명료하고 잘 정의된 API** <br> 단 5줄의 코드로도 추론을 수행할 수 있습니다. Task 라이브러리의 강력하고 사용하기 쉬운 API를 빌딩 블록으로 사용하여 모바일 기기에서 TFLite로 ML을 쉽게 개발할 수 있습니다.
 
-- **복잡하지만 일반적인 데이터 처리** <br> 공통 비전 및 자연어 처리 논리를 지원하여 데이터와 모델에 필요한 데이터 형식 사이에서 변환할 수 있습니다. 학습 및 추론에 동일하고 공유 가능한 처리 로직을 제공합니다.
+- **복잡하지만 일반적인 데이터 처리** <br> 공통 비전 및 자연어 처리 논리를 지원하여 데이터와 모델에 필요한 데이터 형식 사이에서 변환할 수 있습니다. 학습 및 추론에 사용할 수 있는 동일하고 공유 가능한 처리 로직을 제공합니다.
 
-- **높은 성능 향상** <br> 데이터 처리에 수 밀리 초 이상 걸리지 않으므로 TensorFlow Lite를 사용한 빠른 추론 경험이 보장됩니다.
+- **고성능 게인** <br> 데이터 처리에 수 밀리 초밖에 걸리지 않으므로 TensorFlow Lite를 사용한 빠른 추론 경험이 보장됩니다.
 
-- **확장성 및 사용자 정의 기능**<br> Task 라이브러리 인프라가 제공하는 모든 이점을 활용하고 자신만의 Android/iOS 추론 API를 쉽게 구축할 수 있습니다.
+- **확장성 및 사용자 정의 기능**<br> 작업 라이브러리 인프라가 제공하는 모든 이점을 활용하고 자신만의 Android/iOS 추론 API를 쉽게 구축할 수 있습니다.
 
 ## 지원되는 작업
 
@@ -132,7 +132,7 @@ std::unique_ptr<QuestionAnswerer> answerer = BertQuestionAnswerer::CreateFromOpt
 std::vector<QaAnswer> results = answerer->Answer(context_of_question, question_to_ask);
 ```
 
-[여기](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto)에서 고급 가속기 설정을 살펴보세요.
+[여기](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/acceleration/configuration/configuration.proto)에서 고급 가속기 설정을 살펴보세요.
 
 ### Python에서 Coral Edge TPU 사용의 예
 
@@ -207,7 +207,7 @@ brew install libusb
 # Windows is not supported yet.
 ```
 
-Coral Edge TPU 장치에서 [작업 라이브러리 CLI 데모 도구](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop)를 사용해 보세요. [사전 훈련된 Edge TPU 모델](https://coral.ai/models/) 및 [고급 Edge TPU 설정](https://github.com/tensorflow/tensorflow/blob/1a8e885b864c818198a5b2c0cbbeca5a1e833bc8/tensorflow/lite/experimental/acceleration/configuration/configuration.proto#L275)에 대해 자세히 알아보세요.
+Coral Edge TPU 기기에서 [작업 라이브러리 CLI 데모 도구](https://github.com/tensorflow/tflite-support/tree/master/tensorflow_lite_support/examples/task/vision/desktop)를 사용해 보세요. [사전 훈련된 Edge TPU 모델](https://coral.ai/models/) 및 [고급 Edge TPU 설정](https://github.com/tensorflow/tensorflow/blob/4d999fda8d68adfdfacd4d0098124f1b2ea57927/tensorflow/lite/acceleration/configuration/configuration.proto#L594)에 대해 자세히 알아보세요.
 
 ### C++에서 Core ML 대리자 사용 예제
 

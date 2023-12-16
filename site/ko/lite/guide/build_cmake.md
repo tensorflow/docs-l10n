@@ -51,7 +51,7 @@ cmake ../tensorflow_src/tensorflow/lite -DCMAKE_BUILD_TYPE=Debug
 
 #### 커널 단위 테스트로 빌드
 
-커널 테스트를 실행하려면 '-DTFLITE_KERNEL_TEST=on' 플래그를 제공해야 합니다. 단위 테스트 교차 컴파일에 대한 세부 사항은 다음 하위 섹션에서 찾을 수 있습니다.
+커널 테스트를 실행하려면 `-DTFLITE_KERNEL_TEST=on` 플래그를 제공해야 합니다. 단위 테스트 교차 컴파일에 대한 세부 사항은 다음 하위 섹션에서 확인할 수 있습니다.
 
 ```sh
 cmake ../tensorflow_src/tensorflow/lite -DTFLITE_KERNEL_TEST=on
@@ -66,9 +66,12 @@ cmake ../tensorflow_src/tensorflow/lite -DTFLITE_KERNEL_TEST=on
 ```sh
 cmake ../tensorflow_src/tensorflow/lite -DTFLITE_ENABLE_INSTALL=ON \
   -DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON \
+  -DSYSTEM_FARMHASH=ON \
+  -DSYSTEM_PTHREADPOOL=ON \
   -Dabsl_DIR=<install path>/lib/cmake/absl \
   -DEigen3_DIR=<install path>/share/eigen3/cmake \
-  -DFlatbuffers_DIR=<install path>/lib/cmake/flatbuffers \
+  -DFlatBuffers_DIR=<install path>/lib/cmake/flatbuffers \
+  -Dgemmlowp_DIR=<install path>/lib/cmake/gemmlowp \
   -DNEON_2_SSE_DIR=<install path>/lib/cmake/NEON_2_SSE \
   -Dcpuinfo_DIR=<install path>/share/cpuinfo \
   -Druy_DIR=<install path>/lib/cmake/ruy
@@ -180,17 +183,17 @@ cmake --build . -j -t label_image
 
 옵션 이름 | 기능 | Android | 리눅스 | macOS | Windows
 --- | --- | --- | --- | --- | ---
-TFLITE_ENABLE_RUY | RUY 활성화 | ON | OFF | OFF | OFF
+`TFLITE_ENABLE_RUY` | RUY 활성화 | ON | OFF | OFF | OFF
 :                       : matrix         :         :       :       :         : |  |  |  |  |
 :                       : multiplication :         :       :       :         : |  |  |  |  |
 :                       : library        :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_NNAPI | NNAPI 활성화 | ON | OFF | 해당 없음 | 해당 없음
+`TFLITE_ENABLE_NNAPI` | NNAPI 활성화 | ON | OFF | 해당 없음 | 해당 없음
 :                       : delegate       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_GPU | GPU 활성화 | OFF | OFF | 해당 없음 | 해당 없음
+`TFLITE_ENABLE_GPU` | GPU 활성화 | OFF | OFF | 해당 없음 | 해당 없음
 :                       : delegate       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_XNNPACK | XNNPACK 활성화 | ON | ON | ON | ON
+`TFLITE_ENABLE_XNNPACK` | XNNPACK 활성화 | ON | ON | ON | ON
 :                       : delegate       :         :       :       :         : |  |  |  |  |
-TFLITE_ENABLE_MMAP | MMAP 활성화 | ON | ON | ON | 해당 없음
+`TFLITE_ENABLE_MMAP` | MMAP 활성화 | ON | ON | ON | 해당 없음
 
 ## TensorFlow Lite를 사용하는 CMake 프로젝트 만들기
 
@@ -228,10 +231,12 @@ cmake --build . -j
 
 이 명령은 현재 디렉터리에 다음 공유 라이브러리를 생성합니다.
 
+**참고:** Windows 시스템에서는 `debug` 디렉터리에서 `tensorflowlite_c.dll`을 찾을 수 있습니다.
+
 플랫폼 | 라이브러리 이름
 --- | ---
-리눅스 | libtensorflowlite_c.so
-macOS | libtensorflowlite_c.dylib
-Windows | tensorflowlite_c.dll
+리눅스 | `libtensorflowlite_c.so`
+macOS | `libtensorflowlite_c.dylib`
+Windows | `tensorflowlite_c.dll`
 
-**참고:** 생성된 공유 라이브러리를 사용하려면 필요한 헤더(c_api.h, c_api_experimental.h 및 common.h)가 있어야 합니다.
+**참고:** 생성된 공유 라이브러리를 사용하려면 퍼블릭 헤더(`tensorflow/lite/c_api.h`, `tensorflow/lite/c_api_experimental.h`, `tensorflow/ lite/c_api_types.h` 및 `tensorflow/lite/common.h`)와 해당 퍼블릭 헤더에 포함된 프라이빗 헤더(`tensorflow/lite/core/builtin_ops.h{ /code5}, <code data-md-type="codespan">tensorflow/lite/core/c/*.h` 및 `tensorflow/lite/core/async/c/*.h`, )가 있어야 합니다.

@@ -16,9 +16,11 @@
 - 그림 1에서는 Keras GPT-2 모델을 사용하여 기기에서 텍스트 완성 작업을 수행했습니다.
 - 그림 2에서는 지침을 튜닝한 [PaLM 모델](https://ai.googleblog.com/2022/04/pathways-language-model-palm-scaling-to.html) 버전(15억 개의 매개변수)을 TFLite로 변환한 후 TFLite 런타임을 통해 실행했습니다.
 
-<center> ![PaLM으로 자동 완성](https://storage.googleapis.com/download.tensorflow.org/tflite/examples/autocomplete_fig1.gif){: width="400px"}<figcaption> <b>그림 1:</b> Pixel 7에서 텍스트 완성을 수행하기 위해 기기에서 Keras GPT-2 모델(이 [Codelab](https://codelabs.developers.google.com/kerasnlp-tflite)에서 변환됨)을 실행하는 예입니다. 데모는 속도 향상이 없는 실제 대기 시간.</figcaption> </center>
+<center>
+<center> ![PaLM으로 자동 완성](https://storage.googleapis.com/download.tensorflow.org/tflite/examples/autocomplete_fig1.gif){: width="400px"}<figcaption> <b>그림 1:</b> Pixel 7에서 텍스트 완성을 수행하기 위해 기기에서 Keras GPT-2 모델(이 [Codelab](https://codelabs.developers.google.com/kerasnlp-tflite)에서 변환됨)을 실행하는 예입니다. 데모는 속도 향상이 없는 실제 대기 시간.</figcaption> </center> </center>
 
-<center> ![PaLM으로 자동 완성](https://storage.googleapis.com/download.tensorflow.org/tflite/examples/autocomplete_fig2.gif){: width="400px"}<figcaption> <b>그림 2:</b> 15억 개의 매개변수가 있는 [PaLM 모델](https://ai.googleblog.com/2022/04/pathways-language-model-palm-scaling-to.html) 버전 실행의 예. 데모는 재생 속도 향상 없이 Pixel 7 Pro에서 녹화됩니다.</figcaption> </center>
+<center>
+<center> ![PaLM으로 자동 완성](https://storage.googleapis.com/download.tensorflow.org/tflite/examples/autocomplete_fig2.gif){: width="400px"}<figcaption> <b>그림 2:</b> 15억 개의 매개변수가 있는 [PaLM 모델](https://ai.googleblog.com/2022/04/pathways-language-model-palm-scaling-to.html) 버전 실행의 예. 데모는 재생 속도 향상 없이 Pixel 7 Pro에서 녹화됩니다.</figcaption> </center> </center>
 
 ## 가이드
 
@@ -57,7 +59,7 @@ preprocessor=gpt2_preprocessor
 TensorFlow Lite는 모바일, 마이크로컨트롤러 및 기타 에지 기기에 메서드를 배포하기 위한 모바일 라이브러리입니다. 첫 번째 단계는 TensorFlow Lite **변환기**를 사용하여 Keras 모델을 보다 간결한 TensorFlow Lite 형식으로 변환한 다음, 모바일 기기에 고도로 최적화된 TensorFlow Lite **인터프리터**를 사용하여 변환된 모델을 실행하는 것입니다.
 
 
-<img src="https://www.tensorflow.org/lite/examples/auto_complete/images/tflite_workflow.png" class="attempt-right"> <br>변환을 수행하는 `GPT2CausalLM`에서 `generate()` 함수로 시작. `generate()` 함수를 래핑하여 구체적인 TensorFlow 함수를 생성.
+<img src="https://www.tensorflow.org/lite/examples/auto_complete/images/tflite_workflow.png" class="attempt-right"> Start with the `generate()` function from `GPT2CausalLM` that performs the conversion. Wrap the `generate()` function to create a concrete TensorFlow function:
 
 ```python
 @tf.function
@@ -182,7 +184,6 @@ run_inference("I'm enjoying a", quant_generate_tflite)
 이때, 표준 `tensorflow-lite` aar를 gradle 파일에 포함해야 한다는 점에 유의해야 합니다.
 
 ### 컨텍스트 창 크기
-
 
 <img src="https://www.tensorflow.org/lite/examples/auto_complete/images/context_window.png" class="attempt-right">
 

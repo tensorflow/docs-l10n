@@ -42,7 +42,7 @@ TensorFlow 페더레이션은 페더레이션 학습으로 해결할 수 있는 
 
 ## 고성능 시뮬레이션
 
-FL *시뮬레이션*의 벽시계 시간은 알고리즘 평가를 위한 관련 메트릭이 아니지만(시뮬레이션 하드웨어가 실제 FL 배포 환경을 대표하지 않기 때문에), FL 시뮬레이션을 빠르게 실행할 수 있는 것은 연구 생산성에 중요합니다. 따라서 TFF는 고성능 단일 및 다중 머신 런타임을 제공하는 데 많은 투자를 했습니다. 설명서는 개발 중이지만, 지금은 [Kubernetes를 사용한 고성능 시뮬레이션](https://www.tensorflow.org/federated/tutorials/high_performance_simulation_with_kubernetes) 튜토리얼, [가속기를 사용한 TFF 시뮬레이션](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators) 지침 및 [GCP에서 TFF로 시뮬레이션 설정](https://www.tensorflow.org/federated/gcp_setup) 지침을 참조하세요. 고성능 TFF 런타임은 기본적으로 활성화되어 있습니다.
+FL *시뮬레이션*의 벽시계 시간은 알고리즘 평가를 위한 관련 메트릭이 아니지만(시뮬레이션 하드웨어가 실제 FL 배포 환경을 대표하지 않기 때문에), FL 시뮬레이션을 빠르게 실행할 수 있기에 연구 생산성에 중요합니다. 따라서 TFF는 고성능 단일 및 다중 머신 런타임을 제공하는 데 많은 투자를 했습니다. 설명서는 개발 중이기에 지금은 [가속기를 사용한 TFF 시뮬레이션](https://www.tensorflow.org/federated/tutorials/simulations_with_accelerators) 지침 및 [GCP에서 TFF로 시뮬레이션 설정하기](https://www.tensorflow.org/federated/gcp_setup) 지침을 참조하세요. 고성능 TFF 런타임은 기본적으로 활성화되어 있습니다.
 
 ## 다양한 연구 분야를 위한 TFF
 
@@ -91,7 +91,7 @@ TFF는 GAN의 페더레이션 훈련에 대한 연구에 사용할 수 있습니
 
 - 초기 모델에서 시작하여 각 클라이언트의 로컬 데이터세트를 사용하여 개인화된 모델을 훈련 및 평가하는 `tf.function`을 구현하여 개인화 전략을 정의합니다. 예는 [`build_personalize_fn`](https://github.com/tensorflow/federated/blob/main/tensorflow_federated/examples/personalization/p13n_utils.py)에서 제공합니다.
 
-- 전략 이름을 해당 개인화 전략에 매핑하는 `OrderedDict`를 정의하고 [`tff.learning.build_personalization_eval`](https://www.tensorflow.org/federated/api_docs/python/tff/learning/build_personalization_eval)에서 `personalize_fn_dict` 인수로 사용합니다.
+- 전략 이름을 해당 개인화 전략에 매핑하는 `OrderedDict`를 정의하고 [`tff.learning.build_personalization_eval_computation`](https://www.tensorflow.org/federated/api_docs/python/tff/learning/build_personalization_eval_computation)에서 `personalize_fn_dict` 인수로 사용합니다.
 
 또 다른 접근 방식은 모델의 일부를 완전히 로컬로 훈련하여 글로벌 모델 전체를 훈련하는 것을 피하는 것입니다. 이 접근 방식의 인스턴스화는 [이 블로그 게시물](https://ai.googleblog.com/2021/12/a-scalable-approach-for-partially-local.html)에 설명되어 있습니다. 이 접근 방식은 메타 학습과도 연결됩니다([이 백서](https://arxiv.org/abs/2102.03448) 참조). 부분적으로 로컬 페더레이션 훈련을 탐색하기 위해 다음을 수행할 수 있습니다.
 

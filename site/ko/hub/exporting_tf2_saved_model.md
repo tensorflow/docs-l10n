@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-04-09' review_interval: '6 months' } *-->
-
 # SavedModel 내보내기
 
 이 페이지에서는 TensorFlow 프로그램에서 [TensorFlow 2의 SavedModel 형식](https://www.tensorflow.org/guide/saved_model)으로 모델을 내보내는(저장하는) 방법을 자세히 설명합니다. 이 형식은 TensorFlow 허브에서 사전 학습된 모델 및 모델 조각을 공유하는 권장 방법으로, 이전 [TF1 허브 형식](tf1_hub_module.md)을 대체하고 새로운 API 세트와 함께 제공됩니다. [TF1 허브 형식 내보내기](exporting_hub_format.md)에서 TF1 허브 형식 모델을 내보내기 위한 자세한 정보를 찾아볼 수 있습니다. TensorFlow Hub에서 공유하기 위해 SavedModel을 압축하는 방법에 대한 자세한 내용은 [여기](writing_documentation.md#model-specific_asset_content)를 참조하세요.
@@ -83,10 +81,10 @@ Keras 모델에서 저장하면 미세 조정의 모든 메커니즘이 동작�
 
 ## TensorFlow Model Garden
 
-[TensorFlow Model Garden](https://github.com/tensorflow/models/tree/master/official) 리포지토리에는 [tfhub.dev](https://tfhub.dev/)에 업로드할 재사용 가능한 TF2 저장된 모델을 만드는 많은 예제가 포함되어 있습니다.
+[TensorFlow Model Garden](https://github.com/tensorflow/models/tree/master/research/official) 리포지토리에는 [tfhub.dev](https://tfhub.dev/)에 업로드할 재사용 가능한 TF2 저장된 모델을 만드는 많은 예제가 포함되어 있습니다.
 
 ## 커뮤니티 요청
 
-TensorFlow 허브 팀은 tfhub.dev에서 사용할 수 있는 자산의 극히 일부만 생성합니다. 주로 Google 및 Deepmind의 연구원, 기업 및 학술 연구 기관, ML 애호가에게 모델 제작을 의존하고 있습니다. 결과적으로 특정 자산에 대한 커뮤니티 요청을 이행할 수 있다고 보장할 수 없으며 새로운 자산을 언제 제공할 수 있을 지에 대한 확답도 해줄 수 없습니다.
+TensorFlow Hub 팀은 tfhub.dev에서 사용할 수 있는 자산 중 극히 일부만 생성합니다. 주로 Google 및 Deepmind의 연구원, 기업 및 학술 연구 기관, ML 애호가에게 모델 제작을 의존하고 있습니다. 결과적으로 특정 자산에 대한 커뮤니티 요청을 충족할 수 있다고 보장할 수 없으며 새로운 자산을 언제 제공할 수 있을 지에 대한 확답도 해줄 수 없습니다.
 
 아래의 [커뮤니티 모델 요청 이정표](https://github.com/tensorflow/hub/milestone/1)에는 특정 자산에 대한 커뮤니티의 요청이 포함되어 있습니다. 여러분 또는 알고 있는 다른 사람이 자산을 제작하고 tfhub.dev에서 공유하는 데 관심이 있다면 제출을 환영합니다!

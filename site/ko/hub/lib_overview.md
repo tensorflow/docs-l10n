@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'kempy' } *-->
-
 # TensorFlow 서브 라이브러리 개요
 
 [`tensorflow_hub`](https://github.com/tensorflow/hub) 라이브러리를 사용하면 최소한의 코드만 사용하여 TensorFlow 프로그램에서 학습된 모델을 다운로드하고 재사용할 수 있습니다. 학습된 모델을 로드하는 주된 방법은 `hub.KerasLayer` API를 이용하는 것입니다.
@@ -11,6 +9,8 @@ embed = hub.KerasLayer("https://tfhub.dev/google/nnlm-en-dim128/2")
 embeddings = embed(["A long sentence.", "single-word", "http://example.com"])
 print(embeddings.shape, embeddings.dtype)
 ```
+
+**참고:** 이 문서의 예제에서는 TFhub.dev URL 핸들을 사용합니다. 다른 유효한 핸들 유형에 대한 자세한 정보는 [여기](tf2_saved_model.md#model_handles)를 참조하세요.
 
 ## 다운로드를 위한 캐시 위치 설정하기
 

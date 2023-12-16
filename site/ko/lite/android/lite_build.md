@@ -30,7 +30,7 @@ allprojects {
 
 <!-- mdformat off(devsite fails if there are line-breaks in templates) -->
 
-{% dynamic if 'tflite-android-tos' in user.acknowledged_walls and request.tld != 'cn' %} <a href="https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/tools/dockerfiles/tflite-android.Dockerfile">여기</a>에서 Docker 파일을 다운로드할 수 있습니다. {% dynamic else %} 파일을 다운로드하려면 서비스 약관에 동의해야 합니다. <a class="button button-blue devsite-acknowledgement-link" data-globally-unique-wall-id="tflite-android-tos">동의</a> {% dynamic endif %}
+{% dynamic if 'tflite-android-tos' in user.acknowledged_walls and request.tld != 'cn' %} <a href="https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/lite/tools/tflite-android.Dockerfile">여기</a>에서 Docker 파일을 다운로드할 수 있습니다. {% dynamic else %} 파일을 다운로드하려면 서비스 약관에 동의해야합니다. <a class="button button-blue devsite-acknowledgement-link" data-globally-unique-wall-id="tflite-android-tos">확인</a> {% dynamic endif %}
 
 <!-- mdformat on -->
 
@@ -70,7 +70,7 @@ sdkmanager \
 Bazel은 TensorFlow의 기본 빌드 시스템입니다. Bazel을 사용하여 빌드하려면 시스템에 Android NDK 및 SDK가 설치되어 있어야 합니다.
 
 1. 최신 버전의 [Bazel 빌드 시스템](https://bazel.build/versions/master/docs/install.html)을 설치합니다.
-2. 네이티브(C/C++) TensorFlow Lite 코드를 빌드하려면 Android NDK가 필요합니다. 현재 권장되는 버전은 19c이며 [여기](https://developer.android.com/ndk/downloads/older_releases.html#ndk-19c-downloads)에서 찾을 수 있습니다.
+2. 네이티브(C/C++) TensorFlow Lite 코드를 빌드하려면 Android NDK가 필요합니다. 현재 권장되는 버전은 21e이며 [여기](https://developer.android.com/ndk/downloads/older_releases.html#ndk-21e-downloads)에서 찾을 수 있습니다.
 3. Android SDK 및 빌드 도구는 [여기](https://developer.android.com/tools/revisions/build-tools.html)에서 얻거나, [Android Studio](https://developer.android.com/studio/index.html)의 일부로 얻을 수도 있습니다. TensorFlow Lite 빌드에 권장되는 버전은 Build tools API &gt;= 23입니다.
 
 ### WORKSPACE 및 .bazelrc 구성하기
@@ -85,10 +85,10 @@ Bazel은 TensorFlow의 기본 빌드 시스템입니다. Bazel을 사용하여 �
 이들 변수가 설정되지 않은 경우, 스크립트 프롬프트에서 대화식으로 제공해야 합니다. 성공적으로 구성되면 루트 폴더의 `.tf_configure.bazelrc` 파일에 다음과 같은 항목이 생깁니다.
 
 ```shell
-build --action_env ANDROID_NDK_HOME="/usr/local/android/android-ndk-r19c"
-build --action_env ANDROID_NDK_API_LEVEL="21"
-build --action_env ANDROID_BUILD_TOOLS_VERSION="28.0.3"
-build --action_env ANDROID_SDK_API_LEVEL="23"
+build --action_env ANDROID_NDK_HOME="/usr/local/android/android-ndk-r21e"
+build --action_env ANDROID_NDK_API_LEVEL="26"
+build --action_env ANDROID_BUILD_TOOLS_VERSION="30.0.3"
+build --action_env ANDROID_SDK_API_LEVEL="30"
 build --action_env ANDROID_SDK_HOME="/usr/local/android/android-sdk-linux"
 ```
 
@@ -99,6 +99,8 @@ Bazel이 올바르게 구성되면 다음과 같이 루트 체크아웃 디렉�
 ```sh
 bazel build -c opt --fat_apk_cpu=x86,x86_64,arm64-v8a,armeabi-v7a \
   --host_crosstool_top=@bazel_tools//tools/cpp:toolchain \
+  --define=android_dexmerger_tool=d8_dexmerger \
+  --define=android_incremental_dexing_tool=d8_dexbuilder \
   //tensorflow/lite/java:tensorflow-lite
 ```
 

@@ -10,7 +10,7 @@
 
 #### TensorFlow Lite에서 일부 연산이 구현되지 않은 이유는 무엇입니까?
 
-TFLite를 가볍게 유지하기 위해 TFLite에서는 특정 TF 연산자([허용 목록](op_select_allowlist)에 나열됨)만 지원합니다.
+TFLite를 가볍게 유지하기 위해 TFLite에서는 특정 TF 연산자([허용 목록](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/g3doc/guide/op_select_allowlist.md)에 나열됨)만 지원합니다.
 
 #### 내 모델이 변환되지 않는 이유는 무엇입니까?
 
@@ -69,8 +69,8 @@ bazel run //tensorflow/lite/tools:visualize model.tflite visualized_model.html
 
 TensorFlow Lite 성능을 최적화하기 위한 상위 수준 프로세스는 다음과 같습니다.
 
-- *작업에 적합한 모델이 있는지 확인하세요.* 이미지 분류는 [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&module-type=image-classification)를 확인하세요.
-- *스레드 수를 조정합니다.* 많은 TensorFlow Lite 연산자는 다중 스레드 커널을 지원합니다. 이를 위해 [C++ API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/interpreter.h#L345)에서 `SetNumThreads()`를 사용할 수 있습니다. 그러나 스레드를 늘리면 환경에 따라 성능이 달라집니다.
+- *작업에 적합한 모델이 있는지 확인합니다.* 이미지 분류는 [TensorFlow Hub](https://tfhub.dev/s?deployment-format=lite&module-type=image-classification)를 확인합니다.
+- *스레드 수를 조정합니다.* 많은 TensorFlow Lite 연산자가 다중 스레드 커널을 지원합니다. 스레드 수 조정을 위해 [C++ API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/core/interpreter_builder.h#L110)에서 `SetNumThreads()`를 사용할 수 있습니다. 단, 스레드를 늘리면 환경에 따라 성능이 달라질 수 있습니다.
 - *하드웨어 가속기를 사용합니다.* TensorFlow Lite는 대리자를 사용하여 특정 하드웨어에 대한 모델 가속을 지원합니다. 지원되는 가속기와 장치의 모델에서 가속기를 사용하는 방법에 대한 정보는 [대리자](../performance/delegates) 가이드를 참조하세요.
 - *(고급) 모델을 프로파일링합니다.* Tensorflow Lite [벤치마킹 도구](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)에는 연산자별 통계를 표시할 수 있는 프로파일러가 내장되어 있습니다. 특정 플랫폼에 대해 연산자의 성능을 최적화할 수 있는 방법을 알고 있다면 [사용자 정의 연산자](ops_custom)를 구현할 수 있습니다.
 

@@ -92,7 +92,7 @@ model_analyzer = Evaluator(
       eval_config=eval_config)
 ```
 
-Evaluator는 [TFMA](tfma.md)를 사용하여 로드할 수 있는 [EvalResult](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma/EvalResult) (및 검증이 사용된 경우 선택적으로 [ValidationResult](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma/ValidationResult))를 생성합니다. 다음은 결과를 Jupyter 노트북에 로드하는 방법을 보여주는 예입니다.
+평가기는 [TFMA](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma/EvalResult)를 사용하여 로드할 수 있는 [EvalResult](https://www.tensorflow.org/tfx/model_analysis/api_docs/python/tfma/ValidationResult)(및 검증이 사용된 경우 선택적으로 [ValidationResult](tfma.md))를 생성합니다. 다음은 Jupyter 노트북에 결과를 로드하는 방법을 보여주는 예제입니다.
 
 ```
 import tensorflow_model_analysis as tfma

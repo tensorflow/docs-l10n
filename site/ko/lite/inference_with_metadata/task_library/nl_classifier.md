@@ -4,7 +4,7 @@ Task Library의 `NLClassifier` API는 입력 텍스트를 여러 범주로 분�
 
 ## NLClassifier API의 주요 특징
 
-- 단일 문자열을 입력으로 받아서 문자열로 분류를 수행하고 분류 결과로 &lt;Label, Score&gt; 쌍을 출력합니다.
+- 단일 문자열을 입력으로 받아서 문자열로 분류를 수행하고 분류 결과로 &lt;레이블, 점수&gt; 쌍을 출력합니다.
 
 - 입력 텍스트에 Regex Tokenization을 선택적으로 사용할 수 있습니다.
 
@@ -16,7 +16,7 @@ Task Library의 `NLClassifier` API는 입력 텍스트를 여러 범주로 분�
 
 - <a href="../../examples/text_classification/overview">영화 리뷰 감상 분류</a> 모델
 
-- <a>텍스트 분류를 위한 TensorFlow Lite Model Maker</a>에서 생성된 <code>average_word_vec</code> 사양이 있는 모델
+- [텍스트 분류를 위한 TensorFlow Lite Model Maker](https://www.tensorflow.org/lite/models/modify/model_maker/text_classification)에서 생성된 `average_word_vec` 사양이 있는 모델
 
 - [모델 호환성 요구 사항](#model-compatibility-requirements)을 충족하는 사용자 정의 모델
 
@@ -26,7 +26,7 @@ Android 앱에서 `NLClassifier`를 사용하는 방법의 예는 [텍스트 분
 
 ### 1단계: Gradle 종속성 및 기타 설정 가져오기
 
-`.tflite` 모델 파일을 모델이 실행될 Android 모듈의 assets 디렉토리에 복사합니다. 파일을 압축하지 않도록 지정하고 TensorFlow Lite 라이브러리를 모듈의 `build.gradle` 파일에 추가합니다.
+`.tflite` 모델 파일을 모델이 실행될 Android 모듈의 assets 디렉터리에 복사합니다. 파일을 압축하지 않도록 지정하고 TensorFlow Lite 라이브러리를 모듈의 `build.gradle` 파일에 추가합니다.
 
 ```java
 android {
@@ -43,9 +43,9 @@ dependencies {
     // Other dependencies
 
     // Import the Task Vision Library dependency (NNAPI is included)
-    implementation 'org.tensorflow:tensorflow-lite-task-text:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-text:0.4.4'
     // Import the GPU delegate plugin Library for GPU inference
-    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.3.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.4'
 }
 ```
 
@@ -79,7 +79,7 @@ Podfile에 TensorFlowLiteTaskText 포드를 추가합니다.
 ```
 target 'MySwiftAppWithTaskAPI' do
   use_frameworks!
-  pod 'TensorFlowLiteTaskText', '~> 0.2.0'
+  pod 'TensorFlowLiteTaskText', '~> 0.4.4'
 end
 ```
 
@@ -114,6 +114,29 @@ std::vector<core::Category> categories = classifier->Classify(input_text);
 
 자세한 내용은 [소스 코드](https://github.com/tensorflow/tflite-support/blob/master/tensorflow_lite_support/cc/task/text/nlclassifier/nl_classifier.h)를 참조하세요.
 
+## Python에서 추론 실행하기
+
+### 1단계: pip 패키지 설치하기
+
+```
+pip install tflite-support
+```
+
+### 2단계: 모델 사용하기
+
+```python
+# Imports
+from tflite_support.task import text
+
+# Initialization
+classifier = text.NLClassifier.create_from_file(model_path)
+
+# Run inference
+text_classification_result = classifier.classify(text)
+```
+
+<code>NLClassifier</code> 구성을 위한 추가 옵션은 <a>소스 코드</a>를 참조하세요.
+
 ## 예제 결과
 
 다음은 [영화 리뷰 모델](https://www.tensorflow.org/lite/examples/text_classification/overview)의 분류 결과를 보여주는 예입니다.
@@ -139,7 +162,7 @@ category[1]: 'Positive' : '0.18687'
 
     - 모델의 입력은 kTfLiteString 텐서 원시 입력 문자열이거나 원시 입력 문자열의 토큰화된 regex 인덱스의 kTfLiteInt32 텐서여야 합니다.
     - 입력 유형이 kTfLiteString이면 모델에 [메타데이터](../../models/convert/metadata)가 필요하지 않습니다.
-    - 입력 유형이 kTfLiteInt32이면 입력 텐서의 <a>메타데이터</a>에서 <code>RegexTokenizer</code>를 설정해야 합니다.
+    - 입력 유형이 kTfLiteInt32인 경우, 입력 텐서의 [메타데이터](https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial#natural_language_classifiers)에서 `RegexTokenizer`를 설정해야 합니다.
 
 - 출력 스코어 텐서: (kTfLiteUInt8/kTfLiteInt8/kTfLiteInt16/kTfLiteFloat32/kTfLiteFloat64)
 
