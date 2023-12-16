@@ -65,7 +65,7 @@ This pretrained model predicts if a paragraph's sentiment is positive or negativ
   </tr>
 </table>
 
-* 4 つのスレッドを使用。
+* 4 threads used.
 
 ** 最高のパフォーマンス結果を得るために、iPhone では 2 つのスレッドを使用。
 
