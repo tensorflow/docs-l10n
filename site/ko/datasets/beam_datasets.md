@@ -54,13 +54,34 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
 
 ### 로컬에서
 
-기본 Apache Beam 러너를 사용하여 스크립트를 로컬로 실행하기 위한 명령은 다른 데이터세트에서와 같습니다.
+[기본 Apache Beam 실행기](https://beam.apache.org/documentation/runners/direct/)를 사용하여 로컬에서 스크립트를 실행할 때(메모리의 모든 데이터에 맞아야 함) 명령어는 다른 데이터세트와 동일합니다.
 
 ```sh
 tfds build my_dataset
 ```
 
 **경고**: Beam 데이터세트는 **매우** 클 수 있으며(테라바이트 이상), 상당한 양의 리소스가 생성될 수 있습니다(로컬 컴퓨터에서 몇 주가 걸릴 수 있음). 분산 환경을 사용하여 데이터세트를 생성하는 것이 좋습니다. 지원되는 런타임 목록은 [Apache Beam 설명서](https://beam.apache.org/)를 참조하세요.
+
+### Apache Flink 사용
+
+[Apache Flink](https://flink.apache.org/)를 사용하여 파이프라인을 실행하려면 [공식 문서](https://beam.apache.org/documentation/runners/flink)를 읽을 수 있습니다. Beam이 [Flink 버전 호환성](https://beam.apache.org/documentation/runners/flink/#flink-version-compatibility)을 준수하는지 확인하세요.
+
+스크립트를 보다 쉽게 시작하려면 Flink 설정의 실제 값과 생성하려는 데이터세트를 사용하여 다음 변수를 정의하면 도움이 됩니다.
+
+```sh
+DATASET_NAME=<dataset-name>
+DATASET_CONFIG=<dataset-config>
+FLINK_CONFIG_DIR=<flink-config-directory>
+FLINK_VERSION=<flink-version>
+```
+
+내장된 Flink 클러스터에서 실행하려면 아래 명령을 사용하여 작업을 시작할 수 있습니다.
+
+```sh
+tfds build $DATASET_NAME/$DATASET_CONFIG \
+  --beam_pipeline_options=\
+"runner=FlinkRunner,flink_version=$FLINK_VERSION,flink_conf_dir=$FLINK_CONFIG_DIR"
+```
 
 ### 사용자 정의 스크립트
 
@@ -131,8 +152,7 @@ class DummyBeamDataset(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(16, 16, 1)),
             'label': tfds.features.ClassLabel(names=['dog', 'cat']),

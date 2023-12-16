@@ -12,13 +12,18 @@
 
 마이크로컨트롤러용 TensorFlow Lite 인터프리터를 사용하는 데 가장 중요한 파일들은 프로젝트의 루트에 있으며 테스트가 함께 제공됩니다.
 
-- [`all_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.h) 또는 [`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_mutable_op_resolver.h)를 사용하여 인터프리터가 모델을 실행하는 데 사용하는 연산을 제공할 수 있습니다. `all_ops_resolver.h`는 사용 가능한 모든 연산을 가져오기 때문에 많은 메모리를 사용합니다. 운영 애플리케이션에서는 `micro_mutable_op_resolver.h`를 사용하여 모델에 필요한 연산만 가져와야 합니다.
-- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_error_reporter.h)는 디버그 정보를 출력합니다.
+```
+[`micro_mutable_op_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_mutable_op_resolver.h)
+can be used to provide the operations used by the interpreter to run the
+model.
+```
+
+- [`micro_error_reporter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/tflite_bridge/micro_error_reporter.h)는 디버그 정보를 출력합니다.
 - [`micro_interpreter.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_interpreter.h)에는 모델을 처리하고 실행하는 코드가 포함되어 있습니다.
 
 일반적인 사용법에 대한 안내는 [마이크로컨트롤러 시작하기](get_started_low_level.md)를 참조하세요.
 
-빌드 시스템은 특정 파일의 플랫폼별 구현을 제공합니다. 이들 구현은 플랫폼 이름을 가진 디렉터리(예: [`sparkfun_edge`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/sparkfun_edge))에 들어 있습니다.
+빌드 시스템은 특정 파일의 플랫폼별 구현을 제공합니다. 이러한 구현은 플랫폼 이름이 [`cortex-m`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/cortex_m_generic)와 같은 디렉터리에 있습니다(예: [`cortex-m`](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/cortex_m_generic)).
 
 다음을 포함한 다른 여러 디렉터리가 있습니다.
 
@@ -40,7 +45,7 @@ Arduino를 사용하는 경우, *Hello World* 예제는 `Arduino_TensorFlowLite`
 
 마이크로컨트롤러용 TensorFlow Lite는 `Makefile`을 사용하여 필요한 모든 소스 파일을 포함하는 독립형 프로젝트를 생성할 수 있습니다. 현재 지원되는 환경은 Keil, Make 및 Mbed입니다.
 
-Make로 이러한 프로젝트를 생성하려면 [TensorFlow 리포지토리](http://github.com/tensorflow/tensorflow)를 복제하고 다음 명령을 실행합니다.
+Make로 이러한 프로젝트를 생성하려면 [TensorFlow/tflite-micro 리포지토리](https://github.com/tensorflow/tflite-micro)를 복제한 후 다음 명령어를 실행합니다.
 
 ```bash
 make -f tensorflow/lite/micro/tools/make/Makefile generate_projects
@@ -80,13 +85,13 @@ make -f tensorflow/lite/micro/tools/make/Makefile <project_name>_bin
 make -f tensorflow/lite/micro/tools/make/Makefile hello_world_bin
 ```
 
-기본적으로, 프로젝트는 호스트 운영 체제에 맞게 컴파일됩니다. 다른 대상 아키텍처를 지정하려면 `TARGET=`을 사용하세요. 다음 예는 SparkFun Edge에 적합하게 *Hello World* 예제를 빌드하는 방법을 보여줍니다.
+기본적으로 프로젝트는 호스트 운영 체제에 맞게 컴파일됩니다. 다른 대상 아키텍처를 지정하려면 `TARGET=`와 `TARGET_ARCH=`을 사용합니다. 다음 예제는 일반 cortex-m0에 대한 *Hello World* 예제를 빌드하는 방법을 보여줍니다:
 
 ```bash
-make -f tensorflow/lite/micro/tools/make/Makefile TARGET=sparkfun_edge hello_world_bin
+make -f tensorflow/lite/micro/tools/make/Makefile TARGET=cortex_m_generic TARGET_ARCH=cortex-m0 hello_world_bin
 ```
 
-대상이 지정되면 사용 가능한 대상별 소스 파일이 원본 코드 대신 사용됩니다. 예를 들어, `examples/hello_world/sparkfun_edge` 하위 디렉터리에는 대상 `sparkfun_edge`가 지정될 때 사용되는 파일인 `constants.cc` 및 `output_handler.cc`의 SparkFun Edge 구현이 포함됩니다.
+대상이 지정되면 사용 가능한 모든 대상별 소스 파일이 원본 코드 대신 사용됩니다. 예를 들어, 하위 디렉터리 `examples/hello_world/cortex_m_generic`에는 `constants.cc` 및 `output_handler.cc` 파일의 SparkFun Edge 구현이 포함되어 있으며, 이는 대상 `cortex_m_generic`가 지정될 때 사용됩니다.
 
 프로젝트의 Makefile에서 프로젝트 이름을 찾을 수 있습니다. 예를 들어, `examples/hello_world/Makefile.inc`는 *Hello World* 예제의 바이너리 이름을 지정합니다.
 

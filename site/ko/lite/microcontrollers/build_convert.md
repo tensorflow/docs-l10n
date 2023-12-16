@@ -36,12 +36,7 @@ unsigned int converted_model_tflite_len = 18200;
 
 파일을 생성한 후에는 프로그램에 포함할 수 있습니다. 임베디드 플랫폼에서 메모리 효율을 개선하기 위해 배열 선언을 `const`로 변경하는 것이 중요합니다.
 
-<!--
-Removing this link for now because it is broken. Need to update TF example repos. b/244204652
-For an example of how to include and use a model in your program, see
-[`model.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/model.cc)
-in the *Hello World* example.
--->
+프로그램에 모델을 포함하고 사용하는 방법에 대한 예제는 *Hello World* 예제의 [`evaluate_test.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/examples/hello_world/evaluate_test.cc)를 참조하세요.
 
 ## 모델 아키텍처 및 훈련
 
@@ -61,6 +56,6 @@ in the *Hello World* example.
 
 ### 연산 지원
 
-마이크로컨트롤러용 TensorFlow Lite는 현재 TensorFlow 연산의 일부만 지원하기 때문에 실행 가능한 모델 아키텍처에서 제약이 따릅니다. 특정 아키텍처의 참조 구현과 최적화 측면에서 연산 지원을 확대하기 위해 노력하고 있습니다.
+마이크로컨트롤러용 TensorFlow Lite는 현재 TensorFlow 연산의 일부만 지원하기 때문에 실행 가능한 모델 아키텍처에서 제약이 따릅니다. 우리는 특정 아키텍처의 참조 구현과 최적화 측면에서 연산 지원을 확대하기 위해 노력하고 있습니다.
 
-지원되는 연산은 [`all_ops_resolver.cc`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/all_ops_resolver.cc) 파일에서 확인할 수 있습니다.
+지원되는 연산은 [`micro_mutable_ops_resolver.h`](https://github.com/tensorflow/tflite-micro/blob/main/tensorflow/lite/micro/micro_mutable_op_resolver.h) 파일에서 확인할 수 있습니다.

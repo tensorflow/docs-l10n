@@ -16,7 +16,7 @@
 
 TensorFlow Lite를 처음 사용하고 Android 또는 iOS로 작업하는 경우, 다음 예제 애플리케이션을 탐색하면 시작하는 데 도움이 됩니다.
 
-[TensorFlow Lite 작업 라이브러리](../../inference_with_metadata/task_library/image_classifier)의 기본 API를 활용하여 몇 줄의 코드만으로 오디오 분류 모델을 통합할 수 있습니다. [TensorFlow Lite 지원 라이브러리](../../inference_with_metadata/lite_support)를 사용하여 사용자 정의 추론 파이프라인을 구축할 수도 있습니다.
+[TensorFlow Lite 작업 라이브러리](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/g3doc/inference_with_metadata/task_library/image_classifier.md)의 기본 API를 활용하여 단 몇 줄의 코드만으로 이미지 분류 모델을 통합할 수 있습니다. 또한 [TensorFlow Lite 지원 라이브러리](../../inference_with_metadata/lite_support)를 사용하여 사용자 정의 추론 파이프라인을 구축할 수도 있습니다.
 
 아래 Android 예제는 각각 [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_task_api) 및 [lib_support](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/lib_support)로 두 메서드를 구현한 내용을 보여줍니다.
 
@@ -80,7 +80,7 @@ Android/iOS 이외의 플랫폼을 사용 중이거나 이미 [TensorFlow Lite A
 
 TensorFlow Lite는 원본 데이터세트에서 모두 훈련된 다양한 이미지 분류 모델을 제공합니다. MobileNet, Inception 및 NASNet과 같은 모델 아키텍처를 <a href="https://tfhub.dev/s?deployment-format=lite">TensorFlow Hub</a>에서 사용할 수 있습니다. 사용 사례에 가장 적합한 모델을 선택하려면 개별 아키텍처와 다양한 모델 간의 일부 절충점을 고려해야 합니다. 이러한 모델 간의 일부 절충점은 성능, 정확성 및 모델 크기와 같은 메트릭을 기반으로 합니다. 예를 들어 바코드 스캐너를 구축하기 위해 더 빠른 모델이 필요할 수 있고 의료 영상 앱을 위해 더 느리고 더 정확한 모델이 선호될 수도 있습니다.
 
-참고: 제공되는 <a href="https://www.tensorflow.org/lite/guide/hosted_models#image_classification">이미지 분류 모델</a>은 다양한 크기의 입력을 허용합니다. 일부 모델의 경우 크기가 파일 이름에 표시됩니다. 예를 들어 Mobilenet_V1_1.0_224 모델은 224x224픽셀의 입력을 허용합니다. 모든 모델에는 픽셀당 3개의 색상 채널(빨간색, 녹색 및 파란색)이 필요합니다. 양자화된 모델에는 채널당 1바이트가 필요하고 부동 모델에는 채널당 4바이트가 필요합니다. <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android/EXPLORE_THE_CODE.md">Android</a> 및 <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios/EXPLORE_THE_CODE.md">iOS</a> 코드 샘플은 전체 크기 카메라 이미지를 각 모델에 필요한 형식으로 처리하는 방법을 보여줍니다.
+참고: 제공되는 <a href="https://www.tensorflow.org/lite/guide/hosted_models#image_classification">이미지 분류 모델</a>은 다양한 크기의 입력을 허용합니다. 일부 모델의 경우 크기가 파일 이름에 표시됩니다. 예를 들어 Mobilenet_V1_1.0_224 모델은 224x224픽셀의 입력을 허용합니다. 모든 모델에는 픽셀당 3개의 색상 채널(빨간색, 녹색 및 파란색)이 필요합니다. 양자화된 모델에는 채널당 1바이트가 필요하고 부동 모델에는 채널당 4바이트가 필요합니다. <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/android_java">Android</a> 및 <a href="https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification/ios">iOS</a> 코드 샘플은 전체 크기 카메라 이미지를 각 모델에 필요한 형식으로 처리하는 방법을 보여줍니다.
 
 <h3>용도 및 제한</h3>
 
@@ -91,7 +91,7 @@ TensorFlow Lite 이미지 분류 모델은 단일 레이블 분류에 유용합�
 다음과 같은 사용 사례의 경우 다른 유형의 모델을 사용해야 합니다.
 
 <ul>
-  <li>이미지 내 하나 이상의 객체 유형 및 위치 예측하기(<a href="../object_detection/overview">객체 감지</a> 참조)</li>
+  <li>이미지 내에서 하나 이상의 객체 유형 및 위치 예측하기(<a href="../object_detection/overview">객체 감지</a> 참조)</li>
   <li>이미지의 구성 예측하기(예: 피사체 대 배경)(<a href="../segmentation/overview">세분화</a> 참조)</li>
 </ul>
 
@@ -127,7 +127,7 @@ TensorFlow Lite는 MobileNet 모델의 성능 범위를 3.7ms에서 80.3ms까지
   </thead>
   <tr>
     <td rowspan="3">       <a href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/mobilenet_v1_1.0_224_quant_and_labels.zip">Mobilenet_V1_1.0_224_quant</a> </td>
-    <td rowspan="3">       4.3 Mb</td>
+    <td rowspan="3">4.3Mb</td>
     <td>Pixel 3(Android 10)</td>
     <td>6ms</td>
     <td>13ms *</td>

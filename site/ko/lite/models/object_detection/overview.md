@@ -7,7 +7,7 @@
 
 <img src="../images/detection.png" class="attempt-right">
 
-참고: (1) 기존 모델을 통합하려면 [TensorFlow Lite 작업 라이브러리](https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector)를 사용해 보세요. (2) 모델을 사용자 지정하려면 [TensorFlow Lite 모델 제작기](https://www.tensorflow.org/lite/guide/model_maker)를 사용해 보세요.
+참고: (1) 기존 모델을 통합하려면 [TensorFlow Lite 작업 라이브러리](../../inference_with_metadata/task_library/object_detector)를 사용해 보세요. (2) 모델을 사용자 정의하려면 [TensorFlow Lite 모델 제작기](https://www.tensorflow.org/lite/guide/model_maker)를 사용해 보세요.
 
 ## 시작하기
 
@@ -36,7 +36,7 @@ TensorFlow Lite를 처음 사용하고 Android 또는 iOS로 작업하는 경우
 
 [TensorFlow Lite 작업 라이브러리](../../inference_with_metadata/task_library/object_detector)의 기본 API를 활용하여 몇 줄의 코드로 객체 감지 모델을 통합할 수 있습니다. [TensorFlow Lite Interpreter Java API](../../guide/inference#load_and_run_a_model_in_java)를 사용하여 사용자 지정 추론 파이프라인을 구축할 수도 있습니다.
 
-아래 Android 예제는 각각 [lib_task_api](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_task_api) 및 [lib_interpreter](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android/lib_interpreter)로 두 메서드를 구현한 내용을 보여줍니다.
+아래 Android 예제는 각각 [작업 라이브러리](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android_play_services)와 [인터프리터 API](https://github.com/tensorflow/examples/tree/eb925e460f761f5ed643d17f0c449e040ac2ac45/lite/examples/object_detection/android/lib_interpreter)를 사용한 두 메서드의 구현을 보여줍니다.
 
 <a class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android">Android 예제 보기</a>
 
@@ -253,9 +253,9 @@ Android에서 이 사전 처리를 수행하는 방법을 이해하려면 [예�
 
 다양한 지연 및 정밀도 특성을 가진 모바일에 최적화된 감지 모델은 [감지 동물원](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md#mobile-models)에서 찾을 수 있습니다. 각각은 다음 섹션에서 설명하는 입력 및 출력 서명을 따릅니다.
 
-대부분의 다운로드 zip에는 `model.tflite` 파일이 포함되어 있습니다. 없는 경우 [이 지침](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md)에 따라 TensorFlow Lite 플랫 버퍼를 생성할 수 있습니다. [TF2 객체 감지 동물원](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md)의 SSD 모델은 [여기](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md)의 지침을 사용하여 TensorFlow Lite로 변환할 수도 있습니다. 감지 모델은 모바일 친화적인 소스 모델을 생성하는 중간 단계가 필요하기 때문에 [TensorFlow Lite Converter](../../models/convert)를 사용하여 직접 변환할 수 없다는 점에 유의해야 합니다. 위에 링크된 스크립트가 이 단계를 수행합니다.
-
 [TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) 및 [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md) 내보내기 스크립트에는 더 많은 수의 출력 객체 또는 더 느리고 정확한 사후 처리를 활성화할 수 있는 매개변수가 있습니다. 지원되는 인수의 전체 목록을 보려면 스크립트와 함께 `--help`를 사용하세요.
+
+[TF1](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md) 및 [TF2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tf2.md) 내보내기 스크립트에는 더 많은 수의 출력 객체 또는 더 느리고 정확한 사후 처리를 가능하게 하는 매개변수가 있습니다. 지원되는 인수의 전체 목록을 보려면 스크립트와 함께 `--help`를 사용하세요.
 
 > 현재 온디바이스 추론은 SSD 모델에만 최적화되어 있습니다. CenterNet 및 EfficientDet과 같은 다른 아키텍처의 지원을 개선하기 위한 기회를 찾고 있습니다.
 

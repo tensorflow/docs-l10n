@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2020-09-14' } *-->
-
 # TensorFlow 허브
 
 TensorFlow Hub는 재사용 가능한 머신러닝을 위한 개방형 리포지토리 및 라이브러리입니다. [tfhub.dev](https://tfhub.dev) 리포지토리는 텍스트 임베딩, 이미지 분류 모델, TF.js/TFLite 모델 등 많은 사전 훈련된 모델을 제공합니다. 리포지토리는 [커뮤니티 기여자](https://tfhub.dev/s?subtype=publisher)에게 공개됩니다.

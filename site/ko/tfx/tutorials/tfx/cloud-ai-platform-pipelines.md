@@ -41,7 +41,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. Google Cloud 이용 약관에 동의합니다.
 
-      <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/welcome-popup.png">
+       <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/welcome-popup.png">
 
 3. 무료 평가판 계정으로 시작하려면 [**무료로 사용하기**](https://console.cloud.google.com/freetrial)(또는 [**무료로 시작하기**](https://console.cloud.google.com/freetrial))를 클릭하세요.
 
@@ -75,15 +75,15 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. **+ New Instance(+ 새 인스턴스)**를 클릭하여 새 클러스터를 만듭니다.
 
-      <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-instance.png">
+       <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/new-instance.png">
 
 3. **Kubeflow Pipelines(Kubeflow 파이프라인)** 개요 페이지에서 **Configure(구성)**을 클릭합니다.
 
-      <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/configure.png">
+       <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/configure.png">
 
 4. "활성화"를 클릭하여 Kubernetes Engine API를 활성화합니다.
 
-      <img src="images/cloud-ai-platform-pipelines/open-dashboard.png" alt="오픈 대시 보드" data-md-type="image">
+       <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
 
     참고: 계속 진행하기 전에 Kubernetes Engine API를 사용할 수 있게 준비되는 동안 몇 분 정도 기다려야 할 수 있습니다.
 
@@ -93,7 +93,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     2. **중요** *다음 Cloud API에 대한 액세스 허용* 상자를 선택 표시합니다. (이 클러스터가 프로젝트의 다른 부분에 액세스하는 데 필요합니다. 이 단계를 놓치면 나중에 수정하기가 약간 까다롭습니다.)
 
-          <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
+           <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
     3. **새 클러스터 만들기**를 클릭하고 클러스터가 생성될 때까지 몇 분 정도 기다립니다. 이 작업은 몇 분 정도 걸립니다. 완료되면 다음과 같은 메시지가 표시됩니다.
 
@@ -113,7 +113,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 3. TensorFlow Enterprise 2.7(또는 그 이상)이 설치된 **새 노트북**을 생성합니다.
 
-      <img src="images/cloud-ai-platform-pipelines/select-notebook.png" alt="선택 노트북" data-md-type="image">
+       <img src="images/cloud-ai-platform-pipelines/open-template.png">
 
     새 노트북 -&gt; TensorFlow Enterprise 2.7 -&gt; Without GPU
 
@@ -125,7 +125,7 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
     2. 무료 등급을 유지해야 하는 경우 **머신 구성**에서 vCPU가 1개 또는 2개인 구성을 선택할 수 있습니다.
 
-          <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
+           <img style="width: 65%;" src="images/cloud-ai-platform-pipelines/two-cpus.png">
 
     3. 새 노트북이 생성될 때까지 기다린 후 **Notebooks API 사용 설정**을 클릭합니다.
 
@@ -139,15 +139,15 @@ https://pixabay.com/photos/new-york-cab-cabs-taxi-urban-city-2087998/ -->
 
 2. 이 튜토리얼에서 사용중인 클러스터 라인에서 **Open Pipelines Dashboard를** 클릭합니다.
 
-      <img src="images/cloud-ai-platform-pipelines/open-template.png">
+       <img src="images/cloud-ai-platform-pipelines/open-dashboard.png" alt="오픈 대시 보드" data-md-type="image">
 
 3. **시작하기** 페이지에서 **Google Cloud에서 Cloud AI Platform 노트북 열기**를 클릭합니다.
 
-      <img src="images/cloud-ai-platform-pipelines/open-dashboard.png">
+       <img src="images/cloud-ai-platform-pipelines/select-notebook.png" alt="선택 노트북" data-md-type="image">
 
 4. 이 튜토리얼에서 사용 중인 노트북 인스턴스를 선택하고 **계속**을 선택한 후 **확인**을 선택합니다.
 
-      <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/check-the-box.png">
+       <img style="width: 50%;" src="images/cloud-ai-platform-pipelines/check-the-box.png">
 
 ## 5. 노트북에서 계속 작업
 

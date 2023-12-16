@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2022-03-19' } *-->
-
 <!-- Copyright 2018 The TensorFlow Hub Authors. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -145,8 +143,7 @@ TensorFlow Hub는 protobufs를 사용하기 때문에 `.proto` 파일에서 필�
 (tensorflow_hub_env)~/hub/$ ls -1 tensorflow_hub/*_pb2.py
 ```
 
-<pre>
-tensorflow_hub/image_module_info_pb2.py
+<pre>tensorflow_hub/image_module_info_pb2.py
 tensorflow_hub/module_attachment_pb2.py
 tensorflow_hub/module_def_pb2.py
 </pre>

@@ -43,7 +43,7 @@
 다음 Jupyter 노트북은 구현 예제를 보여줍니다.
 
 - [Notebook 1](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/blogs/babyweight_tft/babyweight_tft_keras_.ipynb){: .external }은 데이터 전처리에 대한 내용을 다룹니다. 자세한 내용은 나중에 [Apache Beam 파이프라인 구현하기](#implement-the-apache-beam-pipeline) 섹션에서 제공됩니다.
-- [Notebook 2](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/blogs/babyweight_tft/babyweight_tft_keras_02.ipynb){: .external }는 모델 훈련에 대한 내용을 다룹니다. 자세한 내용은 나중에 [TensorFlow 모델 구현하기](#implement-the-tensorflow-model) 섹션에서 제공됩니다.
+- [Notebook 2](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/blogs/babyweight_tft/babyweight_tft_keras_.ipynb){: .external }는 모델 훈련에 대한 내용을 다룹니다. 자세한 내용은 나중에 [TensorFlow 모델 구현하기](#implement-the-tensorflow-model) 섹션에서 제공됩니다.
 
 다음 섹션에서는 이러한 노트북을 복제하고 노트북을 실행하여 구현 예제가 작동하는 방식을 알아봅니다.
 

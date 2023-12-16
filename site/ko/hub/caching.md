@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2021-07-28' } *-->
-
 # TF Hub에서 모델 다운로드 캐싱하기
 
 ## 개요
@@ -54,3 +52,5 @@ load_options =
 tf.saved_model.LoadOptions(experimental_io_device='/job:localhost')
 reloaded_model = hub.load("https://tfhub.dev/...", options=load_options)
 ```
+
+**참고:** 유효한 핸들에 대한 자세한 정보는 [여기](tf2_saved_model.md#model_handles)에서 확인하세요.

@@ -150,7 +150,7 @@ TensorFlow Lite를 사용하려면 입력 및 출력 텐서의 데이터 유형�
 - `long`
 - `byte`
 
-`String` 유형도 지원되지만 기본 유형과 다르게 인코딩됩니다. 특히, 문자열 Tensor의 형상에 따라 Tensor에서 문자열의 수와 배열이 결정되며 각 요소 자체는 가변 길이 문자열입니다. 이런 맥락에서 Tensor의 (바이트) 크기는 형상과 유형만으로 계산할 수 없기 때문에 문자열은 단일 플랫 `ByteBuffer` 인수로 제공될 수 없습니다.
+`String` 유형도 지원되지만 기본 유형과 다르게 인코딩됩니다. 특히, 문자열 텐서의 형상에 따라 텐서의 문자열 수와 배열이 결정되며 각 요소 자체는 가변 길이 문자열입니다. 이런 맥락에서 텐서의 크기(바이트)는 형상과 유형만으로 계산할 수 없기 때문에 문자열은 단일 플랫 `ByteBuffer` 인수로 제공될 수 없습니다. 이 [페이지](https://www.tensorflow.org/lite/api_docs/java/org/tensorflow/lite/Interpreter)에서 몇 가지 예제를 확인할 수 있습니다.
 
 `Integer` 및 `Float`와 같은 boxed 유형을 포함한 다른 데이터 유형이 사용되면 `IllegalArgumentException`이 발생합니다.
 
@@ -376,7 +376,48 @@ float* output = interpreter->typed_output_tensor<float>(0);
 이 예제는 정의된 SignatureDef를 사용하여 SavedModel에서 변환하는 경우에 권장됩니다. TensorFlow 2.5부터 사용 가능합니다.
 
 ```python
-class TestModel(tf.Module):   def __init__(self):     super(TestModel, self).__init__()    @tf.function(input_signature=[tf.TensorSpec(shape=[1, 10], dtype=tf.float32)])   def add(self, x):     '''     Simple method that accepts single input 'x' and returns 'x' + 4.     '''     # Name the output 'result' for convenience.     return {'result' : x + 4}   SAVED_MODEL_PATH = 'content/saved_models/test_variable' TFLITE_FILE_PATH = 'content/test_variable.tflite'  # Save the model module = TestModel() # You can omit the signatures argument and a default signature name will be # created with name 'serving_default'. tf.saved_model.save(     module, SAVED_MODEL_PATH,     signatures={'my_signature':module.add.get_concrete_function()})  # Convert the model using TFLiteConverter converter = tf.lite.TFLiteConverter.from_saved_model(SAVED_MODEL_PATH) tflite_model = converter.convert() with open(TFLITE_FILE_PATH, 'wb') as f:   f.write(tflite_model)  # Load the TFLite model in TFLite Interpreter interpreter = tf.lite.Interpreter(TFLITE_FILE_PATH) # There is only 1 signature defined in the model, # so it will return it by default. # If there are multiple signatures then we can pass the name. my_signature = interpreter.get_signature_runner()  # my_signature is callable with input as arguments. output = my_signature(x=tf.constant([1.0], shape=(1,10), dtype=tf.float32)) # 'output' is dictionary with all outputs from the inference. # In this case we have single output 'result'. print(output['result'])
+class TestModel(tf.Module):
+  def __init__(self):
+    super(TestModel, self).__init__()
+
+  @tf.function(input_signature=[tf.TensorSpec(shape=[1, 10], dtype=tf.float32)])
+  def add(self, x):
+    '''
+    Simple method that accepts single input 'x' and returns 'x' + 4.
+    '''
+    # Name the output 'result' for convenience.
+    return {'result' : x + 4}
+
+
+SAVED_MODEL_PATH = 'content/saved_models/test_variable'
+TFLITE_FILE_PATH = 'content/test_variable.tflite'
+
+# Save the model
+module = TestModel()
+# You can omit the signatures argument and a default signature name will be
+# created with name 'serving_default'.
+tf.saved_model.save(
+    module, SAVED_MODEL_PATH,
+    signatures={'my_signature':module.add.get_concrete_function()})
+
+# Convert the model using TFLiteConverter
+converter = tf.lite.TFLiteConverter.from_saved_model(SAVED_MODEL_PATH)
+tflite_model = converter.convert()
+with open(TFLITE_FILE_PATH, 'wb') as f:
+  f.write(tflite_model)
+
+# Load the TFLite model in TFLite Interpreter
+interpreter = tf.lite.Interpreter(TFLITE_FILE_PATH)
+# There is only 1 signature defined in the model,
+# so it will return it by default.
+# If there are multiple signatures then we can pass the name.
+my_signature = interpreter.get_signature_runner()
+
+# my_signature is callable with input as arguments.
+output = my_signature(x=tf.constant([1.0], shape=(1,10), dtype=tf.float32))
+# 'output' is dictionary with all outputs from the inference.
+# In this case we have single output 'result'.
+print(output['result'])
 ```
 
 모델에 SignatureDefs가 정의되지 않은 경우의 또 다른 예입니다.
@@ -406,21 +447,20 @@ output_data = interpreter.get_tensor(output_details[0]['index'])
 print(output_data)
 ```
 
-모델을 미리 변환된 `.tflite` 파일로 로드하는 대신 코드를 [TensorFlow Lite Converter Python API](https://www.tensorflow.org/lite/api_docs/python/tf/lite/TFLiteConverter)( `tf.lite.TFLiteConverter`)와 결합하여 TensorFlow 모델을 TensorFlow Lite 형식으로 변환한 다음 추론을 실행할 수 있습니다.
+모델을 미리 변환된 `.tflite` 파일로 로드하는 대신 코드를 [TensorFlow Lite 변환기 Python API](https://www.tensorflow.org/lite/api_docs/python/tf/lite/TFLiteConverter)(`tf.lite.TFLiteConverter`)와 결합하여 Keras 모델을 TensorFlow Lite 형식으로 변환한 다음 추론을 실행할 수 있습니다:
 
 ```python
 import numpy as np
 import tensorflow as tf
 
-img = tf.placeholder(name="img", dtype=tf.float32, shape=(1, 64, 64, 3))
+img = tf.keras.Input(shape=(64, 64, 3), name="img")
 const = tf.constant([1., 2., 3.]) + tf.constant([1., 4., 4.])
 val = img + const
 out = tf.identity(val, name="out")
 
 # Convert to TF Lite format
-with tf.Session() as sess:
-  converter = tf.lite.TFLiteConverter.from_session(sess, [img], [out])
-  tflite_model = converter.convert()
+converter = tf.lite.TFLiteConverter.from_keras_model(tf.keras.models.Model(inputs=[img], outputs=[out]))
+tflite_model = converter.convert()
 
 # Load the TFLite model and allocate tensors.
 interpreter = tf.lite.Interpreter(model_content=tflite_model)
@@ -439,10 +479,7 @@ Python 샘플 코드는 [`label_image.py`](https://github.com/tensorflow/tensorf
 
 다음 예는 서로 다른 언어로 추론을 실행하기 전에 입력 형상의 크기를 조정하는 방법을 보여줍니다. 모든 예제는 입력 형상이 `[1/None, 10]`으로 정의되고 크기를 `[3, 10]`으로 조정해야 한다고 가정합니다.
 
-<section class="tabs">
-</section>
-
-###### C++ {.new-tab}
+C++ 예제:
 
 ```c++
 // Resize input tensors before allocate tensors
@@ -450,7 +487,7 @@ interpreter->ResizeInputTensor(/*tensor_index=*/0, std::vector<int>{3,10});
 interpreter->AllocateTensors();
 ```
 
-###### Python {.new-tab}
+Python 예제:
 
 ```python
 # Load the TFLite model in TFLite Interpreter

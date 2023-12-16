@@ -13,7 +13,7 @@
 
 **페더레이션 분석으로 시작하기**
 
-- [Private Heavy Hitters](private_heavy_hitters.ipynb)는 `tff.analytics.heavy_hitters`를 사용하여 페더레이션 분석 계산을 구축하여 개인 Heavy Hitters를 찾는 방법을 보여줍니다.
+- [비공개 헤비 히터](private_heavy_hitters.ipynb)는 `tff.analytics.heavy_hitters`를 사용하여 페더레이션 분석 계산을 구축하고 개인 헤비 히터를 찾는 방법을 보여줍니다.
 
 **사용자 정의 페더레이션 계산 작성**
 
@@ -24,8 +24,6 @@
 - [사용자 지정 집계 구현](custom_aggregators.ipynb)은<code>tff.aggregators</code> 모듈의 이면에 있는 디자인 원칙과 클라이언트에서 서버로 값의 사용자 정의 집계를 구현하기 위한 모범 사례를 설명합니다.
 
 **시뮬레이션 모범 사례**
-
-- [Kubernetes를 사용한 고성능 시뮬레이션](high_performance_simulation_with_kubernetes.ipynb)에서는 Kubernetes에서 실행되는 고성능 TFF 런타임을 설정하고 구성하는 방법을 설명합니다.
 
 - [가속기(GPU)를 사용한 TFF 시뮬레이션](simulations_with_accelerators.ipynb)은 TFF의 고성능 런타임을 GPU와 함께 사용할 수 있는 방법을 보여줍니다.
 
@@ -42,7 +40,5 @@
 - [페더레이션 학습 연구를 위한 TFF: 모델 및 업데이트 압축](tff_for_federated_learning_research_compression.ipynb)은 [tensor_encoding API](https://github.com/tensorflow/model-optimization/tree/master/tensorflow_model_optimization/python/core/internal/tensor_encoding)를 기반으로 하는 사용자 정의 집계를 TFF에서 사용할 수 있는 방법을 보여줍니다.
 
 - [TFF의 차등 개인 정보 보호 페더레이션 학습](federated_learning_with_differential_privacy.ipynb)은 TFF를 사용하여 사용자 수준 차등 개인 정보 보호를 사용하여 모델을 훈련하는 방법을 보여줍니다.
-
-- [TFF를 사용하여 원격 데이터 로드](loading_remote_data.ipynb)에서는 TFF 런타임에 사용자 지정 논리를 포함하여 원격 컴퓨터에 데이터를 로드하는 방법을 설명합니다.
 
 - [TFF에서 JAX에 대한 지원](../tutorials/jax_support.ipynb)은 TFF에서 [JAX](https://github.com/google/jax) 계산을 사용하는 방법을 보여주고 TFF가 다른 프런트엔드 및 백엔드 ML 프레임워크와 상호 운용될 수 있도록 설계된 방식을 보여줍니다.
