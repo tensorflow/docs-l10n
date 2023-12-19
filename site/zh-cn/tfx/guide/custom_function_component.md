@@ -5,12 +5,15 @@
 如以下示例所示，以此样式编写自定义组件非常简单。
 
 ```python
+class MyOutput(TypedDict):
+  accuracy: float
+
 @component
 def MyValidationComponent(
     model: InputArtifact[Model],
     blessing: OutputArtifact[Model],
     accuracy_threshold: Parameter[int] = 10,
-    ) -> OutputDict(accuracy=float):
+) -> MyOutput:
   '''My simple custom model validation component.'''
 
   accuracy = evaluate_model(model)
@@ -65,17 +68,20 @@ def MyDataProcessor(
 
 - 对于 **Beam 流水线**，使用类型提示注释 `BeamComponentParameter[beam.Pipeline]`。将默认值设置为 `None`。值 `None` 将由 <a><code>BaseBeamExecutor</code></a> {: .external } 的 `_make_beam_pipeline()` 创建的实例化 Beam 流水线所取代
 
-- 对于每个在流水线构造时未知的**简单数据类型输入**（`int`、`float`、`str` 或 `bytes`），请使用类型提示 `T`。请注意，在 TFX 0.22 版本中，无法在流水线构造时为此类型的输入传递具体值（如前一个部分中所述，请使用 `Parameter` 注解）。此实参可以是可选实参，也可以使用默认值进行定义。如果您的组件具有简单数据类型输出（`int`、`float`、`str` 或 `bytes`），您可以使用 `OutputDict` 实例返回这些输出。将 `OutputDict` 类型提示应用为组件的返回值。
-
-- 对于每个 **output**，将实参 `<output_name>=<T>` 添加到 `OutputDict` 构造函数中，其中 `<output_name>` 是输出名称，`<T>` 是输出类型（例如：`int`、`float`、`str` 或 `bytes`）。
+- 对于每个在流水线构造时未知的**简单数据类型输入**（`int`、`float`、`str` 或 `bytes`），请使用类型提示 `T`。请注意，在 TFX 0.22 版本中，无法在流水线构造时为此类型的输入传递具体值（如前一个部分中所述，请使用 `Parameter` 注解）。此实参可以是可选实参，也可以使用默认值进行定义。如果您的组件具有简单数据类型输出（`int`、`float`、`str` 或 `bytes`），您可以使用 `OutputDict` 实例返回这些输出。将 <code>OutputDict</code> 类型提示应用为组件的返回值。
 
 在函数体中，输入和输出工件会作为 `tfx.types.Artifact` 对象传递；您可以通过检查其 `.uri` 获得其系统管理的位置并读取/设置任何属性。输入形参和简单数据类型输入会作为指定类型的对象传递。简单数据类型输出应作为字典返回，其中键是适当的输出名称，值是所需的返回值。
 
 完成后的函数组件如下所示：
 
 ```python
+from typing import TypedDict
 import tfx.v1 as tfx
 from tfx.dsl.component.experimental.decorators import component
+
+class MyOutput(TypedDict):
+  loss: float
+  accuracy: float
 
 @component
 def MyTrainerComponent(
@@ -83,7 +89,7 @@ def MyTrainerComponent(
     model: tfx.dsl.components.OutputArtifact[tfx.types.standard_artifacts.Model],
     dropout_hyperparameter: float,
     num_iterations: tfx.dsl.components.Parameter[int] = 10
-    ) -> tfx.v1.dsl.components.OutputDict(loss=float, accuracy=float):
+) -> MyOutput:
   '''My simple trainer component.'''
 
   records = read_examples(training_data.uri)

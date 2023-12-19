@@ -1,6 +1,6 @@
 # 拆分和切片
 
-所有 TFDS 数据集都公开了可以在[目录](https://www.tensorflow.org/datasets/catalog/overview)中浏览的各种数据拆分（例如 `'train'`、`'test'`）。
+所有 TFDS 数据集都提供了不同的数据拆分（例如 `'train'`、`'test'`），可以在[目录](https://www.tensorflow.org/datasets/catalog/overview)中进行探索。除了 `all`（它是一个保留术语，表示所有拆分的并集，见下文），任何字母字符串都可以用作拆分名称。
 
 除了“官方”数据集拆分之外，TFDS 还允许选择拆分的切片和各种组合。
 
@@ -19,10 +19,10 @@ ds = builder.as_dataset(split='test+train[:75%]')
 
 拆分可以是：
 
-- **普通拆分**（`'train'`、`'test'`）：所选拆分中的所有样本。
+- **普通拆分名称**（字符串，例如 `'train'`、`'test'`…）：所选拆分中的所有样本。
 - **切片**：切片与 [python 切片表示法](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations)具有相同的语义。切片可以是：
     - **绝对**（`'train[123:450]'`、`train[:4000]`）：（请参阅下方注释了解有关读取顺序的注意事项）
-    - **百分比**（`'train[:75%]'`、`'train[25%:75%]'`）：将完整数据分成 100 个均匀切片。如果数据不能被 100 整除，则某些百分比可能包含附加样本。
+    - **百分比** (`'train[:75%]'`、`'train[25%:75%]'`)：将完整数据分成均匀的切片。如果数据不能被整除，则某些百分比可能包含附加样本。支持小数百分比。
     - **分片**（`train[:4shard]`、`train[4shard]`）：选择请求的分片中的所有样本。（请参阅 `info.splits['train'].num_shards` 以获取拆分的分片数）
 - **拆分联合**（`'train+test'`、`'train[:25%]+test'`）：拆分将交错在一起。
 - **完整数据集** (`'all'`)：`'all'` 是一个与所有拆分的联合对应的特殊拆分名称（相当于 `'train+test+...'`）。
@@ -118,7 +118,7 @@ ds = tfds.load('my_dataset', split=split)
 - `%`：百分比切片
 - `shard`：分片切片
 
-`tfds.ReadInstruction` 也有一个舍入参数。如果数据集中的样本数量不能被 `100` 整除：
+`tfds.ReadInstruction` 也有一个舍入参数。如果数据集中的样本数量不能被整除：
 
 - `rounding='closest'`（默认）：剩余的样本会在百分比中分布，因此某些百分比可能包含附加样本。
 - `rounding='pct1_dropremainder'`：剩余的样本会被丢弃，但这可保证所有百分比均包含完全相同数量的样本（例如：`len(5%) == 5 * len(1%)`）。

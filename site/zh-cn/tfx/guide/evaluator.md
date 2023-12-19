@@ -22,7 +22,7 @@ Evaluator 流水线组件通常非常易于部署，而且几乎不需要自定�
 
 设置 Evaluator 需要以下信息：
 
-- 要配置的指标（仅在与模型一起保存的指标之外添加其他指标时需要）。有关更多信息，请参阅 [Tensorflow Model Analysis 指标](https://github.com/tensorflow/model-analysis/blob/master/g3doc/metrics.md)。
+- 要配置的指标（仅在与模型一起保存的指标之外添加其他指标时需要）。有关详情，请参阅 [Tensorflow Model Analysis 指标](https://github.com/tensorflow/model-analysis/blob/master/g3doc/metrics.md)。
 - 要配置的切片（如果未提供切片，则会默认添加“整体”切片）。有关详情，请参阅 [Tensorflow Model Analysis 设置](https://github.com/tensorflow/model-analysis/blob/master/g3doc/setup.md)。
 
 如果要包括验证，则需要以下附加信息：

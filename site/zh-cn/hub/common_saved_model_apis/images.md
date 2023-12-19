@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2022-04-16' review_interval: '6 months' } *-->
-
 # 图像任务的通用 SavedModel API
 
 本页面介绍用于图像相关任务的 [TF2 SavedModel](../tf2_saved_model.md) 应当如何实现[可重用的 SavedModel API](../reusable_saved_models.md)。（这会替换现已弃用的 [TF1 Hub 格式](../tf1_hub_module)的[通用图像签名](../common_signatures/images.md)。）
@@ -46,8 +44,7 @@ features = hub.KerasLayer("path/to/model")(images)
 
 图像特征向量的可重用 SavedModel 在以下各项中使用：
 
-- Colab 教程[重新训练图像分类器](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)；
-- 命令行工具 [make_image_classifier](https://github.com/tensorflow/hub/tree/master/tensorflow_hub/tools/make_image_classifier)。
+- Colab 教程[重新训练图像分类器](https://colab.research.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_image_retraining.ipynb)；
 
 <a name="classification"></a>
 

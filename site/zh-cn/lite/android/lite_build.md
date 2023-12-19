@@ -30,7 +30,7 @@ allprojects {
 
 <!-- mdformat off(devsite fails if there are line-breaks in templates) -->
 
-{% dynamic if 'tflite-android-tos' in user.acknowledged_walls and request.tld != 'cn' %} 您可以在<a href="https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/tools/dockerfiles/tflite-android.Dockerfile">此处</a>下载 Docker 文件 {% dynamic else %} 您必须确认服务条款才能下载此文件。<a class="button button-blue devsite-acknowledgement-link" data-globally-unique-wall-id="tflite-android-tos">确认</a> {% dynamic endif %}
+{% dynamic if 'tflite-android-tos' in user.acknowledged_walls and request.tld != 'cn' %} 您可以在<a href="https://raw.githubusercontent.com/tensorflow/tensorflow/master/tensorflow/lite/tools/tflite-android.Dockerfile">此处</a>下载 Docker 文件 {% dynamic else %} 您必须确认服务条款才能下载此文件。<a class="button button-blue devsite-acknowledgement-link" data-globally-unique-wall-id="tflite-android-tos">确认</a> {% dynamic endif %}
 
 <!-- mdformat on -->
 
@@ -70,7 +70,7 @@ sdkmanager \
 Bazel 是适用于 TensorFlow 的主要构建系统。要使用 Bazel 构建，您必须在系统上安装此工具以及 Android NDK 与 SDK。
 
 1. 安装最新版本的 [Bazel 构建系统](https://bazel.build/versions/master/docs/install.html)。
-2. 需要 Android NDK 才能构建原生 (C/C++) TensorFlow Lite 代码。最新的推荐版本是 17c，在[此处](https://developer.android.com/ndk/downloads/older_releases.html#ndk-19c-downloads)可以找到该版本。
+2. 需要 Android NDK 才能构建原生 (C/C++) TensorFlow Lite 代码。最新的推荐版本是 21e，在[此处](https://developer.android.com/ndk/downloads/older_releases.html#ndk-21e-downloads)可以找到该版本。
 3. 在[此处](https://developer.android.com/tools/revisions/build-tools.html)可以获取 Android SDK 和构建工具，或者，您也可以通过 [Android Studio](https://developer.android.com/studio/index.html) 获取。对于 TensorFlow Lite 模型构建，推荐的构建工具 API 版本是 23 或更高版本。
 
 ### 配置工作区和 .bazelrc
@@ -85,10 +85,10 @@ Bazel 是适用于 TensorFlow 的主要构建系统。要使用 Bazel 构建，�
 如果不设置这些变量，则必须在脚本提示中以交互方式提供。如果配置成功，则会在根文件夹的 `.tf_configure.bazelrc` 文件中产生类似以下代码的条目：
 
 ```shell
-build --action_env ANDROID_NDK_HOME="/usr/local/android/android-ndk-r19c"
-build --action_env ANDROID_NDK_API_LEVEL="21"
-build --action_env ANDROID_BUILD_TOOLS_VERSION="28.0.3"
-build --action_env ANDROID_SDK_API_LEVEL="23"
+build --action_env ANDROID_NDK_HOME="/usr/local/android/android-ndk-r21e"
+build --action_env ANDROID_NDK_API_LEVEL="26"
+build --action_env ANDROID_BUILD_TOOLS_VERSION="30.0.3"
+build --action_env ANDROID_SDK_API_LEVEL="30"
 build --action_env ANDROID_SDK_HOME="/usr/local/android/android-sdk-linux"
 ```
 
@@ -99,6 +99,8 @@ build --action_env ANDROID_SDK_HOME="/usr/local/android/android-sdk-linux"
 ```sh
 bazel build -c opt --fat_apk_cpu=x86,x86_64,arm64-v8a,armeabi-v7a \
   --host_crosstool_top=@bazel_tools//tools/cpp:toolchain \
+  --define=android_dexmerger_tool=d8_dexmerger \
+  --define=android_incremental_dexing_tool=d8_dexbuilder \
   //tensorflow/lite/java:tensorflow-lite
 ```
 

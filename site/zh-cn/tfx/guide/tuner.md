@@ -164,7 +164,7 @@ tuner = google_cloud_ai_platform.Tuner(
 
 注：每个并行搜索中的每次试验都是在工作进程群中的单一机器上进行的，即每次试验都没有利用多工作进程分布式训练的优势。如果每次试验都需要多工作进程分发，请参考 [`DistributingCloudTuner`](https://github.com/tensorflow/cloud/blob/b9c8752f5c53f8722dfc0b5c7e05be52e62597a8/src/python/tensorflow_cloud/tuner/tuner.py#L384-L676)，而不是 `CloudTuner`。
 
-注：`CloudTuner` 和 Google Cloud AI Platform 扩展 Tuner 组件可以一起使用，在这种情况下，它允许由 AI Platform Vizier 的超参数搜索算法提供支持的分布式并行调节。不过，为了做到这一点，Cloud AI Platform 作业必须获得访问 AI Platform Vizier 服务的权限。请参阅此[指南](https://cloud.google.com/ai-platform/training/docs/custom-service-account#custom)设置自定义服务账户。之后，您应该在流水线代码中为训练作业指定该自定义服务账户。有关更多详细信息，请参阅 [GCP 上的 E2E CloudTuner 示例](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow_gcp.py)。
+注：`CloudTuner` 和 Google Cloud AI Platform 扩展 Tuner 组件可以一起使用，在这种情况下，它允许由 AI Platform Vizier 的超参数搜索算法提供支持的分布式并行调节。不过，为了做到这一点，Cloud AI Platform 作业必须获得访问 AI Platform Vizier 服务的权限。请参阅此[指南](https://cloud.google.com/ai-platform/training/docs/custom-service-account#custom)设置自定义服务账户。之后，您应该在流水线代码中为训练作业指定该自定义服务账户。有关更多详细信息，请参阅 [GCP 上的 E2E CloudTuner 示例](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_kubeflow.py)。
 
 ## 链接
 

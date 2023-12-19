@@ -23,7 +23,7 @@ TFX 流水线中步骤的输出称为**工件**。工作流中的后续步骤可
 
 例如，`ExampleGen` 标准组件发出序列化样本，另一些组件（例如 `StatisticsGen` 标准组件）则将这些样本用作输入。
 
-必须使用在 [ML Metadata](mlmd) 存储中注册的**工件类型**对工件进行强类型化。详细了解 [ML Metadata 中使用的概念](mlmd#concepts)。
+必须使用在 <a>ML Metadata</a> 存储中注册的<strong>工件类型</strong>对工件进行强类型化。详细了解 [ML Metadata 中使用的概念](mlmd.md#concepts)。
 
 工件类型具有名称并定义其属性的架构。工件类型名称在 ML Metadata 存储中必须唯一。TFX 提供了几种[标准工件类型](https://github.com/tensorflow/tfx/blob/master/tfx/types/standard_artifacts.py){: .external }，这些类型描述了复杂的数据类型和值类型，例如：字符串、整数和浮点数。您可以[重用这些工件类型](https://github.com/tensorflow/tfx/blob/master/tfx/types/standard_artifacts.py){: .external }，或者定义派生自 [`Artifact`](https://github.com/tensorflow/tfx/blob/master/tfx/types/artifact.py){: .external } 的自定义工件类型。
 
@@ -45,7 +45,7 @@ TFX 流水线中步骤的输出称为**工件**。工作流中的后续步骤可
 - 执行器，用于实现代码以执行 ML 工作流中的步骤，例如提取和转换数据或训练和评估模型。
 - 组件接口，用于包装组件规范和执行器以在流水线中使用。
 
-TFX 提供了可在流水线中使用的几个[标准组件](index#tfx_standard_components)。如果这些组件不能满足您的需求，您可以构建自定义组件。[详细了解自定义组件](understanding_custom_components)。
+TFX 提供了可在流水线中使用的几个[标准组件](index.md#tfx-standard-components)。如果这些组件不能满足您的需求，您可以构建自定义组件。[详细了解自定义组件](understanding_custom_components.md)。
 
 ## 流水线
 
@@ -83,13 +83,13 @@ TFX 流水线是 ML 工作流的可移植实现，可以在各种编排器上运
 - ExampleValidator 和 Transform 组件可以并行运行，因为它们共享输入工件依赖项，并且不依赖于彼此的输出。
 - 在 Transform 组件完成后，Trainer、Evaluator 和自定义部署器组件实例依次运行。
 
-详细了解如何[构建 TFX 流水线](build_tfx_pipeline)。
+详细了解如何[构建 TFX 流水线](build_tfx_pipeline.md)。
 
 ## TFX 流水线模板
 
 TFX 流水线模板通过提供可针对用例自定义的预构建流水线，使流水线开发变得更加容易。
 
-详细了解如何[自定义 TFX 流水线模板](build_tfx_pipeline#build-a-pipeline-using-a-template)。
+详细了解如何[自定义 TFX 流水线模板](build_tfx_pipeline.md#pipeline-templates)。
 
 ## 流水线运行
 
@@ -97,4 +97,4 @@ TFX 流水线模板通过提供可针对用例自定义的预构建流水线，�
 
 ## 编排器
 
-编排器是一个您可以在其中执行流水线运行的系统。TFX 支持众多编排器，例如：[Apache Airflow](airflow)、[Apache Beam](beam_orchestrator) 和 [Kubeflow Pipelines](kubeflow)。TFX 还使用术语 *DagRunner* 来指代支持编排器的实现。
+编排器是一个您可以在其中执行流水线运行的系统。TFX 支持众多编排器，例如：[Apache Airflow](airflow.md)、[Apache Beam](beam.md) 和 [Kubeflow Pipelines](kubeflow.md)。TFX 还使用术语 *DagRunner* 来指代支持编排器的实现。

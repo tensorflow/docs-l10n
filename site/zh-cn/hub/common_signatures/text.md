@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2021-03-09' } *-->
-
 # 文本的常用签名
 
 本页面介绍应由 [TF1 Hub 格式](../tf1_hub_module.md)的模块为接受文本输入的任务实现的常用签名。（有关 [TF2 SavedModel 格式](../tf2_saved_model.md)，请参阅具有类似功能的 [SavedModel API](../common_saved_model_apis/text.md)。）

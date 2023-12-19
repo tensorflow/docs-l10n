@@ -29,7 +29,14 @@ TensorFlow 的公开 API 遵循语义化版本控制 2.0 ([semver](http://semver
 
 - 兼容性 API（在 Python 中，为 `tf.compat` 模块）。在主要版本中，我们可能会发布实用工具和其他端点来帮助用户过渡到新的主要版本。这些 API 符号已弃用且不受支持（即，我们不会添加任何功能，除了修复一些漏洞外，也不会修复错误），但它们在我们的兼容性保证范围内。
 
-- [C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/c/c_api.h)。
+- TensorFlow C API：
+
+    - [tensorflow/c/c_api.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/c/c_api.h)
+
+- TensorFlow Lite C API：
+
+    - [tensorflow/lite/c/c_api.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/c_api.h)
+    - [tensorflow/lite/c/c_api_types.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/c_api_types.h)
 
 - 下列协议缓冲区文件：
 
@@ -59,7 +66,7 @@ TensorFlow 的某些部分可能随时以向后不兼容的方式更改。包括
 - **其他语言**：Python 和 C 以外的其他语言中的 TensorFlow API，例如：
 
     - [C++](../install/lang_c.ipynb)（通过 [`tensorflow/cc`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/cc) 中的头文件公开）
-    - [Java](../install/lang_java_legacy.md)
+    - [Java](../install/lang_java_legacy.md),
     - [Go](https://github.com/tensorflow/build/blob/master/golang_install_guide/README.md)
     - [JavaScript](https://tensorflow.google.cn/js)
 
