@@ -7,7 +7,7 @@
 
 ## 开始使用
 
-<a class="button button-primary" href="https://storage.googleapis.com/download.tensorflow.org/models/tflite/gpu/multi_person_mobilenet_v1_075_float.tflite">下载此模块</a>
+如果您是 TensorFlow Lite 新用户，并且使用的是 Android 或 iOS，我们建议您研究以下可以帮助您入门的示例应用。
 
 <a data-md-type="raw_html" class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/android">Android 示例</a> <a data-md-type="raw_html" class="button button-primary" href="https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios">iOS 示例</a>
 
@@ -21,7 +21,7 @@
 
 ### 使用案例
 
-为了达到清晰的目的，该算法只是对图像中的人简单的预测身体关键位置所在，而不会去辨别此人是谁。
+姿态预测是指检测图像和视频中人物的计算机视觉技术，以便确定某人的身体部位（如肘部）出现在图像中的位置。务必了解这样一个事实：姿态预测仅能预估关键身体关节的位置，而无法识别图像或视频中的人物。
 
 姿态预测模型会将处理后的相机图像作为输入，并输出有关关键点的信息。检测到的关键点由部位 ID 索引，置信度分数介于 0.0 和 1.0 之间。置信度分数表示该位置存在关键点的概率。
 

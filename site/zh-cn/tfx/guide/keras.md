@@ -71,7 +71,7 @@ def trainer_fn(trainer_fn_args, schema):
 
 下面是使用原生 Keras 的几个示例：
 
-- [Penguin](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py)（[模块文件](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils.py)）：“Hello world”端到端示例。
+- [Penguin](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_pipeline_local.py)（[模块文件](https://github.com/tensorflow/tfx/blob/master/tfx/examples/penguin/penguin_utils_keras.py)）：“Hello world”端到端示例。
 - [MNIST](https://github.com/tensorflow/tfx/blob/master/tfx/examples/mnist/mnist_pipeline_native_keras.py)（[模块文件](https://github.com/tensorflow/tfx/blob/master/tfx/examples/mnist/mnist_utils_native_keras.py)）：图像和 TFLite 端到端示例。
 - [Taxi](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_pipeline_native_keras.py)（[模块文件](https://github.com/tensorflow/tfx/blob/master/tfx/examples/chicago_taxi_pipeline/taxi_utils_native_keras.py)）：具有高级 Transform 用法的端到端示例。
 
@@ -159,7 +159,7 @@ def _get_serve_tf_examples_fn(model, tf_transform_output):
   return serve_tf_examples_fn
 ```
 
-在上述应用函数中，需要使用 [`tft.TransformFeaturesLayer`](https://github.com/tensorflow/transform/blob/master/docs/api_docs/python/tft/TransformFeaturesLayer.md) 层将 tf.Transform 转换应用于原始数据以进行推断。使用 Keras 时将不再需要 Estimator 所需的先前的 `_serving_input_receiver_fn`。
+在上述应用函数中，需要使用 [`tft.TransformFeaturesLayer`](https://www.tensorflow.org/tfx/transform/api_docs/python/tft/TransformFeaturesLayer) 层将 tf.Transform 转换应用于原始数据以进行推断。使用 Keras 时将不再需要 Estimator 所需的先前的 `_serving_input_receiver_fn`。
 
 ##### 不带 Transform 的 Keras Module 文件
 
@@ -202,9 +202,7 @@ def run_fn(fn_args: TrainerFnArgs):
   model.save(fn_args.serving_model_dir, save_format='tf', signatures=signatures)
 ```
 
-#####
-
-[tf.distribute.Strategy](https://www.tensorflow.org/guide/distributed_training)
+##### [tf.distribute.Strategy](https://www.tensorflow.org/guide/distributed_training)
 
 目前，TFX 仅支持单个工作进程策略（例如，[MirroredStrategy](https://www.tensorflow.org/api_docs/python/tf/distribute/MirroredStrategy) 和 [OneDeviceStrategy](https://www.tensorflow.org/api_docs/python/tf/distribute/OneDeviceStrategy)）。
 

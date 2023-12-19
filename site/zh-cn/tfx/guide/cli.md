@@ -543,7 +543,7 @@ Vertex：
   <dd>流水线运行的唯一标识符。</dd>
   <dt>--endpoint=<var>endpoint</var> </dt>
   <dd>
-    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
+    <p>       （可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 
@@ -575,7 +575,7 @@ Vertex：
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
-  <dd>     （可选）受 IAP 保护的端点的客户端 ID。</dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
   <dt>--namespace=<var>namespace</var> </dt>
@@ -641,7 +641,7 @@ Kubeflow：
     <p>** 重要说明：DagRunner 在流水线配置文件中所需的编排器必须与所选或自动检测到的引擎匹配。引擎自动检测基于用户环境。如果未安装 Apache Airflow 和 Kubeflow Pipelines，则默认使用本地编排器。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
-  <dd>     （可选）受 IAP 保护的端点的客户端 ID。</dd>
+  <dd>（可选）受 IAP 保护的端点的客户端 ID。</dd>
 
 
   <dt>--namespace=<var>namespace</var> </dt>
@@ -677,7 +677,7 @@ Kubeflow：
   <dt>--endpoint=<var>endpoint</var>
 </dt>
   <dd>
-    <p>       （可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
+    <p>（可选）Kubeflow Pipelines API 服务的端点。Kubeflow Pipelines API 服务的端点与 Kubeflow Pipelines 信息中心的网址相同。您的端点值应类似于：</p>
 </dd>
 </dl>
 

@@ -21,7 +21,7 @@
 ### 前提条件
 
 - 对 C++ 有一定的了解。
-- 必须已安装 [TensorFlow 二进制文件](../../install)，或者必须已[下载 TensorFlow 源代码](../../install/source.md)，并且能够构建。
+- 必须已安装 [TensorFlow 二进制文件](https://www.tensorflow.org/install)，或者必须已[下载 TensorFlow 源代码](https://www.tensorflow.org/install/source)，并且能够构建。
 
 ## 定义运算接口
 
@@ -1082,6 +1082,8 @@ def _zero_out_grad(op, grad):
 - 如果运算根本没有有意义的梯度，您通常无需注册任何梯度，并且只要从不需要该运算的梯度，就没有问题。在某些情况下，运算没有明确定义的梯度，但可以参与梯度计算。在这种情况下，您可以使用 `ops.NotDifferentiable` 自动向后传播零。
 
 请注意，在调用梯度函数时，只有运算的数据流图可用，而张量数据本身不可用。因此，必须使用其他 TensorFlow 运算执行所有计算，以在计算图执行时运行。
+
+在为运算类型注册自定义梯度时添加类型提示，使代码更具可读性、可调试性、更易于维护，并且通过数据验证更加稳健。例如，在函数中采用 `op` 作为参数时，指定梯度函数将采用 <a href="https://www.tensorflow.org/api_docs/python/tf/Operation"><code>tf.Operation</code></a> 作为其参数类型 。
 
 ### C++ 中的形状函数
 

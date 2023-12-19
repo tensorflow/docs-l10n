@@ -100,21 +100,7 @@ def preprocessing_fn(inputs):
 
 ### 理解 preprocessing_fn 的输入
 
-`preprocessing_fn` 描述了对张量（即 `Tensor` 或 `SparseTensor`）执行的一系列运算，因此必须了解如何将您的数据表示为张量，才能正确地编写 `preprocessing_fn`。`preprocessing_fn` 的输入由架构确定。`Schema` proto 包含 `Feature` 列表，Transform 会将其转换为“特征规范”（有时称为“解析规范”），该规范是一种键为特征名称、值为 `FixedLenFeature` 或 `VarLenFeature`（或 TensorFlow Transform 未使用的其他选项）的字典。
-
-从 `Schema` 推断特征规范的规则如下：
-
-- 每个设置了 `shape` 的 `feature` 均会生成包含形状和 `default_value=None` 的 `tf.FixedLenFeature`。`presence.min_fraction` 必须为 `1`，否则将出现错误，因为当没有默认值时，`tf.FixedLenFeature` 要求特征始终存在。
-- 每个未设置 `shape` 的 `feature` 均会生成 `VarLenFeature`。
-- 每个 `sparse_feature` 都将生成 `tf.SparseFeature`，其 `size` 和 `is_sorted` 由 `SparseFeature` 消息的 `fixed_shape` 和 `is_sorted` 字段确定。
-- 如果特征用作 `sparse_feature` 的 `index_feature` 或 `value_feature`，则不会在特征规范中为其生成条目。
-- `feature`（或 `sparse_feature` proto 的值特征）的 `type` 字段与特征规范的 `dtype` 之间的对应关系如下表所示：
-
-`type` | `dtype`
---- | ---
-`schema_pb2.INT` | `tf.int64`
-`schema_pb2.FLOAT` | `tf.float32`
-`schema_pb2.BYTES` | `tf.string`
+`preprocessing_fn` 描述了对张量（即，`Tensor`、`SparseTensor` 或 `RaggedTensor`）的一系列运算。为了正确定义 `preprocessing_fn`，有必要了解数据如何表示为张量。`preprocessing_fn` 的输入由架构确定。[`Schema` proto](https://github.com/tensorflow/metadata/blob/master/tensorflow_metadata/proto/v0/schema.proto#L72) 最终会被转换为用于数据解析的“特征规范”（有时称为“解析规范”），请参阅{ a8}此处有关转换逻辑的更多详细信息。
 
 ## 使用 TensorFlow Transform 处理字符串标签
 
