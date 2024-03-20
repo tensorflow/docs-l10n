@@ -575,7 +575,7 @@ tfx run terminate --run_id=&lt;var&gt;run-id&lt;/var&gt; [--endpoint=&lt;var&gt;
     <p>**要注意: パイプライン構成ファイルの DagRunner に必要とされるオーケストレーターは、選択されたエンジンまたは自動検出されたエンジンと一致する必要があります。エンジンの自動検出は、ユーザー環境に基づいています。Apache Airflow と Kubeflow Pipelines がインストールされていない場合、デフォルトでローカルオーケストレーターが使用されます。</p>
   </dd>
   <dt>--iap_client_id=<var>iap-client-id</var> </dt>
-  <dd> （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
+  <dd>    （オプション）IAP で保護されたエンドポイントのクライアント ID。</dd>
 
 
   <dt>--namespace=<var>namespace</var> </dt>
@@ -646,7 +646,7 @@ tfx run list --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; [--endpoint=&l
 
 
   <dt>--namespace=<var>namespace</var> </dt>
-<dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで <code>kubeflow</code> になります。</dd>
+<dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで<code>kubeflow</code>になります。</dd>
 
 
 
@@ -715,7 +715,7 @@ tfx run status --pipeline_name=&lt;var&gt;pipeline-name&lt;/var&gt; --run_id=&lt
 
 
   <dt>--namespace=<var>namespace</var> </dt>
-<dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで <code>kubeflow</code> になります。</dd>
+<dd>（オプション）Kubeflow Pipelines API に接続するための Kubernetes 名前空間。名前空間が指定されていない場合、値はデフォルトで<code>kubeflow</code>になります。</dd>
 
 
 

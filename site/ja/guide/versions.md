@@ -66,8 +66,8 @@ TensorFlow の一部の構成要素は、いつでも下位互換性のない方
 - **その他の言語**：以下のような、Python や C 以外の言語で書かれた TensorFlow API。
 
     - [C++](../install/lang_c.ipynb)（[`tensorflow/cc`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/cc) 内のヘッダーファイル経由で公開されているもの）。
-    - Java
-    - Go
+    - [Java](../install/lang_java_legacy.md),
+    - [Go](https://github.com/tensorflow/build/blob/master/golang_install_guide/README.md)
     - [JavaScript](https://www.tensorflow.org/js)
 
 - **複合ops（オプス）の詳細：** Python 内の多くのパブリック関数はグラフ内で複数のプリミティブops（オプス）に展開され、これらの詳細はディスクに `GraphDef` として保存されているグラフの要素になります。特に、グラフ間の正確な一致をチェックする回帰テストは、グラフの動作を変更する必要がなく、既存のチェックポイントが引き続き機能する場合であっても、マイナーリリース間で中断される可能性があります。

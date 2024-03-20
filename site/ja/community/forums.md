@@ -1,6 +1,6 @@
 # メーリングリスト
 
-私たちはコミュニティとして、公開メーリングリストで数多くのコラボレーションを行っています。TensorFlow の使用に関するヘルプを探している場合は、まず、[TensorFlow Forum](https://discuss.tensorflow.org/)、[Stack Overflow](https://stackoverflow.com/questions/tagged/tensorflow)、および [GitHub issues](https://github.com/tensorflow/tensorflow/issues) を確認してください。
+私たちはコミュニティとして、公開メーリングリストで数多くのコラボレーションを行っています。TensorFlow の使用に関するヘルプをお探しの場合は、まず、[TensorFlow Forum](https://discuss.tensorflow.org/)、[Stack Overflow](https://stackoverflow.com/questions/tagged/tensorflow)、および [GitHub issues](https://github.com/tensorflow/tensorflow/issues) を確認してください。TensorFlow チームが四半期ごとに発行している更新情報のまとめを受け取るには、[TensorFlow ニュースレター](https://services.google.com/fb/forms/tensorflow/)を購読してください。
 
 ## TensorFlow 全般のリストとフォーラム
 

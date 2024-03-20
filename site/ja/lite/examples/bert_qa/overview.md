@@ -82,5 +82,5 @@ Android または iOS 以外のプラットフォームを使用する場合、�
 
 ## BERT の詳細を読む
 
-- 4 つのスレッドを使用。
+- 4 threads used.
 - [BERT のオープンソース実装](https://github.com/google-research/bert)

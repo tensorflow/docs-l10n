@@ -126,7 +126,7 @@ TensorFlow プログラムがファイルからデータを読み込むと、Ten
 
 入力パイプライン分析ツールを開くには、**Profile** を選択し、**Tools** プルダウンから **input_pipeline_analyzer** を選択します。
 
-![image](./images/tf_profiler/tf_data_graph_selector.png)
+![image](./images/tf_profiler/memory_breakdown_table.png)
 
 ダッシュボードには次の 3 つのセクションがあります。
 
@@ -156,7 +156,7 @@ TensorFlow プログラムがファイルからデータを読み込むと、Ten
 
 個々の入力演算の統計とそのカテゴリの内訳を実行時間別に表示するには、**Input Op Statistics** を展開します。
 
-![image](./images/tf_profiler/trace_viewer.png)
+![image](./images/tf_profiler/tf_data_all_hosts.png)
 
 ソース データテーブルには、次の情報を含む各エントリが表示されます。
 
@@ -174,7 +174,7 @@ TensorFlow プログラムがファイルからデータを読み込むと、Ten
 
 TensorFlow Stats ツールには、プロファイリングセッション中にホストまたはデバイスで実行されるすべての TensorFlow演算（op）のパフォーマンスが表示されます。
 
-![image](./images/tf_profiler/tf_data_all_hosts.png)
+![image](./images/tf_profiler/tf_stats.png)
 
 このツールでは 2 つのペインでパフォーマンス情報が表示されます。
 
@@ -260,7 +260,7 @@ Timeline ペインには、次の要素が含まれます。
 
 このツールには、すべての GPU アクセラレータカーネルのパフォーマンス統計と元の演算を表示されます。
 
-![image](./images/tf_profiler/input_pipeline_analyzer.png)
+![image](./images/tf_profiler/tf_data_graph.png)
 
 このツールでは 2 つのペインで情報が表示されます。
 
@@ -269,11 +269,11 @@ Timeline ペインには、次の要素が含まれます。
 - 下のペインには、一意のカーネル演算ペアごとに次のデータを含むテーブルが表示されます。
 
     - カーネルと演算のペアでグループ化された合計経過 GPU 時間の階数（降順）
-    - 起動されたカーネルの名前
-    - カーネルが使用している GPU レジスタの数
-    - 使用されている共有（静的+動的共有）メモリの合計サイズ（バイト単位）
-    - `blockDim.x, blockDim.y, blockDim.z` で表現されたブロックの次元
-    - `gridDim.x, gridDim.y, gridDim.z` で表現されたグリッドの次元
+    - 起動されたカーネルの名前。
+    - カーネルが使用している GPU レジスタの数。
+    - 使用されている共有（静的+動的共有）メモリの合計サイズ（バイト単位）。
+    - `blockDim.x, blockDim.y, blockDim.z` で表現されたブロックの次元。
+    - `gridDim.x, gridDim.y, gridDim.z` で表現されたグリッドの次元。
     - 演算が[テンソルコア](https://www.nvidia.com/en-gb/data-center/tensor-cores/)を使用可能かどうか
     - カーネルにテンソルコア命令が含まれているかどうか
     - このカーネルを起動した演算の名前
@@ -322,7 +322,7 @@ Timeline ペインには、次の要素が含まれます。
 
 このセクションには、メモリ使用率（GiB）と断片率を時間（ms）比較した図が表示されます。
 
- ![image](./images/tf_profiler/memory_timeline_graph.png?raw=true)
+![image](./images/tf_profiler/memory_timeline_graph.png?raw=true)
 
 X 軸は、プロファイリングインターバルのタイムライン（ms）を表します。左の Y 軸はメモリ使用率（GiB）を、右の Y 軸は断片率を表します。合計メモリは、X 軸のある時点で、スタック（赤）、ヒープ（オレンジ）、空き（緑）の 3 つに分けて示されています。特定のタイムスタンプにマウスポインタを合わせると、以下のように、その時点でのメモリの割り当てと割り当て解除の詳細を確認できます。
 
@@ -345,7 +345,7 @@ X 軸は、プロファイリングインターバルのタイムライン（ms�
 
 このテーブルには、プロファイリングインターバルのピークメモリ使用率の時点でアクティブなメモリの割り当てが示されます。
 
-![image](./images/tf_profiler/input_op_stats.png)
+![image](./images/tf_profiler/tf_data_graph_selector.png)
 
 TensorFlow 演算ごとに 1 つの行があり、各行には次の列があります。
 
@@ -416,7 +416,7 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 
 #### すべての入力パイプラインのサマリー
 
-![image](./images/tf_profiler/tf_data_graph.png)
+![image](./images/tf_profiler/trace_viewer.png)
 
 このセクションには、全ホストのすべての入力パイプラインの概要が示されます。通常、入力パイプラインは 1 つです。分散ストラテジーを使用している場合、プログラムの `tf.data` コードを実行しているホスト入力パイプラインが 1 つと、そのホスト入力パイプラインからデータを取得してデバイスに転送しているデバイス入力パイプラインが複数あります。
 
@@ -424,11 +424,11 @@ dataset = tf.data.Dataset.range(10).map(lambda x: x).repeat(2).batch(5)
 
 #### 入力パイプラインのグラフ
 
-![image](./images/tf_profiler/tf_stats.png)
+![image](./images/tf_profiler/input_op_stats.png)
 
 このセクションには、入力パイプラインのグラフが実行時間と共に示されます。「Host」と「Input Pipeline」を使って、どのホストと入力パイプラインを表示するかを選択できます。入力パイプラインの実行は、実行時間別に降順で並べ替えられており、この順序は **Rank** ドロップダウンを使って選択できます。
 
-![image](./images/tf_profiler/memory_breakdown_table.png)
+![image](./images/tf_profiler/input_pipeline_analyzer.png)
 
 重要なパスにあるノードは太いアウトラインで示されます。ボトルネックノードは重要なパスにある、それ自体の処理に最も時間のかかったノードで、赤いアウトラインで示されます。その他の重要でないノードは、グレーの破線で示されます。
 
