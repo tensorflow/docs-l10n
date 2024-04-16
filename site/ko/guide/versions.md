@@ -18,7 +18,7 @@ TensorFlow는 공개 API에 유의적 버저닝 2.0([semver](http://semver.org))
 
 TensorFlow의 공개 API만이 부 버전 및 패치 버전에서 하위 호환성을 가집니다. 공개 API는 다음을 포함합니다.
 
-- 모든 문서화된 [Python](https://gitlocalize.com/repo/4592/ko/site/en-snapshot/api_docs/python) `tensorflow` 모듈과 서브 모듈에 있는 함수와 클래스, 다음은 제외
+- `tensorflow` 모듈과 그 하위 모듈에 있는 클래스, 모든 문서화된 [Python](https://www.tensorflow.org/api_docs/python) 함수. 단 다음은 제외합니다.
 
     - 비공개 심볼: `_`로 시작하는 함수나 클래스 등
     - 실험적인 및 `tf.contrib` 심볼, 자세한 내용은 [아래](#not_covered) 내용 참조
@@ -29,7 +29,14 @@ TensorFlow의 공개 API만이 부 버전 및 패치 버전에서 하위 호환�
 
 - 호환성 API(Python의 `tf.compat` 모듈). 주 버전에서 사용자들이 새로운 주 버전으로 옮겨가는 것을 도와주는 유틸리티와 추가적인 엔드포인트가 공개될 수도 있습니다. 이러한 API 심볼들은 없어지고 지원되지 않지만(즉, 기능을 추가하지 않고 취약성 이외의 버그를 수정하지 않음) 호환성은 보장됩니다.
 
-- [C API](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/c/c_api.h)
+- TensorFlow C API:
+
+    - [tensorflow/c/c_api.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/c/c_api.h))
+
+- TensorFlow Lite C API:
+
+    - [tensorflow/lite/c/c_api.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/c_api.h)
+    - [tensorflow/lite/c/c_api_types.h](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/c/c_api_types.h).
 
 - 다음의 프로토콜 버퍼 파일:
 
@@ -58,9 +65,9 @@ TensorFlow의 일부분은 어떤 면에서도 하위 호환성이 없도록 변
 
 - **다른 언어:** Python과 C 이외의 다음과 같은 TensorFlow API 언어:
 
-    - [C++](https://www.tensorflow.org/api_guides/cc/guide.md)([`tensorflow/cc`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/cc)의 헤더 파일을 통해 공개되어 있음).
-    -  [Java](https://www.tensorflow.org/api_docs/java/reference/org/tensorflow/package-summary)
-    - [Go](https://godoc.org/github.com/tensorflow/tensorflow/tensorflow/go)
+    - [C++](../install/lang_c.ipynb)([`tensorflow/cc`](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/cc)의 헤더 파일을 통해 공개되어 있음)
+    - [Java](../install/lang_java_legacy.md)
+    - [Go](https://github.com/tensorflow/build/blob/master/golang_install_guide/README.md)
     - [JavaScript](https://js.tensorflow.org)
 
 - **합성 연산 세부사항:** Python의 많은 공개 함수가 일부 그래프의 원시 연산에 확장됩니다, 그리고 이러한 세부사항은 `GraphDef`로 디스크에 저장되는 그래프의 한 부분입니다. 이러한 세부사항은 부(minor) 버전에서 변경될 수 있습니다. 특히, 그래프간 정확한 매칭이 되는지 확인하는 회귀 테스트는 그래프의 행동이 변경되지 않고 기존의 체크포인트가 아직 동작할지라도 서로 다른 부 버전에서는 호환되지 않을 가능성이 높습니다.
@@ -85,7 +92,7 @@ TensorFlow의 일부분은 어떤 면에서도 하위 호환성이 없도록 변
 
 많은 TensorFlow 사용자들이 저장된 모델을 만들고 나중에 릴리즈된 TensorFlow에서 로드하여 실행합니다. [semver](https://semver.org)에 따라 한 버전의 TensorFlow에서 작성된 모델이 같은 주 버전에 속한 나중 버전의 TensorFlow에서 로드되고 평가될 수 있습니다.
 
-*지원하는* 저장된 모델에서는 추가적인 보장이 있습니다. TensorFlow 주 버전 `N`에서 **사라지지 않고 실험적이지도 않으며 호환되지 않는 API**를 사용하여 만든 저장된 모델은 <em data-md-type="emphasis">버전 `N`에서 지원됩니다.</em> TensorFlow 주 버전 `N`에서 지원하는 모든 저장된 모델은 TensorFlow 주 버전 `N+1`에서도 로드되고 실행될 수 있습니다. 그러나, 그 모델을 만들고 수정하기 위해 필요한 기능들을 더 이상 사용할 수 없는 경우, 이 보장은 수정하지 않은 저장된 모델에만 적용됩니다.
+*지원하는* 저장된 모델에서는 추가적인 보장이 있습니다. TensorFlow 주 버전 `N`에서 **사라지지 않고 실험적이지도 않으며 호환되지 않는 API**를 사용하여 만든 저장된 모델은 <em data-md-type="raw_html">버전 `N`에서 지원됩니다.</em> TensorFlow 주 버전 `N`에서 지원하는 모든 저장된 모델은 TensorFlow 주 버전 `N+1`에서도 로드되고 실행될 수 있습니다. 그러나, 그 모델을 만들고 수정하기 위해 필요한 기능들을 더 이상 사용할 수 없는 경우, 이 보장은 수정하지 않은 저장된 모델에만 적용됩니다.
 
 가능하면 하위 호환성을 유지하기 위해 노력할 것이므로 직렬화된 파일들은 오랫동안 사용 가능합니다.
 

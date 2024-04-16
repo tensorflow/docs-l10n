@@ -1,10 +1,8 @@
-<!--* freshness: { owner: 'maringeo' reviewed: '2022-07-11' } *-->
-
 # TensorFlow Hub를 사용하여 TF1에서 TF2로 마이그레이션하기
 
 이 페이지에서는 TensorFlow 코드를 TensorFlow 1에서 TensorFlow 2로 마이그레이션하는 동안 TensorFlow Hub를 계속 사용하는 방법을 설명합니다. TensorFlow의 일반 [마이그레이션 가이드](https://www.tensorflow.org/guide/migrate)를 보완합니다.
 
-TF2의 경우, TF Hub는 `tf.contrib.v1.layers`처럼 `tf.compat.v1.Graph`를 빌드하기 위해 레거시 `hub.Module` API에서 전환했습니다. 대신 `tf.keras.Model`(일반적으로 TF2의 새로운 [즉시 실행 환경](https://www.tensorflow.org/guide/eager_)) 및 하위 수준 TensorFlow 코드에 대한 기본 `hub.load()` 메서드를 빌드하기 위해 다른 Keras 레이어와 함께 사용할 수 있는 `hub.KerasLayer`가 있습니다.
+TF2의 경우, TF Hub는 `tf.contrib.v1.layers`처럼 `tf.compat.v1.Graph`를 빌드하기 위해 레거시 `hub.Module` API에서 전환했습니다. 대신 `hub.KerasLayer`(일반적으로 TF2의 새로운 [즉시 실행 환경](https://www.tensorflow.org/api_docs/python/tf/executing_eagerly)) 및 하위 수준 TensorFlow 코드에 대한 기본 `hub.load()` 메서드를 빌드하기 위해 다른 Keras 레이어와 함께 사용할 `tf.keras.Model`가 있습니다.
 
 `hub.Module` API는 TF1 및 TF2의 TF1 호환성 모드에서 사용할 수 있도록 `tensorflow_hub` 라이브러리에서 계속 사용할 수 있습니다. [TF1 Hub 형식](tf1_hub_module.md)의 모델만 로드할 수 있습니다.
 
@@ -31,8 +29,8 @@ model = tf.keras.Sequential([
 
 많은 튜토리얼에서 이러한 API가 실제로 동작하는 것을 보여줍니다. 특히, 다음을 참조하세요.
 
-- [텍스트 분류 예제 노트북](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
-- [이미지 분류 예제 노트북](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
+- [텍스트 분류 예제 노트북](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_text_classification.ipynb)
+- [이미지 분류 예제 노트북](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_image_retraining.ipynb)
 
 ### Estimator 훈련에서 새 API 사용하기
 

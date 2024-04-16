@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2022-10-17' review_interval: '6 months' } *-->
-
 # 이미지 작업을 위한 일반적인 SavedModel API
 
 이 페이지에서는 이미지 관련 작업용 [TF2 SavedModel](../tf2_saved_model.md)에서 [Reusable SavedModel API](../reusable_saved_models.md)를 구현하는 방법을 설명합니다. (이는 현재 지원 중단된 [TF1 Hub 형식](../common_signatures/images.md)의 [이미지에 대한 일반적인 서명](../tf1_hub_module)을 대체합니다.)
@@ -46,8 +44,7 @@ Keras에서는 `hub.KerasLayer`에서 처리합니다. `trainable=True`로 초�
 
 이미지 특성 벡터용 Reusable SavedModel은 다음에서 사용됩니다.
 
-- Colab 튜토리얼 [이미지 분류자 다시 훈련하기](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
-- 명령 줄 도구 [make_image_classifier](https://github.com/tensorflow/hub/tree/master/tensorflow_hub/tools/make_image_classifier)
+- Colab 튜토리얼 [이미지 분류자 다시 훈련하기](https://colab.research.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_image_retraining.ipynb)
 
 <a name="classification"></a>
 
@@ -55,7 +52,7 @@ Keras에서는 `hub.KerasLayer`에서 처리합니다. `trainable=True`로 초�
 
 ### 사용법 요약
 
-**이미지 분류**는 *모듈 게시자가 선택한 * 분류 체계의 등급(class)에서 이미지의 픽셀을 멤버십에 대한 선형 점수(logit)에 매핑합니다. 이를 통해 모델 소비자는 게시자 모듈에서 학습한 특정 분류에서 결론을 도출할 수 있습니다. (새로운 등급의 세트를 사용한 이미지 분류의 경우, 대신 새 분류자로 [이미지 특성 벡터](#feature-vector) 모델을 재사용하는 것이 일반적입니다.)
+**이미지 분류**는 *모듈 게시자가 선택한 * 분류 체계의 등급(class)에서 이미지의 픽셀을 멤버십에 대한 선형 점수(로짓)에 매핑합니다. 이를 통해 모델 소비자는 게시자 모듈에서 학습한 특정 분류에서 결론을 도출할 수 있습니다. (새로운 등급의 세트를 사용한 이미지 분류의 경우, 대신 새 분류자로 [이미지 특성 벡터](#feature-vector) 모델을 재사용하는 것이 일반적입니다.)
 
 이미지 분류를 위한 Reusable SavedModel에는 이미지 배치를 로짓 배치에 매핑하는 루트 객체에 대한 `__call__` 메서드가 있습니다. 다음과 같이 사용할 수 있습니다.
 
