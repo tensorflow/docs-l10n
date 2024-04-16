@@ -63,7 +63,7 @@ outputs = m(inputs)</pre> </td>
   </tr>
   <tr>
     <td>미세 조정</td>
-    <td>Model.fit()으로 훈련되거나 <a href="https://www.tensorflow.org/guide/migrate#using_a_custom_model_fn">custom model_fn 가이드</a>에 따라 model_fn이 모델을 래핑하는 Estimator에서 훈련된 경우, tf.keras.Model에서 사용되는 hub.KerasLayer를 지원합니다.<br><div style="font-style: italic; font-size: 14px;">참고: hub.KerasLayer는 이전 tf.compat.v1.layers 또는 hub.Module API처럼 그래프 모음을 채우지 <span style="font-weight: bold;">않습니다</span>.</div>
+    <td>Model.fit()으로 훈련되거나 <a href="https://www.tensorflow.org/guide/migrate#using_a_custom_model_fn">custom model_fn 가이드</a>에 따라 model_fn이 Model을 래핑하는 Estimator에서 훈련된 경우, tf.keras.Model에서 사용되는 hub.KerasLayer를 지원합니다.<br><div style="font-style: italic; font-size: 14px;">참고: hub.KerasLayer는 이전 tf.compat.v1.layers 또는 hub.Module API처럼 그래프 모음을 채우지 <span style="font-weight: bold;">않습니다</span>.</div>
 </td>
     <td>완전 지원(<a href="https://www.tensorflow.org/hub/tf2_saved_model#for_savedmodel_consumers">전체 TF2 저장된 모델 미세 조정 가이드</a>). 다음 중 하나를 사용하세요. hub.load: <pre style="font-size: 12px;" lang="python"> m = hub.load (handle) 출력 = m (inputs, training = is_training) </pre> 또는 hub.KerasLayer : <pre style="font-size: 12px;" lang="python"> m = hub.KerasLayer (handle, trainable = True) outputs = m (inputs) </pre> </td>
   </tr>

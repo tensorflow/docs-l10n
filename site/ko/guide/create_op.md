@@ -21,7 +21,7 @@
 ### 전제 조건
 
 - C++에 어느 정도 익숙해야 합니다.
-- [TensorFlow 바이너리](../../install)를 설치했거나 [TensorFlow 소스](../../install/source.md)를 다운로드하여 빌드할 수 있어야 합니다.
+- [TensorFlow 바이너리](https://www.tensorflow.org/install)를 설치했거나 [TensorFlow 소스](https://www.tensorflow.org/install/source)를 다운로드하여 빌드할 수 있어야 합니다.
 
 ## op 인터페이스 정의하기
 
@@ -373,7 +373,7 @@ if __name__ == "__main__":
 $ python zero_out_op_test.py
 ```
 
-## Op에 고급 특성 빌드하기
+## op에 고급 특성 빌드하기
 
 기본 (그리고, 다소 제한적인) op 및 구현을 빌드하는 방법을 살펴보았으므로 일반적으로 op에 빌드하는 데 필요한 조금 더 복잡한 항목을 살펴보겠습니다. 여기에는 다음이 포함됩니다.
 
@@ -412,7 +412,7 @@ $ python zero_out_op_test.py
 
 일부 함수에서 반환된 `Status` 객체가 오류인지 테스트하려는 경우, [`OP_REQUIRES_OK`](https://www.tensorflow.org/code/tensorflow/core/platform/errors.h)를 사용합니다. 이 두 매크로는 모두 오류 시 함수로부터 반환합니다.
 
-### Op 등록
+### op 등록
 
 #### Attrs
 
@@ -1082,6 +1082,8 @@ def _zero_out_grad(op, grad):
 - op에 의미 있는 그래디언트가 없는 경우, 그래디언트를 등록할 필요가 없으며, op의 그래디언트가 필요하지 않은 한 문제 없습니다. 경우에 따라 op에 잘 정의된 그래디언트가 없어도 그래디언트 계산에 관여할 수 있습니다. 이때 `ops.NotDifferentiable`을 사용하여 자동으로 0을 뒤로 전파할 수 있습니다.
 
 그래디언트 함수가 호출될 때 텐서 데이터 자체가 아니라 ops의 데이터 흐름 그래프만 사용할 수 있습니다. 따라서, 모든 계산은 그래프 실행 시간에 실행되도록 다른 tensorflow ops를 사용하여 수행해야 합니다.
+
+op 유형에 대한 사용자 정의 그래디언트를 등록할 때 유형 힌트를 추가하면 데이터 유효성 검사를 통해 코드의 가독성, 디버깅 가능성, 유지 관리 용이성 및 견고성을 높일 수 있습니다. 예를 들어, 함수에서 `op`를 매개변수로 사용할 때 그래디언트 함수가 <a href="https://www.tensorflow.org/api_docs/python/tf/Operation"><code>tf.Operation</code></a>을 매개변수 유형으로 사용하도록 지정합니다.
 
 ### C++의 형상 함수
 

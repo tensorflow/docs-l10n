@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'akhorlin' reviewed: '2022-05-22' } *-->
-
 # 텍스트 작업을 위한 일반적인 SavedModel API
 
 이 페이지에서는 텍스트 관련 작업용 [TF2 SavedModel](../tf2_saved_model.md)에서 [Reusable SavedModel API](../reusable_saved_models.md)를 구현하는 방법을 설명합니다. (이는 현재 지원 중단된 [TF1 Hub 형식](../common_signatures/text.md)의 [텍스트에 대한 일반적인 서명](../tf1_hub_module)을 대체합니다.)
@@ -64,7 +62,7 @@ embeddings = hub.KerasLayer("path/to/model", trainable=...)(text_input)
 
 ### 예
 
-- Colab 튜토리얼 [영화 리뷰로 텍스트 분류](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
+- Colab 튜토리얼 [영화 리뷰로 텍스트 분류](https://colab.research.google.com/github/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_text_classification.ipynb)
 
 <a name="text-embeddings-preprocessed"></a>
 

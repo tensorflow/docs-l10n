@@ -1,5 +1,3 @@
-<!--* freshness: { owner: 'wgierke' reviewed: '2022-07-04' } *-->
-
 # 설치
 
 ## tensorflow_hub 설치하기
@@ -39,7 +37,7 @@ $ pip install --upgrade tf-hub-nightly
 
 - [라이브러리 개요](lib_overview.md)
 - 튜토리얼:
-    - [텍스트 분류](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_text_classification.ipynb)
-    - [이미지 분류](https://github.com/tensorflow/hub/blob/master/examples/colab/tf2_image_retraining.ipynb)
+    - [텍스트 분류](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_text_classification.ipynb)
+    - [이미지 분류](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/tf2_image_retraining.ipynb)
     - [GitHub의](https://github.com/tensorflow/hub/blob/master/examples/README.md) 추가 예제
-- [tfhub.dev](https://tfhub.dev)에서 모델 찾기
+- [tfhub.dev](https://tfhub.dev)에서 모델을 찾아보세요.
