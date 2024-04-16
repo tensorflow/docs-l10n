@@ -40,7 +40,7 @@ compute_eval_stats = StatisticsGen(
 
 ### Cómo crear un esquema seleccionado
 
-`Schema` en TFX es una instancia del <a href="https://github.com/tensorflow/metadata/blob/master/tensorflow_metadata/proto/v0/schema.proto" data-md-type="link">proto de `Schema`</a> de metadatos de TensorFlow. Este se puede redactar en [formato de texto](https://googleapis.dev/python/protobuf/latest/google/protobuf/text_format.html) desde cero. Sin embargo, es más fácil usar el esquema inferido que produce `SchemaGen` como punto de partida. Una vez que se haya ejecutado el componente `SchemaGen`, el esquema se ubicará debajo de la raíz de la canalización en la siguiente ruta:
+`Schema` en TFX es una instancia del <a data-md-type="raw_html" href="https://github.com/tensorflow/metadata/blob/master/tensorflow_metadata/proto/v0/schema.proto">proto de `Schema`</a> de metadatos de TensorFlow. Este se puede redactar en [formato de texto](https://googleapis.dev/python/protobuf/latest/google/protobuf/text_format.html) desde cero. Sin embargo, es más fácil usar el esquema inferido que produce `SchemaGen` como punto de partida. Una vez que se haya ejecutado el componente `SchemaGen`, el esquema se ubicará debajo de la raíz de la canalización en la siguiente ruta:
 
 ```
 <pipeline_root>/SchemaGen/schema/<artifact_id>/schema.pbtxt

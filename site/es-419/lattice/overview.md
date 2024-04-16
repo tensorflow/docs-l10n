@@ -10,6 +10,7 @@ Esta sección es una versión simplificada de la descripción en [Tablas de bús
 
 Una *cuadrícula* es una tabla de búsqueda interpolada que puede aproximarse a relaciones arbitrarias de entrada y salida en sus datos. Superpone una cuadrícula regular en su espacio de entrada y aprende valores para la salida en los vértices de la cuadrícula. Para un punto de prueba $x$, $f(x)$ se interpola linealmente a partir de los valores de la cuadrícula que rodean a $x$.
 
+
 <img src="images/2d_lattice.png" style="display:block; margin:auto;">
 
 El ejemplo simple anterior es una función con 2 características de entrada y 4 parámetros: $\theta=[0, 0.2, 0.4, 1]$, que son los valores de la función en las esquinas del espacio de entrada; el resto de la función se interpola a partir de estos parámetros.
@@ -27,7 +28,7 @@ Digamos que el ejemplo de la cuadrícula anterior representa *la felicidad del u
 
 Queremos que nuestro modelo aprenda sobre la felicidad del usuario con una cafetería local recomendada. Los modelos de TensorFlow Lattice pueden usar *funciones lineales por partes* (con `tfl.layers.PWLCalibration`) para calibrar y normalizar las características de entrada al rango aceptado por la cuadrícula: 0,0 a 1,0 en la cuadrícula del ejemplo anterior. A continuación se muestran ejemplos de funciones de calibraciones con 10 puntos clave:
 
-<p align="center"> <img src="images/pwl_calibration_distance.png"> <img src="images/pwl_calibration_price.png"></p>
+<p align="center"><img src="images/model_comparison.png" style="display:block; margin:auto;"> </p>
 
 Suele ser una buena idea usar los cuantiles de las características como puntos clave de entrada. [Los estimadores prediseñados](tutorials/canned_estimators.ipynb) de TensorFlow Lattice pueden establecer automáticamente los puntos clave de entrada en los cuantiles de las características.
 
@@ -59,7 +60,8 @@ Al usar cuadrículas ajustadas, puede obtener funciones *arbitrariamente complej
 
 Es posible que los datos de entrenamiento del mundo real no representen suficientemente los datos del tiempo de ejecución. Las soluciones de aprendizaje automático flexibles, como las DNN o los bosques, suelen actuar de forma inesperada e incluso desenfrenada en partes del espacio de entrada que no cubren los datos de entrenamiento. Este comportamiento es especialmente problemático cuando existe el riesgo de violar restricciones de directivas o de equidad.
 
-<img src="images/model_comparison.png" style="display:block; margin:auto;">
+ <img src="images/pwl_calibration_distance.png"> <img src="images/pwl_calibration_price.png">
+
 
 Aunque las formas comunes de regularización pueden dar como resultado una extrapolación más sensata, los regularizadores estándar no pueden garantizar un comportamiento razonable del modelo en todo el espacio de entrada, especialmente con entradas de alta dimensión. Cambiar a modelos más simples con un comportamiento más controlado y predecible puede tener un costo severo para la precisión del modelo.
 
