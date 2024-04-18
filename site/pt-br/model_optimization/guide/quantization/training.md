@@ -11,11 +11,11 @@ Esta página fornece uma visão geral do treinamento consciente de quantização
 
 ## Visão geral
 
-O treinamento consciente de quantização emula a quantização de tempo de inferência, criando um modelo que faz o downstream das ferramentas que usará para produzir modelos realmente quantizados.
+O treinamento consciente de quantização emula a quantização de tempo de inferência, criando um modelo que faz o downstream das ferramentas que usará para produzir modelos realmente quantizados. Os modelos quantizados usam uma precisão inferior (por exemplo, float de 8 bits em vez de 32 bits), levando a benefícios durante a implantação.
 
 ### Implante com a quantização
 
-A quantização traz melhorias através da compressão do modelo e da redução da latência. Com os padrões da API, o tamanho do modelo encolhe em 4x, e geralmente vemos melhorias de 1,4 a 4x na latência da CPU nos back-ends testados. Por fim, as melhorias na latência podem ser vistas em aceleradores de aprendizado de máquina compatíveis, como [EdgeTPU](https://coral.ai/docs/edgetpu/benchmarks/) e NNAPI.
+A quantização traz melhorias através da compressão do modelo e da redução da latência. Com os padrões da API, o tamanho do modelo encolhe em 4x, e geralmente vemos melhorias de 1,5 a 4x na latência da CPU nos back-ends testados. Por fim, as melhorias na latência podem ser vistas em aceleradores de aprendizado de máquina compatíveis, como [EdgeTPU](https://coral.ai/docs/edgetpu/benchmarks/) e NNAPI.
 
 A técnica é usada na produção de casos de uso de fala, visão, texto e tradução. No momento, o código é compatível com um [subconjunto desses modelos](#general-support-matrix).
 

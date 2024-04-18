@@ -52,9 +52,9 @@ Vamos obter a seguinte saída:
 > dense_Dense2/bias [10]
 ```
 
-Há quatro pesos no total, dois por camada densa. Isso é o esperado, já que camadas densas representam uma função que mapeia o tensor de entrada `x` para um tensor de saída `y` por meio da equação  `y = Ax + b`, em que `A` (o kernel) e `b` (o bias) são os parâmetros da camada densa.
+Há quatro pesos no total, dois por camada densa. Isso é o esperado, já que camadas densas representam uma função que mapeia o tensor de entrada `x` para um tensor de saída `y` por meio da equação `y = Ax + b`, em que `A` (o kernel) e `b` (o bias) são os parâmetros da camada densa.
 
-> OBSERVAÇÃO: por padrão, as camadas densas incluem um bias, mas você pode excluí-lo especificando  `{useBias: false}` nas opções ao criar uma camada densa.
+> OBSERVAÇÃO: por padrão, as camadas densas incluem um bias, mas você pode excluí-lo especificando `{useBias: false}` nas opções ao criar uma camada densa.
 
 `model.summary()` é um método útil se você quiser obter uma visão geral do modelo e ver o número total de parâmetros:
 
@@ -79,7 +79,7 @@ Há quatro pesos no total, dois por camada densa. Isso é o esperado, já que ca
   </tr>
 </table>
 
-Cada peso no modelo tem um respectivo objeto <code>&lt;a href="https://js.tensorflow.org/api/0.14.2/#class:Variable" data-md-type="link"&gt;Variable&lt;/a&gt;</code>. No TensorFlow.js, uma  <code>Variable</code> é um <code>Tensor</code> de ponto flutuante com um método adicional <code>assign()</code> usado para atualizar seus valores. A API Layers inicializa os pesos automaticamente usando práticas recomendadas. Para fins de demonstração, poderíamos sobrescrever os pesos chamando <code>assign()</code> nas variáveis subjacentes:
+Cada peso no modelo tem um respectivo objeto <code>&lt;a href="https://js.tensorflow.org/api/0.14.2/#class:Variable" data-md-type="link"&gt;Variable&lt;/a&gt;</code>. No TensorFlow.js, uma <code>Variable</code> é um <code>Tensor</code> de ponto flutuante com um método adicional <code>assign()</code> usado para atualizar seus valores. A API Layers inicializa os pesos automaticamente usando práticas recomendadas. Para fins de demonstração, poderíamos sobrescrever os pesos chamando <code>assign()</code> nas variáveis subjacentes:
 
 ```js
 model.weights.forEach(w => {
@@ -93,9 +93,9 @@ model.weights.forEach(w => {
 
 Antes de fazer qualquer treinamento, você precisa tomar decisões sobre três aspectos:
 
-1. **Um otimizador**. O trabalho do otimizador é decidir o quanto alterar cada parâmetro no modelo dada a previsão atual do modelo. Ao usar a API Layers, você pode fornecer um identificador string ou um otimizador existente (como `'sgd'` ou `'adam'`), ou ainda uma instância da classe  <code>&lt;a href="https://js.tensorflow.org/api/latest/#Training-Optimizers" data-md-type="link"&gt;Optimizer&lt;/a&gt;</code>.
-2. <strong>Uma função de perda</strong>. Um valor que o modelo tentará minimizar. O objetivo é fornecer um único número do "quão errada" a previsão do modelo estava. A perda é computada em cada lote de dados para que o modelo possa atualizar seus pesos. Ao usar a API Layers, você pode fornecer um identificador string de uma função de perda existente (como  <code>'categoricalCrossentropy'</code>) ou qualquer função que receba um valor previsto e um verdadeiro, e retorne uma perda. Confira a [lista de perdas disponíveis](https://js.tensorflow.org/api/latest/#Training-Losses) na documentação da API.
-3. <strong>Lista de métricas.</strong> Similares às perdas, as métricas computam um único número que resume o desempenho do modelo. Geralmente, as métricas são computadas para todos os dados no final de cada época. No mínimo, vamos querer monitorar se a perda está diminuindo ao longo do tempo. Entretanto, é comum querermos uma métrica mais amigável, como exatidão. Ao usar a API Layers, você pode fornecer um identificador string ou uma métrica existente  (como <code>'accuracy'</code>) ou qualquer função que receba um valor previsto e um verdadeiro, e retorne uma pontuação. Confira a [lista de métricas disponíveis](https://js.tensorflow.org/api/latest/#Metrics) na documentação da API.
+1. **Um otimizador**. O trabalho do otimizador é decidir o quanto alterar cada parâmetro no modelo dada a previsão atual do modelo. Ao usar a API Layers, você pode fornecer um identificador string ou um otimizador existente (como `'sgd'` ou `'adam'`), ou ainda uma instância da classe <code>&lt;a href="https://js.tensorflow.org/api/latest/#Training-Optimizers" data-md-type="link"&gt;Optimizer&lt;/a&gt;</code>.
+2. <strong>Uma função de perda</strong>. Um valor que o modelo tentará minimizar. O objetivo é fornecer um único número do "quão errada" a previsão do modelo estava. A perda é computada em cada lote de dados para que o modelo possa atualizar seus pesos. Ao usar a API Layers, você pode fornecer um identificador string de uma função de perda existente (como <code>'categoricalCrossentropy'</code>) ou qualquer função que receba um valor previsto e um verdadeiro, e retorne uma perda. Confira a [lista de perdas disponíveis](https://js.tensorflow.org/api/latest/#Training-Losses) na documentação da API.
+3. <strong>Lista de métricas.</strong> Similares às perdas, as métricas computam um único número que resume o desempenho do modelo. Geralmente, as métricas são computadas para todos os dados no final de cada época. No mínimo, vamos querer monitorar se a perda está diminuindo ao longo do tempo. Entretanto, é comum querermos uma métrica mais amigável, como exatidão. Ao usar a API Layers, você pode fornecer um identificador string ou uma métrica existente (como <code>'accuracy'</code>) ou qualquer função que receba um valor previsto e um verdadeiro, e retorne uma pontuação. Confira a [lista de métricas disponíveis](https://js.tensorflow.org/api/latest/#Metrics) na documentação da API.
 
 Após você se decidir, compile um <code>LayersModel</code> chamando <code>model.compile()</code> com as opções fornecidas:
 
@@ -145,7 +145,7 @@ Nos bastidores, `model.fit()` pode fazer muita coisa:
 - Mistura os dados, porém somente após a divisão. Por segurança, você deve pré-misturar os dados antes de passá-los a `fit()`.
 - Divide o tensor grande de dados em tensores menores de tamanho igual a `batchSize`.
 - Chama `optimizer.minimize()` ao computar a perda do modelo com relação ao lote de dados.
-- Notifica você sobre o começo e fim de cada época ou lote. No nosso caso, recebemos uma notificação no fim de cada lote usando a opção `callbacks.onBatchEnd `. Confira outras opções: `onTrainBegin`,  `onTrainEnd`, `onEpochBegin`, `onEpochEnd` e `onBatchBegin`.
+- Notifica você sobre o começo e fim de cada época ou lote. No nosso caso, recebemos uma notificação no fim de cada lote usando a opção `callbacks.onBatchEnd `. Confira outras opções: `onTrainBegin`, `onTrainEnd`, `onEpochBegin`, `onEpochEnd` e `onBatchBegin`.
 - Cede ao thread principal para garantir que as tarefas enfileiradas no loop de eventos do JS possam ser tratadas em tempo hábil.
 
 Confira mais informações na [documentação](https://js.tensorflow.org/api/latest/#tf.Sequential.fit) de `fit()`. Observe que, se você optar por usar a API Core, precisará implementar essa lógica por conta própria.

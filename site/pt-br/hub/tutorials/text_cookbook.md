@@ -1,6 +1,6 @@
 # Tutoriais para domínio de texto
 
-Esta página lista um conjunto de guias e ferramentas conhecidos para resolver problemas no domínio de texto com o  TensorFlow Hub. É um ponto de partida para qualquer pessoa que deseja resolver problemas típicos de aprendizado de máquina usando componentes pré-treinados em vez de começar do zero.
+Esta página lista um conjunto de guias e ferramentas conhecidos para resolver problemas no domínio de texto com o TensorFlow Hub. É um ponto de partida para qualquer pessoa que deseja resolver problemas típicos de aprendizado de máquina usando componentes pré-treinados em vez de começar do zero.
 
 ## Classificação
 
@@ -16,11 +16,11 @@ Os tutoriais abaixo resolvem a mesma tarefa sob diferentes perspectivas e usando
 
 ### Estimator
 
-[Classificação de texto](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/text_classification_with_tf_hub.ipynb) – exemplo para criar um classificador de sentimentos do IMDB com o Estimator  (estimador). Contém várias dicas para melhorias e uma seção de comparação de módulos.
+[Classificação de texto](https://github.com/tensorflow/docs/blob/master/g3doc/en/hub/tutorials/text_classification_with_tf_hub.ipynb) – exemplo para criar um classificador de sentimentos do IMDB com o Estimator (estimador). Contém várias dicas para melhorias e uma seção de comparação de módulos.
 
 ### BERT
 
-[Previsão de sentimento em classificações de filmes com BERT  no TF Hub](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) – mostra como usar um módulo BERT para classificação. Inclui o uso da biblioteca `bert` para tokenização e pré-processamento.
+[Previsão de sentimento em classificações de filmes com BERT no TF Hub](https://github.com/google-research/bert/blob/master/predicting_movie_reviews_with_bert_on_tf_hub.ipynb) – mostra como usar um módulo BERT para classificação. Inclui o uso da biblioteca `bert` para tokenização e pré-processamento.
 
 ### Kaggle
 
@@ -62,10 +62,10 @@ Quando queremos descobrir quais frases estão correlacionadas uma com a outra em
 
 ## Criação de módulos
 
-Em vez de usar somente módulos em  [tfhub.dev](https://tfhub.dev), existem formas de criar seus próprios módulos, o que pode ser útil para uma melhor modularidade do código-base de aprendizado de máquina e para futuro compartilhamento.
+Em vez de usar somente módulos em [tfhub.dev](https://tfhub.dev), existem formas de criar seus próprios módulos, o que pode ser útil para uma melhor modularidade do código-base de aprendizado de máquina e para futuro compartilhamento.
 
 ### Encapsulamento de embeddings pré-treinados existentes
 
-[Exportador de módulos de embedding de texto](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings/export.py) –  ferramenta para encapsular um embedding pré-treinado existente em um módulo. Mostra como incluir operações de pré-processamento de texto no módulo. Isso permite criar um módulo de embedding de frases a partir de embeddings de tokens.
+[Exportador de módulos de embedding de texto](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings/export.py) – ferramenta para encapsular um embedding pré-treinado existente em um módulo. Mostra como incluir operações de pré-processamento de texto no módulo. Isso permite criar um módulo de embedding de frases a partir de embeddings de tokens.
 
 [Exportador de módulos de embedding de texto v2](https://github.com/tensorflow/hub/blob/master/examples/text_embeddings_v2/export_v2.py) – igual ao acima, mas compatível com o TensorFlow 2 e execução eager.
