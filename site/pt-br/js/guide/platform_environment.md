@@ -12,7 +12,7 @@ Quando um programa do TensorFlow.js é executado, a configuração específica �
 
 ### Back-ends
 
-O TensorFlow.js tem suporte a diversos back-ends diferentes que implementam armazenamento de tensores e operações matemáticas. Em um dado momento qualquer, somente um  back-end está ativo. Na maior parte do tempo, o TensorFlow.js escolherá automaticamente o melhor back-end para você dado o ambiente atual. Entretanto, às vezes é importante saber qual back-end está sendo usado e como alterá-lo.
+O TensorFlow.js tem suporte a diversos back-ends diferentes que implementam armazenamento de tensores e operações matemáticas. Em um dado momento qualquer, somente um back-end está ativo. Na maior parte do tempo, o TensorFlow.js escolherá automaticamente o melhor back-end para você dado o ambiente atual. Entretanto, às vezes é importante saber qual back-end está sendo usado e como alterá-lo.
 
 Para descobrir qual back-end você está usando:
 
@@ -33,7 +33,7 @@ O back-end WebGL, 'webgl', é atualmente o back-end mais poderoso para navegador
 
 ##### Evite bloquear o thread de interface gráfica
 
-Quando uma operação é chamada, como tf.matMul(a, b), o tf.Tensor resultante é retornado de maneira síncrona. Entretanto, talvez a computação da multiplicação de matrizes ainda não esteja pronta. Portanto, o tf.Tensor retornado é apenas um identificador da computação. Quando você chamar `x.data()` ou   `x.array()`, os valores serão resolvidos quando a computação for concluída. Por isso, é importante usar os métodos assíncronos `x.data()` e `x.array()` em vez das suas contrapartes síncronas `x.dataSync()` e `x.arraySync()` para evitar bloquear o thread de interface gráfica até a computação ser concluída.
+Quando uma operação é chamada, como tf.matMul(a, b), o tf.Tensor resultante é retornado de maneira síncrona. Entretanto, talvez a computação da multiplicação de matrizes ainda não esteja pronta. Portanto, o tf.Tensor retornado é apenas um identificador da computação. Quando você chamar `x.data()` ou `x.array()`, os valores serão resolvidos quando a computação for concluída. Por isso, é importante usar os métodos assíncronos `x.data()` e `x.array()` em vez das suas contrapartes síncronas `x.dataSync()` e `x.arraySync()` para evitar bloquear o thread de interface gráfica até a computação ser concluída.
 
 ##### Gerenciamento de memória
 
@@ -46,7 +46,7 @@ const a = tf.tensor([[1, 2], [3, 4]]);
 a.dispose();
 ```
 
-É muito comum encadear diversas operações em uma aplicação. Armazenar uma referência a todas as variáveis intermediárias para descartá-las depois pode reduzir a legibilidade do código. Para resolver esse problema, o TensorFlow.js conta com o método   `tf.tidy()`, que elimina todos os `tf.Tensor`s que não são retornados por uma função após a execução, similar à forma como as variáveis locais são eliminadas quando uma função é executada:
+É muito comum encadear diversas operações em uma aplicação. Armazenar uma referência a todas as variáveis intermediárias para descartá-las depois pode reduzir a legibilidade do código. Para resolver esse problema, o TensorFlow.js conta com o método `tf.tidy()`, que elimina todos os `tf.Tensor`s que não são retornados por uma função após a execução, similar à forma como as variáveis locais são eliminadas quando uma função é executada:
 
 ```js
 const a = tf.tensor([[1, 2], [3, 4]]);
@@ -60,13 +60,13 @@ const y = tf.tidy(() => {
 
 ##### Precisão
 
-Em dispositivos móveis, o WebGL pode ter suporte apenas a texturas de ponto flutuante de 16 bits. Porém, a maioria dos modelos de aprendizado de máquina são treinados usando-se ativações e pesos de ponto flutuante de 32 bits, o que pode causar problemas de precisão ao fazer a portabilidade de um modelo para dispositivos móveis, pois os números flutuantes de 16 bits podem representar somente números no intervalo `[0.000000059605, 65504]`. Portanto, você deve ter cuidado para os pesos e as ativações do seu modelo não excederem esse intervalo. Para verificar se o dispositivo tem suporte a texturas de 32 bits, confira o valor de  `tf.ENV.getBool('WEBGL_RENDER_FLOAT32_CAPABLE')`. Se o valor for false, então o dispositivo tem suporte somente a texturas de ponto flutuante de 16 bits. Você pode usar `tf.ENV.getBool('WEBGL_RENDER_FLOAT32_ENABLED')` para verificar se o TensorFlow.js está usando atualmente texturas de 32 bits.
+Em dispositivos móveis, o WebGL pode ter suporte apenas a texturas de ponto flutuante de 16 bits. Porém, a maioria dos modelos de aprendizado de máquina são treinados usando-se ativações e pesos de ponto flutuante de 32 bits, o que pode causar problemas de precisão ao fazer a portabilidade de um modelo para dispositivos móveis, pois os números flutuantes de 16 bits podem representar somente números no intervalo `[0.000000059605, 65504]`. Portanto, você deve ter cuidado para os pesos e as ativações do seu modelo não excederem esse intervalo. Para verificar se o dispositivo tem suporte a texturas de 32 bits, confira o valor de `tf.ENV.getBool('WEBGL_RENDER_FLOAT32_CAPABLE')`. Se o valor for false, então o dispositivo tem suporte somente a texturas de ponto flutuante de 16 bits. Você pode usar `tf.ENV.getBool('WEBGL_RENDER_FLOAT32_ENABLED')` para verificar se o TensorFlow.js está usando atualmente texturas de 32 bits.
 
 ##### Compilação de shaders e uploads de texturas
 
-O TensorFlow.js executa operações na GPU executando programas de shader do WebGL. Esses shaders são montados e compilados de maneira lazy quando o usuário solicita a execução de uma operação. A compilação de um shader ocorre na CPU do thread principal e pode ser lenta. O TensorFlow.js fará o cache dos shaders compilados automaticamente, fazendo a segunda  chamada à mesma operação com tensores de entrada e saída com o mesmo formato de forma muito mais rápida. Tipicamente, aplicações do TensorFlow.js usarão as mesmas operações diversas vezes durante o ciclo de vida da aplicação, então o segundo passo de um modelo de aprendizado de máquina é bem mais rápido.
+O TensorFlow.js executa operações na GPU executando programas de shader do WebGL. Esses shaders são montados e compilados de maneira lazy quando o usuário solicita a execução de uma operação. A compilação de um shader ocorre na CPU do thread principal e pode ser lenta. O TensorFlow.js fará o cache dos shaders compilados automaticamente, fazendo a segunda chamada à mesma operação com tensores de entrada e saída com o mesmo formato de forma muito mais rápida. Tipicamente, aplicações do TensorFlow.js usarão as mesmas operações diversas vezes durante o ciclo de vida da aplicação, então o segundo passo de um modelo de aprendizado de máquina é bem mais rápido.
 
-O TensorFlow.js também armazena dados do tf.Tensor como WebGLTextures. Quando um `tf.Tensor` é criado, não fazemos o upload dos dados imediatamente para a GPU. Em vez disso, mantemos os dados na CPU até que o  `tf.Tensor` seja usado em uma operação. Se o `tf.Tensor` for usado uma segunda vez, os dados já estarão na GPU, então não há custo de upload. Em um modelo típico de aprendizado de máquina, isso significa que é feito upload dos pesos durante a previsão do modelo, e o segundo passo do modelo será muito mais rápido.
+O TensorFlow.js também armazena dados do tf.Tensor como WebGLTextures. Quando um `tf.Tensor` é criado, não fazemos o upload dos dados imediatamente para a GPU. Em vez disso, mantemos os dados na CPU até que o `tf.Tensor` seja usado em uma operação. Se o `tf.Tensor` for usado uma segunda vez, os dados já estarão na GPU, então não há custo de upload. Em um modelo típico de aprendizado de máquina, isso significa que é feito upload dos pesos durante a previsão do modelo, e o segundo passo do modelo será muito mais rápido.
 
 Se o desempenho da primeira previsão do modelo ou o código do TensorFlow.js são importantes para você, recomendamos fazer uma inicialização do modelo passando um tensor de entrada com o mesmo formato antes de usar dados reais.
 
@@ -88,7 +88,7 @@ const result = model.predict(userData);
 
 No back-end TensorFlow Node.js, 'node', a API C do TensorFlow é usada para acelerar as operações. É utilizada a aceleração de hardware que estiver disponível na máquina, como CUDA.
 
-Nesse back-end, assim como no back-end WebGL, as operações retornam `tf.Tensor`s de maneira síncrona.  Entretanto, diferentemente do back-end WebGL, a operação é concluída antes que você receba o tensor de volta. Portanto, uma chamada a `tf.matMul(a, b)` bloqueará o thread de interface gráfica.
+Nesse back-end, assim como no back-end WebGL, as operações retornam `tf.Tensor`s de maneira síncrona. Entretanto, diferentemente do back-end WebGL, a operação é concluída antes que você receba o tensor de volta. Portanto, uma chamada a `tf.matMul(a, b)` bloqueará o thread de interface gráfica.
 
 Por esse motivo, se você pretende usá-lo em uma aplicação de produção, deve executar o TensorFlow.js em threads worker que não bloqueiem o thread principal.
 
@@ -117,7 +117,7 @@ tf.ready().then(() => {...});
 
 ##### Por que usar o WASM?
 
-O [WASM](https://webassembly.org/) foi lançado em 2015 como um novo formato de binário baseado na web, fornecendo programas escritos em  JavaScript, C, C++, etc. com um alvo de compilação para executar na web. O WASM é [compatível](https://webassembly.org/roadmap/) com o Chrome, Safari, Firefox e Edge desde 2017, e também é compatível com [90% dos dispositivos](https://caniuse.com/#feat=wasm) mundialmente.
+O [WASM](https://webassembly.org/) foi lançado em 2015 como um novo formato de binário baseado na web, fornecendo programas escritos em JavaScript, C, C++, etc. com um alvo de compilação para executar na web. O WASM é [compatível](https://webassembly.org/roadmap/) com o Chrome, Safari, Firefox e Edge desde 2017, e também é compatível com [90% dos dispositivos](https://caniuse.com/#feat=wasm) mundialmente.
 
 **Desempenho**
 
@@ -125,7 +125,7 @@ O back-end WASM usa a [biblioteca XNNPACK](https://github.com/google/XNNPACK) pa
 
 *Comparação com o JavaScript*: os binários do WASM geralmente têm um carregamento, processamento e execução mais rápidos do que os pacotes JavaScript no navegador. O JavaScript tem tipagem dinâmica e conta com coleta de lixo, o que pode causar lentidões em tempo de execução.
 
-*Comparação com o WebGL*: o WebGL é mais rápido do que o WASM para a maioria dos modelos. Porém, para modelos muito pequenos, o WASM pode ter desempenho  superior ao WebGL devido aos custos de sobrecarga fixos de execução dos shaders do WebGL. A seção “Quando devo usar o WASM?” abaixo discute a heurística para tomar essa decisão.
+*Comparação com o WebGL*: o WebGL é mais rápido do que o WASM para a maioria dos modelos. Porém, para modelos muito pequenos, o WASM pode ter desempenho superior ao WebGL devido aos custos de sobrecarga fixos de execução dos shaders do WebGL. A seção “Quando devo usar o WASM?” abaixo discute a heurística para tomar essa decisão.
 
 **Portabilidade e estabilidade**
 
@@ -137,7 +137,7 @@ Assim como o WebGL, o WASM tem suporte oficial de todos os grandes navegadores. 
 
 **Tamanho do modelo e demanda computacional**
 
-De forma geral, o WASM é uma boa opção quando os modelos são menores ou quando dispositivos inferiores sem suporte ao WebGL (extensão `OES_texture_float`) são importantes para você, ou quando eles têm GPUs menos poderosas. A tabela abaixo mostra o tempo de inferência (no  TensorFlow.js 1.5.2) no Chrome em um 2018 MacBook Pro para 5 dos nossos [modelos](https://github.com/tensorflow/tfjs-models) com suporte oficial nos back-ends WebGL, WASM e CPU:
+De forma geral, o WASM é uma boa opção quando os modelos são menores ou quando dispositivos inferiores sem suporte ao WebGL (extensão `OES_texture_float`) são importantes para você, ou quando eles têm GPUs menos poderosas. A tabela abaixo mostra o tempo de inferência (no TensorFlow.js 1.5.2) no Chrome em um 2018 MacBook Pro para 5 dos nossos [modelos](https://github.com/tensorflow/tfjs-models) com suporte oficial nos back-ends WebGL, WASM e CPU:
 
 **Modelos menores**
 
@@ -154,13 +154,13 @@ PoseNet | 42,5 ms | 173,9 ms | 1.514,7 ms | 4,5 MB
 BodyPix | 77 ms | 188,4 ms | 2.683 ms | 4,6 MB
 MobileNet v2 | 37 ms | 94 ms | 923,6 ms | 13 MB
 
-A tabela acima mostra que o WASM é de 10 a 30 vezes mais rápido do que o back-end de CPU no JS entre os modelos, e é competitivo com o WebGL para modelos menores, como  [BlazeFace](https://github.com/tensorflow/tfjs-models/tree/master/blazeface), que é leve (400 KB), mas ainda tem um número razoável de operações (cerca de 140). Como os programas do WebGL têm um custo de sobrecarga fixo por execução de operação, isso explica por que modelos como o BlazeFace são mais rápidos no WASM.
+A tabela acima mostra que o WASM é de 10 a 30 vezes mais rápido do que o back-end de CPU no JS entre os modelos, e é competitivo com o WebGL para modelos menores, como [BlazeFace](https://github.com/tensorflow/tfjs-models/tree/master/blazeface), que é leve (400 KB), mas ainda tem um número razoável de operações (cerca de 140). Como os programas do WebGL têm um custo de sobrecarga fixo por execução de operação, isso explica por que modelos como o BlazeFace são mais rápidos no WASM.
 
 **Esses resultados variam dependendo do dispositivo. A melhor forma de determinar se o WASM é a opção certa para sua aplicação e testá-la em diferentes back-ends.**
 
 ##### Inferência versus treinamento
 
-Para tratar o caso de uso principal para implantação de modelos pré-treinados, o desenvolvimento do back-end WASM priorizará suporte à *inferência* em detrimento do *treinamento*. Confira uma [lista atualizada](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/src/register_all_kernels.ts) das operações com suporte no WASM e [nos avise](https://github.com/tensorflow/tfjs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) se o seu modelo tiver uma operação sem suporte. Para modelos de treinamento, recomendamos usar o back-end  Node (TensorFlow C++) ou o back-end WebGL.
+Para tratar o caso de uso principal para implantação de modelos pré-treinados, o desenvolvimento do back-end WASM priorizará suporte à *inferência* em detrimento do *treinamento*. Confira uma [lista atualizada](https://github.com/tensorflow/tfjs/blob/master/tfjs-backend-wasm/src/register_all_kernels.ts) das operações com suporte no WASM e [nos avise](https://github.com/tensorflow/tfjs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) se o seu modelo tiver uma operação sem suporte. Para modelos de treinamento, recomendamos usar o back-end Node (TensorFlow C++) ou o back-end WebGL.
 
 #### Back-end de CPU
 
@@ -173,8 +173,8 @@ Esse back-end pode ser muito útil para testes ou em dispositivos nos quais o We
 O TensorFlow.js tem um conjunto de sinalizadores de ambiente que são avaliados automaticamente e determinam a melhor configuração na plataforma atual. Esses sinalizadores são principalmente internos, mas alguns sinalizadores globais podem ser controlados por meio da API pública.
 
 - `tf.enableProdMode()` – ativa o modo de produção, que remove a validação do modelo, as verificações de NaN e outras checagens para melhorar o desempenho.
-- `tf.enableDebugMode()` – ativa o modo de depuração, que grava no console cada operação executada, bem como as informações de desempenho do runtime, como pegada de memória e tempo total de execução dos kernels.  Observe que isso reduz bastante a velocidade da aplicação e não deve ser usado em produção.
+- `tf.enableDebugMode()` – ativa o modo de depuração, que grava no console cada operação executada, bem como as informações de desempenho do runtime, como pegada de memória e tempo total de execução dos kernels. Observe que isso reduz bastante a velocidade da aplicação e não deve ser usado em produção.
 
 > Observação: esses dois métodos devem ser usados antes de utilizar qualquer código do TensorFlow.js, pois eles afetam os valores de outros sinalizadores que serão armazenados em cache. Por esse mesmo motivo, não existe uma função análoga "disable" para desativá-los.
 
-> Observação: você pode ver todos os sinalizadores que foram avaliados gravando  `tf.ENV.features` no console. Embora eles **não façam parte da API pública** (e, portanto, não há garantias de estabilidade entre as versões), podem ser úteis para fazer a depuração ou os ajustes finos entre plataformas e dispositivos. Você pode usar `tf.ENV.set` para sobrescrever o valor de um sinalizador.
+> Observação: você pode ver todos os sinalizadores que foram avaliados gravando `tf.ENV.features` no console. Embora eles **não façam parte da API pública** (e, portanto, não há garantias de estabilidade entre as versões), podem ser úteis para fazer a depuração ou os ajustes finos entre plataformas e dispositivos. Você pode usar `tf.ENV.set` para sobrescrever o valor de um sinalizador.

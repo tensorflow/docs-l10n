@@ -22,7 +22,7 @@ O pacote TensorFlow GPU pode ser importado da seguinte forma:
 import * as tf from '@tensorflow/tfjs-node-gpu'
 ```
 
-Assim como o pacote de CPU, o módulo obtido será acelerado pelo binário C do TensorFlow. Entretanto, ele executará operações dos tensores na GPU com CUDA e, portanto, somente no Linux. Esse binding pode ser pelo menos uma ordem de  magnitude mais rápido do que outras opções de binding.
+Assim como o pacote de CPU, o módulo obtido será acelerado pelo binário C do TensorFlow. Entretanto, ele executará operações dos tensores na GPU com CUDA e, portanto, somente no Linux. Esse binding pode ser pelo menos uma ordem de magnitude mais rápido do que outras opções de binding.
 
 > Observação: esse pacote funciona somente com o CUDA. Você precisa ter o CUDA instalado na máquina com uma placa gráfica da NVIDIA antes de seguir por este caminho.
 
@@ -44,7 +44,7 @@ Como este pacote não depende do TensorFlow, pode ser usado em mais dispositivos
 
 Os bindings do Node.js fornecem um back-end para o TensorFlow.js que implementa as operações de forma síncrona. Portanto, quando você chama uma operação, como `tf.matMul(a, b)`, ela bloqueará o thread principal até que a operação seja concluída.
 
-Por esse motivo, os bindings são adequados atualmente para scripts e para tarefas offline. Se você deseja usar os bindings do Node.js em uma aplicação em produção, como um servidor web,  deve configurar uma fila de trabalhos ou threads workers para que o código do TensorFlow.js não bloqueie o thread principal.
+Por esse motivo, os bindings são adequados atualmente para scripts e para tarefas offline. Se você deseja usar os bindings do Node.js em uma aplicação em produção, como um servidor web, deve configurar uma fila de trabalhos ou threads workers para que o código do TensorFlow.js não bloqueie o thread principal.
 
 ## APIs
 
@@ -52,7 +52,7 @@ Após importar o pacote como tf em qualquer uma das opções acima, todos os sí
 
 ### tf.browser
 
-No pacote normal do TensorFlow.js, os símbolos no namespace  `tf.browser.*` não serão utilizáveis no Node.js, pois usam APIs específicas de navegador.
+No pacote normal do TensorFlow.js, os símbolos no namespace `tf.browser.*` não serão utilizáveis no Node.js, pois usam APIs específicas de navegador.
 
 Atualmente, são estes:
 

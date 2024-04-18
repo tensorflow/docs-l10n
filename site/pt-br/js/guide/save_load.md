@@ -1,6 +1,6 @@
 # Salvar e carregar modelos
 
-O TensorFlow.js conta com funcionalidades para salvar e carregar modelos que foram criados com a API  [`Layers`](https://js.tensorflow.org/api/0.14.2/#Models) ou convertidos a partir de modelos existentes do TensorFlow. Podem ser modelos que você mesmo treinou ou que tenham sido treinados por outras pessoas. Um importante benefício de se usar a API Layers é que os modelos criados com ela são serializáveis, e é esse aspecto que vamos explorar neste tutorial.
+O TensorFlow.js conta com funcionalidades para salvar e carregar modelos que foram criados com a API [`Layers`](https://js.tensorflow.org/api/0.14.2/#Models) ou convertidos a partir de modelos existentes do TensorFlow. Podem ser modelos que você mesmo treinou ou que tenham sido treinados por outras pessoas. Um importante benefício de se usar a API Layers é que os modelos criados com ela são serializáveis, e é esse aspecto que vamos explorar neste tutorial.
 
 O foco deste tutorial é como salvar e carregar modelos do TensorFlow.js (identificáveis como arquivos JSON). Também podemos importar modelos do TensorFlow em Python. O carregamento desses modelos é discutido nos seguintes tutoriais:
 
@@ -9,7 +9,7 @@ O foco deste tutorial é como salvar e carregar modelos do TensorFlow.js (identi
 
 ## Salve um tf.Model
 
-Tanto [`tf.Model`](https://js.tensorflow.org/api/0.14.2/#class:Model) quanto  [`tf.Sequential`](https://js.tensorflow.org/api/0.14.2/#class:Model) contam com uma função [`model.save`](https://js.tensorflow.org/api/0.14.2/#tf.Model.save) que permite salvar a *topologia* e os *pesos* de um modelo.
+Tanto [`tf.Model`](https://js.tensorflow.org/api/0.14.2/#class:Model) quanto [`tf.Sequential`](https://js.tensorflow.org/api/0.14.2/#class:Model) contam com uma função [`model.save`](https://js.tensorflow.org/api/0.14.2/#tf.Model.save) que permite salvar a *topologia* e os *pesos* de um modelo.
 
 - Topologia – É um arquivo que descreve a arquitetura de um modelo (isto é, quais operações ele usa). Contém referências aos pesos do modelo que são armazenados externamente.
 
@@ -23,7 +23,7 @@ const saveResult = await model.save('localstorage://my-model-1');
 
 Algumas considerações:
 
-- O método `save` recebe um argumento de string tipo URL que começa com um **esquema**. Ele descreve o tipo de destino no qual estamos tentando salvar o modelo. No exemplo acima, o esquema é  `localstorage://`
+- O método `save` recebe um argumento de string tipo URL que começa com um **esquema**. Ele descreve o tipo de destino no qual estamos tentando salvar o modelo. No exemplo acima, o esquema é `localstorage://`
 - Após o esquema, temos o **caminho**. No exemplo acima, o caminho é `my-model-1`.
 - O método `save` é assíncrono.
 - O valor de retorno de `model.save` é um objeto JSON que armazena informações como os tamanhos em bytes da topologia e dos pesos do modelo.
@@ -39,7 +39,7 @@ Vamos avaliar os diferentes esquemas disponíveis abaixo.
 await model.save('localstorage://my-model');
 ```
 
-O modelo é salvo com o nome `my-model` no  [armazenamento local](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) do navegador. Ele será persistente entre as atualizações, embora o armazenamento local possa ser excluído pelos usuários ou pelo próprio navegador, caso o espaço de armazenamento se torne uma preocupação. Cada navegador também define seu próprio limite de quantos dados podem ser armazenados no armazenamento local para um determinado domínio.
+O modelo é salvo com o nome `my-model` no [armazenamento local](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) do navegador. Ele será persistente entre as atualizações, embora o armazenamento local possa ser excluído pelos usuários ou pelo próprio navegador, caso o espaço de armazenamento se torne uma preocupação. Cada navegador também define seu próprio limite de quantos dados podem ser armazenados no armazenamento local para um determinado domínio.
 
 ### IndexedDB (somente navegador)
 
@@ -49,7 +49,7 @@ O modelo é salvo com o nome `my-model` no  [armazenamento local](https://develo
 await model.save('indexeddb://my-model');
 ```
 
-O modelo é salvo no armazenamento [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) do  navegador. Da mesma forma que o armazenamento local, ele também será persistente entre as atualizações. Além disso, ele costuma ter limites de tamanho maiores para os objetos armazenados.
+O modelo é salvo no armazenamento [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) do navegador. Da mesma forma que o armazenamento local, ele também será persistente entre as atualizações. Além disso, ele costuma ter limites de tamanho maiores para os objetos armazenados.
 
 ### Downloads de arquivos (somente navegador)
 
@@ -85,7 +85,7 @@ O modelo será enviado ao servidor HTTP especificado por uma solicitação [POST
 1. Um arquivo JSON de nome `model.json` com a topologia e a referência para o arquivo de pesos descrito abaixo.
 2. Um binário com os valores de pesos, com o nome `model.weights.bin`.
 
-Observe que os nomes dos arquivos serão sempre como especificado acima (o nome está incorporado à função). Esta [documentação da API](https://js.tensorflow.org/api/latest/#tf.io.browserHTTPRequest) contém um trecho de código Python que demonstra como usar o framework web  [flask](http://flask.pocoo.org/) para tratar a solicitação originada pelo `save`.
+Observe que os nomes dos arquivos serão sempre como especificado acima (o nome está incorporado à função). Esta [documentação da API](https://js.tensorflow.org/api/latest/#tf.io.browserHTTPRequest) contém um trecho de código Python que demonstra como usar o framework web [flask](http://flask.pocoo.org/) para tratar a solicitação originada pelo `save`.
 
 Geralmente, você precisará passar mais argumentos ou headers na solicitação para o servidor HTTP (por exemplo, para autenticação ou se desejar especificar uma pasta na qual o modelo deve ser salvo). Você pode obter controle refinado sobre esses aspectos das solicitações de `save` substituindo o argumento de string de URL em `tf.io.browserHTTPRequest`. Esta API oferece maior flexibilidade no controle de solicitações HTTP.
 
@@ -160,9 +160,9 @@ Esse código carrega um modelo a partir do armazenamento [IndexedDB](https://dev
 const model = await tf.loadLayersModel('http://model-server.domain/download/model.json');
 ```
 
-Esse código carrega um modelo a partir de um endpoint HTTP.  Após carregar o arquivo `json`, a função solicitará os arquivos `.bin` correspondentes que o arquivo `json` referencia.
+Esse código carrega um modelo a partir de um endpoint HTTP. Após carregar o arquivo `json`, a função solicitará os arquivos `.bin` correspondentes que o arquivo `json` referencia.
 
-> OBSERVAÇÃO: essa implementação depende da presença do método  [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). Se você estiver usando um ambiente que não forneça o método fetch nativamente, pode fornecer um método global chamado [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) que obedeça a essa interface ou pode usar uma biblioteca, como [`node-fetch`](https://www.npmjs.com/package/node-fetch).
+> OBSERVAÇÃO: essa implementação depende da presença do método [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch). Se você estiver usando um ambiente que não forneça o método fetch nativamente, pode fornecer um método global chamado [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) que obedeça a essa interface ou pode usar uma biblioteca, como [`node-fetch`](https://www.npmjs.com/package/node-fetch).
 
 ### Sistema de arquivos nativo (somente Node.js)
 
@@ -172,11 +172,11 @@ Esse código carrega um modelo a partir de um endpoint HTTP.  Após carregar o a
 const model = await tf.loadLayersModel('file://path/to/my-model/model.json');
 ```
 
-Ao executar no Node.js, também temos acesso direto ao sistema de arquivos e podemos carregar modelos de lá. Observe que, na chamada à função acima, referenciamos o arquivo model.json (enquanto, ao salvar, especificamos uma pasta). Os arquivos  `.bin` correspondentes devem estar na mesma pasta que o arquivo `json`.
+Ao executar no Node.js, também temos acesso direto ao sistema de arquivos e podemos carregar modelos de lá. Observe que, na chamada à função acima, referenciamos o arquivo model.json (enquanto, ao salvar, especificamos uma pasta). Os arquivos `.bin` correspondentes devem estar na mesma pasta que o arquivo `json`.
 
 ## Como carregar modelos com IOHandlers
 
-Se os esquemas acima não forem suficientes para sua necessidade, você pode implementar um comportamento de carregamento personalizado com um `IOHandler`. Um `IOHandler` fornecido pelo TensorFlow.js é  [`tf.io.browserFiles`](https://js.tensorflow.org/api/latest/#io.browserFiles), que permite aos usuários do navegador carregarem arquivos do modelo no navegador. Confira mais informações na [documentação](https://js.tensorflow.org/api/latest/#io.browserFiles).
+Se os esquemas acima não forem suficientes para sua necessidade, você pode implementar um comportamento de carregamento personalizado com um `IOHandler`. Um `IOHandler` fornecido pelo TensorFlow.js é [`tf.io.browserFiles`](https://js.tensorflow.org/api/latest/#io.browserFiles), que permite aos usuários do navegador carregarem arquivos do modelo no navegador. Confira mais informações na [documentação](https://js.tensorflow.org/api/latest/#io.browserFiles).
 
 # Como salvar e carregar modelos com IOHandlers personalizados
 
@@ -186,6 +186,6 @@ Se os esquemas acima não forem suficientes para suas necessidades de carregamen
 
 A função `save` recebe um parâmetro que obedece à interface [ModelArtifacts](https://github.com/tensorflow/tfjs-core/blob/master/src/io/types.ts#L165) e deve retornar uma promise que resolve para um objeto [SaveResult](https://github.com/tensorflow/tfjs-core/blob/master/src/io/types.ts#L107).
 
-A função `load` não recebe parâmetros e deve retornar uma promise que resolve para um objeto  [ModelArtifacts](https://github.com/tensorflow/tfjs-core/blob/master/src/io/types.ts#L165). Esse é o mesmo objeto passado para `save`.
+A função `load` não recebe parâmetros e deve retornar uma promise que resolve para um objeto [ModelArtifacts](https://github.com/tensorflow/tfjs-core/blob/master/src/io/types.ts#L165). Esse é o mesmo objeto passado para `save`.
 
 Confira um exemplo de como implementar um IOHandler em [BrowserHTTPRequest](https://github.com/tensorflow/tfjs-core/blob/master/src/io/browser_http.ts).

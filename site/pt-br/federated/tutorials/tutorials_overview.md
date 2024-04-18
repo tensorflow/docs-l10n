@@ -19,7 +19,7 @@ Observação: no momento, o TFF requer o Python 3.9 ou posterior, mas os runtime
 
 - O tutorial [Construindo seu próprio algoritmo de aprendizado federado](building_your_own_federated_learning_algorithm.ipynb) mostra como usar as APIs Core do TFF para implementar algoritmos de aprendizado federado, usando cálculo federado de médias como exemplo.
 - O tutorial [Combinando algoritmos de aprendizado](composing_learning_algorithms.ipynb) mostra como usar a API Learning do TFF para implementar facilmente novos algoritmos de aprendizado federado, especialmente variantes do cálculo federado de médias.
-- O tutorial [Algoritmo federado personalizado com otimizadores do TFF](custom_federated_algorithm_with_tff_optimizers.ipynb) mostra como usar  `tff.learning.optimizers` para criar um processo iterativo personalizado para cálculo federado de médias.
+- O tutorial [Algoritmo federado personalizado com otimizadores do TFF](custom_federated_algorithm_with_tff_optimizers.ipynb) mostra como usar `tff.learning.optimizers` para criar um processo iterativo personalizado para cálculo federado de médias.
 - Os tutoriais [Algoritmos federados personalizados, parte 1: Introdução ao Federated Core](custom_federated_algorithms_1.ipynb) e [parte 2: Implementando o cálculo federado de médias](custom_federated_algorithms_2.ipynb) apresentam os conceitos e interfaces essenciais oferecidos pela API Federated Core (API FC).
 - O tutorial [Implementando agregações personalizadas](custom_aggregators.ipynb) explica os princípios de design por trás do módulo `tff.aggregators` e as práticas recomendadas para implementar agregação personalizada de valores dos clientes para o servidor.
 
