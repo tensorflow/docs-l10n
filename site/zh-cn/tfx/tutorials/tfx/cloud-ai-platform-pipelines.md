@@ -251,7 +251,7 @@ PROJECT_DIR=os.path.join(os.path.expanduser("~"),"imported",PIPELINE_NAME)
 笔记本会将样本数据上传到 GCS 存储分区，以便可以稍后在流水线中使用。
 
 ```python
-!gsutil cp data/data.csv gs://{GOOGLE_CLOUD_PROJECT}-kubeflowpipelines-default/tfx-template/data/taxi/data.csv
+!gcloud storage cp data/data.csv gs://{GOOGLE_CLOUD_PROJECT}-kubeflowpipelines-default/tfx-template/data/taxi/data.csv
 ```
 
 之后，笔记本会使用 `tfx pipeline create` 命令创建流水线。
