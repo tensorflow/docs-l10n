@@ -99,7 +99,7 @@ tfx run create --pipeline-name $pipeline_name --endpoint=$endpoint \
 
 ## 정리
 
-`fg` 명령을 사용하여 백그라운드에서 포트 전달에 액세스한 다음 ctrl-C를 사용하여 종료시킵니다. `gsutil -m rm -R $output_dir`을 사용하여 기록된 파이프라인 출력이 있는 디렉터리를 삭제할 수 있습니다.
+`fg` 명령을 사용하여 백그라운드에서 포트 전달에 액세스한 다음 ctrl-C를 사용하여 종료시킵니다. `gcloud storage rm --recursive $output_dir`을 사용하여 기록된 파이프라인 출력이 있는 디렉터리를 삭제할 수 있습니다.
 
 이 프로젝트에서 사용한 모든 Google Cloud 리소스를 정리하려면 튜토리얼에서 사용한 [Google Cloud 프로젝트를 삭제](https://cloud.google.com/resource-manager/docs/creating-managing-projects#shutting_down_projects)하면 됩니다.
 

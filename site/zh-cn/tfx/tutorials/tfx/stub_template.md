@@ -99,7 +99,7 @@ tfx run create --pipeline-name $pipeline_name --endpoint=$endpoint \
 
 ## 清理
 
-使用命令 `fg` 在后台访问端口转发，然后按 Ctrl+C 终止。您可以使用 `gsutil -m rm -R $output_dir` 删除包含记录了流水线输出的目录。
+使用命令 `fg` 在后台访问端口转发，然后按 Ctrl+C 终止。您可以使用 `gcloud storage rm --recursive $output_dir` 删除包含记录了流水线输出的目录。
 
 要清理此项目中使用的所有 Google Cloud 资源，您可以[删除用于本教程的 Google Cloud 项目](https://cloud.google.com/resource-manager/docs/creating-managing-projects#shutting_down_projects)。
 
