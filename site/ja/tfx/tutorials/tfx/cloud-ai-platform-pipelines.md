@@ -251,7 +251,7 @@ Notebook は、`tfx run` CLI コマンドを使用してパイプラインを実
 Notebook はサンプル データを GCS バケットにアップロードして、後でパイプラインで使用できるようにします。
 
 ```python
-!gsutil cp data/data.csv gs://{GOOGLE_CLOUD_PROJECT}-kubeflowpipelines-default/tfx-template/data/taxi/data.csv
+!gcloud storage cp data/data.csv gs://{GOOGLE_CLOUD_PROJECT}-kubeflowpipelines-default/tfx-template/data/taxi/data.csv
 ```
 
 次に、Notebook は`tfx pipeline create`コマンドを使用してパイプラインを作成します。
