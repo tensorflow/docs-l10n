@@ -99,7 +99,7 @@ tfx run create --pipeline-name $pipeline_name --endpoint=$endpoint \
 
 ## クリーンアップ
 
-コマンド `fg` を使用してバックグラウンドでポート転送にアクセスし、次に ctrl-C を使用して終了します。`gsutil -m rm -R $output_dir` を使用すると、パイプライン出力が記録されているディレクトリを削除できます。
+コマンド `fg` を使用してバックグラウンドでポート転送にアクセスし、次に ctrl-C を使用して終了します。`gcloud storage rm --recursive $output_dir` を使用すると、パイプライン出力が記録されているディレクトリを削除できます。
 
 このプロジェクトで使用されているすべての Google Cloud リソースをクリーンアップするには、チュートリアルで使用した [Google Cloud プロジェクトを削除](https://cloud.google.com/resource-manager/docs/creating-managing-projects#shutting_down_projects)します。
 

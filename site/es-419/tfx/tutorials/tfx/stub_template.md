@@ -99,7 +99,7 @@ tfx run create --pipeline-name $pipeline_name --endpoint=$endpoint \
 
 ## Limpieza
 
-Use el comando `fg` para acceder al reenvío de puertos en segundo plano y luego presione Ctrl-C para finalizar. Puede eliminar el directorio con salidas de canalización registradas con ayuda de `gsutil -m rm -R $output_dir`.
+Use el comando `fg` para acceder al reenvío de puertos en segundo plano y luego presione Ctrl-C para finalizar. Puede eliminar el directorio con salidas de canalización registradas con ayuda de `gcloud storage rm --recursive $output_dir`.
 
 Para limpiar todos los recursos de Google Cloud utilizados en este proyecto, puede [eliminar el proyecto de Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects#shutting_down_projects) que se usó para el tutorial.
 

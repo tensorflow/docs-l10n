@@ -99,7 +99,7 @@ tfx run create --pipeline-name $pipeline_name --endpoint=$endpoint \
 
 ## Limpeza
 
-Use o comando `fg` para acessar o encaminhamento de porta em segundo plano e depois ctrl-C para encerrá-lo. Você pode excluir o diretório contendo as saídas de pipeline gravadas usando `gsutil -m rm -R $output_dir`.
+Use o comando `fg` para acessar o encaminhamento de porta em segundo plano e depois ctrl-C para encerrá-lo. Você pode excluir o diretório contendo as saídas de pipeline gravadas usando `gcloud storage rm --recursive $output_dir`.
 
 Para limpar todos os recursos do Google Cloud usados ​​neste projeto, [exclua o projeto do Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects#shutting_down_projects) usado no tutorial.
 
