@@ -251,7 +251,7 @@ La ejecución de canalizaciones crea artefactos que deben almacenarse en [ML-Met
 El bloc de notas cargará nuestros datos de muestra en el depósito de GCS para que podamos usarlos más adelante en nuestra canalización.
 
 ```python
-!gsutil cp data/data.csv gs://{GOOGLE_CLOUD_PROJECT}-kubeflowpipelines-default/tfx-template/data/taxi/data.csv
+!gcloud storage cp data/data.csv gs://{GOOGLE_CLOUD_PROJECT}-kubeflowpipelines-default/tfx-template/data/taxi/data.csv
 ```
 
 Luego, el bloc de notas usa el comando `tfx pipeline create` para crear la canalización.

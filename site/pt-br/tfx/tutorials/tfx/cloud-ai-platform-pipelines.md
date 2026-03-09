@@ -251,7 +251,7 @@ A execução de pipelines cria artefatos que devem ser armazenados em [ML-Metada
 O notebook fará upload de nossos dados de amostra para o bucket do GCS para que possamos usá-los em nosso pipeline posteriormente.
 
 ```python
-!gsutil cp data/data.csv gs://{GOOGLE_CLOUD_PROJECT}-kubeflowpipelines-default/tfx-template/data/taxi/data.csv
+!gcloud storage cp data/data.csv gs://{GOOGLE_CLOUD_PROJECT}-kubeflowpipelines-default/tfx-template/data/taxi/data.csv
 ```
 
 O notebook depois usa o comando `tfx pipeline create` para criar o pipeline.
