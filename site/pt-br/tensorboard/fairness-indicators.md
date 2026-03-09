@@ -26,7 +26,7 @@ Se você quiser testar Fairness Indicators no TensorBoard, pode baixar os result
 
 ```
 pip install gsutil
-gsutil cp -r gs://tensorboard_plugin_fairness_indicators/ .
+gcloud storage cp --recursive gs://tensorboard_plugin_fairness_indicators/ .
 ```
 
 Navegue até o diretório que contém os arquivos baixados.

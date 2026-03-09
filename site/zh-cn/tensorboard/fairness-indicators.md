@@ -26,7 +26,7 @@ pip install tensorboard-plugin-fairness-indicators
 
 ```
 pip install gsutil
-gsutil cp -r gs://tensorboard_plugin_fairness_indicators/ .
+gcloud storage cp --recursive gs://tensorboard_plugin_fairness_indicators/ .
 ```
 
 导航到包含已下载文件的目录。
