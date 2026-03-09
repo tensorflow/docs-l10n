@@ -26,7 +26,7 @@ TensorBoard에서 Fairness Indicators를 테스트하려면 Google 클라우드 
 
 ```
 pip install gsutil
-gsutil cp -r gs://tensorboard_plugin_fairness_indicators/ .
+gcloud storage cp --recursive gs://tensorboard_plugin_fairness_indicators/ .
 ```
 
 다운로드한 파일이 있는 디렉토리로 이동합니다.
