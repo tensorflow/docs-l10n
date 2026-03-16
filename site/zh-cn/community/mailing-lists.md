@@ -16,11 +16,11 @@ TensorFlow GitHub 组织内部的以下项目有专门用于各自社区的名�
 
 - [hub](https://groups.google.com/a/tensorflow.org/d/forum/hub) – 围绕 [TensorFlow Hub](https://github.com/tensorflow/hub) 的讨论与合作。
 - [magenta-discuss](https://groups.google.com/a/tensorflow.org/d/forum/magenta-discuss) – 关于 [Magenta](https://magenta.tensorflow.org/) 发展和方向的一般讨论。
-- [tensor2tensor@tensorflow.org](https://groups.google.com/d/forum/tensor2tensor) - Tensor2Tensor 的讨论和同侪支持。
-- [tfjs-announce@tensorflow.org](https://groups.google.com/a/tensorflow.org/d/forum/tfjs-announce) - 新 TensorFlow.js 版本的公告。
-- [tensor2tensor@tensorflow.org](https://groups.google.com/a/tensorflow.org/d/forum/tfjs) - Tensor2Tensor 的讨论和同侪支持。
-- [tensor2tensor@tensorflow.org](https://groups.google.com/a/tensorflow.org/d/forum/tflite) - Tensor2Tensor 的讨论和同侪支持。
-- [tensor2tensor@tensorflow.org](https://groups.google.com/a/tensorflow.org/d/forum/tfprobability) - Tensor2Tensor 的讨论和同侪支持。
+- [tensor2tensor](https://groups.google.com/d/forum/tensor2tensor) - Tensor2Tensor 的讨论和同侪支持。
+- [tfjs-announce](https://groups.google.com/a/tensorflow.org/d/forum/tfjs-announce) - 新 TensorFlow.js 版本的公告。
+- [tfjs](https://groups.google.com/a/tensorflow.org/d/forum/tfjs) - TensorFlow.js 的讨论和同侪支持。
+- [tflite](https://groups.google.com/a/tensorflow.org/d/forum/tflite) - TensorFlow Lite 的讨论和同侪支持。
+- [tfprobability](https://groups.google.com/a/tensorflow.org/d/forum/tfprobability) - TensorFlow Probability 的讨论和同侪支持。
 - [tfx](https://groups.google.com/a/tensorflow.org/forum/#!forum/tfx) – 围绕 [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx/) 的讨论与合作。
 - [tpu-users@tensorflow.org](https://groups.google.com/a/tensorflow.org/d/forum/tpu-users) - TPU 用户的社区讨论和支持。
 - [developers](https://groups.google.com/forum/#!forum/xla-dev) - 为 TensorFlow 做出贡献的开发者的讨论。
