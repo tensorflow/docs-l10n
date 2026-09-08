@@ -25,7 +25,6 @@ pip install tensorboard-plugin-fairness-indicators
 Si desea probar los indicadores de equidad en TensorBoard, puede descargar los resultados de la evaluación del análisis de modelos de TensorFlow como muestra (archivos eval_config.json, métricas y gráficas) y una utilidad `demo.py` de la Plataforma Google Cloud, [aquí](https://console.cloud.google.com/storage/browser/tensorboard_plugin_fairness_indicators/) utilizando el siguiente comando.
 
 ```
-pip install gsutil
 gcloud storage cp --recursive gs://tensorboard_plugin_fairness_indicators/ .
 ```
 

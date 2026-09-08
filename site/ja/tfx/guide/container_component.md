@@ -45,8 +45,8 @@ grep_component = tfx.dsl.components.create_container_component(
     parameters={
         'pattern': str,
     },
-    # The component code uses gsutil to upload the data to Google Cloud Storage, so the
-    # container image needs to have gsutil installed and configured.
+    # The component code uses gcloud storage to upload the data to Google Cloud Storage, so the
+    # container image needs to have gcloud storage installed and configured.
     image='google/cloud-sdk:278.0.0',
     command=[
         'sh', '-exc',
