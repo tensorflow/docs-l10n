@@ -25,7 +25,6 @@ pip install tensorboard-plugin-fairness-indicators
 Se você quiser testar Fairness Indicators no TensorBoard, pode baixar os resultados de avaliação de amostra da TensorFlow Model Analysis (eval_config.json, métricas e arquivos de plotagens), ou Análise de Modelo do TensorFlow, e um utilitário `demo.py` do Google Cloud Platform, [aqui](https://console.cloud.google.com/storage/browser/tensorboard_plugin_fairness_indicators/), usando o comando a seguir.
 
 ```
-pip install gsutil
 gcloud storage cp --recursive gs://tensorboard_plugin_fairness_indicators/ .
 ```
 

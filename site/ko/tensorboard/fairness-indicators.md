@@ -25,7 +25,6 @@ pip install tensorboard-plugin-fairness-indicators
 TensorBoard에서 Fairness Indicators를 테스트하려면 Google 클라우드 플랫폼에서 TensorFlow 모델 분석의 평가 결과 샘플(eval_config.json, 메트릭 및 플롯 파일)과 `demo.py` 유틸리티를 다운로드할 수 있습니다(다음 명령을 사용하여 [여기](https://console.cloud.google.com/storage/browser/tensorboard_plugin_fairness_indicators/)에서 다운로드).
 
 ```
-pip install gsutil
 gcloud storage cp --recursive gs://tensorboard_plugin_fairness_indicators/ .
 ```
 

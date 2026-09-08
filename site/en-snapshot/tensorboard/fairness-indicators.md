@@ -38,7 +38,6 @@ and plots files) and a `demo.py` utility from Google Cloud Platform,
 [here](https://console.cloud.google.com/storage/browser/tensorboard_plugin_fairness_indicators/)
 using following command.
 ```
-pip install gsutil
 gcloud storage cp --recursive gs://tensorboard_plugin_fairness_indicators/ .
 ```
 
